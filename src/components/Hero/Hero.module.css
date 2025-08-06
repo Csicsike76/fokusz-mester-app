@@ -38,3 +38,19 @@
   margin-right: auto;
   text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
 }
+
+/* ...a .content p stílusa után... */
+
+@media screen and (max-width: 768px) {
+  .hero {
+    height: 90vh; /* Kicsit magasabb mobilon */
+  }
+
+  .content h1 {
+    font-size: 3rem; /* Kisebb betűméret a főcímnek */
+  }
+
+  .content p {
+    font-size: 1rem; /* Kisebb betűméret a leírásnak */
+  }
+}

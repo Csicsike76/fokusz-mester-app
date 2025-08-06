@@ -4,7 +4,7 @@
   align-items: center;
   background-color: #2c3e50; 
   color: white;
-  padding: 0.75rem 2.5rem; /* Növeljük a vízszintes paddingot */
+  padding: 0.75rem 2.5rem;
   width: 100%;
   box-sizing: border-box;
   position: sticky;
@@ -18,23 +18,19 @@
   font-size: 1.2rem;
   font-weight: bold;
   line-height: 1.2;
-  white-space: nowrap; /* Megakadályozza, hogy a logó feleslegesen törjön */
+  white-space: nowrap;
 }
 
-/* KULCSFONTOSSÁGÚ JAVÍTÁS */
 .navLinks {
-  flex-grow: 1; /* Ez a sor kitölti a rendelkezésre álló helyet, és középre tolja a linkeket */
   display: flex;
-  justify-content: center; /* A linkeket középre igazítja a konténeren belül */
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* Lehetővé teszi a törést kisebb képernyőn */
-  gap: 1.2rem; /* Térköz a linkek között */
+  gap: 1.2rem;
 }
 
 .navLinks a {
   color: white;
   text-decoration: none;
-  /* A margin-t a gap kezeli, így kinullázzuk */
   margin: 0; 
   font-size: 1rem;
   transition: color 0.3s;
@@ -43,6 +39,12 @@
 
 .navLinks a:hover {
   color: #1abc9c;
+}
+
+.rightSide {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .search input {
@@ -57,6 +59,21 @@
 .authLinks {
   display: flex;
   align-items: center;
+  gap: 1rem;
+}
+
+.loginButton {
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  border: 1px solid #1abc9c;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.loginButton:hover {
+  background-color: #1abc9c;
 }
 
 .authButton {
@@ -73,19 +90,54 @@
   background-color: #16a085;
 }
 
-/* ... a többi stílus után ... */
-.loginButton {
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  border: 1px solid #1abc9c; /* Csak keret, nincs kitöltés */
-  margin-right: 1rem; /* Térköz a két gomb között */
-  transition: background-color 0.3s, color 0.3s;
+/* HAMBURGER IKON STÍLUSA */
+.hamburger {
+  display: none; /* Alapból rejtett */
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.loginButton:hover {
-  background-color: #1abc9c;
-  color: white;
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+/* === MEDIA QUERY A MOBILNÉZETHEZ === */
+/* Amikor a képernyő 992px vagy keskenyebb */
+@media screen and (max-width: 992px) {
+  .navLinks {
+    display: none; /* A linkeket elrejtjük */
+    position: absolute;
+    top: 68px; /* A navbar magassága */
+    left: 0;
+    width: 100%;
+    background-color: #2c3e50;
+    flex-direction: column;
+    padding: 1rem 0;
+  }
+
+  .navLinks.open {
+    display: flex; /* Ha nyitva van, újra láthatóvá tesszük */
+  }
+
+  .rightSide {
+      gap: 1rem;
+  }
+  
+  .search {
+      display: none; /* A keresőt is elrejthetjük mobilon */
+  }
+
+  .hamburger {
+    display: flex; /* Megjelenítjük a hamburger ikont */
+  }
+}
+
+@media screen and (max-width: 576px) {
+    .authLinks {
+        display: none; /* Nagyon kicsi képernyőn a gombokat is elrejthetjük */
+    }
 }
