@@ -1,67 +1,64 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Új import az átirányításhoz
+import { useAuth } from '../context/AuthContext'; // A központi állapot (Context) importálása
 import styles from './LoginPage.module.css';
 
+// A backend API URL-jét egy konstansban tároljuk a könnyebb módosíthatóság érdekében.
 const API_URL = 'https://fokusz-mester-backend.onrender.com';
 
 const LoginPage = () => {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        rememberMe: false,
-    });
-    const [message, setMessage] = useState('');
+    // Állapotok (state-ek) az űrlap adatainak és a visszajelzéseknek
+    const [formData, setFormData] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    
+    // Behúzzuk a "login" függvényt a központi AuthContext-ből
+    const { login } = useAuth(); 
+    // Behúzzuk a "navigate" függvényt az átirányításhoz
+    const navigate = useNavigate();
 
+    // Ez a függvény frissíti az állapotot, ahogy a felhasználó gépel
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prevData => ({ ...prevData, [name]: type === 'checkbox' ? checked : value }));
+        const { name, value } = e.target;
+        setFormData(prevData => ({ ...prevData, [name]: value }));
     };
 
+    // Ez a függvény fut le, amikor a felhasználó a "Bejelentkezés" gombra kattint
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
-        setMessage('');
-        setIsLoading(true);
+        e.preventDefault(); // Megakadályozzuk az oldal újratöltését
+        setError(''); // Töröljük a korábbi hibaüzeneteket
+        setIsLoading(true); // Elindítjuk a "töltés" állapotot
 
         try {
+            // Elküldjük az adatokat a backend /api/login végpontjára
             const response = await fetch(`${API_URL}/api/login`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: formData.email,
-                    password: formData.password
-                }),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: formData.email, password: formData.password }),
             });
 
+            // Beolvassuk a backend válaszát
             const data = await response.json();
 
+            // Ha a backend hibát jelzett (pl. rossz jelszó), akkor hibát dobunk
             if (!response.ok) {
                 throw new Error(data.message || 'Sikertelen bejelentkezés.');
             }
-
-            // SIKERES BEJELENTKEZÉS
-            setMessage(data.message);
-            console.log('Kapott token:', data.token);
-            console.log('Felhasználói adatok:', data.user);
-
-            // A tokent elmentjük a böngésző localStorage-ába.
-            // Így az oldal újratöltése után is bejelentkezve marad a felhasználó.
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
-
-            // TODO: Itt lehetne a felhasználót átirányítani a főoldalra
-            // pl. window.location.href = '/dashboard';
             
-            // Ürítjük az űrlapot
-            setFormData({ email: '', password: '', rememberMe: false });
+            // Ha a bejelentkezés sikeres:
+            // 1. Meghívjuk a központi "login" függvényt a kapott felhasználói adatokkal és a tokennel.
+            //    Ez frissíti a globális állapotot ÉS elmenti az adatokat a localStorage-ba.
+            login(data.user, data.token);
+
+            // 2. Átirányítjuk a felhasználót a főoldalra ('/').
+            navigate('/');
 
         } catch (err) {
+            // Hiba esetén beállítjuk a hibaüzenetet, hogy megjelenjen a felhasználónak
             setError(err.message);
             console.error("Bejelentkezési hiba:", err);
         } finally {
+            // Befejezzük a "töltés" állapotot, akár sikeres volt a kérés, akár nem
             setIsLoading(false);
         }
     };
@@ -82,16 +79,16 @@ const LoginPage = () => {
 
                     <div className={styles.extraOptions}>
                         <div className={styles.checkboxGroup}>
-                            <input type="checkbox" id="rememberMe" name="rememberMe" checked={formData.rememberMe} onChange={handleChange} />
+                            <input type="checkbox" id="rememberMe" name="rememberMe" />
                             <label htmlFor="rememberMe">Emlékezz rám</label>
                         </div>
                         <a href="/elfelejtett-jelszo">Elfelejtetted a jelszavad?</a>
                     </div>
                     
-                    {/* Visszajelző üzenetek */}
-                    {message && <p className={styles.successMessage}>{message}</p>}
+                    {/* Itt jelenik meg a hibaüzenet, ha van */}
                     {error && <p className={styles.errorMessage}>{error}</p>}
 
+                    {/* A gomb letiltva, amíg a bejelentkezés folyamatban van */}
                     <button type="submit" className={styles.submitButton} disabled={isLoading}>
                         {isLoading ? 'Bejelentkezés...' : 'Bejelentkezés'}
                     </button>
@@ -100,36 +97,5 @@ const LoginPage = () => {
         </div>
     );
 };
-
-// Adjunk hozzá stílusokat a visszajelző üzenetekhez a LoginPage.module.css-hez
-// Ez a rész ugyanaz, mint a regisztrációnál, de ide is be kell másolni.
-const LoginPageStyles = `
-.successMessage {
-    color: #2ecc71;
-    background-color: rgba(46, 204, 113, 0.1);
-    padding: 0.75rem;
-    border-radius: 5px;
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-.errorMessage {
-    color: #e74c3c;
-    background-color: rgba(231, 76, 60, 0.1);
-    padding: 0.75rem;
-    border-radius: 5px;
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-.submitButton:disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-}
-`;
-
-// Dinamikusan hozzáadjuk a stílusokat a dokumentumhoz
-const styleSheet = document.createElement("style");
-styleSheet.innerText = LoginPageStyles.replace(/\./g, `.${styles.LoginPage} .`);
-document.head.appendChild(styleSheet);
-
 
 export default LoginPage;

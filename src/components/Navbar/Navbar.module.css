@@ -143,4 +143,29 @@
   .hamburger {
     display: flex; /* Megjelenítjük a hamburger ikont */
   }
+
+  /* ... a .hamburger div stílusa után ... */
+
+.welcomeUser {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.logoutButton {
+  background-color: #e74c3c; /* Piros a kijelentkezéshez */
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logoutButton:hover {
+  background-color: #c0392b;
+}
+
+
 }
