@@ -3,7 +3,7 @@ const cors = require('cors');
 const { Pool } = require('pg');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
-const jwt = require('jsonwebtoken'); // Itt van az új csomag
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 // --- ADATBÁZIS KAPCSOLAT LÉTREHOZÁSA ---
@@ -18,7 +18,7 @@ const pool = new Pool({
 const transporter = nodemailer.createTransport({
     host: process.env.MAIL_SERVER,
     port: process.env.MAIL_PORT,
-    secure: false, // true for 465, false for other ports
+    secure: false, 
     auth: {
         user: process.env.MAIL_USERNAME,
         pass: process.env.MAIL_PASSWORD,
@@ -35,9 +35,9 @@ app.get('/api', (req, res) => {
   res.json({ message: "Szia! Ez a Fókusz Mester API válasza." });
 });
 
-// A REGISZTRÁCIÓS VÉGPONT (már meglévő)
+// A REGISZTRÁCIÓS VÉGPONT TELJES LOGIKÁVAL
 app.post('/api/register', async (req, res) => {
-  const { role, username, email, password, vipCode, classCode } = req.body;
+  const { role, username, email, password, vipCode } = req.body;
   console.log('Regisztrációs kérés feldolgozása:', { email, username, role });
 
   if (!username || !email || !password || !role) {
@@ -50,40 +50,76 @@ app.post('/api/register', async (req, res) => {
       return res.status(409).json({ success: false, message: "Ez az e-mail cím már regisztrálva van." });
     }
 
+    if (role === 'teacher') {
+      if (!vipCode || vipCode !== process.env.VIP_CODE) {
+        console.warn(`Sikertelen tanári regisztrációs kísérlet hibás VIP kóddal: ${vipCode}`);
+        return res.status(403).json({ success: false, message: "Érvénytelen VIP kód." });
+      }
+    }
+
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(password, salt);
 
-    const newUserQuery = `
-      INSERT INTO Users (username, email, password_hash, role) 
-      VALUES ($1, $2, $3, $4) RETURNING id, email;
-    `;
-    const newUserResult = await pool.query(newUserQuery, [username, email, passwordHash, role]);
-    const newUser = newUserResult.rows[0];
-    
-    console.log(`Felhasználó sikeresen létrehozva az adatbázisban, ID: ${newUser.id}`);
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
 
-    const mailOptions = {
-        from: process.env.MAIL_DEFAULT_SENDER,
-        to: newUser.email,
-        subject: 'Sikeres regisztráció a Fókusz Mester oldalon!',
-        html: `<h1>Üdvözlünk, ${username}!</h1><p>Sikeresen regisztráltál a Fókusz Mester oldalra. Hamarosan küldjük a megerősítő linket.</p>`
-    };
+      const newUserQuery = `INSERT INTO Users (username, email, password_hash, role) VALUES ($1, $2, $3, $4) RETURNING id;`;
+      const newUserResult = await client.query(newUserQuery, [username, email, passwordHash, role]);
+      const newUserId = newUserResult.rows[0].id;
 
-    await transporter.sendMail(mailOptions);
-    console.log(`Megerősítő e-mail sikeresen elküldve a(z) ${newUser.email} címre.`);
+      if (role === 'teacher') {
+        const newTeacherQuery = `INSERT INTO Teachers (user_id, vip_code, is_approved) VALUES ($1, $2, false);`;
+        await client.query(newTeacherQuery, [newUserId, vipCode]);
+        console.log(`Tanár adatok mentve a ${newUserId} ID-jű felhasználóhoz, jóváhagyásra vár.`);
 
-    res.status(201).json({ 
-      success: true, 
-      message: `Sikeres regisztráció! Kérjük, erősítsd meg az e-mail címedet (ellenőrizd a postafiókodat).` 
-    });
+        const hostname = req.headers.host.includes('onrender.com') ? req.headers.host : 'fokusz-mester-backend.onrender.com';
+        const approvalUrl = `https://${hostname}/api/approve-teacher/${newUserId}`;
+        
+        const adminMailOptions = {
+            from: process.env.MAIL_DEFAULT_SENDER,
+            to: process.env.MAIL_DEFAULT_SENDER,
+            subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
+            html: `
+                <h1>Új Tanári Regisztráció</h1>
+                <p>Egy új tanár regisztrált a Fókusz Mester oldalon, és a te jóváhagyásodra vár.</p>
+                <ul>
+                    <li><strong>Felhasználónév:</strong> ${username}</li>
+                    <li><strong>E-mail:</strong> ${email}</li>
+                </ul>
+                <p>Kattints az alábbi linkre a fiók aktiválásához:</p>
+                <a href="${approvalUrl}" style="padding: 10px 20px; background-color: #2ecc71; color: white; text-decoration: none; border-radius: 5px;">
+                    Jóváhagyás
+                </a>
+            `
+        };
+        await transporter.sendMail(adminMailOptions);
+        console.log(`Admin értesítő e-mail elküldve a ${newUserId} ID-jű tanár jóváhagyásához.`);
+      }
+      
+      await client.query('COMMIT');
+
+      res.status(201).json({ 
+        success: true, 
+        message: role === 'teacher' 
+          ? `Sikeres regisztráció! A fiókodat egy adminisztrátornak jóvá kell hagynia, mielőtt be tudnál lépni.`
+          : `Sikeres regisztráció! Kérjük, ellenőrizd az e-mail postafiókodat.`
+      });
+
+    } catch (error) {
+      await client.query('ROLLBACK');
+      throw error;
+    } finally {
+      client.release();
+    }
 
   } catch (error) {
     console.error('Hiba történt a regisztráció során:', error);
-    res.status(500).json({ success: false, message: "Szerverhiba történt a regisztráció során. Kérjük, próbáld újra később." });
+    res.status(500).json({ success: false, message: "Szerverhiba történt. Kérjük, próbáld újra később." });
   }
 });
 
-// A BEJELENTKEZÉSI VÉGPONT (ez az új rész)
+// A BEJELENTKEZÉSI VÉGPONT (már meglévő)
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   console.log('Bejelentkezési kérés feldolgozása:', { email });
@@ -131,6 +167,30 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// VÉGPONT A TANÁROK JÓVÁHAGYÁSÁRA
+app.get('/api/approve-teacher/:userId', async (req, res) => {
+  const { userId } = req.params;
+  console.log(`Jóváhagyási kérés érkezett a ${userId} ID-jű felhasználóhoz.`);
+
+  try {
+    const updateQuery = `UPDATE Teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id;`;
+    const result = await pool.query(updateQuery, [userId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).send('<h1>Hiba</h1><p>A tanári felhasználó nem található.</p>');
+    }
+
+    console.log(`A(z) ${userId} ID-jű tanár sikeresen jóváhagyva.`);
+    
+    // TODO: Itt lehetne egy e-mailt küldeni a tanárnak, hogy a fiókja aktív lett.
+
+    res.status(200).send('<h1>Sikeres Jóváhagyás!</h1><p>A tanári fiók sikeresen aktiválva lett.</p>');
+
+  } catch (error) {
+    console.error('Hiba a tanár jóváhagyása során:', error);
+    res.status(500).send('<h1>Szerverhiba</h1><p>Hiba történt a jóváhagyás során.</p>');
+  }
+});
 
 // A SZERVER INDÍTÁSA
 const PORT = process.env.PORT || 3001;
