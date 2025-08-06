@@ -9,7 +9,16 @@ const pool = new Pool({
 });
 
 const createTablesQuery = `
-  -- Felhasználói adatok táblái
+  -- Először töröljük a táblákat a helyes sorrendben, ha léteznek,
+  -- hogy elkerüljük a függőségi hibákat.
+  DROP TABLE IF EXISTS ClassMemberships CASCADE;
+  DROP TABLE IF EXISTS Teachers CASCADE;
+  DROP TABLE IF EXISTS QuizQuestions CASCADE;
+  DROP TABLE IF EXISTS Curriculums CASCADE;
+  DROP TABLE IF EXISTS Classes CASCADE;
+  DROP TABLE IF EXISTS Users CASCADE;
+
+  -- Felhasználói adatok táblái (FRISSÍTVE!)
   CREATE TABLE IF NOT EXISTS Users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -17,6 +26,8 @@ const createTablesQuery = `
     password_hash VARCHAR(255) NOT NULL,
     role VARCHAR(20) NOT NULL CHECK (role IN ('student', 'teacher')),
     email_verified BOOLEAN DEFAULT false,
+    email_verification_token VARCHAR(255), -- ÚJ OSZLOP
+    email_verification_expires TIMESTAMP WITH TIME ZONE, -- ÚJ OSZLOP
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );
 
@@ -65,12 +76,12 @@ const createTablesQuery = `
 `;
 
 async function setupDatabase() {
-  console.log('Adatbázis táblák létrehozásának megkezdése...');
+  console.log('Adatbázis táblák törlése és újraépítése...');
   try {
     await pool.query(createTablesQuery);
-    console.log('✅ Táblák sikeresen létrehozva (vagy már léteztek).');
+    console.log('✅ Táblák sikeresen újraépítve.');
   } catch (error) {
-    console.error('❌ Hiba történt a táblák létrehozása során:', error);
+    console.error('❌ Hiba történt a táblák újraépítése során:', error);
   } finally {
     await pool.end();
   }
