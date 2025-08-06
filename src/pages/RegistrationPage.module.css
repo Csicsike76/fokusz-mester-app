@@ -79,3 +79,29 @@
 .submitButton:hover {
     background-color: #16a085;
 }
+
+/* ... a .submitButton:hover stílus után ... */
+
+.successMessage {
+    color: #2ecc71; /* Zöld szín a sikerhez */
+    background-color: rgba(46, 204, 113, 0.1);
+    padding: 0.75rem;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.errorMessage {
+    color: #e74c3c; /* Piros szín a hibához */
+    background-color: rgba(231, 76, 60, 0.1);
+    padding: 0.75rem;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Letiltott gomb stílusa */
+.submitButton:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
