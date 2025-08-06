@@ -12,21 +12,20 @@ import './App.css';
 
 function App() {
   return (
-    // A BrowserRouter van legkívül
     <BrowserRouter>
-      {/* Az AuthProvider van belül, így hozzáfér a router adataihoz is, ha kell */}
       <AuthProvider>
-        {/* A Layout veszi körbe az oldalakat, hogy a Navbar mindig látszódjon */}
-        <Layout>
-          {/* A Routes határozza meg, melyik URL melyik oldalt töltse be */}
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/bejelentkezes" element={<LoginPage />} />
-            <Route path="/regisztracio" element={<RegistrationPage />} />
-            <Route path="/targy/:subjectName/:grade" element={<SubjectPage />} />
-            <Route path="/kviz/:quizId" element={<QuizPage />} />
-          </Routes>
-        </Layout>
+        {/* A Routes most már közvetlenül az AuthProvider-ben van */}
+        <Routes>
+          {/* Létrehozunk egy "layout" útvonalat, ami a Navbar-t és a többi keret-elemet tartalmazza */}
+          <Route path="/" element={<Layout />}>
+            {/* Ezek a "gyermek" útvonalak fognak megjelenni az Outlet helyén */}
+            <Route index element={<HomePage />} />
+            <Route path="bejelentkezes" element={<LoginPage />} />
+            <Route path="regisztracio" element={<RegistrationPage />} />
+            <Route path="targy/:subjectName/:grade" element={<SubjectPage />} />
+            <Route path="kviz/:quizId" element={<QuizPage />} />
+          </Route>
+        </Routes>
       </AuthProvider>
     </BrowserRouter>
   );

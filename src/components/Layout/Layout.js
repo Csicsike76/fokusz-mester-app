@@ -1,14 +1,17 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom'; // ÚJ IMPORT
 import Navbar from '../Navbar/Navbar';
-import ChatButton from '../ChatButton/ChatButton'; // Ez az útvonal most már helyes!
+import ChatButton from '../ChatButton/ChatButton';
 import BackgroundVideo from '../BackgroundVideo/BackgroundVideo';
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <>
       <BackgroundVideo />
       <Navbar />
-      <main>{children}</main>
+      <main>
+        <Outlet /> {/* A 'children' helyett az Outlet jeleníti meg az oldalakat */}
+      </main>
       <ChatButton />
     </>
   );
