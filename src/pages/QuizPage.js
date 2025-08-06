@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-// A Link komponenst innen is eltávolítjuk
 import SingleChoiceQuestion from '../components/SingleChoiceQuestion';
 import MultipleChoiceQuestion from '../components/MultipleChoiceQuestion';
 import EnteredAnswerQuestion from '../components/EnteredAnswerQuestion';
+import ConditionalLink from '../components/ConditionalLink/ConditionalLink'; // Az új komponenst használjuk
 
 const QuizPage = () => {
   const { quizId } = useParams(); 
@@ -124,8 +124,7 @@ const QuizPage = () => {
       ) : (
         <div>
           <h2>Eredményed: {calculateScore()} / {quizData.questions.length}</h2>
-          {/* A vissza a főoldalra link is <a> tag lett */}
-          <a href="/" target="_blank" rel="noopener noreferrer">Vissza a főoldalra</a>
+          <ConditionalLink to="/">Vissza a főoldalra</ConditionalLink>
         </div>
       )}
     </div>

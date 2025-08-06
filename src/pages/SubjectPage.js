@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-// A Link komponenst innen is eltávolítjuk
 import { curriculum } from '../data/curriculumData';
+import ConditionalLink from '../components/ConditionalLink/ConditionalLink'; // Az új komponenst használjuk
 
 const SubjectPage = () => {
   const { subjectName, grade } = useParams();
@@ -23,10 +23,9 @@ const SubjectPage = () => {
           <div className="card" key={topic.id}>
             <h3>{topic.title}</h3>
             <p>Itt jöhet egy rövid leírás a témakörről...</p>
-            {/* Ez a link is most már egy <a> tag */}
-            <a href={`/kviz/${topic.quizId}`} className="quiz-link" target="_blank" rel="noopener noreferrer">
+            <ConditionalLink to={`/kviz/${topic.quizId}`} className="quiz-link">
               Gyakorló Kvíz →
-            </a>
+            </ConditionalLink>
           </div>
         ))}
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Hero from '../components/Hero/Hero';
-// A Link komponenst innen is eltávolítjuk
 import styles from './HomePage.module.css';
+import ConditionalLink from '../components/ConditionalLink/ConditionalLink'; // Az új komponenst használjuk
 
 const HomePage = () => {
   return (
@@ -11,13 +11,12 @@ const HomePage = () => {
         <h2>Próbáld ki Ingyen!</h2>
         <p>Válassz egy tantárgyat és egy osztályt a fenti menüből, vagy nézd meg a legnépszerűbb témaköröket!</p>
         <div className={styles.buttonContainer}>
-            {/* A gombok most már <a> tagek */}
-            <a href="/targy/matematika/5" className={styles.promoButton} target="_blank" rel="noopener noreferrer">
+            <ConditionalLink to="/targy/matematika/5" className={styles.promoButton}>
                 Matematika 5.
-            </a>
-            <a href="/targy/matematika/6" className={styles.promoButton} target="_blank" rel="noopener noreferrer">
+            </ConditionalLink>
+            <ConditionalLink to="/targy/matematika/6" className={styles.promoButton}>
                 Matematika 6.
-            </a>
+            </ConditionalLink>
         </div>
       </div>
     </div>
