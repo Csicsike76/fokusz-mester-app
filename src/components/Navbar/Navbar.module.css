@@ -4,7 +4,7 @@
   align-items: center;
   background-color: #2c3e50; 
   color: white;
-  padding: 0.75rem 2.5rem;
+  padding: 0.75rem 1.5rem; /* Kisebb padding mobilon */
   width: 100%;
   box-sizing: border-box;
   position: sticky;
@@ -19,41 +19,22 @@
   font-weight: bold;
   line-height: 1.2;
   white-space: nowrap;
+  z-index: 1001; /* Biztosítja, hogy a logó a menü felett legyen */
+}
+
+/* Nagy képernyős nézet (alapértelmezett) */
+.menuContainer {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-grow: 1; /* Kitölti a helyet a logó és a kereső között */
+  justify-content: center;
 }
 
 .navLinks {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 1.2rem;
-}
-
-.navLinks a {
-  color: white;
-  text-decoration: none;
-  margin: 0; 
-  font-size: 1rem;
-  transition: color 0.3s;
-  padding: 0.25rem 0;
-}
-
-.navLinks a:hover {
-  color: #1abc9c;
-}
-
-.rightSide {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.search input {
-  padding: 0.6rem 1rem;
-  border-radius: 20px;
-  border: none;
-  font-size: 0.9rem;
-  background-color: #ffffff;
-  color: #333;
 }
 
 .authLinks {
@@ -62,6 +43,19 @@
   gap: 1rem;
 }
 
+.search {
+  display: block; /* Alapból látható */
+}
+
+.hamburger {
+  display: none; /* Alapból rejtett */
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1001; /* Legyen minden felett */
+}
+
+/* ... (a gombok és egyéb stílusok változatlanok) ... */
 .loginButton {
   color: white;
   padding: 0.6rem 1.2rem;
@@ -71,11 +65,7 @@
   border: 1px solid #1abc9c;
   transition: background-color 0.3s, color 0.3s;
 }
-
-.loginButton:hover {
-  background-color: #1abc9c;
-}
-
+.loginButton:hover { background-color: #1abc9c; }
 .authButton {
   background-color: #1abc9c;
   color: white;
@@ -85,59 +75,71 @@
   font-weight: bold;
   transition: background-color 0.3s;
 }
-
-.authButton:hover {
-  background-color: #16a085;
+.authButton:hover { background-color: #16a085; }
+.search input {
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  border: none;
+  font-size: 0.9rem;
 }
-
-/* HAMBURGER IKON STÍLUSA */
-.hamburger {
-  display: none; /* Alapból rejtett */
-  cursor: pointer;
-  flex-direction: column;
-  gap: 5px;
-}
-
 .hamburger div {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  border-radius: 5px;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
-/* === MEDIA QUERY A MOBILNÉZETHEZ === */
-/* Amikor a képernyő 992px vagy keskenyebb */
-@media screen and (max-width: 992px) {
-  .navLinks {
-    display: none; /* A linkeket elrejtjük */
-    position: absolute;
-    top: 68px; /* A navbar magassága */
-    left: 0;
-    width: 100%;
-    background-color: #2c3e50;
-    flex-direction: column;
-    padding: 1rem 0;
-  }
 
-  .navLinks.open {
-    display: flex; /* Ha nyitva van, újra láthatóvá tesszük */
-  }
-
-  .rightSide {
-      gap: 1rem;
-  }
+/* === JAVÍTOTT MOBILNÉZET === */
+/* Amikor a képernyő 1024px vagy keskenyebb */
+@media screen and (max-width: 1024px) {
   
   .search {
-      display: none; /* A keresőt is elrejthetjük mobilon */
+      display: none; /* A keresőt elrejtjük */
+  }
+
+  .menuContainer {
+    /* A teljes menüt egy lenyíló panelként formázzuk */
+    flex-direction: column;
+    position: fixed; /* Rögzítjük a képernyőhöz */
+    top: 0;
+    left: -100%; /* Alapból a képernyőn kívülre toljuk */
+    width: 100%;
+    height: 100vh;
+    background-color: #2c3e50;
+    justify-content: center; /* Függőlegesen középre igazít */
+    gap: 2rem;
+    transition: left 0.3s ease-in-out; /* Animáció a beúszáshoz */
+  }
+  
+  .menuContainer.open {
+    left: 0; /* Ha nyitva van, a képernyőre húzzuk */
+  }
+
+  .navLinks {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .navLinks a {
+    font-size: 1.8rem; /* Nagyobb, könnyen olvasható betűméret */
+  }
+
+  .authLinks {
+    flex-direction: column;
+    gap: 1rem;
+    width: 80%;
+  }
+
+  .authLinks a {
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.2rem;
   }
 
   .hamburger {
     display: flex; /* Megjelenítjük a hamburger ikont */
   }
-}
-
-@media screen and (max-width: 576px) {
-    .authLinks {
-        display: none; /* Nagyon kicsi képernyőn a gombokat is elrejthetjük */
-    }
 }

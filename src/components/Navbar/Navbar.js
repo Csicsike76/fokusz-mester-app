@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Navbar.module.css';
-import ConditionalLink from '../ConditionalLink/ConditionalLink'; // Fontos: Az új komponenst használjuk
+import ConditionalLink from '../ConditionalLink/ConditionalLink';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -9,16 +9,17 @@ const Navbar = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Kattintás után bezárja a menüt (csak mobilon)
+  // ÚJ FUNKCIÓ: Kattintás után bezárja a menüt mobilon
   const handleLinkClick = () => {
-      if (window.innerWidth < 1100) {
-          setMobileMenuOpen(false);
-      }
-  }
+    if (isMobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  };
 
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
+        {/* A linkek itt is megkapják a handleLinkClick-et */}
         <ConditionalLink to="/" onClick={handleLinkClick}>
           "Fókusz Mester" Tanulási<br />Időzítő
         </ConditionalLink>
