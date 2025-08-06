@@ -1,0 +1,86 @@
+.pageContainer {
+    padding: 4rem 2rem;
+    color: white;
+    min-height: 100vh; /* Biztosítja, hogy a tartalom középre kerüljön */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formContainer {
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgba(44, 62, 80, 0.85);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.formContainer h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 5px;
+    border: 1px solid #7f8c8d;
+    background-color: #34495e;
+    color: white;
+    font-size: 1rem;
+}
+
+.extraOptions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.extraOptions a {
+    color: #1abc9c;
+    text-decoration: none;
+}
+
+.extraOptions a:hover {
+    text-decoration: underline;
+}
+
+.checkboxGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 1rem;
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+    background-color: #16a085;
+}

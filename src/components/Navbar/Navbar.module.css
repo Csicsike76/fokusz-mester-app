@@ -1,0 +1,91 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2c3e50; 
+  color: white;
+  padding: 0.75rem 2.5rem; /* Növeljük a vízszintes paddingot */
+  width: 100%;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.2;
+  white-space: nowrap; /* Megakadályozza, hogy a logó feleslegesen törjön */
+}
+
+/* KULCSFONTOSSÁGÚ JAVÍTÁS */
+.navLinks {
+  flex-grow: 1; /* Ez a sor kitölti a rendelkezésre álló helyet, és középre tolja a linkeket */
+  display: flex;
+  justify-content: center; /* A linkeket középre igazítja a konténeren belül */
+  align-items: center;
+  flex-wrap: wrap; /* Lehetővé teszi a törést kisebb képernyőn */
+  gap: 1.2rem; /* Térköz a linkek között */
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+  /* A margin-t a gap kezeli, így kinullázzuk */
+  margin: 0; 
+  font-size: 1rem;
+  transition: color 0.3s;
+  padding: 0.25rem 0;
+}
+
+.navLinks a:hover {
+  color: #1abc9c;
+}
+
+.search input {
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  border: none;
+  font-size: 0.9rem;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.authLinks {
+  display: flex;
+  align-items: center;
+}
+
+.authButton {
+  background-color: #1abc9c;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.authButton:hover {
+  background-color: #16a085;
+}
+
+/* ... a többi stílus után ... */
+.loginButton {
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  border: 1px solid #1abc9c; /* Csak keret, nincs kitöltés */
+  margin-right: 1rem; /* Térköz a két gomb között */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.loginButton:hover {
+  background-color: #1abc9c;
+  color: white;
+}
