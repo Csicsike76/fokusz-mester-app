@@ -107,10 +107,11 @@
     left: -100%; /* Alapból a képernyőn kívülre toljuk */
     width: 100%;
     height: 100vh;
-    background-color: #2c3e50;
-    justify-content: center; /* Függőlegesen középre igazít */
+    background-color: rgba(44, 62, 80, 0.95); /* Sötét háttér 95% átlátszósággal */
+    backdrop-filter: blur(5px); /* Homályosítja a mögötte lévő tartalmat */
+    justify-content: center;
     gap: 2rem;
-    transition: left 0.3s ease-in-out; /* Animáció a beúszáshoz */
+    transition: left 0.3s ease-in-out;
   }
   
   .menuContainer.open {
