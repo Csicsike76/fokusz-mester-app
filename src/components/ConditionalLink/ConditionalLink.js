@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import useIsMobile from '../../hooks/useIsMobile';
 
 const ConditionalLink = ({ to, children, ...props }) => {
-  const isMobile = useIsMobile(); // A breakpoint alapértelmezetten 992px
+  const isMobile = useIsMobile();
 
   if (isMobile) {
+    // Mobilon a Link komponenshez adjuk a prop-okat
     return (
       <Link to={to} {...props}>
         {children}
@@ -13,6 +14,7 @@ const ConditionalLink = ({ to, children, ...props }) => {
     );
   }
 
+  // Desktopon az <a> tag-hez adjuk a prop-okat
   return (
     <a href={to} target="_blank" rel="noopener noreferrer" {...props}>
       {children}
