@@ -126,17 +126,41 @@ app.post('/api/register', async (req, res) => {
 
 app.get('/api/verify-email/:token', async (req, res) => {
     const { token } = req.params;
+    console.log(`E-mail megerősítési kérés érkezett a következő tokennel: ${token}`);
+    
+    const client = await pool.connect();
     try {
-        const userResult = await pool.query('SELECT * FROM Users WHERE email_verification_token = $1 AND email_verification_expires > NOW()', [token]);
+        await client.query('BEGIN');
+        
+        const userResult = await client.query(
+            'SELECT * FROM Users WHERE email_verification_token = $1 AND email_verification_expires > NOW()',
+            [token]
+        );
+
         if (userResult.rows.length === 0) {
+            console.log("A token nem található az adatbázisban vagy lejárt.");
             return res.status(400).json({ success: false, message: "A megerősítő link érvénytelen vagy lejárt."});
         }
+
         const user = userResult.rows[0];
-        await pool.query('UPDATE Users SET email_verified = true, email_verification_token = NULL, email_verification_expires = NULL WHERE id = $1', [user.id]);
-        res.redirect(`${process.env.FRONTEND_URL}/bejelentkezes?verified=true`);
+        console.log(`Megtalált felhasználó a megerősítéshez: ${user.email} (ID: ${user.id})`);
+
+        await client.query(
+            'UPDATE Users SET email_verified = true, email_verification_token = NULL, email_verification_expires = NULL WHERE id = $1',
+            [user.id]
+        );
+        console.log(`A(z) ${user.id} ID-jű felhasználó e-mail címe sikeresen megerősítve.`);
+        
+        await client.query('COMMIT');
+        
+        res.status(200).json({ success: true, message: "Sikeres megerősítés! Most már bejelentkezhetsz."});
+
     } catch (error) {
+        await client.query('ROLLBACK');
         console.error('Email megerősítési hiba:', error);
-        res.redirect(`${process.env.FRONTEND_URL}/bejelentkezes?error=verification_failed`);
+        res.status(500).json({ success: false, message: "Szerverhiba történt a megerősítés során."});
+    } finally {
+        client.release();
     }
 });
 
