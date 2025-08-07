@@ -225,39 +225,70 @@ app.get('/api/verify-email/:token', async (req, res) => {
     }
 });
 
+// A BEJELENTKEZÉSI VÉGPONT JAVÍTVA A TANÁRI JÓVÁHAGYÁS ELLENŐRZÉSÉVEL
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(400).json({ success: false, message: "E-mail és jelszó megadása kötelező." });
+    return res.status(400).json({ success: false, message: "Az e-mail cím és a jelszó megadása kötelező." });
   }
+
   try {
+    // 1. Megkeressük a felhasználót az e-mail alapján
     const userResult = await pool.query('SELECT * FROM Users WHERE email = $1', [email]);
     if (userResult.rows.length === 0) {
       return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." });
     }
-    const user = userResult.rows[0];
-    
+    let user = userResult.rows[0];
+
+    // 2. Ellenőrizzük, hogy az e-mail címe meg van-e erősítve
     if (!user.email_verified) {
         return res.status(403).json({ success: false, message: "Kérjük, először erősítsd meg az e-mail címedet!" });
     }
 
+    // 3. Ellenőrizzük a jelszót
     const isPasswordCorrect = await bcrypt.compare(password, user.password_hash);
     if (!isPasswordCorrect) {
       return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." });
     }
-    
-    const token = jwt.sign({ userId: user.id, role: user.role }, process.env.SECRET_KEY, { expiresIn: '1d' });
+
+    // 4. JAVÍTÁS ITT: Ha a felhasználó szerepköre 'teacher',
+    //    ellenőrizzük a 'Teachers' táblában, hogy jóvá van-e hagyva.
+    if (user.role === 'teacher') {
+        const teacherResult = await pool.query('SELECT is_approved FROM Teachers WHERE user_id = $1', [user.id]);
+        
+        // Ha nincs is bejegyzés róla, vagy nincs jóváhagyva, nem léphet be tanárként
+        if (teacherResult.rows.length === 0 || !teacherResult.rows[0].is_approved) {
+            return res.status(403).json({ success: false, message: "A tanári fiókod még nem lett jóváhagyva egy adminisztrátor által." });
+        }
+    }
+
+    // 5. Ha minden ellenőrzés sikeres, létrehozzuk a tokent
+    const tokenPayload = {
+      userId: user.id,
+      role: user.role
+    };
+    const token = jwt.sign(tokenPayload, process.env.SECRET_KEY, { expiresIn: '1d' });
+
+    console.log(`Sikeres bejelentkezés: ${user.email}, szerepkör: ${user.role}`);
+
+    // 6. Visszaküldjük a tokent és a felhasználói adatokat
     res.status(200).json({
       success: true,
+      message: "Sikeres bejelentkezés!",
       token: token,
-      user: { id: user.id, username: user.username, email: user.email, role: user.role }
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role
+      }
     });
-  } catch (error) {
-    console.error('Bejelentkezési hiba:', error);
-    res.status(500).json({ success: false, message: "Szerverhiba történt." });
-  }
-  });
 
+  } catch (error) {
+    console.error('Hiba történt a bejelentkezés során:', error);
+    res.status(500).json({ success: false, message: "Szerverhiba történt a bejelentkezés során." });
+  }
+});
 // A többi végpont (verify-email, login, etc.) és a szerver indítása itt következik, változatlanul.
 // Az egyszerűség kedvéért a korábbi teljes kódból ezeket a részeket is beillesztheted ide.
 
