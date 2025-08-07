@@ -38,11 +38,11 @@ const authenticateToken = (req, res, next) => {
 // --- API VÉGPONTOK ---
 
 // A REGISZTRÁCIÓS VÉGPONT JAVÍTOTT HIBAKEZELÉSSEL
+// A REGISZTRÁCIÓS VÉGPONT TELJES LOGIKÁVAL
 app.post('/api/register', async (req, res) => {
   const { role, username, email, password, vipCode, classCode } = req.body;
   console.log('Regisztrációs kérés feldolgozása:', { email, username, role });
 
-  // A 'client'-et a try blokkon kívül deklaráljuk, hogy a 'finally'-ban is elérhető legyen
   let client;
   try {
     client = await pool.connect();
@@ -50,67 +50,78 @@ app.post('/api/register', async (req, res) => {
 
     const userExists = await client.query('SELECT * FROM Users WHERE email = $1', [email]);
     if (userExists.rows.length > 0) {
-      // A hibát itt dobjuk, hogy a központi catch blokk elkapja
       throw new Error("Ez az e-mail cím már regisztrálva van.");
     }
 
-    if (role === 'teacher' && vipCode !== process.env.VIP_CODE) {
-      throw new Error("Érvénytelen VIP kód.");
+    // --- Tanári regisztráció speciális kezelése ---
+    if (role === 'teacher') {
+      if (vipCode !== process.env.VIP_CODE) {
+        throw new Error("Érvénytelen VIP kód.");
+      }
     }
-    
+    // --- ------------------------------------ ---
+
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
-    const verificationExpires = new Date(Date.now() + 3600000);
+    const verificationExpires = new Date(Date.now() + 3600000); // 1 óra
 
     const newUserQuery = `
       INSERT INTO Users (username, email, password_hash, role, email_verification_token, email_verification_expires) 
-      VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, email;
+      VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;
     `;
     const newUserResult = await client.query(newUserQuery, [username, email, passwordHash, role, verificationToken, verificationExpires]);
-    const newUser = newUserResult.rows[0];
-    
-    console.log(`Felhasználó sikeresen létrehozva az adatbázisban, ID: ${newUser.id}`);
+    const newUserId = newUserResult.rows[0].id;
+    console.log(`Felhasználó sikeresen létrehozva az adatbázisban, ID: ${newUserId}`);
 
-    // E-mail küldés
+    // Ha tanár, a Teachers táblába is beillesztjük
+    if (role === 'teacher') {
+      await client.query(`INSERT INTO Teachers (user_id, vip_code, is_approved) VALUES ($1, $2, false);`, [newUserId, vipCode]);
+      console.log(`Tanár adatok mentve a ${newUserId} ID-jű felhasználóhoz, jóváhagyásra vár.`);
+
+      // --- 2. E-MAIL KÜLDÉSE: ÉRTESÍTŐ AZ ADMINNAK ---
+      const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`; // Ezt az oldalt majd létre kell hozni
+      const adminMailOptions = {
+          from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+          to: process.env.MAIL_DEFAULT_SENDER, // Saját magadnak küldöd
+          subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
+          html: `
+              <h1>Új Tanári Regisztráció</h1>
+              <p>Egy új tanár regisztrált a Fókusz Mester oldalon, és a te jóváhagyásodra vár.</p>
+              <ul>
+                  <li><strong>Felhasználónév:</strong> ${username}</li>
+                  <li><strong>E-mail:</strong> ${email}</li>
+              </ul>
+              <p>Kattints a linkre a fiók aktiválásához. FONTOS: Ez a link még nem működik teljesen, a funkciót később kell befejezni.</p>
+              <a href="${approvalUrl}" style="padding: 10px; background-color: #2ecc71; color: white;">Jóváhagyás</a>
+          `
+      };
+      await transporter.sendMail(adminMailOptions);
+      console.log(`Admin értesítő e-mail elküldve a ${newUserId} ID-jű tanár jóváhagyásához.`);
+    }
+
+    // --- 1. E-MAIL KÜLDÉSE: MEGERŐSÍTŐ A FELHASZNÁLÓNAK (minden esetben) ---
     const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${verificationToken}`;
-    const mailOptions = {
+    const userMailOptions = {
         from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
-        to: newUser.email,
+        to: email,
         subject: 'Erősítsd meg az e-mail címedet a Fókusz Mester oldalon!',
-        html: `<h1>Majdnem kész!</h1><p>Kattints a linkre a regisztrációd véglegesítéséhez: <a href="${verificationUrl}">Megerősítés</a></p>`
+        html: `<p>Kattints a linkre a regisztrációd véglegesítéséhez: <a href="${verificationUrl}">Megerősítés</a></p>`
     };
-
-    // A transporter.sendMail egy Promise-t ad vissza, amit el kell kapnunk
-    console.log(`E-mail küldése a következő címre: ${newUser.email}`);
-    await transporter.sendMail(mailOptions);
-    console.log(`Megerősítő e-mail sikeresen elküldve.`);
+    await transporter.sendMail(userMailOptions);
+    console.log(`Megerősítő e-mail sikeresen elküldve a(z) ${email} címre.`);
 
     await client.query('COMMIT');
-
     res.status(201).json({ 
       success: true, 
       message: `Sikeres regisztráció! Elküldtünk egy megerősítő linket a(z) ${email} címre.` 
     });
 
   } catch (error) {
-    // Ha BÁRMILYEN hiba történik a try blokkban (akár adatbázis, akár email), ide fut a program
-    if (client) {
-      await client.query('ROLLBACK'); // Visszavonjuk az adatbázis-műveleteket
-    }
+    if (client) await client.query('ROLLBACK');
     console.error('Hiba történt a regisztráció során:', error);
-    
-    // A hibaüzenetet a frontendnek is elküldjük
-    const errorMessage = error.code === 'EAUTH' 
-        ? "Szerver e-mail küldési hiba. Kérjük, próbálja később." 
-        : error.message || "Szerverhiba történt a regisztráció során.";
-
-    res.status(409).json({ success: false, message: errorMessage });
-  
+    res.status(400).json({ success: false, message: error.message || "Szerverhiba történt." });
   } finally {
-    // Biztosítjuk, hogy a kapcsolat mindig lezáruljon
-    if (client) {
-      client.release();
-    }
+    if (client) client.release();
   }
 });
 app.post('/api/classes/create', authenticateToken, async (req, res) => {
