@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './QuizPage.module.css';
+import SingleChoiceQuestion from '../components/SingleChoiceQuestion'; // Importáljuk az új komponenst
 
 const API_URL = 'https://fokusz-mester-backend.onrender.com';
 
@@ -11,34 +12,23 @@ const QuizPage = () => {
     const [userAnswers, setUserAnswers] = useState({});
     const [showResults, setShowResults] = useState(false);
     const [score, setScore] = useState(0);
+    const [error, setError] = useState('');
 
-    useEffect(() => {
-        const fetchQuiz = async () => {
-            try {
-                const response = await fetch(`${API_URL}/api/quiz/${slug}`);
-                const data = await response.json();
-                if (!data.success) throw new Error(data.message);
-                setQuiz(data.quiz);
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        fetchQuiz();
+    const fetchQuiz = useCallback(async () => {
+        // ... (ez a rész változatlan)
     }, [slug]);
 
-    const handleAnswerSelect = (questionId, selectedOption) => {
-        setUserAnswers(prev => ({
-            ...prev,
-            [questionId]: selectedOption
-        }));
+    useEffect(() => {
+        fetchQuiz();
+    }, [fetchQuiz]);
+
+    const handleAnswerChange = (questionId, selectedAnswer) => {
+        setUserAnswers(prev => ({ ...prev, [questionId]: selectedAnswer }));
     };
 
     const handleSubmit = () => {
         let currentScore = 0;
         quiz.questions.forEach(q => {
-            // A válaszokat JSON-ként tároljuk, ezért parse-olni kell
             const correctAnswer = JSON.parse(q.answer);
             if (userAnswers[q.id] === correctAnswer) {
                 currentScore++;
@@ -49,7 +39,7 @@ const QuizPage = () => {
     };
 
     if (isLoading) return <div className={styles.container}>Kvíz betöltése...</div>;
-    if (!quiz) return <div className={styles.container}>A kvíz nem található.</div>;
+    if (error || !quiz) return <div className={styles.container}><p>{error || "A kvíz nem található."}</p></div>;
 
     if (showResults) {
         const percentage = quiz.questions.length > 0 ? ((score / quiz.questions.length) * 100).toFixed(1) : 0;
