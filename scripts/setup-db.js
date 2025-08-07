@@ -7,15 +7,17 @@ const pool = new Pool({
 });
 
 const setupQueries = `
--- 1. LÉPÉS: A BIZTONSÁG KEDVÉÉRT MINDEN LÉTEZŐ TÁBLA TÖRLÉSE A HELYES SORRENDBEN
+-- 1. LÉPÉS: TÁBLÁK TÖRLÉSE A HELYES FÜGGŐSÉGI SORRENDBEN
+-- Először azokat töröljük, amik más táblákra hivatkoznak.
 DROP TABLE IF EXISTS ClassMemberships;
 DROP TABLE IF EXISTS Teachers;
 DROP TABLE IF EXISTS QuizQuestions;
 DROP TABLE IF EXISTS Curriculums;
 DROP TABLE IF EXISTS Classes;
+-- Végül törölhetjük a Users táblát, amire a többiek hivatkoztak.
 DROP TABLE IF EXISTS Users;
 
--- 2. LÉPÉS: A TÁBLÁK ÚJRAÉPÍTÉSE A NULLÁRÓL A HELYES SZERKEZETTEL
+-- 2. LÉPÉS: TÁBLÁK ÚJRAÉPÍTÉSE A NULLÁRÓL A VÉGLEGES SZERKEZETTEL
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
