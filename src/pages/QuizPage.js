@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styles from './QuizPage.module.css';
@@ -53,6 +54,8 @@ const QuizPage = () => {
         setShowResults(true);
     };
 
+    const allAnswered = quiz?.questions?.every(q => userAnswers[q.id]);
+
     if (isLoading) return <div className={styles.container}><div className={styles.quizBox}><p>Kvíz betöltése...</p></div></div>;
     if (error) return <div className={styles.container}><div className={styles.quizBox}><p className={styles.error}>{error}</p></div></div>;
     if (!quiz) return <div className={styles.container}><div className={styles.quizBox}><p>A kvíz nem található.</p></div></div>;
@@ -74,35 +77,33 @@ const QuizPage = () => {
             </div>
         );
     }
-
+    
     return (
         <div className={styles.container}>
             <div className={styles.quizBox}>
                 <h1>{quiz.title}</h1>
                 <hr/>
                 {quiz.questions && quiz.questions.map((q) => {
-    const type = q.question_type?.toLowerCase().replace(/_/g, '-');
-
-    console.log('Kérdés típusa:', q.question_type, '→ Normalizált:', type); // DEBUG
-
-    if (['single-choice', 'singlechoice'].includes(type)) {
-        return (
-            <SingleChoiceQuestion
-                key={q.id}
-                question={q}
-                userAnswer={userAnswers[q.id]}
-                onAnswerChange={handleAnswerChange}
-            />
-        );
-    }
-
-    return (
-        <div key={q.id}>
-            <p>Ismeretlen kérdéstípus: <strong>{q.question_type}</strong></p>
-        </div>
-    );
-})}
-                <button onClick={handleSubmit} className={styles.submitButton}>Kvíz beküldése</button>
+                    if (q.question_type === 'single-choice') {
+                        return (
+                            <SingleChoiceQuestion
+                                key={q.id}
+                                question={q}
+                                userAnswer={userAnswers[q.id]}
+                                onAnswerChange={handleAnswerChange}
+                                showResults={showResults}
+                            />
+                        );
+                    }
+                    return <p key={q.id}>Ismeretlen kérdéstípus: {q.question_type}</p>;
+                })}
+                <button 
+                    onClick={handleSubmit} 
+                    className={styles.submitButton} 
+                    disabled={!allAnswered}
+                >
+                    Kvíz beküldése
+                </button>
             </div>
         </div>
     );
