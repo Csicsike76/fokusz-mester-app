@@ -269,6 +269,41 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
     }
 });
 
+app.get('/api/curriculums', async (req, res) => {
+    const { subject, grade, q } = req.query; 
+    let query = 'SELECT * FROM Curriculums WHERE is_published = true';
+    const queryParams = [];
+    if (subject) {
+        queryParams.push(subject);
+        query += ` AND subject = $${queryParams.length}`;
+    }
+    if (grade) {
+        queryParams.push(grade);
+        query += ` AND grade = $${queryParams.length}`;
+    }
+    if (q) {
+        queryParams.push(`%${q}%`);
+        query += ` AND title ILIKE $${queryParams.length}`;
+    }
+    query += ' ORDER BY subject, grade, title;';
+    try {
+        const result = await pool.query(query, queryParams);
+        if (subject || grade || q) {
+            return res.status(200).json({ success: true, data: result.rows });
+        }
+        const curriculumsBySubject = result.rows.reduce((acc, curriculum) => {
+            const subj = curriculum.subject;
+            if (!acc[subj]) acc[subj] = [];
+            acc[subj].push(curriculum);
+            return acc;
+        }, {});
+        res.status(200).json({ success: true, data: curriculumsBySubject });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Szerverhiba történt." });
+    }
+});
+
+
 app.get('/api/admin/clear-users/:secret', async (req, res) => {
     const { secret } = req.params;
     if (secret !== process.env.ADMIN_SECRET) {

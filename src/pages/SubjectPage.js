@@ -1,36 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { curriculum } from '../data/curriculumData';
-import ConditionalLink from '../components/ConditionalLink/ConditionalLink'; // Az új komponenst használjuk
+import styles from './LessonsPage.module.css';
+import ConditionalLink from '../components/ConditionalLink/ConditionalLink';
+
+const API_URL = 'https://fokusz-mester-backend.onrender.com';
 
 const SubjectPage = () => {
-  const { subjectName, grade } = useParams();
-  
-  const subjectData = curriculum[subjectName];
-  const gradeData = subjectData?.grades[grade];
+    const { subjectName, grade } = useParams();
+    const [lessons, setLessons] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState('');
 
-  if (!subjectData || !gradeData) {
-    return <h2>A keresett tananyag nem található.</h2>;
-  }
+    const fetchSubjectLessons = useCallback(async () => {
+        setIsLoading(true);
+        setError('');
+        try {
+            const response = await fetch(`${API_URL}/api/curriculums?subject=${subjectName}&grade=${grade}`);
+            const data = await response.json();
+            if (!data.success) {
+                throw new Error(data.message || 'Hiba a tananyagok lekérésekor.');
+            }
+            setLessons(data.data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [subjectName, grade]);
 
-  return (
-    <div style={{ padding: '2rem' }}>
-      <h1>{subjectData.title} - {gradeData.title}</h1>
-      <p>Válassz az alábbi témakörök közül a gyakorláshoz.</p>
-      
-      <div className="card-container">
-        {gradeData.topics.map(topic => (
-          <div className="card" key={topic.id}>
-            <h3>{topic.title}</h3>
-            <p>Itt jöhet egy rövid leírás a témakörről...</p>
-            <ConditionalLink to={`/kviz/${topic.quizId}`} className="quiz-link">
-              Gyakorló Kvíz →
-            </ConditionalLink>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    useEffect(() => {
+        fetchSubjectLessons();
+    }, [fetchSubjectLessons]);
+
+    if (isLoading) return <div className={styles.container}><p>Tananyagok betöltése...</p></div>;
+    if (error) return <div className={styles.container}><p className={styles.error}>Hiba: {error}</p></div>;
+
+    const formattedSubjectName = subjectName ? subjectName.charAt(0).toUpperCase() + subjectName.slice(1) : '';
+
+    return (
+        <div className={styles.container}>
+            <h1>{formattedSubjectName} - {grade}. Osztály</h1>
+            {lessons.length > 0 ? (
+                <div className={styles.cardGrid}>
+                    {lessons.map(lesson => (
+                        <div key={lesson.id} className={styles.lessonCard}>
+                            <h3>{lesson.title}</h3>
+                            <p className={styles.pin}>PIN: {lesson.id + 100000}</p>
+                            <ConditionalLink to={`/kviz/${lesson.slug}`} className={styles.lessonLink}>
+                                Tovább a kvízhez →
+                            </ConditionalLink>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <p>Ehhez a tantárgyhoz és évfolyamhoz jelenleg nincsenek feltöltve tananyagok.</p>
+            )}
+        </div>
+    );
 };
 
 export default SubjectPage;
