@@ -7,13 +7,11 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 require('dotenv').config();
 
-// Adatbázis kapcsolat
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
 
-// E-mail küldő
 const transporter = nodemailer.createTransport({
     host: process.env.MAIL_SERVER,
     port: process.env.MAIL_PORT,
@@ -25,7 +23,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Middleware a felhasználói hitelesítés ellenőrzéséhez
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -40,9 +37,7 @@ const authenticateToken = (req, res, next) => {
 
 // --- API VÉGPONTOK ---
 
-// A REGISZTRÁCIÓS VÉGPONT AZ OSZTÁLYHOZ CSATLAKOZÁS LOGIKÁJÁVAL
 app.post('/api/register', async (req, res) => {
-  // Most már a classCode-ot is kiolvassuk
   const { role, username, email, password, vipCode, classCode } = req.body;
   
   if (!username || !email || !password || !role) {
@@ -51,7 +46,7 @@ app.post('/api/register', async (req, res) => {
 
   const client = await pool.connect();
   try {
-    await client.query('BEGIN'); // Tranzakció indítása a biztonságos adatkezelésért
+    await client.query('BEGIN');
 
     const userExists = await client.query('SELECT * FROM Users WHERE email = $1', [email]);
     if (userExists.rows.length > 0) {
@@ -62,30 +57,22 @@ app.post('/api/register', async (req, res) => {
       throw new Error("Érvénytelen VIP kód.");
     }
     
-    // --- ÚJ LOGIKA A DIÁKOK CSATLAKOZÁSÁHOZ ---
-    let classId = null; // Létrehozunk egy változót az osztály ID tárolására
+    let classId = null;
     if (role === 'student' && classCode) {
         console.log(`Osztálykód ellenőrzése: ${classCode}`);
         const classResult = await client.query('SELECT id, max_students FROM Classes WHERE class_code = $1 AND is_active = true', [classCode]);
-
-        // 1. Ellenőrzés: Létezik-e a kód?
         if (classResult.rows.length === 0) {
             throw new Error("A megadott osztálykód érvénytelen vagy az osztály már nem aktív.");
         }
-        
         classId = classResult.rows[0].id;
         const maxStudents = classResult.rows[0].max_students;
-
-        // 2. Ellenőrzés: Nincs-e betelve az osztály?
         const memberCountResult = await client.query('SELECT COUNT(*) FROM ClassMemberships WHERE class_id = $1', [classId]);
         const memberCount = parseInt(memberCountResult.rows[0].count, 10);
-
         if (memberCount >= maxStudents) {
             throw new Error("Ez az osztály sajnos már betelt.");
         }
         console.log(`Osztály (ID: ${classId}) érvényes, van szabad hely.`);
     }
-    // --- ÚJ LOGIKA VÉGE ---
 
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
@@ -97,27 +84,40 @@ app.post('/api/register', async (req, res) => {
     `;
     const newUserResult = await client.query(newUserQuery, [username, email, passwordHash, role, verificationToken, verificationExpires]);
     const newUserId = newUserResult.rows[0].id;
+    console.log(`Felhasználó sikeresen létrehozva az adatbázisban, ID: ${newUserId}`);
 
     if (role === 'teacher') {
       await client.query(`INSERT INTO Teachers (user_id, vip_code, is_approved) VALUES ($1, $2, false);`, [newUserId, vipCode]);
-      // ... (admin értesítő e-mail küldése változatlan)
+      const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
+      const adminMailOptions = {
+          from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+          to: process.env.MAIL_DEFAULT_SENDER,
+          subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
+          html: `<p>Új tanár regisztrált: ${username} (${email}). Kattints a linkre a jóváhagyáshoz: <a href="${approvalUrl}">Jóváhagyás</a></p>`
+      };
+      await transporter.sendMail(adminMailOptions);
     }
 
-    // Ha a diák adott meg érvényes osztálykódot, hozzáadjuk az osztályhoz
-    if (classId) {
+    if (role === 'student' && classId) {
         await client.query(`INSERT INTO ClassMemberships (user_id, class_id) VALUES ($1, $2);`, [newUserId, classId]);
         console.log(`Diák (User ID: ${newUserId}) hozzáadva az osztályhoz (Class ID: ${classId}).`);
     }
 
-    // ... (felhasználó megerősítő e-mail küldése változatlan) ...
+    const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${verificationToken}`;
+    const userMailOptions = {
+        from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+        to: email,
+        subject: 'Erősítsd meg az e-mail címedet a Fókusz Mester oldalon!',
+        html: `<p>Kattints a linkre a regisztrációd véglegesítéséhez: <a href="${verificationUrl}">Megerősítés</a></p>`
+    };
+    await transporter.sendMail(userMailOptions);
 
-    await client.query('COMMIT'); // Véglegesítjük az összes adatbázis-műveletet
+    await client.query('COMMIT');
     res.status(201).json({ success: true, message: `Sikeres regisztráció! Megerősítő e-mailt küldtünk.` });
 
   } catch (error) {
-    if (client) await client.query('ROLLBACK'); // Hiba esetén mindent visszavonunk
+    if (client) await client.query('ROLLBACK');
     console.error('Regisztrációs hiba:', error);
-    // A frontendnek most már a konkrét hibaüzenetet küldjük vissza
     res.status(400).json({ success: false, message: error.message || "Szerverhiba történt." });
   } finally {
     if (client) client.release();
@@ -133,41 +133,29 @@ app.get('/api/verify-email/:token', async (req, res) => {
         }
         const user = userResult.rows[0];
         await pool.query('UPDATE Users SET email_verified = true, email_verification_token = NULL, email_verification_expires = NULL WHERE id = $1', [user.id]);
-        res.status(200).json({ success: true, message: "Sikeres megerősítés! Most már bejelentkezhetsz."});
+        res.redirect(`${process.env.FRONTEND_URL}/bejelentkezes?verified=true`);
     } catch (error) {
         console.error('Email megerősítési hiba:', error);
-        res.status(500).json({ success: false, message: "Szerverhiba történt."});
+        res.redirect(`${process.env.FRONTEND_URL}/bejelentkezes?error=verification_failed`);
     }
 });
 
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).json({ success: false, message: "E-mail és jelszó megadása kötelező." });
-  }
+  if (!email || !password) { return res.status(400).json({ success: false, message: "E-mail és jelszó megadása kötelező." }); }
   try {
     const userResult = await pool.query('SELECT * FROM Users WHERE email = $1', [email]);
-    if (userResult.rows.length === 0) {
-      return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." });
-    }
+    if (userResult.rows.length === 0) { return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." }); }
     const user = userResult.rows[0];
-    
-    if (!user.email_verified) {
-        return res.status(403).json({ success: false, message: "Kérjük, először erősítsd meg az e-mail címedet!" });
-    }
-
+    if (!user.email_verified) { return res.status(403).json({ success: false, message: "Kérjük, először erősítsd meg az e-mail címedet!" }); }
     const isPasswordCorrect = await bcrypt.compare(password, user.password_hash);
-    if (!isPasswordCorrect) {
-      return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." });
-    }
-
+    if (!isPasswordCorrect) { return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." }); }
     if (user.role === 'teacher') {
         const teacherResult = await pool.query('SELECT is_approved FROM Teachers WHERE user_id = $1', [user.id]);
         if (teacherResult.rows.length === 0 || !teacherResult.rows[0].is_approved) {
             return res.status(403).json({ success: false, message: "A tanári fiókod még nem lett jóváhagyva." });
         }
     }
-    
     const token = jwt.sign({ userId: user.id, role: user.role }, process.env.SECRET_KEY, { expiresIn: '1d' });
     res.status(200).json({
       success: true,
@@ -185,38 +173,25 @@ app.get('/api/approve-teacher/:userId', async (req, res) => {
   try {
     const result = await pool.query(`UPDATE Teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id;`, [userId]);
     if (result.rows.length === 0) {
-      return res.status(404).json({ success: false, message: 'A tanári felhasználó nem található.' });
+      return res.redirect(`${process.env.FRONTEND_URL}?approval_status=not_found`);
     }
-    res.status(200).json({ success: true, message: 'A tanári fiók sikeresen aktiválva lett.' });
+    res.redirect(`${process.env.FRONTEND_URL}?approval_status=success`);
   } catch (error) {
     console.error('Hiba a tanár jóváhagyása során:', error);
-    res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
+    res.redirect(`${process.env.FRONTEND_URL}?approval_status=error`);
   }
 });
 
 app.post('/api/classes/create', authenticateToken, async (req, res) => {
     const { userId, role } = req.user;
     const { className, maxStudents } = req.body;
-
-    if (role !== 'teacher') {
-        return res.status(403).json({ success: false, message: "Nincs jogosultságod osztály létrehozásához." });
-    }
-    
+    if (role !== 'teacher') { return res.status(403).json({ success: false, message: "Nincs jogosultságod." }); }
     if (!className || !maxStudents || maxStudents < 5 || maxStudents > 30) {
-        return res.status(400).json({ success: false, message: "Hibás adatok. Az osztály nevének megadása kötelező, a létszám 5 és 30 között lehet." });
+        return res.status(400).json({ success: false, message: "Hibás adatok. A létszám 5 és 30 között lehet." });
     }
-
     try {
         const classCode = `FKSZ-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
-        const newClassQuery = `
-            INSERT INTO Classes (class_name, class_code, teacher_id, max_students) 
-            VALUES ($1, $2, $3, $4) RETURNING *;
-        `;
-        const newClassResult = await pool.query(newClassQuery, [className, classCode, userId, maxStudents]);
-        
-        // Admin értesítő email küldése
-        // Ezt a részt hozzáadhatod, ha szeretnéd
-        
+        const newClassResult = await pool.query(`INSERT INTO Classes (class_name, class_code, teacher_id, max_students) VALUES ($1, $2, $3, $4) RETURNING *;`, [className, classCode, userId, maxStudents]);
         res.status(201).json({ success: true, message: "Osztály sikeresen létrehozva.", class: newClassResult.rows[0] });
     } catch (error) {
         console.error("Hiba az osztály létrehozása során:", error);
@@ -226,12 +201,9 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
 
 app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
     const { userId, role } = req.user;
-    if (role !== 'teacher') {
-        return res.status(403).json({ success: false, message: "Nincs jogosultságod." });
-    }
+    if (role !== 'teacher') { return res.status(403).json({ success: false, message: "Nincs jogosultságod." }); }
     try {
-        const classesQuery = 'SELECT * FROM Classes WHERE teacher_id = $1 ORDER BY created_at DESC';
-        const classesResult = await pool.query(classesQuery, [userId]);
+        const classesResult = await pool.query('SELECT * FROM Classes WHERE teacher_id = $1 ORDER BY created_at DESC', [userId]);
         res.status(200).json({ success: true, classes: classesResult.rows });
     } catch (error) {
         console.error("Hiba a tanári osztályok lekérdezése során:", error);
@@ -241,16 +213,26 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
 
 app.get('/api/admin/clear-users/:secret', async (req, res) => {
     const { secret } = req.params;
+
+    // 1. Ellenőrizzük a titkos kulcsot
     if (secret !== process.env.ADMIN_SECRET) {
         return res.status(403).json({ message: "Hozzáférés megtagadva." });
     }
+
+    // 2. Lefuttatjuk a törlési parancsot a CASCADE kulcsszóval
     try {
-        await pool.query('DELETE FROM Users');
-        res.status(200).json({ success: true, message: "Minden felhasználó törölve." });
+        await pool.query('DELETE FROM Users CASCADE');
+        
+        console.log('ADMIN: Minden felhasználó sikeresen törölve az adatbázisból.');
+        res.status(200).json({ success: true, message: "Minden felhasználó és a hozzájuk kapcsolódó tagság sikeresen törölve." });
+
     } catch (error) {
-        res.status(500).json({ success: false, message: "Hiba a törlés során." });
+        // 3. Hiba esetén naplózzuk és hibaüzenetet küldünk
+        console.error('Hiba a felhasználók törlése során:', error);
+        res.status(500).json({ success: false, message: "Hiba történt a törlés során." });
     }
 });
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
