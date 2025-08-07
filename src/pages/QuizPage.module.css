@@ -1,0 +1,27 @@
+.container {
+    padding: 2rem;
+    color: white;
+    max-width: 800px;
+    margin: 2rem auto;
+}
+.quizBox {
+    background-color: rgba(44, 62, 80, 0.9);
+    border-radius: 10px;
+    padding: 2rem;
+    backdrop-filter: blur(5px);
+}
+.questionBlock { margin-bottom: 2rem; }
+.options { display: flex; flex-direction: column; gap: 0.75rem; }
+.optionLabel {
+    display: block;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+.optionLabel:hover { border-color: #1abc9c; }
+.selected { border-color: #3498db !important; background-color: rgba(52, 152, 219, 0.3); }
+.submitButton { /* ... (stílus a gombnak, lásd korábbi CSS-ek) ... */ }
+.results { text-align: center; }

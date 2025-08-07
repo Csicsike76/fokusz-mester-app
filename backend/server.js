@@ -232,6 +232,38 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
     }
 });
 
+
+app.get('/api/quiz/:slug', async (req, res) => {
+    const { slug } = req.params;
+    try {
+        // 1. Lekérdezzük a tananyag alapadatait a slug alapján
+        const curriculumQuery = 'SELECT * FROM Curriculums WHERE slug = $1';
+        const curriculumResult = await pool.query(curriculumQuery, [slug]);
+
+        if (curriculumResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: "A kért tananyag nem található." });
+        }
+        const curriculum = curriculumResult.rows[0];
+
+        // 2. Lekérdezzük a tananyaghoz tartozó összes kérdést
+        const questionsQuery = 'SELECT * FROM QuizQuestions WHERE curriculum_id = $1';
+        const questionsResult = await pool.query(questionsQuery, [curriculum.id]);
+
+        // 3. Visszaküldjük az összes adatot egyben
+        res.status(200).json({
+            success: true,
+            quiz: {
+                title: curriculum.title,
+                questions: questionsResult.rows
+            }
+        });
+
+    } catch (error) {
+        console.error(`Hiba a(z) ${slug} kvíz lekérdezése során:`, error);
+        res.status(500).json({ success: false, message: "Szerverhiba történt." });
+    }
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`✅ A szerver elindult a ${PORT} porton.`);

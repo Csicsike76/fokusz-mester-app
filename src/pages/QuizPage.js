@@ -1,134 +1,101 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import SingleChoiceQuestion from '../components/SingleChoiceQuestion';
-import MultipleChoiceQuestion from '../components/MultipleChoiceQuestion';
-import EnteredAnswerQuestion from '../components/EnteredAnswerQuestion';
-import ConditionalLink from '../components/ConditionalLink/ConditionalLink'; // Az új komponenst használjuk
+import styles from './QuizPage.module.css';
+
+const API_URL = 'https://fokusz-mester-backend.onrender.com';
 
 const QuizPage = () => {
-  const { quizId } = useParams(); 
-  const [quizData, setQuizData] = useState(null);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState({});
-  const [showResults, setShowResults] = useState(false);
-  const [error, setError] = useState(null);
+    const { slug } = useParams();
+    const [quiz, setQuiz] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [userAnswers, setUserAnswers] = useState({});
+    const [showResults, setShowResults] = useState(false);
+    const [score, setScore] = useState(0);
 
-  useEffect(() => {
-    const fetchQuiz = async () => {
-      try {
-        const quizModule = await import(`../data/quizzes/${quizId}.json`);
-        setQuizData(quizModule.default);
-        setError(null);
-      } catch (err) {
-        console.error("Hiba a kvíz betöltése közben:", err);
-        setError(`A(z) "${quizId}.json" nevű kvízfájl nem található a "src/data/quizzes" mappában.`);
-        setQuizData(null); 
-      }
+    useEffect(() => {
+        const fetchQuiz = async () => {
+            try {
+                const response = await fetch(`${API_URL}/api/quiz/${slug}`);
+                const data = await response.json();
+                if (!data.success) throw new Error(data.message);
+                setQuiz(data.quiz);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchQuiz();
+    }, [slug]);
+
+    const handleAnswerSelect = (questionId, selectedOption) => {
+        setUserAnswers(prev => ({
+            ...prev,
+            [questionId]: selectedOption
+        }));
     };
 
-    fetchQuiz();
-    setCurrentQuestionIndex(0);
-    setUserAnswers({});
-    setShowResults(false);
-  }, [quizId]);
+    const handleSubmit = () => {
+        let currentScore = 0;
+        quiz.questions.forEach(q => {
+            // A válaszokat JSON-ként tároljuk, ezért parse-olni kell
+            const correctAnswer = JSON.parse(q.answer);
+            if (userAnswers[q.id] === correctAnswer) {
+                currentScore++;
+            }
+        });
+        setScore(currentScore);
+        setShowResults(true);
+    };
 
-  const handleAnswerChange = (questionId, answer) => {
-    setUserAnswers(prevAnswers => {
-      const question = quizData.questions.find(q => q.id === questionId);
-      if (question.type === 'multiple-choice') {
-        const existingAnswers = prevAnswers[questionId] || [];
-        if (existingAnswers.includes(answer)) {
-          return { ...prevAnswers, [questionId]: existingAnswers.filter(a => a !== answer) };
-        } else {
-          return { ...prevAnswers, [questionId]: [...existingAnswers, answer] };
-        }
-      }
-      return { ...prevAnswers, [questionId]: answer };
-    });
-  };
+    if (isLoading) return <div className={styles.container}>Kvíz betöltése...</div>;
+    if (!quiz) return <div className={styles.container}>A kvíz nem található.</div>;
 
-  const calculateScore = () => {
-    let score = 0;
-    quizData.questions.forEach(question => {
-      const userAnswer = userAnswers[question.id];
-      if (!userAnswer) return;
-
-      if (question.type === 'single-choice') {
-        if (userAnswer === question.answer) {
-          score++;
-        }
-      } else if (question.type === 'entered-answer') {
-        if (new RegExp(question.answerRegex, 'i').test(userAnswer)) {
-          score++;
-        }
-      } else if (question.type === 'multiple-choice') {
-        if (JSON.stringify([...userAnswer].sort()) === JSON.stringify([...question.answer].sort())) {
-          score++;
-        }
-      }
-    });
-    return score;
-  };
-
-  const handleSubmit = () => setShowResults(true);
-
-  const renderQuestion = () => {
-    const question = quizData.questions[currentQuestionIndex];
-    switch (question.type) {
-      case 'single-choice':
-        return <SingleChoiceQuestion question={question} onAnswerChange={handleAnswerChange} />;
-      case 'multiple-choice':
-        return <MultipleChoiceQuestion question={question} onAnswerChange={handleAnswerChange} />;
-      case 'entered-answer':
-        return <EnteredAnswerQuestion question={question} onAnswerChange={handleAnswerChange} />;
-      default:
-        return null;
+    if (showResults) {
+        const percentage = quiz.questions.length > 0 ? ((score / quiz.questions.length) * 100).toFixed(1) : 0;
+        return (
+            <div className={styles.container}>
+                <div className={styles.quizBox}>
+                    <div className={styles.results}>
+                        <h1>Kvíz Eredmény</h1>
+                        <h2>{quiz.title}</h2>
+                        <p>Eredményed: {score} / {quiz.questions.length}</p>
+                        <p>Százalék: {percentage}%</p>
+                    </div>
+                </div>
+            </div>
+        );
     }
-  };
-
-  const handleNext = () => {
-    if (currentQuestionIndex < quizData.questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
-  };
-
-  const handleBack = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
-    }
-  };
-  
-  if (error) {
-    return <div style={{ padding: '2rem', color: 'red' }}>Hiba: {error}</div>;
-  }
-
-  if (!quizData) {
-    return <div style={{ padding: '2rem' }}>Kvíz betöltése...</div>;
-  }
-
-  return (
-    <div style={{ padding: '2rem' }}>
-      <h1>{quizData.title}</h1>
-      {!showResults ? (
-        <div>
-          {renderQuestion()}
-          <div className="navigation" style={{ marginTop: '20px' }}>
-            <button onClick={handleBack} disabled={currentQuestionIndex === 0}>Vissza</button>
-            {currentQuestionIndex < quizData.questions.length - 1 ? (
-              <button onClick={handleNext}>Következő</button>
-            ) : (
-              <button onClick={handleSubmit}>Beadás</button>
-            )}
-          </div>
+    
+    return (
+        <div className={styles.container}>
+            <div className={styles.quizBox}>
+                <h1>{quiz.title}</h1>
+                <hr/>
+                {quiz.questions.map((q) => (
+                    <div key={q.id} className={styles.questionBlock}>
+                        <p>{q.description}</p>
+                        <div className={styles.options}>
+                            {JSON.parse(q.options).map((option, index) => (
+                                <label key={index} className={`${styles.optionLabel} ${userAnswers[q.id] === option ? styles.selected : ''}`}>
+                                    <input
+                                        type="radio"
+                                        name={`question-${q.id}`}
+                                        value={option}
+                                        checked={userAnswers[q.id] === option}
+                                        onChange={() => handleAnswerSelect(q.id, option)}
+                                        style={{ display: 'none' }}
+                                    />
+                                    {option}
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+                <button onClick={handleSubmit} className={styles.submitButton}>Kvíz beküldése</button>
+            </div>
         </div>
-      ) : (
-        <div>
-          <h2>Eredményed: {calculateScore()} / {quizData.questions.length}</h2>
-          <ConditionalLink to="/">Vissza a főoldalra</ConditionalLink>
-        </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default QuizPage;
