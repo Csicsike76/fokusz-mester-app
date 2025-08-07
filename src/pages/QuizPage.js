@@ -43,11 +43,7 @@ const QuizPage = () => {
         let currentScore = 0;
         if (quiz && quiz.questions) {
             quiz.questions.forEach(q => {
-                // JAVÍTÁS ITT: A helyes válasz az adatbázisból egy sima string,
-                // nincs szükség JSON.parse-ra a single-choice esetében.
                 const correctAnswer = q.answer;
-                
-                // Közvetlenül a stringeket hasonlítjuk össze.
                 if (userAnswers[q.id] === correctAnswer) {
                     currentScore++;
                 }
