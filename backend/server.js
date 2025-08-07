@@ -37,73 +37,82 @@ const authenticateToken = (req, res, next) => {
 
 // --- API VÉGPONTOK ---
 
+// A REGISZTRÁCIÓS VÉGPONT JAVÍTOTT HIBAKEZELÉSSEL
 app.post('/api/register', async (req, res) => {
   const { role, username, email, password, vipCode, classCode } = req.body;
-  if (!username || !email || !password || !role) {
-    return res.status(400).json({ success: false, message: "Minden kötelező mezőt ki kell tölteni." });
-  }
+  console.log('Regisztrációs kérés feldolgozása:', { email, username, role });
 
-  const client = await pool.connect();
+  // A 'client'-et a try blokkon kívül deklaráljuk, hogy a 'finally'-ban is elérhető legyen
+  let client;
   try {
+    client = await pool.connect();
     await client.query('BEGIN');
 
     const userExists = await client.query('SELECT * FROM Users WHERE email = $1', [email]);
     if (userExists.rows.length > 0) {
-      return res.status(409).json({ success: false, message: "Ez az e-mail cím már regisztrálva van." });
+      // A hibát itt dobjuk, hogy a központi catch blokk elkapja
+      throw new Error("Ez az e-mail cím már regisztrálva van.");
     }
 
     if (role === 'teacher' && vipCode !== process.env.VIP_CODE) {
-      return res.status(403).json({ success: false, message: "Érvénytelen VIP kód." });
+      throw new Error("Érvénytelen VIP kód.");
     }
-
+    
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
     const verificationExpires = new Date(Date.now() + 3600000);
 
     const newUserQuery = `
       INSERT INTO Users (username, email, password_hash, role, email_verification_token, email_verification_expires) 
-      VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;
+      VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, email;
     `;
     const newUserResult = await client.query(newUserQuery, [username, email, passwordHash, role, verificationToken, verificationExpires]);
-    const newUserId = newUserResult.rows[0].id;
+    const newUser = newUserResult.rows[0];
+    
+    console.log(`Felhasználó sikeresen létrehozva az adatbázisban, ID: ${newUser.id}`);
 
-    if (role === 'teacher') {
-      await client.query(`INSERT INTO Teachers (user_id, vip_code, is_approved) VALUES ($1, $2, false);`, [newUserId, vipCode]);
-      // Admin értesítő email küldése (korábbi kódból)
-    }
-
-    if (role === 'student' && classCode) {
-      const classResult = await client.query('SELECT id, max_students FROM Classes WHERE class_code = $1 AND is_active = true', [classCode]);
-      if (classResult.rows.length === 0) {
-        throw new Error("A megadott osztálykód érvénytelen.");
-      }
-      const classId = classResult.rows[0].id;
-      const maxStudents = classResult.rows[0].max_students;
-
-      const memberCountResult = await client.query('SELECT COUNT(*) FROM ClassMemberships WHERE class_id = $1', [classId]);
-      const memberCount = parseInt(memberCountResult.rows[0].count, 10);
-
-      if (memberCount >= maxStudents) {
-        throw new Error("Ez az osztály sajnos már betelt.");
-      }
-      await client.query(`INSERT INTO ClassMemberships (user_id, class_id) VALUES ($1, $2);`, [newUserId, classId]);
-    }
-
+    // E-mail küldés
     const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${verificationToken}`;
-    // E-mail küldés (korábbi kódból)
+    const mailOptions = {
+        from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+        to: newUser.email,
+        subject: 'Erősítsd meg az e-mail címedet a Fókusz Mester oldalon!',
+        html: `<h1>Majdnem kész!</h1><p>Kattints a linkre a regisztrációd véglegesítéséhez: <a href="${verificationUrl}">Megerősítés</a></p>`
+    };
+
+    // A transporter.sendMail egy Promise-t ad vissza, amit el kell kapnunk
+    console.log(`E-mail küldése a következő címre: ${newUser.email}`);
+    await transporter.sendMail(mailOptions);
+    console.log(`Megerősítő e-mail sikeresen elküldve.`);
 
     await client.query('COMMIT');
-    res.status(201).json({ success: true, message: `Sikeres regisztráció! Megerősítő e-mailt küldtünk.` });
+
+    res.status(201).json({ 
+      success: true, 
+      message: `Sikeres regisztráció! Elküldtünk egy megerősítő linket a(z) ${email} címre.` 
+    });
 
   } catch (error) {
-    await client.query('ROLLBACK');
-    console.error('Regisztrációs hiba:', error);
-    res.status(500).json({ success: false, message: error.message || "Szerverhiba történt." });
+    // Ha BÁRMILYEN hiba történik a try blokkban (akár adatbázis, akár email), ide fut a program
+    if (client) {
+      await client.query('ROLLBACK'); // Visszavonjuk az adatbázis-műveleteket
+    }
+    console.error('Hiba történt a regisztráció során:', error);
+    
+    // A hibaüzenetet a frontendnek is elküldjük
+    const errorMessage = error.code === 'EAUTH' 
+        ? "Szerver e-mail küldési hiba. Kérjük, próbálja később." 
+        : error.message || "Szerverhiba történt a regisztráció során.";
+
+    res.status(409).json({ success: false, message: errorMessage });
+  
   } finally {
-    client.release();
+    // Biztosítjuk, hogy a kapcsolat mindig lezáruljon
+    if (client) {
+      client.release();
+    }
   }
 });
-
 app.post('/api/classes/create', authenticateToken, async (req, res) => {
     const { userId, role } = req.user;
     const { className, maxStudents } = req.body;
@@ -233,6 +242,27 @@ app.post('/api/login', async (req, res) => {
 
 // A többi végpont (verify-email, login, etc.) és a szerver indítása itt következik, változatlanul.
 // Az egyszerűség kedvéért a korábbi teljes kódból ezeket a részeket is beillesztheted ide.
+
+
+// "TITKOS" VÉGPONT A FELHASZNÁLÓK TÖRLÉSÉRE
+app.get('/api/admin/clear-users/:secret', async (req, res) => {
+    const { secret } = req.params;
+
+    // Ellenőrizzük a titkos kulcsot
+    if (secret !== process.env.ADMIN_SECRET) {
+        return res.status(403).json({ message: "Hozzáférés megtagadva." });
+    }
+
+    try {
+        await pool.query('DELETE FROM Users');
+        console.log('ADMIN: Minden felhasználó sikeresen törölve az adatbázisból.');
+        res.status(200).json({ success: true, message: "Minden felhasználó törölve." });
+    } catch (error) {
+        console.error('Hiba a felhasználók törlése során:', error);
+        res.status(500).json({ success: false, message: "Hiba a törlés során." });
+    }
+});
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
