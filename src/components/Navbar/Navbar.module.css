@@ -166,6 +166,12 @@
 .logoutButton:hover {
   background-color: #c0392b;
 }
-
+.dashboardLink {
+  font-weight: bold;
+  color: #1abc9c !important; /* Kiemejük a színét */
+  border: 1px solid #1abc9c;
+  padding: 0.4rem 0.8rem !important;
+  border-radius: 5px;
+}
 
 }

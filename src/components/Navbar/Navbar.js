@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styles from './Navbar.module.css';
-import ConditionalLink from '../ConditionalLink/ConditionalLink'; // JAVÍTOTT ÚTVONAL
+import ConditionalLink from '../ConditionalLink/ConditionalLink';
 import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuth(); // Kiolvassuk a bejelentkezett felhasználót
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -26,22 +26,30 @@ const Navbar = () => {
       </div>
 
       <div className={`${styles.menuContainer} ${isMobileMenuOpen ? styles.open : ''}`}>
-        <div className={styles.logo}>
+        <div className={styles.navLinks}>
           <ConditionalLink to="/targy/matematika/5" onClick={handleLinkClick}>Matematika</ConditionalLink>
           <ConditionalLink to="/targy/fizika/7" onClick={handleLinkClick}>Fizika</ConditionalLink>
           <ConditionalLink to="/targy/aimi/0" onClick={handleLinkClick}>AIMI 0. Év</ConditionalLink>
           <ConditionalLink to="/targy/aimi/1" onClick={handleLinkClick}>AIMI 1</ConditionalLink>
           <ConditionalLink to="/targy/aimi/2" onClick={handleLinkClick}>AIMI 2</ConditionalLink>
           <ConditionalLink to="/targy/aimi/szuperkepesseg" onClick={handleLinkClick}>AIMI Szuperkepesseg</ConditionalLink>
+          
+          {/* DINAMIKUS MENÜPONT */}
+          {/* Ez a link csak akkor jelenik meg, ha van bejelentkezett felhasználó ÉS a szerepköre 'teacher' */}
+          {user && user.role === 'teacher' && (
+            <ConditionalLink to="/dashboard/teacher" onClick={handleLinkClick} className={styles.dashboardLink}>Irányítópult</ConditionalLink>
+          )}
         </div>
 
         <div className={styles.authLinks}>
           {user ? (
+            // Ha van bejelentkezett felhasználó:
             <>
               <span className={styles.welcomeUser}>Üdv, {user.username}!</span>
               <button onClick={logout} className={styles.logoutButton}>Kijelentkezés</button>
             </>
           ) : (
+            // Ha nincs bejelentkezett felhasználó:
             <>
               <ConditionalLink to="/bejelentkezes" className={styles.loginButton} onClick={handleLinkClick}>Bejelentkezés</ConditionalLink>
               <ConditionalLink to="/regisztracio" className={styles.authButton} onClick={handleLinkClick}>Regisztráció</ConditionalLink>
