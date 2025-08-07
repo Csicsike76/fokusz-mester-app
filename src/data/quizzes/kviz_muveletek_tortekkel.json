@@ -1,0 +1,188 @@
+{
+  "title": "Műveletek törtekkel",
+  "subject": "matematika",
+  "grade": 5,
+  "category": "free_lesson",
+  "questions": [
+    {
+      "type": "single-choice",
+      "description": "Mennyi 2/7 + 4/7?",
+      "options": ["6/14", "6/7", "8/49"],
+      "answer": "6/7",
+      "explanation": "🔹 1. Lépés: A nevezők azonosak, ezért a számlálókat összeadjuk, a nevező változatlan marad. 🔹 2. Lépés: 2 + 4 = 6. ✅ Megoldás: Az eredmény 6/7."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 8/9 - 3/9?",
+      "options": ["5/0", "5/9", "11/9"],
+      "answer": "5/9",
+      "explanation": "🔹 1. Lépés: A nevezők azonosak, ezért a számlálókat kivonjuk egymásból, a nevező változatlan marad. 🔹 2. Lépés: 8 - 3 = 5. ✅ Megoldás: Az eredmény 5/9."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 3 * (2/11)?",
+      "options": ["6/33", "5/11", "6/11"],
+      "answer": "6/11",
+      "explanation": "🔹 1. Lépés: Törtet egész számmal úgy szorzunk, hogy a számlálót szorozzuk az egész számmal. A nevező nem változik. 🔹 2. Lépés: 3 * 2 = 6. ✅ Megoldás: Az eredmény 6/11."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi (10/13) : 2?",
+      "options": ["5/13", "20/13", "10/26"],
+      "answer": "5/13",
+      "explanation": "🔹 1. Lépés: Törtet egész számmal úgy osztunk, hogy a nevezőt szorozzuk az egész számmal. 🔹 2. Lépés: 10 / (13 * 2) = 10/26. Ezt egyszerűsíteni kell 2-vel: 10:2=5, 26:2=13. ✅ Megoldás: Az eredmény 5/13. ✏️ Bónusz: Osztás helyett szorozhatunk a reciprokával is: 10/13 * 1/2 = 10/26 = 5/13."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 1/3 + 1/6?",
+      "options": ["2/9", "1/2", "2/6"],
+      "answer": "1/2",
+      "explanation": "🔹 1. Lépés: Közös nevezőre hozzuk a törteket. A közös nevező 6. 🔹 2. Lépés: Az 1/3 törtet bővítjük 2-vel: 1/3 = 2/6. 🔹 3. Lépés: Elvégezzük az összeadást: 2/6 + 1/6 = 3/6. 🔹 4. Lépés: Egyszerűsítjük az eredményt 3-mal: 3/6 = 1/2. ✅ Megoldás: Az eredmény 1/2."
+    },
+    {
+      "type": "single-choice",
+      "description": "Hogyan adunk össze két különböző nevezőjű törtet?",
+      "options": [
+        "Összeadjuk a számlálókat és a nevezőket is.",
+        "Közös nevezőre hozzuk, majd összeadjuk a számlálókat.",
+        "Csak a számlálókat adjuk össze."
+      ],
+      "answer": "Közös nevezőre hozzuk, majd összeadjuk a számlálókat.",
+      "explanation": "🔹 1. Lépés: A legfontosabb, hogy a törtek azonos 'méretű' részeket jelöljenek. Ezt a közös nevezőre hozással érjük el. 🔹 2. Lépés: A bővítés után már azonos a nevező, így a számlálókat egyszerűen összeadhatjuk. ✅ Megoldás: Először közös nevezőre hozunk, utána adjuk össze a számlálókat."
+    },
+    {
+      "type": "single-choice",
+      "description": "Anna megevett 1/8-ad, Peti 3/8-ad tortát. A torta mekkora része maradt meg?",
+      "options": ["4/8, azaz 1/2", "5/8", "3/8"],
+      "answer": "4/8, azaz 1/2",
+      "explanation": "🔹 1. Lépés: Összesen ettek: 1/8 + 3/8 = 4/8. 🔹 2. Lépés: Az egész torta 8/8. A maradék: 8/8 - 4/8 = 4/8. 🔹 3. Lépés: A 4/8 törtet egyszerűsíthetjük 4-gyel. ✅ Megoldás: A torta 1/2-e maradt meg."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 2 - 3/5?",
+      "options": ["1 2/5", "1/5", "-1/5"],
+      "answer": "1 2/5",
+      "explanation": "🔹 1. Lépés: A 2 egészet átírjuk ötödökre. 1 egész = 5/5, tehát 2 egész = 10/5. 🔹 2. Lépés: Elvégezzük a kivonást: 10/5 - 3/5 = 7/5. 🔹 3. Lépés: A 7/5 áltörtet átírjuk vegyes szám alakra: 7-ben az 5 megvan egyszer, marad a 2. ✅ Megoldás: Az eredmény 1 2/5."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 5 * (3/10)?",
+      "options": ["15/10, azaz 3/2", "15/50", "8/10"],
+      "answer": "15/10, azaz 3/2",
+      "explanation": "🔹 1. Lépés: A számlálót szorozzuk 5-tel: 5 * 3 = 15. A tört tehát 15/10. 🔹 2. Lépés: Ezt az áltörtet egyszerűsíthetjük 5-tel: 15:5=3, 10:5=2. ✅ Megoldás: Az eredmény 3/2."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 1/2 + 1/4 + 1/8?",
+      "options": ["3/14", "7/8", "3/8"],
+      "answer": "7/8",
+      "explanation": "🔹 1. Lépés: A közös nevező 8. 🔹 2. Lépés: Bővítsük a törteket: 1/2 = 4/8, 1/4 = 2/8. 🔹 3. Lépés: Adjuk össze: 4/8 + 2/8 + 1/8 = 7/8. ✅ Megoldás: Az eredmény 7/8."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 1 - 2/9?",
+      "options": ["7/9", "1/9", "8/9"],
+      "answer": "7/9",
+      "explanation": "🔹 1. Lépés: Az 1 egészet felírjuk kilencedekben: 1 = 9/9. 🔹 2. Lépés: Elvégezzük a kivonást: 9/9 - 2/9 = 7/9. ✅ Megoldás: Az eredmény 7/9."
+    },
+    {
+      "type": "single-choice",
+      "description": "Hogyan osztunk el egy törtet egy természetes számmal?",
+      "options": [
+        "Elosztjuk a számlálót a számmal.",
+        "Megszorozzuk a nevezőt a számmal.",
+        "Megszorozzuk a számlálót a számmal."
+      ],
+      "answer": "Megszorozzuk a nevezőt a számmal.",
+      "explanation": "🔹 1. Lépés: Ha egy tortát elosztunk, a szeletek kisebbek lesznek. Ez azt jelenti, hogy a nevezőnek nőnie kell. 🔹 2. Lépés: Például ha egy fél (1/2) pizzát elosztunk 3 felé, akkor hatodokat (1/6) kapunk. Ezt úgy kapjuk, hogy a nevezőt szorozzuk: 1/(2*3) = 1/6. ✅ Megoldás: A nevezőt szorozzuk az osztóval."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi (4/5) : 4?",
+      "options": ["1", "1/5", "16/5"],
+      "answer": "1/5",
+      "explanation": "🔹 1. Lépés: Elosztjuk a számlálót az egész számmal, ha lehetséges: 4:4=1. A nevező változatlan. ✅ Megoldás: Az eredmény 1/5. ✏️ Bónusz: A másik módszerrel: 4/(5*4) = 4/20, amit 4-gyel egyszerűsítve szintén 1/5-öt kapunk."
+    },
+    {
+      "type": "single-choice",
+      "description": "Egy üveg 3/4-ig van tele. Ha megisszuk a felét, az üveg hányad része marad tele?",
+      "options": ["1/4", "3/8", "1/2"],
+      "answer": "3/8",
+      "explanation": "🔹 1. Lépés: A (3/4) felét kell kiszámolni, ami osztás 2-vel. (3/4) : 2. 🔹 2. Lépés: A nevezőt szorozzuk 2-vel: 3/(4*2) = 3/8. ✅ Megoldás: Az üveg 3/8 része marad tele."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 1 3/5 + 2 1/5?",
+      "options": ["3 4/5", "3 4/10", "4"],
+      "answer": "3 4/5",
+      "explanation": "🔹 1. Lépés: Külön összeadjuk az egész részeket és a tört részeket. 🔹 2. Lépés: Egész részek: 1+2=3. Tört részek: 3/5 + 1/5 = 4/5. ✅ Megoldás: Az eredmény 3 4/5."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 2/5 + 3/10?",
+      "options": ["5/15", "5/10", "7/10"],
+      "answer": "7/10",
+      "explanation": "🔹 1. Lépés: A közös nevező 10. Az első törtet bővítjük 2-vel: 2/5 = 4/10. 🔹 2. Lépés: 4/10 + 3/10 = 7/10. ✅ Megoldás: Az eredmény 7/10."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 4 * (5/8)?",
+      "options": ["20/32", "20/8, azaz 5/2", "9/8"],
+      "answer": "20/8, azaz 5/2",
+      "explanation": "🔹 1. Lépés: Szorozzuk a számlálót: 4 * 5 = 20. Az eredmény 20/8. 🔹 2. Lépés: Egyszerűsítsük a törtet a legnagyobb közös osztóval, ami 4. 20:4=5, 8:4=2. ✅ Megoldás: Az eredmény 5/2."
+    },
+    {
+      "type": "single-choice",
+      "description": "Egy kert 1/3-ában eper, 1/2-ében málna van. A kert mekkora részén van gyümölcs?",
+      "options": ["2/5", "5/6", "1"],
+      "answer": "5/6",
+      "explanation": "🔹 1. Lépés: Össze kell adni a két törtet: 1/3 + 1/2. A közös nevező 6. 🔹 2. Lépés: Bővítés: 1/3 = 2/6, 1/2 = 3/6. 🔹 3. Lépés: Összeadás: 2/6 + 3/6 = 5/6. ✅ Megoldás: A kert 5/6 részén van gyümölcs."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi (5/6) : 5?",
+      "options": ["1/6", "25/6", "1"],
+      "answer": "1/6",
+      "explanation": "🔹 1. Lépés: Elosztjuk a számlálót 5-tel, ha lehet. 5:5=1. A nevező marad 6. ✅ Megoldás: Az eredmény 1/6."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 3/8 + 5/8?",
+      "options": ["8/16", "8/8, azaz 1", "2/8"],
+      "answer": "8/8, azaz 1",
+      "explanation": "🔹 1. Lépés: A nevezők azonosak, a számlálókat összeadjuk. 3 + 5 = 8. 🔹 2. Lépés: Az eredmény 8/8. Ha egy tört számlálója és nevezője megegyezik, az értéke 1. ✅ Megoldás: Az eredmény 1."
+    },
+    {
+      "type": "single-choice",
+      "description": "Melyik művelet eredménye a legnagyobb?",
+      "options": ["1/2 + 1/2", "1/2 * 2", "mindkettő ugyanannyi"],
+      "answer": "mindkettő ugyanannyi",
+      "explanation": "🔹 1. Lépés: Számoljuk ki az elsőt: 1/2 + 1/2 = 2/2 = 1. 🔹 2. Lépés: Számoljuk ki a másodikat: 1/2 * 2 = 2/2 = 1. ✅ Megoldás: Mindkét művelet eredménye 1, tehát egyenlőek."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 5/4 - 1/2?",
+      "options": ["4/2", "3/4", "1/4"],
+      "answer": "3/4",
+      "explanation": "🔹 1. Lépés: A közös nevező 4. Az 1/2 törtet bővítjük 2-vel: 1/2 = 2/4. 🔹 2. Lépés: A kivonás: 5/4 - 2/4 = 3/4. ✅ Megoldás: Az eredmény 3/4."
+    },
+    {
+      "type": "single-choice",
+      "description": "Hogyan egyszerűsítjük a 12/15 törtet?",
+      "options": [
+        "osztjuk a számlálót és a nevezőt is 2-vel",
+        "kivonunk a számlálóból és a nevezőből is 3-at",
+        "osztjuk a számlálót és a nevezőt is 3-mal"
+      ],
+      "answer": "osztjuk a számlálót és a nevezőt is 3-mal",
+      "explanation": "🔹 1. Lépés: Az egyszerűsítéshez a számlálót és a nevezőt is ugyanazzal a számmal, a legnagyobb közös osztójukkal kell elosztani. 🔹 2. Lépés: A 12 és a 15 legnagyobb közös osztója a 3. ✅ Megoldás: A helyes eljárás a 3-mal való osztás."
+    },
+    {
+      "type": "single-choice",
+      "description": "Mennyi 3 * (1/3)?",
+      "options": ["3/3, azaz 1", "1/9", "3 1/3"],
+      "answer": "3/3, azaz 1",
+      "explanation": "🔹 1. Lépés: Szorozzuk a számlálót 3-mal: 3 * 1 = 3. A tört 3/3 lesz. 🔹 2. Lépés: A 3/3 értéke 1. ✅ Megoldás: Az eredmény 1."
+    }
+  ]
+}
