@@ -39,10 +39,10 @@ const authenticateToken = (req, res, next) => {
 
 // A REGISZTRÁCIÓS VÉGPONT JAVÍTOTT HIBAKEZELÉSSEL
 // A REGISZTRÁCIÓS VÉGPONT TELJES LOGIKÁVAL
+// A REGISZTRÁCIÓS VÉGPONT JAVÍTOTT ADMIN LINKKEL
 app.post('/api/register', async (req, res) => {
   const { role, username, email, password, vipCode, classCode } = req.body;
-  console.log('Regisztrációs kérés feldolgozása:', { email, username, role });
-
+  
   let client;
   try {
     client = await pool.connect();
@@ -53,17 +53,13 @@ app.post('/api/register', async (req, res) => {
       throw new Error("Ez az e-mail cím már regisztrálva van.");
     }
 
-    // --- Tanári regisztráció speciális kezelése ---
-    if (role === 'teacher') {
-      if (vipCode !== process.env.VIP_CODE) {
-        throw new Error("Érvénytelen VIP kód.");
-      }
+    if (role === 'teacher' && vipCode !== process.env.VIP_CODE) {
+      throw new Error("Érvénytelen VIP kód.");
     }
-    // --- ------------------------------------ ---
-
+    
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
-    const verificationExpires = new Date(Date.now() + 3600000); // 1 óra
+    const verificationExpires = new Date(Date.now() + 3600000);
 
     const newUserQuery = `
       INSERT INTO Users (username, email, password_hash, role, email_verification_token, email_verification_expires) 
@@ -71,35 +67,23 @@ app.post('/api/register', async (req, res) => {
     `;
     const newUserResult = await client.query(newUserQuery, [username, email, passwordHash, role, verificationToken, verificationExpires]);
     const newUserId = newUserResult.rows[0].id;
-    console.log(`Felhasználó sikeresen létrehozva az adatbázisban, ID: ${newUserId}`);
-
-    // Ha tanár, a Teachers táblába is beillesztjük
+    
     if (role === 'teacher') {
       await client.query(`INSERT INTO Teachers (user_id, vip_code, is_approved) VALUES ($1, $2, false);`, [newUserId, vipCode]);
-      console.log(`Tanár adatok mentve a ${newUserId} ID-jű felhasználóhoz, jóváhagyásra vár.`);
 
-      // --- 2. E-MAIL KÜLDÉSE: ÉRTESÍTŐ AZ ADMINNAK ---
-      const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`; // Ezt az oldalt majd létre kell hozni
+      // JAVÍTÁS ITT: A link most a frontend oldalra mutat, de a frontend
+      // fogja meghívni a backendet. Ez a helyes SPA (Single Page App) megközelítés.
+      const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
+      
       const adminMailOptions = {
           from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
-          to: process.env.MAIL_DEFAULT_SENDER, // Saját magadnak küldöd
+          to: process.env.MAIL_DEFAULT_SENDER,
           subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
-          html: `
-              <h1>Új Tanári Regisztráció</h1>
-              <p>Egy új tanár regisztrált a Fókusz Mester oldalon, és a te jóváhagyásodra vár.</p>
-              <ul>
-                  <li><strong>Felhasználónév:</strong> ${username}</li>
-                  <li><strong>E-mail:</strong> ${email}</li>
-              </ul>
-              <p>Kattints a linkre a fiók aktiválásához. FONTOS: Ez a link még nem működik teljesen, a funkciót később kell befejezni.</p>
-              <a href="${approvalUrl}" style="padding: 10px; background-color: #2ecc71; color: white;">Jóváhagyás</a>
-          `
+          html: `<p>Új tanár regisztrált: ${username} (${email}). Kattints a linkre a jóváhagyáshoz: <a href="${approvalUrl}">Jóváhagyás</a></p>`
       };
       await transporter.sendMail(adminMailOptions);
-      console.log(`Admin értesítő e-mail elküldve a ${newUserId} ID-jű tanár jóváhagyásához.`);
     }
 
-    // --- 1. E-MAIL KÜLDÉSE: MEGERŐSÍTŐ A FELHASZNÁLÓNAK (minden esetben) ---
     const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${verificationToken}`;
     const userMailOptions = {
         from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
@@ -108,13 +92,9 @@ app.post('/api/register', async (req, res) => {
         html: `<p>Kattints a linkre a regisztrációd véglegesítéséhez: <a href="${verificationUrl}">Megerősítés</a></p>`
     };
     await transporter.sendMail(userMailOptions);
-    console.log(`Megerősítő e-mail sikeresen elküldve a(z) ${email} címre.`);
 
     await client.query('COMMIT');
-    res.status(201).json({ 
-      success: true, 
-      message: `Sikeres regisztráció! Elküldtünk egy megerősítő linket a(z) ${email} címre.` 
-    });
+    res.status(201).json({ success: true, message: `Sikeres regisztráció! Elküldtünk egy megerősítő linket a(z) ${email} címre.` });
 
   } catch (error) {
     if (client) await client.query('ROLLBACK');
@@ -122,6 +102,33 @@ app.post('/api/register', async (req, res) => {
     res.status(400).json({ success: false, message: error.message || "Szerverhiba történt." });
   } finally {
     if (client) client.release();
+  }
+});
+
+// A TANÁR-JÓVÁHAGYÓ VÉGPONT JAVÍTVA
+app.get('/api/approve-teacher/:userId', async (req, res) => {
+  const { userId } = req.params;
+  console.log(`Jóváhagyási kérés érkezett a ${userId} ID-jű felhasználóhoz.`);
+
+  try {
+    const updateQuery = `UPDATE Teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id;`;
+    const result = await pool.query(updateQuery, [userId]);
+
+    if (result.rows.length === 0) {
+      // Itt már nem HTML-t, hanem JSON-t küldünk vissza
+      return res.status(404).json({ success: false, message: 'A tanári felhasználó nem található.' });
+    }
+
+    console.log(`A(z) ${userId} ID-jű tanár sikeresen jóváhagyva.`);
+    
+    // TODO: E-mail küldése a tanárnak, hogy a fiókja aktív lett.
+
+    // Sikeres JSON választ küldünk vissza
+    res.status(200).json({ success: true, message: 'A tanári fiók sikeresen aktiválva lett.' });
+
+  } catch (error) {
+    console.error('Hiba a tanár jóváhagyása során:', error);
+    res.status(500).json({ success: false, message: 'Szerverhiba történt a jóváhagyás során.' });
   }
 });
 app.post('/api/classes/create', authenticateToken, async (req, res) => {

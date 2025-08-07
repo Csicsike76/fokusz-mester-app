@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import styles from './SimpleMessagePage.module.css'; // Ugyanazt a stíluslapot használjuk
+import styles from './SimpleMessagePage.module.css';
 
 const API_URL = 'https://fokusz-mester-backend.onrender.com';
 
 const TeacherApprovalPage = () => {
-    const { userId } = useParams(); // Kiolvassuk az user ID-t az URL-ből
+    const { userId } = useParams();
     const [message, setMessage] = useState('Jóváhagyás folyamatban...');
     const [error, setError] = useState(false);
 
@@ -13,17 +13,19 @@ const TeacherApprovalPage = () => {
         if (userId) {
             const approveTeacher = async () => {
                 try {
+                    // A fetch hívás a backend API-ra mutat
                     const response = await fetch(`${API_URL}/api/approve-teacher/${userId}`);
+                    const data = await response.json();
                     
-                    if (!response.ok) {
-                        throw new Error('A jóváhagyás sikertelen.');
+                    if (!response.ok || !data.success) {
+                        throw new Error(data.message || 'A jóváhagyás sikertelen.');
                     }
                     
-                    setMessage('A tanári fiók sikeresen aktiválva lett.');
+                    setMessage(data.message);
                     setError(false);
 
                 } catch (err) {
-                    setMessage('A jóváhagyási link érvénytelen vagy hiba történt.');
+                    setMessage(err.message);
                     setError(true);
                 }
             };
