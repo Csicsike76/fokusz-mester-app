@@ -41,7 +41,7 @@ CREATE TABLE Classes (
     class_name VARCHAR(255) NOT NULL,
     class_code VARCHAR(50) UNIQUE NOT NULL,
     teacher_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
-    max_students INTEGER NOT NULL DEFAULT 35,
+    max_students INTEGER NOT NULL DEFAULT 30,
     is_active BOOLEAN DEFAULT true,
     is_approved BOOLEAN DEFAULT true,
     discount_status VARCHAR(20) DEFAULT 'pending',
