@@ -42,10 +42,9 @@ const QuizPage = () => {
     const handleSubmit = () => {
         let currentScore = 0;
         if (quiz && quiz.questions) {
-            quiz.questions.forEach((q, index) => {
-                const questionId = q.id ?? index;
+            quiz.questions.forEach(q => {
                 const correctAnswer = q.answer;
-                if (userAnswers[questionId] === correctAnswer) {
+                if (userAnswers[q.id] === correctAnswer) {
                     currentScore++;
                 }
             });
@@ -81,19 +80,22 @@ const QuizPage = () => {
             <div className={styles.quizBox}>
                 <h1>{quiz.title}</h1>
                 <hr/>
-                {quiz.questions && quiz.questions.map((q, index) => {
-                    const questionId = q.id ?? index;
-                    if (q.type === 'single-choice') {
+                {quiz.questions && quiz.questions.map((q) => {
+                    const type = q.question_type?.toLowerCase().replace(/_/g, '-');
+                    
+                    if (type === 'single-choice') {
                         return (
                             <SingleChoiceQuestion
-                                key={questionId}
-                                question={{ ...q, id: questionId }}
-                                userAnswer={userAnswers[questionId]}
+                                key={q.id}
+                                question={q}
+                                userAnswer={userAnswers[q.id]}
                                 onAnswerChange={handleAnswerChange}
                             />
                         );
                     }
-                    return <p key={questionId}>Ismeretlen kérdéstípus: {q.type}</p>;
+
+                    // Ha több kérdéstípus lesz, ide bővíthető
+                    return null;
                 })}
                 <button onClick={handleSubmit} className={styles.submitButton}>Kvíz beküldése</button>
             </div>
