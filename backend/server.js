@@ -161,6 +161,29 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
     }
 });
 
+    // ÚJ VÉDPONT: A BEJELENTKEZETT TANÁR OSZTÁLYAINAK LEKÉRDEZÉSE
+app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
+    const { userId, role } = req.user;
+
+    // Ellenőrizzük, hogy a felhasználó valóban tanár-e
+    if (role !== 'teacher') {
+        return res.status(403).json({ success: false, message: "Nincs jogosultságod." });
+    }
+
+    try {
+        // Lekérdezzük az összes osztályt, amit ez a tanár hozott létre
+        const classesQuery = 'SELECT * FROM Classes WHERE teacher_id = $1 ORDER BY created_at DESC';
+        const classesResult = await pool.query(classesQuery, [userId]);
+
+        res.status(200).json({ success: true, classes: classesResult.rows });
+
+    } catch (error) {
+        console.error("Hiba a tanári osztályok lekérdezése során:", error);
+        res.status(500).json({ success: false, message: "Szerverhiba történt." });
+    }
+});
+
+
     app.post('/api/register', async (req, res) => {
   const { role, username, email, password } = req.body;
   if (!username || !email || !password || !role) {
