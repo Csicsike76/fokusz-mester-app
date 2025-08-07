@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import styles from './QuizPage.module.css';
 import SingleChoiceQuestion from '../components/SingleChoiceQuestion';
 
@@ -27,7 +26,6 @@ const QuizPage = () => {
             setQuiz(data.quiz);
         } catch (err) {
             setError(err.message);
-            console.error(err);
         } finally {
             setIsLoading(false);
         }
@@ -45,22 +43,14 @@ const QuizPage = () => {
         let currentScore = 0;
         if (quiz && quiz.questions) {
             quiz.questions.forEach(q => {
+                let correctAnswer;
                 try {
-                    // Az adatbázisból a válasz JSON stringként jön, de a mi esetünkben
-                    // a single-choice válasz egy sima string. A biztonság kedvéért
-                    // megpróbáljuk feldolgozni mindkét esetet.
-                    let correctAnswer;
-                    try {
-                        correctAnswer = JSON.parse(q.answer);
-                    } catch (e) {
-                        correctAnswer = q.answer;
-                    }
-                    
-                    if (userAnswers[q.id] === correctAnswer) {
-                        currentScore++;
-                    }
+                    correctAnswer = JSON.parse(q.answer);
                 } catch (e) {
-                    console.error("Hiba a válasz feldolgozása közben:", e);
+                    correctAnswer = q.answer;
+                }
+                if (userAnswers[q.id] === correctAnswer) {
+                    currentScore++;
                 }
             });
         }
@@ -83,6 +73,7 @@ const QuizPage = () => {
                         <h2>{quiz.title}</h2>
                         <p>Eredményed: {score} / {totalQuestions}</p>
                         <p>Százalék: {percentage}%</p>
+                        <Link to="/" className={styles.backButton}>Vissza a főoldalra</Link>
                     </div>
                 </div>
             </div>
