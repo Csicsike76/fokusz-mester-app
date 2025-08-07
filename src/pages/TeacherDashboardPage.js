@@ -88,7 +88,7 @@ const TeacherDashboardPage = () => {
                                 value={maxStudents}
                                 onChange={(e) => setMaxStudents(e.target.value)}
                                 min="5"
-                                max="50"
+                                max="30"
                                 required
                             />
                         </div>

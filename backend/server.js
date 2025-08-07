@@ -139,8 +139,11 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
         return res.status(403).json({ success: false, message: "Nincs jogosultságod osztály létrehozásához." });
     }
     
-    if (!className || !maxStudents || maxStudents < 5 || maxStudents > 50) {
-        return res.status(400).json({ success: false, message: "Hibás adatok. Az osztály nevének megadása kötelező, a létszám 5 és 50 között lehet." });
+    if (!className || !maxStudents) {
+        return res.status(400).json({ success: false, message: "Az osztály neve és a maximális létszám megadása kötelező." });
+    }
+    if (maxStudents < 5 || maxStudents > 30) { // JAVÍTÁS ITT
+        return res.status(400).json({ success: false, message: "A létszám 5 és 30 között lehet." });
     }
 
     try {
