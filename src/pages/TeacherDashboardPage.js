@@ -55,7 +55,6 @@ const TeacherDashboardPage = () => {
 
             setMessage(`Siker! Az új osztály kódja: ${data.class.class_code}.`);
             setClassName('');
-            
             fetchClasses();
 
         } catch (err) {
@@ -83,7 +82,12 @@ const TeacherDashboardPage = () => {
                         <ul className={styles.classList}>
                             {myClasses.map(cls => (
                                 <li key={cls.id} className={styles.classItem}>
-                                    <span className={styles.className}>{cls.class_name}</span>
+                                    <div>
+                                        <span className={styles.className}>{cls.class_name}</span>
+                                        <span className={styles.studentCount}>
+                                            {cls.student_count} / {cls.max_students} fő
+                                        </span>
+                                    </div>
                                     <span className={styles.classCode}>Kód: {cls.class_code}</span>
                                 </li>
                             ))}
@@ -95,7 +99,6 @@ const TeacherDashboardPage = () => {
 
                 <section>
                     <h2>Új Osztály Létrehozása</h2>
-                    {/* EZ A RÉSZ HIÁNYZOTT TELJESEN A KORÁBBI VÁLASZBÓL */}
                     <form onSubmit={handleCreateClass} className={styles.form}>
                         <div className={styles.formGroup}>
                             <label htmlFor="className">Osztály Neve:</label>
