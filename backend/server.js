@@ -35,8 +35,6 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// --- API VÉGPONTOK ---
-
 app.post('/api/register', async (req, res) => {
   const { role, username, email, password, vipCode, classCode } = req.body;
   if (!username || !email || !password || !role) { return res.status(400).json({ success: false, message: "Minden kötelező mezőt ki kell tölteni." }); }
@@ -156,36 +154,34 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
     }
 });
 
-// A TANANYAGOK LEKÉRDEZÉSE (CSOPORTOSÍTVA ÉS SZŰRVE)
 app.get('/api/curriculums', async (req, res) => {
     const { subject, grade, q } = req.query; 
-    
     let query = 'SELECT * FROM Curriculums WHERE is_published = true';
     const queryParams = [];
-    
-    // A szűrési logika változatlan marad
-    if (subject) { /* ... */ }
-    if (grade) { /* ... */ }
-    if (q) { /* ... */ }
-
+    if (subject) {
+        queryParams.push(subject);
+        query += ` AND subject = $${queryParams.length}`;
+    }
+    if (grade) {
+        queryParams.push(grade);
+        query += ` AND grade = $${queryParams.length}`;
+    }
+    if (q) {
+        queryParams.push(`%${q}%`);
+        query += ` AND title ILIKE $${queryParams.length}`;
+    }
     query += ' ORDER BY subject, grade, title;';
-
     try {
         const result = await pool.query(query, queryParams);
-        
-        // Ha van szűrés (pl. a SubjectPage hívja), akkor a régi, egyszerű listát adjuk vissza
         if (subject || grade || q) {
             return res.status(200).json({ success: true, data: result.rows });
         }
-        
-        // JAVÍTÁS ITT: Ha nincs szűrés (a HomePage hívja), kategóriák szerint csoportosítunk
         const groupedData = {
             freeLessons: {},
             freeTools: [],
             premiumCourses: [],
             premiumTools: []
         };
-
         result.rows.forEach(item => {
             switch (item.category) {
                 case 'free_lesson':
@@ -207,20 +203,15 @@ app.get('/api/curriculums', async (req, res) => {
                     break;
             }
         });
-
         res.status(200).json({ success: true, data: groupedData });
-
     } catch (error) {
-        console.error("Hiba a tananyagok lekérdezése során:", error);
         res.status(500).json({ success: false, message: "Szerverhiba történt." });
     }
 });
 
 app.get('/api/admin/clear-users/:secret', async (req, res) => {
     const { secret } = req.params;
-    if (secret !== process.env.ADMIN_SECRET) {
-        return res.status(403).json({ message: "Hozzáférés megtagadva." });
-    }
+    if (secret !== process.env.ADMIN_SECRET) { return res.status(403).json({ message: "Hozzáférés megtagadva." }); }
     try {
         const dropQuery = `DROP TABLE IF EXISTS ClassMemberships; DROP TABLE IF EXISTS Teachers; DROP TABLE IF EXISTS Classes; DROP TABLE IF EXISTS Users;`;
         const createQuery = `CREATE TABLE Users ( id SERIAL PRIMARY KEY, username VARCHAR(50) UNIQUE NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, password_hash VARCHAR(255) NOT NULL, role VARCHAR(20) NOT NULL, email_verified BOOLEAN DEFAULT false, email_verification_token VARCHAR(255), email_verification_expires TIMESTAMP WITH TIME ZONE, created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP ); CREATE TABLE Teachers ( user_id INTEGER PRIMARY KEY REFERENCES Users(id) ON DELETE CASCADE, vip_code VARCHAR(50) UNIQUE, is_approved BOOLEAN DEFAULT false ); CREATE TABLE Classes ( id SERIAL PRIMARY KEY, class_name VARCHAR(255) NOT NULL, class_code VARCHAR(50) UNIQUE NOT NULL, teacher_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, max_students INTEGER NOT NULL DEFAULT 35, is_active BOOLEAN DEFAULT true, is_approved BOOLEAN DEFAULT true, discount_status VARCHAR(20) DEFAULT 'pending', created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP ); CREATE TABLE ClassMemberships ( user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, class_id INTEGER NOT NULL REFERENCES Classes(id) ON DELETE CASCADE, PRIMARY KEY (user_id, class_id) );`;
@@ -232,24 +223,15 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
     }
 });
 
-
 app.get('/api/quiz/:slug', async (req, res) => {
     const { slug } = req.params;
     try {
-        // 1. Lekérdezzük a tananyag alapadatait a slug alapján
-        const curriculumQuery = 'SELECT * FROM Curriculums WHERE slug = $1';
-        const curriculumResult = await pool.query(curriculumQuery, [slug]);
-
+        const curriculumResult = await pool.query('SELECT * FROM Curriculums WHERE slug = $1', [slug]);
         if (curriculumResult.rows.length === 0) {
             return res.status(404).json({ success: false, message: "A kért tananyag nem található." });
         }
         const curriculum = curriculumResult.rows[0];
-
-        // 2. Lekérdezzük a tananyaghoz tartozó összes kérdést
-        const questionsQuery = 'SELECT * FROM QuizQuestions WHERE curriculum_id = $1';
-        const questionsResult = await pool.query(questionsQuery, [curriculum.id]);
-
-        // 3. Visszaküldjük az összes adatot egyben
+        const questionsResult = await pool.query('SELECT * FROM QuizQuestions WHERE curriculum_id = $1', [curriculum.id]);
         res.status(200).json({
             success: true,
             quiz: {
@@ -257,12 +239,11 @@ app.get('/api/quiz/:slug', async (req, res) => {
                 questions: questionsResult.rows
             }
         });
-
     } catch (error) {
-        console.error(`Hiba a(z) ${slug} kvíz lekérdezése során:`, error);
         res.status(500).json({ success: false, message: "Szerverhiba történt." });
     }
 });
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
