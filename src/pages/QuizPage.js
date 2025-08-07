@@ -39,19 +39,28 @@ const QuizPage = () => {
         setUserAnswers(prev => ({ ...prev, [questionId]: selectedAnswer }));
     };
 
-    const handleSubmit = () => {
-        let currentScore = 0;
-        if (quiz && quiz.questions) {
-            quiz.questions.forEach(q => {
-                const correctAnswer = q.answer;
-                if (userAnswers[q.id] === correctAnswer) {
-                    currentScore++;
-                }
-            });
-        }
-        setScore(currentScore);
-        setShowResults(true);
-    };
+const handleSubmit = () => {
+    let currentScore = 0;
+    if (quiz && quiz.questions) {
+        quiz.questions.forEach(q => {
+            // A helyes válasz az adatbázisból egy sima string.
+            // A biztonság kedvéért megpróbáljuk JSON-ként is értelmezni,
+            // ha a jövőben a multiple-choice válaszok tömbként érkeznének.
+            let correctAnswer;
+            try {
+                correctAnswer = JSON.parse(q.answer);
+            } catch (e) {
+                correctAnswer = q.answer;
+            }
+
+            if (userAnswers[q.id] === correctAnswer) {
+                currentScore++;
+            }
+        });
+    }
+    setScore(currentScore);
+    setShowResults(true);
+};
 
     if (isLoading) return <div className={styles.container}><div className={styles.quizBox}><p>Kvíz betöltése...</p></div></div>;
     if (error) return <div className={styles.container}><div className={styles.quizBox}><p className={styles.error}>{error}</p></div></div>;
@@ -74,7 +83,7 @@ const QuizPage = () => {
             </div>
         );
     }
-
+    
     return (
         <div className={styles.container}>
             <div className={styles.quizBox}>
@@ -102,7 +111,6 @@ const QuizPage = () => {
         </div>
     );
 })}
-
                 <button onClick={handleSubmit} className={styles.submitButton}>Kvíz beküldése</button>
             </div>
         </div>
