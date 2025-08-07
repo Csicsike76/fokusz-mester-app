@@ -81,22 +81,27 @@ const QuizPage = () => {
                 <h1>{quiz.title}</h1>
                 <hr/>
                 {quiz.questions && quiz.questions.map((q) => {
-                    const type = q.question_type?.toLowerCase().replace(/_/g, '-');
-                    
-                    if (type === 'single-choice') {
-                        return (
-                            <SingleChoiceQuestion
-                                key={q.id}
-                                question={q}
-                                userAnswer={userAnswers[q.id]}
-                                onAnswerChange={handleAnswerChange}
-                            />
-                        );
-                    }
+    const type = q.question_type?.toLowerCase().replace(/_/g, '-');
 
-                    // Ha több kérdéstípus lesz, ide bővíthető
-                    return null;
-                })}
+    console.log('Kérdés típusa:', q.question_type, '→ Normalizált:', type); // DEBUG
+
+    if (['single-choice', 'singlechoice'].includes(type)) {
+        return (
+            <SingleChoiceQuestion
+                key={q.id}
+                question={q}
+                userAnswer={userAnswers[q.id]}
+                onAnswerChange={handleAnswerChange}
+            />
+        );
+    }
+
+    return (
+        <div key={q.id}>
+            <p>Ismeretlen kérdéstípus: <strong>{q.question_type}</strong></p>
+        </div>
+    );
+})}
                 <button onClick={handleSubmit} className={styles.submitButton}>Kvíz beküldése</button>
             </div>
         </div>
