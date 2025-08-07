@@ -1,0 +1,20 @@
+{
+  "title": "Számok írása, olvasása - Gyakorló Kvíz",
+  "subject": "matematika",
+  "grade": 5,
+  "questions": [
+    {
+      "id": 1,
+      "type": "single-choice",
+      "description": "Hogyan írjuk le a 'négyszázhuszonhét' számot számjegyekkel?",
+      "options": ["472", "427", "247", "724"],
+      "answer": "427"
+    },
+    {
+      "id": 2,
+      "type": "entered-answer",
+      "description": "Mi a helyiértéke a 7-esnek a 875 számban? (Írd be a választ)",
+      "answerRegex": "^tízes$"
+    }
+  ]
+}

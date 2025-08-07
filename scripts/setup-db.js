@@ -41,7 +41,9 @@ const createTablesQuery = `
     id SERIAL PRIMARY KEY,
     class_code VARCHAR(50) UNIQUE NOT NULL,
     teacher_id INTEGER NOT NULL REFERENCES Users(id),
+    max_students INTEGER NOT NULL DEFAULT 35, -- ÚJ OSZLOP
     is_active BOOLEAN DEFAULT true,
+    is_approved BOOLEAN DEFAULT true, -- Egyelőre a "puha" jóváhagyáshoz true
     discount_status VARCHAR(20) DEFAULT 'pending' CHECK (discount_status IN ('pending', 'active')),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );

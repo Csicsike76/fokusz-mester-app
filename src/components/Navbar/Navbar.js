@@ -26,7 +26,7 @@ const Navbar = () => {
       </div>
 
       <div className={`${styles.menuContainer} ${isMobileMenuOpen ? styles.open : ''}`}>
-        <div className={styles.navLinks}>
+        <div className={styles.logo}>
           <ConditionalLink to="/targy/matematika/5" onClick={handleLinkClick}>Matematika</ConditionalLink>
           <ConditionalLink to="/targy/fizika/7" onClick={handleLinkClick}>Fizika</ConditionalLink>
           <ConditionalLink to="/targy/aimi/0" onClick={handleLinkClick}>AIMI 0. Év</ConditionalLink>
