@@ -3,37 +3,49 @@ import styles from './QuestionStyles.module.css';
 
 const SingleChoiceQuestion = ({ question, userAnswer, onAnswerChange, showResults }) => {
     let options = [];
-    try {
-        const parsedOptions = JSON.parse(question.options);
-        if (Array.isArray(parsedOptions)) {
-            options = parsedOptions;
+
+    if (Array.isArray(question.options)) {
+        options = question.options; // már tömb
+    } else {
+        try {
+            const parsedOptions = JSON.parse(question.options);
+            if (Array.isArray(parsedOptions)) {
+                options = parsedOptions;
+            } else {
+                console.error("Nem tömb típusú opciók:", question.options);
+            }
+        } catch (e) {
+            console.error("Nem sikerült feldolgozni a JSON opciókat:", question.options, e);
         }
-    } catch (e) {
-        console.error("Hiba az opciók feldolgozásakor:", question.description, e);
     }
+
+    const getIcon = (isCorrect, isSelected) => {
+        if (!showResults) return null;
+        if (isCorrect) return <span className={styles.icon}>✔</span>;
+        if (isSelected && !isCorrect) return <span className={styles.icon}>✘</span>;
+        return null;
+    };
 
     return (
         <div className={styles.questionBlock}>
             <p className={styles.description}>{question.description}</p>
             <div className={styles.optionsGrid}>
                 {options.map((option, index) => {
-                    // Itt határozzuk meg a stílusokat a kiértékelés után
                     let labelClass = styles.optionLabel;
                     const isSelected = userAnswer === option;
                     const isCorrect = question.answer === option;
 
                     if (showResults) {
                         if (isCorrect) {
-                            // A helyes válasz mindig zöld lesz
                             labelClass += ` ${styles.correct}`;
                         } else if (isSelected && !isCorrect) {
-                            // A felhasználó által adott ROSSZ válasz piros lesz
                             labelClass += ` ${styles.incorrect}`;
                         }
                     } else if (isSelected) {
-                        // Választás közben kék marad
                         labelClass += ` ${styles.selected}`;
                     }
+
+                    const icon = getIcon(isCorrect, isSelected);
 
                     return (
                         <label key={index} className={labelClass}>
@@ -44,15 +56,13 @@ const SingleChoiceQuestion = ({ question, userAnswer, onAnswerChange, showResult
                                 checked={isSelected}
                                 onChange={() => onAnswerChange(question.id, option)}
                                 style={{ display: 'none' }}
-                                disabled={showResults} // Letiltjuk a további választást
+                                disabled={showResults}
                             />
-                            {option}
+                            {option} {icon}
                         </label>
                     );
                 })}
             </div>
-            {/* A MAGYARÁZAT MEGJELENÍTÉSE */}
-            {/* Ez a rész csak akkor jelenik meg, ha a showResults igaz */}
             {showResults && question.explanation && (
                 <div className={styles.explanation}>
                     {question.explanation}
