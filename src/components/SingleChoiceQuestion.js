@@ -1,60 +1,30 @@
 import React from 'react';
 import styles from './QuestionStyles.module.css';
 
-const SingleChoiceQuestion = ({ question, userAnswer, onAnswerChange, showResults }) => {
-    let options = [];
-
-    // 🔐 Biztonságosan kezeljük az opciókat
-    if (Array.isArray(question.options)) {
-        options = question.options;
-    } else {
-        try {
-            options = JSON.parse(question.options);
-        } catch (e) {
-            console.error("Nem sikerült feldolgozni a kérdés opcióit:", question.options, e);
-        }
-    }
+const SingleChoiceQuestion = ({ question, userAnswer, onAnswerChange }) => {
+    const options = Array.isArray(question.options) ? question.options : [];
 
     return (
         <div className={styles.questionBlock}>
             <p className={styles.description}>{question.description}</p>
             <div className={styles.optionsGrid}>
-                {options.map((option, index) => {
-                    let labelClass = styles.optionLabel;
-                    const isSelected = userAnswer === option;
-                    const isCorrect = question.answer === option;
-
-                    if (showResults) {
-                        if (isCorrect) {
-                            labelClass += ` ${styles.correct}`;
-                        } else if (isSelected && !isCorrect) {
-                            labelClass += ` ${styles.incorrect}`;
-                        }
-                    } else if (isSelected) {
-                        labelClass += ` ${styles.selected}`;
-                    }
-
-                    return (
-                        <label key={index} className={labelClass}>
-                            <input
-                                type="radio"
-                                name={`question-${question.id}`}
-                                value={option}
-                                checked={isSelected}
-                                onChange={() => onAnswerChange(question.id, option)}
-                                style={{ display: 'none' }}
-                                disabled={showResults}
-                            />
-                            {option}
-                        </label>
-                    );
-                })}
+                {options.map((option, index) => (
+                    <label 
+                        key={index} 
+                        className={`${styles.optionLabel} ${userAnswer === option ? styles.selected : ''}`}
+                    >
+                        <input
+                            type="radio"
+                            name={`question-${question.id}`}
+                            value={option}
+                            checked={userAnswer === option}
+                            onChange={() => onAnswerChange(question.id, option)}
+                            style={{ display: 'none' }}
+                        />
+                        {option}
+                    </label>
+                ))}
             </div>
-            {showResults && question.explanation && (
-                <div className={styles.explanation}>
-                    {question.explanation}
-                </div>
-            )}
         </div>
     );
 };
