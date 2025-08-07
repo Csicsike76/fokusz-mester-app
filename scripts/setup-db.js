@@ -1,16 +1,13 @@
+// A scripts/setup-db.js TELJES, VÉGLEGES TARTALMA
 const { Pool } = require('pg');
 require('dotenv').config();
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  ssl: { rejectUnauthorized: false }
 });
 
 const createTablesQuery = `
-  -- Először töröljük a táblákat a helyes sorrendben, ha léteznek,
-  -- hogy elkerüljük a függőségi hibákat.
   DROP TABLE IF EXISTS ClassMemberships CASCADE;
   DROP TABLE IF EXISTS Teachers CASCADE;
   DROP TABLE IF EXISTS QuizQuestions CASCADE;
@@ -18,44 +15,43 @@ const createTablesQuery = `
   DROP TABLE IF EXISTS Classes CASCADE;
   DROP TABLE IF EXISTS Users CASCADE;
 
-  -- Felhasználói adatok táblái (FRISSÍTVE!)
-  CREATE TABLE IF NOT EXISTS Users (
+  CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
-    role VARCHAR(20) NOT NULL CHECK (role IN ('student', 'teacher')),
+    role VARCHAR(20) NOT NULL,
     email_verified BOOLEAN DEFAULT false,
-    email_verification_token VARCHAR(255), -- ÚJ OSZLOP
-    email_verification_expires TIMESTAMP WITH TIME ZONE, -- ÚJ OSZLOP
+    email_verification_token VARCHAR(255),
+    email_verification_expires TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );
 
-  CREATE TABLE IF NOT EXISTS Teachers (
+  CREATE TABLE Teachers (
     user_id INTEGER PRIMARY KEY REFERENCES Users(id) ON DELETE CASCADE,
     vip_code VARCHAR(50) UNIQUE,
     is_approved BOOLEAN DEFAULT false
   );
   
-  CREATE TABLE IF NOT EXISTS Classes (
+  CREATE TABLE Classes (
     id SERIAL PRIMARY KEY,
+    class_name VARCHAR(255) NOT NULL, -- Ez a kritikus oszlop
     class_code VARCHAR(50) UNIQUE NOT NULL,
     teacher_id INTEGER NOT NULL REFERENCES Users(id),
-    max_students INTEGER NOT NULL DEFAULT 35, -- ÚJ OSZLOP
+    max_students INTEGER NOT NULL DEFAULT 35,
     is_active BOOLEAN DEFAULT true,
-    is_approved BOOLEAN DEFAULT true, -- Egyelőre a "puha" jóváhagyáshoz true
-    discount_status VARCHAR(20) DEFAULT 'pending' CHECK (discount_status IN ('pending', 'active')),
+    is_approved BOOLEAN DEFAULT true,
+    discount_status VARCHAR(20) DEFAULT 'pending',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );
 
-  CREATE TABLE IF NOT EXISTS ClassMemberships (
+  CREATE TABLE ClassMemberships (
     user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
     class_id INTEGER NOT NULL REFERENCES Classes(id) ON DELETE CASCADE,
     PRIMARY KEY (user_id, class_id)
   );
-
-  -- Tananyag adatok táblái
-  CREATE TABLE IF NOT EXISTS Curriculums (
+  
+  CREATE TABLE Curriculums (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     subject VARCHAR(50) NOT NULL,
@@ -66,7 +62,7 @@ const createTablesQuery = `
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );
 
-  CREATE TABLE IF NOT EXISTS QuizQuestions (
+  CREATE TABLE QuizQuestions (
     id SERIAL PRIMARY KEY,
     curriculum_id INTEGER NOT NULL REFERENCES Curriculums(id) ON DELETE CASCADE,
     question_type VARCHAR(50) NOT NULL,
