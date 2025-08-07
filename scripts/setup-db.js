@@ -59,7 +59,8 @@ CREATE TABLE Curriculums (
     title VARCHAR(255) NOT NULL,
     subject VARCHAR(50) NOT NULL,
     grade INTEGER NOT NULL,
-    slug VARCHAR(255) UNIQUE NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL, -- Ez a fájlnévből jön
+    category VARCHAR(50) NOT NULL, -- Pl. 'free_lesson', 'premium_tool'
     is_published BOOLEAN DEFAULT true,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
