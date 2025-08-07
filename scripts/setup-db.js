@@ -1,4 +1,3 @@
-// A scripts/setup-db.js TELJES, VÉGLEGES TARTALMA
 const { Pool } = require('pg');
 require('dotenv').config();
 
@@ -7,15 +6,17 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
-const createTablesQuery = `
-  DROP TABLE IF EXISTS ClassMemberships CASCADE;
-  DROP TABLE IF EXISTS Teachers CASCADE;
-  DROP TABLE IF EXISTS QuizQuestions CASCADE;
-  DROP TABLE IF EXISTS Curriculums CASCADE;
-  DROP TABLE IF EXISTS Classes CASCADE;
-  DROP TABLE IF EXISTS Users CASCADE;
+const setupQueries = `
+-- 1. LÉPÉS: A BIZTONSÁG KEDVÉÉRT MINDEN LÉTEZŐ TÁBLA TÖRLÉSE A HELYES SORRENDBEN
+DROP TABLE IF EXISTS ClassMemberships;
+DROP TABLE IF EXISTS Teachers;
+DROP TABLE IF EXISTS QuizQuestions;
+DROP TABLE IF EXISTS Curriculums;
+DROP TABLE IF EXISTS Classes;
+DROP TABLE IF EXISTS Users;
 
-  CREATE TABLE Users (
+-- 2. LÉPÉS: A TÁBLÁK ÚJRAÉPÍTÉSE A NULLÁRÓL A HELYES SZERKEZETTEL
+CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -25,33 +26,33 @@ const createTablesQuery = `
     email_verification_token VARCHAR(255),
     email_verification_expires TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-  );
+);
 
-  CREATE TABLE Teachers (
+CREATE TABLE Teachers (
     user_id INTEGER PRIMARY KEY REFERENCES Users(id) ON DELETE CASCADE,
     vip_code VARCHAR(50) UNIQUE,
     is_approved BOOLEAN DEFAULT false
-  );
-  
-  CREATE TABLE Classes (
+);
+
+CREATE TABLE Classes (
     id SERIAL PRIMARY KEY,
-    class_name VARCHAR(255) NOT NULL, -- Ez a kritikus oszlop
+    class_name VARCHAR(255) NOT NULL,
     class_code VARCHAR(50) UNIQUE NOT NULL,
-    teacher_id INTEGER NOT NULL REFERENCES Users(id),
+    teacher_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
     max_students INTEGER NOT NULL DEFAULT 35,
     is_active BOOLEAN DEFAULT true,
     is_approved BOOLEAN DEFAULT true,
     discount_status VARCHAR(20) DEFAULT 'pending',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-  );
+);
 
-  CREATE TABLE ClassMemberships (
+CREATE TABLE ClassMemberships (
     user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
     class_id INTEGER NOT NULL REFERENCES Classes(id) ON DELETE CASCADE,
     PRIMARY KEY (user_id, class_id)
-  );
-  
-  CREATE TABLE Curriculums (
+);
+
+CREATE TABLE Curriculums (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     subject VARCHAR(50) NOT NULL,
@@ -60,9 +61,9 @@ const createTablesQuery = `
     is_published BOOLEAN DEFAULT true,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-  );
+);
 
-  CREATE TABLE QuizQuestions (
+CREATE TABLE QuizQuestions (
     id SERIAL PRIMARY KEY,
     curriculum_id INTEGER NOT NULL REFERENCES Curriculums(id) ON DELETE CASCADE,
     question_type VARCHAR(50) NOT NULL,
@@ -70,14 +71,14 @@ const createTablesQuery = `
     options JSONB,
     answer JSONB,
     answer_regex VARCHAR(255)
-  );
+);
 `;
 
 async function setupDatabase() {
-  console.log('Adatbázis táblák törlése és újraépítése...');
+  console.log('Adatbázis táblák teljes törlése és újraépítése...');
   try {
-    await pool.query(createTablesQuery);
-    console.log('✅ Táblák sikeresen újraépítve.');
+    await pool.query(setupQueries);
+    console.log('✅ Táblák sikeresen újraépítve a nulláról.');
   } catch (error) {
     console.error('❌ Hiba történt a táblák újraépítése során:', error);
   } finally {
