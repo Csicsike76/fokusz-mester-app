@@ -1,175 +1,51 @@
-/* Promo szekció */
-.promoSection {
-  text-align: center;
-  padding: 8rem 2rem 10rem 2rem;
-  background-color: transparent;
-  color: white;
+.mainContent {
+    padding: 2rem;
+    background-color: white; /* Fehér alap a kártyák mögött */
 }
-
-.promoSection h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.8);
+.section { margin-bottom: 3rem; }
+.sectionTitle {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #333;
 }
-
-.promoSection p {
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto 2.5rem auto;
-  text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.8);
+.subjectTitle {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
 }
-
-/* Gomb konténer */
-.buttonContainer {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-/* Promo gombok */
-.promoButton {
-  padding: 0.8rem 2.5rem;
-  background-color: #2c3e50;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
-  font-size: 1rem;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-  border: 2px solid white;
-}
-
-.promoButton:hover {
-  background-color: #34495e;
-  transform: translateY(-3px);
-}
-
-/* Szülő konténer: flex alapú elrendezés 3-4 kártyához egy sorban */
-.cardGrid {
-  display: flex;
-  flex-wrap: wrap;          /* Több sorra tör mobilon */
-  justify-content: center;  /* Középre rendezi a tartalmat */
-  gap: 20px;                /* Kártyák közti távolság */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 16px;
-  box-sizing: border-box;
-}
-
-/* Kártyák általános stílusa */
-.card {
-  flex: 1 1 calc(25% - 20px); /* Négy kártya egy sorban (20px a gap miatt levonva) */
-  min-width: 250px;           /* Minimum szélesség */
-  max-width: 300px;           /* Maximum szélesség */
-  min-height: 220px;
-  
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(4px);
-  
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  
-  color: #222;
-  font-family: 'Arial', sans-serif;
-  font-weight: 600;
-  
-  padding: 24px 16px 16px 16px;
-  box-sizing: border-box;
-  position: relative;
-  transition: 0.3s ease;
-  
-  display: flex;                /* Flex container, hogy a tartalom középre kerüljön */
-  flex-direction: column;       /* Függőleges irányba rendezés */
-  justify-content: center;      /* Függőlegesen középre */
-  align-items: center;          /* Vízszintesen középre */
-  
-  text-align: center;           /* Szöveg középre */
-  
-  margin: 0;                   /* Margin a gap miatt nem kell */
-}
-
-/* Kártya címsor */
-.card .title {
-  margin-bottom: 12px;
-  font-size: 1.4rem;
-  color: #111;
-}
-
-/* Kártya leírás */
-.card .description {
-  color: #333;
-  margin-bottom: 24px;
-  line-height: 1.4;
-}
-
-/* Gomb megjelenítés */
-.card a.button-link {
-  display: inline-block;
-  padding: 10px 18px;
-  background-color: #34a853; /* Alapértelmezett zöld gomb az ingyeneshez */
-  color: white;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 2px 5px rgba(52, 168, 83, 0.5);
-  transition: background-color 0.3s ease;
-}
-
-.card a.button-link:hover {
-  background-color: #2c8c43;
-}
-
-/* Prémium gomb színezés */
-.card.premium a.button-link {
-  background-color: #c9a200; /* arany */
-}
-
-.card.premium a.button-link:hover {
-  background-color: #aa8a00;
-}
-
-/* Kártya keretek színezése */
-.card.free {
-  border: 2px solid #34a853; /* zöld keret */
-}
-
-.card.premium {
-  border: 2px solid #c9a200; /* arany keret */
-}
-
-
-
+.matematika { border-bottom: 3px solid #e74c3c; color: #e74c3c; } /* Piros */
+.fizika { border-bottom: 3px solid #3498db; color: #3498db; } /* Kék */
+.ai { border-bottom: 3px solid #2ecc71; color: #2ecc71; } /* Zöld */
 
 .cardGrid {
-  display: flex;
-  flex-wrap: nowrap; /* ne törjön sorba, azaz egy sorban maradjon */
-  justify-content: space-between; /* a kártyák közötti távolságot állítja */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 16px;
-  box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
 }
-
 .card {
-  flex: 0 0 calc(25% - 15px); /* 4 fix szélesség */
-  min-width: 0;
-  min-height: 220px;
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(4px);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  color: #222;
-  font-family: 'Arial', sans-serif;
-  font-weight: 600;
-  padding: 24px 16px 16px 16px;
-  box-sizing: border-box;
-  position: relative;
-  transition: 0.3s ease;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-top: 5px solid;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
+.card h4 { margin-top: 0; }
+.card p { color: #666; font-size: 0.9rem; }
 
+/* Kategória színek */
+.freeLesson { border-color: #e74c3c; } /* Piros */
+.freeTool { border-color: #e74c3c; } /* Piros */
+.premiumCourse { border-color: #2ecc71; } /* Zöld */
+.premiumTool { border-color: #2ecc71; } /* Zöld */
+
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.freeLessonBtn, .freeToolBtn { background-color: #e74c3c; }
+.premiumCourseBtn, .premiumToolBtn { background-color: #2ecc71; }
