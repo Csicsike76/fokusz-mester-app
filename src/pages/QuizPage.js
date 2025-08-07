@@ -53,11 +53,29 @@ const QuizPage = () => {
     if (error) return <div className={styles.container}><div className={styles.quizBox}><p className={styles.error}>{error}</p></div></div>;
     if (!quiz) return <div className={styles.container}><div className={styles.quizBox}><p>A kvíz nem található.</p></div></div>;
 
+    if (showResults) {
+        const totalQuestions = quiz.questions ? quiz.questions.length : 0;
+        const percentage = totalQuestions > 0 ? ((score / totalQuestions) * 100).toFixed(0) : 0;
+        return (
+            <div className={styles.container}>
+                <div className={styles.quizBox}>
+                    <div className={styles.results}>
+                        <h1>Kvíz Eredmény</h1>
+                        <h2>{quiz.title}</h2>
+                        <p>Eredményed: {score} / {totalQuestions}</p>
+                        <p>Százalék: {percentage}%</p>
+                        <Link to="/" className={styles.backButton}>Vissza a főoldalra</Link>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    
     return (
         <div className={styles.container}>
             <div className={styles.quizBox}>
                 <h1>{quiz.title}</h1>
-                <hr />
+                <hr/>
                 {quiz.questions && quiz.questions.map((q) => (
                     <SingleChoiceQuestion
                         key={q.id}
@@ -67,22 +85,13 @@ const QuizPage = () => {
                         showResults={showResults}
                     />
                 ))}
-
-                {!showResults ? (
-                    <button
-                        onClick={handleSubmit}
-                        className={styles.submitButton}
-                        disabled={!allAnswered}
-                    >
-                        Kvíz beküldése
-                    </button>
-                ) : (
-                    <div className={styles.resultsBox}>
-                        <p><strong>Eredményed:</strong> {score} / {quiz.questions.length}</p>
-                        <p><strong>Százalék:</strong> {((score / quiz.questions.length) * 100).toFixed(0)}%</p>
-                        <Link to="/" className={styles.backButton}>Vissza a főoldalra</Link>
-                    </div>
-                )}
+                <button 
+                    onClick={handleSubmit} 
+                    className={styles.submitButton} 
+                    disabled={!allAnswered}
+                >
+                    Kvíz beküldése
+                </button>
             </div>
         </div>
     );
