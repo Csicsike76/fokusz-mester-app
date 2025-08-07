@@ -5,7 +5,8 @@ import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user, logout } = useAuth(); // Kiolvassuk a bejelentkezett felhasználót
+  // A 'user', 'logout' mellett az 'isLoading' állapotot is kiolvassuk a központi "hűtőből"
+  const { user, logout, isLoading } = useAuth();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -35,21 +36,25 @@ const Navbar = () => {
           <ConditionalLink to="/targy/aimi/szuperkepesseg" onClick={handleLinkClick}>AIMI Szuperkepesseg</ConditionalLink>
           
           {/* DINAMIKUS MENÜPONT */}
-          {/* Ez a link csak akkor jelenik meg, ha van bejelentkezett felhasználó ÉS a szerepköre 'teacher' */}
-          {user && user.role === 'teacher' && (
+          {/* Ez a link csak akkor jelenik meg, ha a betöltés befejeződött, van user ÉS a szerepköre 'teacher' */}
+          {!isLoading && user && user.role === 'teacher' && (
             <ConditionalLink to="/dashboard/teacher" onClick={handleLinkClick} className={styles.dashboardLink}>Irányítópult</ConditionalLink>
           )}
         </div>
 
         <div className={styles.authLinks}>
-          {user ? (
-            // Ha van bejelentkezett felhasználó:
+          {/* DINAMIKUS BE/KIJELENTKEZÉS SZEKCIÓ */}
+          {/* Amíg az adatok töltenek, nem jelenítünk meg semmit, hogy ne "villogjon" */}
+          {isLoading ? (
+            <div style={{ height: '40px' }}></div> // Üres helykitöltő a villogás elkerülésére
+          ) : user ? (
+            // Ha a betöltés kész és van bejelentkezett felhasználó:
             <>
               <span className={styles.welcomeUser}>Üdv, {user.username}!</span>
               <button onClick={logout} className={styles.logoutButton}>Kijelentkezés</button>
             </>
           ) : (
-            // Ha nincs bejelentkezett felhasználó:
+            // Ha a betöltés kész és NINCS bejelentkezett felhasználó:
             <>
               <ConditionalLink to="/bejelentkezes" className={styles.loginButton} onClick={handleLinkClick}>Bejelentkezés</ConditionalLink>
               <ConditionalLink to="/regisztracio" className={styles.authButton} onClick={handleLinkClick}>Regisztráció</ConditionalLink>

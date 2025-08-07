@@ -3,23 +3,34 @@ import { useLocation, Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const ProtectedRoute = ({ allowedRoles }) => {
-    const { user, token } = useAuth(); // A 'token'-t is kiolvassuk a megbízhatóságért
+    // Kiolvassuk a felhasználót és a betöltési állapotot a központi "hűtőből" (Context)
+    const { user, isLoading } = useAuth();
     const location = useLocation();
 
-    // 1. Elsődleges ellenőrzés: Van-e érvényes token és user adat?
-    //    Ha nincs, akkor a felhasználó biztosan nincs bejelentkezve.
-    if (!token || !user) {
-        // Átirányítás a bejelentkezési oldalra
+    // 1. VÁRAKOZÁS:
+    // Ha a Context még olvassa be az adatokat a böngésző memóriájából (isLoading === true),
+    // akkor egy "Betöltés..." üzenetet jelenítünk meg, és nem csinálunk semmit.
+    // Ez a kulcsfontosságú lépés, ami megakadályozza a korai, hibás átirányítást.
+    if (isLoading) {
+        return <div>Betöltés...</div>; // Ide később egy szebb, animált betöltő is kerülhet
+    }
+
+    // 2. BEJELENTKEZÉS ELLENŐRZÉSE:
+    // Ha a betöltés befejeződött (isLoading === false), és még mindig nincs felhasználói adat (user === null),
+    // az azt jelenti, hogy a felhasználó valóban nincs bejelentkezve.
+    if (!user) {
+        // Ebben az esetben átirányítjuk a bejelentkezési oldalra.
+        // A 'state' és 'replace' attribútumok javítják a felhasználói élményt a böngésző "vissza" gombjának használatakor.
         return <Navigate to="/bejelentkezes" state={{ from: location }} replace />;
     }
     
-    // 2. Szerepkör ellenőrzés:
-    //    Megnézzük, hogy az 'allowedRoles' lista tartalmazza-e a felhasználó szerepkörét.
-    //    A '?.' (optional chaining) operátor megvéd attól, ha a 'user.role' véletlenül nem létezne.
+    // 3. JOGOSULTSÁG (SZEREPKÖR) ELLENŐRZÉSE:
+    // Megnézzük, hogy az ehhez az útvonalhoz megengedett szerepkörök ('allowedRoles') listája
+    // tartalmazza-e a bejelentkezett felhasználó szerepkörét ('user.role').
     const isAllowed = allowedRoles?.includes(user?.role);
     
-    // Ha a felhasználó szerepköre engedélyezett, akkor megjelenítjük a védett oldalt (Outlet).
-    // Ha nem (pl. diák próbál tanári oldalra menni), akkor a főoldalra irányítjuk.
+    // Ha a felhasználó szerepköre megfelelő ('isAllowed' === true), akkor megjelenítjük a védett oldalt (az <Outlet />-et).
+    // Ha nem (pl. egy diák próbál a tanári irányítópultra lépni), akkor átirányítjuk a főoldalra.
     return isAllowed ? <Outlet /> : <Navigate to="/" replace />;
 };
 
