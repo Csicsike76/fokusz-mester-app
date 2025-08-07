@@ -2,15 +2,7 @@ import React from 'react';
 import styles from './QuestionStyles.module.css';
 
 const SingleChoiceQuestion = ({ question, userAnswer, onAnswerChange }) => {
-    let options = [];
-    try {
-        const parsedOptions = JSON.parse(question.options);
-        if (Array.isArray(parsedOptions)) {
-            options = parsedOptions;
-        }
-    } catch (e) {
-        console.error("Hiba az opciók JSON feldolgozása közben a kérdésnél:", question.description, e);
-    }
+    const options = Array.isArray(question.options) ? question.options : [];
 
     return (
         <div className={styles.questionBlock}>
