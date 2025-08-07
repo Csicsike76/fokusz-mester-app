@@ -43,21 +43,13 @@ const QuizPage = () => {
         let currentScore = 0;
         if (quiz && quiz.questions) {
             quiz.questions.forEach(q => {
-                let correctAnswer;
-                try {
-                    correctAnswer = JSON.parse(q.answer);
-                } catch (e) {
-                    correctAnswer = q.answer;
-                }
-                if (Array.isArray(correctAnswer)) { // Multiple choice case
-                    const userAns = userAnswers[q.id] || [];
-                    if (JSON.stringify(userAns.sort()) === JSON.stringify(correctAnswer.sort())) {
-                        currentScore++;
-                    }
-                } else { // Single choice or entered answer
-                    if (userAnswers[q.id] === correctAnswer) {
-                        currentScore++;
-                    }
+                // JAVÍTÁS ITT: A helyes válasz az adatbázisból egy sima string,
+                // nincs szükség JSON.parse-ra a single-choice esetében.
+                const correctAnswer = q.answer;
+                
+                // Közvetlenül a stringeket hasonlítjuk össze.
+                if (userAnswers[q.id] === correctAnswer) {
+                    currentScore++;
                 }
             });
         }
