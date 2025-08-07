@@ -113,3 +113,12 @@
     padding: 0.3rem 0.6rem;
     border-radius: 5px;
 }
+
+/* ... a .classCode stílus után ... */
+
+.studentCount {
+    display: block; /* Új sorba kerül a név alá */
+    font-size: 0.9rem;
+    color: #bdc3c7; /* Halványabb szürke szín */
+    margin-top: 0.25rem;
+}

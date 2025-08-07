@@ -239,10 +239,30 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
 
 app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
     const { userId, role } = req.user;
-    if (role !== 'teacher') { return res.status(403).json({ success: false, message: "Nincs jogosultságod." }); }
+
+    if (role !== 'teacher') {
+        return res.status(403).json({ success: false, message: "Nincs jogosultságod." });
+    }
+
     try {
-        const classesResult = await pool.query('SELECT * FROM Classes WHERE teacher_id = $1 ORDER BY created_at DESC', [userId]);
+        const classesQuery = `
+            SELECT 
+                c.*, 
+                COUNT(cm.user_id)::int AS student_count
+            FROM 
+                Classes c
+            LEFT JOIN 
+                ClassMemberships cm ON c.id = cm.class_id
+            WHERE 
+                c.teacher_id = $1
+            GROUP BY 
+                c.id
+            ORDER BY 
+                c.created_at DESC;
+        `;
+        const classesResult = await pool.query(classesQuery, [userId]);
         res.status(200).json({ success: true, classes: classesResult.rows });
+
     } catch (error) {
         console.error("Hiba a tanári osztályok lekérdezése során:", error);
         res.status(500).json({ success: false, message: "Szerverhiba történt." });
