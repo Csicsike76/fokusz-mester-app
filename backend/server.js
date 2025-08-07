@@ -209,13 +209,27 @@ app.get('/api/approve-teacher/:userId', async (req, res) => {
 app.post('/api/classes/create', authenticateToken, async (req, res) => {
     const { userId, role } = req.user;
     const { className, maxStudents } = req.body;
-    if (role !== 'teacher') { return res.status(403).json({ success: false, message: "Nincs jogosultságod." }); }
-    if (!className || !maxStudents || maxStudents < 5 || maxStudents > 30) {
-        return res.status(400).json({ success: false, message: "Hibás adatok. A létszám 5 és 30 között lehet." });
+
+    if (role !== 'teacher') {
+        return res.status(403).json({ success: false, message: "Nincs jogosultságod osztály létrehozásához." });
     }
+    
+    // PONTOSÍTOTT HIBAÜZENETEK
+    if (!className) {
+        return res.status(400).json({ success: false, message: "Az osztály nevének megadása kötelező." });
+    }
+    if (!maxStudents || maxStudents < 5 || maxStudents > 30) {
+        return res.status(400).json({ success: false, message: "A létszám 5 és 30 között kell, hogy legyen." });
+    }
+
     try {
         const classCode = `FKSZ-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
-        const newClassResult = await pool.query(`INSERT INTO Classes (class_name, class_code, teacher_id, max_students) VALUES ($1, $2, $3, $4) RETURNING *;`, [className, classCode, userId, maxStudents]);
+        const newClassQuery = `
+            INSERT INTO Classes (class_name, class_code, teacher_id, max_students) 
+            VALUES ($1, $2, $3, $4) RETURNING *;
+        `;
+        const newClassResult = await pool.query(newClassQuery, [className, classCode, userId, maxStudents]);
+        
         res.status(201).json({ success: true, message: "Osztály sikeresen létrehozva.", class: newClassResult.rows[0] });
     } catch (error) {
         console.error("Hiba az osztály létrehozása során:", error);

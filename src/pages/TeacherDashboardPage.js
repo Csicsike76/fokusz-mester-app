@@ -7,18 +7,14 @@ const API_URL = 'https://fokusz-mester-backend.onrender.com';
 const TeacherDashboardPage = () => {
     const { user, token } = useAuth();
     
-    // Állapot a meglévő osztályok tárolására
     const [myClasses, setMyClasses] = useState([]);
     const [isLoadingClasses, setIsLoadingClasses] = useState(true);
-
-    // Állapotok az űrlaphoz
     const [className, setClassName] = useState('');
     const [maxStudents, setMaxStudents] = useState(30);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [isLoadingCreate, setIsLoadingCreate] = useState(false);
 
-    // --- OSZTÁLYOK LEKÉRDEZÉSE FUNKCIÓ ---
     const fetchClasses = useCallback(async () => {
         if (!token) return;
         setIsLoadingClasses(true);
@@ -36,13 +32,10 @@ const TeacherDashboardPage = () => {
         }
     }, [token]);
 
-    // Az oldal betöltésekor lefuttatjuk az osztályok lekérdezését
     useEffect(() => {
         fetchClasses();
     }, [fetchClasses]);
 
-
-    // --- OSZTÁLY LÉTREHOZÁSA FUNKCIÓ ---
     const handleCreateClass = async (e) => {
         e.preventDefault();
         setIsLoadingCreate(true);
@@ -63,7 +56,6 @@ const TeacherDashboardPage = () => {
             setMessage(`Siker! Az új osztály kódja: ${data.class.class_code}.`);
             setClassName('');
             
-            // SIKERES LÉTREHOZÁS UTÁN ÚJRA LEKÉRJÜK AZ OSZTÁLYLISTÁT!
             fetchClasses();
 
         } catch (err) {
@@ -93,7 +85,6 @@ const TeacherDashboardPage = () => {
                                 <li key={cls.id} className={styles.classItem}>
                                     <span className={styles.className}>{cls.class_name}</span>
                                     <span className={styles.classCode}>Kód: {cls.class_code}</span>
-                                    {/* Ide jöhetnek majd további adatok, pl. diákszám */}
                                 </li>
                             ))}
                         </ul>
@@ -104,8 +95,31 @@ const TeacherDashboardPage = () => {
 
                 <section>
                     <h2>Új Osztály Létrehozása</h2>
+                    {/* EZ A RÉSZ HIÁNYZOTT TELJESEN A KORÁBBI VÁLASZBÓL */}
                     <form onSubmit={handleCreateClass} className={styles.form}>
-                        {/* ... (az űrlap input mezői változatlanok) ... */}
+                        <div className={styles.formGroup}>
+                            <label htmlFor="className">Osztály Neve:</label>
+                            <input
+                                type="text"
+                                id="className"
+                                value={className}
+                                onChange={(e) => setClassName(e.target.value)}
+                                placeholder="Pl.: 9.A Matek Csoport"
+                                required
+                            />
+                        </div>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="maxStudents">Maximális Létszám (5-30):</label>
+                            <input
+                                type="number"
+                                id="maxStudents"
+                                value={maxStudents}
+                                onChange={(e) => setMaxStudents(e.target.value)}
+                                min="5"
+                                max="30"
+                                required
+                            />
+                        </div>
                         
                         {message && <p className={styles.successMessage}>{message}</p>}
                         {error && <p className={styles.errorMessage}>{error}</p>}
