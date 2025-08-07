@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 2rem;
+    color: white;
+}
+
+.messageBox {
+    text-align: center;
+    background-color: rgba(44, 62, 80, 0.85);
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    max-width: 500px;
+}
+
+.messageBox h1 {
+    margin-top: 0;
+    font-size: 2.5rem;
+}
+
+.messageBox p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.button {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.success .button {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.error .button {
+    background-color: #e74c3c;
+    color: white;
+}
