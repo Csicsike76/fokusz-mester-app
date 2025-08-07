@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './QuizPage.module.css';
@@ -36,7 +37,6 @@ const QuizPage = () => {
         fetchQuiz();
     }, [fetchQuiz]);
 
-    // JAVÍTÁS ITT: A függvény neve most már helyesen 'handleAnswerChange'
     const handleAnswerChange = (questionId, selectedAnswer) => {
         setUserAnswers(prev => ({ ...prev, [questionId]: selectedAnswer }));
     };
@@ -46,8 +46,16 @@ const QuizPage = () => {
         if (quiz && quiz.questions) {
             quiz.questions.forEach(q => {
                 try {
-                    // A válasz egy sima string, nem kell parse-olni
-                    const correctAnswer = q.answer;
+                    // Az adatbázisból a válasz JSON stringként jön, de a mi esetünkben
+                    // a single-choice válasz egy sima string. A biztonság kedvéért
+                    // megpróbáljuk feldolgozni mindkét esetet.
+                    let correctAnswer;
+                    try {
+                        correctAnswer = JSON.parse(q.answer);
+                    } catch (e) {
+                        correctAnswer = q.answer;
+                    }
+                    
                     if (userAnswers[q.id] === correctAnswer) {
                         currentScore++;
                     }
@@ -60,13 +68,13 @@ const QuizPage = () => {
         setShowResults(true);
     };
 
-    if (isLoading) return <div className={styles.container}><p>Kvíz betöltése...</p></div>;
-    if (error) return <div className={styles.container}><p className={styles.error}>{error}</p></div>;
-    if (!quiz) return <div className={styles.container}><p>A kvíz nem található.</p></div>;
+    if (isLoading) return <div className={styles.container}><div className={styles.quizBox}><p>Kvíz betöltése...</p></div></div>;
+    if (error) return <div className={styles.container}><div className={styles.quizBox}><p className={styles.error}>{error}</p></div></div>;
+    if (!quiz) return <div className={styles.container}><div className={styles.quizBox}><p>A kvíz nem található.</p></div></div>;
 
     if (showResults) {
         const totalQuestions = quiz.questions ? quiz.questions.length : 0;
-        const percentage = totalQuestions > 0 ? ((score / totalQuestions) * 100).toFixed(1) : 0;
+        const percentage = totalQuestions > 0 ? ((score / totalQuestions) * 100).toFixed(0) : 0;
         return (
             <div className={styles.container}>
                 <div className={styles.quizBox}>
@@ -97,7 +105,6 @@ const QuizPage = () => {
                             />
                         );
                     }
-                    // Ide jöhet a többi kérdéstípus
                     return <p key={q.id}>Ismeretlen kérdéstípus: {q.question_type}</p>;
                 })}
                 <button onClick={handleSubmit} className={styles.submitButton}>Kvíz beküldése</button>
