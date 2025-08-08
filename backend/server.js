@@ -155,9 +155,10 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
 });
 
 app.get('/api/curriculums', async (req, res) => {
-    const { subject, grade, q } = req.query; 
+    const { subject, grade, q } = req.query;
     let query = 'SELECT * FROM Curriculums WHERE is_published = true';
     const queryParams = [];
+    
     if (subject) {
         queryParams.push(subject);
         query += ` AND subject = $${queryParams.length}`;
@@ -171,24 +172,29 @@ app.get('/api/curriculums', async (req, res) => {
         query += ` AND title ILIKE $${queryParams.length}`;
     }
     query += ' ORDER BY subject, grade, title;';
+
     try {
         const result = await pool.query(query, queryParams);
+        
         if (subject || grade || q) {
             return res.status(200).json({ success: true, data: result.rows });
         }
+        
         const groupedData = {
             freeLessons: {},
             freeTools: [],
             premiumCourses: [],
             premiumTools: []
         };
+
         result.rows.forEach(item => {
+            const subjectKey = item.subject || 'altalanos';
             switch (item.category) {
                 case 'free_lesson':
-                    if (!groupedData.freeLessons[item.subject]) {
-                        groupedData.freeLessons[item.subject] = [];
+                    if (!groupedData.freeLessons[subjectKey]) {
+                        groupedData.freeLessons[subjectKey] = [];
                     }
-                    groupedData.freeLessons[item.subject].push(item);
+                    groupedData.freeLessons[subjectKey].push(item);
                     break;
                 case 'free_tool':
                     groupedData.freeTools.push(item);
@@ -203,8 +209,11 @@ app.get('/api/curriculums', async (req, res) => {
                     break;
             }
         });
+
         res.status(200).json({ success: true, data: groupedData });
+
     } catch (error) {
+        console.error("Hiba a tananyagok lekérdezése során:", error);
         res.status(500).json({ success: false, message: "Szerverhiba történt." });
     }
 });

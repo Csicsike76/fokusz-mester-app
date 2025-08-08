@@ -8,20 +8,16 @@ const API_URL = 'https://fokusz-mester-backend.onrender.com';
 const HomePage = () => {
     const [content, setContent] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchHomePageContent = async () => {
             try {
                 const response = await fetch(`${API_URL}/api/curriculums`);
                 const data = await response.json();
-                if (!data.success) {
-                    throw new Error(data.message || 'Hiba az adatok betöltésekor.');
-                }
+                if (!data.success) throw new Error('Hiba az adatok betöltésekor.');
                 setContent(data.data);
-            } catch (err) {
-                setError(err.message);
-                console.error(err);
+            } catch (error) {
+                console.error(error);
             } finally {
                 setIsLoading(false);
             }
@@ -45,9 +41,6 @@ const HomePage = () => {
             <main className={styles.mainContent}>
                 {isLoading && (
                     <p style={{ textAlign: 'center' }}>Tartalom betöltése...</p>
-                )}
-                {error && (
-                    <p style={{ textAlign: 'center', color: 'red' }}>Hiba: {error}</p>
                 )}
                 {content && (
                     <>
