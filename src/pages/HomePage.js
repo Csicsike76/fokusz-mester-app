@@ -31,7 +31,6 @@ const HomePage = () => {
 
     const renderCard = (item, typeClass) => {
         const pathPrefix = item.category.includes('tool') ? '/eszkoz' : '/kviz';
-        
         return (
             <div key={item.slug} className={`${styles.card} ${styles[typeClass]}`}>
                 <h4>{item.grade > 0 ? `${item.grade}. osztály - ${item.title}` : item.title}</h4>
@@ -55,6 +54,7 @@ const HomePage = () => {
                 )}
                 {content && (
                     <>
+                        {/* === PRÓBÁLD KI INGYEN SZEKCIÓ === */}
                         <section id="ingyenes-leckek" className={styles.section}>
                             <h2 className={styles.sectionTitle}>Próbáld ki Ingyen!</h2>
                             {Object.keys(content.freeLessons || {}).map(subject => (
@@ -67,6 +67,7 @@ const HomePage = () => {
                             ))}
                         </section>
 
+                        {/* === INGYENES ESZKÖZÖK SZEKCIÓ === */}
                         {content.freeTools && content.freeTools.length > 0 && (
                             <section id="ingyenes-eszkozok" className={styles.section}>
                                 <h2 className={styles.sectionTitle}>Ingyenes Interaktív Eszközök</h2>
@@ -76,6 +77,7 @@ const HomePage = () => {
                             </section>
                         )}
 
+                        {/* === PRÉMIUM KURZUSOK SZEKCIÓ (EZ A RÉSZ HIÁNYZOTT) === */}
                         {content.premiumCourses && content.premiumCourses.length > 0 && (
                             <section id="premium-kurzusok" className={styles.section}>
                                 <h2 className={styles.sectionTitle}>Teljes Kurzusok (Prémium)</h2>
@@ -85,6 +87,7 @@ const HomePage = () => {
                             </section>
                         )}
 
+                        {/* === PRÉMIUM ESZKÖZÖK SZEKCIÓ (EZ A RÉSZ HIÁNYZOTT) === */}
                         {content.premiumTools && content.premiumTools.length > 0 && (
                             <section id="premium-eszkozok" className={styles.section}>
                                 <h2 className={styles.sectionTitle}>Exkluzív Prémium Eszközök</h2>
