@@ -3,7 +3,7 @@ import Hero from '../components/Hero/Hero';
 import styles from './HomePage.module.css';
 import ConditionalLink from '../components/ConditionalLink/ConditionalLink';
 
-const API_URL = 'https://fokusz-mester-backend.onrender.com';
+const API_URL = 'http://localhost:3001'; // FONTOS: Helyi fejlesztéshez ezt használjuk!
 
 const HomePage = () => {
     const [content, setContent] = useState(null);

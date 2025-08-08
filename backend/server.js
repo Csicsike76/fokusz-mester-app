@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const path = require('path'); // EZ AZ EGYIK HIÁNYZÓ IMPORT
 const fs = require('fs/promises'); // EZ A MÁSIK HIÁNYZÓ IMPORT
-require('dotenv').config();
+require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -181,7 +181,7 @@ app.get('/api/curriculums', async (req, res) => {
     let queryText = 'SELECT * FROM Curriculums WHERE is_published = true';
     const queryParams = [];
     
-    // Dinamikusan építjük fel a WHERE feltételeket
+    // Dinamikusan és biztonságosan építjük fel a WHERE feltételeket
     if (subject) {
         queryParams.push(subject);
         queryText += ` AND subject = $${queryParams.length}`;
@@ -191,10 +191,7 @@ app.get('/api/curriculums', async (req, res) => {
         queryText += ` AND grade = $${queryParams.length}`;
     }
     if (q) {
-        // A keresőszót kisbetűssé alakítjuk a konzisztens keresésért
-        queryParams.push(`%${q.toLowerCase()}%`); 
-        // Az ILIKE kis- és nagybetű érzéketlen, a LOWER() pedig biztosítja
-        // hogy az adatbázisban lévő címet is kisbetűvel hasonlítsuk össze.
+        queryParams.push(`%${q.toLowerCase()}%`);
         queryText += ` AND LOWER(title) ILIKE $${queryParams.length}`;
     }
 
@@ -203,19 +200,44 @@ app.get('/api/curriculums', async (req, res) => {
     try {
         const result = await pool.query(queryText, queryParams);
         
-        // A VÁLASZ LOGIKÁJA NEM VÁLTOZIK
         if (subject || grade || q) {
             return res.status(200).json({ success: true, data: result.rows });
         }
         
-        // Főoldali csoportosítás...
-        const groupedData = { /* ... */ };
-        result.rows.forEach(item => { /* ... */ });
+        const groupedData = {
+            freeLessons: {},
+            freeTools: [],
+            premiumCourses: [],
+            premiumTools: []
+        };
+        result.rows.forEach(item => {
+            const subjectKey = item.subject || 'altalanos';
+            switch (item.category) {
+                case 'free_lesson':
+                    if (!groupedData.freeLessons[subjectKey]) {
+                        groupedData.freeLessons[subjectKey] = [];
+                    }
+                    groupedData.freeLessons[subjectKey].push(item);
+                    break;
+                case 'free_tool':
+                    groupedData.freeTools.push(item);
+                    break;
+                case 'premium_course':
+                    groupedData.premiumCourses.push(item);
+                    break;
+                case 'premium_tool':
+                    groupedData.premiumTools.push(item);
+                    break;
+                default:
+                    break;
+            }
+        });
+
         res.status(200).json({ success: true, data: groupedData });
 
     } catch (error) {
         console.error("Hiba a tananyagok lekérdezése során:", error);
-        res.status(500).json({ success: false, message: "Szerverhiba történt." });
+        res.status(500).json({ success: false, message: "Szerverhiba történt a tananyagok lekérdezésekor." });
     }
 });
 

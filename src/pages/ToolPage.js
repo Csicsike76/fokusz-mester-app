@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './ToolPage.module.css';
 
-const API_URL = 'https://fokusz-mester-backend.onrender.com';
+const API_URL = 'http://localhost:3001';
 
 const ToolPage = () => {
     const { slug } = useParams();
@@ -40,15 +40,12 @@ const ToolPage = () => {
     const handleSend = () => {
         const userMessage = userInput.trim();
         if (userMessage === '' || !activeChat) return;
-
         const newMessages = [...messages, { text: userMessage, sender: 'user' }];
         setMessages(newMessages);
         setUserInput('');
-
         const systemPrompt = toolData?.characters[activeChat]?.prompt || "Viselkedj segítőkész tanárként.";
         const conversationHistory = newMessages.map(msg => `${msg.sender === 'user' ? 'Diák' : 'Tutor'}: ${msg.text}`).join('\n');
         const fullPrompt = `${systemPrompt}\n\nA beszélgetés eddig:\n${conversationHistory}\nTutor:`;
-
         navigator.clipboard.writeText(fullPrompt.trim()).then(() => {
             setMessages(prev => [...prev, { text: "✅ A kérdésedet a vágólapra másoltam! Nyisd meg a Geminit, illeszd be, majd a választ írd be ide a folytatáshoz.", sender: 'tutor' }]);
             window.open('https://gemini.google.com/app', '_blank');
