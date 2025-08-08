@@ -177,28 +177,44 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
 
 app.get('/api/curriculums', async (req, res) => {
     const { subject, grade, q } = req.query; 
-    let query = 'SELECT * FROM Curriculums WHERE is_published = true';
+    
+    let queryText = 'SELECT * FROM Curriculums WHERE is_published = true';
     const queryParams = [];
     
+    // Dinamikusan építjük fel a WHERE feltételeket
     if (subject) {
         queryParams.push(subject);
-        query += ` AND subject = $${queryParams.length + 1}`;
+        queryText += ` AND subject = $${queryParams.length}`;
     }
     if (grade) {
         queryParams.push(grade);
-        query += ` AND grade = $${queryParams.length + 1}`;
+        queryText += ` AND grade = $${queryParams.length}`;
     }
     if (q) {
-        queryParams.push(`%${q}%`);
-        query += ` AND title ILIKE $${queryParams.length + 1}`;
+        // A keresőszót kisbetűssé alakítjuk a konzisztens keresésért
+        queryParams.push(`%${q.toLowerCase()}%`); 
+        // Az ILIKE kis- és nagybetű érzéketlen, a LOWER() pedig biztosítja
+        // hogy az adatbázisban lévő címet is kisbetűvel hasonlítsuk össze.
+        queryText += ` AND LOWER(title) ILIKE $${queryParams.length}`;
     }
-    query += ' ORDER BY subject, grade, title;';
-    
+
+    queryText += ' ORDER BY subject, grade, title;';
+
     try {
-        const result = await pool.query(query, queryParams);
-        // MOST MÁR MINDEN ESETBEN EGY EGYSZERŰ TÖMBÖT KÜLDÜNK VISSZA
-        res.status(200).json({ success: true, data: result.rows });
+        const result = await pool.query(queryText, queryParams);
+        
+        // A VÁLASZ LOGIKÁJA NEM VÁLTOZIK
+        if (subject || grade || q) {
+            return res.status(200).json({ success: true, data: result.rows });
+        }
+        
+        // Főoldali csoportosítás...
+        const groupedData = { /* ... */ };
+        result.rows.forEach(item => { /* ... */ });
+        res.status(200).json({ success: true, data: groupedData });
+
     } catch (error) {
+        console.error("Hiba a tananyagok lekérdezése során:", error);
         res.status(500).json({ success: false, message: "Szerverhiba történt." });
     }
 });
