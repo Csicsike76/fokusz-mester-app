@@ -31,27 +31,48 @@
   margin-top: 2rem;
   transition: background-color 0.2s;
 }
+.submitButton:hover { background-color: #16a085; }
 
-.submitButton:hover {
-  background-color: #16a085;
-}
+.error { color: #e74c3c; font-weight: bold; }
 
+/* Eredmény doboz + színezés */
 .resultsBox {
   text-align: center;
   margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.04);
 }
+.resultsActions {
+  display: flex;
+  gap: .75rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+.restartButton {
+  padding: 0.7rem 1.2rem;
+  background-color: #8e44ad;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.restartButton:hover { filter: brightness(1.05); }
 
 .backButton {
   display: inline-block;
-  margin-top: 2rem;
-  padding: 0.8rem 2rem;
+  padding: 0.7rem 1.2rem;
   background-color: #3498db;
   color: white;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-weight: 600;
 }
 
-.error {
-  color: #e74c3c;
-  font-weight: bold;
-}
+/* tónus a százalék alapján */
+.bad  { border-color: #e74c3c; background: rgba(231, 76, 60, 0.12); }
+.ok   { border-color: #f1c40f; background: rgba(241, 196, 15, 0.12); }
+.good { border-color: #2ecc71; background: rgba(46, 204, 113, 0.12); }

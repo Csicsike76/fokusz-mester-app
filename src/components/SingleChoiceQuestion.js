@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './QuestionStyles.module.css';
 
 const SingleChoiceQuestion = ({ question, userAnswer, onAnswerChange, showResults }) => {
-  let options = [];
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
-  // Opciók biztonságos feldolgozása (ha stringként jön az adatbázisból)
+  // Beküldéskor alapból legyen NYITVA
+  useEffect(() => {
+    if (showResults) setIsCollapsed(false);
+  }, [showResults]);
+
+  let options = [];
   if (Array.isArray(question.options)) {
     options = question.options;
   } else {
@@ -51,10 +56,21 @@ const SingleChoiceQuestion = ({ question, userAnswer, onAnswerChange, showResult
       </div>
 
       {showResults && (
-        <div className={styles.explanation}>
-          {question.explanation && String(question.explanation).trim().length > 0
-            ? question.explanation
-            : "Ehhez a kérdéshez nincs magyarázat."}
+        <div className={styles.expWrapper}>
+          <button
+            type="button"
+            className={styles.expToggle}
+            onClick={() => setIsCollapsed(v => !v)}
+            aria-expanded={!isCollapsed}
+          >
+            {isCollapsed ? 'Magyarázat megnyitása' : 'Magyarázat elrejtése'}
+          </button>
+
+          <div className={`${styles.explanation} ${isCollapsed ? styles.explanationCollapsed : ''}`}>
+            {question.explanation && String(question.explanation).trim().length > 0
+              ? question.explanation
+              : "Ehhez a kérdéshez nincs magyarázat."}
+          </div>
         </div>
       )}
     </div>

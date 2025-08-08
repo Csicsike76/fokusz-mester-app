@@ -48,6 +48,14 @@ const QuizPage = () => {
     setShowResults(true);
   };
 
+  const handleRestart = () => {
+    setUserAnswers({});
+    setShowResults(false);
+    setScore(0);
+    // opcionálisan visszagörgetünk a tetejére
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const allAnswered =
     (quiz?.questions?.length || 0) > 0 &&
     quiz.questions.every(q => userAnswers[q.id] !== undefined);
@@ -73,6 +81,11 @@ const QuizPage = () => {
       </div>
     );
 
+  const pct = quiz?.questions?.length ? Math.round((score / quiz.questions.length) * 100) : 0;
+  let resultsTone = styles.bad;
+  if (pct >= 80) resultsTone = styles.good;
+  else if (pct >= 50) resultsTone = styles.ok;
+
   return (
     <div className={styles.container}>
       <div className={styles.quizBox}>
@@ -97,10 +110,16 @@ const QuizPage = () => {
             Kvíz beküldése
           </button>
         ) : (
-          <div className={styles.resultsBox}>
+          <div className={`${styles.resultsBox} ${resultsTone}`}>
             <p><strong>Eredményed:</strong> {score} / {quiz.questions.length}</p>
-            <p><strong>Százalék:</strong> {((score / quiz.questions.length) * 100).toFixed(0)}%</p>
-            <Link to="/" className={styles.backButton}>Vissza a főoldalra</Link>
+            <p><strong>Százalék:</strong> {pct}%</p>
+
+            <div className={styles.resultsActions}>
+              <button onClick={handleRestart} className={styles.restartButton}>
+                Újrakezd
+              </button>
+              <Link to="/" className={styles.backButton}>Vissza a főoldalra</Link>
+            </div>
           </div>
         )}
       </div>
