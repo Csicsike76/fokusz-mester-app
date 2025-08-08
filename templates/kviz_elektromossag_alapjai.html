@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Fizika Kvíz - Az Elektromosság Alapjai</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="alsos_stilus.css">
+    <style>
+        .quiz-container { max-width: 800px; margin: 2rem auto; position: relative; z-index: 2; }
+        .question-block { background-color: var(--felulet-szin, rgba(255,255,255,0.9)); backdrop-filter: blur(5px); padding: 20px; border-radius: 10px; margin-bottom: 25px; box-shadow: var(--card-shadow, 0 4px 15px rgba(0,0,0,0.1)); }
+        .options label { display: flex; align-items: center; padding: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.2s; background-color: var(--feher); font-size: 1.1rem; }
+        .options label:hover { background-color: #f8f9fa; border-color: var(--piros); }
+        .options input[type="radio"]:checked + label { background-color: var(--piros); color: var(--feher); border-color: var(--piros); }
+        .evaluation-header { background-color: var(--felulet-szin, rgba(255,255,255,0.9)); backdrop-filter: blur(5px); border-radius: 10px; padding: 1.5rem; margin-bottom: 2rem; text-align: center; }
+        h1 { font-size: 1.8em; }
+        .pin-input { padding: 10px; border-radius: 5px; border: 1px solid #ccc; text-align: center; font-size: 1em; }
+        .check-btn { padding: 10px 20px; background-color:var(--zold); color:white; border:none; border-radius:5px; cursor:pointer; font-size: 1em; }
+        label.correct { border: 2px solid var(--zold) !important; background-color: #e9f5e9 !important; }
+        label.incorrect { border: 2px solid var(--piros) !important; background-color: #fbe9e9 !important; }
+        .explanation { margin-top: 1rem; padding: 1rem; border-radius: 6px; display: none; text-align: left; background-color: #f0f0f0; border-left: 4px solid var(--piros); }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="bg-video">
+      <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <div class="quiz-container">
+        <h1 style="background:var(--felulet-szin); backdrop-filter: blur(5px); border-radius:10px; padding:1rem;">Kvíz: Az Elektromosság Alapjai</h1>
+        
+        <div class="evaluation-header">
+            <div class="pin-wrapper" style="display:flex; justify-content:center; gap:10px;">
+                <input type="password" class="pin-input" placeholder="PIN-kód" autocomplete="off">
+                <button class="check-btn">Ellenőrzés</button>
+            </div>
+            <p class="warning-message" style="color: var(--piros); font-weight: bold; margin-top: 1rem; display: none;"></p>
+            <div class="result-container" style="margin-top: 15px; font-size: 1.2em; font-weight: 700;"></div>
+        </div>
+
+        <form id="quiz-form" autocomplete="off">
+        </form>
+
+        <div class="evaluation-header">
+            <div class="pin-wrapper" style="display:flex; justify-content:center; gap:10px;">
+                <input type="password" class="pin-input" placeholder="PIN-kód" autocomplete="off">
+                <button class="check-btn">Ellenőrzés</button>
+            </div>
+            <p class="warning-message" style="color: var(--piros); font-weight: bold; margin-top: 1rem; display: none;"></p>
+            <div class="result-container" style="margin-top: 15px; font-size: 1.2em; font-weight: 700;"></div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Milyen kétféle elektromos töltés létezik?", answer: "b", options: { a: "Meleg és hideg", b: "Pozitív és negatív", c: "Északi és déli" }, explanation: "Az elektromos töltések kétfélék lehetnek: pozitív (+) és negatív (-). Az északi és déli a mágneses pólusokat jelöli." },
+            { question: "Hogyan hatnak egymásra az azonos elektromos töltések?", answer: "a", options: { a: "Taszítják egymást", b: "Vonzzák egymást", c: "Nincs közöttük kölcsönhatás" }, explanation: "Az azonos nemű töltések (pozitív-pozitív vagy negatív-negatív) taszítják egymást." },
+            { question: "Mi az elektromos áram?", answer: "c", options: { a: "A levegő mozgása", b: "A mágnesek vonzása", c: "Az elektromos töltések rendezett áramlása" }, explanation: "Az elektromos áram definíció szerint az elektromos töltéssel rendelkező részecskék (általában elektronok) egyirányú, rendezett mozgása." },
+            { question: "Melyik NEM része egy egyszerű áramkörnek?", answer: "a", options: { a: "Mérleg", b: "Áramforrás (elem)", c: "Fogyasztó (izzó)" }, explanation: "Egy egyszerű áramkörnek kell egy áramforrás (ami energiát ad), egy fogyasztó (ami felhasználja az energiát) és vezeték, ami összeköti őket. A mérleg tömegmérésre való." },
+            { question: "Melyik anyag jó elektromos vezető?", answer: "b", options: { a: "Gumi", b: "Réz", c: "Műanyag" }, explanation: "A fémek, mint például a réz, kiváló elektromos vezetők, mert bennük az elektronok könnyen el tudnak mozdulni. A gumi és a műanyag szigetelők." },
+            { question: "Mire szolgál a kapcsoló egy áramkörben?", answer: "a", options: { a: "Az áramkör megszakítására és zárására", b: "Az áram erősségének növelésére", c: "Az elem feltöltésére" }, explanation: "A kapcsolóval lehet az áramkört zárni (ekkor folyik az áram) vagy megszakítani (ekkor nem folyik áram)." },
+            { question: "Hogyan hatnak egymásra a különböző nemű elektromos töltések?", answer: "c", options: { a: "Taszítják egymást", b: "Nincs közöttük kölcsönhatás", c: "Vonzzák egymást" }, explanation: "A különböző nemű töltések (pozitív-negatív) vonzzák egymást." },
+            { question: "Mi történik, ha egy soros kapcsolásban az egyik izzó kiég?", answer: "a", options: { a: "A másik izzó is kialszik.", b: "A másik izzó tovább világít.", c: "A másik izzó fényesebben világít." }, explanation: "Soros kapcsolásnál az áram csak egy úton tud haladni. Ha ez az út megszakad (pl. kiég egy izzó), az egész áramkörben leáll az áramlás, így a másik izzó sem kap áramot." },
+            { question: "Melyik anyag jó elektromos szigetelő?", answer: "c", options: { a: "Vas", b: "Alumínium", c: "Porcelán" }, explanation: "A porcelán, a műanyag, az üveg és a gumi jó szigetelők, mert bennük az elektronok nehezen mozdulnak el." },
+            { question: "Mi a feltétele az elektromos áram kialakulásának?", answer: "b", options: { a: "Csak egy fogyasztó", b: "Zárt áramkör és áramforrás", c: "Magas hőmérséklet" }, explanation: "Ahhoz, hogy tartósan áram folyjon, szükség van egy energiaforrásra (pl. elem) és egy zárt körre, amiben a töltések áramolhatnak." },
+            { question: "Hogyan hozhatunk egy műanyag fésűt elektromos állapotba?", answer: "a", options: { a: "Hajunkhoz dörzsölve", b: "Vízbe mártva", c: "Melegítve" }, explanation: "Dörzsöléssel az elektronok átkerülhetnek az egyik testről a másikra. Amikor a fésűt a hajunkhoz dörzsöljük, elektromos állapotba kerül és képes lesz vonzani az apró papírdarabokat." },
+            { question: "Mi történik, ha egy párhuzamos kapcsolásban az egyik izzó kiég?", answer: "b", options: { a: "A másik izzó is kialszik.", b: "A másik izzó tovább világít.", c: "Az áramforrás felrobban." }, explanation: "Párhuzamos kapcsolásnál az áram több ágra oszlik. Ha az egyik ág megszakad, a többi ágban az áram zavartalanul folyik tovább, így a másik izzó tovább világít." },
+            { question: "A villámlás egy hatalmas ...", answer: "c", options: { a: "...mágneses jelenség.", b: "...hőjelenség.", c: "...elektromos kisülés." }, explanation: "A villámlás a felhőkben felgyülemlett hatalmas mennyiségű elektromos töltés hirtelen kisülése a föld vagy egy másik felhő felé." },
+            { question: "Melyik a pozitív pólus jele egy elemen (telepen)?", answer: "a", options: { a: "+", b: "-", c: "N" }, explanation: "Az áramforrások (pl. elemek) pozitív pólusát a '+' jel, negatív pólusát a '-' jel jelöli. Az 'N' a mágnesek északi pólusának jele." },
+            { question: "Mi az elektromos áram iránya?", answer: "b", options: { a: "A negatív pólustól a pozitív felé.", b: "A pozitív pólustól a negatív felé.", c: "Mindkét irányba folyik egyszerre." }, explanation: "A technikában megállapodás szerint az áram irányát a pozitív töltések mozgásának irányával definiálják, ami a pozitív pólustól a negatív pólus felé mutat." },
+            { question: "Mi védi meg az elektromos eszközeinket a túláramtól?", answer: "c", options: { a: "A kapcsoló", b: "A vezeték", c: "A biztosíték" }, explanation: "A biztosíték egy olyan alkatrész, ami túláram esetén megszakítja az áramkört (pl. kiolvad), ezzel megvédve a drágább készülékeket a károsodástól." },
+            { question: "Az elektromos csengő az áram melyik hatásán alapul?", answer: "b", options: { a: "Hőhatásán", b: "Mágneses hatásán", c: "Fényhatásán" }, explanation: "Az elektromos csengőben egy elektromágnes van, ami az áram hatására behúz egy kalapácsot, ami megüti a csengőt. Ez az áram mágneses hatásának alkalmazása." },
+            { question: "Mi a konnektor szerepe?", answer: "a", options: { a: "Csatlakozást biztosít az elektromos hálózathoz.", b: "Dekoráció.", c: "Hőt termel." }, explanation: "A konnektor (fali csatlakozóaljzat) segítségével tudjuk a háztartási eszközeinket biztonságosan csatlakoztatni az elektromos hálózatra." },
+            { question: "Melyik állítás igaz?", answer: "c", options: { a: "A fémek jó szigetelők.", b: "A műanyagok jó vezetők.", c: "Az elektromos áram veszélyes lehet." }, explanation: "A fémek jó vezetők, a műanyagok jó szigetelők. A magas feszültségű elektromos áram rendkívül veszélyes, akár halálos áramütést is okozhat, ezért fontos a biztonsági szabályok betartása." },
+            { question: "Mi az áramforrás feladata az áramkörben?", answer: "a", options: { a: "Energiát biztosít a töltések áramlásához.", b: "Elhasználja az energiát.", c: "Megszakítja az áram útját." }, explanation: "Az áramforrás (pl. elem, generátor) hozza létre azt a feszültségkülönbséget, ami mozgásba hozza az elektromos töltéseket a vezetékben." },
+            { question: "Mit jelent a 'rövidzárlat'?", answer: "b", options: { a: "Az áramkör túl hosszú.", b: "Az áram a fogyasztó kikerülésével, egy nagyon kis ellenállású úton folyik.", c: "Az elem lemerült." }, explanation: "Rövidzárlatkor az áram a legrövidebb, legkisebb ellenállású utat választja, kikerülve a fogyasztót. Ilyenkor rendkívül nagy áram folyik, ami tüzet okozhat." },
+            { question: "A zseblámpa izzója az áram melyik hatásának köszönhetően világít?", answer: "b", options: { a: "Mágneses hatás", b: "Hő- és fényhatás", c: "Kémiai hatás" }, explanation: "Az izzószálon áthaladó áram felhevíti azt (hőhatás), és az izzás következtében az fényt bocsát ki (fényhatás)." },
+            { question: "Miért van a legtöbb elektromos kábelen műanyag borítás?", answer: "a", options: { a: "Mert a műanyag jó szigetelő, és megvéd az áramütéstől.", b: "Mert a műanyag szép színes.", c: "Mert a műanyag vezeti az áramot." }, explanation: "A műanyag szigetelőanyag, ami megakadályozza, hogy az elektromos áram kijusson a vezetékből és áramütést okozzon." },
+            { question: "Hol használunk párhuzamos kapcsolást a hétköznapokban?", answer: "c", options: { a: "A karácsonyfaégőknél.", b: "Sehol.", c: "A lakások elektromos hálózatában." }, explanation: "A lakásban a konnektorok és a lámpák párhuzamosan vannak kötve, hogy mindegyik a teljes hálózati feszültséget kapja, és ha az egyik kiég, a többi tovább működjön." },
+            { question: "Melyik állítás HAMIS?", answer: "b", options: { a: "A pozitív és negatív töltések vonzzák egymást.", b: "A pozitív és pozitív töltések vonzzák egymást.", c: "A negatív és negatív töltések taszítják egymást." }, explanation: "Az azonos nemű töltések (pozitív-pozitív, negatív-negatív) taszítják, míg a különböző neműek (pozitív-negatív) vonzzák egymást. Tehát a 'b' állítás hamis." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizForm = document.getElementById('quiz-form');
+            const masterPin = '121909';
+            const studentPins = Array.from({length: 20}, (_, i) => `1000${i + 1 < 10 ? '0' : ''}${i + 1}`);
+            const shuffledQuestions = quizData.sort(() => Math.random() - 0.5);
+            shuffledQuestions.forEach((q, index) => {
+                const qBlock = document.createElement('div'); qBlock.className = 'question-block';
+                const qText = document.createElement('p'); qText.className = 'question'; qText.textContent = `${index + 1}. ${q.question}`;
+                const opts = document.createElement('ul'); opts.className = 'options'; opts.style.listStyleType = 'none'; opts.style.padding = '0';
+                for (const key in q.options) {
+                    const item = document.createElement('li');
+                    const input = document.createElement('input'); input.type = 'radio'; input.name = `q${index}`; input.value = key; input.id = `q${index}-${key}`;
+                    const label = document.createElement('label'); label.htmlFor = `q${index}-${key}`; label.textContent = q.options[key];
+                    item.append(input, label); opts.appendChild(item);
+                }
+                const expl = document.createElement('div'); expl.className = 'explanation'; expl.innerHTML = `<strong>Magyarázat:</strong> ${q.explanation}`;
+                qBlock.append(qText, opts, expl); quizForm.appendChild(qBlock);
+            });
+
+            const submitBtns = document.querySelectorAll('.check-btn');
+            const pinInputs = document.querySelectorAll('.pin-input');
+            const warningMessages = document.querySelectorAll('.warning-message');
+            const resultContainers = document.querySelectorAll('.result-container');
+
+            const checkAnswers = (e) => {
+                const currentPanel = e.target.closest('.evaluation-header');
+                const pinInput = currentPanel.querySelector('.pin-input');
+                const pin = pinInput.value;
+                warningMessages.forEach(msg => msg.style.display = 'none');
+                
+                const isMaster = pin === masterPin;
+                if (!studentPins.includes(pin) && !isMaster) {
+                    alert('Érvénytelen PIN-kód!'); return;
+                }
+                const selectedAnswers = new FormData(quizForm);
+                const answeredCount = Array.from(selectedAnswers.keys()).length;
+                if (!isMaster && answeredCount < shuffledQuestions.length) {
+                    warningMessages.forEach(msg => {
+                        msg.textContent = `VÁLASZOLJ KÉRLEK MIND A ${shuffledQuestions.length} KÉRDÉSRE!`;
+                        msg.style.display = 'block';
+                    });
+                    return;
+                }
+                
+                let score = 0;
+                shuffledQuestions.forEach((q, index) => {
+                    const userAnswer = selectedAnswers.get(`q${index}`);
+                    const qBlock = quizForm.children[index];
+                    const expl = qBlock.querySelector('.explanation');
+                    const correctLabel = qBlock.querySelector(`label[for="q${index}-${q.answer}"]`);
+                    if (isMaster) {
+                        correctLabel.classList.add('correct');
+                        expl.style.display = 'block';
+                    } else {
+                        const userLabel = qBlock.querySelector(`label[for="q${index}-${userAnswer}"]`);
+                        if (userAnswer === q.answer) {
+                            userLabel.classList.add('correct');
+                            score++;
+                        } else {
+                            if (userLabel) userLabel.classList.add('incorrect');
+                            correctLabel.classList.add('correct');
+                        }
+                        expl.style.display = 'block';
+                    }
+                });
+
+                if (!isMaster) {
+                    resultContainers.forEach(res => res.textContent = `Eredményed: ${score} / ${shuffledQuestions.length}`);
+                } else {
+                    resultContainers.forEach(res => res.textContent = `Mester mód aktív.`);
+                }
+                submitBtns.forEach(btn => btn.disabled = true);
+                pinInputs.forEach(input => input.disabled = true);
+                quizForm.querySelectorAll('input').forEach(i => i.disabled = true);
+            };
+            
+            submitBtns.forEach(btn => btn.addEventListener('click', checkAnswers));
+            pinInputs.forEach(input => {
+                input.addEventListener('keydown', (e) => { 
+                    if (e.key === 'Enter') { 
+                        e.preventDefault();
+                        e.target.closest('.evaluation-header').querySelector('.check-btn').click();
+                    }
+                });
+                input.addEventListener('input', (e) => {
+                    pinInputs.forEach(otherInput => {
+                        if (otherInput !== e.target) otherInput.value = e.target.value;
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

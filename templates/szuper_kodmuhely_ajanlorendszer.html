@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prémium Műhely - Építs egy Filmajánló Rendszert!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --kek: #005A9C;
+            --piros: #CD2A3E;
+            --zold: #436F4D;
+            --feher: #FFFFFF;
+            --sotet: #2c3e50;
+            --vilagos-szurke: #f0f4f8;
+            --szoveg: #34495e;
+            --card-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--vilagos-szurke);
+            color: var(--szoveg);
+            line-height: 1.7;
+        }
+        
+        .container { max-width: 900px; margin: 2rem auto; padding: 0 2rem; }
+
+        .header {
+            text-align: center; margin-bottom: 2rem; padding: 2rem;
+            background: var(--sotet); color: var(--feher);
+            border-radius: 12px; box-shadow: var(--card-shadow);
+        }
+        .header h1 { font-family: 'Roboto Slab', serif; margin: 0; }
+        .header p { opacity: 0.9; margin-top: 0.5rem; }
+
+        .step-card {
+            background: var(--feher); border-radius: 12px; box-shadow: var(--card-shadow);
+            margin-bottom: 2.5rem; border-top: 5px solid var(--piros);
+        }
+        
+        .step-header { padding: 1.5rem; }
+        .step-header h2 {
+            font-family: 'Roboto Slab', serif; color: var(--piros);
+            display: flex; align-items: center; margin: 0;
+        }
+        .step-number {
+            background-color: var(--piros); color: var(--feher); border-radius: 50%;
+            width: 40px; height: 40px; display: inline-flex;
+            justify-content: center; align-items: center; font-size: 1.5rem; margin-right: 15px;
+        }
+        
+        .step-body { padding: 0 1.5rem 1.5rem 1.5rem; }
+        
+        .code-container { position: relative; }
+        .code-box {
+            background-color: #282c34; /* Sötét kód háttér */
+            color: #abb2bf;
+            border: 1px dashed #555;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Source Code Pro', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.95em;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .copy-button {
+            position: absolute; top: 10px; right: 10px;
+            background-color: #61afef; color: white; border: none; padding: 5px 10px;
+            border-radius: 5px; cursor: pointer; font-weight: bold;
+        }
+        
+        .explanation { margin-top: 1rem; }
+        .explanation strong { color: var(--zold); }
+
+        .tool-recommendation {
+            background: #e3f2fd; border: 1px solid var(--kek);
+            padding: 1.5rem; border-radius: 8px; text-align: center;
+        }
+        .tool-recommendation a {
+            display: inline-block; background-color: var(--kek); color: var(--feher);
+            padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 700;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Prémium Műhely: Kódolj velem!</h1>
+            <p>Építs egy egyszerű Filmajánló Rendszert Pythonban</p>
+        </header>
+
+        <div class="step-card">
+            <div class="step-header">
+                <h2><span class="step-number">0</span>Mielőtt belevágnánk: Az Eszközünk</h2>
+            </div>
+            <div class="step-body">
+                <p>Ebben a műhelyben Python kódot fogunk írni. Nem kell semmit telepítened a gépedre! Egy ingyenes, online eszközt, a <strong>Replit</strong>-et fogjuk használni, ami egy böngészőben futó kódszerkesztő és futtató környezet.</p>
+                <div class="tool-recommendation">
+                    <h3>Nyisd meg a Replit-et!</h3>
+                    <p>Kattints a gombra, hozz létre egy ingyenes fiókot, majd válassz egy új, "Python" típusú projektet. A kódrészleteket ide kell majd beillesztened.</p>
+                    <a href="https://replit.com/" target="_blank">Irány a Replit.com →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-header">
+                <h2><span class="step-number">1</span>Az Adatbázis Létrehozása</h2>
+            </div>
+            <div class="step-body">
+                <p>Minden MI-projekt adatokkal kezdődik. Most létrehozzuk a saját, mini film-adatbázisunkat. Ez egy egyszerű "szótár" (dictionary), ahol a felhasználókhoz (Anna, Béla, stb.) hozzárendeljük az általuk látott és értékelt filmeket.</p>
+                <div class="code-container">
+                    <pre class="code-box"><code id="code1"># 1. Lépés: Adatbázis
+# A kulcs a felhasználó neve, az érték pedig egy újabb szótár,
+# amiben a film címe és az értékelés (1-5) szerepel.
+adatbazis = {
+    'Anna': {'Star Wars': 5, 'Titanic': 1, 'Pókember': 4, 'Shrek': 5},
+    'Béla': {'Star Wars': 5, 'Pókember': 5, 'Mátrix': 4},
+    'Cecília': {'Shrek': 5, 'Jégkorszak': 4, 'Verdák': 3, 'Titanic': 2},
+    'Dénes': {'Mátrix': 5, 'Star Wars': 4, 'Pókember': 5},
+    'Eszter': {'Jégkorszak': 3, 'Verdák': 4, 'Titanic': 3},
+    'Te': {'Shrek': 5, 'Star Wars': 4} # Ide kerül a mi ízlésünk!
+}</code></pre>
+                    <button class="copy-button" onclick="copyCode('code1', this)">Másolás</button>
+                </div>
+                <div class="explanation">
+                    <strong>Magyarázat:</strong> Létrehoztunk egy <code>adatbazis</code> nevű változót. A <code>'Te'</code> kulcs alá írd be a saját kedvenc filmjeidet és értékeléseidet! Ez alapján fog a rendszer neked ajánlani.
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-header">
+                <h2><span class="step-number">2</span>A Hasonlóság Kiszámítása</h2>
+            </div>
+            <div class="step-body">
+                <p>Hogyan találjuk meg azt a felhasználót, akinek a leginkább hasonló az ízlése a miénkhez? Ehhez egy matematikai módszert, az "euklideszi távolságot" fogjuk használni, de ne ijedj meg, a kód egyszerű!</p>
+                <div class="code-container">
+                    <pre class="code-box"><code id="code2"># 2. Lépés: Hasonlóság Számítása
+from math import sqrt
+
+def hasonlosag(adatok, szemely1, szemely2):
+    kozosen_ert_filmek = {}
+    for film in adatok[szemely1]:
+        if film in adatok[szemely2]:
+            kozosen_ert_filmek[film] = 1
+
+    if len(kozosen_ert_filmek) == 0:
+        return 0
+
+    negyzetosszeg = sum([pow(adatok[szemely1][film] - adatok[szemely2][film], 2)
+                        for film in kozosen_ert_filmek])
+
+    return 1 / (1 + sqrt(negyzetosszeg))</code></pre>
+                    <button class="copy-button" onclick="copyCode('code2', this)">Másolás</button>
+                </div>
+                <div class="explanation">
+                    <strong>Magyarázat:</strong> Ez a <code>hasonlosag</code> nevű funkció két embert hasonlít össze. Megkeresi azokat a filmeket, amiket mindketten láttak, majd kiszámolja, mennyire térnek el az értékeléseik. A végeredmény egy 0 és 1 közötti szám, ahol az 1 a tökéletes egyezést jelenti.
+                </div>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-header">
+                <h2><span class="step-number">3</span>A "Lelki Társ" Megtalálása</h2>
+            </div>
+            <div class="step-body">
+                <p>Most írunk egy funkciót, ami végigmegy az összes felhasználón, és megtalálja azt, aki a leginkább hasonlít ránk.</p>
+                <div class="code-container">
+                    <pre class="code-box"><code id="code3"># 3. Lépés: Legjobb Találat
+def legjobb_talalatok(adatok, szemely, n=1):
+    pontszamok = [(hasonlosag(adatok, szemely, masik), masik)
+                  for masik in adatok if masik != szemely]
+    pontszamok.sort(reverse=True)
+    return pontszamok[0:n]</code></pre>
+                    <button class="copy-button" onclick="copyCode('code3', this)">Másolás</button>
+                </div>
+                <div class="explanation">
+                    <strong>Magyarázat:</strong> A <code>legjobb_talalatok</code> funkció kiszámolja a hasonlóságot közted és mindenki más között, majd sorba rendezi őket. A végen visszaadja a legjobb találatot (a te "filmes lelki társadat").
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-header">
+                <h2><span class="step-number">4</span>Az Ajánlások Generálása</h2>
+            </div>
+            <div class="step-body">
+                <p>Már majdnem készen vagyunk! Most írunk egy funkciót, ami megnézi, hogy a hozzánk legjobban hasonlító ember milyen filmeket látott, amiket mi még nem, és ezeket fogja nekünk ajánlani.</p>
+                <div class="code-container">
+                    <pre class="code-box"><code id="code4"># 4. Lépés: Ajánlások
+def ajanlasok(adatok, szemely):
+    osszegek = {}
+    hasonlosagi_osszegek = {}
+
+    for masik in adatok:
+        if masik == szemely:
+            continue
+        hasonlo = hasonlosag(adatok, szemely, masik)
+
+        if hasonlo <= 0:
+            continue
+
+        for film in adatok[masik]:
+            if film not in adatok[szemely]:
+                osszegek.setdefault(film, 0)
+                osszegek[film] += adatok[masik][film] * hasanlo
+                hasonlosagi_osszegek.setdefault(film, 0)
+                hasonlosagi_osszegek[film] += hasanlo
+
+    ajanlott_filmek = [(osszeg / hasonlosagi_osszegek[film], film)
+                      for film, osszeg in osszegek.items()]
+    ajanlott_filmek.sort(reverse=True)
+    return ajanlott_filmek</code></pre>
+                    <button class="copy-button" onclick="copyCode('code4', this)">Másolás</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-header">
+                <h2><span class="step-number">5</span>Futtatás és Eredmény!</h2>
+            </div>
+            <div class="step-body">
+                <p>Most már csak annyi a dolgunk, hogy lefuttassuk a programot, és megnézzük, milyen filmeket ajánl nekünk!</p>
+                <div class="code-container">
+                    <pre class="code-box"><code id="code5"># 5. Lépés: Futtatás
+print("A te filmes 'lelki társad':")
+print(legjobb_talalatok(adatbazis, 'Te'))
+
+print("\nFilmek, amik tetszhetnek neked:")
+print(ajanlasok(adatbazis, 'Te'))</code></pre>
+                    <button class="copy-button" onclick="copyCode('code5', this)">Másolás</button>
+                </div>
+                <div class="explanation">
+                    <strong>Magyarázat:</strong> Illeszd be ezt a két sort a kódod végére, majd a Replit felületén kattints a nagy, zöld "Run" gombra! A jobb oldali, fekete konzolon meg fog jelenni az eredmény: kihez hasonlítasz a legjobban, és milyen filmeket ajánl neked a rendszer. <strong>Gratulálok, megépítetted az első saját MI-det!</strong>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<script>
+    function copyCode(codeId, buttonElement) {
+        const codeText = document.getElementById(codeId).textContent;
+        navigator.clipboard.writeText(codeText).then(() => {
+            const originalText = buttonElement.textContent;
+            buttonElement.textContent = 'Másolva!';
+            setTimeout(() => {
+                buttonElement.textContent = 'Másolás';
+            }, 2000);
+        }).catch(err => {
+            console.error('Hiba a másolás során', err);
+        });
+    }
+</script>
+</body>
+</html>

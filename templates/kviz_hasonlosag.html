@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: 6.4 Hasonlóság alkalmazásai (7. osztály)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: 6.4 Hasonlóság alkalmazásai (7. osztály)</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+
+            <div class="evaluation-block" id="bottom-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-bottom">PIN kód:</label>
+                    <input type="password" id="pin-code-bottom" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Miért működik az árnyékkal való magasságmérés?",
+                options: { a: "Mert az összes árnyék egyforma hosszú.", b: "Mert a Napsugarak párhuzamosak, így hasonló háromszögeket hoznak létre.", c: "Mert a tárgyak mindig merőlegesek az árnyékukra." },
+                correct: "b",
+                explanation: "Az árnyékkal való mérés alapja, hogy a Nap sugarait párhuzamosnak tekintjük. Emiatt a tárgyak (pl. egy ember és egy fa) által vetett árnyékok a tárggyal együtt hasonló derékszögű háromszögeket alkotnak."
+            },
+            {
+                question: "Egy 2 méter magas pózna árnyéka 3 méter hosszú. Ugyanekkor egy fa árnyéka 9 méter. Milyen magas a fa?",
+                options: { a: "6 méter", b: "13.5 méter", c: "4.5 méter" },
+                correct: "a",
+                explanation: "Felírhatjuk az aránypárt: fa magassága / pózna magassága = fa árnyéka / pózna árnyéka. Legyen x a fa magassága: x/2 = 9/3. Mivel 9/3 = 3, ezért x/2 = 3, amiből x = 6 méter."
+            },
+            {
+                question: "Melyik aránypár helyes egy magasságmérési feladatnál, ahol h₁ a kisebb tárgy magassága, d₁ az árnyéka, és h₂ a nagyobb tárgy magassága, d₂ az árnyéka?",
+                options: { a: "h₁/h₂ = d₁/d₂", b: "h₁/d₂ = h₂/d₁", c: "h₁/d₁ = d₂/h₂" },
+                correct: "a",
+                explanation: "A helyes aránypár a megfelelő oldalak arányát mutatja. A kisebb háromszög magassága (h₁) úgy aránylik a nagyobb háromszög magasságához (h₂), mint a kisebb háromszög alapja (d₁) a nagyobb háromszög alapjához (d₂)."
+            },
+            {
+                question: "Egy térkép méretaránya 1:50 000. Ha két város távolsága a térképen 4 cm, mennyi a valós távolságuk?",
+                options: { a: "200 m", b: "2 km", c: "20 km" },
+                correct: "b",
+                explanation: "A valós távolság: 4 cm * 50 000 = 200 000 cm. Átváltva: 200 000 cm = 2000 méter = 2 km."
+            },
+            {
+                question: "A szobád tervrajza 1:50 méretarányú. A szoba a rajzon 8 cm széles. Milyen széles a szobád a valóságban?",
+                options: { a: "40 cm", b: "4 méter", c: "40 méter" },
+                correct: "b",
+                explanation: "A valós szélesség: 8 cm * 50 = 400 cm. Átváltva: 400 cm = 4 méter."
+            },
+            {
+                question: "Mire használják a hasonlóságot a mindennapi életben?",
+                options: { a: "Csak elméleti matematikai problémák megoldására.", b: "Tervezésre, térképészetre, és közvetett mérésekre.", c: "Csak az idő mérésére." },
+                correct: "b",
+                explanation: "A hasonlóság egy nagyon gyakorlatias fogalom, amit a mérnökök (tervrajzok), térképészek, fotósok, és sok más szakember használ a mindennapi munkája során, például méretezésre és nehezen mérhető távolságok meghatározására."
+            },
+            {
+                question: "Egy 10 méter magas zászlórúd árnyéka 8 méter. Egy mellette álló fiú magassága 1.5 méter. Milyen hosszú a fiú árnyéka?",
+                options: { a: "1.2 méter", b: "1.875 méter", c: "2 méter" },
+                correct: "a",
+                explanation: "Legyen x a fiú árnyéka. Az aránypár: fiú árnyéka / zászlórúd árnyéka = fiú magassága / zászlórúd magassága. x/8 = 1.5/10. Ebből x = 8 * (1.5/10) = 8 * 0.15 = 1.2 méter."
+            },
+            {
+                question: "Mi a 'közvetett mérés' lényege?",
+                options: { a: "Megkérdezünk valakit, aki tudja a méretet.", b: "Egy könnyen mérhető adat (pl. árnyék) és egy arány segítségével kiszámolunk egy nehezen mérhető adatot (pl. magasság).", c: "Egy nagyon hosszú mérőszalaggal mérünk." },
+                correct: "b",
+                explanation: "A közvetett mérés során nem közvetlenül a mérendő dolgot (pl. egy torony magasságát) mérjük le, hanem más, könnyebben mérhető adatokból (pl. egy pózna és a két árnyék hossza) számítjuk ki a hasonlóság segítségével."
+            },
+            {
+                question: "A telefonod képernyőjén egy 3 cm magas kép van egy 180 cm magas emberről. Mi a kicsinyítés aránya?",
+                options: { a: "1:3", b: "1:60", c: "1:180" },
+                correct: "b",
+                explanation: "A kicsinyítés aránya a kép mérete osztva a valós mérettel. Arány = 3 cm / 180 cm = 1/60. Tehát a méretarány 1:60."
+            },
+            {
+                question: "Egy modellautó 1:18 méretarányú. Ha a modell 10 cm magas, milyen magas az igazi autó?",
+                options: { a: "1.8 méter", b: "18 méter", c: "18 cm" },
+                correct: "a",
+                explanation: "Az igazi autó magassága: 10 cm * 18 = 180 cm. Átváltva: 180 cm = 1.8 méter."
+            },
+            {
+                question: "Egy fotón egy épület 10 cm magas. Tudjuk, hogy az épület a valóságban 20 méter magas. Mekkora a fotó méretaránya?",
+                options: { a: "1:2", b: "1:20", c: "1:200" },
+                correct: "c",
+                explanation: "Először váltsuk át a mértékegységeket: 20 méter = 2000 cm. A méretarány: kép mérete / valós méret = 10 cm / 2000 cm = 1/200. Tehát a méretarány 1:200."
+            },
+            {
+                question: "Melyik állítás igaz a tükörrel való magasságmérésre?",
+                options: { a: "A beesési szög és a visszaverődési szög egyenlősége hozza létre a hasonló háromszögeket.", b: "A tükörnek domborúnak kell lennie.", c: "A módszer csak éjszaka működik." },
+                correct: "a",
+                explanation: "A tükrös mérés a fényvisszaverődés törvényén alapul. Mivel a beesési szög egyenlő a visszaverődési szöggel, két hasonló derékszögű háromszög jön létre, amelyek segítségével számolni tudunk."
+            },
+            {
+                question: "Egy 1.6 méter magas lány 2 méterre áll egy tükörtől, és látja benne egy 10 méterre lévő fa csúcsát. Milyen magas a fa?",
+                options: { a: "12.5 méter", b: "5 méter", c: "8 méter" },
+                correct: "c",
+                explanation: "Felírható az arány: fa magassága / lány magassága = fa távolsága a tükörtől / lány távolsága a tükörtől. x / 1.6 = 10 / 2. Ebből x / 1.6 = 5, tehát x = 5 * 1.6 = 8 méter."
+            },
+            {
+                question: "Ha egy tervrajz méretaránya 1:100, akkor a tervrajzon szereplő terület hogyan aránylik a valós területhez?",
+                options: { a: "1:100", b: "1:200", c: "1:10 000" },
+                correct: "c",
+                explanation: "A területek aránya a hasonlóság arányának a négyzete. A hasonlóság (hossz) aránya 1:100. A területek aránya ezért 1² : 100² = 1 : 10 000."
+            },
+            {
+                question: "Egy 3 méter magas oszlop árnyéka 5 méter. Mekkora annak a toronynak az árnyéka, amelyik 30 méter magas?",
+                options: { a: "18 méter", b: "50 méter", c: "60 méter" },
+                correct: "b",
+                explanation: "A torony 10-szer magasabb az oszlopnál (30/3=10). Ezért az árnyéka is 10-szer hosszabb lesz: 5 méter * 10 = 50 méter."
+            },
+            {
+                question: "A valóságban 8 km hosszú utat egy térképen 4 cm-nek mérünk. Mi a térkép méretaránya?",
+                options: { a: "1:2", b: "1:20 000", c: "1:200 000" },
+                correct: "c",
+                explanation: "Váltsuk át a valós távolságot cm-re: 8 km = 8000 m = 800 000 cm. A méretarány: térkép / valóság = 4 cm / 800 000 cm = 1 / 200 000. Tehát 1:200 000."
+            },
+            {
+                question: "Egy fiú a kinyújtott karjában (60 cm) tart egy 30 cm-es vonalzót, amivel éppen kitakar egy 20 méter magas épületet. Milyen messze áll az épülettől?",
+                options: { a: "10 méter", b: "40 méter", c: "120 méter" },
+                correct: "b",
+                explanation: "Két hasonló háromszög jön létre. Az arány: épület magassága / vonalzó magassága = távolság az épülettől / kar hossza. Váltsunk méterbe: 20 m / 0.3 m = x / 0.6 m. Ebből x = (20/0.3) * 0.6 = 20 * 2 = 40 méter."
+            },
+            {
+                question: "Miért fontos, hogy az árnyékmérésnél a két tárgy ugyanabban az időpontban legyen mérve?",
+                options: { a: "Mert később a tárgyak elmozdulhatnak.", b: "Mert csak délelőtt lehet mérni.", c: "Mert a Nap mozgása miatt az árnyékok hossza és a szögek folyamatosan változnak." },
+                correct: "c",
+                explanation: "A mérés pontossága azon múlik, hogy a napsugarak beesési szöge a két mérésnél azonos legyen. Ez csak akkor teljesül, ha a méréseket egyszerre, vagy nagyon rövid időn belül végezzük el."
+            },
+            {
+                question: "Egy 1 méteres függőleges bot árnyéka 1.5 méter. Egy torony árnyéka 60 méter. Milyen magas a torony?",
+                options: { a: "40 méter", b: "60 méter", c: "90 méter" },
+                correct: "a",
+                explanation: "Az arány: torony magassága / bot magassága = torony árnyéka / bot árnyéka. x/1 = 60/1.5. Mivel 60/1.5 = 40, így x = 40 méter."
+            },
+            {
+                question: "Két város távolsága légvonalban 25 km. Mekkora ez a távolság egy 1:500 000 méretarányú térképen?",
+                options: { a: "5 cm", b: "50 cm", c: "2.5 cm" },
+                correct: "a",
+                explanation: "Váltsuk át a valós távolságot cm-re: 25 km = 25 000 m = 2 500 000 cm. A térképi távolság: 2 500 000 cm / 500 000 = 5 cm."
+            },
+            {
+                question: "Melyik hétköznapi eszköz működése alapul a hasonlóságon?",
+                options: { a: "Egy iránytű.", b: "Egy vetítőgép (projektor).", c: "Egy hőmérő." },
+                correct: "b",
+                explanation: "A vetítőgép (projektor) egy kis képet (pl. egy dián) nagyít fel a vászonra, miközben a kép arányai nem változnak. Ez a hasonlóság elvén működik."
+            },
+            {
+                question: "Ha egy fényképet a duplájára nagyítunk, hogyan változik a rajta lévő terület?",
+                options: { a: "Duplájára nő.", b: "Nem változik.", c: "Négyszeresére nő." },
+                correct: "c",
+                explanation: "A nagyítás aránya (hasonlósági arány) k=2. A területek aránya a hasonlóság arányának a négyzete, tehát k² = 2² = 4. A terület négyszeresére nő."
+            },
+            {
+                question: "Egy szoba alaprajzán a 4 méteres fal 8 cm-es. Mi a tervrajz méretaránya?",
+                options: { a: "1:2", b: "1:50", c: "1:500" },
+                correct: "b",
+                explanation: "Váltsuk át a valós méretet cm-re: 4 méter = 400 cm. A méretarány: rajz / valóság = 8 cm / 400 cm = 1/50. Tehát a méretarány 1:50."
+            },
+            {
+                question: "Mikor ad PONTOS eredményt az árnyékkal való mérés?",
+                options: { a: "Ha a terep teljesen vízszintes és a tárgyak függőlegesek.", b: "Ha fúj a szél.", c: "Ha a mérés délben történik." },
+                correct: "a",
+                explanation: "A módszer feltételezi, hogy tökéletes derékszögű háromszögeket mérünk. Ez csak akkor igaz, ha a talaj vízszintes, és a mért tárgyak (pózna, fa) pontosan függőlegesen állnak."
+            },
+            {
+                question: "Egy 18 méter magas épületet szeretnénk lerajzolni egy füzetbe. Az arányt 1:100-nak választjuk. Milyen magas lesz az épület a rajzon?",
+                options: { a: "1.8 cm", b: "18 cm", c: "180 cm" },
+                correct: "b",
+                explanation: "Váltsuk át a valós magasságot cm-re: 18 méter = 1800 cm. A rajz magassága: 1800 cm / 100 = 18 cm."
+            }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const checkBtns = document.querySelectorAll('.check-btn');
+        const pinInputs = document.querySelectorAll('.pin-code-input');
+        const resultContainers = document.querySelectorAll('.result-container');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">
+                            <label for="q${index}a">
+                                <input type="radio" name="question${index}" id="q${index}a" value="a">
+                                ${item.options.a}
+                            </label>
+                            <label for="q${index}b">
+                                <input type="radio" name="question${index}" id="q${index}b" value="b">
+                                ${item.options.b}
+                            </label>
+                            <label for="q${index}c">
+                                <input type="radio" name="question${index}" id="q${index}c" value="c">
+                                ${item.options.c}
+                            </label>
+                        </div>
+                        <div class="explanation" id="explanation-${index}">
+                            <strong>Magyarázat:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInputs[0].value; // Elég az elsőből olvasni, mert szinkronizáltak
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtns.forEach(btn => btn.disabled = true);
+            pinInputs.forEach(input => input.disabled = true);
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+
+                if (isMaster) {
+                    explanationDiv.style.display = 'block';
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('master-correct');
+                } else {
+                    explanationDiv.style.display = 'block';
+                }
+
+                if (selectedOption) {
+                    const selectedLabel = selectedOption.parentElement;
+                    if (selectedOption.value === item.correct) {
+                        score++;
+                        selectedLabel.classList.add('correct-answer', 'label-correct');
+                    } else {
+                        selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                        const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                        correctLabel.classList.add('correct-answer');
+                    }
+                } else if (isMaster) {
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('correct-answer');
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            const resultText = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            resultContainers.forEach(container => container.innerHTML = resultText);
+
+            if (isMaster) {
+                adminPanels.forEach(panel => panel.style.display = 'block');
+            }
+        }
+
+        // Eseménykezelők hozzáadása az összes vezérlőhöz
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        
+        checkBtns.forEach(btn => {
+            btn.addEventListener('click', checkAnswers);
+        });
+
+        pinInputs.forEach(input => {
+            // Enter gombos ellenőrzés
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+            // PIN mezők szinkronizálása
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

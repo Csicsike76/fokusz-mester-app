@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktív Digitális Tananyag - Fizika 6. Osztály</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f9;
+            --main-text-color: #333;
+            --nav-bg-color: #ffffff;
+            --nav-text-color: #4a5568;
+            --nav-hover-color: #00796b;
+            --nav-border-color: #e2e8f0;
+            --card-bg-color: #ffffff;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --formula-bg: #e0f2f1;
+            --formula-border: #b2dfdb;
+            --example-bg: #e3f2fd;
+            --example-border: #bbdefb;
+            --quiz-button-bg: #009688;
+            --quiz-button-hover-bg: #00796b;
+            --header-color: #004d40;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; margin: 0; background-color: var(--bg-color); color: var(--main-text-color); line-height: 1.6; }
+        .container { display: flex; max-width: 1600px; margin: 0 auto; }
+        #toc { width: 320px; flex-shrink: 0; background-color: var(--nav-bg-color); border-right: 1px solid var(--nav-border-color); padding: 2rem; height: 100vh; position: sticky; top: 0; overflow-y: auto; }
+        #toc h2 { font-size: 1.2rem; margin-top: 0; color: var(--header-color); border-bottom: 2px solid var(--header-color); padding-bottom: 0.5rem; }
+        #toc ul { list-style-type: none; padding: 0; margin: 0; }
+        #toc > ul > li { margin-bottom: 1.2rem; }
+        #toc ul li a { text-decoration: none; color: var(--nav-text-color); display: block; padding: 0.2rem 0; transition: color 0.2s; font-weight: 500; }
+        #toc > ul > li > a { font-weight: 700; font-size: 1.1em; color: var(--header-color); }
+        #toc ul li ul { padding-left: 1rem; margin-top: 0.5rem; border-left: 2px solid var(--nav-border-color); }
+        #toc ul li ul li a { font-size: 0.95em; }
+        #toc ul li a:hover { color: var(--nav-hover-color); }
+        main { flex-grow: 1; padding: 2rem 3rem; }
+        section { margin-bottom: 3rem; padding-top: 2rem; margin-top: -2rem; }
+        main > h1 { text-align: center; font-size: 2.5rem; color: var(--header-color); margin-bottom: 3rem; }
+        section > h2 { font-size: 2rem; color: var(--header-color); border-bottom: 2px solid var(--quiz-button-bg); padding-bottom: 0.5rem; margin-bottom: 2rem; }
+        .card { background-color: var(--card-bg-color); border-radius: 8px; box-shadow: var(--card-shadow); padding: 1.5rem; margin-bottom: 2rem; scroll-margin-top: 20px;}
+        .card h3 { margin-top: 0; font-size: 1.4rem; }
+        .formula, .example { margin-top: 1rem; padding: 1rem; border-radius: 6px; }
+        .formula { background-color: var(--formula-bg); border: 1px solid var(--formula-border); font-family: 'Courier New', Courier, monospace; font-size: 1.1em; white-space: pre-wrap; word-wrap: break-word; }
+        .formula b, .example b { display: block; margin-bottom: 0.5rem; font-size: 0.9em; text-transform: uppercase; color: #555; }
+        .example { background-color: var(--example-bg); border: 1px solid var(--example-border); }
+        .quiz-button { display: inline-block; margin-top: 1.5rem; padding: 0.6rem 1.2rem; background-color: var(--quiz-button-bg); color: white; text-align: center; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s; }
+        .quiz-button:hover { background-color: var(--quiz-button-hover-bg); }
+        @media (max-width: 1024px) {
+            .container { flex-direction: column; }
+            #toc { position: static; width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--nav-border-color); padding: 1rem; }
+            main { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav id="toc">
+            <h2>Tartalomjegyzék</h2>
+            <ul>
+                <li>
+                    <a href="#fejezet1">1. Alapfogalmak a fizikában</a>
+                    <ul>
+                        <li><a href="#fejezet1-1">Fizikai mennyiségek, mértékegységek</a></li>
+                        <li><a href="#fejezet1-2">Hosszúság, terület, térfogat, idő mérése</a></li>
+                        <li><a href="#fejezet1-3">Mérési hibák, hibaforrások</a></li>
+                        <li><a href="#fejezet1-4">Terület és térfogat közvetett mérése</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#fejezet2">2. Mechanikai jelenségek</a>
+                    <ul>
+                        <li><a href="#fejezet2-1">Vonatkoztatási rendszer</a></li>
+                        <li><a href="#fejezet2-2">Pálya</a></li>
+                        <li><a href="#fejezet2-3">Egyenletes mozgás</a></li>
+                        <li><a href="#fejezet2-4">Megtett távolság, időtartam</a></li>
+                        <li><a href="#fejezet2-5">Átlagsebesség</a></li>
+                        <li><a href="#fejezet2-6">Gyorsulás</a></li>
+                        <li><a href="#fejezet2-7">Egyenletesen változó mozgás</a></li>
+                        <li><a href="#fejezet2-8">Tehetetlenség</a></li>
+                        <li><a href="#fejezet2-9">Tömeg</a></li>
+                        <li><a href="#fejezet2-10">Tömegmérés</a></li>
+                        <li><a href="#fejezet2-11">Sűrűség</a></li>
+                        <li><a href="#fejezet2-12">Kölcsönhatások hatásai</a></li>
+                        <li><a href="#fejezet2-13">Erő</a></li>
+                        <li><a href="#fejezet2-14">Súly</a></li>
+                        <li><a href="#fejezet2-15">Erőmérés, dinamométer</a></li>
+                        <li><a href="#fejezet2-16">Súrlódási erő</a></li>
+                        <li><a href="#fejezet2-17">Rugalmassági erő</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#fejezet3">3. Hőjelenségek</a>
+                     <ul>
+                        <li><a href="#fejezet3-1">Hőállapot, hőmérséklet</a></li>
+                        <li><a href="#fejezet3-2">Hőmérsékleti skálák</a></li>
+                        <li><a href="#fejezet3-3">Hőátadás</a></li>
+                        <li><a href="#fejezet3-4">Hőtágulás</a></li>
+                        <li><a href="#fejezet3-5">Halmazállapot-változások</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#fejezet4">4. Elektromos és mágneses jelenségek</a>
+                     <ul>
+                        <li><a href="#fejezet4-1">Mágneses kölcsönhatások</a></li>
+                        <li><a href="#fejezet4-2">Elektromos állapot, töltés</a></li>
+                        <li><a href="#fejezet4-3">Egyszerű áramkörök</a></li>
+                        <li><a href="#fejezet4-4">Soros és párhuzamos kapcsolás</a></li>
+                    </ul>
+                </li>
+                 <li>
+                    <a href="#fejezet5">5. Optikai jelenségek</a>
+                     <ul>
+                        <li><a href="#fejezet5-1">Fényforrások</a></li>
+                        <li><a href="#fejezet5-2">Átlátszó, áttetsző, átlátszatlan testek</a></li>
+                        <li><a href="#fejezet5-3">Fény terjedése, sebessége</a></li>
+                        <li><a href="#fejezet5-4">Árnyék és félárnyék</a></li>
+                        <li><a href="#fejezet5-5">Fényvisszaverődés és fénytörés</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <h1>Fizika Segédlet - 6. Osztály</h1>
+
+            <section id="fejezet1">
+                <h2>1. Alapfogalmak a fizikában</h2>
+                
+                <div class="card" id="fejezet1-1">
+                    <h3>Fizikai mennyiségek, mértékegységek, többszörösök és törtrészek</h3>
+                    <p>A fizikai mennyiségek a testek mérhető tulajdonságai. Mindig egy számértékből és egy mértékegységből állnak. A mértékegységeknek vannak többszörösei (pl. kilo-, mega-) és törtrészei (pl. centi-, milli-).</p>
+                    <a href="{{ url_for('kviz_mennyisegek_mertekegysegek') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+
+                <div class="card" id="fejezet1-2">
+                    <h3>Hosszúság, terület, térfogat és időtartam közvetlen mérése</h3>
+                    <p>A közvetlen mérés során a mérendő mennyiséget egy mérőeszközön lévő skálához hasonlítjuk, és az értéket közvetlenül leolvassuk.</p>
+                    <a href="{{ url_for('kviz_kozvetlen_meres') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+
+                <div class="card" id="fejezet1-3">
+                    <h3>Mérési hibák, hibaforrások, hibaszámítás</h3>
+                    <p>A mérés sosem tökéletesen pontos. A hiba lehet a mérőeszköz, a mérő személy vagy a környezet pontatlansága. Több mérés átlagolásával csökkenthetjük a véletlen hibák hatását.</p>
+                    <a href="{{ url_for('kviz_meresi_hibak') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+
+                <div class="card" id="fejezet1-4">
+                    <h3>Terület és térfogat közvetett mérése</h3>
+                    <p>A közvetett mérés során más, könnyebben mérhető mennyiségekből (pl. hosszúság) számítjuk ki a keresett értéket egy matematikai képlet segítségével.</p>
+                    <a href="{{ url_for('kviz_kozvetett_meres') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+            
+            <section id="fejezet2">
+                <h2>2. Mechanikai jelenségek</h2>
+                <div class="card" id="fejezet2-1">
+                    <h3>Test, mozgó test, viszonyítási pont, vonatkoztatási rendszer</h3>
+                    <p>A testek mozgása vagy nyugalma mindig egy másik testhez (vonatkoztatási rendszerhez) viszonyítva értelmezhető. A mozgás relatív.</p>
+                    <a href="{{ url_for('kviz_vonatkoztatasi_rendszer') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-2">
+                    <h3>Mozgás és nyugalom, pálya</h3>
+                    <p>A mozgó test által leírt vonal a test pályája. Ha egy test helyzete nem változik a vonatkoztatási rendszerhez képest, akkor nyugalomban van.</p>
+                    <a href="{{ url_for('kviz_mozgas_palya') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-3">
+                    <h3>Egyenes vonalú egyenletes mozgás</h3>
+                    <p>Egy test egyenes vonalú egyenletes mozgást végez, ha pályája egyenes, és egyenlő időközök alatt egyenlő utakat tesz meg. Sebessége állandó.</p>
+                    <a href="{{ url_for('kviz_egyenletes_mozgas') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-4">
+                    <h3>Megtett távolság, a mozgás időtartama</h3>
+                    <p>A megtett távolság (út) a pálya hossza, amit a test egy adott időtartam alatt bejár. Az időtartam a mozgás kezdete és vége között eltelt idő.</p>
+                    <a href="{{ url_for('kviz_ut_ido') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-5">
+                    <h3>Átlagsebesség, mértékegységek</h3>
+                    <p>Az átlagsebesség a teljes megtett út és az ehhez szükséges teljes idő hányadosa. Képlete: v = s / t.</p>
+                    <a href="{{ url_for('kviz_atlagsebesseg') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-6">
+                    <h3>Átlagos gyorsulás</h3>
+                    <p>A gyorsulás megmutatja, hogy a test sebessége mennyit változik egységnyi idő alatt. Jele 'a'.</p>
+                    <a href="{{ url_for('kviz_gyorsulas') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-7">
+                    <h3>Egyenes vonalú egyenletesen változó mozgás</h3>
+                    <p>Ilyen mozgást végez a test, ha sebessége egyenlő időközök alatt ugyanannyival változik. A gyorsulása állandó.</p>
+                    <a href="{{ url_for('kviz_valtozo_mozgas') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-8">
+                    <h3>A tehetetlenség, a testek általános tulajdonsága</h3>
+                    <p>A tehetetlenség a testek azon tulajdonsága, hogy mozgásállapotuk megváltoztatásával szemben ellenállást fejtenek ki.</p>
+                    <a href="{{ url_for('kviz_tehetetlenseg') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-9">
+                    <h3>A tömeg, a tehetetlenség mértéke</h3>
+                    <p>A tehetetlenség mértéke a tömeg. Minél nagyobb egy test tömege, annál nagyobb a tehetetlensége. Jele 'm', mértékegysége a kg.</p>
+                    <a href="{{ url_for('kviz_tomeg_merteke') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet2-10">
+                    <h3>Tömegmérés</h3>
+                    <p>A testek tömegét mérleggel mérjük, összehasonlítva ismert tömegű testekkel (súlyokkal).</p>
+                    <a href="{{ url_for('kviz_tomegmeres') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-11">
+                    <h3>Sűrűség</h3>
+                    <p>A sűrűség egy anyagra jellemző fizikai mennyiség, amely megmutatja az anyag egységnyi térfogatának tömegét. Képlete: ρ = m / V.</p>
+                    <a href="{{ url_for('kviz_suruseg') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet2-12">
+                    <h3>A kölcsönhatások hatásai</h3>
+                    <p>A kölcsönhatások megváltoztathatják a testek mozgásállapotát (gyorsíthatják, lassíthatják, elfordíthatják őket) vagy alakját (alakváltozás).</p>
+                    <a href="{{ url_for('kviz_kolcsonhatas_hatasai') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet2-13">
+                    <h3>Az erő, a kölcsönhatás mértéke</h3>
+                    <p>A kölcsönhatás erősségét az erő nevű fizikai mennyiséggel jellemezzük. Az erőnek nagysága és iránya is van, ezért vektormennyiség.</p>
+                    <a href="{{ url_for('kviz_ero_merteke') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet2-14">
+                    <h3>A súly</h3>
+                    <p>A súly az az erő, amellyel a test a Földet vonzza (gravitációs erő). A test tömegétől és a gravitációs gyorsulástól függ.</p>
+                    <a href="{{ url_for('kviz_suly') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-15">
+                    <h3>Az erők mérése, a dinamométer</h3>
+                    <p>Az erőt dinamométerrel (rugós erőmérővel) mérjük. A mérés a rugó megnyúlásán alapul, ami arányos a rá ható erővel.</p>
+                    <a href="{{ url_for('kviz_eromeres') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-16">
+                    <h3>A csúszó súrlódási erő</h3>
+                    <p>A csúszó súrlódási erő egy mozgást akadályozó erő, amely két, egymáson elcsúszó felület között lép fel. Iránya mindig a mozgással ellentétes.</p>
+                    <a href="{{ url_for('kviz_surlodas') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet2-17">
+                    <h3>A rugalmassági erő</h3>
+                    <p>A rugalmas erő egy rugalmas test (pl. rugó) alakváltozása során lép fel, és igyekszik visszaállítani az eredeti alakot. Nagysága arányos a megnyúlással.</p>
+                    <a href="{{ url_for('kviz_rugalmassagi_ero') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+            
+            <section id="fejezet3">
+                <h2>3. Hőjelenségek</h2>
+                 <div class="card" id="fejezet3-1">
+                    <h3>Hőállapot, hőmérséklet, termikus érintkezés</h3>
+                    <p>A hőmérséklet a testek hőállapotát jellemző fizikai mennyiség. Két különböző hőmérsékletű test érintkezésekor hőcsere történik, amíg a hőmérsékletük ki nem egyenlítődik (hőegyensúly).</p>
+                    <a href="{{ url_for('kviz_hoallapot_homerseklet') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet3-2">
+                    <h3>Hőmérsékleti skálák</h3>
+                    <p>A hőmérséklet mérésére különböző skálákat használunk. A mindennapi életben a Celsius-skála, a tudományban a Kelvin-skála a legelterjedtebb.</p>
+                    <a href="{{ url_for('kviz_homersekleti_skalak') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet3-3">
+                    <h3>A hőállapot megváltoztatása, hőátadás</h3>
+                    <p>Egy test hőállapotát hőátadással (melegítéssel vagy hűtéssel) lehet megváltoztatni.</p>
+                    <a href="{{ url_for('kviz_hoallapot_valtozas') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet3-4">
+                    <h3>Hőtágulás, összehúzódás</h3>
+                    <p>A legtöbb anyag melegítés hatására kitágul, hűtés hatására összehúzódik. Ezt a jelenséget hőtágulásnak nevezzük.</p>
+                    <a href="{{ url_for('kviz_hotagulas') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet3-5">
+                    <h3>Halmazállapot-változások</h3>
+                    <p>Az anyagok hőmérséklet-változás hatására halmazállapotot válthatnak. A főbb folyamatok: olvadás, fagyás, párolgás, lecsapódás, szublimáció.</p>
+                    <a href="{{ url_for('kviz_halmazallapot_valtozasok') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+            
+            <section id="fejezet4">
+                <h2>4. Elektromos és mágneses jelenségek</h2>
+                 <div class="card" id="fejezet4-1">
+                    <h3>Mágnesek, mágneses kölcsönhatások, mágneses sarkok</h3>
+                    <p>Minden mágnesnek két pólusa van: északi és déli. Az azonos pólusok taszítják, a különbözőek vonzzák egymást.</p>
+                    <a href="{{ url_for('kviz_magneses_kolcsonhatasok') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet4-2">
+                    <h3>A testek elektromozásának a jelensége. Az elektromos töltés</h3>
+                    <p>Dörzsöléssel a testek elektromos állapotba hozhatók. Kétféle töltés létezik: pozitív és negatív. Az azonos töltések taszítják, a különbözőek vonzzák egymást.</p>
+                    <a href="{{ url_for('kviz_elektromos_töltes') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet4-3">
+                    <h3>Egyszerű elektromos áramkörök</h3>
+                    <p>Az elektromos áram a töltéssel rendelkező részecskék rendezett áramlása. Egy egyszerű áramkör részei: áramforrás, fogyasztó, vezeték és kapcsoló.</p>
+                    <a href="{{ url_for('kviz_egyszeru_aramkor') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet4-4">
+                    <h3>Az égők soros és párhuzamos kapcsolása</h3>
+                    <p><b>Soros kapcsolásnál</b> a fogyasztók egymás után helyezkednek el. Ha egy kiesik, a többi sem működik. <b>Párhuzamos kapcsolásnál</b> a fogyasztók külön ágakon vannak. Ha egy kiesik, a többi tovább működik.</p>
+                    <a href="{{ url_for('kviz_soros_parhuzamos') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+            
+            <section id="fejezet5">
+                <h2>5. Optikai jelenségek</h2>
+                 <div class="card" id="fejezet5-1">
+                    <h3>Fényforrások</h3>
+                    <p>A fényforrások olyan testek, amelyek fényt bocsátanak ki. Lehetnek természetesek (pl. Nap) vagy mesterségesek (pl. lámpa). A megvilágított testek a rájuk eső fényt verik vissza.</p>
+                    <a href="{{ url_for('kviz_fenyforrasok') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet5-2">
+                    <h3>Átlátszó, áttetsző, átlátszatlan testek</h3>
+                    <p>Az átlátszó testeken a fény áthalad és élesen látunk rajtuk keresztül. Az áttetsző testeken a fény áthalad, de szóródik. Az átlátszatlan testek nem engedik át a fényt.</p>
+                    <a href="{{ url_for('kviz_atlatszo_testek') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet5-3">
+                    <h3>A fény egyenesvonalú terjedése. A fény sebessége</h3>
+                    <p>A fény homogén közegben (pl. levegő, vákuum) egyenes vonalban terjed. Sebessége a legnagyobb ismert sebesség a természetben, kb. 300 000 km/s.</p>
+                    <a href="{{ url_for('kviz_feny_terjedese') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                 <div class="card" id="fejezet5-4">
+                    <h3>Az árnyék és a félárnyék</h3>
+                    <p>Amikor egy átlátszatlan test a fény útjába kerül, mögötte árnyék keletkezik. Ha a fényforrás kiterjedt (nem pontszerű), az éles árnyék mellett egy elmosódottabb félárnyék is létrejöhet.</p>
+                    <a href="{{ url_for('kviz_arnyek') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                <div class="card" id="fejezet5-5">
+                    <h3>Fényvisszaverődés és fénytörés</h3>
+                    <p><b>Fényvisszaverődés:</b> Amikor a fény egy felületről visszaverődik (pl. tükör). A beesési szög egyenlő a visszaverődési szöggel. <b>Fénytörés:</b> Amikor a fény egy másik közegbe lépve megváltoztatja haladási irányát (pl. szívószál a vízben).</p>
+                    <a href="{{ url_for('kviz_fenyvisszaverodes_fenytores') }}" target="_blank" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

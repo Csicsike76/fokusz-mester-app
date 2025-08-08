@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 23. hét: A "fekete doboz" probléma</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #e3f2fd;
+            --example-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .prompt-example {
+            background-color: var(--example-bg);
+            border: 1px dashed var(--example-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>Gyakorlati Műhely</h1>
+            <p>23. hét: A "fekete doboz" probléma</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A műhely végére megtapasztalod, mit jelent a "fekete doboz" probléma, és elsajátítasz egy hatékony promptolási technikát ("gondolkodj hangosan"), amellyel rábírhatod az MI-t, hogy fedje fel a döntései mögött rejlő logikai láncot. Képes leszel kritikusan értékelni az MI által adott érvelést.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Szükséges Eszközök</h2>
+                <ul>
+                    <li>Bármelyik <strong>szöveggeneráló MI</strong> (Copilot, Gemini, ChatGPT).</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. Bevezető: A Varázsdoboz Titka</h2>
+                <p>Képzeld el az MI-t egy varázsdobozként! Bedobsz felül egy kérdést (bemenet), és alul kiesik egy válasz (kimenet). De hogy mi történik a dobozon belül, az rejtély. A modern MI-k, különösen a neurális hálók, olyan bonyolultak, hogy még az alkotóik sem mindig tudják pontosan, miért hoznak egy adott döntést. Ezt nevezzük a "fekete doboz" problémának. Ma megtanuljuk, hogyan kérhetünk az MI-től egy kulcsot, amivel legalább egy kicsit bepillanthatunk a dobozba.</p>
+            </section>
+
+             <section class="workshop-section">
+                <h2>4. Kulcsfogalmak</h2>
+                <ul>
+                    <li><strong>Fekete Doboz (Black Box):</strong> Olyan rendszer, amelynek a belső működése ismeretlen vagy érthetetlen a felhasználó számára. Látjuk a bemenetet és a kimenetet, de a kettő közötti folyamat rejtve marad.</li>
+                    <li><strong>Magyarázható MI (Explainable AI - XAI):</strong> Az MI-kutatás azon területe, amely olyan módszerekkel foglalkozik, amelyekkel az MI-modellek döntései érthetővé és ember által értelmezhetővé tehetők.</li>
+                    <li><strong>Következtetési Lánc (Chain of Thought):</strong> Az a folyamat, ahogy az MI lépésről lépésre eljut egy következtetésig. A "gondolkodj hangosan" prompt ezt a láncot próbálja meg láthatóvá tenni.</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <h2>5. Lépésről-lépésre Feladatok</h2>
+                <p><strong>A mai kísérletünk:</strong> Rávesszük az MI-t, hogy ne csak tanácsot adjon, hanem érveljen is mellette.</p>
+
+                <div class="task-card">
+                    <h3>1. Feladat: A "Fekete Doboz" Kérdés</h3>
+                    <p>Tegyünk fel az MI-nek egy összetett, nem egyértelmű kérdést, ami érvelést igényel! A cél, hogy egy rövid, direkt választ kapjunk először.</p>
+                    <div class="prompt-example">Két tantárgy között vacillálok a jövőmet illetően: informatika és biológia. Melyiket válasszam, ha stabil, jól fizető állást szeretnék? Adj egy rövid, direkt választ, melyik a jobb választás!</div>
+                    <p><strong>Megfigyelés:</strong> Az MI valószínűleg választani fog egyet a kettő közül, és ad egy nagyon rövid indoklást. Ez a "fekete doboz" kimenete. Tudjuk a választ, de nem tudjuk, miért.</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: Bepillantás a Dobozba - "Gondolkodj hangosan!"</h3>
+                    <p>Most jön a trükk! Kérjük meg az MI-t, hogy fedje fel a gondolatmenetét!</p>
+                    <div class="prompt-example">Rendben. Most pedig 'gondolkodj hangosan'! Vezesd le lépésről lépésre, milyen szempontokat vettél figyelembe (pl. piaci trendek, kezdő fizetések, jövőbeli lehetőségek), és ezek alapján hogyan jutottál el az előző következtetésedig.</div>
+                    <p><strong>Megfigyelés:</strong> Figyeld meg, hogyan bontja le az MI a problémát! Valószínűleg összehasonlítja a két területet különböző szempontok szerint. Most már nem csak egy választ látsz, hanem egy érvelési folyamatot.</p>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: Az Érvelés Elemzése</h3>
+                    <p>Most, hogy látod a "gondolatmenetet", elemezd kritikusan! Ne fogadd el automatikusan!</p>
+                    <ol>
+                        <li><strong>Logikusak a lépések?</strong> Érthető, hogyan jutott el A-ból B-be?</li>
+                        <li><strong>Milyen forrásokra támaszkodhatott?</strong> (Még ha nem is írja ki, gondold végig: valószínűleg álláshirdetési oldalak, gazdasági cikkek adataiból dolgozik.)</li>
+                        <li><strong>Milyen fontos szempontot hagyott ki?</strong> Említette például a két területhez szükséges különböző készségeket? Vagy a munka-magánélet egyensúlyát?</li>
+                    </ol>
+                </div>
+
+                <div class="task-card">
+                    <h3>4. Feladat: A Fekete Doboz "Megfordítása"</h3>
+                    <p>Teszteljük le, hogy az érvelése mennyire rugalmas! Kérjük meg, hogy érveljen az ellenkezője mellett!</p>
+                    <div class="prompt-example">Érdekes érvelés. Most pedig viselkedj úgy, mint egy másik karrier-tanácsadó, aki szerint a biológia a jobb választás a jövőre nézve! Milyen érveket hoznál fel amellett?</div>
+                    <p><strong>Megfigyelés:</strong> Egy jó MI képes lesz erre, és rávilágít a másik oldal előnyeire is (pl. biotechnológia, egészségügy növekedése). Ez megmutatja, hogy a "fekete doboz" nem egyetlen igazságot tartalmaz, hanem a rendelkezésére álló adatok alapján képes különböző, logikusnak tűnő érveléseket felépíteni.</p>
+                </div>
+            </section>
+            
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>6. Kritikai Gondolkodás Sarok</h2>
+                    <p>Láttuk, hogy az MI döntései mögött van egyfajta logika, de vajon ez elég?</p>
+                    <ul>
+                        <li><strong>Amikor a tét nagy:</strong> A tantárgyválasztás fontos, de mi a helyzet, ha egy MI egy orvosi diagnózisról, egy hitelkérelem elutasításáról vagy egy bírósági ítéletben hoz javaslatot? Miért elengedhetetlenül fontos ezekben az esetekben, hogy a döntés ne egy "fekete dobozból" jöjjön, hanem minden lépése átlátható és megkérdőjelezhető legyen?</li>
+                        <li><strong>A "logikusnak tűnő" csapdája:</strong> Az MI érvelése logikusnak tűnhet, de mi van, ha az alapul szolgáló adatok torzak (ahogy a 19. héten tanultuk)? Hogyan vezethet egy látszólag tökéletes érvelés is teljesen rossz vagy igazságtalan következtetésre?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>7. Önálló Kihívás: A Te Személyes Dilemmád Elemzése!</h2>
+                    <p>Most alkalmazd a tanult technikát egy saját, személyes dilemmádra!</p>
+                    <p><strong>Válassz egyet az alábbi, összetett kérdések közül (vagy találj ki sajátot):</strong></p>
+                    <ul>
+                        <li>"Melyik a jobb választás egy diáknak nyári szünetre: a pénzkeresés egy diákmunkával, vagy egy új készség elsajátítása egy online kurzuson?"</li>
+                        <li>"Jobb ötlet egy új telefont venni, vagy a régi, még működő telefont megtartani és a pénzt másra költeni?"</li>
+                    </ul>
+                    <p><strong>A feladatod:</strong></p>
+                    <ol>
+                        <li>Tedd fel a kérdést az MI-nek, és kérj egy <strong>direkt választ</strong>!</li>
+                        <li>Ezután kérd meg, hogy <strong>"gondolkodjon hangosan"</strong>, és vezesse le az érvelését lépésről lépésre.</li>
+                        <li>Végül írj egy rövid, 2-3 mondatos reflexiót: <strong>Segített neked az MI érvelése a döntésben? Meggyőző volt? Milyen fontos szempontot hagyott ki, ami neked személyesen fontos?</strong></li>
+                    </ol>
+                    <p>Mentsd le a beszélgetésedet és a reflexiódat! Ez a gyakorlat segít, hogy az MI-t ne válasz-automatának, hanem egy gondolkodó partnernek tekintsd.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

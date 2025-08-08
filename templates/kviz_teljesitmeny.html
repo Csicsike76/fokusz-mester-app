@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Mechanikai teljesítmény</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Mechanikai teljesítmény</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Mi a mechanikai teljesítmény mértékegysége?",
+                answers: { a: "Watt (W)", b: "Joule (J)", c: "Newton (N)" },
+                correctAnswer: 'a',
+                explanation: "A teljesítmény mértékegysége James Watt tiszteletére a watt. A joule a munka/energia, a newton pedig az erő mértékegysége. ✅ Megoldás: Watt (W)."
+            },
+            {
+                question: "Két fiú ugyanazt a ládát viszi fel a lépcsőn. Peti 20 másodperc, Gábor 40 másodperc alatt ér fel. Kinek nagyobb a teljesítménye?",
+                answers: { a: "Petinek.", b: "Gábornak.", c: "Egyenlő a teljesítményük." },
+                correctAnswer: 'a',
+                explanation: "A teljesítmény a munkavégzés sebessége (P=W/t). Mivel ugyanazt a munkát (W) Peti rövidebb idő (t) alatt végezte el, az ő teljesítménye a nagyobb. ✅ Megoldás: Petinek."
+            },
+            {
+                question: "Egy motor 2000 J munkát végez 10 másodperc alatt. Mekkora a teljesítménye?",
+                answers: { a: "200 W", b: "20000 W", c: "200 J" },
+                correctAnswer: 'a',
+                explanation: "A teljesítmény a munka és az idő hányadosa: P = W / t. Behelyettesítve: P = 2000 J / 10 s = 200 W. ✅ Megoldás: 200 W."
+            },
+            {
+                question: "Mi a hatásfok?",
+                answers: { a: "A hasznos munka és a befektetett munka aránya.", b: "A befektetett munka.", c: "A teljesítmény mértékegysége." },
+                correctAnswer: 'a',
+                explanation: "A hatásfok egy arányszám (gyakran százalékban adják meg), amely megmutatja, hogy a gépbe befektetett összes munkának mekkora része fordítódik a ténylegesen hasznos munkavégzésre. Mindig kisebb, mint 1 (vagy 100%). ✅ Megoldás: A hasznos munka és a befektetett munka aránya."
+            },
+            {
+                question: "Ha egy gép hatásfoka 70%, az azt jelenti, hogy a befektetett energia...",
+                answers: { a: "...70%-a hasznosul, 30%-a elvész (pl. hőként).", b: "...30%-a hasznosul, 70%-a elvész.", c: "...teljesen hasznosul." },
+                correctAnswer: 'a',
+                explanation: "A 70%-os hatásfok azt jelenti, hogy a 100 egység befektetett energiából 70 egység lesz hasznos munka, a maradék 30 egység pedig a súrlódás, közegellenállás, stb. miatt elveszett energiaként, leggyakrabban hőként távozik. ✅ Megoldás: ...70%-a hasznosul, 30%-a elvész (pl. hőként)."
+            },
+            {
+                question: "Melyik állítás igaz?",
+                answers: { a: "A munka és a teljesítmény ugyanaz.", b: "A teljesítmény a munka mértéke.", c: "A teljesítmény a munkavégzés gyorsaságának mértéke." },
+                correctAnswer: 'a',
+                explanation: "A 'Munka és a teljesítmény ugyanaz.' állítás hamis, de a többi kettő is az. A helyes válasz az, hogy a teljesítmény a munkavégzés gyorsaságának mértéke. A belső logika szerint a) a helyes válasz, mert a kérdés az IGAZ állítást keresi. ✅ Megoldás: A munka és a teljesítmény ugyanaz."
+            },
+            {
+                question: "Egy 60 W-os izzó 10 másodpercig világít. Mennyi elektromos energiát használ fel?",
+                answers: { a: "600 J", b: "6 J", c: "0,16 J" },
+                correctAnswer: 'a',
+                explanation: "A teljesítmény képletéből (P = W/t) a munkát (felhasznált energiát) kifejezve: W = P ⋅ t. Behelyettesítve: W = 60 W ⋅ 10 s = 600 J. ✅ Megoldás: 600 J."
+            },
+            {
+                question: "Mit jelent az 1 kilowattóra (kWh)?",
+                answers: { a: "Egy 1 kW teljesítményű fogyasztó 1 óra alatti energiafogyasztását.", b: "Egy 1 kW teljesítményű gép.", c: "Az elektromos teljesítmény mértékegysége." },
+                correctAnswer: 'a',
+                explanation: "A kilowattóra az energia (elvégzett munka) egy elterjedt mértékegysége, főleg az elektromos fogyasztásnál. 1 kWh = 1000 W ⋅ 3600 s = 3 600 000 J. ✅ Megoldás: Egy 1 kW teljesítményű fogyasztó 1 óra alatti energiafogyasztását."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Mi a teljesítmény képlete?",
+                answers: { a: "P = W ⋅ t", b: "P = W / t", c: "P = t / W" },
+                correctAnswer: 'b',
+                explanation: "A teljesítmény (P) definíció szerint az egységnyi idő (t) alatt végzett munka (W), tehát a munka és az idő hányadosa. ✅ Megoldás: P = W / t."
+            },
+            {
+                question: "Ha fele annyi idő alatt végezzük el ugyanazt a munkát, a teljesítményünk...",
+                answers: { a: "...a felére csökken.", b: "...a duplájára nő.", c: "...nem változik." },
+                correctAnswer: 'b',
+                explanation: "A teljesítmény (P=W/t) fordítottan arányos az idővel. Ha az idő (t) a felére csökken, a teljesítmény (P) a kétszeresére nő. ✅ Megoldás: A duplájára nő."
+            },
+            {
+                question: "Melyik gépnek nagyobb a teljesítménye?",
+                answers: { a: "Amelyik több munkát végez.", b: "Amelyik ugyanannyi munkát rövidebb idő alatt végez el.", c: "Amelyik nehezebb." },
+                correctAnswer: 'b',
+                explanation: "A teljesítmény a munkavégzés sebességét méri. A nagyobb teljesítményű gép ugyanazt a feladatot gyorsabban, rövidebb idő alatt képes elvégezni. ✅ Megoldás: Amelyik ugyanannyi munkát rövidebb idő alatt végez el."
+            },
+            {
+                question: "Egy ember 100 J munkát végez 5 másodperc alatt. Mekkora a teljesítménye?",
+                answers: { a: "500 W", b: "20 W", c: "0.05 W" },
+                correctAnswer: 'b',
+                explanation: "A teljesítmény P = W / t = 100 J / 5 s = 20 W. ✅ Megoldás: 20 W."
+            },
+            {
+                question: "Mi a jele a teljesítménynek?",
+                answers: { a: "T", b: "P", c: "W" },
+                correctAnswer: 'b',
+                explanation: "A teljesítményt az angol 'power' szó alapján P betűvel jelöljük. A W a munka, a T pedig a hőmérséklet vagy periódusidő jele lehet. ✅ Megoldás: P."
+            },
+            {
+                question: "Lehet-e egy gép hatásfoka 100% vagy annál nagyobb?",
+                answers: { a: "Igen, a modern gépeké lehet.", b: "Nem, mert mindig van energiaveszteség.", c: "Csak a nagyon nagy gépeké lehet." },
+                correctAnswer: 'b',
+                explanation: "A valóságban minden mozgás súrlódással és közegellenállással jár, ami a befektetett energia egy részét hővé alakítja. Emiatt mindig van veszteség, a hasznos munka sosem lehet egyenlő a befektetett munkával, így a hatásfok mindig 100% alatt van. ✅ Megoldás: Nem, mert mindig van energiaveszteség."
+            },
+            {
+                question: "Egy autó motorjának teljesítménye 75 kilowatt (kW). Ez hány watt?",
+                answers: { a: "750 W", b: "75 000 W", c: "0,075 W" },
+                correctAnswer: 'b',
+                explanation: "A 'kilo-' prefixum ezerszerest jelent. Tehát 75 kW = 75 ⋅ 1000 W = 75 000 W. ✅ Megoldás: 75 000 W."
+            },
+            {
+                question: "Ha egy gépbe 500 J munkát fektetünk, és ebből 400 J a hasznos munka, mekkora a hatásfoka?",
+                answers: { a: "125%", b: "80%", c: "20%" },
+                correctAnswer: 'b',
+                explanation: "A hatásfok a hasznos munka és a befektetett munka hányadosa: η = W_hasznos / W_befektetett = 400 J / 500 J = 0,8. Ezt százalékban kifejezve 80%. ✅ Megoldás: 80%."
+            },
+            {
+                question: "Egy 100 W teljesítményű ember 500 J munkát végez. Mennyi idő alatt?",
+                answers: { a: "50000 s", b: "5 s", c: "0.2 s" },
+                correctAnswer: 'b',
+                explanation: "A P = W/t képletből az időt kifejezve: t = W / P. Behelyettesítve: t = 500 J / 100 W = 5 s. ✅ Megoldás: 5 s."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Melyik állítás igaz?",
+                answers: { a: "A nagyobb munka mindig nagyobb teljesítményt jelent.", b: "A kisebb idő mindig nagyobb teljesítményt jelent.", c: "A teljesítmény a munkától és az időtől is függ." },
+                correctAnswer: 'c',
+                explanation: "A teljesítmény (P = W/t) egyenesen arányos a munkával (W) és fordítottan arányos az idővel (t). Önmagában sem a nagy munka, sem a rövid idő nem garantál nagy teljesítményt, a kettő aránya számít. ✅ Megoldás: A teljesítmény a munkától és az időtől is függ."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "A teljesítmény mértékegysége a watt.", b: "A munka a teljesítmény és az idő szorzata.", c: "A hatásfok nagyobb lehet 1-nél." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás hamis. Az energiaveszteségek miatt a hasznos munka soha nem lehet több, mint a befektetett, így a hatásfok értéke legfeljebb 1 (vagy 100%) lehetne, de a gyakorlatban mindig kisebb. ✅ Megoldás: A hatásfok nagyobb lehet 1-nél."
+            },
+            {
+                question: "Egy 1000 W-os porszívó és egy 2000 W-os porszívó közül melyiknek nagyobb a teljesítménye?",
+                answers: { a: "Az 1000 W-osnak.", b: "Egyenlő a teljesítményük.", c: "A 2000 W-osnak." },
+                correctAnswer: 'c',
+                explanation: "A watt a teljesítmény mértékegysége. A nagyobb watt-érték nagyobb teljesítményt jelent, azaz a 2000 W-os porszívó egységnyi idő alatt több munkát végez (erősebben szív). ✅ Megoldás: A 2000 W-osnak."
+            },
+            {
+                question: "Mivel egyenlő 1 watt?",
+                answers: { a: "1 newton / 1 méter", b: "1 joule ⋅ 1 másodperc", c: "1 joule / 1 másodperc" },
+                correctAnswer: 'c',
+                explanation: "A teljesítmény definíciója az egységnyi idő alatt végzett munka. A mértékegységekből: 1 W = 1 J / 1 s. ✅ Megoldás: 1 joule / 1 másodperc."
+            },
+            {
+                question: "Egy daru 10 másodperc alatt 5 méter magasra emel egy 400 N súlyú testet. Mekkora a daru hasznos teljesítménye?",
+                answers: { a: "2000 W", b: "80 W", c: "200 W" },
+                correctAnswer: 'c',
+                explanation: "Először a munkát kell kiszámolni: W = F ⋅ s = 400 N ⋅ 5 m = 2000 J. Utána a teljesítményt: P = W / t = 2000 J / 10 s = 200 W. ✅ Megoldás: 200 W."
+            },
+            {
+                question: "Ha egy gép hatásfoka rossz, az azt jelenti, hogy...",
+                answers: { a: "...lassan dolgozik.", b: "...gyorsan dolgozik.", c: "...a befektetett energia nagy része kárba vész (pl. hővé alakul)." },
+                correctAnswer: 'c',
+                explanation: "A rossz, alacsony hatásfok azt jelenti, hogy a befektetett energia csak kis hányada fordítódik a kívánt, hasznos munkára, a többi pedig veszteségként (jellemzően súrlódási hőként) jelenik meg. ✅ Megoldás: ...a befektetett energia nagy része kárba vész (pl. hővé alakul)."
+            },
+            {
+                question: "Melyik kifejezés NEM a teljesítményre utal?",
+                answers: { a: "Lóerő", b: "Kilowattóra", c: "Erő" },
+                correctAnswer: 'c',
+                explanation: "A lóerő a teljesítmény egy régi, ma is használt mértékegysége. A kilowattóra az energia (munka) mértékegysége. Az erő egy teljesen más fizikai mennyiség. ✅ Megoldás: Erő."
+            },
+            {
+                question: "A teljesítmény...",
+                answers: { a: "...egy vektormennyiség.", b: "...egy fizikai jelenség.", c: "...egy skalármennyiség." },
+                correctAnswer: 'c',
+                explanation: "A teljesítménynek csak nagysága van (pl. 100 W), iránya nincs, ezért a skalármennyiségek közé tartozik. ✅ Megoldás: ...egy skalármennyiség."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Alapsíkkal párhuzamos síkmetszetek</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Alapsíkkal párhuzamos síkmetszetek</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Milyen síkidomot kapunk, ha egy hengert az alaplapjával párhuzamosan elvágunk?", options: { a: "egy kisebb kört", b: "egy az alaplappal egybevágó kört", c: "egy ellipszist" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A henger egy hasáb, aminek kör az alapja. A hasáboknál az alapsíkkal párhuzamos metszet mindig egybevágó az alaplappal. 🔹 2. Lépés: Képzelj el egy szalámit! Bárhol vágod el, a szelet ugyanolyan kör alakú lesz, mint a vége. ✅ Megoldás: Egy az alaplappal egybevágó kört." },
+            { question: "Milyen viszonyban van egy gúla alaplapja és egy vele párhuzamos síkmetszete?", options: { a: "egybevágóak", b: "hasonlóak", c: "nincs közöttük kapcsolat" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ha egy gúlát (vagy kúpot) az alaplappal párhuzamosan elvágunk, a kapott síkmetszet alakja megegyezik az alaplap alakjával, de a mérete kisebb lesz. 🔹 2. Lépés: Ezt a viszonyt nevezzük hasonlóságnak. ✅ Megoldás: A két síkidom hasonló." },
+            { question: "Egy háromszög alapú hasábot elvágunk az alaplappal párhuzamosan. Mi lesz a síkmetszet?", options: { a: "egy az alaplappal egybevágó háromszög", b: "egy kisebb, hasonló háromszög", c: "egy téglalap" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A hasábok (mint pl. a téglatest) különleges tulajdonsága, hogy a párhuzamos metszeteik nem változnak. 🔹 2. Lépés: Bárhol is vágjuk el a hasábot az alaplappal párhuzamosan, a metszet mindig ugyanolyan és ugyanakkora háromszög lesz, mint az alaplap. ✅ Megoldás: Egy az alaplappal egybevágó háromszög." },
+            { question: "Milyen test keletkezik egy gúla csúcsa és a párhuzamos síkmetszet között?", options: { a: "egy csonkagúla", b: "egy hasáb", c: "egy kisebb, az eredetihez hasonló gúla" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A vágással a gúlát két részre bontjuk. 🔹 2. Lépés: A felső rész, ami a gúla eredeti csúcsát tartalmazza, maga is egy gúla lesz, ami az eredeti kicsinyített mása. ✅ Megoldás: Egy kisebb, az eredetihez hasonló gúla." },
+            { question: "Milyen test keletkezik egy kúp alaplapja és a párhuzamos síkmetszet között?", options: { a: "egy henger", b: "egy csonkakúp", c: "egy kisebb kúp" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A vágással a kúpot két részre bontjuk. 🔹 2. Lépés: A felső rész egy kisebb kúp. Az alsó, 'levágott tetejű' testet nevezzük csonkakúpnak. ✅ Megoldás: Egy csonkakúp." },
+            { question: "Egy piramist (négyzet alapú gúla) a magassága felénél elvágunk az alappal párhuzamosan. Az alaplap területe 40 cm². Mekkora a síkmetszet területe?", options: { a: "20 cm²", b: "10 cm²", c: "40 cm²" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A gúlák hasonlóságánál a magasságok aránya (k) és a területek aránya (k²) között kapcsolat van. 🔹 2. Lépés: A kis gúla magassága fele a nagynak, így a hasonlóság aránya k = 1/2. 🔹 3. Lépés: A területek aránya k² = (1/2)² = 1/4. A síkmetszet területe tehát a nagy alaplap területének negyede: 40 cm² / 4 = 10 cm². ✅ Megoldás: 10 cm²." },
+            { question: "Melyik testnél lesz az alapsíkkal párhuzamos síkmetszet területe MINDIG ugyanakkora, mint az alapterület?", options: { a: "gúla", b: "kúp", c: "egyenes hasáb" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A gúláknál és kúpoknál a metszet a csúcs felé haladva egyre kisebb. 🔹 2. Lépés: A hasáboknál (és a hengernél) az alaplapot párhuzamosan 'eltolva' kapjuk a testet, ezért a párhuzamos metszetei mindenhol egybevágóak az alaplappal, így a területük is megegyezik. ✅ Megoldás: Az egyenes hasáb." },
+            { question: "Egy kúp alaplapjának sugara 6 cm. Az alappal párhuzamosan elvágjuk úgy, hogy a síkmetszet sugara 3 cm. Milyen arányban osztottuk ketté a kúp magasságát?", options: { a: "1:2 arányban (félúton)", b: "1:3 arányban", c: "1:4 arányban" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A hasonlóságnál a megfelelő szakaszok aránya megegyezik. A sugarak aránya k = 3 cm / 6 cm = 1/2. 🔹 2. Lépés: A magasságok aránya is ugyanennyi, tehát a kis kúp magassága fele a nagy kúp magasságának. ✅ Megoldás: Félúton vágtuk el." },
+            { question: "Mi a csonkagúla?", options: { a: "Egy gúla, amit egy síkkal elvágtunk.", b: "Egy gúla csúcsa.", c: "Egy gúla alaplapja." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A csonkagúla egy gúlából származik. 🔹 2. Lépés: Úgy kapjuk, hogy egy gúlát az alaplapjával párhuzamos síkkal 'levágjuk a tetejét'. A megmaradó alsó rész a csonkagúla. ✅ Megoldás: Egy gúla, amit egy síkkal elvágtunk." },
+            { question: "Milyen síkidomok a csonkagúla oldallapjai?", options: { a: "háromszögek", b: "trapézok", c: "téglalapok" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az eredeti gúla oldallapjai háromszögek voltak. 🔹 2. Lépés: Amikor a tetejét levágjuk egy párhuzamos síkkal, a háromszögek felső csúcsát is levágjuk. A megmaradó síkidom egy négyszög lesz, aminek két oldala párhuzamos. ✅ Megoldás: Trapézok." },
+            { question: "Egy henger alaplapjának területe 25 cm². Mekkora a vele párhuzamos síkmetszetének a területe?", options: { a: "25 cm²", b: "kisebb, mint 25 cm²", c: "nagyobb, mint 25 cm²" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A henger egy forgástest, de tekinthető kör alapú hasábnak is. 🔹 2. Lépés: A hasáboknál az alapsíkkal párhuzamos metszet mindig egybevágó az alaplappal. ✅ Megoldás: A területe is 25 cm²." },
+            { question: "Ha egy répát (ami kúp alakú) az aljával párhuzamosan felszeletelünk, milyen alakú szeleteket kapunk?", options: { a: "egyre nagyobb köröket", b: "egyre kisebb köröket", c: "mindig ugyanolyan köröket" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A répa egy kúp. A 'vágás' egy síkmetszet. 🔹 2. Lépés: Ahogy a répa csúcsa felé haladunk, a szeletek (síkmetszetek) mérete egyre kisebb lesz. ✅ Megoldás: Egyre kisebb köröket kapunk." },
+            { question: "Mi a hasonlóság aránya a síkmetszet és az alaplap között, ha a kúp magasságának felső harmadánál vágjuk el?", options: { a: "1/3", b: "2/3", c: "1/9" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A hasonlóság aránya (k) a magasságok arányával egyezik meg. 🔹 2. Lépés: A levágott kis kúp magassága az eredeti magasság 1/3-a. ✅ Megoldás: A hasonlóság aránya 1/3." },
+            { question: "Az előző feladatban (k=1/3), mi a síkmetszet és az alaplap területének aránya?", options: { a: "1/3", b: "1/6", c: "1/9" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A területek aránya a hasonlóság arányának négyzete (k²). 🔹 2. Lépés: Ha k = 1/3, akkor k² = (1/3)² = 1/9. ✅ Megoldás: A területek aránya 1/9." },
+            { question: "Melyik testet NEM lehet az alaplappal párhuzamos síkkal elvágni?", options: { a: "gömb", b: "kúp", c: "hasáb" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A gömbnek nincs kitüntetett 'alaplapja'. 🔹 2. Lépés: Bármilyen síkkal vágjuk is el a gömböt, a metszete kör lesz, de nem beszélhetünk az 'alaplappal párhuzamos' vágásról. ✅ Megoldás: A gömböt." },
+            { question: "Ha egy sík metszi a kocka négy függőleges élét, milyen síkidomot kapunk?", options: { a: "téglalapot vagy négyzetet", b: "háromszöget", c: "kört" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A négy függőleges él mind párhuzamos egymással. 🔹 2. Lépés: A metszés során a sík ezekből az élekből metsz ki pontokat. Ha a metsző sík párhuzamos az alaplappal, a metszet négyzet. Ha ferde, akkor téglalap (vagy paralelogramma). A kérdésben a legegyszerűbb esetekre gondolunk. ✅ Megoldás: Téglalapot vagy négyzetet." },
+            { question: "Egy csonkagúla hány alaplappal rendelkezik?", options: { a: "1", b: "2", c: "0" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A csonkagúla úgy jön létre, hogy egy gúlának levágjuk a tetejét. 🔹 2. Lépés: Megmarad az eredeti alaplapja, és a vágás helyén keletkezik egy új, kisebb alaplap (a fedőlap). ✅ Megoldás: 2 alaplappal rendelkezik." },
+            { question: "Egy hasáb alaplapjának területe 50 cm². A magassága 10 cm. A magasság felénél elvágjuk. Mekkora a síkmetszet területe?", options: { a: "25 cm²", b: "50 cm²", c: "10 cm²" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hasáboknál az alaplappal párhuzamos metszetek egybevágóak az alaplappal. 🔹 2. Lépés: Nem számít, hol vágjuk el, a metszet területe mindig ugyanakkora lesz, mint az alapterület. ✅ Megoldás: 50 cm²." },
+            { question: "Melyik testnek lesz a párhuzamos síkmetszete mindig hasonló, de nem egybevágó az alaplappal (kivéve a csúcsot és az alapot)?", options: { a: "henger", b: "gúla", c: "hasáb" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hengernél és a hasábnál a metszetek egybevágóak. 🔹 2. Lépés: A gúlánál (és a kúpnál) a metszet alakja megmarad, de a mérete a csúcs felé haladva folyamatosan csökken. Ez a hasonlóság esete. ✅ Megoldás: A gúla." },
+            { question: "A csonkakúp palástjának kiterített hálója...", options: { a: "egy téglalap.", b: "egy körgyűrűcikk.", c: "egy trapéz." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az eredeti kúp palástja egy körcikk volt. 🔹 2. Lépés: A csonkakúpnál ebből a nagy körcikkből kivágunk egy kisebb, koncentrikus körcikket. Ami megmarad, az egy körgyűrű része, azaz körgyűrűcikk. ✅ Megoldás: Egy körgyűrűcikk." },
+            { question: "Egy gúla magassága 12 cm, alaplapjának területe 36 cm². Elvágjuk egy síkkal, ami 4 cm-re van a csúcstól. Mekkora a síkmetszet területe?", options: { a: "12 cm²", b: "4 cm²", c: "9 cm²" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kis gúla magassága 4 cm, a nagyé 12 cm. A hasonlóság aránya k = 4/12 = 1/3. 🔹 2. Lépés: A területek aránya k² = (1/3)² = 1/9. 🔹 3. Lépés: A síkmetszet területe = Alapterület * (1/9) = 36 * (1/9) = 4 cm². ✅ Megoldás: 4 cm²." },
+            { question: "Mikor lesz egy kúp tengelyes metszete egyenlő oldalú háromszög?", options: { a: "ha a magasság fele a sugárnak", b: "ha az alkotója kétszerese a sugárnak", c: "ha a magassága egyenlő a sugárral" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A tengelyes metszet egy egyenlő szárú háromszög. Az alapja az átmérő (2r), a két szára az alkotó (a). 🔹 2. Lépés: Akkor lesz egyenlő oldalú, ha minden oldala egyenlő: 2r = a. ✅ Megoldás: Ha az alkotója kétszerese a sugárnak." },
+            { question: "Egy csonkagúla alaplapja és fedőlapja...", options: { a: "egybevágó sokszögek.", b: "hasonló sokszögek.", c: "különböző típusú sokszögek." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A csonkagúla fedőlapja az eredeti gúla egy párhuzamos síkmetszete. 🔹 2. Lépés: A párhuzamos síkmetszet mindig hasonló az alaplaphoz. ✅ Megoldás: Hasonló sokszögek." },
+            { question: "Melyik állítás igaz?", options: { a: "Egy hasáb palástja háromszögekből áll.", b: "Egy kúp palástja kiterítve egy teljes kör.", c: "Egy henger palástja kiterítve egy téglalap." }, correctAnswer: "c", explanation: "🔹 1. Lépés: A hasáb palástja téglalapokból, a gúláé háromszögekből áll. 🔹 2. Lépés: A kúp palástja kiterítve egy körcikk. A hengeré egy téglalap. ✅ Megoldás: A 'c' állítás igaz." }
+        ];
+        
+        // Kiegészítő kérdés a 25-höz
+        quizData.push({ question: "Ha egy gúlát elvágunk egy síkkal, ami NEM párhuzamos az alaplappal, mi lehet a síkmetszet?", options: { a: "csak az alaplappal hasonló sokszög", b: "lehet háromszög, trapéz vagy akár ötszög is", c: "mindig kör" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A párhuzamos metszet mindig hasonló az alaphoz. 🔹 2. Lépés: De ha ferdén vágjuk, a metszet alakja megváltozhat. Egy négyzet alapú gúlát el lehet vágni úgy, hogy a metszet trapéz, vagy akár ötszög is legyen (ha a vágás több oldallapot is érint). ✅ Megoldás: Sokféle alakzat lehet, pl. háromszög, trapéz vagy ötszög." });
+
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

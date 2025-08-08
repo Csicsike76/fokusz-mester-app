@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 25. hét: A munka jövője</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #e3f2fd;
+            --example-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .prompt-example {
+            background-color: var(--example-bg);
+            border: 1px dashed var(--example-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>Gyakorlati Műhely</h1>
+            <p>25. hét: A munka jövője</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A műhely végére képes leszel elemezni egy általad választott szakmát az MI szempontjából. Megtanulod azonosítani, mely feladatokat automatizálhat az MI, és ami még fontosabb, képes leszel új, emberi készségeket igénylő feladatokat kitalálni, amelyek az MI-vel való együttműködés révén jöhetnek létre.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Szükséges Eszközök</h2>
+                <ul>
+                    <li>Bármelyik <strong>szöveggeneráló MI</strong> (Copilot, Gemini, ChatGPT).</li>
+                    <li>Egy jegyzetfüzet vagy digitális dokumentum az elemzésed rögzítéséhez.</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. Bevezető: Nem gőzhengerek, hanem szerszámok</h2>
+                <p>Amikor a traktor megjelent, sokan attól féltek, hogy a mezőgazdasági munkásoknak végük. És valóban, a kézi kapálás munkája eltűnt. De létrejöttek újak: traktorszerelő, gépészmérnök, logisztikai menedzser. A mesterséges intelligencia nem egy gőzhenger, ami mindent letarol. Sokkal inkább egy svájci bicska tele új, szuper-erős szerszámokkal. Aki megtanulja használni ezeket a szerszámokat, sokkal értékesebb lesz a jövő munkaerőpiacán. Ma azt vizsgáljuk meg, hogyan alakítja át az MI a szakmákat - nem eltörli, hanem átalakítja őket.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>4. Lépésről-lépésre Feladatok</h2>
+                <p><strong>A mai projektünk:</strong> Elemezzük a grafikus dizájner szakmát!</p>
+
+                <div class="task-card">
+                    <h3>1. Feladat: A Szakma Lebontása Feladatokra</h3>
+                    <p>Először is, értsük meg, mit csinál egy grafikus a mindennapokban! Kérjük meg az MI-t, hogy segítsen ebben.</p>
+                    <div class="prompt-example">Viselkedj úgy, mint egy tapasztalt karrier-tanácsadó! Bontsd le egy grafikus dizájner tipikus napi és heti feladatait egy 5-7 pontos listára!</div>
+                    <p><strong>Megfigyelés:</strong> Az MI valószínűleg olyanokat sorol fel, mint: "Logótervezés", "Weboldal dizájn készítése", "Képek hátterének eltávolítása", "Színpaletták összeállítása", "Kapcsolattartás az ügyféllel".</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: Az Automatizálható Feladatok Azonosítása</h3>
+                    <p>Nézd végig az előző pontban kapott listát! A tanultak alapján melyek azok a feladatok, amelyek ismétlődőek, szabályalapúak vagy nagy adatmennyiségen alapulnak? Ezeket valószínűleg automatizálni fogja az MI.</p>
+                    <p><strong>A feladatod:</strong> Válassz ki <strong>3 feladatot</strong> a listából, ami szerinted könnyen automatizálható! Írd le őket, és egy mondatban indokold, miért. (Pl. "Képek hátterének eltávolítása - mert ez egy precíz, ismétlődő feladat, amit az MI már ma is gyorsabban csinál.")</p>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: Az Új, Emberi Feladatok Kitalálása</h3>
+                    <p>Ha az MI elvégzi az unalmas munkát, a grafikusnak több ideje marad az igazán emberi feladatokra. Most ötleteljünk az MI-vel arról, mik lehetnek ezek!</p>
+                    <div class="prompt-example">A grafikusoknak többé nem kell annyi időt tölteniük a képek hátterének eltávolításával vagy egyszerű bannerek gyártásával, mert ezt az MI megcsinálja. Adj 5 ötletet, milyen új, magasabb szintű, kreatív vagy stratégiai feladattal foglalkozhatna egy grafikus a felszabadult idejében!</div>
+                    <p><strong>Megfigyelés:</strong> Az MI valószínűleg olyan ötleteket ad, mint: "MI-művészeti vezető (AI Art Director)", "Vizuális Prompt Mérnök", "Etikai dizájn tanácsadó", "Márka-stratégia kidolgozása".</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>4. Feladat: A Jövő Grafikusának Profilja</h3>
+                    <p>Az elemzés alapján most állítsuk össze, milyen készségekre lesz szüksége egy jövőbeli grafikusnak!</p>
+                    <p><strong>A feladatod:</strong> Írj egy rövid, kéthasábos listát!</p>
+                    <ul>
+                        <li><strong>Bal oldal:</strong> Sorolj fel 3 olyan készséget, aminek a fontossága <strong>csökkenni</strong> fog (pl. manuális, precíz képszerkesztés).</li>
+                        <li><strong>Jobb oldal:</strong> Sorolj fel 3 olyan készséget, aminek a fontossága <strong>nőni</strong> fog (pl. kreatív koncepcióalkotás, promptolás, ügyfélkommunikáció, etikai érzék).</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>5. Kritikai Gondolkodás Sarok</h2>
+                    <p>Az átalakulás izgalmas, de nem mindenkinek könnyű.</p>
+                    <ul>
+                        <li><strong>A tanulás felelőssége:</strong> Ha a szakmák folyamatosan változnak, kinek a felelőssége, hogy a munkavállalók naprakészek maradjanak? Az iskoláé? A cégeké? Vagy mindenkié egyénileg? Miért válik az "élethosszig tartó tanulás" a jövőben nem egy lehetőség, hanem egy alapvető elvárás?</li>
+                        <li><strong>Mi az, ami nem automatizálható?</strong> Az elemzésed alapján próbáld megfogalmazni, mik azok a mélyen emberi képességek, amiket (legalábbis a belátható jövőben) nem lehet automatizálni. (Pl. empátia, eredeti ötlet, morális döntések, bizalom építése).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>6. Önálló Kihívás: Írd meg a Jövő Álláshirdetését!</h2>
+                    <p>Most te jössz! Válassz egy téged érdeklő szakmát (lehet az, amivel eddig dolgoztál, vagy egy teljesen új), és írj hozzá egy kitalált álláshirdetést 2035-re!</p>
+                    <p><strong>A hirdetés tartalmazza a következőket:</strong></p>
+                    <ol>
+                        <li><strong>Pozíció neve:</strong> Legyél kreatív! (Pl. "AI-Támogatott Orvosdiagnoszta", "Robot-Etikai Tanácsadó", "Személyre Szabott Tanulási Útvonal Tervező")</li>
+                        <li><strong>Főbb feladatok (3 pont):</strong> Írd le, mit csinálna ez a személy. A leírásban szerepeljen az MI-eszközökkel való együttműködés!</li>
+                        <li><strong>Elvárt készségek (3 pont):</strong> Sorolj fel legalább egy technikai (pl. "promptolási ismeretek") és egy emberi (pl. "empatikus kommunikáció") készséget!</li>
+                    </ol>
+                    <p>Mentsd el a futurisztikus álláshirdetésedet! Ez a feladat segít elképzelni, hogyan alakulhat át a te jövőbeli szakmád is.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fizika 8. Osztály - Év Végi Összefoglaló Kvíz</title>
+    <link rel="stylesheet" href="static/css/stilus.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; min-height: 100vh; padding-top: 80px; transition: background-color 0.3s ease, color 0.3s ease; }
+        #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; opacity: 0.8; filter: brightness(0.7); }
+        .hidden { display: none !important; }
+        body.dark-mode { background-color: #1a1a2e; color: #e0e0e0; }
+        body.dark-mode .header, body.dark-mode .question-block, body.dark-mode .option, body.dark-mode .explanation, body.dark-mode .modal-content { background-color: rgba(45, 45, 68, 0.9); border-color: #4a4a66; color: #e0e0e0; }
+        body.dark-mode .header h1, body.dark-mode .question-text, body.dark-mode .header p { color: #e0e0e0; }
+        body.dark-mode .option:hover { background: rgba(78, 78, 105, 0.98); }
+        body.dark-mode .option.selected { background: rgba(102, 126, 234, 0.9); border-color: #8396f5; }
+        .controls { position: fixed; top: 90px; left: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
+        .control-btn { width: 50px; height: 50px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2em; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s; }
+        .control-btn:hover { transform: scale(1.1); }
+        .zoom-btn { background: rgba(76, 175, 80, 0.8); color: white; }
+        .theme-btn { background: rgba(255, 193, 7, 0.8); color: white; }
+        .accessibility-toggle-btn { background: rgba(33, 150, 243, 0.8); color: white; }
+        .accessibility-panel { position: fixed; top: 270px; left: 20px; background: rgba(255, 255, 255, 0.95); border-radius: 10px; padding: 15px; display: none; z-index: 1000; }
+        .accessibility-panel.show { display: block; }
+        .accessibility-btn { display: block; width: 100%; margin: 5px 0; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .speak-btn { background: #4CAF50; color: white; }
+        .stop-speak-btn { background: #f44336; color: white; }
+        body.high-contrast { filter: contrast(150%); }
+        body.zoomed { font-size: 115%; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; margin-bottom: 40px; background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 15px; backdrop-filter: blur(10px); }
+        .question-block { background: rgba(248, 249, 250, 0.95); border-radius: 12px; padding: 25px; margin-bottom: 30px; border-left: 5px solid #3498db; }
+        .option { display: flex; align-items: center; padding: 15px; border-radius: 10px; border: 2px solid #e9ecef; cursor: pointer; transition: all 0.2s; }
+        .option input[type="radio"] { display: none; }
+        .option:hover { background: #e9f5ff; border-color: #2196F3; }
+        .option.selected { background: #2196F3; color: white; border-color: #1976d2; }
+        .option.correct { background: #4CAF50 !important; color: white !important; }
+        .option.incorrect { background: #f44336 !important; color: white !important; }
+        .explanation { margin-top: 15px; padding: 15px; background: #fff3cd; border-radius: 8px; display: none; }
+        .explanation.show { display: block; }
+        #submit-btn { background: #6c5ce7; color: white; border: none; padding: 15px 40px; border-radius: 30px; cursor: pointer; font-size: 1.2em; }
+        #submit-btn:disabled { background: #ccc; cursor: not-allowed; }
+        .score-container { text-align: center; margin-top: 30px; display: none; padding: 20px; background: rgba(30, 60, 114, 0.95); color: white; border-radius: 15px; }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; z-index: 2000; align-items: center; justify-content: center; }
+        .modal.show { display: flex; }
+        .modal-content { background: white; padding: 30px; border-radius: 15px; max-width: 500px; width: 90%; text-align: center; color: #333; }
+        body.dark-mode .modal-content { background: #2d2d44; color: #e0e0e0; }
+        body.dark-mode .modal-content input { background: #1a1a2e; border-color: #4a4a66; color: white; }
+        .modal-content button { color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; margin: 5px; font-weight: bold; }
+        .modal-content .btn-primary { background: #2196F3; }
+        .modal-content .btn-secondary { background: #6c757d; }
+        #voice-controls-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2500; display: flex; align-items: center; justify-content: space-around; padding: 20px; }
+        .voice-btn { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; color: white; font-size: 1.5em; font-weight: bold; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .voice-btn .icon { font-size: 2em; margin-bottom: 5px; }
+        .voice-btn.blue { background: #2196F3; }
+        .voice-btn.yellow { background: #ffc107; }
+        .voice-btn.red { background: #f44336; }
+        .voice-mode-active-indicator { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #f44336; color: white; padding: 10px 20px; border-radius: 25px; z-index: 3000; display: none; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(244, 67, 54, 0); } 100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); } }
+        .accessibility-switch { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding: 5px; background: #eee; border-radius: 5px; }
+        .accessibility-switch label { font-size: 0.9em; }
+    </style>
+</head>
+<body class="light-mode">
+    
+    {% include 'navigacio.html' %}
+    <video autoplay muted loop id="bg-video"><source src="static/video/video.mp4" type="video/mp4"></video>
+
+    <div class="modal" id="email-modal"><div class="modal-content"><h2>Szülői Felügyelet</h2><p>Add meg a szülői e-mail címet az eredmények elküldéséhez.</p><input type="email" id="parent-email" placeholder="szulo@email.com"><div><button class="btn-primary" onclick="startQuizWithEmail()">Kvíz Indítása</button><button class="btn-secondary" onclick="skipEmail()">Kihagyás</button></div></div></div>
+    <div class="modal" id="achievement-modal"><div class="modal-content"><h2 id="achievement-title">Gratulálunk!</h2><p id="achievement-description">Sikeres teljesítés!</p><button onclick="downloadCertificate()">Oklevél Letöltése</button><button class="btn-secondary" onclick="closeAchievement()">Bezárás</button></div></div>
+    <div class="modal" id="inactivity-warning"><div class="modal-content" style="background: #ff5722; color: white;"><h3>Inaktivitás Észlelve</h3><p>A kvíz <span id="countdown">10</span> másodperc múlva újraindul.</p><button onclick="resetInactivityTimer()" style="background: white; color: #ff5722;">Folytatom</button></div></div>
+
+    <div class="controls"><button class="control-btn zoom-btn" id="zoom-btn" title="Nagyítás">🔍</button><button class="control-btn theme-btn" id="theme-btn" title="Téma Váltás">🌙</button><button class="control-btn accessibility-toggle-btn" id="accessibility-btn" title="Kisegítő lehetőségek">♿</button></div>
+    <div class="accessibility-panel" id="accessibility-panel"><div class="accessibility-switch"><label for="visually-impaired-mode">Látássérült Mód</label><input type="checkbox" id="visually-impaired-mode"></div><h4>Hangvezérlés</h4><button class="accessibility-btn speak-btn" onclick="startVoiceQuiz()">🎤 Indítás</button><button class="accessibility-btn stop-speak-btn" onclick="stopVoiceQuiz()">🛑 Leállítás</button></div>
+    <div class="voice-mode-active-indicator" id="voice-indicator">🎤 Hangvezérlés aktív...</div>
+    <div id="voice-controls-container" class="hidden"><button class="voice-btn blue" onclick="voiceCommand('ismételd')"><span class="icon">🔄</span>Ismétlés</button><button class="voice-btn yellow" id="pause-resume-btn" onclick="togglePauseResume()"><span class="icon">⏸️</span>Szünet</button><button class="voice-btn red" onclick="stopVoiceQuiz()"><span class="icon">⛔</span>Kilépés</button></div>
+
+    <div class="container">
+        <div class="header"><h1>🧪 Fizika 8. Osztály</h1><p>Év Végi Összefoglaló Kvíz</p></div>
+        <form id="quiz-form"></form>
+        <div class="submit-container"><button type="button" id="submit-btn" disabled>Kvíz Leadása</button></div>
+        <div class="score-container" id="score-container"><h2>Eredmény</h2><div>Helyes: <span id="correct-count">0</span>/25</div><div id="percentage">0%</div></div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- ADATBÁZIS ---
+        const quizData = [
+            { question: "Mi az elektromos áram?", options: ["Elektronok rendezett mozgása", "Protonok mozgása", "Atomok rezgése", "Fény terjedése"], answer: 0, explanation: "Az elektromos áram az elektronok irányított mozgása egy vezetőben." }, { question: "Melyik az Ohm-törvény helyes felírása?", options: ["U = I × R", "U = I / R", "U = R / I", "U = I + R"], answer: 0, explanation: "Az Ohm törvény kimondja, hogy a feszültség egyenlő az áramerősség és az ellenállás szorzatával." }, { question: "Mi a fény sebessége vákuumban?", options: ["300 000 m/s", "3 000 000 m/s", "300 000 000 m/s", "30 000 000 m/s"], answer: 2, explanation: "A fény sebessége vákuumban körülbelül 300 000 000 méter/másodperc." }, { question: "Mit jelent a fénytörés?", options: ["Fény elnyelése", "Fény visszaverődése", "Fény irányváltozása közegváltáskor", "Fény szétszóródása"], answer: 2, explanation: "A fénytörés során a fénysugár irányt változtat, amikor egyik közegből a másikba lép." }, { question: "Mi a mágneses mező forrása?", options: ["Mozgó elektromos töltés", "Álló elektromos töltés", "Hőmérséklet", "Nyomás"], answer: 0, explanation: "A mágneses mezőt mozgó elektromos töltések hozzák létre." }, { question: "Melyik állítás igaz a hullámokra?", options: ["Csak levegőben terjednek", "Energia nélkül terjednek", "Energiát szállítanak", "Mindig ugyanolyan sebességgel terjednek"], answer: 2, explanation: "A hullámok energiát szállítanak anélkül, hogy anyagot szállítanának." }, { question: "Mi a hang sebessége levegőben 20°C-on?", options: ["343 m/s", "1500 m/s", "5000 m/s", "300 000 000 m/s"], answer: 0, explanation: "A hang sebessége levegőben 20°C-on körülbelül 343 méter per szekundum." }, { question: "Mit mér a dinamométer?", options: ["Tömeget", "Erőt", "Sebességet", "Gyorsulást"], answer: 1, explanation: "A dinamométer erő mérésére szolgáló műszer." }, { question: "Mi a mechanikai energia?", options: ["Csak kinetikus energia", "Csak potenciális energia", "Kinetikus és potenciális energia összege", "Hőenergia"], answer: 2, explanation: "A mechanikai energia a kinetikus és potenciális energia összege." }, { question: "Melyik eszköz alakítja át a mechanikai energiát elektromos energiává?", options: ["Motor", "Generátor", "Transzformátor", "Kondenzátor"], answer: 1, explanation: "A generátor (dinamó) alakítja át a mechanikai energiát elektromos energiává." }, { question: "Mi történik a fénnyel, amikor síktükörre esik?", options: ["Teljesen elnyelődik", "Törik", "Visszaverődik", "Szóródik"], answer: 2, explanation: "A síktükör visszaveri a ráeső fényt." }, { question: "Melyik lencse gyűjti a párhuzamos fénysugarakat egy pontba?", options: ["Domború lencse", "Homorú lencse", "Síktükör", "Prizma"], answer: 0, explanation: "A domború (konvex) lencse gyűjti a párhuzamos fénysugarakat egy pontba (fókuszpontba)." }, { question: "Mi a hőmérséklet SI mértékegysége?", options: ["Celsius fok", "Fahrenheit fok", "Kelvin", "Joule"], answer: 2, explanation: "A hőmérséklet SI mértékegysége a Kelvin (K)." }, { question: "Melyik anyag a legjobb hővezető?", options: ["Fa", "Műanyag", "Réz", "Levegő"], answer: 2, explanation: "A réz kiváló hővezető, sokkal jobb, mint a fa, műanyag vagy levegő." }, { question: "Mi az elektromos teljesítmény képlete?", options: ["P = U × I", "P = U / I", "P = U + I", "P = U - I"], answer: 0, explanation: "Az elektromos teljesítmény egyenlő a feszültség és az áramerősség szorzatával." }, { question: "Melyik részecske hordozza a negatív elektromos töltést?", options: ["Proton", "Neutron", "Elektron", "Pozitron"], answer: 2, explanation: "Az elektron hordozza a negatív elektromos töltést." }, { question: "Mi a gravitációs gyorsulás értéke a Földön?", options: ["9,8 m/s²", "10 m/s²", "9,8 m/s", "10 m/s"], answer: 0, explanation: "A gravitációs gyorsulás értéke a Földön körülbelül 9 egész 8 tized méter per szekundum négyzet." }, { question: "Melyik hullámfajta a fény?", options: ["Mechanikai hullám", "Elektromágneses hullám", "Hanghullám", "Vízhullám"], answer: 1, explanation: "A fény elektromágneses hullám, nem mechanikai hullám." }, { question: "Mi a spektroszkópia?", options: ["Hangok elemzése", "Fénytörés vizsgálata", "Fényspektrum elemzése", "Hőmérséklet mérése"], answer: 2, explanation: "A spektroszkópia a fényspektrum elemzésével foglalkozó tudományág." }, { question: "Melyik eszközzel lehet elektromos feszültséget mérni?", options: ["Amperméterrel", "Voltméterrel", "Ohmméterrel", "Wattméterrel"], answer: 1, explanation: "A voltmérő (voltméter) elektromos feszültség mérésére szolgál." }, { question: "Mi a Doppler-effektus?", options: ["Fény törése", "Hang magasságának változása mozgás miatt", "Elektromos vezetés", "Mágneses tér változása"], answer: 1, explanation: "A Doppler-effektus a hang magasságának változása a forrás és megfigyelő relatív mozgása miatt." }, { question: "Melyik energia-átalakulás történik a dinamóban?", options: ["Elektromos → mechanikai", "Mechanikai → elektromos", "Hő → elektromos", "Kémiai → elektromos"], answer: 1, explanation: "A dinamó mechanikai energiát alakít át elektromos energiává." }, { question: "Mi a rezonancia?", options: ["Fény visszaverődése", "Hullámok erősítése azonos frekvencián", "Elektromos rövidzár", "Hőmérséklet emelkedése"], answer: 1, explanation: "A rezonancia során a hullámok erősítik egymást, ha frekvenciájuk megegyezik." }, { question: "Melyik állítás igaz a párhuzamos kapcsolásra?", options: ["Az áram mindenhol egyforma", "A feszültség mindenhol egyforma", "Az ellenállás összeadódik", "Egy elem kiégése mindent leállít"], answer: 1, explanation: "Párhuzamos kapcsolásban a feszültség minden ágban ugyanakkora." }, { question: "Mi az infravörös sugárzás?", options: ["Látható fény", "Hősugárzás", "Röntgensugárzás", "Rádióhullám"], answer: 1, explanation: "Az infravörös sugárzás hősugárzás, amelyet minden meleg test kibocsát." }
+        ];
+
+        // --- DOM ELEMEK és ÁLLAPOTVÁLTOZÓK ---
+        const form = document.getElementById('quiz-form'); const submitBtn = document.getElementById('submit-btn'); const voiceIndicator = document.getElementById('voice-indicator'); const voiceControls = document.getElementById('voice-controls-container'); const pauseResumeBtn = document.getElementById('pause-resume-btn'); const body = document.body; const emailModal = document.getElementById('email-modal'); const achievementModal = document.getElementById('achievement-modal'); const inactivityWarning = document.getElementById('inactivity-warning'); const countdownSpan = document.getElementById('countdown'); const zoomBtn = document.getElementById('zoom-btn'); const themeBtn = document.getElementById('theme-btn'); const accessibilityBtn = document.getElementById('accessibility-btn'); const accessibilityPanel = document.getElementById('accessibility-panel'); const accessibilityModeCheckbox = document.getElementById('visually-impaired-mode');
+        let userAnswers = new Array(quizData.length).fill(null); let currentQuestionIndex = 0; let isVoiceModeActive = false; let waitingForConfirmation = false; let isPaused = false;
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; let recognition;
+
+        // --- INICIALIZÁLÁS ---
+        function init() { loadQuestions(); attachEventListeners(); emailModal.classList.add('show'); }
+
+        // --- HANGVEZÉRLÉS ---
+        window.startVoiceQuiz = function() {
+            if (!SpeechRecognition) return alert("A böngésződ nem támogatja a hangfelismerést.");
+            recognition = new SpeechRecognition();
+            recognition.lang = 'hu-HU'; recognition.continuous = false;
+            recognition.onresult = handleVoiceResult;
+            recognition.onerror = (event) => { if(event.error !== 'no-speech' && event.error !== 'aborted') console.error('Hangfelismerési hiba:', event.error); };
+            recognition.onend = () => { if (isVoiceModeActive && !isPaused) startListening(); };
+            isVoiceModeActive = true;
+            voiceIndicator.style.display = 'block'; voiceControls.classList.remove('hidden'); currentQuestionIndex = 0;
+            speakLines(getQuestionSpeechArray(0), startListening);
+        };
+        window.stopVoiceQuiz = function() { isVoiceModeActive = false; isPaused = false; if (recognition) recognition.stop(); speechSynthesis.cancel(); voiceIndicator.style.display = 'none'; voiceControls.classList.add('hidden'); };
+        function speakLines(lines, onEndCallback, index = 0, rate = 0.9) {
+            if (index >= lines.length) { if (onEndCallback) setTimeout(onEndCallback, 1200); return; }
+            if (recognition && isVoiceModeActive) recognition.stop();
+            const utterance = new SpeechSynthesisUtterance(lines[index]);
+            utterance.lang = "hu-HU"; utterance.rate = rate;
+            utterance.onend = () => { setTimeout(() => speakLines(lines, onEndCallback, index + 1, rate), 1500); };
+            speechSynthesis.speak(utterance);
+        }
+        function startListening() { if (recognition && isVoiceModeActive && !isPaused) { try { recognition.start(); } catch(e) {} } }
+        function getQuestionSpeechArray(index) {
+            const item = quizData[index];
+            const isAccessible = accessibilityModeCheckbox.checked;
+            let questionText = `Kérdés ${index + 1}. ${item.question}`;
+            let options = item.options.map((opt, i) => {
+                let textToRead = opt;
+                if (isAccessible) { textToRead = textToRead.replace(/×/g, ' szorozva ').replace(/m\/s²/g, 'méter per szekundum négyzet').replace(/m\/s/g, 'méter per szekundum').replace(/300 000 000/g, 'háromszázmillió').replace(/3 000 000/g, 'hárommillió').replace(/300 000/g, 'háromszázezer').replace(/9,8/g, 'kilenc egész nyolc tized'); }
+                return `Válasz ${String.fromCharCode(65 + i)}: ${textToRead}.`;
+            });
+            return [questionText, ...options];
+        }
+        function handleVoiceResult(event) { if(!isVoiceModeActive) return; recognition.stop(); const transcript = event.results[0][0].transcript.toLowerCase().trim().replace('.', ''); voiceCommand(transcript); }
+        window.voiceCommand = function(command) {
+            if (!isVoiceModeActive) return; vibrate();
+            const answerMap = { 'a': 0, 'á': 0, 'b': 1, 'c': 2, 'd': 3 };
+            if (waitingForConfirmation) { if (command.includes('igen')) nextQuestion(); else speakLines(["Rendben, várom a további utasításokat."], startListening); waitingForConfirmation = false; return; }
+            if (command in answerMap) handleAnswer(answerMap[command]);
+            else if (command.includes('ismételd')) speakLines(getQuestionSpeechArray(currentQuestionIndex), startListening);
+            else if (command.includes('következő')) nextQuestion();
+            else if (command.includes('előző')) prevQuestion();
+            else speakLines(["Ezt nem értettem. Kérlek, próbáld újra."], startListening);
+        }
+        function handleAnswer(answerIndex) {
+            userAnswers[currentQuestionIndex] = answerIndex; const radio = document.querySelector(`input[name="q${currentQuestionIndex}"][value="${answerIndex}"]`); if(radio) { radio.checked = true; handleOptionChange({ target: radio }); }
+            const isCorrect = quizData[currentQuestionIndex].answer === answerIndex; updateQuestionUI(currentQuestionIndex, isCorrect);
+            let feedback = [isCorrect ? "Helyes!" : "Helytelen.", `A magyarázat: ${quizData[currentQuestionIndex].explanation}.`, `Készen állsz a következő kérdésre? Mondd, hogy igen!`];
+            waitingForConfirmation = true; speakLines(feedback, startListening);
+        }
+        function nextQuestion() { if (currentQuestionIndex < quizData.length - 1) { currentQuestionIndex++; speakLines(getQuestionSpeechArray(currentQuestionIndex), startListening); } else { speakLines(["Elérted az utolsó kérdést.", "A kvízt befejezem és kiértékelem."], () => { stopVoiceQuiz(); handleSubmit(); }); } }
+        function prevQuestion() { if (currentQuestionIndex > 0) { currentQuestionIndex--; speakLines(getQuestionSpeechArray(currentQuestionIndex), startListening); } else { speakLines(["Ez az első kérdés."], startListening); } }
+        window.togglePauseResume = function() { isPaused = !isPaused; if (isPaused) { speechSynthesis.pause(); if (recognition) recognition.stop(); pauseResumeBtn.innerHTML = `<span class="icon">▶️</span>Folytatás`; } else { speechSynthesis.resume(); startListening(); pauseResumeBtn.innerHTML = `<span class="icon">⏸️</span>Szünet`; } vibrate(); }
+        function vibrate() { if (navigator.vibrate) navigator.vibrate(50); }
+
+        // --- Hagyományos Kvíz és Vezérlők ---
+        const scoreContainer = document.getElementById('score-container'); const zoomBtn = document.getElementById('zoom-btn'); const themeBtn = document.getElementById('theme-btn'); const accessibilityBtn = document.getElementById('accessibility-btn'); const accessibilityPanel = document.getElementById('accessibility-panel');
+        function loadQuestions() { let html = quizData.map((item, index) => `<div class="question-block" id="q-block-${index}"><div class="question-text">${index + 1}. ${item.question}</div><div class="options">${item.options.map((option, i) => `<label class="option"><input type="radio" name="q${index}" value="${i}">${String.fromCharCode(65 + i)}. ${option}</label>`).join('')}</div><div class="explanation" id="explanation-${index}"><strong>Magyarázat:</strong> ${item.explanation}</div></div>`).join(''); form.innerHTML = html; }
+        function attachEventListeners() { form.addEventListener('change', handleOptionChange); submitBtn.addEventListener('click', handleSubmit); zoomBtn.addEventListener('click', toggleZoom); themeBtn.addEventListener('click', toggleTheme); accessibilityBtn.addEventListener('click', () => accessibilityPanel.classList.toggle('show')); }
+        function handleOptionChange(event) { if (event.target.type === 'radio') { const qIndex = parseInt(event.target.name.replace('q', '')); userAnswers[qIndex] = parseInt(event.target.value); document.querySelectorAll(`#q-block-${qIndex} .option`).forEach(opt => opt.classList.remove('selected')); event.target.parentElement.classList.add('selected'); checkAllAnswered(); resetInactivityTimer(); } }
+        function checkAllAnswered() { submitBtn.disabled = !userAnswers.every(answer => answer !== null); }
+        function handleSubmit() { let correctCount = 0; quizData.forEach((item, index) => { const isCorrect = item.answer === userAnswers[index]; if (isCorrect) correctCount++; updateQuestionUI(index, isCorrect); }); showFinalScore(correctCount); stopInactivityTimer(); }
+        function updateQuestionUI(index, isCorrect) { const options = document.querySelectorAll(`#q-block-${index} .option`); const selectedOption = userAnswers[index] !== null ? options[userAnswers[index]] : null; if(selectedOption){ selectedOption.classList.add(isCorrect ? 'correct' : 'incorrect'); if (!isCorrect) { options[quizData[index].answer].classList.add('correct'); } } document.getElementById(`explanation-${index}`).classList.add('show'); options.forEach(opt => opt.style.pointerEvents = 'none'); }
+        function showFinalScore(correctCount) { const total = quizData.length; const percentage = Math.round((correctCount / total) * 100); document.getElementById('correct-count').textContent = correctCount; document.getElementById('percentage').textContent = `${percentage}%`; scoreContainer.style.display = 'block'; submitBtn.disabled = true; if (percentage >= 50) achievementModal.classList.add('show'); }
+        function toggleZoom() { body.classList.toggle('zoomed'); }
+        function toggleTheme() { body.classList.toggle('dark-mode'); themeBtn.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙'; }
+        window.startQuizWithEmail = () => { emailModal.classList.remove('show'); resetInactivityTimer(); };
+        window.skipEmail = () => { emailModal.classList.remove('show'); resetInactivityTimer(); };
+        window.closeAchievement = () => achievementModal.classList.remove('show');
+        window.downloadCertificate = () => alert('Oklevél letöltése...');
+        window.toggleHighContrast = () => body.classList.toggle('high-contrast');
+        
+        // --- Inaktivitás ---
+        let inactivityTimer, warningTimer;
+        function resetInactivityTimer() { clearTimeout(inactivityTimer); clearTimeout(warningTimer); inactivityWarning.classList.remove('show'); inactivityTimer = setTimeout(() => showInactivityWarning(), 120000); }
+        function stopInactivityTimer() { clearTimeout(inactivityTimer); clearTimeout(warningTimer); }
+        function showInactivityWarning() { inactivityWarning.classList.add('show'); let count = 10; countdownSpan.textContent = count; warningTimer = setInterval(() => { count--; countdownSpan.textContent = count; if (count <= 0) { clearInterval(warningTimer); location.reload(); } }, 1000); }
+        ['click', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(evt => document.addEventListener(evt, resetInactivityTimer));
+        
+        init();
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Elektromos töltés</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        #control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        #pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        #check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        #check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        #results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Elektromos töltés és állapot</h1>
+
+    <div id="control-panel">
+        <input type="password" id="pin-input" placeholder="PIN kód">
+        <button id="check-button">Ellenőrzés</button>
+        <div id="results"></div>
+        <div id="admin-panel" class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magyarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span id="dist-a"></span> / <span id="dist-b"></span> / <span id="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Hogyan hat egymásra két pozitív töltésű test?",
+                answers: { a: "Taszítják egymást.", b: "Vonzzák egymást.", c: "Nem lépnek kölcsönhatásba." },
+                correctAnswer: 'a',
+                explanation: "Az elektrosztatika alaptörvénye szerint az azonos nemű töltések (pozitív-pozitív vagy negatív-negatív) taszítják egymást. Vonzás az ellentétes nemű töltések között jön létre. ✅ Megoldás: Taszítják egymást."
+            },
+            {
+                question: "Mi történik, ha egy műanyag vonalzót megdörzsölünk egy gyapjúdarabbal, majd apró papírfecnik fölé tartjuk?",
+                answers: { a: "A vonalzó vonzza a papírfecniket.", b: "A vonalzó taszítja a papírfecniket.", c: "Nem történik semmi." },
+                correctAnswer: 'a',
+                explanation: "Dörzsölés hatására a vonalzó elektromosan feltöltődik. Amikor a semleges papírfecnik közelébe kerül, elektromos megosztást hoz létre bennük, és vonzza őket. ✅ Megoldás: A vonalzó vonzza a papírfecniket."
+            },
+            {
+                question: "Melyik anyag jó elektromos szigetelő?",
+                answers: { a: "Gumi", b: "Réz", c: "Vas" },
+                correctAnswer: 'a',
+                explanation: "A szigetelők olyan anyagok, amelyekben a töltések nem tudnak könnyen elmozdulni. A gumi, a műanyag és az üveg jó szigetelők. A fémek, mint a réz és a vas, jó vezetők. ✅ Megoldás: Gumi."
+            },
+            {
+                question: "Mi a neve annak a jelenségnek, amikor dörzsöléssel hozunk létre elektromos állapotot?",
+                answers: { a: "Dörzselektromosság", b: "Mágneses megosztás", c: "Fénytörés" },
+                correctAnswer: 'a',
+                explanation: "Azt a jelenséget, amikor két különböző anyag összedörzsölésével az egyikről töltések vándorolnak át a másikra, dörzselektromosságnak nevezzük. Így mindkét test elektromosan töltötté válik. ✅ Megoldás: Dörzselektromosság."
+            },
+            {
+                question: "Mit jelent az, hogy egy test elektromosan semleges?",
+                answers: { a: "Ugyanannyi pozitív és negatív töltés van benne.", b: "Nincsenek benne töltések.", c: "Csak pozitív töltések vannak benne." },
+                correctAnswer: 'a',
+                explanation: "Minden test atomokból áll, amelyekben pozitív töltésű protonok és negatív töltésű elektronok vannak. Egy test akkor semleges, ha a protonok és elektronok száma megegyezik, így a töltéseik kiegyenlítik egymást. ✅ Megoldás: Ugyanannyi pozitív és negatív töltés van benne."
+            },
+            {
+                question: "Hogyan hat egy pozitívan töltött test egy negatívan töltött testre?",
+                answers: { a: "Vonzzák egymást.", b: "Taszítják egymást.", c: "Nem hatnak egymásra." },
+                correctAnswer: 'a',
+                explanation: "Az ellentétes nemű töltések (pozitív és negatív) vonzzák egymást. Ez az elektrosztatikus vonzás alapja. ✅ Megoldás: Vonzzák egymást."
+            },
+            {
+                question: "Melyik részecske mozog a fémekben, ami az elektromos vezetést okozza?",
+                answers: { a: "Elektronok", b: "Protonok", c: "Neutronok" },
+                correctAnswer: 'a',
+                explanation: "A fémekben a negatív töltésű elektronok könnyen el tudnak mozdulni az atomtörzsek között. Az ő mozgásuk teszi lehetővé az elektromos áram vezetését. A protonok és neutronok az atommagban helyezkednek el, és nem mozognak szabadon. ✅ Megoldás: Elektronok."
+            },
+            {
+                question: "Milyen töltésű lesz az a gyapjúdarab, amivel egy műanyag rudat dörzsöltünk meg, ha a rúd negatív lett?",
+                answers: { a: "Pozitív", b: "Negatív", c: "Semleges" },
+                correctAnswer: 'a',
+                explanation: "A dörzsölés során töltések vándorolnak át. Ha a műanyag rúd negatív lett, az azt jelenti, hogy elektrontöbblete lett. Ezek az elektronok a gyapjúdarabról vándoroltak át, így a gyapjúban elektronhiány, azaz pozitív töltéstöbblet alakult ki. ✅ Megoldás: Pozitív."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Melyik a kétféle elektromos töltés?",
+                answers: { a: "Északi és déli", b: "Pozitív és negatív", c: "Nehéz és könnyű" },
+                correctAnswer: 'b',
+                explanation: "Az elektromos kölcsönhatásokért felelős tulajdonságot elektromos töltésnek nevezzük. Két fajtája van: a pozitív és a negatív. ✅ Megoldás: Pozitív és negatív. Az északi és déli a mágneses pólusokat jelöli."
+            },
+            {
+                question: "Melyik anyag jó elektromos vezető?",
+                answers: { a: "Műanyag", b: "Réz", c: "Üveg" },
+                correctAnswer: 'b',
+                explanation: "Az elektromos vezetők olyan anyagok, amelyekben a töltések könnyen el tudnak mozdulni. A fémek, mint például a réz, kiváló vezetők. A műanyag és az üveg szigetelők. ✅ Megoldás: Réz."
+            },
+            {
+                question: "Mi okozza a villámlást?",
+                answers: { a: "Mágneses vihar a felhőkben.", b: "Hatalmas elektromos töltéskülönbség kiegyenlítődése.", c: "Hangrobbanás a légkörben." },
+                correctAnswer: 'b',
+                explanation: "Villámlás akkor jön létre, amikor a felhőkben a súrlódás miatt óriási pozitív és negatív töltések halmozódnak fel, és ez a hatalmas feszültségkülönbség egy szikrakisülés formájában kiegyenlítődik a felhők között vagy a felhő és a föld között. ✅ Megoldás: Hatalmas elektromos töltéskülönbség kiegyenlítődése."
+            },
+            {
+                question: "Hogyan hat egymásra két negatív töltésű test?",
+                answers: { a: "Vonzzák egymást.", b: "Taszítják egymást.", c: "Először vonzzák, majd taszítják." },
+                correctAnswer: 'b',
+                explanation: "Az azonos nemű töltések taszítják egymást. Mivel mindkét test negatív töltésű, elektrosztatikus taszítóerő lép fel közöttük. ✅ Megoldás: Taszítják egymást."
+            },
+            {
+                question: "Mitől áll égnek a hajad, ha feltöltött lufit közelítesz hozzá?",
+                answers: { a: "A lufi melegétől.", b: "Az elektromos vonzástól.", c: "A lufi mágnesességétől." },
+                correctAnswer: 'b',
+                explanation: "A hajon megdörzsölt lufi elektromosan feltöltődik. Amikor a semleges hajszálaidhoz közelíted, megosztja a töltéseket a hajszálakban és vonzza őket. Mivel a hajszálak könnyűek, a vonzóerő fel tudja emelni őket. ✅ Megoldás: Az elektromos vonzástól."
+            },
+            {
+                question: "Mi a neve annak a berendezésnek, amellyel ki lehet mutatni egy test elektromos állapotát?",
+                answers: { a: "Hőmérő", b: "Elektroszkóp", c: "Iránytű" },
+                correctAnswer: 'b',
+                explanation: "Az elektroszkóp (vagy fémleveles elektroszkóp) egy egyszerű eszköz, amellyel megállapítható, hogy egy test töltött-e vagy sem. Ha töltött testet érintünk hozzá, a mutatója (fémlevelei) kitér. ✅ Megoldás: Elektroszkóp."
+            },
+            {
+                question: "Mi történik egy semleges testtel, ha egy töltött testet közelítünk hozzá?",
+                answers: { a: "Mindig taszítóerő lép fel.", b: "Elektromos megosztás történik, és vonzás jön létre.", c: "Nem történik semmi." },
+                correctAnswer: 'b',
+                explanation: "A töltött test a semleges testben szétválasztja a pozitív és negatív töltéseket. Az ellentétes nemű töltések közelebb kerülnek, az azonos neműek távolabb. Mivel a vonzóerő a kisebb távolság miatt erősebb, az eredő hatás mindig vonzás lesz. ✅ Megoldás: Elektromos megosztás történik, és vonzás jön létre."
+            },
+            {
+                question: "Melyik állítás igaz a szigetelő anyagokra?",
+                answers: { a: "Jól vezetik az elektromos áramot.", b: "A töltések nehezen mozognak bennük.", c: "Mindig pozitív töltésűek." },
+                correctAnswer: 'b',
+                explanation: "A szigetelő anyagok atomjaiban az elektronok erősen kötődnek az atommaghoz, ezért nem tudnak szabadon elmozdulni. Emiatt a szigetelők nem vagy csak nagyon rosszul vezetik az elektromosságot. ✅ Megoldás: A töltések nehezen mozognak bennük."
+            },
+            {
+                question: "Ha egy üvegrudat selyemmel dörzsölünk meg, az üvegrúd pozitív töltésű lesz. Milyen töltésű lesz a selyem?",
+                answers: { a: "Szintén pozitív.", b: "Negatív.", c: "Semleges marad." },
+                correctAnswer: 'b',
+                explanation: "A töltésmegmaradás törvénye szerint a dörzsölés során a negatív töltésű elektronok az üvegrúdról a selyemre vándorolnak. Így az üvegrúdban elektronhiány (pozitív töltés) keletkezik, a selyemben pedig elektrontöbblet (negatív töltés). ✅ Megoldás: Negatív."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Az elektromos töltés jele...",
+                answers: { a: "E", b: "T", c: "Q" },
+                correctAnswer: 'c',
+                explanation: "A fizikában az elektromos töltés mennyiségét általában a 'Q' vagy 'q' betűvel jelölik. ✅ Megoldás: Q."
+            },
+            {
+                question: "Melyik NEM példa az elektrosztatikus jelenségekre?",
+                answers: { a: "A hajadhoz tapadó lufi.", b: "Villámlás a viharban.", c: "Egy mágnes felemel egy szöget." },
+                correctAnswer: 'c',
+                explanation: "A mágnes és a szög közötti kölcsönhatás mágneses, nem pedig elektrosztatikus (nyugalomban lévő töltések közötti) jelenség. A másik két példa a dörzselektromosság és a töltéskiegyenlítődés tipikus esete. ✅ Megoldás: Egy mágnes felemel egy szöget."
+            },
+            {
+                question: "Miért veszélyes a villámcsapás?",
+                answers: { a: "Mert nagyon hangos.", b: "Mert nagyon fényes.", c: "Mert hatalmas elektromos áram halad át a testen." },
+                correctAnswer: 'c',
+                explanation: "A villám egy óriási elektromos szikra, ami hatalmas energiát és nagyon nagy áramerősséget jelent. Ha ez egy élőlény testén halad át, súlyos, akár halálos égési sérüléseket és egyéb károsodásokat okoz. ✅ Megoldás: Mert hatalmas elektromos áram halad át a testen."
+            },
+            {
+                question: "Melyik állítás igaz a vezető anyagokra?",
+                answers: { a: "Rosszul vezetik a hőt.", b: "Mindig negatív töltésűek.", c: "A töltések könnyen mozognak bennük." },
+                correctAnswer: 'c',
+                explanation: "A vezetők, tipikusan a fémek, olyan anyagok, amelyekben a töltéshordozók (általában elektronok) szabadon el tudnak mozdulni, ezért jól vezetik az elektromos áramot. ✅ Megoldás: A töltések könnyen mozognak bennük."
+            },
+            {
+                question: "Mitől kaphatsz egy apró 'csípést', amikor télen kiszállsz az autóból és megérinted az ajtaját?",
+                answers: { a: "A hidegtől.", b: "A mágnesességtől.", c: "A feltöltődött tested és az autó közötti szikrakisüléstől." },
+                correctAnswer: 'c',
+                explanation: "A ruhád és az autó ülése közötti súrlódás miatt a tested elektromosan feltöltődhet. Amikor megérinted a fém karosszériát, ez a töltés egy apró szikra formájában kiegyenlítődik, amit pici csípésként érzel. ✅ Megoldás: A feltöltődött tested és az autó közötti szikrakisüléstől."
+            },
+            {
+                question: "Melyik NEM szigetelő?",
+                answers: { a: "Porcelán", b: "Levegő", c: "Sós víz" },
+                correctAnswer: 'c',
+                explanation: "A porcelán és a száraz levegő jó elektromos szigetelők. A sós víz azonban oldott ionokat tartalmaz, amelyek el tudnak mozdulni, így az elektromos vezetők közé tartozik. ✅ Megoldás: Sós víz."
+            },
+            {
+                question: "Milyen töltésűek az atommagban lévő protonok?",
+                answers: { a: "Negatív", b: "Semleges", c: "Pozitív" },
+                correctAnswer: 'c',
+                explanation: "Az atomok atommagból és elektronfelhőből állnak. Az atommagban pozitív töltésű protonok és semleges neutronok találhatók. Az elektronfelhőt a negatív töltésű elektronok alkotják. ✅ Megoldás: Pozitív."
+            },
+            {
+                question: "Az elektrosztatika mivel foglalkozik?",
+                answers: { a: "A mozgó töltésekkel (árammal).", b: "A mágneses jelenségekkel.", c: "A nyugalomban lévő elektromos töltésekkel." },
+                correctAnswer: 'c',
+                explanation: "Az elektrosztatika a fizika azon ága, amely a nyugalomban lévő elektromos töltésekkel és az általuk létrehozott elektromos mezővel kapcsolatos jelenségeket vizsgálja. ✅ Megoldás: A nyugalomban lévő elektromos töltésekkel."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButton = document.getElementById('check-button');
+        const pinInput = document.getElementById('pin-input');
+        const resultsContainer = document.getElementById('results');
+        const adminPanel = document.getElementById('admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInput.value;
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainer.textContent = "Érvénytelen PIN kód!";
+                resultsContainer.style.color = 'red';
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainer.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                resultsContainer.style.color = 'orange';
+                return;
+            }
+            resultsContainer.style.color = ''; // Reset color
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainer.textContent = "Minden válasz és magyarázat felfedve.";
+                adminPanel.style.display = 'block';
+                document.getElementById('dist-a').textContent = internalCorrectAnswers.a;
+                document.getElementById('dist-b').textContent = internalCorrectAnswers.b;
+                document.getElementById('dist-c').textContent = internalCorrectAnswers.c;
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainer.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+            }
+        }
+        
+        pinInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                checkAnswers();
+            }
+        });
+
+        checkButton.addEventListener('click', checkAnswers);
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

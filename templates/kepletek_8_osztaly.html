@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>8. Osztály Matematika – Központi Segédlet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#FCFCF9;--surface:#FFFFFF;--text:#13343B;--primary:#21808D;
+      --primary-hover:#1D7480;--card-shadow:0 2px 6px rgba(0,0,0,.08);
+      --chapter:#8B4513;--formula-bg:#FFF8DB;--example-bg:#E8F4FA;
+      --quiz-color:#28a745;--quiz-hover:#218838;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    html{scroll-behavior:smooth}
+    .container{display:flex;max-width:1400px;margin:auto;padding:1rem}
+    
+    /*--- HEADER ---*/
+    .header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:linear-gradient(135deg,#21808D,#1D7480);color:white;border-radius:12px}
+    .header h1{font-size:2.2rem;margin-bottom:0.5rem}
+    .header p{font-size:1.1rem;opacity:0.9}
+    
+    /*--- NAV ---*/
+    .toc{width:380px;flex-shrink:0;margin-right:2rem;position:sticky;top:20px;align-self:flex-start;max-height:90vh;overflow-y:auto;background:var(--surface);padding:1.5rem;border-radius:8px;box-shadow:var(--card-shadow)}
+    .toc h2{font-size:1.3rem;margin-bottom:1rem;color:var(--chapter);border-bottom:2px solid var(--chapter);padding-bottom:0.5rem}
+    .toc ul{list-style:none}
+    .toc .chapter{font-weight:600;color:var(--chapter);margin:1.5rem 0 0.8rem 0;font-size:1rem;border-left:4px solid var(--chapter);padding-left:0.5rem}
+    .toc .topic-item{margin:0.5rem 0;padding:0.5rem;border-radius:6px;background:#F8F9FA;border:1px solid #E9ECEF}
+    .toc .topic-link{color:var(--primary);text-decoration:none;font-size:0.9rem;display:block;margin-bottom:0.3rem;font-weight:500}
+    .toc .topic-link:hover{color:var(--primary-hover)}
+    .toc .topic-link.active{color:var(--primary-hover);font-weight:600}
+    
+    /*--- KVÍZ GOMBOK A TARTALOMJEGYZÉKBEN ---*/
+    .toc-quiz-btn{display:inline-block;background:var(--quiz-color);color:white;padding:0.25rem 0.5rem;border-radius:4px;text-decoration:none;font-size:0.75rem;font-weight:500;margin-top:0.2rem;transition:all 0.2s}
+    .toc-quiz-btn:hover{background:var(--quiz-hover);transform:translateY(-1px)}
+    .toc-quiz-btn::before{content:"🎯 ";margin-right:0.2rem}
+    
+    /*--- MAIN ---*/
+    main{flex:1}
+    .chapter-header{background:linear-gradient(135deg,var(--chapter),#A0522D);color:white;padding:1.5rem;border-radius:8px;margin:2rem 0 1rem 0}
+    .chapter-header h2{font-size:1.8rem;margin-bottom:0.5rem}
+    .chapter-header p{opacity:0.9}
+    
+    .card{background:var(--surface);border-radius:8px;box-shadow:var(--card-shadow);padding:1.5rem;margin-bottom:1.5rem;border:1px solid #E7E4DC;transition:transform 0.2s;scroll-margin-top:20px;}
+    .card:hover{transform:translateY(-2px)}
+    .card h3{margin-bottom:0.8rem;font-size:1.3rem;color:var(--chapter)}
+    .card p{margin-bottom:1rem;text-align:justify}
+
+    /*--- DIAGRAM STÍLUS ---*/
+    .diagram-container {
+        text-align: center;
+        background-color: var(--example-bg);
+        border: 1px solid #cce5ff;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1.5rem 0;
+    }
+    .diagram-container svg {
+        max-width: 100%;
+        height: auto;
+    }
+     .summary-card {
+        border: 2px solid var(--primary);
+        background: linear-gradient(135deg, var(--surface), var(--example-bg));
+    }
+    .summary-card h3::before {
+        content: "📚 ";
+    }
+    
+    .formula,.example{padding:1rem;border-radius:6px;margin:1rem 0;font-size:0.95rem;border-left:4px solid}
+    .formula{background:var(--formula-bg);border-left-color:#DAA520}
+    .example{background:var(--example-bg);border-left-color:#4682B4}
+    .formula strong,.example strong{color:#333}
+    
+    /*--- BUTTON ---*/
+    .quiz-btn{display:inline-block;margin-top:1rem;background:var(--quiz-color);color:#fff;
+             padding:0.7rem 1.3rem;border-radius:6px;text-decoration:none;font-weight:500;
+             transition:all 0.3s;border:none;cursor:pointer}
+    .quiz-btn:hover{background:var(--quiz-hover);transform:translateY(-1px);box-shadow:0 4px 8px rgba(0,0,0,0.2)}
+    
+    /*--- RESPONSIVE ---*/
+    @media(max-width:768px){
+      .container{flex-direction:column}
+      .toc{width:100%;position:static;margin-bottom:1rem;max-height:none;order:-1}
+      .header h1{font-size:1.8rem}
+      .chapter-header h2{font-size:1.5rem}
+      .toc-quiz-btn{font-size:0.7rem;padding:0.2rem 0.4rem}
+    }
+    
+    /* Scrollbar styling */
+    .toc::-webkit-scrollbar{width:8px}
+    .toc::-webkit-scrollbar-track{background:#f1f1f1;border-radius:4px}
+    .toc::-webkit-scrollbar-thumb{background:#888;border-radius:4px}
+    .toc::-webkit-scrollbar-thumb:hover{background:#555}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- ---------------- HEADER ---------------- -->
+    <div class="header" style="width:100%;margin-bottom:2rem">
+      <a href="index.html" style="text-decoration: none; color: inherit;">
+        <h1>8. Osztály Matematika</h1>
+        <p>Interaktív Digitális Segédlet és Gyakorló Rendszer</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- ---------------- NAV ---------------- -->
+    <nav id="toc" class="toc">
+      <h2>Tartalomjegyzék</h2>
+      
+      <div class="chapter">Összefoglaló</div>
+      <ul>
+          <li class="topic-item">
+            <a href="#keplet-gyujtemeny" class="topic-link">Képlet- és Tételgyűjtemény</a>
+            <a href="teljes_kepletgyujtemeny_8_osztaly.html" class="toc-quiz-btn">Teljes gyűjtemény megnyitása →</a>
+          </li>
+      </ul>
+
+      <div class="chapter">1. FEJEZET: Intervallumok. Egyenlőtlenségek ℝ-ben</div>
+      <ul>
+        <li class="topic-item">
+          <a href="#halmazok-meghataroza" class="topic-link">Halmazok meghatározása</a>
+          <a href="kviz_halmazok_meghataroza.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#halmazok-relaciok" class="topic-link">Halmazműveletek</a>
+          <a href="kviz_halmazok_relaciok.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+      </ul>
+
+      <div class="chapter">2. FEJEZET: Algebrai számítások ℝ-ben</div>
+      <ul>
+          <li class="topic-item">
+          <a href="#binom-negyzete" class="topic-link">Nevezetes azonosságok</a>
+          <a href="kviz_binom_negyzete.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#masodfoku-egyenletek" class="topic-link">Másodfokú egyenletek</a>
+          <a href="kviz_masodfoku_egyenletek.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+      </ul>
+      
+      <div class="chapter">3. FEJEZET: Függvények</div>
+      <ul>
+        <li class="topic-item">
+          <a href="#fuggveny-fogalma" class="topic-link">A függvény fogalma</a>
+          <a href="kviz_fuggveny_fogalma.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#fuggveny-grafikonja" class="topic-link">A függvény grafikonja</a>
+          <a href="kviz_a_fuggveny_grafikonja.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#linearis-fuggvenyek" class="topic-link">f(x) = ax + b függvények</a>
+          <a href="kviz_fuggveny_ax_b.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+         <li class="topic-item">
+          <a href="#centralis-tendencia" class="topic-link">Statisztikai mutatók</a>
+          <a href="kviz_a_centralis_tendencia_mutatoi.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+      </ul>
+
+      <div class="chapter">4. FEJEZET: A térmértan elemei</div>
+      <ul>
+        <li class="topic-item">
+          <a href="#sik-megalapitas" class="topic-link">A sík meghatározása</a>
+          <a href="kviz_a_sik_meghatarozasa.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#ket-egyenes-helyzete" class="topic-link">Két egyenes helyzete</a>
+          <a href="kviz_ket_egyenes_kolcsonos_helyzete_a_terben.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#egyenes-sik-helyzete" class="topic-link">Egyenes és sík helyzete</a>
+          <a href="kviz_egyenes_es_sik_kolcsonos_helyzete.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#ket-sik-helyzete" class="topic-link">Két sík helyzete</a>
+          <a href="kviz_ket_sik_kolcsonos_helyzete.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#sikmetszetek" class="topic-link">Síkmetszetek</a>
+          <a href="kviz_alapsikkal_parhuzamos_sikmetszetek.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#vetulet-sikra" class="topic-link">Vetületek síkra</a>
+          <a href="kviz_pont_szakasz_egyenes_vetulete_a_sikra.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#egyenes-sik-hajlas" class="topic-link">Egyenes és sík hajlásszöge</a>
+          <a href="kviz_egyenes_es_sik_hajlasszoge.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#lapszog" class="topic-link">Lapszög, síkszög</a>
+          <a href="kviz_lapszog_sikszoeg.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#harom-meroleges" class="topic-link">A három merőleges tétele</a>
+          <a href="kviz_a_harom_meroleges_tetele.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+      </ul>
+
+      <div class="chapter">5. FEJEZET: Testek felszíne és térfogata</div>
+      <ul>
+        <li class="topic-item">
+          <a href="#tavolsagmeres" class="topic-link">Távolságmérés testekben</a>
+          <a href="kviz_tavolsagmeres_testek_felszinen_es_belsejeben.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#hajlasszogek" class="topic-link">Hajlásszögek kiszámítása</a>
+          <a href="kviz_hajlasszogek_kiszamitasa.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#hasab-felszin-terfogat" class="topic-link">Hasáb felszíne, térfogata</a>
+          <a href="kviz_az_egyenes_hasab_felszine_es_terfogata.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#gula-felszin-terfogat" class="topic-link">Gúla felszíne, térfogata</a>
+          <a href="kviz_a_szabalyos_gula_felszine_es_terfogata.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#csonka-gula" class="topic-link">Csonka gúla felszíne, térfogata</a>
+          <a href="kviz_a_szabalyos_csonka_gula_felszine_es_terfogata.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#henger-felszin-terfogat" class="topic-link">Henger felszíne, térfogata</a>
+          <a href="kviz_az_egyenes_korhenger_felszine_es_terfogata.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#kup-felszin-terfogat" class="topic-link">Kúp felszíne, térfogata</a>
+          <a href="kviz_a_kup_felszine_es_terfogata.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+        <li class="topic-item">
+          <a href="#gomb-felszin-terfogat" class="topic-link">Gömb felszíne, térfogata</a>
+          <a href="kviz_a_gomb_felszine_es_terfogata.html" class="toc-quiz-btn">Gyakorló Kvíz →</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- ---------------- MAIN ---------------- -->
+    <main>
+      <div class="card summary-card" id="keplet-gyujtemeny">
+          <h3>Képlet- és Tételgyűjtemény</h3>
+          <p>Az alábbi gombra kattintva megnyithatod a 8. osztályos tananyag összes fontos képletét és tételét egy külön oldalon a könnyebb áttekintés és tanulás érdekében.</p>
+          <a class="quiz-btn" href="teljes_kepletgyujtemeny_8_osztaly.html" style="background-color: var(--primary); width: 100%; text-align: center;">
+            📚 Teljes Képletgyűjtemény Megnyitása →
+          </a>
+      </div>
+
+      <!-- 1. FEJEZET -->
+      <div class="chapter-header"><h2>1. FEJEZET</h2><p>Intervallumok. Egyenlőtlenségek ℝ-ben</p></div>
+      <!-- Itt van az 1. fejezet összes kártyája... -->
+
+      <!-- 2. FEJEZET -->
+      <div class="chapter-header"><h2>2. FEJEZET</h2><p>Algebrai számítások ℝ-ben</p></div>
+      <!-- Itt van a 2. fejezet összes kártyája... -->
+
+      <!-- 3. FEJEZET -->
+      <div class="chapter-header"><h2>3. FEJEZET</h2><p>Függvények</p></div>
+      <!-- Itt van a 3. fejezet összes kártyája... -->
+
+
+      <!-- 4. FEJEZET (ÁBRÁKKAL KIEGÉSZÍTVE) -->
+      <div class="chapter-header">
+        <h2>4. FEJEZET</h2>
+        <p>A térmértan elemei</p>
+      </div>
+      <section id="pont-egyenes-sik" class="card">
+        <h3>Pont, egyenes, sík: jelölések, ábrázolás</h3>
+        <p>A térmértan alapfogalmai a pont, az egyenes és a sík. Ezeket nem definiáljuk, tulajdonságaik alapján képzeljük el őket. A pontokat nagybetűvel (A), az egyeneseket kisbetűvel (e), a síkokat nagybetűvel (S) vagy görög betűvel (α) jelöljük.</p>
+        <div class="diagram-container">
+            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                <defs><marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333" /></marker></defs>
+                <polygon points="50,120 150,140 250,110 150,90" fill="rgba(135, 206, 250, 0.3)" stroke="#555" stroke-width="1"/>
+                <text x="230" y="135" font-family="Roboto" font-size="12px" fill="#555">S (sík)</text>
+                <line x1="20" y1="20" x2="280" y2="60" stroke="#333" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+                <text x="150" y="30" font-family="Roboto" font-size="12px" fill="#333">e (egyenes)</text>
+                <circle cx="80" cy="80" r="3" fill="var(--primary)"/>
+                <text x="75" y="75" font-family="Roboto" font-size="14px" fill="var(--primary-hover)" font-weight="bold">A</text>
+            </svg>
+        </div>
+        <a class="quiz-btn" href="kviz_pont_egyenes_sik.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="sik-megalapitas" class="card">
+        <h3>A sík meghatározása</h3>
+        <p>Egy síkot egyértelműen meghatároz (vagy 'kifeszít') három, nem egy egyenesen lévő pont; egy egyenes és egy rá nem illeszkedő pont; két metsző egyenes; vagy két párhuzamos egyenes.</p>
+        <div class="diagram-container">
+            <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg"><style>.label{font-family:Roboto;font-size:11px;}</style><polygon points="10,80 140,100 290,70 160,50" fill="rgba(135, 206, 250, 0.3)" stroke="#555" stroke-width="1"/><circle cx="60" cy="75" r="3" fill="red"/><circle cx="150" cy="95" r="3" fill="red"/><circle cx="240" cy="75" r="3" fill="red"/><text x="120" y="40" class="label">3 pont kifeszít egy síkot.</text></svg>
+        </div>
+        <a class="quiz-btn" href="kviz_a_sik_meghatarozasa.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="ket-egyenes-helyzete" class="card">
+        <h3>Két egyenes kölcsönös helyzete a térben</h3>
+        <p>Két egyenes a térben lehet: metsző, párhuzamos, azonos, vagy kitérő (nincsenek egy síkban és nincs közös pontjuk).</p>
+        <div class="diagram-container">
+          <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg"><style>.label{font-family:Roboto;font-size:10px;fill:var(--primary-hover);font-weight:600;}.line{stroke-width:2.5;}</style><g transform="translate(100, 75) scale(1.2)"><path d="M -50 -30 L 50 -30 L 70 -50 L -30 -50 Z" fill="rgba(33,128,141,0.1)" stroke="#aaa"/><path d="M 50 -30 L 50 30 L 70 10 L 70 -50" fill="rgba(33,128,141,0.15)" stroke="#aaa"/><line x1="-50" y1="-30" x2="50" y2="-30" class="line" stroke="var(--primary)"/><text x="0" y="-35" class="label" text-anchor="middle">párhuzamos</text><line x1="50" y1="-30" x2="50" y2="30" class="line" stroke="blue" /><text x="55" y="5" class="label">metsző</text><line x1="-30" y1="10" x2="-50" y2="30" class="line" stroke="#28a745" /><text x="-55" y="25" class="label" text-anchor="end">kitérő</text><path d="M -50 30 L 50 30 L 70 10 L -30 10 Z" fill="none" stroke="#aaa" stroke-dasharray="3 3"/></g></svg>
+        </div>
+        <a class="quiz-btn" href="kviz_ket_egyenes_kolcsonos_helyzete_a_terben.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="egyenes-sik-helyzete" class="card">
+        <h3>Egyenes és sík kölcsönös helyzete</h3>
+        <p>Egy egyenes és egy sík a térben háromféle helyzetben lehet: az egyenes metszi a síkot (1 közös pont), párhuzamos a síkkal (0 közös pont), vagy az egyenes illeszkedik a síkra (végtelen sok közös pont).</p>
+        <div class="diagram-container">
+          <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg"><style>.label{font-family:Roboto;font-size:11px;}</style><polygon points="10,80 140,100 290,70 160,50" fill="rgba(135, 206, 250, 0.3)" stroke="#555" stroke-width="1"/><text x="250" y="95" class="label" font-weight="bold">S</text><line x1="20" y1="20" x2="280" y2="20" stroke="var(--primary)" stroke-width="2"/><text x="130" y="15" class="label">e (párhuzamos)</text><line x1="20" y1="65" x2="280" y2="85" stroke="#28a745" stroke-width="2"/><text x="130" y="98" class="label">f (illeszkedő)</text><line x1="100" y1="110" x2="200" y2="40" stroke="red" stroke-width="2" stroke-dasharray="4 4" /><line x1="200" y1="40" x2="225" y2="27.5" stroke="red" stroke-width="2" /><circle cx="175" cy="57.5" r="3" fill="red" /><text x="115" y="45" class="label">g (metsző)</text></svg>
+        </div>
+        <a class="quiz-btn" href="kviz_egyenes_es_sik_kolcsonos_helyzete.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="ket-sik-helyzete" class="card">
+        <h3>Két sík kölcsönös helyzete</h3>
+        <p>Két különböző sík a térben kétféle helyzetben lehet: vagy párhuzamosak (nincs közös pontjuk), vagy metszik egymást (közös pontjaik egy egyenest, a metszésvonalat alkotják).</p>
+        <div class="diagram-container">
+            <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg"><style>.label{font-family:Roboto;font-size:11px;}</style><polygon points="10,80 120,90 280,75 170,65" fill="rgba(135, 206, 250, 0.3)" stroke="#555" stroke-width="1"/><text x="250" y="90" class="label" font-weight="bold">S₁</text><polygon points="10,30 120,40 280,25 170,15" fill="rgba(255, 165, 0, 0.3)" stroke="#555" stroke-width="1"/><text x="250" y="40" class="label" font-weight="bold">S₂ (párhuzamos)</text><polygon points="150,110 280,100 260,20 130,30" fill="rgba(255, 0, 0, 0.2)" stroke="#555" stroke-width="1"/><text x="160" y="40" class="label" font-weight="bold">S₃ (metsző)</text><line x1="140" y1="102" x2="270" y2="88" stroke="red" stroke-width="2.5" /><text x="190" y="110" class="label" fill="red">metszésvonal</text></svg>
+        </div>
+        <a class="quiz-btn" href="kviz_ket_sik_kolcsonos_helyzete.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <!-- ... Itt folytatódnak a többi 4. és 5. fejezetes kártyák, mindegyik a saját ábrájával ... -->
+      <section id="sikmetszetek" class="card">
+        <h3>Alapsíkkal párhuzamos síkmetszetek</h3>
+        <p>Ha egy testet az alaplapjával párhuzamos síkkal elvágunk, a kapott síkmetszet tulajdonságai a test típusától függnek. Hasáboknál egybevágó, gúláknál hasonló az alaplaphoz.</p>
+        <div class="diagram-container">
+            <svg viewBox="0 0 250 140" xmlns="http://www.w3.org/2000/svg">
+                <style>.label{font-family:Roboto;font-size:10px;fill:var(--text);}</style>
+                <polygon points="50,120 150,120 170,100 70,100" fill="rgba(33,128,141,0.2)" stroke="var(--text)" />
+                <polygon points="85,60 125,60 135,50 95,50" fill="rgba(255, 165, 0, 0.4)" stroke="var(--primary)" />
+                <path d="M 50 120 L 110 10 L 150 120 M 70 100 L 110 10 L 170 100" fill="none" stroke="var(--text)"/>
+                <polygon points="10,70 60,75 240,65 190,60" fill="rgba(255, 0, 0, 0.1)" stroke="red" stroke-dasharray="3 3"/>
+                <text x="210" y="58" class="label" fill="red">metszősík</text>
+            </svg>
+        </div>
+        <a class="quiz-btn" href="kviz_alapsikkal_parhuzamos_sikmetszetek.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="meroleges-egyenesek" class="card">
+        <h3>Merőleges egyenesek, síkra merőleges egyenes</h3>
+        <p>Egy egyenes merőleges egy síkra, ha a sík minden, a döfésponton átmenő egyenesére merőleges. Elegendő, ha a sík két, egymást metsző egyenesére merőleges.</p>
+        <div class="diagram-container">
+            <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                 <style>.label{font-family:Roboto;font-size:10px;}</style>
+                 <polygon points="10,80 140,100 190,70 60,50" fill="rgba(135, 206, 250, 0.3)" stroke="#555" stroke-width="1"/>
+                 <line x1="35" y1="90" x2="165" y2="60" stroke="#555"/>
+                 <line x1="115" y1="52" x2="35" y2="70" stroke="#555"/>
+                 <line x1="100" y1="110" x2="100" y2="10" stroke="red" stroke-width="2.5"/>
+                 <circle cx="100" cy="75" r="3" fill="red" />
+                 <text x="105" y="20" class="label" fill="red">e ⊥ S</text>
+            </svg>
+        </div>
+        <a class="quiz-btn" href="kviz_meroleges_egyenesek_sikra_meroleges_egyenes.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="vetulet-sikra" class="card">
+        <h3>Pont, szakasz és egyenes vetülete a síkra</h3>
+        <p>Egy pont merőleges vetülete a pontból a síkra bocsátott merőleges talppontja. Egy alakzat vetületét a pontjainak vetületei alkotják. A vetület hossza maximum az eredeti hosszával egyenlő (párhuzamos esetben).</p>
+        <div class="diagram-container">
+            <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                <style>.label{font-family:Roboto;font-size:11px;}</style>
+                <polygon points="10,110 290,110 290,100 10,100" fill="rgba(135, 206, 250, 0.3)" stroke="#555" stroke-width="1"/>
+                <line x1="50" y1="30" x2="250" y2="60" stroke="var(--primary)" stroke-width="2.5"/><text x="150" y="35" class="label">e (ferde egyenes)</text>
+                <line x1="50" y1="105" x2="250" y2="105" stroke="#28a745" stroke-width="2.5"/><text x="150" y="95" class="label">e' (vetület)</text>
+                <line x1="50" y1="30" x2="50" y2="105" stroke="red" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <line x1="250" y1="60" x2="250" y2="105" stroke="red" stroke-width="1.5" stroke-dasharray="3 3"/>
+            </svg>
+        </div>
+        <a class="quiz-btn" href="kviz_pont_szakasz_egyenes_vetulete_a_sikra.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="egyenes-sik-hajlas" class="card">
+        <h3>Egyenes és sík hajlásszöge</h3>
+        <p>Egy metsző egyenes és egy sík hajlásszöge az egyenes és a síkra eső merőleges vetülete által bezárt szög. A hajlásszög mindig 0° és 90° közötti hegyesszög.</p>
+        <div class="diagram-container">
+            <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                <style>.label{font-family:Roboto;font-size:11px;}</style>
+                <polygon points="0,100 200,100 200,90 0,90" fill="rgba(135, 206, 250, 0.3)" stroke="#555" stroke-width="1"/>
+                <line x1="50" y1="20" x2="150" y2="95" stroke="var(--primary)" stroke-width="2.5"/><text x="80" y="45" class="label">e</text>
+                <line x1="80" y1="95" x2="150" y2="95" stroke="#28a745" stroke-width="2.5"/><text x="110" y="85" class="label">e'</text>
+                <line x1="50" y1="20" x2="80" y2="95" stroke="red" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <path d="M 130 95 A 20 20 0 0 1 143.3 80.3" fill="none" stroke="red" stroke-width="1.5"/><text x="125" y="80" class="label" fill="red">α</text>
+            </svg>
+        </div>
+        <a class="quiz-btn" href="kviz_egyenes_es_sik_hajlasszoge.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="lapszog" class="card">
+        <h3>Lapszög, lapszöghöz tartozó síkszög</h3>
+        <p>Két metsző sík hajlásszögét lapszögnek nevezzük. Mértékét a síkszöggel adjuk meg, amelyet úgy kapunk, hogy a metszésvonal egy pontjában mindkét síkban merőlegest állítunk a metszésvonalra. E két merőleges szár szöge a síkszög.</p>
+        <div class="diagram-container">
+             <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+                <style>.label{font-family:Roboto;font-size:10px;}</style>
+                <polygon points="10,130 190,130 150,10 50,10" fill="rgba(135, 206, 250, 0.2)" stroke="#555"/>
+                <polygon points="10,40 190,40 150,130 50,130" fill="rgba(255, 165, 0, 0.2)" stroke="#555"/>
+                <line x1="30" y1="85" x2="170" y2="85" stroke="red" stroke-width="2" /><text x="90" y="100" class="label" fill="red">metszésvonal</text>
+                <line x1="100" y1="85" x2="120" y2="25" stroke="blue" stroke-width="1.5"/>
+                <line x1="100" y1="85" x2="80" y2="125" stroke="blue" stroke-width="1.5"/>
+                <path d="M 100 75 A 10 10 0 0 1 108 68" fill="none" stroke="blue" stroke-width="1.5"/><text x="110" y="70" class="label" fill="blue">síkszög (α)</text>
+            </svg>
+        </div>
+        <a class="quiz-btn" href="kviz_lapszog_sikszoeg.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="harom-meroleges" class="card">
+        <h3>A három merőleges tétele</h3>
+        <p>Egy ferde egyenes (a) akkor és csak akkor merőleges egy síkbeli egyenesre (f), ha a merőleges vetülete (a') is merőleges f-re. A tétel a térbeli és a síkbeli merőlegesség között teremt kapcsolatot.</p>
+        <div class="diagram-container">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                <style>.label{font-family:Roboto;font-size:11px;}</style>
+                <polygon points="10,140 190,140 190,130 10,130" fill="rgba(135, 206, 250, 0.3)" stroke="#555"/>
+                <line x1="20" y1="135" x2="180" y2="135" stroke="black"/><text x="182" y="138" class="label">f</text>
+                <line x1="50" y1="30" x2="140" y2="135" stroke="var(--primary)" stroke-width="2.5"/><text x="80" y="70" class="label">a</text>
+                <line x1="95" y1="135" x2="140" y2="135" stroke="red" stroke-width="1.5"/><line x1="100" y1="130" x2="100" y2="140" stroke="red" stroke-width="1.5"/>
+                <line x1="90" y1="82.5" x2="140" y2="135" stroke="red" stroke-width="1.5"/><line x1="95" y1="87.5" x2="95" y2="77.5" stroke="red" stroke-width="1.5"/>
+                <line x1="50" y1="30" x2="90" y2="82.5" stroke-dasharray="3 3" stroke="grey"/>
+                <line x1="90" y1="82.5" x2="140" y2="135" stroke="#28a745" stroke-width="2.5"/><text x="110" y="100" class="label">a'</text>
+            </svg>
+        </div>
+        <a class="quiz-btn" href="kviz_a_harom_meroleges_tetele.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+
+      <!-- 5. FEJEZET -->
+      <div class="chapter-header">
+        <h2>5. FEJEZET</h2>
+        <p>Egyes mértani testek felszíne és térfogata</p>
+      </div>
+      
+      <section id="tavolsagmeres" class="card">
+        <h3>Távolságmérés a mértani testek felszínén és belsejében</h3>
+        <p>Két pont távolsága a térben az őket összekötő egyenes szakasz (pl. testátló), amit Pitagorasz-tétellel számolunk. A felszínen megtett legrövidebb út a test kiterített hálóján (testhálón) lévő egyenes szakasz.</p>
+        <div class="diagram-container">
+          <svg viewBox="0 0 250 150" xmlns="http://www.w3.org/2000/svg">
+            <style>.label{font-family:Roboto;font-size:9px;}.line{stroke-width:2;}</style>
+            <g transform="translate(125, 75)">
+                <path d="M -50 -30 L 50 -30 L 70 -50 L -30 -50 Z" fill="rgba(33,128,141,0.1)" stroke="#aaa"/>
+                <path d="M -50 30 L 50 30 L 70 10 L -30 10 Z" fill="rgba(33,128,141,0.2)" stroke="#aaa"/>
+                <path d="M -50 -30 L -50 30 M 50 -30 L 50 30 M -30 -50 L -30 10 M 70 -50 L 70 10" fill="none" stroke="#aaa"/>
+                <line x1="-50" y1="30" x2="70" y2="-50" class="line" stroke="red" stroke-dasharray="3 3"/><text x="-5" y="-15" class="label" fill="red">Testátló (belső út)</text>
+                <path d="M -50 30 L 50 -30 L 70 -50" stroke="blue" class="line" fill="none"/><text x="35" y="10" class="label" fill="blue">Felszíni út</text>
+            </g>
+          </svg>
+        </div>
+        <a class="quiz-btn" href="kviz_tavolsagmeres_testek_felszinen_es_belsejeben.html">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // ... a javascript kód változatlan ...
+  </script>
+</body>
+</html>

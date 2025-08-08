@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktív Digitális Tananyag - Fizika 7. Osztály</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f9; --main-text-color: #333; --nav-bg-color: #ffffff;
+            --nav-text-color: #4a5568; --nav-hover-color: #CD2A3E; --nav-border-color: #e2e8f0;
+            --card-bg-color: #ffffff; --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --formula-bg: #e9f7ff; --formula-border: #bbdefb;
+            --quiz-button-bg: #CD2A3E; --quiz-button-hover-bg: #a30000;
+            --header-color: #8c1827;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; margin: 0; background-color: var(--bg-color); color: var(--main-text-color); line-height: 1.6; }
+        html { scroll-behavior: smooth; }
+        .container { display: flex; max-width: 1600px; margin: 0 auto; }
+        #toc { width: 320px; flex-shrink: 0; background-color: var(--nav-bg-color); border-right: 1px solid var(--nav-border-color); padding: 2rem; height: 100vh; position: sticky; top: 0; overflow-y: auto; }
+        #toc h2 { font-size: 1.2rem; margin-top: 0; color: var(--header-color); border-bottom: 2px solid var(--header-color); padding-bottom: 0.5rem; }
+        #toc ul { list-style-type: none; padding: 0; margin: 0; }
+        #toc > ul > li { margin-bottom: 1.2rem; }
+        #toc ul li a { text-decoration: none; color: var(--nav-text-color); display: block; padding: 0.2rem 0; transition: color 0.2s; font-weight: 500; }
+        #toc > ul > li > a { font-weight: 700; font-size: 1.1em; color: var(--header-color); }
+        #toc ul li ul { padding-left: 1rem; margin-top: 0.5rem; border-left: 2px solid var(--nav-border-color); }
+        #toc ul li ul li a { font-size: 0.95em; }
+        #toc ul li a:hover { color: var(--nav-hover-color); }
+        main { flex-grow: 1; padding: 2rem 3rem; }
+        section { margin-bottom: 3rem; padding-top: 2rem; margin-top: -2rem; }
+        main > h1 { text-align: center; font-size: 2.5rem; color: var(--header-color); margin-bottom: 3rem; }
+        section > h2 { font-size: 2rem; color: var(--header-color); border-bottom: 2px solid var(--quiz-button-bg); padding-bottom: 0.5rem; margin-bottom: 2rem; }
+        .card { background-color: var(--card-bg-color); border-radius: 8px; box-shadow: var(--card-shadow); padding: 1.5rem; margin-bottom: 1rem; scroll-margin-top: 20px;}
+        .card h3 { margin-top: 0; font-size: 1.4rem; }
+        .card p { margin-bottom: 0; }
+        .formula { margin-top: 1rem; padding: 1rem; border-radius: 6px; background-color: var(--formula-bg); border: 1px solid var(--formula-border); font-family: 'Courier New', Courier, monospace; font-size: 1.1em; }
+        .quiz-button { display: inline-block; margin-top: 1.5rem; padding: 0.6rem 1.2rem; background-color: var(--quiz-button-bg); color: white; text-align: center; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s; }
+        .quiz-button:hover { background-color: var(--quiz-button-hover-bg); }
+        @media (max-width: 1024px) { .container { flex-direction: column; } #toc { position: static; width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--nav-border-color); padding: 1rem; } main { padding: 2rem 1.5rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav id="toc">
+            <h2>Tartalomjegyzék</h2>
+            <ul>
+                <li>
+                    <a href="#tema1">I. Egység: Matematikai eljárások</a>
+                    <ul>
+                        <li><a href="#tema1-1">1.1. Fizikai mennyiségek</a></li>
+                        <li><a href="#tema1-2">1.2. Kísérlet lépései</a></li>
+                        <li><a href="#tema1-3">1.3. Metrikus összefüggések</a></li>
+                        <li><a href="#tema1-4">1.4. Skaláris mennyiségek</a></li>
+                        <li><a href="#tema1-5">1.5. Vektoriális mennyiségek</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#tema2">II. Egység: Kölcsönhatások</a>
+                     <ul>
+                        <li><a href="#tema2-1">2.1. A kölcsönhatás</a></li>
+                        <li><a href="#tema2-2">2.2. Az erő</a></li>
+                        <li><a href="#tema2-3">2.3. Tehetetlenség elve</a></li>
+                        <li><a href="#tema2-4">2.4. Hatás-ellenhatás elve</a></li>
+                        <li><a href="#tema2-5">2.5. Példák az erőkre</a></li>
+                        <li><a href="#tema2-7">2.7. Erők összeadása</a></li>
+                    </ul>
+                </li>
+                 <li>
+                    <a href="#tema3">III. Egység: Munka, energia</a>
+                     <ul>
+                        <li><a href="#tema3-1">3.1. Mechanikai munka</a></li>
+                        <li><a href="#tema3-2">3.2. Teljesítmény</a></li>
+                        <li><a href="#tema3-3">3.3. Mozgási energia</a></li>
+                        <li><a href="#tema3-4">3.4. Helyzeti energia</a></li>
+                        <li><a href="#tema3-6">3.6. Mechanikai energia</a></li>
+                        <li><a href="#tema3-7">3.7. Energia-megmaradás</a></li>
+                    </ul>
+                </li>
+                 <li>
+                    <a href="#tema4">IV. Egység: Testek egyensúlya</a>
+                     <ul>
+                        <li><a href="#tema4-2">4.2. Haladási egyensúly</a></li>
+                        <li><a href="#tema4-3">4.3. Erő nyomatéka</a></li>
+                        <li><a href="#tema4-4">4.4. Forgási egyensúly</a></li>
+                        <li><a href="#tema4-5">4.5. Egyszerű gépek</a></li>
+                        <li><a href="#tema4-7">4.7. Súlypont</a></li>
+                    </ul>
+                </li>
+                 <li>
+                    <a href="#tema5">V. Egység: Folyadékok statikája</a>
+                     <ul>
+                        <li><a href="#tema5-1">5.1. Nyomás</a></li>
+                        <li><a href="#tema5-2">5.2. Hidrosztatikai nyomás</a></li>
+                        <li><a href="#tema5-3">5.3. Légköri nyomás</a></li>
+                        <li><a href="#tema5-4">5.4. Pascal törvénye</a></li>
+                        <li><a href="#tema5-5">5.5. Arkhimédész törvénye</a></li>
+                    </ul>
+                </li>
+                 <li>
+                    <a href="#tema6">VI. Egység: Mechanikai hullámok, hang</a>
+                     <ul>
+                        <li><a href="#tema6-1">6.1. Mechanikai hullámok</a></li>
+                        <li><a href="#tema6-2">6.2. Hangok keltése</a></li>
+                        <li><a href="#tema6-3">6.3. Hang jellemzői</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <h1>Fizika Segédlet - 7. Osztály</h1>
+            <section id="tema1">
+                <h2>I. Egység: A fizikában használt matematikai eljárások és modellek</h2>
+                <div class="card" id="tema1-1"><h3>1.1. Fizikai mennyiségek és jelenségek</h3><p>A fizikai mennyiség a testek mérhető tulajdonsága. Lehet skalár (csak nagysága van, pl. tömeg) vagy vektor (nagysága és iránya is van, pl. erő).</p><a href="kviz_fizikai_mennyisegek_es_jelensegek.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema1-2"><h3>1.2. Egy kísérlet magvalósításának a lépései</h3><p>A tudományos módszer lépései: megfigyelés, kérdés, hipotézis, kísérlet, elemzés, következtetés.</p><a href="kviz_egy_kiserlet_magvalositasanak_a_lepesei.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema1-3"><h3>1.3. Metrikus összefüggések tanulmányozása</h3><p>A fizika gyakran használ matematikai képleteket a jelenségek leírására. A Pitagorasz-tétel (a²+b²=c²) alapvető eszköz a vektorok összegzésénél.</p><a href="kviz_metrikus_osszefuggesek_tanulmanyozasa.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema1-4"><h3>1.4. Skaláris fizikai mennyiségek</h3><p>Olyan mennyiségek, amelyeket egyetlen számérték és mértékegység jellemez (pl. 5 kg, 20 °C, 10 s).</p><a href="kviz_skalaris_fizikai_mennyisegek.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema1-5"><h3>1.5. Vektoriális fizikai mennyiségek</h3><p>Olyan mennyiségek, amelyeknek a nagyságukon kívül irányuk is van (pl. 10 N lefelé, 50 km/h észak felé).</p><a href="kviz_vektorialis_fizikai_mennyisegek.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+            </section>
+            <section id="tema2">
+                <h2>II. Egység: Mechanikai jelenségek - Kölcsönhatások</h2>
+                <div class="card" id="tema2-1"><h3>2.1. A kölcsönhatás</h3><p>Két vagy több test egymásra gyakorolt hatása, melynek során megváltozik a mozgásállapotuk vagy az alakjuk.</p><a href="kviz_a_kolcsonhatas.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema2-2"><h3>2.2. Az erő - a kölcsönhatás mértéke</h3><p>Az erő (F) a kölcsönhatás erősségét és irányát leíró vektormennyiség. Mértékegysége a Newton (N).</p><a href="kviz_az_ero_a_kolcsonhatas_merteke.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema2-3"><h3>2.3. A tehetetlenség elve (Newton I.)</h3><p>Minden test nyugalomban marad vagy egyenes vonalú egyenletes mozgást végez, míg egy külső erő a mozgásállapota megváltoztatására nem kényszeríti.</p><a href="kviz_a_tehetetlenseg_elve.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema2-4"><h3>2.4. A hatás és visszahatás elve (Newton III.)</h3><p>Ha 'A' test erőt gyakorol 'B' testre (hatás), akkor 'B' test is ugyanakkora, de ellentétes irányú erőt gyakorol 'A' testre (ellenhatás).</p><a href="kviz_a_hatas_es_visszahatas_elve.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema2-5"><h3>2.5. Példák az erőkre</h3><p>Gravitációs erő (súly), rugalmas erő, súrlódási erő, közegellenállási erő.</p><a href="kviz_peldak_az_erokre.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema2-7"><h3>2.7. Az erők összeadása (eredő erő)</h3><p>Ha egy testre több erő hat, a mozgását az erők vektori összege, az eredő erő határozza meg.</p><a href="kviz_az_erok_osszeadasa.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+            </section>
+            <section id="tema3">
+                <h2>III. Egység: Mechanikai jelenségek - Mechanikai munka, energia</h2>
+                <div class="card" id="tema3-1"><h3>3.1. Mechanikai munka</h3><p>Akkor végzünk munkát, ha egy erő hatására a test elmozdul. Képlete: W = F ⋅ s.</p><a href="kviz_mechanikai_munka.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema3-2"><h3>3.2. Teljesítmény</h3><p>A munkavégzés sebessége. Képlete: P = W / t.</p><a href="kviz_teljesitmeny.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema3-3"><h3>3.3. Mozgási energia</h3><p>A mozgó testek munkavégző képessége. Képlete: E<sub>kin</sub> = ½ ⋅ m ⋅ v².</p><a href="kviz_mozgasi_energia.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema3-4"><h3>3.4. Helyzeti energia</h3><p>A felemelt testek munkavégző képessége a gravitációs mezőben. Képlete: E<sub>pot</sub> = m ⋅ g ⋅ h.</p><a href="kviz_helyzeti_energia.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema3-6"><h3>3.6. Mechanikai energia</h3><p>A mozgási és a helyzeti energia összege. Képlete: E<sub>mech</sub> = E<sub>kin</sub> + E<sub>pot</sub>.</p><a href="kviz_mechanikai_energia.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema3-7"><h3>3.7. Energia-megmaradás</h3><p>Zárt rendszerben a teljes mechanikai energia állandó marad.</p><a href="kviz_energia_megmaradas.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+            </section>
+            <section id="tema4">
+                <h2>IV. Egység: Mechanikai jelenségek - Testek egyensúlya</h2>
+                <div class="card" id="tema4-2"><h3>4.2. Haladási egyensúly</h3><p>Egy test haladási egyensúlyban van, ha a rá ható erők eredője nulla (ΣF = 0).</p><a href="kviz_haladasi_egyensuly.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema4-3"><h3>4.3. Erő nyomatéka</h3><p>Az erő forgató hatása. Képlete: M = F ⋅ k (erő szorozva erőkar).</p><a href="kviz_forgatonyomatek.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema4-4"><h3>4.4. Forgási egyensúly</h3><p>Egy test forgási egyensúlyban van, ha a rá ható forgatónyomatékok összege nulla (ΣM = 0).</p><a href="kviz_forgasi_egyensuly.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema4-5"><h3>4.5. Egyszerű gépek</h3><p>Az erőt vagy annak irányát megváltoztató eszközök, mint az emelő és a csiga.</p><a href="kviz_egyszeru_gepek.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema4-7"><h3>4.7. Súlypont</h3><p>A testen belüli képzeletbeli pont, ahol a test teljes súlyereje támad.</p><a href="kviz_sulypont.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+            </section>
+            <section id="tema5">
+                <h2>V. Egység: Mechanikai jelenségek - Folyadékok statikája</h2>
+                <div class="card" id="tema5-1"><h3>5.1. Nyomás</h3><p>Az egységnyi felületre ható nyomóerő. Képlete: p = F / A.</p><a href="kviz_nyomas.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema5-2"><h3>5.2. Hidrosztatikai nyomás</h3><p>A folyadék súlyából származó nyomás. Képlete: p = ρ ⋅ g ⋅ h.</p><a href="kviz_hidrosztatikai_nyomas.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema5-3"><h3>5.3. Légköri nyomás</h3><p>A Földet körülvevő levegőréteg súlyából származó nyomás.</p><a href="kviz_legkori_nyomas.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema5-4"><h3>5.4. Pascal törvénye</h3><p>Nyugvó, zárt folyadékban a külső nyomás minden irányban gyengítetlenül terjed tovább.</p><a href="kviz_pascal_torvenye.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema5-5"><h3>5.5. Arkhimédész törvénye</h3><p>Minden folyadékba merülő testre felhajtóerő hat, amely egyenlő a test által kiszorított folyadék súlyával.</p><a href="kviz_arkhimedesz_torvenye.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+            </section>
+            <section id="tema6">
+                <h2>VI. Egység: Mechanikai jelenségek - Mechanikai hullámok, a hang</h2>
+                <div class="card" id="tema6-1"><h3>6.1. Mechanikai hullámok</h3><p>Rugalmas közegben terjedő rezgésállapot.</p><a href="kviz_mechanikai_hullamok.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema6-2"><h3>6.2. Hangok keltése</h3><p>A hangot a testek rezgése kelti, terjedéséhez közeg szükséges.</p><a href="kviz_hangok_keltese_es_erzekelese.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                <div class="card" id="tema6-3"><h3>6.3. Hang jellemzői</h3><p>Hangmagasság (frekvencia), hangerősség (amplitúdó), hangszín (felhangok).</p><a href="kviz_a_hang_jellemzoi.html" class="quiz-button">Gyakorló Kvíz a Témakörben →</a></div>
+                
+                <a href="kviz_7_osztaly_ev_vegi_osszefoglalo.html" class="quiz-button" style="display:block; width:100%; text-align:center; margin-top:2rem;">Év Végi Összefoglaló Kvíz - Fizika 7. Osztály</a>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

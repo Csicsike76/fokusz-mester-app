@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Kvíz: Egész számok alapjai</title>
+  <style>
+    :root {
+      --primary-color: #388d3c; /* Zöld */
+      --secondary-color: #d52b1e; /* Piros */
+      --light-green: #e8f5e9;
+      --light-red: #ffebee;
+      --text-dark: #333;
+      --text-light: #fff;
+      --border-color: #ddd;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, var(--secondary-color), var(--text-light), var(--primary-color));
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: var(--text-light);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+    .question-block {
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .question {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    .answers label {
+      display: block;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      border: 1px solid transparent;
+    }
+    .answers label:hover {
+        background-color: #f0f0f0;
+    }
+    .answers input[type="radio"] {
+      margin-right: 0.8em;
+      accent-color: var(--primary-color);
+    }
+    .answers label.correct {
+      background-color: var(--light-green);
+      border-color: var(--primary-color);
+      font-weight: bold;
+    }
+    .answers label.incorrect {
+      background-color: var(--light-red);
+      border-color: var(--secondary-color);
+    }
+    .explanation {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      background-color: #f7f7fa;
+      border-left: 4px solid var(--primary-color);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .controls, .pin-section {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #f9fafb;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .pin-input {
+      width: 140px;
+      padding: 10px;
+      font-size: 1.1em;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    button:hover:not(:disabled) {
+      background-color: #2a6a2d;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    #result {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      font-size: 1.3em;
+      text-align: center;
+    }
+    .admin-panel {
+      display: none;
+      margin-top: 2rem;
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      background-color: #fffde7;
+      border-radius: 8px;
+    }
+    @media (max-width: 600px) {
+      main { padding: 1.5rem 1rem; }
+      header h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body autocomplete="off">
+  
+  <header>
+    <h1>Kvíz: Egész számok alapjai</h1>
+  </header>
+
+  <main>
+    <div class="pin-section">
+      <input type="password" id="pin" class="pin-input" placeholder="PIN-kód" autocomplete="off">
+      <button type="button" id="checkBtn">Ellenőrzés</button>
+      <div id="result"></div>
+    </div>
+    
+    <form id="quiz-form" autocomplete="off">
+      <!-- A kérdések ide generálódnak -->
+    </form>
+    
+    <div class="admin-panel" id="admin-panel">
+      <h3>Adminisztrációs panel</h3>
+      <p>Mester PIN-kóddal sikeresen bejelentkezve.</p>
+    </div>
+  </main>
+
+  <script>
+    const MASTER_PIN = '121909';
+    const studentPins = new Set();
+    function createInitialPins() {
+        for (let i = 1; i <= 20; i++) {
+            studentPins.add((100000 + i).toString());
+        }
+    }
+
+    const questions = [
+        { q: "Melyik szám NEM egész szám?", a: "-100", b: "3/4", c: "0", correct: "b", exp: "Az egész számok halmaza (ℤ) a pozitív és negatív egész számokat, valamint a nullát tartalmazza. A 3/4 egy racionális szám, de nem egész." },
+        { q: "Mi a -20 szám abszolút értéke?", a: "20", b: "-20", c: "±20", correct: "a", exp: "Egy szám abszolút értéke (modulusa) a szám távolsága a 0-tól a számegyenesen. A távolság mindig nemnegatív, ezért |-20| = 20." },
+        { q: "Mi a 15 szám ellentettje?", a: "1/15", b: "-15", c: "15", correct: "b", exp: "Egy szám ellentettje az a szám, amely a számegyenesen a 0-tól ugyanakkora távolságra van, csak az ellenkező oldalon. A 15 ellentettje a -15." },
+        { q: "Melyik a legnagyobb szám az alábbiak közül?", a: "-5", b: "-1", c: "0", correct: "c", exp: "A számegyenesen a jobbra lévő számok a nagyobbak. A 0 jobbra van mind a -1-től, mind a -5-től, ezért a 0 a legnagyobb." },
+        { q: "Melyik szám van legtávolabb a 0-tól?", a: "8", b: "-9", c: "-3", correct: "b", exp: "A 0-tól való távolságot az abszolút érték adja meg. |8|=8; |-9|=9; |-3|=3. A 9 a legnagyobb abszolút érték, tehát a -9 van a legtávolabb." },
+        { q: "Hány olyan egész szám van, amelynek az abszolút értéke 4?", a: "Egy (csak a 4)", b: "Nincs ilyen.", c: "Kettő (a 4 és a -4)", correct: "c", exp: "Az |x|=4 egyenletnek két megoldása van az egész számok körében: x=4 és x=-4, mivel mindkettő 4 egység távolságra van a nullától." },
+        { q: "Melyik a helyes növekvő sorrend?", a: "-10, -5, 0, 2", b: "-5, -10, 0, 2", c: "0, 2, -5, -10", correct: "a", exp: "A számegyenesen balról jobbra haladva a számok növekednek. A helyes sorrend: -10 < -5 < 0 < 2." },
+        { q: "Melyik állítás igaz?", a: "|-7| < |5|", b: "|-7| > |5|", c: "|-7| = -7", correct: "b", exp: "Számoljuk ki az abszolút értékeket: |-7|=7 és |5|=5. Mivel 7 > 5, a 'b' állítás az igaz. Az abszolút érték sosem lehet negatív." },
+        { q: "Mi a 0 szám ellentettje?", a: "Nincs ellentettje.", b: "Maga a 0.", c: "Végtelen.", correct: "b", exp: "A 0 egy speciális szám, amelynek az ellentettje önmaga. |0|=0 és -0=0." },
+        { q: "Mi a |-3| + |-2| értéke?", a: "5", b: "-5", c: "1", correct: "a", exp: "Először kiszámítjuk az abszolút értékeket: |-3|=3 és |-2|=2. Ezután összeadjuk őket: 3 + 2 = 5." },
+        { q: "Melyik a legkisebb pozitív egész szám?", a: "0", b: "1", c: "Nem létezik.", correct: "b", exp: "A pozitív egész számok halmaza a {1, 2, 3, ...}. Ennek a halmaznak a legkisebb eleme az 1. A 0 nem pozitív és nem negatív." },
+        { q: "Hány egész szám van -3 és 3 között (a határokat nem számítva)?", a: "4", b: "6", c: "5", correct: "c", exp: "A -3 és 3 közötti egész számok: -2, -1, 0, 1, 2. Ez összesen 5 darab szám." },
+        { q: "Hol helyezkedik el a -4 a számegyenesen?", a: "A 0-tól jobbra.", b: "A 0-tól balra.", c: "Pontosan a 0-n.", correct: "b", exp: "A negatív egész számokat a számegyenesen a 0-tól balra ábrázoljuk, a negatív irányban." },
+        { q: "Ha |x|=10, akkor x lehetséges értékei:", a: "Csak 10.", b: "10 vagy -10.", c: "Nincs ilyen x.", correct: "b", exp: "Két egész számnak van 10 az abszolút értéke: a 10-nek és a -10-nek. Mindkettő 10 egységre van a nullától." },
+        { q: "Melyik a legnagyobb kétjegyű negatív egész szám?", a: "-99", b: "-10", c: "-1", correct: "b", exp: "A kétjegyű negatív egészek a -99, -98, ..., -10. A számegyenesen a -10 van a leginkább jobbra, ezért ez a legnagyobb közülük." },
+        { q: "Melyik a kakukktojás? (Melyik nem egész szám?)", a: "-18/3", b: "10/4", c: "100/10", correct: "b", exp: "Számoljuk ki az értékeket: a) -18/3 = -6 (egész). b) 10/4 = 2,5 (nem egész). c) 100/10 = 10 (egész). A 10/4 a kakukktojás." },
+        { q: "Mi az a szám, aminek az abszolút értéke és az ellentettje is 8?", a: "8", b: "-8", c: "Nincs ilyen szám.", correct: "b", exp: "Legyen a szám x. |x|=8 és -x=8. A második egyenletből x=-8. Ellenőrizzük az elsőt: |-8|=8. Az állítás igaz. Tehát a keresett szám a -8." },
+        { q: "Melyik reláció igaz?", a: "-100 < -200", b: "-100 > -200", c: "-100 = -200", correct: "b", exp: "Negatív számok esetén az a nagyobb, amelyiknek az abszolút értéke kisebb. Mivel |-100|=100 és |-200|=200, a -100 a nagyobb szám." },
+        { q: "Mi a {-2, 0, 5, -8} halmaz elemeinek abszolút értékeinek halmaza?", a: "{2, 0, 5, 8}", b: "{2, 5, 8}", c: "{-2, 0, 5, -8}", correct: "a", exp: "Vegyük az elemek abszolút értékeit sorban: |-2|=2; |0|=0; |5|=5; |-8|=8. Az így kapott számok halmaza a {0, 2, 5, 8}." },
+        { q: "Mi az x ellentettjének az ellentettje?", a: "0", b: "x", c: "-x", correct: "b", exp: "Egy szám ellentettjének (-x) az ellentettje -(-x), ami megegyezik az eredeti x számmal. Például: -(-5) = 5." },
+        { q: "Hány eleme van az egész számok (ℤ) halmazának?", a: "Végtelen", b: "Véges", c: "Attól függ, meddig számolunk.", correct: "a", exp: "Az egész számok halmaza mind pozitív, mind negatív irányban végtelen, nincs legnagyobb és legkisebb eleme sem. Ezért végtelen halmaz." },
+        { q: "Melyik állítás írja le az egész számok halmazát?", a: "A pozitív számok és a nulla.", b: "A természetes számok és ellentettjeik.", c: "A természetes számok, a nulla és a negatív egészek.", correct: "c", exp: "Ez az egész számok halmazának legpontosabb leírása, amely magában foglalja a pozitív egészeket (természetes számok), a negatív egészeket és a nullát." },
+        { q: "Melyik a legkisebb háromjegyű pozitív egész szám?", a: "100", b: "101", c: "102", correct: "a", exp: "A háromjegyű pozitív egész számok a 100-zal kezdődnek és 999-ig tartanak. Ezek közül a legkisebb a 100." },
+        { q: "A 0 szám...", a: "...pozitív egész szám.", b: "...negatív egész szám.", c: "...sem nem pozitív, sem nem negatív.", correct: "c", exp: "A nulla egy speciális egész szám, amely elválasztja a pozitív és negatív tartományt. Előjel nélküli, se nem pozitív, se nem negatív." },
+        { q: "Melyik a helyes jelölés az 'egész számok halmaza' kifejezésre?", a: "E", b: "N", c: "ℤ", correct: "c", exp: "A matematikában az egész számok halmazának jelölésére a ℤ betűt használjuk, ami a német 'Zahlen' (számok) szóból ered." }
+    ];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    const quizForm = document.getElementById('quiz-form');
+    function populateQuiz() {
+      shuffle(questions);
+      quizForm.innerHTML = '';
+      questions.forEach((item, i) => {
+        const block = document.createElement('div');
+        block.className = 'question-block';
+        block.innerHTML = `
+          <div class="question">${i + 1}. ${item.q}</div>
+          <div class="answers">
+            <label><input type="radio" name="q${i}" value="a"/> a) ${item.a}</label>
+            <label><input type="radio" name="q${i}" value="b"/> b) ${item.b}</label>
+            <label><input type="radio" name="q${i}" value="c"/> c) ${item.c}</label>
+          </div>
+          <div class="explanation" id="exp${i}">${item.exp}</div>
+        `;
+        quizForm.appendChild(block);
+      });
+    }
+
+    function areAllQuestionsAnswered() {
+      for (let i = 0; i < questions.length; i++) {
+        if (!quizForm.querySelector(`input[name="q${i}"]:checked`)) return false;
+      }
+      return true;
+    }
+
+    function isPinValid(pin) {
+        return pin === MASTER_PIN || studentPins.has(pin);
+    }
+
+    function evaluateQuiz(isMaster = false) {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const selectedOption = quizForm.querySelector(`input[name="q${i}"]:checked`);
+        const explanation = document.getElementById(`exp${i}`);
+        const answerLabels = quizForm.querySelector(`input[name="q${i}"]`).parentElement.parentElement.querySelectorAll('label');
+        
+        if (selectedOption) {
+            const parentLabel = selectedOption.parentElement;
+            if (selectedOption.value === q.correct) {
+                score++;
+                parentLabel.classList.add('correct');
+                parentLabel.innerHTML = `✅ ${parentLabel.innerHTML}`;
+            } else {
+                parentLabel.classList.add('incorrect');
+                parentLabel.innerHTML = `❌ ${parentLabel.innerHTML}`;
+                const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+                correctLabel.classList.add('correct');
+            }
+        } else if (isMaster) {
+             const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+             correctLabel.classList.add('correct');
+        }
+        
+        if (selectedOption || isMaster) {
+            explanation.style.display = 'block';
+        }
+        
+        quizForm.querySelectorAll(`input[name="q${i}"]`).forEach(input => input.disabled = true);
+      });
+
+      if (isMaster) score = questions.length;
+      const percentage = ((score / questions.length) * 100).toFixed(0);
+      document.getElementById('result').innerHTML = `Eredmény: <b>${score}/${questions.length}</b> (${percentage}%)`;
+      document.getElementById('checkBtn').disabled = true;
+      document.getElementById('pin').disabled = true;
+    }
+    
+    function masterMode() {
+        questions.forEach((q, i) => {
+            const correctRadio = quizForm.querySelector(`input[name="q${i}"][value="${q.correct}"]`);
+            if (correctRadio) correctRadio.checked = true;
+        });
+        evaluateQuiz(true);
+        document.getElementById('admin-panel').style.display = 'block';
+    }
+
+    function checkAnswers() {
+        const pin = document.getElementById('pin').value;
+        if (!isPinValid(pin)) {
+            alert('Érvénytelen PIN-kód! Kérlek, próbáld újra.');
+            return;
+        }
+
+        if (pin === MASTER_PIN) {
+            masterMode();
+            return;
+        }
+
+        if (!areAllQuestionsAnswered()) {
+            alert('Kérlek, válaszolj az összes kérdésre az ellenőrzés előtt!');
+            return;
+        }
+        
+        evaluateQuiz();
+    }
+
+    document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+    document.getElementById('pin').addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            checkAnswers();
+        }
+    });
+
+    // Induláskor
+    window.onload = function() {
+        createInitialPins();
+        populateQuiz();
+    };
+
+  </script>
+</body>
+</html>

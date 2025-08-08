@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Gyakorló Kvíz – Pont, egyenes, sík</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    :root {
+      --green:#28a745; --green-dark:#1e7e34;
+      --red:#dc3545; --red-dark:#c82333;
+      --blue:#007bff; --blue-dark:#0056b3;
+      --light:#f8f9fa; --dark:#343a40;
+      --master:#ff6b35;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:sans-serif;background:var(--light);color:var(--dark);padding:1rem}
+    .header{background:var(--blue);color:#fff;text-align:center;padding:1.5rem;border-radius:8px}
+    .header h1{margin-bottom:.5rem}
+    .pin-area{background:#fff;border:2px solid var(--blue);border-radius:8px;padding:1rem;max-width:360px;margin:1rem auto;text-align:center}
+    .pin-area input{width:120px;padding:.5rem;margin-top:.5rem}
+    .btn{padding:.5rem 1rem;margin:.5rem;border:none;border-radius:4px;background:var(--blue);color:#fff;cursor:pointer}
+    .btn-master{background:var(--master);display:none}
+    .master-mode{background:var(--master);color:#fff;text-align:center;padding:.5rem;border-radius:20px;margin:1rem 0;display:none}
+    .progress-bar{background:#e9ecef;height:6px;border-radius:3px;overflow:hidden;margin:1rem 0}
+    .progress-fill{background:var(--blue);height:100%;width:0;transition:width .3s}
+    .question{background:#fff;border:1px solid #ddd;border-radius:6px;padding:1rem;margin-bottom:1rem}
+    .question h3{font-size:1rem;margin-bottom:.5rem}
+    .answer-option{display:block;padding:.5rem;border:1px solid transparent;border-radius:4px;cursor:pointer;margin:.3rem 0;transition:background .2s}
+    .answer-option:hover{background:#f1f1f1}
+    .explanation{display:none;background:#eef;padding:.8rem;border-left:4px solid var(--blue);margin-top:.5rem}
+    .explanation.show{display:block}
+    .correct{background:var(--green)!important;color:#fff!important;border-color:var(--green-dark)!important}
+    .correct::after{content:"✅";position:absolute;right:10px;top:10px}
+    .wrong{background:var(--red)!important;color:#fff!important;border-color:var(--red-dark)!important}
+    .wrong::after{content:"❌";position:absolute;right:10px;top:10px}
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🎯 Gyakorló Kvíz</h1>
+    <p>Pont – Egyenes – Sík</p>
+  </div>
+
+  <div class="pin-area">
+    <h3>🔐 PIN-kód ellenőrzés</h3>
+    <p>Írd be a PIN-t:</p>
+    <input type="text" id="pinInput" maxlength="6" placeholder="PIN"/>
+    <br>
+    <button id="checkBtn" class="btn">Ellenőrzés</button>
+    <button id="masterBtn" class="btn btn-master">Mester módban</button>
+  </div>
+
+  <div id="masterMode" class="master-mode">Mester módban – helyes válaszok és magyarázatok láthatók</div>
+  <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+
+  <form id="quizForm" autocomplete="off">
+
+    <!-- 1 (a) -->
+    <div class="question" data-answer="a">
+      <h3>1. Egy síkon két pont egyértelműen meghatároz egy...</h3>
+      <label class="answer-option"><input type="radio" name="q1" value="a">egyenest</label>
+      <label class="answer-option"><input type="radio" name="q1" value="b">kört</label>
+      <label class="answer-option"><input type="radio" name="q1" value="c">háromszöget</label>
+      <div class="explanation">
+        🔹 <strong>Definíció:</strong> Pont–pont → egyenes.<br>
+        ✅ <strong>Megoldás:</strong> egyenes.
+      </div>
+    </div>
+
+    <!-- 2 (b) -->
+    <div class="question" data-answer="b">
+      <h3>2. Három nem kollineáris pont egyértelműen meghatároz egy...</h3>
+      <label class="answer-option"><input type="radio" name="q2" value="a">egyenest</label>
+      <label class="answer-option"><input type="radio" name="q2" value="b">síkmértani háromszöget</label>
+      <label class="answer-option"><input type="radio" name="q2" value="c">gömböt</label>
+      <div class="explanation">
+        🔹 Három nem egy egyenesen lévő pont létrehoz egy síkban húzott háromszöget.<br>
+        ✅ <strong>Megoldás:</strong> síkmértani háromszöget.
+      </div>
+    </div>
+
+    <!-- 3 (c) -->
+    <div class="question" data-answer="c">
+      <h3>3. Ha két egyenes metszi egymást, akkor...</h3>
+      <label class="answer-option"><input type="radio" name="q3" value="a">minden pontjuk közös</label>
+      <label class="answer-option"><input type="radio" name="q3" value="b">nincs közös pontjuk</label>
+      <label class="answer-option"><input type="radio" name="q3" value="c">pontban metszenek</label>
+      <div class="explanation">
+        🔹 Metszéspont = közös pont.<br>
+        ✅ <strong>Megoldás:</strong> pontban metszenek.
+      </div>
+    </div>
+
+    <!-- 4 (a) -->
+    <div class="question" data-answer="a">
+      <h3>4. Két párhuzamos egyenes síkot határoz meg?</h3>
+      <label class="answer-option"><input type="radio" name="q4" value="a">igen</label>
+      <label class="answer-option"><input type="radio" name="q4" value="b">nem</label>
+      <label class="answer-option"><input type="radio" name="q4" value="c">csak merőleges esetén</label>
+      <div class="explanation">
+        🔹 Két párhuzamos egyenes is egy síkon fekszik.<br>
+        ✅ <strong>Megoldás:</strong> igen.
+      </div>
+    </div>
+
+    <!-- 5 (c) -->
+    <div class="question" data-answer="c">
+      <h3>5. Három pont kollineáris, ha...</h3>
+      <label class="answer-option"><input type="radio" name="q5" value="a">háromszöget alkotnak</label>
+      <label class="answer-option"><input type="radio" name="q5" value="b">mindegyik pont külön síkban van</label>
+      <label class="answer-option"><input type="radio" name="q5" value="c">ugyanazon az egyenesen fekszenek</label>
+      <div class="explanation">
+        🔹 Kollinearitás = pontok egy egyenesen.<br>
+        ✅ <strong>Megoldás:</strong> ugyanazon az egyenesen fekszenek.
+      </div>
+    </div>
+
+    <!-- 6 (b) -->
+    <div class="question" data-answer="b">
+      <h3>6. Merőleges egyenesek találkozási szöge:</h3>
+      <label class="answer-option"><input type="radio" name="q6" value="a">60°</label>
+      <label class="answer-option"><input type="radio" name="q6" value="b">90°</label>
+      <label class="answer-option"><input type="radio" name="q6" value="c">120°</label>
+      <div class="explanation">
+        🔹 Merőleges = 90°-os szög.<br>
+        ✅ <strong>Megoldás:</strong> 90°.
+      </div>
+    </div>
+
+    <!-- 7 (a) -->
+    <div class="question" data-answer="a">
+      <h3>7. Egy sík és egy pont nem ezen a síkon új síkot határoz?</h3>
+      <label class="answer-option"><input type="radio" name="q7" value="a">igen</label>
+      <label class="answer-option"><input type="radio" name="q7" value="b">nem</label>
+      <label class="answer-option"><input type="radio" name="q7" value="c">csak ha pont rajta van</label>
+      <div class="explanation">
+        🔹 Egy sík + kívüli pont = új sík.<br>
+        ✅ <strong>Megoldás:</strong> igen.
+      </div>
+    </div>
+
+    <!-- 8 (c) -->
+    <div class="question" data-answer="c">
+      <h3>8. Két párhuzamos sík metszi egymást?</h3>
+      <label class="answer-option"><input type="radio" name="q8" value="a">igen, pontban</label>
+      <label class="answer-option"><input type="radio" name="q8" value="b">igen, vonalban</label>
+      <label class="answer-option"><input type="radio" name="q8" value="c">nem</label>
+      <div class="explanation">
+        🔹 Párhuzamos síkok soha nem metszenek.<br>
+        ✅ <strong>Megoldás:</strong> nem.
+      </div>
+    </div>
+
+    <!-- 9 (b) -->
+    <div class="question" data-answer="b">
+      <h3>9. Ha egyenes merőleges egy síkra, akkor...</h3>
+      <label class="answer-option"><input type="radio" name="q9" value="a">metszi sík vonalát</label>
+      <label class="answer-option"><input type="radio" name="q9" value="b">merőleges bármely síkbeli egyenesre</label>
+      <label class="answer-option"><input type="radio" name="q9" value="c">soha nem találkozik</label>
+      <div class="explanation">
+        🔹 Merőleges egyenes síkra → merőleges minden síkbeli egyenesre.<br>
+        ✅ <strong>Megoldás:</strong> merőleges bármely síkbeli egyenesre.
+      </div>
+    </div>
+
+    <!-- 10 (a) -->
+    <div class="question" data-answer="a">
+      <h3>10. Pont és merőlegesen álló egyenes távolsága a ponttól...</h3>
+      <label class="answer-option"><input type="radio" name="q10" value="a">rövidítés a pontból a síkra</label>
+      <label class="answer-option"><input type="radio" name="q10" value="b">hosszabbodik</label>
+      <label class="answer-option"><input type="radio" name="q10" value="c">nem értelmezhető</label>
+      <div class="explanation">
+        🔹 Pontból vett merőleges vetület meghatározza a legkisebb távolságot.<br>
+        ✅ <strong>Megoldás:</strong> rövidítés a pontból a síkra.
+      </div>
+    </div>
+
+    <!-- 11 (c) -->
+    <div class="question" data-answer="c">
+      <h3>11. Két egyenes nem lap egy síkon, ha...</h3>
+      <label class="answer-option"><input type="radio" name="q11" value="a">metszik egymást</label>
+      <label class="answer-option"><input type="radio" name="q11" value="b">párhuzamosak</label>
+      <label class="answer-option"><input type="radio" name="q11" value="c">ferdén metszik</label>
+      <div class="explanation">
+        🔹 Ferdén metsző egyenesek nem helyezkednek egy síkban.<br>
+        ✅ <strong>Megoldás:</strong> ferdén metszik.
+      </div>
+    </div>
+
+    <!-- 12 (a) -->
+    <div class="question" data-answer="a">
+      <h3>12. Pont és nem metsző sík távolsága...</h3>
+      <label class="answer-option"><input type="radio" name="q12" value="a">a ponttól vett merőleges vetület</label>
+      <label class="answer-option"><input type="radio" name="q12" value="b">tetszőleges pont távolsága</label>
+      <label class="answer-option"><input type="radio" name="q12" value="c">végtelen</label>
+      <div class="explanation">
+        🔹 A távolság definíciója: pontból vett merőleges vetület hossza.<br>
+        ✅ <strong>Megoldás:</strong> a ponttól vett merőleges vetület.
+      </div>
+    </div>
+
+    <!-- 13 (b) -->
+    <div class="question" data-answer="b">
+      <h3>13. Két párhuzamos egyenes közötti távolság...</h3>
+      <label class="answer-option"><input type="radio" name="q13" value="a">felső és alsó pontok összege</label>
+      <label class="answer-option"><input type="radio" name="q13" value="b">bármelyik pontból vett merőleges vetület hossza</label>
+      <label class="answer-option"><input type="radio" name="q13" value="c">az átellenes végtelen</label>
+      <div class="explanation">
+        🔹 Párhuzamos egyenesek távolsága konstans; bármelyik pontból vett merőleges vetület hossza.<br>
+        ✅ <strong>Megoldás:</strong> merőleges vetület hossza.
+      </div>
+    </div>
+
+    <!-- 14 (a) -->
+    <div class="question" data-answer="a">
+      <h3>14. Három nem kollineáris pont távolsága...</h3>
+      <label class="answer-option"><input type="radio" name="q14" value="a">háromszöget alkot</label>
+      <label class="answer-option"><input type="radio" name="q14" value="b">egyenest alkot</label>
+      <label class="answer-option"><input type="radio" name="q14" value="c">síkot nem alkot</label>
+      <div class="explanation">
+        🔹 Három pont nem egy vonalon háromszöget alkot.<br>
+        ✅ <strong>Megoldás:</strong> háromszöget alkot.
+      </div>
+    </div>
+
+    <!-- 15 (c) -->
+    <div class="question" data-answer="c">
+      <h3>15. Valós geometriai pont a síkon definiálható...</h3>
+      <label class="answer-option"><input type="radio" name="q15" value="a">térben</label>
+      <label class="answer-option"><input type="radio" name="q15" value="b">egyenesen</label>
+      <label class="answer-option"><input type="radio" name="q15" value="c">két koordinátával</label>
+      <div class="explanation">
+        🔹 Egy pont síkon két koordinátával határozható meg.<br>
+        ✅ <strong>Megoldás:</strong> két koordinátával.
+      </div>
+    </div>
+
+    <!-- 16 (b) -->
+    <div class="question" data-answer="b">
+      <h3>16. Egy sík egyenlete ax + by + c = 0 formában...</h3>
+      <label class="answer-option"><input type="radio" name="q16" value="a">nem sík</label>
+      <label class="answer-option"><input type="radio" name="q16" value="b">mindent tartalmaz</label>
+      <label class="answer-option"><input type="radio" name="q16" value="c">egyenest ad</label>
+      <div class="explanation">
+        🔹 ax+by+c=0 formában síkot definiálunk a térben.<br>
+        ✅ <strong>Megoldás:</strong> mindent tartalmaz.
+      </div>
+    </div>
+
+    <!-- 17 (a) -->
+    <div class="question" data-answer="a">
+      <h3>17. Pont és sík meghatározásához hány adat kell?</h3>
+      <label class="answer-option"><input type="radio" name="q17" value="a">3 pont</label>
+      <label class="answer-option"><input type="radio" name="q17" value="b">2 vonal</label>
+      <label class="answer-option"><input type="radio" name="q17" value="c">4 pont</label>
+      <div class="explanation">
+        🔹 3 nem egy síkban lévő pont határoz meg egy síkot.<br>
+        ✅ <strong>Megoldás:</strong> 3 pont.
+      </div>
+    </div>
+
+    <!-- 18 (c) -->
+    <div class="question" data-answer="c">
+      <h3>18. Egy sík és egy vele párhuzamos egyenes...</h3>
+      <label class="answer-option"><input type="radio" name="q18" value="a">metszi</label>
+      <label class="answer-option"><input type="radio" name="q18" value="b">merőleges rá</label>
+      <label class="answer-option"><input type="radio" name="q18" value="c">nem metszi</label>
+      <div class="explanation">
+        🔹 Párhuzamos sík és egyenes nem metszi egymást.<br>
+        ✅ <strong>Megoldás:</strong> nem metszi.
+      </div>
+    </div>
+
+    <!-- 19 (a) -->
+    <div class="question" data-answer="a">
+      <h3>19. Pont és rá merőleges sík között a távolság...</h3>
+      <label class="answer-option"><input type="radio" name="q19" value="a">a pontból vett merőleges vetület</label>
+      <label class="answer-option"><input type="radio" name="q19" value="b">a legnagyobb távolság</label>
+      <label class="answer-option"><input type="radio" name="q19" value="c">végtelen</label>
+      <div class="explanation">
+        🔹 Pont és merőleges sík távolsága a merőleges vetület hossza.<br>
+        ✅ <strong>Megoldás:</strong> a pontból vett merőleges vetület.
+      </div>
+    </div>
+
+    <!-- 20 (b) -->
+    <div class="question" data-answer="b">
+      <h3>20. Két sík kereszteződése...</h3>
+      <label class="answer-option"><input type="radio" name="q20" value="a">pont</label>
+      <label class="answer-option"><input type="radio" name="q20" value="b">egyenes</label>
+      <label class="answer-option"><input type="radio" name="q20" value="c">síkon belül marad</label>
+      <div class="explanation">
+        🔹 Két nem párhuzamos sík mindig egy egyenest határoz meg.<br>
+        ✅ <strong>Megoldás:</strong> egyenes.
+      </div>
+    </div>
+
+    <!-- 21 (c) -->
+    <div class="question" data-answer="c">
+      <h3>21. Pont–pont–pont definiálhat síkot, ha...</h3>
+      <label class="answer-option"><input type="radio" name="q21" value="a">kollineáris</label>
+      <label class="answer-option"><input type="radio" name="q21" value="b">egy vonalon</label>
+      <label class="answer-option"><input type="radio" name="q21" value="c">nem kollineáris</label>
+      <div class="explanation">
+        🔹 Három nem egy egyenesen lévő pont határoz meg síkot.<br>
+        ✅ <strong>Megoldás:</strong> nem kollineáris.
+      </div>
+    </div>
+
+    <!-- 22 (a) -->
+    <div class="question" data-answer="a">
+      <h3>22. Egy egyenest két ponttal adjunk meg, ha...</h3>
+      <label class="answer-option"><input type="radio" name="q22" value="a">pontok különböznek</label>
+      <label class="answer-option"><input type="radio" name="q22" value="b">pontok megegyeznek</label>
+      <label class="answer-option"><input type="radio" name="q22" value="c">több pont</label>
+      <div class="explanation">
+        🔹 Két azonos pont nem határoz egyenest.<br>
+        ✅ <strong>Megoldás:</strong> pontok különböznek.
+      </div>
+    </div>
+
+    <!-- 23 (b) -->
+    <div class="question" data-answer="b">
+      <h3>23. Három pont kollinearitását teszteli:</h3>
+      <label class="answer-option"><input type="radio" name="q23" value="a">szakasz</label>
+      <label class="answer-option"><input type="radio" name="q23" value="b">determináns</label>
+      <label class="answer-option"><input type="radio" name="q23" value="c">szögmérő</label>
+      <div class="explanation">
+        🔹 Három pont kollinearitása a mátrix determinánsa segítségével tesztelhető.<br>
+        ✅ <strong>Megoldás:</strong> determináns.
+      </div>
+    </div>
+
+    <!-- 24 (c) -->
+    <div class="question" data-answer="c">
+      <h3>24. Egyenes és pont távolsága a pontból vett...</h3>
+      <label class="answer-option"><input type="radio" name="q24" value="a">legnagyobb</label>
+      <label class="answer-option"><input type="radio" name="q24" value="b">tetszőleges</label>
+      <label class="answer-option"><input type="radio" name="q24" value="c">merőleges vetület</label>
+      <div class="explanation">
+        🔹 Pont–egyenes távolság = merőleges vetület hossza.<br>
+        ✅ <strong>Megoldás:</strong> merőleges vetület.
+      </div>
+    </div>
+
+    <!-- 25 (a) -->
+    <div class="question" data-answer="a">
+      <h3>25. Egy sík és pont merőleges vetülete...</h3>
+      <label class="answer-option"><input type="radio" name="q25" value="a">legkisebb távolság</label>
+      <label class="answer-option"><input type="radio" name="q25" value="b">legnagyobb távolság</label>
+      <label class="answer-option"><input type="radio" name="q25" value="c">nincs értelmezve</label>
+      <div class="explanation">
+        🔹 A síkra vett merőleges vetület adja a legkisebb távolságot.<br>
+        ✅ <strong>Megoldás:</strong> legkisebb távolság.
+      </div>
+    </div>
+
+  </form>
+
+  <script>
+    const MASTER_PIN="121909", STUDENT_PINS=Array.from({length:20},(_,i)=>String(100001+i));
+    const pinInput=document.getElementById("pinInput"), checkBtn=document.getElementById("checkBtn"), masterBtn=document.getElementById("masterBtn");
+    const masterMode=document.getElementById("masterMode"), progressFill=document.getElementById("progressBar"), quizForm=document.getElementById("quizForm");
+
+    pinInput.addEventListener("input",()=>{
+      const isM=pinInput.value.trim()===MASTER_PIN;
+      masterBtn.style.display=isM?"inline-block":"none"; checkBtn.style.display=isM?"none":"inline-block";
+      masterMode.style.display=isM?"block":"none";
+      document.querySelectorAll(".explanation").forEach(e=>e.classList.toggle("show",isM));
+      if(isM) document.querySelectorAll(".answer-option input").forEach(i=>{ if(i.value===i.closest(".question").dataset.answer) i.parentNode.classList.add("master-correct"); });
+    });
+
+    quizForm.addEventListener("change",()=>{ const c=quizForm.querySelectorAll("input[type=radio]:checked").length; progressFill.style.width=(c/25*100)+"%"; });
+
+    function evaluate(master){
+      quizForm.querySelectorAll(".question").forEach((q,i)=>{
+        const ans=q.dataset.answer, sel=q.querySelector("input:checked");
+        q.querySelectorAll(".answer-option").forEach(op=>op.classList.remove("correct","wrong"));
+        if(sel){
+          sel.value===ans?sel.parentNode.classList.add("correct"):sel.parentNode.classList.add("wrong");
+        }
+        if(master) q.querySelector(".explanation").classList.add("show");
+      });
+    }
+
+    checkBtn.onclick=()=>{
+      if(!STUDENT_PINS.includes(pinInput.value.trim())) return alert("❌ Érvénytelen PIN!");
+      if(quizForm.querySelectorAll("input[type=radio]:checked").length<25) return alert("⚠️ Minden kérdésre válaszolj!");
+      evaluate(false);
+    };
+    masterBtn.onclick=()=>evaluate(true);
+
+    pinInput.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); (pinInput.value.trim()===MASTER_PIN?masterBtn:checkBtn).click(); }});
+  </script>
+
+</body>
+</html>

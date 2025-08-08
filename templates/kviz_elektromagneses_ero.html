@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Elektromágneses erő</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Az elektromágnes által kifejtett erő</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Mitől függ az elektromágnes által kifejtett erő?",
+                answers: { a: "A tekercs menetszámától és az áramerősségtől.", b: "Csak a vasmag színétől.", c: "Csak a feszültségtől." },
+                correctAnswer: 'a',
+                explanation: "Az elektromágnes vonzereje annál nagyobb, minél több menet van a tekercsén, minél nagyobb áram folyik benne, és ha van benne vasmag. A feszültség csak közvetve, az áramerősségen keresztül befolyásolja. ✅ Megoldás: A tekercs menetszámától és az áramerősségtől."
+            },
+            {
+                question: "Hogyan lehet növelni egy elektromágnes erejét?",
+                answers: { a: "Növeljük az áramerősséget.", b: "Csökkentjük a menetszámot.", c: "Kivesszük a vasmagot." },
+                correctAnswer: 'a',
+                explanation: "Az elektromágnes ereje egyenesen arányos az áramerősséggel. Nagyobb áram erősebb mágneses mezőt hoz létre, így a vonzerő is nagyobb lesz. ✅ Megoldás: Növeljük az áramerősséget."
+            },
+            {
+                question: "Mi a vasmag szerepe az elektromágnesben?",
+                answers: { a: "Jelentősen felerősíti a mágneses hatást.", b: "Gyengíti a mágneses hatást.", c: "Hűti a tekercset." },
+                correctAnswer: 'a',
+                explanation: "A vas egy ferromágneses anyag, amely a tekercs mágneses mezejének hatására maga is erősen mágneseződik, és a saját mezejével felerősíti az eredeti mezőt. ✅ Megoldás: Jelentősen felerősíti a mágneses hatást."
+            },
+            {
+                question: "Melyik eszköz használja ki az elektromágnes erejét?",
+                answers: { a: "Autóbontóban a roncsokat emelő daru.", b: "Egy iránytű.", c: "Egy hagyományos mérleg." },
+                correctAnswer: 'a',
+                explanation: "A nagy tömegű vas- és acélhulladék emelésére erős, ki- és bekapcsolható elektromágneseket használnak. Az iránytű állandó mágnest használ. ✅ Megoldás: Autóbontóban a roncsokat emelő daru."
+            },
+            {
+                question: "Ha egy elektromágnes 100 gémkapcsot tud felemelni, és megduplázzuk a tekercs menetszámát (az áram állandó), akkor...",
+                answers: { a: "...körülbelül 200 gémkapcsot fog tudni felemelni.", b: "...körülbelül 50 gémkapcsot fog tudni felemelni.", c: "...továbbra is 100 gémkapcsot fog tudni felemelni." },
+                correctAnswer: 'a',
+                explanation: "Az elektromágnes ereje egyenesen arányos a menetszámmal. Ha a menetszámot duplázzuk, az erő is nagyjából a kétszeresére nő. ✅ Megoldás: ...körülbelül 200 gémkapcsot fog tudni felemelni."
+            },
+            {
+                question: "Az elektromágnes által kifejtett erő...",
+                answers: { a: "...egy távolhatás.", b: "...egy érintkezési erő.", c: "...nem valódi erő." },
+                correctAnswer: 'a',
+                explanation: "Mint minden mágneses erő, az elektromágnes ereje is távolhatás, azaz nem szükséges a közvetlen érintkezés ahhoz, hogy a hatását kifejtse a ferromágneses tárgyakra. ✅ Megoldás: ...egy távolhatás."
+            },
+            {
+                question: "Mi történik az elektromágnes erejével, ha kikapcsoljuk az áramot?",
+                answers: { a: "Gyakorlatilag megszűnik.", b: "Megduplázódik.", c: "Nem változik." },
+                correctAnswer: 'a',
+                explanation: "Az elektromágnes működésének alapja az áram mágneses hatása. Ha az áram megszűnik, a mágneses mező is összeomlik, és a vonzerő eltűnik (csak egy minimális, visszamaradt mágnesesség maradhat a vasmagban). ✅ Megoldás: Gyakorlatilag megszűnik."
+            },
+            {
+                question: "Melyik állítás igaz?",
+                answers: { a: "A több menetes tekercs erősebb elektromágnest hoz létre.", b: "A kevesebb menetes tekercs erősebb elektromágnest hoz létre.", c: "A menetszám nem befolyásolja az erőt." },
+                correctAnswer: 'a',
+                explanation: "Minden egyes áramjárta menet létrehoz egy kis mágneses mezőt. Ezeknek a mezőknek a hatása a tekercsben összeadódik, így a több menet erősebb eredő mágneses mezőt és nagyobb vonzerőt eredményez. ✅ Megoldás: A több menetes tekercs erősebb elektromágnest hoz létre."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Mi az elektromágnes?",
+                answers: { a: "Egy állandó mágnes.", b: "Egy áramjárta tekercs, általában vasmaggal.", c: "Egyfajta elem." },
+                correctAnswer: 'b',
+                explanation: "Az elektromágnes egy olyan eszköz, amely elektromos áram hatására hoz létre mágneses mezőt. Jellemzően egy vasmag köré tekert szigetelt vezetékből áll. ✅ Megoldás: Egy áramjárta tekercs, általában vasmaggal."
+            },
+            {
+                question: "Mi NEM befolyásolja az elektromágnes által kifejtett erő nagyságát?",
+                answers: { a: "Az áramerősség.", b: "A tekercs huzalának színe.", c: "A vasmag jelenléte." },
+                correctAnswer: 'b',
+                explanation: "Az elektromágnes erejét az áramerősség, a menetszám és a vasmag anyaga határozza meg. A szigetelő bevonat színének nincs hatása a mágneses tulajdonságokra. ✅ Megoldás: A tekercs huzalának színe."
+            },
+            {
+                question: "Ha egy elektromágnes 100 gémkapcsot tud felemelni, és az áramerősséget a felére csökkentjük, akkor...",
+                answers: { a: "...továbbra is 100 gémkapcsot emel fel.", b: "...körülbelül 50 gémkapcsot fog tudni felemelni.", c: "...körülbelül 200 gémkapcsot fog tudni felemelni." },
+                correctAnswer: 'b',
+                explanation: "Az elektromágnes ereje egyenesen arányos az áramerősséggel. Ha az áramerősséget felére csökkentjük, a vonzerő is körülbelül a felére fog csökkenni. ✅ Megoldás: ...körülbelül 50 gémkapcsot fog tudni felemelni."
+            },
+            {
+                question: "Hogyan lehet szabályozni egy elektromágnes erejét?",
+                answers: { a: "Nem lehet szabályozni.", b: "Az áramerősség változtatásával.", c: "A pólusok felcserélésével." },
+                correctAnswer: 'b',
+                explanation: "Az elektromágnes ereje könnyen szabályozható azáltal, hogy a tekercsen átfolyó áram erősségét változtatjuk. Nagyobb áram erősebb mágnest, kisebb áram gyengébbet eredményez. ✅ Megoldás: Az áramerősség változtatásával."
+            },
+            {
+                question: "Az elektromos motorok...",
+                answers: { a: "...állandó mágneseket használnak.", b: "...az áram mágneses hatásán alapuló erőhatást használják ki a forgáshoz.", c: "...hőenergiával működnek." },
+                correctAnswer: 'b',
+                explanation: "A villanymotorokban az állórész és a forgórész mágneses mezői közötti vonzó és taszító erők hozzák létre a forgatónyomatékot, ami a motor tengelyét forgatja. Ezek a mágneses mezők legalább részben elektromágnesek által jönnek létre. ✅ Megoldás: ...az áram mágneses hatásán alapuló erőhatást használják ki a forgáshoz."
+            },
+            {
+                question: "Melyik állítás igaz?",
+                answers: { a: "Az elektromágnes csak vonzani tud, taszítani nem.", b: "Az elektromágnesnek is van északi és déli pólusa.", c: "Az elektromágnes ereje független a menetszámtól." },
+                correctAnswer: 'b',
+                explanation: "Mint minden mágnesnek, az elektromágnesnek is két pólusa van, egy északi és egy déli. Emiatt képes vonzani a vasat, és vonzani vagy taszítani egy másik mágnes pólusait. ✅ Megoldás: Az elektromágnesnek is van északi és déli pólusa."
+            },
+            {
+                question: "Ha egy elektromágnest egy iránytű közelébe helyezünk, mi történik?",
+                answers: { a: "Semmi.", b: "Az iránytű beáll az elektromágnes mágneses mezejének irányába.", c: "Az iránytű elveszíti mágnesességét." },
+                correctAnswer: 'b',
+                explanation: "Az elektromágnes mágneses mezőt hoz létre maga körül. Ha ebbe a mezőbe egy iránytűt (ami egy kis állandó mágnes) helyezünk, az be fog állni a helyi mágneses erővonalak irányába. ✅ Megoldás: Az iránytű beáll az elektromágnes mágneses mezejének irányába."
+            },
+            {
+                question: "Mi az elektromágneses indukció?",
+                answers: { a: "A mágneses mező erőssége.", b: "Amikor a változó mágneses mező elektromos mezőt (feszültséget) hoz létre.", c: "A mágnesek készítésének módja." },
+                correctAnswer: 'b',
+                explanation: "Az elektromágneses indukció az áram mágneses hatásának fordítottja: ha egy vezető környezetében változik a mágneses mező, a vezetőben feszültség, és így áram indukálódik. Ezen az elven működnek a generátorok. ✅ Megoldás: Amikor a változó mágneses mező elektromos mezőt (feszültséget) hoz létre."
+            },
+            {
+                question: "A hangszórókban egy tekercs mozog egy mágneses mezőben. Mi mozgatja a tekercset?",
+                answers: { a: "A levegő nyomása.", b: "Az elektromos áram és a mágneses mező kölcsönhatása (Lorentz-erő).", c: "A membrán rezgése." },
+                correctAnswer: 'b',
+                explanation: "A hangszóróba vezetett elektromos jel (áram) átfolyik a tekercsen. Az áramjárta tekercsre a mágneses mező erőt fejt ki, ami a hang ritmusában mozgatja a tekercset és a hozzá erősített membránt. ✅ Megoldás: Az elektromos áram és a mágneses mező kölcsönhatása (Lorentz-erő)."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Mi NEM jellemző az elektromágnesre?",
+                answers: { a: "Ki- és bekapcsolható.", b: "Vasmaggal erősíthető.", c: "Természetben is előfordul." },
+                correctAnswer: 'c',
+                explanation: "Az elektromágnes mesterséges eszköz, emberi alkotás, amely elektromos árammal működik. A természetben előforduló mágnesek állandó mágnesek (pl. magnetit). ✅ Megoldás: Természetben is előfordul."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "Az áramjárta tekercs mágnesként viselkedik.", b: "A vasmag gyengíti az elektromágnest.", c: "Nagyobb áram erősebb elektromágnest eredményez." },
+                correctAnswer: 'b',
+                explanation: "Ez az állítás hamis. A vasmag a benne lévő atomi mágnesek rendeződése miatt jelentősen, akár több százszorosára is felerősíti a tekercs mágneses mezejét. ✅ Megoldás: A vasmag gyengíti az elektromágnest."
+            },
+            {
+                question: "Milyen kapcsolat van az elektromosság és a mágnesesség között?",
+                answers: { a: "Nincs köztük kapcsolat.", b: "A mágnesesség az elektromosság egyik formája.", c: "A két jelenség szorosan összefügg, elválaszthatatlanok (elektromágnesség)." },
+                correctAnswer: 'c',
+                explanation: "A mozgó elektromos töltések mágneses mezőt keltenek, a változó mágneses mező pedig elektromos mezőt. A két jelenség valójában egyetlen alapvető kölcsönhatás, az elektromágnesesség két oldala. ✅ Megoldás: A két jelenség szorosan összefügg, elválaszthatatlanok (elektromágnesség)."
+            },
+            {
+                question: "Az elektromágnes által kifejtett erő...",
+                answers: { a: "...mindig taszító.", b: "...mindig vonzó.", c: "...lehet vonzó és taszító is." },
+                correctAnswer: 'c',
+                explanation: "Az elektromágnes, mint minden mágnes, vonzza a ferromágneses anyagokat. Egy másik mágnessel vagy elektromágnessel szemben viszont a pólusok helyzetétől függően vonzó és taszító erőt is ki tud fejteni. ✅ Megoldás: ...lehet vonzó és taszító is."
+            },
+            {
+                question: "Mi a relé?",
+                answers: { a: "Egy áramforrás.", b: "Egy állandó mágnes.", c: "Egy elektromágneses kapcsoló." },
+                correctAnswer: 'c',
+                explanation: "A relé egy olyan eszköz, amellyel egy gyenge áramkör segítségével egy erős áramkört lehet biztonságosan kapcsolni. Egy kis elektromágnes működteti a nagy áramkör kapcsolóját. ✅ Megoldás: Egy elektromágneses kapcsoló."
+            },
+            {
+                question: "Hol használják az elektromágneses erőt?",
+                answers: { a: "Csak laboratóriumokban.", b: "Csak az iparban.", c: "Számos helyen, pl. motorokban, hangszórókban, relékben, darukban." },
+                correctAnswer: 'c',
+                explanation: "Az elektromágneses erőhatás a modern technológia egyik legfontosabb alapelve, a villanymotoroktól kezdve a hangszórókon, merevlemezeken át az orvosi képalkotó berendezésekig (MRI) rendkívül széles körben alkalmazzák. ✅ Megoldás: Számos helyen, pl. motorokban, hangszórókban, relékben, darukban."
+            },
+            {
+                question: "Miért 'zizeg' néha egy nagy teljesítményű transzformátor vagy elektromágnes?",
+                answers: { a: "Mert hibás.", b: "Mert a levegő rezeg benne.", c: "Mert a váltakozó áram által keltett, gyorsan változó mágneses erő megrezegteti a szerkezeti elemeket." },
+                correctAnswer: 'c',
+                explanation: "A hálózati váltakozó áram másodpercenként 50-szer változtat irányt. Ez a gyorsan változó mágneses mező a vasmagot és a tekercs meneteit is rezgésbe hozza, ami a jellegzetes, mély búgó hangot kelti. ✅ Megoldás: Mert a váltakozó áram által keltett, gyorsan változó mágneses erő megrezegteti a szerkezeti elemeket."
+            },
+            {
+                question: "Ha egy iránytűt egyenes áramjárta vezeték alá teszünk, a tű...",
+                answers: { a: "...párhuzamosan áll be a vezetékkel.", b: "...nem mozdul el.", c: "...merőlegesen áll be a vezetékre." },
+                correctAnswer: 'c',
+                explanation: "Az egyenes vezető körüli mágneses erővonalak a vezetőre merőleges síkban lévő körök. Az iránytű beáll a helyi erővonal érintőjének irányába, ami merőleges a vezetékre. ✅ Megoldás: ...merőlegesen áll be a vezetékre."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

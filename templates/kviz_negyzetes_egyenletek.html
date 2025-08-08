@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: x² = a alakú egyenletek</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 2px 5px; border-radius: 3px;}
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: x² = a alakú egyenletek</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'. Magyarázatok betűjel nélkül.
+            { question: "Mennyi az <span class='formula-display'>x² = 81</span> egyenlet megoldása?", answers: { a: "9 és -9", b: "Csak 9", c: "Nincs valós megoldása" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Levezetés:</b> Azokat a számokat keressük, amelyeknek a négyzete 81.</div><div class="explanation-step"><b>🔹 Megoldások:</b> Mind a 9, mind a -9 négyzete 81, mert 9² = 81 és (-9)² = 81.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 9 és -9.</div>` },
+            { question: "Hány valós megoldása van az <span class='formula-display'>x² = 0</span> egyenletnek?", answers: { a: "Egy", b: "Kettő", c: "Egy sem" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Levezetés:</b> Egyetlen szám van, amelynek a négyzete 0, és ez a 0.</div><div class="explanation-solution">✅ Megoldás: Az egyenletnek pontosan egy megoldása van.</div>` },
+            { question: "Mi az <span class='formula-display'>x² = 5</span> egyenlet megoldása?", answers: { a: "√5 és -√5", b: "Csak √5", c: "2.5 és -2.5" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Ha x² = a, és 'a' egy pozitív, de nem négyzetszám, akkor a megoldások a szám négyzetgyöke és annak ellentettje.</div><div class="explanation-solution">✅ Megoldás: A megoldások √5 és -√5.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>2x² = 50</span>", answers: { a: "5 és -5", b: "25 és -25", c: "√25" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. lépés:</b> Először osszuk el az egyenlet mindkét oldalát 2-vel, hogy az x² együtthatója 1 legyen.</div><div class="explanation-step"><b>🔹 2. lépés:</b> x² = 25.</div><div class="explanation-step"><b>🔹 3. lépés:</b> Keressük a számokat, melyek négyzete 25. Ezek az 5 és a -5.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 5 és -5.</div>` },
+            { question: "Melyik egyenletnek van két különböző valós megoldása?", answers: { a: "x² = 10", b: "x² = 0", c: "x² = -10" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Az x² = a egyenletnek akkor van két különböző valós megoldása, ha a > 0.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Csak az x² = 10 egyenletben pozitív a jobb oldal.</div><div class="explanation-solution">✅ Megoldás: Az x² = 10 egyenletnek van két különböző valós megoldása.</div>` },
+            { question: "Melyik számnak/számoknak a négyzete 49?", answers: { a: "7 és -7", b: "Csak 7", c: "24.5" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Kérdés elemzése:</b> Ez az x² = 49 egyenlet szóbeli megfogalmazása.</div><div class="explanation-step"><b>🔹 Megoldás:</b> 7² = 49 és (-7)² = 49.</div><div class="explanation-solution">✅ Megoldás: A 7 és a -7 négyzete 49.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>x² + 5 = 30</span>", answers: { a: "5 és -5", b: "√35 és -√35", c: "25 és -25" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. lépés:</b> Rendezzük az egyenletet. Vonjunk ki 5-öt mindkét oldalból: x² = 30 - 5.</div><div class="explanation-step"><b>🔹 2. lépés:</b> x² = 25.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 5 és -5.</div>` },
+            { question: "Mi az <span class='formula-display'>x² = 16/25</span> egyenlet megoldása?", answers: { a: "4/5 és -4/5", b: "16/5 és -16/5", c: "4/25 és -4/25" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Levezetés:</b> Gyököt vonunk a jobb oldalból: x = ±√(16/25).</div><div class="explanation-step"><b>🔹 Számolás:</b> A gyökvonást elvégezhetjük a számlálón és a nevezőn külön: x = ±(√16 / √25) = ±(4/5).</div><div class="explanation-solution">✅ Megoldás: A megoldások 4/5 és -4/5.</div>` },
+            { question: "Hány valós megoldása van az <span class='formula-display'>x² = -4</span> egyenletnek?", answers: { a: "Egy", b: "Egy sem", c: "Kettő" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Valós szám négyzete soha nem lehet negatív.</div><div class="explanation-step"><b>🔹 Következtetés:</b> Mivel az egyenlet jobb oldalán egy negatív szám (-4) áll, nincs olyan valós szám, amelynek a négyzete -4 lenne.</div><div class="explanation-solution">✅ Megoldás: Az egyenletnek egyetlen valós megoldása sincs.</div>` },
+            { question: "Melyik egyenletnek NINCS valós megoldása?", answers: { a: "x² = 1", b: "x² = -1", c: "x² = 0" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Az x² = a egyenletnek akkor nincs valós megoldása, ha a < 0.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A három opció közül csak az x² = -1 egyenletben negatív a jobb oldal.</div><div class="explanation-solution">✅ Megoldás: Az x² = -1 egyenletnek nincs valós megoldása.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>x² - 9 = 0</span>", answers: { a: "Csak 3", b: "3 és -3", c: "Nincs megoldása" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. lépés:</b> Rendezzük az egyenletet. Adjunk 9-et mindkét oldalhoz: x² = 9.</div><div class="explanation-step"><b>🔹 2. lépés:</b> Keressük a számokat, melyek négyzete 9.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 3 és -3.</div>` },
+            { question: "Az <span class='formula-display'>x² = 121</span> egyenlet pozitív megoldása:", answers: { a: "12.1", b: "11", c: "-11" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Lehetséges megoldások:</b> Az egyenlet megoldásai a 11 és a -11.</div><div class="explanation-step"><b>🔹 Kérdés elemzése:</b> A feladat csak a pozitív megoldást kéri.</div><div class="explanation-solution">✅ Megoldás: A pozitív megoldás a 11.</div>` },
+            { question: "Melyik szám a <span class='formula-display'>4x² = 100</span> egyenlet egyik megoldása?", answers: { a: "25", b: "5", c: "10" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. lépés:</b> Osszuk el az egyenletet 4-gyel: x² = 25.</div><div class="explanation-step"><b>🔹 2. lépés:</b> A megoldások x=5 és x=-5.</div><div class="explanation-step"><b>🔹 Válasz ellenőrzése:</b> Az opciók közül az 5 szerepel.</div><div class="explanation-solution">✅ Megoldás: Az 5 az egyenlet egyik megoldása.</div>` },
+            { question: "Melyik egyenlet megoldáshalmaza a <span class='formula-display'>{√6, -√6}</span>?", answers: { a: "x² = 36", b: "x² = 6", c: "x = √6" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Levezetés:</b> Ha a megoldások √6 és -√6, akkor a négyzetüknek kell az egyenlet jobb oldalán állnia.</div><div class="explanation-step"><b>🔹 Számolás:</b> (√6)² = 6 és (-√6)² = 6.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet, amelynek ezek a megoldásai, az x² = 6.</div>` },
+            { question: "Ha <span class='formula-display'>a < 0</span>, akkor az <span class='formula-display'>x² = a</span> egyenletnek:", answers: { a: "Két megoldása van", b: "Nincs valós megoldása", c: "Egy megoldása van" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Egy valós szám négyzete soha nem lehet negatív.</div><div class="explanation-step"><b>🔹 Következtetés:</b> Ha 'a' negatív, akkor nincs olyan valós 'x' szám, ami kielégítené az egyenletet.</div><div class="explanation-solution">✅ Megoldás: Az egyenletnek nincs valós megoldása.</div>` },
+            { question: "Az <span class='formula-display'>x² = 1</span> egyenlet negatív megoldása:", answers: { a: "0", b: "-1", c: "1" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Lehetséges megoldások:</b> Az egyenlet megoldásai az 1 és a -1.</div><div class="explanation-step"><b>🔹 Kérdés elemzése:</b> A feladat csak a negatív megoldást kéri.</div><div class="explanation-solution">✅ Megoldás: A negatív megoldás a -1.</div>` },
+            { question: "Melyik egyenletnek van pontosan egy megoldása?", answers: { a: "x² = 1", b: "x² = 0", c: "x² = -1" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b><br>• x² = 1: két megoldás (1, -1).<br>• x² = -1: nincs valós megoldás.<br>• x² = 0: egy megoldás (0).</div><div class="explanation-solution">✅ Megoldás: Az x² = 0 egyenletnek van pontosan egy megoldása.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>-x² = -64</span>", answers: { a: "Csak 8", b: "Nincs megoldása", c: "8 és -8" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. lépés:</b> Szorozzuk meg az egyenlet mindkét oldalát -1-gyel.</div><div class="explanation-step"><b>🔹 2. lépés:</b> x² = 64.</div><div class="explanation-step"><b>🔹 3. lépés:</b> Keressük a számokat, melyek négyzete 64.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 8 és -8.</div>` },
+            { question: "Mi a <span class='formula-display'>x² = 100</span> egyenlet megoldásainak összege?", answers: { a: "20", b: "10", c: "0" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Megoldások:</b> Az egyenlet megoldásai x₁ = 10 és x₂ = -10.</div><div class="explanation-step"><b>🔹 Összegzés:</b> 10 + (-10) = 0.</div><div class="explanation-solution">✅ Megoldás: A megoldások összege 0.</div>` },
+            { question: "Melyik szám NEM megoldása az <span class='formula-display'>x² = 36</span> egyenletnek?", answers: { a: "6", b: "-6", c: "18" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Megoldások:</b> Az egyenlet megoldásai 6 és -6, mert 6²=36 és (-6)²=36.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Az 18 négyzete nem 36.</div><div class="explanation-solution">✅ Megoldás: A 18 nem megoldása az egyenletnek.</div>` },
+            { question: "Ha <span class='formula-display'>x² = a</span> és <span class='formula-display'>a > 0</span>, akkor a két megoldás...", answers: { a: "mindig egész szám.", b: "mindig pozitív.", c: "egymás ellentettjei." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Általános megoldás:</b> Ha a>0, a két megoldás x₁ = √a és x₂ = -√a.</div><div class="explanation-step"><b>🔹 Definíció:</b> Két szám egymás ellentettje, ha csak az előjelükben különböznek.</div><div class="explanation-solution">✅ Megoldás: A két megoldás egymás ellentettje.</div>` },
+            { question: "Az <span class='formula-display'>x² = 2</span> egyenlet megoldásai milyen típusú számok?", answers: { a: "Egész számok", b: "Racionális számok", c: "Irracionális számok" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Megoldások:</b> Az egyenlet megoldásai √2 és -√2.</div><div class="explanation-step"><b>🔹 Definíció:</b> Mivel a 2 nem négyzetszám, a gyöke irracionális szám.</div><div class="explanation-solution">✅ Megoldás: A megoldások irracionális számok.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>100 - x² = 0</span>", answers: { a: "50 és -50", b: "Csak 10", c: "10 és -10" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. lépés:</b> Rendezzük az egyenletet: 100 = x².</div><div class="explanation-step"><b>🔹 2. lépés:</b> Ez ugyanaz, mint az x² = 100 egyenlet.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 10 és -10.</div>` },
+            { question: "Hány megoldása van az <span class='formula-display'>(x-5)² = 0</span> egyenletnek?", answers: { a: "2", b: "0", c: "1" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Levezetés:</b> Csak a 0 négyzete 0, tehát (x-5) -nek 0-nak kell lennie.</div><div class="explanation-step"><b>🔹 Egyenlet:</b> x - 5 = 0, amiből x = 5.</div><div class="explanation-solution">✅ Megoldás: Az egyenletnek pontosan egy megoldása van, az 5.</div>` },
+        ];
+
+        // JavaScript logika - változatlan, a címke nélküli megjelenítéssel
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

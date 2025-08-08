@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agyturbó Villámkártyák - Gyors Ismétlés</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --kek: #005A9C; --piros: #CD2A3E; --zold: #436F4D; --feher: #FFFFFF;
+            --sotet: #2c3e50; --vilagos-szurke: #f0f4f8; --szoveg: #34495e;
+            --card-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--vilagos-szurke); color: var(--szoveg); line-height: 1.6; padding: 20px; }
+        .container { max-width: 600px; margin: auto; }
+        .header, .card { background: var(--feher); border-radius: 12px; box-shadow: var(--card-shadow); margin-bottom: 2rem; padding: 1.5rem; }
+        .header h1 { font-family: 'Roboto Slab', serif; color: var(--sotet); margin: 0; text-align: center; }
+        .card h2 { font-family: 'Roboto Slab', serif; color: var(--kek); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem; }
+        .deck-selector-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .deck-selector-grid select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; }
+        .btn { width: 100%; padding: 12px 20px; border-radius: 8px; font-weight: 700; transition: all 0.3s; border: none; cursor: pointer; font-size: 1rem; }
+        .btn-start { background-color: var(--zold); color: var(--feher); }
+        .btn-next { background-color: var(--kek); color: var(--feher); margin-top: 1.5rem; }
+        #practice-area { display: none; }
+        .flashcard-container { perspective: 1000px; min-height: 250px; cursor: pointer; }
+        .flashcard { width: 100%; height: 250px; position: relative; transform-style: preserve-3d; transition: transform 0.6s; }
+        .flashcard.is-flipped { transform: rotateY(180deg); }
+        .flashcard-face {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex;
+            justify-content: center; align-items: center; padding: 2rem; border-radius: 12px;
+            border: 2px solid var(--kek); font-size: 1.5rem; text-align: center; font-weight: 500;
+        }
+        .flashcard-front { background: var(--feher); }
+        .flashcard-back { background: #e3f2fd; transform: rotateY(180deg); font-size: 1.1rem; text-align: left; align-items: flex-start; }
+        #deck-stats { text-align: center; margin: 1.5rem 0; font-weight: 500; }
+        .completion-message { text-align: center; padding: 2rem; color: var(--zold); font-weight: bold; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header"><h1>Agyturbó Villámkártyák</h1></header>
+
+        <div class="card" id="deck-selector-card">
+            <h2>Válassz Paklit!</h2>
+            <div class="deck-selector-grid">
+                <select id="subject-selector"></select>
+                <select id="grade-selector"></select>
+            </div>
+            <button id="start-practice-btn" class="btn btn-start">Gyakorlás Indítása</button>
+        </div>
+
+        <div class="card" id="practice-area">
+            <h2 id="practice-deck-title">Gyakorlás</h2>
+            <div id="deck-stats"></div>
+            <div class="flashcard-container" id="flashcard-container">
+                <div class="flashcard" id="flashcard">
+                    <div class="flashcard-face flashcard-front" id="flashcard-front"></div>
+                    <div class="flashcard-face flashcard-back" id="flashcard-back"></div>
+                </div>
+            </div>
+             <div id="completion-message" style="display: none;"></div>
+            <button id="next-card-btn" class="btn btn-next">Következő</button>
+            <button id="back-to-menu-btn" class="btn" style="background-color:#6c757d; color:white; margin-top:1rem;">Vissza a Menübe</button>
+        </div>
+    </div>
+    
+    <script src="kihivas_adatbazis.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const subjectSelector = document.getElementById('subject-selector');
+        const gradeSelector = document.getElementById('grade-selector');
+        const startBtn = document.getElementById('start-practice-btn');
+        
+        const deckSelectorCard = document.getElementById('deck-selector-card');
+        const practiceArea = document.getElementById('practice-area');
+
+        const practiceDeckTitle = document.getElementById('practice-deck-title');
+        const deckStats = document.getElementById('deck-stats');
+        const flashcardContainer = document.getElementById('flashcard-container');
+        const flashcard = document.getElementById('flashcard');
+        const flashcardFront = document.getElementById('flashcard-front');
+        const flashcardBack = document.getElementById('flashcard-back');
+        const nextCardBtn = document.getElementById('next-card-btn');
+        const backToMenuBtn = document.getElementById('back-to-menu-btn');
+        const completionMessage = document.getElementById('completion-message');
+
+        let currentDeck = [];
+        let currentIndex = 0;
+
+        function populateSubjects() {
+            Object.keys(cardDatabase).forEach(subject => {
+                const option = document.createElement('option');
+                option.value = subject;
+                option.textContent = subject;
+                subjectSelector.appendChild(option);
+            });
+        }
+
+        function populateGrades() {
+            const selectedSubject = subjectSelector.value;
+            gradeSelector.innerHTML = '';
+            Object.keys(cardDatabase[selectedSubject]).forEach(grade => {
+                const option = document.createElement('option');
+                option.value = grade;
+                option.textContent = grade;
+                gradeSelector.appendChild(option);
+            });
+        }
+        
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function startPractice() {
+            const subject = subjectSelector.value;
+            const grade = gradeSelector.value;
+            if (!subject || !grade) return;
+            
+            currentDeck = [...cardDatabase[subject][grade]];
+            shuffleArray(currentDeck);
+            currentIndex = 0;
+            
+            practiceDeckTitle.textContent = `Gyakorlás: ${subject} - ${grade}`;
+            deckSelectorCard.style.display = 'none';
+            practiceArea.style.display = 'block';
+            flashcardContainer.style.display = 'block';
+            nextCardBtn.textContent = 'Következő';
+            completionMessage.style.display = 'none';
+            
+            displayCard();
+        }
+
+        function displayCard() {
+            if (currentIndex >= currentDeck.length) {
+                flashcardContainer.style.display = 'none';
+                completionMessage.innerHTML = `🎉 Gratulálok, a pakli végére értél!`;
+                completionMessage.style.display = 'block';
+                nextCardBtn.textContent = 'Újra!';
+                currentIndex = 0; // Reset for restart
+                shuffleArray(currentDeck);
+                return;
+            }
+            
+            flashcard.classList.remove('is-flipped');
+            
+            const card = currentDeck[currentIndex];
+            flashcardFront.textContent = card.q;
+            flashcardBack.textContent = card.a;
+            
+            deckStats.textContent = `Kártya: ${currentIndex + 1} / ${currentDeck.length}`;
+        }
+        
+        // Event Listeners
+        populateSubjects();
+        populateGrades();
+
+        subjectSelector.addEventListener('change', populateGrades);
+        startBtn.addEventListener('click', startPractice);
+        flashcardContainer.addEventListener('click', () => flashcard.classList.toggle('is-flipped'));
+        
+        nextCardBtn.addEventListener('click', () => {
+            if (flashcardContainer.style.display === 'none') {
+                // Restarting the deck
+                flashcardContainer.style.display = 'block';
+                completionMessage.style.display = 'none';
+                nextCardBtn.textContent = 'Következő';
+            } else {
+                currentIndex++;
+            }
+            displayCard();
+        });
+        
+        backToMenuBtn.addEventListener('click', () => {
+            practiceArea.style.display = 'none';
+            deckSelectorCard.style.display = 'block';
+        });
+    });
+    </script>
+</body>
+</html>

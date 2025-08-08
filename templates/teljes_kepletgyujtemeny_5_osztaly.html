@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Képlet- és Tételgyűjtemény - Matematika 5. Osztály</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        :root {
+            --bg-color: #f4f7f9;
+            --main-text-color: #333;
+            --nav-bg-color: #ffffff;
+            --nav-text-color: #4a5568;
+            --nav-hover-color: #2d3748;
+            --nav-border-color: #e2e8f0;
+            --card-bg-color: #ffffff;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --formula-bg: #eef2f7;
+            --formula-border: #dbe1e8;
+            --example-bg: #fdfaf4;
+            --example-border: #f2e9d8;
+            --quiz-button-bg: #4299e1;
+            --quiz-button-hover-bg: #3182ce;
+            --header-color: #2c3e50;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--main-text-color);
+            line-height: 1.6;
+        }
+        .container { display: flex; max-width: 1400px; margin: 0 auto; }
+        #toc { width: 300px; flex-shrink: 0; background-color: var(--nav-bg-color); border-right: 1px solid var(--nav-border-color); padding: 2rem; height: 100vh; position: sticky; top: 0; overflow-y: auto; }
+        #toc h2 { font-size: 1.2rem; margin-top: 0; color: var(--header-color); border-bottom: 2px solid var(--header-color); padding-bottom: 0.5rem; }
+        #toc ul { list-style-type: none; padding: 0; margin: 0; }
+        #toc > ul > li { margin-bottom: 1rem; }
+        #toc ul li a { text-decoration: none; color: var(--nav-text-color); display: block; padding: 0.3rem 0; transition: color 0.2s; font-weight: 500; }
+        #toc > ul > li > a { font-weight: 700; font-size: 1.1em; color: var(--primary-color); }
+        #toc ul li ul { padding-left: 1rem; margin-top: 0.5rem; border-left: 2px solid var(--nav-border-color); }
+        #toc ul li ul li a { font-size: 0.95em; }
+        #toc ul li a:hover { color: var(--nav-hover-color); }
+        main { flex-grow: 1; padding: 2rem 3rem; }
+        section { margin-bottom: 3rem; padding-top: 2rem; margin-top: -2rem; }
+        main > h1 { text-align: center; font-size: 2.5rem; color: var(--header-color); margin-bottom: 3rem; }
+        section > h2 { font-size: 2rem; color: var(--header-color); border-bottom: 2px solid var(--quiz-button-bg); padding-bottom: 0.5rem; margin-bottom: 2rem; }
+        .card { background-color: var(--card-bg-color); border-radius: 8px; box-shadow: var(--card-shadow); padding: 1.5rem; margin-bottom: 2rem; }
+        .card h3 { margin-top: 0; font-size: 1.4rem; }
+        .formula, .example { margin-top: 1rem; padding: 1rem; border-radius: 6px; }
+        .formula { background-color: var(--formula-bg); border: 1px solid var(--formula-border); font-family: 'Courier New', Courier, monospace; font-size: 1.1em; white-space: pre-wrap; word-wrap: break-word; }
+        .formula b, .example b { display: block; margin-bottom: 0.5rem; font-size: 0.9em; text-transform: uppercase; color: #555; }
+        .example { background-color: var(--example-bg); border: 1px solid var(--example-border); }
+        .quiz-button { display: inline-block; margin-top: 1.5rem; padding: 0.6rem 1.2rem; background-color: var(--quiz-button-bg); color: white; text-align: center; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s; }
+        .quiz-button:hover { background-color: var(--quiz-button-hover-bg); }
+        @media (max-width: 1024px) {
+            .container { flex-direction: column; }
+            #toc { position: static; width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--nav-border-color); padding: 1rem; }
+            main { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <h1>Képlet- és Tételgyűjtemény - 5. Osztály</h1>
+
+        <section id="fejezet1">
+            <h2>1. Természetes számok</h2>
+            
+            <div class="card" id="fejezet1-1">
+                <h3>1.1. Műveleti sorrend</h3>
+                <p>A matematikai műveleteket szigorú sorrendben kell elvégezni a helyes eredmény érdekében. Először a zárójelben lévő, majd a szorzás/osztás, és végül az összeadás/kivonás műveleteket végezzük el, balról jobbra haladva.</p>
+                <div class="formula">
+                    <b>Szabály:</b>
+                    1. Zárójelben lévő műveletek
+                    2. Szorzás és osztás (balról jobbra)
+                    3. Összeadás és kivonás (balról jobbra)
+                </div>
+                <div class="example">
+                    <b>Példa:</b> Számítsd ki: <span style="font-weight:bold;">10 + (6 - 2) * 3</span>
+                    <b>Lépésről lépésre:</b>
+                    1. Zárójel: (6 - 2) = 4
+                    2. A kifejezés most: 10 + 4 * 3
+                    3. Szorzás: 4 * 3 = 12
+                    4. A kifejezés most: 10 + 12
+                    5. Összeadás: 10 + 12 = 22
+                </div>
+                <a href="{{ url_for('kviz_muveleti_sorrend') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+
+            <div class="card" id="fejezet1-2">
+                <h3>1.2. Oszthatósági szabályok</h3>
+                <p>Ezek a szabályok segítenek gyorsan eldönteni, hogy egy szám osztható-e egy másikkal anélkül, hogy elvégeznénk az osztást.</p>
+                <div class="formula">
+                    <b>Alapvető szabályok:</b>
+                    • <b>2-vel:</b> Ha a szám páros (0, 2, 4, 6, 8-ra végződik).
+                    • <b>5-tel:</b> Ha a szám 0-ra vagy 5-re végződik.
+                    • <b>10-zel:</b> Ha a szám 0-ra végződik.
+                    • <b>3-mal:</b> Ha a számjegyeinek összege osztható 3-mal.
+                    • <b>9-cel:</b> Ha a számjegyeinek összege osztható 9-cel.
+                </div>
+                <div class="example">
+                    <b>Példa:</b> Osztható-e a <b>135</b> 3-mal és 5-tel?
+                    <b>Lépésről lépésre:</b>
+                    1. <b>5-tel oszthatóság:</b> A szám 5-re végződik, tehát osztható 5-tel.
+                    2. <b>3-mal oszthatóság:</b> A számjegyek összege: 1 + 3 + 5 = 9.
+                    3. Mivel 9 osztható 3-mal, ezért a 135 is osztható 3-mal.
+                </div>
+                <a href="{{ url_for('kviz_oszthatosag') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+
+            <div class="card" id="fejezet1-3">
+                <h3>1.3. Legnagyobb közös osztó (LNKO) és legkisebb közös többszörös (LKKT)</h3>
+                <p><b>LNKO:</b> A legnagyobb természetes szám, amellyel két vagy több szám maradék nélkül osztható. <br><b>LKKT:</b> A legkisebb pozitív szám, amely mindkét (vagy az összes) számnak többszöröse.</p>
+                <div class="formula">
+                    <b>Meghatározás lépései:</b>
+                    1. Prímtényezős felbontás.
+                    2. LNKO: A közös prímtényezőket a legalacsonyabb hatványon összeszorozzuk.
+                    3. LKKT: Az összes prímtényezőt a legmagasabb hatványon összeszorozzuk.
+                </div>
+                <div class="example">
+                    <b>Példa:</b> LNKO és LKKT a <b>12</b> és <b>18</b> esetén.
+                    <b>Lépésről lépésre:</b>
+                    1. Felbontás: 12 = 2² * 3;  18 = 2 * 3²
+                    2. LNKO: A közös prímek a 2 és a 3. A legalacsonyabb hatványok: 2¹ és 3¹. LNKO(12, 18) = 2 * 3 = 6.
+                    3. LKKT: Az összes prím a 2 és a 3. A legmagasabb hatványok: 2² és 3². LKKT(12, 18) = 2² * 3² = 4 * 9 = 36.
+                </div>
+                <a href="{{ url_for('kviz_oszto_tobbszoros') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+        </section>
+        
+        <section id="fejezet2">
+            <h2>2. Törtek és tizedes törtek</h2>
+            <div class="card" id="fejezet2-1">
+                <h3>2.1. Törtek összeadása és kivonása</h3>
+                <p>Törteket csak akkor tudunk összeadni vagy kivonni, ha a nevezőjük azonos. Ha a nevezők különbözőek, először közös nevezőre kell hozni a törteket (bővítéssel).</p>
+                <div class="formula">
+                    <b>Képlet (közös nevező esetén):</b> a/c + b/c = (a+b)/c
+                </div>
+                <div class="example">
+                    <b>Példa:</b> Mennyi <span style="font-weight:bold;">1/2 + 1/3</span> ?
+                    <b>Lépésről lépésre:</b>
+                    1. <b>Közös nevező keresése:</b> A 2 és a 3 legkisebb közös többszöröse a 6.
+                    2. <b>Bővítés:</b> Az első törtet 3-mal, a másodikat 2-vel bővítjük. 1/2 = 3/6;  1/3 = 2/6.
+                    3. <b>Összeadás:</b> 3/6 + 2/6 = (3+2)/6 = 5/6.
+                </div>
+                <a href="{{ url_for('kviz_muveletek_tortekkel') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+            <div class="card" id="fejezet2-2">
+                <h3>2.2. Törtek szorzása és osztása</h3>
+                <p><b>Szorzás:</b> A számlálót a számlálóval, a nevezőt a nevezővel szorozzuk. <br><b>Osztás:</b> Egy törttel úgy osztunk, hogy a reciprokával szorzunk.</p>
+                <div class="formula">
+                    <b>Képletek:</b>
+                    (a/b) * (c/d) = (a*c) / (b*d)<br>
+                    (a/b) / (c/d) = (a/b) * (d/c)
+                </div>
+                <div class="example">
+                    <b>Példa (osztás):</b> Mennyi <span style="font-weight:bold;">2/3 : 4/5</span> ?
+                    <b>Lépésről lépésre:</b>
+                    1. <b>Reciprok vétel:</b> A 4/5 reciproka 5/4.
+                    2. <b>Szorzás:</b> 2/3 * 5/4 = (2*5) / (3*4) = 10/12.
+                    3. <b>Egyszerűsítés:</b> A 10/12 törtet 2-vel egyszerűsítve 5/6-ot kapunk.
+                </div>
+                <a href="{{ url_for('kviz_muveletek_tortekkel') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+            <div class="card" id="fejezet2-3">
+                <h3>2.3. Műveletek tizedes törtekkel</h3>
+                <p>A tizedes törtekkel végzett műveleteknél a legfontosabb a helyiértékek helyes kezelése. Összeadásnál és kivonásnál a tizedesvesszőket mindig egymás alá írjuk.</p>
+                <div class="formula">
+                    <b>Szabály (szorzás):</b>
+                    1. Elvégezzük a szorzást a tizedesvesszők nélkül.
+                    2. Az eredményben annyi tizedesjegyet választunk le, amennyi a tényezőkben összesen volt.
+                </div>
+                <div class="example">
+                    <b>Példa:</b> Mennyi <span style="font-weight:bold;">1,2 * 0,3</span> ?
+                    <b>Lépésről lépésre:</b>
+                    1. <b>Szorzás vessző nélkül:</b> 12 * 3 = 36.
+                    2. <b>Tizedesjegyek száma:</b> Az 1,2-ben egy, a 0,3-ban egy, tehát összesen 1+1=2 tizedesjegy van.
+                    3. <b>Vessző elhelyezése:</b> A 36-ban két tizedesjegyet leválasztva 0,36-ot kapunk.
+                </div>
+                <a href="{{ url_for('kviz_tizedes_tortek') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+        </section>
+
+        <section id="fejezet3">
+            <h2>3. Geometria alapjai</h2>
+            <div class="card" id="fejezet3-1">
+                <h3>3.1. Szögek típusai</h3>
+                <p>A szögeket mértékük szerint csoportosítjuk. A legfontosabb alaptípusok ismerete elengedhetetlen a geometriai feladatokhoz.</p>
+                <div class="formula">
+                    <b>Típusok:</b>
+                    • <b>Hegyesszög:</b> 0° < α < 90°
+                    • <b>Derékszög:</b> α = 90°
+                    • <b>Tompaszög:</b> 90° < α < 180°
+                    • <b>Egyenesszög:</b> α = 180°
+                    • <b>Teljesszög:</b> α = 360°
+                </div>
+                <div class="example">
+                    <b>Példa:</b>
+                    Egy 120°-os szög tompaszög, mert 90° és 180° közé esik.
+                </div>
+                <a href="{{ url_for('kviz_szogek') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+            <div class="card" id="fejezet3-2">
+                <h3>3.2. Kerület és terület</h3>
+                <p>A kerület a síkidom határoló vonalainak hossza, a terület pedig a síkidom által lefedett terület mértéke.</p>
+                <div class="formula">
+                    <b>Alap képletek:</b>
+                    • <b>Négyzet:</b> Kerület = 4*a; Terület = a*a
+                    • <b>Téglalap:</b> Kerület = 2*(a+b); Terület = a*b
+                </div>
+                <div class="example">
+                    <b>Példa:</b> Egy téglalap oldalai 5 cm és 10 cm.
+                    <b>Lépésről lépésre:</b>
+                    1. <b>Kerület:</b> K = 2 * (5 + 10) = 2 * 15 = 30 cm.
+                    2. <b>Terület:</b> T = 5 * 10 = 50 cm².
+                </div>
+                <a href="{{ url_for('kviz_keruletterulet') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+            <div class="card" id="fejezet3-3">
+                <h3>3.3. Térfogat és felszín (Téglatest)</h3>
+                <p>A téglatest egy háromdimenziós test. A felszíne a határoló lapok területeinek összege, a térfogata pedig a test által elfoglalt tér mértéke.</p>
+                <div class="formula">
+                    <b>Képletek (élek: a, b, c):</b>
+                    • <b>Felszín:</b> A = 2 * (a*b + a*c + b*c)
+                    • <b>Térfogat:</b> V = a * b * c
+                </div>
+                <div class="example">
+                    <b>Példa:</b> Egy téglatest élei 2 cm, 3 cm, 5 cm.
+                    <b>Lépésről lépésre:</b>
+                    1. <b>Felszín:</b> A = 2 * (2*3 + 2*5 + 3*5) = 2 * (6 + 10 + 15) = 2 * 31 = 62 cm².
+                    2. <b>Térfogat:</b> V = 2 * 3 * 5 = 30 cm³.
+                </div>
+                <a href="{{ url_for('kviz_kocka_teglatest') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+        </section>
+        
+        <section id="fejezet4">
+            <h2>4. Mértékegységek</h2>
+            <div class="card" id="fejezet4-1">
+                <h3>4.1. Hosszúság mértékegységei</h3>
+                <p>A hosszúság alapmértékegysége a méter (m). A váltószám a szomszédos mértékegységek között általában 10.</p>
+                <div class="formula">
+                    <b>Gyakori váltószámok:</b>
+                    1 km = 1000 m
+                    1 m = 10 dm = 100 cm = 1000 mm
+                </div>
+                <div class="example">
+                    <b>Példa:</b> Váltsd át 3,5 kilométert centiméterre!
+                    <b>Lépésről lépésre:</b>
+                    1. <b>km → m:</b> 3,5 km = 3,5 * 1000 = 3500 m.
+                    2. <b>m → cm:</b> 3500 m = 3500 * 100 = 350 000 cm.
+                </div>
+                <a href="{{ url_for('kviz_mertekegyseg_hossztel') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+            <div class="card" id="fejezet4-2">
+                <h3>4.2. Tömeg mértékegységei</h3>
+                <p>A tömeg alapmértékegysége a kilogramm (kg). Itt is fontos a váltószámok ismerete.</p>
+                <div class="formula">
+                    <b>Gyakori váltószámok:</b>
+                    1 t = 1000 kg
+                    1 kg = 100 dkg = 1000 g
+                </div>
+                <div class="example">
+                    <b>Példa:</b> Válts át 420 dekagrammot kilogrammra!
+                    <b>Lépésről lépésre:</b>
+                    1. <b>Váltószám:</b> 1 kg = 100 dkg, tehát dkg-ból kg-ba váltáshoz 100-zal kell osztani.
+                    2. <b>Osztás:</b> 420 / 100 = 4,2 kg.
+                </div>
+                <a href="{{ url_for('kviz_mertekegyseg_tomegido') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+            <div class="card" id="fejezet4-3">
+                <h3>4.3. Idő mértékegységei</h3>
+                <p>Az idő mértékegységeinek váltószáma nem tízes alapú, ezért különös figyelmet igényel.</p>
+                <div class="formula">
+                    <b>Gyakori váltószámok:</b>
+                    1 óra = 60 perc
+                    1 perc = 60 másodperc
+                    1 nap = 24 óra
+                </div>
+                <div class="example">
+                    <b>Példa:</b> Hány perc 2,5 óra?
+                    <b>Lépésről lépésre:</b>
+                    1. <b>Váltószám:</b> 1 óra = 60 perc.
+                    2. <b>Szorzás:</b> 2,5 * 60 = 150 perc.
+                </div>
+                <a href="{{ url_for('kviz_mertekegyseg_tomegido') }}" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

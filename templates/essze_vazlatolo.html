@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Esszé Vázlatoló - Prémium Eszköz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stilus.css') }}">
+    <style>
+        .section-wrapper { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); padding: 2.5rem; border-radius: 12px; margin-top: -2rem; box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
+        .header h1 { text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.7); }
+        .header p { text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.6); }
+        
+        .vazlatolo-form { display: flex; flex-direction: column; gap: 1.5rem; max-width: 700px; margin: auto; }
+        .vazlatolo-form label { font-weight: bold; font-size: 1.1rem; color: var(--sotet); }
+        .vazlatolo-form input[type="text"],
+        .vazlatolo-form textarea { width: 100%; padding: 12px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; font-family: 'Roboto', sans-serif; }
+        .vazlatolo-form button { align-self: center; font-size: 1.2rem !important; }
+        #eredmeny-kontener { margin-top: 3rem; border-top: 2px solid var(--zold); padding-top: 2rem; }
+        #generalt-prompt { width: 100%; min-height: 250px; padding: 1rem; border: 2px dashed var(--zold); background-color: #f0f9f3; border-radius: 8px; font-family: monospace; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    
+    <video autoplay muted loop id="bg-video">
+      <source src="{{ url_for('static', filename='video/video.mp4') }}" type="video/mp4">
+    </video>
+    
+    {% include 'navigacio.html' %}
+
+    <div class="content-wrapper">
+        <header class="header">
+            <div class="container">
+                <h1>Esszé Vázlatoló ✍️</h1>
+                <p>A legnehezebb lépés az első. Építsd fel a fogalmazásod logikus vázlatát!</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="container section-wrapper">
+                <div class="vazlatolo-form">
+                    <div>
+                        <label for="tema">1. Mi az esszé témája?</label>
+                        <input type="text" id="tema" placeholder="Pl.: A közösségi média hatása a fiatalokra">
+                    </div>
+                    <div>
+                        <label for="tetelmondat">2. Mi a fő állításod? (Tételmondat)</label>
+                        <input type="text" id="tetelmondat" placeholder="Pl.: A túlzott közösségi média használat negatívan befolyásolja a mentális egészséget.">
+                    </div>
+                    <div>
+                        <label for="ervek">3. Milyen 3 fő érvvel támasztod ezt alá?</label>
+                        <textarea id="ervek" rows="4" placeholder="Minden érvet írj új sorba!
+Pl.: Elszigetelődés a valós kapcsolatoktól
+ irreális elvárások és testképzavar
+ online zaklatás veszélye"></textarea>
+                    </div>
+                    <button type="button" id="vazlat-generalo" class="btn btn-primary ai-btn">Vázlat Tervezése →</button>
+                </div>
+
+                <div id="eredmeny-kontener" style="display: none;">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem; font-family: 'Roboto Slab', serif;">✅ Kész a személyes Promptod!</h3>
+                    <p style="text-align: center; margin-bottom: 1.5rem;">Másold ki az alábbi szöveget, és illeszd be a kedvenc chatbotodba (pl. Gemini), hogy megkapd a személyre szabott vázlatot!</p>
+                    <textarea id="generalt-prompt" readonly></textarea>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button id="masolas-gomb" class="btn btn-primary zold-btn">Prompt Másolása a vágólapra</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="container footer-content">
+            <img src="{{ url_for('static', filename='img/csicsike_logo.png') }}" alt="Csicsike Tudástár Logó" class="footer-logo">
+            <p>CSICSIKE lábnyoma. © 2025</p>
+        </div>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='js/kereso_adatbazis.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const temaInput = document.getElementById('tema');
+            const tetelmondatInput = document.getElementById('tetelmondat');
+            const ervekInput = document.getElementById('ervek');
+            const generaloGomb = document.getElementById('vazlat-generalo');
+            const eredmenyKontener = document.getElementById('eredmeny-kontener');
+            const generaltPromptTextarea = document.getElementById('generalt-prompt');
+            const masolasGomb = document.getElementById('masolas-gomb');
+
+            generaloGomb.addEventListener('click', () => {
+                const tema = temaInput.value.trim();
+                const tetelmondat = tetelmondatInput.value.trim();
+                const ervek = ervekInput.value.trim();
+
+                if (!tema || !tetelmondat || !ervek) {
+                    alert('Kérlek, tölts ki minden mezőt a vázlat elkészítéséhez!');
+                    return;
+                }
+
+                const prompt = `Viselkedj mint egy tapasztalt, segítőkész magyartanár és szövegíró mentor. A feladatod, hogy a diák által megadott információk alapján készíts egy részletes, logikus vázlatot egy esszéhez. FONTOS SZABÁLYOK: NE írd meg helyette a teljes szöveget, CSAK a vázlatot add meg, pontokba szedve. Minden vázlatponthoz adj rövid, rávezető kérdéseket vagy tippeket. A stílusod legyen bátorító. A diák adatai: TÉMA: ${tema}; FŐ ÁLLÍTÁS: ${tetelmondat}; ALÁTÁMASZTÓ ÉRVEK: ${ervek.split('\n').map(erv => `- ${erv.trim()}`).join('; ')}. A vázlat struktúrája: 1. Bevezetés (figyelemfelkeltés, téma, tételmondat). 2. Tárgyalás (minden érv külön bekezdésben, példákkal). 3. Befejezés (összefoglalás, személyes vélemény vagy kérdés).`;
+                
+                generaltPromptTextarea.value = prompt.trim();
+                eredmenyKontener.style.display = 'block';
+            });
+
+            masolasGomb.addEventListener('click', () => {
+                generaltPromptTextarea.select();
+                navigator.clipboard.writeText(generaltPromptTextarea.value);
+                
+                masolasGomb.textContent = '✅ Másolva!';
+                setTimeout(() => {
+                    masolasGomb.textContent = 'Prompt Másolása a vágólapra';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

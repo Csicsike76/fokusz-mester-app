@@ -12,6 +12,7 @@ import EmailVerificationPage from './pages/EmailVerificationPage';
 import TeacherApprovalPage from './pages/TeacherApprovalPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import TeacherDashboardPage from './pages/TeacherDashboardPage';
+import ToolPage from './pages/ToolPage';
 import './App.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="regisztracio" element={<RegistrationPage />} />
             <Route path="targy/:subjectName/:grade" element={<SubjectPage />} />
             <Route path="kviz/:slug" element={<QuizPage />} />
+            <Route path="eszkoz/:slug" element={<ToolPage />} />
             <Route path="verify-email/:token" element={<EmailVerificationPage />} />
             <Route path="approve-teacher/:userId" element={<TeacherApprovalPage />} />
 

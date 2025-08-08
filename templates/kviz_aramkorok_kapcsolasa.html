@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Áramkörök kapcsolása</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Áramkörök kapcsolása</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Két izzót egymás után kötünk be egy áramkörbe. Milyen kapcsolás ez?",
+                answers: { a: "Soros kapcsolás", b: "Párhuzamos kapcsolás", c: "Vegyes kapcsolás" },
+                correctAnswer: 'a',
+                explanation: "Amikor a fogyasztók egyetlen, elágazás nélküli áramköri ágban, láncszerűen követik egymást, azt soros kapcsolásnak nevezzük. ✅ Megoldás: Soros kapcsolás."
+            },
+            {
+                question: "Mi történik soros kapcsolásnál, ha az egyik izzó kiég?",
+                answers: { a: "Az áramkör megszakad, a többi izzó is kialszik.", b: "A többi izzó fényesebben világít.", c: "A többi izzó tovább működik." },
+                correctAnswer: 'a',
+                explanation: "Soros kapcsolásban az áramnak csak egy útja van. Ha ez az út bárhol megszakad (pl. egy izzó kiég), az egész áramkör nyitottá válik, és az áramlás mindenhol megszűnik. ✅ Megoldás: Az áramkör megszakad, a többi izzó is kialszik."
+            },
+            {
+                question: "Hogyan viszonyul a sorba kapcsolt ellenállások eredője az egyes ellenállásokhoz?",
+                answers: { a: "Az eredő ellenállás az egyes ellenállások összege.", b: "Az eredő ellenállás kisebb, mint a legkisebb ellenállás.", c: "Az eredő ellenállás az ellenállások átlaga." },
+                correctAnswer: 'a',
+                explanation: "Soros kapcsolásnál az ellenállások összeadódnak, mert az áramnak mindegyiken át kell haladnia. A képlet: R_eredő = R₁ + R₂ + ... ✅ Megoldás: Az eredő ellenállás az egyes ellenállások összege."
+            },
+            {
+                question: "Melyik állítás igaz a feszültségre soros kapcsolásnál?",
+                answers: { a: "A feszültség megoszlik a fogyasztók között.", b: "Minden fogyasztóra ugyanakkora feszültség jut.", c: "A feszültség az áramkörben nulla." },
+                correctAnswer: 'a',
+                explanation: "Soros kapcsolásban az áramforrás feszültsége megoszlik a sorba kapcsolt fogyasztók között. A nagyobb ellenállású fogyasztóra nagyobb feszültség jut. ✅ Megoldás: A feszültség megoszlik a fogyasztók között."
+            },
+            {
+                question: "Két, 10 Ω-os ellenállást sorba kapcsolunk. Mekkora az eredő ellenállás?",
+                answers: { a: "20 Ω", b: "5 Ω", c: "10 Ω" },
+                correctAnswer: 'a',
+                explanation: "Soros kapcsolásnál az ellenállásokat összeadjuk: R_eredő = R₁ + R₂ = 10 Ω + 10 Ω = 20 Ω. ✅ Megoldás: 20 Ω."
+            },
+            {
+                question: "Melyik kapcsolásnál nagyobb az eredő ellenállás két egyforma fogyasztó esetén?",
+                answers: { a: "Soros kapcsolásnál.", b: "Párhuzamos kapcsolásnál.", c: "Egyforma." },
+                correctAnswer: 'a',
+                explanation: "Soros kapcsolásnál az ellenállások összeadódnak (R_eredő = R+R = 2R), míg párhuzamosnál az eredő ellenállás kisebb lesz, mint a legkisebb tag (R_eredő = R/2). Tehát a soros eredő ellenállása a nagyobb. ✅ Megoldás: Soros kapcsolásnál."
+            },
+            {
+                question: "Ha egy áramkörben az áramnak csak egy útja van, az...",
+                answers: { a: "...soros kapcsolás.", b: "...párhuzamos kapcsolás.", c: "...rövidzárlat." },
+                correctAnswer: 'a',
+                explanation: "Ez a soros kapcsolás definíciója. A fogyasztók láncszerűen vannak felfűzve egyetlen áramköri ágra. ✅ Megoldás: ...soros kapcsolás."
+            },
+            {
+                question: "Melyik kapcsolásban folyik ugyanakkora áram minden fogyasztón?",
+                answers: { a: "Soros kapcsolásban.", b: "Párhuzamos kapcsolásban.", c: "Mindkettőben." },
+                correctAnswer: 'a',
+                explanation: "Mivel soros kapcsolásnál az áramnak csak egy útja van, a vezető minden keresztmetszetén ugyanannyi töltés halad át egységnyi idő alatt, tehát az áramerősség minden fogyasztón azonos. ✅ Megoldás: Soros kapcsolásban."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Két izzót külön ágakra, párhuzamosan kötünk be egy áramkörbe. Milyen kapcsolás ez?",
+                answers: { a: "Soros kapcsolás", b: "Párhuzamos kapcsolás", c: "Nincs neve." },
+                correctAnswer: 'b',
+                explanation: "Amikor az áramkör elágazik, és a fogyasztók ezeken a különálló, párhuzamos ágakon helyezkednek el, azt párhuzamos kapcsolásnak nevezzük. ✅ Megoldás: Párhuzamos kapcsolás."
+            },
+            {
+                question: "Mi történik párhuzamos kapcsolásnál, ha az egyik izzó kiég?",
+                answers: { a: "Minden más izzó is kialszik.", b: "A többi izzó tovább működik.", c: "Rövidzárlat keletkezik." },
+                correctAnswer: 'b',
+                explanation: "Párhuzamos kapcsolásnál az áram több úton haladhat. Ha az egyik ág megszakad (pl. egy izzó kiég), az áram a többi, ép ágon zavartalanul tovább tud folyni. Ezért használják a háztartásokban. ✅ Megoldás: A többi izzó tovább működik."
+            },
+            {
+                question: "Hogyan viszonyul a párhuzamosan kapcsolt ellenállások eredője az egyes ellenállásokhoz?",
+                answers: { a: "Az eredő ellenállás mindig nagyobb, mint a legnagyobb ellenállás.", b: "Az eredő ellenállás mindig kisebb, mint a legkisebb ellenállás.", c: "Az eredő ellenállás az ellenállások összege." },
+                correctAnswer: 'b',
+                explanation: "Párhuzamos kapcsolásnál az áramnak több útja van, így a rendszer 'könnyebben átjárható'. Az eredő ellenállás mindig kisebb lesz, mint a legkisebb ellenállású ág ellenállása. Képlete: 1/R_eredő = 1/R₁ + 1/R₂ + ... ✅ Megoldás: Az eredő ellenállás mindig kisebb, mint a legkisebb ellenállás."
+            },
+            {
+                question: "Melyik állítás igaz a feszültségre párhuzamos kapcsolásnál?",
+                answers: { a: "Megoszlik a fogyasztók között.", b: "Minden párhuzamos ágra ugyanakkora feszültség jut.", c: "Az ágakban a feszültség nulla." },
+                correctAnswer: 'b',
+                explanation: "A párhuzamos kapcsolás nagy előnye, hogy minden ág közvetlenül az áramforrás pólusaira csatlakozik, ezért mindegyikre ugyanaz a feszültség (az áramforrás feszültsége) esik. ✅ Megoldás: Minden párhuzamos ágra ugyanakkora feszültség jut."
+            },
+            {
+                question: "Két, 10 Ω-os ellenállást párhuzamosan kapcsolunk. Mekkora az eredő ellenállás?",
+                answers: { a: "20 Ω", b: "5 Ω", c: "10 Ω" },
+                correctAnswer: 'b',
+                explanation: "Két egyforma ellenállás párhuzamos kapcsolásakor az eredő ellenállás feleakkora lesz. A képlettel: 1/R_eredő = 1/10 + 1/10 = 2/10. Ebből R_eredő = 10/2 = 5 Ω. ✅ Megoldás: 5 Ω."
+            },
+            {
+                question: "A háztartási lámpákat és konnektorokat...",
+                answers: { a: "...sorosan kötik be.", b: "...párhuzamosan kötik be.", c: "...nem kötik sehogy." },
+                correctAnswer: 'b',
+                explanation: "A háztartásokban párhuzamos kapcsolást alkalmaznak, hogy minden eszköz a hálózati feszültséget kapja, és egymástól függetlenül lehessen őket működtetni. ✅ Megoldás: ...párhuzamosan kötik be."
+            },
+            {
+                question: "Ha egy áramkörben az áram útja elágazik, az...",
+                answers: { a: "...soros kapcsolás.", b: "...párhuzamos kapcsolás.", c: "...nyitott áramkör." },
+                correctAnswer: 'b',
+                explanation: "Az elágazási pont, vagy csomópont a párhuzamos kapcsolás egyértelmű ismérve. Itt oszlik szét a főági áram a mellékágakba. ✅ Megoldás: ...párhuzamos kapcsolás."
+            },
+            {
+                question: "Melyik kapcsolásban oszlik meg a főági áram a fogyasztók között?",
+                answers: { a: "Soros kapcsolásban.", b: "Párhuzamos kapcsolásban.", c: "Egyikben sem." },
+                correctAnswer: 'b',
+                explanation: "Párhuzamos kapcsolásnál a csomópontban a főági áram szétoszlik a különböző ágak között, általában a kisebb ellenállású ágban folyik nagyobb áram. ✅ Megoldás: Párhuzamos kapcsolásban."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "Soros kapcsolásnál az ellenállások összeadódnak.", b: "Párhuzamos kapcsolásnál az eredő ellenállás mindig nagyobb, mint a tagok.", c: "Párhuzamos kapcsolásnál a feszültség minden ágban ugyanakkora." },
+                correctAnswer: 'b',
+                explanation: "Ez az állítás hamis. Párhuzamos kapcsolásnál az áramnak több útja van, így a rendszer teljes ellenállása csökken. Az eredő ellenállás mindig kisebb, mint a legkisebb ellenállású ág. ✅ Megoldás: Párhuzamos kapcsolásnál az eredő ellenállás mindig nagyobb, mint a tagok."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Melyik a két alapvető kapcsolási mód?",
+                answers: { a: "Belső és külső.", b: "Rövid és hosszú.", c: "Soros és párhuzamos." },
+                correctAnswer: 'c',
+                explanation: "Az áramköri elemek összekötésének két alapvető módja a soros és a párhuzamos kapcsolás. Bonyolultabb áramkörök ezek kombinációjából (vegyes kapcsolás) állnak. ✅ Megoldás: Soros és párhuzamos."
+            },
+            {
+                question: "A régi típusú karácsonyfaizzó-soroknál, ha egy izzó kiégett, az egész füzér elaludt. Milyen kapcsolásúak voltak?",
+                answers: { a: "Párhuzamos", b: "Vegyes", c: "Soros" },
+                correctAnswer: 'c',
+                explanation: "Ez a jelenség a soros kapcsolás tipikus hátránya. Mivel az áramnak csak egy útja van, ha az bárhol megszakad, az egész áramkör működésképtelenné válik. ✅ Megoldás: Soros."
+            },
+            {
+                question: "Mi a vegyes kapcsolás?",
+                answers: { a: "Amikor vezetők és szigetelők is vannak az áramkörben.", b: "Amikor az áramforrás és a fogyasztó is változtatható.", c: "Soros és párhuzamos kapcsolások kombinációja egy áramkörön belül." },
+                correctAnswer: 'c',
+                explanation: "A bonyolultabb áramkörök gyakran tartalmaznak sorosan kapcsolt elemeket, amelyek párhuzamosan vannak kapcsolva más elemekkel. Ezeket nevezzük vegyes kapcsolásoknak. ✅ Megoldás: Soros és párhuzamos kapcsolások kombinációja egy áramkörön belül."
+            },
+            {
+                question: "Három egyforma izzót párhuzamosan kapcsolunk egy elemre. Hogyan viszonyul a fényerejük egyetlen, ugyanilyen elemre kapcsolt izzó fényerejéhez?",
+                answers: { a: "Halványabbak lesznek.", b: "Fényesebbek lesznek.", c: "Ugyanolyan fényesek lesznek." },
+                correctAnswer: 'c',
+                explanation: "Párhuzamos kapcsolásban minden izzó a telep teljes feszültségét kapja meg, függetlenül a többitől. Így mindegyik ugyanolyan fényerővel fog világítani, mintha egyedül lenne az áramkörben. ✅ Megoldás: Ugyanolyan fényesek lesznek."
+            },
+            {
+                question: "Három egyforma izzót sorba kapcsolunk egy elemre. Hogyan viszonyul a fényerejük egyetlen, ugyanilyen elemre kapcsolt izzó fényerejéhez?",
+                answers: { a: "Fényesebbek lesznek.", b: "Ugyanolyan fényesek lesznek.", c: "Sokkal halványabbak lesznek." },
+                correctAnswer: 'c',
+                explanation: "Soros kapcsolásnál az elem feszültsége megoszlik a három izzó között, így egy-egy izzóra csak a feszültség harmada jut. A kisebb feszültség miatt kisebb áram folyik rajtuk, ezért sokkal halványabban fognak világítani. ✅ Megoldás: Sokkal halványabbak lesznek."
+            },
+            {
+                question: "Egy elágazásnál a főágban 6 A áram folyik. A két mellékág ellenállása egyenlő. Mekkora áram folyik egy-egy mellékágban?",
+                answers: { a: "6 A", b: "12 A", c: "3 A" },
+                correctAnswer: 'c',
+                explanation: "A csomóponti törvény szerint a 6 A áram szétoszlik. Mivel a két ág ellenállása egyenlő, az áram egyenlő arányban oszlik meg, tehát mindkét ágban 6 A / 2 = 3 A fog folyni. ✅ Megoldás: 3 A."
+            },
+            {
+                question: "Melyik állítás igaz az eredő ellenállásra?",
+                answers: { a: "Soros kapcsolásnál mindig nő, párhuzamosnál mindig nő.", b: "Soros kapcsolásnál mindig csökken, párhuzamosnál mindig nő.", c: "Soros kapcsolásnál mindig nő, párhuzamosnál mindig csökken." },
+                correctAnswer: 'c',
+                explanation: "Soros kapcsolásnál az ellenállások összeadódnak, így az eredő mindig nagyobb lesz. Párhuzamos kapcsolásnál több út áll az áram rendelkezésére, így az eredő ellenállás mindig kisebb lesz, mint a legkisebb tagé. ✅ Megoldás: Soros kapcsolásnál mindig nő, párhuzamosnál mindig csökken."
+            },
+            {
+                question: "Egy áramkörben van egy főkapcsoló és minden szobában külön lámpakapcsoló. Milyen a szobák kapcsolása?",
+                answers: { a: "Soros", b: "Vegyes", c: "Párhuzamos" },
+                correctAnswer: 'c',
+                explanation: "Ahhoz, hogy a szobák lámpáit egymástól függetlenül lehessen kapcsolni, párhuzamosan kell őket bekötni a fő vezetékre. A főkapcsoló pedig sorba van kötve ezzel az egész párhuzamos hálózattal. ✅ Megoldás: Párhuzamos."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Pascal törvénye</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Pascal törvénye</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Hogyan szól Pascal törvénye?",
+                answers: { a: "A nyugvó, zárt folyadékban a külső nyomás minden irányban gyengítetlenül terjed tovább.", b: "A folyadékba merülő testre felhajtóerő hat.", c: "A hidrosztatikai nyomás a mélységgel nő." },
+                correctAnswer: 'a',
+                explanation: "Pascal törvénye a külső nyomás továbbterjedéséről szól a folyadékokban. A felhajtóerőről Arkhimédész törvénye, a nyomás mélységfüggéséről pedig a hidrosztatikai nyomás alaptétele szól. ✅ Megoldás: A nyugvó, zárt folyadékban a külső nyomás minden irányban gyengítetlenül terjed tovább."
+            },
+            {
+                question: "Melyik eszköz működése alapul Pascal törvényén?",
+                answers: { a: "Hidraulikus fék", b: "Hajó", c: "Barométer" },
+                correctAnswer: 'a',
+                explanation: "A hidraulikus rendszerek, mint az autó fékrendszere vagy a hidraulikus emelő, Pascal törvényét használják ki. A fékpedál lenyomásával a fékfolyadékra gyakorolt nyomás a csőrendszeren keresztül eljut a kerekekig és működteti a fékpofákat. ✅ Megoldás: Hidraulikus fék."
+            },
+            {
+                question: "Egy hidraulikus emelő kis dugattyújának felülete 1 cm², a nagynak 100 cm². Ha a kis dugattyúra 10 N erővel hatunk, mekkora erőt fejt ki a nagy dugattyú?",
+                answers: { a: "1000 N", b: "10 N", c: "0,1 N" },
+                correctAnswer: 'a',
+                explanation: "Pascal törvénye szerint a nyomás a folyadékban ugyanakkora: p₁ = p₂. Mivel p=F/A, ezért F₁/A₁ = F₂/A₂. Behelyettesítve: 10 N / 1 cm² = F₂ / 100 cm². Ebből F₂ = (10 N / 1 cm²) * 100 cm² = 1000 N. ✅ Megoldás: 1000 N."
+            },
+            {
+                question: "Milyen közegre vonatkozik Pascal törvénye?",
+                answers: { a: "Nyugvó, zárt folyadékokra (és gázokra).", b: "Csak szilárd testekre.", c: "Csak a levegőre." },
+                correctAnswer: 'a',
+                explanation: "Pascal törvénye a nyugvó folyadékok és gázok (összefoglaló néven: fluidumok) nyomásviszonyait írja le, feltéve, hogy a közeg zárt. ✅ Megoldás: Nyugvó, zárt folyadékokra (és gázokra)."
+            },
+            {
+                question: "Mi történik a fogkrémmel, ha a tubus végét megnyomjuk?",
+                answers: { a: "A nyomás továbbterjed a tubusban és kinyomja a fogkrémet a nyíláson.", b: "A fogkrém összenyomódik és eltűnik.", c: "Csak a tubus vége deformálódik." },
+                correctAnswer: 'a',
+                explanation: "A fogkrémes tubus egy egyszerű hidraulikus rendszer. A tubus végére gyakorolt nyomás Pascal törvénye szerint továbbterjed a pasztában, és a legkisebb ellenállás helyén, a nyíláson keresztül kinyomja azt. ✅ Megoldás: A nyomás továbbterjed a tubusban és kinyomja a fogkrémet a nyíláson."
+            },
+            {
+                question: "A hidraulikus emelővel...",
+                answers: { a: "...kis erővel nagy erőt tudunk kifejteni.", b: "...munkát takarítunk meg.", c: "...energiát termelünk." },
+                correctAnswer: 'a',
+                explanation: "A hidraulikus emelő egy 'erő-sokszorozó' gép. A dugattyúk felületének arányában képes a kis dugattyúra ható erőt megnövelni a nagy dugattyún. Munkát azonban nem takarít meg. ✅ Megoldás: ...kis erővel nagy erőt tudunk kifejteni."
+            },
+            {
+                question: "Mi a feltétele Pascal törvénye érvényesülésének?",
+                answers: { a: "A folyadéknak zárt térben kell lennie.", b: "A folyadéknak mozognia kell.", c: "A folyadéknak elektromosan töltöttnek kell lennie." },
+                correctAnswer: 'a',
+                explanation: "A törvény kimondja, hogy a 'zárt' folyadékban terjed tovább a nyomás. Ha az edény nyitott, a folyadék egyszerűen kifolyna, ahelyett, hogy a nyomás továbbterjedne. ✅ Megoldás: A folyadéknak zárt térben kell lennie."
+            },
+            {
+                question: "Egy felfújt lufit ha egy ponton megnyomunk, a lufi máshol kidudorodik. Melyik törvény magyarázza ezt?",
+                answers: { a: "Pascal törvénye", b: "Arkhimédész törvénye", c: "Newton I. törvénye" },
+                correctAnswer: 'a',
+                explanation: "A lufiban lévő levegő (gáz) zárt közegnek tekinthető. Az egy ponton kifejtett külső nyomás a gázban minden irányban továbbterjed, és a lufi falát más helyeken is feszíti, kidudorodást okozva. ✅ Megoldás: Pascal törvénye."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Mit jelent az, hogy a nyomás 'gyengítetlenül' terjed tovább?",
+                answers: { a: "A nyomás útközben egyre kisebb lesz.", b: "A nyomás értéke a folyadék minden pontjában ugyanannyival nő.", c: "A nyomás csak egy irányban terjed." },
+                correctAnswer: 'b',
+                explanation: "A 'gyengítetlenül' szó azt jelenti, hogy a külső nyomás okozta nyomásnövekedés a folyadék minden részébe ugyanakkora mértékben jut el, nem csökken a távolsággal. ✅ Megoldás: A nyomás értéke a folyadék minden pontjában ugyanannyival nő."
+            },
+            {
+                question: "Egy hidraulikus rendszerben a kis dugattyú felülete A₁, a nagyé A₂. Az erők aránya (F₁/F₂) megegyezik...",
+                answers: { a: "...az utak arányával (s₁/s₂).", b: "...a felületek arányával (A₁/A₂).", c: "...a felületek négyzetének arányával." },
+                correctAnswer: 'b',
+                explanation: "Mivel F₁/A₁ = F₂/A₂, az egyenletet átrendezve F₁/F₂ = A₁/A₂. Ez azt jelenti, hogy az erők aránya megegyezik a felületek arányával. ✅ Megoldás: ...a felületek arányával (A₁/A₂)."
+            },
+            {
+                question: "Miért használunk folyadékot (fékolajat) az autók fékrendszerében?",
+                answers: { a: "Mert a folyadék olcsó.", b: "Mert a folyadékok összenyomhatatlanok, így a nyomást hatékonyan továbbítják.", c: "Mert a folyadékok jól vezetik a hőt." },
+                correctAnswer: 'b',
+                explanation: "Pascal törvénye a gyakorlatban akkor működik jól, ha a közeg nem nyomódik össze, különben az erő egy része az összenyomódásra fordítódna. A folyadékok jó közelítéssel összenyomhatatlanok. ✅ Megoldás: Mert a folyadékok összenyomhatatlanok, így a nyomást hatékonyan továbbítják."
+            },
+            {
+                question: "Melyik állítás igaz a hidraulikus emelőre?",
+                answers: { a: "Energiát termel.", b: "Kisebb úton kell kifejteni az erőt.", c: "Nagyobb úton kell kifejteni a kisebb erőt." },
+                correctAnswer: 'b',
+                explanation: "A 'nagyobb úton kell kifejteni a kisebb erőt' állítás a helyes. ✅ Megoldás: Kisebb úton kell kifejteni az erőt."
+            },
+            {
+                question: "A vízipisztoly működése során...",
+                answers: { a: "...Arkhimédész törvénye érvényesül.", b: "...Pascal törvénye érvényesül.", c: "...Newton törvényei érvényesülnek." },
+                correctAnswer: 'b',
+                explanation: "Amikor meghúzzuk a ravaszt, egy dugattyúval nyomást gyakorolunk a zárt térben lévő vízre. Ez a nyomás a csőben továbbterjed és a kis nyíláson keresztül nagy sebességgel kipréseli a vizet. ✅ Megoldás: ...Pascal törvénye érvényesül."
+            },
+            {
+                question: "Mi a hidraulika?",
+                answers: { a: "A víz kémiai tulajdonságainak tudománya.", b: "A nyomás alatti folyadékok gyakorlati alkalmazásával foglalkozó műszaki tudományág.", c: "A gőzmotorok működésének elve." },
+                correctAnswer: 'b',
+                explanation: "A hidraulika a műszaki gyakorlatban a folyadékok (leggyakrabban olaj) segítségével történő erőátvitellel foglalkozik, melynek alapja Pascal törvénye. ✅ Megoldás: A nyomás alatti folyadékok gyakorlati alkalmazásával foglalkozó műszaki tudományág."
+            },
+            {
+                question: "Egy hidraulikus prés kis dugattyújára 500 N erőt fejtünk ki. A nagy dugattyú felülete 20-szorosa a kicsinek. Mekkora nyomóerő keletkezik a nagy dugattyún?",
+                answers: { a: "25 N", b: "10 000 N", c: "500 N" },
+                correctAnswer: 'b',
+                explanation: "Mivel az erők aránya megegyezik a felületek arányával, a nagy dugattyún 20-szor nagyobb erő fog hatni. F₂ = F₁ ⋅ (A₂/A₁) = 500 N ⋅ 20 = 10 000 N. ✅ Megoldás: 10 000 N."
+            },
+            {
+                question: "Mi a közös a hidraulikus fékben és a pneumatikus (levegős) fékben?",
+                answers: { a: "Mindkettőben olaj van.", b: "Mindkettő Pascal törvényén alapul.", c: "Nincs bennük közös." },
+                correctAnswer: 'b',
+                explanation: "Bár az egyikben folyadék (hidraulika), a másikban gáz (pneumatika) a nyomásközvetítő közeg, mindkét rendszer működése Pascal törvényén, azaz a külső nyomás zárt közegben való továbbterjedésén alapul. ✅ Megoldás: Mindkettő Pascal törvényén alapul."
+            },
+            {
+                question: "Pascal törvénye szerint a nyomás...",
+                answers: { a: "...csak a folyadék alján növekszik meg.", b: "...a folyadék minden pontjában ugyanannyival növekszik meg.", c: "...a folyadék felszínén csökken." },
+                correctAnswer: 'b',
+                explanation: "A törvény lényege a nyomás egyenletes, gyengítetlen továbbterjedése. A külső hatásra létrejövő nyomásnövekedés a folyadék minden egyes pontjában, minden irányban megjelenik. ✅ Megoldás: ...a folyadék minden pontjában ugyanannyival növekszik meg."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Melyik állítás HAMIS Pascal törvényével kapcsolatban?",
+                answers: { a: "Nyugvó folyadékokra vonatkozik.", b: "Zárt edényben érvényesül.", c: "Azt mondja ki, hogy a nyomás a mélységgel nő." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás a hidrosztatikai nyomásra vonatkozik, nem Pascal törvényére. Pascal törvénye a külső nyomás továbbterjedéséről szól, nem a folyadék saját súlyából adódó nyomásról. ✅ Megoldás: Azt mondja ki, hogy a nyomás a mélységgel nő."
+            },
+            {
+                question: "Melyik eszköz NEM használja ki Pascal törvényét?",
+                answers: { a: "Hidraulikus autóemelő", b: "Fogorvosi szék emelője", c: "Közlekedőedény" },
+                correctAnswer: 'c',
+                explanation: "A közlekedőedény a hidrosztatikai nyomás elvén működik (a szintek kiegyenlítődnek). A hidraulikus emelő és a fogorvosi szék is a nyomás továbbításával működő, Pascal törvényén alapuló berendezés. ✅ Megoldás: Közlekedőedény."
+            },
+            {
+                question: "A hidraulikus emelőnél a kis dugattyút 10 cm-rel lenyomjuk. A nagy dugattyú felülete 10-szer nagyobb. Mennyit emelkedik a nagy dugattyú?",
+                answers: { a: "100 cm", b: "10 cm", c: "1 cm" },
+                correctAnswer: 'c',
+                explanation: "Az egyszerű gépek 'aranyszabálya' itt is érvényes: amennyivel nyerünk az erőn, annyival veszítünk az úton. Mivel az erő 10-szeresére nő, az elmozdulás 10-ed részére, azaz 10 cm / 10 = 1 cm-re csökken. ✅ Megoldás: 1 cm."
+            },
+            {
+                question: "A hidraulikus rendszerben a nyomás...",
+                answers: { a: "...csak a dugattyúkra hat.", b: "...csak a csövek falára hat.", c: "...a folyadék minden pontjában és a rendszer falán is ugyanakkora (a hidrosztatikai nyomástól eltekintve)." },
+                correctAnswer: 'c',
+                explanation: "Pascal törvénye szerint a külső nyomás hatására a nyomásnövekedés a folyadék minden pontjában és minden irányban, így a rendszert határoló falakra is gyengítetlenül áttevődik. ✅ Megoldás: ...a folyadék minden pontjában és a rendszer falán is ugyanakkora (a hidrosztatikai nyomástól eltekintve)."
+            },
+            {
+                question: "Pascal törvénye kimondja, hogy a külső nyomás...",
+                answers: { a: "...csak lefelé terjed.", b: "...csak oldalirányban terjed.", c: "...minden irányban terjed." },
+                correctAnswer: 'c',
+                explanation: "A törvény egyik fontos eleme, hogy a nyomás terjedése a folyadékban izotróp, azaz minden irányban egyformán történik. ✅ Megoldás: ...minden irányban terjed."
+            },
+            {
+                question: "Mi történik, ha egy vízzel teli lufit megszurkálunk, majd összenyomjuk?",
+                answers: { a: "Csak az alsó lyukon jön ki a víz.", b: "Csak a felső lyukon jön ki a víz.", c: "Minden lyukon közel merőlegesen spriccel ki a víz." },
+                correctAnswer: 'c',
+                explanation: "A lufi összenyomásával nyomást gyakorolunk a benne lévő vízre. Pascal törvénye szerint ez a nyomás a víz minden pontjában megjelenik, és a lyukaknál a folyadékot a felületre merőlegesen préseli ki. ✅ Megoldás: Minden lyukon közel merőlegesen spriccel ki a víz."
+            },
+            {
+                question: "Melyik állítás igaz a hidraulikus rendszerekre?",
+                answers: { a: "Csak gázokkal működnek.", b: "Csak folyadékokkal működnek.", c: "Lehetővé teszik az erőátvitelt és az erő nagyságának megváltoztatását." },
+                correctAnswer: 'c',
+                explanation: "A hidraulikus rendszerek lényege a nyomásközvetítés, amivel az erőt egyik helyről a másikra továbbíthatjuk, és a dugattyúk felületének arányával az erő nagyságát is megváltoztathatjuk. ✅ Megoldás: Lehetővé teszik az erőátvitelt és az erő nagyságának megváltoztatását."
+            },
+            {
+                question: "A nyomás...",
+                answers: { a: "...egy erő.", b: "...egy energiafajta.", c: "...az egységnyi felületre ható nyomóerő." },
+                correctAnswer: 'c',
+                explanation: "Ez a nyomás fizikai definíciója. Fontos megkülönböztetni az erőtől, ami a nyomást létrehozza. ✅ Megoldás: ...az egységnyi felületre ható nyomóerő."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

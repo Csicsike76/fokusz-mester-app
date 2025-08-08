@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 15. hét: Az 'MI-detektív': Információkeresés</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #e3f2fd;
+            --example-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .prompt-example {
+            background-color: var(--example-bg);
+            border: 1px dashed var(--example-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>Gyakorlati Műhely</h1>
+            <p>15. hét: Az 'MI-detektív': Információkeresés</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A műhely végére képes leszel az MI-t komplex kutatási kérdések megválaszolására használni, és ami még fontosabb, megtanulod, hogyan <strong>ellenőrizd kritikusan a kapott válaszokat</strong> a források vizsgálatával. Képes leszel különbséget tenni a megbízható és a megbízhatatlan információ között.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Szükséges Eszközök</h2>
+                <p>Olyan MI-asszisztensre van szükséged, amely képes az interneten keresni és megjelölni a forrásait.</p>
+                <ul>
+                    <li><strong>Microsoft Copilot</strong> vagy <strong>Google Gemini</strong> (az alapértelmezett beállításokkal mindkettő keres az interneten).</li>
+                    <li><strong>Perplexity AI</strong> - Kifejezetten kutatásra és forráskezelésre kihegyezett eszköz.</li>
+                    <li>Webböngésző a források megnyitásához.</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. Bevezető: A Szupergyors Asszisztens és a Főnyomozó</h2>
+                <p>Képzeld el, hogy az MI egy szupergyors kutatóasszisztens, aki másodpercek alatt elolvassa neked az internet összes könyvét és cikkét egy témában, majd összefoglalja a lényeget. Ez fantasztikusan hangzik, de van egy bökkenő: ez az asszisztens néha félreért dolgokat, vagy összekeveri a forrásokat. A te feladatod ma az, hogy te legyél a főnyomozó! Nem hiszel el semmit automatikusan, hanem minden fontos állítást ellenőrzöl. Megtanulod, hogyan kérdezd ki az asszisztensedet, és hogyan buktasd le, ha téved.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>4. Lépésről-lépésre Feladatok</h2>
+                <p><strong>A mai nyomozásunk tárgya:</strong> "Melyek a napenergia előnyei és hátrányai Dániában?"</p>
+
+                <div class="task-card">
+                    <h3>1. Feladat: A Kezdeti Kikérdezés</h3>
+                    <p>Tegyük fel az MI-nek az alap kérdést, de azonnal kérjünk bizonyítékot (forrásokat) is!</p>
+                    <div class="prompt-example">Viselkedj úgy, mint egy energiapolitikai kutatóasszisztens! Gyűjtsd össze pontokba szedve a napenergia 3 legfontosabb előnyét és 3 legfontosabb hátrányát Dániában! Minden ponthoz add meg a forrásaidat link formájában.</div>
+                    <p><strong>Megfigyelés:</strong> Az MI valószínűleg egy szépen strukturált listát ad, lábjegyzetekkel vagy linkekkel a végén. Ez a mi nyomozásunk kiindulópontja.</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: A Bizonyítékok Ellenőrzése</h3>
+                    <p>Itt kezdődik az igazi detektívmunka! Ne hidd el, amit az MI ír, ellenőrizd le!</p>
+                    <ol>
+                        <li>Válassz ki egyet az MI által megadott forráslinkek közül, és <strong>nyisd meg egy új böngészőlapon</strong>.</li>
+                        <li>Olvasd el (vagy legalább fuss át) a forráscikket. A cikk valóban arról szól, amit az MI állít?</li>
+                        <li><strong>Tedd fel magadnak a kérdéseket:</strong> Megbízhatónak tűnik a forrás (pl. egyetemi kutatás, hivatalos statisztika, neves újság)? Vagy egy ismeretlen blogról van szó? A cikkben szereplő információ alátámasztja az MI által írt pontot, vagy az MI túlságosan leegyszerűsítette vagy akár félreértette azt?</li>
+                    </ol>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: A Keresztkérdések</h3>
+                    <p>Most, hogy már van egy alapinformációnk, tegyünk fel egy mélyebb, konkrét adatra vonatkozó kérdést! Ezzel teszteljük, hogy az MI csak általánosságban beszél-e, vagy képes specifikus adatokat is előásni.</p>
+                    <div class="prompt-example">Az egyik hátrányként a 'változékony időjárást' említetted. A forrásaid alapján, konkrét számokkal alátámasztva, hány százalékkal csökken a napelemek hatékonysága egy átlagos téli, felhős napon Dániában a nyári, napsütéses naphoz képest?</div>
+                    <p><strong>Megfigyelés:</strong> Figyeld meg a választ! Tudott konkrét számot mondani, és adott hozzá forrást? Vagy csak egy általános, kitérő választ adott? A jó MI-asszisztens ilyenkor is forrással támasztja alá az állítását.</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>4. Feladat: A Hamis Nyom Tesztje</h3>
+                    <p>Most próbáljuk meg szándékosan becsapni az MI-t, hogy lássuk, észreveszi-e a hazugságot. Ezt hívják "hallucináció" tesztnek.</p>
+                    <div class="prompt-example">Igaz az az információ, hogy Dánia egy hatalmas, sivatagi naperőművet épít a 'Sahara Solar Project' keretében?</div>
+                    <p><strong>Megfigyelés:</strong> Ez egy nyilvánvalóan hamis állítás (Dániában nincs sivatag). Egy jó, tényellenőrző MI erre azt fogja válaszolni, hogy "Nem, ez az információ téves", és elmagyarázza, miért. Ha az MI megpróbálja megerősíteni vagy részleteket kitalálni hozzá, akkor "hallucinál", és nem megbízható a válasza.</p>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>5. Kritikai Gondolkodás Sarok</h2>
+                    <p>A nyomozás végén gondolkozz el a tapasztalatokon!</p>
+                    <ul>
+                        <li><strong>"Bízom, de ellenőrzöm":</strong> Miért ez a legfontosabb szabály, amikor az MI-t kutatásra használjuk? Milyen következményei lehetnek, ha egy iskolai beadandót vagy egy fontos döntést egy ellenőrizetlen, MI által generált információra alapozunk?</li>
+                        <li><strong>A források minősége:</strong> Az MI abból tanul, amit az interneten talál. Ha egy témáról sok a megbízhatatlan, téves információ, az MI válaszai is pontatlanok lesznek. Hogyan segít a források ellenőrzése abban, hogy ne csak az MI-t, hanem magát az internetet is kritikusan kezeld?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>6. Önálló Kihívás: A te saját nyomozásod!</h2>
+                    <p>Most te vagy a főnyomozó! Válassz egy téged érdeklő, összetett kérdést, és végezd el a teljes detektívmunkát.</p>
+                    <p><strong>A feladatod:</strong></p>
+                    <ol>
+                        <li>Tegyél fel egy komplex kérdést az MI-nek, és kérj hozzá forrásokat. (Pl. "Milyen hatással van a videójátékozás a tizenévesek alvási szokásaira?")</li>
+                        <li>Ellenőrizz le legalább <strong>egy forrást</strong> alaposan. Valóban azt írja, amit az MI állít?</li>
+                        <li>Tegyél fel egy <strong>konkrét adatra vonatkozó keresztkérdést</strong>.</li>
+                        <li>A végén írj egy <strong>saját, 3-4 mondatos összefoglalót</strong> a témáról, <strong>a te szavaiddal</strong>, az ellenőrzött információk alapján. Az összefoglaló végén jelöld meg azt az egy forrást, amit te magad is elolvastál és megbízhatónak találtál.</li>
+                    </ol>
+                    <p>Mentsd le a beszélgetésedet és a saját összefoglalódat! Ez a munkafolyamat a felelős és hatékony online kutatás alapja.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

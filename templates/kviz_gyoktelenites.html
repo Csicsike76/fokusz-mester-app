@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Nevező gyöktelenítése</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 2px 5px; border-radius: 3px;}
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Nevező gyöktelenítése</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // 8 'a' answers
+            { question: "Mi a <span class='formula-display'>2 / √2</span> gyöktelenített alakja?", answers: { a: "√2", b: "2√2", c: "1" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevezőben lévő gyökkel, azaz √2-vel bővítjük a törtet.</div><div class="explanation-step"><b>🔹 Számolás:</b> (2 * √2) / (√2 * √2) = 2√2 / 2.</div><div class="explanation-step"><b>🔹 Egyszerűsítés:</b> A 2-vel való egyszerűsítés után az eredmény √2.</div><div class="explanation-solution">✅ Megoldás: A gyöktelenített alak √2.</div>` },
+            { question: "Mivel kell megszorozni a <span class='formula-display'>1 / (√7 + √3)</span> tört számlálóját és nevezőjét a gyöktelenítéshez?", answers: { a: "√7 - √3", b: "√7 + √3", c: "√7 * √3" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Azonosság:</b> A nevezőben egy (a+b) alakú kifejezés van. A gyöktelenítéshez a konjugáltjával, (a-b)-vel kell bővíteni, hogy az (a+b)(a-b) = a²-b² azonosságot használhassuk.</div><div class="explanation-step"><b>🔹 Alkalmazás:</b> Ebben az esetben a nevező konjugáltja (√7 - √3).</div><div class="explanation-solution">✅ Megoldás: A törtet (√7 - √3) kifejezéssel kell bővíteni.</div>` },
+            { question: "Mennyi a <span class='formula-display'>10 / (3 - √-1)</span> értéke?", answers: { a: "Nincs értelme a valós számok halmazán", b: "5(3 + √-1)", c: "1" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A nevezőben a √-1 szerepel.</div><div class="explanation-step"><b>🔹 Szabály:</b> A valós számok halmazán negatív számnak nincs négyzetgyöke.</div><div class="explanation-solution">✅ Megoldás: A kifejezésnek nincs értelme a valós számok halmazán.</div>` },
+            { question: "Mi a <span class='formula-display'>6 / (2√3)</span> gyöktelenített alakja?", answers: { a: "√3", b: "3√3", c: "2√3" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> Elég csak a gyökös résszel, azaz √3-mal bővíteni.</div><div class="explanation-step"><b>🔹 Számolás:</b> (6 * √3) / (2√3 * √3) = 6√3 / (2 * 3) = 6√3 / 6.</div><div class="explanation-step"><b>🔹 Egyszerűsítés:</b> 6-tal egyszerűsítve az eredmény √3.</div><div class="explanation-solution">✅ Megoldás: A gyöktelenített alak √3.</div>` },
+            { question: "Mennyi a <span class='formula-display'>8 / (√5 - 1)</span> gyöktelenített értéke?", answers: { a: "2(√5 + 1)", b: "8(√5 + 1)", c: "4(√5 - 1)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevező konjugáltjával, (√5 + 1)-gyel bővítünk.</div><div class="explanation-step"><b>🔹 Számolás:</b> [8 * (√5 + 1)] / [(√5 - 1)(√5 + 1)] = 8(√5 + 1) / (5 - 1) = 8(√5 + 1) / 4.</div><div class="explanation-step"><b>🔹 Egyszerűsítés:</b> 4-gyel egyszerűsítve kapjuk, hogy 2(√5 + 1).</div><div class="explanation-solution">✅ Megoldás: A kifejezés értéke 2(√5 + 1).</div>` },
+            { question: "Melyik kifejezés nevezője racionális szám?", answers: { a: "5 / 4", b: "√3 / 2", c: "1 / √5" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Racionális szám az, ami felírható két egész szám hányadosaként. A gyökös kifejezések, ha a gyök alatt nem négyzetszám van, irracionálisak.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A "√3 / 2" és "1 / √5" kifejezések értéke irracionális. Az "5 / 4" egy tört, ahol a nevező (4) racionális.</div><div class="explanation-solution">✅ Megoldás: Az 5 / 4 nevezője racionális szám.</div>` },
+            { question: "Mi a <span class='formula-display'>√2 / √3</span> gyöktelenített alakja?", answers: { a: "√6 / 3", b: "2 / 3", c: "√2 / 3" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevezővel, azaz √3-mal bővítjük a törtet.</div><div class="explanation-step"><b>🔹 Számolás:</b> (√2 * √3) / (√3 * √3) = √6 / 3.</div><div class="explanation-solution">✅ Megoldás: A gyöktelenített alak √6 / 3.</div>` },
+            { question: "Mennyi a <span class='formula-display'>12 / (3√2)</span> gyöktelenített értéke?", answers: { a: "2√2", b: "4√2", c: "6√2" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevező gyökös részével, √2-vel bővítünk.</div><div class="explanation-step"><b>🔹 Számolás:</b> (12 * √2) / (3√2 * √2) = 12√2 / (3 * 2) = 12√2 / 6.</div><div class="explanation-step"><b>🔹 Egyszerűsítés:</b> 6-tal egyszerűsítve az eredmény 2√2.</div><div class="explanation-solution">✅ Megoldás: A kifejezés értéke 2√2.</div>` },
+            // 9 'b' answers
+            { question: "Mi a <span class='formula-display'>1 / √5</span> gyöktelenített alakja?", answers: { a: "5", b: "√5 / 5", c: "1/5" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevezőben lévő gyökkel, azaz √5-tel bővítjük a törtet.</div><div class="explanation-step"><b>🔹 Számolás:</b> (1 * √5) / (√5 * √5) = √5 / 5.</div><div class="explanation-solution">✅ Megoldás: A gyöktelenített alak √5 / 5.</div>` },
+            { question: "Mi a célja a nevező gyöktelenítésének?", answers: { a: "A szám értékének megváltoztatása.", b: "A nevező racionálissá tétele.", c: "A számláló eltüntetése." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Fogalom:</b> A "gyöktelenítés" szó maga a folyamat célját írja le: a gyök (irracionális rész) eltávolítását a nevezőből.</div><div class="explanation-step"><b>🔹 Módszer:</b> Ezt a tört bővítésével érjük el, ami nem változtatja meg a tört értékét, csak az alakját.</div><div class="explanation-solution">✅ Megoldás: A cél a nevező racionálissá tétele.</div>` },
+            { question: "Mennyi a <span class='formula-display'>1 / (√2 + 1)</span> gyöktelenített értéke?", answers: { a: "√2 + 1", b: "√2 - 1", c: "1" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevező konjugáltjával, (√2 - 1)-gyel bővítünk.</div><div class="explanation-step"><b>🔹 Számolás:</b> [1 * (√2 - 1)] / [(√2 + 1)(√2 - 1)] = (√2 - 1) / (2 - 1) = (√2 - 1) / 1.</div><div class="explanation-solution">✅ Megoldás: A kifejezés értéke √2 - 1.</div>` },
+            { question: "Mi a <span class='formula-display'>4 / (√5)</span> gyöktelenített alakja?", answers: { a: "4√5 / 25", b: "4√5 / 5", c: "20" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> Bővítjük a törtet a nevezőben lévő gyökkel, azaz √5-tel.</div><div class="explanation-step"><b>🔹 Számolás:</b> (4 * √5) / (√5 * √5) = 4√5 / 5.</div><div class="explanation-solution">✅ Megoldás: A gyöktelenített alak 4√5 / 5.</div>` },
+            { question: "Mivel egyenlő a <span class='formula-display'>(√a - √b)</span> kifejezés konjugáltja?", answers: { a: "√a * √b", b: "√a + √b", c: "a - b" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A konjugált (vagy konjugált pár) egy olyan kéttagú kifejezés, amely csak az előjelben tér el az eredetitől.</div><div class="explanation-step"><b>🔹 Alkalmazás:</b> Az (x-y) konjugáltja az (x+y). Ebben az esetben x=√a és y=√b.</div><div class="explanation-solution">✅ Megoldás: A kifejezés konjugáltja √a + √b.</div>` },
+            { question: "Mennyi a <span class='formula-display'>7 / (4 - √2)</span> gyöktelenített értéke?", answers: { a: "(4 + √2) / 2", b: "(28 + 7√2) / 14", c: "7(4 + √2)" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevező konjugáltjával, (4 + √2)-vel bővítünk.</div><div class="explanation-step"><b>🔹 Számolás:</b> [7 * (4 + √2)] / [(4 - √2)(4 + √2)] = (28 + 7√2) / (16 - 2) = (28 + 7√2) / 14.</div><div class="explanation-solution">✅ Megoldás: A kifejezés értéke (28 + 7√2) / 14.</div>` },
+            { question: "Melyik törtet kell bővíteni a gyöktelenítéshez?", answers: { a: "3 / 4", b: "4 / √3", c: "√3 / 4" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Csak akkor van szükség gyöktelenítésre, ha a nevezőben irracionális szám (gyök) szerepel.</div><div class="explanation-step"><b>🔹 Opciók:</b> A "3 / 4" és "√3 / 4" törtek nevezője (4) racionális. Az "4 / √3" nevezője (√3) irracionális.</div><div class="explanation-solution">✅ Megoldás: A 4 / √3 törtet kell gyökteleníteni.</div>` },
+            { question: "Mi az <span class='formula-display'>(a+b)(a-b)</span> azonosság eredménye?", answers: { a: "a² + b²", b: "a² - b²", c: "a² - 2ab + b²" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Alapvető azonosság:</b> Ez az egyik legfontosabb algebrai azonosság, amelyet a nevezetes szorzatok között tanulunk.</div><div class="explanation-step"><b>🔹 Használat:</b> Pontosan ezt az azonosságot használjuk ki, amikor konjugálttal gyöktelenítünk, mert a négyzetre emelés eltünteti a gyökjelet.</div><div class="explanation-solution">✅ Megoldás: Az azonosság eredménye a² - b².</div>` },
+            { question: "Mennyi a <span class='formula-display'>15 / √5</span> gyöktelenített értéke?", answers: { a: "3√25", b: "3√5", c: "5√3" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevezővel, √5-tel bővítünk.</div><div class="explanation-step"><b>🔹 Számolás:</b> (15 * √5) / (√5 * √5) = 15√5 / 5.</div><div class="explanation-step"><b>🔹 Egyszerűsítés:</b> 5-tel egyszerűsítve az eredmény 3√5.</div><div class="explanation-solution">✅ Megoldás: A kifejezés értéke 3√5.</div>` },
+            // 8 'c' answers
+            { question: "Mi a <span class='formula-display'>3/√3</span> gyöktelenített alakja?", answers: { a: "3", b: "1", c: "√3" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevezőben lévő gyökkel, azaz √3-mal bővítjük a törtet.</div><div class="explanation-step"><b>🔹 Számolás:</b> (3 * √3) / (√3 * √3) = 3√3 / 3.</div><div class="explanation-step"><b>🔹 Egyszerűsítés:</b> A 3-mal való egyszerűsítés után az eredmény √3.</div><div class="explanation-solution">✅ Megoldás: A gyöktelenített alak √3.</div>` },
+            { question: "Mennyi a <span class='formula-display'>1 / (√3 - √2)</span> gyöktelenített értéke?", answers: { a: "1", b: "√3 - √2", c: "√3 + √2" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevező konjugáltjával, (√3 + √2)-vel bővítünk.</div><div class="explanation-step"><b>🔹 Számolás:</b> [1 * (√3 + √2)] / [(√3 - √2)(√3 + √2)] = (√3 + √2) / (3 - 2) = (√3 + √2) / 1.</div><div class="explanation-solution">✅ Megoldás: A kifejezés értéke √3 + √2.</div>` },
+            { question: "Mi a gyöktelenítés után a <span class='formula-display'>7 / √7</span> ?", answers: { a: "1", b: "7√7", c: "√7" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> √7-tel bővítjük a törtet.</div><div class="explanation-step"><b>🔹 Számolás:</b> (7 * √7) / (√7 * √7) = 7√7 / 7.</div><div class="explanation-step"><b>🔹 Egyszerűsítés:</b> 7-tel egyszerűsítve az eredmény √7.</div><div class="explanation-solution">✅ Megoldás: Az eredmény √7.</div>` },
+            { question: "Mennyi a <span class='formula-display'>20 / (√6 + √2)</span> gyöktelenített értéke?", answers: { a: "5(√6 + √2)", b: "20(√6 - √2)", c: "5(√6 - √2)" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevező konjugáltjával, (√6 - √2)-vel bővítünk.</div><div class="explanation-step"><b>🔹 Számolás:</b> [20 * (√6 - √2)] / [(√6 + √2)(√6 - √2)] = 20(√6 - √2) / (6 - 2) = 20(√6 - √2) / 4.</div><div class="explanation-step"><b>🔹 Egyszerűsítés:</b> 4-gyel egyszerűsítve az eredmény 5(√6 - √2).</div><div class="explanation-solution">✅ Megoldás: A kifejezés értéke 5(√6 - √2).</div>` },
+            { question: "Ha gyöktelenítjük a <span class='formula-display'>1/x</span> törtet, ahol <span class='formula-display'>x = √a</span>, mi lesz az eredmény?", answers: { a: "a", b: "x/a", c: "√a / a" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Behelyettesítés:</b> A tört 1/√a.</div><div class="explanation-step"><b>🔹 Bővítés:</b> √a-val bővítünk.</div><div class="explanation-step"><b>🔹 Számolás:</b> (1 * √a) / (√a * √a) = √a / a.</div><div class="explanation-solution">✅ Megoldás: A gyöktelenített alak √a / a.</div>` },
+            { question: "Mi a <span class='formula-display'>√5 / (√5 - 2)</span> gyöktelenített alakja?", answers: { a: "5 - 2√5", b: "5", c: "5 + 2√5" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevező konjugáltjával, (√5 + 2)-vel bővítünk.</div><div class="explanation-step"><b>🔹 Számolás (számláló):</b> √5 * (√5 + 2) = 5 + 2√5.</div><div class="explanation-step"><b>🔹 Számolás (nevező):</b> (√5 - 2)(√5 + 2) = 5 - 4 = 1.</div><div class="explanation-solution">✅ Megoldás: A kifejezés értéke (5 + 2√5) / 1, vagyis 5 + 2√5.</div>` },
+            { question: "Mennyi a <span class='formula-display'>1/(3 - √8)</span> gyöktelenített értéke?", answers: { a: "3 - √8", b: "1", c: "3 + √8" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> A nevező konjugáltjával, (3 + √8)-cal bővítünk.</div><div class="explanation-step"><b>🔹 Számolás:</b> [1 * (3 + √8)] / [(3 - √8)(3 + √8)] = (3 + √8) / (9 - 8) = (3 + √8) / 1.</div><div class="explanation-solution">✅ Megoldás: A kifejezés értéke 3 + √8.</div>` },
+            { question: "A <span class='formula-display'>10 / (5√2)</span> tört gyöktelenítés után mennyi lesz?", answers: { a: "1", b: "√2/2", c: "√2" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Bővítés:</b> √2-vel bővítjük a törtet.</div><div class="explanation-step"><b>🔹 Számolás:</b> (10 * √2) / (5√2 * √2) = 10√2 / (5 * 2) = 10√2 / 10.</div><div class="explanation-step"><b>🔹 Egyszerűsítés:</b> 10-zel egyszerűsítve az eredmény √2.</div><div class="explanation-solution">✅ Megoldás: A gyöktelenített alak √2.</div>` }
+        ];
+
+        // JavaScript logika - a címke nélküli megjelenítéssel
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

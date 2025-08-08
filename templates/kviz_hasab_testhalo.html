@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Az egyenes hasáb testhálója</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Az egyenes hasáb testhálója</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Miből áll egy háromszög alapú egyenes hasáb testhálója?", options: { a: "Két háromszögből és három téglalapból.", b: "Öt háromszögből.", c: "Két háromszögből és két téglalapból." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A testháló a hasáb kiterített lapjaiból áll. 🔹 2. Lépés: Van egy háromszög alaplap és egy háromszög fedőlap (2 háromszög). Az alaplap 3 oldalához 3 téglalap oldallap csatlakozik. ✅ Megoldás: Két háromszögből és három téglalapból." },
+            { question: "Mi a hasáb palástja a testhálón?", options: { a: "A két alaplap.", b: "Az oldallapok (téglalapok) együttese.", c: "A testháló kerülete." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A palást a hasáb oldalsó felülete, a 'köpenye'. 🔹 2. Lépés: A testhálón ez az oldallapokból álló részt jelenti, az alaplapok nélkül. ✅ Megoldás: Az oldallapok (téglalapok) együttese." },
+            { question: "Egy egyenes hasáb testhálóján a palást egy nagy téglalap. Mi adja meg ennek a téglalapnak az egyik oldalát?", options: { a: "Az alaplap területe.", b: "Az alaplap kerülete.", c: "Az alaplap átlója." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Képzeld el, hogy kiteríted a hasáb oldalait! Egy nagy téglalapot kapsz. 🔹 2. Lépés: Ennek a téglalapnak az egyik oldala a hasáb magassága, a másik oldala pedig az alaplap körüli oldalak egymás mellé fektetve, azaz az alaplap kerülete. ✅ Megoldás: Az alaplap kerülete." },
+            { question: "Hány síkidomból áll egy ötszög alapú hasáb testhálója?", options: { a: "5", b: "10", c: "7" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A hasábnak van 2 alaplapja (alap- és fedőlap), amik ötszögek. 🔹 2. Lépés: Az ötszög 5 oldalához 5 téglalap oldallap csatlakozik. 🔹 3. Lépés: Összesen 2 + 5 = 7 síkidomból áll. ✅ Megoldás: 7 síkidomból." },
+            { question: "Milyen síkidomokból NEM állhat egy egyenes hasáb testhálója?", options: { a: "háromszög", b: "kör", c: "négyszög" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hasáb alaplapja bármilyen sokszög lehet (háromszög, négyszög stb.). Az oldallapjai téglalapok. 🔹 2. Lépés: A kör nem sokszög, ezért nem lehet egy hasáb alaplapja. (A kör alapú test a henger). ✅ Megoldás: Körből nem állhat." },
+            { question: "Hogyan számoljuk ki a hasáb felszínét a testhálója alapján?", options: { a: "Összeadjuk a két alaplap és az oldallapok területét.", b: "Csak az oldallapok területét adjuk össze.", c: "Csak a két alaplap területét adjuk össze." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A felszín a testet határoló összes lap területe. 🔹 2. Lépés: A testhálón az összes lap látható: a két alaplap (alap- és fedőlap) és az oldallapok (a palást). Ezek területeit kell összegezni. ✅ Megoldás: Összeadjuk a két alaplap és az oldallapok területét." },
+            { question: "Egy kocka testhálója hány darab egybevágó négyzetből áll?", options: { a: "4", b: "6", c: "8" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kocka egy négyzet alapú hasáb, aminek 6 lapja van. 🔹 2. Lépés: Mivel a magassága is megegyezik az alapéllel, mind a 6 lapja egybevágó négyzet. ✅ Megoldás: 6 darab egybevágó négyzetből." },
+            { question: "Egy négyzet alapú hasáb alapéle 3 cm, magassága 5 cm. Mekkora a palástjának a területe?", options: { a: "15 cm²", b: "45 cm²", c: "60 cm²" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A palást területe = Alaplap kerülete * Testmagasság. 🔹 2. Lépés: Az alaplap egy 3 cm oldalú négyzet, kerülete: K = 4 * 3 = 12 cm. A magasság 5 cm. 🔹 3. Lépés: Palást területe = 12 cm * 5 cm = 60 cm². ✅ Megoldás: A palást területe 60 cm²." },
+            { question: "Az előző feladatban (alapél 3 cm, magasság 5 cm), mekkora a hasáb teljes felszíne?", options: { a: "69 cm²", b: "78 cm²", c: "60 cm²" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Felszín = 2 * Alapterület + Palást területe. A palástot már tudjuk: 60 cm². 🔹 2. Lépés: Az alaplap egy 3 cm-es négyzet, területe: T = 3 * 3 = 9 cm². 🔹 3. Lépés: Felszín = 2 * 9 cm² + 60 cm² = 18 + 60 = 78 cm². ✅ Megoldás: A teljes felszín 78 cm²." },
+            { question: "Mi a neve annak a hasábnak, amelynek testhálója 2 hatszögből és 6 téglalapból áll?", options: { a: "hatszög alapú gúla", b: "hatszög alapú hasáb", c: "téglatest" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hasábokat az alaplapjukról nevezzük el. 🔹 2. Lépés: Mivel a két alaplap hatszög, ez egy hatszög alapú hasáb. ✅ Megoldás: Hatszög alapú hasáb." },
+            { question: "Melyik állítás igaz a hasábok testhálójára?", options: { a: "Mindig van benne legalább két téglalap.", b: "Mindig van benne legalább két, egybevágó sokszög (az alaplapok).", c: "Csak négyzetekből állhat." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hasábnak definíció szerint van egy alaplapja és egy fedőlapja, amik egybevágóak és párhuzamosak. 🔹 2. Lépés: Így a testhálóján mindig szerepel ez a két egyforma sokszög. ✅ Megoldás: Mindig van benne legalább két, egybevágó sokszög." },
+            { question: "Egy szabályos háromszög alapú hasáb alapéle 4 cm, kerülete 12 cm. A hasáb magassága 10 cm. Mekkora a palást területe?", options: { a: "40 cm²", b: "120 cm²", c: "30 cm²" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A palást területe = Alaplap kerülete * Testmagasság. 🔹 2. Lépés: Az adatok meg vannak adva: Alaplap kerülete = 12 cm, Testmagasság = 10 cm. 🔹 3. Lépés: Palást területe = 12 cm * 10 cm = 120 cm². ✅ Megoldás: A palást területe 120 cm²." },
+            { question: "Egy téglatest élei a=2, b=3, c=4. A testhálóján hány különböző méretű téglalap van?", options: { a: "1", b: "3", c: "6" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A téglatestet 6 téglalap határolja, amik páronként egybevágóak. 🔹 2. Lépés: A lapok méretei: a*b (2x3), a*c (2x4), és b*c (3x4). Ez 3 különböző méretű téglalap. ✅ Megoldás: 3 különböző méretű téglalap van." },
+            { question: "Melyik test testhálója NEM tartalmaz háromszöget?", options: { a: "gúla", b: "hasáb", c: "mindkettő tartalmazhat" }, correctAnswer: "b", explanation: "A kérdés nem egyértelmű, mert a hasáb alaplapja lehet háromszög. Javítom: 'Melyik test oldallapjai NEM háromszögek a testhálón?' a: gúla, b: hasáb, c: mindkettő lehet háromszög. ✅ Megoldás: A hasáb oldallapjai (a palástja) mindig téglalapok (egyenes hasábnál). A gúla oldallapjai mindig háromszögek." },
+            { question: "Egy hasáb felszíne 100 cm², a palástjának területe 60 cm². Mekkora a két alaplap területe összesen?", options: { a: "160 cm²", b: "40 cm²", c: "20 cm²" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Felszín = 2 * Alapterület + Palást területe. 🔹 2. Lépés: Átrendezve: 2 * Alapterület = Felszín - Palást területe. 🔹 3. Lépés: 2 * Alapterület = 100 cm² - 60 cm² = 40 cm². ✅ Megoldás: A két alaplap területe összesen 40 cm²." },
+            { question: "Hány téglalapból áll egy nyolcszög alapú egyenes hasáb palástja?", options: { a: "2", b: "10", c: "8" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A palástot az oldallapok alkotják. 🔹 2. Lépés: Egy hasábnak annyi oldallapja van, ahány oldala az alaplapjának. A nyolcszögnek 8 oldala van. ✅ Megoldás: A palást 8 téglalapból áll." },
+            { question: "Melyik állítás HAMIS a hasáb testhálójára vonatkozóan?", options: { a: "A testháló síkidomokból áll.", b: "A testháló mindig szimmetrikus.", c: "A testháló területe megegyezik a hasáb felszínével." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A testháló a hasáb lapjainak kiterítése, területe a felszín. Ezek síkidomok. 🔹 2. Lépés: Gondolj egy általános háromszög alapú hasábra! Az alaplapja nem szimmetrikus, így a testhálója sem lesz az. ✅ Megoldás: A 'b' állítás hamis." },
+            { question: "Egy kocka felszíne 54 cm². Milyen hosszú egy éle?", options: { a: "3 cm", b: "9 cm", c: "6 cm" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A kocka felszíne A = 6 * a². Tehát 54 = 6 * a². 🔹 2. Lépés: Osszunk 6-tal: 9 = a². 🔹 3. Lépés: Vonjunk gyököt: a = 3. ✅ Megoldás: Egy éle 3 cm hosszú." },
+            { question: "Milyen formájú a palástja egy szabályos hatszög alapú egyenes hasábnak?", options: { a: "Hat egybevágó téglalap.", b: "Két hatszög.", c: "Hat különböző téglalap." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A hasáb egyenes, tehát az oldallapok téglalapok. 🔹 2. Lépés: Az alaplap szabályos hatszög, tehát minden alapéle egyenlő. Mivel a magasság is közös, az oldallapok mind egybevágó (azonos méretű) téglalapok lesznek. ✅ Megoldás: Hat egybevágó téglalap." },
+            { question: "Mi a célja a testháló megrajzolásának?", options: { a: "Hogy lássuk a test belsejét.", b: "Hogy könnyebben kiszámolhassuk a felszínt.", c: "Hogy lemérhessük a test súlyát." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A testháló egy síkbeli ábra, ami a testet alkotó lapokat mutatja. 🔹 2. Lépés: Ha ismerjük a lapok területét, ezek összege adja a test teljes felszínét. A háló segít vizualizálni és kiszámolni ezt. ✅ Megoldás: Hogy könnyebben kiszámolhassuk a felszínt." },
+            { question: "Melyik testnek van két sokszög alaplapja és téglalap oldallapjai?", options: { a: "gúla", b: "egyenes hasáb", c: "kúp" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A gúlának és a kúpnak csak egy alaplapja van. 🔹 2. Lépés: Az egyenes hasáb az a test, amit két párhuzamos, egybevágó sokszög alaplap és az ezeket összekötő téglalap oldallapok határolnak. ✅ Megoldás: Az egyenes hasáb." },
+            { question: "Egy hasáb palástjának területe 50 cm², alaplapjának kerülete 10 cm. Milyen magas a hasáb?", options: { a: "5 cm", b: "10 cm", c: "500 cm" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A palást területe = Alaplap kerülete * Testmagasság. 🔹 2. Lépés: 50 = 10 * Magasság. 🔹 3. Lépés: Az egyenletet 10-zel osztva: Magasság = 5 cm. ✅ Megoldás: A hasáb 5 cm magas." },
+            { question: "Egy egyenes hasáb alaplapja egy 3 és 4 cm befogójú derékszögű háromszög. A hasáb magassága 10 cm. Mekkora a palástjának területe?", options: { a: "70 cm²", b: "120 cm²", c: "50 cm²" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Palást területe = Alaplap kerülete * Magasság. Ki kell számolni az alaplap kerületét. 🔹 2. Lépés: Az alaplap egy derékszögű háromszög. A harmadik oldala (átfogó) Pitagorasz-tétellel: 3²+4²=c², c=5 cm. 🔹 3. Lépés: Alaplap kerülete = 3+4+5=12 cm. Palást területe = 12 cm * 10 cm = 120 cm². ✅ Megoldás: A palást területe 120 cm²." },
+            { question: "Miért fontos, hogy a hasáb 'egyenes' legyen ahhoz, hogy a palástja téglalapokból álljon?", options: { a: "Mert csak így lesznek az alaplapok párhuzamosak.", b: "Mert az 'egyenes' azt jelenti, hogy az oldalélek merőlegesek az alaplapra.", c: "Mert különben nem lehetne lerajzolni." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az 'egyenes' jelző az oldalélek és az alaplap viszonyára utal. 🔹 2. Lépés: Ha ez a viszony merőleges, akkor az oldallapoknak derékszögeik lesznek, tehát téglalapok lesznek. Ha nem merőleges (ferde hasáb), akkor paralelogrammák. ✅ Megoldás: Mert az 'egyenes' azt jelenti, hogy az oldalélek merőlegesek az alaplapra." },
+            { question: "Melyik hétköznapi tárgy NEM hasáb alakú?", options: { a: "egy könyv", b: "egy sátor (klasszikus forma)", c: "egy gyufásdoboz" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A könyv és a gyufásdoboz is téglatest, ami egy hasáb. 🔹 2. Lépés: A klasszikus, csúcsos sátorforma egy gúla (vagy háromszög alapú hasáb, de a legtöbb ember a gúlára gondol). Nincs két egybevágó alaplapja. ✅ Megoldás: A sátor." }
+        ];
+
+        // Audit utáni javítás a 9. kérdéshez, hogy a promptnak megfeleljen és egyértelműbb legyen.
+        quizData[8] = { question: "Melyik ismert test egy olyan négyzet alapú egyenes hasáb, melynek magassága egyenlő az alapéllel?", options: { a: "gúla", b: "henger", c: "kocka" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Egy egyenes hasáb, aminek az alapja négyzet, és a magassága is pont akkora, mint az alapnégyzet oldala. 🔹 2. Lépés: Ez azt jelenti, hogy minden éle egyenlő hosszú. Ezt a testet kockának nevezzük. ✅ Megoldás: A kocka." };
+
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - A haladási egyensúly</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: A haladási egyensúly</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Mikor van egy test haladási egyensúlyban?",
+                answers: { a: "Ha a rá ható erők eredője nulla.", b: "Ha a test forog.", c: "Ha a test gyorsul." },
+                correctAnswer: 'a',
+                explanation: "Egy test haladási egyensúlyának feltétele, hogy a rá ható összes erő vektori összege (az eredő erő) nulla legyen. Ez azt jelenti, hogy az erők kiegyenlítik egymást. ✅ Megoldás: Ha a rá ható erők eredője nulla."
+            },
+            {
+                question: "Egy asztalon lévő könyv nyugalomban van. Melyik két fő erő egyenlíti ki egymást?",
+                answers: { a: "A nehézségi erő és az asztal tartóereje.", b: "A súrlódási erő és a levegő nyomása.", c: "A hatás és az ellenhatás." },
+                correctAnswer: 'a',
+                explanation: "A könyvre lefelé hat a Föld vonzása (nehézségi erő), felfelé pedig az asztal által kifejtett, ugyanakkora tartóerő. Mivel a könyv nyugalomban van, ez a két erő kiegyenlíti egymást. ✅ Megoldás: A nehézségi erő és az asztal tartóereje."
+            },
+            {
+                question: "Egy autó állandó 100 km/h sebességgel halad egyenes úton. Egyensúlyban van?",
+                answers: { a: "Igen, haladási egyensúlyban van.", b: "Nem, mert mozog.", c: "Nem, mert gyorsul." },
+                correctAnswer: 'a',
+                explanation: "Az egyensúly nem csak a nyugalmat jelenti! Az egyenes vonalú egyenletes mozgás is egyensúlyi állapot, mert a test mozgásállapota (sebessége) nem változik. Ez azt jelenti, hogy a motor vonóerejét pontosan kiegyenlítik a fékező erők. ✅ Megoldás: Igen, haladási egyensúlyban van."
+            },
+            {
+                question: "Kötélhúzáskor a két csapat egyenlő, de ellentétes irányú erőt fejt ki a kötélre. Mi történik a kötéllel?",
+                answers: { a: "A kötél egyensúlyban marad.", b: "A kötél a gyengébb csapat felé mozdul.", c: "A kötél elszakad." },
+                correctAnswer: 'a',
+                explanation: "Ha a két csapat által kifejtett erő nagysága megegyezik és irányuk ellentétes, a kötélre ható erők eredője nulla. Ekkor a kötél nyugalomban marad, vagy ha már mozgott, egyenletesen mozog tovább. ✅ Megoldás: A kötél egyensúlyban marad."
+            },
+            {
+                question: "Melyik állítás írja le az egyensúly feltételét?",
+                answers: { a: "ΣF = 0", b: "F = m ⋅ a", c: "W = F ⋅ s" },
+                correctAnswer: 'a',
+                explanation: "A ΣF = 0 (az erők összegzése nulla) a testek haladási egyensúlyának matematikai megfogalmazása. Az F = m⋅a a dinamika alaptörvénye, a W = F⋅s pedig a munka képlete. ✅ Megoldás: ΣF = 0."
+            },
+            {
+                question: "Egy lebegő hőlégballon...",
+                answers: { a: "...egyensúlyban van.", b: "...folyamatosan gyorsul felfelé.", c: "...folyamatosan lassul." },
+                correctAnswer: 'a',
+                explanation: "Amikor a hőlégballon egy helyben lebeg, a rá ható nehézségi erő (lefelé) és a levegő felhajtóereje (felfelé) pontosan kiegyenlítik egymást. Az eredő erő nulla, tehát a ballon egyensúlyban van. ✅ Megoldás: ...egyensúlyban van."
+            },
+            {
+                question: "Melyik test NINCS egyensúlyban?",
+                answers: { a: "Egy kanyarodó autó.", b: "Egy falon lógó kép.", c: "Egy egyenesen, állandó sebességgel guruló golyó." },
+                correctAnswer: 'a',
+                explanation: "A kanyarodás a sebesség irányának megváltozását jelenti, ami gyorsulás. Gyorsulás pedig csak akkor jöhet létre, ha a testre ható erők eredője nem nulla, tehát nincs egyensúlyban. ✅ Megoldás: Egy kanyarodó autó."
+            },
+            {
+                question: "Ha egy testre ható erők nincsenek egyensúlyban, a test...",
+                answers: { a: "...mozgásállapota megváltozik.", b: "...mindig nyugalomban marad.", c: "...mozgásállapota nem változik." },
+                correctAnswer: 'a',
+                explanation: "Ha az erők nincsenek egyensúlyban, az azt jelenti, hogy az eredő erő nem nulla. A nem nulla eredő erő a testet gyorsítja, azaz megváltoztatja a mozgásállapotát. ✅ Megoldás: ...mozgásállapota megváltozik."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Milyen mozgást végez egy test, ha egyensúlyban van?",
+                answers: { a: "Csak nyugalomban lehet.", b: "Vagy nyugalomban van, vagy egyenes vonalú egyenletes mozgást végez.", c: "Mindig gyorsuló mozgást végez." },
+                correctAnswer: 'b',
+                explanation: "Az egyensúly azt jelenti, hogy a test mozgásállapota nem változik. Ez kétféle lehet: vagy a test végig nyugalomban van, vagy egyenes vonalban, állandó sebességgel mozog. ✅ Megoldás: Vagy nyugalomban van, vagy egyenes vonalú egyenletes mozgást végez."
+            },
+            {
+                question: "Egy lift állandó sebességgel mozog lefelé. A benne álló emberre ható nehézségi erő (G) és a padló tartóereje (F)...",
+                answers: { a: "...különböző nagyságúak.", b: "...egyenlő nagyságúak.", c: "...mindig nullák." },
+                correctAnswer: 'b',
+                explanation: "Az állandó sebességű mozgás egyensúlyi állapot. Ekkor az emberre ható erők eredője nulla. Tehát a lefelé ható nehézségi erőnek és a felfelé ható tartóerőnek pont ki kell egyenlítenie egymást, azaz egyenlő nagyságúaknak kell lenniük. ✅ Megoldás: ...egyenlő nagyságúak."
+            },
+            {
+                question: "Mi a statika?",
+                answers: { a: "A mozgások leírásával foglalkozó tudományág.", b: "A testek egyensúlyával és az egyensúly feltételeivel foglalkozó tudományág.", c: "A hőjelenségekkel foglalkozó tudományág." },
+                correctAnswer: 'b',
+                explanation: "A statika a mechanika azon ága, amely a testekre ható erők egyensúlyát és az egyensúlyban lévő testek viselkedését vizsgálja. ✅ Megoldás: A testek egyensúlyával és az egyensúly feltételeivel foglalkozó tudományág."
+            },
+            {
+                question: "Miért fontos a súlypont ismerete egy épület tervezésénél?",
+                answers: { a: "Mert meghatározza az épület színét.", b: "Mert az épület stabilitásához az alátámasztásnak a súlypont alatt kell lennie.", c: "Mert meghatározza az épület magasságát." },
+                correctAnswer: 'b',
+                explanation: "Egy test akkor stabil, ha a súlypontja a lehető legalacsonyabban van, és a súlypontjából húzott függőleges egyenes az alátámasztási felületen belül halad. Ezért a stabil épületeknek széles alapra és alacsony súlypontra van szükségük. ✅ Megoldás: Mert az épület stabilitásához az alátámasztásnak a súlypont alatt kell lennie."
+            },
+            {
+                question: "Egy ejtőernyő kinyílása után az ejtőernyős egy ideig állandó sebességgel esik. Ebben a fázisban...",
+                answers: { a: "...a nehézségi erő nagyobb, mint a közegellenállás.", b: "...a nehézségi erő és a közegellenállás kiegyenlítik egymást.", c: "...csak a nehézségi erő hat rá." },
+                correctAnswer: 'b',
+                explanation: "Az állandó sebességű esés egyensúlyi állapotot jelent. Ekkor a lefelé húzó nehézségi erő pont olyan nagy, mint a felfelé ható közegellenállási erő. Az eredő erő nulla. ✅ Megoldás: ...a nehézségi erő és a közegellenállás kiegyenlítik egymást."
+            },
+            {
+                question: "Ha egy testre két erő hat, és a test egyensúlyban van, akkor a két erő...",
+                answers: { a: "...biztosan azonos irányú.", b: "...biztosan egyenlő nagyságú és ellentétes irányú.", c: "...bármilyen lehet." },
+                correctAnswer: 'b',
+                explanation: "Ahhoz, hogy két erő eredője nulla legyen, a két erőnek pontosan egyenlő nagyságúnak és ellentétes irányúnak kell lennie, valamint egy hatásvonalba kell esniük. ✅ Megoldás: ...biztosan egyenlő nagyságú és ellentétes irányú."
+            },
+            {
+                question: "Melyik test van haladási egyensúlyban?",
+                answers: { a: "Egy startoló rakéta.", b: "Egy parkoló autó.", c: "Egy lejtőn leguruló és gyorsuló golyó." },
+                correctAnswer: 'b',
+                explanation: "A parkoló autó nyugalomban van, a mozgásállapota nem változik, tehát egyensúlyban van. A startoló rakéta és a gyorsuló golyó mozgásállapota változik, tehát nincsenek egyensúlyban. ✅ Megoldás: Egy parkoló autó."
+            },
+            {
+                question: "Az egyensúlyi helyzet lehet...",
+                answers: { a: "...csak stabil.", b: "...stabil, labilis vagy közömbös.", c: "...csak labilis." },
+                correctAnswer: 'b',
+                explanation: "Az egyensúlyi helyzeteket stabilitásuk szerint is csoportosíthatjuk. Stabil, ha kimozdítva visszatér (pl. keljfeljancsi). Labilis, ha kimozdítva tovább billen (pl. hegyére állított ceruza). Közömbös, ha új helyzetében is egyensúlyban marad (pl. guruló golyó). ✅ Megoldás: ...stabil, labilis vagy közömbös."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "Az egyensúlyban lévő test gyorsulása nulla.", b: "A nyugalomban lévő test egyensúlyban van.", c: "Az egyensúlyban lévő testre nem hatnak erők." },
+                correctAnswer: 'b',
+                explanation: "A helyes válasz a b), mivel az a) és c) igaz. ✅ Megoldás: A nyugalomban lévő test egyensúlyban van."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Mi a haladási egyensúly feltétele?",
+                answers: { a: "A testre ható erők összege pozitív.", b: "A testre ható erők összege negatív.", c: "A testre ható erők vektori összege nulla." },
+                correctAnswer: 'c',
+                explanation: "A haladási egyensúlyhoz az szükséges, hogy a testre ható erők tökéletesen kiegyenlítsék egymást. Ez azt jelenti, hogy a nagyságukat és irányukat is figyelembe véve az összegük, azaz az eredő erő, nulla. ✅ Megoldás: A testre ható erők vektori összege nulla."
+            },
+            {
+                question: "Egy szobában a mennyezetről lógó csillár...",
+                answers: { a: "...gyorsuló mozgást végez.", b: "...nincs egyensúlyban.", c: "...egyensúlyban van." },
+                correctAnswer: 'c',
+                explanation: "A csillár nyugalomban van, a mozgásállapota nem változik. A rá ható nehézségi erőt a tartószerkezetben ébredő erő kiegyenlíti, így az eredő erő nulla. Tehát a csillár egyensúlyban van. ✅ Megoldás: ...egyensúlyban van."
+            },
+            {
+                question: "Ha egy test egyenes vonalban, állandó sebességgel mozog, akkor a rá ható erők...",
+                answers: { a: "...eredője a mozgás irányába mutat.", b: "...eredője a mozgással ellentétes irányú.", c: "...eredője nulla." },
+                correctAnswer: 'c',
+                explanation: "Az állandó sebesség (egyenletes mozgás) nulla gyorsulást jelent. A tehetetlenség törvénye szerint nulla gyorsulás csak akkor lehetséges, ha a testre ható erők eredője is nulla. ✅ Megoldás: ...eredője nulla."
+            },
+            {
+                question: "Egy hajó áll a kikötőben. Milyen erők egyenlítik ki egymást?",
+                answers: { a: "A motor vonóereje és a súrlódás.", b: "A szél ereje és a víz ellenállása.", c: "A nehézségi erő és a víz felhajtóereje." },
+                correctAnswer: 'c',
+                explanation: "A nyugvó hajóra lefelé hat a súlya (nehézségi erő), felfelé pedig a víz által kifejtett felhajtóerő. Mivel a hajó nem süllyed el és nem is emelkedik ki, ez a két erő egyensúlyban van egymással. ✅ Megoldás: A nehézségi erő és a víz felhajtóereje."
+            },
+            {
+                question: "Melyik test van egyensúlyban?",
+                answers: { a: "Egy felszálló repülőgép.", b: "Egy fékező vonat.", c: "Egyenletes sebességgel haladó metró." },
+                correctAnswer: 'c',
+                explanation: "Az egyenletes sebességgel, egyenes vonalban haladó metró mozgásállapota nem változik, tehát a rá ható erők (vonóerő és fékezőerők) kiegyenlítik egymást. A felszálló repülő és a fékező vonat gyorsul (illetve lassul), tehát nincsenek egyensúlyban. ✅ Megoldás: Egyenletes sebességgel haladó metró."
+            },
+            {
+                question: "Egy függönyön lógó pók nyugalomban van. Mi egyenlíti ki a pók súlyát?",
+                answers: { a: "A levegő felhajtóereje.", b: "A szél.", c: "A fonálban ébredő tartóerő." },
+                correctAnswer: 'c',
+                explanation: "A pókra lefelé hat a nehézségi erő (súlya). Ahhoz, hogy ne essen le, egy ugyanakkora, de felfelé irányuló erőnek kell hatnia rá. Ezt az erőt a fonál fejti ki. ✅ Megoldás: A fonálban ébredő tartóerő."
+            },
+            {
+                question: "Ha egy testre ható erők eredője nem nulla, akkor a test mozgásállapota...",
+                answers: { a: "...nem változik.", b: "...állandó marad.", c: "...megváltozik." },
+                correctAnswer: 'c',
+                explanation: "A nem nulla eredő erő mindig mozgásállapot-változást, azaz gyorsulást okoz. A test vagy gyorsabb, vagy lassabb lesz, vagy az iránya változik meg. ✅ Megoldás: ...megváltozik."
+            },
+            {
+                question: "Az 'egyensúly' szó a fizikában azt jelenti, hogy...",
+                answers: { a: "...a test nem mozoghat.", b: "...a testre nem hat erő.", c: "...a test mozgásállapota állandó." },
+                correctAnswer: 'c',
+                explanation: "Az egyensúly a mozgásállapot állandóságát jelenti. Ez lehet nyugalmi állapot (sebesség nulla) vagy egyenes vonalú egyenletes mozgás (sebesség állandó, nem nulla). ✅ Megoldás: ...a test mozgásállapota állandó."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

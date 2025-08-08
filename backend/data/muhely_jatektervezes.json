@@ -1,0 +1,64 @@
+{
+  "access": "free",
+  "workshop": {
+    "title": "Extra Műhely",
+    "subtitle": "MI a Videójáték-Tervezésben",
+    "sections": [
+      {
+        "id": 1,
+        "title": "Célkitűzés",
+        "content": "A műhely végére képes leszel az MI segítségével létrehozni egy egyszerű videójáték-koncepció alapjait. Megtanulod, hogyan generálj játékötletet, hogyan tervezz karaktert és pályát, és hogyan alkoss \"concept art\"-ot a játékodhoz."
+      },
+      {
+        "id": 2,
+        "title": "Bevezető: Az Ötlet-Motor és a Koncept-Művész",
+        "content": "Minden nagyszerű videójáték egy ötlettel kezdődik. De mi van, ha épp nincs ötleted? Vagy ha van, de nem tudod, hogyan nézne ki? Az MI ebben a folyamatban a te személyes ötletgyárad és koncept-művészed. Segít beindítani a fantáziádat, és vizuális formába önteni a gondolataidat. Ma te leszel a játékrendező, aki egy teljes világot teremt a szavak erejével."
+      },
+      {
+        "id": 3,
+        "title": "Lépésről-lépésre Feladatok",
+        "tasks": [
+          {
+            "id": 1,
+            "title": "A Játékötlet Megszülése",
+            "description": "Kérjük meg az MI-t, hogy segítsen kitalálni egy játékot!",
+            "prompt": "Viselkedj úgy, mint egy tapasztalt játéktervező! Adj 3 egyedi játékötletet! Mindegyikhez add meg a játék műfaját, a főszereplőt és a fő célt! A stílus legyen fantáziadús és kreatív.",
+            "instructions": "Válasszátok ki a csapatoddal (vagy egyénileg) a legizgalmasabb játékötletet! Ezzel fogunk tovább dolgozni."
+          },
+          {
+            "id": 2,
+            "title": "A Főhős Megtervezése",
+            "description": "Minden jó játéknak kell egy emlékezetes főhős. Tervezzük meg a miénket!",
+            "prompt": "A mi játékunk egy \"[a játék műfaja]\", a főhőse pedig egy \"[a főhős leírása]\". Írj egy részletes karakterleírást a főhősről! Térj ki a nevére, a kinézetére, a motivációjára és 2-3 különleges képességére!"
+          },
+          {
+            "id": 3,
+            "title": "Az Első Pálya Megálmodása",
+            "description": "Most tervezzük meg a játék első, bevezető pályáját!",
+            "prompt": "Tervezd meg a játékunk első pályáját! A helyszín egy \"[helyszín leírása, pl. elvarázsolt erdő]\". Írd le, milyen 3 akadállyal találkozik a játékos, és milyen típusú ellenféllel kell megküzdenie! Mi a pálya végső célja?"
+          },
+          {
+            "id": 4,
+            "title": "\"Concept Art\" Készítése",
+            "description": "Itt az ideje, hogy életre keltsük a főhősünket! Használj egy képalkotó MI-t!",
+            "prompt": "concept art of a video game character: [a karakter részletes leírása az MI-generált szövegből], full body portrait, digital painting, fantasy style",
+            "pro_tip": "Próbáld ki a `pixel art` vagy a `retro video game screenshot` stílusokat is, hogy még jobban hasonlítson egy valódi játékra!"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Önálló Kihívás: A Te Játéktervezői Dokumentumod (GDD)",
+        "content": "Most állítsd össze a saját, egyoldalas Játéktervezői Dokumentumodat (Game Design Document - GDD)!",
+        "instructions": "Készíts egy dokumentumot, ami tartalmazza:",
+        "checklist": [
+          "A Játék Címe és Alapötlete: (az 1. feladatból)",
+          "A Főhős Leírása: (a 2. feladatból)",
+          "Az Első Pálya Terve: (a 3. feladatból)",
+          "A Főhős \"Concept Art\"-ja: (illeszd be a 4. feladatban generált legjobb képet)"
+        ],
+        "note": "Mentsd le a GDD-det! Ez a dokumentum egy valódi játékfejlesztési projekt első, legfontosabb lépése."
+      }
+    ]
+  }
+}

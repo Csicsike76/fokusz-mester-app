@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>CSICSIKE Digitális Tudástár - Interaktív Tananyagok</title>
+    <meta name="description" content="Interaktív matematika, fizika és mesterséges intelligencia tananyagok általános iskolásoknak. Próbáld ki ingyen!">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --kek: #005A9C;
+            --piros: #CD2A3E;
+            --zold: #436F4D;
+            --feher: #FFFFFF;
+            --sotet: #2c3e50;
+            --vilagos-szurke: #f8f9fa;
+            --szoveg: #34495e;
+            --card-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--vilagos-szurke);
+            color: var(--szoveg);
+            line-height: 1.7;
+        }
+        
+        #bg-video {
+            position: fixed; right: 0; bottom: 0;
+            min-width: 100%; min-height: 100%;
+            z-index: -1; object-fit: cover; filter: brightness(0.6);
+        }
+        
+        .content-wrapper { position: relative; z-index: 1; }
+        .container { max-width: 1100px; margin: auto; padding: 2rem; }
+
+        .navbar {
+            background-color: rgba(44, 62, 80, 0.9);
+            backdrop-filter: blur(5px);
+            color: var(--feher);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+        .nav-container {
+            max-width: 1100px; margin: auto; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .nav-brand {
+            font-family: 'Roboto Slab', serif; font-size: 1.5rem;
+            font-weight: 700; color: var(--feher); text-decoration: none;
+        }
+        .nav-links a {
+            color: var(--feher); text-decoration: none;
+            margin-left: 1.5rem; font-weight: 500;
+            transition: color 0.2s, transform 0.2s; display: inline-block;
+        }
+        .nav-links a:hover { color: var(--piros); transform: scale(1.1); }
+        
+        .header {
+            text-align: center; padding: 4rem 1.5rem; color: var(--feher); background: transparent;
+        }
+        .header h1 {
+            font-family: 'Roboto Slab', serif; font-size: 3.5rem; margin-bottom: 1rem;
+            font-weight: 700; text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.7);
+        }
+        .header p {
+            font-size: 1.3rem; max-width: 700px; margin: auto; font-weight: 400;
+            text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        .section {
+            padding: 3rem 1.5rem; background: rgba(255, 255, 255, 0.95);
+            margin: 2rem 0; border-radius: 16px; box-shadow: var(--card-shadow);
+        }
+        
+        .section-title {
+            font-family: 'Roboto Slab', serif; font-size: 2.5rem; color: var(--sotet);
+            text-align: center; margin-bottom: 3rem;
+        }
+        
+        .subject-title {
+            font-family: 'Roboto Slab', serif; font-size: 2rem; text-align: center;
+            margin-bottom: 2rem; padding-bottom: 0.5rem; border-bottom: 3px solid;
+        }
+        .math-title { border-color: var(--piros); color: var(--piros); }
+        .physics-title { border-color: var(--kek); color: var(--kek); }
+        .ai-title { border-color: var(--zold); color: var(--zold); }
+
+        .card-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem; margin-bottom: 3rem;
+        }
+        .card {
+            background: var(--feher); border-radius: 12px; box-shadow: var(--card-shadow);
+            text-decoration: none; color: var(--szoveg); transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; flex-direction: column; border-top: 5px solid;
+        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .math-card { border-top-color: var(--piros); }
+        .physics-card { border-top-color: var(--kek); }
+        .ai-card { border-top-color: var(--zold); }
+        
+        .card-body {
+            padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; text-align: center;
+        }
+        .card-body h4 {
+            font-family: 'Roboto Slab', serif; font-size: 1.5rem; margin-bottom: 0.75rem;
+        }
+        .card-body p { margin-bottom: 1.5rem; flex-grow: 1; font-size: 0.95rem; }
+        .btn {
+            display: inline-block; padding: 10px 20px; border-radius: 8px; text-decoration: none;
+            font-weight: 700; transition: all 0.3s; border: 2px solid transparent; margin-top: auto;
+        }
+        .btn-primary.math-btn { background-color: var(--piros); color: var(--feher); }
+        .btn-primary.physics-btn { background-color: var(--kek); color: var(--feher); }
+        .btn-primary.ai-btn { background-color: var(--zold); color: var(--feher); }
+        
+        .btn-primary.math-btn:hover { background-color: var(--feher); color: var(--piros); border-color: var(--piros); }
+        .btn-primary.physics-btn:hover { background-color: var(--feher); color: var(--kek); border-color: var(--kek); }
+        .btn-primary.ai-btn:hover { background-color: var(--feher); color: var(--zold); border-color: var(--zold); }
+        
+        footer { text-align: center; margin-top: 2rem; padding: 1.5rem; color: var(--feher); font-size: 0.9rem; }
+        
+        @media(max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .header p { font-size: 1.1rem; }
+            .section-title, .subject-title { font-size: 2rem; }
+            .nav-container { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop id="bg-video">
+      <source src="video.mp4" type="video/mp4">
+      A böngésződ nem támogatja a videó hátteret.
+    </video>
+    
+    <nav class="navbar">
+        <!-- A te Navbar kódod változatlanul -->
+    </nav>
+
+    <div class="content-wrapper">
+        <div class="container">
+            <header class="header">
+                <h1>Fedezd fel a Jövő Tudását!</h1>
+                <p>Interaktív matematika, fizika és mesterséges intelligencia tananyagok általános iskolásoknak, amik élménnyé teszik a tanulást.</p>
+            </header>
+        </div>
+        
+        <main>
+            <div class="container">
+
+                <!-- ITT AZ ÚJ, KIEMELT SZEKCIÓ -->
+                <section class="section">
+                    <h2 class="section-title">Elakadtál? Kérdezd a Tutort! 💡</h2>
+                    <div class="card-grid" style="grid-template-columns: 1fr;"> <!-- Egyoszlopos rács a kiemeléshez -->
+                         <div class="card physics-card"> <!-- Kék kiemelést kap -->
+                             <div class="card-body">
+                                <h4>CSICSIKE Tutor - A Személyes Korrepetitorod</h4>
+                                <p>Azonnali segítség, ha nem értesz valamit. A Tutor nem adja meg a kész választ, hanem rávezető kérdésekkel segít neked megérteni a megoldást matematika, fizika és AI témakörökben. Próbáld ki!</p>
+                                <a href="tutor.html" class="btn btn-primary physics-btn" style="font-size: 1.2rem; padding: 1rem;">Tutor Indítása →</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- EDDIG TART AZ ÚJ SZEKCIÓ -->
+
+                 <section class="section">
+                    <h2 class="section-title">Extra Interaktív Eszközök</h2>
+                    <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                         <div class="card ai-card">
+                             <div class="card-body">
+                                <h4>Időutazó Csevegő 🕰️</h4>
+                                <p>Beszélgess Newtonnal a gravitációról vagy Turinggal a kódfejtésről. Egy egyedülálló, interaktív történelemóra.</p>
+                                <a href="idoutazo_csevego.html" class="btn btn-primary ai-btn">Csevegő Indítása →</a>
+                            </div>
+                        </div>
+                         <div class="card ai-card">
+                             <div class="card-body">
+                                <h4>Jövőkutató Szimulátor 🚀</h4>
+                                <p>Kérdezz a holnapról egy MI-szakértőtől! Milyen lesz az élet a Marson? Fedezd fel a lehetséges jövőt!</p>
+                                <a href="jovokutato_szimulator.html" class="btn btn-primary ai-btn">Szimulátor Indítása →</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                 <section class="section">
+                    <h2 class="section-title">Teljes Kurzusok Előfizetéssel</h2>
+                    <!-- A teljes kurzusok kártyái változatlanul -->
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">Próbáld ki Ingyen!</h2>
+                    <!-- Az ingyenes kurzusok kártyái változatlanul -->
+                </section>
+                
+            </div>
+        </main>
+
+        <footer>
+            <p>© CSICSIKE 2025 - Minden jog fenntartva.</p>
+        </footer>
+    </div>
+</body>
+</html>

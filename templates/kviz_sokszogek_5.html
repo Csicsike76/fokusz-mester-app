@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Sokszögek</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Sokszögek</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Hogy nevezzük az ötoldalú sokszöget?", options: { a: "négyszög", b: "hatszög", c: "ötszög" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A sokszögeket az oldalaik száma alapján nevezzük el. 🔹 2. Lépés: A görög eredetű 'penta' szó jelentése öt. ✅ Megoldás: Az ötoldalú sokszög neve ötszög (pentagon)." },
+            { question: "Melyik NEM sokszög?", options: { a: "háromszög", b: "kör", c: "téglalap" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A sokszög definíció szerint csak egyenes szakaszokból álló, zárt síkidom. 🔹 2. Lépés: A körnek görbe vonala van, ezért nem sokszög. A háromszög és a téglalap megfelel a definíciónak. ✅ Megoldás: A kör nem sokszög." },
+            { question: "Hogyan számoljuk ki egy sokszög kerületét?", options: { a: "összeadjuk az oldalak hosszát", b: "összeszorozzuk az oldalak hosszát", c: "megmérjük a leghosszabb oldalt" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A kerület a sokszöget határoló vonal teljes hossza. 🔹 2. Lépés: Ezt úgy kapjuk meg, ha az összes oldalhosszúságot összeadjuk. ✅ Megoldás: A kerület az oldalak hosszának összege." },
+            { question: "Mit jelent az, hogy egy sokszög 'szabályos'?", options: { a: "nincs benne hiba", b: "minden oldala és minden szöge egyenlő", c: "legalább 5 oldala van" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A 'szabályos' a geometriában egy különleges tulajdonságot jelöl. 🔹 2. Lépés: Egy sokszög akkor szabályos, ha minden oldala egyforma hosszú ÉS minden belső szöge egyforma nagy. ✅ Megoldás: Minden oldala és minden szöge egyenlő." },
+            { question: "Mi a sokszög csúcsa?", options: { a: "az a pont, ahol két oldal találkozik", b: "a sokszög közepe", c: "a leghosszabb oldal" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A sokszög oldalai szakaszok. Ahol két ilyen szakasz vége összeér, az egy 'sarok'. 🔹 2. Lépés: Ezt a sarkot nevezzük a sokszög csúcsának. ✅ Megoldás: A csúcs az a pont, ahol két oldal találkozik." },
+            { question: "Hány oldala van egy hatszögnek?", options: { a: "5", b: "7", c: "6" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A sokszögek elnevezése az oldalak számából ered. 🔹 2. Lépés: A 'hexa' görög szó jelentése hat. ✅ Megoldás: A hatszögnek (hexagon) 6 oldala van." },
+            { question: "Hogy nevezzük az összes négyoldalú sokszöget közös néven?", options: { a: "négyzet", b: "négyszög", c: "rombusz" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A négyzet és a rombusz a négyoldalú sokszögek speciális esetei. 🔹 2. Lépés: A gyűjtőnevük, ami minden négy oldallal rendelkező sokszögre igaz, a négyszög. ✅ Megoldás: A közös nevük a négyszög." },
+            { question: "Mi a legkevesebb oldal, amiből egy sokszög állhat?", options: { a: "3", b: "4", c: "2" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Egy sokszögnek zárt alakzatnak kell lennie. 🔹 2. Lépés: Két szakaszból nem lehet zárt alakzatot létrehozni, de háromból már igen, ez a háromszög. ✅ Megoldás: A legkevesebb oldalú sokszög a háromszög, aminek 3 oldala van." },
+            { question: "Mennyi a kerülete egy háromszögnek, melynek oldalai 5 cm, 6 cm és 7 cm?", options: { a: "210 cm", b: "30 cm", c: "18 cm" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A kerület az oldalak hosszának összege. 🔹 2. Lépés: 5 + 6 + 7 = 18. ✅ Megoldás: A háromszög kerülete 18 cm." },
+            { question: "Mi a sokszög átlója?", options: { a: "a sokszög oldala", b: "két nem szomszédos csúcsot összekötő szakasz", c: "a sokszög magassága" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az átló a sokszög belsejében halad. 🔹 2. Lépés: Definíció szerint olyan szakaszt nevezünk átlónak, ami két olyan csúcsot köt össze, amik nem egymás mellett vannak. ✅ Megoldás: Két nem szomszédos csúcsot összekötő szakasz." },
+            { question: "Hány csúcsa van egy nyolcszögnek?", options: { a: "7", b: "9", c: "8" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Egy sokszögnek mindig ugyanannyi oldala van, mint csúcsa. 🔹 2. Lépés: A nyolcszögnek 8 oldala van, tehát 8 csúcsa is van. ✅ Megoldás: A nyolcszögnek 8 csúcsa van." },
+            { question: "Melyik a sokszög definíciója?", options: { a: "Csak egyenes szakaszokból álló, zárt síkidom.", b: "Bármilyen zárt síkidom.", c: "Olyan alakzat, aminek van kerülete." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A definíció két legfontosabb része a 'zárt' és az 'egyenes szakaszokból áll'. 🔹 2. Lépés: A kör zárt, de nem egyenes szakaszokból áll, ezért nem sokszög. ✅ Megoldás: A sokszög csak egyenes szakaszokból álló, zárt síkidom." },
+            { question: "A négyzet szabályos sokszög?", options: { a: "Nem, mert nem kerek.", b: "Igen, mert minden oldala és szöge egyenlő.", c: "Csak akkor, ha az oldala páros szám." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A szabályos sokszög feltétele, hogy minden oldala és minden szöge egyenlő. 🔹 2. Lépés: A négyzetnek minden oldala egyenlő hosszú, és minden szöge 90°, tehát azok is egyenlőek. ✅ Megoldás: Igen, a négyzet szabályos sokszög." },
+            { question: "Mennyi egy szabályos hatszög kerülete, ha egy oldala 5 cm?", options: { a: "25 cm", b: "36 cm", c: "30 cm" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A szabályos hatszögnek 6 darab, egyenlő hosszú oldala van. 🔹 2. Lépés: A kerület a 6 oldal hosszának összege: 6 * 5 cm = 30 cm. ✅ Megoldás: A kerülete 30 cm." },
+            { question: "Miből állnak a sokszög oldalai?", options: { a: "pontokból", b: "egyenes szakaszokból", c: "görbe vonalakból" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A sokszög egyenes vonalakból álló alakzat. 🔹 2. Lépés: A sokszöget határoló egyenes vonaldarabokat szakaszoknak nevezzük. ✅ Megoldás: A sokszög oldalai egyenes szakaszok." },
+            { question: "Hogy nevezzük a 3 csúccsal rendelkező sokszöget?", options: { a: "háromszög", b: "négyszög", c: "csúcs-sokszög" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A sokszögnek ugyanannyi csúcsa van, mint oldala. 🔹 2. Lépés: A 3 oldalú (és 3 csúcsú) sokszög neve a háromszög. ✅ Megoldás: A neve háromszög." },
+            { question: "Mi a négyszög?", options: { a: "Minden, aminek 4 sarka van.", b: "Egy négy oldalú sokszög.", c: "A négyzet másik neve." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A 'négyszög' egy gyűjtőnév. 🔹 2. Lépés: Minden olyan sokszöget, aminek 4 oldala van (pl. négyzet, téglalap, rombusz, trapéz), négyszögnek nevezünk. ✅ Megoldás: Egy négy oldalú sokszög." },
+            { question: "Mi a sokszög egyik legfontosabb tulajdonsága?", options: { a: "van területe", b: "görbe", c: "zárt" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A sokszög vonala önmagába tér vissza, nincsenek 'nyitott végei'. 🔹 2. Lépés: Ezt a tulajdonságot nevezzük zártságnak. ✅ Megoldás: A sokszög zárt síkidom." },
+            { question: "Hány átlója van összesen egy négyszögnek?", options: { a: "2", b: "4", c: "1" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Rajzolj egy négyszöget, és kösd össze a szemközti csúcsokat! 🔹 2. Lépés: Látni fogod, hogy pontosan két ilyen vonalat tudsz behúzni. ✅ Megoldás: Egy négyszögnek 2 átlója van." },
+            { question: "Az egyenlő oldalú háromszög szabályos sokszög?", options: { a: "Nem, mert csak 3 oldala van.", b: "Igen, mert minden oldala és szöge egyenlő.", c: "Nem, mert a szögei hegyesszögek." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A szabályosság feltétele az egyenlő oldalak és egyenlő szögek. 🔹 2. Lépés: Az egyenlő oldalú háromszögnek minden oldala egyenlő, és minden szöge 60°. Tehát mindkét feltétel teljesül. ✅ Megoldás: Igen, az egyenlő oldalú háromszög szabályos sokszög." },
+            { question: "Mennyi egy négyzet kerülete, ha egy oldala 7 cm?", options: { a: "28 cm", b: "14 cm", c: "49 cm" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A négyzetnek 4 egyenlő oldala van. 🔹 2. Lépés: A kerület az oldalak összege: 4 * 7 cm = 28 cm. ✅ Megoldás: A kerülete 28 cm." },
+            { question: "Mit nevezünk sokszög oldalának?", options: { a: "A sokszög csúcsát.", b: "A sokszög átlóját.", c: "A sokszöget határoló szakaszt." }, correctAnswer: "c", explanation: "🔹 1. Lépés: A sokszöget vonalak határolják. 🔹 2. Lépés: Ezeket a határoló szakaszokat nevezzük a sokszög oldalainak. ✅ Megoldás: A sokszöget határoló szakasz." },
+            { question: "Hogy nevezzük a 10 oldalú sokszöget?", options: { a: "dekagon", b: "tízszög", c: "mindkettő helyes" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A 10 oldalú sokszög magyar neve a tízszög. 🔹 2. Lépés: Görög eredetű neve a dekagon. Mindkét elnevezés ugyanazt jelenti. ✅ Megoldás: Mindkettő helyes." },
+            { question: "Mit mondhatunk egy sokszög oldalainak és csúcsainak számáról?", options: { a: "mindig több az oldal", b: "mindig több a csúcs", c: "mindig megegyezik" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Gondolj egy háromszögre: 3 oldal, 3 csúcs. Gondolj egy négyszögre: 4 oldal, 4 csúcs. 🔹 2. Lépés: A minta egyértelmű: bármely sokszögnek ugyanannyi oldala van, mint csúcsa. ✅ Megoldás: Az oldalak és csúcsok száma mindig megegyezik." },
+            { question: "Egy szabályos ötszög kerülete 20 cm. Milyen hosszú egy oldala?", options: { a: "5 cm", b: "4 cm", c: "100 cm" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A szabályos ötszögnek 5 egyenlő oldala van. A kerület ezek összege. 🔹 2. Lépés: A kerületet el kell osztani az oldalak számával: 20 cm : 5 = 4 cm. ✅ Megoldás: Egy oldala 4 cm hosszú." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

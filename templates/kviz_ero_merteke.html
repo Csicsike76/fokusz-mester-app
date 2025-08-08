@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Az erő</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Az erő, a kölcsönhatás mértéke</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Mi az erő?", answers: { a: "A kölcsönhatás mértéke.", b: "A test tömege.", c: "A test sebessége." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Az erő az a fizikai mennyiség, amellyel a testek közötti kölcsönhatás erősségét és irányát jellemezzük. Az erő okozza a mozgásállapot-változást vagy az alakváltozást.</div><div class="explanation-solution">✅ Megoldás: Az erő a kölcsönhatás mértéke.</div>` },
+            { question: "Mi az erő jele és SI mértékegysége?", answers: { a: "F, newton (N)", b: "E, joule (J)", c: "m, kilogramm (kg)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Jelölések:</b> Az erőt (az angol 'force' szóból) 'F' betűvel jelöljük. Mértékegysége Isaac Newton tiszteletére a newton, jele 'N'.</div><div class="explanation-solution">✅ Megoldás: Az erő jele F, mértékegysége a newton (N).</div>` },
+            { question: "Milyen mennyiség az erő?", answers: { a: "Vektormennyiség", b: "Skalármennyiség", c: "Alapmennyiség" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Az erőnek nemcsak nagysága van, hanem iránya is, ami nagyon fontos a hatása szempontjából (nem mindegy, hogy toljuk vagy húzzuk a testet).</div><div class="explanation-step"><b>🔹 Definíció:</b> Azt a fizikai mennyiséget, amelynek nagysága és iránya is van, vektormennyiségnek nevezzük.</div><div class="explanation-solution">✅ Megoldás: Az erő vektormennyiség.</div>` },
+            { question: "Melyik NEM erő?", answers: { a: "Tömeg", b: "Gravitációs erő", c: "Súrlódási erő" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A gravitációs erő és a súrlódási erő is kölcsönhatásokat ír le, tehát erők. A tömeg a test tehetetlenségének mértéke, nem erő.</div><div class="explanation-solution">✅ Megoldás: A tömeg nem erő.</div>` },
+            { question: "Mivel mérünk erőt?", answers: { a: "Dinamométerrel (rugós erőmérővel)", b: "Mérleggel", c: "Vonalzóval" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Eszközök:</b> Az erőt dinamométerrel mérjük, ami a rugó megnyúlásán alapul. A mérleg tömeget, a vonalzó hosszúságot mér.</div><div class="explanation-solution">✅ Megoldás: Erőt dinamométerrel mérünk.</div>` },
+            { question: "Mi történik egy test mozgásállapotával, ha a rá ható erők eredője nulla?", answers: { a: "Nem változik.", b: "A test megáll.", c: "A test felgyorsul." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Newton I. törvénye (a tehetetlenség törvénye):</b> Ha egy testre ható erők kiegyenlítik egymást (az eredő erő nulla), a test mozgásállapota nem változik. Ha nyugalomban volt, nyugalomban marad; ha mozgott, egyenes vonalú egyenletes mozgást végez tovább.</div><div class="explanation-solution">✅ Megoldás: A test mozgásállapota nem változik.</div>` },
+            { question: "Mi a Föld által a testekre kifejtett vonzerő neve?", answers: { a: "Gravitációs erő (súly)", b: "Mágneses erő", c: "Rugalmas erő" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A Föld és a rajta lévő testek között fellépő vonzó kölcsönhatást gravitációs erőnek nevezzük. Ennek a testre ható megnyilvánulása a súly.</div><div class="explanation-solution">✅ Megoldás: A Föld vonzereje a gravitációs erő (súly).</div>` },
+            { question: "Hogyan ábrázoljuk az erőt?", answers: { a: "Irányított szakasszal (nyíllal)", b: "Egy ponttal", c: "Egy körrel" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Vektorok ábrázolása:</b> Mivel az erő vektormennyiség, egy irányított szakasszal (nyíllal) ábrázoljuk. A nyíl hossza arányos az erő nagyságával, az iránya pedig megegyezik az erő irányával.</div><div class="explanation-solution">✅ Megoldás: Az erőt irányított szakasszal (nyíllal) ábrázoljuk.</div>` },
+            { question: "Mikor egyenlő két erő?", answers: { a: "Ha a test nem mozog.", b: "Ha nagyságuk és irányuk is megegyezik.", c: "Ha csak a nagyságuk egyezik meg." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Vektorok egyenlősége:</b> Két vektor (így két erő is) akkor és csak akkor egyenlő, ha a nagyságuk és az irányuk is pontosan megegyezik.</div><div class="explanation-solution">✅ Megoldás: Akkor, ha nagyságuk és irányuk is megegyezik.</div>` },
+            { question: "Mi az 'eredő erő'?", answers: { a: "A legerősebb erő.", b: "A testre ható összes erő vektori összege.", c: "A leggyengébb erő." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Az eredő erő az az egyetlen erő, amely ugyanazt a hatást fejti ki a testre, mint a testre ható erők együttesen. Kiszámítása a testre ható erők vektori összegezésével történik.</div><div class="explanation-solution">✅ Megoldás: Az eredő erő a testre ható összes erő vektori összege.</div>` },
+            { question: "Két, egy pontból induló, 3 N és 4 N nagyságú, egymásra merőleges erő eredője mekkora?", answers: { a: "7 N", b: "5 N", c: "1 N" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Vektori összeadás:</b> Mivel az erők merőlegesek egymásra, az eredőjük nagyságát a Pitagorasz-tétellel számolhatjuk ki. A két erő a derékszögű háromszög két befogója, az eredő pedig az átfogó.</div><div class="explanation-step"><b>🔹 Számolás:</b> F_eredő = √(3² + 4²) = √(9 + 16) = √25 = 5 N.</div><div class="explanation-solution">✅ Megoldás: Az eredő erő 5 N.</div>` },
+            { question: "Melyik erő felelős azért, hogy a bolygók a Nap körül keringenek?", answers: { a: "Mágneses erő", b: "Gravitációs erő", c: "Súrlódási erő" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Tömegvonzás:</b> A Nap és a bolygók között a tömegük miatt fellépő vonzó kölcsönhatás, a gravitációs erő tartja a bolygókat a pályájukon.</div><div class="explanation-solution">✅ Megoldás: A gravitációs erő felelős a bolygók keringéséért.</div>` },
+            { question: "Egy 50 N súlyú láda az asztalon áll. Mekkora erőt fejt ki az asztal a ládára?", answers: { a: "0 N", b: "50 N", c: "100 N" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Erő-ellenerő / Egyensúly:</b> A láda nyugalomban van, tehát a rá ható erők eredője nulla. Lefelé hat rá az 50 N súlyerő, ezért az asztalnak egy ugyanekkora, 50 N nagyságú, de ellentétes (felfelé irányuló) tartóerőt kell kifejtenie.</div><div class="explanation-solution">✅ Megoldás: Az asztal 50 N erőt fejt ki a ládára.</div>` },
+            { question: "Mi a súrlódási erő?", answers: { a: "Mozgást segítő erő.", b: "Mozgást akadályozó erő.", c: "Testek közötti vonzóerő." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A súrlódás egy olyan erő, amely két érintkező felület között lép fel, és mindig a mozgás irányával ellentétesen hat, tehát akadályozza azt.</div><div class="explanation-solution">✅ Megoldás: A súrlódás mozgást akadályozó erő.</div>` },
+            { question: "Melyik nemzetközi tudósról nevezték el az erő mértékegységét?", answers: { a: "Einstein", b: "Galilei", c: "Newton" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Tudománytörténet:</b> Isaac Newton fektette le a klasszikus mechanika alapjait, beleértve a mozgástörvényeket és az erő fogalmát. Tiszteletére nevezték el róla az erő SI mértékegységét.</div><div class="explanation-solution">✅ Megoldás: Isaac Newtonról nevezték el.</div>` },
+            { question: "Ha két, egy egyenesbe eső, ellentétes irányú, 10 N és 8 N nagyságú erő hat egy testre, mennyi az eredő erő nagysága?", answers: { a: "18 N", b: "0 N", c: "2 N" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Vektori összeadás:</b> Ha az erők ellentétes irányúak, az eredőjük nagysága a nagyságuk különbsége, és az iránya a nagyobb erő irányával egyezik meg.</div><div class="explanation-step"><b>🔹 Számolás:</b> |10 N - 8 N| = 2 N.</div><div class="explanation-solution">✅ Megoldás: Az eredő erő nagysága 2 N.</div>` },
+            { question: "Melyik erő biztosítja, hogy a Hold a Föld körül keringjen és ne repüljön el?", answers: { a: "Elektromos erő", b: "Súrlódási erő", c: "Gravitációs erő" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Égi mechanika:</b> A Föld és a Hold között ható tömegvonzási, azaz gravitációs erő az, ami a Holdat folyamatosan a Föld felé "görbíti", így körpályán tartja.</div><div class="explanation-solution">✅ Megoldás: A gravitációs erő tartja a Holdat pályáján.</div>` },
+            { question: "Ha egy testre ható eredő erő nem nulla, akkor a test...", answers: { a: "mozgásállapota megváltozik.", b: "mindig nyugalomban van.", c: "mozgásállapota nem változik." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Newton II. törvénye:</b> Ha egy testre ható erők eredője nem nulla, a test gyorsul. A gyorsulás a mozgásállapot megváltozását jelenti (a sebesség nagysága vagy iránya változik).</div><div class="explanation-solution">✅ Megoldás: A test mozgásállapota megváltozik.</div>` },
+            { question: "Mi történik, ha egy rugalmas gumiszalagot meghúzol?", answers: { a: "Nem történik semmi.", b: "Rugalmas erő ébred benne.", c: "A tömege megnő." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Rugalmas alakváltozás:</b> Amikor a gumiszalagot megnyújtjuk, alakváltozást szenved. Mivel rugalmas, benne egy olyan erő ébred (rugalmas erő), amely igyekszik visszaállítani az eredeti hosszát. Ezt érezzük, amikor húzzuk.</div><div class="explanation-solution">✅ Megoldás: Rugalmas erő ébred benne.</div>` },
+            { question: "Melyik a kakukktojás?", answers: { a: "súly", b: "tömeg", c: "súrlódás" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A súly és a súrlódás is erők, mértékegységük a Newton. A tömeg a tehetetlenség mértéke, mértékegysége a kilogramm.</div><div class="explanation-solution">✅ Megoldás: A kakukktojás a tömeg.</div>` },
+            { question: "Ha egy testre két, egy egyenesbe eső, azonos irányú, 5 N és 7 N nagyságú erő hat, mennyi az eredő erő nagysága?", answers: { a: "2 N", b: "12 N", c: "35 N" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Vektori összeadás:</b> Ha az erők azonos irányúak, az eredőjük nagysága a nagyságuk összege, és az iránya is megegyezik az eredeti erők irányával.</div><div class="explanation-step"><b>🔹 Számolás:</b> 5 N + 7 N = 12 N.</div><div class="explanation-solution">✅ Megoldás: Az eredő erő nagysága 12 N.</div>` },
+            { question: "Miért áll meg egy elgurított labda a füvön?", answers: { a: "A gravitáció miatt.", b: "A tehetetlensége miatt.", c: "A súrlódási és közegellenállási erő miatt." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Fékező erők:</b> A labda mozgását két fő erő akadályozza: a fűvel való érintkezés miatti súrlódás, és a levegő ellenállása. Ezek az erők folyamatosan lassítják, míg végül megáll.</div><div class="explanation-solution">✅ Megoldás: A súrlódási és közegellenállási erő miatt áll meg.</div>` },
+            { question: "Mi a feltétele egy test egyensúlyának?", answers: { a: "Nagy tömeg", b: "A rá ható erők eredője nulla.", c: "Kis sebesség" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Egyensúly definíciója:</b> Egy test akkor van egyensúlyban, ha mozgásállapota nem változik (vagy nyugalomban van, vagy egyenes vonalú egyenletes mozgást végez). Ez pontosan akkor teljesül, ha a rá ható erők kiegyenlítik egymást, azaz az eredő erő nulla.</div><div class="explanation-solution">✅ Megoldás: Az egyensúly feltétele, hogy a rá ható erők eredője nulla legyen.</div>` },
+            { question: "Melyik erő NEM érintkezési erő?", answers: { a: "Rugalmas erő", b: "Súrlódási erő", c: "Mágneses erő" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Kölcsönhatás típusok:</b> Az érintkezési erők (pl. rugalmas, súrlódás) csak akkor lépnek fel, ha a testek fizikailag érintkeznek. A távolsági erők (pl. mágneses, gravitációs) érintkezés nélkül is hatnak.</div><div class="explanation-solution">✅ Megoldás: A mágneses erő nem érintkezési erő.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

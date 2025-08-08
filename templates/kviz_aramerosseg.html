@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Az elektromos áram erőssége</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Az elektromos áram erőssége</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Mi az áramerősség mértékegysége?",
+                answers: { a: "Amper (A)", b: "Volt (V)", c: "Coulomb (C)" },
+                correctAnswer: 'a',
+                explanation: "Az elektromos áram erősségének SI mértékegysége az amper, André-Marie Ampère tiszteletére. A volt a feszültség, a coulomb a töltés mértékegysége. ✅ Megoldás: Amper (A)."
+            },
+            {
+                question: "Hogyan kell az ampermérőt az áramkörbe kapcsolni?",
+                answers: { a: "Sorosan, a fogyasztóval egy ágba.", b: "Párhuzamosan a fogyasztóval.", c: "Bárhogy lehet." },
+                correctAnswer: 'a',
+                explanation: "Az ampermérő a rajta átfolyó áram erősségét méri. Ahhoz, hogy a fogyasztón átfolyó áramot mérjük, az ampermérőt a fogyasztóval egy ágba, azaz sorosan kell kapcsolni, hogy ugyanaz az áram haladjon át rajta is. ✅ Megoldás: Sorosan, a fogyasztóval egy ágba."
+            },
+            {
+                question: "Mit mutat meg az áramerősség?",
+                answers: { a: "A vezető keresztmetszetén másodpercenként átáramló töltés mennyiségét.", b: "Az áramforrás feszültségét.", c: "A vezeték ellenállását." },
+                correctAnswer: 'a',
+                explanation: "Az áramerősség az áramlás 'intenzitását' jellemzi. Definíció szerint a vezető keresztmetszetén egységnyi idő alatt átáramló elektromos töltés mennyisége. ✅ Megoldás: A vezető keresztmetszetén másodpercenként átáramló töltés mennyiségét."
+            },
+            {
+                question: "Egy vezetőn 5 másodperc alatt 10 coulomb töltés áramlik át. Mekkora az áramerősség?",
+                answers: { a: "2 A", b: "50 A", c: "0,5 A" },
+                correctAnswer: 'a',
+                explanation: "Az áramerősség képlete I = Q / t. Behelyettesítve: I = 10 C / 5 s = 2 A. ✅ Megoldás: 2 A."
+            },
+            {
+                question: "Melyik állítás igaz soros kapcsolás esetén az áramerősségre?",
+                answers: { a: "Az áramkör minden pontján ugyanakkora.", b: "Megoszlik a fogyasztók között.", c: "Minden fogyasztón nullává válik." },
+                correctAnswer: 'a',
+                explanation: "Soros kapcsolásban az áramnak csak egyetlen útja van. Ebből következik, hogy a töltések ugyanazon az útvonalon haladnak, tehát az áramerősség az áramkör minden pontján, így minden fogyasztón is azonos. ✅ Megoldás: Az áramkör minden pontján ugyanakkora."
+            },
+            {
+                question: "Mi az ampermérő belső ellenállása?",
+                answers: { a: "Nagyon kicsi.", b: "Nagyon nagy.", c: "Végtelen." },
+                correctAnswer: 'a',
+                explanation: "Ahhoz, hogy az ampermérő ne befolyásolja jelentősen a mért áramkört, a lehető legkevésbé szabad akadályoznia az áram folyását. Ezért a belső ellenállásának nagyon kicsinek, ideális esetben nullának kell lennie. ✅ Megoldás: Nagyon kicsi."
+            },
+            {
+                question: "Melyik a nagyobb áramerősség?",
+                answers: { a: "1 amper (A)", b: "1 milliamper (mA)", c: "1 mikroamper (µA)" },
+                correctAnswer: 'a',
+                explanation: "Az amper (A) az alapmértékegység. A milliamper az amper ezredrésze (1 mA = 0,001 A), a mikroamper pedig a milliomodrésze (1 µA = 0,000001 A). ✅ Megoldás: 1 amper (A)."
+            },
+            {
+                question: "Mi a 'technikai áramirány'?",
+                answers: { a: "A pozitív pólustól a negatív pólus felé az áramkörön kívül.", b: "Az elektronok valós áramlási iránya.", c: "Mindig a Föld középpontja felé mutat." },
+                correctAnswer: 'a',
+                explanation: "Történelmi okokból megegyezés szerint az áram irányát a pozitív töltések mozgásirányaként határozták meg. Ez a technikai áramirány, ami az áramforrás pozitív pólusától indul a negatív felé a külső áramkörben. ✅ Megoldás: A pozitív pólustól a negatív pólus felé az áramkörön kívül."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Mi az áramerősség jele a képletekben?",
+                answers: { a: "A", b: "I", c: "U" },
+                correctAnswer: 'b',
+                explanation: "Az áramerősséget az 'intenzitás' szó alapján I betűvel jelöljük. Az A az amper mértékegység jele, az U pedig a feszültségé. ✅ Megoldás: I."
+            },
+            {
+                question: "Melyik eszköz méri az áramerősséget?",
+                answers: { a: "Voltmérő", b: "Ampermérő", c: "Ohm-mérő" },
+                correctAnswer: 'b',
+                explanation: "Az áramerősség mérésére az ampermérőt használjuk, amelyet mindig sorosan kell az áramkörbe kapcsolni. ✅ Megoldás: Ampermérő."
+            },
+            {
+                question: "Mi az áramerősség képlete?",
+                answers: { a: "I = Q ⋅ t", b: "I = Q / t", c: "I = t / Q" },
+                correctAnswer: 'b',
+                explanation: "Az áramerősség (I) definíció szerint az egységnyi idő (t) alatt a vezető keresztmetszetén átáramlott töltésmennyiség (Q). ✅ Megoldás: I = Q / t."
+            },
+            {
+                question: "Melyik állítás igaz párhuzamos kapcsolás esetén az áramerősségre?",
+                answers: { a: "Minden ágban ugyanakkora.", b: "A főágban folyó áram szétoszlik a mellékágak között.", c: "A főágban kisebb az áram, mint a mellékágakban." },
+                correctAnswer: 'b',
+                explanation: "Párhuzamos kapcsolásnál az áramkör elágazik. A csomóponti törvény szerint a főágban érkező áram szétoszlik a párhuzamos ágak között. A főági áramerősség a mellékágak áramerősségének összege. ✅ Megoldás: A főágban folyó áram szétoszlik a mellékágak között."
+            },
+            {
+                question: "Melyik okoz nagyobb áramütést: a feszültség vagy az áramerősség?",
+                answers: { a: "A feszültség.", b: "A testen áthaladó áram erőssége.", c: "Egyik sem veszélyes." },
+                correctAnswer: 'b',
+                explanation: "Az áramütés élettani hatását és veszélyességét a testen ténylegesen átfolyó áram erőssége határozza meg. A magas feszültség azért veszélyes, mert a test ellenállásán képes nagy áramerősséget létrehozni. ✅ Megoldás: A testen áthaladó áram erőssége."
+            },
+            {
+                question: "Az áramerősség egy...",
+                answers: { a: "...vektormennyiség.", b: "...skalármennyiség.", c: "...fizikai jelenség." },
+                correctAnswer: 'b',
+                explanation: "Bár van iránya (technikai áramirány), az áramerősséget a fizikában skalármennyiségként kezeljük, mert az összeadása egyszerű számtani összeadás (csomóponti törvény). ✅ Megoldás: ...skalármennyiség."
+            },
+            {
+                question: "Ha egy áramkörben nő az ellenállás (és a feszültség állandó), mi történik az áramerősséggel?",
+                answers: { a: "Nő.", b: "Csökken.", c: "Nem változik." },
+                correctAnswer: 'b',
+                explanation: "Ohm törvénye szerint (I = U/R) az áramerősség fordítottan arányos az ellenállással. Ha az ellenállás nő, az áram nehezebben tud folyni, tehát az áramerősség csökken. ✅ Megoldás: Csökken."
+            },
+            {
+                question: "Mi az elektronok tényleges áramlási iránya egy fém vezetékben?",
+                answers: { a: "A pozitív pólustól a negatív felé.", b: "A negatív pólustól a pozitív felé.", c: "Nem áramlanak, csak rezegnek." },
+                correctAnswer: 'b',
+                explanation: "Az elektronok negatív töltésűek, ezért az áramforrás negatív pólusa taszítja, a pozitív pólusa pedig vonzza őket. Így a valós fizikai áramirány a negatívtól a pozitív pólus felé mutat. ✅ Megoldás: A negatív pólustól a pozitív felé."
+            },
+            {
+                question: "Egy 0,5 A áramerősségű izzó 1 percig világít. Mennyi töltés halad át rajta?",
+                answers: { a: "0,5 C", b: "30 C", c: "60 C" },
+                correctAnswer: 'b',
+                explanation: "Először az időt átváltjuk másodpercre: 1 perc = 60 s. Az I = Q/t képletből a töltés Q = I ⋅ t. Behelyettesítve: Q = 0,5 A ⋅ 60 s = 30 C. ✅ Megoldás: 30 C."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Mi az elektromos áram?",
+                answers: { a: "Nyugalomban lévő töltések.", b: "Az elektromos mező.", c: "A töltéshordozók rendezett, egyirányú mozgása." },
+                correctAnswer: 'c',
+                explanation: "Az elektromos áramot a töltéssel rendelkező részecskék (fémekben az elektronok) együttes, tartós áramlása jelenti egy vezetőben. ✅ Megoldás: A töltéshordozók rendezett, egyirányú mozgása."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "Az áramerősséget amperben mérjük.", b: "Az ampermérőt sorosan kötjük.", c: "A nyitott áramkörben nagy az áramerősség." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás hamis. A nyitott áramkörben az áram útja meg van szakítva, ezért a töltések nem tudnak áramlani, az áramerősség nulla. ✅ Megoldás: A nyitott áramkörben nagy az áramerősség."
+            },
+            {
+                question: "Mi a töltéshordozó a fémekben?",
+                answers: { a: "Protonok", b: "Ionok", c: "Elektronok" },
+                correctAnswer: 'c',
+                explanation: "A fémek kristályrácsában a külső elektronhéjon lévő elektronok leszakadnak az atomtörzsekről és szabadon mozoghatnak. Ezek a delokalizált elektronok a töltéshordozók. ✅ Megoldás: Elektronok."
+            },
+            {
+                question: "Mi a helyes egység átszámítás?",
+                answers: { a: "1 A = 100 mA", b: "1 kA = 100 A", c: "1 A = 1000 mA" },
+                correctAnswer: 'c',
+                explanation: "A 'milli-' prefixum ezredrészt jelent. Tehát 1 amper 1000 milliamperrel egyenlő. ✅ Megoldás: 1 A = 1000 mA."
+            },
+            {
+                question: "Ha egy áramkörben a feszültséget növeljük (és az ellenállás állandó), mi történik az áramerősséggel?",
+                answers: { a: "Nem változik.", b: "Csökken.", c: "Nő." },
+                correctAnswer: 'c',
+                explanation: "Ohm törvénye (I = U/R) szerint az áramerősség egyenesen arányos a feszültséggel. Nagyobb feszültség ('hajtóerő') nagyobb áramot hoz létre. ✅ Megoldás: Nő."
+            },
+            {
+                question: "Egy izzón 0,2 A áram folyik keresztül. Ez mennyi milliamper?",
+                answers: { a: "2 mA", b: "20 mA", c: "200 mA" },
+                correctAnswer: 'c',
+                explanation: "Mivel 1 A = 1000 mA, ezért 0,2 A = 0,2 ⋅ 1000 mA = 200 mA. ✅ Megoldás: 200 mA."
+            },
+            {
+                question: "Miért veszélyes, ha egy vezetéken túl nagy áram folyik?",
+                answers: { a: "Mert lehűti a vezetéket.", b: "Mert mágneses lesz.", c: "Mert a vezeték túlságosan felmelegedhet és tüzet okozhat." },
+                correctAnswer: 'c',
+                explanation: "Az áramnak hőhatása van (Joule-hő). Minél nagyobb az áramerősség, annál jobban felmelegíti a vezetéket. A túlmelegedés megolvaszthatja a szigetelést és tüzet okozhat. ✅ Megoldás: Mert a vezeték túlságosan felmelegedhet és tüzet okozhat."
+            },
+            {
+                question: "Melyik állítás igaz az áramerősségre?",
+                answers: { a: "Az áramforrás 'elfogyasztja' az áramot.", b: "A fogyasztó 'elfogyasztja' az áramot.", c: "Az áram nem 'fogy el', ugyanannyi töltés lép be a fogyasztóba, mint amennyi kilép." },
+                correctAnswer: 'c',
+                explanation: "Fontos megérteni, hogy az áram (a töltések) nem 'fogy el' az áramkörben. A fogyasztó az áram energiáját alakítja át, de a töltések száma, ami bemegy és ami kijön, ugyanannyi. ✅ Megoldás: Az áram nem 'fogy el', ugyanannyi töltés lép be a fogyasztóba, mint amennyi kilép."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

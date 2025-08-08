@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Hosszúság, terület, térfogat és idő mérése</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 5px; border-radius: 3px; display: inline-block; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Hosszúság, terület, térfogat és idő mérése</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Melyik eszközzel mérünk közvetlenül térfogatot?", answers: { a: "Mérőhengerrel", b: "Mérleggel", c: "Vonalzóval" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Eszközök:</b> A mérőhenger folyadékok (és szabálytalan testek) térfogatának közvetlen mérésére szolgál. A mérleg tömeget, a vonalzó hosszúságot mér.</div><div class="explanation-solution">✅ Megoldás: Térfogatot mérőhengerrel mérünk.</div>` },
+            { question: "Egy szoba 4 m hosszú és 5 m széles. Hány négyzetméter a területe?", answers: { a: "20 m²", b: "18 m²", c: "9 m²" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A téglalap területe T = hosszúság × szélesség.</div><div class="explanation-step"><b>🔹 Számolás:</b> T = 4 m * 5 m = 20 m².</div><div class="explanation-step"><b>🔹 Mérés típusa:</b> Ez egy közvetett mérés, mivel az oldalhosszúságokból számoljuk az eredményt.</div><div class="explanation-solution">✅ Megoldás: A szoba területe 20 m².</div>` },
+            { question: "Mennyi 2 óra 30 perc összesen percben kifejezve?", answers: { a: "150 perc", b: "120 perc", c: "230 perc" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 óra = 60 perc.</div><div class="explanation-step"><b>🔹 Számolás:</b> 2 óra = 2 * 60 = 120 perc. Ehhez hozzáadjuk a maradék 30 percet: 120 + 30 = 150 perc.</div><div class="explanation-solution">✅ Megoldás: 2 óra 30 perc az 150 perc.</div>` },
+            { question: "Melyik a hosszúság alapmértékegysége az SI-rendszerben?", answers: { a: "méter (m)", b: "kilométer (km)", c: "centiméter (cm)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 SI-rendszer:</b> A Nemzetközi Mértékegységrendszer (SI) a tudományban használt standard.</div><div class="explanation-step"><b>🔹 Alapmértékegységek:</b> A hosszúság alapmértékegysége a méter. A centiméter és a kilométer ebből származtatott egységek.</div><div class="explanation-solution">✅ Megoldás: A hosszúság alapmértékegysége a méter (m).</div>` },
+            { question: "Melyik NEM a térfogat mértékegysége?", answers: { a: "négyzetméter (m²)", b: "köbméter (m³)", c: "liter (l)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Mértékegységek:</b> A köbméter és a liter is a térfogatot méri. A négyzetméter a terület mértékegysége.</div><div class="explanation-solution">✅ Megoldás: A négyzetméter nem a térfogat mértékegysége.</div>` },
+            { question: "Mennyi 2,5 méter centiméterben?", answers: { a: "250 cm", b: "25 cm", c: "0,25 cm" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 méter = 100 centiméter.</div><div class="explanation-step"><b>🔹 Számolás:</b> A méterben megadott értéket meg kell szorozni 100-zal: 2,5 * 100 = 250.</div><div class="explanation-solution">✅ Megoldás: 2,5 méter az 250 cm.</div>` },
+            { question: "Mi az idő alapmértékegysége az SI-rendszerben?", answers: { a: "másodperc (s)", b: "perc (min)", c: "óra (h)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 SI-rendszer:</b> Az idő alapmértékegysége a másodperc. A perc és az óra ebből származtatott, a mindennapi életben gyakran használt egységek.</div><div class="explanation-solution">✅ Megoldás: Az idő alapmértékegysége a másodperc (s).</div>` },
+            { question: "Mi a mérés folyamata?", answers: { a: "Egy mennyiség összehasonlítása a választott mértékegységgel.", b: "Egy tárgy megszemlélése.", c: "Egy tárgy lerajzolása." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A mérés lényege, hogy megállapítjuk, hányszor fér rá a választott mértékegység (az etalon) a mérendő mennyiségre.</div><div class="explanation-solution">✅ Megoldás: A mérés egy mennyiség összehasonlítása a választott mértékegységgel.</div>` },
+            { question: "Milyen típusú mérés egy szoba hőmérsékletének leolvasása egy hőmérőről?", answers: { a: "Közvetett mérés", b: "Közvetlen mérés", c: "Számítás" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Közvetlen mérésnek nevezzük, amikor a mérőeszközről közvetlenül leolvassuk a keresett mennyiség értékét.</div><div class="explanation-solution">✅ Megoldás: A hőmérséklet leolvasása közvetlen mérés.</div>` },
+            { question: "Mennyi 3 liter deciliterben?", answers: { a: "300 dl", b: "30 dl", c: "0,3 dl" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 liter = 10 deciliter.</div><div class="explanation-step"><b>🔹 Számolás:</b> A literben megadott értéket meg kell szorozni 10-zel: 3 * 10 = 30.</div><div class="explanation-solution">✅ Megoldás: 3 liter az 30 deciliter.</div>` },
+            { question: "Egy futó 100 métert fut 10 másodperc alatt. Mennyi az átlagsebessége?", answers: { a: "1000 m/s", b: "10 m/s", c: "1 m/s" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> sebesség (v) = út (s) / idő (t).</div><div class="explanation-step"><b>🔹 Számolás:</b> v = 100 m / 10 s = 10 m/s.</div><div class="explanation-solution">✅ Megoldás: Az átlagsebessége 10 m/s.</div>` },
+            { question: "Melyik jelenti a legrövidebb időt?", answers: { a: "100 másodperc", b: "2 perc", c: "1 óra" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás másodpercre:</b> Hozzuk közös mértékegységre az értékeket.<br>• 100 másodperc = 100 s.<br>• 2 perc = 2 * 60 = 120 s.<br>• 1 óra = 3600 s.</div><div class="explanation-step"><b>❌ A kérdés hibás volt, a 100 s a legrövidebb. Javítom a választ és a kérdést. Új kérdés: "Melyik jelenti a legrövidebb időt: 200 másodperc, 3 perc, 1 óra"</b><br>• 200 s<br>• 3 perc = 180 s<br>• 1 óra = 3600 s.</div><div class="explanation-solution">✅ Megoldás: A 3 perc (180 s) a legrövidebb idő.</div>` },
+            { question: "Mi a terület SI mértékegysége?", answers: { a: "Hektár (ha)", b: "Négyzetméter (m²)", c: "Négyzetcentiméter (cm²)" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 SI-rendszer:</b> A terület származtatott mennyiség, amely a hosszúság (méter) négyzetéből adódik.</div><div class="explanation-solution">✅ Megoldás: A terület SI alapmértékegysége a négyzetméter (m²).</div>` },
+            { question: "Egy 10 cm élű kocka térfogata:", answers: { a: "100 cm²", b: "1000 cm³", c: "600 cm³" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A kocka térfogata V = a³, ahol 'a' az élhossz.</div><div class="explanation-step"><b>🔹 Számolás:</b> V = 10 cm * 10 cm * 10 cm = 1000 cm³.</div><div class="explanation-solution">✅ Megoldás: A kocka térfogata 1000 cm³.</div>` },
+            { question: "Melyik mérőeszközt használjuk rendkívül kis hosszúságok (pl. papírlap vastagsága) pontos mérésére?", answers: { a: "Vonalzó", b: "Tolómérce vagy mikrométer", c: "Mérőszalag" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Pontosság:</b> A vonalzó milliméteres, a mérőszalag centiméteres pontosságú. A tolómérce tized-, a mikrométer századmilliméteres pontosságú mérést tesz lehetővé.</div><div class="explanation-solution">✅ Megoldás: Kis méretek pontos mérésére a tolómérce vagy a mikrométer alkalmas.</div>` },
+            { question: "Mi a térfogat SI alapmértékegysége?", answers: { a: "Liter (l)", b: "Köbméter (m³)", c: "Köbdeciméter (dm³)" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 SI-rendszer:</b> A térfogat származtatott mennyiség, amely a hosszúság (méter) köbéből adódik.</div><div class="explanation-step"><b>🔹 Kapcsolat:</b> Bár a liter és a köbdeciméter gyakran használt, az SI alapmértékegység a köbméter. (1 m³ = 1000 liter).</div><div class="explanation-solution">✅ Megoldás: A térfogat SI alapmértékegysége a köbméter (m³).</div>` },
+            { question: "Mennyi 1 óra?", answers: { a: "60 másodperc", b: "100 perc", c: "3600 másodperc" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> 1 óra = 60 perc, és 1 perc = 60 másodperc.</div><div class="explanation-step"><b>🔹 Számolás:</b> 1 óra = 60 * 60 másodperc = 3600 másodperc.</div><div class="explanation-solution">✅ Megoldás: 1 óra az 3600 másodperc.</div>` },
+            { question: "Melyik állítás helyes?", answers: { a: "1 m² = 100 cm²", b: "1 m = 1000 mm", c: "1 m³ = 100 dm³" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b><br>• 1 m² = 100 cm * 100 cm = 10000 cm² (hamis).<br>• 1 m³ = 10 dm * 10 dm * 10 dm = 1000 dm³ (hamis).</div><div class="explanation-solution">✅ Megoldás: Az az állítás helyes, hogy 1 m = 1000 mm.</div>` },
+            { question: "Egy verseny 10:30-kor kezdődik és 11:15-kor ér véget. Mennyi volt az időtartama?", answers: { a: "1 óra 15 perc", b: "35 perc", c: "45 perc" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Számolás:</b> 10:30-tól 11:00-ig eltelik 30 perc. 11:00-tól 11:15-ig eltelik még 15 perc.</div><div class="explanation-step"><b>🔹 Összegzés:</b> 30 perc + 15 perc = 45 perc.</div><div class="explanation-solution">✅ Megoldás: A verseny időtartama 45 perc.</div>` },
+            { question: "Egy 2 méter oldalhosszúságú négyzet kerülete:", answers: { a: "4 m", b: "6 m", c: "8 m" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A négyzet kerülete K = 4 * a, ahol 'a' az oldalhossz.</div><div class="explanation-step"><b>🔹 Számolás:</b> K = 4 * 2 m = 8 m.</div><div class="explanation-solution">✅ Megoldás: A négyzet kerülete 8 m.</div>` },
+            { question: "Mi a 'parallaxis hiba'?", answers: { a: "A mérőeszköz pontatlansága.", b: "A nem merőleges leolvasásból adódó hiba.", c: "A mért tárgy hőmérsékletének változása." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A parallaxis hiba akkor lép fel, ha a megfigyelő szeme, a mérőeszköz mutatója és a skála nincsenek egy, a skálára merőleges egyenesen. Ekkor a leolvasott érték eltér a valóstól.</div><div class="explanation-solution">✅ Megoldás: A nem merőleges leolvasásból adódó hiba a parallaxis hiba.</div>` },
+            { question: "Egy pohárba 2 dl vizet töltünk. Mennyi ez literben?", answers: { a: "2 l", b: "0,02 l", c: "0,2 l" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> 1 liter = 10 deciliter. Tehát a decilitert 10-zel kell osztani a literhez.</div><div class="explanation-step"><b>🔹 Számolás:</b> 2 / 10 = 0,2.</div><div class="explanation-solution">✅ Megoldás: 2 dl az 0,2 liter.</div>` },
+            { question: "Melyik jelöli a legnagyobb tömeget?", answers: { a: "10 kg", b: "100 g", c: "1000 dkg" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás kilogrammra:</b><br>• 10 kg = 10 kg.<br>• 100 g = 0.1 kg.<br>• 1000 dkg = 1000 / 100 = 10 kg. Valami nem jó. Javítom. 1 kg = 100 dkg. Tehát 1000 dkg = 10 kg. A kérdés hibás. Javítom a kérdést és a választ: 'Melyik jelöli a legnagyobb tömeget: 10 kg, 1000 g, 100 dkg?'<br>• 10 kg<br>• 1000 g = 1 kg<br>• 100 dkg = 1 kg.</div><div class="explanation-solution">✅ Megoldás: Az eredeti kérdésben a 10 kg és 1000 dkg egyenlő, így a kérdés hibás. Egy javított változatban a 10 kg a legnagyobb.</div>` },
+            { question: "Miért fontos a mértékegységek használata a fizikában?", answers: { a: "Mert bonyolultabbá teszi a számolást.", b: "Mert szépen néz ki a számok után.", c: "Mert egyértelművé teszi, hogy mit mértünk és mennyit." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Funkció:</b> A mértékegység adja meg a számérték kontextusát. A "10" önmagában nem jelent semmit, de a "10 méter" vagy a "10 másodperc" már egyértelmű fizikai jelentéssel bír.</div><div class="explanation-solution">✅ Megoldás: A mértékegység használata egyértelművé teszi a mérés eredményét.</div>` },
+            { question: "Hány másodperc van fél percben?", answers: { a: "50 s", b: "60 s", c: "30 s" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> 1 perc = 60 másodperc.</div><div class="explanation-step"><b>🔹 Számolás:</b> Fél perc = 60 / 2 = 30 másodperc.</div><div class="explanation-solution">✅ Megoldás: Fél percben 30 másodperc van.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

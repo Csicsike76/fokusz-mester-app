@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 7. hét: Felelősség és tévhitek</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #fce4ec;
+            --example-border: #e91e63;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .checklist-card {
+            background-color: var(--example-bg);
+            border: 1px solid var(--example-border);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .checklist-card h3 {
+            margin-top: 0;
+            color: #c2185b;
+            font-family: 'Roboto Slab', serif;
+        }
+
+        .checklist-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .checklist-card li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .checklist-card li::before {
+            content: '❓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2rem;
+        }
+
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>Gyakorlati Műhely</h1>
+            <p>7. hét: Felelősség és tévhitek</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A műhely végére képes leszel kritikusan elemezni egy mesterséges intelligenciáról szóló hírt vagy bejegyzést. Megtanulsz egyszerű kérdésekkel különbséget tenni a <strong>reális információ</strong> és a <strong>túlzó "hype" (felhajtás)</strong> között, és felismered a leggyakoribb MI-tévhiteket.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Szükséges Eszközök</h2>
+                <ul>
+                    <li>Számítógép vagy telefon internetkapcsolattal</li>
+                    <li>Online kereső (Google, DuckDuckGo, stb.)</li>
+                    <li>Hozzáférést kedvenc hírportálodhoz vagy közösségi média felületedhez (pl. YouTube, TikTok, híroldalak).</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. Bevezető: A Hype-vonat és a valóság</h2>
+                <p>A mesterséges intelligencia izgalmas, ezért a média is imád róla beszélni. Néha azonban a cikkek és videók túloznak: úgy mutatják be az MI-t, mint egy mindentudó, érző varázslót, ami vagy megmenti, vagy elpusztítja a világot. A valóság ennél sokkal árnyaltabb. A mai feladatod, hogy felvedd a kritikus szemüvegedet, és megtanuld elválasztani a tényeket a fantáziától. Te leszel az "MI-Híradó" főszerkesztője!</p>
+            </section>
+            
+            <section class="workshop-section">
+                <h2>4. Az "MI-Híradó Ellenőrzőlista"</h2>
+                <p>Mielőtt belevágnánk a feladatba, ismerd meg a legfontosabb eszközödet! Amikor egy MI-ről szóló hírt olvasol, tedd fel magadnak ezeket a kérdéseket:</p>
+                <div class="checklist-card">
+                    <h3>MI-Híradó Ellenőrzőlista</h3>
+                    <ul>
+                        <li><strong>Ki a cikk szerzője?</strong> Egy újságíró, egy szakértő, vagy egy marketinges? Van forrás megjelölve?</li>
+                        <li><strong>Milyen MI-típusról van szó?</strong> A cikk Szűk MI-ről (ANI), azaz egy konkrét feladatot megoldó rendszerről beszél, vagy tévesen Általános MI-nek (AGI), egyfajta "gondolkodó gépnek" állítja be?</li>
+                        <li><strong>Használ-e túlzó, "emberi" szavakat?</strong> Olyanokat ír, hogy az MI "érez", "gondolkodik", "akar", "dönt"? Vagy a reálisabb "elemez", "mintázatot keres", "jósol" kifejezéseket használja?</li>
+                        <li><strong>Bemutatja-e a korlátokat és a kockázatokat?</strong> A cikk csak a pozitívumokat emeli ki, vagy beszél a technológia lehetséges hibáiról, torzításairól, etikai kérdéseiről is?</li>
+                        <li><strong>Mi a cikk valódi célja?</strong> Tájékoztatni akar, szórakoztatni, esetleg eladni neked egy terméket?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <h2>5. Lépésről-lépésre Feladatok</h2>
+
+                <div class="task-card">
+                    <h3>1. Feladat: Cikkvadászat</h3>
+                    <p>Keress az interneten egy hírt, cikket vagy egy YouTube/TikTok videót, ami a mesterséges intelligenciával foglalkozik! Használhatod a következő keresőszavakat:</p>
+                    <p><code>"mesterséges intelligencia hírek"</code>, <code>"MI a jövőben"</code>, <code>"AI news"</code></p>
+                    <p>Válassz egyet, ami érdekesnek tűnik, és olvasd el / nézd meg figyelmesen!</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: Az Ellenőrzőlista alkalmazása</h3>
+                    <p>Vedd elő az "MI-Híradó Ellenőrzőlistát", és menj végig a pontjain a kiválasztott cikked alapján!</p>
+                    <ol>
+                        <li><strong>Szerző és forrás:</strong> Megbízhatónak tűnik a forrás? (Pl. egy nagy hírügynökség vs. egy ismeretlen blog)</li>
+                        <li><strong>MI-típus:</strong> A cikk egy valós, ma is létező Szűk MI-ről (ANI) szól (pl. egy új képalkotó), vagy egy jövőbeli, gondolkodó Általános MI-ről (AGI) fantáziál?</li>
+                        <li><strong>Szóhasználat:</strong> Gyűjts ki 1-2 példát a cikkből, ami túlzóan "emberi" (pl. "az MI rájött, hogy..."), és 1-2 példát, ami reális (pl. "a modell felismerte a mintázatot").</li>
+                        <li><strong>Korlátok:</strong> Említi a cikk, hogy a bemutatott MI hibázhat, vagy hogy a működése etikai kérdéseket vet fel? Vagy csak a csodálatos eredményekről szól?</li>
+                        <li><strong>Cél:</strong> Szerinted mi volt a szerző fő szándéka a cikkel?</li>
+                    </ol>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: A "Hype-mérő" beállítása</h3>
+                    <p>Most, hogy elemezted a cikket, értékeld egy 1-től 5-ig terjedő skálán!</p>
+                    <ul>
+                        <li><strong>1: Teljesen reális, kiegyensúlyozott cikk.</strong> (Tényekre alapoz, bemutatja a korlátokat is.)</li>
+                        <li><strong>3: Kicsit túlzó, de alapvetően informatív.</strong> (Használ hangzatos szavakat, de a lényeg stimmel.)</li>
+                        <li><strong>5: Tiszta Hype! Szenzációhajhász és félrevezető.</strong> (Úgy beszél az MI-ről, mint egy sci-fi filmben, a valós technológiát figyelmen kívül hagyja.)</li>
+                    </ul>
+                    <p>Írd le a pontszámodat, és egy mondatban indokold meg, miért annyit adtál!</p>
+                </div>
+            </section>
+            
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>6. Kritikai Gondolkodás Sarok</h2>
+                    <p>Gondolkozzunk el a tapasztaltakon!</p>
+                    <ul>
+                        <li><strong>Miért születik ennyi "hype" cikk?</strong> Miért vonzóbb egy olyan főcím, hogy "Az MI öntudatra ébredt", mint az, hogy "Egy új algoritmus 2%-kal javította a képfelismerés pontosságát"? Kinek az érdeke a szenzációkeltés?</li>
+                        <li><strong>Milyen hatása lehet a tévhiteknek?</strong> Ha az emberek azt hiszik, az MI egy mindentudó, tévedhetetlen "agy", milyen hibás döntéseket hozhatnak? (Pl. vakon megbíznak egy MI által adott orvosi tanácsban anélkül, hogy orvossal beszélnének.)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>7. Önálló Kihívás: Legyél te a tényellenőr!</h2>
+                    <p>A feladatod, hogy készíts egy rövid, 3 diából álló "Tényellenőrzés" prezentációt az általad elemzett cikkről.</p>
+                    <ul>
+                        <li><strong>1. Dia:</strong> A cikk címe, szerzője és egy link a forráshoz. Add meg a te "Hype-mérő" értékelésedet (1-5).</li>
+                        <li><strong>2. Dia:</strong> Gyűjts ki a cikkből két állítást. Az egyik legyen szerinted <strong>reális</strong>, a másik pedig <strong>túlzó vagy félrevezető</strong>.</li>
+                        <li><strong>3. Dia:</strong> Írd le 2-3 mondatban a következtetésedet! Ajánlanád ezt a cikket másoknak, hogy tájékozódjanak az MI-ről? Miért igen, vagy miért nem?</li>
+                    </ul>
+                    <p>Mentsd el a prezentációdat! A következő órán megvitathatjuk a legérdekesebb "leleplezéseket".</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

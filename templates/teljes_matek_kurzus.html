@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktív Matematika Gyűjtemény</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="alsos_stilus.css"> <!-- Használhatjuk az alsós stílust, mert az szép és modern -->
+    <style>
+        .header {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: linear-gradient(135deg, var(--piros), #a30000);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+        }
+        .header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .header p { font-size: 1.2rem; opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="bg-video">
+        <source src="video.mp4" type="video/mp4">
+    </video>
+    
+    <div id="navbar-placeholder"></div>
+
+    <div class="content-wrapper">
+        <main class="container">
+            <header class="header">
+                <h1>Interaktív Matematika Gyűjtemény</h1>
+                <p>Digitális segédlet és gyakorlórendszer 1-8. osztályosoknak</p>
+            </header>
+
+            <section class="section" id="evfolyamok">
+                <h2 class="section-title">Válassz Évfolyamot!</h2>
+                <div class="card-grid">
+                    <a href="matek_1_osztaly.html" class="card grade-1"><div class="card-grade">1.</div><div class="card-title">Osztály</div></a>
+                    <a href="matek_2_osztaly.html" class="card grade-2"><div class="card-grade">2.</div><div class="card-title">Osztály</div></a>
+                    <a href="matek_3_osztaly.html" class="card grade-3"><div class="card-grade">3.</div><div class="card-title">Osztály</div></a>
+                    <a href="matek_4_osztaly.html" class="card grade-4"><div class="card-grade">4.</div><div class="card-title">Osztály</div></a>
+                    <!-- Felső tagozat (a fő stíluslapból jövő színekkel) -->
+                    <a href="#" class="card" style="background:var(--primary-color);"><div class="card-grade">5.</div><div class="card-title">Osztály</div></a>
+                    <a href="#" class="card" style="background:var(--primary-color);"><div class="card-grade">6.</div><div class="card-title">Osztály</div></a>
+                    <a href="#" class="card" style="background:var(--primary-color);"><div class="card-grade">7.</div><div class="card-title">Osztály</div></a>
+                    <a href="1Fo oldal.html" class="card" style="background:var(--primary-color);"><div class="card-grade">8.</div><div class="card-title">Osztály</div></a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- AI Chat Ágens és a szükséges szkriptek -->
+    <script src="alsos_kereso_adatbazis.js"></script> <!-- Ideiglenesen, amíg nincs közös adatbázis -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('alsos_nav.html').then(r => r.text()).then(d => {
+                document.getElementById('navbar-placeholder').innerHTML = d;
+                initSearch();
+            }).catch(err => console.error(err));
+            
+            const initSearch = () => { /* Kereső logika */ };
+            const initChatAgent = () => { /* Chat logika */ };
+
+            initChatAgent();
+        });
+    </script>
+</body>
+</html>

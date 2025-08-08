@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Kerületi és középponti szögek</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Kerületi és középponti szögek</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+
+            <div class="evaluation-block" id="bottom-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-bottom">PIN kód:</label>
+                    <input type="password" id="pin-code-bottom" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Mekkora az a kerületi szög, amely a kör átmérője fölé illeszkedik?",
+                options: { a: "90°", b: "180°", c: "Függ a kör sugarától." },
+                correct: "a",
+                explanation: "Ez Thalész tétele. A kör átmérője fölé rajzolt bármely kerületi szög (azaz a háromszög harmadik csúcsa a körvonalon van) mindig derékszög, azaz 90°."
+            },
+            {
+                question: "Egy körben egy 100°-os középponti szöghöz ugyanazon íven mekkora kerületi szög tartozik?",
+                options: { a: "100°", b: "200°", c: "50°" },
+                correct: "c",
+                explanation: "A kerületi és középponti szögek tétele szerint az ugyanahhoz az ívhez tartozó középponti szög mindig kétszerese a kerületi szögnek. Így a kerületi szög 100° / 2 = 50°."
+            },
+            {
+                question: "Milyen szöget zár be a kör érintője az érintési pontba húzott sugárral?",
+                options: { a: "45°", b: "90°", c: "180°" },
+                correct: "b",
+                explanation: "A kör érintője mindig merőleges az érintési pontba húzott sugárra. A merőleges egyenesek 90°-os szöget zárnak be egymással."
+            },
+            {
+                question: "Mi igaz egy húrnégyszög szemközti szögeire?",
+                options: { a: "Egyenlőek.", b: "Összegük 180°.", c: "Összegük 360°." },
+                correct: "b",
+                explanation: "A húrnégyszögek tétele szerint egy húrnégyszög (amelynek minden csúcsa egy körön van) szemközti szögeinek összege mindig 180°."
+            },
+            {
+                question: "Mi igaz egy körhöz egy külső pontból húzott két érintőszakasz hosszára?",
+                options: { a: "A hosszuk mindig különböző.", b: "A hosszuk mindig egyenlő.", c: "Az összegük a kör átmérője." },
+                correct: "b",
+                explanation: "Egy külső pontból a körhöz húzott két érintőszakasz (a külső pont és az érintési pontok közötti szakasz) hossza mindig megegyezik."
+            },
+            {
+                question: "Hol helyezkedik el a kerületi szög csúcsa?",
+                options: { a: "A körvonalon.", b: "A kör középpontjában.", c: "A körön kívül." },
+                correct: "a",
+                explanation: "A kerületi szög definíciója szerint a csúcsa a körvonal egy pontja, szárai pedig a kör két húrja."
+            },
+            {
+                question: "Ha egy kerületi szög 40°, mekkora a hozzá tartozó középponti szög?",
+                options: { a: "20°", b: "40°", c: "80°" },
+                correct: "c",
+                explanation: "A középponti szög kétszerese a kerületi szögnek, ha ugyanazon az íven nyugszanak. Tehát a középponti szög 2 * 40° = 80°."
+            },
+            {
+                question: "Két különböző kerületi szög ugyanahhoz a körívhez tartozik. Milyen viszonyban állnak egymással?",
+                options: { a: "Az összegük 90°.", b: "Egyenlő nagyságúak.", c: "Az egyik a másik kétszerese." },
+                correct: "b",
+                explanation: "Az ugyanazon ívhez tartozó összes kerületi szög nagysága megegyezik. Ez a kerületi szögek tételének egyik fontos következménye."
+            },
+            {
+                question: "Egy húrnégyszög egyik szöge 75°. Mekkora a vele szemközti szög?",
+                options: { a: "105°", b: "75°", c: "15°" },
+                correct: "a",
+                explanation: "A húrnégyszög szemközti szögeinek összege 180°. Így a keresett szög 180° - 75° = 105°."
+            },
+            {
+                question: "Melyik tétel biztosítja, hogy minden derékszögű háromszög köré írható kör középpontja az átfogó felezőpontja?",
+                options: { a: "Pitagorasz-tétel", b: "Thalész-tétel megfordítása", c: "Kerületi szögek tétele" },
+                correct: "b",
+                explanation: "Thalész tételének megfordítása kimondja, hogy ha egy háromszög egyik oldala fölé rajzolt kerületi szög 90°-os, akkor az az oldal a kör átmérője. Ebből következik, hogy a kör középpontja az átfogó felezőpontja."
+            },
+            {
+                question: "Hol helyezkedik el a középponti szög csúcsa?",
+                options: { a: "Bárhol a körön belül.", b: "A körvonalon.", c: "A kör középpontjában." },
+                correct: "c",
+                explanation: "A középponti szög definíciója szerint a csúcsa a kör középpontja, szárai pedig a kör két sugara."
+            },
+            {
+                question: "Hány érintőt lehet húzni egy körhöz egy belső pontjából?",
+                options: { a: "1", b: "0", c: "Végtelen sokat." },
+                correct: "b",
+                explanation: "Egy kör belső pontján keresztül nem lehet érintőt húzni, mivel bármely, a ponton áthaladó egyenes két pontban metszi a kört (tehát szelő)."
+            },
+            {
+                question: "Az érintőszárú kerületi szög...",
+                options: { a: "mindig derékszög.", b: "a csúcsánál lévő sugárral 45°-ot zár be.", c: "egyenlő a szárként szolgáló húr mögötti íven nyugvó bármely kerületi szöggel." },
+                correct: "c",
+                explanation: "Az érintőszárú kerületi szög tétele szerint a szög nagysága megegyezik a belső íven nyugvó bármely kerületi szög nagyságával."
+            },
+            {
+                question: "Egy körívhez tartozó középponti szög 60°. Mekkora a hozzá tartozó kerületi szög?",
+                options: { a: "30°", b: "60°", c: "120°" },
+                correct: "a",
+                explanation: "A kerületi szög fele a hozzá tartozó középponti szögnek. Így a kerületi szög 60° / 2 = 30°."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                options: { a: "Egy kör érintője egy pontban érinti a kört.", b: "Minden háromszög húrháromszög.", c: "Minden négyszög húrnégyszög." },
+                correct: "c",
+                explanation: "Nem minden négyszög húrnégyszög. Csak azok a négyszögek húrnégyszögek, amelyeknek a szemközti szögeinek összege 180°. Ezzel szemben minden háromszög köré írható kör, így mindegyik húrháromszög."
+            },
+            {
+                question: "Egy húrnégyszög három ismert szöge 80°, 90°, 100°. Mekkora a negyedik szög?",
+                options: { a: "90°", b: "80°", c: "110°" },
+                correct: "a",
+                explanation: "A négyszögek belső szögeinek összege 360°. A három ismert szög összege 80+90+100=270°. A negyedik szög 360-270=90°. A feltétel húrnégyszögre is teljesül, mivel a szemközti szögek összege 80+100=180° és 90+90=180°."
+            },
+            {
+                question: "Mi a viszony a kerületi és a hozzá tartozó középponti szög között?",
+                options: { a: "A kerületi szög a középponti szög kétszerese.", b: "A középponti szög a kerületi szög kétszerese.", c: "Egyenlőek." },
+                correct: "b",
+                explanation: "Ez a kerületi és középponti szögek tételének leggyakoribb megfogalmazása. A középponti szög mindig kétszer akkora, mint az azonos íven nyugvó kerületi szög."
+            },
+            {
+                question: "Hány érintőt lehet húzni egy körhöz egy külső pontjából?",
+                options: { a: "0", b: "1", c: "2" },
+                correct: "c",
+                explanation: "Egy körhöz egy külső pontból pontosan két érintő húzható. Az ezen érintőkön lévő érintőszakaszok egyenlő hosszúak."
+            },
+            {
+                question: "Egy kör átmérője AB. A körvonal egy C pontjára igaz, hogy a BC ívhez tartozó kerületi szög (BAC szög) 35°. Mekkora a CAB kerületi szög (ABC szög)?",
+                options: { a: "35°", b: "55°", c: "90°" },
+                correct: "b",
+                explanation: "Thalész tétele miatt az ACB szög 90°. Egy háromszög belső szögeinek összege 180°. Így a harmadik szög: 180° - 90° - 35° = 55°."
+            },
+            {
+                question: "Egy 22°-os kerületi szöghöz tartozó ív a teljes kör hányad része?",
+                options: { a: "A 22/360-ad része.", b: "A 44/360-ad része.", c: "A 11/360-ad része." },
+                correct: "b",
+                explanation: "A kerületi szög 22°, így a hozzá tartozó középponti szög 44°. A körív nagyságát a középponti szöggel mérjük, ami a teljes 360°-os körnek a 44/360-ad része."
+            },
+            {
+                question: "Egy külső pontból húzott érintőszakaszok a kör középpontjával egy négyszöget alkotnak. Melyik állítás igaz erre a négyszögre?",
+                options: { a: "Ez egy deltoid.", b: "Ez egy rombusz.", c: "Ez egy téglalap." },
+                correct: "a",
+                explanation: "A keletkező négyszög (külső pont, két érintési pont, középpont) egy deltoid, mivel két-két szomszédos oldala egyenlő (a két sugár és a két érintőszakasz). Speciális esetben, ha a szögek megfelelőek, lehet sárkány-deltoid."
+            },
+            {
+                question: "Egy egyenlő szárú háromszög alapon fekvő szögei 70°-osak. Mi a szárak által bezárt szög?",
+                options: { a: "70°", b: "40°", c: "50°" },
+                correct: "b",
+                explanation: "A háromszög belső szögeinek összege 180°. Az alapon fekvő két szög összege 70° + 70° = 140°. A harmadik, szárak által bezárt szög 180° - 140° = 40°."
+            },
+            {
+                question: "Ha egy körívhez tartozó középponti szög 180°, akkor az ív...",
+                options: { a: "egy negyedkörív.", b: "egy félkörív.", c: "a teljes körív." },
+                correct: "b",
+                explanation: "A teljes körívhez 360°-os középponti szög tartozik. A 180°-os középponti szög a kör feléhez, azaz egy félkörívhez tartozik. Ez a kör átmérője."
+            },
+            {
+                question: "Melyik speciális négyszög mindig húrnégyszög?",
+                options: { a: "A rombusz.", b: "Az egyenlő szárú (szimmetrikus) trapéz.", c: "A paralelogramma." },
+                correct: "b",
+                explanation: "Az egyenlő szárú trapéz mindig húrnégyszög, mert az egy száron fekvő szögek összege 180°, és a szimmetria miatt a szemközti szögek összege is 180° lesz. A téglalap és a négyzet szintén húrnégyszögek, de az általános rombusz és paralelogramma nem."
+            },
+            {
+                question: "A kerületi szög nagysága függ-e a kör sugarától?",
+                options: { a: "Igen, egyenesen arányos vele.", b: "Nem, csak a hozzá tartozó ívtől.", c: "Igen, fordítottan arányos vele." },
+                correct: "b",
+                explanation: "A kerületi szög nagyságát kizárólag a hozzá tartozó körív határozza meg (pontosabban az ívhez tartozó középponti szög). A kör méretétől (sugarától) független."
+            }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const checkBtns = document.querySelectorAll('.check-btn');
+        const pinInputs = document.querySelectorAll('.pin-code-input');
+        const resultContainers = document.querySelectorAll('.result-container');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">
+                            <label for="q${index}a">
+                                <input type="radio" name="question${index}" id="q${index}a" value="a">
+                                ${item.options.a}
+                            </label>
+                            <label for="q${index}b">
+                                <input type="radio" name="question${index}" id="q${index}b" value="b">
+                                ${item.options.b}
+                            </label>
+                            <label for="q${index}c">
+                                <input type="radio" name="question${index}" id="q${index}c" value="c">
+                                ${item.options.c}
+                            </label>
+                        </div>
+                        <div class="explanation" id="explanation-${index}">
+                            <strong>Magyarázat:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+
+
+        function checkAnswers() {
+            const pin = pinInputs[0].value; // Elég az elsőből olvasni, mert szinkronizáltak
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtns.forEach(btn => btn.disabled = true);
+            pinInputs.forEach(input => input.disabled = true);
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+
+                if (isMaster) {
+                    explanationDiv.style.display = 'block';
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('master-correct');
+                } else {
+                    explanationDiv.style.display = 'block';
+                }
+
+                if (selectedOption) {
+                    const selectedLabel = selectedOption.parentElement;
+                    if (selectedOption.value === item.correct) {
+                        score++;
+                        selectedLabel.classList.add('correct-answer', 'label-correct');
+                    } else {
+                        selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                        const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                        correctLabel.classList.add('correct-answer');
+                    }
+                } else if (isMaster) {
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('correct-answer');
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            const resultText = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            resultContainers.forEach(container => container.innerHTML = resultText);
+
+            if (isMaster) {
+                adminPanels.forEach(panel => panel.style.display = 'block');
+            }
+        }
+
+        // Eseménykezelők hozzáadása az összes vezérlőhöz
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        
+        checkBtns.forEach(btn => {
+            btn.addEventListener('click', checkAnswers);
+        });
+
+        pinInputs.forEach(input => {
+            // Enter gombos ellenőrzés
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+            // PIN mezők szinkronizálása
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

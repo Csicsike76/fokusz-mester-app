@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - A nyomás</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: A nyomás</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Mi a nyomás mértékegysége?",
+                answers: { a: "Pascal (Pa)", b: "Newton (N)", c: "Joule (J)" },
+                correctAnswer: 'a',
+                explanation: "A nyomás SI mértékegysége a pascal, Blaise Pascal tiszteletére. 1 Pa = 1 N/m². A newton az erő, a joule a munka mértékegysége. ✅ Megoldás: Pascal (Pa)."
+            },
+            {
+                question: "Egy 100 N súlyú láda 2 m² felületen fekszik a padlón. Mekkora nyomást gyakorol a padlóra?",
+                answers: { a: "50 Pa", b: "200 Pa", c: "0.02 Pa" },
+                correctAnswer: 'a',
+                explanation: "A nyomás a nyomóerő és a felület hányadosa: p = F / A. Ebben az esetben p = 100 N / 2 m² = 50 Pa. ✅ Megoldás: 50 Pa."
+            },
+            {
+                question: "Miért hegyes a kés éle és a szög hegye?",
+                answers: { a: "Mert a kis felületen ugyanakkora erővel sokkal nagyobb nyomást lehet kifejteni.", b: "Mert így esztétikusabb.", c: "Mert a hegyes tárgyak erősebbek." },
+                correctAnswer: 'a',
+                explanation: "A nyomás fordítottan arányos a felülettel. A nagyon kicsi felület (az él vagy a hegy) koncentrálja az erőt, így hatalmas nyomást hoz létre, ami lehetővé teszi az anyagok vágását vagy átszúrását. ✅ Megoldás: Mert a kis felületen ugyanakkora erővel sokkal nagyobb nyomást lehet kifejteni."
+            },
+            {
+                question: "Hogyan változik a nyomás, ha ugyanazt az erőt kétszer akkora felületen osztjuk el?",
+                answers: { a: "A felére csökken.", b: "A kétszeresére nő.", c: "Nem változik." },
+                correctAnswer: 'a',
+                explanation: "A nyomás (p = F/A) fordítottan arányos a felülettel (A). Ha a felületet duplájára növeljük, a nyomás a felére fog csökkenni. ✅ Megoldás: A felére csökken."
+            },
+            {
+                question: "Egy hójáró talpának nagy a felülete. Miért?",
+                answers: { a: "Hogy a súlyát nagyobb felületen ossza el, így kisebb nyomást gyakoroljon a hóra.", b: "Hogy gyorsabban lehessen vele menni.", c: "Hogy melegen tartsa a lábat." },
+                correctAnswer: 'a',
+                explanation: "A nagy felületű hójáró talp lecsökkenti a hó felszínére nehezedő nyomást (p = F/A). Az alacsony nyomás miatt az ember nem süllyed bele a mély hóba. ✅ Megoldás: Hogy a súlyát nagyobb felületen ossza el, így kisebb nyomást gyakoroljon a hóra."
+            },
+            {
+                question: "Mi a nyomóerő?",
+                answers: { a: "A felületre merőlegesen ható erő.", b: "Bármilyen erő.", c: "A felülettel párhuzamosan ható erő." },
+                correctAnswer: 'a',
+                explanation: "A nyomás kiszámításakor csak az erőnek a felületre merőleges összetevőjét vesszük figyelembe. Ezt nevezzük nyomóerőnek. ✅ Megoldás: A felületre merőlegesen ható erő."
+            },
+            {
+                question: "Melyik esetben nagyobb a nyomás?",
+                answers: { a: "Ha egy tű hegyével bökünk.", b: "Ha az ujjunkkal nyomunk.", c: "Mindkét esetben ugyanakkora." },
+                correctAnswer: 'a',
+                explanation: "A tű hegyének a felülete rendkívül kicsi. Ugyanakkora erővel a tű hegyén sokkal-sokkal nagyobb nyomás ébred, mint a sokkal nagyobb felületű ujjbegyünkön. ✅ Megoldás: Ha egy tű hegyével bökünk."
+            },
+            {
+                question: "Mi a légköri nyomás?",
+                answers: { a: "A felettünk lévő levegőoszlop súlyából származó nyomás.", b: "A Nap által a Földre gyakorolt nyomás.", c: "A Föld forgása által keltett nyomás." },
+                correctAnswer: 'a',
+                explanation: "A Földet körülvevő levegőrétegnek (légkörnek) a gravitáció miatt súlya van. Ez a hatalmas súly nyomást gyakorol a Föld felszínére és mindenre, ami rajta van. ✅ Megoldás: A felettünk lévő levegőoszlop súlyából származó nyomás."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Mi a nyomás képlete?",
+                answers: { a: "p = F ⋅ A", b: "p = F / A", c: "p = A / F" },
+                correctAnswer: 'b',
+                explanation: "A nyomás (p) definíció szerint az egységnyi felületre (A) ható nyomóerő (F), tehát a nyomóerő és a felület hányadosa. ✅ Megoldás: p = F / A."
+            },
+            {
+                question: "Melyik állat lába gyakorol nagyobb nyomást a talajra, ha tömegük azonos: egy elefánt vagy egy tűsarkú cipőt viselő hölgy?",
+                answers: { a: "Az elefánt.", b: "A tűsarkú cipőt viselő hölgy.", c: "Egyforma nyomást gyakorolnak." },
+                correctAnswer: 'b',
+                explanation: "Bár az elefánt súlya sokkal nagyobb, ezt a súlyt elosztja a négy, nagy felületű talpán. A hölgy teljes súlya egy-egy pillanatra a tűsarok rendkívül kicsi felületére koncentrálódik, ami óriási nyomást eredményezhet, ami akár meg is sértheti a padlót. ✅ Megoldás: A tűsarkú cipőt viselő hölgy."
+            },
+            {
+                question: "Hogyan változik a nyomás, ha ugyanazon a felületen kétszer akkora erő hat?",
+                answers: { a: "A felére csökken.", b: "A kétszeresére nő.", c: "Nem változik." },
+                correctAnswer: 'b',
+                explanation: "A nyomás (p = F/A) egyenesen arányos a nyomóerővel (F). Ha az erő duplázódik, és a felület állandó, a nyomás is a kétszeresére nő. ✅ Megoldás: A kétszeresére nő."
+            },
+            {
+                question: "Mi a jele a nyomásnak?",
+                answers: { a: "N", b: "p", c: "F" },
+                correctAnswer: 'b',
+                explanation: "A nyomást az angol 'pressure' szó alapján általában kis 'p' betűvel jelöljük. Az N a newton, az F az erő jele. ✅ Megoldás: p."
+            },
+            {
+                question: "Egy 600 N súlyú ember a két talpán áll, melyek összfelülete 0,05 m². Mekkora nyomást gyakorol a talajra?",
+                answers: { a: "30 Pa", b: "12 000 Pa", c: "600 Pa" },
+                correctAnswer: 'b',
+                explanation: "p = F / A = 600 N / 0,05 m² = 12 000 Pa (vagy 12 kPa). ✅ Megoldás: 12 000 Pa."
+            },
+            {
+                question: "Miért fekszünk hasra a vékony jégen, ha át akarunk kelni rajta?",
+                answers: { a: "Mert így gyorsabban lehet csúszni.", b: "Mert a testsúlyunkat a lehető legnagyobb felületen osztjuk el, így csökkentve a nyomást.", c: "Mert így melegebb." },
+                correctAnswer: 'b',
+                explanation: "A jég egy bizonyos nyomást képes elviselni. Ha lefekszünk, a testünk súlya sokkal nagyobb felületen oszlik el, mint amikor állunk. A kisebb nyomás miatt kisebb az esélye, hogy a jég beszakad alattunk. ✅ Megoldás: Mert a testsúlyunkat a lehető legnagyobb felületen osztjuk el, így csökkentve a nyomást."
+            },
+            {
+                question: "Melyik állítás igaz?",
+                answers: { a: "A nyomás és az erő ugyanaz.", b: "A nyomás skalármennyiség.", c: "A nyomás vektormennyiség." },
+                correctAnswer: 'b',
+                explanation: "Bár a nyomást egy erő (vektor) hozza létre, magának a nyomásnak nincs iránya, csak nagysága, ezért skalármennyiség. ✅ Megoldás: A nyomás skalármennyiség."
+            },
+            {
+                question: "Mikor nagyobb a nyomás a talajon?",
+                answers: { a: "Ha futunk.", b: "Ha egy lábon állunk.", c: "Ha két lábon állunk." },
+                correctAnswer: 'b',
+                explanation: "Ha egy lábon állunk, a teljes testsúlyunk a feleakkora felületen oszlik el, mint két lábon állva. A kisebb felület miatt a nyomás a duplájára nő. ✅ Megoldás: Ha egy lábon állunk."
+            },
+            {
+                question: "Egy fakír egy szöges ágyon fekszik sérülés nélkül. Miért lehetséges ez?",
+                answers: { a: "A szögek nem hegyesek.", b: "A sok szög nagy felületet ad, így a testsúly eloszlik és az egy szögre jutó nyomás kicsi lesz.", c: "Ez csak egy bűvésztrükk." },
+                correctAnswer: 'b',
+                explanation: "A trükk a sok szögben rejlik. A fakír súlya eloszlik a több száz vagy ezer szög hegyén. Az összfelület így elég nagy lesz ahhoz, hogy az egyetlen szögre jutó nyomás már ne legyen elég nagy a bőr átszúrásához. ✅ Megoldás: A sok szög nagy felületet ad, így a testsúly eloszlik és az egy szögre jutó nyomás kicsi lesz."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Melyik NEM befolyásolja a szilárd test által kifejtett nyomást?",
+                answers: { a: "A nyomóerő nagysága.", b: "A nyomott felület nagysága.", c: "A test színe." },
+                correctAnswer: 'c',
+                explanation: "A nyomást a nyomóerő és a felület határozza meg (p = F/A). A test színének nincs köze a kifejtett nyomáshoz. ✅ Megoldás: A test színe."
+            },
+            {
+                question: "Milyen kapcsolat van a nyomás és a felület között (állandó erő mellett)?",
+                answers: { a: "Egyenes arányosság.", b: "Nincs köztük kapcsolat.", c: "Fordított arányosság." },
+                correctAnswer: 'c',
+                explanation: "A p = F/A képletből látszik, hogy a nyomás (p) és a felület (A) fordítottan arányosak: minél nagyobb a felület, annál kisebb a nyomás, és fordítva. ✅ Megoldás: Fordított arányosság."
+            },
+            {
+                question: "Milyen kapcsolat van a nyomás és a nyomóerő között (állandó felület mellett)?",
+                answers: { a: "Fordított arányosság.", b: "Négyzetes arányosság.", c: "Egyenes arányosság." },
+                correctAnswer: 'c',
+                explanation: "A p = F/A képletből látszik, hogy a nyomás (p) és a nyomóerő (F) egyenesen arányosak: minél nagyobb az erő, annál nagyobb a nyomás. ✅ Megoldás: Egyenes arányosság."
+            },
+            {
+                question: "Miért mélyed jobban a sárba egy keskeny kerekű bicikli, mint egy széles kerekű traktor?",
+                answers: { a: "Mert a bicikli nehezebb.", b: "Mert a traktor lassabb.", c: "Mert a bicikli kereke kisebb felületen érintkezik, így nagyobb nyomást fejt ki." },
+                correctAnswer: 'c',
+                explanation: "A traktor hatalmas súlya eloszlik a nagy, széles kerekeken, így viszonylag kis nyomást gyakorol a talajra. A bicikli kisebb súlya egy nagyon keskeny felületre koncentrálódik, ami nagy nyomást eredményez. ✅ Megoldás: Mert a bicikli kereke kisebb felületen érintkezik, így nagyobb nyomást fejt ki."
+            },
+            {
+                question: "Melyik egység NEM a nyomás mértékegysége?",
+                answers: { a: "pascal (Pa)", b: "bar", c: "kelvin (K)" },
+                correctAnswer: 'c',
+                explanation: "A pascal az SI alapmértékegység, a bar pedig egy gyakran használt származtatott egység (1 bar ≈ 100 000 Pa). A kelvin a hőmérséklet mértékegysége. ✅ Megoldás: kelvin (K)."
+            },
+            {
+                question: "Egy 500 N súlyú doboz 0,5 m²-es lapján áll. Mekkora nyomást gyakorol a talajra?",
+                answers: { a: "250 Pa", b: "500,5 Pa", c: "1000 Pa" },
+                correctAnswer: 'c',
+                explanation: "A nyomás a nyomóerő és a felület hányadosa: p = F / A = 500 N / 0,5 m² = 1000 Pa. ✅ Megoldás: 1000 Pa."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "A nyomás függ a nyomóerőtől.", b: "A nyomás függ a felülettől.", c: "A nyomás független a nyomóerőtől." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás hamis. A nyomás definíció szerint egyenesen arányos a nyomóerővel. Ha az erő nő, a nyomás is nő. ✅ Megoldás: A nyomás független a nyomóerőtől."
+            },
+            {
+                question: "A nyomás...",
+                answers: { a: "...csak folyadékokban létezik.", b: "...csak gázokban létezik.", c: "...szilárd testek, folyadékok és gázok esetében is értelmezhető." },
+                correctAnswer: 'c',
+                explanation: "A nyomás egy általános fizikai fogalom, amely mindhárom halmazállapotban fontos szerepet játszik. Beszélünk szilárd testek nyomásáról, hidrosztatikai nyomásról és légnyomásról is. ✅ Megoldás: ...szilárd testek, folyadékok és gázok esetében is értelmezhető."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

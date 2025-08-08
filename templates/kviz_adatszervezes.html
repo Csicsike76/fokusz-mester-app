@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Kvíz: Adatszervezés és valószínűség</title>
+  <style>
+    :root {
+      --primary-color: #388d3c; /* Zöld */
+      --secondary-color: #d52b1e; /* Piros */
+      --light-green: #e8f5e9;
+      --light-red: #ffebee;
+      --text-dark: #333;
+      --text-light: #fff;
+      --border-color: #ddd;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, var(--secondary-color), var(--text-light), var(--primary-color));
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: var(--text-light);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+    .question-block {
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .question {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    .answers label {
+      display: block;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      border: 1px solid transparent;
+    }
+    .answers label:hover {
+        background-color: #f0f0f0;
+    }
+    .answers input[type="radio"] {
+      margin-right: 0.8em;
+      accent-color: var(--primary-color);
+    }
+    .answers label.correct {
+      background-color: var(--light-green);
+      border-color: var(--primary-color);
+      font-weight: bold;
+    }
+    .answers label.incorrect {
+      background-color: var(--light-red);
+      border-color: var(--secondary-color);
+    }
+    .explanation {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      background-color: #f7f7fa;
+      border-left: 4px solid var(--primary-color);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .controls, .pin-section {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #f9fafb;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .pin-input {
+      width: 140px;
+      padding: 10px;
+      font-size: 1.1em;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    button:hover:not(:disabled) {
+      background-color: #2a6a2d;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    #result {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      font-size: 1.3em;
+      text-align: center;
+    }
+    .admin-panel {
+      display: none;
+      margin-top: 2rem;
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      background-color: #fffde7;
+      border-radius: 8px;
+    }
+    @media (max-width: 600px) {
+      main { padding: 1.5rem 1rem; }
+      header h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body autocomplete="off">
+  
+  <header>
+    <h1>Kvíz: Adatszervezés és valószínűség</h1>
+  </header>
+
+  <main>
+    <div class="pin-section">
+      <input type="password" id="pin" class="pin-input" placeholder="PIN-kód" autocomplete="off">
+      <button type="button" id="checkBtn">Ellenőrzés</button>
+      <div id="result"></div>
+    </div>
+    
+    <form id="quiz-form" autocomplete="off">
+      <!-- A kérdések ide generálódnak -->
+    </form>
+    
+    <div class="admin-panel" id="admin-panel">
+      <h3>Adminisztrációs panel</h3>
+      <p>Mester PIN-kóddal sikeresen bejelentkezve.</p>
+    </div>
+  </main>
+
+  <script>
+    const MASTER_PIN = '121909';
+    const studentPins = new Set();
+    function createInitialPins() {
+        for (let i = 1; i <= 20; i++) {
+            studentPins.add((100000 + i).toString());
+        }
+    }
+
+    const questions = [
+      { q: "Mi a valószínűsége annak, hogy egy szabályos dobókockával páros számot dobunk?", a: "1/6", b: "1/2", c: "1/3", correct: "b", exp: "A lehetséges esetek száma 6 (1,2,3,4,5,6). A kedvező esetek (páros számok) a 2, 4, 6, tehát 3 darab van. A valószínűség P = kedvező/összes = 3/6 = 1/2." },
+      { q: "Egy osztályban a jegyek: 5, 4, 5, 3, 4, 5. Mi a jegyek számtani közepe (átlaga)?", a: "4.33", b: "4.5", c: "4", correct: "a", exp: "Az átlaghoz össze kell adni a jegyeket és elosztani a darabszámukkal. Összeg: 5+4+5+3+4+5 = 26. Darabszám: 6. Átlag = 26 / 6 ≈ 4.33." },
+      { q: "Egy dobozban 5 piros és 3 kék golyó van. Mi a valószínűsége, hogy kéket húzunk?", a: "3/8", b: "3/5", c: "5/8", correct: "a", exp: "Az összes eset száma a golyók teljes száma: 5 + 3 = 8. A kedvező esetek száma a kék golyók száma, ami 3. A valószínűség P = kedvező/összes = 3/8." },
+      { q: "Melyik grafikon típus a legalkalmasabb egy egész (pl. torta) részeinek arányos bemutatására?", a: "Vonaldiagram", b: "Oszlopdiagram", c: "Kördiagram", correct: "c", exp: "A kördiagram (vagy tortadiagram) kifejezetten arra szolgál, hogy egy egész 100%-át felosszuk az egyes összetevők arányában. A körcikkek mérete arányos az összetevők részesedésével." },
+      { q: "Mi a mediánja a következő adatsornak: 2, 8, 3, 9, 5?", a: "3", b: "5", c: "5.4", correct: "b", exp: "A medián a sorba rendezett adatsor középső eleme. Először sorba rendezzük: 2, 3, 5, 8, 9. A középső elem az 5." },
+      { q: "Mi a módusza a következő adatsornak: 4, 6, 7, 6, 8, 6, 5?", a: "7", b: "6", c: "8", correct: "b", exp: "A módusz az adatsorban leggyakrabban előforduló elem. A 6-os szám háromszor szerepel, míg a többi csak egyszer. Tehát a módusz a 6." },
+      { q: "Feldobunk egy pénzérmét. Mi a valószínűsége, hogy fejet dobunk?", a: "1", b: "1/2", c: "0", correct: "b", exp: "Két lehetséges kimenetel van: fej vagy írás. Ebből a fej dobása 1 kedvező eset. A valószínűség P = kedvező/összes = 1/2." },
+      { q: "Egy csomag magyar kártyából (32 lap) kihúzunk egy lapot. Mi a valószínűsége, hogy az király lesz?", a: "4/32", b: "1/32", c: "8/32", correct: "a", exp: "Az összes eset 32 (a lapok száma). A kedvező esetek a királyok, amiből 4 darab van (piros, zöld, makk, tök). A valószínűség P = 4/32, ami egyszerűsítve 1/8." },
+      { q: "Melyik esemény valószínűsége 1?", a: "Lehetetlen esemény", b: "Véletlen esemény", c: "Biztos esemény", correct: "c", exp: "A biztos esemény az, ami egy kísérlet során mindenképpen bekövetkezik. Ennek a valószínűsége 1 (vagy 100%). Például: egy dobókockával 7-nél kisebbet dobunk." },
+      { q: "Egy teszten az eredmények: 80%, 90%, 70%. Mi az eredmények átlaga?", a: "80%", b: "85%", c: "240%", correct: "a", exp: "Az átlagot úgy számoljuk, hogy összeadjuk az értékeket és elosztjuk a darabszámukkal. (80+90+70)/3 = 240/3 = 80. Tehát az átlag 80%." },
+      { q: "Mi a mediánja a következő adatsornak: 10, 20, 12, 18?", a: "12", b: "15", c: "16", correct: "b", exp: "Először sorba rendezzük: 10, 12, 18, 20. Mivel páros számú elem van, a medián a két középső elem (12 és 18) számtani közepe. Medián = (12+18)/2 = 30/2 = 15." },
+      { q: "Mi a valószínűsége annak, hogy egy dobókockával 7-est dobunk?", a: "1/6", b: "1/7", c: "0", correct: "c", exp: "Mivel egy hagyományos dobókockán nincsen 7-es, a kedvező esetek száma 0. Így az esemény valószínűsége P = 0/6 = 0. Ezt lehetetlen eseménynek nevezzük." },
+      { q: "Milyen adatot jelenít meg egy oszlopdiagram oszlopának magassága?", a: "A kategória nevét.", b: "A kategóriához tartozó gyakoriságot vagy értéket.", c: "Az adatok sorszámát.", correct: "b", exp: "Az oszlopdiagram lényege, hogy az oszlopok magassága (vagy hossza) arányos azzal az értékkel (gyakoriság, mennyiség), amit az adott kategóriához rendelünk." },
+      { q: "Egy kalapban 10 cetli van, 1-től 10-ig számozva. Mi a valószínűsége, hogy prímszámot húzunk?", a: "4/10", b: "5/10", c: "3/10", correct: "a", exp: "Az összes eset 10. A prímek 1 és 10 között: 2, 3, 5, 7. Ez 4 darab kedvező eset. A valószínűség P = 4/10 = 2/5." },
+      { q: "Melyik állítás igaz a valószínűség értékére?", a: "Lehet negatív szám.", b: "Mindig 0 és 1 között van (beleértve a határokat is).", c: "Lehet 1-nél nagyobb.", correct: "b", exp: "Mivel a kedvező esetek száma sosem lehet több, mint az összes eset száma, a valószínűség P = kedvező/összes arány értéke mindig 0 és 1 között van. 0 a lehetetlen, 1 a biztos esemény." },
+      { q: "Egy kosárban 6 piros és 4 zöld alma van. Mi a valószínűsége, hogy NEM zöld almát húzunk?", a: "6/10", b: "4/10", c: "4/6", correct: "a", exp: "Ha NEM zöldet húzunk, az azt jelenti, hogy pirosat húzunk. A piros a kedvező eset, ebből 6 db van. Az összes eset 10. P = 6/10 = 3/5. Ez a zöld húzás eseményének komplementere: 1 - P(zöld) = 1 - 4/10 = 6/10." },
+      { q: "Mi a relatív gyakoriság?", a: "Az, hogy egy adat hányszor fordul elő.", b: "Az adat gyakoriságának és a teljes adatsor méretének aránya.", c: "A leggyakoribb adat.", correct: "b", exp: "A relatív gyakoriság megmutatja, hogy egy adott érték az összes adat hányad részét, hány százalékát teszi ki. Képlete: (abszolút gyakoriság) / (összes elemszám)." },
+      { q: "Két dobókockával dobunk egyszerre. Mi a valószínűsége, hogy a dobott számok összege 12?", a: "1/6", b: "1/12", c: "1/36", correct: "c", exp: "Az összes lehetséges kimenetel 6×6 = 36 (pl. (1,1), (1,2), ...). Az összeg csak egyetlen esetben lesz 12: ha mindkét kockával 6-ost dobunk, (6,6). A valószínűség P = 1/36." },
+      { q: "Melyik nem a statisztikai középértékek egyike?", a: "Medián", b: "Átlag", c: "Terjedelem", correct: "c", exp: "A leggyakoribb középérték-mutatók az átlag (számtani közép), a medián (középső érték) és a módusz (leggyakoribb érték). A terjedelem a legnagyobb és a legkisebb adat különbsége, ami egy szóródási mutató." },
+      { q: "Egy dobozban 10 golyó van. Annak a valószínűsége, hogy fehéret húzunk, 0,3. Hány fehér golyó van a dobozban?", a: "7", b: "3", c: "Nem lehet tudni.", correct: "b", exp: "P = kedvező/összes. 0,3 = x/10. Az egyenletet 10-zel szorozva: x = 3. Tehát 3 fehér golyó van a dobozban." },
+      { q: "Mi a valószínűsége, hogy egy 52 lapos francia kártyából ászt húzunk?", a: "1/13", b: "1/52", c: "4/13", correct: "a", exp: "Az összes eset 52. A kedvező esetek az ászok, amiből 4 darab van. A valószínűség P = 4/52. Ezt a törtet 4-gyel egyszerűsítve 1/13-ot kapunk." },
+      { q: "Hányféleképpen ülhet le 3 ember egy padra egymás mellé?", a: "3", b: "9", c: "6", correct: "c", exp: "Ez egy sorbarendezési probléma (permutáció). Az első helyre 3 ember ülhet. A másodikra a maradék 2. A harmadikra az utolsó 1. A lehetőségek száma: 3 × 2 × 1 = 6." },
+      { q: "Mi a {10, 10, 10, 10} adatsor átlaga?", a: "40", b: "4", c: "10", correct: "c", exp: "Ha egy adatsor minden eleme ugyanaz, akkor az átlaga, mediánja és módusza is megegyezik ezzel az elemmel. Kiszámolva: (10+10+10+10)/4 = 40/4 = 10." },
+      { q: "Feldobunk két pénzérmét. Mi a valószínűsége, hogy mindkettő fej lesz?", a: "1/2", b: "1/3", c: "1/4", correct: "c", exp: "A lehetséges kimenetelek: (fej,fej), (fej,írás), (írás,fej), (írás,írás). Ez összesen 4 eset. Ebből 1 a kedvező. A valószínűség P = 1/4." },
+      { q: "Egy sportboltban 3-féle színű (piros, kék, zöld) és 2-féle méretű (felnőtt, gyerek) labda van. Hányféle különböző labda van összesen?", a: "5", b: "6", c: "9", correct: "b", exp: "Minden színhez 2 méret tartozik, vagy minden mérethez 3 szín. A kombinációs lehetőségek száma a két tulajdonság darabszámának szorzata: 3 × 2 = 6." }
+    ];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    const quizForm = document.getElementById('quiz-form');
+    function populateQuiz() {
+      shuffle(questions);
+      quizForm.innerHTML = '';
+      questions.forEach((item, i) => {
+        const block = document.createElement('div');
+        block.className = 'question-block';
+        block.innerHTML = `
+          <div class="question">${i + 1}. ${item.q}</div>
+          <div class="answers">
+            <label><input type="radio" name="q${i}" value="a"/> a) ${item.a}</label>
+            <label><input type="radio" name="q${i}" value="b"/> b) ${item.b}</label>
+            <label><input type="radio" name="q${i}" value="c"/> c) ${item.c}</label>
+          </div>
+          <div class="explanation" id="exp${i}">${item.exp}</div>
+        `;
+        quizForm.appendChild(block);
+      });
+    }
+
+    function areAllQuestionsAnswered() {
+      for (let i = 0; i < questions.length; i++) {
+        if (!quizForm.querySelector(`input[name="q${i}"]:checked`)) return false;
+      }
+      return true;
+    }
+
+    function isPinValid(pin) {
+        return pin === MASTER_PIN || studentPins.has(pin);
+    }
+
+    function evaluateQuiz(isMaster = false) {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const selectedOption = quizForm.querySelector(`input[name="q${i}"]:checked`);
+        const explanation = document.getElementById(`exp${i}`);
+        const answerLabels = quizForm.querySelector(`input[name="q${i}"]`).parentElement.parentElement.querySelectorAll('label');
+        
+        if (selectedOption) {
+            const parentLabel = selectedOption.parentElement;
+            if (selectedOption.value === q.correct) {
+                score++;
+                parentLabel.classList.add('correct');
+                parentLabel.innerHTML = `✅ ${parentLabel.innerHTML}`;
+            } else {
+                parentLabel.classList.add('incorrect');
+                parentLabel.innerHTML = `❌ ${parentLabel.innerHTML}`;
+                const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+                correctLabel.classList.add('correct');
+            }
+        } else if (isMaster) {
+             const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+             correctLabel.classList.add('correct');
+        }
+        
+        if (selectedOption || isMaster) {
+            explanation.style.display = 'block';
+        }
+        
+        quizForm.querySelectorAll(`input[name="q${i}"]`).forEach(input => input.disabled = true);
+      });
+
+      if (isMaster) score = questions.length;
+      const percentage = ((score / questions.length) * 100).toFixed(0);
+      document.getElementById('result').innerHTML = `Eredmény: <b>${score}/${questions.length}</b> (${percentage}%)`;
+      document.getElementById('checkBtn').disabled = true;
+      document.getElementById('pin').disabled = true;
+    }
+    
+    function masterMode() {
+        questions.forEach((q, i) => {
+            const correctRadio = quizForm.querySelector(`input[name="q${i}"][value="${q.correct}"]`);
+            if (correctRadio) correctRadio.checked = true;
+        });
+        evaluateQuiz(true);
+        document.getElementById('admin-panel').style.display = 'block';
+    }
+
+    function checkAnswers() {
+        const pin = document.getElementById('pin').value;
+        if (!isPinValid(pin)) {
+            alert('Érvénytelen PIN-kód! Kérlek, próbáld újra.');
+            return;
+        }
+
+        if (pin === MASTER_PIN) {
+            masterMode();
+            return;
+        }
+
+        if (!areAllQuestionsAnswered()) {
+            alert('Kérlek, válaszolj az összes kérdésre az ellenőrzés előtt!');
+            return;
+        }
+        
+        evaluateQuiz();
+    }
+
+    document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+    document.getElementById('pin').addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            checkAnswers();
+        }
+    });
+
+    // Induláskor
+    window.onload = function() {
+        createInitialPins();
+        populateQuiz();
+    };
+
+  </script>
+</body>
+</html>

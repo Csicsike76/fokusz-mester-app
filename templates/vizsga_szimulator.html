@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Vizsga Szimulátor - Megbízható Feladatsorok</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --kek: #005A9C; --piros: #CD2A3E; --zold: #436F4D; --feher: #FFFFFF;
+            --sotet: #2c3e50; --vilagos-szurke: #f0f4f8; --szoveg: #34495e;
+            --card-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--vilagos-szurke); color: var(--szoveg); line-height: 1.6; padding: 20px; }
+        .container { max-width: 800px; margin: 2rem auto; }
+        .simulator-card { background: var(--feher); border-radius: 16px; box-shadow: var(--card-shadow); overflow: hidden; border-top: 8px solid var(--zold); }
+        .simulator-header { padding: 2rem; text-align: center; }
+        .simulator-header .icon { font-size: 4rem; line-height: 1; }
+        .simulator-header h1 { font-family: 'Roboto Slab', serif; color: var(--sotet); margin: 1rem 0 0.5rem 0; }
+        .simulator-header p { color: #6c757d; max-width: 500px; margin: auto; }
+        .simulator-body { padding: 0 2rem 2rem 2rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .form-group select, .form-group input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; font-family: 'Roboto', sans-serif; }
+        .btn-submit { width: 100%; padding: 1rem; border-radius: 8px; text-decoration: none; font-weight: 700; transition: all 0.3s; border: none; background-color: var(--zold); color: var(--feher); font-size: 1.2rem; text-align: center; cursor: pointer; margin-top: 1.5rem; }
+        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .feedback-message { display: none; margin-top: 1.5rem; padding: 1rem; border-radius: 8px; background-color: #e8f5e9; border: 2px solid var(--zold); text-align: center; font-weight: 500; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="simulator-card">
+            <div class="simulator-header">
+                <div class="icon">📝</div>
+                <h1>AI Vizsga Szimulátor</h1>
+                <p>Generálj végtelen számú, megbízható próbafeladatsort a témazáróidra!</p>
+            </div>
+            <div class="simulator-body">
+                <form id="simulator-form">
+                    <div class="form-group">
+                        <label for="subject-selector">1. Válassz tantárgyat:</label>
+                        <select id="subject-selector">
+                             <option value="Matematika">Matematika</option>
+                             <option value="Fizika">Fizika</option>
+                         </select>
+                    </div>
+                     <div class="form-group">
+                        <label for="grade-selector">2. Válassz évfolyamot:</label>
+                        <select id="grade-selector"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="num-questions">3. Kérdések száma:</label>
+                        <select id="num-questions">
+                            <option value="5">5 kérdés (Villámteszt)</option>
+                            <option value="10" selected>10 kérdés (Standard Témazáró)</option>
+                            <option value="15">15 kérdés (Nagy Felmérő)</option>
+                        </select>
+                    </div>
+                     <div class="form-group">
+                        <label for="focus-topics">4. Fókusz témakörök (opcionális):</label>
+                        <input type="text" id="focus-topics" placeholder="Pl. törtek, százalékszámítás, Newton törvényei...">
+                    </div>
+                    <button type="submit" class="btn-submit">Próbavizsga Generálása →</button>
+                    <div id="feedback" class="feedback-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const simulatorForm = document.getElementById('simulator-form');
+    const feedbackDiv = document.getElementById('feedback');
+    const subjectSelector = document.getElementById('subject-selector');
+    const gradeSelector = document.getElementById('grade-selector');
+
+    const gradesBySubject = { "Matematika": ["5. Osztály", "6. Osztály", "7. Osztály", "8. Osztály"], "Fizika": ["6. Osztály", "7. Osztály", "8. Osztály"] };
+
+    function updateGrades() {
+        const selectedSubject = subjectSelector.value;
+        gradeSelector.innerHTML = '';
+        gradesBySubject[selectedSubject].forEach(grade => {
+            const option = document.createElement('option');
+            option.value = grade; option.textContent = grade;
+            gradeSelector.appendChild(option);
+        });
+    }
+    subjectSelector.addEventListener('change', updateGrades);
+    updateGrades();
+
+    simulatorForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const subject = subjectSelector.value;
+        const grade = gradeSelector.value;
+        const numQuestions = document.getElementById('num-questions').value;
+        const focusTopics = document.getElementById('focus-topics').value;
+        
+        // --- A "PUSKA" ---
+        const knowledgeBase = `
+--- TUDÁSBÁZIS (CSAK EBBŐL DOLGOZZ!) ---
+Matematika 5. osztály: Műveletek törtekkel, Tizedestörtek, Természetes számok, Geometriai alapok.
+Matematika 6. osztály: Százalékszámítás, Arányosság, Tengelyes tükrözés, Egész számok, Oszthatóság.
+Matematika 7. osztály: Hatványozás, Algebrai kifejezések, Egyenletek, Háromszögek szögei.
+Matematika 8. osztály: Pitagorasz-tétel (a²+b²=c²), Lineáris függvény (y=mx+b), Nevezetes azonosságok ((a+b)²=a²+2ab+b²), Halmazok (metszet, unió), Henger térfogata (V=r²*π*m).
+Fizika 6. osztály: Halmazállapotok (szilárd, folyékony, gáz), Hőtágulás, Sűrűség (ρ=m/V).
+Fizika 7. osztály: Sebesség (v=s/t), Erő (F, Newton), Newton törvényei (I. Tehetetlenség, II. F=m*a, III. Hatás-ellenhatás), Munka (W=F*s).
+Fizika 8. osztály: Elektromos töltés (pozitív, negatív), Áramerősség (I, Amper), Feszültség (U, Volt), Ellenállás (R, Ohm), Ohm törvénye (I=U/R), Mágneses mező, Iránytű.
+--- TUDÁSBÁZIS VÉGE ---
+`;
+
+        const systemPrompt = `
+Viselkedj úgy, mint egy precíz, megbízható tanár, aki egy témazáró feladatsort állít össze! A feladatod, hogy a megadott paraméterek és a megadott TUDÁSBÁZIS alapján generálj egy próbavizsgát.
+
+**A vizsga paraméterei:**
+- Tantárgy: ${subject}
+- Évfolyam: ${grade}
+- Feladatok száma: ${numQuestions}
+- Fókuszban lévő témakörök: ${focusTopics || 'nincs megadva, általános feladatsor kell'}
+
+${knowledgeBase}
+
+**SZIGORÚ UTASÍTÁSOK:**
+1.  **CSAK a fenti Tudásbázisból dolgozz!** Ne használj semmilyen más, külső ismeretet! Ez garantálja a pontosságot.
+2.  Készíts egy ${numQuestions} kérdésből álló, vegyes típusú feladatsort (feleletválasztós, definíció, egyszerű számítás).
+3.  A kérdések nehézsége feleljen meg a megadott évfolyam szintjének.
+4.  **A feleletválasztós kérdéseknél SOHA NE használj betűjeleket (A, B, C)!** A válaszlehetőségeket egyszerű felsorolásként, jelölés nélkül add meg!
+5.  A feladatsor végén, "**--- MEGOLDÓKULCS ---**" címszó alatt add meg a helyes válaszokat, egyértelműen.
+
+Kezd a választ a feladatsor címével, pl. "Próbavizsga - Fizika 7. Osztály".
+`;
+        
+        navigator.clipboard.writeText(systemPrompt.trim()).then(() => {
+            feedbackDiv.innerHTML = `✅ Szuper! A személyre szabott vizsgasort a vágólapra másoltam. <br><br> <a href="https://gemini.google.com/" target="_blank" class="btn" style="background-color:var(--zold); color:white; width:auto;">Irány a Gemini!</a> <br><br> <small>Nyisd meg, illeszd be a promptot (Ctrl+V), és nyomj Entert!</small>`;
+            feedbackDiv.style.display = 'block';
+        }).catch(err => {
+            feedbackDiv.innerHTML = '❌ Hiba! A vágólapra másolás nem sikerült. Kérlek, próbáld újra!';
+        });
+    });
+});
+</script>
+</body>
+</html>

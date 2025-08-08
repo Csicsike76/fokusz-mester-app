@@ -1,0 +1,88 @@
+{
+  "title": "Gyakorlati Műhely",
+  "week": "2. hét",
+  "theme": "A \"beszélgetés\" az MI-vel: A promptolás alapjai",
+  
+    "access": "free",
+  "sections": [
+    {
+      "title": "1. Célkitűzés",
+      "content": "A műhely végére képes leszel egyszerű, de hatékony utasításokat (promptokat) adni egy szöveggeneráló MI-nek, és megérted, hogyan tudod a válaszait a saját céljaidnak megfelelően formálni a részletesség, a szerepkör és a formátum megadásával."
+    },
+    {
+      "title": "2. Szükséges Eszközök",
+      "content": "Válassz egyet az alábbi, ingyenesen elérhető szöveges MI-asszisztensek közül! A feladatokat bármelyikkel el tudod végezni.",
+      "tools": [
+        "Microsoft Copilot (régen Bing Chat) - Ingyenes, a legújabb GPT modelleket használja.",
+        "Google Gemini - A Google saját, modern MI-modellje.",
+        "ChatGPT (az ingyenes 3.5-ös verzió is tökéletes)"
+      ]
+    },
+    {
+      "title": "3. Bevezető: A jó kérés fél siker",
+      "content": "Képzeld el, hogy pizzát rendelsz. Ha csak annyit mondasz a telefonba, hogy \"Kérek egy pizzát!\", ki tudja, mit fogsz kapni. De ha azt mondod: \"Kérek egy nagy, sonkás-gombás pizzát, vékony tésztával, extra sajttal\", akkor pontosan azt kapod, amit szeretnél. A promptolás pont ilyen: a mesterséges intelligenciának adott pontos és részletes utasítás művészete. Minél jobban kérsz, annál jobbat kapsz."
+    },
+    {
+      "title": "4. Lépésről-lépésre Feladatok",
+      "tasks": [
+        {
+          "title": "1. Feladat: Az egyszerű kérés",
+          "instructions": "Kezdjük egy nagyon egyszerű prompttal! Írd be a választott MI-asszisztensbe a következőt, majd olvasd el a választ.",
+          "prompt": "Írj egy történetet egy sárkányról.",
+          "observation": "Figyeld meg, milyen történetet kaptál! Milyen a sárkány? Hol játszódik a történet? Az MI-nek magának kellett minden részletet kitalálnia."
+        },
+        {
+          "title": "2. Feladat: Részletek hozzáadása (Legyél specifikus!)",
+          "instructions": "Most tegyük a történetet sokkal érdekesebbé! Adjunk hozzá jelzőket, helyszínt és egy problémát. Másold be ezt az új, részletesebb promptot!",
+          "prompt": "Írj egy rövid, vicces történetet egy apró, zöld sárkányról, akinek a legnagyobb félelme a magasság, és egy hegy tetején él.",
+          "observation": "Hasonlítsd össze ezt a történetet az előzővel! Látod, hogyan változott meg a történet hangulata és tartalma, csak mert több információt adtál?"
+        },
+        {
+          "title": "3. Feladat: Szerepkör kiosztása (Legyen valaki!)",
+          "instructions": "Az MI sokkal jobban teljesít, ha megmondod neki, milyen \"szerepet\" játsszon. Próbáld ki ezt a promptot!",
+          "prompt": "Viselkedj úgy, mint egy mogorva kalózkapitány! Meséld el egy mondatban, mi bosszantott fel ma a legjobban a hajón.",
+          "observation": "Figyeld meg a stílust és a szóhasználatot! Az MI megpróbálja utánozni a kalózokról alkotott sztereotípiákat. A szerepkör segít a stílus és a hangnem beállításában."
+        },
+        {
+          "title": "4. Feladat: Formátum meghatározása (Hogyan nézzen ki?)",
+          "instructions": "Nem csak a tartalmat, a kinézetet is irányíthatod. Kérheted, hogy listát, táblázatot vagy vázlatot készítsen. Próbáld ki!",
+          "prompt": "Sorold fel 3 pontban, miért fontos a víz a növények számára. A célközönség egy 10 éves diák.",
+          "observation": "Az MI a kérésednek megfelelően, strukturált, pontokba szedett listát készített. Ez nagyon hasznos, ha információt szeretnél rendszerezni."
+        },
+        {
+          "title": "5. Feladat: Finomítás (Beszélgess vele!)",
+          "instructions": "Az MI emlékszik a beszélgetés korábbi részeire. Nem kell mindig új promptot írnod, finomíthatod is az előző választ. A 4. feladat után írd be ezt:",
+          "prompt": "Ez jó, de most írd át ugyanezt egy rövid, két soros vers formájában.",
+          "observation": "Látod? Az MI vette az előző témát (a víz fontossága), és a kérésednek megfelelően teljesen új formába öntötte. A legjobb eredményeket gyakran több lépéses \"beszélgetéssel\" lehet elérni."
+        }
+      ]
+    },
+    {
+      "title": "5. Tippek a sikeres promptoláshoz",
+      "tips": [
+        "Légy konkrét: A \"nagy kutya\" helyett jobb a \"hatalmas, golden retriever kutya\".",
+        "Adj kontextust: Mondd el, mi a célod, vagy ki a célközönség.",
+        "Rendelj szerepkört: \"Viselkedj úgy, mint egy...\"",
+        "Határozd meg a formátumot: \"Írj listát\", \"Készíts táblázatot\", \"Fogalmazz meg egy emailt\".",
+        "Kísérletezz és finomíts: Az első válasz ritkán tökéletes. Beszélgess, pontosíts, kérj változtatásokat!"
+      ]
+    },
+    {
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "points": [
+        "Honnan tudja ezt az MI? Az MI nem \"gondolkodik\", hanem hatalmas mennyiségű internetes szövegből tanult mintázatok alapján rakja össze a szavakat. Nem mindig tudja, mi a valóság. Kérdezz rá egy konkrét, de kevésbé ismert tényre! Vajon a válasza pontos lesz? Miért fontos a tényellenőrzés?",
+        "Kinek a hangján szól? A kalózos példa vicces volt, de mit jelent ez? Az MI az interneten talált sztereotípiákból táplálkozik. Milyen veszélyei lehetnek ennek, ha komolyabb témákról van szó?"
+      ]
+    },
+    {
+      "title": "7. Önálló Kihívás: Tervezd meg az álomhétvégédet!",
+      "instructions": "Most használd az összes tanult technikát egyetlen feladatban! A célod, hogy az MI segítségével megtervezz egy fantasztikus hétvégi programot.",
+      "taskDetails": [
+        "Szerepkör: \"Viselkedj úgy, mint egy tapasztalt utazásszervező.\"",
+        "Részletek: Add meg a helyszínt (lehet egy valós város vagy egy kitalált hely), az időtartamot (szombat-vasárnap), és hogy milyen típusú programokat szeretsz (pl. \"szeretem a természetet, a történelmet és a jó ételeket\").",
+        "Formátum: \"Készíts egy órára lebontott útitervet táblázatos formában.\""
+      ],
+      "advice": "Kísérletezz, amíg olyan választ nem kapsz, ami igazán tetszik! A legjobb eredményt mentsd le, vagy másold ki egy dokumentumba."
+    }
+  ]
+}

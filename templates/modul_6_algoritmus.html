@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>6. Modul: Az Algoritmus - Az AI Lelke</title>
+    <link rel="stylesheet" href="stilus.css">
+    <style>
+        .scratch-block {
+            background-color: #4d97ff;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            display: inline-block;
+            margin: 2px;
+        }
+        .scratch-input {
+            background-color: white;
+            color: black;
+            padding: 4px 8px;
+            border-radius: 5px;
+            border: 1px solid #c0c0c0;
+        }
+        .task-image {
+            max-width: 100%;
+            border: 2px solid var(--sotet);
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="content-wrapper">
+        <main>
+            <div class="container">
+                <section class="section">
+                    <h2 class="section-title">6. Modul: Az Algoritmus - Az AI Lelke 🤖</h2>
+                    <p class="section-subtitle">Elérkeztünk a legfontosabb részhez! Az algoritmus egy egyszerű, lépésről-lépésre útmutató, amit a gép követ. A mesterséges intelligencia nem más, mint rendkívül sok, okos algoritmus összessége. A legegyszerűbb MI is egy alapvető algoritmusra épül: a döntésre.</p>
+                    <p>Most te magad fogod megépíteni az első mesterséges intelligenciádat a Scratch segítségével!</p>
+                </section>
+
+                <section class="section">
+                    <h3 class="subject-title math-title" style="text-align: left;">A Feladat: Az Okos Asszisztens</h3>
+                    <p>Készítünk egy egyszerű programot, ahol a Scratch macska egy "okos asszisztensként" működik. Képes lesz egy kérdésre válaszolni, és a válaszod alapján döntést hozni.</p>
+                    
+                    <h4>1. Lépés: Indítsd el a Scratch-et!</h4>
+                    <p>Nyisd meg a Scratch online szerkesztőjét egy új fülön. Ha még nincs fiókod, a szüleiddel vagy a tanároddal készíthettek egyet.</p>
+                    <a href="https://scratch.mit.edu/projects/editor/" target="_blank" class="btn btn-primary math-btn" style="margin-top: 1rem;">Scratch Online Szerkesztő Megnyitása →</a>
+
+                    <h4 style="margin-top: 2rem;">2. Lépés: Építsd meg a kódot!</h4>
+                    <p>Húzd be a megfelelő blokkokat a parancsok közül, hogy a jobb oldali képen látható kódot kapd. A blokkokat a következő kategóriákban találod:</p>
+                    <ul>
+                        <li><span class="scratch-block">zöld zászlóra kattintáskor</span>: Események (Events)</li>
+                        <li><span class="scratch-block">kérdezd meg <span class="scratch-input">...</span> és várj</span>: Érzékelés (Sensing)</li>
+                        <li><span class="scratch-block">ha < > akkor, egyébként</span>: Vezérlés (Control)</li>
+                        <li><span class="scratch-block">< > = < ></span>: Műveletek (Operators)</li>
+                        <li><span class="scratch-block">válasz</span>: Érzékelés (Sensing)</li>
+                        <li><span class="scratch-block">mondd: <span class="scratch-input">...</span> 2 mp-ig</span>: Kinézet (Looks)</li>
+                    </ul>
+                </section>
+
+                <section class="section" style="text-align:center;">
+                    <h3 class="subject-title ai-title">A Kész Kód</h3>
+                    <p>A szkriptednek így kell kinéznie a végén:</p>
+                    <img src="https://i.imgur.com/8QWvLp7.png" alt="Scratch kód egy egyszerű MI-hez" class="task-image">
+                </section>
+                
+                <section class="section">
+                    <h3 class="subject-title math-title" style="text-align: left;">3. Lépés: Teszteld az MI-det!</h3>
+                    <p>Kattints a zöld zászlóra! A macska meg fogja kérdezni: "Esik az eső?".</p>
+                    <ul>
+                        <li>Próbálj meg válaszolni "igen"-nel. Mit mond a macska?</li>
+                        <li>Indítsd újra, és próbálj meg "nem"-mel válaszolni. Most mit mond?</li>
+                    </ul>
+                    <h4>Gratulálok, megépítetted az első MI-det!</h4>
+                    <p>Ez a program, bár egyszerű, de már rendelkezik az intelligencia alapvető jelével: képes volt egy bemeneti adat (`válasz`) alapján egy logikai döntést (`ha válasz = "igen"`) hozni, és ennek megfelelően cselekedni (mást mondani).</p>
+                    <p>A legbonyolultabb MI-k, az önvezető autóktól a nagy nyelvi modellekig, pontosan ugyanezen az elven működnek: rengeteg "HA...AKKOR..." típusú döntést hoznak másodpercenként.</p>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        window.addEventListener('load', () => fetch('navigacio.html').then(r => r.text()).then(d => document.getElementById('navbar-placeholder').innerHTML = d));
+    </script>
+</body>
+</html>

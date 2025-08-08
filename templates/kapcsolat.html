@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Kapcsolat</h2>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for c, m in messages %}<div class="flash {{ c }}">{{ m }}</div>{% endfor %}
+{% endwith %}
+
+<form method="post">
+  <label>Név <input name="nev"></label><br>
+  <label>Email <input name="email"></label><br>
+  <label>Üzenet <textarea name="uzenet"></textarea></label><br>
+  <button>Küldés</button>
+</form>
+{% endblock %}

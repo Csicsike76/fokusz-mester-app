@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktív Fizika Gyűjtemény</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stilus.css') }}">
+    <style>
+        /* Ezek a stílusok biztosítják a tartalom olvashatóságát a videó felett */
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+        .header h1 { text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.7); }
+        .header p { text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.6); }
+
+        /* A Fizika oldal kártya stílusainak átemelése */
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            min-height: 180px;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        .card-grade {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+        .grade-6 { background: linear-gradient(135deg, #009688, #00796B); }
+        .grade-7 { background: linear-gradient(135deg, #ff9800, #F57C00); }
+        .grade-8 { background: linear-gradient(135deg, #9c27b0, #7B1FA2); }
+    </style>
+</head>
+<body>
+    
+    <video autoplay muted loop id="bg-video">
+        <source src="{{ url_for('static', filename='video/video.mp4') }}" type="video/mp4">
+        Böngésződ nem támogatja a videó hátteret.
+    </video>
+    
+    {% include 'navigacio.html' %}
+
+    <div class="content-wrapper">
+        <header class="header">
+            <div class="container">
+                <h1>Interaktív Fizika Gyűjtemény</h1>
+                <p>Digitális segédlet és gyakorlórendszer általános iskolásoknak</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                
+                <section class="section">
+                    <h2 class="section-title">Tananyagok Évfolyamok Szerint</h2>
+                    <div class="card-grid">
+                        <a href="{{ url_for('Fizikakepletek_6_osztaly') }}" class="card grade-6">
+                            <div class="card-grade">6.</div>
+                            <div class="card-title">Osztály</div>
+                        </a>
+                        <a href="{{ url_for('Fizikakepletek_7_osztaly') }}" class="card grade-7">
+                            <div class="card-grade">7.</div>
+                            <div class="card-title">Osztály</div>
+                        </a>
+                        <a href="{{ url_for('Fizikakepletek_8_osztaly') }}" class="card grade-8">
+                            <div class="card-grade">8.</div>
+                            <div class="card-title">Osztály</div>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">Összesített Képletgyűjtemények</h2>
+                    <div class="card-grid">
+                        <a href="{{ url_for('Fizikateljes_kepletgyujtemeny_6_osztaly') }}" class="card grade-6">
+                            <div class="card-grade">6.</div>
+                            <div class="card-title">Teljes Gyűjtemény</div>
+                        </a>
+                        <a href="{{ url_for('Fizikateljes_kepletgyujtemeny_7_osztaly') }}" class="card grade-7">
+                            <div class="card-grade">7.</div>
+                            <div class="card-title">Teljes Gyűjtemény</div>
+                        </a>
+                        <a href="{{ url_for('Fizikateljes_kepletgyujtemeny_8_osztaly') }}" class="card grade-8">
+                            <div class="card-grade">8.</div>
+                            <div class="card-title">Teljes Gyűjtemény</div>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">Év Végi Összefoglaló Felmérők</h2>
+                    <div class="card-grid">
+                        <a href="{{ url_for('Fizikakviz_6_osztaly_ev_vegi_osszefoglalo') }}" class="card grade-6">
+                            <div class="card-grade">6.</div>
+                            <div class="card-title">Év Végi Felmérő</div>
+                        </a>
+                        <a href="{{ url_for('Fizikakviz_7_osztaly_ev_vegi_osszefoglalo') }}" class="card grade-7">
+                            <div class="card-grade">7.</div>
+                            <div class="card-title">Év Végi Felmérő</div>
+                        </a>
+                        <a href="{{ url_for('Fizika8kviz_8_osztaly_ev_vegi_osszefoglalo') }}" class="card grade-8">
+                            <div class="card-grade">8.</div>
+                            <div class="card-title">Év Végi Felmérő</div>
+                        </a>
+                    </div>
+                </section>
+                
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <img src="{{ url_for('static', filename='img/csicsike_logo.png') }}" alt="Csicsike Tudástár Logó" class="footer-logo">
+            <p>© 2025 Matematika Tanár 2030-ra. Minden jog fenntartva.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/kereso_adatbazis.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>
+</html>

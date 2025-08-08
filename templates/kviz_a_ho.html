@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - A hő</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: A hő, folyamatjellegű mennyiség</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Mi a hőmennyiség jele és mértékegysége?",
+                answers: { a: "Jele: Q, mértékegysége: joule (J).", b: "Jele: T, mértékegysége: Celsius-fok (°C).", c: "Jele: H, mértékegysége: watt (W)." },
+                correctAnswer: 'a',
+                explanation: "A hőmennyiséget (hőt) Q betűvel jelöljük, és mivel energiaátadási folyamatot ír le, a mértékegysége ugyanaz, mint az energiáé és a munkáé: a joule (J). ✅ Megoldás: Jele: Q, mértékegysége: joule (J)."
+            },
+            {
+                question: "Melyik állítás írja le helyesen a hő fogalmát?",
+                answers: { a: "A hő egy energiaátadási folyamat a hőmérséklet-különbség miatt.", b: "A hő a testben tárolt energia.", c: "A hő ugyanaz, mint a hőmérséklet." },
+                correctAnswer: 'a',
+                explanation: "Fontos különbség: a hőmérséklet egy test állapotát jellemzi, míg a hő egy folyamatot, az energia áramlását írja le a melegebb test felől a hidegebb felé. ✅ Megoldás: A hő egy energiaátadási folyamat a hőmérséklet-különbség miatt."
+            },
+            {
+                question: "Mi a kalorimetria?",
+                answers: { a: "A hőmennyiség mérésével foglalkozó tudományág.", b: "A hőmérséklet mérésének tudománya.", c: "A kalóriák számolása az ételekben." },
+                correctAnswer: 'a',
+                explanation: "A kalorimetria a hőmennyiség-mérésre szolgáló módszerek és eszközök (kaloriméterek) összessége. ✅ Megoldás: A hőmennyiség mérésével foglalkozó tudományág."
+            },
+            {
+                question: "Melyik folyamat jár hőfelvétellel?",
+                answers: { a: "Olvadás", b: "Fagyás", c: "Lecsapódás" },
+                correctAnswer: 'a',
+                explanation: "Az olvadáshoz energiát kell közölni a szilárd anyaggal, hogy a részecskéi kiszabaduljanak a kristályrácsból. Ez egy hőfelvétellel járó folyamat. A fagyás és a lecsapódás hőleadással jár. ✅ Megoldás: Olvadás."
+            },
+            {
+                question: "Mi a fajhő?",
+                answers: { a: "Megmutatja, mennyi hő szükséges 1 kg anyag hőmérsékletének 1 °C-kal történő emeléséhez.", b: "Egy anyag maximális hőmérséklete.", c: "Egy anyag sűrűsége." },
+                correctAnswer: 'a',
+                explanation: "A fajhő (jele: c) egy anyagra jellemző állandó. Azt fejezi ki, hogy az adott anyag mennyire 'nehezen' melegszik. A nagy fajhőjű anyagok (mint a víz) sok hőt tudnak elnyelni kis hőmérséklet-emelkedés mellett. ✅ Megoldás: Megmutatja, mennyi hő szükséges 1 kg anyag hőmérsékletének 1 °C-kal történő emeléséhez."
+            },
+            {
+                question: "Melyik állítás igaz a hőre?",
+                answers: { a: "Folyamatjellegű mennyiség.", b: "Állapotjelző mennyiség.", c: "Vektormennyiség." },
+                correctAnswer: 'a',
+                explanation: "A hő nem a test tulajdonsága, hanem egy folyamatot ír le: az energiaátadást. Ezért folyamatjellegű mennyiség. A hőmérséklet ezzel szemben állapotjelző. ✅ Megoldás: Folyamatjellegű mennyiség."
+            },
+            {
+                question: "Mekkora hőmennyiség szükséges 1 kg víz felmelegítéséhez 20°C-ról 21°C-ra? (A víz fajhője kb. 4200 J/(kg·°C))",
+                answers: { a: "4200 J", b: "210 J", c: "1 J" },
+                correctAnswer: 'a',
+                explanation: "A fajhő definíciója szerint 1 kg víz 1 °C-os melegítéséhez 4200 J hőenergia szükséges. ✅ Megoldás: 4200 J."
+            },
+            {
+                question: "Milyen irányú a hő áramlása?",
+                answers: { a: "A magasabb hőmérsékletű hely felől az alacsonyabb felé.", b: "Az alacsonyabb hőmérsékletű hely felől a magasabb felé.", c: "A hő nem áramlik, hanem a testekben van." },
+                correctAnswer: 'a',
+                explanation: "A termodinamika második főtétele szerint a hő önkéntesen mindig a melegebb helyről a hidegebb hely felé áramlik. A fordított folyamathoz munkavégzés szükséges (pl. hűtőszekrény). ✅ Megoldás: A magasabb hőmérsékletű hely felől az alacsonyabb felé."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Mi NEM a hő mértékegysége?",
+                answers: { a: "Joule (J)", b: "Newton (N)", c: "Kalória (cal)" },
+                correctAnswer: 'b',
+                explanation: "A hő egy energiaforma, mértékegysége a joule. Régebben a kalóriát is használták. A newton az erő mértékegysége. ✅ Megoldás: Newton (N)."
+            },
+            {
+                question: "Hogyan számoljuk ki a test által felvett vagy leadott hőt?",
+                answers: { a: "Q = c ⋅ m / ΔT", b: "Q = c ⋅ m ⋅ ΔT", c: "Q = m ⋅ ΔT / c" },
+                correctAnswer: 'b',
+                explanation: "A hőmennyiség (Q) egyenesen arányos a test fajhőjével (c), a tömegével (m) és a hőmérséklet-változással (ΔT). ✅ Megoldás: Q = c ⋅ m ⋅ ΔT."
+            },
+            {
+                question: "Melyik folyamat jár hőleadással?",
+                answers: { a: "Párolgás", b: "Fagyás", c: "Forrás" },
+                correctAnswer: 'b',
+                explanation: "Fagyáskor a folyadék részecskéi lelassulnak és kristályrácsba rendeződnek, miközben energiát (hőt) adnak le a környezetüknek. A párolgás és a forrás hőfelvétellel járó folyamatok. ✅ Megoldás: Fagyás."
+            },
+            {
+                question: "Egyenlő tömegű vas- és fadarabot ugyanannyi ideig melegítünk. Melyik lesz melegebb?",
+                answers: { a: "A fadarab.", b: "A vasdarab.", c: "Egyenlő hőmérsékletűek lesznek." },
+                correctAnswer: 'b',
+                explanation: "A vas fajhője sokkal kisebb, mint a fáé. Ez azt jelenti, hogy ugyanannyi hőenergiától a vas hőmérséklete sokkal jobban megemelkedik, mint a fáé. ✅ Megoldás: A vasdarab."
+            },
+            {
+                question: "Mi történik a hővel a hőegyensúly beállta után?",
+                answers: { a: "A hideg test tovább hűl.", b: "A nettó hőáramlás megszűnik.", c: "A meleg test tovább melegszik." },
+                correctAnswer: 'b',
+                explanation: "Amikor a két test hőmérséklete kiegyenlítődik, a két irányba történő energiaátadás mértéke egyenlővé válik, így a makroszkopikus, nettó hőáramlás a két test között leáll. ✅ Megoldás: A nettó hőáramlás megszűnik."
+            },
+            {
+                question: "Mi a belső energia?",
+                answers: { a: "Ugyanaz, mint a hő.", b: "A testet alkotó részecskék mozgási és kölcsönhatási energiáinak összege.", c: "A test mechanikai energiája." },
+                correctAnswer: 'b',
+                explanation: "A belső energia egy állapotjelző, a testben tárolt energia. A hő pedig a belső energia megváltozásának egyik módja (a másik a munkavégzés). ✅ Megoldás: A testet alkotó részecskék mozgási és kölcsönhatási energiáinak összege."
+            },
+            {
+                question: "Melyik állítás igaz a hőre és a hőmérsékletre?",
+                answers: { a: "A hő a test tulajdonsága, a hőmérséklet egy folyamat.", b: "A hőmérséklet a test tulajdonsága, a hő egy energiaátadási folyamat.", c: "A kettő ugyanazt jelenti." },
+                correctAnswer: 'b',
+                explanation: "Ez a legfontosabb különbségtétel. A hőmérséklet a test állapotát írja le (állapotjelző), a hő pedig a testek közötti energiaátadást (folyamatjellegű mennyiség). ✅ Megoldás: A hőmérséklet a test tulajdonsága, a hő egy energiaátadási folyamat."
+            },
+            {
+                question: "Miért érezzük a fém kilincset hidegebbnek, mint a fa ajtót, noha a hőmérsékletük azonos?",
+                answers: { a: "Mert a kilincs tényleg hidegebb.", b: "Mert a fém jobb hővezető, és gyorsabban vonja el a hőt a kezünktől.", c: "Mert a fa jobb hővezető." },
+                correctAnswer: 'b',
+                explanation: "A hőérzetünket a hőáramlás sebessége határozza meg. A fém sokkal jobban vezeti a hőt, mint a fa. Amikor megérintjük, gyorsan elvonja a hőt a kezünktől, ezért érezzük hidegebbnek, bár a hőmérsékletük valójában megegyezik. ✅ Megoldás: Mert a fém jobb hővezető, és gyorsabban vonja el a hőt a kezünktől."
+            },
+            {
+                question: "Mi az olvadáshő?",
+                answers: { a: "A test olvadáspontja.", b: "Az a hőmennyiség, ami 1 kg szilárd anyag megolvasztásához szükséges az olvadásponton.", c: "A fajhő másik neve." },
+                correctAnswer: 'b',
+                explanation: "Az olvadás során a test hőmérséklete nem változik. Az olvadáshő az az energia, ami a kristályrács felbontásához szükséges. Mértékegysége J/kg. ✅ Megoldás: Az a hőmennyiség, ami 1 kg szilárd anyag megolvasztásához szükséges az olvadásponton."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Milyen kölcsönhatás felelős a hő terjedéséért?",
+                answers: { a: "Gravitációs kölcsönhatás", b: "Mágneses kölcsönhatás", c: "Termikus kölcsönhatás (hőcsere)" },
+                correctAnswer: 'c',
+                explanation: "Azt a kölcsönhatást, amely a hőmérséklet-különbség miatt jön létre és energiaátadással jár, termikus kölcsönhatásnak vagy hőcserének nevezzük. ✅ Megoldás: Termikus kölcsönhatás (hőcsere)."
+            },
+            {
+                question: "Mi a hőtan első főtétele?",
+                answers: { a: "A hő a melegebb test felől a hidegebb felé áramlik.", b: "Lehetetlen olyan gépet készíteni, ami csak hőt von el és munkát végez.", c: "Egy test belső energiája a vele közölt hő és a rajta végzett munka révén változhat meg." },
+                correctAnswer: 'c',
+                explanation: "A hőtan I. főtétele az energiamegmaradás törvényének általánosítása. Kimondja, hogy egy rendszer belső energiájának megváltozása egyenlő a rendszerrel közölt hő és a rendszeren végzett munka összegével. ✅ Megoldás: Egy test belső energiája a vele közölt hő és a rajta végzett munka révén változhat meg."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "A hő egy energiafajta.", b: "A hőmérséklet egy állapotjelző.", c: "Egy testnek 'sok hője' van." },
+                correctAnswer: 'c',
+                explanation: "Ez a megfogalmazás fizikailag pontatlan. A testeknek belső energiájuk van, nem 'hőjük'. A hő az energiaátadás folyamatát jelöli két test között, nem egy tárolt tulajdonság. ✅ Megoldás: Egy testnek 'sok hője' van."
+            },
+            {
+                question: "Két különböző tömegű, de azonos anyagú és hőmérsékletű test közül melyiknek nagyobb a belső energiája?",
+                answers: { a: "A kisebb tömegűnek.", b: "Egyenlő.", c: "A nagyobb tömegűnek." },
+                correctAnswer: 'c',
+                explanation: "A belső energia a testet alkotó összes részecske energiájának összege. Mivel a nagyobb tömegű testben több részecske van, azonos hőmérsékleten (azonos átlagos mozgási energia mellett) a teljes belső energiája nagyobb lesz. ✅ Megoldás: A nagyobb tömegűnek."
+            },
+            {
+                question: "A víznek kiemelkedően magas a fajhője. Mit jelent ez a gyakorlatban?",
+                answers: { a: "Gyorsan felmelegszik és gyorsan lehűl.", b: "Nem tud megfagyni.", c: "Lassan melegszik fel és lassan hűl le, sok hőt képes tárolni." },
+                correctAnswer: 'c',
+                explanation: "A magas fajhő miatt sok energiát kell közölni a vízzel, hogy a hőmérséklete jelentősen megemelkedjen. Emiatt a nagy víztömegek (tengerek, tavak) kiegyenlítik az éghajlatot, mert lassan melegszenek fel és lassan is hűlnek le. ✅ Megoldás: Lassan melegszik fel és lassan hűl le, sok hőt képes tárolni."
+            },
+            {
+                question: "Mi a kalória?",
+                answers: { a: "A hőmérséklet mértékegysége.", b: "Az erő mértékegysége.", c: "A hőmennyiség egy régebbi mértékegysége." },
+                correctAnswer: 'c',
+                explanation: "A kalória (cal) a hőmennyiség egy korábban használt mértékegysége. 1 kalória az az energia, ami 1 gramm víz hőmérsékletét 1 °C-kal emeli meg. 1 cal ≈ 4,2 J. ✅ Megoldás: A hőmennyiség egy régebbi mértékegysége."
+            },
+            {
+                question: "Miért fontos a hőcsere a mindennapi életben?",
+                answers: { a: "Csak a fűtéshez kell.", b: "Csak a hűtéshez kell.", c: "Szinte mindenhol jelen van, a főzéstől a fűtésen át az időjárásig." },
+                correctAnswer: 'c',
+                explanation: "A hőcsere alapvető fizikai folyamat. Ezen alapul a fűtés, a hűtés, a főzés, a motorok működése, de az időjárási jelenségeket, például a szeleket is a Föld felszínének egyenlőtlen melegedése miatti hőcsere hozza létre. ✅ Megoldás: Szinte mindenhol jelen van, a főzéstől a fűtésen át az időjárásig."
+            },
+            {
+                question: "A hő...",
+                answers: { a: "...a hőmérséklet mértékegysége.", b: "...egy anyag.", c: "...az energiaátadás egyik formája." },
+                correctAnswer: 'c',
+                explanation: "A hő nem anyag és nem is állapotjelző, hanem az energiaátadás egyik módja (a másik a munkavégzés), amely hőmérséklet-különbség hatására jön létre. ✅ Megoldás: ...az energiaátadás egyik formája."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

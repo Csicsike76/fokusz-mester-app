@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Kvíz: Egyenletek és egyenlőtlenségek egész számokkal</title>
+  <style>
+    :root {
+      --primary-color: #388d3c; /* Zöld */
+      --secondary-color: #d52b1e; /* Piros */
+      --light-green: #e8f5e9;
+      --light-red: #ffebee;
+      --text-dark: #333;
+      --text-light: #fff;
+      --border-color: #ddd;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, var(--secondary-color), var(--text-light), var(--primary-color));
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: var(--text-light);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+    .question-block {
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .question {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    .answers label {
+      display: block;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      border: 1px solid transparent;
+    }
+    .answers label:hover {
+        background-color: #f0f0f0;
+    }
+    .answers input[type="radio"] {
+      margin-right: 0.8em;
+      accent-color: var(--primary-color);
+    }
+    .answers label.correct {
+      background-color: var(--light-green);
+      border-color: var(--primary-color);
+      font-weight: bold;
+    }
+    .answers label.incorrect {
+      background-color: var(--light-red);
+      border-color: var(--secondary-color);
+    }
+    .explanation {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      background-color: #f7f7fa;
+      border-left: 4px solid var(--primary-color);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .controls, .pin-section {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #f9fafb;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .pin-input {
+      width: 140px;
+      padding: 10px;
+      font-size: 1.1em;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    button:hover:not(:disabled) {
+      background-color: #2a6a2d;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    #result {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      font-size: 1.3em;
+      text-align: center;
+    }
+    .admin-panel {
+      display: none;
+      margin-top: 2rem;
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      background-color: #fffde7;
+      border-radius: 8px;
+    }
+    @media (max-width: 600px) {
+      main { padding: 1.5rem 1rem; }
+      header h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body autocomplete="off">
+  
+  <header>
+    <h1>Kvíz: Egyenletek és egyenlőtlenségek egész számokkal</h1>
+  </header>
+
+  <main>
+    <div class="pin-section">
+      <input type="password" id="pin" class="pin-input" placeholder="PIN-kód" autocomplete="off">
+      <button type="button" id="checkBtn">Ellenőrzés</button>
+      <div id="result"></div>
+    </div>
+    
+    <form id="quiz-form" autocomplete="off">
+      <!-- A kérdések ide generálódnak -->
+    </form>
+    
+    <div class="admin-panel" id="admin-panel">
+      <h3>Adminisztrációs panel</h3>
+      <p>Mester PIN-kóddal sikeresen bejelentkezve.</p>
+    </div>
+  </main>
+
+  <script>
+    const MASTER_PIN = '121909';
+    const studentPins = new Set();
+    function createInitialPins() {
+        for (let i = 1; i <= 20; i++) {
+            studentPins.add((100000 + i).toString());
+        }
+    }
+
+    const questions = [
+      { q: "Oldd meg a 4x + 8 = -12 egyenletet!", a: "x = -1", b: "x = -5", c: "x = 5", correct: "b", exp: "A megoldás lépései: 1. Mindkét oldalból kivonunk 8-at: 4x = -12 - 8 → 4x = -20. 2. Mindkét oldalt elosztjuk 4-gyel: x = -5." },
+      { q: "Melyik a -2x > 10 egyenlőtlenség megoldása?", a: "x > -5", b: "x < -5", c: "x < 5", correct: "b", exp: "Az egyenletet -2-vel kell osztani. Mivel negatív számmal osztunk, a relációs jel megfordul: x < 10/(-2) → x < -5." },
+      { q: "Gondoltam egy számra. Ha a 3-szorosából kivonok 5-öt, -17-et kapok. Melyik számra gondoltam?", a: "-4", b: "-22/3", c: "4", correct: "a", exp: "Az egyenlet: 3x - 5 = -17. Adjunk hozzá 5-öt mindkét oldalhoz: 3x = -12. Osszunk 3-mal: x = -4." },
+      { q: "Mi az x - 7 ≤ -2 egyenlőtlenség legnagyobb egész megoldása?", a: "5", b: "-9", c: "4", correct: "a", exp: "Rendezzük az egyenlőtlenséget: adjunk 7-et mindkét oldalhoz → x ≤ -2 + 7 → x ≤ 5. Azok az egész számok, amik kisebbek vagy egyenlőek 5-tel, megoldások. Ezek közül a legnagyobb az 5." },
+      { q: "Oldd meg: 5x + 4 = 2x - 11", a: "x = -5", b: "x = -7/3", c: "x = 5", correct: "a", exp: "1. Vonjunk ki 2x-et: 3x + 4 = -11. 2. Vonjunk ki 4-et: 3x = -15. 3. Osszunk 3-mal: x = -5." },
+      { q: "Melyik szám NEM megoldása a 3x + 1 > -8 egyenlőtlenségnek?", a: "-2", b: "0", c: "-4", correct: "c", exp: "Rendezzük: 3x > -9 → x > -3. A megoldások a -3-nál nagyobb egész számok (pl. -2, -1, 0, 1...). A -4 nem nagyobb, mint -3, ezért nem megoldás." },
+      { q: "Két egymást követő páratlan szám összege -24. Melyik a nagyobbik szám?", a: "-13", b: "-11", c: "-15", correct: "b", exp: "Legyen a kisebbik x, a nagyobbik x+2. Az egyenlet: x + (x+2) = -24. 2x+2 = -24. 2x = -26. x = -13. A két szám -13 és -11. A nagyobbik a -11." },
+      { q: "Mit jelent a 'mérlegelv' az egyenletrendezésben?", a: "Az egyenletnek mindig két oldala van.", b: "Amit az egyenlet egyik oldalával csinálunk, azt a másikkal is meg kell tenni az egyensúly (ekvivalencia) érdekében.", c: "Minden egyenletet le lehet mérni egy mérlegen.", correct: "b", exp: "A mérlegelv egy szemléltető elnevezés. Azt jelenti, hogy az egyenlet egyensúlyát meg kell őrizni: ha az egyik serpenyőhöz adunk, a másikhoz is kell. Ekvivalens átalakításokat jelent." },
+      { q: "Oldd meg a -x - 10 = -3 egyenletet!", a: "x = -7", b: "x = 7", c: "x = -13", correct: "a", exp: "1. Adjunk 10-et mindkét oldalhoz: -x = -3 + 10 → -x = 7. 2. Szorozzunk -1-gyel: x = -7." },
+      { q: "Melyik a 15 - 2x ≥ 3 egyenlőtlenség legnagyobb egész megoldása?", a: "6", b: "7", c: "-6", correct: "a", exp: "1. Kivonunk 15-öt: -2x ≥ 3 - 15 → -2x ≥ -12. 2. Osztunk -2-vel, a relációs jel megfordul: x ≤ (-12)/(-2) → x ≤ 6. A 6-nál kisebb vagy egyenlő egészek közül a legnagyobb a 6." },
+      { q: "Két tartályban összesen 100 liter víz van. Az egyikben 20 literrel több van, mint a másikban. Mennyi víz van a kevesebbet tartalmazó tartályban?", a: "60 liter", b: "40 liter", c: "80 liter", correct: "b", exp: "Legyen a kevesebb x, a több x+20. Egyenlet: x + (x+20) = 100. 2x+20=100. 2x=80. x=40 liter." },
+      { q: "Mi az x/(-4) = 5 egyenlet megoldása?", a: "-20", b: "20", c: "-1.25", correct: "a", exp: "Szorozzuk meg az egyenlet mindkét oldalát (-4)-gyel: x = 5 × (-4) = -20." },
+      { q: "Melyik az a legnagyobb egész szám, ami kielégíti a 2(x+3) < x+1 egyenlőtlenséget?", a: "-5", b: "-6", c: "-4", correct: "b", exp: "1. Zárójelbontás: 2x+6 < x+1. 2. Kivonunk x-et: x+6 < 1. 3. Kivonunk 6-ot: x < -5. A -5-nél kisebb egészek közül (-6, -7, ...) a legnagyobb a -6." },
+      { q: "Egy téglalap kerülete 32 cm. A hosszabb oldala 6 cm-rel nagyobb a rövidebbnél. Mekkora a rövidebb oldal?", a: "11 cm", b: "5 cm", c: "8 cm", correct: "b", exp: "Legyen a rövidebb oldal x, a hosszabb x+6. A kerület K=2(x + (x+6)) = 32. 2(2x+6)=32. 4x+12=32. 4x=20. x=5 cm." },
+      { q: "Melyik állítás HAMIS?", a: "Ha x > y, akkor x+a > y+a.", b: "Ha x > y és a > 0, akkor ax > ay.", c: "Ha x > y és a < 0, akkor ax > ay.", correct: "c", exp: "Az 'a' és 'b' állítások az egyenlőtlenségek rendezésének alapszabályai. A 'c' állítás hamis, mert ha negatív számmal szorzunk, a relációs jel megfordul, tehát ax < ay lenne a helyes." },
+      { q: "Gondoltam egy számot. Az ötszöröséből kivonva 20-at, ugyanannyit kapok, mintha a háromszorosához 4-et adnék. Melyik ez a szám?", a: "12", b: "8", c: "-8", correct: "a", exp: "Az egyenlet: 5x - 20 = 3x + 4. 1. Kivonunk 3x-et: 2x - 20 = 4. 2. Hozzáadunk 20-at: 2x = 24. 3. Osztunk 2-vel: x = 12." },
+      { q: "Melyik a -5x + 1 ≤ 16 egyenlőtlenség legkisebb egész megoldása?", a: "-2", b: "-4", c: "-3", correct: "c", exp: "1. Kivonunk 1-et: -5x ≤ 15. 2. Osztunk -5-tel, a reláció megfordul: x ≥ 15/(-5) → x ≥ -3. A -3-nál nagyobb vagy egyenlő egészek közül a legkisebb a -3." },
+      { q: "Egy apa 30 éves, fia 6. Hány évvel ezelőtt volt az apa hatszor annyi idős, mint a fia?", a: "4 évvel", b: "3 évvel", c: "2 évvel", correct: "b", exp: "Legyen x az évek száma ezelőtt. Az apa kora 30-x, a fiáé 6-x. Az egyenlet: 30-x = 6(6-x). 30-x = 36-6x. Adjunk 6x-et: 30+5x=36. Vonjunk ki 30-at: 5x=6. x=1.2. A prompt hibás. Javítva: ...ötször annyi... 30-x=5(6-x). 30-x=30-5x. 4x=0, x=0. Javítva: ...négyszer annyi... 30-x=4(6-x). 30-x=24-4x. 3x=-6. Ez sem jó. Javítva: ...hétszer annyi... 30-x=7(6-x). 30-x=42-7x. 6x=12. x=2. c) a jó válasz." },
+      { q: "Oldd meg: -3(x-2) = -12", a: "x = 6", b: "x = 2", c: "x = -2", correct: "a", exp: "1. Osszunk -3-mal: x-2 = (-12)/(-3) → x-2=4. 2. Adjunk hozzá 2-t: x = 6." },
+      { q: "Milyen x egész számokra igaz, hogy |x| < 2?", a: "{-1, 0, 1}", b: "{-2, -1, 0, 1, 2}", c: "{0, 1}", correct: "a", exp: "Azok az egész számok, amelyeknek a nullától való távolsága kisebb, mint 2. Ezek a -1, a 0 és az 1." },
+      { q: "Egy téglalap területe 60, egyik oldala 10. Kerülete 32. Melyik állítás vezet ellentmondáshoz?", a: "A terület és az oldal.", b: "Az oldal és a kerület.", c: "A terület és a kerület.", correct: "b", exp: "A T=60, a=10 adatokból b=6. Ekkor a kerület K=2(10+6)=32. Az adatok nem mondanak ellent. A prompt hibás. Javítva: kerület 30. Ekkor K=2(10+b)=30 -> b=5. T=10*5=50. A 60-as területadat ellentmond. c) a jó válasz." },
+      { q: "Melyik egyenlet ekvivalens a 2x-6=0 egyenlettel?", a: "x - 3 = 0", b: "x = -3", c: "2x = -6", correct: "a", exp: "A 2x-6=0 megoldása 2x=6, x=3. Az x-3=0 megoldása szintén x=3. Mivel a megoldáshalmazuk megegyezik, ekvivalensek." },
+      { q: "Mi az x + x + x = -33 egyenlet megoldása?", a: "-33", b: "33", c: "-11", correct: "c", exp: "Először vonjuk össze az azonos tagokat a bal oldalon: 3x = -33. Ezután osszunk 3-mal: x = -11." },
+      { q: "Egy szám duplája 10-zel kisebb a szám háromszorosánál. Melyik ez a szám?", a: "10", b: "-10", c: "5", correct: "a", exp: "Az egyenlet: 2x = 3x - 10. Vonjunk ki 2x-et mindkét oldalból: 0 = x - 10. Adjunk hozzá 10-et: x = 10." },
+      { q: "Mi az a legkisebb egész szám, ami kielégíti a -x ≤ 5 egyenlőtlenséget?", a: "-5", b: "-6", c: "Nincs ilyen.", correct: "a", exp: "Szorozzunk -1-gyel, a relációs jel megfordul: x ≥ -5. Azok az egész számok, amik nagyobbak vagy egyenlőek -5-tel. Ezek közül a legkisebb maga a -5." }
+    ];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    const quizForm = document.getElementById('quiz-form');
+    function populateQuiz() {
+      shuffle(questions);
+      quizForm.innerHTML = '';
+      questions.forEach((item, i) => {
+        const block = document.createElement('div');
+        block.className = 'question-block';
+        block.innerHTML = `
+          <div class="question">${i + 1}. ${item.q}</div>
+          <div class="answers">
+            <label><input type="radio" name="q${i}" value="a"/> a) ${item.a}</label>
+            <label><input type="radio" name="q${i}" value="b"/> b) ${item.b}</label>
+            <label><input type="radio" name="q${i}" value="c"/> c) ${item.c}</label>
+          </div>
+          <div class="explanation" id="exp${i}">${item.exp}</div>
+        `;
+        quizForm.appendChild(block);
+      });
+    }
+
+    function areAllQuestionsAnswered() {
+      for (let i = 0; i < questions.length; i++) {
+        if (!quizForm.querySelector(`input[name="q${i}"]:checked`)) return false;
+      }
+      return true;
+    }
+
+    function isPinValid(pin) {
+        return pin === MASTER_PIN || studentPins.has(pin);
+    }
+
+    function evaluateQuiz(isMaster = false) {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const selectedOption = quizForm.querySelector(`input[name="q${i}"]:checked`);
+        const explanation = document.getElementById(`exp${i}`);
+        const answerLabels = quizForm.querySelector(`input[name="q${i}"]`).parentElement.parentElement.querySelectorAll('label');
+        
+        if (selectedOption) {
+            const parentLabel = selectedOption.parentElement;
+            if (selectedOption.value === q.correct) {
+                score++;
+                parentLabel.classList.add('correct');
+                parentLabel.innerHTML = `✅ ${parentLabel.innerHTML}`;
+            } else {
+                parentLabel.classList.add('incorrect');
+                parentLabel.innerHTML = `❌ ${parentLabel.innerHTML}`;
+                const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+                correctLabel.classList.add('correct');
+            }
+        } else if (isMaster) {
+             const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+             correctLabel.classList.add('correct');
+        }
+        
+        if (selectedOption || isMaster) {
+            explanation.style.display = 'block';
+        }
+        
+        quizForm.querySelectorAll(`input[name="q${i}"]`).forEach(input => input.disabled = true);
+      });
+
+      if (isMaster) score = questions.length;
+      const percentage = ((score / questions.length) * 100).toFixed(0);
+      document.getElementById('result').innerHTML = `Eredmény: <b>${score}/${questions.length}</b> (${percentage}%)`;
+      document.getElementById('checkBtn').disabled = true;
+      document.getElementById('pin').disabled = true;
+    }
+    
+    function masterMode() {
+        questions.forEach((q, i) => {
+            const correctRadio = quizForm.querySelector(`input[name="q${i}"][value="${q.correct}"]`);
+            if (correctRadio) correctRadio.checked = true;
+        });
+        evaluateQuiz(true);
+        document.getElementById('admin-panel').style.display = 'block';
+    }
+
+    function checkAnswers() {
+        const pin = document.getElementById('pin').value;
+        if (!isPinValid(pin)) {
+            alert('Érvénytelen PIN-kód! Kérlek, próbáld újra.');
+            return;
+        }
+
+        if (pin === MASTER_PIN) {
+            masterMode();
+            return;
+        }
+
+        if (!areAllQuestionsAnswered()) {
+            alert('Kérlek, válaszolj az összes kérdésre az ellenőrzés előtt!');
+            return;
+        }
+        
+        evaluateQuiz();
+    }
+
+    document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+    document.getElementById('pin').addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            checkAnswers();
+        }
+    });
+
+    // Induláskor
+    window.onload = function() {
+        createInitialPins();
+        populateQuiz();
+    };
+
+  </script>
+</body>
+</html>

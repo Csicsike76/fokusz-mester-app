@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>8. Osztály Matematika – Központi Segédlet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <style>
+    :root{
+      --bg:#FCFCF9;--surface:#FFFFFF;--text:#13343B;--primary:#21808D;
+      --primary-hover:#1D7480;--card-shadow:0 2px 6px rgba(0,0,0,.08);
+      --chapter:#8B4513;--formula-bg:#FFF8DB;--example-bg:#E8F4FA;
+      --quiz-color:#28a745;--quiz-hover:#218838;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    html{scroll-behavior:smooth}
+    .container{display:flex;max-width:1400px;margin:auto;padding:1rem}
+    .header{text-align:center;margin-bottom:2rem;padding:1.5rem;background:linear-gradient(135deg,#21808D,#1D7480);color:white;border-radius:12px}
+    .header h1{font-size:2.2rem;margin-bottom:0.5rem}
+    .header p{font-size:1.1rem;opacity:0.9}
+    .toc{width:380px;flex-shrink:0;margin-right:2rem;position:sticky;top:20px;align-self:flex-start;max-height:90vh;overflow-y:auto;background:var(--surface);padding:1.5rem;border-radius:8px;box-shadow:var(--card-shadow)}
+    .toc h2{font-size:1.3rem;margin-bottom:1rem;color:var(--chapter);border-bottom:2px solid var(--chapter);padding-bottom:0.5rem}
+    .toc ul{list-style:none}
+    .toc .chapter{font-weight:600;color:var(--chapter);margin:1.5rem 0 0.8rem 0;font-size:1rem;border-left:4px solid var(--chapter);padding-left:0.5rem}
+    .toc .topic-item{margin:0.5rem 0;padding:0.5rem;border-radius:6px;background:#F8F9FA;border:1px solid #E9ECEF}
+    .toc .topic-link{color:var(--primary);text-decoration:none;font-size:0.9rem;display:block;margin-bottom:0.3rem;font-weight:500}
+    .toc .topic-link:hover{color:var(--primary-hover)}
+    .toc .topic-link.active{color:var(--primary-hover);font-weight:600}
+    .toc-quiz-btn{display:inline-block;background:var(--quiz-color);color:white;padding:0.25rem 0.5rem;border-radius:4px;text-decoration:none;font-size:0.75rem;font-weight:500;margin-top:0.2rem;transition:all 0.2s}
+    .toc-quiz-btn:hover{background:var(--quiz-hover);transform:translateY(-1px)}
+    .toc-quiz-btn::before{content:"🎯 ";margin-right:0.2rem}
+    main{flex:1}
+    .chapter-header{background:linear-gradient(135deg,var(--chapter),#A0522D);color:white;padding:1.5rem;border-radius:8px;margin:2rem 0 1rem 0}
+    .chapter-header h2{font-size:1.8rem;margin-bottom:0.5rem}
+    .chapter-header p{opacity:0.9}
+    .card{background:var(--surface);border-radius:8px;box-shadow:var(--card-shadow);padding:1.5rem;margin-bottom:1.5rem;border:1px solid #E7E4DC;transition:transform 0.2s;scroll-margin-top:20px;}
+    .card:hover{transform:translateY(-2px)}
+    .card h3{margin-bottom:0.8rem;font-size:1.3rem;color:var(--chapter)}
+    .card p{margin-bottom:1rem;text-align:justify}
+    .diagram-container {text-align:center;background-color:var(--example-bg);border:1px solid #cce5ff;border-radius:8px;padding:1rem;margin:1.5rem 0;}
+    .diagram-container svg {max-width:100%;height:auto;}
+    .formula,.example{padding:1rem;border-radius:6px;margin:1rem 0;font-size:0.95rem;border-left:4px solid}
+    .formula{background:var(--formula-bg);border-left-color:#DAA520}
+    .example{background:var(--example-bg);border-left-color:#4682B4}
+    .formula strong,.example strong{color:#333}
+    .quiz-btn{display:inline-block;margin-top:1rem;background:var(--quiz-color);color:#fff;
+             padding:0.7rem 1.3rem;border-radius:6px;text-decoration:none;font-weight:500;
+             transition:all 0.3s;border:none;cursor:pointer}
+    .quiz-btn:hover{background:var(--quiz-hover);transform:translateY(-1px);box-shadow:0 4px 8px rgba(0,0,0,0.2)}
+    @media(max-width:768px){
+      .container{flex-direction:column}
+      .toc{width:100%;position:static;margin-bottom:1rem;max-height:none;order:-1}
+      .header h1{font-size:1.8rem}
+      .chapter-header h2{font-size:1.5rem}
+      .toc-quiz-btn{font-size:0.7rem;padding:0.2rem 0.4rem}
+    }
+    .toc::-webkit-scrollbar{width:8px}
+    .toc::-webkit-scrollbar-track{background:#f1f1f1;border-radius:4px}
+    .toc::-webkit-scrollbar-thumb{background:#888;border-radius:4px}
+    .toc::-webkit-scrollbar-thumb:hover{background:#555}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header" style="width:100%;margin-bottom:2rem">
+      <a href="{{ url_for('fooldal') }}" style="text-decoration: none; color: inherit;">
+        <h1>8. Osztály Matematika</h1>
+        <p>Interaktív Digitális Segédlet és Gyakorló Rendszer</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <nav id="toc" class="toc">
+      <h2>Tartalomjegyzék</h2>
+      <div class="chapter">1. FEJEZET: Intervallumok. Egyenlőtlenségek ℝ-ben</div>
+      <ul>
+        <li class="topic-item"><a href="#halmazok-meghataroza" class="topic-link">Halmazok meghatározása</a><a href="{{ url_for('kviz_halmazok_meghataroza') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#halmazok-relaciok" class="topic-link">Halmazműveletek</a><a href="{{ url_for('kviz_halmazok_relaciok') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#valos-szamok-abrazolas" class="topic-link">Valós számok ábrázolása</a><a href="{{ url_for('kviz_valos_szamok_abrazolas') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#intervallumok-abrazolas" class="topic-link">Intervallumok ábrázolása</a><a href="{{ url_for('kviz_intervallumok_abrazolas') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#intervallumok-muveletek" class="topic-link">Műveletek intervallumokkal</a><a href="{{ url_for('kviz_intervallumok_muveletek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#relacios-jelek" class="topic-link">Relációs jelek</a><a href="{{ url_for('kviz_relacios_jelek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#elso-foku-egyenlotlensegek" class="topic-link">Elsőfokú egyenlőtlenségek</a><a href="{{ url_for('kviz_elso_foku_egyenlotlensegek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#visszavezetett-egyenlotlensegek" class="topic-link">Visszavezethető egyenlőtlenségek</a><a href="{{ url_for('kviz_visszavezetett_egyenlotlensegek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+      </ul>
+      <div class="chapter">2. FEJEZET: Algebrai számítások ℝ-ben</div>
+      <ul>
+        <li class="topic-item"><a href="#valos-szamok-muveletek" class="topic-link">Műveletek valós számokkal</a><a href="{{ url_for('kviz_valos_szamok_muveletek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#betukkel-muveletek" class="topic-link">Műveletek betűkkel</a><a href="{{ url_for('kviz_betukkel_muveletek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#binom-negyzete" class="topic-link">Binom négyzete</a><a href="{{ url_for('kviz_binom_negyzete') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#rovidtett-keplet-alkalmazas" class="topic-link">Rövidített képletek</a><a href="{{ url_for('kviz_rovidtett_keplet_alkalmazas') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#tenyezokre-bontas-kiemeles" class="topic-link">Tényezőkre bontás: kiemelés</a><a href="{{ url_for('kviz_tenyezokre_bontas_kiemeles') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#tenyezokre-bontas-rovidtett" class="topic-link">Tényezőkre bontás: képletek</a><a href="{{ url_for('kviz_tenyezokre_bontas_rovidtett') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#tovabbi-tenyezokre-bontas" class="topic-link">További bontási módszerek</a><a href="{{ url_for('kviz_tovabbi_tenyezokre_bontas') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#algebrai-tortek" class="topic-link">Algebrai törtek</a><a href="{{ url_for('kviz_algebrai_tortek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#algebrai-tortek-muveletek" class="topic-link">Műveletek algebrai törtekkel</a><a href="{{ url_for('kviz_algebrai_tortek_muveletek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#masodfoku-egyenletek" class="topic-link">Másodfokú egyenletek</a><a href="{{ url_for('kviz_masodfoku_egyenletek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#masodfoku-feladatok" class="topic-link">Szöveges másodfokú feladatok</a><a href="{{ url_for('kviz_masodfoku_feladatok') }}" class="toc-quiz-btn">Kvíz →</a></li>
+      </ul>
+      <div class="chapter">3. FEJEZET: Függvények</div>
+      <ul>
+        <li class="topic-item"><a href="#fuggveny-fogalma" class="topic-link">A függvény fogalma</a><a href="{{ url_for('kviz_fuggveny_fogalma') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#fuggveny-grafikonja" class="topic-link">A függvény grafikonja</a><a href="{{ url_for('kviz_fuggveny_grafikonja') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#linearis-fuggvenyek" class="topic-link">Lineáris függvények</a><a href="{{ url_for('kviz_linearis_fuggvenyek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#linearis-abrazolas" class="topic-link">Lineáris függvények ábrázolása</a><a href="{{ url_for('kviz_linearis_abrazolas') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#adatok-rendezese" class="topic-link">Adatok rendezése</a><a href="{{ url_for('kviz_adatok_rendezese') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#statisztikai-abrazolas" class="topic-link">Statisztikai ábrázolás</a><a href="{{ url_for('kviz_statisztikai_abrazolas') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#centralis-tendencia" class="topic-link">Centrális tendencia</a><a href="{{ url_for('kviz_centralis_tendencia') }}" class="toc-quiz-btn">Kvíz →</a></li>
+      </ul>
+      <div class="chapter">4. FEJEZET: A térmértan elemei</div>
+      <ul>
+        <li class="topic-item"><a href="#pont-egyenes-sik" class="topic-link">Pont, egyenes, sík</a><a href="{{ url_for('kviz_pont_egyenes_sik') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#sik-megalapitas" class="topic-link">A sík meghatározása</a><a href="{{ url_for('kviz_sik_megalapitas') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#ket-egyenes-helyzete" class="topic-link">Két egyenes helyzete</a><a href="{{ url_for('kviz_ket_egyenes_helyzete') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#egyenes-sik-helyzete" class="topic-link">Egyenes és sík helyzete</a><a href="{{ url_for('kviz_egyenes_sik_helyzete') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#ket-sik-helyzete" class="topic-link">Két sík helyzete</a><a href="{{ url_for('kviz_ket_sik_helyzete') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#parhuzamos-sikok" class="topic-link">Párhuzamos síkok</a><a href="{{ url_for('kviz_parhuzamos_sikok') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#sikmetszetek" class="topic-link">Síkmetszetek</a><a href="{{ url_for('kviz_sikmetszetek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#meroleges-egyenesek" class="topic-link">Merőleges egyenesek és síkok</a><a href="{{ url_for('kviz_meroleges_egyenesek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#sikok-tavolsaga" class="topic-link">Síkok távolsága</a><a href="{{ url_for('kviz_sikok_tavolsaga') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#meroleges-sikok" class="topic-link">Merőleges síkok</a><a href="{{ url_for('kviz_meroleges_sikok') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#vetulet-sikra" class="topic-link">Vetület síkra</a><a href="{{ url_for('kviz_vetulet_sikra') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#egyenes-sik-hajlas" class="topic-link">Egyenes és sík hajlásszöge</a><a href="{{ url_for('kviz_egyenes_sik_hajlas') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#lapszog" class="topic-link">Lapszög</a><a href="{{ url_for('kviz_lapszog') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#harom-meroleges" class="topic-link">A három merőleges tétele</a><a href="{{ url_for('kviz_harom_meroleges') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#harom-meroleges-forditott" class="topic-link">A három merőleges tételének fordítottja</a><a href="{{ url_for('kviz_harom_meroleges_forditott') }}" class="toc-quiz-btn">Kvíz →</a></li>
+      </ul>
+      <div class="chapter">5. FEJEZET: Mértani testek</div>
+      <ul>
+        <li class="topic-item"><a href="#tavolsagmeres" class="topic-link">Távolságmérés testekben</a><a href="{{ url_for('kviz_tavolsagmeres') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#hajlasszogek" class="topic-link">Hajlásszögek kiszámítása</a><a href="{{ url_for('kviz_hajlasszogek') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#hasab-felszin-terfogat" class="topic-link">Hasáb felszíne, térfogata</a><a href="{{ url_for('kviz_hasab_felszin_terfogat') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#gula-felszin-terfogat" class="topic-link">Gúla felszíne, térfogata</a><a href="{{ url_for('kviz_gula_felszin_terfogat') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#csonka-gula" class="topic-link">Csonka gúla</a><a href="{{ url_for('kviz_csonka_gula') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#henger-felszin-terfogat" class="topic-link">Henger felszíne, térfogata</a><a href="{{ url_for('kviz_henger_felszin_terfogat') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#kup-felszin-terfogat" class="topic-link">Kúp felszíne, térfogata</a><a href="{{ url_for('kviz_kup_felszin_terfogat') }}" class="toc-quiz-btn">Kvíz →</a></li>
+        <li class="topic-item"><a href="#gomb-felszin-terfogat" class="topic-link">Gömb felszíne, térfogata</a><a href="{{ url_for('kviz_gomb_felszin_terfogat') }}" class="toc-quiz-btn">Kvíz →</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <div class="card" id="keplet-gyujtemeny">
+        <h3>Képlet- és Tételgyűjtemény</h3>
+        <p>Az alábbi gombra kattintva megnyithatod a 8. osztályos tananyag összes fontos képletét és tételét egy külön oldalon a könnyebb áttekintés és tanulás érdekében.</p>
+        <a class="quiz-btn" href="{{ url_for('teljes_kepletgyujtemeny_8_osztaly') }}" style="background-color: var(--primary); width: 100%; text-align: center;">
+          📚 Teljes Képletgyűjtemény Megnyitása →
+        </a>
+      </div>
+      
+      <div class="chapter-header">
+        <h2>1. FEJEZET</h2>
+        <p>Intervallumok. Egyenlőtlenségek ℝ-ben</p>
+      </div>
+      <section id="halmazok-meghataroza" class="card">
+          <h3>Halmazok meghatározása elemeik közös tulajdonságával</h3>
+          <p>A halmazokat meghatározhatjuk elemeik felsorolásával vagy elemeik közös tulajdonságának megadásával. A tulajdonságos meghatározás különösen hasznos végtelen halmazok esetében, ahol az elemek felsorolása nem lehetséges.</p>
+          <div class="formula"><strong>Jelölés:</strong> A = {x | P(x)}, ahol P(x) az x elemre vonatkozó tulajdonság</div>
+          <div class="example"><strong>Példa:</strong> A páros számok halmaza: A = {x ∈ ℕ | x = 2k, k ∈ ℕ}</div>
+          <a class="quiz-btn" href="{{ url_for('kviz_halmazok_meghataroza') }}">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="halmazok-relaciok" class="card">
+          <h3>Halmazok közötti reláció. Halmazokkal végzett műveletek</h3>
+          <p>A halmazok között különböző relációk léteznek (részhalmazok, egyenlőség), és velük különféle műveleteket végezhetünk (unió, metszet, különbség, komplemens).</p>
+          <div class="formula"><strong>Műveletek:</strong> A ∪ B (unió), A ∩ B (metszet), A \ B (különbség), A' (komplemens)</div>
+          <div class="example"><strong>Példa:</strong> Ha A = {1, 2, 3} és B = {2, 3, 4}, akkor A ∪ B = {1, 2, 3, 4}, A ∩ B = {2, 3}</div>
+          <a class="quiz-btn" href="{{ url_for('kviz_halmazok_relaciok') }}">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="valos-szamok-abrazolas" class="card">
+          <h3>Valós számok ábrázolása a számtengelyen</h3>
+          <p>A valós számokat a számtengely pontjainak megfeleltetjük. Minden valós számhoz pontosan egy pont tartozik, és minden ponthoz pontosan egy valós szám.</p>
+          <div class="formula"><strong>Megfeleltetés:</strong> ℝ ↔ számtengely pontjai (bijekció)</div>
+          <div class="example"><strong>Példa:</strong> A √2 ≈ 1,414 számot az 1 és 2 közé helyezzük el a számtengelyen</div>
+          <a class="quiz-btn" href="{{ url_for('kviz_valos_szamok_abrazolas') }}">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="intervallumok-abrazolas" class="card">
+          <h3>Intervallumok ábrázolása a számtengelyen</h3>
+          <p>Az intervallumok a számtengely összefüggő részeit reprezentálják. Megkülönböztetünk nyílt, zárt és félnyílt intervallumokat a végpontok tartozása szerint.</p>
+          <div class="formula"><strong>Jelölések:</strong> [a,b] (zárt), (a,b) (nyílt), [a,b) és (a,b] (félnyílt)</div>
+          <div class="example"><strong>Példa:</strong> [−2, 3) az összes x valós szám, amelyre −2 ≤ x < 3</div>
+          <a class="quiz-btn" href="{{ url_for('kviz_intervallumok_abrazolas') }}">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="intervallumok-muveletek" class="card">
+          <h3>Intervallumokkal végzett műveletek</h3>
+          <p>Az intervallumokkal is végezhetjük a halmazokra jellemző műveleteket: unió, metszet és komplemens. Az eredmény lehet intervallum vagy intervallumok uniója.</p>
+          <div class="formula"><strong>Műveletek:</strong> I₁ ∪ I₂, I₁ ∩ I₂, I₁ \ I₂</div>
+          <div class="example"><strong>Példa:</strong> [1,3] ∩ [2,5] = [2,3], [1,3] ∪ [2,5] = [1,5]</div>
+          <a class="quiz-btn" href="{{ url_for('kviz_intervallumok_muveletek') }}">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="relacios-jelek" class="card">
+          <h3>Valós számok halmazán értelmezett ≤, ≥ relációs jelek</h3>
+          <p>A valós számok között rendezési reláció van értelmezve. Ez lehetővé teszi a számok összehasonlítását és az egyenlőtlenségek felírását.</p>
+          <div class="formula"><strong>Tulajdonságok:</strong> reflexivitás, antiszimmetria, tranzitivitás (részben rendezett halmaz)</div>
+          <div class="example"><strong>Példa:</strong> Ha a ≤ b és b ≤ c, akkor a ≤ c (tranzitivitás)</div>
+          <a class="quiz-btn" href="{{ url_for('kviz_relacios_jelek') }}">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="elso-foku-egyenlotlensegek" class="card">
+          <h3>ax + b ≤ 0 alakú egyenlőtlenségek</h3>
+          <p>Az elsőfokú egyenlőtlenségek megoldását az egyenlőtlenség tulajdonságainak felhasználásával végezzük. A megoldás függ az x együtthatójának előjelétől.</p>
+          <div class="formula"><strong>Megoldás:</strong> Ha a > 0, akkor x ≤ −b/a; Ha a < 0, akkor x ≥ −b/a</div>
+          <div class="example"><strong>Példa:</strong> 3x − 6 ≤ 0 ⟹ 3x ≤ 6 ⟹ x ≤ 2</div>
+          <a class="quiz-btn" href="{{ url_for('kviz_elso_foku_egyenlotlensegek') }}">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+      <section id="visszavezetett-egyenlotlensegek" class="card">
+          <h3>ax + b ≤ 0 alakú egyenlőtlenségre visszavezethető egyenlőtlenségek</h3>
+          <p>Összetettebb egyenlőtlenségeket algebrai átalakításokkal egyszerű alakra hozhatunk. Ez magában foglalja a törtes és összetett egyenlőtlenségeket is.</p>
+          <div class="formula"><strong>Módszer:</strong> Átalakítás → ax + b ≤ 0 alak → megoldás</div>
+          <div class="example"><strong>Példa:</strong> 2x + 1 > 3x − 5 ⟹ −x + 6 > 0 ⟹ x < 6</div>
+          <a class="quiz-btn" href="{{ url_for('kviz_visszavezetett_egyenlotlensegek') }}">Gyakorló Kvíz a Témakörben →</a>
+      </section>
+
+      <div class="chapter-header">
+        <h2>2. FEJEZET</h2>
+        <p>Algebrai számítások ℝ-ben</p>
+      </div>
+      <section id="valos-szamok-muveletek" class="card"><h3>Valós számokkal végzett műveletek</h3><p>A valós számok halmaza (ℝ) magában foglalja a racionális (pl. 2, -5/3, 0.7) és irracionális (pl. √2, π) számokat. A velük végzett műveletek (összeadás, kivonás, szorzás, osztás) ugyanazokat a szabályokat követik, mint a racionális számoknál.</p><div class="formula"><strong>Tulajdonságok:</strong> kommutativitás, asszociativitás, disztributivitás</div><div class="example"><strong>Példa:</strong> 3 * (√2 + 5) = 3 * √2 + 3 * 5 = 3√2 + 15</div><a class="quiz-btn" href="{{ url_for('kviz_valos_szamok_muveletek') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="betukkel-muveletek" class="card"><h3>Betűkkel jelölt valós számokkal végzett műveletek</h3><p>Az algebrában betűket (változókat) használunk számok jelölésére. Az ilyen kifejezéseket algebrai kifejezéseknek nevezzük. A műveleteket (pl. összevonás) csak az egynemű tagok között végezhetjük el (ahol a változók és hatványaik megegyeznek).</p><div class="formula"><strong>Egynemű tagok:</strong> 3x²y és -5x²y. <strong>Nem egyneműek:</strong> 3x²y és 3xy²</div><div class="example"><strong>Példa:</strong> (4a + 2b) - (a - 3b) = 4a + 2b - a + 3b = 3a + 5b</div><a class="quiz-btn" href="{{ url_for('kviz_betukkel_muveletek') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="binom-negyzete" class="card"><h3>Binom négyzete. Két tag összege és különbsége</h3><p>A nevezetes azonosságok olyan szorzatok, melyek gyakran előfordulnak, és érdemes őket fejből tudni. A legfontosabbak a kéttagú összeg és különbség négyzete, valamint az összeg és különbség szorzata.</p><div class="formula"><strong>Azonosságok:</strong><br>(a + b)² = a² + 2ab + b²<br>(a - b)² = a² - 2ab + b²<br>(a + b)(a - b) = a² - b²</div><div class="example"><strong>Példa:</strong> (x + 3)² = x² + 2*x*3 + 3² = x² + 6x + 9</div><a class="quiz-btn" href="{{ url_for('kviz_binom_negyzete') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="rovidtett-keplet-alkalmazas" class="card"><h3>Rövidített számítási képletek alkalmazása</h3><p>A nevezetes azonosságok nemcsak szorzásra, hanem kifejezések egyszerűsítésére és tényezőkre bontására is használhatók. Segítségükkel bonyolultabb algebrai átalakításokat is elvégezhetünk.</p><div class="formula"><strong>Alkalmazás:</strong> Szorzás, egyszerűsítés, tényezőkre bontás.</div><div class="example"><strong>Példa:</strong> 102 * 98 = (100 + 2)(100 - 2) = 100² - 2² = 10000 - 4 = 9996</div><a class="quiz-btn" href="{{ url_for('kviz_rovidtett_keplet_alkalmazas') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="tenyezokre-bontas-kiemeles" class="card"><h3>Tényezőkre bontás közös tényező kiemelésével</h3><p>A tényezőkre bontás az a folyamat, amikor egy összeget szorzattá alakítunk. Ennek legegyszerűbb módja a közös tényező kiemelése a disztributivitás 'visszafelé' történő alkalmazásával.</p><div class="formula"><strong>Elv:</strong> ab + ac = a(b + c)</div><div class="example"><strong>Példa:</strong> 6x²y - 9xy = 3xy * 2x - 3xy * 3 = 3xy(2x - 3)</div><a class="quiz-btn" href="{{ url_for('kviz_tenyezokre_bontas_kiemeles') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="tenyezokre-bontas-rovidtett" class="card"><h3>Tényezőkre bontás rövidített képletekkel</h3><p>A nevezetes azonosságokat 'jobbról balra' olvasva tényezőkre bontási képleteket kapunk. Ez különösen hasznos a négyzetek különbsége és a teljes négyzetek esetében.</p><div class="formula"><strong>Képletek:</strong><br>a² - b² = (a + b)(a - b)<br>a² + 2ab + b² = (a + b)²<br>a² - 2ab + b² = (a - b)²</div><div class="example"><strong>Példa:</strong> x² - 16 = x² - 4² = (x + 4)(x - 4)</div><a class="quiz-btn" href="{{ url_for('kviz_tenyezokre_bontas_rovidtett') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="tovabbi-tenyezokre-bontas" class="card"><h3>További tényezőkre bontási módszerek</h3><p>Összetettebb, több tagú kifejezéseknél néha a csoportosításos módszer vezet célra. A tagokat párokba rendezzük, kiemelünk, majd egy újabb közös tényezőt emelünk ki.</p><div class="formula"><strong>Módszer:</strong> (ac + ad) + (bc + bd) = a(c + d) + b(c + d) = (a + b)(c + d)</div><div class="example"><strong>Példa:</strong> 3x + 3y + ax + ay = 3(x + y) + a(x + y) = (3 + a)(x + y)</div><a class="quiz-btn" href="{{ url_for('kviz_tovabbi_tenyezokre_bontas') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="algebrai-tortek" class="card"><h3>Algebrai törtek</h3><p>Az algebrai tört olyan tört, amelynek nevezőjében változó (betű) szerepel. A legfontosabb szabály, hogy a nevező értéke soha nem lehet nulla, ezért meg kell adnunk a változó(k) lehetséges értékeit (értelmezési tartomány).</p><div class="formula"><strong>Forma:</strong> P(x) / Q(x), ahol Q(x) ≠ 0</div><div class="example"><strong>Példa:</strong> A (x+1)/(x-3) tört értelmezve van, ha x-3 ≠ 0, azaz x ≠ 3.</div><a class="quiz-btn" href="{{ url_for('kviz_algebrai_tortek') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="algebrai-tortek-muveletek" class="card"><h3>Algebrai törtekkel végzett műveletek</h3><p>Az algebrai törtekkel ugyanúgy végezhetünk műveleteket, mint a számokkal: egyszerűsíthetünk (számlálót és nevezőt ugyanazzal a nem nulla kifejezéssel osztva), és összeadhatunk (közös nevezőre hozás után).</p><div class="formula"><strong>Egyszerűsítés:</strong> (ac)/(bc) = a/b, ahol c ≠ 0</div><div class="example"><strong>Példa:</strong> (x²-4)/(x+2) = (x-2)(x+2)/(x+2) = x-2, ha x ≠ -2</div><a class="quiz-btn" href="{{ url_for('kviz_algebrai_tortek_muveletek') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="masodfoku-egyenletek" class="card"><h3>Egy ismeretlenes másodfokú egyenletek</h3><p>Az ax² + bx + c = 0 (ahol a≠0) alakú egyenleteket másodfokú egyenleteknek nevezzük. Megoldásuk a másodfokú megoldóképlettel történik.</p><div class="formula"><strong>Megoldóképlet:</strong> x₁,₂ = (-b ± √(b²-4ac)) / 2a</div><div class="example"><strong>Példa:</strong> x² - 3x + 2 = 0. Itt a=1, b=-3, c=2. x₁,₂ = (3 ± √(9-8)) / 2 = (3 ± 1) / 2. Megoldások: x₁=2, x₂=1.</div><a class="quiz-btn" href="{{ url_for('kviz_masodfoku_egyenletek') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="masodfoku-feladatok" class="card"><h3>ax² + bx + c = 0 egyenletekkel megoldható feladatok</h3><p>Számos gyakorlati probléma (pl. területszámítás, fizikai mozgások) matematikai modellje egy másodfokú egyenlet. A szöveges feladatot le kell fordítani az algebra nyelvére, majd meg kell oldani az egyenletet.</p><div class="formula"><strong>Lépések:</strong> Értelmezés → Egyenlet felírása → Megoldás → Ellenőrzés és válasz</div><div class="example"><strong>Példa:</strong> Egy téglalap egyik oldala 3 cm-rel hosszabb a másiknál, területe 40 cm². Mekkorák az oldalai? x(x+3)=40 → x²+3x-40=0. Megoldás: x=5. Az oldalak 5 cm és 8 cm.</div><a class="quiz-btn" href="{{ url_for('kviz_masodfoku_feladatok') }}">Gyakorló Kvíz a Témakörben →</a></section>
+
+      <div class="chapter-header">
+        <h2>3. FEJEZET</h2>
+        <p>Függvények</p>
+      </div>
+      <section id="fuggveny-fogalma" class="card"><h3>A függvény fogalma. Megadási módjai</h3><p>A függvény egy hozzárendelés két halmaz elemei között, amely az első halmaz (értelmezési tartomány) minden eleméhez a második halmaz (értékkészlet) pontosan egy elemét rendeli. Megadható szabállyal, táblázattal vagy grafikonnal.</p><div class="formula"><strong>Jelölés:</strong> f: A → B, x ↦ f(x)</div><div class="example"><strong>Példa:</strong> f(x) = 2x + 1. Ez a függvény minden számhoz a kétszeresénél eggyel nagyobbat rendeli. f(3) = 2*3 + 1 = 7.</div><a class="quiz-btn" href="{{ url_for('kviz_fuggveny_fogalma') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="fuggveny-grafikonja" class="card"><h3>A függvény grafikonja</h3><p>A függvény grafikonja az (x, f(x)) koordinátájú pontok halmaza a derékszögű koordináta-rendszerben. A grafikon vizuálisan megjeleníti a függvény tulajdonságait, mint például a növekedést, csökkenést, zérushelyet.</p><div class="formula"><strong>Grafikon pontjai:</strong> G = {(x, y) | x ∈ ÉT, y = f(x)}</div><div class="example"><strong>Példa:</strong> Az f(x)=x+1 függvény grafikonján rajta van a (2;3) pont, mert f(2)=2+1=3.</div><a class="quiz-btn" href="{{ url_for('kviz_fuggveny_grafikonja') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="linearis-fuggvenyek" class="card"><h3>f(x) = ax + b alakú függvények</h3><p>Az f(x) = ax + b alakú függvényeket lineáris függvényeknek nevezzük, grafikonjuk egyenes. Az 'a' paraméter a meredekség (mennyit változik y, ha x eggyel nő), a 'b' pedig az y-tengelymetszet (ahol a grafikon metszi az y-tengelyt).</p><div class="formula"><strong>Meredekség:</strong> a. <strong>Y-tengelymetszet:</strong> b.</div><div class="example"><strong>Példa:</strong> f(x) = 2x - 3. Meredeksége a=2, az y-tengelyt a -3-nál metszi.</div><a class="quiz-btn" href="{{ url_for('kviz_linearis_fuggvenyek') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="linearis-abrazolas" class="card"><h3>f(x) = ax + b függvények grafikus ábrázolása</h3><p>Egy lineáris függvény grafikonjának megrajzolásához elég két pontot meghatározni. Leggyakrabban az y-tengelymetszetet (b) és a zérushelyet (ahol f(x)=0) használjuk, vagy az y-metszetből indulva a meredekség segítségével lépünk a következő pontra.</p><div class="formula"><strong>Módszer:</strong> 1. y-tengelyen 'b' bejelölése. 2. Innen a meredekség ('a') alapján a következő pont megkeresése (pl. a=2/3 -> 3 jobbra, 2 fel).</div><div class="example"><strong>Példa:</strong> f(x) = 2x-1. 1. Pont az y-tengelyen: -1. 2. Meredekség 2=2/1, tehát innen 1 jobbra, 2 fel.</div><a class="quiz-btn" href="{{ url_for('kviz_linearis_abrazolas') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="adatok-rendezese" class="card"><h3>Adatok rendezése és rendszerezése</h3><p>A statisztika adatok gyűjtésével, rendszerezésével és elemzésével foglalkozik. Az adatokat gyakorisági táblázatokba rendezhetjük, ami megmutatja, hogy egy-egy adat hányszor fordul elő.</p><div class="formula"><strong>Fogalmak:</strong> Adat, adatsor, gyakoriság.</div><div class="example"><strong>Példa:</strong> Kockadobások: 1, 4, 2, 4, 5, 4. A '4'-es dobás gyakorisága 3.</div><a class="quiz-btn" href="{{ url_for('kviz_adatok_rendezese') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="statisztikai-abrazolas" class="card"><h3>Statisztikai adatsorok mértani ábrázolása</h3><p>Az adatokat diagramok segítségével tehetjük szemléletessé. Az oszlopdiagram kategóriák összehasonlítására, a vonaldiagram időbeli változások követésére, a kördiagram pedig egy egész arányainak bemutatására alkalmas.</p><div class="formula"><strong>Típusok:</strong> Oszlopdiagram, vonaldiagram, kördiagram.</div><div class="example"><strong>Példa:</strong> Egy osztály félévi jegyeinek eloszlását kördiagrammal, a havi átlaghőmérsékletet vonaldiagrammal ábrázoljuk.</div><a class="quiz-btn" href="{{ url_for('kviz_statisztikai_abrazolas') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="centralis-tendencia" class="card"><h3>A centrális tendencia mutatói</h3><p>A centrális tendencia mutatói (középértékek) egyetlen számmal próbálják jellemezni az adatsor 'közepét', 'tipikus' értékét. A legfontosabbak az átlag (számtani közép), a medián (középső érték) és a módusz (leggyakoribb érték).</p><div class="formula"><strong>Átlag:</strong> Σx / n. <strong>Medián:</strong> a sorba rendezett adatsor középső eleme. <strong>Módusz:</strong> a leggyakoribb elem.</div><div class="example"><strong>Példa:</strong> Adatsor: 2, 5, 2, 3, 8. Átlag: 4. Sorba rendezve: 2, 2, 3, 5, 8. Medián: 3. Módusz: 2.</div><a class="quiz-btn" href="{{ url_for('kviz_centralis_tendencia') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      
+      <div class="chapter-header">
+        <h2>4. FEJEZET</h2>
+        <p>A térmértan elemei</p>
+      </div>
+      <section id="pont-egyenes-sik" class="card"><h3>Pont, egyenes, sík: jelölések, ábrázolás</h3><p>A térmértan alapfogalmai a pont, az egyenes és a sík. Ezeket nem definiáljuk, tulajdonságaik alapján képzeljük el őket. A pontokat nagybetűvel (A), az egyeneseket kisbetűvel (e), a síkokat nagybetűvel (S) vagy görög betűvel (α) jelöljük.</p><div class="formula"><strong>Jelölések:</strong> Pont: A, B, C... Egyenes: e, f, g... Sík: S, α, β...</div><div class="example"><strong>Példa:</strong> Egy kifeszített cérna az egyenest, egy füzetlap a síkot modellezi.</div><a class="quiz-btn" href="{{ url_for('kviz_pont_egyenes_sik') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="sik-megalapitas" class="card"><h3>A sík meghatározása</h3><p>Egy síkot egyértelműen meghatároz (vagy 'kifeszít') három, nem egy egyenesen lévő pont; egy egyenes és egy rá nem illeszkedő pont; két metsző egyenes; vagy két párhuzamos egyenes.</p><div class="formula"><strong>Esetek:</strong> (1) 3 pont; (2) egyenes + külső pont; (3) két metsző egyenes; (4) két párhuzamos egyenes.</div><div class="example"><strong>Példa:</strong> Egy háromlábú szék mindig stabil, mert a három lábának végpontja egyértelműen meghatároz egy síkot.</div><a class="quiz-btn" href="{{ url_for('kviz_sik_megalapitas') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="ket-egyenes-helyzete" class="card"><h3>Két egyenes kölcsönös helyzete a térben</h3><p>Két egyenes a térben lehet: metsző (egy közös pont), párhuzamos (egy síkban vannak, nincs közös pont), azonos (minden pontjuk közös), vagy kitérő (nincsenek egy síkban és nincs közös pontjuk).</p><div class="formula"><strong>Helyzetek:</strong> metsző, párhuzamos, azonos, kitérő.</div><div class="example"><strong>Példa:</strong> Egy autópálya-felüljáró és az alatta haladó út kitérő egyenesekre példa.</div><a class="quiz-btn" href="{{ url_for('kviz_ket_egyenes_helyzete') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="egyenes-sik-helyzete" class="card"><h3>Egyenes és sík kölcsönös helyzete</h3><p>Egy egyenes és egy sík a térben háromféle helyzetben lehet: az egyenes metszi a síkot (1 közös pont), párhuzamos a síkkal (0 közös pont), vagy az egyenes illeszkedik a síkra (végtelen sok közös pont).</p><div class="formula"><strong>Helyzetek:</strong> metsző, párhuzamos, illeszkedő.</div><div class="example"><strong>Példa:</strong> A szoba függőleges sarokéle metszi a padló síkját.</div><a class="quiz-btn" href="{{ url_for('kviz_egyenes_sik_helyzete') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="ket-sik-helyzete" class="card"><h3>Két sík kölcsönös helyzete</h3><p>Két különböző sík a térben kétféle helyzetben lehet: vagy párhuzamosak (nincs közös pontjuk), vagy metszik egymást (közös pontjaik egy egyenest, a metszésvonalat alkotják).</p><div class="formula"><strong>Helyzetek:</strong> párhuzamos (S₁ || S₂), metsző (S₁ ∩ S₂ = e).</div><div class="example"><strong>Példa:</strong> A szoba mennyezete és padlója párhuzamos síkok.</div><a class="quiz-btn" href="{{ url_for('kviz_ket_sik_helyzete') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="parhuzamos-sikok" class="card"><h3>Párhuzamos síkok</h3><p>Két sík párhuzamos, ha nincs közös pontjuk. Két párhuzamos sík távolsága a két síkra merőleges szakasz hossza, ez a távolság mindenütt állandó. Ha egy harmadik sík metszi őket, a metszésvonalak párhuzamosak lesznek.</p><div class="formula"><strong>Tétel:</strong> Ha S₁ || S₂ és S₃ metszi őket, akkor (S₁∩S₃) || (S₂∩S₃).</div><div class="example"><strong>Példa:</strong> Egy téglatest szemközti lapjai párhuzamos síkok.</div><a class="quiz-btn" href="{{ url_for('kviz_parhuzamos_sikok') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="sikmetszetek" class="card"><h3>Alapsíkkal párhuzamos síkmetszetek</h3><p>Ha egy testet (pl. gúla, kúp, hasáb, henger) az alaplapjával párhuzamos síkkal elvágunk, a kapott síkmetszet tulajdonságai a test típusától függnek. Hasáboknál egybevágó, gúláknál hasonló az alaplaphoz.</p><div class="formula"><strong>Hasáb:</strong> A metszet egybevágó az alappal. <strong>Gúla/Kúp:</strong> A metszet hasonló az alaphoz.</div><div class="example"><strong>Példa:</strong> Egy gúla magasságának felénél elvágva a síkmetszet területe negyede az alapterületnek.</div><a class="quiz-btn" href="{{ url_for('kviz_sikmetszetek') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="meroleges-egyenesek" class="card"><h3>Merőleges egyenesek, síkra merőleges egyenes</h3><p>Egy egyenes merőleges egy síkra, ha a sík minden, a döfésponton átmenő egyenesére merőleges. Elegendő, ha a sík két, egymást metsző egyenesére merőleges. A síkra merőleges egyenesek párhuzamosak egymással.</p><div class="formula"><strong>Jelölés:</strong> e ⊥ S.</div><div class="example"><strong>Példa:</strong> Egy épület függőleges fala merőleges a vízszintes alapra.</div><a class="quiz-btn" href="{{ url_for('kviz_meroleges_egyenesek') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="sikok-tavolsaga" class="card"><h3>Két párhuzamos sík távolsága</h3><p>Két párhuzamos sík távolsága az egyik sík egy tetszőleges pontjából a másik síkra bocsátott merőleges szakasz hossza. Ez a távolság a síkok minden pontjára nézve állandó.</p><div class="formula"><strong>Meghatározás:</strong> d(S₁, S₂) = |PS₂|, ahol P ∈ S₁ és PS₂ ⊥ S₂.</div><div class="example"><strong>Példa:</strong> Egy szoba belmagassága a padló és a mennyezet párhuzamos síkjainak távolsága.</div><a class="quiz-btn" href="{{ url_for('kviz_sikok_tavolsaga') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="meroleges-sikok" class="card"><h3>Merőleges síkok, átlós metszetek</h3><p>Két sík merőleges, ha hajlásszögük 90°. Az átlós metszet egy test két, nem egy lapon fekvő élére illeszkedő síkmetszet, melynek alakja a test tulajdonságaitól függ (pl. téglatestnél téglalap).</p><div class="formula"><strong>Jelölés:</strong> S₁ ⊥ S₂.</div><div class="example"><strong>Példa:</strong> Egy kocka szomszédos lapjai merőleges síkok.</div><a class="quiz-btn" href="{{ url_for('kviz_meroleges_sikok') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="vetulet-sikra" class="card"><h3>Pont, szakasz és egyenes vetülete a síkra</h3><p>Egy pont merőleges vetülete a pontból a síkra bocsátott merőleges talppontja. Egy alakzat vetületét a pontjainak vetületei alkotják. A vetület hossza maximum az eredeti hosszával egyenlő (párhuzamos esetben).</p><div class="formula"><strong>Speciális esetek:</strong> Síkra merőleges szakasz vetülete pont. Síkkal párhuzamos szakasz vetülete egybevágó szakasz.</div><div class="example"><strong>Példa:</strong> A Nap által délben vetett árnyék közelítőleg merőleges vetület.</div><a class="quiz-btn" href="{{ url_for('kviz_vetulet_sikra') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="egyenes-sik-hajlas" class="card"><h3>Egyenes és sík hajlásszöge</h3><p>Egy metsző egyenes és egy sík hajlásszöge az egyenes és a síkra eső merőleges vetülete által bezárt szög. A hajlásszög mindig 0° és 90° közé eső hegyesszög.</p><div class="formula"><strong>Speciális esetek:</strong> Ha az egyenes párhuzamos a síkkal, a hajlásszög 0°. Ha merőleges, akkor 90°.</div><div class="example"><strong>Példa:</strong> Egy lejtő hajlásszöge a lejtő és a vízszintes sík hajlásszöge.</div><a class="quiz-btn" href="{{ url_for('kviz_egyenes_sik_hajlas') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="lapszog" class="card"><h3>Lapszög, lapszöghöz tartozó síkszög</h3><p>Két metsző sík hajlásszögét lapszögnek nevezzük. Mértékét a síkszöggel adjuk meg, amelyet úgy kapunk, hogy a metszésvonal egy pontjában mindkét síkban merőlegest állítunk a metszésvonalra. E két merőleges szár szöge a síkszög.</p><div class="formula"><strong>Mértéke:</strong> 0° < α ≤ 90° (konvenció szerint a kisebbik szöget nézzük).</div><div class="example"><strong>Példa:</strong> Egy kocka szomszédos lapjainak lapszöge 90°.</div><a class="quiz-btn" href="{{ url_for('kviz_lapszog') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="harom-meroleges" class="card"><h3>A három merőleges tétele</h3><p>Ha egy síkon kívüli pontból egy síkbeli egyenesre merőlegest állítunk, annak talppontját a pont síkbeli vetületével összekötő egyenes is merőleges lesz a síkbeli egyenesre. (És fordítva is igaz).</p><div class="formula"><strong>Logika:</strong> A térbeli merőlegesség (ferde egyenes ⊥ síkbeli egyenes) és a síkbeli merőlegesség (vetület ⊥ síkbeli egyenes) kapcsolata.</div><div class="example"><strong>Példa:</strong> Egy kocka lapátlója merőleges egy kitérő alapélre, mert a vetülete (egy másik alapél) merőleges rá.</div><a class="quiz-btn" href="{{ url_for('kviz_harom_meroleges') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="harom-meroleges-forditott" class="card"><h3>A három merőleges tételének fordított tételei</h3><p>A tétel megfordítása is igaz: Ha egy ferde egyenes merőleges vetülete a síkon merőleges egy síkbeli egyenesre, akkor maga a ferde egyenes is merőleges a síkbeli egyenesre. Ez a tétel oda-vissza érvényes.</p><div class="formula"><strong>Kapcsolat:</strong> a ⊥ e ⇔ a' ⊥ e (ahol a' az 'a' vetülete).</div><div class="example"><strong>Példa:</strong> Egy ferde tetőn a szarufa vetülete a födémen merőleges az ereszcsatornára, ezért maga a szarufa is merőleges az ereszcsatornára.</div><a class="quiz-btn" href="{{ url_for('kviz_harom_meroleges_forditott') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      
+      <div class="chapter-header">
+        <h2>5. FEJEZET</h2>
+        <p>Egyes mértani testek felszíne és térfogata</p>
+      </div>
+      <section id="tavolsagmeres" class="card"><h3>Távolságmérés a mértani testek felszínén és belsejében</h3><p>Két pont távolsága a térben az őket összekötő egyenes szakasz (pl. testátló), amit Pitagorasz-tétellel számolunk. A felszínen megtett legrövidebb út a test kiterített hálóján (testhálón) lévő egyenes szakasz.</p><div class="formula"><strong>Belső távolság:</strong> Pitagorasz-tétel. <strong>Felszíni út:</strong> Testháló + Pitagorasz-tétel.</div><div class="example"><strong>Példa:</strong> Egy 10 cm élű kocka testátlója 10√3 ≈ 17.3 cm, de a felszínén a legrövidebb út a szemközti csúcsba 10√5 ≈ 22.4 cm.</div><a class="quiz-btn" href="{{ url_for('kviz_tavolsagmeres') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="hajlasszogek" class="card"><h3>Hajlásszögek kiszámítása</h3><p>Térbeli testek hajlásszögeit (egyenes-sík, sík-sík) a testen belüli, megfelelő derékszögű háromszögek segítségével számoljuk ki. A háromszög oldalait Pitagorasz-tétellel, a szögeket szögfüggvényekkel (sin, cos, tan) határozzuk meg.</p><div class="formula"><strong>Eszközök:</strong> Pitagorasz-tétel, sin(α), cos(α), tan(α).</div><div class="example"><strong>Példa:</strong> Egy 4m magas, 3m sugarú kúp alkotójának hajlásszöge az alaphoz α, amire tan(α)=4/3.</div><a class="quiz-btn" href="{{ url_for('kviz_hajlasszogek') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="hasab-felszin-terfogat" class="card"><h3>Az egyenes hasáb felszíne és térfogata</h3><p>Az egyenes hasáb felszíne a két egybevágó alaplap és a palást (oldallapok) területének összege. Térfogata az alapterület és a testmagasság szorzata.</p><div class="formula"><strong>Felszín:</strong> A = 2 * Tₐ + Tₚ = 2Tₐ + Kₐ*m <br><strong>Térfogat:</strong> V = Tₐ * m</div><div class="example"><strong>Példa:</strong> Egy 3cm élű kocka felszíne A=6*3²=54 cm², térfogata V=3³=27 cm³.</div><a class="quiz-btn" href="{{ url_for('kviz_hasab_felszin_terfogat') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="gula-felszin-terfogat" class="card"><h3>A szabályos gúla felszíne és térfogata</h3><p>A gúla felszíne az alaplap és a palást (oldallapok) területének összege. Térfogata az azonos alapú és magasságú hasáb térfogatának harmada.</p><div class="formula"><strong>Felszín:</strong> A = Tₐ + Tₚ <br><strong>Térfogat:</strong> V = (Tₐ * m) / 3</div><div class="example"><strong>Példa:</strong> Egy 6cm alapélű, 4cm magas négyzet alapú gúla térfogata V=(6²*4)/3 = 48 cm³.</div><a class="quiz-btn" href="{{ url_for('kviz_gula_felszin_terfogat') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="csonka-gula" class="card"><h3>A szabályos csonka gúla felszíne és térfogata</h3><p>A csonka gúla egy gúlából jön létre annak csúcsának levágásával. Felszíne az alaplap, a fedőlap és a trapéz alakú oldallapokból álló palást területének összege. Térfogatát az eredeti és a levágott gúla térfogatának különbségével számoljuk.</p><div class="formula"><strong>Felszín:</strong> A = T₁ + T₂ + Tₚ <br><strong>Térfogat:</strong> V = (m/3) * (T₁ + √(T₁T₂) + T₂)</div><div class="example"><strong>Példa:</strong> Egy virágcserép gyakran csonkagúla alakú.</div><a class="quiz-btn" href="{{ url_for('kviz_csonka_gula') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="henger-felszin-terfogat" class="card"><h3>Az egyenes körhenger felszíne és térfogata</h3><p>A henger felszíne a két kör alakú alaplap és a téglalap alakúra kiteríthető palást területének összege. Térfogata az alapterület és a magasság szorzata.</p><div class="formula"><strong>Felszín:</strong> A = 2πr² + 2πrm <br><strong>Térfogat:</strong> V = πr²m</div><div class="example"><strong>Példa:</strong> Egy 10cm magas, 3cm sugarú konzervdoboz térfogata V=π*3²*10=90π cm³.</div><a class="quiz-btn" href="{{ url_for('kviz_henger_felszin_terfogat') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="kup-felszin-terfogat" class="card"><h3>A kúp felszíne és térfogata</h3><p>A kúp felszíne a kör alakú alaplap és a körcikk alakú palást területének összege. Térfogata az azonos alapú és magasságú henger térfogatának harmada.</p><div class="formula"><strong>Felszín:</strong> A = πr² + πra (a=alkotó) <br><strong>Térfogat:</strong> V = (πr²m) / 3</div><div class="example"><strong>Példa:</strong> Egy 4cm magas, 3cm sugarú kúp térfogata V=(π*3²*4)/3=12π cm³.</div><a class="quiz-btn" href="{{ url_for('kviz_kup_felszin_terfogat') }}">Gyakorló Kvíz a Témakörben →</a></section>
+      <section id="gomb-felszin-terfogat" class="card"><h3>A gömb felszíne és térfogata</h3><p>A gömb felszíne a gömböt borító felület területe, ami pontosan négyszerese a gömb főkörének területének. Térfogata a gömb által elfoglalt tér nagysága.</p><div class="formula"><strong>Felszín:</strong> A = 4πr² <br><strong>Térfogat:</strong> V = (4/3)πr³</div><div class="example"><strong>Példa:</strong> Egy 3cm sugarú labda felszíne A=4π*3²=36π cm², térfogata V=(4/3)π*3³=36π cm³.</div><a class="quiz-btn" href="{{ url_for('kviz_gomb_felszin_terfogat') }}">Gyakorló Kvíz a Témakörben →</a></section>
+
+    </main>
+  </div>
+</body>
+</html>

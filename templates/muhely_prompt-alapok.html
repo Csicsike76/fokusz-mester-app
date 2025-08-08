@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 2. hét: A promptolás alapjai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #e3f2fd;
+            --example-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .prompt-example {
+            background-color: var(--example-bg);
+            border: 1px dashed var(--example-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>Gyakorlati Műhely</h1>
+            <p>2. hét: A "beszélgetés" az MI-vel: A promptolás alapjai</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A műhely végére képes leszel egyszerű, de hatékony utasításokat (promptokat) adni egy szöveggeneráló MI-nek, és megérted, hogyan tudod a válaszait a saját céljaidnak megfelelően formálni a <strong>részletesség, a szerepkör és a formátum</strong> megadásával.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Szükséges Eszközök</h2>
+                <p>Válassz egyet az alábbi, ingyenesen elérhető szöveges MI-asszisztensek közül! A feladatokat bármelyikkel el tudod végezni.</p>
+                <ul>
+                    <li><strong>Microsoft Copilot</strong> (régen Bing Chat) - Ingyenes, a legújabb GPT modelleket használja.</li>
+                    <li><strong>Google Gemini</strong> - A Google saját, modern MI-modellje.</li>
+                    <li><strong>ChatGPT</strong> (az ingyenes 3.5-ös verzió is tökéletes)</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. Bevezető: A jó kérés fél siker</h2>
+                <p>Képzeld el, hogy pizzát rendelsz. Ha csak annyit mondasz a telefonba, hogy "Kérek egy pizzát!", ki tudja, mit fogsz kapni. De ha azt mondod: "Kérek egy nagy, sonkás-gombás pizzát, vékony tésztával, extra sajttal", akkor pontosan azt kapod, amit szeretnél. A promptolás pont ilyen: a mesterséges intelligenciának adott <strong>pontos és részletes utasítás művészete</strong>. Minél jobban kérsz, annál jobbat kapsz.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>4. Lépésről-lépésre Feladatok</h2>
+
+                <div class="task-card">
+                    <h3>1. Feladat: Az egyszerű kérés</h3>
+                    <p>Kezdjük egy nagyon egyszerű prompttal! Írd be a választott MI-asszisztensbe a következőt, majd olvasd el a választ.</p>
+                    <div class="prompt-example">Írj egy történetet egy sárkányról.</div>
+                    <p><strong>Megfigyelés:</strong> Figyeld meg, milyen történetet kaptál! Milyen a sárkány? Hol játszódik a történet? Az MI-nek magának kellett minden részletet kitalálnia.</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: Részletek hozzáadása (Legyél specifikus!)</h3>
+                    <p>Most tegyük a történetet sokkal érdekesebbé! Adjunk hozzá jelzőket, helyszínt és egy problémát. Másold be ezt az új, részletesebb promptot!</p>
+                    <div class="prompt-example">Írj egy rövid, vicces történetet egy apró, zöld sárkányról, akinek a legnagyobb félelme a magasság, és egy hegy tetején él.</div>
+                    <p><strong>Megfigyelés:</strong> Hasonlítsd össze ezt a történetet az előzővel! Látod, hogyan változott meg a történet hangulata és tartalma, csak mert több információt adtál?</p>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: Szerepkör kiosztása (Legyen valaki!)</h3>
+                    <p>Az MI sokkal jobban teljesít, ha megmondod neki, milyen "szerepet" játsszon. Próbáld ki ezt a promptot!</p>
+                    <div class="prompt-example">Viselkedj úgy, mint egy mogorva kalózkapitány! Meséld el egy mondatban, mi bosszantott fel ma a legjobban a hajón.</div>
+                    <p><strong>Megfigyelés:</strong> Figyeld meg a stílust és a szóhasználatot! Az MI megpróbálja utánozni a kalózokról alkotott sztereotípiákat. A szerepkör segít a stílus és a hangnem beállításában.</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>4. Feladat: Formátum meghatározása (Hogyan nézzen ki?)</h3>
+                    <p>Nem csak a tartalmat, a kinézetet is irányíthatod. Kérheted, hogy listát, táblázatot vagy vázlatot készítsen. Próbáld ki!</p>
+                    <div class="prompt-example">Sorold fel 3 pontban, miért fontos a víz a növények számára. A célközönség egy 10 éves diák.</div>
+                    <p><strong>Megfigyelés:</strong> Az MI a kérésednek megfelelően, strukturált, pontokba szedett listát készített. Ez nagyon hasznos, ha információt szeretnél rendszerezni.</p>
+                </div>
+                 <div class="task-card">
+                    <h3>5. Feladat: Finomítás (Beszélgess vele!)</h3>
+                    <p>Az MI emlékszik a beszélgetés korábbi részeire. Nem kell mindig új promptot írnod, finomíthatod is az előző választ. A 4. feladat után írd be ezt:</p>
+                    <div class="prompt-example">Ez jó, de most írd át ugyanezt egy rövid, két soros vers formájában.</div>
+                    <p><strong>Megfigyelés:</strong> Látod? Az MI vette az előző témát (a víz fontossága), és a kérésednek megfelelően teljesen új formába öntötte. A legjobb eredményeket gyakran több lépéses "beszélgetéssel" lehet elérni.</p>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <h2>5. Tippek a sikeres promptoláshoz</h2>
+                <ul>
+                    <li><strong>Légy konkrét:</strong> A "nagy kutya" helyett jobb a "hatalmas, golden retriever kutya".</li>
+                    <li><strong>Adj kontextust:</strong> Mondd el, mi a célod, vagy ki a célközönség.</li>
+                    <li><strong>Rendelj szerepkört:</strong> "Viselkedj úgy, mint egy..."</li>
+                    <li><strong>Határozd meg a formátumot:</strong> "Írj listát", "Készíts táblázatot", "Fogalmazz meg egy emailt".</li>
+                    <li><strong>Kísérletezz és finomíts:</strong> Az első válasz ritkán tökéletes. Beszélgess, pontosíts, kérj változtatásokat!</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>6. Kritikai Gondolkodás Sarok</h2>
+                    <p>Most, hogy már tudsz "beszélgetni" az MI-vel, gondolkozz el ezen!</p>
+                    <ul>
+                        <li><strong>Honnan tudja ezt az MI?</strong> Az MI nem "gondolkodik", hanem hatalmas mennyiségű internetes szövegből tanult mintázatok alapján rakja össze a szavakat. Nem mindig tudja, mi a valóság. Kérdezz rá egy konkrét, de kevésbé ismert tényre! Vajon a válasza pontos lesz? Miért fontos a tényellenőrzés?</li>
+                        <li><strong>Kinek a hangján szól?</strong> A kalózos példa vicces volt, de mit jelent ez? Az MI az interneten talált sztereotípiákból táplálkozik. Milyen veszélyei lehetnek ennek, ha komolyabb témákról van szó?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>7. Önálló Kihívás: Tervezd meg az álomhétvégédet!</h2>
+                    <p>Most használd az összes tanult technikát egyetlen feladatban! A célod, hogy az MI segítségével megtervezz egy fantasztikus hétvégi programot.</p>
+                    <p>Írj egyetlen, részletes promptot, ami tartalmazza a következőket:</p>
+                    <ol>
+                        <li><strong>Szerepkör:</strong> "Viselkedj úgy, mint egy tapasztalt utazásszervező."</li>
+                        <li><strong>Részletek:</strong> Add meg a helyszínt (lehet egy valós város vagy egy kitalált hely), az időtartamot (szombat-vasárnap), és hogy milyen típusú programokat szeretsz (pl. "szeretem a természetet, a történelmet és a jó ételeket").</li>
+                        <li><strong>Formátum:</strong> "Készíts egy órára lebontott útitervet táblázatos formában."</li>
+                    </ol>
+                    <p>Kísérletezz, amíg olyan választ nem kapsz, ami igazán tetszik! A legjobb eredményt mentsd le, vagy másold ki egy dokumentumba.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Szuperképesség - M03: Személyre Szabott Tanulási Terv</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --primary-blue: #003366;
+            --primary-white: #FFFFFF;
+            --text-color: #333;
+            --bg-color: #f4f4f4;
+            --card-shadow: rgba(0, 0, 0, 0.08);
+            --accent-bg: #e3f2fd;
+            --example-border: var(--primary-blue);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-blue) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-red) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-blue);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .prompt-container {
+            position: relative;
+        }
+
+        .prompt-example {
+            background-color: var(--accent-bg);
+            border: 1px dashed var(--example-border);
+            padding: 1rem;
+            padding-right: 80px; /* Hely a gombnak */
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        
+        .copy-button:hover {
+            background-color: #385a3e;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-blue);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>AIMI Szuperképesség Műhely</h1>
+            <p>3. Műhely: Személyre Szabott Tanulási Terv</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A műhely végére képes leszel az MI segítségével egy komplett, egyhónapos tanulási tervet készíteni bármilyen új készség vagy hobbi elsajátításához. Megtanulod, hogyan határozz meg reális célokat, és hogyan kérj az MI-től egy strukturált, heti bontású tervet, ami elméleti és gyakorlati feladatokat is tartalmaz.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Bevezető: A Hegyi Túravezetőd</h2>
+                <p>Egy új készség elsajátítása olyan, mint megmászni egy hegyet. Elindulhatsz egyedül, térkép nélkül, és talán felérsz a csúcsra, de valószínűleg sokat fogsz bolyongani. Az MI ebben a helyzetben a te személyes hegyi túravezetőd. Nem ő mászik helyetted, de megmutatja a legjobb útvonalat, figyelmeztet a veszélyes szakaszokra, és segít bepakolni a megfelelő felszerelést. Ma megtanuljuk, hogyan kérjünk egy részletes útitervet ettől a digitális túravezetőtől.</p>
+            </section>
+            
+            <section class="workshop-section">
+                <h2>3. Lépésről-lépésre Feladatok</h2>
+                <p><strong>A mai projektünk:</strong> Megtanulunk jobban fotózni az okostelefonunkkal egy hónap alatt.</p>
+
+                <div class="task-card">
+                    <h3>1. Feladat: A Cél Pontos Meghatározása</h3>
+                    <p>Mielőtt tervet készítenénk, tudnunk kell, hova akarunk eljutni. A "megtanulni fotózni" túl tág cél. Legyünk konkrétabbak!</p>
+                     <p><strong>Feladat:</strong> Írd le a jegyzetedbe egyetlen, mérhető mondatban, hogy mit szeretnél elérni egy hónap alatt! Például:</p>
+                     <ul>
+                        <li>"Egy hónap múlva szeretnék képes lenni 5, kompozíciósan helyes, jól megvilágított portrét készíteni a barátaimról a telefonommal."</li>
+                        <li>"Egy hónap múlva szeretném megérteni a rekeszérték, záridő és ISO alapvető összefüggéseit."</li>
+                     </ul>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: A Tanulási Terv Generálása</h3>
+                    <p>Most, hogy megvan a cél, kérjük meg az MI-t, hogy készítsen hozzá egy útitervet!</p>
+                    <div class="prompt-container">
+                        <div class="prompt-example">Viselkedj úgy, mint egy profi fotográfia-oktató! A célom, hogy egy hónap alatt megtanuljak sokkal jobb fotókat készíteni az okostelefonommal. A végcélom: "[Ide másold be az előző feladatban megfogalmazott konkrét célodat!]".
+
+Készíts egy 4 hetes, heti bontású tanulási tervet számomra! Minden héthez tartozzon:
+1.  Egy fő elméleti téma, amit meg kell értenem.
+2.  Egy konkrét, heti gyakorlati fotós kihívás.
+3.  Javaslat 1-2 ingyenes online forrásra (YouTube videó vagy cikk), ami segít az adott heti témában.</div>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                    </div>
+                    <p><strong>Megfigyelés:</strong> Az MI egy strukturált, követhető tervet adott. Nemcsak megmondja, MIT tanulj, hanem azt is, HOGYAN (gyakorlati feladat) és MIBŐL (források).</p>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: A Terv Részletezése és Finomítása</h3>
+                    <p>Az alap terv jó, de néha szükség van mélyebb részletekre. Fúrjunk bele az egyik heti feladatba!</p>
+                     <div class="prompt-container">
+                        <div class="prompt-example">Nagyszerű a terv! Koncentráljunk az 1. hét gyakorlati kihívására. Adj 5 konkrét tippet vagy trükköt, amire egy teljesen kezdőnek figyelnie kell, amikor a "harmadolási szabályt" próbálja alkalmazni a fotóin!</div>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                    </div>
+                     <p><strong>Feladat:</strong> Olvasd el a kapott tippeket! Ez a lépés megmutatja, hogyan tudod az MI-t nemcsak tervezésre, hanem konkrét, mélyebb tudás megszerzésére is használni. A kapott tippek alapján próbáld ki a heti kihívást!</p>
+                </div>
+            </section>
+            
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>4. Kritikai Gondolkodás Sarok</h2>
+                    <ul>
+                        <li><strong>A Passzív Tanulás Csapdája:</strong> Az MI elkészítette a tervet és javasolt forrásokat. Hol van a te szereped abban, hogy a tanulás valóban megtörténjen? Miért nem elég csak elolvasni a tervet? Miért a gyakorlati kihívások elvégzése a legfontosabb lépés?</li>
+                        <li><strong>Forráskritika:</strong> Az MI által javasolt YouTube videók és cikkek vajon mindig a legjobb minőségűek? Hogyan tudnád leellenőrizni, hogy egy javasolt forrás megbízható és valóban hasznos-e? (Pl. megnézed a kommenteket, a készítő egyéb munkáit).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>5. Önálló Kihívás: A Te Személyes Készségfejlesztési Terved</h2>
+                    <p>Most tervezd meg a saját kalandodat!</p>
+                    <p><strong>A feladatod:</strong></p>
+                    <ol>
+                        <li>Válassz egy <strong>valódi készséget vagy hobbit</strong>, amibe mindig is bele akartál kezdeni (pl. egy hangszer, egy programozási nyelv alapjai, rajzolás, egy új sport).</li>
+                        <li>Fogalmazz meg egy <strong>konkrét, egy hónap alatt elérhető célt</strong> ezzel kapcsolatban.</li>
+                        <li>A tanult promptolási technikával készíttesd el az MI-vel a <strong>személyre szabott, 4 hetes tanulási tervedet</strong>.</li>
+                    </ol>
+                    <p>Mentsd le a kész tervet! Ez nem csak egy iskolai feladat, hanem a te személyes útiterved az első lépésekhez. Ha van kedved, vágj is bele!</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+<script>
+    function copyToClipboard(buttonElement) {
+        const promptText = buttonElement.parentElement.querySelector('.prompt-example').textContent;
+        navigator.clipboard.writeText(promptText).then(() => {
+            const originalText = buttonElement.textContent;
+            buttonElement.textContent = 'Másolva!';
+            setTimeout(() => {
+                buttonElement.textContent = originalText;
+            }, 2000);
+        }).catch(err => {
+            console.error('Hiba a másolás során', err);
+        });
+    }
+</script>
+</body>
+</html>

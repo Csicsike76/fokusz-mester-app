@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: A szabályos gúla felszíne és térfogata</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: A szabályos gúla felszíne és térfogata</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Mi a gúla felszínének általános képlete?", options: { a: "A = Alapterület * Testmagasság", b: "A = Alapterület + Palást területe", c: "A = 2 * Alapterület + Palást területe" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A felszín a testet határoló összes lap területének összege. 🔹 2. Lépés: A gúlának van egy alaplapja (Alapterület) és az oldallapokból álló palástja (Palást területe). ✅ Megoldás: A = Alapterület + Palást területe." },
+            { question: "Mi a gúla térfogatának általános képlete?", options: { a: "V = Alapterület * Testmagasság", b: "V = (Alapterület * Testmagasság) / 3", c: "V = Alapterület * Oldalél" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A gúla (és a kúp) térfogata mindig harmada az azonos alapterületű és magasságú hasáb (és henger) térfogatának. 🔹 2. Lépés: Ezért a hasáb térfogatképletét el kell osztanunk 3-mal. ✅ Megoldás: V = (Alapterület * Testmagasság) / 3." },
+            { question: "Miből áll egy szabályos gúla palástja?", options: { a: "egybevágó egyenlő szárú háromszögekből", b: "különböző háromszögekből", c: "téglalapokból" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A szabályos gúla alaplapja szabályos sokszög, és a magassága a középpontba esik. 🔹 2. Lépés: Emiatt minden oldaléle egyenlő hosszú, így az oldallapokat alkotó háromszögek egybevágóak és egyenlő szárúak. ✅ Megoldás: Egybevágó egyenlő szárú háromszögekből." },
+            { question: "Egy négyzet alapú gúla alapéle 6 cm, magassága 4 cm. Mennyi a térfogata?", options: { a: "144 cm³", b: "24 cm³", c: "48 cm³" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A térfogat V = (T_alap * m) / 3. Először az alapterület kell. 🔹 2. Lépés: Az alaplap egy 6 cm oldalú négyzet, területe T_alap = 6 * 6 = 36 cm². 🔹 3. Lépés: V = (36 cm² * 4 cm) / 3 = 144 / 3 = 48 cm³. ✅ Megoldás: 48 cm³." },
+            { question: "Egy négyzet alapú gúla alapéle 6 cm, az oldallapjának magassága 5 cm. Mekkora a palástjának a területe?", options: { a: "60 cm²", b: "30 cm²", c: "120 cm²" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A palást a 4 darab egybevágó háromszög területének összege. 🔹 2. Lépés: Egy oldallap területe = (alapél * oldallap magassága) / 2 = (6 * 5) / 2 = 15 cm². 🔹 3. Lépés: A palást területe = 4 * 15 cm² = 60 cm². ✅ Megoldás: 60 cm²." },
+            { question: "Az előző feladatban (alapél 6 cm, palást területe 60 cm²), mekkora a gúla teljes felszíne?", options: { a: "66 cm²", b: "96 cm²", c: "120 cm²" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Felszín = Alapterület + Palást területe. 🔹 2. Lépés: Az alapterület egy 6 cm-es négyzet területe: T_alap = 6 * 6 = 36 cm². 🔹 3. Lépés: Felszín = 36 cm² + 60 cm² = 96 cm². ✅ Megoldás: 96 cm²." },
+            { question: "Mi a 'tetraéder'?", options: { a: "egy négyzet alapú gúla", b: "egy hatszög alapú gúla", c: "egy háromszög alapú gúla" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A 'tetra' görög szó jelentése négy. A tetraédernek négy lapja van. 🔹 2. Lépés: Egy gúlának akkor van 4 lapja, ha van 1 alaplapja és 3 oldallapja. Ehhez az alaplapnak háromszögnek kell lennie. ✅ Megoldás: A tetraéder egy háromszög alapú gúla." },
+            { question: "Egy szabályos négyzet alapú gúla alapéle 10 cm, testmagassága 12 cm. Mekkora az oldallapjának a magassága?", options: { a: "13 cm", b: "11 cm", c: "12,5 cm" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az oldallap magassága (m_o), a testmagasság (m) és az alapél felének vetülete (a/2) egy derékszögű háromszöget alkotnak. 🔹 2. Lépés: A befogók: m=12 cm, a/2 = 10/2 = 5 cm. Az átfogó az m_o. 🔹 3. Lépés: Pitagorasz-tétel: 12² + 5² = (m_o)². 144 + 25 = 169. m_o = √169 = 13 cm. ✅ Megoldás: 13 cm." },
+            { question: "Ha egy gúla alaplapjának területét megduplázzuk, de a magassága nem változik, mi történik a térfogatával?", options: { a: "megduplázódik", b: "négyszeresére nő", c: "nem változik" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A térfogat képlete: V = (T_alap * m) / 3. 🔹 2. Lépés: Látható, hogy a térfogat egyenesen arányos az alapterülettel. Ha az egyik duplájára nő, a másik is. ✅ Megoldás: Megduplázódik." },
+            { question: "Ha egy gúla magasságát a harmadára csökkentjük, de az alaplapja nem változik, mi történik a térfogatával?", options: { a: "nem változik", b: "kilencedére csökken", c: "harmadára csökken" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A térfogat képlete: V = (T_alap * m) / 3. 🔹 2. Lépés: A térfogat egyenesen arányos a magassággal. Ha a magasság harmadolódik, a térfogat is. ✅ Megoldás: Harmadára csökken." },
+            { question: "Egy gúla alaplapja egy 5 cm oldalú szabályos háromszög, melynek területe kb. 10,8 cm². A gúla magassága 10 cm. Mekkora a térfogata?", options: { a: "108 cm³", b: "36 cm³", c: "54 cm³" }, correctAnswer: "b", explanation: "🔹 1. Lépés: V = (T_alap * m) / 3. 🔹 2. Lépés: Helyettesítsük be az adatokat: V = (10,8 cm² * 10 cm) / 3 = 108 / 3 = 36. ✅ Megoldás: 36 cm³." },
+            { question: "Egy gúla térfogata 50 cm³, alapterülete 25 cm². Milyen magas a gúla?", options: { a: "2 cm", b: "6 cm", c: "75 cm" }, correctAnswer: "b", explanation: "🔹 1. Lépés: V = (T_alap * m) / 3. Átrendezzük m-re: m = (3 * V) / T_alap. 🔹 2. Lépés: m = (3 * 50 cm³) / 25 cm² = 150 / 25 = 6 cm. ✅ Megoldás: 6 cm." },
+            { question: "Melyik test térfogata a nagyobb: egy 10 cm élű kockáé vagy egy 10 cm alapélű, 10 cm magas négyzet alapú gúláé?", options: { a: "a kockáé", b: "a gúláé", c: "egyenlőek" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A gúla térfogata mindig harmada az azonos alapú és magasságú hasábénak. 🔹 2. Lépés: Mivel a kocka egy ilyen hasáb, a térfogata háromszor nagyobb lesz, mint a gúláé. ✅ Megoldás: A kockáé." },
+            { question: "Mi a gúla testmagassága?", options: { a: "Az oldalél hossza.", b: "A csúcs merőleges távolsága az alaplap síkjától.", c: "Az oldallap magassága." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A testmagasság a gúla 'legmagasabb pontjának' távolsága az aljától. 🔹 2. Lépés: Ezt a távolságot mindig merőlegesen mérjük. ✅ Megoldás: A csúcs merőleges távolsága az alaplap síkjától." },
+            { question: "Egy szabályos gúla alaplapja és oldallapjai egybevágó szabályos háromszögek. Mi ez a test?", options: { a: "háromszög alapú hasáb", b: "szabályos tetraéder", c: "kocka" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ha az alaplap is szabályos háromszög, akkor ez egy háromszög alapú gúla. 🔹 2. Lépés: Ha az oldallapok is ugyanakkora szabályos háromszögek, akkor a testet 4 egybevágó szabályos háromszög határolja. Ezt nevezzük szabályos tetraédernek. ✅ Megoldás: Szabályos tetraéder." },
+            { question: "Egy gúla palástja 4 darab egyenlő szárú háromszögből áll. Milyen az alaplapja?", options: { a: "háromszög", b: "négyszög", c: "ötszög" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A gúla palástját az oldallapok alkotják. 🔹 2. Lépés: A gúlának annyi oldallapja van, ahány oldala az alaplapjának. Ha 4 oldallapja van, akkor az alaplapnak is 4 oldala kell, hogy legyen. ✅ Megoldás: Négyszög." },
+            { question: "Egy gúla felszíne 120 cm², a palástjának területe 80 cm². Mekkora az alapterülete?", options: { a: "40 cm²", b: "200 cm²", c: "1,5 cm²" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Felszín = Alapterület + Palást területe. 🔹 2. Lépés: Átrendezve: Alapterület = Felszín - Palást területe. 🔹 3. Lépés: Alapterület = 120 cm² - 80 cm² = 40 cm². ✅ Megoldás: 40 cm²." },
+            { question: "Ha egy gúla minden élét megduplázzuk, hányszorosára nő a térfogata?", options: { a: "kétszeresére", b: "négyszeresére", c: "nyolcszorosára" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A hasonlóság aránya k=2. 🔹 2. Lépés: A térfogatok aránya a hasonlóság arányának köbével (k³) egyenlő. 🔹 3. Lépés: k³ = 2³ = 8. ✅ Megoldás: Nyolcszorosára nő." },
+            { question: "Ha egy gúla minden élét megduplázzuk, hányszorosára nő a felszíne?", options: { a: "négyszeresére", b: "kétszeresére", c: "nyolcszorosára" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A hasonlóság aránya k=2. 🔹 2. Lépés: A felszínek (területek) aránya a hasonlóság arányának négyzetével (k²) egyenlő. 🔹 3. Lépés: k² = 2² = 4. ✅ Megoldás: Négyszeresére nő." },
+            { question: "Egy gúla alaplapja 5 cm oldalú négyzet, oldalélei szintén 5 cm-esek. Mekkora egy oldallap területe?", options: { a: "12,5 cm²", b: "kb. 10,8 cm²", c: "25 cm²" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az oldallap egy egyenlő oldalú háromszög, melynek minden oldala 5 cm. 🔹 2. Lépés: Az egyenlő oldalú háromszög területe: T = (a² * √3) / 4 = (25 * √3) / 4 ≈ (25 * 1,732) / 4 ≈ 10,825 cm². ✅ Megoldás: kb. 10,8 cm²." },
+            { question: "Melyik testnek van több lapja: egy ötszög alapú gúlának vagy egy négyzet alapú hasábnak?", options: { a: "a gúlának", b: "a hasábnak", c: "egyenlő számú lapjuk van" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Ötszög alapú gúla lapjai: 1 alaplap + 5 oldallap = 6 lap. 🔹 2. Lépés: Négyzet alapú hasáb lapjai: 2 alaplap + 4 oldallap = 6 lap. ✅ Megoldás: Egyenlő számú lapjuk van." },
+            { question: "Egy gúla alapterülete 15 cm², magassága 10 cm. Mekkora a térfogata?", options: { a: "150 cm³", b: "50 cm³", c: "75 cm³" }, correctAnswer: "b", explanation: "🔹 1. Lépés: V = (T_alap * m) / 3. 🔹 2. Lépés: V = (15 cm² * 10 cm) / 3 = 150 / 3 = 50 cm³. ✅ Megoldás: 50 cm³." },
+            { question: "Mi a szabályos gúla palástjának területe, ha az alaplap kerülete K, az oldallap magassága pedig m_o?", options: { a: "K * m_o", b: "(K * m_o) / 2", c: "K + m_o" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A palástot kiterítve háromszögeket kapunk. Ezek összterülete a palást területe. 🔹 2. Lépés: Ha a háromszögeket egy sorba rendezzük, egy olyan alakzatot kapunk, aminek 'alapja' az alaplap kerülete (K), magassága pedig az oldallap magassága (m_o). A területe a háromszögekéhez hasonlóan számolható. ✅ Megoldás: (K * m_o) / 2." },
+            { question: "Melyik állítás HAMIS?", options: { a: "A gúla egy poliéder.", b: "A gúla palástja síklapokból áll.", c: "A gúla alaplapja lehet kör." }, correctAnswer: "c", explanation: "🔹 1. Lépés: A gúla síklapokkal határolt test, tehát poliéder. A palástja háromszögekből áll, amik síklapok. 🔹 2. Lépés: A gúla alaplapja definíció szerint sokszög. Ha az alaplapja kör, a testet kúpnak nevezzük. ✅ Megoldás: A 'c' állítás hamis." },
+            { question: "Egy szabályos hatszög alapú gúla felszínéhez...", options: { a: "1 hatszög és 6 háromszög területét kell összeadni.", b: "2 hatszög és 6 téglalap területét kell összeadni.", c: "7 háromszög területét kell összeadni." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A felszín a gúla hálójának területe. 🔹 2. Lépés: A háló egy hatszög alaplapból és hat háromszög oldallapból áll. ✅ Megoldás: 1 hatszög és 6 háromszög területét kell összeadni." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

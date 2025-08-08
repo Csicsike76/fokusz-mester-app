@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: A kör kerülete és területe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: A kör kerülete és területe</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+
+            <div class="evaluation-block" id="bottom-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-bottom">PIN kód:</label>
+                    <input type="password" id="pin-code-bottom" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Mi a kör területének (T) képlete a sugár (r) segítségével?",
+                options: { a: "T = r² * π", b: "T = 2 * r * π", c: "T = r * π" },
+                correct: "a",
+                explanation: "A kör területét a sugár négyzetének és a π (pi) szorzatával számoljuk. A képlet T = r² * π."
+            },
+            {
+                question: "Mi a kör kerületének (K) képlete a sugár (r) segítségével?",
+                options: { a: "K = r² * π", b: "K = 2 * r * π", c: "K = r * π" },
+                correct: "b",
+                explanation: "A kör kerületét a sugár kétszeresének és a π (pi) szorzatával, vagyis az átmérő és a π szorzatával számoljuk. A képlet K = 2 * r * π."
+            },
+            {
+                question: "Milyen kapcsolat van a kör átmérője (d) és sugara (r) között?",
+                options: { a: "r = 2d", b: "d = r²", c: "d = 2r" },
+                correct: "c",
+                explanation: "A kör átmérője (d) a körön áthaladó leghosszabb húr, amely pontosan kétszerese a kör sugarának (r)."
+            },
+            {
+                question: "Mekkora egy 20 cm átmérőjű kör területe?",
+                options: { a: "100π cm²", b: "400π cm²", c: "20π cm²" },
+                correct: "a",
+                explanation: "Ha az átmérő (d) 20 cm, akkor a sugár (r) a fele, azaz 10 cm. A terület T = r² * π = 10² * π = 100π cm²."
+            },
+            {
+                question: "Mekkora egy 10 cm sugarú kör kerülete?",
+                options: { a: "10π cm", b: "20π cm", c: "100π cm" },
+                correct: "b",
+                explanation: "A kerület képlete K = 2 * r * π. Behelyettesítve: K = 2 * 10 * π = 20π cm."
+            },
+            {
+                question: "Mekkora egy 5 cm sugarú kör területe?",
+                options: { a: "10π cm²", b: "5π cm²", c: "25π cm²" },
+                correct: "c",
+                explanation: "A terület képlete T = r² * π. Behelyettesítve: T = 5² * π = 25π cm²."
+            },
+            {
+                question: "Mi a kör kerületének képlete az átmérő (d) segítségével?",
+                options: { a: "K = d * π", b: "K = d² * π", c: "K = 2 * d * π" },
+                correct: "a",
+                explanation: "Mivel a kerület K = 2 * r * π és az átmérő d = 2r, ezért a 2r helyére d-t írva a képlet K = d * π."
+            },
+            {
+                question: "Egy kör kerülete 30π cm. Mekkora a sugara?",
+                options: { a: "30 cm", b: "15 cm", c: "10 cm" },
+                correct: "b",
+                explanation: "A kerület K = 2 * r * π. Az egyenlet: 30π = 2 * r * π. Az egyenletet 2π-vel osztva kapjuk, hogy r = 15 cm."
+            },
+            {
+                question: "Egy kör területe 16π cm². Mekkora a sugara?",
+                options: { a: "16 cm", b: "8 cm", c: "4 cm" },
+                correct: "c",
+                explanation: "A terület T = r² * π. Az egyenlet: 16π = r² * π. Az egyenletet π-vel osztva kapjuk, hogy r² = 16, tehát r = 4 cm."
+            },
+            {
+                question: "Mi a Pi (π) értéke matematikailag?",
+                options: { a: "A kör kerületének és átmérőjének aránya.", b: "A kör kerületének és sugarának aránya.", c: "A kör területének és sugarának aránya." },
+                correct: "a",
+                explanation: "A π (pi) egy matematikai konstans, amely bármely kör kerületének és átmérőjének hányadosaként definiálható. π = K/d."
+            },
+            {
+                question: "Ha egy kör sugarát megduplázzuk, hogyan változik a kerülete?",
+                options: { a: "Négyszeresére nő.", b: "Megduplázódik.", c: "Nem változik." },
+                correct: "b",
+                explanation: "A kerület egyenesen arányos a sugárral (K = 2π * r). Ha a sugár kétszeresére nő, a kerület is kétszeresére nő."
+            },
+            {
+                question: "Ha egy kör sugarát megduplázzuk, hogyan változik a területe?",
+                options: { a: "Megduplázódik.", b: "Háromszorosára nő.", c: "Négyszeresére nő." },
+                correct: "c",
+                explanation: "A terület a sugár négyzetével arányos (T = π * r²). Ha a sugár kétszeresére nő, a terület 2² = 4-szeresére nő."
+            },
+            {
+                question: "Mekkora a 90°-os középponti szögű körív hossza egy 4 cm sugarú körben?",
+                options: { a: "2π cm", b: "4π cm", c: "π cm" },
+                correct: "a",
+                explanation: "A körív hosszának képlete: (α/360) * 2 * r * π. Behelyettesítve: (90/360) * 2 * 4 * π = (1/4) * 8π = 2π cm."
+            },
+            {
+                question: "Mekkora a 90°-os középponti szögű körcikk területe egy 4 cm sugarú körben?",
+                options: { a: "2π cm²", b: "4π cm²", c: "8π cm²" },
+                correct: "b",
+                explanation: "A körcikk területének képlete: (α/360) * r² * π. Behelyettesítve: (90/360) * 4² * π = (1/4) * 16π = 4π cm²."
+            },
+            {
+                question: "Mit nevezünk körlapnak?",
+                options: { a: "A körvonalat.", b: "A kör átmérőjét.", c: "A körvonal által határolt síkrészt." },
+                correct: "c",
+                explanation: "A körlap (vagy körlemez) az a síkidom, amelyet a körvonal határol. A területet a körlapra számoljuk."
+            },
+            {
+                question: "Egy kör területe 36π cm². Mekkora az átmérője?",
+                options: { a: "12 cm", b: "6 cm", c: "18 cm" },
+                correct: "a",
+                explanation: "A terület T = r² * π, tehát 36π = r² * π. Ebből r² = 36, vagyis r = 6 cm. Az átmérő d = 2r = 2 * 6 = 12 cm."
+            },
+            {
+                question: "Mi a különbség a kör és a körvonal között a matematikában?",
+                options: { a: "Nincs különbség, a két szó szinonima.", b: "A körvonal a pontok halmaza (a vonal), a kör pedig a körvonal és a belső pontok együttese.", c: "A körvonal a sugár, a kör az átmérő." },
+                correct: "b",
+                explanation: "A matematikában a körvonal csak a határvonalat jelenti, míg a kör (vagy körlap) magában foglalja a határolt területet is."
+            },
+            {
+                question: "Milyen mértékegysége van a kör kerületének, ha a sugár méterben van megadva?",
+                options: { a: "m² (négyzetméter)", b: "m³ (köbméter)", c: "m (méter)" },
+                correct: "c",
+                explanation: "A kerület egy hosszúság, így a mértékegysége megegyezik a sugár mértékegységével, ami ebben az esetben méter (m)."
+            },
+            {
+                question: "Milyen mértékegysége van a kör területének, ha a sugár méterben van megadva?",
+                options: { a: "m² (négyzetméter)", b: "m (méter)", c: "cm (centiméter)" },
+                correct: "a",
+                explanation: "A terület síkbeli kiterjedést mér, így mértékegysége mindig négyzetes, ebben az esetben négyzetméter (m²)."
+            },
+            {
+                question: "Mekkora egy 10 cm átmérőjű kör kerülete?",
+                options: { a: "20π cm", b: "10π cm", c: "5π cm" },
+                correct: "b",
+                explanation: "A kerület képlete átmérővel: K = d * π. Behelyettesítve: K = 10 * π = 10π cm."
+            },
+            {
+                question: "Egy autó kereke 50 cm átmérőjű. Mekkora utat tesz meg egyetlen teljes körbefordulással? (π ≈ 3.14)",
+                options: { a: "Kb. 78.5 cm", b: "Kb. 314 cm", c: "Kb. 157 cm" },
+                correct: "c",
+                explanation: "Egy körbefordulás alatt a kerék a kerületével megegyező utat tesz meg. K = d * π = 50 cm * 3.14 ≈ 157 cm."
+            },
+            {
+                question: "Hogyan számolnánk ki egy körgyűrű területét, ha R a külső és r a belső kör sugara?",
+                options: { a: "T = (R² - r²) * π", b: "T = (R - r)² * π", c: "T = (R + r) * π" },
+                correct: "a",
+                explanation: "A körgyűrű területét megkapjuk, ha a nagyobbik kör területéből kivonjuk a kisebbik kör területét: T = T_nagy - T_kicsi = R²π - r²π = (R² - r²)π."
+            },
+            {
+                question: "Mekkora a 180°-os körcikk (félkör) kerülete egy 10 cm sugarú körben?",
+                options: { a: "10π cm", b: "10π + 20 cm", c: "20π cm" },
+                correct: "b",
+                explanation: "A félkör kerülete a fél körív hosszából és az átmérőből áll. Ívhossz: (180/360) * 2 * 10 * π = 10π cm. Átmérő: 2 * 10 = 20 cm. A teljes kerület: 10π + 20 cm."
+            },
+            {
+                question: "A Pi (π) szám...",
+                options: { a: "egy racionális szám.", b: "egy egész szám.", c: "egy irracionális szám." },
+                correct: "c",
+                explanation: "A π irracionális szám, ami azt jelenti, hogy nem írható fel két egész szám hányadosaként, és tizedestört alakja végtelen, nem szakaszos."
+            },
+            {
+                question: "Egy kör területe 49π cm². Mekkora a kerülete?",
+                options: { a: "7π cm", b: "14π cm", c: "49π cm" },
+                correct: "b",
+                explanation: "Először a sugár kell. T = r² * π -> 49π = r² * π -> r² = 49 -> r = 7 cm. Utána a kerület: K = 2 * r * π = 2 * 7 * π = 14π cm."
+            }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const checkBtns = document.querySelectorAll('.check-btn');
+        const pinInputs = document.querySelectorAll('.pin-code-input');
+        const resultContainers = document.querySelectorAll('.result-container');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">
+                            <label for="q${index}a">
+                                <input type="radio" name="question${index}" id="q${index}a" value="a">
+                                ${item.options.a}
+                            </label>
+                            <label for="q${index}b">
+                                <input type="radio" name="question${index}" id="q${index}b" value="b">
+                                ${item.options.b}
+                            </label>
+                            <label for="q${index}c">
+                                <input type="radio" name="question${index}" id="q${index}c" value="c">
+                                ${item.options.c}
+                            </label>
+                        </div>
+                        <div class="explanation" id="explanation-${index}">
+                            <strong>Magyarázat:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInputs[0].value; // Elég az elsőből olvasni, mert szinkronizáltak
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtns.forEach(btn => btn.disabled = true);
+            pinInputs.forEach(input => input.disabled = true);
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+
+                if (isMaster) {
+                    explanationDiv.style.display = 'block';
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('master-correct');
+                } else {
+                    explanationDiv.style.display = 'block';
+                }
+
+                if (selectedOption) {
+                    const selectedLabel = selectedOption.parentElement;
+                    if (selectedOption.value === item.correct) {
+                        score++;
+                        selectedLabel.classList.add('correct-answer', 'label-correct');
+                    } else {
+                        selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                        const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                        correctLabel.classList.add('correct-answer');
+                    }
+                } else if (isMaster) {
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('correct-answer');
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            const resultText = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            resultContainers.forEach(container => container.innerHTML = resultText);
+
+            if (isMaster) {
+                adminPanels.forEach(panel => panel.style.display = 'block');
+            }
+        }
+
+        // Eseménykezelők hozzáadása az összes vezérlőhöz
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        
+        checkBtns.forEach(btn => {
+            btn.addEventListener('click', checkAnswers);
+        });
+
+        pinInputs.forEach(input => {
+            // Enter gombos ellenőrzés
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+            // PIN mezők szinkronizálása
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

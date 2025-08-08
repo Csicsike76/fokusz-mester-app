@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - Prompt Mester Kártyacsomag</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --prompt-bg: #e3f2fd;
+            --prompt-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .header {
+            background-color: var(--primary-red);
+            color: var(--background-white);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 3rem; margin: 0;
+        }
+
+        .header p {
+            font-size: 1.2rem; opacity: 0.9; margin-top: 5px;
+        }
+        
+        .controls {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            background-color: #ddd;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover {
+            background-color: #ccc;
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+        .random-btn {
+            background-color: var(--primary-red);
+            color: white;
+        }
+        .random-btn:hover {
+            background-color: #b71c1c;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .prompt-card {
+            background-color: var(--background-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            border-left: 5px solid var(--primary-green);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+        
+        .prompt-card.highlight {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .prompt-card h3 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .prompt-card p { margin-top: 0; }
+        
+        .prompt-card strong { color: var(--primary-green); }
+        
+        .prompt-template, .prompt-example {
+            background-color: var(--prompt-bg);
+            border: 1px dashed var(--prompt-border);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.9em;
+        }
+        
+        .copy-button {
+            background-color: var(--prompt-border);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
+            align-self: flex-end;
+        }
+        
+        .copy-button:hover { background-color: #1976d2; }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Prompt Mester</h1>
+            <p>Kreatív Technikák Kártyacsomagja</p>
+        </header>
+
+        <main>
+            <div class="controls">
+                <button class="filter-btn active" data-category="all">Összes</button>
+                <button class="filter-btn" data-category="szovegiras">Szövegírás</button>
+                <button class="filter-btn" data-category="kepalkotas">Képalkotás</button>
+                <button class="filter-btn" data-category="otleteles">Ötletelés</button>
+                <button class="filter-btn random-btn" id="random-btn">🎲 Véletlen Kártya!</button>
+            </div>
+
+            <div class="card-grid">
+                
+                <div class="prompt-card" data-category="szovegiras otleteles">
+                    <h3>Szerepjáték (Persona)</h3>
+                    <p>A leghatékonyabb technika a stílus és a hangnem beállítására. Mondd meg az MI-nek, hogy kinek a bőrébe bújjon!</p>
+                    <strong>Sablon:</strong>
+                    <div class="prompt-template">"Viselkedj úgy, mint egy [SZEREPKÖR]! [FELADAT LEÍRÁSA]"</div>
+                    <strong>Példa:</strong>
+                    <div class="prompt-example">Viselkedj úgy, mint egy lelkes idegenvezető! Írj egy rövid, 3 mondatos kedvcsinálót a Grand Canyonhoz.</div>
+                    <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                </div>
+                
+                <div class="prompt-card" data-category="otleteles">
+                    <h3>Lánc-Gondolkodás (Chain of Thought)</h3>
+                    <p>Komplex problémák megoldásához. Kérd meg az MI-t, hogy ne csak a választ adja meg, hanem vezesse le lépésről lépésre, hogyan jutott el odáig.</p>
+                    <strong>Sablon:</strong>
+                    <div class="prompt-template">"[PROBLÉMA LEÍRÁSA]. Vezesd le a megoldást lépésről lépésre, 'gondolkodj hangosan'!"</div>
+                    <strong>Példa:</strong>
+                    <div class="prompt-example">Van 30 diák egy osztályban. Ha mindenki mindenkivel kezet fog egyszer, hány kézfogás történik összesen? Vezesd le a megoldást lépésről lépésre!</div>
+                    <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                </div>
+                
+                <div class="prompt-card" data-category="kepalkotas">
+                    <h3>Negatív Prompt</h3>
+                    <p>A képalkotás kulcsa. Nemcsak azt mondod meg, mit akarsz látni, hanem azt is, hogy mit NEM. Segít elkerülni a hibákat és a nem kívánt elemeket.</p>
+                    <strong>Sablon:</strong>
+                    <div class="prompt-template">"[KÉP LEÍRÁSA], --no [NEM KÍVÁNT ELEM]"</div>
+                    <strong>Példa:</strong>
+                    <div class="prompt-example">photo of a beautiful forest, --no path, --no people</div>
+                    <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                </div>
+
+                <div class="prompt-card" data-category="szovegiras">
+                    <h3>Formátum és Célközönség</h3>
+                    <p>Irányítsd a válasz szerkezetét és stílusát! Mondd meg, kinek készül és hogyan nézzen ki.</p>
+                    <strong>Sablon:</strong>
+                    <div class="prompt-template">"[TÉMA]. Magyarázd el [FORMÁTUM]-ban, egy [CÉLKÖZÖNSÉG] számára."</div>
+                    <strong>Példa:</strong>
+                    <div class="prompt-example">A fotoszintézis. Magyarázd el pontokba szedett listában, egy 10 éves gyerek számára.</div>
+                    <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                </div>
+
+                <div class="prompt-card" data-category="otleteles">
+                    <h3>Analógiás Gondolkodás</h3>
+                    <p>Kérd meg az MI-t, hogy egy bonyolult fogalmat egy egyszerű, hétköznapi hasonlattal magyarázzon el. Kiváló a megértéshez.</p>
+                    <strong>Sablon:</strong>
+                    <div class="prompt-template">"Magyarázd el a(z) [BONYOLULT FOGALOM] működését egy [EGYSZERŰ DOLOG] analógiájával!"</div>
+                    <strong>Példa:</strong>
+                    <div class="prompt-example">Magyarázd el a számítógépes RAM memória működését egy íróasztal analógiájával!</div>
+                    <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                </div>
+
+                <div class="prompt-card" data-category="kepalkotas">
+                    <h3>Stílus-keverés (Style Blending)</h3>
+                    <p>Hoz létre teljesen egyedi, meglepő képeket két, látszólag össze nem illő stílus vagy téma keresztezésével.</p>
+                    <strong>Sablon:</strong>
+                    <div class="prompt-template">"[TÉMA 1], in the style of [MŰVÉSZ/STÍLUS 2]"</div>
+                    <strong>Példa:</strong>
+                    <div class="prompt-example">An astronaut riding a horse, in the style of a medieval tapestry.</div>
+                    <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                </div>
+                
+                <div class="prompt-card" data-category="otleteles">
+                    <h3>Fordított Ötletbörze</h3>
+                    <p>Ha elakadtál, ne a megoldást keresd, hanem a problémát! Ez a technika segít új nézőpontokat találni.</p>
+                    <strong>Sablon:</strong>
+                    <div class="prompt-template">"Hogyan tudnánk a(z) [CÉL] elérését teljesen elrontani? Sorolj fel 5 módszert, amivel garantáltan kudarcot vallanánk!"</div>
+                    <strong>Példa:</strong>
+                    <div class="prompt-example">Hogyan tudnánk egy osztálykirándulás megszervezését teljesen elrontani? Sorolj fel 5 módszert, amivel garantáltan kudarcot vallanánk!</div>
+                    <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+<script>
+    function copyToClipboard(buttonElement) {
+        const promptText = buttonElement.previousElementSibling.textContent;
+        navigator.clipboard.writeText(promptText).then(() => {
+            const originalText = buttonElement.textContent;
+            buttonElement.textContent = 'Másolva!';
+            setTimeout(() => {
+                buttonElement.textContent = originalText;
+            }, 2000);
+        }).catch(err => {
+            console.error('Hiba a másolás során', err);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const randomButton = document.getElementById('random-btn');
+        const cards = document.querySelectorAll('.prompt-card');
+
+        filterButtons.forEach(button => {
+            if (button.id === 'random-btn') return;
+            button.addEventListener('click', () => {
+                const category = button.getAttribute('data-category');
+                
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                cards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category').includes(category)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        randomButton.addEventListener('click', () => {
+            const visibleCards = Array.from(cards).filter(card => card.style.display !== 'none');
+            
+            if (visibleCards.length > 0) {
+                cards.forEach(card => card.classList.remove('highlight'));
+                
+                const randomIndex = Math.floor(Math.random() * visibleCards.length);
+                const randomCard = visibleCards[randomIndex];
+                
+                randomCard.classList.add('highlight');
+                randomCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                setTimeout(() => {
+                    randomCard.classList.remove('highlight');
+                }, 2500);
+            }
+        });
+    });
+</script>
+</body>
+</html>

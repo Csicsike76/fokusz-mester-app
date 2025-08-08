@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 35. hét: Nagy Projekt - Bemutató</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #e3f2fd;
+            --example-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .prompt-example {
+            background-color: var(--example-bg);
+            border: 1px dashed var(--example-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>IV. Modul: A Nagy Projekt</h1>
+            <p>35. hét: Főpróba és nyilvános bemutató</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A hét célja, hogy a csapatod egy rövid, meggyőző és jól felépített prezentáció keretében bemutassa a félév során készített projektjét. A hangsúly a tiszta kommunikáción, a projekt legfontosabb eredményeinek kiemelésén és a tanulságok levonásán van.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Bevezető: A Történet Elmesélése</h2>
+                <p>Elérkeztetek a féléves utazásotok végéhez. Kutattatok, terveztetek, alkottatok és teszteltetek. Most itt az ideje, hogy elmeséljétek a történeteteket! A prezentáció nem csak a projektetek bemutatásáról szól, hanem arról az útról is, amit a csapatotok bejárt. Nem kell minden apró részletet elmondani. A feladatotok, hogy megragadjátok a hallgatóság figyelmét, bemutassátok a problémát, amit megoldottatok, és büszkén megmutassátok, mit hoztatok létre.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. A Prezentáció Forgatókönyve</h2>
+                <p>Minden csapatnak <strong>maximum 5-7 perce</strong> van a bemutatóra. Fontos a pontosság! Az alábbi struktúra segít tartani az időkeretet és logikusan felépíteni az előadást.</p>
+
+                <div class="task-card">
+                    <h3>A Javasolt Szerkezet (kb. 5 dia)</h3>
+                    <ol>
+                        <li>
+                            <strong>Bevezetés (kb. 1 perc) - A "Horog"</strong>
+                            <ul>
+                                <li>Mutatkozzatok be (csapatnév, tagok).</li>
+                                <li>Mondjátok el a projekt címet.</li>
+                                <li>Ragadjátok meg a figyelmet: kezdjetek egy elgondolkodtató kérdéssel vagy egy meglepő statisztikával, ami rávilágít a problémátok fontosságára.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>A Probléma és a Cél (kb. 1 perc)</strong>
+                            <ul>
+                                <li>Röviden mutassátok be a problémát, amit vizsgáltatok.</li>
+                                <li>Mondjátok el, mi volt a célkitűzésetek: mit akartatok létrehozni?</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>A Megoldás Bemutatása (kb. 2-3 perc) - A Show!</strong>
+                            <ul>
+                                <li>Ez a prezentáció legfontosabb része! Mutassátok be a kész projekteteket!</li>
+                                <li>Ha egy prezentációt készítettetek, mutassátok meg a legérdekesebb diákat.</li>
+                                <li>Ha egy kampánytervet, mutassátok be a legjobb posztert és szlogent.</li>
+                                <li>Magyarázzátok el, hogyan segített az MI az alkotás folyamatában! Mutassatok egy konkrét "előtte-utána" példát (pl. egy nyers MI-válasz és a ti általatok finomított verzió).</li>
+                            </ul>
+                        </li>
+                         <li>
+                            <strong>Tanulságok (kb. 1 perc)</strong>
+                            <ul>
+                                <li>Mi volt a legnagyobb kihívás a projekt során?</li>
+                                <li>Mi volt a legfontosabb dolog, amit a csapatként tanultatok az MI-ről vagy a közös munkáról?</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Zárszó és Kérdések (kb. 1 perc)</strong>
+                            <ul>
+                                <li>Köszönjétek meg a figyelmet.</li>
+                                <li>Zárjatok egyetlen, erős, emlékezetes mondattal.</li>
+                                <li>Ajánljátok fel a lehetőséget a kérdésekre.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <h2>4. Értékelési Szempontok</h2>
+                <p>Az előadásotok az alábbi szempontok alapján lesz értékelve:</p>
+                <ul>
+                    <li><strong>Tisztaság és érthetőség:</strong> A prezentáció logikusan felépített, a probléma és a megoldás mindenki számára érthető volt.</li>
+                    <li><strong>Kreativitás és Eredetiség:</strong> A projektötlet és a megvalósítás kreatív, a csapat belevitte a saját egyéniségét.</li>
+                    <li><strong>MI Tudatos Használata:</strong> A csapat bemutatta, hogyan használta az MI-t eszközként, és reflektált a folyamatra.</li>
+                    <li><strong>Előadásmód és Csapatmunka:</strong> Az előadás magabiztos volt, a csapattagok együttműködtek. Betartottátok az időkeretet.</li>
+                </ul>
+            </section>
+            
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>5. A Hét Kihívása: Főpróba!</h2>
+                    <p>A nyilvános bemutató előtt tartsatok legalább egy teljes főpróbát!</p>
+                    <p><strong>A feladatotok:</strong></p>
+                    <ol>
+                        <li>Állítsátok össze a végleges prezentációs anyagotokat.</li>
+                        <li>Osszátok ki egymás között, ki melyik részről fog beszélni.</li>
+                        <li>Mérjétek az időt! Menjetek végig a teljes előadáson, és győződjetek meg róla, hogy belefértek az 5-7 perces keretbe.</li>
+                        <li>Adjatok egymásnak visszajelzést: Mi volt jó? Min lehetne még javítani az előadásmódban?</li>
+                    </ol>
+                    <p>Egy jó főpróba a siker kulcsa. Segít, hogy magabiztosak legyetek, és a bemutató napján már csak a történetetek elmesélésére kelljen koncentrálnotok.</p>
+                    <p><strong>Sok sikert a felkészüléshez és a nagy bemutatóhoz!</strong></p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

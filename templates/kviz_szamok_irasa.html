@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Kvíz: Számok írása, olvasása</title>
+  <style>
+    :root {
+      --primary-color: #D9534F;
+      --secondary-color: #fcf8e3;
+      --accent-color: #5BC0DE;
+      --text-dark: #333;
+      --text-light: #fff;
+      --border-color: #ddd;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7f9;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, #D9534F, #fcf8e3, #5BC0DE);
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: var(--text-light);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+    .question-block {
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .question {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    .answers label {
+      display: block;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      border: 1px solid transparent;
+    }
+    .answers label:hover {
+        background-color: #f0f0f0;
+    }
+    .answers input[type="radio"] {
+      margin-right: 0.8em;
+      accent-color: var(--primary-color);
+    }
+    .answers label.correct {
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+      font-weight: bold;
+    }
+    .answers label.incorrect {
+      background-color: #f2dede;
+      border-color: #ebccd1;
+    }
+    .explanation {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      background-color: #f7f7fa;
+      border-left: 4px solid var(--primary-color);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .controls, .pin-section {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #f9fafb;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .pin-input {
+      width: 140px;
+      padding: 10px;
+      font-size: 1.1em;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    button:hover:not(:disabled) {
+      background-color: #c9302c;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    #result {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      font-size: 1.3em;
+      text-align: center;
+    }
+    .admin-panel {
+      display: none;
+      margin-top: 2rem;
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      background-color: #fffde7;
+      border-radius: 8px;
+    }
+    @media (max-width: 600px) {
+      main { padding: 1.5rem 1rem; }
+      header h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body autocomplete="off">
+  
+  <header>
+    <h1>Kvíz: Számok írása, olvasása</h1>
+  </header>
+
+  <main>
+    <div class="pin-section">
+      <input type="password" id="pin" class="pin-input" placeholder="PIN-kód" autocomplete="off">
+      <button type="button" id="checkBtn">Ellenőrzés</button>
+      <div id="result"></div>
+    </div>
+    
+    <form id="quiz-form" autocomplete="off">
+      <!-- A kérdések ide generálódnak -->
+    </form>
+    
+    <div class="admin-panel" id="admin-panel">
+      <h3>Adminisztrációs panel</h3>
+      <p>Mester PIN-kóddal sikeresen bejelentkezve.</p>
+    </div>
+  </main>
+
+  <script>
+    const MASTER_PIN = '121909';
+    const studentPins = new Set();
+    function createInitialPins() {
+        for (let i = 1; i <= 20; i++) {
+            studentPins.add((100000 + i).toString());
+        }
+    }
+
+    const questions = [
+      { q: "Hogyan írjuk le betűvel a 407 számot?", a: "Négyszázhetven", b: "Négyszázhét", c: "Negyvenhét", correct: "b", exp: "A 4-es a százas helyiértéken áll, a 0 a tízesen, a 7 az egyesen. A nulla tízes helyiértéket nem ejtjük ki. Tehát a szám: négyszázhét." },
+      { q: "Melyik számjegy áll az ezres helyiértéken a 12 345 számban?", a: "1", b: "2", c: "3", correct: "b", exp: "A helyiértékeket jobbról balra olvassuk: egyes, tízes, százas, ezres, tízezres. Az ezres helyiértéken a 2-es számjegy áll." },
+      { q: "Hogyan írjuk le számjegyekkel: 'ötezer-tizenkettő'?", a: "512", b: "5012", c: "5120", correct: "b", exp: "Az ötezer (5000) és a tizenkettő (12) összege 5012. Figyelni kell a nulla százas helyiértékre." },
+      { q: "Melyik a legnagyobb háromjegyű páros szám?", a: "999", b: "998", c: "990", correct: "b", exp: "A legnagyobb háromjegyű szám a 999. Mivel ez páratlan, a nála eggyel kisebb szám, a 998 lesz a legnagyobb háromjegyű páros szám." },
+      { q: "Mi a 345 szám alaki értékeinek összege?", a: "12", b: "345", c: "Nem lehet összeadni", correct: "a", exp: "Az alaki érték magát a számjegyet jelenti, függetlenül a helyiértéktől. Az alaki értékek összege: 3 + 4 + 5 = 12." },
+      { q: "Melyik a legkisebb négyjegyű páratlan szám?", a: "1000", b: "1001", c: "9999", correct: "b", exp: "A legkisebb négyjegyű szám az 1000. Ez páros. A következő szám az 1001, ami már páratlan, tehát ez a legkisebb négyjegyű páratlan szám." },
+      { q: "Hány darab százas van a 3782 számban?", a: "7", b: "37", c: "378", correct: "b", exp: "A 3782 számot felírhatjuk úgy, mint 37 × 100 + 82. Tehát 37 darab teljes százas van benne." },
+      { q: "Melyik számjegyet kell a 45_2 számban az aláhúzás helyére írni, hogy a szám páros legyen?", a: "Bármelyik számjegyet", b: "Csak páros számjegyet", c: "Csak páratlan számjegyet", correct: "a", exp: "Egy szám párosságát vagy páratlanságát az utolsó számjegye határozza meg. Mivel az utolsó számjegy (2) páros, a szám páros lesz, függetlenül attól, hogy a tízes helyiértéken mi áll." },
+      { q: "Hogyan bontható fel helyiérték szerint a 608 szám?", a: "6 + 0 + 8", b: "60 + 8", c: "6⋅100 + 0⋅10 + 8⋅1", correct: "c", exp: "A helyiértékes bontás során minden számjegyet megszorzunk a helyiértékének megfelelő értékkel (1, 10, 100, ...), majd ezeket összeadjuk." },
+      { q: "Mennyi a különbség a legnagyobb és a legkisebb háromjegyű szám között?", a: "899", b: "900", c: "898", correct: "a", exp: "A legnagyobb háromjegyű szám a 999. A legkisebb a 100. A különbségük: 999 - 100 = 899." },
+      { q: "Hány darab számjegy van a tízes számrendszerben?", a: "9", b: "10", c: "Végtelen sok", correct: "b", exp: "A tízes (decimális) számrendszer 10 darab számjegyet használ: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Minden más számot ezek kombinációjából írunk le." },
+      { q: "A 23 456 számban a 3-as számjegy valódi értéke:", a: "3", b: "3000", c: "300", correct: "b", exp: "A valódi érték a számjegy helyiértékétől függő érték. A 3-as az ezres helyiértéken áll, tehát a valódi értéke 3 × 1000 = 3000." },
+      { q: "Melyik a legnagyobb szám, amit a 7, 1, 9 számjegyekből egyszeri felhasználással képezhetünk?", a: "179", b: "971", c: "917", correct: "b", exp: "A legnagyobb számot úgy kapjuk, ha a legnagyobb helyiértékre a legnagyobb számjegyet írjuk, és így tovább, csökkenő sorrendben. 971." },
+      { q: "Melyik állítás igaz a 'természetes számok' fogalmára?", a: "Csak a pozitív egész számok.", b: "A pozitív egész számok és a nulla.", c: "Minden szám, ami nem tört.", correct: "b", exp: "A természetes számok halmaza (ℕ) a nemnegatív egész számokat tartalmazza: {0, 1, 2, 3, ...}. (Megjegyzés: néha a 0-t nem sorolják ide, de a NAT2020 tanterv igen)." },
+      { q: "Hány darab tízes van a 1234 számban?", a: "3", b: "123", c: "12", correct: "b", exp: "A 1234 számot felírhatjuk úgy, mint 123 × 10 + 4. Tehát 123 darab teljes tízes van benne." },
+      { q: "Hogyan írjuk le számjegyekkel: 'hetvenkétezer-öt'?", a: "725", b: "7205", c: "72005", correct: "c", exp: "A hetvenkétezer a 72 000. Ehhez hozzáadva az 5-öt: 72 005. Figyelni kell a nulla százas és tízes helyiértékre." },
+      { q: "Melyik szám páratlan?", a: "2048", b: "1000", c: "333", correct: "c", exp: "Egy szám párosságát vagy páratlanságát az utolsó számjegye határozza meg. A 3 páratlan számjegy, ezért a 333 is páratlan szám." },
+      { q: "Melyik számban a legnagyobb a 8-as számjegy helyiértéke?", a: "1823", b: "8123", c: "2381", correct: "b", exp: "A helyiértékeket vizsgálva: a) százas, b) ezres, c) tízes. Az ezres a legnagyobb helyiérték a felsoroltak közül." },
+      { q: "Mi az a szám, amelyben 5 egyes, 0 tízes és 4 százas van?", a: "504", b: "450", c: "405", correct: "c", exp: "A helyiértékek szerint összeállítva: 4 százas (400) + 0 tízes (0) + 5 egyes (5) = 405." },
+      { q: "Hány különböző kétjegyű szám képezhető a 2 és 5 számjegyekből?", a: "2", b: "4", c: "3", correct: "b", exp: "Ha a számjegyek ismétlődhetnek, akkor a lehetőségek: 22, 25, 52, 55. Ez 4 darab szám." },
+      { q: "Melyik a legkisebb háromjegyű, különböző számjegyekből álló szám?", a: "100", b: "123", c: "102", correct: "c", exp: "A százas helyiértékre a legkisebb nem nulla számjegyet (1) kell írni. A tízesre a maradék legkisebbet (0). Az egyesre a következő legkisebbet (2). Így kapjuk a 102-t." },
+      { q: "Melyik szám van közelebb a 600-hoz: 589 vagy 612?", a: "589", b: "612", c: "Egyenlő távolságra vannak.", correct: "a", exp: "Számoljuk ki a különbségeket: 600 - 589 = 11. 612 - 600 = 12. Mivel 11 < 12, az 589 van közelebb a 600-hoz." },
+      { q: "Mi a 'számjegy' és a 'szám' közötti különbség?", a: "Nincs különbség, szinonimák.", b: "A számjegy egy jel (0-9), a szám pedig egy mennyiséget jelölő fogalom, amit számjegyekkel írunk le.", c: "A számjegy csak páros lehet, a szám bármilyen.", correct: "b", exp: "A számjegyek az 'ábécé', amivel a számokat 'leírjuk'. Egy szám (pl. 345) több számjegyből áll, és egy absztrakt mennyiséget képvisel." },
+      { q: "Hogyan írjuk azt a számot, ami 3 tízezresből, 5 százasból és 1 egyesből áll?", a: "351", b: "30501", c: "3501", correct: "b", exp: "Helyiértékek szerint: 3 tízezres (30000) + 0 ezres (0) + 5 százas (500) + 0 tízes (0) + 1 egyes (1) = 30501." },
+      { q: "Hány nulla van az 'egymillió' számban?", a: "5", b: "6", c: "7", correct: "b", exp: "Az egymilliót számjegyekkel így írjuk: 1 000 000. Látható, hogy az 1-es után 6 darab nulla áll." }
+    ];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    const quizForm = document.getElementById('quiz-form');
+    function populateQuiz() {
+      shuffle(questions);
+      quizForm.innerHTML = '';
+      questions.forEach((item, i) => {
+        const block = document.createElement('div');
+        block.className = 'question-block';
+        block.innerHTML = `
+          <div class="question">${i + 1}. ${item.q}</div>
+          <div class="answers">
+            <label><input type="radio" name="q${i}" value="a"/> a) ${item.a}</label>
+            <label><input type="radio" name="q${i}" value="b"/> b) ${item.b}</label>
+            <label><input type="radio" name="q${i}" value="c"/> c) ${item.c}</label>
+          </div>
+          <div class="explanation" id="exp${i}">${item.exp}</div>
+        `;
+        quizForm.appendChild(block);
+      });
+    }
+
+    function areAllQuestionsAnswered() {
+      for (let i = 0; i < questions.length; i++) {
+        if (!quizForm.querySelector(`input[name="q${i}"]:checked`)) return false;
+      }
+      return true;
+    }
+
+    function isPinValid(pin) {
+        return pin === MASTER_PIN || studentPins.has(pin);
+    }
+
+    function evaluateQuiz(isMaster = false) {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const selectedOption = quizForm.querySelector(`input[name="q${i}"]:checked`);
+        const explanation = document.getElementById(`exp${i}`);
+        const answerLabels = quizForm.querySelector(`input[name="q${i}"]`).parentElement.parentElement.querySelectorAll('label');
+        
+        if (selectedOption) {
+            const parentLabel = selectedOption.parentElement;
+            if (selectedOption.value === q.correct) {
+                score++;
+                parentLabel.classList.add('correct');
+                parentLabel.innerHTML = `✅ ${parentLabel.innerHTML}`;
+            } else {
+                parentLabel.classList.add('incorrect');
+                parentLabel.innerHTML = `❌ ${parentLabel.innerHTML}`;
+                const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+                correctLabel.classList.add('correct');
+            }
+        } else if (isMaster) {
+             const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+             correctLabel.classList.add('correct');
+        }
+        
+        if (selectedOption || isMaster) {
+            explanation.style.display = 'block';
+        }
+        
+        quizForm.querySelectorAll(`input[name="q${i}"]`).forEach(input => input.disabled = true);
+      });
+
+      if (isMaster) score = questions.length;
+      const percentage = ((score / questions.length) * 100).toFixed(0);
+      document.getElementById('result').innerHTML = `Eredmény: <b>${score}/${questions.length}</b> (${percentage}%)`;
+      document.getElementById('checkBtn').disabled = true;
+      document.getElementById('pin').disabled = true;
+    }
+    
+    function masterMode() {
+        questions.forEach((q, i) => {
+            const correctRadio = quizForm.querySelector(`input[name="q${i}"][value="${q.correct}"]`);
+            if (correctRadio) correctRadio.checked = true;
+        });
+        evaluateQuiz(true);
+        document.getElementById('admin-panel').style.display = 'block';
+    }
+
+    function checkAnswers() {
+        const pin = document.getElementById('pin').value;
+        if (!isPinValid(pin)) {
+            alert('Érvénytelen PIN-kód! Kérlek, próbáld újra.');
+            return;
+        }
+
+        if (pin === MASTER_PIN) {
+            masterMode();
+            return;
+        }
+
+        if (!areAllQuestionsAnswered()) {
+            alert('Kérlek, válaszolj az összes kérdésre az ellenőrzés előtt!');
+            return;
+        }
+        
+        evaluateQuiz();
+    }
+
+    document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+    document.getElementById('pin').addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            checkAnswers();
+        }
+    });
+
+    // Induláskor
+    window.onload = function() {
+        createInitialPins();
+        populateQuiz();
+    };
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Bevezetés az optikába</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Bevezetés az optikába</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Mivel foglalkozik az optika?",
+                answers: { a: "A fénnyel és a fényjelenségekkel.", b: "A hanggal és a hangjelenségekkel.", c: "A hővel és a hőjelenségekkel." },
+                correctAnswer: 'a',
+                explanation: "Az optika a fizika azon ága, amely a fény természetét, terjedését és a hozzá kapcsolódó jelenségeket, mint például a visszaverődést, törést és a színeket vizsgálja. ✅ Megoldás: A fénnyel és a fényjelenségekkel."
+            },
+            {
+                question: "Mi a fényforrás?",
+                answers: { a: "Olyan test, amely fényt bocsát ki vagy ver vissza.", b: "Csak olyan test, ami saját maga termel fényt.", c: "Csak a Nap." },
+                correctAnswer: 'a',
+                explanation: "Tágabb értelemben minden olyan test fényforrás, amelyről fény jut a szemünkbe. Ez lehet elsődleges fényforrás (saját fényt bocsát ki) vagy másodlagos (a ráeső fényt veri vissza). ✅ Megoldás: Olyan test, amely fényt bocsát ki vagy ver vissza."
+            },
+            {
+                question: "Melyik egy elsődleges, természetes fényforrás?",
+                answers: { a: "A Nap", b: "A Hold", c: "Egy tükör" },
+                correctAnswer: 'a',
+                explanation: "Az elsődleges fényforrások saját energiájukat alakítják fénnyé. A Nap a természetben létezik és fényt termel. A Hold és a tükör csak visszaverik a fényt, tehát másodlagosak. ✅ Megoldás: A Nap."
+            },
+            {
+                question: "Hogyan terjed a fény homogén (egynemű) közegben?",
+                answers: { a: "Egyenes vonalban.", b: "Görbe vonalban.", c: "Körkörösen." },
+                correctAnswer: 'a',
+                explanation: "A fény egyenes vonalú terjedése az optika egyik alapelve. Ezt bizonyítja például az árnyékok keletkezése. ✅ Megoldás: Egyenes vonalban."
+            },
+            {
+                question: "Mi az oka annak, hogy látjuk a nem világító tárgyakat?",
+                answers: { a: "Mert a tárgyakról a fény visszaverődik a szemünkbe.", b: "Mert a szemünk bocsát ki fényt.", c: "Mert a tárgyak elnyelik a fényt." },
+                correctAnswer: 'a',
+                explanation: "A nem világító tárgyak másodlagos fényforrásként működnek. Egy elsődleges fényforrás (pl. lámpa) megvilágítja őket, ők pedig a rájuk eső fényt a szemünkbe szórják (diffúz visszaverődés), így válnak láthatóvá. ✅ Megoldás: Mert a tárgyakról a fény visszaverődik a szemünkbe."
+            },
+            {
+                question: "Mi a fénysugár?",
+                answers: { a: "A fény útját szemléltető egyenes vonal.", b: "A fény energiája.", c: "A fény sebessége." },
+                correctAnswer: 'a',
+                explanation: "A fénysugár egy modell a geometriai optikában, amellyel a fény egyenes vonalú terjedését ábrázoljuk. Segítségével könnyen szerkeszthető a fény útja. ✅ Megoldás: A fény útját szemléltető egyenes vonal."
+            },
+            {
+                question: "Milyen test a tiszta levegő?",
+                answers: { a: "Átlátszó", b: "Áttetsző", c: "Átlátszatlan" },
+                correctAnswer: 'a',
+                explanation: "Az átlátszó testeken a fény szinte torzítás nélkül áthalad, ezért élesen átlátunk rajtuk. A tiszta levegő ilyen. ✅ Megoldás: Átlátszó."
+            },
+            {
+                question: "Melyik NEM optikai jelenség?",
+                answers: { a: "Hangrobbanás", b: "Szivárvány", c: "Tükörkép" },
+                correctAnswer: 'a',
+                explanation: "A hangrobbanás egy hangtani jelenség. A szivárvány (fénytörés, színfelbontás) és a tükörkép (fényvisszaverődés) az optika tárgykörébe tartoznak. ✅ Megoldás: Hangrobbanás."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Melyik egy másodlagos, természetes fényforrás?",
+                answers: { a: "Egy csillag", b: "A Hold", c: "Egy égő gyertya" },
+                correctAnswer: 'b',
+                explanation: "A Hold a természetben van, de nincs saját fénye, csak a Nap fényét veri vissza, ezért természetes és másodlagos fényforrás. A csillagok és a gyertya elsődlegesek. ✅ Megoldás: A Hold."
+            },
+            {
+                question: "Melyik test átlátszatlan?",
+                answers: { a: "Ablaküveg", b: "Egy fal", c: "Víz" },
+                correctAnswer: 'b',
+                explanation: "Az átlátszatlan testek nem engedik át a fényt. Egy falon nem látunk keresztül. Az ablaküveg és a tiszta víz átlátszó. ✅ Megoldás: Egy fal."
+            },
+            {
+                question: "Mi a fény terjedési sebessége vákuumban?",
+                answers: { a: "Végtelen", b: "Körülbelül 300 000 km/s", c: "Körülbelül 340 m/s" },
+                correctAnswer: 'b',
+                explanation: "A fény sebessége vákuumban a legnagyobb lehetséges sebesség, értéke kb. 300 000 kilométer másodpercenként. A 340 m/s a hang sebessége levegőben. ✅ Megoldás: Körülbelül 300 000 km/s."
+            },
+            {
+                question: "Miért látjuk a villámlást hamarabb, mint ahogy a dörgést halljuk?",
+                answers: { a: "Mert a dörgés később keletkezik.", b: "Mert a fény sokkal gyorsabban terjed, mint a hang.", c: "Mert a szemünk érzékenyebb, mint a fülünk." },
+                correctAnswer: 'b',
+                explanation: "A fény sebessége (≈300 000 km/s) nagyságrendekkel nagyobb a hangénál (≈340 m/s). Emiatt a villanás fénye szinte azonnal eljut hozzánk, míg a hangnak időre van szüksége a távolság megtételéhez. ✅ Megoldás: Mert a fény sokkal gyorsabban terjed, mint a hang."
+            },
+            {
+                question: "Milyen test a tejüveg?",
+                answers: { a: "Átlátszó", b: "Áttetsző", c: "Átlátszatlan" },
+                correctAnswer: 'b',
+                explanation: "Az áttetsző testek áteresztik a fényt, de azt szétszórják, ezért nem látunk rajtuk keresztül éles képet. A tejüveg tipikusan ilyen. ✅ Megoldás: Áttetsző."
+            },
+            {
+                question: "Melyik NEM elsődleges fényforrás?",
+                answers: { a: "A Nap", b: "Egy papírlap", c: "Egy LED lámpa" },
+                correctAnswer: 'b',
+                explanation: "Az elsődleges fényforrások saját fényt bocsátanak ki. A papírlapnak nincs saját fénye, csak a ráeső fényt veri vissza, ezért másodlagos fényforrás. ✅ Megoldás: Egy papírlap."
+            },
+            {
+                question: "Mi a látás alapvető feltétele?",
+                answers: { a: "Hogy a tárgy nagy legyen.", b: "Hogy a tárgyról fény jusson a szemünkbe.", c: "Hogy a tárgy színes legyen." },
+                correctAnswer: 'b',
+                explanation: "Ahhoz, hogy bármit lássunk, arra van szükség, hogy az adott tárgyról fénysugarak érkezzenek a szemünkbe. Ezek származhatnak a tárgyból magából (elsődleges forrás) vagy visszaverődhetnek róla (másodlagos forrás). ✅ Megoldás: Hogy a tárgyról fény jusson a szemünkbe."
+            },
+            {
+                question: "A Föld bolygó...",
+                answers: { a: "...elsődleges fényforrás.", b: "...másodlagos fényforrás.", c: "...nem fényforrás." },
+                correctAnswer: 'b',
+                explanation: "A Földnek, a Holdhoz és a többi bolygóhoz hasonlóan, nincs saját fénykibocsátása. A Nap fényét veri vissza, ezért látszik fényesnek a világűrből. ✅ Megoldás: ...másodlagos fényforrás."
+            },
+            {
+                question: "Mi a fényév?",
+                answers: { a: "Egy időtartam.", b: "Egy távolság mértékegysége.", c: "A fény erőssége." },
+                correctAnswer: 'b',
+                explanation: "A fényév egy csillagászatban használt távolságegység. Azt a távolságot jelenti, amelyet a fény egy év alatt megtesz vákuumban. ✅ Megoldás: Egy távolság mértékegysége."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Melyik egy mesterséges, elsődleges fényforrás?",
+                answers: { a: "A Hold", b: "A Nap", c: "Egy égő villanykörte" },
+                correctAnswer: 'c',
+                explanation: "A villanykörte emberi alkotás (mesterséges), és saját maga állítja elő a fényt (elsődleges). A Hold másodlagos, a Nap természetes fényforrás. ✅ Megoldás: Egy égő villanykörte."
+            },
+            {
+                question: "Melyik test vet árnyékot?",
+                answers: { a: "Átlátszó", b: "Áttetsző", c: "Átlátszatlan" },
+                correctAnswer: 'c',
+                explanation: "Az árnyék úgy keletkezik, hogy egy test elállja a fény útját. Az átlátszatlan testek nem engedik át a fényt, ezért mögöttük fényhiányos terület, azaz árnyék jön létre. ✅ Megoldás: Átlátszatlan."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "A fény egyenes vonalban terjed.", b: "A fény terjedéséhez közeg kell.", c: "A fény terjedési sebessége véges." },
+                correctAnswer: 'b',
+                explanation: "Ez az állítás hamis. Ellentétben a hanggal, a fény (elektromágneses hullám) terjedéséhez nincs szükség közvetítő közegre, a vákuumban is képes terjedni. ✅ Megoldás: A fény terjedéséhez közeg kell."
+            },
+            {
+                question: "Milyen jelenség a szivárvány?",
+                answers: { a: "Fényvisszaverődés", b: "Árnyékjelenség", c: "Fénytörés és színfelbontás" },
+                correctAnswer: 'c',
+                explanation: "A szivárvány akkor alakul ki, amikor a napfény áthalad a levegőben lévő apró vízcseppeken. A vízcseppek prizmaként viselkednek: megtörik és színeire bontják a fehér fényt. ✅ Megoldás: Fénytörés és színfelbontás."
+            },
+            {
+                question: "Mi a geometriai optika?",
+                answers: { a: "A fény hullámtermészetével foglalkozik.", b: "A fény részecsketermészetével foglalkozik.", c: "A fény terjedését fénysugarakkal, geometriai módszerekkel leíró modell." },
+                correctAnswer: 'c',
+                explanation: "A geometriai optika egy egyszerűsített modell, amelyben a fényt egyenes vonalban terjedő sugarakként kezeljük. Ez a modell kiválóan alkalmas az olyan jelenségek leírására, mint a visszaverődés, törés és a leképezés. ✅ Megoldás: A fény terjedését fénysugarakkal, geometriai módszerekkel leíró modell."
+            },
+            {
+                question: "A fény terjedési sebessége vízben...",
+                answers: { a: "...nagyobb, mint vákuumban.", b: "...egyenlő a vákuumbelivel.", c: "...kisebb, mint vákuumban." },
+                correctAnswer: 'c',
+                explanation: "A fény sebessége minden anyagi közegben kisebb, mint a vákuumbeli fénysebesség. Minél sűrűbb egy optikai közeg, annál lassabban halad benne a fény. ✅ Megoldás: ...kisebb, mint vákuumban."
+            },
+            {
+                question: "Mi a látás folyamata?",
+                answers: { a: "A szem fényt bocsát ki a tárgyra.", b: "Az agy képet küld a szemnek.", c: "A tárgyról érkező fény a szemben képet alkot, amit az agy feldolgoz." },
+                correctAnswer: 'c',
+                explanation: "A látás során a tárgyakról (mint másodlagos fényforrásokról) visszaverődő fény a szemlencsén keresztül a retinára fókuszálódik, ahol egy fordított kép keletkezik. Ezt a képet az idegek elektromos jelekké alakítják, amit az agy értelmez. ✅ Megoldás: A tárgyról érkező fény a szemben képet alkot, amit az agy feldolgoz."
+            },
+            {
+                question: "Egy bekapcsolt okostelefon kijelzője...",
+                answers: { a: "...másodlagos fényforrás.", b: "...nem fényforrás.", c: "...elsődleges, mesterséges fényforrás." },
+                correctAnswer: 'c',
+                explanation: "A telefont az ember készítette (mesterséges), és a kijelzője saját maga állítja elő a fényt, amit látunk (elsődleges). ✅ Megoldás: ...elsődleges, mesterséges fényforrás."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

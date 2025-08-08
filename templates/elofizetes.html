@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Előfizetés - MatekTanár Projekt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stilus.css') }}">
+    <style>
+        .pricing-table { display: flex; justify-content: center; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; }
+        .pricing-card { background: var(--feher); border-radius: 12px; box-shadow: var(--card-shadow); width: 320px; padding: 2rem; text-align: center; border-top: 5px solid var(--piros); }
+        .pricing-card h3 { font-family: 'Roboto Slab', serif; font-size: 1.8rem; margin-top: 0; }
+        .price { font-size: 2.5rem; font-weight: bold; margin: 1rem 0; color: var(--sotet); }
+        .price .month { font-size: 1rem; font-weight: normal; }
+        .pricing-card ul { list-style: none; padding: 0; margin: 2rem 0; text-align: left; }
+        .pricing-card li { margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="content-wrapper">
+        <main class="container">
+            <section class="section">
+                <h2 class="section-title">Teljes Hozzáférés a Tudáshoz</h2>
+                 <p class="section-subtitle">Válaszd az egyszerű, mindenre kiterjedő csomagunkat, és spórolj az éves előfizetéssel!</p>
+                <div class="pricing-table">
+                    
+                    <div class="pricing-card">
+                        <h3>Havi Prémium</h3>
+                        <div class="price">5€<span class="month">/hó</span></div>
+                        <ul>
+                            <li>✅ Minden <strong>Matematika & Fizika</strong> kurzus</li>
+                            <li>✅ Minden interaktív kvíz</li>
+                            <li>✅ Minden <strong>AIMI & Szuperképesség</strong> Műhely</li>
+                            <li>✅ Összes <strong>exkluzív MI eszköz</strong></li>
+                            <li>✅ Hozzáférés a jövőbeli tartalmakhoz</li>
+                        </ul>
+                        <!-- A gomb egyelőre nem csinál semmit -->
+                        <a href="#" class="btn btn-primary math-btn">Kiválasztom</a>
+                    </div>
+
+                    <div class="pricing-card" style="border-top-color: var(--zold);">
+                        <h3>Éves Prémium</h3>
+                        <span style="background: var(--zold); color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight:bold;">2 HÓNAP AJÁNDÉK</span>
+                        <div class="price">50€<span class="month">/év</span></div>
+                        <ul>
+                            <li>✅ Minden <strong>Matematika & Fizika</strong> kurzus</li>
+                            <li>✅ Minden interaktív kvíz</li>
+                            <li>✅ Minden <strong>AIMI & Szuperképesség</strong> Műhely</li>
+                            <li>✅ Összes <strong>exkluzív MI eszköz</strong></li>
+                            <li>✅ Hozzáférés a jövőbeli tartalmakhoz</li>
+                        </ul>
+                         <!-- A gomb egyelőre nem csinál semmit -->
+                        <a href="#" class="btn btn-primary ai-btn">Kiválasztom</a>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        fetch("{{ url_for('navigacio') }}").then(r=>r.text()).then(d=>document.getElementById('navbar-placeholder').innerHTML=d);
+    </script>
+</body>
+</html>

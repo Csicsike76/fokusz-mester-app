@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Két halmaz Descartes-szorzata</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 5px; border-radius: 3px; display: block; text-align: center; margin: 10px 0;}
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Két halmaz Descartes-szorzata</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Mit jelent a Descartes-szorzat?", answers: { a: "Két halmaz elemeiből képzett összes rendezett elempár halmaza.", b: "A két halmaz közös elemeinek halmaza.", c: "A két halmaz összes elemének halmaza." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Az A és B halmaz Descartes-szorzata (A × B) azoknak az (a,b) rendezett pároknak a halmaza, ahol 'a' eleme az A halmaznak, 'b' pedig eleme a B halmaznak.</div><div class="explanation-solution">✅ Megoldás: A helyes definíció a két halmaz elemeiből képzett összes rendezett elempár halmaza.</div>` },
+            { question: "Legyen A = {1, 2} és B = {c}. Mi az A × B?", answers: { a: "{(1, c), (2, c)}", b: "{(c, 1), (c, 2)}", c: "{1, 2, c}" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Levezetés:</b> Az A halmaz minden elemét párosítjuk a B halmaz minden elemével. Az első helyen az A halmaz elemei állnak.</div><div class="explanation-step"><b>🔹 Elemek:</b> Az 1-et párosítjuk c-vel: (1, c). A 2-t párosítjuk c-vel: (2, c).</div><div class="explanation-solution">✅ Megoldás: Az A × B halmaz az {(1, c), (2, c)}.</div>` },
+            { question: "Ha card(A) = 3 és card(B) = 4, akkor mennyi card(A × B)?", answers: { a: "12", b: "7", c: "3" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Tétel:</b> A Descartes-szorzat elemszáma a halmazok elemszámának szorzata.</div><div class="explanation-step"><b>🔹 Számolás:</b> card(A × B) = card(A) * card(B) = 3 * 4 = 12.</div><div class="explanation-solution">✅ Megoldás: A Descartes-szorzatnak 12 eleme van.</div>` },
+            { question: "Melyik pont van a koordináta-rendszer II. síknegyedében?", answers: { a: "(-2, 3)", b: "(2, 3)", c: "(2, -3)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Síknegyedek:</b> I.(+,+), II.(-,+), III.(-,-), IV.(+,-).</div><div class="explanation-step"><b>🔹 Elemzés:</b> A II. síknegyedben az x-koordináta negatív, az y-koordináta pozitív.</div><div class="explanation-solution">✅ Megoldás: A (-2, 3) pont felel meg a kritériumnak.</div>` },
+            { question: "Mi a koordináta-rendszer origójának koordinátája?", answers: { a: "(0, 0)", b: "(1, 1)", c: "Nincs neki." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Az origó az a pont, ahol az x- és az y-tengely metszi egymást. Ez mindkét tengelyen a 0 értéknél történik.</div><div class="explanation-solution">✅ Megoldás: Az origó koordinátája (0, 0).</div>` },
+            { question: "Egy pont az y-tengelyen helyezkedik el. Mi igaz a koordinátáira?", answers: { a: "Az x-koordinátája 0.", b: "Az y-koordinátája 0.", c: "Mindkét koordinátája 0." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Az y-tengelyen lévő pontok nem mozdulnak el sem jobbra, sem balra az origótól, ezért az x-irányú koordinátájuk mindig 0.</div><div class="explanation-solution">✅ Megoldás: Egy y-tengelyen lévő pont x-koordinátája 0.</div>` },
+            { question: "Ha A × B = {(k, a), (k, b), (m, a), (m, b)}, akkor mi az A halmaz?", answers: { a: "{k, m}", b: "{a, b}", c: "{k, m, a, b}" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> A Descartes-szorzat (a,b) párjainak első tagjai mindig az első halmazból (A) származnak.</div><div class="explanation-step"><b>🔹 Leolvasás:</b> Az első koordináták a 'k' és az 'm'.</div><div class="explanation-solution">✅ Megoldás: Az A halmaz az {k, m}.</div>` },
+            { question: "Mit nevezünk egy pont első koordinátájának?", answers: { a: "Abszcissza", b: "Ordináta", c: "Origó" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elnevezések:</b> A derékszögű koordináta-rendszerben az x-koordinátát abszcisszának, az y-koordinátát ordinátának nevezzük.</div><div class="explanation-solution">✅ Megoldás: Az első koordináta az abszcissza.</div>` },
+            { question: "Mit jelent a '(a, b)' jelölés a Descartes-szorzatban?", answers: { a: "Rendezett elempár", b: "Halmaz", c: "Számpár" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A kerek zárójel olyan párt jelöl, ahol a sorrend számít. Ezért (a,b) nem ugyanaz, mint (b,a), ha a≠b. Ezt a tulajdonságot "rendezett"-nek hívjuk.</div><div class="explanation-solution">✅ Megoldás: A helyes kifejezés a rendezett elempár.</div>` },
+            { question: "Legyen A = {x} és B = {y, z}. Mi az A × B?", answers: { a: "{(x,y), (x,z)}", b: "{(y,x), (z,x)}", c: "{x, y, z}" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Levezetés:</b> Az A halmaz minden elemét párosítjuk a B halmaz minden elemével. Az első helyen az A halmaz elemei állnak.</div><div class="explanation-step"><b>🔹 Elemek:</b> Az x-et párosítjuk y-nal: (x, y). Az x-et párosítjuk z-vel: (x, z).</div><div class="explanation-solution">✅ Megoldás: Az A × B halmaz az {(x, y), (x, z)}.</div>` },
+            { question: "Mikor igaz az A × B = B × A egyenlőség?", answers: { a: "Soha", b: "Ha A = B", c: "Mindig" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A Descartes-szorzat sorrendérzékeny. Az (a,b) pár csak akkor egyenlő a (b,a) párral, ha a=b. Ezért a szorzathalmazok is csak akkor lesznek egyenlőek, ha az eredeti halmazok is megegyeznek (vagy valamelyik üres).</div><div class="explanation-solution">✅ Megoldás: Az egyenlőség akkor áll fenn, ha A = B.</div>` },
+            { question: "Melyik síknegyedben van a (-1, -5) pont?", answers: { a: "II.", b: "III.", c: "IV." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Síknegyedek:</b> I.(+,+), II.(-,+), III.(-,-), IV.(+,-).</div><div class="explanation-step"><b>🔹 Elemzés:</b> A (-1, -5) pontban mindkét koordináta negatív, tehát a III. síknegyedben található.</div><div class="explanation-solution">✅ Megoldás: A pont a III. síknegyedben van.</div>` },
+            { question: "Mi a vízszintes tengely neve a koordináta-rendszerben?", answers: { a: "Ordinátatengely", b: "Abszcisszatengely (x-tengely)", c: "y-tengely" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elnevezések:</b> A vízszintes tengelyt x-tengelynek vagy abszcisszatengelynek, a függőlegeset y-tengelynek vagy ordinátatengelynek nevezzük.</div><div class="explanation-solution">✅ Megoldás: A vízszintes tengely az abszcisszatengely (x-tengely).</div>` },
+            { question: "Mit nevezünk egy pont második koordinátájának?", answers: { a: "Abszcissza", b: "Ordináta", c: "Koordináta" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elnevezések:</b> A derékszögű koordináta-rendszerben az x-koordinátát (első) abszcisszának, az y-koordinátát (második) ordinátának nevezzük.</div><div class="explanation-solution">✅ Megoldás: A második koordináta az ordináta.</div>` },
+            { question: "Ha A × B = {(k, a), (k, b), (m, a), (m, b)}, akkor mi a B halmaz?", answers: { a: "{k, m}", b: "{a, b}", c: "{k, m, a, b}" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> A Descartes-szorzat (a,b) párjainak második tagjai mindig a második halmazból (B) származnak.</div><div class="explanation-step"><b>🔹 Leolvasás:</b> A második koordináták az 'a' és a 'b'.</div><div class="explanation-solution">✅ Megoldás: A B halmaz az {a, b}.</div>` },
+            { question: "Ha az A halmaznak 5 eleme van, és B halmaznak 6 eleme van, hány eleme van a B × A szorzatnak?", answers: { a: "11", b: "30", c: "Nem lehet tudni" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Tétel:</b> A Descartes-szorzat elemszáma a halmazok elemszámának szorzata. A sorrend nem befolyásolja az elemszámot.</div><div class="explanation-step"><b>🔹 Számolás:</b> card(B × A) = card(B) * card(A) = 6 * 5 = 30.</div><div class="explanation-solution">✅ Megoldás: A szorzatnak 30 eleme van.</div>` },
+            { question: "Igaz vagy hamis: Az (5, 3) és (3, 5) rendezett párok ugyanazt a pontot jelölik a koordináta-rendszerben.", answers: { a: "Igaz", b: "Hamis", c: "Csak ha pozitívak" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b><br>• (5, 3): 5 egység jobbra az x-tengelyen, 3 egység fel az y-tengelyen.<br>• (3, 5): 3 egység jobbra az x-tengelyen, 5 egység fel az y-tengelyen.</div><div class="explanation-step"><b>🔹 Következtetés:</b> A két pont különböző helyen van. A rendezett pároknál a sorrend számít.</div><div class="explanation-solution">✅ Megoldás: Az állítás hamis.</div>` },
+            { question: "Melyik pont van az x-tengelyen?", answers: { a: "(3, 3)", b: "(3, 0)", c: "(0, 3)" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Egy pont akkor van az x-tengelyen, ha az y-koordinátája 0, mivel nem mozdul el sem fel, sem le az x-tengelyről.</div><div class="explanation-solution">✅ Megoldás: A (3, 0) pont van az x-tengelyen.</div>` },
+            { question: "A Descartes-szorzat felcserélhető (kommutatív) művelet?", answers: { a: "Igen, mindig", b: "Néha", c: "Nem, általában nem" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A Descartes-szorzat rendezett párokból áll, ahol a sorrend számít. (a,b) ≠ (b,a), ha a≠b.</div><div class="explanation-step"><b>🔹 Példa:</b> Legyen A={1}, B={2}. A×B={(1,2)}, de B×A={(2,1)}. A két halmaz nem egyenlő.</div><div class="explanation-solution">✅ Megoldás: A Descartes-szorzat általában nem felcserélhető (nem kommutatív).</div>` },
+            { question: "Melyik síknegyedben van a (4, -1) pont?", answers: { a: "I.", b: "II.", c: "IV." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Síknegyedek:</b> I.(+,+), II.(-,+), III.(-,-), IV.(+,-).</div><div class="explanation-step"><b>🔹 Elemzés:</b> A (4, -1) pontban az x-koordináta pozitív, az y-koordináta negatív, tehát a IV. síknegyedben található.</div><div class="explanation-solution">✅ Megoldás: A pont a IV. síknegyedben van.</div>` },
+            { question: "Mi a függőleges tengely neve a koordináta-rendszerben?", answers: { a: "x-tengely", b: "Abszcisszatengely", c: "Ordinátatengely (y-tengely)" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elnevezések:</b> A vízszintes tengelyt x-tengelynek vagy abszcisszatengelynek, a függőlegeset y-tengelynek vagy ordinátatengelynek nevezzük.</div><div class="explanation-solution">✅ Megoldás: A függőleges tengely az ordinátatengely (y-tengely).</div>` },
+            { question: "A P(-3, 5) pont abszcisszája:", answers: { a: "5", b: "2", c: "-3" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Egy pont abszcisszája az első, x-koordinátája. Ordinátája a második, y-koordinátája.</div><div class="explanation-solution">✅ Megoldás: A P(-3, 5) pont abszcisszája -3.</div>` },
+            { question: "A Q(7, -1) pont ordinátája:", answers: { a: "7", b: "6", c: "-1" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Egy pont abszcisszája az első, x-koordinátája. Ordinátája a második, y-koordinátája.</div><div class="explanation-solution">✅ Megoldás: A Q(7, -1) pont ordinátája -1.</div>` },
+            { question: "Hány eleme van a {k, l} × {1, 2, 3} szorzatnak?", answers: { a: "5", b: "4", c: "6" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> A Descartes-szorzat elemszáma a halmazok elemszámának szorzata.</div><div class="explanation-step"><b>🔹 Számolás:</b> Az első halmaznak 2 eleme van, a másodiknak 3. Így a szorzatnak 2 * 3 = 6 eleme van.</div><div class="explanation-solution">✅ Megoldás: A szorzathalmaznak 6 eleme van.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

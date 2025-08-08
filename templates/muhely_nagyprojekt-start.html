@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 28-29. hét: Nagy Projekt - Start</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #e3f2fd;
+            --example-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .prompt-example {
+            background-color: var(--example-bg);
+            border: 1px dashed var(--example-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>IV. Modul: A Nagy Projekt</h1>
+            <p>28-29. hét: Ötletelés és csapatépítés</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>Ezen a dupla héten a cél, hogy megalapozzátok a félév végi nagy projekteteket. A műhely végére <strong>csapatokba szerveződtök, kiválasztotok egy titeket érdeklő témát</strong>, és megfogalmazzátok azt a konkrét problémát, amivel foglalkozni fogtok. Létrehoztok egy egyszerű projektterv-vázlatot, ami a következő hetek munkáját irányítja.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Bevezető: A Garázstól a Világsikerig</h2>
+                <p>Sok híres cég és innováció egy egyszerű ötlettel indult egy garázsban vagy egy kollégiumi szobában. A következő hetekben ti is egy ilyen "startup" csapattá váltok. Nem kell megváltanotok a világot, de lehetőségetek van arra, hogy egy olyan problémával foglalkozzatok, ami valóban érdekel titeket. Az MI lesz a legfőbb eszközötök a kutatásban, tervezésben és alkotásban. Az első és legfontosabb lépés: megtalálni azt az egyetlen, közös ötletet, amiért a csapat minden tagja lelkesedni tud.</p>
+            </section>
+            
+            <section class="workshop-section">
+                <h2>3. Kulcsfogalmak</h2>
+                <ul>
+                    <li><strong>Problémamegfogalmazás (Problem Statement):</strong> Egy-két mondat, ami pontosan leírja, mi az a probléma, amit a projektetekkel orvosolni szeretnétek.</li>
+                    <li><strong>Célkitűzés (Goal/Objective):</strong> Egy mondat, ami leírja, mit szeretnétek elérni. Mi lesz a projekt kézzelfogható eredménye?</li>
+                    <li><strong>Célközönség (Target Audience):</strong> Kinek készül a projekt? Kinek a problémáját oldja meg? (pl. diákok, tanárok, a helyi közösség)</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <h2>4. Lépésről-lépésre Feladatok</h2>
+
+                <div class="task-card">
+                    <h3>1. Feladat: Csapatépítés (kb. 15 perc)</h3>
+                    <p>Ez a projekt csapatmunka! A feladatotok, hogy alkossatok <strong>3-4 fős csapatokat</strong>! Próbáljatok olyanokkal zusammenarbeiten, akikkel jól tudtok együtt dolgozni és hasonló az érdeklődési körötök.</p>
+                    <p>Ha a csapatok megalakultak, találjatok ki egy nevet a csapatotoknak!</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: Témakörök Feltárása (kb. 30 perc)</h3>
+                    <p>Most, hogy van egy csapatotok, ötleteljetek közösen! Milyen nagy témakörök érdekelnek titeket? Használjátok az MI-t inspirációként!</p>
+                    <div class="prompt-example">Viselkedj úgy, mint egy innovációs tanácsadó! Egy középiskolás diákokból álló csapat vagyunk, és egy féléves MI-projekthez keresünk témát. Adj 5 nagy témakört, ami érdekes lehet számunkra, és mindegyikhez 2-3 konkrét projektötletet! A témák legyenek relevánsak a mindennapi életünkre (pl. iskola, környezetvédelem, közösség, mentális egészség, kreativitás).</div>
+                    <p><strong>Feladat:</strong> Beszéljétek meg az MI által adott ötleteket és a sajátjaitokat! Válasszatok ki <strong>1-2 nagy témakört</strong>, amivel a legszívesebben foglalkoznátok.</p>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: A Konkrét Probléma Megtalálása (kb. 30 perc)</h3>
+                    <p>A "környezetvédelem" túl tág téma. Konkrét problémára van szükségetek! Most szűkítsétek a kört az MI segítségével!</p>
+                    <div class="prompt-example">A csapatunkat a(z) "[ide írjátok a választott témakört, pl. iskolai élet]" téma érdekli. Adj 5 konkrét, kicsi, megoldható problémát ezen a területen belül, amivel egy diákprojekt foglalkozhatna!</div>
+                    <p><strong>Feladat:</strong> Válasszátok ki azt az <strong>egyetlen, konkrét problémát</strong>, ami a csapatotokat a legjobban motiválja! (Pl. "Nehéz követni a házi feladatokat", "Sok ételmaradék keletkezik a menzán", "Az új diákok nehezen illeszkednek be".)</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>4. Feladat: A Projektcél Megfogalmazása (kb. 15 perc)</h3>
+                    <p>Most, hogy megvan a probléma, fogalmazzátok meg a célt! Mit fogtok létrehozni?</p>
+                    <div class="prompt-example">A problémánk a következő: "[ide másoljátok a problémátokat]". Adj javaslatot egy fülbemászó projektnévre és egy egyetlen mondatos célkitűzésre (mission statement)! A célkitűzés írja le, mi lesz a projektünk kézzelfogható eredménye (pl. egy applikáció terve, egy kampányterv, egy bemutató).</div>
+                    <p><strong>Feladat:</strong> A kapott javaslatok alapján fogalmazzátok meg a projektetek végleges címét és célkitűzését!</p>
+                </div>
+            </section>
+            
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>5. Kritikai Gondolkodás Sarok</h2>
+                    <p>Mielőtt belevágnátok, gondoljátok át közösen!</p>
+                    <ul>
+                        <li><strong>Valódi a probléma?</strong> A kiválasztott probléma tényleg létezik, és tényleg zavarja a célközönséget? Vagy csak egy érdekesnek tűnő ötlet? Hogyan tudnátok erről meggyőződni? (Pl. megkérdezhettek más diákokat.)</li>
+                        <li><strong>Megoldható a probléma?</strong> A célkitűzésetek reális? Az MI tényleg tud segíteni a megvalósításban? Fontos, hogy a projekt a rendelkezésre álló idő (néhány hét) és eszközök (MI-asszisztensek) keretein belül megvalósítható legyen.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>6. A Hét Kihívása: A Projekt Terv Vázlat Elkészítése</h2>
+                    <p>A két hét munkájának eredménye egyetlen, közös dokumentum, a "Projekt Terv Vázlat".</p>
+                    <p><strong>Készítsetek egy egyoldalas dokumentumot (pl. Google Docs), ami a következőket tartalmazza:</strong></p>
+                    <ol>
+                        <li><strong>Csapatnév</strong></li>
+                        <li><strong>Csapattagok nevei</strong></li>
+                        <li><strong>A Projekt Címe</strong></li>
+                        <li><strong>Problémamegfogalmazás (1-2 mondat):</strong> Mi az a probléma, amit megoldotok?</li>
+                        <li><strong>Célkitűzés (1 mondat):</strong> Mi lesz a projekt kézzelfogható eredménye?</li>
+                        <li><strong>Célközönség (1 mondat):</strong> Kinek készült a projekt?</li>
+                    </ol>
+                    <p>Ezt a dokumentumot mentsétek el a csapatotoknak! A következő hetekben ez lesz az útitervetek. Sok sikert a közös munkához!</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Terület és térfogat közvetett mérése</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 5px; border-radius: 3px; display: inline-block; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Terület és térfogat közvetett mérése</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Mi a közvetett mérés lényege?", answers: { a: "A mért mennyiség kiszámítása más, közvetlenül mért adatokból.", b: "A mért mennyiség leolvasása egy speciális műszerről.", c: "A mérés többszöri megismétlése." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Közvetett mérésnek nevezzük, amikor a keresett mennyiséget nem tudjuk közvetlenül leolvasni, hanem más, mérhető adatokból (pl. hosszúság) és egy képlet segítségével határozzuk meg.</div><div class="explanation-solution">✅ Megoldás: A helyes definíció az, hogy a mennyiséget más adatokból számítjuk ki.</div>` },
+            { question: "Egy 5 m hosszú és 4 m széles szoba padlójának területe...", answers: { a: "közvetett méréssel határozható meg.", b: "közvetlen méréssel határozható meg.", c: "nem mérhető." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Mérés menete:</b> Megmérjük a hosszúságot (közvetlen mérés) és a szélességet (közvetlen mérés).</div><div class="explanation-step"><b>🔹 Számolás:</b> A területet a T = a * b képlettel számoljuk ki. Mivel számolásra van szükség, a mérés közvetett.</div><div class="explanation-solution">✅ Megoldás: A terület közvetett méréssel határozható meg.</div>` },
+            { question: "Melyik a terület mértékegysége?", answers: { a: "négyzetméter (m²)", b: "méter (m)", c: "köbméter (m³)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Mértékegységek:</b><br>• méter (m): hosszúság<br>• négyzetméter (m²): terület<br>• köbméter (m³): térfogat</div><div class="explanation-solution">✅ Megoldás: A terület mértékegysége a négyzetméter.</div>` },
+            { question: "Hogyan számoljuk ki egy téglatest térfogatát?", answers: { a: "V = a * b * c", b: "V = a + b + c", c: "V = 2(ab+ac+bc)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képletek:</b> A téglatest térfogatát a három különböző élhosszának szorzatával kapjuk meg. A V = 2(ab+ac+bc) a felszín képlete.</div><div class="explanation-solution">✅ Megoldás: A térfogat képlete V = a * b * c.</div>` },
+            { question: "Melyik mennyiséget mérjük közvetlenül egy stopperrel?", answers: { a: "Időtartam", b: "Sebesség", c: "Hosszúság" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A stopperről közvetlenül az eltelt időt olvassuk le. A sebességet útból és időből számoljuk (közvetett mérés). A hosszúságot vonalzóval mérjük.</div><div class="explanation-solution">✅ Megoldás: Az időtartamot mérjük közvetlenül.</div>` },
+            { question: "Egy 10 cm élű kocka térfogata:", answers: { a: "1000 cm³", b: "100 cm²", c: "600 cm²" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A kocka térfogata V = a³, ahol 'a' az élhossz.</div><div class="explanation-step"><b>🔹 Számolás:</b> V = 10 cm * 10 cm * 10 cm = 1000 cm³.</div><div class="explanation-solution">✅ Megoldás: A kocka térfogata 1000 cm³.</div>` },
+            { question: "Egy szoba 2 m magas, 3 m széles és 5 m hosszú. Mennyi a térfogata?", answers: { a: "30 m³", b: "10 m³", c: "62 m²" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A téglatest térfogata V = a * b * c.</div><div class="explanation-step"><b>🔹 Számolás:</b> V = 2 m * 3 m * 5 m = 30 m³.</div><div class="explanation-solution">✅ Megoldás: A szoba térfogata 30 m³.</div>` },
+            { question: "Mennyi 2 négyzetméter (m²) négyzetcentiméterben (cm²)?", answers: { a: "20 000 cm²", b: "200 cm²", c: "2000 cm²" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 méter = 100 centiméter.</div><div class="explanation-step"><b>🔹 Négyzetre emelés:</b> 1 m² = (100 cm)² = 100 cm * 100 cm = 10 000 cm².</div><div class="explanation-step"><b>🔹 Számolás:</b> 2 m² = 2 * 10 000 cm² = 20 000 cm².</div><div class="explanation-solution">✅ Megoldás: 2 m² az 20 000 cm².</div>` },
+            { question: "Melyik mennyiséget NEM tudjuk közvetlenül mérni egy hagyományos vonalzóval?", answers: { a: "Hosszúság", b: "Terület", c: "Szélesség" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A vonalzó a hosszúság mérésére szolgáló eszköz. A szélesség is egy hosszúság. A területet a mért hosszúságokból számoljuk, tehát azt nem mérjük közvetlenül.</div><div class="explanation-solution">✅ Megoldás: A területet nem tudjuk közvetlenül mérni vonalzóval.</div>` },
+            { question: "Egy 6 cm oldalú négyzet területe:", answers: { a: "24 cm²", b: "36 cm²", c: "12 cm²" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A négyzet területe T = a * a = a².</div><div class="explanation-step"><b>🔹 Számolás:</b> T = 6 cm * 6 cm = 36 cm². (A 24 cm a kerülete lenne).</div><div class="explanation-solution">✅ Megoldás: A négyzet területe 36 cm².</div>` },
+            { question: "Mi a térfogat jele a fizikában?", answers: { a: "T", b: "V", c: "A" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Jelek:</b> A térfogatot általában 'V' betűvel (az angol volume szóból), a területet 'A'-val (area) vagy 'T'-vel, az időt 't'-vel jelöljük.</div><div class="explanation-solution">✅ Megoldás: A térfogat jele V.</div>` },
+            { question: "Egy medence 10 m hosszú, 5 m széles és 2 m mély. Hány liter víz fér bele?", answers: { a: "1000 liter", b: "100 000 liter", c: "10 000 liter" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Térfogat számítása:</b> V = 10 m * 5 m * 2 m = 100 m³.</div><div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 köbméter (m³) = 1000 liter.</div><div class="explanation-step"><b>🔹 Számolás:</b> 100 m³ = 100 * 1000 liter = 100 000 liter.</div><div class="explanation-solution">✅ Megoldás: 100 000 liter víz fér a medencébe.</div>` },
+            { question: "Melyik mérés közvetett?", answers: { a: "Egy cérna hosszának megmérése.", b: "Egy szoba alapterületének kiszámítása.", c: "Egy pohár víz térfogatának leolvasása mérőhengerből." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A cérna hosszát és a víz térfogatát közvetlenül leolvassuk. A szoba alapterületét az oldalhosszak megmérése után számolással határozzuk meg, ezért az közvetett.</div><div class="explanation-solution">✅ Megoldás: A szoba alapterületének kiszámítása közvetett mérés.</div>` },
+            { question: "Ha egy kocka térfogata 8 cm³, milyen hosszú egy éle?", answers: { a: "4 cm", b: "2 cm", c: "2.67 cm" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A kocka térfogata V = a³.</div><div class="explanation-step"><b>🔹 Visszafelé gondolkodás:</b> Azt a számot keressük, amelynek a harmadik hatványa 8.</div><div class="explanation-step"><b>🔹 Megoldás:</b> 2 * 2 * 2 = 8, tehát az élhossz 2 cm.</div><div class="explanation-solution">✅ Megoldás: A kocka éle 2 cm.</div>` },
+            { question: "Mennyi egy 30 cm × 40 cm-es papírlap területe négyzetméterben?", answers: { a: "1.2 m²", b: "0.12 m²", c: "1200 m²" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Számolás cm²-ben:</b> T = 30 cm * 40 cm = 1200 cm².</div><div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 m² = 10 000 cm². Ezért a cm²-ben kapott értéket osztanunk kell 10 000-rel.</div><div class="explanation-step"><b>🔹 Levezetés:</b> 1200 / 10 000 = 0.12 m².</div><div class="explanation-solution">✅ Megoldás: A papírlap területe 0.12 m².</div>` },
+            { question: "Melyik méréshez van szükségünk képletre?", answers: { a: "Időtartam méréséhez", b: "Tömeg méréséhez", c: "Téglatest térfogatának meghatározásához" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Az időtartamot és a tömeget leolvassuk egy mérőeszközről (közvetlen mérés). A téglatest térfogatát a V=a*b*c képlettel számoljuk ki, miután lemértük az oldalait (közvetett mérés).</div><div class="explanation-solution">✅ Megoldás: A téglatest térfogatának meghatározásához van szükség képletre.</div>` },
+            { question: "Egy 3 cm oldalú kocka felszíne:", answers: { a: "27 cm²", b: "9 cm²", c: "54 cm²" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Felszín:</b> A kockát 6 darab egybevágó négyzetlap határolja.</div><div class="explanation-step"><b>🔹 Egy lap területe:</b> T_lap = 3 cm * 3 cm = 9 cm².</div><div class="explanation-step"><b>🔹 Teljes felszín:</b> A = 6 * T_lap = 6 * 9 cm² = 54 cm².</div><div class="explanation-solution">✅ Megoldás: A kocka felszíne 54 cm².</div>` },
+            { question: "Ha egy téglalap területét és egyik oldalát ismerjük, hogyan számoljuk ki a másik oldalát?", answers: { a: "Összeadjuk őket.", b: "Elosztjuk a területet az ismert oldallal.", c: "Megszorozzuk őket." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> T = a * b.</div><div class="explanation-step"><b>🔹 Átrendezés:</b> Ha 'a'-t keressük, akkor az egyenlet mindkét oldalát elosztjuk 'b'-vel: a = T / b.</div><div class="explanation-solution">✅ Megoldás: A másik oldalt úgy kapjuk meg, hogy elosztjuk a területet az ismert oldallal.</div>` },
+            { question: "Egy könyv 20 cm hosszú. Hány ilyen könyvet lehet egymás mellé tenni egy 2 méteres polcra?", answers: { a: "5", b: "100", c: "10" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Először hozzuk közös mértékegységre az adatokat. 2 méter = 200 cm.</div><div class="explanation-step"><b>🔹 Osztás:</b> A polc hosszát elosztjuk egy könyv hosszával: 200 cm / 20 cm = 10.</div><div class="explanation-solution">✅ Megoldás: 10 könyvet lehet a polcra tenni.</div>` },
+            { question: "Egy 2 literes üdítőből hány 2 deciliteres poharat lehet teletölteni?", answers: { a: "5", b: "20", c: "10" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> 1 liter = 10 deciliter, tehát 2 liter = 20 deciliter.</div><div class="explanation-step"><b>🔹 Osztás:</b> A teljes mennyiséget elosztjuk egy pohár űrtartalmával: 20 dl / 2 dl = 10.</div><div class="explanation-solution">✅ Megoldás: 10 poharat lehet teletölteni.</div>` },
+            { question: "Melyik állítás igaz?", answers: { a: "A területet literben mérjük.", b: "Az időt méterben mérjük.", c: "A térfogatot köbcentiméterben mérjük." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Mennyiségek és mértékegységek:</b><br>• Terület -> m², cm², stb.<br>• Idő -> s, min, h, stb.<br>• Térfogat -> m³, cm³, liter, stb.</div><div class="explanation-solution">✅ Megoldás: A helyes párosítás az, hogy a térfogatot köbcentiméterben mérjük.</div>` },
+            { question: "Ha egy kocka élét megháromszorozzuk, hányszorosára nő a térfogata?", answers: { a: "9-szeresére", b: "3-szorosára", c: "27-szeresére" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Eredeti térfogat:</b> V₁ = a³.</div><div class="explanation-step"><b>🔹 Új térfogat:</b> Az új élhossz 3a. Az új térfogat V₂ = (3a)³ = 3³ * a³ = 27a³.</div><div class="explanation-step"><b>🔹 Arány:</b> V₂ / V₁ = 27a³ / a³ = 27.</div><div class="explanation-solution">✅ Megoldás: A térfogata 27-szeresére nő.</div>` },
+            { question: "Egy 10 cm x 20 cm x 30 cm méretű dobozba hány 1 cm élű kocka fér el?", answers: { a: "60", b: "600", c: "6000" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Térfogat számítása:</b> A doboz térfogata V = 10 cm * 20 cm * 30 cm = 6000 cm³.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Egy 1 cm élű kocka térfogata 1 cm³.</div><div class="explanation-step"><b>🔹 Következtetés:</b> A 6000 cm³-es dobozba 6000 darab 1 cm³-es kocka fér el.</div><div class="explanation-solution">✅ Megoldás: 6000 kocka fér el a dobozban.</div>` },
+            { question: "Melyik a terület mértékegysége?", answers: { a: "hektár", b: "kilogramm", c: "óra" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A kilogramm a tömeg, az óra az idő mértékegysége. A hektár (10 000 m²) egy, a mezőgazdaságban gyakran használt területmérték.</div><div class="explanation-solution">✅ Megoldás: A hektár a terület mértékegysége.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

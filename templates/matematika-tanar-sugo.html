@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Matematika Fizika Mesterséges Intelligencia - Digitális Eszköztár</title>
+    <meta name="description" content="Egy inspiráló 5-8. osztályos matematika tanár digitális eszköztára, aki empátiával, kreativitással és mesterséges intelligenciával tanít.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stilus.css') }}">
+    <style>
+        /* Súgó stílusok */
+        .help-section {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(80, 200, 120, 0.1));
+            border: 2px solid rgba(74, 144, 226, 0.3);
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 1200px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .help-header {
+            background: linear-gradient(135deg, #4a90e2, #50c878);
+            color: white;
+            padding: 15px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+        
+        .help-header:hover {
+            background: linear-gradient(135deg, #3a7bd5, #40b068);
+        }
+        
+        .help-toggle {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+        
+        .help-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .help-content.active {
+            max-height: 800px;
+        }
+        
+        .help-inner {
+            padding: 25px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        .help-column h3 {
+            color: #4a90e2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            border-bottom: 2px solid #50c878;
+            padding-bottom: 5px;
+        }
+        
+        .help-step {
+            background: white;
+            border-left: 4px solid #50c878;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .help-step strong {
+            color: #4a90e2;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .help-tip {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .help-tip strong {
+            color: #856404;
+        }
+        
+        @media (max-width: 768px) {
+            .help-inner {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+        /* Súgó stílusok */
+.help-section {
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(80, 200, 120, 0.1));
+    border: 2px solid rgba(74, 144, 226, 0.3);
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 1200px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.help-header {
+    background: linear-gradient(135deg, #4a90e2, #50c878);
+    color: white;
+    padding: 15px 25px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+.help-header:hover {
+    background: linear-gradient(135deg, #3a7bd5, #40b068);
+}
+
+.help-toggle {
+    font-size: 1.5em;
+    transition: transform 0.3s ease;
+}
+
+.help-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.help-content.active {
+    max-height: 800px;
+}
+
+.help-inner {
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.help-column h3 {
+    color: #4a90e2;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    border-bottom: 2px solid #50c878;
+    padding-bottom: 5px;
+}
+
+.help-step {
+    background: white;
+    border-left: 4px solid #50c878;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.help-step strong {
+    color: #4a90e2;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.help-tip {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    grid-column: 1 / -1;
+}
+
+.help-tip strong {
+    color: #856404;
+}
+
+@media (max-width: 768px) {
+    .help-inner {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+    </style>
+</head>
+<body>
+    
+    <video autoplay muted loop id="bg-video">
+      <source src="{{ url_for('static', filename='video/video.mp4') }}" type="video/mp4">
+      Böngésződ nem támogatja a videó hátteret.
+    </video>
+    
+    {% include 'navigacio.html' %}
+
+    <div class="content-wrapper">
+        
+        <!-- SÚGÓ RÉSZ - ÚJ -->
+        <div class="help-section">
+            <div class="help-header" onclick="toggleHelp()">
+                <span>📚 Hogyan használd ezt az oldalt? (Kattints a megnyitáshoz)</span>
+                <span class="help-toggle" id="help-toggle">▼</span>
+            </div>
+            <div class="help-content" id="help-content">
+                <div class="help-inner">
+                    <div class="help-column">
+                        <h3>🎯 Első lépések</h3>
+                        <div class="help-step">
+                            <strong>1. Regisztrálj ingyen</strong>
+                            30 napos ingyenes próbaidőszakot kapsz minden prémium funkcióhoz!
+                            Ha meghívsz 5 ismerőst, akik az ingyenes 30 napos időszak lejárta után előfizetővé válnak, 
+                            te egy plusz egy hónap ingyenes hozzáférést kapsz. A kódodat a megerősítő e-mailedben találod.
+                        </div>
+                        <div class="help-step">
+                            <strong>2. Próbáld ki az ingyenes leckéket</strong>
+                            Kezd az "Ingyenes Lecke" gombokkal, regisztráció nélkül is!
+                        </div>
+                        <div class="help-step">
+                            <strong>3. Használd az interaktív eszközöket</strong>
+                            Az "Időutazó Csevegő" és "Jövőkutató Szimulátor" mindenkinek elérhető.
+                        </div>
+                    </div>
+                    
+                    <div class="help-column">
+                        <h3>⚡ Prémium funkciók</h3>
+                        <div class="help-step">
+                            <strong>Teljes kurzusok</strong>
+                            Hozzáférés minden matematika,fizika és AI MI anyaghoz (5-8. osztály).
+                        </div>
+                        <div class="help-step">
+                            <strong>AI eszközök</strong>
+                            Házifeladat Hős, CSICSIKE Tutor, AI Vita Aréna és még sok más.
+                        </div>
+                        <div class="help-step">
+                            <strong>Képlet- és tételtár</strong>
+                            Interaktív keresővel minden fontos képlet és tétel egy helyen.
+                        </div>
+                    </div>
+                    
+                    <div class="help-tip">
+                        <strong>💡 Tipp:</strong>FEJLESZTES ALATT!!! Ha elakadsz, használd a keresőt a felső menüben! Begépelhetsz bármilyen témát (pl. "területszámítás", "elektromosság", "függvények") és megtalálod a kapcsolódó leckéket és kvízeket.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SÚGÓ RÉSZ - ÚJ -->
+<div class="help-section">
+    <div class="help-header" onclick="toggleHelp()">
+        <span>📚 Hogyan használd ezt az oldalt? (Kattints a megnyitáshoz)</span>
+        <span class="help-toggle" id="help-toggle">▼</span>
+    </div>
+    <div class="help-content" id="help-content">
+        <div class="help-inner">
+            <div class="help-column">
+                <h3>🎯 Első lépések</h3>
+                <div class="help-step">
+                    <strong>1. Regisztrálj ingyen</strong>
+                    30 napos ingyenes próbaidőszakot kapsz minden prémium funkcióhoz!
+                    Ha meghívsz 5 ismerőst, akik az ingyenes 30 napos időszak lejárta után előfizetővé válnak, 
+                    te egy plusz egy hónap ingyenes hozzáférést kapsz. A kódodat a megerősítő e-mailedben találod.
+                </div>
+                <div class="help-step">
+                    <strong>2. Próbáld ki az ingyenes leckéket</strong>
+                    Kezd az  "Ingyenes Lecke" gombokkal, regisztráció nélkül is!
+                </div>
+                <div class="help-step">
+                    <strong>3. Használd az interaktív eszközöket</strong>
+                    Az "Időutazó Csevegő" és "Jövőkutató Szimulátor" mindenkinek elérhető.
+                </div>
+            </div>
+            
+            <div class="help-column">
+                <h3>⚡ Prémium funkciók</h3>
+                <div class="help-step">
+                    <strong>Teljes kurzusok</strong>
+                    Hozzáférés minden matematika,fizika és AI MI anyaghoz (5-8. osztály).
+                </div>
+                <div class="help-step">
+                    <strong>AI eszközök</strong>
+                    Házifeladat Hős, CSICSIKE Tutor, AI Vita Aréna és még sok más.
+                </div>
+                <div class="help-step">
+                    <strong>Képlet- és tételtár</strong>
+                    Interaktív keresővel minden fontos képlet és tétel egy helyen.
+                </div>
+            </div>
+            
+            <div class="help-tip">
+                <strong>💡 Tipp:</strong>FEJLESZTES ALATT!!! Ha elakadsz, használd a keresőt a felső menüben! Begépelhetsz bármilyen témát (pl. "területszámítás", "elektromosság", "függvények") és megtalálod a kapcsolódó leckéket és kvízeket.
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+        <header class="header">
+            <div class="container">
+                <h1 class="main-title">
+                    Matematika Tanár <span class="highlight">2030</span>-ra
+                </h1>
+                <p class="subtitle">
+                    Egy inspiráló <strong>5-8. osztályos</strong> matematika tanár digitális eszköztára, 
+                    aki <em>empátiával</em>, <em>kreativitással</em> és <em>mesterséges intelligenciával</em> tanít.
+                </p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                
+                <!-- Próbáld ki Ingyen szekció -->
+                <section class="try-free-section">
+                    <h2 class="section-title">🎯 Próbáld ki Ingyen!</h2>
+                    
+                    <!-- Matematika -->
+                    <div class="subject-group">
+                        <h3 class="subject-title">📊 Matematika</h3>
+                        <div class="grade-grid">
+                            <div class="grade-card">
+                                <h4>5. Osztály</h4>
+                                <div class="lesson-item">
+                                    <strong>Törtek és Tizedestörtek</strong>
+                                    <a href="{{ url_for('kviz_muveletek_tortekkel') }}" class="btn btn-free">Ingyenes Lecke →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="grade-card">
+                                <h4>6. Osztály</h4>
+                                <div class="lesson-item">
+                                    <strong>Százalékszámítás</strong>
+                                    <a href="{{ url_for('kviz_aranyok') }}" class="btn btn-free">Ingyenes Lecke →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="grade-card">
+                                <h4>7. Osztály</h4>
+                                <div class="lesson-item">
+                                    <strong>Négyzetgyökvonás</strong>
+                                    <a href="{{ url_for('kviz_termeszetes_negyzetgyok') }}" class="btn btn-free">Ingyenes Lecke →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="grade-card">
+                                <h4>8. Osztály</h4>
+                                <div class="lesson-item">
+                                    <strong>Halmazok</strong>
+                                    <a href="{{ url_for('kviz_halmazok_meghataroza') }}" class="btn btn-free">Ingyenes Lecke →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fizika -->
+                    <div class="subject-group">
+                        <h3 class="subject-title">⚡ Fizika</h3>
+                        <div class="grade-grid">
+                            <div class="grade-card">
+                                <h4>6. Osztály</h4>
+                                <div class="lesson-item">
+                                    <strong>Halmazállapot-változások</strong>
+                                    <a href="{{ url_for('kviz_halmazallapot_valtozasok') }}" class="btn btn-free">Ingyenes Lecke →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="grade-card">
+                                <h4>7. Osztály</h4>
+                                <div class="lesson-item">
+                                    <strong>Fizikai Mennyiségek</strong>
+                                    <a href="{{ url_for('kviz_fizikai_mennyisegek_es_jelensegek') }}" class="btn btn-free">Ingyenes Lecke →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="grade-card">
+                                <h4>8. Osztály</h4>
+                                <div class="lesson-item">
+                                    <strong>Elektromosság alapjai</strong>
+                                    <a href="{{ url_for('kviz_elektromossag_alapjai') }}" class="btn btn-free">Ingyenes Lecke →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mesterséges Intelligencia -->
+                    <div class="subject-group">
+                        <h3 class="subject-title">🤖 Mesterséges Intelligencia</h3>
+                        <div class="grade-grid">
+                            <div class="grade-card">
+                                <h4>Képalkotás MI-vel</h4>
+                                <div class="lesson-item">
+                                    <strong>Változtasd a szavakat lenyűgöző képekké!</strong>
+                                    <a href="{{ url_for('muhely_kepalkotas') }}" class="btn btn-free">Ingyenes Műhely →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="grade-card">
+                                <h4>Játéktervezés 101</h4>
+                                <div class="lesson-item">
+                                    <strong>Tervezd meg a saját videójátékod koncepcióját!</strong>
+                                    <a href="{{ url_for('muhely_jatektervezes') }}" class="btn btn-free">Ingyenes Műhely →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="grade-card">
+                                <h4>A Promptolás Alapjai</h4>
+                                <div class="lesson-item">
+                                    <strong>Tanulj meg hatékonyan "beszélgetni" az MI-vel!</strong>
+                                    <a href="{{ url_for('muhely_prompt_alapok') }}" class="btn btn-free">Ingyenes Műhely →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ingyenes Interaktív Eszközök -->
+                <section class="free-tools-section">
+                    <h2 class="section-title">🛠️ Ingyenes Interaktív Eszközök</h2>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <h4>Időutazó Csevegő 🕰️</h4>
+                            <p>Beszélgess Newtonnal a gravitációról vagy Turinggal.</p>
+                            <a href="{{ url_for('idoutazo_csevego') }}" class="btn btn-tool">Csevegő Indítása →</a>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h4>Jövőkutató Szimulátor 🚀</h4>
+                            <p>Kérdezz a holnapról egy MI-szakértőtől!</p>
+                            <a href="{{ url_for('jovokutato_szimulator') }}" class="btn btn-tool">Szimulátor Indítása →</a>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h4>Személyes Célkitűző 🎯</h4>
+                            <p>Bontsd le a nagy álmaidat apró, elérhető lépésekre.</p>
+                            <a href="{{ url_for('celkituzo') }}" class="btn btn-tool">Tervezés Indítása →</a>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h4>Tudás Iránytű 🧭</h4>
+                            <p>Elakadtál? Az MI útvonalat javasol a Tudástárból.</p>
+                            <a href="{{ url_for('iranytu') }}" class="btn btn-tool">Útvonal Keresése →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Próbáld ki a teljes tudástárat -->
+                <section class="trial-section">
+                    <div class="trial-card">
+                        <h3>🎁 Próbáld ki a teljes tudástárat 30 napig ingyen!</h3>
+                        <p>Regisztrálj most, és azonnal hozzáférést kapsz az összes prémium kurzushoz és exkluzív eszközhöz, kötelezettségek nélkül.</p>
+                        <a href="{{ url_for('register') }}" class="btn btn-trial">Regisztrálok és kérem a 30 napot!</a>
+                    </div>
+                </section>
+
+                <!-- Teljes Kurzusok (Prémium) -->
+                <section class="premium-courses-section">
+                    <h2 class="section-title">📚 Teljes Kurzusok (Prémium)</h2>
+                    <div class="courses-grid">
+                        <div class="course-card premium">
+                            <h4>Teljes Matematika Kurzus</h4>
+                            <p>Hozzáférés az összes évfolyam (5-8.) minden interaktív leckéjéhez.</p>
+                            <a href="{{ url_for('teljes_matek_kurzus') }}" class="btn btn-premium">Részletek →</a>
+                        </div>
+                        
+                        <div class="course-card premium">
+                            <h4>Teljes Fizika Kurzus</h4>
+                            <p>Hozzáférés az összes évfolyam (6-8.) minden interaktív leckéjéhez.</p>
+                            <a href="{{ url_for('teljes_index') }}" class="btn btn-premium">Részletek →</a>
+                        </div>
+                        
+                        <div class="course-card premium">
+                            <h4>Teljes Interaktív AIMI Gyűjtemény</h4>
+                            <p>A Koncepciótól a Prototípusig - A teljes projektmenedzsment kurzus.</p>
+                            <a href="{{ url_for('Interaktív_AIMI_Gyűjtemény') }}" class="btn btn-premium">Részletek →</a>
+                        </div>
+                        
+                        <div class="course-card premium">
+                            <h4>Teljes AIMI Műhely Gyűjtemény</h4>
+                            <p>Hozzáférés az összes alapozó és haladó MI műhelyhez.</p>
+                            <a href="{{ url_for('muhely_mi_a_gyakorlatban') }}" class="btn btn-premium">Részletek →</a>
+                        </div>
+                        
+                        <div class="course-card premium">
+                            <h4>Teljes Szuperképesség Gyűjtemény</h4>
+                            <p>Személyes hatékonyság és stratégia az MI korában.</p>
+                            <a href="{{ url_for('Interaktív_Szuperkepesseg_Gyűjtemény') }}" class="btn btn-premium">Részletek →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Exkluzív Prémium Eszközök -->
+                <section class="premium-tools-section">
+                    <h2 class="section-title">🔥 Exkluzív Prémium Eszközök</h2>
+                    <div class="premium-tools-grid">
+                        <div class="premium-tool-card">
+                            <h4>Interaktív Képlet- és Tételtár 📚</h4>
+                            <p>Egy teljes, interaktív tudásbázis matekból és fizikából.</p>
+                            <a href="{{ url_for('kepletgyujtemeny') }}" class="btn btn-premium">Tudástár Megnyitása →</a>
+                        </div>
+                        
+                        <div class="premium-tool-card">
+                            <h4>A Napi Kihívás 🧠</h4>
+                            <p>Egy gyors, napi logikai vagy matematikai agytorna.</p>
+                            <a href="{{ url_for('napi_kihivas') }}" class="btn btn-premium">Kihívás Indítása →</a>
+                        </div>
+                        
+                        <div class="premium-tool-card">
+                            <h4>CSICSIKE Tutor 💡</h4>
+                            <p>A Tutor rávezető kérdésekkel segít megérteni a megoldást.</p>
+                            <a href="{{ url_for('tutor') }}" class="btn btn-premium">Tutor Indítása →</a>
+                        </div>
+                        
+                        <div class="premium-tool-card">
+                            <h4>Házifeladat Hős 🦸</h4>
+                            <p>Lépésről-lépésre végigvezet a gondolkodás folyamatán.</p>
+                            <a href="{{ url_for('hazi_hos') }}" class="btn btn-premium">Hős Indítása →</a>
+                        </div>
+                        
+                        <div class="premium-tool-card">
+                            <h4>AI Vita Aréna 🏛️</h4>
+                            <p>Elemezd két, ellentétes nézőpontú MI érvelését.</p>
+                            <a href="{{ url_for('vita_arena') }}" class="btn btn-premium">Aréna Megnyitása →</a>
+                        </div>
+                        
+                        <div class="premium-tool-card">
+                            <h4>AI Vizsga Szimulátor 📝</h4>
+                            <p>Generálj végtelen számú, egyedi próbafeladatsort.</p>
+                            <a href="{{ url_for('vizsga_szimulator') }}" class="btn btn-premium">Szimulátor Indítása →</a>
+                        </div>
+                        
+                        <div class="premium-tool-card">
+                            <h4>Absztrakt-Konkrét Fordító 🔬</h4>
+                            <p>Egy hétköznapi analógiával magyarázza el a fogalmakat.</p>
+                            <a href="{{ url_for('konkretizalo') }}" class="btn btn-premium">Fordító Indítása →</a>
+                        </div>
+                        
+                        <div class="premium-tool-card">
+                            <h4>Esszé Vázlatoló ✍️</h4>
+                            <p>Segít a fogalmazás logikus szerkezetének felépítésében.</p>
+                            <a href="{{ url_for('essze_vazlatolo') }}" class="btn btn-premium">Vázlatoló Indítása →</a>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Súgó toggle funkció
+        function toggleHelp() {
+            const content = document.getElementById('help-content');
+            const toggle = document.getElementById('help-toggle');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                toggle.textContent = '▼';
+            } else {
+                content.classList.add('active');
+                toggle.textContent = '▲';
+            }
+        }
+    </script>
+
+    <!-- Chatbot script if needed -->
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+
+    <script>
+// Súgó toggle funkció
+function toggleHelp() {
+    const content = document.getElementById('help-content');
+    const toggle = document.getElementById('help-toggle');
+    
+    if (content.classList.contains('active')) {
+        content.classList.remove('active');
+        toggle.textContent = '▼';
+    } else {
+        content.classList.add('active');
+        toggle.textContent = '▲';
+    }
+}
+</script>
+
+
+
+</body>
+</html>

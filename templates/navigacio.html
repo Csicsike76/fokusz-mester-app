@@ -1,0 +1,27 @@
+<nav class="navbar">
+  <a href="{{ url_for('fooldal') }}" class="brand">
+      <img src="{{ url_for('static', filename='img/csicsike_logo.png') }}"
+           alt="Logo" height="40">
+  </a>
+
+  <input id="search" placeholder="Keress a tudástárban…">
+  <div id="results"></div>
+
+  <a href="{{ url_for('fooldal') }}">Főoldal</a>
+  <a href="{{ url_for('kapcsolat') }}">Kapcsolat</a>
+  {% if current_user.is_authenticated %}
+      <a href="{{ url_for('fiok') }}">Fiókom</a>
+      <a href="{{ url_for('logout') }}">Kijelentkezés</a>
+  {% else %}
+      <a href="{{ url_for('login') }}">Bejelentkezés</a>
+      <a href="{{ url_for('register') }}">Regisztráció</a>
+  {% endif %}
+
+  <button id="theme-btn" title="Sötét/Világos">🌓</button>
+</nav>
+
+<script>
+// biztonságos betöltés
+window.KERESO = {{ search_database_json|safe }};
+window.URLMAP = {{ url_map_json|safe }};
+</script>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - A hatás-visszahatás elve</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: A hatás-visszahatás elve</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Melyik Newton törvénye a hatás-visszahatás (ellenhatás) elve?",
+                answers: { a: "A harmadik törvény.", b: "Az első törvény.", c: "A második törvény." },
+                correctAnswer: 'a',
+                explanation: "Newton harmadik mozgástörvénye fogalmazza meg a hatás-ellenhatás elvét. Az első a tehetetlenség, a második pedig a dinamika alaptörvénye. ✅ Megoldás: A harmadik törvény."
+            },
+            {
+                question: "Amikor egy rakéta felszáll, a forró gázokat lefelé lövelli ki. Melyik erő emeli fel a rakétát?",
+                answers: { a: "A gázok által a rakétára kifejtett, felfelé irányuló erő.", b: "A levegő, amibe a rakéta beleütközik.", c: "A Föld gravitációs ereje." },
+                correctAnswer: 'a',
+                explanation: "Ez a hatás-ellenhatás elvének klasszikus példája. A rakéta lefelé irányuló erőt (hatás) fejt ki a gázokra. Ennek ellenhatásaként a gázok ugyanekkora, de felfelé irányuló erőt fejtenek ki a rakétára, ami felemeli azt. ✅ Megoldás: A gázok által a rakétára kifejtett, felfelé irányuló erő."
+            },
+            {
+                question: "Egy asztalon álló könyv nyomóerőt fejt ki az asztalra. Mi ennek az erőnek az ellenhatása?",
+                answers: { a: "Az asztal által a könyvre kifejtett tartóerő.", b: "A Föld által a könyvre kifejtett nehézségi erő.", c: "A könyv által a Földre kifejtett vonzerő." },
+                correctAnswer: 'a',
+                explanation: "A hatás-ellenhatás pár mindig ugyanaz a kölcsönhatás, csak a két különböző testen. Ha a könyv hat az asztalra (hatás), akkor az asztal hat a könyvre (ellenhatás). ✅ Megoldás: Az asztal által a könyvre kifejtett tartóerő."
+            },
+            {
+                question: "Ha egy falat 50 N erővel nyomsz, mekkora erővel nyom vissza a fal téged?",
+                answers: { a: "50 N", b: "0 N", c: "Kevesebb, mint 50 N" },
+                correctAnswer: 'a',
+                explanation: "A hatás-ellenhatás törvénye szerint az erők mindig párosával lépnek fel, egyenlő nagyságúak és ellentétes irányúak. Tehát a fal pontosan 50 N erővel nyomja a kezedet. ✅ Megoldás: 50 N."
+            },
+            {
+                question: "A hatás-ellenhatás erők...",
+                answers: { a: "...két különböző testre hatnak.", b: "...ugyanarra a testre hatnak.", c: "...csak mozgó testeknél lépnek fel." },
+                correctAnswer: 'a',
+                explanation: "Ez a törvény legfontosabb és leggyakrabban félreértett része. Az erőpár két tagja soha nem hathat ugyanarra a testre, mert akkor mindig kiegyenlítenék egymást és nem jöhetne létre gyorsulás. ✅ Megoldás: ...két különböző testre hatnak."
+            },
+            {
+                question: "Amikor ugorni készülsz, lefelé irányuló erőt fejtesz ki a talajra. Miért tudsz felugrani?",
+                answers: { a: "Mert a talaj ugyanakkora, de felfelé irányuló erőt fejt ki rád.", b: "Mert a levegő felemel.", c: "Mert a súlyod lecsökken." },
+                correctAnswer: 'a',
+                explanation: "Az elrugaszkodáskor a lábad erőt fejt ki a talajra (hatás). Ennek ellenhatásaként a talaj egy ugyanakkora, de felfelé irányuló erőt fejt ki a lábadra. Ez az erő az, ami felgyorsít és a levegőbe emel. ✅ Megoldás: Mert a talaj ugyanakkora, de felfelé irányuló erőt fejt ki rád."
+            },
+            {
+                question: "Melyik jelenség NEM a hatás-ellenhatás törvényén alapul?",
+                answers: { a: "Egy szabadon eső alma mozgása.", b: "Egy puska visszarúgása lövéskor.", c: "Egy evezős csónak haladása." },
+                correctAnswer: 'a',
+                explanation: "A szabadon eső alma mozgását a tehetetlenség és a dinamika alaptörvénye írja le a gravitációs erő hatására. A puska visszarúgása (puska hat a golyóra, golyó a puskára) és az evezés (evező hat a vízre, víz az evezőre) a hatás-ellenhatás klasszikus példái. ✅ Megoldás: Egy szabadon eső alma mozgása."
+            },
+            {
+                question: "A Föld vonzza a Holdat. A hatás-ellenhatás törvénye szerint...",
+                answers: { a: "...a Hold is vonzza a Földet, ugyanakkora erővel.", b: "...a Hold kisebb erővel vonzza a Földet.", c: "...a Hold nem hat a Földre." },
+                correctAnswer: 'a',
+                explanation: "A gravitációs kölcsönhatás is kölcsönös. A Föld és a Hold között ható vonzerő pontosan egyenlő nagyságú. A Föld hatalmas tömege miatt azonban a Hold vonzásának hatása a Föld mozgására sokkal kisebb mértékű. ✅ Megoldás: ...a Hold is vonzza a Földet, ugyanakkora erővel."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Milyen irányú az ellenhatás a hatóerőhöz képest?",
+                answers: { a: "Megegyező irányú.", b: "Ellentétes irányú.", c: "Merőleges." },
+                correctAnswer: 'b',
+                explanation: "A hatás-ellenhatás törvénye kimondja, hogy az erőpár tagjai mindig ellentétes irányúak. Ha te nyomod a falat jobbra, a fal balra nyom téged. ✅ Megoldás: Ellentétes irányú."
+            },
+            {
+                question: "Miért nem egyenlítik ki egymást a hatás-ellenhatás erők?",
+                answers: { a: "Mert nem egyenlő a nagyságuk.", b: "Mert két különböző testre hatnak.", c: "Mert csak az egyik valós erő." },
+                correctAnswer: 'b',
+                explanation: "Két erő csak akkor tudja kiegyenlíteni egymást, ha ugyanarra a testre hatnak. Mivel a hatás és az ellenhatás mindig különböző testekre hat, ezért soha nem tudják kioltani egymás hatását. ✅ Megoldás: Mert két különböző testre hatnak."
+            },
+            {
+                question: "Amikor egy focista fejel, a feje erőt fejt ki a labdára. Mi az ellenhatás?",
+                answers: { a: "A levegő ellenállása.", b: "A labda ugyanakkora erőt fejt ki a focista fejére.", c: "A Föld vonzereje." },
+                correctAnswer: 'b',
+                explanation: "A kölcsönhatás a fej és a labda között jön létre. Ha a fej hat a labdára (hatás), akkor a labda is hat a fejre (ellenhatás). Ezért érez fájdalmat a játékos. ✅ Megoldás: A labda ugyanakkora erőt fejt ki a focista fejére."
+            },
+            {
+                question: "Mekkora az ellenhatás nagysága a hatóerőhöz képest?",
+                answers: { a: "Mindig kisebb.", b: "Mindig egyenlő.", c: "Mindig nagyobb." },
+                correctAnswer: 'b',
+                explanation: "A hatás-ellenhatás törvényének egyik legfontosabb pontja, hogy az erőpár tagjai minden körülmények között pontosan egyenlő nagyságúak. ✅ Megoldás: Mindig egyenlő."
+            },
+            {
+                question: "Amikor egy autó kereke forog, hátrafelé irányuló erőt fejt ki az útra. Mi hajtja előre az autót?",
+                answers: { a: "A motor ereje.", b: "Az út által a kerékre kifejtett, előre irányuló erő.", c: "A légnyomás." },
+                correctAnswer: 'b',
+                explanation: "Az autó mozgásának oka a kerék és az út közötti súrlódási erő. A kerék hátrafelé 'tolja' az utat (hatás). Az út pedig ugyanekkora, de előre irányuló erőt fejt ki a kerékre (ellenhatás). Ez az erő gyorsítja az autót. ✅ Megoldás: Az út által a kerékre kifejtett, előre irányuló erő."
+            },
+            {
+                question: "Az asztalon lévő pohárra ható nehézségi erő (a Föld vonzza a poharat) ellenhatása:",
+                answers: { a: "Az asztal által a pohárra kifejtett tartóerő.", b: "A pohár által a Földre kifejtett vonzerő.", c: "A pohár által az asztalra kifejtett nyomóerő." },
+                correctAnswer: 'b',
+                explanation: "A nehézségi erő a Föld és a pohár közötti kölcsönhatás. Ha a Föld vonzza a poharat (hatás), akkor a pohár is vonzza a Földet (ellenhatás). Az asztal által kifejtett tartóerő egy másik kölcsönhatás része. ✅ Megoldás: A pohár által a Földre kifejtett vonzerő."
+            },
+            {
+                question: "A hatás-ellenhatás elve érvényes...",
+                answers: { a: "...csak a gravitációs erőre.", b: "...mindenféle kölcsönhatásra.", c: "...csak az érintkezési erőkre." },
+                correctAnswer: 'b',
+                explanation: "Newton harmadik törvénye általános érvényű, minden típusú kölcsönhatásra igaz, legyen az gravitációs, elektromos, mágneses vagy érintkezési erő. ✅ Megoldás: ...mindenféle kölcsönhatásra."
+            },
+            {
+                question: "Ha egy mágnes vonz egy vasdarabot, akkor...",
+                answers: { a: "...csak a mágnes fejt ki erőt.", b: "...a vasdarab is vonzza a mágnest, ugyanakkora erővel.", c: "...a vasdarab taszítja a mágnest." },
+                correctAnswer: 'b',
+                explanation: "A mágneses vonzás is kölcsönös. A mágnes és a vasdarab egyenlő nagyságú, ellentétes irányú erővel vonzza egymást. Mivel a vasdarab általában könnyebb, az fog elmozdulni a mágnes felé. ✅ Megoldás: ...a vasdarab is vonzza a mágnest, ugyanakkora erővel."
+            },
+            {
+                question: "Két különböző tömegű test ütközik. Melyik fejt ki nagyobb erőt a másikra az ütközés pillanatában?",
+                answers: { a: "A nagyobb tömegű.", b: "Ugyanakkora erőt fejtenek ki egymásra.", c: "A gyorsabb." },
+                correctAnswer: 'b',
+                explanation: "A hatás-ellenhatás törvénye szerint az ütközés során a két test által egymásra kifejtett erő minden pillanatban egyenlő nagyságú és ellentétes irányú, függetlenül a testek tömegétől vagy sebességétől. A kisebb tömegű test fog jobban 'megérezni', mert a gyorsulása nagyobb lesz. ✅ Megoldás: Ugyanakkora erőt fejtenek ki egymásra."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "A hatás-ellenhatás törvénye szerint az erők párosával lépnek fel. Milyenek ezek az erők?",
+                answers: { a: "Egyenlő nagyságúak és megegyező irányúak.", b: "Különböző nagyságúak és ellentétes irányúak.", c: "Egyenlő nagyságúak és ellentétes irányúak." },
+                correctAnswer: 'c',
+                explanation: "Ez a törvény pontos megfogalmazása: az erők mindig párban jelentkeznek, nagyságuk azonos, irányuk pedig ellentétes. ✅ Megoldás: Egyenlő nagyságúak és ellentétes irányúak."
+            },
+            {
+                question: "Miért érzel fájdalmat, ha ököllel megütsz egy falat?",
+                answers: { a: "Mert a fal kemény.", b: "Mert az öklöd gyenge.", c: "Mert a fal ugyanakkora erővel 'visszaüt', mint amekkorával te ütötted." },
+                correctAnswer: 'c',
+                explanation: "A hatás-ellenhatás törvénye alapján, amekkora erőt az öklöd kifejt a falra, a fal ugyanakkora, de ellentétes irányú erőt fejt ki az öklödre. Ezt az erőt érzed fájdalomként. ✅ Megoldás: Mert a fal ugyanakkora erővel 'visszaüt', mint amekkorával te ütötted."
+            },
+            {
+                question: "Ha egy madár a levegőben repül, a szárnyával lefelé nyomja a levegőt. Mi emeli a madarat?",
+                answers: { a: "A madár könnyű.", b: "A tehetetlensége.", c: "A levegő, ami felfelé nyomja a madár szárnyát." },
+                correctAnswer: 'c',
+                explanation: "A madár szárnya lefelé irányuló erőt (hatás) fejt ki a levegőre. Az ellenhatás az, hogy a levegő ugyanekkora, de felfelé irányuló erőt fejt ki a szárnyra, ami a repüléshez szükséges felhajtóerőt adja. ✅ Megoldás: A levegő, ami felfelé nyomja a madár szárnyát."
+            },
+            {
+                question: "Az asztalon lévő könyvre ható nehézségi erő és az asztal által a könyvre kifejtett tartóerő...",
+                answers: { a: "...egy hatás-ellenhatás erőpárt alkotnak.", b: "...mindig különböző nagyságúak.", c: "...kiegyenlítik egymást, de nem hatás-ellenhatás pár." },
+                correctAnswer: 'c',
+                explanation: "Ez a két erő kiegyenlíti egymást (mert az eredőjük nulla, és a könyv nyugalomban van), de NEM alkotnak hatás-ellenhatás párt, mert mindketten ugyanarra a testre, a könyvre hatnak. ✅ Megoldás: ...kiegyenlítik egymást, de nem hatás-ellenhatás pár."
+            },
+            {
+                question: "Ha egy rugót a két végénél fogva széthúzol, a bal kezed balra húzza a rugót. Milyen erőt érez a jobb kezed?",
+                answers: { a: "Balra irányuló erőt.", b: "Felfelé irányuló erőt.", c: "Jobbra irányuló erőt." },
+                correctAnswer: 'c',
+                explanation: "A rugó mindkét kezedre erőt fejt ki, ami igyekszik összehúzni azt. A bal kezedre jobbra ható erőt, a jobb kezedre pedig balra ható erőt fejt ki a rugó. Te a jobb kezeddel egy jobbra irányuló erőt (ellenhatás) kell kifejts, hogy egyensúlyban tartsd. ✅ Megoldás: Jobbra irányuló erőt."
+            },
+            {
+                question: "A kölcsönhatásban...",
+                answers: { a: "...csak egy test mozgása változhat meg.", b: "...csak az egyik test fejt ki erőt.", c: "...mindig mindkét testre hat erő." },
+                correctAnswer: 'c',
+                explanation: "A kölcsönhatás definíció szerint kétoldalú. Mindig mindkét résztvevő testre hat egy-egy erő, amelyek a hatás-ellenhatás párt alkotják. ✅ Megoldás: ...mindig mindkét testre hat erő."
+            },
+            {
+                question: "Miért NEM tudod magad a hajadnál fogva felemelni?",
+                answers: { a: "Mert nem vagy elég erős.", b: "Mert a gravitáció túl erős.", c: "Mert a hatás és az ellenhatás erők egy rendszeren belül vannak." },
+                correctAnswer: 'c',
+                explanation: "Amikor a kezeddel húzod a hajad felfelé (hatás), a hajad ugyanakkora erővel húzza lefelé a kezed (ellenhatás). Mivel mindkét erő a te testeden (mint rendszeren) belül hat, ezek belső erők, és nem tudják a rendszer egészét (téged) felgyorsítani. ✅ Megoldás: Mert a hatás és az ellenhatás erők egy rendszeren belül vannak."
+            },
+            {
+                question: "Egy csónakból a partra ugrasz. Miért mozdul el a csónak a parttól ellentétes irányba?",
+                answers: { a: "Mert a víz löki el.", b: "Mert könnyű a csónak.", c: "Mert a lábad erőt fejt ki a csónakra hátrafelé." },
+                correctAnswer: 'c',
+                explanation: "Amikor elrugaszkodsz a csónakról a part felé, a lábad a csónakot hátrafelé (a parttól el) irányuló erővel löki meg (hatás). Ennek ellenhatásaként a csónak ugyanekkora, de előre (a part felé) irányuló erővel lök el téged. Ez a kölcsönhatás okozza mindkét test mozgását. ✅ Megoldás: Mert a lábad erőt fejt ki a csónakra hátrafelé."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

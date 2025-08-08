@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Interaktív Matematika Gyűjtemény</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        :root {
+            --piros: #CD2A3E;
+            --feher: #FFFFFF;
+            --zold: #477050;
+            --sotet-szurke: #333333;
+            --vilagos-szurke: #f8f9fa;
+            --bg: #fdfdfd;
+            --surface: rgba(255, 255, 255, 0.9);
+            --text: var(--sotet-szurke);
+            --primary: var(--piros);
+            --primary-hover: #B72637;
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --chapter: var(--zold);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(90deg, 
+                rgba(205, 42, 62, 0.8) 33.3%, 
+                rgba(255, 255, 255, 0.8) 33.3%, 
+                rgba(255, 255, 255, 0.8) 66.6%, 
+                rgba(71, 112, 80, 0.8) 66.6%);
+            color: var(--text);
+            border-radius: 16px;
+            border: 1px solid rgba(221, 221, 221, 0.5);
+        }
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .section-title {
+            font-size: 2rem;
+            color: var(--chapter);
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--chapter);
+            display: inline-block;
+            background-color: var(--surface);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+        .title-wrapper {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .card {
+            background: var(--surface);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #E7E4DC;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .card .grade-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+        .card .grade-text {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        .formula-card {
+             background: linear-gradient(135deg, rgba(241, 248, 233, 0.9), rgba(255, 255, 255, 0.9));
+             border-color: var(--zold);
+        }
+        .formula-card .grade-text {
+            color: var(--chapter);
+        }
+        .formula-card .grade-number {
+            font-size: 2rem;
+            line-height: 1.2;
+        }
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 1.5rem;
+            color: var(--feher);
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .summary-card {
+             background: linear-gradient(135deg, #477050, #5a8e65);
+             border-color: #3b5e43;
+             color: white;
+        }
+        .summary-card .grade-number, .summary-card .grade-text {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop id="bg-video">
+      <source src="{{ url_for('static', filename='video/video.mp4') }}" type="video/mp4">
+      A böngésződ nem támogatja a videó hátteret.
+    </video>
+
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="header" style="width:100%">
+                <h1>Interaktív Matematika Gyűjtemény</h1>
+                <p>Digitális segédlet és gyakorlórendszer általános iskolásoknak</p>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div style="width:100%">
+                <div class="title-wrapper">
+                    <h2 class="section-title">Tananyagok Évfolyamok Szerint</h2>
+                </div>
+
+                <div class="card-grid">
+                    <a href="{{ url_for('kepletek_5__osztaly') }}" class="card">
+                        <div class="grade-number">5.</div>
+                        <div class="grade-text">Osztály</div>
+                    </a>
+                    <a href="{{ url_for('kepletek_6_osztaly') }}" class="card">
+                        <div class="grade-number">6.</div>
+                        <div class="grade-text">Osztály</div>
+                    </a>
+                    <a href="{{ url_for('kepletek_7_osztaly') }}" class="card">
+                        <div class="grade-number">7.</div>
+                        <div class="grade-text">Osztály</div>
+                    </a>
+                    <a href="{{ url_for('8keplet') }}" class="card">
+                        <div class="grade-number">8.</div>
+                        <div class="grade-text">Osztály</div>
+                    </a>
+                </div>
+                
+                <div class="title-wrapper">
+                    <h2 class="section-title">Összesített Képletgyűjtemények</h2>
+                </div>
+
+                <div class="card-grid">
+                    <a href="{{ url_for('teljes_kepletgyujtemeny_5_osztaly') }}" class="card formula-card">
+                        <div class="grade-number">5. Osztály</div>
+                        <div class="grade-text">Teljes Gyűjtemény</div>
+                    </a>
+                    <a href="{{ url_for('teljes_kepletgyujtemeny_6_osztaly') }}" class="card formula-card">
+                        <div class="grade-number">6. Osztály</div>
+                        <div class="grade-text">Teljes Gyűjtemény</div>
+                    </a>
+                    <a href="{{ url_for('teljes_kepletgyujtemeny_7_osztaly') }}" class="card formula-card">
+                        <div class="grade-number">7. Osztály</div>
+                        <div class="grade-text">Teljes Gyűjtemény</div>
+                    </a>
+                    <a href="{{ url_for('teljes_kepletgyujtemeny_8_osztaly') }}" class="card formula-card">
+                        <div class="grade-number">8. Osztály</div>
+                        <div class="grade-text">Teljes Gyűjtemény</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+             
+            <div class="title-wrapper">
+                <h2 class="section-title">Év Végi Összefoglaló Felmérők</h2>
+            </div>
+
+            <div class="card-grid">
+                <a href="{{ url_for('kviz_5_osztaly_ev_vegi_osszefoglalo') }}" class="card summary-card">
+                    <div class="grade-number">5. Osztály</div>
+                    <div class="grade-text">Év Végi Felmérő</div>
+                </a>
+                <a href="{{ url_for('kviz_6_osztaly_ev_vegi_osszefoglalo') }}" class="card summary-card">
+                    <div class="grade-number">6. Osztály</div>
+                    <div class="grade-text">Év Végi Felmérő</div>
+                </a>
+                <a href="{{ url_for('kviz_7_osztaly_ev_vegi_osszefoglalo') }}" class="card summary-card">
+                    <div class="grade-number">7. Osztály</div>
+                    <div class="grade-text">Év Végi Felmérő</div>
+                </a>
+                <a href="{{ url_for('kviz_8_osztaly_ev_vegi_osszefoglalo') }}" class="card summary-card">
+                    <div class="grade-number">8. Osztály</div>
+                    <div class="grade-text">Év Végi Felmérő</div>
+                </a>
+            </div>
+
+             <footer>
+                <p>Generálta: CSICSIKE 2025</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

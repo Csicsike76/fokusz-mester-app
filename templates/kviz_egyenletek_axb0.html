@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: ax + b = 0 alakú egyenletek</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 2px 5px; border-radius: 3px;}
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: ax + b = 0 alakú egyenletek</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Oldd meg az egyenletet: <span class='formula-display'>3x - 15 = 0</span>", answers: { a: "5", b: "-5", c: "15" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. lépés (Rendezés):</b> Adjunk 15-öt mindkét oldalhoz, hogy az x-et tartalmazó tag egyedül maradjon. Ekkor: 3x = 15.</div><div class="explanation-step"><b>🔹 2. lépés (Osztás):</b> Osszuk el az egyenlet mindkét oldalát 3-mal.</div><div class="explanation-solution">✅ Megoldás: x = 5.</div>` },
+            { question: "Mi a megoldása a <span class='formula-display'>x/4 + 1 = 3</span> egyenletnek?", answers: { a: "8", b: "2", c: "16" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. lépés (Rendezés):</b> Vonjunk ki 1-et mindkét oldalból. Ekkor: x/4 = 2.</div><div class="explanation-step"><b>🔹 2. lépés (Szorzás):</b> Szorozzuk meg az egyenlet mindkét oldalát 4-gyel.</div><div class="explanation-solution">✅ Megoldás: x = 8.</div>` },
+            { question: "Melyik x-re igaz, hogy <span class='formula-display'>2(x + 5) = 2x + 10</span>?", answers: { a: "Minden valós x-re", b: "Csak x=5 esetén", c: "Nincs ilyen x" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Felbontás:</b> A bal oldalon felbontjuk a zárójelet: 2*x + 2*5 = 2x + 10.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Az egyenlet mindkét oldala megegyezik (2x + 10 = 2x + 10). Ez azt jelenti, hogy bármilyen számot helyettesítünk x helyére, az egyenlőség igaz lesz. Ezt hívjuk azonosságnak.</div><div class="explanation-solution">✅ Megoldás: Az egyenlőség minden valós x-re igaz.</div>` },
+            { question: "Ha <span class='formula-display'>100 - 10x = 20</span>, akkor x=?", answers: { a: "8", b: "12", c: "-8" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. lépés (Rendezés):</b> Vonjunk ki 100-at mindkét oldalból: -10x = 20 - 100, azaz -10x = -80.</div><div class="explanation-step"><b>🔹 2. lépés (Osztás):</b> Osszuk el az egyenlet mindkét oldalát -10-zel.</div><div class="explanation-solution">✅ Megoldás: x = 8.</div>` },
+            { question: "Ha egy szám ötszöröséből elveszünk 1-et, 44-et kapunk. Melyik ez a szám?", answers: { a: "9", b: "8.6", c: "40" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Egyenlet felírása:</b> A szöveg alapján az egyenlet: 5x - 1 = 44.</div><div class="explanation-step"><b>🔹 Megoldás:</b> Adjunk 1-et mindkét oldalhoz: 5x = 45. Majd osszunk 5-tel: x = 9.</div><div class="explanation-solution">✅ Megoldás: A keresett szám a 9.</div>` },
+            { question: "Melyik egyenletnek a megoldása az x = 1?", answers: { a: "7x - 5 = 2", b: "7x + 2 = 5", c: "5x - 7 = 2" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Ellenőrzés:</b> Behelyettesítjük az x=1 értéket a lehetőségekbe.<br>• 7(1) - 5 = 7 - 5 = 2. Ez helyes.<br>• 7(1) + 2 = 9, ami nem 5.<br>• 5(1) - 7 = -2, ami nem 2.</div><div class="explanation-solution">✅ Megoldás: A 7x - 5 = 2 egyenletnek a megoldása az 1.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>-x + 3 = 10</span>", answers: { a: "-7", b: "7", c: "13" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. lépés (Rendezés):</b> Vonjunk ki 3-at mindkét oldalból: -x = 7.</div><div class="explanation-step"><b>🔹 2. lépés (Szorzás):</b> Szorozzuk meg mindkét oldalt -1-gyel.</div><div class="explanation-solution">✅ Megoldás: x = -7.</div>` },
+            { question: "Mi a megoldása a <span class='formula-display'>-3x - 9 = 0</span> egyenletnek?", answers: { a: "-3", b: "3", c: "9" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. lépés (Rendezés):</b> Adjunk 9-et mindkét oldalhoz: -3x = 9.</div><div class="explanation-step"><b>🔹 2. lépés (Osztás):</b> Osszuk el mindkét oldalt -3-mal.</div><div class="explanation-solution">✅ Megoldás: x = -3.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>4x + 8 = 0</span>", answers: { a: "2", b: "-2", c: "4" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. lépés (Rendezés):</b> Vonjunk ki 8-at mindkét oldalból: 4x = -8.</div><div class="explanation-step"><b>🔹 2. lépés (Osztás):</b> Osszuk el mindkét oldalt 4-gyel.</div><div class="explanation-solution">✅ Megoldás: x = -2.</div>` },
+            { question: "Mi a megoldása a <span class='formula-display'>2(x + 4) = 12</span> egyenletnek?", answers: { a: "8", b: "2", c: "1" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. lépés (Felbontás):</b> Bontsuk fel a zárójelet: 2x + 8 = 12.</div><div class="explanation-step"><b>🔹 2. lépés (Rendezés):</b> Vonjunk ki 8-at mindkét oldalból: 2x = 4.</div><div class="explanation-step"><b>🔹 3. lépés (Osztás):</b> Osszuk el mindkét oldalt 2-vel.</div><div class="explanation-solution">✅ Megoldás: x = 2.</div>` },
+            { question: "Ha <span class='formula-display'>x - 7 = -3</span>, akkor x=?", answers: { a: "-10", b: "4", c: "10" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Rendezés:</b> Adjunk 7-et az egyenlet mindkét oldalához.</div><div class="explanation-step"><b>🔹 Számolás:</b> x = -3 + 7.</div><div class="explanation-solution">✅ Megoldás: x = 4.</div>` },
+            { question: "Melyik egyenletnek van végtelen sok megoldása (azonosság)?", answers: { a: "x = x+1", b: "x+x = 2x", c: "x = 5" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Az 'x = x+1' egyenlet ellentmondás, az 'x=5' pedig egyetlen megoldással rendelkezik.</div><div class="explanation-step"><b>🔹 Azonosság:</b> Az x+x = 2x egyenlőség minden valós számra igaz, tehát ez egy azonosság.</div><div class="explanation-solution">✅ Megoldás: Az x+x = 2x egyenletnek van végtelen sok megoldása.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>-5x = 25</span>", answers: { a: "5", b: "-5", c: "-125" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Osztás:</b> Osszuk el az egyenlet mindkét oldalát -5-tel.</div><div class="explanation-step"><b>🔹 Számolás:</b> x = 25 / (-5).</div><div class="explanation-solution">✅ Megoldás: x = -5.</div>` },
+            { question: "Mi a megoldása a <span class='formula-display'>6 - x = 6</span> egyenletnek?", answers: { a: "1", b: "0", c: "6" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Rendezés:</b> Vonjunk ki 6-ot mindkét oldalból.</div><div class="explanation-step"><b>🔹 Levezetés:</b> -x = 0. Ezt -1-gyel szorozva kapjuk, hogy x = 0.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 0.</div>` },
+            { question: "Ha <span class='formula-display'>3(x + 1) = 9</span>, akkor x=?", answers: { a: "3", b: "2", c: "4/3" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. módszer (Osztás):</b> Először osszunk 3-mal: x + 1 = 3. Ebből x = 2.</div><div class="explanation-step"><b>🔹 2. módszer (Felbontás):</b> 3x + 3 = 9. Ebből 3x = 6, tehát x = 2.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 2.</div>` },
+            { question: "Egy szám fele 7. Melyik ez a szám?", answers: { a: "3.5", b: "14", c: "9" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Egyenlet:</b> x / 2 = 7.</div><div class="explanation-step"><b>🔹 Megoldás:</b> Szorozzuk mindkét oldalt 2-vel.</div><div class="explanation-solution">✅ Megoldás: A keresett szám a 14.</div>` },
+            { question: "Ha <span class='formula-display'>0.5x = 4</span>, akkor x=?", answers: { a: "2", b: "8", c: "4.5" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Megjegyzés:</b> A 0.5-del való szorzás ugyanaz, mint a 2-vel való osztás.</div><div class="explanation-step"><b>🔹 Levezetés:</b> Az egyenlet: x/2 = 4. Mindkét oldalt 2-vel szorozva x = 8.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 8.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>5x + 1 = 4x + 6</span>", answers: { a: "7", b: "1", c: "5" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. lépés:</b> Vonjunk ki 4x-et mindkét oldalból: x + 1 = 6.</div><div class="explanation-step"><b>🔹 2. lépés:</b> Vonjunk ki 1-et mindkét oldalból.</div><div class="explanation-solution">✅ Megoldás: x = 5.</div>` },
+            { question: "Melyik egyenletnek NINCS megoldása?", answers: { a: "x = x", b: "x = 5", c: "x + 2 = x + 3" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Ha az x + 2 = x + 3 egyenletből kivonunk x-et mindkét oldalból, a 2 = 3 állítást kapjuk, ami hamis. Ezt hívjuk ellentmondásnak.</div><div class="explanation-solution">✅ Megoldás: Az x + 2 = x + 3 egyenletnek nincs megoldása.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>-x = -1</span>", answers: { a: "-1", b: "0", c: "1" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Szorzás:</b> Szorozzuk meg az egyenlet mindkét oldalát -1-gyel.</div><div class="explanation-step"><b>🔹 Levezetés:</b> (-x) * (-1) = x. (-1) * (-1) = 1.</div><div class="explanation-solution">✅ Megoldás: x = 1.</div>` },
+            { question: "Mi a megoldása a <span class='formula-display'>25 - 5x = 0</span> egyenletnek?", answers: { a: "20", b: "-5", c: "5" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. lépés:</b> Adjunk 5x-et mindkét oldalhoz: 25 = 5x.</div><div class="explanation-step"><b>🔹 2. lépés:</b> Osszuk el mindkét oldalt 5-tel.</div><div class="explanation-solution">✅ Megoldás: x = 5.</div>` },
+            { question: "Ha egy számhoz 10-et adunk, majd az eredményt megduplázzuk, 30-at kapunk. Mi a szám?", answers: { a: "10", b: "20", c: "5" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Egyenlet felírása:</b> 2 * (x + 10) = 30.</div><div class="explanation-step"><b>🔹 Levezetés:</b> Először osszunk 2-vel: x + 10 = 15. Majd vonjunk ki 10-et: x = 5.</div><div class="explanation-solution">✅ Megoldás: A keresett szám az 5.</div>` },
+            { question: "Mi a megoldása a <span class='formula-display'>x/3 = -4</span> egyenletnek?", answers: { a: "-1.33", b: "7", c: "-12" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Szorzás:</b> Az egyenlet mindkét oldalát szorozzuk meg 3-mal.</div><div class="explanation-step"><b>🔹 Számolás:</b> x = -4 * 3.</div><div class="explanation-solution">✅ Megoldás: x = -12.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>1 - x = 2</span>", answers: { a: "1", b: "-3", c: "-1" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. lépés:</b> Vonjunk ki 1-et mindkét oldalból: -x = 1.</div><div class="explanation-step"><b>🔹 2. lépés:</b> Szorozzuk mindkét oldalt -1-gyel.</div><div class="explanation-solution">✅ Megoldás: x = -1.</div>` }
+        ];
+
+        // JavaScript logika - a címke nélküli megjelenítéssel
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

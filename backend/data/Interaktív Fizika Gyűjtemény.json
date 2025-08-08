@@ -1,0 +1,44 @@
+{
+  "title": "Interaktív Fizika Gyűjtemény",
+  "subject": "physics",
+  "grade": 8,
+  "category": "premium",
+  "description": "Digitális segédlet és gyakorlórendszer általános iskolásoknak, évfolyamonkénti és összesített képletgyűjteményekkel, valamint év végi felmérőkkel.",
+  "questions": [],
+  "content": {
+    "subtitle": "Digitális segédlet és gyakorlórendszer általános iskolásoknak",
+    "sections": [
+      {
+        "sectionTitle": "Tananyagok Évfolyamok Szerint",
+        "cards": [
+          { "grade": "6.", "text": "Osztály", "link": "Fizikakepletek_6_osztaly.html" },
+          { "grade": "7.", "text": "Osztály", "link": "Fizikakepletek_7_osztaly.html" },
+          { "grade": "8.", "text": "Osztály", "link": "Fizikakepletek_8_osztaly.html" }
+        ]
+      },
+      {
+        "sectionTitle": "Összesített Képletgyűjtemények",
+        "cards": [
+          { "grade": "6.", "text": "Teljes Gyűjtemény", "link": "Fizikateljes_kepletgyujtemeny_6_osztaly.html" },
+          { "grade": "7.", "text": "Teljes Gyűjtemény", "link": "Fizikateljes_kepletgyujtemeny_7_osztaly.html" },
+          { "grade": "8.", "text": "Teljes Gyűjtemény", "link": "Fizikateljes_kepletgyujtemeny_8_osztaly.html" }
+        ]
+      },
+      {
+        "sectionTitle": "Év Végi Összefoglaló Felmérők",
+        "cards": [
+          { "grade": "6.", "text": "Év Végi Felmérő", "link": "Fizikakviz_6_osztaly_ev_vegi_osszefoglalo.html" },
+          { "grade": "7.", "text": "Év Végi Felmérő", "link": "Fizikakviz_7_osztaly_ev_vegi_osszefoglalo.html" },
+          { "grade": "8.", "text": "Év Végi Felmérő", "link": "Fizika8kviz_8_osztaly_ev_vegi_osszefoglalo.html" }
+        ]
+      }
+    ],
+    "chatWidget": {
+      "triggerButton": "💬",
+      "chatTitle": "TudásTutor AI",
+      "welcomeMessage": "Szia! Én a TudásTutor vagyok. Miben segíthetek ma? Kérdezz bátran!",
+      "inputPlaceholder": "Írd be a kérdésed...",
+      "sendButtonText": "Küldés"
+    }
+  }
+}

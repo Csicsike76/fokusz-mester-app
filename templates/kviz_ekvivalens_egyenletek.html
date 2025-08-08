@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Ekvivalens egyenlőségek és azonosságok</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 2px 5px; border-radius: 3px;}
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Ekvivalens egyenlőségek és azonosságok</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Melyik egyenlet ekvivalens az <span class='formula-display'>x + 3 = 8</span> egyenlettel?", answers: { a: "x = 5", b: "x = 11", c: "x + 8 = 3" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Két egyenlet ekvivalens, ha a megoldáshalmazuk ugyanaz.</div><div class="explanation-step"><b>🔹 Eredeti egyenlet megoldása:</b> Az x + 3 = 8 egyenletből 3-at kivonva mindkét oldalból kapjuk, hogy x = 5.</div><div class="explanation-solution">✅ Megoldás: Az az egyenlet ekvivalens vele, amelyiknek szintén 5 a megoldása, tehát az x = 5.</div>` },
+            { question: "Mi az azonosság definíciója?", answers: { a: "Olyan egyenlőség, amely a változó minden megengedett értékére igaz.", b: "Olyan egyenlőség, aminek nincs megoldása.", c: "Olyan egyenlőség, aminek csak egy megoldása van." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Fogalom:</b> Míg egy egyenlet csak bizonyos értékekre igaz, addig egy azonosság mindig, a változó bármely értékére teljesül.</div><div class="explanation-step"><b>🔹 Példa:</b> Az x + 1 = 3 egyenlet, de a 2(x+1) = 2x+2 egy azonosság.</div><div class="explanation-solution">✅ Megoldás: Az azonosság a változó minden megengedett értékére igaz.</div>` },
+            { question: "Melyik átalakítás NEM ekvivalens átalakítás?", answers: { a: "Mindkét oldal szorzása 0-val.", b: "Mindkét oldalhoz 5 hozzáadása.", c: "Mindkét oldal osztása 2-vel." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Ekvivalens átalakítás (mérleg-elv):</b> A megoldáshalmaz nem változik, ha mindkét oldalhoz ugyanazt adjuk/vonjuk, vagy mindkét oldalt ugyanazzal a *nem nulla* számmal szorozzuk/osztjuk.</div><div class="explanation-step"><b>🔹 Hibaforrás:</b> Ha 0-val szorzunk, az x=2 és x=3 egyenletekből is 0=0 lesz, holott az eredeti egyenletek nem voltak ekvivalensek.</div><div class="explanation-solution">✅ Megoldás: A 0-val való szorzás nem ekvivalens átalakítás.</div>` },
+            { question: "Melyik egyenlőség egy azonosság?", answers: { a: "3(x - 2) = 3x - 6", b: "x - 2 = 3", c: "x = x + 1" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Azt az egyenlőséget keressük, ami minden x-re igaz.<br>• Az 'x-2=3' csak x=5 esetén igaz.<br>• Az 'x=x+1' soha nem igaz.</div><div class="explanation-step"><b>🔹 Azonosság:</b> A 3(x-2) = 3x-6 a disztributivitás (tagonkénti szorzás) miatt minden x-re igaz.</div><div class="explanation-solution">✅ Megoldás: A 3(x - 2) = 3x - 6 egy azonosság.</div>` },
+            { question: "Ha az <span class='formula-display'>5x = 20</span> egyenlet mindkét oldalát elosztjuk 5-tel, mit kapunk?", answers: { a: "x = 4", b: "x = 15", c: "x = 25" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Mérleg-elv:</b> Az egyenlet mindkét oldalával ugyanazt a műveletet végezzük el.</div><div class="explanation-step"><b>🔹 Levezetés:</b> (5x)/5 = 20/5, amiből x = 4.</div><div class="explanation-solution">✅ Megoldás: Az átalakítás után kapott egyenlet x = 4.</div>` },
+            { question: "Melyik egyenlet NEM ekvivalens a többivel?", answers: { a: "x = 10", b: "x - 2 = 8", c: "x + 2 = 8" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Megoldások keresése:</b><br>• x=10: A megoldás 10.<br>• x-2=8: Ha mindkét oldalhoz 2-t adunk, x=10. A megoldás 10.<br>• x+2=8: Ha mindkét oldalból 2-t kivonunk, x=6. A megoldás 6.</div><div class="explanation-solution">✅ Megoldás: Az x+2=8 egyenlet nem ekvivalens a másik kettővel.</div>` },
+            { question: "Mi a <span class='formula-display'>2x + 5 = 15</span> egyenlet megoldása?", answers: { a: "5", b: "10", c: "7.5" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. lépés:</b> Mindkét oldalból kivonunk 5-öt: 2x = 10.</div><div class="explanation-step"><b>🔹 2. lépés:</b> Mindkét oldalt elosztjuk 2-vel: x = 5.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 5.</div>` },
+            { question: "Melyik egyenletnek ugyanaz a megoldása, mint az <span class='formula-display'>x / 2 = 6</span> egyenletnek?", answers: { a: "x = 12", b: "x = 3", c: "x = 8" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Eredeti egyenlet megoldása:</b> Az x/2 = 6 egyenlet mindkét oldalát 2-vel szorozva kapjuk, hogy x = 12.</div><div class="explanation-step"><b>🔹 Keresés:</b> Azt az egyenletet keressük, amelynek megoldása 12.</div><div class="explanation-solution">✅ Megoldás: Az x = 12 egyenletnek ugyanaz a megoldása.</div>` },
+            { question: "Mi a 'mérleg-elv' a matematikában?", answers: { a: "Két oldalnak egyensúlyban kell lennie", b: "Egyenletek megoldásának módszere ekvivalens átalakításokkal", c: "Súlyok mérésére szolgáló eszköz" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Fogalom:</b> A mérleg-elv egy szemléltetés arra, hogyan működnek az ekvivalens átalakítások. Ahogy egy kétkarú mérleg egyensúlyban marad, ha mindkét serpenyőbe ugyanannyit teszünk vagy veszünk el, úgy egy egyenlőség is igaz marad, ha mindkét oldalán ugyanazt a műveletet végezzük el.</div><div class="explanation-solution">✅ Megoldás: A mérleg-elv egyenletek megoldásának módszere ekvivalens átalakításokkal.</div>` },
+            { question: "Melyik egyenlet ekvivalens a <span class='formula-display'>10 - x = 4</span> egyenlettel?", answers: { a: "x = 14", b: "x = 6", c: "x = -6" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Levezetés:</b><br>10 - x = 4 | adjunk x-et mindkét oldalhoz.<br>10 = 4 + x | vonjunk ki 4-et mindkét oldalból.<br>6 = x.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 6.</div>` },
+            { question: "Melyik állítás igaz az azonosságokra?", answers: { a: "Csak pozitív számokra igazak.", b: "A változó minden értékére igazak.", c: "Nincs bennük változó." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Az azonosság egy olyan egyenlőség, amely a változó(k) minden lehetséges (megengedett) értékére igaz.</div><div class="explanation-solution">✅ Megoldás: Az azonosság a változó minden értékére igaz.</div>` },
+            { question: "Melyik egyenlet egyenértékű az <span class='formula-display'>x = -2</span> egyenlettel?", answers: { a: "-x = -2", b: "x + 2 = 0", c: "x - 2 = 0" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b><br>• -x = -2 megoldása x=2.<br>• x + 2 = 0 megoldása x=-2.<br>• x - 2 = 0 megoldása x=2.</div><div class="explanation-solution">✅ Megoldás: Az x + 2 = 0 egyenlet megoldása -2.</div>` },
+            { question: "Mi az első lépés a <span class='formula-display'>3x - 5 = 10</span> egyenlet megoldásában?", answers: { a: "Osztás 3-mal", b: "5 hozzáadása mindkét oldalhoz", c: "5 kivonása mindkét oldalból" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Cél:</b> Az x-et tartalmazó tagot egyedül kell hagyni az egyik oldalon.</div><div class="explanation-step"><b>🔹 Első lépés:</b> Ehhez a -5 tagot kell "eltüntetni", amit 5 hozzáadásával tehetünk meg mindkét oldalon. Így kapjuk: 3x = 15.</div><div class="explanation-solution">✅ Megoldás: Az első logikus lépés 5 hozzáadása mindkét oldalhoz.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>-2x = -8</span>", answers: { a: "-4", b: "4", c: "6" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Levezetés:</b> Az egyenlet mindkét oldalát elosztjuk -2-vel.</div><div class="explanation-step"><b>🔹 Számolás:</b> (-2x) / (-2) = x. (-8) / (-2) = 4.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 4.</div>` },
+            { question: "Ha <span class='formula-display'>x = y</span>, akkor igaz-e, hogy <span class='formula-display'>x + z = y + z</span>?", answers: { a: "Csak ha z pozitív", b: "Igen, mindig", c: "Nem" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Mérleg-elv:</b> Az egyenlőség megmarad, ha mindkét oldalhoz ugyanazt a számot adjuk hozzá, függetlenül annak előjelétől.</div><div class="explanation-solution">✅ Megoldás: Az állítás mindig igaz.</div>` },
+            { question: "Ha x=y, akkor melyik állítás NEM igaz mindig?", answers: { a: "x/z = y/z", b: "x*z = y*z", c: "x-z = y-z" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Az ekvivalens átalakításoknál a 0-val való osztás nincs értelmezve.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A szorzás és a kivonás bármilyen z-re igaz. Az osztás viszont csak akkor, ha z ≠ 0.</div><div class="explanation-solution">✅ Megoldás: Az x/z = y/z állítás nem igaz mindig, mert z lehet 0.</div>` },
+            { question: "Oldd meg: <span class='formula-display'>12 - 2x = 2</span>", answers: { a: "6", b: "4", c: "5" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. lépés:</b> Vonjunk ki 12-t mindkét oldalból: -2x = 2 - 12 = -10.</div><div class="explanation-step"><b>🔹 2. lépés:</b> Osszuk el mindkét oldalt -2-vel: x = (-10) / (-2) = 5.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása 5.</div>` },
+            { question: "Melyik NEM azonosság?", answers: { a: "x+y = y+x", b: "x/1 = x", c: "x-y = y-x" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b><br>• x+y = y+x: Az összeadás felcserélhető (kommutatív), ez egy azonosság.<br>• x/1 = x: Bármely számot 1-gyel osztva önmagát kapjuk, ez egy azonosság.</div><div class="explanation-step"><b>🔹 Ellenpélda:</b> Az x-y = y-x nem azonosság. Pl. 5-3=2, de 3-5=-2.</div><div class="explanation-solution">✅ Megoldás: Az x-y = y-x nem azonosság.</div>` },
+            { question: "Melyik ekvivalens átalakítás vezet az <span class='formula-display'>x = 10</span> eredményhez a <span class='formula-display'>2x = 20</span> egyenletből?", answers: { a: "10 kivonása", b: "2-vel való osztás", c: "2-vel való szorzás" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Cél:</b> Az x együtthatóját 1-re kell változtatni.</div><div class="explanation-step"><b>🔹 Művelet:</b> Ha a 2x kifejezést elosztjuk 2-vel, x-et kapunk. A mérleg-elv szerint a másik oldalt is el kell osztani 2-vel (20/2=10).</div><div class="explanation-solution">✅ Megoldás: A helyes átalakítás a 2-vel való osztás.</div>` },
+            { question: "Melyik egyenletnek van végtelen sok megoldása (azonosság)?", answers: { a: "x = x", b: "x = -x", c: "x + 1 = x - 1" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b><br>• x = -x: Csak x=0 esetén igaz.<br>• x + 1 = x - 1: Soha nem igaz, mert 1≠-1.</div><div class="explanation-step"><b>🔹 Azonosság:</b> Az x = x egyenlet minden számra igaz, ez a reflexív tulajdonság, ami egy alapvető azonosság.</div><div class="explanation-solution">✅ Megoldás: Az x = x egyenletnek van végtelen sok megoldása.</div>` },
+            { question: "Ha az <span class='formula-display'>y-1=x</span>, akkor mivel egyenlő y?", answers: { a: "x-1", b: "1-x", c: "x+1" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Egyenletrendezés:</b> Az y-t egyedül kell hagyni az egyik oldalon.</div><div class="explanation-step"><b>🔹 Lépés:</b> Adjunk 1-et az egyenlet mindkét oldalához: (y-1)+1 = x+1.</div><div class="explanation-solution">✅ Megoldás: Az átalakítás után y = x+1.</div>` },
+            { question: "Mi az <span class='formula-display'>x=x</span> egyenlőség neve?", answers: { a: "Egyenlet", b: "Ellentmondás", c: "Azonosság" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Olyan egyenlőség, amely a változó minden értékére igaz, az azonosság. Mivel az x=x minden számra igaz, ez egy azonosság.</div><div class="explanation-solution">✅ Megoldás: Az x=x egy azonosság.</div>` },
+            { question: "Az <span class='formula-display'>5(x+2) = 5x+10</span> egy...", answers: { a: "egyenlet egy megoldással.", b: "ellentmondás.", c: "azonosság." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> A szorzás disztributív (tagonkénti) az összeadásra nézve.</div><div class="explanation-step"><b>🔹 Levezetés:</b> 5*x + 5*2 = 5x + 10. Mivel a két oldal formálisan is megegyezik, az egyenlőség minden x-re igaz.</div><div class="explanation-solution">✅ Megoldás: Az egyenlőség egy azonosság.</div>` },
+            { question: "Mi a <span class='formula-display'>-x = 5</span> egyenlet megoldása?", answers: { a: "5", b: "Nincs megoldása", c: "-5" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Levezetés:</b> Az egyenlet mindkét oldalát szorozzuk -1-gyel.</div><div class="explanation-step"><b>🔹 Számolás:</b> (-x)*(-1) = x. 5*(-1) = -5.</div><div class="explanation-solution">✅ Megoldás: Az egyenlet megoldása -5.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

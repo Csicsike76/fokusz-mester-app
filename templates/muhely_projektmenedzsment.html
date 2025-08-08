@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 17. hét: Személyes projektmenedzsment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #e3f2fd;
+            --example-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .prompt-example {
+            background-color: var(--example-bg);
+            border: 1px dashed var(--example-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>Gyakorlati Műhely</h1>
+            <p>17. hét: Személyes projektmenedzsment</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A műhely végére képes leszel egy nagy, összetett célt (pl. egy esemény megszervezése) az MI segítségével kisebb, logikus fázisokra és konkrét, végrehajtható feladatokra bontani. Megtanulod, hogyan készíts teendőlistát és egyszerű idővonalat bármilyen projekthez.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Szükséges Eszközök</h2>
+                <ul>
+                    <li>Bármelyik <strong>szöveggeneráló MI</strong> (Copilot, Gemini, ChatGPT).</li>
+                    <li>Egy jegyzetfüzet vagy digitális dokumentum a tervek mentéséhez.</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. Bevezető: Hogyan eszünk meg egy elefántot?</h2>
+                <p>A válasz: falatonként. A legtöbb nagy projekt azért tűnik ijesztőnek, mert egyben, "elefántként" tekintünk rá. A projektmenedzsment művészete abban rejlik, hogy képesek vagyunk ezt a nagy feladatot apró, emészthető "falatokra" vágni. Az MI ebben a folyamatban a te személyes projektmenedzsered: segít a bontásban, a feladatok kiosztásában és az időbeosztásban. Ma megtanuljuk, hogyan irányítsuk ezt az asszisztenst, hogy a legnagyobb célok is elérhetőnek tűnjenek.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>4. Lépésről-lépésre Feladatok</h2>
+                <p><strong>A mai projektünk:</strong> Megszervezünk egy egynapos osztálykirándulást a közeli erdőbe!</p>
+
+                <div class="task-card">
+                    <h3>1. Feladat: A Nagy Cél Lebontása Fázisokra</h3>
+                    <p>Először is, lássuk át a projekt főbb szakaszait! Nem kell mindent egyszerre tudnunk, elég a nagy lépéseket felvázolni.</p>
+                    <div class="prompt-example">Viselkedj úgy, mint egy tapasztalt rendezvényszervező! Az a feladatom, hogy megszervezzek egy egynapos osztálykirándulást a közeli erdőbe 30 diáknak. Bontsd le ezt a projektet 4-5 logikus, egymást követő fázisra!</div>
+                    <p><strong>Megfigyelés:</strong> Az MI valószínűleg olyan fázisokat javasol, mint: 1. Tervezés és Engedélyeztetés, 2. Költségvetés és Pénzgyűjtés, 3. Logisztika és Szervezés, 4. Lebonyolítás, 5. Utókövetés és Értékelés. Ezzel máris sokkal átláthatóbb lett a feladat!</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: Részletes Teendőlista (To-Do List)</h3>
+                    <p>Most válasszunk ki egyetlen fázist, és nézzük meg részletesebben! Fókuszáljunk a legbonyolultabbra: a Logisztika és Szervezés fázisra.</p>
+                    <div class="prompt-example">Rendben, fókuszáljunk a 3. fázisra: "Logisztika és Szervezés". Készíts ehhez egy részletes, pontokba szedett teendőlistát! Minden feladathoz rendelj egy javasolt felelőst (pl. diákönkormányzat, osztályfőnök) és egy hozzávetőleges határidőt a kirándulás napja előtt (pl. "2 héttel előtte").</div>
+                    <p><strong>Megfigyelés:</strong> Az MI egy konkrét, végrehajtható listát készített, ami olyan pontokat tartalmazhat, mint "Autóbusz lefoglalása", "Szendvicsek megrendelése", "Szülői engedélyek begyűjtése". Ezzel a listával már el lehet kezdeni dolgozni.</p>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: Idővonal Készítése</h3>
+                    <p>A teendőlista remek, de egy idővonal segít vizuálisan is átlátni a feladatokat. Kérjünk egy egyszerű táblázatot!</p>
+                    <div class="prompt-example">Készíts egy egyszerű heti bontású idővonalat a kirándulás előtti 4 hétre táblázatos formában! A táblázat mutassa meg, hogy az előző teendőlista legfontosabb feladatai melyik hétre esnek.</div>
+                    <p><strong>Megfigyelés:</strong> Az MI létrehozott egy egyszerű Gantt-diagramhoz hasonló táblázatot. Ezzel könnyen követhető, hogy mikor minek kell elkészülnie, és nem csúszunk ki a határidőkből.</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>4. Feladat: Kockázatkezelés</h3>
+                    <p>Egy jó projektmenedzser a lehetséges problémákra is felkészül. Kérdezzük meg az MI-t a kockázatokról!</p>
+                    <div class="prompt-example">Mik a legnagyobb lehetséges kockázatok vagy problémák egy erdei osztálykirándulás során? Adj 3 példát, és mindegyikhez javasolj egy megelőzési vagy megoldási tervet ("B tervet")!</div>
+                    <p><strong>Megfigyelés:</strong> Az MI olyan problémákat sorolhat fel, mint "rossz időjárás", "valaki megsérül", "nem gyűlik össze elég pénz". A javasolt "B tervek" (pl. esőnap, elsősegély-felszerelés) a felelős tervezés részét képezik.</p>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>5. Kritikai Gondolkodás Sarok</h2>
+                    <p>Az MI segített egy tökéletesnek tűnő tervet készíteni. De vajon az is?</p>
+                    <ul>
+                        <li><strong>A rejtett feladatok:</strong> Az MI terve logikus, de számol-e az emberi tényezővel? Például beleszámolta, hogy a szülői engedélyek begyűjtése nem egy perc, mert néhány diák elfelejti hazavinni? Miért fontos, hogy a projektmenedzser (te) a valós tapasztalatok alapján mindig finomítsa és kiegészítse az MI által javasolt tervet?</li>
+                        <li><strong>A kreativitás szerepe:</strong> Az MI egy logikus, de talán kissé sablonos tervet adott. Hol van a te szereped abban, hogy a kirándulás ne csak jól szervezett, hanem emlékezetes és kreatív is legyen (pl. egyedi programok, játékok kitalálása)? Az MI a "hogyan"-ban segít, de a "mit" és a "miért" nagy része még mindig a tiéd.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>6. Önálló Kihívás: Tervezd meg a saját projektedet!</h2>
+                    <p>Most válassz egy saját, személyes projektet, és használd a tanult projektmenedzsment-technikákat!</p>
+                    <p><strong>Válassz egyet a projektek közül (vagy találj ki sajátot):</strong> "Felkészülni egy fontos témazáróra", "Megtanulni egy új dalt egy hangszeren", "Kitakarítani és átrendezni a szobámat egy hétvége alatt".</p>
+                    <p><strong>A feladatod:</strong></p>
+                    <ol>
+                        <li>Az MI segítségével bontsd le a projektet <strong>3-4 fő fázisra</strong>.</li>
+                        <li>Válassz ki egy fázist, és készíttess hozzá egy <strong>részletes teendőlistát</strong>.</li>
+                        <li>Kérj az MI-től <strong>3 lehetséges kockázatot</strong> a projekttel kapcsolatban, és javaslatokat a kezelésükre.</li>
+                    </ol>
+                    <p>Mentsd le a kész tervet! Ez nem csak egy iskolai feladat, hanem egy valódi útmutató, ami segít elérni a saját célodat.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Energiaátvitel, energiaforrások</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Energiaátvitel, energiaforrások</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Melyik a megújuló energiaforrás?",
+                answers: { a: "Napenergia", b: "Földgáz", c: "Szén" },
+                correctAnswer: 'a',
+                explanation: "A megújuló energiaforrások emberi időléptékben kimeríthetetlenek vagy újratermelődnek. A Nap energiája ilyen. A földgáz és a szén fosszilis tüzelőanyagok, amelyek végesek. ✅ Megoldás: Napenergia."
+            },
+            {
+                question: "Mi az energia-megmaradás törvénye?",
+                answers: { a: "Az energia nem vész el, csak átalakul egyik formájából a másikba.", b: "Az energia mennyisége folyamatosan csökken a világban.", c: "Új energiát lehet teremteni a semmiből." },
+                correctAnswer: 'a',
+                explanation: "Ez a fizika egyik legfontosabb alaptörvénye. Zárt rendszerben a teljes energia mennyisége állandó, legfeljebb a formája változik meg (pl. kémiai energiából hőenergia lesz). ✅ Megoldás: Az energia nem vész el, csak átalakul egyik formájából a másikba."
+            },
+            {
+                question: "Milyen energiaátalakulás történik egy hőerőműben?",
+                answers: { a: "Kémiai (vagy nukleáris) energia → hőenergia → mozgási energia → elektromos energia.", b: "Elektromos energia → hőenergia.", c: "Mozgási energia → kémiai energia." },
+                correctAnswer: 'a',
+                explanation: "A fűtőanyag (pl. szén) elégetésével (kémiai) hőt (hő) termelnek, amivel gőzt fejlesztenek. A gőz meghajt egy turbinát (mozgási), ami egy generátort forgat, ami áramot termel (elektromos). ✅ Megoldás: Kémiai (vagy nukleáris) energia → hőenergia → mozgási energia → elektromos energia."
+            },
+            {
+                question: "Melyik NEM fosszilis energiaforrás?",
+                answers: { a: "Vízenergia", b: "Kőolaj", c: "Szén" },
+                correctAnswer: 'a',
+                explanation: "A vízenergia a magasan lévő víz helyzeti energiáját hasznosítja, ami a vízkörforgás révén megújuló. A kőolaj és a szén évmilliók alatt keletkezett fosszilis energiahordozók. ✅ Megoldás: Vízenergia."
+            },
+            {
+                question: "Melyik a leginkább környezetbarát energiaforrás?",
+                answers: { a: "Szélenergia", b: "Szénerőmű", c: "Olajtüzelésű erőmű" },
+                correctAnswer: 'a',
+                explanation: "A szélenergia hasznosítása közben nem szabadulnak fel üvegházhatású gázok vagy más káros anyagok. A szén- és olajtüzelésű erőművek jelentős légszennyezést okoznak. ✅ Megoldás: Szélenergia."
+            },
+            {
+                question: "Mi az energiaátvitel?",
+                answers: { a: "Az energia átadása egyik testről a másikra.", b: "Az energia átalakítása egyik formából a másikba.", c: "Az energia megsemmisítése." },
+                correctAnswer: 'a',
+                explanation: "Az energiaátvitel (vagy energiaközlés) az a folyamat, amikor az energia munkavégzés vagy hőcsere révén egyik rendszertől a másikhoz kerül. ✅ Megoldás: Az energia átadása egyik testről a másikra."
+            },
+            {
+                question: "Milyen energiaforrást használnak a napelemek?",
+                answers: { a: "A Nap sugárzó energiáját (fényét).", b: "A Nap hőjét.", c: "A szél energiáját." },
+                correctAnswer: 'a',
+                explanation: "A napelemek (fotovoltaikus cellák) a Napból érkező fényenergiát alakítják át közvetlenül elektromos energiává. ✅ Megoldás: A Nap sugárzó energiáját (fényét)."
+            },
+            {
+                question: "A Föld belső hőjét hasznosító energiaforrás a...",
+                answers: { a: "...geotermikus energia.", b: "...napenergia.", c: "...vízenergia." },
+                correctAnswer: 'a',
+                explanation: "A geotermikus energia a Föld mélyéből származó hőt használja fel fűtésre vagy áramtermelésre. Ez is egy megújuló energiaforrás. ✅ Megoldás: ...geotermikus energia."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Melyik a nem megújuló (fosszilis) energiaforrás?",
+                answers: { a: "Szélenergia", b: "Földgáz", c: "Napenergia" },
+                correctAnswer: 'b',
+                explanation: "A földgáz, a szén és a kőolaj fosszilis energiahordozók, amelyek évmilliók alatt képződtek, és készleteik végesek. A szél- és napenergia megújuló források. ✅ Megoldás: Földgáz."
+            },
+            {
+                question: "Milyen energiaátalakulás történik, amikor egy izzó világít?",
+                answers: { a: "Fényenergia → Elektromos energia", b: "Elektromos energia → Fény- és hőenergia", c: "Hőenergia → Fényenergia" },
+                correctAnswer: 'b',
+                explanation: "Az izzó egy fogyasztó, amely az elektromos hálózatból felvett elektromos energiát alakítja át a kívánt fényenergiává, de melléktermékként mindig keletkezik hőenergia is. ✅ Megoldás: Elektromos energia → Fény- és hőenergia."
+            },
+            {
+                question: "Melyik állítás igaz a fosszilis energiaforrásokra?",
+                answers: { a: "Kimeríthetetlenek.", b: "Égetésük üvegházhatású gázokat juttat a légkörbe.", c: "Teljesen környezetbarátok." },
+                correctAnswer: 'b',
+                explanation: "A fosszilis tüzelőanyagok elégetésekor szén-dioxid szabadul fel, ami hozzájárul a globális felmelegedéshez. Készleteik pedig végesek. ✅ Megoldás: Égetésük üvegházhatású gázokat juttat a légkörbe."
+            },
+            {
+                question: "Milyen energiát hasznosít egy szélerőmű?",
+                answers: { a: "A levegő helyzeti energiáját.", b: "A levegő mozgási energiáját.", c: "A Nap hőenergiáját." },
+                correctAnswer: 'b',
+                explanation: "A szél a levegő áramlása, tehát a levegőnek mozgási energiája van. A szélturbina lapátjai ezt a mozgási energiát alakítják át forgási, majd elektromos energiává. ✅ Megoldás: A levegő mozgási energiáját."
+            },
+            {
+                question: "Melyik a biomassza?",
+                answers: { a: "Kőolaj", b: "Növényi és állati eredetű szerves anyagok.", c: "Szén" },
+                correctAnswer: 'b',
+                explanation: "A biomassza kategóriájába tartozik minden olyan szerves anyag, ami elégethető energiatermelés céljából, például a fa, szalma, energianövények, vagy akár a szerves hulladék. ✅ Megoldás: Növényi és állati eredetű szerves anyagok."
+            },
+            {
+                question: "Milyen energiaátalakulás történik, amikor eszünk?",
+                answers: { a: "Hőenergia → Kémiai energia", b: "Kémiai energia → Hő- és mozgási energia", c: "Mozgási energia → Kémiai energia" },
+                correctAnswer: 'b',
+                explanation: "Az élelmiszerek kémiai energiát tárolnak. Az emésztés során a szervezetünk ezt a kémiai energiát alakítja át a testünk működéséhez szükséges hőenergiává és a mozgásunkhoz szükséges mechanikai energiává. ✅ Megoldás: Kémiai energia → Hő- és mozgási energia."
+            },
+            {
+                question: "Az atomerőművekben...",
+                answers: { a: "...a Nap energiáját használják.", b: "...az atommagokban tárolt energiát szabadítják fel.", c: "...fosszilis fűtőanyagokat égetnek." },
+                correctAnswer: 'b',
+                explanation: "Az atomerőművek az urán atommagjainak hasadásakor felszabaduló hatalmas energiát (magenergiát) használják fel hőtermelésre, amivel gőzt fejlesztenek és áramot termelnek. ✅ Megoldás: ...az atommagokban tárolt energiát szabadítják fel."
+            },
+            {
+                question: "Melyik a legfontosabb energiaforrás a Földön?",
+                answers: { a: "A szél", b: "A Nap", c: "A Föld belső hője" },
+                correctAnswer: 'b',
+                explanation: "A Földön szinte minden energiaforrás (közvetlenül vagy közvetve) a Napból származik. A Nap energiája hozza létre a szeleket, a vízkörforgást, és a fosszilis energiahordozók is egykor a napfényt hasznosító élőlényekből jöttek létre. ✅ Megoldás: A Nap."
+            },
+            {
+                question: "Mi a hatásfok?",
+                answers: { a: "A befektetett energia.", b: "A hasznos és a befektetett energia aránya.", c: "A hasznos energia." },
+                correctAnswer: 'b',
+                explanation: "A hatásfok egy arányszám, ami megmutatja, hogy a befektetett összes energiának mekkora hányada alakul át a kívánt, hasznos energiaformává. Értéke mindig 1-nél kisebb. ✅ Megoldás: A hasznos és a befektetett energia aránya."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Milyen energiaátalakulás történik egy vízerőműben?",
+                answers: { a: "Kémiai energia → Elektromos energia", b: "Hőenergia → Mozgási energia", c: "Helyzeti energia → Mozgási energia → Elektromos energia" },
+                correctAnswer: 'c',
+                explanation: "A magasan lévő víz helyzeti energiája lezúdulás közben mozgási energiává alakul. A mozgó víz megforgatja a turbinákat, amelyek a generátorokat hajtva elektromos energiát termelnek. ✅ Megoldás: Helyzeti energia → Mozgási energia → Elektromos energia."
+            },
+            {
+                question: "Melyik energiaforrás NEM megújuló?",
+                answers: { a: "Szélenergia", b: "Vízenergia", c: "Kőolaj" },
+                correctAnswer: 'c',
+                explanation: "A kőolaj fosszilis tüzelőanyag, amelynek készletei végesek, és nem termelődnek újra emberi időléptékben. A szél- és vízenergia a Nap által hajtott körfolyamatok része, így megújulók. ✅ Megoldás: Kőolaj."
+            },
+            {
+                question: "Mi az 'energiaátalakulás'?",
+                answers: { a: "Az energia mennyiségének növekedése.", b: "Az energia megsemmisülése.", c: "Az energia átalakulása egyik formájából a másikba." },
+                correctAnswer: 'c',
+                explanation: "Az energia-megmaradás törvénye szerint az energia nem vész el, csupán átalakul. Például egy elemben a kémiai energia alakul elektromos energiává. ✅ Megoldás: Az energia átalakulása egyik formájából a másikba."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "A Nap megújuló energiaforrás.", b: "A szén nem megújuló energiaforrás.", c: "Az atomerőművek megújuló energiát használnak." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás hamis. Bár az atomerőművek nem bocsátanak ki szén-dioxidot, fűtőanyaguk, az urán, egy a Földön bányászott, véges mennyiségben rendelkezésre álló ásványkincs, tehát nem megújuló. ✅ Megoldás: Az atomerőművek megújuló energiát használnak."
+            },
+            {
+                question: "Milyen energiája van a fának, amit a kandallóban elégetünk?",
+                answers: { a: "Hőenergia", b: "Mozgási energia", c: "Kémiai energia" },
+                correctAnswer: 'c',
+                explanation: "A fa, mint minden szerves anyag, kémiai kötésekben tárolja az energiát, amit a fotoszintézis során a Napból vett fel. Égéskor ez a kémiai energia szabadul fel hő formájában. ✅ Megoldás: Kémiai energia."
+            },
+            {
+                question: "Mi a megújuló energiaforrások közös jellemzője?",
+                answers: { a: "Nagyon drágák.", b: "Mindig elérhetőek.", c: "Környezetkímélőbbek és készletük nem merül ki." },
+                correctAnswer: 'c',
+                explanation: "A megújuló energiaforrások (nap, szél, víz, geotermikus) legnagyobb előnye, hogy hasznosításuk nem, vagy csak csekély mértékben szennyezi a környezetet, és forrásuk emberi léptékkel mérve kimeríthetetlen. ✅ Megoldás: Környezetkímélőbbek és készletük nem merül ki."
+            },
+            {
+                question: "Mi a fotoszintézis?",
+                answers: { a: "Az állatok légzése.", b: "Kémiai reakció.", c: "Az a folyamat, ahogy a növények a napfény energiáját kémiai energiává alakítják." },
+                correctAnswer: 'c',
+                explanation: "A fotoszintézis a földi élet alapja. A zöld növények a napfény energiáját felhasználva a levegő szén-dioxidjából és a vízből szerves anyagokat (cukrot) hoznak létre, amelyekben az energia kémiai formában tárolódik. ✅ Megoldás: Az a folyamat, ahogy a növények a napfény energiáját kémiai energiává alakítják."
+            },
+            {
+                question: "Mi a fűtőanyag?",
+                answers: { a: "Minden, ami meleg.", b: "Minden, ami folyékony.", c: "Olyan anyag, aminek elégetésével hőt termelünk." },
+                correctAnswer: 'c',
+                explanation: "Fűtőanyagnak azokat az anyagokat nevezzük, amelyekben nagy mennyiségű kémiai energia van tárolva, és ezt az energiát égés útján, hő formájában tudjuk felszabadítani és hasznosítani. ✅ Megoldás: Olyan anyag, aminek elégetésével hőt termelünk."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

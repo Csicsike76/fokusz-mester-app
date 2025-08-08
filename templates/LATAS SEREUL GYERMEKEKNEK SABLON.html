@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kvíz Látássérült Gyerekeknek</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f2f2f2;
+    }
+    .question {
+      margin-bottom: 2rem;
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question p {
+      font-size: 1.2rem;
+    }
+    button {
+      margin-top: 0.5rem;
+      padding: 0.4rem 1rem;
+      border: none;
+      background-color: #0077cc;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .sr-only {
+      position: absolute;
+      left: -9999px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Kvízkérdések</h1>
+
+  <div class="question" id="q2">
+    <p><strong>2. Melyik az Ohm-törvény helyes felírása?</strong></p>
+    <ul>
+      <li>A. U = I × R</li>
+      <li>B. U = I / R</li>
+      <li>C. U = R / I</li>
+      <li>D. U = I + R</li>
+    </ul>
+    <button onclick="speak('2. kérdés. Melyik az Ohm-törvény helyes felírása? A: U egyenlő I szor R. B: U egyenlő I osztva R-rel. C: U egyenlő R osztva I-vel. D: U egyenlő I plusz R.')">Felolvasás</button>
+  </div>
+
+  <div class="question" id="q3">
+    <p><strong>3. Mi a fény sebessége vákuumban?</strong></p>
+    <ul id="answers-q3">
+      <!-- Ezek látó nézet -->
+      <li>A. 300 000 m/s</li>
+      <li>B. 3 000 000 m/s</li>
+      <li>C. 300 000 000 m/s</li>
+      <li>D. 30 000 000 m/s</li>
+    </ul>
+    <button onclick="speak(getLightSpeedQuestionText())">Felolvasás</button>
+  </div>
+
+  <script>
+    const isScreenReader = window.location.search.includes("sr=true");
+
+    // Ha látássérült mód aktív, cseréljük le a számokat szövegre
+    if (isScreenReader) {
+      document.getElementById("answers-q3").innerHTML = `
+        <li>A. háromszázezer méter per szekundum</li>
+        <li>B. hárommillió méter per szekundum</li>
+        <li>C. háromszázmillió méter per szekundum</li>
+        <li>D. harmincmillió méter per szekundum</li>
+      `;
+    }
+
+    function getLightSpeedQuestionText() {
+      if (isScreenReader) {
+        return '3. kérdés. Mi a fény sebessége vákuumban? A: háromszázezer méter per szekundum. B: hárommillió méter per szekundum. C: háromszázmillió méter per szekundum. D: harmincmillió méter per szekundum.';
+      } else {
+        return '3. kérdés. Mi a fény sebessége vákuumban? A: háromszázezer. B: hárommillió. C: háromszázmillió. D: harmincmillió. Minden mértékegység: méter per szekundum.';
+      }
+    }
+
+    function speak(text) {
+      const synth = window.speechSynthesis;
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'hu-HU';
+      utter.rate = 0.9;
+      synth.cancel(); // korábbi hangok leállítása
+      synth.speak(utter);
+    }
+  </script>
+
+</body>
+</html>

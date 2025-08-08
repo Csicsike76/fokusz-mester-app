@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tudás Kártyák - Interaktív Gyakorló</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --kek: #005A9C;
+            --piros: #CD2A3E;
+            --zold: #436F4D;
+            --feher: #FFFFFF;
+            --sotet: #2c3e50;
+            --vilagos-szurke: #f0f4f8;
+            --szoveg: #34495e;
+            --card-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--vilagos-szurke);
+            color: var(--szoveg);
+            line-height: 1.6;
+            padding-bottom: 4rem;
+        }
+        
+        .container { max-width: 800px; margin: auto; padding: 2rem; }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--feher);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+        .header h1 { font-family: 'Roboto Slab', serif; color: var(--sotet); margin: 0; }
+        .header p { color: #6c757d; }
+
+        .card {
+            background: var(--feher);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+            padding: 2rem;
+        }
+        .card h2 { font-family: 'Roboto Slab', serif; color: var(--kek); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem; }
+
+        .deck-manager input, .deck-manager select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .button-group { display: flex; gap: 1rem; }
+        .btn {
+            flex-grow: 1;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn-create { background-color: var(--zold); color: var(--feher); }
+        .btn-delete { background-color: var(--piros); color: var(--feher); }
+        .btn-start { background-color: var(--kek); color: var(--feher); }
+        
+        #card-creator { display: none; }
+        #practice-area { display: none; }
+        
+        .flashcard-container {
+            perspective: 1000px;
+            min-height: 250px;
+        }
+        .flashcard {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        .flashcard.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid var(--kek);
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .flashcard-front {
+            background: var(--feher);
+        }
+        .flashcard-back {
+            background: #e3f2fd;
+            transform: rotateY(180deg);
+            font-size: 1rem;
+            align-items: flex-start;
+            text-align: left;
+        }
+        
+        #deck-stats { text-align: center; margin: 1.5rem 0; font-weight: 500; }
+        #no-cards-message { text-align: center; padding: 2rem; color: #6c757d; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <h1>Tudás Kártyák</h1>
+            <p>Az aktív felidézés szuperképessége</p>
+        </header>
+
+        <div class="card deck-manager">
+            <h2>Pakli Választó</h2>
+            <select id="deck-selector"></select>
+            <div class="button-group">
+                <button id="start-practice-btn" class="btn btn-start">Gyakorlás Indítása</button>
+                <button id="delete-deck-btn" class="btn btn-delete">Pakli Törlése</button>
+            </div>
+            <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #eee;">
+            <input type="text" id="new-deck-name" placeholder="Új pakli neve...">
+            <button id="create-deck-btn" class="btn btn-create">Új Pakli Létrehozása</button>
+        </div>
+
+        <div class="card" id="card-creator">
+            <h2>Új Kártya Hozzáadása</h2>
+            <input type="text" id="card-front" placeholder="Kártya előlapja (fogalom vagy kérdés)...">
+            <textarea id="card-back" style="width:100%; min-height: 100px; margin-bottom: 1rem; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;" placeholder="Kártya hátlapja (válasz vagy definíció)..."></textarea>
+            <button id="add-card-btn" class="btn btn-create">Kártya Hozzáadása</button>
+        </div>
+
+        <div class="card" id="practice-area">
+            <h2 id="practice-deck-title">Gyakorlás</h2>
+            <div id="deck-stats"></div>
+            <div id="no-cards-message" style="display:none;">Ehhez a paklihoz még nem tartozik kártya, vagy már mindet tudod. Adj hozzá újakat!</div>
+            <div class="flashcard-container">
+                <div class="flashcard" id="flashcard">
+                    <div class="flashcard-face flashcard-front" id="flashcard-front"></div>
+                    <div class="flashcard-face flashcard-back" id="flashcard-back"></div>
+                </div>
+            </div>
+            <div class="button-group" style="margin-top:1.5rem;">
+                <button id="flip-card-btn" class="btn" style="background-color: #6c757d; color: white;">Megfordít</button>
+            </div>
+            <div class="button-group" id="assessment-buttons" style="display:none; margin-top:1rem;">
+                <button id="didnt-know-btn" class="btn btn-delete">Nem tudtam</button>
+                <button id="knew-btn" class="btn btn-create">Tudtam</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    // --- ADATBÁZIS ---
+    const initialDecks = {
+        "Fizika 6. Osztály": [
+            { front: "Halmazállapotok", back: "Az anyagok megjelenési formái (szilárd, folyékony, gáz), amelyeket a részecskék közötti kölcsönhatás erőssége határoz meg.", known: false },
+            { front: "Hőtágulás", back: "Az a jelenség, amikor egy anyag térfogata melegítés hatására megnövekszik, mert a részecskéi gyorsabban mozognak és távolabb kerülnek egymástól.", known: false },
+            { front: "Sűrűség", back: "Egy anyag tömegének és térfogatának hányadosa (ρ = m/V). Megmutatja, hogy egységnyi térfogatban mekkora tömeg található.", known: false },
+        ],
+        "Fizika 7. Osztály": [
+            { front: "Erő", back: "Olyan fizikai hatás, amely egy test mozgásállapotát (sebességét) vagy alakját képes megváltoztatni. Jele: F, mértékegysége: Newton (N).", known: false },
+            { front: "Sebesség", back: "A mozgás gyorsaságát és irányát leíró fizikai mennyiség. Jele: v, képlete: v = s/t (út osztva idővel).", known: false },
+            { front: "Tehetetlenség törvénye (Newton I.)", back: "Minden test nyugalomban marad vagy egyenes vonalú egyenletes mozgást végez mindaddig, amíg egy másik test vagy mező erőt nem gyakorol rá.", known: false },
+        ],
+        "Fizika 8. Osztály": [
+            { front: "Elektromos töltés", back: "Az anyag alapvető tulajdonsága, amely elektromos és mágneses kölcsönhatást hoz létre. Lehet pozitív (proton) vagy negatív (elektron).", known: false },
+            { front: "Ohm törvénye", back: "Egy vezetőn átfolyó áram erőssége (I) egyenesen arányos a rajta eső feszültséggel (U) és fordítottan arányos az ellenállásával (R). Képlete: I = U/R.", known: false },
+            { front: "Mágneses mező", back: "Mágnesek vagy elektromos áramok által létrehozott erőtér, amely más mágnesekre vagy mozgó töltésekre fejt ki erőt.", known: false },
+        ],
+        "Matematika 7. Osztály": [
+            { front: "Hatványozás", back: "Egy szám (az alap) önmagával való ismételt szorzása. A kitevő mutatja meg, hányszor kell az alapot összeszorozni.", known: false },
+            { front: "Algebrai kifejezés", back: "Számokból és betűkből (változókból) álló kifejezés, amelyeket matematikai műveletek kapcsolnak össze (pl. 3x + 2y - 5).", known: false },
+            { front: "Egyenlet", back: "Két algebrai kifejezés egyenlősége, amely legalább egy ismeretlent (változót) tartalmaz. A megoldása az a szám, amellyel az egyenlőség igazzá válik.", known: false },
+        ],
+        "Matematika 8. Osztály": [
+            { front: "Pitagorasz-tétel", back: "Egy derékszögű háromszög két befogójának (a, b) négyzetösszege egyenlő az átfogó (c) négyzetével. Képlete: a² + b² = c².", known: false },
+            { front: "Halmazok metszete", back: "Két vagy több halmaz közös elemeiből álló halmaz. Jele: ∩. Például: {1, 2} ∩ {2, 3} = {2}.", known: false },
+            { front: "Lineáris függvény", back: "Olyan függvény, amelynek a grafikonja egy egyenes. Általános alakja: f(x) = mx + b, ahol 'm' a meredekség, 'b' pedig az y-tengely metszete.", known: false },
+        ]
+    };
+    
+    // --- ALKALMAZÁS LOGIKA ---
+    document.addEventListener('DOMContentLoaded', () => {
+        let decks = {};
+        let currentDeckName = '';
+        let currentCardIndex = 0;
+        let practiceCards = [];
+
+        const deckSelector = document.getElementById('deck-selector');
+        const createDeckBtn = document.getElementById('create-deck-btn');
+        const newDeckNameInput = document.getElementById('new-deck-name');
+        const deleteDeckBtn = document.getElementById('delete-deck-btn');
+        const startPracticeBtn = document.getElementById('start-practice-btn');
+        
+        const cardCreator = document.getElementById('card-creator');
+        const addCardBtn = document.getElementById('add-card-btn');
+        const cardFrontInput = document.getElementById('card-front');
+        const cardBackInput = document.getElementById('card-back');
+
+        const practiceArea = document.getElementById('practice-area');
+        const practiceDeckTitle = document.getElementById('practice-deck-title');
+        const deckStats = document.getElementById('deck-stats');
+        const noCardsMessage = document.getElementById('no-cards-message');
+        const flashcard = document.getElementById('flashcard');
+        const flashcardFront = document.getElementById('flashcard-front');
+        const flashcardBack = document.getElementById('flashcard-back');
+        const flipCardBtn = document.getElementById('flip-card-btn');
+        const assessmentButtons = document.getElementById('assessment-buttons');
+        const knewBtn = document.getElementById('knew-btn');
+        const didntKnowBtn = document.getElementById('didnt-know-btn');
+
+        function saveDecks() {
+            localStorage.setItem('flashcardDecks', JSON.stringify(decks));
+        }
+
+        function loadDecks() {
+            const savedDecks = localStorage.getItem('flashcardDecks');
+            if (savedDecks) {
+                decks = JSON.parse(savedDecks);
+            } else {
+                decks = initialDecks; // Első indításkor betöltjük az alap paklikat
+                saveDecks();
+            }
+            populateDeckSelector();
+        }
+        
+        function populateDeckSelector() {
+            deckSelector.innerHTML = '';
+            for (const deckName in decks) {
+                const option = document.createElement('option');
+                option.value = deckName;
+                option.textContent = deckName;
+                deckSelector.appendChild(option);
+            }
+        }
+
+        function createDeck() {
+            const name = newDeckNameInput.value.trim();
+            if (name && !decks[name]) {
+                decks[name] = [];
+                saveDecks();
+                populateDeckSelector();
+                deckSelector.value = name;
+                newDeckNameInput.value = '';
+                updateUIForSelectedDeck();
+            }
+        }
+        
+        function deleteDeck() {
+            const name = deckSelector.value;
+            if (name && confirm(`Biztosan törölni szeretnéd a "${name}" paklit? Ezt nem lehet visszavonni.`)) {
+                delete decks[name];
+                saveDecks();
+                populateDeckSelector();
+                updateUIForSelectedDeck();
+            }
+        }
+
+        function addCard() {
+            const front = cardFrontInput.value.trim();
+            const back = cardBackInput.value.trim();
+            if (front && back && currentDeckName) {
+                decks[currentDeckName].push({ front, back, known: false });
+                saveDecks();
+                cardFrontInput.value = '';
+                cardBackInput.value = '';
+                cardFrontInput.focus();
+            }
+        }
+
+        function startPractice() {
+            currentDeckName = deckSelector.value;
+            if (!currentDeckName) return;
+
+            practiceDeckTitle.textContent = `Gyakorlás: ${currentDeckName}`;
+            practiceCards = decks[currentDeckName].filter(card => !card.known);
+            currentCardIndex = 0;
+            
+            practiceArea.style.display = 'block';
+            cardCreator.style.display = 'none';
+
+            if (practiceCards.length > 0) {
+                noCardsMessage.style.display = 'none';
+                flashcard.style.display = 'block';
+                flipCardBtn.style.display = 'block';
+                displayCard();
+            } else {
+                noCardsMessage.style.display = 'block';
+                flashcard.style.display = 'none';
+                flipCardBtn.style.display = 'none';
+                assessmentButtons.style.display = 'none';
+                updateStats();
+            }
+        }
+
+        function displayCard() {
+            flashcard.classList.remove('is-flipped');
+            assessmentButtons.style.display = 'none';
+            flipCardBtn.style.display = 'block';
+
+            const card = practiceCards[currentCardIndex];
+            flashcardFront.textContent = card.front;
+            flashcardBack.textContent = card.back;
+            updateStats();
+        }
+        
+        function updateStats() {
+            const total = decks[currentDeckName].length;
+            const knownCount = decks[currentDeckName].filter(c => c.known).length;
+            deckStats.textContent = `${knownCount} / ${total} kártyát tudsz.`;
+        }
+
+        function nextCard(markAsKnown) {
+            const cardInFullDeck = decks[currentDeckName].find(c => c.front === practiceCards[currentCardIndex].front);
+            if (cardInFullDeck) {
+                cardInFullDeck.known = markAsKnown;
+            }
+            saveDecks();
+
+            practiceCards.splice(currentCardIndex, 1);
+            
+            if (practiceCards.length === 0) {
+                startPractice(); // Refresh to show completion message
+                return;
+            }
+            
+            if (currentCardIndex >= practiceCards.length) {
+                currentCardIndex = 0;
+            }
+            displayCard();
+        }
+        
+        function updateUIForSelectedDeck() {
+            currentDeckName = deckSelector.value;
+            practiceArea.style.display = 'none';
+            cardCreator.style.display = 'block';
+        }
+
+        createDeckBtn.addEventListener('click', createDeck);
+        deleteDeckBtn.addEventListener('click', deleteDeck);
+        addCardBtn.addEventListener('click', addCard);
+        startPracticeBtn.addEventListener('click', startPractice);
+        deckSelector.addEventListener('change', updateUIForSelectedDeck);
+        
+        flipCardBtn.addEventListener('click', () => {
+            flashcard.classList.add('is-flipped');
+            assessmentButtons.style.display = 'flex';
+            flipCardBtn.style.display = 'none';
+        });
+        
+        knewBtn.addEventListener('click', () => nextCard(true));
+        didntKnowBtn.addEventListener('click', () => nextCard(false));
+
+        loadDecks();
+        updateUIForSelectedDeck();
+    });
+    </script>
+</body>
+</html>

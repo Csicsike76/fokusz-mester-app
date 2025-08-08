@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Stúdió - M02: Versenytárs-elemzés és Projekt Vázlat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #e3f2fd;
+            --example-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .prompt-container {
+            position: relative;
+        }
+
+        .prompt-example {
+            background-color: var(--example-bg);
+            border: 1px dashed var(--example-border);
+            padding: 1rem;
+            padding-right: 80px; /* Hely a gombnak */
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        
+        .copy-button:hover {
+            background-color: #385a3e;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>Mérföldkő Műhely</h1>
+            <p>3-4. hét: Versenytárs-elemzés és Projekt Vázlat</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A mérföldkő végére a csapatotok képes lesz felmérni a "piacot", azonosítani a lehetséges versenytársakat, és megfogalmazni, mitől lesz a ti projektetek <strong>egyedi és különleges</strong>. Mindezt egy hivatalos, egyoldalas <strong>projekt vázlatban (One-Pager)</strong> rögzítitek, ami a féléves munka legfontosabb dokumentuma lesz.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Bevezető: Ne találd fel újra a spanyolviaszt!</h2>
+                <p>Mielőtt belevágnánk egy nagy projektbe, érdemes körülnézni: foglalkozott-e már valaki hasonló problémával? Ha igen, hogyan? Ez nem a másolásról szól, hanem a tanulásról. A létező megoldások elemzése (a "versenytársaké") segít elkerülni a buktatókat, és megtalálni azt a rést, ahol a ti ötletetek valami újat, valami jobbat tud nyújtani. Ma az MI-t arra használjuk, hogy segítsen nekünk "kémkedni" egy kicsit, és megtalálni a projektünk szupererejét.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. Lépésről-lépésre Feladatok</h2>
+                <p>Vegyétek elő az előző mérföldkőn készített "Kutatási Összefoglalótokat"!</p>
+
+                <div class="task-card">
+                    <h3>1. Feladat: A "Versenytársak" Feltérképezése</h3>
+                    <p>Használjátok az MI-t, hogy kiderítsétek, léteznek-e már hasonló megoldások a problémátokra!</p>
+                    <div class="prompt-container">
+                        <div class="prompt-example">Viselkedj úgy, mint egy piackutató! A projektünk egy olyan megoldás, ami segít [ide írjátok a probléma rövid leírását, pl. 'a diákoknak követni a házi feladataikat']. Keress 3 létező applikációt, weboldalt vagy módszert, ami ugyanezt a problémát próbálja megoldani! Mindegyikhez írd le röviden az erősségét és a gyengeségét!</div>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                    </div>
+                    <p><strong>Feladat:</strong> Beszéljétek meg a kapott listát! Ismeritek ezeket a megoldásokat? Mennyire jók? Írjátok le a 3 legfontosabb "versenytársat" és a róluk tanultakat a projekt dokumentumotokba.</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: Az Egyedi Értékajánlat (USP) Megfogalmazása</h3>
+                    <p>Most jön a legfontosabb kérdés: ha már léteznek megoldások, <strong>mitől lesz a tiétek más vagy jobb?</strong> Ez az Egyedi Értékajánlat (Unique Selling Proposition - USP). Kérjünk az MI-től segítséget a megfogalmazásához!</p>
+                    <div class="prompt-container">
+                        <div class="prompt-example">A mi projektünk egy [a ti megoldásotok leírása]. A versenytársak a következők: [soroljátok fel a 3 versenytársat]. Adj 3 ötletet arra, mi lehet a mi egyedi értékajánlatunk (USP)! Miben lehetünk mások? (Pl. egyszerűbb, ingyenes, egy speciális funkció, jobban céloz a diákokra stb.)</div>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                    </div>
+                    <p><strong>Feladat:</strong> Válasszátok ki a legütősebb ötletet, és fogalmazzátok meg egyetlen, emlékezetes mondatban a projektetek USP-jét! (Pl. "A mi applikációnk nemcsak egy határidőnapló, hanem egy játékos, motiváló rendszer, ami segít legyőzni a halogatást.") Ezt a mondatot írjátok be a projektdokumentumba!</p>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: A Projekt Vázlat (One-Pager) Összeállítása</h3>
+                    <p>Most minden tudásunkat egyetlen, áttekinthető dokumentumba sűrítjük. Ez lesz a projektetek "személyi igazolványa".</p>
+                    <div class="prompt-container">
+                        <div class="prompt-example">Viselkedj úgy, mint egy projektmenedzser! A rendelkezésre álló információk alapján (probléma, célközönség, USP) készíts egy egyoldalas projekt vázlatot (One-Pager)! A vázlat a következő részekből álljon: 1. Projekt Címe, 2. Problémamegfogalmazás (1 mondat), 3. Megoldás (1 mondat), 4. Célközönség (kiknek szól?), 5. Egyedi Értékajánlat (USP), 6. A Siker Mérőszámai (2-3 pont, pl. 'a diákok 80%-a használja', 'csökken az elfelejtett házik száma').</div>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Másolás</button>
+                    </div>
+                    <p><strong>Feladat:</strong> A kapott vázlatot finomítsátok, töltsétek ki a saját, véglegesített információitokkal, és formázzátok meg szépen egy dokumentumban!</p>
+                </div>
+            </section>
+            
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>4. Kritikai Gondolkodás Sarok</h2>
+                    <ul>
+                        <li><strong>Innováció vagy Másolat?</strong> Az MI a már létező információk alapján dolgozik. Hogyan tudjátok biztosítani, hogy a projektetek valóban új ötleteket tartalmazzon, és ne csak a versenytársak funkcióinak egy újabb kombinációja legyen? Mi az a kreatív, emberi szikra, amit ti tesztek hozzá?</li>
+                        <li><strong>A "Siker" Definíciója:</strong> Az MI segített megfogalmazni a siker mérőszámait. De a siker csak számokban mérhető? Milyen más, nem mérhető (kvalitatív) módokon lehetne sikeres a projektetek? (Pl. "a diákok kevésbé szoronganak a házik miatt", "erősíti az osztályközösséget").</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>5. A Mérföldkő Kihívása: A Végleges Projekt Vázlat (One-Pager)</h2>
+                    <p>A két hét munkájának eredménye a csapatotok legfontosabb dokumentuma.</p>
+                    <p><strong>Készítsétek el és véglegesítsétek a hivatalos, egyoldalas Projekt Vázlatotokat, ami a következő 6 pontot tartalmazza:</strong></p>
+                    <ol>
+                        <li>Projekt Címe</li>
+                        <li>Problémamegfogalmazás</li>
+                        <li>Megoldás</li>
+                        <li>Célközönség</li>
+                        <li>Egyedi Értékajánlat (USP)</li>
+                        <li>A Siker Mérőszámai</li>
+                    </ol>
+                    <p>Ezt a dokumentumot mentsétek el PDF-ként! A következő fázisban, a tervezés során ez lesz a legfőbb iránymutatótok, ami segít, hogy ne térjetek le a kijelölt útról. Jó munkát!</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+<script>
+    function copyToClipboard(buttonElement) {
+        const promptText = buttonElement.previousElementSibling.textContent;
+        navigator.clipboard.writeText(promptText).then(() => {
+            const originalText = buttonElement.textContent;
+            buttonElement.textContent = 'Másolva!';
+            setTimeout(() => {
+                buttonElement.textContent = originalText;
+            }, 2000);
+        }).catch(err => {
+            console.error('Hiba a másolás során', err);
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Az erők összeadása</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        #control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        #pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        #check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        #check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        #results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Az erők összeadása</h1>
+
+    <div id="control-panel">
+        <input type="password" id="pin-input" placeholder="PIN kód">
+        <button id="check-button">Ellenőrzés</button>
+        <div id="results"></div>
+        <div id="admin-panel" class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span id="dist-a"></span> / <span id="dist-b"></span> / <span id="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Hogyan adunk össze két, azonos irányú erőt?",
+                answers: { a: "A nagyságukat összeadjuk, az irányuk változatlan.", b: "A nagyságukat kivonjuk, az irányuk a nagyobbé.", c: "A paralelogramma-szabályt használjuk." },
+                correctAnswer: 'a',
+                explanation: "Ha két erő egy irányba hat, a hatásuk erősíti egymást. Az eredő erő nagysága a két erő nagyságának összege, az iránya pedig megegyezik az eredeti erők irányával. ✅ Megoldás: A nagyságukat összeadjuk, az irányuk változatlan."
+            },
+            {
+                question: "Egy dobozt ketten tolnak előre. Az egyik 50 N, a másik 30 N erővel. Mekkora az eredő erő?",
+                answers: { a: "80 N előre", b: "20 N előre", c: "80 N hátra" },
+                correctAnswer: 'a',
+                explanation: "Mivel mindkét erő azonos irányú (előre), az eredő erő nagysága a két erő nagyságának összege: 50 N + 30 N = 80 N. Az iránya is előre mutat. ✅ Megoldás: 80 N előre."
+            },
+            {
+                question: "Mi a neve annak a módszernek, amivel két, nem egy egyenesbe eső erőt összegzünk?",
+                answers: { a: "Paralelogramma-módszer", b: "Pitagorasz-tétel", c: "Skaláris összeadás" },
+                correctAnswer: 'a',
+                explanation: "Ha két erő egy pontból, de különböző irányokba hat, az eredőjüket a két erővektorra feszített paralelogramma átlója adja meg. Ezt a grafikus szerkesztési eljárást nevezzük paralelogramma-módszernek. ✅ Megoldás: Paralelogramma-módszer."
+            },
+            {
+                question: "Mi az eredő erő?",
+                answers: { a: "Az egy testre ható összes erő vektori összege.", b: "A legnagyobb erő, ami a testre hat.", c: "Az erők számtani átlaga." },
+                correctAnswer: 'a',
+                explanation: "Az eredő erő az az egyetlen erő, amely ugyanazt a hatást fejti ki a testre, mint a rá ható erők együttesen. Az erők vektori összeadásával kapjuk meg, figyelembe véve a nagyságukat és irányukat is. ✅ Megoldás: Az egy testre ható összes erő vektori összege."
+            },
+            {
+                question: "Két, egymásra merőleges, 6 N és 8 N nagyságú erő eredője mekkora?",
+                answers: { a: "10 N", b: "14 N", c: "2 N" },
+                correctAnswer: 'a',
+                explanation: "Merőleges erők esetén az eredő erő nagyságát a Pitagorasz-tétellel számolhatjuk. A két erő a derékszögű háromszög befogói, az eredő az átfogó. 6² + 8² = 36 + 64 = 100. Az eredő erő nagysága √100 = 10 N. ✅ Megoldás: 10 N."
+            },
+            {
+                question: "Mikor lesz az eredő erő nulla?",
+                answers: { a: "Ha a testre ható erők kiegyenlítik egymást.", b: "Ha a test nyugalomban van.", c: "Ha a test mozog." },
+                correctAnswer: 'a',
+                explanation: "Az eredő erő akkor nulla, ha a testre ható erők vektori összege nulla. Ez azt jelenti, hogy az erők hatásai pont kioltják egymást, azaz kiegyenlítik egymást. Ez bekövetkezhet nyugalomban és egyenletes mozgás közben is. ✅ Megoldás: Ha a testre ható erők kiegyenlítik egymást."
+            },
+            {
+                question: "Ha egy tárgyra egy 12 N-os erő hat jobbra és egy 12 N-os erő hat balra, mekkora az eredő erő?",
+                answers: { a: "0 N", b: "24 N jobbra", c: "12 N" },
+                correctAnswer: 'a',
+                explanation: "A két erő egyenlő nagyságú és pontosan ellentétes irányú. Ilyenkor a hatásuk tökéletesen kioltja egymást, a vektori összegük, azaz az eredő erő nulla. ✅ Megoldás: 0 N."
+            },
+            {
+                question: "Melyik módszer NEM alkalmas erők összeadására?",
+                answers: { a: "Az erők nagyságának egyszerű, számtani összeadása (az irányok figyelmen kívül hagyásával).", b: "A paralelogramma-módszer.", c: "A háromszög-módszer (vektorok sorba rajzolása)." },
+                correctAnswer: 'a',
+                explanation: "Az erők vektorok, ezért az irányukat mindig figyelembe kell venni. A nagyságok egyszerű összeadása csak abban a speciális esetben ad helyes eredményt, ha az erők azonos irányúak. ✅ Megoldás: Az erők nagyságának egyszerű, számtani összeadása (az irányok figyelmen kívül hagyásával)."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Hogyan adunk össze két, ellentétes irányú erőt?",
+                answers: { a: "A nagyságukat összeadjuk.", b: "A nagyságukat kivonjuk egymásból, az irány a nagyobbé.", c: "Nem lehet összeadni őket." },
+                correctAnswer: 'b',
+                explanation: "Ha két erő ellentétes irányban hat, a hatásuk gyengíti egymást. Az eredő erő nagysága a két erő nagyságának különbsége, az iránya pedig a nagyobbik erő irányával egyezik meg. ✅ Megoldás: A nagyságukat kivonjuk egymásból, az irány a nagyobbé."
+            },
+            {
+                question: "Egy hajót a folyó 3 m/s sebességgel sodor, a hajó motorja pedig 4 m/s sebességgel hajtja a folyásiránnyal megegyező irányba. Mekkora a hajó sebessége a parthoz képest?",
+                answers: { a: "1 m/s", b: "7 m/s", c: "5 m/s" },
+                correctAnswer: 'b',
+                explanation: "Mivel a két sebességvektor azonos irányú, a nagyságuk összeadódik. A hajó eredő sebessége a parthoz képest 3 m/s + 4 m/s = 7 m/s. ✅ Megoldás: 7 m/s."
+            },
+            {
+                question: "Egy testre hat egy 15 N-os erő jobbra és egy 5 N-os erő balra. Mekkora és milyen irányú az eredő erő?",
+                answers: { a: "20 N jobbra", b: "10 N jobbra", c: "10 N balra" },
+                correctAnswer: 'b',
+                explanation: "A két erő ellentétes irányú, ezért a nagyságukat kivonjuk: 15 N - 5 N = 10 N. Az eredő erő iránya a nagyobb erő (15 N) irányába, azaz jobbra mutat. ✅ Megoldás: 10 N jobbra."
+            },
+            {
+                question: "Ha egy testre ható erők eredője nem nulla, akkor a test...",
+                answers: { a: "...nyugalomban marad.", b: "...gyorsuló mozgást végez.", c: "...egyenletes mozgást végez." },
+                correctAnswer: 'b',
+                explanation: "A dinamika alaptörvénye (Newton II.) szerint, ha egy testre eredő erő hat, akkor a test mozgásállapota megváltozik, azaz gyorsulni fog. ✅ Megoldás: ...gyorsuló mozgást végez."
+            },
+            {
+                question: "Mi a háromszög-módszer az erők összeadásánál?",
+                answers: { a: "A paralelogramma-módszer egy másik neve.", b: "A második vektort az első végpontjából indítjuk, az eredő az első kezdőpontjából a második végpontjába mutat.", c: "A vektorok hosszának átlagát vesszük." },
+                correctAnswer: 'b',
+                explanation: "A háromszög-módszer egy másik grafikus eljárás. Az első vektor végpontjához illesztjük a második vektor kezdőpontját. Az eredő vektor az első vektor kezdőpontját köti össze a második végpontjával, egy háromszöget bezárva. ✅ Megoldás: A második vektort az első végpontjából indítjuk, az eredő az első kezdőpontjából a második végpontjába mutat."
+            },
+            {
+                question: "Egy repülőgépet 4000 N vonóerő hajt előre, és összesen 4000 N fékezőerő (légellenállás) hat rá. Hogyan mozog a gép?",
+                answers: { a: "Gyorsul.", b: "Egyenes vonalú egyenletes mozgással halad.", c: "Lassul." },
+                correctAnswer: 'b',
+                explanation: "Az előre ható 4000 N és a hátrafelé ható 4000 N erő eredője nulla. Ha az eredő erő nulla, a test mozgásállapota nem változik, tehát egyenes vonalú egyenletes mozgást végez. ✅ Megoldás: Egyenes vonalú egyenletes mozgással halad."
+            },
+            {
+                question: "Mikor NEM lehet két erő eredője nulla?",
+                answers: { a: "Ha az erők egyenlő nagyságúak és ellentétes irányúak.", b: "Ha az erők azonos irányúak és egyik sem nulla.", c: "Ha a test nyugalomban van." },
+                correctAnswer: 'b',
+                explanation: "Ha két erő azonos irányú, az eredőjük nagysága mindig a két erő nagyságának összege. Ha egyik erő sem nulla, az összegük sem lehet nulla. ✅ Megoldás: Ha az erők azonos irányúak és egyik sem nulla."
+            },
+            {
+                question: "Miért kell figyelembe venni az erők irányát az összeadáskor?",
+                answers: { a: "Valójában nem kell.", b: "Mert az erő vektormennyiség.", c: "Mert a mértékegysége megköveteli." },
+                correctAnswer: 'b',
+                explanation: "Az erő vektormennyiség, ami azt jelenti, hogy az iránya ugyanolyan fontos tulajdonsága, mint a nagysága. Az irány figyelmen kívül hagyása hibás eredményhez vezetne az eredő erő meghatározásakor. ✅ Megoldás: Mert az erő vektormennyiség."
+            },
+            {
+                question: "Egy ládát két ember emel, mindketten 100-100 N függőlegesen felfelé irányuló erővel. Mekkora az eredő emelőerő?",
+                answers: { a: "100 N", b: "200 N", c: "0 N" },
+                correctAnswer: 'b',
+                explanation: "A két emelőerő azonos irányú (felfelé), ezért a nagyságukat egyszerűen összeadjuk: 100 N + 100 N = 200 N. ✅ Megoldás: 200 N."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Egy testre ható erőket...",
+                answers: { a: "...mindig számtanilag kell összeadni.", b: "...soha nem lehet összeadni.", c: "...vektorilag kell összeadni." },
+                correctAnswer: 'c',
+                explanation: "Mivel az erő vektormennyiség, az összegzésüknél a vektoriális összeadás szabályait kell alkalmazni, ami figyelembe veszi az erők nagyságát és irányát is. ✅ Megoldás: ...vektorilag kell összeadni."
+            },
+            {
+                question: "Ha egy testre ható erők nincsenek egy egyenesben, az eredő erőt...",
+                answers: { a: "...nem lehet meghatározni.", b: "...a nagyságok összeadásával kapjuk meg.", c: "...a paralelogramma-módszerrel szerkeszthetjük meg." },
+                correctAnswer: 'c',
+                explanation: "Amennyiben az erők szöget zárnak be egymással, a paralelogramma-szabály egy helyes grafikus módszer az eredő erő nagyságának és irányának a meghatározására. ✅ Megoldás: ...a paralelogramma-módszerrel szerkeszthetjük meg."
+            },
+            {
+                question: "Mi történik, ha egy testre egyetlen erő hat?",
+                answers: { a: "A test nyugalomban marad.", b: "A test egyenletesen mozog.", c: "A test az erő irányában gyorsul." },
+                correctAnswer: 'c',
+                explanation: "Ha csak egy erő hat, akkor az egyben az eredő erő is. Ha az eredő erő nem nulla, akkor a test gyorsuló mozgást végez az erő irányában. ✅ Megoldás: A test az erő irányában gyorsul."
+            },
+            {
+                question: "Egy csónak kel át a folyón, a partra merőlegesen 3 m/s sebességgel. A folyó 4 m/s sebességgel sodorja. Mekkora a csónak eredő sebessége a parthoz képest?",
+                answers: { a: "7 m/s", b: "1 m/s", c: "5 m/s" },
+                correctAnswer: 'c',
+                explanation: "A két sebességvektor egymásra merőleges. Az eredő sebesség nagyságát a Pitagorasz-tétellel számíthatjuk ki: 3² + 4² = 9 + 16 = 25. Az eredő sebesség nagysága √25 = 5 m/s. ✅ Megoldás: 5 m/s."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "Az eredő erő iránya a mozgásváltozás iránya.", b: "Az eredő erő nulla, ha a test nyugalomban van.", c: "Az eredő erő mindig a mozgás irányába mutat." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás hamis. Például egy fékező autónál a mozgás előre irányul, de a fékezőerő (és így az eredő erő is) hátrafelé. Az eredő erő iránya a gyorsulás (sebességváltozás) irányával egyezik meg. ✅ Megoldás: Az eredő erő mindig a mozgás irányába mutat."
+            },
+            {
+                question: "Egy testre két erő hat. Mikor lesz az eredő erejük a legnagyobb?",
+                answers: { a: "Ha merőlegesek egymásra.", b: "Ha ellentétes irányúak.", c: "Ha azonos irányúak." },
+                correctAnswer: 'c',
+                explanation: "Két erő eredője akkor a legnagyobb, ha a hatásuk maximálisan összeadódik, ez pedig akkor történik, ha azonos irányba hatnak. Ekkor az eredő nagysága a két nagyság összege. ✅ Megoldás: Ha azonos irányúak."
+            },
+            {
+                question: "Egy testre két erő hat. Mikor lesz az eredő erejük a legkisebb?",
+                answers: { a: "Ha azonos irányúak.", b: "Ha merőlegesek egymásra.", c: "Ha ellentétes irányúak." },
+                correctAnswer: 'c',
+                explanation: "Két erő eredője akkor a legkisebb, ha a hatásuk a leginkább kioltja egymást. Ez akkor történik, ha ellentétes irányúak. Ekkor az eredő nagysága a két nagyság különbsége. ✅ Megoldás: Ha ellentétes irányúak."
+            },
+            {
+                question: "Egy asztalon lévő könyvre ható erők eredője nulla. Mit jelent ez?",
+                answers: { a: "A könyv lebegni fog.", b: "Az asztal összeomlik.", c: "A könyv nyugalomban marad az asztalon." },
+                correctAnswer: 'c',
+                explanation: "A nulla eredő erő azt jelenti, hogy a könyv mozgásállapota nem változik. Mivel eredetileg nyugalomban volt, továbbra is nyugalomban marad. ✅ Megoldás: A könyv nyugalomban marad az asztalon."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButton = document.getElementById('check-button');
+        const pinInput = document.getElementById('pin-input');
+        const resultsContainer = document.getElementById('results');
+        const adminPanel = document.getElementById('admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInput.value;
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainer.textContent = "Érvénytelen PIN kód!";
+                resultsContainer.style.color = '#D50000';
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainer.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                resultsContainer.style.color = 'orange';
+                return;
+            }
+            resultsContainer.style.color = '#333'; // Reset color
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainer.textContent = "Minden válasz és magyarázat felfedve.";
+                adminPanel.style.display = 'block';
+                document.getElementById('dist-a').textContent = internalCorrectAnswers.a;
+                document.getElementById('dist-b').textContent = internalCorrectAnswers.b;
+                document.getElementById('dist-c').textContent = internalCorrectAnswers.c;
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainer.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+            }
+        }
+        
+        pinInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                checkButton.click(); // Simulate a button click
+            }
+        });
+
+        checkButton.addEventListener('click', checkAnswers);
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

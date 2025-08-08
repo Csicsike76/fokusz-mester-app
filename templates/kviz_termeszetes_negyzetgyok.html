@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Természetes számok négyzetgyöke (Frissített Elrendezés)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #ecf0f1;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .quiz-header {
+            padding: 20px 30px;
+            background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%);
+            color: var(--primary-color);
+            text-align: center;
+        }
+        .quiz-header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        /* === ÚJ: Controls (ellenőrző panel) stílusai === */
+        .controls {
+            padding: 20px 30px;
+            background-color: #f8f9fa; /* Enyhén eltérő háttér a jobb elkülönülésért */
+            text-align: center;
+            border-bottom: 2px solid var(--light-color);
+        }
+        .pin-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        #pin-input {
+            padding: 10px;
+            width: 120px;
+            border: 2px solid var(--neutral-color);
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        #pin-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 5px var(--accent-color);
+        }
+        #submit-btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        #submit-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        #submit-btn:disabled {
+            background-color: var(--neutral-color);
+            cursor: not-allowed;
+            transform: none;
+        }
+        #results {
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        #admin-panel {
+            display: none;
+            margin-top: 15px;
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        #admin-panel h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+        #alert-message {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            color: var(--white);
+            background-color: var(--error-color);
+        }
+        /* === Kérdések stílusai === */
+        .quiz-body {
+            padding: 30px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #bdc3c7;
+        }
+        .question:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .question p {
+            font-size: 1.2em;
+            margin: 0 0 15px 0;
+            font-weight: 600;
+        }
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .answer {
+            display: block;
+            background-color: var(--light-color);
+            padding: 12px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            border: 1px solid transparent;
+        }
+        .answer:hover {
+            background-color: #dcdde1;
+            transform: translateY(-2px);
+        }
+        .answer input[type="radio"] {
+            display: none;
+        }
+        .answer input[type="radio"]:checked + span {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        .feedback-icon {
+            display: none;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            background-color: #e8f5e9;
+            border: 1px solid var(--success-color);
+        }
+        .incorrect {
+            background-color: #fce4e4;
+            border: 1px solid var(--error-color);
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 5px solid var(--neutral-color);
+            border-radius: 5px;
+        }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+        .explanation-bonus { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--neutral-color); font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>Kvíz: Természetes számok négyzetgyöke</h1>
+        </div>
+
+        <!-- === MÓDOSÍTOTT RÉSZ: Az ellenőrző panel felülre került === -->
+        <div class="controls">
+            <div class="pin-container">
+                <input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off">
+                <button id="submit-btn">Ellenőrzés</button>
+            </div>
+            <div id="alert-message"></div>
+            <!-- Az eredmények (pontszám, százalék) és az admin panel is itt fognak megjelenni -->
+            <div id="results"></div>
+            <div id="admin-panel">
+                <h3>Admin Panel</h3>
+                <p>Mester PIN elfogadva. A magyarázatok és a helyes válaszok láthatók.</p>
+                <p id="answer-distribution"></p>
+            </div>
+        </div>
+        <!-- === MÓDOSÍTÁS VÉGE === -->
+
+        <div class="quiz-body" id="quiz-body">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        const fullQuestionPool = [
+            // A kérdések és magyarázatok adatbázisa változatlan marad
+            // 8 'a' answers
+            { question: "Mennyi a √361 értéke?", answers: { a: "19", b: "18", c: "21" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. Definíció:</b> Azt a számot keressük, amelynek a négyzete 361.</div><div class="explanation-step"><b>🔹 2. Becslés:</b> 10²=100 és 20²=400. A szám 10 és 20 között van. Mivel a 361 utolsó számjegye 1, a keresett szám 1-re vagy 9-re végződik.</div><div class="explanation-step"><b>🔹 3. Ellenőrzés:</b> 19 × 19 = 361.</div><div class="explanation-solution">✅ Megoldás: √361 = 19.</div>` },
+            { question: "Melyik szám négyzete a 225?", answers: { a: "15", b: "25", c: "12.5" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. Kérdés elemzése:</b> Azt a számot keressük, amire igaz, hogy x² = 225. Ez a √225 kiszámításával egyenértékű.</div><div class="explanation-step"><b>🔹 2. Becslés:</b> A szám 5-re végződik, mert 225-re végződik. 10²=100, 20²=400. A 15-öt kell kipróbálni.</div><div class="explanation-step"><b>🔹 3. Ellenőrzés:</b> 15 × 15 = 225.</div><div class="explanation-solution">✅ Megoldás: A 15 négyzete 225.</div>` },
+            { question: "Mi az a szám, aminek a négyzete 49?", answers: { a: "7", b: "4.9", c: "9" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. Definíció:</b> Keressük azt az x számot, melyre x² = 49.</div><div class="explanation-step"><b>🔹 2. Számolás:</b> A szorzótáblából tudjuk, hogy 7 × 7 = 49.</div><div class="explanation-solution">✅ Megoldás: A 7 az a szám.</div>` },
+            { question: "Melyik a legnagyobb tökéletes négyzet 200-nál kisebb?", answers: { a: "196", b: "169", c: "199" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. Keresés:</b> Nézzük a négyzetszámokat. 13² = 169. 14² = 196. 15² = 225.</div><div class="explanation-step"><b>🔹 2. Következtetés:</b> A 225 már több, mint 200. Tehát a 196 a legnagyobb, ami 200-nál kisebb.</div><div class="explanation-solution">✅ Megoldás: 196.</div>` },
+            { question: "Mennyi a √0 értéke?", answers: { a: "0", b: "1", c: "Nincs értelmezve" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. Definíció:</b> Azt a nemnegatív számot keressük, melynek négyzete 0.</div><div class="explanation-step"><b>🔹 2. Számolás:</b> 0 × 0 = 0.</div><div class="explanation-solution">✅ Megoldás: √0 = 0.</div>` },
+            { question: "Ha √x = 20, akkor mennyi az x?", answers: { a: "400", b: "40", c: "100" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. Egyenlet:</b> √x = 20.</div><div class="explanation-step"><b>🔹 2. Megoldás:</b> Az egyenlet mindkét oldalát négyzetre emeljük, hogy eltüntessük a gyökjelet.</div><div class="explanation-step"><b>🔹 3. Számolás:</b> (√x)² = 20² → x = 400.</div><div class="explanation-solution">✅ Megoldás: x = 400.</div>` },
+            { question: "Melyik szám van a √121 és a √169 között?", answers: { a: "12", b: "10", c: "14" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. Határértékek:</b> Először kiszámoljuk a határokat. √121 = 11. √169 = 13.</div><div class="explanation-step"><b>🔹 2. Keresés:</b> Azt az egész számot keressük, ami 11 és 13 között van.</div><div class="explanation-solution">✅ Megoldás: Ez a 12.</div>` },
+            { question: "Melyik szám négyzete a 625?", answers: { a: "25", b: "15", c: "35" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 1. Kérdés:</b> x² = 625. Mi az x?</div><div class="explanation-step"><b>🔹 2. Becslés:</b> 20²=400, 30²=900. A szám 20 és 30 között van, és 5-re végződik.</div><div class="explanation-step"><b>🔹 3. Ellenőrzés:</b> 25 × 25 = 625.</div><div class="explanation-solution">✅ Megoldás: A 25 négyzete 625.</div>` },
+            // 9 'b' answers
+            { question: "Egy négyzet alakú kert területe 256 m². Milyen hosszú a kert egy oldala?", answers: { a: "15 m", b: "16 m", c: "64 m" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. Képlet:</b> A négyzet területe T = a², ahol 'a' az oldal hossza. Ebből a = √T.</div><div class="explanation-step"><b>🔹 2. Behelyettesítés:</b> a = √256.</div><div class="explanation-step"><b>🔹 3. Számolás:</b> 16 × 16 = 256.</div><div class="explanation-solution">✅ Megoldás: Az oldal hossza 16 m.</div>` },
+            { question: "Mennyi a √(13²) értéke?", answers: { a: "169", b: "13", c: "26" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. Tétel:</b> Egy nemnegatív szám négyzetének a négyzetgyöke maga a szám. Képlettel: √(n²) = n, ha n ≥ 0.</div><div class="explanation-step"><b>🔹 2. Alkalmazás:</b> Itt n = 13, tehát √(13²) = 13.</div><div class="explanation-bonus"><b>✏️ Bónusz út:</b> 13² = 169, majd √169 = 13. Az eredmény ugyanaz.</div><div class="explanation-solution">✅ Megoldás: 13.</div>` },
+            { question: "Mi a `√n = 25` egyenlet megoldása?", answers: { a: "5", b: "625", c: "50" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. Egyenlet:</b> √n = 25.</div><div class="explanation-step"><b>🔹 2. Megoldás:</b> Az egyenlet mindkét oldalát négyzetre emeljük.</div><div class="explanation-step"><b>🔹 3. Számolás:</b> (√n)² = 25² → n = 625.</div><div class="explanation-solution">✅ Megoldás: n = 625.</div>` },
+            { question: "Mennyi a √81 értéke?", answers: { a: "8.1", b: "9", c: "40.5" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. Definíció:</b> Azt a számot keressük, melynek négyzete 81.</div><div class="explanation-step"><b>🔹 2. Számolás:</b> 9 × 9 = 81.</div><div class="explanation-solution">✅ Megoldás: √81 = 9.</div>` },
+            { question: "Mennyi a √(3² + 4²) értéke?", answers: { a: "7", b: "5", c: "25" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. Szabály:</b> A gyökjel alatt kell először elvégezni a műveleteket (műveleti sorrend).</div><div class="explanation-step"><b>🔹 2. Számolás:</b> 3²=9, 4²=16. Tehát √(9 + 16) = √25.</div><div class="explanation-step"><b>🔹 3. Gyökvonás:</b> √25 = 5.</div><div class="explanation-bonus"><b>✏️ Figyelem:</b> A művelet NEM egyenlő √9 + √16 = 3+4=7-tel!</div><div class="explanation-solution">✅ Megoldás: 5.</div>` },
+            { question: "Ha egy négyzet oldala 11 cm, mennyi a területe?", answers: { a: "44 cm²", b: "121 cm²", c: "22 cm²" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. Képlet:</b> A négyzet területe T = a².</div><div class="explanation-step"><b>🔹 2. Behelyettesítés:</b> T = 11².</div><div class="explanation-step"><b>🔹 3. Számolás:</b> 11 × 11 = 121.</div><div class="explanation-solution">✅ Megoldás: A terület 121 cm².</div>` },
+            { question: "Mennyi a √(10000) értéke?", answers: { a: "1000", b: "100", c: "5000" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. Szabály:</b> 10-hatványoknál a gyökjel alatti nullák számát felezni kell.</div><div class="explanation-step"><b>🔹 2. Alkalmazás:</b> A 10000-ben 4 db nulla van. A gyökében 4/2 = 2 db nulla lesz.</div><div class="explanation-step"><b>🔹 3. Ellenőrzés:</b> 100 × 100 = 10000.</div><div class="explanation-solution">✅ Megoldás: √10000 = 100.</div>` },
+            { question: "Melyik szám négyzete a 144?", answers: { a: "72", b: "12", c: "14.4" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. Kérdés:</b> x² = 144. Mennyi x?</div><div class="explanation-step"><b>🔹 2. Számolás:</b> 12 × 12 = 144.</div><div class="explanation-solution">✅ Megoldás: A 12 négyzete 144.</div>` },
+            { question: "Mennyi a √289 értéke?", answers: { a: "13", b: "17", c: "19" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 1. Becslés:</b> 10²=100, 20²=400. A szám 10 és 20 között van. 9-re végződik, tehát a szám 3-ra vagy 7-re végződik.</div><div class="explanation-step"><b>🔹 2. Próba:</b> 13²=169 (nem jó). 17² = 289 (jó).</div><div class="explanation-solution">✅ Megoldás: √289 = 17.</div>` },
+            // 8 'c' answers
+            { question: "Melyik kifejezés értéke NEM természetes szám?", answers: { a: "√100", b: "√144", c: "√50" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. Vizsgálat:</b> Meg kell nézni, melyik szám nem "tökéletes négyzet".</div><div class="explanation-step"><b>🔹 2. Elemzés:</b> √100 = 10 (természetes). √144 = 12 (természetes). A 50 nem négyzetszám (7²=49, 8²=64).</div><div class="explanation-solution">✅ Megoldás: A √50 értéke nem természetes szám.</div>` },
+            { question: "Mennyi a √400 értéke?", answers: { a: "40", b: "200", c: "20" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. Módszer:</b> √400 = √(4 × 100).</div><div class="explanation-step"><b>🔹 2. Tétel:</b> A gyökvonás szorzásra nézve szétszedhető: √a × √b = √(a×b).</div><div class="explanation-step"><b>🔹 3. Számolás:</b> √4 × √100 = 2 × 10 = 20.</div><div class="explanation-solution">✅ Megoldás: √400 = 20.</div>` },
+            { question: "Melyik állítás igaz?", answers: { a: "√(9+16) = 3+4", b: "√2 nem valós szám", c: "√(9×16) = √9 × √16" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 A)</b> √(9+16)=√25=5. De 3+4=7. Hamis.</div><div class="explanation-step"><b>🔹 B)</b> √2 valós szám (irracionális), de nem racionális. Hamis.</div><div class="explanation-step"><b>🔹 C)</b> √(9×16)=√144=12. És √9×√16=3×4=12. Igaz.</div><div class="explanation-solution">✅ Megoldás: A c) állítás igaz.</div>` },
+            { question: "Mennyi a √1 értéke?", answers: { a: "0", b: "Nincs értelmezve", c: "1" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. Definíció:</b> Keressük a számot, melynek négyzete 1.</div><div class="explanation-step"><b>🔹 2. Számolás:</b> 1 × 1 = 1.</div><div class="explanation-solution">✅ Megoldás: √1 = 1.</div>` },
+            { question: "Mi a 'tökéletes négyzet' definíciója?", answers: { a: "Páros szám.", b: "Osztható 2-vel.", c: "Egy természetes szám négyzete." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. Fogalom:</b> A négyzetszámok azok a számok, amik előállnak egy természetes szám önmagával való szorzataként.</div><div class="explanation-step"><b>🔹 2. Példák:</b> 4 (mert 2²), 9 (mert 3²), 16 (mert 4²).</div><div class="explanation-solution">✅ Megoldás: A c) definíció a helyes.</div>` },
+            { question: "Mennyi a √64 értéke?", answers: { a: "32", b: "16", c: "8" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. Definíció:</b> Keressük a számot, melynek négyzete 64.</div><div class="explanation-step"><b>🔹 2. Számolás:</b> 8 × 8 = 64.</div><div class="explanation-solution">✅ Megoldás: √64 = 8.</div>` },
+            { question: "Mennyi a √4 × √9 értéke?", answers: { a: "√13", b: "36", c: "6" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. Módszer:</b> Elvégezzük a gyökvonásokat külön-külön. √4=2, √9=3.</div><div class="explanation-step"><b>🔹 2. Szorzás:</b> 2 × 3 = 6.</div><div class="explanation-bonus"><b>✏️ Bónusz:</b> Használhatjuk a √(a×b) = √a×√b azonosságot is: √4×√9 = √(4×9) = √36 = 6.</div><div class="explanation-solution">✅ Megoldás: 6.</div>` },
+            { question: "Melyik a legkisebb háromjegyű négyzetszám?", answers: { a: "121", b: "101", c: "100" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. Keresés:</b> Keressük a határt. 9² = 81 (ez kétjegyű).</div><div class="explanation-step"><b>🔹 2. Következő szám:</b> 10² = 100. Ez az első olyan négyzetszám, ami már háromjegyű.</div><div class="explanation-solution">✅ Megoldás: A legkisebb háromjegyű négyzetszám a 100.</div>` }
+        ];
+
+        // A JavaScript logika változatlan marad, mivel az elemek áthelyezése nem befolyásolja a működést.
+        // Csak az elemeket kereső változók (pl. quizBody, submitBtn) ugyanúgy megtalálják a célpontjaikat.
+        const quizBody = document.getElementById('quiz-body');
+        const submitBtn = document.getElementById('submit-btn');
+        const pinInput = document.getElementById('pin-input');
+        const resultsDiv = document.getElementById('results');
+        const adminPanel = document.getElementById('admin-panel');
+        const alertMessage = document.getElementById('alert-message');
+        const answerDistributionDiv = document.getElementById('answer-distribution');
+
+        let selectedAnswers = {};
+        let questionsOnPage = [];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function buildQuiz() {
+            shuffleArray(fullQuestionPool);
+            questionsOnPage = fullQuestionPool;
+
+            questionsOnPage.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.id = `question-${index}`;
+                
+                const questionText = document.createElement('p');
+                questionText.innerHTML = `${index + 1}. ${q.question}`;
+                questionDiv.appendChild(questionText);
+
+                const answersDiv = document.createElement('div');
+                answersDiv.classList.add('answers');
+                
+                let answerOptions = Object.entries(q.answers).map(([key, text]) => ({ key, text }));
+                shuffleArray(answerOptions);
+
+                const displayLabels = ['a', 'b', 'c'];
+                displayLabels.forEach((displayLabel, i) => {
+                    const option = answerOptions[i];
+                    
+                    const label = document.createElement('label');
+                    label.classList.add('answer');
+
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `question${index}`;
+                    radio.value = option.key;
+                    radio.id = `q${index}l${displayLabel}`;
+                    radio.addEventListener('change', handleAnswerSelection);
+
+                    const span = document.createElement('span');
+                    span.innerHTML = `${displayLabel.toUpperCase()}) ${option.text}`;
+
+                    const feedbackIcon = document.createElement('span');
+                    feedbackIcon.classList.add('feedback-icon');
+
+                    label.appendChild(radio);
+                    label.appendChild(span);
+                    label.appendChild(feedbackIcon);
+                    answersDiv.appendChild(label);
+                });
+                
+                questionDiv.appendChild(answersDiv);
+                
+                const explanationDiv = document.createElement('div');
+                explanationDiv.classList.add('explanation');
+                explanationDiv.innerHTML = q.explanation;
+                questionDiv.appendChild(explanationDiv);
+
+                quizBody.appendChild(questionDiv);
+            });
+        }
+
+        function handleAnswerSelection(event) {
+            const questionIndex = event.target.name.replace('question', '');
+            selectedAnswers[questionIndex] = event.target.value;
+        }
+        
+        function checkPIN(pin) {
+            const masterPIN = "121909";
+            if (pin === masterPIN) return "master";
+            const studentPIN = parseInt(pin, 10);
+            if (studentPIN >= 100001 && studentPIN <= 100020) return "student";
+            return null;
+        }
+
+        function showAlert(message) {
+            alertMessage.textContent = message;
+            alertMessage.style.display = 'block';
+        }
+
+        function hideAlert() {
+            alertMessage.style.display = 'none';
+        }
+
+        function revealAllForMaster() {
+            questionsOnPage.forEach((q, index) => {
+                const questionDiv = document.getElementById(`question-${index}`);
+                const correctKey = q.correctAnswer;
+                
+                const explanation = questionDiv.querySelector('.explanation');
+                explanation.style.display = 'block';
+
+                const labels = questionDiv.querySelectorAll('.answer');
+                labels.forEach(label => {
+                    const radio = label.querySelector('input');
+                    radio.disabled = true;
+                    const radioValue = radio.value;
+                    const feedbackIcon = label.querySelector('.feedback-icon');
+
+                    if (radioValue === correctKey) {
+                        label.classList.add('correct');
+                        feedbackIcon.style.display = 'inline';
+                        feedbackIcon.textContent = ' ✅ Helyes';
+                    }
+                });
+            });
+
+            resultsDiv.textContent = "Mester Mód: Megoldások felfedve.";
+            submitBtn.disabled = true;
+            pinInput.disabled = true;
+
+            adminPanel.style.display = 'block';
+            const dist = questionsOnPage.reduce((acc, q) => {
+                acc[q.correctAnswer] = (acc[q.correctAnswer] || 0) + 1;
+                return acc;
+            }, {});
+            answerDistributionDiv.innerHTML = `<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${dist.a || 0}, B: ${dist.b || 0}, C: ${dist.c || 0}.`;
+        }
+        
+        function evaluateStudentAnswers() {
+            let score = 0;
+            questionsOnPage.forEach((q, index) => {
+                const questionDiv = document.getElementById(`question-${index}`);
+                const selectedKey = selectedAnswers[index];
+                const correctKey = q.correctAnswer;
+                
+                const labels = questionDiv.querySelectorAll('.answer');
+                labels.forEach(label => {
+                    const radio = label.querySelector('input');
+                    radio.disabled = true;
+                    const radioValue = radio.value;
+                    const feedbackIcon = label.querySelector('.feedback-icon');
+
+                    if (radioValue === selectedKey) {
+                        if (selectedKey === correctKey) {
+                            score++;
+                            label.classList.add('correct');
+                            feedbackIcon.style.display = 'inline';
+                            feedbackIcon.textContent = ' ✅';
+                        } else {
+                            label.classList.add('incorrect');
+                            feedbackIcon.style.display = 'inline';
+                            feedbackIcon.textContent = ' ❌';
+                        }
+                    }
+                });
+            });
+
+            const percentage = Math.round((score / questionsOnPage.length) * 100);
+            resultsDiv.textContent = `Eredményed: ${score} / ${questionsOnPage.length} (${percentage}%)`;
+            submitBtn.disabled = true;
+            pinInput.disabled = true;
+        }
+
+        submitBtn.addEventListener('click', () => {
+            hideAlert();
+            const pin = pinInput.value;
+            const pinType = checkPIN(pin);
+
+            if (pinType === 'master') {
+                revealAllForMaster();
+                return;
+            }
+
+            if (Object.keys(selectedAnswers).length < questionsOnPage.length) {
+                showAlert('Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!');
+                return;
+            }
+
+            if (!pinType) {
+                showAlert('Érvénytelen PIN kód. Kérj egyet a tanárodtól!');
+                return;
+            }
+            
+            evaluateStudentAnswers();
+        });
+
+        pinInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                submitBtn.click();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', buildQuiz);
+    </script>
+</body>
+</html>

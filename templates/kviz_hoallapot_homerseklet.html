@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Hőállapot és hőmérséklet</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Hőállapot és hőmérséklet</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Mi a hőmérséklet?", answers: { a: "A testek hőállapotát jellemző fizikai mennyiség.", b: "Az anyagban lévő hő mennyisége.", c: "A test súlya." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A hőmérséklet egy fizikai mennyiség, amely azt méri, hogy egy test mennyire meleg vagy hideg. A "hő" ezzel szemben az energiaátadási folyamatot jelöli.</div><div class="explanation-solution">✅ Megoldás: A hőmérséklet a testek hőállapotát jellemző fizikai mennyiség.</div>` },
+            { question: "Mi az SI mértékegysége a hőmérsékletnek?", answers: { a: "kelvin (K)", b: "Celsius-fok (°C)", c: "joule (J)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 SI-rendszer:</b> Bár a mindennapi életben a Celsius-fokot használjuk, a tudományos Nemzetközi Mértékegységrendszer (SI) alapmértékegysége a hőmérsékletre a kelvin. A joule az energia mértékegysége.</div><div class="explanation-solution">✅ Megoldás: A hőmérséklet SI mértékegysége a kelvin (K).</div>` },
+            { question: "Mi történik, ha egy hideg és egy meleg testet termikus érintkezésbe hozunk?", answers: { a: "A meleg test hőt ad át a hidegnek, amíg a hőmérsékletük ki nem egyenlítődik.", b: "A hideg test 'hideget' ad át a melegnek.", c: "Nem történik semmi." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Hőáramlás iránya:</b> A termodinamika törvényei szerint a hőenergia mindig a magasabb hőmérsékletű hely felől áramlik az alacsonyabb hőmérsékletű hely felé.</div><div class="explanation-step"><b>🔹 Hőegyensúly:</b> Ez a folyamat addig tart, amíg a két test hőmérséklete azonos nem lesz. Ezt az állapotot nevezzük hőegyensúlynak.</div><div class="explanation-solution">✅ Megoldás: A meleg test hőt ad át a hidegnek, amíg hőegyensúlyba nem kerülnek.</div>` },
+            { question: "Milyen eszközzel mérünk hőmérsékletet?", answers: { a: "Hőmérővel", b: "Mérleggel", c: "Barométerrel" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Eszközök:</b> A hőmérséklet mérésére a hőmérő szolgál. A mérleg tömeget, a barométer légnyomást mér.</div><div class="explanation-solution">✅ Megoldás: Hőmérsékletet hőmérővel mérünk.</div>` },
+            { question: "Mit nevezünk hőegyensúlynak?", answers: { a: "Azt az állapotot, amikor a termikus érintkezésben lévő testek hőmérséklete azonos.", b: "Amikor egy test tömege állandó.", c: "Amikor egy test nem mozog." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A hőegyensúly a termikus kölcsönhatás végállapota, ahol a testek között már nincsen nettó hőáramlás, mert a hőmérsékletük kiegyenlítődött.</div><div class="explanation-solution">✅ Megoldás: A hőegyensúly az az állapot, amikor a testek hőmérséklete azonos.</div>` },
+            { question: "Melyik folyamat NEM termikus kölcsönhatás?", answers: { a: "Egy labda elgurítása.", b: "Egy pohár tea lehűlése a szobában.", c: "Egy jégkocka elolvadása a tenyerünkben." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A tea lehűlése és a jégkocka olvadása is hőátadási folyamat. A labda elgurítása mechanikai kölcsönhatás (erőhatás) eredménye.</div><div class="explanation-solution">✅ Megoldás: A labda elgurítása nem termikus kölcsönhatás.</div>` },
+            { question: "Ha egy forró teába hideg tejet öntünk, mi történik a keverék hőmérsékletével?", answers: { a: "Valahol a tea és a tej eredeti hőmérséklete között lesz.", b: "Forróbb lesz, mint a tea.", c: "Hidegebb lesz, mint a tej." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Hőcsere:</b> A forró tea hőt ad le, a hideg tej hőt vesz fel, amíg a hőmérsékletük ki nem egyenlítődik.</div><div class="explanation-step"><b>🔹 Végeredmény:</b> A kialakuló közös hőmérséklet a két kiindulási hőmérséklet között lesz, az arányokat a tömegek és a fajhők határozzák meg.</div><div class="explanation-solution">✅ Megoldás: A keverék hőmérséklete a tea és a tej eredeti hőmérséklete között lesz.</div>` },
+            { question: "A Celsius-skála mihez rögzíti a 0 és 100 fokos pontokat?", answers: { a: "A víz fagyás- és forráspontjához.", b: "A higany fagyás- és forráspontjához.", c: "A levegő legalacsonyabb és legmagasabb hőmérsékletéhez." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Referenciapontok:</b> Anders Celsius a skáláját a víz két jól ismert és könnyen reprodukálható halmazállapot-változásához rögzítette: a jég olvadásához (0 °C) és a víz forrásához (100 °C) normál légköri nyomáson.</div><div class="explanation-solution">✅ Megoldás: A Celsius-skála a víz fagyás- és forráspontjához van rögzítve.</div>` },
+            { question: "Mit jelent a 'hőállapot'?", answers: { a: "Egy test súlyát.", b: "Azt, hogy egy test mennyire meleg vagy hideg.", c: "A test halmazállapotát." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Fogalom:</b> A hőállapot egy kvalitatív (minőségi) leírása a testnek, amit az érzékszerveinkkel tapasztalunk. Ennek a számszerűsített mértéke a hőmérséklet.</div><div class="explanation-solution">✅ Megoldás: A hőállapot azt jelenti, hogy egy test mennyire meleg vagy hideg.</div>` },
+            { question: "Ha kint -5°C van, bent pedig 20°C, merre áramlik a hő az ablaküvegen keresztül?", answers: { a: "Nem áramlik.", b: "Bentről kifelé.", c: "Kintről befelé." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Hőáramlás iránya:</b> A hő mindig a melegebb hely felől áramlik a hidegebb felé.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Mivel a benti levegő melegebb, mint a kinti, a hő a szobából az utca felé fog áramlani az ablaküvegen keresztül.</div><div class="explanation-solution">✅ Megoldás: A hő bentről kifelé áramlik.</div>` },
+            { question: "Mikor szűnik meg a hőáramlás két test között?", answers: { a: "Amikor az egyik test elfogy.", b: "Amikor elérik a hőegyensúlyt.", c: "Soha." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Hőegyensúly:</b> A hőáramlás hajtóereje a hőmérséklet-különbség. Amikor ez a különbség megszűnik, azaz a testek hőmérséklete kiegyenlítődik, a nettó hőáramlás is leáll.</div><div class="explanation-solution">✅ Megoldás: A hőáramlás a hőegyensúly elérésekor szűnik meg.</div>` },
+            { question: "Mi történik a hideg kezeddel, ha megfogsz egy bögre forró teát?", answers: { a: "Tovább hűl.", b: "Felmelegszik.", c: "Nem változik." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Hőcsere:</b> A forró bögre hőt ad át a hidegebb kezednek. Ez a hőenergia növeli a kezed belső energiáját, amit melegedésként érzékelsz.</div><div class="explanation-solution">✅ Megoldás: A kezed felmelegszik.</div>` },
+            { question: "Mi a 'termikus érintkezés'?", answers: { a: "Amikor két test összeér.", b: "Olyan kapcsolat, ahol a testek hőt tudnak cserélni.", c: "Amikor két test hőmérséklete azonos." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A termikus érintkezés nem feltétlenül jelent fizikai összeérést (pl. hősugárzás). A lényege az, hogy a két test között lehetséges a hőenergia átadása.</div><div class="explanation-solution">✅ Megoldás: A termikus érintkezés olyan kapcsolat, ahol a testek hőt tudnak cserélni.</div>` },
+            { question: "A hőmérséklet...", answers: { a: "vektormennyiség.", b: "skalármennyiség.", c: "nem mérhető." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Skalár vs. Vektor:</b> A skalármennyiségeknek csak nagyságuk van (pl. hőmérséklet, tömeg). A vektormennyiségeknek nagyságuk és irányuk is van (pl. erő). A hőmérsékletnek nincs iránya.</div><div class="explanation-solution">✅ Megoldás: A hőmérséklet skalármennyiség.</div>` },
+            { question: "Melyik hőmérséklet a legmagasabb?", answers: { a: "-5 °C", b: "0 °C", c: "-10 °C" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Számegyenes:</b> A hőmérsékleti skála is egy számegyenes. Minél jobbra van egy érték, annál nagyobb. A 0 jobbra van a negatív számoktól.</div><div class="explanation-solution">✅ Megoldás: A 0 °C a legmagasabb hőmérséklet.</div>` },
+            { question: "Mi az abszolút nulla fok?", answers: { a: "A víz fagyáspontja.", b: "A létező legalacsonyabb hőmérséklet.", c: "Amikor a Nap nem süt." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Az abszolút nulla fok (0 Kelvin, vagy -273,15 °C) az az elméleti hőmérséklet, amelynél a részecskék hőmozgása teljesen megszűnik. Ennél alacsonyabb hőmérséklet nem létezik.</div><div class="explanation-solution">✅ Megoldás: Az abszolút nulla fok a létező legalacsonyabb hőmérséklet.</div>` },
+            { question: "Mi történik egy jégkocka hőmérsékletével olvadás közben?", answers: { a: "Folyamatosan nő.", b: "Folyamatosan csökken.", c: "Változatlan marad (0 °C)." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Halmazállapot-változás:</b> Amíg a halmazállapot-változás (olvadás) tart, a test által felvett összes hőenergia a szerkezeti kötések feltörésére fordítódik, nem a hőmérséklet emelésére.</div><div class="explanation-solution">✅ Megoldás: A jégkocka hőmérséklete olvadás közben változatlan marad (0 °C).</div>` },
+            { question: "A hő...", answers: { a: "egyfajta anyag.", b: "a testek hőállapota.", c: "energiaátadási folyamat." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Fizikai fogalom:</b> A 'hő' a fizikában azt az energiát jelenti, ami a hőmérséklet-különbség miatt áramlik át egyik testről a másikra. Nem egy anyag, ami a testekben van.</div><div class="explanation-solution">✅ Megoldás: A hő egy energiaátadási folyamat.</div>` },
+            { question: "Ha egy pohár vizet beteszünk a hűtőbe, mi történik?", answers: { a: "A víz hőt ad le a hűtőnek.", b: "A hűtő 'hideget' ad a víznek.", c: "A víz hőmérséklete nő." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Hőáramlás:</b> A melegebb víz hőt ad át a hidegebb levegőnek a hűtőben. Nincs olyan, hogy 'hidegáramlás'. A hideg érzete a hőveszteség.</div><div class="explanation-solution">✅ Megoldás: A víz hőt ad le a hűtőnek.</div>` },
+            { question: "Melyik hőmérséklet a legalacsonyabb?", answers: { a: "100 K", b: "0 °C", c: "-200 °C" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás Celsiusra:</b> Hozzuk közös mértékegységre az értékeket. 0 °C = 273 K. 100 K = 100 - 273 = -173 °C.</div><div class="explanation-step"><b>🔹 Összehasonlítás:</b> A három hőmérséklet: -173 °C, 0 °C, -200 °C. Ezek közül a -200 °C a legalacsonyabb.</div><div class="explanation-solution">✅ Megoldás: A -200 °C a legalacsonyabb hőmérséklet.</div>` },
+            { question: "Miért érezzük hidegebbnek a fém kilincset, mint a fa ajtót, noha a hőmérsékletük azonos?", answers: { a: "Mert a fém jobb hővezető.", b: "Mert a fém valójában hidegebb.", c: "Mert a fém sűrűbb." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Hővezetés:</b> A fémek jó hővezetők, ami azt jelenti, hogy gyorsan elvezetik a hőt a kezünktől. Ezt a gyors hőveszteséget érezzük hidegnek. A fa rossz hővezető (hőszigetelő), lassabban von el hőt.</div><div class="explanation-solution">✅ Megoldás: Azért érezzük hidegebbnek, mert a fém jobb hővezető.</div>` },
+            { question: "Mi az a termikus kölcsönhatás?", answers: { a: "Mágneses vonzás.", b: "Testek ütközése.", c: "Hőcsere." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A termikus kölcsönhatás az a folyamat, amely során a különböző hőmérsékletű testek között hőenergia cserélődik, amíg el nem érik a közös hőmérsékletet.</div><div class="explanation-solution">✅ Megoldás: A termikus kölcsönhatás a hőcsere.</div>` },
+            { question: "Ha egy test hőmérséklete nő, a részecskéinek mozgása...", answers: { a: "Lassul.", b: "Nem változik.", c: "Gyorsul." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Hőmérséklet és mozgás:</b> A hőmérséklet a testet alkotó részecskék (atomok, molekulák) átlagos mozgási energiájának mértéke. Ha a hőmérséklet nő, a részecskék hevesebben, gyorsabban mozognak, rezegnek.</div><div class="explanation-solution">✅ Megoldás: A részecskék mozgása gyorsul.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

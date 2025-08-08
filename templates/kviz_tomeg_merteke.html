@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: A tömeg</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 5px; border-radius: 3px; display: inline-block; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: A tömeg</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Melyik fizikai mennyiség a tehetetlenség mértéke?", answers: { a: "A tömeg (m)", b: "A súly (G)", c: "A sebesség (v)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A tömeg a testben lévő anyag mennyisége, és a test tehetetlenségének számszerűsített mértéke. Minél nagyobb a tömeg, annál nehezebb megváltoztatni a test mozgásállapotát.</div><div class="explanation-solution">✅ Megoldás: A tehetetlenség mértéke a tömeg.</div>` },
+            { question: "Mi a tömeg jele és SI mértékegysége?", answers: { a: "m, kilogramm (kg)", b: "t, gramm (g)", c: "G, newton (N)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Jelölések:</b> A tömeg fizikai jele 'm' (az angol mass szóból). A Nemzetközi Mértékegységrendszer (SI) szerinti alapmértékegysége a kilogramm (kg).</div><div class="explanation-solution">✅ Megoldás: A helyes jelölés m, a mértékegység pedig a kilogramm (kg).</div>` },
+            { question: "Melyik testnek nagyobb a tehetetlensége?", answers: { a: "Egy elefántnak", b: "Egy egérnek", c: "Mindkettőnek egyenlő" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Összefüggés:</b> A tehetetlenség mértéke a tömeg. Minél nagyobb egy test tömege, annál nagyobb a tehetetlensége.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Az elefánt tömege sokkal nagyobb, mint az egéré.</div><div class="explanation-solution">✅ Megoldás: Az elefántnak nagyobb a tehetetlensége.</div>` },
+            { question: "Mivel mérünk tömeget?", answers: { a: "Mérleggel", b: "Dinamométerrel", c: "Vonalzóval" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Eszközök:</b> A tömeg mérésére a mérleg szolgál, amely a testet egy ismert tömegű etalonnal hasonlítja össze. A dinamométer (rugós erőmérő) a súlyt, azaz egy erőt mér.</div><div class="explanation-solution">✅ Megoldás: Tömeget mérleggel mérünk.</div>` },
+            { question: "Mennyi 2500 gramm kilogrammban?", answers: { a: "2,5 kg", b: "25 kg", c: "0,25 kg" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 kg = 1000 g.</div><div class="explanation-step"><b>🔹 Számolás:</b> A grammban megadott értéket el kell osztani 1000-rel, hogy kilogrammot kapjunk: 2500 / 1000 = 2,5.</div><div class="explanation-solution">✅ Megoldás: 2500 gramm az 2,5 kg.</div>` },
+            { question: "Mi a különbség a tömeg és a súly között?", answers: { a: "A tömeg a tehetetlenség mértéke, a súly pedig egy erő.", b: "Nincs különbség, a két szó ugyanazt jelenti.", c: "A súly a tehetetlenség mértéke, a tömeg pedig egy erő." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíciók:</b> A tömeg (m) a testben lévő anyag mennyisége és a tehetetlenségének mértéke. A súly (G) az az erő, amellyel a gravitáció hat a testre (G = m*g).</div><div class="explanation-step"><b>🔹 Példa:</b> A Holdon a tömeged ugyanannyi, de a súlyod kb. a hatoda a földinek.</div><div class="explanation-solution">✅ Megoldás: A tömeg a tehetetlenség mértéke, a súly pedig egy erő.</div>` },
+            { question: "Egy test tömege 5 kg. Mennyi a tömege a Holdon?", answers: { a: "5 kg", b: "kb. 0,83 kg", c: "kb. 30 kg" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Alaptulajdonság:</b> A tömeg a test belső, állandó tulajdonsága, amely nem függ a helytől. Azt mutatja meg, mennyi anyagból van a test.</div><div class="explanation-step"><b>❌ Hibás opciók:</b> A súlya változna meg a Holdon, de a tömege nem.</div><div class="explanation-solution">✅ Megoldás: A test tömege a Holdon is 5 kg.</div>` },
+            { question: "Melyik NEM a tömeg mértékegysége?", answers: { a: "Newton", b: "Tonna", c: "Gramm" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A tonna és a gramm a kilogrammból származtatott tömegegységek. A Newton az erő mértékegysége.</div><div class="explanation-solution">✅ Megoldás: A Newton nem a tömeg mértékegysége.</div>` },
+            { question: "Hány kilogramm 0,5 tonna?", answers: { a: "50 kg", b: "500 kg", c: "5000 kg" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 tonna (t) = 1000 kilogramm (kg).</div><div class="explanation-step"><b>🔹 Számolás:</b> 0,5 * 1000 = 500.</div><div class="explanation-solution">✅ Megoldás: 0,5 tonna az 500 kg.</div>` },
+            { question: "Hogyan működik a kétkarú mérleg?", answers: { a: "A rugó megnyúlását méri.", b: "Ismert tömegű súlyokkal hasonlítja össze a mérendő testet.", c: "A Föld mágneses terét használja." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Működési elv:</b> A kétkarú mérleg akkor van egyensúlyban, ha a két serpenyőjére ható gravitációs erő (súly) egyenlő. Mivel a gravitáció mindkét oldalon ugyanaz, ez azt jelenti, hogy a két oldalon lévő tömegek is egyenlőek.</div><div class="explanation-solution">✅ Megoldás: Ismert tömegű súlyokkal hasonlítja össze a mérendő testet.</div>` },
+            { question: "Melyiknek nagyobb a tömege: 1 kg vasnak vagy 1 kg tollnak?", answers: { a: "A vasnak.", b: "Egyenlő a tömegük.", c: "A tollnak." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A kérdés a tömegre vonatkozik, nem a térfogatra vagy a sűrűségre.</div><div class="explanation-step"><b>🔹 Tény:</b> 1 kg az 1 kg, függetlenül attól, hogy milyen anyagról van szó.</div><div class="explanation-solution">✅ Megoldás: A tömegük egyenlő.</div>` },
+            { question: "Egy tárgy tömege a Marson...", answers: { a: "kisebb, mint a Földön.", b: "ugyanannyi, mint a Földön.", c: "nagyobb, mint a Földön." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Tömeg vs. Súly:</b> A tömeg a test állandó tulajdonsága. A súly az, ami a gravitációtól függ. A Marson a gravitáció gyengébb, ezért a tárgy súlya kisebb lenne, de a tömege változatlan marad.</div><div class="explanation-solution">✅ Megoldás: A tárgy tömege ugyanannyi, mint a Földön.</div>` },
+            { question: "Mi a tömegmegmaradás törvénye?", answers: { a: "A tömeg soha nem vész el, csak átalakul.", b: "Zárt rendszerben a tömeg állandó marad.", c: "A tömeg mindig csökken." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Törvény:</b> A tömegmegmaradás törvénye kimondja, hogy egy zárt rendszerben (ahol anyag nem tud se bejutni, se távozni) a kémiai és fizikai folyamatok során a testek össztömege nem változik.</div><div class="explanation-solution">✅ Megoldás: Zárt rendszerben a tömeg állandó marad.</div>` },
+            { question: "Melyik jelöl tömeget?", answers: { a: "5 m", b: "5 kg", c: "5 N" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Mértékegységek:</b><br>• m (méter): hosszúság<br>• N (newton): erő (súly)<br>• kg (kilogramm): tömeg</div><div class="explanation-solution">✅ Megoldás: Az 5 kg jelöl tömeget.</div>` },
+            { question: "Hogyan változik egy test tehetetlensége, ha a tömegét megduplázzuk?", answers: { a: "Felére csökken.", b: "A duplájára nő.", c: "Nem változik." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Arányosság:</b> A tehetetlenség egyenesen arányos a tömeggel. Ha a tömeg kétszeresére nő, a tehetetlenség is kétszeresére nő.</div><div class="explanation-solution">✅ Megoldás: A tehetetlenség a duplájára nő.</div>` },
+            { question: "Egy űrhajós lebeg az űrben. Van-e tömege?", answers: { a: "Nincs, mert súlytalan.", b: "Van, de nincs súlya.", c: "Van, és a súlya is ugyanannyi." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Súlytalanság:</b> A súlytalanság állapota azt jelenti, hogy a testre ható gravitációs erő elhanyagolható, vagy a test szabadesésben van. Ettől a test tömege, ami az anyag mennyiségét jelenti, nem változik.</div><div class="explanation-solution">✅ Megoldás: Igen, van tömege, de (közel) nincs súlya.</div>` },
+            { question: "Mennyi 1 tonna grammban?", answers: { a: "100 000 g", b: "10 000 g", c: "1 000 000 g" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> 1 tonna = 1000 kg. 1 kg = 1000 g.</div><div class="explanation-step"><b>🔹 Számolás:</b> 1 tonna = 1000 * 1000 g = 1 000 000 g.</div><div class="explanation-solution">✅ Megoldás: 1 tonna az 1 000 000 gramm.</div>` },
+            { question: "Egy test tömege 10 kg. A rá ható gravitációs erő (súlya) a Földön kb. 100 N. Mennyi a tömege ugyanennek a testnek a Holdon, ahol a gravitáció gyengébb?", answers: { a: "kb. 1,6 kg", b: "kb. 16 N", c: "10 kg" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Alaptulajdonság:</b> A tömeg a testre jellemző, helytől független állandó. A súly az, ami a gravitációs mező erősségétől függ.</div><div class="explanation-solution">✅ Megoldás: A test tömege a Holdon is 10 kg marad.</div>` },
+            { question: "Melyik állítás igaz a tömegre?", answers: { a: "Iránya van.", b: "Mértékegysége a Newton.", c: "Skalármennyiség." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Skalár vs. Vektor:</b> A skalármennyiségeknek csak nagyságuk van (pl. tömeg, idő). A vektormennyiségeknek nagyságuk és irányuk is van (pl. erő). A tömegnek nincs iránya.</div><div class="explanation-solution">✅ Megoldás: A tömeg skalármennyiség.</div>` },
+            { question: "Melyiknek van nagyobb tömege: egy liter víznek vagy egy liter olajnak?", answers: { a: "Az olajnak.", b: "Egyenlő.", c: "A víznek." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Sűrűség:</b> A víz sűrűsége (kb. 1 g/cm³) nagyobb, mint az olajé (kb. 0,9 g/cm³).</div><div class="explanation-step"><b>🔹 Következtetés:</b> Mivel a térfogatuk azonos (1 liter), annak lesz nagyobb a tömege, amelyiknek nagyobb a sűrűsége.</div><div class="explanation-solution">✅ Megoldás: A víznek van nagyobb tömege.</div>` },
+            { question: "Ha egy test tehetetlensége nagy, akkor...", answers: { a: "könnyű megállítani.", b: "könnyű elindítani.", c: "nehéz megváltoztatni a mozgásállapotát." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Tehetetlenség:</b> A tehetetlenség a mozgásállapot-változással szembeni ellenállás. A nagy tehetetlenség nagy ellenállást jelent.</div><div class="explanation-solution">✅ Megoldás: A nagy tehetetlenségű testet nehéz megváltoztatni a mozgásállapotát.</div>` },
+            { question: "Melyik a tömeg törtrésze?", answers: { a: "Kilogramm", b: "Tonna", c: "Milligramm" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Prefixumok:</b> A 'tonna' a kilogramm többszöröse. A 'milli-' prefixum ezredrészt jelent, tehát a milligramm a gramm (és így a kilogramm) törtrésze.</div><div class="explanation-solution">✅ Megoldás: A milligramm a tömeg törtrésze.</div>` },
+            { question: "Melyik jelenség NEM a tehetetlenségen alapul?", answers: { a: "Az öv becsatolása.", b: "A por kirázása a szőnyegből.", c: "A mágnes vonzza a vasat." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A biztonsági öv és a pórkirázás is a testek azon tulajdonságán alapul, hogy igyekeznek megtartani mozgásállapotukat. A mágneses vonzás egy alapvető kölcsönhatás, nem a tehetetlenség megnyilvánulása.</div><div class="explanation-solution">✅ Megoldás: A mágneses vonzás nem a tehetetlenségen alapul.</div>` },
+            { question: "Hány gramm 1 kilogramm?", answers: { a: "10", b: "100", c: "1000" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> A 'kilo-' prefixum ezerszeres szorzót jelent.</div><div class="explanation-solution">✅ Megoldás: 1 kilogramm az 1000 gramm.</div>` },
+            { question: "Egy testre ható erők eredője nulla. A test...", answers: { a: "Gyorsul.", b: "Lassul.", c: "Megtartja mozgásállapotát." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Newton I. törvénye:</b> Ha egy testre ható erők kiegyenlítik egymást (az eredő erő nulla), a test mozgásállapota nem változik. Ha nyugalomban volt, nyugalomban marad. Ha mozgásban volt, egyenes vonalú egyenletes mozgást végez tovább.</div><div class="explanation-solution">✅ Megoldás: A test megtartja mozgásállapotát.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

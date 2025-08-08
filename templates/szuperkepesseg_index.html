@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Szuperképesség: Személyes Stratégiák az MI Korában</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --primary-blue: #003366; 
+            --primary-white: #FFFFFF;
+            --text-color: #333;
+            --bg-color: #f4f4f4;
+            --card-shadow: rgba(0, 0, 0, 0.08);
+            --border-color: #e0e0e0;
+            --accent-yellow: #ffc107;
+            --accent-blue-light: #e3f2fd;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: var(--primary-blue);
+            color: var(--primary-white);
+            padding: 2.5rem 1rem;
+            text-align: center;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px var(--card-shadow);
+        }
+
+        .header h1 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+        }
+
+        #toc {
+            position: sticky;
+            top: 20px;
+            align-self: start;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+
+        #toc h3 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        #toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #toc li {
+            margin-bottom: 10px;
+        }
+        
+        #toc a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            display: block;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .nav-button {
+            text-align: center;
+            margin-bottom: 1rem !important;
+            border: 2px solid;
+        }
+
+        .toolkit-link { background-color: var(--accent-yellow); color: #333; border-color: #c79100; }
+        .prompt-master-link { background-color: #2196f3; color: white !important; border-color: #1976d2; }
+        .nav-button:hover { transform: scale(1.05); }
+        .toolkit-link:hover { background-color: #ffca28 !important; }
+        .prompt-master-link:hover { background-color: #42a5f5 !important; }
+
+        #toc a:not(.nav-button):hover {
+            background-color: var(--accent-blue-light);
+        }
+
+        #toc a.active {
+            background-color: var(--primary-blue);
+            color: var(--primary-white);
+            transform: translateX(5px);
+        }
+
+        .content-area {
+            padding-bottom: 3rem;
+        }
+
+        .module-section {
+            margin-bottom: 3rem;
+            padding-top: 20px;
+        }
+        
+        .module-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            font-size: 2.2rem;
+            border-bottom: 3px solid var(--primary-red);
+            padding-bottom: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .workshop-card {
+            background: var(--primary-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--primary-blue);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .workshop-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--card-shadow);
+        }
+        
+        /* ÚJ PRÉMIUM KÁRTYA STÍLUS */
+        .premium-card {
+            border-left-color: var(--sotet);
+            background-image: linear-gradient(135deg, #434343 0%, #000000 100%);
+            color: var(--primary-white);
+        }
+        .premium-card h4 {
+            color: var(--accent-yellow);
+        }
+        .premium-card .workshop-button {
+             background-color: var(--accent-yellow);
+             color: var(--sotet);
+             border: none;
+        }
+
+        .workshop-card h4 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--text-color);
+            font-size: 1.3rem;
+            margin-top: 0;
+        }
+        
+        .workshop-card p {
+            font-size: 0.95rem;
+        }
+
+        .workshop-button {
+            display: inline-block;
+            background-color: var(--primary-red);
+            color: var(--primary-white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .workshop-button:hover {
+            background-color: #b71c1c;
+        }
+
+        @media (max-width: 1024px) {
+            .main-layout { grid-template-columns: 1fr; }
+            #toc { position: static; max-height: none; margin-bottom: 2rem; padding-right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>AIMI Szuperképesség</h1>
+        <p>Személyes Hatékonyság és Stratégia az MI Korában</p>
+    </header>
+
+    <div class="container">
+        <div class="main-layout">
+            <nav id="toc">
+                <h3>Navigáció</h3>
+                <ul>
+                    <li><a href="eszkoztar.html" class="nav-button toolkit-link">Központi Eszköztár 🛠️</a></li>
+                    <li><a href="prompt_kartyak.html" class="nav-button prompt-master-link">Prompt Mester Kártyák 🃏</a></li>
+                </ul>
+
+                <h3>Modulok</h3>
+                <ul>
+                    <li><a href="#module1">I. Személyes OS Fejlesztés</a></li>
+                    <li><a href="#module2">II. A Kreatív Erősítő</a></li>
+                    <li><a href="#module3">III. Stratégiai Jövőkép</a></li>
+                    <li><a href="#module4">IV. Záróprojekt</a></li>
+                    <li><a href="#premium">V. Prémium Műhelyek</a></li>
+                </ul>
+            </nav>
+
+            <main class="content-area">
+            
+                <div class="workshop-card" style="border-left-color: var(--primary-red);">
+                    <h4>🚀 Üzenet a Stratégának: Frissítsd az operációs rendszered!</h4>
+                    <p>
+                        <strong>Üdv a következő szinten!</strong><br><br>
+                        Az alapokat már ismered. Most már nem az a kérdés, HOGYAN működnek az eszközök, hanem az, hogy HOGYAN használod őket a saját, személyes céljaid elérésére. Ez a kurzus nem az MI-ről szól. <strong>A te mentális operációs rendszered frissítéséről szól.</strong><br><br>
+                        <strong>Készen állsz a "szuperképességeid" feloldására?</strong>
+                    </p>
+                </div>
+                
+                <section id="module1" class="module-section">
+                    <h2>I. MODUL: SZEMÉLYES OS FEJLESZTÉS</h2>
+                    <div class="workshop-card"><h4>1. Műhely: A Tökéletes Hét Megtervezése</h4><p>Feladat: Tanuld meg, hogyan használd az MI-t a heti teendőid, tanulási és pihenőidőd optimalizálására!</p><a href="szuper_tokeletes-het.html" class="workshop-button">Gyakorlati Műhely →</a></div>
+                    <div class="workshop-card"><h4>2. Műhely: Dilemma Elemzés és Döntéstámogatás</h4><p>Feladat: Használd a "gondolkodj hangosan" technikát, hogy egy komplex döntés minden lehetséges kimenetelét elemezd.</p><a href="szuper_dilemma-elemzes.html" class="workshop-button">Gyakorlati Műhely →</a></div>
+                    <div class="workshop-card"><h4>3. Műhely: Személyre Szabott Tanulási Terv</h4><p>Feladat: Tervezz meg egy egyhónapos, MI-asszisztált tervet egy új készség elsajátítására a nulláról.</p><a href="szuper_tanulasi-terv.html" class="workshop-button">Gyakorlati Műhely →</a></div>
+                </section>
+                
+                <section id="module2" class="module-section">
+                    <h2>II. MODUL: A KREATÍV ERŐSÍTŐ</h2>
+                    <div class="workshop-card"><h4>4. Műhely: Közös Alkotás - Írj egy novellát az MI-vel!</h4><p>Feladat: Hozz létre egy teljes, több fejezetes történetet, ahol te vagy a rendező, az MI pedig a világépítő és a szövegíró.</p><a href="szuper_novella-iras.html" class="workshop-button">Gyakorlati Műhely →</a></div>
+                    <div class="workshop-card"><h4>5. Műhely: Adatvizualizáció - Történetmesélés számokkal</h4><p>Feladat: Keress egy érdekes adatsort, és az MI segítségével hozz létre belőle egy teljes infografika tervét.</p><a href="szuper_adatvizualizacio.html" class="workshop-button">Gyakorlati Műhely →</a></div>
+                    <div class="workshop-card"><h4>6. Műhely: Játéktervezés 101</h4><p>Feladat: Tervezz egy teljes játék-koncepciót! Alkoss ötletet, karaktert, pályát és "concept art"-ot az MI segítségével.</p><a href="muhely_jatektervezes.html" class="workshop-button">Gyakorlati Műhely →</a></div>
+                </section>
+                
+                <section id="module3" class="module-section">
+                    <h2>III. MODUL: STRATÉGIAI JÖVŐKÉP</h2>
+                    <div class="workshop-card"><h4>7. Műhely: Digitális Önvédelmi Stratégiák</h4><p>Feladat: Elemezd a saját digitális lábnyomodat, és készíts egy személyes tervet az online jelenléted tudatosabb kezelésére.</p><a href="szuper_onvedelem.html" class="workshop-button">Gyakorlati Műhely →</a></div>
+                    <div class="workshop-card"><h4>8. Műhely: Az Algoritmusok Pszichológiája</h4><p>Feladat: Elemezd, milyen pszichológiai trükköket használ a kedvenc appod algoritmusa a figyelem fenntartására.</p><a href="szuper_algoritmus-pszicho.html" class="workshop-button">Gyakorlati Műhely →</a></div>
+                    <div class="workshop-card"><h4>9. Műhely: Jövőálló Készségek Fejlesztése</h4><p>Feladat: Készíts egy "készség-térképet" egy téged érdeklő szakmáról 10 év múlva.</p><a href="szuper_jovoallo-keszsegek.html" class="workshop-button">Gyakorlati Műhely →</a></div>
+                </section>
+                
+                <section id="module4" class="module-section">
+                     <h2>IV. MODUL: ZÁRÓPROJEKT</h2>
+                    <div class="workshop-card"><h4>10-12. hét: A Személyes Küldetés</h4><p>Feladat: Válassz egy nagy, konkrét, egy hónap alatt elérhető személyes célt, és tervezd meg a megvalósítást az MI segítségével!</p><a href="szuper_zaroprojekt.html" class="workshop-button">Gyakorlati Műhely →</a></div>
+                </section>
+                
+                <!-- ITT AZ ÚJ PRÉMIUM SZEKCIÓ -->
+                <section id="premium" class="module-section">
+                    <h2>V. PRÉMIUM MŰHELYEK: Kódolj velem!</h2>
+                    <div class="workshop-card premium-card">
+                        <h4>Építs egy Filmajánló Rendszert!</h4>
+                        <p>Pillants be a motorháztető alá! Ezen a haladó műhelyen lépésről lépésre, közérthető magyarázatokkal építünk fel egy egyszerű, de valódi MI-alkalmazást Pythonban. Kódolási előtudás nem szükséges, csak a kíváncsiságod!</p>
+                        <a href="szuper_kodmuhely_ajanlorendszer.html" class="workshop-button">Prémium Műhely Indítása →</a>
+                    </div>
+                </section>
+                
+            </main>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.module-section');
+    const navLinks = document.querySelectorAll('#toc a:not(.nav-button)');
+
+    const options = {
+        root: null,
+        rootMargin: '-30% 0px -70% 0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === entry.target.id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, options);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+</script>
+
+</body>
+</html>

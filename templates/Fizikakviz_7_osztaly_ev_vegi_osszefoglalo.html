@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Év Végi Összefoglaló Kvíz - Fizika 7. Osztály</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        #control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        #pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        #check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        #check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        #results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Év Végi Összefoglaló Kvíz - Fizika 7. Osztály</h1>
+
+    <div id="control-panel">
+        <input type="password" id="pin-input" placeholder="PIN kód">
+        <button id="check-button">Ellenőrzés</button>
+        <div id="results"></div>
+        <div id="admin-panel" class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span id="dist-a"></span> / <span id="dist-b"></span> / <span id="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Melyik fizikai mennyiség vektormennyiség?",
+                answers: { a: "Erő", b: "Tömeg", c: "Hőmérséklet" },
+                correctAnswer: 'a',
+                explanation: "A vektormennyiségeknek nagyságuk és irányuk is van. Az erő ilyen, mert nem mindegy, milyen irányba hat. A tömegnek és a hőmérsékletnek csak nagysága van, ezek skalármennyiségek. ✅ Megoldás: Erő."
+            },
+            {
+                question: "Mit mond ki a tehetetlenség törvénye (Newton I. törvénye)?",
+                answers: { a: "Minden test nyugalomban marad vagy egyenes vonalú egyenletes mozgást végez, amíg egy másik test mozgásállapotának megváltoztatására nem kényszeríti.", b: "Az erő egyenlő a tömeg és a gyorsulás szorzatával.", c: "Minden hatáshoz tartozik egy azonos nagyságú, ellentétes irányú ellenhatás." },
+                correctAnswer: 'a',
+                explanation: "A tehetetlenség törvénye a testek azon tulajdonságát írja le, hogy önmaguktól nem változtatják meg a mozgásállapotukat. Ehhez külső erőhatás szükséges. ✅ Megoldás: Minden test nyugalomban marad vagy egyenes vonalú egyenletes mozgást végez, amíg egy másik test mozgásállapotának megváltoztatására nem kényszeríti."
+            },
+            {
+                question: "Mi a mechanikai munka mértékegysége az SI mértékrendszerben?",
+                answers: { a: "Joule (J)", b: "Watt (W)", c: "Newton (N)" },
+                correctAnswer: 'a',
+                explanation: "A mechanikai munka mértékegysége a joule, jele J. A watt a teljesítmény, a newton pedig az erő mértékegysége. ✅ Megoldás: Joule (J)."
+            },
+            {
+                question: "Mit jelent a mechanikai energia megmaradásának törvénye zárt rendszerben?",
+                answers: { a: "A mozgási és a helyzeti energia összege állandó.", b: "Csak a mozgási energia állandó.", c: "Az energia idővel mindig csökken." },
+                correctAnswer: 'a',
+                explanation: "Ha egy rendszerre nem hat külső erő (vagy a külső erők munkája nulla), akkor a benne lévő mozgási (kinetikus) és helyzeti (potenciális) energia összege, azaz a teljes mechanikai energia, nem változik. Az energiák egymásba alakulhatnak, de az összegük állandó. ✅ Megoldás: A mozgási és a helyzeti energia összege állandó."
+            },
+            {
+                question: "Mi az erő forgatónyomatéka?",
+                answers: { a: "Az erő forgató hatását leíró fizikai mennyiség.", b: "Az erő gyorsító hatása.", c: "Az erő mértékegysége." },
+                correctAnswer: 'a',
+                explanation: "Az erőnek nemcsak haladó mozgást létrehozó, hanem forgató hatása is lehet. Ezt a forgató hatást jellemzi a forgatónyomaték, ami az erő és az erőkarnak (a forgástengelytől mért távolság) a szorzata. ✅ Megoldás: Az erő forgató hatását leíró fizikai mennyiség."
+            },
+            {
+                question: "Mit mond ki Pascal törvénye?",
+                answers: { a: "A nyugvó folyadékban a külső nyomás minden irányban gyengítetlenül terjed tovább.", b: "A folyadékba merülő testre felhajtóerő hat.", c: "A folyadék nyomása a mélységgel csökken." },
+                correctAnswer: 'a',
+                explanation: "Pascal törvénye a hidraulikus rendszerek (pl. fék, emelő) működésének alapja. Kimondja, hogy ha egy zárt folyadékra nyomást gyakorolunk, az a folyadék minden pontjában ugyanakkora nyomásnövekedést okoz. ✅ Megoldás: A nyugvó folyadékban a külső nyomás minden irányban gyengítetlenül terjed tovább."
+            },
+            {
+                question: "Mivel egyenlő a folyadékba merülő testre ható felhajtóerő nagysága Arkhimédész törvénye szerint?",
+                answers: { a: "A test által kiszorított folyadék súlyával.", b: "A test saját súlyával.", c: "A test térfogatával." },
+                correctAnswer: 'a',
+                explanation: "Arkhimédész törvénye kimondja, hogy minden folyadékba vagy gázba merülő testre felhajtóerő hat, amelynek nagysága egyenlő a test által kiszorított folyadék vagy gáz súlyával. ✅ Megoldás: A test által kiszorított folyadék súlyával."
+            },
+            {
+                question: "Mi határozza meg a hang magasságát?",
+                answers: { a: "A hanghullám frekvenciája.", b: "A hanghullám amplitúdója.", c: "A hang terjedési sebessége." },
+                correctAnswer: 'a',
+                explanation: "A hang magasságát a rezgések száma, azaz a frekvencia határozza meg. A magasabb frekvencia magasabb hangot, az alacsonyabb frekvencia mélyebb hangot eredményez. Az amplitúdó a hang erősségét (hangosságát) határozza meg. ✅ Megoldás: A hanghullám frekvenciája."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Mi az erő mértékegysége az SI mértékrendszerben?",
+                answers: { a: "Joule (J)", b: "Newton (N)", c: "Pascal (Pa)" },
+                correctAnswer: 'b',
+                explanation: "Az erő mértékegysége a newton, jele N. A joule a munka/energia, a pascal pedig a nyomás mértékegysége. ✅ Megoldás: Newton (N)."
+            },
+            {
+                question: "Melyik példa a távolhatásra?",
+                answers: { a: "Egy labda elrúgása.", b: "A Föld vonzza a Holdat.", c: "Egy rugó megnyújtása." },
+                correctAnswer: 'b',
+                explanation: "A távolhatás olyan kölcsönhatás, amelyhez a testeknek nem kell érintkezniük. A gravitációs vonzás ilyen. A labda elrúgása és a rugó megnyújtása érintkezést igénylő kölcsönhatás. ✅ Megoldás: A Föld vonzza a Holdat."
+            },
+            {
+                question: "Mikor van egy testnek mozgási (kinetikus) energiája?",
+                answers: { a: "Ha magasan van.", b: "Ha mozog.", c: "Ha nyugalomban van." },
+                correctAnswer: 'b',
+                explanation: "A mozgási energia a mozgásból származó energia. Minden testnek, amelynek sebessége van, mozgási energiája is van. ✅ Megoldás: Ha mozog."
+            },
+            {
+                question: "Mikor van egy testnek gravitációs helyzeti energiája?",
+                answers: { a: "Amikor a földön van.", b: "Amikor egy bizonyos magasságban van egy választott szinthez képest.", c: "Amikor gyorsul." },
+                correctAnswer: 'b',
+                explanation: "A gravitációs helyzeti energia a magasságból és a gravitációs vonzásból származó tárolt energia. Minél magasabban van egy test, annál nagyobb a helyzeti energiája. ✅ Megoldás: Amikor egy bizonyos magasságban van egy választott szinthez képest."
+            },
+            {
+                question: "Mit nevezünk teljesítménynek?",
+                answers: { a: "Az elvégzett munkát.", b: "Az egységnyi idő alatt végzett munkát.", c: "Az energia mértékét." },
+                correctAnswer: 'b',
+                explanation: "A teljesítmény azt mutatja meg, hogy milyen gyorsan történik a munkavégzés vagy az energiaátalakulás. Kiszámítása: P = W/t (Munka osztva az idővel). Mértékegysége a watt (W). ✅ Megoldás: Az egységnyi idő alatt végzett munkát."
+            },
+            {
+                question: "Mikor van egy test haladási egyensúlyban?",
+                answers: { a: "Ha a rá ható erők összege nagyobb, mint nulla.", b: "Ha a rá ható erők (vektori) összege nulla.", c: "Ha csak egyetlen erő hat rá." },
+                correctAnswer: 'b',
+                explanation: "Egy test akkor van haladási egyensúlyban (vagyis nyugalomban marad vagy egyenes vonalú egyenletes mozgást végez), ha a rá ható erők kiegyenlítik egymást, azaz az erők vektori összege nulla. ✅ Megoldás: Ha a rá ható erők (vektori) összege nulla."
+            },
+            {
+                question: "Hogyan számítjuk ki a nyomást?",
+                answers: { a: "Nyomás = Nyomóerő × Felület", b: "Nyomás = Nyomóerő / Felület", c: "Nyomás = Felület / Nyomóerő" },
+                correctAnswer: 'b',
+                explanation: "A nyomás az egységnyi felületre ható nyomóerőt jelenti. Képlete: p = F/A. Mértékegysége a pascal (Pa). ✅ Megoldás: Nyomás = Nyomóerő / Felület."
+            },
+            {
+                question: "Hogyan változik a hidrosztatikai nyomás a folyadékban a mélységgel?",
+                answers: { a: "Nem változik.", b: "A mélységgel egyenesen arányosan növekszik.", c: "A mélységgel csökken." },
+                correctAnswer: 'b',
+                explanation: "A hidrosztatikai nyomást a folyadékoszlop súlya okozza. Minél mélyebbre megyünk, annál magasabb (és nehezebb) folyadékoszlop nyomja az alatt lévő rétegeket, ezért a nyomás növekszik. ✅ Megoldás: A mélységgel egyenesen arányosan növekszik."
+            },
+            {
+                question: "Képes-e a hang terjedni a világűrben (vákuumban)?",
+                answers: { a: "Igen, gyorsabban, mint a Földön.", b: "Nem, mert a terjedéséhez közvetítő közegre van szüksége.", c: "Igen, de csak nagyon halkan." },
+                correctAnswer: 'b',
+                explanation: "A hang egy mechanikai hullám, ami az anyag részecskéinek rezgését jelenti. Ahol nincsenek részecskék (mint a vákuumban), ott nincs mi rezegjen, így a hang nem tud terjedni. ✅ Megoldás: Nem, mert a terjedéséhez közvetítő közegre van szüksége."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Mire való a paralelogramma-szabály a fizikában?",
+                answers: { a: "Területszámításra.", b: "Munka kiszámítására.", c: "Két, egy pontból kiinduló erő (vektor) összegzésére." },
+                correctAnswer: 'c',
+                explanation: "A paralelogramma-módszer egy grafikus eljárás két vektor (pl. erő) összegének, azaz az eredő vektornak a megszerkesztésére. ✅ Megoldás: Két, egy pontból kiinduló erő (vektor) összegzésére."
+            },
+            {
+                question: "Mi a hatásfok?",
+                answers: { a: "A befektetett munka és a hasznos munka különbsége.", b: "Azt mutatja meg, milyen gyorsan dolgozik egy gép.", c: "A hasznos munka és a befektetett munka aránya." },
+                correctAnswer: 'c',
+                explanation: "A hatásfok egy arányszám, amely megmutatja, hogy a befektetett energiának vagy munkának mekkora hányada alakul át hasznos energiává vagy munkává. Értéke mindig 1-nél (vagy 100%-nál) kisebb. ✅ Megoldás: A hasznos munka és a befektetett munka aránya."
+            },
+            {
+                question: "A feszítővas (pajszer) egy egyszerű gép. Melyik típusba tartozik?",
+                answers: { a: "Csiga", b: "Lejtő", c: "Emelő" },
+                correctAnswer: 'c',
+                explanation: "A feszítővas egy egykarú emelő, ahol a forgáspont (az alátámasztás) az egyik végén, az erőkifejtés a másik végén, a teher pedig a kettő között van. ✅ Megoldás: Emelő."
+            },
+            {
+                question: "Mi egy test súlypontja?",
+                answers: { a: "A test legnehezebb pontja.", b: "A test mértani középpontja.", c: "Az a pont, amelyen keresztül a testre ható nehézségi erő hat." },
+                correctAnswer: 'c',
+                explanation: "A súlypont egy elméleti pont, ahol a test teljes súlyát egyetlen erőként, támadáspontként vehetjük figyelembe. Egy homogén, szabályos testnél ez egybeesik a mértani középponttal. ✅ Megoldás: Az a pont, amelyen keresztül a testre ható nehézségi erő hat."
+            },
+            {
+                question: "Mi okozza a légköri nyomást?",
+                answers: { a: "A Föld forgása.", b: "A napszél.", c: "A felettünk lévő levegőoszlop súlya." },
+                correctAnswer: 'c',
+                explanation: "A Földet körülvevő levegőrétegnek (légkörnek) a gravitáció miatt súlya van. Ez a súly nyomást gyakorol a Föld felszínére és a rajta lévő minden testre. Ezt nevezzük légköri nyomásnak. ✅ Megoldás: A felettünk lévő levegőoszlop súlya."
+            },
+            {
+                question: "Mikor úszik egy test a víz felszínén?",
+                answers: { a: "Ha a súlya kisebb, mint a rá ható felhajtóerő.", b: "Ha a sűrűsége nagyobb, mint a vízé.", c: "Ha a rá ható felhajtóerő egyenlő a súlyával." },
+                correctAnswer: 'c',
+                explanation: "Egy test akkor lebeg a folyadékban vagy úszik a felszínén, ha a rá ható, felfelé irányuló felhajtóerő pontosan kiegyenlíti a lefelé húzó nehézségi erőt (súlyt). Ha a felhajtóerő kisebb, a test elmerül. ✅ Megoldás: Ha a rá ható felhajtóerő egyenlő a súlyával."
+            },
+            {
+                question: "Mi határozza meg a hang erősségét (hangosságát)?",
+                answers: { a: "A hang frekvenciája.", b: "A hang terjedési sebessége.", c: "A hanghullám amplitúdója." },
+                correctAnswer: 'c',
+                explanation: "A hang erőssége a hanghullám által szállított energiától függ, amit a hullám amplitúdója (maximális kitérése) jellemez. A nagyobb amplitúdó erősebb, hangosabb hangot jelent. ✅ Megoldás: A hanghullám amplitúdója."
+            },
+            {
+                question: "Mi a mechanikai hullám?",
+                answers: { a: "Fényjelenség.", b: "Elektromos jelenség.", c: "Rezgés, amely valamilyen közegben terjed tova." },
+                correctAnswer: 'c',
+                explanation: "A mechanikai hullámok (pl. hanghullám, vízhullám) valamilyen rugalmas közeg részecskéinek rezgése, amely energiaátadással továbbterjed, de maga az anyag nem áramlik. ✅ Megoldás: Rezgés, amely valamilyen közegben terjed tova."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButton = document.getElementById('check-button');
+        const pinInput = document.getElementById('pin-input');
+        const resultsContainer = document.getElementById('results');
+        const adminPanel = document.getElementById('admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInput.value;
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainer.textContent = "Érvénytelen PIN kód!";
+                resultsContainer.style.color = '#D50000';
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainer.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                resultsContainer.style.color = 'orange';
+                return;
+            }
+            resultsContainer.style.color = '#333'; // Reset color
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainer.textContent = "Minden válasz és magyarázat felfedve.";
+                adminPanel.style.display = 'block';
+                document.getElementById('dist-a').textContent = internalCorrectAnswers.a;
+                document.getElementById('dist-b').textContent = internalCorrectAnswers.b;
+                document.getElementById('dist-c').textContent = internalCorrectAnswers.c;
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainer.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+            }
+        }
+        
+        pinInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                checkButton.click(); // Simulate a button click
+            }
+        });
+
+        checkButton.addEventListener('click', checkAnswers);
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

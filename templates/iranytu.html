@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tudás Iránytű - Személyre Szabott Tanulási Kalauz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --kek: #005A9C; --piros: #CD2A3E; --zold: #436F4D; --feher: #FFFFFF;
+            --sotet: #2c3e50; --vilagos-szurke: #f0f4f8; --szoveg: #34495e;
+            --card-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--vilagos-szurke); color: var(--szoveg); line-height: 1.6; padding: 20px; }
+        .container { max-width: 800px; margin: 2rem auto; }
+        .compass-card { background: var(--feher); border-radius: 16px; box-shadow: var(--card-shadow); overflow: hidden; border-top: 8px solid var(--sotet); }
+        .compass-header { padding: 2rem; text-align: center; }
+        .compass-header .icon { font-size: 4rem; line-height: 1; color: var(--sotet); }
+        .compass-header h1 { font-family: 'Roboto Slab', serif; color: var(--sotet); margin: 1rem 0 0.5rem 0; }
+        .compass-header p { color: #6c757d; max-width: 500px; margin: auto; }
+        .compass-body { padding: 0 2rem 2rem 2rem; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .form-group textarea { width: 100%; min-height: 100px; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; font-family: 'Roboto', sans-serif; resize: vertical; }
+        .btn { width: 100%; padding: 1rem; border-radius: 8px; text-decoration: none; font-weight: 700; transition: all 0.3s; border: none; font-size: 1.2rem; text-align: center; cursor: pointer; }
+        .btn-prepare { background-color: var(--piros); color: var(--feher); margin-top: 1rem; }
+        .btn-open { background-color: var(--zold); color: var(--feher); margin-top: 1rem; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .feedback-message { display: none; margin-top: 1.5rem; padding: 1rem; border-radius: 8px; background-color: #e8f5e9; border: 2px solid var(--zold); text-align: center; font-weight: 500; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="compass-card">
+            <div class="compass-header">
+                <div class="icon">🧭</div>
+                <h1>Tudás Iránytű</h1>
+                <p>A személyre szabott kalauzod a CSICSIKE Tudástárban</p>
+            </div>
+            <div class="compass-body">
+                <form id="guide-form">
+                    <div class="form-group">
+                        <label for="user-problem">Miben segíthetek ma?</label>
+                        <textarea id="user-problem" rows="4" placeholder="Írd le, mit szeretnél tanulni, miben akadtál el, vagy mihez van kedved! Pl: 'Segíts felkészülni a Pitagorasz-tételre!', 'Unatkozom, valami kreatívat csinálnék AI-val.', 'Hogyan működik a hőtágulás?'" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-prepare">1. Prompt Előkészítése</button>
+                    <div id="feedback" class="feedback-message">
+                        <!-- Ide kerül a dinamikus üzenet -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const guideForm = document.getElementById('guide-form');
+        const userProblemTextarea = document.getElementById('user-problem');
+        const feedbackDiv = document.getElementById('feedback');
+
+        guideForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const userProblem = userProblemTextarea.value;
+            
+            const systemPrompt = `Viselkedj úgy, mint a "Tudás Iránytű", a CSICSIKE Tudástár intelligens kalauza! A feladatod, hogy a felhasználó kérésére egy személyre szabott, lépésről-lépésre vezető tanulási útvonalat állíts össze a CSICSIKE Tudástár meglévő tananyagaiból és eszközeiből.
+
+**A CSICSIKE Tudástár Felépítése:**
+
+1.  **Tantárgyak és Leckék:**
+    *   Matematika (5-8. osztály)
+    *   Fizika (6-8. osztály)
+    *   Mesterséges Intelligencia (AI) Műhelyek
+    *   Szuperképesség Kurzus
+
+2.  **Extra Interaktív Eszközök:**
+   
+    *   **Fókusz Mester (fokusz_mester.html):** Tanulási időzítő.
+    *   **Időutazó Csevegő (idoutazo_csevego.html):** Beszélgetés híres tudósokkal.
+    *   **Jövőkutató Szimulátor (jovokutato_szimulator.html):** A jövő felfedezése.
+    *   **Személyes Célkitűző (celkituzo.html):** Célok tervezése.
+
+**A TE FELADATOD:**
+
+A felhasználó a következő problémával/kéréssel fordul hozzád:
+"${userProblem}"
+
+Válaszként állíts össze egy 2-4 lépésből álló, logikus "Tanulási Útvonalat"!
+-   Minden lépéshez írj egy rövid, bátorító magyarázatot!
+-   Minden lépésnél javasolj egy konkrét eszközt vagy leckét a CSICSIKE Tudástárból!
+-   **FONTOS:** A válaszodban ne linkeket használj, hanem vastag betűvel írd ki az ajánlott oldal nevét! Pl. "**Interaktív Segédlet: Matematika 8. Osztály**" vagy "**Extra Eszköz: Fókusz Mester**".
+
+**Válasz Stílusa:** Legyél barátságos, segítőkész és rendkívül gyakorlatias. A célod, hogy a felhasználó úgy érezze, egy személyre szabott, exkluzív útitervet kapott.
+
+Kezd a választ így: "Szia! A kérésed alapján itt van egy javasolt útvonal a CSICSIKE Tudástárban:"`;
+            
+            navigator.clipboard.writeText(systemPrompt.trim()).then(() => {
+                feedbackDiv.innerHTML = `✅ Szuper! A személyre szabott promptot a vágólapra másoltam. <br><br> <a href="https://gemini.google.com/" target="_blank" class="btn btn-open">2. Irány a Gemini!</a> <br><br> <small>Nyisd meg, illeszd be a promptot (Ctrl+V), és nyomj Entert!</small>`;
+                feedbackDiv.style.display = 'block';
+            }).catch(err => {
+                feedbackDiv.innerHTML = '❌ Hiba! A vágólapra másolás nem sikerült. Kérlek, próbáld újra!';
+                feedbackDiv.style.backgroundColor = '#ffebee';
+                feedbackDiv.style.borderColor = 'var(--piros)';
+                feedbackDiv.style.display = 'block';
+            });
+        });
+    });
+    </script>
+</body>
+</html>

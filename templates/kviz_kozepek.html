@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Számtani és mértani közép</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 2px 5px; border-radius: 3px;}
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Számtani és mértani közép</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Mi a 10 és a 30 számtani közepe?", answers: { a: "20", b: "15", c: "40" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> Két szám (x, y) számtani közepe: (x + y) / 2.</div><div class="explanation-step"><b>🔹 Behelyettesítés:</b> (10 + 30) / 2 = 40 / 2.</div><div class="explanation-solution">✅ Megoldás: A két szám számtani közepe 20.</div>` },
+            { question: "Mi a 4 és a 16 mértani közepe?", answers: { a: "8", b: "10", c: "64" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> Két pozitív szám (x, y) mértani közepe: √(x * y).</div><div class="explanation-step"><b>🔹 Behelyettesítés:</b> √(4 * 16) = √64.</div><div class="explanation-solution">✅ Megoldás: A két szám mértani közepe 8.</div>` },
+            { question: "Ha két szám számtani közepe 15, és az egyik szám 10, mennyi a másik szám?", answers: { a: "20", b: "12.5", c: "25" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Egyenlet:</b> (10 + x) / 2 = 15.</div><div class="explanation-step"><b>🔹 Levezetés:</b> 10 + x = 30, amiből x = 20.</div><div class="explanation-solution">✅ Megoldás: A másik szám a 20.</div>` },
+            { question: "Mikor egyenlő két pozitív szám számtani és mértani közepe?", answers: { a: "Ha a két szám egyenlő.", b: "Soha.", c: "Ha az egyik szám 0." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Tétel:</b> A számtani és mértani közép közötti egyenlőtlenség (AM-GM) szerint a számtani közép mindig nagyobb vagy egyenlő a mértaninál.</div><div class="explanation-step"><b>🔹 Egyenlőség esete:</b> Az egyenlőség pontosan akkor áll fenn, ha a két szám megegyezik.</div><div class="explanation-solution">✅ Megoldás: Akkor, ha a két szám egyenlő.</div>` },
+            { question: "Mi az 1, 2, 3, 4, 5 számok számtani közepe?", answers: { a: "3", b: "2.5", c: "3.5" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A számok összegét el kell osztani a számok darabszámával.</div><div class="explanation-step"><b>🔹 Számolás:</b> (1 + 2 + 3 + 4 + 5) / 5 = 15 / 5.</div><div class="explanation-solution">✅ Megoldás: A számok számtani közepe 3.</div>` },
+            { question: "Két dolgozatod jegye 4-es és 5-ös. Az 5-ös jegy súlya kétszeres. Mi a súlyozott átlagod?", answers: { a: "4,67", b: "4,5", c: "4,75" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> Súlyozott átlag = (érték1*súly1 + érték2*súly2) / (súly1 + súly2).</div><div class="explanation-step"><b>🔹 Számolás:</b> (4*1 + 5*2) / (1 + 2) = (4 + 10) / 3 = 14 / 3 ≈ 4,67.</div><div class="explanation-solution">✅ Megoldás: A súlyozott átlag kb. 4,67.</div>` },
+            { question: "Mi a 10 és a 90 mértani közepe?", answers: { a: "30", b: "50", c: "√80" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> Két pozitív szám (x, y) mértani közepe: √(x * y).</div><div class="explanation-step"><b>🔹 Számolás:</b> √(10 * 90) = √900.</div><div class="explanation-solution">✅ Megoldás: A mértani közép 30.</div>` },
+            { question: "Melyik számhármasnak 10 a számtani közepe?", answers: { a: "5, 10, 15", b: "10, 10, 9", c: "5, 5, 5" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Ellenőrzés:</b> Azt a számhármast keressük, amelynek tagjait összeadva és 3-mal elosztva 10-et kapunk.</div><div class="explanation-step"><b>🔹 Számolás:</b> (5 + 10 + 15) / 3 = 30 / 3 = 10.</div><div class="explanation-solution">✅ Megoldás: Az 5, 10, 15 számok számtani közepe 10.</div>` },
+            { question: "Mi a 2 és a 8 mértani közepe?", answers: { a: "5", b: "4", c: "16" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> Két pozitív szám (x, y) mértani közepe: √(x * y).</div><div class="explanation-step"><b>🔹 Behelyettesítés:</b> √(2 * 8) = √16.</div><div class="explanation-solution">✅ Megoldás: A két szám mértani közepe 4.</div>` },
+            { question: "Mi a 7, 8, 9 számok számtani közepe?", answers: { a: "7", b: "8", c: "9" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> (7 + 8 + 9) / 3.</div><div class="explanation-step"><b>🔹 Számolás:</b> 24 / 3 = 8.</div><div class="explanation-solution">✅ Megoldás: A számok számtani közepe 8.</div>` },
+            { question: "Ha két szám mértani közepe 10, és az egyik szám 5, mennyi a másik?", answers: { a: "15", b: "20", c: "10" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Egyenlet:</b> √(5 * x) = 10.</div><div class="explanation-step"><b>🔹 Levezetés:</b> Mindkét oldalt négyzetre emeljük: 5 * x = 100. Ebből x = 100 / 5.</div><div class="explanation-solution">✅ Megoldás: A másik szám a 20.</div>` },
+            { question: "Melyik közepet használjuk általában jegyek átlagolására?", answers: { a: "Mértani közép", b: "Számtani közép", c: "Harmonikus közép" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Gyakorlat:</b> Az iskolai osztályzatok, teszteredmények átlagát hagyományosan a számtani (vagy súlyozott számtani) középpel számoljuk.</div><div class="explanation-solution">✅ Megoldás: A számtani közepet használjuk.</div>` },
+            { question: "Hasonlítsd össze a 4 és 9 számtani és mértani közepét!", answers: { a: "Egyenlőek", b: "A számtani közép nagyobb", c: "A mértani közép nagyobb" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Számolás:</b><br>• Számtani közép: (4 + 9) / 2 = 13 / 2 = 6,5.<br>• Mértani közép: √(4 * 9) = √36 = 6.</div><div class="explanation-step"><b>🔹 Összehasonlítás:</b> 6,5 > 6.</div><div class="explanation-solution">✅ Megoldás: A számtani közép nagyobb.</div>` },
+            { question: "Mi a -5 és 5 számtani közepe?", answers: { a: "2.5", b: "0", c: "Nincs értelme" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> (x + y) / 2.</div><div class="explanation-step"><b>🔹 Számolás:</b> (-5 + 5) / 2 = 0 / 2 = 0.</div><div class="explanation-solution">✅ Megoldás: A két szám számtani közepe 0.</div>` },
+            { question: "Mi az 5 és 5 mértani közepe?", answers: { a: "25", b: "5", c: "√10" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> √(x * y).</div><div class="explanation-step"><b>🔹 Számolás:</b> √(5 * 5) = √25 = 5.</div><div class="explanation-step"><b>🔹 Megjegyzés:</b> Ha a két szám egyenlő, a számtani és mértani közepük is megegyezik a számmal.</div><div class="explanation-solution">✅ Megoldás: A mértani közép 5.</div>` },
+            { question: "Egy téglalap oldalai 2 és 18. Milyen hosszú oldala van annak a négyzetnek, amelynek a területe megegyezik a téglalapéval?", answers: { a: "10", b: "6", c: "8" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Területek:</b><br>• Téglalap területe: 2 * 18 = 36.<br>• Négyzet területe: a².</div><div class="explanation-step"><b>🔹 Egyenlet:</b> a² = 36, amiből a = √36 = 6.</div><div class="explanation-step"><b>✏️ Bónusz:</b> A feladat a 2 és a 18 mértani közepének kiszámítását jelenti.</div><div class="explanation-solution">✅ Megoldás: A négyzet oldala 6.</div>` },
+            { question: "Mi az első három páros természetes szám (2, 4, 6) számtani közepe?", answers: { a: "3", b: "4", c: "5" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Összegzés:</b> 2 + 4 + 6 = 12.</div><div class="explanation-step"><b>🔹 Osztás:</b> 12 / 3 = 4.</div><div class="explanation-solution">✅ Megoldás: A számok számtani közepe 4.</div>` },
+            { question: "Mi az 1, 2 és 6 számok számtani közepe?", answers: { a: "2", b: "3.5", c: "3" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A számok összegét el kell osztani a darabszámukkal.</div><div class="explanation-step"><b>🔹 Számolás:</b> (1 + 2 + 6) / 3 = 9 / 3 = 3.</div><div class="explanation-solution">✅ Megoldás: A számok számtani közepe 3.</div>` },
+            { question: "Mi a 3 és a 12 mértani közepe?", answers: { a: "7.5", b: "√15", c: "6" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> Két pozitív szám (x, y) mértani közepe: √(x * y).</div><div class="explanation-step"><b>🔹 Behelyettesítés:</b> √(3 * 12) = √36.</div><div class="explanation-solution">✅ Megoldás: A két szám mértani közepe 6.</div>` },
+            { question: "Melyik reláció igaz két KÜLÖNBÖZŐ pozitív szám számtani (AM) és mértani (GM) közepére?", answers: { a: "AM < GM", b: "AM = GM", c: "AM > GM" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 AM-GM Egyenlőtlenség:</b> Két nemnegatív szám számtani közepe mindig nagyobb vagy egyenlő, mint a mértani közepük.</div><div class="explanation-step"><b>🔹 Szigorú egyenlőtlenség:</b> Az egyenlőség csak akkor áll fenn, ha a két szám egyenlő. Mivel a kérdés különböző számokra vonatkozik, a számtani közép szigorúan nagyobb.</div><div class="explanation-solution">✅ Megoldás: Különböző pozitív számok esetén a számtani közép nagyobb, mint a mértani.</div>` },
+            { question: "Melyik számpárnak NEM értelmezhető a mértani közepe a valós számok halmazán?", answers: { a: "4 és 9", b: "0 és 5", c: "-4 és 4" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A mértani közép a számok szorzatának négyzetgyöke.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A -4 és 4 szorzata -16. A valós számok halmazán negatív számnak nincs négyzetgyöke.</div><div class="explanation-solution">✅ Megoldás: A -4 és 4 számpárnak nem értelmezhető a mértani közepe.</div>` },
+            { question: "Mi a 10 és a 40 mértani közepe?", answers: { a: "25", b: "√50", c: "20" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> √(x * y).</div><div class="explanation-step"><b>🔹 Számolás:</b> √(10 * 40) = √400 = 20.</div><div class="explanation-solution">✅ Megoldás: A mértani közép 20.</div>` },
+            { question: "Mi a 0, 10 és 20 számtani közepe?", answers: { a: "15", b: "5", c: "10" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> (0 + 10 + 20) / 3.</div><div class="explanation-step"><b>🔹 Számolás:</b> 30 / 3 = 10.</div><div class="explanation-solution">✅ Megoldás: A számok számtani közepe 10.</div>` },
+            { question: "Hogyan definiáljuk két pozitív szám, 'a' és 'b' mértani közepét?", answers: { a: "a*b / 2", b: "(a+b)²", c: "√(a*b)" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Két pozitív szám mértani közepe a számok szorzatának négyzetgyöke.</div><div class="explanation-solution">✅ Megoldás: A helyes képlet a √(a*b).</div>` },
+            { question: "Hogyan definiáljuk két szám, 'a' és 'b' számtani közepét?", answers: { a: "a+b", b: "√(a+b)", c: "(a+b)/2" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Két szám számtani közepe a számok összegének a fele.</div><div class="explanation-solution">✅ Megoldás: A helyes képlet az (a+b)/2.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

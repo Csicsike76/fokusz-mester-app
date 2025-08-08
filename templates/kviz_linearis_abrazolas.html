@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Függvények grafikus ábrázolása</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: f(x) = ax + b alakú függvények ábrázolása</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Mi az első lépés az f(x) = 2x + 3 függvény ábrázolásakor a paraméterekkel?", options: { a: "A meredekség szerint lépünk.", b: "Értéktáblázatot készítünk.", c: "Megkeressük a 3-at az y-tengelyen." }, correctAnswer: "c", explanation: "🔹 1. Lépés: A legegyszerűbb módszer, ha a 'b' paramétert, azaz az y-tengelymetszetet használjuk kezdőpontnak. 🔹 2. Lépés: A 'b' értéke itt 3, tehát az első pontunk a (0; 3) lesz, ami az y-tengelyen a 3-nál van. ✅ Megoldás: Megkeressük a 3-at az y-tengelyen." },
+            { question: "Mit jelent a 2-es meredekség az f(x) = 2x + 3 függvényben?", options: { a: "1-et jobbra, 2-t fel", b: "2-t jobbra, 3-at fel", c: "2-t jobbra, 1-et fel" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A meredekséget törtként is felírhatjuk: a = 2 = 2/1. 🔹 2. Lépés: A nevező (1) a vízszintes lépést, a számláló (2) a függőleges lépést jelenti. Mivel pozitív, felfelé lépünk. ✅ Megoldás: Bármely pontból 1-et jobbra, 2-t felfelé lépve a grafikon egy újabb pontját kapjuk." },
+            { question: "Hány pontot kell minimum kiszámolnunk és ábrázolnunk egy egyenes megrajzolásához?", options: { a: "1", b: "2", c: "3" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A geometria alaptétele szerint két különböző ponton át pontosan egy egyenes fektethető. 🔹 2. Lépés: Tehát elég két pontot meghatároznunk a grafikonon, és egy vonalzóval összekötve őket megkapjuk a teljes függvénygrafikont. ✅ Megoldás: Minimum 2 pont szükséges." },
+            { question: "Egy függvény grafikonja az y-tengelyt a 4-nél metszi. Melyik pont van biztosan a grafikonon?", options: { a: "(4; 0)", b: "(0; 4)", c: "(4; 4)" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az y-tengelyen minden pont x koordinátája 0. 🔹 2. Lépés: Ha a metszet a 4-nél van, az azt jelenti, hogy az y koordináta 4. ✅ Megoldás: A (0; 4) pont van a grafikonon." },
+            { question: "Mi a legegyszerűbb módja az f(x) = 5 függvény ábrázolásának?", options: { a: "egy vízszintes egyenest húzunk az y=5 magasságban", b: "egy függőleges egyenest húzunk az x=5 helyen", c: "az origón átmenő egyenest húzunk" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Ez egy konstans függvény, ami azt jelenti, hogy minden x-hez ugyanazt az y értéket, az 5-öt rendeli. 🔹 2. Lépés: A pontjai például (0;5), (1;5), (2;5). Ezek egy vízszintes egyenesen helyezkednek el. ✅ Megoldás: Egy vízszintes egyenest húzunk az y=5 magasságban." },
+            { question: "Egy lineáris függvény grafikonja átmegy a (0; -2) és (1; 1) pontokon. Mi a függvény hozzárendelési szabálya?", options: { a: "f(x) = 2x - 3", b: "f(x) = 3x - 2", c: "f(x) = -2x + 3" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az y-tengelymetszet (b) a (0; -2) pontból leolvasható, tehát b=-2. 🔹 2. Lépés: A meredekség (a): 1-et jobbra léptünk (0-ról 1-re), és 3-at felfelé (-2-ről 1-re). Tehát a=3/1=3. 🔹 3. Lépés: A szabály: f(x) = 3x - 2. ✅ Megoldás: f(x) = 3x - 2." },
+            { question: "Melyik módszerrel lehet BÁRMILYEN függvényt ábrázolni?", options: { a: "meredekség és y-metszet", b: "zérushely-számítás", c: "értéktáblázat" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A meredekséges módszer csak lineáris függvényekre működik. A zérushely egyetlen pont, ami nem elég. 🔹 2. Lépés: Az értéktáblázat univerzális: kiválasztunk x értékeket, kiszámoljuk a hozzájuk tartozó y értékeket, és a kapott (x;y) pontokat ábrázoljuk. Ez minden függvénytípusnál alkalmazható. ✅ Megoldás: Értéktáblázattal." },
+            { question: "Hogyan ábrázoljuk a P(-1; -4) pontot?", options: { a: "1-et jobbra, 4-et le", b: "1-et balra, 4-et le", c: "1-et le, 4-et balra" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az első koordináta (x=-1) azt jelenti, hogy az origóból 1 egységet balra lépünk. 🔹 2. Lépés: A második koordináta (y=-4) azt jelenti, hogy onnan 4 egységet lefelé lépünk. ✅ Megoldás: 1-et balra, 4-et le." },
+            { question: "Milyen meredekségű az f(x) = 4 - x függvény?", options: { a: "4", b: "-1", c: "1" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Írjuk át a függvényt ax+b sorrendbe: f(x) = -x + 4. 🔹 2. Lépés: Ezt felírhatjuk f(x) = (-1)*x + 4 alakban is. Az x együtthatója a meredekség. ✅ Megoldás: A meredekség -1." },
+            { question: "Melyik pont van az f(x) = -2x + 7 grafikonján?", options: { a: "(3; 1)", b: "(1; 9)", c: "(2; 11)" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Helyettesítsük be a 3-at: f(3) = -2 * 3 + 7 = -6 + 7 = 1. 🔹 2. Lépés: A kapott y érték 1, ami megegyezik a pont y koordinátájával. ✅ Megoldás: A (3; 1) pont rajta van a grafikonon." },
+            { question: "Mi az első lépés egy pont koordináta-rendszerben való leolvasásakor?", options: { a: "A vízszintes (x) koordináta megkeresése.", b: "A függőleges (y) koordináta megkeresése.", c: "A távolság megmérése az origótól." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A pontok koordinátáit mindig (x; y) sorrendben adjuk meg. 🔹 2. Lépés: Ezért a leolvasást is mindig a vízszintes tengelyen kezdjük, hogy megtaláljuk az első, x koordinátát. ✅ Megoldás: A vízszintes (x) koordináta megkeresése." },
+            { question: "Az f(x) = x grafikonja...", options: { a: "egy függőleges egyenes.", b: "egy az origón átmenő, 45°-os egyenes.", c: "egy vízszintes egyenes." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A szabály szerint y=x. Néhány pontja: (0;0), (1;1), (2;2). 🔹 2. Lépés: Ezek a pontok egy olyan egyenesen vannak, ami áthalad az origón és 'felezi' az I. és III. síknegyedet. ✅ Megoldás: Egy, az origón átmenő, 45°-os egyenes." },
+            { question: "Mi a grafikonja az f(x) = -3 függvénynek?", options: { a: "Függőleges egyenes az x=-3-nál.", b: "Az origón átmenő egyenes.", c: "Vízszintes egyenes az y=-3-nál." }, correctAnswer: "c", explanation: "🔹 1. Lépés: Ez egy konstans függvény, minden x-hez a -3 értéket rendeli. 🔹 2. Lépés: A pontjai (0;-3), (1;-3), (2;-3) stb., amelyek egy vízszintes egyenest alkotnak az y tengely -3-as értékénél. ✅ Megoldás: Vízszintes egyenes az y=-3-nál." },
+            { question: "Egy függvény meredeksége 0. Milyen a grafikonja?", options: { a: "vízszintes egyenes", b: "függőleges egyenes", c: "45°-os egyenes" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A 0 meredekség azt jelenti, hogy a függvény se nem emelkedik, se nem süllyed. 🔹 2. Lépés: Ez egy konstans függvényt ír le, aminek a grafikonja mindig egy vízszintes egyenes. ✅ Megoldás: Vízszintes egyenes." },
+            { question: "Egy grafikonról leolvasod, hogy az y-tengelyt a -1-nél metszi, és 1-et jobbra lépve 2-t kell felfelé lépni. Mi a szabály?", options: { a: "f(x) = 2x - 1", b: "f(x) = -x + 2", c: "f(x) = x - 2" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az y-tengelymetszet (b) a -1. 🔹 2. Lépés: A meredekség (a) az '1 jobbra, 2 fel' lépésből adódik: a = 2/1 = 2. 🔹 3. Lépés: A szabály f(x) = ax + b, tehát f(x) = 2x - 1. ✅ Megoldás: f(x) = 2x - 1." },
+            { question: "Hol helyezkedik el a P(0; 5) pont?", options: { a: "az x tengelyen", b: "az y tengelyen", c: "az origóban" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A pont x koordinátája 0. 🔹 2. Lépés: Ha az x koordináta nulla, a pont nem mozdul el sem jobbra, sem balra az origótól, tehát a függőleges (y) tengelyen van. ✅ Megoldás: A pont az y tengelyen van." },
+            { question: "Mi az f(x) = -5x + 10 zérushelye?", options: { a: "x = 10", b: "x = 2", c: "x = -2" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A zérushelyhez megoldjuk az f(x) = 0 egyenletet: -5x + 10 = 0. 🔹 2. Lépés: Vonjunk ki 10-et: -5x = -10. Osszunk -5-tel: x = 2. ✅ Megoldás: A zérushelye az x=2." },
+            { question: "Hány pontot kell ábrázolni egy értéktáblázatból a biztos ábrázoláshoz?", options: { a: "1", b: "2 (és egy harmadikat ellenőrzésképp)", c: "mindig 5-öt" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Két pont egyértelműen meghatároz egy egyenest. 🔹 2. Lépés: A gyakorlatban érdemes egy harmadik pontot is kiszámolni és ábrázolni, hogy ellenőrizzük, nem számoltuk-e el magunkat. Ha a harmadik pont is ugyanarra az egyenesre esik, jól dolgoztunk. ✅ Megoldás: 2 pont elég, de 3 az ellenőrzés miatt javasolt." },
+            { question: "Melyik függvény metszi magasabban az y-tengelyt: f(x)=x+5 vagy g(x)=2x+3?", options: { a: "az f(x)", b: "a g(x)", c: "ugyanott metszik" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az y-tengelymetszetet a 'b' paraméter értéke adja meg. 🔹 2. Lépés: Az f(x) esetében b=5, a g(x) esetében b=3. 🔹 3. Lépés: Mivel 5 > 3, az f(x) metszi magasabban az y-tengelyt. ✅ Megoldás: Az f(x)." },
+            { question: "Melyik függvény grafikonja párhuzamos az x-tengellyel?", options: { a: "f(x) = x", b: "f(x) = 2x+1", c: "f(x) = 4" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A vízszintes x-tengellyel párhuzamos egyenes szintén vízszintes. 🔹 2. Lépés: A vízszintes egyenesek a konstans függvények grafikonjai, ahol a meredekség 0. Az f(x)=4 egy ilyen függvény. ✅ Megoldás: Az f(x) = 4." },
+            { question: "Mi az első koordináta (x) neve?", options: { a: "ordináta", b: "abszcissza", c: "koordináta" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Mindkét szám a pont koordinátája. 🔹 2. Lépés: Az első (x) koordinátát abszcisszának, a másodikat (y) ordinátának nevezzük. ✅ Megoldás: Az x-koordináta neve abszcissza." },
+            { question: "Mi a második koordináta (y) neve?", options: { a: "abszcissza", b: "ordináta", c: "koordináta" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Mindkét szám a pont koordinátája. 🔹 2. Lépés: Az első (x) koordinátát abszcisszának, a másodikat (y) ordinátának nevezzük. ✅ Megoldás: Az y-koordináta neve ordináta." },
+            { question: "Egy függvény grafikonja átmegy a (0,0) és (2,4) pontokon. Mi a szabálya?", options: { a: "f(x) = x+2", b: "f(x) = 4x", c: "f(x) = 2x" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Mivel átmegy az origón (0,0), a 'b' paraméter 0. A szabály f(x) = ax alakú. 🔹 2. Lépés: Helyettesítsük be a másik pontot: 4 = a * 2. Ebből a=2. ✅ Megoldás: A szabály f(x) = 2x." },
+            { question: "Mit ábrázolunk a függvény grafikonján?", options: { a: "az értelmezési tartományt", b: "a hozzárendelési szabályt", c: "az összetartozó (x;y) pontpárokat" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A grafikon a függvény vizuális megjelenítése. 🔹 2. Lépés: Minden pontja egy (x; y) számpárnak felel meg, ahol y = f(x). ✅ Megoldás: Az összetartozó (x;y) pontpárokat ábrázoljuk." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

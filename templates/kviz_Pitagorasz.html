@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: 7.2 Pitagorasz-tétel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: 7.2 Pitagorasz-tétel</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+
+            <div class="evaluation-block" id="bottom-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-bottom">PIN kód:</label>
+                    <input type="password" id="pin-code-bottom" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Hogyan szól a Pitagorasz-tétel képlete?",
+                options: { a: "a + b = c", b: "a² + b² = c²", c: "a² - b² = c²" },
+                correct: "b",
+                explanation: "A tétel szerint a derékszögű háromszög két befogójának (a, b) négyzetösszege egyenlő az átfogó (c) négyzetével. Tehát: a² + b² = c²."
+            },
+            {
+                question: "Milyen típusú háromszögekre alkalmazható a Pitagorasz-tétel?",
+                options: { a: "Minden háromszögre.", b: "Csak egyenlő szárú háromszögekre.", c: "Csak derékszögű háromszögekre." },
+                correct: "c",
+                explanation: "Pitagorasz tétele kizárólag a derékszögű háromszögek oldalai közötti összefüggést írja le."
+            },
+            {
+                question: "Mit nevezünk átfogónak (c) egy derékszögű háromszögben?",
+                options: { a: "A legrövidebb oldalt.", b: "Bármelyik oldalt.", c: "A derékszöggel szemközti, leghosszabb oldalt." },
+                correct: "c",
+                explanation: "Az átfogó mindig a 90°-os szöggel szemben helyezkedik el, és ez a háromszög leghosszabb oldala."
+            },
+            {
+                question: "Egy derékszögű háromszög befogói 3 cm és 4 cm. Milyen hosszú az átfogója?",
+                options: { a: "7 cm", b: "5 cm", c: "25 cm" },
+                correct: "b",
+                explanation: "a² + b² = c². Behelyettesítve: 3² + 4² = c², azaz 9 + 16 = 25. Tehát c² = 25, amiből c = √25 = 5 cm."
+            },
+            {
+                question: "Egy derékszögű háromszög átfogója 13 cm, egyik befogója 5 cm. Milyen hosszú a másik befogó?",
+                options: { a: "12 cm", b: "8 cm", c: "18 cm" },
+                correct: "a",
+                explanation: "a² + b² = c². Átrendezve: b² = c² - a². Behelyettesítve: b² = 13² - 5² = 169 - 25 = 144. Tehát b = √144 = 12 cm."
+            },
+            {
+                question: "Mi a Pitagorasz-tétel megfordítása?",
+                options: { a: "Ha a²+b²=c², akkor a háromszög derékszögű.", b: "Ha egy háromszög derékszögű, akkor a=b.", c: "Minden háromszögnek van átfogója." },
+                correct: "a",
+                explanation: "A tétel megfordítása arra jó, hogy eldöntsük, egy adott háromszög derékszögű-e. Ha az oldalak kielégítik az a²+b²=c² egyenletet, akkor a háromszög biztosan derékszögű."
+            },
+            {
+                question: "Egy háromszög oldalai 6, 8 és 10 egység. Derékszögű-e a háromszög?",
+                options: { a: "Igen", b: "Nem", c: "Nem eldönthető" },
+                correct: "a",
+                explanation: "Ellenőrizzük a tétel megfordítását. A leghosszabb oldal a 'c' (10). 6² + 8² = 36 + 64 = 100. Mivel 10² = 100, az egyenlőség teljesül, tehát a háromszög derékszögű."
+            },
+            {
+                question: "Mit nevezünk befogónak (a, b) egy derékszögű háromszögben?",
+                options: { a: "A leghosszabb oldalt.", b: "A derékszöget közrefogó két oldalt.", c: "A szögeket." },
+                correct: "b",
+                explanation: "A befogók a derékszöget bezáró, rövidebb oldalak. Az átfogóval szemben helyezkednek el."
+            },
+            {
+                question: "Egy derékszögű háromszög befogói 5 cm és 12 cm. Mekkora az átfogója?",
+                options: { a: "17 cm", b: "169 cm", c: "13 cm" },
+                correct: "c",
+                explanation: "a² + b² = c². Behelyettesítve: 5² + 12² = 25 + 144 = 169. Tehát c² = 169, amiből c = √169 = 13 cm."
+            },
+            {
+                question: "Egy 10 méter magas létrát a falnak támasztunk úgy, hogy alja a faltól 6 méterre van. Milyen magasra ér fel a létra a falon?",
+                options: { a: "4 méter", b: "16 méter", c: "8 méter" },
+                correct: "c",
+                explanation: "A létra, a fal és a talaj egy derékszögű háromszöget alkot. A létra hossza az átfogó (c=10), a faltól való távolság az egyik befogó (a=6). A magasság a másik befogó (b). b² = 10² - 6² = 100 - 36 = 64. Tehát b = √64 = 8 méter."
+            },
+            {
+                question: "Egy négyzet átlója 10 cm. Milyen hosszú a négyzet oldala? (Segítség: a²+a²=c²)",
+                options: { a: "5 cm", b: "√50 cm (kb. 7.07 cm)", c: "10 cm" },
+                correct: "b",
+                explanation: "A négyzet átlója egy derékszögű háromszöget hoz létre, ahol a két befogó a négyzet 'a' oldala, az átfogó pedig 10. Tehát a² + a² = 10². 2a² = 100. a² = 50. a = √50 cm."
+            },
+            {
+                question: "Egy háromszög oldalai 5, 6, 7. Derékszögű-e?",
+                options: { a: "Igen", b: "Nem", c: "Csak ha egyenlő szárú." },
+                correct: "b",
+                explanation: "A leghosszabb oldal a 'c' (7). 5² + 6² = 25 + 36 = 61. Mivel 7² = 49, és 61 ≠ 49, a háromszög nem derékszögű. (Hegyesszögű, mert a²+b² > c²)."
+            },
+            {
+                question: "Egy derékszögű háromszög átfogója 25 cm, egyik befogója 7 cm. Mekkora a másik befogó?",
+                options: { a: "24 cm", b: "18 cm", c: "32 cm" },
+                correct: "a",
+                explanation: "b² = c² - a² = 25² - 7² = 625 - 49 = 576. Tehát b = √576 = 24 cm."
+            },
+            {
+                question: "Egy téglalap oldalai 8 cm és 15 cm. Milyen hosszú az átlója?",
+                options: { a: "23 cm", b: "17 cm", c: "12.5 cm" },
+                correct: "b",
+                explanation: "A téglalap átlója egy derékszögű háromszöget alkot a téglalap oldalaival. Az oldalak a befogók, az átló az átfogó. c² = 8² + 15² = 64 + 225 = 289. Tehát c = √289 = 17 cm."
+            },
+            {
+                question: "Egy derékszögű háromszög befogói egyenlőek: mindkettő 1 cm. Mekkora az átfogó?",
+                options: { a: "√2 cm (kb. 1.41 cm)", b: "2 cm", c: "1 cm" },
+                correct: "a",
+                explanation: "c² = 1² + 1² = 1 + 1 = 2. Tehát c = √2 cm."
+            },
+            {
+                question: "A Pitagorasz-tétel szerint a befogókra emelt négyzetek területeinek összege...",
+                options: { a: "...kisebb, mint az átfogóra emelt négyzet területe.", b: "...egyenlő az átfogóra emelt négyzet területével.", c: "...nagyobb, mint az átfogóra emelt négyzet területe." },
+                correct: "b",
+                explanation: "Ez a tétel vizuális megfogalmazása. Az 'a²' jelenti az 'a' oldalú négyzet területét. Tehát a két kisebb négyzet területe együtt pont akkora, mint a nagy négyzet területe."
+            },
+            {
+                question: "Egy derékszögű háromszög befogói 10 cm és 24 cm. Mekkora a kerülete?",
+                options: { a: "34 cm", b: "60 cm", c: "50 cm" },
+                correct: "b",
+                explanation: "Először az átfogó kell: c² = 10² + 24² = 100 + 576 = 676. c = √676 = 26 cm. A kerület K = a+b+c = 10 + 24 + 26 = 60 cm."
+            },
+            {
+                question: "Egy háromszög oldalai 2, 3, 4. Derékszögű-e?",
+                options: { a: "Igen", b: "Nem", c: "Hegyesszögű" },
+                correct: "b",
+                explanation: "A leghosszabb oldal a 'c' (4). 2² + 3² = 4 + 9 = 13. Mivel 4² = 16, és 13 ≠ 16, a háromszög nem derékszögű. (Tompaszögű, mert a²+b² < c²)."
+            },
+            {
+                question: "Egy derékszögű háromszög területe 30 cm², egyik befogója 5 cm. Milyen hosszú az átfogója?",
+                options: { a: "13 cm", b: "12 cm", c: "17 cm" },
+                correct: "a",
+                explanation: "A terület T=(a*b)/2. 30=(5*b)/2 -> 60=5b -> b=12 cm. Most már ismerjük a két befogót (5, 12). Az átfogó: c²=5²+12²=25+144=169. c = √169 = 13 cm."
+            },
+            {
+                question: "Két barát egy derékszögű kereszteződéstől indul. Az egyik északra megy 3 km-t, a másik keletre 4 km-t. Milyen messze vannak egymástól légvonalban?",
+                options: { a: "7 km", b: "5 km", c: "1 km" },
+                correct: "b",
+                explanation: "A megtett utak a derékszögű háromszög befogói. A légvonalbeli távolság az átfogó. c² = 3² + 4² = 9 + 16 = 25. c = 5 km."
+            },
+            {
+                question: "Egy egyenlő szárú derékszögű háromszög átfogója 8 cm. Milyen hosszúak a befogók?",
+                options: { a: "4 cm", b: "√32 cm (kb. 5.66 cm)", c: "8 cm" },
+                correct: "b",
+                explanation: "Ha a befogók egyenlőek, jelöljük őket 'a'-val. a² + a² = 8². 2a² = 64. a² = 32. a = √32 cm."
+            },
+            {
+                question: "Melyik ókori görög matematikus nevéhez fűződik a tétel?",
+                options: { a: "Thalész", b: "Arkhimédész", c: "Pitagorasz" },
+                correct: "c",
+                explanation: "A tételt a szamoszi Pitagoraszról nevezték el, bár valószínűleg már előtte is ismerték Babilóniában és Egyiptomban."
+            },
+            {
+                question: "Egy derékszögű háromszög oldalai egész számok. Ezeket az oldalhosszakat minek nevezzük?",
+                options: { a: "Pitagoraszi számhármasoknak", b: "Prímszámoknak", c: "Négyzetszámoknak" },
+                correct: "a",
+                explanation: "Azokat a pozitív egész számokat (a, b, c), amelyekre teljesül, hogy a²+b²=c², pitagoraszi számhármasoknak nevezzük. Például (3, 4, 5) vagy (5, 12, 13)."
+            },
+            {
+                question: "Egy rombusz átlói 6 cm és 8 cm. Milyen hosszú a rombusz oldala?",
+                options: { a: "10 cm", b: "7 cm", c: "5 cm" },
+                correct: "c",
+                explanation: "A rombusz átlói merőlegesen felezik egymást, így négy egybevágó derékszögű háromszöget hoznak létre. Egy ilyen háromszög befogói az átlók fele: 3 cm és 4 cm. Az oldala (ami az átfogó) Pitagorasz-tétellel: 3²+4²=c², c=5 cm."
+            },
+            {
+                question: "Derékszögű-e egy háromszög, melynek oldalai 1, 1 és 2?",
+                options: { a: "Igen", b: "Nem", c: "Ez nem is háromszög." },
+                correct: "c",
+                explanation: "Ez nem lehet háromszög. A háromszög-egyenlőtlenség szerint bármely két oldal összegének nagyobbnak kell lennie a harmadik oldalnál. Itt 1+1 nem nagyobb, mint 2 (hanem egyenlő vele), így a háromszög nem szerkeszthető meg."
+            }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const checkBtns = document.querySelectorAll('.check-btn');
+        const pinInputs = document.querySelectorAll('.pin-code-input');
+        const resultContainers = document.querySelectorAll('.result-container');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">
+                            <label for="q${index}a">
+                                <input type="radio" name="question${index}" id="q${index}a" value="a">
+                                ${item.options.a}
+                            </label>
+                            <label for="q${index}b">
+                                <input type="radio" name="question${index}" id="q${index}b" value="b">
+                                ${item.options.b}
+                            </label>
+                            <label for="q${index}c">
+                                <input type="radio" name="question${index}" id="q${index}c" value="c">
+                                ${item.options.c}
+                            </label>
+                        </div>
+                        <div class="explanation" id="explanation-${index}">
+                            <strong>Magyarázat:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInputs[0].value; // Elég az elsőből olvasni, mert szinkronizáltak
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtns.forEach(btn => btn.disabled = true);
+            pinInputs.forEach(input => input.disabled = true);
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+
+                if (isMaster) {
+                    explanationDiv.style.display = 'block';
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('master-correct');
+                } else {
+                    explanationDiv.style.display = 'block';
+                }
+
+                if (selectedOption) {
+                    const selectedLabel = selectedOption.parentElement;
+                    if (selectedOption.value === item.correct) {
+                        score++;
+                        selectedLabel.classList.add('correct-answer', 'label-correct');
+                    } else {
+                        selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                        const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                        correctLabel.classList.add('correct-answer');
+                    }
+                } else if (isMaster) {
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('correct-answer');
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            const resultText = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            resultContainers.forEach(container => container.innerHTML = resultText);
+
+            if (isMaster) {
+                adminPanels.forEach(panel => panel.style.display = 'block');
+            }
+        }
+
+        // Eseménykezelők hozzáadása az összes vezérlőhöz
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        
+        checkBtns.forEach(btn => {
+            btn.addEventListener('click', checkAnswers);
+        });
+
+        pinInputs.forEach(input => {
+            // Enter gombos ellenőrzés
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+            // PIN mezők szinkronizálása
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

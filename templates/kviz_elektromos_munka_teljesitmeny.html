@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Elektromos munka és teljesítmény</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Elektromos munka és teljesítmény</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Mi az elektromos munka mértékegysége?",
+                answers: { a: "Joule (J)", b: "Watt (W)", c: "Amper (A)" },
+                correctAnswer: 'a',
+                explanation: "Az elektromos munka, mint minden munka és energia, mértékegysége az SI rendszerben a joule. A watt a teljesítmény, az amper az áramerősség mértékegysége. ✅ Megoldás: Joule (J)."
+            },
+            {
+                question: "Hogyan számítható ki a fogyasztón végzett elektromos munka?",
+                answers: { a: "W = U ⋅ I ⋅ t", b: "W = U / I", c: "W = R ⋅ t" },
+                correctAnswer: 'a',
+                explanation: "Az elektromos munka (W) a fogyasztón eső feszültség (U), a rajta átfolyó áram erősségének (I) és a működési időnek (t) a szorzata. ✅ Megoldás: W = U ⋅ I ⋅ t."
+            },
+            {
+                question: "Mi a Joule-hő?",
+                answers: { a: "Az a hőmennyiség, ami egy vezetőben az elektromos áram hatására fejlődik.", b: "A hő mértékegysége.", c: "A fűtőanyagok energiája." },
+                correctAnswer: 'a',
+                explanation: "Amikor egy vezetőn áram folyik át, annak ellenállása miatt a vezető felmelegszik. Az így keletkező hőt nevezzük Joule-hőnek. Ez az elektromos fűtőberendezések működésének alapja. ✅ Megoldás: Az a hőmennyiség, ami egy vezetőben az elektromos áram hatására fejlődik."
+            },
+            {
+                question: "Egy 100 W teljesítményű izzó 10 másodpercig működik. Mennyi munkát végez?",
+                answers: { a: "1000 J", b: "10 J", c: "0,1 J" },
+                correctAnswer: 'a',
+                explanation: "A munkát a teljesítmény és az idő szorzataként kapjuk: W = P ⋅ t. Behelyettesítve: W = 100 W ⋅ 10 s = 1000 J. ✅ Megoldás: 1000 J."
+            },
+            {
+                question: "Melyik fogyasztó alakítja az elektromos energiát főként hővé?",
+                answers: { a: "Vasaló", b: "Villanymotor", c: "Hangszóró" },
+                correctAnswer: 'a',
+                explanation: "A vasalóban egy nagy ellenállású fűtőszál található, amelynek kifejezetten az a célja, hogy az átfolyó áram elektromos energiáját a lehető leghatékonyabban hőenergiává alakítsa. ✅ Megoldás: Vasaló."
+            },
+            {
+                question: "Mi a teljesítmény?",
+                answers: { a: "Az egységnyi idő alatt végzett munka.", b: "Az elvégzett munka.", c: "Az áramerősség mértéke." },
+                correctAnswer: 'a',
+                explanation: "A teljesítmény a munkavégzés sebességét, ütemét jellemzi. Azt mutatja meg, mennyi munkát végez a berendezés egy másodperc alatt. ✅ Megoldás: Az egységnyi idő alatt végzett munka."
+            },
+            {
+                question: "Egy 10 V feszültségű áramkörben 2 A áram folyik 5 másodpercig. Mennyi munkát végez az áram?",
+                answers: { a: "100 J", b: "20 J", c: "4 J" },
+                correctAnswer: 'a',
+                explanation: "A munka képlete: W = U ⋅ I ⋅ t. Behelyettesítve: W = 10 V ⋅ 2 A ⋅ 5 s = 100 J. ✅ Megoldás: 100 J."
+            },
+            {
+                question: "Melyik állítás igaz az elektromos munkára?",
+                answers: { a: "Az elektromos mező munkavégzése a töltéseken.", b: "Csak a feszültségtől függ.", c: "Nincs mértékegysége." },
+                correctAnswer: 'a',
+                explanation: "Az elektromos munka az az energia, amit az elektromos mező a töltések mozgatására fordít az áramkörben. Ez az energia alakul át a fogyasztón másfajta energiává. ✅ Megoldás: Az elektromos mező munkavégzése a töltéseken."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Mi az elektromos teljesítmény mértékegysége?",
+                answers: { a: "Joule (J)", b: "Watt (W)", c: "Volt (V)" },
+                correctAnswer: 'b',
+                explanation: "Az elektromos teljesítmény, mint minden teljesítmény, mértékegysége az SI rendszerben a watt. ✅ Megoldás: Watt (W)."
+            },
+            {
+                question: "Hogyan számítható ki a fogyasztó elektromos teljesítménye?",
+                answers: { a: "P = U / I", b: "P = U ⋅ I", c: "P = I / U" },
+                correctAnswer: 'b',
+                explanation: "Az elektromos teljesítmény (P) a fogyasztón eső feszültség (U) és a rajta átfolyó áram erősségének (I) szorzata. ✅ Megoldás: P = U ⋅ I."
+            },
+            {
+                question: "Melyik izzó világít fényesebben?",
+                answers: { a: "A 40 W-os.", b: "A 100 W-os.", c: "Egyformán." },
+                correctAnswer: 'b',
+                explanation: "A wattban megadott érték a teljesítményt jelöli. A nagyobb teljesítményű izzó másodpercenként több elektromos energiát alakít át fénnyé (és hővé), ezért fényesebben világít. ✅ Megoldás: A 100 W-os."
+            },
+            {
+                question: "Egy 230 V-os hálózatra kapcsolt fogyasztón 2 A áram folyik. Mekkora a teljesítménye?",
+                answers: { a: "115 W", b: "460 W", c: "232 W" },
+                correctAnswer: 'b',
+                explanation: "A teljesítmény a feszültség és az áramerősség szorzata: P = U ⋅ I = 230 V ⋅ 2 A = 460 W. ✅ Megoldás: 460 W."
+            },
+            {
+                question: "Mi a kilowattóra (kWh)?",
+                answers: { a: "A teljesítmény mértékegysége.", b: "Az elektromos munka (energia) mértékegysége.", c: "Az áramerősség mértékegysége." },
+                correctAnswer: 'b',
+                explanation: "A kilowattóra a háztartásokban az elfogyasztott elektromos energia mérésére használt egység. 1 kWh az az energia, amit egy 1 kW teljesítményű fogyasztó 1 óra alatt használ el. ✅ Megoldás: Az elektromos munka (energia) mértékegysége."
+            },
+            {
+                question: "Joule törvénye szerint a vezetőben fejlődő hő...",
+                answers: { a: "...fordítottan arányos az áramerősség négyzetével.", b: "...egyenesen arányos az áramerősség négyzetével és az ellenállással.", c: "...nem függ az ellenállástól." },
+                correctAnswer: 'b',
+                explanation: "Joule törvénye kimondja, hogy a vezetőben fejlődő hő (W vagy Q) egyenesen arányos a vezető ellenállásával (R), a benne folyó áram erősségének négyzetével (I²) és az áramfolyás idejével (t). Képlete: W = I² ⋅ R ⋅ t. ✅ Megoldás: ...egyenesen arányos az áramerősség négyzetével és az ellenállással."
+            },
+            {
+                question: "Miért van a fűtőberendezésekben (pl. hajszárító) nagy ellenállású fűtőszál?",
+                answers: { a: "Mert az olcsóbb.", b: "Mert Joule törvénye szerint a nagy ellenálláson fejlődik a legtöbb hő.", c: "Mert a kis ellenállás veszélyes." },
+                correctAnswer: 'b',
+                explanation: "Az áram hőhatása (Joule-hő) arányos az ellenállással. A fűtőberendezésekben szándékosan nagy ellenállású anyagokat használnak, hogy az átfolyó áram minél több hőt termeljen. ✅ Megoldás: Mert Joule törvénye szerint a nagy ellenálláson fejlődik a legtöbb hő."
+            },
+            {
+                question: "Két különböző, 230 V-ra készült izzó közül melyiken folyik át nagyobb áram?",
+                answers: { a: "A kisebb teljesítményűn.", b: "A nagyobb teljesítményűn.", c: "Ugyanakkora áram folyik mindkettőn." },
+                correctAnswer: 'b',
+                explanation: "A P = U ⋅ I képletből I = P / U. Mivel a feszültség (U) mindkét izzónál azonos (230 V), az áramerősség (I) ott lesz nagyobb, ahol a teljesítmény (P) is nagyobb. ✅ Megoldás: A nagyobb teljesítményűn."
+            },
+            {
+                question: "Egy 2300 W-os vízforraló 230 V-os hálózatról működik. Mekkora áramot vesz fel?",
+                answers: { a: "1 A", b: "10 A", c: "100 A" },
+                correctAnswer: 'b',
+                explanation: "A P = U ⋅ I képletből az áramerősség I = P / U. Behelyettesítve: I = 2300 W / 230 V = 10 A. ✅ Megoldás: 10 A."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Mi a különbség a munka és a teljesítmény között?",
+                answers: { a: "Nincs különbség, ugyanazt jelentik.", b: "A munka az energia, a teljesítmény az erő.", c: "A munka az energiaváltozás, a teljesítmény a munkavégzés sebessége." },
+                correctAnswer: 'c',
+                explanation: "A munka (Joule) azt méri, mennyi energia alakult át. A teljesítmény (Watt) azt méri, hogy ez az átalakulás milyen gyorsan, mennyi idő alatt történt. ✅ Megoldás: A munka az energiaváltozás, a teljesítmény a munkavégzés sebessége."
+            },
+            {
+                question: "Egy fogyasztó teljesítménye 50 W. Ez mit jelent?",
+                answers: { a: "A fogyasztó 50 Joule munkát végez.", b: "A fogyasztó ellenállása 50 Ohm.", c: "A fogyasztó másodpercenként 50 Joule munkát végez." },
+                correctAnswer: 'c',
+                explanation: "A watt definíciója 1 joule per másodperc (1 W = 1 J/s). Tehát az 50 W-os teljesítmény azt jelenti, hogy a fogyasztó minden másodpercben 50 J elektromos energiát alakít át másfajta energiává. ✅ Megoldás: A fogyasztó másodpercenként 50 Joule munkát végez."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "A teljesítmény mértékegysége a watt.", b: "A munka mértékegysége a joule.", c: "Az elektromos munka és a feszültség ugyanaz." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás hamis. Az elektromos munka a töltéseken végzett munka, mértékegysége a joule. A feszültség az egységnyi töltésen végzett munka, mértékegysége a volt. ✅ Megoldás: Az elektromos munka és a feszültség ugyanaz."
+            },
+            {
+                question: "Hogyan függ a vezetőben fejlődő Joule-hő az áramerősségtől?",
+                answers: { a: "Egyenesen arányos.", b: "Fordítottan arányos.", c: "Az áramerősség négyzetével arányos." },
+                correctAnswer: 'c',
+                explanation: "Joule törvénye szerint a fejlődő hő (W) arányos az áramerősség négyzetével (I²). Ez azt jelenti, hogy ha az áramot megduplázzuk, a hőtermelés a négyszeresére nő. ✅ Megoldás: Az áramerősség négyzetével arányos."
+            },
+            {
+                question: "Melyik eszközön NEM a Joule-hő jelenségét hasznosítjuk elsősorban?",
+                answers: { a: "Hajszárító", b: "Vízforraló", c: "LED lámpa" },
+                correctAnswer: 'c',
+                explanation: "A hajszárító és a vízforraló fűtőszálakat tartalmaz, amelyek célja a hőtermelés. A LED lámpa ezzel szemben az elektromos energiát nagyon jó hatásfokkal, csekély hőtermelés mellett alakítja fénnyé. ✅ Megoldás: LED lámpa."
+            },
+            {
+                question: "Miért melegszik fel a telefon töltője használat közben?",
+                answers: { a: "Mert túl régi.", b: "Mert a Nap melegíti.", c: "Az áram hőhatása (Joule-hő) miatt." },
+                correctAnswer: 'c',
+                explanation: "A töltőben lévő alkatrészeknek (pl. transzformátor) van elektromos ellenállása. Az áram áthaladásakor ezeken az alkatrészeken az energia egy része hővé alakul, ez a Joule-hő. Ez normális jelenség. ✅ Megoldás: Az áram hőhatása (Joule-hő) miatt."
+            },
+            {
+                question: "Melyik állítás igaz a villanyszámlára?",
+                answers: { a: "A teljesítményt fizetjük ki.", b: "Az áramerősséget fizetjük ki.", c: "Az elhasznált elektromos energiát (munkát) fizetjük ki." },
+                correctAnswer: 'c',
+                explanation: "A villanyszámlán a fogyasztásmérő által mért, kilowattórában (kWh) kifejezett elektromos energiát (munkát) kell kifizetnünk, nem pedig a készülékek teljesítményét. ✅ Megoldás: Az elhasznált elektromos energiát (munkát) fizetjük ki."
+            },
+            {
+                question: "Egy fogyasztó teljesítménye 2 kW. Hány watt ez?",
+                answers: { a: "20 W", b: "200 W", c: "2000 W" },
+                correctAnswer: 'c',
+                explanation: "A 'kilo-' prefixum ezerszerest jelent. 2 kilowatt = 2 ⋅ 1000 watt = 2000 watt. ✅ Megoldás: 2000 W."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>7. Osztály - Matematika Képletek és Tételek</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stilus.css') }}">
+    <style>
+        .section-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-top: -2rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+        .header h1 { text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.7); }
+        .header p { text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.6); }
+
+        .formula-card { background: var(--feher); border-radius: 12px; box-shadow: var(--card-shadow); margin-bottom: 2rem; padding: 2rem; border-left: 5px solid var(--piros); }
+        .formula-title { font-family: 'Roboto Slab', serif; font-size: 1.8rem; margin-bottom: 1rem; }
+        .formula-explanation { margin-bottom: 1.5rem; line-height: 1.7; }
+        .formula-expression { font-size: 1.8rem; font-weight: bold; background: #fff1f2; padding: 1rem; border-radius: 8px; text-align: center; }
+        .formula-var { position: relative; cursor: pointer; border-bottom: 2px dotted var(--piros); }
+        .tooltip-text { visibility: hidden; width: 180px; background-color: var(--sotet); color: var(--feher); text-align: center; border-radius: 6px; padding: 5px 10px; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -90px; opacity: 0; transition: opacity 0.3s; font-size: 0.9rem; }
+        .formula-var:hover .tooltip-text { visibility: visible; opacity: 1; }
+        .button-group { text-align: right; margin-top: 1rem; display: flex; justify-content: flex-end; gap: 0.5rem; flex-wrap: wrap; }
+        .example-area { display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
+        .example-area p { background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+    
+    <video autoplay muted loop id="bg-video">
+      <source src="{{ url_for('static', filename='video/video.mp4') }}" type="video/mp4">
+    </video>
+    
+    {% include 'navigacio.html' %}
+
+    <div class="content-wrapper">
+        <header class="header">
+            <div class="container">
+                <h1>7. Osztály - Matematika</h1>
+                <p>Képletek és Tételek Részletes Magyarázattal</p>
+            </div>
+        </header>
+
+ <main>
+            <div class="container">
+                <section class="section">
+                    <h2 class="section-title">7. Osztály - Matematika</h2>
+                    <p class="section-subtitle">Képletek és Tételek Részletes Magyarázattal</p>
+                    
+                     <h3 class="subject-title math-title">Valós Számok Halmaza</h3>
+
+<!-- Természetes számok négyzetgyöke Kártya -->
+<div class="formula-card" 
+     data-formula-name="Természetes számok négyzetgyöke" 
+     data-formula-expression="√a * √a = a" 
+     data-formula-example="Mennyi a √81 (81 négyzetgyöke)? Megoldás: 9, mert 9 * 9 = 81.">
+    <h4 class="formula-title">1.1 Természetes Számok Négyzetgyöke</h4>
+    <p class="formula-explanation">Egy 'a' természetes szám négyzetgyöke az a nemnegatív szám, amelyet önmagával megszorozva 'a'-t kapunk. A négyzetgyökvonás a négyzetre emelés fordított művelete. Csak nemnegatív számból vonhatunk négyzetgyököt.</p>
+    <div class="formula-expression">
+        √<span class="formula-var">a<span class="tooltip-text">A szám, amiből gyököt vonunk (radikandus)</span></span> * 
+        √<span class="formula-var">a<span class="tooltip-text">Ugyanaz a szám</span></span> = 
+        <span class="formula-var">a<span class="tooltip-text">Az eredeti szám</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Mennyi a √81 (81 négyzetgyöke)?<br>
+           <strong>Gondolkodás:</strong> Keressük azt a számot, amit ha megszorzunk önmagával, 81-et kapunk.<br>
+           <strong>Megoldás:</strong> 9, mert 9 * 9 = 81. Tehát √81 = 9.</p>
+    </div>
+</div>
+
+<!-- Racionális számok négyzetgyöke Kártya -->
+<div class="formula-card" 
+     data-formula-name="Racionális számok négyzetgyöke" 
+     data-formula-expression="√(a/b) = (√a)/(√b)" 
+     data-formula-example="Mennyi a √(16/25)? Megoldás: (√16)/(√25) = 4/5.">
+    <h4 class="formula-title">1.2 Racionális Számok Négyzetgyöke</h4>
+    <p class="formula-explanation">Egy tört négyzetgyökét úgy is kiszámolhatjuk, hogy külön-külön négyzetgyököt vonunk a számlálóból és a nevezőből, majd a kapott eredményeket elosztjuk egymással. Ez a szabály nagyban leegyszerűsíti a törtekkel való gyökvonást.</p>
+    <div class="formula-expression">
+        √(<span class="formula-var">a<span class="tooltip-text">Számláló</span></span>/<span class="formula-var">b<span class="tooltip-text">Nevező</span></span>) = 
+        (√<span class="formula-var">a<span class="tooltip-text">Számláló gyöke</span></span>) / 
+        (√<span class="formula-var">b<span class="tooltip-text">Nevező gyöke</span></span>)
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki a √(16/25) értékét!<br>
+           <strong>Gondolkodás:</strong> A szabály szerint külön vonhatok gyököt a 16-ból és a 25-ből.<br>
+           <strong>Megoldás:</strong> √16 = 4 és √25 = 5. Tehát az eredmény 4/5.</p>
+    </div>
+</div>
+
+<!-- Négyzetgyök becslése Kártya -->
+<div class="formula-card" 
+     data-formula-name="Pozitív racionális szám négyzetgyökének becslése" 
+     data-formula-expression="√20 ≈ 4.47" 
+     data-formula-example="Becsüld meg a √20 értékét! Megoldás: Tudjuk, hogy √16=4 és √25=5. Tehát a √20 értéke 4 és 5 között van, közelebb a 4-hez.">
+    <h4 class="formula-title">1.3 Négyzetgyök Becslése</h4>
+    <p class="formula-explanation">Sok számnak (pl. √20) nincs "szép", egész végeredménye. Ilyenkor az értékét megbecsülhetjük. Keressük meg a két legközelebbi négyzetszámot (olyan számot, aminek egész a gyöke), ami közé az adott szám esik. A keresett négyzetgyök e két négyzetszám gyöke között lesz.</p>
+    <div class="formula-expression">
+        √16 < √20 < √25   =>   4 < √20 < 5
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Melyik két egész szám közé esik a √20 értéke?<br>
+           <strong>Gondolkodás:</strong> Melyek a 20-hoz legközelebbi négyzetszámok? 4*4=16 és 5*5=25.<br>
+           <strong>Megoldás:</strong> A 20 a 16 és a 25 között van. Ebből következik, hogy a √20 a √16 és a √25 között van, tehát az értéke 4 és 5 közé esik.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === IRRACIONÁLIS SZÁMOK ÉS HALMAZOK === -->
+<!-- ================================== -->
+
+<!-- Irracionális számok Kártya -->
+<div class="formula-card" 
+     data-formula-name="Irracionális számok" 
+     data-formula-expression="π ≈ 3.14159..., √2 ≈ 1.41421..." 
+     data-formula-example="A π (pí) egy irracionális szám. Bármilyen pontosan is számoljuk ki, a tizedesjegyei soha nem ismétlődnek szakaszosan és soha nem érnek véget.">
+    <h4 class="formula-title">1.4 Irracionális Számok</h4>
+    <p class="formula-explanation">Az irracionális számok olyan számok, amelyeket nem lehet felírni két egész szám hányadosaként (törtként). A tizedestört alakjuk végtelen és nem szakaszos, azaz a számjegyeik soha nem ismétlődnek szabályosan.</p>
+    <div class="formula-expression">
+        Példák: 
+        <span class="formula-var">π<span class="tooltip-text">A kör kerületének és átmérőjének aránya</span></span>, 
+        <span class="formula-var">√2<span class="tooltip-text">2 négyzetgyöke</span></span>, 
+        <span class="formula-var">√3<span class="tooltip-text">3 négyzetgyöke</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példa:</strong> A √2 egy híres irracionális szám. Az értéke körülbelül 1.41421356..., de a tizedesjegyei a végtelenségig folytatódnak anélkül, hogy bármilyen ismétlődő mintát alkotnának.<br>
+           <strong>Fontos:</strong> A √4 nem irracionális, mert az értéke pontosan 2, ami egy egész szám!</p>
+    </div>
+</div>
+
+<!-- Számhalmazok bennfoglalása Kártya -->
+<div class="formula-card" 
+     data-formula-name="A számhalmazok bennfoglalása" 
+     data-formula-expression="ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ" 
+     data-formula-example="A -5 egy egész szám (ℤ), de nem természetes szám (ℕ). Ugyanakkor a -5 egyben racionális szám is (ℚ), mert felírható -5/1 alakban, és egyben valós szám is (ℝ).">
+    <h4 class="formula-title">1.5 A Valós Számok Halmaza (Bennfoglalás)</h4>
+    <p class="formula-explanation">A számokat különböző halmazokba soroljuk. A legbővebb halmaz, amivel foglalkozunk, a valós számok (ℝ) halmaza, amely tartalmazza az összes racionális (ℚ) és irracionális számot. A számhalmazok egymásba vannak ágyazva, mint a matrjoska babák.</p>
+    <div class="formula-expression">
+        <span class="formula-var">ℕ<span class="tooltip-text">Természetes számok (0, 1, 2, ...)</span></span> ⊂ 
+        <span class="formula-var">ℤ<span class="tooltip-text">Egész számok (..., -2, -1, 0, 1, 2, ...)</span></span> ⊂ 
+        <span class="formula-var">ℚ<span class="tooltip-text">Racionális számok (törtek)</span></span> ⊂ 
+        <span class="formula-var">ℝ<span class="tooltip-text">Valós számok (minden szám a számegyenesen)</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Gondolj rá így:</strong><br>
+           - Minden **természetes szám** egyben **egész szám** is.<br>
+           - Minden **egész szám** egyben **racionális szám** is (pl. 3 = 3/1).<br>
+           - Minden **racionális szám** egyben **valós szám** is.<br>
+           - Az **irracionális számok** is **valós számok**, de ők egy külön ágat képviselnek a racionális számok mellett.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === GYÖKJEL ALATTI MŰVELETEK === -->
+<!-- ================================== -->
+
+<!-- Tényezők kiemelése a gyökjel alól Kártya -->
+<div class="formula-card" 
+     data-formula-name="Tényezők kiemelése a gyökjel alól" 
+     data-formula-expression="√(a² * b) = a * √b" 
+     data-formula-example="Hozd ki a gyökjel alól, amit lehet: √50. Megoldás: √50 = √(25 * 2) = √25 * √2 = 5 * √2.">
+    <h4 class="formula-title">1.6 Tényezők Kiemelése a Gyökjel Alól</h4>
+    <p class="formula-explanation">Ez a művelet segít egyszerűbb alakra hozni a gyökös kifejezéseket. A gyökjel alatti számot felbontjuk egy négyzetszám és egy másik szám szorzatára. A négyzetszámból gyököt tudunk vonni, így az "kikerül" a gyökjel elé szorzóként, míg a másik tényező a gyökjel alatt marad.</p>
+    <div class="formula-expression">
+        √(<span class="formula-var">a²<span class="tooltip-text">Egy négyzetszám tényező</span></span> * 
+        <span class="formula-var">b<span class="tooltip-text">A másik tényező</span></span>) = 
+        <span class="formula-var">a<span class="tooltip-text">A kiemelt tényező</span></span> * 
+        √<span class="formula-var">b<span class="tooltip-text">A gyökjel alatt maradt tényező</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Hozd ki a gyökjel alól a lehető legtöbb tényezőt: √50.<br>
+           <strong>Gondolkodás:</strong> Keressük a legnagyobb négyzetszámot, amivel az 50 osztható. Ez a 25. Tehát 50 = 25 * 2.<br>
+           <strong>Megoldás:</strong> √50 = √(25 * 2) = √25 * √2 = 5 * √2.</p>
+    </div>
+</div>
+
+<!-- Tényezők bevitele gyökjel alá Kártya -->
+<div class="formula-card" 
+     data-formula-name="Tényezők bevitele a gyökjel alá" 
+     data-formula-expression="a * √b = √(a² * b)" 
+     data-formula-example="Vidd be a gyökjel alá a szorzót: 3 * √5. Megoldás: 3 * √5 = √(3² * 5) = √(9 * 5) = √45.">
+    <h4 class="formula-title">1.7 Tényezők Bevitele a Gyökjel Alá</h4>
+    <p class="formula-explanation">Ez az előző művelet fordítottja. Arra használjuk, hogy különböző gyökös kifejezéseket össze tudjunk hasonlítani. A gyökjel előtti szorzót "bevisszük" a gyökjel alá úgy, hogy négyzetre emeljük, majd megszorozzuk a már ott lévő számmal.</p>
+    <div class="formula-expression">
+        <span class="formula-var">a<span class="tooltip-text">A gyökjel előtti szorzó</span></span> * 
+        √<span class="formula-var">b<span class="tooltip-text">A gyökjel alatti szám</span></span> = 
+        √(<span class="formula-var">a²<span class="tooltip-text">A szorzó a négyzeten</span></span> * 
+        <span class="formula-var">b<span class="tooltip-text">Az eredeti gyökjel alatti szám</span></span>)
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Vidd be a gyökjel alá a szorzótényezőt: 3 * √5.<br>
+           <strong>Gondolkodás:</strong> A 3-at négyzetre emelve (3*3=9) vihetem be a gyökjel alá szorzóként.<br>
+           <strong>Megoldás:</strong> 3 * √5 = √(3² * 5) = √(9 * 5) = √45.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === VALÓS SZÁMOK ÉS A SZÁMEGYENES === -->
+<!-- ================================== -->
+
+<!-- Valós számok ábrázolása Kártya -->
+<div class="formula-card" 
+     data-formula-name="Valós számok ábrázolása a számegyenesen" 
+     data-formula-expression="√2 ≈ 1.41 helye a számegyenesen" 
+     data-formula-example="Ábrázold a √10-et a számegyenesen! Megoldás: Becsüljük meg az értékét. √9=3 és √16=4, tehát a √10 a 3 és 4 között van, közel a 3-hoz (kb. 3.16). Ennek megfelelően jelöljük a helyét.">
+    <h4 class="formula-title">1.8 Valós Számok Ábrázolása Közelítéssel</h4>
+    <p class="formula-explanation">Minden valós számnak (legyen az egész, tört vagy irracionális) pontosan egy helye van a számegyenesen. Az irracionális számokat, mint a √2 vagy a π, a tizedestört alakjuk közelítésével tudjuk ábrázolni. Minél több tizedesjegyet használunk, annál pontosabban jelölhetjük ki a helyüket.</p>
+    <div class="formula-expression">
+        π ≈ 3.14  => A helye a 3 és a 4 között van, a 3-hoz közel.
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Ábrázold a √10-et a számegyenesen!<br>
+           <strong>Gondolkodás:</strong> Először megbecsüljük az értékét. A legközelebbi négyzetszámok a 9 (√9=3) és a 16 (√16=4). A √10 tehát a 3 és a 4 között van, és mivel a 10 közelebb van a 9-hez, a √10 is közelebb lesz a 3-hoz.<br>
+           <strong>Megoldás:</strong> A számegyenesen a 3-as után, de a 3.5-ös (a 3 és 4 fele) előtt jelöljük be a pontot.</p>
+    </div>
+</div>
+
+<!-- Számok összehasonlítása Kártya -->
+<div class="formula-card" 
+     data-formula-name="Valós számok összehasonlítása és rendezése" 
+     data-formula-expression="a < b  vagy a > b" 
+     data-formula-example="Melyik nagyobb: 3/4 vagy 0.7? Megoldás: Írjuk át mindkettőt tizedestört alakra. 3/4 = 0.75. Mivel 0.75 > 0.7, ezért 3/4 > 0.7.">
+    <h4 class="formula-title">1.9 Valós Számok Összehasonlítása</h4>
+    <p class="formula-explanation">Két valós számot úgy tudunk a legkönnyebben összehasonlítani, ha azonos alakra hozzuk őket (pl. mindkettőt tizedestört alakra). A számegyenesen az a szám a nagyobb, amelyik jobbra helyezkedik el.</p>
+    <div class="formula-expression">
+        Ha <span class="formula-var">a<span class="tooltip-text">Egyik szám</span></span> jobbra van, mint <span class="formula-var">b<span class="tooltip-text">Másik szám</span></span>, akkor a > b.
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Tedd növekvő sorrendbe: √9, π, 3.1. <br>
+           <strong>Gondolkodás:</strong> Átírjuk őket közelítő értékre: √9 = 3; π ≈ 3.14; 3.1 = 3.1.<br>
+           <strong>Megoldás:</strong> A helyes sorrend: 3 < 3.1 < 3.14... azaz √9 < 3.1 < π.</p>
+    </div>
+</div>
+
+<!-- Abszolút érték Kártya -->
+<div class="formula-card" 
+     data-formula-name="Valós szám abszolút értéke (modulusa)" 
+     data-formula-expression="|a|" 
+     data-formula-example="Mennyi a |-5| (mínusz öt abszolút értéke)? Megoldás: 5, mert a -5 szám 5 egység távolságra van a nullától a számegyenesen.">
+    <h4 class="formula-title">1.10 Valós Szám Abszolút Értéke</h4>
+    <p class="formula-explanation">Egy szám abszolút értéke (vagy modulusa) a szám távolságát jelenti a nullától a számegyenesen. Mivel a távolság soha nem lehet negatív, egy szám abszolút értéke is mindig nemnegatív.</p>
+    <div class="formula-expression">
+        |<span class="formula-var">a<span class="tooltip-text">Egy szám</span></span>| = 
+        <span class="formula-var">a<span class="tooltip-text">ha a ≥ 0</span></span> vagy 
+        -<span class="formula-var">a<span class="tooltip-text">ha a < 0</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Mennyi a |-5| és a |+5|?<br>
+           <strong>Megoldás:</strong> A -5 és a +5 is egyaránt 5 egység távolságra van a nullától, tehát mindkettő abszolút értéke 5. |-5| = 5 és |+5| = 5.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === MŰVELETEK VALÓS SZÁMOKKAL === -->
+<!-- ================================== -->
+
+<!-- Alapműveletek Kártya -->
+<div class="formula-card" 
+     data-formula-name="Műveletek valós számokkal" 
+     data-formula-expression="Azonos gyökös tagok összevonhatók" 
+     data-formula-example="Mennyi 3*√2 + 5*√2? Megoldás: Azonos a gyökös tag (√2), ezért az együtthatókat összeadhatjuk: (3+5)*√2 = 8*√2.">
+    <h4 class="formula-title">1.11 Alapműveletek Valós Számokkal</h4>
+    <p class="formula-explanation">Az irracionális számokkal (pl. gyökös kifejezésekkel) végzett műveleteknek saját szabályai vannak. Az összeadás és kivonás csak akkor végezhető el, ha a gyökös tagok megegyeznek (pl. √2-t csak √2-vel lehet összevonni). Ilyenkor az előttük álló szorzókat (együtthatókat) vonjuk össze. A szorzás és osztás elvégezhető különböző gyökös tagok között is.</p>
+    <div class="formula-expression">
+        <span class="formula-var">a<span class="tooltip-text">Együttható</span></span>*√<span class="formula-var">x<span class="tooltip-text">Gyökös tag</span></span> + 
+        <span class="formula-var">b<span class="tooltip-text">Együttható</span></span>*√<span class="formula-var">x<span class="tooltip-text">Azonos gyökös tag</span></span> = 
+        (<span class="formula-var">a<span class="tooltip-text">Együttható</span></span>+<span class="formula-var">b<span class="tooltip-text">Együttható</span></span>)*√<span class="formula-var">x<span class="tooltip-text">Gyökös tag</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Mennyi 3*√2 + 5*√2?<br>
+           <strong>Gondolkodás:</strong> Ez olyan, mintha azt kérdeznénk: mennyi 3 alma + 5 alma? A válasz 8 alma. Itt az "alma" a √2.<br>
+           <strong>Megoldás:</strong> (3+5)*√2 = 8*√2.</p>
+    </div>
+</div>
+
+<!-- Hatványozás Kártya -->
+<div class="formula-card" 
+     data-formula-name="Valós számok hatványozása" 
+     data-formula-expression="(a*√b)² = a² * b" 
+     data-formula-example="Mennyi a (3*√2)²? Megoldás: 3² * (√2)² = 9 * 2 = 18.">
+    <h4 class="formula-title">1.12 Valós Számok Hatványozása</h4>
+    <p class="formula-explanation">A hatványozás azonosságai a valós számokra is érvényesek. Egy szorzatot úgy emelünk hatványra, hogy a tényezőket külön-külön hatványozzuk. Fontos tudni, hogy egy szám négyzetgyökének a négyzete maga a szám (ha a szám nemnegatív).</p>
+    <div class="formula-expression">
+        (<span class="formula-var">a<span class="tooltip-text">Együttható</span></span> * √<span class="formula-var">b<span class="tooltip-text">Gyökös tag</span></span>)² = 
+        <span class="formula-var">a²<span class="tooltip-text">Együttható a négyzeten</span></span> * 
+        (<span class="formula-var">√b<span class="tooltip-text">Gyökös tag</span></span>)² = 
+        <span class="formula-var">a²<span class="tooltip-text">Együttható a négyzeten</span></span> * <span class="formula-var">b<span class="tooltip-text">Az eredeti gyökjel alatti szám</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki: (3*√2)²<br>
+           <strong>Megoldás:</strong> A szabály szerint külön hatványozzuk a 3-at és a √2-t. 3² = 9. (√2)² = 2. A kettő szorzata: 9 * 2 = 18.</p>
+    </div>
+</div>
+
+<!-- Gyöktelenítés Kártya -->
+<div class="formula-card" 
+     data-formula-name="Nevező gyöktelenítése" 
+     data-formula-expression="a/√b = (a*√b)/b" 
+     data-formula-example="Gyöktelenítsd a következő tört nevezőjét: 10/√5. Megoldás: Bővítjük a törtet √5/√5-tel. (10*√5)/(√5*√5) = (10*√5)/5 = 2*√5.">
+    <h4 class="formula-title">1.13 Nevező Gyöktelenítése</h4>
+    <p class="formula-explanation">A matematikában "illetlenség" a tört nevezőjében gyökös kifejezést hagyni. A gyöktelenítés az az eljárás, amellyel ezt eltüntetjük. A törtet bővítjük a nevezőben lévő gyökös kifejezéssel. Mivel a törtet ugyanazzal a számmal szorozzuk a számlálóban és a nevezőben is, az értéke nem változik, de a nevezőből eltűnik a gyökjel.</p>
+    <div class="formula-expression">
+        <span class="formula-var">a<span class="tooltip-text">Számláló</span></span> / √<span class="formula-var">b<span class="tooltip-text">Nevező</span></span> = 
+        (<span class="formula-var">a<span class="tooltip-text">Számláló</span></span>*√<span class="formula-var">b<span class="tooltip-text">Nevező</span></span>) / 
+        (<span class="formula-var">√b<span class="tooltip-text">Nevező</span></span>*√<span class="formula-var">b<span class="tooltip-text">Nevező</span></span>) = 
+        (<span class="formula-var">a<span class="tooltip-text">Számláló</span></span>*√<span class="formula-var">b<span class="tooltip-text">Nevező</span></span>) / <span class="formula-var">b<span class="tooltip-text">Gyöktelenített nevező</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Gyöktelenítsd a tört nevezőjét: 10/√5.<br>
+           <strong>Gondolkodás:</strong> Bővítenem kell a törtet √5/√5-tel. Ez olyan, mintha 1-gyel szoroznám, így az érték nem változik.<br>
+           <strong>Megoldás:</strong> (10 * √5) / (√5 * √5) = (10*√5) / 5. A 10-et és az 5-öt lehet egyszerűsíteni, így a végeredmény: 2*√5.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === KÖZEPEK ÉS ÁTLAGOK === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Közepek és Átlagok</h3>
+
+<!-- Súlyozott számtani közép Kártya -->
+<div class="formula-card" 
+     data-formula-name="Súlyozott számtani közép" 
+     data-formula-expression="(s₁*a₁ + s₂*a₂ + ...)/(s₁ + s₂ + ...)" 
+     data-formula-example="Egy diák kapott egy 5-öst (3-as súllyal) és egy 4-est (1-es súllyal). Mennyi a súlyozott átlaga? Megoldás: (3*5 + 1*4) / (3+1) = (15+4)/4 = 19/4 = 4.75.">
+    <h4 class="formula-title">1.14 Súlyozott Számtani Közép</h4>
+    <p class="formula-explanation">A súlyozott átlagot akkor használjuk, ha az átlagolandó értékek (pl. jegyek) nem egyformán "fontosak". Minden értékhez tartozik egy "súly", ami megmutatja a fontosságát. A számításnál minden értéket megszorzunk a saját súlyával, ezeket összeadjuk, majd elosztjuk a súlyok összegével.</p>
+    <div class="formula-expression">
+        (<span class="formula-var">s₁<span class="tooltip-text">1. súly</span></span>*<span class="formula-var">a₁<span class="tooltip-text">1. érték</span></span> + 
+        <span class="formula-var">s₂<span class="tooltip-text">2. súly</span></span>*<span class="formula-var">a₂<span class="tooltip-text">2. érték</span></span> + ...) / 
+        (<span class="formula-var">s₁<span class="tooltip-text">1. súly</span></span> + 
+        <span class="formula-var">s₂<span class="tooltip-text">2. súly</span></span> + ...)
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy diák kapott egy 5-öst egy témazáróra (ez 3-as súllyal számít) és egy 4-est feleletre (ez 1-es súllyal számít). Mennyi a jegyeinek súlyozott átlaga?<br>
+           <strong>Megoldás:</strong> (3*5 + 1*4) / (3+1) = (15 + 4) / 4 = 19 / 4 = 4.75. Az átlaga 4,75.</p>
+    </div>
+</div>
+
+<!-- Mértani közép Kártya -->
+<div class="formula-card" 
+     data-formula-name="Két pozitív szám mértani közepe" 
+     data-formula-expression="√(a * b)" 
+     data-formula-example="Mi a 4 és a 9 mértani közepe? Megoldás: √(4 * 9) = √36 = 6.">
+    <h4 class="formula-title">1.15 Két Pozitív Szám Mértani Közepe</h4>
+    <p class="formula-explanation">Két (nemnegatív) szám mértani közepe a számok szorzatának a négyzetgyöke. A geometriában különösen fontos: egy téglalap területével megegyező területű négyzet oldalhossza pont a téglalap két oldalának mértani közepe.</p>
+    <div class="formula-expression">
+        √(<span class="formula-var">a<span class="tooltip-text">Egyik szám</span></span> * 
+        <span class="formula-var">b<span class="tooltip-text">Másik szám</span></span>)
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki a 4 és a 9 mértani közepét!<br>
+           <strong>Megoldás:</strong> Először összeszorozzuk a két számot: 4 * 9 = 36. Majd négyzetgyököt vonunk az eredményből: √36 = 6. A mértani közép tehát 6.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === EGYENLETEK, EGYENLETRENDSZEREK === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Egyenletek, Egyenletrendszerek</h3>
+
+<!-- x² = a alakú egyenletek Kártya -->
+<div class="formula-card" 
+     data-formula-name="x² = a alakú egyenletek" 
+     data-formula-expression="x² = a" 
+     data-formula-example="Oldd meg: x² = 49. Megoldás: Két megoldás van, x₁=7 és x₂=-7, mert 7*7=49 és (-7)*(-7)=49.">
+    <h4 class="formula-title">1.16 Az x² = a Alakú Egyenlet</h4>
+    <p class="formula-explanation">Ennek az egyenletnek a megoldása attól függ, hogy az 'a' értéke milyen. A megoldás(ok) az(ok) a szám(ok), amely(ek)nek a négyzete 'a'-val egyenlő. Három esetet különböztetünk meg a valós számok halmazán:</p>
+    <ul>
+        <li><strong>Ha 'a' pozitív (a > 0):</strong> Az egyenletnek pontosan két megoldása van: √a és -√a.</li>
+        <li><strong>Ha 'a' nulla (a = 0):</strong> Az egyenletnek pontosan egy megoldása van: x = 0.</li>
+        <li><strong>Ha 'a' negatív (a < 0):</strong> Az egyenletnek nincs megoldása a valós számok körében, mert nincs olyan valós szám, aminek a négyzete negatív.</li>
+    </ul>
+    <div class="formula-expression">
+        <span class="formula-var">x<span class="tooltip-text">Az ismeretlen</span></span>² = 
+        <span class="formula-var">a<span class="tooltip-text">Egy valós szám</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Oldd meg a következő egyenletet a valós számok halmazán: x² = 49.<br>
+           <strong>Gondolkodás:</strong> Keressük azokat a számokat, amelyeknek a négyzete 49. A 7² az 49, de a (-7)² is 49!<br>
+           <strong>Megoldás:</strong> Az egyenletnek két megoldása van: x₁ = 7 és x₂ = -7.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === EGYENLŐSÉG ÁTALAKÍTÁSA === -->
+<!-- ================================== -->
+
+<!-- Ekvivalens átalakítás Kártya -->
+<div class="formula-card" 
+     data-formula-name="Ekvivalens átalakítás és a mérleg-elv" 
+     data-formula-expression="Ha a=b, akkor a+c = b+c" 
+     data-formula-example="Oldjuk meg: x - 5 = 10. A mérleg-elv alapján mindkét oldalhoz hozzáadhatunk 5-öt anélkül, hogy az egyenlőség megváltozna. Így (x - 5) + 5 = 10 + 5, amiből x = 15.">
+    <h4 class="formula-title">2.1 Ekvivalens Átalakítások (Mérleg-elv)</h4>
+    <p class="formula-explanation">Az egyenletmegoldás során a célunk, hogy az ismeretlent (x) "egyedül hagyjuk" az egyenlet egyik oldalán. Ezt ekvivalens átalakításokkal érjük el, ami azt jelenti, hogy az egyenlet mindkét oldalán ugyanazt a műveletet végezzük el. Képzelj el egy kétkarú mérleget, ami egyensúlyban van: ha az egyik serpenyőbe teszel valamit, a másikba is ugyanazt kell tenned, hogy az egyensúly megmaradjon.</p>
+    <p><strong>A legfontosabb ekvivalens átalakítások:</strong></p>
+    <ul>
+        <li>Az egyenlet mindkét oldalához ugyanazt a számot <strong>hozzáadhatjuk</strong> vagy <strong>kivonhatjuk</strong> belőle.</li>
+        <li>Az egyenlet mindkét oldalát ugyanazzal a <strong>nullától különböző</strong> számmal <strong>megszorozhatjuk</strong> vagy <strong>eloszthatjuk</strong>.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Oldd meg az alábbi egyenletet: 2x - 4 = 8.<br>
+           <strong>1. Lépés (Mérleg-elv: összeadás):</strong> Hogy a bal oldalon csak az 'x'-es tag maradjon, mindkét oldalhoz hozzáadunk 4-et.<br>
+           (2x - 4) + 4 = 8 + 4<br>
+           2x = 12<br>
+           <strong>2. Lépés (Mérleg-elv: osztás):</strong> Hogy 'x' egyedül maradjon, mindkét oldalt elosztjuk 2-vel.<br>
+           2x / 2 = 12 / 2<br>
+           x = 6</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === EGYENLETRENDSZEREK === -->
+<!-- ================================== -->
+
+<!-- Egyenletrendszer - Behelyettesítő módszer Kártya -->
+<div class="formula-card" 
+     data-formula-name="Egyenletrendszer megoldása behelyettesítő módszerrel" 
+     data-formula-expression="I. x + y = 10; II. x - y = 2" 
+     data-formula-example="Oldd meg behelyettesítéssel: I. x+y=10, II. x-y=2. Megoldás: Az I.-ből kifejezzük x-et: x=10-y. Ezt behelyettesítjük a II.-ba: (10-y)-y=2 => 10-2y=2 => 8=2y => y=4. Visszahelyettesítünk: x=10-4 => x=6.">
+    <h4 class="formula-title">2.2 Egyenletrendszer Megoldása (Behelyettesítő Módszer)</h4>
+    <p class="formula-explanation">A kétismeretlenes egyenletrendszer megoldásának célja, hogy megtaláljuk azt az (x; y) számpárt, amely mindkét egyenletet igazzá teszi. A behelyettesítő módszer lépései:</p>
+    <ol>
+        <li>Válasszunk ki egy egyenletet, és fejezzük ki belőle az egyik ismeretlent a másikkal (pl. x = ...y...).</li>
+        <li>Ezt a kifejezést helyettesítsük be a MÁSIK egyenletbe a megfelelő ismeretlen helyére.</li>
+        <li>Így kapunk egy egyismeretlenes egyenletet, amit oldjunk meg.</li>
+        <li>A kapott eredményt helyettesítsük vissza a legelső lépésben kapott kifejezésbe, hogy megkapjuk a másik ismeretlent is.</li>
+    </ol>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Oldd meg behelyettesítéssel: I. x + y = 10, II. x - y = 2.<br>
+           <strong>1. Lépés (Kifejezés):</strong> Az I. egyenletből kifejezzük x-et: x = 10 - y.<br>
+           <strong>2. Lépés (Behelyettesítés):</strong> Ezt behelyettesítjük a II. egyenlet 'x' helyére: (10 - y) - y = 2.<br>
+           <strong>3. Lépés (Megoldás):</strong> Megoldjuk az egyismeretlenes egyenletet: 10 - 2y = 2 => 8 = 2y => y = 4.<br>
+           <strong>4. Lépés (Visszahelyettesítés):</strong> Visszahelyettesítjük az y=4 értéket az 1. lépésben kapott képletbe: x = 10 - 4 => x = 6.<br>
+           <strong>Megoldás:</strong> x=6, y=4.</p>
+    </div>
+</div>
+
+<!-- Egyenletrendszer - Egyenlő együtthatók módszere Kártya -->
+<div class="formula-card" 
+     data-formula-name="Egyenletrendszer megoldása az egyenlő együtthatók módszerével" 
+     data-formula-expression="I. x + y = 10; II. x - y = 2" 
+     data-formula-example="Oldd meg a kiküszöbölés módszerével: I. x+y=10, II. x-y=2. Megoldás: Adjuk össze a két egyenletet. (x+y)+(x-y)=10+2 => 2x=12 => x=6. Behelyettesítünk az I.-be: 6+y=10 => y=4.">
+    <h4 class="formula-title">2.3 Egyenletrendszer Megoldása (Egyenlő Együtthatók / Kiküszöbölés)</h4>
+    <p class="formula-explanation">Ez a módszer akkor különösen hatékony, ha az egyik ismeretlen együtthatója (szorzója) azonos vagy ellentétes a két egyenletben. A módszer lépései:</p>
+    <ol>
+        <li>Ha szükséges, szorozzuk meg az egyik (vagy mindkét) egyenletet úgy, hogy az egyik ismeretlen együtthatói ellentétesek legyenek (pl. +2y és -2y).</li>
+        <li>Adjuk össze a két egyenletet. Ekkor az egyik ismeretlen "kiesik".</li>
+        <li>Így kapunk egy egyismeretlenes egyenletet, amit oldjunk meg.</li>
+        <li>A kapott eredményt helyettesítsük vissza az egyik EREDETI egyenletbe, hogy megkapjuk a másik ismeretlent is.</li>
+    </ol>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Oldd meg az egyenlő együtthatók módszerével: I. x + y = 10, II. x - y = 2.<br>
+           <strong>1. Lépés (Előkészítés):</strong> Látjuk, hogy 'y' együtthatói ellentétesek (+1 és -1), így nincs szükség szorzásra.<br>
+           <strong>2. Lépés (Összeadás):</strong> Összeadjuk a két egyenlet megfelelő oldalait: (x + y) + (x - y) = 10 + 2.<br>
+           <strong>3. Lépés (Megoldás):</strong> Az összevonás után: 2x = 12. Ebből x = 6.<br>
+           <strong>4. Lépés (Visszahelyettesítés):</strong> Visszahelyettesítjük az x=6 értéket az I. eredeti egyenletbe: 6 + y = 10. Ebből y = 4.<br>
+           <strong>Megoldás:</strong> x=6, y=4.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === ADATSZERVEZÉS ÉS FÜGGVÉNYEK === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Az Adatszervezés Elemei</h3>
+
+<!-- Descartes-szorzat Kártya -->
+<div class="formula-card" 
+     data-formula-name="Két halmaz Descartes-féle szorzata" 
+     data-formula-expression="A × B" 
+     data-formula-example="Legyen A={1, 2} és B={cica, kutya}. Az A × B Descartes-szorzat elemei: {(1; cica), (1; kutya), (2; cica), (2; kutya)}.">
+    <h4 class="formula-title">3.1 Két Halmaz Descartes-féle Szorzata</h4>
+    <p class="formula-explanation">Két halmaz Descartes-szorzata egy új halmazt hoz létre, amelynek elemei **rendezett párok**. A párok első tagját az első halmazból, a második tagját a második halmazból vesszük, az összes lehetséges kombinációban. A sorrend fontos, azaz a (2; cica) pár nem ugyanaz, mint a (cica; 2) pár.</p>
+    <div class="formula-expression">
+        <span class="formula-var">A<span class="tooltip-text">Első halmaz</span></span> × 
+        <span class="formula-var">B<span class="tooltip-text">Második halmaz</span></span> = 
+        { (<span class="formula-var">a<span class="tooltip-text">Elem A-ból</span></span>; <span class="formula-var">b<span class="tooltip-text">Elem B-ből</span></span>) }
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Adott két halmaz: A = {1, 2} és B = {cica, kutya}. Add meg az A × B halmaz elemeit!<br>
+           <strong>Gondolkodás:</strong> Párokat kell alkotnom úgy, hogy az első elem mindig A-ból, a második mindig B-ből jön.<br>
+           <strong>Megoldás:</strong> Az A × B elemei a rendezett párok: {(1; cica), (1; kutya), (2; cica), (2; kutya)}.</p>
+    </div>
+</div>
+
+<!-- Derékszögű koordináta-rendszer Kártya -->
+<div class="formula-card" 
+     data-formula-name="Derékszögű koordináta-rendszer" 
+     data-formula-expression="P(x; y)" 
+     data-formula-example="Ábrázold a P(3; 2) pontot! Megoldás: Az origóból indulva lépj 3 egységet jobbra az x-tengelyen, majd onnan 2 egységet felfelé, párhuzamosan az y-tengellyel.">
+    <h4 class="formula-title">3.2 Derékszögű Koordináta-rendszer</h4>
+    <p class="formula-explanation">A koordináta-rendszer a Descartes-szorzat geometriai megjelenítése. Lehetővé teszi, hogy a sík bármely pontjának helyzetét egyértelműen megadjuk egy rendezett számpárral. A rendszer két, egymásra merőleges számegyenesből (tengelyből) áll:</p>
+    <ul>
+        <li><strong>x-tengely (abszcissza):</strong> A vízszintes tengely.</li>
+        <li><strong>y-tengely (ordináta):</strong> A függőleges tengely.</li>
+        <li><strong>Origó:</strong> A két tengely metszéspontja, a (0; 0) pont.</li>
+    </ul>
+    <div class="formula-expression">
+        <span class="formula-var">P<span class="tooltip-text">A pont neve</span></span>(<span class="formula-var">x<span class="tooltip-text">x-koordináta (vízszintes elmozdulás)</span></span>; 
+        <span class="formula-var">y<span class="tooltip-text">y-koordináta (függőleges elmozdulás)</span></span>)
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Ábrázold a P(3; 2) pontot a koordináta-rendszerben!<br>
+           <strong>Megoldás:</strong> Az origóból (0;0) indulva lépj 3 egységet jobbra a vízszintes x-tengelyen. Innen lépj 2 egységet felfelé, párhuzamosan a függőleges y-tengellyel. A pont, ahová érkeztél, a P(3; 2) pont.</p>
+    </div>
+</div>
+
+<!-- Függvényi kapcsolat Kártya -->
+<div class="formula-card" 
+     data-formula-name="Függvényi kapcsolat" 
+     data-formula-expression="y = f(x)" 
+     data-formula-example="Legyen a szabály: 'Minden számhoz rendeld hozzá a dupláját!'. Ez egy függvény. Ha x=3, akkor f(3)=6.">
+    <h4 class="formula-title">3.3 Függvényi Kapcsolat</h4>
+    <p class="formula-explanation">A függvény egyértelmű hozzárendelési szabály két halmaz elemei között. Minden kiindulási elemhez (x) pontosan egy érkezési elemet (y) rendel hozzá. A függvényt felfoghatjuk egy "gépként": bedobunk egy számot (x), a gép elvégzi a szabály szerinti műveletet, és kiad egy másik számot (y).</p>
+    <div class="formula-expression">
+        <span class="formula-var">y<span class="tooltip-text">Függvényérték, a 'kimenet'</span></span> = 
+        <span class="formula-var">f<span class="tooltip-text">A függvény neve/szabálya</span></span>(<span class="formula-var">x<span class="tooltip-text">Változó, a 'bemenet'</span></span>)
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Adott a következő függvény: f(x) = x + 5. Számítsd ki f(2) értékét!<br>
+           <strong>Gondolkodás:</strong> A szabály az, hogy minden számhoz adjunk hozzá 5-öt. A bemenet (x) most 2.<br>
+           <strong>Megoldás:</strong> f(2) = 2 + 5 = 7. A 2-höz a 7-et rendeli a függvény.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === A NÉGYSZÖGEK === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">A Négyszögek</h3>
+
+<!-- Konvex négyszög Kártya -->
+<div class="formula-card" 
+     data-formula-name="A konvex négyszög belső szögeinek összege" 
+     data-formula-expression="α + β + γ + δ = 360°" 
+     data-formula-example="Egy négyszög három ismert szöge 70°, 100° és 110°. Mekkora a negyedik szög? Megoldás: 70+100+110 = 280°. 360° - 280° = 80°.">
+    <h4 class="formula-title">4.1 Konvex Négyszög Belső Szögeinek Összege</h4>
+    <p class="formula-explanation">Bármely konvex (kifelé domborodó) négyszög belső szögeinek összege mindig pontosan 360 fok. Ez a tétel abból következik, hogy a négyszög bármelyik átlója két háromszögre bontja, és egy háromszög belső szögeinek összege 180°. Így 2 * 180° = 360°.</p>
+    <div class="formula-expression">
+        <span class="formula-var">α<span class="tooltip-text">Alfa szög</span></span> + <span class="formula-var">β<span class="tooltip-text">Béta szög</span></span> + <span class="formula-var">γ<span class="tooltip-text">Gamma szög</span></span> + <span class="formula-var">δ<span class="tooltip-text">Delta szög</span></span> = 360°
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+         <p><strong>Feladat:</strong> Egy négyszög három ismert belső szöge 70°, 100° és 110°. Mekkora a negyedik, hiányzó szöge?<br>
+           <strong>Megoldás:</strong> Összeadjuk az ismert szögeket: 70° + 100° + 110° = 280°. Ezt kivonjuk 360°-ból: 360° - 280° = 80°. A negyedik szög 80°-os.</p>
+    </div>
+</div>
+
+<!-- Paralelogramma Kártya -->
+<div class="formula-card" 
+     data-formula-name="A paralelogramma" 
+     data-formula-expression="T = a * mₐ" 
+     data-formula-example="Egy paralelogramma 'a' oldala 10 cm, a hozzá tartozó magassága 5 cm. Mekkora a területe? Megoldás: T = 10 * 5 = 50 cm².">
+    <h4 class="formula-title">4.2 A Paralelogramma</h4>
+    <p class="formula-explanation">A paralelogramma egy olyan négyszög, amelynek két-két szemközti oldala párhuzamos. Főbb tulajdonságai:</p>
+    <ul>
+        <li>Szemközti oldalai egyenlő hosszúak.</li>
+        <li>Szemközti szögei egyenlő nagyságúak.</li>
+        <li>Bármely két szomszédos szögének összege 180°.</li>
+        <li>Átlói felezik egymást.</li>
+    </ul>
+    <div class="formula-expression">
+        Terület: <span class="formula-var">T<span class="tooltip-text">Terület</span></span> = <span class="formula-var">a<span class="tooltip-text">'a' oldal</span></span> * <span class="formula-var">mₐ<span class="tooltip-text">'a' oldalhoz tartozó magasság</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy paralelogramma 'a' oldala 10 cm, a hozzá tartozó magassága (mₐ) 5 cm. Mekkora a területe?<br>
+           <strong>Megoldás:</strong> A területképletbe behelyettesítve: T = 10 cm * 5 cm = 50 cm².</p>
+    </div>
+</div>
+
+<!-- Sajátos paralelogrammák Kártya -->
+<div class="formula-card" 
+     data-formula-name="Sajátos paralelogrammák (téglalap, rombusz, négyzet)" 
+     data-formula-expression="Téglalap: T=a*b; Rombusz: T=(e*f)/2; Négyzet: T=a²" 
+     data-formula-example="Mekkora egy 4 cm oldalhosszúságú négyzet területe? Megoldás: T = 4² = 16 cm².">
+    <h4 class="formula-title">4.3 Sajátos Paralelogrammák</h4>
+    <p class="formula-explanation">A paralelogramma speciális esetei, amelyek további tulajdonságokkal rendelkeznek:</p>
+    <ul>
+        <li><strong>Téglalap:</strong> Minden szöge derékszög (90°). Területe: T = a * b.</li>
+        <li><strong>Rombusz:</strong> Minden oldala egyenlő hosszú. Átlói merőlegesen felezik egymást. Területe: T = (e * f) / 2 (ahol 'e' és 'f' az átlók hossza).</li>
+        <li><strong>Négyzet:</strong> Téglalap is és rombusz is. Minden oldala egyenlő és minden szöge derékszög. Területe: T = a².</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy rombusz átlói 6 cm és 8 cm hosszúak. Mekkora a területe?<br>
+           <strong>Megoldás:</strong> A rombusz területképletét használva: T = (6 * 8) / 2 = 48 / 2 = 24 cm².</p>
+    </div>
+</div>
+
+<!-- Trapéz Kártya -->
+<div class="formula-card" 
+     data-formula-name="A trapéz" 
+     data-formula-expression="T = ((a+c)/2)*m" 
+     data-formula-example="Egy trapéz párhuzamos oldalai 10 cm és 6 cm, magassága 5 cm. Mekkora a területe? Megoldás: T = ((10+6)/2)*5 = (16/2)*5 = 8*5 = 40 cm².">
+    <h4 class="formula-title">4.4 A Trapéz</h4>
+    <p class="formula-explanation">A trapéz olyan négyszög, amelynek van legalább egy párhuzamos oldalpárja. A párhuzamos oldalakat alapoknak, a másik két oldalt száraknak nevezzük. A középvonala a két alap számtani közepe: (a+c)/2.</p>
+    <div class="formula-expression">
+        Terület: <span class="formula-var">T<span class="tooltip-text">Terület</span></span> = 
+        ((<span class="formula-var">a<span class="tooltip-text">Egyik alap</span></span>+<span class="formula-var">c<span class="tooltip-text">Másik alap</span></span>)/2) * 
+        <span class="formula-var">m<span class="tooltip-text">Magasság</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy trapéz párhuzamos oldalai (alapjai) 10 cm és 6 cm, magassága pedig 5 cm. Mekkora a területe?<br>
+           <strong>Megoldás:</strong> A területképletbe behelyettesítve: T = ((10 + 6) / 2) * 5 = (16 / 2) * 5 = 8 * 5 = 40 cm².</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === A KÖR === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">A Kör</h3>
+
+<!-- Kerületi és középponti szögek Kártya -->
+<div class="formula-card" 
+     data-formula-name="Kerületi és középponti szögek tétele" 
+     data-formula-expression="β = α / 2" 
+     data-formula-example="Egy körben egy adott ívhez tartozó középponti szög 80°. Mekkora az ugyanahhoz az ívhez tartozó kerületi szög? Megoldás: β = 80° / 2 = 40°.">
+    <h4 class="formula-title">5.1 Kerületi és Középponti Szögek Tétele</h4>
+    <p class="formula-explanation">Ez a tétel a kör egy adott ívéhez tartozó két fontos szög kapcsolatát írja le:</p>
+    <ul>
+        <li><strong>Középponti szög (α):</strong> A csúcsa a kör középpontjában van, a szárai a körív végpontjaihoz futnak.</li>
+        <li><strong>Kerületi szög (β):</strong> A csúcsa a körvonalon van, a szárai szintén a körív végpontjaihoz futnak.</li>
+    </ul>
+    <p><strong>A tétel:</strong> Ugyanazon ívhez tartozó középponti szög mindig kétszer akkora, mint az ugyanahhoz az ívhez tartozó kerületi szög.</p>
+    <div class="formula-expression">
+        <span class="formula-var">β<span class="tooltip-text">Kerületi szög</span></span> = 
+        <span class="formula-var">α<span class="tooltip-text">Középponti szög</span></span> / 2
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy körben egy adott ívhez tartozó középponti szög 80°. Mekkora az ugyanahhoz az ívhez tartozó kerületi szög?<br>
+           <strong>Megoldás:</strong> A kerületi szög fele a középponti szögnek, tehát β = 80° / 2 = 40°.</p>
+    </div>
+</div>
+
+<!-- Thalész-tétel Kártya (a körhöz kapcsolódóan) -->
+<div class="formula-card" 
+     data-formula-name="Thalész-tétel" 
+     data-formula-expression="Egy kör átmérőjének két végpontját a kör bármely más pontjával összekötve derékszögű háromszöget kapunk." 
+     data-formula-example="Egy kör átmérője AB. A körvonalon felveszünk egy C pontot. Mekkora az ACB szög? Megoldás: A Thalész-tétel miatt a C-nél lévő szög mindig 90°.">
+    <h4 class="formula-title">Thalész-tétel</h4>
+    <p class="formula-explanation">A Thalész-tétel a kerületi és középponti szögek tételének egy speciális esete. A kör átmérőjéhez tartozó középponti szög egy egyenesszög, azaz 180°. Az ehhez az "ívhez" (félkörhöz) tartozó kerületi szög ennek a fele, azaz 180° / 2 = 90°. Tehát az átmérő fölé rajzolt háromszög mindig derékszögű.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Adott egy kör, melynek AB szakasza az átmérője. Felveszünk a körvonalon egy C pontot, ami nem esik egybe A-val vagy B-vel. Milyen típusú az ABC háromszög?<br>
+           <strong>Megoldás:</strong> A Thalész-tétel értelmében a háromszög mindig derékszögű lesz, a derékszög a C csúcsnál található.</p>
+    </div>
+</div>
+
+<!-- A kör kerülete és területe Kártya -->
+<div class="formula-card" 
+     data-formula-name="A kör kerülete és területe" 
+     data-formula-expression="K = 2 * r * π  és  T = r² * π" 
+     data-formula-example="Mekkora egy 10 cm sugarú kör kerülete és területe? Megoldás: K = 2 * 10 * π = 20π ≈ 62.8 cm. T = 10² * π = 100π ≈ 314 cm².">
+    <h4 class="formula-title">5.3 A Kör Kerülete és Területe</h4>
+    <p class="formula-explanation">Ezek a matematika legismertebb képletei, amelyek a π (pí) segítségével írják le a kör tulajdonságait.</p>
+    <ul>
+        <li><strong>Kerület (K):</strong> A körvonal hossza.</li>
+        <li><strong>Terület (T):</strong> A körlap által lefedett síkrész mérete.</li>
+    </ul>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; justify-content: space-around; flex-wrap: wrap;">
+        <div>K = 2 * <span class="formula-var">r<span class="tooltip-text">Sugár</span></span> * <span class="formula-var">π<span class="tooltip-text">Pi, kb. 3.14</span></span></div>
+        <div>T = <span class="formula-var">r<span class="tooltip-text">Sugár</span></span>² * <span class="formula-var">π<span class="tooltip-text">Pi, kb. 3.14</span></span></div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Mekkora egy 10 cm sugarú kör kerülete és területe?<br>
+           <strong>Megoldás:</strong><br>
+           Kerület: K = 2 * 10 * π = 20π cm. Ez körülbelül 20 * 3.14 = 62.8 cm.<br>
+           Terület: T = 10² * π = 100π cm². Ez körülbelül 100 * 3.14 = 314 cm².</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === HÁROMSZÖGEK HASONLÓSÁGA === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Háromszögek Hasonlósága</h3>
+
+<!-- Arányos szakaszok Kártya -->
+<div class="formula-card" 
+     data-formula-name="Arányos szakaszok és a párhuzamos szelők tétele" 
+     data-formula-expression="a/b = a'/b'" 
+     data-formula-example="Egy szög szárait elmetszük két párhuzamos egyenessel. Az egyik száron 4 és 6 egység hosszú szakaszok keletkeznek. Ha a másik száron az első szakasz 5 egység, milyen hosszú a második? Megoldás: 4/6 = 5/x => 4x = 30 => x = 7.5.">
+    <h4 class="formula-title">6.1 Arányos Szakaszok (Párhuzamos Szelők Tétele)</h4>
+    <p class="formula-explanation">Ha egy szög két szárát több párhuzamos egyenessel metsszük, akkor az egyik száron keletkező szakaszok aránya megegyezik a másik száron keletkező megfelelő szakaszok arányával. Ez a tétel a nagyítás és a térképek matematikai alapja.</p>
+    <div class="formula-expression">
+        <span class="formula-var">a<span class="tooltip-text">Első szakasz az egyik száron</span></span> / 
+        <span class="formula-var">b<span class="tooltip-text">Második szakasz az egyik száron</span></span> = 
+        <span class="formula-var">a'<span class="tooltip-text">Első szakasz a másik száron</span></span> / 
+        <span class="formula-var">b'<span class="tooltip-text">Második szakasz a másik száron</span></span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy szög szárait elmetszük két párhuzamos egyenessel. Az egyik száron 4 és 6 egység hosszú szakaszok keletkeznek. Ha a másik száron az első szakasz 5 egység, milyen hosszú a második (x)?<br>
+           <strong>Megoldás:</strong> Felírjuk az aránypárt: 4/6 = 5/x. Keresztbeszorzással: 4 * x = 6 * 5 => 4x = 30. Osztunk 4-gyel: x = 7.5.</p>
+    </div>
+</div>
+
+<!-- Hasonlóság alaptétele Kártya -->
+<div class="formula-card" 
+     data-formula-name="A háromszögek hasonlóságának alaptétele" 
+     data-formula-expression="Ha egy háromszög egyik oldalával párhuzamos egyenes metszi a másik két oldalt, akkor az levág egy, az eredetihez hasonló háromszöget." 
+     data-formula-example="Az ABC háromszög AB oldalával párhuzamos DE egyenes metszi az AC oldalt D-ben, a BC oldalt E-ben. Ezáltal a DEC háromszög hasonló lesz az ABC háromszöghöz.">
+    <h4 class="formula-title">6.2 A Hasonlóság Alaptétele</h4>
+    <p class="formula-explanation">Ez a tétel a hasonló háromszögek létrehozásának legegyszerűbb módját írja le. A hasonlóság azt jelenti, hogy a két háromszög szögei megegyeznek, és a megfelelő oldalaik aránya állandó (ezt az arányt nevezzük hasonlósági aránynak, jele λ).</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Gyakorlati alkalmazás:</strong> Ezzel a tétellel meg lehet mérni egy fa vagy egy torony magasságát az árnyékuk segítségével. A napsugarak párhuzamosak, így a fa és az árnyéka, valamint egy mérőléc és annak árnyéka két hasonló derékszögű háromszöget alkotnak. Az oldalak arányából a fa magassága kiszámolható.</p>
+    </div>
+</div>
+
+<!-- Hasonlósági esetek Kártya -->
+<div class="formula-card" 
+     data-formula-name="A háromszögek hasonlóságának esetei" 
+     data-formula-expression="Háromszögek hasonlók, ha..." 
+     data-formula-example="Két háromszög oldalai 3, 4, 5 és 6, 8, 10. Hasonlóak-e? Megoldás: Igen, mert a megfelelő oldalak aránya állandó (6/3=2, 8/4=2, 10/5=2). A hasonlóság aránya 2.">
+    <h4 class="formula-title">6.3 A Hasonlóság Esetei</h4>
+    <p class="formula-explanation">Két háromszögről nem kell minden adatot ismernünk ahhoz, hogy eldöntsük, hasonlóak-e. Elég az alábbi feltételek egyikének teljesülnie:</p>
+    <ol>
+        <li><strong>Szög-Szög (Sz-Sz):</strong> Ha a két háromszög két-két szöge páronként megegyezik. (A harmadik szögük is automatikusan egyenlő lesz).</li>
+        <li><strong>Oldal-Oldal-Oldal (O-O-O):</strong> Ha a két háromszög megfelelő oldalainak aránya páronként megegyezik.</li>
+        <li><strong>Oldal-Szög-Oldal (O-Sz-O):</strong> Ha a két háromszög két-két oldalának aránya megegyezik, és az általuk közbezárt szög is egyenlő.</li>
+    </ol>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egyik háromszög oldalai 3, 4, 5. A másiké 6, 8, 10. Hasonló-e a két háromszög?<br>
+           <strong>Megoldás:</strong> Megvizsgáljuk a megfelelő oldalak arányát: 6/3 = 2, 8/4 = 2, 10/5 = 2. Mivel az arány mindhárom esetben ugyanaz (2), a két háromszög az O-O-O tétel alapján hasonló.</p>
+    </div>
+</div>
+
+<!-- ========================================================== -->
+<!-- === METRIKUS ÖSSZEFÜGGÉSEK A DERÉKSZÖGŰ HÁROMSZÖGBEN === -->
+<!-- ========================================================== -->
+<h3 class="subject-title math-title">Metrikus Összefüggések a Derékszögű Háromszögben</h3>
+
+<!-- Magasságtétel és Befogótétel Kártya -->
+<div class="formula-card" 
+     data-formula-name="A magasságtétel és a befogótétel" 
+     data-formula-expression="Magasságtétel: m² = p*q. Befogótétel: a²=c*p és b²=c*q" 
+     data-formula-example="Egy derékszögű háromszög átfogójához tartozó magassága az átfogót egy 4cm és egy 9cm hosszú szakaszra bontja. Milyen magas a háromszög? Megoldás (magasságtétel): m² = 4 * 9 = 36, tehát m = 6 cm.">
+    <h4 class="formula-title">7.1 Magasságtétel és Befogótétel</h4>
+    <p class="formula-explanation">Ezek a tételek a derékszögű háromszögben az átfogóhoz tartozó magasság, valamint az oldalak és az átfogó szeletei közötti kapcsolatot írják le. A magasság az átfogót két szeletre (p és q) bontja.</p>
+    <ul>
+        <li><strong>Magasságtétel:</strong> Az átfogóhoz tartozó magasság (m) mértani közepe az átfogó két szeletének (p és q).</li>
+        <li><strong>Befogótétel:</strong> Bármelyik befogó (a vagy b) mértani közepe az egész átfogónak (c) és a befogó melletti átfogó-szeletnek (p vagy q).</li>
+    </ul>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+        <div>Magasságtétel: <span class="formula-var">m<span class="tooltip-text">Átfogóhoz tartozó magasság</span></span>² = <span class="formula-var">p<span class="tooltip-text">Átfogó egyik szelete</span></span> * <span class="formula-var">q<span class="tooltip-text">Átfogó másik szelete</span></span></div>
+        <div>Befogótétel: <span class="formula-var">a<span class="tooltip-text">Befogó</span></span>² = <span class="formula-var">c<span class="tooltip-text">Teljes átfogó</span></span> * <span class="formula-var">p<span class="tooltip-text">'a' befogó melletti szelet</span></span></div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy derékszögű háromszög átfogójához tartozó magassága az átfogót egy 4 cm és egy 9 cm hosszú szakaszra bontja. Milyen magas a háromszög (m)?<br>
+           <strong>Megoldás (magasságtétel):</strong> m² = p * q => m² = 4 * 9 = 36. Ebből m = √36 = 6 cm.</p>
+    </div>
+</div>
+
+<!-- Trigonometria elemei Kártya -->
+<div class="formula-card" 
+     data-formula-name="A trigonometria elemei (szögfüggvények)" 
+     data-formula-expression="sin(α) = a/c, cos(α) = b/c, tan(α) = a/b" 
+     data-formula-example="Egy derékszögű háromszög α szögével szemközti befogó 5 cm, az átfogó 10 cm. Mennyi a sin(α)? Megoldás: sin(α) = szemközti/átfogó = 5/10 = 0.5.">
+    <h4 class="formula-title">7.3 A Trigonometria Elemei (Szögfüggvények)</h4>
+    <p class="formula-explanation">A szögfüggvények a derékszögű háromszög egy hegyesszöge és az oldalak arányai közötti kapcsolatot írják le. Segítségükkel ki tudjuk számolni egy háromszög hiányzó oldalait vagy szögeit, ha elegendő adatot ismerünk. Az 'α' szög szempontjából:</p>
+    <ul>
+        <li><strong>Szinusz (sin):</strong> a szög<u>g</u>el <u>sz</u>emközti befogó / <u>á</u>tfogó</li>
+        <li><strong>Koszinusz (cos):</strong> a szög <u>m</u>elletti befogó / <u>á</u>tfogó</li>
+        <li><strong>Tangens (tan):</strong> a szög<u>g</u>el <u>sz</u>emközti befogó / a szög <u>m</u>elletti befogó</li>
+    </ul>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+        <div>sin(<span class="formula-var">α<span class="tooltip-text">A vizsgált szög</span></span>) = <span class="formula-var">a<span class="tooltip-text">Szemközti befogó</span></span> / <span class="formula-var">c<span class="tooltip-text">Átfogó</span></span></div>
+        <div>cos(<span class="formula-var">α<span class="tooltip-text">A vizsgált szög</span></span>) = <span class="formula-var">b<span class="tooltip-text">Szög melletti befogó</span></span> / <span class="formula-var">c<span class="tooltip-text">Átfogó</span></span></div>
+        <div>tan(<span class="formula-var">α<span class="tooltip-text">A vizsgált szög</span></span>) = <span class="formula-var">a<span class="tooltip-text">Szemközti befogó</span></span> / <span class="formula-var">b<span class="tooltip-text">Szög melletti befogó</span></span></div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy derékszögű háromszög α szögével szemközti befogó ('a') hossza 5 cm, az átfogó ('c') hossza 10 cm. Mennyi a sin(α)?<br>
+           <strong>Megoldás:</strong> sin(α) = szemközti befogó / átfogó = a / c = 5 / 10 = 0.5. (Számológéppel visszakeresve ez a 30°-os szög szinusza).</p>
+    </div>
+</div>
+
+
+
+                    <!-- === Lineáris Egyenletek === -->
+                    <h3 class="subject-title math-title">Lineáris Egyenletek</h3>
+                    <div class="formula-card" data-formula-name="Lineáris egyenlet általános alakja" data-formula-expression="a*x + b = 0" data-formula-example="Oldd meg: 3x + 6 = 0. Megoldás: 3x = -6 => x = -2.">
+                        <h4 class="formula-title">Lineáris Egyenlet Általános Alakja</h4>
+                        <p class="formula-explanation">Az egyismeretlenes lineáris egyenlet célja, hogy megtaláljuk az 'x' (ismeretlen) értékét, amelyre az egyenlőség igaz. A megoldás során "mérleg-elvet" alkalmazunk, azaz mindkét oldalból ugyanazt vonjuk ki vagy adunk hozzá, amíg 'x' egyedül marad.</p>
+                        <div class="formula-expression">
+                            <span class="formula-var">a<span class="tooltip-text">'x' együtthatója (szorzója)</span></span>*<span class="formula-var">x<span class="tooltip-text">Az ismeretlen</span></span> + <span class="formula-var">b<span class="tooltip-text">Konstans tag</span></span> = 0
+                        </div>
+                        <div class="button-group">
+                            <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+                            <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+                        </div>
+                        <div class="example-area">
+                             <p><strong>Feladat:</strong> Oldd meg a következő egyenletet: 3x + 6 = 0.<br>
+                               <strong>Megoldás:</strong> Először mindkét oldalból elveszünk 6-ot: 3x = -6. Utána mindkét oldalt elosztjuk 3-mal: x = -2.</p>
+                        </div>
+                    </div>
+
+                    <!-- === Négyszögek === -->
+                    <h3 class="subject-title math-title">A Négyszög</h3>
+                    <div class="formula-card" data-formula-name="A konvex négyszög belső szögeinek összege" data-formula-expression="α + β + γ + δ = 360°" data-formula-example="Egy négyszög három ismert szöge 70°, 100° és 110°. Mekkora a negyedik szög? Megoldás: 70+100+110 = 280°. 360° - 280° = 80°.">
+                        <h4 class="formula-title">Belső Szögek Összege</h4>
+                        <p class="formula-explanation">Bármely konvex (kifelé domborodó) négyszög belső szögeinek összege mindig pontosan 360 fok. Ez a tétel segít kiszámolni egy hiányzó szöget, ha a többi hármat ismerjük.</p>
+                        <div class="formula-expression">
+                            <span class="formula-var">α<span class="tooltip-text">Alfa szög</span></span> + <span class="formula-var">β<span class="tooltip-text">Béta szög</span></span> + <span class="formula-var">γ<span class="tooltip-text">Gamma szög</span></span> + <span class="formula-var">δ<span class="tooltip-text">Delta szög</span></span> = 360°
+                        </div>
+                        <div class="button-group">
+                            <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+                            <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+                        </div>
+                        <div class="example-area">
+                             <p><strong>Feladat:</strong> Egy négyszög három ismert belső szöge 70°, 100° és 110°. Mekkora a negyedik, hiányzó szöge?<br>
+                               <strong>Megoldás:</strong> Összeadjuk az ismert szögeket: 70° + 100° + 110° = 280°. Ezt kivonjuk 360°-ból: 360° - 280° = 80°. A negyedik szög 80°-os.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- === Háromszögek Hasonlósága === -->
+                    <h3 class="subject-title math-title">Háromszögek Hasonlósága</h3>
+                    <div class="formula-card" data-formula-name="Thalész-tétel" data-formula-expression="A párhuzamos szelők a szögszárakból arányos szakaszokat vágnak le." data-formula-example="Egy szög szárait elmetszük két párhuzamos egyenessel. Az egyik száron 4 és 6 egység hosszú szakaszok keletkeznek. Ha a másik száron az első szakasz 5 egység, milyen hosszú a második? Megoldás: 4/6 = 5/x => 4x = 30 => x = 7.5.">
+                        <h4 class="formula-title">Thalész-tétel (Párhuzamos szelők tétele)</h4>
+                        <p class="formula-explanation">Ha egy szög két szárát elmetsszük párhuzamos egyenesekkel, akkor a megfelelő szakaszok aránya a két száron megegyezik. Ez a tétel a nagyítás és kicsinyítés matematikai alapja.</p>
+                        <div class="formula-expression">
+                            a / b = c / d
+                        </div>
+                        <div class="button-group">
+                            <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+                            <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+                        </div>
+                        <div class="example-area">
+                             <p><strong>Feladat:</strong> Egy szög szárait elmetszük két párhuzamos egyenessel. Az egyik száron 4 és 6 egység hosszú szakaszok keletkeznek. Ha a másik száron az első szakasz 5 egység, milyen hosszú a második (x)?<br>
+                               <strong>Megoldás:</strong> Felírjuk az aránypárt: 4/6 = 5/x. Keresztbeszorzással: 4 * x = 6 * 5 => 4x = 30. Osztunk 4-gyel: x = 7.5.</p>
+                        </div>
+                    </div>
+
+                    <!-- === Pitagorasz-tétel === -->
+                    <h3 class="subject-title math-title">Metrikus Összefüggések a Derékszögű Háromszögben</h3>
+                    <div class="formula-card" data-formula-name="Pitagorasz-tétel" data-formula-expression="a² + b² = c²" data-formula-example="Egy derékszögű háromszög befogói 6 cm és 8 cm. Milyen hosszú az átfogója? Megoldás: 6² + 8² = c² => 36 + 64 = c² => 100 = c² => c = 10 cm.">
+                        <h4 class="formula-title">Pitagorasz-tétel</h4>
+                        <p class="formula-explanation">Ez a tétel a derékszögű háromszögek oldalainak hosszára vonatkozik. Azt mondja ki, hogy a két rövidebb oldal (a befogók) négyzeteinek összege egyenlő a leghosszabb oldal (az átfogó) négyzetével.</p>
+                        <div class="formula-expression">
+                            <span class="formula-var">a<span class="tooltip-text">Egyik befogó hossza</span></span>² + 
+                            <span class="formula-var">b<span class="tooltip-text">Másik befogó hossza</span></span>² = 
+                            <span class="formula-var">c<span class="tooltip-text">Átfogó hossza</span></span>²
+                        </div>
+                        <div class="button-group">
+                            <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+                            <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+                        </div>
+                        <div class="example-area">
+                            <p><strong>Feladat:</strong> Egy derékszögű háromszög befogói 6 cm és 8 cm. Milyen hosszú az átfogója?<br>
+                               <strong>Megoldás:</strong> 6² + 8² = c² => 36 + 64 = c² => 100 = c² => c = 10 cm.</p>
+                        </div>
+                    </div>
+
+                    <!-- ================================== -->
+<!-- === ÖSSZEFOGLALÁS ÉS GYAKORLÁS === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Összefoglalás és Gyakorlás</h3>
+
+<!-- Összefoglaló feladatok Kártya -->
+<div class="formula-card" 
+     data-formula-name="Összefoglaló feladatok és gyakorlás" 
+     data-formula-expression="Napi Kihívás" 
+     data-formula-example="Indítsd el a Napi Kihívást, és válaszd ki a 7. osztályt! A rendszer véletlenszerűen fog feladatokat adni az egész éves tananyagból, hogy teszteld a tudásod.">
+    <h4 class="formula-title">Összefoglaló Feladatok</h4>
+    <p class="formula-explanation">A legjobb módja a tudás elmélyítésének a rendszeres, vegyes gyakorlás. Ahelyett, hogy csak egy témakörre koncentrálnál, teszteld magad az egész éves tananyagból! Erre a legkiválóbb eszköz a **Napi Kihívás**, ami véletlenszerűen generál feladatokat a 7. osztályos témakörökből.</p>
+    <div class="formula-expression" style="font-size: 1.5rem;">
+        Gyakorolj okosan a Napi Kihívással!
+    </div>
+    <div class="button-group">
+        <!-- Ez a gomb a Napi Kihívás prémium eszközre mutat -->
+        <a href="napi_kihivas.html" class="btn btn-primary math-btn">Irány a Napi Kihívás! →</a>
+    </div>
+</div>
+
+<!-- Év végi felmérő Kártya -->
+<div class="formula-card" 
+     data-formula-name="Év végi felmérő és vizsgaszimuláció" 
+     data-formula-expression="AI Vizsga Szimulátor" 
+     data-formula-example="Indítsd el a Vizsga Szimulátort! Az MI egy teljes, 7. osztályos év végi felmérőt fog generálni neked a tananyag alapján, időméréssel és pontozással.">
+    <h4 class="formula-title">Év Végi Felmérő Szimuláció</h4>
+    <p class="formula-explanation">Készen állsz, hogy leteszteld a felkészültségedet egy éles vizsgahelyzetben? Az **AI Vizsga Szimulátor** pontosan ezt nyújtja. Generálj egy teljes, 45 perces, 7. osztályos év végi felmérőt, ami lefedi az összes tanult témakört. A legjobb felkészülés a témazáróra!</p>
+    <div class="formula-expression" style="font-size: 1.5rem;">
+        Készülj fel a vizsgára élesben!
+    </div>
+    <div class="button-group">
+        <!-- Ez a gomb az AI Vizsga Szimulátor prémium eszközre mutat -->
+        <a href="vizsga_szimulator.html" class="btn btn-primary math-btn">Indítom a Vizsga Szimulátort! →</a>
+    </div>
+</div>
+
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="container footer-content">
+            <img src="{{ url_for('static', filename='img/csicsike_logo.png') }}" alt="Csicsike Tudástár Logó" class="footer-logo">
+            <p>CSICSIKE lábnyoma. © 2025</p>
+        </div>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='js/kereso_adatbazis.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.example-toggle').forEach(button => {
+                button.addEventListener('click', () => {
+                    const exampleArea = button.closest('.formula-card').querySelector('.example-area');
+                    const isVisible = exampleArea.style.display === 'block';
+                    exampleArea.style.display = isVisible ? 'none' : 'block';
+                    button.textContent = isVisible ? 'Mutass egy példát!' : 'Példa elrejtése';
+                });
+            });
+            
+            document.querySelectorAll('.gemini-help-btn').forEach(button => {
+                const originalText = button.innerHTML;
+                button.addEventListener('click', () => {
+                    const card = button.closest('.formula-card');
+                    const formulaName = card.dataset.formulaName;
+                    const formulaExpr = card.dataset.formulaExpression;
+                    const formulaExample = card.dataset.formulaExample;
+
+                    const prompt = `Viselkedj úgy, mint egy türelmes és segítőkész 7. osztályos matematika tanár! Egy diák segítséget kért a következővel kapcsolatban: "${formulaName}".\nA feladatod a következő 3 lépésben:\n1. Magyarázd el lépésről lépésre, egyszerű szavakkal, hogy mit jelent ez a képlet/tétel: ${formulaExpr}. Magyarázd el, hogy a betűk mit jelentenek!\n2. Vezesd végig a diákot a következő példafeladat megoldásán: "${formulaExample}" Magyarázd el minden lépésnél, hogy mit és miért csinálsz!\n3. Adj a diáknak 5 új, egyszerű, gyakorló feladatot (megoldás nélkül), amivel begyakorolhatja ezt a képletet/tételt. A feladatok legyenek változatosak és hétkönyapiak.\nA stílusod legyen bátorító és pozitív! Kezdd a választ így: "Szia! Nagyszerű, hogy segítséget kértél a(z) ${formulaName} megértéséhez. Nézzük meg együtt lépésről lépésre!"`;
+                    
+                    navigator.clipboard.writeText(prompt.trim()).then(() => {
+                        button.innerHTML = '✅ Prompt másolva!';
+                        window.open('https://gemini.google.com/app', '_blank');
+                        setTimeout(() => { button.innerHTML = originalText; }, 3000);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

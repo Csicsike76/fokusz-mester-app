@@ -8,16 +8,20 @@ const API_URL = 'https://fokusz-mester-backend.onrender.com';
 const HomePage = () => {
     const [content, setContent] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchHomePageContent = async () => {
             try {
                 const response = await fetch(`${API_URL}/api/curriculums`);
                 const data = await response.json();
-                if (!data.success) throw new Error('Hiba az adatok betöltésekor.');
+                if (!data.success) {
+                    throw new Error(data.message || 'Hiba az adatok betöltésekor.');
+                }
                 setContent(data.data);
-            } catch (error) {
-                console.error(error);
+            } catch (err) {
+                setError(err.message);
+                console.error(err);
             } finally {
                 setIsLoading(false);
             }
@@ -25,15 +29,19 @@ const HomePage = () => {
         fetchHomePageContent();
     }, []);
 
-    const renderCard = (item, typeClass) => (
-        <div key={item.slug} className={`${styles.card} ${styles[typeClass]}`}>
-            <h4>{item.grade > 0 ? `${item.grade}. osztály - ${item.title}` : item.title}</h4>
-            <p>{item.description || `PIN: ${item.id + 100000}`}</p>
-            <ConditionalLink to={`/kviz/${item.slug}`} className={`${styles.btn} ${styles[typeClass + 'Btn']}`}>
-                Tovább →
-            </ConditionalLink>
-        </div>
-    );
+    const renderCard = (item, typeClass) => {
+        const pathPrefix = item.category.includes('tool') ? '/eszkoz' : '/kviz';
+        
+        return (
+            <div key={item.slug} className={`${styles.card} ${styles[typeClass]}`}>
+                <h4>{item.grade > 0 ? `${item.grade}. osztály - ${item.title}` : item.title}</h4>
+                <p>{item.description || `PIN: ${item.id + 100000}`}</p>
+                <ConditionalLink to={`${pathPrefix}/${item.slug}`} className={`${styles.btn} ${styles[typeClass + 'Btn']}`}>
+                    Tovább →
+                </ConditionalLink>
+            </div>
+        );
+    };
 
     return (
         <div>
@@ -41,6 +49,9 @@ const HomePage = () => {
             <main className={styles.mainContent}>
                 {isLoading && (
                     <p style={{ textAlign: 'center' }}>Tartalom betöltése...</p>
+                )}
+                {error && (
+                    <p style={{ textAlign: 'center', color: 'red' }}>Hiba: {error}</p>
                 )}
                 {content && (
                     <>

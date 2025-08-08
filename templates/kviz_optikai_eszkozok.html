@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Optikai eszközök</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Optikai eszközök</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Milyen lencsét használ a nagyító?",
+                answers: { a: "Gyűjtőlencsét (domború lencsét).", b: "Szórólencsét (homorú lencsét).", c: "Síktükröt." },
+                correctAnswer: 'a',
+                explanation: "A nagyító egy egyszerű gyűjtőlencse, amely a fókusztávolságán belülre helyezett tárgyról nagyított, látszólagos képet alkot. ✅ Megoldás: Gyűjtőlencsét (domború lencsét)."
+            },
+            {
+                question: "Milyen képet hoz létre a fényképezőgép objektívje a képérzékelőn?",
+                answers: { a: "Valódi, fordított állású, kicsinyített képet.", b: "Látszólagos, egyenes állású, nagyított képet.", c: "Nem hoz létre képet, csak fényt gyűjt." },
+                correctAnswer: 'a',
+                explanation: "A fényképezőgép objektívje (egy összetett gyűjtőlencse-rendszer) a külvilágról egy valódi, fordított és kicsinyített képet vetít a digitális szenzorra vagy a filmre. ✅ Megoldás: Valódi, fordított állású, kicsinyített képet."
+            },
+            {
+                question: "Mi a távcső feladata?",
+                answers: { a: "A távoli tárgyakról érkező fénysugarak látószögének megnövelése.", b: "A közeli tárgyak nagyítása.", c: "A fény színekre bontása." },
+                correctAnswer: 'a',
+                explanation: "A távcső a távoli objektumokról érkező, szinte párhuzamos fénysugarakat gyűjti össze (objektív), majd egy másik lencsével (okulár) a szem számára felnagyítja a képet. Lényegében a látószöget növeli meg, így a tárgyat nagyobbnak látjuk. ✅ Megoldás: A távoli tárgyakról érkező fénysugarak látószögének megnövelése."
+            },
+            {
+                question: "Milyen lencsét használunk a rövidlátás korrigálására?",
+                answers: { a: "Szórólencsét (homorú lencsét).", b: "Gyűjtőlencsét (domború lencsét).", c: "Hengeres lencsét." },
+                correctAnswer: 'a',
+                explanation: "A rövidlátó szem a fénysugarakat a retina előtt fókuszálja. A szórólencse kissé széttartóbbá teszi a beérkező sugarakat, így a szemlencse már a megfelelő helyre, a retinára tudja fókuszálni a képet. ✅ Megoldás: Szórólencsét (homorú lencsét)."
+            },
+            {
+                question: "Melyik optikai eszköz működése alapul a fényvisszaverődésen?",
+                answers: { a: "Tükrös távcső (reflektor)", b: "Mikroszkóp", c: "Szemüveg" },
+                correctAnswer: 'a',
+                explanation: "A tükrös távcsövek (pl. Newton-távcső) egy homorú tükörrel gyűjtik össze a fényt, nem pedig lencsével. A mikroszkóp és a szemüveg a fénytörésen alapul. ✅ Megoldás: Tükrös távcső (reflektor)."
+            },
+            {
+                question: "Mi a mikroszkóp feladata?",
+                answers: { a: "Apró, közeli tárgyakról nagyított kép készítése.", b: "Távoli csillagok megfigyelése.", c: "A fény erősségének mérése." },
+                correctAnswer: 'a',
+                explanation: "A mikroszkóp két gyűjtőlencse-rendszer (objektív és okulár) segítségével a közeli, szabad szemmel nem látható tárgyakról hoz létre erősen nagyított, virtuális képet. ✅ Megoldás: Apró, közeli tárgyakról nagyított kép készítése."
+            },
+            {
+                question: "Mi az emberi szem lencséjének különlegessége?",
+                answers: { a: "Képes változtatni a fókusztávolságát.", b: "Homorú lencse.", c: "Nem töri meg a fényt." },
+                correctAnswer: 'a',
+                explanation: "A szemlencse egy rugalmas, gyűjtő típusú lencse. A sugárizmok segítségével képes változtatni a domborúságát, és ezzel a fókusztávolságát, hogy a különböző távolságban lévő tárgyakra is rá tudjon fókuszálni. ✅ Megoldás: Képes változtatni a fókusztávolságát."
+            },
+            {
+                question: "Milyen képet látunk a nagyítóban?",
+                answers: { a: "Látszólagos, egyenes állású, nagyított képet.", b: "Valódi, fordított, kicsinyített képet.", c: "Valódi, egyenes állású képet." },
+                correctAnswer: 'a',
+                explanation: "A nagyító (gyűjtőlencse) akkor nagyít, ha a tárgy a fókusztávolságon belül van. Az így keletkező kép virtuális (látszólagos), a tárggyal azonos állású és annál nagyobb. ✅ Megoldás: Látszólagos, egyenes állású, nagyított képet."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Melyik NEM optikai eszköz?",
+                answers: { a: "Szemüveg", b: "Hangszóró", c: "Távcső" },
+                correctAnswer: 'b',
+                explanation: "Az optikai eszközök a fénnyel kapcsolatos jelenségeket használják ki. A hangszóró az elektromos jeleket hanghullámokká alakítja, tehát egy elektroakusztikai eszköz. ✅ Megoldás: Hangszóró."
+            },
+            {
+                question: "Milyen lencsét használunk a távollátás korrigálására?",
+                answers: { a: "Szórólencsét (homorú lencsét).", b: "Gyűjtőlencsét (domború lencsét).", c: "Bármilyen lencsét." },
+                correctAnswer: 'b',
+                explanation: "A távollátó szem a fénysugarakat a retina mögött fókuszálná. A gyűjtőlencse segít a fénysugarakat jobban 'összehúzni', hogy a kép a retinára kerüljön. ✅ Megoldás: Gyűjtőlencsét (domború lencsét)."
+            },
+            {
+                question: "Mi a vetítőgép (projektor) működésének alapja?",
+                answers: { a: "Szórólencsével kicsinyített képet hoz létre.", b: "Gyűjtőlencsével valódi, nagyított képet vetít az ernyőre.", c: "Tükrökkel veri a fényt a falra." },
+                correctAnswer: 'b',
+                explanation: "A projektorban egy tárgyat (diát vagy digitális kijelzőt) egy gyűjtőlencse elé helyeznek, a fókuszpont és a kétszeres fókusztávolság közé. Így a lencse a másik oldalon, az ernyőn egy valódi, fordított és nagyított képet hoz létre. ✅ Megoldás: Gyűjtőlencsével valódi, nagyított képet vetít az ernyőre."
+            },
+            {
+                question: "Melyik eszköz működik a fénytörés elvén?",
+                answers: { a: "Síktükör", b: "Szemüveg", c: "Periszkóp" },
+                correctAnswer: 'b',
+                explanation: "A szemüveg lencséi a fénytörés segítségével korrigálják a látáshibákat. A tükrök és a periszkóp a fényvisszaverődésen alapulnak. ✅ Megoldás: Szemüveg."
+            },
+            {
+                question: "Mi a szerepe az objektívnek egy távcsőben vagy fényképezőgépben?",
+                answers: { a: "Nagyított látszólagos képet ad.", b: "Összegyűjti a tárgyról érkező fényt és létrehoz egy valódi képet.", c: "Színezi a képet." },
+                correctAnswer: 'b',
+                explanation: "Az objektív (egy lencse vagy lencserendszer) az optikai eszköz első, tárgy felőli része. Feladata, hogy a tárgyról minél több fényt gyűjtsön össze és egy valódi képet hozzon létre, amit aztán az okulárral (vagy a szemünkkel) tovább vizsgálunk. ✅ Megoldás: Összegyűjti a tárgyról érkező fényt és létrehoz egy valódi képet."
+            },
+            {
+                question: "Mi az okulár?",
+                answers: { a: "A távcső vagy mikroszkóp tárgy felőli lencséje.", b: "A távcső vagy mikroszkóp szem felőli lencséje (szemlencse).", c: "Egyfajta tükör." },
+                correctAnswer: 'b',
+                explanation: "Az okulár, más néven szemlencse, az optikai eszközök (távcső, mikroszkóp) szemhez közeli lencserendszere. Feladata, hogy az objektív által létrehozott valódi képről nagyított látszólagos képet alkosson a szemünk számára. ✅ Megoldás: A távcső vagy mikroszkóp szem felőli lencséje (szemlencse)."
+            },
+            {
+                question: "A kamerák és az emberi szem működése között mi a hasonlóság?",
+                answers: { a: "Nincs hasonlóság.", b: "Mindkettő egy gyűjtőlencse segítségével valódi, kicsinyített, fordított képet hoz létre egy fényérzékeny felületen.", c: "Mindkettő szórólencsét használ." },
+                correctAnswer: 'b',
+                explanation: "A fényképezőgép működése nagyon hasonló az emberi szem felépítéséhez. Az objektív megfelel a szemlencsének, a blende a pupillának, a képérzékelő pedig a retinának. Mindkettő egy valódi képet vetít a fényérzékeny felületre. ✅ Megoldás: Mindkettő egy gyűjtőlencse segítségével valódi, kicsinyített, fordított képet hoz létre egy fényérzékeny felületen."
+            },
+            {
+                question: "Melyik optikai eszköz NEM alkot képet?",
+                answers: { a: "Szemüveg", b: "Prizma", c: "Távcső" },
+                correctAnswer: 'b',
+                explanation: "A prizma a fényt megtöri és színeire bontja, de nem hoz létre leképezést, azaz képet. A szemüveg és a távcső lencséi képet alkotnak. ✅ Megoldás: Prizma."
+            },
+            {
+                question: "Milyen képet látunk egy ajtókémlelőn (kukucskálón) keresztül?",
+                answers: { a: "Nagyított, valódi képet.", b: "Kicsinyített, egyenes állású, látszólagos képet.", c: "Fordított állású képet." },
+                correctAnswer: 'b',
+                explanation: "Az ajtókémlelő egy homorú (szóró) lencsét tartalmaz, ami széles látószöget biztosít. A szórólencsék mindig kicsinyített, egyenes állású és látszólagos képet adnak. ✅ Megoldás: Kicsinyített, egyenes állású, látszólagos képet."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Melyik eszközben található homorú tükör?",
+                answers: { a: "Nagyító", b: "Szemüveg", c: "Autó fényszórója" },
+                correctAnswer: 'c',
+                explanation: "Az autó fényszórójában egy homorú tükör található az izzó mögött. Az izzót a tükör fókuszpontjába helyezik, így a tükör a fényt párhuzamos fénynyaláppá veri vissza, ami messzire elvilágít. ✅ Megoldás: Autó fényszórója."
+            },
+            {
+                question: "A mikroszkóp két lencserendszere az...",
+                answers: { a: "...objektív és a tükör.", b: "...szemlencse és a prizma.", c: "...objektív és az okulár." },
+                correctAnswer: 'c',
+                explanation: "A mikroszkóp két fő lencserendszerből áll: a tárgyhoz közeli objektívből, ami létrehoz egy valódi, nagyított képet, és a szemhez közeli okulárból (szemlencse), ami ezt a képet tovább nagyítja. ✅ Megoldás: ...objektív és az okulár."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "A nagyító egy gyűjtőlencse.", b: "A szemüveg a fénytörésen alapul.", c: "A távcsővel apró tárgyakat vizsgálunk." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás hamis. A távcsővel távoli tárgyakat figyelünk meg. Az apró, közeli tárgyak vizsgálatára a mikroszkóp szolgál. ✅ Megoldás: A távcsővel apró tárgyakat vizsgálunk."
+            },
+            {
+                question: "Mi a retina szerepe a szemben?",
+                answers: { a: "Változtatja a fókusztávolságot.", b: "Szabályozza a bejutó fény mennyiségét.", c: "Fényérzékeny felület, ahol a kép keletkezik." },
+                correctAnswer: 'c',
+                explanation: "A retina a szem hátsó falán található fényérzékeny réteg, amely a fényingereket elektromos jelekké alakítja. Ez felel meg a fényképezőgép szenzorának. ✅ Megoldás: Fényérzékeny felület, ahol a kép keletkezik."
+            },
+            {
+                question: "Milyen képet lát a szemünk a retinán?",
+                answers: { a: "Látszólagos, egyenes állású, nagyított képet.", b: "Valódi, egyenes állású képet.", c: "Valódi, fordított állású, kicsinyített képet." },
+                correctAnswer: 'c',
+                explanation: "A szemlencse, mint gyűjtőlencse, a külvilágról a retinára egy valódi, fordított állású és a valósághoz képest kicsinyített képet vetít. Az agyunk 'fordítja vissza' ezt a képet, hogy egyenesen lássuk a világot. ✅ Megoldás: Valódi, fordított állású, kicsinyített képet."
+            },
+            {
+                question: "Mi a közös a távcsőben és a mikroszkópban?",
+                answers: { a: "Ugyanazt a tárgyat vizsgálják.", b: "Mindkettőben csak tükrök vannak.", c: "Mindkettő egy objektívből és egy okulárból áll." },
+                correctAnswer: 'c',
+                explanation: "Mindkét eszköz alapvető felépítése egy tárgy felőli lencserendszerből (objektív) és egy szem felőli lencserendszerből (okulár) áll, amelyek együttesen hoznak létre nagyított képet. ✅ Megoldás: Mindkettő egy objektívből és egy okulárból áll."
+            },
+            {
+                question: "A periszkóp...",
+                answers: { a: "...lencsékkel nagyít.", b: "...színekre bontja a fényt.", c: "...tükrök segítségével teszi lehetővé, hogy akadályok mögül nézzünk ki." },
+                correctAnswer: 'c',
+                explanation: "A periszkóp két, egymással párhuzamosan elhelyezett, 45°-os szögben álló síktükröt használ. A fény az egyik tükörről a másikra verődik, így 'megkerüli' az akadályt. ✅ Megoldás: ...tükrök segítségével teszi lehetővé, hogy akadályok mögül nézzünk ki."
+            },
+            {
+                question: "Mi a dioptria mértékegysége?",
+                answers: { a: "méter", b: "fok", c: "1/méter" },
+                correctAnswer: 'c',
+                explanation: "A dioptria a lencse fókusztávolságának (f) reciprok értéke, ahol a fókusztávolságot méterben kell megadni. Tehát a mértékegysége 1/m. ✅ Megoldás: 1/méter."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

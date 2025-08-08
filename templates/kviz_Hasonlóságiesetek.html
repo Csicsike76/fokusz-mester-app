@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: 6.3 Hasonlósági esetek (7. osztály)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: 6.3 Hasonlósági esetek (7. osztály)</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+
+            <div class="evaluation-block" id="bottom-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-bottom">PIN kód:</label>
+                    <input type="password" id="pin-code-bottom" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Melyik NEM a háromszögek hasonlóságának egyik alapesete?",
+                options: { a: "Mindhárom oldal aránya megegyezik (O-O-O).", b: "Két oldal és a közbezárt szög egyenlő (O-Sz-O).", c: "Két-két szögük páronként egyenlő (Sz-Sz)." },
+                correct: "b",
+                explanation: "A hasonlóság O-Sz-O esetében a két-két oldal aránya egyezik meg, és a közbezárt szögük egyenlő. A 'két oldal egyenlő' az egybevágóság feltétele, nem a hasonlóságé."
+            },
+            {
+                question: "Egy háromszög szögei 40° és 60°. Egy másik háromszög szögei 40° és 80°. Hasonló-e a két háromszög?",
+                options: { a: "Igen", b: "Nem", c: "Csak ha az oldalaik is egyenlőek." },
+                correct: "a",
+                explanation: "Igen. Az első háromszög harmadik szöge 180° - 40° - 60° = 80°. A második háromszög harmadik szöge 180° - 40° - 80° = 60°. Mindkét háromszög szögei 40°, 60°, 80°, tehát a Szög-Szög (Sz-Sz) tétel alapján hasonlóak."
+            },
+            {
+                question: "Ha két háromszög hasonló, és a hasonlóság aránya k=3, akkor mit mondhatunk a területeik arányáról?",
+                options: { a: "A területek aránya is 3.", b: "A területek aránya 6.", c: "A területek aránya 9." },
+                correct: "c",
+                explanation: "A területek aránya a hasonlóság arányának négyzetével egyenlő. Tehát a területek aránya k² = 3² = 9."
+            },
+            {
+                question: "Egy háromszög oldalai 3, 4, 5. Egy másiké 9, 12, 15. Melyik hasonlósági tétel alapján hasonlóak?",
+                options: { a: "Szög-Szög (Sz-Sz)", b: "Oldal-Oldal-Oldal (O-O-O)", c: "Oldal-Szög-Oldal (O-Sz-O)" },
+                correct: "b",
+                explanation: "Vizsgáljuk a megfelelő oldalak arányát: 9/3 = 3, 12/4 = 3, 15/5 = 3. Mivel mindhárom arány megegyezik, a háromszögek az O-O-O tétel alapján hasonlóak."
+            },
+            {
+                question: "Melyik a legegyszerűbb, leggyakrabban használt hasonlósági tétel?",
+                options: { a: "Az O-O-O tétel.", b: "Az O-Sz-O tétel.", c: "A Sz-Sz (Szög-Szög) tétel." },
+                correct: "c",
+                explanation: "A Szög-Szög (Sz-Sz) tétel a legegyszerűbb, mert elég mindössze két szöget ismernünk a hasonlóság bizonyításához. Ha két szög megegyezik, a harmadik automatikusan is meg fog."
+            },
+            {
+                question: "Két háromszög hasonló. A kisebbik kerülete 12 cm, a hasonlóság aránya k=3. Mekkora a nagyobbik háromszög kerülete?",
+                options: { a: "36 cm", b: "15 cm", c: "4 cm" },
+                correct: "a",
+                explanation: "A kerületek aránya megegyezik a hasonlóság arányával. K_nagy = K_kicsi * k = 12 cm * 3 = 36 cm."
+            },
+            {
+                question: "Egy háromszög oldalai 6 cm és 10 cm, a közbezárt szög 50°. Melyik háromszög lesz ehhez hasonló?",
+                options: { a: "Egy olyan, melynek oldalai 6 cm, 10 cm és a szög 60°.", b: "Egy olyan, melynek oldalai 3 cm, 5 cm és a közbezárt szög 50°.", c: "Egy olyan, melynek oldalai 3 cm, 5 cm és a szög 60°." },
+                correct: "b",
+                explanation: "Az O-Sz-O tételhez a közbezárt szögnek meg kell egyeznie (50°), és a megfelelő oldalak arányának állandónak kell lennie. A 'b' esetben az oldalak aránya 6/3 = 2 és 10/5 = 2, a szög pedig 50°, tehát ez a hasonló háromszög."
+            },
+            {
+                question: "Mikor nevezünk két háromszöget egybevágónak?",
+                options: { a: "Ha kerületük egyenlő.", b: "Ha területük egyenlő.", c: "Ha hasonlóak és a hasonlóság aránya 1." },
+                correct: "c",
+                explanation: "Az egybevágóság a hasonlóság speciális esete. Két háromszög akkor egybevágó, ha minden szögük és minden oldaluk megegyezik, ami azt jelenti, hogy a hasonlóság aránya k=1."
+            },
+            {
+                question: "Két derékszögű háromszög hasonló, ha...",
+                options: { a: "az átfogóik egyenlőek.", b: "egyik-egyik hegyesszögük megegyezik.", c: "a területük megegyezik." },
+                correct: "b",
+                explanation: "Ha a két derékszögű háromszögnek van egy 90°-os szöge, és még egy hegyesszöge is megegyezik, akkor a Sz-Sz tétel alapján már biztosan hasonlóak."
+            },
+            {
+                question: "Egy térkép méretaránya 1:20 000. Mit jelent ez?",
+                options: { a: "A valóság 20 000-szer nagyobb, mint a térkép.", b: "A térkép 20 000-szer nagyobb, mint a valóság.", c: "20 000 cm a térképen 1 méter a valóságban." },
+                correct: "a",
+                explanation: "Az 1:20 000 méretarány azt jelenti, hogy 1 egység a térképen 20 000 egység a valóságban. Ez egy hasonlósági arány, ahol a valóság a 'nagy' és a térkép a 'kicsi' kép."
+            },
+            {
+                question: "Egy 2 méter magas ember árnyéka 4 méter. Ugyanekkor egy fa árnyéka 10 méter. Milyen magas a fa?",
+                options: { a: "20 méter", b: "5 méter", c: "8 méter" },
+                correct: "b",
+                explanation: "A napsugarak párhuzamossága miatt hasonló háromszögek jönnek létre. Az arány: fa_magasság / ember_magasság = fa_árnyék / ember_árnyék. x/2 = 10/4. Ebből x/2 = 2.5, tehát x = 5 méter."
+            },
+            {
+                question: "Két hasonló háromszög területének aránya 16. Mekkora a hasonlóság aránya?",
+                options: { a: "16", b: "8", c: "4" },
+                correct: "c",
+                explanation: "A területek aránya a hasonlóság arányának a négyzete (T'/T = k²). Ha k²=16, akkor k=√16=4."
+            },
+            {
+                question: "Melyik állítás igaz MINDIG?",
+                options: { a: "Minden derékszögű háromszög hasonló.", b: "Minden egyenlő szárú háromszög hasonló.", c: "Minden egyenlő oldalú háromszög hasonló." },
+                correct: "c",
+                explanation: "Minden egyenlő oldalú háromszögnek 60°-osak a szögei. Mivel a szögeik megegyeznek, a Sz-Sz-Sz tétel alapján bármely két egyenlő oldalú háromszög hasonló egymáshoz."
+            },
+            {
+                question: "Melyik síkidom-pár NEM feltétlenül hasonló egymáshoz?",
+                options: { a: "Bármely két négyzet.", b: "Bármely két téglalap.", c: "Bármely két kör." },
+                correct: "b",
+                explanation: "Két téglalap csak akkor hasonló, ha a megfelelő oldalaik aránya megegyezik. Egy 2x4-es téglalap nem hasonló egy 2x5-öshöz. Ezzel szemben minden négyzet és minden kör hasonló."
+            },
+            {
+                question: "Egy háromszög oldalai 5, 6, 7. Egy hozzá hasonló háromszög legrövidebb oldala 10. Mekkora a leghosszabb oldala?",
+                options: { a: "14", b: "12", c: "15" },
+                correct: "a",
+                explanation: "A hasonlóság arányát a legrövidebb oldalakból kapjuk: k = 10/5 = 2. A leghosszabb oldal az eredetiben 7, a hasonlóban 7 * 2 = 14."
+            },
+            {
+                question: "Ha két háromszögnek egy-egy oldala egyenlő és a rajtuk fekvő két-két szög is egyenlő, akkor a két háromszög...",
+                options: { a: "hasonló, de nem feltétlenül egybevágó.", b: "egybevágó.", c: "nem feltétlenül hasonló." },
+                correct: "b",
+                explanation: "Ez az egybevágóság Sz-O-Sz (Szög-Oldal-Szög) esete. Ha nemcsak a szögek egyeznek meg, hanem egy megfelelő oldal hossza is, akkor már egybevágóságról beszélünk, nem csak hasonlóságról."
+            },
+            {
+                question: "Melyik a hasonlóság jele a matematikában?",
+                options: { a: "=", b: "≅", c: "~" },
+                correct: "c",
+                explanation: "A hasonlóság jele a hullámvonal, azaz a tilde (~). Az egyenlőségjelet (=) egyenlőségre, a (≅) jelet pedig egybevágóságra használjuk."
+            },
+            {
+                question: "Két hasonló háromszög kerületének aránya 4. Mi a területeik aránya?",
+                options: { a: "4", b: "8", c: "16" },
+                correct: "c",
+                explanation: "A kerületek aránya megegyezik a hasonlóság arányával, tehát k=4. A területek aránya a hasonlóság arányának a négyzete, tehát k² = 4² = 16."
+            },
+            {
+                question: "Egy háromszög oldalai 4, 8, 10. Egy másiké 6, 12, 15. Hasonlóak-e?",
+                options: { a: "Igen", b: "Nem", c: "Nem eldönthető" },
+                correct: "a",
+                explanation: "Ellenőrizzük az oldalak arányát: 6/4 = 1.5, 12/8 = 1.5, 15/10 = 1.5. Mivel az arány mindhárom esetben ugyanaz, a két háromszög hasonló az O-O-O tétel alapján."
+            },
+            {
+                question: "Ha egy háromszög oldalait egyenként a kétszeresére nagyítjuk, mit kapunk?",
+                options: { a: "Egy egybevágó háromszöget.", b: "Egy hasonló háromszöget.", c: "Egy teljesen másfajta háromszöget." },
+                correct: "b",
+                explanation: "Ha minden oldalt ugyanannyiszorosára (most épp 2-szeresére) nagyítunk, az O-O-O tétel alapján az eredetihez hasonló háromszöget kapunk. A hasonlóság aránya k=2 lesz."
+            },
+            {
+                question: "Egy háromszög szögei 30° és 70°. Melyik háromszög hasonló ehhez?",
+                options: { a: "Amelynek szögei 30° és 80°.", b: "Amelynek szögei 70° és 80°.", c: "Amelynek szögei 70° és 100°." },
+                correct: "b",
+                explanation: "Az eredeti háromszög harmadik szöge 180° - 30° - 70° = 80°. A 'b' opcióban megadott háromszög harmadik szöge 180° - 70° - 80° = 30°. Mindkét háromszög szögei 30°, 70°, 80°, tehát hasonlóak."
+            },
+            {
+                question: "Ha egy nagy háromszögben behúzzuk a középvonalat, a levágott kis háromszög...",
+                options: { a: "...egybevágó a nagy háromszöggel.", b: "...területe fele a nagy háromszögének.", c: "...hasonló a nagy háromszöghöz, és k=2 az arány." },
+                correct: "c",
+                explanation: "A középvonal párhuzamos a harmadik oldallal és fele olyan hosszú. Így a levágott kis háromszög szögei megegyeznek a nagyéval (hasonló), és oldalai fele akkorák. Az arány (nagy/kicsi) tehát k=2."
+            },
+            {
+                question: "Két háromszög egybevágó. Mekkora a hasonlóságuk aránya?",
+                options: { a: "k=0", b: "k=1", c: "k=2" },
+                correct: "b",
+                explanation: "Az egybevágóság a hasonlóság speciális esete, amikor a megfelelő oldalak nemcsak arányosak, hanem egyenlőek is. Az arányuk tehát 1."
+            },
+            {
+                question: "Az O-Sz-O hasonlósági tételben a szögnek...",
+                options: { a: "...bármelyik szögnek lehet lennie.", b: "...a két oldal által közbezárt szögnek kell lennie.", c: "...a nagyobbik oldallal szemközti szögnek kell lennie." },
+                correct: "b",
+                explanation: "A tétel nevében a 'Sz' betű a két 'O' között van, ami pontosan azt jelöli, hogy a szögnek a két arányos oldal által közbezárt szögnek kell lennie."
+            },
+            {
+                question: "Egy háromszög oldalai 2, 4, 5. Egy hasonló háromszög kerülete 33. Melyek az oldalai?",
+                options: { a: "4, 8, 10", b: "3, 6, 7.5", c: "6, 12, 15" },
+                correct: "c",
+                explanation: "Az eredeti kerület K=2+4+5=11. A kerületek aránya k=33/11=3. A hasonló háromszög oldalai az eredeti oldalak 3-szorosai: 2*3=6, 4*3=12, 5*3=15."
+            }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const checkBtns = document.querySelectorAll('.check-btn');
+        const pinInputs = document.querySelectorAll('.pin-code-input');
+        const resultContainers = document.querySelectorAll('.result-container');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">
+                            <label for="q${index}a">
+                                <input type="radio" name="question${index}" id="q${index}a" value="a">
+                                ${item.options.a}
+                            </label>
+                            <label for="q${index}b">
+                                <input type="radio" name="question${index}" id="q${index}b" value="b">
+                                ${item.options.b}
+                            </label>
+                            <label for="q${index}c">
+                                <input type="radio" name="question${index}" id="q${index}c" value="c">
+                                ${item.options.c}
+                            </label>
+                        </div>
+                        <div class="explanation" id="explanation-${index}">
+                            <strong>Magyarázat:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInputs[0].value; // Elég az elsőből olvasni, mert szinkronizáltak
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtns.forEach(btn => btn.disabled = true);
+            pinInputs.forEach(input => input.disabled = true);
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+
+                if (isMaster) {
+                    explanationDiv.style.display = 'block';
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('master-correct');
+                } else {
+                    explanationDiv.style.display = 'block';
+                }
+
+                if (selectedOption) {
+                    const selectedLabel = selectedOption.parentElement;
+                    if (selectedOption.value === item.correct) {
+                        score++;
+                        selectedLabel.classList.add('correct-answer', 'label-correct');
+                    } else {
+                        selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                        const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                        correctLabel.classList.add('correct-answer');
+                    }
+                } else if (isMaster) {
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('correct-answer');
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            const resultText = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            resultContainers.forEach(container => container.innerHTML = resultText);
+
+            if (isMaster) {
+                adminPanels.forEach(panel => panel.style.display = 'block');
+            }
+        }
+
+        // Eseménykezelők hozzáadása az összes vezérlőhöz
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        
+        checkBtns.forEach(btn => {
+            btn.addEventListener('click', checkAnswers);
+        });
+
+        pinInputs.forEach(input => {
+            // Enter gombos ellenőrzés
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+            // PIN mezők szinkronizálása
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

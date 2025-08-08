@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Osztó, többszörös</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Osztó, többszörös</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Melyik szám a 7-nek többszöröse?", options: { a: "15", b: "21", c: "27" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A többszörös azt jelenti, hogy a számot maradék nélkül lehet osztani 7-tel. 🔹 2. Lépés: Ellenőrizzük a lehetőségeket. 15 : 7 = 2, maradék 1. 21 : 7 = 3, maradék 0. 27 : 7 = 3, maradék 6. ✅ Megoldás: A 21 osztható 7-tel, tehát a 21 a 7 többszöröse. ✏️ Bónusz: A 7 többszörösei a 7-es szorzótábla számai (7, 14, 21, 28...)." },
+            { question: "Melyik szám a 24-nek osztója?", options: { a: "5", b: "8", c: "10" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az osztó azt jelenti, hogy a 24-et maradék nélkül el lehet vele osztani. 🔹 2. Lépés: Ellenőrizzük a lehetőségeket. 24 : 5 nem egész. 24 : 8 = 3. 24 : 10 nem egész. ✅ Megoldás: A 8 osztója a 24-nek. ✏️ Bónusz: A 24 osztói: 1, 2, 3, 4, 6, 8, 12, 24." },
+            { question: "Melyik állítás igaz?", options: { a: "A 15 osztója a 3-nak.", b: "A 3 osztója a 15-nek.", c: "A 15 és a 3 egymás többszörösei." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Vizsgáljuk a kapcsolatot a 3 és a 15 között. 15-öt el tudjuk osztani 3-mal? Igen, 15 : 3 = 5. 🔹 2. Lépés: Ez azt jelenti, hogy a 3 osztója a 15-nek, és a 15 többszöröse a 3-nak. ✅ Megoldás: Az 'b' állítás fogalmaz helyesen: a 3 osztója a 15-nek. Az 'a' állítás fordítva igaz. A 'c' állítás pontatlan." },
+            { question: "Melyik szám NEM többszöröse a 4-nek?", options: { a: "12", b: "20", c: "18" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A 4 többszörösei azok a számok, amik a 4-es szorzótáblában szerepelnek. 🔹 2. Lépés: Ellenőrizzük a számokat. 12 = 3 * 4. 20 = 5 * 4. A 18 viszont nem osztható 4-gyel maradék nélkül (18:4=4, maradék 2). ✅ Megoldás: A 18 nem többszöröse a 4-nek." },
+            { question: "Melyik szám NEM osztója a 30-nak?", options: { a: "4", b: "5", c: "6" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Keressük azt a számot, amellyel a 30-at nem lehet maradék nélkül elosztani. 🔹 2. Lépés: 30 : 4 = 7, maradék 2. 30 : 5 = 6. 30 : 6 = 5. ✅ Megoldás: A 4 nem osztója a 30-nak." },
+            { question: "Melyik szám osztója minden természetes számnak?", options: { a: "a 0", b: "a 2", c: "az 1" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Gondoljuk végig a számok tulajdonságait! Bármelyik számot elosztva 1-gyel, önmagát kapjuk maradék nélkül. 🔹 2. Lépés: Például 5:1=5, 17:1=17. Nullával nem lehet osztani. ✅ Megoldás: Az 1 az egyetlen szám, ami minden természetes számnak osztója." },
+            { question: "Mi a 18 legnagyobb valódi osztója? (A valódi osztó nem önmaga.)", options: { a: "18", b: "9", c: "6" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Soroljuk fel a 18 összes osztóját: 1, 2, 3, 6, 9, 18. 🔹 2. Lépés: A valódi osztók azok, amik nem egyenlők magával a számmal. Ezek: 1, 2, 3, 6, 9. 🔹 3. Lépés: Ezek közül a legnagyobb a 9. ✅ Megoldás: A 18 legnagyobb valódi osztója a 9." },
+            { question: "Minden páros szám többszöröse a ...", options: { a: "4-nek", b: "10-nek", c: "2-nek" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A páros számok definíciója az, hogy maradék nélkül oszthatók 2-vel. 🔹 2. Lépés: Ha egy szám osztható 2-vel, az azt jelenti, hogy többszöröse a 2-nek. ✅ Megoldás: Minden páros szám többszöröse a 2-nek." },
+            { question: "Melyik a 9 legkisebb, 9-nél nagyobb többszöröse?", options: { a: "18", b: "27", c: "1" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Soroljuk fel a 9 többszöröseit: 9, 18, 27, 36... 🔹 2. Lépés: Keressük a legkisebbet, ami nagyobb, mint 9. Ez a sorban a következő szám. ✅ Megoldás: A 9 legkisebb, 9-nél nagyobb többszöröse a 18." },
+            { question: "Ha 'a' osztója 'b'-nek, akkor 'b' ... 'a'-nak.", options: { a: "osztója", b: "többszöröse", c: "egyenlő vele" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ez a két fogalom definíciója. Az oszó és a többszörös ugyanannak a kapcsolatnak a két oldala. 🔹 2. Lépés: Például a 4 osztója a 20-nak, ezért a 20 többszöröse a 4-nek. ✅ Megoldás: Ha 'a' osztója 'b'-nek, akkor 'b' többszöröse 'a'-nak." },
+            { question: "Melyik szám a 11-nek többszöröse?", options: { a: "33", b: "23", c: "111" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Azt a számot keressük, amelyik osztható 11-gyel. 🔹 2. Lépés: 33 : 11 = 3. 23 nem osztható 11-gyel. 111 : 11 = 10, maradék 1. ✅ Megoldás: A 33 többszöröse a 11-nek." },
+            { question: "Melyik szám osztója a 42-nek?", options: { a: "8", b: "7", c: "4" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Keressük azt a számot, amivel a 42 maradék nélkül osztható. 🔹 2. Lépés: A 42 nem osztható 8-cal és 4-gyel. Viszont 42 : 7 = 6. ✅ Megoldás: A 7 osztója a 42-nek." },
+            { question: "Hány osztója van a 10-nek?", options: { a: "2", b: "3", c: "4" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Soroljuk fel a 10 összes osztóját. 🔹 2. Lépés: A 10 osztható 1-gyel, 2-vel, 5-tel és 10-zel. 🔹 3. Lépés: Számoljuk össze őket: 4 darab van. ✅ Megoldás: A 10-nek 4 osztója van." },
+            { question: "Egy szám ... önmagának.", options: { a: "csak osztója", b: "osztója és többszöröse is", c: "csak többszöröse" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Vizsgáljuk a 7-es példáján. 7:7=1, tehát a 7 osztója önmagának. 🔹 2. Lépés: 7 = 1 * 7, tehát a 7 többszöröse is önmagának. ✅ Megoldás: Minden szám (kivéve a 0) osztója és többszöröse is önmagának." },
+            { question: "Melyik szám a 100-nak osztója?", options: { a: "200", b: "25", c: "30" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A 100-at el kell tudnunk osztani az osztóval. 🔹 2. Lépés: A 200 nagyobb, mint 100, így nem lehet osztója. 100:25=4. A 30 nem osztója a 100-nak. ✅ Megoldás: A 25 osztója a 100-nak." },
+            { question: "Mi a 20 legkisebb valódi osztója? (A valódi osztó nem 1.)", options: { a: "1", b: "2", c: "4" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A 20 osztói: 1, 2, 4, 5, 10, 20. 🔹 2. Lépés: A valódi osztók, amik nem 1: 2, 4, 5, 10, 20. 🔹 3. Lépés: Ezek közül a legkisebb a 2. ✅ Megoldás: A 20 legkisebb, 1-nél nagyobb osztója a 2." },
+            { question: "Hány többszöröse van egy 1-nél nagyobb természetes számnak?", options: { a: "Pontosan 10.", b: "Végtelen sok.", c: "Annyi, mint a szám értéke." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A többszörösöket úgy kapjuk, hogy a számot megszorozzuk az egész számokkal (1, 2, 3, 4...). 🔹 2. Lépés: Mivel végtelen sok egész számmal szorozhatunk, egy számnak végtelen sok többszöröse van. ✅ Megoldás: Egy számnak végtelen sok többszöröse van." },
+            { question: "Mi egy szám legnagyobb osztója?", options: { a: "Önmaga", b: "A fele", c: "Az 1" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Egy számot nem lehet önmagánál nagyobb számmal elosztani úgy, hogy az eredmény egész legyen. 🔹 2. Lépés: Minden szám osztható önmagával (az eredmény 1). ✅ Megoldás: Egy szám legnagyobb osztója mindig önmaga." },
+            { question: "Melyik a 15 és a 20 közös osztója?", options: { a: "10", b: "3", c: "5" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A 15 osztói: 1, 3, 5, 15. A 20 osztói: 1, 2, 4, 5, 10, 20. 🔹 2. Lépés: Keressük a közös elemeket a két listában. A közös osztók az 1 és az 5. A lehetőségek közül az 5 szerepel. ✅ Megoldás: Az 5 közös osztója a 15-nek és a 20-nak." },
+            { question: "Melyik a 4 és a 6 közös többszöröse?", options: { a: "24", b: "16", c: "18" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A 4 többszörösei: 4, 8, 12, 16, 20, 24... A 6 többszörösei: 6, 12, 18, 24... 🔹 2. Lépés: Keressük a közös elemeket. A 12 és a 24 is közös többszörös. A lehetőségek közül a 24 szerepel. ✅ Megoldás: A 24 közös többszöröse a 4-nek és a 6-nak." },
+            { question: "Melyik számcsoportban van a 12-nek egy osztója ÉS egy többszöröse?", options: { a: "5 és 10", b: "6 és 24", c: "8 és 16" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Vizsgáljuk a 'b' lehetőséget. A 6 osztója a 12-nek? Igen (12:6=2). A 24 többszöröse a 12-nek? Igen (24=2*12). 🔹 2. Lépés: Ez a pár megfelel a feltételnek. A többi párban nincs ilyen kapcsolat. ✅ Megoldás: A 'b' csoportban (6 és 24) van egy osztó és egy többszörös." },
+            { question: "Mi egy prímszám valódi osztóinak a száma?", options: { a: "0", b: "1", c: "2" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A prímszám definíció szerint csak 1-gyel és önmagával osztható. 🔹 2. Lépés: A valódi osztók nem lehetnek sem 1, sem önmaga a szám. 🔹 3. Lépés: Ebből következik, hogy a prímszámoknak nincsenek valódi osztóik. ✅ Megoldás: Egy prímszámnak 0 darab valódi osztója van." },
+            { question: "Ha egy szám többszöröse a 10-nek, akkor biztosan többszöröse a ...", options: { a: "20-nak", b: "5-nek", c: "100-nak" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ha egy szám osztható 10-zel, akkor a 10 osztóival is oszthatónak kell lennie. 🔹 2. Lépés: A 10 osztói az 1, 2, 5, 10. Tehát a szám biztosan osztható 5-tel is. ✅ Megoldás: Ha egy szám többszöröse a 10-nek, akkor biztosan többszöröse az 5-nek is." },
+            { question: "Melyik szám lesz a 6-nak is és a 9-nek is többszöröse?", options: { a: "12", b: "27", c: "36" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Keressük a 6 és a 9 közös többszörösét. 🔹 2. Lépés: 36:6=6, tehát a 36 többszöröse a 6-nak. 36:9=4, tehát a 36 többszöröse a 9-nek is. A 12 és a 27 csak az egyiknek többszöröse. ✅ Megoldás: A 36 mindkettőnek többszöröse." },
+            { question: "Egy dobozban 32 cukorka van. Hány fős csoportnak lehet igazságosan szétosztani?", options: { a: "6", b: "8", c: "10" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Azt a számot keressük, amelyik osztója a 32-nek. 🔹 2. Lépés: 32 nem osztható 6-tal és 10-zel maradék nélkül. 32 : 8 = 4. ✅ Megoldás: 8 fős csoportnak lehet igazságosan (maradék nélkül) szétosztani a cukorkákat." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { // Handle not answered questions for student mode after check
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

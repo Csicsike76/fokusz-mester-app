@@ -1,0 +1,12 @@
+.chatContainer { max-width: 800px; margin: 2rem auto; color: white; background-color: rgba(44, 62, 80, 0.9); border-radius: 10px; backdrop-filter: blur(5px); display: flex; flex-direction: column; height: 80vh; }
+.header { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.2); }
+.header h1 { margin: 0; text-align: center; }
+.charSelector { margin-top: 1rem; text-align: center; }
+.charSelector select { padding: 0.5rem; border-radius: 5px; }
+.messages { flex-grow: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; }
+.message { padding: 0.75rem 1rem; border-radius: 15px; max-width: 80%; line-height: 1.5; }
+.tutor { background-color: #34495e; align-self: flex-start; }
+.user { background-color: #1abc9c; align-self: flex-end; }
+.inputArea { display: flex; padding: 1rem; border-top: 1px solid rgba(255,255,255,0.2); }
+.inputArea input { flex-grow: 1; padding: 0.75rem; border-radius: 5px; border: none; background-color: rgba(0,0,0,0.2); color: white; }
+.inputArea button { padding: 0.75rem 1rem; margin-left: 1rem; border: none; border-radius: 5px; background-color: #1abc9c; color: white; cursor: pointer; }

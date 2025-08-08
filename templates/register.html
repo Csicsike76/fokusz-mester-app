@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Regisztráció</h2>
+<form method="post">
+  <label>Felhasználónév <input name="username"></label><br>
+  <label>Email <input name="email"></label><br>
+  <label>Jelszó <input type="password" name="password"></label><br>
+  <label>VIP kód (opcionális) <input name="vip_code"></label><br>
+  <button>Regisztráció</button>
+</form>
+{% endblock %}

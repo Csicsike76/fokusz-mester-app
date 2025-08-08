@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: 5. Osztályos Év Végi Összefoglaló</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 5px; border-radius: 3px; display: inline-block; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: 5. Osztályos Év Végi Összefoglaló</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Mennyi a <span class='formula-display'>10 + 5 * 2</span> művelet eredménye?", answers: { a: "20", b: "30", c: "25" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Műveleti sorrend:</b> Először a szorzást, majd az összeadást végezzük el.</div><div class="explanation-step"><b>🔹 Számolás:</b> 5 * 2 = 10. Ezután 10 + 10 = 20.</div><div class="explanation-solution">✅ Megoldás: Az eredmény 20.</div>` },
+            { question: "Mennyi 360 perc órában kifejezve?", answers: { a: "6 óra", b: "3.6 óra", c: "36 óra" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 óra = 60 perc.</div><div class="explanation-step"><b>🔹 Számolás:</b> A perceket el kell osztani 60-nal, hogy megkapjuk az órák számát: 360 / 60 = 6.</div><div class="explanation-solution">✅ Megoldás: 360 perc az 6 óra.</div>` },
+            { question: "Melyik szám osztható 3-mal?", answers: { a: "123", b: "124", c: "125" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Oszthatósági szabály:</b> Egy szám akkor osztható 3-mal, ha a számjegyeinek összege osztható 3-mal.</div><div class="explanation-step"><b>🔹 Számolás:</b> 1 + 2 + 3 = 6. Mivel a 6 osztható 3-mal, ezért a 123 is.</div><div class="explanation-solution">✅ Megoldás: A 123 osztható 3-mal.</div>` },
+            { question: "Egy téglalap oldalai 8 cm és 5 cm. Mennyi a kerülete?", answers: { a: "26 cm", b: "40 cm", c: "13 cm" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A téglalap kerülete K = 2 * (a + b).</div><div class="explanation-step"><b>🔹 Számolás:</b> K = 2 * (8 + 5) = 2 * 13 = 26 cm.</div><div class="explanation-solution">✅ Megoldás: A téglalap kerülete 26 cm.</div>` },
+            { question: "Mennyi 200-nak a 3/4 része?", answers: { a: "150", b: "100", c: "75" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Levezetés:</b> A számot el kell osztani a nevezővel (4), majd meg kell szorozni a számlálóval (3).</div><div class="explanation-step"><b>🔹 Számolás:</b> 200 / 4 = 50. Majd 50 * 3 = 150.</div><div class="explanation-solution">✅ Megoldás: 200-nak a 3/4 része 150.</div>` },
+            { question: "Kerekítsd a 478-at a legközelebbi százasra!", answers: { a: "500", b: "400", c: "480" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Százasra kerekítéskor a tízes helyiértéket kell nézni. Ha 5 vagy annál nagyobb, felfelé kerekítünk.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A 478-ban a tízesek helyén 7-es áll, ami nagyobb, mint 5, ezért felfelé kerekítünk.</div><div class="explanation-solution">✅ Megoldás: A legközelebbi százas az 500.</div>` },
+            { question: "Péternek van 2500 Ft-ja. Vásárol egy könyvet 1200 Ft-ért és egy füzetet 300 Ft-ért. Mennyi pénze marad?", answers: { a: "1000 Ft", b: "1300 Ft", c: "1200 Ft" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Kiadások összege:</b> 1200 Ft + 300 Ft = 1500 Ft.</div><div class="explanation-step"><b>🔹 Kivonás:</b> 2500 Ft - 1500 Ft = 1000 Ft.</div><div class="explanation-solution">✅ Megoldás: Péternek 1000 Ft-ja marad.</div>` },
+            { question: "Melyik tört nagyobb: 3/5 vagy 4/5?", answers: { a: "4/5", b: "3/5", c: "Egyenlőek" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Ha két törtnek azonos a nevezője, akkor az a nagyobb, amelyiknek a számlálója nagyobb.</div><div class="explanation-step"><b>🔹 Összehasonlítás:</b> Mivel 4 > 3, ezért 4/5 > 3/5.</div><div class="explanation-solution">✅ Megoldás: A 4/5 a nagyobb.</div>` },
+            { question: "Mennyi 12.5 + 3.7?", answers: { a: "15.12", b: "16.2", c: "15.2" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Számolás:</b> A tizedesvesszőket egymás alá írva, helyiérték szerint adjuk össze a számokat: 12,5 + 3,7 = 16,2.</div><div class="explanation-solution">✅ Megoldás: Az összeg 16,2.</div>` },
+            { question: "Melyik szög a derékszög?", answers: { a: "A 180°-os", b: "A 90°-os", c: "A 45°-os" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A derékszög az a szög, amelyik egyenes szöget (180°) két egyenlő részre oszt.</div><div class="explanation-solution">✅ Megoldás: A 90°-os szög a derékszög.</div>` },
+            { question: "Hogyan írjuk le római számokkal a 4-et?", answers: { a: "IIII", b: "IV", c: "VI" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Kivonásos szabály:</b> A római számírásban a kisebb érték a nagyobb elé írva kivonást jelent. Az 5 jele V, az 1 jele I.</div><div class="explanation-step"><b>🔹 Levezetés:</b> A 4-et úgy írjuk le, mint 5-1, azaz IV.</div><div class="explanation-solution">✅ Megoldás: A 4 római számmal IV.</div>` },
+            { question: "Mennyi 2.5 méter centiméterben?", answers: { a: "25 cm", b: "250 cm", c: "0.25 cm" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 méter = 100 centiméter.</div><div class="explanation-step"><b>🔹 Számolás:</b> A méterben megadott értéket meg kell szorozni 100-zal: 2.5 * 100 = 250.</div><div class="explanation-solution">✅ Megoldás: 2.5 méter az 250 centiméter.</div>` },
+            { question: "Melyik számra végződik a 125 * 10?", answers: { a: "5", b: "0", c: "1" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Ha egy egész számot 10-zel szorzunk, az utolsó számjegye mindig 0 lesz.</div><div class="explanation-step"><b>🔹 Számolás:</b> 125 * 10 = 1250.</div><div class="explanation-solution">✅ Megoldás: A szorzat 0-ra végződik.</div>` },
+            { question: "Mi a 7/10 tizedestört alakja?", answers: { a: "7.10", b: "0.7", c: "0.07" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> A tizedestörtben a vessző utáni első hely a tizedek helye.</div><div class="explanation-step"><b>🔹 Levezetés:</b> A 7/10 azt jelenti, hogy 7 tizedünk van, amit 0,7-ként írunk le.</div><div class="explanation-solution">✅ Megoldás: A tizedestört alak 0.7.</div>` },
+            { question: "Egy 6 cm oldalú négyzetnek mennyi a területe?", answers: { a: "24 cm", b: "36 cm²", c: "12 cm²" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A négyzet területe T = a * a = a².</div><div class="explanation-step"><b>🔹 Számolás:</b> T = 6 cm * 6 cm = 36 cm². A kerület lenne 24 cm.</div><div class="explanation-solution">✅ Megoldás: A négyzet területe 36 cm².</div>` },
+            { question: "Egy dobozban 12 ceruza van. Mennyi ceruza van 5 dobozban?", answers: { a: "17", b: "60", c: "52" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Művelet:</b> A feladat megoldásához szoroznunk kell.</div><div class="explanation-step"><b>🔹 Számolás:</b> 12 * 5 = 60.</div><div class="explanation-solution">✅ Megoldás: 5 dobozban 60 ceruza van.</div>` },
+            { question: "Melyik az egyenes szög?", answers: { a: "90°", b: "360°", c: "180°" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Az egyenes szög egy egyenes két ellentétes félegyenese által bezárt szög.</div><div class="explanation-solution">✅ Megoldás: Az egyenes szög mértéke 180°.</div>` },
+            { question: "Mennyi 15.8 - 4.3?", answers: { a: "11.5", b: "1.15", c: "11.05" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Számolás:</b> A tizedesvesszőket egymás alá írva, helyiérték szerint vonjuk ki a számokat: 15,8 - 4,3 = 11,5.</div><div class="explanation-solution">✅ Megoldás: A különbség 11,5.</div>` },
+            { question: "Melyik szám osztható 5-tel is és 10-zel is?", answers: { a: "15", b: "25", c: "40" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Ha egy szám osztható 10-zel, akkor automatikusan osztható 5-tel is. A 10-zel oszthatósághoz 0-ra kell végződnie.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A 15 és 25 csak 5-tel osztható. A 40 osztható 10-zel (és így 5-tel is).</div><div class="explanation-solution">✅ Megoldás: A 40 osztható mindkét számmal.</div>` },
+            { question: "Mennyi 2/7 + 3/7?", answers: { a: "5/14", b: "1/7", c: "5/7" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Szabály:</b> Azonos nevezőjű törteket úgy adunk össze, hogy a számlálókat összeadjuk, a nevező pedig változatlan marad.</div><div class="explanation-step"><b>🔹 Számolás:</b> (2+3)/7 = 5/7.</div><div class="explanation-solution">✅ Megoldás: Az összeg 5/7.</div>` },
+            { question: "Melyik a legnagyobb szám?", answers: { a: "9876", b: "10001", c: "9999" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Helyiérték:</b> Először a számjegyek számát hasonlítjuk össze. A 10001 ötjegyű, a többi négyjegyű.</div><div class="explanation-step"><b>🔹 Következtetés:</b> Az ötjegyű szám mindig nagyobb, mint a négyjegyű.</div><div class="explanation-solution">✅ Megoldás: A legnagyobb szám a 10001.</div>` },
+            { question: "Mennyi 5000 gramm kilogrammban?", answers: { a: "500 kg", b: "50 kg", c: "5 kg" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 kilogramm = 1000 gramm.</div><div class="explanation-step"><b>🔹 Számolás:</b> A grammban megadott értéket el kell osztani 1000-rel: 5000 / 1000 = 5.</div><div class="explanation-solution">✅ Megoldás: 5000 gramm az 5 kilogramm.</div>` },
+            { question: "Egy buszon 45 utas van. Az első megállóban leszáll 12, felszáll 8. Hányan vannak a buszon?", answers: { a: "25", b: "33", c: "41" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 1. lépés (leszállás):</b> 45 - 12 = 33 utas marad.</div><div class="explanation-step"><b>🔹 2. lépés (felszállás):</b> 33 + 8 = 41 utas lesz.</div><div class="explanation-solution">✅ Megoldás: 41-en vannak a buszon.</div>` },
+            { question: "Melyik a prímszám?", answers: { a: "9", b: "1", c: "7" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A prímszámok azok a természetes számok, amelyeknek pontosan két osztójuk van: 1 és önmaguk.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A 9 osztható 3-mal is. Az 1-nek csak egy osztója van. A 7-nek csak az 1 és a 7 az osztója.</div><div class="explanation-solution">✅ Megoldás: A 7 prímszám.</div>` },
+            { question: "Mennyi <span class='formula-display'>(20 - 5) / 3</span>?", answers: { a: "10", b: "15", c: "5" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Műveleti sorrend:</b> Először a zárójelben lévő műveletet végezzük el.</div><div class="explanation-step"><b>🔹 Számolás:</b> 20 - 5 = 15. Ezután 15 / 3 = 5.</div><div class="explanation-solution">✅ Megoldás: Az eredmény 5.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

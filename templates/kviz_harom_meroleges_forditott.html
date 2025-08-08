@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: A három merőleges tételének fordított tételei</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: A három merőleges tételének fordított tételei</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Melyik állítás a három merőleges tételének megfordítása?", options: { a: "Ha egy ferde egyenes merőleges egy síkbeli egyenesre, akkor a vetülete is merőleges rá.", b: "Ha egy ferde egyenes párhuzamos egy síkbeli egyenessel, a vetülete is párhuzamos vele.", c: "Minden derékszög 90 fokos." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A tétel iránya: 'ha a vetület merőleges, akkor a ferde egyenes is az'. A megfordítás az ellenkező irányú állítás. 🔹 2. Lépés: Tehát a megfordítás: 'ha a ferde egyenes merőleges a síkbeli egyenesre, akkor a vetülete is merőleges a síkbeli egyenesre'. ✅ Megoldás: Az 'a' opció a helyes." },
+            { question: "Egy kocka elülső lapjának átlója merőleges az alaplap jobb oldali élére. Mit tudunk ebből a vetületéről?", options: { a: "A vetülete is merőleges az alaplap jobb oldali élére.", b: "A vetülete párhuzamos vele.", c: "A vetülete egy pont." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A tétel megfordítását alkalmazzuk. A ferde egyenes az elülső lapátló. A síkbeli egyenes a jobb oldali alapél. A sík az alaplap. 🔹 2. Lépés: Mivel a ferde egyenes merőleges a síkbeli egyenesre, a tétel megfordítása szerint a vetületének is merőlegesnek kell lennie rá. ✅ Megoldás: A vetülete is merőleges az alaplap jobb oldali élére." },
+            { question: "A síkban egy 'e' egyenes merőleges egy 'f' egyenesre. Mi igaz a síkon kívüli 'g' egyenesre, ha az 'e' a 'g' vetülete, és 'g' metszi 'f'-et?", options: { a: "g merőleges f-re", b: "g párhuzamos f-fel", c: "g kitérő f-hez" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Ez a három merőleges tételének eredeti iránya. 🔹 2. Lépés: Adott, hogy a vetület ('e') merőleges a síkbeli egyenesre ('f'). 🔹 3. Lépés: A tétel kimondja, hogy ebben az esetben az eredeti ferde egyenes ('g') is merőleges a síkbeli egyenesre ('f'). ✅ Megoldás: g merőleges f-re." },
+            { question: "Egy sátor ferde tartórúdja merőleges a sátor bejáratának alsó élére. A tartórúd vetülete a talajon...", options: { a: "párhuzamos a bejárat élével.", b: "merőleges a bejárat élére.", c: "egy pont." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A sík a talaj. A ferde egyenes a tartórúd. A síkbeli egyenes a bejárat éle. 🔹 2. Lépés: A feladat szerint a ferde egyenes merőleges a síkbeli egyenesre. 🔹 3. Lépés: A tétel megfordítása szerint ilyenkor a ferde egyenes vetületének is merőlegesnek kell lennie a síkbeli egyenesre. ✅ Megoldás: Merőleges a bejárat élére." },
+            { question: "Egy ferde egyenes merőleges egy síkbeli egyenesre. Milyen a vetülete a síkbeli egyenesre?", options: { a: "merőleges", b: "párhuzamos", c: "nem lehet tudni" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Ez a tétel megfordításának egyszerűsített kimondása. 🔹 2. Lépés: Ha a térbeli viszony merőleges, akkor a síkbeli vetületi viszony is merőleges. ✅ Megoldás: Merőleges." },
+            { question: "Mire jó a három merőleges tételének megfordítása?", options: { a: "Térbeli merőlegességből síkbeli merőlegességre következtethetünk.", b: "Síkbeli merőlegességből térbeli merőlegességre következtethetünk.", c: "Párhuzamosságot bizonyíthatunk vele." }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az eredeti tétel iránya: síkbeli merőlegesség => térbeli merőlegesség. 🔹 2. Lépés: A megfordítás iránya: térbeli merőlegesség => síkbeli merőlegesség. Vagyis a ferde egyenes és a síkbeli egyenes merőlegességéből következtetünk a vetület merőlegességére. ✅ Megoldás: Térbeli merőlegességből síkbeli merőlegességre következtethetünk." },
+            { question: "Egy kocka testátlója és az alaplap egyik átlója kitérőek, de merőlegesek. Mit mondhatunk a testátló vetületéről?", options: { a: "A testátló vetülete párhuzamos az alaplap átlójával.", b: "A testátló vetülete merőleges az alaplap átlójára.", c: "A testátló vetülete egy pont." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A testátló (ferde egyenes) merőleges az alaplap átlójára (síkbeli egyenes). A sík az alaplap. 🔹 2. Lépés: A tétel megfordítása szerint a testátló vetületének is merőlegesnek kell lennie az alaplap átlójára. 🔹 3. Lépés: Tudjuk, hogy a testátló vetülete az alaplap MÁSIK átlója, és a négyzet átlói merőlegesek. ✅ Megoldás: A testátló vetülete merőleges az alaplap átlójára." },
+            { question: "Melyik állítás igaz?", options: { a: "Ha a vetület nem merőleges, a ferde egyenes sem az.", b: "Ha a ferde egyenes nem merőleges, a vetület sem az.", c: "Mindkettő igaz." }, correctAnswer: "c", explanation: "🔹 1. Lépés: A tétel egy 'akkor és csak akkor' típusú állítás, ami azt jelenti, hogy a két merőlegesség (térbeli és síkbeli) feltételezi egymást. 🔹 2. Lépés: Ha az egyik nem teljesül, akkor a másik sem. Mindkét állítás ugyanazt fejezi ki, csak más irányból. ✅ Megoldás: Mindkettő igaz." },
+            { question: "Egy hegyoldalon ferdén lefutó sípálya merőleges egy, a hegyoldalban vízszintesen futó útra. A sípálya vetülete a völgy vízszintes síkján...", options: { a: "merőleges az útra.", b: "párhuzamos az úttal.", c: "nem lehet megmondani." }, correctAnswer: "a", explanation: "A kérdés összetett. A három merőleges tétele egy síkra vonatkozik. Itt két sík van. A kérdés nem egyértelmű 8. osztályos szinten. Javítom: 'Egy ferde tetőn a szarufa merőleges az ereszcsatornára. A szarufa vetülete a vízszintes födémen...' 🔹 1. Lépés: A szarufa a ferde egyenes, az ereszcsatorna a síkbeli egyenes. A sík a tető síkja. 🔹 2. Lépés: A vetület a födémen az esésvonal. Az ereszcsatorna vízszintes. A legmeredekebb esésvonal mindig merőleges a vízszintesre. ✅ Megoldás: A szarufa vetülete a födémen merőleges lesz az ereszcsatornára." },
+            { question: "Mi egy, a síkkal 45°-os szöget bezáró egyenes merőleges vetülete a síkra?", options: { a: "egy pont", b: "egy, az eredetinél rövidebb egyenes", c: "egy, az eredetivel párhuzamos egyenes" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Mivel a hajlásszög nem 0° és nem 90°, a vetület nem lesz egyenlő az eredetivel és nem lesz egy pont sem. 🔹 2. Lépés: A ferde helyzet miatt a vetület mindig rövidebb, mint az eredeti szakasz. ✅ Megoldás: Egy, az eredetinél rövidebb egyenes." },
+            { question: "Melyik három dolog között teremt kapcsolatot a tétel?", options: { a: "ferde egyenes, vetülete, síkbeli egyenes", b: "pont, egyenes, sík", c: "három metsző egyenes" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A tétel a merőlegességükről szól. 🔹 2. Lépés: A három szereplő: 1. a ferde egyenes, 2. a síkbeli egyenes, 3. a ferde egyenes merőleges vetülete a síkra. ✅ Megoldás: Ferde egyenes, vetülete, síkbeli egyenes." },
+            { question: "Egy gúla oldaléle merőleges egy, az alaplapon lévő, vele nem érintkező alapélre. Mit tudunk az oldalél vetületéről?", options: { a: "párhuzamos az alapéllel", b: "merőleges az alapélre", c: "egybeesik az alapéllel" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A ferde egyenes az oldalél. A síkbeli egyenes az alapél. A sík az alaplap. 🔹 2. Lépés: A tétel megfordítása szerint, mivel a ferde egyenes merőleges a síkbeli egyenesre, a vetületének is merőlegesnek kell lennie rá. ✅ Megoldás: Merőleges az alapélre." },
+            { question: "Ha egy ferde egyenes vetülete párhuzamos egy síkbeli egyenessel, mit mondhatunk az eredeti egyenesről?", options: { a: "Merőleges a síkbeli egyenesre.", b: "Párhuzamos a síkbeli egyenessel.", c: "Nem lehet tudni." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ez nem a három merőleges tétele, hanem a vetítés párhuzamosságtartó tulajdonsága. 🔹 2. Lépés: Ha a vetület párhuzamos, akkor az eredeti ferde egyenes is párhuzamos a síkbeli egyenessel. ✅ Megoldás: Párhuzamos a síkbeli egyenessel." },
+            { question: "A három merőleges tétele és megfordítása...", options: { a: "csak a kockára igaz.", b: "két, egymástól független állítás.", c: "egy 'akkor és csak akkor' típusú, egyenértékű állítást alkotnak." }, correctAnswer: "c", explanation: "🔹 1. Lépés: A tétel mindkét irányba igaz. 🔹 2. Lépés: Ez azt jelenti, hogy a térbeli merőlegesség és a síkbeli (vetületi) merőlegesség között egyenértékűség, logikai 'oda-vissza' kapcsolat van. ✅ Megoldás: Egy 'akkor és csak akkor' típusú, egyenértékű állítást alkotnak." },
+            { question: "Egy kocka alaplapja ABCD. Merőleges-e a BC él az AC lapátlóra?", options: { a: "Igen", b: "Nem", c: "Párhuzamosak" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A BC él vetülete az ABCD síkon önmaga. 🔹 2. Lépés: A BC egyenes és az AC egyenes az ABC derékszögű háromszög befogója és átfogója, amik a C csúcsban hegyesszöget zárnak be. Tehát nem merőlegesek. 🔹 3. Lépés: Mivel a vetület nem merőleges, az eredeti egyenes sem az. ✅ Megoldás: Nem." },
+            { question: "Melyik állítás NEM feltétele a tétel alkalmazásának?", options: { a: "A ferde egyenesnek és a síkbeli egyenesnek metszenie kell egymást.", b: "A ferde egyenesnek és a síkbeli egyenesnek egy síkban kell lennie.", c: "A ferde egyenes nem lehet párhuzamos a síkkal." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A tétel pont arról szól, amikor a ferde egyenes NINCS egy síkban a síkbeli egyenessel. 🔹 2. Lépés: Az viszont feltétel, hogy a két egyenesnek legyen egy közös pontja (döféspont), különben nem beszélhetünk merőlegességről. ✅ Megoldás: Az, hogy egy síkban legyenek, nem feltétel." },
+            { question: "A három merőleges tételének 'szereplői':", options: { a: "3 pont", b: "3 sík", c: "2 egyenes és 1 sík" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A tétel egy ferde egyenesről, egy síkbeli egyenesről, és arról a síkról szól, amelyre vetítünk. 🔹 2. Lépés: A 'harmadik' merőlegességet a vetítősugarak adják. ✅ Megoldás: 2 egyenes és 1 sík." },
+            { question: "Egy szabályos tetraéder egyik oldalélének vetülete az alaplapon merőleges az alaplap egyik oldalélére. Igaz-e?", options: { a: "Igaz", b: "Hamis" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A szabályos tetraéder alaplapja egy szabályos háromszög. 🔹 2. Lépés: Az oldalél vetülete az alaplap súlyvonalának 2/3 része. A súlyvonal egyben magasságvonal is, tehát merőleges az oldalélre. Ez a vetület nem merőleges az alaplap másik oldalélére. ✅ Megoldás: Az állítás hamis." },
+            { question: "Melyik állítás írja le helyesen a tétel logikáját?", options: { a: "Ha az árnyék merőleges a sínen, akkor a ferde pózna is merőleges a sínre.", b: "Ha a pózna merőleges a sínre, az árnyéka is merőleges a póznára.", c: "Ha az árnyék párhuzamos a sínnel, a pózna is párhuzamos vele." }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az 'árnyék' a vetület. A 'sín' a síkbeli egyenes. A 'ferde pózna' a ferde egyenes. 🔹 2. Lépés: A tétel azt mondja: ha a vetület (árnyék) merőleges a síkbeli egyenesre (sín), akkor az eredeti ferde egyenes (pózna) is merőleges rá. ✅ Megoldás: Az 'a' opció." },
+            { question: "Egy kocka AC lapátlója merőleges a DH oldalélre?", options: { a: "Igen", b: "Nem", c: "Párhuzamosak" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A DH él merőleges az alaplapra. Az AC az alaplapon van. De a DH és AC kitérőek. 🔹 2. Lépés: A DH vetülete az alaplapra a D pont. A D pont és az AC egyenes nem merőlegesek. A tétel megfordítása alapján sem igaz. ✅ Megoldás: Nem." },
+            { question: "A három merőleges tétele egy eszköz a(z)...", options: { a: "térfogatszámításra.", b: "térbeli merőlegesség bizonyítására.", c: "területszámításra." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A tétel nevében is benne van: 'merőleges'. 🔹 2. Lépés: A segítségével bonyolultabb térbeli helyzeteket tudunk visszavezetni egyszerűbb, síkbeli derékszögekre, és ezzel bizonyítani a merőlegességet. ✅ Megoldás: Térbeli merőlegesség bizonyítására." },
+            { question: "Egy síkbeli 'f' egyenesre merőleges egy ferde 'g' egyenes. Hol metszik egymást?", options: { a: "A ferde egyenes döféspontjában.", b: "Bárhol a síkbeli egyenesen.", c: "Nem metszik egymást." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A tétel alkalmazásához a két egyenesnek kell, hogy legyen közös pontja. 🔹 2. Lépés: Ez a közös pont a ferde egyenesnek a síkkal való metszéspontja, azaz a döféspontja. ✅ Megoldás: A ferde egyenes döféspontjában." },
+            { question: "Ha egy ferde egyenes merőleges a síkra, akkor a vetülete...", options: { a: "párhuzamos az eredetivel.", b: "egy pont.", c: "merőleges az eredetire." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A síkra merőleges egyenes minden pontja a döféspontba vetül. 🔹 2. Lépés: Így a teljes egyenes képe egyetlen pont lesz. ✅ Megoldás: Egy pont." },
+            { question: "Egy kocka alaplapjának középpontját kössük össze az egyik felső csúccsal. Ez a szakasz merőleges az alaplap átlójára?", options: { a: "Nem", b: "Igen", c: "Csak akkor, ha az átló a csúcs alatt van." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A ferde szakasz vetülete az alaplapon az alaplap középpontjától az egyik csúcsig tartó szakasz (az átló fele). 🔹 2. Lépés: Ez a vetület (az átló fele) nem merőleges az alaplap átlójára, hiszen rajta van. ✅ Megoldás: Nem." },
+            { question: "Melyik tétel NEM kapcsolódik szorosan a három merőleges tételéhez?", options: { a: "Pitagorasz-tétele", b: "a síkra merőlegesség definíciója", c: "a kör kerületének képlete" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A tétel bizonyítása és alkalmazása során gyakran használunk derékszögű háromszögeket (Pitagorasz-tétel) és a síkra merőlegesség fogalmát. 🔹 2. Lépés: A kör kerületének nincs közvetlen kapcsolata ezzel a térgeometriai tétellel. ✅ Megoldás: A kör kerületének képlete." }
+        ];
+
+        // Audit utáni javítás a 9. kérdéshez
+        quizData[8] = { question: "Egy ferde tetőn a szarufa merőleges az ereszcsatornára. A szarufa vetülete a vízszintes födémen...", options: { a: "merőleges lesz az ereszcsatornára.", b: "párhuzamos lesz az ereszcsatornával.", c: "egy pont lesz." }, correctAnswer: "a", explanation: "🔹 1. Lépés: Ez a tétel egy gyakorlati alkalmazása. A szarufa (ferde egyenes) merőleges a vízszintes ereszcsatornára (síkbeli egyenes a tetősíkon). 🔹 2. Lépés: A szarufa vetülete a vízszintes födémen a legmeredekebb esésvonal. 🔹 3. Lépés: A legmeredekebb esésvonal a síkban mindig merőleges a vízszintes vonalakra (mint az ereszcsatorna). ✅ Megoldás: Merőleges lesz az ereszcsatornára." };
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

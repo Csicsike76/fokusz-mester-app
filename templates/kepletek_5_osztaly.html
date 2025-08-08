@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5. Osztályos Matematika - Interaktív Segédlet</title>
+  <style>
+    :root {
+      --primary-color: #D9534F; /* 5. osztályos pirosasabb szín */
+      --secondary-color: #fcf8e3;
+      --accent-color: #5BC0DE;
+      --text-dark: #333;
+      --text-light: #fff;
+      --border-color: #ddd;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+    .container {
+      display: flex;
+    }
+    #toc {
+      position: sticky;
+      top: 0;
+      width: 260px;
+      height: 100vh;
+      background-color: #fff;
+      border-right: 1px solid var(--border-color);
+      padding: 20px;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    #toc h2 {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-top: 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    #toc ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    #toc > ul > li > a {
+        font-weight: bold;
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+    #toc ul ul {
+        padding-left: 15px;
+    }
+    #toc li a {
+        display: block;
+        padding: 8px 10px;
+        text-decoration: none;
+        color: #444;
+        border-radius: 5px;
+        transition: background-color 0.2s, color 0.2s;
+        font-size: 0.95rem;
+    }
+    #toc li a:hover, #toc li a.active {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+    main {
+      flex-grow: 1;
+      padding: 2rem 4rem;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 1.5rem;
+    }
+    header h1 {
+        font-size: 2.8rem;
+        color: var(--primary-color);
+        margin: 0;
+    }
+    section {
+      margin-bottom: 4rem;
+    }
+    h2 {
+      font-size: 2.2rem;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+    .card {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: #333;
+      font-size: 1.5rem;
+    }
+    .formula {
+      background-color: var(--secondary-color);
+      border: 1px solid #faebcc;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 15px 0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #8a6d3b;
+      overflow-x: auto;
+    }
+    .example {
+      background-color: #eef7f2;
+      border-left: 5px solid #5cb85c;
+      padding: 12px 18px;
+      font-style: italic;
+      margin-top: 10px;
+    }
+     .quiz-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .quiz-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    @media (max-width: 1000px) {
+        .container {
+            flex-direction: column;
+        }
+        #toc {
+            position: static;
+            width: 100%;
+            height: auto;
+            border-right: none;
+            border-bottom: 1px solid var(--border-color);
+        }
+        main {
+            padding: 1.5rem;
+        }
+        header h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <nav id="toc">
+    <h2>Tartalomjegyzék</h2>
+    <ul>
+      <li><a href="#fej1">1. Természetes számok</a></li>
+      <ul>
+        <li><a href="#al1.1">1.1 Számok írása, olvasása</a></li>
+        <li><a href="#al1.2">1.2 Összehasonlítás, kerekítés</a></li>
+        <li><a href="#al1.3">1.3 Római számok</a></li>
+        <li><a href="#al1.4">1.4 Műveletek, tulajdonságok</a></li>
+      </ul>
+      <li><a href="#fej2">2. Természetes számok oszthatósága</a></li>
+      <ul>
+        <li><a href="#al2.1">2.1 Osztó, többszörös</a></li>
+        <li><a href="#al2.2">2.2 Oszthatósági szabályok</a></li>
+        <li><a href="#al2.3">2.3 Prímszámok, felbontás</a></li>
+      </ul>
+      <li><a href="#fej3">3. Törtek</a></li>
+      <ul>
+        <li><a href="#al3.1">3.1 Közönséges törtek</a></li>
+        <li><a href="#al3.2">3.2 Összehasonlítás, ábrázolás</a></li>
+        <li><a href="#al3.3">3.3 Tizedes törtek</a></li>
+        <li><a href="#al3.4">3.4 Műveletek törtekkel</a></li>
+      </ul>
+      <li><a href="#fej4">4. Mértani alapfogalmak</a></li>
+      <ul>
+        <li><a href="#al4.1">4.1 Pont, egyenes, sík</a></li>
+        <li><a href="#al4.2">4.2 Szakaszok, szögek</a></li>
+        <li><a href="#al4.3">4.3 Merőlegesség, párhuzamosság</a></li>
+      </ul>
+      <li><a href="#fej5">5. Mértani alakzatok</a></li>
+      <ul>
+        <li><a href="#al5.1">5.1 Sokszögek, háromszögek, négyszögek</a></li>
+        <li><a href="#al5.2">5.2 A kör</a></li>
+        <li><a href="#al5.3">5.3 Tengelyes szimmetria</a></li>
+      </ul>
+      <li><a href="#fej6">6. Mértani testek</a></li>
+      <ul>
+        <li><a href="#al6.1">6.1 Kocka, téglatest</a></li>
+        <li><a href="#al6.2">6.2 Henger, gömb, kúp, gúla</a></li>
+      </ul>
+      <li><a href="#fej7">7. Mértékegységek</a></li>
+      <ul>
+        <li><a href="#al7.1">7.1 Hosszúság, terület, térfogat</a></li>
+        <li><a href="#al7.2">7.2 Tömeg, űrmérték, idő</a></li>
+      </ul>
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+            <div class="card summary-card" id="keplet-gyujtemeny">
+          <h3>Képlet- és Tételgyűjtemény</h3>
+          <p>Az alábbi gombra kattintva megnyithatod a 5. osztályos tananyag összes fontos képletét és tételét egy külön oldalon a könnyebb áttekintés és tanulás érdekében.</p>
+          <a class="quiz-btn" href="teljes_kepletgyujtemeny_5_osztaly.html" style="background-color: var(--primary); width: 100%; text-align: center;">
+            📚 Teljes Képletgyűjtemény Megnyitása →
+          </a>
+      </div>
+      <h1>5. Osztályos Matematika Interaktív Segédlet</h1>
+      <p>A legfontosabb tételek, definíciók és képletek egy helyen, a tankönyv struktúrája szerint.</p>
+    </header>
+
+    <section id="fej1">
+      <h2>1. Természetes számok</h2>
+      <div id="al1.1" class="card">
+        <h3>1.1 Számok írása, olvasása</h3>
+        <p>A tízes számrendszerben 10 számjegyet használunk: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. A számjegyek értéke a helyiértéktől függ (egyes, tízes, százas, ...).</p>
+        <div class="example"><strong>Példa:</strong> A 427 szám felbontva: 4⋅100 + 2⋅10 + 7⋅1.</div>
+        <a href="kviz_szamok_irasa.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a>
+      </div>
+      <div id="al1.2" class="card">
+        <h3>1.2 Összehasonlítás, kerekítés</h3>
+        <p><strong>Összehasonlítás:</strong> Az a szám a nagyobb, amelyiknek több számjegye van. Ha a számjegyek száma azonos, a legmagasabb helyiértéktől haladva hasonlítjuk össze őket.</p>
+        <p><strong>Kerekítés:</strong> A kerekítési helyiérték utáni első számjegyet nézzük. Ha 0-4, lefelé kerekítünk (a számjegy marad). Ha 5-9, felfelé kerekítünk (a számjegy eggyel nő).</p>
+        <div class="example"><strong>Példa:</strong> 378 kerekítése tízesre: 380. Százasra: 400.</div>
+        <a href="kviz_osszehasonlitas_kerekites.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a>
+      </div>
+      <div id="al1.3" class="card">
+        <h3>1.3 Római számok</h3>
+        <div class="formula">I=1, V=5, X=10, L=50, C=100, D=500, M=1000</div>
+        <p><strong>Szabályok:</strong> Ha a kisebb értékű szám a nagyobb után áll, összeadjuk (pl. VI=6). Ha előtte, kivonjuk (pl. IV=4).</p>
+        <a href="kviz_romai_szamok.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a>
+      </div>
+       <div id="al1.4" class="card">
+        <h3>1.4 Műveletek, tulajdonságok</h3>
+        <p><strong>Műveleti sorrend:</strong> 1. Zárójel 2. Szorzás/Osztás (balról jobbra) 3. Összeadás/Kivonás (balról jobbra).</p>
+        <p><strong>Tulajdonságok:</strong> Kommutativitás (felcserélhetőség: a+b=b+a), asszociativitás (csoportosíthatóság: (a+b)+c=a+(b+c)).</p>
+        <a href="kviz_muveletek_termeszetes.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a>
+      </div>
+    </section>
+
+    <!-- További szekciók és kártyák a tartalomjegyzéknek megfelelően... -->
+    
+    <section id="fej2">
+      <h2>2. Természetes számok oszthatósága</h2>
+      <p>Itt jönnek majd a 2. fejezet témakörei...</p>
+      <div id="al2.1" class="card">
+        <h3>2.1 Osztó, többszörös</h3>
+        <!-- Tartalom... -->
+        <a href="kviz_oszto_tobbszoros.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a>
+      </div>
+       <div id="al2.2" class="card">
+        <h3>2.2 Oszthatósági szabályok</h3>
+        <!-- Tartalom... -->
+        <a href="kviz_oszthatosagi_szabalyok.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a>
+      </div>
+       <div id="al2.3" class="card">
+        <h3>2.3 Prímszámok, felbontás</h3>
+        <!-- Tartalom... -->
+        <a href="kviz_primek.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a>
+      </div>
+    </section>
+
+     <section id="fej3">
+      <h2>3. Törtek</h2>
+      <p>Itt jönnek majd a 3. fejezet témakörei...</p>
+      <div id="al3.1" class="card"><h3>3.1 Közönséges törtek</h3><a href="kviz_kozonseges_tortek.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+      <div id="al3.2" class="card"><h3>3.2 Összehasonlítás, ábrázolás</h3><a href="kviz_tortek_osszehasonlitasa.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+      <div id="al3.3" class="card"><h3>3.3 Tizedes törtek</h3><a href="kviz_tizedes_tortek.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+      <div id="al3.4" class="card"><h3>3.4 Műveletek törtekkel</h3><a href="kviz_muveletek_tortekkel.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+    </section>
+
+    <section id="fej4">
+      <h2>4. Mértani alapfogalmak</h2>
+        <div id="al4.1" class="card"><h3>4.1 Pont, egyenes, sík</h3><a href="kviz_mertani_alapok.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+        <div id="al4.2" class="card"><h3>4.2 Szakaszok, szögek</h3><a href="kviz_szakaszok_szogek.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+        <div id="al4.3" class="card"><h3>4.3 Merőlegesség, párhuzamosság</h3><a href="kviz_meroleges_parhuzamos_5.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+    </section>
+    
+    <section id="fej5">
+        <h2>5. Mértani alakzatok</h2>
+        <div id="al5.1" class="card"><h3>5.1 Sokszögek</h3><a href="kviz_sokszogek_5.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+        <div id="al5.2" class="card"><h3>5.2 A kör</h3><a href="kviz_kor_5.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+        <div id="al5.3" class="card"><h3>5.3 Tengelyes szimmetria</h3><a href="kviz_szimmetria_5.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+    </section>
+
+    <section id="fej6">
+        <h2>6. Mértani testek</h2>
+        <div id="al6.1" class="card"><h3>6.1 Kocka, téglatest</h3><a href="kviz_kocka_teglatest.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+        <div id="al6.2" class="card"><h3>6.2 Henger, gömb, kúp, gúla</h3><a href="kviz_testek_5.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+    </section>
+
+    <section id="fej7">
+        <h2>7. Mértékegységek</h2>
+        <div id="al7.1" class="card"><h3>7.1 Hosszúság, terület, térfogat</h3><a href="kviz_mertekegyseg_hossztel.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+        <div id="al7.2" class="card"><h3>7.2 Tömeg, űrmérték, idő</h3><a href="kviz_mertekegyseg_tomegido.html" target="_blank" class="quiz-link">Gyakorló Kvíz a Témakörben →</a></div>
+    </section>
+
+  </main>
+</div>
+
+</body>
+</html>

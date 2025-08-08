@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 6. hét: Az adat és az algoritmus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #e3f2fd;
+            --example-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .instruction {
+            background-color: var(--example-bg);
+            border: 1px solid var(--example-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>Gyakorlati Műhely</h1>
+            <p>6. hét: Az adat és az algoritmus: Mitől működik?</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A műhely végére képes leszel a Google Teachable Machine segítségével betanítani egy egyszerű, saját MI-modellt, ami meg tud különböztetni két különböző tárgyat a webkamerád képén. A gyakorlaton keresztül megérted a gépi tanulás három alapvető lépését: az <strong>adatgyűjtést</strong>, a <strong>tanítást</strong> és a <strong>tesztelést</strong>.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Szükséges Eszközök</h2>
+                <ul>
+                    <li>Számítógép <strong>webkamerával</strong> és Chrome vagy Firefox böngészővel.</li>
+                    <li><strong>Két különböző, hétköznapi tárgy.</strong> Például: egy toll és egy bögre, egy telefon és egy szemüveg, egy alma és egy banán.</li>
+                    <li>A <strong>Google Teachable Machine</strong> weboldala: <a href="https://teachablemachine.withgoogle.com/" target="_blank">teachablemachine.withgoogle.com</a></li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. Bevezető: Készítsünk MI-t!</h2>
+                <p>Az előző hetekben olyan MI-ket használtunk, amiket mások már betanítottak. Most fordul a kocka! Bepillantunk a "motorháztető" alá, és mi magunk fogunk tanítani egy gépet. Nem bonyolult kódsorokat fogunk írni, hanem a legegyszerűbb módszert alkalmazzuk: <strong>példákat mutatunk neki</strong>. Pont úgy, ahogy egy kisgyereknek mutatnánk meg a különbséget egy kutya és egy macska között. Lássuk, hogyan működik a varázslat!</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>4. Lépésről-lépésre Feladatok</h2>
+                <p>A mai projektünk: <strong>Készítünk egy MI-t, ami felismeri a tollat és a bögrét.</strong></p>
+
+                <div class="task-card">
+                    <h3>1. Feladat: A projekt előkészítése</h3>
+                    <ol>
+                        <li>Nyisd meg a <a href="https://teachablemachine.withgoogle.com/" target="_blank">Teachable Machine</a> weboldalt.</li>
+                        <li>Kattints a nagy kék "Get Started" gombra.</li>
+                        <li>Válaszd az "Image Project" (Kép projekt) lehetőséget.</li>
+                        <li>Válaszd a "Standard image model" opciót. Most egy új felületet látsz két "Class" (Osztály) dobozzal.</li>
+                    </ol>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: Adatgyűjtés - Az első osztály</h3>
+                    <p>Most megtanítjuk a gépnek, hogyan néz ki egy toll. Ezt hívjuk az első "osztálynak".</p>
+                    <div class="instruction">
+                        <p><strong>A "Class 1" dobozban:</strong></p>
+                        <ol>
+                            <li>Kattints a ceruza ikonra és nevezd át az osztályt <strong>"Toll"</strong>-ra.</li>
+                            <li>Kattints a "Webcam" gombra, és engedélyezd a kamera használatát.</li>
+                            <li>Vedd a kezedbe a tolladat! Kattints és tartsd lenyomva a kék <strong>"Hold to Record"</strong> gombot, és közben mozgasd a tollat a kamera előtt. Mutasd meg különböző szögekből, kicsit közelebbről, távolabbról, más háttér előtt.</li>
+                            <li>Csinálj kb. <strong>100-150 képkockát</strong>! Minél több és változatosabb, annál jobb.</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: Adatgyűjtés - A második osztály</h3>
+                    <p>Most ismételjük meg ugyanezt a bögrével!</p>
+                     <div class="instruction">
+                        <p><strong>A "Class 2" dobozban:</strong></p>
+                        <ol>
+                            <li>Kattints a ceruza ikonra és nevezd át az osztályt <strong>"Bögre"</strong>-re.</li>
+                            <li>Tedd le a tollat, és vedd a kezedbe a bögrét!</li>
+                            <li>A "Webcam" gombbal, a "Hold to Record" nyomva tartásával készíts kb. <strong>100-150 képkockát</strong> a bögrédről is, szintén különböző szögekből és távolságokból.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <h3>4. Feladat: A Modell Tanítása</h3>
+                    <p>Most jön a varázslat! A számítógép elemzi a képeket, és megkeresi a mintázatokat, amik megkülönböztetik a tollat a bögrétől.</p>
+                     <div class="instruction">
+                        <p>Kattints a <strong>"Train Model"</strong> (Modell tanítása) gombra. A tanítás eltarthat egy percig, légy türelmes és ne zárd be az oldalt!</p>
+                    </div>
+                </div>
+                <div class="task-card">
+                    <h3>5. Feladat: Tesztelés és Kiértékelés</h3>
+                    <p>Miután a tanítás befejeződött, a jobb oldalon megjelenik egy "Output" ablak a kamerád képével. Itt az ideje vizsgáztatni az MI-nket!</p>
+                     <div class="instruction">
+                        <ol>
+                            <li>Mutasd fel a <strong>tolladat</strong> a kamerának! Figyeld a százalékos csíkokat. Jól ismeri fel?</li>
+                            <li>Most mutasd fel a <strong>bögrédet</strong>! Változik az eredmény?</li>
+                            <li>Próbáld ki valami mással! Mutass fel egy harmadik tárgyat, vagy csak a kezedet. Mit csinál az MI? Próbálja besorolni a két tanult kategória valamelyikébe, még ha nem is helyes.</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <h2>5. Tippek a jobb modellért</h2>
+                <ul>
+                    <li><strong>Több adat, jobb eredmény:</strong> Minél több képet adsz neki, annál jobban fog tanulni.</li>
+                    <li><strong>A változatosság gyönyörködtet:</strong> A különböző szögek, fényviszonyok és hátterek segítenek az MI-nek, hogy ne csak egyféleképpen ismerje fel a tárgyat.</li>
+                    <li><strong>Tiszta háttér:</strong> Próbáld meg, hogy csak a tárgy legyen a képen, a kezed vagy más zavaró dolog a lehető legkevésbé látsszon.</li>
+                    <li><strong>Profi tipp:</strong> Hozz létre egy harmadik osztályt "Hatter" (Background) néven, és készíts képeket az üres háttérről. Így az MI megtanulja azt is, amikor "semmi" sincs a képen!</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>6. Kritikai Gondolkodás Sarok</h2>
+                    <p>Létrehoztad a saját, működő MI-det. Most gondolkozz el!</p>
+                    <ul>
+                        <li><strong>"Szemét be, szemét ki":</strong> Mi történne, ha a tanítás során felcserélnéd a címkéket, és a toll képeit "Bögre" néven, a bögre képeit pedig "Toll" néven mentenéd el? Mit tanulna meg az MI? Ez a példa miért mutatja be tökéletesen az adatok minőségének fontosságát?</li>
+                        <li><strong>A torzítás (bias) csírája:</strong> Mi történne, ha csak piros színű tollakkal tanítanád a modellt? Felismerne utána egy kék tollat is? Miért fontos, hogy a tanító adatok a lehető legváltozatosabbak legyenek?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>7. Önálló Kihívás: A te személyes felismerőd!</h2>
+                    <p>Most rajtad a sor, hogy valami igazán személyeset alkoss!</p>
+                    <p><strong>A feladatod:</strong></p>
+                    <ol>
+                        <li>Válassz két (vagy akár három!) saját tárgyat, amit szeretnél, hogy az MI felismerjen. Például: a kedvenc könyved vs. a telefonod, vagy egy alma vs. egy narancs.</li>
+                        <li>Hajtsd végre a tanítási folyamatot a Teachable Machine segítségével ezekkel a tárgyakkal.</li>
+                        <li><strong>Haladóknak:</strong> Próbálj meg betanítani egy modellt, ami három különböző kézjelet ismer fel: kő, papír, olló. Működik?</li>
+                    </ol>
+                    <p>A kész modelled linkjét (az "Export Model" gombbal tudsz linket generálni) mentsd el, hogy megmutathasd a többieknek!</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

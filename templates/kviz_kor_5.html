@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: A kör</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: A kör</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Hogyan definiáljuk a kört?", options: { a: "Egy ponttól azonos távolságra lévő pontok halmaza a síkban.", b: "Egy zárt, görbe vonal.", c: "Egy olyan sokszög, aminek végtelen sok oldala van." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A kör definíciójának két kulcseleme van: egy fix pont (a középpont) és egy fix távolság (a sugár). 🔹 2. Lépés: A körvonalon lévő összes pont pontosan sugárnyi távolságra van a középponttól. ✅ Megoldás: A kör egy ponttól azonos távolságra lévő pontok halmaza a síkban." },
+            { question: "Mi a neve a kör középpontját a körvonal egy pontjával összekötő szakasznak?", options: { a: "átmérő", b: "sugár", c: "húr" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ez a távolság a kör legfontosabb jellemzője. 🔹 2. Lépés: Ezt a szakaszt sugárnak nevezzük, és 'r' betűvel jelöljük. ✅ Megoldás: A neve sugár." },
+            { question: "Milyen kapcsolat van a kör sugara (r) és átmérője (d) között?", options: { a: "d = r * r", b: "r = d * 2", c: "d = 2 * r" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Az átmérő a kör leghosszabb húrja, ami áthalad a középponton. 🔹 2. Lépés: Ez pontosan két sugárnyi hosszúságú. ✅ Megoldás: Az átmérő a sugár kétszerese, d = 2 * r." },
+            { question: "Hogy nevezzük azt a szakaszt, ami a körvonal két tetszőleges pontját köti össze?", options: { a: "átmérő", b: "sugár", c: "húr" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Gondolj a gitár húrjára, ami két pont között feszül. 🔹 2. Lépés: A körben ezt a szakaszt, ami két pontot köt össze a körvonalon, húrnak nevezzük. ✅ Megoldás: A neve húr." },
+            { question: "Mi a kör leghosszabb húrja?", options: { a: "az átmérő", b: "a sugár", c: "a körív" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Azok a húrok a leghosszabbak, amik a legközelebb vannak a kör középpontjához. 🔹 2. Lépés: A leghosszabb az a húr, ami át is halad a középponton. Ezt nevezzük átmérőnek. ✅ Megoldás: A leghosszabb húr az átmérő." },
+            { question: "Egy kör sugara 5 cm. Mekkora az átmérője?", options: { a: "2,5 cm", b: "10 cm", c: "25 cm" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az átmérő a sugár kétszerese. 🔹 2. Lépés: d = 2 * r = 2 * 5 cm = 10 cm. ✅ Megoldás: Az átmérő 10 cm." },
+            { question: "Egy kör átmérője 14 cm. Mekkora a sugara?", options: { a: "28 cm", b: "14 cm", c: "7 cm" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A sugár az átmérő fele. 🔹 2. Lépés: r = d / 2 = 14 cm / 2 = 7 cm. ✅ Megoldás: A sugár 7 cm." },
+            { question: "Mi a neve a körvonal egy darabjának?", options: { a: "körszelet", b: "körcikk", c: "körív" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A körvonal a teljes vonal. Ha ebből csak egy részt nézünk, azt máshogy nevezzük. 🔹 2. Lépés: A körvonal egy részét körívnek hívjuk. ✅ Megoldás: A neve körív." },
+            { question: "Melyik NEM a kör része?", options: { a: "középpont", b: "sugár", c: "oldal" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A körnek van középpontja és sugara. 🔹 2. Lépés: A körnek nincsenek egyenes oldalai, mint egy sokszögnek, ezért az 'oldal' fogalom nem értelmezhető rá. ✅ Megoldás: A körnek nincs oldala." },
+            { question: "Mi az a körcikk?", options: { a: "Két sugár és a körvonal által határolt rész.", b: "Egy húr és a körív által határolt rész.", c: "A kör területe." }, correctAnswer: "a", explanation: "🔹 1. Lépés: Gondolj egy tortaszeletre! 🔹 2. Lépés: A tortaszeletet két vágás (két sugár) és a torta széle (körív) határolja. ✅ Megoldás: Két sugár és a körvonal által határolt rész." },
+            { question: "Mi az a körszelet?", options: { a: "Két sugár és a körív által határolt rész.", b: "Egy húr és a körív által határolt rész.", c: "A kör kerülete." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Gondolj egy kenyérre, amiből levágsz egy szeletet! Az egyenes vágás a húr. 🔹 2. Lépés: A körszeletet egy húr és az általa lemetszett körív határolja. ✅ Megoldás: Egy húr és a körív által határolt rész." },
+            { question: "Mit nevezünk körlapnak?", options: { a: "a körvonalat", b: "a körvonal által határolt teljes területet", c: "a kör átmérőjét" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A körvonal csak a határvonal. 🔹 2. Lépés: A körlap (vagy körlemez) maga a síkidom, aminek területe van. ✅ Megoldás: A körvonal által határolt teljes területet nevezzük körlapnak." },
+            { question: "Mi a neve annak az egyenesnek, amelyiknek pontosan egy közös pontja van a körrel?", options: { a: "szelő", b: "érintő", c: "elkerülő" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A szelő két pontban metszi a kört. Az elkerülőnek nincs közös pontja. 🔹 2. Lépés: Az az egyenes, ami 'éppen csak hozzáér' a körhöz egyetlen pontban, az az érintő. ✅ Megoldás: A neve érintő." },
+            { question: "Mi a neve annak az egyenesnek, amelyik két pontban metszi a kört?", options: { a: "szelő", b: "érintő", c: "sugár" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az érintő egy pontban érinti, a sugár pedig egy szakasz. 🔹 2. Lépés: Az az egyenes, ami 'keresztülszeli' a kört, és két pontban metszi, a szelő. ✅ Megoldás: A neve szelő." },
+            { question: "Hogyan viszonyul egymáshoz egy kör összes sugara?", options: { a: "mind különböző hosszúságú", b: "mind egyenlő hosszúságú", c: "összegük az átmérő" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kör definíciója, hogy minden pontja egyenlő távolságra van a középponttól. 🔹 2. Lépés: Ez a távolság a sugár, tehát minden sugár egyforma hosszú. ✅ Megoldás: Mind egyenlő hosszúságú." },
+            { question: "Melyik eszközzel rajzolunk legpontosabban kört?", options: { a: "vonalzóval", b: "szögmérővel", c: "körzővel" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A körző pont úgy működik, mint a kör definíciója. 🔹 2. Lépés: Az egyik hegye a középpont (fix pont), a másik pedig a ceruza, ami a sugár mentén körbe forog. ✅ Megoldás: A körzővel rajzolunk kört." },
+            { question: "Mi a jele a sugárnak?", options: { a: "d", b: "r", c: "K" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A 'd' az átmérő (diameter), a 'K' a kerület. 🔹 2. Lépés: A sugár latin neve radius, ennek a rövidítése az 'r'. ✅ Megoldás: A sugár jele 'r'." },
+            { question: "Mi a jele az átmérőnek?", options: { a: "r", b: "d", c: "T" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az 'r' a sugár, a 'T' a terület. 🔹 2. Lépés: Az átmérő latin neve diameter, ennek a rövidítése a 'd'. ✅ Megoldás: Az átmérő jele 'd'." },
+            { question: "Két kör koncentrikus. Mit jelent ez?", options: { a: "a sugaruk egyenlő", b: "a középpontjuk közös", c: "metszik egymást" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A 'kon' előtag jelentése 'közös'. A 'centrum' pedig középpontot jelent. 🔹 2. Lépés: A koncentrikus köröknek közös a középpontjuk, de a sugaruk különböző (mint egy céltábla). ✅ Megoldás: A középpontjuk közös." },
+            { question: "Hol található a kör középpontja?", options: { a: "a körvonalon", b: "a körön belül", c: "a körön kívül" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A körvonal pontjai mind a középponttól sugárnyi távolságra vannak. 🔹 2. Lépés: Ebből következik, hogy a középpont a körvonal által határolt területen, azaz a körön belül helyezkedik el. ✅ Megoldás: A körön belül található." },
+            { question: "Ha egy pont távolsága a kör középpontjától nagyobb, mint a sugár, hol van a pont?", options: { a: "a körön kívül", b: "a körön belül", c: "a körvonalon" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A körvonalon lévő pontok távolsága PONTOSAN a sugárral egyenlő. 🔹 2. Lépés: Ha a távolság ennél nagyobb, akkor a pont 'túlment' a körvonalon. ✅ Megoldás: A pont a körön kívül van." },
+            { question: "Ha egy pont távolsága a kör középpontjától kisebb, mint a sugár, hol van a pont?", options: { a: "a körön kívül", b: "a körön belül", c: "a körvonalon" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A körvonalig a távolság 'r'. 🔹 2. Lépés: Ha a távolság 'r'-nél kisebb, akkor a pont még nem érte el a körvonalat, tehát belül van. ✅ Megoldás: A pont a körön belül van." },
+            { question: "Melyik állítás HAMIS?", options: { a: "A körnek végtelen sok sugara van.", b: "A körnek végtelen sok átmérője van.", c: "A körnek egyetlen középpontja van." }, correctAnswer: "b", explanation: "A kérdés trükkös. Valójában mindhárom állítás igaz. Javítom a kérdést és a magyarázatot, hogy egyértelmű legyen. Kérdés: Melyik állítás HAMIS? Opciók: a) A körnek végtelen sok sugara van. b) A körnek egyetlen átmérője van. c) A körnek egyetlen középpontja van. Ebben az esetben a 'b' hamis. ✅ Megoldás: A körnek végtelen sok sugara és átmérője van (bármelyik irányban húzhatunk egyet), de középpontja csak egyetlen egy van." },
+            { question: "Egy kör átmérője 20 egység. Hány egység hosszú a leghosszabb húrja?", options: { a: "10", b: "20", c: "40" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kör leghosszabb húrja maga az átmérő. 🔹 2. Lépés: A feladat megadja, hogy az átmérő 20 egység. ✅ Megoldás: A leghosszabb húr 20 egység hosszú." },
+            { question: "Mi a körvonal?", options: { a: "A kör területe.", b: "A kör határvonala.", c: "A kör sugara." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A körvonal maga a 'vonal', ami a körlapot körbeveszi. 🔹 2. Lépés: Ezért hívjuk a kör határvonalának. ✅ Megoldás: A körvonal a kör határvonala." }
+        ];
+
+        // Audit utáni javítás a 23. kérdéshez, hogy a promptnak megfeleljen és egyértelmű legyen.
+        quizData[22] = { question: "Melyik állítás HAMIS?", options: { a: "A körnek végtelen sok sugara van.", b: "A körnek egyetlen átmérője van.", c: "A körnek egyetlen középpontja van." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Egy körnek valóban végtelen sok sugara van, és csak egy középpontja. Tehát az 'a' és 'c' állítások igazak. 🔹 2. Lépés: Egy körnek azonban végtelen sok átmérője is van, hiszen a középponton át bármilyen irányban húzhatunk egyet. Az az állítás, hogy csak egyetlen átmérője van, hamis. ✅ Megoldás: A 'b' állítás hamis." };
+
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

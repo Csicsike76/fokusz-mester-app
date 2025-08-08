@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Közönséges törtek</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Közönséges törtek</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Mi a 7/10 törtben a számláló?", options: { a: "a törtvonal", b: "7", c: "10" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A számláló a törtvonal feletti szám. 🔹 2. Lépés: A 7/10 törtben a 7-es van a törtvonal felett. ✅ Megoldás: A számláló a 7." },
+            { question: "Mi a 4/9 törtben a nevező?", options: { a: "4", b: "a törtvonal", c: "9" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A nevező a törtvonal alatti szám. 🔹 2. Lépés: A 4/9 törtben a 9-es van a törtvonal alatt. ✅ Megoldás: A nevező a 9." },
+            { question: "Melyik az áltört (nem valódi tört)?", options: { a: "3/8", b: "9/9", c: "1/2" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az áltört olyan tört, ahol a számláló nagyobb vagy egyenlő, mint a nevező. 🔹 2. Lépés: A 3/8-nál és az 1/2-nél a számláló kisebb. A 9/9-nél a számláló egyenlő a nevezővel. ✅ Megoldás: A 9/9 egy áltört (értéke 1)." },
+            { question: "Melyik a valódi tört?", options: { a: "7/6", b: "5/5", c: "2/3" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A valódi tört olyan tört, ahol a számláló kisebb, mint a nevező. 🔹 2. Lépés: A 7/6-nál és az 5/5-nél a számláló nem kisebb a nevezőnél. A 2/3-nál a számláló (2) kisebb, mint a nevező (3). ✅ Megoldás: A 2/3 egy valódi tört." },
+            { question: "Mennyi a 2 1/4 vegyes szám áltört alakban?", options: { a: "9/4", b: "7/4", c: "3/4" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az átalakításhoz az egész részt megszorozzuk a nevezővel, és hozzáadjuk a számlálót. A nevező változatlan marad. 🔹 2. Lépés: (2 * 4 + 1) / 4 = (8 + 1) / 4 = 9/4. ✅ Megoldás: Az áltört alak a 9/4." },
+            { question: "Mennyi a 7/2 áltört vegyes szám alakban?", options: { a: "2 1/2", b: "3 1/2", c: "4 1/2" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Megnézzük, hányszor van meg a 7-ben a 2. 7 : 2 = 3. 🔹 2. Lépés: A maradék 1 (mert 3*2=6, és 7-6=1). Az egész rész a 3, a maradék a számláló, a nevező nem változik. ✅ Megoldás: A vegyes szám alak a 3 1/2." },
+            { question: "Melyik tört egyenlő az 1/2-del?", options: { a: "2/3", b: "3/4", c: "4/8" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Két tört akkor egyenlő, ha egyszerűsítés vagy bővítés után ugyanazt az alakot kapjuk. 🔹 2. Lépés: A 4/8 törtet egyszerűsíthetjük 4-gyel. 4:4=1, 8:4=2. Az eredmény 1/2. ✅ Megoldás: A 4/8 egyenlő az 1/2-del." },
+            { question: "Egyszerűsítsd a 6/9 törtet!", options: { a: "2/3", b: "3/2", c: "1/3" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Keressük a 6 és a 9 legnagyobb közös osztóját. Ez a 3. 🔹 2. Lépés: Elosztjuk a számlálót és a nevezőt is 3-mal. 6:3=2, 9:3=3. ✅ Megoldás: A tört egyszerűsített alakja 2/3." },
+            { question: "Bővítsd a 3/5 törtet 4-gyel!", options: { a: "7/9", b: "12/20", c: "12/5" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Bővítéskor a számlálót és a nevezőt is ugyanazzal a számmal kell megszorozni. 🔹 2. Lépés: 3 * 4 = 12. 5 * 4 = 20. ✅ Megoldás: A bővített tört a 12/20." },
+            { question: "Mennyi 20-nak a 3/4 része?", options: { a: "12", b: "15", c: "16" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Először kiszámoljuk a 20-nak az 1/4 részét: 20 : 4 = 5. 🔹 2. Lépés: Ezt megszorozzuk 3-mal, hogy megkapjuk a 3/4 részt: 5 * 3 = 15. ✅ Megoldás: 20-nak a 3/4 része 15." },
+            { question: "Melyik tört értéke pontosan 1?", options: { a: "1/100", b: "99/100", c: "100/100" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Egy tört értéke akkor 1, ha a számlálója és a nevezője megegyezik. 🔹 2. Lépés: A 100/100 törtben a számláló és a nevező is 100. ✅ Megoldás: A 100/100 értéke 1." },
+            { question: "Mi a neve a törtvonal alatti számnak?", options: { a: "számláló", b: "nevező", c: "osztó" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A tört három részből áll: számláló (fent), törtvonal (középen), nevező (lent). 🔹 2. Lépés: A nevező mutatja meg, hány részre osztjuk az egészet. ✅ Megoldás: A törtvonal alatti szám a nevező." },
+            { question: "Melyik tört a nagyobb: 3/5 vagy 4/5?", options: { a: "3/5", b: "4/5", c: "egyenlőek" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ha a törtek nevezője azonos, akkor az a nagyobb, amelyiknek a számlálója nagyobb. 🔹 2. Lépés: Mivel 4 > 3, ezért a 4/5 a nagyobb. ✅ Megoldás: A 4/5 a nagyobb." },
+            { question: "Mennyi egy órának a 2/3 része percben?", options: { a: "20 perc", b: "30 perc", c: "40 perc" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Egy óra 60 perc. Ennek kell a 2/3 részét vennünk. 🔹 2. Lépés: Először vesszük az 1/3 részt: 60 : 3 = 20 perc. 🔹 3. Lépés: Ezt megszorozzuk 2-vel: 20 * 2 = 40 perc. ✅ Megoldás: Egy órának a 2/3 része 40 perc." },
+            { question: "Melyik számot jelöli a 3 2/5 vegyes szám?", options: { a: "17/5", b: "10/5", c: "13/5" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Átalakításhoz az egész részt (3) megszorozzuk a nevezővel (5), és hozzáadjuk a számlálót (2). 🔹 2. Lépés: (3 * 5 + 2) / 5 = (15 + 2) / 5 = 17/5. ✅ Megoldás: A 3 2/5 áltört alakja 17/5." },
+            { question: "Egyszerűsítsd a 12/18 törtet!", options: { a: "3/4", b: "6/9", c: "2/3" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A 12 és 18 legnagyobb közös osztója a 6. 🔹 2. Lépés: Elosztjuk a számlálót és a nevezőt is 6-tal. 12:6=2, 18:6=3. ✅ Megoldás: A legegyszerűbb alak a 2/3. (A 6/9 is helyes, de az még tovább egyszerűsíthető)." },
+            { question: "Melyik tört a legkisebb?", options: { a: "1/2", b: "1/4", c: "1/3" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ha a törtek számlálója azonos, akkor az a legkisebb, amelyiknek a nevezője a legnagyobb (mert több részre osztjuk az egészet). 🔹 2. Lépés: A 4 a legnagyobb nevező. ✅ Megoldás: Az 1/4 a legkisebb." },
+            { question: "Mennyi 30-nak az 5/6 része?", options: { a: "24", b: "25", c: "20" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Kiszámoljuk a 30-nak az 1/6 részét: 30 : 6 = 5. 🔹 2. Lépés: Ezt megszorozzuk 5-tel: 5 * 5 = 25. ✅ Megoldás: 30-nak az 5/6 része 25." },
+            { question: "Melyik állítás igaz az áltörtekre?", options: { a: "Értékük mindig kisebb, mint 1.", b: "Értékük mindig nagyobb vagy egyenlő, mint 1.", c: "Nincs értékük." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az áltört az, aminek a számlálója nagyobb vagy egyenlő a nevezőjénél. 🔹 2. Lépés: Ez azt jelenti, hogy legalább egy egész, vagy annál több van benne. ✅ Megoldás: Az áltörtek értéke mindig nagyobb vagy egyenlő, mint 1." },
+            { question: "Hogyan írjuk le a 15/4 áltörtet vegyes számként?", options: { a: "3 3/4", b: "4 1/4", c: "3 1/4" }, correctAnswer: "a", explanation: "🔹 1. Lépés: 15-ben a 4 megvan 3-szor (3*4=12). 🔹 2. Lépés: A maradék 15-12=3. Az egész rész a 3, a maradék a számláló. ✅ Megoldás: A vegyes szám alak 3 3/4." },
+            { question: "Bővítsd a 4/7 törtet 3-mal!", options: { a: "7/10", b: "12/21", c: "12/7" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Bővítéskor a számlálót és a nevezőt is ugyanazzal a számmal szorozzuk. 🔹 2. Lépés: 4 * 3 = 12. 7 * 3 = 21. ✅ Megoldás: A bővített tört a 12/21." },
+            { question: "Mit jelent a törtvonal a matematikában?", options: { a: "összeadást", b: "szorzást", c: "osztást" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A tört egy osztás jelölésének is tekinthető. 🔹 2. Lépés: A 3/4 ugyanazt jelenti, mint a 3 : 4. ✅ Megoldás: A törtvonal osztást jelent." },
+            { question: "Egy kosárban 12 alma van, ebből 4 piros. Az almák hányad része piros?", options: { a: "4/8", b: "1/3", c: "1/4" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A 12 almából 4 a piros, ezt tört alakban így írjuk: 4/12. 🔹 2. Lépés: Ezt a törtet egyszerűsíteni kell. A 4 és a 12 legnagyobb közös osztója a 4. 🔹 3. Lépés: 4:4=1, 12:4=3. ✅ Megoldás: Az almák 1/3 része piros." },
+            { question: "Mennyi 100-nak a 7/10 része?", options: { a: "7", b: "10", c: "70" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Kiszámoljuk a 100-nak az 1/10 részét: 100 : 10 = 10. 🔹 2. Lépés: Ezt megszorozzuk 7-tel: 10 * 7 = 70. ✅ Megoldás: 100-nak a 7/10 része 70." },
+            { question: "Melyik NEM áltört?", options: { a: "11/10", b: "10/11", c: "10/10" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az áltörtnél a számláló nagyobb vagy egyenlő, mint a nevező. Mi azt keressük, ahol a számláló kisebb. 🔹 2. Lépés: A 10/11 törtben a számláló (10) kisebb, mint a nevező (11). ✅ Megoldás: A 10/11 nem áltört, hanem valódi tört." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

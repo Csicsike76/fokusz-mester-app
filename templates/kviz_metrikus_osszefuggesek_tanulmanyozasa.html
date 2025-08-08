@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Metrikus összefüggések</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        #control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        #pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        #check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        #check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        #results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Metrikus összefüggések</h1>
+
+    <div id="control-panel">
+        <input type="password" id="pin-input" placeholder="PIN kód">
+        <button id="check-button">Ellenőrzés</button>
+        <div id="results"></div>
+        <div id="admin-panel" class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span id="dist-a"></span> / <span id="dist-b"></span> / <span id="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Melyik híres tétel kapcsolódik a derékszögű háromszögek oldalaihoz?",
+                answers: { a: "Pitagorasz-tétel", b: "Thalész-tétel", c: "Newton I. törvénye" },
+                correctAnswer: 'a',
+                explanation: "A Pitagorasz-tétel egy alapvető metrikus összefüggés, amely a derékszögű háromszög befogói és átfogója közötti kapcsolatot írja le (a² + b² = c²). A Thalész-tétel a párhuzamos szelőkkel, Newton I. törvénye pedig a tehetetlenséggel foglalkozik. ✅ Megoldás: Pitagorasz-tétel."
+            },
+            {
+                question: "Egy derékszögű háromszög befogói 6 cm és 8 cm hosszúak. Milyen hosszú az átfogója?",
+                answers: { a: "10 cm", b: "14 cm", c: "7 cm" },
+                correctAnswer: 'a',
+                explanation: "A Pitagorasz-tétel szerint a² + b² = c². Behelyettesítve: 6² + 8² = c², ami 36 + 64 = c², tehát 100 = c². Ebből c = √100 = 10 cm. A 14 cm az oldalak egyszerű összege, ami hibás. ✅ Megoldás: 10 cm."
+            },
+            {
+                question: "Egy turista 3 km-t megy keletre, majd 4 km-t északra. Milyen messze van légvonalban a kiindulási ponttól?",
+                answers: { a: "5 km", b: "7 km", c: "1 km" },
+                correctAnswer: 'a',
+                explanation: "A két elmozdulás egy derékszögű háromszög két befogója. A légvonalbeli távolság az átfogó. A Pitagorasz-tétel szerint: 3² + 4² = c², ami 9 + 16 = 25. Ebből c = √25 = 5 km. ✅ Megoldás: 5 km."
+            },
+            {
+                question: "Egy 5 méteres létrát a falnak támasztunk úgy, hogy az alja 3 méterre van a faltól. Milyen magasra ér fel a létra?",
+                answers: { a: "4 méter", b: "8 méter", c: "2 méter" },
+                correctAnswer: 'a',
+                explanation: "A létra, a fal és a talaj egy derékszögű háromszöget alkot. A létra az átfogó (5 m), az aljának távolsága az egyik befogó (3 m). A keresett magasság a másik befogó. Pitagorasz-tétel: 3² + b² = 5², azaz 9 + b² = 25. Ebből b² = 16, tehát b = 4 méter. ✅ Megoldás: 4 méter."
+            },
+            {
+                question: "Melyik oldalhosszúságú háromszög NEM derékszögű?",
+                answers: { a: "5 cm, 12 cm, 14 cm", b: "5 cm, 12 cm, 13 cm", c: "3 cm, 4 cm, 5 cm" },
+                correctAnswer: 'a',
+                explanation: "A Pitagorasz-tétel fordításával ellenőrizzük: a két rövidebb oldal négyzetösszege egyenlő-e a leghosszabb négyzetével. 5² + 12² = 25 + 144 = 169. Mivel 14² = 196, és 169 ≠ 196, ez a háromszög nem derékszögű. A másik két esetben (5²+12²=13² és 3²+4²=5²) teljesül az egyenlőség. ✅ Megoldás: 5 cm, 12 cm, 14 cm."
+            },
+            {
+                question: "Egy négyzet átlója 10 cm. Milyen hosszú az oldala?",
+                answers: { a: "kb. 7,07 cm", b: "5 cm", c: "10 cm" },
+                correctAnswer: 'a',
+                explanation: "A négyzet átlója a két oldalával egy egyenlő szárú derékszögű háromszöget alkot. Legyen az oldal 'a'. Ekkor a² + a² = 10², azaz 2a² = 100, a² = 50. Az oldal hossza a = √50 ≈ 7,07 cm. ✅ Megoldás: kb. 7,07 cm."
+            },
+            {
+                question: "Két, egymásra merőlegesen ható erő 30 N és 40 N. Mekkora az eredő erő nagysága?",
+                answers: { a: "50 N", b: "70 N", c: "10 N" },
+                correctAnswer: 'a',
+                explanation: "A két merőleges erővektor egy derékszögű háromszög két befogóját alkotja, az eredő erő pedig az átfogó. A nagyságát a Pitagorasz-tétellel számolhatjuk: 30² + 40² = F_eredő², azaz 900 + 1600 = 2500. Ebből az eredő erő √2500 = 50 N. ✅ Megoldás: 50 N."
+            },
+            {
+                question: "Mit jelent a metrikus összefüggés?",
+                answers: { a: "Mérésen alapuló (távolság-, terület-, stb.) geometriai kapcsolat.", b: "Kizárólag a szögekre vonatkozó összefüggés.", c: "Csak fizikai törvény lehet." },
+                correctAnswer: 'a',
+                explanation: "A metrika szó mérést jelent. A metrikus összefüggések a geometriai alakzatok mérhető tulajdonságai (oldalhossz, terület, magasság) közötti matematikai kapcsolatokat írják le. A Pitagorasz-tétel a legismertebb példa. ✅ Megoldás: Mérésen alapuló (távolság-, terület-, stb.) geometriai kapcsolat."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Mi a Pitagorasz-tétel képlete, ha 'a' és 'b' a befogók, 'c' pedig az átfogó?",
+                answers: { a: "a + b = c", b: "a² + b² = c²", c: "a² - b² = c²" },
+                correctAnswer: 'b',
+                explanation: "A tétel kimondja, hogy a derékszögű háromszög két befogójának négyzetösszege egyenlő az átfogó négyzetével. A helyes képlet tehát a² + b² = c². Az 'a + b = c' a háromszög-egyenlőtlenség megsértése lenne. ✅ Megoldás: a² + b² = c²."
+            },
+            {
+                question: "Egy derékszögű háromszög átfogója 13 cm, az egyik befogója 5 cm. Milyen hosszú a másik befogó?",
+                answers: { a: "18 cm", b: "12 cm", c: "8 cm" },
+                correctAnswer: 'b',
+                explanation: "A Pitagorasz-tételből a hiányzó befogót kell kifejezni: a² = c² - b². Behelyettesítve: a² = 13² - 5², ami a² = 169 - 25 = 144. Ebből a = √144 = 12 cm. ✅ Megoldás: 12 cm."
+            },
+            {
+                question: "Melyik állítás igaz a derékszögű háromszögre?",
+                answers: { a: "A befogó mindig hosszabb, mint az átfogó.", b: "Az átfogó a leghosszabb oldal.", c: "Minden oldala egyenlő." },
+                correctAnswer: 'b',
+                explanation: "A derékszögű háromszögben az átfogó a derékszöggel szemközti oldal, és ez mindig a háromszög leghosszabb oldala. ✅ Megoldás: Az átfogó a leghosszabb oldal."
+            },
+            {
+                question: "Melyik számhármas alkot derékszögű háromszöget (pitagoraszi számhármas)?",
+                answers: { a: "1, 2, 3", b: "8, 15, 17", c: "7, 8, 9" },
+                correctAnswer: 'b',
+                explanation: "Ellenőrizzük a Pitagorasz-tételt: 8² + 15² = 64 + 225 = 289. Mivel 17² = 289, ez a háromszög derékszögű. Az 1²+2²=5, ami nem 3²=9. A 7²+8²=49+64=113, ami nem 9²=81. ✅ Megoldás: 8, 15, 17."
+            },
+            {
+                question: "Egy négyzet oldala 5 cm. Milyen hosszú az átlója?",
+                answers: { a: "10 cm", b: "kb. 7,07 cm", c: "5 cm" },
+                correctAnswer: 'b',
+                explanation: "A négyzet átlója egy derékszögű háromszög átfogója, melynek mindkét befogója 5 cm. A Pitagorasz-tétel szerint: 5² + 5² = c², azaz 25 + 25 = 50 = c². Ebből c = √50 ≈ 7,07 cm. ✅ Megoldás: kb. 7,07 cm."
+            },
+            {
+                question: "Egy téglalap oldalai 12 m és 5 m. Milyen hosszú az átlója?",
+                answers: { a: "17 m", b: "13 m", c: "7 m" },
+                correctAnswer: 'b',
+                explanation: "A téglalap átlója egy derékszögű háromszög átfogója. A befogók a téglalap oldalai. Pitagorasz-tétel: 12² + 5² = c², azaz 144 + 25 = 169 = c². Ebből c = √169 = 13 m. ✅ Megoldás: 13 m."
+            },
+            {
+                question: "Mire használható a Pitagorasz-tétel a fizikában?",
+                answers: { a: "Csak területszámításra.", b: "Egymásra merőleges vektorok (pl. elmozdulás, erő) összegének kiszámítására.", c: "Hőmérséklet mérésére." },
+                correctAnswer: 'b',
+                explanation: "A fizikában sokszor kell egymásra merőleges vektormennyiségek eredőjének nagyságát kiszámolni. Mivel ezek egy derékszögű háromszöget alkotnak, a Pitagorasz-tétel tökéletes eszköz erre. ✅ Megoldás: Egymásra merőleges vektorok (pl. elmozdulás, erő) összegének kiszámítására."
+            },
+            {
+                question: "Ha egy téglatest élei 3, 4 és 12 egység hosszúak, milyen hosszú a testátlója?",
+                answers: { a: "19 egység", b: "13 egység", c: "12 egység" },
+                correctAnswer: 'b',
+                explanation: "A testátló négyzete az élek négyzeteinek összege: d² = a² + b² + c². Behelyettesítve: d² = 3² + 4² + 12² = 9 + 16 + 144 = 169. Ebből d = √169 = 13 egység. ✅ Megoldás: 13 egység."
+            },
+            {
+                question: "Egy egyenlő szárú háromszög alapja 10 cm, szárai 13 cm hosszúak. Milyen magas a háromszög?",
+                answers: { a: "15 cm", b: "12 cm", c: "10 cm" },
+                correctAnswer: 'b',
+                explanation: "A magasság két derékszögű háromszögre bontja az egyenlő szárú háromszöget. Egy ilyen háromszög átfogója 13 cm, egyik befogója az alap fele, azaz 5 cm. A magasság a másik befogó. Pitagorasz-tétel: 5² + m² = 13², azaz 25 + m² = 169. Ebből m² = 144, tehát m = 12 cm. ✅ Megoldás: 12 cm."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Milyen típusú háromszögre vonatkozik a Pitagorasz-tétel?",
+                answers: { a: "Bármilyen háromszögre.", b: "Csak egyenlő szárú háromszögre.", c: "Csak derékszögű háromszögre." },
+                correctAnswer: 'c',
+                explanation: "A Pitagorasz-tétel (a² + b² = c²) kizárólag a derékszögű háromszögek oldalai közötti összefüggést írja le, ahol 'a' és 'b' a derékszöget közrefogó befogók, 'c' pedig az átfogó. ✅ Megoldás: Csak derékszögű háromszögre."
+            },
+            {
+                question: "Mi az átfogó egy derékszögű háromszögben?",
+                answers: { a: "A legrövidebb oldal.", b: "Bármelyik oldal lehet.", c: "A derékszöggel szemközti, leghosszabb oldal." },
+                correctAnswer: 'c',
+                explanation: "Az átfogó (hipotenusz) a derékszögű háromszög egyértelműen azonosítható, leghosszabb oldala, amely a 90 fokos szöggel szemben helyezkedik el. ✅ Megoldás: A derékszöggel szemközti, leghosszabb oldal."
+            },
+            {
+                question: "Mi a befogó egy derékszögű háromszögben?",
+                answers: { a: "A leghosszabb oldal.", b: "Csak egy van belőle.", c: "A derékszöget közrefogó két rövidebb oldal egyike." },
+                correctAnswer: 'c',
+                explanation: "A derékszögű háromszögnek két befogója van. Ezek azok az oldalak, amelyek a 90 fokos szöget alkotják. Mindig rövidebbek, mint az átfogó. ✅ Megoldás: A derékszöget közrefogó két rövidebb oldal egyike."
+            },
+            {
+                question: "Egy derékszögű háromszög befogói 5 cm és 12 cm. Mekkora az átfogója?",
+                answers: { a: "17 cm", b: "7 cm", c: "13 cm" },
+                correctAnswer: 'c',
+                explanation: "A Pitagorasz-tétel szerint a² + b² = c². Behelyettesítve: 5² + 12² = c², ami 25 + 144 = c², tehát 169 = c². Ebből c = √169 = 13 cm. ✅ Megoldás: 13 cm."
+            },
+            {
+                question: "Ha egy háromszög oldalai 9, 40 és 41 egység, akkor a háromszög...",
+                answers: { a: "...nem derékszögű.", b: "...egyenlő szárú.", c: "...derékszögű." },
+                correctAnswer: 'c',
+                explanation: "Ellenőrizzük a Pitagorasz-tétel fordítását: 9² + 40² = 81 + 1600 = 1681. Mivel 41² = 1681, az egyenlőség teljesül, tehát a háromszög derékszögű. ✅ Megoldás: ...derékszögű."
+            },
+            {
+                question: "Egy kocka éle 1 méter. Milyen hosszú a lapátlója?",
+                answers: { a: "1 méter", b: "2 méter", c: "kb. 1,41 méter" },
+                correctAnswer: 'c',
+                explanation: "A kocka oldallapja egy 1 méter oldalú négyzet. Ennek átlója a Pitagorasz-tétellel számolható: 1² + 1² = d², azaz 2 = d². Ebből d = √2 ≈ 1,41 méter. ✅ Megoldás: kb. 1,41 méter."
+            },
+            {
+                question: "Egy derékszögű háromszög egyik szöge 90°. Mekkora a másik két szög összege?",
+                answers: { a: "180°", b: "45°", c: "90°" },
+                correctAnswer: 'c',
+                explanation: "A háromszög belső szögeinek összege mindig 180°. Ha az egyik szög 90°, akkor a másik kettőre összesen 180° - 90° = 90° marad. ✅ Megoldás: 90°."
+            },
+            {
+                question: "Melyik mennyiség NEM kapcsolódik közvetlenül a metrikus összefüggésekhez?",
+                answers: { a: "Távolság", b: "Terület", c: "Szín" },
+                correctAnswer: 'c',
+                explanation: "A metrikus összefüggések a mérhető (metrikus) tulajdonságokkal, mint a hosszúság, távolság, terület, térfogat, foglalkoznak. A szín egy optikai tulajdonság, nem geometriai méret. ✅ Megoldás: Szín."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButton = document.getElementById('check-button');
+        const pinInput = document.getElementById('pin-input');
+        const resultsContainer = document.getElementById('results');
+        const adminPanel = document.getElementById('admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInput.value;
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainer.textContent = "Érvénytelen PIN kód!";
+                resultsContainer.style.color = '#D50000';
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainer.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                resultsContainer.style.color = 'orange';
+                return;
+            }
+            resultsContainer.style.color = '#333'; // Reset color
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainer.textContent = "Minden válasz és magyarázat felfedve.";
+                adminPanel.style.display = 'block';
+                document.getElementById('dist-a').textContent = internalCorrectAnswers.a;
+                document.getElementById('dist-b').textContent = internalCorrectAnswers.b;
+                document.getElementById('dist-c').textContent = internalCorrectAnswers.c;
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainer.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+            }
+        }
+        
+        pinInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                checkButton.click(); // Simulate a button click
+            }
+        });
+
+        checkButton.addEventListener('click', checkAnswers);
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

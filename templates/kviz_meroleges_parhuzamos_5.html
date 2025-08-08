@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Merőlegesség, párhuzamosság</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Merőlegesség, párhuzamosság</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Hogy nevezzük azokat az egyeneseket, amelyek soha nem metszik egymást?", options: { a: "merőlegesek", b: "metszők", c: "párhuzamosak" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A definíció szerint a párhuzamos egyenesek azok, amik egy síkban vannak, de nincs közös pontjuk. 🔹 2. Lépés: A merőleges és a metsző egyeneseknek mindig van egy közös pontjuk. ✅ Megoldás: Párhuzamosaknak nevezzük őket." },
+            { question: "Mekkora szöget zárnak be egymással a merőleges egyenesek?", options: { a: "180°", b: "90°", c: "45°" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A merőlegesség definíciója a derékszöghöz kötődik. 🔹 2. Lépés: A derékszög pontosan 90°-os. ✅ Megoldás: A merőleges egyenesek 90°-os szöget zárnak be." },
+            { question: "Mi a párhuzamosság jele?", options: { a: "||", b: "⊥", c: "≈" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A két függőleges vonal (||) vizuálisan is emlékeztet a párhuzamos sínekre. 🔹 2. Lépés: A ⊥ jel a merőlegességet jelenti. ✅ Megoldás: A párhuzamosság jele ||." },
+            { question: "Mi a merőlegesség jele?", options: { a: "||", b: "=", c: "⊥" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A lefelé fordított T betű (⊥) jelöli, hogy egy egyenes derékszögben találkozik egy másikkal. 🔹 2. Lépés: A || jel a párhuzamosságot jelenti. ✅ Megoldás: A merőlegesség jele ⊥." },
+            { question: "Egy téglalap szomszédos oldalai...", options: { a: "párhuzamosak egymással.", b: "merőlegesek egymásra.", c: "kitérőek." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Gondolj egy téglalap sarkára! 🔹 2. Lépés: A sarkokban a téglalap oldalai derékszöget zárnak be, tehát merőlegesek egymásra. ✅ Megoldás: A téglalap szomszédos oldalai merőlegesek egymásra." },
+            { question: "Egy téglalap szemközti oldalai...", options: { a: "merőlegesek egymásra.", b: "párhuzamosak egymással.", c: "metszik egymást." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Gondolj egy téglalap két hosszabbik vagy két rövidebbik oldalára! 🔹 2. Lépés: Ezek soha nem találkoznak, és a távolságuk állandó. ✅ Megoldás: A téglalap szemközti oldalai párhuzamosak egymással." },
+            { question: "Melyik hétköznapi tárgy modellezi a párhuzamosságot?", options: { a: "egy olló", b: "egy vasúti sínpár", c: "egy csillag" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A vasúti síneknek végig ugyanakkora távolságra kell lenniük egymástól, különben a vonat kisiklana. 🔹 2. Lépés: Ez a tulajdonság a párhuzamosság lényege. ✅ Megoldás: A vasúti sínpár a párhuzamosság modellje." },
+            { question: "Mi igaz a füzeted vonalaira?", options: { a: "merőlegesek egymásra", b: "párhuzamosak egymással", c: "metszik egymást" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A füzet vízszintes vonalai soha nem keresztezik egymást. 🔹 2. Lépés: A távolságuk végig állandó. ✅ Megoldás: A füzet vonalai párhuzamosak egymással." },
+            { question: "Ha az 'e' egyenes párhuzamos az 'f' egyenessel, és az 'f' párhuzamos a 'g' egyenessel, akkor mi igaz?", options: { a: "e merőleges g-re", b: "e párhuzamos g-vel", c: "e metszi g-t" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ez a párhuzamosság tranzitív (átmenő) tulajdonsága. 🔹 2. Lépés: Ha az első egyenes párhuzamos a másodikkal, és a második a harmadikkal, akkor az első is párhuzamos a harmadikkal. ✅ Megoldás: e párhuzamos g-vel." },
+            { question: "Hány közös pontja van két merőleges egyenesnek?", options: { a: "végtelen sok", b: "egy", c: "kettő" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A merőleges egyenesek metszik egymást. 🔹 2. Lépés: A metszésük definíció szerint egyetlen pontban történik. ✅ Megoldás: Két merőleges egyenesnek egy közös pontja van." },
+            { question: "Hány közös pontja van két párhuzamos egyenesnek?", options: { a: "egy", b: "kettő", c: "nulla" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A párhuzamosság definíciója, hogy az egyenesek soha nem metszik egymást. 🔹 2. Lépés: Ha soha nem metszik egymást, akkor nincs közös pontjuk. ✅ Megoldás: Két párhuzamos egyenesnek nulla közös pontja van." },
+            { question: "Egy T-alakú útkereszteződésben az utak...", options: { a: "párhuzamosak.", b: "merőlegesek.", c: "kitérőek." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A 'T' betű szára és a teteje derékszöget zár be egymással. 🔹 2. Lépés: Ez a derékszög a merőlegességet jelenti. ✅ Megoldás: Az utak merőlegesek." },
+            { question: "Milyen egyeneseket kapsz, ha egy egyenesre két különböző pontban merőlegeseket állítasz?", options: { a: "párhuzamos egyeneseket", b: "metsző egyeneseket", c: "ugyanazt az egyenest" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Képzelj el egy vízszintes egyenest. Ha két pontjában is húzol egy-egy függőleges vonalat, azok egymással nem fognak találkozni. 🔹 2. Lépés: Ez a párhuzamosok szerkesztésének egyik módja. ✅ Megoldás: Párhuzamos egyeneseket kapunk." },
+            { question: "Milyen viszonyban van egy létra két oldala?", options: { a: "merőlegesek", b: "párhuzamosak", c: "metszők" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A létra két hosszanti szára végig azonos távolságra van egymástól. 🔹 2. Lépés: Ez a párhuzamosság definíciója. ✅ Megoldás: A létra két oldala párhuzamos." },
+            { question: "Milyen viszonyban vannak egy létra fokai a létra oldalával?", options: { a: "párhuzamosak", b: "merőlegesek", c: "kitérőek" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A létrafokok általában derékszögben csatlakoznak a létra oldalához. 🔹 2. Lépés: A derékszög a merőlegességet jelenti. ✅ Megoldás: A létra fokai merőlegesek az oldalára." },
+            { question: "Mit jelent az, hogy e ⊥ f?", options: { a: "e és f párhuzamosak", b: "e és f egyenlő hosszúak", c: "e és f merőlegesek" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A ⊥ szimbólum a merőlegesség jele a matematikában. 🔹 2. Lépés: A kiolvasása: 'e merőleges f-re'. ✅ Megoldás: e és f merőlegesek." },
+            { question: "Mi a távolság két párhuzamos egyenes között?", options: { a: "mindig változik", b: "mindenhol ugyanannyi", c: "nulla" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A párhuzamosság egyik legfontosabb tulajdonsága, hogy az egyenesek 'nem közelednek és nem távolodnak' egymástól. 🔹 2. Lépés: Ez azt jelenti, hogy a távolságuk állandó, mindenhol ugyanannyi. ✅ Megoldás: A távolságuk mindenhol ugyanannyi." },
+            { question: "Melyik alakzatnak vannak párhuzamos és merőleges oldalai is?", options: { a: "kör", b: "háromszög", c: "téglalap" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A téglalap szemközti oldalai párhuzamosak. 🔹 2. Lépés: A téglalap szomszédos oldalai merőlegesek. ✅ Megoldás: A téglalapnak mindkét tulajdonságú oldalpárja van." },
+            { question: "Az 'e' és 'f' egyenesek metszik egymást, de nem derékszögben. Milyen viszonyban vannak?", options: { a: "merőlegesek", b: "metszők", c: "párhuzamosak" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ha két egyenesnek van közös pontja, akkor metszik egymást. 🔹 2. Lépés: Ha a metszéspontnál a szög nem derékszög, akkor egyszerűen csak metszőknek nevezzük őket. A merőlegesség a metszés egy speciális esete. ✅ Megoldás: Metszők." },
+            { question: "Egy négyzet átlói...", options: { a: "párhuzamosak.", b: "merőlegesek egymásra.", c: "nincsenek neki átlói." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A négyzet egy speciális rombusz is, a rombuszok átlói pedig mindig merőlegesen metszik egymást. 🔹 2. Lépés: Rajzolj egy négyzetet és húzd be az átlóit! Láthatod, hogy a metszéspontnál derékszög keletkezik. ✅ Megoldás: A négyzet átlói merőlegesek egymásra." },
+            { question: "Ha az asztalon merőlegesen áll egy pohár, milyen viszonyban van a pohár oldala az asztal lapjával?", options: { a: "merőleges", b: "párhuzamos", c: "metsző" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A függőlegesen álló pohár oldala és a vízszintes asztallap derékszöget zár be. 🔹 2. Lépés: Ez a merőlegesség definíciója egyenes és sík között. ✅ Megoldás: A pohár oldala merőleges az asztal lapjára." },
+            { question: "Melyik állítás HAMIS?", options: { a: "Két egyenes vagy párhuzamos, vagy metszi egymást.", b: "Két szakasz lehet párhuzamos.", c: "Két pont lehet merőleges." }, correctAnswer: "c", explanation: "🔹 1. Lépés: Az első két állítás igaz. Két egyenes egy síkban vagy párhuzamos, vagy van egy metszéspontjuk. Két szakasz is lehet párhuzamos (pl. egy téglalap szemközti oldalai). 🔹 2. Lépés: A merőlegesség egyenesek (vagy szakaszok, síkok) közötti viszony, ami szöget ír le. Pontoknak nincs irányuk, így nem lehetnek merőlegesek. ✅ Megoldás: A 'c' állítás hamis." },
+            { question: "Mi az 'egymást keresztező utak' geometriai megfelelője?", options: { a: "párhuzamos egyenesek", b: "metsző egyenesek", c: "szakaszok" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kereszteződés egy olyan hely, ahol az utak találkoznak. 🔹 2. Lépés: A találkozási pont a metszéspont, tehát az utak metsző egyenesek modelljei. ✅ Megoldás: Metsző egyenesek." },
+            { question: "Egy könyvespolc polcai egymással...", options: { a: "párhuzamosak.", b: "merőlegesek.", c: "metszők." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A praktikus használat miatt a könyvespolc polcait úgy készítik, hogy egyenlő távolságra legyenek egymástól és soha ne találkozzanak. 🔹 2. Lépés: Ez a párhuzamosság. ✅ Megoldás: A polcai párhuzamosak." },
+            { question: "A kocka egy csúcsában találkozó élek...", options: { a: "párhuzamosak egymással.", b: "merőlegesek egymásra.", c: "egy síkban vannak." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Gondolj egy szoba sarkára! A padló mentén futó két él, és a függőleges falél mind derékszöget zárnak be egymással. 🔹 2. Lépés: Tehát ezek az élek páronként merőlegesek egymásra. ✅ Megoldás: A kocka egy csúcsában találkozó élek merőlegesek egymásra." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

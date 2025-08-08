@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fókusz Mester - Pomodoro Tanulási Időzítő</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --kek: #005A9C;
+            --zold: #436F4D;
+            --piros: #CD2A3E;
+            --feher: #FFFFFF;
+            --sotet: #2c3e50;
+            --vilagos-szurke: #f0f4f8;
+            --szoveg: #34495e;
+            --card-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--vilagos-szurke);
+            color: var(--szoveg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .timer-container {
+            background-color: var(--feher);
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            width: 100%;
+            max-width: 450px;
+            padding: 2rem 2.5rem;
+            text-align: center;
+            border-top: 8px solid var(--kek);
+            transition: border-top-color 0.5s;
+        }
+
+        .timer-container.break-mode {
+            border-top-color: var(--zold);
+        }
+
+        .header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--sotet);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            margin-bottom: 2rem;
+            color: #6c757d;
+        }
+
+        .timer {
+            margin-bottom: 1.5rem;
+        }
+
+        #time-display {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 6rem;
+            font-weight: 700;
+            color: var(--kek);
+            transition: color 0.5s;
+        }
+
+        .timer-container.break-mode #time-display {
+            color: var(--zold);
+        }
+
+        .controls button {
+            border: none;
+            padding: 12px 25px;
+            margin: 0 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        #start-pause-btn {
+            background-color: var(--kek);
+            color: var(--feher);
+            border: 2px solid var(--kek);
+        }
+        .timer-container.break-mode #start-pause-btn {
+             background-color: var(--zold);
+             border-color: var(--zold);
+        }
+
+        #start-pause-btn:hover {
+            background-color: var(--feher);
+            color: var(--sotet);
+        }
+
+        #reset-btn {
+            background-color: transparent;
+            color: var(--sotet);
+            border: 2px solid #ccc;
+        }
+        #reset-btn:hover {
+            background-color: var(--piros);
+            color: var(--feher);
+            border-color: var(--piros);
+        }
+
+        .progress {
+            margin-top: 2rem;
+        }
+
+        .progress p {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        #pomodoro-count {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--sotet);
+        }
+
+        /* --- MAGYARÁZÓ DOBOZ STÍLUSAI --- */
+        .explanation-box {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed #ddd;
+            text-align: left;
+        }
+        .explanation-box h3 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--sotet);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .explanation-box p {
+            color: #6c757d;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .explanation-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .explanation-box li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .explanation-box .icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            line-height: 1.6;
+        }
+        .explanation-box .tip {
+            background-color: #fffbe5;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="timer-container" id="timer-container">
+        <div class="header">
+            <h1>Fókusz Mester</h1>
+            <p>Tanulj a Pomodoro-módszerrel!</p>
+        </div>
+        <div class="timer">
+            <div id="time-display">25:00</div>
+        </div>
+        <div class="controls">
+            <button id="start-pause-btn">Start</button>
+            <button id="reset-btn">Újraindítás</button>
+        </div>
+        <div class="progress">
+            <p>Teljesített Pomodorók: <span id="pomodoro-count">0</span> / 4</p>
+        </div>
+    </div>
+            <!-- === MAGYARÁZÓ SZEKCIÓ KEZDETE === -->
+        <div class="explanation-box">
+            <h3>Hogyan működik? A Pomodoro-módszer</h3>
+            <p>Ez az időzítő a tudományosan bizonyított Pomodoro-módszeren alapul, ami segít a koncentráció fenntartásában és a halogatás leküzdésében.</p>
+            <ul>
+                <li><span class="icon">🎯</span> <div><strong>Fókusz (25 perc):</strong> Válassz ki egy feladatot, és dolgozz rajta teljes odaadással, megszakítás nélkül.</div></li>
+                <li><span class="icon">☕</span> <div><strong>Rövid szünet (5 perc):</strong> Minden fókuszált szakasz után tarts egy rövid pihenőt. Állj fel, nyújtózz, igyál egy pohár vizet!</div></li>
+                <li><span class="icon">🎉</span> <div><strong>Hosszú szünet (15 perc):</strong> Négy "pomodoro" (fókuszált szakasz) után tarts egy hosszabb szünetet, hogy az agyad teljesen feltöltődhessen.</div></li>
+            </ul>
+            <p class="tip"><strong>Profi Tipp:</strong> A szünetekben kerüld a telefont és a közösségi médiát, hogy az agyad valóban pihenni tudjon!</p>
+        </div>
+        <!-- === MAGYARÁZÓ SZEKCIÓ VÉGE === -->
+
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const WORK_TIME = 25 * 60;
+    const SHORT_BREAK_TIME = 5 * 60;
+    const LONG_BREAK_TIME = 15 * 60;
+    const LONG_BREAK_INTERVAL = 4;
+
+    let timeLeft = WORK_TIME;
+    let timerInterval = null;
+    let isPaused = true;
+    let currentMode = 'work'; // 'work', 'short_break', 'long_break'
+    let pomodoroCount = 0;
+
+    const timeDisplay = document.getElementById('time-display');
+    const startPauseBtn = document.getElementById('start-pause-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const pomodoroCountSpan = document.getElementById('pomodoro-count');
+    const timerContainer = document.getElementById('timer-container');
+    
+    let audioContext;
+    try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    } catch (e) {
+        console.warn('Web Audio API is not supported in this browser');
+    }
+
+    function playAlarm() {
+        if (!audioContext) return;
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // A note
+        gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
+        
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.5); // Beep for 0.5 seconds
+    }
+
+    function updateDisplay() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.title = `${timeDisplay.textContent} - Fókusz Mester`;
+    }
+
+    function startTimer() {
+        isPaused = false;
+        startPauseBtn.textContent = 'Szünet';
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            updateDisplay();
+            if (timeLeft < 0) {
+                clearInterval(timerInterval);
+                playAlarm();
+                switchMode();
+            }
+        }, 1000);
+    }
+
+    function pauseTimer() {
+        isPaused = true;
+        clearInterval(timerInterval);
+        startPauseBtn.textContent = 'Folytatás';
+    }
+
+    function startPauseToggle() {
+        if (isPaused) {
+            startTimer();
+        } else {
+            pauseTimer();
+        }
+    }
+    
+    function switchMode() {
+        if (currentMode === 'work') {
+            pomodoroCount++;
+            pomodoroCountSpan.textContent = `${pomodoroCount} / ${LONG_BREAK_INTERVAL}`;
+            if (pomodoroCount % LONG_BREAK_INTERVAL === 0) {
+                currentMode = 'long_break';
+                timeLeft = LONG_BREAK_TIME;
+            } else {
+                currentMode = 'short_break';
+                timeLeft = SHORT_BREAK_TIME;
+            }
+            timerContainer.classList.add('break-mode');
+        } else {
+            currentMode = 'work';
+            timeLeft = WORK_TIME;
+            timerContainer.classList.remove('break-mode');
+        }
+        updateDisplay();
+        startTimer();
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval);
+        isPaused = true;
+        currentMode = 'work';
+        timeLeft = WORK_TIME;
+        pomodoroCount = 0;
+        startPauseBtn.textContent = 'Start';
+        pomodoroCountSpan.textContent = `0 / ${LONG_BREAK_INTERVAL}`;
+        timerContainer.classList.remove('break-mode');
+        updateDisplay();
+    }
+
+    startPauseBtn.addEventListener('click', startPauseToggle);
+    resetBtn.addEventListener('click', resetTimer);
+    
+    updateDisplay(); // Initial display setup
+});
+</script>
+ 
+</body>
+</html>

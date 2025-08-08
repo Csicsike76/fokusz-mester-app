@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Visszajelzés Statisztika</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stilus.css') }}">
+    <style>
+        .stat-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+        .stat-table th, .stat-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        .stat-table th { background-color: var(--sotet); color: var(--feher); }
+        .stat-table tr:nth-child(even) { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    {% include 'navigacio.html' %}
+    <div class="content-wrapper">
+        <main class="container">
+            <section class="section">
+                <h2 class="section-title">Leckék Értékelése</h2>
+                <p class="section-subtitle">A legnépszerűbb és legkevésbé kedvelt tananyagok a felhasználói visszajelzések alapján.</p>
+                <table class="stat-table">
+                    <thead>
+                        <tr>
+                            <th>Tananyag Azonosító</th>
+                            <th>👍 Tetszik</th>
+                            <th>👎 Nem tetszik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for feedback in feedbacks %}
+                        <tr>
+                            <td>{{ feedback.card_id }}</td>
+                            <td>{{ feedback.likes }}</td>
+                            <td>{{ feedback.dislikes }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="3">Még nem érkezett visszajelzés.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

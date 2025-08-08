@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI 0. Év - AI Alapozó Kurzus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stilus.css') }}">
+</head>
+<body>
+    
+    <video autoplay muted loop id="bg-video">
+        <source src="{{ url_for('static', filename='video/video.mp4') }}" type="video/mp4">
+        Böngésződ nem támogatja a videó hátteret.
+    </video>
+    
+    {% include 'navigacio.html' %}
+
+    <div class="content-wrapper">
+        <header class="header">
+            <div class="container">
+                <h1 class="main-title">
+                    <span class="highlight">AIMI 0. Év</span>
+                    AI Alapozó Kurzus
+                </h1>
+                <p class="subtitle">
+                    Fedezd fel a mesterséges intelligencia világát kreatív módon! Ez a kurzus tökéletes első lépés minden fiatal számára, aki kíváncsi az AI működésére.
+                </p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                
+                <!-- Kurzus áttekintés -->
+                <section class="course-overview">
+                    <h2>📚 Mit fogsz megtanulni?</h2>
+                    <div class="overview-grid">
+                        <div class="overview-item">
+                            <h3>🧠 AI Alapfogalmak</h3>
+                            <p>Megérted, mi az a mesterséges intelligencia, és hogyan működik a valóságban.</p>
+                        </div>
+                        <div class="overview-item">
+                            <h3>🎨 Kreatív Projektek</h3>
+                            <p>Scratch segítségével építed meg az első AI algoritmusaidat játékos módon.</p>
+                        </div>
+                        <div class="overview-item">
+                            <h3>🔍 Problémamegoldás</h3>
+                            <p>Megtanulod, hogyan gondolkodik egy gép, és hogyan oldja meg a problémákat.</p>
+                        </div>
+                        <div class="overview-item">
+                            <h3>🚀 Jövőkép</h3>
+                            <p>Megismered az AI jövőbeli lehetőségeit és szerepét a világunkban.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Kurzus modulok -->
+                <section class="course-modules">
+                    <h2>📖 Kurzus Modulok</h2>
+                    
+                  
+
+                    <div class="module">
+                        <div class="module-header">
+                            <h3>1. Modul: Az Információtól az Adatig</h3>
+                            <span class="module-status available">Elérhető</span>
+                        </div>
+                        <div class="module-content">
+                            <p>Mi a közös a szavakban, a képekben és a hangokban? Megtanuljuk, hogyan válik mindenből adat, amivel egy gép már tud "gondolkodni".</p>
+                            <div class="module-actions">
+                                <a href="{{ url_for('muhely_prompt_alapok') }}" class="btn btn-primary">Modul Indítása →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. MODUL - KIEGÉSZÍTETT VERZIÓ -->
+                    <div class="module">
+                        <div class="module-header">
+                            <h3>2. Modul: A Gép, ami Gondolkodik</h3>
+                            <span class="module-status available">Elérhető</span>
+                        </div>
+                        <div class="module-content">
+                            <p><strong>Hogyan "tanul" egy számítógép?</strong> Ebben a modulban megismerkedünk az algoritmusokkal és a gépi tanulás alapjaival - de úgy, hogy te is könnyen megértsd!</p>
+                            
+                            <div class="module-details">
+                                <h4>🎯 Mit fogsz megtanulni:</h4>
+                                <ul>
+                                    <li><strong>Mi az algoritmus?</strong> - Mint egy recept, amit a gép követni tud</li>
+                                    <li><strong>Hogyan tanul a gép?</strong> - Példákon keresztül, mint ahogy te is tanulsz</li>
+                                    <li><strong>Döntéshozatal:</strong> Ha-akkor szabályok, mint egy játékban</li>
+                                    <li><strong>Mintafelismerés:</strong> Hogyan ismeri fel a gép a macskát a kutyától?</li>
+                                </ul>
+
+                                <h4>🎮 Gyakorlati feladatok:</h4>
+                                <ul>
+                                    <li>Készíts Scratch-ben egy "okos" robotot, aki megtanulja a kedvenc színedet</li>
+                                    <li>Építs egy egyszerű játékot, ahol a gép megjósolja a következő lépésedet</li>
+                                    <li>Hozz létre egy "tanácsadó" programot, ami kérdések alapján ajánl filmet</li>
+                                </ul>
+
+                                <h4>🌟 Vicces példák:</h4>
+                                <p>Képzeld el, hogy az AI olyan, mint egy nagyon figyelmes barát, aki mindig emlékszik, mit szeretsz. Ha minden nap epret eszel reggelire, ő megjegyzi, és legközelebb epres müzlit ajánl!</p>
+                            </div>
+                            
+                            <div class="module-actions">
+                                <a href="{{ url_for('muhely_jatektervezes') }}" class="btn btn-primary">Modul Indítása →</a>
+                                <span class="module-duration">⏱️ ~45 perc</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. MODUL - KIEGÉSZÍTETT VERZIÓ -->
+                    <div class="module">
+                        <div class="module-header">
+                            <h3>3. Modul: A Rendszer az Adatok Mögött</h3>
+                            <span class="module-status available">Elérhető</span>
+                        </div>
+                        <div class="module-content">
+                            <p><strong>Mi történik a színfalak mögött?</strong> Megértjük, hogyan tárolják és dolgozzák fel az adatokat a számítógépek - olyan egyszerűen, hogy még a nagyszüleid is megértenék!</p>
+                            
+                            <div class="module-details">
+                                <h4>🏗️ Mit fogsz megtanulni:</h4>
+                                <ul>
+                                    <li><strong>Adattárolás:</strong> Mint egy hatalmas digitális könyvtár</li>
+                                    <li><strong>Adatfeldolgozás:</strong> Hogyan válogat a gép millió információ közül</li>
+                                    <li><strong>Rendszerezés:</strong> Minden adatnak megvan a helyye, mint egy jól szervezett szekrényben</li>
+                                    <li><strong>Sebesség titka:</strong> Miért olyan gyors a számítógép?</li>
+                                </ul>
+
+                                <h4>🎯 Gyakorlati projektek:</h4>
+                                <ul>
+                                    <li>Építs Scratch-ben egy "Digitális fiókos szekrényt" - tárold és keresd meg az adataidat</li>
+                                    <li>Készíts egy egyszerű "adatbázist" a kedvenc könyveidről</li>
+                                    <li>Hozz létre egy "Memória-játékot", ami megjegyzi és visszaidézi az információkat</li>
+                                </ul>
+
+                                <h4>🎪 Képzeld el úgy:</h4>
+                                <p>Az AI agya olyan, mint egy varázslatos könyvtár, ahol minden könyv (adat) pillanatok alatt megtalálható. A könyvtáros (algoritmus) bámulatos gyorsasággal hozza neked pontosan azt, amire szükséged van!</p>
+                                
+                                <h4>🔍 Érdekes tények:</h4>
+                                <ul>
+                                    <li>Egy átlagos AI több adatot tud tárolni, mint amennyi könyv van az egész világon!</li>
+                                    <li>A számítógép 1 másodperc alatt akár milliárdszor tud számolni</li>
+                                    <li>Az adatok nem csak számok - képek, videók, zene is mind "adat"</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="module-actions">
+                                <a href="{{ url_for('muhely_kod_magyarazat') }}" class="btn btn-primary">Modul Indítása →</a>
+                                <span class="module-duration">⏱️ ~50 perc</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. MODUL - KIEGÉSZÍTETT VERZIÓ -->
+                    <div class="module">
+                        <div class="module-header">
+                            <h3>4. Modul: Az Internet, az AI Könyvtára</h3>
+                            <span class="module-status available">Elérhető</span>
+                        </div>
+                        <div class="module-content">
+                            <p><strong>Hogyan szerzi be az AI a tudását az internetről?</strong> Megismerkedünk a nagy adatbázisokkal és az online tanulással - fedezd fel, hogyan lesz az AI egyre okosabb!</p>
+                            
+                            <div class="module-details">
+                                <h4>🌐 Mit fogsz megtanulni:</h4>
+                                <ul>
+                                    <li><strong>Az Internet mint tankönyv:</strong> Hogyan olvas bele az AI az egész világ tudásába?</li>
+                                    <li><strong>Online tanulás:</strong> Az AI sosem fejezi be az iskolát - folyton tanul!</li>
+                                    <li><strong>Hatalmas adatbázisok:</strong> Mint egy végtelen enciklopédia</li>
+                                    <li><strong>Információ-szűrés:</strong> Hogyan találja meg az AI a fontos dolgokat a rengeteg info között?</li>
+                                </ul>
+
+                                <h4>🚀 Izgalmas projektek:</h4>
+                                <ul>
+                                    <li>Készíts egy "Mini-Google"-t Scratch-ben, ami megtalálja a keresett dolgokat</li>
+                                    <li>Építs egy "Tudás-gyűjtő" robotot, aki megjegyzi az új információkat</li>
+                                    <li>Hozz létre egy "Okos Asszisztenst", aki válaszol a kérdéseidre</li>
+                                    <li>Tervezz egy "Fake News Detektort" - hogyan ismeri fel az AI a hamis híreket?</li>
+                                </ul>
+
+                                <h4>🎨 Fantasztikus hasonlatok:</h4>
+                                <p>Az AI olyan, mint egy szuper-diák, aki az egész internetet elolvassa egy nap alatt! Képzeld el: minden Wikipedia cikk, minden könyv, minden videó - és mind a fejében van!</p>
+                                
+                                <h4>🤯 Elképesztő tények:</h4>
+                                <ul>
+                                    <li>Az AI másodpercek alatt olvas el annyi szöveget, amennyit te egy hét alatt</li>
+                                    <li>Egyszerre több nyelven is tud tanulni - angolul, magyarul, japánul!</li>
+                                    <li>Sosem felejtő: amit egyszer megtanult, azt örökre tudja</li>
+                                    <li>A ChatGPT-t például több könyvön tanították, mint amennyi a világ összes könyvtárában van!</li>
+                                </ul>
+
+                                <h4>🎭 Interaktív kihívások:</h4>
+                                <ul>
+                                    <li><strong>"AI Quiz":</strong> Teszteld le, mennyit tudsz az internetes AI működésről!</li>
+                                    <li><strong>"Információ-vadászat":</strong> Keress meg bizonyos adatokat gyorsabban, mint az AI!</li>
+                                    <li><strong>"Nyelvtanuló verseny":</strong> Tanítsd meg az AI-nak az új szavakat!</li>
+                                </ul>
+
+                                <h4>⚠️ Fontos tudnivalók:</h4>
+                                <p>Az AI nem mindent hisz el, amit az interneten lát. Megtanuljuk, hogyan választja szét az igaz és hamis információkat, és te is megtanulhatsz kritikusan gondolkodni!</p>
+                            </div>
+                            
+                            <div class="module-actions">
+                                <a href="{{ url_for('idoutazo_csevego') }}" class="btn btn-primary">Modul Indítása →</a>
+                                <span class="module-duration">⏱️ ~60 perc</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module">
+                        <div class="module-header">
+                            <h3>5. Modul: Hogyan "Lát" az AI?</h3>
+                            <span class="module-status available">Elérhető</span>
+                        </div>
+                        <div class="module-content">
+                            <p>Hogyan ismer fel egy gép egy macskát egy képen? Megtanuljuk, hogy a képek pixelekből állnak, és egy MI számára a látás valójában számok és mintázatok elemzése.</p>
+                            <div class="module-actions">
+                                <a href="{{ url_for('muhely_kepalkotas') }}" class="btn btn-primary">Modul Indítása →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module">
+                        <div class="module-header">
+                            <h3>6. Modul: Az Algoritmus - Az AI Lelke</h3>
+                            <span class="module-status available">Elérhető</span>
+                        </div>
+                        <div class="module-content">
+                            <p>Mi az az algoritmus? És hogyan lesz egyszerű szabályokból "intelligens" döntés? Megépítjük a legegyszerűbb MI-nket a Scratch segítségével!</p>
+                            <div class="module-actions">
+                                <a href="{{ url_for('muhely_jatektervezes') }}" class="btn btn-primary">Modul Indítása →</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gyakorlati eszközök -->
+                <section class="tools-section">
+                    <h2>🛠️ Gyakorlati Eszközök</h2>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <h3>🎮 Játéktervezés AI-val</h3>
+                            <p>Készíts saját játékot Scratch-ben AI elemekkel!</p>
+                            <a href="{{ url_for('muhely_jatektervezes') }}" class="btn btn-secondary">Eszköz megnyitása</a>
+                        </div>
+                        <div class="tool-card">
+                            <h3>🖼️ Képalkotás</h3>
+                            <p>Ismerd meg, hogyan "látnak" a gépek!</p>
+                            <a href="{{ url_for('muhely_kepalkotas') }}" class="btn btn-secondary">Eszköz megnyitása</a>
+                        </div>
+                        <div class="tool-card">
+                            <h3>💬 Promptolás Alapok</h3>
+                            <p>Tanulj meg beszélni az AI-val!</p>
+                            <a href="{{ url_for('muhely_prompt_alapok') }}" class="btn btn-secondary">Eszköz megnyitása</a>
+                        </div>
+                        <div class="tool-card">
+                            <h3>🔬 MI a Gyakorlatban</h3>
+                            <p>Valós példákon keresztül értsd meg az AI-t!</p>
+                            <a href="{{ url_for('muhely_mi_a_gyakorlatban') }}" class="btn btn-secondary">Eszköz megnyitása</a>
+                        </div>
+                        <div class="tool-card">
+                            <h3>🕰️ Időutazó Csevegő</h3>
+                            <p>Beszélgess történelmi személyiségekkel!</p>
+                            <a href="{{ url_for('idoutazo_csevego') }}" class="btn btn-secondary">Eszköz megnyitása</a>
+                        </div>
+                        <div class="tool-card">
+                            <h3>🧑‍💻 Kód Magyarázat</h3>
+                            <p>Értsd meg, hogyan működik a programozás!</p>
+                            <a href="{{ url_for('muhely_kod_magyarazat') }}" class="btn btn-secondary">Eszköz megnyitása</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Előrehaladás - FRISSÍTETT -->
+                <section class="progress-section">
+                    <h2>📊 Az Eddigi Előrehaladásod</h2>
+                    <div class="progress-overview">
+                        <div class="progress-stat">
+                            <h3>6/6</h3>
+                            <p>Elérhető modulok</p>
+                        </div>
+                        <div class="progress-stat">
+                            <h3>6</h3>
+                            <p>Gyakorlati eszköz</p>
+                        </div>
+                        <div class="progress-stat">
+                            <h3>1</h3>
+                            <p>Záróprojekt</p>
+                        </div>
+                        <div class="progress-stat">
+                            <h3>100%</h3>
+                            <p>Kurzus teljesítés</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <img src="{{ url_for('static', filename='img/csicsike_logo.png') }}" alt="CSICSIKE Logo" class="footer-logo">
+            <p>&copy; 2025 Matematika Tanár 2030-ra. Minden jog fenntartva.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/kereso_adatbazis.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>
+</html>
+
+<style>
+/* AI Alapozó kurzus specifikus stílusok */
+.course-overview {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.overview-item {
+    background: var(--feher);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--zold);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.overview-item h3 {
+    color: var(--zold);
+    margin-bottom: 0.5rem;
+}
+
+.course-modules {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.module {
+    background: var(--feher);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.module:hover {
+    transform: translateY(-2px);
+}
+
+.special-module {
+    border: 2px solid var(--piros);
+    background: linear-gradient(135deg, rgba(205, 42, 62, 0.1), rgba(255, 255, 255, 0.95));
+}
+
+.module-header {
+    background: var(--vilagos-szurke);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.special-module .module-header {
+    background: linear-gradient(135deg, var(--piros), #e74c3c);
+    color: var(--feher);
+}
+
+.module-header h3 {
+    margin: 0;
+    color: var(--sotet);
+}
+
+.special-module .module-header h3 {
+    color: var(--feher);
+}
+
+.module-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.module-status.available {
+    background: var(--zold);
+    color: var(--feher);
+}
+
+.module-status.development {
+    background: #f39c12;
+    color: var(--feher);
+}
+
+.module-content {
+    padding: 1.5rem;
+}
+
+.module-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* ÚJ STÍLUSOK A KIEGÉSZÍTETT MODULOKHOZ */
+.module-details {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 4px solid var(--kek);
+}
+
+.module-details h4 {
+    color: var(--kek);
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.module-details ul {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.module-details li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.module-details li strong {
+    color: var(--sotet);
+}
+
+.module-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.module-duration {
+    color: #666;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.btn-disabled {
+    background-color: #95a5a6;
+    color: var(--feher);
+    cursor: not-allowed;
+}
+
+.btn-disabled:hover {
+    background-color: #95a5a6;
+    transform: none;
+}
+
+.tools-section {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.tool-card {
+    background: var(--feher);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-4px);
+}
+
+.tool-card h3 {
+    color: var(--kek);
+    margin-bottom: 0.5rem;
+}
+
+.tool-card p {
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.progress-section {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.progress-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.progress-stat {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--feher);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.progress-stat h3 {
+    font-size: 2.5rem;
+    color: var(--zold);
+    margin-bottom: 0.5rem;
+}
+
+.progress-stat p {
+    color: #666;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .overview-grid,
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .module-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .progress-overview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .module-details {
+        padding: 1rem;
+    }
+    
+    .module-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+</style>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Kvíz: Halmazok és relációk</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <style>
+    :root {
+      --primary-color: #388d3c;
+      --secondary-color: #d52b1e;
+      --light-green: #e8f5e9;
+      --light-red: #ffebee;
+      --text-dark: #333;
+      --text-light: #fff;
+      --border-color: #ddd;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, var(--secondary-color), var(--text-light), var(--primary-color));
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: var(--text-light);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+    .question-block {
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .question {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    .answers label {
+      display: block;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      border: 1px solid transparent;
+    }
+    .answers label:hover {
+        background-color: #f0f0f0;
+    }
+    .answers input[type="radio"] {
+      margin-right: 0.8em;
+      accent-color: var(--primary-color);
+    }
+    .answers label.correct {
+      background-color: var(--light-green);
+      border-color: var(--primary-color);
+      font-weight: bold;
+    }
+    .answers label.incorrect {
+      background-color: var(--light-red);
+      border-color: var(--secondary-color);
+    }
+    .explanation {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      background-color: #f7f7fa;
+      border-left: 4px solid var(--primary-color);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .controls, .pin-section {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #f9fafb;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .pin-input {
+      width: 140px;
+      padding: 10px;
+      font-size: 1.1em;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    button:hover:not(:disabled) {
+      background-color: #2a6a2d;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    #result {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      font-size: 1.3em;
+      text-align: center;
+    }
+    .admin-panel {
+      display: none;
+      margin-top: 2rem;
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      background-color: #fffde7;
+      border-radius: 8px;
+    }
+    @media (max-width: 600px) {
+      main { padding: 1.5rem 1rem; }
+      header h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body autocomplete="off">
+  
+  <header>
+    <h1>Kvíz: Halmazok és relációk</h1>
+  </header>
+
+  <main>
+    <div class="pin-section">
+      <input type="password" id="pin" class="pin-input" placeholder="PIN-kód" autocomplete="off">
+      <button type="button" id="checkBtn">Ellenőrzés</button>
+      <div id="result"></div>
+    </div>
+    
+    <form id="quiz-form" autocomplete="off">
+    </form>
+    
+    <div class="admin-panel" id="admin-panel">
+      <h3>Adminisztrációs panel</h3>
+      <p>Mester PIN-kóddal sikeresen bejelentkezve.</p>
+    </div>
+  </main>
+
+  {% raw %}
+  <script>
+    const MASTER_PIN = '121909';
+    const studentPins = new Set();
+    function createInitialPins() {
+        for (let i = 1; i <= 20; i++) {
+            studentPins.add((100000 + i).toString());
+        }
+    }
+
+    const questions = [
+        { q: "Hogy nevezzük azt a halmazt, amelynek egyetlen eleme sincs?", a: "Nullhalmaz", b: "Üres halmaz", c: "Elemtelen halmaz", correct: "b", exp: "Azt a halmazt, amelynek nincsenek elemei, üres halmaznak nevezzük. Jele: ∅ vagy {}. A kardinálisa (elemszáma) 0." },
+        { q: "Melyik jelölés fejezi ki, hogy 'a' eleme az A halmaznak?", a: "a ⊂ A", b: "a ∈ A", c: "A ∈ a", correct: "b", exp: "Az '∈' szimbólum az eleme reláció jele. Azt jelenti, hogy a bal oldalán lévő elem a jobb oldalán lévő halmazhoz tartozik. A '⊂' a részhalmaz jele." },
+        { q: "Ha A = {1, 3, 5} és B = {1, 2, 3, 4, 5}, melyik állítás igaz?", a: "A = B", b: "B ⊂ A", c: "A ⊂ B", correct: "c", exp: "Az A halmaz minden eleme (1, 3, 5) megtalálható a B halmazban is, ezért az A részhalmaza a B-nek. Jele: A ⊂ B." },
+        { q: "Mi a {2, 4, 6, 8} halmaz kardinálisa?", a: "4", b: "8", c: "Nem lehet meghatározni", correct: "a", exp: "A halmaz kardinálisa (számossága) a halmaz elemeinek a számát jelenti. A {2, 4, 6, 8} halmaznak 4 darab eleme van." },
+        { q: "Két halmaz mikor egyenlő?", a: "Ha az elemeik száma megegyezik.", b: "Ha pontosan ugyanazok az elemeik.", c: "Ha van közös elemük.", correct: "b", exp: "Két halmaz akkor és csak akkor egyenlő, ha minden elemük megegyezik. Az elemek sorrendje nem számít. Az elemszámuk egyezése nem elegendő (pl. {1,2} és {3,4} elemszáma egyenlő, de a halmazok nem)." },
+        { q: "Melyik állítás igaz MINDIG?", a: "Minden halmaznak van legalább egy eleme.", b: "Az üres halmaz minden halmaznak részhalmaza.", c: "Két halmaz mindig részhalmaza egymásnak.", correct: "b", exp: "Matematikai definíció szerint az üres halmaz (∅) minden halmaznak részhalmaza. Az 'a' állítás hamis az üres halmaz miatt. A 'c' pedig általában nem igaz." },
+        { q: "Mi a különbség az {a, b} és az (a, b) jelölések között?", a: "Nincs különbség.", b: "{a,b} egy halmaz, ahol a sorrend nem számít, (a,b) egy rendezett pár, ahol a sorrend számít.", c: "{a,b} a nyílt intervallum, (a,b) a zárt intervallum.", correct: "b", exp: "A { } kapcsos zárójel halmazt jelöl, melynek elemei között nincs sorrend. A ( ) kerek zárójel rendezett párt (vagy n-est) jelöl, ahol az elemek sorrendje kötött és fontos. Pl. (1,2) ≠ (2,1)." },
+        { q: "Ha A ⊂ B és B ⊂ A, mit mondhatunk a két halmazról?", a: "A = B", b: "A és B diszjunktak.", c: "A ⊂ B", correct: "a", exp: "Ez a halmazok egyenlőségének definíciója. Ha az 'A' minden eleme benne van 'B'-ben, és a 'B' minden eleme benne van 'A'-ban, az csak úgy lehetséges, ha a két halmaznak pontosan ugyanazok az elemei." },
+        { q: "Melyik állítás írja le a természetes számok (ℕ) és az egész számok (ℤ) viszonyát?", a: "ℤ ⊂ ℕ", b: "ℕ ⊂ ℤ", c: "ℕ = ℤ", correct: "b", exp: "Minden természetes szám (0, 1, 2, ...) egyben egész szám is. De létezik olyan egész szám (pl. -1), ami nem természetes. Tehát a természetes számok halmaza valódi részhalmaza az egész számok halmazának." },
+        { q: "Hány részhalmaza van az A = {x, y} halmaznak?", a: "2", b: "3", c: "4", correct: "c", exp: "Egy halmaz részhalmazai: az üres halmaz, az egyelemű részhalmazok, a kételemű, stb., és maga a halmaz. Itt: ∅, {x}, {y}, {x,y}. Ez összesen 4 db. Általában egy n elemű halmaznak 2ⁿ részhalmaza van." },
+        { q: "Mi a páratlan számjegyek halmaza?", a: "{1, 3, 5, 7, 9}", b: "{1, 2, 3, 4, 5}", c: "{1, 3, 5, ...}", correct: "a", exp: "A számjegyek a 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Ezek közül a páratlanok az 1, 3, 5, 7, 9. A 'c' a páratlan számok halmazát jelöli, nem a számjegyekét." },
+        { q: "Mikor nevezünk két halmazt diszjunktnak?", a: "Ha van közös elemük.", b: "Ha nincs közös elemük.", c: "Ha az egyik részhalmaza a másiknak.", correct: "b", exp: "Két halmaz akkor diszjunkt, ha a metszetük az üres halmaz, azaz nincs egyetlen közös elemük sem." },
+        { q: "Ha A a 12 osztóinak halmaza és B a 18 osztóinak halmaza, mi a közös osztók halmaza?", a: "A ∪ B", b: "A ∩ B", c: "A \ B", correct: "b", exp: "A közös osztók halmaza pontosan az a halmaz, amely azokat az elemeket tartalmazza, amelyek mindkét halmazban benne vannak. Ez a halmazok metszetének definíciója." },
+        { q: "A Venn-diagram mire használható?", a: "Halmazok és a köztük lévő viszonyok szemléltetésére.", b: "Függvények ábrázolására.", c: "Egyenletek megoldására.", correct: "a", exp: "A Venn-Euler diagram egy grafikus ábrázolási mód, amely zárt görbékkel (általában körökkel) szemlélteti a halmazokat és azok metszetét, unióját és egyéb viszonyait." },
+        { q: "Adott A = {1,2,3}. Melyik állítás HAMIS?", a: "2 ∈ A", b: "{2} ⊂ A", c: "2 ⊂ A", correct: "c", exp: "Az 'a' és 'b' állítások igazak: a 2 eleme A-nak; a {2} halmaz pedig részhalmaza A-nak. A 'c' állítás formailag helytelen, mert a részhalmaz reláció (⊂) két halmaz között értelmezett, nem egy elem és egy halmaz között." },
+        { q: "Hány eleme van egy egyelemű halmaznak?", a: "0", b: "1", c: "Végtelen sok", correct: "b", exp: "A nevében is benne van: az egyelemű halmaznak pontosan egy darab eleme van. Például a {5} halmaznak egy eleme van, az 5." },
+        { q: "Ha A={a,b,c} és B={a,b,c}, akkor...", a: "A ⊂ B, de A≠B", b: "A ⊄ B", c: "A = B", correct: "c", exp: "Mivel a két halmaznak pontosan ugyanazok az elemei, ezért a két halmaz egyenlő. Az egyenlőségből következik a részhalmaz reláció is (A⊂B és B⊂A)." },
+        { q: "Melyik halmaz végtelen?", a: "A Földön élő emberek halmaza.", b: "A 100-nál kisebb prímszámok halmaza.", c: "A páros számok halmaza.", correct: "c", exp: "A páros számok halmaza {..., -2, 0, 2, 4, ...} végtelen, mert nincs 'utolsó' páros szám. Az emberek és a 100-nál kisebb prímek száma nagy, de véges." },
+        { q: "Mi a 'halmaz' szó szinonimája a matematikában?", a: "Csoport", b: "Sokaság", c: "Nincs pontos szinonimája.", correct: "b", exp: "A halmazelméletben a 'halmaz' egy alapfogalom, amit nem definiálunk, hanem körülírunk. A 'sokaság' vagy 'gyűjtemény' szavak állnak hozzá a legközelebb." },
+        { q: "Ha A a {piros, zöld} és B a {kék, sárga} halmaz, akkor A és B...", a: "...egyenlőek.", b: "...diszjunktak.", c: "...részhalmazai egymásnak.", correct: "b", exp: "Mivel a két halmaznak nincs egyetlen közös eleme sem, a metszetük üres. Az ilyen halmazokat diszjunktnak nevezzük." },
+        { q: "A {x | x páros természetes szám} halmaz megadási módja:", a: "Elemek felsorolása.", b: "Közös tulajdonság megadása.", c: "Venn-diagram.", correct: "b", exp: "Ez a jelölés azt jelenti: 'azon x elemek halmaza, amelyekre igaz, hogy x páros természetes szám'. Ez a halmaz elemeinek közös tulajdonságával való megadása." },
+        { q: "Ha A ⊂ B, akkor mit mondhatunk az elemeik számáról?", a: "|A| > |B|", b: "|A| ≤ |B|", c: "|A| = |B|", correct: "b", exp: "Ha A részhalmaza B-nek, az azt jelenti, hogy minden A-beli elem B-ben is ott van. Ebből következik, hogy A-nak nem lehet több eleme, mint B-nek, tehát az elemszáma kisebb vagy egyenlő." },
+        { q: "Melyik reláció tranzitív?", a: "Eleme (∈)", b: "Részhalmaz (⊂)", c: "Nem eleme (∉)", correct: "b", exp: "A részhalmaz reláció tranzitív: ha A⊂B és B⊂C, akkor A⊂C. Az 'eleme' reláció nem tranzitív: pl. 1 ∈ {1,2} és {1,2} ∈ {{1,2}, 3}, de 1 nem eleme a {{1,2}, 3} halmaznak." },
+        { q: "Mi a különbség az üres halmaz ∅ és a {∅} halmaz között?", a: "A {∅} egy egyelemű halmaz, amelynek az egyetlen eleme az üres halmaz.", b: "Semmi, a két jelölés ugyanazt jelenti.", c: "A {∅} nem létező fogalom.", correct: "a", exp: "Az ∅ az a halmaz, aminek nincs eleme. A {∅} egy olyan halmaz, aminek van eleme, méghozzá egy darab, és ez az elem maga az üres halmaz." },
+        { q: "Ha A={1,2} és B={{1,2}, 3}, mi igaz?", a: "A ⊂ B", b: "A ∈ B", c: "A = B", correct: "b", exp: "A B halmaznak két eleme van: az egyik az {1,2} halmaz, a másik a 3-as szám. Mivel az A halmaz ({1,2}) pontosan megegyezik a B halmaz egyik elemével, ezért A ∈ B." }
+    ];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    const quizForm = document.getElementById('quiz-form');
+    function populateQuiz() {
+      shuffle(questions);
+      quizForm.innerHTML = '';
+      questions.forEach((item, i) => {
+        const block = document.createElement('div');
+        block.className = 'question-block';
+        block.innerHTML = `
+          <div class="question">${i + 1}. ${item.q}</div>
+          <div class="answers">
+            <label><input type="radio" name="q${i}" value="a"/> a) ${item.a}</label>
+            <label><input type="radio" name="q${i}" value="b"/> b) ${item.b}</label>
+            <label><input type="radio" name="q${i}" value="c"/> c) ${item.c}</label>
+          </div>
+          <div class="explanation" id="exp${i}">${item.exp}</div>
+        `;
+        quizForm.appendChild(block);
+      });
+    }
+
+    function areAllQuestionsAnswered() {
+      for (let i = 0; i < questions.length; i++) {
+        if (!quizForm.querySelector(`input[name="q${i}"]:checked`)) return false;
+      }
+      return true;
+    }
+
+    function isPinValid(pin) {
+        return pin === MASTER_PIN || studentPins.has(pin);
+    }
+
+    function evaluateQuiz(isMaster = false) {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const selectedOption = quizForm.querySelector(`input[name="q${i}"]:checked`);
+        const explanation = document.getElementById(`exp${i}`);
+        const answerLabels = quizForm.querySelector(`input[name="q${i}"]`).parentElement.parentElement.querySelectorAll('label');
+        
+        if (selectedOption) {
+            const parentLabel = selectedOption.parentElement;
+            if (selectedOption.value === q.correct) {
+                score++;
+                parentLabel.classList.add('correct');
+                parentLabel.innerHTML = `✅ ${parentLabel.innerHTML}`;
+            } else {
+                parentLabel.classList.add('incorrect');
+                parentLabel.innerHTML = `❌ ${parentLabel.innerHTML}`;
+                const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+                correctLabel.classList.add('correct');
+            }
+        } else if (isMaster) {
+             const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+             correctLabel.classList.add('correct');
+        }
+        
+        if (selectedOption || isMaster) {
+            explanation.style.display = 'block';
+        }
+        
+        quizForm.querySelectorAll(`input[name="q${i}"]`).forEach(input => input.disabled = true);
+      });
+
+      if (isMaster) score = questions.length;
+      const percentage = ((score / questions.length) * 100).toFixed(0);
+      document.getElementById('result').innerHTML = `Eredmény: <b>${score}/${questions.length}</b> (${percentage}%)`;
+      document.getElementById('checkBtn').disabled = true;
+      document.getElementById('pin').disabled = true;
+    }
+    
+    function masterMode() {
+        questions.forEach((q, i) => {
+            const correctRadio = quizForm.querySelector(`input[name="q${i}"][value="${q.correct}"]`);
+            if (correctRadio) correctRadio.checked = true;
+        });
+        evaluateQuiz(true);
+        document.getElementById('admin-panel').style.display = 'block';
+    }
+
+    function checkAnswers() {
+        const pin = document.getElementById('pin').value;
+        if (!isPinValid(pin)) {
+            alert('Érvénytelen PIN-kód! Kérlek, próbáld újra.');
+            return;
+        }
+
+        if (pin === MASTER_PIN) {
+            masterMode();
+            return;
+        }
+
+        if (!areAllQuestionsAnswered()) {
+            alert('Kérlek, válaszolj az összes kérdésre az ellenőrzés előtt!');
+            return;
+        }
+        
+        evaluateQuiz();
+    }
+
+    document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+    document.getElementById('pin').addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            checkAnswers();
+        }
+    });
+
+    window.onload = function() {
+        createInitialPins();
+        populateQuiz();
+    };
+  </script>
+  {% endraw %}
+</body>
+</html>

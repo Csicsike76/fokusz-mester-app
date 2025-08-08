@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Stúdió - A Koncepciótól a Prototípusig</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --primary-white: #FFFFFF;
+            --text-color: #333;
+            --bg-color: #f4f4f4;
+            --card-shadow: rgba(0, 0, 0, 0.08);
+            --border-color: #e0e0e0;
+            --accent-yellow: #ffc107;
+            --accent-blue: #2196f3;
+            --accent-green-light: #e8f5e9;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: var(--primary-green);
+            color: var(--primary-white);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px var(--card-shadow);
+        }
+
+        .header h1 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+        }
+
+        #toc {
+            position: sticky;
+            top: 20px;
+            align-self: start;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+
+        #toc h3 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        #toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #toc li {
+            margin-bottom: 10px;
+        }
+        
+        #toc a {
+            text-decoration: none;
+            color: var(--primary-green);
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            display: block;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .nav-button {
+            color: #333;
+            text-align: center;
+            margin-bottom: 1rem !important;
+            border: 2px solid;
+        }
+
+        .toolkit-link {
+            background-color: var(--accent-yellow);
+            border-color: #c79100;
+        }
+        
+        .prompt-master-link {
+            background-color: var(--accent-blue);
+            color: white !important;
+            border-color: #1976d2;
+        }
+        
+        .handbook-link {
+            background-color: var(--accent-green-light);
+            border-color: var(--primary-green);
+        }
+        
+        .nav-button:hover {
+            transform: scale(1.05);
+        }
+        .toolkit-link:hover { background-color: #ffca28 !important; }
+        .prompt-master-link:hover { background-color: #42a5f5 !important; }
+        .handbook-link:hover { background-color: #dceddd !important; }
+        
+
+        #toc a:not(.nav-button):hover {
+            background-color: var(--accent-green-light);
+        }
+
+        #toc a.active {
+            background-color: var(--primary-green);
+            color: var(--primary-white);
+            transform: translateX(5px);
+        }
+
+        .content-area {
+            padding-bottom: 3rem;
+        }
+
+        .phase-section {
+            margin-bottom: 3rem;
+            padding-top: 20px;
+        }
+        
+        .phase-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            font-size: 2.2rem;
+            border-bottom: 3px solid var(--primary-red);
+            padding-bottom: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .milestone-card {
+            background: var(--primary-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--primary-green);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .milestone-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--card-shadow);
+        }
+
+        .milestone-card h4 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--text-color);
+            font-size: 1.3rem;
+            margin-top: 0;
+        }
+        
+        .milestone-card p {
+            font-size: 0.95rem;
+        }
+
+        .milestone-button {
+            display: inline-block;
+            background-color: var(--primary-red);
+            color: var(--primary-white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .milestone-button:hover {
+            background-color: #b71c1c;
+        }
+
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            #toc {
+                position: static;
+                max-height: none;
+                margin-bottom: 2rem;
+                padding-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>AIMI Stúdió</h1>
+        <p>A Koncepciótól a Prototípusig</p>
+    </header>
+
+    <div class="container">
+        <div class="main-layout">
+            <nav id="toc">
+                <h3>Navigáció</h3>
+                <ul>
+                    <!-- ITT AZ ÚJ RÉSZ -->
+                    <li><a href="projekt_kezikonyv.html" class="nav-button handbook-link">Projekt Kézikönyv 📖</a></li>
+                    <li><a href="eszkoztar.html" class="nav-button toolkit-link">Központi Eszköztár 🛠️</a></li>
+                    <li><a href="prompt_kartyak.html" class="nav-button prompt-master-link">Prompt Mester Kártyák 🃏</a></li>
+                </ul>
+
+                <h3>Projekt Fázisok</h3>
+                <ul>
+                    <li><a href="#fazis1">I. Ötlet és Kutatás</a></li>
+                    <li><a href="#fazis2">II. Tervezés és Prototípus</a></li>
+                    <li><a href="#fazis3">III. Tartalomgyártás</a></li>
+                    <li><a href="#fazis4">IV. Tesztelés és "Pitch"</a></li>
+                </ul>
+
+                 <h3>Extra Műhelyek</h3>
+                <ul>
+                    <li><a href="#extra-chatbot">Chatbot Készítés</a></li>
+                    <li><a href="#extra-gamedevelopment">Játéktervezés</a></li>
+                </ul>
+            </nav>
+
+            <main class="content-area">
+            
+                <div class="milestone-card">
+                    <h4>🚀 Üzenet a Stúdió Tagjainak</h4>
+                    <p>
+                        <strong>Üdv újra a fedélzeten!</strong><br><br>
+                        Az első félévben megtanultad használni a szerszámokat. Most eljött az idő, hogy <strong>építs velük valamit</strong>. Ez már nem csak egy műhely – ez egy alkotói stúdió. Itt nem különálló feladatokat oldunk meg, hanem a csapatoddal egyetlen, nagy projektet visztek végig az ötlettől a bemutatható prototípusig.<br><br>
+                        Egy mini "startup" lesztek, ahol az MI a legfőbb munkatársatok. A célotok, hogy egy valós problémára adjatok egy kreatív, MI-vel támogatott választ.<br><br>
+                        <strong>Készen állsz az építkezésre?</strong>
+                    </p>
+                </div>
+                
+                <section id="fazis1" class="phase-section">
+                    <h2>I. FÁZIS: ÖTLET ÉS KUTATÁS</h2>
+                    <div class="milestone-card"><h4>1-2. hét: Piackutatás és Célcsoport</h4><p>Feladat: Azonosítsatok egy problémát, és az MI segítségével végezzetek kutatást! Határozzátok meg a célközönségeteket.</p><a href="merfoldko_01_piackutatas.html" class="milestone-button">Mérföldkő Műhely →</a></div>
+                    <div class="milestone-card"><h4>3-4. hét: Versenytárs-elemzés és Projekt Vázlat</h4><p>Feladat: Keressetek létező megoldásokat a problémára! Készítsétek el a projekt hivatalos, egyoldalas vázlatát!</p><a href="merfoldko_02_projekt-vazlat.html" class="milestone-button">Mérföldkő Műhely →</a></div>
+                </section>
+                
+                <section id="fazis2" class="phase-section">
+                    <h2>II. FÁZIS: TERVEZÉS ÉS PROTOTÍPUS</h2>
+                    <div class="milestone-card"><h4>5-6. hét: Felhasználói Élmény (UX) és Drótváz</h4><p>Feladat: Tervezzétek meg a felhasználói utat! Készítsetek egyszerű, funkcionális drótvázakat a főbb képernyőkről.</p><a href="merfoldko_03_drotvaz.html" class="milestone-button">Mérföldkő Műhely →</a></div>
+                    <div class="milestone-card"><h4>7-9. hét: Arculattervezés és Vizuális Prototípus</h4><p>Feladat: Tervezzetek logót, színpalettát és komplett arculatot! Állítsátok össze a látványos, vizuális prototípust.</p><a href="merfoldko_04_arculat.html" class="milestone-button">Mérföldkő Műhely →</a></div>
+                </section>
+                
+                <section id="fazis3" class="phase-section">
+                    <h2>III. FÁZIS: "FEJLESZTÉS" ÉS TARTALOMGYÁRTÁS</h2>
+                    <div class="milestone-card"><h4>10-12. hét: Tartalomstratégia és -gyártás</h4><p>Feladat: Írjátok meg az MI-vel a prototípus összes szövegét, és generáljátok le a szükséges képeket és ikonokat.</p><a href="merfoldko_05_tartalomgyartas.html" class="milestone-button">Mérföldkő Műhely →</a></div>
+                    <div class="milestone-card"><h4>13-15. hét: Interaktív Prototípus Építése</h4><p>Feladat: Keltsétek életre a terveket! Készítsétek el a projekt kattintható, működőképes prototípusát.</p><a href="merfoldko_06_interaktiv-prototipus.html" class="milestone-button">Mérföldkő Műhely →</a></div>
+                </section>
+                
+                <section id="fazis4" class="phase-section">
+                     <h2>IV. FÁZIS: TESZTELÉS ÉS "PITCH"</h2>
+                    <div class="milestone-card"><h4>16. hét: Felhasználói Tesztelés</h4><p>Feladat: Mutassátok be a prototípust egy másik csapatnak! Gyűjtsetek visszajelzést, és elemezzétek a javaslatokat.</p><a href="merfoldko_07_teszteles.html" class="milestone-button">Mérföldkő Műhely →</a></div>
+                    <div class="milestone-card"><h4>17. hét: A "Pitch" Felépítése</h4><p>Feladat: Készítsétek el a záró, 5 perces "befektetői prezentációtok" vázlatát és szövegét!</p><a href="merfoldko_08_pitch-keszites.html" class="milestone-button">Mérföldkő Műhely →</a></div>
+                    <div class="milestone-card"><h4>18. hét: Záró Prezentációk</h4><p>Feladat: A csapatok bemutatják a féléves munkájukat, a koncepciót és az interaktív prototípust.</p><a href="merfoldko_09_zaro-prezentacio.html" class="milestone-button">Mérföldkő Műhely →</a></div>
+                </section>
+
+                <section class="phase-section">
+                    <h2 id="extra-modules">EXTRA MŰHELYEK</h2>
+                    <div id="extra-chatbot" class="milestone-card">
+                        <h4>Extra: Chatbot Készítés Személyiséggel</h4>
+                        <p>Feladat: Tervezz meg egy egyedi karaktert, és írj egy "rendszerpromptot", ami életre kelti őt! Tanuld meg, hogyan adhatsz egy MI-nek személyiséget, tudást és viselkedési szabályokat.</p>
+                        <a href="muhely_chatbot-keszites.html" class="milestone-button">Gyakorlati Műhely →</a>
+                    </div>
+                    <!-- ITT AZ ÚJ KÁRTYA -->
+                    <div id="extra-gamedevelopment" class="milestone-card">
+                        <h4>Extra: MI a Videójáték-Tervezésben</h4>
+                        <p>Feladat: Tervezz egy teljes játék-koncepciót! Alkoss ötletet, karaktert, pályát és "concept art"-ot az MI segítségével. Ébreszd fel a benned rejlő játékfejlesztőt!</p>
+                        <a href="muhely_jatektervezes.html" class="milestone-button">Gyakorlati Műhely →</a>
+                    </div>
+                </section>
+                
+            </main>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.phase-section');
+    const navLinks = document.querySelectorAll('#toc a:not(.nav-button)');
+
+    const options = {
+        root: null,
+        rootMargin: '-30% 0px -70% 0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const href = link.getAttribute('href');
+                    if (href && href.substring(1) === entry.target.id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, options);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    const extraSectionLinks = document.querySelectorAll('#toc a[href^="#extra-"]');
+    extraSectionLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = e.currentTarget.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>

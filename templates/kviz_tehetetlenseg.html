@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Tehetetlenség</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 5px; border-radius: 3px; display: inline-block; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Tehetetlenség</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Mi a tehetetlenség?", answers: { a: "A testek azon tulajdonsága, hogy ellenállnak a mozgásállapotuk megváltoztatásának.", b: "A testek súlya.", c: "A testek hajlékonysága." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Newton I. törvénye:</b> Más néven a tehetetlenség törvénye. Kimondja, hogy minden test nyugalomban marad vagy egyenes vonalú egyenletes mozgást végez mindaddig, amíg egy másik test erőt nem gyakorol rá, hogy megváltoztassa ezt az állapotot.</div><div class="explanation-solution">✅ Megoldás: A tehetetlenség a testek ellenállása a mozgásállapotuk megváltoztatásával szemben.</div>` },
+            { question: "Melyik testnek nagyobb a tehetetlensége?", answers: { a: "Egy teherautónak", b: "Egy személyautónak", c: "Egyenlő" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 A tehetetlenség mértéke:</b> A test tehetetlenségének mértéke a tömege. Minél nagyobb egy test tömege, annál nehezebb megváltoztatni a mozgásállapotát (elindítani vagy megállítani).</div><div class="explanation-step"><b>🔹 Elemzés:</b> A teherautó tömege sokkal nagyobb, mint a személyautóé.</div><div class="explanation-solution">✅ Megoldás: A teherautónak nagyobb a tehetetlensége.</div>` },
+            { question: "Miért dőlsz előre a buszon, amikor az hirtelen fékez?", answers: { a: "A tehetetlenséged miatt.", b: "Mert a szél előrenyom.", c: "Mert a busz padlója csúszik." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Jelenség:</b> Amikor a busz halad, a tested is halad vele együtt. Amikor a busz hirtelen fékez, a tested a tehetetlensége miatt igyekszik megtartani az eredeti, haladó mozgásállapotát. Ezért "mész tovább" előre a buszhoz képest.</div><div class="explanation-solution">✅ Megoldás: A jelenség oka a tehetetlenséged.</div>` },
+            { question: "Melyik fizikai mennyiség a tehetetlenség mértéke?", answers: { a: "A tömeg (m)", b: "A súly (G)", c: "A sebesség (v)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Mennyiségek:</b><br>• A <b>tömeg</b> a testben lévő anyag mennyisége, és a tehetetlenség mértéke. Mértékegysége a kg.<br>• A <b>súly</b> egy erő, amivel a testet a Föld vonzza. Mértékegysége a N.</div><div class="explanation-solution">✅ Megoldás: A tehetetlenség mértéke a tömeg.</div>` },
+            { question: "Egy asztalon lévő pohár magától...", answers: { a: "...nyugalomban marad, amíg erő nem hat rá.", b: "...elkezd mozogni.", c: "...felborul." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Tehetetlenség törvénye:</b> Egy test nyugalmi állapota csak akkor változik meg, ha külső erőhatás éri. Magától nem kezd el mozogni.</div><div class="explanation-solution">✅ Megoldás: A pohár nyugalomban marad, amíg erő nem hat rá.</div>` },
+            { question: "Melyik esetben nehezebb hirtelen irányt változtatni?", answers: { a: "Egy nehéz teherhajóval", b: "Egy kis motorcsónakkal", c: "Mindkettővel egyformán nehéz" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Az irányváltoztatás is a mozgásállapot megváltoztatása. Minél nagyobb egy test tömege (tehetetlensége), annál nehezebb megváltoztatni a mozgásának irányát.</div><div class="explanation-step"><b>🔹 Következtetés:</b> A teherhajó hatalmas tömege miatt sokkal nehezebben tud irányt váltani.</div><div class="explanation-solution">✅ Megoldás: Egy nehéz teherhajóval nehezebb irányt változtatni.</div>` },
+            { question: "Melyik törvény kapcsolódik a tehetetlenség fogalmához?", answers: { a: "Newton I. törvénye", b: "Pitagorasz-tétel", c: "Thalész-tétel" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elnevezés:</b> Newton I. törvényét a tehetetlenség törvényének is nevezik.</div><div class="explanation-solution">✅ Megoldás: Newton I. törvénye kapcsolódik a tehetetlenséghez.</div>` },
+            { question: "Miért kell bekötni a biztonsági övet az autóban?", answers: { a: "Mert ütközéskor a tehetetlenség miatt a testünk előre repülne.", b: "Mert kényelmesebb.", c: "Mert így gyorsabb lesz az autó." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Funkció:</b> Egy hirtelen fékezésnél vagy ütközésnél az autó megáll, de a tested a tehetetlensége miatt megtartaná a sebességét és előre repülne. A biztonsági öv egy külső erőt fejt ki, ami a testedet is lelassítja az autóval együtt.</div><div class="explanation-solution">✅ Megoldás: A biztonsági öv a tehetetlenség káros hatásaitól véd meg.</div>` },
+            { question: "Egy űrhajó a légüres térben halad, kikapcsolt hajtóművekkel. Mit csinál?", answers: { a: "Lassul és megáll.", b: "Egyenes vonalú egyenletes mozgást végez.", c: "Felgyorsul." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Tehetetlenség törvénye:</b> Mivel a légüres térben nincs közegellenállás és a hajtóművek sem működnek, a testre nem hat külső erő. Ezért megtartja a mozgásállapotát.</div><div class="explanation-solution">✅ Megoldás: Az űrhajó egyenes vonalú egyenletes mozgást végez.</div>` },
+            { question: "Melyik tárgynak van a legkisebb tehetetlensége?", answers: { a: "Egy kamion", b: "Egy tollpihe", c: "Egy tégla" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 A tehetetlenség mértéke:</b> A tehetetlenség a tömegtől függ.</div><div class="explanation-step"><b>🔹 Összehasonlítás:</b> A felsorolt tárgyak közül a tollpihének a legkisebb a tömege, így a tehetetlensége is.</div><div class="explanation-solution">✅ Megoldás: A tollpihének van a legkisebb tehetetlensége.</div>` },
+            { question: "Ha megrázol egy üdítős dobozt, és az egyik tele van, a másik üres, melyiket nehezebb megállítani?", answers: { a: "Mindkettőt egyforma.", b: "A telit.", c: "Az üreset." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A teli doboz tömege (és így a tehetetlensége is) nagyobb. A nagyobb tehetetlenségű testet nehezebb mozgásba hozni, és nehezebb megállítani is.</div><div class="explanation-solution">✅ Megoldás: A teli dobozt nehezebb megállítani.</div>` },
+            { question: "Mikor érezzük a tehetetlenséget leginkább?", answers: { a: "Amikor egyenletesen mozgunk.", b: "Amikor hirtelen gyorsítunk vagy fékezünk.", c: "Amikor állunk." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Jelenség:</b> A tehetetlenség a mozgásállapot-változással szembeni ellenállás. Ezt az ellenállást akkor érezzük, amikor valami megpróbálja megváltoztatni a mozgásunkat, például egy gyorsuló busz ülése a hátunkat nyomja.</div><div class="explanation-solution">✅ Megoldás: Hirtelen gyorsításkor vagy fékezéskor érezzük leginkább.</div>` },
+            { question: "Ha egy űrhajós eldob egy csavarkulcsot az űrben, mi történik a kulccsal?", answers: { a: "Lassulva megáll.", b: "Azonnal megáll.", c: "Egyenes vonalban, egyenletesen halad tovább." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Tehetetlenség törvénye:</b> Az űrben elhanyagolható a közegellenállás és a gravitáció. Miután az űrhajós eldobta a kulcsot, arra nem hat több külső erő, ezért megtartja a mozgásállapotát.</div><div class="explanation-solution">✅ Megoldás: A kulcs egyenes vonalban, egyenletesen halad tovább.</div>` },
+            { question: "Miért nehéz egy nehéz szekrényt eltolni a helyéről?", answers: { a: "Mert kicsi a súrlódás.", b: "Mert nagy a súrlódás és a tehetetlenség.", c: "Mert könnyű." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Okok:</b> Két fő ok van. Először le kell győzni a nyugalmi állapotát, amihez a nagy tehetetlensége (nagy tömege) miatt nagy erő kell. Másodszor, a nagy tömeg miatt a szekrény nagy súllyal nyomja a padlót, ami nagy súrlódási erőt eredményez.</div><div class="explanation-solution">✅ Megoldás: A nagy súrlódás és a nagy tehetetlenség miatt nehéz eltolni.</div>` },
+            { question: "Ha egy busz hirtelen elindul, merre dőlsz?", answers: { a: "Előre", b: "Oldalra", c: "Hátra" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Tehetetlenség:</b> A tested megpróbálja megtartani a nyugalmi helyzetét. Miközben a busz elindul előre, a tested "ott akar maradni", ezért a buszhoz képest hátrafelé dőlsz.</div><div class="explanation-solution">✅ Megoldás: Hátrafelé dőlsz.</div>` },
+            { question: "Melyik testnek van tehetetlensége?", answers: { a: "Csak a mozgó testeknek.", b: "Csak a nehéz testeknek.", c: "Minden testnek, aminek van tömege." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Alapvető tulajdonság:</b> A tehetetlenség a tömeggel rendelkező testek univerzális tulajdonsága, függetlenül attól, hogy mozognak-e vagy nyugalomban vannak.</div><div class="explanation-solution">✅ Megoldás: Minden testnek van tehetetlensége, aminek van tömege.</div>` },
+            { question: "Egy jégkorong korong a jégen sokáig csúszik. Miért?", answers: { a: "Mert nagy a tehetetlensége.", b: "Mert kicsi a súrlódás.", c: "Mert nehéz." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A jégen a súrlódás nagyon kicsi. A tehetetlensége miatt a korong megtartaná a mozgását a végtelenségig, ha nem hatna rá semmilyen fékező erő. A kis súrlódás csak lassan tudja lefékezni.</div><div class="explanation-solution">✅ Megoldás: Azért csúszik sokáig, mert kicsi a súrlódás.</div>` },
+            { question: "Hogyan függ össze a tömeg és a tehetetlenség?", answers: { a: "Fordítottan arányosak.", b: "Nincs köztük kapcsolat.", c: "Egyenesen arányosak." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A tömeg a tehetetlenség mértéke. Ez azt jelenti, hogy ha egy test tömege kétszer akkora, a tehetetlensége is kétszer akkora lesz.</div><div class="explanation-solution">✅ Megoldás: A tömeg és a tehetetlenség egyenesen arányosak.</div>` },
+            { question: "Miért rázod ki a port a szőnyegből, ahelyett, hogy kipiszkálnád?", answers: { a: "Mert gyorsabb.", b: "Mert a porszemek tehetetlensége miatt a szőnyeg 'kiszalad' alóluk.", c: "Mert a por fél a rázástól." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Fizika a háztartásban:</b> Amikor a szőnyeget hirtelen megütöd vagy megrázod, a szőnyeg gyorsan elmozdul. A porszemek a tehetetlenségük miatt "ott akarnak maradni a levegőben", így a szőnyeg gyakorlatilag elmozdul alóluk, és a por a gravitáció hatására leesik.</div><div class="explanation-solution">✅ Megoldás: A porszemek tehetetlensége a kulcs.</div>` },
+            { question: "Melyik állítás HAMIS?", answers: { a: "A tehetetlenség egy erő.", b: "A tömeg az SI rendszerben kilogrammban mért alapmennyiség.", c: "A testek ellenállnak a mozgásállapot-változásnak." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A tehetetlenség nem erő, hanem a testeknek az a *tulajdonsága*, hogy ellenállnak az erőhatásoknak, amelyek megváltoztatnák a mozgásukat. Az erő a kölcsönhatás mértéke.</div><div class="explanation-solution">✅ Megoldás: Az az állítás hamis, hogy a tehetetlenség egy erő.</div>` },
+            { question: "Ha egy asztalon lévő poharat lassan elkezdesz húzni az alatta lévő terítővel...", answers: { a: "a pohár felborul.", b: "a pohár a terítővel együtt mozog.", c: "a pohár a helyén marad." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Jelenség:</b> Ha lassan húzzuk, a terítő és a pohár közötti súrlódási erő elég nagy ahhoz, hogy a poharat is mozgásba hozza, legyőzve a tehetetlenségét.</div><div class="explanation-solution">✅ Megoldás: A pohár a terítővel együtt mozog.</div>` },
+            { question: "Ha egy asztalon lévő pohár alól hirtelen kirántod a terítőt...", answers: { a: "a pohár a helyén marad.", b: "a pohár a terítővel együtt esik le.", c: "a pohár felrobban." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Jelenség:</b> Ha a rántás elég gyors, a súrlódási erő csak nagyon rövid ideig hat. A pohár nagy tehetetlensége miatt "nincs ideje" felvenni a terítő sebességét, és a helyén marad. Ez a híres asztalterítős trükk alapja.</div><div class="explanation-solution">✅ Megoldás: A pohár a tehetetlensége miatt a helyén marad.</div>` },
+            { question: "Mi a tömeg jele a fizikában?", answers: { a: "t", b: "m", c: "s" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Jelölések:</b> A tömeg jele 'm' (az angol mass szóból). A 't' az idő, az 's' pedig az út jele.</div><div class="explanation-solution">✅ Megoldás: A tömeg jele 'm'.</div>` },
+            { question: "Melyiknek nagyobb a tehetetlensége: 1 kg vasnak vagy 1 kg vattának?", answers: { a: "A vasnak.", b: "A vattának.", c: "Egyenlő." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 A tehetetlenség mértéke:</b> A tehetetlenség csak a tömegtől függ, az anyagi minőségtől vagy a térfogattól nem.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Mivel mindkét test tömege 1 kg, a tehetetlenségük is pontosan ugyanakkora.</div><div class="explanation-solution">✅ Megoldás: A tehetetlenségük egyenlő.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

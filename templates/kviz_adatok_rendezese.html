@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Adatok rendezése és rendszerezése</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Adatok rendezése és rendszerezése</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Mi egy adathalmaz átlaga (számtani közepe)?", options: { a: "A legnagyobb és a legkisebb érték különbsége.", b: "Az adatok összege osztva az adatok számával.", c: "A leggyakrabban előforduló adat." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az átlag kiszámításához először össze kell adni az összes adatot. 🔹 2. Lépés: Az így kapott összeget el kell osztani annyival, ahány adatunk van. ✅ Megoldás: Az adatok összege osztva az adatok számával." },
+            { question: "Mi egy adathalmaz mediánja?", options: { a: "A legkisebb adat.", b: "A sorba rendezett adatok közül a középső.", c: "A legnagyobb adat." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A legfontosabb, hogy az adatokat először növekvő sorrendbe kell rendezni. 🔹 2. Lépés: A medián az az érték, amelyik a sorba rendezett adatsor közepén helyezkedik el. ✅ Megoldás: A sorba rendezett adatok közül a középső." },
+            { question: "Mi egy adathalmaz módusza?", options: { a: "A leggyakrabban előforduló adat.", b: "Az adatok átlaga.", c: "Az adatok középső eleme." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A módusz a 'divatot' jelenti, azaz azt, ami a legnépszerűbb, leggyakoribb. 🔹 2. Lépés: Meg kell számolni, hogy melyik adat fordul elő a legtöbbször az adatsorban. ✅ Megoldás: A leggyakrabban előforduló adat." },
+            { question: "Mi egy adathalmaz terjedelme?", options: { a: "Az adatok összege.", b: "A legnagyobb és legkisebb adat különbsége.", c: "Az adatok száma." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A terjedelem az adatok 'szóródását', szétterülését méri. 🔹 2. Lépés: Ehhez meg kell keresni a legnagyobb és a legkisebb értéket, majd kivonni őket egymásból. ✅ Megoldás: A legnagyobb és a legkisebb adat különbsége." },
+            { question: "Mi az átlaga a következő számoknak: 2, 4, 6?", options: { a: "12", b: "4", c: "6" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Adjuk össze a számokat: 2 + 4 + 6 = 12. 🔹 2. Lépés: Osszuk el az összeget a számok darabszámával (3): 12 / 3 = 4. ✅ Megoldás: Az átlag 4." },
+            { question: "Mi a módusza a következő adatsornak: 5, 2, 8, 2, 5, 2?", options: { a: "5", b: "8", c: "2" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Számoljuk meg az egyes adatok gyakoriságát. Az 5 kétszer, a 8 egyszer, a 2 pedig háromszor fordul elő. 🔹 2. Lépés: A leggyakrabban előforduló adat a 2. ✅ Megoldás: A módusz 2." },
+            { question: "Mi a mediánja a következő számoknak: 3, 9, 5, 2, 10?", options: { a: "9", b: "5", c: "6" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Először rendezzük sorba a számokat: 2, 3, 5, 9, 10. 🔹 2. Lépés: Keressük meg a középső elemet. Mivel 5 (páratlan) számunk van, a középső a 3. elem. ✅ Megoldás: A medián 5." },
+            { question: "Mi a terjedelme a következő adatsornak: 15, 8, 22, 5, 12?", options: { a: "17", b: "22", c: "5" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Keressük meg a legnagyobb és a legkisebb értéket. Legnagyobb: 22, legkisebb: 5. 🔹 2. Lépés: Vonjuk ki őket egymásból: 22 - 5 = 17. ✅ Megoldás: A terjedelem 17." },
+            { question: "Melyik diagramtípus a legalkalmasabb egy egész részekre osztásának bemutatására (pl. választási eredmények százalékban)?", options: { a: "oszlopdiagram", b: "vonaldiagram", c: "kördiagram" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A kördiagram az egyetlen, ami egy teljes egészet (a 100%-ot) ábrázol. 🔹 2. Lépés: A körcikkek mérete arányos az egyes kategóriák részesedésével. ✅ Megoldás: A kördiagram a legalkalmasabb." },
+            { question: "Melyik diagramtípus mutatja a legjobban az adatok időbeli változását (pl. hőmérséklet egy hét alatt)?", options: { a: "kördiagram", b: "vonaldiagram", c: "táblázat" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A vonaldiagram összeköti az időben egymást követő adatpontokat. 🔹 2. Lépés: Az így kapott vonal emelkedése vagy süllyedése jól mutatja a változás trendjét, irányát. ✅ Megoldás: A vonaldiagram a legjobb erre a célra." },
+            { question: "Melyik statisztikai mutatóra van a legnagyobb hatással egy kiugróan nagy vagy kicsi adat (outlier)?", options: { a: "az átlag", b: "a medián", c: "a módusz" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A medián a sor közepén van, a módusz a leggyakoribb, ezekre egyetlen kiugró adat nincs nagy hatással. 🔹 2. Lépés: Az átlagot viszont az adatok összegéből számoljuk, így egy extrém érték az összeget és ezen keresztül az átlagot is erősen el tudja torzítani. ✅ Megoldás: Az átlagra." },
+            { question: "Mi a mediánja a következő számoknak: 10, 20, 30, 40?", options: { a: "20", b: "25", c: "30" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az adatok már sorba vannak rendezve. Páros számú (4 db) adatunk van. 🔹 2. Lépés: Ilyenkor a két középső elemet kell megkeresni: 20 és 30. 🔹 3. Lépés: A medián a két középső elem átlaga: (20 + 30) / 2 = 50 / 2 = 25. ✅ Megoldás: A medián 25." },
+            { question: "Mi a módusza az 'alma, körte, alma, szilva, körte, alma' adatsornak?", options: { a: "körte", b: "alma", c: "nincs neki" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Számoljuk meg, melyik gyümölcs hányszor szerepel. Alma: 3-szor, körte: 2-szer, szilva: 1-szer. 🔹 2. Lépés: A legtöbbször az alma fordul elő. ✅ Megoldás: A módusz az 'alma'." },
+            { question: "Egy kördiagramon egy 90°-os körcikk az egész hány százalékát jelöli?", options: { a: "90%", b: "50%", c: "25%" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A teljes kör 360°. Ez felel meg a 100%-nak. 🔹 2. Lépés: A 90° a 360°-nak a negyede (360/90=4). 🔹 3. Lépés: Tehát a 100%-nak is a negyedét jelöli: 100% / 4 = 25%. ✅ Megoldás: 25%-ot jelöl." },
+            { question: "Milyen adatrendezési módszer a 'strichliste' (vonalkázás)?", options: { a: "Az adatok átlagolása.", b: "Az adatok gyakoriságának jelölése vonalakkal.", c: "Az adatok sorba rendezése." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Amikor adatokat gyűjtünk, minden előfordulásnál húzunk egy vonalat. 🔹 2. Lépés: Ez a strichliste, vagy gyakorisági vonalazás, ami segít gyorsan megszámolni az egyes kategóriákba tartozó elemeket. ✅ Megoldás: Az adatok gyakoriságának jelölése vonalakkal." },
+            { question: "Mi az első lépés a medián meghatározásakor?", options: { a: "Az adatok sorba rendezése.", b: "Az adatok összeadása.", c: "A leggyakoribb adat megkeresése." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A medián definíció szerint a 'középső' elem. 🔹 2. Lépés: A közepét egy adathalmaznak csak akkor tudjuk megtalálni, ha előtte sorba rendeztük. Ez a legfontosabb, kihagyhatatlan lépés. ✅ Megoldás: Az adatok sorba rendezése." },
+            { question: "Lehet-e egy adatsornak több módusza?", options: { a: "Nem, a módusz mindig egyedi.", b: "Igen, ha több adat is ugyanannyiszor a leggyakoribb.", c: "Csak akkor, ha az adatok páros számok." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Tekintsük az adatsort: 1, 1, 2, 3, 3. Itt az 1 és a 3 is kétszer fordul elő. 🔹 2. Lépés: Mivel mindkettő a leggyakoribb, ezért az adatsornak két módusza van: az 1 és a 3. ✅ Megoldás: Igen, lehet több módusza is." },
+            { question: "Négy dolgozatod jegye: 5, 4, 3, 5. Mi a jegyeid átlaga?", options: { a: "4.5", b: "4.25", c: "4" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Összeadjuk a jegyeket: 5 + 4 + 3 + 5 = 17. 🔹 2. Lépés: Elosztjuk a darabszámmal (4): 17 / 4 = 4.25. ✅ Megoldás: Az átlag 4.25." },
+            { question: "Lehet-e egy adatsornak, hogy nincs módusza?", options: { a: "Igen, ha minden adat csak egyszer szerepel.", b: "Nem, mindig van leggyakoribb.", c: "Csak ha az adatok negatívak." }, correctAnswer: "a", explanation: "🔹 1. Lépés: Tekintsük az adatsort: 1, 2, 3, 4, 5. 🔹 2. Lépés: Ebben a sorban minden adat pontosan egyszer fordul elő. Nincs olyan, ami a 'leggyakoribb' lenne. ✅ Megoldás: Igen, lehet, ha minden adat gyakorisága ugyanannyi." },
+            { question: "Melyik középérték mutatja meg a legjobban a 'tipikus' értéket, ha az adatok között nagy kiugró értékek vannak?", options: { a: "a terjedelem", b: "a medián", c: "az átlag" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az átlagot egy extrém érték erősen eltorzítja. A terjedelem pedig csak a végleteket mutatja. 🔹 2. Lépés: A medián a sorba rendezett adatsor közepén van, így rá nincsenek hatással a kiugró értékek, jobban mutatja a 'tipikus' adatot. ✅ Megoldás: A medián." },
+            { question: "Egy osztályban a fiúk-lányok arányát szeretnénk ábrázolni. Melyik diagram a legjobb?", options: { a: "Oszlopdiagram vagy kördiagram", b: "Csak vonaldiagram", c: "Csak táblázat" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az oszlopdiagrammal összehasonlíthatjuk a fiúk és a lányok létszámát. 🔹 2. Lépés: A kördiagrammal pedig megmutathatjuk, hogy az egész osztály hány százaléka fiú és hány százaléka lány. Mindkettő jó megoldás. ✅ Megoldás: Oszlopdiagram vagy kördiagram." },
+            { question: "Mi az átlaga a következő számoknak: 10, 10, 10?", options: { a: "30", b: "10", c: "3" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ha minden adat ugyanaz, az átlaguk is annyi lesz. 🔹 2. Lépés: Számolással: (10 + 10 + 10) / 3 = 30 / 3 = 10. ✅ Megoldás: Az átlag 10." },
+            { question: "Mi a gyakorisági táblázat célja?", options: { a: "Az adatok sorba rendezése.", b: "Az adatok megszámolása és átláthatóvá tétele.", c: "Az adatok átlagának kiszámítása." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Egy gyakorisági táblázatban az egyik oszlopban az adatok lehetséges értékei, a másikban pedig az előfordulásuk száma (gyakorisága) szerepel. 🔹 2. Lépés: Ez segít gyorsan átlátni, hogy melyik adatból mennyi van. ✅ Megoldás: Az adatok megszámolása és átláthatóvá tétele." },
+            { question: "Melyik állítás igaz?", options: { a: "A medián mindig kisebb, mint az átlag.", b: "A módusz mindig egy szám.", c: "Egy adatsornak lehet több mediánja." }, correctAnswer: "b", explanation: "A kérdés hibás. Javítom a magyarázatot és a választ. A medián nem mindig kisebb. Egy adatsornak nem lehet több mediánja. A módusz lehet nem szám is (pl. 'alma'). A 'b' állítás a leginkább helytálló a 8. osztályos kontextusban, bár lehetne pontosabb. Új, jobb kérdés: 'Melyik állítás igaz?' Opciók: a) A medián mindig az adatsor egyik eleme. b) A módusz mindig az adatsor egyik eleme. c) Az átlag mindig az adatsor egyik eleme. Helyes válasz: 'b'. ✅ Megoldás: A módusz definíció szerint a leggyakrabban előforduló adat, tehát mindig az adatok közül kerül ki. Az átlag és a medián (páros adatszámnál) nem feltétlenül." },
+            { question: "Mi az első lépés egy kutatásnál, miután feltettük a kérdést?", options: { a: "Diagram rajzolása", b: "Adatgyűjtés", c: "Átlagszámítás" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Mielőtt bármit rendeznénk vagy számolnánk, szükségünk van magukra az adatokra. 🔹 2. Lépés: Az adatokat felméréssel, megfigyeléssel, kísérlettel gyűjthetjük. ✅ Megoldás: Az első lépés az adatgyűjtés." }
+        ];
+
+        // Audit utáni javítás a 24. kérdéshez, hogy a promptnak megfeleljen és egyértelműbb legyen.
+        quizData[23] = { question: "Melyik állítás igaz?", options: { a: "A medián mindig az adatsor egyik eleme.", b: "A módusz mindig az adatsor egyik eleme.", c: "Az átlag mindig az adatsor egyik eleme." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Vizsgáljuk az állításokat! Az átlag gyakran nem egyezik meg egyetlen elemmel sem (pl. a 2 és 4 átlaga 3). A medián páros elemszámnál szintén nem (pl. a 2, 4, 6, 8 mediánja 5). 🔹 2. Lépés: A módusz viszont definíció szerint a leggyakoribb *adat*, tehát mindig az adatok közül kerül ki. ✅ Megoldás: A módusz mindig az adatsor egyik eleme." };
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

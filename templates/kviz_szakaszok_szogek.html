@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Szakaszok, szögek</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Szakaszok, szögek</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Hogyan nevezzük a pontosan 90°-os szöget?", options: { a: "derékszög", b: "hegyesszög", c: "tompaszög" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A szögeket méretük szerint csoportosítjuk. 🔹 2. Lépés: A 90°-os szöget nevezzük derékszögnek, ami a négyzetek és téglalapok sarkaiban is megtalálható. ✅ Megoldás: A helyes elnevezés a derékszög." },
+            { question: "Melyik szög a hegyesszög?", options: { a: "100°", b: "85°", c: "90°" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hegyesszög definíció szerint 0° és 90° közötti szög. 🔹 2. Lépés: A 100° tompaszög, a 90° derékszög. A 85° kisebb, mint 90°. ✅ Megoldás: A 85°-os szög hegyesszög." },
+            { question: "Mi a neve a 90°-nál nagyobb, de 180°-nál kisebb szögnek?", options: { a: "egyenesszög", b: "hegyesszög", c: "tompaszög" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A definíció szerint a 90° és 180° közé eső szögeket tompaszögnek nevezzük. 🔹 2. Lépés: Ilyen például a 110°-os vagy a 150°-os szög. ✅ Megoldás: A helyes elnevezés a tompaszög." },
+            { question: "Hány fokos az egyenesszög?", options: { a: "180°", b: "90°", c: "360°" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az egyenesszög két szára egy egyenest alkot. 🔹 2. Lépés: Ez pontosan két derékszögnek felel meg, tehát 2 * 90° = 180°. ✅ Megoldás: Az egyenesszög 180°-os." },
+            { question: "Mi a szög két félegyenesének közös kiindulópontja?", options: { a: "szára", b: "csúcsa", c: "oldala" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A szög két fő része a két szár (félegyenes) és az a pont, ahonnan ezek indulnak. 🔹 2. Lépés: Ezt a közös pontot a szög csúcsának nevezzük. ✅ Megoldás: A közös pont a szög csúcsa." },
+            { question: "A 175°-os szög milyen típusú?", options: { a: "hegyesszög", b: "tompaszög", c: "egyenesszög" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Hasonlítsuk össze a 175°-ot a nevezetes szögekkel. 🔹 2. Lépés: A 175° nagyobb, mint 90°, de kisebb, mint 180°. Ez a tompaszög definíciója. ✅ Megoldás: A 175°-os szög tompaszög." },
+            { question: "Mit nevezünk a szög szárainak?", options: { a: "a szög méretét", b: "a szög csúcsát", c: "a szög két félegyenesét" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A szög egy síkrész, amit két, közös pontból induló félegyenes határol. 🔹 2. Lépés: Ezt a két félegyenest nevezzük a szög szárainak. ✅ Megoldás: A szög szárai a két félegyenes." },
+            { question: "Mekkora a teljesszög?", options: { a: "180°", b: "270°", c: "360°" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A teljesszög egy teljes kört ír le, amikor a szög egyik szára körbefordul és visszaér a másik szárra. 🔹 2. Lépés: A teljes kör 360°-os. ✅ Megoldás: A teljesszög 360°-os." },
+            { question: "Ha egy derékszöget megfelezünk, milyen szögeket kapunk?", options: { a: "két hegyesszöget", b: "két tompaszöget", c: "két derékszöget" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A derékszög 90°. Ha megfelezzük, elosztjuk kettővel: 90° : 2 = 45°. 🔹 2. Lépés: A 45°-os szög kisebb, mint 90°, tehát hegyesszög. Két ilyet kapunk. ✅ Megoldás: Két hegyesszöget kapunk." },
+            { question: "A 15°-os szög milyen típusú?", options: { a: "hegyesszög", b: "tompaszög", c: "derékszög" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A 15° kisebb, mint 90°. 🔹 2. Lépés: A 90°-nál kisebb szögek a hegyesszögek. ✅ Megoldás: A 15°-os szög hegyesszög." },
+            { question: "Milyen szöget zárnak be egymással egy négyzet oldalai a csúcsoknál?", options: { a: "hegyesszöget", b: "derékszöget", c: "tompaszöget" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A négyzet definíció szerint minden szöge egyenlő. 🔹 2. Lépés: A belső szögeinek összege 360°, és mivel 4 szöge van, 360:4=90°. ✅ Megoldás: A négyzet szögei derékszögek." },
+            { question: "Melyik szög a legnagyobb?", options: { a: "egyenesszög", b: "derékszög", c: "tompaszög" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Derékszög = 90°. Tompaszög > 90°, de < 180°. Egyenesszög = 180°. 🔹 2. Lépés: A felsoroltak közül az egyenesszög (180°) a legnagyobb. ✅ Megoldás: Az egyenesszög a legnagyobb." },
+            { question: "Milyen eszközzel mérünk szöget?", options: { a: "vonalzóval", b: "szögmérővel", c: "körzővel" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A vonalzóval távolságot (szakasz hosszát) mérünk, a körzővel köríveket rajzolunk. 🔹 2. Lépés: A szögek méretének megállapítására a szögmérőt használjuk. ✅ Megoldás: Szögmérővel mérünk szöget." },
+            { question: "Hogyan nevezzük az AB szakaszon az A és B betűket?", options: { a: "a szakasz csúcsai", b: "a szakasz végpontjai", c: "a szakasz szárai" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A szakasz egy véges hosszúságú vonal, amit két pont határol. 🔹 2. Lépés: Ezt a két pontot a szakasz végpontjainak hívjuk. ✅ Megoldás: A betűk a szakasz végpontjait jelölik." },
+            { question: "Ha az óra 5 órát mutat, a mutatók milyen szöget zárnak be?", options: { a: "derékszöget", b: "hegyesszöget", c: "tompaszöget" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Képzeljük el az órát! A 3 óra a 90°. 🔹 2. Lépés: Az 5 óra jóval nagyobb, mint 3 óra, de kisebb, mint 6 óra (ami 180°). Tehát 90° és 180° közé esik. ✅ Megoldás: A mutatók tompaszöget zárnak be." },
+            { question: "Melyik állítás igaz?", options: { a: "Minden hegyesszög kisebb a derékszögnél.", b: "Minden tompaszög kisebb a derékszögnél.", c: "Minden hegyesszög nagyobb a tompaszögnél." }, correctAnswer: "a", explanation: "🔹 1. Lépés: Hegyesszög < 90°. Derékszög = 90°. Tompaszög > 90°. 🔹 2. Lépés: Ebből látszik, hogy a hegyesszög mindig kisebb a derékszögnél. A többi állítás hamis. ✅ Megoldás: Az 'a' állítás igaz." },
+            { question: "Két hegyesszög összege lehet-e tompaszög?", options: { a: "Nem, soha.", b: "Igen, lehet.", c: "Csak ha egyenlőek." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Keressünk példát! Legyen az egyik hegyesszög 50°, a másik 60°. 🔹 2. Lépés: Az összegük 50° + 60° = 110°. A 110° nagyobb, mint 90°, tehát tompaszög. ✅ Megoldás: Igen, lehet." },
+            { question: "Milyen szöget alkot egy kinyitott könyv lapja, ha teljesen síkba hajtjuk?", options: { a: "derékszöget", b: "egyenesszöget", c: "teljes szöget" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ha a könyvet teljesen kinyitjuk és az asztalra fektetjük, a két lap egy egyenest alkot. 🔹 2. Lépés: Az egyenes vonalhoz tartozó szög az egyenesszög. ✅ Megoldás: Egyenesszöget alkot." },
+            { question: "Melyik szög a kisebb?", options: { a: "a teljesszög", b: "az egyenesszög", c: "a derékszög" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Hasonlítsuk össze a méretüket: teljesszög = 360°, egyenesszög = 180°, derékszög = 90°. 🔹 2. Lépés: Ezek közül a 90° a legkisebb. ✅ Megoldás: A derékszög a legkisebb." },
+            { question: "Egy 10 cm-es szakasz felezőpontja milyen messze van a végpontoktól?", options: { a: "10 cm", b: "5 cm", c: "20 cm" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A felezőpont nevében benne van, hogy pontosan a szakasz felénél helyezkedik el. 🔹 2. Lépés: A 10 cm fele 5 cm. ✅ Megoldás: A felezőpont 5 cm-re van a végpontoktól." },
+            { question: "Egy 130°-os szög milyen típusú?", options: { a: "hegyesszög", b: "egyenesszög", c: "tompaszög" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A 130° nagyobb, mint 90°, de kisebb, mint 180°. 🔹 2. Lépés: Ez a tompaszög definíciója. ✅ Megoldás: A 130°-os szög tompaszög." },
+            { question: "Ha egy 120°-os tompaszögből levágunk egy 40°-os szöget, milyen szöget kapunk?", options: { a: "80°-os hegyesszöget", b: "160°-os tompaszöget", c: "90°-os derékszöget" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A művelet egy kivonás: 120° - 40° = 80°. 🔹 2. Lépés: A 80° kisebb, mint 90°, tehát hegyesszög. ✅ Megoldás: 80°-os hegyesszöget kapunk." },
+            { question: "Hogyan nevezzük a 91°-os szöget?", options: { a: "derékszög", b: "tompaszög", c: "hegyesszög" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Bár csak egy kicsivel, de a 91° nagyobb, mint 90°. 🔹 2. Lépés: Minden szög, ami 90° és 180° között van, tompaszögnek számít. ✅ Megoldás: A 91°-os szög tompaszög." },
+            { question: "Melyik nem lehet egy háromszög belső szöge?", options: { a: "179°", b: "90°", c: "180°" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Egy háromszög belső szögeinek összege pontosan 180°. 🔹 2. Lépés: Ha az egyik szög maga 180° lenne, a másik kettőnek 0°-osnak kellene lennie, ami nem lehetséges. ✅ Megoldás: Egy háromszög belső szöge nem lehet 180°." },
+            { question: "Mi az 'α' (alfa)?", options: { a: "Egy pont jelölése.", b: "Egy szög jelölése.", c: "Egy szakasz jelölése." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A görög ábécé kisbetűit, mint az alfa (α), béta (β), gamma (γ), gyakran használjuk a szögek elnevezésére. 🔹 2. Lépés: A pontokat nagy latin betűkkel, a szakaszokat a végpontjaikkal jelöljük. ✅ Megoldás: Az 'α' egy szög jelölése." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

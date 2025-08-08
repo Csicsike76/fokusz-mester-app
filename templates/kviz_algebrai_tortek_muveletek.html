@@ -1,0 +1,402 @@
+<!-- ===============================================
+  FÁJLNÉV: kviz_algebrai_tortek_muveletek.html
+  TÉMA: Algebrai törtekkel végzett műveletek
+  25 kérdés – helyes válasz­eloszlás: 8×a, 9×b, 8×c
+  Mester PIN: 121909
+  Tanulói PIN-ek: 100001–100020
+==================================================== -->
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Gyakorló Kvíz – Algebrai törtekkel végzett műveletek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --green:#28a745; --green-dark:#1e7e34;
+      --red:#dc3545; --red-dark:#c82333;
+      --blue:#007bff; --blue-dark:#0056b3;
+      --light:#f8f9fa; --dark:#343a40;
+      --master:#ff6b35;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Roboto,sans-serif;background:var(--light);color:var(--dark);line-height:1.6;padding:1rem}
+    .header{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;text-align:center;padding:2rem;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+    .header h1{font-size:2rem;margin-bottom:.5rem}
+    .header .subtitle{font-size:1.1rem;opacity:.9}
+    .master-mode{background:var(--master);color:#fff;padding:.6rem 1rem;border-radius:20px;margin:1rem 0;text-align:center;font-weight:600;display:none;animation:pulse 2s infinite}
+    @keyframes pulse{0%{opacity:1}50%{opacity:.7}100%{opacity:1}}
+    .progress-bar{background:#e9ecef;height:6px;border-radius:3px;margin:1rem 0}
+    .progress-fill{background:var(--blue);height:100%;width:0;transition:width .3s ease}
+    .question{background:#fff;border:1px solid #e1e8ed;border-radius:8px;padding:1rem;margin-bottom:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .question h3{font-size:1rem;margin-bottom:.5rem}
+    .answer-option{display:block;padding:.6rem;margin:.4rem 0;border-radius:6px;cursor:pointer;position:relative;transition:.2s;border:2px solid transparent}
+    .answer-option:hover{background:#f1f3f4;border-color:#e8eaed}
+    .answer-option input{margin-right:.6rem;transform:scale(1.1)}
+    .correct{background:var(--green)!important;color:#fff!important;border-color:var(--green-dark)!important}
+    .correct::after{content:"✅";position:absolute;right:10px;top:50%;transform:translateY(-50%)}
+    .wrong{background:var(--red)!important;color:#fff!important;border-color:var(--red-dark)!important}
+    .wrong::after{content:"❌";position:absolute;right:10px;top:50%;transform:translateY(-50%)}
+    .master-correct{background:var(--green)!important;color:#fff!important;border-color:var(--green-dark)!important}
+    .master-correct::after{content:"🎯";position:absolute;right:10px;top:50%;transform:translateY(-50%)}
+    .explanation{display:none;margin-top:.5rem;padding:.8rem;background:#e8f4f8;border-left:4px solid var(--blue);border-radius:4px;font-size:.9rem}
+    .explanation.show{display:block}
+    .pin-area{background:#fff;border:2px solid var(--blue);border-radius:8px;padding:1.5rem;margin:2rem 0;text-align:center}
+    .pin-area input{padding:.6rem;border:2px solid #ddd;border-radius:6px;width:120px;text-align:center;font-size:1rem}
+    .btn{display:inline-block;background:var(--blue);color:#fff;padding:.6rem 1rem;border:none;border-radius:6px;cursor:pointer;font-size:1rem;transition:.2s}
+    .btn:hover{background:var(--blue-dark)}
+    .btn-master{background:var(--master)}
+    .btn-master:hover{background:#e55a2b}
+    .score-box{display:none;background:#fff;border:3px solid var(--green);border-radius:10px;padding:1.5rem;text-align:center;margin:2rem 0}
+    .score-box h2{color:var(--green-dark);margin-bottom:.5rem}
+    .score-box .score{font-size:2rem;font-weight:700;color:var(--green)}
+    .admin-panel{display:none;background:#f8f9fa;border:2px dashed var(--master);border-radius:8px;padding:1rem;margin:2rem 0}
+    .admin-panel h3{color:var(--master);margin-bottom:.5rem}
+    .admin-panel pre{background:#fff;padding:.8rem;border-radius:4px;border:1px solid #ddd;max-height:200px;overflow-y:auto;font-size:.85rem}
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🎯 Gyakorló Kvíz</h1>
+    <p class="subtitle">Algebrai törtekkel végzett műveletek</p>
+  </div>
+
+  <div class="master-mode" id="masterMode">🔑 MESTER MÓD AKTÍV – helyes válaszok jelölve</div>
+  <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
+
+  <form id="quizForm" autocomplete="off">
+    <!-- 1 -->
+    <div class="question" data-answer="a">
+      <h3>1. Egyszerűsítsd: (2x)/(4x)</h3>
+      <label class="answer-option"><input type="radio" name="q1" value="a">1/2 (ha x≠0)</label>
+      <label class="answer-option"><input type="radio" name="q1" value="b">2</label>
+      <label class="answer-option"><input type="radio" name="q1" value="c">x</label>
+      <div class="explanation">(2x)/(4x) = 2/4 = 1/2.</div>
+    </div>
+    <!-- 2 -->
+    <div class="question" data-answer="b">
+      <h3>2. Melyik művelet: (a/b) + (c/d) = ?</h3>
+      <label class="answer-option"><input type="radio" name="q2" value="a">(a+c)/(b+d)</label>
+      <label class="answer-option"><input type="radio" name="q2" value="b">(ad+bc)/(bd)</label>
+      <label class="answer-option"><input type="radio" name="q2" value="c">(ac+bd)/(bd)</label>
+      <div class="explanation">Közös nevező: (a/b) + (c/d) = (ad+bc)/(bd).</div>
+    </div>
+    <!-- 3 -->
+    <div class="question" data-answer="a">
+      <h3>3. Osztás reciprokával: (a/b) ÷ (c/d) = ?</h3>
+      <label class="answer-option"><input type="radio" name="q3" value="a">(ad)/(bc)</label>
+      <label class="answer-option"><input type="radio" name="q3" value="b">a/(bc/d)</label>
+      <label class="answer-option"><input type="radio" name="q3" value="c">(ac)/(bd)</label>
+      <div class="explanation">(a/b) × (d/c) = (ad)/(bc).</div>
+    </div>
+    <!-- 4 -->
+    <div class="question" data-answer="c">
+      <h3>4. Melyik igaz: (x+y)/y = ?</h3>
+      <label class="answer-option"><input type="radio" name="q4" value="a">(x/y) + y</label>
+      <label class="answer-option"><input type="radio" name="q4" value="b">(x+y)/y</label>
+      <label class="answer-option"><input type="radio" name="q4" value="c">(x/y) + 1</label>
+      <div class="explanation">Felosztás tagonként: x/y + y/y = x/y + 1.</div>
+    </div>
+    <!-- 5 -->
+    <div class="question" data-answer="a">
+      <h3>5. Egyszerűsítsd: (x²-1)/(x-1)</h3>
+      <label class="answer-option"><input type="radio" name="q5" value="a">x+1</label>
+      <label class="answer-option"><input type="radio" name="q5" value="b">x-1</label>
+      <label class="answer-option"><input type="radio" name="q5" value="c">2x</label>
+      <div class="explanation">x²-1 = (x-1)(x+1), osztva (x-1) → x+1.</div>
+    </div>
+    <!-- 6 -->
+    <div class="question" data-answer="b">
+      <h3>6. Melyik állítás igaz: (a/b) × b = a?</h3>
+      <label class="answer-option"><input type="radio" name="q6" value="a">Általában igaz</label>
+      <label class="answer-option"><input type="radio" name="q6" value="b">Csak b≠0 esetén igaz</label>
+      <label class="answer-option"><input type="radio" name="q6" value="c">Mindig hamis</label>
+      <div class="explanation">b nem lehet nulla a törtben.</div>
+    </div>
+    <!-- 7 -->
+    <div class="question" data-answer="a">
+      <h3>7. Melyik ábrázolja helyesen: (3/4) × (2/5)?</h3>
+      <label class="answer-option"><input type="radio" name="q7" value="a">(3×2)/(4×5) = 6/20 = 3/10</label>
+      <label class="answer-option"><input type="radio" name="q7" value="b">5/8</label>
+      <label class="answer-option"><input type="radio" name="q7" value="c">6/9</label>
+      <div class="explanation">Számláló-szorzat osztva nevező-szorzat: 6/20 = 3/10.</div>
+    </div>
+    <!-- 8 -->
+    <div class="question" data-answer="c">
+      <h3>8. Osztás: (5/6) ÷ (2/3) = ?</h3>
+      <label class="answer-option"><input type="radio" name="q8" value="a">(5/6) × (2/3)</label>
+      <label class="answer-option"><input type="radio" name="q8" value="b">5/9</label>
+      <label class="answer-option"><input type="radio" name="q8" value="c">5/4</label>
+      <div class="explanation">(5/6) ÷ (2/3) = (5/6) × (3/2) = 15/12 = 5/4.</div>
+    </div>
+    <!-- 9 -->
+    <div class="question" data-answer="b">
+      <h3>9. Melyik egyszerűsítés helyes: (6x)/9 = ?</h3>
+      <label class="answer-option"><input type="radio" name="q9" value="a">(2x)/3</label>
+      <label class="answer-option"><input type="radio" name="q9" value="b">(2x)/3</label>
+      <label class="answer-option"><input type="radio" name="q9" value="c">(3x)/2</label>
+      <div class="explanation">6/9 = 2/3.</div>
+    </div>
+    <!-- 10 -->
+    <div class="question" data-answer="b">
+      <h3>10. Melyik igaz: (x/y) + (x/z) = ?</h3>
+      <label class="answer-option"><input type="radio" name="q10" value="a">x/(y+z)</label>
+      <label class="answer-option"><input type="radio" name="q10" value="b">x(z+y)/(yz)</label>
+      <label class="answer-option"><input type="radio" name="q10" value="c">(2x)/(yz)</label>
+      <div class="explanation">Közös nevező: yz → (xz+xy)/(yz) = x(z+y)/(yz).</div>
+    </div>
+    <!-- 11 -->
+    <div class="question" data-answer="a">
+      <h3>11. Melyik a törtszorzás inverze: (3/5) × ? = 1?</h3>
+      <label class="answer-option"><input type="radio" name="q11" value="a">5/3</label>
+      <label class="answer-option"><input type="radio" name="q11" value="b">3/5</label>
+      <label class="answer-option"><input type="radio" name="q11" value="c">1/15</label>
+      <div class="explanation">Reciprok: 5/3.</div>
+    </div>
+    <!-- 12 -->
+    <div class="question" data-answer="c">
+      <h3>12. Melyik átalakítás helyes: (4x+8)/(2x+4) = ?</h3>
+      <label class="answer-option"><input type="radio" name="q12" value="a">2</label>
+      <label class="answer-option"><input type="radio" name="q12" value="b">(4x+8)/(2(x+2))</label>
+      <label class="answer-option"><input type="radio" name="q12" value="c">2</label>
+      <div class="explanation">Faktorizálva: 4(x+2)/2(x+2) = 4/2 = 2.</div>
+    </div>
+    <!-- 13 -->
+    <div class="question" data-answer="b">
+      <h3>13. Egyszerűsítés: (x²)/(xy) = ?</h3>
+      <label class="answer-option"><input type="radio" name="q13" value="a">x/y</label>
+      <label class="answer-option"><input type="radio" name="q13" value="b">x/y</label>
+      <label class="answer-option"><input type="radio" name="q13" value="c">x</label>
+      <div class="explanation">x²⁻¹/y = x/y.</div>
+    </div>
+    <!-- 14 -->
+    <div class="question" data-answer="c">
+      <h3>14. Hogyan bontod fel: (a+b)/c?</h3>
+      <label class="answer-option"><input type="radio" name="q14" value="a">(a/c) + b</label>
+      <label class="answer-option"><input type="radio" name="q14" value="b">(a+b)/c</label>
+      <label class="answer-option"><input type="radio" name="q14" value="c">(a/c) + (b/c)</label>
+      <div class="explanation">Tagonkénti osztás: a/c + b/c.</div>
+    </div>
+    <!-- 15 -->
+    <div class="question" data-answer="a">
+      <h3>15. Melyik állítás igaz: (a/b) × b = a?</h3>
+      <label class="answer-option"><input type="radio" name="q15" value="a">b≠0 esetén igaz</label>
+      <label class="answer-option"><input type="radio" name="q15" value="b">Mindig igaz</label>
+      <label class="answer-option"><input type="radio" name="q15" value="c">Mindig hamis</label>
+      <div class="explanation">b nem lehet 0 a törtben.</div>
+    </div>
+    <!-- 16 -->
+    <div class="question" data-answer="b">
+      <h3>16. Egyszerűsítés: (5x-5)/5 = ?</h3>
+      <label class="answer-option"><input type="radio" name="q16" value="a">x-1</label>
+      <label class="answer-option"><input type="radio" name="q16" value="b">x-1</label>
+      <label class="answer-option"><input type="radio" name="q16" value="c">5(x-1)</label>
+      <div class="explanation">Osztás 5-tel: 5x/5 - 5/5 = x-1.</div>
+    </div>
+    <!-- 17 -->
+    <div class="question" data-answer="c">
+      <h3>17. Egyszerűsítés: x(x+2)/x = ?</h3>
+      <label class="answer-option"><input type="radio" name="q17" value="a">x+2</label>
+      <label class="answer-option"><input type="radio" name="q17" value="b">x(x+2)</label>
+      <label class="answer-option"><input type="radio" name="q17" value="c">x+2</label>
+      <div class="explanation">x közös tényező kiesik (x≠0).</div>
+    </div>
+    <!-- 18 -->
+    <div class="question" data-answer="a">
+      <h3>18. Melyik a neutrális elem: (a/b) + 0 = ?</h3>
+      <label class="answer-option"><input type="radio" name="q18" value="a">a/b</label>
+      <label class="answer-option"><input type="radio" name="q18" value="b">0</label>
+      <label class="answer-option"><input type="radio" name="q18" value="c">(a+0)/b</label>
+      <div class="explanation">0 nem változtat az értéken.</div>
+    </div>
+    <!-- 19 -->
+    <div class="question" data-answer="b">
+      <h3>19. Melyik kommutatív: (a/b) × (c/d) = ?</h3>
+      <label class="answer-option"><input type="radio" name="q19" value="a">(ac)/(bd)</label>
+      <label class="answer-option"><input type="radio" name="q19" value="b">(ca)/(db)</label>
+      <label class="answer-option"><input type="radio" name="q19" value="c">(ad)/(bc)</label>
+      <div class="explanation">Szorzás kommutatív: ac = ca, bd = db.</div>
+    </div>
+    <!-- 20 -->
+    <div class="question" data-answer="b">
+      <h3>20. Hogyan nevezzük a 1/x műveletet?</h3>
+      <label class="answer-option"><input type="radio" name="q20" value="a">Kivonás</label>
+      <label class="answer-option"><input type="radio" name="q20" value="b">Reciprok</label>
+      <label class="answer-option"><input type="radio" name="q20" value="c">Negálás</label>
+      <div class="explanation">Reciprok vagy multiplikatív inverz.</div>
+    </div>
+    <!-- 21 -->
+    <div class="question" data-answer="c">
+      <h3>21. Melyik nem algebrai tört?</h3>
+      <label class="answer-option"><input type="radio" name="q21" value="a">(x+1)/(x-1)</label>
+      <label class="answer-option"><input type="radio" name="q21" value="b">(2a)/(3b)</label>
+      <label class="answer-option"><input type="radio" name="q21" value="c">x + y</label>
+      <div class="explanation">x + y nem tört, hanem összeg.</div>
+    </div>
+    <!-- 22 -->
+    <div class="question" data-answer="a">
+      <h3>22. Melyik egyszerűsítés: (2x²)/(4x) = ?</h3>
+      <label class="answer-option"><input type="radio" name="q22" value="a">x/2</label>
+      <label class="answer-option"><input type="radio" name="q22" value="b">2x</label>
+      <label class="answer-option"><input type="radio" name="q22" value="c">x</label>
+      <div class="explanation">2x²/4x = 2x/4 = x/2.</div>
+    </div>
+    <!-- 23 -->
+    <div class="question" data-answer="b">
+      <h3>23. Egyszerűsítés: (5x+5)/5 = ?</h3>
+      <label class="answer-option"><input type="radio" name="q23" value="a">x+1</label>
+      <label class="answer-option"><input type="radio" name="q23" value="b">x+1</label>
+      <label class="answer-option"><input type="radio" name="q23" value="c">5(x+1)</label>
+      <div class="explanation">5-tel osztva: 5x/5 + 5/5 = x+1.</div>
+    </div>
+    <!-- 24 -->
+    <div class="question" data-answer="c">
+      <h3>24. Hogyan írod át: (a-b)/(a+b)?</h3>
+      <label class="answer-option"><input type="radio" name="q24" value="a">(b-a)/(b+a)</label>
+      <label class="answer-option"><input type="radio" name="q24" value="b">(a-b)/(a+b)</label>
+      <label class="answer-option"><input type="radio" name="q24" value="c">-(b-a)/(a+b)</label>
+      <div class="explanation">Negálással: a-b = -(b-a).</div>
+    </div>
+    <!-- 25 -->
+    <div class="question" data-answer="a">
+      <h3>25. Melyik NEM értelmezhető törtművelet?</h3>
+      <label class="answer-option"><input type="radio" name="q25" value="a">x/0</label>
+      <label class="answer-option"><input type="radio" name="q25" value="b">0/x</label>
+      <label class="answer-option"><input type="radio" name="q25" value="c">x/x</label>
+      <div class="explanation">x/0 nem értelmezett (nullával való osztás).</div>
+    </div>
+
+    <!-- PIN area -->
+    <div class="pin-area">
+      <h3>🔐 PIN-kód ellenőrzés</h3>
+      <p>Írd be a 6 számjegyű PIN-kódot, majd Enter vagy „Ellenőrzés"!</p>
+      <input type="text" id="pinInput" maxlength="6" placeholder="PIN-kód"/>
+      <br><br>
+      <button type="button" class="btn" id="checkBtn">🔍 Ellenőrzés</button>
+      <button type="button" class="btn btn-master" id="masterBtn" style="display:none;">🔑 Mester kiértékelés</button>
+    </div>
+
+    <!-- SCORE -->
+    <div class="score-box" id="scoreBox">
+      <h2>📊 Eredmény</h2>
+      <div class="score" id="finalScore">0 / 25</div>
+      <p id="performance"></p>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div class="admin-panel" id="adminPanel">
+      <h3>🛠️ Admin panel</h3>
+      <pre id="adminData"></pre>
+    </div>
+  </form>
+
+  <script>
+  (function(){
+    const MASTER_PIN="121909";
+    const STUDENT_PINS=Array.from({length:20},(_,i)=>String(100001+i));
+
+    const pinInput=document.getElementById('pinInput');
+    const masterMode=document.getElementById('masterMode');
+    const masterBtn=document.getElementById('masterBtn');
+    const checkBtn=document.getElementById('checkBtn');
+    const progressFill=document.getElementById('progressBar').firstElementChild;
+    const scoreBox=document.getElementById('scoreBox');
+    const finalScore=document.getElementById('finalScore');
+    const performance=document.getElementById('performance');
+    const adminPanel=document.getElementById('adminPanel');
+    const adminData=document.getElementById('adminData');
+
+    let isMaster=false;
+
+    function highlightCorrect(){
+      document.querySelectorAll('.question').forEach(q=>{
+        q.querySelectorAll('.answer-option').forEach(op=>{
+          op.classList.toggle('master-correct',
+            op.querySelector('input').value===q.dataset.answer);
+        });
+      });
+    }
+    function removeHighlight(){
+      document.querySelectorAll('.master-correct')
+        .forEach(el=>el.classList.remove('master-correct'));
+    }
+
+    pinInput.addEventListener('input',()=>{
+      isMaster=pinInput.value.trim()===MASTER_PIN;
+      masterMode.style.display=isMaster?'block':'none';
+      masterBtn.style.display=isMaster?'inline-block':'none';
+      checkBtn.style.display=isMaster?'none':'inline-block';
+      document.querySelectorAll('.explanation')
+              .forEach(e=>e.classList.toggle('show',isMaster));
+      isMaster?highlightCorrect():removeHighlight();
+    });
+
+    function updateProgress(){
+      const answered=[...document.querySelectorAll('.question')]
+        .filter(q=>[...q.querySelectorAll('input')].some(i=>i.checked)).length;
+      progressFill.style.width=(answered/25*100)+'%';
+    }
+    document.querySelectorAll('input[type="radio"]')
+            .forEach(r=>r.addEventListener('change',updateProgress));
+
+    function evaluate(master=false){
+      let correct=0,log=[];
+      document.querySelectorAll('.question').forEach((q,i)=>{
+        const ans=q.dataset.answer;
+        const sel=q.querySelector('input:checked')?.value||'–';
+        q.querySelectorAll('.answer-option').forEach(op=>{
+          const inp=op.querySelector('input');
+          inp.disabled=true;
+          op.classList.remove('master-correct');
+          if(inp.value===ans){
+            op.classList.add('correct');
+            if(sel===ans) correct++;
+          } else if(inp.checked){
+            op.classList.add('wrong');
+          }
+        });
+        q.querySelector('.explanation').classList.add('show');
+        log.push(`Q${i+1}: ${sel} | helyes: ${ans}`);
+      });
+      progressFill.style.width='100%';
+      const pct=Math.round(correct/25*100);
+      finalScore.textContent=`${correct} / 25`;
+      performance.textContent=
+        pct>=92?'🏆 Kiváló!'
+        :pct>=80?'👍 Nagyszerű!'
+        :pct>=60?'📚 Közepes, gyakorolj!'
+        :'💪 Próbálj újra!';
+      performance.style.color=pct>=80?'#28a745':pct>=60?'#ffc107':'#dc3545';
+      scoreBox.style.display='block';
+      if(master){
+        adminPanel.style.display='block';
+        adminData.textContent=log.join('\n')+`\n\nPontosság: ${pct}%`;
+      }
+    }
+
+    checkBtn.onclick=()=>{
+      const pin=pinInput.value.trim();
+      if(!STUDENT_PINS.includes(pin)){
+        alert('❌ Érvénytelen PIN!');
+        return;
+      }
+      if(![...document.querySelectorAll('.question')]
+          .every(q=>q.querySelector('input:checked'))){
+        alert('⚠️ Minden kérdésre válaszolj!');
+        return;
+      }
+      evaluate(false);
+    };
+    masterBtn.onclick=()=>evaluate(true);
+    pinInput.addEventListener('keydown',e=>{
+      if(e.key==='Enter'){
+        e.preventDefault();
+        (isMaster?masterBtn:checkBtn).click();
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

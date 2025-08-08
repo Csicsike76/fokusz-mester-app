@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Átlagsebesség</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 5px; border-radius: 3px; display: inline-block; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Átlagsebesség</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Egy autó 2 óra alatt 180 km-t tesz meg egyenletesen. Mennyi az átlagsebessége?", answers: { a: "90 km/h", b: "360 km/h", c: "90 m/s" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A sebesség (v) a megtett út (s) és az eltelt idő (t) hányadosa: v = s / t.</div><div class="explanation-step"><b>🔹 Számolás:</b> v = 180 km / 2 h = 90 km/h.</div><div class="explanation-solution">✅ Megoldás: Az autó átlagsebessége 90 km/h.</div>` },
+            { question: "Mi az átlagsebesség SI mértékegysége?", answers: { a: "m/s", b: "km/h", c: "m/perc" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 SI-rendszer:</b> A Nemzetközi Mértékegységrendszerben az út alapmértékegysége a méter (m), az időé pedig a másodperc (s).</div><div class="explanation-step"><b>🔹 Levezetés:</b> Mivel a sebesség út/idő, ezért az SI mértékegysége a méter/másodperc.</div><div class="explanation-solution">✅ Megoldás: Az átlagsebesség SI mértékegysége a m/s.</div>` },
+            { question: "Egy kerékpáros 5 m/s sebességgel halad. Mekkora utat tesz meg 1 perc alatt?", answers: { a: "300 méter", b: "5 méter", c: "60 méter" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Először az időt átváltjuk másodpercre: 1 perc = 60 másodperc.</div><div class="explanation-step"><b>🔹 Képlet:</b> Az út (s) a sebesség (v) és az idő (t) szorzata: s = v * t.</div><div class="explanation-step"><b>🔹 Számolás:</b> s = 5 m/s * 60 s = 300 m.</div><div class="explanation-solution">✅ Megoldás: A kerékpáros 300 métert tesz meg.</div>` },
+            { question: "Egy csiga 2 cm/s sebességgel halad. Mennyi idő alatt tesz meg 30 cm-t?", answers: { a: "15 másodperc", b: "60 másodperc", c: "32 másodperc" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> Az idő (t) a megtett út (s) és a sebesség (v) hányadosa: t = s / v.</div><div class="explanation-step"><b>🔹 Számolás:</b> t = 30 cm / 2 cm/s = 15 s.</div><div class="explanation-solution">✅ Megoldás: A csigának 15 másodpercre van szüksége.</div>` },
+            { question: "Melyik jelenti a legnagyobb sebességet?", answers: { a: "10 m/s", b: "10 km/h", c: "10 cm/s" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> A km/h-t m/s-ra váltva osztani kell 3,6-del. 10 km/h ≈ 2,78 m/s. A 10 cm/s pedig 0,1 m/s.</div><div class="explanation-step"><b>🔹 Összehasonlítás:</b> 10 m/s a legnagyobb a három közül.</div><div class="explanation-solution">✅ Megoldás: A 10 m/s jelenti a legnagyobb sebességet.</div>` },
+            { question: "Egy vonat 50 km-t tesz meg fél óra alatt. Mennyi az átlagsebessége?", answers: { a: "100 km/h", b: "50 km/h", c: "25 km/h" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Fél óra = 0,5 óra.</div><div class="explanation-step"><b>🔹 Képlet:</b> v = s / t.</div><div class="explanation-step"><b>🔹 Számolás:</b> v = 50 km / 0,5 h = 100 km/h.</div><div class="explanation-solution">✅ Megoldás: A vonat átlagsebessége 100 km/h.</div>` },
+            { question: "Ha az út és az idő is duplájára nő, mi történik az átlagsebességgel?", answers: { a: "Nem változik.", b: "Duplájára nő.", c: "Felére csökken." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> v = s / t.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Az új sebesség v' = (2s) / (2t). A 2-esekkel egyszerűsíthetünk, így v' = s/t, ami megegyezik az eredeti sebességgel.</div><div class="explanation-solution">✅ Megoldás: Az átlagsebesség nem változik.</div>` },
+            { question: "Egy autó 10 másodperc alatt gyorsul fel álló helyzetből 20 m/s sebességre. Mennyi az átlagsebessége ezalatt, ha a gyorsulás egyenletes volt?", answers: { a: "10 m/s", b: "20 m/s", c: "15 m/s" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Egyenletesen változó mozgás:</b> Ha a mozgás egyenletesen gyorsuló, az átlagsebesség a kezdő- és végsebesség számtani közepe.</div><div class="explanation-step"><b>🔹 Számolás:</b> v_átlag = (v_kezdő + v_vég) / 2 = (0 m/s + 20 m/s) / 2 = 10 m/s.</div><div class="explanation-solution">✅ Megoldás: Az átlagsebessége 10 m/s.</div>` },
+            { question: "Egy vonat 72 km/h sebességgel halad. Mennyi ez m/s-ban?", answers: { a: "25 m/s", b: "20 m/s", c: "36 m/s" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltási faktor:</b> A km/h és m/s közötti váltószám 3,6. Ha km/h-ról váltunk m/s-ra, osztani kell.</div><div class="explanation-step"><b>🔹 Számolás:</b> 72 / 3,6 = 20.</div><div class="explanation-solution">✅ Megoldás: A sebesség 20 m/s.</div>` },
+            { question: "Mi a 'v' betű jele a mozgástanban?", answers: { a: "Idő", b: "Sebesség", c: "Út" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Jelölések:</b><br>• s: út (spatium)<br>• t: idő (tempus)<br>• v: sebesség (velocitas)</div><div class="explanation-solution">✅ Megoldás: A 'v' betű a sebességet jelöli.</div>` },
+            { question: "Egy autó 10 m/s sebességgel halad. Mekkora utat tesz meg fél perc alatt?", answers: { a: "5 méter", b: "300 méter", c: "150 méter" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Fél perc = 30 másodperc.</div><div class="explanation-step"><b>🔹 Képlet:</b> s = v * t.</div><div class="explanation-step"><b>🔹 Számolás:</b> s = 10 m/s * 30 s = 300 m.</div><div class="explanation-solution">✅ Megoldás: Az autó 300 métert tesz meg.</div>` },
+            { question: "Melyik állítás igaz az egyenletes mozgásra?", answers: { a: "A test sebessége folyamatosan változik.", b: "A test sebessége állandó.", c: "A test mindig gyorsul." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Az egyenletes mozgás legfontosabb jellemzője, hogy a test sebessége sem nagyságra, sem irányra nem változik. A gyorsulása nulla.</div><div class="explanation-solution">✅ Megoldás: Az egyenletes mozgás során a test sebessége állandó.</div>` },
+            { question: "Egy hajó 100 km-t tesz meg 4 óra alatt. Mennyi az átlagsebessége?", answers: { a: "400 km/h", b: "25 km/h", c: "104 km/h" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> v = s / t.</div><div class="explanation-step"><b>🔹 Számolás:</b> v = 100 km / 4 h = 25 km/h.</div><div class="explanation-solution">✅ Megoldás: A hajó átlagsebessége 25 km/h.</div>` },
+            { question: "Ha az időt változatlanul hagyjuk, de a megtett utat megduplázzuk, hogyan változik az átlagsebesség?", answers: { a: "Felére csökken.", b: "Duplájára nő.", c: "Nem változik." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> v = s / t.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Az új sebesség v' = (2s) / t. Ez megegyezik 2 * (s/t) -vel, ami 2v. A sebesség tehát a duplájára nő.</div><div class="explanation-solution">✅ Megoldás: Az átlagsebesség a duplájára nő.</div>` },
+            { question: "Egy űrszonda 8 km/s sebességgel halad. Mekkora utat tesz meg 1 perc alatt?", answers: { a: "8 km", b: "480 km", c: "80 km" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> 1 perc = 60 másodperc.</div><div class="explanation-step"><b>🔹 Képlet:</b> s = v * t.</div><div class="explanation-step"><b>🔹 Számolás:</b> s = 8 km/s * 60 s = 480 km.</div><div class="explanation-solution">✅ Megoldás: Az űrszonda 480 km-t tesz meg.</div>` },
+            { question: "Ha egy test nyugalomban van, mennyi az átlagsebessége?", answers: { a: "1 m/s", b: "0", c: "Végtelen" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Ha egy test nyugalomban van, a megtett útja (s) nulla.</div><div class="explanation-step"><b>🔹 Képlet:</b> v = s / t = 0 / t = 0.</div><div class="explanation-solution">✅ Megoldás: A nyugalomban lévő test átlagsebessége 0.</div>` },
+            { question: "Ha az utat változatlanul hagyjuk, de a megtételéhez szükséges időt megfelezzük, hogyan változik az átlagsebesség?", answers: { a: "Nem változik.", b: "Felére csökken.", c: "Duplájára nő." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> v = s / t.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Az új sebesség v' = s / (t/2). A reciprokával való szorzás miatt ez v' = 2 * (s/t) = 2v. A sebesség tehát duplájára nő.</div><div class="explanation-solution">✅ Megoldás: Az átlagsebesség a duplájára nő.</div>` },
+            { question: "Ha az utat méterben (m), az időt másodpercben (s) mérjük, mi lesz a sebesség mértékegysége?", answers: { a: "m*s", b: "m-s", c: "m/s" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> sebesség = út / idő.</div><div class="explanation-step"><b>🔹 Mértékegységek:</b> A mértékegységekkel is elvégezzük a műveletet: méter / másodperc.</div><div class="explanation-solution">✅ Megoldás: A sebesség mértékegysége m/s.</div>` },
+            { question: "Egy autó 1 órán át 60 km/h-val, majd 1 órán át 100 km/h-val halad. Mennyi az átlagsebessége a teljes úton?", answers: { a: "70 km/h", b: "90 km/h", c: "80 km/h" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Teljes út:</b> s_teljes = s₁ + s₂ = (60 km/h * 1h) + (100 km/h * 1h) = 60 km + 100 km = 160 km.</div><div class="explanation-step"><b>🔹 Teljes idő:</b> t_teljes = 1 h + 1 h = 2 h.</div><div class="explanation-step"><b>🔹 Átlagsebesség:</b> v_átlag = s_teljes / t_teljes = 160 km / 2 h = 80 km/h.</div><div class="explanation-solution">✅ Megoldás: Az átlagsebessége 80 km/h.</div>` },
+            { question: "Melyik jelölést használjuk a megtett útra?", answers: { a: "v", b: "t", c: "s" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Jelölések:</b> s - út (spatium), t - idő (tempus), v - sebesség (velocitas).</div><div class="explanation-solution">✅ Megoldás: A megtett útra az 's' jelölést használjuk.</div>` },
+            { question: "Egy hangya 50 cm-t tesz meg 10 másodperc alatt. Mennyi az átlagsebessége?", answers: { a: "500 cm/s", b: "10 cm/s", c: "5 cm/s" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> v = s / t.</div><div class="explanation-step"><b>🔹 Számolás:</b> v = 50 cm / 10 s = 5 cm/s.</div><div class="explanation-solution">✅ Megoldás: A hangya átlagsebessége 5 cm/s.</div>` },
+            { question: "Melyik jelölést használjuk az időtartamra?", answers: { a: "s", b: "v", c: "t" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Jelölések:</b> s - út (spatium), t - idő (tempus), v - sebesség (velocitas).</div><div class="explanation-solution">✅ Megoldás: Az időtartamra a 't' jelölést használjuk.</div>` },
+            { question: "Egy diák 600 méterre lakik az iskolától. Ha 10 perc alatt ér be, mennyi az átlagsebessége m/s-ban?", answers: { a: "6 m/s", b: "60 m/s", c: "1 m/s" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Az időt átváltjuk másodpercre: 10 perc = 10 * 60 = 600 s.</div><div class="explanation-step"><b>🔹 Képlet:</b> v = s / t.</div><div class="explanation-step"><b>🔹 Számolás:</b> v = 600 m / 600 s = 1 m/s.</div><div class="explanation-solution">✅ Megoldás: Az átlagsebessége 1 m/s.</div>` },
+            { question: "Ha ismerjük a megtett utat és a sebességet, hogyan számoljuk ki az időt?", answers: { a: "t = v / s", b: "t = s * v", c: "t = s / v" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Alapképlet:</b> v = s / t.</div><div class="explanation-step"><b>🔹 Átrendezés:</b> Az egyenletet átrendezve t-re kapjuk, hogy t = s / v.</div><div class="explanation-solution">✅ Megoldás: A helyes képlet t = s / v.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

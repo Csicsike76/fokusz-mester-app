@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Henger, gömb, kúp, gúla</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Henger, gömb, kúp, gúla</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Melyik testnek van egy kör alakú alaplapja és egy csúcsa?", options: { a: "gömb", b: "henger", c: "kúp" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A hengernek két körlapja van. A gömbnek nincs alaplapja. 🔹 2. Lépés: A kúp az a test, amelyik egy kör alaplapból és egy csúcsból áll, amit a palást köt össze. ✅ Megoldás: A kúpnak van egy kör alaplapja és egy csúcsa." },
+            { question: "Melyik testet határolja két egybevágó körlap és egy görbe felület?", options: { a: "kúp", b: "henger", c: "gömb" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ez a test hasonlít egy konzervdobozra. 🔹 2. Lépés: Van egy alsó és egy felső körlapja (alaplap és fedőlap), és az őket összekötő görbe oldalfelület, a palást. ✅ Megoldás: Ez a henger definíciója." },
+            { question: "Melyik testnek nincs se éle, se csúcsa?", options: { a: "kocka", b: "gömb", c: "gúla" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kockának és a gúlának is vannak élei és csúcsai. 🔹 2. Lépés: A gömböt egyetlenegy, önmagába záródó görbe felület határolja, ezért nincsenek rajta élek vagy csúcsok. ✅ Megoldás: A gömbnek nincs éle és csúcsa." },
+            { question: "Milyen síkidomok határolnak egy négyzet alapú gúlát?", options: { a: "egy négyzet és négy háromszög", b: "csak háromszögek", c: "csak négyzetek" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az alaplapja a nevéből adódóan egy négyzet. 🔹 2. Lépés: Az oldalán lévő lapok (oldallapok) háromszögek, amelyek a gúla csúcsában futnak össze. Mivel az alap négyzet, 4 ilyen háromszög van. ✅ Megoldás: Egy négyzet és négy háromszög." },
+            { question: "A Föld melyik mértani testhez hasonlít a legjobban?", options: { a: "kör", b: "henger", c: "gömb" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A kör egy síkidom, a Föld viszont térbeli. 🔹 2. Lépés: A Föld egy háromdimenziós, gömbölyű test. ✅ Megoldás: A Föld alakja a gömb." },
+            { question: "Mi a neve a kúp és a henger görbe oldalfelületének?", options: { a: "oldallap", b: "palást", c: "alaplap" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az alaplap a test alja. Az oldallap a sokszögekből álló testek (pl. gúla) oldalát jelöli. 🔹 2. Lépés: A henger és a kúp görbe felületét palástnak nevezzük. ✅ Megoldás: A neve palást." },
+            { question: "Hány alaplapja van egy gúlának?", options: { a: "kettő", b: "nincs neki", c: "egy" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A gúla egy sokszög alaplapból és egy csúcsból áll. 🔹 2. Lépés: Nincs fedőlapja, mint a hengernek vagy a hasábnak. ✅ Megoldás: A gúlának egy alaplapja van." },
+            { question: "Hány csúcsa van egy kúpnak?", options: { a: "egy", b: "kettő", c: "végtelen sok" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A kúpnak van egy kör alakú alapja. 🔹 2. Lépés: Az alaplap pontjait egyetlen pontba, a kúp csúcsába kötjük össze. ✅ Megoldás: A kúpnak egy csúcsa van." },
+            { question: "Egy fagylalttölcsér melyik testhez hasonlít?", options: { a: "henger", b: "gúla", c: "kúp" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A fagylalttölcsérnek kör alakú a 'teteje' (az alapja) és egy csúcsban végződik. 🔹 2. Lépés: Ez pontosan megfelel a kúp leírásának. ✅ Megoldás: A tölcsér egy kúp." },
+            { question: "Melyik testet kapjuk, ha egy téglalapot megforgatunk az egyik oldala körül?", options: { a: "kocka", b: "henger", c: "gömb" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Képzelj el egy téglalapot, amit az egyik oldalánál fogva pörgetsz! 🔹 2. Lépés: A téglalap másik oldala körívet ír le, így egy hengert 'söpör' végig. ✅ Megoldás: Hengert kapunk." },
+            { question: "Mi a gömb sugara?", options: { a: "A gömb középpontját a felület egy pontjával összekötő szakasz.", b: "A gömb kerülete.", c: "A gömb legnagyobb húrja." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A gömb definíciója szerint a felületének minden pontja egyenlő távolságra van a középponttól. 🔹 2. Lépés: Ezt a távolságot (és az ezt reprezentáló szakaszt) nevezzük a gömb sugarának. ✅ Megoldás: A középpontot a felülettel összekötő szakasz." },
+            { question: "Mi az egyiptomi piramisok alakja?", options: { a: "kúp", b: "henger", c: "négyzet alapú gúla" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A piramisoknak sokszög alaplapjuk van, és egy csúcsban futnak össze az oldalaik. Tehát gúlák. 🔹 2. Lépés: A leghíresebb piramisoknak négyzet alakú az alapjuk. ✅ Megoldás: Négyzet alapú gúlák." },
+            { question: "Mi a henger alaplapja és fedőlapja?", options: { a: "két különböző méretű kör", b: "két egybevágó kör", c: "két négyzet" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A henger definíciója szerint két párhuzamos körlap határolja alul és felül. 🔹 2. Lépés: Ahhoz, hogy a palást egyenes legyen, a két körlapnak egybevágónak (azonos méretűnek) kell lennie. ✅ Megoldás: Két egybevágó kör." },
+            { question: "Milyen testet kapunk, ha egy derékszögű háromszöget megforgatunk az egyik befogója körül?", options: { a: "kúp", b: "gömb", c: "henger" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A forgástengely a háromszög egyik befogója (magassága). 🔹 2. Lépés: A másik befogó (az alap sugara) körívet ír le, miközben az átfogó alkotja a test palástját. Ez a kúp. ✅ Megoldás: Kúpot kapunk." },
+            { question: "Hány lapja van egy háromszög alapú gúlának?", options: { a: "3", b: "4", c: "5" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Van egy háromszög alakú alaplapja. 🔹 2. Lépés: Az alaplap mindhárom oldaláról indul egy-egy háromszög alakú oldallap a csúcsig. Ez 3 oldallap. 🔹 3. Lépés: Összesen 1 alaplap + 3 oldallap = 4 lap. ✅ Megoldás: 4 lapja van." },
+            { question: "Melyik testnek van pontosan egy görbe felülete és két síklapja?", options: { a: "kúp", b: "gömb", c: "henger" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A kúpnak egy görbe felülete (palást) és egy síklapja (alaplap) van. A gömbnek csak egy görbe felülete van. 🔹 2. Lépés: A hengernek van egy görbe palástja, és két síklapja (az alaplap és a fedőlap). ✅ Megoldás: A hengernek." },
+            { question: "Egy konzervdoboz milyen testnek felel meg?", options: { a: "kocka", b: "gömb", c: "henger" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A konzervdoboznak van egy kör alakú alja és teteje. 🔹 2. Lépés: Van egy görbe oldala is, ami összeköti őket. Ez a henger leírása. ✅ Megoldás: Hengernek felel meg." },
+            { question: "Mi a különbség a gúla és a kúp között?", options: { a: "A gúlának sokszög az alapja, a kúpnak kör.", b: "A gúlának van csúcsa, a kúpnak nincs.", c: "A kúpnak van palástja, a gúlának nincs." }, correctAnswer: "a", explanation: "🔹 1. Lépés: Mindkettőnek van csúcsa és palástja (a gúla palástja háromszögekből áll). 🔹 2. Lépés: A legfőbb különbség az alaplapjukban van: a gúláknak mindig sokszög (háromszög, négyszög stb.) az alaplapja, míg a kúpnak mindig kör. ✅ Megoldás: Az alaplapjuk alakja a különbség." },
+            { question: "Hány éle van egy háromszög alapú gúlának?", options: { a: "3", b: "6", c: "5" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az alaplap egy háromszög, aminek 3 éle van. 🔹 2. Lépés: A gúla csúcsából mindhárom alap-csúcshoz fut egy-egy él. Ez további 3 él. 🔹 3. Lépés: Összesen 3 + 3 = 6 él. ✅ Megoldás: 6 éle van." },
+            { question: "Melyik testet határolja egyetlen görbe felület?", options: { a: "gömb", b: "kúp", c: "henger" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A kúpnak és a hengernek is van sík alaplapja(uk) a görbe palást mellett. 🔹 2. Lépés: A gömb az egyetlen a felsoroltak közül, amelynek csak és kizárólag egy görbe felülete van. ✅ Megoldás: A gömböt." },
+            { question: "Mi a gömb átmérője?", options: { a: "A sugár fele.", b: "A középponton áthaladó leghosszabb húr.", c: "A felülete." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Hasonlóan a körhöz, a gömbnek is van sugara és átmérője. 🔹 2. Lépés: Az átmérő az a szakasz, ami áthalad a gömb középpontján, és a két végpontja a gömb felületén van. Ez a leghosszabb 'belső' távolság a gömbben. ✅ Megoldás: A középponton áthaladó leghosszabb húr." },
+            { question: "A henger palástjának kiterített alakja egy...", options: { a: "kör", b: "háromszög", c: "téglalap" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Gondolj egy WC-papír gurigára! Ha hosszában felvágod és kiteríted, mit kapsz? 🔹 2. Lépés: Egy téglalapot fogsz kapni, aminek egyik oldala a henger magassága, a másik oldala pedig az alaplap kerülete. ✅ Megoldás: Téglalap." },
+            { question: "Melyik testnek van egy csúcsa és egy sokszög alaplapja?", options: { a: "gúla", b: "kúp", c: "hasáb" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A kúpnak kör az alapja. A hasábnak két egybevágó sokszög alaplapja van. 🔹 2. Lépés: A gúla az a test, amely egy sokszög alaplap pontjait köti össze egyetlen térbeli ponttal, a csúccsal. ✅ Megoldás: A gúla." },
+            { question: "Melyik állítás igaz a kúpra?", options: { a: "Nincs csúcsa.", b: "Két körlap határolja.", c: "Van egy csúcsa és egy alaplapja." }, correctAnswer: "c", explanation: "🔹 1. Lépés: Vizsgáljuk az állításokat! A kúpnak van csúcsa, tehát 'a' hamis. A hengernek van két körlapja, tehát 'b' hamis. 🔹 2. Lépés: A kúp egy kör alaplapból és egy csúcsból áll. ✅ Megoldás: A 'c' állítás igaz." },
+            { question: "Egy dobókocka melyik mértani testnek felel meg?", options: { a: "kocka", b: "gúla", c: "téglatest" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A dobókocka minden oldala egyforma, négyzet alakú. 🔹 2. Lépés: Ez a kocka definíciója. Bár minden kocka téglatest, a legpontosabb megnevezés a kocka. ✅ Megoldás: A dobókocka egy kocka." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

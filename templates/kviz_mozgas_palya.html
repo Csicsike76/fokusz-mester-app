@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Mozgás és Pálya</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Mozgás és Pálya</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Mi a pálya fizikai definíciója?", answers: { a: "A mozgó test által leírt vonal.", b: "A test sebessége.", c: "A test kiindulási helye." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A pálya az a tényleges út, az a vonal (legyen az egyenes vagy görbe), amelyet egy test a mozgása során befut egy adott vonatkoztatási rendszerben.</div><div class="explanation-solution">✅ Megoldás: A pálya a mozgó test által leírt vonal.</div>` },
+            { question: "Egy egyenes úton haladó autó pályája...", answers: { a: "egyenes.", b: "kör.", c: "görbe." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Ha egy test egyenes vonalban mozog, akkor az általa leírt pálya is egyenes. Ezt nevezzük egyenesvonalú mozgásnak.</div><div class="explanation-solution">✅ Megoldás: Az autó pályája egyenes.</div>` },
+            { question: "A Hold Föld körüli pályája milyen alakú?", answers: { a: "Kör (közelítőleg)", b: "Egyenes", c: "Háromszög" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Csillagászat:</b> A Hold a Föld gravitációs vonzásának hatására kering bolygónk körül. A pályája enyhén elliptikus, de jó közelítéssel körnek tekinthető.</div><div class="explanation-solution">✅ Megoldás: A Hold pályája közelítőleg kör alakú.</div>` },
+            { question: "Mi a megtett út?", answers: { a: "A pálya hossza.", b: "A kezdő- és végpont közötti távolság.", c: "A test sebessége." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Megkülönböztetés:</b> A megtett út a pálya teljes hossza, amit a test bejár. Ezzel szemben az elmozdulás a kezdő- és végpont közötti legrövidebb, egyenes távolság.</div><div class="explanation-solution">✅ Megoldás: A megtett út a pálya hossza.</div>` },
+            { question: "Egy körhinta szélén ülő személy pályája a körhinta középpontjához képest...", answers: { a: "kör.", b: "egyenes.", c: "pont." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Vonatkoztatási rendszer:</b> A viszonyítási pont a körhinta középpontja.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Ahogy a körhinta forog, a rajta ülő személy egy kör alakú pályát ír le a középpont körül. Ezt nevezzük körmozgásnak.</div><div class="explanation-solution">✅ Megoldás: A személy pályája kör.</div>` },
+            { question: "Egy feldobott kő pályája (a légellenállást elhanyagolva)...", answers: { a: "egy görbe vonal (parabola).", b: "egyenesen felfelé, majd egyenesen lefelé.", c: "egy kör." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Hajítás:</b> A feldobott testre a gravitáció hat, ami folyamatosan "lefelé húzza". Emiatt a pályája nem egyenes, hanem egy jellegzetes, parabola alakú görbe.</div><div class="explanation-solution">✅ Megoldás: A kő pályája egy görbe vonal.</div>` },
+            { question: "Ha körbesétálsz egy 400 méteres futópályán és visszaérsz a kiindulási pontba, mennyi a megtett utad?", answers: { a: "400 m", b: "0 m", c: "200 m" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Megtett út:</b> A megtett út a pálya teljes hossza. Mivel a pálya hossza 400 méter, ennyit sétáltál.</div><div class="explanation-step"><b>✏️ Bónusz:</b> Ebben az esetben az elmozdulásod viszont 0 méter, mert a kezdő- és végpontod megegyezik.</div><div class="explanation-solution">✅ Megoldás: A megtett út 400 m.</div>` },
+            { question: "Milyen pályán mozog a Föld a Nap körül?", answers: { a: "Ellipszis (közel kör) alakú pályán.", b: "Egyenes vonalú pályán.", c: "Szabálytalan pályán." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Csillagászat:</b> A bolygók, így a Föld is, a Nap gravitációs vonzásának hatására ellipszis alakú pályán keringenek. A Föld pályája nagyon hasonlít egy körhöz, de nem tökéletes kör.</div><div class="explanation-solution">✅ Megoldás: A Föld ellipszis (közel kör) alakú pályán mozog.</div>` },
+            { question: "Melyik test mozog egyenes vonalú pályán?", answers: { a: "Egy hullámvasút", b: "Egy szabadon eső alma", c: "Egy óra mutatójának vége" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A hullámvasút és az óramutató is görbe pályán mozog. A szabadon eső testet a gravitáció egyenesen a Föld középpontja felé húzza, így a pályája (szélcsendben) egyenes.</div><div class="explanation-solution">✅ Megoldás: A szabadon eső alma mozog egyenes vonalú pályán.</div>` },
+            { question: "Mi a neve annak a mozgásnak, aminek a pályája görbe?", answers: { a: "Egyenletes mozgás", b: "Görbe vonalú mozgás", c: "Nyugalmi állapot" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elnevezések:</b> A mozgásokat a pályájuk alakja szerint is csoportosíthatjuk. Ha a pálya egyenes, a mozgás egyenesvonalú. Ha a pálya görbe, a mozgás görbe vonalú.</div><div class="explanation-solution">✅ Megoldás: A mozgás neve görbe vonalú mozgás.</div>` },
+            { question: "Egy autóbusz utasa sétál a busz elejétől a végéig. Milyen a pályája az úttesthez képest?", answers: { a: "Pontosan ugyanolyan, mint a buszhoz képest.", b: "Egyenes, de hosszabb, mint a buszhoz képest.", c: "Görbe vonalú." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Relatív mozgás:</b> Az utas pályája az úttesthez képest a busz mozgásának és a buszon belüli saját mozgásának az "összege". Mivel mindkét mozgás egyenes vonalú és egyirányú, a pálya is egyenes lesz, de a hossza az utas által a buszban megtett út és a busz által az úton megtett út összege.</div><div class="explanation-solution">✅ Megoldás: A pálya egyenes, de hosszabb, mint a buszhoz képest.</div>` },
+            { question: "A Földön állva egy elsuhanó vonat kerekén lévő pont milyen pályát ír le?", answers: { a: "Egyenes", b: "Ciklois (speciális görbe)", c: "Kör" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Összetett mozgás:</b> A kerék pontja egyszerre forog a tengely körül (körmozgás) és halad előre a vonattal (egyenesvonalú mozgás). A két mozgás eredőjeként egy speciális görbe, az ún. ciklois jön létre.</div><div class="explanation-solution">✅ Megoldás: A pont pályája egy ciklois.</div>` },
+            { question: "A nyugalomban lévő test pályája...", answers: { a: "egy egyenes.", b: "egy pont.", c: "egy kör." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A nyugalom azt jelenti, hogy a test helyzete nem változik. A pálya a mozgás során bejárt pontok halmaza. Ha a test nem mozog, akkor csak egyetlen pontban van.</div><div class="explanation-solution">✅ Megoldás: A nyugalomban lévő test pályája egy pont.</div>` },
+            { question: "Egy sípályán lesikló síelő pályája milyen?", answers: { a: "Mindig egyenes", b: "Görbe vonalú", c: "Mindig kör" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A sípályák kanyarognak a hegyoldalon, ezért a síelő által bejárt út, azaz a pálya, egy görbe vonal.</div><div class="explanation-solution">✅ Megoldás: A síelő pályája görbe vonalú.</div>` },
+            { question: "Mit jelent az 'egyenesvonalú mozgás'?", answers: { a: "A test sebessége állandó.", b: "A test pályája egyenes.", c: "A test nem gyorsul." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elnevezés:</b> A név pontosan leírja a jelenséget. Az "egyenesvonalú" szó a pálya alakjára utal. (Az "egyenletes" szó utalna az állandó sebességre).</div><div class="explanation-solution">✅ Megoldás: Azt jelenti, hogy a test pályája egyenes.</div>` },
+            { question: "Egy autó kilométer-számlálója mit mér?", answers: { a: "Az elmozdulást.", b: "A pálya hosszát (megtett utat).", c: "Az átlagsebességet." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Funkció:</b> A kilométer-számláló (odometer) folyamatosan méri és összegzi a kerekek által megtett utat, függetlenül attól, hogy merre kanyargunk. Ez pontosan a pálya hossza.</div><div class="explanation-solution">✅ Megoldás: A számláló a pálya hosszát, azaz a megtett utat méri.</div>` },
+            { question: "Egy csúszdán lecsúszó gyerek pályája...", answers: { a: "egyenes.", b: "görbe.", c: "pont." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A legtöbb játszótéri csúszda íves, kanyarodó, így a rajta lecsúszó gyerek pályája is görbe vonalú lesz.</div><div class="explanation-solution">✅ Megoldás: A gyerek pályája görbe.</div>` },
+            { question: "Melyik állítás igaz az elmozdulásra?", answers: { a: "Mindig egyenlő a pálya hosszával.", b: "Lehet nulla, akkor is, ha a test mozgott.", c: "Mindig nagyobb, mint a megtett út." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíciók:</b> Az elmozdulás a kezdő- és végpontot összekötő egyenes szakasz. A megtett út a pálya hossza.</div><div class="explanation-step"><b>🔹 Viszonyuk:</b> A legrövidebb út két pont között az egyenes. Ezért a megtett út (pálya hossza) mindig nagyobb vagy egyenlő, mint az elmozdulás. Az egyenlőség csak egyenes vonalú, egyirányú mozgásnál áll fenn.</div><div class="explanation-solution">✅ Megoldás: Az elmozdulás lehet nulla, akkor is, ha a test mozgott (pl. egy teljes kör megtétele után).</div>` },
+            { question: "Egy szobában repkedő légy pályája...", answers: { a: "egyenes.", b: "kör.", c: "szabálytalan görbe." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Megfigyelés:</b> A légy mozgása kaotikus, hirtelen irányváltásokkal teli. Az általa bejárt út egy bonyolult, szabálytalan görbe vonal.</div><div class="explanation-solution">✅ Megoldás: A légy pályája egy szabálytalan görbe.</div>` },
+            { question: "Egy óra másodpercmutatójának végpontja milyen pályán mozog?", answers: { a: "Egyenes", b: "Spirál", c: "Kör" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A mutató végpontja mindig azonos távolságra van az óra középpontjától, miközben körbejár. Ez a kör definíciója.</div><div class="explanation-solution">✅ Megoldás: A mutató végpontja körpályán mozog.</div>` },
+            { question: "Egy focilabda a levegőben repül. Milyen a pályája?", answers: { a: "Kör", b: "Háromszög", c: "Görbe vonal (parabola)" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Fizika:</b> A megrúgott labda mozgása a hajítások közé tartozik. A kezdősebesség és a gravitáció együttes hatására a labda egy parabolaívet ír le.</div><div class="explanation-solution">✅ Megoldás: A labda pályája görbe vonal (parabola).</div>` },
+            { question: "Mi az a 'körmozgás'?", answers: { a: "Olyan mozgás, ahol a test körbe-körbe forog.", b: "Olyan mozgás, ahol a test lassan mozog.", c: "Olyan mozgás, aminek a pályája egy kör." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A körmozgás egy speciális mozgásforma, amelynek a definíciója, hogy a test pályája egy kör.</div><div class="explanation-solution">✅ Megoldás: A körmozgás olyan mozgás, aminek a pályája egy kör.</div>` },
+            { question: "Ha egy test nyugalomban van, mit mondhatunk a pályájáról?", answers: { a: "Végtelen hosszú.", b: "Nincs pályája.", c: "A pályája egyetlen pont." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A pálya a mozgás során bejárt pontok halmaza. Ha egy test nyugalomban van, nem jár be új pontokat, végig ugyanabban az egy pontban marad.</div><div class="explanation-solution">✅ Megoldás: A nyugalomban lévő test pályája egyetlen pont.</div>` },
+            { question: "A hegyről leguruló kő pályája milyen?", answers: { a: "Egyenes", b: "Kör", c: "Szabálytalan görbe" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A hegyoldal felszíne egyenetlen, a kő pattog, kanyarog, ahogy gurul lefelé. A bejárt útja ezért egy komplex, szabálytalan görbe vonal.</div><div class="explanation-solution">✅ Megoldás: A kő pályája szabálytalan görbe.</div>` },
+            { question: "Mi a különbség a pálya és az elmozdulás között?", answers: { a: "Az elmozdulás a pálya hossza.", b: "Nincs különbség.", c: "A pálya a teljes út, az elmozdulás a kezdő- és végpont közötti egyenes távolság." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíciók:</b> A pálya a ténylegesen bejárt vonal. Az elmozdulás egy vektor, ami a startpontból a célpontba mutat. A megtett út a pálya hossza.</div><div class="explanation-step"><b>🔹 Példa:</b> Ha elmész a boltba és hazajössz, a megtett utad több kilométer, de az elmozdulásod nulla.</div><div class="explanation-solution">✅ Megoldás: A pálya a teljes út, az elmozdulás a kezdő- és végpont közötti egyenes távolság.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

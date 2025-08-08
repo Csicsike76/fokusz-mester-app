@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>8. Osztály - Matematika Képletek és Tételek</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stilus.css') }}">
+    <style>
+        .section-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-top: -2rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+        .header h1 { text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.7); }
+        .header p { text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.6); }
+
+        .formula-card { background: var(--feher); border-radius: 12px; box-shadow: var(--card-shadow); margin-bottom: 2rem; padding: 2rem; border-left: 5px solid var(--piros); }
+        .formula-title { font-family: 'Roboto Slab', serif; font-size: 1.8rem; margin-bottom: 1rem; }
+        .formula-explanation { margin-bottom: 1.5rem; line-height: 1.7; }
+        .formula-expression { font-size: 1.8rem; font-weight: bold; background: #fff1f2; padding: 1rem; border-radius: 8px; text-align: center; }
+        .formula-var { position: relative; cursor: pointer; border-bottom: 2px dotted var(--piros); }
+        .tooltip-text { visibility: hidden; width: 180px; background-color: var(--sotet); color: var(--feher); text-align: center; border-radius: 6px; padding: 5px 10px; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -90px; opacity: 0; transition: opacity 0.3s; font-size: 0.9rem; }
+        .formula-var:hover .tooltip-text { visibility: visible; opacity: 1; }
+        .button-group { text-align: right; margin-top: 1rem; display: flex; justify-content: flex-end; gap: 0.5rem; flex-wrap: wrap; }
+        .example-area { display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
+        .example-area p { background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+    
+    <video autoplay muted loop id="bg-video">
+      <source src="{{ url_for('static', filename='video/video.mp4') }}" type="video/mp4">
+    </video>
+    
+    {% include 'navigacio.html' %}
+
+    <div class="content-wrapper">
+        <header class="header">
+            <div class="container">
+                <h1>8. Osztály - Matematika</h1>
+                <p>Képletek és Tételek Részletes Magyarázattal</p>
+            </div>
+        </header>
+
+<main>
+            <div class="container">
+                <section class="section">
+                    <h2 class="section-title">8. Osztály - Matematika</h2>
+                    <p class="section-subtitle">Képletek és Tételek Részletes Magyarázattal</p>
+
+                    <!-- === Halmazok, Intervallumok, Egyenlőtlenségek === -->
+                    <h3 class="subject-title math-title">Halmazok, Intervallumok, Egyenlőtlenségek</h3>
+
+                    <!-- Halmazok megadása Kártya -->
+                    <div class="formula-card" 
+                         data-formula-name="Halmazok megadása közös tulajdonsággal" 
+                         data-formula-expression="{ x | x ∈ ℤ, -2 < x ≤ 3 }" 
+                         data-formula-example="A = { x | x ∈ ℕ, x < 4 }. Elemeinek felsorolásával: A = {0, 1, 2, 3}.">
+                        <h4 class="formula-title">1.1 Halmazok Megadása Tulajdonsággal</h4>
+                        <p class="formula-explanation">A halmazokat nemcsak elemeik felsorolásával, hanem az elemek közös tulajdonságának megadásával is meghatározhatjuk. Ezt a jelölést "halmazépítő" jelölésnek is nevezik. A függőleges vonal (|) azt jelenti: "amelyre igaz, hogy...".</p>
+                        <div class="formula-expression">
+                            { <span class="formula-var">x<span class="tooltip-text">A halmaz elemei</span></span> | <span class="formula-var">x ∈ ℤ<span class="tooltip-text">x eleme az egész számok halmazának</span></span>, <span class="formula-var">-2 < x ≤ 3<span class="tooltip-text">és x -2-nél nagyobb, de kisebb vagy egyenlő, mint 3</span></span> }
+                        </div>
+                        <div class="button-group">
+                            <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+                            <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+                        </div>
+                        <div class="example-area">
+                            <p><strong>Feladat:</strong> Add meg elemeinek felsorolásával az A = { x | x ∈ ℕ, x < 4 } halmazt!<br>
+                               <strong>Gondolkodás:</strong> Keressük azokat a természetes számokat (ℕ), amelyek kisebbek, mint 4. A természetes számok a 0, 1, 2, ...<br>
+                               <strong>Megoldás:</strong> A = {0, 1, 2, 3}.</p>
+                        </div>
+                    </div>
+
+                    <!-- Halmazműveletek és relációk Kártya -->
+                    <div class="formula-card" 
+                         data-formula-name="Halmazműveletek és relációk (részhalmaz)" 
+                         data-formula-expression="A ⊂ B" 
+                         data-formula-example="A={1,2}, B={1,2,3}. Az A⊂B (A részhalmaza B-nek) állítás igaz, mert az A halmaz minden eleme a B halmaznak is eleme.">
+                        <h4 class="formula-title">1.2 Halmazok Közötti Relációk és Műveletek</h4>
+                        <p class="formula-explanation">A már ismert halmazműveletek (unió: ∪, metszet: ∩) mellett fontos a halmazok közötti viszony, a reláció is. A legfontosabb reláció a **részhalmaz** viszony.</p>
+                        <ul>
+                            <li><strong>Részhalmaz (⊂):</strong> Az 'A' halmaz részhalmaza a 'B' halmaznak, ha 'A' minden eleme 'B'-nek is eleme.</li>
+                            <li><strong>Valódi részhalmaz:** Ha 'A' részhalmaza 'B'-nek, de nem egyenlő vele.</li>
+                        </ul>
+                        <div class="button-group">
+                            <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+                            <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+                        </div>
+                        <div class="example-area">
+                            <p><strong>Feladat:</strong> Legyen A={a,b} és B={a,b,c}. Igaz-e, hogy A⊂B? Igaz-e, hogy B⊂A?<br>
+                               <strong>Megoldás:</strong><br>
+                               Az A⊂B állítás **igaz**, mert 'a' és 'b' is eleme a B halmaznak.<br>
+                               A B⊂A állítás **hamis**, mert a 'c' elem benne van B-ben, de nincs benne A-ban.</p>
+                        </div>
+                    </div>
+                    <!-- ================================== -->
+<!-- === JAVÍTOTT INTERVALLUMOK KÁRTYA === -->
+<!-- ================================== -->
+<div class="formula-card" 
+     data-formula-name="Intervallumok a valós számok halmazán" 
+     data-formula-expression="[a, b] ; (a, b) ; [a, b) ; (a, b]" 
+     data-formula-example="Az [1; 5] intervallum az összes valós számot jelenti 1-től 5-ig, beleértve az 1-et és az 5-öt is.">
+    <!-- JAVÍTVA: A cím pontosítva -->
+    <h4 class="formula-title">1.3 Intervallumok: A Számegyenes Részhalmazai</h4>
+    <!-- JAVÍTVA: A magyarázat kiegészítve -->
+    <p class="formula-explanation">A számegyenes a valós számok halmazának geometriai képe. Ennek az egyenesnek a **részhalmazait** vizsgáljuk. Az intervallum a számegyenes egy összefüggő szakaszát jelöli, azaz két végpont közötti összes valós számot. A zárójelek típusa jelzi, hogy a végpontok (a szakasz határai) beletartoznak-e az intervallumba:</p>
+    <ul>
+        <li><strong>Zárt intervallum [a, b]:</strong> 'a' és 'b' is beletartozik. (Számegyenesen teli karikával jelöljük.)</li>
+        <li><strong>Nyílt intervallum (a, b):</strong> Sem 'a', sem 'b' nem tartozik bele. (Üres karikával jelöljük.)</li>
+        <li><strong>Félig nyílt/zárt intervallum [a, b) vagy (a, b]:</strong> Az egyik végpont beletartozik, a másik nem.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Írd le jelöléssel és ábrázold a számegyenesen a -2-nél nagyobb, de 3-nál nem nagyobb valós számok halmazát!<br>
+           <strong>Gondolkodás:</strong> A "-2-nél nagyobb" azt jelenti, a -2 nincs benne (nyílt végpont). A "3-nál nem nagyobb" azt jelenti, a 3 benne van (zárt végpont).<br>
+           <strong>Megoldás:</strong> A helyes jelölés: (-2; 3]. A számegyenesen a -2-nél üres, a 3-nál teli karikát rajzolunk, és a köztük lévő szakaszt vastagítjuk ki.</p>
+    </div>
+</div>
+
+<!-- Műveletek intervallumokkal Kártya -->
+<div class="formula-card" 
+     data-formula-name="Műveletek intervallumokkal (metszet, unió)" 
+     data-formula-expression="[1; 5] ∩ [3; 7] = [3; 5]" 
+     data-formula-example="Legyen A=[1;5] és B=[3;7]. Mi a metszetük (A∩B) és az uniójuk (A∪B)? Megoldás: A metszet a közös rész: [3;5]. Az unió az összes elem: [1;7].">
+    <h4 class="formula-title">1.4 Műveletek Intervallumokkal</h4>
+    <p class="formula-explanation">Az intervallumok valós számok halmazai, így ugyanazokat a műveleteket (metszet, unió) végezhetjük el velük. A megoldáshoz a legkönnyebb, ha a számegyenesen ábrázoljuk mindkét intervallumot, és leolvassuk a közös részt (metszet) vagy az általuk lefedett teljes szakaszt (unió).</p>
+    <ul>
+        <li><strong>Metszet (∩):</strong> Az a szakasz, ahol mindkét intervallum "átfedi" egymást.</li>
+        <li><strong>Unió (∪):</strong> Az a szakasz, ami az első intervallum elejétől a második intervallum végéig tart (ha van közös részük).</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Adott két intervallum: A = [1; 5] és B = [3; 7]. Add meg a metszetüket és az uniójukat!<br>
+           <strong>Megoldás:</strong><br>
+           Metszet (a közös rész): A ∩ B = [3; 5].<br>
+           Unió (a teljes lefedett szakasz): A ∪ B = [1; 7].</p>
+    </div>
+</div>
+<!-- ================================== -->
+<!-- === EGYENLŐTLENSÉGEK === -->
+<!-- ================================== -->
+
+<!-- Egyenlőtlenségek megoldása Kártya -->
+<div class="formula-card" 
+     data-formula-name="Lineáris egyenlőtlenségek megoldása" 
+     data-formula-expression="ax + b ≤ 0" 
+     data-formula-example="Oldd meg: 2x - 6 ≤ 0. Megoldás: 2x ≤ 6 => x ≤ 3. A megoldás a (-∞; 3] intervallum.">
+    <h4 class="formula-title">3.1 Lineáris Egyenlőtlenségek</h4>
+    <p class="formula-explanation">Az egyenlőtlenségek megoldása nagyon hasonló az egyenletekéhez, a mérleg-elvet itt is alkalmazzuk. Azonban van egy rendkívül fontos, új szabály:</p>
+    <p style="background: #fffbe5; border-left: 3px solid #ffc107; padding: 1rem; font-weight: bold;">Ha az egyenlőtlenség mindkét oldalát egy NEGATÍV számmal szorozzuk vagy osztjuk, a relációs jel (<, >, ≤, ≥) megfordul!</p>
+    <p>Az egyenlőtlenségek megoldása a valós számok halmazán általában egy intervallum.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Oldd meg a következő egyenlőtlenséget: -3x + 6 > 12.<br>
+           <strong>1. Lépés:</strong> Mindkét oldalból kivonunk 6-ot: -3x > 6.<br>
+           <strong>2. Lépés (FONTOS!):</strong> Mindkét oldalt elosztjuk -3-mal. Mivel negatív számmal osztottunk, a relációs jel (>) megfordul (<)-re!<br>
+           x < -2.<br>
+           <strong>Megoldás intervallummal:</strong> x ∈ (-∞; -2).</p>
+    </div>
+</div>
+<!-- ================================== -->
+<!-- === EGYENLŐTLENSÉGEK RÉSZLETESEN === -->
+<!-- ================================== -->
+
+<!-- Relációs jelek tulajdonságai Kártya -->
+<div class="formula-card" 
+     data-formula-name="Az egyenlőtlenségek tulajdonságai (mérleg-elv)" 
+     data-formula-expression="Ha a > b, akkor a+c > b+c" 
+     data-formula-example="A 7 > 3 egyenlőtlenség mindkét oldalához adjunk 2-t: 7+2 > 3+2, azaz 9 > 5, ami szintén igaz.">
+    <h4 class="formula-title">3.2 A Relációs Jelek Tulajdonságai</h4>
+    <p class="formula-explanation">Az egyenlőtlenségeket ugyanúgy alakíthatjuk, mint az egyenleteket (a mérleg-elv segítségével), de egy nagyon fontos kivétellel. Az ekvivalens átalakítások:</p>
+    <ul>
+        <li>Mindkét oldalhoz ugyanazt a számot **hozzáadhatjuk** vagy **kivonhatjuk**, a relációs jel nem változik.</li>
+        <li>Mindkét oldalt **megszorozhatjuk** vagy **eloszthatjuk** ugyanazzal a **POZITÍV** számmal, a relációs jel nem változik.</li>
+        <li style="font-weight: bold; color: var(--piros);">Ha mindkét oldalt egy **NEGATÍV** számmal szorozzuk vagy osztjuk, a relációs jel (<, >, ≤, ≥) az ellenkezőjére fordul!</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példa a jel megfordulására:</strong><br>
+           Tudjuk, hogy 6 > 4. Szorozzuk meg mindkét oldalt (-2)-vel.<br>
+           6 * (-2) = -12<br>
+           4 * (-2) = -8<br>
+           Mivel -12 < -8, látjuk, hogy a relációs jel megfordult: a > jelből < jel lett.</p>
+    </div>
+</div>
+
+<!-- ax+b<=0 alakú egyenlőtlenségek Kártya -->
+<div class="formula-card" 
+     data-formula-name="ax + b ≤ 0 alakú egyenlőtlenségek megoldása" 
+     data-formula-expression="ax + b ≤ 0" 
+     data-formula-example="Oldd meg: 2x - 6 ≤ 0. Megoldás: Hozzáadunk 6-ot: 2x ≤ 6. Osztunk 2-vel: x ≤ 3. A megoldás a (-∞; 3] intervallum.">
+    <h4 class="formula-title">3.3 "ax + b ≤ 0" Alakú Egyenlőtlenségek</h4>
+    <p class="formula-explanation">Az ilyen típusú egyenlőtlenségek megoldásához az előző pontban tanult ekvivalens átalakításokat (mérleg-elvet) használjuk. A cél, hogy az 'x' ismeretlent az egyik oldalon egyedül hagyjuk, miközben végig figyelünk a relációs jel esetleges megfordulására.</p>
+    <div class="formula-expression">
+        <span class="formula-var">a<span class="tooltip-text">x együtthatója</span></span>*<span class="formula-var">x<span class="tooltip-text">ismeretlen</span></span> + 
+        <span class="formula-var">b<span class="tooltip-text">konstans</span></span> ≤ 0
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Oldd meg a következő egyenlőtlenséget: -3x + 6 > 12.<br>
+           <strong>1. Lépés (kivonás):</strong> Mindkét oldalból kivonunk 6-ot: -3x > 6.<br>
+           <strong>2. Lépés (osztás negatívval):</strong> Mindkét oldalt elosztjuk -3-mal. **A relációs jel megfordul!**<br>
+           x < -2.<br>
+           <strong>Megoldás intervallummal:</strong> x ∈ (-∞; -2).</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 1. FEJEZET ISMERETFELMÉRŐ === -->
+<!-- ================================== -->
+<div class="formula-card" style="border-color: var(--zold);">
+    <h4 class="formula-title">Ismeretfelmérő: Halmazok, Intervallumok és Egyenlőtlenségek</h4>
+    <p class="formula-explanation">Készen állsz, hogy leteszteld a tudásodat a halmazokról, intervallumokról és az egyenlőtlenségek megoldásáról? Használd a Tudástár intelligens eszközeit a gyakorláshoz és a felkészüléshez!</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+        <div style="text-align: center;">
+            <p><strong>Gyors Ismétlés</strong></p>
+            <p style="font-size: 0.9em; margin-bottom: 0.5rem;">Generálj véletlenszerű, rövid feladatokat a 8. osztályos tananyagból!</p>
+            <a href="napi_kihivas.html" class="btn btn-primary ai-btn">Irány a Napi Kihívás! →</a>
+        </div>
+        <div style="text-align: center;">
+            <p><strong>Próba-Témazáró</strong></p>
+            <p style="font-size: 0.9em; margin-bottom: 0.5rem;">Generálj egy teljes témazárót ebből a fejezetből az AI Vizsga Szimulátorral!</p>
+            <a href="vizsga_szimulator.html" class="btn btn-primary ai-btn">Indítom a Szimulátort! →</a>
+        </div>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 2. FEJEZET: ALGEBRAI SZÁMÍTÁSOK === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Algebrai Számítások ℝ-ben</h3>
+
+<!-- Valós számokkal végzett műveletek Kártya -->
+<div class="formula-card" 
+     data-formula-name="Valós számokkal végzett műveletek" 
+     data-formula-expression="√a * √b = √(a*b)  és  √a / √b = √(a/b)" 
+     data-formula-example="Számítsd ki: √8 * √2. Megoldás: √(8*2) = √16 = 4.">
+    <h4 class="formula-title">2.1 Valós Számokkal Végzett Műveletek</h4>
+    <p class="formula-explanation">A valós számokkal végzett műveletek során a korábban tanult szabályok (pl. műveleti sorrend) érvényben maradnak. A gyökös kifejezésekre vonatkozóan a legfontosabb új azonosságok a szorzásra és osztásra vonatkoznak:</p>
+    <ul>
+        <li><strong>Azonos kitevőjű gyökök szorzása:</strong> A gyökjel alatti számokat összeszorozhatjuk egy közös gyökjel alatt.</li>
+        <li><strong>Azonos kitevőjű gyökök osztása:</strong> A gyökjel alatti számokat eloszthatjuk egymással egy közös gyökjel alatt.</li>
+    </ul>
+    <p><strong>Fontos:</strong> Összeadásra és kivonásra Nincs ilyen egyszerű szabály! (√a + √b ≠ √(a+b))</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki: √18 / √2.<br>
+           <strong>Megoldás:</strong> √(18 / 2) = √9 = 3.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === BETŰS KIFEJEZÉSEK === -->
+<!-- ================================== -->
+
+<!-- Betűkkel jelölt valós számok Kártya -->
+<div class="formula-card" 
+     data-formula-name="Műveletek betűkkel jelölt valós számokkal (algebrai kifejezések)" 
+     data-formula-expression="3a + 5a = 8a" 
+     data-formula-example="Vond össze az egynemű tagokat: 2x + 3y - x + 2y. Megoldás: (2x-x) + (3y+2y) = x + 5y.">
+    <h4 class="formula-title">2.2 Betűkkel Jelölt Valós Számok (Algebrai Kifejezések)</h4>
+    <p class="formula-explanation">Az algebrai kifejezésekben a betűk (változók) számokat jelölnek. A velük végzett műveletek során a legfontosabb fogalom az **egynemű kifejezések** összevonása.</p>
+    <ul>
+        <li><strong>Egynemű kifejezések:</strong> Olyan tagok, amelyekben a betűs rész pontosan ugyanaz (a változók és azok hatványkitevői is megegyeznek). Pl. `3x²y` és `-5x²y` egyneműek, de `3xy` és `3x²y` nem.</li>
+        <li><strong>Összevonás:</strong> Csak egynemű kifejezéseket lehet összevonni (összeadni vagy kivonni). Az összevonás során az együtthatókkal (a betűk előtti számokkal) végezzük el a műveletet, a betűs rész változatlan marad.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Vond össze az egynemű tagokat a következő kifejezésben: 2x + 3y - x + 2y.<br>
+           <strong>Gondolkodás:</strong> Külön csoportosítom az 'x'-es és az 'y'-os tagokat. Figyelek az előjelekre!<br>
+           <strong>Megoldás:</strong> (2x - 1x) + (3y + 2y) = 1x + 5y = x + 5y.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === NEVEZETES AZONOSSÁGOK === -->
+<!-- ================================== -->
+
+<!-- Nevezetes azonosságok Kártya -->
+<div class="formula-card" 
+     data-formula-name="Nevezetes azonosságok (rövidített számítási képletek)" 
+     data-formula-expression="(a+b)² = a²+2ab+b² és (a+b)(a-b) = a²-b²" 
+     data-formula-example="Számítsd ki: (x+3)². Megoldás: x² + 2*x*3 + 3² = x² + 6x + 9.">
+    <h4 class="formula-title">2.2.1 Rövidített Számítási Képletek (Nevezetes Azonosságok)</h4>
+    <p class="formula-explanation">Ezek olyan gyakran előforduló algebrai szorzatok, amelyeket érdemes megtanulni, mert meggyorsítják a számolást. A két legfontosabb:</p>
+    <ul>
+        <li><strong>Binom (kéttagú összeg) négyzete:</strong> Az első tag négyzete, plusz az első és második tag szorzatának kétszerese, plusz a második tag négyzete.</li>
+        <li><strong>Két tag különbségének négyzete:</strong> Ugyanaz, mint az előző, csak a középső tag előjele negatív: (a-b)² = a² - 2ab + b².</li>
+        <li><strong>Két tag összegének és különbségének szorzata:</strong> Az első tag négyzete mínusz a második tag négyzete.</li>
+    </ul>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+        <div>(<span class="formula-var">a<span class="tooltip-text">Első tag</span></span>+<span class="formula-var">b<span class="tooltip-text">Második tag</span></span>)² = <span class="formula-var">a²<span class="tooltip-text">Első tag négyzete</span></span> + 2<span class="formula-var">ab<span class="tooltip-text">Vegyes szorzat</span></span> + <span class="formula-var">b²<span class="tooltip-text">Második tag négyzete</span></span></div>
+        <div>(<span class="formula-var">a<span class="tooltip-text">Első tag</span></span>+<span class="formula-var">b<span class="tooltip-text">Második tag</span></span>)(<span class="formula-var">a<span class="tooltip-text">Első tag</span></span>-<span class="formula-var">b<span class="tooltip-text">Második tag</span></span>) = <span class="formula-var">a²<span class="tooltip-text">Első tag négyzete</span></span> - <span class="formula-var">b²<span class="tooltip-text">Második tag négyzete</span></span></div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Végezd el a szorzást: (y - 5)(y + 5).<br>
+           <strong>Gondolkodás:</strong> Ez a második típusú azonosság, ahol a=y és b=5.<br>
+           <strong>Megoldás:</strong> (y - 5)(y + 5) = y² - 5² = y² - 25.</p>
+    </div>
+</div>
+<!-- ================================== -->
+<!-- === AZONOSSÁGOK ALKALMAZÁSA === -->
+<!-- ================================== -->
+
+<!-- Azonosságok alkalmazása (gyöktelenítés) Kártya -->
+<div class="formula-card" 
+     data-formula-name="Nevezetes azonosságok alkalmazása (törtek gyöktelenítése)" 
+     data-formula-expression="c / (a-√b)" 
+     data-formula-example="Gyöktelenítsd: 2 / (√5 - 1). Megoldás: Bővítünk (√5+1)-gyel. Számláló: 2*(√5+1). Nevező: (√5-1)(√5+1) = (√5)²-1² = 5-1=4. Eredmény: 2(√5+1)/4 = (√5+1)/2.">
+    <h4 class="formula-title">2.2.2 Azonosságok Alkalmazása: Gyöktelenítés</h4>
+    <p class="formula-explanation">Az `(a+b)(a-b) = a²-b²` azonosságot használhatjuk olyan törtek nevezőjének gyöktelenítésére is, ahol a nevezőben egy összeg vagy különbség szerepel. A trükk az, hogy a törtet a nevező **konjugáltjával** (ugyanaz a két tag, csak ellentétes előjellel) bővítjük. Ezzel a nevezőben egy `a²-b²` alakú kifejezést kapunk, ami eltünteti a gyökjelet.</p>
+    <div class="formula-expression" style="font-size: 1.2rem;">
+        <span class="formula-var">c<span class="tooltip-text">Számláló</span></span> / (<span class="formula-var">a<span class="tooltip-text">Első tag</span></span> - √<span class="formula-var">b<span class="tooltip-text">Második tag</span></span>) * 
+        <span style="color: var(--piros);">(<span class="formula-var">a<span class="tooltip-text">Első tag</span></span> + √<span class="formula-var">b<span class="tooltip-text">Második tag</span></span>) / 
+        (<span class="formula-var">a<span class="tooltip-text">Első tag</span></span> + √<span class="formula-var">b<span class="tooltip-text">Második tag</span></span>)</span>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Gyöktelenítsd a következő tört nevezőjét: 2 / (√5 - 1).<br>
+           <strong>Gondolkodás:</strong> A nevező konjugáltja a (√5 + 1). Ezzel a törttel kell bővítenem.<br>
+           <strong>1. Lépés (Számláló):</strong> 2 * (√5 + 1) = 2(√5 + 1).<br>
+           <strong>2. Lépés (Nevező):</strong> (√5 - 1) * (√5 + 1) = (√5)² - 1² = 5 - 1 = 4.<br>
+           <strong>3. Lépés (Egyszerűsítés):</strong> A törtünk most: [2(√5 + 1)] / 4. A 2-vel lehet egyszerűsíteni.
+           <strong>Végeredmény:</strong> (√5 + 1) / 2.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === TÉNYEZŐKRE BONTÁS === -->
+<!-- ================================== -->
+
+<!-- Tényezőkre bontás kiemeléssel Kártya -->
+<div class="formula-card" 
+     data-formula-name="Tényezőkre bontás közös tényező kiemelésével" 
+     data-formula-expression="ax + ay = a(x+y)" 
+     data-formula-example="Bontsd tényezőkre: 6x + 9. Megoldás: A legnagyobb közös osztó a 3. Kiemeljük: 3(2x + 3).">
+    <h4 class="formula-title">2.3.1 Tényezőkre Bontás Kiemeléssel</h4>
+    <p class="formula-explanation">A tényezőkre bontás a zárójel-felbontás fordított művelete. A célunk, hogy egy összeget vagy különbséget szorzattá alakítsunk. Ennek legegyszerűbb módja a **közös tényező kiemelése**.</p>
+    <ol>
+        <li><strong>Keresd meg</strong> a kifejezés minden tagjának legnagyobb közös osztóját (LNKO). Ez lehet szám, betű, vagy mindkettő.</li>
+        <li><strong>Emeld ki</strong> ezt a közös tényezőt a zárójel elé.</li>
+        <li><strong>A zárójelen belülre</strong> írd azt, amivel a kiemelt tényezőt meg kellene szorozni, hogy visszakapjuk az eredeti tagokat. Ezt úgy kapod meg, ha minden eredeti tagot elosztasz a kiemelt közös tényezővel.</li>
+    </ol>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Bontsd tényezőkre a következő kifejezést: 4x²y - 6xy².<br>
+           <strong>1. Lépés (LNKO keresése):</strong><br>
+           - A számok (4, 6) LNKO-ja: 2.<br>
+           - Az 'x'-ek (x², x) LNKO-ja: x.<br>
+           - Az 'y'-ok (y, y²) LNKO-ja: y.<br>
+           - A közös tényező tehát: 2xy.<br>
+           <strong>2. Lépés (Kiemelés és osztás):</strong><br>
+           2xy * ( ... )<br>
+           - Első tag: 4x²y / (2xy) = 2x.<br>
+           - Második tag: -6xy² / (2xy) = -3y.<br>
+           <strong>Végeredmény:</strong> 2xy(2x - 3y).</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === TÉNYEZŐKRE BONTÁS AZONOSSÁGGAL === -->
+<!-- ================================== -->
+
+<!-- Tényezőkre bontás azonossággal Kártya -->
+<div class="formula-card" 
+     data-formula-name="Tényezőkre bontás nevezetes azonosságokkal" 
+     data-formula-expression="a² - b² = (a-b)(a+b)" 
+     data-formula-example="Bontsd tényezőkre: x² - 9. Megoldás: Ez egy a²-b² alakú kifejezés, ahol a=x és b=3. A felbontása: (x-3)(x+3).">
+    <h4 class="formula-title">2.3.2 Tényezőkre Bontás Nevezetes Azonosságokkal</h4>
+    <p class="formula-explanation">A nevezetes azonosságokat "visszafelé" is használhatjuk. Ha egy kifejezés formája megegyezik egy azonosság eredményével, akkor átalakíthatjuk szorzattá. Ez a tényezőkre bontás egyik leghatékonyabb módja.</p>
+    <ul>
+        <li><strong>Négyzetek különbsége:</strong> a² - b² = (a - b)(a + b)</li>
+        <li><strong>Teljes négyzet (összeg):</strong> a² + 2ab + b² = (a + b)²</li>
+        <li><strong>Teljes négyzet (különbség):</strong> a² - 2ab + b² = (a - b)²</li>
+    </ul>
+    <p>A legfontosabb, hogy felismerd a mintázatot a kifejezésben!</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Bontsd tényezőkre: x² + 6x + 9.<br>
+           <strong>Gondolkodás:</strong> Ez egy háromtagú kifejezés. Lehet, hogy egy teljes négyzet?
+           <ul>
+               <li>Az első tag (x²) az 'x' négyzete.</li>
+               <li>Az utolsó tag (9) a '3' négyzete.</li>
+               <li>Ellenőrizzük a középső tagot: 2 * x * 3 = 6x. Igen, megegyezik!</li>
+           </ul>
+           Ez tehát egy (a+b)² alakú kifejezés, ahol a=x és b=3.<br>
+           <strong>Végeredmény:</strong> (x + 3)².</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === TÉNYEZŐKRE BONTÁS CSOPORTOSÍTÁSSAL === -->
+<!-- ================================== -->
+
+<!-- Tényezőkre bontás csoportosítással Kártya -->
+<div class="formula-card" 
+     data-formula-name="Tényezőkre bontás csoportosítással" 
+     data-formula-expression="ax + ay + bx + by = (a+b)(x+y)" 
+     data-formula-example="Bontsd tényezőkre: 3x+3y+ax+ay. Megoldás: Az első két tagból kiemelünk 3-at: 3(x+y). Az utolsó két tagból kiemelünk 'a'-t: a(x+y). A közös zárójeles tényező (x+y), amit kiemelhetünk: (x+y)(3+a).">
+    <h4 class="formula-title">2.3.3 További Módszerek: Tényezőkre Bontás Csoportosítással</h4>
+    <p class="formula-explanation">Ezt a módszert általában négytagú kifejezéseknél használjuk, amikor nincs minden tagban közös tényező. A trükk az, hogy a tagokat páronként csoportosítjuk, és a párokból külön-külön emelünk ki valamit úgy, hogy a zárójelekben ugyanaz a kifejezés maradjon. Ez a közös zárójeles kifejezés lesz az új közös tényező, amit ismét kiemelhetünk.</p>
+    <ol>
+        <li><strong>Csoportosíts</strong> a tagokat kettesével.</li>
+        <li><strong>Emelj ki</strong> mindkét csoportból, amit csak lehet.</li>
+        <li>A cél, hogy a zárójelekben **ugyanaz a kifejezés** jöjjön létre.</li>
+        <li><strong>Emeld ki</strong> a közös zárójeles tényezőt.</li>
+    </ol>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Bontsd tényezőkre: 3x + 3y + ax + ay.<br>
+           <strong>1. Lépés (Csoportosítás):</strong> (3x + 3y) + (ax + ay).<br>
+           <strong>2. Lépés (Kiemelés páronként):</strong> Az első csoportból kiemeljük a 3-at: 3(x+y). A második csoportból kiemeljük az 'a'-t: a(x+y).<br>
+           <strong>3. Lépés (Közös zárójel felismerése):</strong> A kifejezésünk most: 3(x+y) + a(x+y). Látjuk, hogy az (x+y) a közös tényező.<br>
+           <strong>4. Lépés (Végső kiemelés):</strong> Kiemeljük az (x+y) tagot: (x+y)(3+a).<br>
+           <strong>Végeredmény:</strong> (x+y)(3+a).</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === GYAKORLATI ALKALMAZÁSOK === -->
+<!-- ================================== -->
+
+<!-- Gyakorlati alkalmazások Kártya -->
+<div class="formula-card" 
+     data-formula-name="A tényezőkre bontás gyakorlati alkalmazásai" 
+     data-formula-expression="Algebrai törtek egyszerűsítése" 
+     data-formula-example="Egyszerűsítsd: (x²-9)/(x+3). Megoldás: A számlálót tényezőkre bontjuk: (x-3)(x+3). A törtünk: (x-3)(x+3)/(x+3). Egyszerűsítünk (x+3)-mal. Az eredmény: x-3.">
+    <h4 class="formula-title">2.3.4 Gyakorlati Alkalmazások</h4>
+    <p class="formula-explanation">A tényezőkre bontás két fő területen rendkívül hasznos a gyakorlatban:</p>
+    <ol>
+        <li><strong>Algebrai Törtek Egyszerűsítése:</strong> Ha a számlálót és a nevezőt is szorzattá alakítjuk (tényezőkre bontjuk), gyakran találunk közös tényezőket, amelyekkel egyszerűsíthetjük a törtet.</li>
+        <li><strong>Másodfokú Egyenletek Megoldása (később):</strong> A tényezőkre bontás lesz az egyik legfontosabb módszer a másodfokú egyenletek megoldásához, mivel "egy szorzat akkor és csak akkor nulla, ha legalább az egyik tényezője nulla".</li>
+    </ol>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egyszerűsítsd a következő algebrai törtet: (x² - 9) / (x + 3).<br>
+           <strong>Gondolkodás:</strong> A nevező (x+3) már nem bontható tovább. A számláló (x²-9) egy nevezetes azonosság (a²-b²).<br>
+           <strong>1. Lépés (Tényezőkre bontás):</strong> x² - 9 = (x - 3)(x + 3).<br>
+           <strong>2. Lépés (Behelyettesítés és egyszerűsítés):</strong> A törtünk most: [(x - 3)(x + 3)] / (x + 3).<br>
+           Látjuk, hogy a számlálóban és a nevezőben is szerepel az (x+3) tényező, amivel egyszerűsíthetünk (feltéve, hogy x ≠ -3).<br>
+           <strong>Végeredmény:</strong> x - 3.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 4. FEJEZET: ALGEBRAI TÖRTEK === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Algebrai Törtek</h3>
+
+<!-- Algebrai törtek és értelmezési tartomány Kártya -->
+<div class="formula-card" 
+     data-formula-name="Algebrai törtek és értelmezési tartományuk" 
+     data-formula-expression="A(x) / B(x), ahol B(x) ≠ 0" 
+     data-formula-example="Mi az értelmezési tartománya a 3/(x-2) törtnek? Megoldás: A nevező nem lehet nulla, tehát x-2≠0. Ebből x≠2. Az értelmezési tartomány minden valós szám, kivéve a 2-t.">
+    <h4 class="formula-title">4.4.1 Algebrai Törtek és Értelmezési Tartomány</h4>
+    <p class="formula-explanation">Az algebrai tört egy olyan tört, amelynek számlálójában és/vagy nevezőjében algebrai kifejezés (változó) szerepel. A legfontosabb alapszabály a törtekkel kapcsolatban, hogy **a nevező soha nem lehet nulla**, mivel nullával nem lehet osztani.</p>
+    <p>Az **értelmezési tartomány** azoknak a számoknak a halmaza, amelyeket a változó helyére behelyettesítve a kifejezés értelmes lesz. Algebrai törtek esetén ez azt jelenti, hogy meg kell találnunk azokat az értékeket, amelyekre a nevező NULLA lenne, és ezeket ki kell zárnunk.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Határozd meg a 3 / (x - 2) algebrai tört értelmezési tartományát!<br>
+           <strong>Gondolkodás:</strong> A tört akkor nem értelmes, ha a nevezője nulla.<br>
+           <strong>1. Lépés (A "tilos" egyenlet felírása):</strong> x - 2 = 0<br>
+           <strong>2. Lépés (Megoldás):</strong> x = 2.<br>
+           <strong>Végeredmény:</strong> A tört értelmezési tartománya minden valós szám, kivéve a 2-t. Jelöléssel: ℝ \ {2}.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === ALGEBRAI TÖRTEK EGYSZERŰSÍTÉSE === -->
+<!-- ================================== -->
+
+<!-- Algebrai törtek egyszerűsítése Kártya -->
+<div class="formula-card" 
+     data-formula-name="Algebrai törtek bővítése és egyszerűsítése" 
+     data-formula-expression="(a*c)/(b*c) = a/b" 
+     data-formula-example="Egyszerűsítsd: (x²-9)/(x+3). Megoldás: A számlálót tényezőkre bontjuk: (x-3)(x+3). A törtünk: (x-3)(x+3)/(x+3). Egyszerűsítünk (x+3)-mal. Az eredmény: x-3. (x≠-3)">
+    <h4 class="formula-title">4.4.2 Algebrai Törtek Egyszerűsítése és Bővítése</h4>
+    <p class="formula-explanation">Az algebrai törtekkel ugyanazokat a műveleteket végezhetjük el, mint a számokkal írt törtekkel. A legfontosabb művelet az **egyszerűsítés**, aminek a lépései a következők:</p>
+    <ol>
+        <li><strong>Tényezőkre bontás:</strong> Bontsd tényezőkre (alakítsd szorzattá) a tört számlálóját és nevezőjét is, ahogy csak lehet (kiemeléssel, azonosságokkal).</li>
+        <li><strong>Közös tényezők keresése:</strong> Keresd meg azokat a tényezőket, amelyek a számlálóban és a nevezőben is szerepelnek.</li>
+        <li><strong>Egyszerűsítés:</strong> A közös tényezőkkel "leoszthatsz".</li>
+        <li><strong>Értelmezési tartomány:</strong> Az egyszerűsítés előtt mindig meg kell határozni az eredeti tört értelmezési tartományát!</li>
+    </ol>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egyszerűsítsd a következő törtet: (4x - 8) / (x² - 4).<br>
+           <strong>1. Lépés (Értelmezési tartomány):</strong> A nevező nem lehet nulla: x² - 4 ≠ 0 => x² ≠ 4. Tehát x ≠ 2 és x ≠ -2.<br>
+           <strong>2. Lépés (Tényezőkre bontás):</strong><br>
+           - Számláló: 4x - 8 = 4(x - 2) (kiemelés)<br>
+           - Nevező: x² - 4 = (x - 2)(x + 2) (azonosság)<br>
+           <strong>3. Lépés (Behelyettesítés és egyszerűsítés):</strong><br>
+           [4(x - 2)] / [(x - 2)(x + 2)]<br>
+           A közös tényező az (x - 2), amivel egyszerűsítünk.<br>
+           <strong>Végeredmény:</strong> 4 / (x + 2), ahol x≠2 és x≠-2.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === MŰVELETEK ALGEBRAI TÖRTEKKEL === -->
+<!-- ================================== -->
+
+<!-- Műveletek algebrai törtekkel Kártya -->
+<div class="formula-card" 
+     data-formula-name="Műveletek algebrai törtekkel" 
+     data-formula-expression="Szorzás: (A/B) * (C/D) = (A*C)/(B*D)" 
+     data-formula-example="Végezd el a szorzást: [x/(x+1)] * [(x²-1)/x²]. Megoldás: [x*(x-1)(x+1)] / [(x+1)*x*x]. Egyszerűsítés után: (x-1)/x. (x≠0, x≠-1)">
+    <h4 class="formula-title">4.4.3 Algebrai Törtekkel Végzett Műveletek</h4>
+    <p class="formula-explanation">Az algebrai törtekkel végzett műveletek szabályai megegyeznek a számokkal felírt törtekével. A legfontosabb, hogy minden lépés előtt és után, ahol csak lehet, **egyszerűsítsünk**!</p>
+    <ul>
+        <li><strong>Szorzás:</strong> Számlálót a számlálóval, nevezőt a nevezővel szorozzuk, majd egyszerűsítünk. (Tipp: érdemes már szorzás előtt tényezőkre bontani mindent!)</li>
+        <li><strong>Osztás:</strong> Az osztó reciprokával szorzunk.</li>
+        <li><strong>Összeadás és Kivonás:</strong> A legbonyolultabb művelet. A törteket közös nevezőre kell hozni, amihez gyakran tényezőkre kell bontani a nevezőket, hogy megtaláljuk a legkisebb közös többszöröst.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat (Szorzás):</strong> Végezd el a szorzást: [ x / (x+1) ] * [ (x²-1) / x² ].<br>
+           <strong>1. Lépés (Értelmezési tartomány):</strong> x+1≠0 => x≠-1; és x²≠0 => x≠0.<br>
+           <strong>2. Lépés (Tényezőkre bontás):</strong> x²-1 = (x-1)(x+1).<br>
+           <strong>3. Lépés (Szorzás és egyszerűsítés):</strong><br>
+           [ x * (x-1)(x+1) ] / [ (x+1) * x * x ]<br>
+           Egyszerűsítünk (x)-szel és (x+1)-gyel.<br>
+           <strong>Végeredmény:</strong> (x-1) / x, ahol x≠0 és x≠-1.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 5. FEJEZET: ALGEBRAI EGYENLETEK === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Algebrai Egyenletek</h3>
+
+<!-- Másodfokú egyenlet Kártya -->
+<div class="formula-card" 
+     data-formula-name="A másodfokú egyenlet és a megoldóképlet" 
+     data-formula-expression="ax² + bx + c = 0" 
+     data-formula-example="Oldd meg: x²-5x+6=0. a=1, b=-5, c=6. Behelyettesítve a megoldóképletbe a gyökjel alatt 25-24=1 lesz. x₁=(5+1)/2=3, x₂=(5-1)/2=2.">
+    <!-- JAVÍTVA: A cím a kérésnek megfelelő számozással -->
+    <h4 class="formula-title">5.1 Az ax² + bx + c = 0 Alakú Egyenlet</h4>
+    <p class="formula-explanation">A másodfokú egyenlet egy olyan egyenlet, amelyben az ismeretlen (x) legmagasabb hatványa a négyzet (x²). Az általános alakja **ax² + bx + c = 0**, ahol 'a' nem lehet nulla. A megoldásához a **megoldóképletet** használjuk.</p>
+    <p>A képletben a gyökjel alatti kifejezést, a **diszkriminánst (D = b² - 4ac)** vizsgálva meg tudjuk mondani, hány valós megoldása van az egyenletnek:</p>
+    <ul>
+        <li>Ha **D > 0**: Két különböző valós megoldás van.</li>
+        <li>Ha **D = 0**: Egy valós megoldás van (két egybeeső gyök).</li>
+        <li>Ha **D < 0**: Nincs valós megoldás.</li>
+    </ul>
+    <div class="formula-expression" style="font-size: 1.5rem;">
+        x₁,₂ = [-b ± √(b² - 4ac)] / 2a
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Oldd meg az x² - 5x + 6 = 0 egyenletet!<br>
+           <strong>1. Lépés (Együtthatók azonosítása):</strong> a=1, b=-5, c=6.<br>
+           <strong>2. Lépés (Behelyettesítés a képletbe):</strong><br>
+           x₁,₂ = [-(-5) ± √((-5)² - 4*1*6)] / (2*1)<br>
+           x₁,₂ = [5 ± √(25 - 24)] / 2<br>
+           x₁,₂ = [5 ± √1] / 2<br>
+           x₁,₂ = [5 ± 1] / 2<br>
+           <strong>3. Lépés (Megoldások szétválasztása):</strong><br>
+           x₁ = (5 + 1) / 2 = 6 / 2 = 3.<br>
+           x₂ = (5 - 1) / 2 = 4 / 2 = 2.<br>
+           <strong>Végeredmény:</strong> A megoldások a 2 és a 3.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === SZÖVEGES FELADATOK (MÁSODFOKÚ) === -->
+<!-- ================================== -->
+
+<!-- Szöveges feladatok Kártya -->
+<div class="formula-card" 
+     data-formula-name="Másodfokú egyenlettel megoldható szöveges feladatok" 
+     data-formula-expression="Szöveg -> Egyenlet -> Megoldás -> Ellenőrzés" 
+     data-formula-example="Egy téglalap területe 24 cm², kerülete 20 cm. Mekkorák az oldalai? Megoldás: K=2(a+b)=20 => a+b=10 => b=10-a. T=a*b=24 => a(10-a)=24 => 10a-a²=24 => a²-10a+24=0. Megoldóképlettel a=6 és a=4. Az oldalak 4 cm és 6 cm.">
+    <h4 class="formula-title">5.2 Másodfokú Egyenlettel Megoldható Feladatok</h4>
+    <p class="formula-explanation">Sok gyakorlati, például geometriai vagy fizikai probléma vezet másodfokú egyenletre. A megoldás menete a következő:</p>
+    <ol>
+        <li><strong>Szövegértelmezés és adatok felírása:</strong> Olvasd el figyelmesen a feladatot, és jelöld az ismeretlent (általában 'x'-szel).</li>
+        <li><strong>Egyenlet felírása:</strong> A szöveg alapján írj fel egy matematikai összefüggést (egyenletet).</li>
+        <li><strong>Egyenlet megoldása:</strong> Rendezd az egyenletet ax²+bx+c=0 alakra, majd oldd meg a megoldóképlettel.</li>
+        <li><strong>Ellenőrzés és válaszadás:</strong> Ellenőrizd, hogy a kapott matematikai megoldás(ok) a valóságban is értelmesek-e (pl. egy oldal hossza nem lehet negatív). Végül adj szöveges választ a kérdésre.</li>
+    </ol>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy téglalap területe 24 cm², kerülete 20 cm. Mekkorák az oldalai?<br>
+           <strong>1. Lépés (Adatok):</strong> Legyen az egyik oldal 'a', a másik 'b'. K=2(a+b)=20, T=a*b=24.<br>
+           <strong>2. Lépés (Egyenlet felírása):</strong> A kerületből: a+b=10, tehát b=10-a. Ezt behelyettesítjük a területképletbe: a*(10-a)=24.<br>
+           <strong>3. Lépés (Megoldás):</strong> 10a - a² = 24. Rendezzük: 0 = a² - 10a + 24. Ezt megoldva a megoldóképlettel, az 'a' lehetséges értékei: a₁=6 és a₂=4.<br>
+           <strong>4. Lépés (Ellenőrzés, válasz):</strong> Ha a=6, akkor b=10-6=4. Ha a=4, akkor b=10-4=6. Mindkét megoldás értelmes. A téglalap oldalai 4 cm és 6 cm hosszúak.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 2. FEJEZET ISMERETFELMÉRŐ === -->
+<!-- ================================== -->
+
+<div class="formula-card" style="border-color: var(--zold);">
+    <!-- JAVÍTVA: A cím a te számozásod szerint -->
+    <h4 class="formula-title">2.6 Ismeretfelmérő: Algebrai Kifejezések és Egyenletek</h4>
+    <p class="formula-explanation">Készen állsz, hogy leteszteld a tudásodat a nevezetes azonosságokról, a tényezőkre bontásról, az algebrai törtekről és a másodfokú egyenletek megoldásáról? Használd a Tudástár intelligens eszközeit a gyakorláshoz és a felkészüléshez!</p>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+        
+        <div style="text-align: center;">
+            <p><strong>Gyors Ismétlés</strong></p>
+            <p style="font-size: 0.9em; margin-bottom: 0.5rem;">Generálj véletlenszerű, rövid feladatokat a 8. osztályos tananyagból!</p>
+            <a href="napi_kihivas.html" class="btn btn-primary ai-btn">Irány a Napi Kihívás! →</a>
+        </div>
+        
+        <div style="text-align: center;">
+            <p><strong>Próba-Témazáró</strong></p>
+            <p style="font-size: 0.9em; margin-bottom: 0.5rem;">Generálj egy teljes témazárót ebből a fejezetből az AI Vizsga Szimulátorral!</p>
+            <a href="vizsga_szimulator.html" class="btn btn-primary ai-btn">Indítom a Szimulátort! →</a>
+        </div>
+        
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 3. FEJEZET: FÜGGVÉNYEK === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Függvények</h3>
+
+<!-- A függvény fogalma Kártya -->
+<div class="formula-card" 
+     data-formula-name="A függvény fogalma és megadási módjai" 
+     data-formula-expression="f: A → B,  y = f(x)" 
+     data-formula-example="Legyen a szabály (függvény): 'Minden számhoz rendeld hozzá a 3-mal nagyobb számot!'. Ez képlettel: f(x)=x+3. Ha a bemenet (x) 5, a kimenet (y) f(5)=5+3=8.">
+    <h4 class="formula-title">3.1.1 A Függvény Fogalma és Megadási Módjai</h4>
+    <p class="formula-explanation">A **függvény** egyértelmű hozzárendelés két halmaz (az **értelmezési tartomány** és az **értékkészlet**) elemei között. A lényege, hogy az értelmezési tartomány minden eleméhez pontosan egy elemet rendel az értékkészletből. A függvényt felfoghatjuk egy "gépként": bedobunk egy számot (x), a gép elvégzi a szabály szerinti műveletet, és kiad egy másik számot (y).</p>
+    <p><strong>A függvény megadási módjai:</strong></p>
+    <ul>
+        <li><strong>Képlettel vagy szabállyal:</strong> Pl. f(x) = 2x + 1</li>
+        <li><strong>Értéktáblázattal:</strong> Megadjuk az összetartozó x és y értékpárokat.</li>
+        <li><strong>Grafikonnal:</strong> A koordináta-rendszerben ábrázoljuk az (x; y) összetartozó értékpárokat.</li>
+        <li><strong>Nyíldiagrammal:</strong> Nyilakkal kötjük össze a két halmaz összetartozó elemeit.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Adott a következő függvény: f(x) = x + 5. Az értelmezési tartomány: {1, 2, 3}. Add meg a függvény értékkészletét!<br>
+           <strong>Gondolkodás:</strong> Be kell helyettesítenem az értelmezési tartomány minden elemét az 'x' helyére, és ki kell számolnom a hozzájuk tartozó 'y' (azaz f(x)) értékeket.<br>
+           <strong>Megoldás:</strong><br>
+           f(1) = 1 + 5 = 6<br>
+           f(2) = 2 + 5 = 7<br>
+           f(3) = 3 + 5 = 8<br>
+           Az értékkészlet tehát a {6, 7, 8} halmaz.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === FÜGGVÉNY GRAFIKONJA === -->
+<!-- ================================== -->
+
+<!-- A függvény grafikonja Kártya -->
+<div class="formula-card" 
+     data-formula-name="A függvény grafikonja" 
+     data-formula-expression="Gf = {(x; f(x)) | x ∈ ÉT}" 
+     data-formula-example="Ábrázoljuk az f(x)=x+1 függvényt, ha az ÉT={0,1,2}. Az értékpárok: (0;1), (1;2), (2;3). Ezeket a pontokat ábrázoljuk a koordináta-rendszerben.">
+    <h4 class="formula-title">3.1.2 A Függvény Grafikonja</h4>
+    <p class="formula-explanation">A **függvény grafikonja** az összetartozó (x; y) értékpárok halmaza, ábrázolva a derékszögű koordináta-rendszerben. Minden értékpár egy pontot jelöl ki a síkon. A grafikon vizuálisan mutatja meg a függvény "viselkedését".</p>
+    <p><strong>A grafikon rajzolásának lépései:</strong></p>
+    <ol>
+        <li><strong>Értéktáblázat készítése:</strong> Kiválasztunk néhány értéket az értelmezési tartományból (x), és kiszámoljuk a hozzájuk tartozó függvényértékeket (y = f(x)).</li>
+        <li><strong>Pontok ábrázolása:</strong> Az (x; y) számpárokat pontokként ábrázoljuk a koordináta-rendszerben.</li>
+        <li><strong>Pontok összekötése:</strong> Ha az értelmezési tartomány a valós számok halmaza (vagy egy intervallum), a pontokat összekötjük. Lineáris függvény esetén ez egy egyenes lesz.</li>
+    </ol>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Ábrázold az f(x) = x + 1 függvényt, ha az értelmezési tartománya (ÉT) a {0, 1, 2} halmaz.<br>
+           <strong>1. Lépés (Értéktáblázat):</strong><br>
+           - Ha x=0, akkor y = 0+1=1. A pont: (0; 1).<br>
+           - Ha x=1, akkor y = 1+1=2. A pont: (1; 2).<br>
+           - Ha x=2, akkor y = 2+1=3. A pont: (2; 3).<br>
+           <strong>2. Lépés (Ábrázolás):</strong> A (0;1), (1;2) és (2;3) pontokat bejelöljük a koordináta-rendszerben.<br>
+           <strong>Fontos:</strong> Mivel az ÉT csak 3 pontból áll, a pontokat NEM kötjük össze!</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === LINEÁRIS FÜGGVÉNY === -->
+<!-- ================================== -->
+
+<!-- Lineáris függvény Kártya -->
+<div class="formula-card" 
+     data-formula-name="A lineáris függvény" 
+     data-formula-expression="f(x) = ax + b" 
+     data-formula-example="Ábrázoljuk az f(x)=2x+1 függvényt. A 'b' értéke 1, tehát a grafikon az y-tengelyt az 1-esnél metszi. Az 'a' értéke 2 (=2/1), tehát innen 1-et lépünk jobbra és 2-t fel. A két pontot összekötve megkapjuk az egyenest.">
+    <h4 class="formula-title">3.2.1 Az f(x) = ax + b Alakú Függvény (Lineáris Függvény)</h4>
+    <p class="formula-explanation">A lineáris függvény egy olyan függvény, amelynek a grafikonja egy **egyenes**. Az általános képlete **f(x) = ax + b**, ahol 'a' és 'b' valós számok.</p>
+    <ul>
+        <li><strong>'b' - y-tengelymetszet:</strong> A 'b' tag megmutatja, hogy a függvény grafikonja hol metszi a függőleges (y) tengelyt. Ez a (0; b) pont.</li>
+        <li><strong>'a' - meredekség:</strong> Az 'a' tag (az x együtthatója) a függvény **meredeksége**. Azt mutatja meg, hogy ha 1 egységet lépünk jobbra az x-tengelyen, hány egységet kell lépnünk felfelé (ha 'a' pozitív) vagy lefelé (ha 'a' negatív) az y-tengellyel párhuzamosan. Érdemes törtként felírni: a = (függőleges változás)/(vízszintes változás).</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Ábrázold az f(x) = 2x + 1 függvényt a valós számok halmazán!<br>
+           <strong>1. Lépés (y-tengelymetszet):</strong> A 'b' értéke +1. Tehát az egyenes átmegy az y-tengely (0; 1) pontján. Ezt bejelöljük.<br>
+           <strong>2. Lépés (Meredekség):</strong> Az 'a' értéke 2, amit felírunk törtként: 2/1. Ez azt jelenti: "1-et jobbra, 2-t fel".<br>
+           <strong>3. Lépés (Második pont):</strong> Az (0;1) pontból indulva lépünk 1-et jobbra (az x=1-hez) és 2-t felfelé (az y=3-hoz). Megkaptuk a második pontot: (1; 3).<br>
+           <strong>4. Lépés (Egyenes rajzolása):</strong> A két pontot ( (0;1) és (1;3) ) egy vonalzóval összekötjük, és mindkét irányban meghosszabbítjuk.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === LINEÁRIS FÜGGVÉNY ELEMZÉSE === -->
+<!-- ================================== -->
+
+<!-- Lineáris függvény grafikonjának elemzése Kártya -->
+<div class="formula-card" 
+     data-formula-name="A lineáris függvény grafikonjának tanulmányozása" 
+     data-formula-expression="f(x) = ax + b" 
+     data-formula-example="Az f(x)=-2x+4 függvény monoton csökkenő, mert a meredeksége (-2) negatív. A zérushelye: -2x+4=0 => 4=2x => x=2.">
+    <h4 class="formula-title">3.2.2 A Lineáris Függvény Grafikonjának Tanulmányozása</h4>
+    <p class="formula-explanation">Miután ábrázoltuk a lineáris függvényt, a grafikonjáról fontos tulajdonságokat olvashatunk le:</p>
+    <ul>
+        <li><strong>Monotonitás:</strong> A függvény "viselkedését" írja le.
+            <ul>
+                <li>Ha **a > 0** (pozitív meredekség), a függvény **monoton növekvő** (balról jobbra haladva "felfelé megy").</li>
+                <li>Ha **a < 0** (negatív meredekség), a függvény **monoton csökkenő** (balról jobbra "lefelé megy").</li>
+                <li>Ha **a = 0**, a függvény **konstans** (vízszintes egyenes).</li>
+            </ul>
+        </li>
+        <li><strong>Zérushely:</strong> Az a pont, ahol a grafikon **metszi az x-tengelyt**. Ebben a pontban a függvényérték (y) nulla. Kiszámítása: Az `ax + b = 0` egyenlet megoldásával.</li>
+    </ul>
+    <p>Ha az értelmezési tartomány (D) egy **intervallum**, akkor a grafikon nem egy végtelen egyenes, hanem egy **szakasz** vagy **félegyenes**.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Jellemezd az f(x) = -2x + 4 függvényt! (Monotonitás, zérushely)<br>
+           <strong>1. Lépés (Monotonitás):</strong> A meredekség (a) értéke -2. Mivel ez negatív, a függvény **szigorúan monoton csökkenő**.<br>
+           <strong>2. Lépés (Zérushely):</strong> Meg kell oldanunk az -2x + 4 = 0 egyenletet.<br>
+           4 = 2x<br>
+           x = 2.<br>
+           A függvény zérushelye az x=2 pontban van, a grafikon itt metszi az x-tengelyt.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === STATISZTIKA ELEMEI === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Statisztika Elemei</h3>
+
+<!-- Statisztika alapfogalmak Kártya -->
+<div class="formula-card" 
+     data-formula-name="A statisztika alapfogalmai" 
+     data-formula-expression="Adathalmaz, gyakoriság" 
+     data-formula-example="Egy osztályban a jegyek: 5,4,5,3,4,5. Az '5'-ös jegy abszolút gyakorisága 3, mert háromszor fordul elő.">
+    <h4 class="formula-title">3.3.1 Statisztikai Alapfogalmak: Adatok Rendezése</h4>
+    <p class="formula-explanation">A statisztika adatok gyűjtésével, rendszerezésével, elemzésével és értelmezésével foglalkozik. A legfontosabb alapfogalmak:</p>
+    <ul>
+        <li><strong>Adathalmaz (Sokaság):</strong> A vizsgált adatok összessége. (Pl. egy osztály matekjegyei).</li>
+        <li><strong>Gyakorisági táblázat:</strong> Egy táblázat, ami megmutatja, hogy az egyes adatok hányszor fordulnak elő.</li>
+        <li><strong>Abszolút gyakoriság:</strong> Egy adott adat előfordulásainak száma az adathalmazban.</li>
+        <li><strong>Relatív gyakoriság:</strong> Az abszolút gyakoriság és az összes adat számának aránya (gyakran százalékban kifejezve).</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy dobókockával 10-szer dobtunk, az eredmények: 1, 6, 4, 3, 4, 2, 6, 4, 5, 6. Készíts gyakorisági táblázatot!<br>
+           <strong>Megoldás:</strong><br>
+           <table style="width:100%; text-align:center;">
+             <tr><th style="border-bottom:1px solid black;">Dobás</th><th style="border-bottom:1px solid black;">Abszolút Gyakoriság</th></tr>
+             <tr><td>1</td><td>1</td></tr>
+             <tr><td>2</td><td>1</td></tr>
+             <tr><td>3</td><td>1</td></tr>
+             <tr><td>4</td><td>3</td></tr>
+             <tr><td>5</td><td>1</td></tr>
+             <tr><td>6</td><td>3</td></tr>
+           </table>
+        </p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === STATISZTIKAI ÁBRÁZOLÁS === -->
+<!-- ================================== -->
+
+<!-- Statisztikai ábrázolás Kártya -->
+<div class="formula-card" 
+     data-formula-name="Statisztikai adatsorok mértani ábrázolása" 
+     data-formula-expression="Oszlopdiagram, kördiagram" 
+     data-formula-example="Ha egy osztály 50%-a fiú, 50%-a lány, akkor egy kördiagramon egy félkör jelöli a fiúkat és egy félkör a lányokat.">
+    <h4 class="formula-title">3.3.2 Statisztikai Adatsorok Mértani Ábrázolása</h4>
+    <p class="formula-explanation">A gyakorisági táblázatban rendszerezett adatokat diagramokkal tehetjük még szemléletesebbé. A két leggyakoribb diagramtípus:</p>
+    <ul>
+        <li><strong>Oszlopdiagram:</strong> Az egyes adatokhoz tartozó gyakoriságokat téglalapok (oszlopok) magasságával ábrázoljuk. Könnyen összehasonlíthatók vele az értékek.</li>
+        <li><strong>Kördiagram:</strong> Az egész adathalmazt egy teljes körnek tekintjük (100%). Az egyes adatok arányát a megfelelő középponti szögű körcikkekkel ábrázoljuk. A teljes kör 360°, így egy adatcsoporthoz tartozó középponti szög = (relatív gyakoriság %) * 3.6°.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy 20 fős osztályban 10-en jelest, 6-an jót, 4-en közepest kaptak. Ábrázold az adatokat kördiagramon!<br>
+           <strong>Gondolkodás:</strong> Először kiszámoljuk a relatív gyakoriságokat, majd a középponti szögeket.<br>
+           - Jeles: 10/20 = 50%. Szög: 0.50 * 360° = 180° (félkör).<br>
+           - Jó: 6/20 = 30%. Szög: 0.30 * 360° = 108°.<br>
+           - Közepes: 4/20 = 20%. Szög: 0.20 * 360° = 72°.<br>
+           <strong>Megoldás:</strong> Rajzolunk egy kört, és a fenti szögekkel kimetszük a körcikkeket.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === CENTRÁLIS TENDENCIA MUTATÓI === -->
+<!-- ================================== -->
+
+<!-- Centrális tendencia mutatói Kártya -->
+<div class="formula-card" 
+     data-formula-name="A centrális tendencia mutatói (átlag, medián, módusz)" 
+     data-formula-expression="Átlag = (adatok összege)/(adatok száma)" 
+     data-formula-example="Adatok: 2, 3, 3, 4, 8. Átlag: (2+3+3+4+8)/5=4. Medián: 3 (a középső elem). Módusz: 3 (a leggyakoribb).">
+    <h4 class="formula-title">3.3.3 A Centrális Tendencia Mutatói</h4>
+    <p class="formula-explanation">Ezek a statisztikai mutatók segítenek jellemezni egy adatsor "közepét" vagy "tipikus" értékét. A három legfontosabb:</p>
+    <ul>
+        <li><strong>Számtani közép (Átlag):</strong> Az adatok összegét elosztjuk az adatok számával. Érzékeny a kiugró értékekre.</li>
+        <li><strong>Medián:</strong> Az adatsor **növekvő sorrendbe rendezése után** a középső elem. Páros számú adat esetén a két középső elem átlaga. Nem érzékeny a kiugró értékekre.</li>
+        <li><strong>Módusz:</strong> Az adatsorban a leggyakrabban előforduló elem. Egy adatsornak lehet több módusza is, vagy egy sem.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Határozd meg az alábbi adatsor átlagát, mediánját és móduszát: {2, 3, 3, 4, 8}.<br>
+           <strong>Megoldás:</strong><br>
+           - <strong>Átlag:</strong> (2 + 3 + 3 + 4 + 8) / 5 = 20 / 5 = 4.<br>
+           - <strong>Medián:</strong> Az adatsor már rendezett. Az 5 elem közül a középső a 3. elem, ami a <strong>3</strong>.<br>
+           - <strong>Módusz:</strong> A <strong>3</strong> fordul elő a leggyakrabban (kétszer).</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 3. FEJEZET ISMERETFELMÉRŐ === -->
+<!-- ================================== -->
+
+<div class="formula-card" style="border-color: var(--zold);">
+    <h4 class="formula-title">3.4 Ismeretfelmérő: Függvények és Statisztika</h4>
+    <p class="formula-explanation">Készen állsz, hogy leteszteld a tudásodat a lineáris függvények ábrázolásáról, a grafikonok elemzéséről és a statisztikai mutatók kiszámításáról? Használd a Tudástár intelligens eszközeit a gyakorláshoz és a felkészüléshez!</p>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+        
+        <div style="text-align: center;">
+            <p><strong>Gyors Ismétlés</strong></p>
+            <p style="font-size: 0.9em; margin-bottom: 0.5rem;">Generálj véletlenszerű, rövid feladatokat a 8. osztályos tananyagból!</p>
+            <a href="napi_kihivas.html" class="btn btn-primary ai-btn">Irány a Napi Kihívás! →</a>
+        </div>
+        
+        <div style="text-align: center;">
+            <p><strong>Próba-Témazáró</strong></p>
+            <p style="font-size: 0.9em; margin-bottom: 0.5rem;">Generálj egy teljes témazárót ebből a fejezetből az AI Vizsga Szimulátorral!</p>
+            <a href="vizsga_szimulator.html" class="btn btn-primary ai-btn">Indítom a Szimulátort! →</a>
+        </div>
+        
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 4. FEJEZET: TÉRGEOMETRIA === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Pont, Egyenes, Sík a Térben</h3>
+
+<!-- Térgeometriai alapfogalmak Kártya -->
+<div class="formula-card" 
+     data-formula-name="Térgeometriai alapfogalmak" 
+     data-formula-expression="Pont, egyenes, sík" 
+     data-formula-example="Axióma: Két különböző ponton keresztül pontosan egy egyenes húzható.">
+    <h4 class="formula-title">4.1.1 Pont, Egyenes, Sík: Alapfogalmak</h4>
+    <p class="formula-explanation">A térgeometria alapvető, nem definiált elemei, amelyekre az egész rendszer épül:</p>
+    <ul>
+        <li><strong>Pont:</strong> Nincs kiterjedése. Jelölése: Nagybetű (pl. A, B).</li>
+        <li><strong>Egyenes:</strong> Mindkét irányban végtelen, egyenes vonal. Nincs vastagsága. Jelölése: Kisbetű (pl. e, f).</li>
+        <li><strong>Sík:</strong> Minden irányban végtelen, lapos felület. Nincs vastagsága. Jelölése: Görög kisbetű (pl. α, β) vagy a sík 3 nem egy egyenesbe eső pontja (pl. (ABC) sík).</li>
+    </ul>
+    <p><strong>Alapvető axiómák (bizonyítás nélküli igazságok):</strong></p>
+    <ul>
+        <li>Két pont egyértelműen meghatároz egy egyenest.</li>
+        <li>Három, nem egy egyenesbe eső pont egyértelműen meghatároz egy síkot.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === KÖLCSÖNÖS HELYZETEK A TÉRBEN === -->
+<!-- ================================== -->
+
+<!-- Kölcsönös helyzetek Kártya -->
+<div class="formula-card" 
+     data-formula-name="Pontok, egyenesek és síkok kölcsönös helyzete" 
+     data-formula-expression="Kitérő egyenesek" 
+     data-formula-example="Egy kocka egyik alaplapjának átlója és egy, az alaplapra nem illeszkedő oldalél kitérő egyenesek.">
+    <h4 class="formula-title">4.1.2 Sík Meghatározása, Kölcsönös Helyzetek</h4>
+    <p class="formula-explanation">A térbeli elemek különböző viszonyban lehetnek egymással. A síkgeometriához képest új, fontos esetek jelennek meg.</p>
+    <p><strong>Egy sík meghatározása:</strong> Egy síkot egyértelműen meghatároz...</p>
+    <ul>
+        <li>...három, nem egy egyenesbe eső pont.</li>
+        <li>...egy egyenes és egy rá nem illeszkedő pont.</li>
+        <li>...két, egymást metsző egyenes.</li>
+        <li>...két, egymással párhuzamos egyenes.</li>
+    </ul>
+    <p><strong>Két egyenes helyzete a térben:</strong></p>
+    <ul>
+        <li><strong>Metszők:</strong> Egy közös pontjuk van.</li>
+        <li><strong>Párhuzamosak:</strong> Egy síkban vannak, de nincs közös pontjuk.</li>
+        <li><strong>Kitérők:</strong> Nincs közös pontjuk, és **nincsenek egy síkban sem**. (Ez egy új, csak térben létező eset!)</li>
+        <li><strong>Azonosak:</strong> Minden pontjuk közös.</li>
+    </ul>
+     <p><strong>Egyenes és sík helyzete:</strong></p>
+    <ul>
+        <li>Az egyenes **illeszkedik a síkra** (minden pontja a síkon van).</li>
+        <li>Az egyenes **döfi a síkot** (egy közös pontjuk van).</li>
+        <li>Az egyenes **párhuzamos a síkkal** (nincs közös pontjuk).</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példa kitérő egyenesekre:</strong><br>
+           Képzelj el egy asztalt (sík) és felette egy lámpát. Az asztal egyik éle (egyenes) és a lámpa függőleges vezetéke (egyenes) kitérő helyzetűek: soha nem fogják metszeni egymást, de nem is párhuzamosak.</p>
+    </div>
+</div>
+
+<!-- Sík meghatározása Kártya -->
+<div class="formula-card" 
+     data-formula-name="A sík meghatározása" 
+     data-formula-expression="Egy síkot meghatároz 3 nem egy egyenesbe eső pont." 
+     data-formula-example="Egy kameraállvány három lába mindig stabilan áll a talajon (egy síkon), mert a három végpontjuk egyértelműen meghatároz egy síkot.">
+    <h4 class="formula-title">4.1.2.1 A Sík Meghatározása</h4>
+    <p class="formula-explanation">Egy síkot a térben egyértelműen meghatározhatunk a következő esetekben:</p>
+    <ul>
+        <li>három, nem egy egyenesbe eső pont.</li>
+        <li>egy egyenes és egy rá nem illeszkedő pont.</li>
+        <li>két, egymást metsző egyenes.</li>
+        <li>két, egymással párhuzamos egyenes.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példa:</strong> Miért billeg egy négy lábú szék, ha a lábai nem pontosan egyformák, de egy három lábú soha? Mert három pont (a három láb végpontja) mindig egy síkban van, de a negyedik pont már lehet, hogy kilóg ebből a síkból.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === KÉT EGYENES KÖLCSÖNÖS HELYZETE === -->
+<!-- ================================== -->
+
+<!-- Két egyenes kölcsönös helyzete Kártya -->
+<div class="formula-card" 
+     data-formula-name="Két egyenes kölcsönös helyzete a térben" 
+     data-formula-expression="Metsző, párhuzamos, kitérő" 
+     data-formula-example="Egy kocka egyik alaplapjának átlója és egy, az alaplapra nem illeszkedő oldalél kitérő egyenesek.">
+    <h4 class="formula-title">4.1.3 Két Egyenes Kölcsönös Helyzete a Térben</h4>
+    <p class="formula-explanation">Két különböző egyenes a térben háromféleképpen helyezkedhet el egymáshoz képest:</p>
+    <ul>
+        <li><strong>Metszők:</strong> Egy síkban vannak és pontosan egy közös pontjuk van.</li>
+        <li><strong>Párhuzamosak:</strong> Egy síkban vannak, de nincs közös pontjuk.</li>
+        <li style="font-weight: bold; color: var(--piros);"><strong>Kitérők:</strong> Nincs közös pontjuk, és **nincsenek egy síkban sem**. Ez a legfontosabb új eset a térgeometriában!</li>
+    </ul>
+    <p>Ha a két egyenes minden pontja közös, akkor **azonosak**.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példa kitérő egyenesekre:</strong><br>
+           Képzelj el egy szobát! A padló egyik szélének egyenese és a szemközti fal és a plafon találkozásának egyenese kitérő helyzetűek. Soha nem metszik egymást, de nem is párhuzamosak.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === EGYENES ÉS SÍK KÖLCSÖNÖS HELYZETE === -->
+<!-- ================================== -->
+
+<!-- Egyenes és sík kölcsönös helyzete Kártya -->
+<div class="formula-card" 
+     data-formula-name="Egyenes és sík kölcsönös helyzete" 
+     data-formula-expression="Illeszkedő, döfő, párhuzamos" 
+     data-formula-example="Egy asztallap (sík) és egy rajta fekvő ceruza (egyenes) illeszkedő helyzetűek.">
+    <h4 class="formula-title">4.1.4.1 Egyenes és Sík Kölcsönös Helyzete</h4>
+    <p class="formula-explanation">Egy egyenes és egy sík a térben háromféleképpen helyezkedhet el egymáshoz képest, a közös pontjaik száma alapján:</p>
+    <ul>
+        <li><strong>Az egyenes a síkban van (illeszkedik):</strong> Végtelen sok közös pontjuk van (az egyenes minden pontja).</li>
+        <li><strong>Az egyenes döfi a síkot:</strong> Pontosan egy közös pontjuk van (a döféspont).</li>
+        <li><strong>Az egyenes párhuzamos a síkkal:</strong> Nincs közös pontjuk.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példák:</strong><br>
+           - Egy falon lógó kép éle (egyenes) **párhuzamos** a szemközti fal síkjával.<br>
+           - Egy a falba fúrt szög (egyenes) **döfi** a fal síkját.<br>
+           - A falra festett egyenes vonal (egyenes) **illeszkedik** a fal síkjára.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === KÉT SÍK KÖLCSÖNÖS HELYZETE === -->
+<!-- ================================== -->
+
+<!-- Két sík kölcsönös helyzete Kártya -->
+<div class="formula-card" 
+     data-formula-name="Két sík kölcsönös helyzete" 
+     data-formula-expression="Metsző vagy párhuzamos" 
+     data-formula-example="Egy szoba padlója és mennyezete párhuzamos síkok. A padló és az egyik oldalfal metsző síkok.">
+    <h4 class="formula-title">4.1.5 Két Sík Kölcsönös Helyzete</h4>
+    <p class="formula-explanation">Két különböző sík a térben kétféleképpen helyezkedhet el egymáshoz képest:</p>
+    <ul>
+        <li><strong>Párhuzamos síkok:</strong> Nincs közös pontjuk.</li>
+        <li><strong>Metsző síkok:</strong> Végtelen sok közös pontjuk van, amelyek egy közös egyenest, a **metszésvonalat** alkotják.</li>
+    </ul>
+    <p>Ha a két sík minden pontja közös, akkor a síkok **azonosak**.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példák egy szobában:</strong><br>
+           - A padló síkja és a mennyezet síkja **párhuzamosak**.<br>
+           - A padló síkja és egy oldalfal síkja **metszők**. A metszésvonaluk az a vonal, ahol a fal a padlóval találkozik.<br>
+           - Két szomszédos oldalfal síkja szintén **metszők**. A metszésvonaluk a szoba sarka.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 4.2 FEJEZET: MÉRTANI TESTEK === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Mértani Testek</h3>
+
+<!-- A gúla Kártya -->
+<div class="formula-card" 
+     data-formula-name="A gúla" 
+     data-formula-expression="Jellegzetes elemek: alaplap, palást, csúcs, magasság" 
+     data-formula-example="A gízai piramisok négyzet alapú gúlák.">
+    <h4 class="formula-title">4.4.2.1 A Gúla: Ábrázolás és Jellegzetes Elemek</h4>
+    <p class="formula-explanation">A **gúla** egy olyan mértani test, amelyet egy sokszög alaplap és egy, az alaplap síkján kívül eső pont (a csúcs) határoz meg. A palástját az alaplap csúcsait a gúla csúcsával összekötő háromszöglapok (oldallapok) alkotják.</p>
+    <p><strong>Jellegzetes elemei:</strong></p>
+    <ul>
+        <li><strong>Alaplap:</strong> A gúla alapját képező sokszög (pl. háromszög, négyzet, ötszög stb.). A gúlát az alaplapja szerint nevezzük el (pl. háromszög alapú gúla).</li>
+        <li><strong>Csúcs (C):</strong> Az alaplap síkján kívüli pont.</li>
+        <li><strong>Oldallapok:</strong> Az alaplap oldalait a csúccsal összekötő háromszögek.</li>
+        <li><strong>Palást:</strong> Az oldallapok összessége.</li>
+        <li><strong>Testmagasság (m):</strong> A csúcs távolsága az alaplap síkjától (merőleges szakasz).</li>
+    </ul>
+    <p>A **szabályos gúla** alaplapja szabályos sokszög, és a testmagassága az alaplap középpontjába esik.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+    </div>
+</div>
+
+<!-- A gúla Kártya -->
+<div class="formula-card" 
+     data-formula-name="A gúla" 
+     data-formula-expression="Jellegzetes elemek: alaplap, palást, csúcs, magasság" 
+     data-formula-example="A gízai piramisok négyzet alapú gúlák.">
+    <h4 class="formula-title">4.2.1 A Gúla: Ábrázolás és Jellegzetes Elemek</h4>
+    <p class="formula-explanation">A **gúla** egy olyan mértani test, amelyet egy sokszög alaplap és egy, az alaplap síkján kívül eső pont (a csúcs) határoz meg. A palástját az alaplap csúcsait a gúla csúcsával összekötő háromszöglapok (oldallapok) alkotják.</p>
+    <p><strong>Jellegzetes elemei:</strong></p>
+    <ul>
+        <li><strong>Alaplap:</strong> A gúla alapját képező sokszög (pl. háromszög, négyzet).</li>
+        <li><strong>Csúcs (C):</strong> Az alaplap síkján kívüli pont.</li>
+        <li><strong>Oldallapok:</strong> Az alaplap oldalait a csúccsal összekötő háromszögek.</li>
+        <li><strong>Palást:</strong> Az oldallapok összessége.</li>
+        <li><strong>Testmagasság (m):</strong> A csúcs távolsága az alaplap síkjától.</li>
+    </ul>
+    <p>A **szabályos gúla** alaplapja szabályos sokszög, és a testmagassága az alaplap középpontjába esik.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <!-- GOMB HOZZÁADVA -->
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példa:</strong> Hány lapja, éle és csúcsa van egy négyzet alapú gúlának?<br>
+           <strong>Megoldás:</strong><br>
+           - **Lapok:** 1 alaplap + 4 oldallap = 5 lap.<br>
+           - **Élek:** 4 alapél + 4 oldalél = 8 él.<br>
+           - **Csúcsok:** 4 alapcsúcs + 1 gúla csúcs = 5 csúcs.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === A GÚLA TESTHÁLÓJA === -->
+<!-- ================================== -->
+
+<!-- A gúla testhálója Kártya -->
+<div class="formula-card" 
+     data-formula-name="A gúla testhálója (lefejtése)" 
+     data-formula-expression="Testháló = Alaplap + Palást" 
+     data-formula-example="Egy négyzet alapú gúla hálója egy négyzetből és a négy oldalára illesztett négy darab egyenlő szárú háromszögből áll.">
+    <h4 class="formula-title">4.4.2.2 A Gúla Testhálója (Lefejtése)</h4>
+    <p class="formula-explanation">A **testháló** (vagy háló) a mértani test síkba kiterített felülete. Úgy kell elképzelni, mintha a testet az élei mentén felvágnánk és kiterítenénk egy papírlapra. A testháló segít megérteni a test felszínének felépítését.</p>
+    <p><strong>A gúla testhálója két fő részből áll:</strong></p>
+    <ul>
+        <li><strong>Egy darab alaplap:</strong> Ez egy sokszög, amilyen a gúla alapja.</li>
+        <li><strong>A palást:</strong> Ez annyi darab háromszögből áll, ahány oldala van az alaplapnak. Szabályos gúla esetén ezek a háromszögek egybevágó, egyenlő szárú háromszögek.</li>
+    </ul>
+    <p>A gúla **felszíne (A)** a testháló teljes területe, azaz az alaplap területének (Tₐ) és a palást területének (Tₚ) összege: **A = Tₐ + Tₚ**.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példa:</strong> Hogyan néz ki egy háromszög alapú gúla (tetraéder) hálója?<br>
+           <strong>Megoldás:</strong> A háló egy nagyobb háromszögből (az alaplapból) és annak mindhárom oldalára illesztett további háromszögekből (az oldallapokból) áll.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === AZ EGYENES HASÁB === -->
+<!-- ================================== -->
+<!-- Az egyenes hasáb Kártya -->
+<div class="formula-card" 
+     data-formula-name="Az egyenes hasáb jellegzetes elemei" 
+     data-formula-expression="Jellegzetes elemek: alaplap, fedőlap, oldallapok, magasság" 
+     data-formula-example="Egy dobókocka egyenes hasáb, speciálisan egy kocka. Két egybevágó négyzet (alap- és fedőlap) és négy darab négyzet oldallap alkotja.">
+    <h4 class="formula-title">4.2.3 Az Egyenes Hasáb: Ábrázolás és Elemek</h4>
+    <p class="formula-explanation">Az **egyenes hasáb** egy olyan mértani test, amelyet két, egymással egybevágó és párhuzamos sokszög (az **alaplap** és a **fedőlap**), valamint az ezeket összekötő téglalapok (az **oldallapok**) határolnak.</p>
+    <p><strong>Jellegzetes elemei:</strong></p>
+    <ul>
+        <li><strong>Alaplap és Fedőlap:</strong> Két párhuzamos, egybevágó sokszög.</li>
+        <li><strong>Oldallapok:</strong> Az alaplap és a fedőlap megfelelő csúcsait összekötő téglalapok.</li>
+        <li><strong>Palást:</strong> Az oldallapok összessége.</li>
+        <li><strong>Testmagasság (m):</strong> Az alaplap és a fedőlap síkjának távolsága.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <!-- GOMB HOZZÁADVA -->
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példa:</strong> Hány lapja, éle és csúcsa van egy háromszög alapú hasábnak?<br>
+           <strong>Megoldás:</strong><br>
+           - **Lapok:** 1 alaplap + 1 fedőlap + 3 oldallap = 5 lap.<br>
+           - **Élek:** 3 alapél + 3 fedélél + 3 oldalél = 9 él.<br>
+           - **Csúcsok:** 3 alapcsúcs + 3 fedélcsúcs = 6 csúcs.</p>
+    </div>
+</div>
+<!-- Az egyenes hasáb Kártya -->
+<div class="formula-card" 
+     data-formula-name="Az egyenes hasáb" 
+     data-formula-expression="Jellegzetes elemek: alaplap, fedőlap, palást, magasság" 
+     data-formula-example="Egy dobókocka egyenes hasáb, speciálisan egy kocka. Két egybevágó négyzet (alap- és fedőlap) és négy darab négyzet oldallap (palást) alkotja.">
+    <h4 class="formula-title">4.4.2.3 Az Egyenes Hasáb</h4>
+    <p class="formula-explanation">Az **egyenes hasáb** egy olyan mértani test, amelyet két, egymással egybevágó és párhuzamos sokszög (az **alaplap** és a **fedőlap**), valamint az ezeket összekötő téglalapok (az **oldallapok**) határolnak. Az egyenes hasáb oldalélei merőlegesek az alaplap síkjára.</p>
+    <p><strong>Jellegzetes elemei:</strong></p>
+    <ul>
+        <li><strong>Alaplap és Fedőlap:</strong> Két párhuzamos, egybevágó sokszög. A hasábot az alaplapja szerint nevezzük el (pl. háromszöghasáb).</li>
+        <li><strong>Oldallapok:</strong> Az alaplap és a fedőlap megfelelő csúcsait összekötő téglalapok.</li>
+        <li><strong>Palást (Tₚ):</strong> Az oldallapok összessége. Területe az alaplap kerületének (Kₐ) és a testmagasságnak (m) a szorzata: **Tₚ = Kₐ * m**.</li>
+        <li><strong>Testmagasság (m):</strong> Az alaplap és a fedőlap síkjának távolsága.</li>
+    </ul>
+    <p><strong>Testháló (Lefejtés):</strong> A hasáb hálója a két egybevágó alaplapból és a palástot alkotó, egymás mellé kiterített téglalapokból áll.</p>
+    <p>A hasáb **felszíne (A)** a testháló teljes területe: **A = 2 * Tₐ + Tₚ** (kétszer az alaplap területe plusz a palást területe).</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+    </div>
+</div>
+
+<!-- Az egyenes hasáb Kártya -->
+<div class="formula-card" 
+     data-formula-name="Az egyenes hasáb jellegzetes elemei" 
+     data-formula-expression="Jellegzetes elemek: alaplap, fedőlap, oldallapok, magasság" 
+     data-formula-example="Egy dobókocka egyenes hasáb, speciálisan egy kocka. Két egybevágó négyzet (alap- és fedőlap) és négy darab négyzet oldallap alkotja.">
+    <h4 class="formula-title">4.4.2.3.1 Az Egyenes Hasáb: Ábrázolás és Elemek</h4>
+    <p class="formula-explanation">Az **egyenes hasáb** egy olyan mértani test, amelyet két, egymással egybevágó és párhuzamos sokszög (az **alaplap** és a **fedőlap**), valamint az ezeket összekötő téglalapok (az **oldallapok**) határolnak. Az egyenes hasáb oldalélei merőlegesek az alaplap síkjára.</p>
+    <p><strong>Jellegzetes elemei:</strong></p>
+    <ul>
+        <li><strong>Alaplap és Fedőlap:</strong> Két párhuzamos, egybevágó sokszög. A hasábot az alaplapja szerint nevezzük el (pl. háromszöghasáb).</li>
+        <li><strong>Oldallapok:</strong> Az alaplap és a fedőlap megfelelő csúcsait összekötő téglalapok.</li>
+        <li><strong>Palást:</strong> Az oldallapok összessége.</li>
+        <li><strong>Testmagasság (m):</strong> Az alaplap és a fedőlap síkjának távolsága.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === A HASÁB TESTHÁLÓJA === -->
+<!-- ================================== -->
+<!-- A hasáb testhálója Kártya -->
+<div class="formula-card" 
+     data-formula-name="Az egyenes hasáb testhálója (lefejtése)" 
+     data-formula-expression="A = 2*Tₐ + Tₚ" 
+     data-formula-example="Egy 3cm élű kocka felszíne: Az alaplap területe (Tₐ)=3*3=9cm². A palást területe (Tₚ)= (4*3)*3=36cm². A teljes felszín: A = 2*9 + 36 = 18+36=54cm².">
+    <h4 class="formula-title">4.2.4 Az Egyenes Hasáb Testhálója és Felszíne</h4>
+    <p class="formula-explanation">A hasáb **testhálója** a test síkba kiterített felülete. A háló segít kiszámolni a test teljes felszínét.</p>
+    <p><strong>Részei:</strong> Két egybevágó sokszög (alaplap, fedőlap) és a palást (ami egy nagy téglalapként is kiteríthető).</p>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+        <div>Palást területe: Tₚ = Kₐ * m</div>
+        <div>Teljes felszín: A = 2*Tₐ + Tₚ</div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <!-- GOMB HOZZÁADVA -->
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki egy 3 cm élű kocka felszínét!<br>
+           <strong>Gondolkodás:</strong> A kocka egy négyzet alapú hasáb, ahol a magasság is 3 cm.<br>
+           - Alaplap területe (Tₐ): 3 * 3 = 9 cm².<br>
+           - Alaplap kerülete (Kₐ): 4 * 3 = 12 cm.<br>
+           - Palást területe (Tₚ): Kₐ * m = 12 * 3 = 36 cm².<br>
+           <strong>Megoldás:</strong> Teljes felszín: A = 2*Tₐ + Tₚ = 2*9 + 36 = 18 + 36 = 54 cm².</p>
+    </div>
+</div>
+<!-- A hasáb testhálója Kártya -->
+<div class="formula-card" 
+     data-formula-name="Az egyenes hasáb testhálója (lefejtése)" 
+     data-formula-expression="A = 2*Tₐ + Tₚ" 
+     data-formula-example="Egy háromszöghasáb hálója két egybevágó háromszögből (alap- és fedőlap) és három, egymás mellé kiterített téglalapból (palást) áll.">
+    <h4 class="formula-title">4.4.2.4 Az Egyenes Hasáb Testhálója és Felszíne</h4>
+    <p class="formula-explanation">A hasáb **testhálója (lefejtése)** a test síkba kiterített felülete. A háló segít kiszámolni a test teljes felszínét.</p>
+    <p><strong>A hasáb testhálója a következő részekből áll:</strong></p>
+    <ul>
+        <li><strong>Két darab egybevágó sokszög:</strong> az alaplap és a fedőlap.</li>
+        <li><strong>A palást:</strong> ami egyetlen nagy téglalapként is kiteríthető. Ennek a téglalapnak az egyik oldala a hasáb magassága (m), a másik oldala pedig az alaplap kerülete (Kₐ).</li>
+    </ul>
+    <p>A hasáb **felszíne (A)** a testháló teljes területe, azaz a két alaplap területének (2 * Tₐ) és a palást területének (Tₚ) összege.</p>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+        <div>Palást területe: Tₚ = Kₐ * m</div>
+        <div>Teljes felszín: A = 2*Tₐ + Tₚ</div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === AZ EGYENES KÖRHENGER === -->
+<!-- ================================== -->
+
+<!-- Az egyenes körhenger Kártya -->
+<div class="formula-card" 
+     data-formula-name="Az egyenes körhenger" 
+     data-formula-expression="Jellegzetes elemek: alap- és fedőkör, palást, magasság" 
+     data-formula-example="Egy konzervdoboz vagy egy fazék jó közelítéssel egyenes körhengerek.">
+    <h4 class="formula-title">4.4.2.5 Az Egyenes Körhenger</h4>
+    <p class="formula-explanation">Az **egyenes körhenger** egy olyan mértani test, amelyet két, egymással egybevágó és párhuzamos kör (az **alap-** és **fedőkör**), valamint az ezeket összekötő görbe felület, a **palást** határol. A henger egy téglalap egyik oldala körüli megforgatásával jön létre, ezért forgástestnek is nevezzük.</p>
+    <p><strong>Jellegzetes elemei:</strong></p>
+    <ul>
+        <li><strong>Alap- és Fedőkör:</strong> Két párhuzamos, egybevágó körlap, sugaruk 'r'.</li>
+        <li><strong>Palást (Tₚ):</strong> A két kört összekötő görbe felület. Kiterítve egy téglalapot kapunk.</li>
+        <li><strong>Testmagasság (m):</strong> Az alap- és fedőkör síkjának távolsága.</li>
+    </ul>
+    <p><strong>Testháló (Lefejtés):</strong> A henger hálója két egybevágó körből és egy téglalapból áll. Ennek a téglalapnak az egyik oldala a henger magassága (m), a másik oldala pedig az alapkör kerülete (2*r*π).</p>
+    <p>A henger **felszíne (A)** a testháló teljes területe: **A = 2 * Tₐ + Tₚ** (kétszer az alapkör területe plusz a palást területe).</p>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+        <div>Palást területe: Tₚ = (2*r*π) * m</div>
+        <div>Teljes felszín: A = 2*(r²*π) + (2*r*π*m)</div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+    </div>
+</div>
+
+<!-- Az egyenes körhenger Kártya -->
+<div class="formula-card" 
+     data-formula-name="Az egyenes körhenger" 
+     data-formula-expression="A = 2*(r²*π) + (2*r*π*m)" 
+     data-formula-example="Egy henger sugara 10cm, magassága 5cm. Felszíne? Megoldás: Alaplapok területe: 2*(10²*π)=200π. Palást területe: (2*10*π)*5 = 100π. Teljes felszín: 200π+100π=300π cm².">
+    <h4 class="formula-title">4.2.5 Az Egyenes Körhenger</h4>
+    <p class="formula-explanation">Az **egyenes körhenger** egy olyan mértani test, amelyet két párhuzamos, egybevágó kör (az **alap-** és **fedőkör**), valamint az ezeket összekötő görbe felület, a **palást** határol.</p>
+    <p><strong>Testhálója</strong> két körből és egy téglalapból áll. A téglalap egyik oldala a henger magassága (m), a másik az alapkör kerülete (2*r*π).</p>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+        <div>Palást területe: Tₚ = (2*r*π) * m</div>
+        <div>Teljes felszín: A = 2*(r²*π) + Tₚ</div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <!-- GOMB HOZZÁADVA -->
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki egy 10 cm sugarú és 5 cm magasságú henger felszínét!<br>
+           <strong>Gondolkodás:</strong> Kiszámoljuk a két kör és a palást területét külön.<br>
+           - Két alapkör területe: 2 * Tₐ = 2 * (10² * π) = 2 * 100π = 200π cm².<br>
+           - Palást területe: Tₚ = (2 * 10 * π) * 5 = 20π * 5 = 100π cm².<br>
+           <strong>Megoldás:</strong> Teljes felszín: A = 200π + 100π = 300π cm².</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === AZ EGYENES KÖRKÚP === -->
+<!-- ================================== -->
+
+<!-- Az egyenes körkúp Kártya -->
+<div class="formula-card" 
+     data-formula-name="Az egyenes körkúp" 
+     data-formula-expression="A = Tₐ + Tₚ = r²π + rπa" 
+     data-formula-example="Egy kúp sugara 3cm, alkotója 5cm. Felszíne? Alaplap: 3²π=9π. Palást: 3*π*5=15π. Teljes felszín: 9π+15π=24π cm².">
+    <h4 class="formula-title">4.2.6 Az Egyenes Körkúp</h4>
+    <p class="formula-explanation">Az **egyenes körkúp** egy olyan mértani test, amelyet egy kör (az **alapkör**) és egy, az alapkör síkján kívüli pont (a **csúcs**) határoz meg, ahol a csúcs merőleges vetülete az alapkör középpontjába esik. A kúp egy derékszögű háromszög egyik befogója körüli megforgatásával jön létre.</p>
+    <p><strong>Jellegzetes elemei:</strong></p>
+    <ul>
+        <li><strong>Alapkör:</strong> A kúp alapját képező körlap, sugara 'r'.</li>
+        <li><strong>Csúcs (C):</strong> Az alapkör síkján kívüli pont.</li>
+        <li><strong>Palást (Tₚ):</strong> Az alapkör pontjait a csúccsal összekötő görbe felület. Kiterítve egy körcikket kapunk.</li>
+        <li><strong>Testmagasság (m):</strong> A csúcs távolsága az alapkör síkjától.</li>
+        <li><strong>Alkotó (a):</strong> A csúcsot az alapkör kerületének bármely pontjával összekötő szakasz. A magasság, a sugár és az alkotó egy derékszögű háromszöget alkotnak (m² + r² = a²).</li>
+    </ul>
+    <p><strong>Testháló (Lefejtés):</strong> A kúp hálója egy körből (alapkör) és egy körcikkből (palást) áll.</p>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+        <div>Palást területe: Tₚ = r * π * a</div>
+        <div>Teljes felszín: A = r²π + rπa</div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítsést! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki egy 3 cm sugarú és 5 cm alkotójú kúp felszínét!<br>
+           <strong>Gondolkodás:</strong> Külön kiszámoljuk az alapkör és a palást területét, majd összeadjuk őket.<br>
+           - Alapkör területe (Tₐ): r² * π = 3² * π = 9π cm².<br>
+           - Palást területe (Tₚ): r * π * a = 3 * π * 5 = 15π cm².<br>
+           <strong>Megoldás:</strong> Teljes felszín: A = 9π + 15π = 24π cm².</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 4.3 FEJEZET: TÁVOLSÁGOK ÉS SZÖGEK A TÉRBEN === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Távolságok és Szögek a Térben</h3>
+
+<!-- Párhuzamos egyenesek és hajlásszög Kártya -->
+<div class="formula-card" 
+     data-formula-name="Párhuzamos egyenesek és a hajlásszög" 
+     data-formula-expression="Két egyenes hajlásszöge" 
+     data-formula-example="Egy kocka alapnégyzetének egyik oldala és a rábocsátott oldalél merőlegesek egymásra, hajlásszögük 90°. Az alapnégyzet két szomszédos oldalának hajlásszöge is 90°.">
+    <h4 class="formula-title">4.3.1 Párhuzamos Egyenesek, Két Térbeli Egyenes Hajlásszöge</h4>
+    <p class="formula-explanation">A térben az egyenesek viszonyát nem csak a helyzetükkel, hanem a bezárt szögükkel is jellemezhetjük.</p>
+    <ul>
+        <li><strong>Párhuzamos egyenesek:</strong> Azok az egyenesek, amelyek egy síkban vannak és nem metszik egymást. Hajlásszögük definíció szerint **0°**.</li>
+        <li><strong>Metsző egyenesek:</strong> A metszéspontjuknál négy szöget zárnak be, amelyek közül a legkisebbet (egy nem tompaszöget) nevezzük a két egyenes **hajlásszögének**. Ez az érték **0° és 90°** között van.</li>
+        <li><strong>Kitérő egyenesek:</strong> Mivel nincs közös pontjuk, a hajlásszögüket trükkösen határozzuk meg. A tér egy tetszőleges pontjából párhuzamost húzunk mindkét egyenessel. Ennek a két, már metsző egyenesnek a hajlásszöge lesz a kitérő egyenesek hajlásszöge.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy kocka alaplapján lévő AB oldalél és a szemközti fedőlapon lévő GH oldalél párhuzamosak. Mekkora a hajlásszögük?<br>
+           <strong>Megoldás:</strong> Mivel párhuzamosak, a hajlásszögük 0°.</p>
+        <p><strong>Feladat:</strong> Egy kocka AB oldalélének és a kitérő helyzetű EH oldalélének mekkora a hajlásszöge?<br>
+           <strong>Gondolkodás:</strong> Az EH egyenest párhuzamosan eltoljuk úgy, hogy az A pontba kerüljön. Ez az AD egyenes lesz. Az AB és az AD egyenesek hajlásszögét keressük.<br>
+           <strong>Megoldás:</strong> Az AB és AD a kocka alapnégyzetének szomszédos élei, így merőlegesek egymásra. A hajlásszögük 90°.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === ADOTT SÍKKAL PÁRHUZAMOS EGYENES === -->
+<!-- ================================== -->
+
+<!-- Síkkal párhuzamos egyenes Kártya -->
+<div class="formula-card" 
+     data-formula-name="Adott síkkal párhuzamos egyenes" 
+     data-formula-expression="Egyenes || Sík" 
+     data-formula-example="Egy asztal (sík) felett vízszintesen tartott ceruza (egyenes) párhuzamos az asztal síkjával.">
+    <h4 class="formula-title">4.3.2 Adott Síkkal Párhuzamos Egyenes</h4>
+    <p class="formula-explanation">Egy 'e' egyenes akkor és csak akkor **párhuzamos** egy 'S' síkkal, ha az 'e' egyenes párhuzamos az 'S' síkban fekvő valamelyik 'f' egyenessel.</p>
+    <p><strong>A párhuzamosság bizonyításának tétele:</strong></p>
+    <p>Ha egy 'e' egyenes, amely nem illeszkedik az 'S' síkra, párhuzamos az 'S' sík egy 'f' egyenesével, akkor az 'e' egyenes párhuzamos az 'S' síkkal is. Ez a leggyakrabban használt módszer a párhuzamosság igazolására.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Adott egy kocka. Igazold, hogy a fedőlapon lévő EF él párhuzamos az alaplap síkjával!<br>
+           <strong>Gondolkodás:</strong> Meg kell keresnem egy olyan egyenest az alaplap síkjában, amellyel az EF párhuzamos.<br>
+           <strong>Megoldás:</strong> Az EF él párhuzamos az alaplapon fekvő AB éllel. Mivel az EF párhuzamos egy, az alaplap síkjában lévő egyenessel (az AB-vel), ezért maga az EF egyenes is párhuzamos az alaplap teljes síkjával.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === PÁRHUZAMOS SÍKOK === -->
+<!-- ================================== -->
+
+<!-- Párhuzamos síkok Kártya -->
+<div class="formula-card" 
+     data-formula-name="Párhuzamos síkok" 
+     data-formula-expression="Sík₁ || Sík₂" 
+     data-formula-example="Egy szoba padlója és mennyezete párhuzamos síkokat alkotnak.">
+    <h4 class="formula-title">4.3.3 Párhuzamos Síkok</h4>
+    <p class="formula-explanation">Két sík akkor **párhuzamos**, ha nincs közös pontjuk. A párhuzamosság bizonyításának leggyakoribb tétele:</p>
+    <p>Ha az egyik síkban van két, egymást metsző egyenes, amelyek külön-külön párhuzamosak a másik sík egy-egy egyenesével, akkor a két sík párhuzamos egymással.</p>
+    <p><strong>Fontos tétel:</strong> Ha két párhuzamos síkot egy harmadik sík metsz, akkor a metszésvonalaik párhuzamos egyenesek.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Adott egy kocka. Igazold, hogy az alaplap (ABCD sík) és a fedőlap (EFGH sík) párhuzamosak!<br>
+           <strong>Gondolkodás:</strong> Keresnem kell két metsző egyenest a fedőlapon, amelyek párhuzamosak az alaplap egy-egy egyenesével.<br>
+           <strong>Megoldás:</strong><br>
+           1. A fedőlapon az EF és EH egyenesek az E pontban metszik egymást.<br>
+           2. Az EF egyenes párhuzamos az alaplapon lévő AB egyenessel.<br>
+           3. Az EH egyenes párhuzamos az alaplapon lévő AD egyenessel.<br>
+           Mivel találtunk a fedőlapon két metsző egyenest, amelyek párhuzamosak az alaplap síkjában lévő egyenesekkel, a tétel értelmében a két sík (az alaplap és a fedőlap) párhuzamos egymással.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === PÁRHUZAMOS SÍKMETSZETEK === -->
+<!-- ================================== -->
+
+<!-- Párhuzamos síkmetszetek Kártya -->
+<div class="formula-card" 
+     data-formula-name="Mértani testek alapsíkjával párhuzamos síkmetszetei" 
+     data-formula-expression="Síkmetszet ~ Alaplap" 
+     data-formula-example="Ha egy gúlát az alaplapjával párhuzamos síkkal elmetszünk, a metszet egy, az alaplaphoz hasonló sokszög lesz.">
+    <h4 class="formula-title">4.3.4 Párhuzamos Síkmetszetek</h4>
+    <p class="formula-explanation">Ha egy mértani testet (pl. gúlát, kúpot, hasábot, hengert) egy, az alapsíkjával párhuzamos síkkal elmetszünk, a keletkező síkidom (a **síkmetszet**) fontos tulajdonságokkal rendelkezik:</p>
+    <ul>
+        <li><strong>Hasáb és Henger esetén:</strong> A síkmetszet egy, az alaplappal **egybevágó** (kongruens) sokszög vagy kör.</li>
+        <li><strong>Gúla és Kúp esetén:</strong> A síkmetszet egy, az alaplaphoz **hasonló** sokszög vagy kör. A síkmetszet és az alaplap területének aránya a csúcstól mért távolságaik négyzetének arányával egyenlő.</li>
+    </ul>
+    <p>A párhuzamos metszősík a testet két részre vágja. Gúla vagy kúp esetén a felső rész egy kisebb, az eredetihez hasonló gúla/kúp, az alsó rész pedig egy **csonkagúla** vagy **csonkakúp**.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy 10 cm magas gúlát a csúcsától 5 cm távolságra, az alaplappal párhuzamosan elmetszünk. Az alaplap területe 40 cm². Mekkora a síkmetszet területe?<br>
+           <strong>Gondolkodás:</strong> A síkmetszet és az alaplap hasonlóak. A hasonlóság aránya (λ) a magasságok aránya: 5/10 = 1/2. A területek aránya a hasonlóság arányának négyzete (λ²).<br>
+           <strong>Megoldás:</strong> A területek aránya (1/2)² = 1/4. A síkmetszet területe = Alaplap területe * (1/4) = 40 * (1/4) = 10 cm².</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 4.4 FEJEZET: MERŐLEGESSÉG A TÉRBEN === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Merőlegesség a Térben</h3>
+
+<!-- Merőlegesség alapjai Kártya -->
+<div class="formula-card" 
+     data-formula-name="Merőlegesség a térben" 
+     data-formula-expression="Egyenes ⊥ Sík" 
+     data-formula-example="Egy függőlegesen álló zászlórúd (egyenes) merőleges a vízszintes talaj (sík) minden egyenesére.">
+    <h4 class="formula-title">4.4.1 Merőleges Egyenesek, Síkra Merőleges Egyenes</h4>
+    <p class="formula-explanation">A merőlegesség (derékszög) a térben is alapvető fontosságú. A síkgeometriához képest új, fontosabb definíciók jelennek meg.</p>
+    <ul>
+        <li><strong>Merőleges egyenesek:</strong> Két egyenes merőleges, ha hajlásszögük 90°. (Ez igaz metsző és kitérő egyenesekre is!)</li>
+        <li style="font-weight: bold;"><strong>Síkbeli merőleges egyenes:</strong> Egy 'e' egyenes akkor merőleges egy 'S' síkra, ha a sík **minden** egyenesére merőleges.</li>
+    </ul>
+    <p><strong>A síkbeli merőlegesség bizonyításának tétele:</strong></p>
+    <p>Ha egy 'e' egyenes merőleges egy 'S' sík két, egymást metsző 'f' és 'g' egyenesére, akkor az 'e' egyenes merőleges az 'S' sík összes többi egyenesére is (tehát merőleges a síkra).</p>
+    <p><strong>Pont távolsága síktól:</strong> Egy pont és egy sík távolsága a pontból a síkra bocsátott merőleges szakasz hossza.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példa:</strong> Egy kocka A pontjába fut be három él: AB, AD és AE. Igazold, hogy az AE él merőleges az alaplap (ABCD) síkjára!<br>
+           <strong>Gondolkodás:</strong> Meg kell mutatnom, hogy az AE él merőleges az alaplap két, egymást metsző egyenesére.<br>
+           <strong>Megoldás:</strong><br>
+           1. Az AE él merőleges az AB élre (mivel egy négyzet oldalai).<br>
+           2. Az AE él merőleges az AD élre (mivel egy másik négyzet oldalai).<br>
+           3. Az AB és AD egyenesek az A pontban metszik egymást és az alaplapon fekszenek.<br>
+           Mivel az AE merőleges két, a síkot kifeszítő metsző egyenesre, ezért a tétel értelmében az AE merőleges az alaplap teljes síkjára.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === TÉRELEMEK TÁVOLSÁGA, MAGASSÁG === -->
+<!-- ================================== -->
+
+<!-- Távolságok és magasságok Kártya -->
+<div class="formula-card" 
+     data-formula-name="Térelemek távolsága és a testmagasság" 
+     data-formula-expression="Két párhuzamos sík távolsága" 
+     data-formula-example="Egy 10 cm magas egyenes hasáb alap- és fedőlapjának síkjai párhuzamosak, távolságuk pontosan a testmagasság, azaz 10 cm.">
+    <h4 class="formula-title">4.4.2 Térelemek Távolsága, Testmagasság</h4>
+    <p class="formula-explanation">A térben gyakran van szükségünk különböző elemek (pontok, egyenesek, síkok) távolságának meghatározására. Ez a távolság mindig a legrövidebb utat, azaz a merőleges szakaszt jelenti.</p>
+    <ul>
+        <li><strong>Két párhuzamos sík távolsága:</strong> Az egyik sík tetszőleges pontjából a másik síkra bocsátott merőleges szakasz hossza.</li>
+        <li><strong>Testmagasság (m):</strong> A mértani testek magassága pontosan a párhuzamos alap- és fedőlapok síkjának távolságát jelenti. Ezért a testmagasság mindig merőleges az alapsíkra.</li>
+    </ul>
+    <p><strong>A magasság fogalma a tanult testeknél:</strong></p>
+    <ul>
+        <li><strong>Egyenes hasáb, téglatest, henger:</strong> Az alaplap és a fedőlap síkjának távolsága.</li>
+        <li><strong>Gúla, kúp:</strong> A csúcs távolsága az alaplap síkjától.</li>
+        <li><strong>Csonkagúla, csonkakúp:</strong> Az alap- és fedőlap síkjának távolsága.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy 15 cm magas egyenes körkúpot az alaplappal párhuzamos síkkal elvágunk. A vágás a csúcstól 5 cm-re történik. Milyen magas a keletkezett csonkakúp?<br>
+           <strong>Gondolkodás:</strong> A csonkakúp magassága a teljes kúp magasságának és a levágott kis kúp magasságának a különbsége.<br>
+           <strong>Megoldás:</strong> A csonkakúp magassága = 15 cm - 5 cm = 10 cm.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === MERŐLEGES SÍKOK, METSZETEK === -->
+<!-- ================================== -->
+
+<!-- Merőleges síkok és metszetek Kártya -->
+<div class="formula-card" 
+     data-formula-name="Merőleges síkok és speciális metszetek" 
+     data-formula-expression="Sík₁ ⊥ Sík₂" 
+     data-formula-example="Egy szobában két szomszédos fal síkja merőleges egymásra.">
+    <h4 class="formula-title">4.4.3 Merőleges Síkok, Átlós- és Tengelymetszetek</h4>
+    <p class="formula-explanation">A térbeli testek vizsgálatakor gyakran használunk speciális síkmetszeteket, hogy a belső szerkezetükről síkgeometriai információt kapjunk.</p>
+    <ul>
+        <li><strong>Merőleges síkok:</strong> Két sík akkor merőleges, ha hajlásszögük 90°. (A hajlásszögüket a metszésvonalukra merőlegesen állított egyenesek hajlásszöge adja meg).</li>
+        <li style="font-weight: bold;"><strong>Átlós metszet (hasáb, gúla):</strong> Olyan síkmetszet, amely a test két, nem egy oldallapon fekvő oldalélét tartalmazza. Ez a sík általában átmegy a test egy testátlóján.</li>
+        <li style="font-weight: bold;"><strong>Tengelymetszet (forgástestek):</strong> Olyan síkmetszet, amely a test forgástengelyére illeszkedik.
+            <ul>
+                <li>Egyenes körhenger tengelymetszete egy **téglalap**.</li>
+                <li>Egyenes körkúp tengelymetszete egy **egyenlő szárú háromszög**.</li>
+                <li>A gömb tengelymetszete (főköre) egy **kör**.</li>
+            </ul>
+        </li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy 6 cm sugarú és 8 cm magasságú egyenes körkúpnak mekkorák a tengelymetszetét alkotó egyenlő szárú háromszög oldalai?<br>
+           <strong>Gondolkodás:</strong> A tengelymetszet egy háromszög. Az alapja a kúp alapkörének átmérője. A két szára a kúp alkotója. A magassága a kúp magassága.<br>
+           <strong>Megoldás:</strong><br>
+           - A háromszög alapja: 2 * sugár = 2 * 6 = 12 cm.<br>
+           - A háromszög magassága: 8 cm (adott).<br>
+           - A háromszög szára (a kúp alkotója): Ezt a Pitagorasz-tétellel számoljuk ki a magasságból és a sugárból: a² = 8² + 6² = 64 + 36 = 100. Tehát a = 10 cm.
+           A tengelymetszet egy 12 cm alapú, 10 cm szárú egyenlő szárú háromszög.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === MERŐLEGES VETÜLETEK SÍKRA === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Merőleges Vetületek a Térben</h3>
+
+<!-- Merőleges vetület síkra Kártya -->
+<div class="formula-card" 
+     data-formula-name="Pont, szakasz és egyenes merőleges vetülete síkra" 
+     data-formula-expression="P → P'" 
+     data-formula-example="Egy merőlegesen beeső fénysugár (mint a déli napfény) által a földre (síkra) vetett árnyék egy tárgy merőleges vetülete.">
+    <h4 class="formula-title">4.5.1 Pont, Szakasz és Egyenes Vetülete a Síkra</h4>
+    <p class="formula-explanation">A **merőleges vetítés** egy térbeli alakzat "árnyékának" megszerkesztése egy adott síkon. A vetítés során az alakzat minden pontjából merőlegest bocsátunk a síkra.</p>
+    <ul>
+        <li><strong>Pont vetülete (P'):</strong> Egy pont (P) merőleges vetülete a síkon az a pont, ahol a pontból a síkra bocsátott merőleges döfi a síkot.</li>
+        <li><strong>Szakasz vetülete:</strong> Egy szakasz merőleges vetülete a végpontjainak vetületei által meghatározott szakasz. <strong>Fontos:</strong> A vetület hossza általában rövidebb, mint az eredeti szakasz hossza, kivéve, ha a szakasz párhuzamos a síkkal (akkor egyenlőek).</li>
+        <li><strong>Egyenes vetülete:</strong> Egy egyenes merőleges vetülete általában egy másik egyenes. Kivétel, ha az eredeti egyenes merőleges a síkra, ekkor a vetülete egyetlen pont.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példa:</strong> Képzelj el egy kockát, és vetítsük az éleit az alaplap síkjára.<br>
+           - Az alaplapon fekvő élek (pl. AB) vetülete **önmaga**.<br>
+           - A fedőlapon lévő élek (pl. EF) vetülete az alaplap megfelelő éle lesz (az EF-é az AB).<br>
+           - A függőleges oldalélek (pl. AE) vetülete egyetlen pont lesz (az AE-é az A pont).</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === EGYENES ÉS SÍK HAJLÁSSZÖGE === -->
+<!-- ================================== -->
+
+<!-- Egyenes és sík hajlásszöge Kártya -->
+<div class="formula-card" 
+     data-formula-name="Egyenes és sík hajlásszöge, szakasz vetületének hossza" 
+     data-formula-expression="vetület_hossza = eredeti_hossz * cos(α)" 
+     data-formula-example="Egy 10 cm hosszú szakasz 60°-os szöget zár be egy síkkal. Milyen hosszú a vetülete? Megoldás: Vetület = 10 * cos(60°) = 10 * 0.5 = 5 cm.">
+    <h4 class="formula-title">4.5.2 Egyenes és Sík Hajlásszöge, Szakasz Vetületének Hossza</h4>
+    <p class="formula-explanation">Két fontos fogalom, ami a merőleges vetítéshez kapcsolódik:</p>
+    <ul>
+        <li><strong>Egyenes és sík hajlásszöge (α):</strong> Egy 'e' egyenes és egy 'S' sík hajlásszöge az 'e' egyenes és az 'e' síkra eső merőleges vetületének (e') hajlásszöge. Ez a szög mindig 0° és 90° között van.</li>
+        <li><strong>Szakasz vetületének hossza:</strong> Egy 'S' síkra vetített szakasz hossza kiszámítható, ha ismerjük az eredeti szakasz hosszát és a szakasz egyenesének a síkkal bezárt hajlásszögét (α). A szakasz, a vetülete és a pontokból bocsátott merőlegesek egy derékszögű háromszöget alkotnak.</li>
+    </ul>
+    <div class="formula-expression">
+        <span class="formula-var">vetület<span class="tooltip-text">A vetületi szakasz hossza</span></span> = 
+        <span class="formula-var">eredeti<span class="tooltip-text">Az eredeti szakasz hossza</span></span> * 
+        cos(<span class="formula-var">α<span class="tooltip-text">Az egyenes és a sík hajlásszöge</span></span>)
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy 10 cm hosszú ceruzát úgy tartunk egy asztallap fölé, hogy az 60°-os szöget zár be az asztal síkjával. Milyen hosszú lesz a ceruza merőleges vetülete (árnyéka) az asztalon?<br>
+           <strong>Gondolkodás:</strong> Használjuk a vetület hosszára vonatkozó képletet. Az eredeti hossz 10 cm, a szög (α) 60°. A cos(60°) értéke 0.5.<br>
+           <strong>Megoldás:</strong> Vetület hossza = 10 * cos(60°) = 10 * 0.5 = 5 cm.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === KÉT SÍK HAJLÁSSZÖGE === -->
+<!-- ================================== -->
+
+<!-- Két sík hajlásszöge Kártya -->
+<div class="formula-card" 
+     data-formula-name="Két sík hajlásszöge (lapszög)" 
+     data-formula-expression="A síkok hajlásszögét a metszésvonalukra merőlegesen állított egyenesek hajlásszöge adja meg." 
+     data-formula-example="Egy szabályos négyoldalú gúla alaplapja és egyik oldallapja által bezárt szög a gúla oldallapjának magassága és az alaplap megfelelő középvonalának hajlásszöge.">
+    <h4 class="formula-title">4.5.3 Két Sík Hajlásszöge (Lapszög)</h4>
+    <p class="formula-explanation">Két metsző sík a teret négy részre, úgynevezett **lapszögtartományra** osztja. A **lapszög** mértéke, azaz a **két sík hajlásszöge** a következőképpen határozható meg:</p>
+    <ol>
+        <li>Vegyük a két sík közös **metszésvonalát**.</li>
+        <li>A metszésvonal egy tetszőleges pontjában állítsunk merőlegest a metszésvonalra mindkét síkban.</li>
+        <li>Ennek a két, a metszésvonalra merőleges egyenesnek a hajlásszöge adja meg a két sík hajlásszögét. Ez a szög 0° és 90° között van.</li>
+    </ol>
+    <p><strong>Merőleges síkok:</strong> Két sík akkor merőleges, ha a hajlásszögük 90°.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Példa:</strong> Hogyan határoznád meg egy kinyitott könyv két oldalának hajlásszögét?<br>
+           <strong>Megoldás:</strong><br>
+           1. A könyv gerince a két sík (a két könyvoldal) **metszésvonala**.<br>
+           2. A gerinc egy pontjából húzz egy-egy merőleges vonalat a gerincre az egyik és a másik oldalon is (ezek a vonalak a papíron futnak).<br>
+           3. E két, a gerincre rajzolt vonal által bezárt szög lesz a könyv két oldalának hajlásszöge.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === A HÁROM MERŐLEGES TÉTELE === -->
+<!-- ================================== -->
+
+<!-- A három merőleges tétele Kártya -->
+<div class="formula-card" 
+     data-formula-name="A három merőleges tétele" 
+     data-formula-expression="Ha e⊥S és f⊂S, akkor e'⊥f => e⊥f" 
+     data-formula-example="Egy függőleges oszlop (e) merőleges a talajra (S). A talajon van egy egyenes kerítés (f). Az oszlop talppontjából a kerítésre bocsátott merőleges (e') egyben a legrövidebb út a kerítéshez.">
+    <h4 class="formula-title">4.6.1 A Három Merőleges Tétele</h4>
+    <p class="formula-explanation">Ez a tétel egy pontból egy, a síkban futó egyenesre bocsátott merőlegesek kapcsolatát írja le. Nagyon hasznos térbeli távolságok kiszámításához.</p>
+    <p><strong>A tétel:</strong> Vegyünk egy 'S' síkot és egy rá nem illeszkedő 'P' pontot. Legyen az 'S' síkban egy 'f' egyenes.</p>
+    <p>Ha a 'P' pont merőleges vetülete a síkon P', és P'-ből merőlegest állítunk az 'f' egyenesre a T pontban, akkor a PT szakasz is merőleges lesz az 'f' egyenesre.</p>
+    <p><strong>A "három merőleges":</strong></p>
+    <ol>
+        <li>PP' ⊥ S (A pont vetítése a síkra)</li>
+        <li>P'T ⊥ f (A vetületből merőleges az egyenesre a síkban)</li>
+        <li><strong>Ebből következik:</strong> PT ⊥ f (Az eredeti pontból az egyenesre húzott szakasz is merőleges)</li>
+    </ol>
+    <p>A PT szakasz hossza adja meg a **P pont és az f egyenes térbeli távolságát**.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy 4 méter magas, függőleges oszlop (P pont a teteje) egy sík talajon áll. Az oszlop talppontjától 3 méterre van egy egyenes vonal (f). Milyen messze van az oszlop teteje (P) a vonaltól (f)?<br>
+           <strong>Gondolkodás:</strong> A három merőleges tétele alapján egy derékszögű háromszög jön létre. Az egyik befogó az oszlop magassága (4m). A másik befogó a talppont távolsága a vonaltól (3m). Az átfogó lesz a keresett távolság.<br>
+           <strong>Megoldás (Pitagorasz-tétellel):</strong> d² = 4² + 3² = 16 + 9 = 25. Tehát d = √25 = 5 méter.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === HÁROM MERŐLEGES FORDÍTOTT TÉTELE === -->
+<!-- ================================== -->
+
+<!-- A három merőleges fordított tétele Kártya -->
+<div class="formula-card" 
+     data-formula-name="A három merőleges tételének fordított tétele" 
+     data-formula-expression="Ha e⊥f és e'⊥f, akkor e⊥S" 
+     data-formula-example="Ha egy gúla oldaléle (e) merőleges egy alapélre (f), és az oldalél vetülete (e') is merőleges ugyanarra az alapélre, akkor az oldalél merőleges az egész alaplap síkjára (S). (Ez csak speciális esetekben igaz).">
+    <h4 class="formula-title">4.6.2 A Három Merőleges Tételének Fordítottja</h4>
+    <p class="formula-explanation">A tétel fordítottja a következtetésből indul ki, és az egyik feltételre kérdez rá. Két fő fordított tétel létezik, amelyek merőlegesség bizonyítására használhatók.</p>
+    <p>Legyen adott egy 'S' sík, benne egy 'f' egyenes, és a síkon kívül egy 'P' pont. A 'P' pont vetülete a síkon legyen P', a 'P' pont vetülete az 'f' egyenesen legyen T.</p>
+    <p><strong>1. Fordított Tétel:</strong></p>
+    <p>Ha a PT szakasz merőleges az 'f' egyenesre (a pontból az egyenesre húzott szakasz merőleges), ÉS a PP' szakasz is merőleges az 'f' egyenesre, akkor a P'T vetületi szakasz is merőleges lesz az 'f' egyenesre.</p>
+    <p><strong>2. Fordított Tétel (fontosabb):</strong></p>
+    <p>Ha a PT szakasz merőleges az 'f' egyenesre, ÉS a P'T vetületi szakasz is merőleges az 'f' egyenesre, akkor a PP' (a pontot a síkkal összekötő) szakasz merőleges a teljes 'S' síkra.</p>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 4. FEJEZET ISMERETFELMÉRŐ === -->
+<!-- ================================== -->
+
+<div class="formula-card" style="border-color: var(--zold);">
+    <h4 class="formula-title">Ismeretfelmérő: Térgeometria Alapjai</h4>
+    <p class="formula-explanation">Készen állsz, hogy leteszteld a tudásodat a térbeli elemek kölcsönös helyzetéről, a párhuzamosságról, merőlegességről és a mértani testek alapjairól? Használd a Tudástár intelligens eszközeit a gyakorláshoz és a felkészüléshez!</p>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+        
+        <div style="text-align: center;">
+            <p><strong>Gyors Ismétlés</strong></p>
+            <p style-="font-size: 0.9em; margin-bottom: 0.5rem;">Generálj véletlenszerű, rövid feladatokat a 8. osztályos tananyagból!</p>
+            <a href="napi_kihivas.html" class="btn btn-primary ai-btn">Irány a Napi Kihívás! →</a>
+        </div>
+        
+        <div style="text-align: center;">
+            <p><strong>Próba-Témazáró</strong></p>
+            <p style="font-size: 0.9em; margin-bottom: 0.5rem;">Generálj egy teljes témazárót ebből a fejezetből az AI Vizsga Szimulátorral!</p>
+            <a href="vizsga_szimulator.html" class="btn btn-primary ai-btn">Indítom a Szimulátort! →</a>
+        </div>
+        
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 5. FEJEZET: FELSZÍN ÉS TÉRFOGAT === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Egyes Mértani Testek Felszíne és Térfogata</h3>
+
+<!-- Távolságmérés testekben Kártya -->
+<div class="formula-card" 
+     data-formula-name="Távolságmérés mértani testekben" 
+     data-formula-expression="Pitagorasz-tétel a térben" 
+     data-formula-example="Egy 3x4x12 cm-es téglatest testátlója: Először az alapátló: d²=3²+4²=25 => d=5. Utána a testátló: D²=d²+12²=5²+12²=25+144=169 => D=13 cm.">
+    <h4 class="formula-title">5.1.1 Távolságmérés a Mértani Testekben</h4>
+    <p class="formula-explanation">A mértani testek belsejében és felszínén lévő távolságok kiszámításához a legfontosabb eszközünk a **Pitagorasz-tétel**. A trükk az, hogy a térbeli problémát **síkgeometriai problémára vezetjük vissza** azzal, hogy megfelelő derékszögű háromszögeket keresünk a testen belül vagy annak felszínén.</p>
+    <p><strong>Gyakori feladatok:</strong></p>
+    <ul>
+        <li><strong>Lapátló kiszámítása:</strong> Egy test bármelyik lapján (ami általában téglalap vagy négyzet) az átló hosszának kiszámítása.</li>
+        <li><strong>Testátló kiszámítása:</strong> A test két, egymással szemközti csúcsát összekötő szakasz hossza. Ezt általában két lépésben, két Pitagorasz-tétellel számoljuk ki.</li>
+        <li><strong>Gúla/kúp alkotójának, magasságának kiszámítása.</strong></li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki egy 3 cm, 4 cm és 12 cm élű téglatest leghosszabb átlójának, a testátlónak a hosszát!<br>
+           <strong>1. Lépés (Alaplap átlója):</strong> Keressünk egy derékszögű háromszöget az alaplapon. Ennek befogói 3 cm és 4 cm. Az átfogója (legyen 'd') az alaplap átlója. d² = 3² + 4² = 9 + 16 = 25. Tehát d = 5 cm.<br>
+           <strong>2. Lépés (Testátló):</strong> Keressünk egy másik derékszögű háromszöget a testen belül. Ennek egyik befogója az imént kiszámolt alapátló (d=5 cm), a másik befogója a test magassága (12 cm). Az átfogója (legyen 'D') maga a testátló.<br>
+           D² = d² + 12² = 5² + 12² = 25 + 144 = 169.<br>
+           <strong>Megoldás:</strong> D = √169 = 13 cm.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === HAJLÁSSZÖGEK KISZÁMÍTÁSA === -->
+<!-- ================================== -->
+
+<!-- Hajlásszögek kiszámítása Kártya -->
+<div class="formula-card" 
+     data-formula-name="Hajlásszögek kiszámítása mértani testekben" 
+     data-formula-expression="Szögfüggvények (sin, cos, tan) alkalmazása" 
+     data-formula-example="Egy kocka testátlója és lapátlója milyen szöget zár be? Megoldás: A kocka éle 'a'. A lapátló a√2, a testátló a√3. Egy derékszögű háromszögben cos(α)=(a√2)/(a√3)=√2/√3≈0.816. α≈35.26°.">
+    <h4 class="formula-title">5.1.2 Hajlásszögek Kiszámítása</h4>
+    <p class="formula-explanation">A mértani testekben lévő hajlásszögek (pl. testátló és lapátló, oldallap és alaplap szöge) kiszámításához ugyanazt a stratégiát követjük, mint a távolságmérésnél: **keresünk egy megfelelő derékszögű háromszöget**, amelyben a keresett szög szerepel.</p>
+    <p>Miután megtaláltuk a derékszögű háromszöget és ismerünk benne legalább két oldalt, a **szögfüggvények (szinusz, koszinusz, tangens)** segítségével határozhatjuk meg a keresett szöget.</p>
+    <p><strong>Gyakori feladatok:</strong></p>
+    <ul>
+        <li>Testátló és lapátló hajlásszöge.</li>
+        <li>Testátló és alaplap síkjának hajlásszöge.</li>
+        <li>Gúla oldallapjának és alaplapjának hajlásszöge.</li>
+    </ul>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy 8 cm magas, 6 cm sugarú egyenes körkúp alkotója mekkora szöget zár be az alaplap síkjával?<br>
+           <strong>Gondolkodás:</strong> A keresett szög a kúp tengelymetszetét alkotó derékszögű háromszögben található. Ennek a háromszögnek az egyik befogója a magasság (m=8), a másik befogója a sugár (r=6). A keresett szög (α) a sugárral van szemben.<br>
+           <strong>Megoldás (Tangens használatával):</strong><br>
+           tan(α) = szemközti befogó / melletti befogó = magasság / sugár = 8 / 6 ≈ 1.333.<br>
+           Számológéppel visszakeresve: α ≈ 53.13°.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === FELSZÍN- ÉS TÉRFOGATSZÁMÍTÁS === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Mértani Testek Felszíne és Térfogata</h3>
+
+<!-- Egyenes hasáb felszíne és térfogata Kártya -->
+<div class="formula-card" 
+     data-formula-name="Az egyenes hasáb felszíne és térfogata" 
+     data-formula-expression="A = 2*Tₐ + Tₚ  ;  V = Tₐ * m" 
+     data-formula-example="Egy négyzet alapú hasáb alapéle 3cm, magassága 10cm. Térfogata? Megoldás: Alaplap területe: Tₐ=3*3=9cm². Térfogat: V=Tₐ*m = 9*10=90cm³.">
+    <h4 class="formula-title">5.2.1 Az Egyenes Hasáb Felszíne és Térfogata</h4>
+    <p class="formula-explanation">A hasábok két alapvető mértékét, a felszínt és a térfogatot a következőképpen számolhatjuk ki:</p>
+    <ul>
+        <li><strong>Felszín (A):</strong> A testet határoló összes lap területének összege. Ezt a testhálóból vezetjük le: a két alaplap területének (2 * Tₐ) és a palást területének (Tₚ) összege. A palást területe az alaplap kerületének (Kₐ) és a testmagasságnak (m) a szorzata.</li>
+        <li><strong>Térfogat (V):</strong> A test által a térben elfoglalt hely mértéke. A hasáb térfogatát úgy kapjuk meg, hogy az alaplap területét (Tₐ) megszorozzuk a testmagassággal (m).</li>
+    </ul>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+        <div>Felszín: A = 2*<span class="formula-var">Tₐ<span class="tooltip-text">Alaplap területe</span></span> + <span class="formula-var">Kₐ<span class="tooltip-text">Alaplap kerülete</span></span> * <span class="formula-var">m<span class="tooltip-text">Testmagasság</span></span></div>
+        <div>Térfogat: V = <span class="formula-var">Tₐ<span class="tooltip-text">Alaplap területe</span></span> * <span class="formula-var">m<span class="tooltip-text">Testmagasság</span></span></div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki egy négyzet alapú egyenes hasáb térfogatát és felszínét, ha az alapéle 3 cm, a magassága pedig 10 cm.<br>
+           <strong>Megoldás:</strong><br>
+           - Alaplap területe (Tₐ): 3 * 3 = 9 cm².<br>
+           - Alaplap kerülete (Kₐ): 4 * 3 = 12 cm.<br>
+           - **Térfogat (V):** Tₐ * m = 9 * 10 = 90 cm³.<br>
+           - Palást területe (Tₚ): Kₐ * m = 12 * 10 = 120 cm².<br>
+           - **Felszín (A):** 2*Tₐ + Tₚ = 2*9 + 120 = 18 + 120 = 138 cm².</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === A GÚLA FELSZÍNE ÉS TÉRFOGATA === -->
+<!-- ================================== -->
+
+<!-- Gúla felszíne és térfogata Kártya -->
+<div class="formula-card" 
+     data-formula-name="A szabályos gúla felszíne és térfogata" 
+     data-formula-expression="A = Tₐ + Tₚ  ;  V = (Tₐ * m)/3" 
+     data-formula-example="Egy négyzet alapú gúla alapéle 6cm, magassága 4cm. Térfogata? Tₐ=6*6=36cm². V=(36*4)/3 = 144/3=48cm³.">
+    <h4 class="formula-title">5.2.2 A Szabályos Gúla Felszíne és Térfogata</h4>
+    <p class="formula-explanation">A szabályos gúla alaplapja szabályos sokszög, oldallapjai pedig egybevágó egyenlő szárú háromszögek.</p>
+    <ul>
+        <li><strong>Felszín (A):</strong> Az alaplap területének (Tₐ) és a palást területének (Tₚ) összege. A palástot az oldallapok (háromszögek) alkotják, így a palást területe ezen háromszögek területeinek összege.</li>
+        <li><strong>Térfogat (V):</strong> A gúla térfogata **harmada** az azonos alapterületű és magasságú hasáb térfogatának. Kiszámítása: az alaplap területét (Tₐ) megszorozzuk a testmagassággal (m), majd az eredményt elosztjuk hárommal.</li>
+    </ul>
+    <p>A **szabályos tetraéder** egy olyan speciális gúla, amelynek minden lapja (az alaplap is) egybevágó, szabályos háromszög.</p>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+        <div>Felszín: A = <span class="formula-var">Tₐ<span class="tooltip-text">Alaplap területe</span></span> + <span class="formula-var">Tₚ<span class="tooltip-text">Palást területe</span></span></div>
+        <div>Térfogat: V = (<span class="formula-var">Tₐ<span class="tooltip-text">Alaplap területe</span></span> * <span class="formula-var">m<span class="tooltip-text">Testmagasság</span></span>) / 3</div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki egy négyzet alapú szabályos gúla térfogatát, ha az alapéle 6 cm, a testmagassága pedig 4 cm!<br>
+           <strong>Megoldás:</strong><br>
+           - Alaplap területe (Tₐ): Mivel az alap egy 6 cm oldalú négyzet, Tₐ = 6 * 6 = 36 cm².<br>
+           - **Térfogat (V):** (Tₐ * m) / 3 = (36 * 4) / 3 = 144 / 3 = 48 cm³.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === A CSONKAGÚLA FELSZÍNE ÉS TÉRFOGATA === -->
+<!-- ================================== -->
+
+<!-- Csonkagúla felszíne és térfogata Kártya -->
+<div class="formula-card" 
+     data-formula-name="A szabályos csonkagúla felszíne és térfogata" 
+     data-formula-expression="A = Tₐ + Tբ + Tₚ  ;  V = (m/3)*(Tₐ+√(TₐTբ)+Tբ)" 
+     data-formula-example="Egy csonkagúla a nagy gúla és a levágott kis gúla különbsége.">
+    <h4 class="formula-title">5.2.3 A Szabályos Csonkagúla Felszíne és Térfogata</h4>
+    <p class="formula-explanation">A **csonkagúla** egy olyan test, amely egy gúla alaplapjával párhuzamos síkkal történő elmetszésével jön létre (a levágott "csúcs" alatti rész). Két, egymáshoz hasonló sokszög alaplapja van: egy nagyobb **alaplap** (Tₐ) és egy kisebb **fedőlap** (Tբ).</p>
+    <ul>
+        <li><strong>Felszín (A):</strong> Az alaplap, a fedőlap és a palást területének összege. A palástot trapézok alkotják. **A = Tₐ + Tբ + Tₚ**.</li>
+        <li><strong>Térfogat (V):</strong> A csonkagúla térfogatát a legegyszerűbben úgy képzelhetjük el, mint a nagy, eredeti "kiegészítő" gúla és a levágott kis gúla térfogatának különbségét. A képlet a csonkagúla magasságát (m) és a két alaplap területét (Tₐ, Tբ) használja.</li>
+    </ul>
+    <div class="formula-expression" style="font-size: 1.2rem; text-align: left;">
+        V = (<span class="formula-var">m<span class="tooltip-text">Csonkagúla magassága</span></span>/3) * (
+        <span class="formula-var">Tₐ<span class="tooltip-text">Alaplap területe</span></span> + 
+        √(<span class="formula-var">Tₐ<span class="tooltip-text">Alaplap területe</span></span>*<span class="formula-var">Tբ<span class="tooltip-text">Fedőlap területe</span></span>) + 
+        <span class="formula-var">Tբ<span class="tooltip-text">Fedőlap területe</span></span>)
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Egy négyzet alapú szabályos csonkagúla alaplapjának területe 36 cm², fedőlapjának területe 9 cm², magassága 5 cm. Mekkora a térfogata?<br>
+           <strong>Megoldás:</strong> Behelyettesítünk a térfogatképletbe:<br>
+           V = (5/3) * (36 + √(36 * 9) + 9)<br>
+           V = (5/3) * (36 + √324 + 9)<br>
+           V = (5/3) * (36 + 18 + 9)<br>
+           V = (5/3) * 63<br>
+           V = 5 * 21 = 105 cm³.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 5.3 GÖRBE LAPÚ TESTEK === -->
+<!-- ================================== -->
+<h3 class="subject-title math-title">Görbe Lapú Testek Felszíne és Térfogata</h3>
+
+<!-- Egyenes körhenger felszíne és térfogata Kártya -->
+<div class="formula-card" 
+     data-formula-name="Az egyenes körhenger felszíne és térfogata" 
+     data-formula-expression="A = 2*r²π + 2*r*π*m  ;  V = r²π * m" 
+     data-formula-example="Egy henger sugara 2cm, magassága 10cm. Térfogata? Tₐ=2²π=4π cm². V=Tₐ*m = 4π*10=40π cm³.">
+    <h4 class="formula-title">5.3.1 Az Egyenes Körhenger Felszíne és Térfogata</h4>
+    <p class="formula-explanation">A henger felszín- és térfogatképletei nagyon hasonlítanak a hasáb képleteire, csak itt az alaplap egy kör.</p>
+    <ul>
+        <li><strong>Felszín (A):</strong> A két kör alakú alaplap (2 * Tₐ) és a téglalappá kiteríthető palást (Tₚ) területének összege. A palást területe az alapkör kerületének (2*r*π) és a henger magasságának (m) szorzata.</li>
+        <li><strong>Térfogat (V):</strong> Az alapkör területét (Tₐ = r²π) megszorozzuk a henger magasságával (m).</li>
+    </ul>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+        <div>Felszín: A = 2 * (<span class="formula-var">r<span class="tooltip-text">Sugár</span></span>²<span class="formula-var">π<span class="tooltip-text">Pi</span></span>) + (2*<span class="formula-var">r<span class="tooltip-text">Sugár</span></span>*<span class="formula-var">π<span class="tooltip-text">Pi</span></span> * <span class="formula-var">m<span class="tooltip-text">Magasság</span></span>)</div>
+        <div>Térfogat: V = (<span class="formula-var">r<span class="tooltip-text">Sugár</span></span>²<span class="formula-var">π<span class="tooltip-text">Pi</span></span>) * <span class="formula-var">m<span class="tooltip-text">Magasság</span></span></div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki egy 2 cm sugarú és 10 cm magasságú egyenes körhenger térfogatát és felszínét!<br>
+           <strong>Megoldás:</strong><br>
+           - Alapkör területe (Tₐ): r²π = 2²π = 4π cm².<br>
+           - **Térfogat (V):** Tₐ * m = 4π * 10 = 40π cm³.<br>
+           - Palást területe (Tₚ): (2*r*π) * m = (2*2*π) * 10 = 4π * 10 = 40π cm².<br>
+           - **Felszín (A):** 2*Tₐ + Tₚ = 2*(4π) + 40π = 8π + 40π = 48π cm².</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === KÚP ÉS CSONKAKÚP FELSZÍNE, TÉRFOGATA === -->
+<!-- ================================== -->
+
+<!-- Kúp és csonkakúp felszíne és térfogata Kártya -->
+<div class="formula-card" 
+     data-formula-name="A kúp és csonkakúp felszíne és térfogata" 
+     data-formula-expression="Kúp: V=(r²π*m)/3; Csonkakúp: V=(m/3)*(T+√(TT')+T')" 
+     data-formula-example="Egy kúp sugara 3cm, magassága 4cm. Térfogata? Tₐ=3²π=9π cm². V=(9π*4)/3=12π cm³.">
+    <h4 class="formula-title">5.3.2 Kúp és Csonkakúp Felszíne és Térfogata</h4>
+    <p class="formula-explanation">A kúp és a csonkakúp képletei a gúláéhoz és a csonkagúláéhoz hasonló logikára épülnek.</p>
+    
+    <h5 style="font-family: 'Roboto Slab', serif; margin-top: 1.5rem;">Az Egyenes Körkúp</h5>
+    <ul>
+        <li><strong>Felszín (A):</strong> Az alapkör területének (Tₐ) és a palást területének (Tₚ) összege. A palást területe: Tₚ = r * π * a (ahol 'a' az alkotó). Teljes felszín: **A = r²π + rπa**.</li>
+        <li><strong>Térfogat (V):</strong> Harmada az azonos alapterületű és magasságú henger térfogatának. **V = (r²π * m) / 3**.</li>
+    </ul>
+
+    <h5 style="font-family: 'Roboto Slab', serif; margin-top: 1.5rem;">Az Egyenes Csonkakúp</h5>
+    <p>A csonkakúp egy "levágott csúcsú" kúp. Van egy nagyobb alapkör sugara (R) és egy kisebb fedőkör sugara (r).</p>
+    <ul>
+        <li><strong>Felszín (A):</strong> Az alap- és fedőkör területének, valamint a palást területének összege. A palást területe: Tₚ = (R+r) * π * a (ahol 'a' a csonkakúp alkotója).</li>
+        <li><strong>Térfogat (V):</strong> A képlet a csonkakúp magasságát (m) és a két kör területét (T=R²π, t=r²π) használja.</li>
+    </ul>
+    <div class="formula-expression" style="font-size: 1.2rem; text-align: left;">
+        V_csonkakúp = (<span class="formula-var">m<span class="tooltip-text">Csonkakúp magassága</span></span>/3) * (
+        <span class="formula-var">T<span class="tooltip-text">Alapkör területe</span></span> + 
+        √(<span class="formula-var">T<span class="tooltip-text">Alapkör területe</span></span>*<span class="formula-var">t<span class="tooltip-text">Fedőkör területe</span></span>) + 
+        <span class="formula-var">t<span class="tooltip-text">Fedőkör területe</span></span>)
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat (Kúp):</strong> Számítsd ki egy 3 cm sugarú és 4 cm magasságú egyenes körkúp térfogatát!<br>
+           <strong>Megoldás:</strong><br>
+           - Alapkör területe (Tₐ): r²π = 3²π = 9π cm².<br>
+           - **Térfogat (V):** (Tₐ * m) / 3 = (9π * 4) / 3 = 36π / 3 = 12π cm³.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === A GÖMB FELSZÍNE ÉS TÉRFOGATA === -->
+<!-- ================================== -->
+
+<!-- A gömb felszíne és térfogata Kártya -->
+<div class="formula-card" 
+     data-formula-name="A gömb felszíne és térfogata" 
+     data-formula-expression="A = 4*r²π  ;  V = (4*r³π)/3" 
+     data-formula-example="Egy 3 cm sugarú gömb térfogata? V=(4*3³*π)/3 = (4*27*π)/3 = 4*9π = 36π cm³.">
+    <h4 class="formula-title">5.3.3 A Gömb Felszíne és Térfogata</h4>
+    <p class="formula-explanation">A **gömb** azoknak a pontoknak a halmaza a térben, amelyek egy adott ponttól (a középponttól) egyenlő távolságra vannak. Ez a távolság a gömb **sugara (r)**.</p>
+    <ul>
+        <li><strong>Felszín (A):</strong> Érdekesség, hogy a gömb felszíne pontosan négyszer akkora, mint a gömb főkörének (a tengelymetszetének) a területe.</li>
+        <li><strong>Térfogat (V):</strong> A gömb térfogatának képlete a sugár harmadik hatványát tartalmazza.</li>
+    </ul>
+    <div class="formula-expression" style="font-size: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+        <div>Felszín: A = 4 * <span class="formula-var">r<span class="tooltip-text">Sugár</span></span>² * <span class="formula-var">π<span class="tooltip-text">Pi</span></span></div>
+        <div>Térfogat: V = (4 * <span class="formula-var">r<span class="tooltip-text">Sugár</span></span>³ * <span class="formula-var">π<span class="tooltip-text">Pi</span></span>) / 3</div>
+    </div>
+    <div class="button-group">
+        <button class="btn btn-primary physics-btn gemini-help-btn">Nem értem, kérek segítséget! →</button>
+        <button class="btn btn-primary math-btn example-toggle">Mutass egy példát!</button>
+    </div>
+    <div class="example-area">
+        <p><strong>Feladat:</strong> Számítsd ki egy 3 cm sugarú gömb felszínét és térfogatát!<br>
+           <strong>Megoldás:</strong><br>
+           - **Felszín (A):** 4 * r² * π = 4 * 3² * π = 4 * 9 * π = 36π cm².<br>
+           - **Térfogat (V):** (4 * r³ * π) / 3 = (4 * 3³ * π) / 3 = (4 * 27 * π) / 3. Itt egyszerűsíthetünk 3-mal: 4 * 9 * π = 36π cm³.</p>
+    </div>
+</div>
+
+<!-- ================================== -->
+<!-- === 5. FEJEZET ISMERETFELMÉRŐ === -->
+<!-- ================================== -->
+
+<div class="formula-card" style="border-color: var(--zold);">
+    <h4 class="formula-title">Ismeretfelmérő: Mértani Testek Felszíne és Térfogata</h4>
+    <p class="formula-explanation">Készen állsz, hogy leteszteld a tudásodat a hasábok, gúlák, hengerek, kúpok és a gömb felszín- és térfogatszámításáról? Használd a Tudástár intelligens eszközeit a gyakorláshoz és a felkészüléshez!</p>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+        
+        <div style="text-align: center;">
+            <p><strong>Gyors Ismétlés</strong></p>
+            <p style="font-size: 0.9em; margin-bottom: 0.5rem;">Generálj véletlenszerű, rövid feladatokat a 8. osztályos tananyagból!</p>
+            <a href="napi_kihivas.html" class="btn btn-primary ai-btn">Irány a Napi Kihívás! →</a>
+        </div>
+        
+        <div style="text-align: center;">
+            <p><strong>Próba-Témazáró</strong></p>
+            <p style="font-size: 0.9em; margin-bottom: 0.5rem;">Generálj egy teljes témazárót ebből a fejezetből az AI Vizsga Szimulátorral!</p>
+            <a href="vizsga_szimulator.html" class="btn btn-primary ai-btn">Indítom a Szimulátort! →</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="container footer-content">
+            <img src="{{ url_for('static', filename='img/csicsike_logo.png') }}" alt="Csicsike Tudástár Logó" class="footer-logo">
+            <p>CSICSIKE lábnyoma. © 2025</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/kereso_adatbazis.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.example-toggle').forEach(button => {
+                button.addEventListener('click', () => {
+                    const exampleArea = button.closest('.formula-card').querySelector('.example-area');
+                    const isVisible = exampleArea.style.display === 'block';
+                    exampleArea.style.display = isVisible ? 'none' : 'block';
+                    button.textContent = isVisible ? 'Mutass egy példát!' : 'Példa elrejtése';
+                });
+            });
+            
+            document.querySelectorAll('.gemini-help-btn').forEach(button => {
+                const originalText = button.innerHTML;
+                button.addEventListener('click', () => {
+                    const card = button.closest('.formula-card');
+                    const formulaName = card.dataset.formulaName;
+                    const formulaExpr = card.dataset.formulaExpression;
+                    const formulaExample = card.dataset.formulaExample;
+
+                    const prompt = `Viselkedj úgy, mint egy türelmes és segítőkész 8. osztályos matematika tanár! Egy diák segítséget kért a következővel kapcsolatban: "${formulaName}".\nA feladatod a következő 3 lépésben:\n1. Magyarázd el lépésről lépésre, egyszerű szavakkal, hogy mit jelent ez a fogalom/képlet: ${formulaExpr}.\n2. Vezesd végig a diákot a következő példafeladat megoldásán: "${formulaExample}" Magyarázd el minden lépésnél, hogy mit és miért csinálsz!\n3. Adj a diáknak 5 új, egyszerű, gyakorló feladatot (megoldás nélkül), amivel begyakorolhatja ezt a témakört.\nA stílusod legyen bátorító és pozitív! Kezdd a választ így: "Szia! Nagyszerű, hogy segítséget kértél a(z) ${formulaName} megértéséhez. Nézzük meg együtt lépésről lépésre!"`;
+                    
+                    navigator.clipboard.writeText(prompt.trim()).then(() => {
+                        button.innerHTML = '✅ Prompt másolva!';
+                        window.open('https://gemini.google.com/app', '_blank');
+                        setTimeout(() => { button.innerHTML = originalText; }, 3000);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

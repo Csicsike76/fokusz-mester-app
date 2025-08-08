@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 24. hét: Az MI etikája: A dilemmák</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --warning-bg: #fce4ec;
+            --warning-border: #e91e63;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>Gyakorlati Műhely</h1>
+            <p>24. hét: Az MI etikája: A dilemmák</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A műhely végére a gyakorlatban tapasztalod meg, milyen bonyolult etikai döntéseket kell beprogramozni egy MI-be. A "Moral Machine" szimulátor segítségével szembesülsz az önvezető autók dilemmáival, elemzed a saját morális preferenciáidat, és megérted, miért nincsenek egyszerű, "tökéletes" válaszok ezekre a kérdésekre.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Szükséges Eszközök</h2>
+                <ul>
+                    <li>Webböngésző.</li>
+                    <li>Az MIT (Massachusetts Institute of Technology) által fejlesztett <strong>"Moral Machine"</strong> szimulátor. Elérhető itt: <a href="https://www.moralmachine.net/" target="_blank">moralmachine.net</a> (az oldal nyelve magyarra állítható a jobb felső sarokban).</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. Bevezető: A villamos-dilemma 2.0</h2>
+                <p>Talán hallottál már a klasszikus filozófiai problémáról, a villamos-dilemmáról: átirányítanál-e egy elszabadult villamost egy másik vágányra, hogy megments öt embert, még akkor is, ha a másik vágányon egy ember áll? Most képzeld el, hogy ezt a döntést egy önvezető autó MI-jének kell meghoznia ezredmásodpercek alatt egy elkerülhetetlen balesetnél. Kit védjen az autó? Az utasát? A gyalogosokat? Azokat, akik betartják a szabályokat? Ma te leszel a programozó, akinek ezekre a lehetetlen kérdésekre kell választ adnia.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>4. Lépésről-lépésre Feladatok</h2>
+
+                <div class="task-card">
+                    <h3>1. Feladat: Indítsd el a Szimulációt!</h3>
+                    <ol>
+                        <li>Nyisd meg a <a href="https://www.moralmachine.net/" target="_blank">Moral Machine</a> weboldalt.</li>
+                        <li>Ha szükséges, állítsd a nyelvet magyarra (jobb felső sarok).</li>
+                        <li>Kattints a "Kezdje el az ítélkezést" gombra.</li>
+                    </ol>
+                    <p>A rendszer 13 véletlenszerű, elkerülhetetlen baleseti forgatókönyvet fog mutatni. Minden esetben neked kell eldöntened, hogy az önvezető autó melyik kimenetelt válassza. Nincs "jó" vagy "rossz" válasz, dönts a saját belátásod szerint!</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: A Személyes Elemzés</h3>
+                    <p>Miután végigvitted a 13 esetet, a rendszer egy részletes elemzést ad a döntéseidről.</p>
+                    <ol>
+                        <li>Nézd meg alaposan az eredményeket! A rendszer megmutatja, milyen tényezőket részesítettél előnyben. Például:
+                            <ul>
+                                <li><strong>Az utasok mentése vs. a gyalogosok mentése.</strong></li>
+                                <li><strong>A többség megmentése (több élet vs. kevesebb élet).</strong></li>
+                                <li><strong>Azok védelme, akik betartják a szabályokat (zöld lámpa vs. piros lámpa).</strong></li>
+                                <li>Figyelembe vetted-e az emberek korát, nemét, vagy akár a fajukat (emberek vs. állatok)?</li>
+                            </ul>
+                        </li>
+                        <li>Készíts egy képernyőképet a te személyes eredmény-összesítődről!</li>
+                    </ol>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: Összehasonlítás a Világgal</h3>
+                    <p>Az eredményeid alatt van egy gomb vagy fül, ami megmutatja, hogyan viszonyulnak a te döntéseid a több millió ember által adott válaszok globális átlagához.</p>
+                    <ol>
+                        <li>Kattints rá, és nézd meg az összehasonlító ábrákat!</li>
+                        <li><strong>A feladatod:</strong> Írj le a jegyzetedbe egy olyan szempontot, amiben a te döntésed <strong>hasonlított</strong> a globális átlaghoz, és egy olyat, amiben jelentősen <strong>eltért</strong> attól.</li>
+                        <li>Mit gondolsz, miért lehetnek ezek az eltérések? (Pl. kulturális különbségek, személyes értékrend)</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>5. Kritikai Gondolkodás Sarok</h2>
+                    <p>A játék véget ért, de a valódi kérdések csak most jönnek.</p>
+                    <ul>
+                        <li><strong>Ki döntsön?</strong> Ha a te eredményeid ennyire eltérhetnek a globális átlagtól (vagy akár a padtársadétól), kinek az etikáját kellene beprogramozni az összes önvezető autóba? A tiédet? Az enyémet? A gyártó cégét? A kormányét? Lehetséges egyáltalán egyetlen, mindenki számára elfogadható etikai szabályrendszert alkotni?</li>
+                        <li><strong>Az algoritmus mint bűnbak:</strong> Ha egy önvezető autó balesetet okoz, és az MI a beprogramozott etikai szabályai szerint "döntött", ki a felelős? A programozó, aki a kódot írta? A cég, aki az autót gyártotta? A tulajdonos, aki megvette? Vagy maga az "algoritmus"?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>6. Önálló Kihívás: Írd meg a te "Autó-Etikai" szabályodat!</h2>
+                    <p>Képzeld el, hogy te vagy az a törvényhozó, akinek egyetlen, egyszerű szabályt kell alkotnia, amit minden önvezető autónak követnie kell elkerülhetetlen baleset esetén.</p>
+                    <p><strong>A feladatod:</strong></p>
+                    <p>Fogalmazz meg <strong>egyetlen mondatban</strong> egy általános etikai szabályt! A mondat kezdődjön így:</p>
+                    <p><strong>"Elkerülhetetlen baleset esetén az önvezető autó MI-jének minden esetben..."</strong></p>
+                    <p>Nincs tökéletes válasz. A cél a gondolkodás. Miután megfogalmaztad a szabályodat, írj le 1-2 mondatban egy olyan lehetséges helyzetet is, ahol a te saját szabályod is igazságtalan vagy problémás eredményre vezetne.</p>
+                    <p>Mentsd le a szabályodat és az ellenpéldádat! Ez a feladat segít megérteni az MI-szabályozás elképesztő bonyolultságát.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

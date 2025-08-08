@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 27. hét: III. Modul Projekt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #e3f2fd;
+            --example-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .prompt-example {
+            background-color: var(--example-bg);
+            border: 1px dashed var(--example-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>III. Modul Projekt</h1>
+            <p>Felelős MI Felhasználói Kézikönyv</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>A projekt célja, hogy a harmadik modul során tanult kritikai ismereteket (torzítás, dezinformáció, szerzői jog, adatvédelem, etika) egy gyakorlati, kézzelfogható alkotásban szintetizáld. Létrehozol egy <strong>egyoldalas "Felelős Felhasználói Kézikönyvet"</strong> egy általad választott MI-eszközhöz, amely másoknak is segít eligazodni a technológia felelős használatában.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Szükséges Eszközök</h2>
+                <ul>
+                    <li>Bármelyik <strong>szöveggeneráló MI</strong> az ötleteléshez és a szövegezéshez.</li>
+                    <li>Egy egyszerű <strong>szerkesztőprogram</strong> a kézikönyv elkészítéséhez (pl. Canva, Google Docs, Word, vagy akár egy MI prezentációkészítő, mint a Gamma).</li>
+                </ul>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. Bevezető: Az MI "KRESZ-táblái"</h2>
+                <p>Megtanultál autót vezetni, ami egy szuper képesség, de a biztonságos közlekedéshez ismerned kell a KRESZ-szabályokat is. Az MI-eszközök használata is hasonló: hatalmat adnak a kezedbe, de felelősséggel is járnak. A mai projekt során te magad fogod megalkotni a "KRESZ-táblákat" egy MI-eszközhöz. Nemcsak azt fogod leírni, hogyan kell használni, hanem azt is, mik a veszélyei, és milyen szabályokat érdemes betartani, hogy se magadnak, se másoknak ne okozz "balesetet".</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>4. A Projekt Lépései</h2>
+
+                <div class="task-card">
+                    <h3>1. Feladat: Válassz Eszközt!</h3>
+                    <p>Válassz egyet az eddig megismert MI-eszközök vagy -területek közül, amelyikhez a kézikönyvedet készíted! Például:</p>
+                    <ul>
+                        <li>Egy konkrét képalkotó (pl. Copilot Designer)</li>
+                        <li>Egy konkrét chatbot (pl. ChatGPT)</li>
+                        <li>MI-alapú zeneszerzők (általánosságban)</li>
+                        <li>A Google Teachable Machine</li>
+                    </ul>
+                    <p>A választásod írd le a jegyzetedbe!</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: A Tartalom Ötletbörzéje</h3>
+                    <p>Most használd az MI-t, hogy segítsen összegyűjteni a kézikönyved tartalmát! Gondolj az elmúlt hetekre: torzítás, dezinformáció, adatvédelem, etika...</p>
+                    <div class="prompt-example">Viselkedj úgy, mint egy digitális állampolgárságra nevelő szakértő! Segíts összegyűjteni a pontokat egy "Felelős Felhasználói Kézikönyvhöz", ami a [IDE ÍRD A VÁLASZTOTT ESZKÖZ NEVÉT] használatáról szól.
+                    <br><br>
+                    Gyűjts nekem:
+                    <br>
+                    - 5 pozitív tippet, hogyan lehet kreatívan és hasznosan használni.
+                    <br>
+                    - 3 fontos figyelmeztetést a lehetséges veszélyekről (pl. torzítás, pontatlanság, adatvédelem).</div>
+                    <p><strong>Megfigyelés:</strong> Az MI egy remek kiindulási alapot ad a kézikönyved két legfontosabb fejezetéhez. Olvasd át a javaslatait, és egészítsd ki a saját gondolataiddal!</p>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: A Kézikönyv Megszerkesztése</h3>
+                    <p>Nyisd meg a választott szerkesztőprogramot, és készítsd el az egyoldalas kézikönyvedet! A dokumentum legyen átlátható, könnyen olvasható és informatív. A következő szerkezetet javasoljuk:</p>
+                    <ol>
+                        <li><strong>Főcím:</strong> Felelős Felhasználói Kézikönyv: [Az eszköz neve]</li>
+                        <li><strong>Rövid bemutatkozás (1-2 mondat):</strong> Mire jó ez az eszköz?</li>
+                        <li><strong>5 Tipp a Kreatív Használathoz:</strong> Itt sorold fel a pozitív, inspiráló tippeket. Használj ikonokat vagy képeket!</li>
+                        <li><strong>3 Figyelmeztetés a Veszélyekre:</strong> Itt sorold fel a kritikai pontokat. Használj figyelmeztető jeleket!</li>
+                        <li><strong>Az én aranyszabályom:</strong> Fogalmazz meg egyetlen, számodra legfontosabb szabályt az eszköz használatával kapcsolatban.</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>5. Kritikai Gondolkodás Sarok</h2>
+                    <p>A kézikönyved elkészült. De vajon elolvassák az emberek?</p>
+                    <ul>
+                        <li><strong>A felelősség áthárítása:</strong> Sok cég a felhasználási feltételek apróbetűs részébe rejti a figyelmeztetéseket, ezzel áthárítva a felelősséget a felhasználóra. A te kézikönyved mennyivel felhasználóbarátabb? Miért fontos, hogy a cégek is közérthetően és proaktívan tájékoztassanak a kockázatokról?</li>
+                        <li><strong>Szabályozás vagy önszabályozás?</strong> Elég, ha a felhasználók magukévá tesznek egyfajta etikai kódexet? Vagy szükség van szigorú állami törvényekre is, amelyek korlátozzák, mit tehetnek meg az MI-cégek? Melyik megközelítés lehet hatékonyabb?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>6. A Projekt Leadása és Megosztása</h2>
+                    <p>A feladatod, hogy a kész, egyoldalas kézikönyvedet elmentsd PDF formátumban.</p>
+                    <p>Ez a projekt a harmadik modul esszenciája. Nemcsak a saját tudásodat rendszerezed, hanem egy olyan anyagot hozol létre, ami másoknak is segíthet abban, hogy a digitális világ felelős és tudatos polgáraivá váljanak.</p>
+                    <p><strong>A következő órán mutasd be a kézikönyvedet, és emeld ki:</strong></p>
+                    <ul>
+                        <li>Melyik eszközt választottad és miért?</li>
+                        <li>Melyik figyelmeztetést tartod a legfontosabbnak?</li>
+                        <li>Mi a te személyes "aranyszabályod"?</li>
+                    </ul>
+                    <p>Sok sikert a modulzáró projekthez!</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

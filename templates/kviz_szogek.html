@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Kvíz: Szögek</title>
+  <style>
+    :root {
+      --primary-color: #388d3c; /* Zöld */
+      --secondary-color: #d52b1e; /* Piros */
+      --light-green: #e8f5e9;
+      --light-red: #ffebee;
+      --text-dark: #333;
+      --text-light: #fff;
+      --border-color: #ddd;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, var(--secondary-color), var(--text-light), var(--primary-color));
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: var(--text-light);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+    .question-block {
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .question {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    .answers label {
+      display: block;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      border: 1px solid transparent;
+    }
+    .answers label:hover {
+        background-color: #f0f0f0;
+    }
+    .answers input[type="radio"] {
+      margin-right: 0.8em;
+      accent-color: var(--primary-color);
+    }
+    .answers label.correct {
+      background-color: var(--light-green);
+      border-color: var(--primary-color);
+      font-weight: bold;
+    }
+    .answers label.incorrect {
+      background-color: var(--light-red);
+      border-color: var(--secondary-color);
+    }
+    .explanation {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      background-color: #f7f7fa;
+      border-left: 4px solid var(--primary-color);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .controls, .pin-section {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #f9fafb;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .pin-input {
+      width: 140px;
+      padding: 10px;
+      font-size: 1.1em;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    button:hover:not(:disabled) {
+      background-color: #2a6a2d;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    #result {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      font-size: 1.3em;
+      text-align: center;
+    }
+    .admin-panel {
+      display: none;
+      margin-top: 2rem;
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      background-color: #fffde7;
+      border-radius: 8px;
+    }
+    @media (max-width: 600px) {
+      main { padding: 1.5rem 1rem; }
+      header h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body autocomplete="off">
+  
+  <header>
+    <h1>Kvíz: Szögek</h1>
+  </header>
+
+  <main>
+    <div class="pin-section">
+      <input type="password" id="pin" class="pin-input" placeholder="PIN-kód" autocomplete="off">
+      <button type="button" id="checkBtn">Ellenőrzés</button>
+      <div id="result"></div>
+    </div>
+    
+    <form id="quiz-form" autocomplete="off">
+      <!-- A kérdések ide generálódnak -->
+    </form>
+    
+    <div class="admin-panel" id="admin-panel">
+      <h3>Adminisztrációs panel</h3>
+      <p>Mester PIN-kóddal sikeresen bejelentkezve.</p>
+    </div>
+  </main>
+
+  <script>
+    const MASTER_PIN = '121909';
+    const studentPins = new Set();
+    function createInitialPins() {
+        for (let i = 1; i <= 20; i++) {
+            studentPins.add((100000 + i).toString());
+        }
+    }
+
+    const questions = [
+      { q: "Mekkora egy 40°-os szög pótszöge?", a: "50°", b: "140°", c: "40°", correct: "a", exp: "Két szög pótszög, ha az összegük 90°. A 40°-os szög pótszöge tehát 90° - 40° = 50°." },
+      { q: "Hogy nevezzük azt a két szöget, amelyeknek van egy közös száruk, a másik kettő pedig egy egyenest alkot?", a: "Csúcsszögek", b: "Mellékszögek", c: "Pótszögek", correct: "b", exp: "A mellékszögek definíciója szerint egy közös száruk van, a másik kettő pedig kiegészíti egymást egyenessé. Összegük mindig 180°." },
+      { q: "Két metsző egyenes által bezárt egyik szög 70°. Mekkora a csúcsszöge?", a: "110°", b: "20°", c: "70°", correct: "c", exp: "A csúcsszögek tétele szerint a csúcsszögek mindig egyenlő nagyságúak. Tehát a 70°-os szög csúcsszöge is 70°." },
+      { q: "Mekkora egy 115°-os szög kiegészítő szöge?", a: "65°", b: "245°", c: "-25°", correct: "a", exp: "Két szög kiegészítő szög, ha az összegük 180°. A 115°-os szög kiegészítő szöge tehát 180° - 115° = 65°." },
+      { q: "Milyen típusú az a szög, amelyik 90°-nál nagyobb, de 180°-nál kisebb?", a: "Hegyesszög", b: "Tompaszög", c: "Homorúszög", correct: "b", exp: "A 90° és 180° közötti szögeket tompaszögnek nevezzük. A hegyesszög 0° és 90° közötti, a homorúszög 180°-nál nagyobb." },
+      { q: "Mi az egyenesszög mértéke?", a: "90°", b: "180°", c: "360°", correct: "b", exp: "Az egyenesszög az, amikor a szög két szára egy egyenest alkot. Ennek a mértéke definíció szerint 180°." },
+      { q: "Két metsző egyenes négy szöget alkot. Ha az egyik 30°, mekkora a mellette lévő?", a: "30°", b: "60°", c: "150°", correct: "c", exp: "Két metsző egyenesnél a szomszédos szögek mellékszögek, tehát az összegük 180°. A 30°-os szög melletti szög mértéke 180° - 30° = 150°." },
+      { q: "Melyik szögpár összege 90°?", a: "Pótszögek", b: "Kiegészítő szögek", c: "Váltószögek", correct: "a", exp: "Definíció szerint a pótszögek azok a szögek, amelyeknek az összege 90°. Például egy derékszögű háromszög két hegyesszöge mindig pótszögpár." },
+      { q: "Mi a derékszög mértéke?", a: "100°", b: "90°", c: "180°", correct: "b", exp: "A derékszög a geometriában egy alapvető szög, mértéke pontosan 90°." },
+      { q: "Mi igaz a csúcsszögekre?", a: "Mindig hegyesszögek.", b: "Páronként egyenlő nagyságúak.", c: "Összegük 360°.", correct: "b", exp: "A csúcsszögek tétele kimondja, hogy két metsző egyenes által létrehozott, egymással szemközti szögek mérete mindig megegyezik." },
+      { q: "Egy szög és a pótszöge egyenlőek. Mekkora ez a szög?", a: "90°", b: "60°", c: "45°", correct: "c", exp: "Ha a szög α, a pótszöge 90°-α. Az egyenlet: α = 90°-α. Hozzáadva α-t: 2α = 90°. α = 45°." },
+      { q: "Egy pont körüli szögek összege mennyi?", a: "180°", b: "360°", c: "Attól függ, hány szög van.", correct: "b", exp: "Ha egy pont köré szögeket helyezünk el úgy, hogy hézagmentesen kitöltik a teljes síkot, az összegük mindig egy teljesszög, azaz 360°." },
+      { q: "Melyik állítás HAMIS?", a: "Minden derékszögnek van pótszöge.", b: "Minden hegyesszögnek van kiegészítő szöge.", c: "Minden tompaszögnek van pótszöge.", correct: "c", exp: "Mivel a tompaszögek 90°-nál nagyobbak, nem létezik olyan pozitív szög, amit hozzájuk adva 90°-ot kapnánk. Tehát a tompaszögeknek nincs pótszögük." },
+      { q: "Két egymás melletti szög 4x és 5x. Ha kiegészítő szögek, mekkora x?", a: "20°", b: "10°", c: "90°", correct: "a", exp: "Ha kiegészítő szögek, az összegük 180°. Az egyenlet: 4x + 5x = 180°. 9x = 180°. x = 20°." },
+      { q: "Egy szög 20 fokkal nagyobb, mint a kiegészítő szöge. Mekkora a kisebbik szög?", a: "80°", b: "100°", c: "90°", correct: "a", exp: "Legyen a kisebbik szög x, a nagyobbik x+20. Az összegük 180°: x + (x+20) = 180°. 2x+20=180. 2x=160. x=80°. A szögek 80° és 100°." },
+      { q: "Mi az a szög, ami egyenlő a saját kiegészítő szögével?", a: "45°", b: "90°", c: "180°", correct: "b", exp: "Ha a szög α, a kiegészítője 180°-α. Az egyenlet: α = 180°-α. Hozzáadva α-t: 2α = 180°. α = 90°. Tehát a derékszög az." },
+      { q: "Mit alkot két, egymásra merőleges egyenes metszéspontjában?", a: "Négy hegyesszöget.", b: "Négy derékszöget.", c: "Négy tompaszöget.", correct: "b", exp: "A merőleges egyenesek definíció szerint 90°-os szöget zárnak be. Mivel a csúcsszögek és mellékszögek is ebből számolhatók, mind a négy keletkező szög 90°-os lesz." },
+      { q: "Hogy nevezzük a 0°-os szöget?", a: "Hegyesszög", b: "Nem létezik", c: "Nullszög", correct: "c", exp: "A 0°-os szöget nullszögnek nevezzük. Ez az, amikor a szög két szára egybeesik." },
+      { q: "Egy 120°-os szög mellékszöge mekkora?", a: "60°", b: "240°", c: "120°", correct: "a", exp: "A mellékszögek összege 180°. Tehát a keresett szög 180° - 120° = 60°." },
+      { q: "Egy szög feleakkora, mint a pótszöge. Mekkora ez a szög?", a: "60°", b: "30°", c: "45°", correct: "b", exp: "Legyen a szög x, a pótszöge 90-x. Az egyenlet: x = (90-x)/2. Szorozzunk 2-vel: 2x = 90-x. Adjunk x-et: 3x=90. x=30°." },
+      { q: "Hány fokperc van egy fokban?", a: "100", b: "60", c: "360", correct: "b", exp: "A szögmérés váltószáma a 60-as, hasonlóan az időméréshez. 1 fok (°) = 60 szögperc (′). 1 szögperc (′) = 60 szögmásodperc (″)." },
+      { q: "Két szög csúcsszög, ha...", a: "...a csúcsuk közös.", b: "...száraik egymás ellentétes félegyenesei.", c: "...összegük 180°.", correct: "b", exp: "Ez a csúcsszögek pontos definíciója. Két metsző egyenes hozza létre őket, és a szögszárak páronként egymás folytatásai." },
+      { q: "Melyik állítás igaz?", a: "Egy hegyesszög kiegészítő szöge mindig tompaszög.", b: "Egy tompaszög kiegészítő szöge mindig tompaszög.", c: "Egy derékszög kiegészítő szöge hegyesszög.", correct: "a", exp: "Ha α < 90°, akkor a kiegészítője 180°-α > 90°, tehát tompaszög. A 'b' és 'c' állítások hamisak." },
+      { q: "Három szög egy pont körüli szöget alkot. Kettő közülük 100° és 150°. Mekkora a harmadik?", a: "110°", b: "90°", c: "130°", correct: "a", exp: "A pont körüli szögek összege 360°. A harmadik szög: 360° - (100° + 150°) = 360° - 250° = 110°." },
+      { q: "Hány fok 120 szögperc?", a: "2°", b: "1,2°", c: "6°", correct: "a", exp: "Mivel 1° = 60′, a fokra való átváltáshoz osztani kell 60-nal. 120′ / 60 = 2°." }
+    ];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    const quizForm = document.getElementById('quiz-form');
+    function populateQuiz() {
+      shuffle(questions);
+      quizForm.innerHTML = '';
+      questions.forEach((item, i) => {
+        const block = document.createElement('div');
+        block.className = 'question-block';
+        block.innerHTML = `
+          <div class="question">${i + 1}. ${item.q}</div>
+          <div class="answers">
+            <label><input type="radio" name="q${i}" value="a"/> a) ${item.a}</label>
+            <label><input type="radio" name="q${i}" value="b"/> b) ${item.b}</label>
+            <label><input type="radio" name="q${i}" value="c"/> c) ${item.c}</label>
+          </div>
+          <div class="explanation" id="exp${i}">${item.exp}</div>
+        `;
+        quizForm.appendChild(block);
+      });
+    }
+
+    function areAllQuestionsAnswered() {
+      for (let i = 0; i < questions.length; i++) {
+        if (!quizForm.querySelector(`input[name="q${i}"]:checked`)) return false;
+      }
+      return true;
+    }
+
+    function isPinValid(pin) {
+        return pin === MASTER_PIN || studentPins.has(pin);
+    }
+
+    function evaluateQuiz(isMaster = false) {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const selectedOption = quizForm.querySelector(`input[name="q${i}"]:checked`);
+        const explanation = document.getElementById(`exp${i}`);
+        const answerLabels = quizForm.querySelector(`input[name="q${i}"]`).parentElement.parentElement.querySelectorAll('label');
+        
+        if (selectedOption) {
+            const parentLabel = selectedOption.parentElement;
+            if (selectedOption.value === q.correct) {
+                score++;
+                parentLabel.classList.add('correct');
+                parentLabel.innerHTML = `✅ ${parentLabel.innerHTML}`;
+            } else {
+                parentLabel.classList.add('incorrect');
+                parentLabel.innerHTML = `❌ ${parentLabel.innerHTML}`;
+                const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+                correctLabel.classList.add('correct');
+            }
+        } else if (isMaster) {
+             const correctLabel = answerLabels[q.correct.charCodeAt(0) - 97];
+             correctLabel.classList.add('correct');
+        }
+        
+        if (selectedOption || isMaster) {
+            explanation.style.display = 'block';
+        }
+        
+        quizForm.querySelectorAll(`input[name="q${i}"]`).forEach(input => input.disabled = true);
+      });
+
+      if (isMaster) score = questions.length;
+      const percentage = ((score / questions.length) * 100).toFixed(0);
+      document.getElementById('result').innerHTML = `Eredmény: <b>${score}/${questions.length}</b> (${percentage}%)`;
+      document.getElementById('checkBtn').disabled = true;
+      document.getElementById('pin').disabled = true;
+    }
+    
+    function masterMode() {
+        questions.forEach((q, i) => {
+            const correctRadio = quizForm.querySelector(`input[name="q${i}"][value="${q.correct}"]`);
+            if (correctRadio) correctRadio.checked = true;
+        });
+        evaluateQuiz(true);
+        document.getElementById('admin-panel').style.display = 'block';
+    }
+
+    function checkAnswers() {
+        const pin = document.getElementById('pin').value;
+        if (!isPinValid(pin)) {
+            alert('Érvénytelen PIN-kód! Kérlek, próbáld újra.');
+            return;
+        }
+
+        if (pin === MASTER_PIN) {
+            masterMode();
+            return;
+        }
+
+        if (!areAllQuestionsAnswered()) {
+            alert('Kérlek, válaszolj az összes kérdésre az ellenőrzés előtt!');
+            return;
+        }
+        
+        evaluateQuiz();
+    }
+
+    document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+    document.getElementById('pin').addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            checkAnswers();
+        }
+    });
+
+    // Induláskor
+    window.onload = function() {
+        createInitialPins();
+        populateQuiz();
+    };
+
+  </script>
+</body>
+</html>

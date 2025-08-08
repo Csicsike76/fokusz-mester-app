@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Önértékelés - Hőjelenségek</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Önértékelési feladatlap - Hőjelenségek</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Melyik hőterjedési mód nem igényel közvetítő közeget?",
+                answers: { a: "Hősugárzás", b: "Hővezetés", c: "Hőáramlás" },
+                correctAnswer: 'a',
+                explanation: "A hősugárzás elektromágneses hullámok formájában terjed, ami a vákuumban is képes haladni. A hővezetéshez és hőáramláshoz anyagi közeg szükséges. ✅ Megoldás: Hősugárzás."
+            },
+            {
+                question: "Mi történik a legtöbb anyaggal, ha melegítjük?",
+                answers: { a: "Kitágul.", b: "Összehúzódik.", c: "A mérete nem változik." },
+                correctAnswer: 'a',
+                explanation: "A hőmérséklet emelkedésével a részecskék mozgása hevesebbé válik, nagyobb helyet igényelnek, ami a test méretének növekedését, azaz hőtágulását okozza. ✅ Megoldás: Kitágul."
+            },
+            {
+                question: "Melyik állítás igaz a hőre?",
+                answers: { a: "Egy energiaátadási folyamat.", b: "Egy testben tárolt tulajdonság.", c: "Ugyanaz, mint a hőmérséklet." },
+                correctAnswer: 'a',
+                explanation: "A hő nem a test tulajdonsága, hanem egy folyamat, az energia áramlása a melegebb test felől a hidegebb felé a hőmérséklet-különbség miatt. ✅ Megoldás: Egy energiaátadási folyamat."
+            },
+            {
+                question: "Mi a kaloriméter?",
+                answers: { a: "Hőszigetelt edény hőmennyiség mérésére.", b: "Hőmérő.", c: "Ételek energiatartalmát mérő eszköz." },
+                correctAnswer: 'a',
+                explanation: "A kaloriméter egy olyan hőszigetelt edény, amiben a hőcsere folyamatokat lehet vizsgálni, és a hőmérséklet-változásokból a kicserélődött hőmennyiségre lehet következtetni. ✅ Megoldás: Hőszigetelt edény hőmennyiség mérésére."
+            },
+            {
+                question: "Mi a fűtőérték?",
+                answers: { a: "Az a hőmennyiség, ami 1 kg fűtőanyag elégetésekor felszabadul.", b: "A fűtőanyag gyulladási hőmérséklete.", c: "A fűtőanyag ára." },
+                correctAnswer: 'a',
+                explanation: "A fűtőérték egy anyagra jellemző érték, ami megmutatja az egységnyi tömegű anyag elégetésekor felszabaduló energiát. ✅ Megoldás: Az a hőmennyiség, ami 1 kg fűtőanyag elégetésekor felszabadul."
+            },
+            {
+                question: "Melyik folyamat jár hőfelvétellel?",
+                answers: { a: "Forrás", b: "Fagyás", c: "Lecsapódás" },
+                correctAnswer: 'a',
+                explanation: "A forrás (és az olvadás, párolgás) során az anyag energiát vesz fel a környezetétől a halmazállapot-változáshoz. A fagyás és a lecsapódás hőleadással jár. ✅ Megoldás: Forrás."
+            },
+            {
+                question: "Melyik anyag a jó hővezető?",
+                answers: { a: "Fémek", b: "Fa", c: "Levegő" },
+                correctAnswer: 'a',
+                explanation: "A fémekben a szabad elektronok hatékonyan továbbítják a rezgési energiát, ezért kiváló hővezetők. A fa és a levegő hőszigetelők. ✅ Megoldás: Fémek."
+            },
+            {
+                question: "Milyen halmazállapotú a víz 0 °C-on?",
+                answers: { a: "Lehet szilárd (jég) és folyékony is.", b: "Csak szilárd.", c: "Csak folyékony." },
+                correctAnswer: 'a',
+                explanation: "A 0 °C a víz olvadás- és fagyáspontja. Ezen a hőmérsékleten a jég és a víz egyensúlyban lehet egymással. Az olvadás vagy fagyás folyamata ezen a hőmérsékleten zajlik. ✅ Megoldás: Lehet szilárd (jég) és folyékony is."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Melyik hőterjedési mód jellemző a folyadékokra és gázokra?",
+                answers: { a: "Hővezetés", b: "Hőáramlás (konvekció)", c: "Hősugárzás" },
+                correctAnswer: 'b',
+                explanation: "Folyadékokban és gázokban a felmelegedett részek sűrűsége lecsökken és felemelkednek, helyükre hidegebb, sűrűbb részek áramlanak. Ez az anyagáramlással járó hőterjedés a hőáramlás. ✅ Megoldás: Hőáramlás (konvekció)."
+            },
+            {
+                question: "Mi a hőmérséklet?",
+                answers: { a: "A hő mennyisége.", b: "A testek hőállapotát jellemző fizikai mennyiség.", c: "A hő terjedésének sebessége." },
+                correctAnswer: 'b',
+                explanation: "A hőmérséklet egy állapotjelző, amely a testet alkotó részecskék átlagos mozgási energiájával arányos. ✅ Megoldás: A testek hőállapotát jellemző fizikai mennyiség."
+            },
+            {
+                question: "Melyik állítás igaz a belső égésű motorokra?",
+                answers: { a: "Külső hőforrást használnak.", b: "Az üzemanyag elégetése a motoron belül történik.", c: "100%-os hatásfokkal működnek." },
+                correctAnswer: 'b',
+                explanation: "A belső égésű motorok (pl. autó motorja) esetében az üzemanyag (benzin, dízel) elégetése a motor hengerében zajlik, és az égéstermékek tágulása végzi a munkát. ✅ Megoldás: Az üzemanyag elégetése a motoron belül történik."
+            },
+            {
+                question: "Mi a víz anomáliája?",
+                answers: { a: "A víz 50 °C-on forr.", b: "A víz +4 °C-tól 0 °C-ig hűtve tágul.", c: "A víz nem vezeti a hőt." },
+                correctAnswer: 'b',
+                explanation: "A legtöbb anyagtól eltérően a víz sűrűsége +4 °C-on a legnagyobb. Ha +4 °C-ról tovább hűtjük, a víz tágulni kezd, ezért a jég úszik a vízen. ✅ Megoldás: A víz +4 °C-tól 0 °C-ig hűtve tágul."
+            },
+            {
+                question: "Mi a fajhő mértékegysége?",
+                answers: { a: "J/kg", b: "J/(kg·°C)", c: "kg/m³" },
+                correctAnswer: 'b',
+                explanation: "A fajhő (c) azt adja meg, hogy mennyi joule energia kell 1 kilogramm anyag hőmérsékletének 1 Celsius-fokkal való emeléséhez. ✅ Megoldás: J/(kg·°C)."
+            },
+            {
+                question: "Melyik a megújuló energiaforrás?",
+                answers: { a: "Földgáz", b: "Tűzifa (biomassza)", c: "Szén" },
+                correctAnswer: 'b',
+                explanation: "A megújuló energiaforrások emberi időléptékben képesek újratermelődni. A tűzifa ilyen, mert a fák újratelepíthetők. A földgáz és a szén fosszilis tüzelőanyagok. ✅ Megoldás: Tűzifa (biomassza)."
+            },
+            {
+                question: "Mi a diffúzió?",
+                answers: { a: "A testek hőtágulása.", b: "Az anyagok elkeveredése a részecskék hőmozgása miatt.", c: "A hő terjedése vákuumban." },
+                correctAnswer: 'b',
+                explanation: "A diffúzió az anyagok önkéntes keveredése, amit a részecskék állandó, rendezetlen mozgása, a hőmozgás okoz. ✅ Megoldás: Az anyagok elkeveredése a részecskék hőmozgása miatt."
+            },
+            {
+                question: "Mi történik a részecskékkel melegítés hatására?",
+                answers: { a: "Lelassulnak.", b: "A hőmozgásuk hevesebbé válik.", c: "Kristályrácsba rendeződnek." },
+                correctAnswer: 'b',
+                explanation: "A melegítés energiát közöl a testtel, ami a részecskék mozgási energiáját növeli. Emiatt a hőmozgásuk (rezgés, haladás) gyorsabb, hevesebb lesz. ✅ Megoldás: A hőmozgásuk hevesebbé válik."
+            },
+            {
+                question: "A Nap melege hogyan jut el a Földre?",
+                answers: { a: "Hővezetéssel.", b: "Hősugárzással.", c: "Hőáramlással." },
+                correctAnswer: 'b',
+                explanation: "A Nap és Föld közötti vákuumban csak a hősugárzás képes terjedni. A Nap energiája elektromágneses sugárzás formájában éri el a bolygónkat. ✅ Megoldás: Hősugárzással."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Melyik NEM halmazállapot?",
+                answers: { a: "Szilárd", b: "Légnemű", c: "Hőmérséklet" },
+                correctAnswer: 'c',
+                explanation: "A szilárd, folyékony és légnemű az anyagok három alapvető halmazállapota. A hőmérséklet egy fizikai mennyiség, ami a testek hőállapotát jellemzi. ✅ Megoldás: Hőmérséklet."
+            },
+            {
+                question: "Mi a hőmennyiség képlete?",
+                answers: { a: "Q = m ⋅ c", b: "Q = m ⋅ ΔT", c: "Q = c ⋅ m ⋅ ΔT" },
+                correctAnswer: 'c',
+                explanation: "A hőmérséklet-változáshoz szükséges hőmennyiség (Q) a fajhő (c), a tömeg (m) és a hőmérséklet-változás (ΔT) szorzata. ✅ Megoldás: Q = c ⋅ m ⋅ ΔT."
+            },
+            {
+                question: "Melyik állítás igaz a folyadékokra?",
+                answers: { a: "Kitöltik a rendelkezésre álló teret.", b: "Állandó alakjuk van.", c: "Felveszik az edény alakját, de térfogatuk állandó." },
+                correctAnswer: 'c',
+                explanation: "A folyadékok részecskéi elgördülnek egymáson, ezért felveszik a tartóedény alakját, de a köztük lévő vonzerő miatt a térfogatuk állandó. A gázok töltik ki a teret, a szilárd testeknek van állandó alakjuk. ✅ Megoldás: Felveszik az edény alakját, de térfogatuk állandó."
+            },
+            {
+                question: "Miért rossz hővezető a levegő?",
+                answers: { a: "Mert nehéz.", b: "Mert színtelen.", c: "Mert a részecskéi távol vannak egymástól." },
+                correctAnswer: 'c',
+                explanation: "A hővezetés a részecskék rezgésének továbbadását jelenti. A gázokban, így a levegőben is, a részecskék messze vannak egymástól, így nehezen adják át egymásnak az energiát. Ezért a levegő jó hőszigetelő. ✅ Megoldás: Mert a részecskéi távol vannak egymástól."
+            },
+            {
+                question: "Mi a hőerőgép?",
+                answers: { a: "Egy fűtőtest.", b: "Egy hűtőgép.", c: "Olyan gép, ami a hőt mechanikai munkává alakítja." },
+                correctAnswer: 'c',
+                explanation: "A hőerőgépek (pl. gőzgép, belső égésű motor) lényege, hogy egy meleg helyről hőt vesznek fel, ezt részben hasznos munkává alakítják, a maradék hőt pedig leadják egy hidegebb helyen. ✅ Megoldás: Olyan gép, ami a hőt mechanikai munkává alakítja."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "A fűtőanyagok égéskor hőt termelnek.", b: "A hő a melegebb helyről a hidegebb felé áramlik.", c: "A testek hűtéskor mindig kitágulnak." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás hamis. A legtöbb test hűtéskor összehúzódik. A víz a +4°C alatti anomáliája miatt kivétel. ✅ Megoldás: A testek hűtéskor mindig kitágulnak."
+            },
+            {
+                question: "Mi a különbség az olvadás és a forrás között?",
+                answers: { a: "Az olvadás szilárdból folyékony, a forrás folyékonyból szilárd átmenet.", b: "Az olvadás a felszínen, a forrás a folyadék belsejében történik.", c: "Az olvadás szilárdból folyékony, a forrás folyékonyból légnemű átmenet." },
+                correctAnswer: 'c',
+                explanation: "Az olvadás a szilárd-folyékony, a forrás pedig a folyékony-légnemű halmazállapot-változás. A forrás a folyadék belsejében zajlik, de nem ez a legfőbb különbség. ✅ Megoldás: Az olvadás szilárdból folyékony, a forrás folyékonyból légnemű átmenet."
+            },
+            {
+                question: "Mi a hőegyensúly feltétele?",
+                answers: { a: "A testek tömege egyenlő.", b: "A testek belső energiája egyenlő.", c: "A testek hőmérséklete egyenlő." },
+                correctAnswer: 'c',
+                explanation: "Hőegyensúly akkor áll be, amikor a testek között megszűnik a nettó hőáramlás. Ez pontosan akkor következik be, amikor a hőmérsékletük kiegyenlítődik. ✅ Megoldás: A testek hőmérséklete egyenlő."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

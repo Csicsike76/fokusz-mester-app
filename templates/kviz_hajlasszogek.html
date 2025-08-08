@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Hajlásszögek kiszámítása</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Hajlásszögek kiszámítása</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Melyik derékszögű háromszögben kell számolni egy gúla oldalélének és alaplapjának hajlásszögét?", options: { a: "A testmagasság, az oldalél és az alapél fele által alkotott háromszögben.", b: "A testmagasság, az oldalél és az alaplap átlójának fele által alkotott háromszögben.", c: "Az oldallap magassága, az oldalél és az alapél fele által alkotott háromszögben." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hajlásszög az oldalél (ferde egyenes) és a vetülete (alaplap átlójának fele) között van. 🔹 2. Lépés: A háromszöget ez a két szakasz és a testmagasság alkotja. Az átfogó az oldalél. ✅ Megoldás: A testmagasság, az oldalél és az alaplap átlójának fele által alkotott háromszögben." },
+            { question: "Melyik derékszögű háromszögben kell számolni egy szabályos gúla oldallapjának és alaplapjának lapszögét?", options: { a: "A testmagasság, az alapél és az oldalél által alkotott háromszögben.", b: "Az oldallap magassága, a testmagasság és az alapél felének vetülete által alkotott háromszögben.", c: "Két oldalél és egy alapél által alkotott háromszögben." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A lapszöget a síkszög méri. Ennek szárai a metszésvonalra (alapélre) állított merőlegesek. 🔹 2. Lépés: Az egyik szár az oldallap magassága, a másik az alaplapon a középponttól az oldalél felezőpontjáig tartó szakasz. A harmadik oldal a testmagasság. ✅ Megoldás: Az oldallap magassága, a testmagasság és az alapél felének vetülete által alkotott háromszögben." },
+            { question: "Egy 4 méter magas, 3 méter sugarú kúp alkotója mekkora szöget zár be az alaplappal (α)? Mi a szög tangense?", options: { a: "tan(α) = 3/4", b: "tan(α) = 4/5", c: "tan(α) = 4/3" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A hajlásszöget a magasság (m), a sugár (r) és az alkotó (a) által alkotott derékszögű háromszögben keressük. 🔹 2. Lépés: A szög a sugár és az alkotó között van. A szöggel szemközti befogó a magasság (m=4), a szög melletti befogó a sugár (r=3). 🔹 3. Lépés: tan(α) = szemközti / melletti = m / r = 4/3. ✅ Megoldás: A szög tangense 4/3." },
+            { question: "Mekkora egy kocka testátlójának hajlásszöge az alaplaphoz?", options: { a: "45°", b: "kb. 35,26°", c: "60°" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hajlásszöget (α) a testátló (átfogó), a testmagasság (szemközti befogó, hossza 'a') és a lapátló (melletti befogó, hossza 'a√2') derékszögű háromszögében keressük. 🔹 2. Lépés: tan(α) = szemközti / melletti = a / (a√2) = 1/√2 ≈ 0,707. 🔹 3. Lépés: A számológép visszakereső (arctg) funkciójával kapjuk, hogy α ≈ 35,26°. ✅ Megoldás: kb. 35,26°." },
+            { question: "Mekkora egy kocka lapátlójának hajlásszöge az alaplaphoz, ha az átló az oldallapon van?", options: { a: "45°", b: "90°", c: "0°" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A hajlásszöget a lapátló (átfogó), a kocka éle (szemközti befogó) és a lapátló vetülete (melletti befogó, ami szintén egy él) derékszögű háromszögében keressük. 🔹 2. Lépés: Ez egy egyenlő szárú derékszögű háromszög, melynek hegyesszögei mindig 45°-osak. ✅ Megoldás: 45°." },
+            { question: "Egy 10 cm élű kocka testátlója és alaplapja által bezárt szög (α) szinusza mennyi?", options: { a: "1 / √2", b: "1 / √3", c: "√2 / √3" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A derékszögű háromszög oldalai: szemközti befogó (magasság) = 10, átfogó (testátló) = 10√3. 🔹 2. Lépés: sin(α) = szemközti / átfogó = 10 / (10√3) = 1/√3. ✅ Megoldás: 1 / √3." },
+            { question: "Egy egyenes és egy sík hajlásszöge 0°. Milyen a helyzetük?", options: { a: "merőlegesek", b: "metszők 45°-ban", c: "párhuzamosak vagy illeszkedők" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A hajlásszöget az egyenes és a síkra eső vetülete között mérjük. 🔹 2. Lépés: Ha ez a szög 0°, az azt jelenti, hogy az egyenes egybeesik a vetületével, tehát vagy rajta fekszik a síkon (illeszkedő), vagy párhuzamos vele. ✅ Megoldás: Párhuzamosak vagy illeszkedők." },
+            { question: "Egy egyenes és egy sík hajlásszöge 90°. Milyen a helyzetük?", options: { a: "párhuzamosak", b: "merőlegesek", c: "illeszkedők" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ha a hajlásszög 90°, az a lehető legnagyobb szög, amit egy egyenes és egy sík bezárhat. 🔹 2. Lépés: Ez a síkra merőlegesség definíciója. ✅ Megoldás: Merőlegesek." },
+            { question: "Egy szabályos négyzet alapú gúla alapéle 8 cm, testmagassága 3 cm. Mekkora az oldallap és az alaplap lapszögének (α) tangense?", options: { a: "3 / 4", b: "3 / 5", c: "4 / 3" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A lapszöget a testmagasság (szemközti befogó, m=3) és az alapél felének (melletti befogó, 8/2=4) által alkotott derékszögű háromszögben mérjük. 🔹 2. Lépés: tan(α) = szemközti / melletti = 3 / 4. ✅ Megoldás: A szög tangense 3/4." },
+            { question: "Egy rámpa 20 méter hosszú és 10 métert emelkedik. Mekkora a hajlásszöge (α) a vízszinteshez?", options: { a: "45°", b: "30°", c: "60°" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A rámpa hossza az átfogó (20), az emelkedés a szöggel szemközti befogó (10). 🔹 2. Lépés: sin(α) = szemközti / átfogó = 10 / 20 = 0,5. 🔹 3. Lépés: Az a szög, aminek a szinusza 0,5, az a 30°. ✅ Megoldás: 30°." },
+            { question: "Mekkora két párhuzamos sík lapszöge?", options: { a: "90°", b: "0°", c: "180°" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A párhuzamos síkok soha nem metszik egymást, nincs metszésvonaluk. 🔹 2. Lépés: Ilyenkor a hajlásszögüket (lapszögüket) 0°-nak definiáljuk. ✅ Megoldás: 0°." },
+            { question: "Két sík hajlásszöge 120°. Ez a szög...", options: { a: "hegyesszög.", b: "tompaszög.", c: "nem lehetséges." }, correctAnswer: "c", explanation: "🔹 1. Lépés: Két sík hajlásszögét (lapszögét) mindig a kisebbik térrészben mérjük. 🔹 2. Lépés: Ezért a mértéke mindig 0° és 90° közötti hegyesszög vagy 90°-os derékszög lehet. Tompaszög nem. ✅ Megoldás: Nem lehetséges." },
+            { question: "Egy egyenes és egy sík hajlásszögének szinusza 1. Milyen a helyzetük?", options: { a: "párhuzamosak", b: "merőlegesek", c: "45°-os szöget zárnak be" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az a szög, aminek a szinusza 1, az a 90°-os szög. 🔹 2. Lépés: Ha egy egyenes és egy sík hajlásszöge 90°, akkor merőlegesek egymásra. ✅ Megoldás: Merőlegesek." },
+            { question: "Melyik testben NEM értelmezhető az oldallap és az alaplap lapszöge?", options: { a: "gúla", b: "hasáb", c: "henger" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A lapszöget síklapok között mérjük. 🔹 2. Lépés: A gúlának és a hasábnak is sík alap- és oldallapjai vannak. A henger oldalfelülete (palástja) görbe, így a hagyományos lapszög nem értelmezhető. ✅ Megoldás: Henger." },
+            { question: "Egy kocka testátlója és az oldallap, amelyből kiindul, mekkora szöget zár be?", options: { a: "45°", b: "kb. 35,26°", c: "90°" }, correctAnswer: "a", explanation: "A kérdés bonyolult. A testátló vetülete az oldallapra a lapátló. A derékszögű háromszög oldalai: az él, a lapátló, a testátló. sin(α) = él / testátló = a / (a√3) = 1/√3. Ez a 35.26°. Ha a kérdés a testátló és a lapátló szöge, akkor cos(β) = lapátló / testátló = a√2 / a√3 = √2/√3. Ez sem 45°. A 45° a lapátló és az alapél szöge. Javítom a kérdést: 'Mekkora egy kocka lapátlójának hajlásszöge az alaplaphoz, ha az átló az oldallapon van?' ✅ Megoldás: A lapátló és vetülete (az alapél) egyenlő szárú derékszögű háromszöget alkotnak, ahol a szögek 45°-osak." },
+            { question: "Ha egy lejtő hajlásszöge nő, akkor a lejtő...", options: { a: "meredekebb lesz.", b: "lankásabb lesz.", c: "hossza nem változik." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A nagyobb hajlásszög nagyobb emelkedést jelent ugyanakkora vízszintes távolságon. 🔹 2. Lépés: A nagyobb emelkedés meredekebb lejtőt eredményez. ✅ Megoldás: Meredekebb lesz." },
+            { question: "Egy szabályos gúla oldaléle 45°-os szöget zár be az alaplappal. Mi igaz a testre?", options: { a: "A testmagasság fele az alapélnek.", b: "A testmagasság egyenlő az alaplap átlójának felével.", c: "Az oldalél egyenlő a testmagassággal." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hajlásszöget a testmagasság (szemközti befogó) és az alaplap átlójának fele (melletti befogó) által alkotott derékszögű háromszögben mérjük. 🔹 2. Lépés: Ha a szög 45°, akkor a háromszög egyenlő szárú, tehát a két befogó egyenlő. ✅ Megoldás: A testmagasság egyenlő az alaplap átlójának felével." },
+            { question: "Két sík metszésvonalára merőleges sík a két síkból mit metsz ki?", options: { a: "két párhuzamos egyenest", b: "a lapszöget mérő síkszög szárait", c: "két pontot" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ez a síkszög szerkesztésének a módja. 🔹 2. Lépés: A metszésvonalra merőleges metszősík a két eredeti síkból egy-egy félegyenest vág ki. E két félegyenes szöge adja a lapszög mértékét. ✅ Megoldás: A lapszöget mérő síkszög szárait." },
+            { question: "Egy 6 cm élű kocka oldallapjának átlója mekkora szöget zár be az alaplappal?", options: { a: "30°", b: "45°", c: "60°" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hajlásszöget a lapátló (átfogó), a kocka éle (szemközti befogó, 6cm) és a vetület (melletti befogó, szintén 6cm) derékszögű háromszögében keressük. 🔹 2. Lépés: Mivel a két befogó egyenlő, a háromszög egyenlő szárú, a hegyesszögei pedig 45°-osak. ✅ Megoldás: 45°." },
+            { question: "Egy sík és egy rá illeszkedő egyenes hajlásszöge mennyi?", options: { a: "0°", b: "90°", c: "Nincs értelmezve" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Ha az egyenes a síkon fekszik, a vetülete önmaga. 🔹 2. Lépés: Egy egyenes önmagával 0°-os szöget zár be. ✅ Megoldás: 0°." },
+            { question: "Egy egyenes és egy sík hajlásszöge (α) a következő tartományba esik:", options: { a: "0° ≤ α ≤ 90°", b: "0° < α < 90°", c: "0° ≤ α ≤ 180°" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A hajlásszög lehet 0° (párhuzamos vagy illeszkedő esetben) és lehet 90° (merőleges esetben). 🔹 2. Lépés: A többi esetben a kettő közötti hegyesszöget veszi fel. ✅ Megoldás: 0° ≤ α ≤ 90°." },
+            { question: "Egy ferde házfal hajlásszöge a talajhoz 80°. Milyen ez a szög?", options: { a: "derékszög", b: "hegyesszög", c: "tompaszög" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hajlásszög mindig a legkisebb szög az egyenes és a sík között. 🔹 2. Lépés: A 80° kisebb, mint 90°, ezért hegyesszögnek számít. ✅ Megoldás: Hegyesszög." },
+            { question: "Melyik szögfüggvényt használjuk, ha a hajlásszöget a testmagasságból és az oldalélből akarjuk kiszámolni?", options: { a: "szinusz", b: "koszinusz", c: "tangens" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A derékszögű háromszögben a testmagasság a szöggel szemközti befogó. 🔹 2. Lépés: Az oldalél az átfogó. 🔹 3. Lépés: A szemközti befogó és az átfogó aránya a szinusz. ✅ Megoldás: Szinusz." },
+            { question: "Mekkora a hajlásszöge egy kocka két, egy csúcsból induló lapátlójának?", options: { a: "90°", b: "45°", c: "60°" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A két lapátló és a harmadik, őket összekötő lapátló egy háromszöget alkot. 🔹 2. Lépés: Mivel a kocka lapátlói egyenlő hosszúak, ez egy egyenlő oldalú háromszög. 🔹 3. Lépés: Az egyenlő oldalú háromszög minden szöge 60°. ✅ Megoldás: 60°." },
+            { question: "Egy lejtő 100 méter alatt 100 métert emelkedik. Mekkora a hajlásszöge?", options: { a: "30°", b: "45°", c: "60°" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A vízszintes vetület (melletti befogó) 100 m, a magasság (szemközti befogó) 100 m. 🔹 2. Lépés: tan(α) = szemközti/melletti = 100/100 = 1. 🔹 3. Lépés: Az a szög, aminek a tangense 1, az a 45°. ✅ Megoldás: 45°." }
+        ];
+        
+        // Audit utáni javítás a 15. kérdéshez
+        quizData[14] = { question: "Melyik állítás igaz egy kocka testátlójára és az oldallapra, amiből kiindul?", options: { a: "A hajlásszögük 45°.", b: "A hajlásszögük kb. 35,26°.", c: "Merőlegesek egymásra." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hajlásszög a testátló (átfogó) és a vetülete (lapátló) közötti szög. A derékszögű háromszög harmadik oldala a kocka éle. 🔹 2. Lépés: A szög szinusza: sin(α) = szemközti befogó / átfogó = él / testátló = a / (a√3) = 1/√3. 🔹 3. Lépés: A számológép visszakereső (arcsin) funkciójával kapjuk, hogy α ≈ 35,26°. ✅ Megoldás: A hajlásszög kb. 35,26°." };
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

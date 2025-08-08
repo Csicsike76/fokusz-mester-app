@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title> KVIZ 7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    :root{
+        --red:#CD2E3A;
+        --white:#FFFFFF;
+        --green:#436F4D;
+        --light:#f4f4f9;
+        --radius:8px;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--light);}
+    header{
+        background:linear-gradient(to right,var(--red),var(--white),var(--green));
+        color:#fff;
+        padding:20px 10px;
+        text-align:center;
+        font-size:24px;
+        font-weight:bold;
+        text-shadow:1px 1px 2px #000;
+    }
+    .wrapper{
+        display:flex;
+        max-width:1200px;
+        margin:0 auto;
+    }
+    #toc{
+        width:280px;
+        background:#fff;
+        padding:20px;
+        position:sticky;
+        top:0;
+        height:100vh;
+        overflow-y:auto;
+        border-right:1px solid #ddd;
+    }
+    #toc h2{margin-top:0;}
+    #toc ul{list-style:none;padding-left:0;}
+    #toc li{margin:6px 0;}
+    #toc a{
+        text-decoration:none;
+        color:#007bff;
+        font-weight:500;
+    }
+    #toc a:hover{color:var(--red);}
+    main{
+        flex:1;
+        padding:20px;
+    }
+    .card{
+        background:#fff;
+        border-radius:var(--radius);
+        margin-bottom:25px;
+        padding:20px;
+        box-shadow:0 2px 6px rgba(0,0,0,.1);
+    }
+    .card h3{margin-top:0;color:var(--green);}
+    .formula{
+        background:#eef;
+        border-left:4px solid var(--green);
+        padding:10px 15px;
+        margin:10px 0;
+        font-family:"Courier New",Courier,monospace;
+        font-size:1.1em;
+    }
+    .example{
+        background:#f9f9f9;
+        border-left:4px solid var(--red);
+        padding:10px 15px;
+        margin:10px 0;
+    }
+    .quizBtn{
+        display:inline-block;
+        margin-top:10px;
+        padding:8px 16px;
+        background:var(--green);
+        color:#fff;
+        text-decoration:none;
+        border-radius:var(--radius);
+    }
+    .quizBtn:hover{background:var(--red);}
+    @media(max-width:900px){
+        .wrapper{flex-direction:column;}
+        #toc{
+            width:100%;
+            position:relative;
+            height:auto;
+            border-right:none;
+            border-bottom:1px solid #ddd;
+        }
+    }
+</style>
+</head>
+<body>
+<header> 7. osztály</header>
+<div class="wrapper">
+<!-- Bal oldali tartalomjegyzék -->
+<nav id="toc">
+    <h2>Tartalomjegyzék</h2>
+    <ul>
+        <li><a href="#fejezet1">1. Valós számok halmaza</a>
+            <ul>
+                <li><a href="#1-1">1.1 Természetes számok négyzetgyöke</a></li>
+                <li><a href="#1-2">1.2 Irracionális számok</a></li>
+                <li><a href="#1-3">1.3 Tényezők kiemelése gyökjel alól</a></li>
+                <li><a href="#1-4">1.4 Számok ábrázolása, összehasonlítás</a></li>
+                <li><a href="#1-5">1.5 Műveletek valós számokkal</a></li>
+                <li><a href="#1-6">1.6 Számtani és mértani közép</a></li>
+                <li><a href="#1-7">1.7 x² = a egyenletek</a></li>
+            </ul>
+        </li>
+        <li><a href="#fejezet2">2. Lineáris egyenletek és rendszerek</a>
+            <ul>
+        <li><a href="#fejezet3">3. Az adatszervezés elemei</a>
+            <ul>
+                <li><a href="#3-1">3.1 Descartes-szorzat</a></li>
+                <li><a href="#3-2">3.2 Koordináta-rendszer</a></li>
+                <li><a href="#3-3">3.3 Függvényi kapcsolat</a></li>
+            </ul>
+        </li>
+        <li><a href="#fejezet4">4. A négyszög</a>
+            <ul>
+                <li><a href="#4-1">4.1 Konvex négyszög szögei</a></li>
+                <li><a href="#4-2">4.2 Paralelogramma</a></li>
+                <li><a href="#4-3">4.3 Téglalap, rombusz, négyzet</a></li>
+                <li><a href="#4-4">4.4 Trapéz és középvonala</a></li>
+                <li><a href="#4-5">4.5 Kerület és terület</a></li>
+            </ul>
+        </li>
+        <li><a href="#fejezet5">5. A kör</a>
+            <ul>
+                <li><a href="#5-1">5.1 Kerületi szög és érintők</a></li>
+                <li><a href="#5-2">5.2 Szabályos sokszögek</a></li>
+                <li><a href="#5-3">5.3 Kerület és terület</a></li>
+            </ul>
+        </li>
+        <li><a href="#fejezet6">6. Háromszögek hasonlósága</a>
+            <ul>
+                <li><a href="#6-1">6.1 Arányos szakaszok</a></li>
+                <li><a href="#6-2">6.2 Thalész tétele</a></li>
+                <li><a href="#6-3">6.3 Hasonlósági esetek</a></li>
+                <li><a href="#6-4">6.4 Gyakorlati alkalmazás</a></li>
+            </ul>
+        </li>
+        <li><a href="#fejezet7">7. Metrikus összefüggések derékszögű háromszögben</a>
+            <ul>
+                <li><a href="#7-1">7.1 Magasság- és befogótétel</a></li>
+                <li><a href="#7-2">7.2 Pitagorasz-tétel</a></li>
+                <li><a href="#7-3">7.3 Trigonometria alapjai</a></li>
+                <li><a href="#7-4">7.4 Derékszögű háromszög megoldása</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<!-- Jobb oldali fő tartalom -->
+<main>
+
+          <div class="card summary-card" id="keplet-gyujtemeny">
+          <h3>Képlet- és Tételgyűjtemény</h3>
+          <p>Az alábbi gombra kattintva megnyithatod a 7. osztályos tananyag összes fontos képletét és tételét egy külön oldalon a könnyebb áttekintés és tanulás érdekében.</p>
+          <a class="quiz-btn" href="teljes_kepletgyujtemeny_7_osztaly.html" style="background-color: var(--primary); width: 100%; text-align: center;">
+            📚 Teljes Képletgyűjtemény Megnyitása →
+          </a>
+      </div>
+    <!-- Fejezet 1 -->
+    <section id="fejezet1">
+        <h2>1. Valós számok halmaza</h2>
+
+        <!-- 1.1 -->
+        <div id="1-1" class="card">
+            <h3>1.1 Természetes számok négyzetének négyzetgyöke</h3>
+            <p>Egy természetes szám négyzetének négyzetgyöke visszaadja az eredeti számot.</p>
+            <div class="formula">√(n²) = n,  ahol n ∈ ℕ</div>
+            <div class="example">
+                <strong>Példa:</strong> √49 = 7, mert 7² = 49.
+            </div>
+            <a class="quizBtn" href="kviz_termeszetes_negyzetgyok.html">Gyakorló Kvíz a Témakörben →</a>
+        </div>
+
+        <!-- 1.2 -->
+        <div id="1-2" class="card">
+            <h3>1.2 Irracionális számok</h3>
+            <p>Olyan valós számok, amelyek nem írhatók fel két egész szám hányadosaként. Tizedes alakjuk végtelen és nem szakaszos.</p>
+            <div class="formula">√2 ≈ 1,41421356…</div>
+            <div class="example">
+                <strong>Példa:</strong> √2, π, √3 mind irracionálisak.
+            </div>
+            <a class="quizBtn" href="kviz_irracionalis_szamok.html">Gyakorló Kvíz a Témakörben →</a>
+        </div>
+
+        <!-- 1.3 -->
+        <div id="1-3" class="card">
+            <h3>1.3 Tényezők kiemelése a gyökjel alól</h3>
+            <p>A gyökjel alól kiemelhetjük a négyzetszám-tényezőket: √(a²·b) = a√b</p>
+            <div class="formula">√50 = √(25·2) = 5√2</div>
+            <div class="example">
+                <strong>Példa:</strong> √72 = √(36·2) = 6√2
+            </div>
+            <a class="quizBtn" href="kviz_gyoktelenites.html">Gyakorló Kvíz a Témakörben →</a>
+        </div>
+
+        <!-- 1.4 -->
+        <div id="1-4" class="card">
+            <h3>1.4 Valós számok ábrázolása, összehasonlítás, abszolút érték</h3>
+            <p>Minden valós szám egyértelműen ábrázolható a számtengelyen. Az abszolút érték a számtengelyen mért távolság 0-tól.</p>
+            <div class="formula">|x| = x, ha x ≥ 0; |x| = –x, ha x &lt; 0</div>
+            <div class="example">
+                <strong>Példa:</strong> |–5| = 5; |3,2| = 3,2
+            </div>
+            <a class="quizBtn" href="kviz_szamtengely_abszolut.html">Gyakorló Kvíz a Témakörben →</a>
+        </div>
+
+        <!-- 1.5 -->
+        <div id="1-5" class="card">
+            <h3>1.5 Műveletek valós számokkal</h3>
+            <p>Az összeadás, kivonás, szorzás, osztás ugyanúgy működik irracionális számokkal is, mint racionálisokkal.</p>
+            <div class="formula">a√b ± c√b = (a ± c)√b</div>
+            <div class="example">
+                <strong>Példa:</strong> 3√5 + 2√5 = 5√5
+            </div>
+            <a class="quizBtn" href="kviz_muveletek_valos.html">Gyakorló Kvíz a Témakörben →</a>
+        </div>
+
+        <!-- 1.6 -->
+        <div id="1-6" class="card">
+            <h3>1.6 Számtani és mértani közép</h3>
+            <p>Két pozitív szám számtani közepe: (a+b)/2; mértani közepe: √(ab)</p>
+            <div class="formula">m<sub>a</sub> = (a + b)/2  m<sub>g</sub> = √(ab)</div>
+            <div class="example">
+                <strong>Példa:</strong> 4 és 9 mértani közepe: √36 = 6
+            </div>
+            <a class="quizBtn" href="kviz_kozepek.html">Gyakorló Kvíz a Témakörben →</a>
+        </div>
+
+        <!-- 1.7 -->
+        <div id="1-7" class="card">
+            <h3>1.7 x² = a alakú egyenletek</h3>
+            <p>Ha a ≥ 0, akkor x = ±√a; ha a &lt; 0, nincs valós megoldás.</p>
+            <div class="formula">x² = 25 ⇒ x = 5 vagy x = –5</div>
+            <div class="example">
+                <strong>Példa:</strong> x² = –9 → nincs valós megoldás
+            </div>
+            <a class="quizBtn" href="kviz_negyzetes_egyenletek.html">Gyakorló Kvíz a Témakörben →</a>
+        </div>
+    </section>
+
+    <!-- Fejezet 2 -->
+    <section id="fejezet2">
+        <h2>2. Lineáris egyenletek és egyenletrendszerek</h2>
+
+        <!-- 2.1 -->
+        <div id="2-1" class="card">
+            <h3>2.1 Ekvivalens egyenlőségek és azonosságok</h3>
+            <p>Két egyenlet ekvivalens, ha ugyanazt a megoldáshalmazt adják.</p>
+            <div class="formula">ax + b = 0 ⇔ ax = –b</div>
+            <div class="example">
+                <strong>Példa:</strong> 2x – 4 = 0 ⇔ 2x = 4 ⇔ x = 2
+            </div>
+            <a class="quizBtn" href="kviz_ekvivalens_egyenletek.html">Gyakorló Kvíz a Témakörben →</a>
+        </div>
+
+        <!-- 2.2 -->
+        <div id="2-2" class="card">
+            <h3>2.2 ax + b = 0 alakú egyenletek</h3>
+            <p>Elsőfokú egyismeretlenes egyenlet megoldása:</p>
+            <div class="formula">x = –b/a (a ≠ 0)</div>
+            <div class="example">
+                <strong>Példa:</strong> 3x + 6 = 0 → 3x = –6 → x = –2
+            </div>
+            <a class="quizBtn" href="kviz_egyenletek_axb0.html">Gyakorló Kvíz a Témakörben →</a>
+        </div>
+
+        <!-- 2.3 -->
+        <div id="2-3" class="card">
+            <h3>2.3 Kétismeretlenes lineáris egyenletrendszerek</h3>
+            <p>Két lineáris egyenletből álló rendszer megoldása helyettesítéssel vagy kiküszöböléssel.</p>
+            <div class="formula">
+                2x + 3y = 12<br>
+                x – y = 1
+            </div>
+            <div class="example">
+                <strong>Példa megoldás:</strong> x = 3, y = 2
+            </div>
+            <a class="quizBtn" href="kviz_egyenletrendszerek.html">Gyakorló Kvíz a Témakörben →</a>
+        </div>
+
+        <!-- 2.4 -->
+        <div id="2-4" class="card">
+            <h3>2.4 Szöveges feladatok egyenletekkel</h3>
+            <p>Szavakból egyenletet készítünk, majd megoldjuk.</p>
+            <div class="example">
+                <strong>Feladat:</strong> Két szám összege 20, különbségük 4. Mekkora a két szám?<br>
+                <strong>Megoldás:</strong> x + y = 20; x – y = 4 ⇒ x = 12, y = 8
+            </div>
+            <a class="quizBtn" href="kviz_szoveges_feladatok.html">Gyakorló Kvíz a Témakörben →</a>
+        </div>
+    </section>
+
+    <!-- 3. Fejezet -->
+    <section class="card" id="fejezet3">
+        <h2>3. Az adatszervezés elemei</h2>
+
+        <h3>3.1 Két halmaz Descartes-szorzata</h3>
+        <p>Az A és B halmaz Descartes-szorzata az összes lehetséges (a,b) rendezett párok halmaza, ahol a∈A és b∈B.</p>
+        <div class="formula">A × B = { (a,b) | a ∈ A, b ∈ B }</div>
+        <div class="example">
+            <strong>Példa:</strong> Ha A = {1,2}, B = {x,y}, akkor A × B = {(1,x),(1,y),(2,x),(2,y)}.
+        </div>
+            <a class="quizBtn" href="kviz_Descartes-szorzata.html">Gyakorló Kvíz →</a>
+    </section>
+
+        <h3>3.2 Derékszögű koordináta-rendszer</h3>
+        <p>Két egymásra merőleges számtengely alkotja: vízszintes x, függőleges y tengely. Minden pontot (x;y) koordináták írnak le.</p>
+        <div class="formula">P(x;y)</div>
+        <div class="example">
+            <strong>Példa:</strong> A(3;–2) pont 3 egységre van az origótól jobbra és 2 egységre lefelé.
+        </div>
+        <a class="quizBtn" href="kviz_adatszervezes.html">Gyakorló Kvíz →</a>
+    </section>
+
+    <!-- 4. Fejezet -->
+    <section class="card" id="fejezet4">
+        <h2>4. A négyszög</h2>
+
+        <h3>4.1 Konvex négyszög szögeinek összege</h3>
+        <p>Bármely konvex négyszög belső szögeinek összege 360°.</p>
+        <div class="formula">α + β + γ + δ = 360°</div>
+        <a class="quizBtn" href="kviz_Konvexnégyszög.html">Gyakorló Kvíz →</a>
+    </section>
+
+        <h3>4.2 Paralelogramma</h3>
+        <p>Ellentétes oldalai párhuzamosak és egyenlő hosszúak, szemközti szögei egyenlők.</p>
+        <div class="formula">AB ∥ CD, AD ∥ BC és AB = CD, AD = BC</div>
+        <a class="quizBtn" href="kviz_Paralelogramma.html">Gyakorló Kvíz →</a>
+    </section>
+
+        <h3>4.3 Speciális paralelogrammák</h3>
+        <ul>
+            <li><strong>Téglalap:</strong> minden szöge 90°.</li>
+            <li><strong>Rombusz:</strong> minden oldala egyenlő, átlói merőlegesek.</li>
+            <li><strong>Négyzet:</strong> téglalap és rombusz tulajdonságait egyszerre hordozza.</li>
+        </ul>
+
+        <h3>4.4 Trapéz</h3>
+        <p>Legalább egy pár szemközti oldala párhuzamos. Középvonala a szárak felezőpontját összekötő szakasz, párhuzamos az alapokkal és hossza az alapok számtani közepe.</p>
+        <div class="formula">k = (a + c)/2</div>
+        <a class="quizBtn" href="kviz_Trapéz.html">Gyakorló Kvíz →</a>
+    </section>
+
+        <h3>4.5 Kerület és terület</h3>
+        <p>Téglalap esetén: K = 2(a+b), T = a·b</p>
+        <div class="example">
+            <strong>Példa:</strong> a=5 cm, b=3 cm → K=16 cm, T=15 cm².
+        </div>
+        <a class="quizBtn" href="kviz_keruletterulet.html">Gyakorló Kvíz →</a>
+    </section>
+
+    <!-- 5. Fejezet -->
+    <section class="card" id="fejezet5">
+        <h2>5. A kör</h2>
+
+        <h3>5.1 Kerületi szög és érintőszabályok</h3>
+        <p>Kerületi szög fele a középponti szögnek, ha azonos ívhez tartoznak.</p>
+        <div class="formula">α = β / 2</div>
+        <a class="quizBtn" href="kviz_keruletszog.html">Gyakorló Kvíz →</a>
+    </section>
+
+        <h3>5.2 Körbe írt szabályos sokszögek</h3>
+        <p>Oldalhossz: a = 2r·sin(π/n), ahol n az oldalak száma.</p>
+        <a class="quizBtn" href="kviz_szabályossokszogek.html">Gyakorló Kvíz →</a>
+    </section>
+
+        <h3>5.3 Kerület és terület</h3>
+        <div class="formula">K = 2rπ  T = r²π</div>
+        <div class="example">
+            <strong>Példa:</strong> r = 4 cm → K ≈ 25,13 cm, T ≈ 50,27 cm².
+        </div>
+        <a class="quizBtn" href="kviz_kor.html">Gyakorló Kvíz →</a>
+    </section>
+
+    <!-- 6. Fejezet -->
+    <section class="card" id="fejezet6">
+        <h2>6. Háromszögek hasonlósága</h2>
+
+        <h3>6.1 Arányos szakaszok</h3>
+        <p>Ha egy szakaszt n részre osztunk, akkor az arányok megtartása mellett bármely rész hossza az egész 1/n-ed része.</p>
+        <a class="quizBtn" href="kviz_Arányosszakaszok.html">Gyakorló Kvíz →</a>
+    </section>
+        
+
+        <h3>6.2 Thalész tétele</h3>
+        <p>Ha egy kör átmérőjének végpontjaihoz egy tetszőleges pontot kapcsolunk, akkor a keletkező szög derékszög.</p>
+        <div class="formula">∠ACB = 90°</div>
+        <a class="quizBtn" href="kviz_Thalésztétele.html">Gyakorló Kvíz →</a>
+    </section>
+
+        <h3>6.3 Hasonlósági esetek</h3>
+        <ul>
+            <li>AA (két szög egyenlő)</li>
+            <li>SAS (két szög és a közrefogó oldal aránya)</li>
+            <li>SSS (minden oldal aránya)</li>
+        </ul><a class="quizBtn" href="kviz_Hasonlóságiesetek.html">Gyakorló Kvíz →</a>
+    </section>
+
+        <h3>6.4 Alkalmazások</h3>
+        <p>Távolság mérése hasonló háromszögekkel: h₁/h₂ = d₁/d₂</p>
+        <div class="example">
+            <strong>Példa:</strong> Eiffel-torony magasságának becslése árnyék alapján.
+        </div>
+        <a class="quizBtn" href="kviz_hasonlosag.html">Gyakorló Kvíz →</a>
+    </section>
+
+    <!-- 7. Fejezet -->
+    <section class="card" id="fejezet7">
+        <h2>7. Metrikus összefüggések derékszögű háromszögben</h2>
+
+        <h3>7.1 Magasságtétel, befogótétel</h3>
+        <p>Magasság: h² = p·q  Befogó: a² = p·c, b² = q·c</p>
+        <a class="quizBtn" href="kviz_Magasságtételbefogótétel.html">Gyakorló Kvíz →</a>
+    </section>
+
+        <h3>7.2 Pitagorasz-tétel</h3>
+        <div class="formula">a² + b² = c²</div>
+        <div class="example">
+            <strong>Példa:</strong> a=6 cm, b=8 cm → c=√(36+64)=10 cm
+        </div><a class="quizBtn" href="kviz_Pitagorasz.html">Gyakorló Kvíz →</a>
+    </section>
+
+        <h3>7.3 Trigonometriai alapfogalmak</h3>
+        <div class="formula">
+            sin α = szemközti / átfogó  cos α = szomszédos / átfogó  tan α = szemközti / szomszédos
+        </div>
+<a class="quizBtn" href="kviz_Trigonometriaialapfogalmak.html">Gyakorló Kvíz →</a>
+    </section>
+        <h3>7.4 Derékszögű háromszög megoldása</h3>
+        <p>Adott két adat esetén kiszámíthatók a hiányzó oldalak és szögek.</p>
+        <a class="quizBtn" href="kviz_trigonometria.html">Gyakorló Kvíz →</a>
+    </section>
+      
+</div>
+</body>
+</html>

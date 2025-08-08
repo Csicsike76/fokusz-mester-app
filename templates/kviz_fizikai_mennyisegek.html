@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Fizikai mennyiségek és mérésük</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 5px; border-radius: 3px; display: inline-block; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Fizikai mennyiségek és mérésük</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Melyik a hosszúság alapmértékegysége az SI-rendszerben?", answers: { a: "méter (m)", b: "kilométer (km)", c: "centiméter (cm)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 SI-rendszer:</b> A Nemzetközi Mértékegységrendszer (SI) a tudományban használt standard.</div><div class="explanation-step"><b>🔹 Alapmértékegységek:</b> A hosszúság alapmértékegysége a méter, a tömegé a kilogramm, az időé a másodperc. A többi (pl. centiméter, kilométer) ezekből származtatott.</div><div class="explanation-solution">✅ Megoldás: A hosszúság alapmértékegysége a méter (m).</div>` },
+            { question: "Mivel mérünk tömeget?", answers: { a: "Mérleggel", b: "Vonalzóval", c: "Hőmérővel" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Eszközök és mennyiségek:</b><br>• A <b>mérleg</b> a tömeg mérésére szolgál.<br>• A <b>vonalzó</b> a hosszúság mérésére.<br>• A <b>hőmérő</b> a hőmérséklet mérésére.</div><div class="explanation-solution">✅ Megoldás: Tömeget mérleggel mérünk.</div>` },
+            { question: "Mennyi 1500 gramm kilogrammban?", answers: { a: "1,5 kg", b: "15 kg", c: "0,15 kg" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 kg = 1000 g.</div><div class="explanation-step"><b>🔹 Számolás:</b> A grammban megadott értéket el kell osztani 1000-rel, hogy kilogrammot kapjunk: 1500 / 1000 = 1,5.</div><div class="explanation-solution">✅ Megoldás: 1500 gramm az 1,5 kg.</div>` },
+            { question: "Mi a fizikai mennyiség?", answers: { a: "A testek és jelenségek mérhető tulajdonsága.", b: "A testek színe és szaga.", c: "Csak a számérték, mértékegység nélkül." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A fizikai mennyiségek azok a tulajdonságok, amelyeket méréssel, azaz számszerűen jellemezni tudunk. Ilyen a hosszúság, tömeg, idő, de nem ilyen a szépség vagy a szag.</div><div class="explanation-solution">✅ Megoldás: A helyes definíció az, hogy a testek és jelenségek mérhető tulajdonsága.</div>` },
+            { question: "Egy téglalap oldalai 5 cm és 10 cm. Hogyan számolnád ki a területét?", answers: { a: "Közvetett méréssel (számolással).", b: "Közvetlen méréssel (leolvasással).", c: "Becsléssel." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Mérés típusok:</b><br>• <b>Közvetlen mérés:</b> Amikor a mérőeszközről közvetlenül leolvassuk az értéket (pl. hosszúság mérése vonalzóval).<br>• <b>Közvetett mérés:</b> Amikor más mennyiségeket mérünk, és azokból számolással határozzuk meg a keresett mennyiséget.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A területet a két oldal lemérése után, a T=a*b képlettel számoljuk ki. Ez közvetett mérés.</div><div class="explanation-solution">✅ Megoldás: A területet közvetett méréssel (számolással) határozzuk meg.</div>` },
+            { question: "Mi a célja a mérés többszöri elvégzésének és az eredmények átlagolásának?", answers: { a: "A mérési hiba csökkentése.", b: "Az idő elhúzása.", c: "A mértékegység megváltoztatása." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Mérési hibák:</b> A mérések során mindig adódnak kisebb-nagyobb pontatlanságok.</div><div class="explanation-step"><b>🔹 Átlagolás:</b> Ha több mérést végzünk, a véletlenszerű hibák "kiegyenlíthetik" egymást, így az átlag közelebb lesz a valós értékhez.</div><div class="explanation-solution">✅ Megoldás: A mérések átlagolásának célja a mérési hiba csökkentése.</div>` },
+            { question: "Melyik NEM fizikai mennyiség?", answers: { a: "Szépség", b: "Hőmérséklet", c: "Térfogat" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A hőmérsékletet és a térfogatot tudjuk mérni, tehát ezek fizikai mennyiségek. A szépség szubjektív, nincs objektív mérési módja és mértékegysége.</div><div class="explanation-solution">✅ Megoldás: A szépség nem fizikai mennyiség.</div>` },
+            { question: "Melyik jelenti a legnagyobb távolságot?", answers: { a: "2 km", b: "200 m", c: "20000 cm" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás méterbe:</b> Hozzuk közös mértékegységre az értékeket.<br>• 2 km = 2 * 1000 = 2000 m.<br>• 200 m = 200 m.<br>• 20000 cm = 20000 / 100 = 200 m.</div><div class="explanation-solution">✅ Megoldás: A 2 km a legnagyobb távolság.</div>` },
+            { question: "Mit jelent a 'kilo-' prefixum?", answers: { a: "Százszoros", b: "Ezerszeres", c: "Ezredrész" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 SI prefixumok:</b><br>• kilo- (k): 1000-szeres<br>• hekto- (h): 100-szoros<br>• deka- (da): 10-szeres<br>• deci- (d): tizedrész<br>• centi- (c): századrész<br>• milli- (m): ezredrész</div><div class="explanation-solution">✅ Megoldás: A 'kilo-' prefixum ezerszeres szorzót jelent.</div>` },
+            { question: "Mi az idő alapmértékegysége az SI-rendszerben?", answers: { a: "perc (min)", b: "másodperc (s)", c: "óra (h)" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 SI-rendszer:</b> A Nemzetközi Mértékegységrendszerben az idő alapmértékegysége a másodperc. A perc és az óra ebből származtatott, de a mindennapi életben gyakran használt egységek.</div><div class="explanation-solution">✅ Megoldás: Az idő alapmértékegysége a másodperc (s).</div>` },
+            { question: "Mivel mérünk időtartamot?", answers: { a: "Órával, stopperrel", b: "Mérleggel", c: "Vonalzóval" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Eszközök és mennyiségek:</b> Az óra és a stopper az időtartam mérésére szolgál. A mérleg a tömeget, a vonalzó a hosszúságot méri.</div><div class="explanation-solution">✅ Megoldás: Időtartamot órával vagy stopperrel mérünk.</div>` },
+            { question: "Mennyi 0.5 liter köbcentiméterben (cm³)?", answers: { a: "50 cm³", b: "500 cm³", c: "5 cm³" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 liter = 1 köbdeciméter (dm³) és 1 dm³ = 1000 cm³.</div><div class="explanation-step"><b>🔹 Számolás:</b> 0.5 liter = 0.5 dm³ = 0.5 * 1000 cm³ = 500 cm³.</div><div class="explanation-solution">✅ Megoldás: 0.5 liter az 500 köbcentiméter.</div>` },
+            { question: "Melyik NEM a hosszúság mértékegysége?", answers: { a: "fényév", b: "gramm", c: "mérföld" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A fényév és a mérföld is távolságot, azaz hosszúságot mér. A gramm a tömeg mértékegysége.</div><div class="explanation-solution">✅ Megoldás: A gramm nem a hosszúság mértékegysége.</div>` },
+            { question: "Egy edényben 2 dl víz van. Hány liter ez?", answers: { a: "2 l", b: "0.2 l", c: "0.02 l" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 liter = 10 deciliter (dl).</div><div class="explanation-step"><b>🔹 Számolás:</b> A deciliterben megadott értéket el kell osztani 10-zel: 2 / 10 = 0.2.</div><div class="explanation-solution">✅ Megoldás: 2 dl az 0.2 liter.</div>` },
+            { question: "Mit jelent a 'centi-' prefixum?", answers: { a: "Tizedrész", b: "Századrész", c: "Százszoros" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 SI prefixumok:</b> A 'centi-' (c) prefixum 1/100-ad részt, azaz századrészt jelent.</div><div class="explanation-solution">✅ Megoldás: A 'centi-' prefixum századrészt jelent.</div>` },
+            { question: "Mennyi egy 2 méter oldalhosszúságú kocka térfogata?", answers: { a: "4 m²", b: "8 m³", c: "6 m³" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A kocka térfogata V = a³, ahol 'a' az élhossz.</div><div class="explanation-step"><b>🔹 Számolás:</b> V = 2 m * 2 m * 2 m = 8 m³.</div><div class="explanation-solution">✅ Megoldás: A kocka térfogata 8 m³.</div>` },
+            { question: "Melyik mennyiség alapmennyiség az SI rendszerben?", answers: { a: "Sebesség", b: "Terület", c: "Tömeg" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Alapmennyiségek:</b> Az SI rendszer 7 alapmennyiségre épül, a 6. osztályban tanultak közül ilyen a hosszúság, tömeg, idő, hőmérséklet.</div><div class="explanation-step"><b>🔹 Származtatott mennyiségek:</b> A sebesség (út/idő) és a terület (hossz*hossz) már ezekből származtatható.</div><div class="explanation-solution">✅ Megoldás: A tömeg alapmennyiség.</div>` },
+            { question: "Mennyi 1 óra 15 perc másodpercben?", answers: { a: "75 s", b: "3700 s", c: "4500 s" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b><br>• 1 óra = 60 perc = 60 * 60 = 3600 másodperc.<br>• 15 perc = 15 * 60 = 900 másodperc.</div><div class="explanation-step"><b>🔹 Összeadás:</b> 3600 s + 900 s = 4500 s.</div><div class="explanation-solution">✅ Megoldás: 1 óra 15 perc az 4500 másodperc.</div>` },
+            { question: "Mi a tömeg alapmértékegysége az SI-rendszerben?", answers: { a: "gramm (g)", b: "tonna (t)", c: "kilogramm (kg)" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 SI-rendszer:</b> Bár a 'kilo-' egy prefixum, a tömeg alapmértékegysége történelmi okokból a kilogramm, nem pedig a gramm.</div><div class="explanation-solution">✅ Megoldás: A tömeg alapmértékegysége a kilogramm (kg).</div>` },
+            { question: "Egy autó 30 m/s sebességgel halad. Mennyi ez km/h-ban?", answers: { a: "90 km/h", b: "100 km/h", c: "108 km/h" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltási faktor:</b> 1 m/s = 3,6 km/h.</div><div class="explanation-step"><b>🔹 Számolás:</b> A m/s-ban megadott értéket meg kell szorozni 3,6-del: 30 * 3,6 = 108.</div><div class="explanation-solution">✅ Megoldás: 30 m/s az 108 km/h.</div>` },
+            { question: "Egy 2 literes üvegbe hány deciliter víz fér?", answers: { a: "2 dl", b: "200 dl", c: "20 dl" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 liter = 10 deciliter (dl).</div><div class="explanation-step"><b>🔹 Számolás:</b> A literben megadott értéket meg kell szorozni 10-zel: 2 * 10 = 20.</div><div class="explanation-solution">✅ Megoldás: 2 liter az 20 deciliter.</div>` },
+            { question: "Melyik a kakukktojás?", answers: { a: "másodperc", b: "newton", c: "méter" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A másodperc (idő) és a méter (hosszúság) alapmennyiségek mértékegységei. A newton az erő (származtatott mennyiség) mértékegysége.</div><div class="explanation-solution">✅ Megoldás: A kakukktojás a newton.</div>` },
+            { question: "Mi a hibaforrás, ha ferdén olvasunk le egy vonalzót?", answers: { a: "A mérőeszköz hibája", b: "A mérő személy hibája (parallaxis hiba)", c: "A környezet hibája" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Hiba típusok:</b> A ferdén való leolvasás miatti pontatlanságot parallaxis hibának nevezzük, és ez a mérést végző személy technikájából adódik.</div><div class="explanation-solution">✅ Megoldás: Ez a mérő személy hibája.</div>` },
+            { question: "Mivel mérünk hőmérsékletet?", answers: { a: "Vonalzóval", b: "Mérleggel", c: "Hőmérővel" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Eszközök és mennyiségek:</b> A hőmérő a hőmérséklet, a mérleg a tömeg, a vonalzó a hosszúság mérésére szolgál.</div><div class="explanation-solution">✅ Megoldás: Hőmérsékletet hőmérővel mérünk.</div>` },
+            { question: "Melyik jelöl egy fizikai mennyiséget helyesen?", answers: { a: "15", b: "kg", c: "15 kg" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Egy fizikai mennyiség teljes leírásához szükség van egy számértékre és egy mértékegységre is.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A '15' önmagában csak egy szám. A 'kg' önmagában csak egy mértékegység.</div><div class="explanation-solution">✅ Megoldás: A helyes jelölés a '15 kg'.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

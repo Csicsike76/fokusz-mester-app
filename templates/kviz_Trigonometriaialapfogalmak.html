@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: 7.3 Trigonometriai alapfogalmak</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: 7.3 Trigonometriai alapfogalmak</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+
+            <div class="evaluation-block" id="bottom-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-bottom">PIN kód:</label>
+                    <input type="password" id="pin-code-bottom" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Hogyan definiáljuk egy hegyesszög szinuszát (sin α)?",
+                options: { a: "szemközti befogó / átfogó", b: "szomszédos befogó / átfogó", c: "szemközti befogó / szomszédos befogó" },
+                correct: "a",
+                explanation: "A szinusz definíciója a szöggel szemközti befogó és az átfogó aránya."
+            },
+            {
+                question: "Hogyan definiáljuk egy hegyesszög koszinuszát (cos α)?",
+                options: { a: "szemközti befogó / átfogó", b: "szomszédos befogó / átfogó", c: "szomszédos befogó / szemközti befogó" },
+                correct: "b",
+                explanation: "A koszinusz definíciója a szög melletti (szomszédos) befogó és az átfogó aránya."
+            },
+            {
+                question: "Hogyan definiáljuk egy hegyesszög tangensét (tan α)?",
+                options: { a: "szemközti befogó / átfogó", b: "átfogó / szomszédos befogó", c: "szemközti befogó / szomszédos befogó" },
+                correct: "c",
+                explanation: "A tangens definíciója a szöggel szemközti befogó és a szög melletti (szomszédos) befogó aránya."
+            },
+            {
+                question: "Milyen típusú háromszögekben használjuk ezeket az alapvető szögfüggvényeket?",
+                options: { a: "Minden háromszögben.", b: "Csak derékszögű háromszögekben.", c: "Csak egyenlő szárú háromszögekben." },
+                correct: "b",
+                explanation: "Ezek a definíciók (szemközti/szomszédos befogó, átfogó) kizárólag a derékszögű háromszögekre érvényesek."
+            },
+            {
+                question: "Egy derékszögű háromszög befogói a=3, b=4, átfogója c=5. Mekkora az 'a' oldallal szemközti szög szinusza?",
+                options: { a: "3/5 = 0.6", b: "4/5 = 0.8", c: "3/4 = 0.75" },
+                correct: "a",
+                explanation: "A kért szög szinusza = szemközti befogó / átfogó. A szemközti befogó 'a', ami 3. Az átfogó 'c', ami 5. Tehát az arány 3/5."
+            },
+            {
+                question: "Egy derékszögű háromszög befogói a=3, b=4, átfogója c=5. Mekkora az 'a' oldallal szemközti szög koszinusza?",
+                options: { a: "3/5 = 0.6", b: "4/5 = 0.8", c: "4/3 ≈ 1.33" },
+                correct: "b",
+                explanation: "A kért szög koszinusza = szomszédos befogó / átfogó. A szemközti befogó 'a', tehát a szomszédos befogó 'b', ami 4. Az átfogó 5. Tehát az arány 4/5."
+            },
+            {
+                question: "Egy derékszögű háromszög befogói a=3, b=4, átfogója c=5. Mekkora az 'a' oldallal szemközti szög tangense?",
+                options: { a: "3/5 = 0.6", b: "4/5 = 0.8", c: "3/4 = 0.75" },
+                correct: "c",
+                explanation: "A kért szög tangense = szemközti befogó / szomszédos befogó. A szemközti befogó 'a'=3, a szomszédos 'b'=4. Tehát az arány 3/4."
+            },
+            {
+                question: "Melyik szögfüggvény értéke lehet nagyobb, mint 1?",
+                options: { a: "sin α", b: "cos α", c: "tan α" },
+                correct: "c",
+                explanation: "A sin és cos értéke sosem lehet 1-nél nagyobb, mert a befogó sosem hosszabb az átfogónál. A tangens (szemközti/szomszédos) viszont lehet 1-nél nagyobb, ha a szemközti befogó hosszabb, mint a szomszédos."
+            },
+            {
+                question: "Egy derékszögű háromszögben minek a rövidítése a 'hipotenuz'?",
+                options: { a: "Az átfogó.", b: "A befogó.", c: "A magasság." },
+                correct: "a",
+                explanation: "A hipotenuz a görög eredetű szó az átfogóra, a derékszögű háromszög leghosszabb oldalára."
+            },
+            {
+                question: "Egy derékszögű háromszög befogói 6 cm és 8 cm. Mekkora az átfogó?",
+                options: { a: "14 cm", b: "10 cm", c: "100 cm" },
+                correct: "b",
+                explanation: "Pitagorasz-tétellel: c² = 6² + 8² = 36 + 64 = 100. Tehát az átfogó c = √100 = 10 cm."
+            },
+            {
+                question: "Az előző feladatban (a=6, b=8, c=10), mekkora a 6 cm-es oldallal szemközti szög szinusza?",
+                options: { a: "6/8 = 0.75", b: "8/10 = 0.8", c: "6/10 = 0.6" },
+                correct: "c",
+                explanation: "sin α = szemközti / átfogó = 6 / 10 = 0.6."
+            },
+            {
+                question: "Egy derékszögű háromszögben α és β a két hegyesszög. Melyik összefüggés igaz?",
+                options: { a: "sin α = sin β", b: "sin α = cos β", c: "tan α = tan β" },
+                correct: "b",
+                explanation: "Az α szöggel szemközti befogó a β szög melletti befogó. Emiatt az egyik szög szinusza mindig egyenlő a másik szög koszinuszával. (sin α = a/c és cos β = a/c)."
+            },
+            {
+                question: "Egy egyenlő szárú derékszögű háromszögben (ahol a befogók egyenlőek), mekkora a hegyesszögek tangense?",
+                options: { a: "0.5", b: "1", c: "2" },
+                correct: "b",
+                explanation: "Ha a befogók egyenlőek (a=b), akkor tan α = szemközti/szomszédos = a/a = 1. Ez a 45°-os szögre igaz."
+            },
+            {
+                question: "Egy derékszögű háromszög átfogója 13, egyik befogója 12. Mekkora a 12-es befogóval szemközti szög koszinusza?",
+                options: { a: "5/13", b: "12/13", c: "5/12" },
+                correct: "a",
+                explanation: "Először Pitagorasz-tétellel kiszámoljuk a másik befogót: a² = 13² - 12² = 169 - 144 = 25, tehát a=5. A 12-es oldallal szemközti szög koszinusza = szomszédos/átfogó = 5/13."
+            },
+            {
+                question: "Melyik oldal van a nevezőben a szinusz és a koszinusz kiszámításakor?",
+                options: { a: "A szemközti befogó.", b: "A szomszédos befogó.", c: "Az átfogó." },
+                correct: "c",
+                explanation: "Mindkét esetben az átfogóval osztunk. sin α = szemközti/átfogó, cos α = szomszédos/átfogó."
+            },
+            {
+                question: "Ha egy derékszögű háromszöget felnagyítunk a kétszeresére, mi történik a szögeinek szinuszával?",
+                options: { a: "A kétszeresére nő.", b: "A felére csökken.", c: "Nem változik." },
+                correct: "c",
+                explanation: "A nagyítás egy hasonló háromszöget hoz létre. A hasonló háromszögek szögei megegyeznek, így a szögek szinusza, koszinusza és tangense sem változik."
+            },
+            {
+                question: "Egy derékszögű háromszögben tan α = 1. Milyen ez a háromszög?",
+                options: { a: "Szabályos.", b: "A befogói egyenlőek.", c: "Az egyik befogó kétszerese a másiknak." },
+                correct: "b",
+                explanation: "Ha tan α = szemközti/szomszédos = 1, az azt jelenti, hogy a szemközti és a szomszédos befogó egyenlő hosszú. Ez egy egyenlő szárú derékszögű háromszög."
+            },
+            {
+                question: "Mi a 'trigonometria' szó jelentése?",
+                options: { a: "Háromszögmérés", b: "Körszámítás", c: "Szögfüggvény" },
+                correct: "a",
+                explanation: "A trigonometria szó a görög 'trigonon' (háromszög) és 'metron' (mérés) szavakból származik, jelentése tehát 'háromszögmérés'."
+            },
+            {
+                question: "Melyik szögfüggvényt kapjuk, ha a sin α értékét elosztjuk a cos α értékével?",
+                options: { a: "A reciprokát.", b: "A tan α értékét.", c: "Mindig 1-et." },
+                correct: "b",
+                explanation: "(szemközti/átfogó) / (szomszédos/átfogó) = szemközti/átfogó * átfogó/szomszédos = szemközti/szomszédos, ami pont a tangens definíciója."
+            },
+            {
+                question: "Egy derékszögű háromszög befogói 8 és 15. Mekkora a 8-as oldallal szemközti szög koszinusza?",
+                options: { a: "8/17", b: "15/17", c: "8/15" },
+                correct: "b",
+                explanation: "Először az átfogó kell: c² = 8² + 15² = 64 + 225 = 289, c=17. A 8-as oldallal szemközti szög koszinusza a szomszédos befogó (15) és az átfogó (17) aránya: 15/17."
+            },
+            {
+                question: "Ha cos α = 0.8, és az átfogó 20, milyen hosszú a szomszédos befogó?",
+                options: { a: "16", b: "25", c: "8" },
+                correct: "a",
+                explanation: "cos α = szomszédos/átfogó. 0.8 = szomszédos / 20. Ebből a szomszédos befogó = 0.8 * 20 = 16."
+            },
+            {
+                question: "Mi a 'szemközti befogó' az α szöghöz képest?",
+                options: { a: "Az az oldal, ami az α szöget alkotja az átfogóval.", b: "A leghosszabb oldal.", c: "Az az oldal, amivel az α szög 'szemben' van." },
+                correct: "c",
+                explanation: "A szemközti befogó az, amelyik nem érinti a vizsgált hegyesszöget."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                options: { a: "sin α sosem lehet nagyobb 1-nél.", b: "cos α sosem lehet nagyobb 1-nél.", c: "tan α sosem lehet nagyobb 1-nél." },
+                correct: "c",
+                explanation: "A tangens (szemközti/szomszédos) értéke lehet nagyobb 1-nél, ha a szemközti befogó hosszabb, mint a szomszédos."
+            },
+            {
+                question: "Egy derékszögű háromszög átfogója 25, a magassága 12. Az egyik befogó 15. Mekkora ezen befogóval szemközti szög szinusza?",
+                options: { a: "12/25", b: "15/25 = 0.6", c: "12/15 = 0.8" },
+                correct: "b",
+                explanation: "A szinuszhoz csak a szemközti oldal és az átfogó kell. sin α = szemközti / átfogó = 15 / 25 = 0.6. A magasságra itt nincs szükség."
+            },
+            {
+                question: "Minek a segítségével tudjuk egy derékszögű háromszög oldalainak arányából a szöget kiszámolni?",
+                options: { a: "Vonalzóval.", b: "A szögfüggvények és egy számológép segítségével.", c: "A körzővel." },
+                correct: "b",
+                explanation: "A szögfüggvények (sin, cos, tan) és azok inverzei (arcsin, arccos, arctan), melyek a számológépeken megtalálhatók, teszik lehetővé, hogy az oldalak arányából visszakapjuk a szög értékét."
+            }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const checkBtns = document.querySelectorAll('.check-btn');
+        const pinInputs = document.querySelectorAll('.pin-code-input');
+        const resultContainers = document.querySelectorAll('.result-container');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">
+                            <label for="q${index}a">
+                                <input type="radio" name="question${index}" id="q${index}a" value="a">
+                                ${item.options.a}
+                            </label>
+                            <label for="q${index}b">
+                                <input type="radio" name="question${index}" id="q${index}b" value="b">
+                                ${item.options.b}
+                            </label>
+                            <label for="q${index}c">
+                                <input type="radio" name="question${index}" id="q${index}c" value="c">
+                                ${item.options.c}
+                            </label>
+                        </div>
+                        <div class="explanation" id="explanation-${index}">
+                            <strong>Magyarázat:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInputs[0].value; // Elég az elsőből olvasni, mert szinkronizáltak
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtns.forEach(btn => btn.disabled = true);
+            pinInputs.forEach(input => input.disabled = true);
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+
+                if (isMaster) {
+                    explanationDiv.style.display = 'block';
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('master-correct');
+                } else {
+                    explanationDiv.style.display = 'block';
+                }
+
+                if (selectedOption) {
+                    const selectedLabel = selectedOption.parentElement;
+                    if (selectedOption.value === item.correct) {
+                        score++;
+                        selectedLabel.classList.add('correct-answer', 'label-correct');
+                    } else {
+                        selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                        const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                        correctLabel.classList.add('correct-answer');
+                    }
+                } else if (isMaster) {
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('correct-answer');
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            const resultText = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            resultContainers.forEach(container => container.innerHTML = resultText);
+
+            if (isMaster) {
+                adminPanels.forEach(panel => panel.style.display = 'block');
+            }
+        }
+
+        // Eseménykezelők hozzáadása az összes vezérlőhöz
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        
+        checkBtns.forEach(btn => {
+            btn.addEventListener('click', checkAnswers);
+        });
+
+        pinInputs.forEach(input => {
+            // Enter gombos ellenőrzés
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+            // PIN mezők szinkronizálása
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

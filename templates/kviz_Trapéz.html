@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: A Trapéz</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: A Trapéz</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+
+            <div class="evaluation-block" id="bottom-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-bottom">PIN kód:</label>
+                    <input type="password" id="pin-code-bottom" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Adminisztrátori mód aktív. A helyes válaszok és a magyarázatok feloldva.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Hogyan nevezzük a trapéz párhuzamos oldalait?",
+                options: { a: "Száraknak", b: "Alapoknak", c: "Átlóknak" },
+                correct: "b",
+                explanation: "A trapéz definíciója szerint az a négyszög, amelynek van legalább egy párhuzamos oldalpárja. Ezt a két párhuzamos oldalt a trapéz alapjainak nevezzük. A másik két, nem párhuzamos oldalt pedig a szárainak hívjuk."
+            },
+            {
+                question: "Melyik speciális trapéz rendelkezik egy szimmetriatengellyel?",
+                options: { a: "Derékszögű trapéz", b: "Húrtrapéz (szimmetrikus trapéz)", c: "Bármelyik trapéz, ha az alapjai egyenlőek" },
+                correct: "b",
+                explanation: "A húrtrapéz (vagy más néven szimmetrikus trapéz) az a trapéz, amelynek a szárai egyenlő hosszúak. Ennek a tulajdonságnak köszönhetően tengelyesen szimmetrikus az alapok felezőmerőlegesére."
+            },
+            {
+                question: "Mi a trapéz területének képlete, ha 'a' és 'c' az alapok, 'm' pedig a magasság?",
+                options: { a: "T = (a + c) * m", b: "T = a * c * m", c: "T = ((a + c) / 2) * m" },
+                correct: "c",
+                explanation: "A trapéz területe megegyezik az alapok számtani közepének (középvonalának) és a magasságnak a szorzatával. A képlet: T = (a + c) / 2 * m. Ez logikailag levezethető abból, hogy két egybevágó trapézból egy paralelogrammát lehet összerakni."
+            },
+            {
+                question: "Mi a trapéz középvonalának hossza?",
+                options: { a: "Az alapok összegének a fele", b: "A szárak összegének a fele", c: "Az alapok és a szárak összegének a negyede" },
+                correct: "a",
+                explanation: "A trapéz középvonala a két szár felezőpontját összekötő szakasz. Hossza megegyezik a két párhuzamos alap hosszának számtani közepével, azaz (a+c)/2."
+            },
+            {
+                question: "Melyik állítás igaz a derékszögű trapézra?",
+                options: { a: "Legalább az egyik szára merőleges az alapokra.", b: "Mindkét szára merőleges az alapokra.", c: "Az átlói mindig merőlegesek egymásra." },
+                correct: "a",
+                explanation: "A derékszögű trapéz olyan trapéz, amelynek van derékszöge. Mivel az alapok párhuzamosak, ha az egyik szár merőleges az egyik alapra, akkor a másikra is az. Így legalább két derékszöge van, és ez a szár egyben a trapéz magassága is."
+            },
+            {
+                question: "Mi igaz a húrtrapéz (szimmetrikus trapéz) átlóira?",
+                options: { a: "Mindig merőlegesek egymásra.", b: "Egyenlő hosszúak.", c: "Felemás hosszúságúak." },
+                correct: "b",
+                explanation: "A húrtrapéz szimmetriája miatt az átlói mindig egyenlő hosszúak. Ez a tulajdonság a szimmetriatengelyre való tükrözésből következik."
+            },
+            {
+                question: "Egy trapéz alapjai 10 cm és 6 cm, magassága 5 cm. Mekkora a területe?",
+                options: { a: "80 cm²", b: "40 cm²", c: "50 cm²" },
+                correct: "b",
+                explanation: "A területképlet T = ((a+c)/2) * m. Behelyettesítve az értékeket: T = ((10 + 6) / 2) * 5 = (16 / 2) * 5 = 8 * 5 = 40 cm²."
+            },
+            {
+                question: "Lehet-e egy trapéz egyben paralelogramma is?",
+                options: { a: "Igen, ha mindkét pár szemközti oldala párhuzamos.", b: "Nem, soha.", c: "Csak akkor, ha téglalap." },
+                correct: "a",
+                explanation: "A trapéz definíciója szerint legalább egy párhuzamos oldalpárja van. A paralelogrammának kettő van. Mivel a 'legalább egy' feltételt a paralelogramma teljesíti, ezért minden paralelogramma (és így a rombusz, téglalap, négyzet is) speciális trapéznak tekinthető."
+            },
+            {
+                question: "Melyik állítás NEM igaz minden trapézra?",
+                options: { a: "Belső szögeinek összege 360°.", b: "Van két párhuzamos oldala.", c: "A szárai mindig egyenlő hosszúak." },
+                correct: "c",
+                explanation: "A szárak egyenlő hossza csak a szimmetrikus (húr)trapézokra jellemző, az általános trapézokra nem. Azonban minden négyszög, így a trapéz belső szögeinek összege is 360°, és definíció szerint van (legalább) egy párhuzamos oldalpárja."
+            },
+            {
+                question: "Hogyan nevezzük a trapéz nem párhuzamos oldalait?",
+                options: { a: "Alapoknak", b: "Száraknak", c: "Magasságoknak" },
+                correct: "b",
+                explanation: "A trapéz két nem párhuzamos oldalát száraknak nevezzük. Az alapok a párhuzamos oldalak, a magasság pedig az alapok közötti távolság."
+            },
+            {
+                question: "Egy trapéz középvonala 12 cm, magassága 10 cm. Mekkora a területe?",
+                options: { a: "60 cm²", b: "120 cm²", c: "240 cm²" },
+                correct: "b",
+                explanation: "A trapéz területe a középvonal és a magasság szorzata. A középvonal (k) hossza (a+c)/2. A területképlet T = k * m. Behelyettesítve: T = 12 cm * 10 cm = 120 cm²."
+            },
+            {
+                question: "Mi a feltétele annak, hogy egy trapéz húrtrapéz legyen?",
+                options: { a: "A szárai egyenlő hosszúak.", b: "Az alapjai egyenlő hosszúak.", c: "Az egyik szöge derékszög." },
+                correct: "a",
+                explanation: "A húrtrapéz definíciója szerint az a trapéz, amelynek a szárai (a nem párhuzamos oldalai) egyenlő hosszúak. Ebből következik több más tulajdonsága is, például az alapon fekvő szögek egyenlősége."
+            },
+            {
+                question: "Egy trapéz egyik szárán fekvő két szög összege...",
+                options: { a: "mindig 90°.", b: "mindig 180°.", c: "nem feltétlenül 180°." },
+                correct: "b",
+                explanation: "Mivel a trapéz alapjai párhuzamosak, a szárakat tekinthetjük a párhuzamosokat metsző egyeneseknek. Ilyenkor a szár és az alapok által bezárt szögek társszögek, amelyek összege mindig 180°."
+            },
+            {
+                question: "Mi a neve annak a trapéznak, amelynek van derékszöge?",
+                options: { a: "Húrtrapéz", b: "Általános trapéz", c: "Derékszögű trapéz" },
+                correct: "c",
+                explanation: "Azt a trapézt, amelynek van legalább egy derékszöge, derékszögű trapéznak nevezzük. Ilyenkor automatikusan van egy másik derékszöge is, mivel a száron fekvő szögek összege 180°."
+            },
+            {
+                question: "Hány szimmetriatengelye van egy általános (nem szimmetrikus, nem derékszögű) trapéznak?",
+                options: { a: "0", b: "1", c: "2" },
+                correct: "a",
+                explanation: "Egy általános trapéz, amelynek sem a szárai, sem a szögei nem rendelkeznek speciális tulajdonságokkal, nem szimmetrikus. Nincs sem tengelyes, sem középpontos szimmetriája. Csak a húrtrapéznak van egy szimmetriatengelye."
+            },
+            {
+                question: "Egy trapéz kerülete 30 cm. Alapjai 12 cm és 8 cm. Milyen hosszúak a szárai, ha a trapéz szimmetrikus?",
+                options: { a: "A két szár 4 cm és 6 cm.", b: "A két szár 5 cm és 5 cm.", c: "A két szár 10 cm és 10 cm." },
+                correct: "b",
+                explanation: "A kerület a négy oldal összege: K = a+b+c+d. Tudjuk, hogy K=30, a=12, c=8. Az alapok összege 12+8=20 cm. A kerületből levonva az alapokat megkapjuk a szárak összegét: 30 - 20 = 10 cm. Mivel a trapéz szimmetrikus, a két szár egyenlő, így 10/2 = 5 cm egy szár hossza."
+            },
+            {
+                question: "Egy trapéz területe 100 cm², magassága 10 cm. Mekkora az alapjainak összege?",
+                options: { a: "10 cm", b: "20 cm", c: "15 cm" },
+                correct: "b",
+                explanation: "A területképlet: T = ((a+c)/2)*m. Tudjuk, hogy T=100 és m=10. Behelyettesítve: 100 = ((a+c)/2)*10. Osszunk 10-zel: 10 = (a+c)/2. Szorozzunk 2-vel: 20 = a+c. Az alapok összege tehát 20 cm."
+            },
+            {
+                question: "Melyik geometriai alakzat NEM trapéz?",
+                options: { a: "Téglalap", b: "Rombusz", c: "Deltoid (ha nem rombusz)" },
+                correct: "c",
+                explanation: "A téglalapnak és a rombusznak is van két pár párhuzamos oldala, így teljesítik a trapéz 'legalább egy párhuzamos oldalpár' definícióját. Egy általános deltoidnak viszont nincsenek párhuzamos oldalai, így az nem trapéz."
+            },
+            {
+                question: "Mi igaz a húrtrapéz alapon fekvő szögeire?",
+                options: { a: "Mind a négy szög egyenlő.", b: "Mindig derékszögek.", c: "Az egy alapon fekvő két szög páronként egyenlő." },
+                correct: "c",
+                explanation: "A húrtrapéz szimmetriája miatt az egyik alapon fekvő szögei egyenlőek egymással, és a másik alapon fekvő szögei is egyenlőek egymással. Tehát ha a hosszabb alap szögei α, akkor a rövidebb alap szögei β, és α+β=180°."
+            },
+            {
+                question: "Egy derékszögű trapéz rövidebbik alapja 5 cm, magassága 4 cm, a hosszabbik alapja 8 cm. Mekkora a területe?",
+                options: { a: "26 cm²", b: "52 cm²", c: "32 cm²" },
+                correct: "a",
+                explanation: "A területképlet T = ((a+c)/2) * m. Az adatok: a=8, c=5, m=4. Behelyettesítve: T = ((8 + 5) / 2) * 4 = (13 / 2) * 4 = 6.5 * 4 = 26 cm²."
+            },
+            {
+                question: "A trapéz átlói...",
+                options: { a: "mindig felezik egymást.", b: "soha nem felezik egymást.", c: "általános esetben nem felezik egymást." },
+                correct: "c",
+                explanation: "Az átlók csak a paralelogramma-típusú négyszögekben felezik egymást. Mivel az általános trapéz nem paralelogramma, az átlói nem felezik, csak metszik egymást. A metszéspont az alapokkal párhuzamosan osztja az átlókat."
+            },
+            {
+                question: "Hogyan számítjuk ki egy általános trapéz kerületét?",
+                options: { a: "K = 2*(a+b)", b: "K = a+b+c+d", c: "K = (a+c)*2" },
+                correct: "b",
+                explanation: "A kerület bármely sokszög esetén az oldalak hosszának összege. Egy trapéz esetén, ahol az oldalak a, b, c, d, a kerület K = a + b + c + d."
+            },
+            {
+                question: "Egy trapéz középvonala 15 cm. Egyik alapja 10 cm. Milyen hosszú a másik alapja?",
+                options: { a: "25 cm", b: "20 cm", c: "5 cm" },
+                correct: "b",
+                explanation: "A középvonal (k) képlete: k = (a+c)/2. Tudjuk, hogy k=15 és az egyik alap, pl. a=10. Behelyettesítve: 15 = (10+c)/2. Szorozzunk 2-vel: 30 = 10+c. Vonjunk ki 10-et: c = 20 cm."
+            },
+            {
+                question: "Hány derékszöge lehet maximálisan egy olyan trapéznak, ami nem téglalap?",
+                options: { a: "1", b: "2", c: "3" },
+                correct: "b",
+                explanation: "Egy trapéznak lehet 2 derékszöge, ez a derékszögű trapéz. Ha 3 derékszöge lenne, akkor a negyediknek is derékszögnek kellene lennie (mivel a belső szögek összege 360°), ami már egy téglalapot eredményezne. Tehát a maximum 2."
+            },
+            {
+                question: "Melyik állítás igaz? Egy trapézt két átlója...",
+                options: { a: "négy egyenlő területű háromszögre bont.", b: "négy háromszögre bont, melyek közül kettőnek a területe egyenlő.", c: "négy különböző területű háromszögre bont." },
+                correct: "b",
+                explanation: "Az átlók négy háromszögre bontják a trapézt. Az alapokon fekvő két háromszög hasonló egymáshoz. A szárakon fekvő két háromszög területe viszont mindig megegyezik. Ez azért van, mert pl. az ABD és ABC háromszögek területe egyenlő (közös AB alap, azonos magasság), és ebből elvéve a közös ABM háromszöget (ahol M az átlók metszéspontja), a maradék területek is egyenlők."
+            }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const checkBtns = document.querySelectorAll('.check-btn');
+        const pinInputs = document.querySelectorAll('.pin-code-input');
+        const resultContainers = document.querySelectorAll('.result-container');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">
+                            <label for="q${index}a">
+                                <input type="radio" name="question${index}" id="q${index}a" value="a">
+                                ${item.options.a}
+                            </label>
+                            <label for="q${index}b">
+                                <input type="radio" name="question${index}" id="q${index}b" value="b">
+                                ${item.options.b}
+                            </label>
+                            <label for="q${index}c">
+                                <input type="radio" name="question${index}" id="q${index}c" value="c">
+                                ${item.options.c}
+                            </label>
+                        </div>
+                        <div class="explanation" id="explanation-${index}">
+                            <strong>Magyarázat:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInputs[0].value; // Elég az elsőből olvasni, mert szinkronizáltak
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtns.forEach(btn => btn.disabled = true);
+            pinInputs.forEach(input => input.disabled = true);
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+
+                if (isMaster) {
+                    explanationDiv.style.display = 'block';
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('master-correct');
+                } else {
+                    explanationDiv.style.display = 'block';
+                }
+
+                if (selectedOption) {
+                    const selectedLabel = selectedOption.parentElement;
+                    if (selectedOption.value === item.correct) {
+                        score++;
+                        selectedLabel.classList.add('correct-answer', 'label-correct');
+                    } else {
+                        selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                        const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                        correctLabel.classList.add('correct-answer');
+                    }
+                } else if (isMaster) {
+                    const correctLabel = document.querySelector(`label[for="q${index}${item.correct}"]`);
+                    correctLabel.classList.add('correct-answer');
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            const resultText = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            resultContainers.forEach(container => container.innerHTML = resultText);
+
+            if (isMaster) {
+                adminPanels.forEach(panel => panel.style.display = 'block');
+            }
+        }
+
+        // Eseménykezelők hozzáadása az összes vezérlőhöz
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        
+        checkBtns.forEach(btn => {
+            btn.addEventListener('click', checkAnswers);
+        });
+
+        pinInputs.forEach(input => {
+            // Enter gombos ellenőrzés
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+            // PIN mezők szinkronizálása
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

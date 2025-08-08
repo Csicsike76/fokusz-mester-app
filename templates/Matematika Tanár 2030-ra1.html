@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Matematika Tanár 2030-ra - Digitális Eszköztár</title>
+    <meta name="description" content="Egy inspiráló 5-8. osztályos matematika tanár digitális eszköztára, aki empátiával, kreativitással és mesterséges intelligenciával tanít.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@700&display=swap">
+    <link rel="stylesheet" href="stilus.css">
+    <!-- A kihívás adatbázis szkriptjét innen kivettük, és a body végére tettük a stabil működés érdekében -->
+</head>
+<body>
+    
+    <video autoplay muted loop id="bg-video">
+      <source src="video.mp4" type="video/mp4">
+      Böngésződ nem támogatja a videó hátteret.
+    </video>
+    
+    <div id="navbar-placeholder"></div>
+
+    <div class="content-wrapper">
+        <header class="header">
+            <div class="container">
+                <h1>A Jövő Matematika Tanára</h1>
+                <p>A küldetésem, hogy 2030-ig olyan inspiráló tanárrá váljak, aki nemcsak tanít, hanem gondolkodni tanít – empátiával, kreativitással és a mesterséges intelligencia tudatos használatával. Ez az én digitális eszköztáram.</p>
+            </div>
+        </header>
+
+        <main>
+           <div class="container">
+                <section class="section">
+                    <h2 class="section-title">A Napi Kihívás 🧠</h2>
+                    <div id="kihivas-kontener" style="text-align: center;">
+                        <p id="kihivas-kerdes" style="font-size: 1.4rem; font-weight: 500; min-height: 50px;">Kattints a gombra egy új kihívásért!</p>
+                        <div id="kihivas-valasz-terulet" style="display: none; margin-top: 1rem; padding: 1rem; background-color: #f1f5f9; border-radius: 8px;">
+                             <p id="kihivas-tipp" style="color: var(--kek); font-style: italic;"></p>
+                             <p id="kihivas-megoldas" style="color: var(--zold); font-weight: bold; margin-top: 0.5rem;"></p>
+                        </div>
+                        <div id="kihivas-gombok" style="margin-top: 1.5rem; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <select id="evfolyam-valaszto" class="btn">
+                                <option value="osszes">Összes évfolyam</option>
+                                <option value="5">5. osztály</option>
+                                <option value="6">6. osztály</option>
+                                <option value="7">7. osztály</option>
+                                <option value="8">8. osztály</option>
+                            </select>
+                            <button id="uj-kihivas-gomb" class="btn btn-primary ai-btn">Új Kihívás!</button>
+                            <button id="tipp-gomb" class="btn btn-primary physics-btn" style="display: none;">Kérek egy tippet!</button>
+                            <button id="megoldas-gomb" class="btn btn-primary math-btn" style="display: none;">Megoldás</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="section">
+                    <h2 class="section-title">Ingyenes Interaktív Eszközök</h2>
+                    <div class="card-grid">
+                         <div class="card ai-card"><div class="card-body"><h4>Időutazó Csevegő 🕰️</h4><p>Beszélgess Newtonnal a gravitációról vagy Turinggal a kódfejtésről. Egy egyedülálló, interaktív történelemóra.</p><a href="idoutazo_csevego.html" class="btn btn-primary ai-btn">Csevegő Indítása →</a></div></div>
+                         <div class="card ai-card"><div class="card-body"><h4>Jövőkutató Szimulátor 🚀</h4><p>Kérdezz a holnapról egy MI-szakértőtől! Milyen lesz az élet a Marson? Fedezd fel a lehetséges jövőt!</p><a href="jovokutato_szimulator.html" class="btn btn-primary ai-btn">Szimulátor Indítása →</a></div></div>
+                         <div class="card math-card"><div class="card-body"><h4>Személyes Célkitűző 🎯</h4><p>Bontsd le a nagy álmaidat apró, elérhető lépésekre az MI segítségével, és kapj személyre szabott motivációt!</p><a href="celkituzo.html" class="btn btn-primary math-btn">Tervezés Indítása →</a></div></div>
+                         <div class="card physics-card"><div class="card-body"><h4>Tudás Iránytű 🧭</h4><p>Elakadtál? Írd le a problémád, és az MI személyre szabott tanulási útvonalat javasol a Tudástár anyagaiból!</p><a href="iranytu.html" class="btn btn-primary physics-btn">Útvonal Keresése →</a></div></div>
+                    </div>
+                </section>
+                
+                <section class="section">
+                    <h2 class="section-title">Teljes Kurzusok (Prémium)</h2>
+                    <div class="card-grid">
+                        <div class="card math-card"><div class="card-body"><h4>Teljes Matematika Kurzus</h4><p>Hozzáférés az összes évfolyam (5-8.) minden interaktív leckéjéhez és képletgyűjteményéhez.</p><a href="Interaktív Matematika Gyűjtemény.html" class="btn btn-primary math-btn protected-link">Részletek →</a></div></div>
+                        <div class="card physics-card"><div class="card-body"><h4>Teljes Fizika Kurzus</h4><p>Hozzáférés az összes évfolyam (6-8.) minden interaktív leckéjéhez és képletgyűjteményéhez.</p><a href="Interaktív Fizika Gyűjtemény.html" class="btn btn-primary physics-btn protected-link">Részletek →</a></div></div>
+                        <div class="card ai-card"><div class="card-body"><h4>Teljes Interaktív AIMI1 Gyűjtemény</h4><p>Hozzáférés az összes haladó műhelyhez, a projekt kézikönyvhöz és az extra tartalmakhoz.</p><a href="Interaktív AIMI1 Gyűjtemény.html" class="btn btn-primary ai-btn protected-link">Részletek →</a></div></div>
+                        <div class="card ai-card"><div class="card-body"><h4>Teljes Interaktív AIMI2 Gyűjtemény</h4><p>Hozzáférés az összes haladó műhelyhez, a projekt kézikönyvhöz és az extra tartalmakhoz.</p><a href="Interaktív AIMI2 Gyűjtemény.html" class="btn btn-primary ai-btn protected-link">Részletek →</a></div></div>
+                        <div class="card ai-card"><div class="card-body"><h4>Teljes Interaktív Szuperkepesseg Gyűjtemény</h4><p>Hozzáférés az összes haladó műhelyhez, a projekt kézikönyvhöz és az extra tartalmakhoz.</p><a href="Interaktív Szuperkepesseg Gyűjtemény.html" class="btn btn-primary ai-btn protected-link">Részletek →</a></div></div>
+                    
+                    </div>
+                </section>
+
+               
+
+                <!-- ÚJ SZEKCIÓ: A prémium eszközök, beleértve a Tutort is -->
+               <!-- Exkluzív Prémium Eszközök szekció, egységes zöld színvilággal -->
+<div class="card-grid">
+    <!-- Tutor (Zöldre változtatva) -->
+    <div class="card ai-card">
+        <div class="card-body">
+            <h4>CSICSIKE Tutor 💡</h4>
+            <p>A Tutor nem adja meg a kész választ, hanem rávezető kérdésekkel segít neked megérteni a megoldást.</p>
+            <a href="tutor.html" class="btn btn-primary ai-btn protected-link">Tutor Indítása →</a>
+        </div>
+    </div>
+
+    <!-- Házifeladat Hős (Zöldre változtatva) -->
+    <div class="card ai-card">
+        <div class="card-body">
+            <h4>Házifeladat Hős 🦸</h4>
+            <p>Illeszd be a szöveges feladatodat, és az MI lépésről-lépésre végigvezet a gondolkodás folyamatán.</p>
+            <a href="hazi_hos.html" class="btn btn-primary ai-btn protected-link">Hős Indítása →</a>
+        </div>
+    </div>
+
+    <!-- AI Vita Aréna (Már zöld volt) -->
+    <div class="card ai-card">
+        <div class="card-body">
+            <h4>AI Vita Aréna 🏛️</h4>
+            <p>Nézd meg, hogyan vitáznak a gépek! Elemezd két, ellentétes nézőpontú MI érvelését.</p>
+            <a href="vita_arena.html" class="btn btn-primary ai-btn protected-link">Aréna Megnyitása →</a>
+        </div>
+    </div>
+    
+    <!-- AI Vizsga Szimulátor (Zöldre változtatva) -->
+    <div class="card ai-card">
+        <div class="card-body">
+            <h4>AI Vizsga Szimulátor 📝</h4>
+            <p>Generálj végtelen számú, egyedi próbafeladatsort a témazáróidra a beépített tudásbázis alapján!</p>
+            <a href="vizsga_szimulator.html" class="btn btn-primary ai-btn protected-link">Szimulátor Indítása →</a>
+        </div>
+    </div>
+
+    <!-- Absztrakt->Konkrét Fordító (Zöldre változtatva) -->
+    <div class="card ai-card">
+        <div class="card-body">
+            <h4>Absztrakt->Konkrét Fordító 🔬</h4>
+            <p>Nem értesz egy bonyolult fogalmat? Az MI egy hétköznapi analógiával magyarázza el neked!</p>
+            <a href="konkretizalo.html" class="btn btn-primary ai-btn protected-link">Fordító Indítása →</a>
+        </div>
+    </div>
+
+    <!-- Esszé Vázlatoló (Már zöld volt) -->
+    <div class="card ai-card">
+        <div class="card-body">
+            <h4>Esszé Vázlatoló ✍️</h4>
+            <p>Segít a diákoknak a legnehezebb részben: egy fogalmazás vagy esszé logikus szerkezetének felépítésében.</p>
+            <a href="essze_vazlatolo.html" class="btn btn-primary ai-btn protected-link">Vázlatoló Indítása →</a>
+        </div>
+    </div>
+</div>
+<!-- A javított card-grid div vége -->
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">Próbáld ki Ingyen!</h2>
+                    <h3 class="subject-title math-title">Matematika</h3>
+                    <div class="card-grid">
+                        <div class="card math-card"><div class="card-body"><h4>5. Osztály</h4><p>Törtek és Tizedestörtek PIN:100001</p><a href="kviz_muveletek_tortekkel.html" class="btn btn-primary math-btn">Ingyenes Lecke →</a></div></div>
+                        <div class="card math-card"><div class="card-body"><h4>6. Osztály</h4><p>Százalékszámítás PIN:100001</p><a href="kviz_aranyok.html" class="btn btn-primary math-btn">Ingyenes Lecke →</a></div></div>
+                        <div class="card math-card"><div class="card-body"><h4>7. Osztály</h4><p>Természetes számok négyzetének négyzetgyöke PIN:100001</p><a href="kviz_termeszetes_negyzetgyok.html" class="btn btn-primary math-btn">Ingyenes Lecke →</a></div></div>
+                        <div class="card math-card"><div class="card-body"><h4>8. Osztály</h4><p>Halmazok meghatározása elemeik közös tulajdonságával PIN:100001</p><a href="kviz_halmazok_meghataroza.html" class="btn btn-primary math-btn">Ingyenes Lecke →</a></div></div>
+                        
+                    </div>
+
+                    <!-- ... a többi prémium eszköz kártyája ... -->
+
+
+                <div class="card ai-card">
+
+            
+                </section>
+
+            </div>
+        </main>
+        
+        <footer>
+            <div class="container">
+                <p>Egy jövőbeli tanár digitális lábnyoma. © 2024</p>
+            </div>
+        </footer>
+    </div>
+    
+    <div class="pin-modal-overlay" id="pin-modal">
+        <div class="pin-modal-content">
+            <h3>Hozzáférés Szükséges</h3>
+            <p>Ez a tartalom a kidolgozás alatt álló eszköztár része.<br>Kérjük, add meg a hozzáférési kódot!</p>
+            <input type="password" id="pin-input" placeholder="PIN-kód" autocomplete="off">
+            <div id="pin-error"></div>
+            <button id="pin-submit">Belépés</button>
+        </div>
+    </div>
+
+
+    <!-- SZKRIPTEK BETÖLTÉSE A BODY VÉGÉN, EZ A LEGBIZTOSABB MÓDSZER -->
+    <script src="kihivas_adatbazis.js"></script>
+    <script>
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('navigacio.html')
+            .then(response => { if (!response.ok) { throw new Error('Hiba: navigacio.html'); } return response.text(); })
+            .then(data => { document.getElementById('navbar-placeholder').innerHTML = data; initializePinProtection(); })
+            .catch(error => { console.error('Hiba a navigáció betöltése közben:', error); document.getElementById('navbar-placeholder').innerHTML = '<p style="color:red; text-align:center;">Hiba: A navigációs menü nem tölthető be.</p>'; });
+        function initializePinProtection() {
+            const masterPin = '121909';
+            const protectedLinks = document.querySelectorAll('.protected-link');
+            const modal = document.getElementById('pin-modal');
+            const pinInput = document.getElementById('pin-input');
+            const pinSubmit = document.getElementById('pin-submit');
+            const pinError = document.getElementById('pin-error');
+            let targetUrl = '';
+            if (protectedLinks.length === 0) return;
+            function requestPin(url) {
+                if (sessionStorage.getItem('isAuthenticated_csicsike') === 'true') { window.location.href = url; return; }
+                targetUrl = url;
+                modal.classList.add('visible');
+                pinInput.focus();
+            }
+            protectedLinks.forEach(link => { link.addEventListener('click', (event) => { event.preventDefault(); const url = link.getAttribute('href'); requestPin(url); }); });
+            function checkPin() {
+                if (pinInput.value === masterPin) {
+                    sessionStorage.setItem('isAuthenticated_csicsike', 'true');
+                    modal.classList.remove('visible');
+                    pinInput.value = '';
+                    pinError.textContent = '';
+                    if (targetUrl) { window.location.href = targetUrl; }
+                } else { pinError.textContent = 'Hibás PIN-kód!'; pinInput.value = ''; }
+            }
+            pinSubmit.addEventListener('click', checkPin);
+            pinInput.addEventListener('keyup', (event) => { pinError.textContent = ''; if (event.key === 'Enter') { checkPin(); } });
+            modal.addEventListener('click', (event) => { if (event.target === modal) { modal.classList.remove('visible'); pinError.textContent = ''; pinInput.value = ''; } });
+        }
+    });
+    </script>
+</body>
+</html>

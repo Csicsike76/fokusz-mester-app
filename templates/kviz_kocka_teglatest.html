@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Kocka, téglatest</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Kocka, téglatest</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Hány lapja van egy kockának?", options: { a: "6", b: "8", c: "12" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Gondolj egy dobókockára! Megszámolhatod az oldalait. 🔹 2. Lépés: A dobókockának 6 oldala van (alul, felül, és 4 oldalt). ✅ Megoldás: A kockának 6 lapja van." },
+            { question: "Milyen alakúak a kocka lapjai?", options: { a: "téglalapok", b: "négyzetek", c: "háromszögek" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kocka egy különleges téglatest, ahol minden él egyenlő hosszú. 🔹 2. Lépés: Emiatt minden lapja egyforma, egyenlő oldalú négyszög, amit négyzetnek hívunk. ✅ Megoldás: A kocka lapjai négyzetek." },
+            { question: "Hány csúcsa van egy téglatestnek?", options: { a: "6", b: "12", c: "8" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A csúcsok a 'sarkok'. Számoljuk meg őket! 🔹 2. Lépés: Egy téglatestnek van 4 csúcsa alul és 4 csúcsa felül. Ez összesen 8. ✅ Megoldás: Egy téglatestnek 8 csúcsa van." },
+            { question: "Hány éle van egy kockának?", options: { a: "12", b: "8", c: "6" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az élek a 'szélek', a lapok találkozásánál lévő szakaszok. 🔹 2. Lépés: Alul van 4 él, felül van 4 él, és a kettőt összeköti 4 függőleges él. Ez összesen 4+4+4=12. ✅ Megoldás: A kockának 12 éle van." },
+            { question: "Mennyi a térfogata egy 2 cm élű kockának?", options: { a: "12 cm³", b: "8 cm³", c: "24 cm³" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kocka térfogatának képlete V = a * a * a. 🔹 2. Lépés: Behelyettesítve az a=2 cm értéket: V = 2 * 2 * 2 = 8. ✅ Megoldás: A kocka térfogata 8 cm³." },
+            { question: "Mennyi a felszíne egy 2 cm élű kockának?", options: { a: "8 cm²", b: "12 cm²", c: "24 cm²" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A kocka felszíne a 6 darab egybevágó négyzetlap területének összege. Egy lap területe: a * a. A teljes felszín: A = 6 * a * a. 🔹 2. Lépés: Egy lap területe: 2 * 2 = 4 cm². A teljes felszín: 6 * 4 cm² = 24 cm². ✅ Megoldás: A kocka felszíne 24 cm²." },
+            { question: "Egy téglatest élei 2 cm, 3 cm és 4 cm. Mennyi a térfogata?", options: { a: "24 cm³", b: "9 cm³", c: "52 cm³" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A téglatest térfogatának képlete V = a * b * c. 🔹 2. Lépés: Behelyettesítjük az oldalakat: V = 2 * 3 * 4 = 24. ✅ Megoldás: A téglatest térfogata 24 cm³." },
+            { question: "Egy téglatest élei 1 cm, 2 cm és 5 cm. Mennyi a felszíne?", options: { a: "26 cm²", b: "34 cm²", c: "10 cm²" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A téglatest felszínének képlete A = 2 * (a*b + a*c + b*c). 🔹 2. Lépés: A lapok területei: a*b=1*2=2; a*c=1*5=5; b*c=2*5=10. 🔹 3. Lépés: A = 2 * (2 + 5 + 10) = 2 * 17 = 34. ✅ Megoldás: A téglatest felszíne 34 cm²." },
+            { question: "Ha egy téglatest minden éle egyenlő, akkor azt ... nevezzük.", options: { a: "négyzetnek", b: "gúlának", c: "kockának" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A téglatest egy olyan test, amit téglalapok határolnak. 🔹 2. Lépés: Ha minden éle egyenlő, akkor ezek a téglalapok speciálisak: négyzetek lesznek. Ezt a testet kockának nevezzük. ✅ Megoldás: Kockának nevezzük." },
+            { question: "Hogyan számoljuk ki egy kocka felszínét?", options: { a: "A = a * a", b: "A = 6 * a * a", c: "A = 12 * a" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kockának 6 egyforma négyzetlapja van. 🔹 2. Lépés: Egy négyzetlap területe a*a. A 6 lap területe együtt 6 * (a*a). ✅ Megoldás: A kocka felszínének képlete A = 6 * a * a." },
+            { question: "Hány lapja, éle és csúcsa van egy téglatestnek?", options: { a: "6 lap, 8 él, 12 csúcs", b: "6 lap, 12 él, 8 csúcs", c: "8 lap, 12 él, 6 csúcs" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Számoljuk meg őket! Lapok: alul, felül + 4 oldalt = 6. Élek: 4 alul, 4 felül, 4 függőleges = 12. Csúcsok: 4 alul, 4 felül = 8. ✅ Megoldás: 6 lapja, 12 éle és 8 csúcsa van." },
+            { question: "Mi a 'kockaháló'?", options: { a: "egy háló, amivel kockát lehet fogni", b: "a kocka kiterített, 2D-s rajza", c: "egy pók hálója a kockán" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A háló vagy testháló egy síkba kiterített testet jelent. 🔹 2. Lépés: A kockaháló egy olyan 2D-s alakzat, ami hat négyzetből áll, és amiből össze lehet hajtogatni egy kockát. ✅ Megoldás: A kocka kiterített, 2D-s rajza." },
+            { question: "Egy kocka térfogata 27 cm³. Milyen hosszú egy éle?", options: { a: "9 cm", b: "4.5 cm", c: "3 cm" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A térfogat V = a * a * a = 27. 🔹 2. Lépés: Keressük azt a számot, amit önmagával háromszor megszorozva 27-et kapunk. 3 * 3 * 3 = 27. ✅ Megoldás: A kocka éle 3 cm." },
+            { question: "Egy téglatest alaplapja egy 3 cm oldalú négyzet, a magassága 5 cm. Mennyi a térfogata?", options: { a: "15 cm³", b: "45 cm³", c: "75 cm³" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A téglatest élei: a=3 cm, b=3 cm, c=5 cm. 🔹 2. Lépés: A térfogat V = a * b * c = 3 * 3 * 5 = 9 * 5 = 45. ✅ Megoldás: A térfogata 45 cm³." },
+            { question: "Melyik állítás igaz?", options: { a: "Minden kocka téglatest.", b: "Minden téglatest kocka.", c: "A kockának és a téglatestnek semmi köze egymáshoz." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A téglatest egy általánosabb fogalom. A kocka egy speciális téglatest. 🔹 2. Lépés: Mivel a kocka megfelel a téglatest definíciójának (hat téglalap határolja, amik történetesen négyzetek), ezért minden kocka téglatest. De nem minden téglatest kocka. ✅ Megoldás: Minden kocka téglatest." },
+            { question: "Mi a neve a téglatestet határoló síkidomoknak?", options: { a: "oldalak", b: "élek", c: "lapok" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A testet határoló felületeket lapoknak nevezzük. 🔹 2. Lépés: Az élek a lapok találkozásánál lévő szakaszok, a csúcsok pedig az élek találkozásánál lévő pontok. ✅ Megoldás: A határoló síkidomok a lapok." },
+            { question: "Egy kocka éle 1 méter. Hány liter a térfogata?", options: { a: "1 liter", b: "100 liter", c: "1000 liter" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A kocka térfogata V = 1m * 1m * 1m = 1 m³. 🔹 2. Lépés: Ismernünk kell az átváltást: 1 m³ = 1000 dm³. Mivel 1 dm³ = 1 liter, ezért 1 m³ = 1000 liter. ✅ Megoldás: A kocka térfogata 1000 liter." },
+            { question: "Egy gyufásdoboz milyen geometriai testhez hasonlít a legjobban?", options: { a: "gúla", b: "kocka", c: "téglatest" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A gyufásdoboznak különböző hosszúságú élei vannak (hosszúság, szélesség, magasság). 🔹 2. Lépés: Emiatt a lapjai téglalapok, nem pedig négyzetek. ✅ Megoldás: A gyufásdoboz egy téglatest." },
+            { question: "Hány négyzetből áll egy kocka hálója?", options: { a: "4", b: "6", c: "8" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kockaháló a kiterített kocka. 🔹 2. Lépés: Mivel a kockának 6 négyzetlapja van, a hálójának is 6 négyzetből kell állnia. ✅ Megoldás: A kocka hálója 6 négyzetből áll." },
+            { question: "Egy 10 cm élű kockát pirosra festünk, majd 1 cm élű kis kockákra vágjuk. Hány olyan kiskocka lesz, aminek pontosan 3 oldala festett?", options: { a: "12", b: "8", c: "6" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A 3 oldalukon festett kiskockák a nagy kocka sarkaiban, azaz a csúcsaiban helyezkednek el. 🔹 2. Lépés: Egy kockának 8 csúcsa van. ✅ Megoldás: 8 ilyen kiskocka lesz." },
+            { question: "Melyik testet határolja 6 darab egybevágó négyzet?", options: { a: "a kocka", b: "a téglatest", c: "egyik sem" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Ez a kocka definíciója. 🔹 2. Lépés: A téglatestet téglalapok határolják, amik nem feltétlenül egybevágóak. ✅ Megoldás: A kockát határolja 6 egybevágó négyzet." },
+            { question: "Egy téglatest térfogata 60 cm³, két éle 3 cm és 4 cm. Milyen hosszú a harmadik éle?", options: { a: "12 cm", b: "5 cm", c: "20 cm" }, correctAnswer: "b", explanation: "🔹 1. Lépés: V = a * b * c. Tudjuk, hogy V=60, a=3, b=4. Tehát 60 = 3 * 4 * c. 🔹 2. Lépés: 60 = 12 * c. Az egyenletet 12-vel osztva: c = 60 / 12 = 5. ✅ Megoldás: A harmadik él 5 cm hosszú." },
+            { question: "Hány éle fut össze egy téglatest egy csúcsában?", options: { a: "2", b: "3", c: "4" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Nézz egy szoba sarkába! 🔹 2. Lépés: A sarokban egy függőleges és két vízszintes él találkozik. Ez összesen 3 él. ✅ Megoldás: Egy csúcsban 3 él fut össze." },
+            { question: "Melyik mértékegységgel mérjük a térfogatot?", options: { a: "cm", b: "cm²", c: "cm³" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A hosszúságot cm-ben, a területet cm²-ben mérjük. 🔹 2. Lépés: A térfogat három dimenzió (hossz, szélesség, magasság) szorzata, ezért a mértékegysége köbös, azaz cm³. ✅ Megoldás: A térfogatot cm³-ben (köbcentiméterben) mérjük." },
+            { question: "Egy kocka felszíne 600 cm². Mennyi egy lapjának a területe?", options: { a: "60 cm²", b: "100 cm²", c: "10 cm²" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kocka felszíne 6 egyforma lap területének összege. 🔹 2. Lépés: Egy lap területét úgy kapjuk meg, ha a teljes felszínt elosztjuk 6-tal: 600 cm² / 6 = 100 cm². ✅ Megoldás: Egy lap területe 100 cm²." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

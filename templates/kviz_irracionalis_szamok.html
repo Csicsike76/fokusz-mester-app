@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Irracionális számok (Végleges Verzió)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Irracionális számok</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'. Magyarázatok betűjel nélkül.
+            { question: "Melyik definíció írja le pontosan az irracionális számot?", answers: { a: "Olyan szám, amely nem írható fel két egész szám hányadosaként.", b: "Minden szám, amiben gyökjel van.", c: "Csak a π és az e." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A racionális számok felírhatók p/q törtalakban. Az irracionálisak azok a valós számok, amelyek erre nem képesek.</div><div class="explanation-step"><b>❌ Hibás opciók:</b> Az, hogy "Minden szám, amiben gyökjel van", hamis, mert √9 = 3, ami racionális. Az, hogy "Csak a π és az e", hamis, mert pl. a √2 is irracionális.</div><div class="explanation-solution">✅ Megoldás: A helyes definíció az, hogy a szám nem írható fel két egész szám hányadosaként.</div>` },
+            { question: "Melyik szám irracionális az alábbiak közül?", answers: { a: "√3", b: "√100", c: "0,25" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Azt a számot keressük, ami nem írható fel törtként.</div><div class="explanation-step"><b>❌ Hibás opciók:</b> A √100 értéke 10, ami racionális. A 0,25 értéke 1/4, ami racionális.</div><div class="explanation-solution">✅ Megoldás: A √3 irracionális, mert a 3 nem négyzetszám.</div>` },
+            { question: "Mi lesz a 5 + √2 kifejezés eredménye?", answers: { a: "Irracionális szám", b: "Racionális szám", c: "Egész szám" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Tétel:</b> Egy racionális szám (5) és egy irracionális szám (√2) összege mindig irracionális.</div><div class="explanation-solution">✅ Megoldás: Az eredmény irracionális szám.</div>` },
+            { question: "Hogyan viszonyul a π és a 22/7?", answers: { a: "A 22/7 a π egyik racionális közelítése.", b: "A két szám pontosan egyenlő.", c: "A π a 22/7 egész része." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Típusok:</b> A π irracionális, míg a 22/7 egy tört, tehát racionális. Emiatt nem lehetnek egyenlők.</div><div class="explanation-step"><b>🔹 Kapcsolat:</b> A 22/7 ≈ 3.1428... egy nagyon jó racionális közelítése a π ≈ 3.1415... értékének.</div><div class="explanation-solution">✅ Megoldás: Helyes állítás, hogy a 22/7 a π egyik racionális közelítése.</div>` },
+            { question: "Melyik szám van a 4 és az 5 között?", answers: { a: "√17", b: "√26", c: "√16" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Határok:</b> Tudjuk, hogy 4 = √16 és 5 = √25. Olyan √x számot keresünk, ahol 16 < x < 25.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A √17 teljesíti ezt a feltételt.</div><div class="explanation-solution">✅ Megoldás: A √17 van 4 és 5 között.</div>` },
+            { question: "Az 'e' (Euler-féle szám) milyen szám?", answers: { a: "Irracionális", b: "Racionális", c: "Egész" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Az 'e' szám (kb. 2,718) a természetes logaritmus alapja, a π-hez hasonlóan egy fontos matematikai konstans.</div><div class="explanation-step"><b>🔹 Tulajdonság:</b> Végtelen, nem szakaszos tizedestört, tehát irracionális.</div><div class="explanation-solution">✅ Megoldás: Az 'e' szám irracionális.</div>` },
+            { question: "A 0.1010010001... szám milyen típusú?", answers: { a: "Irracionális", b: "Racionális", c: "Szakaszos" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Minta elemzése:</b> A tizedesjegyek mintázata (10, 100, 1000...) soha nem ismétlődik egy fix hosszúságú szakaszban.</div><div class="explanation-step"><b>🔹 Következtetés:</b> Mivel a tizedestört végtelen és nem szakaszos, a szám definíció szerint irracionális.</div><div class="explanation-solution">✅ Megoldás: A szám irracionális.</div>` },
+            { question: "Melyik számhalmazba tartozik a √15?", answers: { a: "Irracionális számok", b: "Racionális számok", c: "Egész számok" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Tétel:</b> Egy egész szám négyzetgyöke csak akkor racionális, ha maga a szám négyzetszám.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A 15 nem négyzetszám (3²=9, 4²=16), ezért a gyöke irracionális.</div><div class="explanation-solution">✅ Megoldás: A √15 az irracionális számok halmazába tartozik.</div>` },
+            { question: "Melyik szám RACIONÁLIS az alábbiak közül?", answers: { a: "√20", b: "√25", c: "π" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A racionális szám felírható törtként. A √25 értéke 5, ami racionális. A másik két opció irracionális.</div><div class="explanation-solution">✅ Megoldás: A √25 racionális.</div>` },
+            { question: "Hogyan jellemeznéd egy irracionális szám tizedestört alakját?", answers: { a: "Véges", b: "Végtelen, nem szakaszos", c: "Végtelen, szakaszos" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíciók:</b> A véges és a végtelen szakaszos tizedestörtek a racionális számokat írják le.</div><div class="explanation-solution">✅ Megoldás: Az irracionális számok tizedestört alakja végtelen és nem szakaszos.</div>` },
+            { question: "A 0.123123123... szám milyen típusú?", answers: { a: "Irracionális", b: "Racionális", c: "Véges" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Minta elemzése:</b> A "123" számsor ismétlődik a végtelenségig. Ez egy végtelen, szakaszos tizedestört.</div><div class="explanation-step"><b>🔹 Tétel:</b> Minden végtelen szakaszos tizedestört felírható törtalakban, tehát racionális.</div><div class="explanation-solution">✅ Megoldás: Ez egy racionális szám.</div>` },
+            { question: "Melyik kifejezés értéke lehet racionális?", answers: { a: "π - 1", b: "√5 * √5", c: "3 * √2" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Racionális és irracionális szám összege/különbsége/szorzata (ha a racionális nem 0) mindig irracionális.</div><div class="explanation-solution">✅ Megoldás: A √5 * √5 értéke (√5)², ami 5, tehát racionális.</div>` },
+            { question: "Az irracionális számok halmazának jele:", answers: { a: "ℝ", b: "ℚ*", c: "ℤ" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Jelek:</b> ℝ: valós számok; ℤ: egész számok; ℚ: racionális számok.</div><div class="explanation-step"><b>🔹 Levezetés:</b> Az irracionális számok a valós számok, amelyek nem racionálisak (ℝ \ ℚ). Ennek a halmaznak a leggyakoribb jele a ℚ*.</div><div class="explanation-solution">✅ Megoldás: A leggyakoribb jelölés a ℚ*.</div>` },
+            { question: "Melyik állítás HAMIS?", answers: { a: "Minden egész szám valós szám.", b: "Minden valós szám irracionális.", c: "Minden természetes szám racionális." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Az, hogy "Minden egész szám valós szám", igaz. Az, hogy "Minden természetes szám racionális", igaz.</div><div class="explanation-solution">✅ Megoldás: Az az állítás hamis, hogy "Minden valós szám irracionális", mert a valós számok között vannak racionálisak is (pl. 5).</div>` },
+            { question: "Mi a √121 értéke?", answers: { a: "Irracionális", b: "Racionális", c: "Csak természetes szám" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Számolás:</b> √121 = 11.</div><div class="explanation-step"><b>🔹 Elemzés:</b> A 11 egy természetes szám, ami egyben egész és racionális is. A "racionális" a legtágabb helyes kategória a válaszok közül.</div><div class="explanation-solution">✅ Megoldás: A √121 értéke racionális.</div>` },
+            { question: "Melyik művelet eredménye BIZTOSAN irracionális?", answers: { a: "√2 * √8", b: "√3 + 5", c: "√2 - √2" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b><br>• √2 * √8 = √16 = 4, ami racionális.<br>• √2 - √2 = 0, ami racionális.</div><div class="explanation-solution">✅ Megoldás: A √3 + 5 (egy irracionális és egy racionális szám összege) biztosan irracionális.</div>` },
+            { question: "Ha egy négyzet oldala √5 cm, akkor a területe:", answers: { a: "Irracionális", b: "Racionális", c: "Nem számolható ki" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A négyzet területe T = a².</div><div class="explanation-step"><b>🔹 Számolás:</b> T = (√5)² = 5 cm².</div><div class="explanation-solution">✅ Megoldás: A terület értéke, 5, egy racionális szám.</div>` },
+            { question: "Melyik szám NEM irracionális?", answers: { a: "√10", b: "π + 1", c: "√49" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b><br>• √10: Irracionális, mert a 10 nem négyzetszám.<br>• π + 1: Irracionális és racionális összege, ami irracionális.</div><div class="explanation-solution">✅ Megoldás: A √49 értéke 7, ami racionális, tehát NEM irracionális.</div>` },
+            { question: "Melyik állítás IGAZ?", answers: { a: "√(9+16) = √9 + √16", b: "√2 nem valós szám", c: "√(9×16) = √9 × √16" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b><br>• Az "√(9+16) = √9 + √16" állítás hamis, mert a bal oldal √25=5, a jobb oldal 3+4=7.<br>• A "√2 nem valós szám" állítás hamis, mert a √2 valós (csak nem racionális).</div><div class="explanation-solution">✅ Megoldás: Az az állítás igaz, hogy √(9×16) = √9 × √16, mert mindkét oldal értéke 12.</div>` },
+            { question: "A √2 * √18 művelet eredménye:", answers: { a: "Irracionális", b: "Negatív", c: "Racionális" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Számolás:</b> A gyökvonás azonosságát használva: √2 * √18 = √(2 * 18) = √36.</div><div class="explanation-step"><b>🔹 Végeredmény:</b> √36 = 6.</div><div class="explanation-solution">✅ Megoldás: Az eredmény, 6, egy racionális szám.</div>` },
+            { question: "Ha egy kör sugara √3 cm, akkor a kerülete (K=2rπ):", answers: { a: "Racionális", b: "Egész", c: "Irracionális" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> K = 2 * r * π.</div><div class="explanation-step"><b>🔹 Behelyettesítés:</b> K = 2 * √3 * π.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Mivel a π és a √3 is irracionális, a szorzatuk is az lesz.</div><div class="explanation-solution">✅ Megoldás: A kerület irracionális.</div>` },
+            { question: "A racionális és irracionális számok együtt alkotják a ... számok halmazát.", answers: { a: "Természetes", b: "Egész", c: "Valós" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A valós számok (ℝ) halmaza definíció szerint a racionális számok (ℚ) és az irracionális számok (ℚ*) uniója.</div><div class="explanation-solution">✅ Megoldás: A két halmaz együtt a valós számok halmazát alkotja.</div>` },
+            { question: "Melyik számhalmaz a legbővebb az alábbiak közül?", answers: { a: "Egész számok (ℤ)", b: "Racionális számok (ℚ)", c: "Valós számok (ℝ)" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Halmazok viszonya:</b> Természetes ⊂ Egész ⊂ Racionális ⊂ Valós. Az irracionálisak szintén a valósak részhalmazát alkotják.</div><div class="explanation-solution">✅ Megoldás: A valós számok halmaza a legbővebb.</div>` },
+            { question: "A √50 egyszerűsített alakja:", answers: { a: "25√2", b: "10√5", c: "5√2" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Tényezőkre bontás:</b> Keressük a legnagyobb négyzetszámot, amivel 50 osztható. Ez a 25. Tehát 50 = 25 * 2.</div><div class="explanation-step"><b>🔹 Képlet alkalmazása:</b> A √(a² · b) = a · √b szabályt használva: √50 = √(25 · 2) = 5√2.</div><div class="explanation-solution">✅ Megoldás: A helyes egyszerűsített alak az 5√2.</div>` },
+            { question: "Melyik szám nem valós szám?", answers: { a: "√5", b: "π", c: "√-4" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A valós számok halmazán negatív számnak nincs négyzetgyöke.</div><div class="explanation-step"><b>❌ Hibás opciók:</b> A √5 és a π valós számok.</div><div class="explanation-solution">✅ Megoldás: A √-4 nem értelmezhető a valós számok körében, tehát nem valós szám.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

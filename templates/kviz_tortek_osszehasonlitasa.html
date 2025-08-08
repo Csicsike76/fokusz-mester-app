@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Törtek összehasonlítása, ábrázolása</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Törtek összehasonlítása, ábrázolása</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Melyik tört a nagyobb: 7/8 vagy 5/8?", options: { a: "7/8", b: "5/8", c: "egyenlőek" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A nevezők azonosak (8). Ilyenkor az a tört a nagyobb, amelyiknek a számlálója nagyobb. 🔹 2. Lépés: Mivel 7 > 5, ezért a 7/8 a nagyobb. ✅ Megoldás: A 7/8 a nagyobb." },
+            { question: "Melyik tört a kisebb: 1/3 vagy 1/5?", options: { a: "1/5", b: "1/3", c: "egyenlőek" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A számlálók azonosak (1). Ilyenkor az a tört a kisebb, amelyiknek a nevezője nagyobb, mert az egészet több részre osztjuk. 🔹 2. Lépés: Mivel 5 > 3, ezért az 1/5 a kisebb. ✅ Megoldás: Az 1/5 a kisebb." },
+            { question: "Anna a torta 1/4-ét, Bea az 1/3-át ette meg. Ki evett kevesebbet?", options: { a: "Anna", b: "Bea", c: "Ugyanannyit ettek." }, correctAnswer: "a", explanation: "🔹 1. Lépés: Össze kell hasonlítani az 1/4 és az 1/3 törteket. A számlálók azonosak. 🔹 2. Lépés: Az a tört a kisebb, amelyiknek a nevezője nagyobb. Mivel 4 > 3, ezért 1/4 < 1/3. ✅ Megoldás: Anna evett kevesebbet." },
+            { question: "Hol helyezkedik el a 3/2 a számegyenesen?", options: { a: "az 1 és a 2 között", b: "a 0 és az 1 között", c: "pontosan a 3-nál" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A 3/2 egy áltört. Átírjuk vegyes szám alakra. 🔹 2. Lépés: 3-ban a 2 megvan 1-szer, a maradék 1. Tehát 3/2 = 1 1/2. 🔹 3. Lépés: Ez a szám 1-nél nagyobb, de 2-nél kisebb. ✅ Megoldás: A 3/2 az 1 és a 2 között helyezkedik el." },
+            { question: "Melyik tört egyenlő 3/4-del?", options: { a: "9/12", b: "6/9", c: "4/3" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Keressük azt a törtet, ami a 3/4 bővített vagy egyszerűsített alakja. 🔹 2. Lépés: Ha a 3/4-et bővítjük 3-mal: 3*3=9, 4*3=12. Az eredmény 9/12. ✅ Megoldás: A 9/12 egyenlő a 3/4-del." },
+            { question: "Hasonlítsd össze: 2/3 és 5/6. Melyik a nagyobb?", options: { a: "5/6", b: "2/3", c: "egyenlőek" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Közös nevezőre kell hozni a törteket. A közös nevező a 6. 🔹 2. Lépés: Az első törtet bővíteni kell 2-vel: 2/3 = 4/6. 🔹 3. Lépés: Most a 4/6-ot és az 5/6-ot hasonlítjuk össze. Mivel 5 > 4, ezért 5/6 > 4/6. ✅ Megoldás: Az 5/6 a nagyobb." },
+            { question: "Melyik a legnagyobb? 4/5, 3/4, 2/3", options: { a: "4/5", b: "3/4", c: "2/3" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Hozzuk közös nevezőre a törteket. A legkisebb közös többszörös az 5, 4, 3 számoknak a 60. 🔹 2. Lépés: 4/5 = 48/60. 3/4 = 45/60. 2/3 = 40/60. 🔹 3. Lépés: Most már látszik, hogy a 48/60 a legnagyobb. ✅ Megoldás: A 4/5 a legnagyobb." },
+            { question: "Melyik tört értéke van közelebb az 1-hez?", options: { a: "9/10", b: "8/10", c: "1/10" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az 1 egész az 10/10. 🔹 2. Lépés: Nézzük a különbségeket: 10/10 - 9/10 = 1/10. 10/10 - 8/10 = 2/10. 10/10 - 1/10 = 9/10. 🔹 3. Lépés: Az 1/10 a legkisebb különbség, tehát a 9/10 van legközelebb az 1-hez. ✅ Megoldás: A 9/10 van közelebb az 1-hez." },
+            { question: "Melyik a kisebb: 4/9 vagy 7/9?", options: { a: "egyenlőek", b: "4/9", c: "7/9" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A nevezők azonosak (9). Ilyenkor az a tört a kisebb, amelyiknek a számlálója kisebb. 🔹 2. Lépés: Mivel 4 < 7, ezért a 4/9 a kisebb. ✅ Megoldás: A 4/9 a kisebb." },
+            { question: "Melyik a nagyobb: 3/4 vagy 3/5?", options: { a: "3/5", b: "3/4", c: "egyenlőek" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A számlálók azonosak (3). Ilyenkor az a tört a nagyobb, amelyiknek a nevezője kisebb. 🔹 2. Lépés: Mivel 4 < 5, ezért a 3/4 a nagyobb. ✅ Megoldás: A 3/4 a nagyobb." },
+            { question: "Melyik tört nagyobb, mint 1?", options: { a: "7/8", b: "8/7", c: "8/8" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Egy tört akkor nagyobb, mint 1, ha a számlálója nagyobb, mint a nevezője. Ezt áltörtnek nevezzük. 🔹 2. Lépés: A 8/7 törtben a 8 > 7. A 7/8 valódi tört (<1), a 8/8 pedig pontosan 1. ✅ Megoldás: A 8/7 nagyobb, mint 1." },
+            { question: "A számegyenesen melyik van balra: 2/5 vagy 4/5?", options: { a: "4/5", b: "2/5", c: "egy helyen vannak" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A számegyenesen balra a kisebb számok vannak. 🔹 2. Lépés: Össze kell hasonlítani a 2/5 és 4/5 törteket. Mivel a nevezőjük azonos, a 2/5 a kisebb. ✅ Megoldás: A 2/5 van balra." },
+            { question: "Melyik tört egyszerűsített alakja 2/3?", options: { a: "8/10", b: "10/15", c: "9/12" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Egyszerűsítsük a lehetőségeket. a) 8/10 = 4/5. b) 10/15-öt 5-tel egyszerűsítve: 10:5=2, 15:5=3, tehát 2/3. c) 9/12 = 3/4. ✅ Megoldás: A 10/15 egyszerűsített alakja 2/3." },
+            { question: "Hasonlítsd össze: 1/2 és 3/5. Melyik a nagyobb?", options: { a: "1/2", b: "3/5", c: "egyenlőek" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Hozzuk közös nevezőre a törteket. A közös nevező 10. 🔹 2. Lépés: 1/2 = 5/10. 3/5 = 6/10. 🔹 3. Lépés: Mivel 6 > 5, ezért a 6/10 (azaz a 3/5) a nagyobb. ✅ Megoldás: A 3/5 a nagyobb." },
+            { question: "Egy léc 2/5-ét kékre, 3/10-ét pirosra festettük. Melyik színből használtunk többet?", options: { a: "pirosból", b: "kékből", c: "ugyanannyit" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Hasonlítsuk össze a 2/5 és a 3/10 törteket. Közös nevező a 10. 🔹 2. Lépés: 2/5 = 4/10. 🔹 3. Lépés: Mivel 4/10 > 3/10, ezért a kék részből van több. ✅ Megoldás: Kékből használtunk többet." },
+            { question: "Melyik tört van a 0 és az 1 között?", options: { a: "7/6", b: "5/6", c: "6/6" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A 0 és 1 közötti törtek a valódi törtek, ahol a számláló kisebb, mint a nevező. 🔹 2. Lépés: 7/6 egy áltört (>1). 6/6 egy áltört (=1). Az 5/6 egy valódi tört. ✅ Megoldás: Az 5/6 van 0 és 1 között." },
+            { question: "Melyik állítás igaz?", options: { a: "a 3/4 kisebb, mint 1/2", b: "a 4/3 nagyobb, mint 1", c: "az 5/5 kisebb, mint 1" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Vizsgáljuk az állításokat. a) 3/4 > 2/4 (ami 1/2), tehát hamis. b) 4/3 egy áltört, ahol a számláló nagyobb, mint a nevező, tehát az értéke > 1. Ez igaz. c) 5/5 értéke pontosan 1, nem kisebb, tehát hamis. ✅ Megoldás: A 'b' állítás igaz." },
+            { question: "Melyik a kisebb: 7/5 vagy 5/7?", options: { a: "7/5", b: "egyenlőek", c: "5/7" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A 7/5 egy áltört, tehát az értéke nagyobb, mint 1. Az 5/7 egy valódi tört, tehát az értéke kisebb, mint 1. 🔹 2. Lépés: Ebből egyértelmű, hogy az 5/7 a kisebb. ✅ Megoldás: Az 5/7 a kisebb." },
+            { question: "A számegyenesen melyik van jobbra: 1/2 vagy 1/4?", options: { a: "1/4", b: "egy helyen vannak", c: "1/2" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A számegyenesen jobbra a nagyobb számok vannak. 🔹 2. Lépés: Hasonlítsuk össze a törteket. 1/2-et bővítjük 2-vel, így 2/4 lesz. Mivel 2/4 > 1/4, ezért az 1/2 a nagyobb. ✅ Megoldás: Az 1/2 van jobbra." },
+            { question: "Hasonlítsd össze: 3/4 és 7/8. Melyik a kisebb?", options: { a: "7/8", b: "egyenlőek", c: "3/4" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A közös nevező a 8. Bővítsük a 3/4 törtet 2-vel. 🔹 2. Lépés: 3/4 = 6/8. 🔹 3. Lépés: Most a 6/8-ot és a 7/8-ot hasonlítjuk össze. Mivel 6 < 7, a 6/8 (azaz a 3/4) a kisebb. ✅ Megoldás: A 3/4 a kisebb." },
+            { question: "Az osztály 2/5-e fiú. A lányok vannak többen vagy a fiúk?", options: { a: "fiúk", b: "ugyanannyian vannak", c: "lányok" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Ha az osztály 2/5-e fiú, akkor a lányok aránya a maradék, azaz 1 - 2/5 = 3/5. 🔹 2. Lépés: Hasonlítsuk össze a két arányt: 3/5 (lányok) és 2/5 (fiúk). 🔹 3. Lépés: Mivel 3/5 > 2/5, ezért a lányok vannak többen. ✅ Megoldás: A lányok vannak többen." },
+            { question: "Melyik a legkisebb? 1/2, 2/3, 1/4", options: { a: "1/2", b: "2/3", c: "1/4" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Hozzuk közös nevezőre a törteket. A közös nevező 12. 🔹 2. Lépés: 1/2 = 6/12. 2/3 = 8/12. 1/4 = 3/12. 🔹 3. Lépés: Az új törtek közül a 3/12 a legkisebb. ✅ Megoldás: Az 1/4 a legkisebb." },
+            { question: "Mi a legegyszerűbb közös nevezője a 2/3 és a 3/5 törteknek?", options: { a: "8", b: "30", c: "15" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A közös nevező a nevezők (3 és 5) közös többszöröse kell, hogy legyen. 🔹 2. Lépés: Keressük a 3 és az 5 legkisebb közös többszörösét. Mivel ezek prímszámok, a legkisebb közös többszörösük a szorzatuk: 3 * 5 = 15. ✅ Megoldás: A legkisebb közös nevező a 15." },
+            { question: "Peti a zsebpénze 1/2-ét, Zoli a 2/4-ét költötte el. Ki költött többet?", options: { a: "Peti", b: "Zoli", c: "Ugyanannyit költöttek." }, correctAnswer: "c", explanation: "🔹 1. Lépés: Hasonlítsuk össze az 1/2 és a 2/4 törteket. 🔹 2. Lépés: A 2/4 törtet egyszerűsíthetjük 2-vel: 2:2=1, 4:2=2. Az eredmény 1/2. 🔹 3. Lépés: Mivel 1/2 = 1/2, ezért ugyanannyit költöttek. ✅ Megoldás: Ugyanannyit költöttek." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

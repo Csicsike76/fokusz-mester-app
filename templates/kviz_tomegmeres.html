@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Tömegmérés</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Tömegmérés</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Melyik eszközt használjuk tömegmérésre?", answers: { a: "Mérleg", b: "Vonalzó", c: "Stopper" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Eszközök és funkciók:</b> A mérleg a tömeg, a vonalzó a hosszúság, a stopper pedig az idő mérésére szolgál.</div><div class="explanation-solution">✅ Megoldás: Tömegmérésre a mérleget használjuk.</div>` },
+            { question: "Mi a tömeg SI alapmértékegysége?", answers: { a: "kilogramm (kg)", b: "gramm (g)", c: "newton (N)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 SI-rendszer:</b> A Nemzetközi Mértékegységrendszer (SI) alapmértékegysége a tömegre a kilogramm. A gramm ennek egy törtrésze. A newton az erő mértékegysége.</div><div class="explanation-solution">✅ Megoldás: A tömeg SI alapmértékegysége a kilogramm (kg).</div>` },
+            { question: "Hogyan működik a kétkarú mérleg?", answers: { a: "A mérendő testet ismert tömegű testekkel (súlyokkal) hasonlítja össze.", b: "A rugó megnyúlását méri.", c: "Digitális kijelzőn mutatja az értéket." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Működési elv:</b> A kétkarú mérleg akkor van egyensúlyban, ha a két serpenyőjében lévő tömegek egyenlőek. Ezért az egyik serpenyőbe a mérendő testet, a másikba pedig ismert tömegű súlyokat helyezünk addig, amíg az egyensúly be nem áll.</div><div class="explanation-solution">✅ Megoldás: A kétkarú mérleg ismert tömegű testekkel hasonlítja össze a mérendő testet.</div>` },
+            { question: "Mennyi 3500 gramm kilogrammban?", answers: { a: "3,5 kg", b: "35 kg", c: "0,35 kg" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 kg = 1000 g. Ezért a grammban megadott értéket el kell osztani 1000-rel.</div><div class="explanation-step"><b>🔹 Számolás:</b> 3500 / 1000 = 3,5.</div><div class="explanation-solution">✅ Megoldás: 3500 gramm az 3,5 kg.</div>` },
+            { question: "Melyik test tömege NEM változik a Holdon a Földhöz képest?", answers: { a: "Egyiké sem.", b: "Csak az űrhajósé.", c: "Csak a kőzeteké." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Alaptulajdonság:</b> A tömeg a testben lévő anyag mennyiségétől függ, ami egy helytől független, állandó tulajdonság.</div><div class="explanation-step"><b>❌ A súly változik:</b> A súly az az erő, amivel a bolygó vonzza a testet. Mivel a Hold gravitációja gyengébb, a testek súlya ott kisebb, de a tömegük nem változik.</div><div class="explanation-solution">✅ Megoldás: Egyik test tömege sem változik.</div>` },
+            { question: "Melyik jelöli a legnagyobb tömeget?", answers: { a: "1 tonna", b: "100 kg", c: "100 000 g" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás kilogrammra:</b> Hozzuk közös mértékegységre az értékeket.<br>• 1 tonna = 1000 kg.<br>• 100 kg = 100 kg.<br>• 100 000 g = 100 000 / 1000 = 100 kg.</div><div class="explanation-solution">✅ Megoldás: Az 1 tonna a legnagyobb tömeg.</div>` },
+            { question: "Mi a 'tárázás' művelete egy digitális mérlegen?", answers: { a: "A mérleg lenullázása, miután ráhelyeztünk egy edényt.", b: "A mértékegység átváltása.", c: "A mérleg kikapcsolása." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Funkció:</b> A tárázás (vagy nullázás) arra szolgál, hogy csak a mérni kívánt anyag tömegét mérjük, az edény (pl. pohár, tál) tömege nélkül. Ráhelyezzük az üres edényt, megnyomjuk a TARE gombot, a mérleg 0-t mutat, és innentől csak a beletöltött anyag tömegét méri.</div><div class="explanation-solution">✅ Megoldás: A tárázás a mérleg lenullázása a rajta lévő edénnyel.</div>` },
+            { question: "Egy almás pite receptje 25 dekagramm lisztet ír. Hány gramm ez?", answers: { a: "250 g", b: "2,5 g", c: "2500 g" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 dekagramm (dkg) = 10 gramm (g).</div><div class="explanation-step"><b>🔹 Számolás:</b> 25 * 10 = 250.</div><div class="explanation-solution">✅ Megoldás: 25 dekagramm az 250 gramm.</div>` },
+            { question: "A tömegmérés során mit használunk etalonként (viszonyítási alapként)?", answers: { a: "A mérleget.", b: "Ismert tömegű súlyokat.", c: "A mérendő testet." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Mérés elve:</b> A mérés mindig egy viszonyítás egy standardhoz (etalonhoz). Tömegmérés esetén ezek a hitelesített, ismert tömegű súlyok, amelyekhez a mérendő test tömegét hasonlítjuk.</div><div class="explanation-solution">✅ Megoldás: Ismert tömegű súlyokat használunk etalonként.</div>` },
+            { question: "Miért fontos, hogy a mérleg vízszintes felületen álljon mérés közben?", answers: { a: "Mert így szebb.", b: "Mert így pontosabb a mérés.", c: "Mert így gyorsabb." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Hibaforrás:</b> Ha a mérleg ferdén áll, a belső mechanikájára vagy érzékelőire ható erők nem megfelelően oszlanak el, ami a mérés pontatlanságához vezet. A kétkarú mérlegnél az egyensúly is csak vízszintes helyzetben értelmezhető helyesen.</div><div class="explanation-solution">✅ Megoldás: A vízszintes elhelyezés a mérés pontossága miatt fontos.</div>` },
+            { question: "Melyiknek nagyobb a tömege: 1 kg vasnak vagy 1 kg vattának?", answers: { a: "A vasnak.", b: "Egyenlő a tömegük.", c: "A vattának." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A kérdés a tömegre vonatkozik, nem a térfogatra vagy a sűrűségre.</div><div class="explanation-step"><b>🔹 Tény:</b> 1 kg az 1 kg, függetlenül attól, hogy milyen anyagról van szó.</div><div class="explanation-solution">✅ Megoldás: A tömegük egyenlő.</div>` },
+            { question: "Mennyi 2 kg 50 dkg grammban?", answers: { a: "250 g", b: "2500 g", c: "2050 g" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás grammra:</b><br>• 2 kg = 2 * 1000 = 2000 g.<br>• 50 dkg = 50 * 10 = 500 g.</div><div class="explanation-step"><b>🔹 Összeadás:</b> 2000 g + 500 g = 2500 g.</div><div class="explanation-solution">✅ Megoldás: A tömeg 2500 gramm.</div>` },
+            { question: "Ha egy dinnye tömege 4,2 kg, az hány gramm?", answers: { a: "420 g", b: "4200 g", c: "42 g" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> 1 kg = 1000 g. A kilogrammban megadott értéket 1000-rel kell szorozni.</div><div class="explanation-step"><b>🔹 Számolás:</b> 4,2 * 1000 = 4200.</div><div class="explanation-solution">✅ Megoldás: A dinnye tömege 4200 gramm.</div>` },
+            { question: "A tömeg...?", answers: { a: "a helytől függő mennyiség.", b: "a testre ható gravitációs erő.", c: "a testre jellemző, helytől független mennyiség." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Tömeg vs. Súly:</b> A tömeg a test belső tulajdonsága, az anyag mennyisége. A súly az az erő, amivel a gravitáció hat rá, és ez a helytől függ (pl. Hold vs. Föld).</div><div class="explanation-solution">✅ Megoldás: A tömeg helytől független mennyiség.</div>` },
+            { question: "Egy doboz cukor tömege 1 kg. Ha a cukrot áttöltjük egy másik, nagyobb dobozba, mennyi lesz a cukor tömege?", answers: { a: "Kevesebb, mint 1 kg.", b: "Több, mint 1 kg.", c: "Pontosan 1 kg." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Tömegmegmaradás:</b> Az anyag (és így a tömege) nem vész el az áttöltés során. A térfogat, amit elfoglal, változhat, de a tömege nem.</div><div class="explanation-solution">✅ Megoldás: A cukor tömege pontosan 1 kg marad.</div>` },
+            { question: "Mi a 'nettó tömeg'?", answers: { a: "A termék tömege a csomagolás nélkül.", b: "A termék tömege a csomagolással együtt.", c: "A termék ára." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Fogalmak:</b><br>• <b>Nettó tömeg:</b> A tiszta termék tömege.<br>• <b>Bruttó tömeg:</b> A termék és a csomagolás együttes tömege.<br>• <b>Tára:</b> A csomagolás tömege.</div><div class="explanation-solution">✅ Megoldás: A nettó tömeg a termék tömege a csomagolás nélkül.</div>` },
+            { question: "Hogyan működik egy digitális konyhai mérleg?", answers: { a: "Rugó megnyúlását méri.", b: "Kétkarú emelő elvén.", c: "Nyomásérzékelőkkel méri a rá nehezedő súlyt, és abból számolja a tömeget." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Technológia:</b> A modern digitális mérlegek alján nyomásérzékelő cellák (load cell) vannak. Ezek a rájuk nehezedő erő (súly) hatására minimálisan deformálódnak, és ezt a deformációt elektromos jellé alakítják, amiből a processzor kiszámítja a tömeget.</div><div class="explanation-solution">✅ Megoldás: Nyomásérzékelőkkel méri a súlyt, és abból számolja a tömeget.</div>` },
+            { question: "Melyik állítás HAMIS?", answers: { a: "A tömeg a tehetetlenség mértéke.", b: "A tömeg az SI rendszerben kilogrammban mért alapmennyiség.", c: "A tömeg egyenlő a súllyal." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Az első két állítás igaz. A tömeg és a súly azonban két különböző fizikai mennyiség. A tömeg skalármennyiség (kg), a súly pedig erő (N).</div><div class="explanation-solution">✅ Megoldás: Az az állítás hamis, hogy a tömeg egyenlő a súllyal.</div>` },
+            { question: "Egy 10 literes vödörbe vizet töltünk. A víz tömege kb. ...", answers: { a: "1 kg.", b: "100 kg.", c: "10 kg." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Víz sűrűsége:</b> A víz sűrűsége kb. 1 kg/liter. Ez azt jelenti, hogy 1 liter víz tömege 1 kg.</div><div class="explanation-step"><b>🔹 Számolás:</b> 10 liter víz tömege ennek megfelelően 10 kg.</div><div class="explanation-solution">✅ Megoldás: A víz tömege kb. 10 kg.</div>` },
+            { question: "Melyik jelöl tömeget?", answers: { a: "5 m", b: "5 N", c: "5 kg" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Mértékegységek:</b><br>• m (méter): hosszúság<br>• N (newton): erő (súly)<br>• kg (kilogramm): tömeg</div><div class="explanation-solution">✅ Megoldás: Az 5 kg jelöl tömeget.</div>` },
+            { question: "Melyiknek nagyobb a tehetetlensége: 1 kg vasnak vagy 2 kg vattának?", answers: { a: "A vasnak.", b: "A vattának.", c: "Egyenlő." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 A tehetetlenség mértéke:</b> A tehetetlenség csak a tömegtől függ.</div><div class="explanation-step"><b>🔹 Elemzés:</b> Mivel a vatta tömege (2 kg) nagyobb, mint a vasé (1 kg), ezért a tehetetlensége is nagyobb.</div><div class="explanation-solution">✅ Megoldás: A 2 kg vattának nagyobb a tehetetlensége.</div>` },
+            { question: "Mi a tonna jele?", answers: { a: "to", b: "T", c: "t" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Szabványos jelölések:</b> A tonna jele a kis 't' betű. A nagy 'T' a hőmérséklet (Kelvinben) vagy a periódusidő jele lehet.</div><div class="explanation-solution">✅ Megoldás: A tonna jele t.</div>` },
+            { question: "Ha egy testre nem hat erő, és nyugalomban van, akkor...", answers: { a: "elkezd gyorsulni.", b: "nyugalomban is marad.", c: "elkezd egyenletesen mozogni." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Tehetetlenség törvénye:</b> Egy test megtartja nyugalmi állapotát (vagy egyenes vonalú egyenletes mozgását), amíg egy külső erő a mozgásállapotának megváltoztatására nem kényszeríti.</div><div class="explanation-solution">✅ Megoldás: A test nyugalomban is marad.</div>` },
+            { question: "Egy zsákban 50 kg krumpli van. Hány dekagramm ez?", answers: { a: "500 dkg", b: "50 000 dkg", c: "5000 dkg" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Tudjuk, hogy 1 kg = 100 dkg.</div><div class="explanation-step"><b>🔹 Számolás:</b> A kilogrammban megadott értéket meg kell szorozni 100-zal: 50 * 100 = 5000.</div><div class="explanation-solution">✅ Megoldás: 50 kg az 5000 dekagramm.</div>` },
+            { question: "Melyik mérési eljárás?", answers: { a: "Egyenlő karú mérleg használata.", b: "Egy pohár víz térfogatának becslése.", c: "Egy autó sebességének kiszámolása." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> A becslés nem mérés. A sebesség kiszámítása közvetett mérés. Az egyenlő karú mérleg használata a tömeg közvetlen összehasonlító mérésének klasszikus példája.</div><div class="explanation-solution">✅ Megoldás: Az egyenlő karú mérleg használata egy mérési eljárás.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

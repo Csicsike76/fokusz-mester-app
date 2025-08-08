@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Egyenes vonalú egyenletes mozgás</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .formula-display {font-family: 'Courier New', Courier, monospace; background-color: #e9ecef; padding: 5px; border-radius: 3px; display: inline-block; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Egyenes vonalú egyenletes mozgás</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Mit jelent az, hogy egy test mozgása egyenletes?", answers: { a: "Egyenlő időközök alatt egyenlő utakat tesz meg.", b: "A sebessége folyamatosan nő.", c: "A pályája egyenes." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Az egyenletes mozgás kulcsa a sebesség állandósága. Ez azt jelenti, hogy a test sebessége nem változik, így bármely egyenlő időtartam alatt ugyanakkora utat fut be.</div><div class="explanation-solution">✅ Megoldás: Az egyenletes mozgás azt jelenti, hogy a test egyenlő időközök alatt egyenlő utakat tesz meg.</div>` },
+            { question: "Egy autó 2 óra alatt 180 km-t tesz meg egyenletesen. Mennyi a sebessége?", answers: { a: "90 km/h", b: "360 km/h", c: "90 m/s" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> A sebesség (v) a megtett út (s) és az eltelt idő (t) hányadosa: v = s / t.</div><div class="explanation-step"><b>🔹 Számolás:</b> v = 180 km / 2 h = 90 km/h.</div><div class="explanation-solution">✅ Megoldás: Az autó sebessége 90 km/h.</div>` },
+            { question: "Milyen az egyenes vonalú egyenletes mozgás út-idő (s-t) grafikonja?", answers: { a: "Egy origóból induló, emelkedő egyenes.", b: "Egy vízszintes egyenes.", c: "Egy parabola." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Összefüggés:</b> Az út (s) és az idő (t) között egyenes arányosság van (s = v*t). Az egyenes arányosság grafikonja mindig egy origón átmenő egyenes.</div><div class="explanation-step"><b>🔹 Jelentés:</b> Minél meredekebb az egyenes, annál nagyobb a sebesség.</div><div class="explanation-solution">✅ Megoldás: A grafikon egy origóból induló, emelkedő egyenes.</div>` },
+            { question: "Egy kerékpáros 5 m/s sebességgel halad. Mekkora utat tesz meg 1 perc alatt?", answers: { a: "300 méter", b: "5 méter", c: "60 méter" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Először az időt átváltjuk másodpercre: 1 perc = 60 másodperc.</div><div class="explanation-step"><b>🔹 Képlet:</b> Az út (s) a sebesség (v) és az idő (t) szorzata: s = v * t.</div><div class="explanation-step"><b>🔹 Számolás:</b> s = 5 m/s * 60 s = 300 m.</div><div class="explanation-solution">✅ Megoldás: A kerékpáros 300 métert tesz meg.</div>` },
+            { question: "Mi a pályája az egyenes vonalú mozgásnak?", answers: { a: "Egyenes", b: "Kör", c: "Görbe" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A mozgás nevében benne van a pálya alakja. Az "egyenes vonalú" jelző pontosan azt jelenti, hogy a test egyenes mentén mozog.</div><div class="explanation-solution">✅ Megoldás: A mozgás pályája egyenes.</div>` },
+            { question: "Két autó közül az A jelű út-idő grafikonja meredekebb, mint a B jelűé. Melyik autó halad gyorsabban?", answers: { a: "Az A jelű autó.", b: "A B jelű autó.", c: "Egyenlő sebességgel haladnak." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Grafikon értelmezése:</b> Az út-idő grafikon meredeksége a sebességet jelenti. Minél meredekebb a grafikon, annál nagyobb a sebesség, mert ugyanannyi idő alatt nagyobb utat tesz meg.</div><div class="explanation-solution">✅ Megoldás: Az A jelű autó halad gyorsabban.</div>` },
+            { question: "Egy csiga 2 cm/s sebességgel halad. Mennyi idő alatt tesz meg 30 cm-t?", answers: { a: "15 másodperc", b: "60 másodperc", c: "32 másodperc" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> Az idő (t) a megtett út (s) és a sebesség (v) hányadosa: t = s / v.</div><div class="explanation-step"><b>🔹 Számolás:</b> t = 30 cm / 2 cm/s = 15 s.</div><div class="explanation-solution">✅ Megoldás: A csigának 15 másodpercre van szüksége.</div>` },
+            { question: "Mi állandó az egyenletes mozgás során?", answers: { a: "A sebesség", b: "A megtett út", c: "Az eltelt idő" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Az egyenletes mozgás legfontosabb jellemzője, hogy a test sebessége sem nagyságra, sem irányra nem változik. A megtett út és az idő folyamatosan nő.</div><div class="explanation-solution">✅ Megoldás: A sebesség állandó.</div>` },
+            { question: "Egy gyalogos 1,5 m/s sebességgel megy. Mennyi ez km/h-ban?", answers: { a: "4,5 km/h", b: "5,4 km/h", c: "15 km/h" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltási faktor:</b> A m/s és km/h közötti váltószám 3,6. Ha m/s-ról váltunk km/h-ra, szorozni kell.</div><div class="explanation-step"><b>🔹 Számolás:</b> 1,5 * 3,6 = 5,4.</div><div class="explanation-solution">✅ Megoldás: A sebesség 5,4 km/h.</div>` },
+            { question: "Milyen az egyenes vonalú egyenletes mozgás sebesség-idő (v-t) grafikonja?", answers: { a: "Emelkedő egyenes", b: "Az időtengellyel párhuzamos egyenes.", c: "Csökkenő egyenes." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elemzés:</b> Mivel a sebesség az egyenletes mozgás során állandó, a grafikonon az idő múlásával a sebesség értéke nem változik.</div><div class="explanation-step"><b>🔹 Grafikon képe:</b> Ez a grafikonon egy vízszintes, az időtengellyel párhuzamos egyenesként jelenik meg.</div><div class="explanation-solution">✅ Megoldás: A grafikon egy, az időtengellyel párhuzamos egyenes.</div>` },
+            { question: "Egy vonat 72 km/h sebességgel halad. Mennyi ez m/s-ban?", answers: { a: "25 m/s", b: "20 m/s", c: "36 m/s" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltási faktor:</b> A km/h és m/s közötti váltószám 3,6. Ha km/h-ról váltunk m/s-ra, osztani kell.</div><div class="explanation-step"><b>🔹 Számolás:</b> 72 / 3,6 = 20.</div><div class="explanation-solution">✅ Megoldás: A sebesség 20 m/s.</div>` },
+            { question: "Mi az 's' betű jele a mozgástanban?", answers: { a: "Sebesség", b: "Megtett út", c: "Idő" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Jelölések:</b><br>• s: út (spatium)<br>• t: idő (tempus)<br>• v: sebesség (velocitas)</div><div class="explanation-solution">✅ Megoldás: Az 's' betű a megtett utat jelöli.</div>` },
+            { question: "Ha egy test nem mozog, akkor a sebessége...", answers: { a: "negatív.", b: "nulla.", c: "végtelen." }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A nyugalom a mozgás speciális esete, amikor a sebesség nulla, azaz a test helyzete nem változik.</div><div class="explanation-solution">✅ Megoldás: A nyugalomban lévő test sebessége nulla.</div>` },
+            { question: "Egy autó sebessége 10 m/s. Mekkora utat tesz meg fél perc alatt?", answers: { a: "5 méter", b: "300 méter", c: "150 méter" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Fél perc = 30 másodperc.</div><div class="explanation-step"><b>🔹 Képlet:</b> s = v * t.</div><div class="explanation-step"><b>🔹 Számolás:</b> s = 10 m/s * 30 s = 300 m.</div><div class="explanation-solution">✅ Megoldás: Az autó 300 métert tesz meg.</div>` },
+            { question: "Két autó halad egymás mellett. Az egyik sebessége 50 km/h, a másiké 60 km/h. Mennyi a relatív sebességük?", answers: { a: "110 km/h", b: "55 km/h", c: "10 km/h" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Relatív sebesség:</b> Ha két test azonos irányban mozog, a relatív sebességük (ahogy egymáshoz képest mozognak) a sebességeik különbsége.</div><div class="explanation-step"><b>🔹 Számolás:</b> 60 km/h - 50 km/h = 10 km/h.</div><div class="explanation-solution">✅ Megoldás: A relatív sebességük 10 km/h.</div>` },
+            { question: "Mi a 'v' betű jele a mozgástanban?", answers: { a: "Idő", b: "Út", c: "Sebesség" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Jelölések:</b><br>• s: út (spatium)<br>• t: idő (tempus)<br>• v: sebesség (velocitas)</div><div class="explanation-solution">✅ Megoldás: A 'v' betű a sebességet jelöli.</div>` },
+            { question: "Egyenletes mozgás esetén a pillanatnyi sebesség és az átlagsebesség...", answers: { a: "eltérő.", b: "az átlagsebesség mindig nagyobb.", c: "megegyezik." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> Mivel az egyenletes mozgás sebessége állandó, a mozgás bármely pillanatában mért sebesség (pillanatnyi sebesség) ugyanakkora, mint a teljes útra számított átlagsebesség.</div><div class="explanation-solution">✅ Megoldás: A két sebesség megegyezik.</div>` },
+            { question: "A hang sebessége a levegőben kb. 340 m/s. Ha 3 másodperccel a villámlás után hallod a dörgést, milyen messze csapott be a villám?", answers: { a: "kb. 1 km-re", b: "kb. 10 km-re", c: "kb. 340 m-re" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> út = sebesség × idő.</div><div class="explanation-step"><b>🔹 Számolás:</b> s = 340 m/s * 3 s = 1020 m.</div><div class="explanation-step"><b>🔹 Átváltás:</b> 1020 méter körülbelül 1 kilométer.</div><div class="explanation-solution">✅ Megoldás: A villám kb. 1 km-re csapott be.</div>` },
+            { question: "Ha a sebesség és az időtartam is ismert, milyen képlettel számoljuk ki a megtett utat?", answers: { a: "s = v / t", b: "s = t / v", c: "s = v * t" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Alapképlet:</b> v = s / t.</div><div class="explanation-step"><b>🔹 Átrendezés:</b> Ha az egyenlet mindkét oldalát megszorozzuk t-vel, megkapjuk az útra vonatkozó képletet.</div><div class="explanation-solution">✅ Megoldás: A helyes képlet s = v * t.</div>` },
+            { question: "Egy hajó 100 km-t tesz meg 4 óra alatt. Mennyi az átlagsebessége?", answers: { a: "400 km/h", b: "104 km/h", c: "25 km/h" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Képlet:</b> v = s / t.</div><div class="explanation-step"><b>🔹 Számolás:</b> v = 100 km / 4 h = 25 km/h.</div><div class="explanation-solution">✅ Megoldás: A hajó átlagsebessége 25 km/h.</div>` },
+            { question: "Egy mozgó test út-idő grafikonja egy vízszintes egyenes. Mit jelent ez?", answers: { a: "A test egyenletesen gyorsul.", b: "A test egyenletesen mozog.", c: "A test nyugalomban van." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Grafikon értelmezése:</b> Az út-idő grafikon a test helyzetét mutatja az idő függvényében. Ha a grafikon egy vízszintes vonal, az azt jelenti, hogy a test helyzete (s) az idő múlásával nem változik.</div><div class="explanation-solution">✅ Megoldás: Ez azt jelenti, hogy a test nyugalomban van.</div>` },
+            { question: "Ha egy test sebessége negatív, az mit jelent?", answers: { a: "A test lassul.", b: "Lehetetlen, a sebesség nem lehet negatív.", c: "A test a koordináta-rendszer negatív irányába mozog." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Sebesség mint vektor:</b> A sebességnek iránya is van. A fizikában gyakran kijelölünk egy pozitív irányt. Ha egy test ebbe az irányba mozog, a sebessége pozitív, ha az ellenkező irányba, akkor negatív.</div><div class="explanation-solution">✅ Megoldás: A negatív sebesség azt jelenti, hogy a test a koordináta-rendszer negatív irányába mozog.</div>` },
+            { question: "Mi a 't' betű jele a mozgástanban?", answers: { a: "Tömeg", b: "Út", c: "Idő" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Jelölések:</b><br>• s: út (spatium)<br>• t: idő (tempus)<br>• v: sebesség (velocitas)<br>• m: tömeg (massa)</div><div class="explanation-solution">✅ Megoldás: A 't' betű az időt jelöli.</div>` },
+            { question: "Két autó halad egymással szemben, mindkettő 50 km/h sebességgel. Mennyi a relatív sebességük?", answers: { a: "0 km/h", b: "50 km/h", c: "100 km/h" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Relatív sebesség:</b> Ha két test egymással szemben mozog, a relatív sebességük (ahogy egymáshoz közelednek) a sebességeik nagyságának összege.</div><div class="explanation-step"><b>🔹 Számolás:</b> 50 km/h + 50 km/h = 100 km/h.</div><div class="explanation-solution">✅ Megoldás: A relatív sebességük 100 km/h.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

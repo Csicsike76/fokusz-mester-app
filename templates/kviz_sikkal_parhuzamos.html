@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Adott síkkal párhuzamos egyenes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Adott síkkal párhuzamos egyenes</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Mit jelent, ha egy egyenes párhuzamos egy síkkal?", options: { a: "Az egyenesnek és a síknak nincs közös pontja.", b: "Az egyenes merőleges a síkra.", c: "Az egyenesnek és a síknak egy közös pontja van." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A párhuzamosság a térben is azt jelenti, hogy az elemek 'nem találkoznak'. 🔹 2. Lépés: Ha egy egyenes párhuzamos egy síkkal, akkor az egyenes minden pontja ugyanakkora távolságra van a síktól, így soha nem metszik egymást. ✅ Megoldás: Nincs közös pontjuk." },
+            { question: "Hogyan bizonyíthatjuk be legkönnyebben, hogy egy 'e' egyenes párhuzamos egy 'S' síkkal?", options: { a: "Megmutatjuk, hogy 'e' merőleges az 'S' síkra.", b: "Megmutatjuk, hogy 'e' párhuzamos egy, az 'S' síkban fekvő 'f' egyenessel.", c: "Megmérjük a távolságukat." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ez a párhuzamosság legfontosabb tétele. Nem kell az egész síkot vizsgálni. 🔹 2. Lépés: Elég találni a síkban egyetlen olyan egyenest, amellyel a vizsgált egyenes párhuzamos. Ha ilyen létezik, akkor az egyenes az egész síkkal is párhuzamos lesz. ✅ Megoldás: Megmutatjuk, hogy 'e' párhuzamos egy, az 'S' síkban fekvő 'f' egyenessel." },
+            { question: "Egy kocka felső lapjának egyik éle milyen helyzetű az alsó lap síkjával?", options: { a: "metsző", b: "illeszkedő", c: "párhuzamos" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A kocka alsó és felső lapja párhuzamos síkok. 🔹 2. Lépés: A felső lapon lévő él soha nem fogja metszeni az alsó lap síkját, mert a felső sík része. ✅ Megoldás: Párhuzamos helyzetű." },
+            { question: "Egy asztalon fekvő vonalzó milyen helyzetben van az asztal lapjával?", options: { a: "illeszkedő (rajta fekszik)", b: "párhuzamos", c: "metsző" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az illeszkedés azt jelenti, hogy az egyenes minden pontja a síknak is pontja. 🔹 2. Lépés: A vonalzó az asztallapon van, tehát minden pontja rajta van az asztal síkján. ✅ Megoldás: Illeszkedő helyzetű." },
+            { question: "Egy szoba mennyezetének egyik éle milyen helyzetű a padló síkjával?", options: { a: "metsző", b: "párhuzamos", c: "illeszkedő" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A mennyezet síkja párhuzamos a padló síkjával. 🔹 2. Lépés: A mennyezet síkjában fekvő egyenes (az él) soha nem fogja metszeni a padló síkját. ✅ Megoldás: Párhuzamos." },
+            { question: "Hány közös pontja van egy síknak és egy azt metsző egyenesnek?", options: { a: "végtelen sok", b: "0", c: "1" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A 'metsző' szó azt jelenti, hogy az egyenes 'átdöfi' a síkot. 🔹 2. Lépés: Ez a döfés egyetlen pontban történik, amit döféspontnak is nevezünk. ✅ Megoldás: 1 közös pontjuk van." },
+            { question: "Ha egy egyenes a síkon fekszik (illeszkedik rá), akkor párhuzamos-e vele?", options: { a: "Nem, mert van közös pontjuk.", b: "Igen, ez a párhuzamosság speciális esete.", c: "Csak ha az egyenes körbeér." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A párhuzamosság definíciója szerint az egyenesnek és a síknak NINCS közös pontja. 🔹 2. Lépés: Az illeszkedő egyenesnek végtelen sok közös pontja van a síkkal. A két feltétel kizárja egymást. ✅ Megoldás: Nem, mert van közös pontjuk." },
+            { question: "Adott egy pont a síkon kívül. Hány, a síkkal párhuzamos egyenest lehet ezen a ponton átfektetni?", options: { a: "egyet sem", b: "végtelen sokat", c: "pontosan egyet" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Képzelj el egy pontot az asztallap felett. 🔹 2. Lépés: Ezen a ponton keresztül egy egész síkot fektethetünk, ami párhuzamos az asztallappal. Ezen a 'lebegő' síkon belül pedig végtelen sok egyenest húzhatunk. ✅ Megoldás: Végtelen sokat." },
+            { question: "Egy kocka elülső lapjának egyik éle milyen helyzetű a HÁTSÓ lap síkjával?", options: { a: "illeszkedő", b: "metsző", c: "párhuzamos" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A kocka elülső és hátsó lapja párhuzamos síkok. 🔹 2. Lépés: Az elülső lapon fekvő él soha nem fogja metszeni a hátsó lap síkját. ✅ Megoldás: Párhuzamos." },
+            { question: "Egy függőlegesen álló oszlop milyen helyzetű a vízszintes talaj síkjával?", options: { a: "metsző", b: "párhuzamos", c: "illeszkedő" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az oszlop 'beleáll' a talajba, tehát van egy közös pontjuk. 🔹 2. Lépés: Ez a metszés esete. (Pontosabban merőlegesen metszi). ✅ Megoldás: Metsző." },
+            { question: "Hogyan jelöljük, hogy az 'e' egyenes párhuzamos az 'S' síkkal?", options: { a: "e ⊥ S", b: "e || S", c: "e ∈ S" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A párhuzamosság jele a ||. Ezt használjuk egyenesek és síkok esetében is. 🔹 2. Lépés: Az 'e ⊥ S' merőlegességet, az 'e ∈ S' pedig illeszkedést (eleme) jelent. ✅ Megoldás: e || S." },
+            { question: "Melyik állítás igaz? Ha egy 'e' egyenes párhuzamos egy 'S' síkkal, akkor 'e'...", options: { a: "párhuzamos a sík összes egyenesével.", b: "merőleges a sík összes egyenesére.", c: "párhuzamos a sík végtelen sok egyenesével." }, correctAnswer: "c", explanation: "🔹 1. Lépés: Képzeld el a plafonnal párhuzamos lámpacsövet. A plafonon húzhatsz rá merőleges vonalakat is. Tehát 'a' és 'b' hamis. 🔹 2. Lépés: Azonban a plafonon végtelen sok, a lámpacsővel párhuzamos vonalat is húzhatsz. ✅ Megoldás: Végtelen sok, a síkban fekvő egyenessel párhuzamos." },
+            { question: "Két különböző, egymással párhuzamos síkban van egy-egy egyenes. Ezek az egyenesek...", options: { a: "lehetnek párhuzamosak vagy kitérőek.", b: "mindig párhuzamosak.", c: "mindig metszők." }, correctAnswer: "a", explanation: "🔹 1. Lépés: Képzeld el a plafont és a padlót. Ha a plafonon és a padlón is ugyanabba az irányba fut egy-egy egyenes, akkor párhuzamosak. 🔹 2. Lépés: De ha a plafonon hosszában, a padlón pedig keresztben fut egy-egy egyenes, akkor kitérőek lesznek. ✅ Megoldás: Lehetnek párhuzamosak vagy kitérőek." },
+            { question: "Milyen helyzetű egy kocka testátlója az alaplap síkjával?", options: { a: "párhuzamos", b: "metsző", c: "illeszkedő" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A testátló a kocka egyik alsó csúcsát köti össze egy szemközti felső csúccsal. 🔹 2. Lépés: Mivel az egyik végpontja az alaplapon van, a többi része pedig a kocka belsejében, ezért 'átdöfi', azaz metszi az alaplap síkját. ✅ Megoldás: Metsző." },
+            { question: "Melyik NEM lehet egy egyenes és egy sík kölcsönös helyzete?", options: { a: "párhuzamos", b: "metsző", c: "kitérő" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Egy egyenes és egy sík háromféle helyzetben lehet: vagy metszi a síkot (ennek speciális esete a merőlegesség), vagy párhuzamos vele, vagy illeszkedik rá. 🔹 2. Lépés: A 'kitérő' fogalmat két, nem egy síkban lévő egyenesre használjuk. Egyenes és sík között ilyen viszony nincs. ✅ Megoldás: Nem lehetnek kitérők." },
+            { question: "Mi az 'illeszkedés' másik neve?", options: { a: "'rajta van'", b: "párhuzamosság", c: "metszés" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az illeszkedés egy geometriai szakszó. 🔹 2. Lépés: A hétkönyapi nyelvben egyszerűen azt mondjuk, hogy a pont 'rajta van' az egyenesen, vagy az egyenes 'rajta van' a síkon. ✅ Megoldás: 'rajta van'." },
+            { question: "Egy egyenesnek és egy síknak végtelen sok közös pontja van. Milyen a helyzetük?", options: { a: "párhuzamosak", b: "az egyenes illeszkedik a síkra", c: "metszők" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ha végtelen sok közös pontjuk van, az azt jelenti, hogy az egyenes teljes egészében a síkban van. 🔹 2. Lépés: Ezt a helyzetet illeszkedésnek nevezzük. ✅ Megoldás: Az egyenes illeszkedik a síkra." },
+            { question: "Egy kocka felső lapjának átlója milyen helyzetű az alsó lap síkjával?", options: { a: "metsző", b: "illeszkedő", c: "párhuzamos" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Az átló a felső lap síkjában van. 🔹 2. Lépés: A felső lap síkja párhuzamos az alsó lap síkjával. Ebből következik, hogy a felső lapon lévő átló is párhuzamos az alsó lap síkjával. ✅ Megoldás: Párhuzamos." },
+            { question: "Mi a feltétele annak, hogy egy egyenes merőleges legyen egy síkra?", options: { a: "Merőleges a sík két, egymást metsző egyenesére.", b: "Merőleges a sík egyetlen egyenesére.", c: "Párhuzamos a sík normálvektorával." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A síkra való merőlegességhez nem elég egyetlen egyenesre merőlegesnek lenni. 🔹 2. Lépés: A tétel szerint, ha egy egyenes merőleges a sík két, egymást metsző egyenesére, akkor merőleges a sík összes egyenesére, tehát magára a síkra is. ✅ Megoldás: Merőleges a sík két, egymást metsző egyenesére." },
+            { question: "Egy könyvespolc polca milyen helyzetű a polc oldalfalával?", options: { a: "párhuzamos", b: "merőlegesen metsző", c: "kitérő" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A polc (vízszintes sík darabja) és az oldalfal (függőleges sík darabja) találkoznak. 🔹 2. Lépés: A találkozásnál derékszöget zárnak be egymással. ✅ Megoldás: Merőlegesen metszik egymást." },
+            { question: "Egy egyenes metszi az S1 síkot, ami párhuzamos az S2 síkkal. Mit tudunk az egyenes és S2 viszonyáról?", options: { a: "párhuzamosak", b: "metszik egymást", c: "az egyenes illeszkedik S2-re" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Képzelj el két párhuzamos papírlapot (emeletek). Ha egy ceruza átszúrja a felsőt, tovább halad lefelé. 🔹 2. Lépés: Mivel a két sík párhuzamos, a ceruza elkerülhetetlenül átszúrja az alsót is. ✅ Megoldás: Metszik egymást." },
+            { question: "A szoba falán lévő képkeret felső éle milyen helyzetű a padló síkjával?", options: { a: "metsző", b: "illeszkedő", c: "párhuzamos" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A képkeret felső éle a fal síkjában van. A fal síkja metszi a padló síkját. 🔹 2. Lépés: DE! A képkeret felső éle párhuzamos a fal és a padló metszésvonalával (a szegéllyel). Mivel párhuzamos egy, a padló síkjában lévő egyenessel, ezért párhuzamos magával a padló síkjával is. ✅ Megoldás: Párhuzamos." },
+            { question: "Melyik állítás igaz a térben?", options: { a: "Ha két egyenes merőleges egy harmadikra, akkor párhuzamosak.", b: "Ha egy egyenes merőleges két metsző egyenesre, akkor merőleges a síkjukra is.", c: "Ha két egyenes nem metszi egymást, akkor párhuzamosak." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az 'a' és 'c' állítás a térben nem igaz a kitérő helyzet miatt. 🔹 2. Lépés: A 'b' állítás a síkra való merőlegesség egyik fontos tétele. Ha egy egyenes merőleges egy síkot meghatározó két metsző egyenesre, akkor az egész síkra merőleges lesz. ✅ Megoldás: A 'b' állítás igaz." },
+            { question: "Hány, egymással párhuzamos síkpárja van egy téglatestnek?", options: { a: "6", b: "12", c: "3" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Egy téglatestet 6 lap határol. Ezek párokba rendezhetők. 🔹 2. Lépés: Van egy alsó-felső pár, egy első-hátsó pár és egy jobb-bal oldali pár. Ez összesen 3 párhuzamos síkpár. ✅ Megoldás: 3 párhuzamos síkpárja van." },
+            { question: "Egy repülőgép egyenes vonalban, egyenletes magasságban repül a sík terep felett. Milyen helyzetű a repülőgép útvonala a terep síkjával?", options: { a: "párhuzamos", b: "metsző", c: "illeszkedő" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az 'egyenletes magasságban' azt jelenti, hogy a repülőgép távolsága a földtől állandó. 🔹 2. Lépés: Ez a síkkal való párhuzamosság definíciója, nincs közös pontjuk. ✅ Megoldás: Párhuzamos." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

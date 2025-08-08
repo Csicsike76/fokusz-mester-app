@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Hőmérsékleti skálák</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #f4f7f9;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-color: #95a5a6;
+            --white: #ffffff;
+            --red-hu: #CD2A3E;
+            --green-hu: #436F4D;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--light-color); color: var(--primary-color); margin: 0; padding: 20px; display: flex; justify-content: center; line-height: 1.6; }
+        .quiz-container { width: 100%; max-width: 800px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .quiz-header { padding: 20px 30px; background: linear-gradient(135deg, var(--red-hu) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green-hu) 66.66%); color: var(--primary-color); text-align: center; }
+        .quiz-header h1 { margin: 0; font-size: 1.8em; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .controls { padding: 20px 30px; background-color: #f8f9fa; text-align: center; border-bottom: 2px solid var(--light-color); }
+        .pin-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        #pin-input { padding: 10px; width: 120px; border: 2px solid var(--neutral-color); border-radius: 5px; text-align: center; font-size: 1.1em; }
+        #submit-btn { background-color: var(--accent-color); color: var(--white); border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        #submit-btn:disabled { background-color: var(--neutral-color); cursor: not-allowed; }
+        #results { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+        #admin-panel { display: none; margin-top: 15px; background-color: var(--light-color); padding: 15px; border-radius: 5px; text-align: left; }
+        #admin-panel h3 { margin-top: 0; text-align: center; }
+        #alert-message { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; color: var(--white); background-color: var(--error-color); }
+        .quiz-body { padding: 30px; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #bdc3c7; }
+        .question:last-of-type { border-bottom: none; }
+        .question p { font-size: 1.2em; margin: 0 0 15px 0; font-weight: 600; }
+        .answers { display: flex; flex-direction: column; gap: 10px; }
+        .answer { display: flex; align-items: center; gap: 12px; background-color: #ecf0f1; padding: 12px 15px; border-radius: 5px; cursor: pointer; border: 1px solid transparent; }
+        .answer input[type="radio"] { flex-shrink: 0; transform: scale(1.2); }
+        .answer span { flex-grow: 1; }
+        .feedback-icon { display: none; margin-left: auto; font-weight: bold; }
+        .correct { background-color: #e8f5e9; border: 1px solid var(--success-color); }
+        .incorrect { background-color: #fce4e4; border: 1px solid var(--error-color); }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid var(--neutral-color); border-radius: 5px; }
+        .explanation-step { margin-bottom: 10px; }
+        .explanation-step b { color: var(--secondary-color); }
+        .explanation-solution { margin-top: 10px; font-weight: bold; color: var(--success-color); }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header"><h1>Kvíz: Hőmérsékleti skálák</h1></div>
+        <div class="controls">
+            <div class="pin-container"><input type="password" id="pin-input" placeholder="PIN kód" autocomplete="off"><button id="submit-btn">Ellenőrzés</button></div>
+            <div id="alert-message"></div>
+            <div id="results"></div>
+            <div id="admin-panel"><h3>Admin Panel</h3><p>Mester PIN elfogadva...</p><p id="answer-distribution"></p></div>
+        </div>
+        <div class="quiz-body" id="quiz-body"></div>
+    </div>
+    <script>
+        const fullQuestionPool = [
+            // Eloszlás: 8 'a', 9 'b', 8 'c'
+            { question: "Mennyi a víz fagyáspontja a Celsius-skálán?", answers: { a: "0 °C", b: "32 °C", c: "100 °C" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A Celsius-skála referenciapontjai a víz fagyás- és forráspontja.</div><div class="explanation-step"><b>🔹 Értékek:</b> A skála a fagyáspontot 0 °C-nak, a forráspontot 100 °C-nak nevezi. A 32 a Fahrenheit-skálán a fagyáspont.</div><div class="explanation-solution">✅ Megoldás: A víz fagyáspontja 0 °C.</div>` },
+            { question: "Mi az abszolút nulla fok a Kelvin-skálán?", answers: { a: "0 K", b: "-273 K", c: "273 K" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A Kelvin-skála abszolút skála, ami azt jelenti, hogy a 0 pontja az elméletileg lehetséges legalacsonyabb hőmérséklet, az abszolút nulla fok.</div><div class="explanation-solution">✅ Megoldás: Az abszolút nulla fok 0 K.</div>` },
+            { question: "Ha egy test hőmérséklete 10 °C-kal nő, mennyivel nő a hőmérséklete Kelvinben?", answers: { a: "10 K-nel", b: "283 K-nel", c: "263 K-nel" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Skálák viszonya:</b> A Celsius és a Kelvin-skála "lépésköze" megegyezik. Ez azt jelenti, hogy egy 1 Celsius-fokos változás pontosan 1 Kelvin változásnak felel meg.</div><div class="explanation-solution">✅ Megoldás: A hőmérséklet-változás 10 K.</div>` },
+            { question: "Miről nevezték el a Celsius-skálát?", answers: { a: "Anders Celsiusról", b: "Lord Kelvinről", c: "Daniel Fahrenheitről" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Tudománytörténet:</b> Anders Celsius svéd csillagász volt, aki 1742-ben javasolta a 100 fokos beosztású skálát a víz fagyás- és forráspontja között.</div><div class="explanation-solution">✅ Megoldás: A skálát Anders Celsiusról nevezték el.</div>` },
+            { question: "Melyik a hőmérséklet SI alapmértékegysége?", answers: { a: "kelvin (K)", b: "Celsius-fok (°C)", c: "joule (J)" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 SI-rendszer:</b> A Nemzetközi Mértékegységrendszerben (SI) a hőmérséklet alapmértékegysége a kelvin, mivel ez egy abszolút skála.</div><div class="explanation-solution">✅ Megoldás: A hőmérséklet SI alapmértékegysége a kelvin.</div>` },
+            { question: "Hogyan váltjuk át a Celsius-fokot Kelvinre (kerekítve)?", answers: { a: "Hozzáadunk 273-at.", b: "Kivonunk 273-at.", c: "Megszorozzuk 273-mal." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Átváltási képlet:</b> T(K) = t(°C) + 273,15. A mindennapi számítások során gyakran kerekítünk: T(K) ≈ t(°C) + 273.</div><div class="explanation-solution">✅ Megoldás: Hozzáadunk 273-at.</div>` },
+            { question: "Melyik egy abszolút hőmérsékleti skála?", answers: { a: "Kelvin-skála", b: "Celsius-skála", c: "Fahrenheit-skála" }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Abszolút skála:</b> Az abszolút skála nullpontja egy fizikai minimumot jelöl (az abszolút nulla fokot), így nincsenek negatív értékei. A Celsius és Fahrenheit skáláknak vannak negatív értékei.</div><div class="explanation-solution">✅ Megoldás: A Kelvin-skála egy abszolút skála.</div>` },
+            { question: "Mi történik az anyagot alkotó részecskék mozgásával az abszolút nulla fokon?", answers: { a: "Elméletileg teljesen megszűnik.", b: "Felgyorsul.", c: "Nem változik." }, correctAnswer: "a", explanation: `<div class="explanation-step"><b>🔹 Hőmérséklet és mozgás:</b> A hőmérséklet a részecskék átlagos mozgási energiájának mértéke. Az abszolút nulla fok az az elméleti állapot, ahol ez a mozgás leáll.</div><div class="explanation-solution">✅ Megoldás: A részecskék mozgása elméletileg megszűnik.</div>` },
+            { question: "Mennyi a víz forráspontja a Celsius-skálán?", answers: { a: "0 °C", b: "100 °C", c: "212 °C" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Definíció:</b> A Celsius-skála a víz fagyáspontját 0 °C-nak, a forráspontját pedig 100 °C-nak definiálja normál légköri nyomáson.</div><div class="explanation-solution">✅ Megoldás: A víz forráspontja 100 °C.</div>` },
+            { question: "Mennyi 0 °C Kelvinben (kerekítve)?", answers: { a: "0 K", b: "273 K", c: "-273 K" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> T(K) ≈ t(°C) + 273.</div><div class="explanation-step"><b>🔹 Számolás:</b> T(K) ≈ 0 + 273 = 273 K.</div><div class="explanation-solution">✅ Megoldás: 0 °C az körülbelül 273 K.</div>` },
+            { question: "Melyik hőmérsékleti skálát használják leggyakrabban a mindennapi életben Európában?", answers: { a: "Fahrenheit", b: "Celsius", c: "Kelvin" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elterjedtség:</b> A világ legtöbb országában, így Európában is, a Celsius-skála a mindennapi élet (pl. időjárás-jelentés) standardja. A Fahrenheit-skála főleg az USA-ban használatos.</div><div class="explanation-solution">✅ Megoldás: A Celsius-skálát használják leggyakrabban.</div>` },
+            { question: "Melyik hőmérsékleten mutat ugyanannyit a Celsius és a Fahrenheit hőmérő?", answers: { a: "0", b: "-40", c: "100" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> Az átváltási képletet használva: C = (F - 32) / 1.8. Ha C=F=x, akkor x = (x-32)/1.8 → 1.8x = x-32 → 0.8x = -32 → x = -40.</div><div class="explanation-solution">✅ Megoldás: -40 °C pontosan megegyezik -40 °F-tel.</div>` },
+            { question: "Melyik országban használják elsődlegesen a Fahrenheit-skálát?", answers: { a: "Németország", b: "Amerikai Egyesült Államok", c: "Japán" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Elterjedtség:</b> A világon ma már csak néhány országban, leginkább az Amerikai Egyesült Államokban és néhány kisebb, hozzá kötődő területen használják a Fahrenheit-skálát a mindennapokban.</div><div class="explanation-solution">✅ Megoldás: Az Amerikai Egyesült Államokban használják.</div>` },
+            { question: "Mennyi az emberi test átlagos hőmérséklete Celsius-fokban?", answers: { a: "98,6 °C", b: "kb. 37 °C", c: "25 °C" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Orvostudomány:</b> Az egészséges emberi test belső hőmérséklete 36,5-37,5 °C között mozog. A 98,6 a Fahrenheit-skálán mért érték.</div><div class="explanation-solution">✅ Megoldás: Az emberi test átlagos hőmérséklete kb. 37 °C.</div>` },
+            { question: "Mennyi a víz fagyáspontja a Fahrenheit-skálán?", answers: { a: "0 °F", b: "32 °F", c: "212 °F" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Referenciapontok:</b> A Fahrenheit-skála a víz fagyáspontját 32 °F-nek, forráspontját pedig 212 °F-nek rögzíti.</div><div class="explanation-solution">✅ Megoldás: A víz fagyáspontja 32 °F.</div>` },
+            { question: "Egy szoba hőmérséklete 293 K. Mennyi ez Celsius-fokban?", answers: { a: "293 °C", b: "20 °C", c: "-20 °C" }, correctAnswer: "b", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> t(°C) ≈ T(K) - 273.</div><div class="explanation-step"><b>🔹 Számolás:</b> t(°C) ≈ 293 - 273 = 20 °C.</div><div class="explanation-solution">✅ Megoldás: A hőmérséklet 20 °C.</div>` },
+            { question: "Melyik hőmérséklet a legalacsonyabb?", answers: { a: "10 °C", b: "10 °F", c: "10 K" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Összehasonlítás:</b> A Kelvin-skála 0 pontja az abszolút nulla. A 10 K csak 10 fokkal van efelett. A 10 °C jóval melegebb, a 10 °F pedig fagypont alatti, de még mindig sokkal magasabb hőmérséklet, mint a 10 K. (10 K ≈ -263 °C).</div><div class="explanation-solution">✅ Megoldás: A 10 K a legalacsonyabb hőmérséklet.</div>` },
+            { question: "Mennyi a víz forráspontja a Fahrenheit-skálán?", answers: { a: "100 °F", b: "180 °F", c: "212 °F" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Referenciapontok:</b> A Fahrenheit-skála a víz fagyáspontját 32 °F-nek, forráspontját pedig 212 °F-nek rögzíti.</div><div class="explanation-solution">✅ Megoldás: A víz forráspontja 212 °F.</div>` },
+            { question: "Miről nevezték el a Kelvin-skálát?", answers: { a: "Egy folyóról", b: "Egy városról", c: "Lord Kelvinről" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Tudománytörténet:</b> Lord Kelvin (eredeti nevén William Thomson) brit fizikus volt, aki az abszolút hőmérsékleti skála koncepcióját kidolgozta.</div><div class="explanation-solution">✅ Megoldás: A skálát Lord Kelvinről nevezték el.</div>` },
+            { question: "Lehetséges-e -10 K hőmérsékletet elérni?", answers: { a: "Igen, laboratóriumban.", b: "Igen, a világűrben.", c: "Nem, mert 0 K az abszolút minimum." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Abszolút nulla:</b> A 0 K az a pont, ahol a részecskék mozgása elméletileg megszűnik. Ennél alacsonyabb energiaállapot, és így alacsonyabb hőmérséklet nem létezik.</div><div class="explanation-solution">✅ Megoldás: Nem lehetséges, mert 0 K az abszolút minimum.</div>` },
+            { question: "Mi a viszony az 1 Celsius-fok és az 1 Kelvin nagysága között?", answers: { a: "A Kelvin nagyobb.", b: "A Celsius nagyobb.", c: "Egyenlő nagyságúak." }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Skálák "lépésköze":</b> Bár a Kelvin-skála nullpontja máshol van, a fokbeosztása megegyezik a Celsius-skála beosztásával. Egy 1 fokos változás mindkét skálán ugyanakkora hőmérséklet-különbséget jelent.</div><div class="explanation-solution">✅ Megoldás: A két fokbeosztás egyenlő nagyságú.</div>` },
+            { question: "Ha a külső hőmérséklet -10 °C, akkor Kelvinben ez...", answers: { a: "283 K", b: "10 K", c: "263 K" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Átváltás:</b> T(K) ≈ t(°C) + 273.</div><div class="explanation-step"><b>🔹 Számolás:</b> T(K) ≈ -10 + 273 = 263 K.</div><div class="explanation-solution">✅ Megoldás: A hőmérséklet 263 K.</div>` },
+            { question: "Melyik skála alapul empirikus (tapasztalati) referenciapontokon?", answers: { a: "Csak a Kelvin", b: "Csak a Fahrenheit", c: "A Celsius és a Fahrenheit" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Empirikus vs. Abszolút:</b> Az empirikus skálák könnyen előállítható, hétköznapi jelenségeken alapulnak (pl. víz fagyása, emberi testhőmérséklet). A Celsius és a Fahrenheit is ilyen. Ezzel szemben az abszolút (Kelvin) skála egy elméleti fizikai minimumon alapul.</div><div class="explanation-solution">✅ Megoldás: A Celsius és a Fahrenheit skála is empirikus.</div>` },
+            { question: "Hány fok van a Fahrenheit-skála fagyás- és forráspontja között?", answers: { a: "100", b: "212", c: "180" }, correctAnswer: "c", explanation: `<div class="explanation-step"><b>🔹 Számolás:</b> A forráspont 212 °F, a fagyáspont 32 °F.</div><div class="explanation-step"><b>🔹 Különbség:</b> 212 - 32 = 180.</div><div class="explanation-solution">✅ Megoldás: 180 fok van a két pont között.</div>` }
+        ];
+
+        const quizBody=document.getElementById("quiz-body"),submitBtn=document.getElementById("submit-btn"),pinInput=document.getElementById("pin-input"),resultsDiv=document.getElementById("results"),adminPanel=document.getElementById("admin-panel"),alertMessage=document.getElementById("alert-message"),answerDistributionDiv=document.getElementById("answer-distribution");let selectedAnswers={},questionsOnPage=[];
+        function shuffleArray(e){for(let t=e.length-1;t>0;t--){const o=Math.floor(Math.random()*(t+1));[e[t],e[o]]=[e[o],e[t]]}}
+        
+        function buildQuiz(){
+            shuffleArray(fullQuestionPool);
+            questionsOnPage=fullQuestionPool;
+            questionsOnPage.forEach((e,t)=>{
+                const o=document.createElement("div");o.classList.add("question"),o.id=`question-${t}`;
+                const n=document.createElement("p");n.innerHTML=`${t+1}. ${e.question}`,o.appendChild(n);
+                const a=document.createElement("div");a.classList.add("answers");
+                let s=Object.entries(e.answers).map(([e,t])=>({key:e,text:t}));
+                shuffleArray(s);
+                s.forEach((n,s)=>{
+                    const l=document.createElement("label");l.classList.add("answer");
+                    const d=document.createElement("input");d.type="radio",d.name=`question${t}`,d.value=n.key,d.id=`q${t}k${n.key}`,d.addEventListener("change",handleAnswerSelection);
+                    const i=document.createElement("span");
+                    i.textContent=n.text;
+                    const r=document.createElement("span");r.classList.add("feedback-icon");
+                    l.appendChild(d),l.appendChild(i),l.appendChild(r),a.appendChild(l)
+                });
+                o.appendChild(a);
+                const l=document.createElement("div");l.classList.add("explanation"),l.innerHTML=e.explanation,o.appendChild(l),quizBody.appendChild(o)
+            })
+        }
+        
+        function handleAnswerSelection(e){const t=e.target.name.replace("question","");selectedAnswers[t]=e.target.value}function checkPIN(e){const t="121909";if(e===t)return"master";const o=parseInt(e,10);return o>=100001&&o<=100020?"student":null}function showAlert(e){alertMessage.textContent=e,alertMessage.style.display="block"}function hideAlert(){alertMessage.style.display="none"}function revealAllForMaster(){questionsOnPage.forEach((e,t)=>{const o=document.getElementById(`question-${t}`),n=e.correctAnswer,a=o.querySelector(".explanation");a.style.display="block";const s=o.querySelectorAll(".answer");s.forEach(e=>{const t=e.querySelector("input");t.disabled=!0;const o=t.value,a=e.querySelector(".feedback-icon");o===n&&(e.classList.add("correct"),a.style.display="inline",a.textContent=" ✅ Helyes")})}),resultsDiv.textContent="Mester Mód: Megoldások felfedve.",submitBtn.disabled=!0,pinInput.disabled=!0,adminPanel.style.display="block";const e=questionsOnPage.reduce((e,t)=>(e[t.correctAnswer]=(e[t.correctAnswer]||0)+1,e),{});answerDistributionDiv.innerHTML=`<b>Előírt eloszlás:</b> 8×'a', 9×'b', 8×'c'.<br><b>Tényleges eloszlás:</b> A: ${e.a||0}, B: ${e.b||0}, C: ${e.c||0}.`}function evaluateStudentAnswers(){let e=0;questionsOnPage.forEach((t,o)=>{const n=document.getElementById(`question-${o}`),a=selectedAnswers[o],s=t.correctAnswer,l=n.querySelector(".explanation");l.style.display="block";const d=n.querySelectorAll(".answer");d.forEach(t=>{const o=t.querySelector("input");o.disabled=!0;const n=o.value,l=t.querySelector(".feedback-icon");n===a&&(a===s?(e++,t.classList.add("correct"),l.style.display="inline",l.textContent=" ✅"):(t.classList.add("incorrect"),l.style.display="inline",l.textContent=" ❌"))})});const t=Math.round(e/questionsOnPage.length*100);resultsDiv.textContent=`Eredményed: ${e} / ${questionsOnPage.length} (${t}%)`,submitBtn.disabled=!0,pinInput.disabled=!0}submitBtn.addEventListener("click",()=>{hideAlert();const e=pinInput.value,t=checkPIN(e);if("master"===t)return void revealAllForMaster();if(Object.keys(selectedAnswers).length<questionsOnPage.length)return void showAlert("Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!");if(!t)return void showAlert("Érvénytelen PIN kód. Kérj egyet a tanárodtól!");evaluateStudentAnswers()}),pinInput.addEventListener("keydown",e=>{"Enter"===e.key&&(e.preventDefault(),submitBtn.click())}),document.addEventListener("DOMContentLoaded",buildQuiz);
+    </script>
+</body>
+</html>

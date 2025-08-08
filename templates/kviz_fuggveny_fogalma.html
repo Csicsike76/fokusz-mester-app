@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: A függvény fogalma</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: A függvény fogalma</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Mi a függvény legfontosabb tulajdonsága?", options: { a: "Minden elemhez több elemet rendel.", b: "Minden elemhez pontosan egy elemet rendel.", c: "A hozzárendelés mindig szorzás." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A függvény egyértelmű hozzárendelést jelent. 🔹 2. Lépés: Ez azt jelenti, hogy egy bemeneti értékhez (az értelmezési tartományból) mindig csak egyetlen kimeneti érték tartozhat. ✅ Megoldás: Minden elemhez pontosan egy elemet rendel." },
+            { question: "Mit nevezünk a függvény értelmezési tartományának?", options: { a: "A lehetséges kimeneti értékek halmazát.", b: "A lehetséges bemeneti értékek halmazát.", c: "A hozzárendelés szabályát." }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az értelmezési tartomány azokat az 'x' értékeket tartalmazza, amiket a függvénybe 'behelyettesíthetünk'. 🔹 2. Lépés: Ezek a bemeneti értékek, amiket a függvény értelmezni tud. ✅ Megoldás: A lehetséges bemeneti értékek halmazát." },
+            { question: "Mit nevezünk a függvény értékkészletének?", options: { a: "A ténylegesen felvett kimeneti értékek halmazát.", b: "A lehetséges bemeneti értékek halmazát.", c: "A függvény grafikonját." }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az értékkészlet azokat az 'y' (vagy f(x)) értékeket tartalmazza, amiket a függvény eredményül ad. 🔹 2. Lépés: Ezek a tényleges kimeneti értékek. ✅ Megoldás: A ténylegesen felvett kimeneti értékek halmazát." },
+            { question: "Adott az f(x) = x + 5 függvény. Mennyi az f(3) értéke?", options: { a: "5", b: "3", c: "8" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Az f(3) azt jelenti, hogy az x helyére 3-at kell helyettesíteni a szabályba. 🔹 2. Lépés: f(3) = 3 + 5 = 8. ✅ Megoldás: Az f(3) értéke 8." },
+            { question: "Adott az f(x) = 2 * x függvény. Melyik x értékre lesz f(x) = 10?", options: { a: "5", b: "10", c: "20" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az egyenlet, amit meg kell oldanunk: 10 = 2 * x. 🔹 2. Lépés: Az egyenletet 2-vel osztva kapjuk, hogy x = 5. ✅ Megoldás: Az x=5 értékre lesz a függvényérték 10." },
+            { question: "Melyik NEM lehet függvény?", options: { a: "x -> x négyzete", b: "Emberek -> születési évük", c: "Osztály -> a tanulók nevei" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Azt a hozzárendelést keressük, ahol egy bemenethez több kimenet tartozhat. 🔹 2. Lépés: Egy számnak csak egy négyzete van. Egy embernek csak egy születési éve van. Viszont egy osztályhoz több tanuló is tartozik. ✅ Megoldás: Az 'Osztály -> a tanulók nevei' hozzárendelés nem függvény." },
+            { question: "Mi a hozzárendelési szabály a 'Minden számhoz a háromszorosát rendeljük' függvényben?", options: { a: "x -> 3x", b: "x -> x+3", c: "x -> x-3" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A 'háromszorosát' szó szorzást jelent. 🔹 2. Lépés: Ha a bemeneti szám x, akkor a háromszorosa 3*x, vagy röviden 3x. ✅ Megoldás: A hozzárendelési szabály x -> 3x." },
+            { question: "Melyik betűt használjuk leggyakrabban a függvények elnevezésére?", options: { a: "x", b: "f, g, h", c: "y" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az 'x' általában a változót (bemeneti értéket), az 'y' pedig a függvényértéket (kimeneti értéket) jelöli. 🔹 2. Lépés: Magát a függvényt, a 'gépet' vagy a 'szabályt' pedig kisbetűkkel, leggyakrabban f, g, vagy h betűkkel jelöljük. ✅ Megoldás: f, g, h." },
+            { question: "Adott az f(x) = 10 - x függvény. Mennyi az f(10) értéke?", options: { a: "10", b: "0", c: "20" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Helyettesítsük be az x helyére a 10-et. 🔹 2. Lépés: f(10) = 10 - 10 = 0. ✅ Megoldás: Az f(10) értéke 0." },
+            { question: "Mi az 'x' szerepe az f(x) jelölésben?", options: { a: "a függvény neve", b: "a függvény változója (bemeneti érték)", c: "a függvény értéke (kimeneti érték)" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az f(x) jelölés azt mutatja, hogy az 'f' függvény az 'x' változótól függ. 🔹 2. Lépés: Az 'x' a független változó, az az érték, amit behelyettesítünk a függvénybe. ✅ Megoldás: Az 'x' a függvény változója." },
+            { question: "Mi az f(x) szerepe az f(x) jelölésben?", options: { a: "a függvény értéke (kimeneti érték)", b: "a függvény változója (bemeneti érték)", c: "a hozzárendelés szabálya" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az f(x) jelölés egésze azt az értéket jelenti, amit a függvény a bemeneti 'x' értékhez rendel. 🔹 2. Lépés: Gyakran használjuk helyette az 'y' jelölést is a koordináta-rendszerben. ✅ Megoldás: Az f(x) a függvény értéke." },
+            { question: "A 'szám -> a szám kétszerese' függvényben mi a 4 helyen felvett érték?", options: { a: "2", b: "8", c: "4" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hozzárendelési szabály a 'kétszeresére venni'. 🔹 2. Lépés: A 4 kétszerese 4 * 2 = 8. ✅ Megoldás: A 4 helyen felvett érték 8." },
+            { question: "Melyik ábrázolási mód NEM egyértelműen függvény?", options: { a: "egy képlet, pl. f(x) = x+1", b: "egy táblázat, ahol egy x-hez több y tartozik", c: "egy nyíldiagram, ahol minden bal oldali elemből egy nyíl indul ki" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A függvény definíciója szerint egy bemenethez (x) csak egy kimenet (y) tartozhat. 🔹 2. Lépés: Ha egy táblázatban egy x érték mellett több y érték is szerepel, az a hozzárendelés nem lehet függvény. ✅ Megoldás: Az a táblázat, ahol egy x-hez több y tartozik." },
+            { question: "Egy automata bedobott pénzhez egy üdítőt ad. Ez a hozzárendelés...", options: { a: "nem függvény, mert több pénzt is bedobhatunk.", b: "függvény, mert egyféle pénzhez egyféle üdítőt ad.", c: "nem függvény, mert az üdítőnek van színe." }, correctAnswer: "b", explanation: "🔹 1. Lépés: A bemenet (értelmezési tartomány) a bedobott érme/bankjegy. A kimenet (értékkészlet) az üdítő. 🔹 2. Lépés: A lényeg, hogy egy adott gombnyomáshoz (bemenet) pontosan egy üdítő (kimenet) tartozik. ✅ Megoldás: Ez a hozzárendelés függvény." },
+            { question: "Adott az f(x) = 6 / x függvény. Mi az f(2) értéke?", options: { a: "12", b: "6", c: "3" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Helyettesítsük be az x helyére a 2-t. 🔹 2. Lépés: f(2) = 6 / 2 = 3. ✅ Megoldás: Az f(2) értéke 3." },
+            { question: "Mi a függvény 'képe'?", options: { a: "A függvény grafikonja.", b: "A hozzárendelési szabály.", c: "Az értelmezési tartomány." }, correctAnswer: "a", explanation: "🔹 1. Lépés: A függvényt vizuálisan is meg lehet jeleníteni. 🔹 2. Lépés: A koordináta-rendszerben az összetartozó (x, f(x)) pontok halmazát nevezzük a függvény grafikonjának, vagy más néven a függvény képének. ✅ Megoldás: A függvény grafikonja." },
+            { question: "Adott a g(x) = x² függvény. Mennyi a g(5) értéke?", options: { a: "10", b: "25", c: "5" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A hozzárendelési szabály a négyzetre emelés. 🔹 2. Lépés: Helyettesítsük be az x helyére az 5-öt: g(5) = 5² = 5 * 5 = 25. ✅ Megoldás: A g(5) értéke 25." },
+            { question: "Ha az értelmezési tartomány {1, 2, 3} és f(x)=x-1, mi az értékkészlet?", options: { a: "{1, 2, 3}", b: "{0, 1, 2}", c: "{2, 3, 4}" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Számoljuk ki a függvényértékeket az értelmezési tartomány minden elemére. 🔹 2. Lépés: f(1)=1-1=0. f(2)=2-1=1. f(3)=3-1=2. 🔹 3. Lépés: Az eredményül kapott értékek halmaza az értékkészlet. ✅ Megoldás: Az értékkészlet {0, 1, 2}." },
+            { question: "Egy koordináta-rendszerben melyik tengelyen ábrázoljuk általában a bemeneti értékeket (x)?", options: { a: "a függőleges (y) tengelyen", b: "a vízszintes (x) tengelyen", c: "mindkettőn" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A Descartes-koordináta-rendszerben a tengelyeknek megvan a szokásos szerepük. 🔹 2. Lépés: A vízszintes tengely a független változó (általában x) helye, a függőleges pedig a függő változóé (y vagy f(x)). ✅ Megoldás: A vízszintes (x) tengelyen." },
+            { question: "Adott a h(x) = 5. Mennyi a h(100) értéke?", options: { a: "100", b: "5", c: "500" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Ez egy konstans függvény. A neve azt jelenti, hogy az értéke állandó. 🔹 2. Lépés: Nem számít, mit helyettesítünk be x helyére, az eredmény mindig 5 lesz. ✅ Megoldás: A h(100) értéke 5." },
+            { question: "Melyik leírás NEM függvény?", options: { a: "Tanuló -> a magassága cm-ben", b: "Ország -> a szomszédos országai", c: "Autó -> a gyártási éve" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Azt keressük, ahol egy bemenethez több kimenet tartozhat. 🔹 2. Lépés: Egy tanulónak egy magassága van, egy autónak egy gyártási éve. De egy országnak (pl. Magyarországnak) több szomszédja is lehet. ✅ Megoldás: Az 'Ország -> a szomszédos országai' hozzárendelés nem függvény." },
+            { question: "A 'szám -> a szám fele' függvényben mihez tartozik a 10?", options: { a: "5", b: "20", c: "10" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A kérdés fordított: a 10 a kimenet (függvényérték). A bemenetet (x) keressük. 🔹 2. Lépés: Az egyenlet: x / 2 = 10. Az egyenletet 2-vel szorozva: x = 20. ✅ Megoldás: A 20-hoz tartozik a 10." },
+            { question: "Mi az f(x) = x+x függvény egyszerűbb alakja?", options: { a: "f(x) = x²", b: "f(x) = x", c: "f(x) = 2x" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Az algebrai kifejezést össze kell vonni. 🔹 2. Lépés: x + x = 2 * x. ✅ Megoldás: Az egyszerűbb alak f(x) = 2x." },
+            { question: "Milyen elemekből áll a függvény?", options: { a: "értelmezési tartomány, értékkészlet, hozzárendelési szabály", b: "számláló, nevező, törtvonal", c: "alap, magasság, oldal" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Egy függvényt három dolog határoz meg. 🔹 2. Lépés: Kell egy halmaz, ahonnan az értékeket vesszük (értelmezési tartomány), egy halmaz, ahova az értékek érkeznek (értékkészlet), és egy szabály, ami a hozzárendelést leírja. ✅ Megoldás: Értelmezési tartomány, értékkészlet, hozzárendelési szabály." },
+            { question: "Adott az f(x) = 3x - 1 függvény. Mennyi az f(1) értéke?", options: { a: "3", b: "1", c: "2" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Helyettesítsük be az x helyére az 1-et. 🔹 2. Lépés: f(1) = 3 * 1 - 1 = 3 - 1 = 2. ✅ Megoldás: Az f(1) értéke 2." }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - A mechanikai energia</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: A mechanikai energia</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Miből tevődik össze a mechanikai energia?",
+                answers: { a: "A mozgási és a helyzeti (potenciális) energiák összegéből.", b: "Csak a mozgási energiából.", c: "Csak a hőenergiából." },
+                correctAnswer: 'a',
+                explanation: "A mechanikai energia egy test mozgásából (kinetikus energia) és helyzetéből (potenciális energia, pl. gravitációs, rugalmas) származó energiáinak az összege. Képlete: E_mech = E_kin + E_pot. ✅ Megoldás: A mozgási és a helyzeti (potenciális) energiák összegéből."
+            },
+            {
+                question: "Mi történik egy szabadon eső labda mechanikai energiájával (ha a légellenállás elhanyagolható)?",
+                answers: { a: "Állandó marad.", b: "Növekszik.", c: "Csökken." },
+                correctAnswer: 'a',
+                explanation: "Ez az energia-megmaradás törvényének egy példája. Esés közben a labda helyzeti energiája csökken, de a mozgási energiája pont ugyanennyivel nő (gyorsul). A kettő összege, a mechanikai energia, mindvégig állandó marad. ✅ Megoldás: Állandó marad."
+            },
+            {
+                question: "Egy inga a pálya legmagasabb pontján van. Milyen energiája van ekkor (a legalsó ponthoz képest)?",
+                answers: { a: "Csak helyzeti energiája.", b: "Csak mozgási energiája.", c: "Nincs mechanikai energiája." },
+                correctAnswer: 'a',
+                explanation: "A szélső helyzetben az inga egy pillanatra megáll, tehát a sebessége és a mozgási energiája nulla. Mivel ez a legmagasabb pont, a helyzeti energiája itt maximális. A teljes mechanikai energiája megegyezik ezzel a maximális helyzeti energiával. ✅ Megoldás: Csak helyzeti energiája."
+            },
+            {
+                question: "Egy hullámvasúti kocsi elindul a legmagasabb pontról. Milyen energiaalakulás történik?",
+                answers: { a: "A helyzeti energia mozgási energiává alakul.", b: "A mozgási energia helyzeti energiává alakul.", c: "A hőenergia mechanikai energiává alakul." },
+                correctAnswer: 'a',
+                explanation: "A legmagasabb ponton a kocsinak nagy a helyzeti energiája. Ahogy lefelé gurul, a magassága csökken, így a helyzeti energiája is, miközben felgyorsul, tehát a mozgási energiája nő. A helyzeti energia alakul át mozgási energiává. ✅ Megoldás: A helyzeti energia mozgási energiává alakul."
+            },
+            {
+                question: "Mi a mechanikai energia mértékegysége?",
+                answers: { a: "Joule (J)", b: "Watt (W)", c: "Newton (N)" },
+                correctAnswer: 'a',
+                explanation: "Mivel a mechanikai energia is egy energiafajta, a mértékegysége ugyanaz, mint a többi energiáé vagy a munkáé: az SI rendszerben a joule. ✅ Megoldás: Joule (J)."
+            },
+            {
+                question: "Melyik testnek van mechanikai energiája?",
+                answers: { a: "Minden testnek, aminek van tömege és sebessége vagy magassága.", b: "Csak a gépeknek.", c: "Csak az élőlényeknek." },
+                correctAnswer: 'a',
+                explanation: "Bármely testnek, amely mozog (mozgási energia) vagy egy erőmezőben (pl. gravitációs) egy viszonyítási szint felett van (helyzeti energia), van mechanikai energiája. ✅ Megoldás: Minden testnek, aminek van tömege és sebessége vagy magassága."
+            },
+            {
+                question: "Mi történik a mechanikai energiával súrlódásos közegben?",
+                answers: { a: "Egy része hőenergiává alakul, tehát a mechanikai energia csökken.", b: "Nem változik.", c: "Növekszik." },
+                correctAnswer: 'a',
+                explanation: "A súrlódás és a közegellenállás olyan erők, amelyek negatív munkát végeznek. Ez a munka a rendszer mechanikai energiáját csökkenti, és jellemzően hővé (belső energiává) alakítja át. A rendszer így nem zárt. ✅ Megoldás: Egy része hőenergiává alakul, tehát a mechanikai energia csökken."
+            },
+            {
+                question: "Egy 2 kg-os test 10 m magasan van és 5 m/s sebességgel mozog. Mekkora a mechanikai energiája? (g≈10 N/kg)",
+                answers: { a: "225 J", b: "200 J", c: "25 J" },
+                correctAnswer: 'a',
+                explanation: "A mechanikai energia a helyzeti és mozgási energia összege. Helyzeti energia: E_pot = mgh = 2*10*10 = 200 J. Mozgási energia: E_kin = ½mv² = 0.5*2*5² = 25 J. A kettő összege: 200 J + 25 J = 225 J. ✅ Megoldás: 225 J."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Egy feldobott labda a pálya legmagasabb pontján van. Milyen energiája van?",
+                answers: { a: "Csak mozgási.", b: "Főként helyzeti, de van mozgási is (ha ferdén dobtuk).", c: "Nincs energiája." },
+                correctAnswer: 'b',
+                explanation: "A pálya legmagasabb pontján a labda függőleges sebessége nulla, de ha ferdén dobtuk el, még van vízszintes sebessége, tehát mozgási energiája is. A magassága miatt a helyzeti energiája itt a legnagyobb. A teljes mechanikai energiája a kettő összege. ✅ Megoldás: Főként helyzeti, de van mozgási is (ha ferdén dobtuk)."
+            },
+            {
+                question: "Egy inga a pálya legalsó pontján halad át. Milyen energiája van ekkor (önmagához képest)?",
+                answers: { a: "Csak helyzeti energiája.", b: "Csak mozgási energiája.", c: "Helyzeti és mozgási energiája is." },
+                correctAnswer: 'b',
+                explanation: "A pálya legalsó pontját választva nullszintnek, itt a helyzeti energia nulla. Az inga sebessége és így a mozgási energiája itt a legnagyobb. A teljes mechanikai energia itt megegyezik a maximális mozgási energiával. ✅ Megoldás: Csak mozgási energiája."
+            },
+            {
+                question: "Mit mond ki a mechanikai energia megmaradásának törvénye?",
+                answers: { a: "A mozgási energia mindig állandó.", b: "Zárt rendszerben a mozgási és helyzeti energia összege állandó.", c: "Az energia idővel mindig csökken." },
+                correctAnswer: 'b',
+                explanation: "Súrlódásmentes esetben (zárt rendszerben) az energia nem vész el, csak átalakul. A helyzeti és mozgási energia egymás rovására változhat, de az összegük, a teljes mechanikai energia, mindvégig változatlan. ✅ Megoldás: Zárt rendszerben a mozgási és helyzeti energia összege állandó."
+            },
+            {
+                question: "Egy lejtőn csúszó szánkó (súrlódás nélkül) mechanikai energiája...",
+                answers: { a: "...csökken.", b: "...állandó marad.", c: "...növekszik." },
+                correctAnswer: 'b',
+                explanation: "Ha a súrlódást elhanyagoljuk, a rendszer zártnak tekinthető. A szánkó helyzeti energiája mozgási energiává alakul, de a kettő összege, a mechanikai energia, a lejtőn végig állandó. ✅ Megoldás: ...állandó marad."
+            },
+            {
+                question: "Melyik esetben NEM marad meg a mechanikai energia?",
+                answers: { a: "Egy bolygó kering a Nap körül.", b: "Egy fékező autó esetében.", c: "Egy súrlódásmentes inga lengésekor." },
+                correctAnswer: 'b',
+                explanation: "A fékezés során a súrlódási erő negatív munkát végez, ami a jármű mozgási energiáját hőenergiává alakítja. Mivel az energia egy része hővé alakul, a mechanikai energia nem marad meg. ✅ Megoldás: Egy fékező autó esetében."
+            },
+            {
+                question: "Egy test helyzeti energiája 100 J, a mozgási energiája 50 J. Mennyi a mechanikai energiája?",
+                answers: { a: "50 J", b: "150 J", c: "2 J" },
+                correctAnswer: 'b',
+                explanation: "A mechanikai energia a mozgási és a helyzeti energia egyszerű összege: E_mech = E_kin + E_pot = 50 J + 100 J = 150 J. ✅ Megoldás: 150 J."
+            },
+            {
+                question: "Mikor beszélünk zárt rendszerről a mechanikában?",
+                answers: { a: "Ha a rendszer le van fedve.", b: "Ha a külső erők (pl. súrlódás) munkája elhanyagolható.", c: "Ha a rendszer nem mozog." },
+                correctAnswer: 'b',
+                explanation: "Zárt rendszernek azt a rendszert tekintjük, amelyre nem hatnak külső, nem-konzervatív erők, mint a súrlódás vagy a közegellenállás, vagy ezek munkája nulla. Ilyen ideális esetben marad meg a mechanikai energia. ✅ Megoldás: Ha a külső erők (pl. súrlódás) munkája elhanyagolható."
+            },
+            {
+                question: "Egy rugós puska golyójának kilövésénél milyen energiaátalakulás történik?",
+                answers: { a: "Mozgási → Helyzeti", b: "Rugalmas → Mozgási", c: "Kémiai → Mozgási" },
+                correctAnswer: 'b',
+                explanation: "Az összenyomott rugóban tárolt rugalmas potenciális energia alakul át a golyó mozgási energiájává, amikor a rugó kirúgja azt. ✅ Megoldás: Rugalmas → Mozgási."
+            },
+            {
+                question: "Egy test teljes mechanikai energiája 500 J. Ha a mozgási energiája 200 J, mennyi a helyzeti energiája?",
+                answers: { a: "700 J", b: "300 J", c: "2.5 J" },
+                correctAnswer: 'b',
+                explanation: "Mivel E_mech = E_kin + E_pot, ezért a helyzeti energia E_pot = E_mech - E_kin = 500 J - 200 J = 300 J. ✅ Megoldás: 300 J."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Egy magasból leejtett testnek a földet érés pillanata előtt...",
+                answers: { a: "...csak helyzeti energiája van.", b: "...nincs energiája.", c: "...főként mozgási energiája van." },
+                correctAnswer: 'c',
+                explanation: "A földet érés pillanatában a magassága közel nulla, tehát a helyzeti energiája is. Mivel esés közben folyamatosan gyorsult, a sebessége és így a mozgási energiája itt a legnagyobb. ✅ Megoldás: ...főként mozgási energiája van."
+            },
+            {
+                question: "Melyik állítás írja le az energiaátalakulást egy feldobott kő esetében, amíg emelkedik?",
+                answers: { a: "A helyzeti energia mozgási energiává alakul.", b: "A rugalmas energia hőenergiává alakul.", c: "A mozgási energia helyzeti energiává alakul." },
+                correctAnswer: 'c',
+                explanation: "Felfelé haladva a kő lassul, tehát a mozgási energiája csökken. Ugyanakkor a magassága nő, tehát a helyzeti energiája növekszik. A mozgási energia alakul át helyzeti energiává. ✅ Megoldás: A mozgási energia helyzeti energiává alakul."
+            },
+            {
+                question: "Mi a mechanikai energia képlete?",
+                answers: { a: "E = m ⋅ c²", b: "W = F ⋅ s", c: "E = E_kin + E_pot" },
+                correctAnswer: 'c',
+                explanation: "A mechanikai energia a rendszer mozgási (kinetikus) és helyzeti (potenciális) energiáinak összege. Az E=mc² a tömeg-energia ekvivalencia, a W=F⋅s pedig a munka képlete. ✅ Megoldás: E = E_kin + E_pot."
+            },
+            {
+                question: "Egy pattanó labda sosem pattan vissza az eredeti magasságba. Miért?",
+                answers: { a: "Mert a gravitáció erősebb lesz.", b: "Mert a labda elfárad.", c: "Mert a mechanikai energia egy része hővé és hanggá alakul az ütközéskor." },
+                correctAnswer: 'c',
+                explanation: "A pattanás nem tökéletesen rugalmas. Az ütközéskor a labda deformálódik, és a levegővel is súrlódik. Emiatt a mechanikai energia egy része elvész (hővé és hanggá alakul), így már nem tud visszapattanni az eredeti magasságba. ✅ Megoldás: Mert a mechanikai energia egy része hővé és hanggá alakul az ütközéskor."
+            },
+            {
+                question: "Melyik állítás HAMIS?",
+                answers: { a: "A mozgási energia függ a sebességtől.", b: "A helyzeti energia függ a magasságtól.", c: "A mechanikai energia csak a tömegtől függ." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás hamis. A mechanikai energia a mozgási és helyzeti energiák összege, így a tömegtől, a sebességtől és a magasságtól is függ. ✅ Megoldás: A mechanikai energia csak a tömegtől függ."
+            },
+            {
+                question: "Egy biciklis legurul egy dombról, majd tekerés nélkül felgurul egy kisebb dombra. Mi történik az energiájával?",
+                answers: { a: "Helyzeti → Mozgási", b: "Mozgási → Hő", c: "Helyzeti → Mozgási → Helyzeti" },
+                correctAnswer: 'c',
+                explanation: "Először a lejtőn lefelé a helyzeti energiája alakul át mozgási energiává (gyorsul). Majd a másik dombon felfelé a mozgási energiája alakul vissza helyzeti energiává (lassul). ✅ Megoldás: Helyzeti → Mozgási → Helyzeti."
+            },
+            {
+                question: "Az energia-megmaradás törvénye...",
+                answers: { a: "...csak a mechanikában érvényes.", b: "...csak a nagy testekre igaz.", c: "...a fizika egyik legáltalánosabb, minden területre érvényes törvénye." },
+                correctAnswer: 'c',
+                explanation: "Az energia-megmaradás egy univerzális elv. Bár mi a mechanikai energiára tanultuk, a teljes energia (beleértve a hőt, a fényt, a kémiai energiát stb.) egy zárt rendszerben mindig állandó. ✅ Megoldás: ...a fizika egyik legáltalánosabb, minden területre érvényes törvénye."
+            },
+            {
+                question: "Mi a közös a mozgási és a helyzeti energiában?",
+                answers: { a: "Mindkettő a sebességtől függ.", b: "Mindkettő a magasságtól függ.", c: "Mindkettő a test munkavégző képességét fejezi ki." },
+                correctAnswer: 'c',
+                explanation: "Az energia definíció szerint a test munkavégző képessége. A mozgási energia a mozgásból, a helyzeti energia a helyzetből adódó munkavégző képességet jelenti. Mindkettő a mechanikai energia része. ✅ Megoldás: Mindkettő a test munkavégző képességét fejezi ki."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

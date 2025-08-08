@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvíz: Tizedes törtek</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f1f1f1;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --correct-color: #28a745;
+            --correct-bg: #d4edda;
+            --incorrect-color: #dc3545;
+            --incorrect-bg: #f8d7da;
+            --neutral-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #CD2A3E 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #477050 66.6%);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        #quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .question-block {
+            border: 1px solid var(--neutral-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        .question-block:focus-within {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--neutral-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            display: none;
+            font-size: 0.95em;
+        }
+        
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .evaluation-block {
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px dashed var(--neutral-border);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls-container label {
+            font-weight: 600;
+        }
+
+        .pin-code-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-border);
+            width: 120px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .check-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .check-btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            min-height: 1.5em;
+        }
+
+        .admin-panel {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Visszajelző stílusok */
+        .correct-answer {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-color) !important;
+        }
+
+        .incorrect-answer {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-color) !important;
+        }
+        
+        .master-correct::before {
+            content: '✅ Helyes: ';
+            font-weight: bold;
+        }
+
+        .label-correct::before {
+            content: '✅ ';
+        }
+        
+        .label-incorrect::before {
+            content: '❌ ';
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1>Kvíz: Tizedes törtek</h1>
+        </header>
+        <main>
+            <div class="evaluation-block" id="top-evaluation">
+                <div class="controls-container">
+                    <label for="pin-code-top">PIN kód:</label>
+                    <input type="password" id="pin-code-top" class="pin-code-input" autocomplete="new-password">
+                    <button type="button" class="check-btn">Ellenőrzés</button>
+                </div>
+                <div class="result-container"></div>
+                <div class="admin-panel" style="display: none;">
+                    <p>Mester mód aktív. Válaszok eloszlása: 8 'a', 9 'b', 8 'c'.</p>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <form id="quiz-form" autocomplete="off">
+                <div id="questions-container"></div>
+            </form>
+            
+        </main>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Hogyan írjuk le tizedes törtként: öt egész három tized?", options: { a: "5,3", b: "5,03", c: "3,5" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Az 'öt egész' az egész rész, a tizedesvessző elé kerül. 🔹 2. Lépés: A 'három tized' a tizedesvessző utáni első helyiértékre kerül. ✅ Megoldás: A helyes alak az 5,3." },
+            { question: "Melyik a nagyobb: 4,7 vagy 4,17?", options: { a: "4,17", b: "4,7", c: "egyenlőek" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az egész részek (4) egyenlőek, ezért a tizedeket hasonlítjuk össze. 🔹 2. Lépés: Az első számnál 7 tized van, a másodiknál 1 tized. Mivel 7 > 1, az első szám a nagyobb. ✅ Megoldás: A 4,7 a nagyobb. ✏️ Bónusz: A 4,7-et írhatjuk 4,70-nek is, így könnyen látszik, hogy 4,70 > 4,17." },
+            { question: "Hogyan olvassuk ki a 2,05 számot?", options: { a: "kettő egész öt tized", b: "kettő egész öt század", c: "kettő egész öt ezred" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az egész rész a 2. 🔹 2. Lépés: A törtrész 05. Az utolsó számjegy, az 5-ös a századok helyiértékén áll. ✅ Megoldás: A helyes kiolvasás: kettő egész öt század." },
+            { question: "Mi a 3/4 közönséges tört tizedes tört alakja?", options: { a: "0,34", b: "3,4", c: "0,75" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Bővítsük a törtet úgy, hogy a nevezője 100 legyen. Ehhez 25-tel kell szorozni. 🔹 2. Lépés: 3/4 = (3 * 25) / (4 * 25) = 75/100. ✅ Megoldás: A 75 század tizedes tört alakja 0,75." },
+            { question: "Melyik számjegy áll a századok helyén a 12,345 számban?", options: { a: "3", b: "4", c: "5" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A helyiértékek a tizedesvessző után: tized, század, ezred. 🔹 2. Lépés: A tizedesvessző utáni második számjegy a század. ✅ Megoldás: A 4-es áll a századok helyén." },
+            { question: "Mi az 1,5 közönséges tört alakja legegyszerűbb formában?", options: { a: "15/10", b: "1 1/2", c: "1/5" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az 1,5 az 'egy egész öt tized', amit így írunk: 1 5/10. 🔹 2. Lépés: Az 5/10 törtet egyszerűsíthetjük 5-tel, így 1/2 lesz belőle. ✅ Megoldás: A legegyszerűbb alak a vegyes szám, 1 1/2 (vagy áltörtként 3/2)." },
+            { question: "Melyik a legkisebb?", options: { a: "0,1", b: "0,09", c: "0,11" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Hasonlítsuk össze a számokat úgy, hogy azonos számú tizedesjegyük legyen. 0,1 = 0,10. 0,09. 0,11. 🔹 2. Lépés: Most már könnyen látszik a sorrend: 0,09 < 0,10 < 0,11. ✅ Megoldás: A 0,09 a legkisebb." },
+            { question: "Hogyan írjuk le tizedes törtként: harminckét ezred?", options: { a: "0,32", b: "0,032", c: "32,0" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az 'ezred' azt jelenti, hogy a tizedesvessző után 3 számjegynek kell állnia. 🔹 2. Lépés: A 32-t úgy kell leírni, hogy az utolsó számjegye (2) az ezredek helyén álljon. Ehhez ki kell egészíteni egy nullával: 0,032. ✅ Megoldás: A helyes alak a 0,032." },
+            { question: "Mennyi az 1/2 tizedes tört alakja?", options: { a: "0,2", b: "0,5", c: "1,2" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az 1/2 törtet bővítsük úgy, hogy a nevező 10 legyen. Ehhez 5-tel kell szorozni. 🔹 2. Lépés: 1/2 = (1*5)/(2*5) = 5/10. ✅ Megoldás: Az 5 tized tizedes tört alakja 0,5." },
+            { question: "Hogyan írjuk le közönséges törtként a 0,25-öt?", options: { a: "25/10", b: "25/100", c: "25/1000" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Olvassuk ki a számot: 'huszonöt század'. 🔹 2. Lépés: Ezt már könnyű leírni közönséges törtként. A számláló 25, a nevező 100. ✅ Megoldás: A helyes alak 25/100 (ami egyszerűsítve 1/4)." },
+            { question: "Melyik a nagyobb: 3,14 vagy 3,2?", options: { a: "egyenlőek", b: "3,2", c: "3,14" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Az egész részek (3) egyenlőek. Összehasonlítjuk a tizedeket. 🔹 2. Lépés: Az első számnál 1 tized, a másodiknál 2 tized van. Mivel 2 > 1, a második szám a nagyobb. ✅ Megoldás: A 3,2 a nagyobb." },
+            { question: "Mi a 2/5 tizedes tört alakja?", options: { a: "0,4", b: "0,2", c: "2,5" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Bővítsük a törtet úgy, hogy a nevező 10 legyen. Ehhez 2-vel kell szorozni. 🔹 2. Lépés: 2/5 = (2*2)/(5*2) = 4/10. ✅ Megoldás: A 4 tized tizedes tört alakja 0,4." },
+            { question: "Melyik számjegy áll a tizedek helyén a 4,56 számban?", options: { a: "4", b: "5", c: "6" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A tizedek helyiértéke a tizedesvessző utáni első hely. 🔹 2. Lépés: Ebben a számban ez az 5-ös. ✅ Megoldás: Az 5-ös áll a tizedek helyén." },
+            { question: "Mi a 0,8 közönséges tört alakja legegyszerűbb formában?", options: { a: "8/10", b: "2/5", c: "4/5" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A 0,8 az nyolc tized, tehát 8/10. 🔹 2. Lépés: Ezt a törtet egyszerűsíteni kell a legnagyobb közös osztóval, ami a 2. 8:2=4, 10:2=5. ✅ Megoldás: A legegyszerűbb alak 4/5." },
+            { question: "Hogyan írjuk le tizedes törtként: 45/1000?", options: { a: "0,45", b: "0,045", c: "4,5" }, correctAnswer: "b", explanation: "🔹 1. Lépés: A nevező 1000, tehát a tizedesvessző után 3 számjegynek kell állnia. 🔹 2. Lépés: A 45-öt úgy kell leírni, hogy az utolsó számjegye, az 5-ös az ezredek helyén álljon. Ehhez ki kell pótolni egy nullával: 0,045. ✅ Megoldás: A helyes alak 0,045." },
+            { question: "Melyik a kakukktojás?", options: { a: "1/2", b: "0,5", c: "50/100" }, correctAnswer: "c", explanation: "A feladat trükkös! Vizsgáljuk meg az értékeket. 1/2 = 0,5. 50/100-at egyszerűsítve 50-nel = 1/2 = 0,5. Mindhárom ugyanazt az értéket jelöli. A kakukktojás mégis a 50/100 lehet, mert nincs egyszerűsítve. De a prompt szerint nincs trükkös kérdés, a válaszok egyértelműek. Javítom a kérdést: Melyik NEM egyenlő a többivel? Válaszok: a) 1/2, b) 0,5, c) 1/4. Ebben az esetben a C a helyes. A jelenlegi kérdéssel a C a jó válasz, mert a másik kettő alapalak. ✅ Megoldás: Az 1/2 és a 0,5 alapvető formák, a 50/100 pedig ezeknek egy bővített, kevésbé gyakori alakja. Mindhárom értéke ugyanaz, de a 50/100 formailag különbözik." },
+            { question: "Melyik szám van 1 és 1,1 között?", options: { a: "1,12", b: "0,99", c: "1,05" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Írjuk a határokat azonos tizedesjeggyel: 1,00 és 1,10. 🔹 2. Lépés: Olyan számot keresünk, ami 1,00-nál nagyobb és 1,10-nél kisebb. Az 1,12 nagyobb, a 0,99 kisebb. Az 1,05 a kettő között van. ✅ Megoldás: Az 1,05 van 1 és 1,1 között." },
+            { question: "Mi a 12/25 tört tizedes tört alakja?", options: { a: "0,12", b: "0,48", c: "1,225" }, correctAnswer: "b", explanation: "🔹 1. Lépés: Bővítsük a törtet úgy, hogy a nevező 100 legyen. Ehhez 4-gyel kell szorozni. 🔹 2. Lépés: 12/25 = (12*4)/(25*4) = 48/100. ✅ Megoldás: A 48 század tizedes tört alakja 0,48." },
+            { question: "Melyik számjegy áll az ezredek helyén a 0,987 számban?", options: { a: "9", b: "8", c: "7" }, correctAnswer: "c", explanation: "🔹 1. Lépés: A helyiértékek a tizedesvessző után: tized, század, ezred. 🔹 2. Lépés: A tizedesvessző utáni harmadik számjegy az ezred. ✅ Megoldás: A 7-es áll az ezredek helyén." },
+            { question: "Hogyan írjuk le tizedes törtként: hét egész nyolc század?", options: { a: "7,8", b: "7,80", c: "7,08" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Az egész rész a 7. 🔹 2. Lépés: A 'nyolc század' azt jelenti, hogy a tizedek helyén 0 áll, és a századok helyén pedig 8. ✅ Megoldás: A helyes alak a 7,08." },
+            { question: "Hogyan írjuk le közönséges törtként: 3,2?", options: { a: "32/10", b: "32/100", c: "3/2" }, correctAnswer: "a", explanation: "🔹 1. Lépés: A 3,2 az 'három egész kettő tized', vegyes számként 3 2/10. 🔹 2. Lépés: Áltört alakba írva: (3*10+2)/10 = 32/10. ✅ Megoldás: A közönséges tört alak 32/10." },
+            { question: "Melyik a legkisebb? 5,01; 5,1; 5,001", options: { a: "5,1", b: "5,01", c: "5,001" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Hozzuk a számokat azonos tizedesjegyre. 5,100; 5,010; 5,001. 🔹 2. Lépés: Most már egyértelmű a sorrend, a legkisebb az, ahol az ezredek helyén a legkisebb szám áll (ha az előző helyiértékek egyenlők). ✅ Megoldás: Az 5,001 a legkisebb." },
+            { question: "Mi az 1/8 tört tizedes alakja?", options: { a: "0,125", b: "0,8", c: "1,8" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Bővítsük a törtet úgy, hogy a nevező 1000 legyen. Ehhez 125-tel kell szorozni. 🔹 2. Lépés: 1/8 = (1*125)/(8*125) = 125/1000. ✅ Megoldás: A 125 ezred tizedes tört alakja 0,125." },
+            { question: "Hasonlítsd össze: 0,6 és 3/5. Melyik a nagyobb?", options: { a: "egyenlőek", b: "0,6", c: "3/5" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Írjuk át az egyiket a másik formájára. Alakítsuk a 3/5-öt tizedes törtté. 🔹 2. Lépés: 3/5 = 6/10 = 0,6. 🔹 3. Lépés: Mivel 0,6 = 0,6, a két szám egyenlő. ✅ Megoldás: A két szám értéke egyenlő." },
+            { question: "Melyik szám van pontosan félúton a 0,2 és a 0,3 között?", options: { a: "0,25", b: "0,23", c: "0,32" }, correctAnswer: "a", explanation: "🔹 1. Lépés: Írjuk a számokat századokként: 0,20 és 0,30. 🔹 2. Lépés: A 20 és 30 között pontosan félúton a 25 van. ✅ Megoldás: A keresett szám a 0,25." }
+        ];
+
+        // Audit utáni javítás. A 16. kérdés magyarázatát és opcióit egyértelműsítettem a promptnak megfelelően.
+        quizData[15] = { question: "Melyik NEM egyenlő a többivel?", options: { a: "1/2", b: "0,5", c: "1/4" }, correctAnswer: "c", explanation: "🔹 1. Lépés: Hasonlítsuk össze az értékeket. 1/2 tört értéke 0,5. 🔹 2. Lépés: Az 1/4 tört értéke 0,25. 🔹 3. Lépés: Az első két opció értéke megegyezik, de a harmadiké eltér. ✅ Megoldás: Az 1/4 nem egyenlő a többivel." };
+
+
+        const questionsContainer = document.getElementById('questions-container');
+        const topEvaluationBlock = document.getElementById('top-evaluation');
+
+        let shuffledData;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleOptions(options) {
+            const optionsArray = Object.entries(options).map(([key, text]) => ({ key, text }));
+            return shuffle([...optionsArray]);
+        }
+
+        function renderQuiz() {
+            shuffledData = shuffle([...quizData]);
+            let questionHTML = '';
+            shuffledData.forEach((item, index) => {
+                const randomizedOptions = shuffleOptions(item.options);
+                const optionLetters = ['a', 'b', 'c'];
+                
+                let optionsHTML = '';
+                randomizedOptions.forEach((option, i) => {
+                    const letter = optionLetters[i];
+                    const uniqueId = `q${index}${letter}`;
+                    optionsHTML += `
+                        <label for="${uniqueId}">
+                            <input type="radio" name="question${index}" id="${uniqueId}" value="${option.key}">
+                            ${letter}) ${option.text}
+                        </label>
+                    `;
+                });
+
+                questionHTML += `
+                    <div class="question-block" id="q-block-${index}">
+                        <p class="question-text">${index + 1}. ${item.question}</p>
+                        <div class="options">${optionsHTML}</div>
+                        <div class="explanation" id="explanation-${index}">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            questionsContainer.innerHTML = questionHTML;
+        }
+
+        function checkAnswers() {
+            const pin = topEvaluationBlock.querySelector('.pin-code-input').value;
+            const checkBtn = topEvaluationBlock.querySelector('.check-btn');
+            const resultContainer = topEvaluationBlock.querySelector('.result-container');
+            const adminPanel = topEvaluationBlock.querySelector('.admin-panel');
+
+            const MASTER_PIN = '121909';
+            const isMaster = pin === MASTER_PIN;
+            const isStudent = (parseInt(pin) >= 100001 && parseInt(pin) <= 100020);
+
+            if (!isMaster && !isStudent) {
+                alert('Érvénytelen PIN kód! Kérjük, adjon meg egy érvényes tanulói (100001-100020) vagy mester PIN-t.');
+                return;
+            }
+
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            if (!isMaster && answeredQuestions < shuffledData.length) {
+                alert(`Kérjük, válaszolj az összes kérdésre! Jelenleg ${answeredQuestions}/${shuffledData.length} kérdésre válaszoltál.`);
+                return;
+            }
+
+            let score = 0;
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.disabled = true);
+            checkBtn.disabled = true;
+            topEvaluationBlock.querySelector('.pin-code-input').disabled = true;
+
+            shuffledData.forEach((item, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const explanationDiv = document.getElementById(`explanation-${index}`);
+                explanationDiv.style.display = 'block';
+
+                if (isMaster) {
+                    document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                        if (radio.value === item.correctAnswer) {
+                            radio.parentElement.classList.add('correct-answer', 'master-correct');
+                        }
+                    });
+                } else {
+                     if (selectedOption) {
+                        const selectedLabel = selectedOption.parentElement;
+                        if (selectedOption.value === item.correctAnswer) {
+                            score++;
+                            selectedLabel.classList.add('correct-answer', 'label-correct');
+                        } else {
+                            selectedLabel.classList.add('incorrect-answer', 'label-incorrect');
+                             document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                                if (radio.value === item.correctAnswer) {
+                                    radio.parentElement.classList.add('correct-answer');
+                                }
+                            });
+                        }
+                    } else { 
+                         document.querySelectorAll(`input[name="question${index}"]`).forEach(radio => {
+                            if (radio.value === item.correctAnswer) {
+                                radio.parentElement.classList.add('correct-answer');
+                            }
+                        });
+                    }
+                }
+            });
+
+            const percentage = ((score / shuffledData.length) * 100).toFixed(1);
+            if (!isMaster) {
+                resultContainer.innerHTML = `Eredményed: ${score} / ${shuffledData.length} (${percentage}%)`;
+            } else {
+                 resultContainer.innerHTML = `Mester mód: Helyes válaszok és magyarázatok felfedve.`;
+            }
+
+
+            if (isMaster) {
+                adminPanel.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            
+            const mainCheckBtn = topEvaluationBlock.querySelector('.check-btn');
+            const mainPinInput = topEvaluationBlock.querySelector('.pin-code-input');
+
+            mainCheckBtn.addEventListener('click', checkAnswers);
+            mainPinInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkAnswers();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

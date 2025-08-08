@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - 32-33. hét: Nagy Projekt - Alkotás</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+            --example-bg: #e3f2fd;
+            --example-border: #2196f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .workshop-container {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            padding: 2px 0;
+            background: linear-gradient(90deg, var(--primary-red) 33.3%, var(--background-white) 33.3%, var(--background-white) 66.6%, var(--primary-green) 66.6%);
+        }
+
+        .workshop-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: #fcfcfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .workshop-header h1 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .workshop-header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            color: #555;
+        }
+
+        .workshop-body {
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .workshop-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .workshop-section h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .task-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary-red);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .task-card h3 {
+            margin-top: 0;
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-red);
+        }
+
+        .prompt-example {
+            background-color: var(--example-bg);
+            border: 1px dashed var(--example-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .critical-thinking {
+            background-color: var(--accent-bg);
+            border: 1px solid var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .challenge {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .workshop-header { padding: 1.5rem; }
+            .workshop-header h1 { font-size: 2rem; }
+            .workshop-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="workshop-container">
+        <div class="header-bar"></div>
+        <div class="workshop-header">
+            <h1>IV. Modul: A Nagy Projekt</h1>
+            <p>32-33. hét: Alkotás és megvalósítás</p>
+        </div>
+
+        <div class="workshop-body">
+
+            <section class="workshop-section">
+                <h2>1. Célkitűzés</h2>
+                <p>Ezen a dupla héten a feladat, hogy a csapatotok a részletes tervrajz alapján <strong>hozza létre a projekt kézzelfogható elemeit</strong>. A műhely végére el kell készülnötök a projektetek első, teljes verziójával ("prototípusával"), beleértve a szöveges, vizuális és egyéb tartalmakat, amelyeket a következő héten már tesztelhettek.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>2. Bevezető: Az Építkezés</h2>
+                <p>A tervek elkészültek, az alapanyagok (az ötleteitek) a helyükön vannak. Itt az ideje, hogy felvegyétek a védősisakot, és elkezdjétek az építkezést! Ebben a fázisban az MI-eszközök a ti "power tool"-jaitok: a szöveggenerátor a nagy teljesítményű csavarhúzó, a képalkotó a digitális festékszóró. De a legfontosabb személy az építkezésen te és a csapatod vagytok: ti vagytok az építésvezetők, akik eldöntik, melyik elem hova kerül, és hogy a végeredmény stabil és esztétikus legyen.</p>
+            </section>
+
+            <section class="workshop-section">
+                <h2>3. Lépésről-lépésre Feladatok</h2>
+                <p>Vegyétek elő a múlt héten elkészített, részletes "Projekt Terveteket" és a kiosztott szerepeket! A munka mostantól a tervetek alapján, párhuzamosan folyik.</p>
+
+                <div class="task-card">
+                    <h3>1. Feladat: A Szöveges Tartalom Létrehozása (Felelős: Főkutató/Szövegíró)</h3>
+                    <p>A projektetek minden szöveges elemét most kell megalkotni! Ez lehet egy applikáció menüpontjainak leírása, egy kampány szlogenjei és posztjai, vagy egy prezentáció diáinak szövege.</p>
+                    <div class="prompt-example">Viselkedj úgy, mint egy profi szövegíró! A projektünk egy [ide írjátok a projekt formátumát], aminek a célja [ide írjátok a célkitűzést]. Írj egy rövid, de meggyőző szöveget a [konkrét elem, pl. "Főoldalra", "Bemutatkozó diára"]! A stílus legyen [stílus leírása, pl. "informatív, de laza"].</div>
+                    <p><strong>Feladat:</strong> Írjátok meg az MI segítségével az összes szükséges szöveget! Ne felejtsétek el a kapott nyers szövegeket <strong>átírni, finomítani és a saját hangotokra formálni!</strong></p>
+                </div>
+
+                <div class="task-card">
+                    <h3>2. Feladat: A Vizuális Világ Megteremtése (Felelős: Kreatív Vezető/Dizájner)</h3>
+                    <p>Egy projekt annyira jó, amennyire kinéz. Most hozzátok létre a projekt vizuális elemeit!</p>
+                    <div class="prompt-example">Egy [projektötlet leírása] projekthez készítek vizuális anyagokat. Generálj egy logótervet és 3 illusztrációt, amelyek passzolnak a projekthez! A stílus legyen egységes: [stílus leírása, pl. "minimalista, letisztult, pasztell színekkel"]!</div>
+                    <p><strong>Feladat:</strong> Készítsétek el a projektetek logóját, a szükséges illusztrációkat, háttérképeket vagy egyéb vizuális elemeket! Törekedjetek az <strong>egységes stílusra</strong>, hogy a projekt kinézete koherens legyen!</p>
+                </div>
+                
+                <div class="task-card">
+                    <h3>3. Feladat: A Prototípus Összeállítása (Felelős: Projektvezető és a Csapat)</h3>
+                    <p>Itt az ideje, hogy a szöveges és vizuális elemeket összeillesszétek a kiválasztott formátumban!</p>
+                    <p><strong>Feladat:</strong> Nyissátok meg a választott szerkesztőprogramot (Canva, Gamma, Google Diák, stb.)! A projektvezető koordinálásával kezdjétek el összeállítani a projekt első, teljes verzióját:</p>
+                    <ul>
+                        <li>Illesszétek be a véglegesített szövegeket a megfelelő helyekre.</li>
+                        <li>Töltsétek fel a generált képeket, logót.</li>
+                        <li>Állítsátok be a betűtípusokat, színeket, elrendezést.</li>
+                    </ul>
+                    <p>A cél, hogy a hét végére legyen egy olyan verzió, amit már be lehet mutatni valakinek.</p>
+                </div>
+
+                <div class="task-card">
+                    <h3>4. Feladat: Az "Extra Lépés" (Opcionális, de ajánlott)</h3>
+                    <p>Ha van időtök és energiátok, tegyetek bele valami extrát, ami kiemeli a projekteteket a többi közül!</p>
+                    <ul>
+                        <li>Generáljatok egy rövid, 15-20 másodperces <strong>zenei aláfestést</strong> a bemutatótokhoz!</li>
+                        <li>Írassatok az MI-vel egy rövid, 30 másodperces <strong>videó narrátor-szövegét</strong>!</li>
+                        <li>Készítsetek egy <strong>interaktív elemet</strong> (pl. egy egyszerű kvízt a témában, amit az MI generált).</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="workshop-section">
+                <div class="critical-thinking">
+                    <h2>5. Kritikai Gondolkodás Sarok</h2>
+                    <p>Az alkotói folyamat közben gondolkodjatok el a tapasztaltakon!</p>
+                    <ul>
+                        <li><strong>A "Rendező" Szerepe:</strong> Az MI rengeteg tartalmat generált. Milyen döntéseket kellett meghoznotok, hogy ezekből egy egységes, értelmes egészet alkossatok? Miért mondhatjuk, hogy ebben a fázisban ti voltatok a rendezők, és az MI csak a színészek és a díszletesek?</li>
+                        <li><strong>Konzisztencia-problémák:</strong> Tapasztaltátok, hogy az MI néha elfelejtette a korábbi utasításokat, és a képek vagy szövegek stílusa nem volt teljesen egységes? Hogyan oldottátok meg ezeket a problémákat? Miért fontos az emberi felügyelet a konzisztencia fenntartásához?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="workshop-section">
+                <div class="challenge">
+                    <h2>6. A Hét Kihívása: "Version 1.0" - Az Első Kész Verzió</h2>
+                    <p>A dupla hét végére a csapatotoknak el kell készülnie a projekt <strong>első, teljes, bemutatható verziójával</strong>.</p>
+                    <p><strong>A leadandó anyag:</strong></p>
+                    <ul>
+                        <li>A választott formátumban összeállított prototípus (pl. egy kész prezentáció linkje, egy dokumentum a kampánytervvel és a poszterekkel).</li>
+                        <li>A produktumnak tartalmaznia kell a véglegesnek szánt szövegeket és vizuális elemeket.</li>
+                    </ul>
+                    <p>Ez a verzió még nem a végső, de már elég teljesnek kell lennie ahhoz, hogy a következő héten visszajelzést kérhessetek rá. Jó munkát, építészek!</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>

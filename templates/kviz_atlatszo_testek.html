@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Átlátszó, áttetsző, átlátszatlan testek</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        #control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        #pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        #check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        #check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        #results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Átlátszó, áttetsző és átlátszatlan testek</h1>
+
+    <div id="control-panel">
+        <input type="password" id="pin-input" placeholder="PIN kód">
+        <button id="check-button">Ellenőrzés</button>
+        <div id="results"></div>
+        <div id="admin-panel" class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magyarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span id="dist-a"></span> / <span id="dist-b"></span> / <span id="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Melyik test engedi át a fényt, de a rajta keresztül nézve a tárgyak elmosódottak?",
+                answers: { a: "Áttetsző test", b: "Átlátszó test", c: "Átlátszatlan test" },
+                correctAnswer: 'a',
+                explanation: "Az áttetsző testek áteresztik a fényt, de azt szétszórják, ezért a mögöttük lévő tárgyak körvonalai elmosódottan látszanak. Ilyen például a tejüveg vagy a zsírpapír. ✅ Megoldás: Áttetsző test."
+            },
+            {
+                question: "Melyik a legjobb példa egy átlátszatlan testre?",
+                answers: { a: "Egy vastag fal", b: "Egy ablaküveg", c: "Egy pohár víz" },
+                correctAnswer: 'a',
+                explanation: "Az átlátszatlan testek nem engedik át a fényt, hanem elnyelik vagy visszaverik azt. Egy vastag fal tökéletes példa erre, mert nem látunk át rajta. ✅ Megoldás: Egy vastag fal. Az ablaküveg és a víz átlátszó."
+            },
+            {
+                question: "Milyen árnyékot vet egy átlátszatlan test, ha pontszerű fényforrással világítjuk meg?",
+                answers: { a: "Éles határvonalú, sötét árnyékot.", b: "Elmosódott árnyékot.", c: "Nem vet árnyékot." },
+                correctAnswer: 'a',
+                explanation: "Mivel az átlátszatlan test a fényt teljesen feltartóztatja, mögötte egy fénymentes terület, azaz árnyék keletkezik. Ha a fényforrás pontszerű, az árnyék határvonala éles lesz. ✅ Megoldás: Éles határvonalú, sötét árnyékot."
+            },
+            {
+                question: "Miért használunk átlátszó anyagot (üveget) az ablakokhoz?",
+                answers: { a: "Mert az átlátszó anyagokon keresztül tisztán átlátunk.", b: "Mert az üveg jó hőszigetelő.", c: "Mert az üveg olcsó." },
+                correctAnswer: 'a',
+                explanation: "Az ablakok elsődleges funkciója, hogy a fényt beengedjék, és lehetővé tegyék a kilátást. Ezt a feladatot az átlátszó anyagok látják el a legjobban, mert a fényt torzítás nélkül engedik át. ✅ Megoldás: Mert az átlátszó anyagokon keresztül tisztán átlátunk."
+            },
+            {
+                question: "Mi történik a fénysugarakkal, amikor egy áttetsző anyagon haladnak át?",
+                answers: { a: "Szétszóródnak.", b: "Visszaverődnek.", c: "Elnyelődnek." },
+                correctAnswer: 'a',
+                explanation: "Az áttetsző anyagok jellegzetessége, hogy a rajtuk áthaladó fénysugarakat minden irányba szétszórják. Ezért nem látunk éles képet rajtuk keresztül. ✅ Megoldás: Szétszóródnak."
+            },
+            {
+                question: "Melyik csoportban vannak CSAK átlátszatlan testek?",
+                answers: { a: "Könyv, fa, fémkanál", b: "Víz, levegő, üvegpohár", c: "Tejüveg, füst, köd" },
+                correctAnswer: 'a',
+                explanation: "A könyv, a fa és a fémkanál sem engedi át a fényt, tehát mindhárom átlátszatlan. A második csoportban átlátszó, a harmadikban áttetsző testek vannak. ✅ Megoldás: Könyv, fa, fémkanál."
+            },
+            {
+                question: "Milyen test a tiszta levegő?",
+                answers: { a: "Átlátszó", b: "Áttetsző", c: "Átlátszatlan" },
+                correctAnswer: 'a',
+                explanation: "A tiszta levegőn a fénysugarak szinte akadálytalanul áthaladnak, ezért tisztán látunk rajta keresztül. Emiatt a levegő átlátszó közeg. ✅ Megoldás: Átlátszó."
+            },
+            {
+                question: "A fürdőszobák ablakát gyakran tejüvegből készítik. Milyen tulajdonsága miatt?",
+                answers: { a: "Mert áttetsző, így a fényt beengedi, de nem lehet belátni.", b: "Mert átlátszó, így szép a kilátás.", c: "Mert átlátszatlan, így teljesen sötétít." },
+                correctAnswer: 'a',
+                explanation: "A tejüveg áttetsző. Ez a tulajdonsága ideális fürdőszobai ablaknak, mert a fényt átereszti, így világos marad a helyiség, de a fény szétszórása miatt nem lehet rajta keresztül éles képet látni, ami biztosítja a magánszférát. ✅ Megoldás: Mert áttetsző, így a fényt beengedi, de nem lehet belátni."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Melyik test engedi át a fényt szinte teljes egészében, torzítás nélkül?",
+                answers: { a: "Átlátszatlan test", b: "Átlátszó test", c: "Áttetsző test" },
+                correctAnswer: 'b',
+                explanation: "Az átlátszó testek azok, amelyeken a fény akadálytalanul áthalad, így a mögöttük lévő tárgyakat tisztán, élesen látjuk. Ilyen például az ablaküveg vagy a tiszta víz. ✅ Megoldás: Átlátszó test."
+            },
+            {
+                question: "Melyik a legjobb példa egy átlátszó testre?",
+                answers: { a: "Egy kartondoboz", b: "Egy tiszta ablaküveg", c: "Egy darab pauszpapír" },
+                correctAnswer: 'b',
+                explanation: "A tiszta ablaküvegen keresztül a fény akadálytalanul áthalad, ezért átlátszónak nevezzük. A kartondoboz átlátszatlan, a pauszpapír pedig áttetsző. ✅ Megoldás: Egy tiszta ablaküveg."
+            },
+            {
+                question: "Melyik test NEM engedi át a fényt?",
+                answers: { a: "Víz", b: "Tégla", c: "Vékony papír" },
+                correctAnswer: 'b',
+                explanation: "Az átlátszatlan testek elnyelik vagy visszaverik a fényt, de nem engedik át. A tégla ilyen. A víz átlátszó, a vékony papír pedig áttetsző. ✅ Megoldás: Tégla."
+            },
+            {
+                question: "Milyen test a köd?",
+                answers: { a: "Átlátszó", b: "Áttetsző", c: "Átlátszatlan" },
+                correctAnswer: 'b',
+                explanation: "A köd apró vízcseppekből áll, amelyek a levegőben lebegnek. A fénysugarak áthaladnak rajta, de a cseppekről visszaverődve és megtörve szétszóródnak, ezért a látótávolság csökken. Emiatt a köd áttetsző. ✅ Megoldás: Áttetsző."
+            },
+            {
+                question: "Mi történik a fénysugarakkal, amikor egy átlátszatlan testbe ütköznek?",
+                answers: { a: "Áthaladnak rajta.", b: "Elnyelődnek vagy visszaverődnek.", c: "Szétszóródnak a testben." },
+                correctAnswer: 'b',
+                explanation: "Az átlátszatlan testek nem engedik át a fényt. A rájuk eső fény egy részét elnyelik (ezért melegszenek fel), a másik részét pedig visszaverik (ezért látjuk őket színesnek). ✅ Megoldás: Elnyelődnek vagy visszaverődnek."
+            },
+            {
+                question: "Melyik csoportban vannak CSAK átlátszó testek?",
+                answers: { a: "Ablaküveg, fal, víz", b: "Tiszta víz, levegő, üveglencse", c: "Füst, köd, jég" },
+                correctAnswer: 'b',
+                explanation: "A tiszta víz, a levegő és egy üveglencse mind olyan anyagok, amelyeken a fény akadálytalanul áthalad. Az első csoportban a fal, a harmadikban a füst és a köd nem átlátszó. ✅ Megoldás: Tiszta víz, levegő, üveglencse."
+            },
+            {
+                question: "Egy test átlátszósága függhet...",
+                answers: { a: "...a súlyától.", b: "...a vastagságától.", c: "...a hőmérsékletétől." },
+                correctAnswer: 'b',
+                explanation: "Igen, az anyagok optikai tulajdonságai függhetnek a vastagságuktól. Például egy vékony papírlap még áttetsző lehet, de egy vastag könyv már átlátszatlan. A víz is átlátszó, de egy mély tó aljára már nem jut le a fény. ✅ Megoldás: ...a vastagságától."
+            },
+            {
+                question: "Egy fekete póló...",
+                answers: { a: "...átlátszó, mert a fekete nem szín.", b: "...átlátszatlan, mert a legtöbb fényt elnyeli.", c: "...áttetsző, mert vékony anyagból van." },
+                correctAnswer: 'b',
+                explanation: "A fekete színű testek a rájuk eső látható fény nagy részét elnyelik és nagyon keveset vernek vissza. Mivel nem engedik át a fényt, átlátszatlanok. ✅ Megoldás: ...átlátszatlan, mert a legtöbb fényt elnyeli."
+            },
+            {
+                question: "A celofán fólia...",
+                answers: { a: "...átlátszatlan.", b: "...átlátszó.", c: "...áttetsző." },
+                correctAnswer: 'b',
+                explanation: "A celofán egy vékony, átlátszó műanyagfólia, amit gyakran csomagolásra használnak, éppen azért, hogy a becsomagolt termék jól látható legyen. ✅ Megoldás: ...átlátszó."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Melyik a legjobb példa egy áttetsző testre?",
+                answers: { a: "Egy tükör", b: "Egy tiszta vizespohár", c: "Egy olajos folt a papíron" },
+                correctAnswer: 'c',
+                explanation: "Az olaj kitölti a papír rostjai közötti apró hézagokat, így a fény jobban át tud haladni rajta, de szétszóródik. Emiatt az olajos folt áttetszővé teszi a papírt. ✅ Megoldás: Egy olajos folt a papíron."
+            },
+            {
+                question: "Miért látszik a Hold az égen?",
+                answers: { a: "Mert saját fénye van.", b: "Mert egy átlátszó test.", c: "Mert visszaveri a Nap fényét." },
+                correctAnswer: 'c',
+                explanation: "A Hold egy átlátszatlan égitest, amelynek nincs saját fénykibocsátása. Azért látjuk, mert a Nap megvilágítja, és a felszínéről visszaverődő napfény eljut a Földre. Tehát másodlagos fényforrás. ✅ Megoldás: Mert visszaveri a Nap fényét."
+            },
+            {
+                question: "Melyik test NEM vet árnyékot, ha megvilágítjuk?",
+                answers: { a: "Egy átlátszatlan test.", b: "Egy áttetsző test.", c: "Egy tökéletesen átlátszó test." },
+                correctAnswer: 'c',
+                explanation: "Az árnyék a fény útjában álló akadály mögött kialakuló fényhiány. Egy elméleti, tökéletesen átlátszó test minden fényt átengedne, így nem hozna létre árnyékot maga mögött. A valóságban még a legátlátszóbb testek is vetnek valamennyi, alig látható árnyékot. ✅ Megoldás: Egy tökéletesen átlátszó test."
+            },
+            {
+                question: "Milyen anyagnak kell lennie egy szemüveg lencséjének?",
+                answers: { a: "Átlátszatlannak", b: "Áttetszőnek", c: "Átlátszónak" },
+                correctAnswer: 'c',
+                explanation: "A szemüveg lencséjének az a feladata, hogy a fényt szabályozott módon megtörve korrigálja a látást. Ehhez elengedhetetlen, hogy a fény tisztán, torzítás és szóródás nélkül áthaladjon rajta, tehát átlátszónak kell lennie. ✅ Megoldás: Átlátszónak."
+            },
+            {
+                question: "Melyik állítás igaz?",
+                answers: { a: "Minden folyadék átlátszó.", b: "Minden szilárd test átlátszatlan.", c: "Egy anyag optikai tulajdonsága függhet a halmazállapotától." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás igaz. Például a víz folyékonyan átlátszó, szilárdan (jég) többnyire áttetsző, légnemű állapotban (vízgőz) pedig átlátszó. Az első két állítás hamis, hiszen pl. a tej folyékony és átlátszatlan, az üveg pedig szilárd és átlátszó. ✅ Megoldás: Egy anyag optikai tulajdonsága függhet a halmazállapotától."
+            },
+            {
+                question: "Egy vékony selyemsál...",
+                answers: { a: "...átlátszó.", b: "...átlátszatlan.", c: "...áttetsző." },
+                correctAnswer: 'c',
+                explanation: "Egy vékony selyemsál szálai között a fény részben áthalad, de közben megtörik és szétszóródik. Emiatt a sálon keresztül a formák elmosódottan látszanak, tehát áttetsző. ✅ Megoldás: ...áttetsző."
+            },
+            {
+                question: "Melyik állítás írja le helyesen a fény és az anyag kölcsönhatását?",
+                answers: { a: "A fény csak az átlátszó testekkel lép kölcsönhatásba.", b: "A fény csak az átlátszatlan testekkel lép kölcsönhatásba.", c: "A fény minden anyaggal kölcsönhatásba lép valamilyen módon." },
+                correctAnswer: 'c',
+                explanation: "Minden anyag hatással van a fényre: az átlátszó testek áteresztik, az áttetszők áteresztik és szétszórják, az átlátszatlanok pedig elnyelik vagy visszaverik. Nincs olyan anyag, amivel a fény ne lépne valamilyen kölcsönhatásba. ✅ Megoldás: A fény minden anyaggal kölcsönhatásba lép valamilyen módon."
+            },
+            {
+                question: "Miért nem látjuk a levegőt?",
+                answers: { a: "Mert túl messze van.", b: "Mert nincs színe.", c: "Mert átlátszó, és a fény áthalad rajta." },
+                correctAnswer: 'c',
+                explanation: "A levegő gázmolekulái annyira messze vannak egymástól, hogy a látható fény szinte akadálytalanul áthalad közöttük anélkül, hogy jelentősen visszaverődne vagy elnyelődne. Mivel átlátszó, ezért nem 'látjuk' magát a levegőt. ✅ Megoldás: Mert átlátszó, és a fény áthalad rajta."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButton = document.getElementById('check-button');
+        const pinInput = document.getElementById('pin-input');
+        const resultsContainer = document.getElementById('results');
+        const adminPanel = document.getElementById('admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInput.value;
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainer.textContent = "Érvénytelen PIN kód!";
+                resultsContainer.style.color = '#D50000';
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainer.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                resultsContainer.style.color = 'orange';
+                return;
+            }
+            resultsContainer.style.color = '#333'; // Reset color
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainer.textContent = "Minden válasz és magyarázat felfedve.";
+                adminPanel.style.display = 'block';
+                document.getElementById('dist-a').textContent = internalCorrectAnswers.a;
+                document.getElementById('dist-b').textContent = internalCorrectAnswers.b;
+                document.getElementById('dist-c').textContent = internalCorrectAnswers.c;
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainer.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+            }
+        }
+        
+        pinInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                checkButton.click(); // Simulate a button click
+            }
+        });
+
+        checkButton.addEventListener('click', checkAnswers);
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

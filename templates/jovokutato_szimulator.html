@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jövőkutató Szimulátor - Kérdezz a Holnapról!</title>
+    <link rel="stylesheet" href="stilus.css">
+    <style>
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .topic-card {
+            background-size: cover; background-position: center; border-radius: 12px;
+            box-shadow: var(--card-shadow); text-decoration: none; color: var(--feher);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            min-height: 400px; padding: 1.5rem; position: relative; overflow: hidden;
+            transition: transform 0.3s; cursor: pointer;
+        }
+        .topic-card:hover { transform: scale(1.03); }
+        .topic-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 60%);
+        }
+        .topic-card-content { position: relative; z-index: 2; }
+        .topic-card h3 { font-family: 'Roboto Slab', serif; margin: 0 0 0.5rem 0; font-size: 1.8rem; text-shadow: 0 2px 5px rgba(0,0,0,0.7); }
+        .topic-card p { font-size: 1rem; margin-bottom: 1.5rem; opacity: 0.9; }
+        .topic-card .btn {
+            display: inline-block; padding: 12px 24px; border-radius: 8px;
+            text-decoration: none; font-weight: 700; transition: all 0.3s;
+            border: 2px solid var(--feher); background-color: transparent; color: var(--feher);
+        }
+        .topic-card:hover .btn { background-color: var(--feher); color: var(--sotet); }
+    </style>
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="content-wrapper">
+        <main>
+            <div class="container">
+                <section class="section">
+                    <h2 class="section-title">Jövőkutató Szimulátor 🚀</h2>
+                    <p class="section-subtitle">Válassz egy témát! A rendszer a vágólapodra másolja a beszélgetésindító promptot, és megnyitja a Geminit. Ott már csak be kell illesztened (Ctrl+V)!</p>
+                    
+                    <div class="topic-grid">
+                        <div class="topic-card" style="background-image: url('https://images.pexels.com/photos/73910/mars-mars-rover-space-travel-robot-73910.jpeg');" data-topic="Élet a Marson">
+                            <div class="topic-card-content">
+                                <h3>Élet a Marson</h3>
+                                <p>Milyen lenne egy nap a vörös bolygón? Kérdezz a lakómodulokról, a terraformálásról és a marsi mindennapokról!</p>
+                                <span class="btn">Beszélgetés Indítása →</span>
+                            </div>
+                        </div>
+                        <div class="topic-card" style="background-image: url('https://images.pexels.com/photos/2166711/pexels-photo-2166711.jpeg');" data-topic="Jövő Városai">
+                            <div class="topic-card-content">
+                                <h3>Jövő Városai</h3>
+                                <p>Hogyan fogunk közlekedni, élni és dolgozni 2050-ben? Tegyél fel kérdéseket a lebegő autókról és a vertikális farmokról!</p>
+                                <span class="btn">Beszélgetés Indítása →</span>
+                            </div>
+                        </div>
+                        <div class="topic-card" style="background-image: url('https://images.pexels.com/photos/3913025/pexels-photo-3913025.jpeg');" data-topic="Mesterséges Ételek">
+                            <div class="topic-card-content">
+                                <h3>Mesterséges Ételek</h3>
+                                <p>Milyen ételeket fogunk enni a jövőben? Kérdezz a laborhúsokról, 3D-nyomtatott pizzáról és a rovarfehérjékről!</p>
+                                <span class="btn">Beszélgetés Indítása →</span>
+                            </div>
+                        </div>
+                        <div class="topic-card" style="background-image: url('https://images.pexels.com/photos/5496464/pexels-photo-5496464.jpeg');" data-topic="Agy-Gép Interfészek">
+                            <div class="topic-card-content">
+                                <h3>Agy-Gép Interfészek</h3>
+                                <p>Hogyan kötjük össze az agyunkat a gépekkel? Kérdezz a gondolatolvasásról és a tudásletöltésről!</p>
+                                <span class="btn">Beszélgetés Indítása →</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        window.addEventListener('load', function() {
+            // Navigáció betöltése
+            fetch('navigacio.html')
+                .then(response => response.ok ? response.text() : Promise.reject('navigacio.html nem található.'))
+                .then(data => { document.getElementById('navbar-placeholder').innerHTML = data; })
+                .catch(error => console.error("Navigáció hiba:", error));
+
+            // Jövőkutató kártyák logikája
+            const basePrompt = `Viselkedj úgy, mint egy optimista, de tudományosan megalapozott jövőkutató! A stílusod legyen lebilincselő, informatív és inspiráló. A válaszaid legyenek közérthetőek egy 12-16 éves diák számára. Mindig hangsúlyozd, hogy a jövőképek lehetőségek, nem kőbe vésett jóslatok. Fontos szabály: SOHA ne említsd, hogy egy MI vagy! Te egy jövőkutató szakértő vagy.`;
+            
+            const topicCards = document.querySelectorAll('.topic-card');
+
+            topicCards.forEach(card => {
+                const button = card.querySelector('.btn');
+                const originalButtonText = button.innerHTML;
+
+                card.addEventListener('click', () => {
+                    const topic = card.dataset.topic;
+                    const fullPrompt = `${basePrompt}\n\nA mostani beszélgetésünk fókuszában ez a téma áll: "${topic}". Kezdjük azzal, hogy röviden bemutatod ezt a területet, majd tedd fel a kérdést: "Mi érdekel a leginkább a(z) ${topic} témakörével kapcsolatban?"`;
+                    
+                    // A prompt vágólapra másolása
+                    navigator.clipboard.writeText(fullPrompt.trim()).then(() => {
+                        // Vizuális visszajelzés a gombra
+                        button.innerHTML = '✅ Prompt másolva! Megnyitom a Geminit...';
+                        
+                        // Gemini megnyitása új fülön
+                        window.open('https://gemini.google.com/app', '_blank');
+
+                        // Gomb állapotának visszaállítása 3 másodperc után
+                        setTimeout(() => {
+                            button.innerHTML = originalButtonText;
+                        }, 3000);
+
+                    }).catch(err => {
+                        console.error('Hiba a vágólapra másolás során:', err);
+                        alert('Hiba történt a prompt másolása közben.');
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

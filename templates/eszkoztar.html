@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMI Műhely - Eszköztár</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D52B1E;
+            --primary-green: #436F4D;
+            --background-white: #ffffff;
+            --light-gray: #f0f0f0;
+            --text-color: #333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --accent-bg: #e8f5e9;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .header {
+            background-color: var(--primary-red);
+            color: var(--background-white);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px var(--card-shadow);
+        }
+
+        .header h1 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .tool-category h2 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-bg);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .tool-card {
+            background-color: var(--background-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--card-shadow);
+        }
+
+        .tool-info {
+            flex-grow: 1;
+        }
+
+        .tool-info h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-family: 'Roboto Slab', serif;
+            color: var(--text-color);
+        }
+
+        .tool-info p {
+            margin: 0;
+            color: #555;
+        }
+
+        .tool-link a {
+            display: inline-block;
+            background-color: var(--primary-red);
+            color: var(--background-white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            margin-left: 1.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .tool-link a:hover {
+            background-color: #b71c1c;
+        }
+
+        @media (max-width: 600px) {
+            .tool-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .tool-link a {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>AIMI Műhely</h1>
+            <p>Központi Eszköztár</p>
+        </header>
+
+        <main>
+            <div class="tool-category">
+                <h2>Szöveg és Beszélgetés</h2>
+                <div class="tool-card">
+                    <div class="tool-info">
+                        <h3>Microsoft Copilot</h3>
+                        <p>Sokoldalú asszisztens, a legújabb GPT modelleket használja, beépített képalkotóval.</p>
+                    </div>
+                    <div class="tool-link"><a href="https://copilot.microsoft.com/" target="_blank">Megnyitás</a></div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-info">
+                        <h3>Google Gemini</h3>
+                        <p>A Google modern, multimodális MI-modellje, kiválóan alkalmas kutatásra és ötletelésre.</p>
+                    </div>
+                    <div class="tool-link"><a href="https://gemini.google.com/" target="_blank">Megnyitás</a></div>
+                </div>
+                 <div class="tool-card">
+                    <div class="tool-info">
+                        <h3>ChatGPT</h3>
+                        <p>Az egyik legismertebb chatbot, az ingyenes 3.5-ös verzió is tökéletes a legtöbb feladatra.</p>
+                    </div>
+                    <div class="tool-link"><a href="https://chat.openai.com/" target="_blank">Megnyitás</a></div>
+                </div>
+            </div>
+
+            <div class="tool-category">
+                <h2>Képalkotás</h2>
+                <div class="tool-card">
+                    <div class="tool-info">
+                        <h3>Microsoft Designer</h3>
+                        <p>A Copilot beépített képalkotója, DALL-E 3 motorral. Könnyen használható, kiváló minőség.</p>
+                    </div>
+                    <div class="tool-link"><a href="https://designer.microsoft.com/image-creator" target="_blank">Megnyitás</a></div>
+                </div>
+                 <div class="tool-card">
+                    <div class="tool-info">
+                        <h3>Leonardo.Ai</h3>
+                        <p>Haladóbb képalkotó, rengeteg stílussal és modellel, napi ingyenes krediteket ad.</p>
+                    </div>
+                    <div class="tool-link"><a href="https://leonardo.ai/" target="_blank">Megnyitás</a></div>
+                </div>
+            </div>
+            
+            <div class="tool-category">
+                <h2>Zene és Hang</h2>
+                 <div class="tool-card">
+                    <div class="tool-info">
+                        <h3>Suno AI</h3>
+                        <p>Komplett dalokat (szöveggel, énekkel) képes generálni egyszerű leírásokból.</p>
+                    </div>
+                    <div class="tool-link"><a href="https://www.suno.ai/" target="_blank">Megnyitás</a></div>
+                </div>
+            </div>
+
+            <div class="tool-category">
+                <h2>Prezentáció</h2>
+                 <div class="tool-card">
+                    <div class="tool-info">
+                        <h3>Gamma.app</h3>
+                        <p>Egyetlen promptból látványos, interaktív prezentációkat és weboldalakat készít.</p>
+                    </div>
+                    <div class="tool-link"><a href="https://gamma.app/" target="_blank">Megnyitás</a></div>
+                </div>
+            </div>
+            
+            <div class="tool-category">
+                <h2>Speciális Eszközök</h2>
+                 <div class="tool-card">
+                    <div class="tool-info">
+                        <h3>Google Teachable Machine</h3>
+                        <p>Kódolás nélküli eszköz, amivel saját, egyszerű képfelismerő modellt taníthatsz be.</p>
+                    </div>
+                    <div class="tool-link"><a href="https://teachablemachine.withgoogle.com/" target="_blank">Megnyitás</a></div>
+                </div>
+                 <div class="tool-card">
+                    <div class="tool-info">
+                        <h3>W3Schools Tryit Editor</h3>
+                        <p>Online szerkesztő, ahol azonnal kipróbálhatod az MI által generált HTML kódokat.</p>
+                    </div>
+                    <div class="tool-link"><a href="https://www.w3schools.com/html/tryit.asp?filename=tryhtml_default" target="_blank">Megnyitás</a></div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

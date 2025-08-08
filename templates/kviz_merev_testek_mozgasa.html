@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Merev testek mozgása</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        .control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        .results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Merev testek haladó és forgó mozgása</h1>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <div class="control-panel">
+        <input type="password" class="pin-input" placeholder="PIN kód">
+        <button class="check-button">Ellenőrzés</button>
+        <div class="results"></div>
+        <div class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span class="dist-a"></span> / <span class="dist-b"></span> / <span class="dist-c"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Mi a merev test?",
+                answers: { a: "Egy olyan idealizált test, amelynek alakja és mérete az erők hatására sem változik.", b: "Egy nagyon kemény anyagból készült test.", c: "Egy test, amely nem tud mozogni." },
+                correctAnswer: 'a',
+                explanation: "A merev test egy fizikai modell, amelyben eltekintünk a testek valós deformációjától. Ez az egyszerűsítés lehetővé teszi, hogy a mozgását könnyebben leírjuk. ✅ Megoldás: Egy olyan idealizált test, amelynek alakja és mérete az erők hatására sem változik."
+            },
+            {
+                question: "Milyen mozgást végez egy lecsúszó, de nem pörgő szánkó?",
+                answers: { a: "Tiszta haladó mozgást (transzlációt).", b: "Tiszta forgó mozgást (rotációt).", c: "Általános mozgást." },
+                correctAnswer: 'a',
+                explanation: "Haladó mozgás (transzláció) során a test minden pontja azonos pályán, párhuzamosan mozdul el. A csúszó szánkó minden része ugyanúgy mozog lefelé. ✅ Megoldás: Tiszta haladó mozgást (transzlációt)."
+            },
+            {
+                question: "Milyen mozgást végez egy óra másodpercmutatójának hegye?",
+                answers: { a: "Tiszta forgó mozgást.", b: "Tiszta haladó mozgást.", c: "Nyugalomban van." },
+                correctAnswer: 'a',
+                explanation: "Forgó mozgás (rotáció) során a test pontjai egy rögzített tengely körül körpályán mozognak. A másodpercmutató hegye az óra középpontja körül végez forgó mozgást. ✅ Megoldás: Tiszta forgó mozgást."
+            },
+            {
+                question: "Mi a forgástengely?",
+                answers: { a: "Az az egyenes, amely körül a merev test forog.", b: "A test súlypontja.", c: "A test sebességvektora." },
+                correctAnswer: 'a',
+                explanation: "A forgó mozgást végző merev testnek mindig van egy (valós vagy képzeletbeli) egyenese, amelynek pontjai a mozgás során helyben maradnak. Ez a forgástengely. ✅ Megoldás: Az az egyenes, amely körül a merev test forog."
+            },
+            {
+                question: "Melyik test végez haladó és forgó mozgást egyszerre?",
+                answers: { a: "Egy guruló kerék.", b: "Egy lift.", c: "Egy körhinta." },
+                correctAnswer: 'a',
+                explanation: "A guruló kerék egy általános mozgást végez: a középpontja halad előre (transzláció), miközben a kerék pontjai e középpont körül forognak (rotáció). ✅ Megoldás: Egy guruló kerék."
+            },
+            {
+                question: "Egy autó kereke forog. A kerék tengelye a kocsihoz képest...",
+                answers: { a: "...nyugalomban van.", b: "...forgó mozgást végez.", c: "...haladó mozgást végez." },
+                correctAnswer: 'a',
+                explanation: "Bár a kerék forog, a forgásának középpontja, a tengely, a kocsi vázához van rögzítve, tehát ahhoz képest nyugalomban van. (A talajhoz képest persze halad.) ✅ Megoldás: ...nyugalomban van."
+            },
+            {
+                question: "Milyen mozgást végez egy dodzsem?",
+                answers: { a: "Haladó és forgó mozgás keverékét.", b: "Csak haladó mozgást.", c: "Csak forgó mozgást." },
+                correctAnswer: 'a',
+                explanation: "A dodzsem a pályán halad előre, hátra és oldalra (haladó mozgás), miközben gyakran a saját tengelye körül is forog, különösen egy ütközés után. Ez egy általános, összetett mozgás. ✅ Megoldás: Haladó és forgó mozgás keverékét."
+            },
+            {
+                question: "Mi a transzláció?",
+                answers: { a: "A haladó mozgás másik neve.", b: "A forgó mozgás másik neve.", c: "A test gyorsulása." },
+                correctAnswer: 'a',
+                explanation: "A transzláció a tiszta haladó mozgás tudományos elnevezése, amikor a test minden pontja párhuzamos pályán mozdul el. ✅ Megoldás: A haladó mozgás másik neve."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Mi jellemző a tiszta haladó mozgásra?",
+                answers: { a: "A test pontjai különböző sebességgel mozognak.", b: "A test minden pontja ugyanakkora elmozdulást tesz meg ugyanannyi idő alatt.", c: "A test egy pont körül forog." },
+                correctAnswer: 'b',
+                explanation: "A tiszta haladó mozgás (transzláció) lényege, hogy a test nem forog el. Ennek következtében minden pontja azonos alakú és hosszúságú pályát ír le. ✅ Megoldás: A test minden pontja ugyanakkora elmozdulást tesz meg ugyanannyi idő alatt."
+            },
+            {
+                question: "Mi jellemző a tiszta forgó mozgásra?",
+                answers: { a: "A test minden pontja egyenes vonalban mozog.", b: "A test pontjai a forgástengely körül körpályán mozognak.", c: "A test minden pontja nyugalomban van." },
+                correctAnswer: 'b',
+                explanation: "Forgó mozgás során a test pontjai (a tengely pontjait kivéve) koncentrikus körpályákat írnak le a forgástengely körül. ✅ Megoldás: A test pontjai a forgástengely körül körpályán mozognak."
+            },
+            {
+                question: "Egy focilabda repül a kapu felé, miközben pörög. Milyen mozgást végez?",
+                answers: { a: "Csak forgó mozgást.", b: "Haladó és forgó mozgás összegét (általános mozgást).", c: "Csak haladó mozgást." },
+                correctAnswer: 'b',
+                explanation: "A labda súlypontja egy görbe vonalú pályán halad a kapu felé (ez a haladó mozgás), miközben a labda a súlypontja körül forog is. Ez a két mozgás együtt adja a labda általános mozgását. ✅ Megoldás: Haladó és forgó mozgás összegét (általános mozgást)."
+            },
+            {
+                question: "Egy csúszdán lecsúszó gyerek...",
+                answers: { a: "...forgó mozgást végez.", b: "...haladó mozgást végez.", c: "...nyugalomban van." },
+                correctAnswer: 'b',
+                explanation: "A csúszdán lecsúszó gyerek teste nem forog, hanem a csúszda pályáját követve halad. Ez egy görbe vonalú haladó mozgás. ✅ Megoldás: ...haladó mozgást végez."
+            },
+            {
+                question: "Egy ajtó a zsanérjai körül...",
+                answers: { a: "...haladó mozgást végez.", b: "...forgó mozgást végez.", c: "...általános mozgást végez." },
+                correctAnswer: 'b',
+                explanation: "Az ajtó nyitásakor és csukásakor a zsanérok által meghatározott függőleges egyenes körül forog. Ez egy tiszta forgó mozgás. ✅ Megoldás: ...forgó mozgást végez."
+            },
+            {
+                question: "Melyik állítás igaz a forgó mozgást végző merev test pontjaira?",
+                answers: { a: "Mindegyik pont sebessége ugyanakkora.", b: "A forgástengelytől távolabbi pontok sebessége nagyobb.", c: "A forgástengelyhez közelebbi pontok sebessége nagyobb." },
+                correctAnswer: 'b',
+                explanation: "Bár a test minden pontja ugyanakkora szögsebességgel forog, a kerületi sebességük a tengelytől mért távolságtól függ. A távolabbi pontoknak ugyanannyi idő alatt nagyobb utat kell megtenniük, ezért a sebességük is nagyobb. ✅ Megoldás: A forgástengelytől távolabbi pontok sebessége nagyobb."
+            },
+            {
+                question: "Mi a rotáció?",
+                answers: { a: "A haladó mozgás másik neve.", b: "A forgó mozgás másik neve.", c: "Az erő mértékegysége." },
+                correctAnswer: 'b',
+                explanation: "A rotáció a tiszta forgó mozgás tudományos, latin eredetű elnevezése. ✅ Megoldás: A forgó mozgás másik neve."
+            },
+            {
+                question: "Milyen mozgást végez egy Föld körül keringő műhold?",
+                answers: { a: "Csak forgó mozgást.", b: "Haladó mozgást.", c: "Nyugalomban van." },
+                correctAnswer: 'b',
+                explanation: "A műhold a Föld körül kering, a súlypontja egy körpályán halad. Ez egy haladó mozgás (görbe vonalú). Ha a műhold a saját tengelye körül is forogna, akkor lenne általános mozgása. ✅ Megoldás: Haladó mozgást."
+            },
+            {
+                question: "Egy fiók kihúzásakor a fiók...",
+                answers: { a: "...forgó mozgást végez.", b: "...haladó mozgást végez.", c: "...általános mozgást végez." },
+                correctAnswer: 'b',
+                explanation: "A fiók minden pontja egyenes vonalban, párhuzamosan mozdul el, nem forog. Ez egy tiszta, egyenes vonalú haladó mozgás. ✅ Megoldás: ...haladó mozgást végez."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Hogyan írható le a merev testek mozgása a legegyszerűbben?",
+                answers: { a: "Minden pontját külön kell vizsgálni.", b: "Csak a forgását kell nézni.", c: "Haladó és forgó mozgások összegeként." },
+                correctAnswer: 'c',
+                explanation: "A merev testek mozgásának leírását leegyszerűsíti, ha azt két alapmozgás, a haladó (transzlációs) és a forgó (rotációs) mozgás kombinációjaként kezeljük. ✅ Megoldás: Haladó és forgó mozgások összegeként."
+            },
+            {
+                question: "Egy feldobott, pörgő kulcscsomó mozgása...",
+                answers: { a: "...tiszta forgás.", b: "...tiszta haladás.", c: "...általános mozgás." },
+                correctAnswer: 'c',
+                explanation: "A kulcscsomó súlypontja egy parabolaíven halad (haladó mozgás), miközben a kulcscsomó a súlypontja körül forog is. Ez a két mozgás együtt egy általános, összetett mozgást eredményez. ✅ Megoldás: ...általános mozgás."
+            },
+            {
+                question: "Melyik test NEM tekinthető merev testnek?",
+                answers: { a: "Egy acélgolyó", b: "Egy biliárdasztal", c: "Egy pohár víz" },
+                correctAnswer: 'c',
+                explanation: "A víz folyadék, ezért felveszi az edény alakját és az egyes részecskéi könnyen elmozdulnak egymáshoz képest. A folyadékok nem merev testek. Az acélgolyó és az asztal jó közelítéssel merev testnek tekinthető. ✅ Megoldás: Egy pohár víz."
+            },
+            {
+                question: "A Föld Nap körüli keringése...",
+                answers: { a: "...egy tiszta forgó mozgás.", b: "...egy nyugalmi állapot.", c: "...egy haladó mozgás (keringés)." },
+                correctAnswer: 'c',
+                explanation: "Bár a Föld forog a saját tengelye körül, a Nap körüli mozgása egy keringő, haladó mozgás. A Föld súlypontja egy ellipszispályán halad. A Föld teljes mozgása tehát egy általános mozgás. ✅ Megoldás: ...egy haladó mozgás (keringés)."
+            },
+            {
+                question: "Melyik állítás HAMIS a merev testekre?",
+                answers: { a: "Mozgásuk haladó és forgó mozgásból tevődik össze.", b: "Nincs két olyan pontjuk, melyek távolsága változna.", c: "Minden pontjuk mindig azonos sebességgel mozog." },
+                correctAnswer: 'c',
+                explanation: "Ez az állítás hamis. Forgó mozgásnál a tengelytől távolabbi pontoknak nagyobb a kerületi sebessége. Általános mozgásnál pedig a haladó és forgó mozgás sebességei összeadódnak, ami pontról pontra eltérő eredő sebességet ad. ✅ Megoldás: Minden pontjuk mindig azonos sebességgel mozog."
+            },
+            {
+                question: "Melyik pontja van nyugalomban egy forgó merev testnek?",
+                answers: { a: "A leggyorsabb pontja.", b: "A leglassabb pontja.", c: "A forgástengely pontjai." },
+                correctAnswer: 'c',
+                explanation: "A forgó mozgás definíciója szerint a forgástengely az a vonal, amelynek pontjai a forgás során helyben maradnak, tehát nyugalomban vannak a forgó rendszerhez képest. ✅ Megoldás: A forgástengely pontjai."
+            },
+            {
+                question: "Egy feldobott kalapács súlypontja...",
+                answers: { a: "...bonyolult, imbolygó mozgást végez.", b: "...egyenes vonalban mozog.", c: "...egy egyszerű parabolaívet ír le." },
+                correctAnswer: 'c',
+                explanation: "Bár a kalapács bonyolult forgó-bukdácsoló mozgást végez, a tömegközéppontja (súlypontja) ugyanúgy mozog, mintha egy egyszerű, nem forgó pontszerű test lenne: egy szabályos parabolaíven (hajítási görbén). ✅ Megoldás: ...egy egyszerű parabolaívet ír le."
+            },
+            {
+                question: "Milyen mozgást végeznek egy körhinta székei?",
+                answers: { a: "Egyenes vonalú haladó mozgást.", b: "Általános mozgást.", c: "Körpályán történő haladó mozgást." },
+                correctAnswer: 'c',
+                explanation: "A körhinta székei úgy mozognak, hogy közben nem fordulnak el (mindig ugyanabba az irányba néznek). A pályájuk kör, de a mozgásuk tiszta haladó mozgás, mert minden pontjuk azonos pályát ír le. ✅ Megoldás: Körpályán történő haladó mozgást."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButtons = document.querySelectorAll('.check-button');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const resultsContainers = document.querySelectorAll('.results');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers(event) {
+            // Find which control panel triggered the event
+            const currentPanel = event.target.closest('.control-panel');
+            const pinInput = currentPanel.querySelector('.pin-input');
+            const pin = pinInput.value;
+            
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Érvénytelen PIN kód!";
+                    container.style.color = '#D50000';
+                });
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainers.forEach(container => {
+                    container.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                    container.style.color = 'orange';
+                });
+                return;
+            }
+            
+            resultsContainers.forEach(container => container.style.color = '#333');
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainers.forEach(container => container.textContent = "Minden válasz és magyarázat felfedve.");
+                adminPanels.forEach(panel => {
+                    panel.style.display = 'block';
+                    panel.querySelector('.dist-a').textContent = internalCorrectAnswers.a;
+                    panel.querySelector('.dist-b').textContent = internalCorrectAnswers.b;
+                    panel.querySelector('.dist-c').textContent = internalCorrectAnswers.c;
+                });
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainers.forEach(container => {
+                    container.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+                });
+            }
+        }
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Pass the event to the handler to identify the correct panel
+                    checkAnswers(event);
+                }
+            });
+             // Sync PIN inputs
+            input.addEventListener('input', (e) => {
+                pinInputs.forEach(otherInput => {
+                    if (otherInput !== e.target) {
+                        otherInput.value = e.target.value;
+                    }
+                });
+            });
+        });
+
+        checkButtons.forEach(button => {
+            button.addEventListener('click', checkAnswers);
+        });
+
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

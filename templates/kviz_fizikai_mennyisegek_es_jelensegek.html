@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyakorló Kvíz - Fizikai mennyiségek és jelenségek</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #D50000; /* Piros */
+            text-align: center;
+            border-bottom: 2px solid #D50000; /* Piros */
+            padding-bottom: 10px;
+        }
+        #quiz-container {
+            background-color: #ffffff; /* Fehér */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .options-container label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+        }
+        .options-container label:hover {
+            background-color: #f9f9f9;
+        }
+        .options-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9; /* Világos zöld */
+            border-left: 4px solid #008751; /* Zöld */
+            border-radius: 4px;
+        }
+        #control-panel {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff; /* Fehér */
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        #pin-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        #check-button {
+            padding: 10px 20px;
+            background-color: #D50000; /* Piros */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        #check-button:hover {
+            background-color: #a30000; /* Sötétebb piros */
+        }
+        #results {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Színkódok a kiértékeléshez */
+        .correct-answer-reveal {
+            background-color: #c8e6c9 !important; /* Zöld */
+            border-color: #008751 !important; /* Zöld */
+        }
+        .student-incorrect {
+            background-color: #f8d7da !important; /* Piros */
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbe6;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gyakorló Kvíz: Fizikai mennyiségek és jelenségek</h1>
+
+    <div id="control-panel">
+        <input type="password" id="pin-input" placeholder="PIN kód">
+        <button id="check-button">Ellenőrzés</button>
+        <div id="results"></div>
+        <div id="admin-panel" class="admin-panel">
+            <h3>Adminisztrációs Panel</h3>
+            <p>A helyes válaszok és a magarázatok feloldva.</p>
+            <p>Helyes válaszok eloszlása (a/b/c): <span id="dist-a"></span> / <span id="dist-b"></span> / <span id="dist-c"></span></p>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- A kvízkérdések ide generálódnak -->
+    </div>
+
+    <script>
+        const quizData = [
+            // Kérdések 'a' helyes válasszal (8 db)
+            {
+                question: "Melyik a fizikai jelenség?",
+                answers: { a: "A víz forrása", b: "A hőmérséklet", c: "A tömeg" },
+                correctAnswer: 'a',
+                explanation: "A fizikai jelenség egy folyamat vagy történés, mint például a víz forrása. A hőmérséklet és a tömeg fizikai mennyiségek, amelyekkel a testek állapotát vagy tulajdonságait jellemezzük. ✅ Megoldás: A víz forrása."
+            },
+            {
+                question: "Melyik fizikai mennyiségnek van iránya is a nagyságán kívül?",
+                answers: { a: "Vektormennyiség", b: "Skalármennyiség", c: "Alapmennyiség" },
+                correctAnswer: 'a',
+                explanation: "A vektormennyiségeket a nagyságuk és az irányuk is jellemzi. Ilyen például az erő vagy a sebesség. A skalármennyiségeknek csak nagyságuk van. ✅ Megoldás: Vektormennyiség."
+            },
+            {
+                question: "Melyik NEM skalármennyiség?",
+                answers: { a: "Gyorsulás", b: "Idő", c: "Térfogat" },
+                correctAnswer: 'a',
+                explanation: "A gyorsulásnak van iránya (pl. a Föld középpontja felé), ezért vektormennyiség. Az időnek és a térfogatnak csak nagysága van, ezért skalármennyiségek. ✅ Megoldás: Gyorsulás."
+            },
+            {
+                question: "Mit jelent a 'modell' a fizikában?",
+                answers: { a: "Egy valós jelenség vagy rendszer egyszerűsített leírása.", b: "Egy bonyolult matematikai képlet.", c: "Egy híres fizikus." },
+                correctAnswer: 'a',
+                explanation: "A fizikai modellek segítenek megérteni a bonyolult valóságot azáltal, hogy a lényeges tulajdonságokra fókuszálnak és elhanyagolják a kevésbé fontosakat. Például a pontszerű test modellje. ✅ Megoldás: Egy valós jelenség vagy rendszer egyszerűsített leírása."
+            },
+            {
+                question: "Melyik csoportban vannak CSAK fizikai mennyiségek?",
+                answers: { a: "Hosszúság, tömeg, erő", b: "Esőzés, villámlás, szél", c: "Erő, esőzés, sebesség" },
+                correctAnswer: 'a',
+                explanation: "A hosszúság, a tömeg és az erő mind mérhető fizikai tulajdonságok, tehát mennyiségek. Az esőzés, villámlás és szél folyamatok, azaz fizikai jelenségek. ✅ Megoldás: Hosszúság, tömeg, erő."
+            },
+            {
+                question: "Mi a kísérletezés célja a fizikában?",
+                answers: { a: "Egy elmélet (hipotézis) igazolása vagy cáfolása.", b: "Csak a szórakoztatás.", c: "Már ismert törvények megismétlése." },
+                correctAnswer: 'a',
+                explanation: "A kísérlet a tudományos módszer kulcsfontosságú lépése, amelynek során ellenőrzött körülmények között vizsgálunk egy jelenséget, hogy egy feltevés (hipotézis) helytállóságáról meggyőződjünk. ✅ Megoldás: Egy elmélet (hipotézis) igazolása vagy cáfolása."
+            },
+            {
+                question: "A Föld körül keringő Hold mozgása...",
+                answers: { a: "...egy fizikai jelenség.", b: "...egy fizikai mennyiség.", c: "...egy fizikai modell." },
+                correctAnswer: 'a',
+                explanation: "A Hold mozgása egy a természetben megfigyelhető folyamat, történés, ezért fizikai jelenségnek nevezzük. ✅ Megoldás: ...egy fizikai jelenség."
+            },
+            {
+                question: "A Pitagorasz-tétel...",
+                answers: { a: "...egy metrikus összefüggés.", b: "...egy fizikai jelenség.", c: "...egy fizikai kísérlet." },
+                correctAnswer: 'a',
+                explanation: "A Pitagorasz-tétel egy matematikai (geometriai) tétel, amely a derékszögű háromszögek oldalainak hossza közötti kapcsolatot írja le. Az ilyen, mérésen alapuló kapcsolatokat metrikus összefüggéseknek is nevezzük. ✅ Megoldás: ...egy metrikus összefüggés."
+            },
+            // Kérdések 'b' helyes válasszal (9 db)
+            {
+                question: "Melyik a fizikai mennyiség?",
+                answers: { a: "A jég olvadása", b: "A sebesség", c: "A hang terjedése" },
+                correctAnswer: 'b',
+                explanation: "A sebesség egy mérhető tulajdonság (mennyiség), míg a jég olvadása és a hang terjedése folyamatok (jelenségek). ✅ Megoldás: A sebesség."
+            },
+            {
+                question: "Melyik NEM vektormennyiség?",
+                answers: { a: "Erő", b: "Hőmérséklet", c: "Elmozdulás" },
+                correctAnswer: 'b',
+                explanation: "A hőmérsékletnek csak nagysága van (pl. 25 °C), nincs iránya, ezért skalármennyiség. Az erőnek és az elmozdulásnak iránya is van. ✅ Megoldás: Hőmérséklet."
+            },
+            {
+                question: "Mit csinálunk a kísérlet során a hipotézissel?",
+                answers: { a: "Figyelmen kívül hagyjuk.", b: "Ellenőrizzük az igazságtartalmát.", c: "Megváltoztatjuk az eredményekhez." },
+                correctAnswer: 'b',
+                explanation: "A hipotézis egy tudományos feltevés, egy lehetséges magyarázat a jelenségre. A kísérlet célja, hogy adatokat gyűjtsünk, amelyek vagy alátámasztják, vagy megcáfolják ezt a feltevést. ✅ Megoldás: Ellenőrizzük az igazságtartalmát."
+            },
+            {
+                question: "Melyik csoportban vannak CSAK fizikai jelenségek?",
+                answers: { a: "Hosszúság, tömeg, idő", b: "Szivárvány, napfogyatkozás, dörgés", c: "Sűrűség, villámlás, erő" },
+                correctAnswer: 'b',
+                explanation: "A szivárvány, a napfogyatkozás és a dörgés mind a természetben megfigyelhető folyamatok, tehát jelenségek. Az 'a' opcióban csak mennyiségek, a 'c' opcióban pedig vegyesen vannak. ✅ Megoldás: Szivárvány, napfogyatkozás, dörgés."
+            },
+            {
+                question: "A 'pontszerű test' a fizikában...",
+                answers: { a: "...egy nagyon kicsi test.", b: "...egy modell, ahol a test kiterjedését elhanyagoljuk.", c: "...egy valóságban nem létező fogalom." },
+                correctAnswer: 'b',
+                explanation: "A pontszerű test egy rendkívül hasznos fizikai modell. Akkor alkalmazzuk, ha a test mérete sokkal kisebb, mint az általa megtett út vagy más, a jelenségben szereplő távolság. Ilyenkor a testet egyetlen tömegpontként kezelhetjük. ✅ Megoldás: ...egy modell, ahol a test kiterjedését elhanyagoljuk."
+            },
+            {
+                question: "Melyik a skalármennyiség?",
+                answers: { a: "Erő", b: "Tömeg", c: "Sebesség" },
+                correctAnswer: 'b',
+                explanation: "A tömegnek csak nagysága van (pl. 10 kg), iránya nincs, ezért skalármennyiség. Az erőnek és a sebességnek van iránya is. ✅ Megoldás: Tömeg."
+            },
+            {
+                question: "Mi a kísérlet első lépése?",
+                answers: { a: "A következtetés levonása.", b: "A probléma megfogalmazása, a kérdés feltevése.", c: "Az eszközök elpakolása." },
+                correctAnswer: 'b',
+                explanation: "Minden tudományos vizsgálat egy megfigyeléssel és az abból fakadó kérdéssel kezdődik. Meg kell fogalmaznunk, hogy pontosan mit szeretnénk megvizsgálni. ✅ Megoldás: A probléma megfogalmazása, a kérdés feltevése."
+            },
+            {
+                question: "Melyik állítás írja le helyesen a fizika és a matematika kapcsolatát?",
+                answers: { a: "A két tudomány teljesen független egymástól.", b: "A matematika a fizika 'nyelve', eszköze a jelenségek leírására.", c: "A fizika a matematika egyik ága." },
+                correctAnswer: 'b',
+                explanation: "A fizika a természet törvényeit vizsgálja, a matematika pedig egy absztrakt, logikai rendszer. A fizikusok a matematika eszközeit, képleteit és összefüggéseit használják, hogy a fizikai törvényeket pontosan és egyértelműen leírhassák. ✅ Megoldás: A matematika a fizika 'nyelve', eszköze a jelenségek leírására."
+            },
+            {
+                question: "Melyik a vektormennyiség?",
+                answers: { a: "Térfogat", b: "Elmozdulás", c: "Hosszúság" },
+                correctAnswer: 'b',
+                explanation: "Az elmozdulás egy vektormennyiség, mert nemcsak a megtett út hossza számít, hanem az iránya is (pl. 5 métert tett meg kelet felé). A térfogatnak és a hosszúságnak (mint távolságnak) csak nagysága van. ✅ Megoldás: Elmozdulás."
+            },
+            // Kérdések 'c' helyes válasszal (8 db)
+            {
+                question: "Melyik NEM fizikai mennyiség?",
+                answers: { a: "Erő", b: "Tömeg", c: "Szépség" },
+                correctAnswer: 'c',
+                explanation: "A fizikai mennyiségek objektíven mérhetők. A szépség egy szubjektív, esztétikai fogalom, nincs általánosan elfogadott mérési módja vagy mértékegysége. ✅ Megoldás: Szépség."
+            },
+            {
+                question: "Melyik NEM fizikai jelenség?",
+                answers: { a: "A Föld keringése a Nap körül", b: "Egy test leesése", c: "Az idő múlása" },
+                correctAnswer: 'c',
+                explanation: "Bár az idő múlása alapvető a fizikában, maga nem egy megfigyelhető folyamat vagy esemény, hanem a jelenségek lejátszódásának kerete. Az idő egy alapvető fizikai mennyiség. A Föld keringése és egy test esése konkrét, megfigyelhető folyamatok, tehát jelenségek. ✅ Megoldás: Az idő múlása."
+            },
+            {
+                question: "Egy autó sebességmérője 50 km/h-t mutat. Ez az adat...",
+                answers: { a: "...egy vektormennyiség.", b: "...egy fizikai jelenség.", c: "...egy skalármennyiség." },
+                correctAnswer: 'c',
+                explanation: "Bár a sebesség vektormennyiség (van iránya), az autó sebességmérője csak a sebesség nagyságát mutatja, az irányát nem. A sebesség nagyságát skalárként kezeljük. ✅ Megoldás: ...egy skalármennyiség."
+            },
+            {
+                question: "A tudományos elmélet...",
+                answers: { a: "...egy egyszerű tipp vagy ötlet.", b: "...egy megcáfolt hipotézis.", c: "...egy sok kísérlettel alátámasztott, jól bevált magyarázat." },
+                correctAnswer: 'c',
+                explanation: "A tudományos elmélet egy átfogó magyarázó rendszer, amely számos kísérlet és megfigyelés eredményét foglalja össze és magyarázza meg. Sokkal több, mint egy egyszerű feltevés. ✅ Megoldás: ...egy sok kísérlettel alátámasztott, jól bevált magyarázat."
+            },
+            {
+                question: "Mi a mérés?",
+                answers: { a: "Egy test tulajdonságainak megváltoztatása.", b: "Egy jelenség megfigyelése.", c: "Egy fizikai mennyiség összehasonlítása a mértékegységével." },
+                correctAnswer: 'c',
+                explanation: "A mérés során megállapítjuk, hogy egy adott fizikai mennyiség hányszorosa a választott mértékegységnek. Az eredmény egy mérőszámból és egy mértékegységből áll. ✅ Megoldás: Egy fizikai mennyiség összehasonlítása a mértékegységével."
+            },
+            {
+                question: "Ha egy fizikai mennyiséget csak egy szám jellemez, az...",
+                answers: { a: "...vektormennyiség.", b: "...mindig alapmennyiség.", c: "...skalármennyiség." },
+                correctAnswer: 'c',
+                explanation: "A skalármennyiségeket teljesen meghatározza a nagyságuk, amit egy számértékkel és egy mértékegységgel adunk meg. Nincs szükség az irány megadására. ✅ Megoldás: ...skalármennyiség."
+            },
+            {
+                question: "A fizika tudománya mivel foglalkozik?",
+                answers: { a: "Az élő szervezetekkel.", b: "Az anyagok átalakulásával.", c: "Az élettelen természet alapvető törvényeivel." },
+                correctAnswer: 'c',
+                explanation: "A fizika az élettelen természetet, az anyagot, az energiát és a köztük lévő kölcsönhatásokat, valamint az ezeket leíró alapvető törvényeket vizsgálja. ✅ Megoldás: Az élettelen természet alapvető törvényeivel."
+            },
+            {
+                question: "Melyik eszköz NEM fizikai mérésre szolgál?",
+                answers: { a: "Vonalzó", b: "Stopperóra", c: "Toll" },
+                correctAnswer: 'c',
+                explanation: "A vonalzó a hosszúság, a stopperóra az idő mérésére szolgál. A toll írásra való eszköz, nem mérőeszköz. ✅ Megoldás: Toll."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const checkButton = document.getElementById('check-button');
+        const pinInput = document.getElementById('pin-input');
+        const resultsContainer = document.getElementById('results');
+        const adminPanel = document.getElementById('admin-panel');
+
+        let shuffledQuizData = [];
+        let internalCorrectAnswers = { a: 0, b: 0, c: 0 };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizData.forEach(q => {
+                internalCorrectAnswers[q.correctAnswer]++;
+            });
+
+            shuffledQuizData = [...quizData];
+            shuffleArray(shuffledQuizData);
+            
+            let quizHTML = '';
+            shuffledQuizData.forEach((q, index) => {
+                quizHTML += `<div class="question-block" id="q-${index}">`;
+                quizHTML += `<div class="question-text">${index + 1}. ${q.question}</div>`;
+                quizHTML += `<div class="options-container">`;
+
+                const options = Object.entries(q.answers);
+                shuffleArray(options);
+
+                options.forEach(([key, value]) => {
+                    quizHTML += `<label>
+                                    <input type="radio" name="question${index}" value="${key}">
+                                    ${value}
+                                 </label>`;
+                });
+
+                quizHTML += `</div>`;
+                quizHTML += `<div class="explanation" id="exp-${index}">${q.explanation}</div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function checkAnswers() {
+            const pin = pinInput.value;
+            const isMasterPin = pin === '121909';
+            const isStudentPin = pin >= 100001 && pin <= 100020;
+            let score = 0;
+            let allAnswered = true;
+
+            if (!isMasterPin) {
+                 for (let i = 0; i < shuffledQuizData.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+            }
+           
+            if (!isMasterPin && !isStudentPin) {
+                resultsContainer.textContent = "Érvénytelen PIN kód!";
+                resultsContainer.style.color = '#D50000';
+                return;
+            }
+
+            if (!allAnswered && !isMasterPin) {
+                resultsContainer.textContent = "Kérlek, válaszold meg az összes kérdést az ellenőrzés előtt!";
+                resultsContainer.style.color = 'orange';
+                return;
+            }
+            resultsContainer.style.color = '#333'; // Reset color
+
+            shuffledQuizData.forEach((q, index) => {
+                const explanation = document.getElementById(`exp-${index}`);
+                explanation.style.display = 'block';
+
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                document.querySelectorAll(`input[name="question${index}"]`).forEach(option => {
+                    const label = option.parentElement;
+                    option.disabled = true;
+
+                    // Reveal the correct answer for everyone
+                    if (option.value === q.correctAnswer) {
+                        label.classList.add('correct-answer-reveal');
+                    }
+                    
+                    // Color student's specific choice if a student PIN is used
+                    if(isStudentPin && selectedOption && selectedOption === option){
+                        if(selectedOption.value !== q.correctAnswer){
+                             label.classList.add('student-incorrect');
+                        }
+                    }
+                });
+                
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            if(isMasterPin){
+                resultsContainer.textContent = "Minden válasz és magyarázat felfedve.";
+                adminPanel.style.display = 'block';
+                document.getElementById('dist-a').textContent = internalCorrectAnswers.a;
+                document.getElementById('dist-b').textContent = internalCorrectAnswers.b;
+                document.getElementById('dist-c').textContent = internalCorrectAnswers.c;
+            }
+
+            if(isStudentPin){
+                const percentage = Math.round((score / shuffledQuizData.length) * 100);
+                resultsContainer.innerHTML = `Eredményed: ${score} / ${shuffledQuizData.length} (${percentage}%)`;
+            }
+        }
+        
+        pinInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                checkButton.click(); // Simulate a button click
+            }
+        });
+
+        checkButton.addEventListener('click', checkAnswers);
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+</body>
+</html>

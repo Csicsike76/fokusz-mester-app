@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Gyakorló Kvíz – Másodfokú egyenletek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green: #28a745; --green-dark: #1e7e34;
+      --red: #dc3545; --red-dark: #c82333;
+      --blue: #007bff; --blue-dark: #0056b3;
+      --light: #f8f9fa; --dark: #343a40;
+      --master: #ff6b35;
+    }
+    * { box-sizing:border-box; margin:0; padding:0 }
+    body { font-family:Roboto,sans-serif; background:var(--light); color:var(--dark); line-height:1.6; padding:1rem }
+    .header { background:linear-gradient(135deg,var(--blue),var(--blue-dark)); color:#fff; text-align:center; padding:2rem; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,.1) }
+    .header h1 { font-size:2rem; margin-bottom:.5rem }
+    .header .subtitle { font-size:1.1rem; opacity:.9 }
+    .pin-area { background:#fff; border:2px solid var(--blue); border-radius:8px; padding:1.5rem; max-width:360px; margin:2rem auto; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.06) }
+    .pin-area h3 { margin-bottom:.5rem; font-size:1rem; font-weight:500 }
+    .pin-area p { margin-bottom:1rem; font-size:.95rem }
+    .pin-area input { padding:.6rem; border:2px solid #ddd; border-radius:6px; width:120px; text-align:center; font-size:1rem; margin-bottom:1rem }
+    .btn { display:inline-block; background:var(--blue); color:#fff; padding:.6rem 1rem; border:none; border-radius:6px; cursor:pointer; font-size:1rem; transition:.2s }
+    .btn:hover { background:var(--blue-dark) }
+    .btn-master { background:var(--master); display:none }
+    .btn-master:hover { background:#e55a2b }
+    .master-mode { background:var(--master); color:#fff; padding:.6rem 1rem; border-radius:20px; margin:1rem 0; text-align:center; font-weight:600; display:none; animation:pulse 2s infinite }
+    @keyframes pulse { 0%{opacity:1} 50%{opacity:.7} 100%{opacity:1} }
+    .progress-bar { background:#e9ecef; height:6px; border-radius:3px; margin:1rem 0; overflow:hidden }
+    .progress-fill { background:var(--blue); height:100%; width:0; transition:width .3s ease }
+    .question { background:#fff; border:1px solid #e1e8ed; border-radius:8px; padding:1rem; margin-bottom:1.2rem; box-shadow:0 2px 8px rgba(0,0,0,.06) }
+    .question h3 { font-size:1rem; margin-bottom:.5rem }
+    .answer-option { display:block; padding:.6rem; margin:.4rem 0; border-radius:6px; cursor:pointer; border:2px solid transparent; position:relative; transition:.2s }
+    .answer-option:hover { background:#f1f3f4; border-color:#e8eaed }
+    .answer-option input { margin-right:.6rem; transform:scale(1.1) }
+    .explanation { display:none; margin-top:.5rem; padding:1rem; background:#e8f4f8; border-left:4px solid var(--blue); border-radius:4px; font-size:.9rem; line-height:1.6 }
+    .explanation.show { display:block }
+    .correct { background:var(--green)!important; color:#fff!important; border-color:var(--green-dark)!important }
+    .correct::after { content:"✅"; position:absolute; right:10px; top:50%; transform:translateY(-50%) }
+    .wrong { background:var(--red)!important; color:#fff!important; border-color:var(--red-dark)!important }
+    .wrong::after { content:"❌"; position:absolute; right:10px; top:50%; transform:translateY(-50%) }
+    .master-correct { background:var(--green)!important; color:#fff!important; border-color:var(--green-dark)!important }
+    .master-correct::after { content:"🎯"; position:absolute; right:10px; top:50%; transform:translateY(-50%) }
+    .score-box { display:none; background:#fff; border:3px solid var(--green); border-radius:10px; padding:1.5rem; text-align:center; margin:2rem 0 }
+    .score-box h2 { color:var(--green-dark); margin-bottom:.5rem }
+    .score-box .score { font-size:2rem; font-weight:700; color:var(--green) }
+    .admin-panel { display:none; background:#f8f9fa; border:2px dashed var(--master); border-radius:8px; padding:1rem; margin:2rem 0 }
+    .admin-panel h3 { color:var(--master); margin-bottom:.5rem }
+    .admin-panel pre { background:#fff; padding:.8rem; border-radius:4px; border:1px solid #ddd; max-height:200px; overflow-y:auto; font-size:.85rem }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🎯 Gyakorló Kvíz</h1>
+    <p class="subtitle">ax² + bx + c = 0 egyenletekkel megoldható feladatok</p>
+  </div>
+
+  <div class="pin-area">
+    <h3>🔐 PIN-kód ellenőrzés</h3>
+    <p>Írd be a 6 számjegyű PIN-kódot, majd Enter vagy „Ellenőrzés"!</p>
+    <input type="text" id="pinInput" maxlength="6" placeholder="PIN-kód"/>
+    <br><br>
+    <button type="button" class="btn" id="checkBtn">🔍 Ellenőrzés</button>
+    <button type="button" class="btn btn-master" id="masterBtn">🔑 Mester kiértékelés</button>
+  </div>
+
+  <div class="master-mode" id="masterMode">🔑 MESTER MÓD AKTÍV – helyes válaszok jelölve</div>
+  <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
+
+  <form id="quizForm" autocomplete="off">
+
+    <!-- 1 (a) -->
+    <div class="question" data-answer="a">
+      <h3>1. Oldd meg: x² − 7x + 10 = 0</h3>
+      <label class="answer-option"><input type="radio" name="q1" value="a">{2, 5}</label>
+      <label class="answer-option"><input type="radio" name="q1" value="b">{−2, −5}</label>
+      <label class="answer-option"><input type="radio" name="q1" value="c">{1, 10}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a következő másodfokú egyenletet:</strong><br>
+        x² − 7x + 10 = 0<br><br>
+        
+        🔹 <strong>1. Általános alak</strong><br>
+        Ez egy másodfokú egyenlet: ax² + bx + c = 0<br>
+        ahol: a = 1, b = −7, c = 10<br><br>
+        
+        🔹 <strong>2. Szorzatra bontás módszer</strong><br>
+        Keresünk két számot, amelyek:<br>
+        • összege = 7 (mivel b = −7)<br>
+        • szorzata = 10 (mivel c = 10)<br><br>
+        
+        🔹 <strong>3. A számok megtalálása</strong><br>
+        2 + 5 = 7 ✓<br>
+        2 × 5 = 10 ✓<br><br>
+        
+        🔹 <strong>4. Faktorizálás</strong><br>
+        x² − 7x + 10 = (x − 2)(x − 5) = 0<br><br>
+        
+        ✅ <strong>Megoldás:</strong><br>
+        x − 2 = 0 → x = 2<br>
+        x − 5 = 0 → x = 5<br><br>
+        
+        <strong>Ellenőrzés:</strong><br>
+        x = 2: 4 − 14 + 10 = 0 ✓<br>
+        x = 5: 25 − 35 + 10 = 0 ✓
+      </div>
+    </div>
+
+    <!-- 2 (b) -->
+    <div class="question" data-answer="b">
+      <h3>2. Megoldás: 2x² + 5x + 2 = 0</h3>
+      <label class="answer-option"><input type="radio" name="q2" value="a">{−1, −2}</label>
+      <label class="answer-option"><input type="radio" name="q2" value="b">{−2, −0.5}</label>
+      <label class="answer-option"><input type="radio" name="q2" value="c">{2, 0.5}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a következő másodfokú egyenletet:</strong><br>
+        2x² + 5x + 2 = 0<br><br>
+        
+        🔹 <strong>1. Általános alak</strong><br>
+        ahol: a = 2, b = 5, c = 2<br><br>
+        
+        🔹 <strong>2. Megoldóképlet alkalmazása</strong><br>
+        x = (−b ± √(b² − 4ac)) / (2a)<br><br>
+        
+        🔹 <strong>3. Diszkrimináns számítása</strong><br>
+        D = b² − 4ac = 5² − 4×2×2 = 25 − 16 = 9<br><br>
+        
+        🔹 <strong>4. Gyökök számítása</strong><br>
+        x = (−5 ± √9) / (2×2) = (−5 ± 3) / 4<br><br>
+        
+        x₁ = (−5 + 3) / 4 = −2/4 = −0.5<br>
+        x₂ = (−5 − 3) / 4 = −8/4 = −2<br><br>
+        
+        ✅ <strong>Megoldás:</strong> {−2, −0.5}<br><br>
+        
+        <strong>Faktorizált alak:</strong><br>
+        2x² + 5x + 2 = (2x + 1)(x + 2) = 0
+      </div>
+    </div>
+
+    <!-- 3 (a) -->
+    <div class="question" data-answer="a">
+      <h3>3. Oldd meg Δ módszerrel: x² + 4x + 1 = 0</h3>
+      <label class="answer-option"><input type="radio" name="q3" value="a">{−2±√3}</label>
+      <label class="answer-option"><input type="radio" name="q3" value="b">{2±√3}</label>
+      <label class="answer-option"><input type="radio" name="q3" value="c">{−2±√5}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a következő másodfokú egyenletet:</strong><br>
+        x² + 4x + 1 = 0<br><br>
+        
+        🔹 <strong>1. Általános alak</strong><br>
+        ahol: a = 1, b = 4, c = 1<br><br>
+        
+        🔹 <strong>2. Diszkrimináns (Δ) számítása</strong><br>
+        Δ = b² − 4ac = 4² − 4×1×1 = 16 − 4 = 12<br><br>
+        
+        🔹 <strong>3. Δ értékelése</strong><br>
+        Mivel Δ = 12 > 0, az egyenletnek két különböző valós gyöke van.<br><br>
+        
+        🔹 <strong>4. Megoldóképlet</strong><br>
+        x = (−b ± √Δ) / (2a)<br>
+        x = (−4 ± √12) / (2×1)<br>
+        x = (−4 ± √(4×3)) / 2<br>
+        x = (−4 ± 2√3) / 2<br>
+        x = −2 ± √3<br><br>
+        
+        ✅ <strong>Megoldás:</strong><br>
+        x₁ = −2 + √3 ≈ −0.27<br>
+        x₂ = −2 − √3 ≈ −3.73
+      </div>
+    </div>
+
+    <!-- 4 (c) -->
+    <div class="question" data-answer="c">
+      <h3>4. Hol metszi az y-tengelyt a parabola: x² − 3x − 4?</h3>
+      <label class="answer-option"><input type="radio" name="q4" value="a">x = −1 pontnál</label>
+      <label class="answer-option"><input type="radio" name="q4" value="b">x = 4 pontnál</label>
+      <label class="answer-option"><input type="radio" name="q4" value="c">y = −4 pontnál</label>
+      <div class="explanation">
+        <strong>Keressük meg, hol metszi az y-tengelyt a parabola:</strong><br>
+        f(x) = x² − 3x − 4<br><br>
+        
+        🔹 <strong>1. Y-tengely metszéspont meghatározása</strong><br>
+        Az y-tengelyen x = 0, ezért helyettesítsük be x = 0-t:<br><br>
+        
+        🔹 <strong>2. Behelyettesítés</strong><br>
+        f(0) = 0² − 3×0 − 4<br>
+        f(0) = 0 − 0 − 4<br>
+        f(0) = −4<br><br>
+        
+        🔹 <strong>3. Eredmény értelmezése</strong><br>
+        A parabola az y-tengelyt az (0, −4) pontban metszi.<br><br>
+        
+        ✅ <strong>Válasz:</strong> y = −4 pontnál<br><br>
+        
+        📌 <strong>Megjegyzés:</strong><br>
+        Általában az y-tengely metszéspont koordinátája mindig a "c" konstans tag értéke a másodfokú függvényben.
+      </div>
+    </div>
+
+    <!-- 5 (a) -->
+    <div class="question" data-answer="a">
+      <h3>5. Megoldás: 3x² − 12 = 0</h3>
+      <label class="answer-option"><input type="radio" name="q5" value="a">{±2}</label>
+      <label class="answer-option"><input type="radio" name="q5" value="b">{±4}</label>
+      <label class="answer-option"><input type="radio" name="q5" value="c">{±√12}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a következő egyenletet:</strong><br>
+        3x² − 12 = 0<br><br>
+        
+        🔹 <strong>1. Egyszerűsítés</strong><br>
+        3x² = 12<br>
+        x² = 12/3<br>
+        x² = 4<br><br>
+        
+        🔹 <strong>2. Négyzetgyök vétele</strong><br>
+        √(x²) = ±√4<br>
+        x = ±2<br><br>
+        
+        ✅ <strong>Megoldás:</strong> {+2, −2}<br><br>
+        
+        <strong>Ellenőrzés:</strong><br>
+        x = 2: 3×4 − 12 = 12 − 12 = 0 ✓<br>
+        x = −2: 3×4 − 12 = 12 − 12 = 0 ✓<br><br>
+        
+        📌 <strong>Megjegyzés:</strong><br>
+        Ez egy hiányos másodfokú egyenlet (nincs benne x tag), ezért közvetlen négyzetgyökvonással oldható meg.
+      </div>
+    </div>
+
+    <!-- 6 (b) -->
+    <div class="question" data-answer="b">
+      <h3>6. Hol van a csúcs: x² − 6x + 5?</h3>
+      <label class="answer-option"><input type="radio" name="q6" value="a">(3, 5)</label>
+      <label class="answer-option"><input type="radio" name="q6" value="b">(3, −4)</label>
+      <label class="answer-option"><input type="radio" name="q6" value="c">(−3, 4)</label>
+      <div class="explanation">
+        <strong>Keressük meg a parabola csúcspontját:</strong><br>
+        f(x) = x² − 6x + 5<br><br>
+        
+        🔹 <strong>1. Általános alak</strong><br>
+        ahol: a = 1, b = −6, c = 5<br><br>
+        
+        🔹 <strong>2. Csúcs x-koordinátája</strong><br>
+        x₀ = −b/(2a) = −(−6)/(2×1) = 6/2 = 3<br><br>
+        
+        🔹 <strong>3. Csúcs y-koordinátája</strong><br>
+        y₀ = f(3) = 3² − 6×3 + 5<br>
+        y₀ = 9 − 18 + 5<br>
+        y₀ = −4<br><br>
+        
+        ✅ <strong>Csúcspont:</strong> (3, −4)<br><br>
+        
+        🔹 <strong>4. Alternatív módszer - teljes négyzet</strong><br>
+        x² − 6x + 5 = (x − 3)² − 9 + 5 = (x − 3)² − 4<br>
+        Ebből látható, hogy a csúcs (3, −4).
+      </div>
+    </div>
+
+    <!-- 7 (a) -->
+    <div class="question" data-answer="a">
+      <h3>7. Milyen típusú megoldás, ha Δ = 0?</h3>
+      <label class="answer-option"><input type="radio" name="q7" value="a">Dupla gyök</label>
+      <label class="answer-option"><input type="radio" name="q7" value="b">Két különböző valós gyök</label>
+      <label class="answer-option"><input type="radio" name="q7" value="c">Nincs valós gyök</label>
+      <div class="explanation">
+        <strong>Diszkrimináns és a gyökök kapcsolata:</strong><br><br>
+        
+        🔹 <strong>Diszkrimináns (Δ) definíciója</strong><br>
+        Δ = b² − 4ac<br><br>
+        
+        🔹 <strong>Ha Δ = 0:</strong><br>
+        • Az egyenletnek pontosan egy valós gyöke van<br>
+        • Ez a gyök "dupla gyök" vagy "kétszeres gyök"<br>
+        • A parabola érinti az x-tengelyt (nem metszi)<br><br>
+        
+        🔹 <strong>Megoldóképlet Δ = 0 esetén</strong><br>
+        x = (−b ± √0)/(2a) = −b/(2a)<br><br>
+        
+        🔹 <strong>Példa:</strong><br>
+        x² + 4x + 4 = 0<br>
+        Δ = 16 − 16 = 0<br>
+        x = −4/2 = −2 (dupla gyök)<br>
+        Faktorizálva: (x + 2)² = 0<br><br>
+        
+        ✅ <strong>Válasz:</strong> Dupla gyök
+      </div>
+    </div>
+
+    <!-- 8 (b) -->
+    <div class="question" data-answer="b">
+      <h3>8. Megoldás: x² − 5 = 0</h3>
+      <label class="answer-option"><input type="radio" name="q8" value="a">{√5}</label>
+      <label class="answer-option"><input type="radio" name="q8" value="b">{±√5}</label>
+      <label class="answer-option"><input type="radio" name="q8" value="c">{±5}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a következő egyenletet:</strong><br>
+        x² − 5 = 0<br><br>
+        
+        🔹 <strong>1. Átrendezés</strong><br>
+        x² = 5<br><br>
+        
+        🔹 <strong>2. Négyzetgyök vétele</strong><br>
+        √(x²) = ±√5<br>
+        x = ±√5<br><br>
+        
+        🔹 <strong>3. Eredmény kiértékelése</strong><br>
+        √5 ≈ 2.236<br>
+        Tehát: x₁ ≈ 2.236, x₂ ≈ −2.236<br><br>
+        
+        ✅ <strong>Megoldás:</strong> {+√5, −√5}<br><br>
+        
+        <strong>Ellenőrzés:</strong><br>
+        x = √5: (√5)² − 5 = 5 − 5 = 0 ✓<br>
+        x = −√5: (−√5)² − 5 = 5 − 5 = 0 ✓<br><br>
+        
+        📌 <strong>Fontos:</strong> Mindig ± jelzést írunk, mert a négyzetgyök vétele két megoldást ad!
+      </div>
+    </div>
+
+    <!-- 9 (a) -->
+    <div class="question" data-answer="a">
+      <h3>9. Oldd meg: 4x² + 4x + 1 = 0</h3>
+      <label class="answer-option"><input type="radio" name="q9" value="a">{−½}</label>
+      <label class="answer-option"><input type="radio" name="q9" value="b">{−1±i}</label>
+      <label class="answer-option"><input type="radio" name="q9" value="c">{−¼}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a következő másodfokú egyenletet:</strong><br>
+        4x² + 4x + 1 = 0<br><br>
+        
+        🔹 <strong>1. Általános alak</strong><br>
+        ahol: a = 4, b = 4, c = 1<br><br>
+        
+        🔹 <strong>2. Diszkrimináns számítása</strong><br>
+        Δ = b² − 4ac = 4² − 4×4×1 = 16 − 16 = 0<br><br>
+        
+        🔹 <strong>3. Megoldóképlet</strong><br>
+        Mivel Δ = 0, dupla gyök van:<br>
+        x = −b/(2a) = −4/(2×4) = −4/8 = −1/2<br><br>
+        
+        ✅ <strong>Megoldás:</strong> x = −1/2<br><br>
+        
+        🔹 <strong>4. Bónusz – Megfigyelés</strong><br>
+        Az eredeti egyenlet tökéletes négyzet:<br>
+        4x² + 4x + 1 = (2x + 1)²<br><br>
+        
+        Tehát: (2x + 1)² = 0<br>
+        2x + 1 = 0<br>
+        x = −1/2<br><br>
+        
+        Ugyanazt kapjuk gyorsabban!
+      </div>
+    </div>
+
+    <!-- 10 (b) -->
+    <div class="question" data-answer="b">
+      <h3>10. Megoldás: x² + 9 = 0</h3>
+      <label class="answer-option"><input type="radio" name="q10" value="a">{±3}</label>
+      <label class="answer-option"><input type="radio" name="q10" value="b">{±3i}</label>
+      <label class="answer-option"><input type="radio" name="q10" value="c">{0, 3}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a következő egyenletet:</strong><br>
+        x² + 9 = 0<br><br>
+        
+        🔹 <strong>1. Átrendezés</strong><br>
+        x² = −9<br><br>
+        
+        🔹 <strong>2. Probléma felismerése</strong><br>
+        Negatív számból nem lehet valós négyzetgyököt vonni!<br><br>
+        
+        🔹 <strong>3. Komplex megoldás</strong><br>
+        x = ±√(−9) = ±√(9×(−1)) = ±3√(−1) = ±3i<br><br>
+        
+        ahol i = √(−1) az imaginárius egység.<br><br>
+        
+        ✅ <strong>Megoldás:</strong> {+3i, −3i}<br><br>
+        
+        🔹 <strong>4. Diszkrimináns ellenőrzés</strong><br>
+        a = 1, b = 0, c = 9<br>
+        Δ = 0² − 4×1×9 = −36 < 0<br><br>
+        
+        Mivel Δ < 0, nincs valós gyök, csak komplex.
+      </div>
+    </div>
+
+    <!-- 11 (a) -->
+    <div class="question" data-answer="a">
+      <h3>11. Oldd meg: 5x² − 20x + 15 = 0</h3>
+      <label class="answer-option"><input type="radio" name="q11" value="a">{1, 3}</label>
+      <label class="answer-option"><input type="radio" name="q11" value="b">{−1, −3}</label>
+      <label class="answer-option"><input type="radio" name="q11" value="c">{5, 15}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a következő másodfokú egyenletet:</strong><br>
+        5x² − 20x + 15 = 0<br><br>
+        
+        🔹 <strong>1. Közös tényező kiemelése</strong><br>
+        5(x² − 4x + 3) = 0<br>
+        x² − 4x + 3 = 0<br><br>
+        
+        🔹 <strong>2. Szorzatra bontás</strong><br>
+        Keresünk két számot: összeg = 4, szorzat = 3<br>
+        1 + 3 = 4 ✓, 1 × 3 = 3 ✓<br><br>
+        
+        🔹 <strong>3. Faktorizálás</strong><br>
+        (x − 1)(x − 3) = 0<br><br>
+        
+        ✅ <strong>Megoldás:</strong> x = 1 vagy x = 3
+      </div>
+    </div>
+
+    <!-- 12 (c) -->
+    <div class="question" data-answer="c">
+      <h3>12. Mire utal a diszkrimináns értéke?</h3>
+      <label class="answer-option"><input type="radio" name="q12" value="a">A parabola szélessége</label>
+      <label class="answer-option"><input type="radio" name="q12" value="b">A parabola tengelye</label>
+      <label class="answer-option"><input type="radio" name="q12" value="c">A gyökök típusa és száma</label>
+      <div class="explanation">
+        <strong>A diszkrimináns (Δ) jelentése:</strong><br><br>
+        
+        🔹 <strong>Definíció</strong><br>
+        Δ = b² − 4ac<br><br>
+        
+        🔹 <strong>Ha Δ > 0:</strong><br>
+        • Két különböző valós gyök<br>
+        • A parabola két pontban metszi az x-tengelyt<br><br>
+        
+        🔹 <strong>Ha Δ = 0:</strong><br>
+        • Egy dupla gyök<br>
+        • A parabola érinti az x-tengelyt<br><br>
+        
+        🔹 <strong>Ha Δ < 0:</strong><br>
+        • Nincs valós gyök<br>
+        • A parabola nem metszi az x-tengelyt<br><br>
+        
+        ✅ <strong>Válasz:</strong> A gyökök típusa és száma
+      </div>
+    </div>
+
+    <!-- 13 (b) -->
+    <div class="question" data-answer="b">
+      <h3>13. Hol metszi az x-tengelyt: x² − 4x + 3?</h3>
+      <label class="answer-option"><input type="radio" name="q13" value="a">{1}</label>
+      <label class="answer-option"><input type="radio" name="q13" value="b">{1, 3}</label>
+      <label class="answer-option"><input type="radio" name="q13" value="c">{3}</label>
+      <div class="explanation">
+        <strong>Keressük meg, hol metszi az x-tengelyt a parabola:</strong><br>
+        f(x) = x² − 4x + 3<br><br>
+        
+        🔹 <strong>1. X-tengely metszéspontok meghatározása</strong><br>
+        Az x-tengelyen y = 0, ezért megoldjuk:<br>
+        x² − 4x + 3 = 0<br><br>
+        
+        🔹 <strong>2. Szorzatra bontás módszere</strong><br>
+        Keresünk két számot, amelyek:<br>
+        • összege = 4 (mivel b = −4)<br>
+        • szorzata = 3 (mivel c = 3)<br><br>
+        
+        🔹 <strong>3. A számok megtalálása</strong><br>
+        1 + 3 = 4 ✓<br>
+        1 × 3 = 3 ✓<br><br>
+        
+        🔹 <strong>4. Faktorizálás</strong><br>
+        x² − 4x + 3 = (x − 1)(x − 3) = 0<br><br>
+        
+        ✅ <strong>Megoldás:</strong><br>
+        x − 1 = 0 → x = 1<br>
+        x − 3 = 0 → x = 3<br><br>
+        
+        <strong>Ellenőrzés:</strong><br>
+        x = 1: 1 − 4 + 3 = 0 ✓<br>
+        x = 3: 9 − 12 + 3 = 0 ✓<br><br>
+        
+        📌 <strong>Eredmény:</strong> A parabola az x-tengelyt (1,0) és (3,0) pontokban metszi.
+      </div>
+    </div>
+
+    <!-- 14 (c) -->
+    <div class="question" data-answer="c">
+      <h3>14. Mi a parabola szimmetriatengelye: x² + 8x + 7?</h3>
+      <label class="answer-option"><input type="radio" name="q14" value="a">x = 4</label>
+      <label class="answer-option"><input type="radio" name="q14" value="b">x = −7</label>
+      <label class="answer-option"><input type="radio" name="q14" value="c">x = −4</label>
+      <div class="explanation">
+        <strong>Keressük meg a parabola szimmetriatengelyét:</strong><br>
+        f(x) = x² + 8x + 7<br><br>
+        
+        🔹 <strong>1. Általános alak azonosítása</strong><br>
+        ax² + bx + c = 0 alakban:<br>
+        a = 1, b = 8, c = 7<br><br>
+        
+        🔹 <strong>2. Szimmetriatengely képlete</strong><br>
+        A parabola szimmetriatengelyének egyenlete:<br>
+        x₀ = −b/(2a)<br><br>
+        
+        🔹 <strong>3. Értékek behelyettesítése</strong><br>
+        x₀ = −8/(2×1)<br>
+        x₀ = −8/2<br>
+        x₀ = −4<br><br>
+        
+        ✅ <strong>Válasz:</strong> x = −4<br><br>
+        
+        🔹 <strong>4. Ellenőrzés teljes négyzetes alakkal</strong><br>
+        x² + 8x + 7 = (x + 4)² − 16 + 7 = (x + 4)² − 9<br>
+        Ebből látható, hogy a csúcs x-koordinátája x = −4.<br><br>
+        
+        📌 <strong>Megjegyzés:</strong><br>
+        A szimmetriatengely mindig átmegy a parabola csúcspontján.
+      </div>
+    </div>
+
+    <!-- 15 (a) -->
+    <div class="question" data-answer="a">
+      <h3>15. Mikor nyílik lefelé a parabola?</h3>
+      <label class="answer-option"><input type="radio" name="q15" value="a">Ha a < 0</label>
+      <label class="answer-option"><input type="radio" name="q15" value="b">Ha b < 0</label>
+      <label class="answer-option"><input type="radio" name="q15" value="c">Ha c < 0</label>
+      <div class="explanation">
+        <strong>A parabola nyitásirányának meghatározása:</strong><br>
+        f(x) = ax² + bx + c<br><br>
+        
+        🔹 <strong>1. Az 'a' együttható szerepe</strong><br>
+        Az x² együtthatója (a) határozza meg a parabola nyitásirányát:<br><br>
+        
+        🔹 <strong>2. Ha a > 0:</strong><br>
+        • A parabola felfelé nyílik<br>
+        • Van minimuma (legkisebb értéke)<br>
+        • A csúcs a legmélyebb pont<br><br>
+        
+        🔹 <strong>3. Ha a < 0:</strong><br>
+        • A parabola lefelé nyílik<br>
+        • Van maximuma (legnagyobb értéke)<br>
+        • A csúcs a legmagasabb pont<br><br>
+        
+        ✅ <strong>Válasz:</strong> Ha a < 0<br><br>
+        
+        🔹 <strong>4. Példák</strong><br>
+        • y = x² (a = 1 > 0) → felfelé nyílik ∪<br>
+        • y = −x² (a = −1 < 0) → lefelé nyílik ∩<br>
+        • y = 2x² + 3x − 1 (a = 2 > 0) → felfelé nyílik<br>
+        • y = −3x² + x + 2 (a = −3 < 0) → lefelé nyílik<br><br>
+        
+        📌 <strong>Megjegyzés:</strong><br>
+        A b és c együtthatók nem befolyásolják a nyitásirányát, csak a parabola helyzetét.
+      </div>
+    </div>
+
+    <!-- 16 (b) -->
+    <div class="question" data-answer="b">
+      <h3>16. Δ értéke az egyenletben: x² + 4x + 5 = 0?</h3>
+      <label class="answer-option"><input type="radio" name="q16" value="a">4</label>
+      <label class="answer-option"><input type="radio" name="q16" value="b">−4</label>
+      <label class="answer-option"><input type="radio" name="q16" value="c">16</label>
+      <div class="explanation">
+        <strong>Számítsuk ki a diszkrimináns értékét:</strong><br>
+        x² + 4x + 5 = 0<br><br>
+        
+        🔹 <strong>1. Általános alak azonosítása</strong><br>
+        ax² + bx + c = 0 alakban:<br>
+        a = 1, b = 4, c = 5<br><br>
+        
+        🔹 <strong>2. Diszkrimináns képlete</strong><br>
+        Δ = b² − 4ac<br><br>
+        
+        🔹 <strong>3. Értékek behelyettesítése</strong><br>
+        Δ = 4² − 4×1×5<br>
+        Δ = 16 − 20<br>
+        Δ = −4<br><br>
+        
+        ✅ <strong>Válasz:</strong> Δ = −4<br><br>
+        
+        🔹 <strong>4. Eredmény értelmezése</strong><br>
+        Mivel Δ = −4 < 0:<br>
+        • Az egyenletnek nincs valós gyöke<br>
+        • A parabola nem metszi az x-tengelyt<br>
+        • Csak komplex gyökök léteznek<br><br>
+        
+        🔹 <strong>5. Komplex gyökök (opcionális)</strong><br>
+        x = (−4 ± √(−4))/(2×1) = (−4 ± 2i)/2 = −2 ± i<br><br>
+        
+        📌 <strong>Megjegyzés:</strong><br>
+        Negatív diszkrimináns esetén a parabola teljesen az x-tengely fölött vagy alatt helyezkedik el.
+      </div>
+    </div>
+
+    <!-- 17 (c) -->
+    <div class="question" data-answer="c">
+      <h3>17. Hány valós gyöke van, ha Δ = 9?</h3>
+      <label class="answer-option"><input type="radio" name="q17" value="a">1</label>
+      <label class="answer-option"><input type="radio" name="q17" value="b">0</label>
+      <label class="answer-option"><input type="radio" name="q17" value="c">2</label>
+      <div class="explanation">
+        <strong>A diszkrimináns és a gyökök számának kapcsolata:</strong><br><br>
+        
+        🔹 <strong>1. Diszkrimináns értékelése</strong><br>
+        Δ = 9 > 0<br><br>
+        
+        🔹 <strong>2. Gyökök számának meghatározása</strong><br>
+        Ha Δ > 0: két különböző valós gyök van<br><br>
+        
+        🔹 <strong>3. Általános szabály</strong><br>
+        • Ha Δ > 0 → 2 különböző valós gyök<br>
+        • Ha Δ = 0 → 1 dupla valós gyök<br>
+        • Ha Δ < 0 → 0 valós gyök (2 komplex gyök)<br><br>
+        
+        ✅ <strong>Válasz:</strong> 2 valós gyök<br><br>
+        
+        🔹 <strong>4. Geometriai értelmezés</strong><br>
+        Mivel Δ = 9 > 0:<br>
+        • A parabola két pontban metszi az x-tengelyt<br>
+        • A két metszéspont között van a parabola csúcsa<br><br>
+        
+        🔹 <strong>5. Példa számítás</strong><br>
+        Ha pl. x² − 6x + 8 = 0, akkor Δ = 36 − 32 = 4 > 0<br>
+        x = (6 ± √4)/2 = (6 ± 2)/2 → x₁ = 4, x₂ = 2<br><br>
+        
+        📌 <strong>Fontos:</strong><br>
+        A diszkrimináns előjele egyértelműen meghatározza a valós gyökök számát.
+      </div>
+    </div>
+
+    <!-- 18 (a) -->
+    <div class="question" data-answer="a">
+      <h3>18. Oldd meg: x² − 2x = 0</h3>
+      <label class="answer-option"><input type="radio" name="q18" value="a">{0, 2}</label>
+      <label class="answer-option"><input type="radio" name="q18" value="b">{1}</label>
+      <label class="answer-option"><input type="radio" name="q18" value="c">{−2, 2}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a hiányos másodfokú egyenletet:</strong><br>
+        x² − 2x = 0<br><br>
+        
+        🔹 <strong>1. Hiányos egyenlet felismerése</strong><br>
+        Ez egy hiányos másodfokú egyenlet, mert nincs konstans tag (c = 0).<br><br>
+        
+        🔹 <strong>2. Közös tényező kiemelése</strong><br>
+        x² − 2x = x(x − 2) = 0<br><br>
+        
+        🔹 <strong>3. Nulltényezős szorzat tulajdonsága</strong><br>
+        Ha A × B = 0, akkor A = 0 vagy B = 0<br>
+        Esetünkben: x = 0 vagy (x − 2) = 0<br><br>
+        
+        🔹 <strong>4. Gyökök meghatározása</strong><br>
+        x = 0 ✓<br>
+        x − 2 = 0 → x = 2 ✓<br><br>
+        
+        ✅ <strong>Megoldás:</strong> {0, 2}<br><br>
+        
+        <strong>Ellenőrzés:</strong><br>
+        x = 0: 0² − 2×0 = 0 − 0 = 0 ✓<br>
+        x = 2: 2² − 2×2 = 4 − 4 = 0 ✓<br><br>
+        
+        📌 <strong>Általános szabály:</strong><br>
+        Ha c = 0, akkor az egyenlet alakja: ax² + bx = 0<br>
+        Mindig x(ax + b) = 0 formára hozható, így x = 0 mindig gyök.
+      </div>
+    </div>
+
+    <!-- 19 (b) -->
+    <div class="question" data-answer="b">
+      <h3>19. Oldd meg: 5x² + 20x = 0</h3>
+      <label class="answer-option"><input type="radio" name="q19" value="a">{−4}</label>
+      <label class="answer-option"><input type="radio" name="q19" value="b">{0, −4}</label>
+      <label class="answer-option"><input type="radio" name="q19" value="c">{4}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a hiányos másodfokú egyenletet:</strong><br>
+        5x² + 20x = 0<br><br>
+        
+        🔹 <strong>1. Közös tényező azonosítása</strong><br>
+        Mindkét tagban szerepel x és egy szám:<br>
+        5x² = 5x × x<br>
+        20x = 5x × 4<br><br>
+        
+        🔹 <strong>2. Közös tényező kiemelése</strong><br>
+        5x² + 20x = 5x(x + 4) = 0<br><br>
+        
+        🔹 <strong>3. Nulltényezős szorzat</strong><br>
+        Ha 5x(x + 4) = 0, akkor:<br>
+        5x = 0 vagy (x + 4) = 0<br><br>
+        
+        🔹 <strong>4. Gyökök kiszámítása</strong><br>
+        5x = 0 → x = 0/5 = 0<br>
+        x + 4 = 0 → x = −4<br><br>
+        
+        ✅ <strong>Megoldás:</strong> {0, −4}<br><br>
+        
+        <strong>Ellenőrzés:</strong><br>
+        x = 0: 5×0² + 20×0 = 0 + 0 = 0 ✓<br>
+        x = −4: 5×16 + 20×(−4) = 80 − 80 = 0 ✓<br><br>
+        
+        🔹 <strong>5. Alternatív módszer</strong><br>
+        Oszthatjuk az egész egyenletet 5-tel:<br>
+        x² + 4x = 0 → x(x + 4) = 0<br><br>
+        
+        📌 <strong>Fontos:</strong><br>
+        Hiányos másodfokú egyenleteknél (c = 0) x = 0 mindig megoldás.
+      </div>
+    </div>
+
+    <!-- 20 (b) -->
+    <div class="question" data-answer="b">
+      <h3>20. Oldd meg: x² + x = 0</h3>
+      <label class="answer-option"><input type="radio" name="q20" value="a">{1}</label>
+      <label class="answer-option"><input type="radio" name="q20" value="b">{0, −1}</label>
+      <label class="answer-option"><input type="radio" name="q20" value="c">{−1}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a hiányos másodfokú egyenletet:</strong><br>
+        x² + x = 0<br><br>
+        
+        🔹 <strong>1. Egyenlet átalakítása</strong><br>
+        x² + x = x² + 1×x = 0<br><br>
+        
+        🔹 <strong>2. Közös tényező kiemelése</strong><br>
+        x² + x = x(x + 1) = 0<br><br>
+        
+        🔹 <strong>3. Nulltényezős szorzat alkalmazása</strong><br>
+        Ha x(x + 1) = 0, akkor:<br>
+        x = 0 vagy (x + 1) = 0<br><br>
+        
+        🔹 <strong>4. Mindkét egyenlet megoldása</strong><br>
+        x = 0 ✓<br>
+        x + 1 = 0 → x = −1 ✓<br><br>
+        
+        ✅ <strong>Megoldás:</strong> {0, −1}<br><br>
+        
+        <strong>Ellenőrzés:</strong><br>
+        x = 0: 0² + 0 = 0 + 0 = 0 ✓<br>
+        x = −1: (−1)² + (−1) = 1 − 1 = 0 ✓<br><br>
+        
+        🔹 <strong>5. Grafikus értelmezés</strong><br>
+        A parabola y = x² + x az x-tengelyt (0,0) és (−1,0) pontokban metszi.<br><br>
+        
+        📌 <strong>Szabály:</strong><br>
+        x² + bx = 0 típusú egyenleteknél mindig x = 0 és x = −b a megoldás.
+      </div>
+    </div>
+
+    <!-- 21 (c) -->
+    <div class="question" data-answer="c">
+      <h3>21. Oldd meg Δ-vel: 3x² − 3x + 1 = 0</h3>
+      <label class="answer-option"><input type="radio" name="q21" value="a">{1/3}</label>
+      <label class="answer-option"><input type="radio" name="q21" value="b">{1/3±i√3/3}</label>
+      <label class="answer-option"><input type="radio" name="q21" value="c">Nincsenek valós gyökök</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a másodfokú egyenletet diszkrimináns módszerrel:</strong><br>
+        3x² − 3x + 1 = 0<br><br>
+        
+        🔹 <strong>1. Általános alak azonosítása</strong><br>
+        ax² + bx + c = 0 alakban:<br>
+        a = 3, b = −3, c = 1<br><br>
+        
+        🔹 <strong>2. Diszkrimináns számítása</strong><br>
+        Δ = b² − 4ac<br>
+        Δ = (−3)² − 4×3×1<br>
+        Δ = 9 − 12<br>
+        Δ = −3<br><br>
+        
+        🔹 <strong>3. Diszkrimináns értékelése</strong><br>
+        Mivel Δ = −3 < 0:<br>
+        • Az egyenletnek nincs valós gyöke<br>
+        • Csak komplex gyökök léteznek<br>
+        • A parabola nem metszi az x-tengelyt<br><br>
+        
+        ✅ <strong>Válasz:</strong> Nincsenek valós gyökök<br><br>
+        
+        🔹 <strong>4. Komplex gyökök (opcionális)</strong><br>
+        x = (−b ± √Δ)/(2a)<br>
+        x = (3 ± √(−3))/(6)<br>
+        x = (3 ± i√3)/6<br>
+        x = 1/2 ± i√3/6<br><br>
+        
+        🔹 <strong>5. Grafikus értelmezés</strong><br>
+        A parabola y = 3x² − 3x + 1:<br>
+        • felfelé nyílik (a = 3 > 0)<br>
+        • teljesen az x-tengely fölött helyezkedik el<br>
+        • minimuma pozitív<br><br>
+        
+        📌 <strong>Szabály:</strong><br>
+        Ha Δ < 0, akkor a másodfokú egyenletnek nincs valós megoldása.
+      </div>
+    </div>
+
+    <!-- 22 (a) -->
+    <div class="question" data-answer="a">
+      <h3>22. A parabola csúcspontja: x² − 10x + 9?</h3>
+      <label class="answer-option"><input type="radio" name="q22" value="a">(5, −16)</label>
+      <label class="answer-option"><input type="radio" name="q22" value="b">(5, 16)</label>
+      <label class="answer-option"><input type="radio" name="q22" value="c">(−5, −16)</label>
+      <div class="explanation">
+        <strong>Keressük meg a parabola csúcspontját:</strong><br>
+        f(x) = x² − 10x + 9<br><br>
+        
+        🔹 <strong>1. Általános alak azonosítása</strong><br>
+        ax² + bx + c alakban:<br>
+        a = 1, b = −10, c = 9<br><br>
+        
+        🔹 <strong>2. Csúcs x-koordinátája</strong><br>
+        x₀ = −b/(2a)<br>
+        x₀ = −(−10)/(2×1)<br>
+        x₀ = 10/2<br>
+        x₀ = 5<br><br>
+        
+        🔹 <strong>3. Csúcs y-koordinátája</strong><br>
+        y₀ = f(x₀) = f(5)<br>
+        y₀ = 5² − 10×5 + 9<br>
+        y₀ = 25 − 50 + 9<br>
+        y₀ = −16<br><br>
+        
+        ✅ <strong>Csúcspont:</strong> (5, −16)<br><br>
+        
+        🔹 <strong>4. Ellenőrzés teljes négyzetes alakkal</strong><br>
+        x² − 10x + 9 = (x − 5)² − 25 + 9 = (x − 5)² − 16<br>
+        Ebből látható: csúcs (5, −16)<br><br>
+        
+        🔹 <strong>5. Alternatív módszer diszkriminánssal</strong><br>
+        y₀ = −Δ/(4a) = −(100−36)/(4×1) = −64/4 = −16<br><br>
+        
+        🔹 <strong>6. Parabola tulajdonságai</strong><br>
+        • felfelé nyílik (a = 1 > 0)<br>
+        • minimuma: −16 az x = 5 helyen<br>
+        • szimmetriatengely: x = 5<br><br>
+        
+        📌 <strong>Megjegyzés:</strong><br>
+        A csúcs a parabola legmélyebb pontja, mivel a > 0.
+      </div>
+    </div>
+
+    <!-- 23 (b) -->
+    <div class="question" data-answer="b">
+      <h3>23. Oldd meg: 4x² − 1 = 0</h3>
+      <label class="answer-option"><input type="radio" name="q23" value="a">{±¼}</label>
+      <label class="answer-option"><input type="radio" name="q23" value="b">{±½}</label>
+      <label class="answer-option"><input type="radio" name="q23" value="c">{±1}</label>
+      <div class="explanation">
+        <strong>Oldjuk meg a hiányos másodfokú egyenletet:</strong><br>
+        4x² − 1 = 0<br><br>
+        
+        🔹 <strong>1. Egyenlet átrendezése</strong><br>
+        4x² = 1<br>
+        x² = 1/4<br><br>
+        
+        🔹 <strong>2. Négyzetgyök vétele</strong><br>
+        √(x²) = ±√(1/4)<br>
+        x = ±√(1/4)<br>
+        x = ±(1/2)<br>
+        x = ±1/2<br><br>
+        
+        ✅ <strong>Megoldás:</strong> {+1/2, −1/2}<br><br>
+        
+        <strong>Ellenőrzés:</strong><br>
+        x = 1/2: 4×(1/2)² − 1 = 4×(1/4) − 1 = 1 − 1 = 0 ✓<br>
+        x = −1/2: 4×(−1/2)² − 1 = 4×(1/4) − 1 = 1 − 1 = 0 ✓<br><br>
+        
+        🔹 <strong>3. Alternatív módszer - szorzatra bontás</strong><br>
+        4x² − 1 = (2x)² − 1² = (2x − 1)(2x + 1) = 0<br>
+        2x − 1 = 0 → x = 1/2<br>
+        2x + 1 = 0 → x = −1/2<br><br>
+        
+        🔹 <strong>4. Általános módszer megoldóképlettel</strong><br>
+        a = 4, b = 0, c = −1<br>
+        Δ = 0² − 4×4×(−1) = 16<br>
+        x = (0 ± √16)/(8) = ±4/8 = ±1/2<br><br>
+        
+        📌 <strong>Szabály:</strong><br>
+        ax² + c = 0 típusú egyenletek: x = ±√(−c/a) (ha −c/a > 0)
+      </div>
+    </div>
+
+    <!-- 24 (c) -->
+    <div class="question" data-answer="c">
+      <h3>24. Mikor egyezik meg Δ nullával?</h3>
+      <label class="answer-option"><input type="radio" name="q24" value="a">Ha b² > 4ac</label>
+      <label class="answer-option"><input type="radio" name="q24" value="b">Ha a² + b² = c²</label>
+      <label class="answer-option"><input type="radio" name="q24" value="c">Ha b² = 4ac</label>
+      <div class="explanation">
+        <strong>A diszkrimináns nullával való egyenlőségének feltétele:</strong><br><br>
+        
+        🔹 <strong>1. Diszkrimináns definíciója</strong><br>
+        Δ = b² − 4ac<br><br>
+        
+        🔹 <strong>2. Δ = 0 feltétel felírása</strong><br>
+        Δ = 0<br>
+        b² − 4ac = 0<br>
+        b² = 4ac<br><br>
+        
+        ✅ <strong>Válasz:</strong> Ha b² = 4ac<br><br>
+        
+        🔹 <strong>3. Geometriai jelentés</strong><br>
+        Ha Δ = 0, akkor:<br>
+        • A parabola érinti az x-tengelyt<br>
+        • Pontosan egy érintési pont van<br>
+        • Dupla gyök létezik<br><br>
+        
+        🔹 <strong>4. Példa</strong><br>
+        x² + 4x + 4 = 0<br>
+        a = 1, b = 4, c = 4<br>
+        b² = 16, 4ac = 16<br>
+        Valóban: b² = 4ac → Δ = 0<br>
+        (x + 2)² = 0 → x = −2 (dupla gyök)<br><br>
+        
+        🔹 <strong>5. Más feltételek vizsgálata</strong><br>
+        • b² > 4ac → Δ > 0 (két különböző valós gyök)<br>
+        • b² < 4ac → Δ < 0 (nincs valós gyök)<br>
+        • a² + b² = c² → Pitagorasz-tétel (nem kapcsolódik Δ-hoz)<br><br>
+        
+        📌 <strong>Fontos:</strong><br>
+        A b² = 4ac feltétel az egyetlen, amely Δ = 0-t eredményez.
+      </div>
+    </div>
+
+    <!-- 25 (a) -->
+    <div class="question" data-answer="a">
+      <h3>25. Mi a neve az ax² + bx + c = 0 típusú egyenletnek?</h3>
+      <label class="answer-option"><input type="radio" name="q25" value="a">Másodfokú egyenlet</label>
+      <label class="answer-option"><input type="radio" name="q25" value="b">Lineáris egyenlet</label>
+      <label class="answer-option"><input type="radio" name="q25" value="c">Harmadfokú egyenlet</label>
+      <div class="explanation">
+        <strong>Az egyenlet típusának meghatározása:</strong><br>
+        ax² + bx + c = 0<br><br>
+        
+        🔹 <strong>1. Fokszám meghatározása</strong><br>
+        Az egyenlet fokszáma a legmagasabb kitevő:<br>
+        • x² tag → 2. fokú<br>
+        • x tag → 1. fokú<br>
+        • konstans tag → 0. fokú<br><br>
+        
+        🔹 <strong>2. Elnevezés szabálya</strong><br>
+        A legmagasabb kitevő szerint nevezzük el:<br>
+        • 2. fokú → másodfokú egyenlet<br>
+        • 1. fokú → elsőfokú (lineáris) egyenlet<br>
+        • 3. fokú → harmadfokú egyenlet<br><br>
+        
+        ✅ <strong>Válasz:</strong> Másodfokú egyenlet<br><br>
+        
+        🔹 <strong>3. Feltételek</strong><br>
+        Ahhoz, hogy valóban másodfokú legyen:<br>
+        • a ≠ 0 (különben nem lenne x² tag)<br>
+        • b és c lehet 0 is<br><br>
+        
+        🔹 <strong>4. Egyenlet típusok</strong><br>
+        • Teljes másodfokú: ax² + bx + c = 0 (a,b,c ≠ 0)<br>
+        • Hiányos másodfokú: ax² + c = 0 (b = 0)<br>
+        • Hiányos másodfokú: ax² + bx = 0 (c = 0)<br><br>
+        
+        🔹 <strong>5. Példák</strong><br>
+        • x² + 5x + 6 = 0 → másodfokú<br>
+        • 3x + 7 = 0 → lineáris (elsőfokú)<br>
+        • x³ + 2x − 1 = 0 → harmadfokú<br>
+        • 2x² − 8 = 0 → másodfokú (hiányos)<br><br>
+        
+        📌 <strong>Megjegyzés:</strong><br>
+        A másodfokú egyenlet grafikonja mindig parabola.
+      </div>
+    </div>
+
+  </form>
+
+  <div class="score-box" id="scoreBox">
+    <h2>📊 Eredmény</h2>
+    <div class="score" id="finalScore">0 / 25</div>
+    <p id="performance"></p>
+  </div>
+
+  <div class="admin-panel" id="adminPanel">
+    <h3>🛠️ Admin panel</h3>
+    <pre id="adminData"></pre>
+  </div>
+
+  <script>
+    const MASTER_PIN = "121909";
+    const STUDENT_PINS = Array.from({length:20},(_,i)=>String(100001+i));
+    
+    const pinInput = document.getElementById("pinInput");
+    const checkBtn = document.getElementById("checkBtn");
+    const masterBtn = document.getElementById("masterBtn");
+    const masterMode = document.getElementById("masterMode");
+    const progressFill = document.getElementById("progressBar");
+    const quizForm = document.getElementById("quizForm");
+    const scoreBox = document.getElementById("scoreBox");
+    const finalScore = document.getElementById("finalScore");
+    const performance = document.getElementById("performance");
+    const adminPanel = document.getElementById("adminPanel");
+    const adminData = document.getElementById("adminData");
+
+    let isMaster = false;
+
+    function highlightCorrect() {
+      document.querySelectorAll('.question').forEach(q => {
+        q.querySelectorAll('.answer-option').forEach(op => {
+          op.classList.toggle('master-correct',
+            op.querySelector('input').value === q.dataset.answer);
+        });
+      });
+    }
+
+    function removeHighlight() {
+      document.querySelectorAll('.master-correct')
+        .forEach(el => el.classList.remove('master-correct'));
+    }
+
+    pinInput.addEventListener("input", () => {
+      const pin = pinInput.value.trim();
+      isMaster = pin === MASTER_PIN;
+      masterMode.style.display = isMaster ? "block" : "none";
+      masterBtn.style.display = isMaster ? "inline-block" : "none";
+      checkBtn.style.display = isMaster ? "none" : "inline-block";
+      
+      document.querySelectorAll(".explanation").forEach(e => {
+        e.classList.toggle("show", isMaster);
+      });
+      
+      if (isMaster) {
+        highlightCorrect();
+      } else {
+        removeHighlight();
+      }
+    });
+
+    function updateProgress() {
+      const answered = quizForm.querySelectorAll("input[type=radio]:checked").length;
+      progressFill.style.width = (answered/25*100) + "%";
+    }
+    quizForm.addEventListener("change", updateProgress);
+
+    function evaluate(master = false) {
+      let correct = 0;
+      let log = [];
+      
+      quizForm.querySelectorAll(".question").forEach((q, i) => {
+        const correctAnswer = q.getAttribute("data-answer");
+        const selected = q.querySelector("input[type=radio]:checked");
+        
+        q.querySelectorAll(".answer-option").forEach(op => {
+          const inp = op.querySelector('input');
+          inp.disabled = true;
+          op.classList.remove("correct", "wrong", "master-correct");
+          
+          if (inp.value === correctAnswer) {
+            op.classList.add("correct");
+            if (selected && selected.value === correctAnswer) {
+              correct++;
+            }
+          } else if (inp.checked) {
+            op.classList.add("wrong");
+          }
+        });
+        
+        q.querySelector(".explanation").classList.add("show");
+        log.push(`Q${i+1}: ${selected ? selected.value : '–'} | helyes: ${correctAnswer}`);
+      });
+
+      progressFill.style.width = "100%";
+      const pct = Math.round(correct/25*100);
+      finalScore.textContent = `${correct} / 25`;
+      performance.textContent = 
+        pct >= 92 ? '🏆 Kiváló!' :
+        pct >= 80 ? '👍 Nagyszerű!' :
+        pct >= 60 ? '📚 Közepes, gyakorolj!' :
+        '💪 Próbálj újra!';
+      performance.style.color = pct >= 80 ? '#28a745' : pct >= 60 ? '#ffc107' : '#dc3545';
+      scoreBox.style.display = "block";
+
+      if (master) {
+        adminPanel.style.display = "block";
+        adminData.textContent = log.join('\n') + `\n\nPontosság: ${pct}%`;
+      }
+    }
+
+    checkBtn.onclick = () => {
+      const pin = pinInput.value.trim();
+      if (!STUDENT_PINS.includes(pin)) {
+        alert("❌ Érvénytelen PIN!");
+        return;
+      }
+      if (quizForm.querySelectorAll("input[type=radio]:checked").length < 25) {
+        alert("⚠️ Minden kérdésre válaszolj!");
+        return;
+      }
+      evaluate(false);
+    };
+
+    masterBtn.onclick = () => evaluate(true);
+
+    pinInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        (pinInput.value.trim() === MASTER_PIN ? masterBtn : checkBtn).click();
+      }
+    });
+  </script>
+
+</body>
+</html>
