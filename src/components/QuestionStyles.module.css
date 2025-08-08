@@ -1,50 +1,50 @@
 .questionBlock {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
 }
+
 .description {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+  margin: 0 0 0.75rem 0;
+  font-weight: 600;
 }
+
 .optionsGrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+  display: grid;
+  gap: 0.5rem;
 }
+
 .optionLabel {
-    display: block;
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: all 0.2s ease;
+  display: block;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
 }
-.optionLabel:hover {
-    border-color: #1abc9c;
-}
+
 .selected {
-    border-color: #3498db !important;
-    background-color: rgba(52, 152, 219, 0.3) !important;
+  outline: 2px solid #3498db;
 }
+
 .correct {
-    border-color: #2ecc71 !important;
-    background-color: rgba(46, 204, 113, 0.2) !important;
+  border-color: #2ecc71 !important;
+  background-color: rgba(46, 204, 113, 0.2) !important;
 }
+
 .incorrect {
-    border-color: #e74c3c !important;
-    background-color: rgba(231, 76, 60, 0.2) !important;
-    opacity: 0.7;
+  border-color: #e74c3c !important;
+  background-color: rgba(231, 76, 60, 0.2) !important;
+  opacity: 0.85;
 }
+
 .explanation {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-left: 4px solid #3498db;
-    border-radius: 5px;
-    font-size: 0.95rem;
-    line-height: 1.6;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-left: 4px solid #3498db;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }

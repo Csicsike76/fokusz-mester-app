@@ -53,9 +53,21 @@ async function syncDatabase() {
 
       await client.query('DELETE FROM QuizQuestions WHERE curriculum_id = $1', [curriculumId]);
       for (const question of questions) {
-        const insertQuestionQuery = `INSERT INTO QuizQuestions (curriculum_id, question_type, description, options, answer, answer_regex) VALUES ($1, $2, $3, $4, $5, $6);`;
-        await client.query(insertQuestionQuery, [curriculumId, question.type, question.description, JSON.stringify(question.options || null), JSON.stringify(question.answer || null), question.answerRegex || null]);
-      }
+    const insertQuestionQuery = `
+        INSERT INTO QuizQuestions 
+        (curriculum_id, question_type, description, options, answer, explanation, answer_regex) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7);
+    `;
+    await client.query(insertQuestionQuery, [
+        curriculumId,
+        question.type,
+        question.description,
+        JSON.stringify(question.options || null),
+        JSON.stringify(question.answer || null),
+        question.explanation || null,       // ← Magyarázat beszúrása, ha van
+        question.answerRegex || null
+    ]);
+}
       console.log(`${questions.length} kérdés mentve a(z) ${curriculumId} ID-jű tananyaghoz.`);
     }
 
