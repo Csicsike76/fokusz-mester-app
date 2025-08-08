@@ -1,193 +1,252 @@
 [
-    {
-        "question": "Melyik a fizikai jelenség?",
-        "answers": { "a": "A víz forrása", "b": "A hőmérséklet", "c": "A tömeg" },
-        "correctAnswer": "a",
-        "explanation": "A fizikai jelenség egy folyamat vagy történés, mint például a víz forrása. A hőmérséklet és a tömeg fizikai mennyiségek, amelyekkel a testek állapotát vagy tulajdonságait jellemezzük. ✅ Megoldás: A víz forrása."
+  {
+    "question": "Melyik a fizikai jelenség?",
+    "answers": {
+      "a": "A víz forrása",
+      "b": "A hőmérséklet",
+      "c": "A tömeg"
     },
-    {
-        "question": "Melyik fizikai mennyiségnek van iránya is a nagyságán kívül?",
-        "answers": { "a": "Vektormennyiség", "b": "Skalármennyiség", "c": "Alapmennyiség" },
-        "correctAnswer": "a",
-        "explanation": "A vektormennyiségeket a nagyságuk és az irányuk is jellemzi. Ilyen például az erő vagy a sebesség. A skalármennyiségeknek csak nagyságuk van. ✅ Megoldás: Vektormennyiség."
+    "correctAnswer": "a",
+    "explanation": "A fizikai jelenség egy folyamat vagy történés, mint például a víz forrása. A hőmérséklet és a tömeg fizikai mennyiségek, amelyekkel a testek állapotát vagy tulajdonságait jellemezzük. ✅ Megoldás: A víz forrása."
+  },
+  {
+    "question": "Melyik fizikai mennyiségnek van iránya is a nagyságán kívül?",
+    "answers": {
+      "a": "Vektormennyiség",
+      "b": "Skalármennyiség",
+      "c": "Alapmennyiség"
     },
-    {
-        "question": "Melyik NEM skalármennyiség?",
-        "answers": { "a": "Gyorsulás", "b": "Idő", "c": "Térfogat" },
-        "correctAnswer": "a",
-        "explanation": "A gyorsulásnak van iránya (pl. a Föld középpontja felé), ezért vektormennyiség. Az időnek és a térfogatnak csak nagysága van, ezért skalármennyiségek. ✅ Megoldás: Gyorsulás."
+    "correctAnswer": "a",
+    "explanation": "A vektormennyiségeket a nagyságuk és az irányuk is jellemzi. Ilyen például az erő vagy a sebesség. A skalármennyiségeknek csak nagyságuk van. ✅ Megoldás: Vektormennyiség."
+  },
+  {
+    "question": "Melyik NEM skalármennyiség?",
+    "answers": {
+      "a": "Gyorsulás",
+      "b": "Idő",
+      "c": "Térfogat"
     },
-    {
-        "question": "Mit jelent a 'modell' a fizikában?",
-        "answers": { "a": "Egy valós jelenség vagy rendszer egyszerűsített leírása.", "b": "Egy bonyolult matematikai képlet.", "c": "Egy híres fizikus." },
-        "correctAnswer": "a",
-        "explanation": "A fizikai modellek segítenek megérteni a bonyolult valóságot azáltal, hogy a lényeges tulajdonságokra fókuszálnak és elhanyagolják a kevésbé fontosakat. Például a pontszerű test modellje. ✅ Megoldás: Egy valós jelenség vagy rendszer egyszerűsített leírása."
+    "correctAnswer": "a",
+    "explanation": "A gyorsulásnak van iránya (pl. a Föld középpontja felé), ezért vektormennyiség. Az időnek és a térfogatnak csak nagysága van, ezért skalármennyiségek. ✅ Megoldás: Gyorsulás."
+  },
+  {
+    "question": "Mit jelent a 'modell' a fizikában?",
+    "answers": {
+      "a": "Egy valós jelenség vagy rendszer egyszerűsített leírása.",
+      "b": "Egy bonyolult matematikai képlet.",
+      "c": "Egy híres fizikus."
     },
-    {
-        "question": "Melyik csoportban vannak CSAK fizikai mennyiségek?",
-        "answers": { "a": "Hosszúság, tömeg, erő", "b": "Esőzés, villámlás, szél", "c": "Erő, esőzés, sebesség" },
-        "correctAnswer": "a",
-        "explanation": "A hosszúság, a tömeg és az erő mind mérhető fizikai tulajdonságok, tehát mennyiségek. Az esőzés, villámlás és szél folyamatok, azaz fizikai jelenségek. ✅ Megoldás: Hosszúság, tömeg, erő."
+    "correctAnswer": "a",
+    "explanation": "A fizikai modellek segítenek megérteni a bonyolult valóságot azáltal, hogy a lényeges tulajdonságokra fókuszálnak és elhanyagolják a kevésbé fontosakat. Például a pontszerű test modellje. ✅ Megoldás: Egy valós jelenség vagy rendszer egyszerűsített leírása."
+  },
+  {
+    "question": "Melyik csoportban vannak CSAK fizikai mennyiségek?",
+    "answers": {
+      "a": "Hosszúság, tömeg, erő",
+      "b": "Esőzés, villámlás, szél",
+      "c": "Erő, esőzés, sebesség"
     },
-    {
-        "question": "Mi a kísérletezés célja a fizikában?",
-        "answers": { "a": "Egy elmélet (hipotézis) igazolása vagy cáfolása.", "b": "Csak a szórakoztatás.", "c": "Már ismert törvények megismétlése." },
-        "correctAnswer": "a",
-        "explanation": "A kísérlet a tudományos módszer kulcsfontosságú lépése, amelynek során ellenőrzött körülmények között vizsgálunk egy jelenséget, hogy egy feltevés (hipotézis) helytállóságáról meggyőződjünk. ✅ Megoldás: Egy elmélet (hipotézis) igazolása vagy cáfolása."
+    "correctAnswer": "a",
+    "explanation": "A hosszúság, a tömeg és az erő mind mérhető fizikai tulajdonságok, tehát mennyiségek. Az esőzés, villámlás és szél folyamatok, azaz fizikai jelenségek. ✅ Megoldás: Hosszúság, tömeg, erő."
+  },
+  {
+    "question": "Mi a kísérletezés célja a fizikában?",
+    "answers": {
+      "a": "Egy elmélet (hipotézis) igazolása vagy cáfolása.",
+      "b": "Csak a szórakoztatás.",
+      "c": "Már ismert törvények megismétlése."
     },
-    {
-        "question": "A Föld körül keringő Hold mozgása...",
-        "answers": { "a": "...egy fizikai jelenség.", "b": "...egy fizikai mennyiség.", "c": "...egy fizikai modell." },
-        "correctAnswer": "a",
-        "explanation": "A Hold mozgása egy a természetben megfigyelhető folyamat, történés, ezért fizikai jelenségnek nevezzük. ✅ Megoldás: ...egy fizikai jelenség."
+    "correctAnswer": "a",
+    "explanation": "A kísérlet a tudományos módszer kulcsfontosságú lépése, amelynek során ellenőrzött körülmények között vizsgálunk egy jelenséget, hogy egy feltevés (hipotézis) helytállóságáról meggyőződjünk. ✅ Megoldás: Egy elmélet (hipotézis) igazolása vagy cáfolása."
+  },
+  {
+    "question": "A Föld körül keringő Hold mozgása...",
+    "answers": {
+      "a": "...egy fizikai jelenség.",
+      "b": "...egy fizikai mennyiség.",
+      "c": "...egy fizikai modell."
     },
-    {
-        "question": "A Pitagorasz-tétel...",
-        "answers": { "a": "...egy metrikus összefüggés.", "b": "...egy fizikai jelenség.", "c": "...egy fizikai kísérlet." },
-        "correctAnswer": "a",
-        "explanation": "A Pitagorasz-tétel egy matematikai (geometriai) tétel, amely a derékszögű háromszögek oldalainak hossza közötti kapcsolatot írja le. Az ilyen, mérésen alapuló kapcsolatokat metrikus összefüggéseknek is nevezzük. ✅ Megoldás: ...egy metrikus összefüggés."
+    "correctAnswer": "a",
+    "explanation": "A Hold mozgása egy a természetben megfigyelhető folyamat, történés, ezért fizikai jelenségnek nevezzük. ✅ Megoldás: ...egy fizikai jelenség."
+  },
+  {
+    "question": "A Pitagorasz-tétel...",
+    "answers": {
+      "a": "...egy metrikus összefüggés.",
+      "b": "...egy fizikai jelenség.",
+      "c": "...egy fizikai kísérlet."
     },
-    {
-        "question": "Melyik a fizikai mennyiség?",
-        "answers": { "a": "A jég olvadása", "b": "A sebesség", "c": "A hang terjedése" },
-        "correctAnswer": "b",
-        "explanation": "A sebesség egy mérhető tulajdonság (mennyiség), míg a jég olvadása és a hang terjedése folyamatok (jelenségek). ✅ Megoldás: A sebesség."
+    "correctAnswer": "a",
+    "explanation": "A Pitagorasz-tétel egy matematikai (geometriai) tétel, amely a derékszögű háromszögek oldalainak hossza közötti kapcsolatot írja le. Az ilyen, mérésen alapuló kapcsolatokat metrikus összefüggéseknek is nevezzük. ✅ Megoldás: ...egy metrikus összefüggés."
+  },
+  {
+    "question": "Melyik a fizikai mennyiség?",
+    "answers": {
+      "a": "A jég olvadása",
+      "b": "A sebesség",
+      "c": "A hang terjedése"
     },
-    {
-        "question": "Melyik NEM vektormennyiség?",
-        "answers": { "a": "Erő", "b": "Hőmérséklet", "c": "Elmozdulás" },
-        "correctAnswer": "b",
-        "explanation": "A hőmérsékletnek csak nagysága van (pl. 25 °C), nincs iránya, ezért skalármennyiség. Az erőnek és az elmozdulásnak iránya is van. ✅ Megoldás: Hőmérséklet."
+    "correctAnswer": "b",
+    "explanation": "A sebesség egy mérhető tulajdonság (mennyiség), míg a jég olvadása és a hang terjedése folyamatok (jelenségek). ✅ Megoldás: A sebesség."
+  },
+  {
+    "question": "Melyik NEM vektormennyiség?",
+    "answers": {
+      "a": "Erő",
+      "b": "Hőmérséklet",
+      "c": "Elmozdulás"
     },
-    {
-        "question": "Mit csinálunk a kísérlet során a hipotézissel?",
-        "answers": { "a": "Figyelmen kívül hagyjuk.", "b": "Ellenőrizzük az igazságtartalmát.", "c": "Megváltoztatjuk az eredményekhez." },
-        "correctAnswer": "b",
-        "explanation": "A hipotézis egy tudományos feltevés, egy lehetséges magyarázat a jelenségre. A kísérlet célja, hogy adatokat gyűjtsünk, amelyek vagy alátámasztják, vagy megcáfolják ezt a feltevést. ✅ Megoldás: Ellenőrizzük az igazságtartalmát."
+    "correctAnswer": "b",
+    "explanation": "A hőmérsékletnek csak nagysága van (pl. 25 °C), nincs iránya, ezért skalármennyiség. Az erőnek és az elmozdulásnak iránya is van. ✅ Megoldás: Hőmérséklet."
+  },
+  {
+    "question": "Mit csinálunk a kísérlet során a hipotézissel?",
+    "answers": {
+      "a": "Figyelmen kívül hagyjuk.",
+      "b": "Ellenőrizzük az igazságtartalmát.",
+      "c": "Megváltoztatjuk az eredményekhez."
     },
-    {
-        "question": "Melyik csoportban vannak CSAK fizikai jelenségek?",
-        "answers": { "a": "Hosszúság, tömeg, idő", "b": "Szivárvány, napfogyatkozás, dörgés", "c": "Sűrűség, villámlás, erő" },
-        "correctAnswer": "b",
-        "explanation": "A szivárvány, a napfogyatkozás és a dörgés mind a természetben megfigyelhető folyamatok, tehát jelenségek. Az 'a' opcióban csak mennyiségek, a 'c' opcióban pedig vegyesen vannak. ✅ Megoldás: Szivárvány, napfogyatkozás, dörgés."
+    "correctAnswer": "b",
+    "explanation": "A hipotézis egy tudományos feltevés, egy lehetséges magyarázat a jelenségre. A kísérlet célja, hogy adatokat gyűjtsünk, amelyek vagy alátámasztják, vagy megcáfolják ezt a feltevést. ✅ Megoldás: Ellenőrizzük az igazságtartalmát."
+  },
+  {
+    "question": "Melyik csoportban vannak CSAK fizikai jelenségek?",
+    "answers": {
+      "a": "Hosszúság, tömeg, idő",
+      "b": "Szivárvány, napfogyatkozás, dörgés",
+      "c": "Sűrűség, villámlás, erő"
     },
-    {
-        "question": "A 'pontszerű test' a fizikában...",
-        "answers": { "a": "...egy nagyon kicsi test.", "b": "...egy modell, ahol a test kiterjedését elhanyagoljuk.", "c": "...egy valóságban nem létező fogalom." },
-        "correctAnswer": "b",
-        "explanation": "A pontszerű test egy rendkívül hasznos fizikai modell. Akkor alkalmazzuk, ha a test mérete sokkal kisebb, mint az általa megtett út vagy más, a jelenségben szereplő távolság. Ilyenkor a testet egyetlen tömegpontként kezelhetjük. ✅ Megoldás: ...egy modell, ahol a test kiterjedését elhanyagoljuk."
+    "correctAnswer": "b",
+    "explanation": "A szivárvány, a napfogyatkozás és a dörgés mind a természetben megfigyelhető folyamatok, tehát jelenségek. Az 'a' opcióban csak mennyiségek, a 'c' opcióban pedig vegyesen vannak. ✅ Megoldás: Szivárvány, napfogyatkozás, dörgés."
+  },
+  {
+    "question": "A 'pontszerű test' a fizikában...",
+    "answers": {
+      "a": "...egy nagyon kicsi test.",
+      "b": "...egy modell, ahol a test kiterjedését elhanyagoljuk.",
+      "c": "...egy valóságban nem létező fogalom."
     },
-    {
-        "question": "Melyik a skalármennyiség?",
-        "answers": { "a": "Erő", "b": "Tömeg", "c": "Sebesség" },
-        "correctAnswer": "b",
-        "explanation": "A tömegnek csak nagysága van (pl. 10 kg), iránya nincs, ezért skalármennyiség. Az erőnek és a sebességnek van iránya is. ✅ Megoldás: Tömeg."
+    "correctAnswer": "b",
+    "explanation": "A pontszerű test egy rendkívül hasznos fizikai modell. Akkor alkalmazzuk, ha a test mérete sokkal kisebb, mint az általa megtett út vagy más, a jelenségben szereplő távolság. Ilyenkor a testet egyetlen tömegpontként kezelhetjük. ✅ Megoldás: ...egy modell, ahol a test kiterjedését elhanyagoljuk."
+  },
+  {
+    "question": "Melyik a skalármennyiség?",
+    "answers": {
+      "a": "Erő",
+      "b": "Tömeg",
+      "c": "Sebesség"
     },
-    {
-        "question": "Mi a kísérlet első lépése?",
-        "answers": { "a": "A következtetés levonása.", "b": "A probléma megfogalmazása, a kérdés feltevése.", "c": "Az eszközök elpakolása." },
-        "correctAnswer": "b",
-        "explanation": "Minden tudományos vizsgálat egy megfigyeléssel és az abból fakadó kérdéssel kezdődik. Meg kell fogalmaznunk, hogy pontosan mit szeretnénk megvizsgálni. ✅ Megoldás: A probléma megfogalmazása, a kérdés feltevése."
+    "correctAnswer": "b",
+    "explanation": "A tömegnek csak nagysága van (pl. 10 kg), iránya nincs, ezért skalármennyiség. Az erőnek és a sebességnek van iránya is. ✅ Megoldás: Tömeg."
+  },
+  {
+    "question": "Mi a kísérlet első lépése?",
+    "answers": {
+      "a": "A következtetés levonása.",
+      "b": "A probléma megfogalmazása, a kérdés feltevése.",
+      "c": "Az eszközök elpakolása."
     },
-    {
-        "question": "Melyik állítás írja le helyesen a fizika és a matematika kapcsolatát?",
-        "answers": {
-            "a": "A két tudomány teljesen független egymástól.",
-            "b": "A matematika a fizika 'nyelve', eszköze a jelenségek leírására.",
-            "c": "A fizika a matematika egyik ága."
-        },
-        "correctAnswer": "b",
-        "explanation": "A fizika a természet törvényeit vizsgálja, a matematika pedig egy absztrakt, logikai rendszer. A fizikusok a matematika eszközeit, képleteit és összefüggéseit használják, hogy a fizikai törvényeket pontosan és egyértelműen leírhassák. ✅ Megoldás: A matematika a fizika 'nyelve', eszköze a jelenségek leírására."
+    "correctAnswer": "b",
+    "explanation": "Minden tudományos vizsgálat egy megfigyeléssel és az abból fakadó kérdéssel kezdődik. Meg kell fogalmaznunk, hogy pontosan mit szeretnénk megvizsgálni. ✅ Megoldás: A probléma megfogalmazása, a kérdés feltevése."
+  },
+  {
+    "question": "Melyik állítás írja le helyesen a fizika és a matematika kapcsolatát?",
+    "answers": {
+      "a": "A két tudomány teljesen független egymástól.",
+      "b": "A matematika a fizika 'nyelve', eszköze a jelenségek leírására.",
+      "c": "A fizika a matematika egyik ága."
     },
-    {
-        "question": "Melyik a vektormennyiség?",
-        "answers": {
-            "a": "Térfogat",
-            "b": "Elmozdulás",
-            "c": "Hosszúság"
-        },
-        "correctAnswer": "b",
-        "explanation": "Az elmozdulás egy vektormennyiség, mert nemcsak a megtett út hossza számít, hanem az iránya is (pl. 5 métert tett meg kelet felé). A térfogatnak és a hosszúságnak (mint távolságnak) csak nagysága van. ✅ Megoldás: Elmozdulás."
+    "correctAnswer": "b",
+    "explanation": "A fizika a természet törvényeit vizsgálja, a matematika pedig egy absztrakt, logikai rendszer. A fizikusok a matematika eszközeit, képleteit és összefüggéseit használják, hogy a fizikai törvényeket pontosan és egyértelműen leírhassák. ✅ Megoldás: A matematika a fizika 'nyelve', eszköze a jelenségek leírására."
+  },
+  {
+    "question": "Melyik a vektormennyiség?",
+    "answers": {
+      "a": "Térfogat",
+      "b": "Elmozdulás",
+      "c": "Hosszúság"
     },
-    {
-        "question": "Melyik NEM fizikai mennyiség?",
-        "answers": {
-            "a": "Erő",
-            "b": "Tömeg",
-            "c": "Szépség"
-        },
-        "correctAnswer": "c",
-        "explanation": "A fizikai mennyiségek objektíven mérhetők. A szépség egy szubjektív, esztétikai fogalom, nincs általánosan elfogadott mérési módja vagy mértékegysége. ✅ Megoldás: Szépség."
+    "correctAnswer": "b",
+    "explanation": "Az elmozdulás egy vektormennyiség, mert nemcsak a megtett út hossza számít, hanem az iránya is (pl. 5 métert tett meg kelet felé). A térfogatnak és a hosszúságnak (mint távolságnak) csak nagysága van. ✅ Megoldás: Elmozdulás."
+  },
+  {
+    "question": "Melyik NEM fizikai mennyiség?",
+    "answers": {
+      "a": "Erő",
+      "b": "Tömeg",
+      "c": "Szépség"
     },
-    {
-        "question": "Melyik NEM fizikai jelenség?",
-        "answers": {
-            "a": "A Föld keringése a Nap körül",
-            "b": "Egy test leesése",
-            "c": "Az idő múlása"
-        },
-        "correctAnswer": "c",
-        "explanation": "Bár az idő múlása alapvető a fizikában, maga nem egy megfigyelhető folyamat vagy esemény, hanem a jelenségek lejátszódásának kerete. Az idő egy alapvető fizikai mennyiség. A Föld keringése és egy test esése konkrét, megfigyelhető folyamatok, tehát jelenségek. ✅ Megoldás: Az idő múlása."
+    "correctAnswer": "c",
+    "explanation": "A fizikai mennyiségek objektíven mérhetők. A szépség egy szubjektív, esztétikai fogalom, nincs általánosan elfogadott mérési módja vagy mértékegysége. ✅ Megoldás: Szépség."
+  },
+  {
+    "question": "Melyik NEM fizikai jelenség?",
+    "answers": {
+      "a": "A Föld keringése a Nap körül",
+      "b": "Egy test leesése",
+      "c": "Az idő múlása"
     },
-    {
-        "question": "Egy autó sebességmérője 50 km/h-t mutat. Ez az adat...",
-        "answers": {
-            "a": "...egy vektormennyiség.",
-            "b": "...egy fizikai jelenség.",
-            "c": "...egy skalármennyiség."
-        },
-        "correctAnswer": "c",
-        "explanation": "Bár a sebesség vektormennyiség (van iránya), az autó sebességmérője csak a sebesség nagyságát mutatja, az irányát nem. A sebesség nagyságát skalárként kezeljük. ✅ Megoldás: ...egy skalármennyiség."
+    "correctAnswer": "c",
+    "explanation": "Bár az idő múlása alapvető a fizikában, maga nem egy megfigyelhető folyamat vagy esemény, hanem a jelenségek lejátszódásának kerete. Az idő egy alapvető fizikai mennyiség. A Föld keringése és egy test esése konkrét, megfigyelhető folyamatok, tehát jelenségek. ✅ Megoldás: Az idő múlása."
+  },
+  {
+    "question": "Egy autó sebességmérője 50 km/h-t mutat. Ez az adat...",
+    "answers": {
+      "a": "...egy vektormennyiség.",
+      "b": "...egy fizikai jelenség.",
+      "c": "...egy skalármennyiség."
     },
-    {
-        "question": "A tudományos elmélet...",
-        "answers": {
-            "a": "...egy egyszerű tipp vagy ötlet.",
-            "b": "...egy megcáfolt hipotézis.",
-            "c": "...egy sok kísérlettel alátámasztott, jól bevált magyarázat."
-        },
-        "correctAnswer": "c",
-        "explanation": "A tudományos elmélet egy átfogó magyarázó rendszer, amely számos kísérlet és megfigyelés eredményét foglalja össze és magyarázza meg. Sokkal több, mint egy egyszerű feltevés. ✅ Megoldás: ...egy sok kísérlettel alátámasztott, jól bevált magyarázat."
+    "correctAnswer": "c",
+    "explanation": "Bár a sebesség vektormennyiség (van iránya), az autó sebességmérője csak a sebesség nagyságát mutatja, az irányát nem. A sebesség nagyságát skalárként kezeljük. ✅ Megoldás: ...egy skalármennyiség."
+  },
+  {
+    "question": "A tudományos elmélet...",
+    "answers": {
+      "a": "...egy egyszerű tipp vagy ötlet.",
+      "b": "...egy megcáfolt hipotézis.",
+      "c": "...egy sok kísérlettel alátámasztott, jól bevált magyarázat."
     },
-    {
-        "question": "Mi a mérés?",
-        "answers": {
-            "a": "Egy test tulajdonságainak megváltoztatása.",
-            "b": "Egy jelenség megfigyelése.",
-            "c": "Egy fizikai mennyiség összehasonlítása a mértékegységével."
-        },
-        "correctAnswer": "c",
-        "explanation": "A mérés során megállapítjuk, hogy egy adott fizikai mennyiség hányszorosa a választott mértékegységnek. Az eredmény egy mérőszámból és egy mértékegységből áll. ✅ Megoldás: Egy fizikai mennyiség összehasonlítása a mértékegységével."
+    "correctAnswer": "c",
+    "explanation": "A tudományos elmélet egy átfogó magyarázó rendszer, amely számos kísérlet és megfigyelés eredményét foglalja össze és magyarázza meg. Sokkal több, mint egy egyszerű feltevés. ✅ Megoldás: ...egy sok kísérlettel alátámasztott, jól bevált magyarázat."
+  },
+  {
+    "question": "Mi a mérés?",
+    "answers": {
+      "a": "Egy test tulajdonságainak megváltoztatása.",
+      "b": "Egy jelenség megfigyelése.",
+      "c": "Egy fizikai mennyiség összehasonlítása a mértékegységével."
     },
-    {
-        "question": "Ha egy fizikai mennyiséget csak egy szám jellemez, az...",
-        "answers": {
-            "a": "...vektormennyiség.",
-            "b": "...mindig alapmennyiség.",
-            "c": "...skalármennyiség."
-        },
-        "correctAnswer": "c",
-        "explanation": "A skalármennyiségeket teljesen meghatározza a nagyságuk, amit egy számértékkel és egy mértékegységgel adunk meg. Nincs szükség az irány megadására. ✅ Megoldás: ...skalármennyiség."
+    "correctAnswer": "c",
+    "explanation": "A mérés során megállapítjuk, hogy egy adott fizikai mennyiség hányszorosa a választott mértékegységnek. Az eredmény egy mérőszámból és egy mértékegységből áll. ✅ Megoldás: Egy fizikai mennyiség összehasonlítása a mértékegységével."
+  },
+  {
+    "question": "Ha egy fizikai mennyiséget csak egy szám jellemez, az...",
+    "answers": {
+      "a": "...vektormennyiség.",
+      "b": "...mindig alapmennyiség.",
+      "c": "...skalármennyiség."
     },
-    {
-        "question": "A fizika tudománya mivel foglalkozik?",
-        "answers": {
-            "a": "Az élő szervezetekkel.",
-            "b": "Az anyagok átalakulásával.",
-            "c": "Az élettelen természet alapvető törvényeivel."
-        },
-        "correctAnswer": "c",
-        "explanation": "A fizika az élettelen természetet, az anyagot, az energiát és a köztük lévő kölcsönhatásokat, valamint az ezeket leíró alapvető törvényeket vizsgálja. ✅ Megoldás: Az élettelen természet alapvető törvényeivel."
+    "correctAnswer": "c",
+    "explanation": "A skalármennyiségeket teljesen meghatározza a nagyságuk, amit egy számértékkel és egy mértékegységgel adunk meg. Nincs szükség az irány megadására. ✅ Megoldás: ...skalármennyiség."
+  },
+  {
+    "question": "A fizika tudománya mivel foglalkozik?",
+    "answers": {
+      "a": "Az élő szervezetekkel.",
+      "b": "Az anyagok átalakulásával.",
+      "c": "Az élettelen természet alapvető törvényeivel."
     },
-    {
-        "question": "Melyik eszköz NEM fizikai mérésre szolgál?",
-        "answers": {
-            "a": "Vonalzó",
-            "b": "Stopperóra",
-            "c": "Toll"
-        },
-        "correctAnswer": "c",
-        "explanation": "A vonalzó a hosszúság, a stopperóra az idő mérésére szolgál. A toll írásra való eszköz, nem mérőeszköz. ✅ Megoldás: Toll."
-    }
+    "correctAnswer": "c",
+    "explanation": "A fizika az élettelen természetet, az anyagot, az energiát és a köztük lévő kölcsönhatásokat, valamint az ezeket leíró alapvető törvényeket vizsgálja. ✅ Megoldás: Az élettelen természet alapvető törvényeivel."
+  },
+  {
+    "question": "Melyik eszköz NEM fizikai mérésre szolgál?",
+    "answers": {
+      "a": "Vonalzó",
+      "b": "Stopperóra",
+      "c": "Toll"
+    },
+    "correctAnswer": "c",
+    "explanation": "A vonalzó a hosszúság, a stopperóra az idő mérésére szolgál. A toll írásra való eszköz, nem mérőeszköz. ✅ Megoldás: Toll."
+  }
 ]
-

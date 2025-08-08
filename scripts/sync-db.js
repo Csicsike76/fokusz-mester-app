@@ -8,11 +8,6 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
-/**
- * FONTOS: A JSON-ok a backend repo-ban legyenek itt:
- *   backend/data/quizzes/*.json
- * Ha máshol tartod, ezt az utat módosítsd.
- */
 const quizzesDirectory = path.join(__dirname, '..', 'data', 'quizzes');
 
 async function syncDatabase() {
@@ -39,13 +34,14 @@ async function syncDatabase() {
         continue;
       }
 
-      const slug = path.parse(fileName).name;
-      const { title, subject, grade, category, questions } = quizData;
+      if (!quizData.title) quizData.title = path.parse(fileName).name;
+      if (!quizData.subject) quizData.subject = 'ismeretlen';
+      if (!quizData.grade) quizData.grade = 0;
+      if (!quizData.category) quizData.category = 'free';
+      if (!Array.isArray(quizData.questions)) quizData.questions = [];
 
-      if (!title || !subject || !grade || !category || !Array.isArray(questions)) {
-        console.warn(`⚠️  Hiányos fájl: ${fileName} — (title, subject, grade, category, questions szükséges) → kihagyva.`);
-        continue;
-      }
+      const { title, subject, grade, category, questions } = quizData;
+      const slug = path.parse(fileName).name;
 
       const upsertCurriculumQuery = `
         INSERT INTO Curriculums (slug, title, subject, grade, category, is_published, created_at, updated_at)
@@ -70,7 +66,6 @@ async function syncDatabase() {
         continue;
       }
 
-      // Régi kérdések törlése
       await client.query('DELETE FROM QuizQuestions WHERE curriculum_id = $1', [curriculumId]);
 
       const insertQuestionQuery = `

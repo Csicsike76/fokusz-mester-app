@@ -5,257 +5,205 @@
   "category": "free_tool",
   "description": "Interaktív kvízkérdések a halmazállapotok és halmazállapot-változások témaköréből, magyarázatokkal.",
   "questions": [
-  {
-    "question": "Melyik folyamat során alakul át a szilárd halmazállapotú anyag folyékonnyá?",
-    "answers": {
+    {
+      "q": "Melyik folyamat során alakul át a szilárd halmazállapotú anyag folyékonnyá?",
       "a": "Olvadás",
       "b": "Párolgás",
-      "c": "Lecsapódás"
+      "c": "Lecsapódás",
+      "correct": "a",
+      "exp": "A szilárd anyagok melegítés hatására folyékonnyá válnak, ezt a folyamatot olvadásnak nevezzük. Az olvadás egy meghatározott hőmérsékleten, az olvadásponton történik."
     },
-    "correctAnswer": "a",
-    "explanation": "A szilárd anyagok melegítés hatására folyékonnyá válnak, ezt a folyamatot olvadásnak nevezzük. Az olvadás egy meghatározott hőmérsékleten, az olvadásponton történik. ✅ Megoldás: Olvadás. A párolgás folyékonyból légneművé, a lecsapódás pedig légneműből folyékonnyá alakulást jelent."
-  },
-  {
-    "question": "Mi történik a víz részecskéivel fagyás közben?",
-    "answers": {
+    {
+      "q": "Mi történik a víz részecskéivel fagyás közben?",
       "a": "Rendezetten kristályrácsba rendeződnek.",
       "b": "Egyre gyorsabban mozognak.",
-      "c": "Eltávolodnak egymástól és gőzzé válnak."
+      "c": "Eltávolodnak egymástól és gőzzé válnak.",
+      "correct": "a",
+      "exp": "Fagyás során a folyadék részecskéinek mozgási energiája csökken. A vonzóerők hatására lelassulnak és egy szabályos, szoros kristályrácsba rendeződnek."
     },
-    "correctAnswer": "a",
-    "explanation": "Fagyás során a folyadék részecskéinek mozgási energiája csökken. A vonzóerők hatására lelassulnak és egy szabályos, szoros szerkezetbe, azaz kristályrácsba rendeződnek, így jön létre a szilárd halmazállapot. ✅ Megoldás: Rendezetten kristályrácsba rendeződnek. A gyorsabb mozgás a melegítésre, az eltávolodás és gőzzé válás a párolgásra vagy forrásra jellemző."
-  },
-  {
-    "question": "Mi a neve annak a folyamatnak, amikor a vízgőz a hideg ablaküvegen vízcseppekké alakul?",
-    "answers": {
+    {
+      "q": "Mi a neve annak a folyamatnak, amikor a vízgőz a hideg ablaküvegen vízcseppekké alakul?",
       "a": "Lecsapódás",
       "b": "Forrás",
-      "c": "Párolgás"
+      "c": "Párolgás",
+      "correct": "a",
+      "exp": "Amikor a légnemű anyag (gőz) egy hideg felülettel érintkezve lehűl és folyékonnyá válik, azt lecsapódásnak nevezzük."
     },
-    "correctAnswer": "a",
-    "explanation": "Amikor a légnemű anyag (gőz) egy hideg felülettel érintkezve lehűl és folyékonnyá válik, azt lecsapódásnak nevezzük. Ez a felhő- és esőképződés alapja is. ✅ Megoldás: Lecsapódás."
-  },
-  {
-    "question": "Hány fokon fagy meg a tiszta víz normál légköri nyomáson?",
-    "answers": {
+    {
+      "q": "Hány fokon fagy meg a tiszta víz normál légköri nyomáson?",
       "a": "0 °C-on",
       "b": "100 °C-on",
-      "c": "-10 °C-on"
+      "c": "-10 °C-on",
+      "correct": "a",
+      "exp": "A víz fagyáspontja 0 Celsius-fok. Ezen a hőmérsékleten kezd a folyékony víz szilárd jéggé alakulni."
     },
-    "correctAnswer": "a",
-    "explanation": "A víz fagyáspontja 0 Celsius-fok. Ezen a hőmérsékleten kezd a folyékony víz szilárd jéggé alakulni. Érdekesség, hogy ez megegyezik a jég olvadáspontjával. ✅ Megoldás: 0 °C-on. 100 °C-on a víz forrni kezd."
-  },
-  {
-    "question": "Melyik állítás igaz a párolgásra?",
-    "answers": {
+    {
+      "q": "Melyik állítás igaz a párolgásra?",
       "a": "Csak a folyadék felszínén történik.",
       "b": "Csak 100 °C-on megy végbe.",
-      "c": "Buborékképződéssel jár."
+      "c": "Buborékképződéssel jár.",
+      "correct": "a",
+      "exp": "A párolgás a folyadék felszínén lévő, nagyobb energiájú részecskék eltávozása. Bármilyen hőmérsékleten végbemegy, buborékképződés nélkül."
     },
-    "correctAnswer": "a",
-    "explanation": "A párolgás az a folyamat, amikor a folyadék felszínén lévő, nagyobb energiájú részecskék elhagyják a folyadékot. Ez bármilyen hőmérsékleten végbemegy és nem jár buborékképződéssel. ✅ Megoldás: Csak a folyadék felszínén történik. A buborékképződés és a meghatározott hőmérsékleten (100 °C) való zajlás a forrásra jellemző."
-  },
-  {
-    "question": "Melyik anyag szilárd halmazállapotú szobahőmérsékleten?",
-    "answers": {
+    {
+      "q": "Melyik anyag szilárd halmazállapotú szobahőmérsékleten?",
       "a": "Vas",
       "b": "Víz",
-      "c": "Levegő"
+      "c": "Levegő",
+      "correct": "a",
+      "exp": "Szobahőmérsékleten a vas szilárd, a víz folyékony, a levegő légnemű."
     },
-    "correctAnswer": "a",
-    "explanation": "Szobahőmérsékleten (kb. 20-25 °C) a vas szilárd, a víz folyékony, a levegő pedig légnemű (gáz). A vas olvadáspontja kb. 1538 °C, tehát nagyon magas hőmérséklet kell a megolvasztásához. ✅ Megoldás: Vas."
-  },
-  {
-    "question": "Milyen halmazállapot-változás történik, amikor a jégkocka eltűnik a pohár italból?",
-    "answers": {
+    {
+      "q": "Milyen halmazállapot-változás történik, amikor a jégkocka eltűnik a pohár italból?",
       "a": "Olvadás",
       "b": "Fagyás",
-      "c": "Forrás"
+      "c": "Forrás",
+      "correct": "a",
+      "exp": "A jég szilárd víz, amely hő hatására folyékonnyá válik — ez az olvadás."
     },
-    "correctAnswer": "a",
-    "explanation": "A jég szilárd halmazállapotú víz. Amikor a melegebb italba kerül, hőt vesz fel és folyékonnyá, azaz vízzé alakul. Ezt a folyamatot olvadásnak nevezzük. ✅ Megoldás: Olvadás."
-  },
-  {
-    "question": "Mi a forrás?",
-    "answers": {
+    {
+      "q": "Mi a forrás?",
       "a": "A folyadék belsejében zajló, heves párolgás.",
       "b": "A gázok folyékonnyá alakulása.",
-      "c": "A szilárd anyagok gázzá alakulása."
+      "c": "A szilárd anyagok gázzá alakulása.",
+      "correct": "a",
+      "exp": "A forrás egy gyors párolgási folyamat, amely a folyadék teljes térfogatában zajlik, buborékképződéssel."
     },
-    "correctAnswer": "a",
-    "explanation": "A forrás egy speciális, gyors párolgási folyamat, amely a folyadék teljes tömegében, a forrásponton megy végbe. Jellemzője a buborékképződés. ✅ Megoldás: A folyadék belsejében zajló, heves párolgás. A gázok folyékonnyá alakulása a lecsapódás."
-  },
-  {
-    "question": "Mi a forráspont?",
-    "answers": {
+    {
+      "q": "Mi a forráspont?",
       "a": "Az a hőmérséklet, aminél egy anyag fagy.",
       "b": "Az a hőmérséklet, aminél egy anyag forr.",
-      "c": "Az a hőmérséklet, aminél egy anyag elpárolog."
+      "c": "Az a hőmérséklet, aminél egy anyag elpárolog.",
+      "correct": "b",
+      "exp": "A forráspont az a meghatározott hőmérséklet, amelyen a folyadék belsejében is megindul a gőzképződés."
     },
-    "correctAnswer": "b",
-    "explanation": "A forráspont az a meghatározott hőmérséklet, amelyen egy folyadék belsejében is megindul a gőzképződés, azaz forrni kezd. ✅ Megoldás: Az a hőmérséklet, aminél egy anyag forr. Az a kijelentés, hogy 'aminél egy anyag elpárolog', pontatlan, mert a párolgás minden hőmérsékleten lehetséges, nem csak a forrásponton."
-  },
-  {
-    "question": "Melyik folyamat fordítottja a fagyásnak?",
-    "answers": {
+    {
+      "q": "Melyik folyamat fordítottja a fagyásnak?",
       "a": "Párolgás",
       "b": "Olvadás",
-      "c": "Lecsapódás"
+      "c": "Lecsapódás",
+      "correct": "b",
+      "exp": "A fagyás során folyadékból szilárd lesz, ennek fordítottja az olvadás."
     },
-    "correctAnswer": "b",
-    "explanation": "A fagyás során a folyékony anyag szilárddá válik (pl. vízből jég). Ennek a folyamatnak a fordítottja, amikor a szilárd anyag folyékonnyá alakul, amit olvadásnak nevezünk (pl. jégből víz). ✅ Megoldás: Olvadás."
-  },
-  {
-    "question": "Miért 'tűnik el' a pocsolya egy napsütéses napon?",
-    "answers": {
+    {
+      "q": "Miért 'tűnik el' a pocsolya egy napsütéses napon?",
       "a": "Mert lecsapódik.",
       "b": "Mert elpárolog.",
-      "c": "Mert megfagy."
+      "c": "Mert megfagy.",
+      "correct": "b",
+      "exp": "A napsugárzás felgyorsítja a párolgást, a víz gőzzé válik és a levegőbe kerül."
     },
-    "correctAnswer": "b",
-    "explanation": "A Nap energiája felgyorsítja a párolgás folyamatát. A víz a felszínéről légnemű halmazállapotúvá, azaz vízgőzzé alakul és a levegőbe kerül, ezért a pocsolya lassan 'eltűnik'. ✅ Megoldás: Mert elpárolog."
-  },
-  {
-    "question": "Mi van a forrásban lévő vízben keletkező buborékokban?",
-    "answers": {
+    {
+      "q": "Mi van a forrásban lévő vízben keletkező buborékokban?",
       "a": "Levegő",
       "b": "Vízgőz",
-      "c": "Oxigén"
+      "c": "Oxigén",
+      "correct": "b",
+      "exp": "A forrás során keletkező buborékok vízgőzzel teltek."
     },
-    "correctAnswer": "b",
-    "explanation": "A forrás során a folyadék belsejében is elegendő energia halmozódik fel ahhoz, hogy a vízrészecskék gázzá alakuljanak. Ezek a gázbuborékok valójában vízgőzzel vannak tele, amelyek a felszínre emelkedve távoznak. ✅ Megoldás: Vízgőz."
-  },
-  {
-    "question": "Melyik halmazállapotban vannak a részecskék a legrendezettebb állapotban?",
-    "answers": {
+    {
+      "q": "Melyik halmazállapotban vannak a részecskék a legrendezettebb állapotban?",
       "a": "Folyékony",
       "b": "Szilárd",
-      "c": "Légnemű (gáz)"
+      "c": "Légnemű (gáz)",
+      "correct": "b",
+      "exp": "Szilárd halmazállapotban a részecskék kristályrácsba rendeződnek."
     },
-    "correctAnswer": "b",
-    "explanation": "Szilárd halmazállapotban az anyagot alkotó részecskék egy szabályos szerkezetben, az úgynevezett kristályrácsban helyezkednek el, és csak rezgőmozgást végeznek. Ez a legrendezettebb állapot. ✅ Megoldás: Szilárd."
-  },
-  {
-    "question": "Mi történik egy anyaggal, amikor hőt ad le a környezetének?",
-    "answers": {
+    {
+      "q": "Mi történik egy anyaggal, amikor hőt ad le a környezetének?",
       "a": "Elolvad vagy elpárolog.",
       "b": "Megfagy vagy lecsapódik.",
-      "c": "A hőmérséklete mindig emelkedik."
+      "c": "A hőmérséklete mindig emelkedik.",
+      "correct": "b",
+      "exp": "A fagyás és lecsapódás során az anyag hőt ad le a környezetének."
     },
-    "correctAnswer": "b",
-    "explanation": "A fagyás és a lecsapódás olyan folyamatok, amelyek során az anyag energiát (hőt) ad le a környezetének, miközben rendezettebb állapotba kerül (folyékonyból szilárdba, vagy gázból folyékonyba). ✅ Megoldás: Megfagy vagy lecsapódik. Az olvadás és párolgás hőfelvétellel járó folyamatok."
-  },
- 
-  {
-    "question": "Melyik halmazállapot-változás NEM jár hőfelvétellel?",
-    "answers": {
+    {
+      "q": "Melyik halmazállapot-változás NEM jár hőfelvétellel?",
       "a": "Olvadás",
       "b": "Fagyás",
-      "c": "Forrás"
+      "c": "Forrás",
+      "correct": "b",
+      "exp": "A fagyás hőleadással jár, az olvadás és forrás hőfelvétellel."
     },
-    "correctAnswer": "b",
-    "explanation": "Az olvadáshoz és a forráshoz is energiát kell közölnünk az anyaggal, tehát ezek hőfelvétellel járnak. A fagyás során azonban az anyag hőt ad le a környezetének, miközben szilárddá válik. ✅ Megoldás: Fagyás."
-  },
-  {
-    "question": "Hogyan nevezzük azt, amikor a gőz folyékonnyá válik?",
-    "answers": {
+    {
+      "q": "Hogyan nevezzük azt, amikor a gőz folyékonnyá válik?",
       "a": "Párolgás",
       "b": "Lecsapódás",
-      "c": "Forrás"
+      "c": "Forrás",
+      "correct": "b",
+      "exp": "A gőz folyékonnyá alakulása a lecsapódás."
     },
-    "correctAnswer": "b",
-    "explanation": "A légnemű (gőz) halmazállapotból folyékony halmazállapotba történő átmenetet lecsapódásnak nevezzük. Ez a folyamat hőleadással jár. ✅ Megoldás: Lecsapódás."
-  },
-  {
-    "question": "Mi a különbség a párolgás és a forrás között?",
-    "answers": {
-      "a": "Nincs különbség, a kettő ugyanaz.",
+    {
+      "q": "Mi a különbség a párolgás és a forrás között?",
+      "a": "Nincs különbség.",
       "b": "A forrás a folyadék belsejében is zajlik, a párolgás csak a felszínen.",
-      "c": "A párolgás csak melegben, a forrás csak hidegben történik."
+      "c": "A párolgás csak melegben, a forrás csak hidegben történik.",
+      "correct": "b",
+      "exp": "A párolgás a felszínen zajlik bármikor, a forrás a teljes térfogatban forrásponton."
     },
-    "correctAnswer": "b",
-    "explanation": "A legalapvetőbb különbség, hogy a párolgás a folyadék felszínén, bármilyen hőmérsékleten zajlik. Ezzel szemben a forrás egy meghatározott hőmérsékleten (forrásponton) a folyadék teljes tömegében, buborékképződéssel járó heves folyamat. ✅ Megoldás: A forrás a folyadék belsejében is zajlik, a párolgás csak a felszínen."
-  },
-  {
-    "question": "Melyik halmazállapotban tölti ki az anyag a rendelkezésére álló teljes teret?",
-    "answers": {
+    {
+      "q": "Melyik halmazállapotban tölti ki az anyag a rendelkezésére álló teljes teret?",
       "a": "Szilárd",
       "b": "Folyékony",
-      "c": "Légnemű (gáz)"
+      "c": "Légnemű (gáz)",
+      "correct": "c",
+      "exp": "A gázok kitöltik a rendelkezésükre álló teljes teret."
     },
-    "correctAnswer": "c",
-    "explanation": "A légnemű (gáz) halmazállapotú anyagok részecskéi szabadon mozognak és nincsenek szoros kölcsönhatásban egymással, ezért kitöltik a rendelkezésükre álló teljes teret. A folyadékok felveszik az edény alakját, de van saját térfogatuk, a szilárd testeknek pedig saját alakjuk és térfogatuk is van. ✅ Megoldás: Légnemű (gáz)."
-  },
-  {
-    "question": "Mi az olvadáspont?",
-    "answers": {
+    {
+      "q": "Mi az olvadáspont?",
       "a": "Az a hőmérséklet, aminél a folyadék gőzzé válik.",
       "b": "Az a hőmérséklet, aminél a folyadék megfagy.",
-      "c": "Az a hőmérséklet, aminél a szilárd anyag megolvad."
+      "c": "Az a hőmérséklet, aminél a szilárd anyag megolvad.",
+      "correct": "c",
+      "exp": "Az olvadáspont a szilárd anyag folyékonnyá válásának hőmérséklete."
     },
-    "correctAnswer": "c",
-    "explanation": "Az olvadáspont az a specifikus hőmérséklet, amelyen egy szilárd, kristályos anyag melegítés hatására folyékony halmazállapotúvá kezd válni. ✅ Megoldás: Az a hőmérséklet, aminél a szilárd anyag megolvad."
-  },
-  {
-    "question": "A csokoládé olvasztása milyen halmazállapot-változás?",
-    "answers": {
+    {
+      "q": "A csokoládé olvasztása milyen halmazállapot-változás?",
       "a": "Forrás",
       "b": "Fagyás",
-      "c": "Olvadás"
+      "c": "Olvadás",
+      "correct": "c",
+      "exp": "A csokoládé melegítés hatására olvad."
     },
-    "correctAnswer": "c",
-    "explanation": "A csokoládé szobahőmérsékleten szilárd. Amikor melegítjük, folyékonnyá válik. A szilárd halmazállapotból folyékonyba való átmenetet olvadásnak hívjuk. ✅ Megoldás: Olvadás."
-  },
-  {
-    "question": "Melyik folyamat játszódik le, amikor a forró leves gőze a hideg fedőn vízcseppekké válik?",
-    "answers": {
+    {
+      "q": "Melyik folyamat játszódik le, amikor a forró leves gőze a hideg fedőn vízcseppekké válik?",
       "a": "Olvadás",
       "b": "Forrás",
-      "c": "Lecsapódás"
+      "c": "Lecsapódás",
+      "correct": "c",
+      "exp": "A gőz hideg felületen vízcseppekké alakul — lecsapódás."
     },
-    "correctAnswer": "c",
-    "explanation": "A levesből felszálló forró vízgőz (légnemű) a hidegebb fedővel érintkezve lehűl, és energiát ad le. Ennek hatására újra folyékony vízcseppekké alakul. Ezt a folyamatot lecsapódásnak nevezzük. ✅ Megoldás: Lecsapódás."
-  },
-  {
-    "question": "Hány fokon forr a tiszta víz normál légköri nyomáson?",
-    "answers": {
+    {
+      "q": "Hány fokon forr a tiszta víz normál légköri nyomáson?",
       "a": "90 °C-on",
       "b": "0 °C-on",
-      "c": "100 °C-on"
+      "c": "100 °C-on",
+      "correct": "c",
+      "exp": "A víz forráspontja normál nyomáson 100 °C."
     },
-    "correctAnswer": "c",
-    "explanation": "A víz forráspontja standard (tengerszinti) légköri nyomáson 100 Celsius-fok. Ezen a hőmérsékleten kezd a víz hevesen, a belsejében is gőzzé alakulni. ✅ Megoldás: 100 °C-on. 0 °C a víz fagyáspontja."
-  },
-  {
-    "question": "Melyik NEM halmazállapot?",
-    "answers": {
+    {
+      "q": "Melyik NEM halmazállapot?",
       "a": "Szilárd",
       "b": "Folyékony",
-      "c": "Sűrűség"
+      "c": "Sűrűség",
+      "correct": "c",
+      "exp": "A sűrűség anyagi jellemző, de nem halmazállapot."
     },
-    "correctAnswer": "c",
-    "explanation": "Az anyagoknak három alapvető halmazállapota van: szilárd, folyékony és légnemű (gáz). A sűrűség az anyagok egy fizikai tulajdonsága, de nem halmazállapot. ✅ Megoldás: Sűrűség."
-  },
-  {
-    "question": "A jégkockakészítés során a víz...",
-    "answers": {
+    {
+      "q": "A jégkockakészítés során a víz...",
       "a": "...elpárolog.",
       "b": "...lecsapódik.",
-      "c": "...megfagy."
+      "c": "...megfagy.",
+      "correct": "c",
+      "exp": "A víz 0°C-on hőt lead és szilárd jéggé válik."
     },
-    "correctAnswer": "c",
-    "explanation": "Amikor a folyékony vizet a fagyasztóba tesszük, az hőt ad le a környezetének és 0°C-on szilárd halmazállapotúvá, azaz jéggé alakul. Ez a fagyás folyamata. ✅ Megoldás: ...megfagy."
-  },
-  {
-    "question": "Miért párásodik be a szemüveged, ha télen egy meleg szobába lépsz be?",
-    "answers": {
+    {
+      "q": "Miért párásodik be a szemüveged, ha télen egy meleg szobába lépsz be?",
       "a": "Mert megfagy a lencsén a pára.",
       "b": "Mert elpárolog a lencséről a víz.",
-      "c": "Mert a meleg szoba levegőjének párája lecsapódik a hideg lencsén."
-    },
-    "correctAnswer": "c",
-    "explanation": "A kintről behozott szemüveglencse hideg. A meleg szoba levegője több vízgőzt (párát) tartalmaz. Amikor ez a pára a hideg lencséhez ér, lehűl és apró vízcseppek formájában lecsapódik rá. ✅ Megoldás: Mert a meleg szoba levegőjének párája lecsapódik a hideg lencsén."
-  }
-]
-
+      "c": "Mert a meleg szoba levegőjének párája lecsapódik a hideg lencsén.",
+      "correct": "c",
+      "exp": "A hideg lencsén a meleg szoba levegőjének párája lecsapódik."
+    }
+  ]
 }

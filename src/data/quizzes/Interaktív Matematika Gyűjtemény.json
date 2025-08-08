@@ -1,38 +1,41 @@
 {
   "title": "Interaktív Matematika Gyűjtemény",
-  "subtitle": "Digitális segédlet és gyakorlórendszer általános iskolásoknak",
-  "category": {
-    "access": "premium",
-    "name": "Matematika Gyűjtemény"
-  },
-  "sections": [
-    {
-      "sectionTitle": "Tananyagok Évfolyamok Szerint",
-      "cards": [
-        { "grade": "5.", "text": "Osztály", "link": "kepletek_5_osztaly.html" },
-        { "grade": "6.", "text": "Osztály", "link": "kepletek_6_osztaly.html" },
-        { "grade": "7.", "text": "Osztály", "link": "kepletek_7_osztaly.html" },
-        { "grade": "8.", "text": "Osztály", "link": "1Fo oldal.html" }
-      ]
-    },
-    {
-      "sectionTitle": "Összesített Képletgyűjtemények",
-      "cards": [
-        { "grade": "5. Osztály", "text": "Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_5_osztaly.html" },
-        { "grade": "6. Osztály", "text": "Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_6_osztaly.html" },
-        { "grade": "7. Osztály", "text": "Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_7_osztaly.html" },
-        { "grade": "8. Osztály", "text": "Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_8_osztaly.html" }
-      ]
-    },
-    {
-      "sectionTitle": "Év Végi Összefoglaló Felmérők",
-      "cards": [
-        { "grade": "5. Osztály", "text": "Év Végi Felmérő", "link": "kviz_5_osztaly_ev_vegi_osszefoglalo.html" },
-        { "grade": "6. Osztály", "text": "Év Végi Felmérő", "link": "kviz_6_osztaly_ev_vegi_osszefoglalo.html" },
-        { "grade": "7. Osztály", "text": "Év Végi Felmérő", "link": "kviz_7_osztaly_ev_vegi_osszefoglalo.html" },
-        { "grade": "8. Osztály", "text": "Év Végi Felmérő", "link": "kviz_8_osztaly_ev_vegi_osszefoglalo.html" }
-      ]
-    }
-  ],
-  "footer": "Generálta: CSICSIKE 2025"
+  "subject": "math",
+  "grade": 8,
+  "category": "premium",
+  "description": "Digitális segédlet és gyakorlórendszer általános iskolásoknak, évfolyamonkénti és összesített képletgyűjteményekkel, valamint év végi felmérőkkel.",
+  "questions": [],
+  "content": {
+    "subtitle": "Digitális segédlet és gyakorlórendszer általános iskolásoknak",
+    "sections": [
+      {
+        "sectionTitle": "Tananyagok Évfolyamok Szerint",
+        "cards": [
+          { "grade": "5.", "text": "Osztály", "link": "kepletek_5_osztaly.html" },
+          { "grade": "6.", "text": "Osztály", "link": "kepletek_6_osztaly.html" },
+          { "grade": "7.", "text": "Osztály", "link": "kepletek_7_osztaly.html" },
+          { "grade": "8.", "text": "Osztály", "link": "1Fo oldal.html" }
+        ]
+      },
+      {
+        "sectionTitle": "Összesített Képletgyűjtemények",
+        "cards": [
+          { "grade": "5. Osztály", "text": "Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_5_osztaly.html" },
+          { "grade": "6. Osztály", "text": "Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_6_osztaly.html" },
+          { "grade": "7. Osztály", "text": "Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_7_osztaly.html" },
+          { "grade": "8. Osztály", "text": "Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_8_osztaly.html" }
+        ]
+      },
+      {
+        "sectionTitle": "Év Végi Összefoglaló Felmérők",
+        "cards": [
+          { "grade": "5. Osztály", "text": "Év Végi Felmérő", "link": "kviz_5_osztaly_ev_vegi_osszefoglalo.html" },
+          { "grade": "6. Osztály", "text": "Év Végi Felmérő", "link": "kviz_6_osztaly_ev_vegi_osszefoglalo.html" },
+          { "grade": "7. Osztály", "text": "Év Végi Felmérő", "link": "kviz_7_osztaly_ev_vegi_osszefoglalo.html" },
+          { "grade": "8. Osztály", "text": "Év Végi Felmérő", "link": "kviz_8_osztaly_ev_vegi_osszefoglalo.html" }
+        ]
+      }
+    ],
+    "footer": "Generálta: CSICSIKE 2025"
+  }
 }
