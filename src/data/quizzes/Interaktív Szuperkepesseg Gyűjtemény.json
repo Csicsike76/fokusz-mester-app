@@ -1,4 +1,8 @@
 {
+  "category": {
+    "access": "premium",
+    "name": "Stratégiai MI Kurzus"
+  },
   "navigation": {
     "links": [
       {
@@ -13,22 +17,10 @@
       }
     ],
     "modules": [
-      {
-        "id": "module1",
-        "text": "I. Személyes OS Fejlesztés"
-      },
-      {
-        "id": "module2",
-        "text": "II. A Kreatív Erősítő"
-      },
-      {
-        "id": "module3",
-        "text": "III. Stratégiai Jövőkép"
-      },
-      {
-        "id": "module4",
-        "text": "IV. Záróprojekt"
-      }
+      { "id": "module1", "text": "I. Személyes OS Fejlesztés" },
+      { "id": "module2", "text": "II. A Kreatív Erősítő" },
+      { "id": "module3", "text": "III. Stratégiai Jövőkép" },
+      { "id": "module4", "text": "IV. Záróprojekt" }
     ]
   },
   "main": {
