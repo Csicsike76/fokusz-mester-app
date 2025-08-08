@@ -8,8 +8,12 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
-// Állítsd be, ha más nálad az útvonal
-const quizzesDirectory = path.join(__dirname, '..', 'src', 'data', 'quizzes');
+/**
+ * FONTOS: A JSON-ok a backend repo-ban legyenek itt:
+ *   backend/data/quizzes/*.json
+ * Ha máshol tartod, ezt az utat módosítsd.
+ */
+const quizzesDirectory = path.join(__dirname, '..', 'data', 'quizzes');
 
 async function syncDatabase() {
   console.log('Adatbázis szinkronizáció megkezdése...');
@@ -32,21 +36,17 @@ async function syncDatabase() {
         quizData = JSON.parse(fileContent);
       } catch (parseErr) {
         console.error(`❌ JSON hiba a fájlban: ${fileName}\n   ${parseErr.message}`);
-        // Hibás JSON → kihagyjuk és lépünk tovább
         continue;
       }
 
-      // A slug a fájlnév (kiterjesztés nélkül)
       const slug = path.parse(fileName).name;
       const { title, subject, grade, category, questions } = quizData;
 
-      // Minimális validáció
       if (!title || !subject || !grade || !category || !Array.isArray(questions)) {
         console.warn(`⚠️  Hiányos fájl: ${fileName} — (title, subject, grade, category, questions szükséges) → kihagyva.`);
         continue;
       }
 
-      // Curriculums upsert
       const upsertCurriculumQuery = `
         INSERT INTO Curriculums (slug, title, subject, grade, category, is_published, created_at, updated_at)
         VALUES ($1, $2, $3, $4, $5, true, NOW(), NOW())
@@ -67,10 +67,10 @@ async function syncDatabase() {
         console.log(`✔️  Tananyag upsertelve: ${slug} (id=${curriculumId})`);
       } catch (e) {
         console.error(`❌ Curriculums mentési hiba (${fileName}): ${e.message}`);
-        continue; // lépjünk tovább a következő fájlra
+        continue;
       }
 
-      // Régi kérdések törlése és újak beszúrása (explanation-nel!)
+      // Régi kérdések törlése
       await client.query('DELETE FROM QuizQuestions WHERE curriculum_id = $1', [curriculumId]);
 
       const insertQuestionQuery = `
@@ -104,7 +104,6 @@ async function syncDatabase() {
 
     await client.query('COMMIT');
     console.log('\n✅ Adatbázis szinkronizáció sikeresen befejeződött!');
-
   } catch (error) {
     await client.query('ROLLBACK');
     console.error('❌ Hiba történt a szinkronizáció során:', error);
