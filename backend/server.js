@@ -225,56 +225,37 @@ app.get('/api/curriculums', async (req, res) => {
     let query = 'SELECT * FROM Curriculums WHERE is_published = true';
     const queryParams = [];
     
-    if (subject) {
-        queryParams.push(subject);
-        query += ` AND subject = $${queryParams.length}`;
-    }
-    if (grade) {
-        queryParams.push(grade);
-        query += ` AND grade = $${queryParams.length}`;
-    }
-    if (q) {
-        queryParams.push(`%${q}%`);
-        query += ` AND title ILIKE $${queryParams.length}`;
-    }
-    query += ' ORDER BY subject, grade, title;';
+    if (subject) { /* ... */ }
+    if (grade) { /* ... */ }
+    if (q) { /* ... */ }
+    query += ' ORDER BY category, title;';
 
     try {
         const result = await pool.query(query, queryParams);
         
-        if (subject || grade || q) {
-            return res.status(200).json({ success: true, data: result.rows });
-        }
-        
+        // JAVÍTÁS ITT: MINDEN ESETBEN CSOPORTOSÍTUNK
         const groupedData = {
-            freeLessons: {},
-            freeTools: [],
-            premiumCourses: [],
-            premiumTools: []
+            lessons: [],
+            collections: [], // gyűjtemények
+            assessments: []  // felmérők
         };
-
+        
+        // A kategória helyett a SLUG alapján csoportosítunk
         result.rows.forEach(item => {
-            const subjectKey = item.subject || 'altalanos';
-            switch (item.category) {
-                case 'free_lesson':
-                    if (!groupedData.freeLessons[subjectKey]) {
-                        groupedData.freeLessons[subjectKey] = [];
-                    }
-                    groupedData.freeLessons[subjectKey].push(item);
-                    break;
-                case 'free_tool':
-                    groupedData.freeTools.push(item);
-                    break;
-                case 'premium_course':
-                    groupedData.premiumCourses.push(item);
-                    break;
-                case 'premium_tool':
-                    groupedData.premiumTools.push(item);
-                    break;
-                default:
-                    break;
+            if (item.slug.includes('kepletgyujtemeny')) {
+                groupedData.collections.push(item);
+            } else if (item.slug.includes('ev_vegi_osszefoglalo')) {
+                groupedData.assessments.push(item);
+            } else {
+                groupedData.lessons.push(item);
             }
         });
+        
+        // Ha a főoldal hívja (nincs szűrés), egy másik formátumot adunk vissza
+        if (!subject && !grade && !q) {
+            // ... a korábbi, főoldalra szánt csoportosítási logika ...
+            return res.status(200).json({ success: true, data: mainPageGroupedData });
+        }
 
         res.status(200).json({ success: true, data: groupedData });
 
