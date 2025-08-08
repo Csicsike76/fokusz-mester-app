@@ -1,0 +1,266 @@
+[
+  {
+    "question": "1. Melyik jelölés írja le helyesen „az összes pozitív páros szám\" halmazát?",
+    "options": {
+      "a": "A = {x ∈ ℕ | x = 2k, k ∈ ℕ}",
+      "b": "A = {x ∈ ℝ | x < 0}",
+      "c": "A = {2,4,6,8,10,12,14}"
+    },
+    "correct": "a",
+    "explanation": "A pozitív páros számok formális definíciója: x természetes szám és x = 2k alakban írható fel, ahol k ∈ ℕ. Ez pontosan az „a\" válasz."
+  },
+  {
+    "question": "2. Igaz vagy hamis? Az {x | x egy prímszám és x < 10} halmaznak 5 eleme van.",
+    "options": {
+      "a": "Igaz",
+      "b": "Hamis",
+      "c": "Nem dönthető el"
+    },
+    "correct": "b",
+    "explanation": "A 10-nél kisebb prímszámok: 2, 3, 5, 7 – összesen 4 elem van, nem 5. Az állítás hamis."
+  },
+  {
+    "question": "3. Mi NEM befolyásolja a halmaz elemeit?",
+    "options": {
+      "a": "Az elemek sorrendje",
+      "b": "Az elemek tényleges értéke",
+      "c": "Az elemek tulajdonságai"
+    },
+    "correct": "a",
+    "explanation": "A halmazban az elemek sorrendje lényegtelen: {1,2,3} = {3,1,2}. Az elemek értéke és tulajdonságai viszont meghatározzák a halmazt."
+  },
+  {
+    "question": "4. Adott S = {x | x ∈ ℤ, x² = 1}. Hány elemű az S halmaz?",
+    "options": {
+      "a": "1 elemű",
+      "b": "3 elemű",
+      "c": "2 elemű"
+    },
+    "correct": "c",
+    "explanation": "Az x² = 1 egyenlet egész megoldásai: x = 1 és x = -1. Tehát az S halmaz 2 elemű."
+  },
+  {
+    "question": "5. Mi jellemzi a set-builder (tulajdonságos) jelölést?",
+    "options": {
+      "a": "Logikai feltétellel írja le a halmaz elemeit",
+      "b": "Csak véges halmazokra használható",
+      "c": "Mindig tartalmaz intervalumot"
+    },
+    "correct": "a",
+    "explanation": "A set-builder jelölés: {x | P(x)} alakú, ahol P(x) egy logikai feltétel, amely meghatározza, mely elemek tartoznak a halmazba."
+  },
+  {
+    "question": "6. Melyik jelölés helyes az üres halmazra?",
+    "options": {
+      "a": "Csak a ∅ jelölés",
+      "b": "Csak a { } jelölés",
+      "c": "Mind a ∅, mind a { } jelölés"
+    },
+    "correct": "c",
+    "explanation": "Az üres halmazt jelölhetjük mind ∅ szimbólummal, mind { } üres kapcsos zárójellel. Mindkettő egyenértékű."
+  },
+  {
+    "question": "7. Mi a helyes jelölése a halmaznak: „x páratlan szám és 1 ≤ x ≤ 9\"?",
+    "options": {
+      "a": "H = {2,4,6,8}",
+      "b": "H = {x ∈ ℕ | x = 2k+1, 0 ≤ k ≤ 4}",
+      "c": "H = {x ∈ ℝ | x > 9}"
+    },
+    "correct": "b",
+    "explanation": "A páratlan számok x = 2k+1 alakban írhatók. A tartomány 1 ≤ x ≤ 9 esetén k = 0,1,2,3,4, ami a {1,3,5,7,9} halmazt adja."
+  },
+  {
+    "question": "8. Melyik NEM eleme a K = {x | x = 2n, n ∈ ℤ, -3 ≤ n ≤ 2} halmaznak?",
+    "options": {
+      "a": "8",
+      "b": "-4",
+      "c": "2"
+    },
+    "correct": "a",
+    "explanation": "n ∈ {-3,-2,-1,0,1,2} → K = {-6,-4,-2,0,2,4}. A 8 nem szerepel, mert ahhoz n = 4 kellene, ami kívül esik a [-3,2] tartományon."
+  },
+  {
+    "question": "9. Az üres halmaz részhalmaza-e minden halmaznak?",
+    "options": {
+      "a": "Nem",
+      "b": "Igen",
+      "c": "Csak véges halmazoknál"
+    },
+    "correct": "b",
+    "explanation": "Definíció szerint ∅ ⊆ A minden A halmazra, mert az üres halmaz minden eleme (nincs ilyen) benne van A-ban is."
+  },
+  {
+    "question": "10. Ha A = {x | x ∈ ℝ, x² < 9}, akkor A melyik intervallum?",
+    "options": {
+      "a": "[-3,3]",
+      "b": "(-3,3)",
+      "c": "(-∞,3)"
+    },
+    "correct": "b",
+    "explanation": "x² < 9 ⟺ |x| < 3 ⟺ -3 < x < 3. Ez a (-3,3) nyílt intervallum, mert a végpontok nem tartoznak bele."
+  },
+  {
+    "question": "11. Melyik NEM határozza meg egyértelműen a halmazt?",
+    "options": {
+      "a": "„A legszebb virágok\"",
+      "b": "{Mars, Vénusz, Föld}",
+      "c": "{x ∈ ℕ | x > 1000}"
+    },
+    "correct": "a",
+    "explanation": "A „legszebb\" szubjektív fogalom, nem ad egyértelmű kritériumot. Egy halmaznál minden elemről el kell tudni dönteni, hogy beletartozik-e vagy sem."
+  },
+  {
+    "question": "12. Mire használjuk a Venn-diagramot?",
+    "options": {
+      "a": "Koordináta-geometriai számításokra",
+      "b": "Függvények ábrázolására",
+      "c": "Halmazok és halmazműveletek szemléltetésére"
+    },
+    "correct": "c",
+    "explanation": "A Venn-diagram körök, ellipszisek segítségével ábrázolja a halmazokat és műveleteikteket (unió, metszet, különbség)."
+  },
+  {
+    "question": "13. Igaz-e a következő egyenlőség: {0} = ∅?",
+    "options": {
+      "a": "Igen",
+      "b": "Nem",
+      "c": "Függ a kontextustól"
+    },
+    "correct": "b",
+    "explanation": "A {0} halmaz egy elemű (a 0 szám), míg az ∅ üres halmaz (nincs eleme). Ezért {0} ≠ ∅."
+  },
+  
+  {
+    "id": 14,
+    "question": "Hogyan jelöljük, hogy az 'a' elem NEM tartozik a B halmazhoz?",
+    "options": {
+      "a": "a ∈ B",
+      "b": "a ⊂ B",
+      "c": "a ∉ B"
+    },
+    "correct_answer": "c",
+    "explanation": "A „∉\" szimbólum jelenti, hogy az elem NEM tartozik a halmazba. Az „∈\" ellentéte."
+  },
+  {
+    "id": 15,
+    "question": "Melyik kifejezés helyes: „x természetes szám, amely 5-nél kisebb\"?",
+    "options": {
+      "a": "{x ∈ ℕ | x < 5}",
+      "b": "{x ∈ ℝ | x ≥ 5}",
+      "c": "{x ∈ ℤ | x > 5}"
+    },
+    "correct_answer": "a",
+    "explanation": "A feltételek: x ∈ ℕ (természetes szám) és x < 5 (kisebb 5-nél). Ez pontosan az „a\" válasz."
+  },
+  {
+    "id": 16,
+    "question": "Két halmaz mikor egyenlő?",
+    "options": {
+      "a": "Ha ugyanúgy írjuk le őket",
+      "b": "Ha ugyanazok az elemeik",
+      "c": "Ha azonos a nevük"
+    },
+    "correct_answer": "b",
+    "explanation": "A = B ⟺ minden elemük közös. A leírás módja és a névválasztás irreleváns."
+  },
+  {
+    "id": 17,
+    "question": "Hány eleme van a P = {x ∈ ℕ | x = 2n+1, n < 3} halmaznak?",
+    "options": {
+      "a": "2",
+      "b": "4",
+      "c": "3"
+    },
+    "correct_answer": "c",
+    "explanation": "Ha n < 3 és n ∈ ℕ, akkor n ∈ {0,1,2}. Ez x = 1, 3, 5 elemeket adja. Tehát P = {1,3,5}, ami 3 elemű."
+  },
+  {
+    "id": 18,
+    "question": "A {x | x osztható 3-mal és 5-tel} kifejezés milyen számokra igaz?",
+    "options": {
+      "a": "x osztható 15-tel",
+      "b": "x páratlan",
+      "c": "x prímszám"
+    },
+    "correct_answer": "a",
+    "explanation": "Ha x osztható 3-mal és 5-tel, akkor x osztható a 3 és 5 legkisebb közös többszörösével, ami 15."
+  },
+  {
+    "id": 19,
+    "question": "Melyik NEM részhalmaz-kapcsolati jelölés?",
+    "options": {
+      "a": "⊆",
+      "b": "∉",
+      "c": "⊂"
+    },
+    "correct_answer": "b",
+    "explanation": "A ∉ az elem-halmazhoz tartozás tagadása. A ⊆ és ⊂ részhalmaz-jelölések."
+  },
+  {
+    "id": 20,
+    "question": "Ha T = {x | x = 2k, k ∈ ℤ}, akkor T melyik számhalmaz?",
+    "options": {
+      "a": "Prímszámok halmaza",
+      "b": "Páros egész számok halmaza",
+      "c": "Pozitív racionális számok halmaza"
+    },
+    "correct_answer": "b",
+    "explanation": "Minden x = 2k (k ∈ ℤ) alakú szám páros egész szám. Ez a páros egészek halmaza."
+  },
+  {
+    "id": 21,
+    "question": "Melyik állítás igaz az üres halmazra (∅)?",
+    "options": {
+      "a": "Végtelen elemszámú",
+      "b": "Egy elemű",
+      "c": "Elemszáma 0"
+    },
+    "correct_answer": "c",
+    "explanation": "Az üres halmaz definíció szerint olyan halmaz, amelynek egyetlen eleme sincs. |∅| = 0."
+  },
+  {
+    "id": 22,
+    "question": "Melyik definiál végtelen halmazt?",
+    "options": {
+      "a": "{x ∈ ℕ | x > 0}",
+      "b": "{x ∈ ℕ | 1 ≤ x ≤ 10}",
+      "c": "{a, b, c, d, e}"
+    },
+    "correct_answer": "a",
+    "explanation": "A pozitív természetes számok {1,2,3,4,...} halmaza végtelen. A többi véges."
+  },
+  {
+    "id": 23,
+    "question": "Helyes-e az egyenlőség: {x | x páros, x < 6} = {2,4} (ha ℕ = {1,2,3,...})?",
+    "options": {
+      "a": "Nem, mert hiányzik a 0",
+      "b": "Igen, pontosan 2 és 4 felel meg",
+      "c": "Nem, mert 6 is páros"
+    },
+    "correct_answer": "b",
+    "explanation": "Ha ℕ = {1,2,3,...}, akkor a pozitív páros számok közül x < 6 feltételnek csak a 2 és 4 felel meg."
+  },
+  {
+    "id": 24,
+    "question": "Az {x | x² ≤ 4} halmaz intervallum formában:",
+    "options": {
+      "a": "(-2,2)",
+      "b": "[-2,2)",
+      "c": "[-2,2]"
+    },
+    "correct_answer": "c",
+    "explanation": "x² ≤ 4 ⟺ |x| ≤ 2 ⟺ -2 ≤ x ≤ 2. Ez a [-2,2] zárt intervallum."
+  },
+  {
+    "id": 25,
+    "question": "Mi az üres halmaz komplementere az U alaphalmazban?",
+    "options": {
+      "a": "U",
+      "b": "∅",
+      "c": "Nem létezik"
+    },
+    "correct_answer": "a",
+    "explanation": "∅' = U, mert a komplementer tartalmazza az alaphalmaz minden olyan elemét, ami nem eleme ∅-nek. Mivel ∅-nek nincs eleme, minden elem a komplementerbe tartozik."
+  }
+]
+
