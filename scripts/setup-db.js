@@ -66,16 +66,15 @@ CREATE TABLE Curriculums (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- setup-db.js kivonat - QuizQuestions tábla sémája magyarázat mezővel kiegészítve:
 CREATE TABLE QuizQuestions (
-    id SERIAL PRIMARY KEY,
-    curriculum_id INTEGER NOT NULL REFERENCES Curriculums(id) ON DELETE CASCADE,
-    question_type VARCHAR(50) NOT NULL,
-    description TEXT NOT NULL,
-    options JSONB,
-    answer JSONB,
-    explanation TEXT,          -- Új oszlop a magyarázat tárolására
-    answer_regex VARCHAR(255)
+  id SERIAL PRIMARY KEY,
+  curriculum_id INTEGER NOT NULL REFERENCES Curriculums(id) ON DELETE CASCADE,
+  question_type VARCHAR(50) NOT NULL,
+  description TEXT NOT NULL,
+  options JSONB,
+  answer JSONB,
+  explanation TEXT,           -- 👈 EZ KELL
+  answer_regex VARCHAR(255)
 );
 
 `;

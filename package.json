@@ -15,14 +15,15 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "sync": "node scripts/sync-db.js",
-    "setup-db": "node scripts/setup-db.js"
-  },
+"scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
+  "sync-db": "node scripts/sync-db.js",  
+  "setup-db": "node scripts/setup-db.js"
+},
+
   "eslintConfig": {
     "extends": [
       "react-app",

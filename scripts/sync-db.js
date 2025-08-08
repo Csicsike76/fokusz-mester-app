@@ -8,36 +8,49 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
+// Állítsd be, ha más nálad az útvonal
 const quizzesDirectory = path.join(__dirname, '..', 'src', 'data', 'quizzes');
 
 async function syncDatabase() {
   console.log('Adatbázis szinkronizáció megkezdése...');
   const client = await pool.connect();
+
   try {
     await client.query('BEGIN');
+
     const files = await fs.readdir(quizzesDirectory);
     const jsonFiles = files.filter(file => file.endsWith('.json'));
     console.log(`${jsonFiles.length} darab .json fájl található.`);
 
     for (const fileName of jsonFiles) {
       const filePath = path.join(quizzesDirectory, fileName);
-      const fileContent = await fs.readFile(filePath, 'utf-8');
-      const quizData = JSON.parse(fileContent);
+      console.log(`\n--- Feldolgozás: ${fileName} ---`);
 
-      // A slug-ot a FÁJLNÉVBŐL generáljuk
-      const slug = path.parse(fileName).name;
-      
-      const { title, subject, grade, category, questions } = quizData;
-
-      if (!title || !subject || !grade || !category || !questions) {
-          console.warn(`Figyelmeztetés: A(z) ${fileName} fájl hiányos. A fájl kihagyva.`);
-          continue;
+      let quizData;
+      try {
+        const fileContent = await fs.readFile(filePath, 'utf-8');
+        quizData = JSON.parse(fileContent);
+      } catch (parseErr) {
+        console.error(`❌ JSON hiba a fájlban: ${fileName}\n   ${parseErr.message}`);
+        // Hibás JSON → kihagyjuk és lépünk tovább
+        continue;
       }
 
+      // A slug a fájlnév (kiterjesztés nélkül)
+      const slug = path.parse(fileName).name;
+      const { title, subject, grade, category, questions } = quizData;
+
+      // Minimális validáció
+      if (!title || !subject || !grade || !category || !Array.isArray(questions)) {
+        console.warn(`⚠️  Hiányos fájl: ${fileName} — (title, subject, grade, category, questions szükséges) → kihagyva.`);
+        continue;
+      }
+
+      // Curriculums upsert
       const upsertCurriculumQuery = `
         INSERT INTO Curriculums (slug, title, subject, grade, category, is_published, created_at, updated_at)
         VALUES ($1, $2, $3, $4, $5, true, NOW(), NOW())
-        ON CONFLICT (slug) 
+        ON CONFLICT (slug)
         DO UPDATE SET
           title = EXCLUDED.title,
           subject = EXCLUDED.subject,
@@ -46,33 +59,51 @@ async function syncDatabase() {
           updated_at = NOW()
         RETURNING id;
       `;
-      
-      const result = await client.query(upsertCurriculumQuery, [slug, title, subject, grade, category]);
-      const curriculumId = result.rows[0].id;
-      console.log(`Tananyag mentve/frissítve a '${slug}' slug-gal. ID: ${curriculumId}`);
 
+      let curriculumId;
+      try {
+        const { rows } = await client.query(upsertCurriculumQuery, [slug, title, subject, grade, category]);
+        curriculumId = rows[0].id;
+        console.log(`✔️  Tananyag upsertelve: ${slug} (id=${curriculumId})`);
+      } catch (e) {
+        console.error(`❌ Curriculums mentési hiba (${fileName}): ${e.message}`);
+        continue; // lépjünk tovább a következő fájlra
+      }
+
+      // Régi kérdések törlése és újak beszúrása (explanation-nel!)
       await client.query('DELETE FROM QuizQuestions WHERE curriculum_id = $1', [curriculumId]);
-      for (const question of questions) {
-    const insertQuestionQuery = `
-        INSERT INTO QuizQuestions 
-        (curriculum_id, question_type, description, options, answer, explanation, answer_regex) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7);
-    `;
-    await client.query(insertQuestionQuery, [
-        curriculumId,
-        question.type,
-        question.description,
-        JSON.stringify(question.options || null),
-        JSON.stringify(question.answer || null),
-        question.explanation || null,       // ← Magyarázat beszúrása, ha van
-        question.answerRegex || null
-    ]);
-}
-      console.log(`${questions.length} kérdés mentve a(z) ${curriculumId} ID-jű tananyaghoz.`);
+
+      const insertQuestionQuery = `
+        INSERT INTO QuizQuestions
+          (curriculum_id, question_type, description, options, answer, explanation, answer_regex)
+        VALUES
+          ($1, $2, $3, $4, $5, $6, $7);
+      `;
+
+      let inserted = 0;
+      for (let i = 0; i < questions.length; i++) {
+        const q = questions[i];
+        try {
+          await client.query(insertQuestionQuery, [
+            curriculumId,
+            q.type || 'single-choice',
+            q.description || '',
+            JSON.stringify(q.options ?? null),
+            JSON.stringify(q.answer ?? null),
+            q.explanation ?? null,
+            q.answerRegex ?? null
+          ]);
+          inserted++;
+        } catch (e) {
+          console.error(`❌ Kérdés beszúrási hiba (${fileName} | kérdés #${i + 1}): ${e.message}`);
+        }
+      }
+
+      console.log(`→ ${inserted}/${questions.length} kérdés beszúrva (${fileName}).`);
     }
 
     await client.query('COMMIT');
-    console.log('✅ Adatbázis szinkronizáció sikeresen befejeződött!');
+    console.log('\n✅ Adatbázis szinkronizáció sikeresen befejeződött!');
 
   } catch (error) {
     await client.query('ROLLBACK');
