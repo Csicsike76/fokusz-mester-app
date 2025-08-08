@@ -59,7 +59,7 @@ CREATE TABLE Curriculums (
     grade INTEGER NOT NULL,
     slug VARCHAR(255) UNIQUE NOT NULL,
     category VARCHAR(50) NOT NULL,
-    description TEXT,
+    description TEXT, -- EZ AZ OSZLOP HIÁNYZOTT
     content JSONB,
     is_published BOOLEAN DEFAULT true,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -73,7 +73,7 @@ CREATE TABLE QuizQuestions (
     description TEXT NOT NULL,
     options JSONB,
     answer JSONB,
-    explanation TEXT,
+    explanation TEXT, -- EZ AZ OSZLOP IS FONTOS LESZ
     answer_regex VARCHAR(255)
 );
 `;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './Navbar.module.css';
 import ConditionalLink from '../ConditionalLink/ConditionalLink';
 import { useAuth } from '../../context/AuthContext';
+import Search from '../Search/Search';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -54,9 +55,9 @@ const Navbar = () => {
         </div>
       </div>
       
-      <div className={styles.search}>
-        <input type="text" placeholder="Keress a tananyagban..." />
-      </div>
+        <div className={styles.search}>
+           <Search />
+        </div>
 
       <div className={styles.hamburger} onClick={toggleMobileMenu}>
         <div></div>

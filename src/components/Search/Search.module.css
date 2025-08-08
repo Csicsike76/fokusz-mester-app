@@ -1,0 +1,51 @@
+.searchContainer {
+    position: relative;
+    width: 280px; /* Kicsit szélesebb */
+}
+
+.searchContainer input {
+    width: 100%;
+    padding: 0.7rem 1.2rem; /* Kicsit nagyobb */
+    border-radius: 50px;
+    border: 1px solid transparent;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.searchContainer input:focus {
+    outline: none;
+    border-color: #1abc9c;
+    box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.3);
+}
+
+.resultsDropdown {
+    position: absolute;
+    top: calc(100% + 5px); /* Kis térköz */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1100;
+    border: 1px solid #eee;
+}
+
+.resultItem {
+    padding: 0.8rem 1.2rem;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
+}
+
+.resultItem:last-child {
+    border-bottom: none;
+}
+
+.resultItem:hover {
+    background-color: #f8f9fa;
+    color: #1abc9c;
+}

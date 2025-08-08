@@ -3,9 +3,9 @@
   "subject": "matematika",
   "grade": 5,
   "category": "free_lesson",
+  "description": "Gyakorló feladatok a természetes számok alapjaihoz, 5. osztályos szinten.",
   "questions": [
     {
-      "id": 1,
       "type": "single-choice",
       "description": "Hogyan írjuk le a 'négyszázhuszonhét' számot számjegyekkel?",
       "options": [
@@ -14,14 +14,15 @@
         "247",
         "724"
       ],
-      "answer": "427"
+      "answer": "427",
+      "explanation": "A szám helyiértékei: 4 százas, 2 tízes, 7 egyes."
     },
     {
-      "id": 2,
       "type": "entered-answer",
       "description": "Mi a helyiértéke a 7-esnek a 875 számban? (Írd be a választ)",
-      "answerRegex": "^tízes$"
+      "options": [],
+      "answer": "tízes",
+      "answerRegex": "^tízes"
     }
   ]
 }
-
