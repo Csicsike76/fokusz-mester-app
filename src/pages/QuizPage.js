@@ -20,16 +20,10 @@ const QuizPage = () => {
         try {
             const response = await fetch(`${API_URL}/api/quiz/${slug}`);
             const data = await response.json();
-            if (!data.success) { 
-                throw new Error(data.message || 'A kvíz betöltése sikertelen.'); 
-            }
+            if (!data.success) { throw new Error(data.message || 'A kvíz betöltése sikertelen.'); }
             setQuiz(data.quiz);
-        } catch (err) { 
-            setError(err.message); 
-        }
-        finally { 
-            setIsLoading(false); 
-        }
+        } catch (err) { setError(err.message); }
+        finally { setIsLoading(false); }
     }, [slug]);
 
     useEffect(() => { fetchQuiz(); }, [fetchQuiz]);

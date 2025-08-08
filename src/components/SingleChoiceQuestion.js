@@ -50,11 +50,9 @@ const SingleChoiceQuestion = ({ question, userAnswer, onAnswerChange, showResult
                     );
                 })}
             </div>
-
-            {/* Magyarázat minden kérdés alatt, ha vége a kvíznek */}
-            {showResults && (
+            {showResults && question.explanation && (
                 <div className={styles.explanation}>
-                    {question.explanation || "Ehhez a kérdéshez nincs magyarázat."}
+                    {question.explanation}
                 </div>
             )}
         </div>
