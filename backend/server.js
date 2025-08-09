@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
+const nodemailer =require('nodemailer');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const path = require('path');
@@ -37,8 +37,6 @@ const authenticateToken = (req, res, next) => {
 };
 
 const DATA_PATH = path.join(__dirname, 'data');
-
-// --- API VÉGPONTOK ---
 
 app.post('/api/register', async (req, res) => {
   const { role, username, email, password, vipCode, classCode, referralCode } = req.body;
@@ -171,28 +169,51 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
 
 app.get('/api/curriculums', async (req, res) => {
     const { subject, grade, q } = req.query; 
-    let queryText = 'SELECT * FROM Curriculums WHERE is_published = true';
+    let queryText = 'SELECT * FROM curriculums WHERE is_published = true';
     const queryParams = [];
-    if (subject) { queryParams.push(subject); queryText += ` AND subject = $${queryParams.length}`; }
-    if (grade) { queryParams.push(grade); queryText += ` AND grade = $${queryParams.length}`; }
-    if (q) { queryParams.push(`%${q.toLowerCase()}%`); queryText += ` AND LOWER(title) ILIKE $${queryParams.length}`; }
+    if (subject) {
+        queryParams.push(subject);
+        queryText += ` AND subject = $${queryParams.length}`;
+    }
+    if (grade) {
+        queryParams.push(grade);
+        queryText += ` AND grade = $${queryParams.length}`;
+    }
+    if (q) {
+        queryParams.push(`%${q.toLowerCase()}%`);
+        queryText += ` AND LOWER(title) ILIKE $${queryParams.length}`;
+    }
     queryText += ' ORDER BY subject, grade, title;';
     try {
         const result = await pool.query(queryText, queryParams);
         if (subject || grade || q) {
             return res.status(200).json({ success: true, data: result.rows });
         }
-        const groupedData = { freeLessons: {}, freeTools: [], premiumCourses: [], premiumTools: [] };
+        const groupedData = {
+            freeLessons: {},
+            freeTools: [],
+            premiumCourses: [],
+            premiumTools: []
+        };
         result.rows.forEach(item => {
-            const subjectKey = item.subject || 'altalanos';
-            switch (item.category) {
+            const newItem = { ...item };
+            if (newItem.content && typeof newItem.content === 'string') {
+                try {
+                    newItem.content = JSON.parse(newItem.content);
+                } catch (e) {
+                    console.error(`Error parsing content for slug: ${newItem.slug}`);
+                    newItem.content = {};
+                }
+            }
+            const subjectKey = newItem.subject || 'altalanos';
+            switch (newItem.category) {
                 case 'free_lesson':
                     if (!groupedData.freeLessons[subjectKey]) { groupedData.freeLessons[subjectKey] = []; }
-                    groupedData.freeLessons[subjectKey].push(item);
+                    groupedData.freeLessons[subjectKey].push(newItem);
                     break;
-                case 'free_tool': groupedData.freeTools.push(item); break;
-                case 'premium_course': groupedData.premiumCourses.push(item); break;
-                case 'premium_tool': groupedData.premiumTools.push(item); break;
+                case 'free_tool': groupedData.freeTools.push(newItem); break;
+                case 'premium_course': groupedData.premiumCourses.push(newItem); break;
+                case 'premium_tool': groupedData.premiumTools.push(newItem); break;
                 default: break;
             }
         });
@@ -202,54 +223,45 @@ app.get('/api/curriculums', async (req, res) => {
     }
 });
 
-app.get('/api/tool/:slug', async (req, res) => {
-    const { slug } = req.params;
-    try {
-        const filePath = path.join(DATA_PATH, `${slug}.json`);
-        const fileContent = await fs.readFile(filePath, 'utf-8');
-        const toolData = JSON.parse(fileContent);
-        res.status(200).json({ success: true, data: toolData });
-    } catch (error) {
-        res.status(404).json({ success: false, message: "Az eszköz adatai nem találhatóak." });
-    }
-});
-
 app.get('/api/quiz/:slug', async (req, res) => {
+    // Eredeti slug a paraméterből
     const { slug } = req.params;
+
+    // JAVÍTÁS: Automatikusan cseréljük az alsóvonásokat kötőjelekre.
+    // Ez megoldja az "idoutazo_csevego" vs "idoutazo-csevego" problémát.
+    const correctedSlug = slug.replace(/_/g, '-');
+
     try {
-        const curriculumResult = await pool.query('SELECT * FROM Curriculums WHERE slug = $1', [slug]);
-        if (curriculumResult.rows.length === 0) { return res.status(404).json({ success: false, message: "A kért tananyag nem található." }); }
+        // A lekérdezésben már a javított slugot használjuk.
+        const curriculumResult = await pool.query('SELECT * FROM curriculums WHERE slug = $1', [correctedSlug]);
+        
+        if (curriculumResult.rows.length === 0) {
+            // Ha így sem található, akkor valóban nem létezik.
+            return res.status(404).json({ success: false, message: "A kért tananyag nem található." });
+        }
+        
         const curriculum = curriculumResult.rows[0];
-        const questionsResult = await pool.query('SELECT * FROM QuizQuestions WHERE curriculum_id = $1', [curriculum.id]);
+        
+        const contentData = curriculum.content && typeof curriculum.content === 'string' 
+            ? JSON.parse(curriculum.content) 
+            : curriculum.content || {};
+
+        const questionsResult = await pool.query('SELECT * FROM quizquestions WHERE curriculum_id = $1', [curriculum.id]);
+        
+        const responseData = {
+            ...curriculum,
+            ...contentData,
+            questions: questionsResult.rows
+        };
+        delete responseData.content;
+
         res.status(200).json({
             success: true,
-            quiz: { title: curriculum.title, questions: questionsResult.rows }
+            data: responseData
         });
     } catch (error) {
+        console.error(`Error fetching quiz ${correctedSlug}:`, error);
         res.status(500).json({ success: false, message: "Szerverhiba történt." });
-    }
-});
-
-app.get('/api/help', async (req, res) => {
-    const { q } = req.query;
-    try {
-        let queryText = 'SELECT * FROM helparticles';
-        const queryParams = [];
-        if (q && q.trim().length > 2) {
-            queryParams.push(`%${q.trim().toLowerCase()}%`);
-            queryText += ' WHERE LOWER(question) ILIKE $1 OR LOWER(answer) ILIKE $1 OR LOWER(keywords) ILIKE $1';
-        }
-        queryText += ' ORDER BY category, id;';
-        const result = await pool.query(queryText, queryParams);
-        const articlesByCategory = result.rows.reduce((acc, article) => {
-            const { category } = article;
-            if (!acc[category]) { acc[category] = []; }
-            acc[category].push(article);
-            return acc;
-        }, {});
-        res.status(200).json({ success: true, data: articlesByCategory });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Szerverhiba történt a súgó cikkek lekérdezésekor." });
     }
 });
 
@@ -257,7 +269,7 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
     const { secret } = req.params;
     if (secret !== process.env.ADMIN_SECRET) { return res.status(403).json({ message: "Hozzáférés megtagadva." }); }
     try {
-        const dropQuery = `DROP TABLE IF EXISTS ClassMemberships; DROP TABLE IF EXISTS Teachers; DROP TABLE IF EXISTS Classes; DROP TABLE IF EXISTS Users CASCADE;`;
+        const dropQuery = `DROP TABLE IF EXISTS ClassMemberships; DROP TABLE IF EXISTS Teachers; DROP TABLE IF EXISTS Referrals; DROP TABLE IF EXISTS Users CASCADE;`;
         const createQuery = `CREATE TABLE Users ( id SERIAL PRIMARY KEY, username VARCHAR(50) UNIQUE NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, password_hash VARCHAR(255) NOT NULL, role VARCHAR(20) NOT NULL, email_verified BOOLEAN DEFAULT false, email_verification_token VARCHAR(255), email_verification_expires TIMESTAMP WITH TIME ZONE, created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP, referral_code VARCHAR(50) UNIQUE ); CREATE TABLE Teachers ( user_id INTEGER PRIMARY KEY REFERENCES Users(id) ON DELETE CASCADE, vip_code VARCHAR(50) UNIQUE, is_approved BOOLEAN DEFAULT false ); CREATE TABLE Classes ( id SERIAL PRIMARY KEY, class_name VARCHAR(255) NOT NULL, class_code VARCHAR(50) UNIQUE NOT NULL, teacher_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, max_students INTEGER NOT NULL DEFAULT 30, is_active BOOLEAN DEFAULT true, is_approved BOOLEAN DEFAULT true, discount_status VARCHAR(20) DEFAULT 'pending', created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP, CONSTRAINT max_students_check CHECK (max_students >= 5 AND max_students <= 30) ); CREATE TABLE ClassMemberships ( user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, class_id INTEGER NOT NULL REFERENCES Classes(id) ON DELETE CASCADE, PRIMARY KEY (user_id, class_id) ); CREATE TABLE Referrals ( id SERIAL PRIMARY KEY, referrer_user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, referred_user_id INTEGER UNIQUE NOT NULL REFERENCES Users(id) ON DELETE CASCADE, status VARCHAR(20) DEFAULT 'registered' NOT NULL, created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP );`;
         await pool.query(dropQuery);
         await pool.query(createQuery);

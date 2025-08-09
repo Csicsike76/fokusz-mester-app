@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero/Hero';
 import styles from './HomePage.module.css';
-import ConditionalLink from '../components/ConditionalLink/ConditionalLink';
-import { useAuth } from '../context/AuthContext';
 
 const API_URL = 'http://localhost:3001';
 
+// A statikus elrendezési objektum, ami a főoldal vázát adja.
 const homePageLayout = {
     freeLessons: {
         matematika: [
@@ -20,7 +19,7 @@ const homePageLayout = {
             { slug: 'kviz_fizikai_mennyisegek_es_jelensegek', grade: '7. Osztály', titleOverride: 'A fizikában használt matematikai eljárások és modellek' },
             { slug: 'kviz_elektromossag_alapjai', grade: '8. Osztály', titleOverride: 'Elektromosság alapjai' },
         ],
-        'mesterséges intelligencia': [
+        'mesterseges intelligencia': [
             { slug: 'muhely_kepalkotas', titleOverride: 'Képalkotás MI‑vel', description: 'Változtasd a szavakat lenyűgöző képekké! Próbáld ki az első kreatív műhelyt!' },
             { slug: 'muhely_jatektervezes', titleOverride: 'Játéktervezés 101', description: 'Tervezd meg a saját videójátékod koncepcióját az ötlettől a karakterig az MI‑vel!' },
             { slug: 'muhely_prompt-alapok', titleOverride: 'A Promptolás Alapjai', description: 'Tanulj meg hatékonyan „beszélgetni” az MI‑vel, és írj egy rövid történetet közösen!' },
@@ -33,9 +32,9 @@ const homePageLayout = {
         { slug: 'iranytu', titleOverride: 'Tudás Iránytű', description: 'Elakadtál? Írd le a problémád, és az MI útvonalat javasol a Tudástárból.' },
     ],
     premiumCourses: [
-        { slug: 'interaktiv_matematika_gyujtemeny', titleOverride: 'Teljes Matematika Kurzus', description: 'Hozzáférés az összes évfolyam (5‑8.) minden interaktív leckéjéhez és képletgyűjteményéhez.' },
-        { slug: 'interaktiv_fizika_gyujtemeny', titleOverride: 'Teljes Fizika Kurzus', description: 'Hozzáférés az összes évfolyam (6‑8.) minden interaktív leckéjéhez és képletgyűjteményéhez.' },
-        { slug: 'interaktiv_aimi1_gyujtemeny', titleOverride: 'Teljes Interaktív Mesterséges Intelligencia', description: 'Hozzáférés az összes haladó műhelyhez, a projekt kézikönyvhöz és az extra tartalmakhoz.' },
+        { slug: 'interaktav-matematika-gyljtemany', titleOverride: 'Teljes Matematika Kurzus', description: 'Hozzáférés az összes évfolyam (5‑8.) minden interaktív leckéjéhez és képletgyűjteményéhez.' },
+        { slug: 'interaktav-fizika-gyljtemany', titleOverride: 'Teljes Fizika Kurzus', description: 'Hozzáférés az összes évfolyam (6‑8.) minden interaktív leckéjéhez és képletgyűjteményéhez.' },
+        { slug: 'interaktav-aimi1-gyljtemany', titleOverride: 'Teljes Interaktív Mesterséges Intelligencia', description: 'Hozzáférés az összes haladó műhelyhez, a projekt kézikönyvhöz és az extra tartalmakhoz.' },
     ],
     premiumTools: [
         { slug: 'kepletgyujtemeny', titleOverride: 'Interaktív Képlet‑ és Tételtár', description: 'Egy teljes, interaktív tudásbázis matekból és fizikából, részletes magyarázatokkal, példákkal és beépített MI‑segítséggel.' },
@@ -50,10 +49,9 @@ const homePageLayout = {
 };
 
 const HomePage = () => {
-    const [allCurriculums, setAllCurriculums] = useState(null);
+    const [allCurriculumsMap, setAllCurriculumsMap] = useState(new Map());
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
-    const { canUsePremium } = useAuth();
 
     useEffect(() => {
         const fetchAllCurriculums = async () => {
@@ -61,7 +59,25 @@ const HomePage = () => {
                 const response = await fetch(`${API_URL}/api/curriculums`);
                 const data = await response.json();
                 if (!data.success) throw new Error('Hiba az adatok betöltésekor.');
-                setAllCurriculums(data.data); 
+                
+                const curriculumMap = new Map();
+                const allContent = data.data;
+
+                const processItems = (items) => {
+                    if (Array.isArray(items)) {
+                        items.forEach(item => item && item.slug && curriculumMap.set(item.slug, item));
+                    }
+                };
+
+                processItems(allContent.freeTools);
+                processItems(allContent.premiumCourses);
+                processItems(allContent.premiumTools);
+
+                if (typeof allContent.freeLessons === 'object' && allContent.freeLessons !== null) {
+                    Object.values(allContent.freeLessons).forEach(subjectArray => processItems(subjectArray));
+                }
+                
+                setAllCurriculumsMap(curriculumMap);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -71,53 +87,28 @@ const HomePage = () => {
         fetchAllCurriculums();
     }, []);
 
-    const flatCurriculumList = useMemo(() => {
-        if (!allCurriculums) return [];
-        let list = [];
-        Object.values(allCurriculums.freeLessons || {}).forEach(arr => list.push(...arr));
-        list.push(...(allCurriculums.freeTools || []));
-        list.push(...(allCurriculums.premiumCourses || []));
-        list.push(...(allCurriculums.premiumTools || []));
-        return list;
-    }, [allCurriculums]);
-
-    const findDataBySlug = (slug) => {
-        return flatCurriculumList.find(item => item.slug === slug);
-    };
-
     const renderCard = (itemConfig, typeClass) => {
-        const curriculumData = findDataBySlug(itemConfig.slug);
-        const isPremium = typeClass.toLowerCase().includes('premium');
+        const dynamicData = allCurriculumsMap.get(itemConfig.slug.replace(/_/g, '-'));
+        if (!dynamicData) return null;
 
-        if (isPremium && !canUsePremium) {
-            return (
-                <div key={itemConfig.slug} className={`${styles.card} ${styles.premiumLocked}`}>
-                    <h4>{itemConfig.titleOverride || itemConfig.slug.replace(/_/g, ' ')}</h4>
-                    <p>{itemConfig.description || 'Ez a tartalom csak előfizetéssel érhető el.'}</p>
-                    <Link to="/elofizetes" className={styles.subscribeBtn}>
-                        Előfizetek →
-                    </Link>
-                </div>
-            );
-        }
-
-        const title = itemConfig.titleOverride || (curriculumData && curriculumData.title) || itemConfig.slug.replace(/_/g, ' ');
-        let description = '';
-        if (curriculumData && curriculumData.description) { description = curriculumData.description; } 
-        else if (itemConfig.description) { description = itemConfig.description; } 
-        else if (curriculumData && typeof curriculumData.id === 'number') { description = `PIN: ${curriculumData.id + 100000}`; }
+        const title = itemConfig.titleOverride || dynamicData.title;
+        const description = itemConfig.description || dynamicData.description;
+        const linkTarget = `/tananyag/${itemConfig.slug.replace(/_/g, '-')}`;
         
-        let pathPrefix = '/kviz';
-        if (curriculumData?.category?.includes('tool') || typeClass.toLowerCase().includes('tool')) { pathPrefix = '/eszkoz'; }
-        const linkTarget = `${pathPrefix}/${itemConfig.slug}`;
+        const buttonTextMap = {
+            freeLesson: 'Ingyenes Lecke →',
+            freeTool: 'Eszköz Indítása →',
+            premiumCourse: 'Részletek →',
+            premiumTool: 'Indítás →'
+        };
 
         return (
-            <div key={itemConfig.slug} className={`${styles.card} ${styles[typeClass]}`}> 
+            <div key={itemConfig.slug} className={`${styles.card} ${styles[typeClass]}`}>
                 <h4>{itemConfig.grade ? `${itemConfig.grade} - ` : ''}{title}</h4>
                 {description && <p>{description}</p>}
-                <ConditionalLink to={linkTarget} className={`${styles.btn} ${styles[typeClass + 'Btn']}`}>
-                    Tovább →
-                </ConditionalLink>
+                <Link to={linkTarget} className={`${styles.btn} ${styles[typeClass + 'Btn']}`}>
+                    {buttonTextMap[typeClass] || 'Tovább →'}
+                </Link>
             </div>
         );
     };
@@ -132,7 +123,7 @@ const HomePage = () => {
                 <section id="ingyenes-leckek" className={styles.section}>
                     <h2 className={styles.sectionTitle}>Próbáld ki Ingyen!</h2>
                     {Object.keys(homePageLayout.freeLessons).map(subject => {
-                        const subjectClassName = subject.replace(/\s+/g, '-');
+                        const subjectClassName = subject.replace(/\s+/g, '-').toLowerCase();
                         return (
                             <div key={subject}>
                                 <h3 className={`${styles.subjectTitle} ${styles[subjectClassName] || ''}`}>{subject}</h3>
