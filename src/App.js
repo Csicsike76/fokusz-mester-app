@@ -14,6 +14,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import TeacherDashboardPage from './pages/TeacherDashboardPage';
 import ToolPage from './pages/ToolPage';
 import ProfilePage from './pages/ProfilePage';
+import HelpCenterPage from './pages/HelpCenterPage';
 import './App.css';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="eszkoz/:slug" element={<ToolPage />} />
             <Route path="verify-email/:token" element={<EmailVerificationPage />} />
             <Route path="approve-teacher/:userId" element={<TeacherApprovalPage />} />
+            <Route path="sugo" element={<HelpCenterPage />} />
 
             <Route element={<ProtectedRoute allowedRoles={['student', 'teacher']} />}>
               <Route path="profil" element={<ProfilePage />} />
