@@ -33,6 +33,10 @@ const Navbar = () => {
           <ConditionalLink to="/targy/matematika/5" onClick={handleLinkClick}>Matematika</ConditionalLink>
           <ConditionalLink to="/targy/fizika/7" onClick={handleLinkClick}>Fizika</ConditionalLink>
           
+          {!isLoading && user && (
+            <ConditionalLink to="/profil" onClick={handleLinkClick}>Profil</ConditionalLink>
+          )}
+
           {!isLoading && user && user.role === 'teacher' && (
             <ConditionalLink to="/dashboard/teacher" onClick={handleLinkClick} className={styles.dashboardLink}>Irányítópult</ConditionalLink>
           )}

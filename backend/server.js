@@ -5,8 +5,8 @@ const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const path = require('path'); // EZ AZ EGYIK HIÁNYZÓ IMPORT
-const fs = require('fs/promises'); // EZ A MÁSIK HIÁNYZÓ IMPORT
+const path = require('path');
+const fs = require('fs/promises');
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 
 const pool = new Pool({
@@ -25,28 +25,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '../templates')));  // Módosított elérési út
-
-// Az index.html kiszolgálása
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../templates', 'Matematika Tanár 2030-ra.html')); // Az index fájl helyes neve
-});
-
-// Például a /about oldal kiszolgálása
-app.get('/about', (req, res) => {
-    res.sendFile(path.join(__dirname, '../templates', 'about.html'));  // Helyes fájl elérési út
-});
-
-// Például a /contact oldal kiszolgálása
-app.get('/contact', (req, res) => {
-    res.sendFile(path.join(__dirname, '../templates', 'contact.html'));  // Helyes fájl elérési út
-});
-
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     if (token == null) return res.sendStatus(401);
-
     jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
         if (err) return res.sendStatus(403);
         req.user = user;
@@ -57,14 +39,26 @@ const authenticateToken = (req, res, next) => {
 const DATA_PATH = path.join(__dirname, 'data');
 
 app.post('/api/register', async (req, res) => {
-  const { role, username, email, password, vipCode, classCode } = req.body;
+  const { role, username, email, password, vipCode, classCode, referralCode } = req.body;
   if (!username || !email || !password || !role) { return res.status(400).json({ success: false, message: "Minden kötelező mezőt ki kell tölteni." }); }
+  
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
+
     const userExists = await client.query('SELECT * FROM Users WHERE email = $1', [email]);
     if (userExists.rows.length > 0) { throw new Error("Ez az e-mail cím már regisztrálva van."); }
+
+    let referrerId = null;
+    if (referralCode) {
+        const referrerResult = await client.query('SELECT id FROM Users WHERE referral_code = $1', [referralCode]);
+        if (referrerResult.rows.length > 0) {
+            referrerId = referrerResult.rows[0].id;
+        }
+    }
+
     if (role === 'teacher' && vipCode !== process.env.VIP_CODE) { throw new Error("Érvénytelen VIP kód."); }
+    
     let classId = null;
     if (role === 'student' && classCode) {
         const classResult = await client.query('SELECT id, max_students FROM Classes WHERE class_code = $1 AND is_active = true', [classCode]);
@@ -75,26 +69,46 @@ app.post('/api/register', async (req, res) => {
         const memberCount = parseInt(memberCountResult.rows[0].count, 10);
         if (memberCount >= maxStudents) { throw new Error("Ez az osztály sajnos már betelt."); }
     }
+
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
     const verificationExpires = new Date(Date.now() + 3600000);
-    const newUserQuery = `INSERT INTO Users (username, email, password_hash, role, email_verification_token, email_verification_expires) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
-    const newUserResult = await client.query(newUserQuery, [username, email, passwordHash, role, verificationToken, verificationExpires]);
+    const newReferralCode = `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
+
+    const newUserQuery = `
+      INSERT INTO Users (username, email, password_hash, role, referral_code, email_verification_token, email_verification_expires, created_at) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, NOW()) RETURNING id, created_at;
+    `;
+    const newUserResult = await client.query(newUserQuery, [username, email, passwordHash, role, newReferralCode, verificationToken, verificationExpires]);
     const newUserId = newUserResult.rows[0].id;
+    const registrationDate = newUserResult.rows[0].created_at;
+
+    if (referrerId) {
+        await client.query('INSERT INTO Referrals (referrer_user_id, referred_user_id) VALUES ($1, $2)', [referrerId, newUserId]);
+    }
+
     if (role === 'teacher') {
       await client.query(`INSERT INTO Teachers (user_id, vip_code, is_approved) VALUES ($1, $2, false);`, [newUserId, vipCode]);
       const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
-      const adminMailOptions = { from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`, to: process.env.MAIL_DEFAULT_SENDER, subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!', html: `<p>Új tanár regisztrált: ${username} (${email}). Kattints a linkre a jóváhagyáshoz: <a href="${approvalUrl}">Jóváhagyás</a></p>`};
+      const adminMailOptions = { from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`, to: process.env.MAIL_DEFAULT_SENDER, subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!', html: `<p>Új tanár: ${username} (${email}). <a href="${approvalUrl}">Jóváhagyás</a></p>`};
       await transporter.sendMail(adminMailOptions);
     }
+
     if (role === 'student' && classId) {
         await client.query(`INSERT INTO ClassMemberships (user_id, class_id) VALUES ($1, $2);`, [newUserId, classId]);
     }
+
     const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${verificationToken}`;
-    const userMailOptions = { from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`, to: email, subject: 'Erősítsd meg az e-mail címedet a Fókusz Mester oldalon!', html: `<p>Kattints a linkre a regisztrációd véglegesítéséhez: <a href="${verificationUrl}">Megerősítés</a></p>`};
+    const userMailOptions = { from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`, to: email, subject: 'Erősítsd meg az e-mail címedet!', html: `<p>Kattints a linkre a regisztrációdhoz: <a href="${verificationUrl}">Megerősítés</a></p>`};
     await transporter.sendMail(userMailOptions);
+
     await client.query('COMMIT');
-    res.status(201).json({ success: true, message: `Sikeres regisztráció! Megerősítő e-mailt küldtünk.` });
+    res.status(201).json({ 
+        success: true, 
+        message: `Sikeres regisztráció! Megerősítő e-mailt küldtünk.`,
+        user: { id: newUserId, createdAt: registrationDate }
+    });
+
   } catch (error) {
     if (client) await client.query('ROLLBACK');
     res.status(400).json({ success: false, message: error.message || "Szerverhiba történt." });
@@ -131,7 +145,7 @@ app.post('/api/login', async (req, res) => {
         if (teacherResult.rows.length === 0 || !teacherResult.rows[0].is_approved) { return res.status(403).json({ success: false, message: "A tanári fiókod még nem lett jóváhagyva." }); }
     }
     const token = jwt.sign({ userId: user.id, role: user.role }, process.env.SECRET_KEY, { expiresIn: '1d' });
-    res.status(200).json({ success: true, token: token, user: { id: user.id, username: user.username, email: user.email, role: user.role } });
+    res.status(200).json({ success: true, token: token, user: { id: user.id, username: user.username, email: user.email, role: user.role, referral_code: user.referral_code, createdAt: user.created_at } });
   } catch (error) {
     res.status(500).json({ success: false, message: "Szerverhiba történt." });
   }
@@ -177,79 +191,34 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
 
 app.get('/api/curriculums', async (req, res) => {
     const { subject, grade, q } = req.query; 
-    
-    let queryText = 'SELECT * FROM Curriculums WHERE is_published = true';
+    let query = 'SELECT * FROM Curriculums WHERE is_published = true';
     const queryParams = [];
-    
-    // Dinamikusan és biztonságosan építjük fel a WHERE feltételeket
-    if (subject) {
-        queryParams.push(subject);
-        queryText += ` AND subject = $${queryParams.length}`;
-    }
-    if (grade) {
-        queryParams.push(grade);
-        queryText += ` AND grade = $${queryParams.length}`;
-    }
-    if (q) {
-        queryParams.push(`%${q.toLowerCase()}%`);
-        queryText += ` AND LOWER(title) ILIKE $${queryParams.length}`;
-    }
-
-    queryText += ' ORDER BY subject, grade, title;';
-
+    if (subject) { queryParams.push(subject); query += ` AND subject = $${queryParams.length + 1}`; }
+    if (grade) { queryParams.push(grade); query += ` AND grade = $${queryParams.length + 1}`; }
+    if (q) { queryParams.push(`%${q}%`); query += ` AND title ILIKE $${queryParams.length + 1}`; }
+    query += ' ORDER BY subject, grade, title;';
     try {
-        const result = await pool.query(queryText, queryParams);
-        
+        const result = await pool.query(query, queryParams);
         if (subject || grade || q) {
             return res.status(200).json({ success: true, data: result.rows });
         }
-        
-        const groupedData = {
-            freeLessons: {},
-            freeTools: [],
-            premiumCourses: [],
-            premiumTools: []
-        };
+        const groupedData = { freeLessons: {}, freeTools: [], premiumCourses: [], premiumTools: [] };
         result.rows.forEach(item => {
             const subjectKey = item.subject || 'altalanos';
             switch (item.category) {
                 case 'free_lesson':
-                    if (!groupedData.freeLessons[subjectKey]) {
-                        groupedData.freeLessons[subjectKey] = [];
-                    }
+                    if (!groupedData.freeLessons[subjectKey]) { groupedData.freeLessons[subjectKey] = []; }
                     groupedData.freeLessons[subjectKey].push(item);
                     break;
-                case 'free_tool':
-                    groupedData.freeTools.push(item);
-                    break;
-                case 'premium_course':
-                    groupedData.premiumCourses.push(item);
-                    break;
-                case 'premium_tool':
-                    groupedData.premiumTools.push(item);
-                    break;
-                default:
-                    break;
+                case 'free_tool': groupedData.freeTools.push(item); break;
+                case 'premium_course': groupedData.premiumCourses.push(item); break;
+                case 'premium_tool': groupedData.premiumTools.push(item); break;
+                default: break;
             }
         });
-
         res.status(200).json({ success: true, data: groupedData });
-
     } catch (error) {
-        console.error("Hiba a tananyagok lekérdezése során:", error);
-        res.status(500).json({ success: false, message: "Szerverhiba történt a tananyagok lekérdezésekor." });
-    }
-});
-
-app.get('/api/page/:pageName', async (req, res) => {
-    const { pageName } = req.params;
-    try {
-        const filePath = path.join(__dirname, 'pages', `${pageName}.json`);
-        const fileContent = await fs.readFile(filePath, 'utf-8');
-        const pageData = JSON.parse(fileContent);
-        res.status(200).json({ success: true, data: pageData });
-    } catch (error) {
-        res.status(404).json({ success: false, message: "Az oldal adatai nem találhatóak." });
+        res.status(500).json({ success: false, message: "Szerverhiba történt." });
     }
 });
 
@@ -283,29 +252,15 @@ app.get('/api/quiz/:slug', async (req, res) => {
 
 app.get('/api/admin/clear-users/:secret', async (req, res) => {
     const { secret } = req.params;
-    if (secret !== process.env.ADMIN_SECRET) {
-        return res.status(403).json({ message: "Hozzáférés megtagadva." });
-    }
+    if (secret !== process.env.ADMIN_SECRET) { return res.status(403).json({ message: "Hozzáférés megtagadva." }); }
     try {
-        const dropQuery = `
-            DROP TABLE IF EXISTS ClassMemberships;
-            DROP TABLE IF EXISTS Teachers;
-            DROP TABLE IF EXISTS Classes;
-            DROP TABLE IF EXISTS Users;
-        `;
-        const createQuery = `
-            CREATE TABLE Users ( id SERIAL PRIMARY KEY, username VARCHAR(50) UNIQUE NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, password_hash VARCHAR(255) NOT NULL, role VARCHAR(20) NOT NULL, email_verified BOOLEAN DEFAULT false, email_verification_token VARCHAR(255), email_verification_expires TIMESTAMP WITH TIME ZONE, created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP );
-            CREATE TABLE Teachers ( user_id INTEGER PRIMARY KEY REFERENCES Users(id) ON DELETE CASCADE, vip_code VARCHAR(50) UNIQUE, is_approved BOOLEAN DEFAULT false );
-            CREATE TABLE Classes ( id SERIAL PRIMARY KEY, class_name VARCHAR(255) NOT NULL, class_code VARCHAR(50) UNIQUE NOT NULL, teacher_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, max_students INTEGER NOT NULL DEFAULT 30, is_active BOOLEAN DEFAULT true, is_approved BOOLEAN DEFAULT true, discount_status VARCHAR(20) DEFAULT 'pending', created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP, CONSTRAINT max_students_check CHECK (max_students >= 5 AND max_students <= 30) );
-            CREATE TABLE ClassMemberships ( user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, class_id INTEGER NOT NULL REFERENCES Classes(id) ON DELETE CASCADE, PRIMARY KEY (user_id, class_id) );
-        `;
+        const dropQuery = `DROP TABLE IF EXISTS ClassMemberships; DROP TABLE IF EXISTS Teachers; DROP TABLE IF EXISTS Classes; DROP TABLE IF EXISTS Users CASCADE;`;
+        const createQuery = `CREATE TABLE Users ( id SERIAL PRIMARY KEY, username VARCHAR(50) UNIQUE NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, password_hash VARCHAR(255) NOT NULL, role VARCHAR(20) NOT NULL, email_verified BOOLEAN DEFAULT false, email_verification_token VARCHAR(255), email_verification_expires TIMESTAMP WITH TIME ZONE, created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP, referral_code VARCHAR(50) UNIQUE ); CREATE TABLE Teachers ( user_id INTEGER PRIMARY KEY REFERENCES Users(id) ON DELETE CASCADE, vip_code VARCHAR(50) UNIQUE, is_approved BOOLEAN DEFAULT false ); CREATE TABLE Classes ( id SERIAL PRIMARY KEY, class_name VARCHAR(255) NOT NULL, class_code VARCHAR(50) UNIQUE NOT NULL, teacher_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, max_students INTEGER NOT NULL DEFAULT 30, is_active BOOLEAN DEFAULT true, is_approved BOOLEAN DEFAULT true, discount_status VARCHAR(20) DEFAULT 'pending', created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP, CONSTRAINT max_students_check CHECK (max_students >= 5 AND max_students <= 30) ); CREATE TABLE ClassMemberships ( user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, class_id INTEGER NOT NULL REFERENCES Classes(id) ON DELETE CASCADE, PRIMARY KEY (user_id, class_id) ); CREATE TABLE Referrals ( id SERIAL PRIMARY KEY, referrer_user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, referred_user_id INTEGER UNIQUE NOT NULL REFERENCES Users(id) ON DELETE CASCADE, status VARCHAR(20) DEFAULT 'registered' NOT NULL, created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP );`;
         await pool.query(dropQuery);
         await pool.query(createQuery);
-        console.log('ADMIN: Felhasználói táblák sikeresen kiürítve és újraépítve.');
         res.status(200).json({ success: true, message: "Minden felhasználói adat sikeresen törölve." });
     } catch (error) {
-        console.error('Hiba a felhasználók törlése során:', error);
-        res.status(500).json({ success: false, message: "Hiba történt a törlés során." });
+        res.status(500).json({ success: false, message: "Hiba a törlés során." });
     }
 });
 

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styles from './RegistrationPage.module.css';
 
-// A backend URL-jét egy változóba tesszük
-const API_URL = 'https://fokusz-mester-backend.onrender.com';
+const API_URL = 'http://localhost:3001';
 
 const RegistrationPage = () => {
     const [role, setRole] = useState('student');
@@ -16,7 +15,6 @@ const RegistrationPage = () => {
         classCode: '',
         termsAccepted: false,
     });
-    // Állapotok a felhasználói visszajelzéshez
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +26,6 @@ const RegistrationPage = () => {
 
     const handleRoleChange = (e) => { setRole(e.target.value); };
 
-    // A TELJES, JAVÍTOTT handleSubmit FÜGGVÉNY
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -43,16 +40,16 @@ const RegistrationPage = () => {
             return;
         }
 
-        setIsLoading(true); // Töltés jelzése
+        setIsLoading(true);
 
         const registrationData = {
             role,
             username: formData.username,
             email: formData.email,
             password: formData.password,
-            referralCode: formData.referralCode,
-            ...(role === 'teacher' && { vipCode: formData.vipCode }),
-            ...((role === 'student' || role === 'class') && { classCode: formData.classCode }),
+            referralCode: formData.referralCode.trim(),
+            vipCode: formData.vipCode.trim(),
+            classCode: formData.classCode.trim(),
         };
 
         try {
@@ -70,7 +67,6 @@ const RegistrationPage = () => {
                 throw new Error(data.message || 'Ismeretlen hiba történt.');
             }
 
-            // Sikeres regisztráció: üzenet beállítása és űrlap ürítése
             setMessage(data.message);
             setFormData({
                 username: '', email: '', password: '', passwordConfirm: '',
@@ -79,11 +75,9 @@ const RegistrationPage = () => {
             setRole('student');
 
         } catch (err) {
-            // Hiba esetén a hibaüzenet beállítása
             setError(err.message);
             console.error("Regisztrációs hiba:", err);
         } finally {
-            // A töltés jelzésének leállítása, akár sikeres, akár nem
             setIsLoading(false);
         }
     };
@@ -93,13 +87,11 @@ const RegistrationPage = () => {
             <div className={styles.formContainer}>
                 <h1>Regisztráció</h1>
                 <form onSubmit={handleSubmit}>
-                    {/* ... A form többi része változatlan ... */}
                     <div className={styles.formGroup}>
                         <label>Szerepkör kiválasztása:</label>
                         <div className={styles.roleSelection}>
                             <label><input type="radio" value="student" checked={role === 'student'} onChange={handleRoleChange} /> Tanuló</label>
                             <label><input type="radio" value="teacher" checked={role === 'teacher'} onChange={handleRoleChange} /> Tanár</label>
-                            <label><input type="radio" value="class" checked={role === 'class'} onChange={handleRoleChange} /> Osztályregisztráció</label>
                         </div>
                     </div>
                     <div className={styles.formGroup}>
@@ -124,9 +116,9 @@ const RegistrationPage = () => {
                             <input type="text" id="vipCode" name="vipCode" value={formData.vipCode} onChange={handleChange} required />
                         </div>
                     )}
-                    {(role === 'student' || role === 'class') && (
+                    {role === 'student' && (
                         <div className={`${styles.formGroup} ${styles.conditionalField}`}>
-                            <label htmlFor="classCode">{role === 'class' ? 'Add meg a létrehozandó osztálykódot!' : 'Osztálykód (ha van)'}</label>
+                            <label htmlFor="classCode">Osztálykód (ha van)</label>
                             <input type="text" id="classCode" name="classCode" value={formData.classCode} onChange={handleChange} />
                         </div>
                     )}
@@ -139,7 +131,6 @@ const RegistrationPage = () => {
                         <label htmlFor="termsAccepted">Elfogadom az Általános Szerződési Feltételeket</label>
                     </div>
 
-                    {/* Visszajelző üzenetek */}
                     {message && <p className={styles.successMessage}>{message}</p>}
                     {error && <p className={styles.errorMessage}>{error}</p>}
 

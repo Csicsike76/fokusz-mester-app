@@ -1,0 +1,99 @@
+.container {
+    padding: 2rem;
+    color: white;
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.profileBox {
+    background-color: rgba(44, 62, 80, 0.9);
+    border-radius: 10px;
+    padding: 2rem 3rem;
+    backdrop-filter: blur(5px);
+}
+
+.profileBox h1 {
+    text-align: center;
+    margin-top: 0;
+    font-family: 'Roboto Slab', serif;
+    margin-bottom: 2.5rem;
+}
+
+.infoGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.infoItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.label {
+    font-weight: bold;
+    color: #bdc3c7;
+}
+
+.value {
+    font-size: 1.1rem;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 2.5rem 0;
+}
+
+.referralSection h2 {
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    color: #1abc9c;
+}
+
+.referralSection p {
+    text-align: center;
+    line-height: 1.7;
+    color: #ecf0f1;
+}
+
+.referralCodeBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px dashed #1abc9c;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    gap: 1rem;
+}
+
+.referralCodeBox span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: monospace;
+    color: #1abc9c;
+}
+
+.referralCodeBox button {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.subscriptionStatus {
+    margin-top: 2.5rem;
+    text-align: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}

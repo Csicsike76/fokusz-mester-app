@@ -53,7 +53,7 @@ const HomePage = () => {
     const [allCurriculums, setAllCurriculums] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
-    const { isSubscribed } = useAuth();
+    const { canUsePremium } = useAuth();
 
     useEffect(() => {
         const fetchAllCurriculums = async () => {
@@ -89,7 +89,7 @@ const HomePage = () => {
         const curriculumData = findDataBySlug(itemConfig.slug);
         const isPremium = typeClass.toLowerCase().includes('premium');
 
-        if (isPremium && !isSubscribed) {
+        if (isPremium && !canUsePremium) {
             return (
                 <div key={itemConfig.slug} className={`${styles.card} ${styles.premiumLocked}`}>
                     <h4>{itemConfig.titleOverride || itemConfig.slug.replace(/_/g, ' ')}</h4>

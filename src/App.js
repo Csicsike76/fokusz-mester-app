@@ -13,6 +13,7 @@ import TeacherApprovalPage from './pages/TeacherApprovalPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import TeacherDashboardPage from './pages/TeacherDashboardPage';
 import ToolPage from './pages/ToolPage';
+import ProfilePage from './pages/ProfilePage';
 import './App.css';
 
 function App() {
@@ -30,6 +31,10 @@ function App() {
             <Route path="verify-email/:token" element={<EmailVerificationPage />} />
             <Route path="approve-teacher/:userId" element={<TeacherApprovalPage />} />
 
+            <Route element={<ProtectedRoute allowedRoles={['student', 'teacher']} />}>
+              <Route path="profil" element={<ProfilePage />} />
+            </Route>
+            
             <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
               <Route path="dashboard/teacher" element={<TeacherDashboardPage />} />
             </Route>
