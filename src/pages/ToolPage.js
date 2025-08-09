@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './ToolPage.module.css';
 
-const API_URL = 'http://localhost:3001';
+// A távoli Render backend URL-je. Minden lekérdezést ide irányítunk.
+const API_URL = 'https://fokusz-mester-backend.onrender.com';
 
 const ToolPage = () => {
     const { slug } = useParams();
@@ -18,6 +19,8 @@ const ToolPage = () => {
         setError(''); // Hiba törlése minden betöltéskor
         try {
             // JAVÍTÁS: A helyes végpont használata és az alsóvonás javítása
+            // A slug-ban lévő alsóvonásokat kötőjellel helyettesítjük, mert a backend
+            // hyphen-case slugeket használ.
             const correctedSlug = slug.replace(/_/g, '-');
             const response = await fetch(`${API_URL}/api/quiz/${correctedSlug}`);
             const data = await response.json();

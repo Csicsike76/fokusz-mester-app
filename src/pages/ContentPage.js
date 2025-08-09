@@ -4,7 +4,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './ContentPage.module.css'; // Egy új, központi CSS fájl
 
-const API_URL = 'http://localhost:3001';
+// A távoli Render backend URL-je. Minden lekérdezést ide irányítunk.
+const API_URL = 'https://fokusz-mester-backend.onrender.com';
 
 // A különálló nézetek komponensei
 const CharacterSelectionView = ({ toolData, onSelectCharacter }) => (
@@ -65,6 +66,8 @@ const ContentPage = () => {
         setIsLoading(true);
         setError('');
         try {
+            // A slug-ban lévő alsóvonásokat kötőjellel helyettesítjük, mert a backend
+            // hyphen-case slugeket használ (pl. "kviz_muveletek_tortekkel" → "kviz-muveletek-tortekkel").
             const correctedSlug = slug.replace(/_/g, '-');
             const response = await fetch(`${API_URL}/api/quiz/${correctedSlug}`);
             if (!response.ok) throw new Error('Hálózati hiba');
