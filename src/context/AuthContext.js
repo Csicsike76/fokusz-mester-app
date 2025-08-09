@@ -5,7 +5,7 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
-    // ÚJ ÁLLAPOT: Jelzi, hogy még töltjük-e az adatokat a localStorage-ból
+    const [isSubscribed, setIsSubscribed] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -13,14 +13,18 @@ export const AuthProvider = ({ children }) => {
             const storedToken = localStorage.getItem('token');
             const storedUser = localStorage.getItem('user');
             if (storedToken && storedUser) {
+                const parsedUser = JSON.parse(storedUser);
                 setToken(storedToken);
-                setUser(JSON.parse(storedUser));
+                setUser(parsedUser);
+                // Ideiglenesen minden bejelentkezett felhasználó előfizetőnek számít
+                setIsSubscribed(true); 
             }
         } catch (error) {
             console.error("Hiba a localStorage olvasása közben", error);
-            // Hiba esetén is befejezzük a töltést, hogy ne ragadjon be az oldal
+            // Hiba esetén is kiürítjük a tárolót a biztonság kedvéért
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
         } finally {
-            // Miután végeztünk, a betöltési állapotot hamisra állítjuk
             setIsLoading(false);
         }
     }, []);
@@ -30,6 +34,8 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('token', userToken);
         setUser(userData);
         setToken(userToken);
+        // Ideiglenesen minden bejelentkezett felhasználó előfizetőnek számít
+        setIsSubscribed(true);
     };
 
     const logout = () => {
@@ -37,19 +43,20 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('token');
         setUser(null);
         setToken(null);
+        setIsSubscribed(false);
     };
 
     const value = {
         user,
         token,
-        isLoading, // Elérhetővé tesszük a betöltési állapotot
+        isSubscribed,
+        isLoading,
         login,
         logout
     };
 
-    // Amíg töltünk, nem jelenítünk meg semmit, hogy elkerüljük a hibákat
     if (isLoading) {
-        return null; // Vagy egy betöltő animáció: return <div>Betöltés...</div>;
+        return null;
     }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
