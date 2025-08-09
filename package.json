@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "main": "server.js",
-  "scripts": {
+"scripts": {
   "start": "react-scripts start",
   "build": "react-scripts build",
   "sync-db": "node scripts/sync-db.js",
-  "migrate": "node-pg-migrate",
+  "migrate": "node-pg-migrate -j js",
   "migrate:create": "npm run migrate create",
   "migrate:up": "npm run migrate up",
   "migrate:down": "npm run migrate down"
