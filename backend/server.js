@@ -27,17 +27,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    if (token == null) return res.sendStatus(401);
-    jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
-        if (err) return res.sendStatus(403);
-        req.user = user;
-        next();
-    });
-};
-
 app.post('/api/register', async (req, res) => {
   const { role, username, email, password, vipCode, classCode, referralCode } = req.body;
   if (!username || !email || !password || !role) { return res.status(400).json({ success: false, message: "Minden kötelező mezőt ki kell tölteni." }); }
@@ -133,37 +122,18 @@ app.get('/api/curriculums', async (req, res) => {
     const { subject, grade, q } = req.query; 
     let queryText = 'SELECT * FROM curriculums WHERE is_published = true';
     const queryParams = [];
-    if (subject) {
-        queryParams.push(subject);
-        queryText += ` AND subject = $${queryParams.length}`;
-    }
-    if (grade) {
-        queryParams.push(grade);
-        queryText += ` AND grade = $${queryParams.length}`;
-    }
-    if (q) {
-        queryParams.push(`%${q.toLowerCase()}%`);
-        queryText += ` AND LOWER(title) ILIKE $${queryParams.length}`;
-    }
+    if (subject) { queryParams.push(subject); queryText += ` AND subject = $${queryParams.length}`; }
+    if (grade) { queryParams.push(grade); queryText += ` AND grade = $${queryParams.length}`; }
+    if (q) { queryParams.push(`%${q.toLowerCase()}%`); queryText += ` AND LOWER(title) ILIKE $${queryParams.length}`; }
     queryText += ' ORDER BY subject, grade, title;';
     try {
         const result = await pool.query(queryText, queryParams);
-        if (subject || grade || q) {
-            return res.status(200).json({ success: true, data: result.rows });
-        }
-        const groupedData = {
-            freeLessons: {},
-            freeTools: [],
-            premiumCourses: [],
-            premiumTools: []
-        };
+        if (subject || grade || q) { return res.status(200).json({ success: true, data: result.rows }); }
+        const groupedData = { freeLessons: {}, freeTools: [], premiumCourses: [], premiumTools: [] };
         result.rows.forEach(item => {
             const subjectKey = item.subject || 'altalanos';
             switch (item.category) {
-                case 'free_lesson':
-                    if (!groupedData.freeLessons[subjectKey]) { groupedData.freeLessons[subjectKey] = []; }
-                    groupedData.freeLessons[subjectKey].push(item);
-                    break;
+                case 'free_lesson': if (!groupedData.freeLessons[subjectKey]) { groupedData.freeLessons[subjectKey] = []; } groupedData.freeLessons[subjectKey].push(item); break;
                 case 'free_tool': groupedData.freeTools.push(item); break;
                 case 'premium_course': groupedData.premiumCourses.push(item); break;
                 case 'premium_tool': groupedData.premiumTools.push(item); break;
@@ -171,74 +141,23 @@ app.get('/api/curriculums', async (req, res) => {
             }
         });
         res.status(200).json({ success: true, data: groupedData });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Szerverhiba történt." });
-    }
+    } catch (error) { res.status(500).json({ success: false, message: "Szerverhiba történt." }); }
 });
 
 app.get('/api/quiz/:slug', async (req, res) => {
-  const { slug } = req.params;
-  const correctedSlug = slug.replace(/_/g, '-');
-
-  const fsPath = path.join(__dirname, 'data', 'tananyag', `${correctedSlug}.json`);
-
-  let curriculum = null;
-  let questions = [];
-  let dbContent = {};
-  let fileContent = {};
-
-  try {
-    // 1) Próbáljuk DB-ből
-    const curRes = await pool.query('SELECT * FROM curriculums WHERE slug = $1', [correctedSlug]);
-    if (curRes.rows.length > 0) {
-      curriculum = curRes.rows[0];
-
-      // DB JSON parse – ha rossz, ne dobjunk 500-at, csak logoljuk és megyünk tovább
-      if (curriculum.content) {
-        try {
-          dbContent = JSON.parse(curriculum.content);
-        } catch (e) {
-          console.warn(`[quiz] Hibás JSON a curriculums.content-ben (${correctedSlug}):`, e.message);
-          dbContent = {};
-        }
-      }
-
-      // Kérdések (ha vannak)
-      const qRes = await pool.query('SELECT * FROM quizquestions WHERE curriculum_id = $1', [curriculum.id]);
-      questions = qRes.rows || [];
-    }
-  } catch (err) {
-    console.warn(`[quiz] DB lekérdezési hiba (${correctedSlug}):`, err.message);
-    // Nem dobunk 500-at, megyünk a fájlos fallbackre
-  }
-
-  // 2) Fallback fájlból (ha nincs DB vagy hiányos)
-  try {
-    const raw = await fs.readFile(fsPath, 'utf8');
-    fileContent = JSON.parse(raw);
-  } catch (e) {
-    // ha nincs fájl, semmi gond; csak akkor gond, ha a végén nincs semmi tartalom
-    if (!curriculum && Object.keys(dbContent).length === 0) {
-      return res.status(404).json({ success: false, message: "A kért tananyag nem található." });
-    }
-  }
-
-  // 3) Összefésülés: DB meta + DB content + fájltartalom (a fájl felülírhat)
-  const base = {
-    slug: correctedSlug,
-    category: curriculum?.category ?? fileContent.category ?? 'free_tool',
-    title: curriculum?.title ?? fileContent.title ?? 'Tartalom',
-    description: curriculum?.description ?? fileContent.description ?? '',
-    id: curriculum?.id,
-  };
-
-  const merged = { ...base, ...dbContent, ...fileContent };
-  merged.questions = questions;        // ha nincs DB-s kérdés, üres tömb
-  delete merged.content;               // ne küldjük vissza a nyers JSON-t
-
-  return res.status(200).json({ success: true, data: merged });
+    const { slug } = req.params;
+    const correctedSlug = slug.replace(/_/g, '-');
+    try {
+        const curriculumResult = await pool.query('SELECT * FROM curriculums WHERE slug = $1', [correctedSlug]);
+        if (curriculumResult.rows.length === 0) { return res.status(404).json({ success: false, message: "A kért tananyag nem található." }); }
+        const curriculum = curriculumResult.rows[0];
+        const contentData = curriculum.content ? JSON.parse(curriculum.content) : {};
+        const questionsResult = await pool.query('SELECT * FROM quizquestions WHERE curriculum_id = $1', [curriculum.id]);
+        const responseData = { ...curriculum, ...contentData, questions: questionsResult.rows };
+        delete responseData.content;
+        res.status(200).json({ success: true, data: responseData });
+    } catch (error) { res.status(500).json({ success: false, message: "Szerverhiba történt." }); }
 });
-
 
 app.get('/api/help', async (req, res) => {
     const { q } = req.query;
@@ -263,6 +182,27 @@ app.get('/api/help', async (req, res) => {
     }
 });
 
+// JAVÍTÁS: A hiányzó /api/admin/clear-users végpont visszaállítása
+app.get('/api/admin/clear-users/:secret', async (req, res) => {
+    const { secret } = req.params;
+    if (secret !== process.env.ADMIN_SECRET) {
+        return res.status(403).json({ message: "Hozzáférés megtagadva." });
+    }
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        // A táblákat a megfelelő sorrendben ürítjük ki a külső kulcsok miatt
+        await client.query('TRUNCATE TABLE ClassMemberships, Teachers, Referrals, Users RESTART IDENTITY CASCADE;');
+        await client.query('COMMIT');
+        res.status(200).json({ success: true, message: "Minden felhasználói adat (Users, Teachers, stb.) sikeresen törölve." });
+    } catch (error) {
+        await client.query('ROLLBACK');
+        console.error('Hiba a felhasználói adatok törlése során:', error);
+        res.status(500).json({ success: false, message: "Hiba történt a törlés során." });
+    } finally {
+        client.release();
+    }
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
