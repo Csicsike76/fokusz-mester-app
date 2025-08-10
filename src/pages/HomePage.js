@@ -1,11 +1,15 @@
+// src/pages/HomePage.js
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero/Hero';
 import styles from './HomePage.module.css';
 
-const API_URL = 'http://localhost:3001';
+// EZ AZ EGYETLEN SOR A JAVÍTÁS: Az API cím mostantól dinamikusan,
+// a környezetnek megfelelően kerül beállításra.
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
-// A statikus elrendezési objektum, ami a főoldal vázát adja.
+// A statikus elrendezési objektum, ami a főoldal vázát adja. (Ez az Ön eredeti logikája)
 const homePageLayout = {
     freeLessons: {
         matematika: [

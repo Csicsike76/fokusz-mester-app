@@ -10,8 +10,9 @@ const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs/promises');
 const validator = require('validator');
-const rateLimit = require('express-rate-limit');
-const axios = require('axios'); // ÚJ: Axios importálása
+// JAVÍTVA: A rateLimit és a biztonságos ipKeyGenerator importálása
+const { rateLimit, ipKeyGenerator } = require('express-rate-limit');
+const axios = require('axios');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
@@ -33,14 +34,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// JAVÍTVA: A rate limiter beállítása a biztonságos ipKeyGenerator használatával
 const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 10,
+    windowMs: 15 * 60 * 1000, // 15 perc
+    max: 10, // Max 10 kérés
     standardHeaders: true,
     legacyHeaders: false,
     message: { success: false, message: "Túl sok próbálkozás, kérjük, próbálja újra 15 perc múlva." },
     keyGenerator: (req, res) => {
-        return req.ip + (req.body.email || '');
+        // A kulcsot a biztonságosan kezelt IP címből ÉS a kérésben szereplő
+        // e-mail címből (ha van) rakjuk össze.
+        return ipKeyGenerator(req) + (req.body.email || '');
     },
 });
 
@@ -58,11 +62,6 @@ const authenticateToken = (req, res, next) => {
 app.post('/api/register', authLimiter, async (req, res) => {
   const { role, username, email, password, vipCode, classCode, referralCode, specialCode, recaptchaToken } = req.body;
   
-  // ======================= DIAGNOSZTIKA KEZDETE =======================
-  console.log('[REG_DIAG] Új regisztrációs kérelem érkezett.');
-  console.log(`[REG_DIAG] Szerepkör: ${role}, E-mail: ${email}`);
-  // ======================= DIAGNOSZTIKA VÉGE =======================
-
   if (!recaptchaToken) {
       return res.status(400).json({ success: false, message: "Kérjük, igazolja, hogy nem robot." });
   }
@@ -71,12 +70,10 @@ app.post('/api/register', authLimiter, async (req, res) => {
       const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}&remoteip=${req.ip}`;
       const response = await axios.post(verificationURL);
       if (!response.data.success) {
-          console.log('[REG_DIAG] Hiba: A reCAPTCHA ellenőrzés sikertelen.');
           return res.status(400).json({ success: false, message: "A reCAPTCHA ellenőrzés sikertelen." });
       }
-      console.log('[REG_DIAG] reCAPTCHA ellenőrzés sikeres.');
   } catch (reCaptchaError) {
-      console.error("[REG_DIAG] Hiba a reCAPTCHA API hívása közben:", reCaptchaError);
+      console.error("reCAPTCHA hiba:", reCaptchaError);
       return res.status(500).json({ success: false, message: "Hiba történt a reCAPTCHA ellenőrzése során." });
   }
 
@@ -93,14 +90,8 @@ app.post('/api/register', authLimiter, async (req, res) => {
   }
 
   let isPermanentFree = false;
-  if (specialCode) {
-    console.log(`[REG_DIAG] Speciális kódot kaptunk: ${specialCode}`);
-    if (specialCode === process.env.SPECIAL_ACCESS_CODE) {
-        isPermanentFree = true;
-        console.log('[REG_DIAG] A speciális kód érvényes, a felhasználó örökös ingyenes státuszt kap.');
-    } else {
-        console.log('[REG_DIAG] A megadott speciális kód érvénytelen.');
-    }
+  if (specialCode && specialCode === process.env.SPECIAL_ACCESS_CODE) {
+    isPermanentFree = true;
   }
 
   const client = await pool.connect();
@@ -142,8 +133,6 @@ app.post('/api/register', authLimiter, async (req, res) => {
     ]);
     const newUserId = newUserResult.rows[0].id;
     const registrationDate = newUserResult.rows[0].created_at;
-    console.log(`[REG_DIAG] Felhasználó sikeresen beszúrva az adatbázisba, ID: ${newUserId}`);
-
     if (referrerId) {
       await client.query('INSERT INTO referrals (referrer_user_id, referred_user_id) VALUES ($1, $2)', [referrerId, newUserId]);
     }
@@ -163,11 +152,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
       subject: 'Erősítsd meg az e-mail címedet!',
       html: `<p>Kérjük, kattints a linkre: <a href="${verificationUrl}">Megerősítés</a></p>`
     };
-    
-    console.log(`[REG_DIAG] Megerősítő e-mail küldése folyamatban a(z) ${email} címre...`);
     await transporter.sendMail(userMailOptions);
-    console.log(`[REG_DIAG] Megerősítő e-mail sikeresen elküldve.`);
-
 
     if (role === 'teacher') {
       const approvalUrl = `${baseUrl}/approve-teacher/${newUserId}`;
@@ -177,26 +162,18 @@ app.post('/api/register', authLimiter, async (req, res) => {
         subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
         html: `<p>Új tanár: ${username} (${email})<br><a href="${approvalUrl}">Jóváhagyás</a></p>`
       };
-      console.log(`[REG_DIAG] Tanár-jóváhagyó e-mail küldése az adminnak...`);
       await transporter.sendMail(adminMailOptions);
-      console.log(`[REG_DIAG] Tanár-jóváhagyó e-mail sikeresen elküldve.`);
     }
     
     await client.query('COMMIT');
-    console.log(`[REG_DIAG] Tranzakció sikeresen commitálva.`);
     res.status(201).json({ success: true, message: "Sikeres regisztráció! Ellenőrizd az emailjeidet.", user: { id: newUserId, createdAt: registrationDate } });
-  
   } catch (err) {
     if(client) await client.query('ROLLBACK');
-    console.error(`[REG_DIAG] KRITIKUS HIBA a regisztrációs folyamatban:`, err.message);
     res.status(400).json({ success: false, message: err.message || "Szerverhiba történt." });
   } finally {
     if(client) client.release();
   }
 });
-
-// A többi végpont (verify-email, login, stb.) változatlanul marad.
-// ... (Itt jön a többi, már meglévő funkció)
 
 app.get('/api/verify-email/:token', async (req, res) => {
     const { token } = req.params;
@@ -363,21 +340,166 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
 
 app.get('/api/curriculums', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM curriculums WHERE is_published = true ORDER BY subject, grade, title;');
-        const groupedData = { freeLessons: {}, freeTools: [], premiumCourses: [], premiumTools: [] };
-        result.rows.forEach(item => {
-            const subjectKey = item.subject || 'altalanos';
-            switch (item.category) {
-                case 'free_lesson': if (!groupedData.freeLessons[subjectKey]) groupedData.freeLessons[subjectKey] = []; groupedData.freeLessons[subjectKey].push(item); break;
-                case 'free_tool': groupedData.freeTools.push(item); break;
-                case 'premium_course': groupedData.premiumCourses.push(item); break;
-                case 'premium_tool': groupedData.premiumTools.push(item); break;
-                default: break;
+        console.log('📚 Curriculums API hívás elindult...');
+        
+        const tananyagPath = path.resolve(__dirname, 'data', 'tananyag');
+        console.log('📁 Tananyag mappa elérési útvonala:', tananyagPath);
+        
+        // Ellenőrizzük, hogy létezik-e a mappa
+        try {
+            await fs.access(tananyagPath);
+            console.log('✅ Tananyag mappa megtalálva');
+        } catch (error) {
+            console.log('❌ Tananyag mappa nem található:', tananyagPath);
+            return res.status(200).json({ 
+                success: true, 
+                message: "Tananyag mappa nem található", 
+                data: { freeLessons: {}, freeTools: [], premiumCourses: [], premiumTools: [] }
+            });
+        }
+
+        // Olvassuk be a mappa tartalmát
+        const files = await fs.readdir(tananyagPath);
+        console.log('📄 Talált fájlok:', files);
+
+        const groupedData = { 
+            freeLessons: {}, 
+            freeTools: [], 
+            premiumCourses: [], 
+            premiumTools: [] 
+        };
+
+        // Feldolgozzuk minden fájlt
+        for (const fileName of files) {
+            if (!fileName.endsWith('.json') && !fileName.endsWith('.js')) {
+                console.log(`⏭️ Kihagyott fájl (nem json/js): ${fileName}`);
+                continue;
+            }
+
+            try {
+                const filePath = path.join(tananyagPath, fileName);
+                let content;
+
+                if (fileName.endsWith('.json')) {
+                    // JSON fájl beolvasása
+                    const fileContent = await fs.readFile(filePath, 'utf8');
+                    content = JSON.parse(fileContent);
+                } else if (fileName.endsWith('.js')) {
+                    // JavaScript fájl beolvasása (require-rel)
+                    delete require.cache[require.resolve(filePath)]; // Cache törlése
+                    content = require(filePath);
+                }
+
+                console.log(`📖 Betöltött fájl: ${fileName}`);
+                
+                // Ha a content egy tömb, feldolgozzuk az elemeket
+                if (Array.isArray(content)) {
+                    content.forEach(item => processItem(item, groupedData));
+                } else if (content && typeof content === 'object') {
+                    // Ha egy objektum, feldolgozzuk
+                    processItem(content, groupedData);
+                }
+
+            } catch (fileError) {
+                console.error(`❌ Hiba a fájl feldolgozásában (${fileName}):`, fileError.message);
+            }
+        }
+
+        // Alternatíva: Ha van egy index.js vagy main.js fájl
+        const indexPath = path.join(tananyagPath, 'index.js');
+        try {
+            await fs.access(indexPath);
+            console.log('📋 Index fájl megtalálva, betöltés...');
+            delete require.cache[require.resolve(indexPath)];
+            const indexData = require(indexPath);
+            
+            if (indexData && typeof indexData === 'object') {
+                // Ha az index fájl már csoportosított adatokat tartalmaz
+                if (indexData.freeLessons) groupedData.freeLessons = { ...groupedData.freeLessons, ...indexData.freeLessons };
+                if (indexData.freeTools) groupedData.freeTools = [...groupedData.freeTools, ...indexData.freeTools];
+                if (indexData.premiumCourses) groupedData.premiumCourses = [...groupedData.premiumCourses, ...indexData.premiumCourses];
+                if (indexData.premiumTools) groupedData.premiumTools = [...groupedData.premiumTools, ...indexData.premiumTools];
+            }
+        } catch {
+            console.log('📋 Nincs index fájl');
+        }
+
+        console.log('📊 Végleges eredmény:');
+        console.log(`- Free lessons: ${Object.keys(groupedData.freeLessons).length} tantárgy`);
+        Object.keys(groupedData.freeLessons).forEach(subject => {
+            console.log(`  * ${subject}: ${groupedData.freeLessons[subject].length} lecke`);
+        });
+        console.log(`- Free tools: ${groupedData.freeTools.length}`);
+        console.log(`- Premium courses: ${groupedData.premiumCourses.length}`);
+        console.log(`- Premium tools: ${groupedData.premiumTools.length}`);
+
+        res.status(200).json({ 
+            success: true, 
+            data: groupedData,
+            meta: {
+                filesProcessed: files.length,
+                timestamp: new Date().toISOString()
             }
         });
-        res.status(200).json({ success: true, data: groupedData });
-    } catch (error) { res.status(500).json({ success: false, message: "Szerverhiba történt." }); }
+
+    } catch (error) {
+        console.error('❌ Hiba a curriculums API-ban:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: "Szerverhiba történt a tananyagok betöltésekor.",
+            error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
+    }
 });
+
+// Segédfüggvény az elemek feldolgozásához
+function processItem(item, groupedData) {
+    if (!item || !item.slug) return;
+
+    const subjectKey = item.subject || 'altalanos';
+    
+    switch (item.category) {
+        case 'free_lesson':
+            if (!groupedData.freeLessons[subjectKey]) {
+                groupedData.freeLessons[subjectKey] = [];
+            }
+            groupedData.freeLessons[subjectKey].push(item);
+            console.log(`➕ Free lesson: ${item.title} -> ${subjectKey}`);
+            break;
+            
+        case 'free_tool':
+            groupedData.freeTools.push(item);
+            console.log(`➕ Free tool: ${item.title}`);
+            break;
+            
+        case 'premium_course':
+            groupedData.premiumCourses.push(item);
+            console.log(`➕ Premium course: ${item.title}`);
+            break;
+            
+        case 'premium_tool':
+            groupedData.premiumTools.push(item);
+            console.log(`➕ Premium tool: ${item.title}`);
+            break;
+            
+        default:
+            // Ha nincs kategória, próbáljuk kitalálni a fájlnév vagy slug alapján
+            if (item.slug) {
+                if (item.slug.startsWith('kviz-') || item.slug.startsWith('muhely-')) {
+                    const subject = item.subject || 'altalanos';
+                    if (!groupedData.freeLessons[subject]) {
+                        groupedData.freeLessons[subject] = [];
+                    }
+                    groupedData.freeLessons[subject].push({...item, category: 'free_lesson'});
+                    console.log(`➕ Auto-kategorized as free lesson: ${item.title}`);
+                } else {
+                    groupedData.freeTools.push({...item, category: 'free_tool'});
+                    console.log(`➕ Auto-kategorized as free tool: ${item.title}`);
+                }
+            }
+            break;
+    }
+}
 
 app.get('/api/quiz/:slug', async (req, res) => {
     const { slug } = req.params;
