@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './ToolPage.module.css';
+import { API_URL } from '../config/api';
+
 
 // A távoli Render backend URL-je. Minden lekérdezést ide irányítunk.
 const API_URL = 'https://fokusz-mester-backend.onrender.com';
