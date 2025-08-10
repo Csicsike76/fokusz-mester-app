@@ -141,8 +141,7 @@ app.post('/api/login', async (req, res) => {
     const userResult = await pool.query('SELECT * FROM Users WHERE email = $1', [email]);
     if (userResult.rows.length === 0) { return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." }); }
     const user = userResult.rows[0];
-    if (!user.email_verified) { return res.status(403).json({ success: false, message: "Kérjük, először erősítsd meg az e-mail címedet!" }); }
-    const isPasswordCorrect = await bcrypt.compare(password, user.password_hash);
+
     if (!isPasswordCorrect) { return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." }); }
     if (user.role === 'teacher') {
         const teacherResult = await pool.query('SELECT is_approved FROM Teachers WHERE user_id = $1', [user.id]);
