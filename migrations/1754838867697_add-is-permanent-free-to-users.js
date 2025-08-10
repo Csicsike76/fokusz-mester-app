@@ -1,17 +1,14 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    // Itt adjuk hozzá az új 'is_permanent_free' oszlopot a 'Users' táblához.
-    await queryInterface.addColumn('Users', 'is_permanent_free', {
-      type: Sequelize.BOOLEAN,
-      defaultValue: false,
-      allowNull: false
+  up: (pgm) => {
+    // Új 'is_permanent_free' oszlop hozzáadása a 'Users' táblához
+    pgm.addColumns('Users', {
+      is_permanent_free: { type: 'boolean', default: false, notNull: true },
     });
   },
-
-  down: async (queryInterface, Sequelize) => {
-    // Ez a rész a migráció visszavonására szolgál, eltávolítja az oszlopot.
-    await queryInterface.removeColumn('Users', 'is_permanent_free');
+  down: (pgm) => {
+    // A migráció visszavonása, eltávolítja az oszlopot
+    pgm.dropColumns('Users', ['is_permanent_free']);
   }
 };
