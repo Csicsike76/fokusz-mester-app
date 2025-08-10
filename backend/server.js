@@ -10,7 +10,7 @@ const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs/promises');
 
-// JAVÍTÁS: A .env fájlt csak akkor töltjük be, ha nem az éles szerveren futunk.
+// VÉGLEGES JAVÍTÁS: A .env fájlt csak akkor töltjük be, ha nem az éles szerveren futunk.
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 }
@@ -195,7 +195,7 @@ app.get('/api/quiz/:slug', async (req, res) => {
 });
 
 app.get('/api/help', async (req, res) => {
-    const { q } = req.query;
+    const { q } = req.params;
     try {
         let queryText = 'SELECT * FROM helparticles';
         const queryParams = [];
