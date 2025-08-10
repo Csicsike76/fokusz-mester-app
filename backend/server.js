@@ -123,8 +123,10 @@ app.post('/api/register', async (req, res) => {
 app.get('/api/verify-email/:token', async (req, res) => {
     const { token } = req.params;
     try {
-        const userResult = await pool.query('SELECT * FROM Users WHERE email_verification_token = $1 AND email_verification_expires > NOW()', [token]);
-        if (userResult.rows.length === 0) { return res.status(400).json({ success: false, message: "A megerősítő link érvénytelen vagy lejárt."}); }
+        const userResult = await pool.query('SELECT id FROM Users WHERE email_verification_token = $1 AND email_verification_expires > NOW()', [token]);
+        if (userResult.rows.length === 0) {
+            return res.status(400).json({ success: false, message: "A megerősítő link érvénytelen vagy lejárt."});
+        }
         const user = userResult.rows[0];
         await pool.query('UPDATE Users SET email_verified = true, email_verification_token = NULL, email_verification_expires = NULL WHERE id = $1', [user.id]);
         res.status(200).json({ success: true, message: "Sikeres megerősítés! Most már bejelentkezhetsz."});
@@ -140,9 +142,14 @@ app.post('/api/login', async (req, res) => {
     const userResult = await pool.query('SELECT * FROM Users WHERE email = $1', [email]);
     if (userResult.rows.length === 0) { return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." }); }
     const user = userResult.rows[0];
+    
+    if (!user.email_verified) {
+        return res.status(403).json({ success: false, message: "Kérjük, először erősítsd meg az e-mail címedet!" });
+    }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password_hash);
     if (!isPasswordCorrect) { return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." }); }
+    
     if (user.role === 'teacher') {
         const teacherResult = await pool.query('SELECT is_approved FROM Teachers WHERE user_id = $1', [user.id]);
         if (teacherResult.rows.length === 0 || !teacherResult.rows[0].is_approved) { return res.status(403).json({ success: false, message: "A tanári fiókod még nem lett jóváhagyva." }); }
@@ -152,6 +159,60 @@ app.post('/api/login', async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, message: "Szerverhiba történt." });
   }
+});
+
+app.get('/api/curriculums', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM curriculums WHERE is_published = true ORDER BY subject, grade, title;');
+        const groupedData = { freeLessons: {}, freeTools: [], premiumCourses: [], premiumTools: [] };
+        result.rows.forEach(item => {
+            const subjectKey = item.subject || 'altalanos';
+            switch (item.category) {
+                case 'free_lesson': if (!groupedData.freeLessons[subjectKey]) groupedData.freeLessons[subjectKey] = []; groupedData.freeLessons[subjectKey].push(item); break;
+                case 'free_tool': groupedData.freeTools.push(item); break;
+                case 'premium_course': groupedData.premiumCourses.push(item); break;
+                case 'premium_tool': groupedData.premiumTools.push(item); break;
+                default: break;
+            }
+        });
+        res.status(200).json({ success: true, data: groupedData });
+    } catch (error) { res.status(500).json({ success: false, message: "Szerverhiba történt." }); }
+});
+
+app.get('/api/quiz/:slug', async (req, res) => {
+    const { slug } = req.params;
+    const correctedSlug = slug.replace(/_/g, '-');
+    try {
+        const curriculumResult = await pool.query('SELECT * FROM curriculums WHERE slug = $1', [correctedSlug]);
+        if (curriculumResult.rows.length === 0) return res.status(404).json({ success: false, message: "A kért tananyag nem található." });
+        const curriculum = curriculumResult.rows[0];
+        const contentData = curriculum.content ? JSON.parse(curriculum.content) : {};
+        const questionsResult = await pool.query('SELECT * FROM quizquestions WHERE curriculum_id = $1', [curriculum.id]);
+        const responseData = { ...curriculum, ...contentData, questions: questionsResult.rows };
+        delete responseData.content;
+        res.status(200).json({ success: true, data: responseData });
+    } catch (error) { res.status(500).json({ success: false, message: "Szerverhiba történt." }); }
+});
+
+app.get('/api/help', async (req, res) => {
+    const { q } = req.params;
+    try {
+        let queryText = 'SELECT * FROM helparticles';
+        const queryParams = [];
+        if (q && q.trim().length > 2) {
+            queryParams.push(`%${q.trim().toLowerCase()}%`);
+            queryText += ' WHERE LOWER(question) ILIKE $1 OR LOWER(answer) ILIKE $1 OR LOWER(keywords) ILIKE $1';
+        }
+        queryText += ' ORDER BY category, id;';
+        const result = await pool.query(queryText, queryParams);
+        const articlesByCategory = result.rows.reduce((acc, article) => {
+            const { category } = article;
+            if (!acc[category]) acc[category] = [];
+            acc[category].push(article);
+            return acc;
+        }, {});
+        res.status(200).json({ success: true, data: articlesByCategory });
+    } catch (error) { res.status(500).json({ success: false, message: "Szerverhiba a súgó cikkek lekérdezésekor." }); }
 });
 
 app.get('/api/admin/clear-users/:secret', async (req, res) => {
@@ -171,6 +232,7 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
     }
 });
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log(`Szerver fut a(z) ${process.env.PORT || 3001} porton`);
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`✅ A szerver elindult a ${PORT} porton.`);
 });
