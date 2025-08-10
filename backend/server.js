@@ -30,23 +30,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ======================= BIZTONSÁGI MIDDLEWARE =======================
-// Ez a funkció ellenőrzi, hogy a felhasználó be van-e jelentkezve, mielőtt
-// hozzáférhetne a védett adatokhoz (pl. osztályok listája).
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
-
-    if (token == null) return res.sendStatus(401); // Nincs token
-
+    if (token == null) return res.sendStatus(401);
     jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
-        if (err) return res.sendStatus(403); // Érvénytelen token
+        if (err) return res.sendStatus(403);
         req.user = user;
-        next(); // Token rendben, mehet a kérés tovább
+        next();
     });
 };
 
-// ======================= REGISZTRÁCIÓS LOGIKA =======================
 app.post('/api/register', async (req, res) => {
   const { role, username, email, password, vipCode, classCode, referralCode } = req.body;
   if (!username || !email || !password || !role) {
@@ -95,7 +89,6 @@ app.post('/api/register', async (req, res) => {
       verificationExpires
     ]);
     const newUserId = newUserResult.rows[0].id;
-    const registrationDate = newUserResult.rows[0].created_at;
     if (referrerId) {
       await client.query('INSERT INTO Referrals (referrer_user_id, referred_user_id) VALUES ($1, $2)', [referrerId, newUserId]);
     }
@@ -115,7 +108,19 @@ app.post('/api/register', async (req, res) => {
       subject: 'Erősítsd meg az e-mail címedet!',
       html: `<p>Kérjük, kattints a linkre: <a href="${verificationUrl}">Megerősítés</a></p>`
     };
-    await transporter.sendMail(userMailOptions);
+
+    // ======================= DIAGNOSZTIKA KEZDETE =======================
+    console.log(`[DIAG] E-mail küldése folyamatban a következő címre: ${email}`);
+    console.log(`[DIAG] Felhasználó szerepe: ${role}`);
+    try {
+        const info = await transporter.sendMail(userMailOptions);
+        console.log(`[DIAG] E-mail sikeresen átadva a szervernek. Válasz: ${info.response}`);
+        console.log(`[DIAG] Elfogadott címzettek: ${info.accepted}`);
+        console.log(`[DIAG] Elutasított címzettek: ${info.rejected}`);
+    } catch (mailError) {
+        console.error(`[DIAG] KRITIKUS HIBA az e-mail küldésekor:`, mailError);
+    }
+    // ======================= DIAGNOSZTIKA VÉGE =======================
 
     if (role === 'teacher') {
       const approvalUrl = `${baseUrl}/approve-teacher/${newUserId}`;
@@ -129,7 +134,7 @@ app.post('/api/register', async (req, res) => {
     }
     
     await client.query('COMMIT');
-    res.status(201).json({ success: true, message: "Sikeres regisztráció! Ellenőrizd az emailjeidet.", user: { id: newUserId, createdAt: registrationDate } });
+    res.status(201).json({ success: true, message: "Sikeres regisztráció! Ellenőrizd az emailjeidet." });
   } catch (err) {
     if(client) await client.query('ROLLBACK');
     res.status(400).json({ success: false, message: err.message || "Szerverhiba történt." });
@@ -137,6 +142,8 @@ app.post('/api/register', async (req, res) => {
     if(client) client.release();
   }
 });
+
+// A többi kód változatlanul marad...
 
 app.get('/api/verify-email/:token', async (req, res) => {
     const { token } = req.params;
@@ -193,9 +200,6 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// ======================= ÚJ TANÁRI FUNKCIÓK =======================
-
-// Osztályok lekérdezése a tanár számára
 app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
     try {
         if (req.user.role !== 'teacher') {
@@ -218,7 +222,6 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
     }
 });
 
-// Új osztály létrehozása
 app.post('/api/classes/create', authenticateToken, async (req, res) => {
     const { className, maxStudents } = req.body;
     try {
@@ -245,8 +248,6 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
     }
 });
 
-
-// ======================= MEGLÉVŐ ÁLTALÁNOS FUNKCIÓK =======================
 app.get('/api/curriculums', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM curriculums WHERE is_published = true ORDER BY subject, grade, title;');
