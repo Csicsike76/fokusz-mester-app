@@ -1,3 +1,5 @@
+// backend/scripts/setup-db.js (feltételezett útvonal)
+
 const { Pool } = require('pg');
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
@@ -17,7 +19,22 @@ DROP TABLE IF EXISTS Curriculums CASCADE;
 DROP TABLE IF EXISTS Classes CASCADE;
 DROP TABLE IF EXISTS Users CASCADE;
 
-CREATE TABLE Users ( id SERIAL PRIMARY KEY, username VARCHAR(50) UNIQUE NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, password_hash VARCHAR(255) NOT NULL, role VARCHAR(20) NOT NULL, referral_code VARCHAR(50) UNIQUE, email_verified BOOLEAN DEFAULT false, email_verification_token VARCHAR(255), email_verification_expires TIMESTAMP WITH TIME ZONE, created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP );
+-- MÓDOSÍTVA: Hozzáadtuk az "is_permanent_free" oszlopot a Users táblához.
+-- Ez egy logikai (igaz/hamis) érték, ami alapból 'hamis'.
+CREATE TABLE Users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL,
+    referral_code VARCHAR(50) UNIQUE,
+    email_verified BOOLEAN DEFAULT false,
+    email_verification_token VARCHAR(255),
+    email_verification_expires TIMESTAMP WITH TIME ZONE,
+    is_permanent_free BOOLEAN DEFAULT false, -- <<<<<<<<<< ÚJ OSZLOP
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE Teachers ( user_id INTEGER PRIMARY KEY REFERENCES Users(id) ON DELETE CASCADE, vip_code VARCHAR(50) UNIQUE, is_approved BOOLEAN DEFAULT false );
 CREATE TABLE Classes ( id SERIAL PRIMARY KEY, class_name VARCHAR(255) NOT NULL, class_code VARCHAR(50) UNIQUE NOT NULL, teacher_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, max_students INTEGER NOT NULL DEFAULT 30, is_active BOOLEAN DEFAULT true, is_approved BOOLEAN DEFAULT true, discount_status VARCHAR(20) DEFAULT 'pending', created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP, CONSTRAINT max_students_check CHECK (max_students >= 5 AND max_students <= 30) );
 CREATE TABLE ClassMemberships ( user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE, class_id INTEGER NOT NULL REFERENCES Classes(id) ON DELETE CASCADE, PRIMARY KEY (user_id, class_id) );
