@@ -41,19 +41,21 @@ app.post('/api/register', async (req, res) => {
     if (userExists.rows.length > 0) { throw new Error("Ez az e-mail cím már regisztrálva van."); }
     let referrerId = null;
     if (referralCode) {
-        const referrerResult = await client.query('SELECT id FROM Users WHERE referral_code = $1', [referralCode]);
-        if (referrerResult.rows.length > 0) { referrerId = referrerResult.rows[0].id; }
+      const referrerResult = await client.query('SELECT id FROM Users WHERE referral_code = $1', [referralCode]);
+      if (referrerResult.rows.length > 0) { referrerId = referrerResult.rows[0].id; }
     }
-    if (role === 'teacher' && vipCode !== process.env.VIP_CODE) { throw new Error("Érvénytelen VIP kód."); }
+    if (role === 'teacher') {
+      if (process.env.VIP_CODE && vipCode !== process.env.VIP_CODE) { throw new Error("Érvénytelen VIP kód."); }
+    }
     let classId = null;
     if (role === 'student' && classCode) {
-        const classResult = await client.query('SELECT id, max_students FROM Classes WHERE class_code = $1 AND is_active = true', [classCode]);
-        if (classResult.rows.length === 0) { throw new Error("A megadott osztálykód érvénytelen vagy az osztály már nem aktív."); }
-        classId = classResult.rows[0].id;
-        const maxStudents = classResult.rows[0].max_students;
-        const memberCountResult = await client.query('SELECT COUNT(*) FROM ClassMemberships WHERE class_id = $1', [classId]);
-        const memberCount = parseInt(memberCountResult.rows[0].count, 10);
-        if (memberCount >= maxStudents) { throw new Error("Ez az osztály sajnos már betelt."); }
+      const classResult = await client.query('SELECT id, max_students FROM Classes WHERE class_code = $1 AND is_active = true', [classCode]);
+      if (classResult.rows.length === 0) { throw new Error("A megadott osztálykód érvénytelen vagy az osztály már nem aktív."); }
+      classId = classResult.rows[0].id;
+      const maxStudents = classResult.rows[0].max_students;
+      const memberCountResult = await client.query('SELECT COUNT(*) FROM ClassMemberships WHERE class_id = $1', [classId]);
+      const memberCount = parseInt(memberCountResult.rows[0].count, 10);
+      if (memberCount >= maxStudents) { throw new Error("Ez az osztály sajnos már betelt."); }
     }
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
@@ -63,22 +65,18 @@ app.post('/api/register', async (req, res) => {
     const newUserResult = await client.query(newUserQuery, [username, email, passwordHash, role, newReferralCode, verificationToken, verificationExpires]);
     const newUserId = newUserResult.rows[0].id;
     const registrationDate = newUserResult.rows[0].created_at;
-    if (referrerId) {
-        await client.query('INSERT INTO Referrals (referrer_user_id, referred_user_id) VALUES ($1, $2)', [referrerId, newUserId]);
-    }
-    if (role === 'teacher') {
-      await client.query(`INSERT INTO Teachers (user_id, vip_code, is_approved) VALUES ($1, $2, false);`, [newUserId, vipCode]);
-      const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
-      const adminMailOptions = { from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`, to: process.env.MAIL_DEFAULT_SENDER, subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!', html: `<p>Új tanár: ${username} (${email}). <a href="${approvalUrl}">Jóváhagyás</a></p>`};
-      await transporter.sendMail(adminMailOptions);
-    }
-    if (role === 'student' && classId) {
-        await client.query(`INSERT INTO ClassMemberships (user_id, class_id) VALUES ($1, $2);`, [newUserId, classId]);
-    }
+    if (referrerId) { await client.query('INSERT INTO Referrals (referrer_user_id, referred_user_id) VALUES ($1, $2)', [referrerId, newUserId]); }
+    if (role === 'teacher') { await client.query(`INSERT INTO Teachers (user_id, vip_code, is_approved) VALUES ($1, $2, false);`, [newUserId, vipCode || null]); }
+    if (role === 'student' && classId) { await client.query(`INSERT INTO ClassMemberships (user_id, class_id) VALUES ($1, $2);`, [newUserId, classId]); }
+    await client.query('COMMIT');
     const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${verificationToken}`;
     const userMailOptions = { from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`, to: email, subject: 'Erősítsd meg az e-mail címedet!', html: `<p>Kattints a linkre a regisztrációdhoz: <a href="${verificationUrl}">Megerősítés</a></p>`};
-    await transporter.sendMail(userMailOptions);
-    await client.query('COMMIT');
+    if (role === 'teacher') {
+      const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
+      const adminMailOptions = { from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`, to: process.env.MAIL_DEFAULT_SENDER, subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!', html: `<p>Új tanár: ${username} (${email}). <a href="${approvalUrl}">Jóváhagyás</a></p>`};
+      try { await transporter.sendMail(adminMailOptions); } catch (e) { console.error('Admin mail error', e); }
+    }
+    try { await transporter.sendMail(userMailOptions); } catch (e) { console.error('User mail error', e); }
     res.status(201).json({ success: true, message: `Sikeres regisztráció! Megerősítő e-mailt küldtünk.`, user: { id: newUserId, createdAt: registrationDate } });
   } catch (error) {
     if (client) await client.query('ROLLBACK');
@@ -87,6 +85,7 @@ app.post('/api/register', async (req, res) => {
     if (client) client.release();
   }
 });
+
 
 app.get('/api/verify-email/:token', async (req, res) => {
     const { token } = req.params;
