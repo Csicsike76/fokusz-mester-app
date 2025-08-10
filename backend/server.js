@@ -56,10 +56,13 @@ const authenticateToken = (req, res, next) => {
 };
 
 app.post('/api/register', authLimiter, async (req, res) => {
-  // ÚJ: A 'recaptchaToken' változót is fogadjuk
   const { role, username, email, password, vipCode, classCode, referralCode, specialCode, recaptchaToken } = req.body;
   
-  // ======================= ÚJ reCAPTCHA ELLENŐRZÉS KEZDETE =======================
+  // ======================= DIAGNOSZTIKA KEZDETE =======================
+  console.log('[REG_DIAG] Új regisztrációs kérelem érkezett.');
+  console.log(`[REG_DIAG] Szerepkör: ${role}, E-mail: ${email}`);
+  // ======================= DIAGNOSZTIKA VÉGE =======================
+
   if (!recaptchaToken) {
       return res.status(400).json({ success: false, message: "Kérjük, igazolja, hogy nem robot." });
   }
@@ -68,13 +71,14 @@ app.post('/api/register', authLimiter, async (req, res) => {
       const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}&remoteip=${req.ip}`;
       const response = await axios.post(verificationURL);
       if (!response.data.success) {
+          console.log('[REG_DIAG] Hiba: A reCAPTCHA ellenőrzés sikertelen.');
           return res.status(400).json({ success: false, message: "A reCAPTCHA ellenőrzés sikertelen." });
       }
+      console.log('[REG_DIAG] reCAPTCHA ellenőrzés sikeres.');
   } catch (reCaptchaError) {
-      console.error("reCAPTCHA hiba:", reCaptchaError);
+      console.error("[REG_DIAG] Hiba a reCAPTCHA API hívása közben:", reCaptchaError);
       return res.status(500).json({ success: false, message: "Hiba történt a reCAPTCHA ellenőrzése során." });
   }
-  // ======================= ÚJ reCAPTCHA ELLENŐRZÉS VÉGE =======================
 
   if (!username || !email || !password || !role) {
     return res.status(400).json({ success: false, message: "Minden kötelező mezőt ki kell tölteni." });
@@ -89,8 +93,14 @@ app.post('/api/register', authLimiter, async (req, res) => {
   }
 
   let isPermanentFree = false;
-  if (specialCode && specialCode === process.env.SPECIAL_ACCESS_CODE) {
-    isPermanentFree = true;
+  if (specialCode) {
+    console.log(`[REG_DIAG] Speciális kódot kaptunk: ${specialCode}`);
+    if (specialCode === process.env.SPECIAL_ACCESS_CODE) {
+        isPermanentFree = true;
+        console.log('[REG_DIAG] A speciális kód érvényes, a felhasználó örökös ingyenes státuszt kap.');
+    } else {
+        console.log('[REG_DIAG] A megadott speciális kód érvénytelen.');
+    }
   }
 
   const client = await pool.connect();
@@ -132,6 +142,8 @@ app.post('/api/register', authLimiter, async (req, res) => {
     ]);
     const newUserId = newUserResult.rows[0].id;
     const registrationDate = newUserResult.rows[0].created_at;
+    console.log(`[REG_DIAG] Felhasználó sikeresen beszúrva az adatbázisba, ID: ${newUserId}`);
+
     if (referrerId) {
       await client.query('INSERT INTO referrals (referrer_user_id, referred_user_id) VALUES ($1, $2)', [referrerId, newUserId]);
     }
@@ -151,7 +163,11 @@ app.post('/api/register', authLimiter, async (req, res) => {
       subject: 'Erősítsd meg az e-mail címedet!',
       html: `<p>Kérjük, kattints a linkre: <a href="${verificationUrl}">Megerősítés</a></p>`
     };
+    
+    console.log(`[REG_DIAG] Megerősítő e-mail küldése folyamatban a(z) ${email} címre...`);
     await transporter.sendMail(userMailOptions);
+    console.log(`[REG_DIAG] Megerősítő e-mail sikeresen elküldve.`);
+
 
     if (role === 'teacher') {
       const approvalUrl = `${baseUrl}/approve-teacher/${newUserId}`;
@@ -161,13 +177,18 @@ app.post('/api/register', authLimiter, async (req, res) => {
         subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
         html: `<p>Új tanár: ${username} (${email})<br><a href="${approvalUrl}">Jóváhagyás</a></p>`
       };
+      console.log(`[REG_DIAG] Tanár-jóváhagyó e-mail küldése az adminnak...`);
       await transporter.sendMail(adminMailOptions);
+      console.log(`[REG_DIAG] Tanár-jóváhagyó e-mail sikeresen elküldve.`);
     }
     
     await client.query('COMMIT');
+    console.log(`[REG_DIAG] Tranzakció sikeresen commitálva.`);
     res.status(201).json({ success: true, message: "Sikeres regisztráció! Ellenőrizd az emailjeidet.", user: { id: newUserId, createdAt: registrationDate } });
+  
   } catch (err) {
     if(client) await client.query('ROLLBACK');
+    console.error(`[REG_DIAG] KRITIKUS HIBA a regisztrációs folyamatban:`, err.message);
     res.status(400).json({ success: false, message: err.message || "Szerverhiba történt." });
   } finally {
     if(client) client.release();
