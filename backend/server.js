@@ -340,166 +340,21 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
 
 app.get('/api/curriculums', async (req, res) => {
     try {
-        console.log('📚 Curriculums API hívás elindult...');
-        
-        const tananyagPath = path.resolve(__dirname, 'data', 'tananyag');
-        console.log('📁 Tananyag mappa elérési útvonala:', tananyagPath);
-        
-        // Ellenőrizzük, hogy létezik-e a mappa
-        try {
-            await fs.access(tananyagPath);
-            console.log('✅ Tananyag mappa megtalálva');
-        } catch (error) {
-            console.log('❌ Tananyag mappa nem található:', tananyagPath);
-            return res.status(200).json({ 
-                success: true, 
-                message: "Tananyag mappa nem található", 
-                data: { freeLessons: {}, freeTools: [], premiumCourses: [], premiumTools: [] }
-            });
-        }
-
-        // Olvassuk be a mappa tartalmát
-        const files = await fs.readdir(tananyagPath);
-        console.log('📄 Talált fájlok:', files);
-
-        const groupedData = { 
-            freeLessons: {}, 
-            freeTools: [], 
-            premiumCourses: [], 
-            premiumTools: [] 
-        };
-
-        // Feldolgozzuk minden fájlt
-        for (const fileName of files) {
-            if (!fileName.endsWith('.json') && !fileName.endsWith('.js')) {
-                console.log(`⏭️ Kihagyott fájl (nem json/js): ${fileName}`);
-                continue;
-            }
-
-            try {
-                const filePath = path.join(tananyagPath, fileName);
-                let content;
-
-                if (fileName.endsWith('.json')) {
-                    // JSON fájl beolvasása
-                    const fileContent = await fs.readFile(filePath, 'utf8');
-                    content = JSON.parse(fileContent);
-                } else if (fileName.endsWith('.js')) {
-                    // JavaScript fájl beolvasása (require-rel)
-                    delete require.cache[require.resolve(filePath)]; // Cache törlése
-                    content = require(filePath);
-                }
-
-                console.log(`📖 Betöltött fájl: ${fileName}`);
-                
-                // Ha a content egy tömb, feldolgozzuk az elemeket
-                if (Array.isArray(content)) {
-                    content.forEach(item => processItem(item, groupedData));
-                } else if (content && typeof content === 'object') {
-                    // Ha egy objektum, feldolgozzuk
-                    processItem(content, groupedData);
-                }
-
-            } catch (fileError) {
-                console.error(`❌ Hiba a fájl feldolgozásában (${fileName}):`, fileError.message);
-            }
-        }
-
-        // Alternatíva: Ha van egy index.js vagy main.js fájl
-        const indexPath = path.join(tananyagPath, 'index.js');
-        try {
-            await fs.access(indexPath);
-            console.log('📋 Index fájl megtalálva, betöltés...');
-            delete require.cache[require.resolve(indexPath)];
-            const indexData = require(indexPath);
-            
-            if (indexData && typeof indexData === 'object') {
-                // Ha az index fájl már csoportosított adatokat tartalmaz
-                if (indexData.freeLessons) groupedData.freeLessons = { ...groupedData.freeLessons, ...indexData.freeLessons };
-                if (indexData.freeTools) groupedData.freeTools = [...groupedData.freeTools, ...indexData.freeTools];
-                if (indexData.premiumCourses) groupedData.premiumCourses = [...groupedData.premiumCourses, ...indexData.premiumCourses];
-                if (indexData.premiumTools) groupedData.premiumTools = [...groupedData.premiumTools, ...indexData.premiumTools];
-            }
-        } catch {
-            console.log('📋 Nincs index fájl');
-        }
-
-        console.log('📊 Végleges eredmény:');
-        console.log(`- Free lessons: ${Object.keys(groupedData.freeLessons).length} tantárgy`);
-        Object.keys(groupedData.freeLessons).forEach(subject => {
-            console.log(`  * ${subject}: ${groupedData.freeLessons[subject].length} lecke`);
-        });
-        console.log(`- Free tools: ${groupedData.freeTools.length}`);
-        console.log(`- Premium courses: ${groupedData.premiumCourses.length}`);
-        console.log(`- Premium tools: ${groupedData.premiumTools.length}`);
-
-        res.status(200).json({ 
-            success: true, 
-            data: groupedData,
-            meta: {
-                filesProcessed: files.length,
-                timestamp: new Date().toISOString()
+        const result = await pool.query('SELECT * FROM curriculums WHERE is_published = true ORDER BY subject, grade, title;');
+        const groupedData = { freeLessons: {}, freeTools: [], premiumCourses: [], premiumTools: [] };
+        result.rows.forEach(item => {
+            const subjectKey = item.subject || 'altalanos';
+            switch (item.category) {
+                case 'free_lesson': if (!groupedData.freeLessons[subjectKey]) groupedData.freeLessons[subjectKey] = []; groupedData.freeLessons[subjectKey].push(item); break;
+                case 'free_tool': groupedData.freeTools.push(item); break;
+                case 'premium_course': groupedData.premiumCourses.push(item); break;
+                case 'premium_tool': groupedData.premiumTools.push(item); break;
+                default: break;
             }
         });
-
-    } catch (error) {
-        console.error('❌ Hiba a curriculums API-ban:', error);
-        res.status(500).json({ 
-            success: false, 
-            message: "Szerverhiba történt a tananyagok betöltésekor.",
-            error: process.env.NODE_ENV === 'development' ? error.message : undefined
-        });
-    }
+        res.status(200).json({ success: true, data: groupedData });
+    } catch (error) { res.status(500).json({ success: false, message: "Szerverhiba történt." }); }
 });
-
-// Segédfüggvény az elemek feldolgozásához
-function processItem(item, groupedData) {
-    if (!item || !item.slug) return;
-
-    const subjectKey = item.subject || 'altalanos';
-    
-    switch (item.category) {
-        case 'free_lesson':
-            if (!groupedData.freeLessons[subjectKey]) {
-                groupedData.freeLessons[subjectKey] = [];
-            }
-            groupedData.freeLessons[subjectKey].push(item);
-            console.log(`➕ Free lesson: ${item.title} -> ${subjectKey}`);
-            break;
-            
-        case 'free_tool':
-            groupedData.freeTools.push(item);
-            console.log(`➕ Free tool: ${item.title}`);
-            break;
-            
-        case 'premium_course':
-            groupedData.premiumCourses.push(item);
-            console.log(`➕ Premium course: ${item.title}`);
-            break;
-            
-        case 'premium_tool':
-            groupedData.premiumTools.push(item);
-            console.log(`➕ Premium tool: ${item.title}`);
-            break;
-            
-        default:
-            // Ha nincs kategória, próbáljuk kitalálni a fájlnév vagy slug alapján
-            if (item.slug) {
-                if (item.slug.startsWith('kviz-') || item.slug.startsWith('muhely-')) {
-                    const subject = item.subject || 'altalanos';
-                    if (!groupedData.freeLessons[subject]) {
-                        groupedData.freeLessons[subject] = [];
-                    }
-                    groupedData.freeLessons[subject].push({...item, category: 'free_lesson'});
-                    console.log(`➕ Auto-kategorized as free lesson: ${item.title}`);
-                } else {
-                    groupedData.freeTools.push({...item, category: 'free_tool'});
-                    console.log(`➕ Auto-kategorized as free tool: ${item.title}`);
-                }
-            }
-            break;
-    }
-}
 
 app.get('/api/quiz/:slug', async (req, res) => {
     const { slug } = req.params;
