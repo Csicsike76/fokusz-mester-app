@@ -10,7 +10,6 @@ const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs/promises');
 
-// A .env fájlt csak akkor töltjük be, ha nem az éles szerveren futunk.
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 }
@@ -31,6 +30,23 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ======================= BIZTONSÁGI MIDDLEWARE =======================
+// Ez a funkció ellenőrzi, hogy a felhasználó be van-e jelentkezve, mielőtt
+// hozzáférhetne a védett adatokhoz (pl. osztályok listája).
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (token == null) return res.sendStatus(401); // Nincs token
+
+    jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
+        if (err) return res.sendStatus(403); // Érvénytelen token
+        req.user = user;
+        next(); // Token rendben, mehet a kérés tovább
+    });
+};
+
+// ======================= REGISZTRÁCIÓS LOGIKA =======================
 app.post('/api/register', async (req, res) => {
   const { role, username, email, password, vipCode, classCode, referralCode } = req.body;
   if (!username || !email || !password || !role) {
@@ -122,7 +138,6 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// ======================= JAVÍTVA =======================
 app.get('/api/verify-email/:token', async (req, res) => {
     const { token } = req.params;
     try {
@@ -132,28 +147,20 @@ app.get('/api/verify-email/:token', async (req, res) => {
         }
         const user = userResult.rows[0];
         await pool.query('UPDATE Users SET email_verified = true, email_verification_token = NULL, email_verification_expires = NULL WHERE id = $1', [user.id]);
-        
-        // JSON választ küldünk, amit a frontend feldolgozhat
         res.status(200).json({ success: true, message: "Sikeres megerősítés! Most már bejelentkezhetsz."});
-
     } catch (error) {
         res.status(500).json({ success: false, message: "Szerverhiba történt a megerősítés során."});
     }
 });
 
-// ======================= JAVÍTVA =======================
 app.get('/api/approve-teacher/:userId', async (req, res) => {
     const { userId } = req.params;
     try {
         const result = await pool.query('UPDATE Teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id', [userId]);
-
         if (result.rowCount === 0) {
             return res.status(404).json({ success: false, message: "A tanár nem található." });
         }
-        
-        // JSON választ küldünk, amit a frontend feldolgozhat
         res.status(200).json({ success: true, message: "A tanári fiók sikeresen jóváhagyva." });
-
     } catch (error) {
         console.error("Tanár jóváhagyási hiba:", error);
         res.status(500).json({ success: false, message: "Hiba történt a jóváhagyás során."});
@@ -186,6 +193,60 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// ======================= ÚJ TANÁRI FUNKCIÓK =======================
+
+// Osztályok lekérdezése a tanár számára
+app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== 'teacher') {
+            return res.status(403).json({ message: "Hozzáférés megtagadva: csak tanárok kérhetik le az osztályaikat." });
+        }
+        const teacherId = req.user.userId;
+        const query = `
+            SELECT c.id, c.class_name, c.class_code, c.max_students, COUNT(cm.user_id) AS student_count
+            FROM Classes c
+            LEFT JOIN ClassMemberships cm ON c.id = cm.class_id
+            WHERE c.teacher_id = $1
+            GROUP BY c.id
+            ORDER BY c.created_at DESC;
+        `;
+        const { rows } = await pool.query(query, [teacherId]);
+        res.status(200).json({ success: true, classes: rows });
+    } catch (error) {
+        console.error("Hiba az osztályok lekérdezésekor:", error);
+        res.status(500).json({ success: false, message: "Szerverhiba történt az osztályok lekérdezésekor." });
+    }
+});
+
+// Új osztály létrehozása
+app.post('/api/classes/create', authenticateToken, async (req, res) => {
+    const { className, maxStudents } = req.body;
+    try {
+        if (req.user.role !== 'teacher') {
+            return res.status(403).json({ message: "Hozzáférés megtagadva: csak tanárok hozhatnak létre osztályt." });
+        }
+        if (!className || !maxStudents) {
+            return res.status(400).json({ success: false, message: "Osztálynév és maximális létszám megadása kötelező." });
+        }
+        const teacherId = req.user.userId;
+        const classCode = `OSZTALY-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
+        
+        const query = `
+            INSERT INTO Classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
+            VALUES ($1, $2, $3, $4, true, true)
+            RETURNING *;
+        `;
+        const { rows } = await pool.query(query, [className, classCode, teacherId, maxStudents]);
+        res.status(201).json({ success: true, message: "Osztály sikeresen létrehozva!", class: rows[0] });
+
+    } catch (error) {
+        console.error("Hiba az osztály létrehozásakor:", error);
+        res.status(500).json({ success: false, message: "Szerverhiba történt az osztály létrehozásakor." });
+    }
+});
+
+
+// ======================= MEGLÉVŐ ÁLTALÁNOS FUNKCIÓK =======================
 app.get('/api/curriculums', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM curriculums WHERE is_published = true ORDER BY subject, grade, title;');
