@@ -10,15 +10,6 @@ const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs/promises');
 
-// ======================= HIBAKERESÉS KEZDETE =======================
-// A szerver indulásakor kiírjuk a logba a kritikus környezeti változókat.
-// Ez segít látni, hogy a Render átadja-e őket helyesen az alkalmazásnak.
-console.log('--- Környezeti Változók Ellenőrzése Induláskor ---');
-console.log(`NODE_ENV értéke: ${process.env.NODE_ENV}`);
-console.log(`FRONTEND_URL értéke: ${process.env.FRONTEND_URL}`);
-console.log('--- Ellenőrzés Vége ---');
-// ======================= HIBAKERESÉS VÉGE =======================
-
 // A .env fájlt csak akkor töltjük be, ha nem az éles szerveren futunk.
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
@@ -99,14 +90,9 @@ app.post('/api/register', async (req, res) => {
       await client.query('INSERT INTO ClassMemberships (user_id, class_id) VALUES ($1, $2)', [newUserId, classId]);
     }
     
-    // ======================= JAVÍTÁS KEZDETE =======================
-    // A hiba az, hogy a process.env.FRONTEND_URL valamiért 'undefined'.
-    // Hozzáadunk egy "vészmegoldást", ami garantálja, hogy a link helyes lesz,
-    // ha a környezeti változó beolvasása sikertelen.
     const baseUrl = process.env.FRONTEND_URL || 'https://fokusz-mester-app.onrender.com';
     const verificationUrl = `${baseUrl}/verify-email/${verificationToken}`;
-    // ======================= JAVÍTÁS VÉGE =======================
-
+    
     const userMailOptions = {
       from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
       to: email,
@@ -116,6 +102,7 @@ app.post('/api/register', async (req, res) => {
     await transporter.sendMail(userMailOptions);
 
     if (role === 'teacher') {
+      // Itt a link az API végpontra mutat, nem a frontendre, mert a jóváhagyás egy szerveroldali művelet
       const approvalUrl = `${baseUrl}/approve-teacher/${newUserId}`;
       const adminMailOptions = {
         from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
@@ -145,11 +132,36 @@ app.get('/api/verify-email/:token', async (req, res) => {
         }
         const user = userResult.rows[0];
         await pool.query('UPDATE Users SET email_verified = true, email_verification_token = NULL, email_verification_expires = NULL WHERE id = $1', [user.id]);
-        res.status(200).json({ success: true, message: "Sikeres megerősítés! Most már bejelentkezhetsz."});
+        // A frontend számára itt nem kell JSON válasz, mert az egy külön oldalon kezeli.
+        // Ehelyett átirányítjuk a felhasználót a sikeres megerősítést jelző oldalra.
+        res.redirect(`${process.env.FRONTEND_URL || 'https://fokusz-mester-app.onrender.com'}/email-verified`);
     } catch (error) {
-        res.status(500).json({ success: false, message: "Szerverhiba történt a megerősítés során."});
+        // Hiba esetén is egy hibát jelző frontend oldalra irányítunk.
+        res.redirect(`${process.env.FRONTEND_URL || 'https://fokusz-mester-app.onrender.com'}/email-verification-failed`);
     }
 });
+
+// ======================= ÚJ KÓDBLOKK KEZDETE =======================
+// Ez a hiányzó funkció, ami a tanár jóváhagyó linkre kattintást kezeli.
+app.get('/api/approve-teacher/:userId', async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const result = await pool.query('UPDATE Teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id', [userId]);
+
+        if (result.rowCount === 0) {
+            return res.status(404).send('<h1>Hiba</h1><p>A tanár nem található.</p>');
+        }
+
+        // Itt nem JSON-t, hanem egy egyszerű HTML oldalt küldünk vissza,
+        // hogy az admin lássa a művelet sikerességét.
+        res.status(200).send('<h1>Siker!</h1><p>A tanári fiók sikeresen jóváhagyva. Most már be tud jelentkezni.</p>');
+
+    } catch (error) {
+        console.error("Tanár jóváhagyási hiba:", error);
+        res.status(500).send('<h1>Szerverhiba</h1><p>Hiba történt a jóváhagyás során.</p>');
+    }
+});
+// ======================= ÚJ KÓDBLOKK VÉGE =======================
 
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
@@ -176,6 +188,8 @@ app.post('/api/login', async (req, res) => {
     res.status(500).json({ success: false, message: "Szerverhiba történt." });
   }
 });
+
+// A többi kód változatlanul marad...
 
 app.get('/api/curriculums', async (req, res) => {
     try {
