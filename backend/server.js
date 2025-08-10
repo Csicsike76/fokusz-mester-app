@@ -10,7 +10,16 @@ const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs/promises');
 
-// VÉGLEGES JAVÍTÁS: A .env fájlt csak akkor töltjük be, ha nem az éles szerveren futunk.
+// ======================= HIBAKERESÉS KEZDETE =======================
+// A szerver indulásakor kiírjuk a logba a kritikus környezeti változókat.
+// Ez segít látni, hogy a Render átadja-e őket helyesen az alkalmazásnak.
+console.log('--- Környezeti Változók Ellenőrzése Induláskor ---');
+console.log(`NODE_ENV értéke: ${process.env.NODE_ENV}`);
+console.log(`FRONTEND_URL értéke: ${process.env.FRONTEND_URL}`);
+console.log('--- Ellenőrzés Vége ---');
+// ======================= HIBAKERESÉS VÉGE =======================
+
+// A .env fájlt csak akkor töltjük be, ha nem az éles szerveren futunk.
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 }
@@ -23,7 +32,7 @@ const pool = new Pool({
 const transporter = nodemailer.createTransport({
     host: process.env.MAIL_SERVER,
     port: process.env.MAIL_PORT,
-    secure: process.env.MAIL_USE_TLS === 'true', 
+    secure: process.env.MAIL_USE_TLS === 'true',
     auth: { user: process.env.MAIL_USERNAME, pass: process.env.MAIL_PASSWORD },
 });
 
@@ -63,7 +72,7 @@ app.post('/api/register', async (req, res) => {
     }
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
-    const verificationExpires = new Date(Date.now() + 3600000); 
+    const verificationExpires = new Date(Date.now() + 3600000);
     const referralCodeNew = role === 'student' ? `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}` : null;
     const insertUserQuery = `
       INSERT INTO Users (username, email, password_hash, role, referral_code, email_verification_token, email_verification_expires, created_at)
@@ -90,7 +99,14 @@ app.post('/api/register', async (req, res) => {
       await client.query('INSERT INTO ClassMemberships (user_id, class_id) VALUES ($1, $2)', [newUserId, classId]);
     }
     
-    const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${verificationToken}`;
+    // ======================= JAVÍTÁS KEZDETE =======================
+    // A hiba az, hogy a process.env.FRONTEND_URL valamiért 'undefined'.
+    // Hozzáadunk egy "vészmegoldást", ami garantálja, hogy a link helyes lesz,
+    // ha a környezeti változó beolvasása sikertelen.
+    const baseUrl = process.env.FRONTEND_URL || 'https://fokusz-mester-app.onrender.com';
+    const verificationUrl = `${baseUrl}/verify-email/${verificationToken}`;
+    // ======================= JAVÍTÁS VÉGE =======================
+
     const userMailOptions = {
       from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
       to: email,
@@ -100,7 +116,7 @@ app.post('/api/register', async (req, res) => {
     await transporter.sendMail(userMailOptions);
 
     if (role === 'teacher') {
-      const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
+      const approvalUrl = `${baseUrl}/approve-teacher/${newUserId}`;
       const adminMailOptions = {
         from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
         to: process.env.MAIL_DEFAULT_SENDER,
