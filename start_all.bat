@@ -8,6 +8,25 @@ echo Fókusz Mester - Fejlesztői Környezet Indító
 echo ======================================================
 echo.
 
+:SETUP_CHOICE
+REM Megkérdezzük a felhasználót, hogy szükség van-e tiszta telepítésre.
+CHOICE /C IN /M "Szükséges az adatbázis teljes újraépítése (minden adat törlődik)? [I/N]"
+IF ERRORLEVEL 2 GOTO CHECK_DEPS
+IF ERRORLEVEL 1 GOTO SETUP_DB
+
+:SETUP_DB
+echo.
+echo [INFO] Adatbázis teljes törlése és újraépítése a 'setup-db.js' alapján...
+node scripts/setup-db.js
+if %errorlevel% neq 0 (
+    echo [HIBA] Hiba történt a 'setup-db.js' futtatása során!
+    pause
+    exit /b 1
+)
+echo [OK] Alap táblák sikeresen létrehozva.
+echo.
+GOTO CHECK_DEPS
+
 :CHECK_DEPS
 echo [1/3] Függőségek ellenőrzése...
 if not exist "backend\node_modules" (
