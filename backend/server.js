@@ -102,7 +102,6 @@ app.post('/api/register', async (req, res) => {
     await transporter.sendMail(userMailOptions);
 
     if (role === 'teacher') {
-      // Itt a link az API végpontra mutat, nem a frontendre, mert a jóváhagyás egy szerveroldali művelet
       const approvalUrl = `${baseUrl}/approve-teacher/${newUserId}`;
       const adminMailOptions = {
         from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
@@ -123,6 +122,7 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
+// ======================= JAVÍTVA =======================
 app.get('/api/verify-email/:token', async (req, res) => {
     const { token } = req.params;
     try {
@@ -132,36 +132,33 @@ app.get('/api/verify-email/:token', async (req, res) => {
         }
         const user = userResult.rows[0];
         await pool.query('UPDATE Users SET email_verified = true, email_verification_token = NULL, email_verification_expires = NULL WHERE id = $1', [user.id]);
-        // A frontend számára itt nem kell JSON válasz, mert az egy külön oldalon kezeli.
-        // Ehelyett átirányítjuk a felhasználót a sikeres megerősítést jelző oldalra.
-        res.redirect(`${process.env.FRONTEND_URL || 'https://fokusz-mester-app.onrender.com'}/email-verified`);
+        
+        // JSON választ küldünk, amit a frontend feldolgozhat
+        res.status(200).json({ success: true, message: "Sikeres megerősítés! Most már bejelentkezhetsz."});
+
     } catch (error) {
-        // Hiba esetén is egy hibát jelző frontend oldalra irányítunk.
-        res.redirect(`${process.env.FRONTEND_URL || 'https://fokusz-mester-app.onrender.com'}/email-verification-failed`);
+        res.status(500).json({ success: false, message: "Szerverhiba történt a megerősítés során."});
     }
 });
 
-// ======================= ÚJ KÓDBLOKK KEZDETE =======================
-// Ez a hiányzó funkció, ami a tanár jóváhagyó linkre kattintást kezeli.
+// ======================= JAVÍTVA =======================
 app.get('/api/approve-teacher/:userId', async (req, res) => {
     const { userId } = req.params;
     try {
         const result = await pool.query('UPDATE Teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id', [userId]);
 
         if (result.rowCount === 0) {
-            return res.status(404).send('<h1>Hiba</h1><p>A tanár nem található.</p>');
+            return res.status(404).json({ success: false, message: "A tanár nem található." });
         }
-
-        // Itt nem JSON-t, hanem egy egyszerű HTML oldalt küldünk vissza,
-        // hogy az admin lássa a művelet sikerességét.
-        res.status(200).send('<h1>Siker!</h1><p>A tanári fiók sikeresen jóváhagyva. Most már be tud jelentkezni.</p>');
+        
+        // JSON választ küldünk, amit a frontend feldolgozhat
+        res.status(200).json({ success: true, message: "A tanári fiók sikeresen jóváhagyva." });
 
     } catch (error) {
         console.error("Tanár jóváhagyási hiba:", error);
-        res.status(500).send('<h1>Szerverhiba</h1><p>Hiba történt a jóváhagyás során.</p>');
+        res.status(500).json({ success: false, message: "Hiba történt a jóváhagyás során."});
     }
 });
-// ======================= ÚJ KÓDBLOKK VÉGE =======================
 
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
@@ -188,8 +185,6 @@ app.post('/api/login', async (req, res) => {
     res.status(500).json({ success: false, message: "Szerverhiba történt." });
   }
 });
-
-// A többi kód változatlanul marad...
 
 app.get('/api/curriculums', async (req, res) => {
     try {
