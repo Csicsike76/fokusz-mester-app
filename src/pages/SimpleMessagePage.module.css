@@ -1,51 +1,59 @@
+/* src/pages/SimpleMessagePage.module.css */
+
 .container {
     display: flex;
-    align-items: center;
     justify-content: center;
-    min-height: 80vh;
+    align-items: center;
+    min-height: calc(100vh - 150px);
     padding: 2rem;
-    color: white;
+    background-color: #f4f7f9; /* Világosszürke háttér */
 }
 
 .messageBox {
-    text-align: center;
-    background-color: rgba(44, 62, 80, 0.85);
-    padding: 3rem;
+    background-color: white;
+    padding: 2.5rem 3rem;
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
     max-width: 500px;
+    width: 100%;
+    border-top: 5px solid #3498db; /* Kék felső szegély */
 }
 
 .messageBox h1 {
-    margin-top: 0;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
+    color: #2c3e50; /* Sötétkékes-szürke címsor */
+    margin-bottom: 1.5rem;
 }
 
 .messageBox p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
 }
 
-.button {
-    display: inline-block;
-    padding: 0.8rem 2rem;
-    border-radius: 5px;
-    text-decoration: none;
+.successText {
+    color: #2ecc71; /* Zöld a sikeres üzenethez */
     font-weight: bold;
-    transition: transform 0.2s ease;
 }
 
-.button:hover {
-    transform: translateY(-2px);
+.errorText {
+    color: #e74c3c; /* Piros a hibaüzenethez */
+    font-weight: bold;
 }
 
-.success .button {
-    background-color: #2ecc71;
+.loginButton {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.8rem 1.8rem;
+    background-color: #3498db; /* Kék gomb */
     color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s;
 }
 
-.error .button {
-    background-color: #e74c3c;
-    color: white;
+.loginButton:hover {
+    background-color: #2980b9; /* Sötétebb kék hoverre */
 }
