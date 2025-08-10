@@ -10,6 +10,8 @@ const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs/promises');
 const validator = require('validator');
+const rateLimit = require('express-rate-limit');
+const axios = require('axios'); // ÚJ: Axios importálása
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
@@ -31,6 +33,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 10,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { success: false, message: "Túl sok próbálkozás, kérjük, próbálja újra 15 perc múlva." },
+    keyGenerator: (req, res) => {
+        return req.ip + (req.body.email || '');
+    },
+});
+
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -42,8 +55,27 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-app.post('/api/register', async (req, res) => {
-  const { role, username, email, password, vipCode, classCode, referralCode, specialCode } = req.body;
+app.post('/api/register', authLimiter, async (req, res) => {
+  // ÚJ: A 'recaptchaToken' változót is fogadjuk
+  const { role, username, email, password, vipCode, classCode, referralCode, specialCode, recaptchaToken } = req.body;
+  
+  // ======================= ÚJ reCAPTCHA ELLENŐRZÉS KEZDETE =======================
+  if (!recaptchaToken) {
+      return res.status(400).json({ success: false, message: "Kérjük, igazolja, hogy nem robot." });
+  }
+
+  try {
+      const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}&remoteip=${req.ip}`;
+      const response = await axios.post(verificationURL);
+      if (!response.data.success) {
+          return res.status(400).json({ success: false, message: "A reCAPTCHA ellenőrzés sikertelen." });
+      }
+  } catch (reCaptchaError) {
+      console.error("reCAPTCHA hiba:", reCaptchaError);
+      return res.status(500).json({ success: false, message: "Hiba történt a reCAPTCHA ellenőrzése során." });
+  }
+  // ======================= ÚJ reCAPTCHA ELLENŐRZÉS VÉGE =======================
+
   if (!username || !email || !password || !role) {
     return res.status(400).json({ success: false, message: "Minden kötelező mezőt ki kell tölteni." });
   }
@@ -142,6 +174,9 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
+// A többi végpont (verify-email, login, stb.) változatlanul marad.
+// ... (Itt jön a többi, már meglévő funkció)
+
 app.get('/api/verify-email/:token', async (req, res) => {
     const { token } = req.params;
     try {
@@ -171,7 +206,7 @@ app.get('/api/approve-teacher/:userId', async (req, res) => {
     }
 });
 
-app.post('/api/login', async (req, res) => {
+app.post('/api/login', authLimiter, async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) { return res.status(400).json({ success: false, message: "E-mail és jelszó megadása kötelező." }); }
   try {
@@ -197,7 +232,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-app.post('/api/forgot-password', async (req, res) => {
+app.post('/api/forgot-password', authLimiter, async (req, res) => {
     const { email } = req.body;
     try {
         const userResult = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
