@@ -87,18 +87,18 @@
 
 /* KVÍZ ÉS ÁLTALÁNOS NÉZET */
 .quizContainer, .genericToolContainer {
-    background-color: rgba(211, 141, 42, 0.468);
+    background-color: rgba(44, 62, 80, 0.85); /* navhoz hasonló, picit világosabb */
     padding: 3rem 4rem;
     border-radius: 15px;
     text-align: center;
-    color: #2c3e50;
+    color: #ecf0f1;
     max-width: 800px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     backdrop-filter: blur(5px);
 }
 
-.quizContainer .mainTitle, .genericToolContainer .mainTitle { color: #2c3e50; text-shadow: none; }
-.quizContainer .subTitle, .genericToolContainer .subTitle { color: #34495e; text-shadow: none; }
+.quizContainer .mainTitle, .genericToolContainer .mainTitle { color: #ecf0f5; text-shadow: none; }
+.quizContainer .subTitle, .genericToolContainer .subTitle { color: #e7ebef; text-shadow: none; }
 
 .workInProgress {
     margin-top: 2rem;
@@ -116,4 +116,9 @@
 @media (max-width: 768px) {
     .characterGrid { grid-template-columns: 1fr; }
     .quizContainer, .genericToolContainer { padding: 2rem; }
+}
+
+/* Tananyag oldalak főcíme */
+.contentTitle {
+  color: white !important;
 }
