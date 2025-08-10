@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs/promises');
+const validator = require('validator');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
@@ -42,18 +43,32 @@ const authenticateToken = (req, res, next) => {
 };
 
 app.post('/api/register', async (req, res) => {
-  const { role, username, email, password, vipCode, classCode, referralCode } = req.body;
+  const { role, username, email, password, vipCode, classCode, referralCode, specialCode } = req.body;
   if (!username || !email || !password || !role) {
     return res.status(400).json({ success: false, message: "Minden kötelező mezőt ki kell tölteni." });
   }
+
+  const passwordOptions = { minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 };
+  if (!validator.isStrongPassword(password, passwordOptions)) {
+      return res.status(400).json({ 
+          success: false, 
+          message: "A jelszó túl gyenge! A jelszónak legalább 8 karakter hosszúnak kell lennie, és tartalmaznia kell kisbetűt, nagybetűt, számot és speciális karaktert (pl. ?, !, @, #)." 
+      });
+  }
+
+  let isPermanentFree = false;
+  if (specialCode && specialCode === process.env.SPECIAL_ACCESS_CODE) {
+    isPermanentFree = true;
+  }
+
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
-    const userExists = await client.query('SELECT id FROM Users WHERE email = $1', [email]);
+    const userExists = await client.query('SELECT id FROM users WHERE email = $1', [email]);
     if (userExists.rows.length > 0) throw new Error("Ez az e-mail cím már regisztrálva van.");
     let referrerId = null;
     if (referralCode) {
-      const referrerResult = await client.query('SELECT id FROM Users WHERE referral_code = $1', [referralCode]);
+      const referrerResult = await client.query('SELECT id FROM users WHERE referral_code = $1', [referralCode]);
       if (referrerResult.rows.length > 0) referrerId = referrerResult.rows[0].id;
     }
     if (role === 'teacher') {
@@ -63,11 +78,11 @@ app.post('/api/register', async (req, res) => {
     }
     let classId = null;
     if (role === 'student' && classCode) {
-      const classResult = await client.query('SELECT id, max_students FROM Classes WHERE class_code = $1 AND is_active = true', [classCode]);
+      const classResult = await client.query('SELECT id, max_students FROM classes WHERE class_code = $1 AND is_active = true', [classCode]);
       if (classResult.rows.length === 0) throw new Error("A megadott osztálykód érvénytelen vagy az osztály már nem aktív.");
       classId = classResult.rows[0].id;
       const maxStudents = classResult.rows[0].max_students;
-      const memberCountResult = await client.query('SELECT COUNT(*) FROM ClassMemberships WHERE class_id = $1', [classId]);
+      const memberCountResult = await client.query('SELECT COUNT(*) FROM classmemberships WHERE class_id = $1', [classId]);
       const memberCount = parseInt(memberCountResult.rows[0].count, 10);
       if (memberCount >= maxStudents) throw new Error("Ez az osztály sajnos már betelt.");
     }
@@ -75,28 +90,24 @@ app.post('/api/register', async (req, res) => {
     const verificationToken = crypto.randomBytes(32).toString('hex');
     const verificationExpires = new Date(Date.now() + 3600000);
     const referralCodeNew = role === 'student' ? `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}` : null;
+    
     const insertUserQuery = `
-      INSERT INTO Users (username, email, password_hash, role, referral_code, email_verification_token, email_verification_expires, created_at)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, NOW()) RETURNING id, created_at
+      INSERT INTO users (username, email, password_hash, role, referral_code, email_verification_token, email_verification_expires, is_permanent_free, created_at)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW()) RETURNING id, created_at
     `;
     const newUserResult = await client.query(insertUserQuery, [
-      username,
-      email,
-      passwordHash,
-      role,
-      referralCodeNew,
-      verificationToken,
-      verificationExpires
+      username, email, passwordHash, role, referralCodeNew, verificationToken, verificationExpires, isPermanentFree
     ]);
     const newUserId = newUserResult.rows[0].id;
+    const registrationDate = newUserResult.rows[0].created_at;
     if (referrerId) {
-      await client.query('INSERT INTO Referrals (referrer_user_id, referred_user_id) VALUES ($1, $2)', [referrerId, newUserId]);
+      await client.query('INSERT INTO referrals (referrer_user_id, referred_user_id) VALUES ($1, $2)', [referrerId, newUserId]);
     }
     if (role === 'teacher') {
-      await client.query('INSERT INTO Teachers (user_id, vip_code, is_approved) VALUES ($1, $2, false)', [newUserId, vipCode || null]);
+      await client.query('INSERT INTO teachers (user_id, vip_code, is_approved) VALUES ($1, $2, false)', [newUserId, vipCode || null]);
     }
     if (role === 'student' && classId) {
-      await client.query('INSERT INTO ClassMemberships (user_id, class_id) VALUES ($1, $2)', [newUserId, classId]);
+      await client.query('INSERT INTO classmemberships (user_id, class_id) VALUES ($1, $2)', [newUserId, classId]);
     }
     
     const baseUrl = process.env.FRONTEND_URL || 'https://fokusz-mester-app.onrender.com';
@@ -108,19 +119,7 @@ app.post('/api/register', async (req, res) => {
       subject: 'Erősítsd meg az e-mail címedet!',
       html: `<p>Kérjük, kattints a linkre: <a href="${verificationUrl}">Megerősítés</a></p>`
     };
-
-    // ======================= DIAGNOSZTIKA KEZDETE =======================
-    console.log(`[DIAG] E-mail küldése folyamatban a következő címre: ${email}`);
-    console.log(`[DIAG] Felhasználó szerepe: ${role}`);
-    try {
-        const info = await transporter.sendMail(userMailOptions);
-        console.log(`[DIAG] E-mail sikeresen átadva a szervernek. Válasz: ${info.response}`);
-        console.log(`[DIAG] Elfogadott címzettek: ${info.accepted}`);
-        console.log(`[DIAG] Elutasított címzettek: ${info.rejected}`);
-    } catch (mailError) {
-        console.error(`[DIAG] KRITIKUS HIBA az e-mail küldésekor:`, mailError);
-    }
-    // ======================= DIAGNOSZTIKA VÉGE =======================
+    await transporter.sendMail(userMailOptions);
 
     if (role === 'teacher') {
       const approvalUrl = `${baseUrl}/approve-teacher/${newUserId}`;
@@ -134,7 +133,7 @@ app.post('/api/register', async (req, res) => {
     }
     
     await client.query('COMMIT');
-    res.status(201).json({ success: true, message: "Sikeres regisztráció! Ellenőrizd az emailjeidet." });
+    res.status(201).json({ success: true, message: "Sikeres regisztráció! Ellenőrizd az emailjeidet.", user: { id: newUserId, createdAt: registrationDate } });
   } catch (err) {
     if(client) await client.query('ROLLBACK');
     res.status(400).json({ success: false, message: err.message || "Szerverhiba történt." });
@@ -143,17 +142,15 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// A többi kód változatlanul marad...
-
 app.get('/api/verify-email/:token', async (req, res) => {
     const { token } = req.params;
     try {
-        const userResult = await pool.query('SELECT id FROM Users WHERE email_verification_token = $1 AND email_verification_expires > NOW()', [token]);
+        const userResult = await pool.query('SELECT id FROM users WHERE email_verification_token = $1 AND email_verification_expires > NOW()', [token]);
         if (userResult.rows.length === 0) {
             return res.status(400).json({ success: false, message: "A megerősítő link érvénytelen vagy lejárt."});
         }
         const user = userResult.rows[0];
-        await pool.query('UPDATE Users SET email_verified = true, email_verification_token = NULL, email_verification_expires = NULL WHERE id = $1', [user.id]);
+        await pool.query('UPDATE users SET email_verified = true, email_verification_token = NULL, email_verification_expires = NULL WHERE id = $1', [user.id]);
         res.status(200).json({ success: true, message: "Sikeres megerősítés! Most már bejelentkezhetsz."});
     } catch (error) {
         res.status(500).json({ success: false, message: "Szerverhiba történt a megerősítés során."});
@@ -163,7 +160,7 @@ app.get('/api/verify-email/:token', async (req, res) => {
 app.get('/api/approve-teacher/:userId', async (req, res) => {
     const { userId } = req.params;
     try {
-        const result = await pool.query('UPDATE Teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id', [userId]);
+        const result = await pool.query('UPDATE teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id', [userId]);
         if (result.rowCount === 0) {
             return res.status(404).json({ success: false, message: "A tanár nem található." });
         }
@@ -178,7 +175,7 @@ app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) { return res.status(400).json({ success: false, message: "E-mail és jelszó megadása kötelező." }); }
   try {
-    const userResult = await pool.query('SELECT * FROM Users WHERE email = $1', [email]);
+    const userResult = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
     if (userResult.rows.length === 0) { return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." }); }
     const user = userResult.rows[0];
     
@@ -190,7 +187,7 @@ app.post('/api/login', async (req, res) => {
     if (!isPasswordCorrect) { return res.status(401).json({ success: false, message: "Hibás e-mail cím vagy jelszó." }); }
     
     if (user.role === 'teacher') {
-        const teacherResult = await pool.query('SELECT is_approved FROM Teachers WHERE user_id = $1', [user.id]);
+        const teacherResult = await pool.query('SELECT is_approved FROM teachers WHERE user_id = $1', [user.id]);
         if (teacherResult.rows.length === 0 || !teacherResult.rows[0].is_approved) { return res.status(403).json({ success: false, message: "A tanári fiókod még nem lett jóváhagyva." }); }
     }
     const token = jwt.sign({ userId: user.id, role: user.role }, process.env.SECRET_KEY, { expiresIn: '1d' });
@@ -198,6 +195,66 @@ app.post('/api/login', async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, message: "Szerverhiba történt." });
   }
+});
+
+app.post('/api/forgot-password', async (req, res) => {
+    const { email } = req.body;
+    try {
+        const userResult = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+        if (userResult.rows.length === 0) {
+            return res.status(200).json({ success: true, message: "Ha az e-mail cím regisztrálva van, kiküldtünk egy linket a jelszó visszaállításához." });
+        }
+        const user = userResult.rows[0];
+
+        const token = crypto.randomBytes(32).toString('hex');
+        const expires = new Date(Date.now() + 3600000); // 1 óra
+
+        await pool.query('UPDATE users SET password_reset_token = $1, password_reset_expires = $2 WHERE id = $3', [token, expires, user.id]);
+        
+        const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password/${token}`;
+        const mailOptions = {
+            from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+            to: user.email,
+            subject: 'Jelszó Visszaállítása',
+            html: `<p>Jelszó visszaállítási kérelmet kaptunk. A linkre kattintva állíthatsz be új jelszót:</p><p><a href="${resetUrl}">Új jelszó beállítása</a></p><p>A link 1 órán át érvényes. Ha nem te kérted a visszaállítást, hagyd figyelmen kívül ezt az e-mailt.</p>`
+        };
+
+        await transporter.sendMail(mailOptions);
+        
+        res.status(200).json({ success: true, message: "Ha az e-mail cím regisztrálva van, kiküldtünk egy linket a jelszó visszaállításához." });
+
+    } catch (error) {
+        console.error("Jelszó-visszaállítási hiba (kérelem):", error);
+        res.status(500).json({ success: false, message: "Szerverhiba történt." });
+    }
+});
+
+app.post('/api/reset-password/:token', async (req, res) => {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    try {
+        const passwordOptions = { minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 };
+        if (!validator.isStrongPassword(password, passwordOptions)) {
+            return res.status(400).json({ success: false, message: "A jelszó túl gyenge! A követelményeknek meg kell felelnie." });
+        }
+
+        const userResult = await pool.query('SELECT * FROM users WHERE password_reset_token = $1 AND password_reset_expires > NOW()', [token]);
+
+        if (userResult.rows.length === 0) {
+            return res.status(400).json({ success: false, message: "A jelszó-visszaállító link érvénytelen vagy lejárt." });
+        }
+        const user = userResult.rows[0];
+
+        const passwordHash = await bcrypt.hash(password, 10);
+        await pool.query('UPDATE users SET password_hash = $1, password_reset_token = NULL, password_reset_expires = NULL WHERE id = $2', [passwordHash, user.id]);
+
+        res.status(200).json({ success: true, message: "Jelszó sikeresen módosítva! Most már bejelentkezhetsz az új jelszavaddal." });
+
+    } catch (error) {
+        console.error("Jelszó-visszaállítási hiba (beállítás):", error);
+        res.status(500).json({ success: false, message: "Szerverhiba történt." });
+    }
 });
 
 app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
@@ -208,8 +265,8 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
         const teacherId = req.user.userId;
         const query = `
             SELECT c.id, c.class_name, c.class_code, c.max_students, COUNT(cm.user_id) AS student_count
-            FROM Classes c
-            LEFT JOIN ClassMemberships cm ON c.id = cm.class_id
+            FROM classes c
+            LEFT JOIN classmemberships cm ON c.id = cm.class_id
             WHERE c.teacher_id = $1
             GROUP BY c.id
             ORDER BY c.created_at DESC;
@@ -235,7 +292,7 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
         const classCode = `OSZTALY-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
         
         const query = `
-            INSERT INTO Classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
+            INSERT INTO classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
             VALUES ($1, $2, $3, $4, true, true)
             RETURNING *;
         `;
@@ -308,7 +365,7 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
     const client = await pool.connect();
     try {
         await client.query('BEGIN');
-        await client.query('TRUNCATE TABLE ClassMemberships, Teachers, Referrals, Users RESTART IDENTITY CASCADE;');
+        await client.query('TRUNCATE TABLE classmemberships, teachers, referrals, users RESTART IDENTITY CASCADE;');
         await client.query('COMMIT');
         res.status(200).json({ success: true, message: "Minden felhasználói adat sikeresen törölve." });
     } catch (error) {

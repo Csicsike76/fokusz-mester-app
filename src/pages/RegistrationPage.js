@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './RegistrationPage.module.css';
 
-const API_URL = 'http://localhost:3001';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const RegistrationPage = () => {
     const [role, setRole] = useState('student');
@@ -13,11 +13,44 @@ const RegistrationPage = () => {
         vipCode: '',
         referralCode: '',
         classCode: '',
+        specialCode: '',
         termsAccepted: false,
     });
+    
+    // ÚJ: Állapot a jelszóval kapcsolatos hibák tárolására
+    const [passwordError, setPasswordError] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    // ÚJ: Figyeljük a jelszó mezők változását, és azonnal validálunk
+    useEffect(() => {
+        // Jelszó erősségének ellenőrzése
+        if (formData.password) {
+            const hasLowercase = /[a-z]/.test(formData.password);
+            const hasUppercase = /[A-Z]/.test(formData.password);
+            const hasNumber = /[0-9]/.test(formData.password);
+            const hasSymbol = /[^A-Za-z0-9]/.test(formData.password);
+            const isLongEnough = formData.password.length >= 8;
+
+            if (!isLongEnough || !hasLowercase || !hasUppercase || !hasNumber || !hasSymbol) {
+                setPasswordError('A jelszónak legalább 8 karakter hosszúnak kell lennie, és tartalmaznia kell kisbetűt, nagybetűt, számot és speciális karaktert.');
+            } else {
+                setPasswordError('');
+            }
+        } else {
+            setPasswordError('');
+        }
+
+        // Jelszó egyezésének ellenőrzése
+        if (formData.passwordConfirm && formData.password !== formData.passwordConfirm) {
+            if (!passwordError) { // Csak akkor írjuk felül, ha nincs már erősségi hiba
+                setPasswordError('A két jelszó nem egyezik!');
+            }
+        }
+
+    }, [formData.password, formData.passwordConfirm, passwordError]);
+
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -31,6 +64,11 @@ const RegistrationPage = () => {
         setError('');
         setMessage('');
 
+        // Az űrlap elküldése előtt is ellenőrzünk
+        if (passwordError) {
+            setError(passwordError);
+            return;
+        }
         if (formData.password !== formData.passwordConfirm) {
             setError("A jelszavak nem egyeznek!");
             return;
@@ -50,14 +88,13 @@ const RegistrationPage = () => {
             referralCode: formData.referralCode.trim(),
             vipCode: formData.vipCode.trim(),
             classCode: formData.classCode.trim(),
+            specialCode: formData.specialCode.trim(),
         };
 
         try {
             const response = await fetch(`${API_URL}/api/register`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(registrationData),
             });
 
@@ -70,7 +107,7 @@ const RegistrationPage = () => {
             setMessage(data.message);
             setFormData({
                 username: '', email: '', password: '', passwordConfirm: '',
-                vipCode: '', referralCode: '', classCode: '', termsAccepted: false
+                vipCode: '', referralCode: '', classCode: '', specialCode: '', termsAccepted: false
             });
             setRole('student');
 
@@ -110,6 +147,9 @@ const RegistrationPage = () => {
                         <label htmlFor="passwordConfirm">Jelszó megerősítése</label>
                         <input type="password" id="passwordConfirm" name="passwordConfirm" value={formData.passwordConfirm} onChange={handleChange} required />
                     </div>
+                    {/* ÚJ: A jelszó hibaüzenet megjelenítése */}
+                    {passwordError && <p className={styles.errorMessage}>{passwordError}</p>}
+                    
                     {role === 'teacher' && (
                         <div className={`${styles.formGroup} ${styles.conditionalField}`}>
                             <label htmlFor="vipCode">VIP kód (csak tanároknak)</label>
@@ -126,6 +166,10 @@ const RegistrationPage = () => {
                         <label htmlFor="referralCode">Ajánlókód (opcionális)</label>
                         <input type="text" id="referralCode" name="referralCode" value={formData.referralCode} onChange={handleChange} />
                     </div>
+                    <div className={styles.formGroup}>
+                        <label htmlFor="specialCode">Speciális Hozzáférési Kód (ha van)</label>
+                        <input type="text" id="specialCode" name="specialCode" value={formData.specialCode} onChange={handleChange} />
+                    </div>
                     <div className={`${styles.formGroup} ${styles.checkboxGroup}`}>
                         <input type="checkbox" id="termsAccepted" name="termsAccepted" checked={formData.termsAccepted} onChange={handleChange} />
                         <label htmlFor="termsAccepted">Elfogadom az Általános Szerződési Feltételeket</label>
@@ -134,7 +178,8 @@ const RegistrationPage = () => {
                     {message && <p className={styles.successMessage}>{message}</p>}
                     {error && <p className={styles.errorMessage}>{error}</p>}
 
-                    <button type="submit" className={styles.submitButton} disabled={isLoading}>
+                    {/* MÓDOSÍTVA: A gomb le van tiltva, ha hiba van a jelszóval */}
+                    <button type="submit" className={styles.submitButton} disabled={isLoading || passwordError}>
                         {isLoading ? 'Regisztrálás...' : 'Regisztrálás'}
                     </button>
                 </form>
