@@ -1,0 +1,75 @@
+/* src/components/UiControls/UiControls.module.css */
+.wrapper {
+  position: fixed;
+  left: 14px;
+  top: calc(var(--navbar-height, 72px) + 10px); /* közvetlenül a navbar (logo) alatt */
+  display: flex;
+  flex-direction: column;    /* egymás alá kerüljenek */
+  gap: 10px;
+  z-index: 1000;             /* mindig a tartalom fölött */
+  pointer-events: auto;
+}
+
+/* Egy-egy blokk (téma, zoom, később továbbiak) */
+.group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Nagy „pill” gomb a téma váltóhoz */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  user-select: none;
+}
+.pill:hover { background: rgba(255, 255, 255, 0.14); }
+
+.icon { font-size: 1rem; }
+.label { font-weight: 600; }
+
+/* Kerek gombok (−/+) */
+.roundBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+.roundBtn:hover { background: rgba(255, 255, 255, 0.14); }
+
+/* A középső kis jelző (pl. 100%) */
+.pillSmall {
+  min-width: 66px;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Helyfoglaló a jövőbeni funkcióknak (most üres) */
+.spacer { height: 2px; }
+
+/* Kis képernyőn se lógjon bele semmibe */
+@media (max-width: 640px) {
+  .wrapper {
+    left: 8px;
+    top: calc(var(--navbar-height, 64px) + 8px);
+    gap: 8px;
+  }
+}

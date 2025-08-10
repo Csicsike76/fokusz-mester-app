@@ -1,0 +1,52 @@
+.bar{
+  position: sticky;      /* a navbar alatt, görgetéskor ott marad */
+  top: 64px;             /* igazítsd a navbar magasságához, ha kell */
+  z-index: 5;            /* a tartalom fölé, de a navbar alá */
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  padding: .5rem 0;
+}
+
+.btn{
+  background: rgba(0,0,0,.45);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 12px;
+  padding: .45rem .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+.btn:hover{ filter: brightness(1.05); }
+
+.group{
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  background: rgba(0,0,0,.45);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 12px;
+  padding: .35rem .5rem;
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+
+.iconBtn{
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.35);
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.iconBtn:hover{ filter: brightness(1.08); }
+
+.zoomLabel{
+  min-width: 48px;
+  text-align: center;
+  font-weight: 700;
+}

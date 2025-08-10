@@ -1,3 +1,4 @@
+// src/components/Navbar/Navbar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
@@ -5,11 +6,15 @@ import { useNav } from '../../hooks/useNav';
 import ConditionalLink from '../ConditionalLink/ConditionalLink';
 import UserMenu from './UserMenu';
 import Search from '../Search/Search';
+import UiControls from '../UiControls/UiControls'; // << ÚJ
 
 const Navbar = () => {
-    const navItems = useNav(); // Az hook-tól már a szűrt menüpontokat kapjuk
+    const navItems = useNav();
 
     return (
+
+        
+
         <nav className={styles.navbar}>
             <div className={styles.logo}>
                 <Link to="/">"Fókusz Mester"</Link>
@@ -25,12 +30,16 @@ const Navbar = () => {
 
             <div className={styles.rightSide}>
                 <Search />
+                <UiControls /> {/* << Itt jelennek meg a gombok, nincs több külön sáv */}
                 <div className={styles.authLinks}>
                     <UserMenu />
                 </div>
             </div>
-            {/* ... a hamburger menü logikája ide jöhet ... */}
         </nav>
+
+       
+
+
     );
 };
 
