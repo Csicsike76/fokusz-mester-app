@@ -1,14 +1,28 @@
+// src/components/Hero/Hero.js
+
 import React from 'react';
 import styles from './Hero.module.css';
 
-// A videó importot eltávolítottuk innen!
-const Hero = () => {
+const Hero = ({ title, subtitle, buttonText, scrollToId }) => {
+
+  const handleScroll = (e) => {
+    e.preventDefault();
+    const element = document.getElementById(scrollToId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    // A videó és az overlay div-eket eltávolítottuk
     <div className={styles.hero}>
       <div className={styles.content}>
-        <h1>A Jövő Matematika Tanára</h1>
-        <p>A küldetésem, hogy 2030-ig olyan inspiráló tanárrá váljak, aki nemcsak tanít, hanem gondolkodni tanít – empátiával, kreativitással és a mesterséges intelligencia tudatos használatával. Ez az én digitális eszköztáram.</p>
+        <h1>{title}</h1>
+        <p>{subtitle}</p>
+        {buttonText && scrollToId && (
+          <a href={`#${scrollToId}`} className={styles.ctaButton} onClick={handleScroll}>
+            {buttonText}
+          </a>
+        )}
       </div>
     </div>
   );

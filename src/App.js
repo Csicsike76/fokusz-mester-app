@@ -29,7 +29,11 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="bejelentkezes" element={<LoginPage />} />
             <Route path="regisztracio" element={<RegistrationPage />} />
-            <Route path="targy/:subjectName/:grade" element={<SubjectPage />} />
+
+            {/* Tantárgy gyűjtemény-oldal (grade paraméter nem kell ide) */}
+            <Route path="targy/:subjectName" element={<SubjectPage />} />
+
+            {/* Minden lecke/eszköz egy helyen */}
             <Route path="tananyag/:slug" element={<ContentPage />} />
             
             <Route path="verify-email/:token" element={<EmailVerificationPage />} />

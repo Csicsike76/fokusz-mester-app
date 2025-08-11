@@ -6,15 +6,12 @@ import { useNav } from '../../hooks/useNav';
 import ConditionalLink from '../ConditionalLink/ConditionalLink';
 import UserMenu from './UserMenu';
 import Search from '../Search/Search';
-import UiControls from '../UiControls/UiControls'; // << ÚJ
+import UiControls from '../UiControls/UiControls';
 
 const Navbar = () => {
     const navItems = useNav();
 
     return (
-
-        
-
         <nav className={styles.navbar}>
             <div className={styles.logo}>
                 <Link to="/">"Fókusz Mester"</Link>
@@ -30,16 +27,12 @@ const Navbar = () => {
 
             <div className={styles.rightSide}>
                 <Search />
-                <UiControls /> {/* << Itt jelennek meg a gombok, nincs több külön sáv */}
+                <UiControls />
                 <div className={styles.authLinks}>
                     <UserMenu />
                 </div>
             </div>
         </nav>
-
-       
-
-
     );
 };
 

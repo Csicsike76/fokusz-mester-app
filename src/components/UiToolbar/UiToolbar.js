@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './UiToolbar.module.css';
 
+
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
 const UiToolbar = () => {

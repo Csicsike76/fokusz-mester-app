@@ -1,7 +1,7 @@
 // src/pages/ContentPage.js
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom'; // Link hozzáadva
 import styles from './ContentPage.module.css';
 import { API_URL } from '../config/api';
 import SingleChoiceQuestion from '../components/SingleChoiceQuestion';
@@ -154,7 +154,6 @@ const ContentPage = () => {
     setIsLoading(true);
     setError('');
     try {
-      // backend a kötőjeles sluggot várja
       const correctedSlug = slug.replace(/_/g, '-');
       const res = await fetch(`${API_URL}/api/quiz/${correctedSlug}`);
       if (!res.ok) throw new Error('Hálózati hiba');
@@ -174,7 +173,6 @@ const ContentPage = () => {
     fetchData();
   }, [fetchData]);
 
-  // Chat logika (karakteres eszközökhöz)
   const handleCharacterSelect = (charKey) => {
     setActiveChat(charKey);
     setMessages([
@@ -219,7 +217,6 @@ const ContentPage = () => {
 
   const renderContent = () => {
     if (!activeChat) {
-      // kategória alapján döntünk
       switch (contentData.category) {
         case 'free_tool':
         case 'premium_tool':
@@ -242,7 +239,6 @@ const ContentPage = () => {
       }
     }
 
-    // Chat nézet
     return (
       <div className={styles.chatContainer}>
         <div className={styles.chatHeader}>
@@ -285,7 +281,11 @@ const ContentPage = () => {
       <video autoPlay loop muted className={styles.backgroundVideo}>
         <source src="/videos/bg-video.mp4" type="video/mp4" />
       </video>
-      <div className={styles.contentWrapper}>{renderContent()}</div>
+      <div className={styles.contentWrapper}>
+        {/* ÚJ: Vissza a főoldalra gomb */}
+        <Link to="/" className={styles.backToHomeButton}>← Vissza a Főoldalra</Link>
+        {renderContent()}
+      </div>
     </div>
   );
 };

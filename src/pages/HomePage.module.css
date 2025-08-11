@@ -1,3 +1,5 @@
+/* src/pages/HomePage.module.css */
+
 .mainContent {
     background-color: transparent;
     padding: 2rem 1rem;
@@ -6,7 +8,59 @@
 .section {
     max-width: 1200px;
     margin: 0 auto 4rem auto;
+    padding-top: 4rem; /* Hely a lebegő menü miatt */
 }
+
+/* ÚJ: Feature Szekció */
+.featureGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+.featureCard {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+.featureIcon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+    fill: #1abc9c;
+}
+.featureCard h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+.featureCard p {
+    color: #bdc3c7;
+    line-height: 1.6;
+}
+
+/* ÚJ: Interaktív Szekció */
+.interactiveSection {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+}
+.interactiveSubtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+.interactiveCta p {
+    font-size: 1.1rem;
+    color: #bdc3c7;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Régi Szekciók */
 .sectionTitle {
     text-align: center;
     font-size: 2.5rem;
@@ -24,7 +78,7 @@
 }
 .matematika { border-bottom: 4px solid #e74c3c; }
 .fizika { border-bottom: 4px solid #3498db; }
-.ai, .mesterséges-intelligencia { border-bottom: 4px solid #2ecc71; }
+.ai, .mesterseges-intelligencia { border-bottom: 4px solid #2ecc71; }
 .eszkozok { border-bottom: 4px solid #f39c12; }
 
 .cardGrid {
