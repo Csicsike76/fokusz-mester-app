@@ -11,7 +11,7 @@ const path = require('path');
 const fsSync = require('fs');
 const fsp = require('fs/promises');
 const validator = require('validator');
-const { rateLimit } = require('express-rate-limit');
+const { rateLimit, ipKeyGenerator } = require('express-rate-limit');
 const axios = require('axios');
 
 // ───────────────────────────────────────────────────────────────────────────────
@@ -76,15 +76,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Helper to extract the client IP address (IPv6 and proxies handled)
-const getClientIp = (req) => {
-  const xff = req.headers['x-forwarded-for'];
-  if (xff && typeof xff === 'string') {
-    return xff.split(',')[0].trim();
-  }
-  return (req.ip || (req.connection && req.connection.remoteAddress) || '').toString();
-};
-
 // Rate limiter (IPv6-safe kulcsgenerálás)
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -96,7 +87,7 @@ const authLimiter = rateLimit({
     message: 'Túl sok próbálkozás, kérjük, próbáld újra 15 perc múlva.',
   },
   keyGenerator: (req) => {
-    const ipKey = getClientIp(req);
+    const ipKey = ipKeyGenerator(req);
     const emailKey = (req.body && req.body.email) ? String(req.body.email).toLowerCase() : '';
     return emailKey ? `${ipKey}:${emailKey}` : ipKey;
   },
@@ -119,6 +110,7 @@ app.get('/api/help', async (req, res) => {
     try {
       let queryText = 'SELECT * FROM helparticles';
       const queryParams = [];
+  
       if (q && q.length >= 2) {
         queryParams.push(`%${q}%`);
         queryText += `
@@ -201,7 +193,6 @@ app.post('/api/register', authLimiter, async (req, res) => {
   let isPermanentFree = false;
   let specialPending = false;
   if (specialCode && specialCode === process.env.SPECIAL_ACCESS_CODE) {
-    // Special Access Code: require admin approval, do not auto-activate
     specialPending = true;
   }
 
@@ -304,7 +295,6 @@ app.post('/api/register', authLimiter, async (req, res) => {
     await transporter.sendMail(userMailOptions);
 
     if (role === 'teacher') {
-      // Create a signed approval token for teacher verification
       const approvalToken = jwt.sign(
         { sub: newUserId, type: 'teacher_approval' },
         process.env.ADMIN_SECRET || process.env.SECRET_KEY,
@@ -323,7 +313,6 @@ app.post('/api/register', authLimiter, async (req, res) => {
       }
     }
 
-    // Ha speciális hozzáférést igényelt, küldjünk jóváhagyási e-mailt az adminnak
     if (specialPending) {
       const approvalToken = jwt.sign(
         { sub: newUserId, type: 'special_approval' },
@@ -423,7 +412,6 @@ app.get('/api/approve-teacher/:userId', async (req, res) => {
   }
 });
 
-// Speciális hozzáférés jóváhagyása
 app.get('/api/approve-special/:userId', async (req, res) => {
   const { userId } = req.params;
   const token = req.query.token || req.headers['x-approval-token'];
@@ -484,7 +472,6 @@ app.post('/api/login', authLimiter, async (req, res) => {
         .json({ success: false, message: 'Kérjük, először erősítsd meg az e-mail címedet!' });
     }
 
-    // Ha speciális hozzáférés kérvényezve van, de még nincs jóváhagyva
     if (user.special_pending) {
       return res.status(403).json({
         success: false,
