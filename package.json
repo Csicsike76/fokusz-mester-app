@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "main": "server.js",
-  "scripts": {
+"scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "db:setup": "node scripts/setup-db.js",
+    "db:reset": "npm run db:setup && npm run sync-db",
     "sync-db": "node scripts/sync-db.js",
     "migrate:create": "node-pg-migrate create",
     "migrate:up": "node-pg-migrate --database-url \"${DATABASE_URL}?ssl=true\" --reject-unauthorized false up",
