@@ -1,129 +1,133 @@
-const { Pool } = require('pg');
-const fs = require('fs');
-const fsp = require('fs/promises');
+// scripts/sync-db.js
+require('dotenv').config();
+const { Client } = require('pg');
 const path = require('path');
+const fs = require('fs');
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || undefined,
-  ssl: (process.env.DB_SSL === 'true' || process.env.DB_SSL === '1') ? { rejectUnauthorized: false } : false,
-});
+function buildPgConfig() {
+  const cs = process.env.DATABASE_URL;
+  if (!cs || typeof cs !== 'string') {
+    throw new Error('Hiányzik a DATABASE_URL az .env-ből.');
+  }
+  const url = cs.toLowerCase();
+  const needSsl =
+    url.includes('render.com') ||
+    url.includes('neon.tech') ||
+    url.includes('supabase.co') ||
+    url.includes('sslmode=require') ||
+    String(process.env.DB_SSL || '').toLowerCase() === 'true' ||
+    String(process.env.PGSSLMODE || '').toLowerCase() === 'require';
 
-async function readJsonOrJs(filePath) {
-  if (filePath.endsWith('.json')) {
-    const txt = await fsp.readFile(filePath, 'utf8');
-    return JSON.parse(txt);
-  }
-  if (filePath.endsWith('.js')) {
-    delete require.cache[require.resolve(filePath)];
-    const mod = require(filePath);
-    return (mod && mod.default) ? mod.default : mod;
-  }
-  return null;
+  return {
+    connectionString: cs,
+    ssl: needSsl ? { rejectUnauthorized: false } : false,
+  };
 }
 
-async function loadCurriculums(client) {
-  const baseDir = path.resolve(__dirname, 'data', 'tananyag');
-  if (!fs.existsSync(baseDir)) return;
-  const files = await fsp.readdir(baseDir);
+function readJsonFolder(folderAbsPath) {
+  if (!fs.existsSync(folderAbsPath)) return [];
+  const files = fs.readdirSync(folderAbsPath).filter(f => f.toLowerCase().endsWith('.json'));
+  const items = [];
   for (const file of files) {
-    if (!file.endsWith('.json') && !file.endsWith('.js')) continue;
-    const full = path.join(baseDir, file);
-    const data = await readJsonOrJs(full);
-    if (!data) continue;
-
-    const slug = (data.slug || path.basename(file, path.extname(file))).toString();
-    const title = (data.title || slug).toString();
-    const category = (data.category || 'free_lesson').toString();
-    const subject = data.subject ? String(data.subject) : null;
-    const grade = Number.isFinite(data.grade) ? Number(data.grade) : null;
-    const description = data.description ? String(data.description) : null;
-    const is_published = typeof data.is_published === 'boolean' ? data.is_published : true;
-
-    await client.query(
-      `INSERT INTO curriculums (slug, title, subject, grade, category, description, is_published, created_at, updated_at)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,NOW(),NOW())
-       ON CONFLICT (slug) DO UPDATE
-       SET title=EXCLUDED.title,
-           subject=EXCLUDED.subject,
-           grade=EXCLUDED.grade,
-           category=EXCLUDED.category,
-           description=EXCLUDED.description,
-           is_published=EXCLUDED.is_published,
-           updated_at=NOW();`,
-      [slug, title, subject, grade, category, description, is_published]
-    );
-  }
-}
-
-async function loadHelp(client) {
-  const baseDir = path.resolve(__dirname, 'data', 'help');
-  if (!fs.existsSync(baseDir)) return;
-  const files = await fsp.readdir(baseDir);
-  for (const file of files) {
-    const full = path.join(baseDir, file);
-    if (file.endsWith('.json')) {
-      const obj = await readJsonOrJs(full);
-      if (!obj) continue;
-      const slug = (obj.slug || path.basename(file, '.json')).toString();
-      const title = (obj.title || slug).toString();
-      const content = (obj.content || '').toString();
-      const category = obj.category ? String(obj.category) : null;
-      const tags = obj.tags ? String(obj.tags) : null;
-      await client.query(
-        `INSERT INTO helparticles (slug, title, content, category, tags, created_at, updated_at)
-         VALUES ($1,$2,$3,$4,$5,NOW(),NOW())
-         ON CONFLICT (slug) DO UPDATE
-         SET title=EXCLUDED.title,
-             content=EXCLUDED.content,
-             category=EXCLUDED.category,
-             tags=EXCLUDED.tags,
-             updated_at=NOW();`,
-        [slug, title, content, category, tags]
-      );
-    } else if (file.endsWith('.md')) {
-      const txt = await fsp.readFile(full, 'utf8');
-      const slug = path.basename(file, '.md');
-      const firstLine = txt.split(/\r?\n/)[0] || slug;
-      const title = firstLine.replace(/^#\s*/, '') || slug;
-      const content = txt;
-      const category = null;
-      const tags = null;
-      await client.query(
-        `INSERT INTO helparticles (slug, title, content, category, tags, created_at, updated_at)
-         VALUES ($1,$2,$3,$4,$5,NOW(),NOW())
-         ON CONFLICT (slug) DO UPDATE
-         SET title=EXCLUDED.title,
-             content=EXCLUDED.content,
-             category=EXCLUDED.category,
-             tags=EXCLUDED.tags,
-             updated_at=NOW();`,
-        [slug, title, content, category, tags]
-      );
+    try {
+      const raw = fs.readFileSync(path.join(folderAbsPath, file), 'utf8');
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        items.push(...parsed);
+      } else if (parsed && typeof parsed === 'object') {
+        items.push(parsed);
+      }
+    } catch (e) {
+      console.warn(`⚠️ JSON hiba: ${file}: ${e.message}`);
     }
   }
+  return items;
+}
+
+function slugify(str) {
+  return String(str || '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
 }
 
 async function run() {
-  const client = await pool.connect();
+  // A szerver.js ALAKJÁHOZ IGAZODVA:
+  // a fájlok a backend/data alatt vannak:
+  const rootDir = path.resolve(__dirname, '..');
+  const dataTananyagDir = path.join(rootDir, 'backend', 'data', 'tananyag');
+  const dataHelpDir = path.join(rootDir, 'backend', 'data', 'help');
+
+  const client = new Client(buildPgConfig());
+  await client.connect();
+
   try {
+    console.log('Régi adatok törlése...');
     await client.query('BEGIN');
-
-    // Wipe & load
-    await client.query(`DELETE FROM helparticles;`);
-    await client.query(`DELETE FROM curriculums;`);
-
-    await loadCurriculums(client);
-    await loadHelp(client);
-
+    await client.query('TRUNCATE TABLE curriculums RESTART IDENTITY;');
+    await client.query('TRUNCATE TABLE help_articles RESTART IDENTITY;');
     await client.query('COMMIT');
-  } catch (e) {
-    await client.query('ROLLBACK');
-    console.error(e);
+
+    // Tananyagok beolvasása
+    const curris = readJsonFolder(dataTananyagDir);
+    if (curris.length === 0) {
+      console.warn(`Figyelmeztetés: A(z) ${dataTananyagDir} mappa nem létezik vagy üres, kihagyva.`);
+    } else {
+      console.log(`Feldolgozás indul: ${curris.length} db tananyag.`);
+      for (const c of curris) {
+        const title = c.title || c.name || c.cim || 'Névtelen tananyag';
+        const subject = c.subject || c.tantargy || null;
+        const grade = typeof c.grade === 'number' ? c.grade : (c.osztaly || null);
+        const description = c.description || c.leiras || null;
+        const isPremium = Boolean(c.is_premium || c.premium || false);
+
+        await client.query(
+          `INSERT INTO curriculums (title, subject, grade, description, is_premium)
+           VALUES ($1,$2,$3,$4,$5);`,
+          [title, subject, grade, description, isPremium]
+        );
+      }
+    }
+
+    // Súgó / help beolvasása
+    const helps = readJsonFolder(dataHelpDir);
+    if (helps.length === 0) {
+      console.warn(`Figyelmeztetés: A(z) ${dataHelpDir} mappa nem létezik vagy üres, kihagyva.`);
+    } else {
+      console.log(`Feldolgozás indul: ${helps.length} db .json fájl a(z) help mappából.`);
+      for (const h of helps) {
+        const title = h.title || h.cim || 'Cím nélkül';
+        const slug = h.slug || slugify(title);
+        const category = h.category || h.kategoria || null;
+        const orderNum = Number.isFinite(h.order_num) ? h.order_num : (Number(h.sorrend) || 0);
+        const isPublished = typeof h.is_published === 'boolean' ? h.is_published : true;
+
+        // Tartalmat JSONB-be mentjük: a teljes objektumot eltároljuk
+        await client.query(
+          `INSERT INTO help_articles (slug, title, content, category, order_num, is_published)
+           VALUES ($1,$2,$3,$4,$5,$6)
+           ON CONFLICT (slug) DO UPDATE
+             SET title=EXCLUDED.title,
+                 content=EXCLUDED.content,
+                 category=EXCLUDED.category,
+                 order_num=EXCLUDED.order_num,
+                 is_published=EXCLUDED.is_published;`,
+          [slug, title, h, category, orderNum, isPublished]
+        );
+      }
+    }
+
+    console.log('✅ Adatbázis szinkronizáció sikeresen befejeződött!');
+  } catch (err) {
+    console.error(err);
     process.exitCode = 1;
   } finally {
-    client.release();
-    await pool.end();
+    await client.end();
   }
 }
 
-run();
+run().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
