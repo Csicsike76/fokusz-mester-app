@@ -1,3 +1,5 @@
+// scripts/sync-db.js
+
 const fs = require('fs/promises');
 const path = require('path');
 const { Pool } = require('pg');
@@ -8,7 +10,8 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
-const quizzesDir = path.join(__dirname, '..', 'backend', 'data', 'quizzes');
+// JAVÍTVA: Az útvonal most már a helyes 'tananyag' mappára mutat.
+const contentDir = path.join(__dirname, '..', 'backend', 'data', 'tananyag');
 const helpDir = path.join(__dirname, '..', 'backend', 'data', 'help');
 
 async function syncSingleFile(client, filePath, syncFunction) {
@@ -38,15 +41,15 @@ async function syncCurriculums(client, fileName, data) {
     
     const contentJson = Object.keys(contentObject).length > 0 ? JSON.stringify(contentObject) : null;
     
-    const upsertQuery = `INSERT INTO Curriculums (slug, title, subject, grade, category, description, content, is_published) VALUES ($1, $2, $3, $4, $5, $6, $7, true) ON CONFLICT (slug) DO UPDATE SET title = EXCLUDED.title, subject = EXCLUDED.subject, grade = EXCLUDED.grade, category = EXCLUDED.category, description = EXCLUDED.description, content = EXCLUDED.content, is_published = true RETURNING id;`;
+    const upsertQuery = `INSERT INTO curriculums (slug, title, subject, grade, category, description, content, is_published) VALUES ($1, $2, $3, $4, $5, $6, $7, true) ON CONFLICT (slug) DO UPDATE SET title = EXCLUDED.title, subject = EXCLUDED.subject, grade = EXCLUDED.grade, category = EXCLUDED.category, description = EXCLUDED.description, content = EXCLUDED.content, is_published = true RETURNING id;`;
     
     const result = await client.query(upsertQuery, [slug, title, subject, grade, category, description || null, contentJson]);
     const curriculumId = result.rows[0].id;
 
-    await client.query('DELETE FROM QuizQuestions WHERE curriculum_id = $1', [curriculumId]);
+    await client.query('DELETE FROM quizquestions WHERE curriculum_id = $1', [curriculumId]);
     if (questions && Array.isArray(questions) && questions.length > 0) {
         for (const q of questions) {
-            const insertQuestionQuery = `INSERT INTO QuizQuestions (curriculum_id, question_type, description, options, answer, explanation) VALUES ($1, $2, $3, $4, $5, $6);`;
+            const insertQuestionQuery = `INSERT INTO quizquestions (curriculum_id, question_type, description, options, answer, explanation) VALUES ($1, $2, $3, $4, $5, $6);`;
             await client.query(insertQuestionQuery, [curriculumId, q.type, q.description, JSON.stringify(q.options), JSON.stringify(q.answer), q.explanation || null]);
         }
     }
@@ -69,7 +72,6 @@ async function syncDirectory(client, directoryPath, syncFunction) {
         const jsonFiles = files.filter(file => file.endsWith('.json'));
         console.log(`Feldolgozás indul: ${jsonFiles.length} db .json fájl a(z) ${path.basename(directoryPath)} mappából.`);
         for (const fileName of jsonFiles) {
-            // Minden fájlt egy külön tranzakcióban dolgozunk fel, hogy egy hiba ne akassza meg a többit.
             await client.query('BEGIN');
             try {
                 await syncSingleFile(client, path.join(directoryPath, fileName), syncFunction);
@@ -90,12 +92,12 @@ async function syncDatabase() {
   const client = await pool.connect();
   try {
     console.log('Régi adatok törlése...');
-    // A törlést a ciklusokon kívül végezzük el, egyszer.
-    await client.query('DELETE FROM QuizQuestions');
-    await client.query('DELETE FROM Curriculums');
-    await client.query('DELETE FROM HelpArticles');
+    await client.query('DELETE FROM quizquestions');
+    await client.query('DELETE FROM curriculums');
+    await client.query('DELETE FROM helparticles');
 
-    await syncDirectory(client, quizzesDir, syncCurriculums);
+    // JAVÍTVA: A helyes 'contentDir' változót használjuk
+    await syncDirectory(client, contentDir, syncCurriculums);
     await syncDirectory(client, helpDir, syncHelpArticles);
     
     console.log('✅ Adatbázis szinkronizáció sikeresen befejeződött!');
