@@ -1,112 +1,129 @@
-// scripts/sync-db.js
-
-const fs = require('fs/promises');
-const path = require('path');
 const { Pool } = require('pg');
-require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
+const fs = require('fs');
+const fsp = require('fs/promises');
+const path = require('path');
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
+  connectionString: process.env.DATABASE_URL || undefined,
+  ssl: (process.env.DB_SSL === 'true' || process.env.DB_SSL === '1') ? { rejectUnauthorized: false } : false,
 });
 
-// JAVÍTVA: Az útvonal most már a helyes 'tananyag' mappára mutat.
-const contentDir = path.join(__dirname, '..', 'backend', 'data', 'tananyag');
-const helpDir = path.join(__dirname, '..', 'backend', 'data', 'help');
-
-async function syncSingleFile(client, filePath, syncFunction) {
-    const fileName = path.basename(filePath);
-    try {
-        const fileContent = await fs.readFile(filePath, 'utf-8');
-        const data = JSON.parse(fileContent);
-        await syncFunction(client, fileName, data);
-    } catch (error) {
-        console.error(`❌ Hiba a(z) ${fileName} fájl feldolgozása közben. A fájl kihagyva. Hiba: ${error.message}`);
-    }
+async function readJsonOrJs(filePath) {
+  if (filePath.endsWith('.json')) {
+    const txt = await fsp.readFile(filePath, 'utf8');
+    return JSON.parse(txt);
+  }
+  if (filePath.endsWith('.js')) {
+    delete require.cache[require.resolve(filePath)];
+    const mod = require(filePath);
+    return (mod && mod.default) ? mod.default : mod;
+  }
+  return null;
 }
 
-async function syncCurriculums(client, fileName, data) {
-    const slug = path.parse(fileName).name;
-    const { title, subject, grade, category, description, questions, characters } = data;
+async function loadCurriculums(client) {
+  const baseDir = path.resolve(__dirname, 'data', 'tananyag');
+  if (!fs.existsSync(baseDir)) return;
+  const files = await fsp.readdir(baseDir);
+  for (const file of files) {
+    if (!file.endsWith('.json') && !file.endsWith('.js')) continue;
+    const full = path.join(baseDir, file);
+    const data = await readJsonOrJs(full);
+    if (!data) continue;
 
-    if (!title || !subject || grade === undefined || !category) {
-        console.warn(`⏩ Kihagyva: ${fileName} (hiányzó alapvető metaadatok).`);
-        return;
-    }
+    const slug = (data.slug || path.basename(file, path.extname(file))).toString();
+    const title = (data.title || slug).toString();
+    const category = (data.category || 'free_lesson').toString();
+    const subject = data.subject ? String(data.subject) : null;
+    const grade = Number.isFinite(data.grade) ? Number(data.grade) : null;
+    const description = data.description ? String(data.description) : null;
+    const is_published = typeof data.is_published === 'boolean' ? data.is_published : true;
 
-    const contentObject = {};
-    if (characters) {
-        contentObject.characters = characters;
-    }
-    
-    const contentJson = Object.keys(contentObject).length > 0 ? JSON.stringify(contentObject) : null;
-    
-    const upsertQuery = `INSERT INTO curriculums (slug, title, subject, grade, category, description, content, is_published) VALUES ($1, $2, $3, $4, $5, $6, $7, true) ON CONFLICT (slug) DO UPDATE SET title = EXCLUDED.title, subject = EXCLUDED.subject, grade = EXCLUDED.grade, category = EXCLUDED.category, description = EXCLUDED.description, content = EXCLUDED.content, is_published = true RETURNING id;`;
-    
-    const result = await client.query(upsertQuery, [slug, title, subject, grade, category, description || null, contentJson]);
-    const curriculumId = result.rows[0].id;
-
-    await client.query('DELETE FROM quizquestions WHERE curriculum_id = $1', [curriculumId]);
-    if (questions && Array.isArray(questions) && questions.length > 0) {
-        for (const q of questions) {
-            const insertQuestionQuery = `INSERT INTO quizquestions (curriculum_id, question_type, description, options, answer, explanation) VALUES ($1, $2, $3, $4, $5, $6);`;
-            await client.query(insertQuestionQuery, [curriculumId, q.type, q.description, JSON.stringify(q.options), JSON.stringify(q.answer), q.explanation || null]);
-        }
-    }
+    await client.query(
+      `INSERT INTO curriculums (slug, title, subject, grade, category, description, is_published, created_at, updated_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,NOW(),NOW())
+       ON CONFLICT (slug) DO UPDATE
+       SET title=EXCLUDED.title,
+           subject=EXCLUDED.subject,
+           grade=EXCLUDED.grade,
+           category=EXCLUDED.category,
+           description=EXCLUDED.description,
+           is_published=EXCLUDED.is_published,
+           updated_at=NOW();`,
+      [slug, title, subject, grade, category, description, is_published]
+    );
+  }
 }
 
-async function syncHelpArticles(client, fileName, data) {
-    const articles = Array.isArray(data) ? data : [data];
-    for (const article of articles) {
-        if (article && article.category && article.question && article.answer) {
-            const { category, question, answer, keywords } = article;
-            const query = `INSERT INTO helparticles (category, question, answer, keywords) VALUES ($1, $2, $3, $4)`;
-            await client.query(query, [category, question, answer, keywords || null]);
-        }
+async function loadHelp(client) {
+  const baseDir = path.resolve(__dirname, 'data', 'help');
+  if (!fs.existsSync(baseDir)) return;
+  const files = await fsp.readdir(baseDir);
+  for (const file of files) {
+    const full = path.join(baseDir, file);
+    if (file.endsWith('.json')) {
+      const obj = await readJsonOrJs(full);
+      if (!obj) continue;
+      const slug = (obj.slug || path.basename(file, '.json')).toString();
+      const title = (obj.title || slug).toString();
+      const content = (obj.content || '').toString();
+      const category = obj.category ? String(obj.category) : null;
+      const tags = obj.tags ? String(obj.tags) : null;
+      await client.query(
+        `INSERT INTO helparticles (slug, title, content, category, tags, created_at, updated_at)
+         VALUES ($1,$2,$3,$4,$5,NOW(),NOW())
+         ON CONFLICT (slug) DO UPDATE
+         SET title=EXCLUDED.title,
+             content=EXCLUDED.content,
+             category=EXCLUDED.category,
+             tags=EXCLUDED.tags,
+             updated_at=NOW();`,
+        [slug, title, content, category, tags]
+      );
+    } else if (file.endsWith('.md')) {
+      const txt = await fsp.readFile(full, 'utf8');
+      const slug = path.basename(file, '.md');
+      const firstLine = txt.split(/\r?\n/)[0] || slug;
+      const title = firstLine.replace(/^#\s*/, '') || slug;
+      const content = txt;
+      const category = null;
+      const tags = null;
+      await client.query(
+        `INSERT INTO helparticles (slug, title, content, category, tags, created_at, updated_at)
+         VALUES ($1,$2,$3,$4,$5,NOW(),NOW())
+         ON CONFLICT (slug) DO UPDATE
+         SET title=EXCLUDED.title,
+             content=EXCLUDED.content,
+             category=EXCLUDED.category,
+             tags=EXCLUDED.tags,
+             updated_at=NOW();`,
+        [slug, title, content, category, tags]
+      );
     }
+  }
 }
 
-async function syncDirectory(client, directoryPath, syncFunction) {
-    try {
-        const files = await fs.readdir(directoryPath);
-        const jsonFiles = files.filter(file => file.endsWith('.json'));
-        console.log(`Feldolgozás indul: ${jsonFiles.length} db .json fájl a(z) ${path.basename(directoryPath)} mappából.`);
-        for (const fileName of jsonFiles) {
-            await client.query('BEGIN');
-            try {
-                await syncSingleFile(client, path.join(directoryPath, fileName), syncFunction);
-                await client.query('COMMIT');
-            } catch (fileError) {
-                console.error(`Hiba a(z) ${fileName} tranzakciója közben, a változtatások visszavonva. Hiba: ${fileError.message}`);
-                await client.query('ROLLBACK');
-            }
-        }
-    } catch (error) {
-        if (error.code !== 'ENOENT') { throw error; }
-        console.log(`Figyelmeztetés: A(z) ${directoryPath} mappa nem létezik vagy üres, kihagyva.`);
-    }
-}
-
-
-async function syncDatabase() {
+async function run() {
   const client = await pool.connect();
   try {
-    console.log('Régi adatok törlése...');
-    await client.query('DELETE FROM quizquestions');
-    await client.query('DELETE FROM curriculums');
-    await client.query('DELETE FROM helparticles');
+    await client.query('BEGIN');
 
-    // JAVÍTVA: A helyes 'contentDir' változót használjuk
-    await syncDirectory(client, contentDir, syncCurriculums);
-    await syncDirectory(client, helpDir, syncHelpArticles);
-    
-    console.log('✅ Adatbázis szinkronizáció sikeresen befejeződött!');
-  } catch (error) {
-    console.error('❌ Kritikus hiba történt a szinkronizáció során:', error);
+    // Wipe & load
+    await client.query(`DELETE FROM helparticles;`);
+    await client.query(`DELETE FROM curriculums;`);
+
+    await loadCurriculums(client);
+    await loadHelp(client);
+
+    await client.query('COMMIT');
+  } catch (e) {
+    await client.query('ROLLBACK');
+    console.error(e);
+    process.exitCode = 1;
   } finally {
     client.release();
     await pool.end();
   }
 }
 
-syncDatabase();
+run();

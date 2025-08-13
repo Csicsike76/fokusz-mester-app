@@ -1,56 +1,45 @@
-import React, { useState, useEffect, useRef } from 'react'; // ÚJ: useRef import
-import ReCAPTCHA from 'react-google-recaptcha'; // ÚJ: ReCAPTCHA import
+import React, { useState, useEffect, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import styles from './RegistrationPage.module.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
-const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY; // ÚJ: reCAPTCHA kulcs
+const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
 const RegistrationPage = () => {
     const [role, setRole] = useState('student');
     const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        password: '',
-        passwordConfirm: '',
-        vipCode: '',
-        referralCode: '',
-        classCode: '',
-        specialCode: '',
-        termsAccepted: false,
+        username: '', email: '', password: '', passwordConfirm: '',
+        vipCode: '', referralCode: '', classCode: '', specialCode: '', termsAccepted: false,
     });
     
-    const [passwordError, setPasswordError] = useState('');
+    const [passwordErrors, setPasswordErrors] = useState({ match: false, strength: false });
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [recaptchaToken, setRecaptchaToken] = useState(null); // ÚJ: reCAPTCHA token tárolása
-    const recaptchaRef = useRef(); // ÚJ: Hivatkozás a reCAPTCHA komponensre
+    const [recaptchaToken, setRecaptchaToken] = useState(null);
+    const recaptchaRef = useRef();
 
     useEffect(() => {
+        let newErrors = { match: false, strength: false };
+
         if (formData.password) {
             const hasLowercase = /[a-z]/.test(formData.password);
             const hasUppercase = /[A-Z]/.test(formData.password);
             const hasNumber = /[0-9]/.test(formData.password);
             const hasSymbol = /[^A-Za-z0-9]/.test(formData.password);
             const isLongEnough = formData.password.length >= 8;
-
             if (!isLongEnough || !hasLowercase || !hasUppercase || !hasNumber || !hasSymbol) {
-                setPasswordError('A jelszónak legalább 8 karakter hosszúnak kell lennie, és tartalmaznia kell kisbetűt, nagybetűt, számot és speciális karaktert.');
-            } else {
-                setPasswordError('');
+                newErrors.strength = true;
             }
-        } else {
-            setPasswordError('');
         }
 
         if (formData.passwordConfirm && formData.password !== formData.passwordConfirm) {
-            if (!passwordError) {
-                setPasswordError('A két jelszó nem egyezik!');
-            }
+            newErrors.match = true;
         }
 
-    }, [formData.password, formData.passwordConfirm, passwordError]);
+        setPasswordErrors(newErrors);
 
+    }, [formData.password, formData.passwordConfirm]);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -64,36 +53,19 @@ const RegistrationPage = () => {
         setError('');
         setMessage('');
 
-        if (passwordError) {
-            setError(passwordError);
+        if (passwordErrors.strength) {
+            setError("A jelszó túl gyenge! Legalább 8 karakter, kis- és nagybetű, szám és speciális karakter szükséges.");
             return;
         }
-        if (formData.password !== formData.passwordConfirm) {
-            setError("A jelszavak nem egyeznek!");
+        if (passwordErrors.match) {
+            setError("A két jelszó nem egyezik!");
             return;
         }
-        if (!formData.termsAccepted) {
-            setError("El kell fogadnod a felhasználási feltételeket!");
-            return;
-        }
-        if (!recaptchaToken) {
-            setError("Kérjük, igazolja, hogy nem robot.");
-            return;
-        }
+        if (!formData.termsAccepted) { setError("El kell fogadnod a felhasználási feltételeket!"); return; }
+        if (!recaptchaToken) { setError("Kérjük, igazolja, hogy nem robot."); return; }
 
         setIsLoading(true);
-
-        const registrationData = {
-            role,
-            username: formData.username,
-            email: formData.email,
-            password: formData.password,
-            referralCode: formData.referralCode.trim(),
-            vipCode: formData.vipCode.trim(),
-            classCode: formData.classCode.trim(),
-            specialCode: formData.specialCode.trim(),
-            recaptchaToken, // ÚJ: A token elküldése
-        };
+        const registrationData = { ...formData, recaptchaToken, role: role };
 
         try {
             const response = await fetch(`${API_URL}/api/register`, {
@@ -101,13 +73,8 @@ const RegistrationPage = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(registrationData),
             });
-
             const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || 'Ismeretlen hiba történt.');
-            }
-
+            if (!response.ok) { throw new Error(data.message || 'Ismeretlen hiba történt.'); }
             setMessage(data.message);
             setFormData({
                 username: '', email: '', password: '', passwordConfirm: '',
@@ -115,23 +82,33 @@ const RegistrationPage = () => {
             });
             setRole('student');
             setRecaptchaToken(null);
-            recaptchaRef.current.reset(); // reCAPTCHA visszaállítása
+            if(recaptchaRef.current) recaptchaRef.current.reset();
 
         } catch (err) {
             setError(err.message);
-            recaptchaRef.current.reset(); // Hiba esetén is visszaállítjuk
-            console.error("Regisztrációs hiba:", err);
+            if(recaptchaRef.current) recaptchaRef.current.reset();
         } finally {
             setIsLoading(false);
         }
     };
+    
+    const getErrorMessage = () => {
+        if (error) return error;
+        if (passwordErrors.match) return "A két jelszó nem egyezik!";
+        if (passwordErrors.strength && formData.password.length > 0 && formData.password.length < 8) return "A jelszónak legalább 8 karakter hosszúnak kell lennie.";
+        if (passwordErrors.strength && formData.password.length >= 8) return "A jelszónak tartalmaznia kell kis- és nagybetűt, számot és szimbólumot.";
+        return '';
+    };
+
+    const finalError = getErrorMessage();
+    const isSubmitDisabled = isLoading || (formData.password ? (passwordErrors.strength || passwordErrors.match) : false) || !recaptchaToken;
+
 
     return (
         <div className={styles.pageContainer}>
             <div className={styles.formContainer}>
                 <h1>Regisztráció</h1>
                 <form onSubmit={handleSubmit}>
-                    {/* ... (a többi mező változatlan) ... */}
                     <div className={styles.formGroup}>
                         <label>Szerepkör kiválasztása:</label>
                         <div className={styles.roleSelection}>
@@ -155,7 +132,6 @@ const RegistrationPage = () => {
                         <label htmlFor="passwordConfirm">Jelszó megerősítése</label>
                         <input type="password" id="passwordConfirm" name="passwordConfirm" value={formData.passwordConfirm} onChange={handleChange} required />
                     </div>
-                    {passwordError && <p className={styles.errorMessage}>{passwordError}</p>}
                     
                     {role === 'teacher' && (
                         <div className={`${styles.formGroup} ${styles.conditionalField}`}>
@@ -182,7 +158,6 @@ const RegistrationPage = () => {
                         <label htmlFor="termsAccepted">Elfogadom az Általános Szerződési Feltételeket</label>
                     </div>
 
-                    {/* ÚJ: reCAPTCHA komponens */}
                     {RECAPTCHA_SITE_KEY && (
                       <div className={styles.recaptchaContainer}>
                           <ReCAPTCHA
@@ -195,9 +170,9 @@ const RegistrationPage = () => {
                     )}
 
                     {message && <p className={styles.successMessage}>{message}</p>}
-                    {error && <p className={styles.errorMessage}>{error}</p>}
+                    {finalError && <p className={styles.errorMessage}>{finalError}</p>}
 
-                    <button type="submit" className={styles.submitButton} disabled={isLoading || passwordError || !recaptchaToken}>
+                    <button type="submit" className={styles.submitButton} disabled={isSubmitDisabled}>
                         {isLoading ? 'Regisztrálás...' : 'Regisztrálás'}
                     </button>
                 </form>

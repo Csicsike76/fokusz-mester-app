@@ -1,3 +1,5 @@
+/* src/pages/ProfilePage.module.css */
+
 .container {
     padding: 2rem;
     color: white;
@@ -31,6 +33,7 @@
     align-items: center;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    min-height: 40px;
 }
 
 .label {
@@ -47,6 +50,67 @@
     height: 1px;
     background-color: rgba(255, 255, 255, 0.2);
     margin: 2.5rem 0;
+}
+
+.section h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.formGrid input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 5px;
+    border: 1px solid #7f8c8d;
+    background-color: #34495e;
+    color: white;
+    font-size: 1rem;
+}
+
+.formGrid button {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.valueView, .editView {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.editView input {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #7f8c8d;
+    background-color: #34495e;
+    color: white;
+}
+
+.valueView button, .editView button {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    background: #3498db;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.editView button:last-of-type {
+    background: #95a5a6;
 }
 
 .referralSection h2 {
@@ -96,4 +160,71 @@
     padding: 1rem;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
+}
+
+.successMessage {
+    color: #2ecc71;
+    background-color: rgba(46, 204, 113, 0.1);
+    padding: 0.75rem;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.errorMessage {
+    color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+    padding: 0.75rem;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }

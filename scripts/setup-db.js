@@ -1,121 +1,239 @@
-// scripts/setup-db.js
-
 const { Pool } = require('pg');
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
+  connectionString: process.env.DATABASE_URL || undefined,
+  ssl: (process.env.DB_SSL === 'true' || process.env.DB_SSL === '1') ? { rejectUnauthorized: false } : false,
 });
 
-const setupQueries = `
--- A biztonság kedvéért a törlés a helyes sorrendben történik
-DROP TABLE IF EXISTS helparticles CASCADE;
-DROP TABLE IF EXISTS referrals CASCADE;
-DROP TABLE IF EXISTS classmemberships CASCADE;
-DROP TABLE IF EXISTS teachers CASCADE;
-DROP TABLE IF EXISTS quizquestions CASCADE;
-DROP TABLE IF EXISTS curriculums CASCADE;
-DROP TABLE IF EXISTS classes CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
-
--- A VÉGLEGES, MINDEN SZÜKSÉGES OSZLOPOT TARTALMAZÓ USERS TÁBLA
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    role VARCHAR(20) NOT NULL,
-    referral_code VARCHAR(50) UNIQUE,
-    email_verified BOOLEAN DEFAULT false,
-    email_verification_token VARCHAR(255),
-    email_verification_expires TIMESTAMP WITH TIME ZONE,
-    is_permanent_free BOOLEAN DEFAULT false, -- << KIEGÉSZÍTVE
-    password_reset_token VARCHAR(255),       -- << KIEGÉSZÍTVE
-    password_reset_expires TIMESTAMP WITH TIME ZONE, -- << KIEGÉSZÍTVE
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE teachers (
-    user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
-    vip_code VARCHAR(50) UNIQUE,
-    is_approved BOOLEAN DEFAULT false
-);
-
-CREATE TABLE classes (
-    id SERIAL PRIMARY KEY,
-    class_name VARCHAR(255) NOT NULL,
-    class_code VARCHAR(50) UNIQUE NOT NULL,
-    teacher_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    max_students INTEGER NOT NULL DEFAULT 30,
-    is_active BOOLEAN DEFAULT true,
-    is_approved BOOLEAN DEFAULT true,
-    discount_status VARCHAR(20) DEFAULT 'pending',
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT max_students_check CHECK (max_students >= 5 AND max_students <= 30)
-);
-
-CREATE TABLE classmemberships (
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    class_id INTEGER NOT NULL REFERENCES classes(id) ON DELETE CASCADE,
-    PRIMARY KEY (user_id, class_id)
-);
-
-CREATE TABLE referrals (
-    id SERIAL PRIMARY KEY,
-    referrer_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    referred_user_id INTEGER UNIQUE NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    status VARCHAR(20) DEFAULT 'registered' NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE curriculums (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    subject VARCHAR(50), -- notNull eltávolítva a migráció alapján
-    grade INTEGER,       -- notNull eltávolítva a migráció alapján
-    slug VARCHAR(255) UNIQUE NOT NULL,
-    category VARCHAR(50) NOT NULL,
-    description TEXT,
-    content JSONB,
-    is_published BOOLEAN DEFAULT true,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE quizquestions (
-    id SERIAL PRIMARY KEY,
-    curriculum_id INTEGER NOT NULL REFERENCES curriculums(id) ON DELETE CASCADE,
-    question_type VARCHAR(50) NOT NULL,
-    description TEXT NOT NULL,
-    options JSONB,
-    answer JSONB,
-    explanation TEXT,
-    answer_regex VARCHAR(255)
-);
-
-CREATE TABLE helparticles (
-    id SERIAL PRIMARY KEY,
-    category VARCHAR(50) NOT NULL,
-    question TEXT NOT NULL,
-    answer TEXT NOT NULL,
-    keywords VARCHAR(255),
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-`;
-
-async function setupDatabase() {
-  console.log('Adatbázis táblák teljes törlése és újraépítése a VÉGLEGES sémával...');
+async function run() {
   const client = await pool.connect();
   try {
-    await client.query(setupQueries);
-    console.log('✅ Végleges táblák sikeresen újraépítve a nulláról.');
-  } catch (error) {
-    console.error('❌ Hiba történt a táblák újraépítése során:', error);
+    await client.query('BEGIN');
+
+    await client.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`);
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        username TEXT NOT NULL,
+        email TEXT NOT NULL UNIQUE,
+        password_hash TEXT NOT NULL,
+        role TEXT NOT NULL CHECK (role IN ('student','teacher','admin')),
+        referral_code TEXT,
+        email_verified BOOLEAN NOT NULL DEFAULT false,
+        email_verification_token TEXT,
+        email_verification_expires TIMESTAMPTZ,
+        password_reset_token TEXT,
+        password_reset_expires TIMESTAMPTZ,
+        is_permanent_free BOOLEAN NOT NULL DEFAULT false,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS teachers (
+        user_id UUID PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+        vip_code TEXT,
+        is_approved BOOLEAN NOT NULL DEFAULT false
+      );
+    `);
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS classes (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        class_name TEXT NOT NULL,
+        class_code TEXT NOT NULL UNIQUE,
+        teacher_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        max_students INTEGER NOT NULL CHECK (max_students > 0),
+        is_active BOOLEAN NOT NULL DEFAULT true,
+        is_approved BOOLEAN NOT NULL DEFAULT true,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS classmemberships (
+        user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        class_id UUID NOT NULL REFERENCES classes(id) ON DELETE CASCADE,
+        PRIMARY KEY (user_id, class_id)
+      );
+    `);
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS referrals (
+        referrer_user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        referred_user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE (referrer_user_id, referred_user_id)
+      );
+    `);
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS helparticles (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        slug TEXT NOT NULL UNIQUE,
+        title TEXT NOT NULL,
+        content TEXT NOT NULL,
+        category TEXT,
+        tags TEXT,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
+
+    await client.query(`
+      CREATE INDEX IF NOT EXISTS idx_helparticles_category ON helparticles(category);
+    `);
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS curriculums (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        slug TEXT NOT NULL UNIQUE,
+        title TEXT NOT NULL,
+        subject TEXT,
+        grade INTEGER,
+        category TEXT NOT NULL CHECK (category IN ('free_lesson','free_tool','premium_course','premium_tool')),
+        description TEXT,
+        is_published BOOLEAN NOT NULL DEFAULT true,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
+
+    await client.query(`
+      CREATE INDEX IF NOT EXISTS idx_curriculums_pub_cat_sub_grade
+      ON curriculums(is_published, category, subject, grade);
+    `);
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS subscription_plans (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        name TEXT NOT NULL,
+        price_cents INTEGER NOT NULL CHECK (price_cents >= 0),
+        interval_unit TEXT NOT NULL CHECK (interval_unit IN ('day','month','year')),
+        interval_count INTEGER NOT NULL CHECK (interval_count > 0),
+        trial_days INTEGER NOT NULL DEFAULT 0 CHECK (trial_days >= 0),
+        is_active BOOLEAN NOT NULL DEFAULT true
+      );
+    `);
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS subscriptions (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        plan_id UUID NOT NULL REFERENCES subscription_plans(id) ON DELETE RESTRICT,
+        status TEXT NOT NULL CHECK (status IN ('active','canceled','past_due')),
+        current_period_start TIMESTAMPTZ NOT NULL,
+        current_period_end TIMESTAMPTZ NOT NULL,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        canceled_at TIMESTAMPTZ
+      );
+    `);
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS activity_logs (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        user_id UUID REFERENCES users(id) ON DELETE SET NULL,
+        activity_type TEXT NOT NULL,
+        ip_address TEXT,
+        user_agent TEXT,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
+
+    await client.query(`
+      DO $$
+      BEGIN
+        IF NOT EXISTS (
+          SELECT 1 FROM information_schema.routines
+          WHERE routine_schema = 'public' AND routine_name = 'users_after_insert_special_free'
+        ) THEN
+          CREATE FUNCTION users_after_insert_special_free() RETURNS trigger AS $f$
+          BEGIN
+            IF NEW.is_permanent_free THEN
+              UPDATE users
+                SET email_verified = true,
+                    email_verification_token = NULL,
+                    email_verification_expires = NULL
+              WHERE id = NEW.id;
+            END IF;
+            RETURN NEW;
+          END;
+          $f$ LANGUAGE plpgsql;
+        END IF;
+      END$$;
+    `);
+
+    await client.query(`
+      DO $$
+      BEGIN
+        IF NOT EXISTS (
+          SELECT 1 FROM pg_trigger WHERE tgname = 'trg_users_after_insert_special_free'
+        ) THEN
+          CREATE TRIGGER trg_users_after_insert_special_free
+          AFTER INSERT ON users
+          FOR EACH ROW
+          EXECUTE FUNCTION users_after_insert_special_free();
+        END IF;
+      END$$;
+    `);
+
+    await client.query(`
+      DO $$
+      BEGIN
+        IF NOT EXISTS (
+          SELECT 1 FROM information_schema.routines
+          WHERE routine_schema = 'public' AND routine_name = 'teachers_before_insert_autoadopt'
+        ) THEN
+          CREATE FUNCTION teachers_before_insert_autoadopt() RETURNS trigger AS $f$
+          DECLARE
+            perm_free BOOLEAN;
+          BEGIN
+            SELECT is_permanent_free INTO perm_free FROM users WHERE id = NEW.user_id;
+            IF perm_free IS TRUE THEN
+              NEW.is_approved := true;
+            END IF;
+            RETURN NEW;
+          END;
+          $f$ LANGUAGE plpgsql;
+        END IF;
+      END$$;
+    `);
+
+    await client.query(`
+      DO $$
+      BEGIN
+        IF NOT EXISTS (
+          SELECT 1 FROM pg_trigger WHERE tgname = 'trg_teachers_before_insert_autoadopt'
+        ) THEN
+          CREATE TRIGGER trg_teachers_before_insert_autoadopt
+          BEFORE INSERT ON teachers
+          FOR EACH ROW
+          EXECUTE FUNCTION teachers_before_insert_autoadopt();
+        END IF;
+      END$$;
+    `);
+
+    const plans = await client.query(`SELECT COUNT(*)::int AS c FROM subscription_plans WHERE is_active = true;`);
+    if (plans.rows[0].c === 0) {
+      await client.query(`
+        INSERT INTO subscription_plans (name, price_cents, interval_unit, interval_count, trial_days, is_active)
+        VALUES
+          ('Ingyenes próba', 0, 'day', 30, 0, true),
+          ('Alap havidíj', 1990, 'month', 1, 7, true),
+          ('Tanári csomag', 4990, 'month', 1, 7, true)
+      `);
+    }
+
+    await client.query('COMMIT');
+  } catch (e) {
+    await client.query('ROLLBACK');
+    console.error(e);
+    process.exitCode = 1;
   } finally {
     client.release();
     await pool.end();
   }
 }
-setupDatabase();
+
+run();

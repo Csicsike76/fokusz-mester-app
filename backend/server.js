@@ -11,7 +11,7 @@ const path = require('path');
 const fsSync = require('fs');
 const fsp = require('fs/promises');
 const validator = require('validator');
-const { rateLimit, ipKeyGenerator } = require('express-rate-limit');
+const { rateLimit } = require('express-rate-limit');
 const axios = require('axios');
 
 // ───────────────────────────────────────────────────────────────────────────────
@@ -76,6 +76,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Helper to extract the client IP address (IPv6 and proxies handled)
+const getClientIp = (req) => {
+  const xff = req.headers['x-forwarded-for'];
+  if (xff && typeof xff === 'string') {
+    return xff.split(',')[0].trim();
+  }
+  return (req.ip || (req.connection && req.connection.remoteAddress) || '').toString();
+};
+
 // Rate limiter (IPv6-safe kulcsgenerálás)
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -87,7 +96,7 @@ const authLimiter = rateLimit({
     message: 'Túl sok próbálkozás, kérjük, próbáld újra 15 perc múlva.',
   },
   keyGenerator: (req) => {
-    const ipKey = ipKeyGenerator(req); // IPv6-biztos IP kulcs
+    const ipKey = getClientIp(req);
     const emailKey = (req.body && req.body.email) ? String(req.body.email).toLowerCase() : '';
     return emailKey ? `${ipKey}:${emailKey}` : ipKey;
   },
@@ -104,39 +113,36 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-// ======================= ÚJ SÚGÓ FUNKCIÓ (AZ ÖN KÓDJÁBÓL JAVÍTVA) =======================
 app.get('/api/help', async (req, res) => {
-    // JAVÍTVA: A req.query.q helyes kezelése, hogy ne legyen 'undefined', ha hiányzik
     const q = (req.query.q || '').toString().trim().toLowerCase();
     
     try {
       let queryText = 'SELECT * FROM helparticles';
       const queryParams = [];
-  
       if (q && q.length >= 2) {
         queryParams.push(`%${q}%`);
-        queryText += ' WHERE LOWER(question) ILIKE $1 OR LOWER(answer) ILIKE $1 OR LOWER(keywords) ILIKE $1';
+        queryText += `
+          WHERE LOWER(COALESCE(category,'')) ILIKE $1
+             OR LOWER(COALESCE(question,'')) ILIKE $1
+             OR LOWER(COALESCE(answer,'')) ILIKE $1
+             OR LOWER(COALESCE(keywords,'')) ILIKE $1
+        `;
       }
-  
       queryText += ' ORDER BY category, id;';
       const result = await pool.query(queryText, queryParams);
-  
       const articlesByCategory = result.rows.reduce((acc, article) => {
-        const { category } = article;
+        const category = article.category || 'Egyéb';
         if (!acc[category]) acc[category] = [];
         acc[category].push(article);
         return acc;
       }, {});
-  
       res.status(200).json({ success: true, data: articlesByCategory });
     } catch (error) {
-      console.error('❌ /api/help hiba:', error);
-      res.status(500).json({ success: false, message: "Szerverhiba a súgó cikkek lekérdezésekor." });
+      console.error('/api/help hiba:', error);
+      res.status(500).json({ success: false, message: 'Szerverhiba a súgó cikkek lekérdezésekor.' });
     }
 });
 
-// ───────────────────────────────────────────────────────────────────────────────
-// REGISZTRÁCIÓ
 app.post('/api/register', authLimiter, async (req, res) => {
   const {
     role,
@@ -193,8 +199,10 @@ app.post('/api/register', authLimiter, async (req, res) => {
   }
 
   let isPermanentFree = false;
+  let specialPending = false;
   if (specialCode && specialCode === process.env.SPECIAL_ACCESS_CODE) {
-    isPermanentFree = true;
+    // Special Access Code: require admin approval, do not auto-activate
+    specialPending = true;
   }
 
   const client = await pool.connect();
@@ -244,8 +252,8 @@ app.post('/api/register', authLimiter, async (req, res) => {
       role === 'student' ? `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}` : null;
 
     const insertUserQuery = `
-      INSERT INTO users (username, email, password_hash, role, referral_code, email_verification_token, email_verification_expires, is_permanent_free, created_at)
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,NOW())
+      INSERT INTO users (username, email, password_hash, role, referral_code, email_verification_token, email_verification_expires, is_permanent_free, special_pending, created_at)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,NOW())
       RETURNING id, created_at
     `;
     const newUserResult = await client.query(insertUserQuery, [
@@ -257,6 +265,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
       verificationToken,
       verificationExpires,
       isPermanentFree,
+      specialPending,
     ]);
 
     const newUserId = newUserResult.rows[0].id;
@@ -295,14 +304,43 @@ app.post('/api/register', authLimiter, async (req, res) => {
     await transporter.sendMail(userMailOptions);
 
     if (role === 'teacher') {
-      const approvalUrl = `${baseUrl}/approve-teacher/${newUserId}`;
-      const adminMailOptions = {
-        from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
-        to: process.env.MAIL_DEFAULT_SENDER,
-        subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
-        html: `<p>Új tanár: ${username} (${email})</p><p><a href="${approvalUrl}">Jóváhagyás</a></p>`,
-      };
-      await transporter.sendMail(adminMailOptions);
+      // Create a signed approval token for teacher verification
+      const approvalToken = jwt.sign(
+        { sub: newUserId, type: 'teacher_approval' },
+        process.env.ADMIN_SECRET || process.env.SECRET_KEY,
+        { expiresIn: '1h' }
+      );
+      const approvalUrl = `${baseUrl}/approve-teacher/${newUserId}?token=${approvalToken}`;
+      const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
+      if (adminRecipient) {
+        const adminMailOptions = {
+          from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+          to: adminRecipient,
+          subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
+          html: `<p>Új tanár: ${username} (${email})</p><p><a href="${approvalUrl}">Jóváhagyás</a></p>`,
+        };
+        await transporter.sendMail(adminMailOptions);
+      }
+    }
+
+    // Ha speciális hozzáférést igényelt, küldjünk jóváhagyási e-mailt az adminnak
+    if (specialPending) {
+      const approvalToken = jwt.sign(
+        { sub: newUserId, type: 'special_approval' },
+        process.env.ADMIN_SECRET || process.env.SECRET_KEY,
+        { expiresIn: '1h' }
+      );
+      const approvalUrl = `${baseUrl}/approve-special/${newUserId}?token=${approvalToken}`;
+      const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
+      if (adminRecipient) {
+        const adminMailOptions = {
+          from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+          to: adminRecipient,
+          subject: 'Speciális hozzáférés jóváhagyásra vár!',
+          html: `<p>Új felhasználó speciális hozzáférést igényel: ${username} (${email})</p><p><a href="${approvalUrl}">Jóváhagyás</a></p>`,
+        };
+        await transporter.sendMail(adminMailOptions);
+      }
     }
 
     await client.query('COMMIT');
@@ -319,7 +357,6 @@ app.post('/api/register', authLimiter, async (req, res) => {
   }
 });
 
-// E-MAIL MEGERŐSÍTÉS
 app.get('/api/verify-email/:token', async (req, res) => {
   const { token } = req.params;
   try {
@@ -347,9 +384,30 @@ app.get('/api/verify-email/:token', async (req, res) => {
   }
 });
 
-// TANÁR JÓVÁHAGYÁS
 app.get('/api/approve-teacher/:userId', async (req, res) => {
   const { userId } = req.params;
+  const token = req.query.token || req.headers['x-approval-token'];
+  const adminSecret = req.query.admin_secret || req.headers['x-admin-secret'];
+  let authorized = false;
+  try {
+    if (token) {
+      const decoded = jwt.verify(
+        String(token),
+        process.env.ADMIN_SECRET || process.env.SECRET_KEY
+      );
+      if (decoded && String(decoded.sub) === String(userId) && decoded.type === 'teacher_approval') {
+        authorized = true;
+      }
+    }
+  } catch (_) {
+    // invalid token
+  }
+  if (!authorized && adminSecret && adminSecret === (process.env.ADMIN_SECRET || '')) {
+    authorized = true;
+  }
+  if (!authorized) {
+    return res.status(403).json({ success: false, message: 'Hiányzó vagy érvénytelen jóváhagyási token.' });
+  }
   try {
     const result = await pool.query(
       'UPDATE teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id',
@@ -358,14 +416,53 @@ app.get('/api/approve-teacher/:userId', async (req, res) => {
     if (result.rowCount === 0) {
       return res.status(404).json({ success: false, message: 'A tanár nem található.' });
     }
-    res.status(200).json({ success: true, message: 'A tanári fiók sikeresen jóváhagyva.' });
+    return res.status(200).json({ success: true, message: 'A tanári fiók sikeresen jóváhagyva.' });
   } catch (error) {
     console.error('Tanár jóváhagyási hiba:', error);
-    res.status(500).json({ success: false, message: 'Hiba történt a jóváhagyás során.' });
+    return res.status(500).json({ success: false, message: 'Hiba történt a jóváhagyás során.' });
   }
 });
 
-// BEJELENTKEZÉS
+// Speciális hozzáférés jóváhagyása
+app.get('/api/approve-special/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const token = req.query.token || req.headers['x-approval-token'];
+  const adminSecret = req.query.admin_secret || req.headers['x-admin-secret'];
+  let authorized = false;
+  try {
+    if (token) {
+      const decoded = jwt.verify(
+        String(token),
+        process.env.ADMIN_SECRET || process.env.SECRET_KEY
+      );
+      if (decoded && String(decoded.sub) === String(userId) && decoded.type === 'special_approval') {
+        authorized = true;
+      }
+    }
+  } catch (_) {
+    // ignore token error
+  }
+  if (!authorized && adminSecret && adminSecret === (process.env.ADMIN_SECRET || '')) {
+    authorized = true;
+  }
+  if (!authorized) {
+    return res.status(403).json({ success: false, message: 'Hiányzó vagy érvénytelen jóváhagyási token.' });
+  }
+  try {
+    const result = await pool.query(
+      'UPDATE users SET is_permanent_free = true, special_pending = false WHERE id = $1 RETURNING id',
+      [userId]
+    );
+    if (result.rowCount === 0) {
+      return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
+    }
+    return res.status(200).json({ success: true, message: 'A speciális hozzáférés jóváhagyva.' });
+  } catch (error) {
+    console.error('Speciális jóváhagyási hiba:', error);
+    return res.status(500).json({ success: false, message: 'Hiba történt a jóváhagyás során.' });
+  }
+});
+
 app.post('/api/login', authLimiter, async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -385,6 +482,14 @@ app.post('/api/login', authLimiter, async (req, res) => {
       return res
         .status(403)
         .json({ success: false, message: 'Kérjük, először erősítsd meg az e-mail címedet!' });
+    }
+
+    // Ha speciális hozzáférés kérvényezve van, de még nincs jóváhagyva
+    if (user.special_pending) {
+      return res.status(403).json({
+        success: false,
+        message: 'A fiók speciális hozzáférési jóváhagyásra vár.',
+      });
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password_hash);
@@ -424,7 +529,6 @@ app.post('/api/login', authLimiter, async (req, res) => {
   }
 });
 
-// ELFELEJTETT JELSZÓ – KÉRÉS
 app.post('/api/forgot-password', authLimiter, async (req, res) => {
   const { email } = req.body;
   try {
@@ -467,7 +571,6 @@ app.post('/api/forgot-password', authLimiter, async (req, res) => {
   }
 });
 
-// ELFELEJTETT JELSZÓ – BEÁLLÍTÁS
 app.post('/api/reset-password/:token', async (req, res) => {
   const { token } = req.params;
   const { password } = req.body;
@@ -512,7 +615,6 @@ app.post('/api/reset-password/:token', async (req, res) => {
   }
 });
 
-// TANÁR OSZTÁLYAI
 app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
   try {
     if (req.user.role !== 'teacher') {
@@ -539,7 +641,6 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
   }
 });
 
-// OSZTÁLY LÉTREHOZÁSA
 app.post('/api/classes/create', authenticateToken, async (req, res) => {
   const { className, maxStudents } = req.body;
   try {
@@ -571,7 +672,6 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
   }
 });
 
-// CURRICULUMOK – csoportosítva
 app.get('/api/curriculums', async (req, res) => {
   try {
     const { rows } = await pool.query(`
@@ -636,7 +736,6 @@ app.get('/api/curriculums', async (req, res) => {
   }
 });
 
-// /api/quiz/:slug — DB elsődleges, fájl fallback
 app.get('/api/quiz/:slug', async (req, res) => {
   try {
     const raw = req.params.slug || '';
@@ -674,7 +773,6 @@ app.get('/api/quiz/:slug', async (req, res) => {
   }
 });
 
-// Admin: összes user törlése
 app.get('/api/admin/clear-users/:secret', async (req, res) => {
   const { secret } = req.params;
   if (secret !== process.env.ADMIN_SECRET) return res.status(403).json({ message: 'Hozzáférés megtagadva.' });
