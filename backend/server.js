@@ -87,7 +87,7 @@ const authLimiter = rateLimit({
     message: 'Túl sok próbálkozás, kérjük, próbáld újra 15 perc múlva.',
   },
   keyGenerator: (req) => {
-    const ipKey = ipKeyGenerator(req);
+    const ipKey = ipKeyGenerator(req); // IPv6-biztos IP kulcs
     const emailKey = (req.body && req.body.email) ? String(req.body.email).toLowerCase() : '';
     return emailKey ? `${ipKey}:${emailKey}` : ipKey;
   },
