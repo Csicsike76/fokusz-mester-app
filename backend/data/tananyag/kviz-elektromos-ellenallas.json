@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz elektromos ellenallas\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mire használják a nagy ellenállású fűtőszálakat?",
+      "answers": {
+        "a": "Biztosítékként.",
+        "b": "Fűtőberendezésekben (pl. vasaló, vízforraló).",
+        "c": "Villámhárítóként."
+      },
+      "correct": "b",
+      "explanation": "Az áram hőhatása arányos az ellenállással. A fűtőberendezésekben szándékosan nagy ellenállású ötvözeteket használnak, amelyek az átfolyó áram hatására hatékonyan felmelegszenek."
+    },
+    {
+      "question": "Hogyan változik egy fémhuzal ellenállása, ha hosszabb lesz?",
+      "answers": {
+        "a": "Nő.",
+        "b": "Csökken.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "Az ellenállás egyenesen arányos a vezető hosszával. Minél hosszabb a huzal, annál több atommal kell az elektronoknak 'ütközniük', így annál nagyobb az ellenállása."
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "A szigetelőknek nulla az ellenállása.",
+        "b": "A szigetelőknek nagyon nagy az ellenállása.",
+        "c": "A szigetelőknek kicsi az ellenállása."
+      },
+      "correct": "b",
+      "explanation": "A szigetelők lényege, hogy rendkívül nagy elektromos ellenállással rendelkeznek, ami megakadályozza a töltések áramlását. Az ideális szigetelő ellenállása végtelen."
+    },
+    {
+      "question": "Mi a reosztát?",
+      "answers": {
+        "a": "Változtatható ellenállás.",
+        "b": "Áramforrás.",
+        "c": "Kapcsoló."
+      },
+      "correct": "a",
+      "explanation": "A reosztát (vagy potenciométer) egy olyan áramköri elem, amelynek az ellenállása egy csúszka segítségével változtatható. Ezzel szabályozni lehet az áramkörben folyó áram erősségét."
+    },
+    {
+      "question": "Mi az elektromos ellenállás?",
+      "answers": {
+        "a": "Egy anyag azon tulajdonsága, amely akadályozza az elektromos áram folyását.",
+        "b": "Az áram erőssége.",
+        "c": "Az áramforrás feszültsége."
+      },
+      "correct": "a",
+      "explanation": "Az ellenállás azt mutatja meg, hogy egy adott vezető mennyire nehezíti a töltések áramlását. A jó vezetőknek kicsi, a szigetelőknek nagy az ellenállása."
+    },
+    {
+      "question": "Melyik anyagnak a legnagyobb az ellenállása?",
+      "answers": {
+        "a": "Gumi (szigetelő)",
+        "b": "Réz (vezető)",
+        "c": "Vas (vezető)"
+      },
+      "correct": "a",
+      "explanation": "A szigetelőknek rendkívül nagy az elektromos ellenállásuk, ami miatt gyakorlatilag nem folyik bennük áram. A fémeknek, mint a réz és a vas, kicsi az ellenállásuk."
+    },
+    {
+      "question": "Mi az ellenállás szerepe egy izzószálban?",
+      "answers": {
+        "a": "Nincs szerepe.",
+        "b": "A nagy ellenállású szál az átfolyó áram hatására felizzik és világít.",
+        "c": "Csökkenti az áramfogyasztást."
+      },
+      "correct": "b",
+      "explanation": "Az izzólámpa volfrámszála azért világít, mert nagyon nagy az elektromos ellenállása. Az áramnak le kell győznie ezt az ellenállást, ami közben a szál annyira felhevül, hogy izzani kezd és fényt bocsát ki."
+    },
+    {
+      "question": "Hogyan változik egy fémhuzal ellenállása, ha vastagabb lesz?",
+      "answers": {
+        "a": "Csökken.",
+        "b": "Nő.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "Az ellenállás fordítottan arányos a vezető keresztmetszetével. A vastagabb huzalban a töltések 'kényelmesebben' elférnek, több út áll rendelkezésükre, így az ellenállás kisebb lesz."
+    },
+    {
+      "question": "Két egyforma rézhuzal közül az egyik hosszabb. Melyiknek nagyobb az ellenállása?",
+      "answers": {
+        "a": "A hosszabbnak.",
+        "b": "A rövidebbnek.",
+        "c": "Egyforma az ellenállásuk."
+      },
+      "correct": "a",
+      "explanation": "Mivel az ellenállás egyenesen arányos a vezető hosszával, a hosszabb rézhuzalnak lesz nagyobb az ellenállása."
+    },
+    {
+      "question": "Mi az ellenállás jele a képletekben?",
+      "answers": {
+        "a": "E",
+        "b": "R",
+        "c": "I"
+      },
+      "correct": "b",
+      "explanation": "Az elektromos ellenállást az angol 'resistance' szó alapján R betűvel jelöljük."
+    },
+    {
+      "question": "Hogyan változik a legtöbb fém ellenállása a hőmérséklettel?",
+      "answers": {
+        "a": "Csökken.",
+        "b": "Nő.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "A fémek melegítés hatására a rácspontokban lévő atomok hevesebben rezegnek. Ez a hevesebb rezgés jobban akadályozza az elektronok áramlását, ezért a fémek ellenállása a hőmérséklettel nő."
+    },
+    {
+      "question": "Mi az ellenállás mértékegysége?",
+      "answers": {
+        "a": "Ohm (Ω)",
+        "b": "Amper (A)",
+        "c": "Volt (V)"
+      },
+      "correct": "a",
+      "explanation": "Az elektromos ellenállás mértékegysége Georg Ohm tiszteletére az ohm, jele a görög omega betű (Ω)."
+    },
+    {
+      "question": "Melyik állítás írja le helyesen az ellenállást?",
+      "answers": {
+        "a": "Az áram és a feszültség szorzata.",
+        "b": "Az áram és a feszültség összege.",
+        "c": "A feszültség és az áramerősség hányadosa."
+      },
+      "correct": "c",
+      "explanation": "Ez Ohm törvényének átrendezett formája: R = U / I. Az ellenállás egy fogyasztón a rá eső feszültség és a rajta átfolyó áram erősségének hányadosa."
+    },
+    {
+      "question": "Mi a szupervezetés?",
+      "answers": {
+        "a": "Nagyon jó hővezetés.",
+        "b": "Egyes anyagoknak az a tulajdonsága, hogy nagyon alacsony hőmérsékleten az ellenállásuk nullává válik.",
+        "c": "Nagyon nagy sebességű áramlás."
+      },
+      "correct": "b",
+      "explanation": "A szupervezetés egy különleges fizikai jelenség, amely során bizonyos anyagok elektromos ellenállása egy kritikus hőmérséklet alatt mérhetetlenül kicsivé, gyakorlatilag nullává válik."
+    },
+    {
+      "question": "Mi a jele az ellenállásnak egy kapcsolási rajzon?",
+      "answers": {
+        "a": "Egy kör.",
+        "b": "Egy cikk-cakk vonal.",
+        "c": "Egy téglalap."
+      },
+      "correct": "c",
+      "explanation": "Az ellenállást (mint áramköri elemet) egy téglalappal jelöljük a kapcsolási rajzokon."
+    },
+    {
+      "question": "Melyik a legjobb elektromos vezető a mindennapi anyagok közül?",
+      "answers": {
+        "a": "Vas",
+        "b": "Alumínium",
+        "c": "Réz"
+      },
+      "correct": "c",
+      "explanation": "Bár az ezüst és az arany még jobb vezetők, a réz kiváló vezetőképessége és viszonylag alacsony ára miatt a legelterjedtebb anyag az elektromos vezetékek gyártásához."
+    },
+    {
+      "question": "Egy 10 Ω-os és egy 20 Ω-os ellenállás közül melyik akadályozza jobban az áramot?",
+      "answers": {
+        "a": "A 10 Ω-os.",
+        "b": "Egyformán.",
+        "c": "A 20 Ω-os."
+      },
+      "correct": "c",
+      "explanation": "Az ohmban mért érték az ellenállás nagyságát mutatja. Minél nagyobb az ohm-érték, annál nagyobb az ellenállás, tehát annál jobban akadályozza a töltések áramlását."
+    },
+    {
+      "question": "Ha egy fogyasztó ellenállása nagyon nagy, akkor a rajta átfolyó áram (adott feszültség mellett)...",
+      "answers": {
+        "a": "...is nagyon nagy.",
+        "b": "...nulla.",
+        "c": "...nagyon kicsi."
+      },
+      "correct": "c",
+      "explanation": "Ohm törvénye (I = U/R) szerint az áramerősség fordítottan arányos az ellenállással. Ha az ellenállás nagyon nagy, az áramerősség nagyon kicsi lesz. Ez a szigetelők működésének alapja."
+    },
+    {
+      "question": "Két egyforma hosszú és vastag huzal közül az egyik alumíniumból, a másik aranyból készült. Melyiknek nagyobb az ellenállása?",
+      "answers": {
+        "a": "Az aranynak.",
+        "b": "Egyenlő.",
+        "c": "Az alumíniumnak."
+      },
+      "correct": "c",
+      "explanation": "Az arany egy nagyon jó vezető, fajlagos ellenállása kisebb, mint az alumíniumé. Ezért az alumíniumhuzalnak lesz nagyobb az elektromos ellenállása."
+    },
+    {
+      "question": "Az ellenállás egy fizikai...",
+      "answers": {
+        "a": "...jelenség.",
+        "b": "...folyamat.",
+        "c": "...mennyiség."
+      },
+      "correct": "c",
+      "explanation": "Az elektromos ellenállás egy mérhető tulajdonsága az anyagnak, illetve az áramköri elemnek, ezért fizikai mennyiségnek nevezzük."
+    },
+    {
+      "question": "Mitől függ egy anyag fajlagos ellenállása?",
+      "answers": {
+        "a": "Az anyagi minőségtől.",
+        "b": "A vezeték hosszától.",
+        "c": "A vezeték vastagságától."
+      },
+      "correct": "a",
+      "explanation": "A fajlagos ellenállás (jele: ρ) egy anyagra jellemző állandó, ami megmutatja, hogy az adott anyag mennyire jó vagy rossz vezető. Nem függ a méretektől."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Az ellenállás mértékegysége az ohm.",
+        "b": "A hosszabb vezetéknek nagyobb az ellenállása.",
+        "c": "A vastagabb vezetéknek nagyobb az ellenállása."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. Az ellenállás fordítottan arányos a keresztmetszettel, tehát a vastagabb vezetéknek kisebb az ellenállása, mert a töltéseknek 'több helyük van' áramlani."
+    },
+    {
+      "question": "Két egyforma hosszú huzal közül az egyik rézből, a másik vasból készült. Melyiknek kisebb az ellenállása?",
+      "answers": {
+        "a": "A vasnak.",
+        "b": "A réznek.",
+        "c": "Egyforma."
+      },
+      "correct": "b",
+      "explanation": "A réz fajlagos ellenállása kisebb, mint a vasé. Ez azt jelenti, hogy a réz jobb vezető. Ugyanolyan méretek esetén a rézhuzalnak lesz kisebb az ellenállása."
+    },
+    {
+      "question": "Mitől függ egy adott anyagból készült vezeték ellenállása?",
+      "answers": {
+        "a": "Csak a hosszától.",
+        "b": "A hosszától és a keresztmetszetétől.",
+        "c": "Csak a keresztmetszetétől."
+      },
+      "correct": "b",
+      "explanation": "Egy adott anyagú (tehát azonos fajlagos ellenállású) vezeték ellenállása egyenesen arányos a hosszával és fordítottan arányos a keresztmetszetével (vastagságával)."
+    },
+    {
+      "question": "Melyik anyagnak a legkisebb az ellenállása?",
+      "answers": {
+        "a": "Üveg",
+        "b": "Ezüst",
+        "c": "Porcelán"
+      },
+      "correct": "b",
+      "explanation": "Az ezüst a legjobb elektromos vezető a fémek között, ami azt jelenti, hogy neki a legkisebb a fajlagos ellenállása. Az üveg és a porcelán szigetelők."
+    }
+  ]
 }

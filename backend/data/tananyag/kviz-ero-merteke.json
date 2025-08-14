@@ -4,5 +4,226 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz ero merteke\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik NEM erő?",
+      "answers": {
+        "a": "Tömeg",
+        "b": "Gravitációs erő",
+        "c": "Súrlódási erő"
+      },
+      "correct": "a",
+      "explanation": "A gravitációs erő és a súrlódási erő is kölcsönhatásokat ír le, tehát erők. A tömeg a test tehetetlenségének mértéke, nem erő."
+    },
+    {
+      "question": "Ha egy testre ható eredő erő nem nulla, akkor a test...",
+      "answers": {
+        "a": "mozgásállapota megváltozik.",
+        "b": "mindig nyugalomban van.",
+        "c": "mozgásállapota nem változik."
+      },
+      "correct": "a",
+      "explanation": "Newton II. törvénye szerint, ha egy testre ható erők eredője nem nulla, a test gyorsul. A gyorsulás a mozgásállapot megváltozását jelenti (a sebesség nagysága vagy iránya változik)."
+    },
+    {
+      "question": "Mivel mérünk erőt?",
+      "answers": {
+        "a": "Dinamométerrel (rugós erőmérővel)",
+        "b": "Mérleggel",
+        "c": "Vonalzóval"
+      },
+      "correct": "a",
+      "explanation": "Az erőt dinamométerrel mérjük, ami a rugó megnyúlásán alapul. A mérleg tömeget, a vonalzó hosszúságot mér."
+    },
+    {
+      "question": "Mi a Föld által a testekre kifejtett vonzerő neve?",
+      "answers": {
+        "a": "Gravitációs erő (súly)",
+        "b": "Mágneses erő",
+        "c": "Rugalmas erő"
+      },
+      "correct": "a",
+      "explanation": "A Föld és a rajta lévő testek között fellépő vonzó kölcsönhatást gravitációs erőnek nevezzük. Ennek a testre ható megnyilvánulása a súly."
+    },
+    {
+      "question": "Mi az erő?",
+      "answers": {
+        "a": "A kölcsönhatás mértéke.",
+        "b": "A test tömege.",
+        "c": "A test sebessége."
+      },
+      "correct": "a",
+      "explanation": "Az erő az a fizikai mennyiség, amellyel a testek közötti kölcsönhatás erősségét és irányát jellemezzük. Az erő okozza a mozgásállapot-változást vagy az alakváltozást."
+    },
+    {
+      "question": "Hogyan ábrázoljuk az erőt?",
+      "answers": {
+        "a": "Irányított szakasszal (nyíllal)",
+        "b": "Egy ponttal",
+        "c": "Egy körrel"
+      },
+      "correct": "a",
+      "explanation": "Mivel az erő vektormennyiség, egy irányított szakasszal (nyíllal) ábrázoljuk. A nyíl hossza arányos az erő nagyságával, az iránya pedig megegyezik az erő irányával."
+    },
+    {
+      "question": "Milyen mennyiség az erő?",
+      "answers": {
+        "a": "Vektormennyiség",
+        "b": "Skalármennyiség",
+        "c": "Alapmennyiség"
+      },
+      "correct": "a",
+      "explanation": "Az erőnek nemcsak nagysága van, hanem iránya is, ami nagyon fontos a hatása szempontjából. Azt a fizikai mennyiséget, amelynek nagysága és iránya is van, vektormennyiségnek nevezzük."
+    },
+    {
+      "question": "Mi a jele az erőnek a fizikai képletekben?",
+      "answers": {
+        "a": "F",
+        "b": "m",
+        "c": "t"
+      },
+      "correct": "a",
+      "explanation": "Az erőt az angol 'force' szóból eredően általában F betűvel jelölik. Az 'm' a tömeg, a 't' pedig az idő jele."
+    },
+    {
+      "question": "Melyik nemzetközi tudósról nevezték el az erő mértékegységét?",
+      "answers": {
+        "a": "Einstein",
+        "b": "Galilei",
+        "c": "Newton"
+      },
+      "correct": "c",
+      "explanation": "Isaac Newton fektette le a klasszikus mechanika alapjait, beleértve a mozgástörvényeket és az erő fogalmát. Tiszteletére nevezték el róla az erő SI mértékegységét."
+    },
+    {
+      "question": "Mi történik, ha egy rugalmas gumiszalagot meghúzol?",
+      "answers": {
+        "a": "Nem történik semmi.",
+        "b": "Rugalmas erő ébred benne.",
+        "c": "A tömege megnő."
+      },
+      "correct": "b",
+      "explanation": "Amikor a gumiszalagot megnyújtjuk, alakváltozást szenved. Mivel rugalmas, benne egy olyan erő ébred (rugalmas erő), amely igyekszik visszaállítani az eredeti hosszát."
+    },
+    {
+      "question": "Miért áll meg egy elgurított labda a füvön?",
+      "answers": {
+        "a": "A gravitáció miatt.",
+        "b": "A tehetetlensége miatt.",
+        "c": "A súrlódási és közegellenállási erő miatt."
+      },
+      "correct": "c",
+      "explanation": "A labda mozgását két fő erő akadályozza: a fűvel való érintkezés miatti súrlódás, és a levegő ellenállása. Ezek az erők folyamatosan lassítják, míg végül megáll."
+    },
+    {
+      "question": "Ha egy test nyugalomban van egy lejtőn, mi tartja ott?",
+      "answers": {
+        "a": "A gravitációs erő.",
+        "b": "A súrlódási erő.",
+        "c": "A tehetetlensége."
+      },
+      "correct": "b",
+      "explanation": "A gravitációs erő a lejtő mentén lefelé húzná a testet. Ahhoz, hogy nyugalomban maradjon, egy másik erőnek kell ezt kiegyenlítenie. Ez az erő a lejtővel párhuzamos, felfelé mutató tapadási súrlódási erő."
+    },
+    {
+      "question": "Melyik a kakukktojás?",
+      "answers": {
+        "a": "súly",
+        "b": "tömeg",
+        "c": "súrlódás"
+      },
+      "correct": "b",
+      "explanation": "A súly és a súrlódás is erők, mértékegységük a Newton. A tömeg a tehetetlenség mértéke, mértékegysége a kilogramm."
+    },
+    {
+      "question": "Két, egy pontból induló, 3 N és 4 N nagyságú, egymásra merőleges erő eredője mekkora?",
+      "answers": {
+        "a": "7 N",
+        "b": "5 N",
+        "c": "1 N"
+      },
+      "correct": "b",
+      "explanation": "Mivel az erők merőlegesek egymásra, az eredőjük nagyságát a Pitagorasz-tétellel számolhatjuk ki. Az eredő erő = négyzetgyök(3*3 + 4*4) = négyzetgyök(9 + 16) = négyzetgyök(25) = 5 N."
+    },
+    {
+      "question": "Mi a feltétele egy test egyensúlyának?",
+      "answers": {
+        "a": "Nagy tömeg",
+        "b": "A rá ható erők eredője nulla.",
+        "c": "Kis sebesség"
+      },
+      "correct": "b",
+      "explanation": "Egy test akkor van egyensúlyban, ha mozgásállapota nem változik. Ez pontosan akkor teljesül, ha a rá ható erők kiegyenlítik egymást, azaz az eredő erő nulla."
+    },
+    {
+      "question": "Ha két, egy egyenesbe eső, ellentétes irányú, 10 N és 8 N nagyságú erő hat egy testre, mennyi az eredő erő nagysága?",
+      "answers": {
+        "a": "18 N",
+        "b": "0 N",
+        "c": "2 N"
+      },
+      "correct": "c",
+      "explanation": "Ha az erők ellentétes irányúak, az eredőjük nagysága a nagyságuk különbsége. 10 N - 8 N = 2 N."
+    },
+    {
+      "question": "Egy 50 N súlyú láda az asztalon áll. Mekkora erőt fejt ki az asztal a ládára?",
+      "answers": {
+        "a": "0 N",
+        "b": "50 N",
+        "c": "100 N"
+      },
+      "correct": "b",
+      "explanation": "A láda nyugalomban van, tehát a rá ható erők eredője nulla. Lefelé hat rá az 50 N súlyerő, ezért az asztalnak egy ugyanekkora, 50 N nagyságú, de felfelé irányuló tartóerőt kell kifejtenie."
+    },
+    {
+      "question": "Mikor egyenlő két erő?",
+      "answers": {
+        "a": "Ha a test nem mozog.",
+        "b": "Ha nagyságuk és irányuk is megegyezik.",
+        "c": "Ha csak a nagyságuk egyezik meg."
+      },
+      "correct": "b",
+      "explanation": "Két vektor (így két erő is) akkor és csak akkor egyenlő, ha a nagyságuk és az irányuk is pontosan megegyezik."
+    },
+    {
+      "question": "Melyik erő NEM érintkezési erő?",
+      "answers": {
+        "a": "Rugalmas erő",
+        "b": "Súrlódási erő",
+        "c": "Mágneses erő"
+      },
+      "correct": "c",
+      "explanation": "Az érintkezési erők (pl. rugalmas, súrlódás) csak akkor lépnek fel, ha a testek fizikailag érintkeznek. A távolsági erők (pl. mágneses, gravitációs) érintkezés nélkül is hatnak."
+    },
+    {
+      "question": "Mi az eredő erő?",
+      "answers": {
+        "a": "A legerősebb erő.",
+        "b": "A testre ható összes erő vektori összege.",
+        "c": "A leggyengébb erő."
+      },
+      "correct": "b",
+      "explanation": "Az eredő erő az az egyetlen erő, amely ugyanazt a hatást fejti ki a testre, mint a testre ható erők együttesen. Kiszámítása a testre ható erők vektori összegezésével történik."
+    },
+    {
+      "question": "Ha egy testre két, egy egyenesbe eső, azonos irányú, 5 N és 7 N nagyságú erő hat, mennyi az eredő erő nagysága?",
+      "answers": {
+        "a": "2 N",
+        "b": "12 N",
+        "c": "35 N"
+      },
+      "correct": "b",
+      "explanation": "Ha az erők azonos irányúak, az eredőjük nagysága a nagyságuk összege. 5 N + 7 N = 12 N."
+    },
+    {
+      "question": "Milyen erő feszíti egy íj húrját, amikor megfeszítjük?",
+      "answers": {
+        "a": "Súrlódási erő",
+        "b": "Rugalmas erő",
+        "c": "Nehézségi erő"
+      },
+      "correct": "b",
+      "explanation": "Amikor egy rugalmas testet (mint az íj vagy egy gumiszalag) megnyújtunk vagy összenyomunk, benne egy erő ébred, ami igyekszik visszaállítani az eredeti alakját. Ezt nevezzük rugalmas erőnek."
+    }
+  ]
 }

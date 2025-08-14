@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz elektromagneses ero\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "Az elektromágnes csak vonzani tud, taszítani nem.",
+        "b": "Az elektromágnesnek is van északi és déli pólusa.",
+        "c": "Az elektromágnes ereje független a menetszámtól."
+      },
+      "correct": "b",
+      "explanation": "Mint minden mágnesnek, az elektromágnesnek is két pólusa van, egy északi és egy déli. Emiatt képes vonzani a vasat, és vonzani vagy taszítani egy másik mágnes pólusait."
+    },
+    {
+      "question": "Az elektromágnes által kifejtett erő...",
+      "answers": {
+        "a": "mindig taszító.",
+        "b": "mindig vonzó.",
+        "c": "lehet vonzó és taszító is."
+      },
+      "correct": "c",
+      "explanation": "Az elektromágnes, mint minden mágnes, vonzza a ferromágneses anyagokat. Egy másik mágnessel vagy elektromágnessel szemben viszont a pólusok helyzetétől függően vonzó és taszító erőt is ki tud fejteni."
+    },
+    {
+      "question": "Ha egy elektromágnes 100 gémkapcsot tud felemelni, és megduplázzuk a tekercs menetszámát (az áram állandó), akkor...",
+      "answers": {
+        "a": "...körülbelül 200 gémkapcsot fog tudni felemelni.",
+        "b": "...körülbelül 50 gémkapcsot fog tudni felemelni.",
+        "c": "...továbbra is 100 gémkapcsot fog tudni felemelni."
+      },
+      "correct": "a",
+      "explanation": "Az elektromágnes ereje egyenesen arányos a menetszámmal. Ha a menetszámot duplázzuk, az erő is nagyjából a kétszeresére nő."
+    },
+    {
+      "question": "Mi a relé?",
+      "answers": {
+        "a": "Egy áramforrás.",
+        "b": "Egy állandó mágnes.",
+        "c": "Egy elektromágneses kapcsoló."
+      },
+      "correct": "c",
+      "explanation": "A relé egy olyan eszköz, amellyel egy gyenge áramkör segítségével egy erős áramkört lehet biztonságosan kapcsolni. Egy kis elektromágnes működteti a nagy áramkör kapcsolóját."
+    },
+    {
+      "question": "Miért 'zizeg' néha egy nagy teljesítményű transzformátor vagy elektromágnes?",
+      "answers": {
+        "a": "Mert hibás.",
+        "b": "Mert a levegő rezeg benne.",
+        "c": "Mert a váltakozó áram által keltett, gyorsan változó mágneses erő megrezegteti a szerkezeti elemeket."
+      },
+      "correct": "c",
+      "explanation": "A hálózati váltakozó áram másodpercenként 50-szer változtat irányt. Ez a gyorsan változó mágneses mező a vasmagot és a tekercs meneteit is rezgésbe hozza, ami a jellegzetes, mély búgó hangot kelti."
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "A több menetes tekercs erősebb elektromágnest hoz létre.",
+        "b": "A kevesebb menetes tekercs erősebb elektromágnest hoz létre.",
+        "c": "A menetszám nem befolyásolja az erőt."
+      },
+      "correct": "a",
+      "explanation": "Minden egyes áramjárta menet létrehoz egy kis mágneses mezőt. Ezeknek a mezőknek a hatása a tekercsben összeadódik, így a több menet erősebb eredő mágneses mezőt és nagyobb vonzerőt eredményez."
+    },
+    {
+      "question": "Mitől függ az elektromágnes által kifejtett erő?",
+      "answers": {
+        "a": "A tekercs menetszámától és az áramerősségtől.",
+        "b": "Csak a vasmag színétől.",
+        "c": "Csak a feszültségtől."
+      },
+      "correct": "a",
+      "explanation": "Az elektromágnes vonzereje annál nagyobb, minél több menet van a tekercsén, minél nagyobb áram folyik benne, és ha van benne vasmag."
+    },
+    {
+      "question": "Hogyan lehet szabályozni egy elektromágnes erejét?",
+      "answers": {
+        "a": "Nem lehet szabályozni.",
+        "b": "Az áramerősség változtatásával.",
+        "c": "A pólusok felcserélésével."
+      },
+      "correct": "b",
+      "explanation": "Az elektromágnes ereje könnyen szabályozható azáltal, hogy a tekercsen átfolyó áram erősségét változtatjuk. Nagyobb áram erősebb mágnest, kisebb áram gyengébbet eredményez."
+    },
+    {
+      "question": "Melyik eszköz használja ki az elektromágnes erejét?",
+      "answers": {
+        "a": "Autóbontóban a roncsokat emelő daru.",
+        "b": "Egy iránytű.",
+        "c": "Egy hagyományos mérleg."
+      },
+      "correct": "a",
+      "explanation": "A nagy tömegű vas- és acélhulladék emelésére erős, ki- és bekapcsolható elektromágneseket használnak. Az iránytű állandó mágnest használ."
+    },
+    {
+      "question": "Mi NEM jellemző az elektromágnesre?",
+      "answers": {
+        "a": "Ki- és bekapcsolható.",
+        "b": "Vasmaggal erősíthető.",
+        "c": "Természetben is előfordul."
+      },
+      "correct": "c",
+      "explanation": "Az elektromágnes mesterséges eszköz, emberi alkotás, amely elektromos árammal működik. A természetben előforduló mágnesek állandó mágnesek (pl. magnetit)."
+    },
+    {
+      "question": "Hogyan lehet növelni egy elektromágnes erejét?",
+      "answers": {
+        "a": "Növeljük az áramerősséget.",
+        "b": "Csökkentjük a menetszámot.",
+        "c": "Kivesszük a vasmagot."
+      },
+      "correct": "a",
+      "explanation": "Az elektromágnes ereje egyenesen arányos az áramerősséggel. Nagyobb áram erősebb mágneses mezőt hoz létre, így a vonzerő is nagyobb lesz."
+    },
+    {
+      "question": "A hangszórókban egy tekercs mozog egy mágneses mezőben. Mi mozgatja a tekercset?",
+      "answers": {
+        "a": "A levegő nyomása.",
+        "b": "Az elektromos áram és a mágneses mező kölcsönhatása (Lorentz-erő).",
+        "c": "A membrán rezgése."
+      },
+      "correct": "b",
+      "explanation": "A hangszóróba vezetett elektromos jel (áram) átfolyik a tekercsen. Az áramjárta tekercsre a mágneses mező erőt fejt ki, ami a hang ritmusában mozgatja a tekercset és a hozzá erősített membránt."
+    },
+    {
+      "question": "Ha egy elektromágnest egy iránytű közelébe helyezünk, mi történik?",
+      "answers": {
+        "a": "Semmi.",
+        "b": "Az iránytű beáll az elektromágnes mágneses mezejének irányába.",
+        "c": "Az iránytű elveszíti mágnesességét."
+      },
+      "correct": "b",
+      "explanation": "Az elektromágnes mágneses mezőt hoz létre maga körül. Ha ebbe a mezőbe egy iránytűt (ami egy kis állandó mágnes) helyezünk, az be fog állni a helyi mágneses erővonalak irányába."
+    },
+    {
+      "question": "Mi történik az elektromágnes erejével, ha kikapcsoljuk az áramot?",
+      "answers": {
+        "a": "Gyakorlatilag megszűnik.",
+        "b": "Megduplázódik.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "Az elektromágnes működésének alapja az áram mágneses hatása. Ha az áram megszűnik, a mágneses mező is összeomlik, és a vonzerő eltűnik."
+    },
+    {
+      "question": "Az elektromágneses indukció?",
+      "answers": {
+        "a": "A mágneses mező erőssége.",
+        "b": "Amikor a változó mágneses mező elektromos mezőt (feszültséget) hoz létre.",
+        "c": "A mágnesek készítésének módja."
+      },
+      "correct": "b",
+      "explanation": "Az elektromágneses indukció az áram mágneses hatásának fordítottja: ha egy vezető környezetében változik a mágneses mező, a vezetőben feszültség, és így áram indukálódik. Ezen az elven működnek a generátorok."
+    },
+    {
+      "question": "Ha egy iránytűt egyenes áramjárta vezeték alá teszünk, a tű...",
+      "answers": {
+        "a": "...párhuzamosan áll be a vezetékkel.",
+        "b": "...nem mozdul el.",
+        "c": "...merőlegesen áll be a vezetékre."
+      },
+      "correct": "c",
+      "explanation": "Az egyenes vezető körüli mágneses erővonalak a vezetőre merőleges síkban lévő körök. Az iránytű beáll a helyi erővonal érintőjének irányába, ami merőleges a vezetékre."
+    },
+    {
+      "question": "Mi a vasmag szerepe az elektromágnesben?",
+      "answers": {
+        "a": "Jelentősen felerősíti a mágneses hatást.",
+        "b": "Gyengíti a mágneses hatást.",
+        "c": "Hűti a tekercset."
+      },
+      "correct": "a",
+      "explanation": "A vas egy ferromágneses anyag, amely a tekercs mágneses mezejének hatására maga is erősen mágneseződik, és a saját mezejével felerősíti az eredeti mezőt."
+    },
+    {
+      "question": "Az elektromágnes által kifejtett erő...",
+      "answers": {
+        "a": "...egy távolhatás.",
+        "b": "...egy érintkezési erő.",
+        "c": "...nem valódi erő."
+      },
+      "correct": "a",
+      "explanation": "Mint minden mágneses erő, az elektromágnes ereje is távolhatás, azaz nem szükséges a közvetlen érintkezés ahhoz, hogy a hatását kifejtse a ferromágneses tárgyakra."
+    },
+    {
+      "question": "Mi az elektromágnes?",
+      "answers": {
+        "a": "Egy állandó mágnes.",
+        "b": "Egy áramjárta tekercs, általában vasmaggal.",
+        "c": "Egyfajta elem."
+      },
+      "correct": "b",
+      "explanation": "Az elektromágnes egy olyan eszköz, amely elektromos áram hatására hoz létre mágneses mezőt. Jellemzően egy vasmag köré tekert szigetelt vezetékből áll."
+    },
+    {
+      "question": "Hol használják az elektromágneses erőt?",
+      "answers": {
+        "a": "Csak laboratóriumokban.",
+        "b": "Csak az iparban.",
+        "c": "Számos helyen, pl. motorokban, hangszórókban, relékben, darukban."
+      },
+      "correct": "c",
+      "explanation": "Az elektromágneses erőhatás a modern technológia egyik legfontosabb alapelve, a villanymotoroktól kezdve a hangszórókon, merevlemezeken át az orvosi képalkotó berendezésekig (MRI) rendkívül széles körben alkalmazzák."
+    },
+    {
+      "question": "Milyen kapcsolat van az elektromosság és a mágnesesség között?",
+      "answers": {
+        "a": "Nincs köztük kapcsolat.",
+        "b": "A mágnesesség az elektromosság egyik formája.",
+        "c": "A két jelenség szorosan összefügg, elválaszthatatlanok (elektromágnesség)."
+      },
+      "correct": "c",
+      "explanation": "A mozgó elektromos töltések mágneses mezőt keltenek, a változó mágneses mező pedig elektromos mezőt. A két jelenség valójában egyetlen alapvető kölcsönhatás, az elektromágnesség két oldala."
+    },
+    {
+      "question": "Mi NEM befolyásolja az elektromágnes által kifejtett erő nagyságát?",
+      "answers": {
+        "a": "Az áramerősség.",
+        "b": "A tekercs huzalának színe.",
+        "c": "A vasmag jelenléte."
+      },
+      "correct": "b",
+      "explanation": "Az elektromágnes erejét az áramerősség, a menetszám és a vasmag anyaga határozza meg. A szigetelő bevonat színének nincs hatása a mágneses tulajdonságokra."
+    },
+    {
+      "question": "Az elektromos motorok...",
+      "answers": {
+        "a": "...állandó mágneseket használnak.",
+        "b": "...az áram mágneses hatásán alapuló erőhatást használják ki a forgáshoz.",
+        "c": "...hőenergiával működnek."
+      },
+      "correct": "b",
+      "explanation": "A villanymotorokban az állórész és a forgórész mágneses mezői közötti vonzó és taszító erők hozzák létre a forgatónyomatékot, ami a motor tengelyét forgatja."
+    },
+    {
+      "question": "Ha egy elektromágnes 100 gémkapcsot tud felemelni, és az áramerősséget a felére csökkentjük, akkor...",
+      "answers": {
+        "a": "...továbbra is 100 gémkapcsot emel fel.",
+        "b": "...körülbelül 50 gémkapcsot fog tudni felemelni.",
+        "c": "...körülbelül 200 gémkapcsot fog tudni felemelni."
+      },
+      "correct": "b",
+      "explanation": "Az elektromágnes ereje egyenesen arányos az áramerősséggel. Ha az áramerősséget felére csökkentjük, a vonzerő is körülbelül a felére fog csökkenni."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Az áramjárta tekercs mágnesként viselkedik.",
+        "b": "A vasmag gyengíti az elektromágnest.",
+        "c": "Nagyobb áram erősebb elektromágnest eredményez."
+      },
+      "correct": "b",
+      "explanation": "Ez az állítás hamis. A vasmag a benne lévő atomi mágnesek rendeződése miatt jelentősen, akár több százszorosára is felerősíti a tekercs mágneses mezejét."
+    }
+  ]
 }

@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz fenyforrasok\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás igaz a Holdra?",
+      "answers": {
+        "a": "Elsődleges, természetes fényforrás.",
+        "b": "Másodlagos, természetes fényforrás.",
+        "c": "Másodlagos, mesterséges fényforrás."
+      },
+      "correct": "b",
+      "explanation": "A Hold a természetben található, tehát természetes. Mivel nincs saját fénye, csak a Nap fényét veri vissza, ezért másodlagos fényforrás."
+    },
+    {
+      "question": "A fényforrásokat két fő csoportba oszthatjuk aszerint, hogy saját maguk állítják-e elő a fényt. Melyik ez a két csoport?",
+      "answers": {
+        "a": "Elsődleges és másodlagos",
+        "b": "Meleg és hideg",
+        "c": "Fényes és halvány"
+      },
+      "correct": "a",
+      "explanation": "A legfontosabb fizikai csoportosítás az, hogy a test saját maga bocsátja-e ki a fényt (elsődleges), vagy csak visszaveri egy másik forrás fényét (másodlagos)."
+    },
+    {
+      "question": "A szentjánosbogár...",
+      "answers": {
+        "a": "...természetes és elsődleges fényforrás.",
+        "b": "...mesterséges és elsődleges fényforrás.",
+        "c": "...természetes és másodlagos fényforrás."
+      },
+      "correct": "a",
+      "explanation": "A szentjánosbogár a természetben él, tehát természetes. Mivel a testében zajló kémiai folyamatok révén saját maga állítja elő a fényt, ezért elsődleges fényforrás."
+    },
+    {
+      "question": "Miért látjuk a tárgyakat?",
+      "answers": {
+        "a": "Mert a szemünk bocsát ki fényt.",
+        "b": "Mert a tárgyakról visszaverődő fény a szemünkbe jut.",
+        "c": "Mert a tárgyak mindig világítanak."
+      },
+      "correct": "b",
+      "explanation": "A látás feltétele, hogy a tárgyról (ami vagy maga a fényforrás, vagy egy megvilágított test) a fény a szemünkbe jusson. A nem világító tárgyakat azért látjuk, mert a róluk visszaverődő fény eljut hozzánk."
+    },
+    {
+      "question": "Miért látjuk a szobában lévő bútorokat, ha felkapcsoljuk a villanyt?",
+      "answers": {
+        "a": "Mert a bútorok másodlagos fényforrásokká válnak.",
+        "b": "Mert a bútorok is elkezdenek világítani.",
+        "c": "Mert a szemünk hozzászokik a sötéthez."
+      },
+      "correct": "a",
+      "explanation": "A lámpa (elsődleges fényforrás) fényt bocsát ki. Ez a fény eljut a bútorokig, amelyek visszaverik azt. A visszavert fény jut a szemünkbe, így látjuk a bútorokat. A bútorok tehát másodlagos fényforrásként működnek."
+    },
+    {
+      "question": "Melyik NEM elsődleges fényforrás?",
+      "answers": {
+        "a": "A Hold",
+        "b": "A csillagok",
+        "c": "Egy égő gyufa"
+      },
+      "correct": "a",
+      "explanation": "Az elsődleges fényforrások saját fényt bocsátanak ki. A csillagok (mint a Nap) és az égő gyufa is ilyenek. A Hold azonban csak a Nap fényét veri vissza, ezért másodlagos fényforrás."
+    },
+    {
+      "question": "A macska szeme az éjszakában...",
+      "answers": {
+        "a": "...saját fényt termel, ezért elsődleges fényforrás.",
+        "b": "...visszaveri a ráeső csekély fényt, ezért másodlagos fényforrás.",
+        "c": "...nem is világít, ez csak mese."
+      },
+      "correct": "b",
+      "explanation": "A macska szemében van egy különleges réteg (tapetum lucidum), ami a legkisebb fénysugarakat is képes visszaverni, mint egy tükör. Ezért látszik úgy, mintha 'világítana' a szeme a sötétben."
+    },
+    {
+      "question": "Ha egy sötét szobában vagyunk, miért nem látunk semmit?",
+      "answers": {
+        "a": "Mert a szemünknek idő kell, hogy fényt termeljen.",
+        "b": "Mert nincsenek fényforrások, amikről a fény a szemünkbe juthatna.",
+        "c": "Mert a sötét elnyeli a látásunkat."
+      },
+      "correct": "b",
+      "explanation": "A látáshoz fény szükséges. Egy teljesen sötét szobában nincsenek sem elsődleges, sem másodlagos fényforrások, így nincs olyan fény, ami a szemünkbe juthatna."
+    },
+    {
+      "question": "Melyik a mesterséges, másodlagos fényforrás?",
+      "answers": {
+        "a": "Égő gyertya",
+        "b": "Egy útjelző tábla éjszaka, autó fényszórójában",
+        "c": "A Hold"
+      },
+      "correct": "b",
+      "explanation": "Az útjelző tábla emberi alkotás (mesterséges), és csak akkor látszik, ha az autó fényszórójának (elsődleges forrás) fényét visszaveri (másodlagos). Az égő gyertya elsődleges, a Hold pedig természetes."
+    },
+    {
+      "question": "Melyik csoportban van CSAK elsődleges fényforrás?",
+      "answers": {
+        "a": "Nap, villám, TV képernyő",
+        "b": "Hold, papírlap, tükör",
+        "c": "Nap, Hold, csillagok"
+      },
+      "correct": "a",
+      "explanation": "A Nap, a villám és a bekapcsolt TV képernyő is saját maguk bocsátanak ki fényt. A többi csoportban van másodlagos fényforrás is."
+    },
+    {
+      "question": "Az izzólámpa...",
+      "answers": {
+        "a": "...természetes fényforrás.",
+        "b": "...mesterséges, elsődleges fényforrás.",
+        "c": "...mesterséges, másodlagos fényforrás."
+      },
+      "correct": "b",
+      "explanation": "Az izzólámpa egy ember által készített eszköz, tehát mesterséges. Az elektromos áram hatására az izzószála felhevül és fényt bocsát ki, tehát elsődleges fényforrás."
+    },
+    {
+      "question": "Mi a fényforrás?",
+      "answers": {
+        "a": "Minden tárgy, ami meleg.",
+        "b": "Csak az elektromos eszközök.",
+        "c": "Minden olyan test, amely fényt bocsát ki vagy fényt ver vissza."
+      },
+      "correct": "c",
+      "explanation": "A fényforrás tágabb értelemben minden olyan test, amelyről fény jut a szemünkbe. Ez lehet azért, mert maga termeli a fényt (elsődleges), vagy azért, mert egy másik forrás fényét veri vissza (másodlagos)."
+    },
+    {
+      "question": "A Föld bolygó fényforrásként...",
+      "answers": {
+        "a": "...nem viselkedhet, mert sötét van rajta.",
+        "b": "...elsődleges, mert a városok fényei világítanak.",
+        "c": "...másodlagos, mert a Nap fényét veri vissza."
+      },
+      "correct": "c",
+      "explanation": "A Föld, mint égitest, a Naprendszer többi bolygójához hasonlóan a Nap fényét veri vissza. A világűrből nézve ezért látható, tehát másodlagos fényforrás."
+    },
+    {
+      "question": "Melyik a természetes, másodlagos fényforrás?",
+      "answers": {
+        "a": "A villám",
+        "b": "Egy égő tábortűz",
+        "c": "A Vénusz bolygó az esti égen"
+      },
+      "correct": "c",
+      "explanation": "A bolygók, mint a Vénusz, a természet részei. Nincs saját fénykibocsátásuk, a Nap fényét verik vissza, ezért láthatjuk őket az égen. Emiatt természetes, másodlagos fényforrások."
+    },
+    {
+      "question": "A parázsló szén...",
+      "answers": {
+        "a": "...nem fényforrás, mert csak hőt ad.",
+        "b": "...másodlagos fényforrás.",
+        "c": "...elsődleges fényforrás."
+      },
+      "correct": "c",
+      "explanation": "A magas hőmérsékletű, izzó testek fényt bocsátanak ki. A parázsló szén is ilyen, saját maga termeli a vöröses fényt, ezért elsődleges fényforrásnak számít."
+    },
+    {
+      "question": "Mi a különbség a természetes és a mesterséges fényforrás között?",
+      "answers": {
+        "a": "A természetes erősebben világít.",
+        "b": "A mesterséges emberi alkotás, a természetes a természetben jön létre.",
+        "c": "A természetes mindig elsődleges, a mesterséges mindig másodlagos."
+      },
+      "correct": "b",
+      "explanation": "A megkülönböztetés alapja a fényforrás eredete. Ha az emberi beavatkozás nélkül jön létre (pl. Nap, csillagok), akkor természetes. Ha ember készítette (pl. lámpa, gyertya), akkor mesterséges."
+    },
+    {
+      "question": "Melyik sor tartalmazza helyesen a példákat?",
+      "answers": {
+        "a": "Elsődleges: Hold; Másodlagos: Nap",
+        "b": "Természetes: Izzó; Mesterséges: Villám",
+        "c": "Elsődleges: Csillag; Másodlagos: Tükör"
+      },
+      "correct": "c",
+      "explanation": "A csillagok saját fényt bocsátanak ki (elsődleges), a tükör pedig a ráeső fényt veri vissza (másodlagos). A többi párosítás hibás."
+    },
+    {
+      "question": "Melyik állítás igaz a másodlagos fényforrásokra?",
+      "answers": {
+        "a": "Visszaverik a más forrásból érkező fényt.",
+        "b": "Saját maguk termelnek hőt és fényt.",
+        "c": "Mindig a természetben fordulnak elő."
+      },
+      "correct": "a",
+      "explanation": "A másodlagos fényforrásoknak nincs saját fénykibocsátásuk. Csak akkor válnak láthatóvá, ha egy elsődleges fényforrás megvilágítja őket, és ezt a fényt verik vissza a szemünkbe."
+    },
+    {
+      "question": "Melyik csoportban van CSAK másodlagos fényforrás?",
+      "answers": {
+        "a": "Tükör, Hold, villám",
+        "b": "Egy fehér fal, a Hold, a bolygók",
+        "c": "Zseblámpa, gyertya, Nap"
+      },
+      "correct": "b",
+      "explanation": "A fehér fal, a Hold és a bolygók mind a Nap (vagy más csillag) fényét verik vissza, tehát mind másodlagos fényforrások."
+    },
+    {
+      "question": "Egy fényesre polírozott fémgolyó a Napon...",
+      "answers": {
+        "a": "...elsődleges fényforrás.",
+        "b": "...nem fényforrás.",
+        "c": "...másodlagos fényforrás."
+      },
+      "correct": "c",
+      "explanation": "A fémgolyó nem termel saját fényt. A Nap (elsődleges fényforrás) sugarait azonban nagyon jól visszaveri, ezért fényesnek látjuk. Mivel csak visszaveri a fényt, másodlagos fényforrásnak minősül."
+    },
+    {
+      "question": "Melyik NEM fényforrás a felsoroltak közül?",
+      "answers": {
+        "a": "A Nap",
+        "b": "Egy fekete pulóver a sötét szobában",
+        "c": "Egy égő villanykörte"
+      },
+      "correct": "b",
+      "explanation": "A fényforrás fényt bocsát ki vagy ver vissza. Egy fekete pulóver a sötétben semmilyen fényt nem bocsát ki és nem is ver vissza, ezért ilyenkor nem tekinthető fényforrásnak."
+    },
+    {
+      "question": "A bekapcsolt mobiltelefon kijelzője...",
+      "answers": {
+        "a": "...természetes, elsődleges fényforrás.",
+        "b": "...mesterséges, másodlagos fényforrás.",
+        "c": "...mesterséges, elsődleges fényforrás."
+      },
+      "correct": "c",
+      "explanation": "A telefont az ember készítette, tehát mesterséges. A kijelzője saját maga állítja elő a fényt, amit látunk, tehát elsődleges fényforrás."
+    },
+    {
+      "question": "Melyik a természetes, elsődleges fényforrás?",
+      "answers": {
+        "a": "A Nap",
+        "b": "A Hold",
+        "c": "A tükör"
+      },
+      "correct": "a",
+      "explanation": "Az elsődleges fényforrások saját maguk termelnek fényt. A Nap egy természetes, elsődleges fényforrás. A Hold és a tükör másodlagos fényforrások."
+    },
+    {
+      "question": "Ahhoz, hogy egy tárgyat lássunk, mi szükséges?",
+      "answers": {
+        "a": "Hogy a tárgy színes legyen.",
+        "b": "Hogy a tárgy mozogjon.",
+        "c": "Fényforrás és ép látószerv."
+      },
+      "correct": "c",
+      "explanation": "A látás két alapvető feltétele, hogy legyen fény (amit egy fényforrás biztosít), és legyen egy működőképes érzékszerv (a szem), ami ezt a fényt képes érzékelni."
+    },
+    {
+      "question": "Mi a közös a gyertyában és a zseblámpában?",
+      "answers": {
+        "a": "Mindkettő mesterséges, elsődleges fényforrás.",
+        "b": "Mindkettő természetes fényforrás.",
+        "c": "Mindkettő másodlagos fényforrás."
+      },
+      "correct": "a",
+      "explanation": "Mind a gyertya (égés), mind a zseblámpa (izzó) saját maga állítja elő a fényt, tehát elsődleges fényforrások. Mivel emberi tevékenység hozta őket létre, ezért mesterségesek."
+    }
+  ]
 }

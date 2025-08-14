@@ -4,5 +4,236 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz elektromos toltes kolcsonhatas\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás igaz a semleges testekre?",
+      "answers": {
+        "a": "Ugyanannyi pozitív és negatív töltést tartalmaznak.",
+        "b": "Nincsenek bennük töltések.",
+        "c": "Csak pozitív töltéseket tartalmaznak."
+      },
+      "correct": "a",
+      "explanation": "Minden anyag atomokból áll, amelyek pozitív protonokat és negatív elektronokat tartalmaznak. Egy test akkor semleges, ha a benne lévő pozitív és negatív töltések száma megegyezik, így a hatásuk kiegyenlíti egymást."
+    },
+    {
+      "question": "Az elektrosztatika a...",
+      "answers": {
+        "a": "...nyugalomban lévő töltésekkel és kölcsönhatásaikkal foglalkozik.",
+        "b": "...mozgó töltésekkel (árammal) foglalkozik.",
+        "c": "...mágneses jelenségekkel foglalkozik."
+      },
+      "correct": "a",
+      "explanation": "Az elektrosztatika a fizika azon ága, amely a stacionárius, azaz nyugalomban lévő elektromos töltések által keltett jelenségeket vizsgálja."
+    },
+    {
+      "question": "Hogyan hat egymásra két negatív elektromos töltés?",
+      "answers": {
+        "a": "Vonzzák egymást.",
+        "b": "Nem hatnak egymásra.",
+        "c": "Taszítják egymást."
+      },
+      "correct": "c",
+      "explanation": "Az azonos nemű töltések taszítják egymást. Mivel mindkét töltés negatív, elektrosztatikus taszítóerő lép fel közöttük."
+    },
+    {
+      "question": "Melyik részecske a negatív elemi töltés hordozója?",
+      "answers": {
+        "a": "Elektron",
+        "b": "Proton",
+        "c": "Neutron"
+      },
+      "correct": "a",
+      "explanation": "Az atomban az elektronok negatív töltésűek. A protonok pozitívak, a neutronok pedig semlegesek. Az elektromos jelenségek többségéért az elektronok mozgása felelős."
+    },
+    {
+      "question": "Melyik állítás írja le a testek elektromos állapotát?",
+      "answers": {
+        "a": "Minden test csak pozitív lehet.",
+        "b": "Minden test csak negatív lehet.",
+        "c": "A testek lehetnek pozitív, negatív vagy semleges töltésűek."
+      },
+      "correct": "c",
+      "explanation": "Egy test elektromos állapota a benne lévő pozitív és negatív töltések arányától függ. Ha a pozitív van többségben, a test pozitív. Ha a negatív, akkor negatív. Ha egyenlő a számuk, a test semleges."
+    },
+    {
+      "question": "Mi a neve annak a jelenségnek, amikor dörzsöléssel töltéseket választunk szét?",
+      "answers": {
+        "a": "Mágneses indukció",
+        "b": "Dörzselektromosság",
+        "c": "Fénytörés"
+      },
+      "correct": "b",
+      "explanation": "A dörzselektromosság során két különböző anyag összedörzsölésével elektronok vándorolnak át az egyikről a másikra, így mindkét test elektromosan töltötté válik."
+    },
+    {
+      "question": "Melyik részecske a pozitív elemi töltés hordozója?",
+      "answers": {
+        "a": "Elektron",
+        "b": "Proton",
+        "c": "Neutron"
+      },
+      "correct": "b",
+      "explanation": "Az atommagban található protonok hordozzák a pozitív elemi töltést. Az elektronok negatívok, a neutronok semlegesek."
+    },
+    {
+      "question": "Hogyan hat egy töltött test egy semleges testre?",
+      "answers": {
+        "a": "Mindig taszítja.",
+        "b": "Mindig vonzza.",
+        "c": "Nem hat rá."
+      },
+      "correct": "b",
+      "explanation": "A töltött test a semleges testben elektromos megosztást hoz létre. Az ellentétes nemű töltések közelebb kerülnek a töltött testhez, az azonos neműek távolabb. Mivel a vonzóerő kisebb távolságon erősebb, az eredő hatás mindig vonzás lesz."
+    },
+    {
+      "question": "Mi az elektromos megosztás?",
+      "answers": {
+        "a": "Amikor egy külső töltött test hatására egy vezetőben szétválnak a pozitív és negatív töltések.",
+        "b": "Amikor egy testet kettévágunk.",
+        "c": "Az áramkör elágazása."
+      },
+      "correct": "a",
+      "explanation": "Ha egy töltött testet egy semleges vezető közelébe viszünk, a vezetőben lévő mozgékony töltések elmozdulnak. Az ellentétes nemű töltések a vonzás miatt közelebb, az azonos neműek a taszítás miatt távolabb kerülnek."
+    },
+    {
+      "question": "Hogyan hat egymásra két pozitív elektromos töltés?",
+      "answers": {
+        "a": "Taszítják egymást.",
+        "b": "Vonzzák egymást.",
+        "c": "Nem hatnak egymásra."
+      },
+      "correct": "a",
+      "explanation": "Az elektrosztatika alaptörvénye szerint az azonos nemű töltések (pozitív-pozitív, negatív-negatív) taszítják egymást."
+    },
+    {
+      "question": "Mi a töltésmegmaradás törvénye?",
+      "answers": {
+        "a": "Zárt rendszerben az elektromos töltések előjeles összege állandó.",
+        "b": "A töltések soha nem mozoghatnak.",
+        "c": "Minden test semleges."
+      },
+      "correct": "a",
+      "explanation": "A töltésmegmaradás egy alapvető fizikai törvény. Azt jelenti, hogy töltést nem lehet létrehozni vagy megsemmisíteni, csak szétválasztani vagy átrendezni."
+    },
+    {
+      "question": "Milyen töltésű lesz egy test, ha elektronokat vesz fel?",
+      "answers": {
+        "a": "Pozitív",
+        "b": "Negatív",
+        "c": "Semleges"
+      },
+      "correct": "b",
+      "explanation": "Mivel az elektronok negatív töltésűek, ha egy semleges test elektronokat vesz fel, akkor negatív töltéstöbblete lesz, tehát a test negatív töltésűvé válik."
+    },
+    {
+      "question": "Melyik a jó elektromos szigetelő?",
+      "answers": {
+        "a": "Vas",
+        "b": "Porcelán",
+        "c": "Alumínium"
+      },
+      "correct": "b",
+      "explanation": "A szigetelők olyan anyagok, amelyekben a töltések nagyon nehezen mozdulnak el. A porcelán, üveg, gumi, műanyagok jó szigetelők. A vas és az alumínium fémek, tehát vezetők."
+    },
+    {
+      "question": "Mi az elektroszkóp?",
+      "answers": {
+        "a": "Áramforrás.",
+        "b": "Eszköz elektromos töltés kimutatására.",
+        "c": "Töltésmérő műszer."
+      },
+      "correct": "b",
+      "explanation": "Az elektroszkóp egy egyszerű eszköz, amellyel megállapíthatjuk, hogy egy test elektromosan töltött-e. A mutató kitérésének mértéke utal a töltés nagyságára."
+    },
+    {
+      "question": "Hogyan hat egymásra egy pozitív és egy negatív töltés?",
+      "answers": {
+        "a": "Taszítják egymást.",
+        "b": "Vonzzák egymást.",
+        "c": "Nem hatnak egymásra."
+      },
+      "correct": "b",
+      "explanation": "Az elektrosztatika alaptörvénye szerint az ellentétes nemű töltések (pozitív és negatív) mindig vonzzák egymást."
+    },
+    {
+      "question": "Milyen töltésű lesz egy test, ha elektronokat ad le?",
+      "answers": {
+        "a": "Pozitív",
+        "b": "Negatív",
+        "c": "Semleges"
+      },
+      "correct": "a",
+      "explanation": "Az elektronok negatív töltésűek. Ha egy test elveszít elektronokat, benne a pozitív töltésű protonok kerülnek többségbe, így a test eredő töltése pozitív lesz."
+    },
+    {
+      "question": "Hogyan lehet egy testet leföldelni?",
+      "answers": {
+        "a": "Ha vízzel lemossuk.",
+        "b": "Ha eltemetjük a földbe.",
+        "c": "Ha egy vezetővel összekötjük a Földdel."
+      },
+      "correct": "c",
+      "explanation": "A Föld egy óriási vezető, amely képes befogadni vagy leadni szinte bármennyi töltést. Ha egy töltött testet egy vezetővel összekötünk a Földdel, a töltéstöbblet elvezetődik, és a test semlegessé válik."
+    },
+    {
+      "question": "Melyik NEM jó elektromos vezető?",
+      "answers": {
+        "a": "Sós víz",
+        "b": "Ezüst",
+        "c": "Száraz fa"
+      },
+      "correct": "c",
+      "explanation": "Az ezüst az egyik legjobb fémvezető. A sós víz az ionok mozgása miatt vezeti az áramot. A száraz fa viszont nagyon kevés mozgékony töltést tartalmaz, ezért szigetelő."
+    },
+    {
+      "question": "Az elektromos töltés mértékegysége az SI rendszerben a...",
+      "answers": {
+        "a": "...volt (V).",
+        "b": "...coulomb (C).",
+        "c": "...amper (A)."
+      },
+      "correct": "b",
+      "explanation": "Az elektromos töltés mértékegysége a coulomb, jele C. A volt a feszültség, az amper az áramerősség mértékegysége."
+    },
+    {
+      "question": "Mi az elemi töltés?",
+      "answers": {
+        "a": "A neutron töltése.",
+        "b": "A legkisebb létező elektromos töltésmennyiség, amit a protonok és elektronok hordoznak.",
+        "c": "A coulomb egy másik neve."
+      },
+      "correct": "b",
+      "explanation": "Az elemi töltés a természetben előforduló legkisebb töltésadag, értéke kb. 1,6 * 10⁻¹⁹ C. A proton töltése +1, az elektroné -1 elemi töltés."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Léteznek pozitív és negatív töltések.",
+        "b": "A pozitív töltések vonzzák a pozitív töltéseket.",
+        "c": "A töltésmegmaradás törvénye érvényes."
+      },
+      "correct": "b",
+      "explanation": "Ez az állítás hamis. Az azonos nemű töltések (pozitív-pozitív) taszítják egymást."
+    },
+    {
+      "question": "Mitől függ az elektromos kölcsönhatás erőssége?",
+      "answers": {
+        "a": "Csak a töltések nagyságától.",
+        "b": "Csak a töltések távolságától.",
+        "c": "A töltések nagyságától és a távolságuktól is."
+      },
+      "correct": "c",
+      "explanation": "Coulomb törvénye szerint az elektromos erő egyenesen arányos a töltések nagyságának szorzatával, és fordítottan arányos a távolságuk négyzetével."
+    },
+    {
+      "question": "A töltések...",
+      "answers": {
+        "a": "...csak vonzhatják egymást.",
+        "b": "...csak taszíthatják egymást.",
+        "c": "...vonzhatják és taszíthatják is egymást."
+      },
+      "correct": "c",
+      "explanation": "Az elektromos kölcsönhatás kétirányú: az azonos nemű töltések taszítják, az ellentétes neműek pedig vonzzák egymást."
+    }
+  ]
 }

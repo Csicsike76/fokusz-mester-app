@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz elektromos munka teljesitmeny\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a Joule-hő?",
+      "answers": {
+        "a": "Az a hőmennyiség, ami egy vezetőben az elektromos áram hatására fejlődik.",
+        "b": "A hő mértékegysége.",
+        "c": "A fűtőanyagok energiája."
+      },
+      "correct": "a",
+      "explanation": "Amikor egy vezetőn áram folyik át, annak ellenállása miatt a vezető felmelegszik. Az így keletkező hőt nevezzük Joule-hőnek. Ez az elektromos fűtőberendezések működésének alapja."
+    },
+    {
+      "question": "Hogyan számítható ki a fogyasztón végzett elektromos munka?",
+      "answers": {
+        "a": "W = U * I * t",
+        "b": "W = U / I",
+        "c": "W = R * t"
+      },
+      "correct": "a",
+      "explanation": "Az elektromos munka (W) a fogyasztón eső feszültség (U), a rajta átfolyó áram erősségének (I) és a működési időnek (t) a szorzata."
+    },
+    {
+      "question": "Melyik állítás igaz az elektromos munkára?",
+      "answers": {
+        "a": "Az elektromos mező munkavégzése a töltéseken.",
+        "b": "Csak a feszültségtől függ.",
+        "c": "Nincs mértékegysége."
+      },
+      "correct": "a",
+      "explanation": "Az elektromos munka az az energia, amit az elektromos mező a töltések mozgatására fordít az áramkörben. Ez az energia alakul át a fogyasztón másfajta energiává."
+    },
+    {
+      "question": "Egy 100 W teljesítményű izzó 10 másodpercig működik. Mennyi munkát végez?",
+      "answers": {
+        "a": "1000 J",
+        "b": "10 J",
+        "c": "0,1 J"
+      },
+      "correct": "a",
+      "explanation": "A munkát a teljesítmény és az idő szorzataként kapjuk: W = P * t. Behelyettesítve: W = 100 W * 10 s = 1000 J."
+    },
+    {
+      "question": "Egy 2300 W-os vízforraló 230 V-os hálózatról működik. Mekkora áramot vesz fel?",
+      "answers": {
+        "a": "1 A",
+        "b": "10 A",
+        "c": "100 A"
+      },
+      "correct": "b",
+      "explanation": "A P = U * I képletből az áramerősség I = P / U. Behelyettesítve: I = 2300 W / 230 V = 10 A."
+    },
+    {
+      "question": "Mi az elektromos teljesítmény mértékegysége?",
+      "answers": {
+        "a": "Joule (J)",
+        "b": "Watt (W)",
+        "c": "Volt (V)"
+      },
+      "correct": "b",
+      "explanation": "Az elektromos teljesítmény, mint minden teljesítmény, mértékegysége az SI rendszerben a watt."
+    },
+    {
+      "question": "Egy 230 V-os hálózatra kapcsolt fogyasztón 2 A áram folyik. Mekkora a teljesítménye?",
+      "answers": {
+        "a": "115 W",
+        "b": "460 W",
+        "c": "232 W"
+      },
+      "correct": "b",
+      "explanation": "A teljesítmény a feszültség és az áramerősség szorzata: P = U * I = 230 V * 2 A = 460 W."
+    },
+    {
+      "question": "Egy 10 V feszültségű áramkörben 2 A áram folyik 5 másodpercig. Mennyi munkát végez az áram?",
+      "answers": {
+        "a": "100 J",
+        "b": "20 J",
+        "c": "4 J"
+      },
+      "correct": "a",
+      "explanation": "A munka képlete: W = U * I * t. Behelyettesítve: W = 10 V * 2 A * 5 s = 100 J."
+    },
+    {
+      "question": "Miért melegszik fel a telefon töltője használat közben?",
+      "answers": {
+        "a": "Mert túl régi.",
+        "b": "Mert a Nap melegíti.",
+        "c": "Az áram hőhatása (Joule-hő) miatt."
+      },
+      "correct": "c",
+      "explanation": "A töltőben lévő alkatrészeknek van elektromos ellenállása. Az áram áthaladásakor ezeken az alkatrészeken az energia egy része hővé alakul, ez a Joule-hő. Ez normális jelenség."
+    },
+    {
+      "question": "Egy fogyasztó teljesítménye 2 kW. Hány watt ez?",
+      "answers": {
+        "a": "20 W",
+        "b": "200 W",
+        "c": "2000 W"
+      },
+      "correct": "c",
+      "explanation": "A 'kilo-' prefixum ezerszerest jelent. 2 kilowatt = 2 * 1000 watt = 2000 watt."
+    },
+    {
+      "question": "Hogyan számítható ki a fogyasztó elektromos teljesítménye?",
+      "answers": {
+        "a": "P = U / I",
+        "b": "P = U * I",
+        "c": "P = I / U"
+      },
+      "correct": "b",
+      "explanation": "Az elektromos teljesítmény (P) a fogyasztón eső feszültség (U) és a rajta átfolyó áram erősségének (I) szorzata."
+    },
+    {
+      "question": "Mi a különbség a munka és a teljesítmény között?",
+      "answers": {
+        "a": "Nincs különbség, ugyanazt jelentik.",
+        "b": "A munka az energia, a teljesítmény az erő.",
+        "c": "A munka az energiaváltozás, a teljesítmény a munkavégzés sebessége."
+      },
+      "correct": "c",
+      "explanation": "A munka (Joule) azt méri, mennyi energia alakult át. A teljesítmény (Watt) azt méri, hogy ez az átalakulás milyen gyorsan, mennyi idő alatt történt."
+    },
+    {
+      "question": "Melyik fogyasztó alakítja az elektromos energiát főként hővé?",
+      "answers": {
+        "a": "Vasaló",
+        "b": "Villanymotor",
+        "c": "Hangszóró"
+      },
+      "correct": "a",
+      "explanation": "A vasalóban egy nagy ellenállású fűtőszál található, amelynek kifejezetten az a célja, hogy az átfolyó áram elektromos energiáját a lehető leghatékonyabban hőenergiává alakítsa."
+    },
+    {
+      "question": "Melyik állítás igaz a villanyszámlára?",
+      "answers": {
+        "a": "A teljesítményt fizetjük ki.",
+        "b": "Az áramerősséget fizetjük ki.",
+        "c": "Az elhasznált elektromos energiát (munkát) fizetjük ki."
+      },
+      "correct": "c",
+      "explanation": "A villanyszámlán a fogyasztásmérő által mért, kilowattórában (kWh) kifejezett elektromos energiát (munkát) kell kifizetnünk, nem pedig a készülékek teljesítményét."
+    },
+    {
+      "question": "Mi a teljesítmény?",
+      "answers": {
+        "a": "Az egységnyi idő alatt végzett munka.",
+        "b": "Az elvégzett munka.",
+        "c": "Az áramerősség mértéke."
+      },
+      "correct": "a",
+      "explanation": "A teljesítmény a munkavégzés sebességét, ütemét jellemzi. Azt mutatja meg, mennyi munkát végez a berendezés egy másodperc alatt."
+    },
+    {
+      "question": "Egy fogyasztó teljesítménye 50 W. Ez mit jelent?",
+      "answers": {
+        "a": "A fogyasztó 50 Joule munkát végez.",
+        "b": "A fogyasztó ellenállása 50 Ohm.",
+        "c": "A fogyasztó másodpercenként 50 Joule munkát végez."
+      },
+      "correct": "c",
+      "explanation": "A watt definíciója 1 joule per másodperc (1 W = 1 J/s). Tehát az 50 W-os teljesítmény azt jelenti, hogy a fogyasztó minden másodpercben 50 J elektromos energiát alakít át."
+    },
+    {
+      "question": "Melyik eszközön NEM a Joule-hő jelenségét hasznosítjuk elsősorban?",
+      "answers": {
+        "a": "Hajszárító",
+        "b": "Vízforraló",
+        "c": "LED lámpa"
+      },
+      "correct": "c",
+      "explanation": "A hajszárító és a vízforraló fűtőszálakat tartalmaz, amelyek célja a hőtermelés. A LED lámpa ezzel szemben az elektromos energiát nagyon jó hatásfokkal, csekély hőtermelés mellett alakítja fénnyé."
+    },
+    {
+      "question": "Hogyan függ a vezetőben fejlődő Joule-hő az áramerősségtől?",
+      "answers": {
+        "a": "Egyenesen arányos.",
+        "b": "Fordítottan arányos.",
+        "c": "Az áramerősség négyzetével arányos."
+      },
+      "correct": "c",
+      "explanation": "Joule törvénye szerint a fejlődő hő arányos az áramerősség négyzetével (I²). Ez azt jelenti, hogy ha az áramot megduplázzuk, a hőtermelés a négyszeresére nő."
+    },
+    {
+      "question": "Joule törvénye szerint a vezetőben fejlődő hő...",
+      "answers": {
+        "a": "...fordítottan arányos az áramerősség négyzetével.",
+        "b": "...egyenesen arányos az áramerősség négyzetével és az ellenállással.",
+        "c": "...nem függ az ellenállástól."
+      },
+      "correct": "b",
+      "explanation": "Joule törvénye kimondja, hogy a vezetőben fejlődő hő (W vagy Q) egyenesen arányos a vezető ellenállásával (R), a benne folyó áram erősségének négyzetével (I²) és az áramfolyás idejével (t)."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A teljesítmény mértékegysége a watt.",
+        "b": "A munka mértékegysége a joule.",
+        "c": "Az elektromos munka és a feszültség ugyanaz."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. Az elektromos munka a töltéseken végzett munka, mértékegysége a joule. A feszültség az egységnyi töltésen végzett munka, mértékegysége a volt."
+    },
+    {
+      "question": "Két különböző, 230 V-ra készült izzó közül melyiken folyik át nagyobb áram?",
+      "answers": {
+        "a": "A kisebb teljesítményűn.",
+        "b": "A nagyobb teljesítményűn.",
+        "c": "Ugyanakkora áram folyik mindkettőn."
+      },
+      "correct": "b",
+      "explanation": "A P = U * I képletből I = P / U. Mivel a feszültség (U) mindkét izzónál azonos (230 V), az áramerősség (I) ott lesz nagyobb, ahol a teljesítmény (P) is nagyobb."
+    },
+    {
+      "question": "Melyik izzó világít fényesebben?",
+      "answers": {
+        "a": "A 40 W-os.",
+        "b": "A 100 W-os.",
+        "c": "Egyformán."
+      },
+      "correct": "b",
+      "explanation": "A wattban megadott érték a teljesítményt jelöli. A nagyobb teljesítményű izzó másodpercenként több elektromos energiát alakít át fénnyé (és hővé), ezért fényesebben világít."
+    },
+    {
+      "question": "Miért van a fűtőberendezésekben (pl. hajszárító) nagy ellenállású fűtőszál?",
+      "answers": {
+        "a": "Mert az olcsóbb.",
+        "b": "Mert Joule törvénye szerint a nagy ellenálláson fejlődik a legtöbb hő.",
+        "c": "Mert a kis ellenállás veszélyes."
+      },
+      "correct": "b",
+      "explanation": "Az áram hőhatása (Joule-hő) arányos az ellenállással. A fűtőberendezésekben szándékosan nagy ellenállású anyagokat használnak, hogy az átfolyó áram minél több hőt termeljen."
+    },
+    {
+      "question": "Mi az elektromos munka mértékegysége?",
+      "answers": {
+        "a": "Joule (J)",
+        "b": "Watt (W)",
+        "c": "Amper (A)"
+      },
+      "correct": "a",
+      "explanation": "Az elektromos munka, mint minden munka és energia, mértékegysége az SI rendszerben a joule. A watt a teljesítmény, az amper az áramerősség mértékegysége."
+    },
+    {
+      "question": "Mi a kilowattóra (kWh)?",
+      "answers": {
+        "a": "A teljesítmény mértékegysége.",
+        "b": "Az elektromos munka (energia) mértékegysége.",
+        "c": "Az áramerősség mértékegysége."
+      },
+      "correct": "b",
+      "explanation": "A kilowattóra a háztartásokban az elfogyasztott elektromos energia mérésére használt egység. 1 kWh az az energia, amit egy 1 kW teljesítményű fogyasztó 1 óra alatt használ el."
+    }
+  ]
 }

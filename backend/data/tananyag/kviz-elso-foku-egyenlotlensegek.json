@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz elso foku egyenlotlensegek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik x oldja meg: 2(x+1) ≤ 4?",
+      "answers": {
+        "a": "x ≤ 1",
+        "b": "x ≥ 1",
+        "c": "x = 1"
+      },
+      "correct": "a",
+      "explanation": "Először bontsuk fel a zárójelet: 2x+2 ≤ 4. Vonjunk ki 2-t mindkét oldalból: 2x ≤ 2. Végül osszunk 2-vel: x ≤ 1."
+    },
+    {
+      "question": "Megoldás: −4x + 8 ≤ 0.",
+      "answers": {
+        "a": "x ≤ 2",
+        "b": "x ≥ 2",
+        "c": "x ≥ −2"
+      },
+      "correct": "b",
+      "explanation": "Vonjunk ki 8-at mindkét oldalból: -4x ≤ -8. Osszunk -4-gyel. Mivel negatív számmal osztunk, a relációs jel megfordul: x ≥ 2."
+    },
+    {
+      "question": "Oldd meg: −6x + 12 ≤ 0.",
+      "answers": {
+        "a": "x ≥ 2",
+        "b": "x ≤ 2",
+        "c": "x ≤ −2"
+      },
+      "correct": "a",
+      "explanation": "Vonjunk ki 12-t mindkét oldalból: -6x ≤ -12. Osszunk -6-tal. Mivel negatív számmal osztunk, a relációs jel megfordul: x ≥ 2."
+    },
+    {
+      "question": "Melyik a megoldása: 0·x − 3 ≤ 0?",
+      "answers": {
+        "a": "nincs megoldás",
+        "b": "minden x",
+        "c": "csak x=0"
+      },
+      "correct": "b",
+      "explanation": "A bal oldalon a 0*x mindig 0, bármi is legyen az x. Így az egyenlőtlenség -3 ≤ 0. Mivel ez az állítás mindig igaz, az eredeti egyenlőtlenség is igaz minden x-re."
+    },
+    {
+      "question": "Oldd meg: −2(x+3) ≤ 4?",
+      "answers": {
+        "a": "x ≥ −5",
+        "b": "x ≤ −5",
+        "c": "x ≥ −1"
+      },
+      "correct": "a",
+      "explanation": "Bontsuk fel a zárójelet: -2x−6 ≤ 4. Adjunk hozzá 6-ot: -2x ≤ 10. Osszunk -2-vel, a relációs jel megfordul: x ≥ -5."
+    },
+    {
+      "question": "Megoldás: −2x + 6 ≤ 0.",
+      "answers": {
+        "a": "x ≤ 3",
+        "b": "x ≥ 3",
+        "c": "x ≥ 3"
+      },
+      "correct": "c",
+      "explanation": "Vonjunk ki 6-ot mindkét oldalból: -2x ≤ -6. Osszunk -2-vel. Mivel negatív számmal osztunk, a relációs jel megfordul: x ≥ 3."
+    },
+    {
+      "question": "Oldd meg a 2x + 3 ≤ 0 egyenlőtlenséget.",
+      "answers": {
+        "a": "x ≤ −3/2",
+        "b": "x ≤ −1.5",
+        "c": "x ≥ 1.5"
+      },
+      "correct": "b",
+      "explanation": "Vonjunk ki 3-at mindkét oldalból: 2x ≤ -3. Osszunk 2-vel: x ≤ -3/2, ami tizedes törtben -1.5."
+    },
+    {
+      "question": "Ha ax + b ≤ 0, mi történik, ha a negatív?",
+      "answers": {
+        "a": "Nem változik",
+        "b": "Az eredmény mindig nulla",
+        "c": "Megfordul az egyenlőtlenség iránya"
+      },
+      "correct": "c",
+      "explanation": "Az egyenlőtlenségek rendezésének fontos szabálya, hogy ha negatív számmal szorzunk vagy osztunk, a relációs jel (<, >) iránya megfordul."
+    },
+    {
+      "question": "Oldd meg: −3(x−2) ≤ 6.",
+      "answers": {
+        "a": "x ≤ 0",
+        "b": "x ≥ 0",
+        "c": "x ≥ 4"
+      },
+      "correct": "b",
+      "explanation": "Bontsuk fel a zárójelet: -3x+6 ≤ 6. Vonjunk ki 6-ot mindkét oldalból: -3x ≤ 0. Osszunk -3-mal, a relációs jel megfordul: x ≥ 0."
+    },
+    {
+      "question": "Oldd meg: 5x + 0 ≤ 0.",
+      "answers": {
+        "a": "x ≤ 0",
+        "b": "x ≥ 0",
+        "c": "x = 0"
+      },
+      "correct": "a",
+      "explanation": "Az egyenlőtlenség 5x ≤ 0. Ha mindkét oldalt elosztjuk 5-tel (ami pozitív szám), a relációs jel nem változik: x ≤ 0."
+    },
+    {
+      "question": "Megoldás: 0·x + 0 ≤ 0?",
+      "answers": {
+        "a": "nincs megoldás",
+        "b": "minden x",
+        "c": "csak x=0"
+      },
+      "correct": "b",
+      "explanation": "A bal oldalon 0*x+0 az mindig 0, bármi is legyen az x. Így az egyenlőtlenség 0 ≤ 0. Mivel ez az állítás igaz, az eredeti egyenlőtlenség is igaz minden x-re."
+    },
+    {
+      "question": "Ha a = 0, akkor ax + b ≤ 0:",
+      "answers": {
+        "a": "megoldása a b ≤ 0 feltételtől függ, x bármi lehet",
+        "b": "megoldása x ≤ −b/a",
+        "c": "nincs értelmezve"
+      },
+      "correct": "a",
+      "explanation": "Ha a=0, az egyenlőtlenség 0*x + b ≤ 0, vagyis b ≤ 0. Ha ez az állítás igaz (pl. b=-2), akkor minden x megoldás. Ha hamis (pl. b=5), akkor nincs megoldás. Az x-től nem függ a megoldás."
+    },
+    {
+      "question": "Oldd meg: x ≤ 2x + 1.",
+      "answers": {
+        "a": "x ≥ −1",
+        "b": "x ≤ −1",
+        "c": "x ≥ 1"
+      },
+      "correct": "a",
+      "explanation": "Vonjunk ki 2x-et mindkét oldalból: x - 2x ≤ 1, ami -x ≤ 1. Szorozzunk -1-gyel, a relációs jel megfordul: x ≥ -1."
+    },
+    {
+      "question": "Melyik a megoldása: 2x − 4 ≤ 2?",
+      "answers": {
+        "a": "x ≤ 3",
+        "b": "x ≥ 3",
+        "c": "x ≤ −3"
+      },
+      "correct": "a",
+      "explanation": "Adjunk 4-et mindkét oldalhoz: 2x ≤ 6. Osszunk 2-vel: x ≤ 3."
+    },
+    {
+      "question": "Melyik megoldást írja helyesen: 6 − x ≤ 2?",
+      "answers": {
+        "a": "x ≤ 4",
+        "b": "x ≥ 4",
+        "c": "x ≤ −4"
+      },
+      "correct": "b",
+      "explanation": "Először vonjunk ki 6-ot mindkét oldalból: -x ≤ -4. Most szorozzunk -1-gyel, emiatt a relációs jel megfordul: x ≥ 4."
+    },
+    {
+      "question": "Oldd meg az 3x − 9 ≤ 0 egyenlőtlenséget.",
+      "answers": {
+        "a": "x ≤ 3",
+        "b": "x ≥ 3",
+        "c": "x ≤ −3"
+      },
+      "correct": "a",
+      "explanation": "Adjunk 9-et mindkét oldalhoz: 3x ≤ 9. Osszunk 3-mal: x ≤ 3."
+    },
+    {
+      "question": "Megoldás: 5x + 10 ≤ 10?",
+      "answers": {
+        "a": "x ≥ 0",
+        "b": "x = 0",
+        "c": "x ≤ 0"
+      },
+      "correct": "c",
+      "explanation": "Vonjunk ki 10-et mindkét oldalból: 5x ≤ 0. Osszunk 5-tel: x ≤ 0."
+    },
+    {
+      "question": "Megoldás: 4(x−1) ≤ 0?",
+      "answers": {
+        "a": "x ≥ 1",
+        "b": "x ≤ 1",
+        "c": "x = 1"
+      },
+      "correct": "b",
+      "explanation": "Osszuk el mindkét oldalt 4-gyel: x-1 ≤ 0. Adjunk hozzá 1-et: x ≤ 1."
+    },
+    {
+      "question": "Oldd meg: −x + 2 ≤ 4.",
+      "answers": {
+        "a": "x ≥ 2",
+        "b": "x ≤ −2",
+        "c": "x ≥ −2"
+      },
+      "correct": "c",
+      "explanation": "Vonjunk ki 2-t mindkét oldalból: -x ≤ 2. Szorozzunk -1-gyel, a relációs jel megfordul: x ≥ -2."
+    },
+    {
+      "question": "Megoldás: −x + 5 ≤ 0.",
+      "answers": {
+        "a": "x ≤ 5",
+        "b": "x ≥ 5",
+        "c": "x ≥ 5"
+      },
+      "correct": "c",
+      "explanation": "Vonjunk ki 5-öt mindkét oldalból: -x ≤ -5. Szorozzunk -1-gyel. Mivel negatív számmal szorzunk, a relációs jel megfordul: x ≥ 5."
+    },
+    {
+      "question": "Ha x ≤ −2 és x ≤ 3, mi igaz?",
+      "answers": {
+        "a": "x ≤ 3",
+        "b": "x ≥ −2",
+        "c": "x ≤ −2"
+      },
+      "correct": "c",
+      "explanation": "Olyan számokat keresünk, amelyek egyszerre kisebbek vagy egyenlőek -2-nél, ÉS kisebbek vagy egyenlőek 3-nál. A két feltétel közül a szigorúbbnak kell teljesülnie, ami az x ≤ -2."
+    },
+    {
+      "question": "Az x + 5 ≤ 5 egyenlőtlenség megoldása:",
+      "answers": {
+        "a": "x ≥ 0",
+        "b": "x = 0",
+        "c": "x ≤ 0"
+      },
+      "correct": "c",
+      "explanation": "Vonjunk ki 5-öt mindkét oldalból: x ≤ 0."
+    },
+    {
+      "question": "Oldd meg: −3x + 0 ≤ 6.",
+      "answers": {
+        "a": "x ≤ −2",
+        "b": "x ≥ 2",
+        "c": "x ≥ −2"
+      },
+      "correct": "c",
+      "explanation": "Az egyenlőtlenség -3x ≤ 6. Osszunk -3-mal. Mivel negatív számmal osztunk, a relációs jel megfordul: x ≥ -2."
+    },
+    {
+      "question": "Megoldás: 4x + 2 ≤ 2.",
+      "answers": {
+        "a": "x ≤ 0",
+        "b": "x ≤ 0",
+        "c": "x ≥ 0"
+      },
+      "correct": "b",
+      "explanation": "Vonjunk ki 2-t mindkét oldalból: 4x ≤ 0. Osszunk 4-gyel: x ≤ 0."
+    },
+    {
+      "question": "Melyik a megoldása: 0·x + 5 ≤ 0?",
+      "answers": {
+        "a": "x ≤ −5",
+        "b": "nincs megoldás",
+        "c": "minden x"
+      },
+      "correct": "b",
+      "explanation": "A bal oldalon a 0*x mindig 0, bármi is legyen az x. Így az egyenlőtlenség 5 ≤ 0. Mivel ez az állítás soha nem igaz, az eredeti egyenlőtlenségnek sincs megoldása."
+    }
+  ]
 }

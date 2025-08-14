@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz fenytores\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A fénytöréskor a fény iránya megváltozik.",
+        "b": "A fénytöréskor a fény sebessége megváltozik.",
+        "c": "A fénytöréskor a fény színe mindig megváltozik."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. A fénytörés során a fény frekvenciája (és így a színe) nem változik meg, csak a sebessége és a hullámhossza. Színváltozás (színekre bontás) csak akkor történik, ha összetett, pl. fehér fényről van szó."
+    },
+    {
+      "question": "Mi a törési szög?",
+      "answers": {
+        "a": "A megtört fénysugár és a felület szöge.",
+        "b": "A beeső fénysugár és a megtört fénysugár szöge.",
+        "c": "A megtört fénysugár és a beesési merőleges szöge."
+      },
+      "correct": "c",
+      "explanation": "A törési szöget a megtört fénysugár és a beesési merőleges között mérjük, a határfelület másik oldalán."
+    },
+    {
+      "question": "Milyen lencsével lehet a rövidlátást javítani?",
+      "answers": {
+        "a": "Domború lencsével.",
+        "b": "Sík-domború lencsével.",
+        "c": "Homorú (szóró) lencsével."
+      },
+      "correct": "c",
+      "explanation": "A rövidlátó szem a fénysugarakat a retina előtt fókuszálja. A homorú (szóró) lencse kissé szétszórja a beérkező fénysugarakat, így a szemlencse már a megfelelő helyre, a retinára tudja fókuszálni a képet."
+    },
+    {
+      "question": "Mekkora egy, a síkra merőleges egyenes hajlásszöge a síkhoz?",
+      "answers": {
+        "a": "90°",
+        "b": "0°",
+        "c": "45°"
+      },
+      "correct": "a",
+      "explanation": "A síkra merőleges egyenes vetülete a síkon egyetlen pont. A definíció szerint ilyenkor a hajlásszöget 90°-nak tekintjük."
+    },
+    {
+      "question": "Mi egy, a síkkal párhuzamos szakasz merőleges vetülete a síkon?",
+      "answers": {
+        "a": "egy rövidebb szakasz",
+        "b": "egy, az eredetivel egyenlő hosszúságú szakasz",
+        "c": "egy pont"
+      },
+      "correct": "b",
+      "explanation": "Ha a szakasz párhuzamos a síkkal, akkor a vetítés során nem 'rövidül'. A vetület hossza pontosan megegyezik az eredeti szakasz hosszával."
+    },
+    {
+      "question": "Melyik jelenség kapcsolódik a fénytöréshez?",
+      "answers": {
+        "a": "A szivárvány kialakulása.",
+        "b": "A holdfogyatkozás.",
+        "c": "Egy tárgy árnyéka."
+      },
+      "correct": "a",
+      "explanation": "A szivárvány a napfény esőcseppeken való fénytörésének és színekre bomlásának (diszperzió) gyönyörű példája."
+    },
+    {
+      "question": "Ha a fény levegőből vízbe lép, a törési merőlegeshez képest hogyan változik az iránya?",
+      "answers": {
+        "a": "A merőlegeshez közelebb törik.",
+        "b": "A merőlegestől távolabb törik.",
+        "c": "Iránya nem változik."
+      },
+      "correct": "a",
+      "explanation": "A víz optikailag sűrűbb közeg, mint a levegő, ezért a fény lelassul benne. Amikor a fény ritkább közegből sűrűbbe lép, mindig a beesési merőlegeshez törik."
+    },
+    {
+      "question": "Melyik állítás igaz a fénytörésre?",
+      "answers": {
+        "a": "Minden felületen bekövetkezik.",
+        "b": "Két különböző átlátszó közeg határán jön létre.",
+        "c": "Csak a tükrökre jellemző."
+      },
+      "correct": "b",
+      "explanation": "A fénytörés feltétele, hogy a fény áthaladjon egy olyan határfelületen, amely két különböző optikai sűrűségű, átlátszó közeget választ el egymástól."
+    },
+    {
+      "question": "Mi az 'optikailag sűrűbb' közeg?",
+      "answers": {
+        "a": "Amelyiknek nagyobb a tömege.",
+        "b": "Amelyik jobban visszaveri a fényt.",
+        "c": "Amelyikben a fény lassabban terjed (nagyobb a törésmutatója)."
+      },
+      "correct": "c",
+      "explanation": "Az optikai sűrűség nem a hétköznapi sűrűséget jelenti, hanem azt, hogy egy anyag mennyire 'lassítja le' a fényt. A nagyobb törésmutatójú közeg az optikailag sűrűbb."
+    },
+    {
+      "question": "Melyik eszköz bontja a fehér fényt színeire?",
+      "answers": {
+        "a": "Síktükör",
+        "b": "Domború tükör",
+        "c": "Prizma"
+      },
+      "correct": "c",
+      "explanation": "A prizma egy olyan optikai eszköz (általában üveghasáb), amely a fénytörés és a diszperzió jelenségét használja ki a fehér fény színspektrumra való bontására."
+    },
+    {
+      "question": "Milyen lencse van egy egyszerű nagyítóban?",
+      "answers": {
+        "a": "Domború (gyűjtő) lencse",
+        "b": "Homorú (szóró) lencse",
+        "c": "Síklencse"
+      },
+      "correct": "a",
+      "explanation": "A nagyítók domború lencséket használnak, mert azok képesek a fénysugarakat egy pontba gyűjteni, és megfelelő távolságból nézve nagyított, látszólagos képet alkotni."
+    },
+    {
+      "question": "Mekkora egy, a síkkal párhuzamos egyenes hajlásszöge a síkhoz?",
+      "answers": {
+        "a": "90°",
+        "b": "45°",
+        "c": "0°"
+      },
+      "correct": "c",
+      "explanation": "Ha egy egyenes párhuzamos a síkkal, akkor a merőleges vetülete is egy vele párhuzamos egyenes lesz. Két párhuzamos egyenes hajlásszöge 0°."
+    },
+    {
+      "question": "Mi a teljes visszaverődés (fényvisszaverődés)?",
+      "answers": {
+        "a": "Az a jelenség, amikor a fény egy sűrűbb közegből egy ritkább felé haladva egy bizonyos határszögnél nagyobb szögben érkezve nem törik meg, hanem teljesen visszaverődik.",
+        "b": "Amikor a fény 100%-ban elnyelődik.",
+        "c": "A tükör másik neve."
+      },
+      "correct": "a",
+      "explanation": "Ha a fény sűrűbb közegből ritkább felé halad, a merőlegestől távolabb törik. Egy bizonyos beesési szögnél (határszög) a törési szög elérné a 90°-ot. Ennél nagyobb beesési szögben a fény már nem lép ki, hanem teljesen visszaverődik."
+    },
+    {
+      "question": "Melyik jelenséget magyarázza a fénytörés?",
+      "answers": {
+        "a": "A vízbe tett kanál 'töröttnek' látszik.",
+        "b": "A tükörkép kialakulása.",
+        "c": "Az árnyék keletkezése."
+      },
+      "correct": "a",
+      "explanation": "A kanál víz alatti részéről jövő fénysugarak a víz-levegő határfelületen megtörnek. A szemünk és agyunk ezt úgy értelmezi, mintha a kanál egy másik helyen lenne, ezért látjuk 'töröttnek'."
+    },
+    {
+      "question": "Miért látszik a medence alja sekélyebbnek, mint amilyen valójában?",
+      "answers": {
+        "a": "A fényvisszaverődés miatt.",
+        "b": "A fénytörés miatt.",
+        "c": "Optikai csalódás, amit a víz színe okoz."
+      },
+      "correct": "b",
+      "explanation": "A medence aljáról érkező fénysugarak a víz-levegő határon megtörnek. A szemünk a fénysugarakat egyenesnek érzékeli, ezért a medence alját egy magasabb, 'látszólagos' helyen látjuk."
+    },
+    {
+      "question": "Melyik optikai eszköz működése alapul a fénytörésen?",
+      "answers": {
+        "a": "Lencse (pl. szemüveg, nagyító)",
+        "b": "Síktükör",
+        "c": "Periszkóp"
+      },
+      "correct": "a",
+      "explanation": "A lencsék görbült felületeiken a fénytörés törvényei szerint változtatják meg a fénysugarak irányát, így képet alkotnak. A tükrök és a periszkóp a fényvisszaverődésen alapulnak."
+    },
+    {
+      "question": "Melyik jelenség NEM fénytörés?",
+      "answers": {
+        "a": "Egy szemüveg működése.",
+        "b": "A szivárvány kialakulása.",
+        "c": "A tükörkép a tó vizén."
+      },
+      "correct": "c",
+      "explanation": "A tükörkép a fényvisszaverődés következménye. A szemüveg és a szivárvány is a fénytörés elvén alapul."
+    },
+    {
+      "question": "Mit csinál egy domború (gyűjtő) lencse a párhuzamos fénysugarakkal?",
+      "answers": {
+        "a": "Szétszórja őket.",
+        "b": "Egy pontba (fókuszpontba) gyűjti össze őket.",
+        "c": "Visszaveri őket."
+      },
+      "correct": "b",
+      "explanation": "A domború lencsét gyűjtőlencsének is hívják, mert a rajta áthaladó, tengellyel párhuzamos fénysugarakat a lencse egy pontjában, a fókuszpontban egyesíti."
+    },
+    {
+      "question": "Melyik állítás igaz a törésmutatóra?",
+      "answers": {
+        "a": "A víz törésmutatója kisebb, mint a levegőé.",
+        "b": "A gyémántnak az egyik legmagasabb a törésmutatója.",
+        "c": "Minden anyagnak 1 a törésmutatója."
+      },
+      "correct": "b",
+      "explanation": "A gyémánt rendkívül nagy törésmutatójának köszönheti ragyogását, mert a belsejében a fény erősen megtörik és színeire bomlik. A víz törésmutatója nagyobb, mint a levegőé."
+    },
+    {
+      "question": "Mit csinál egy homorú (szóró) lencse a párhuzamos fénysugarakkal?",
+      "answers": {
+        "a": "Egy pontba gyűjti őket.",
+        "b": "Szétszórja őket.",
+        "c": "Nem változtatja meg az irányukat."
+      },
+      "correct": "b",
+      "explanation": "A homorú lencsét szórólencsének is nevezik, mert a rajta áthaladó párhuzamos fénysugarakat úgy töri meg, mintha azok egy, a lencse előtti pontból indultak volna ki."
+    },
+    {
+      "question": "Mi a törésmutató?",
+      "answers": {
+        "a": "Egy anyagra jellemző szám, ami megmutatja, hányszor lassabb a fény az adott anyagban, mint vákuumban.",
+        "b": "A törési szög mértéke.",
+        "c": "A lencse vastagsága."
+      },
+      "correct": "a",
+      "explanation": "A törésmutató (n) egy anyagra jellemző szám, amely egy átlátszó anyag optikai sűrűségét jellemzi. Minél nagyobb egy anyag törésmutatója, annál jobban lelassítja a fényt."
+    },
+    {
+      "question": "A fény terjedési sebessége...",
+      "answers": {
+        "a": "...minden közegben ugyanaz.",
+        "b": "...a levegőben a legnagyobb.",
+        "c": "...vákuumban a legnagyobb, más közegekben kisebb."
+      },
+      "correct": "c",
+      "explanation": "A fény terjedési sebessége a közeg optikai sűrűségétől függ. A legnagyobb sebességet vákuumban éri el, minden más átlátszó anyagban lelassul."
+    },
+    {
+      "question": "Mi a fénytörés alapvető oka?",
+      "answers": {
+        "a": "A fény sebességének megváltozása, amikor új közegbe lép.",
+        "b": "A fény visszaverődése a felületről.",
+        "c": "A fény elnyelődése az anyagban."
+      },
+      "correct": "a",
+      "explanation": "Fénytörés akkor jön létre, amikor a fény egy eltérő optikai sűrűségű közeg határát átlépi. A közegváltáskor a fény sebessége megváltozik, és ez okozza a fénysugár irányának megváltozását."
+    },
+    {
+      "question": "Ha a fény merőlegesen érkezik egy üveglap felületére, mi történik vele?",
+      "answers": {
+        "a": "Visszaverődik.",
+        "b": "Irányváltoztatás nélkül halad tovább.",
+        "c": "Megtörik."
+      },
+      "correct": "b",
+      "explanation": "Merőleges beeséskor a beesési szög 0°. Ilyenkor a törési szög is 0°, ami azt jelenti, hogy a fénysugár nem térül el az eredeti irányától, csak a sebessége csökken le az üvegben."
+    },
+    {
+      "question": "Ha a fény sűrűbb közegből (pl. vízből) ritkább közegbe (pl. levegőbe) lép, akkor...",
+      "answers": {
+        "a": "...a merőlegeshez közelebb törik.",
+        "b": "...a merőlegestől távolabb törik.",
+        "c": "...nem törik meg."
+      },
+      "correct": "b",
+      "explanation": "Amikor a fény egy ritkább közegbe lépve felgyorsul, az iránya a beesési merőlegestől távolabb fog eltérni. Ez a jelenség a teljes visszaverődés alapja."
+    }
+  ]
 }

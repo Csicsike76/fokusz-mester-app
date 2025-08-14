@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz forgasi egyensuly\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A forgatónyomaték az erő forgató hatását méri.",
+        "b": "Egyensúlyban a forgatónyomatékok összege nulla.",
+        "c": "Ha egy test nyugalomban van, nem hatnak rá forgatónyomatékok."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. Egy nyugalomban lévő testre hathatnak forgatónyomatékok, de azoknak ki kell egyenlíteniük egymást. Például egy egyensúlyban lévő libikókára mindkét gyerek forgatónyomatékot fejt ki."
+    },
+    {
+      "question": "Az egyensúlyban lévő libikóka két végén ülő gyerekek...",
+      "answers": {
+        "a": "...súlya mindig egyenlő.",
+        "b": "...által kifejtett erő mindig egyenlő.",
+        "c": "...által kifejtett forgatónyomaték mindig egyenlő."
+      },
+      "correct": "c",
+      "explanation": "Az egyensúly feltétele nem az, hogy a súlyok legyenek egyenlők, hanem az, hogy a forgatónyomatékok (súly * távolság) legyenek egyenlők. Egy könnyebb gyerek messzebb ülve egyensúlyban tud lenni egy nehezebb, közelebb ülő gyerekkel."
+    },
+    {
+      "question": "Melyik test a legstabilabb?",
+      "answers": {
+        "a": "Egy magas, keskeny váza.",
+        "b": "Egy alacsony, széles talpú tál.",
+        "c": "Egy hegyére állított ceruza."
+      },
+      "correct": "b",
+      "explanation": "A stabilitás annál nagyobb, minél alacsonyabban van a test súlypontja és minél nagyobb az alátámasztási felülete. Az alacsony, széles tál felel meg legjobban ezeknek a feltételeknek."
+    },
+    {
+      "question": "Mikor NEM nulla a forgatónyomaték?",
+      "answers": {
+        "a": "Ha az erő hatásvonala átmegy a forgástengelyen.",
+        "b": "Ha az erő nulla.",
+        "c": "Ha az erő hatásvonala nem megy át a forgástengelyen és az erő nem nulla."
+      },
+      "correct": "c",
+      "explanation": "Forgatónyomaték létrehozásához két dolog kell: erő (F) és erőkar (k). Ha az erő hatásvonala nem megy át a tengelyen, az erőkar nem nulla. Ha az erő sem nulla, akkor a szorzatuk, a forgatónyomaték sem lesz nulla."
+    },
+    {
+      "question": "Mi a feltétele egy test teljes mechanikai egyensúlyának?",
+      "answers": {
+        "a": "A rá ható erők és forgatónyomatékok eredője is nulla.",
+        "b": "Csak a rá ható erők eredője nulla.",
+        "c": "Csak a rá ható forgatónyomatékok eredője nulla."
+      },
+      "correct": "a",
+      "explanation": "A teljes egyensúlyhoz a testnek haladási ÉS forgási egyensúlyban is kell lennie. Ez azt jelenti, hogy sem elmozdulni, sem elfordulni nem kezd."
+    },
+    {
+      "question": "Melyik NEM példa forgási egyensúlyra?",
+      "answers": {
+        "a": "Egy nyugalomban lévő ajtó.",
+        "b": "Egy elinduló autó kereke.",
+        "c": "Egy állandó sebességgel forgó ventilátor."
+      },
+      "correct": "b",
+      "explanation": "Az elinduló kerék forgása gyorsul, tehát a forgási állapota változik. Ez azt jelenti, hogy a rá ható forgatónyomatékok eredője nem nulla, tehát nincs forgási egyensúlyban."
+    },
+    {
+      "question": "Mikor van egy test forgási egyensúlyban?",
+      "answers": {
+        "a": "Ha a rá ható forgatónyomatékok előjeles összege nulla.",
+        "b": "Ha a test nem mozog.",
+        "c": "Ha a rá ható erők eredője nulla."
+      },
+      "correct": "a",
+      "explanation": "A forgási egyensúly feltétele, hogy a test forgómozgása ne változzon. Ez akkor teljesül, ha az óramutató járásával megegyező és azzal ellentétes irányú forgatónyomatékok kiegyenlítik egymást."
+    },
+    {
+      "question": "Melyik egyszerű gép NEM a forgási egyensúly elvén működik?",
+      "answers": {
+        "a": "Lejtő",
+        "b": "Mérleghinta",
+        "c": "Csavarkulcs"
+      },
+      "correct": "a",
+      "explanation": "A lejtő a súlyerő felbontásával csökkenti a szükséges erőt, nem forgatónyomatékok egyensúlyán alapul. A mérleghinta és a csavarkulcs is az emelők elvén, a forgatónyomatékok egyensúlyán működik."
+    },
+    {
+      "question": "Egy kerékpár pedáljára 100 N erővel taposol. A pedálkar 0,2 m hosszú. Mekkora forgatónyomatékot hozol létre?",
+      "answers": {
+        "a": "500 N*m",
+        "b": "20 N*m",
+        "c": "100,2 N*m"
+      },
+      "correct": "b",
+      "explanation": "A forgatónyomaték az erő és az erőkar szorzata. M = F * k = 100 N * 0,2 m = 20 N*m."
+    },
+    {
+      "question": "Mi a stabilitás?",
+      "answers": {
+        "a": "A test súlya.",
+        "b": "A test azon képessége, hogy egyensúlyi helyzetébe visszatérjen kimozdítás után.",
+        "c": "A test forgási sebessége."
+      },
+      "correct": "b",
+      "explanation": "A stabil egyensúlyi helyzet azt jelenti, hogy ha a testet kissé kibillentjük, akkor magától visszatér az eredeti helyzetébe. A stabilitás ennek a képességnek a mértéke."
+    },
+    {
+      "question": "Melyik állítás írja le a forgási egyensúlyt?",
+      "answers": {
+        "a": "A test sebessége állandó.",
+        "b": "A test forgási állapota nem változik.",
+        "c": "A test súlypontja nem mozdul el."
+      },
+      "correct": "b",
+      "explanation": "A forgási egyensúly azt jelenti, hogy a test vagy nem forog, vagy állandó szögsebességgel forog. A lényeg, hogy a forgómozgása nem változik."
+    },
+    {
+      "question": "Mi az emelők törvénye?",
+      "answers": {
+        "a": "Erő * erőkar = Teher * teherkar",
+        "b": "Erő + erőkar = Teher + teherkar",
+        "c": "Erő / erőkar = Teher / teherkar"
+      },
+      "correct": "a",
+      "explanation": "Az emelő egyensúlyának feltétele, hogy az erőkifejtés oldali forgatónyomaték (Erő * erőkar) megegyezzen a teher oldali forgatónyomatékkal (Teher * teherkar)."
+    },
+    {
+      "question": "Egyensúlyban lévő kétkarú emelőn 20 N erő hat 3 méteres erőkaron. Mekkora teher van a 2 méteres teherkaron?",
+      "answers": {
+        "a": "20 N",
+        "b": "13,3 N",
+        "c": "30 N"
+      },
+      "correct": "c",
+      "explanation": "Az emelők törvénye: F_erő * k_erő = F_teher * k_teher. Behelyettesítve: 20 N * 3 m = F_teher * 2 m. Ebből 60 Nm = F_teher * 2 m. A teher súlya: F_teher = 60 Nm / 2 m = 30 N."
+    },
+    {
+      "question": "Mi történik egy libikókával, ha a két végén ülő, egyenlő súlyú gyerek közül az egyik közelebb ül a tengelyhez?",
+      "answers": {
+        "a": "A libikóka egyensúlyban marad.",
+        "b": "A libikóka a távolabb ülő gyerek oldalára billen le.",
+        "c": "A libikóka a közelebb ülő gyerek oldalára billen le."
+      },
+      "correct": "b",
+      "explanation": "A távolabb ülő gyereknek nagyobb az erőkarja. Mivel az erők (súlyok) egyenlők, a nagyobb erőkarral rendelkező gyerek nagyobb forgatónyomatékot fejt ki, ezért az ő oldala fog lebillenni."
+    },
+    {
+      "question": "Az egyensúlyi állapot azt jelenti, hogy a test...",
+      "answers": {
+        "a": "...mindig gyorsul.",
+        "b": "...mindig nyugalomban van.",
+        "c": "...mozgásállapota nem változik."
+      },
+      "correct": "c",
+      "explanation": "Az egyensúly azt jelenti, hogy a test gyorsulása nulla. Ez teljesülhet nyugalmi állapotban, de egyenes vonalú egyenletes mozgás vagy állandó sebességű forgás esetén is. A lényeg a mozgásállapot állandósága."
+    },
+    {
+      "question": "Hogyan lehet egy emelővel kis erővel nagy terhet emelni?",
+      "answers": {
+        "a": "A teherkart kell növelni.",
+        "b": "Az erőt és a terhet ugyanoda kell tenni.",
+        "c": "Az erőkart kell megnövelni a teherkarhoz képest."
+      },
+      "correct": "c",
+      "explanation": "Az emelők törvényéből következik, hogy ha az erőkar sokkal nagyobb, mint a teherkar, akkor az erőkifejtés sokkal kisebb lehet, mint a teher súlya."
+    },
+    {
+      "question": "Egy test forgómozgását a rá ható...",
+      "answers": {
+        "a": "...erők összege határozza meg.",
+        "b": "...súrlódási erő határozza meg.",
+        "c": "...forgatónyomatékok összege határozza meg."
+      },
+      "correct": "c",
+      "explanation": "A test haladó mozgását az erők eredője, forgómozgását pedig a forgatónyomatékok eredője határozza meg."
+    },
+    {
+      "question": "Egyensúlyban lévő kétkarú mérlegen a bal serpenyőben egy 2 kg-os test van. Mekkora tömegű test van a jobb serpenyőben?",
+      "answers": {
+        "a": "1 kg",
+        "b": "2 kg",
+        "c": "4 kg"
+      },
+      "correct": "b",
+      "explanation": "A hagyományos kétkarú mérleg karjai egyenlő hosszúak. Az egyensúlyhoz az kell, hogy a két oldalon ható forgatónyomatékok (és így a súlyerők) egyenlők legyenek. Ha a súlyerők egyenlők, akkor a tömegek is."
+    },
+    {
+      "question": "Mi a 'nyomatéki egyensúly'?",
+      "answers": {
+        "a": "A haladási egyensúly másik neve.",
+        "b": "A tehetetlenség elve.",
+        "c": "A forgási egyensúly másik neve."
+      },
+      "correct": "c",
+      "explanation": "A nyomatéki egyensúly a forgási egyensúly szinonimája, arra utal, hogy a testre ható forgatónyomatékok egyensúlyban vannak."
+    },
+    {
+      "question": "Melyik test van forgási egyensúlyban?",
+      "answers": {
+        "a": "Egy állandó sebességgel pörgő búgócsiga.",
+        "b": "Egy felgyorsuló ventilátor.",
+        "c": "Egy lelassuló körhinta."
+      },
+      "correct": "a",
+      "explanation": "A forgási egyensúly nemcsak nyugalmat jelenthet, hanem állandó szögsebességgel történő forgást is. A gyorsuló és lassuló testek forgási állapota változik, tehát nincsenek forgási egyensúlyban."
+    },
+    {
+      "question": "Mi történik, ha egy testre ható forgatónyomatékok eredője nem nulla?",
+      "answers": {
+        "a": "A test forgómozgása megváltozik (szöggyorsulása lesz).",
+        "b": "A test haladó mozgása változik meg.",
+        "c": "A test tömege változik meg."
+      },
+      "correct": "a",
+      "explanation": "Ha a forgatónyomatékok nincsenek egyensúlyban, a test forgási állapota megváltozik: vagy elkezd forogni, vagy a már meglévő forgása felgyorsul vagy lelassul."
+    },
+    {
+      "question": "Egyensúly esetén a jobbra forgató és balra forgató nyomatékok...",
+      "answers": {
+        "a": "...közül a jobbra forgató a nagyobb.",
+        "b": "...közül a balra forgató a nagyobb.",
+        "c": "...egyenlő nagyságúak."
+      },
+      "correct": "c",
+      "explanation": "A forgási egyensúly pontos feltétele, hogy az óramutató járásával megegyező (jobbra forgató) nyomatékok összege megegyezzen az azzal ellentétes (balra forgató) nyomatékok összegével."
+    },
+    {
+      "question": "Egy libikóka egyik oldalán egy 40 kg-os gyerek ül a tengelytől 2 méterre. Hova üljön egy 20 kg-os gyerek, hogy egyensúly legyen?",
+      "answers": {
+        "a": "A tengelytől 4 méterre a másik oldalon.",
+        "b": "A tengelytől 2 méterre a másik oldalon.",
+        "c": "A tengelytől 1 méterre a másik oldalon."
+      },
+      "correct": "a",
+      "explanation": "A 40 kg-os gyerek nyomatéka ~400 N * 2 m = 800 Nm. A 20 kg-os gyerek súlya ~200 N. A szükséges erőkar: k₂ = 800 Nm / 200 N = 4 m."
+    },
+    {
+      "question": "A Földön egyensúlyban lévő testek...",
+      "answers": {
+        "a": "...csak nyugalomban lehetnek.",
+        "b": "...lehetnek nyugalomban vagy egyenes vonalú egyenletes mozgásban.",
+        "c": "...csak foroghatnak."
+      },
+      "correct": "b",
+      "explanation": "A teljes egyensúly feltétele, hogy a test ne gyorsuljon és a forgása se változzon. Ez teljesül nyugalmi állapotban, és egyenes vonalú egyenletes mozgás esetén is."
+    },
+    {
+      "question": "Melyik esetben nagyobb a forgatónyomaték, ha az erő ugyanakkora?",
+      "answers": {
+        "a": "Ha kisebb az erőkar.",
+        "b": "Ha nagyobb az erőkar.",
+        "c": "Az erőkar nem befolyásolja."
+      },
+      "correct": "b",
+      "explanation": "Mivel a forgatónyomaték (M = F * k) egyenesen arányos az erőkarral (k), ezért nagyobb erőkarral nagyobb forgatónyomatékot lehet elérni ugyanazzal az erővel."
+    }
+  ]
 }

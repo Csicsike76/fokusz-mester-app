@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz ekvivalens egyenletek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik egyenletnek ugyanaz a megoldása, mint az <span class='formula-display'>x / 2 = 6</span> egyenletnek?",
+      "answers": {
+        "a": "x = 12",
+        "b": "x = 3",
+        "c": "x = 8"
+      },
+      "correct": "a",
+      "explanation": "Az x/2 = 6 egyenlet mindkét oldalát 2-vel szorozva kapjuk, hogy x = 12. Azt az egyenletet keressük, amelynek megoldása szintén 12."
+    },
+    {
+      "question": "Melyik ekvivalens átalakítás vezet az <span class='formula-display'>x = 10</span> eredményhez a <span class='formula-display'>2x = 20</span> egyenletből?",
+      "answers": {
+        "a": "10 kivonása",
+        "b": "2-vel való osztás",
+        "c": "2-vel való szorzás"
+      },
+      "correct": "b",
+      "explanation": "Ahhoz, hogy a 2x-ből x legyen, el kell osztanunk 2-vel. A mérleg-elv szerint a másik oldalt is el kell osztani 2-vel (20/2=10)."
+    },
+    {
+      "question": "Oldd meg: <span class='formula-display'>12 - 2x = 2</span>",
+      "answers": {
+        "a": "6",
+        "b": "4",
+        "c": "5"
+      },
+      "correct": "c",
+      "explanation": "Először vonjunk ki 12-t mindkét oldalból: -2x = 2 - 12, ami -2x = -10. Utána osszuk el mindkét oldalt -2-vel: x = 5."
+    },
+    {
+      "question": "Mi az azonosság definíciója?",
+      "answers": {
+        "a": "Olyan egyenlőség, amely a változó minden megengedett értékére igaz.",
+        "b": "Olyan egyenlőség, aminek nincs megoldása.",
+        "c": "Olyan egyenlőség, aminek csak egy megoldása van."
+      },
+      "correct": "a",
+      "explanation": "Míg egy egyenlet csak bizonyos értékekre igaz, addig egy azonosság mindig, a változó bármely értékére teljesül. Például a 2(x+1) = 2x+2 egy azonosság."
+    },
+    {
+      "question": "Ha az <span class='formula-display'>5x = 20</span> egyenlet mindkét oldalát elosztjuk 5-tel, mit kapunk?",
+      "answers": {
+        "a": "x = 4",
+        "b": "x = 15",
+        "c": "x = 25"
+      },
+      "correct": "a",
+      "explanation": "A mérleg-elv alapján az egyenlet mindkét oldalával ugyanazt a műveletet végezzük el. (5x)/5 = x, és 20/5 = 4. Tehát x = 4."
+    },
+    {
+      "question": "Melyik NEM azonosság?",
+      "answers": {
+        "a": "x+y = y+x",
+        "b": "x/1 = x",
+        "c": "x-y = y-x"
+      },
+      "correct": "c",
+      "explanation": "Az x-y = y-x nem azonosság. Például, ha x=5 és y=3, akkor 5-3=2, de 3-5=-2. Az összeadás és a szorzás felcserélhető, de a kivonás nem."
+    },
+    {
+      "question": "Mi a <span class='formula-display'>2x + 5 = 15</span> egyenlet megoldása?",
+      "answers": {
+        "a": "5",
+        "b": "10",
+        "c": "7.5"
+      },
+      "correct": "a",
+      "explanation": "Először mindkét oldalból kivonunk 5-öt, így 2x = 10. Utána mindkét oldalt elosztjuk 2-vel, így x = 5."
+    },
+    {
+      "question": "Mi a <span class='formula-display'>-x = 5</span> egyenlet megoldása?",
+      "answers": {
+        "a": "5",
+        "b": "Nincs megoldása",
+        "c": "-5"
+      },
+      "correct": "c",
+      "explanation": "Az egyenlet mindkét oldalát szorozzuk -1-gyel. (-x)*(-1) = x, és 5*(-1) = -5. Tehát az egyenlet megoldása -5."
+    },
+    {
+      "question": "Melyik egyenlet NEM ekvivalens a többivel?",
+      "answers": {
+        "a": "x = 10",
+        "b": "x - 2 = 8",
+        "c": "x + 2 = 8"
+      },
+      "correct": "c",
+      "explanation": "Az x=10 megoldása 10. Az x-2=8 megoldása szintén 10. Az x+2=8 megoldása viszont 6. Tehát az utolsó egyenlet nem ekvivalens a másik kettővel."
+    },
+    {
+      "question": "Ha <span class='formula-display'>x = y</span>, akkor igaz-e, hogy <span class='formula-display'>x + z = y + z</span>?",
+      "answers": {
+        "a": "Csak ha z pozitív",
+        "b": "Igen, mindig",
+        "c": "Nem"
+      },
+      "correct": "b",
+      "explanation": "A mérleg-elv alapján az egyenlőség megmarad, ha mindkét oldalhoz ugyanazt a számot adjuk hozzá, függetlenül annak előjelétől."
+    },
+    {
+      "question": "Melyik egyenlet ekvivalens az <span class='formula-display'>x + 3 = 8</span> egyenlettel?",
+      "answers": {
+        "a": "x = 5",
+        "b": "x = 11",
+        "c": "x + 8 = 3"
+      },
+      "correct": "a",
+      "explanation": "Két egyenlet ekvivalens, ha a megoldáshalmazuk ugyanaz. Az x + 3 = 8 egyenletből 3-at kivonva mindkét oldalból kapjuk, hogy x = 5. Tehát az az egyenlet ekvivalens vele, amelyiknek szintén 5 a megoldása."
+    },
+    {
+      "question": "Mi az <span class='formula-display'>x=x</span> egyenlőség neve?",
+      "answers": {
+        "a": "Egyenlet",
+        "b": "Ellentmondás",
+        "c": "Azonosság"
+      },
+      "correct": "c",
+      "explanation": "Olyan egyenlőség, amely a változó minden értékére igaz, az azonosság. Mivel az x=x minden számra igaz, ez egy azonosság."
+    },
+    {
+      "question": "Az <span class='formula-display'>5(x+2) = 5x+10</span> egy...",
+      "answers": {
+        "a": "egyenlet egy megoldással.",
+        "b": "ellentmondás.",
+        "c": "azonosság."
+      },
+      "correct": "c",
+      "explanation": "A szorzás disztributív (tagonkénti) az összeadásra nézve. 5*x + 5*2 = 5x + 10. Mivel a két oldal formálisan is megegyezik, az egyenlőség minden x-re igaz."
+    },
+    {
+      "question": "Melyik egyenlet egyenértékű az <span class='formula-display'>x = -2</span> egyenlettel?",
+      "answers": {
+        "a": "-x = -2",
+        "b": "x + 2 = 0",
+        "c": "x - 2 = 0"
+      },
+      "correct": "b",
+      "explanation": "Az -x = -2 megoldása x=2. Az x + 2 = 0 megoldása x=-2. Az x - 2 = 0 megoldása x=2. Tehát az x + 2 = 0 egyenlet megoldása -2."
+    },
+    {
+      "question": "Oldd meg: <span class='formula-display'>-2x = -8</span>",
+      "answers": {
+        "a": "-4",
+        "b": "4",
+        "c": "6"
+      },
+      "correct": "b",
+      "explanation": "Az egyenlet mindkét oldalát elosztjuk -2-vel. (-2x) / (-2) = x. (-8) / (-2) = 4. Tehát x = 4."
+    },
+    {
+      "question": "Melyik átalakítás NEM ekvivalens átalakítás?",
+      "answers": {
+        "a": "Mindkét oldal szorzása 0-val.",
+        "b": "Mindkét oldalhoz 5 hozzáadása.",
+        "c": "Mindkét oldal osztása 2-vel."
+      },
+      "correct": "a",
+      "explanation": "A megoldáshalmaz nem változik, ha mindkét oldalhoz ugyanazt adjuk/vonjuk, vagy mindkét oldalt ugyanazzal a *nem nulla* számmal szorozzuk/osztjuk. Ha 0-val szorzunk, az x=2 és x=3 egyenletekből is 0=0 lesz, holott az eredetiek nem voltak ekvivalensek."
+    },
+    {
+      "question": "Mi az első lépés a <span class='formula-display'>3x - 5 = 10</span> egyenlet megoldásában?",
+      "answers": {
+        "a": "Osztás 3-mal",
+        "b": "5 hozzáadása mindkét oldalhoz",
+        "c": "5 kivonása mindkét oldalból"
+      },
+      "correct": "b",
+      "explanation": "Az x-et tartalmazó tagot egyedül kell hagyni az egyik oldalon. Ehhez a -5 tagot kell 'eltüntetni', amit 5 hozzáadásával tehetünk meg mindkét oldalon. Így kapjuk: 3x = 15."
+    },
+    {
+      "question": "Mi a 'mérleg-elv' a matematikában?",
+      "answers": {
+        "a": "Két oldalnak egyensúlyban kell lennie",
+        "b": "Egyenletek megoldásának módszere ekvivalens átalakításokkal",
+        "c": "Súlyok mérésére szolgáló eszköz"
+      },
+      "correct": "b",
+      "explanation": "A mérleg-elv egy szemléltetés arra, hogyan működnek az ekvivalens átalakítások. Ahogy egy mérleg egyensúlyban marad, ha mindkét serpenyőbe ugyanannyit teszünk vagy veszünk el, úgy egy egyenlőség is igaz marad, ha mindkét oldalán ugyanazt a műveletet végezzük el."
+    },
+    {
+      "question": "Ha x=y, akkor melyik állítás NEM igaz mindig?",
+      "answers": {
+        "a": "x/z = y/z",
+        "b": "x*z = y*z",
+        "c": "x-z = y-z"
+      },
+      "correct": "a",
+      "explanation": "Az ekvivalens átalakításoknál a 0-val való osztás nincs értelmezve. A szorzás és a kivonás bármilyen z-re igaz. Az osztás viszont csak akkor, ha z nem nulla."
+    },
+    {
+      "question": "Ha az <span class='formula-display'>y-1=x</span>, akkor mivel egyenlő y?",
+      "answers": {
+        "a": "x-1",
+        "b": "1-x",
+        "c": "x+1"
+      },
+      "correct": "c",
+      "explanation": "Az y-t egyedül kell hagyni az egyik oldalon. Ehhez adjunk 1-et az egyenlet mindkét oldalához: (y-1)+1 = x+1, amiből y = x+1."
+    },
+    {
+      "question": "Melyik állítás igaz az azonosságokra?",
+      "answers": {
+        "a": "Csak pozitív számokra igazak.",
+        "b": "A változó minden értékére igazak.",
+        "c": "Nincs bennük változó."
+      },
+      "correct": "b",
+      "explanation": "Az azonosság egy olyan egyenlőség, amely a változó(k) minden lehetséges (megengedett) értékére igaz."
+    },
+    {
+      "question": "Melyik egyenlőség egy azonosság?",
+      "answers": {
+        "a": "3(x - 2) = 3x - 6",
+        "b": "x - 2 = 3",
+        "c": "x = x + 1"
+      },
+      "correct": "a",
+      "explanation": "Az 'x-2=3' csak x=5 esetén igaz. Az 'x=x+1' soha nem igaz. A 3(x-2) = 3x-6 a tagonkénti szorzás miatt minden x-re igaz."
+    },
+    {
+      "question": "Melyik egyenletnek van végtelen sok megoldása (azonosság)?",
+      "answers": {
+        "a": "x = x",
+        "b": "x = -x",
+        "c": "x + 1 = x - 1"
+      },
+      "correct": "a",
+      "explanation": "Az x = -x csak x=0 esetén igaz. Az x + 1 = x - 1 soha nem igaz. Az x = x egyenlet minden számra igaz, ez egy alapvető azonosság."
+    },
+    {
+      "question": "Melyik egyenlet ekvivalens a <span class='formula-display'>10 - x = 4</span> egyenlettel?",
+      "answers": {
+        "a": "x = 14",
+        "b": "x = 6",
+        "c": "x = -6"
+      },
+      "correct": "b",
+      "explanation": "Rendezzük az egyenletet: adjunk x-et mindkét oldalhoz, így 10 = 4 + x. Vonjunk ki 4-et mindkét oldalból, így 6 = x."
+    }
+  ]
 }

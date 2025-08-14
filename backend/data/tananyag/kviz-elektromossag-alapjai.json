@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz elektromossag alapjai\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik részecske hordoz negatív elektromos töltést?",
+      "answers": {
+        "a": "Proton",
+        "b": "Elektron",
+        "c": "Neutron"
+      },
+      "correct": "b",
+      "explanation": "Az atomot alkotó részecskék közül a proton pozitív, a neutron semleges, az elektron pedig negatív töltésű. Az elektromos jelenségek többségéért az elektronok mozgása felelős."
+    },
+    {
+      "question": "Mi történik, ha egy műanyag vonalzót megdörzsölünk egy gyapjúdarabbal?",
+      "answers": {
+        "a": "A vonalzó mágneses lesz.",
+        "b": "A vonalzó elektromosan feltöltődik.",
+        "c": "A vonalzó felmelegszik."
+      },
+      "correct": "b",
+      "explanation": "A dörzsölés hatására a negatív töltésű elektronok átvándorolnak a gyapjúról a vonalzóra. Így a vonalzónak elektrontöbblete lesz, tehát negatív elektromos állapotba kerül."
+    },
+    {
+      "question": "Hogyan hat egymásra két pozitív töltésű test?",
+      "answers": {
+        "a": "Vonzzák egymást.",
+        "b": "Taszítják egymást.",
+        "c": "Nem lépnek kölcsönhatásba."
+      },
+      "correct": "b",
+      "explanation": "Az elektromosság alaptörvénye szerint az azonos nemű töltések (pozitív-pozitív vagy negatív-negatív) taszítják egymást."
+    },
+    {
+      "question": "Mi az áramforrás feladata egy egyszerű áramkörben?",
+      "answers": {
+        "a": "Fogyasztja az áramot.",
+        "b": "Energiát biztosít a töltések áramlásához.",
+        "c": "Megszakítja az áram útját."
+      },
+      "correct": "b",
+      "explanation": "Az áramforrás (pl. elem) az áramkör 'motorja'. A benne lévő energiát (pl. kémiai energiát) alakítja át elektromos energiává, ami mozgásban tartja a töltéseket."
+    },
+    {
+      "question": "Melyik NEM része egy egyszerű áramkörnek?",
+      "answers": {
+        "a": "Áramforrás",
+        "b": "Hőmérő",
+        "c": "Fogyasztó"
+      },
+      "correct": "b",
+      "explanation": "Egy egyszerű áramkörhöz kell áramforrás (ami hajtja), fogyasztó (ami használja az energiát) és vezeték (amin az áram folyik). A hőmérő a hőmérséklet mérésére való, nem az áramkör része."
+    },
+    {
+      "question": "Melyik anyag jó elektromos szigetelő?",
+      "answers": {
+        "a": "Rézdrót",
+        "b": "Alumíniumfólia",
+        "c": "Műanyag"
+      },
+      "correct": "c",
+      "explanation": "A szigetelők olyan anyagok, amelyekben a töltések nem tudnak könnyen mozogni. A műanyag, az üveg és a gumi jó szigetelők. A fémek, mint a réz és az alumínium, jó vezetők."
+    },
+    {
+      "question": "Mi az elektromos áram mértékegysége?",
+      "answers": {
+        "a": "Volt (V)",
+        "b": "Ohm (Ω)",
+        "c": "Amper (A)"
+      },
+      "correct": "c",
+      "explanation": "Az áram erősségét amperben mérjük. A volt a feszültség, az ohm pedig az ellenállás mértékegysége."
+    },
+    {
+      "question": "Milyen kapcsolás esetén működnek tovább a többi izzók, ha egy kiég?",
+      "answers": {
+        "a": "Soros kapcsolásnál",
+        "b": "Párhuzamos kapcsolásnál",
+        "c": "Egyik esetben sem."
+      },
+      "correct": "b",
+      "explanation": "Párhuzamos kapcsolásnál minden fogyasztó külön áramköri ágon helyezkedik el. Ha az egyik ág megszakad, a többi ágon az áram zavartalanul tovább tud folyni. Ezért használják ezt a háztartásokban is."
+    },
+    {
+      "question": "Hogyan hat egymásra egy pozitív és egy negatív töltés?",
+      "answers": {
+        "a": "Taszítják egymást.",
+        "b": "Vonzzák egymást.",
+        "c": "Nem hatnak egymásra."
+      },
+      "correct": "b",
+      "explanation": "Az elektromosság alaptörvénye szerint az ellentétes nemű töltések (pozitív és negatív) vonzzák egymást."
+    },
+    {
+      "question": "Milyen töltésű lesz egy test, ha elektrontöbblete van?",
+      "answers": {
+        "a": "Pozitív",
+        "b": "Negatív",
+        "c": "Semleges"
+      },
+      "correct": "b",
+      "explanation": "Mivel az elektronok negatív töltésűek, ha egy testben több van belőlük, mint a pozitív protonokból, akkor a test eredő töltése negatív lesz."
+    },
+    {
+      "question": "Mi az elektromos feszültség mértékegysége?",
+      "answers": {
+        "a": "Amper (A)",
+        "b": "Volt (V)",
+        "c": "Watt (W)"
+      },
+      "correct": "b",
+      "explanation": "A feszültséget voltban mérjük. Az amper az áramerősség, a watt pedig a teljesítmény mértékegysége."
+    },
+    {
+      "question": "Mi a fogyasztó feladata az áramkörben?",
+      "answers": {
+        "a": "Energiát termel.",
+        "b": "Az elektromos energiát másfajta energiává (pl. fénnyé, hővé) alakítja.",
+        "c": "Megszakítja az áramkört."
+      },
+      "correct": "b",
+      "explanation": "A fogyasztó (pl. izzó, motor) az áramkör azon eleme, amely az áramforrás által biztosított elektromos energiát valamilyen számunkra hasznos formává alakítja át."
+    },
+    {
+      "question": "Milyen irányúnak tekintjük megegyezés szerint az áram irányát?",
+      "answers": {
+        "a": "A negatívtól a pozitív pólus felé.",
+        "b": "A pozitívtól a negatív pólus felé.",
+        "c": "Mindkét irányba egyszerre."
+      },
+      "correct": "b",
+      "explanation": "Ez az úgynevezett technikai áramirány. Bár valójában a negatív elektronok áramlanak, megegyezés szerint az áram irányának a pozitív töltések mozgásának irányát tekintjük."
+    },
+    {
+      "question": "Mi történik, ha egy áramkörben a kapcsolót kinyitjuk?",
+      "answers": {
+        "a": "Az áramkör zárt lesz.",
+        "b": "Az áramkör megszakad, az áramlás leáll.",
+        "c": "Az izzó fényesebben világít."
+      },
+      "correct": "b",
+      "explanation": "A kapcsoló kinyitásával egy légrést iktatunk az áramkörbe. Mivel a levegő szigetelő, a töltések útja megszakad, az áramkör nyitottá válik, és az áram nem tud tovább folyni."
+    },
+    {
+      "question": "Mit jelent az, hogy egy test elektromosan semleges?",
+      "answers": {
+        "a": "Csak negatív töltések vannak benne.",
+        "b": "Ugyanannyi pozitív és negatív töltés van benne.",
+        "c": "Nincsenek benne töltések."
+      },
+      "correct": "b",
+      "explanation": "Minden test atomokból áll, amelyekben pozitív protonok és negatív elektronok vannak. Egy test akkor semleges, ha a protonok és elektronok száma megegyezik, így a töltéseik kiegyenlítik egymást."
+    },
+    {
+      "question": "Hogyan kell az áramerősséget mérő ampermérőt az áramkörbe kapcsolni?",
+      "answers": {
+        "a": "Párhuzamosan",
+        "b": "Sorosan",
+        "c": "A fogyasztó helyére"
+      },
+      "correct": "b",
+      "explanation": "Az ampermérő a rajta átfolyó áramot méri. Ahhoz, hogy a fogyasztón átfolyó áramot mérjük, az ampermérőt a fogyasztóval egy ágba, azaz sorosan kell kapcsolni."
+    },
+    {
+      "question": "Melyik részecske hordoz pozitív elektromos töltést?",
+      "answers": {
+        "a": "Proton",
+        "b": "Elektron",
+        "c": "Foton"
+      },
+      "correct": "a",
+      "explanation": "Az atomban a protonok pozitív töltésűek, az elektronok negatívok, a neutronok pedig semlegesek."
+    },
+    {
+      "question": "Mi az elektromos ellenállás mértékegysége?",
+      "answers": {
+        "a": "Volt (V)",
+        "b": "Amper (A)",
+        "c": "Ohm (Ω)"
+      },
+      "correct": "c",
+      "explanation": "Az elektromos ellenállást, ami az áram folyását akadályozó tulajdonság, ohmban mérjük."
+    },
+    {
+      "question": "Mi a villám?",
+      "answers": {
+        "a": "Hangjelenség.",
+        "b": "Hőjelenség.",
+        "c": "Hatalmas elektromos szikrakisülés."
+      },
+      "correct": "c",
+      "explanation": "A villám akkor jön létre, amikor a felhőkben felhalmozódott hatalmas elektromos töltéskülönbség egy szikra formájában kiegyenlítődik a felhők között vagy a felhő és a föld között."
+    },
+    {
+      "question": "Mi történik soros kapcsolásnál, ha az egyik izzó kiég?",
+      "answers": {
+        "a": "A többi izzó fényesebben világít.",
+        "b": "A többi izzó tovább működik.",
+        "c": "Az áramkör megszakad, a többi izzó is kialszik."
+      },
+      "correct": "c",
+      "explanation": "Soros kapcsolásban az áramnak csak egy útja van. Ha ez az út bárhol megszakad (pl. egy izzó kiég), az egész áramkör nyitottá válik, és az áramlás mindenhol megszűnik."
+    },
+    {
+      "question": "Hogyan kell a feszültséget mérő voltmérőt az áramkörbe kapcsolni?",
+      "answers": {
+        "a": "Sorosan",
+        "b": "Bárhogy lehet.",
+        "c": "Párhuzamosan"
+      },
+      "correct": "c",
+      "explanation": "A voltmérő a két pont közötti feszültségkülönbséget méri. Ezért az áramkörben a mérendő fogyasztó két kivezetéséhez, azaz vele párhuzamosan kell kapcsolni."
+    },
+    {
+      "question": "Mi az elektromos áram?",
+      "answers": {
+        "a": "Töltéssel rendelkező részecskék rendezett, egyirányú mozgása.",
+        "b": "A vezeték melegedése.",
+        "c": "A mágneses mező változása."
+      },
+      "correct": "a",
+      "explanation": "Az elektromos áramot a töltéshordozók (fémekben az elektronok) együttes, egy irányba történő, rendezett mozgása hozza létre egy vezetőben."
+    },
+    {
+      "question": "Melyik állítás igaz az elektromos mezőre?",
+      "answers": {
+        "a": "Elektromos töltések hozzák létre maguk körül.",
+        "b": "Csak a mágnesek körül létezik.",
+        "c": "Látni lehet."
+      },
+      "correct": "a",
+      "explanation": "Az elektromos mező egy láthatatlan erőtér, amelyet az elektromos töltések hoznak létre. Ha egy másik töltést helyezünk a mezőbe, arra a mező erőt fejt ki."
+    },
+    {
+      "question": "Melyik a két alapvető kapcsolási mód?",
+      "answers": {
+        "a": "Belső és külső.",
+        "b": "Rövid és hosszú.",
+        "c": "Soros és párhuzamos."
+      },
+      "correct": "c",
+      "explanation": "Az áramköri elemek összekötésének két alapvető módja a soros és a párhuzamos kapcsolás. Bonyolultabb áramkörök ezek kombinációjából állnak."
+    },
+    {
+      "question": "Mi a biztosíték szerepe?",
+      "answers": {
+        "a": "Növeli az áram erősségét.",
+        "b": "Tárolja a felesleges áramot.",
+        "c": "Megvédi az áramkört a túláramtól."
+      },
+      "correct": "c",
+      "explanation": "A biztosíték egy biztonsági eszköz. Ha az áramkörben az áramerősség túl naggyá válik, a biztosítékban lévő vékony szál elolvad és megszakítja az áramkört, ezzel megelőzve a komolyabb károkat."
+    }
+  ]
 }

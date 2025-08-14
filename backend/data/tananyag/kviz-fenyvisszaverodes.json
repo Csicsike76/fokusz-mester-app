@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz fenyvisszaverodes\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Milyen tükör szórja szét a párhuzamos fénysugarakat?",
+      "answers": {
+        "a": "Síktükör",
+        "b": "Domború tükör",
+        "c": "Homorú tükör"
+      },
+      "correct": "b",
+      "explanation": "A domború (kifelé ívelő) tükör a rá eső párhuzamos fénysugarakat úgy veri vissza, mintha azok egy, a tükör mögötti pontból indultak volna ki. Tehát szétszórja a fényt."
+    },
+    {
+      "question": "Melyik állítás NEM része a fényvisszaverődés törvényének?",
+      "answers": {
+        "a": "A beesési szög egyenlő a visszaverődési szöggel.",
+        "b": "A beeső fénysugár sebessége megnő.",
+        "c": "A beeső fénysugár, a beesési merőleges és a visszavert fénysugár egy síkban vannak."
+      },
+      "correct": "b",
+      "explanation": "A fényvisszaverődés során a fény sebessége és színe nem változik meg, csak az iránya. A másik két állítás a törvény része."
+    },
+    {
+      "question": "Mi a beesési szög?",
+      "answers": {
+        "a": "A beeső fénysugár és a felület szöge.",
+        "b": "A visszavert fénysugár és a merőleges szöge.",
+        "c": "A beeső fénysugár és a beesési merőleges szöge."
+      },
+      "correct": "c",
+      "explanation": "A beesési szöget mindig a beeső fénysugár és a felületre a beesési pontban állított merőleges egyenes között mérjük."
+    },
+    {
+      "question": "Milyen képet hoz létre egy síktükör?",
+      "answers": {
+        "a": "Látszólagos, egyenes állású és azonos méretű képet.",
+        "b": "Valódi, fordított állású képet.",
+        "c": "Kicsinyített képet."
+      },
+      "correct": "a",
+      "explanation": "A síktükör által alkotott kép mindig a tükör mögött jön létre (látszólagos), a tárggyal megegyező állású és nagyságú."
+    },
+    {
+      "question": "Milyen képet ad egy domború (kifelé ívelő) tükör?",
+      "answers": {
+        "a": "Mindig kicsinyített, egyenes állású, látszólagos képet.",
+        "b": "Mindig nagyított, valódi képet.",
+        "c": "Mindig fordított állású képet."
+      },
+      "correct": "a",
+      "explanation": "A domború tükrök a fénysugarakat szétszórják, ezért mindig kicsinyített, egyenes állású és látszólagos képet hoznak létre. Ilyeneket használnak például útkereszteződésekben."
+    },
+    {
+      "question": "Milyen felületről verődik vissza a fény szabályosan, éles tükörképet adva?",
+      "answers": {
+        "a": "Egy papírlapról.",
+        "b": "Egy gyapjúpulóverről.",
+        "c": "Egy síktükörről."
+      },
+      "correct": "c",
+      "explanation": "A szabályos fényvisszaverődéshez nagyon sima felület kell. A síktükör felülete ilyen, ezért a fénysugarakat rendezetten veri vissza, ami éles tükörképet eredményez."
+    },
+    {
+      "question": "Melyik NEM az optika tárgyköre?",
+      "answers": {
+        "a": "Távcsövek",
+        "b": "Lencsék",
+        "c": "Hangszórók"
+      },
+      "correct": "c",
+      "explanation": "A távcsövek és lencsék optikai eszközök. A hangszórók az elektromos jeleket hanghullámokká alakítják, működésük az akusztika és az elektrodinamika területére esik."
+    },
+    {
+      "question": "A fényvisszaverődés során mi változik meg?",
+      "answers": {
+        "a": "A fény sebessége.",
+        "b": "A fény színe.",
+        "c": "A fény haladási iránya."
+      },
+      "correct": "c",
+      "explanation": "A fényvisszaverődés lényege, hogy a fény a felületről egy meghatározott szabály szerint visszaverődve megváltoztatja a terjedési irányát. A sebessége és a színe azonos közegben nem változik."
+    },
+    {
+      "question": "Milyen tükröt használnak az autók visszapillantó tükreként (jellemzően az utasoldalon)?",
+      "answers": {
+        "a": "Homorú tükröt.",
+        "b": "Síktükröt.",
+        "c": "Domború tükröt."
+      },
+      "correct": "c",
+      "explanation": "A domború tükrök kicsinyített képet adnak, de cserébe nagyobb területet (látóteret) mutatnak. Ez segít a sofőrnek abban, hogy a 'holtteret' is belássa."
+    },
+    {
+      "question": "Milyen felületen jön létre szórt (diffúz) fényvisszaverődés?",
+      "answers": {
+        "a": "Érdes, matt felületen.",
+        "b": "Sima tükörfelületen.",
+        "c": "Minden felületen."
+      },
+      "correct": "a",
+      "explanation": "Ha a felület mikroszkopikusan is egyenetlen, érdes, akkor a párhuzamosan beérkező fénysugarak különböző szögekben verődnek vissza, minden irányba szétszóródnak. Ezt nevezzük diffúz visszaverődésnek."
+    },
+    {
+      "question": "Miért látod magad egy csendes tó felszínén?",
+      "answers": {
+        "a": "Mert a vízfelszín síktükörként viselkedik.",
+        "b": "A fénytörés miatt.",
+        "c": "Mert a víz világít."
+      },
+      "correct": "a",
+      "explanation": "A nyugodt, sima vízfelszín szabályosan veri vissza a fényt, hasonlóan egy síktükörhöz, ezért képes tükörképet alkotni."
+    },
+    {
+      "question": "Mi a virtuális kép?",
+      "answers": {
+        "a": "Olyan kép, ami a fénysugarak meghosszabbításainak metszéspontjában jön létre, és ernyőn nem fogható fel.",
+        "b": "Olyan kép, amit ernyőn fel lehet fogni.",
+        "c": "A homorú tükör képe."
+      },
+      "correct": "a",
+      "explanation": "A látszólagos (virtuális) kép ott keletkezik, ahonnan a fénysugarak a visszaverődés után érkezni látszanak. Mivel a valós fénysugarak ott nem metszik egymást, a kép nem fogható fel ernyőn."
+    },
+    {
+      "question": "Egy fehér papírlap...",
+      "answers": {
+        "a": "...szabályosan veri vissza a fényt.",
+        "b": "...elnyeli az összes fényt.",
+        "c": "...szórtan veri vissza a fényt."
+      },
+      "correct": "c",
+      "explanation": "A papír felülete mikroszkopikusan érdes, ezért a ráeső fényt minden irányba szétszórja. Ezt nevezzük diffúz visszaverődésnek. A fehér szín azt jelenti, hogy a látható fény minden színét visszaveri."
+    },
+    {
+      "question": "Hogyan szól a fényvisszaverődés törvénye a szögekre vonatkozóan?",
+      "answers": {
+        "a": "A beesési szög egyenlő a visszaverődési szöggel.",
+        "b": "A beesési szög mindig nagyobb, mint a visszaverődési szög.",
+        "c": "A beesési szög és a visszaverődési szög összege 90°."
+      },
+      "correct": "a",
+      "explanation": "A fényvisszaverődés törvényének egyik legfontosabb pontja, hogy a beesési szög és a visszaverődési szög mindig megegyezik. A szögeket a beesési merőlegeshez mérjük."
+    },
+    {
+      "question": "Egy fénysugár 30°-os szögben esik egy síktükörre. Mekkora a visszaverődési szög?",
+      "answers": {
+        "a": "30°",
+        "b": "60°",
+        "c": "90°"
+      },
+      "correct": "a",
+      "explanation": "A fényvisszaverődés törvénye szerint a visszaverődési szög mindig megegyezik a beesési szöggel. Tehát ha a beesési szög 30°, a visszaverődési szög is 30°."
+    },
+    {
+      "question": "Milyen tükör gyűjti össze a párhuzamos fénysugarakat egy pontba?",
+      "answers": {
+        "a": "Síktükör",
+        "b": "Homorú tükör",
+        "c": "Domború tükör"
+      },
+      "correct": "b",
+      "explanation": "A homorú (befelé ívelő) tükör a párhuzamosan érkező fénysugarakat egyetlen pontban, az úgynevezett fókuszpontban gyűjti össze."
+    },
+    {
+      "question": "Mi történik a síktükörben a jobb és bal oldallal?",
+      "answers": {
+        "a": "Nem történik semmi.",
+        "b": "Felcserélődnek (tükörszimmetria).",
+        "c": "A kép fejjel lefelé áll."
+      },
+      "correct": "b",
+      "explanation": "A síktükör a mélységi irányt fordítja meg. Ennek következménye, hogy a tükörképben a jobb és a bal oldal felcserélődik."
+    },
+    {
+      "question": "A borotválkozó tükör, amely nagyít...",
+      "answers": {
+        "a": "...egy domború tükör.",
+        "b": "...egy homorú tükör.",
+        "c": "...egy síktükör."
+      },
+      "correct": "b",
+      "explanation": "A homorú tükrök képesek nagyított, látszólagos képet alkotni, ha a tárgyat (az arcunkat) a tükör és a fókuszpontja közé helyezzük."
+    },
+    {
+      "question": "Ha egy fénysugár merőlegesen esik a tükörre, hogyan verődik vissza?",
+      "answers": {
+        "a": "90°-os szögben.",
+        "b": "Önmagába, az eredeti úton.",
+        "c": "Párhuzamosan a tükörrel."
+      },
+      "correct": "b",
+      "explanation": "Merőleges beeséskor a beesési szög 0°. A visszaverődés törvénye szerint a visszaverődési szög is 0°, tehát a fénysugár önmagán haladva verődik vissza."
+    },
+    {
+      "question": "Miért látod a nevedet fordítva egy papírlapon a tükörben?",
+      "answers": {
+        "a": "Mert a tükör megfordítja a betűket.",
+        "b": "Mert a tükörben minden fejjel lefelé van.",
+        "c": "A tükör a mélységet fordítja meg, ami a jobb-bal cseréjét eredményezi."
+      },
+      "correct": "c",
+      "explanation": "A tükör nem cseréli fel a jobb és bal oldalt, hanem a 'előtt' és 'mögött' viszonyt. Amikor szembefordulsz a tükörképeddel, ez a mélységi fordítás eredményezi a jobb-bal felcserélődés látszatát."
+    },
+    {
+      "question": "Mi a beesési merőleges?",
+      "answers": {
+        "a": "A visszaverő felületre, a beesési pontban állított merőleges egyenes.",
+        "b": "A beeső fénysugár.",
+        "c": "A visszavert fénysugár."
+      },
+      "correct": "a",
+      "explanation": "A beesési merőleges egy fontos segédvonal, amely merőleges a felületre abban a pontban, ahová a fénysugár érkezik. A szögeket ehhez a vonalhoz képest mérjük."
+    },
+    {
+      "question": "Mi a valódi kép?",
+      "answers": {
+        "a": "Olyan kép, amit nem lehet ernyőn felfogni.",
+        "b": "Olyan kép, ahol a visszavert fénysugarak ténylegesen metszik egymást, és ernyőn felfogható.",
+        "c": "A síktükör képe."
+      },
+      "correct": "b",
+      "explanation": "Valódi kép akkor jön létre, amikor a fénysugarak egy pontban gyűlnek össze a visszaverődés után. Ha erre a pontra egy ernyőt helyezünk, a kép láthatóvá válik."
+    },
+    {
+      "question": "Mi a fókuszpont (gyújtópont)?",
+      "answers": {
+        "a": "A tükör középpontja.",
+        "b": "Ahol a tükörkép mindig keletkezik.",
+        "c": "Az a pont, ahol a homorú tükör a párhuzamos fénysugarakat összegyűjti."
+      },
+      "correct": "c",
+      "explanation": "A fókuszpont a homorú tükrök és gyűjtőlencsék fontos jellemzője. Ide gyűjtik össze a tengellyel párhuzamosan beérkező fénysugarakat."
+    },
+    {
+      "question": "Melyik állítás igaz a tükörkép és a tárgy távolságára síktükör esetén?",
+      "answers": {
+        "a": "A kép közelebb van a tükörhöz, mint a tárgy.",
+        "b": "A kép távolabb van a tükörhöz, mint a tárgy.",
+        "c": "A kép ugyanolyan messze van a tükör mögött, mint a tárgy a tükör előtt."
+      },
+      "correct": "c",
+      "explanation": "Síktükör esetén a tárgytávolság (a tárgy és a tükör közötti távolság) mindig megegyezik a képtávolsággal (a kép és a tükör közötti távolság)."
+    },
+    {
+      "question": "Miért látjuk a legtöbb tárgyat magunk körül?",
+      "answers": {
+        "a": "A szabályos visszaverődés miatt.",
+        "b": "A szórt (diffúz) visszaverődés miatt.",
+        "c": "A fénytörés miatt."
+      },
+      "correct": "b",
+      "explanation": "A legtöbb felület (papír, fal, ruha) érdes. A rájuk eső fényt minden irányba szétszórják, így a tárgyat bárhonnan nézve látjuk."
+    }
+  ]
 }

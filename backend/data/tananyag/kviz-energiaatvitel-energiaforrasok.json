@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz energiaatvitel energiaforrasok\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás igaz a fosszilis energiaforrásokra?",
+      "answers": {
+        "a": "Kimeríthetetlenek.",
+        "b": "Égetésük üvegházhatású gázokat juttat a légkörbe.",
+        "c": "Teljesen környezetbarátok."
+      },
+      "correct": "b",
+      "explanation": "A fosszilis tüzelőanyagok elégetésekor szén-dioxid szabadul fel, ami hozzájárul a globális felmelegedéshez. Készleteik pedig végesek."
+    },
+    {
+      "question": "Mi a hatásfok?",
+      "answers": {
+        "a": "A befektetett energia.",
+        "b": "A hasznos és a befektetett energia aránya.",
+        "c": "A hasznos energia."
+      },
+      "correct": "b",
+      "explanation": "A hatásfok egy arányszám, ami megmutatja, hogy a befektetett összes energiának mekkora hányada alakul át a kívánt, hasznos energiaformává. Értéke mindig 1-nél kisebb."
+    },
+    {
+      "question": "Milyen energiát hasznosít egy szélerőmű?",
+      "answers": {
+        "a": "A levegő helyzeti energiáját.",
+        "b": "A levegő mozgási energiáját.",
+        "c": "A Nap hőenergiáját."
+      },
+      "correct": "b",
+      "explanation": "A szél a levegő áramlása, tehát a levegőnek mozgási energiája van. A szélturbina lapátjai ezt a mozgási energiát alakítják át forgási, majd elektromos energiává."
+    },
+    {
+      "question": "Melyik a megújuló energiaforrás?",
+      "answers": {
+        "a": "Napenergia",
+        "b": "Földgáz",
+        "c": "Szén"
+      },
+      "correct": "a",
+      "explanation": "A megújuló energiaforrások emberi időléptékben kimeríthetetlenek vagy újratermelődnek. A Nap energiája ilyen. A földgáz és a szén fosszilis tüzelőanyagok, amelyek végesek."
+    },
+    {
+      "question": "A Föld belső hőjét hasznosító energiaforrás a...",
+      "answers": {
+        "a": "...geotermikus energia.",
+        "b": "...napenergia.",
+        "c": "...vízenergia."
+      },
+      "correct": "a",
+      "explanation": "A geotermikus energia a Föld mélyéből származó hőt használja fel fűtésre vagy áramtermelésre. Ez is egy megújuló energiaforrás."
+    },
+    {
+      "question": "Mi a megújuló energiaforrások közös jellemzője?",
+      "answers": {
+        "a": "Nagyon drágák.",
+        "b": "Mindig elérhetőek.",
+        "c": "Környezetkímélőbbek és készletük nem merül ki."
+      },
+      "correct": "c",
+      "explanation": "A megújuló energiaforrások (nap, szél, víz) legnagyobb előnye, hogy hasznosításuk nem, vagy csak csekély mértékben szennyezi a környezetet, és forrásuk emberi léptékkel mérve kimeríthetetlen."
+    },
+    {
+      "question": "Milyen energiaforrást használnak a napelemek?",
+      "answers": {
+        "a": "A Nap sugárzó energiáját (fényét).",
+        "b": "A Nap hőjét.",
+        "c": "A szél energiáját."
+      },
+      "correct": "a",
+      "explanation": "A napelemek (fotovoltaikus cellák) a Napból érkező fényenergiát alakítják át közvetlenül elektromos energiává."
+    },
+    {
+      "question": "Mi a fűtőanyag?",
+      "answers": {
+        "a": "Minden, ami meleg.",
+        "b": "Minden, ami folyékony.",
+        "c": "Olyan anyag, aminek elégetésével hőt termelünk."
+      },
+      "correct": "c",
+      "explanation": "Fűtőanyagnak azokat az anyagokat nevezzük, amelyekben nagy mennyiségű kémiai energia van tárolva, és ezt az energiát égés útján, hő formájában tudjuk felszabadítani és hasznosítani."
+    },
+    {
+      "question": "Milyen energiaátalakulás történik, amikor egy izzó világít?",
+      "answers": {
+        "a": "Fényenergia → Elektromos energia",
+        "b": "Elektromos energia → Fény- és hőenergia",
+        "c": "Hőenergia → Fényenergia"
+      },
+      "correct": "b",
+      "explanation": "Az izzó egy fogyasztó, amely az elektromos hálózatból felvett elektromos energiát alakítja át a kívánt fényenergiává, de melléktermékként mindig keletkezik hőenergia is."
+    },
+    {
+      "question": "Mi az 'energiaátalakulás'?",
+      "answers": {
+        "a": "Az energia mennyiségének növekedése.",
+        "b": "Az energia megsemmisülése.",
+        "c": "Az energia átalakulása egyik formájából a másikba."
+      },
+      "correct": "c",
+      "explanation": "Az energia-megmaradás törvénye szerint az energia nem vész el, csupán átalakul. Például egy elemben a kémiai energia alakul elektromos energiává."
+    },
+    {
+      "question": "Melyik a nem megújuló (fosszilis) energiaforrás?",
+      "answers": {
+        "a": "Szélenergia",
+        "b": "Földgáz",
+        "c": "Napenergia"
+      },
+      "correct": "b",
+      "explanation": "A földgáz, a szén és a kőolaj fosszilis energiahordozók, amelyek évmilliók alatt képződtek, és készleteik végesek."
+    },
+    {
+      "question": "Milyen energiája van a fának, amit a kandallóban elégetünk?",
+      "answers": {
+        "a": "Hőenergia",
+        "b": "Mozgási energia",
+        "c": "Kémiai energia"
+      },
+      "correct": "c",
+      "explanation": "A fa, mint minden szerves anyag, kémiai kötésekben tárolja az energiát, amit a fotoszintézis során a Napból vett fel. Égéskor ez a kémiai energia szabadul fel hő formájában."
+    },
+    {
+      "question": "Melyik NEM fosszilis energiaforrás?",
+      "answers": {
+        "a": "Vízenergia",
+        "b": "Kőolaj",
+        "c": "Szén"
+      },
+      "correct": "a",
+      "explanation": "A vízenergia a magasan lévő víz helyzeti energiáját hasznosítja, ami a vízkörforgás révén megújuló. A kőolaj és a szén fosszilis energiahordozók."
+    },
+    {
+      "question": "Milyen energiaátalakulás történik egy vízerőműben?",
+      "answers": {
+        "a": "Kémiai energia → Elektromos energia",
+        "b": "Hőenergia → Mozgási energia",
+        "c": "Helyzeti energia → Mozgási energia → Elektromos energia"
+      },
+      "correct": "c",
+      "explanation": "A magasan lévő víz helyzeti energiája lezúdulás közben mozgási energiává alakul. A mozgó víz megforgatja a turbinákat, amelyek a generátorokat hajtva elektromos energiát termelnek."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A Nap megújuló energiaforrás.",
+        "b": "A szén nem megújuló energiaforrás.",
+        "c": "Az atomerőművek megújuló energiát használnak."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. Bár az atomerőművek nem bocsátanak ki szén-dioxidot, fűtőanyaguk, az urán, egy a Földön bányászott, véges mennyiségben rendelkezésre álló ásványkincs."
+    },
+    {
+      "question": "Az energia-megmaradás törvénye?",
+      "answers": {
+        "a": "Az energia nem vész el, csak átalakul egyik formájából a másikba.",
+        "b": "Az energia mennyisége folyamatosan csökken a világban.",
+        "c": "Új energiát lehet teremteni a semmiből."
+      },
+      "correct": "a",
+      "explanation": "Ez a fizika egyik legfontosabb alaptörvénye. Zárt rendszerben a teljes energia mennyisége állandó, legfeljebb a formája változik meg."
+    },
+    {
+      "question": "Mi az energiaátvitel?",
+      "answers": {
+        "a": "Az energia átadása egyik testről a másikra.",
+        "b": "Az energia átalakítása egyik formából a másikba.",
+        "c": "Az energia megsemmisítése."
+      },
+      "correct": "a",
+      "explanation": "Az energiaátvitel (vagy energiaközlés) az a folyamat, amikor az energia munkavégzés vagy hőcsere révén egyik rendszertől a másikhoz kerül."
+    },
+    {
+      "question": "Mi a biomassza?",
+      "answers": {
+        "a": "Kőolaj",
+        "b": "Növényi és állati eredetű szerves anyagok.",
+        "c": "Szén"
+      },
+      "correct": "b",
+      "explanation": "A biomassza kategóriájába tartozik minden olyan szerves anyag, ami elégethető energiatermelés céljából, például a fa, szalma, energianövények, vagy akár a szerves hulladék."
+    },
+    {
+      "question": "Milyen energiaátalakulás történik, amikor eszünk?",
+      "answers": {
+        "a": "Hőenergia → Kémiai energia",
+        "b": "Kémiai energia → Hő- és mozgási energia",
+        "c": "Mozgási energia → Kémiai energia"
+      },
+      "correct": "b",
+      "explanation": "Az élelmiszerek kémiai energiát tárolnak. Az emésztés során a szervezetünk ezt a kémiai energiát alakítja át a testünk működéséhez szükséges hőenergiává és a mozgásunkhoz szükséges mechanikai energiává."
+    },
+    {
+      "question": "Az atomerőművekben...",
+      "answers": {
+        "a": "...a Nap energiáját használják.",
+        "b": "...az atommagokban tárolt energiát szabadítják fel.",
+        "c": "...fosszilis fűtőanyagokat égetnek."
+      },
+      "correct": "b",
+      "explanation": "Az atomerőművek az urán atommagjainak hasadásakor felszabaduló hatalmas energiát (magenergiát) használják fel hőtermelésre, amivel gőzt fejlesztenek és áramot termelnek."
+    },
+    {
+      "question": "Melyik a leginkább környezetbarát energiaforrás?",
+      "answers": {
+        "a": "Szélenergia",
+        "b": "Szénerőmű",
+        "c": "Olajtüzelésű erőmű"
+      },
+      "correct": "a",
+      "explanation": "A szélenergia hasznosítása közben nem szabadulnak fel üvegházhatású gázok vagy más káros anyagok. A szén- és olajtüzelésű erőművek jelentős légszennyezést okoznak."
+    },
+    {
+      "question": "Milyen energiaátalakulás történik egy hőerőműben?",
+      "answers": {
+        "a": "Kémiai (vagy nukleáris) energia → hőenergia → mozgási energia → elektromos energia.",
+        "b": "Elektromos energia → hőenergia.",
+        "c": "Mozgási energia → kémiai energia."
+      },
+      "correct": "a",
+      "explanation": "A fűtőanyag elégetésével hőt termelnek, amivel gőzt fejlesztenek. A gőz meghajt egy turbinát (mozgási), ami egy generátort forgat, ami áramot termel (elektromos)."
+    },
+    {
+      "question": "Melyik energiaforrás NEM megújuló?",
+      "answers": {
+        "a": "Szélenergia",
+        "b": "Vízenergia",
+        "c": "Kőolaj"
+      },
+      "correct": "c",
+      "explanation": "A kőolaj fosszilis tüzelőanyag, amelynek készletei végesek. A szél- és vízenergia a Nap által hajtott körfolyamatok része, így megújulók."
+    },
+    {
+      "question": "Mi a fotoszintézis?",
+      "answers": {
+        "a": "Az állatok légzése.",
+        "b": "Kémiai reakció.",
+        "c": "Az a folyamat, ahogy a növények a napfény energiáját kémiai energiává alakítják."
+      },
+      "correct": "c",
+      "explanation": "A fotoszintézis a földi élet alapja. A zöld növények a napfény energiáját felhasználva a levegő szén-dioxidjából és a vízből szerves anyagokat (cukrot) hoznak létre."
+    },
+    {
+      "question": "Melyik a legfontosabb energiaforrás a Földön?",
+      "answers": {
+        "a": "A szél",
+        "b": "A Nap",
+        "c": "A Föld belső hője"
+      },
+      "correct": "b",
+      "explanation": "A Földön szinte minden energiaforrás (közvetlenül vagy közvetve) a Napból származik. A Nap energiája hozza létre a szeleket, a vízkörforgást, és a fosszilis energiahordozók is egykor a napfényt hasznosító élőlényekből jöttek létre."
+    }
+  ]
 }

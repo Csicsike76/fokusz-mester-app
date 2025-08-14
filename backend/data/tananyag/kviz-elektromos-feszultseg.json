@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz elektromos feszultseg\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás írja le a feszültséget?",
+      "answers": {
+        "a": "A töltések áramlása.",
+        "b": "A töltések mozgásával szembeni ellenállás.",
+        "c": "Azt mutatja meg, hogy az áramforrás mennyi energiát ad át egységnyi töltésnek."
+      },
+      "correct": "c",
+      "explanation": "A feszültség definíciója szerint az a munkavégzés, amit az elektromos mező 1 C töltésen végez, miközben az A pontból B pontba jut. Lényegében az 'egy töltésre jutó energiát' jelenti."
+    },
+    {
+      "question": "Melyik NEM áramforrás, tehát nem hoz létre feszültséget?",
+      "answers": {
+        "a": "Akkumulátor",
+        "b": "Generátor",
+        "c": "Kondenzátor"
+      },
+      "correct": "c",
+      "explanation": "Bár a feltöltött kondenzátoron van feszültség, ő maga nem áramforrás, mert nem alakít át másfajta energiát elektromos energiává, csupán tárolja azt."
+    },
+    {
+      "question": "A háztartási konnektorban lévő feszültség Magyarországon...",
+      "answers": {
+        "a": "230 V.",
+        "b": "110 V.",
+        "c": "12 V."
+      },
+      "correct": "a",
+      "explanation": "Európában, így Magyarországon is a háztartási hálózati feszültség szabványos értéke 230 volt."
+    },
+    {
+      "question": "Mi a voltmérő belső ellenállása?",
+      "answers": {
+        "a": "Nagyon kicsi.",
+        "b": "Nagyon nagy.",
+        "c": "Nulla."
+      },
+      "correct": "b",
+      "explanation": "Ahhoz, hogy a voltmérő ne befolyásolja jelentősen a mért áramkört, a lehető legkevesebb áramot szabad csak 'elterelnie'. Ezért a belső ellenállásának nagyon nagynak kell lennie."
+    },
+    {
+      "question": "Mi történik a feszültséggel, ha két egyforma elemet sorba kapcsolunk?",
+      "answers": {
+        "a": "A feszültségek összeadódnak.",
+        "b": "A feszültség a felére csökken.",
+        "c": "A feszültség nem változik."
+      },
+      "correct": "a",
+      "explanation": "Ha az elemeket helyesen (pozitív pólust a negatívhoz) sorba kötjük, az általuk létrehozott feszültségek összeadódnak. Így két 1,5 V-os elemből 3 V-os áramforrást kapunk."
+    },
+    {
+      "question": "Melyik eszköz méri a feszültséget?",
+      "answers": {
+        "a": "Voltmérő",
+        "b": "Ampermérő",
+        "c": "Erőmérő"
+      },
+      "correct": "a",
+      "explanation": "A feszültség mérésére a voltmérőt használjuk, amelyet mindig párhuzamosan kell kapcsolni azzal a fogyasztóval, amelyen a feszültséget mérni szeretnénk."
+    },
+    {
+      "question": "Ha egy fogyasztón nagyobb a feszültség, de az áramerősség ugyanakkora, akkor a teljesítménye...",
+      "answers": {
+        "a": "...csökken.",
+        "b": "...nagyobb.",
+        "c": "...nem változik."
+      },
+      "correct": "b",
+      "explanation": "Az elektromos teljesítmény képlete P = U * I. Ha a feszültség (U) nő, miközben az áramerősség (I) állandó, a szorzatuk, azaz a teljesítmény is nagyobb lesz."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A feszültség mértékegysége a volt.",
+        "b": "A feszültséget voltmérővel mérjük.",
+        "c": "A feszültség és az áramerősség ugyanaz."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. A feszültség az áram 'oka', az áramerősség pedig a 'következménye'. A feszültség hajtja a töltéseket, az áramerősség pedig a másodpercenként átáramló töltések számát méri."
+    },
+    {
+      "question": "Hogyan kell a voltmérőt az áramkörbe kapcsolni?",
+      "answers": {
+        "a": "Párhuzamosan a fogyasztóval.",
+        "b": "Sorosan a fogyasztóval.",
+        "c": "Bárhogy lehet."
+      },
+      "correct": "a",
+      "explanation": "A voltmérő a két pont közötti feszültségkülönbséget méri. Ezért az áramkörben a mérendő fogyasztó két kivezetéséhez, azaz vele párhuzamosan kell kapcsolni."
+    },
+    {
+      "question": "Mi az elektromotoros erő?",
+      "answers": {
+        "a": "Az áramforrás (pl. elem) által létrehozott feszültség.",
+        "b": "Egy motor által kifejtett erő.",
+        "c": "Az elektronok sebessége."
+      },
+      "correct": "a",
+      "explanation": "Az elektromotoros erő az áramforrásra jellemző mennyiség. Azt a munkát adja meg, amit az áramforrás 1 C töltés áramkörben való körbeáramoltatásához végez."
+    },
+    {
+      "question": "A feszültség egy...",
+      "answers": {
+        "a": "...vektormennyiség.",
+        "b": "...skalármennyiség.",
+        "c": "...erő."
+      },
+      "correct": "b",
+      "explanation": "Bár a feszültség az elektromos mezővel kapcsolatos, maga a feszültség (két pont közötti potenciálkülönbség) skalármennyiség, nincs iránya, csak nagysága és előjele."
+    },
+    {
+      "question": "Mi a feszültség mértékegysége?",
+      "answers": {
+        "a": "Volt (V)",
+        "b": "Amper (A)",
+        "c": "Ohm (Ω)"
+      },
+      "correct": "a",
+      "explanation": "Az elektromos feszültség mértékegysége Alessandro Volta tiszteletére a volt, jele V. Az amper az áramerősség, az ohm pedig az ellenállás mértékegysége."
+    },
+    {
+      "question": "Melyik veszélyesebb az emberi testre?",
+      "answers": {
+        "a": "Az alacsony feszültség.",
+        "b": "A magas feszültség.",
+        "c": "A feszültség nem veszélyes."
+      },
+      "correct": "b",
+      "explanation": "Az áramütés veszélyességét a testen áthaladó áram erőssége határozza meg. Magasabb feszültség ugyanakkora ellenállás mellett nagyobb áramot hajt át a testen, ezért veszélyesebb."
+    },
+    {
+      "question": "A konnektor két nyílása között mi van?",
+      "answers": {
+        "a": "Mágneses mező",
+        "b": "Feszültségkülönbség",
+        "c": "Vákuum"
+      },
+      "correct": "b",
+      "explanation": "A konnektor két pontja az elektromos hálózat két pólusához csatlakozik, amelyek között feszültségkülönbség (kb. 230 V) van. Ez a feszültség hajtja az áramot a bedugott készülékekben."
+    },
+    {
+      "question": "A feszültség...",
+      "answers": {
+        "a": "...mindig veszélyes.",
+        "b": "...soha nem veszélyes.",
+        "c": "...csak akkor veszélyes, ha képes a testen keresztül nagy áramot létrehozni."
+      },
+      "correct": "c",
+      "explanation": "Önmagában a feszültség nem, hanem a testen áthaladó áram okozza a sérülést. A magas feszültség azért veszélyes, mert az emberi test viszonylag nagy ellenállásán is képes nagy áramerősséget létrehozni."
+    },
+    {
+      "question": "Hogyan mérünk feszültséget egy izzón?",
+      "answers": {
+        "a": "A voltmérőt az izzó helyére kötjük.",
+        "b": "A voltmérőt az izzóval sorba kötjük.",
+        "c": "A voltmérőt az izzó két kivezetéséhez kötjük (párhuzamosan)."
+      },
+      "correct": "c",
+      "explanation": "A feszültség két pont közötti különbség. Ahhoz, hogy az izzó két végpontja közötti feszültséget megmérjük, a voltmérő mérőcsúcsait az izzó két kivezetéséhez kell érinteni. Ez a párhuzamos kapcsolás."
+    },
+    {
+      "question": "Párhuzamos kapcsolásnál az egyes ágakra jutó feszültség...",
+      "answers": {
+        "a": "...az ágak számától függ.",
+        "b": "...mindegyik ágban ugyanakkora, mint az áramforrás feszültsége.",
+        "c": "...az ágakban eloszlik."
+      },
+      "correct": "b",
+      "explanation": "A párhuzamos kapcsolás nagy előnye, hogy minden párhuzamos ág közvetlenül az áramforrás pólusaira csatlakozik, ezért mindegyikre az áramforrás teljes feszültsége jut."
+    },
+    {
+      "question": "Mitől függ egy galvánelem feszültsége?",
+      "answers": {
+        "a": "Az elem méretétől.",
+        "b": "Az elem korától.",
+        "c": "Az elemben lévő anyagok kémiai minőségétől."
+      },
+      "correct": "c",
+      "explanation": "A galvánelem (pl. ceruzaelem) feszültségét az határozza meg, hogy milyen elektródákat és elektrolitot használnak benne. Például a cink-szén elem mindig kb. 1,5 V feszültséget ad, mérettől függetlenül."
+    },
+    {
+      "question": "Soros kapcsolásnál a fogyasztókra eső feszültségek...",
+      "answers": {
+        "a": "...mindig egyenlők.",
+        "b": "...összege egyenlő az áramforrás feszültségével.",
+        "c": "...nagyobbak, mint az áramforrás feszültsége."
+      },
+      "correct": "b",
+      "explanation": "Soros kapcsolás esetén az áramforrás teljes feszültsége megoszlik a sorba kapcsolt fogyasztók között. A rájuk eső feszültségek összege adja ki a telep feszültségét."
+    },
+    {
+      "question": "Mi a feszültség jele a képletekben?",
+      "answers": {
+        "a": "F",
+        "b": "U",
+        "c": "I"
+      },
+      "correct": "b",
+      "explanation": "A feszültséget általában U betűvel jelöljük. Az F az erő, az I az áramerősség jele."
+    },
+    {
+      "question": "Melyik állítás igaz a feszültségre soros kapcsolásban?",
+      "answers": {
+        "a": "Minden fogyasztón ugyanakkora.",
+        "b": "Nagyobb a fogyasztókon, mint az áramforráson.",
+        "c": "Megoszlik a fogyasztók között."
+      },
+      "correct": "c",
+      "explanation": "Soros kapcsolásnál az áramforrás feszültsége 'elfogy' a fogyasztókon, azaz a feszültség megoszlik közöttük. A nagyobb ellenállású fogyasztóra nagyobb feszültség jut."
+    },
+    {
+      "question": "Mi a feszültség szerepe az áramkörben?",
+      "answers": {
+        "a": "Ez 'hajtja' a töltéseket, létrehozza az áramot.",
+        "b": "Ez akadályozza a töltések mozgását.",
+        "c": "Ez a töltések száma."
+      },
+      "correct": "a",
+      "explanation": "A feszültség az áramforrás két pólusa közötti 'töltéskülönbség'. Ez az elektromos mező hozza létre azt az erőt, ami a vezetékben lévő szabad töltéseket mozgásra kényszeríti."
+    },
+    {
+      "question": "Mi a potenciálkülönbség?",
+      "answers": {
+        "a": "Az áramerősség másik neve.",
+        "b": "Az ellenállás másik neve.",
+        "c": "A feszültség másik neve."
+      },
+      "correct": "c",
+      "explanation": "A feszültség az elektromos mező két pontjának elektromos potenciálja közötti különbséget jelenti. A két kifejezést a gyakorlatban szinonimaként használjuk."
+    },
+    {
+      "question": "Egy hagyományos ceruzaelem feszültsége kb...",
+      "answers": {
+        "a": "1,5 V",
+        "b": "9 V",
+        "c": "230 V"
+      },
+      "correct": "a",
+      "explanation": "A standard ceruzaelemek (AA, AAA) feszültsége általában 1,5 volt. A 9 V a laposelemekre, a 230 V pedig a hálózati feszültségre jellemző."
+    },
+    {
+      "question": "Mi a feszültség?",
+      "answers": {
+        "a": "A töltések áramlásának sebessége.",
+        "b": "Az áramforrás két pólusa közötti potenciálkülönbség.",
+        "c": "Az áramkör ellenállása."
+      },
+      "correct": "b",
+      "explanation": "A feszültség az elektromos mező két pontja közötti munkavégző képességet írja le. Azt adja meg, hogy a mező mennyi munkát végez egységnyi töltésen, miközben az elmozdul a két pont között."
+    }
+  ]
 }

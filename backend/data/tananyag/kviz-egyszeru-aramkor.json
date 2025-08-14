@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz egyszeru aramkor\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik NEM áramforrás?",
+      "answers": {
+        "a": "Akkumulátor",
+        "b": "Napelem",
+        "c": "Ellenállás"
+      },
+      "correct": "c",
+      "explanation": "Az akkumulátor és a napelem is képes elektromos energiát biztosítani az áramkör számára. Az ellenállás egy olyan áramköri elem, amely a töltések áramlását akadályozza, tehát fogyasztónak tekinthető."
+    },
+    {
+      "question": "Melyik NEM szükséges egy egyszerű áramkör működéséhez?",
+      "answers": {
+        "a": "Mágnes",
+        "b": "Áramforrás (pl. elem)",
+        "c": "Fogyasztó (pl. izzó)"
+      },
+      "correct": "a",
+      "explanation": "Egy egyszerű áramkör alapvető részei az áramforrás, a fogyasztó és a vezeték. A kapcsoló a működtetéshez kell. A mágnes nem része az alapvető elektromos áramkörnek."
+    },
+    {
+      "question": "Mi a galvánelem?",
+      "answers": {
+        "a": "Egyfajta motor.",
+        "b": "Egyfajta kapcsoló.",
+        "c": "Kémiai energiát elektromos energiává alakító áramforrás (pl. ceruzaelem)."
+      },
+      "correct": "c",
+      "explanation": "A galvánelem (pl. a hagyományos elemek) belsejében kémiai reakciók zajlanak, amelyek elektromos feszültséget hoznak létre. Ezek az eszközök a kémiai energiát alakítják át elektromos energiává."
+    },
+    {
+      "question": "Miért van a legtöbb elektromos kábel műanyaggal bevonva?",
+      "answers": {
+        "a": "Hogy szebb legyen.",
+        "b": "Hogy ne melegedjen annyira.",
+        "c": "Mert a műanyag szigetel, és véd az áramütéstől."
+      },
+      "correct": "c",
+      "explanation": "A kábel belsejében lévő fém a vezető, ami az áramot szállítja. A külső műanyag bevonat egy szigetelő réteg, ami megakadályozza, hogy véletlenül hozzáérjünk a vezetőhöz és áramütést szenvedjünk."
+    },
+    {
+      "question": "Melyik áramforrás?",
+      "answers": {
+        "a": "Elem",
+        "b": "Izzó",
+        "c": "Kapcsoló"
+      },
+      "correct": "a",
+      "explanation": "Az elem (galvánelem) kémiai energiát alakít át elektromos energiává, tehát áramforrás. Az izzó fogyasztó, a kapcsoló pedig egy vezérlőelem."
+    },
+    {
+      "question": "Mi az elektromos áram?",
+      "answers": {
+        "a": "A töltéssel rendelkező részecskék egyirányú, rendezett mozgása.",
+        "b": "A vezeték melegedése.",
+        "c": "A mágneses mező változása."
+      },
+      "correct": "a",
+      "explanation": "Az elektromos áramot a töltéshordozók, fémekben az elektronok, rendezett, egyirányú áramlása hozza létre egy vezetőben."
+    },
+    {
+      "question": "Mi a feltétele az elektromos áram létrejöttének?",
+      "answers": {
+        "a": "Mágneses mező jelenléte.",
+        "b": "Nagyon magas hőmérséklet.",
+        "c": "Zárt áramkör és áramforrás."
+      },
+      "correct": "c",
+      "explanation": "Elektromos áram csak akkor jöhet létre, ha van egy áramforrás, ami energiát biztosít a töltéseknek, és van egy zárt, folytonos vezető út, amelyen a töltések körbe tudnak áramlani."
+    },
+    {
+      "question": "A háztartási elektromos hálózat...",
+      "answers": {
+        "a": "...egy áramkör, de nincs benne fogyasztó.",
+        "b": "...nem tekinthető áramkörnek.",
+        "c": "...egy összetett elektromos áramkör."
+      },
+      "correct": "c",
+      "explanation": "A lakás elektromos hálózata egy nagyon összetett áramkör, amelyben az erőmű az áramforrás, a vezetékek, kapcsolók, biztosítékok, konnektorok és a rácsatlakoztatott készülékek mind az áramkör részei."
+    },
+    {
+      "question": "Mi a különbség a zárt és a nyitott áramkör között?",
+      "answers": {
+        "a": "A zártban van áramforrás, a nyitottban nincs.",
+        "b": "A zártban folyik áram, a nyitottban nem.",
+        "c": "A zártban van fogyasztó, a nyitottban nincs."
+      },
+      "correct": "b",
+      "explanation": "A zárt áramkör egy folytonos, megszakítás nélküli utat biztosít a töltéseknek, ezért folyik benne áram. A nyitott áramkörben az út valahol meg van szakítva, így az áramlás nem jöhet létre."
+    },
+    {
+      "question": "Mi a vezeték szerepe?",
+      "answers": {
+        "a": "Energiát termel.",
+        "b": "Utat biztosít a töltések áramlásának.",
+        "c": "Megszakítja az áramkört."
+      },
+      "correct": "b",
+      "explanation": "A vezetékek jó vezető anyagból (jellemzően fémből) készülnek, és az a feladatuk, hogy összekössék az áramkör elemeit (áramforrást, kapcsolót, fogyasztót)."
+    },
+    {
+      "question": "Melyik a fogyasztó?",
+      "answers": {
+        "a": "Kapcsoló",
+        "b": "Elektromos csengő",
+        "c": "Akkumulátor"
+      },
+      "correct": "b",
+      "explanation": "Az elektromos csengő az elektromos energiát hangenergiává és mozgási energiává alakítja, tehát fogyasztó. Az akkumulátor áramforrás, a kapcsoló pedig vezérlőelem."
+    },
+    {
+      "question": "Egy egyszerű áramkörben az elem...",
+      "answers": {
+        "a": "...a fogyasztó.",
+        "b": "...a vezeték.",
+        "c": "...az áramforrás."
+      },
+      "correct": "c",
+      "explanation": "Az elem kémiai energiát alakít át elektromos energiává, ezzel biztosítva a feszültséget, ami mozgásba hozza a töltéseket az áramkörben. Tehát az elem az áramforrás."
+    },
+    {
+      "question": "Miért veszélyes, ha egy hajszárító a fürdőkádba esik?",
+      "answers": {
+        "a": "Mert a víz elrozsdásítja.",
+        "b": "Mert a víz jó vezető, és áramütést okozhat.",
+        "c": "Mert a víz lehűti a hajszárítót."
+      },
+      "correct": "b",
+      "explanation": "A csapvíz vezeti az elektromos áramot. Ha egy bekapcsolt elektromos eszköz vízbe esik, a víz áramkört hozhat létre a benne tartózkodó ember testén keresztül, ami halálos áramütést okozhat."
+    },
+    {
+      "question": "Milyen irányúnak tekintjük megegyezés szerint az áram irányát?",
+      "answers": {
+        "a": "A negatívtól a pozitív pólus felé.",
+        "b": "A pozitívtól a negatív pólus felé.",
+        "c": "Mindkét irányba egyszerre."
+      },
+      "correct": "b",
+      "explanation": "Ez az úgynevezett technikai áramirány. Megegyezés alapján a pozitív töltések mozgásának irányát nevezték ki az áram irányának. Ez az áramforrás pozitív pólusától a negatív pólusa felé mutat."
+    },
+    {
+      "question": "Melyik rajzjel jelöli az izzót egy kapcsolási rajzon?",
+      "answers": {
+        "a": "Egy kör, benne egy 'X' jellel.",
+        "b": "Egy hosszú és egy rövid párhuzamos vonal.",
+        "c": "Egy cikk-cakk vonal."
+      },
+      "correct": "a",
+      "explanation": "Az izzót, mint egyszerű fogyasztót, egy körrel ábrázoljuk, amelybe egy 'X'-et rajzolunk. A hosszú és rövid vonal a telepet (áramforrást) jelöli."
+    },
+    {
+      "question": "Mi a biztosíték szerepe?",
+      "answers": {
+        "a": "Megvédi az áramkört a túláramtól.",
+        "b": "Erősíti az áramot.",
+        "c": "Tárolja az elektromos energiát."
+      },
+      "correct": "a",
+      "explanation": "A biztosíték egy biztonsági eszköz. Ha az áramkörben az áramerősség túl naggyá válik, a biztosítékban lévő vékony szál elolvad és megszakítja az áramkört, ezzel megelőzve a nagyobb károkat."
+    },
+    {
+      "question": "Melyik eszköz NEM fogyasztó?",
+      "answers": {
+        "a": "Vezeték",
+        "b": "Izzó",
+        "c": "Villanymotor"
+      },
+      "correct": "a",
+      "explanation": "A fogyasztó az elektromos energiát valamilyen más, hasznos energiaformává (fény, hő, mozgás) alakítja. A vezeték feladata a töltések szállítása, nem az energia átalakítása."
+    },
+    {
+      "question": "Mi a kapcsoló feladata egy áramkörben?",
+      "answers": {
+        "a": "Megszakítja vagy zárja az áram útját.",
+        "b": "Termeli az elektromos áramot.",
+        "c": "Fogyasztja az elektromos energiát."
+      },
+      "correct": "a",
+      "explanation": "A kapcsoló segítségével tudjuk az áramkört nyitottá (áram nem folyik) vagy zárttá (áram folyik) tenni. Ezzel szabályozzuk az áram útját."
+    },
+    {
+      "question": "Melyik NEM szigetelő?",
+      "answers": {
+        "a": "Üveg",
+        "b": "Levegő",
+        "c": "Vas"
+      },
+      "correct": "c",
+      "explanation": "Az üveg és a levegő elektromos szigetelők. A vas egy fém, ami kiválóan vezeti az elektromos áramot, tehát elektromos vezető."
+    },
+    {
+      "question": "Melyik állítás igaz a zárt áramkörre?",
+      "answers": {
+        "a": "Az áram tud folyni benne.",
+        "b": "A kapcsoló nyitott állapotban van.",
+        "c": "Nincs benne fogyasztó."
+      },
+      "correct": "a",
+      "explanation": "Zárt áramkörről akkor beszélünk, ha az áramforrástól a fogyasztón keresztül megszakítás nélkül vezet út vissza az áramforráshoz. Csak zárt áramkörben tud folyni az elektromos áram."
+    },
+    {
+      "question": "Mi az áramforrás szerepe az áramkörben?",
+      "answers": {
+        "a": "Energiát biztosít a töltések áramlásához.",
+        "b": "Fogyasztja az elektromos energiát.",
+        "c": "Megszakítja az áram útját."
+      },
+      "correct": "a",
+      "explanation": "Az áramforrás (pl. elem) az áramkör 'motorja', amely a benne lévő kémiai energiát elektromos energiává alakítja, és ezzel mozgásban tartja a töltéseket."
+    },
+    {
+      "question": "A kapcsolási rajz egy...",
+      "answers": {
+        "a": "...művészi rajz az áramkörről.",
+        "b": "...egyszerűsített, egyezményes jelekkel készült vázlat az áramkörről.",
+        "c": "...háromdimenziós modell."
+      },
+      "correct": "b",
+      "explanation": "A kapcsolási rajz az áramkörök sematikus ábrázolására szolgál. Nem a valós kinézetet, hanem az elemeket és azok összekötését mutatja be szabványos, egyezményes jelekkel."
+    },
+    {
+      "question": "Melyik rajzjel jelöli a telepet (áramforrást)?",
+      "answers": {
+        "a": "Egy kör egy 'A' betűvel.",
+        "b": "Egy hosszabb és egy rövidebb, egymással párhuzamos vonal.",
+        "c": "Egy megszakított vonal."
+      },
+      "correct": "b",
+      "explanation": "A galvánelemet vagy telepet egy hosszabb (pozitív pólus) és egy rövidebb (negatív pólus) párhuzamos vonallal jelöljük. A megszakított vonal a kapcsolót jelöli."
+    },
+    {
+      "question": "Mi a különbség egy vezető és egy szigetelő között?",
+      "answers": {
+        "a": "A vezetők drágábbak.",
+        "b": "A vezetők mindig fémek, a szigetelők nem.",
+        "c": "A vezetőkben könnyen mozognak a töltések, a szigetelőkben nem."
+      },
+      "correct": "c",
+      "explanation": "A vezetőkben vannak szabadon mozgó töltéshordozók (pl. elektronok), míg a szigetelőkben a töltések erősen kötöttek, így nem tudnak áramot létrehozni."
+    },
+    {
+      "question": "Egy egyszerű áramkörben az elektronok...",
+      "answers": {
+        "a": "...az áramforrás negatív pólusától a pozitív felé áramlanak.",
+        "b": "...az áramforrás pozitív pólusától a negatív felé áramlanak.",
+        "c": "...nem mozognak."
+      },
+      "correct": "a",
+      "explanation": "Az elektronok negatív töltésűek, ezért az áramforrás negatív pólusa taszítja, a pozitív pólusa pedig vonzza őket. Így a valós áramlási irányuk a negatívtól a pozitív pólus felé mutat."
+    }
+  ]
 }

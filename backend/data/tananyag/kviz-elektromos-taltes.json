@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz elektromos taltes\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás igaz a szigetelő anyagokra?",
+      "answers": {
+        "a": "Jól vezetik az elektromos áramot.",
+        "b": "A töltések nehezen mozognak bennük.",
+        "c": "Mindig pozitív töltésűek."
+      },
+      "correct": "b",
+      "explanation": "A szigetelő anyagok atomjaiban az elektronok erősen kötődnek az atommaghoz, ezért nem tudnak szabadon elmozdulni. Emiatt a szigetelők nem vagy csak nagyon rosszul vezetik az elektromosságot."
+    },
+    {
+      "question": "Melyik részecske mozog a fémekben, ami az elektromos vezetést okozza?",
+      "answers": {
+        "a": "Elektronok",
+        "b": "Protonok",
+        "c": "Neutronok"
+      },
+      "correct": "a",
+      "explanation": "A fémekben a negatív töltésű elektronok könnyen el tudnak mozdulni az atomtörzsek között. Az ő mozgásuk teszi lehetővé az elektromos áram vezetését."
+    },
+    {
+      "question": "Hogyan hat egymásra két pozitív töltésű test?",
+      "answers": {
+        "a": "Taszítják egymást.",
+        "b": "Vonzzák egymást.",
+        "c": "Nem lépnek kölcsönhatásba."
+      },
+      "correct": "a",
+      "explanation": "Az elektrosztatika alaptörvénye szerint az azonos nemű töltések (pozitív-pozitív vagy negatív-negatív) taszítják egymást."
+    },
+    {
+      "question": "Milyen töltésű lesz az a gyapjúdarab, amivel egy műanyag rudat dörzsöltünk meg, ha a rúd negatív lett?",
+      "answers": {
+        "a": "Pozitív",
+        "b": "Negatív",
+        "c": "Semleges"
+      },
+      "correct": "a",
+      "explanation": "A dörzsölés során a negatív töltésű elektronok a gyapjúdarabról a műanyag rúdra vándorolnak. Így a gyapjúban elektronhiány, azaz pozitív töltéstöbblet alakul ki."
+    },
+    {
+      "question": "Mi a neve annak a berendezésnek, amellyel ki lehet mutatni egy test elektromos állapotát?",
+      "answers": {
+        "a": "Hőmérő",
+        "b": "Elektroszkóp",
+        "c": "Iránytű"
+      },
+      "correct": "b",
+      "explanation": "Az elektroszkóp egy egyszerű eszköz, amellyel megállapítható, hogy egy test töltött-e vagy sem. Ha töltött testet érintünk hozzá, a mutatója (fémlevelei) kitér."
+    },
+    {
+      "question": "Az elektrosztatika mivel foglalkozik?",
+      "answers": {
+        "a": "A mozgó töltésekkel (árammal).",
+        "b": "A mágneses jelenségekkel.",
+        "c": "A nyugalomban lévő elektromos töltésekkel."
+      },
+      "correct": "c",
+      "explanation": "Az elektrosztatika a fizika azon ága, amely a nyugalomban lévő elektromos töltésekkel és az általuk létrehozott elektromos mezővel kapcsolatos jelenségeket vizsgálja."
+    },
+    {
+      "question": "Melyik NEM példa az elektrosztatikus jelenségekre?",
+      "answers": {
+        "a": "A hajadhoz tapadó lufi.",
+        "b": "Villámlás a viharban.",
+        "c": "Egy mágnes felemel egy szöget."
+      },
+      "correct": "c",
+      "explanation": "A mágnes és a szög közötti kölcsönhatás mágneses, nem pedig elektrosztatikus (nyugalomban lévő töltések közötti) jelenség."
+    },
+    {
+      "question": "Mi történik, ha egy műanyag vonalzót megdörzsölünk egy gyapjúdarabbal, majd apró papírfecnik fölé tartjuk?",
+      "answers": {
+        "a": "A vonalzó vonzza a papírfecniket.",
+        "b": "A vonalzó taszítja a papírfecniket.",
+        "c": "Nem történik semmi."
+      },
+      "correct": "a",
+      "explanation": "Dörzsölés hatására a vonalzó elektromosan feltöltődik. Amikor a semleges papírfecnik közelébe kerül, elektromos megosztást hoz létre bennük, és vonzza őket."
+    },
+    {
+      "question": "Melyik NEM szigetelő?",
+      "answers": {
+        "a": "Porcelán",
+        "b": "Levegő",
+        "c": "Sós víz"
+      },
+      "correct": "c",
+      "explanation": "A porcelán és a száraz levegő jó elektromos szigetelők. A sós víz azonban oldott ionokat tartalmaz, amelyek el tudnak mozdulni, így az elektromos vezetők közé tartozik."
+    },
+    {
+      "question": "Mi okozza a villámlást?",
+      "answers": {
+        "a": "Mágneses vihar a felhőkben.",
+        "b": "Hatalmas elektromos töltéskülönbség kiegyenlítődése.",
+        "c": "Hangrobbanás a légkörben."
+      },
+      "correct": "b",
+      "explanation": "Villámlás akkor jön létre, amikor a felhőkben a súrlódás miatt óriási pozitív és negatív töltések halmozódnak fel, és ez a hatalmas feszültségkülönbség egy szikrakisülés formájában kiegyenlítődik."
+    },
+    {
+      "question": "Melyik anyag jó elektromos vezető?",
+      "answers": {
+        "a": "Műanyag",
+        "b": "Réz",
+        "c": "Üveg"
+      },
+      "correct": "b",
+      "explanation": "Az elektromos vezetők olyan anyagok, amelyekben a töltések könnyen el tudnak mozdulni. A fémek, mint például a réz, kiváló vezetők. A műanyag és az üveg szigetelők."
+    },
+    {
+      "question": "Hogyan hat egy pozitívan töltött test egy negatívan töltött testre?",
+      "answers": {
+        "a": "Vonzzák egymást.",
+        "b": "Taszítják egymást.",
+        "c": "Nem hatnak egymásra."
+      },
+      "correct": "a",
+      "explanation": "Az ellentétes nemű töltések (pozitív és negatív) vonzzák egymást. Ez az elektrosztatikus vonzás alapja."
+    },
+    {
+      "question": "Mi a neve annak a jelenségnek, amikor dörzsöléssel hozunk létre elektromos állapotot?",
+      "answers": {
+        "a": "Dörzselektromosság",
+        "b": "Mágneses megosztás",
+        "c": "Fénytörés"
+      },
+      "correct": "a",
+      "explanation": "Azt a jelenséget, amikor két különböző anyag összedörzsölésével az egyikről töltések vándorolnak át a másikra, dörzselektromosságnak nevezzük."
+    },
+    {
+      "question": "Hogyan hat egymásra két negatív töltésű test?",
+      "answers": {
+        "a": "Vonzzák egymást.",
+        "b": "Taszítják egymást.",
+        "c": "Először vonzzák, majd taszítják."
+      },
+      "correct": "b",
+      "explanation": "Az azonos nemű töltések taszítják egymást. Mivel mindkét test negatív töltésű, elektrosztatikus taszítóerő lép fel közöttük."
+    },
+    {
+      "question": "Melyik állítás igaz a vezető anyagokra?",
+      "answers": {
+        "a": "Rosszul vezetik a hőt.",
+        "b": "Mindig negatív töltésűek.",
+        "c": "A töltések könnyen mozognak bennük."
+      },
+      "correct": "c",
+      "explanation": "A vezetők, tipikusan a fémek, olyan anyagok, amelyekben a töltéshordozók (általában elektronok) szabadon el tudnak mozdulni, ezért jól vezetik az elektromos áramot."
+    },
+    {
+      "question": "Ha egy üvegrudat selyemmel dörzsölünk meg, az üvegrúd pozitív töltésű lesz. Milyen töltésű lesz a selyem?",
+      "answers": {
+        "a": "Szintén pozitív.",
+        "b": "Negatív.",
+        "c": "Semleges marad."
+      },
+      "correct": "b",
+      "explanation": "A töltésmegmaradás törvénye szerint a dörzsölés során a negatív töltésű elektronok az üvegrúdról a selyemre vándorolnak. Így az üvegrúdban elektronhiány (pozitív töltés) keletkezik, a selyemben pedig elektrontöbblet (negatív töltés)."
+    },
+    {
+      "question": "Melyik a kétféle elektromos töltés?",
+      "answers": {
+        "a": "Északi és déli",
+        "b": "Pozitív és negatív",
+        "c": "Nehéz és könnyű"
+      },
+      "correct": "b",
+      "explanation": "Az elektromos kölcsönhatásokért felelős tulajdonságot elektromos töltésnek nevezzük. Két fajtája van: a pozitív és a negatív."
+    },
+    {
+      "question": "Milyen töltésűek az atommagban lévő protonok?",
+      "answers": {
+        "a": "Negatív",
+        "b": "Semleges",
+        "c": "Pozitív"
+      },
+      "correct": "c",
+      "explanation": "Az atomok atommagból és elektronfelhőből állnak. Az atommagban pozitív töltésű protonok és semleges neutronok találhatók. Az elektronfelhőt a negatív töltésű elektronok alkotják."
+    },
+    {
+      "question": "Mitől kaphatsz egy apró 'csípést', amikor télen kiszállsz az autóból és megérinted az ajtaját?",
+      "answers": {
+        "a": "A hidegtől.",
+        "b": "A mágnesességtől.",
+        "c": "A feltöltődött tested és az autó közötti szikrakisüléstől."
+      },
+      "correct": "c",
+      "explanation": "A ruhád és az autó ülése közötti súrlódás miatt a tested elektromosan feltöltődhet. Amikor megérinted a fém karosszériát, ez a töltés egy apró szikra formájában kiegyenlítődik."
+    },
+    {
+      "question": "Miért veszélyes a villámcsapás?",
+      "answers": {
+        "a": "Mert nagyon hangos.",
+        "b": "Mert nagyon fényes.",
+        "c": "Mert hatalmas elektromos áram halad át a testen."
+      },
+      "correct": "c",
+      "explanation": "A villám egy óriási elektromos szikra, ami hatalmas energiát és nagyon nagy áramerősséget jelent. Ha ez egy élőlény testén halad át, súlyos, akár halálos sérüléseket okoz."
+    },
+    {
+      "question": "Az elektromos töltés jele...",
+      "answers": {
+        "a": "E",
+        "b": "T",
+        "c": "Q"
+      },
+      "correct": "c",
+      "explanation": "A fizikában az elektromos töltés mennyiségét általában a 'Q' vagy 'q' betűvel jelölik."
+    },
+    {
+      "question": "Melyik anyag jó elektromos szigetelő?",
+      "answers": {
+        "a": "Gumi",
+        "b": "Réz",
+        "c": "Vas"
+      },
+      "correct": "a",
+      "explanation": "A szigetelők olyan anyagok, amelyekben a töltések nem tudnak könnyen elmozdulni. A gumi, a műanyag és az üveg jó szigetelők. A fémek, mint a réz és a vas, jó vezetők."
+    },
+    {
+      "question": "Mi történik egy semleges testtel, ha egy töltött testet közelítünk hozzá?",
+      "answers": {
+        "a": "Mindig taszítóerő lép fel.",
+        "b": "Elektromos megosztás történik, és vonzás jön létre.",
+        "c": "Nem történik semmi."
+      },
+      "correct": "b",
+      "explanation": "A töltött test a semleges testben szétválasztja a pozitív és negatív töltéseket. Az ellentétes nemű töltések közelebb kerülnek, az azonos neműek távolabb. Mivel a vonzóerő a kisebb távolság miatt erősebb, az eredő hatás mindig vonzás lesz."
+    },
+    {
+      "question": "Mitől áll égnek a hajad, ha feltöltött lufit közelítesz hozzá?",
+      "answers": {
+        "a": "A lufi melegétől.",
+        "b": "Az elektromos vonzástól.",
+        "c": "A lufi mágnesességétől."
+      },
+      "correct": "b",
+      "explanation": "A hajon megdörzsölt lufi elektromosan feltöltődik. Amikor a semleges hajszálaidhoz közelíted, megosztja a töltéseket a hajszálakban és vonzza őket."
+    },
+    {
+      "question": "Mit jelent az, hogy egy test elektromosan semleges?",
+      "answers": {
+        "a": "Ugyanannyi pozitív és negatív töltés van benne.",
+        "b": "Nincsenek benne töltések.",
+        "c": "Csak pozitív töltések vannak benne."
+      },
+      "correct": "a",
+      "explanation": "Minden test atomokból áll, amelyekben pozitív protonok és negatív elektronok vannak. Egy test akkor semleges, ha a protonok és elektronok száma megegyezik, így a töltéseik kiegyenlítik egymást."
+    }
+  ]
 }

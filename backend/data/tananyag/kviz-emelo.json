@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz emelo\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik eszköz NEM emelő?",
+      "answers": {
+        "a": "Csipesz",
+        "b": "Csavar",
+        "c": "Csónakevező"
+      },
+      "correct": "b",
+      "explanation": "A csavar egy lejtő, ami egy hengerre van feltekerve. A csipesz és a csónakevező egykarú emelők."
+    },
+    {
+      "question": "Hogyan lehet egy emelővel erőt megtakarítani?",
+      "answers": {
+        "a": "Ha az erőkar nagyobb, mint a teherkar.",
+        "b": "Ha a teherkar nagyobb, mint az erőkar.",
+        "c": "Sehogy, az emelővel csak az erő irányát lehet megváltoztatni."
+      },
+      "correct": "a",
+      "explanation": "Az emelők törvénye szerint, ha az erő kifejtésének helye (erőkar) messzebb van a forgásponttól, mint a teher (teherkar), akkor kisebb erővel is egyensúlyban tartható a nagyobb teher."
+    },
+    {
+      "question": "A csipesz...",
+      "answers": {
+        "a": "...egy egykarú emelő.",
+        "b": "...egy kétkarú emelő.",
+        "c": "...nem emelő."
+      },
+      "correct": "a",
+      "explanation": "A csipesz egy egykarú emelő. A forgáspont a csipesz végén van, a teher a csipesz szájánál, az erőt pedig a kettő között fejtjük ki."
+    },
+    {
+      "question": "Mi a teherkar?",
+      "answers": {
+        "a": "A teher és a forgáspont közötti távolság.",
+        "b": "Az erőkifejtés helye és a forgáspont közötti távolság.",
+        "c": "A teher súlya."
+      },
+      "correct": "a",
+      "explanation": "A teherkar az emelő azon részének hossza, amely a forgástengely és a teher támadáspontja között van."
+    },
+    {
+      "question": "Melyik állítás igaz az egyszerű gépekre, mint az emelő?",
+      "answers": {
+        "a": "Energiát termelnek.",
+        "b": "Munkát takarítanak meg.",
+        "c": "Erőt takaríthatnak meg."
+      },
+      "correct": "c",
+      "explanation": "Az egyszerű gépekkel munkát megtakarítani nem lehet. A nagy előnyük, hogy lehetővé teszik, hogy kisebb erővel végezzük el ugyanazt a munkát, cserébe hosszabb úton."
+    },
+    {
+      "question": "Mi az erőkar?",
+      "answers": {
+        "a": "A teher és az erő közötti távolság.",
+        "b": "Az erőkifejtés helye és a forgáspont közötti távolság.",
+        "c": "Az emelő teljes hossza."
+      },
+      "correct": "b",
+      "explanation": "Az erőkar az emelő azon részének hossza, amely a forgástengely és az erőkifejtés támadáspontja között van."
+    },
+    {
+      "question": "Melyik NEM emelő?",
+      "answers": {
+        "a": "Lépcső",
+        "b": "Mérleghinta (libikóka)",
+        "c": "Diótörő"
+      },
+      "correct": "a",
+      "explanation": "A lépcső egy lejtő típusú egyszerű gép. A mérleghinta és a diótörő is egy forgáspont körül elforduló karokból áll, tehát emelők."
+    },
+    {
+      "question": "Az egyensúlyban lévő libikóka két végén ülő gyerekek...",
+      "answers": {
+        "a": "...súlya mindig egyenlő.",
+        "b": "...által kifejtett erő mindig egyenlő.",
+        "c": "...által kifejtett forgatónyomaték mindig egyenlő."
+      },
+      "correct": "c",
+      "explanation": "Az egyensúly feltétele nem az, hogy a súlyok legyenek egyenlők, hanem az, hogy a forgatónyomatékok (súly * távolság) legyenek egyenlők. Egy könnyebb gyerek messzebb ülve egyensúlyban tud lenni egy nehezebb, közelebb ülő gyerekkel."
+    },
+    {
+      "question": "Melyik a kétkarú emelő?",
+      "answers": {
+        "a": "Talicska",
+        "b": "Diótörő",
+        "c": "Olló"
+      },
+      "correct": "c",
+      "explanation": "Az ollónál a forgáspont középen van, a két szár két emelőkarként működik. Ez egy kettős kétkarú emelő. A talicska és a diótörő egykarú emelők."
+    },
+    {
+      "question": "Melyik NEM egyszerű gép?",
+      "answers": {
+        "a": "Emelő",
+        "b": "Csiga",
+        "c": "Villanymotor"
+      },
+      "correct": "c",
+      "explanation": "Az egyszerű gépek (emelő, csiga, lejtő, stb.) az erőt vagy annak irányát változtatják meg. A villanymotor egy összetett gép, amely elektromos energiát alakít át mozgási energiává."
+    },
+    {
+      "question": "Milyen előnye van az állócsiga használatának?",
+      "answers": {
+        "a": "Megváltoztatja az erő irányát, ami kényelmesebb munkavégzést tehet lehetővé.",
+        "b": "Kisebb erőkifejtést igényel.",
+        "c": "Nincs semmilyen előnye."
+      },
+      "correct": "a",
+      "explanation": "Az állócsiga segítségével egy terhet nem felfelé kell emelni, hanem a kötél másik végét lefelé húzva. A lefelé irányuló húzáshoz a saját testsúlyunkat is felhasználhatjuk, ami sokszor kényelmesebb."
+    },
+    {
+      "question": "Mi az emelők törvénye?",
+      "answers": {
+        "a": "A teher mindig egyenlő az erővel.",
+        "b": "A forgatónyomatékok egyensúlya: F₁*k₁ = F₂*k₂.",
+        "c": "Az erőkarok mindig egyenlőek."
+      },
+      "correct": "b",
+      "explanation": "Az emelő egyensúlyának az a feltétele, hogy az egyik oldalon ható erő forgatónyomatéka megegyezzen a másik oldalon ható erő forgatónyomatékával."
+    },
+    {
+      "question": "Egyensúlyban lévő libikóka egyik végén egy 400 N-os fiú ül 3 méterre. A másik végén egy lány ül 4 méterre. Mekkora a lány súlya?",
+      "answers": {
+        "a": "400 N",
+        "b": "300 N",
+        "c": "533 N"
+      },
+      "correct": "b",
+      "explanation": "Az emelők törvénye: 400 N * 3 m = F_lány * 4 m. Ebből 1200 Nm = F_lány * 4 m. A lány súlya: F_lány = 1200 Nm / 4 m = 300 N."
+    },
+    {
+      "question": "Mi az egyszerű gépek 'aranyszabálya'?",
+      "answers": {
+        "a": "Energiát lehet velük termelni.",
+        "b": "Amennyivel kisebb erőt kell kifejteni, annyival nagyobb úton kell azt megtenni.",
+        "c": "Mindig felgyorsítják a munkavégzést."
+      },
+      "correct": "b",
+      "explanation": "Az egyszerű gépekkel munkát nem lehet megtakarítani. Azonban lehetővé teszik, hogy kisebb erővel végezzük el a munkát, cserébe hosszabb úton kell az erőt kifejteni."
+    },
+    {
+      "question": "Melyik példa egykarú emelőre?",
+      "answers": {
+        "a": "Talicska",
+        "b": "Olló",
+        "c": "Mérleghinta"
+      },
+      "correct": "a",
+      "explanation": "A talicskánál a kerék a forgáspont, a teher a forgáspont és az erőkifejtés között van. Mivel az erő és a teher ugyanazon az oldalon van a forgásponthoz képest, ez egy egykarú emelő."
+    },
+    {
+      "question": "Mi a forgáspont (vagy alátámasztási pont)?",
+      "answers": {
+        "a": "Ahol a terhet elhelyezzük.",
+        "b": "Az a pont, amely körül az emelő elfordul.",
+        "c": "Ahol az erőt kifejtjük."
+      },
+      "correct": "b",
+      "explanation": "A forgáspont az emelőnek az a rögzített pontja, amely körül a rúd el tud fordulni."
+    },
+    {
+      "question": "Melyik egykarú emelő?",
+      "answers": {
+        "a": "Mérleghinta",
+        "b": "Sörnyitó",
+        "c": "Harapófogó"
+      },
+      "correct": "b",
+      "explanation": "A sörnyitónál a forgáspont a kupak szélén van, a teher a kupak közepe, az erőt pedig a sörnyitó végén fejtjük ki. A teher a forgáspont és az erő között van, ez egykarú emelő."
+    },
+    {
+      "question": "Az emberi alkar...",
+      "answers": {
+        "a": "...nem viselkedik emelőként.",
+        "b": "...egy egykarú emelőként működik.",
+        "c": "...egy kétkarú emelőként működik."
+      },
+      "correct": "b",
+      "explanation": "Az alkar egy egykarú emelő. A forgáspont a könyökízület, a teher a kézben tartott tárgy, az erőkifejtés pedig a bicepsz által történik a kettő között."
+    },
+    {
+      "question": "Egy 2 méter hosszú feszítővassal, amelynek teherkarja 0,2 m, mekkora erőt tudunk kifejteni egy 900 N súlyú kőre?",
+      "answers": {
+        "a": "180 N",
+        "b": "100 N",
+        "c": "900 N"
+      },
+      "correct": "b",
+      "explanation": "A feszítővas teljes hossza 2 m, a teherkar 0,2 m, tehát az erőkar 1,8 m. Az emelők törvénye szerint F_erő * 1,8 m = 900 N * 0,2 m. Ebből F_erő = 180 Nm / 1,8 m = 100 N."
+    },
+    {
+      "question": "Mi az emelő?",
+      "answers": {
+        "a": "Egy egyszerű gép, ami egy forgáspont körül elforgatható merev rúd.",
+        "b": "Egy lejtős felület.",
+        "c": "Egy kötél és egy tárcsa."
+      },
+      "correct": "a",
+      "explanation": "Az emelő az egyik legegyszerűbb gép. Lényege egy alátámasztási pont (forgáspont) körül elforgatható rúd, amivel erőt lehet megtakarítani."
+    },
+    {
+      "question": "A mérleghinta (libikóka) egy...",
+      "answers": {
+        "a": "...egykarú emelő.",
+        "b": "...lejtő.",
+        "c": "...kétkarú emelő."
+      },
+      "correct": "c",
+      "explanation": "A mérleghinta egy klasszikus kétkarú emelő, ahol az alátámasztási pont (forgástengely) az erőkifejtés és a teher között helyezkedik el."
+    },
+    {
+      "question": "Mi a kétkarú emelő?",
+      "answers": {
+        "a": "Olyan emelő, ahol a forgáspont a teher és az erő között van.",
+        "b": "Olyan emelő, ahol a teher van a forgáspont és az erő között.",
+        "c": "Olyan emelő, ahol az erő van a forgáspont és a teher között."
+      },
+      "correct": "a",
+      "explanation": "A klasszikus kétkarú emelőnél az alátámasztás középen helyezkedik el, elválasztva az erőkart és a teherkart. Ilyen például a mérleghinta vagy egy olló."
+    },
+    {
+      "question": "Mit jelent az, hogy egy emelő 'erő-sokszorozó'?",
+      "answers": {
+        "a": "Több erőt hoz létre, mint amennyit befektetünk.",
+        "b": "Több munkát végez, mint amennyit befektetünk.",
+        "c": "Kisebb erővel tudunk nagyobb erőt (terhet) legyőzni."
+      },
+      "correct": "c",
+      "explanation": "Az emelő nem hoz létre energiát. Az 'erő-sokszorozás' azt jelenti, hogy a karok arányának megfelelő mértékben kisebb erőkifejtéssel tudunk egyensúlyt tartani egy nagyobb teherrel."
+    },
+    {
+      "question": "Ha egy emelőn az erőkar és a teherkar egyenlő, akkor az egyensúlyhoz...",
+      "answers": {
+        "a": "...az erőnek nagyobbnak kell lennie, mint a teher.",
+        "b": "...az erőnek kisebbnek kell lennie, mint a teher.",
+        "c": "...az erőnek egyenlőnek kell lennie a teherrel."
+      },
+      "correct": "c",
+      "explanation": "Az emelők törvénye (F₁*k₁ = F₂*k₂) szerint, ha a karok (k₁, k₂) egyenlők, akkor az erőknek (F₁, F₂) is egyenlőknek kell lenniük az egyensúlyhoz."
+    },
+    {
+      "question": "Az emelők egyensúlyának feltétele a...",
+      "answers": {
+        "a": "...haladási egyensúly.",
+        "b": "...hőmérsékleti egyensúly.",
+        "c": "...forgási egyensúly."
+      },
+      "correct": "c",
+      "explanation": "Az emelők egy forgáspont körül forognak, ezért az egyensúlyuk feltétele a forgási egyensúly, azaz a rájuk ható forgatónyomatékok összegének nullának kell lennie."
+    }
+  ]
 }

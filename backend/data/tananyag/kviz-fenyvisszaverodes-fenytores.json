@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz fenyvisszaverodes fenytores\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás NEM része a fényvisszaverődés törvényének?",
+      "answers": {
+        "a": "A beeső fénysugár és a visszavert fénysugár a beesési merőleges két oldalán van.",
+        "b": "A beesési szög egyenlő a visszaverődési szög.",
+        "c": "A fény színe a visszaverődéskor megváltozik."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. A fényvisszaverődés során a fény színe (frekvenciája) nem változik meg. A másik két állítás a fényvisszaverődés törvényének fontos része."
+    },
+    {
+      "question": "A fényvisszaverődés törvénye szerint a beesési szög...",
+      "answers": {
+        "a": "...egyenlő a visszaverődési szöggel.",
+        "b": "...mindig nagyobb, mint a visszaverődési szög.",
+        "c": "...mindig kisebb, mint a visszaverődési szög."
+      },
+      "correct": "a",
+      "explanation": "A fényvisszaverődés egyik alaptörvénye kimondja, hogy a beesési szög (a beérkező fénysugár és a beesési merőleges által bezárt szög) mindig pontosan megegyezik a visszaverődési szöggel."
+    },
+    {
+      "question": "Mi a fénytörés?",
+      "answers": {
+        "a": "Amikor a fény visszaverődik egy felületről.",
+        "b": "Amikor a fény irányt változtat, miközben egyik közegből a másikba lép.",
+        "c": "Amikor a fény elnyelődik egy testben."
+      },
+      "correct": "b",
+      "explanation": "A fénytörés az a jelenség, amikor a fénysugár iránya megváltozik, mert átlép egy másik, eltérő optikai sűrűségű közeg határán. Ez a jelenség felelős például a lencsék működéséért."
+    },
+    {
+      "question": "Melyik NEM viselkedik tükörként?",
+      "answers": {
+        "a": "Egy csendes tó felszíne.",
+        "b": "Egy fekete bársonydarab.",
+        "c": "Egy fényesre polírozott fémkanál."
+      },
+      "correct": "b",
+      "explanation": "A fekete bársony felülete rendkívül érdes és a ráeső fény nagy részét elnyeli, nem pedig szabályosan visszaveri. Emiatt nem ad tükörképet."
+    },
+    {
+      "question": "Miért látjuk a tükörképünket a tükörben?",
+      "answers": {
+        "a": "A fényvisszaverődés miatt.",
+        "b": "A fénytörés miatt.",
+        "c": "Mert a tükör egy fényforrás."
+      },
+      "correct": "a",
+      "explanation": "A testünkről kiinduló fénysugarak eljutnak a tükörig, onnan szabályosan visszaverődnek, és ez a visszavert fény jut a szemünkbe. Az agyunk ezt úgy dolgozza fel, mintha a fénysugarak a tükör mögül érkeznének."
+    },
+    {
+      "question": "Mi az alapvető oka a fénytörés jelenségének?",
+      "answers": {
+        "a": "A fény sebességének megváltozása a közegváltáskor.",
+        "b": "A fény visszaverődése a felületről.",
+        "c": "A fény színének megváltozása."
+      },
+      "correct": "a",
+      "explanation": "Fénytörés akkor jön létre, amikor a fény egy eltérő optikai sűrűségű közeg határát átlépi. A közegváltáskor a fény sebessége megváltozik, és ez okozza a fénysugár irányának megváltozását."
+    },
+    {
+      "question": "Milyen lencse van egy egyszerű nagyítóban?",
+      "answers": {
+        "a": "Homorú lencse",
+        "b": "Domború lencse",
+        "c": "Síklencse"
+      },
+      "correct": "b",
+      "explanation": "A nagyítók domború (gyűjtő-) lencsét tartalmaznak. Ha a tárgyat a lencse és a fókuszpontja közé helyezzük, a lencse egy nagyított, látszólagos képet hoz létre."
+    },
+    {
+      "question": "Milyen képet hoz létre a síktükör?",
+      "answers": {
+        "a": "Látszólagos, egyenes állású, azonos méretű képet.",
+        "b": "Valódi, fordított állású képet.",
+        "c": "Mindig nagyított képet."
+      },
+      "correct": "a",
+      "explanation": "A síktükör által alkotott kép látszólagos (a tükör mögött jön létre), a tárggyal megegyező állású és méretű."
+    },
+    {
+      "question": "Milyen felületről verődik vissza a fény szabályosan, éles tükörképet adva?",
+      "answers": {
+        "a": "Egy papírlapról.",
+        "b": "Egy gyapjúpulóverről.",
+        "c": "Egy síktükörről."
+      },
+      "correct": "c",
+      "explanation": "A szabályos fényvisszaverődéshez nagyon sima felület kell. A síktükör felülete ilyen, ezért a fénysugarakat rendezetten veri vissza, ami éles tükörképet eredményez."
+    },
+    {
+      "question": "Mit csinál egy domború (gyűjtő-) lencse a párhuzamosan érkező fénysugarakkal?",
+      "answers": {
+        "a": "Visszaveri őket.",
+        "b": "Szétszórja őket.",
+        "c": "Egy pontban (fókuszpontban) gyűjti össze őket."
+      },
+      "correct": "c",
+      "explanation": "A domború lencsét gyűjtőlencsének is nevezik, mert a rajta áthaladó, párhuzamos fénysugarakat egyetlen pontba, a fókuszpontba töri meg."
+    },
+    {
+      "question": "Miért csillog a víz felszíne, ha a Nap rásüt?",
+      "answers": {
+        "a": "Mert a víz meleg lesz.",
+        "b": "Mert a víz világít.",
+        "c": "A fényvisszaverődés miatt."
+      },
+      "correct": "c",
+      "explanation": "A csendes vízfelszín tükörként működik. Amikor a napsugarak elérik, szabályosan visszaverődnek róla. Ez a visszavert, koncentrált fény a szemünkbe jutva okozza a csillogó, vakító hatást."
+    },
+    {
+      "question": "Mi a beesési merőleges?",
+      "answers": {
+        "a": "Maga a beeső fénysugár.",
+        "b": "A felületre, a beesési pontban állított merőleges egyenes.",
+        "c": "A visszavert fénysugár."
+      },
+      "correct": "b",
+      "explanation": "A beesési merőleges egy segédvonal, amelyet a fényvisszaverődés és fénytörés vizsgálatakor használunk. A szögeket ehhez a vonalhoz képest mérjük."
+    },
+    {
+      "question": "Mit csinál egy homorú (szóró-) lencse a párhuzamosan érkező fénysugarakkal?",
+      "answers": {
+        "a": "Egy pontba gyűjti őket.",
+        "b": "Nem változtatja meg az irányukat.",
+        "c": "Szétszórja őket."
+      },
+      "correct": "c",
+      "explanation": "A homorú lencsét szórólencsének is hívják. A rajta áthaladó párhuzamos fénysugarakat úgy töri meg, mintha azok egy pontból indultak volna ki a lencse túlsó oldalán."
+    },
+    {
+      "question": "Hogyan nevezzük azt az anyagot vagy közeget, amelyben a fény terjed?",
+      "answers": {
+        "a": "Fényvezető",
+        "b": "Szigetelő",
+        "c": "Optikai közeg"
+      },
+      "correct": "c",
+      "explanation": "Minden olyan anyagot, amelyben a fény képes terjedni (legyen az levegő, víz, üveg, vagy akár a vákuum), optikai közegnek nevezünk."
+    },
+    {
+      "question": "Melyik optikai eszköz bontja a fehér fényt a szivárvány színeire?",
+      "answers": {
+        "a": "Síktükör",
+        "b": "Homorú tükör",
+        "c": "Prizma"
+      },
+      "correct": "c",
+      "explanation": "A prizma egy olyan üveghasáb, amely a rajta áthaladó fehér fényt megtöri és alkotóelemeire, a különböző színekre bontja. Ez a jelenség a diszperzió."
+    },
+    {
+      "question": "Milyen képet látunk egy domború (kifelé ívelő) tükörben?",
+      "answers": {
+        "a": "Kicsinyített, látszólagos képet.",
+        "b": "Nagyított, valódi képet.",
+        "c": "Fordított állású képet."
+      },
+      "correct": "a",
+      "explanation": "A domború tükrök a fénysugarakat szétszórják, ezért mindig kicsinyített, egyenes állású és látszólagos képet hoznak létre."
+    },
+    {
+      "question": "Milyen felületen jön létre szabályos fényvisszaverődés?",
+      "answers": {
+        "a": "Sima, tükröző felületen.",
+        "b": "Érdes, matt felületen.",
+        "c": "Minden felületen."
+      },
+      "correct": "a",
+      "explanation": "Szabályos visszaverődésről akkor beszélünk, ha a párhuzamosan beeső fénysugarak párhuzamosan verődnek vissza. Ez csak nagyon sima, polírozott felületeken, például tükrökön valósul meg."
+    },
+    {
+      "question": "Amikor kinézünk egy ablakon, milyen jelenség(ek) játszódik le az üvegen?",
+      "answers": {
+        "a": "Csak fényvisszaverődés.",
+        "b": "Csak fénytörés.",
+        "c": "Fénytörés és egy kis mértékű fényvisszaverődés is."
+      },
+      "correct": "c",
+      "explanation": "Az ablaküveg fő funkciója a fény áteresztése (fénytörés). Azonban minden felület, még a legátlátszóbb is, visszaveri a fény egy kis részét. Ezért látjuk néha a saját tükörképünket is az ablaküvegen."
+    },
+    {
+      "question": "Milyen felületen jön létre diffúz (szórt) fényvisszaverődés?",
+      "answers": {
+        "a": "Sima tükörfelületen.",
+        "b": "Érdes, matt felületen.",
+        "c": "Csak fekete felületen."
+      },
+      "correct": "b",
+      "explanation": "Ha a felület érdes, a párhuzamosan beérkező fénysugarak a felület egyenetlenségei miatt minden irányba, rendezetlenül verődnek vissza. Ezt nevezzük diffúz visszaverődésnek."
+    },
+    {
+      "question": "Mi történik a fénysugárral, amikor egy tükör felületére esik?",
+      "answers": {
+        "a": "Visszaverődik.",
+        "b": "Megtörik.",
+        "c": "Elnyelődik."
+      },
+      "correct": "a",
+      "explanation": "A tükör sima felületéről a fénysugarak szabályosan visszaverődnek. Ez a fényvisszaverődés jelensége."
+    },
+    {
+      "question": "Miért látjuk a vízbe tett szívószálat 'megtörtnek'?",
+      "answers": {
+        "a": "A fényvisszaverődés miatt.",
+        "b": "A fénytörés miatt.",
+        "c": "Mert a víz tényleg meggörbíti."
+      },
+      "correct": "b",
+      "explanation": "A szívószál víz alatti részéről kiinduló fénysugarak a víz-levegő határon megtörnek, irányt változtatnak. Az agyunk ezt úgy értelmezi, mintha a szívószálat 'töröttnek' látnánk a vízfelszínnél."
+    },
+    {
+      "question": "A szivárvány kialakulása a napfény...",
+      "answers": {
+        "a": "...visszaverődése a felhőkről.",
+        "b": "...megtörésének és színekre bomlásának következménye az esőcseppekben.",
+        "c": "...elnyelődése a levegőben."
+      },
+      "correct": "b",
+      "explanation": "A szivárvány akkor jön létre, amikor a napfény áthalad a levegőben lebegő apró esőcseppeken. A vízcseppek prizmaként működnek: megtörik és alkotóelemeire bontják a fehér fényt."
+    },
+    {
+      "question": "Melyik eszköz használja ki a teljes visszaverődés jelenségét?",
+      "answers": {
+        "a": "Nagyító",
+        "b": "Optikai szál (fénykábel)",
+        "c": "Síktükör"
+      },
+      "correct": "b",
+      "explanation": "Az optikai szálban a fény a szál belsejében 'pattogva' halad. A szál belsejének és a burkolatának határán a fény mindig a határszögnél nagyobb szögben érkezik, ezért újra és újra teljesen visszaverődik."
+    },
+    {
+      "question": "Ha a fény egy optikailag ritkább közegből (pl. levegő) sűrűbb közegbe (pl. víz) lép, akkor...",
+      "answers": {
+        "a": "...a törési merőlegeshez közelebb törik.",
+        "b": "...a törési merőlegestől távolabb törik.",
+        "c": "...nem változtat irányt."
+      },
+      "correct": "a",
+      "explanation": "Amikor a fény egy sűrűbb közegbe lépve lelassul, az iránya a beesési merőlegeshez közelebb fog eltérni. Ezt a jelenséget nevezzük a merőlegeshez való törésnek."
+    },
+    {
+      "question": "Mit csinál egy homorú (befelé ívelő) tükör a párhuzamos fénysugarakkal?",
+      "answers": {
+        "a": "Szétszórja őket.",
+        "b": "Egy pontba (fókuszpontba) gyűjti össze őket.",
+        "c": "Nem változtatja meg az irányukat."
+      },
+      "correct": "b",
+      "explanation": "A homorú tükör a rá eső párhuzamos fénysugarakat egyetlen pontba, az úgynevezett fókuszpontba veri vissza. Ezt a tulajdonságát használják ki például a csillagászati távcsövekben."
+    }
+  ]
 }

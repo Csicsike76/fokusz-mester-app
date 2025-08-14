@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz feny terjedese\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A fény egyenes vonalban terjed.",
+        "b": "A fény sebessége végtelen.",
+        "c": "Az árnyék a fény egyenes vonalú terjedésének következménye."
+      },
+      "correct": "b",
+      "explanation": "Ez az állítás hamis. A fény sebessége rendkívül nagy, de nem végtelen. Vákuumban az értéke kb. 300 000 km/s."
+    },
+    {
+      "question": "Hogyan terjed a fény homogén, átlátszó közegben?",
+      "answers": {
+        "a": "Egyenes vonalban",
+        "b": "Görbe vonalban",
+        "c": "Cikk-cakkban"
+      },
+      "correct": "a",
+      "explanation": "A fény egyenes vonalú terjedése az optika egyik alapelve. Ez azt jelenti, hogy amíg a közeg, amiben halad, egynemű, a fény egyenes mentén terjed."
+    },
+    {
+      "question": "A lézershow során látható 'fénykardok'...",
+      "answers": {
+        "a": "...valódi, megfogható fényből vannak.",
+        "b": "...a levegőben lévő porszemcséken és párarészecskéken szétszóródó lézerfény útját mutatják.",
+        "c": "...csak a filmekben léteznek."
+      },
+      "correct": "b",
+      "explanation": "Normál esetben a lézerfény sugarát nem látjuk. Ahhoz, hogy az egész 'fénykard' láthatóvá váljon, a levegőbe apró részecskéket (pl. füstöt) juttatnak, amelyek szétszórják a lézerfényt."
+    },
+    {
+      "question": "Hogyan hívjuk azokat a testeket, amelyek saját maguk bocsátanak ki fényt?",
+      "answers": {
+        "a": "Másodlagos fényforrások",
+        "b": "Átlátszó testek",
+        "c": "Elsődleges fényforrások"
+      },
+      "correct": "c",
+      "explanation": "Azokat a testeket, amelyek saját maguk termelnek és bocsátanak ki fényt, elsődleges fényforrásoknak nevezzük. Ilyen a Nap vagy egy égő gyertya."
+    },
+    {
+      "question": "Ha egy keskeny résen keresztül nézünk egy lámpát, a rés...",
+      "answers": {
+        "a": "...egyfajta pontszerű fényforrásként viselkedik.",
+        "b": "...eltünteti a fényt.",
+        "c": "...megváltoztatja a fény színét."
+      },
+      "correct": "a",
+      "explanation": "Ha egy fényforrás fényét egy nagyon kicsi nyíláson engedjük át, a nyílásból kiinduló fény úgy terjed tovább, mintha maga a nyílás lenne a fényforrás."
+    },
+    {
+      "question": "Mikor látunk egy tárgyat?",
+      "answers": {
+        "a": "Amikor a tárgy fényt nyel el.",
+        "b": "Amikor a tárgyról a szemünkbe jut a fény.",
+        "c": "Amikor a szemünk fényt bocsát a tárgyra."
+      },
+      "correct": "b",
+      "explanation": "A látás alapfeltétele, hogy a megfigyelt tárgyról (ami vagy saját fényforrás, vagy egy megvilágított test) a fénysugarak a szemünkbe érkezzenek."
+    },
+    {
+      "question": "Mi a fény?",
+      "answers": {
+        "a": "Anyagi részecskék áramlása.",
+        "b": "Elektromágneses sugárzás.",
+        "c": "Hanghullám."
+      },
+      "correct": "b",
+      "explanation": "A fény az elektromágneses sugárzás egy formája, amelynek az emberi szem által is érzékelhető tartományát látható fénynek nevezzük."
+    },
+    {
+      "question": "Melyik terjed gyorsabban: a rádióhullám vagy a látható fény?",
+      "answers": {
+        "a": "Egyforma sebességgel terjednek.",
+        "b": "A látható fény.",
+        "c": "A rádióhullám."
+      },
+      "correct": "a",
+      "explanation": "Mind a rádióhullám, mind a látható fény elektromágneses sugárzás. Vákuumban minden elektromágneses sugárzás fénysebességgel terjed."
+    },
+    {
+      "question": "Miért látjuk a tárgyak színét?",
+      "answers": {
+        "a": "Mert a tárgyak maguk termelik a színes fényt.",
+        "b": "Mert a szemünk színezi be a tárgyakat.",
+        "c": "Mert a tárgy a fehér fényből csak a saját színének megfelelő fényt veri vissza."
+      },
+      "correct": "c",
+      "explanation": "A fehér fény sok szín keveréke. Amikor ez egy színes tárgyra esik, a tárgy a legtöbb színt elnyeli, és csak azt a színt veri vissza, amilyennek látjuk."
+    },
+    {
+      "question": "A fény terjedési sebessége üvegben...",
+      "answers": {
+        "a": "...nagyobb, mint vákuumban.",
+        "b": "...ugyanakkora, mint vákuumban.",
+        "c": "...kisebb, mint vákuumban."
+      },
+      "correct": "c",
+      "explanation": "Amikor a fény egy sűrűbb optikai közegbe, például üvegbe vagy vízbe lép, lelassul. A fény sebessége mindig vákuumban a legnagyobb."
+    },
+    {
+      "question": "Milyen közegben terjed a fény a leggyorsabban?",
+      "answers": {
+        "a": "Vízben",
+        "b": "Vákuumban (légüres térben)",
+        "c": "Levegőben"
+      },
+      "correct": "b",
+      "explanation": "A fény sebessége akkor a legnagyobb, ha semmilyen anyag nem lassítja a terjedését. Ez a vákuum. Minden más közegben a fény sebessége kisebb."
+    },
+    {
+      "question": "Mi történik a fénysugárral, amikor eléri egy átlátszatlan test felületét?",
+      "answers": {
+        "a": "Változatlanul áthalad rajta.",
+        "b": "Egy része visszaverődik, más része elnyelődik.",
+        "c": "Mindig csak visszaverődik."
+      },
+      "correct": "b",
+      "explanation": "Amikor a fény egy átlátszatlan test felületére ér, a fény egy része visszaverődik a felületről (ezért látjuk a testet), a másik része pedig elnyelődik a testben (és általában hővé alakul)."
+    },
+    {
+      "question": "Mi a fényév?",
+      "answers": {
+        "a": "Az a távolság, amit a fény egy év alatt megtesz.",
+        "b": "Az az idő, amíg a fény a Napról a Földre ér.",
+        "c": "A fény sebességének mértékegysége."
+      },
+      "correct": "a",
+      "explanation": "A fényév egy távolság mértékegység, amit a csillagászatban használnak hatalmas távolságok mérésére."
+    },
+    {
+      "question": "Melyik állítás igaz a fény terjedésére?",
+      "answers": {
+        "a": "A fénynek mindig szüksége van valamilyen közegre a terjedéshez.",
+        "b": "A fény vákuumban is képes terjedni.",
+        "c": "A fény csak levegőben terjed."
+      },
+      "correct": "b",
+      "explanation": "Ellentétben a hanggal, a fénynek nincs szüksége közvetítő közegre a terjedéshez. Képes áthatolni a légüres téren (vákuumon), ezért jut el hozzánk a Nap és a csillagok fénye is."
+    },
+    {
+      "question": "Milyen jelenség bizonyítja a fény egyenes vonalú terjedését?",
+      "answers": {
+        "a": "Az árnyék keletkezése.",
+        "b": "A szivárvány kialakulása.",
+        "c": "A hang visszaverődése."
+      },
+      "correct": "a",
+      "explanation": "Az árnyék akkor jön létre, amikor egy átlátszatlan test a fény útját elállja. Mivel a fény egyenesen terjed és nem tudja 'megkerülni' a testet, mögötte egy fénymentes terület alakul ki."
+    },
+    {
+      "question": "Mi a különbség a fény és a hang terjedése között?",
+      "answers": {
+        "a": "A fény csak egyenesen terjed, a hang görbe vonalban.",
+        "b": "A fénynek nem kell közeg a terjedéshez, a hangnak igen.",
+        "c": "Nincs lényeges különbség."
+      },
+      "correct": "b",
+      "explanation": "A legfontosabb különbség, hogy a fény (elektromágneses sugárzás) képes terjedni a légüres térben, míg a hang (mechanikai hullám) terjedéséhez mindig szükség van valamilyen közvetítő közegre."
+    },
+    {
+      "question": "A fény terjedéséhez szükséges idő...",
+      "answers": {
+        "a": "...nulla, a fény terjedése pillanatszerű.",
+        "b": "...mindig ugyanannyi, távolságtól függetlenül.",
+        "c": "...a távolságtól függ, de általában nagyon rövid."
+      },
+      "correct": "c",
+      "explanation": "Bár a fény sebessége rendkívül nagy, de véges. Ebből következik, hogy a fénynek időre van szüksége a távolságok megtételéhez. Földi méretekben ez az idő elhanyagolhatóan kicsi."
+    },
+    {
+      "question": "Hány perc alatt ér a Nap fénye a Földre?",
+      "answers": {
+        "a": "Körülbelül 1 perc",
+        "b": "Körülbelül 8 perc",
+        "c": "Körülbelül 1 óra"
+      },
+      "correct": "b",
+      "explanation": "A Nap és a Föld közötti átlagos távolság körülbelül 150 millió kilométer. Ezt a távolságot a fény körülbelül 8 perc és 20 másodperc alatt teszi meg."
+    },
+    {
+      "question": "Melyik jelenség NEM magyarázható a fény egyenes vonalú terjedésével?",
+      "answers": {
+        "a": "A napfogyatkozás.",
+        "b": "A szivárvány színeinek kialakulása.",
+        "c": "Az éles árnyékok létrejötte."
+      },
+      "correct": "b",
+      "explanation": "A napfogyatkozás és az árnyékok a fény egyenes vonalú terjedésének következményei. A szivárvány kialakulása azonban a fénytörés és a színekre bontás eredménye."
+    },
+    {
+      "question": "Egy zseblámpa fénycsóvája a sötétben azért látszik kúp alakúnak, mert...",
+      "answers": {
+        "a": "...az elemek gyengék.",
+        "b": "...a levegő meggörbíti a fényt.",
+        "c": "...a fény egyenes vonalban terjed a fényforrástól minden irányba."
+      },
+      "correct": "c",
+      "explanation": "A zseblámpa izzója egy közel pontszerű fényforrás. Innen a fénysugarak egyenes vonalban, minden irányba szétterjednek, így egy egyre táguló fénykúpot alkotnak."
+    },
+    {
+      "question": "Mi a fénysugár?",
+      "answers": {
+        "a": "A fény útját jelölő egyenes.",
+        "b": "A fényforrás maga.",
+        "c": "A fény színe."
+      },
+      "correct": "a",
+      "explanation": "A fénysugár egy modell, amivel a fény egyenes vonalú terjedését szemléltetjük. Ez egy nyíllal ellátott egyenes, amely megmutatja a fény útját és irányát."
+    },
+    {
+      "question": "Mekkora a fény sebessége vákuumban (légüres térben)?",
+      "answers": {
+        "a": "Körülbelül 300 000 km/s",
+        "b": "Körülbelül 340 m/s",
+        "c": "Végtelen"
+      },
+      "correct": "a",
+      "explanation": "A fény sebessége vákuumban a legnagyobb lehetséges sebesség a természetben. A 340 m/s a hang sebessége levegőben."
+    },
+    {
+      "question": "Mi történik, ha egy fénysugár eléri egy síktükör felületét?",
+      "answers": {
+        "a": "Elnyelődik.",
+        "b": "Átmegy rajta.",
+        "c": "Visszaverődik."
+      },
+      "correct": "c",
+      "explanation": "A tükör egy sima, fényes felület, amely a ráeső fénysugarak nagy részét szabályosan visszaveri. Ezt a jelenséget nevezzük fényvisszaverődésnek."
+    },
+    {
+      "question": "Ha egy tárgyat nagyon messziről nézünk, a róla érkező fénysugarak...",
+      "answers": {
+        "a": "...görbévé válnak.",
+        "b": "...erősebbek lesznek.",
+        "c": "...közel párhuzamosnak tekinthetők."
+      },
+      "correct": "c",
+      "explanation": "Egy távoli fényforrásból (mint a Nap) érkező fénysugarak annyira kis szögben távolodnak egymástól, hogy a Földön egy kis területre érkezve gyakorlatilag párhuzamosnak tekinthetjük őket."
+    },
+    {
+      "question": "Miért látjuk a villámlást előbb, mint ahogy a dörgést halljuk?",
+      "answers": {
+        "a": "Mert a fény sokkal gyorsabban terjed, mint a hang.",
+        "b": "Mert a dörgés később keletkezik.",
+        "c": "Mert a fülünk lassabban érzékel, mint a szemünk."
+      },
+      "correct": "a",
+      "explanation": "A villámlás fénye szinte azonnal eljut hozzánk (fénysebességgel), míg a dörgés hangja sokkal lassabban (hangsebességgel) terjed a levegőben."
+    }
+  ]
 }

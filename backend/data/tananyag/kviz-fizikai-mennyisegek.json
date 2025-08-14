@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz fizikai mennyisegek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik jelenti a legnagyobb távolságot?",
+      "answers": {
+        "a": "2 km",
+        "b": "200 m",
+        "c": "20000 cm"
+      },
+      "correct": "a",
+      "explanation": "Hozzuk közös mértékegységre az értékeket, például méterbe: 2 km = 2000 m; 200 m = 200 m; 20000 cm = 200 m. Így látható, hogy a 2 km a legnagyobb távolság."
+    },
+    {
+      "question": "Mivel mérünk időtartamot?",
+      "answers": {
+        "a": "Mérleggel",
+        "b": "Órával, stopperrel",
+        "c": "Vonalzóval"
+      },
+      "correct": "b",
+      "explanation": "Az óra és a stopper az időtartam mérésére szolgál. A mérleg a tömeget, a vonalzó a hosszúságot méri."
+    },
+    {
+      "question": "Melyik NEM fizikai mennyiség?",
+      "answers": {
+        "a": "Szépség",
+        "b": "Hőmérséklet",
+        "c": "Térfogat"
+      },
+      "correct": "a",
+      "explanation": "A fizikai mennyiségek objektíven mérhetők. A szépség szubjektív, esztétikai fogalom, nincs objektív mérési módja és mértékegysége."
+    },
+    {
+      "question": "Mi a fizikai mennyiség?",
+      "answers": {
+        "a": "A testek és jelenségek mérhető tulajdonsága.",
+        "b": "A testek színe és szaga.",
+        "c": "Csak a számérték, mértékegység nélkül."
+      },
+      "correct": "a",
+      "explanation": "A fizikai mennyiségek azok a tulajdonságok, amelyeket méréssel, azaz számszerűen jellemezni tudunk. Ilyen a hosszúság, tömeg, idő, de nem ilyen a szépség."
+    },
+    {
+      "question": "Melyik mennyiség alapmennyiség az SI rendszerben?",
+      "answers": {
+        "a": "Sebesség",
+        "b": "Terület",
+        "c": "Tömeg"
+      },
+      "correct": "c",
+      "explanation": "Az SI rendszer 7 alapmennyiségre épül, a 6. osztályban tanultak közül ilyen a hosszúság, tömeg, idő, hőmérséklet. A sebesség (út/idő) és a terület (hossz*hossz) már ezekből származtatható."
+    },
+    {
+      "question": "Mi a célja a mérés többszöri elvégzésének és az eredmények átlagolásának?",
+      "answers": {
+        "a": "A mérési hiba csökkentése.",
+        "b": "Az idő elhúzása.",
+        "c": "A mértékegység megváltoztatása."
+      },
+      "correct": "a",
+      "explanation": "A mérések során mindig adódnak kisebb-nagyobb pontatlanságok. Ha több mérést végzünk, a véletlenszerű hibák 'kiegyenlíthetik' egymást, így az átlag közelebb lesz a valós értékhez."
+    },
+    {
+      "question": "Mi a hibaforrás, ha ferdén olvasunk le egy vonalzót?",
+      "answers": {
+        "a": "A mérőeszköz hibája",
+        "b": "A mérő személy hibája (parallaxis hiba)",
+        "c": "A környezet hibája"
+      },
+      "correct": "b",
+      "explanation": "A ferdén való leolvasás miatti pontatlanságot parallaxis hibának nevezzük, és ez a mérést végző személy technikájából adódik."
+    },
+    {
+      "question": "Mennyi 1 óra 15 perc másodpercben?",
+      "answers": {
+        "a": "75 s",
+        "b": "3700 s",
+        "c": "4500 s"
+      },
+      "correct": "c",
+      "explanation": "Először váltsuk át az órákat és perceket másodpercre: 1 óra = 3600 másodperc, 15 perc = 15 * 60 = 900 másodperc. Összeadva: 3600 s + 900 s = 4500 s."
+    },
+    {
+      "question": "Egy téglalap oldalai 5 cm és 10 cm. Hogyan számolnád ki a területét?",
+      "answers": {
+        "a": "Közvetett méréssel (számolással).",
+        "b": "Közvetlen méréssel (leolvasással).",
+        "c": "Becsléssel."
+      },
+      "correct": "a",
+      "explanation": "A területet a két oldal lemérése után, a T=a*b képlettel számoljuk ki. Mivel mérés után számolunk, ez közvetett mérés."
+    },
+    {
+      "question": "Melyik a kakukktojás?",
+      "answers": {
+        "a": "másodperc",
+        "b": "newton",
+        "c": "méter"
+      },
+      "correct": "b",
+      "explanation": "A másodperc (idő) és a méter (hosszúság) alapmennyiségek mértékegységei. A newton az erő (származtatott mennyiség) mértékegysége."
+    },
+    {
+      "question": "Melyik NEM a hosszúság mértékegysége?",
+      "answers": {
+        "a": "fényév",
+        "b": "gramm",
+        "c": "mérföld"
+      },
+      "correct": "b",
+      "explanation": "A fényév és a mérföld is távolságot, azaz hosszúságot mér. A gramm a tömeg mértékegysége."
+    },
+    {
+      "question": "Mennyi egy 2 méter oldalhosszúságú kocka térfogata?",
+      "answers": {
+        "a": "4 m²",
+        "b": "8 m³",
+        "c": "6 m³"
+      },
+      "correct": "b",
+      "explanation": "A kocka térfogata V = a*a*a, ahol 'a' az élhossz. Behelyettesítve: V = 2 m * 2 m * 2 m = 8 m³."
+    },
+    {
+      "question": "Mit jelent a 'centi-' prefixum?",
+      "answers": {
+        "a": "Tizedrész",
+        "b": "Századrész",
+        "c": "Százszoros"
+      },
+      "correct": "b",
+      "explanation": "Az SI prefixumok közül a 'centi-' (c) 1/100-ad részt, azaz századrészt jelent."
+    },
+    {
+      "question": "Mennyi 1500 gramm kilogrammban?",
+      "answers": {
+        "a": "1,5 kg",
+        "b": "15 kg",
+        "c": "0,15 kg"
+      },
+      "correct": "a",
+      "explanation": "Tudjuk, hogy 1 kg = 1000 g. A grammban megadott értéket el kell osztani 1000-rel, hogy kilogrammot kapjunk: 1500 / 1000 = 1,5."
+    },
+    {
+      "question": "Melyik jelöl egy fizikai mennyiséget helyesen?",
+      "answers": {
+        "a": "15",
+        "b": "kg",
+        "c": "15 kg"
+      },
+      "correct": "c",
+      "explanation": "Egy fizikai mennyiség teljes leírásához szükség van egy számértékre és egy mértékegységre is. A '15' csak egy szám, a 'kg' csak egy mértékegység."
+    },
+    {
+      "question": "Mivel mérünk tömeget?",
+      "answers": {
+        "a": "Mérleggel",
+        "b": "Vonalzóval",
+        "c": "Hőmérővel"
+      },
+      "correct": "a",
+      "explanation": "A mérleg a tömeg mérésére szolgál. A vonalzó a hosszúságot, a hőmérő a hőmérsékletet méri."
+    },
+    {
+      "question": "Egy 2 literes üvegbe hány deciliter víz fér?",
+      "answers": {
+        "a": "2 dl",
+        "b": "200 dl",
+        "c": "20 dl"
+      },
+      "correct": "c",
+      "explanation": "Tudjuk, hogy 1 liter = 10 deciliter (dl). A literben megadott értéket meg kell szorozni 10-zel: 2 * 10 = 20."
+    },
+    {
+      "question": "Mivel mérünk hőmérsékletet?",
+      "answers": {
+        "a": "Vonalzóval",
+        "b": "Mérleggel",
+        "c": "Hőmérővel"
+      },
+      "correct": "c",
+      "explanation": "A hőmérő a hőmérséklet, a mérleg a tömeg, a vonalzó a hosszúság mérésére szolgál."
+    },
+    {
+      "question": "Mi a tömeg alapmértékegysége az SI-rendszerben?",
+      "answers": {
+        "a": "gramm (g)",
+        "b": "tonna (t)",
+        "c": "kilogramm (kg)"
+      },
+      "correct": "c",
+      "explanation": "Bár a 'kilo-' egy prefixum, a tömeg alapmértékegysége történelmi okokból a kilogramm, nem pedig a gramm."
+    },
+    {
+      "question": "Mennyi 0.5 liter köbcentiméterben (cm³)?",
+      "answers": {
+        "a": "50 cm³",
+        "b": "500 cm³",
+        "c": "5 cm³"
+      },
+      "correct": "b",
+      "explanation": "Tudjuk, hogy 1 liter = 1 köbdeciméter (dm³) és 1 dm³ = 1000 cm³. Ezért 0.5 liter = 0.5 dm³ = 0.5 * 1000 cm³ = 500 cm³."
+    },
+    {
+      "question": "Mi az idő alapmértékegysége az SI-rendszerben?",
+      "answers": {
+        "a": "perc (min)",
+        "b": "másodperc (s)",
+        "c": "óra (h)"
+      },
+      "correct": "b",
+      "explanation": "A Nemzetközi Mértékegységrendszerben az idő alapmértékegysége a másodperc. A perc és az óra ebből származtatott egységek."
+    },
+    {
+      "question": "Mit jelent a 'kilo-' prefixum?",
+      "answers": {
+        "a": "Százszoros",
+        "b": "Ezerszeres",
+        "c": "Ezredrész"
+      },
+      "correct": "b",
+      "explanation": "Az SI prefixumok közül a 'kilo-' (k) 1000-szeres szorzót jelent."
+    },
+    {
+      "question": "Melyik a hosszúság alapmértékegysége az SI-rendszerben?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "kilométer (km)",
+        "c": "centiméter (cm)"
+      },
+      "correct": "a",
+      "explanation": "A Nemzetközi Mértékegységrendszerben (SI) a hosszúság alapmértékegysége a méter. A kilométer és a centiméter ezekből származtatott egységek."
+    },
+    {
+      "question": "Egy autó 30 m/s sebességgel halad. Mennyi ez km/h-ban?",
+      "answers": {
+        "a": "90 km/h",
+        "b": "100 km/h",
+        "c": "108 km/h"
+      },
+      "correct": "c",
+      "explanation": "Az átváltási faktor 3,6. Ha m/s-ról váltunk km/h-ra, szorozni kell. 30 * 3,6 = 108."
+    },
+    {
+      "question": "Melyik csoportban vannak CSAK fizikai mennyiségek?",
+      "answers": {
+        "a": "Hosszúság, tömeg, erő",
+        "b": "Esőzés, villámlás, szél",
+        "c": "Erő, esőzés, sebesség"
+      },
+      "correct": "a",
+      "explanation": "A hosszúság, a tömeg és az erő mind mérhető fizikai tulajdonságok. Az esőzés, villámlás és szél folyamatok, azaz fizikai jelenségek."
+    }
+  ]
 }
