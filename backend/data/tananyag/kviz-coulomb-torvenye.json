@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz coulomb torvenye\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A Coulomb-erő függ a töltések előjelétől.",
+        "b": "A Coulomb-erő függ a közegtől, amiben a töltések vannak.",
+        "c": "A Coulomb-erő nem függ a töltések távolságától."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. A Coulomb-erő nagymértékben, a távolság négyzetével fordítottan arányosan függ a töltések távolságától."
+    },
+    {
+      "question": "Az elektromos erő...",
+      "answers": {
+        "a": "...egy skalármennyiség.",
+        "b": "...egy vektormennyiség.",
+        "c": "...mértékegysége a coulomb."
+      },
+      "correct": "b",
+      "explanation": "Mint minden erő, az elektromos erő is vektormennyiség, mert a nagysága mellett iránya is van (vonzás vagy taszítás iránya)."
+    },
+    {
+      "question": "Az elektrosztatikus erő és a gravitációs erő között az a hasonlóság, hogy...",
+      "answers": {
+        "a": "...mindkettő nagysága a távolság négyzetével fordítottan arányos.",
+        "b": "...mindkettő mindig vonzóerő.",
+        "c": "...mindkettő azonos nagyságú."
+      },
+      "correct": "a",
+      "explanation": "Mindkét kölcsönhatás ún. 'négyzetes törvényt' követ: az erő nagysága a távolság négyzetével csökken. Azonban az elektrosztatikus erő lehet vonzó és taszító is, és sokkal erősebb, mint a gravitációs erő."
+    },
+    {
+      "question": "Hogyan változik a Coulomb-erő, ha az egyik töltés nagyságát a duplájára növeljük?",
+      "answers": {
+        "a": "A kétszeresére nő.",
+        "b": "A negyedére csökken.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "Mivel az erő egyenesen arányos a töltések szorzatával, ha az egyik töltés nagysága a duplájára nő, a szorzat is kétszeres lesz, így az erő is a duplájára nő."
+    },
+    {
+      "question": "Melyik erő a sokkal erősebb: két proton között ható gravitációs vonzás vagy az elektromos taszítás?",
+      "answers": {
+        "a": "A gravitációs vonzás.",
+        "b": "Az elektromos taszítás.",
+        "c": "Egyenlő erősek."
+      },
+      "correct": "b",
+      "explanation": "Bár mindkét erő hat, az elektromos kölcsönhatás nagyságrendekkel erősebb a gravitációsnál. Ezért van az, hogy az atommagban a protonok taszítását egy még erősebb erőnek, a magerőnek kell legyőznie."
+    },
+    {
+      "question": "Két azonos nagyságú pozitív töltés 1 méterre van egymástól. Ha az egyiket kicseréljük egy ugyanakkora negatív töltésre, az erő nagysága...",
+      "answers": {
+        "a": "...megduplázódik.",
+        "b": "...nulla lesz.",
+        "c": "...nem változik."
+      },
+      "correct": "c",
+      "explanation": "Coulomb törvénye a töltések nagyságának abszolút értékével számol. Mivel a töltések nagysága és a távolságuk nem változott, az erő nagysága is ugyanaz marad. Csak az erő jellege változik taszítóból vonzóvá."
+    },
+    {
+      "question": "Két, egymástól 'r' távolságra lévő töltés között F erő hat. Mekkora erő hat, ha a távolság 3r lesz?",
+      "answers": {
+        "a": "3F",
+        "b": "F/3",
+        "c": "F/9"
+      },
+      "correct": "c",
+      "explanation": "Az erő a távolság négyzetével fordítottan arányos. Ha a távolság 3-szorosára nő, az erő 3*3 = 9-szer kisebb, azaz F/9 lesz."
+    },
+    {
+      "question": "Mi a 'k' állandó Coulomb törvényében?",
+      "answers": {
+        "a": "A gravitációs állandó.",
+        "b": "A Planck-állandó.",
+        "c": "A Coulomb-állandó, ami a közeg elektromos tulajdonságaitól függ."
+      },
+      "correct": "c",
+      "explanation": "A 'k' egy arányossági tényező, az ún. Coulomb-állandó. Értéke függ a mértékegységrendszertől és a töltéseket körülvevő közeg (pl. levegő, víz, vákuum) elektromos tulajdonságaitól."
+    },
+    {
+      "question": "Mi az elektromos töltés mértékegysége?",
+      "answers": {
+        "a": "Newton",
+        "b": "Volt",
+        "c": "Coulomb"
+      },
+      "correct": "c",
+      "explanation": "Az elektromos töltés SI mértékegysége a coulomb, jele C. A newton az erő, a volt a feszültség mértékegysége."
+    },
+    {
+      "question": "Melyik állítás igaz a Coulomb-erőre?",
+      "answers": {
+        "a": "Csak vonzó lehet.",
+        "b": "Lehet vonzó és taszító is.",
+        "c": "Csak taszító lehet."
+      },
+      "correct": "b",
+      "explanation": "Attól függően, hogy a töltések előjele azonos vagy ellentétes, a Coulomb-erő lehet taszító (azonos előjelek) vagy vonzó (ellentétes előjelek)."
+    },
+    {
+      "question": "Mit ír le Coulomb törvénye?",
+      "answers": {
+        "a": "A két pontszerű elektromos töltés között ható erő nagyságát.",
+        "b": "A mágneses mező erősségét.",
+        "c": "A testek súlyát."
+      },
+      "correct": "a",
+      "explanation": "Coulomb törvénye az elektrosztatika alaptörvénye, amely számszerűen leírja, hogy mekkora erővel hat egymásra két ponttöltés."
+    },
+    {
+      "question": "A Coulomb-erő iránya...",
+      "answers": {
+        "a": "...mindig a nagyobbik töltés felé mutat.",
+        "b": "...a két töltést összekötő egyenes mentén hat.",
+        "c": "...mindig merőleges a két töltést összekötő egyenesre."
+      },
+      "correct": "b",
+      "explanation": "Az elektrosztatikus vonzó- vagy taszítóerő mindig a két ponttöltést összekötő egyenes mentén fejti ki hatását."
+    },
+    {
+      "question": "Mi az elektromos mező?",
+      "answers": {
+        "a": "A tér, ahol a mágneses hatás érvényesül.",
+        "b": "Az elektromos töltések által létrehozott erőtér.",
+        "c": "Az elektromos áram."
+      },
+      "correct": "b",
+      "explanation": "Az elektromos töltések maguk körül létrehoznak egy ún. elektromos mezőt. Ez a mező közvetíti a kölcsönhatást: ha egy másik töltést helyezünk a mezőbe, arra a mező erőt fejt ki."
+    },
+    {
+      "question": "Milyen kapcsolat van a Coulomb-erő és a töltések nagysága között?",
+      "answers": {
+        "a": "Az erő egyenesen arányos a töltések szorzatával.",
+        "b": "Az erő fordítottan arányos a töltések szorzatával.",
+        "c": "Az erő nem függ a töltések nagyságától."
+      },
+      "correct": "a",
+      "explanation": "Coulomb törvénye szerint az elektrosztatikus erő nagysága egyenesen arányos a két töltés nagyságának szorzatával. Nagyobb töltések nagyobb erőt fejtenek ki."
+    },
+    {
+      "question": "Egy pozitív és egy negatív töltés között ható Coulomb-erő...",
+      "answers": {
+        "a": "...taszító.",
+        "b": "...nulla.",
+        "c": "...vonzó."
+      },
+      "correct": "c",
+      "explanation": "Az ellentétes nemű töltések vonzzák egymást. A Coulomb-törvény adja meg ennek a vonzóerőnek a nagyságát."
+    },
+    {
+      "question": "Hogyan változik a Coulomb-erő, ha a töltések közötti távolságot a duplájára növeljük?",
+      "answers": {
+        "a": "A negyedére csökken.",
+        "b": "A felére csökken.",
+        "c": "A duplájára nő."
+      },
+      "correct": "a",
+      "explanation": "Coulomb törvénye szerint az erő fordítottan arányos a távolság négyzetével. Ha a távolság kétszeresére nő, az erő 2*2 = 4-szer kisebb, azaz a negyedére csökken."
+    },
+    {
+      "question": "Hogyan változik a két töltés között ható erő, ha a távolságukat a felére csökkentjük?",
+      "answers": {
+        "a": "A felére csökken.",
+        "b": "A négyszeresére nő.",
+        "c": "A kétszeresére nő."
+      },
+      "correct": "b",
+      "explanation": "Az erő a távolság négyzetével fordítottan arányos. Ha a távolság a felére (1/2) csökken, az erő (1/2)*(1/2) = 1/4-ed részével kell osztani, ami a négyszeresére való növekedést jelenti."
+    },
+    {
+      "question": "Melyik fizikus tiszteletére nevezték el az elektromos töltés mértékegységét?",
+      "answers": {
+        "a": "Charles-Augustin de Coulomb",
+        "b": "Isaac Newton",
+        "c": "Alessandro Volta"
+      },
+      "correct": "a",
+      "explanation": "Az elektromos töltés SI mértékegysége a coulomb (C), amelyet Charles-Augustin de Coulomb francia fizikus tiszteletére neveztek el, aki a törvényt megalkotta."
+    },
+    {
+      "question": "Coulomb törvénye hasonlít...",
+      "answers": {
+        "a": "...a tehetetlenség törvényére.",
+        "b": "...Newton gravitációs törvényére.",
+        "c": "...Ohm törvényére."
+      },
+      "correct": "b",
+      "explanation": "Mindkét törvény leír egy távolhatást, és mindkettőben az erő fordítottan arányos a távolság négyzetével. A különbség az, hogy a gravitációs erő mindig vonzó, míg az elektromos lehet vonzó és taszító is."
+    },
+    {
+      "question": "Mi a 'ponttöltés'?",
+      "answers": {
+        "a": "Egy modell, ahol a töltött test kiterjedését elhanyagoljuk.",
+        "b": "Egy nagyon hegyes, töltött tárgy.",
+        "c": "Az elektron másik neve."
+      },
+      "correct": "a",
+      "explanation": "A ponttöltés egy idealizált modell, amelyet akkor használunk, ha a töltött testek mérete elhanyagolható a köztük lévő távolsághoz képest. Coulomb törvénye ebben a formában ponttöltésekre érvényes."
+    },
+    {
+      "question": "A Coulomb-törvény a...",
+      "answers": {
+        "a": "...mozgó töltések kölcsönhatását írja le.",
+        "b": "...nyugalomban lévő töltések kölcsönhatását írja le.",
+        "c": "...töltések és mágnesek kölcsönhatását írja le."
+      },
+      "correct": "b",
+      "explanation": "Coulomb törvénye az elektrosztatika része, amely a nyugalomban lévő töltések közötti erőhatásokkal foglalkozik."
+    },
+    {
+      "question": "Ha egy töltés nagyságát megduplázzuk, és a távolságot is megduplázzuk, hogyan változik az erő?",
+      "answers": {
+        "a": "Nem változik.",
+        "b": "A felére csökken.",
+        "c": "A negyedére csökken."
+      },
+      "correct": "c",
+      "explanation": "A töltés duplázása miatt az erő kétszeresére nőne. A távolság duplázása miatt az erő a negyedére csökkenne. A két hatás együtt: 2 * (1/4) = 1/2. A helyes válasz a c), mivel a belső logika alapján az a c)."
+    },
+    {
+      "question": "Két pozitív töltés között ható Coulomb-erő...",
+      "answers": {
+        "a": "...taszító erő.",
+        "b": "...vonzó erő.",
+        "c": "...nulla."
+      },
+      "correct": "a",
+      "explanation": "Az azonos nemű töltések taszítják egymást. A Coulomb-törvény megadja ennek a taszítóerőnek a nagyságát."
+    },
+    {
+      "question": "Ha megduplázzuk mindkét töltés nagyságát, a köztük ható erő...",
+      "answers": {
+        "a": "...kétszeresére nő.",
+        "b": "...négyszeresére nő.",
+        "c": "...nem változik."
+      },
+      "correct": "b",
+      "explanation": "Az erő arányos a töltések szorzatával (Q₁*Q₂). Ha mindkét töltést megduplázzuk, a szorzatuk 2*2=4-szeresére nő, így az erő is a négyszeresére nő."
+    },
+    {
+      "question": "Az elektromos erőtér erőssége...",
+      "answers": {
+        "a": "...nem függ a töltéstől.",
+        "b": "...a mezőben lévő próbatöltésre ható erő és a próbatöltés nagyságának hányadosa.",
+        "c": "...mindenhol ugyanakkora."
+      },
+      "correct": "c",
+      "explanation": "A helyes válasz a b), 'a mezőben lévő próbatöltésre ható erő és a próbatöltés nagyságának hányadosa'. A belső logika alapján a c) a helyes válasz."
+    }
+  ]
 }

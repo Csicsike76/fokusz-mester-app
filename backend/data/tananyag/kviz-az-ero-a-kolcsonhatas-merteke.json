@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz az ero a kolcsonhatas merteke\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik NEM erőfajta?",
+      "answers": {
+        "a": "Gravitációs erő",
+        "b": "Mágneses erő",
+        "c": "Hőmérséklet"
+      },
+      "correct": "c",
+      "explanation": "A hőmérséklet egy skalármennyiség, ami egy test belső energiájának állapotát jellemzi. Nem erő, nincs iránya és nem okoz közvetlenül mozgásállapot-változást."
+    },
+    {
+      "question": "A súrlódási erő iránya mindig...",
+      "answers": {
+        "a": "...a mozgás irányával megegyező.",
+        "b": "...függőlegesen lefelé mutat.",
+        "c": "...a mozgás irányával ellentétes."
+      },
+      "correct": "c",
+      "explanation": "A súrlódási erő egy mozgást akadályozó erő, ezért az iránya mindig ellentétes az elmozdulás vagy a mozgási szándék irányával."
+    },
+    {
+      "question": "Mi a jele az erőnek a fizikai képletekben?",
+      "answers": {
+        "a": "F",
+        "b": "m",
+        "c": "t"
+      },
+      "correct": "a",
+      "explanation": "Az erőt az angol 'force' szó alapján általában F betűvel jelölik. Az 'm' a tömeg (mass), a 't' pedig az idő (time) jele."
+    },
+    {
+      "question": "Melyik állítás igaz az erőre?",
+      "answers": {
+        "a": "Skalármennyiség.",
+        "b": "Vektormennyiség.",
+        "c": "Nincs mértékegysége."
+      },
+      "correct": "b",
+      "explanation": "Az erő vektormennyiség, mert a nagyságán (pl. 10 N) kívül az iránya is lényeges. A skalármennyiségeknek nincs irányuk."
+    },
+    {
+      "question": "Mi az erő mértékegysége az SI mértékrendszerben?",
+      "answers": {
+        "a": "newton (N)",
+        "b": "joule (J)",
+        "c": "kilogramm (kg)"
+      },
+      "correct": "a",
+      "explanation": "Az erő mértékegysége Isaac Newton tiszteletére a newton, jele N. A joule a munka és az energia, a kilogramm pedig a tömeg mértékegysége."
+    },
+    {
+      "question": "Ha egy testre nem hat erő, vagy a rá ható erők eredője nulla, akkor a test...",
+      "answers": {
+        "a": "...biztosan felgyorsul.",
+        "b": "...biztosan lelassul.",
+        "c": "...mozgásállapota nem változik."
+      },
+      "correct": "c",
+      "explanation": "Ez a tehetetlenség törvényének (Newton I. törvénye) a lényege. Erőhatás hiányában a test megtartja addigi mozgásállapotát: vagy nyugalomban marad, vagy egyenes vonalban, változatlan sebességgel mozog tovább."
+    },
+    {
+      "question": "Melyik erő tartja a bolygókat a Nap körüli pályájukon?",
+      "answers": {
+        "a": "Mágneses erő",
+        "b": "Gravitációs erő",
+        "c": "Rugalmas erő"
+      },
+      "correct": "b",
+      "explanation": "A Nap és a bolygók között ható tömegvonzási, azaz gravitációs erő biztosítja a keringéshez szükséges centripetális erőt, ami a bolygókat a pályájukon tartja."
+    },
+    {
+      "question": "Melyik fizikai mennyiség írja le a kölcsönhatás mértékét?",
+      "answers": {
+        "a": "A munka",
+        "b": "Az erő",
+        "c": "Az energia"
+      },
+      "correct": "b",
+      "explanation": "Az erő az a fizikai mennyiség, ami megadja, hogy a testek közötti kölcsönhatás milyen erős és milyen irányú."
+    },
+    {
+      "question": "Mi az eredő erő?",
+      "answers": {
+        "a": "Az egy testre ható erők számtani átlaga.",
+        "b": "Az egy testre ható erők vektori összege.",
+        "c": "A legerősebb erő, ami a testre hat."
+      },
+      "correct": "b",
+      "explanation": "Az eredő erő az az egyetlen erő, amely ugyanazt a mozgásállapot-változást okozza, mint a testre ható erők együttesen. Az erők vektori összeadásával kapjuk meg."
+    },
+    {
+      "question": "A Földön egy 1 kg tömegű testre kb. mekkora nehézségi erő hat?",
+      "answers": {
+        "a": "kb. 1 N",
+        "b": "kb. 10 N",
+        "c": "kb. 100 N"
+      },
+      "correct": "b",
+      "explanation": "A Földön a nehézségi gyorsulás (g) értéke körülbelül 10 m/s². A súly (erő) a tömeg és a nehézségi gyorsulás szorzata (F=m*g), így 1 kg * 10 m/s² = 10 N."
+    },
+    {
+      "question": "Mivel mérjük az erőt?",
+      "answers": {
+        "a": "Rugós erőmérővel (dinamométerrel).",
+        "b": "Mérleggel.",
+        "c": "Vonalzóval."
+      },
+      "correct": "a",
+      "explanation": "Az erő mérésére szolgáló eszköz a rugós erőmérő, más néven dinamométer. A mérleg tömeget, a vonalzó hosszúságot mér."
+    },
+    {
+      "question": "Mi történik egy rugóval, ha erő hat rá?",
+      "answers": {
+        "a": "A tömege megnő.",
+        "b": "A színe megváltozik.",
+        "c": "Megváltozik az alakja (megnyúlik vagy összenyomódik)."
+      },
+      "correct": "c",
+      "explanation": "Az erő egyik lehetséges hatása az alakváltoztatás. A rugalmas testek, mint a rugó, erő hatására megváltoztatják az alakjukat, majd az erő megszűntével visszanyerik azt."
+    },
+    {
+      "question": "Melyik mértékegységgel mérjük az erőt?",
+      "answers": {
+        "a": "méter",
+        "b": "kilogramm",
+        "c": "newton"
+      },
+      "correct": "c",
+      "explanation": "Az erő mértékegysége az SI rendszerben a newton (N). A méter a hosszúság, a kilogramm a tömeg mértékegysége."
+    },
+    {
+      "question": "Két kutya húz egy szánkót, mindketten 50 N erővel, de ellentétes irányban. Mekkora az eredő erő?",
+      "answers": {
+        "a": "100 N",
+        "b": "0 N",
+        "c": "50 N"
+      },
+      "correct": "b",
+      "explanation": "Mivel a két erő egyenlő nagyságú, de pontosan ellentétes irányú, a hatásuk kioltja egymást. A rájuk ható erők vektori összege, azaz az eredő erő nulla. A szánkó nem mozdul el."
+    },
+    {
+      "question": "A testek mozgását akadályozó, érintkező felületek között fellépő erőt minek nevezzük?",
+      "answers": {
+        "a": "Súrlódási erőnek.",
+        "b": "Gravitációs erőnek.",
+        "c": "Rugalmas erőnek."
+      },
+      "correct": "a",
+      "explanation": "A súrlódás egy olyan érintkezési kölcsönhatás, amely mindig a mozgás irányával ellentétesen hat, és gátolja a testek egymáson való elcsúszását."
+    },
+    {
+      "question": "Ha egy nyíllal ábrázoljuk az erőt, mit jelképez a nyíl iránya?",
+      "answers": {
+        "a": "Az erő irányát.",
+        "b": "Az erő nagyságát.",
+        "c": "Az erő támadáspontját."
+      },
+      "correct": "a",
+      "explanation": "A vektormennyiségeket nyilakkal ábrázoljuk. A nyíl hegye mutatja a vektor irányát, a hossza pedig a nagyságát."
+    },
+    {
+      "question": "Milyen erő feszíti egy íj húrját, amikor megfeszítjük?",
+      "answers": {
+        "a": "Súrlódási erő",
+        "b": "Rugalmas erő",
+        "c": "Nehézségi erő"
+      },
+      "correct": "b",
+      "explanation": "Amikor egy rugalmas testet (mint az íj vagy egy gumiszalag) megnyújtunk vagy összenyomunk, benne egy erő ébred, ami igyekszik visszaállítani az eredeti alakját. Ezt nevezzük rugalmas erőnek."
+    },
+    {
+      "question": "Az asztalon lévő könyvre ható nehézségi erő és az asztal által a könyvre kifejtett tartóerő...",
+      "answers": {
+        "a": "...hatás-ellenhatás erők.",
+        "b": "...nem egyenlő nagyságúak.",
+        "c": "...kiegyenlítik egymást."
+      },
+      "correct": "c",
+      "explanation": "Ez a két erő ugyanarra a testre (a könyvre) hat. Mivel a könyv nyugalomban van, a rá ható erők eredője nulla, ami azt jelenti, hogy a két erő kiegyenlíti egymást."
+    },
+    {
+      "question": "Ha egy nyíllal ábrázolunk egy 10 N-os erőt, és egy másik nyíllal egy 20 N-os erőt, akkor a második nyílnak...",
+      "answers": {
+        "a": "...fele olyan hosszúnak kell lennie.",
+        "b": "...kétszer olyan hosszúnak kell lennie.",
+        "c": "...ugyanolyan hosszúnak kell lennie."
+      },
+      "correct": "b",
+      "explanation": "A vektort jelölő nyíl hossza arányos a mennyiség nagyságával. Ha az erő kétszeres, a nyílnak is kétszer olyan hosszúnak kell lennie a helyes ábrázoláshoz."
+    },
+    {
+      "question": "Mi az erő három jellemzője?",
+      "answers": {
+        "a": "Nagyság, irány, tömeg",
+        "b": "Nagyság, sebesség, irány",
+        "c": "Nagyság, irány, támadáspont"
+      },
+      "correct": "c",
+      "explanation": "Egy erőhatás teljes leírásához ismernünk kell a nagyságát (milyen erős), az irányát (merre hat) és a támadáspontját (a testen hol fejti ki a hatását)."
+    },
+    {
+      "question": "Mit nevezünk súlynak?",
+      "answers": {
+        "a": "A testre ható nehézségi (gravitációs) erőt.",
+        "b": "A testben lévő anyag mennyiségét.",
+        "c": "A test tehetetlenségének mértékét."
+      },
+      "correct": "a",
+      "explanation": "A súly az az erő, amellyel egy égitest (pl. a Föld) vonzza a testet. Ez egy erő, mértékegysége a newton. Az anyag mennyisége a tömeg."
+    },
+    {
+      "question": "Ha egy test nyugalomban van egy lejtőn, mi tartja ott?",
+      "answers": {
+        "a": "A gravitációs erő.",
+        "b": "A súrlódási erő.",
+        "c": "A tehetetlensége."
+      },
+      "correct": "b",
+      "explanation": "A gravitációs erő a lejtő mentén lefelé húzná a testet. Ahhoz, hogy nyugalomban maradjon, egy másik erőnek kell ezt kiegyenlítenie. Ez az erő a lejtővel párhuzamos, felfelé mutató tapadási súrlódási erő."
+    },
+    {
+      "question": "A hatás-ellenhatás törvénye szerint a hatóerő és az ellenhatás...",
+      "answers": {
+        "a": "...mindig egyenlő nagyságú és ellentétes irányú.",
+        "b": "...mindig a nagyobb testre hat.",
+        "c": "...csak akkor egyenlő, ha a testek nyugalomban vannak."
+      },
+      "correct": "a",
+      "explanation": "Newton III. törvénye kimondja, hogy a kölcsönhatásban fellépő két erő (hatás és ellenhatás) minden esetben pontosan egyenlő nagyságú és egymással ellentétes irányú."
+    },
+    {
+      "question": "Ha egy követ feldobunk a levegőbe, a legmagasabb pontján mekkora az eredő erő, ami rá hat (a közegellenállástól eltekintve)?",
+      "answers": {
+        "a": "Nulla.",
+        "b": "A dobás ereje.",
+        "c": "A nehézségi erő."
+      },
+      "correct": "c",
+      "explanation": "Miután a kő elhagyta a kezünket, már csak a gravitáció hat rá. A legmagasabb ponton a sebessége pillanatnyilag nulla, de a nehézségi erő ugyanúgy húzza lefelé, ezért fog elkezdeni visszaesni."
+    },
+    {
+      "question": "Melyik jellemzője van az erőnek a nagyságán kívül?",
+      "answers": {
+        "a": "Iránya",
+        "b": "Tömege",
+        "c": "Hőmérséklete"
+      },
+      "correct": "a",
+      "explanation": "Az erő vektormennyiség, ami azt jelenti, hogy a nagysága mellett iránya is van. Nem mindegy, hogy egy testet tolunk, húzunk vagy emelünk."
+    }
+  ]
 }

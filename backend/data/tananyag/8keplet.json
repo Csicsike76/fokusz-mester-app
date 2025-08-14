@@ -1,8 +1,261 @@
+
+
 {
   "title": "8keplet",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"8keplet\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Hogyan számoljuk ki egy egyenes hasáb térfogatát (V)?",
+      "answers": {
+        "a": "V = Alapterület × Testmagasság",
+        "b": "V = Alapkerület × Testmagasság",
+        "c": "V = 2 × Alapterület + Palást"
+      },
+      "correct": "a",
+      "explanation": "Egy hasáb térfogata mindig az alaplap területének és a test magasságának a szorzata. A palást a felszín része."
+    },
+    {
+      "question": "Mi az (a - b)² kifejezés teljes négyzetté alakított, kifejtett formája?",
+      "answers": {
+        "a": "a² - 2ab + b²",
+        "b": "a² - b²",
+        "c": "a² + 2ab + b²"
+      },
+      "correct": "a",
+      "explanation": "Ez egy nevezetes azonosság. A kéttagú különbség négyzete: az első tag négyzete, mínusz a két tag kétszeres szorzata, plusz a második tag négyzete."
+    },
+    {
+      "question": "Mi a gömb felszínének (A) képlete, ha a sugara 'r'?",
+      "answers": {
+        "a": "A = 4πr²",
+        "b": "A = πr²",
+        "c": "V = (4/3)πr³"
+      },
+      "correct": "a",
+      "explanation": "A gömb felszíne négyszerese a gömb főkörének (a sugárral megegyező sugarú kör) területének. A (4/3)πr³ a gömb térfogatának képlete."
+    },
+    {
+      "question": "Mi keletkezik, ha egy gúlát elvágunk egy, az alaplapjával párhuzamos síkkal?",
+      "answers": {
+        "a": "Egy kisebb gúla és egy csonka gúla",
+        "b": "Két egybevágó gúla",
+        "c": "Egy hasáb és egy gúla"
+      },
+      "correct": "a",
+      "explanation": "Az alapsíkkal párhuzamos vágás során a gúla csúcsánál egy, az eredetihez hasonló kisebb gúla keletkezik, az alsó rész pedig egy csonka gúla lesz."
+    },
+    {
+      "question": "Mit nevezünk egy függvény grafikonjának a derékszögű koordináta-rendszerben?",
+      "answers": {
+        "a": "Az (x, f(x)) pontok halmazát.",
+        "b": "A függvény szabályát leíró képletet.",
+        "c": "A függvény meredekségét."
+      },
+      "correct": "a",
+      "explanation": "A függvény grafikonja azoknak a pontoknak a halmaza a síkon, amelyek első koordinátája egy értelmezési tartománybeli 'x' érték, a második pedig a hozzá rendelt 'f(x)' függvényérték."
+    },
+    {
+      "question": "Milyen helyzetű az a két egyenes a térben, amelyek nem párhuzamosak és nincs közös pontjuk?",
+      "answers": {
+        "a": "Kitérő",
+        "b": "Metsző",
+        "c": "Azonos"
+      },
+      "correct": "a",
+      "explanation": "A kitérő egyenesek definíció szerint nem fekszenek egy síkban, így nem metszhetik egymást és nem is párhuzamosak."
+    },
+    {
+      "question": "Mi a legrövidebb távolság két pont között a térben?",
+      "answers": {
+        "a": "Az őket összekötő egyenes szakasz hossza",
+        "b": "A felszínükön mért legrövidebb út",
+        "c": "A koordinátáik különbségeinek összege"
+      },
+      "correct": "a",
+      "explanation": "Az euklideszi térben a két pont közötti legrövidebb út a távolságuk, azaz az őket összekötő egyenes szakasz hossza."
+    },
+    {
+      "question": "Mit nevezünk egy adatsor móduszának?",
+      "answers": {
+        "a": "A leggyakrabban előforduló értéket",
+        "b": "A legnagyobb és legkisebb érték különbségét (terjedelmét)",
+        "c": "Az adatok számtani átlagát"
+      },
+      "correct": "a",
+      "explanation": "A módusz a centrális tendencia egyik mutatója, amely az adathalmazban leggyakrabban szereplő elemet jelöli."
+    },
+    {
+      "question": "Melyik művelet eredményezi két halmaz közös elemeit?",
+      "answers": {
+        "a": "Unió (egyesítés)",
+        "b": "Metszet",
+        "c": "Különbség"
+      },
+      "correct": "b",
+      "explanation": "A metszet (∩) művelet azokat az elemeket adja vissza, amelyek mindkét halmazban megtalálhatók."
+    },
+    {
+      "question": "Melyik az ax² + bx + c = 0 alakú egyenlet neve?",
+      "answers": {
+        "a": "Lineáris egyenlet",
+        "b": "Másodfokú egyenlet",
+        "c": "Harmadfokú egyenlet"
+      },
+      "correct": "b",
+      "explanation": "Ez a másodfokú egyenlet általános alakja, ahol 'x' a változó, 'a', 'b' és 'c' pedig konstansok, és 'a' nem lehet nulla."
+    },
+    {
+      "question": "Mit jelent az 'a' paraméter az f(x) = ax + b lineáris függvényben?",
+      "answers": {
+        "a": "Az y-tengelymetszetet",
+        "b": "A függvény meredekségét",
+        "c": "Az x-tengelymetszetet"
+      },
+      "correct": "b",
+      "explanation": "Az 'a' együttható (iránytényező) a függvény grafikonjának meredekségét adja meg. A 'b' paraméter jelöli az y-tengelymetszetet."
+    },
+    {
+      "question": "Mi NEM határoz meg egyértelműen egy síkot a térben?",
+      "answers": {
+        "a": "Két metsző egyenes",
+        "b": "Két kitérő egyenes",
+        "c": "Három, nem egy egyenesen lévő pont"
+      },
+      "correct": "b",
+      "explanation": "Két kitérő egyenes nincs egy síkban, így nem feszíthetnek ki egyet. A többi opció mind egyértelműen meghatároz egy síkot."
+    },
+    {
+      "question": "Miből áll egy egyenes körhenger felszíne (A)?",
+      "answers": {
+        "a": "Egy körlap területéből és a palást területéből",
+        "b": "Két körlap területének és a palást területének összegéből",
+        "c": "Csak a palást területéből"
+      },
+      "correct": "b",
+      "explanation": "A henger felszínéhez hozzá kell venni az alaplap és a fedőlap (két egybevágó kör) területét, valamint a kiterített téglalap alakú palást területét."
+    },
+    {
+      "question": "Hogyan viszonyul az azonos alapkörű és magasságú kúp és henger térfogata?",
+      "answers": {
+        "a": "A kúp térfogata fele a hengerének",
+        "b": "A kúp térfogata harmada a hengerének",
+        "c": "Megegyeznek"
+      },
+      "correct": "b",
+      "explanation": "Cavalieri elve alapján egy kúp térfogata pontosan egyharmada az azonos alapterületű és magasságú henger térfogatának."
+    },
+    {
+      "question": "Mit nevezünk két metsző sík hajlásszögének?",
+      "answers": {
+        "a": "Síkszög",
+        "b": "Lapszög",
+        "c": "Vetületi szög"
+      },
+      "correct": "b",
+      "explanation": "A két metsző sík által bezárt szöget lapszögnek hívjuk, melynek mértékét a hozzá tartozó síkszöggel adjuk meg."
+    },
+    {
+      "question": "Mit nevezünk egy függvény értelmezési tartományának?",
+      "answers": {
+        "a": "Azon értékek halmazát, amelyeket a függvény felvehet (értékkészlet).",
+        "b": "Azon x értékek halmazát, amelyekhez a függvény hozzárendel egy értéket.",
+        "c": "Az x és y tengelyek metszetét."
+      },
+      "correct": "b",
+      "explanation": "Az értelmezési tartomány a 'bemeneti' értékek (általában x) halmaza, amelyekre a függvény szabálya értelmezve van."
+    },
+    {
+      "question": "Mi a metszete két, egymással nem párhuzamos síknak a térben?",
+      "answers": {
+        "a": "Egy pont",
+        "b": "Egy egyenes",
+        "c": "Egy síkdarab"
+      },
+      "correct": "b",
+      "explanation": "Két metsző sík végtelen sok közös ponttal rendelkezik, amelyek egy egyenesre, a metszésvonalra illeszkednek."
+    },
+    {
+      "question": "Mi a szabályos gúla térfogatának képlete?",
+      "answers": {
+        "a": "V = Alapterület × Testmagasság",
+        "b": "V = (Alapterület × Testmagasság) / 2",
+        "c": "V = (Alapterület × Testmagasság) / 3"
+      },
+      "correct": "c",
+      "explanation": "Minden gúla (és kúp) térfogata az alapterület és a magasság szorzatának harmada."
+    },
+    {
+      "question": "Mikor egyenlő egy szakasz síkra eső merőleges vetületének hossza az eredeti szakasz hosszával?",
+      "answers": {
+        "a": "Soha",
+        "b": "Ha a szakasz merőleges a síkra",
+        "c": "Ha a szakasz párhuzamos a síkkal (vagy illeszkedik a síkra)"
+      },
+      "correct": "c",
+      "explanation": "Ha a szakasz merőleges a síkra, a vetülete egyetlen pont. Ha párhuzamos, a vetület hossza nem rövidül, megegyezik az eredeti hosszával."
+    },
+    {
+      "question": "Mi a gömb térfogatának (V) képlete, ha a sugara 'r'?",
+      "answers": {
+        "a": "V = πr³",
+        "b": "V = 4πr²",
+        "c": "V = (4/3)πr³"
+      },
+      "correct": "c",
+      "explanation": "A gömb térfogatképlete V = (4/3)πr³. A 4πr² a gömb felszínének képlete."
+    },
+    {
+      "question": "Melyik statisztikai mutató mutatja meg a sorba rendezett adatsor 'közepén' álló elemet?",
+      "answers": {
+        "a": "Módusz",
+        "b": "Átlag",
+        "c": "Medián"
+      },
+      "correct": "c",
+      "explanation": "A medián a statisztikai sokaság központi értékét mutatja úgy, hogy az adatokat sorba rendezve a középső elemet (vagy két középső átlagát) választja."
+    },
+    {
+      "question": "Hány közös pontja van egy síknak és egy vele párhuzamos egyenesnek?",
+      "answers": {
+        "a": "Végtelen sok",
+        "b": "Egy",
+        "c": "Nulla"
+      },
+      "correct": "c",
+      "explanation": "A párhuzamosság definíciója szerint az egyenes és a sík soha nem találkoznak, tehát nincs közös pontjuk."
+    },
+    {
+      "question": "Mi az a² - b² kifejezés szorzattá alakított, nevezetes formája?",
+      "answers": {
+        "a": "(a-b)(a-b)",
+        "b": "(a+b)(a+b)",
+        "c": "(a-b)(a+b)"
+      },
+      "correct": "c",
+      "explanation": "Ez a 'két négyzet különbsége' nevezetes azonosság, amely egyenlő a két tag különbségének és összegének szorzatával."
+    },
+    {
+      "question": "Hogyan számoljuk ki egy egyenes körhenger térfogatát (V), ha az alapkör sugara 'r' és magassága 'h'?",
+      "answers": {
+        "a": "V = 2πr × h",
+        "b": "V = 2πr² + 2πrh",
+        "c": "V = πr² × h"
+      },
+      "correct": "c",
+      "explanation": "A henger, mint hasáb, térfogata az alapterület (egy kör területe: πr²) és a magasság (h) szorzata."
+    },
+    {
+      "question": "Melyik NEM a háromszögek hasonlóságának egyik alapesete?",
+      "answers": {
+        "a": "Két-két szögük páronként egyenlő.",
+        "b": "Két-két oldaluk aránya és az általuk közbezárt szög egyenlő.",
+        "c": "Mindhárom oldaluk páronként egyenlő."
+      },
+      "correct": "c",
+      "explanation": "A háromszögek hasonlóságának alapesetei az oldalak ARÁNYÁVAL dolgoznak. Amikor mindhárom oldal páronként egyenlő (nem csak arányos), az már az egybevágóság esete."
+    }
+  ]
 }

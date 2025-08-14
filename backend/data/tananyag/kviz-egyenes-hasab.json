@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz egyenes hasab\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás igaz egy egyenes hasáb palástjára?",
+      "answers": {
+        "a": "Mindig egyetlen nagy téglalapra teríthető ki.",
+        "b": "Háromszögekből áll.",
+        "c": "Görbe felület."
+      },
+      "correct": "a",
+      "explanation": "A palást az egymás mellé helyezett téglalap oldallapokból áll. Ha ezeket kiterítjük, egyetlen nagy téglalapot kapunk, aminek egyik oldala a testmagasság, a másik az alaplap kerülete."
+    },
+    {
+      "question": "Hány csúcsa van egy ötszög alapú hasábnak?",
+      "answers": {
+        "a": "5",
+        "b": "10",
+        "c": "15"
+      },
+      "correct": "b",
+      "explanation": "Az alaplap egy ötszög, aminek 5 csúcsa van. A fedőlap szintén egy ötszög, aminek szintén 5 csúcsa van. Összesen 5 + 5 = 10 csúcs."
+    },
+    {
+      "question": "Egy háromszög alapú hasáb alaplapjának területe 10 cm², magassága 5 cm. Mennyi a térfogata?",
+      "answers": {
+        "a": "50 cm³",
+        "b": "15 cm³",
+        "c": "25 cm³"
+      },
+      "correct": "a",
+      "explanation": "Bármely hasáb térfogatának képlete: Térfogat = Alapterület * Testmagasság. Tehát a térfogat 10 cm² * 5 cm = 50 cm³."
+    },
+    {
+      "question": "Hogyan számoljuk ki egy hasáb felszínét?",
+      "answers": {
+        "a": "2 * Alapterület + Palást területe",
+        "b": "Alapterület + Palást területe",
+        "c": "Alapterület * Magasság"
+      },
+      "correct": "a",
+      "explanation": "A teljes felszín a hasábot határoló összes lap területének összege. Van két egyforma alaplap (alap- és fedőlap), ehhez jön hozzá az oldallapok összterülete, a palást."
+    },
+    {
+      "question": "Milyen testet kapunk, ha egy sokszöget eltolunk a térben önmagával párhuzamosan?",
+      "answers": {
+        "a": "gúlát",
+        "b": "kúpot",
+        "c": "hasábot"
+      },
+      "correct": "c",
+      "explanation": "A sokszög eredeti és új helyzete lesz a hasáb alap- és fedőlapja, a mozgás közben 'húzott' oldalak pedig az oldallapok."
+    },
+    {
+      "question": "Mi a hasáb palástja?",
+      "answers": {
+        "a": "Az alaplap és a fedőlap együtt.",
+        "b": "Az oldallapok összterülete.",
+        "c": "A test térfogata."
+      },
+      "correct": "b",
+      "explanation": "A palást a test oldalsó, 'köpeny' része, ami körbeveszi. A hasáb esetében ez az oldallapok (egyenes hasábnál téglalapok) összességét jelenti."
+    },
+    {
+      "question": "Mi a különbség a hasáb és a gúla között?",
+      "answers": {
+        "a": "A gúlának van csúcsa, a hasábnak nincs.",
+        "b": "A hasábnak van csúcsa, a gúlának nincs.",
+        "c": "A gúla lapjai görbék."
+      },
+      "correct": "a",
+      "explanation": "A gúla oldallapjai egyetlen csúcsban futnak össze. A hasábnak két alaplapja van, és nincsen egy kitüntetett csúcsa."
+    },
+    {
+      "question": "Egy egyenes hasáb oldaléle 10 cm. Mekkora a testmagassága?",
+      "answers": {
+        "a": "5 cm",
+        "b": "10 cm",
+        "c": "nem lehet tudni"
+      },
+      "correct": "b",
+      "explanation": "Az 'egyenes' hasáb azt jelenti, hogy az oldalélek merőlegesek az alaplapra. Ebben az esetben az oldalél hossza megegyezik a két alaplap távolságával, azaz a testmagassággal."
+    },
+    {
+      "question": "Milyen síkidomok az oldallapjai egy ferde hasábnak?",
+      "answers": {
+        "a": "háromszögek",
+        "b": "téglalapok",
+        "c": "paralelogrammák"
+      },
+      "correct": "c",
+      "explanation": "A ferde hasáb oldalélei nem merőlegesek az alaplapra, 'dőlnek'. Emiatt az oldallapok már nem téglalapok, hanem paralelogrammák lesznek."
+    },
+    {
+      "question": "Milyen viszonyban vannak az oldalélek az alaplap síkjával egy egyenes hasáb esetén?",
+      "answers": {
+        "a": "párhuzamosak",
+        "b": "merőlegesek",
+        "c": "45°-os szöget zárnak be"
+      },
+      "correct": "b",
+      "explanation": "Az 'egyenes' jelző a hasáb nevében pontosan erre a tulajdonságra utal. Azt jelenti, hogy az oldalélek derékszögben 'állnak' az alaplapon."
+    },
+    {
+      "question": "Mi a palást területe egy egyenes hasábnál?",
+      "answers": {
+        "a": "Alaplap kerülete * Testmagasság",
+        "b": "Alaplap területe * Testmagasság",
+        "c": "Alaplap kerülete * Alapél"
+      },
+      "correct": "a",
+      "explanation": "A palást a kiterített oldallapokból álló nagy téglalap. Ennek a téglalapnak az egyik oldala a hasáb magassága, a másik oldala pedig az alaplap kerülete."
+    },
+    {
+      "question": "Mi az egyenes hasáb két legfontosabb jellemzője?",
+      "answers": {
+        "a": "Két egybevágó, párhuzamos alaplapja és téglalap oldallapjai vannak.",
+        "b": "Van egy csúcsa és egy sokszög alaplapja.",
+        "c": "Görbe felületek határolják."
+      },
+      "correct": "a",
+      "explanation": "A hasábnak mindig van egy alaplapja és egy vele párhuzamos, egybevágó fedőlapja. Ha a hasáb 'egyenes', akkor az oldalélei merőlegesek az alaplapra, így az oldallapok téglalapok."
+    },
+    {
+      "question": "Milyen síkidomokból áll egy háromszög alapú egyenes hasáb testhálója?",
+      "answers": {
+        "a": "Három háromszögből és két téglalapból.",
+        "b": "Két háromszögből és három téglalapból.",
+        "c": "Öt téglalapból."
+      },
+      "correct": "b",
+      "explanation": "A hasábnak van egy háromszög alakú alaplapja és egy ugyanilyen fedőlapja (ez 2 háromszög). Az alaplap három oldalához egy-egy téglalap alakú oldallap csatlakozik (ez 3 téglalap)."
+    },
+    {
+      "question": "Melyik állítás igaz az egyenes hasábra?",
+      "answers": {
+        "a": "Csak egy alaplapja van.",
+        "b": "Az alap- és fedőlapja egybevágó és párhuzamos.",
+        "c": "Az oldallapjai háromszögek."
+      },
+      "correct": "b",
+      "explanation": "A hasáb definíciójának legfontosabb része a két alaplap. Ennek a két lapnak párhuzamos síkokban kell lennie, és egybevágó (méret- és alakazonos) sokszögeknek kell lenniük."
+    },
+    {
+      "question": "Mi az Euler-féle poliédertétel?",
+      "answers": {
+        "a": "lapok + élek = csúcsok + 2",
+        "b": "csúcsok + lapok = élek + 2",
+        "c": "csúcsok + élek = lapok + 2"
+      },
+      "correct": "b",
+      "explanation": "Euler svájci matematikus fedezte fel az összefüggést a konvex testek lapjai, csúcsai és élei között. A tétel szerint a csúcsok számának és a lapok számának összege mindig kettővel több, mint az élek száma."
+    },
+    {
+      "question": "Hány lapja van egy négyszög alapú hasábnak?",
+      "answers": {
+        "a": "8",
+        "b": "6",
+        "c": "4"
+      },
+      "correct": "b",
+      "explanation": "Van 1 alaplapja és 1 fedőlapja (ez 2 lap). Az alaplap 4 oldalához 4 oldallap csatlakozik. Összesen 2 + 4 = 6 lap."
+    },
+    {
+      "question": "Hány éle van egy tízszög alapú hasábnak?",
+      "answers": {
+        "a": "20",
+        "b": "30",
+        "c": "12"
+      },
+      "correct": "b",
+      "explanation": "Alul 10, felül 10, és a kettőt összekötő 10 oldalél van. Összesen 10 + 10 + 10 = 30 él."
+    },
+    {
+      "question": "Mi a neve a hasáb alaplapjait összekötő éleknek?",
+      "answers": {
+        "a": "alapélek",
+        "b": "oldalélek",
+        "c": "magasságvonalak"
+      },
+      "correct": "b",
+      "explanation": "Az alaplapok éleit alapéleknek nevezzük. Azokat az éleket, amik a két lap megfelelő csúcsait kötik össze, oldaléleknek hívjuk."
+    },
+    {
+      "question": "Hogyan nevezzük a hasábot az alaplapja alapján?",
+      "answers": {
+        "a": "Magassága szerint.",
+        "b": "Alaplapjának oldalszáma szerint.",
+        "c": "Éleinek száma szerint."
+      },
+      "correct": "b",
+      "explanation": "A hasábok nevét az alapjukat alkotó sokszög határozza meg. Ha az alap háromszög, akkor háromszöghasáb. Ha hatszög, akkor hatszöghasáb."
+    },
+    {
+      "question": "Hány éle van egy hatszög alapú hasábnak?",
+      "answers": {
+        "a": "12",
+        "b": "18",
+        "c": "24"
+      },
+      "correct": "b",
+      "explanation": "Az alaplapnak 6 éle van, a fedőlapnak is 6 éle van. A két lapot 6 darab oldalél köti össze. Összesen 6 + 6 + 6 = 18 él."
+    },
+    {
+      "question": "Ellenőrizzük Euler tételét egy háromszöghasábra! (csúcs:6, él:9, lap:5)",
+      "answers": {
+        "a": "6 + 9 = 5 + 2",
+        "b": "6 + 5 = 9 + 2",
+        "c": "5 + 9 = 6 + 2"
+      },
+      "correct": "b",
+      "explanation": "A tétel: csúcsok + lapok = élek + 2. Behelyettesítve a megadott értékeket: 6 + 5 = 11. Az élek száma + 2: 9 + 2 = 11. Mivel 11=11, a tétel érvényes."
+    },
+    {
+      "question": "Melyik ismert test egy olyan négyzet alapú egyenes hasáb, melynek magassága egyenlő az alapéllel?",
+      "answers": {
+        "a": "gúla",
+        "b": "henger",
+        "c": "kocka"
+      },
+      "correct": "c",
+      "explanation": "Egy egyenes hasáb, aminek az alapja négyzet, és a magassága is pont akkora, mint az alapnégyzet oldala, azt jelenti, hogy minden éle egyenlő hosszú. Ezt a testet kockának nevezzük."
+    },
+    {
+      "question": "Egy szobát tekinthetünk egy nagy...",
+      "answers": {
+        "a": "gúlának.",
+        "b": "hasábnak (téglatestnek).",
+        "c": "hengernek."
+      },
+      "correct": "b",
+      "explanation": "A szobának van egy padlója (alaplap) és egy mennyezete (fedőlap), amik párhuzamosak és egybevágóak. Az oldalfalak téglalapok. Ez a téglatest, ami egy egyenes hasáb, leírása."
+    },
+    {
+      "question": "Mi a hasáb testmagassága?",
+      "answers": {
+        "a": "Az oldalél hossza.",
+        "b": "A két alaplap síkjának távolsága.",
+        "c": "Az alaplap átlója."
+      },
+      "correct": "b",
+      "explanation": "A testmagasság a hasáb 'magasságát' jelenti. Ez a két párhuzamos alaplap közötti merőleges távolság. Egyenes hasábnál ez megegyezik az oldalél hosszával."
+    },
+    {
+      "question": "A dobókocka egy...",
+      "answers": {
+        "a": "háromszög alapú hasáb.",
+        "b": "hatszög alapú hasáb.",
+        "c": "négyzet alapú hasáb."
+      },
+      "correct": "c",
+      "explanation": "A dobókocka alaplapja és fedőlapja is négyzet. Ezért ez egy négyzet alapú hasáb (ami egyben kocka is)."
+    }
+  ]
 }

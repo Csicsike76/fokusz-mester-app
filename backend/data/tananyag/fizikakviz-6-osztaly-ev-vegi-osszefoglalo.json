@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Fizikakviz 6 osztaly ev vegi osszefoglalo\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi történik egy soros áramkörben, ha az egyik izzó kiég?",
+      "answers": {
+        "a": "Az összes többi izzó is kialszik.",
+        "b": "A többi izzó fényesebben világít.",
+        "c": "A többi izzó változatlanul világít."
+      },
+      "correct": "a",
+      "explanation": "Soros kapcsolásban az áramnak egyetlen útja van. Ha ez az út megszakad (pl. egy izzó kiég), az egész áramkör nyitottá válik, és az áramlás megszűnik."
+    },
+    {
+      "question": "Melyik jelenség alapja a fény egyenes vonalú terjedése?",
+      "answers": {
+        "a": "Az árnyék keletkezése.",
+        "b": "A szivárvány.",
+        "c": "A hangsebesség."
+      },
+      "correct": "a",
+      "explanation": "Az árnyék azért jön létre, mert a fény egyenes vonalban terjed, és az útjában álló átlátszatlan testet nem tudja 'megkerülni'. Így a test mögött fényhiányos terület alakul ki."
+    },
+    {
+      "question": "Mi a neve annak a halmazállapot-változásnak, amikor a gőz folyékonnyá válik?",
+      "answers": {
+        "a": "Lecsapódás",
+        "b": "Párolgás",
+        "c": "Fagyás"
+      },
+      "correct": "a",
+      "explanation": "A légnemű halmazállapotból folyékonyba való átmenetet lecsapódásnak nevezzük. Ez történik például, amikor a forró leves gőze a hideg fedőn vízcseppekké válik."
+    },
+    {
+      "question": "Hogyan hat egymásra két mágnes északi pólusa?",
+      "answers": {
+        "a": "Taszítják egymást.",
+        "b": "Vonzzák egymást.",
+        "c": "Nem hatnak egymásra."
+      },
+      "correct": "a",
+      "explanation": "A mágneses kölcsönhatás alaptörvénye szerint az azonos nevű pólusok (északi-északi, déli-déli) taszítják egymást."
+    },
+    {
+      "question": "Melyik anyag jó elektromos szigetelő?",
+      "answers": {
+        "a": "Műanyag",
+        "b": "Rézdrót",
+        "c": "Alumínium"
+      },
+      "correct": "a",
+      "explanation": "A szigetelőkben a töltések nem tudnak könnyen elmozdulni. A műanyag egy ilyen anyag, ezért használják elektromos vezetékek bevonására. A réz és az alumínium fémek, tehát jó vezetők."
+    },
+    {
+      "question": "Mi történik a fénysugárral, amikor egy síktükörre esik?",
+      "answers": {
+        "a": "Szabályosan visszaverődik.",
+        "b": "Megtörik.",
+        "c": "Elnyelődik."
+      },
+      "correct": "a",
+      "explanation": "A síktükör sima felülete a ráeső párhuzamos fénysugarakat párhuzamosan veri vissza. Ezt nevezzük szabályos fényvisszaverődésnek, ami a tükörkép alapja."
+    },
+    {
+      "question": "Milyen képet hoz létre egy domború tükör?",
+      "answers": {
+        "a": "Kicsinyített, egyenes állású, látszólagos képet.",
+        "b": "Nagyított, valódi képet.",
+        "c": "Fordított, azonos méretű képet."
+      },
+      "correct": "a",
+      "explanation": "A domború (kifelé ívelődő) tükrök a fénysugarakat szétszórják, ezért mindig a tárgynál kisebb, egyenes állású és látszólagos (a tükör mögött keletkező) képet adnak."
+    },
+    {
+      "question": "Melyik NEM szükséges egy egyszerű áramkör működéséhez?",
+      "answers": {
+        "a": "Iránytű",
+        "b": "Áramforrás",
+        "c": "Fogyasztó"
+      },
+      "correct": "a",
+      "explanation": "Egy egyszerű áramkör alapvető részei az áramforrás (energiaforrás), a fogyasztó (energia-átalakító) és a vezeték (áram útja). Az iránytű a mágneses mező kimutatására szolgál, nem az áramkör része."
+    },
+    {
+      "question": "Mi a különbség a párolgás és a forrás között?",
+      "answers": {
+        "a": "A párolgás gyors, a forrás lassú folyamat.",
+        "b": "A forrás a folyadék belsejében is zajlik, a párolgás csak a felszínen.",
+        "c": "Nincs különbség, ugyanazt jelentik."
+      },
+      "correct": "b",
+      "explanation": "A párolgás a folyadék felszínén, bármely hőmérsékleten végbemenő gőzképződés. Ezzel szemben a forrás egy meghatározott hőmérsékleten, a folyadék egész tömegében zajló, heves gőzképződés."
+    },
+    {
+      "question": "Hogyan hat egymásra egy pozitív és egy negatív elektromos töltés?",
+      "answers": {
+        "a": "Taszítják egymást.",
+        "b": "Vonzzák egymást.",
+        "c": "Nem lépnek kölcsönhatásba."
+      },
+      "correct": "b",
+      "explanation": "Az elektrosztatika alaptörvénye szerint az ellentétes nemű töltések (pozitív és negatív) vonzzák egymást."
+    },
+    {
+      "question": "Miért látjuk a vízbe mártott kanalat 'görbének'?",
+      "answers": {
+        "a": "Mert a víz tényleg meggörbíti.",
+        "b": "A fénytörés jelensége miatt.",
+        "c": "A fényvisszaverődés miatt."
+      },
+      "correct": "b",
+      "explanation": "A kanál víz alatti részéről érkező fénysugarak a víz-levegő határfelületen irányt változtatnak, azaz megtörnek. Az agyunk ezt úgy értelmezi, mintha a kanál 'megtört' volna."
+    },
+    {
+      "question": "Melyik a legfontosabb természetes, elsődleges fényforrásunk?",
+      "answers": {
+        "a": "A Hold",
+        "b": "A Nap",
+        "c": "A villám"
+      },
+      "correct": "b",
+      "explanation": "Az elsődleges fényforrások saját maguk termelnek fényt. A Nap messze a legfontosabb energia- és fényforrás a Föld számára. A Hold csak visszaveri a Nap fényét (másodlagos), a villám pedig bár elsődleges, de csak rövid ideig tart."
+    },
+    {
+      "question": "Melyik kapcsolás esetén működnek tovább a többi izzók, ha egy kiég?",
+      "answers": {
+        "a": "Soros kapcsolás",
+        "b": "Párhuzamos kapcsolás",
+        "c": "Egyik esetben sem."
+      },
+      "correct": "b",
+      "explanation": "Párhuzamos kapcsolásnál minden fogyasztó külön áramköri ágon helyezkedik el. Ha egy ág megszakad, a többi ágon az áram zavartalanul tovább folyhat."
+    },
+    {
+      "question": "Mi történik, ha egy mágnest kettétörünk?",
+      "answers": {
+        "a": "Az egyik fele északi, a másik déli pólusú lesz.",
+        "b": "Két kisebb mágnest kapunk, mindkettőnek van északi és déli pólusa.",
+        "c": "Elveszítik a mágnesességüket."
+      },
+      "correct": "b",
+      "explanation": "A mágneses pólusok nem választhatók szét. Bármilyen kicsi darabra is törünk egy mágnest, minden darabnak lesz saját északi és déli pólusa."
+    },
+    {
+      "question": "Melyik NEM elektromos fogyasztó?",
+      "answers": {
+        "a": "Izzó",
+        "b": "Kapcsoló",
+        "c": "Villanymotor"
+      },
+      "correct": "b",
+      "explanation": "A fogyasztó az elektromos energiát másfajta energiává alakítja (fény, hő, mozgás). A kapcsoló csak megszakítja vagy zárja az áramkört, nem alakít át energiát."
+    },
+    {
+      "question": "Milyen anyagokat vonz a mágnes?",
+      "answers": {
+        "a": "Minden fémet.",
+        "b": "A ferromágneses anyagokat (pl. vasat).",
+        "c": "Csak a műanyagokat."
+      },
+      "correct": "b",
+      "explanation": "A mágnesek a ferromágneses anyagokra (vas, nikkel, kobalt) fejtenek ki erős vonzóerőt. Fontos, hogy nem minden fém mágneses, például az alumínium vagy a réz nem az."
+    },
+    {
+      "question": "Miért van a vezetékeknek műanyag szigetelése?",
+      "answers": {
+        "a": "Hogy jobban nézzenek ki.",
+        "b": "Hogy megvédjenek az áramütéstől.",
+        "c": "Hogy jobban vezessék az áramot."
+      },
+      "correct": "b",
+      "explanation": "A műanyag egy jó elektromos szigetelő. A szigetelés megakadályozza, hogy véletlenül hozzáérjünk a feszültség alatt lévő vezetőhöz, és megvéd a veszélyes áramütéstől."
+    },
+    {
+      "question": "Melyik test átlátszatlan?",
+      "answers": {
+        "a": "Ablaküveg",
+        "b": "Zsírpapír",
+        "c": "Egy könyv"
+      },
+      "correct": "c",
+      "explanation": "Az átlátszatlan testek nem engedik át a fényt. Egy könyv vastag papírja és a rajta lévő festék elnyeli és visszaveri a fényt, de nem engedi át, ezért nem látunk keresztül rajta."
+    },
+    {
+      "question": "Mi az elektromos áram?",
+      "answers": {
+        "a": "Az elektronok rezgőmozgása.",
+        "b": "A pozitív töltések áramlása a szigetelőkben.",
+        "c": "A töltéshordozók egyirányú, rendezett mozgása."
+      },
+      "correct": "c",
+      "explanation": "Elektromos áram akkor jön létre, ha a töltéssel rendelkező részecskék (fémekben az elektronok) egy vezetőben tartósan egy irányba mozognak."
+    },
+    {
+      "question": "Melyik a helyes energiaátalakulás egy elemben (áramforrásban)?",
+      "answers": {
+        "a": "Elektromos energia → Fényenergia",
+        "b": "Mozgási energia → Elektromos energia",
+        "c": "Kémiai energia → Elektromos energia"
+      },
+      "correct": "c",
+      "explanation": "Az elemekben és akkumulátorokban kémiai reakciók zajlanak. Ezek a reakciók szabadítják fel azt az energiát, ami a töltéseket mozgásba hozza, tehát kémiai energiát alakítanak át elektromos energiává."
+    },
+    {
+      "question": "Melyik NEM elsődleges fényforrás?",
+      "answers": {
+        "a": "Nap",
+        "b": "Égő gyertya",
+        "c": "Hold"
+      },
+      "correct": "c",
+      "explanation": "Az elsődleges fényforrások saját maguk termelnek fényt. A Nap és a gyertya is ilyen. A Holdnak nincs saját fénye, csak a Nap fényét veri vissza, ezért másodlagos fényforrás."
+    },
+    {
+      "question": "Milyen fényforrás hoz létre félárnyékot?",
+      "answers": {
+        "a": "Pontszerű fényforrás.",
+        "b": "Másodlagos fényforrás.",
+        "c": "Kiterjedt fényforrás."
+      },
+      "correct": "c",
+      "explanation": "Félárnyék (penumbra) akkor jön létre, ha a fényforrás mérete nem elhanyagolhatóan kicsi. Ilyenkor az átlátszatlan test mögött van egy sötétebb teljes árnyék és egy világosabb félárnyékos sáv is."
+    },
+    {
+      "question": "Mekkora a fény sebessége?",
+      "answers": {
+        "a": "Kb. 340 méter másodpercenként.",
+        "b": "Végtelen.",
+        "c": "Kb. 300 000 kilométer másodpercenként."
+      },
+      "correct": "c",
+      "explanation": "A fény sebessége a legnagyobb ismert sebesség a világegyetemben. Vákuumban az értéke megközelítőleg 300 000 km/s. A 340 m/s a hang sebessége."
+    },
+    {
+      "question": "Mi a neve annak a folyamatnak, amikor a szilárd anyag folyékonnyá válik?",
+      "answers": {
+        "a": "Fagyás",
+        "b": "Forrás",
+        "c": "Olvadás"
+      },
+      "correct": "c",
+      "explanation": "A szilárd halmazállapotból folyékonyba történő átmenetet, amely hőfelvétellel jár, olvadásnak nevezzük. Ennek fordított folyamata a fagyás."
+    },
+    {
+      "question": "Mit csinál az iránytű?",
+      "answers": {
+        "a": "A Nap állását mutatja.",
+        "b": "A Hold állását mutatja.",
+        "c": "A Föld mágneses mezőjéhez igazodva beáll észak-déli irányba."
+      },
+      "correct": "c",
+      "explanation": "Az iránytű egy szabadon elforduló mágnestű, amely kölcsönhatásba lép a Föld mágneses mezejével. Ennek hatására a tű északi pólusa mindig a Föld mágneses déli pólusa (ami a földrajzi Északi-sark közelében van) felé fordul."
+    }
+  ]
 }

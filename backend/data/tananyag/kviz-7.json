@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz 7\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mit állít a Pitagorasz-tétel egy derékszögű háromszögben?",
+      "answers": {
+        "a": "a² + b² = c²",
+        "b": "a + b = c",
+        "c": "a² - b² = c²"
+      },
+      "correct": "a",
+      "explanation": "A tétel szerint a két befogó (a, b) hosszának négyzetösszege egyenlő az átfogó (c) hosszának négyzetével."
+    },
+    {
+      "question": "Melyik NEM a háromszögek hasonlóságának egyik alapesete?",
+      "answers": {
+        "a": "Két-két szögük páronként megegyezik (Sz-Sz).",
+        "b": "Mindhárom oldaluk páronként egyenlő hosszú (O-O-O).",
+        "c": "Két-két oldaluk aránya és az általuk bezárt szög megegyezik (O-Sz-O)."
+      },
+      "correct": "b",
+      "explanation": "Ha mindhárom oldal páronként egyenlő, az az egybevágóság esete, nem a hasonlóságé. A hasonlóságnál az oldalak aránya egyezik meg."
+    },
+    {
+      "question": "Hogyan számítjuk ki egy kör kerületét (K), ha a sugara 'r'?",
+      "answers": {
+        "a": "K = r²π",
+        "b": "K = rπ",
+        "c": "K = 2rπ"
+      },
+      "correct": "c",
+      "explanation": "A kör kerületének képlete K = 2 * r * π. Az r²π a kör területének képlete."
+    },
+    {
+      "question": "Mi a definíciója egy szög szinuszának (sin α) egy derékszögű háromszögben?",
+      "answers": {
+        "a": "szomszédos befogó / átfogó",
+        "b": "szemközti befogó / átfogó",
+        "c": "szemközti befogó / szomszédos befogó"
+      },
+      "correct": "b",
+      "explanation": "A szinusz (sin) a szöggel szemközti befogó és az átfogó aránya."
+    },
+    {
+      "question": "Mit mond ki a magasságtétel a derékszögű háromszögben?",
+      "answers": {
+        "a": "Az átfogóhoz tartozó magasság mértani közepe az átfogó két szeletének (h² = p·q).",
+        "b": "A magasság mindig felezi az átfogót.",
+        "c": "A magasság egyenlő a két befogó szorzatával."
+      },
+      "correct": "a",
+      "explanation": "A magasságtétel szerint az átfogóhoz tartozó magasság négyzetének értéke megegyezik az átfogón létrehozott két szakasz (p és q) hosszának szorzatával."
+    },
+    {
+      "question": "Mennyi egy konvex négyszög belső szögeinek összege?",
+      "answers": {
+        "a": "180°",
+        "b": "360°",
+        "c": "540°"
+      },
+      "correct": "b",
+      "explanation": "Bármely konvex négyszög belső szögeinek összege mindig 360°."
+    },
+    {
+      "question": "Hogyan számoljuk ki két pozitív szám (a, b) mértani közepét?",
+      "answers": {
+        "a": "(a + b) / 2",
+        "b": "√(a·b)",
+        "c": "√(a² + b²)"
+      },
+      "correct": "b",
+      "explanation": "A mértani közép a két szám szorzatának négyzetgyöke. Az (a+b)/2 a számtani közép."
+    },
+    {
+      "question": "Mit állít Thalész tétele?",
+      "answers": {
+        "a": "Egy háromszög súlyvonalai egy pontban metszik egymást.",
+        "b": "A kör átmérője feletti kerületi szög mindig derékszög.",
+        "c": "A párhuzamos szelők tétele."
+      },
+      "correct": "b",
+      "explanation": "Thalész tétele szerint ha egy kör átmérőjének két végpontját összekötjük a körvonal bármely más pontjával, derékszögű háromszöget kapunk."
+    },
+    {
+      "question": "Melyik állítás igaz a paralelogrammára?",
+      "answers": {
+        "a": "Minden szöge derékszög.",
+        "b": "Szemközti oldalai párhuzamosak és egyenlő hosszúak.",
+        "c": "Minden oldala egyenlő hosszú."
+      },
+      "correct": "b",
+      "explanation": "A paralelogramma definíciója, hogy szemközti oldalai párhuzamosak, amiből következik, hogy egyenlő hosszúak is, és szemközti szögei is egyenlők."
+    },
+    {
+      "question": "Mi a megoldása az x² = 49 egyenletnek a valós számok halmazán?",
+      "answers": {
+        "a": "x = 7",
+        "b": "x = 7 és x = -7",
+        "c": "Nincs megoldása."
+      },
+      "correct": "b",
+      "explanation": "Mivel mind a 7² = 49, mind a (-7)² = 49, ezért az egyenletnek két valós megoldása van."
+    },
+    {
+      "question": "Mi a trapéz középvonalának hossza, ha az alapjai 'a' és 'c'?",
+      "answers": {
+        "a": "√(a·c)",
+        "b": "(a + c) / 2",
+        "c": "a + c"
+      },
+      "correct": "b",
+      "explanation": "A trapéz középvonala párhuzamos az alapokkal, és hossza az alapok hosszának számtani közepe."
+    },
+    {
+      "question": "Mi a π (pi)?",
+      "answers": {
+        "a": "Egy racionális szám, értéke pontosan 3,14.",
+        "b": "Egy irracionális szám, a kör kerületének és átmérőjének aránya.",
+        "c": "A derékszögű háromszögek egyik oldalaránya."
+      },
+      "correct": "b",
+      "explanation": "A π egy végtelen, nem szakaszos tizedestört, ezért irracionális. Értéke minden kör esetén a kerület és az átmérő hányadosa."
+    },
+    {
+      "question": "Hogyan számoljuk ki egy kör területét (T), ha a sugara 'r'?",
+      "answers": {
+        "a": "T = 2rπ",
+        "b": "T = r²π",
+        "c": "T = rπ²"
+      },
+      "correct": "b",
+      "explanation": "A kör területének képlete T = r² * π. A 2rπ a kör kerületének képlete."
+    },
+    {
+      "question": "Mi a √72 kifejezés egyszerűbb alakja a gyökjel alóli kiemelés után?",
+      "answers": {
+        "a": "36√2",
+        "b": "6√2",
+        "c": "2√18"
+      },
+      "correct": "b",
+      "explanation": "A 72-t felbontjuk a legnagyobb négyzetszám-tényezőre: 72 = 36 * 2. Ebből √72 = √(36·2) = √36 * √2 = 6√2."
+    },
+    {
+      "question": "Két halmaz Descartes-szorzata mit tartalmaz?",
+      "answers": {
+        "a": "A két halmaz közös elemeit.",
+        "b": "Az összes lehetséges rendezett párt, ahol az első elem az első, a második elem a második halmazból való.",
+        "c": "A két halmaz unióját."
+      },
+      "correct": "b",
+      "explanation": "Az A × B Descartes-szorzat az összes (a,b) rendezett párok halmaza, ahol 'a' eleme A-nak és 'b' eleme B-nek."
+    },
+    {
+      "question": "Mi a definíciója egy szög koszinuszának (cos α) egy derékszögű háromszögben?",
+      "answers": {
+        "a": "szomszédos befogó / átfogó",
+        "b": "szemközti befogó / átfogó",
+        "c": "szemközti befogó / szomszédos befogó"
+      },
+      "correct": "a",
+      "explanation": "A koszinusz (cos) a szög melletti (szomszédos) befogó és az átfogó aránya."
+    },
+    {
+      "question": "Melyik speciális paralelogramma, amelynek minden oldala egyenlő és átlói merőlegesek?",
+      "answers": {
+        "a": "Téglalap",
+        "b": "Trapéz",
+        "c": "Rombusz"
+      },
+      "correct": "c",
+      "explanation": "A rombusz definíció szerint egy olyan négyszög, amelynek minden oldala egyenlő hosszú. Ebből következik, hogy átlói merőlegesen felezik egymást."
+    },
+    {
+      "question": "Hogyan oldanánk meg a 2x + 3 = 11 egyenletet?",
+      "answers": {
+        "a": "Mindkét oldalból kivonunk 3-at, majd osztunk 2-vel.",
+        "b": "Mindkét oldalhoz hozzáadunk 3-at, majd osztunk 2-vel.",
+        "c": "Mindkét oldalt megszorozzuk 2-vel, majd kivonunk 3-at."
+      },
+      "correct": "a",
+      "explanation": "A megoldás lépései: 2x = 11 - 3 → 2x = 8 → x = 8 / 2 → x = 4."
+    },
+    {
+      "question": "Mit nevezünk irracionális számnak?",
+      "answers": {
+        "a": "Olyan számot, amely nem írható fel két egész szám hányadosaként.",
+        "b": "Minden negatív számot.",
+        "c": "Minden törtet."
+      },
+      "correct": "a",
+      "explanation": "Az irracionális számok tizedes alakja végtelen és nem szakaszos. Ilyen például a √2 vagy a π."
+    },
+    {
+      "question": "Mi a P(3; -4) pont helye a koordináta-rendszerben?",
+      "answers": {
+        "a": "3 egység balra, 4 egység felfelé.",
+        "b": "3 egység jobbra, 4 egység lefelé.",
+        "c": "3 egység felfelé, 4 egység jobbra."
+      },
+      "correct": "b",
+      "explanation": "Az első koordináta (x) a vízszintes elmozdulást mutatja (pozitív=jobbra), a második (y) a függőlegeset (negatív=lefelé)."
+    },
+    {
+      "question": "Mekkora a kerületi szög, ha a hozzá tartozó középponti szög 140°?",
+      "answers": {
+        "a": "140°",
+        "b": "280°",
+        "c": "70°"
+      },
+      "correct": "c",
+      "explanation": "A kerületi szög mindig feleakkora, mint az azonos íven nyugvó középponti szög, tehát 140° / 2 = 70°."
+    },
+    {
+      "question": "Mi a √25 + √144 művelet eredménye?",
+      "answers": {
+        "a": "17",
+        "b": "√169",
+        "c": "13"
+      },
+      "correct": "a",
+      "explanation": "Először elvégezzük a gyökvonásokat: √25 = 5 és √144 = 12. Ezután összeadjuk az eredményeket: 5 + 12 = 17."
+    },
+    {
+      "question": "Mi a definíciója egy szög tangensének (tan α) egy derékszögű háromszögben?",
+      "answers": {
+        "a": "szomszédos befogó / átfogó",
+        "b": "szemközti befogó / szomszédos befogó",
+        "c": "szemközti befogó / átfogó"
+      },
+      "correct": "b",
+      "explanation": "A tangens (tan) a szöggel szemközti befogó és a szög melletti (szomszédos) befogó aránya."
+    },
+    {
+      "question": "Hogyan viszonyul egymáshoz egy téglalap és egy négyzet?",
+      "answers": {
+        "a": "Semmi közük egymáshoz.",
+        "b": "Minden négyzet egyben téglalap is.",
+        "c": "Minden téglalap egyben négyzet is."
+      },
+      "correct": "b",
+      "explanation": "A téglalap definíciója, hogy minden szöge derékszög. Mivel a négyzetnek is minden szöge derékszög, ezért a négyzet egy speciális téglalap (olyan, aminek oldalai is egyenlők)."
+    },
+    {
+      "question": "Melyik állítás igaz a szabályos sokszögekre?",
+      "answers": {
+        "a": "Csak az oldalaik egyenlők.",
+        "b": "Minden oldaluk és minden belső szögük egyenlő.",
+        "c": "Csak a szögeik egyenlők."
+      },
+      "correct": "b",
+      "explanation": "A szabályos sokszögek definíció szerint konvexek, és minden oldaluk hossza, valamint minden belső szögük mértéke megegyezik."
+    }
+  ]
 }

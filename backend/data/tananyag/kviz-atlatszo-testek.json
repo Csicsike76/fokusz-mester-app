@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz atlatszo testek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik test engedi át a fényt, de a rajta keresztül nézve a tárgyak elmosódottak?",
+      "answers": {
+        "a": "Áttetsző test",
+        "b": "Átlátszó test",
+        "c": "Átlátszatlan test"
+      },
+      "correct": "a",
+      "explanation": "Az áttetsző testek áteresztik a fényt, de azt szétszórják, ezért a mögöttük lévő tárgyak körvonalai elmosódottan látszanak. Ilyen például a tejüveg vagy a zsírpapír."
+    },
+    {
+      "question": "Milyen árnyékot vet egy átlátszatlan test, ha pontszerű fényforrással világítjuk meg?",
+      "answers": {
+        "a": "Éles határvonalú, sötét árnyékot.",
+        "b": "Elmosódott árnyékot.",
+        "c": "Nem vet árnyékot."
+      },
+      "correct": "a",
+      "explanation": "Mivel az átlátszatlan test a fényt teljesen feltartóztatja, mögötte egy fénymentes terület, azaz árnyék keletkezik. Ha a fényforrás pontszerű, az árnyék határvonala éles lesz."
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "Minden folyadék átlátszó.",
+        "b": "Minden szilárd test átlátszatlan.",
+        "c": "Egy anyag optikai tulajdonsága függhet a halmazállapotától."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás igaz. Például a víz folyékonyan átlátszó, szilárdan (jég) többnyire áttetsző, légnemű állapotban (vízgőz) pedig átlátszó."
+    },
+    {
+      "question": "A fürdőszobák ablakát gyakran tejüvegből készítik. Milyen tulajdonsága miatt?",
+      "answers": {
+        "a": "Mert áttetsző, így a fényt beengedi, de nem lehet belátni.",
+        "b": "Mert átlátszó, így szép a kilátás.",
+        "c": "Mert átlátszatlan, így teljesen sötétít."
+      },
+      "correct": "a",
+      "explanation": "A tejüveg áttetsző. Ez a tulajdonsága ideális fürdőszobai ablaknak, mert a fényt átereszti, de a fény szétszórása miatt nem lehet rajta keresztül éles képet látni, ami biztosítja a magánszférát."
+    },
+    {
+      "question": "Melyik test NEM engedi át a fényt?",
+      "answers": {
+        "a": "Víz",
+        "b": "Tégla",
+        "c": "Vékony papír"
+      },
+      "correct": "b",
+      "explanation": "Az átlátszatlan testek elnyelik vagy visszaverik a fényt, de nem engedik át. A tégla ilyen. A víz átlátszó, a vékony papír pedig áttetsző."
+    },
+    {
+      "question": "Melyik csoportban vannak CSAK átlátszatlan testek?",
+      "answers": {
+        "a": "Könyv, fa, fémkanál",
+        "b": "Víz, levegő, üvegpohár",
+        "c": "Tejüveg, füst, köd"
+      },
+      "correct": "a",
+      "explanation": "A könyv, a fa és a fémkanál sem engedi át a fényt, tehát mindhárom átlátszatlan. A második csoportban átlátszó, a harmadikban áttetsző testek vannak."
+    },
+    {
+      "question": "Milyen anyagnak kell lennie egy szemüveg lencséjének?",
+      "answers": {
+        "a": "Átlátszatlannak",
+        "b": "Áttetszőnek",
+        "c": "Átlátszónak"
+      },
+      "correct": "c",
+      "explanation": "A szemüveg lencséjének az a feladata, hogy a fényt szabályozott módon megtörve korrigálja a látást. Ehhez elengedhetetlen, hogy a fény tisztán, torzítás és szóródás nélkül áthaladjon rajta, tehát átlátszónak kell lennie."
+    },
+    {
+      "question": "Milyen test a tiszta levegő?",
+      "answers": {
+        "a": "Átlátszó",
+        "b": "Áttetsző",
+        "c": "Átlátszatlan"
+      },
+      "correct": "a",
+      "explanation": "A tiszta levegőn a fénysugarak szinte akadálytalanul áthaladnak, ezért tisztán látunk rajta keresztül. Emiatt a levegő átlátszó közeg."
+    },
+    {
+      "question": "Egy vékony selyemsál...",
+      "answers": {
+        "a": "...átlátszó.",
+        "b": "...átlátszatlan.",
+        "c": "...áttetsző."
+      },
+      "correct": "c",
+      "explanation": "Egy vékony selyemsál szálai között a fény részben áthalad, de közben megtörik és szétszóródik. Emiatt a sálon keresztül a formák elmosódottan látszanak, tehát áttetsző."
+    },
+    {
+      "question": "Miért nem látjuk a levegőt?",
+      "answers": {
+        "a": "Mert túl messze van.",
+        "b": "Mert nincs színe.",
+        "c": "Mert átlátszó, és a fény áthalad rajta."
+      },
+      "correct": "c",
+      "explanation": "A levegő gázmolekulái annyira messze vannak egymástól, hogy a látható fény szinte akadálytalanul áthalad közöttük anélkül, hogy jelentősen visszaverődne vagy elnyelődne."
+    },
+    {
+      "question": "Melyik test engedi át a fényt szinte teljes egészében, torzítás nélkül?",
+      "answers": {
+        "a": "Átlátszatlan test",
+        "b": "Átlátszó test",
+        "c": "Áttetsző test"
+      },
+      "correct": "b",
+      "explanation": "Az átlátszó testek azok, amelyeken a fény akadálytalanul áthalad, így a mögöttük lévő tárgyakat tisztán, élesen látjuk. Ilyen például az ablaküveg vagy a tiszta víz."
+    },
+    {
+      "question": "Mi történik a fénysugarakkal, amikor egy átlátszatlan testbe ütköznek?",
+      "answers": {
+        "a": "Áthaladnak rajta.",
+        "b": "Elnyelődnek vagy visszaverődnek.",
+        "c": "Szétszóródnak a testben."
+      },
+      "correct": "b",
+      "explanation": "Az átlátszatlan testek nem engedik át a fényt. A rájuk eső fény egy részét elnyelik (ezért melegszenek fel), a másik részét pedig visszaverik (ezért látjuk őket színesnek)."
+    },
+    {
+      "question": "Melyik állítás írja le helyesen a fény és az anyag kölcsönhatását?",
+      "answers": {
+        "a": "A fény csak az átlátszó testekkel lép kölcsönhatásba.",
+        "b": "A fény csak az átlátszatlan testekkel lép kölcsönhatásba.",
+        "c": "A fény minden anyaggal kölcsönhatásba lép valamilyen módon."
+      },
+      "correct": "c",
+      "explanation": "Minden anyag hatással van a fényre: az átlátszó testek áteresztik, az áttetszők áteresztik és szétszórják, az átlátszatlanok pedig elnyelik vagy visszaverik."
+    },
+    {
+      "question": "Melyik a legjobb példa egy átlátszatlan testre?",
+      "answers": {
+        "a": "Egy vastag fal",
+        "b": "Egy ablaküveg",
+        "c": "Egy pohár víz"
+      },
+      "correct": "a",
+      "explanation": "Az átlátszatlan testek nem engedik át a fényt, hanem elnyelik vagy visszaverik azt. Egy vastag fal tökéletes példa erre, mert nem látunk át rajta."
+    },
+    {
+      "question": "Melyik a legjobb példa egy átlátszó testre?",
+      "answers": {
+        "a": "Egy kartondoboz",
+        "b": "Egy tiszta ablaküveg",
+        "c": "Egy darab pauszpapír"
+      },
+      "correct": "b",
+      "explanation": "A tiszta ablaküvegen keresztül a fény akadálytalanul áthalad, ezért átlátszónak nevezzük. A kartondoboz átlátszatlan, a pauszpapír pedig áttetsző."
+    },
+    {
+      "question": "Miért látszik a Hold az égen?",
+      "answers": {
+        "a": "Mert saját fénye van.",
+        "b": "Mert egy átlátszó test.",
+        "c": "Mert visszaveri a Nap fényét."
+      },
+      "correct": "c",
+      "explanation": "A Hold egy átlátszatlan égitest, amelynek nincs saját fénykibocsátása. Azért látjuk, mert a Nap megvilágítja, és a felszínéről visszaverődő napfény eljut a Földre."
+    },
+    {
+      "question": "A celofán fólia...",
+      "answers": {
+        "a": "...átlátszatlan.",
+        "b": "...átlátszó.",
+        "c": "...áttetsző."
+      },
+      "correct": "b",
+      "explanation": "A celofán egy vékony, átlátszó műanyagfólia, amit gyakran csomagolásra használnak, éppen azért, hogy a becsomagolt termék jól látható legyen."
+    },
+    {
+      "question": "Miért használunk átlátszó anyagot (üveget) az ablakokhoz?",
+      "answers": {
+        "a": "Mert az átlátszó anyagokon keresztül tisztán átlátunk.",
+        "b": "Mert az üveg jó hőszigetelő.",
+        "c": "Mert az üveg olcsó."
+      },
+      "correct": "a",
+      "explanation": "Az ablakok elsődleges funkciója, hogy a fényt beengedjék, és lehetővé tegyék a kilátást. Ezt a feladatot az átlátszó anyagok látják el a legjobban, mert a fényt torzítás nélkül engedik át."
+    },
+    {
+      "question": "Milyen test a köd?",
+      "answers": {
+        "a": "Átlátszó",
+        "b": "Áttetsző",
+        "c": "Átlátszatlan"
+      },
+      "correct": "b",
+      "explanation": "A köd apró vízcseppekből áll, amelyek a levegőben lebegnek. A fénysugarak áthaladnak rajta, de a cseppekről visszaverődve és megtörve szétszóródnak, ezért a látótávolság csökken. Emiatt a köd áttetsző."
+    },
+    {
+      "question": "Egy fekete póló...",
+      "answers": {
+        "a": "...átlátszó, mert a fekete nem szín.",
+        "b": "...átlátszatlan, mert a legtöbb fényt elnyeli.",
+        "c": "...áttetsző, mert vékony anyagból van."
+      },
+      "correct": "b",
+      "explanation": "A fekete színű testek a rájuk eső látható fény nagy részét elnyelik és nagyon keveset vernek vissza. Mivel nem engedik át a fényt, átlátszatlanok."
+    },
+    {
+      "question": "Melyik test NEM vet árnyékot, ha megvilágítjuk?",
+      "answers": {
+        "a": "Egy átlátszatlan test.",
+        "b": "Egy áttetsző test.",
+        "c": "Egy tökéletesen átlátszó test."
+      },
+      "correct": "c",
+      "explanation": "Az árnyék a fény útjában álló akadály mögött kialakuló fényhiány. Egy elméleti, tökéletesen átlátszó test minden fényt átengedne, így nem hozna létre árnyékot maga mögött."
+    },
+    {
+      "question": "Mi történik a fénysugarakkal, amikor egy áttetsző anyagon haladnak át?",
+      "answers": {
+        "a": "Szétszóródnak.",
+        "b": "Visszaverődnek.",
+        "c": "Elnyelődnek."
+      },
+      "correct": "a",
+      "explanation": "Az áttetsző anyagok jellegzetessége, hogy a rajtuk áthaladó fénysugarakat minden irányba szétszórják. Ezért nem látunk éles képet rajtuk keresztül."
+    },
+    {
+      "question": "Melyik csoportban vannak CSAK átlátszó testek?",
+      "answers": {
+        "a": "Ablaküveg, fal, víz",
+        "b": "Tiszta víz, levegő, üveglencse",
+        "c": "Füst, köd, jég"
+      },
+      "correct": "b",
+      "explanation": "A tiszta víz, a levegő és egy üveglencse mind olyan anyagok, amelyeken a fény akadálytalanul áthalad. Az első csoportban a fal, a harmadikban a füst és a köd nem átlátszó."
+    },
+    {
+      "question": "Egy test átlátszósága függhet...",
+      "answers": {
+        "a": "...a súlyától.",
+        "b": "...a vastagságától.",
+        "c": "...a hőmérsékletétől."
+      },
+      "correct": "b",
+      "explanation": "Igen, az anyagok optikai tulajdonságai függhetnek a vastagságuktól. Például egy vékony papírlap még áttetsző lehet, de egy vastag könyv már átlátszatlan."
+    },
+    {
+      "question": "Melyik a legjobb példa egy áttetsző testre?",
+      "answers": {
+        "a": "Egy tükör",
+        "b": "Egy tiszta vizespohár",
+        "c": "Egy olajos folt a papíron"
+      },
+      "correct": "c",
+      "explanation": "Az olaj kitölti a papír rostjai közötti apró hézagokat, így a fény jobban át tud haladni rajta, de szétszóródik. Emiatt az olajos folt áttetszővé teszi a papírt."
+    }
+  ]
 }

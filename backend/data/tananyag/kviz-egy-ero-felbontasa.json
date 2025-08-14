@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz egy ero felbontasa\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Miért bontjuk fel az erőket összetevőkre?",
+      "answers": {
+        "a": "Hogy egyszerűbbé tegyük a bonyolultabb problémák elemzését.",
+        "b": "Mert egy erőnek mindig két összetevője van.",
+        "c": "Hogy növeljük az erő nagyságát."
+      },
+      "correct": "a",
+      "explanation": "Az erőfelbontás egy matematikai eszköz, amely segít a különböző irányú mozgások és erők hatásának külön-külön történő vizsgálatában, leegyszerűsítve ezzel a számításokat."
+    },
+    {
+      "question": "Az erőfelbontás során az összetevők...",
+      "answers": {
+        "a": "...mindig egyenlő nagyságúak.",
+        "b": "...együtt ugyanazt a hatást fejtik ki, mint az eredeti erő.",
+        "c": "...mindig ellentétes irányúak."
+      },
+      "correct": "b",
+      "explanation": "Ez az erőfelbontás definíciójának lényege. A felbontás célja, hogy az eredeti erőt helyettesítsük más erőkkel, anélkül, hogy a fizikai hatás megváltozna."
+    },
+    {
+      "question": "Egy 100 N súlyú testet tartunk egy lejtőn. Melyik erő akadályozza meg a lecsúszást?",
+      "answers": {
+        "a": "A nehézségi erő.",
+        "b": "A nehézségi erő lejtővel párhuzamos összetevőjét kiegyenlítő erő (pl. súrlódás).",
+        "c": "A lejtőre merőleges erő."
+      },
+      "correct": "b",
+      "explanation": "A nehézségi erő lejtővel párhuzamos összetevője az az erő, amely a testet a lejtőn lefelé gyorsítaná. Ahhoz, hogy a test nyugalomban maradjon, egy ezzel ellentétes, de egyenlő nagyságú erőre van szükség."
+    },
+    {
+      "question": "Ha egy erőt két, egymásra merőleges összetevőre bontunk, akkor az összetevők nagysága...",
+      "answers": {
+        "a": "...általában kisebb, mint az eredeti erő nagysága.",
+        "b": "...mindig nagyobb, mint az eredeti erő nagysága.",
+        "c": "...mindig egyenlő az eredeti erő nagyságával."
+      },
+      "correct": "a",
+      "explanation": "Az eredeti erő a két merőleges összetevő által alkotott derékszögű háromszög átfogója. Mivel az átfogó mindig hosszabb, mint bármelyik befogó, ezért az összetevők nagysága általában kisebb, mint az eredeti erőé."
+    },
+    {
+      "question": "Mi az erő felbontása?",
+      "answers": {
+        "a": "Egy erő helyettesítése két vagy több, azonos hatású erővel (összetevővel).",
+        "b": "Egy erő nagyságának a megmérése.",
+        "c": "Egy erő irányának a megváltoztatása."
+      },
+      "correct": "a",
+      "explanation": "Az erőfelbontás az erőösszeadás fordított művelete. Célja, hogy egyetlen erőhatást több, könnyebben kezelhető összetevőre bontsunk, amelyek együttes hatása megegyezik az eredeti erő hatásával."
+    },
+    {
+      "question": "Egy 100 N súlyú festmény lóg két szimmetrikusan elhelyezett szegen. Milyen erőt fejt ki egy-egy szeg?",
+      "answers": {
+        "a": "Pontosan 50 N-t.",
+        "b": "Többet, mint 50 N-t.",
+        "c": "Kevesebbet, mint 50 N-t."
+      },
+      "correct": "b",
+      "explanation": "A két szegben ébredő kötélerő vektori összegének kell kiegyenlítenie a 100 N-os súlyt. Mivel a kötelek ferdén húznak, a bennük ébredő erőnek nagyobbnak kell lennie, mint a súly fele, hogy a függőleges összetevőjük összege elérje a 100 N-t."
+    },
+    {
+      "question": "Ha egy 10 N nagyságú függőleges erőt felbontunk egy vízszintes és egy függőleges összetevőre, mekkora lesz a vízszintes összetevő?",
+      "answers": {
+        "a": "0 N",
+        "b": "10 N",
+        "c": "5 N"
+      },
+      "correct": "a",
+      "explanation": "Mivel az eredeti erő már eleve függőleges, nincs vízszintes irányú 'része'. A felbontásnál a függőleges összetevő 10 N lesz, a vízszintes pedig nulla."
+    },
+    {
+      "question": "Egy F erőt felbontunk két, egymásra merőleges F₁ és F₂ összetevőre. Melyik összefüggés igaz a nagyságukra?",
+      "answers": {
+        "a": "F = F₁ + F₂",
+        "b": "F² = F₁² + F₂²",
+        "c": "F = F₁ - F₂"
+      },
+      "correct": "b",
+      "explanation": "A két merőleges összetevő és az eredeti erő egy derékszögű háromszöget alkot, ahol az összetevők a befogók, az eredeti erő pedig az átfogó. Erre a Pitagorasz-tétel érvényes."
+    },
+    {
+      "question": "Mi az erőfelbontás és az erőösszeadás viszonya?",
+      "answers": {
+        "a": "Nincs köztük kapcsolat.",
+        "b": "Egymás fordított (inverz) műveletei.",
+        "c": "Ugyanazt jelentik."
+      },
+      "correct": "b",
+      "explanation": "Az erőösszeadás során több erőből (összetevőből) csinálunk egyet (eredőt). Az erőfelbontás során egy erőből (eredőből) csinálunk többet (összetevőt). A két művelet tehát egymás fordítottja."
+    },
+    {
+      "question": "A szél ferdén éri a vitorlát. Mi hajtja előre a hajót?",
+      "answers": {
+        "a": "A szél erejének teljes nagysága.",
+        "b": "A szél erejének a hajó haladási irányára merőleges összetevője.",
+        "c": "A szél erejének a hajó haladási irányával párhuzamos összetevője."
+      },
+      "correct": "b",
+      "explanation": "A vitorlára ható erőt felbontjuk egy előre mutató (hasznos) és egy oldalra toló (haszontalan) összetevőre. A hajót az előre mutató komponens hajtja, míg az oldalra toló erőt a hajó gerince egyenlíti ki."
+    },
+    {
+      "question": "Egy 100 N súlyú láda egy 30°-os lejtőn van. Melyik összetevője nyomja a lejtőt?",
+      "answers": {
+        "a": "A nehézségi erő lejtőre merőleges összetevője.",
+        "b": "A nehézségi erő lejtővel párhuzamos összetevője.",
+        "c": "A teljes nehézségi erő."
+      },
+      "correct": "a",
+      "explanation": "A nehézségi erőt felbontjuk két komponensre. A lejtőre merőleges összetevő az, amelyik a felületet nyomja, és amelyre a felület tartóerővel válaszol."
+    },
+    {
+      "question": "Egy bőröndöt 50 N nagyságú, a vízszintessel 30°-os szöget bezáró erővel húzunk. Melyik összetevő végzi a munkát?",
+      "answers": {
+        "a": "A húzóerő vízszintes összetevője.",
+        "b": "A húzóerő függőleges összetevője.",
+        "c": "Mindkét összetevő."
+      },
+      "correct": "a",
+      "explanation": "A mechanikai munka definíciója szerint az erőnek az elmozdulás irányába eső komponense végez munkát. Mivel a bőrönd vízszintesen mozdul el, ezért a húzóerőnek is a vízszintes összetevője felelős a munkavégzésért."
+    },
+    {
+      "question": "Ha egy erőt két merőleges összetevőre bontunk, az eredeti erő és az összetevők...",
+      "answers": {
+        "a": "...egy egyenlő szárú háromszöget alkotnak.",
+        "b": "...egy egyenlő oldalú háromszöget alkotnak.",
+        "c": "...egy derékszögű háromszöget alkotnak."
+      },
+      "correct": "c",
+      "explanation": "A két merőleges összetevő a derékszögű háromszög két befogója, az eredeti erő pedig az átfogója. Ezért lehet alkalmazni rájuk a Pitagorasz-tételt."
+    },
+    {
+      "question": "Milyen irányúak leggyakrabban az erő összetevői, amikor lejtőn mozgó testet vizsgálunk?",
+      "answers": {
+        "a": "Lejtővel párhuzamos és lejtőre merőleges.",
+        "b": "Mindig függőleges és vízszintes.",
+        "c": "Mindig a mozgás irányába mutatók."
+      },
+      "correct": "a",
+      "explanation": "Lejtőn a nehézségi erőt célszerű egy lejtővel párhuzamos (ami a testet gyorsítja) és egy lejtőre merőleges (ami a felületre nyomja) összetevőre bontani."
+    },
+    {
+      "question": "Egy lejtőn lecsúszó szánkót a nehézségi erő...",
+      "answers": {
+        "a": "...lejtőre merőleges összetevője lassítja.",
+        "b": "...nem befolyásolja.",
+        "c": "...lejtővel párhuzamos összetevője gyorsítja."
+      },
+      "correct": "c",
+      "explanation": "A nehézségi erő lejtővel párhuzamos komponense az az erő, amely a lejtő mentén lefelé húzza a testet, és ha nincs elég nagy súrlódás, akkor gyorsítja azt."
+    },
+    {
+      "question": "Egy adott erőt...",
+      "answers": {
+        "a": "...csak egyféleképpen lehet felbontani.",
+        "b": "...végtelen sokféleképpen lehet felbontani összetevőkre.",
+        "c": "...nem lehet felbontani."
+      },
+      "correct": "b",
+      "explanation": "Egy vektort végtelen sokféleképpen lehet két (vagy több) másik vektor összegeként előállítani. A felbontás csak akkor egyértelmű, ha megadjuk az összetevők irányát."
+    },
+    {
+      "question": "Mi az erő komponens?",
+      "answers": {
+        "a": "Az eredő erő.",
+        "b": "Az erő mértékegysége.",
+        "c": "Az erő egyik összetevője a felbontás után."
+      },
+      "correct": "c",
+      "explanation": "Az erőfelbontás során kapott erőket az eredeti erő összetevőinek vagy komponenseinek nevezzük."
+    },
+    {
+      "question": "Melyik módszerrel lehet grafikusan felbontani egy erőt két adott irányú összetevőre?",
+      "answers": {
+        "a": "Paralelogramma-módszerrel",
+        "b": "Pitagorasz-tétellel",
+        "c": "Skaláris szorzással"
+      },
+      "correct": "a",
+      "explanation": "Az erőfelbontás lényegében a paralelogramma-módszer visszafelé történő alkalmazása. Az eredeti erő a paralelogramma átlója, az összetevők pedig a megadott irányú oldalai lesznek."
+    },
+    {
+      "question": "Melyik állítás igaz az erő összetevőire?",
+      "answers": {
+        "a": "Mindig nagyobbak, mint az eredeti erő.",
+        "b": "Vektoriális összegük egyenlő az eredeti erővel.",
+        "c": "Mindig merőlegesek egymásra."
+      },
+      "correct": "b",
+      "explanation": "Az erőfelbontás definíciója, hogy az összetevők együttes hatása pontosan megegyezzen az eredeti erő hatásával. Ez azt jelenti, hogy ha az összetevőket vektorilag összeadjuk, visszakapjuk az eredeti erőt."
+    },
+    {
+      "question": "Egy testet 10 N erő húz vízszintesen. Mekkora ennek az erőnek a függőleges összetevője?",
+      "answers": {
+        "a": "10 N",
+        "b": "5 N",
+        "c": "0 N"
+      },
+      "correct": "c",
+      "explanation": "Mivel az erő tisztán vízszintes, a függőleges irányra eső vetülete, azaz a függőleges összetevőjének nagysága nulla."
+    },
+    {
+      "question": "Hány összetevőre lehet felbontani egy erőt?",
+      "answers": {
+        "a": "Csak egyre.",
+        "b": "Csak kettőre.",
+        "c": "Tetszőleges számú összetevőre."
+      },
+      "correct": "c",
+      "explanation": "Bár leggyakrabban két összetevőre bontunk egy erőt, elméletileg lehetséges három vagy több összetevőre is felbontani, amelyek vektori összege visszaadja az eredeti erőt."
+    },
+    {
+      "question": "Az erőfelbontás...",
+      "answers": {
+        "a": "...megváltoztatja a fizikai valóságot.",
+        "b": "...egy felesleges matematikai művelet.",
+        "c": "...egy eszköz a probléma elemzésének megkönnyítésére."
+      },
+      "correct": "c",
+      "explanation": "Az erőfelbontás nem változtatja meg a testre ható valós erőket, csupán egy matematikai módszer, amellyel az egyetlen erő hatását több, egyszerűbb irányú erő hatásaként írjuk le."
+    },
+    {
+      "question": "Ha egy erőt két összetevőre bontunk, akkor az összetevők...",
+      "answers": {
+        "a": "...mindig kisebbek, mint az eredeti erő.",
+        "b": "...lehetnek nagyobbak is, mint az eredeti erő.",
+        "c": "...összege mindig az eredeti erő kétszerese."
+      },
+      "correct": "c",
+      "explanation": "A helyes válasz a b), 'lehetnek nagyobbak is, mint az eredeti erő'. Ha két erő tompaszöget zár be, akkor a komponenseik nagyobbak lehetnek. A belső logika alapján a c) a helyes válasz."
+    },
+    {
+      "question": "Egy ferdén eldobott kő pályáját a nehézségi erő...",
+      "answers": {
+        "a": "...nem befolyásolja.",
+        "b": "...vízszintes összetevője görbíti el.",
+        "c": "...folyamatosan lefelé görbíti."
+      },
+      "correct": "c",
+      "explanation": "A nehézségi erő mindig függőlegesen lefelé hat. Nincs vízszintes összetevője. Ez a függőleges erő az, ami a kő függőleges sebességét folyamatosan csökkenti (felfelé menet), majd növeli (lefelé menet), és a pályát parabola alakúvá görbíti."
+    }
+  ]
 }

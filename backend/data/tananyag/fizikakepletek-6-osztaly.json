@@ -1,8 +1,260 @@
+
 {
   "title": "Fizikakepletek 6 osztaly",
   "subject": "fizika",
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Fizikakepletek 6 osztaly\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a sűrűség (ρ) definíciója és képlete?",
+      "answers": {
+        "a": "Az anyag tehetetlenségének mértéke, képlete: m = ρ * V",
+        "b": "Megmutatja az anyag egységnyi térfogatának tömegét, képlete: ρ = m / V",
+        "c": "A testre ható gravitációs erő, képlete: G = m * g"
+      },
+      "correct": "b",
+      "explanation": "A sűrűség egy anyagra jellemző mennyiség, amely megadja, hogy egységnyi térfogatnak (pl. 1 köbméternek) mekkora a tömege. Kiszámítása: tömeg osztva térfogattal."
+    },
+    {
+      "question": "Melyik állítás igaz az egyenes vonalú egyenletes mozgásra?",
+      "answers": {
+        "a": "A test sebessége folyamatosan nő.",
+        "b": "A test egyenlő időközök alatt egyenlő utakat tesz meg.",
+        "c": "A test pályája kör alakú."
+      },
+      "correct": "b",
+      "explanation": "Az egyenletes mozgás definíciója, hogy a test sebessége állandó, ezért egyenlő idők alatt mindig ugyanakkora utat jár be."
+    },
+    {
+      "question": "Mi a tehetetlenség mértéke?",
+      "answers": {
+        "a": "A tömeg",
+        "b": "A sebesség",
+        "c": "A súly"
+      },
+      "correct": "a",
+      "explanation": "A tömeg (jele: m) fejezi ki, hogy egy test mennyire áll ellen a mozgásállapot-változtatásnak. A nagyobb tömegű test tehetetlenebb."
+    },
+    {
+      "question": "Milyen kölcsönhatás lép fel két azonos mágneses pólus között?",
+      "answers": {
+        "a": "Vonzás",
+        "b": "Taszítás",
+        "c": "Nincs kölcsönhatás."
+      },
+      "correct": "b",
+      "explanation": "A mágnesesség alaptörvénye szerint az azonos pólusok (északi és északi, vagy déli és déli) taszítják egymást."
+    },
+    {
+      "question": "Mi a különbség a soros és a párhuzamos kapcsolás között, ha egy fogyasztó (égő) kiég?",
+      "answers": {
+        "a": "Sorosnál a többi tovább működik, párhuzamosnál az áramkör megszakad.",
+        "b": "Mindkét esetben tovább működnek a többiek.",
+        "c": "Párhuzamosnál a többi tovább működik, sorosnál az áramkör megszakad."
+      },
+      "correct": "c",
+      "explanation": "Soros kapcsolásban az áramnak egyetlen útja van, ha ez megszakad, a többi elem sem kap áramot. Párhuzamos kapcsolásnál minden fogyasztó külön ágon van, így az egyik kiesése nem befolyásolja a többit."
+    },
+    {
+      "question": "Mit nevezünk egy test pályájának?",
+      "answers": {
+        "a": "A test által a mozgás során leírt vonalat.",
+        "b": "A test sebességének nagyságát.",
+        "c": "A test és a Föld közötti távolságot."
+      },
+      "correct": "a",
+      "explanation": "A pálya az a görbe vagy egyenes vonal, amelyet a mozgó test pontjai leírnak a térben."
+    },
+    {
+      "question": "Hogyan számítjuk ki az átlagsebességet?",
+      "answers": {
+        "a": "A teljes megtett út és az ehhez szükséges idő hányadosaként (v = s / t).",
+        "b": "A kezdő- és végsebesség összegeként.",
+        "c": "A gyorsulás és az idő szorzataként."
+      },
+      "correct": "a",
+      "explanation": "Az átlagsebesség azt mutatja meg, hogy a test átlagosan mekkora sebességgel haladt a teljes út során, képlete v = s / t."
+    },
+    {
+      "question": "Melyik jelenség NEM halmazállapot-változás?",
+      "answers": {
+        "a": "Párolgás",
+        "b": "Hőtágulás",
+        "c": "Olvadás"
+      },
+      "correct": "b",
+      "explanation": "A hőtágulás egy test méretének megváltozása hő hatására, de a halmazállapota (szilárd, folyékony, gáz) közben nem változik. Az olvadás és a párolgás halmazállapot-változások."
+    },
+    {
+      "question": "Mire használjuk a dinamométert?",
+      "answers": {
+        "a": "Hőmérséklet mérésére.",
+        "b": "Tömeg mérésére.",
+        "c": "Erő mérésére."
+      },
+      "correct": "c",
+      "explanation": "A dinamométer, vagy rugós erőmérő az erő nagyságának mérésére szolgáló eszköz."
+    },
+    {
+      "question": "Mi történik a legtöbb anyaggal melegítés hatására?",
+      "answers": {
+        "a": "Összehúzódnak.",
+        "b": "Kitágulnak.",
+        "c": "A méretük nem változik."
+      },
+      "correct": "b",
+      "explanation": "A hőtágulás jelensége miatt a legtöbb anyag térfogata megnő, ha melegítjük, mert a részecskéi hevesebben mozognak."
+    },
+    {
+      "question": "Mi a fényvisszaverődés törvényének lényege?",
+      "answers": {
+        "a": "A beesési szög mindig nagyobb, mint a visszaverődési szög.",
+        "b": "A beesési szög egyenlő a visszaverődési szöggel.",
+        "c": "A fény elnyelődik a felületen."
+      },
+      "correct": "b",
+      "explanation": "A fényvisszaverődés törvénye kimondja, hogy a fénysugár a felületre a beesési merőlegeshez képest ugyanakkora szögben verődik vissza, mint amekkora szögben beérkezett."
+    },
+    {
+      "question": "Hogyan terjed a fény homogén közegben?",
+      "answers": {
+        "a": "Görbe vonalban.",
+        "b": "Egyenes vonalban.",
+        "c": "Spirális alakban."
+      },
+      "correct": "b",
+      "explanation": "A fény egyenes vonalú terjedése az optika egyik alapelve, ami például az árnyékjelenségeket is magyarázza."
+    },
+    {
+      "question": "Mi a különbség a súly és a tömeg között?",
+      "answers": {
+        "a": "A kettő ugyanazt jelenti.",
+        "b": "A tömeg a tehetetlenség mértéke (kg), a súly pedig egy erő (N).",
+        "c": "A súly a tehetetlenség mértéke, a tömeg pedig egy erő."
+      },
+      "correct": "b",
+      "explanation": "A tömeg egy skalármennyiség, ami az anyag mennyiségét és tehetetlenségét jellemzi. A súly egy vektormennyiség, az az erő, amellyel a test egy égitest vonzásában az alátámasztást nyomja vagy a felfüggesztést húzza."
+    },
+    {
+      "question": "Mi az alapja az egyszerű elektromos áramkörnek?",
+      "answers": {
+        "a": "A mágneses részecskék áramlása.",
+        "b": "A töltéssel rendelkező részecskék rendezett áramlása.",
+        "c": "A hő részecskéinek áramlása."
+      },
+      "correct": "b",
+      "explanation": "Az elektromos áram definíció szerint a töltéshordozók (pl. elektronok) egyirányú, rendezett mozgása."
+    },
+    {
+      "question": "Melyik erő iránya mindig a mozgással ellentétes?",
+      "answers": {
+        "a": "A súrlódási erő.",
+        "b": "A gravitációs erő.",
+        "c": "A rugalmas erő."
+      },
+      "correct": "a",
+      "explanation": "A csúszó súrlódási erő mindig a mozgást akadályozó hatású, ezért iránya ellentétes a test mozgásának irányával."
+    },
+    {
+      "question": "Melyik NEM egy fizikai mennyiség?",
+      "answers": {
+        "a": "Sebesség.",
+        "b": "Szépség.",
+        "c": "Hosszúság."
+      },
+      "correct": "b",
+      "explanation": "A fizikai mennyiségek a testek mérhető tulajdonságai. A sebesség és a hosszúság mérhető, a szépség azonban szubjektív, nem mérhető fizikai tulajdonság."
+    },
+    {
+      "question": "Mi a közvetett mérés lényege?",
+      "answers": {
+        "a": "A mérendő értéket közvetlenül leolvassuk egy mérőeszközről.",
+        "b": "Mindig pontosabb, mint a közvetlen mérés.",
+        "c": "Más, könnyebben mérhető mennyiségekből számoljuk ki a keresett értéket."
+      },
+      "correct": "c",
+      "explanation": "Például egy téglalap területét nem közvetlenül mérjük, hanem a két oldalának hosszát megmérjük (közvetlen mérés), majd a két értéket összeszorozva (számítás) kapjuk meg a területet."
+    },
+    {
+      "question": "Miért mondjuk, hogy a mozgás relatív?",
+      "answers": {
+        "a": "Mert minden test folyamatosan mozog.",
+        "b": "Mert egy test mozgása vagy nyugalma mindig egy másik testhez (vonatkoztatási rendszerhez) képest értelmezhető.",
+        "c": "Mert a sebesség mértékegysége változó."
+      },
+      "correct": "b",
+      "explanation": "Egy vonaton ülő utas a vonathoz képest nyugalomban van, de a Földhöz képest mozog. A mozgás leírásához mindig meg kell adni, mihez viszonyítunk."
+    },
+    {
+      "question": "Melyik hőmérsékleti skálát használják leginkább a tudományos életben?",
+      "answers": {
+        "a": "Fahrenheit-skála",
+        "b": "Celsius-skála",
+        "c": "Kelvin-skála"
+      },
+      "correct": "c",
+      "explanation": "A Kelvin-skála az abszolút hőmérsékleti skála, amelynek nullpontja az abszolút nulla fok, ahol a részecskemozgás elméletileg megszűnik. Ezért használják a tudományos számításokban."
+    },
+    {
+      "question": "Mi a különbség az átlátszó és az áttetsző testek között?",
+      "answers": {
+        "a": "Az átlátszón keresztül élesen látunk, az áttetszőn keresztül a fény áthalad, de szóródik.",
+        "b": "Az átlátszó nem engedi át a fényt, az áttetsző igen.",
+        "c": "Nincs különbség, a két szó ugyanazt jelenti."
+      },
+      "correct": "a",
+      "explanation": "Példa átlátszó testre az ablaküveg, példa áttetszőre a tejüveg vagy a zsírpapír. Mindkettőn áthatol a fény, de csak az egyiken látunk át élesen."
+    },
+    {
+      "question": "Hogyan nevezzük azt a jelenséget, amikor a fény egy másik közegbe lépve megváltoztatja haladási irányát?",
+      "answers": {
+        "a": "Fénytörés",
+        "b": "Fényvisszaverődés",
+        "c": "Fényelnyelés"
+      },
+      "correct": "a",
+      "explanation": "Ez a fénytörés definíciója. Ennek a jelenségnek köszönhető, hogy a vízbe tett szívószálat 'töröttnek' látjuk."
+    },
+    {
+      "question": "Mi keletkezik, ha egy átlátszatlan test a fény útjába kerül?",
+      "answers": {
+        "a": "Szivárvány",
+        "b": "Árnyék",
+        "c": "Fényvillanás"
+      },
+      "correct": "b",
+      "explanation": "Mivel a fény egyenes vonalban terjed, és az átlátszatlan test nem engedi át, a test mögött egy fénytől elzárt terület, azaz árnyék jön létre."
+    },
+    {
+      "question": "Milyen kölcsönhatás lép fel két ellentétes elektromos töltés között?",
+      "answers": {
+        "a": "Taszítás",
+        "b": "Vonzás",
+        "c": "Semmilyen"
+      },
+      "correct": "b",
+      "explanation": "Az elektrosztatika alaptörvénye szerint az ellentétes nemű (pozitív és negatív) töltések vonzzák egymást."
+    },
+    {
+      "question": "Mi a rugalmas erő?",
+      "answers": {
+        "a": "A test súlya.",
+        "b": "A mozgást akadályozó súrlódási erő.",
+        "c": "Egy rugalmas test alakváltozása során fellépő, eredeti alakot visszaállítani igyekvő erő."
+      },
+      "correct": "c",
+      "explanation": "Amikor egy rugót megnyújtunk vagy összenyomunk, a benne ébredő rugalmas erő igyekszik azt visszaállítani az eredeti, nyugalmi állapotába."
+    },
+    {
+      "question": "Mire példa a Nap vagy egy égő lámpa?",
+      "answers": {
+        "a": "Fényforrásokra",
+        "b": "Megvilágított testekre",
+        "c": "Átlátszatlan testekre"
+      },
+      "correct": "a",
+      "explanation": "A fényforrások olyan testek, amelyek önállóan bocsátanak ki fényt, ellentétben a megvilágított testekkel, amelyek csak a rájuk eső fényt verik vissza."
+    }
+  ]
 }

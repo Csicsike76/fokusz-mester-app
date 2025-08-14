@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz descartes szorzata\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik pont van a koordináta-rendszer II. síknegyedében?",
+      "answers": {
+        "a": "(-2, 3)",
+        "b": "(2, 3)",
+        "c": "(2, -3)"
+      },
+      "correct": "a",
+      "explanation": "A síknegyedek számozása a következő: I. (+,+), II. (-,+), III. (-,-), IV. (+,-). A II. síknegyedben az x-koordináta negatív, az y-koordináta pedig pozitív."
+    },
+    {
+      "question": "A Q(7, -1) pont ordinátája:",
+      "answers": {
+        "a": "7",
+        "b": "6",
+        "c": "-1"
+      },
+      "correct": "c",
+      "explanation": "Egy pont ordinátája a második, y-koordinátája. Az első, x-koordináta az abszcissza."
+    },
+    {
+      "question": "Mit nevezünk egy pont második koordinátájának?",
+      "answers": {
+        "a": "Abszcissza",
+        "b": "Ordináta",
+        "c": "Koordináta"
+      },
+      "correct": "b",
+      "explanation": "A derékszögű koordináta-rendszerben az x-koordinátát (első) abszcisszának, az y-koordinátát (második) ordinátának nevezzük."
+    },
+    {
+      "question": "Mi a vízszintes tengely neve a koordináta-rendszerben?",
+      "answers": {
+        "a": "Ordinátatengely",
+        "b": "Abszcisszatengely (x-tengely)",
+        "c": "y-tengely"
+      },
+      "correct": "b",
+      "explanation": "A vízszintes tengelyt x-tengelynek vagy abszcisszatengelynek, a függőlegeset y-tengelynek vagy ordinátatengelynek nevezzük."
+    },
+    {
+      "question": "Mikor igaz az A × B = B × A egyenlőség?",
+      "answers": {
+        "a": "Soha",
+        "b": "Ha A = B",
+        "c": "Mindig"
+      },
+      "correct": "b",
+      "explanation": "A Descartes-szorzat sorrendérzékeny. Az (a,b) pár csak akkor egyenlő a (b,a) párral, ha a=b. Ezért a szorzathalmazok is csak akkor lesznek egyenlőek, ha az eredeti halmazok is megegyeznek."
+    },
+    {
+      "question": "Mi a koordináta-rendszer origójának koordinátája?",
+      "answers": {
+        "a": "(0, 0)",
+        "b": "(1, 1)",
+        "c": "Nincs neki."
+      },
+      "correct": "a",
+      "explanation": "Az origó az a pont, ahol az x- és az y-tengely metszi egymást. Ez mindkét tengelyen a 0 értéknél történik."
+    },
+    {
+      "question": "Melyik síknegyedben van a (4, -1) pont?",
+      "answers": {
+        "a": "I.",
+        "b": "II.",
+        "c": "IV."
+      },
+      "correct": "c",
+      "explanation": "A síknegyedek számozása: I.(+,+), II.(-,+), III.(-,-), IV.(+,-). A (4, -1) pontban az x-koordináta pozitív, az y-koordináta negatív, tehát a IV. síknegyedben található."
+    },
+    {
+      "question": "Melyik pont van az x-tengelyen?",
+      "answers": {
+        "a": "(3, 3)",
+        "b": "(3, 0)",
+        "c": "(0, 3)"
+      },
+      "correct": "b",
+      "explanation": "Egy pont akkor van az x-tengelyen, ha az y-koordinátája 0, mivel nem mozdul el sem fel, sem le az x-tengelyről."
+    },
+    {
+      "question": "Hány eleme van a {k, l} × {1, 2, 3} szorzatnak?",
+      "answers": {
+        "a": "5",
+        "b": "4",
+        "c": "6"
+      },
+      "correct": "c",
+      "explanation": "A Descartes-szorzat elemszáma a halmazok elemszámának szorzata. Az első halmaznak 2 eleme van, a másodiknak 3. Így a szorzatnak 2 * 3 = 6 eleme van."
+    },
+    {
+      "question": "Igaz vagy hamis: Az (5, 3) és (3, 5) rendezett párok ugyanazt a pontot jelölik a koordináta-rendszerben.",
+      "answers": {
+        "a": "Igaz",
+        "b": "Hamis",
+        "c": "Csak ha pozitívak"
+      },
+      "correct": "b",
+      "explanation": "A két pont különböző helyen van. Az (5, 3) pont 5 egység jobbra és 3 egység fel, míg a (3, 5) pont 3 egység jobbra és 5 egység fel van az origótól. A rendezett pároknál a sorrend számít."
+    },
+    {
+      "question": "Ha az A halmaznak 5 eleme van, és B halmaznak 6 eleme van, hány eleme van a B × A szorzatnak?",
+      "answers": {
+        "a": "11",
+        "b": "30",
+        "c": "Nem lehet tudni"
+      },
+      "correct": "b",
+      "explanation": "A Descartes-szorzat elemszáma a halmazok elemszámának szorzata. A sorrend nem befolyásolja az elemszámot. Így a szorzatnak 6 * 5 = 30 eleme van."
+    },
+    {
+      "question": "Mit jelent a Descartes-szorzat?",
+      "answers": {
+        "a": "Két halmaz elemeiből képzett összes rendezett elempár halmaza.",
+        "b": "A két halmaz közös elemeinek halmaza.",
+        "c": "A két halmaz összes elemének halmaza."
+      },
+      "correct": "a",
+      "explanation": "Az A és B halmaz Descartes-szorzata (A × B) azoknak az (a,b) rendezett pároknak a halmaza, ahol 'a' eleme az A halmaznak, 'b' pedig eleme a B halmaznak."
+    },
+    {
+      "question": "Ha card(A) = 3 és card(B) = 4, akkor mennyi card(A × B)?",
+      "answers": {
+        "a": "12",
+        "b": "7",
+        "c": "3"
+      },
+      "correct": "a",
+      "explanation": "A Descartes-szorzat elemszáma a halmazok elemszámának szorzata. Így a szorzatnak 3 * 4 = 12 eleme van."
+    },
+    {
+      "question": "Ha A × B = {(k, a), (k, b), (m, a), (m, b)}, akkor mi a B halmaz?",
+      "answers": {
+        "a": "{k, m}",
+        "b": "{a, b}",
+        "c": "{k, m, a, b}"
+      },
+      "correct": "b",
+      "explanation": "A Descartes-szorzat (a,b) párjainak második tagjai mindig a második halmazból (B) származnak. A második koordináták az 'a' és a 'b'."
+    },
+    {
+      "question": "Melyik síknegyedben van a (-1, -5) pont?",
+      "answers": {
+        "a": "II.",
+        "b": "III.",
+        "c": "IV."
+      },
+      "correct": "b",
+      "explanation": "A síknegyedek számozása: I.(+,+), II.(-,+), III.(-,-), IV.(+,-). A (-1, -5) pontban mindkét koordináta negatív, tehát a III. síknegyedben található."
+    },
+    {
+      "question": "A Descartes-szorzat felcserélhető (kommutatív) művelet?",
+      "answers": {
+        "a": "Igen, mindig",
+        "b": "Néha",
+        "c": "Nem, általában nem"
+      },
+      "correct": "c",
+      "explanation": "A Descartes-szorzat rendezett párokból áll, ahol a sorrend számít. (a,b) nem ugyanaz, mint (b,a), ha 'a' és 'b' különbözőek. Ezért a szorzat nem felcserélhető."
+    },
+    {
+      "question": "A P(-3, 5) pont abszcisszája:",
+      "answers": {
+        "a": "5",
+        "b": "2",
+        "c": "-3"
+      },
+      "correct": "c",
+      "explanation": "Egy pont abszcisszája az első, x-koordinátája. Ordinátája a második, y-koordinátája."
+    },
+    {
+      "question": "Mit jelent a '(a, b)' jelölés a Descartes-szorzatban?",
+      "answers": {
+        "a": "Rendezett elempár",
+        "b": "Halmaz",
+        "c": "Számpár"
+      },
+      "correct": "a",
+      "explanation": "A kerek zárójel olyan párt jelöl, ahol a sorrend számít. Ezért (a,b) nem ugyanaz, mint (b,a), ha a és b különbözőek. Ezt a tulajdonságot 'rendezett'-nek hívjuk."
+    },
+    {
+      "question": "Ha A × B = {(k, a), (k, b), (m, a), (m, b)}, akkor mi az A halmaz?",
+      "answers": {
+        "a": "{k, m}",
+        "b": "{a, b}",
+        "c": "{k, m, a, b}"
+      },
+      "correct": "a",
+      "explanation": "A Descartes-szorzat (a,b) párjainak első tagjai mindig az első halmazból (A) származnak. Az első koordináták a 'k' és az 'm'."
+    },
+    {
+      "question": "Mit nevezünk egy pont első koordinátájának?",
+      "answers": {
+        "a": "Abszcissza",
+        "b": "Ordináta",
+        "c": "Origó"
+      },
+      "correct": "a",
+      "explanation": "A derékszögű koordináta-rendszerben az x-koordinátát abszcisszának, az y-koordinátát ordinátának nevezzük."
+    },
+    {
+      "question": "Egy pont az y-tengelyen helyezkedik el. Mi igaz a koordinátáira?",
+      "answers": {
+        "a": "Az x-koordinátája 0.",
+        "b": "Az y-koordinátája 0.",
+        "c": "Mindkét koordinátája 0."
+      },
+      "correct": "a",
+      "explanation": "Az y-tengelyen lévő pontok nem mozdulnak el sem jobbra, sem balra az origótól, ezért az x-irányú koordinátájuk mindig 0."
+    },
+    {
+      "question": "Legyen A = {x} és B = {y, z}. Mi az A × B?",
+      "answers": {
+        "a": "{(x,y), (x,z)}",
+        "b": "{(y,x), (z,x)}",
+        "c": "{x, y, z}"
+      },
+      "correct": "a",
+      "explanation": "Az A halmaz minden elemét párosítjuk a B halmaz minden elemével. Az első helyen az A halmaz elemei állnak. Így a párok (x, y) és (x, z) lesznek."
+    },
+    {
+      "question": "Mi a függőleges tengely neve a koordináta-rendszerben?",
+      "answers": {
+        "a": "x-tengely",
+        "b": "Abszcisszatengely",
+        "c": "Ordinátatengely (y-tengely)"
+      },
+      "correct": "c",
+      "explanation": "A vízszintes tengelyt x-tengelynek vagy abszcisszatengelynek, a függőlegeset y-tengelynek vagy ordinátatengelynek nevezzük."
+    },
+    {
+      "question": "Legyen A = {1, 2} és B = {c}. Mi az A × B?",
+      "answers": {
+        "a": "{(1, c), (2, c)}",
+        "b": "{(c, 1), (c, 2)}",
+        "c": "{1, 2, c}"
+      },
+      "correct": "a",
+      "explanation": "Az A halmaz minden elemét párosítjuk a B halmaz minden elemével. Az első helyen az A halmaz elemei állnak. Az 1-et párosítjuk c-vel: (1, c). A 2-t párosítjuk c-vel: (2, c)."
+    }
+  ]
 }

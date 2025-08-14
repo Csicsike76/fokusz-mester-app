@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz egyenletes mozgas\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Milyen az egyenes vonalú egyenletes mozgás sebesség-idő (v-t) grafikonja?",
+      "answers": {
+        "a": "Emelkedő egyenes",
+        "b": "Az időtengellyel párhuzamos egyenes.",
+        "c": "Csökkenő egyenes."
+      },
+      "correct": "b",
+      "explanation": "Mivel a sebesség az egyenletes mozgás során állandó, a grafikonon az idő múlásával a sebesség értéke nem változik. Ez a grafikonon egy vízszintes, az időtengellyel párhuzamos egyenesként jelenik meg."
+    },
+    {
+      "question": "Melyik állítás igaz az egyenletes mozgásra?",
+      "answers": {
+        "a": "A test sebessége folyamatosan változik.",
+        "b": "A test sebessége állandó.",
+        "c": "A test mindig gyorsul."
+      },
+      "correct": "b",
+      "explanation": "Az egyenletes mozgás legfontosabb jellemzője, hogy a test sebessége sem nagyságra, sem irányra nem változik. A gyorsulása nulla."
+    },
+    {
+      "question": "Két autó közül az A jelű út-idő grafikonja meredekebb, mint a B jelűé. Melyik autó halad gyorsabban?",
+      "answers": {
+        "a": "Az A jelű autó.",
+        "b": "A B jelű autó.",
+        "c": "Egyenlő sebességgel haladnak."
+      },
+      "correct": "a",
+      "explanation": "Az út-idő grafikon meredeksége a sebességet jelenti. Minél meredekebb a grafikon, annál nagyobb a sebesség, mert ugyanannyi idő alatt nagyobb utat tesz meg."
+    },
+    {
+      "question": "Egy csiga 2 cm/s sebességgel halad. Mennyi idő alatt tesz meg 30 cm-t?",
+      "answers": {
+        "a": "15 másodperc",
+        "b": "60 másodperc",
+        "c": "32 másodperc"
+      },
+      "correct": "a",
+      "explanation": "Az idő (t) a megtett út (s) és a sebesség (v) hányadosa: t = s / v. Behelyettesítve: t = 30 cm / 2 cm/s = 15 s."
+    },
+    {
+      "question": "Mi a pályája az egyenes vonalú mozgásnak?",
+      "answers": {
+        "a": "Egyenes",
+        "b": "Kör",
+        "c": "Görbe"
+      },
+      "correct": "a",
+      "explanation": "A mozgás nevében benne van a pálya alakja. Az \"egyenes vonalú\" jelző pontosan azt jelenti, hogy a test egyenes mentén mozog."
+    },
+    {
+      "question": "Egy gyalogos 1,5 m/s sebességgel megy. Mennyi ez km/h-ban?",
+      "answers": {
+        "a": "4,5 km/h",
+        "b": "5,4 km/h",
+        "c": "15 km/h"
+      },
+      "correct": "b",
+      "explanation": "A m/s és km/h közötti váltószám 3,6. Ha m/s-ról váltunk km/h-ra, szorozni kell. Így: 1,5 * 3,6 = 5,4 km/h."
+    },
+    {
+      "question": "Melyik jelölést használjuk az időtartamra?",
+      "answers": {
+        "a": "s",
+        "b": "v",
+        "c": "t"
+      },
+      "correct": "c",
+      "explanation": "A fizikai jelölések a latin szavakból erednek: s - út (spatium), t - idő (tempus), v - sebesség (velocitas)."
+    },
+    {
+      "question": "Egy mozgó test út-idő grafikonja egy vízszintes egyenes. Mit jelent ez?",
+      "answers": {
+        "a": "A test egyenletesen gyorsul.",
+        "b": "A test egyenletesen mozog.",
+        "c": "A test nyugalomban van."
+      },
+      "correct": "c",
+      "explanation": "Az út-idő grafikon a test helyzetét mutatja az idő függvényében. Ha a grafikon egy vízszintes vonal, az azt jelenti, hogy a test helyzete (s) az idő múlásával nem változik."
+    },
+    {
+      "question": "Egyenletes mozgás esetén a pillanatnyi sebesség és az átlagsebesség...",
+      "answers": {
+        "a": "eltérő.",
+        "b": "az átlagsebesség mindig nagyobb.",
+        "c": "megegyezik."
+      },
+      "correct": "c",
+      "explanation": "Mivel az egyenletes mozgás sebessége állandó, a mozgás bármely pillanatában mért sebesség ugyanakkora, mint a teljes útra számított átlagsebesség."
+    },
+    {
+      "question": "Egy autó 10 m/s sebességgel halad. Mekkora utat tesz meg fél perc alatt?",
+      "answers": {
+        "a": "5 méter",
+        "b": "300 méter",
+        "c": "150 méter"
+      },
+      "correct": "b",
+      "explanation": "Először az időt átváltjuk másodpercre: fél perc = 30 másodperc. Az út (s) a sebesség (v) és az idő (t) szorzata: s = v * t. Behelyettesítve: s = 10 m/s * 30 s = 300 m."
+    },
+    {
+      "question": "Melyik a 't' betű jele a mozgástanban?",
+      "answers": {
+        "a": "Tömeg",
+        "b": "Út",
+        "c": "Idő"
+      },
+      "correct": "c",
+      "explanation": "A fizikai jelölések: s - út, t - idő, v - sebesség, m - tömeg."
+    },
+    {
+      "question": "Mi állandó az egyenletes mozgás során?",
+      "answers": {
+        "a": "A sebesség",
+        "b": "A megtett út",
+        "c": "Az eltelt idő"
+      },
+      "correct": "a",
+      "explanation": "Az egyenletes mozgás legfontosabb jellemzője, hogy a test sebessége sem nagyságra, sem irányra nem változik. A megtett út és az idő folyamatosan nő."
+    },
+    {
+      "question": "Milyen az egyenes vonalú egyenletes mozgás út-idő (s-t) grafikonja?",
+      "answers": {
+        "a": "Egy origóból induló, emelkedő egyenes.",
+        "b": "Egy vízszintes egyenes.",
+        "c": "Egy parabola."
+      },
+      "correct": "a",
+      "explanation": "Az út (s) és az idő (t) között egyenes arányosság van (s = v*t). Az egyenes arányosság grafikonja mindig egy origón átmenő egyenes. Minél meredekebb az egyenes, annál nagyobb a sebesség."
+    },
+    {
+      "question": "Egy kerékpáros 5 m/s sebességgel halad. Mekkora utat tesz meg 1 perc alatt?",
+      "answers": {
+        "a": "300 méter",
+        "b": "5 méter",
+        "c": "60 méter"
+      },
+      "correct": "a",
+      "explanation": "Először az időt átváltjuk másodpercre: 1 perc = 60 másodperc. Az út (s) a sebesség (v) és az idő (t) szorzata: s = v * t. Behelyettesítve: s = 5 m/s * 60 s = 300 m."
+    },
+    {
+      "question": "Mi az átlagsebesség SI mértékegysége?",
+      "answers": {
+        "a": "m/s",
+        "b": "km/h",
+        "c": "m/perc"
+      },
+      "correct": "a",
+      "explanation": "A Nemzetközi Mértékegységrendszerben (SI) az út alapmértékegysége a méter (m), az időé pedig a másodperc (s). Mivel a sebesség út/idő, ezért az SI mértékegysége a méter/másodperc."
+    },
+    {
+      "question": "Egy autó 2 óra alatt 180 km-t tesz meg egyenletesen. Mennyi a sebessége?",
+      "answers": {
+        "a": "90 km/h",
+        "b": "360 km/h",
+        "c": "90 m/s"
+      },
+      "correct": "a",
+      "explanation": "A sebesség (v) a megtett út (s) és az eltelt idő (t) hányadosa: v = s / t. Behelyettesítve: v = 180 km / 2 h = 90 km/h."
+    },
+    {
+      "question": "A hang sebessége a levegőben kb. 340 m/s. Ha 3 másodperccel a villámlás után hallod a dörgést, milyen messze csapott be a villám?",
+      "answers": {
+        "a": "kb. 1 km-re",
+        "b": "kb. 10 km-re",
+        "c": "kb. 340 m-re"
+      },
+      "correct": "a",
+      "explanation": "Az út = sebesség * idő. Behelyettesítve: s = 340 m/s * 3 s = 1020 m. 1020 méter körülbelül 1 kilométer."
+    },
+    {
+      "question": "Ha egy test sebessége negatív, az mit jelent?",
+      "answers": {
+        "a": "A test lassul.",
+        "b": "Lehetetlen, a sebesség nem lehet negatív.",
+        "c": "A test a koordináta-rendszer negatív irányába mozog."
+      },
+      "correct": "c",
+      "explanation": "A sebességnek iránya is van. A fizikában gyakran kijelölünk egy pozitív irányt. Ha egy test ebbe az irányba mozog, a sebessége pozitív, ha az ellenkező irányba, akkor negatív."
+    },
+    {
+      "question": "Két autó halad egymással szemben, mindkettő 50 km/h sebességgel. Mennyi a relatív sebességük?",
+      "answers": {
+        "a": "0 km/h",
+        "b": "50 km/h",
+        "c": "100 km/h"
+      },
+      "correct": "c",
+      "explanation": "Ha két test egymással szemben mozog, a relatív sebességük (ahogy egymáshoz közelednek) a sebességeik nagyságának összege. Így: 50 km/h + 50 km/h = 100 km/h."
+    },
+    {
+      "question": "Mit jelent az, hogy egy test mozgása egyenletes?",
+      "answers": {
+        "a": "Egyenlő időközök alatt egyenlő utakat tesz meg.",
+        "b": "A sebessége folyamatosan nő.",
+        "c": "A pályája egyenes."
+      },
+      "correct": "a",
+      "explanation": "Az egyenletes mozgás kulcsa a sebesség állandósága. Ez azt jelenti, hogy a test sebessége nem változik, így bármely egyenlő időtartam alatt ugyanakkora utat fut be."
+    },
+    {
+      "question": "Ha a sebesség és az időtartam is ismert, milyen képlettel számoljuk ki a megtett utat?",
+      "answers": {
+        "a": "s = v / t",
+        "b": "s = t / v",
+        "c": "s = v * t"
+      },
+      "correct": "c",
+      "explanation": "Az alapképlet v = s / t. Ha az egyenlet mindkét oldalát megszorozzuk t-vel, megkapjuk az útra vonatkozó képletet: s = v * t."
+    },
+    {
+      "question": "Két autó halad egymás mellett. Az egyik sebessége 50 km/h, a másiké 60 km/h. Mennyi a relatív sebességük?",
+      "answers": {
+        "a": "110 km/h",
+        "b": "55 km/h",
+        "c": "10 km/h"
+      },
+      "correct": "c",
+      "explanation": "Ha két test azonos irányban mozog, a relatív sebességük (ahogy egymáshoz képest mozognak) a sebességeik különbsége. Így: 60 km/h - 50 km/h = 10 km/h."
+    },
+    {
+      "question": "Egy vonat 72 km/h sebességgel halad. Mennyi ez m/s-ban?",
+      "answers": {
+        "a": "25 m/s",
+        "b": "20 m/s",
+        "c": "36 m/s"
+      },
+      "correct": "b",
+      "explanation": "A km/h és m/s közötti átváltási szám a 3,6. Ha kilométer per óráról váltunk méter per másodpercre, akkor osztani kell 3,6-del. Tehát: 72 / 3,6 = 20 m/s."
+    },
+    {
+      "question": "Ha egy test nem mozog, akkor a sebessége...",
+      "answers": {
+        "a": "negatív.",
+        "b": "nulla.",
+        "c": "végtelen."
+      },
+      "correct": "b",
+      "explanation": "A nyugalom a mozgás speciális esete, amikor a sebesség nulla, azaz a test helyzete nem változik."
+    }
+  ]
 }

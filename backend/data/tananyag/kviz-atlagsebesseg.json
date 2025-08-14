@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz atlagsebesseg\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik jelölést használjuk a megtett útra?",
+      "answers": {
+        "a": "v",
+        "b": "t",
+        "c": "s"
+      },
+      "correct": "c",
+      "explanation": "A fizikai jelölések: s - út (a latin 'spatium' szóból), t - idő (a latin 'tempus' szóból), v - sebesség (a latin 'velocitas' szóból)."
+    },
+    {
+      "question": "Egy csiga 2 cm/s sebességgel halad. Mennyi idő alatt tesz meg 30 cm-t?",
+      "answers": {
+        "a": "15 másodperc",
+        "b": "60 másodperc",
+        "c": "32 másodperc"
+      },
+      "correct": "a",
+      "explanation": "Az időt (t) úgy számoljuk ki, hogy a megtett utat (s) elosztjuk a sebességgel (v). Képlete: t = s / v. Behelyettesítve: t = 30 cm / 2 cm/s = 15 s."
+    },
+    {
+      "question": "Melyik jelenti a legnagyobb sebességet?",
+      "answers": {
+        "a": "10 m/s",
+        "b": "10 km/h",
+        "c": "10 cm/s"
+      },
+      "correct": "a",
+      "explanation": "Ahhoz, hogy összehasonlítsuk őket, váltsuk át mindet m/s-ra! A 10 km/h-t el kell osztani 3,6-del, ami kb. 2,78 m/s. A 10 cm/s pedig 0,1 m/s. Így látható, hogy a 10 m/s a legnagyobb."
+    },
+    {
+      "question": "Egy autó 10 másodperc alatt gyorsul fel álló helyzetből 20 m/s sebességre. Mennyi az átlagsebessége ezalatt, ha a gyorsulás egyenletes volt?",
+      "answers": {
+        "a": "10 m/s",
+        "b": "20 m/s",
+        "c": "15 m/s"
+      },
+      "correct": "a",
+      "explanation": "Ha egy mozgás egyenletesen gyorsuló, az átlagsebességet a kezdő- és végsebesség összegének felével (számtani közepével) számolhatjuk. Itt: (0 m/s + 20 m/s) / 2 = 10 m/s."
+    },
+    {
+      "question": "Ha az utat változatlanul hagyjuk, de a megtételéhez szükséges időt megfelezzük, hogyan változik az átlagsebesség?",
+      "answers": {
+        "a": "Nem változik.",
+        "b": "Felére csökken.",
+        "c": "Duplájára nő."
+      },
+      "correct": "c",
+      "explanation": "A sebesség képlete v = s / t. Ha feleannyi idő alatt tesszük meg ugyanazt az utat, akkor kétszer gyorsabbnak kell lennünk. Matematikailag: s / (t/2) = 2 * (s/t) = 2v."
+    },
+    {
+      "question": "Egy autó 1 órán át 60 km/h-val, majd 1 órán át 100 km/h-val halad. Mennyi az átlagsebessége a teljes úton?",
+      "answers": {
+        "a": "70 km/h",
+        "b": "90 km/h",
+        "c": "80 km/h"
+      },
+      "correct": "c",
+      "explanation": "Először ki kell számolni a teljes utat és a teljes időt. Teljes út: (60 km/h * 1h) + (100 km/h * 1h) = 160 km. Teljes idő: 1h + 1h = 2h. Átlagsebesség = teljes út / teljes idő = 160 km / 2 h = 80 km/h."
+    },
+    {
+      "question": "Ha egy test nyugalomban van, mennyi az átlagsebessége?",
+      "answers": {
+        "a": "1 m/s",
+        "b": "0",
+        "c": "Végtelen"
+      },
+      "correct": "b",
+      "explanation": "Ha egy test nyugalomban van, a megtett útja (s) nulla. Mivel a sebesség képlete v = s / t, ezért az eredmény v = 0 / t = 0."
+    },
+    {
+      "question": "Egy vonat 50 km-t tesz meg fél óra alatt. Mennyi az átlagsebessége?",
+      "answers": {
+        "a": "100 km/h",
+        "b": "50 km/h",
+        "c": "25 km/h"
+      },
+      "correct": "a",
+      "explanation": "Az átlagsebesség képlete v = s / t. A fél óra az 0,5 óra. Behelyettesítve: v = 50 km / 0,5 h = 100 km/h."
+    },
+    {
+      "question": "Ha az időt változatlanul hagyjuk, de a megtett utat megduplázzuk, hogyan változik az átlagsebesség?",
+      "answers": {
+        "a": "Felére csökken.",
+        "b": "Duplájára nő.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "A sebesség képlete v = s / t. Ha ugyanannyi idő alatt kétszer akkora utat teszünk meg, akkor a sebességünk is a duplája lesz."
+    },
+    {
+      "question": "Melyik állítás igaz az egyenletes mozgásra?",
+      "answers": {
+        "a": "A test sebessége folyamatosan változik.",
+        "b": "A test sebessége állandó.",
+        "c": "A test mindig gyorsul."
+      },
+      "correct": "b",
+      "explanation": "Az egyenletes mozgás legfontosabb jellemzője, hogy a test sebessége sem nagyságra, sem irányra nem változik. A gyorsulása nulla."
+    },
+    {
+      "question": "Egy autó 10 m/s sebességgel halad. Mekkora utat tesz meg fél perc alatt?",
+      "answers": {
+        "a": "5 méter",
+        "b": "300 méter",
+        "c": "150 méter"
+      },
+      "correct": "b",
+      "explanation": "Először az időt átváltjuk másodpercre: fél perc = 30 másodperc. Az út (s) a sebesség (v) és az idő (t) szorzata: s = v * t. Behelyettesítve: s = 10 m/s * 30 s = 300 m."
+    },
+    {
+      "question": "Mi a 'v' betű jele a mozgástanban?",
+      "answers": {
+        "a": "Idő",
+        "b": "Sebesség",
+        "c": "Út"
+      },
+      "correct": "b",
+      "explanation": "A fizikai jelölések a latin szavakból erednek: s - út (spatium), t - idő (tempus), v - sebesség (velocitas)."
+    },
+    {
+      "question": "Egy diák 600 méterre lakik az iskolától. Ha 10 perc alatt ér be, mennyi az átlagsebessége m/s-ban?",
+      "answers": {
+        "a": "6 m/s",
+        "b": "60 m/s",
+        "c": "1 m/s"
+      },
+      "correct": "c",
+      "explanation": "Először az időt át kell váltani másodpercre: 10 perc = 10 * 60 = 600 másodperc. A sebesség képlete v = s / t. Behelyettesítve: v = 600 m / 600 s = 1 m/s."
+    },
+    {
+      "question": "Mi az átlagsebesség SI mértékegysége?",
+      "answers": {
+        "a": "m/s",
+        "b": "km/h",
+        "c": "m/perc"
+      },
+      "correct": "a",
+      "explanation": "A Nemzetközi Mértékegységrendszerben (SI) az út alapmértékegysége a méter (m), az időé pedig a másodperc (s). Mivel a sebesség út/idő, ezért az SI mértékegysége a méter/másodperc."
+    },
+    {
+      "question": "Egy űrszonda 8 km/s sebességgel halad. Mekkora utat tesz meg 1 perc alatt?",
+      "answers": {
+        "a": "8 km",
+        "b": "480 km",
+        "c": "80 km"
+      },
+      "correct": "b",
+      "explanation": "Először az időt átváltjuk másodpercre: 1 perc = 60 másodperc. Az út (s) a sebesség (v) és az idő (t) szorzata: s = v * t. Behelyettesítve: s = 8 km/s * 60 s = 480 km."
+    },
+    {
+      "question": "Egy autó 2 óra alatt 180 km-t tesz meg egyenletesen. Mennyi az átlagsebessége?",
+      "answers": {
+        "a": "90 km/h",
+        "b": "360 km/h",
+        "c": "90 m/s"
+      },
+      "correct": "a",
+      "explanation": "A sebesség (v) a megtett út (s) és az eltelt idő (t) hányadosa. A képlet: v = s / t. Behelyettesítve: v = 180 km / 2 h = 90 km/h."
+    },
+    {
+      "question": "Ha az út és az idő is duplájára nő, mi történik az átlagsebességgel?",
+      "answers": {
+        "a": "Nem változik.",
+        "b": "Duplájára nő.",
+        "c": "Felére csökken."
+      },
+      "correct": "a",
+      "explanation": "A sebesség képlete v = s / t. Ha az új út 2s és az új idő 2t, akkor az új sebesség v' = (2s) / (2t). A 2-esekkel egyszerűsíthetünk, így az új sebesség v' = s/t, ami megegyezik az eredetivel."
+    },
+    {
+      "question": "Egy hajó 100 km-t tesz meg 4 óra alatt. Mennyi az átlagsebessége?",
+      "answers": {
+        "a": "400 km/h",
+        "b": "25 km/h",
+        "c": "104 km/h"
+      },
+      "correct": "b",
+      "explanation": "Az átlagsebesség képlete v = s / t. Behelyettesítve: v = 100 km / 4 h = 25 km/h."
+    },
+    {
+      "question": "Ha az utat méterben (m), az időt másodpercben (s) mérjük, mi lesz a sebesség mértékegysége?",
+      "answers": {
+        "a": "m*s",
+        "b": "m-s",
+        "c": "m/s"
+      },
+      "correct": "c",
+      "explanation": "A sebesség definíciója 'út per idő', azaz út osztva idővel. Ezért a mértékegységekkel is elvégezzük az osztást: méter / másodperc."
+    },
+    {
+      "question": "Egy hangya 50 cm-t tesz meg 10 másodperc alatt. Mennyi az átlagsebessége?",
+      "answers": {
+        "a": "500 cm/s",
+        "b": "10 cm/s",
+        "c": "5 cm/s"
+      },
+      "correct": "c",
+      "explanation": "Az átlagsebesség képlete v = s / t. Behelyettesítve: v = 50 cm / 10 s = 5 cm/s."
+    },
+    {
+      "question": "Egy kerékpáros 5 m/s sebességgel halad. Mekkora utat tesz meg 1 perc alatt?",
+      "answers": {
+        "a": "300 méter",
+        "b": "5 méter",
+        "c": "60 méter"
+      },
+      "correct": "a",
+      "explanation": "Először az időt át kell váltani másodpercre: 1 perc = 60 másodperc. Az út (s) a sebesség (v) és az idő (t) szorzata: s = v * t. Behelyettesítve: s = 5 m/s * 60 s = 300 m."
+    },
+    {
+      "question": "Melyik jelölést használjuk az időtartamra?",
+      "answers": {
+        "a": "s",
+        "b": "v",
+        "c": "t"
+      },
+      "correct": "c",
+      "explanation": "A fizikai jelölések a latin szavakból erednek: s - út (spatium), t - idő (tempus), v - sebesség (velocitas)."
+    },
+    {
+      "question": "Egy vonat 72 km/h sebességgel halad. Mennyi ez m/s-ban?",
+      "answers": {
+        "a": "25 m/s",
+        "b": "20 m/s",
+        "c": "36 m/s"
+      },
+      "correct": "b",
+      "explanation": "A km/h és m/s közötti átváltási szám a 3,6. Ha kilométer per óráról váltunk méter per másodpercre, akkor osztani kell 3,6-del. Tehát: 72 / 3,6 = 20 m/s."
+    },
+    {
+      "question": "Ha ismerjük a megtett utat és a sebességet, hogyan számoljuk ki az időt?",
+      "answers": {
+        "a": "t = v / s",
+        "b": "t = s * v",
+        "c": "t = s / v"
+      },
+      "correct": "c",
+      "explanation": "Az alapképlet v = s / t. Ha ezt átrendezzük az időre (t), akkor azt kapjuk, hogy az idő az út és a sebesség hányadosa: t = s / v."
+    }
+  ]
 }

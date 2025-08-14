@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz az energia es az elet\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás igaz a táplálékláncra?",
+      "answers": {
+        "a": "Az energia áramlását mutatja be a termelőktől a fogyasztók felé.",
+        "b": "Azt mutatja, melyik állat a legerősebb.",
+        "c": "Csak a növényeket tartalmazza."
+      },
+      "correct": "a",
+      "explanation": "A tápláléklánc az élőlények táplálkozási kapcsolatait írja le, és egyben modellezi az energia áramlását az ökoszisztémában. Az energia a növényektől (termelők) halad a növényevőkön át a ragadozók felé."
+    },
+    {
+      "question": "Milyen energiát hasznosítanak a növények?",
+      "answers": {
+        "a": "Holdenergiát",
+        "b": "Szélenergiát",
+        "c": "Napenergiát"
+      },
+      "correct": "c",
+      "explanation": "A növények a fotoszintézishez a Napból érkező fényenergiát használják fel."
+    },
+    {
+      "question": "Mi a táplálék?",
+      "answers": {
+        "a": "Víz és levegő.",
+        "b": "Csak a vitaminok.",
+        "c": "Olyan szerves anyag, ami energiát és építőelemeket biztosít az élőlényeknek."
+      },
+      "correct": "c",
+      "explanation": "A táplálék egyrészt a benne tárolt kémiai energia felszabadításával biztosítja az életfolyamatokhoz szükséges energiát, másrészt a test felépítéséhez szükséges anyagokat is tartalmazza."
+    },
+    {
+      "question": "Mi a biomassza?",
+      "answers": {
+        "a": "Növényi vagy állati eredetű szerves anyag, amit energiatermelésre lehet használni.",
+        "b": "A testek tömege.",
+        "c": "Egyfajta kőzet."
+      },
+      "correct": "a",
+      "explanation": "A biomassza kategóriájába tartozik például a tűzifa, a szalma vagy az energianövények. Megújuló energiaforrás, mert a növények a Nap energiájával folyamatosan újratermelik."
+    },
+    {
+      "question": "Mi történik az energiával a táplálékláncban?",
+      "answers": {
+        "a": "Egyik szintről a másikra veszteség nélkül jut át.",
+        "b": "Minden szinten az energia egy része elvész (hőként), és csak kb. 10%-a épül be a következő szintbe.",
+        "c": "Az energia a lánc végén a legnagyobb."
+      },
+      "correct": "b",
+      "explanation": "Az energiaáramlás a táplálékláncban nem túl hatékony. Az élőlények az elfogyasztott energia nagy részét a saját életfolyamataikra használják, ami hőként távozik."
+    },
+    {
+      "question": "Melyik folyamat bocsát ki oxigént?",
+      "answers": {
+        "a": "Az állatok légzése.",
+        "b": "A fotoszintézis.",
+        "c": "Az égés."
+      },
+      "correct": "b",
+      "explanation": "A fotoszintézis során a növények nemcsak szerves anyagot, hanem melléktermékként oxigént is termelnek, amit a légkörbe bocsátanak. A légzés és az égés oxigént használ fel."
+    },
+    {
+      "question": "Az emberi test működése során az energia...",
+      "answers": {
+        "a": "...nem alakul át.",
+        "b": "...átalakul, pl. mozgási energiává és hővé.",
+        "c": "...megsemmisül."
+      },
+      "correct": "b",
+      "explanation": "Az energia-megmaradás törvénye az élő szervezetekre is érvényes. A táplálékkal felvett kémiai energia a testünkben átalakul a mozgáshoz szükséges mechanikai energiává és a testhőmérsékletünket biztosító hőenergiává."
+    },
+    {
+      "question": "Milyen energiát tartalmaz az elfogyasztott élelmiszer?",
+      "answers": {
+        "a": "Mozgási energiát.",
+        "b": "Kémiai energiát.",
+        "c": "Helyzeti energiát."
+      },
+      "correct": "b",
+      "explanation": "Az élelmiszerekben (szénhidrátok, zsírok, fehérjék) az energia a molekulák kémiai kötéseiben van tárolva, amit a szervezetünk emésztés során szabadít fel."
+    },
+    {
+      "question": "Mi a fosszilis energiahordozók eredete?",
+      "answers": {
+        "a": "Több millió évvel ezelőtt élt élőlények maradványai.",
+        "b": "Vulkáni tevékenység.",
+        "c": "A Föld légköréből származnak."
+      },
+      "correct": "a",
+      "explanation": "A szén, a kőolaj és a földgáz évmilliókkal ezelőtt elpusztult növényi és állati szervezetek maradványaiból jött létre, amelyekben az egykori napenergia kémiai energia formájában raktározódott el."
+    },
+    {
+      "question": "Mi a 'termelő' szervezet a táplálékláncban?",
+      "answers": {
+        "a": "A ragadozó.",
+        "b": "A növényevő.",
+        "c": "A növény."
+      },
+      "correct": "c",
+      "explanation": "A termelő szervezetek (producensek) állítják elő a szerves anyagot szervetlenből, jellemzően a napfény energiájának felhasználásával. A földi ökoszisztémákban ezek a zöld növények."
+    },
+    {
+      "question": "Az energiaáramlás egy ökoszisztémában...",
+      "answers": {
+        "a": "...körkörös.",
+        "b": "...kétirányú.",
+        "c": "...egyirányú."
+      },
+      "correct": "c",
+      "explanation": "Az energia a Naptól a termelőkön át a fogyasztók felé áramlik, és minden szinten jelentős része hőként távozik. Az energia nem forog körbe, mint az anyag."
+    },
+    {
+      "question": "Melyik NEM megújuló energiaforrás?",
+      "answers": {
+        "a": "Szélenergia",
+        "b": "Szén",
+        "c": "Napenergia"
+      },
+      "correct": "b",
+      "explanation": "A szén fosszilis tüzelőanyag, készletei végesek. A szél- és a napenergia a Nap működésének köszönhetően folyamatosan rendelkezésre állnak, ezért megújulók."
+    },
+    {
+      "question": "Melyik élőlénycsoport áll a tápláléklánc alap_j_án?",
+      "answers": {
+        "a": "A ragadozók (másodlagos fogyasztók).",
+        "b": "A növények (termelők).",
+        "c": "A lebontók."
+      },
+      "correct": "b",
+      "explanation": "A táplálékláncok mindig a termelő szervezetekkel kezdődnek, amelyek képesek a Nap energiáját megkötni és szerves anyaggá alakítani. Ezek a zöld növények."
+    },
+    {
+      "question": "Milyen energiaátalakulás történik, amikor futunk?",
+      "answers": {
+        "a": "A testünkben tárolt kémiai energia mozgási energiává és hővé alakul.",
+        "b": "A mozgási energia kémiai energiává alakul.",
+        "c": "A hőenergia mozgási energiává alakul."
+      },
+      "correct": "a",
+      "explanation": "Futás közben az izmaink a tápanyagokból származó kémiai energiát használják fel. Ennek egy része a mozgáshoz szükséges mechanikai munkává, a nagyobbik része pedig hővé alakul."
+    },
+    {
+      "question": "Milyen formában tárolják az élőlények az energiát?",
+      "answers": {
+        "a": "Kémiai energia formájában (pl. zsírok, szénhidrátok).",
+        "b": "Mozgási energia formájában.",
+        "c": "Hőenergia formájában."
+      },
+      "correct": "a",
+      "explanation": "Az élelmiszerekben az energia a molekulák kémiai kötéseiben van elraktározva. A szervezetünk ezeket a kötéseket bontja fel, hogy felszabadítsa az energiát az életfolyamataihoz."
+    },
+    {
+      "question": "Mi a közös a fában és a szénben?",
+      "answers": {
+        "a": "Mindkettő megújuló.",
+        "b": "Mindkettőben a Nap egykori energiája van elraktározva kémiai formában.",
+        "c": "Mindkettő folyékony."
+      },
+      "correct": "b",
+      "explanation": "A fa a fotoszintézis révén közvetlenül, a szén pedig az évmilliókkal ezelőtt élt növények maradványain keresztül tárolja a Nap energiáját. Mindkettő elégetésével ezt az energiát szabadítjuk fel."
+    },
+    {
+      "question": "Mi a földi élet legfőbb energiaforrása?",
+      "answers": {
+        "a": "A Nap",
+        "b": "A Föld belső hője",
+        "c": "Az elektromosság"
+      },
+      "correct": "a",
+      "explanation": "A Földön szinte minden életfolyamat végső soron a Napból származó energiára vezethető vissza. A növények ezt közvetlenül használják a fotoszintézishez, az állatok pedig a növények elfogyasztásával jutnak hozzá."
+    },
+    {
+      "question": "Az életfenntartó rendszerek (pl. űrállomás) energiáját mi biztosítja leggyakrabban?",
+      "answers": {
+        "a": "Elemek",
+        "b": "Gázmotor",
+        "c": "Napelemek"
+      },
+      "correct": "c",
+      "explanation": "Az űrállomások és műholdak hosszú távú energiaellátását szinte kizárólag nagy felületű napelemek biztosítják, amelyek a Nap energiáját alakítják át elektromos energiává."
+    },
+    {
+      "question": "Milyen energiát használnak az izmaink?",
+      "answers": {
+        "a": "Elektromos energiát.",
+        "b": "Kémiai energiát.",
+        "c": "Napenergiát."
+      },
+      "correct": "b",
+      "explanation": "Az izomsejtek a véráramból felvett tápanyagokban (pl. glükóz) tárolt kémiai energiát alakítják át az összehúzódáshoz szükséges mechanikai energiává."
+    },
+    {
+      "question": "Melyik folyamat során használ fel a növény energiát?",
+      "answers": {
+        "a": "Fotoszintézis",
+        "b": "Párolgás",
+        "c": "Égés"
+      },
+      "correct": "a",
+      "explanation": "A fotoszintézis egy energiaigényes folyamat, amelyhez a növény a napfény energiáját használja fel, hogy szervetlen anyagokból szerves anyagokat építsen fel."
+    },
+    {
+      "question": "Mi az energia?",
+      "answers": {
+        "a": "A testek súlya.",
+        "b": "A testek munkavégző képessége.",
+        "c": "A testek hőmérséklete."
+      },
+      "correct": "b",
+      "explanation": "Az energia egy test vagy rendszer azon képességét jelenti, hogy kölcsönhatásain keresztül változást tud előidézni, azaz munkát tud végezni."
+    },
+    {
+      "question": "A Földön az energia végső soron...",
+      "answers": {
+        "a": "...a Föld magjából származik.",
+        "b": "...a Holdtól származik.",
+        "c": "...a Naptól származik."
+      },
+      "correct": "c",
+      "explanation": "Bár a geotermikus és a nukleáris energia a Föld belsejéből ered, az élethez, az időjáráshoz és a legtöbb általunk használt energiaformához szükséges energia a Napból érkezik."
+    },
+    {
+      "question": "Mi a fotoszintézis?",
+      "answers": {
+        "a": "A folyamat, amely során a zöld növények a napfény energiáját kémiai energiává (szerves anyaggá) alakítják.",
+        "b": "Az állatok légzése.",
+        "c": "A Föld felmelegedése."
+      },
+      "correct": "a",
+      "explanation": "A fotoszintézis során a növények a szén-dioxidból és a vízből a napfény energiájának segítségével cukrot és oxigént állítanak elő. Ezzel a Nap energiáját kémiai kötésekben raktározzák el."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Az energia átalakulhat egyik formájából a másikba.",
+        "b": "A fosszilis energiahordozók megújulók.",
+        "c": "Az élőlényeknek energiára van szükségük az életben maradáshoz."
+      },
+      "correct": "b",
+      "explanation": "Ez az állítás hamis. A fosszilis energiahordozók (szén, kőolaj, földgáz) készletei végesek és nem termelődnek újra emberi léptékkel."
+    },
+    {
+      "question": "Melyik folyamat során szabadul fel energia?",
+      "answers": {
+        "a": "Fotoszintézis",
+        "b": "Növekedés",
+        "c": "Légzés (biológiai oxidáció)"
+      },
+      "correct": "c",
+      "explanation": "A légzés során a sejtek 'elégetik' a tápanyagokat (pl. cukrot) oxigén segítségével, miközben a bennük tárolt kémiai energia felszabadul, és a szervezet ezt használja fel."
+    }
+  ]
 }

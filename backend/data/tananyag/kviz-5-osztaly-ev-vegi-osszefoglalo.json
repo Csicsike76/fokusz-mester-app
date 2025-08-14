@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz 5 osztaly ev vegi osszefoglalo\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mennyi a 10 + 5 * 2 művelet eredménye?",
+      "answers": {
+        "a": "20",
+        "b": "30",
+        "c": "25"
+      },
+      "correct": "a",
+      "explanation": "Műveleti sorrend: Először a szorzást, majd az összeadást végezzük el. Számolás: 5 * 2 = 10. Ezután 10 + 10 = 20."
+    },
+    {
+      "question": "Mennyi 360 perc órában kifejezve?",
+      "answers": {
+        "a": "6 óra",
+        "b": "3.6 óra",
+        "c": "36 óra"
+      },
+      "correct": "a",
+      "explanation": "Átváltás: Tudjuk, hogy 1 óra = 60 perc. A perceket el kell osztani 60-nal, hogy megkapjuk az órák számát: 360 / 60 = 6."
+    },
+    {
+      "question": "Melyik szám osztható 3-mal?",
+      "answers": {
+        "a": "123",
+        "b": "124",
+        "c": "125"
+      },
+      "correct": "a",
+      "explanation": "Oszthatósági szabály: Egy szám akkor osztható 3-mal, ha a számjegyeinek összege osztható 3-mal. Számolás: 1 + 2 + 3 = 6. Mivel a 6 osztható 3-mal, ezért a 123 is."
+    },
+    {
+      "question": "Egy téglalap oldalai 8 cm és 5 cm. Mennyi a kerülete?",
+      "answers": {
+        "a": "26 cm",
+        "b": "40 cm",
+        "c": "13 cm"
+      },
+      "correct": "a",
+      "explanation": "Képlet: A téglalap kerülete K = 2 * (a + b). Számolás: K = 2 * (8 + 5) = 2 * 13 = 26 cm."
+    },
+    {
+      "question": "Mennyi 200-nak a 3/4 része?",
+      "answers": {
+        "a": "150",
+        "b": "100",
+        "c": "75"
+      },
+      "correct": "a",
+      "explanation": "Levezetés: A számot el kell osztani a nevezővel (4), majd meg kell szorozni a számlálóval (3). Számolás: 200 / 4 = 50. Majd 50 * 3 = 150."
+    },
+    {
+      "question": "Kerekítsd a 478-at a legközelebbi százasra!",
+      "answers": {
+        "a": "500",
+        "b": "400",
+        "c": "480"
+      },
+      "correct": "a",
+      "explanation": "Szabály: Százasra kerekítéskor a tízes helyiértéket kell nézni. Ha 5 vagy annál nagyobb, felfelé kerekítünk. A 478-ban a tízesek helyén 7-es áll, ami nagyobb, mint 5, ezért felfelé kerekítünk."
+    },
+    {
+      "question": "Péternek van 2500 Ft-ja. Vásárol egy könyvet 1200 Ft-ért és egy füzetet 300 Ft-ért. Mennyi pénze marad?",
+      "answers": {
+        "a": "1000 Ft",
+        "b": "1300 Ft",
+        "c": "1200 Ft"
+      },
+      "correct": "a",
+      "explanation": "Kiadások összege: 1200 Ft + 300 Ft = 1500 Ft. Kivonás: 2500 Ft - 1500 Ft = 1000 Ft."
+    },
+    {
+      "question": "Melyik tört nagyobb: 3/5 vagy 4/5?",
+      "answers": {
+        "a": "4/5",
+        "b": "3/5",
+        "c": "Egyenlőek"
+      },
+      "correct": "a",
+      "explanation": "Szabály: Ha két törtnek azonos a nevezője, akkor az a nagyobb, amelyiknek a számlálója nagyobb. Mivel 4 > 3, ezért 4/5 > 3/5."
+    },
+    {
+      "question": "Mennyi 12.5 + 3.7?",
+      "answers": {
+        "a": "15.12",
+        "b": "16.2",
+        "c": "15.2"
+      },
+      "correct": "b",
+      "explanation": "Számolás: A tizedesvesszőket egymás alá írva, helyiérték szerint adjuk össze a számokat: 12,5 + 3,7 = 16,2."
+    },
+    {
+      "question": "Melyik szög a derékszög?",
+      "answers": {
+        "a": "A 180°-os",
+        "b": "A 90°-os",
+        "c": "A 45°-os"
+      },
+      "correct": "b",
+      "explanation": "Definíció: A derékszög az a szög, amelyik egyenes szöget (180°) két egyenlő részre oszt. A 90°-os szög a derékszög."
+    },
+    {
+      "question": "Hogyan írjuk le római számokkal a 4-et?",
+      "answers": {
+        "a": "IIII",
+        "b": "IV",
+        "c": "VI"
+      },
+      "correct": "b",
+      "explanation": "Kivonásos szabály: A római számírásban a kisebb érték a nagyobb elé írva kivonást jelent. Az 5 jele V, az 1 jele I. A 4-et úgy írjuk le, mint 5-1, azaz IV."
+    },
+    {
+      "question": "Mennyi 2.5 méter centiméterben?",
+      "answers": {
+        "a": "25 cm",
+        "b": "250 cm",
+        "c": "0.25 cm"
+      },
+      "correct": "b",
+      "explanation": "Átváltás: Tudjuk, hogy 1 méter = 100 centiméter. A méterben megadott értéket meg kell szorozni 100-zal: 2.5 * 100 = 250."
+    },
+    {
+      "question": "Melyik számra végződik a 125 * 10?",
+      "answers": {
+        "a": "5",
+        "b": "0",
+        "c": "1"
+      },
+      "correct": "b",
+      "explanation": "Szabály: Ha egy egész számot 10-zel szorzunk, az utolsó számjegye mindig 0 lesz. Számolás: 125 * 10 = 1250."
+    },
+    {
+      "question": "Mi a 7/10 tizedestört alakja?",
+      "answers": {
+        "a": "7.10",
+        "b": "0.7",
+        "c": "0.07"
+      },
+      "correct": "b",
+      "explanation": "Átváltás: A tizedestörtben a vessző utáni első hely a tizedek helye. A 7/10 azt jelenti, hogy 7 tizedünk van, amit 0,7-ként írunk le."
+    },
+    {
+      "question": "Egy 6 cm oldalú négyzetnek mennyi a területe?",
+      "answers": {
+        "a": "24 cm",
+        "b": "36 cm²",
+        "c": "12 cm²"
+      },
+      "correct": "b",
+      "explanation": "Képlet: A négyzet területe T = a * a = a². Számolás: T = 6 cm * 6 cm = 36 cm². A kerület lenne 24 cm."
+    },
+    {
+      "question": "Egy dobozban 12 ceruza van. Mennyi ceruza van 5 dobozban?",
+      "answers": {
+        "a": "17",
+        "b": "60",
+        "c": "52"
+      },
+      "correct": "b",
+      "explanation": "Művelet: A feladat megoldásához szoroznunk kell. Számolás: 12 * 5 = 60."
+    },
+    {
+      "question": "Melyik az egyenes szög?",
+      "answers": {
+        "a": "90°",
+        "b": "360°",
+        "c": "180°"
+      },
+      "correct": "c",
+      "explanation": "Definíció: Az egyenes szög egy egyenes két ellentétes félegyenese által bezárt szög. Mértéke 180°."
+    },
+    {
+      "question": "Mennyi 15.8 - 4.3?",
+      "answers": {
+        "a": "11.5",
+        "b": "1.15",
+        "c": "11.05"
+      },
+      "correct": "a",
+      "explanation": "Számolás: A tizedesvesszőket egymás alá írva, helyiérték szerint vonjuk ki a számokat: 15,8 - 4,3 = 11,5."
+    },
+    {
+      "question": "Melyik szám osztható 5-tel is és 10-zel is?",
+      "answers": {
+        "a": "15",
+        "b": "25",
+        "c": "40"
+      },
+      "correct": "c",
+      "explanation": "Szabály: Ha egy szám osztható 10-zel, akkor automatikusan osztható 5-tel is. A 10-zel oszthatósághoz 0-ra kell végződnie. A 40 osztható 10-zel (és így 5-tel is)."
+    },
+    {
+      "question": "Mennyi 2/7 + 3/7?",
+      "answers": {
+        "a": "5/14",
+        "b": "1/7",
+        "c": "5/7"
+      },
+      "correct": "c",
+      "explanation": "Szabály: Azonos nevezőjű törteket úgy adunk össze, hogy a számlálókat összeadjuk, a nevező pedig változatlan marad. Számolás: (2+3)/7 = 5/7."
+    },
+    {
+      "question": "Melyik a legnagyobb szám?",
+      "answers": {
+        "a": "9876",
+        "b": "10001",
+        "c": "9999"
+      },
+      "correct": "b",
+      "explanation": "Helyiérték: Először a számjegyek számát hasonlítjuk össze. A 10001 ötjegyű, a többi négyjegyű. Az ötjegyű szám mindig nagyobb, mint a négyjegyű."
+    },
+    {
+      "question": "Mennyi 5000 gramm kilogrammban?",
+      "answers": {
+        "a": "500 kg",
+        "b": "50 kg",
+        "c": "5 kg"
+      },
+      "correct": "c",
+      "explanation": "Átváltás: Tudjuk, hogy 1 kilogramm = 1000 gramm. A grammban megadott értéket el kell osztani 1000-rel: 5000 / 1000 = 5."
+    },
+    {
+      "question": "Egy buszon 45 utas van. Az első megállóban leszáll 12, felszáll 8. Hányan vannak a buszon?",
+      "answers": {
+        "a": "25",
+        "b": "33",
+        "c": "41"
+      },
+      "correct": "c",
+      "explanation": "1. lépés (leszállás): 45 - 12 = 33 utas marad. 2. lépés (felszállás): 33 + 8 = 41 utas lesz."
+    },
+    {
+      "question": "Melyik a prímszám?",
+      "answers": {
+        "a": "9",
+        "b": "1",
+        "c": "7"
+      },
+      "correct": "c",
+      "explanation": "Definíció: A prímszámok azok a természetes számok, amelyeknek pontosan két osztójuk van: 1 és önmaguk. A 9 osztható 3-mal is. Az 1-nek csak egy osztója van. A 7-nek csak az 1 és a 7 az osztója."
+    },
+    {
+      "question": "Mennyi (20 - 5) / 3?",
+      "answers": {
+        "a": "10",
+        "b": "15",
+        "c": "5"
+      },
+      "correct": "c",
+      "explanation": "Műveleti sorrend: Először a zárójelben lévő műveletet végezzük el. Számolás: 20 - 5 = 15. Ezután 15 / 3 = 5."
+    }
+  ]
 }

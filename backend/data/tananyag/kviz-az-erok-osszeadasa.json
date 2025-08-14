@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz az erok osszeadasa\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Ha egy tárgyra egy 12 N-os erő hat jobbra és egy 12 N-os erő hat balra, mekkora az eredő erő?",
+      "answers": {
+        "a": "0 N",
+        "b": "24 N jobbra",
+        "c": "12 N"
+      },
+      "correct": "a",
+      "explanation": "A két erő egyenlő nagyságú és pontosan ellentétes irányú. Ilyenkor a hatásuk kioltja egymást, a vektori összegük, azaz az eredő erő nulla."
+    },
+    {
+      "question": "Melyik módszer NEM alkalmas erők összeadására?",
+      "answers": {
+        "a": "Az erők nagyságának egyszerű, számtani összeadása (az irányok figyelmen kívül hagyásával).",
+        "b": "A paralelogramma-módszer.",
+        "c": "A háromszög-módszer (vektorok sorba rajzolása)."
+      },
+      "correct": "a",
+      "explanation": "Az erők vektorok, ezért az irányukat mindig figyelembe kell venni. A nagyságok egyszerű összeadása csak abban a speciális esetben ad helyes eredményt, ha az erők azonos irányúak."
+    },
+    {
+      "question": "Mi a háromszög-módszer az erők összeadásánál?",
+      "answers": {
+        "a": "A paralelogramma-módszer egy másik neve.",
+        "b": "A második vektort az első végpontjából indítjuk, az eredő az első kezdőpontjából a második végpontjába mutat.",
+        "c": "A vektorok hosszának átlagát vesszük."
+      },
+      "correct": "b",
+      "explanation": "A háromszög-módszer egy másik grafikus eljárás. Az első vektor végpontjához illesztjük a második vektor kezdőpontját. Az eredő vektor az első vektor kezdőpontját köti össze a második végpontjával, egy háromszöget bezárva."
+    },
+    {
+      "question": "Egy testre hat egy 15 N-os erő jobbra és egy 5 N-os erő balra. Mekkora és milyen irányú az eredő erő?",
+      "answers": {
+        "a": "20 N jobbra",
+        "b": "10 N jobbra",
+        "c": "10 N balra"
+      },
+      "correct": "b",
+      "explanation": "A két erő ellentétes irányú, ezért a nagyságukat kivonjuk: 15 N - 5 N = 10 N. Az eredő erő iránya a nagyobb erő (15 N) irányába, azaz jobbra mutat."
+    },
+    {
+      "question": "Hogyan adunk össze két, ellentétes irányú erőt?",
+      "answers": {
+        "a": "A nagyságukat összeadjuk.",
+        "b": "A nagyságukat kivonjuk egymásból, az irány a nagyobbé.",
+        "c": "Nem lehet összeadni őket."
+      },
+      "correct": "b",
+      "explanation": "Ha két erő ellentétes irányban hat, a hatásuk gyengíti egymást. Az eredő erő nagysága a két erő nagyságának különbsége, az iránya pedig a nagyobbik erő irányával egyezik meg."
+    },
+    {
+      "question": "Egy dobozt ketten tolnak előre. Az egyik 50 N, a másik 30 N erővel. Mekkora az eredő erő?",
+      "answers": {
+        "a": "80 N előre",
+        "b": "20 N előre",
+        "c": "80 N hátra"
+      },
+      "correct": "a",
+      "explanation": "Mivel mindkét erő azonos irányú (előre), az eredő erő nagysága a két erő nagyságának összege: 50 N + 30 N = 80 N. Az iránya is előre mutat."
+    },
+    {
+      "question": "Mi az eredő erő?",
+      "answers": {
+        "a": "Az egy testre ható összes erő vektori összege.",
+        "b": "A legnagyobb erő, ami a testre hat.",
+        "c": "Az erők számtani átlaga."
+      },
+      "correct": "a",
+      "explanation": "Az eredő erő az az egyetlen erő, amely ugyanazt a hatást fejti ki a testre, mint a rá ható erők együttesen. Az erők vektori összeadásával kapjuk meg, figyelembe véve a nagyságukat és irányukat is."
+    },
+    {
+      "question": "Egy csónak kel át a folyón, a partra merőlegesen 3 m/s sebességgel. A folyó 4 m/s sebességgel sodorja. Mekkora a csónak eredő sebessége a parthoz képest?",
+      "answers": {
+        "a": "7 m/s",
+        "b": "1 m/s",
+        "c": "5 m/s"
+      },
+      "correct": "c",
+      "explanation": "A két sebességvektor egymásra merőleges. Az eredő sebesség nagyságát a Pitagorasz-tétellel számíthatjuk ki: 3*3 + 4*4 = 9 + 16 = 25. Az eredő sebesség nagysága ennek a gyöke, azaz 5 m/s."
+    },
+    {
+      "question": "Egy asztalon lévő könyvre ható erők eredője nulla. Mit jelent ez?",
+      "answers": {
+        "a": "A könyv lebegni fog.",
+        "b": "Az asztal összeomlik.",
+        "c": "A könyv nyugalomban marad az asztalon."
+      },
+      "correct": "c",
+      "explanation": "A nulla eredő erő azt jelenti, hogy a könyv mozgásállapota nem változik. Mivel eredetileg nyugalomban volt, továbbra is nyugalomban marad."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Az eredő erő iránya a mozgásváltozás iránya.",
+        "b": "Az eredő erő nulla, ha a test nyugalomban van.",
+        "c": "Az eredő erő mindig a mozgás irányába mutat."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. Például egy fékező autónál a mozgás előre irányul, de a fékezőerő (és így az eredő erő is) hátrafelé. Az eredő erő iránya a gyorsulás (sebességváltozás) irányával egyezik meg."
+    },
+    {
+      "question": "Mikor lesz az eredő erő nulla?",
+      "answers": {
+        "a": "Ha a testre ható erők kiegyenlítik egymást.",
+        "b": "Ha a test nyugalomban van.",
+        "c": "Ha a test mozog."
+      },
+      "correct": "a",
+      "explanation": "Az eredő erő akkor nulla, ha a testre ható erők vektori összege nulla. Ez azt jelenti, hogy az erők hatásai pont kioltják egymást, azaz kiegyenlítik egymást. Ez bekövetkezhet nyugalomban és egyenletes mozgás közben is."
+    },
+    {
+      "question": "Ha egy testre ható erők nincsenek egy egyenesben, az eredő erőt...",
+      "answers": {
+        "a": "...nem lehet meghatározni.",
+        "b": "...a nagyságok összeadásával kapjuk meg.",
+        "c": "...a paralelogramma-módszerrel szerkeszthetjük meg."
+      },
+      "correct": "c",
+      "explanation": "Amennyiben az erők szöget zárnak be egymással, a paralelogramma-szabály egy helyes grafikus módszer az eredő erő nagyságának és irányának a meghatározására."
+    },
+    {
+      "question": "Mikor NEM lehet két erő eredője nulla?",
+      "answers": {
+        "a": "Ha az erők egyenlő nagyságúak és ellentétes irányúak.",
+        "b": "Ha az erők azonos irányúak és egyik sem nulla.",
+        "c": "Ha a test nyugalomban van."
+      },
+      "correct": "b",
+      "explanation": "Ha két erő azonos irányú, az eredőjük nagysága mindig a két erő nagyságának összege. Ha egyik erő sem nulla, az összegük sem lehet nulla."
+    },
+    {
+      "question": "Miért kell figyelembe venni az erők irányát az összeadáskor?",
+      "answers": {
+        "a": "Valójában nem kell.",
+        "b": "Mert az erő vektormennyiség.",
+        "c": "Mert a mértékegysége megköveteli."
+      },
+      "correct": "b",
+      "explanation": "Az erő vektormennyiség, ami azt jelenti, hogy az iránya ugyanolyan fontos tulajdonsága, mint a nagysága. Az irány figyelmen kívül hagyása hibás eredményhez vezetne az eredő erő meghatározásakor."
+    },
+    {
+      "question": "Hogyan adunk össze két, azonos irányú erőt?",
+      "answers": {
+        "a": "A nagyságukat összeadjuk, az irányuk változatlan.",
+        "b": "A nagyságukat kivonjuk, az irányuk a nagyobbé.",
+        "c": "A paralelogramma-szabályt használjuk."
+      },
+      "correct": "a",
+      "explanation": "Ha két erő egy irányba hat, a hatásuk erősíti egymást. Az eredő erő nagysága a két erő nagyságának összege, az iránya pedig megegyezik az eredeti erők irányával."
+    },
+    {
+      "question": "Mi a neve annak a módszernek, amivel két, nem egy egyenesbe eső erőt összegzünk?",
+      "answers": {
+        "a": "Paralelogramma-módszer",
+        "b": "Pitagorasz-tétel",
+        "c": "Skaláris összeadás"
+      },
+      "correct": "a",
+      "explanation": "Ha két erő egy pontból, de különböző irányokba hat, az eredőjüket a két erővektorra feszített paralelogramma átlója adja meg. Ezt a grafikus szerkesztési eljárást nevezzük paralelogramma-módszernek."
+    },
+    {
+      "question": "Egy testre két erő hat. Mikor lesz az eredő erejük a legkisebb?",
+      "answers": {
+        "a": "Ha azonos irányúak.",
+        "b": "Ha merőlegesek egymásra.",
+        "c": "Ha ellentétes irányúak."
+      },
+      "correct": "c",
+      "explanation": "Két erő eredője akkor a legkisebb, ha a hatásuk a leginkább kioltja egymást. Ez akkor történik, ha ellentétes irányúak. Ekkor az eredő nagysága a két nagyság különbsége."
+    },
+    {
+      "question": "Ha egy testre ható erők eredője nem nulla, akkor a test...",
+      "answers": {
+        "a": "...nyugalomban marad.",
+        "b": "...gyorsuló mozgást végez.",
+        "c": "...egyenletes mozgást végez."
+      },
+      "correct": "b",
+      "explanation": "A dinamika alaptörvénye (Newton II.) szerint, ha egy testre eredő erő hat, akkor a test mozgásállapota megváltozik, azaz gyorsulni fog."
+    },
+    {
+      "question": "Egy repülőgépet 4000 N vonóerő hajt előre, és összesen 4000 N fékezőerő (légellenállás) hat rá. Hogyan mozog a gép?",
+      "answers": {
+        "a": "Gyorsul.",
+        "b": "Egyenes vonalú egyenletes mozgással halad.",
+        "c": "Lassul."
+      },
+      "correct": "b",
+      "explanation": "Az előre ható 4000 N és a hátrafelé ható 4000 N erő eredője nulla. Ha az eredő erő nulla, a test mozgásállapota nem változik, tehát egyenes vonalú egyenletes mozgást végez."
+    },
+    {
+      "question": "Egy ládát két ember emel, mindketten 100-100 N függőlegesen felfelé irányuló erővel. Mekkora az eredő emelőerő?",
+      "answers": {
+        "a": "100 N",
+        "b": "200 N",
+        "c": "0 N"
+      },
+      "correct": "b",
+      "explanation": "A két emelőerő azonos irányú (felfelé), ezért a nagyságukat egyszerűen összeadjuk: 100 N + 100 N = 200 N."
+    },
+    {
+      "question": "Két, egymásra merőleges, 6 N és 8 N nagyságú erő eredője mekkora?",
+      "answers": {
+        "a": "10 N",
+        "b": "14 N",
+        "c": "2 N"
+      },
+      "correct": "a",
+      "explanation": "Merőleges erők esetén az eredő erő nagyságát a Pitagorasz-tétellel számolhatjuk. A két erő a derékszögű háromszög befogói, az eredő az átfogó. 6*6 + 8*8 = 36 + 64 = 100. Az eredő erő nagysága ennek a gyöke, azaz 10 N."
+    },
+    {
+      "question": "Mi történik, ha egy testre egyetlen erő hat?",
+      "answers": {
+        "a": "A test nyugalomban marad.",
+        "b": "A test egyenletesen mozog.",
+        "c": "A test az erő irányában gyorsul."
+      },
+      "correct": "c",
+      "explanation": "Ha csak egy erő hat, akkor az egyben az eredő erő is. Ha az eredő erő nem nulla, akkor a test gyorsuló mozgást végez az erő irányában."
+    },
+    {
+      "question": "Egy hajót a folyó 3 m/s sebességgel sodor, a hajó motorja pedig 4 m/s sebességgel hajtja a folyásiránnyal megegyező irányba. Mekkora a hajó sebessége a parthoz képest?",
+      "answers": {
+        "a": "1 m/s",
+        "b": "7 m/s",
+        "c": "5 m/s"
+      },
+      "correct": "b",
+      "explanation": "Mivel a két sebességvektor azonos irányú, a nagyságuk összeadódik. A hajó eredő sebessége a parthoz képest 3 m/s + 4 m/s = 7 m/s."
+    },
+    {
+      "question": "Egy testre két erő hat. Mikor lesz az eredő erejük a legnagyobb?",
+      "answers": {
+        "a": "Ha merőlegesek egymásra.",
+        "b": "Ha ellentétes irányúak.",
+        "c": "Ha azonos irányúak."
+      },
+      "correct": "c",
+      "explanation": "Két erő eredője akkor a legnagyobb, ha a hatásuk maximálisan összeadódik, ez pedig akkor történik, ha azonos irányba hatnak. Ekkor az eredő nagysága a két nagyság összege."
+    },
+    {
+      "question": "Egy testre ható erőket...",
+      "answers": {
+        "a": "...mindig számtanilag kell összeadni.",
+        "b": "...soha nem lehet összeadni.",
+        "c": "...vektorilag kell összeadni."
+      },
+      "correct": "c",
+      "explanation": "Mivel az erő vektormennyiség, az összegzésüknél a vektoriális összeadás szabályait kell alkalmazni, ami figyelembe veszi az erők nagyságát és irányát is."
+    }
+  ]
 }

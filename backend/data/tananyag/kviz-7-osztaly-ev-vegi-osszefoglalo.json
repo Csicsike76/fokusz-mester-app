@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz 7 osztaly ev vegi osszefoglalo\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Egy derékszögű háromszög befogói 5 cm és 12 cm. Milyen hosszú az átfogója?",
+      "answers": {
+        "a": "17 cm",
+        "b": "13 cm",
+        "c": "7 cm"
+      },
+      "correct": "b",
+      "explanation": "Alkalmazzuk a Pitagorasz-tételt: a² + b² = c². Behelyettesítve: 5² + 12² = 25 + 144 = 169. Az átfogó (c) a gyökvonás után: √169 = 13 cm."
+    },
+    {
+      "question": "Mi a (2x - 3y) + (x + 5y) algebrai kifejezés összevont alakja?",
+      "answers": {
+        "a": "3x + 2y",
+        "b": "3x + 8y",
+        "c": "2x + 8y"
+      },
+      "correct": "a",
+      "explanation": "Vonjuk össze az egynemű tagokat. Az x-es tagok összege: 2x + x = 3x. Az y-os tagok összege: -3y + 5y = 2y. A végeredmény tehát 3x + 2y."
+    },
+    {
+      "question": "Egy kör átmérője 20 cm. Mekkora a kerülete?",
+      "answers": {
+        "a": "10π cm",
+        "b": "20π cm",
+        "c": "100π cm"
+      },
+      "correct": "b",
+      "explanation": "A kör kerületének képlete átmérővel (d): K = d * π. Behelyettesítve: K = 20 * π = 20π cm."
+    },
+    {
+      "question": "Melyik szám normálalakja 3,45 * 10³?",
+      "answers": {
+        "a": "345",
+        "b": "0,0345",
+        "c": "3450"
+      },
+      "correct": "c",
+      "explanation": "A 10³ azt jelenti, hogy 1000-rel kell szorozni, ami a tizedesvessző 3 hellyel való jobbra mozgatását jelenti: 3,45 -> 34,5 -> 345,0 -> 3450."
+    },
+    {
+      "question": "Két hasonló háromszög hasonlósági aránya 2. A kisebbik területe 15 cm². Mekkora a nagyobbik területe?",
+      "answers": {
+        "a": "30 cm²",
+        "b": "60 cm²",
+        "c": "150 cm²"
+      },
+      "correct": "b",
+      "explanation": "A területek aránya a hasonlóság arányának négyzetével (k²) egyenlő. Itt k=2, tehát k²=4. A nagyobbik területe a kisebbik területének 4-szerese: 15 cm² * 4 = 60 cm²."
+    },
+    {
+      "question": "Mi az x² * x³ művelet eredménye?",
+      "answers": {
+        "a": "x⁵",
+        "b": "x⁶",
+        "c": "2x⁵"
+      },
+      "correct": "a",
+      "explanation": "Azonos alapú hatványok szorzásakor a kitevőket összeadjuk. Így x² * x³ = x²⁺³ = x⁵."
+    },
+    {
+      "question": "Egy 60°-os középponti szöghöz mekkora kerületi szög tartozik ugyanazon az íven?",
+      "answers": {
+        "a": "60°",
+        "b": "120°",
+        "c": "30°"
+      },
+      "correct": "c",
+      "explanation": "A kerületi és középponti szögek tétele szerint a kerületi szög feleakkora, mint a hozzá tartozó középponti szög. Tehát 60° / 2 = 30°."
+    },
+    {
+      "question": "Mekkora egy szabályos hatszög egy belső szöge?",
+      "answers": {
+        "a": "108°",
+        "b": "120°",
+        "c": "60°"
+      },
+      "correct": "b",
+      "explanation": "A szabályos n-szög egy belső szögének képlete: (n-2)*180°/n. Hatszög esetén n=6. (6-2)*180°/6 = 4*180°/6 = 720°/6 = 120°."
+    },
+    {
+      "question": "Mit állít Thalész tétele?",
+      "answers": {
+        "a": "Minden derékszögű háromszög köré írható kör.",
+        "b": "A kör átmérője feletti kerületi szög mindig derékszög (90°).",
+        "c": "a²+b²=c²"
+      },
+      "correct": "b",
+      "explanation": "Thalész tétele a kör átmérője és a körvonal egy tetszőleges (az átmérő végpontjaitól különböző) pontja által alkotott háromszögről szól, és kimondja, hogy ez a háromszög mindig derékszögű."
+    },
+    {
+      "question": "Egy derékszögű háromszög átfogója 25, egyik befogója 7. Mekkora a másik befogó?",
+      "answers": {
+        "a": "24",
+        "b": "18",
+        "c": "√576"
+      },
+      "correct": "a",
+      "explanation": "A Pitagorasz-tétel átrendezve: b² = c² - a². Behelyettesítve: b² = 25² - 7² = 625 - 49 = 576. A másik befogó hossza: b = √576 = 24."
+    },
+    {
+      "question": "Hogyan írjuk fel az 'egy szám ötszörösénél 3-mal kisebb számot' algebrai kifejezéssel?",
+      "answers": {
+        "a": "5x - 3",
+        "b": "3x - 5",
+        "c": "5(x-3)"
+      },
+      "correct": "a",
+      "explanation": "Ha a szám 'x', akkor az ötszöröse 5x. Ennél 3-mal kisebb, tehát 5x - 3."
+    },
+    {
+      "question": "Egy 5 cm sugarú kör területe...",
+      "answers": {
+        "a": "10π cm²",
+        "b": "25π cm²",
+        "c": "5π cm²"
+      },
+      "correct": "b",
+      "explanation": "A kör területének képlete T = r² * π. Behelyettesítve: T = 5² * π = 25π cm²."
+    },
+    {
+      "question": "Mi az (x³)⁴ művelet eredménye?",
+      "answers": {
+        "a": "x⁷",
+        "b": "x⁸¹",
+        "c": "x¹²"
+      },
+      "correct": "c",
+      "explanation": "Hatvány hatványozásakor a kitevőket összeszorozzuk. Így (x³)⁴ = x³*⁴ = x¹²."
+    },
+    {
+      "question": "Melyik szám normálalak?",
+      "answers": {
+        "a": "12 * 10³",
+        "b": "5,67 * 10⁻⁴",
+        "c": "0,5 * 10⁶"
+      },
+      "correct": "b",
+      "explanation": "A normálalak feltétele, hogy az első szorzótényező abszolút értéke 1 és 10 közé essen (1-et beleértve). A 12 és a 0,5 nem felel meg ennek, az 5,67 viszont igen."
+    },
+    {
+      "question": "Egy derékszögű háromszög α szögével szemközti befogó 6, az átfogó 10. Mi a sin(α)?",
+      "answers": {
+        "a": "6/10 = 0,6",
+        "b": "8/10 = 0,8",
+        "c": "6/8 = 0,75"
+      },
+      "correct": "a",
+      "explanation": "A szinusz definíciója egy derékszögű háromszögben: sin(α) = (szöggel szemközti befogó) / (átfogó). Tehát sin(α) = 6 / 10 = 0,6."
+    },
+    {
+      "question": "Egy húrnégyszög egyik szöge 110°. Mekkora a vele szemközti szög?",
+      "answers": {
+        "a": "110°",
+        "b": "70°",
+        "c": "250°"
+      },
+      "correct": "b",
+      "explanation": "A húrnégyszögek tétele szerint a szemközti szögek összege mindig 180°. Így a keresett szög: 180° - 110° = 70°."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Minden négyzet rombusz.",
+        "b": "Minden trapéz paralelogramma.",
+        "c": "Minden téglalap húrnégyszög."
+      },
+      "correct": "b",
+      "explanation": "A trapéznak csak egy pár párhuzamos oldala van, míg a paralelogrammának kettő. Tehát nem minden trapéz paralelogramma. A többi állítás igaz."
+    },
+    {
+      "question": "Egy áru ára 20% áfával 1200 Ft. Mennyi az áfa nélküli, nettó ár?",
+      "answers": {
+        "a": "960 Ft",
+        "b": "1000 Ft",
+        "c": "1440 Ft"
+      },
+      "correct": "b",
+      "explanation": "A 1200 Ft a 120%-os (1,2-szeres) ár. A nettó (100%-os) árat úgy kapjuk meg, ha a bruttó árat elosztjuk 1,2-del: 1200 / 1,2 = 1000 Ft."
+    },
+    {
+      "question": "Mi az 5x - (3x - 2) kifejezés egyszerűbb alakja?",
+      "answers": {
+        "a": "2x - 2",
+        "b": "2x + 2",
+        "c": "8x - 2"
+      },
+      "correct": "b",
+      "explanation": "Felbontjuk a zárójelet. Mivel előtte kivonásjel van, a zárójelen belüli tagok előjele megváltozik: 5x - 3x + 2. Az egynemű tagok összevonása után: 2x + 2."
+    },
+    {
+      "question": "Egy 10 cm sugarú körbe írt szabályos hatszög kerülete...",
+      "answers": {
+        "a": "30 cm",
+        "b": "60 cm",
+        "c": "10π cm"
+      },
+      "correct": "b",
+      "explanation": "A szabályos hatszög oldalhossza megegyezik a köré írt kör sugarával, tehát az oldalhossz 10 cm. A hatszögnek 6 oldala van, így a kerülete: K = 6 * 10 = 60 cm."
+    },
+    {
+      "question": "Egy derékszögű háromszög átfogóhoz tartozó magassága az átfogót 4 és 9 cm-es szakaszokra bontja. Milyen magas a háromszög?",
+      "answers": {
+        "a": "13 cm",
+        "b": "6 cm",
+        "c": "36 cm"
+      },
+      "correct": "b",
+      "explanation": "Alkalmazzuk a magasságtételt, ami kimondja, hogy m² = p * q, ahol p és q az átfogó két szelete. Így m² = 4 * 9 = 36. A magasság tehát m = √36 = 6 cm."
+    },
+    {
+      "question": "Melyik az x / 3 = 12 egyenlet megoldása?",
+      "answers": {
+        "a": "4",
+        "b": "36",
+        "c": "9"
+      },
+      "correct": "b",
+      "explanation": "Az egyenletet úgy oldjuk meg, hogy mindkét oldalt beszorozzuk 3-mal, hogy x egyedül maradjon. Így x = 12 * 3 = 36."
+    },
+    {
+      "question": "Melyik állítás igaz a fordított arányosságra?",
+      "answers": {
+        "a": "Ha az egyik mennyiség nő, a másik is nő.",
+        "b": "A két mennyiség szorzata állandó.",
+        "c": "A két mennyiség összege állandó."
+      },
+      "correct": "b",
+      "explanation": "A fordított arányosság definíciója, hogy amíg az egyik mennyiség valahányszorosára nő, a másik ugyanannyiad részére csökken. Ebből következik, hogy a két összetartozó érték szorzata mindig állandó (x * y = k)."
+    },
+    {
+      "question": "Mi az 5⁻² értéke?",
+      "answers": {
+        "a": "-25",
+        "b": "-10",
+        "c": "1/25"
+      },
+      "correct": "c",
+      "explanation": "A negatív kitevő a szám reciprokát jelenti a pozitív kitevővel. Tehát a⁻ⁿ = 1/aⁿ. Így 5⁻² = 1 / 5² = 1 / 25."
+    },
+    {
+      "question": "Egy 2000 Ft-os termék árát 10%-kal csökkentik. Mennyi lesz az új ár?",
+      "answers": {
+        "a": "1800 Ft",
+        "b": "2200 Ft",
+        "c": "200 Ft"
+      },
+      "correct": "a",
+      "explanation": "Először kiszámoljuk a 10%-os kedvezményt: 2000 * 0,10 = 200 Ft. Ezt kivonjuk az eredeti árból: 2000 - 200 = 1800 Ft."
+    }
+  ]
 }

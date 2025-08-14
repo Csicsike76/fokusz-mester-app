@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz egyenes sik helyzete\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik NEM lehet egy egyenes és egy sík kölcsönös helyzete?",
+      "answers": {
+        "a": "kitérő",
+        "b": "párhuzamos",
+        "c": "metsző"
+      },
+      "correct": "a",
+      "explanation": "A 'kitérő' helyzetet két egyenes viszonyára használjuk, amelyek nincsenek egy síkban. Egy egyenes és egy sík viszonyában ilyen eset nem létezik. Vagy metszi, vagy párhuzamos vele, vagy rajta fekszik."
+    },
+    {
+      "question": "Hány közös pontja van egy síknak és egy rá illeszkedő egyenesnek?",
+      "answers": {
+        "a": "1",
+        "b": "végtelen sok",
+        "c": "0"
+      },
+      "correct": "b",
+      "explanation": "Ha az egyenes illeszkedik a síkra, az azt jelenti, hogy minden pontja a síknak is pontja. Mivel egy egyenes végtelen sok pontból áll, ezért végtelen sok közös pontjuk van."
+    },
+    {
+      "question": "Két különböző, egymással párhuzamos egyenes meghatároz...",
+      "answers": {
+        "a": "egy pontot.",
+        "b": "egy síkot.",
+        "c": "egy testet."
+      },
+      "correct": "b",
+      "explanation": "Ez a síkmeghatározás egyik alapesete. A két párhuzamos egyenesre mindig rá lehet fektetni egy és csakis egy síkot."
+    },
+    {
+      "question": "Egy kocka felső lapjának egyik éle milyen helyzetben van az alsó lap síkjával?",
+      "answers": {
+        "a": "párhuzamos",
+        "b": "metsző",
+        "c": "illeszkedő"
+      },
+      "correct": "a",
+      "explanation": "A kocka alsó és felső lapja párhuzamos síkok. A felső lapon lévő él soha nem fogja metszeni az alsó lap síkját, tehát párhuzamos vele."
+    },
+    {
+      "question": "Hány, egymással párhuzamos síkpárja van egy téglatestnek?",
+      "answers": {
+        "a": "6",
+        "b": "3",
+        "c": "12"
+      },
+      "correct": "b",
+      "explanation": "Egy téglatestet 6 lap határol. Ezek párokba rendezhetők. Van egy alsó-felső pár, egy első-hátsó pár és egy jobb-bal oldali pár. Ez összesen 3 párhuzamos síkpár."
+    },
+    {
+      "question": "Melyik állítás igaz a térben?",
+      "answers": {
+        "a": "Ha két egyenes merőleges egy harmadikra, akkor párhuzamosak.",
+        "b": "Ha két egyenes nem metszi egymást, akkor párhuzamosak.",
+        "c": "Ha egy egyenes merőleges két metsző egyenesre, akkor merőleges a síkjukra is."
+      },
+      "correct": "c",
+      "explanation": "Az 'a' és 'b' állítás a térben nem igaz a kitérő helyzet miatt. A 'c' állítás a síkra való merőlegesség egyik fontos tétele."
+    },
+    {
+      "question": "Egy szoba mennyezete és padlója...",
+      "answers": {
+        "a": "metsző síkok.",
+        "b": "párhuzamos síkok.",
+        "c": "azonos síkok."
+      },
+      "correct": "b",
+      "explanation": "A mennyezet és a padló soha nem találkoznak (ideális esetben). A távolságuk mindenhol ugyanannyi. Ez a párhuzamos síkok definíciója."
+    },
+    {
+      "question": "Egy kocka lapátlója milyen helyzetű a szemközti, vele párhuzamos lappal?",
+      "answers": {
+        "a": "illeszkedő",
+        "b": "párhuzamos",
+        "c": "metsző"
+      },
+      "correct": "b",
+      "explanation": "Az átló az egyik síkon fekszik. A másik sík párhuzamos ezzel a síkkal. Mivel a síkok párhuzamosak, az egyik síkon lévő egyenes soha nem metszheti a másik síkot."
+    },
+    {
+      "question": "Mi a metszete egy kockának és egy síknak, ami átmegy a kocka középpontján?",
+      "answers": {
+        "a": "mindig négyzet",
+        "b": "lehet háromszög, négyszög, hatszög",
+        "c": "mindig kör"
+      },
+      "correct": "b",
+      "explanation": "A vágás síkjától függően a metszetfelület lehet háromszög (ha egy sarkot vágunk le), négyszög (ha párhuzamosan vágunk egy lappal), vagy akár hatszög is (ha ferdén vágjuk)."
+    },
+    {
+      "question": "Hány közös pontja van egy síknak és egy vele párhuzamos egyenesnek?",
+      "answers": {
+        "a": "1",
+        "b": "végtelen sok",
+        "c": "0"
+      },
+      "correct": "c",
+      "explanation": "A párhuzamosság definíciója szerint az egyenes és a sík soha nem találkoznak. Ha nincs találkozási pont, akkor a közös pontok száma nulla."
+    },
+    {
+      "question": "Egy asztalon fekvő ceruza milyen helyzetben van az asztal lapjával (a síkkal)?",
+      "answers": {
+        "a": "párhuzamos",
+        "b": "metsző",
+        "c": "illeszkedő"
+      },
+      "correct": "c",
+      "explanation": "A ceruza az asztal lapján fekszik. Ez azt jelenti, hogy a ceruza által reprezentált egyenes minden pontja rajta van az asztal síkján."
+    },
+    {
+      "question": "Egy szék lába merőleges a padlóra. Ez azt jelenti, hogy a láb egyenese...",
+      "answers": {
+        "a": "...párhuzamos a padló síkjával.",
+        "b": "...metszi a padló síkját.",
+        "c": "...illeszkedik a padló síkjára."
+      },
+      "correct": "b",
+      "explanation": "A merőlegesség a metszés egy speciális esete, ahol a metszéspontnál a szög 90°. Tehát ha merőleges, akkor mindenképpen metszi is a síkot."
+    },
+    {
+      "question": "Hogy nevezzük azt az esetet, amikor egy egyenes minden pontja a síkon van?",
+      "answers": {
+        "a": "az egyenes illeszkedik a síkra",
+        "b": "az egyenes metszi a síkot",
+        "c": "az egyenes kitérő a síkhoz"
+      },
+      "correct": "a",
+      "explanation": "Ha az egyenes minden pontja a síknak is pontja, akkor végtelen sok közös pontjuk van. Ezt a helyzetet illeszkedésnek nevezzük."
+    },
+    {
+      "question": "Melyik az a helyzet, amikor egy egyenesnek és egy síknak PONTOSAN egy közös pontja van?",
+      "answers": {
+        "a": "illeszkedő",
+        "b": "metsző",
+        "c": "párhuzamos"
+      },
+      "correct": "b",
+      "explanation": "A három lehetséges helyzetet vizsgáljuk. A párhuzamosnak 0, az illeszkedőnek végtelen sok közös pontja van. A metsző az az eset, amikor az egyenes átdöfi a síkot, létrehozva egyetlen metszéspontot."
+    },
+    {
+      "question": "Hány egyenes fektethető át egy ponton, ami párhuzamos egy adott síkkal?",
+      "answers": {
+        "a": "egy",
+        "b": "kettő",
+        "c": "végtelen sok"
+      },
+      "correct": "c",
+      "explanation": "Képzeld el az asztal lapját (a síkot) és egy pontot felette. Ebben a pontban bármilyen irányba húzhatsz egy, az asztallal párhuzamos egyenest. Ezek az egyenesek egy, az asztallal párhuzamos síkot határoznak meg."
+    },
+    {
+      "question": "Ha egy e egyenes párhuzamos egy S síkkal, akkor...",
+      "answers": {
+        "a": "e minden, az S síkban fekvő egyenessel párhuzamos.",
+        "b": "e a sík minden egyenesét metszi.",
+        "c": "e párhuzamos a sík végtelen sok egyenesével."
+      },
+      "correct": "c",
+      "explanation": "A plafonnal párhuzamosan tartott ceruza nem lesz párhuzamos a plafonon húzott összes egyenessel. De biztosan találsz a plafonon végtelen sok olyan egyenest, amikkel a ceruzád is párhuzamos lesz."
+    },
+    {
+      "question": "Egy kocka lapátlója milyen helyzetű azzal a lappal, amelyen fekszik?",
+      "answers": {
+        "a": "illeszkedő",
+        "b": "párhuzamos",
+        "c": "metsző"
+      },
+      "correct": "a",
+      "explanation": "A lapátló a kocka egyik lapjának két szemközti csúcsát köti össze. Mivel minden pontja is a lapon van, ezért az átló illeszkedik a lap síkjára."
+    },
+    {
+      "question": "Egy kocka egyik függőleges éle milyen helyzetű az alaplap síkjával?",
+      "answers": {
+        "a": "merőlegesen metszi",
+        "b": "párhuzamos vele",
+        "c": "illeszkedik rá"
+      },
+      "correct": "a",
+      "explanation": "A függőleges él a kocka egyik alsó csúcsában találkozik az alaplappal, tehát metszi azt. Mivel az él függőleges, az alaplap pedig vízszintes, a metszés merőleges."
+    },
+    {
+      "question": "Egy függőlegesen álló zászlórúd milyen helyzetben van a vízszintes talaj síkjával?",
+      "answers": {
+        "a": "párhuzamos",
+        "b": "merőlegesen metszi",
+        "c": "illeszkedik rá"
+      },
+      "correct": "b",
+      "explanation": "A zászlórúd 'átdöfi' a talajt egy pontban, tehát metszi azt. Mivel a rúd függőleges a vízszintes talajra, a metszéspontnál derékszöget zárnak be, tehát a metszés merőleges."
+    },
+    {
+      "question": "Egy síkban fekvő A, B, C pontok milyen síkot határoznak meg?",
+      "answers": {
+        "a": "Pontosan egyet, ha nincsenek egy egyenesen.",
+        "b": "Pontosan egyet, ha egy egyenesen vannak.",
+        "c": "Soha nem határoznak meg síkot."
+      },
+      "correct": "a",
+      "explanation": "A sík meghatározásának egyik alapesete három pont. A feltétel az, hogy a három pont ne legyen egy egyenesen, különben végtelen sok síkot lehetne rajtuk átfektetni."
+    },
+    {
+      "question": "A szoba falának függőleges éle és a mennyezet síkja milyen helyzetűek?",
+      "answers": {
+        "a": "metszők",
+        "b": "párhuzamosak",
+        "c": "illeszkedők"
+      },
+      "correct": "a",
+      "explanation": "A fal függőleges éle felér a mennyezetig. A sarokban, ahol a fal és a mennyezet találkozik, van egy közös pontjuk. Tehát metszik egymást."
+    },
+    {
+      "question": "Mit jelent, ha egy egyenes merőleges egy síkra?",
+      "answers": {
+        "a": "A sík minden egyenesével párhuzamos.",
+        "b": "A síkot 90°-ban metszi és a sík minden, a metszésponton átmenő egyenesére merőleges.",
+        "c": "A sík felett lebeg."
+      },
+      "correct": "b",
+      "explanation": "A síkra merőlegesség egy nagyon szigorú feltétel. Az egyenesnek a sík ÖSSZES, a döfésponton áthaladó egyenesére merőlegesnek kell lennie."
+    },
+    {
+      "question": "Ha egy egyenes párhuzamos egy, a síkban lévő egyenessel, akkor az egyenes...",
+      "answers": {
+        "a": "biztosan metszi a síkot.",
+        "b": "párhuzamos a síkkal vagy illeszkedik rá.",
+        "c": "biztosan merőleges a síkra."
+      },
+      "correct": "b",
+      "explanation": "Ez a párhuzamosság egyik fontos tétele. Ha az egyenes párhuzamos egy síkbeli egyenessel, akkor nem döfheti át a síkot. Két eset lehetséges: vagy 'elcsúszik' a sík felett (párhuzamos), vagy ő maga is a síkon van (illeszkedő)."
+    },
+    {
+      "question": "Mi a neve annak az egyenesnek és síknak, amiknek végtelen sok közös pontjuk van?",
+      "answers": {
+        "a": "merőlegesek",
+        "b": "párhuzamosak",
+        "c": "illeszkedők"
+      },
+      "correct": "c",
+      "explanation": "A végtelen sok közös pont azt jelenti, hogy az egyenes teljes egészében a sík része. Ezt a helyzetet illeszkedésnek nevezzük."
+    },
+    {
+      "question": "Egy repülőgép száll fel a kifutópályáról. Milyen helyzetben van a géptörzs egyenese a föld síkjával?",
+      "answers": {
+        "a": "párhuzamos",
+        "b": "illeszkedő",
+        "c": "metsző"
+      },
+      "correct": "c",
+      "explanation": "Felszállás közben a gép emelkedik, tehát távolodik a föld síkjától. Mivel nem párhuzamosan halad a földdel, a vonala metszi a föld síkját (ha meghosszabbítanánk)."
+    }
+  ]
 }

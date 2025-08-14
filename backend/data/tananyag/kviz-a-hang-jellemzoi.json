@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz a hang jellemzoi\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi hozza létre a hangot?",
+      "answers": {
+        "a": "A fény.",
+        "b": "A testek rezgése.",
+        "c": "A csend."
+      },
+      "correct": "b",
+      "explanation": "A hang akkor keletkezik, amikor egy test vagy anyag rezgőmozgást végez, és ez a rezgés a környező közegben (pl. levegőben) továbbterjed."
+    },
+    {
+      "question": "Mi határozza meg a hang magasságát (azt, hogy mélynek vagy magasnak halljuk)?",
+      "answers": {
+        "a": "A rezgés frekvenciája.",
+        "b": "A rezgés erőssége.",
+        "c": "A levegő hőmérséklete."
+      },
+      "correct": "a",
+      "explanation": "A hang magassága a rezgés sebességétől, azaz a frekvenciától függ. A gyors rezgés (magas frekvencia) magas hangot, a lassú rezgés (alacsony frekvencia) mély hangot eredményez."
+    },
+    {
+      "question": "Mi a frekvencia mértékegysége?",
+      "answers": {
+        "a": "Decibel (dB)",
+        "b": "Méter (m)",
+        "c": "Hertz (Hz)"
+      },
+      "correct": "c",
+      "explanation": "A frekvenciát hertzben mérjük. Az 1 Hz másodpercenként egy rezgést jelent."
+    },
+    {
+      "question": "Mi határozza meg a hang erősségét (hangosságát)?",
+      "answers": {
+        "a": "A rezgés frekvenciája.",
+        "b": "A rezgés amplitúdója.",
+        "c": "A hangforrás színe."
+      },
+      "correct": "b",
+      "explanation": "A hangerősség a rezgés tágasságától, azaz az amplitúdójától függ. Minél nagyobb az amplitúdó, annál hangosabb a hang."
+    },
+    {
+      "question": "Mi a hangerősség mértékegysége?",
+      "answers": {
+        "a": "Hertz (Hz)",
+        "b": "Decibel (dB)",
+        "c": "Pascal (Pa)"
+      },
+      "correct": "b",
+      "explanation": "A hang erősségének szintjét decibelben mérjük. A 0 dB a hallásküszöb."
+    },
+    {
+      "question": "Miért látjuk a villámot hamarabb, mint ahogy a dörgést halljuk?",
+      "answers": {
+        "a": "Mert a hang gyorsabb a fénynél.",
+        "b": "Mert a szemünk érzékenyebb, mint a fülünk.",
+        "c": "Mert a fény sokkal gyorsabban terjed, mint a hang."
+      },
+      "correct": "c",
+      "explanation": "A fény sebessége kb. 300 000 km/s, míg a hangé levegőben csak kb. 340 m/s. Emiatt a villám fényét szinte azonnal meglátjuk, de a hangjának időre van szüksége, hogy elérjen hozzánk."
+    },
+    {
+      "question": "Hogyan nevezzük azt a jelenséget, amikor a hang visszaverődik egy felületről?",
+      "answers": {
+        "a": "Visszhang (hangvisszaverődés)",
+        "b": "Hangelnyelés",
+        "c": "Hangárnyék"
+      },
+      "correct": "a",
+      "explanation": "A visszhang a hang visszaverődése, amelyet a hangforrástól távolodva, késleltetve hallunk meg."
+    },
+    {
+      "question": "Hol NEM képes terjedni a hang?",
+      "answers": {
+        "a": "Vízben.",
+        "b": "Vákuumban (légüres térben).",
+        "c": "Egy vasúti sínben."
+      },
+      "correct": "b",
+      "explanation": "A hang mechanikai hullám, ami azt jelenti, hogy terjedéséhez közvetítő közegre (anyagra) van szüksége. A vákuumban nincsenek részecskék, így a hang nem tud terjedni."
+    },
+    {
+      "question": "Melyik közegben terjed a leggyorsabban a hang?",
+      "answers": {
+        "a": "Levegőben.",
+        "b": "Vízben.",
+        "c": "Egy acélgerendában."
+      },
+      "correct": "c",
+      "explanation": "A hang a szilárd anyagokban terjed a leggyorsabban, mert a sűrűn elhelyezkedő részecskék könnyen átadják egymásnak a rezgést. Lassabban terjed a folyadékokban, és a leglassabban a gázokban."
+    },
+    {
+      "question": "Hogyan nevezzük az emberi fül számára már túl magas hangokat?",
+      "answers": {
+        "a": "Infrahang",
+        "b": "Ultrahang",
+        "c": "Szuperhang"
+      },
+      "correct": "b",
+      "explanation": "Az emberi hallástartomány kb. 20 Hz és 20 000 Hz között van. Az e feletti hangokat ultrahangnak nevezzük."
+    },
+    {
+      "question": "Melyik állat használ ultrahangot a tájékozódásra?",
+      "answers": {
+        "a": "Elefánt",
+        "b": "Denevér",
+        "c": "Oroszlán"
+      },
+      "correct": "b",
+      "explanation": "A denevérek ultrahangokat bocsátanak ki, és a visszaverődő visszhangok alapján tájékozódnak a környezetükről (ezt echolokációnak hívják)."
+    },
+    {
+      "question": "Mi az a hangszín?",
+      "answers": {
+        "a": "A hang magassága.",
+        "b": "A hang egyedi „színezete”, ami megkülönbözteti a hangszereket.",
+        "c": "A hang erőssége."
+      },
+      "correct": "b",
+      "explanation": "A hangszín az, ami miatt meg tudunk különböztetni egy hegedűt egy zongorától, még akkor is, ha ugyanazt a hangot játsszák le ugyanolyan hangerővel. A felhangok összetétele határozza meg."
+    },
+    {
+      "question": "Ha megfeszítünk egy gitárhúrt, milyen lesz a hangja?",
+      "answers": {
+        "a": "Magasabb",
+        "b": "Mélyebb",
+        "c": "Nem változik"
+      },
+      "correct": "a",
+      "explanation": "A húr megfeszítése növeli a rezgés sebességét (frekvenciáját), ami magasabb hangot eredményez."
+    },
+    {
+      "question": "Mi a különbség a zenei hang és a zaj között?",
+      "answers": {
+        "a": "A zenei hangok hangosak, a zajok halkak.",
+        "b": "A zenei hangoknak szabályos, a zajoknak szabálytalan a rezgése.",
+        "c": "A zenei hangokat csak hangszerek kelthetik."
+      },
+      "correct": "b",
+      "explanation": "A legfőbb különbség a rezgés szabályosságában van. A zenei hangoknak periodikus, ismétlődő rezgése van, míg a zajoknak kaotikus, szabálytalan."
+    },
+    {
+      "question": "Mi a puha anyagok (pl. szőnyeg, függöny) szerepe egy szobában a hang szempontjából?",
+      "answers": {
+        "a": "Erősítik a visszhangot.",
+        "b": "Elnyelik a hangot és csökkentik a visszhangot.",
+        "c": "Nincs hatásuk a hangra."
+      },
+      "correct": "b",
+      "explanation": "A puha, porózus anyagok jó hangelnyelők. Csökkentik a hang visszaverődését, így a szoba csendesebbnek, a hangok pedig tisztábbnak hallatszanak."
+    },
+    {
+      "question": "Egy hegedű vékony, rövid húrja milyen hangot ad ki?",
+      "answers": {
+        "a": "Magas hangot.",
+        "b": "Mély hangot.",
+        "c": "Nagyon halk hangot."
+      },
+      "correct": "a",
+      "explanation": "A vékony, rövid és feszes húrok gyorsabban rezegnek, így magasabb frekvenciájú, azaz magasabb hangot keltenek."
+    },
+    {
+      "question": "Hogyan nevezzük az emberi fül számára már túl mély hangokat?",
+      "answers": {
+        "a": "Ultrahang",
+        "b": "Szubhang",
+        "c": "Infrahang"
+      },
+      "correct": "c",
+      "explanation": "Az emberi hallástartomány alsó határa kb. 20 Hz. Az ennél alacsonyabb frekvenciájú hangokat infrahangnak nevezzük."
+    },
+    {
+      "question": "Ha egy dobot csak finoman ütünk meg, a keletkező hangnak...",
+      "answers": {
+        "a": "...nagy az amplitúdója.",
+        "b": "...magas a frekvenciája.",
+        "c": "...kicsi az amplitúdója."
+      },
+      "correct": "c",
+      "explanation": "Az ütés erőssége a rezgés tágasságát (amplitúdóját) határozza meg. A gyenge ütés kis amplitúdót és halk hangot eredményez."
+    },
+    {
+      "question": "Hogyan terjed a hang a levegőben?",
+      "answers": {
+        "a": "A levegő részecskéinek rezgésével, sűrűsödésével és ritkulásával.",
+        "b": "Úgy, hogy maguk a levegőrészecskék utaznak el a fülünkig.",
+        "c": "Vákuumbuborékok létrehozásával."
+      },
+      "correct": "a",
+      "explanation": "A hang longitudinális hullámként terjed a levegőben. A rezgés továbbadódik részecskéről részecskére, de maguk a részecskék csak kis mértékben mozdulnak el az egyensúlyi helyzetükből."
+    },
+    {
+      "question": "Melyik szervünk kezd el először rezegni, amikor hangot hallunk?",
+      "answers": {
+        "a": "Az agy.",
+        "b": "A csiga.",
+        "c": "A dobhártya."
+      },
+      "correct": "c",
+      "explanation": "A hanghullámok a hallójáraton keresztül eljutnak a dobhártyáig, és azt hozzák először rezgésbe. Ez a rezgés adódik tovább a hallócsontocskáknak."
+    },
+    {
+      "question": "Egy nagyméretű, nehéz harang általában milyen hangot ad?",
+      "answers": {
+        "a": "Alacsony frekvenciájú (mély) hangot.",
+        "b": "Magas frekvenciájú (magas) hangot.",
+        "c": "Olyan hangot, ami gyorsabb a fénynél."
+      },
+      "correct": "a",
+      "explanation": "A nagyobb és nehezebb tárgyak lassabban rezegnek, ami alacsonyabb frekvenciát és mélyebb hangot eredményez."
+    },
+    {
+      "question": "Melyik NEM a hang egyik alapvető jellemzője?",
+      "answers": {
+        "a": "Hangmagasság",
+        "b": "Hangerősség",
+        "c": "Szín"
+      },
+      "correct": "c",
+      "explanation": "A hang három fő jellemzője a hangmagasság, a hangerősség és a hangszín. A szín a fény jellemzője, nem a hangé."
+    },
+    {
+      "question": "Ahhoz, hogy egy hang halkabb legyen, mit kell tennünk a rezgéssel?",
+      "answers": {
+        "a": "Csökkenteni kell az amplitúdóját.",
+        "b": "Növelni kell a frekvenciáját.",
+        "c": "Csökkenteni kell a frekvenciáját."
+      },
+      "correct": "a",
+      "explanation": "A hangerősség közvetlenül az amplitúdótól függ. A rezgés tágasságának csökkentése halkabb hangot eredményez."
+    },
+    {
+      "question": "Egy cselló vastag, hosszú húrja milyen hangot ad ki egy hegedű vékony, rövid húrjához képest?",
+      "answers": {
+        "a": "Magasabb hangot.",
+        "b": "Ugyanolyan hangot.",
+        "c": "Mélyebb hangot."
+      },
+      "correct": "c",
+      "explanation": "A hosszú, vastag és nehéz húrok lassabban rezegnek, mint a rövid, vékony és könnyű húrok. A lassabb rezgés alacsonyabb frekvenciát, azaz mélyebb hangot jelent."
+    },
+    {
+      "question": "A hanghullám egyfajta...",
+      "answers": {
+        "a": "...mechanikai hullám.",
+        "b": "...elektromágneses hullám.",
+        "c": "...fényhullám."
+      },
+      "correct": "a",
+      "explanation": "A hang mechanikai hullám, mert terjedéséhez anyagi közegre (szilárd, folyékony vagy gáz) van szüksége. Az elektromágneses hullámok, mint a fény, terjednek vákuumban is."
+    }
+  ]
 }

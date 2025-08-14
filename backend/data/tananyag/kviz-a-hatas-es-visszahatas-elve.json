@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz a hatas es visszahatas elve\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik Newton törvénye a hatás-visszahatás (ellenhatás) elve?",
+      "answers": {
+        "a": "A harmadik törvény.",
+        "b": "Az első törvény.",
+        "c": "A második törvény."
+      },
+      "correct": "a",
+      "explanation": "Newton harmadik mozgástörvénye fogalmazza meg a hatás-ellenhatás elvét. Az első a tehetetlenség, a második pedig a dinamika alaptörvénye."
+    },
+    {
+      "question": "Amikor egy rakéta felszáll, a forró gázokat lefelé lövelli ki. Melyik erő emeli fel a rakétát?",
+      "answers": {
+        "a": "A gázok által a rakétára kifejtett, felfelé irányuló erő.",
+        "b": "A levegő, amibe a rakéta beleütközik.",
+        "c": "A Föld gravitációs ereje."
+      },
+      "correct": "a",
+      "explanation": "Ez a hatás-ellenhatás elvének klasszikus példája. A rakéta lefelé irányuló erőt (hatás) fejt ki a gázokra. Ennek ellenhatásaként a gázok ugyanekkora, de felfelé irányuló erőt fejtenek ki a rakétára, ami felemeli azt."
+    },
+    {
+      "question": "Egy asztalon álló könyv nyomóerőt fejt ki az asztalra. Mi ennek az erőnek az ellenhatása?",
+      "answers": {
+        "a": "Az asztal által a könyvre kifejtett tartóerő.",
+        "b": "A Föld által a könyvre kifejtett nehézségi erő.",
+        "c": "A könyv által a Földre kifejtett vonzerő."
+      },
+      "correct": "a",
+      "explanation": "A hatás-ellenhatás pár mindig ugyanaz a kölcsönhatás, csak a két különböző testen. Ha a könyv hat az asztalra (hatás), akkor az asztal hat a könyvre (ellenhatás)."
+    },
+    {
+      "question": "Ha egy falat 50 N erővel nyomsz, mekkora erővel nyom vissza a fal téged?",
+      "answers": {
+        "a": "50 N",
+        "b": "0 N",
+        "c": "Kevesebb, mint 50 N"
+      },
+      "correct": "a",
+      "explanation": "A hatás-ellenhatás törvénye szerint az erők mindig párosával lépnek fel, egyenlő nagyságúak és ellentétes irányúak. Tehát a fal pontosan 50 N erővel nyomja a kezedet."
+    },
+    {
+      "question": "A hatás-ellenhatás erők...",
+      "answers": {
+        "a": "...két különböző testre hatnak.",
+        "b": "...ugyanarra a testre hatnak.",
+        "c": "...csak mozgó testeknél lépnek fel."
+      },
+      "correct": "a",
+      "explanation": "Ez a törvény legfontosabb része. Az erőpár két tagja soha nem hathat ugyanarra a testre, mert akkor mindig kiegyenlítenék egymást és nem jöhetne létre gyorsulás."
+    },
+    {
+      "question": "Amikor ugorni készülsz, lefelé irányuló erőt fejtesz ki a talajra. Miért tudsz felugrani?",
+      "answers": {
+        "a": "Mert a talaj ugyanakkora, de felfelé irányuló erőt fejt ki rád.",
+        "b": "Mert a levegő felemel.",
+        "c": "Mert a súlyod lecsökken."
+      },
+      "correct": "a",
+      "explanation": "Az elrugaszkodáskor a lábad erőt fejt ki a talajra (hatás). Ennek ellenhatásaként a talaj egy ugyanakkora, de felfelé irányuló erőt fejt ki a lábadra. Ez az erő az, ami felgyorsít és a levegőbe emel."
+    },
+    {
+      "question": "Melyik jelenség NEM a hatás-ellenhatás törvényén alapul?",
+      "answers": {
+        "a": "Egy szabadon eső alma mozgása.",
+        "b": "Egy puska visszarúgása lövéskor.",
+        "c": "Egy evezős csónak haladása."
+      },
+      "correct": "a",
+      "explanation": "A szabadon eső alma mozgását a tehetetlenség és a dinamika alaptörvénye írja le. A puska visszarúgása és az evezés a hatás-ellenhatás klasszikus példái."
+    },
+    {
+      "question": "A Föld vonzza a Holdat. A hatás-ellenhatás törvénye szerint...",
+      "answers": {
+        "a": "...a Hold is vonzza a Földet, ugyanakkora erővel.",
+        "b": "...a Hold kisebb erővel vonzza a Földet.",
+        "c": "...a Hold nem hat a Földre."
+      },
+      "correct": "a",
+      "explanation": "A gravitációs kölcsönhatás kölcsönös. A Föld és a Hold között ható vonzerő pontosan egyenlő nagyságú. A Föld hatalmas tömege miatt azonban a Hold vonzásának hatása a Föld mozgására sokkal kisebb."
+    },
+    {
+      "question": "Milyen irányú az ellenhatás a hatóerőhöz képest?",
+      "answers": {
+        "a": "Megegyező irányú.",
+        "b": "Ellentétes irányú.",
+        "c": "Merőleges."
+      },
+      "correct": "b",
+      "explanation": "A hatás-ellenhatás törvénye kimondja, hogy az erőpár tagjai mindig ellentétes irányúak."
+    },
+    {
+      "question": "Miért nem egyenlítik ki egymást a hatás-ellenhatás erők?",
+      "answers": {
+        "a": "Mert nem egyenlő a nagyságuk.",
+        "b": "Mert két különböző testre hatnak.",
+        "c": "Mert csak az egyik valós erő."
+      },
+      "correct": "b",
+      "explanation": "Két erő csak akkor tudja kiegyenlíteni egymást, ha ugyanarra a testre hatnak. Mivel a hatás és az ellenhatás mindig különböző testekre hat, soha nem tudják kioltani egymás hatását."
+    },
+    {
+      "question": "Amikor egy focista fejel, a feje erőt fejt ki a labdára. Mi az ellenhatás?",
+      "answers": {
+        "a": "A levegő ellenállása.",
+        "b": "A labda ugyanakkora erőt fejt ki a focista fejére.",
+        "c": "A Föld vonzereje."
+      },
+      "correct": "b",
+      "explanation": "A kölcsönhatás a fej és a labda között jön létre. Ha a fej hat a labdára (hatás), akkor a labda is hat a fejre (ellenhatás)."
+    },
+    {
+      "question": "Mekkora az ellenhatás nagysága a hatóerőhöz képest?",
+      "answers": {
+        "a": "Mindig kisebb.",
+        "b": "Mindig egyenlő.",
+        "c": "Mindig nagyobb."
+      },
+      "correct": "b",
+      "explanation": "A hatás-ellenhatás törvényének egyik legfontosabb pontja, hogy az erőpár tagjai minden körülmények között pontosan egyenlő nagyságúak."
+    },
+    {
+      "question": "Amikor egy autó kereke forog, hátrafelé irányuló erőt fejt ki az útra. Mi hajtja előre az autót?",
+      "answers": {
+        "a": "A motor ereje.",
+        "b": "Az út által a kerékre kifejtett, előre irányuló erő.",
+        "c": "A légnyomás."
+      },
+      "correct": "b",
+      "explanation": "Az autó mozgásának oka a kerék és az út közötti súrlódási erő. A kerék hátrafelé 'tolja' az utat (hatás), az út pedig ugyanekkora, de előre irányuló erőt fejt ki a kerékre (ellenhatás)."
+    },
+    {
+      "question": "Az asztalon lévő pohárra ható nehézségi erő (a Föld vonzza a poharat) ellenhatása:",
+      "answers": {
+        "a": "Az asztal által a pohárra kifejtett tartóerő.",
+        "b": "A pohár által a Földre kifejtett vonzerő.",
+        "c": "A pohár által az asztalra kifejtett nyomóerő."
+      },
+      "correct": "b",
+      "explanation": "A nehézségi erő a Föld és a pohár közötti kölcsönhatás. Ha a Föld vonzza a poharat (hatás), akkor a pohár is vonzza a Földet (ellenhatás)."
+    },
+    {
+      "question": "A hatás-ellenhatás elve érvényes...",
+      "answers": {
+        "a": "...csak a gravitációs erőre.",
+        "b": "...mindenféle kölcsönhatásra.",
+        "c": "...csak az érintkezési erőkre."
+      },
+      "correct": "b",
+      "explanation": "Newton harmadik törvénye általános érvényű, minden típusú kölcsönhatásra igaz, legyen az gravitációs, elektromos, mágneses vagy érintkezési erő."
+    },
+    {
+      "question": "Ha egy mágnes vonz egy vasdarabot, akkor...",
+      "answers": {
+        "a": "...csak a mágnes fejt ki erőt.",
+        "b": "...a vasdarab is vonzza a mágnest, ugyanakkora erővel.",
+        "c": "...a vasdarab taszítja a mágnest."
+      },
+      "correct": "b",
+      "explanation": "A mágneses vonzás is kölcsönös. A mágnes és a vasdarab egyenlő nagyságú, ellentétes irányú erővel vonzza egymást."
+    },
+    {
+      "question": "Két különböző tömegű test ütközik. Melyik fejt ki nagyobb erőt a másikra az ütközés pillanatában?",
+      "answers": {
+        "a": "A nagyobb tömegű.",
+        "b": "Ugyanakkora erőt fejtenek ki egymásra.",
+        "c": "A gyorsabb."
+      },
+      "correct": "b",
+      "explanation": "A hatás-ellenhatás törvénye szerint az ütközés során a két test által egymásra kifejtett erő minden pillanatban egyenlő nagyságú, függetlenül a testek tömegétől vagy sebességétől."
+    },
+    {
+      "question": "A hatás-ellenhatás törvénye szerint az erők párosával lépnek fel. Milyenek ezek az erők?",
+      "answers": {
+        "a": "Egyenlő nagyságúak és megegyező irányúak.",
+        "b": "Különböző nagyságúak és ellentétes irányúak.",
+        "c": "Egyenlő nagyságúak és ellentétes irányúak."
+      },
+      "correct": "c",
+      "explanation": "Ez a törvény pontos megfogalmazása: az erők mindig párban jelentkeznek, nagyságuk azonos, irányuk pedig ellentétes."
+    },
+    {
+      "question": "Miért érzel fájdalmat, ha ököllel megütsz egy falat?",
+      "answers": {
+        "a": "Mert a fal kemény.",
+        "b": "Mert az öklöd gyenge.",
+        "c": "Mert a fal ugyanakkora erővel 'visszaüt', mint amekkorával te ütötted."
+      },
+      "correct": "c",
+      "explanation": "A hatás-ellenhatás törvénye alapján, amekkora erőt az öklöd kifejt a falra, a fal ugyanakkora, de ellentétes irányú erőt fejt ki az öklödre."
+    },
+    {
+      "question": "Ha egy madár a levegőben repül, a szárnyával lefelé nyomja a levegőt. Mi emeli a madarat?",
+      "answers": {
+        "a": "A madár könnyű.",
+        "b": "A tehetetlensége.",
+        "c": "A levegő, ami felfelé nyomja a madár szárnyát."
+      },
+      "correct": "c",
+      "explanation": "A madár szárnya lefelé irányuló erőt (hatás) fejt ki a levegőre. Az ellenhatás az, hogy a levegő ugyanekkora, de felfelé irányuló erőt fejt ki a szárnyra."
+    },
+    {
+      "question": "Az asztalon lévő könyvre ható nehézségi erő és az asztal által a könyvre kifejtett tartóerő...",
+      "answers": {
+        "a": "...egy hatás-ellenhatás erőpárt alkotnak.",
+        "b": "...mindig különböző nagyságúak.",
+        "c": "...kiegyenlítik egymást, de nem hatás-ellenhatás pár."
+      },
+      "correct": "c",
+      "explanation": "Ez a két erő kiegyenlíti egymást, de NEM alkotnak hatás-ellenhatás párt, mert mindketten ugyanarra a testre, a könyvre hatnak."
+    },
+    {
+      "question": "Ha egy rugót a két végénél fogva széthúzol, a bal kezed balra húzza a rugót. Milyen erőt érez a jobb kezed?",
+      "answers": {
+        "a": "Balra irányuló erőt.",
+        "b": "Felfelé irányuló erőt.",
+        "c": "Jobbra irányuló erőt."
+      },
+      "correct": "c",
+      "explanation": "A rugó mindkét kezedre erőt fejt ki, ami igyekszik összehúzni azt. A bal kezedre jobbra ható erőt, a jobb kezedre pedig balra ható erőt fejt ki a rugó. Te a jobb kezeddel egy jobbra irányuló erőt (ellenhatás) kell kifejts."
+    },
+    {
+      "question": "A kölcsönhatásban...",
+      "answers": {
+        "a": "...csak egy test mozgása változhat meg.",
+        "b": "...csak az egyik test fejt ki erőt.",
+        "c": "...mindig mindkét testre hat erő."
+      },
+      "correct": "c",
+      "explanation": "A kölcsönhatás definíció szerint kétoldalú. Mindig mindkét résztvevő testre hat egy-egy erő, amelyek a hatás-ellenhatás párt alkotják."
+    },
+    {
+      "question": "Miért NEM tudod magad a hajadnál fogva felemelni?",
+      "answers": {
+        "a": "Mert nem vagy elég erős.",
+        "b": "Mert a gravitáció túl erős.",
+        "c": "Mert a hatás és az ellenhatás erők egy rendszeren belül vannak."
+      },
+      "correct": "c",
+      "explanation": "Amikor a kezeddel húzod a hajad felfelé (hatás), a hajad ugyanakkora erővel húzza lefelé a kezed (ellenhatás). Mivel mindkét erő a te testeden belül hat, ezek belső erők, és nem tudják a rendszer egészét felgyorsítani."
+    },
+    {
+      "question": "Egy csónakból a partra ugrasz. Miért mozdul el a csónak a parttól ellentétes irányba?",
+      "answers": {
+        "a": "Mert a víz löki el.",
+        "b": "Mert könnyű a csónak.",
+        "c": "Mert a lábad erőt fejt ki a csónakra hátrafelé."
+      },
+      "correct": "c",
+      "explanation": "Amikor elrugaszkodsz a csónakról a part felé, a lábad a csónakot hátrafelé (a parttól el) irányuló erővel löki meg (hatás). Ennek ellenhatásaként a csónak ugyanekkora, de előre (a part felé) irányuló erővel lök el téged."
+    }
+  ]
 }

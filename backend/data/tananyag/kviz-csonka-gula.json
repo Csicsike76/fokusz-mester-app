@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz csonka gula\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik test térfogata a nagyobb: egy 10 cm élű kockáé vagy egy 10 cm alapélű, 10 cm magas négyzet alapú gúláé?",
+      "answers": {
+        "a": "a kockáé",
+        "b": "a gúláé",
+        "c": "egyenlőek"
+      },
+      "correct": "a",
+      "explanation": "A gúla térfogata mindig harmada az azonos alapterületű és magasságú hasábénak. Mivel a kocka egy ilyen hasáb, a térfogata háromszor nagyobb lesz, mint a gúláé."
+    },
+    {
+      "question": "Egy négyzet alapú gúla alapéle 6 cm, magassága 4 cm. Mennyi a térfogata?",
+      "answers": {
+        "a": "144 cm³",
+        "b": "24 cm³",
+        "c": "48 cm³"
+      },
+      "correct": "c",
+      "explanation": "A térfogat V = (Alapterület * magasság) / 3. Az alaplap egy 6 cm oldalú négyzet, területe 36 cm². Így V = (36 * 4) / 3 = 144 / 3 = 48 cm³."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A gúla egy poliéder.",
+        "b": "A gúla palástja síklapokból áll.",
+        "c": "A gúla alaplapja lehet kör."
+      },
+      "correct": "c",
+      "explanation": "A gúla alaplapja definíció szerint sokszög. Ha az alaplapja kör, a testet kúpnak nevezzük, nem gúlának."
+    },
+    {
+      "question": "Mi a szabályos gúla palástjának területe, ha az alaplap kerülete K, az oldallap magassága pedig m_o?",
+      "answers": {
+        "a": "K * m_o",
+        "b": "(K * m_o) / 2",
+        "c": "K + m_o"
+      },
+      "correct": "b",
+      "explanation": "A palástot kiterítve háromszögeket kapunk. Ha ezeket egy sorba rendezzük, egy olyan alakzatot kapunk, aminek 'alapja' az alaplap kerülete (K), magassága pedig az oldallap magassága (m_o). A területe a háromszögekéhez hasonlóan számolható."
+    },
+    {
+      "question": "Egy gúla alaplapja 5 cm oldalú négyzet, oldalélei szintén 5 cm-esek. Mekkora egy oldallap területe?",
+      "answers": {
+        "a": "12,5 cm²",
+        "b": "kb. 10,8 cm²",
+        "c": "25 cm²"
+      },
+      "correct": "b",
+      "explanation": "Az oldallap egy egyenlő oldalú háromszög, melynek minden oldala 5 cm. Az egyenlő oldalú háromszög területe: T = (oldal² * gyök(3)) / 4 = (25 * 1,732) / 4 ≈ 10,8 cm²."
+    },
+    {
+      "question": "Egy gúla térfogata 50 cm³, alapterülete 25 cm². Milyen magas a gúla?",
+      "answers": {
+        "a": "2 cm",
+        "b": "6 cm",
+        "c": "75 cm"
+      },
+      "correct": "b",
+      "explanation": "A térfogat képletét átrendezzük a magasságra: m = (3 * Térfogat) / Alapterület. Behelyettesítve: m = (3 * 50) / 25 = 150 / 25 = 6 cm."
+    },
+    {
+      "question": "Ha egy gúla alaplapjának területét megduplázzuk, de a magassága nem változik, mi történik a térfogatával?",
+      "answers": {
+        "a": "megduplázódik",
+        "b": "négyszeresére nő",
+        "c": "nem változik"
+      },
+      "correct": "a",
+      "explanation": "A térfogat képlete: V = (Alapterület * magasság) / 3. A térfogat egyenesen arányos az alapterülettel. Ha az egyik duplájára nő, a másik is."
+    },
+    {
+      "question": "Egy szabályos négyzet alapú gúla alapéle 10 cm, testmagassága 12 cm. Mekkora az oldallapjának a magassága?",
+      "answers": {
+        "a": "13 cm",
+        "b": "11 cm",
+        "c": "12,5 cm"
+      },
+      "correct": "a",
+      "explanation": "Az oldallap magassága (átfogó), a testmagasság (befogó) és az alapél fele (befogó, 10/2=5 cm) egy derékszögű háromszöget alkotnak. Pitagorasz-tétel: 12² + 5² = 144 + 25 = 169. Az oldallap magassága ennek a gyöke, azaz 13 cm."
+    },
+    {
+      "question": "Egy négyzet alapú gúla alapéle 6 cm, az oldallapjának magassága 5 cm. Mekkora a palástjának a területe?",
+      "answers": {
+        "a": "60 cm²",
+        "b": "30 cm²",
+        "c": "120 cm²"
+      },
+      "correct": "a",
+      "explanation": "A palást 4 darab egybevágó háromszög területének összege. Egy oldallap területe = (alapél * oldallap magassága) / 2 = (6 * 5) / 2 = 15 cm². A palást területe = 4 * 15 cm² = 60 cm²."
+    },
+    {
+      "question": "Ha egy gúla magasságát a harmadára csökkentjük, de az alaplapja nem változik, mi történik a térfogatával?",
+      "answers": {
+        "a": "nem változik",
+        "b": "kilencedére csökken",
+        "c": "harmadára csökken"
+      },
+      "correct": "c",
+      "explanation": "A térfogat képlete: V = (Alapterület * magasság) / 3. A térfogat egyenesen arányos a magassággal. Ha a magasság harmadolódik, a térfogat is."
+    },
+    {
+      "question": "Egy gúla palástja 4 darab egyenlő szárú háromszögből áll. Milyen az alaplapja?",
+      "answers": {
+        "a": "háromszög",
+        "b": "négyszög",
+        "c": "ötszög"
+      },
+      "correct": "b",
+      "explanation": "A gúlának annyi oldallapja van, ahány oldala az alaplapjának. Ha 4 oldallapja van, akkor az alaplapnak is 4 oldala kell, hogy legyen, tehát négyszög."
+    },
+    {
+      "question": "Melyik testnek van több lapja: egy ötszög alapú gúlának vagy egy négyzet alapú hasábnak?",
+      "answers": {
+        "a": "a gúlának",
+        "b": "a hasábnak",
+        "c": "egyenlő számú lapjuk van"
+      },
+      "correct": "c",
+      "explanation": "Az ötszög alapú gúla lapjai: 1 alaplap + 5 oldallap = 6 lap. A négyzet alapú hasáb lapjai: 2 alaplap + 4 oldallap = 6 lap."
+    },
+    {
+      "question": "Egy gúla felszíne 120 cm², a palástjának területe 80 cm². Mekkora az alapterülete?",
+      "answers": {
+        "a": "40 cm²",
+        "b": "200 cm²",
+        "c": "1,5 cm²"
+      },
+      "correct": "a",
+      "explanation": "A felszín képlete: Felszín = Alapterület + Palást területe. Ezt átrendezve: Alapterület = Felszín - Palást területe = 120 - 80 = 40 cm²."
+    },
+    {
+      "question": "Mi a gúla felszínének általános képlete?",
+      "answers": {
+        "a": "A = Alapterület * Testmagasság",
+        "b": "A = Alapterület + Palást területe",
+        "c": "A = 2 * Alapterület + Palást területe"
+      },
+      "correct": "b",
+      "explanation": "A felszín a testet határoló összes lap területének összege. A gúlának van egy alaplapja és az oldallapokból álló palástja."
+    },
+    {
+      "question": "Ha egy gúla minden élét megduplázzuk, hányszorosára nő a felszíne?",
+      "answers": {
+        "a": "négyszeresére",
+        "b": "kétszeresére",
+        "c": "nyolcszorosára"
+      },
+      "correct": "a",
+      "explanation": "A hasonlóság aránya k=2. A felszínek (területek) aránya a hasonlóság arányának négyzetével (k²) egyenlő. Tehát 2² = 4-szeresére nő."
+    },
+    {
+      "question": "Egy gúla alaplapja egy 5 cm oldalú szabályos háromszög, melynek területe kb. 10,8 cm². A gúla magassága 10 cm. Mekkora a térfogata?",
+      "answers": {
+        "a": "108 cm³",
+        "b": "36 cm³",
+        "c": "54 cm³"
+      },
+      "correct": "b",
+      "explanation": "A térfogat képlete: V = (Alapterület * magasság) / 3. Behelyettesítve az adatokat: V = (10,8 * 10) / 3 = 108 / 3 = 36 cm³."
+    },
+    {
+      "question": "Miből áll egy szabályos gúla palástja?",
+      "answers": {
+        "a": "egybevágó egyenlő szárú háromszögekből",
+        "b": "különböző háromszögekből",
+        "c": "téglalapokból"
+      },
+      "correct": "a",
+      "explanation": "A szabályos gúla alaplapja szabályos sokszög. Emiatt minden oldaléle egyenlő hosszú, így az oldallapokat alkotó háromszögek egybevágóak és egyenlő szárúak."
+    },
+    {
+      "question": "Egy szabályos hatszög alapú gúla felszínéhez...",
+      "answers": {
+        "a": "1 hatszög és 6 háromszög területét kell összeadni.",
+        "b": "2 hatszög és 6 téglalap területét kell összeadni.",
+        "c": "7 háromszög területét kell összeadni."
+      },
+      "correct": "a",
+      "explanation": "A felszín a gúla összes lapjának területe. A gúla hálója egy hatszög alaplapból és hat háromszög oldallapból áll."
+    },
+    {
+      "question": "Ha egy gúla minden élét megduplázzuk, hányszorosára nő a térfogata?",
+      "answers": {
+        "a": "kétszeresére",
+        "b": "négyszeresére",
+        "c": "nyolcszorosára"
+      },
+      "correct": "c",
+      "explanation": "A hasonlóság aránya k=2. A térfogatok aránya a hasonlóság arányának köbével (k³) egyenlő. Tehát 2³ = 8-szorosára nő."
+    },
+    {
+      "question": "Az előző feladatban (alapél 6 cm, palást területe 60 cm²), mekkora a gúla teljes felszíne?",
+      "answers": {
+        "a": "66 cm²",
+        "b": "96 cm²",
+        "c": "120 cm²"
+      },
+      "correct": "b",
+      "explanation": "Felszín = Alapterület + Palást területe. Az alapterület egy 6 cm-es négyzet területe: 36 cm². Így a teljes felszín = 36 cm² + 60 cm² = 96 cm²."
+    },
+    {
+      "question": "Mi a gúla térfogatának általános képlete?",
+      "answers": {
+        "a": "V = Alapterület * Testmagasság",
+        "b": "V = (Alapterület * Testmagasság) / 3",
+        "c": "V = Alapterület * Oldalél"
+      },
+      "correct": "b",
+      "explanation": "A gúla (és a kúp) térfogata mindig harmada az azonos alapterületű és magasságú hasáb (és henger) térfogatának."
+    },
+    {
+      "question": "Egy gúla alapterülete 15 cm², magassága 10 cm. Mekkora a térfogata?",
+      "answers": {
+        "a": "150 cm³",
+        "b": "50 cm³",
+        "c": "75 cm³"
+      },
+      "correct": "b",
+      "explanation": "A térfogat képlete: V = (Alapterület * magasság) / 3. Behelyettesítve: V = (15 * 10) / 3 = 150 / 3 = 50 cm³."
+    },
+    {
+      "question": "Mi a gúla testmagassága?",
+      "answers": {
+        "a": "Az oldalél hossza.",
+        "b": "A csúcs merőleges távolsága az alaplap síkjától.",
+        "c": "Az oldallap magassága."
+      },
+      "correct": "b",
+      "explanation": "A testmagasság a gúla 'legmagasabb pontjának' távolsága az aljától. Ezt a távolságot mindig merőlegesen mérjük."
+    },
+    {
+      "question": "Mi a 'tetraéder'?",
+      "answers": {
+        "a": "egy négyzet alapú gúla",
+        "b": "egy hatszög alapú gúla",
+        "c": "egy háromszög alapú gúla"
+      },
+      "correct": "c",
+      "explanation": "A 'tetra' görög szó jelentése négy. A tetraédernek négy lapja van. Egy gúlának akkor van 4 lapja, ha van 1 alaplapja és 3 oldallapja, ehhez pedig az alaplapnak háromszögnek kell lennie."
+    },
+    {
+      "question": "Egy szabályos gúla alaplapja és oldallapjai egybevágó szabályos háromszögek. Mi ez a test?",
+      "answers": {
+        "a": "háromszög alapú hasáb",
+        "b": "szabályos tetraéder",
+        "c": "kocka"
+      },
+      "correct": "b",
+      "explanation": "Ha az alaplap is szabályos háromszög, és az oldallapok is ugyanakkora szabályos háromszögek, akkor a testet 4 egybevágó szabályos háromszög határolja. Ezt nevezzük szabályos tetraédernek."
+    }
+  ]
 }

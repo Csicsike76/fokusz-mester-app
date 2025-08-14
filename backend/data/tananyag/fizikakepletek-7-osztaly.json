@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Fizikakepletek 7 osztaly\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a mechanikai munka (W) képlete, ha az F erő s úton mozgatja el a testet?",
+      "answers": {
+        "a": "W = F ⋅ s",
+        "b": "W = F / s",
+        "c": "W = F + s"
+      },
+      "correct": "a",
+      "explanation": "A mechanikai munka az erő és az elmozdulás szorzata, feltéve, hogy az erő és az elmozdulás egyirányú."
+    },
+    {
+      "question": "Mit jelent a teljesítmény (P) a fizikában?",
+      "answers": {
+        "a": "A test teljes energiáját.",
+        "b": "A munkavégzés sebességét (W / t).",
+        "c": "Az erő forgató hatását."
+      },
+      "correct": "b",
+      "explanation": "A teljesítmény azt mutatja meg, hogy egységnyi idő alatt mennyi munkát végzünk. Mértékegysége a Watt (W)."
+    },
+    {
+      "question": "Melyik két mennyiségtől függ egy test mozgási (kinetikus) energiája?",
+      "answers": {
+        "a": "A tömegétől és a magasságától.",
+        "b": "Az erejétől és a sebességétől.",
+        "c": "A tömegétől és a sebességének négyzetétől."
+      },
+      "correct": "c",
+      "explanation": "A mozgási energia képlete E(kin) = ½ ⋅ m ⋅ v², tehát a test tömegétől és sebességének négyzetétől függ."
+    },
+    {
+      "question": "Hogyan szól Newton I. törvénye, a tehetetlenség elve?",
+      "answers": {
+        "a": "Minden test nyugalomban marad vagy egyenes vonalú egyenletes mozgást végez, amíg egy külső erő mozgásállapota megváltoztatására nem kényszeríti.",
+        "b": "Az erők mindig párosával lépnek fel, mint hatás és ellenhatás.",
+        "c": "A test gyorsulása egyenesen arányos a rá ható erővel."
+      },
+      "correct": "a",
+      "explanation": "A tehetetlenség elve azt mondja ki, hogy a testek maguktól nem változtatják meg a mozgásukat, ehhez külső erőhatásra van szükség."
+    },
+    {
+      "question": "Mi a lényege Newton III. törvényének, a hatás-ellenhatás elvének?",
+      "answers": {
+        "a": "Az erősebb test mindig nagyobb erőt fejt ki.",
+        "b": "Két test kölcsönhatásakor mindkét testre azonos nagyságú, de ellentétes irányú erő hat.",
+        "c": "Az ellenhatás mindig később lép fel, mint a hatás."
+      },
+      "correct": "b",
+      "explanation": "Az erők mindig párosával lépnek fel. Ha egy falat megütünk, a fal ugyanakkora, de ellentétes irányú erővel hat vissza a kezünkre."
+    },
+    {
+      "question": "Hogyan számítható ki az erő forgató hatása, a forgatónyomaték (M)?",
+      "answers": {
+        "a": "M = F + k (Erő + Erőkar)",
+        "b": "M = F / k (Erő / Erőkar)",
+        "c": "M = F ⋅ k (Erő ⋅ Erőkar)"
+      },
+      "correct": "c",
+      "explanation": "A forgatónyomaték az erő és az erőkar (a forgástengelytől mért merőleges távolság) szorzata."
+    },
+    {
+      "question": "Mi a nyomás (p) definíciója?",
+      "answers": {
+        "a": "A nyomás az egységnyi felületre ható nyomóerő nagysága (p = F / A).",
+        "b": "A nyomás a folyadék súlyából származik (p = m ⋅ g).",
+        "c": "A nyomás a test teljes tömege."
+      },
+      "correct": "a",
+      "explanation": "A nyomás azt mutatja meg, hogyan oszlik el egy erő egy adott felületen. Ugyanakkora erő kisebb felületen nagyobb nyomást fejt ki."
+    },
+    {
+      "question": "Mitől függ a hidrosztatikai nyomás?",
+      "answers": {
+        "a": "Csak a folyadék mennyiségétől.",
+        "b": "A folyadék sűrűségétől és a folyadékoszlop magasságától.",
+        "c": "Az edény alakjától."
+      },
+      "correct": "b",
+      "explanation": "A hidrosztatikai nyomás (p = ρ ⋅ g ⋅ h) annál nagyobb, minél sűrűbb a folyadék és minél mélyebbre merülünk benne."
+    },
+    {
+      "question": "Hogyan szól Arkhimédész törvénye?",
+      "answers": {
+        "a": "Minden test elsüllyed a vízben.",
+        "b": "A testek súlya a vízben kisebb.",
+        "c": "Minden folyadékba merülő testre a kiszorított folyadék súlyával egyenlő nagyságú felhajtóerő hat."
+      },
+      "correct": "c",
+      "explanation": "Ez a törvény magyarázza meg a testek úszását. Ha a testre ható felhajtóerő nagyobb vagy egyenlő, mint a test súlya, a test lebeg vagy úszik."
+    },
+    {
+      "question": "Mi határozza meg a hang magasságát?",
+      "answers": {
+        "a": "A hang frekvenciája.",
+        "b": "A hang amplitúdója.",
+        "c": "A hang terjedési közege."
+      },
+      "correct": "a",
+      "explanation": "A magas hangoknak nagy a frekvenciája (a rezgés gyors), a mély hangoknak kicsi a frekvenciája (a rezgés lassú)."
+    },
+    {
+      "question": "Mit jelent, ha egy fizikai mennyiség vektoriális?",
+      "answers": {
+        "a": "Hogy csak nagysága van.",
+        "b": "Hogy a nagyságán kívül iránya is van.",
+        "c": "Hogy csak pozitív értéke lehet."
+      },
+      "correct": "b",
+      "explanation": "A vektormennyiségeket (pl. erő, sebesség) egy nyíllal ábrázoljuk, aminek hossza a nagyságot, iránya pedig a mennyiség irányát mutatja."
+    },
+    {
+      "question": "Mi a feltétele a testek haladási egyensúlyának?",
+      "answers": {
+        "a": "A testre ható erők összege pozitív.",
+        "b": "A testre ható forgatónyomatékok összege nulla.",
+        "c": "A testre ható erők vektori összege (az eredő erő) nulla."
+      },
+      "correct": "c",
+      "explanation": "Ha az eredő erő nulla, a test nem gyorsul, azaz vagy nyugalomban van, vagy egyenes vonalú egyenletes mozgást végez."
+    },
+    {
+      "question": "Mire vonatkozik Pascal törvénye?",
+      "answers": {
+        "a": "Nyugvó, zárt folyadékokra, melyekben a külső nyomás gyengítetlenül terjed tovább.",
+        "b": "Mozgó gázokra.",
+        "c": "Szilárd testek rugalmasságára."
+      },
+      "correct": "a",
+      "explanation": "Pascal törvénye a hidraulikus rendszerek (pl. autófék) működésének alapja."
+    },
+    {
+      "question": "Mikor marad meg egy test mechanikai energiája?",
+      "answers": {
+        "a": "Mindig, minden körülmények között.",
+        "b": "Zárt rendszerben, ha a súrlódás elhanyagolható.",
+        "c": "Csak akkor, ha a test nyugalomban van."
+      },
+      "correct": "b",
+      "explanation": "A mechanikai energia megmaradásának törvénye akkor érvényes, ha nincs energiaveszteség, például súrlódás vagy közegellenállás miatt. Ilyenkor a helyzeti és mozgási energia egymásba alakul, de az összegük állandó."
+    },
+    {
+      "question": "Mi az emelők törvénye?",
+      "answers": {
+        "a": "F₁ ⋅ k₁ = F₂ ⋅ k₂",
+        "b": "F₁ / k₁ = F₂ / k₂",
+        "c": "F₁ + k₁ = F₂ + k₂"
+      },
+      "correct": "a",
+      "explanation": "Az emelő egyensúlyban van, ha az egyik oldalon ható erő és erőkar szorzata (forgatónyomaték) megegyezik a másik oldalon ható erő és erőkar szorzatával."
+    },
+    {
+      "question": "Melyik az alábbiak közül skaláris mennyiség?",
+      "answers": {
+        "a": "Erő",
+        "b": "Sebesség",
+        "c": "Idő"
+      },
+      "correct": "c",
+      "explanation": "Az időnek csak nagysága van (pl. 10 másodperc), iránya nincs, ezért skalár. Az erőnek és a sebességnek iránya is van, ezért azok vektorok."
+    },
+    {
+      "question": "Mit tesz egy mozgócsiga?",
+      "answers": {
+        "a": "Megváltoztatja az erő irányát, de a nagyságát nem.",
+        "b": "Felezi a teher felemeléséhez szükséges erőt, de kétszeres úton kell húzni.",
+        "c": "Duplázza a szükséges erőt."
+      },
+      "correct": "b",
+      "explanation": "A mozgócsiga egy egyszerű gép, ami erőt takarít meg az út rovására. Az állócsiga csak az erő irányát változtatja meg."
+    },
+    {
+      "question": "Mi a gravitációs helyzeti energia (E_pot) képlete?",
+      "answers": {
+        "a": "E_pot = m ⋅ g ⋅ h",
+        "b": "E_pot = m ⋅ v² / 2",
+        "c": "E_pot = m ⋅ a"
+      },
+      "correct": "a",
+      "explanation": "A helyzeti energia a test tömegétől (m), a gravitációs gyorsulástól (g) és a választott nullszinthez képesti magasságtól (h) függ."
+    },
+    {
+      "question": "Miért nem terjed a hang vákuumban?",
+      "answers": {
+        "a": "Mert a vákuum túl hideg.",
+        "b": "Mert a hang terjedéséhez közvetítő közeg (anyag) szükséges.",
+        "c": "Mert a fény elnyeli a hangot a vákuumban."
+      },
+      "correct": "b",
+      "explanation": "A hang mechanikai hullám, ami az anyag részecskéinek rezgését jelenti. A vákuumban nincsenek részecskék, amik rezeghetnének, így a hang nem tud terjedni."
+    },
+    {
+      "question": "Mire használjuk a paralelogramma szabályt a fizikában?",
+      "answers": {
+        "a": "Területszámításra.",
+        "b": "Hőmérséklet átváltására.",
+        "c": "Két, egy pontból kiinduló erővektor eredőjének megszerkesztésére."
+      },
+      "correct": "c",
+      "explanation": "Ez egy grafikus módszer két vektor összegzésére. Az eredő vektort a két vektorra feszített paralelogramma átlója adja meg."
+    },
+    {
+      "question": "Melyik NEM vektormennyiség?",
+      "answers": {
+        "a": "Elmozdulás",
+        "b": "Tömeg",
+        "c": "Gyorsulás"
+      },
+      "correct": "b",
+      "explanation": "A tömegnek csak nagysága van, iránya nincs, ezért skalár. Az elmozdulásnak és a gyorsulásnak nagysága és iránya is van, tehát vektorok."
+    },
+    {
+      "question": "Mi a súlypont?",
+      "answers": {
+        "a": "A test legnehezebb pontja.",
+        "b": "A test mértani középpontja.",
+        "c": "Az a képzeletbeli pont, ahol a test teljes súlyereje támad."
+      },
+      "correct": "c",
+      "explanation": "A súlypont a test egyensúlyi szempontból fontos pontja. Homogén testeknél ez egybeesik a mértani középponttal."
+    },
+    {
+      "question": "Melyik hullámtípusra példa a hanghullám?",
+      "answers": {
+        "a": "Transzverzális hullám.",
+        "b": "Longitudinális hullám.",
+        "c": "Elektromágneses hullám."
+      },
+      "correct": "b",
+      "explanation": "A hanghullám longitudinális, mert a közeg részecskéi a hullám terjedési irányával párhuzamosan rezegnek (sűrűsödések és ritkulások formájában)."
+    },
+    {
+      "question": "Mi egy test mechanikai energiája?",
+      "answers": {
+        "a": "A mozgási és helyzeti energiájának összege.",
+        "b": "Csak a mozgási energiája.",
+        "c": "A testben tárolt kémiai energia."
+      },
+      "correct": "a",
+      "explanation": "A mechanikai energia a mozgásból (kinetikus) és a helyzetből (potenciális) származó energiák összessége. Képlete: E_mech = E_kin + E_pot."
+    },
+    {
+      "question": "Mi okozza a légköri nyomást?",
+      "answers": {
+        "a": "A Föld forgása.",
+        "b": "A napszél.",
+        "c": "A Földet körülvevő levegőréteg súlya."
+      },
+      "correct": "c",
+      "explanation": "A felettünk lévő, több kilométer magas levegőoszlopnak súlya van, és ez a súly nyomást gyakorol a Föld felszínére és a rajta lévő testekre."
+    }
+  ]
 }

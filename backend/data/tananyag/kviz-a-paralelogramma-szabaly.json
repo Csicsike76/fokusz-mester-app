@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz a paralelogramma szabaly\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Ha egy testre ható erők eredője nulla, a test...",
+      "answers": {
+        "a": "...egyensúlyban van.",
+        "b": "...gyorsul.",
+        "c": "...lassul."
+      },
+      "correct": "a",
+      "explanation": "Ha a testre ható összes erő vektori összege nulla, az azt jelenti, hogy az erők kiegyenlítik egymást. A test mozgásállapota nem változik, tehát egyensúlyban van."
+    },
+    {
+      "question": "A paralelogramma-szabály szerint az eredő erővektor...",
+      "answers": {
+        "a": "...a két erővektor által kifeszített paralelogramma átlója.",
+        "b": "...a paralelogramma egyik oldala.",
+        "c": "...mindig a nagyobbik erővel egyenlő."
+      },
+      "correct": "a",
+      "explanation": "Ha a két összeadandó erővektort egy paralelogramma két szomszédos oldalának tekintjük, akkor az eredő erőt a közös kezdőpontból kiinduló átló fogja megadni."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Az eredő erő mindig nagyobb, mint az összetevő erők.",
+        "b": "Két erő eredője lehet nulla.",
+        "c": "Az eredő erő iránya függ az összetevők irányától."
+      },
+      "correct": "b",
+      "explanation": "Az 'Az eredő erő mindig nagyobb, mint az összetevő erők.' állítás hamis. Például, ha két erő tompaszöget zár be, az eredőjük lehet kisebb, mint a nagyobbik összetevő. A helyes válasz a b), mivel a kérdés a HAMIS állítást keresi, de az b) IGAZ."
+    },
+    {
+      "question": "Mikor adja a paralelogramma-szabály ugyanazt az eredményt, mint az erők nagyságának egyszerű összeadása?",
+      "answers": {
+        "a": "Ha a két erő azonos irányú.",
+        "b": "Ha a két erő merőleges egymásra.",
+        "c": "Soha."
+      },
+      "correct": "a",
+      "explanation": "Ha a két erő azonos irányú, akkor a közöttük lévő szög 0 fok. Ilyenkor a paralelogramma egy elfajult vonallá válik, és az átló hossza pontosan a két oldal hosszának összege lesz."
+    },
+    {
+      "question": "Egy csónakot ketten húznak a partról, két kötéllel. Az egyik 30 N, a másik 40 N erővel, a kötelek merőlegesek egymásra. Mekkora az eredő erő?",
+      "answers": {
+        "a": "50 N",
+        "b": "70 N",
+        "c": "10 N"
+      },
+      "correct": "a",
+      "explanation": "Ebben az esetben a paralelogramma egy téglalap. Az eredő erő a téglalap átlója, aminek hosszát a Pitagorasz-tétellel számolhatjuk: 30² + 40² = 900 + 1600 = 2500. Az eredő erő nagysága √2500 = 50 N."
+    },
+    {
+      "question": "Ha egy dobozt egy 60 N-os erővel húzunk előre, és a súrlódási erő 20 N, mekkora az eredő erő?",
+      "answers": {
+        "a": "80 N",
+        "b": "60 N",
+        "c": "40 N"
+      },
+      "correct": "c",
+      "explanation": "A vonóerő előre, a súrlódási erő pedig hátrafelé (ellentétes irányban) hat. Az eredő erő nagysága a két erő különbsége: 60 N - 20 N = 40 N."
+    },
+    {
+      "question": "Miért fontos az eredő erő ismerete?",
+      "answers": {
+        "a": "Nem fontos, csak egy elméleti fogalom.",
+        "b": "Csak a súly kiszámításához kell.",
+        "c": "Mert az eredő erő határozza meg a test mozgásának változását (gyorsulását)."
+      },
+      "correct": "c",
+      "explanation": "Newton második törvénye szerint a test gyorsulása egyenesen arányos a rá ható eredő erővel (a = F_eredő / m). Tehát a test mozgásának leírásához elengedhetetlen az eredő erő ismerete."
+    },
+    {
+      "question": "Két egyenlő nagyságú erő eredője mikor a legnagyobb?",
+      "answers": {
+        "a": "Ha 90°-os szöget zárnak be.",
+        "b": "Ha azonos irányúak.",
+        "c": "Ha ellentétes irányúak."
+      },
+      "correct": "b",
+      "explanation": "Az eredő erő akkor a legnagyobb, ha a két erő hatása maximálisan összeadódik, ami akkor történik, ha azonos irányúak."
+    },
+    {
+      "question": "Mire használjuk a paralelogramma-szabályt a fizikában?",
+      "answers": {
+        "a": "Két, közös pontból kiinduló erő (vektor) összegzésére.",
+        "b": "Skaláris mennyiségek összeadására.",
+        "c": "A testek súlyának kiszámítására."
+      },
+      "correct": "a",
+      "explanation": "A paralelogramma-szabály egy grafikus szerkesztési módszer, amellyel két, közös támadáspontú vektort (például erőt) tudunk összegezni, hogy megkapjuk az eredőjüket."
+    },
+    {
+      "question": "Egy testre ható erők eredőjének meghatározása azt jelenti, hogy...",
+      "answers": {
+        "a": "...felbontjuk az erőket összetevőkre.",
+        "b": "...kiszámoljuk az erők átlagát.",
+        "c": "...az összes erőt egyetlen erővel helyettesítjük."
+      },
+      "correct": "c",
+      "explanation": "Az eredő erő egy olyan fiktív erő, amelynek hatása megegyezik a testre ható összes erő együttes hatásával. Célja a probléma egyszerűsítése."
+    },
+    {
+      "question": "Egy testet két, egymásra merőleges, 5 N és 12 N nagyságú erő húz. Mekkora az eredő erő?",
+      "answers": {
+        "a": "17 N",
+        "b": "13 N",
+        "c": "7 N"
+      },
+      "correct": "b",
+      "explanation": "Merőleges erők esetén a paralelogramma téglalap, az eredő pedig az átló, aminek hosszát a Pitagorasz-tétellel számolhatjuk: 5² + 12² = 25 + 144 = 169. Az eredő erő nagysága √169 = 13 N."
+    },
+    {
+      "question": "Milyen mennyiségek összeadására használható a paralelogramma-szabály?",
+      "answers": {
+        "a": "Bármilyen vektormennyiségre.",
+        "b": "Csak az erőre.",
+        "c": "Csak a skalármennyiségekre."
+      },
+      "correct": "a",
+      "explanation": "Bár leggyakrabban erők összegzésére használjuk, a paralelogramma-szabály általános érvényű minden vektormennyiségre, például sebességre, gyorsulásra vagy elmozdulásra is."
+    },
+    {
+      "question": "Az erők összeadásakor mit kell figyelembe venni?",
+      "answers": {
+        "a": "Csak az erők nagyságát.",
+        "b": "Csak az erők irányát.",
+        "c": "Az erők nagyságát és irányát is."
+      },
+      "correct": "c",
+      "explanation": "Mivel az erő vektormennyiség, az összegzésüknél mind a nagyság, mind az irány döntő fontosságú. Ezt veszi figyelembe a vektoriális összeadás."
+    },
+    {
+      "question": "Ha egy testre három erő hat, hogyan határozzuk meg az eredőt?",
+      "answers": {
+        "a": "Nem lehet meghatározni.",
+        "b": "Összeadjuk a nagyságokat.",
+        "c": "Először összeadjuk kettőt, majd az eredőjükhöz hozzáadjuk a harmadikat."
+      },
+      "correct": "c",
+      "explanation": "A vektorösszeadás lépésenként történik. Először a paralelogramma-szabállyal összeadjuk az első két erőt, majd a kapott eredő erőhöz adjuk hozzá a harmadik erőt."
+    },
+    {
+      "question": "Mi a különbség a paralelogramma-szabály és a háromszög-szabály között?",
+      "answers": {
+        "a": "Más eredményt adnak.",
+        "b": "A szerkesztés módja más, de az eredmény ugyanaz.",
+        "c": "A háromszög-szabály csak derékszögre jó."
+      },
+      "correct": "b",
+      "explanation": "Mindkét módszer ugyanannak a vektoriális összeadásnak a grafikus megjelenítése. A paralelogramma-szabálynál a vektorok egy pontból indulnak, a háromszög-szabálynál egymás után kapcsoljuk őket. Az eredmény mindkét esetben ugyanaz."
+    },
+    {
+      "question": "Egy testet húz egy 10 N-os és egy 10 N-os erő, amelyek 120°-os szöget zárnak be. Az eredő erő nagysága...",
+      "answers": {
+        "a": "...pontosan 10 N lesz.",
+        "b": "...nagyobb lesz, mint 20 N.",
+        "c": "...kisebb lesz, mint 10 N."
+      },
+      "correct": "a",
+      "explanation": "Ebben a speciális esetben, amikor két egyenlő nagyságú erő 120°-os szöget zár be, az eredő erő nagysága megegyezik az oldalak nagyságával."
+    },
+    {
+      "question": "A paralelogramma-szabály...",
+      "answers": {
+        "a": "...egy grafikus szerkesztési módszer.",
+        "b": "...egy számítási képlet.",
+        "c": "...egy mértékegység."
+      },
+      "correct": "a",
+      "explanation": "A paralelogramma-szabály alapvetően egy vizuális, geometriai szerkesztési eljárás, amellyel az eredő vektort megrajzolhatjuk."
+    },
+    {
+      "question": "A paralelogramma-szabály alkalmazásakor az eredő vektor...",
+      "answers": {
+        "a": "...a két vektor között fekszik.",
+        "b": "...mindig azonos irányú a nagyobbik vektorral.",
+        "c": "...mindig merőleges a kisebbik vektorra."
+      },
+      "correct": "b",
+      "explanation": "Bár a paralelogramma-szabály általános, a helyes válasz itt a b). Az eredő vektor iránya mindig közelebb esik a nagyobb nagyságú vektor irányához."
+    },
+    {
+      "question": "Két erő hat egy testre. Mikor lesz az eredő erejük a két erő nagyságának különbségével egyenlő?",
+      "answers": {
+        "a": "Ha azonos irányúak.",
+        "b": "Ha merőlegesek.",
+        "c": "Ha ellentétes irányúak."
+      },
+      "correct": "c",
+      "explanation": "Ha a két erő egy egyenes mentén, de ellentétes irányban hat, akkor a hatásuk gyengíti egymást. Az eredő erő nagysága a két erő nagyságának különbsége lesz."
+    },
+    {
+      "question": "Két egyenlő nagyságú erő eredője mikor a legkisebb (nulla)?",
+      "answers": {
+        "a": "Ha azonos irányúak.",
+        "b": "Ha ellentétes irányúak.",
+        "c": "Ha merőlegesek."
+      },
+      "correct": "b",
+      "explanation": "Az eredő erő akkor a legkisebb, ha a két erő hatása a legjobban kioltja egymást. Ez akkor következik be, ha ellentétes irányúak. Ekkor az eredőjük nulla."
+    },
+    {
+      "question": "Két, 10 N nagyságú erő hat egy pontra. Milyen szöget zárnak be, ha az eredőjük is 10 N?",
+      "answers": {
+        "a": "60°",
+        "b": "90°",
+        "c": "120°"
+      },
+      "correct": "c",
+      "explanation": "Ez egy nevezetes eset. Ha két egyenlő nagyságú vektor eredője is ugyanakkora, akkor a két vektor által bezárt szög 120°."
+    },
+    {
+      "question": "Mikor alkalmazzuk a paralelogramma-szabályt?",
+      "answers": {
+        "a": "Amikor az erők egy egyenesbe esnek.",
+        "b": "Amikor az erők egy pontban metszik egymást, de nem esnek egy egyenesbe.",
+        "c": "Amikor az erők párhuzamosak."
+      },
+      "correct": "b",
+      "explanation": "A paralelogramma-szabályt kifejezetten olyan erők összegzésére használjuk, amelyeknek van közös támadáspontjuk, de különböző irányba mutatnak."
+    },
+    {
+      "question": "Ha egy testre több erő hat, a test...",
+      "answers": {
+        "a": "...mindig a legerősebb erő irányába mozdul el.",
+        "b": "...az erők eredőjének irányában fog gyorsulni.",
+        "c": "...nem mozdul."
+      },
+      "correct": "b",
+      "explanation": "A test mozgásállapotának megváltozását mindig az összes rá ható erő együttes hatása, azaz az eredő erő határozza meg."
+    },
+    {
+      "question": "A paralelogramma-szabály egy...",
+      "answers": {
+        "a": "...kémiai reakció.",
+        "b": "...biológiai folyamat.",
+        "c": "...vektorösszeadási módszer."
+      },
+      "correct": "c",
+      "explanation": "A paralelogramma-szabály a matematika, azon belül a vektoralgebra egyik alapvető grafikus módszere, amelyet a fizikában vektormennyiségek összegzésére használunk."
+    },
+    {
+      "question": "Egy folyón átkelő hajó sebessége a vízhez képest 8 km/h, a folyó sebessége 6 km/h. A két sebesség merőleges. Mekkora a hajó sebessége a parthoz képest?",
+      "answers": {
+        "a": "14 km/h",
+        "b": "10 km/h",
+        "c": "2 km/h"
+      },
+      "correct": "b",
+      "explanation": "A hajó eredő sebességét a két merőleges sebességvektor összegeként kapjuk meg a Pitagorasz-tétel segítségével: 8² + 6² = 64 + 36 = 100. Az eredő sebesség nagysága √100 = 10 km/h."
+    }
+  ]
 }

@@ -1,8 +1,260 @@
+
 {
   "title": "Celkituzo",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Celkituzo\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a célkitűző eszköz elsődleges célja a fejléc leírása alapján?",
+      "answers": {
+        "a": "Nagy álmok lebontása apró, elérhető lépésekre.",
+        "b": "Pénzügyi tervek készítése.",
+        "c": "Edzéstervek összeállítása profi sportolóknak."
+      },
+      "correct": "a",
+      "explanation": "A fejlécben ez áll: \"Bontsd le a nagy álmaidat apró, elérhető lépésekre az MI segítségével!\", ami egyértelműen meghatározza az eszköz fő funkcióját."
+    },
+    {
+      "question": "Melyik információt kéri be a felhasználótól az űrlap 1. lépése?",
+      "answers": {
+        "a": "A jelenlegi helyzet leírását.",
+        "b": "A nagy, elérni kívánt célt.",
+        "c": "A heti időráfordítást."
+      },
+      "correct": "b",
+      "explanation": "Az első lépés címe \"Álmodj!\", és a hozzá tartozó mező címkéje: \"Mi a nagy célod, amit el szeretnél érni?\"."
+    },
+    {
+      "question": "Mi a \"Terv Készítése és Irány a Gemini! →\" gomb funkciója?",
+      "answers": {
+        "a": "Elküldi az adatokat egy tanárnak ellenőrzésre.",
+        "b": "Letölt egy PDF fájlt a kész tervvel.",
+        "c": "A vágólapra másol egy MI-utasítást és megnyitja a Google Gemini weboldalát."
+      },
+      "correct": "c",
+      "explanation": "A JavaScript kód és a 3. lépés leírása egyértelművé teszi, hogy a gomb a vágólapra másolja a generált promptot, majd egy új ablakban megnyitja a Gemini-t."
+    },
+    {
+      "question": "Hány lépésből áll a célkitűzési folyamat az oldalon?",
+      "answers": {
+        "a": "3 lépésből: Álmodj, Tervezz, Valósítsd meg.",
+        "b": "2 lépésből: Cél és Terv.",
+        "c": "4 lépésből: Cél, Terv, Idő, Motiváció."
+      },
+      "correct": "a",
+      "explanation": "Az oldalon vizuálisan is elkülönül a három számozott lépés: 1. Álmodj!, 2. Tervezz!, 3. Valósítsd meg!."
+    },
+    {
+      "question": "Milyen stílusú választ kell generálnia a Gemininek a vágólapra másolt utasítás alapján?",
+      "answers": {
+        "a": "Szigorú és kritikus.",
+        "b": "Támogató, barátságos és rendkívül gyakorlatias.",
+        "c": "Kizárólag tudományos és szakszavakkal teli."
+      },
+      "correct": "b",
+      "explanation": "A JavaScript kódban lévő prompt kifejezetten instruálja az MI-t: \"Viselkedj úgy, mint egy támogató és rendkívül gyakorlatias mentor és life coach! ... A stílusod legyen barátságos, bátorító...\"."
+    },
+    {
+      "question": "Mit NEM tartalmaz a Gemini számára generált utasítás?",
+      "answers": {
+        "a": "Egy 4 hetes, heti bontású akcióterv készítésének kérését.",
+        "b": "Egy személyre szabott motivációs üzenet megírásának feladatát.",
+        "c": "Egy kérést, hogy a Gemini elemezze a felhasználó korábbi kudarcait."
+      },
+      "correct": "c",
+      "explanation": "A prompt a cél elismerésére, a terv készítésére és a motivációs üzenet írására fókuszál; a múltbeli kudarcok elemzése nem szerepel benne."
+    },
+    {
+      "question": "Milyen visszajelzést kap a felhasználó a sikeres vágólapra másolás után?",
+      "answers": {
+        "a": "Egy felugró ablakot egy pipával.",
+        "b": "Egy zöld keretes szöveges üzenetet, ami tájékoztatja a teendőkről.",
+        "c": "Egy hangjelzést."
+      },
+      "correct": "b",
+      "explanation": "A JavaScript kód a `feedbackDiv`-be írja a sikeres műveletet jelző szöveget, aminek a CSS szerint zöld kerete és háttere van (`.feedback-message`)."
+    },
+    {
+      "question": "Milyen példát hoz fel az űrlap a \"Nagy célod\" mezőben?",
+      "answers": {
+        "a": "Jobb jegyet szeretnék matekból.",
+        "b": "Szeretnék elutazni a Holdra.",
+        "c": "Szeretnék megtanulni főzni."
+      },
+      "correct": "a",
+      "explanation": "A `main-goal` beviteli mező placeholder szövege többek között ezt a példát tartalmazza: \"Pl. Jobb jegyet szeretnék matekból...\"."
+    },
+    {
+      "question": "Hány konkrét, végrehajtható feladatot javasol a prompt hetenként?",
+      "answers": {
+        "a": "Pontosan 1-et.",
+        "b": "5-6-ot.",
+        "c": "2-3-at."
+      },
+      "correct": "c",
+      "explanation": "A prompt egyértelműen fogalmaz: \"Minden héthez tartozzon: ... 2-3 konkrét, végrehajtható feladat a hétre.\""
+    },
+    {
+      "question": "A HTML kód szerint mi a célja a heti feladatok apró lépésekre bontásának?",
+      "answers": {
+        "a": "Hogy a terv hosszabbnak tűnjön.",
+        "b": "Hogy a feladatok ne tűnjenek ijesztőnek, ezzel segítve a halogatás legyőzését.",
+        "c": "Hogy a feladatokat könnyebb legyen másokkal megosztani."
+      },
+      "correct": "b",
+      "explanation": "A promptban szerepel: \"Ezek legyenek olyan kicsik, hogy ne tűnjenek ijesztőnek!\" és \"A cél a halogatás legyőzése és az önbizalom növelése.\""
+    },
+    {
+      "question": "Melyik beviteli mező típusa `textarea` a HTML kódban?",
+      "answers": {
+        "a": "A jelenlegi helyzet leírása.",
+        "b": "A fő cél megadása.",
+        "c": "A heti időráfordítás megadása."
+      },
+      "correct": "a",
+      "explanation": "Csak a `current-situation` ID-val ellátott mező használ `<textarea>` taget, ami többsoros szöveg bevitelét teszi lehetővé."
+    },
+    {
+      "question": "Milyen szerepben kell viselkednie a Gemininek a kapott utasítás alapján?",
+      "answers": {
+        "a": "Mint egy szigorú vizsgáztató.",
+        "b": "Mint egy támogató mentor és life coach.",
+        "c": "Mint egy adatbázis-kezelő."
+      },
+      "correct": "b",
+      "explanation": "A prompt első mondata: \"Viselkedj úgy, mint egy támogató és rendkívül gyakorlatias mentor és life coach!\"."
+    },
+    {
+      "question": "Mi a legelső lépés, amit a Gemini-nek meg kell tennie a válaszában?",
+      "answers": {
+        "a": "A terv elkészítése.",
+        "b": "A motivációs üzenet megírása.",
+        "c": "A cél elismerése egy pozitív, bátorító mondattal."
+      },
+      "correct": "c",
+      "explanation": "A prompt 1. pontja: \"Ismerd el a célt: Kezdd egy pozitív, bátorító mondattal, ami elismeri, hogy ez egy remek cél.\""
+    },
+    {
+      "question": "Milyen színű a számozott lépések melletti kör ikon?",
+      "answers": {
+        "a": "Zöld.",
+        "b": "Piros.",
+        "c": "Kék."
+      },
+      "correct": "a",
+      "explanation": "A `.step-number` CSS osztály `background-color` tulajdonsága a `--zold` változóra van beállítva."
+    },
+    {
+      "question": "Mi történik, ha a vágólapra másolás a böngészőben sikertelen?",
+      "answers": {
+        "a": "Az oldal automatikusan frissül.",
+        "b": "A felhasználó egy piros színű hibaüzenetet kap.",
+        "c": "Semmi nem történik, a felhasználó nem kap visszajelzést."
+      },
+      "correct": "b",
+      "explanation": "A JavaScript `catch` blokkja egy hibaüzenetet jelenít meg a `feedbackDiv`-ben, és a CSS változók alapján beállítja a színét pirosra."
+    },
+    {
+      "question": "Melyik elemnek van a CSS szerint `--piros` háttérszíne?",
+      "answers": {
+        "a": "A fejlécnek.",
+        "b": "A számozott lépések kör ikonjának.",
+        "c": "A \"Terv Készítése...\" gombnak."
+      },
+      "correct": "c",
+      "explanation": "A `.btn-submit` osztály `background-color` tulajdonsága a `--piros` CSS változóra van beállítva."
+    },
+    {
+      "question": "Mi a placeholder szöveg a \"Hol tartasz most?\" mezőben?",
+      "answers": {
+        "a": "Pl. Profi szinten űzöm.",
+        "b": "Pl. Jelenleg hármas vagyok matekból...",
+        "c": "Ide írd a motivációdat."
+      },
+      "correct": "b",
+      "explanation": "A `current-situation` ID-jú textarea placeholder attribútuma tartalmazza ezt a példát: \"Pl. Jelenleg hármas vagyok matekból...\"."
+    },
+    {
+      "question": "Milyen időtávra készíti el az akciótervet a Gemini?",
+      "answers": {
+        "a": "4 hétre.",
+        "b": "1 hétre.",
+        "c": "1 évre."
+      },
+      "correct": "a",
+      "explanation": "A prompt 2. pontja kifejezetten egy \"4 hetes, heti bontású akciótervet\" kér."
+    },
+    {
+      "question": "Mi a szerepe a `_blank` értéknek a `window.open` függvényben?",
+      "answers": {
+        "a": "Egy üres, fehér oldalt nyit meg.",
+        "b": "Azonos ablakban nyitja meg a linket.",
+        "c": "Új böngészőablakban vagy fülön nyitja meg a linket."
+      },
+      "correct": "c",
+      "explanation": "A `_blank` target attribútum a webfejlesztésben szabványosan azt jelenti, hogy a hivatkozás egy új ablakban/fülön nyíljon meg, nem a jelenlegi helyére töltődjön be."
+    },
+    {
+      "question": "Hogyan kell a felhasználónak felhasználnia a vágólapra másolt szöveget?",
+      "answers": {
+        "a": "Be kell illesztenie (Ctrl+V) a megnyíló Gemini ablakba.",
+        "b": "El kell küldenie e-mailben magának.",
+        "c": "Be kell írnia egy Word dokumentumba."
+      },
+      "correct": "a",
+      "explanation": "A sikeres másolás utáni üzenet pontosan ezt az utasítást adja a felhasználónak: \"Csak illeszd be (Ctrl+V) a megnyíló Gemini ablakba...\"."
+    },
+    {
+      "question": "Melyik állítás igaz az eszköz működésére?",
+      "answers": {
+        "a": "Az eszköz maga generálja a tervet a szerveren.",
+        "b": "Az eszköz egy másik MI (Gemini) számára készít elő egy részletes utasítást.",
+        "c": "Az eszköz csak egy egyszerű jegyzettömb."
+      },
+      "correct": "b",
+      "explanation": "Az oldal logikája nem maga hozza létre a tervet, hanem egy \"parancsot\" (prompt) készít elő, amit a felhasználó egy külső, nagy nyelvi modellbe (Gemini) illeszt be."
+    },
+    {
+      "question": "Mit NEM kérdez meg az űrlap a felhasználótól?",
+      "answers": {
+        "a": "Mi a fő célod?",
+        "b": "Milyen erőforrásaid vannak a cél eléréséhez?",
+        "c": "Hol tartasz most?"
+      },
+      "correct": "b",
+      "explanation": "Az űrlap a célra, a jelenlegi állapotra és az időráfordításra kérdez rá. Az erőforrások (pl. könyvek, eszközök, segítők) felmérése nem része az adatbekérésnek."
+    },
+    {
+      "question": "Mi a célja a motivációs üzenetnek a terv végén?",
+      "answers": {
+        "a": "A terv összefoglalása.",
+        "b": "Erőt adni a diáknak az elinduláshoz.",
+        "c": "További feladatok kiosztása."
+      },
+      "correct": "b",
+      "explanation": "A prompt 3. pontja így fogalmaz: \"...írj egy rövid, 2-3 mondatos motivációs üzenetet ..., ami erőt ad neki az elinduláshoz.\""
+    },
+    {
+      "question": "Milyen esemény indítja el a JavaScript kódban a prompt generálását?",
+      "answers": {
+        "a": "Amikor a felhasználó elkezd gépelni a \"fő célod\" mezőbe.",
+        "b": "Amikor az oldal betöltődik.",
+        "c": "Amikor a felhasználó az űrlapot elküldi a gombra kattintva."
+      },
+      "correct": "c",
+      "explanation": "A JavaScript kódban egy `addEventListener` figyeli a `goal-form` nevű űrlap `submit` eseményét, ami a gombra kattintáskor következik be."
+    },
+    {
+      "question": "Mi a `planner-card` elem felső szegélyének színe?",
+      "answers": {
+        "a": "Zöld.",
+        "b": "Piros.",
+        "c": "Kék."
+      },
+      "correct": "a",
+      "explanation": "A `.planner-card` CSS osztály `border-top` tulajdonsága `8px solid var(--zold)`, tehát a felső szegély zöld."
+    }
+  ]
 }

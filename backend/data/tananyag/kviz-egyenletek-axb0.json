@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz egyenletek axb0\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik egyenletnek van végtelen sok megoldása (azonosság)?",
+      "answers": {
+        "a": "x = x+1",
+        "b": "x+x = 2x",
+        "c": "x = 5"
+      },
+      "correct": "b",
+      "explanation": "Az 'x = x+1' egyenlet ellentmondás, az 'x=5' pedig egyetlen megoldással rendelkezik. Az x+x = 2x egyenlőség minden valós számra igaz, tehát ez egy azonosság."
+    },
+    {
+      "question": "Ha 3(x + 1) = 9, akkor x=?",
+      "answers": {
+        "a": "3",
+        "b": "2",
+        "c": "4/3"
+      },
+      "correct": "b",
+      "explanation": "Először osszuk el mindkét oldalt 3-mal: x + 1 = 3. Ebből vonjunk ki 1-et: x = 2."
+    },
+    {
+      "question": "Ha 0.5x = 4, akkor x=?",
+      "answers": {
+        "a": "2",
+        "b": "8",
+        "c": "4.5"
+      },
+      "correct": "b",
+      "explanation": "A 0.5-del való szorzás ugyanaz, mint a 2-vel való osztás. Az egyenlet tehát x/2 = 4. Mindkét oldalt 2-vel szorozva x = 8."
+    },
+    {
+      "question": "Mi a megoldása a -3x - 9 = 0 egyenletnek?",
+      "answers": {
+        "a": "-3",
+        "b": "3",
+        "c": "9"
+      },
+      "correct": "a",
+      "explanation": "Először adjunk 9-et mindkét oldalhoz: -3x = 9. Utána osszuk el mindkét oldalt -3-mal: x = -3."
+    },
+    {
+      "question": "Oldd meg: 4x + 8 = 0",
+      "answers": {
+        "a": "2",
+        "b": "-2",
+        "c": "4"
+      },
+      "correct": "b",
+      "explanation": "Először vonjunk ki 8-at mindkét oldalból: 4x = -8. Utána osszuk el mindkét oldalt 4-gyel: x = -2."
+    },
+    {
+      "question": "Melyik egyenletnek a megoldása az x = 1?",
+      "answers": {
+        "a": "7x - 5 = 2",
+        "b": "7x + 2 = 5",
+        "c": "5x - 7 = 2"
+      },
+      "correct": "a",
+      "explanation": "Ellenőrizzük behelyettesítéssel. Az 'a' esetben: 7*1 - 5 = 7 - 5 = 2. Ez helyes."
+    },
+    {
+      "question": "Ha egy szám fele 7. Melyik ez a szám?",
+      "answers": {
+        "a": "3.5",
+        "b": "14",
+        "c": "9"
+      },
+      "correct": "b",
+      "explanation": "Az egyenlet: x / 2 = 7. Szorozzuk mindkét oldalt 2-vel, így megkapjuk, hogy x = 14."
+    },
+    {
+      "question": "Oldd meg: 3x - 15 = 0",
+      "answers": {
+        "a": "5",
+        "b": "-5",
+        "c": "15"
+      },
+      "correct": "a",
+      "explanation": "Adjunk 15-öt mindkét oldalhoz, hogy az x-et tartalmazó tag egyedül maradjon. Ekkor: 3x = 15. Osszuk el az egyenlet mindkét oldalát 3-mal. Így x = 5."
+    },
+    {
+      "question": "Mi a megoldása a 6 - x = 6 egyenletnek?",
+      "answers": {
+        "a": "1",
+        "b": "0",
+        "c": "6"
+      },
+      "correct": "b",
+      "explanation": "Vonjunk ki 6-ot mindkét oldalból: -x = 0. Ezt -1-gyel szorozva kapjuk, hogy x = 0."
+    },
+    {
+      "question": "Mi a megoldása a x/3 = -4 egyenletnek?",
+      "answers": {
+        "a": "-1.33",
+        "b": "7",
+        "c": "-12"
+      },
+      "correct": "c",
+      "explanation": "Az egyenlet mindkét oldalát szorozzuk meg 3-mal, így x = -4 * 3 = -12."
+    },
+    {
+      "question": "Oldd meg: 5x + 1 = 4x + 6",
+      "answers": {
+        "a": "7",
+        "b": "1",
+        "c": "5"
+      },
+      "correct": "c",
+      "explanation": "Először vonjunk ki 4x-et mindkét oldalból: x + 1 = 6. Utána vonjunk ki 1-et mindkét oldalból: x = 5."
+    },
+    {
+      "question": "Mi a megoldása a 2(x + 4) = 12 egyenletnek?",
+      "answers": {
+        "a": "8",
+        "b": "2",
+        "c": "1"
+      },
+      "correct": "b",
+      "explanation": "Először osszuk el mindkét oldalt 2-vel: x + 4 = 6. Utána vonjunk ki 4-et mindkét oldalból: x = 2."
+    },
+    {
+      "question": "Melyik egyenletnek NINCS megoldása?",
+      "answers": {
+        "a": "x = x",
+        "b": "x = 5",
+        "c": "x + 2 = x + 3"
+      },
+      "correct": "c",
+      "explanation": "Ha az x + 2 = x + 3 egyenletből kivonunk x-et mindkét oldalból, a 2 = 3 állítást kapjuk, ami hamis. Ezt hívjuk ellentmondásnak."
+    },
+    {
+      "question": "Oldd meg: -x = -1",
+      "answers": {
+        "a": "-1",
+        "b": "0",
+        "c": "1"
+      },
+      "correct": "c",
+      "explanation": "Szorozzuk meg az egyenlet mindkét oldalát -1-gyel. (-x) * (-1) = x, és (-1) * (-1) = 1. Tehát x = 1."
+    },
+    {
+      "question": "Ha egy számhoz 10-et adunk, majd az eredményt megduplázzuk, 30-at kapunk. Mi a szám?",
+      "answers": {
+        "a": "10",
+        "b": "20",
+        "c": "5"
+      },
+      "correct": "c",
+      "explanation": "Az egyenlet: 2 * (x + 10) = 30. Először osszunk 2-vel: x + 10 = 15. Majd vonjunk ki 10-et: x = 5."
+    },
+    {
+      "question": "Ha x - 7 = -3, akkor x=?",
+      "answers": {
+        "a": "-10",
+        "b": "4",
+        "c": "10"
+      },
+      "correct": "b",
+      "explanation": "Adjunk 7-et az egyenlet mindkét oldalához. x = -3 + 7, tehát x = 4."
+    },
+    {
+      "question": "Ha 100 - 10x = 20, akkor x=?",
+      "answers": {
+        "a": "8",
+        "b": "12",
+        "c": "-8"
+      },
+      "correct": "a",
+      "explanation": "Először vonjunk ki 100-at mindkét oldalból: -10x = 20 - 100, azaz -10x = -80. Utána osszuk el mindkét oldalt -10-zel: x = 8."
+    },
+    {
+      "question": "Oldd meg: -5x = 25",
+      "answers": {
+        "a": "5",
+        "b": "-5",
+        "c": "-125"
+      },
+      "correct": "b",
+      "explanation": "Osszuk el az egyenlet mindkét oldalát -5-tel. x = 25 / (-5) = -5."
+    },
+    {
+      "question": "Mi a megoldása a 25 - 5x = 0 egyenletnek?",
+      "answers": {
+        "a": "20",
+        "b": "-5",
+        "c": "5"
+      },
+      "correct": "c",
+      "explanation": "Először adjunk 5x-et mindkét oldalhoz: 25 = 5x. Utána osszuk el mindkét oldalt 5-tel: x = 5."
+    },
+    {
+      "question": "Melyik x-re igaz, hogy 2(x + 5) = 2x + 10?",
+      "answers": {
+        "a": "Minden valós x-re",
+        "b": "Csak x=5 esetén",
+        "c": "Nincs ilyen x"
+      },
+      "correct": "a",
+      "explanation": "A bal oldalon felbontjuk a zárójelet: 2*x + 2*5 = 2x + 10. Az egyenlet mindkét oldala megegyezik, ami azt jelenti, hogy bármilyen számot helyettesítünk x helyére, az egyenlőség igaz lesz. Ezt hívjuk azonosságnak."
+    },
+    {
+      "question": "Oldd meg: -x + 3 = 10",
+      "answers": {
+        "a": "-7",
+        "b": "7",
+        "c": "13"
+      },
+      "correct": "a",
+      "explanation": "Először vonjunk ki 3-at mindkét oldalból: -x = 7. Utána szorozzuk meg mindkét oldalt -1-gyel: x = -7."
+    },
+    {
+      "question": "Mi a megoldása a x/4 + 1 = 3 egyenletnek?",
+      "answers": {
+        "a": "8",
+        "b": "2",
+        "c": "16"
+      },
+      "correct": "a",
+      "explanation": "Először vonjunk ki 1-et mindkét oldalból: x/4 = 2. Utána szorozzuk meg az egyenlet mindkét oldalát 4-gyel: x = 8."
+    },
+    {
+      "question": "Oldd meg: 1 - x = 2",
+      "answers": {
+        "a": "1",
+        "b": "-3",
+        "c": "-1"
+      },
+      "correct": "c",
+      "explanation": "Először vonjunk ki 1-et mindkét oldalból: -x = 1. Utána szorozzuk mindkét oldalt -1-gyel: x = -1."
+    },
+    {
+      "question": "Ha egy szám ötszöröséből elveszünk 1-et, 44-et kapunk. Melyik ez a szám?",
+      "answers": {
+        "a": "9",
+        "b": "8.6",
+        "c": "40"
+      },
+      "correct": "a",
+      "explanation": "A szöveg alapján az egyenlet: 5x - 1 = 44. Adjunk 1-et mindkét oldalhoz: 5x = 45. Majd osszunk 5-tel: x = 9."
+    }
+  ]
 }

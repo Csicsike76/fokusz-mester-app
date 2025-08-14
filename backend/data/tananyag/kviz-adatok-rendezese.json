@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz adatok rendezese\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "A medián mindig az adatsor egyik eleme.",
+        "b": "A módusz mindig az adatsor egyik eleme.",
+        "c": "Az átlag mindig az adatsor egyik eleme."
+      },
+      "correct": "b",
+      "explanation": "A módusz definíció szerint a leggyakrabban előforduló adat, tehát mindig az adatok közül kerül ki. Az átlag és a medián (páros adatszámnál) nem feltétlenül."
+    },
+    {
+      "question": "Négy dolgozatod jegye: 5, 4, 3, 5. Mi a jegyeid átlaga?",
+      "answers": {
+        "a": "4.5",
+        "b": "4.25",
+        "c": "4"
+      },
+      "correct": "b",
+      "explanation": "Összeadjuk a jegyeket: 5 + 4 + 3 + 5 = 17. Ezt elosztjuk a darabszámmal (4): 17 / 4 = 4.25."
+    },
+    {
+      "question": "Mi egy adathalmaz terjedelme?",
+      "answers": {
+        "a": "Az adatok összege.",
+        "b": "A legnagyobb és legkisebb adat különbsége.",
+        "c": "Az adatok száma."
+      },
+      "correct": "b",
+      "explanation": "A terjedelem az adatok 'szóródását' méri. Ehhez meg kell keresni a legnagyobb és a legkisebb értéket, majd kivonni őket egymásból."
+    },
+    {
+      "question": "Melyik középérték mutatja meg a legjobban a 'tipikus' értéket, ha az adatok között nagy kiugró értékek vannak?",
+      "answers": {
+        "a": "a terjedelem",
+        "b": "a medián",
+        "c": "az átlag"
+      },
+      "correct": "b",
+      "explanation": "Az átlagot egy extrém érték erősen eltorzítja. A medián a sorba rendezett adatsor közepén van, így rá nincsenek hatással a kiugró értékek, jobban mutatja a 'tipikus' adatot."
+    },
+    {
+      "question": "Mi egy adathalmaz átlaga (számtani közepe)?",
+      "answers": {
+        "a": "A legnagyobb és a legkisebb érték különbsége.",
+        "b": "Az adatok összege osztva az adatok számával.",
+        "c": "A leggyakrabban előforduló adat."
+      },
+      "correct": "b",
+      "explanation": "Az átlag kiszámításához először össze kell adni az összes adatot, majd az így kapott összeget el kell osztani annyival, ahány adatunk van."
+    },
+    {
+      "question": "Mi az első lépés a medián meghatározásakor?",
+      "answers": {
+        "a": "Az adatok sorba rendezése.",
+        "b": "Az adatok összeadása.",
+        "c": "A leggyakoribb adat megkeresése."
+      },
+      "correct": "a",
+      "explanation": "A medián definíció szerint a 'középső' elem. A közepét egy adathalmaznak csak akkor tudjuk megtalálni, ha előtte sorba rendeztük."
+    },
+    {
+      "question": "Mi a mediánja a következő számoknak: 10, 20, 30, 40?",
+      "answers": {
+        "a": "20",
+        "b": "25",
+        "c": "30"
+      },
+      "correct": "b",
+      "explanation": "Az adatok már sorba vannak rendezve. Páros számú (4 db) adatunk van. Ilyenkor a két középső elem (20 és 30) átlaga a medián: (20 + 30) / 2 = 25."
+    },
+    {
+      "question": "Mi a módusza az 'alma, körte, alma, szilva, körte, alma' adatsornak?",
+      "answers": {
+        "a": "körte",
+        "b": "alma",
+        "c": "nincs neki"
+      },
+      "correct": "b",
+      "explanation": "Számoljuk meg, melyik gyümölcs hányszor szerepel. Alma: 3-szor, körte: 2-szer, szilva: 1-szer. A legtöbbször az alma fordul elő."
+    },
+    {
+      "question": "Mi az átlaga a következő számoknak: 10, 10, 10?",
+      "answers": {
+        "a": "30",
+        "b": "10",
+        "c": "3"
+      },
+      "correct": "b",
+      "explanation": "Ha minden adat ugyanaz, az átlaguk is annyi lesz. Számolással: (10 + 10 + 10) / 3 = 10."
+    },
+    {
+      "question": "Melyik statisztikai mutatóra van a legnagyobb hatással egy kiugróan nagy vagy kicsi adat (outlier)?",
+      "answers": {
+        "a": "az átlag",
+        "b": "a medián",
+        "c": "a módusz"
+      },
+      "correct": "a",
+      "explanation": "A medián és a móduszra egyetlen kiugró adat nincs nagy hatással. Az átlagot viszont az adatok összegéből számoljuk, így egy extrém érték az összeget és ezen keresztül az átlagot is erősen el tudja torzítani."
+    },
+    {
+      "question": "Lehet-e egy adatsornak több módusza?",
+      "answers": {
+        "a": "Nem, a módusz mindig egyedi.",
+        "b": "Igen, ha több adat is ugyanannyiszor a leggyakoribb.",
+        "c": "Csak akkor, ha az adatok páros számok."
+      },
+      "correct": "b",
+      "explanation": "Igen. Például az 1, 1, 2, 3, 3 adatsornak két módusza is van: az 1 és a 3, mert mindkettő kétszer fordul elő, ami a leggyakoribb."
+    },
+    {
+      "question": "Mi egy adathalmaz mediánja?",
+      "answers": {
+        "a": "A legkisebb adat.",
+        "b": "A sorba rendezett adatok közül a középső.",
+        "c": "A legnagyobb adat."
+      },
+      "correct": "b",
+      "explanation": "A legfontosabb, hogy az adatokat először növekvő sorrendbe kell rendezni. A medián az az érték, amelyik a sorba rendezett adatsor közepén helyezkedik el."
+    },
+    {
+      "question": "Milyen adatrendezési módszer a 'strichliste' (vonalkázás)?",
+      "answers": {
+        "a": "Az adatok átlagolása.",
+        "b": "Az adatok gyakoriságának jelölése vonalakkal.",
+        "c": "Az adatok sorba rendezése."
+      },
+      "correct": "b",
+      "explanation": "A strichliste, vagy gyakorisági vonalazás segít gyorsan megszámolni az egyes kategóriákba tartozó elemeket minden előfordulásnál húzott vonallal."
+    },
+    {
+      "question": "Mi a terjedelme a következő adatsornak: 15, 8, 22, 5, 12?",
+      "answers": {
+        "a": "17",
+        "b": "22",
+        "c": "5"
+      },
+      "correct": "a",
+      "explanation": "Keressük meg a legnagyobb (22) és a legkisebb (5) értéket. Vonjuk ki őket egymásból: 22 - 5 = 17."
+    },
+    {
+      "question": "Egy osztályban a fiúk-lányok arányát szeretnénk ábrázolni. Melyik diagram a legjobb?",
+      "answers": {
+        "a": "Oszlopdiagram vagy kördiagram",
+        "b": "Csak vonaldiagram",
+        "c": "Csak táblázat"
+      },
+      "correct": "a",
+      "explanation": "Az oszlopdiagrammal összehasonlíthatjuk a fiúk és a lányok létszámát. A kördiagrammal pedig megmutathatjuk, hogy az egész osztály hány százaléka fiú és hány százaléka lány."
+    },
+    {
+      "question": "Mi a módusza a következő adatsornak: 5, 2, 8, 2, 5, 2?",
+      "answers": {
+        "a": "5",
+        "b": "8",
+        "c": "2"
+      },
+      "correct": "c",
+      "explanation": "Számoljuk meg az egyes adatok gyakoriságát. Az 5 kétszer, a 8 egyszer, a 2 pedig háromszor fordul elő. A leggyakrabban előforduló adat a 2."
+    },
+    {
+      "question": "Melyik diagramtípus mutatja a legjobban az adatok időbeli változását (pl. hőmérséklet egy hét alatt)?",
+      "answers": {
+        "a": "kördiagram",
+        "b": "vonaldiagram",
+        "c": "táblázat"
+      },
+      "correct": "b",
+      "explanation": "A vonaldiagram összeköti az időben egymást követő adatpontokat, így a vonal emelkedése vagy süllyedése jól mutatja a változás trendjét."
+    },
+    {
+      "question": "Mi egy adathalmaz módusza?",
+      "answers": {
+        "a": "A leggyakrabban előforduló adat.",
+        "b": "Az adatok átlaga.",
+        "c": "Az adatok középső eleme."
+      },
+      "correct": "a",
+      "explanation": "A módusz a 'divatot' jelenti, azaz azt, ami a legnépszerűbb, leggyakoribb. Meg kell számolni, hogy melyik adat fordul elő a legtöbbször."
+    },
+    {
+      "question": "Egy kördiagramon egy 90°-os körcikk az egész hány százalékát jelöli?",
+      "answers": {
+        "a": "90%",
+        "b": "50%",
+        "c": "25%"
+      },
+      "correct": "c",
+      "explanation": "A teljes kör 360°, ami a 100%-nak felel meg. A 90° a 360°-nak a negyede, tehát a 100%-nak is a negyedét jelöli, ami 25%."
+    },
+    {
+      "question": "Mi a gyakorisági táblázat célja?",
+      "answers": {
+        "a": "Az adatok sorba rendezése.",
+        "b": "Az adatok megszámolása és átláthatóvá tétele.",
+        "c": "Az adatok átlagának kiszámítása."
+      },
+      "correct": "b",
+      "explanation": "Egy gyakorisági táblázatban az egyik oszlopban az adatok lehetséges értékei, a másikban pedig az előfordulásuk száma (gyakorisága) szerepel, segítve az adatok átláthatóságát."
+    },
+    {
+      "question": "Lehet-e egy adatsornak, hogy nincs módusza?",
+      "answers": {
+        "a": "Igen, ha minden adat csak egyszer szerepel.",
+        "b": "Nem, mindig van leggyakoribb.",
+        "c": "Csak ha az adatok negatívak."
+      },
+      "correct": "a",
+      "explanation": "Igen. Ha egy adatsorban minden adat pontosan egyszer fordul elő (pl. 1, 2, 3, 4, 5), akkor nincs olyan, ami a 'leggyakoribb' lenne."
+    },
+    {
+      "question": "Melyik diagramtípus a legalkalmasabb egy egész részekre osztásának bemutatására (pl. választási eredmények százalékban)?",
+      "answers": {
+        "a": "oszlopdiagram",
+        "b": "vonaldiagram",
+        "c": "kördiagram"
+      },
+      "correct": "c",
+      "explanation": "A kördiagram egy teljes egészet (a 100%-ot) ábrázol, és a körcikkek mérete arányos az egyes kategóriák részesedésével, így ideális arányok bemutatására."
+    },
+    {
+      "question": "Mi az átlaga a következő számoknak: 2, 4, 6?",
+      "answers": {
+        "a": "12",
+        "b": "4",
+        "c": "6"
+      },
+      "correct": "b",
+      "explanation": "Adjuk össze a számokat: 2 + 4 + 6 = 12. Osszuk el az összeget a számok darabszámával (3): 12 / 3 = 4."
+    },
+    {
+      "question": "Mi az első lépés egy kutatásnál, miután feltettük a kérdést?",
+      "answers": {
+        "a": "Diagram rajzolása",
+        "b": "Adatgyűjtés",
+        "c": "Átlagszámítás"
+      },
+      "correct": "b",
+      "explanation": "Mielőtt bármit rendeznénk vagy számolnánk, szükségünk van magukra az adatokra, amelyeket felméréssel, megfigyeléssel vagy kísérlettel gyűjthetünk."
+    },
+    {
+      "question": "Mi a mediánja a következő számoknak: 3, 9, 5, 2, 10?",
+      "answers": {
+        "a": "9",
+        "b": "5",
+        "c": "6"
+      },
+      "correct": "b",
+      "explanation": "Először rendezzük sorba a számokat: 2, 3, 5, 9, 10. Mivel 5 (páratlan) számunk van, a középső a 3. elem, ami az 5."
+    }
+  ]
 }

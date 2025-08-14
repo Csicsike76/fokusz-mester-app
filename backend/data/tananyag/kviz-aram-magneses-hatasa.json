@@ -1,8 +1,249 @@
 {
-  "title": "Kviz aram magneses hatasa",
+  "title": "Kviz aram kemiai hatasa",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz aram magneses hatasa\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kviz aram kemiai hatasa\" című tananyag.",
+  "questions": [
+    {
+      "question": "Milyen anyagokban jön létre az áram kémiai hatása?",
+      "answers": {
+        "a": "Ionvegyületek oldataiban vagy olvadékaiban (elektrolitokban).",
+        "b": "Fémekben.",
+        "c": "Vákuumban."
+      },
+      "correct": "a",
+      "explanation": "Az áram kémiai hatása olyan közegekben jelentkezik, ahol a töltéshordozók ionok. Az ionvegyületek vizes oldatai és olvadékai, az elektrolitok ilyenek."
+    },
+    {
+      "question": "A víz elektrolízisekor a pozitív elektródán (anódon)...",
+      "answers": {
+        "a": "...hidrogén gáz fejlődik.",
+        "b": "...oxigén gáz fejlődik.",
+        "c": "...nem történik semmi."
+      },
+      "correct": "b",
+      "explanation": "A vízben lévő negatív hidroxidionok (OH⁻) a pozitív anód felé vándorolnak, ott elektronokat adnak le, és oxigén gázzá (O₂) alakulnak."
+    },
+    {
+      "question": "Az anionok...",
+      "answers": {
+        "a": "...semleges részecskék.",
+        "b": "...pozitív töltésű ionok.",
+        "c": "...negatív töltésű ionok."
+      },
+      "correct": "c",
+      "explanation": "A negatív töltésű ionokat anionoknak nevezzük, mert az elektrolízis során a pozitív anód felé vándorolnak."
+    },
+    {
+      "question": "Mi a galvanizálás?",
+      "answers": {
+        "a": "Egy fém bevonása egy másik fémmel elektrolízis útján.",
+        "b": "Egy fém megolvasztása.",
+        "c": "Egy fém mágnesezése."
+      },
+      "correct": "a",
+      "explanation": "A galvanizálás egy ipari eljárás, ahol elektrolízis segítségével egy fémtárgyat bevonnak egy másik, nemesebb vagy ellenállóbb fém vékony rétegével."
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "Az áram kémiai hatása minden vezetőben fellép.",
+        "b": "Az áram kémiai hatása csak elektrolitokban figyelhető meg.",
+        "c": "A fémekben az ionok vezetik az áramot."
+      },
+      "correct": "b",
+      "explanation": "Kémiai hatás csak ott jöhet létre, ahol az áramot ionok mozgása hozza létre, mert az ionok az elektródákon kémiai reakcióba léphetnek. Ilyen közegek az elektrolitok."
+    },
+    {
+      "question": "Az elektrolízis során a katódon...",
+      "answers": {
+        "a": "...mindig gáz fejlődik.",
+        "b": "...elektronleadás (oxidáció) történik.",
+        "c": "...elektronfelvétel (redukció) történik."
+      },
+      "correct": "c",
+      "explanation": "A negatív katód vonzza a pozitív kationokat. A kationok itt vesznek fel elektronokat, azaz redukálódnak."
+    },
+    {
+      "question": "Mi az ion?",
+      "answers": {
+        "a": "Töltéssel rendelkező atom vagy atomcsoport.",
+        "b": "Az atom legkisebb része.",
+        "c": "Semleges részecske."
+      },
+      "correct": "a",
+      "explanation": "Az ionok olyan atomok vagy molekulák, amelyek elektronleadással (pozitív ion, kation) vagy elektronfelvétellel (negatív ion, anion) elektromos töltésre tettek szert."
+    },
+    {
+      "question": "A víz elektrolízisekor a negatív elektródán (katódon)...",
+      "answers": {
+        "a": "...oxigén gáz fejlődik.",
+        "b": "...hidrogén gáz fejlődik.",
+        "c": "...klór gáz fejlődik."
+      },
+      "correct": "b",
+      "explanation": "A vízben lévő pozitív hidrogénionok (H⁺) a negatív katód felé vándorolnak, ott elektronokat vesznek fel és hidrogén gázzá (H₂) alakulnak."
+    },
+    {
+      "question": "Melyik folyadék vezeti az elektromos áramot, miközben kémiai átalakulás is történik?",
+      "answers": {
+        "a": "Desztillált víz",
+        "b": "Sós víz (konyhasó oldata)",
+        "c": "Olaj"
+      },
+      "correct": "b",
+      "explanation": "A sós vízben a konyhasó (NaCl) ionokra (Na⁺ és Cl⁻) bomlik. Ezek az ionok a töltéshordozók, amelyek lehetővé teszik az áramvezetést. A desztillált víz és az olaj nagyon rossz vezetők."
+    },
+    {
+      "question": "A kationok...",
+      "answers": {
+        "a": "...negatív töltésű ionok.",
+        "b": "...semleges részecskék.",
+        "c": "...pozitív töltésű ionok."
+      },
+      "correct": "c",
+      "explanation": "A pozitív töltésű ionokat kationoknak nevezzük, mert az elektrolízis során a negatív katód felé vándorolnak."
+    },
+    {
+      "question": "Mi a katód?",
+      "answers": {
+        "a": "Az elektrolizáló cella pozitív pólusa.",
+        "b": "Az elektrolizáló cella negatív pólusa.",
+        "c": "A két pólus közötti távolság."
+      },
+      "correct": "b",
+      "explanation": "A katód az az elektróda, amely az áramforrás negatív pólusához csatlakozik. A katód felé vándorolnak a pozitív töltésű ionok (kationok)."
+    },
+    {
+      "question": "Melyik folyadék NEM vezeti az elektromos áramot?",
+      "answers": {
+        "a": "Sós víz",
+        "b": "Savas víz",
+        "c": "Tiszta (desztillált) víz"
+      },
+      "correct": "c",
+      "explanation": "A tiszta, desztillált vízben nagyon kevés ion van, ezért gyakorlatilag szigetelő. A sós vagy savas vízben az oldott anyag ionokra bomlik, amelyek már képesek vezetni az áramot."
+    },
+    {
+      "question": "Az elektrolit oldatokban a töltéshordozók a(z)...",
+      "answers": {
+        "a": "...pozitív és negatív ionok.",
+        "b": "...szabad elektronok.",
+        "c": "...semleges molekulák."
+      },
+      "correct": "a",
+      "explanation": "Ellentétben a fémekkel, ahol az elektronok vezetik az áramot, az elektrolit oldatokban a pozitív (kationok) és negatív (anionok) elmozdulása jelenti az elektromos áramot."
+    },
+    {
+      "question": "Mi az anód?",
+      "answers": {
+        "a": "Az elektrolizáló cella pozitív pólusa.",
+        "b": "Az elektrolizáló cella negatív pólusa.",
+        "c": "Az oldat maga."
+      },
+      "correct": "a",
+      "explanation": "Az anód az az elektróda, amely az áramforrás pozitív pólusához csatlakozik. Az anód felé vándorolnak a negatív töltésű ionok (anionok)."
+    },
+    {
+      "question": "A konyhasó (NaCl) oldatának elektrolízisekor a negatív elektródán...",
+      "answers": {
+        "a": "...klór gáz fejlődik.",
+        "b": "...nátrium fém válik ki.",
+        "c": "...hidrogén gáz fejlődik."
+      },
+      "correct": "b",
+      "explanation": "Bár a nátriumionok (Na⁺) vándorolnak a negatív katódhoz, a vízbontás könnyebben megy végbe, így a vízből hidrogén gáz fejlődik, nem pedig a nátrium válik ki. A helyes válasz b)."
+    },
+    {
+      "question": "Mi az elektrolízis?",
+      "answers": {
+        "a": "Kémiai reakció, amelyet elektromos áram idéz elő.",
+        "b": "Az áram hőhatása.",
+        "c": "Az áram mágneses hatása."
+      },
+      "correct": "a",
+      "explanation": "Az elektrolízis során az elektromos áram energiája kémiai átalakulást, anyagok felbontását idézi elő. Ez az áram kémiai hatásának legfontosabb példája."
+    },
+    {
+      "question": "A víz elektrolízisekor kétszer annyi hidrogén fejlődik, mint oxigén. Miért?",
+      "answers": {
+        "a": "Mert a hidrogén könnyebb.",
+        "b": "Mert a hidrogén jobban vezeti az áramot.",
+        "c": "Mert a vízmolekulában (H₂O) kétszer annyi hidrogénatom van, mint oxigénatom."
+      },
+      "correct": "c",
+      "explanation": "A víz kémiai képlete H₂O. Amikor a molekula szétbomlik, a benne lévő atomok arányának megfelelően kétszer akkora térfogatú hidrogén gáz keletkezik, mint oxigén gáz."
+    },
+    {
+      "question": "A víz elektrolízise során milyen gázok fejlődnek?",
+      "answers": {
+        "a": "Hidrogén és oxigén.",
+        "b": "Szén-dioxid és nitrogén.",
+        "c": "Nem fejlődik gáz."
+      },
+      "correct": "a",
+      "explanation": "A víz (H₂O) elektrolízise során a vízmolekulák alkotóelemeikre, hidrogénre és oxigénre bomlanak. A negatív elektródán hidrogén, a pozitív elektródán oxigén gáz fejlődik."
+    },
+    {
+      "question": "Mitől függ az elektrolízis során kiváló anyag mennyisége?",
+      "answers": {
+        "a": "Csak az oldat hőmérsékletétől.",
+        "b": "Az áramerősségtől és az elektrolízis idejétől.",
+        "c": "Csak az elektródák anyagától."
+      },
+      "correct": "b",
+      "explanation": "Faraday törvényei szerint a kiválasztott anyag mennyisége egyenesen arányos az áramerősséggel és az idővel, azaz az áramkörön áthaladt teljes töltésmennyiséggel."
+    },
+    {
+      "question": "Mi történik az akkumulátor töltésekor?",
+      "answers": {
+        "a": "Az áram hőhatását használjuk ki.",
+        "b": "Az elektromos energia kémiai energiává alakul.",
+        "c": "A kémiai energia elektromos energiává alakul."
+      },
+      "correct": "b",
+      "explanation": "Az akkumulátor töltése egy elektrolízishez hasonló folyamat. A külső áramforrás energiájával visszafordítjuk azt a kémiai reakciót, ami a kisütéskor zajlott."
+    },
+    {
+      "question": "Mi az elektrolit?",
+      "answers": {
+        "a": "Egy fém vezeték.",
+        "b": "Egyfajta szigetelőanyag.",
+        "c": "Olyan anyag, amelynek vizes oldata vagy olvadéka vezeti az elektromos áramot."
+      },
+      "correct": "c",
+      "explanation": "Az elektrolitok olyan ionvegyületek (savak, bázisok, sók), amelyek oldatban vagy olvadékban ionokra esnek szét, és így az oldat elektromosan vezetővé válik."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Az elektrolízis egy kémiai folyamat.",
+        "b": "Az elektrolitok vezetik az áramot.",
+        "c": "Az elektrolízishez nem szükséges áramforrás."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. Az elektrolízis egy energiaigényes folyamat, amelyet külső áramforrás (pl. elem, akkumulátor) energiája tart fenn."
+    },
+    {
+      "question": "Mi a galvánelem?",
+      "answers": {
+        "a": "Egy elektrolizáló cella.",
+        "b": "Olyan berendezés, ami kémiai energia rovására elektromos áramot hoz létre.",
+        "c": "Egyfajta biztosíték."
+      },
+      "correct": "b",
+      "explanation": "A galvánelem (pl. ceruzaelem) az elektrolízis fordított folyamatát valósítja meg: egy spontán végbemenő kémiai reakció energiáját alakítja át elektromos energiává."
+    },
+    {
+      "question": "Az elektrolízis során az anódon...",
+      "answers": {
+        "a": "...mindig fém válik ki.",
+        "b": "...elektronfelvétel (redukció) történik.",
+        "c": "...elektronleadás (oxidáció) történik."
+      },
+      "correct": "c",
+      "explanation": "A pozitív anód vonzza a negatív anionokat. Az anionok itt adják le elektrontöbbletüket, azaz oxidálódnak."
+    }
+  ]
 }

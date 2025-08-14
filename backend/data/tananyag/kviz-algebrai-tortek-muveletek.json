@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz algebrai tortek muveletek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás igaz: (a/b) × b = a?",
+      "answers": {
+        "a": "Általában igaz",
+        "b": "Csak b≠0 esetén igaz",
+        "c": "Mindig hamis"
+      },
+      "correct": "b",
+      "explanation": "A 'b'-vel való szorzás és osztás kioltja egymást. Azonban fontos szabály, hogy a nevezőben (a tört alsó részén) soha nem állhat nulla, mert nullával nem lehet osztani."
+    },
+    {
+      "question": "Egyszerűsítés: (5x+5)/5 = ?",
+      "answers": {
+        "a": "x+1",
+        "b": "x+1",
+        "c": "5(x+1)"
+      },
+      "correct": "b",
+      "explanation": "Ha egy összeget (a felső részt) osztunk egy számmal (az alsó résszel), akkor az összeg minden tagját külön-külön el kell osztani. 5x osztva 5-tel az x. 5 osztva 5-tel az 1. Az eredmény: x+1."
+    },
+    {
+      "question": "Hogyan bontod fel: (a+b)/c?",
+      "answers": {
+        "a": "(a/c) + b",
+        "b": "(a+b)/c",
+        "c": "(a/c) + (b/c)"
+      },
+      "correct": "c",
+      "explanation": "Ha a számlálóban (a felső részben) egy összeg van, akkor az összeg minden tagját külön-külön is eloszthatjuk a nevezővel. Tehát (a+b)/c felbontható a/c + b/c alakra."
+    },
+    {
+      "question": "Melyik állítás igaz: (a/b) × b = a?",
+      "answers": {
+        "a": "b≠0 esetén igaz",
+        "b": "Mindig igaz",
+        "c": "Mindig hamis"
+      },
+      "correct": "a",
+      "explanation": "Az osztás és a szorzás 'b'-vel kioltja egymást. A szabály csak akkor igaz, ha 'b' nem nulla, mert a nevezőben soha nem állhat nulla."
+    },
+    {
+      "question": "Melyik ábrázolja helyesen: (3/4) × (2/5)?",
+      "answers": {
+        "a": "(3×2)/(4×5) = 6/20 = 3/10",
+        "b": "5/8",
+        "c": "6/9"
+      },
+      "correct": "a",
+      "explanation": "Törteket úgy szorzunk össze, hogy a számlálót (felső részt) szorozzuk a számlálóval, a nevezőt (alsó részt) pedig a nevezővel. Így 3*2=6 és 4*5=20. A kapott 6/20 törtet egyszerűsíthetjük 2-vel, így lesz belőle 3/10."
+    },
+    {
+      "question": "Melyik a törtszorzás inverze: (3/5) × ? = 1?",
+      "answers": {
+        "a": "5/3",
+        "b": "3/5",
+        "c": "1/15"
+      },
+      "correct": "a",
+      "explanation": "Egy törtet a reciprokával (megfordítottjával) kell megszorozni, hogy az eredmény 1 legyen. A 3/5 reciproka az 5/3."
+    },
+    {
+      "question": "Melyik kommutatív: (a/b) × (c/d) = ?",
+      "answers": {
+        "a": "(ac)/(bd)",
+        "b": "(ca)/(db)",
+        "c": "(ad)/(bc)"
+      },
+      "correct": "b",
+      "explanation": "A szorzás felcserélhető (kommutatív), ami azt jelenti, hogy a tényezők sorrendje nem számít. a*c ugyanaz, mint c*a, és b*d ugyanaz, mint d*b. Tehát (a/b)×(c/d) ugyanaz, mint (c/d)×(a/b)."
+    },
+    {
+      "question": "Hogyan nevezzük a 1/x műveletet?",
+      "answers": {
+        "a": "Kivonás",
+        "b": "Reciprok",
+        "c": "Negálás"
+      },
+      "correct": "b",
+      "explanation": "Amikor egy számot 'megfordítunk' és a számlálójába 1-et írunk, azt a szám reciprokának nevezzük. Például az 5 reciproka 1/5."
+    },
+    {
+      "question": "Hogyan írod át: (a-b)/(a+b)?",
+      "answers": {
+        "a": "(b-a)/(b+a)",
+        "b": "(a-b)/(a+b)",
+        "c": "-(b-a)/(a+b)"
+      },
+      "correct": "c",
+      "explanation": "Egy kivonásban a tagok sorrendjének felcseréléséhez ki kell emelni egy mínusz jelet. Például 5-2 = 3, de 2-5 = -3. Tehát a-b ugyanaz, mint -(b-a)."
+    },
+    {
+      "question": "Melyik nem algebrai tört?",
+      "answers": {
+        "a": "(x+1)/(x-1)",
+        "b": "(2a)/(3b)",
+        "c": "x + y"
+      },
+      "correct": "c",
+      "explanation": "Az algebrai tört olyan kifejezés, amiben van egy számláló (felső rész) és egy nevező (alsó rész), és legalább az egyikben betű (változó) is szerepel. Az x+y egy egyszerű összeg, nem tört."
+    },
+    {
+      "question": "Egyszerűsítsd: (x²-1)/(x-1)",
+      "answers": {
+        "a": "x+1",
+        "b": "x-1",
+        "c": "2x"
+      },
+      "correct": "a",
+      "explanation": "A felső részt, az (x² - 1)-et, át lehet írni szorzattá: (x-1)(x+1). Így a törtünk: (x-1)(x+1) / (x-1). Mivel az (x-1) rész a felső és az alsó részben is ugyanaz, egyszerűsíthetünk vele. Ami marad, az az x+1."
+    },
+    {
+      "question": "Melyik egyszerűsítés helyes: (6x)/9 = ?",
+      "answers": {
+        "a": "(2x)/3",
+        "b": "(2x)/3",
+        "c": "(3x)/2"
+      },
+      "correct": "b",
+      "explanation": "A számlálóban lévő 6-ot és a nevezőben lévő 9-et is el tudjuk osztani 3-mal. 6 osztva 3-mal az 2, 9 osztva 3-mal pedig 3. Így az egyszerűsített tört 2x/3."
+    },
+    {
+      "question": "Melyik művelet: (a/b) + (c/d) = ?",
+      "answers": {
+        "a": "(a+c)/(b+d)",
+        "b": "(ad+bc)/(bd)",
+        "c": "(ac+bd)/(bd)"
+      },
+      "correct": "b",
+      "explanation": "Különböző nevezőjű törtek összeadásához közös nevezőre kell hozni őket. A közös nevező itt b*d lesz. Az első törtet 'd'-vel, a másodikat 'b'-vel kell bővíteni. Így a számlálóban (a*d + b*c) lesz."
+    },
+    {
+      "question": "Melyik igaz: (x/y) + (x/z) = ?",
+      "answers": {
+        "a": "x/(y+z)",
+        "b": "x(z+y)/(yz)",
+        "c": "(2x)/(yz)"
+      },
+      "correct": "b",
+      "explanation": "A közös nevező y*z. Az első törtet 'z'-vel, a másodikat 'y'-nal kell bővíteni. Így a számláló x*z + x*y lesz. Ebből kiemelhetjük az x-et: x*(z+y). Tehát a helyes alak: x(z+y)/(yz)."
+    },
+    {
+      "question": "Osztás reciprokával: (a/b) ÷ (c/d) = ?",
+      "answers": {
+        "a": "(ad)/(bc)",
+        "b": "a/(bc/d)",
+        "c": "(ac)/(bd)"
+      },
+      "correct": "a",
+      "explanation": "Törttel úgy osztunk, hogy az osztó törtet (a másodikat) 'megfordítjuk' (a reciprokát vesszük), és azzal szorzunk. Tehát (a/b) * (d/c), amiből (a*d)/(b*c) lesz."
+    },
+    {
+      "question": "Egyszerűsítés: x(x+2)/x = ?",
+      "answers": {
+        "a": "x+2",
+        "b": "x(x+2)",
+        "c": "x+2"
+      },
+      "correct": "c",
+      "explanation": "A számlálóban és a nevezőben is szerepel az 'x' mint szorzótényező. Ha a számlálót és a nevezőt is elosztjuk 'x'-szel, az 'x' eltűnik, és marad x+2."
+    },
+    {
+      "question": "Melyik NEM értelmezhető törtművelet?",
+      "answers": {
+        "a": "x/0",
+        "b": "0/x",
+        "c": "x/x"
+      },
+      "correct": "a",
+      "explanation": "A matematika egyik legfontosabb alapszabálya, hogy nullával nem lehet osztani. Ezért egy tört nevezőjében (alsó részében) soha nem állhat nulla."
+    },
+    {
+      "question": "Osztás: (5/6) ÷ (2/3) = ?",
+      "answers": {
+        "a": "(5/6) × (2/3)",
+        "b": "5/9",
+        "c": "5/4"
+      },
+      "correct": "c",
+      "explanation": "Törttel úgy osztunk, hogy az osztó törtet (2/3) 'megfordítjuk' (3/2 lesz belőle) és azzal szorzunk. (5/6) * (3/2) = (5*3)/(6*2) = 15/12. Ezt a törtet egyszerűsíthetjük 3-mal, így 5/4 lesz az eredmény."
+    },
+    {
+      "question": "Melyik egyszerűsítés: (2x²)/(4x) = ?",
+      "answers": {
+        "a": "x/2",
+        "b": "2x",
+        "c": "x"
+      },
+      "correct": "a",
+      "explanation": "Először egyszerűsítsük a számokat: 2/4 = 1/2. Utána a betűket: x²/x = x. Ha összerakjuk, az eredmény (1*x)/2, vagyis x/2."
+    },
+    {
+      "question": "Egyszerűsítés: (5x-5)/5 = ?",
+      "answers": {
+        "a": "x-1",
+        "b": "x-1",
+        "c": "5(x-1)"
+      },
+      "correct": "b",
+      "explanation": "A felső részben lévő kivonás minden tagját el kell osztani 5-tel. 5x osztva 5-tel az x. -5 osztva 5-tel pedig -1. Az eredmény: x-1."
+    },
+    {
+      "question": "Melyik a neutrális elem: (a/b) + 0 = ?",
+      "answers": {
+        "a": "a/b",
+        "b": "0",
+        "c": "(a+0)/b"
+      },
+      "correct": "a",
+      "explanation": "Ha bármilyen számhoz (vagy algebrai törthöz) nullát adunk, az értéke nem változik. A nulla az összeadás semleges (neutrális) eleme."
+    },
+    {
+      "question": "Melyik átalakítás helyes: (4x+8)/(2x+4) = ?",
+      "answers": {
+        "a": "2",
+        "b": "(4x+8)/(2(x+2))",
+        "c": "2"
+      },
+      "correct": "c",
+      "explanation": "Vegyük észre, hogy a felső rész (4x+8) pont a kétszerese az alsó résznek (2x+4). Ezt úgy is írhatjuk, hogy a felső rész 2*(2x+4). Mivel a (2x+4) rész a számlálóban és a nevezőben is szerepel, egyszerűsíthetünk vele, és az eredmény 2."
+    },
+    {
+      "question": "Egyszerűsítés: (x²)/(xy) = ?",
+      "answers": {
+        "a": "x/y",
+        "b": "x/y",
+        "c": "x"
+      },
+      "correct": "b",
+      "explanation": "A számlálóban x² (ami x*x), a nevezőben pedig x*y van. Mindkét részből egyszerűsíthetünk egy 'x'-et. Így a számlálóban marad egy 'x', a nevezőben pedig egy 'y'."
+    },
+    {
+      "question": "Egyszerűsítsd: (2x)/(4x)",
+      "answers": {
+        "a": "1/2 (ha x≠0)",
+        "b": "2",
+        "c": "x"
+      },
+      "correct": "a",
+      "explanation": "A számlálót és a nevezőt is eloszthatjuk 2-vel, így x/2x marad. Utána eloszthatjuk x-szel is (feltéve, hogy x nem nulla), így 1/2 lesz a végeredmény."
+    },
+    {
+      "question": "Melyik igaz: (x+y)/y = ?",
+      "answers": {
+        "a": "(x/y) + y",
+        "b": "(x+y)/y",
+        "c": "(x/y) + 1"
+      },
+      "correct": "c",
+      "explanation": "Ha a számlálóban összeg van, felbonthatjuk két külön törtté: x/y + y/y. Mivel egy számot önmagával osztva 1-et kapunk (ha y nem nulla), ezért y/y = 1. A végeredmény tehát x/y + 1."
+    }
+  ]
 }

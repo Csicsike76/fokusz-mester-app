@@ -1,8 +1,261 @@
+
+
 {
   "title": "Fizika8kviz 8 osztaly ev vegi osszefoglalo",
   "subject": "fizika",
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Fizika8kviz 8 osztaly ev vegi osszefoglalo\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik NEM a hőterjedés egyik formája?",
+      "answers": {
+        "a": "Hővezetés",
+        "b": "Hőáramlás",
+        "c": "Hőtágulás"
+      },
+      "correct": "c",
+      "explanation": "A hőterjedés három fő módja a hővezetés, hőáramlás és hősugárzás. A hőtágulás a hőmérséklet-változás hatására bekövetkező méretváltozás, nem egy hőterjedési folyamat."
+    },
+    {
+      "question": "Hogyan szól Ohm törvénye?",
+      "answers": {
+        "a": "A feszültség és az ellenállás egyenesen arányos.",
+        "b": "Az áramerősség és a feszültség egyenesen arányos.",
+        "c": "Az áramerősség és az ellenállás egyenesen arányos."
+      },
+      "correct": "b",
+      "explanation": "Ohm törvénye szerint egy fogyasztón átfolyó áram erőssége (I) egyenesen arányos a sarkain mérhető feszültséggel (U)."
+    },
+    {
+      "question": "Milyen képet alkot egy gyűjtőlencse a fókuszpontján belül elhelyezett tárgyról?",
+      "answers": {
+        "a": "Valódi, kicsinyített, fordított.",
+        "b": "Valódi, nagyított, fordított.",
+        "c": "Látszólagos, nagyított, egyenes állású."
+      },
+      "correct": "c",
+      "explanation": "Ez a nagyító esete. Amikor a tárgy a fókusztávolságon belül van, a lencse egy virtuális (látszólagos), a tárggyal azonos állású és annál nagyobb képet hoz létre."
+    },
+    {
+      "question": "Mi az elektrolízis?",
+      "answers": {
+        "a": "Az áram hőhatása.",
+        "b": "Az áram mágneses hatása.",
+        "c": "Az áram kémiai hatása."
+      },
+      "correct": "c",
+      "explanation": "Az elektrolízis egy kémiai folyamat, amelyet elektromos áram idéz elő egy ionos oldatban, azaz az áram kémiai hatásának megnyilvánulása."
+    },
+    {
+      "question": "Mi a hőmennyiség mértékegysége?",
+      "answers": {
+        "a": "Celsius-fok",
+        "b": "Watt",
+        "c": "Joule"
+      },
+      "correct": "c",
+      "explanation": "A hő, mint energiaforma, mértékegysége az SI rendszerben a joule (J)."
+    },
+    {
+      "question": "Melyik állítás igaz a párhuzamos kapcsolásra?",
+      "answers": {
+        "a": "Az áramerősség minden ágban ugyanaz.",
+        "b": "A feszültség megoszlik az ágak között.",
+        "c": "Az eredő ellenállás kisebb, mint a legkisebb ellenállás."
+      },
+      "correct": "c",
+      "explanation": "Párhuzamos kapcsolásnál az áramnak több útja van, így a rendszer teljes ellenállása csökken. Az eredő ellenállás értéke mindig kisebb lesz, mint a legkisebb ellenállású ág ellenállása."
+    },
+    {
+      "question": "A Nap energiája hogyan jut el a Földre?",
+      "answers": {
+        "a": "Hővezetéssel",
+        "b": "Hőáramlással",
+        "c": "Hősugárzással"
+      },
+      "correct": "c",
+      "explanation": "A Nap és a Föld közötti vákuumon keresztül csak a hősugárzás (elektromágneses hullám) képes terjedni."
+    },
+    {
+      "question": "Mi a töltésmegmaradás törvénye?",
+      "answers": {
+        "a": "Az elektromos töltés sosem mozog.",
+        "b": "Egy zárt rendszerben a töltések előjeles összege állandó.",
+        "c": "Minden test semleges."
+      },
+      "correct": "b",
+      "explanation": "A töltésmegmaradás azt jelenti, hogy töltést nem lehet létrehozni vagy megsemmisíteni, csak szétválasztani vagy átrendezni."
+    },
+    {
+      "question": "Hogyan hat egymásra két ellentétes nemű elektromos töltés?",
+      "answers": {
+        "a": "Taszítják egymást.",
+        "b": "Vonzzák egymást.",
+        "c": "Nem hatnak egymásra."
+      },
+      "correct": "b",
+      "explanation": "Az elektrosztatika alaptörvénye szerint az ellentétes nemű töltések (pozitív és negatív) vonzzák egymást."
+    },
+    {
+      "question": "Mi a víz anomáliája?",
+      "answers": {
+        "a": "A víz +4°C-on a legsűrűbb, nem 0°C-on.",
+        "b": "A víz 50°C-on forr.",
+        "c": "A víz nem vezeti a hőt."
+      },
+      "correct": "a",
+      "explanation": "A legtöbb anyagtól eltérően a víz sűrűsége +4 °C-on a legnagyobb. Ennek köszönhető, hogy a tavak fentről lefelé fagynak be, lehetővé téve a vízi élővilág áttelelését."
+    },
+    {
+      "question": "Mi a feszültség mértékegysége?",
+      "answers": {
+        "a": "Ohm",
+        "b": "Volt",
+        "c": "Amper"
+      },
+      "correct": "b",
+      "explanation": "Az elektromos feszültség mértékegysége a volt (V). Az ohm az ellenállás, az amper az áramerősség mértékegysége."
+    },
+    {
+      "question": "Milyen képet alkot egy síktükör?",
+      "answers": {
+        "a": "Valódi, fordított, kicsinyített.",
+        "b": "Látszólagos, egyenes állású, azonos méretű.",
+        "c": "Valódi, nagyított, egyenes állású."
+      },
+      "correct": "b",
+      "explanation": "A síktükör által alkotott kép mindig a tükör mögött jön létre (látszólagos), a tárggyal megegyező állású és nagyságú."
+    },
+    {
+      "question": "Mitől függ a hang magassága?",
+      "answers": {
+        "a": "Az amplitúdójától.",
+        "b": "A frekvenciájától.",
+        "c": "A terjedési sebességétől."
+      },
+      "correct": "b",
+      "explanation": "A hang magasságát (hogy mélynek vagy magasnak halljuk) a hangforrás rezgésének gyorsasága, azaz a frekvencia határozza meg."
+    },
+    {
+      "question": "Melyik állítás igaz a soros kapcsolásra?",
+      "answers": {
+        "a": "A feszültség minden fogyasztón ugyanakkora.",
+        "b": "Az áramerősség minden fogyasztón ugyanakkora.",
+        "c": "Ha egy fogyasztó kiég, a többi tovább működik."
+      },
+      "correct": "b",
+      "explanation": "Soros kapcsolásban az áramnak csak egyetlen útja van, ezért az áramerősség az áramkör minden pontján, így minden fogyasztón is azonos."
+    },
+    {
+      "question": "Mi a hőszigetelő anyagok legfontosabb tulajdonsága?",
+      "answers": {
+        "a": "Jó hővezetők.",
+        "b": "Rossz hővezetők.",
+        "c": "Jól verik vissza a fényt."
+      },
+      "correct": "b",
+      "explanation": "A hőszigetelő anyagok (pl. hungarocell, gyapjú) lényege, hogy a bennük lévő sok apró légbuborék miatt rosszul vezetik a hőt, így megakadályozzák a hő áramlását."
+    },
+    {
+      "question": "Melyik NEM megújuló energiaforrás?",
+      "answers": {
+        "a": "Szélenergia",
+        "b": "Szén",
+        "c": "Napenergia"
+      },
+      "correct": "b",
+      "explanation": "A szén fosszilis tüzelőanyag, készletei végesek. A szél- és a napenergia a Nap működésének köszönhetően folyamatosan rendelkezésre állnak, ezért megújulók."
+    },
+    {
+      "question": "Milyen lencsével lehet a távollátást korrigálni?",
+      "answers": {
+        "a": "Szórólencsével.",
+        "b": "Gyűjtőlencsével.",
+        "c": "Domború tükörrel."
+      },
+      "correct": "b",
+      "explanation": "A távollátó szem a fénysugarakat a retina mögött fókuszálná. A gyűjtőlencse (domború) segít a fénysugarak előbb történő összegyűjtésében, így a kép a retinára kerül."
+    },
+    {
+      "question": "Mi az áramerősség mértékegysége?",
+      "answers": {
+        "a": "Volt (V)",
+        "b": "Ohm (Ω)",
+        "c": "Amper (A)"
+      },
+      "correct": "c",
+      "explanation": "Az áramerősség mértékegysége az amper (A)."
+    },
+    {
+      "question": "Milyen jelenség miatt látjuk a vízbe tett kanalat 'töröttnek'?",
+      "answers": {
+        "a": "Fényvisszaverődés",
+        "b": "Elhajlás",
+        "c": "Fénytörés"
+      },
+      "correct": "c",
+      "explanation": "Amikor a fény a vízből a levegőbe lép, iránya megváltozik, megtörik. Az agyunk ezt úgy értelmezi, mintha a kanál a vízfelszínnél 'megtört' volna."
+    },
+    {
+      "question": "Mi az elektromágnes?",
+      "answers": {
+        "a": "Egy természetben előforduló mágnes.",
+        "b": "Egy állandó mágnes.",
+        "c": "Egy áramjárta vasmagos tekercs."
+      },
+      "correct": "c",
+      "explanation": "Az elektromágnes egy olyan eszköz, amely csak akkor mágneses, ha elektromos áram folyik át a tekercsén. Általában vasmaggal erősítik a hatását."
+    },
+    {
+      "question": "A hang...",
+      "answers": {
+        "a": "...terjed vákuumban.",
+        "b": "...gyorsabb a fénynél.",
+        "c": "...terjedéséhez közeg szükséges."
+      },
+      "correct": "c",
+      "explanation": "A hang mechanikai hullám, ami a közeg részecskéinek rezgését jelenti. Anyagi közeg nélkül (vákuumban) nincs mi rezegjen, így a hang nem tud terjedni."
+    },
+    {
+      "question": "Mi a fűtőanyagok energiájának forrása?",
+      "answers": {
+        "a": "Mozgási energia",
+        "b": "Helyzeti energia",
+        "c": "Kémiai energia"
+      },
+      "correct": "c",
+      "explanation": "A fűtőanyagok (fa, szén, gáz) molekuláiban, a kémiai kötésekben van energia tárolva. Az égés során ez a kémiai energia szabadul fel hő formájában."
+    },
+    {
+      "question": "Mi a teljesítmény mértékegysége?",
+      "answers": {
+        "a": "Joule",
+        "b": "Newton",
+        "c": "Watt"
+      },
+      "correct": "c",
+      "explanation": "A teljesítmény (a munkavégzés sebessége) mértékegysége a watt (W)."
+    },
+    {
+      "question": "Mi a fotoszintézis?",
+      "answers": {
+        "a": "A sejtlégzés folyamata.",
+        "b": "Az energia megsemmisülése.",
+        "c": "A folyamat, ahogy a növények a napfényből kémiai energiát állítanak elő."
+      },
+      "correct": "c",
+      "explanation": "A fotoszintézis során a zöld növények a napfény energiáját használják fel, hogy szén-dioxidból és vízből szerves anyagot (cukrot) és oxigént termeljenek."
+    },
+    {
+      "question": "Mi az elektromos ellenállás mértékegysége?",
+      "answers": {
+        "a": "Volt",
+        "b": "Amper",
+        "c": "Ohm"
+      },
+      "correct": "c",
+      "explanation": "Az elektromos ellenállás mértékegysége az ohm (Ω)."
+    }
+  ]
 }

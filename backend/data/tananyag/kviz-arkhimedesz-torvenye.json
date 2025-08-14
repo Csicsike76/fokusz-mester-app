@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz arkhimedesz torvenye\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás írja le Arkhimédész törvényét?",
+      "answers": {
+        "a": "Erő * erőkar = Teher * teherkar",
+        "b": "A felhajtóerő egyenlő a kiszorított folyadék súlyával.",
+        "c": "Nyomás = Erő / Felület"
+      },
+      "correct": "b",
+      "explanation": "Ez Arkhimédész törvényének pontos megfogalmazása. Az 'a' opció az emelők törvénye, a 'c' opció pedig a nyomás definíciója."
+    },
+    {
+      "question": "Egy test súlya a levegőn 50 N, a vízbe merítve 30 N. Mekkora a rá ható felhajtóerő?",
+      "answers": {
+        "a": "80 N",
+        "b": "20 N",
+        "c": "30 N"
+      },
+      "correct": "b",
+      "explanation": "A vízbe merített testen mért súlycsökkenés pontosan megegyezik a felhajtóerő nagyságával. A csökkenés 50 N - 30 N = 20 N."
+    },
+    {
+      "question": "Melyik jelenséget NEM magyarázza Arkhimédész törvénye?",
+      "answers": {
+        "a": "A hajók úszása.",
+        "b": "A hőlégballon felemelkedése.",
+        "c": "A hidraulikus fék működése."
+      },
+      "correct": "c",
+      "explanation": "A hidraulikus fék működése Pascal törvényén alapul. A hajók úszása és a hőlégballon emelkedése (egyik folyadékban, másik gázban) Arkhimédész törvényének klasszikus példái."
+    },
+    {
+      "question": "Hogyan működik a tengeralattjáró merülése és emelkedése?",
+      "answers": {
+        "a": "A motorjával.",
+        "b": "A súlypontját változtatja.",
+        "c": "A ballaszttartályokba vizet engedve vagy kipumpálva változtatja az átlagsűrűségét."
+      },
+      "correct": "c",
+      "explanation": "A tengeralattjáró a tartályaiba vizet szivattyúzva megnöveli a saját tömegét és átlagsűrűségét, így le tud merülni. Amikor emelkedni akar, sűrített levegővel kipréseli a vizet, csökkentve az átlagsűrűségét."
+    },
+    {
+      "question": "Egy jégkocka úszik a vízben. Miért?",
+      "answers": {
+        "a": "Mert a jég sűrűsége kisebb, mint a víz sűrűsége.",
+        "b": "Mert a jég hideg.",
+        "c": "Mert a jég szilárd."
+      },
+      "correct": "a",
+      "explanation": "A víz azon kevés anyagok egyike, amelynek a sűrűsége szilárd halmazállapotban (jégként) kisebb, mint folyékony állapotban. Mivel a jég sűrűsége kisebb, úszik a vízen."
+    },
+    {
+      "question": "Miért úszik egy vasból készült hajó?",
+      "answers": {
+        "a": "Mert a vas könnyebb a víznél.",
+        "b": "Mert a hajótest nagy térfogata miatt az átlagsűrűsége kisebb, mint a vízé.",
+        "c": "Mert a motorja hajtja előre."
+      },
+      "correct": "b",
+      "explanation": "Bár a vas sűrűsége nagyobb a vízénél, a hajótest belsejében sok levegő van. Emiatt a hajó teljes térfogatához képest az átlagsűrűsége kisebb lesz, mint a víz sűrűsége, így a rá ható felhajtóerő elbírja a súlyát."
+    },
+    {
+      "question": "Mikor lebeg egy test a folyadékban?",
+      "answers": {
+        "a": "Ha sűrűsége kisebb, mint a folyadéké.",
+        "b": "Ha sűrűsége pontosan megegyezik a folyadék sűrűségével.",
+        "c": "Ha sűrűsége nagyobb, mint a folyadéké."
+      },
+      "correct": "b",
+      "explanation": "Ha a test sűrűsége megegyezik a folyadék sűrűségével, akkor a rá ható felhajtóerő pontosan egyenlő lesz a súlyával. Ilyenkor a test a folyadék bármely mélységében egyensúlyban marad, azaz lebeg."
+    },
+    {
+      "question": "Milyen irányú a felhajtóerő?",
+      "answers": {
+        "a": "Mindig függőlegesen felfelé.",
+        "b": "Mindig függőlegesen lefelé.",
+        "c": "A mozgás irányával ellentétes."
+      },
+      "correct": "a",
+      "explanation": "A felhajtóerő a hidrosztatikai nyomáskülönbségből származik (a test aljára nagyobb nyomás hat, mint a tetejére), ezért iránya mindig a nehézségi erővel ellentétes, azaz függőlegesen felfelé mutat."
+    },
+    {
+      "question": "Melyik folyadékban nagyobb a testekre ható felhajtóerő?",
+      "answers": {
+        "a": "A kisebb sűrűségűben.",
+        "b": "Nem függ a sűrűségtől.",
+        "c": "A nagyobb sűrűségűben."
+      },
+      "correct": "c",
+      "explanation": "A felhajtóerő a kiszorított folyadék súlyával egyenlő. Ugyanakkora térfogatú, de sűrűbb folyadéknak nagyobb a súlya, ezért nagyobb felhajtóerőt is fejt ki. Ezért könnyebb úszni a sós tengerben, mint az édesvízben."
+    },
+    {
+      "question": "Egy kődarab sűrűsége nagyobb, mint a vízé. Mi történik, ha vízbe tesszük?",
+      "answers": {
+        "a": "Úszni fog.",
+        "b": "Lebegni fog.",
+        "c": "Elmerül."
+      },
+      "correct": "c",
+      "explanation": "Ha egy test sűrűsége nagyobb a folyadék sűrűségénél, akkor a rá ható nehézségi erő nagyobb lesz, mint a maximális felhajtóerő. Ennek következtében a test elmerül."
+    },
+    {
+      "question": "Milyen erők hatnak egy folyadékba merített, nyugalomban lévő testre?",
+      "answers": {
+        "a": "Csak a nehézségi erő.",
+        "b": "Csak a felhajtóerő.",
+        "c": "A nehézségi erő és a felhajtóerő."
+      },
+      "correct": "c",
+      "explanation": "Minden folyadékba merített testre hat a lefelé irányuló nehézségi erő (súly) és a felfelé irányuló felhajtóerő. E két erő viszonya dönti el, hogy a test úszik, lebeg vagy elmerül."
+    },
+    {
+      "question": "Melyik test merül el a vízben?",
+      "answers": {
+        "a": "Egy vasgolyó.",
+        "b": "Egy hungarocell darab.",
+        "c": "Egy léggömb."
+      },
+      "correct": "a",
+      "explanation": "A vas sűrűsége sokkal nagyobb, mint a vízé, ezért a rá ható felhajtóerő kisebb lesz, mint a súlya, így elmerül. A hungarocell és a levegő sűrűsége kisebb a vízénél, ezért úsznak."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A felhajtóerő a nehézségi erővel ellentétes irányú.",
+        "b": "A felhajtóerő a test által kiszorított folyadék térfogatával egyenlő.",
+        "c": "A felhajtóerő a kiszorított folyadék súlyával egyenlő."
+      },
+      "correct": "b",
+      "explanation": "Ez az állítás hamis. A felhajtóerő nem a térfogattal, hanem a kiszorított folyadék SÚLYÁVAL egyenlő."
+    },
+    {
+      "question": "Egy 10 N súlyú test lebeg a vízben. Mekkora a rá ható felhajtóerő?",
+      "answers": {
+        "a": "Kevesebb, mint 10 N.",
+        "b": "Több, mint 10 N.",
+        "c": "Pontosan 10 N."
+      },
+      "correct": "c",
+      "explanation": "A lebegés egyensúlyi állapotot jelent. Ebben az esetben a testre ható erők eredője nulla. Ez azt jelenti, hogy a lefelé ható 10 N-os súlyt egy pont ugyanakkora, felfelé ható felhajtóerőnek kell kiegyenlítenie."
+    },
+    {
+      "question": "Hogyan szól Arkhimédész törvénye?",
+      "answers": {
+        "a": "Minden folyadékba merülő testre felhajtóerő hat, melynek nagysága egyenlő a test által kiszorított folyadék súlyával.",
+        "b": "A nyugvó folyadékban a külső nyomás minden irányban gyengítetlenül terjed tovább.",
+        "c": "A testek ellenállnak a mozgásállapotuk megváltoztatásának."
+      },
+      "correct": "a",
+      "explanation": "Arkhimédész törvénye a folyadékokba és gázokba merülő testekre ható felhajtóerőt írja le. A másik két állítás Pascal törvénye, illetve a tehetetlenség elve."
+    },
+    {
+      "question": "Mitől függ a felhajtóerő nagysága?",
+      "answers": {
+        "a": "A bemerülő térfogattól és a folyadék sűrűségétől.",
+        "b": "A test súlyától.",
+        "c": "A test alakjától."
+      },
+      "correct": "a",
+      "explanation": "Arkhimédész törvénye szerint a felhajtóerő a kiszorított folyadék súlyával egyenlő. A kiszorított folyadék súlya pedig a folyadék sűrűségétől és a kiszorított térfogattól függ."
+    },
+    {
+      "question": "Mikor úszik egy test a víz felszínén?",
+      "answers": {
+        "a": "Ha a test átlagsűrűsége kisebb, mint a víz sűrűsége.",
+        "b": "Ha a test súlya nagyobb, mint a víz súlya.",
+        "c": "Ha a test nehezebb a víznél."
+      },
+      "correct": "a",
+      "explanation": "Egy test akkor úszik, ha a rá ható felhajtóerő képes kiegyenlíteni a súlyát, anélkül, hogy teljesen elmerülne. Ez akkor következik be, ha a test átlagos sűrűsége kisebb a folyadék sűrűségénél."
+    },
+    {
+      "question": "A Föld légkörében ránk is hat felhajtóerő?",
+      "answers": {
+        "a": "Nem, csak folyadékokban van felhajtóerő.",
+        "b": "Nem, mert nem vagyunk elég könnyűek.",
+        "c": "Igen, de a nagysága elhanyagolható a súlyunkhoz képest."
+      },
+      "correct": "c",
+      "explanation": "Arkhimédész törvénye gázokra is érvényes. A levegő is kifejt ránk egy felhajtóerőt, amely a testünk által kiszorított levegő súlyával egyenlő. Mivel a levegő sűrűsége nagyon kicsi, ez az erő a súlyunkhoz képest elhanyagolható."
+    },
+    {
+      "question": "Miért könnyebb felemelni egy nagy követ a víz alatt, mint a parton?",
+      "answers": {
+        "a": "Mert a víz felhajtóerőt fejt ki a kőre, ami 'segít' nekünk.",
+        "b": "Mert a vízben kisebb a kő súlya.",
+        "c": "Mert a víz csúszóssá teszi."
+      },
+      "correct": "a",
+      "explanation": "A kő súlya a vízben nem változik. Azonban a víz egy felfelé irányuló felhajtóerőt fejt ki rá. Az általunk kifejtendő emelőerőnek csak a kő súlyának és a felhajtóerőnek a különbségét kell legyőznie."
+    },
+    {
+      "question": "Mikor süllyed el egy test egy folyadékban?",
+      "answers": {
+        "a": "Ha a rá ható felhajtóerő nagyobb, mint a súlya.",
+        "b": "Ha a rá ható felhajtóerő kisebb, mint a súlya.",
+        "c": "Ha a felhajtóerő egyenlő a súlyával."
+      },
+      "correct": "b",
+      "explanation": "Ha a testre ható, lefelé irányuló nehézségi erő (súly) nagyobb, mint a felfelé irányuló felhajtóerő, akkor a testre ható eredő erő lefelé mutat, és a test elmerül."
+    },
+    {
+      "question": "Egy test térfogata 3 m³, a sűrűsége 800 kg/m³. Úszik-e a vízben (ρ_víz ≈ 1000 kg/m³)?",
+      "answers": {
+        "a": "Elmerül.",
+        "b": "Úszik.",
+        "c": "Lebeg."
+      },
+      "correct": "b",
+      "explanation": "Mivel a test sűrűsége (800 kg/m³) kisebb, mint a víz sűrűsége (1000 kg/m³), a test úszni fog a vízen."
+    },
+    {
+      "question": "Egy 2 dm³ térfogatú test teljesen elmerül a vízben. Mekkora a rá ható felhajtóerő? (A víz sűrűsége 1 kg/dm³, g≈10 N/kg)",
+      "answers": {
+        "a": "20 N",
+        "b": "2 N",
+        "c": "0,2 N"
+      },
+      "correct": "a",
+      "explanation": "A test 2 dm³ vizet szorít ki. Ennek a víznek a tömege m = ρ*V = 1 kg/dm³ * 2 dm³ = 2 kg. Ennek a víznek a súlya F = m*g = 2 kg * 10 N/kg = 20 N. A felhajtóerő ezzel a súllyal egyenlő."
+    },
+    {
+      "question": "Miért száll fel egy héliummal töltött lufi a levegőben?",
+      "answers": {
+        "a": "Mert a hélium 'negatív súlyú'.",
+        "b": "Mert a levegő felhajtóerőt fejt ki rá, ami nagyobb, mint a lufi súlya.",
+        "c": "Mert a szél felkapja."
+      },
+      "correct": "b",
+      "explanation": "A levegő is egy közeg, amiben Arkhimédész törvénye érvényesül. Mivel a hélium sűrűsége sokkal kisebb, mint a levegőé, a lufi által kiszorított levegő súlya (a felhajtóerő) nagyobb lesz, mint a lufi és a benne lévő hélium együttes súlya."
+    },
+    {
+      "question": "Két egyenlő térfogatú golyó közül az egyik fából, a másik vasból van. Melyikre hat nagyobb felhajtóerő, ha teljesen a víz alá merítjük őket?",
+      "answers": {
+        "a": "A vasgolyóra.",
+        "b": "A fagolyóra.",
+        "c": "Egyenlő nagyságú felhajtóerő hat rájuk."
+      },
+      "correct": "c",
+      "explanation": "A felhajtóerő a kiszorított folyadék súlyától, azaz a bemerülő térfogattól függ. Mivel a két golyó térfogata egyenlő és mindkettő teljesen elmerül, ugyanannyi vizet szorítanak ki, így a rájuk ható felhajtóerő is pontosan ugyanakkora lesz."
+    },
+    {
+      "question": "Melyik közegben NEM hat felhajtóerő a testekre?",
+      "answers": {
+        "a": "Levegőben",
+        "b": "Vákuumban",
+        "c": "Vízben"
+      },
+      "correct": "b",
+      "explanation": "A felhajtóerő a test által kiszorított közeg súlyából származik. Vákuumban (légüres térben) nincs közeg, amit ki lehetne szorítani, ezért ott nincs felhajtóerő sem."
+    }
+  ]
 }

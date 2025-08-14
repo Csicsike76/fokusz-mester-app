@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Ai alapozo\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a 6. modul fő célja a leírás alapján?",
+      "answers": {
+        "a": "Képek elemzése pixelek segítségével.",
+        "b": "Megépíteni egy egyszerű mesterséges intelligenciát Scratch segítségével.",
+        "c": "Megérteni az internet működését."
+      },
+      "correct": "b",
+      "explanation": "A 6. modul leírása kifejezetten említi, hogy a cél egy egyszerű MI megépítése a Scratch nevű programozási környezetben, hogy megértsük az algoritmusok szerepét."
+    },
+    {
+      "question": "Mi az adat az 1. modul kontextusában?",
+      "answers": {
+        "a": "Az információ (szó, kép, hang) olyan formája, amivel egy gép már tud dolgozni.",
+        "b": "Csak a számítógépen tárolt képek.",
+        "c": "Kizárólag a szavak és betűk."
+      },
+      "correct": "a",
+      "explanation": "Az 1. modul azt tanítja, hogy a különböző típusú információk hogyan alakulnak át adattá, amit a számítógép már képes értelmezni és feldolgozni."
+    },
+    {
+      "question": "Hogyan \"lát\" egy mesterséges intelligencia az 5. modul szerint?",
+      "answers": {
+        "a": "Úgy, mint az ember, egy belső kamerával.",
+        "b": "Számok és mintázatok elemzésével, amik a kép pixeleiből származnak.",
+        "c": "A képhez tartozó szöveges leírások elolvasásával."
+      },
+      "correct": "b",
+      "explanation": "Az 5. modul szerint az MI a képeket alkotó pixeleket elemzi, amelyeket számokként és mintázatokként értelmez, és ebből ismeri fel a tartalmat, például egy macskát."
+    },
+    {
+      "question": "Mit nevezünk algoritmusnak a 6. modul alapján?",
+      "answers": {
+        "a": "A számítógép fizikai alkatrészét.",
+        "b": "A mesterséges intelligencia \"lelkét\", egyszerű szabályok sorozatát, ami döntésekhez vezet.",
+        "c": "Egy képet alkotó legkisebb egységet."
+      },
+      "correct": "b",
+      "explanation": "A modul leírása az algoritmust az \"AI Lelkének\" nevezi, amely egyszerű szabályokból épít fel komplex, intelligensnek tűnő döntéseket."
+    },
+    {
+      "question": "Mi a kurzus záróprojektjének a célja?",
+      "answers": {
+        "a": "Egy esszé írása a mesterséges intelligenciáról.",
+        "b": "A tanultak összefoglalása és egy saját, egyedi MI-alkalmazás létrehozása Scratch-ben.",
+        "c": "Egy hardver, például egy robot megépítése."
+      },
+      "correct": "b",
+      "explanation": "A záróprojekt célja, hogy a diákok a kurzus során megszerzett tudást felhasználva egy saját, kreatív MI-projektet valósítsanak meg."
+    },
+    {
+      "question": "Miből áll egy digitális kép a tananyag 5. modulja szerint?",
+      "answers": {
+        "a": "Apró festékpöttyökből.",
+        "b": "Pixelekből, amelyek egy MI számára számokat jelentenek.",
+        "c": "Hanghullámokból."
+      },
+      "correct": "b",
+      "explanation": "Az 5. modul egyértelműen a pixeleket nevezi meg a digitális képek építőköveiként, és kiemeli, hogy ezeket az MI számokként és mintázatokként elemzi."
+    },
+    {
+      "question": "Melyik programozási környezetet említi a 6. modul az egyszerű MI megépítéséhez?",
+      "answers": {
+        "a": "Python",
+        "b": "Scratch",
+        "c": "JavaScript"
+      },
+      "correct": "b",
+      "explanation": "A 6. modul leírása konkrétan a Scratch nevű vizuális programozási nyelvet említi, mint eszközt a legegyszerűbb MI megalkotásához."
+    },
+    {
+      "question": "Mi a kurzus átfogó célja a fejlécben található leírás alapján?",
+      "answers": {
+        "a": "Kizárólag a programozás tanítása.",
+        "b": "Annak bemutatása, hogyan válnak az informatika alapjai az AI szuperképességeivé.",
+        "c": "A digitális eszközök biztonságos használatának elsajátítása."
+      },
+      "correct": "b",
+      "explanation": "A fejléc szerint a kurzus célja, hogy a résztvevők felfedezzék, hogyan épül fel a mesterséges intelligencia a legalapvetőbb informatikai fogalmakból."
+    },
+    {
+      "question": "Miért fontos, hogy a szavakból, képekből adat legyen?",
+      "answers": {
+        "a": "Mert csak így lehet kinyomtatni őket.",
+        "b": "Mert a gép csak adatokkal, számokkal tud \"gondolkodni\" és műveleteket végezni.",
+        "c": "Mert így kevesebb helyet foglalnak."
+      },
+      "correct": "b",
+      "explanation": "Az 1. modul alapján az információt át kell alakítani adattá (pl. számokká, kódokká), mert a számítógép alapvetően ezekkel a formalizált jelekkel tud dolgozni."
+    },
+    {
+      "question": "A kurzus alapján mi a kapcsolat a pixelek és a képfelismerés között?",
+      "answers": {
+        "a": "A pixelek csak a kép színét határozzák meg, a felismeréshez nincs közük.",
+        "b": "Az MI a pixelekben lévő számokból és azok elrendeződéséből alkotott mintázatokat elemzi a kép tartalmának felismeréséhez.",
+        "c": "Minél kevesebb pixel van egy képen, annál könnyebb felismerni a tartalmát."
+      },
+      "correct": "b",
+      "explanation": "Az MI a képfelismerés során nem a képet látja esztétikai értelemben, hanem a pixelek millióit mint numerikus adatokat elemzi, és ezekben keres mintázatokat."
+    },
+    {
+      "question": "Mire utal az \"AI 0. Év\" elnevezés?",
+      "answers": {
+        "a": "Arra, hogy a kurzus a legeslegalapvetőbb, nulladik szintű ismereteket adja át.",
+        "b": "Arra, hogy a kurzus elvégzése nulla évig tart.",
+        "c": "Arra, hogy a kurzus csak 2000-ben születetteknek szól."
+      },
+      "correct": "a",
+      "explanation": "A \"0. Év\" kifejezés a marketingben és az oktatásban gyakran egy előkészítő, alapozó szintet jelöl, ami a téma alapjait mutatja be, mielőtt a diákok mélyebbre ásnának."
+    },
+    {
+      "question": "Mi az első lépés egy macska felismeréséhez a gépi látás során a tananyag szerint?",
+      "answers": {
+        "a": "A kép átalakítása pixelek adatfolyamává.",
+        "b": "A \"macska\" szó beírása egy keresőbe.",
+        "c": "A kép meghallgatása."
+      },
+      "correct": "a",
+      "explanation": "Ahhoz, hogy az MI elemezni tudjon egy képet, először annak digitális reprezentációjára van szüksége, ami a pixelek halmaza."
+    },
+    {
+      "question": "Melyik állítás igaz az algoritmusokra a tananyag alapján?",
+      "answers": {
+        "a": "Egy algoritmus mindig rendkívül bonyolult.",
+        "b": "Egy algoritmus egyszerű szabályok lépésről lépésre történő végrehajtását jelenti egy cél elérése érdekében.",
+        "c": "Az algoritmusok csak a matematikai számításokhoz használhatók."
+      },
+      "correct": "b",
+      "explanation": "A 6. modul leírása szerint az algoritmusok egyszerű szabályokból épülnek fel, amelyek együttesen vezetnek el egy \"intelligens\" döntéshez vagy eredményhez."
+    },
+    {
+      "question": "Milyen képességet fejleszt a záróprojekt a leírás alapján?",
+      "answers": {
+        "a": "Gyorsgépelést.",
+        "b": "Az elméleti tudás gyakorlati, kreatív alkalmazását.",
+        "c": "Kizárólag a rajzolást."
+      },
+      "correct": "b",
+      "explanation": "A projekt leírása szerint a diákoknak fel kell használniuk mindazt, amit tanultak, és egy egyedi dolgot kell alkotniuk, ami az elmélet gyakorlatba ültetését jelenti."
+    },
+    {
+      "question": "Melyik modul címe utal arra, hogy a képi információ hogyan lesz a gép számára feldolgozható?",
+      "answers": {
+        "a": "1. Modul: Az Információtól az Adatig",
+        "b": "4. Modul: Az Internet, az AI Könyvtára",
+        "c": "5. Modul: Hogyan \"Lát\" az AI?"
+      },
+      "correct": "c",
+      "explanation": "Az 5. modul címe és leírása foglalkozik azzal, hogy a látás, azaz a képi információ feldolgozása hogyan történik az MI esetében a pixelek elemzésén keresztül."
+    },
+    {
+      "question": "Mi a közös a szavakban, képekben és hangokban a tananyag szerint?",
+      "answers": {
+        "a": "Mindegyik ugyanannyi helyet foglal a számítógépen.",
+        "b": "Mindegyik átalakítható adattá, amit egy gép feldolgozhat.",
+        "c": "Mindegyiket csak az emberi agy képes értelmezni."
+      },
+      "correct": "b",
+      "explanation": "Az 1. modul alapgondolata, hogy a legkülönfélébb információtípusok közös jellemzője, hogy digitalizálhatók, azaz adattá alakíthatók a gépi feldolgozás számára."
+    },
+    {
+      "question": "Miért a \"lélek\" metaforát használja a 6. modul az algoritmusra?",
+      "answers": {
+        "a": "Mert az algoritmus láthatatlan és megfoghatatlan.",
+        "b": "Mert az algoritmus adja a működés lényegét, a szabályrendszert, ami \"életre kelti\" a programot.",
+        "c": "Mert az algoritmusoknak érzelmeik vannak."
+      },
+      "correct": "b",
+      "explanation": "A \"lélek\" metafora arra utal, hogy míg a hardver a \"test\", addig az algoritmus (a szoftver része) az a belső szabályrendszer, ami a működést, a \"viselkedést\" irányítja."
+    },
+    {
+      "question": "Melyik modul foglalkozik az információ gépi reprezentációjának legalapvetőbb kérdésével?",
+      "answers": {
+        "a": "6. Modul: Az Algoritmus - Az AI Lelke",
+        "b": "1. Modul: Az Információtól az Adatig",
+        "c": "5. Modul: Hogyan \"Lát\" az AI?"
+      },
+      "correct": "b",
+      "explanation": "Az 1. modul alapozza meg az egész kurzust azzal, hogy bemutatja, hogyan lesz bármilyen információból adat, ami a gépi feldolgozás előfeltétele."
+    },
+    {
+      "question": "Melyik állítás HAMIS a kurzusleírások alapján?",
+      "answers": {
+        "a": "A kurzus foglalkozik a gépi látás alapjaival.",
+        "b": "A diákok gyakorlati feladatot is kapnak a Scratch használatával.",
+        "c": "A kurzus csak elméleti, nem tartalmaz gyakorlati projektet."
+      },
+      "correct": "c",
+      "explanation": "Az állítás hamis, mivel a tananyag kifejezetten kiemel egy záróprojektet, ahol a diákoknak egy saját MI-t kell építeniük, ami egyértelműen gyakorlati feladat."
+    },
+    {
+      "question": "Mi a \"digitális világ építőköve\" a kurzus kontextusában?",
+      "answers": {
+        "a": "Maga a számítógép hardvere.",
+        "b": "Az alapvető informatikai fogalmak, mint az adat és az algoritmus.",
+        "c": "A számítógépes játékok."
+      },
+      "correct": "b",
+      "explanation": "A kurzus alcíme és felépítése arra utal, hogy az olyan alapfogalmak, mint az adat, pixel, algoritmus, azok az építőkövek, amelyekből a komplex digitális rendszerek, így az MI is felépül."
+    },
+    {
+      "question": "Melyik modulban van a legnagyobb hangsúly a gyakorlati alkotás on?",
+      "answers": {
+        "a": "1. Modul",
+        "b": "5. Modul",
+        "c": "6. Modul"
+      },
+      "correct": "c",
+      "explanation": "A 6. modul leírása említi konkrétan, hogy a diákok \"megépítik a legegyszerűbb MI-nket a Scratch segítségével\", ami aktív, gyakorlati alkotást jelent."
+    },
+    {
+      "question": "Mi a különbség az 1. és az 5. modul között?",
+      "answers": {
+        "a": "Az 1. modul általánosan beszél az adatokról, míg az 5. modul kifejezetten a képi adatokra fókuszál.",
+        "b": "Az 1. modul a programozásról, az 5. pedig az internetről szól.",
+        "c": "Nincs különbség, a két modul ugyanazt a témát dolgozza fel."
+      },
+      "correct": "a",
+      "explanation": "Az 1. modul lefekteti az általános alapot (mi az adat), az 5. modul pedig egy speciális esetet mutat be: hogyan lesz a vizuális információból (kép) adat (pixel), és azt hogyan dolgozza fel az MI."
+    },
+    {
+      "question": "Mit NEM említ a tananyag a \"fejlesztés alatt\" lévő modulok között?",
+      "answers": {
+        "a": "A Gép, ami Gondolkodik",
+        "b": "Az Internet, az AI Könyvtára",
+        "c": "A Kreatív Írás MI-vel"
+      },
+      "correct": "c",
+      "explanation": "A felsorolásban a 2., 3. és 4. modul van fejlesztés alatt, de a \"Kreatív Írás MI-vel\" nem szerepel közöttük."
+    },
+    {
+      "question": "Mi az elsődleges üzenete a \"Hogyan 'Lát' az AI?\" című modulnak?",
+      "answers": {
+        "a": "A gépi látás sokkal jobb, mint az emberi.",
+        "b": "A gépi látás valójában nem látás, hanem numerikus adatok és minták matematikai elemzése.",
+        "c": "Minden számítógépnek van beépített kamerája."
+      },
+      "correct": "b",
+      "explanation": "A modul azt demisztifikálja, hogy az MI \"látása\" nem emberi értelemben vett látás, hanem komplex matematikai folyamat a pixelek adatai alapján."
+    },
+    {
+      "question": "A kurzus egésze alapján mi a mesterséges intelligencia legalapvetőbb építőeleme?",
+      "answers": {
+        "a": "Az adat és az azt feldolgozó algoritmus.",
+        "b": "A monitor és a billentyűzet.",
+        "c": "A villamos energia."
+      },
+      "correct": "a",
+      "explanation": "A bemutatott modulok (adat, pixelek mint adat, algoritmus) mind arra mutatnak rá, hogy az MI működésének alapja az adatok megléte és az azokat feldolgozó, szabályokon alapuló algoritmusok."
+    }
+  ]
 }

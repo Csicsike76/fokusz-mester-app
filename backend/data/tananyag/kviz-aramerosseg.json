@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz aramerosseg\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás igaz soros kapcsolás esetén az áramerősségre?",
+      "answers": {
+        "a": "Az áramkör minden pontján ugyanakkora.",
+        "b": "Megoszlik a fogyasztók között.",
+        "c": "Minden fogyasztón nullává válik."
+      },
+      "correct": "a",
+      "explanation": "Soros kapcsolásban az áramnak csak egyetlen útja van. Ebből következik, hogy a töltések ugyanazon az útvonalon haladnak, tehát az áramerősség az áramkör minden pontján, így minden fogyasztón is azonos."
+    },
+    {
+      "question": "Egy izzón 0,2 A áram folyik keresztül. Ez mennyi milliamper?",
+      "answers": {
+        "a": "2 mA",
+        "b": "20 mA",
+        "c": "200 mA"
+      },
+      "correct": "c",
+      "explanation": "Mivel 1 A = 1000 mA, ezért 0,2 A = 0,2 * 1000 mA = 200 mA."
+    },
+    {
+      "question": "Ha egy áramkörben nő az ellenállás (és a feszültség állandó), mi történik az áramerősséggel?",
+      "answers": {
+        "a": "Nő.",
+        "b": "Csökken.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "Ohm törvénye szerint (I = U/R) az áramerősség fordítottan arányos az ellenállással. Ha az ellenállás nő, az áram nehezebben tud folyni, tehát az áramerősség csökken."
+    },
+    {
+      "question": "Az áramerősség egy...",
+      "answers": {
+        "a": "...vektormennyiség.",
+        "b": "...skalármennyiség.",
+        "c": "...fizikai jelenség."
+      },
+      "correct": "b",
+      "explanation": "Bár van iránya (technikai áramirány), az áramerősséget a fizikában skalármennyiségként kezeljük, mert az összeadása egyszerű számtani összeadás (csomóponti törvény)."
+    },
+    {
+      "question": "Melyik okoz nagyobb áramütést: a feszültség vagy az áramerősség?",
+      "answers": {
+        "a": "A feszültség.",
+        "b": "A testen áthaladó áram erőssége.",
+        "c": "Egyik sem veszélyes."
+      },
+      "correct": "b",
+      "explanation": "Az áramütés élettani hatását és veszélyességét a testen ténylegesen átfolyó áram erőssége határozza meg. A magas feszültség azért veszélyes, mert a test ellenállásán képes nagy áramerősséget létrehozni."
+    },
+    {
+      "question": "Mi az áramerősség képlete?",
+      "answers": {
+        "a": "I = Q * t",
+        "b": "I = Q / t",
+        "c": "I = t / Q"
+      },
+      "correct": "b",
+      "explanation": "Az áramerősség (I) definíció szerint az egységnyi idő (t) alatt a vezető keresztmetszetén átáramlott töltésmennyiség (Q)."
+    },
+    {
+      "question": "Mi az 'technikai áramirány'?",
+      "answers": {
+        "a": "A pozitív pólustól a negatív pólus felé az áramkörön kívül.",
+        "b": "Az elektronok valós áramlási iránya.",
+        "c": "Mindig a Föld középpontja felé mutat."
+      },
+      "correct": "a",
+      "explanation": "Történelmi okokból megegyezés szerint az áram irányát a pozitív töltések mozgásirányaként határozták meg. Ez a technikai áramirány, ami az áramforrás pozitív pólusától indul a negatív felé a külső áramkörben."
+    },
+    {
+      "question": "Melyik eszköz méri az áramerősséget?",
+      "answers": {
+        "a": "Voltmérő",
+        "b": "Ampermérő",
+        "c": "Ohm-mérő"
+      },
+      "correct": "b",
+      "explanation": "Az áramerősség mérésére az ampermérőt használjuk, amelyet mindig sorosan kell az áramkörbe kapcsolni."
+    },
+    {
+      "question": "Mi a töltéshordozó a fémekben?",
+      "answers": {
+        "a": "Protonok",
+        "b": "Ionok",
+        "c": "Elektronok"
+      },
+      "correct": "c",
+      "explanation": "A fémek kristályrácsában a külső elektronhéjon lévő elektronok leszakadnak az atomtörzsekről és szabadon mozoghatnak. Ezek a delokalizált elektronok a töltéshordozók."
+    },
+    {
+      "question": "Hogyan kell az ampermérőt az áramkörbe kapcsolni?",
+      "answers": {
+        "a": "Sorosan, a fogyasztóval egy ágba.",
+        "b": "Párhuzamosan a fogyasztóval.",
+        "c": "Bárhogy lehet."
+      },
+      "correct": "a",
+      "explanation": "Az ampermérő a rajta átfolyó áram erősségét méri. Ahhoz, hogy a fogyasztón átfolyó áramot mérjük, az ampermérőt a fogyasztóval egy ágba, azaz sorosan kell kapcsolni."
+    },
+    {
+      "question": "Mi az elektronok tényleges áramlási iránya egy fém vezetékben?",
+      "answers": {
+        "a": "A pozitív pólustól a negatív felé.",
+        "b": "A negatív pólustól a pozitív felé.",
+        "c": "Nem áramlanak, csak rezegnek."
+      },
+      "correct": "b",
+      "explanation": "Az elektronok negatív töltésűek, ezért az áramforrás negatív pólusa taszítja, a pozitív pólusa pedig vonzza őket. Így a valós fizikai áramirány a negatívtól a pozitív pólus felé mutat."
+    },
+    {
+      "question": "Mi az ampermérő belső ellenállása?",
+      "answers": {
+        "a": "Nagyon kicsi.",
+        "b": "Nagyon nagy.",
+        "c": "Végtelen."
+      },
+      "correct": "a",
+      "explanation": "Ahhoz, hogy az ampermérő ne befolyásolja jelentősen a mért áramkört, a lehető legkevésbé szabad akadályoznia az áram folyását. Ezért a belső ellenállásának nagyon kicsinek kell lennie."
+    },
+    {
+      "question": "Mi az áramerősség mértékegysége?",
+      "answers": {
+        "a": "Amper (A)",
+        "b": "Volt (V)",
+        "c": "Coulomb (C)"
+      },
+      "correct": "a",
+      "explanation": "Az elektromos áram erősségének SI mértékegysége az amper, André-Marie Ampère tiszteletére. A volt a feszültség, a coulomb a töltés mértékegysége."
+    },
+    {
+      "question": "Melyik állítás igaz az áramerősségre?",
+      "answers": {
+        "a": "Az áramforrás 'elfogyasztja' az áramot.",
+        "b": "A fogyasztó 'elfogyasztja' az áramot.",
+        "c": "Az áram nem 'fogy el', ugyanannyi töltés lép be a fogyasztóba, mint amennyi kilép."
+      },
+      "correct": "c",
+      "explanation": "Fontos megérteni, hogy az áram (a töltések) nem 'fogy el' az áramkörben. A fogyasztó az áram energiáját alakítja át, de a töltések száma, ami bemegy és ami kijön, ugyanannyi."
+    },
+    {
+      "question": "Melyik a nagyobb áramerősség?",
+      "answers": {
+        "a": "1 amper (A)",
+        "b": "1 milliamper (mA)",
+        "c": "1 mikroamper (µA)"
+      },
+      "correct": "a",
+      "explanation": "Az amper (A) az alapmértékegység. A milliamper az amper ezredrésze (1 mA = 0,001 A), a mikroamper pedig a milliomodrésze (1 µA = 0,000001 A)."
+    },
+    {
+      "question": "Mi az áramerősség jele a képletekben?",
+      "answers": {
+        "a": "A",
+        "b": "I",
+        "c": "U"
+      },
+      "correct": "b",
+      "explanation": "Az áramerősséget az 'intenzitás' szó alapján I betűvel jelöljük. Az A az amper mértékegység jele, az U pedig a feszültségé."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Az áramerősséget amperben mérjük.",
+        "b": "Az ampermérőt sorosan kötjük.",
+        "c": "A nyitott áramkörben nagy az áramerősség."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. A nyitott áramkörben az áram útja meg van szakítva, ezért a töltések nem tudnak áramlani, az áramerősség nulla."
+    },
+    {
+      "question": "Egy 0,5 A áramerősségű izzó 1 percig világít. Mennyi töltés halad át rajta?",
+      "answers": {
+        "a": "0,5 C",
+        "b": "30 C",
+        "c": "60 C"
+      },
+      "correct": "b",
+      "explanation": "Először az időt átváltjuk másodpercre: 1 perc = 60 s. Az I = Q/t képletből a töltés Q = I * t. Behelyettesítve: Q = 0,5 A * 60 s = 30 C."
+    },
+    {
+      "question": "Ha egy áramkörben a feszültséget növeljük (és az ellenállás állandó), mi történik az áramerősséggel?",
+      "answers": {
+        "a": "Nem változik.",
+        "b": "Csökken.",
+        "c": "Nő."
+      },
+      "correct": "c",
+      "explanation": "Ohm törvénye (I = U/R) szerint az áramerősség egyenesen arányos a feszültséggel. Nagyobb feszültség ('hajtóerő') nagyobb áramot hoz létre."
+    },
+    {
+      "question": "Egy vezetőn 5 másodperc alatt 10 coulomb töltés áramlik át. Mekkora az áramerősség?",
+      "answers": {
+        "a": "2 A",
+        "b": "50 A",
+        "c": "0,5 A"
+      },
+      "correct": "a",
+      "explanation": "Az áramerősség képlete I = Q / t. Behelyettesítve: I = 10 C / 5 s = 2 A."
+    },
+    {
+      "question": "Melyik állítás igaz párhuzamos kapcsolás esetén az áramerősségre?",
+      "answers": {
+        "a": "Minden ágban ugyanakkora.",
+        "b": "A főágban folyó áram szétoszlik a mellékágak között.",
+        "c": "A főágban kisebb az áram, mint a mellékágakban."
+      },
+      "correct": "b",
+      "explanation": "Párhuzamos kapcsolásnál az áramkör elágazik. A csomóponti törvény szerint a főágban érkező áram szétoszlik a párhuzamos ágak között."
+    },
+    {
+      "question": "Mi az elektromos áram?",
+      "answers": {
+        "a": "Nyugalomban lévő töltések.",
+        "b": "Az elektromos mező.",
+        "c": "A töltéshordozók rendezett, egyirányú mozgása."
+      },
+      "correct": "c",
+      "explanation": "Az elektromos áramot a töltéssel rendelkező részecskék (fémekben az elektronok) együttes, tartós áramlása jelenti egy vezetőben."
+    },
+    {
+      "question": "Mi a helyes egység átszámítás?",
+      "answers": {
+        "a": "1 A = 100 mA",
+        "b": "1 kA = 100 A",
+        "c": "1 A = 1000 mA"
+      },
+      "correct": "c",
+      "explanation": "A 'milli-' prefixum ezredrészt jelent. Tehát 1 amper 1000 milliamperrel egyenlő."
+    },
+    {
+      "question": "Mit mutat meg az áramerősség?",
+      "answers": {
+        "a": "A vezető keresztmetszetén másodpercenként átáramló töltés mennyiségét.",
+        "b": "Az áramforrás feszültségét.",
+        "c": "A vezeték ellenállását."
+      },
+      "correct": "a",
+      "explanation": "Az áramerősség az áramlás 'intenzitását' jellemzi. Definíció szerint a vezető keresztmetszetén egységnyi idő alatt átáramló elektromos töltés mennyisége."
+    },
+    {
+      "question": "Miért veszélyes, ha egy vezetéken túl nagy áram folyik?",
+      "answers": {
+        "a": "Mert lehűti a vezetéket.",
+        "b": "Mert mágneses lesz.",
+        "c": "Mert a vezeték túlságosan felmelegedhet és tüzet okozhat."
+      },
+      "correct": "c",
+      "explanation": "Az áramnak hőhatása van (Joule-hő). Minél nagyobb az áramerősség, annál jobban felmelegíti a vezetéket. A túlmelegedés megolvaszthatja a szigetelést és tüzet okozhat."
+    }
+  ]
 }

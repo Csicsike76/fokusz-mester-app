@@ -1,8 +1,259 @@
 {
   "title": "Kviz pitagorasz",
-  "subject": "altalanos",
+  "subject": "altmatematika",
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz pitagorasz\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mit állít a Pitagorasz-tétel?",
+      "answers": {
+        "a": "Egy derékszögű háromszög befogóinak összege egyenlő az átfogóval.",
+        "b": "Egy derékszögű háromszög befogóinak négyzetösszege egyenlő az átfogó négyzetével.",
+        "c": "Bármely háromszög oldalainak négyzetösszege állandó."
+      },
+      "correct": "b",
+      "explanation": "A Pitagorasz-tétel kimondja, hogy egy derékszögű háromszög két befogójának (a, b) hosszának négyzetösszege megegyezik az átfogó (c) hosszának négyzetével. A tétel képlete: a² + b² = c²."
+    },
+    {
+      "question": "Melyik oldal a derékszögű háromszög átfogója?",
+      "answers": {
+        "a": "A derékszöggel szemközti, leghosszabb oldal.",
+        "b": "A legrövidebb oldal.",
+        "c": "A derékszöget bezáró bármelyik oldal."
+      },
+      "correct": "a",
+      "explanation": "Az átfogó (vagy hipotenusz) a derékszögű háromszög 90°-os szögével szemben fekvő oldala, és mindig ez a háromszög leghosszabb oldala."
+    },
+    {
+      "question": "Hogyan nevezzük a derékszögű háromszögben a derékszöget közrefogó két oldalt?",
+      "answers": {
+        "a": "Átlók",
+        "b": "Vetületek",
+        "c": "Befogók"
+      },
+      "correct": "c",
+      "explanation": "A derékszöget bezáró két oldalt befogóknak (vagy katétusoknak) nevezzük."
+    },
+    {
+      "question": "Egy derékszögű háromszög befogói 6 cm és 8 cm hosszúak. Milyen hosszú az átfogó?",
+      "answers": {
+        "a": "14 cm",
+        "b": "100 cm",
+        "c": "10 cm"
+      },
+      "correct": "c",
+      "explanation": "A tétel alapján: 6² + 8² = c². Ez 36 + 64 = 100. Tehát c² = 100, amiből az átfogó (c) hossza √100 = 10 cm."
+    },
+    {
+      "question": "Melyik alábbi számhármas alkot pitagoraszi számhármast?",
+      "answers": {
+        "a": "3, 4, 5",
+        "b": "2, 3, 4",
+        "c": "4, 5, 6"
+      },
+      "correct": "a",
+      "explanation": "A pitagoraszi számhármasok olyan pozitív egész számok, amelyekre teljesül a Pitagorasz-tétel. A 3, 4, 5 számokra igaz, hogy 3² + 4² = 9 + 16 = 25, ami egyenlő 5²-nel."
+    },
+    {
+      "question": "Mi a Pitagorasz-tétel megfordítása?",
+      "answers": {
+        "a": "Ha egy háromszög nem derékszögű, akkor oldalai nem lehetnek egész számok.",
+        "b": "Ha egy háromszög két oldalának négyzetösszege egyenlő a harmadik oldal négyzetével, akkor a háromszög derékszögű.",
+        "c": "Minden derékszögű háromszög egyenlő szárú."
+      },
+      "correct": "b",
+      "explanation": "A tétel megfordítása kimondja, hogy ha egy háromszög oldalaira igaz az a² + b² = c² összefüggés, akkor az a háromszög biztosan derékszögű."
+    },
+    {
+      "question": "Egy derékszögű háromszög átfogója 13 cm, az egyik befogója 5 cm. Milyen hosszú a másik befogó?",
+      "answers": {
+        "a": "12 cm",
+        "b": "8 cm",
+        "c": "18 cm"
+      },
+      "correct": "a",
+      "explanation": "Az egyenlet: 5² + b² = 13². Ebből 25 + b² = 169. Ha kivonunk 25-öt, b² = 144, tehát a másik befogó (b) hossza √144 = 12 cm."
+    },
+    {
+      "question": "Melyik esetben lesz egy háromszög tompaszögű a 'c' leghosszabb oldalánál?",
+      "answers": {
+        "a": "Ha a² + b² > c²",
+        "b": "Ha a² + b² < c²",
+        "c": "Ha a² + b² = c²"
+      },
+      "correct": "b",
+      "explanation": "Ha a két rövidebb oldal négyzetösszege kisebb, mint a leghosszabb oldal négyzete, akkor a háromszög tompaszögű."
+    },
+    {
+      "question": "Milyen hosszú egy 10 cm oldalhosszúságú négyzet átlója?",
+      "answers": {
+        "a": "√200 cm (kb. 14,14 cm)",
+        "b": "20 cm",
+        "c": "10 cm"
+      },
+      "correct": "a",
+      "explanation": "A négyzet átlója egy derékszögű háromszöget hoz létre, ahol a két befogó 10 cm. Így 10² + 10² = átló². 100 + 100 = 200, tehát az átló hossza √200 cm."
+    },
+    {
+      "question": "Egy 5 méter magas létrát a falnak támasztanak úgy, hogy az alja 3 méterre van a faltól. Milyen magasra ér fel a létra a falon?",
+      "answers": {
+        "a": "4 méter",
+        "b": "2 méter",
+        "c": "√34 méter"
+      },
+      "correct": "a",
+      "explanation": "A létra, a fal és a talaj derékszögű háromszöget alkotnak. A létra az átfogó (5 m), a faltól való távolság az egyik befogó (3 m). Így 3² + b² = 5². Ebből 9 + b² = 25, tehát b² = 16, vagyis a létra 4 méter magasra ér fel a falon."
+    },
+    {
+      "question": "A Pitagorasz-tétel csak az euklideszi geometriában érvényes?",
+      "answers": {
+        "a": "Nem, minden geometriai rendszerben érvényes.",
+        "b": "Igen, ez az euklideszi geometria egyik alapvető tétele.",
+        "c": "Csak a térgeometriában érvényes."
+      },
+      "correct": "b",
+      "explanation": "A Pitagorasz-tétel szorosan kötődik az euklideszi (hagyományos sík-) geometria axiómáihoz. Nem-euklideszi rendszerekben, mint a gömbi vagy hiperbolikus geometria, a tétel ebben a formában nem érvényes."
+    },
+    {
+      "question": "Derékszögű-e az a háromszög, melynek oldalai 8, 15 és 17 egység hosszúak?",
+      "answers": {
+        "a": "Nem, mert tompaszögű.",
+        "b": "Igen, mert 8² + 15² = 17².",
+        "c": "Nem, mert hegyesszögű."
+      },
+      "correct": "b",
+      "explanation": "A tétel megfordítását alkalmazva: 8² + 15² = 64 + 225 = 289. Mivel 17² szintén 289, az összefüggés teljesül, tehát a háromszög derékszögű."
+    },
+    {
+      "question": "Hogyan szól a Pitagorasz-tétel területekkel megfogalmazva?",
+      "answers": {
+        "a": "A befogókra emelt négyzetek kerületének összege egyenlő az átfogóra emelt négyzet kerületével.",
+        "b": "A befogókra emelt körök területének összege egyenlő az átfogóra emelt kör területével.",
+        "c": "A befogók fölé emelt négyzetek területének összege egyenlő az átfogó fölé emelt négyzet területével."
+      },
+      "correct": "c",
+      "explanation": "A tétel geometriai bizonyításai gyakran a területek egyenlőségén alapulnak, miszerint a két kisebb négyzet területe (a² és b²) pontosan kitölti a legnagyobb négyzet területét (c²)."
+    },
+    {
+      "question": "Melyik ókori kultúrákban ismerték a tételt már Püthagorasz előtt?",
+      "answers": {
+        "a": "A rómaiak és a görögök.",
+        "b": "A babilóniaiak, kínaiak és indiaiak.",
+        "c": "Az aztékok és a maják."
+      },
+      "correct": "b",
+      "explanation": "Bár a tétel a görög Püthagoraszról kapta a nevét, régészeti leletek bizonyítják, hogy a babilóniaiak, indiaiak és más ókori kultúrák már jóval előtte ismerték és alkalmazták az összefüggést."
+    },
+    {
+      "question": "Egy egyenlő szárú derékszögű háromszög átfogója 10 cm. Milyen hosszúak a befogók?",
+      "answers": {
+        "a": "√50 cm (kb. 7,07 cm)",
+        "b": "5 cm",
+        "c": "10 cm"
+      },
+      "correct": "a",
+      "explanation": "Ha a háromszög egyenlő szárú, akkor a két befogó egyenlő (a = b). Tehát a² + a² = 10², vagyis 2a² = 100. Ebből a² = 50, tehát a befogó hossza √50 cm."
+    },
+    {
+      "question": "Mi a téglatest testátlójának kiszámításának képlete (a, b, c élekkel)?",
+      "answers": {
+        "a": "d = a + b + c",
+        "b": "d² = a² + b² + c²",
+        "c": "d² = a² * b² * c²"
+      },
+      "correct": "b",
+      "explanation": "A térbeli Pitagorasz-tétel szerint egy 'a', 'b' és 'c' élű téglatest testátlójának (d) négyzete egyenlő az élek négyzeteinek összegével. Ez a tétel kétszeri alkalmazásából vezethető le."
+    },
+    {
+      "question": "Milyen hosszú egy 12 cm oldalú szabályos háromszög magassága?",
+      "answers": {
+        "a": "6 cm",
+        "b": "√108 cm (kb. 10,39 cm)",
+        "c": "12 cm"
+      },
+      "correct": "b",
+      "explanation": "A magasság a szabályos háromszöget két egybevágó derékszögű háromszögre bontja. Itt az átfogó 12 cm, az egyik befogó 6 cm (az alap fele). Így 6² + m² = 12². Ebből 36 + m² = 144, tehát m² = 108, a magasság pedig √108 cm."
+    },
+    {
+      "question": "Egy 7, 24, 25 oldalú háromszög derékszögű. Mekkora a 14, 48, 50 oldalú háromszög legnagyobb szöge?",
+      "answers": {
+        "a": "90°",
+        "b": "Kb. 120°",
+        "c": "Hegyes szög"
+      },
+      "correct": "a",
+      "explanation": "A 14, 48, 50 oldalak a 7, 24, 25 oldalak kétszeresei. Mivel az eredeti háromszög derékszögű (7²+24²=25²), a hozzá hasonló háromszög is derékszögű lesz. A hasonlóság során a szögek nem változnak."
+    },
+    {
+      "question": "A Pitagorasz-tételt melyik másik matematikai tétellel lehet egyszerűen bizonyítani?",
+      "answers": {
+        "a": "A Thalész-tétellel.",
+        "b": "A befogótétellel.",
+        "c": "A szinusztétellel."
+      },
+      "correct": "b",
+      "explanation": "A befogótétel kimondja, hogy a befogó négyzete egyenlő az átfogó és a befogó átfogóra eső vetületének szorzatával (a²=c*p és b²=c*q). A két egyenletet összeadva a² + b² = c*(p+q). Mivel p+q=c, így a² + b² = c²."
+    },
+    {
+      "question": "Egy P(3, 4) pont milyen messze van az origótól (0, 0) a koordináta-rendszerben?",
+      "answers": {
+        "a": "7 egység",
+        "b": "5 egység",
+        "c": "3.5 egység"
+      },
+      "correct": "b",
+      "explanation": "A pont koordinátái egy derékszögű háromszög befogóit adják meg, ahol az átfogó a pont távolsága az origótól. Tehát 3² + 4² = távolság². 9 + 16 = 25, így a távolság √25 = 5 egység."
+    },
+    {
+      "question": "A 6, 8, 10 oldalhosszúságú háromszög pitagoraszi számhármast alkot. Ez milyen típusú számhármas?",
+      "answers": {
+        "a": "Primitív pitagoraszi számhármas.",
+        "b": "Nem primitív, mert a 3, 4, 5 számhármas többszöröse.",
+        "c": "Nem pitagoraszi számhármas."
+      },
+      "correct": "b",
+      "explanation": "Primitív pitagoraszi számhármasnak azokat nevezzük, amelyeknek nincs 1-nél nagyobb közös osztójuk. A 6, 8, 10 számok mind oszthatók 2-vel, és a 3, 4, 5 primitív számhármasból származtathatók."
+    },
+    {
+      "question": "Melyik esetben lesz egy háromszög hegyesszögű a 'c' leghosszabb oldalánál?",
+      "answers": {
+        "a": "Ha a² + b² > c²",
+        "b": "Ha a² + b² < c²",
+        "c": "Csak ha a=b=c"
+      },
+      "correct": "a",
+      "explanation": "Ha a két rövidebb oldal négyzetösszege nagyobb, mint a leghosszabb oldal négyzete, akkor a háromszög minden szöge hegyesszög."
+    },
+    {
+      "question": "Egy rombusz átlói 10 cm és 24 cm hosszúak. Milyen hosszú a rombusz egy oldala?",
+      "answers": {
+        "a": "17 cm",
+        "b": "34 cm",
+        "c": "13 cm"
+      },
+      "correct": "c",
+      "explanation": "A rombusz átlói merőlegesen felezik egymást, így négy egybevágó derékszögű háromszögre bontják. Egy ilyen háromszög befogói az átlók fele, azaz 5 cm és 12 cm. Az átfogó (a rombusz oldala) 5² + 12² = c² alapján 25 + 144 = 169, tehát c = 13 cm."
+    },
+    {
+      "question": "Kinek a nevéhez fűződik a tétel egyik híres, átdarabolós, geometriai bizonyítása?",
+      "answers": {
+        "a": "Euklidész",
+        "b": "Leonardo da Vinci",
+        "c": "Bhászkara"
+      },
+      "correct": "c",
+      "explanation": "A 12. századi indiai matematikus, II. Bhászkara egy elegáns, átdaraboláson alapuló bizonyítást adott a tételre, amely egy (a+b) oldalú négyzet kétféle felbontásán alapul."
+    },
+    {
+      "question": "Egy derékszögű háromszög befogóinak aránya 3:4, kerülete 60 cm. Mekkora az átfogó?",
+      "answers": {
+        "a": "35 cm",
+        "b": "30 cm",
+        "c": "25 cm"
+      },
+      "correct": "c",
+      "explanation": "Ha a befogók 3x és 4x, akkor az átfogó (3x)²+(4x)²=c² alapján √(9x²+16x²)=√25x²=5x. A kerület 3x+4x+5x=12x=60, tehát x=5. Az átfogó hossza 5x = 5*5 = 25 cm."
+    }
+  ]
 }

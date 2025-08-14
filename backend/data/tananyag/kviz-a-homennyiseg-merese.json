@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz a homennyiseg merese\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A hő egy energiafajta.",
+        "b": "A hőmérséklet egy állapotjelző.",
+        "c": "Egy testnek 'sok hője' van."
+      },
+      "correct": "c",
+      "explanation": "Ez a megfogalmazás fizikailag pontatlan. A testeknek belső energiájuk van, nem 'hőjük'. A hő az energiaátadás folyamatát jelöli két test között, nem egy tárolt tulajdonság."
+    },
+    {
+      "question": "A Q = c ⋅ m ⋅ ΔT képletben mit jelöl a 'c'?",
+      "answers": {
+        "a": "A hőmennyiséget.",
+        "b": "A tömeget.",
+        "c": "A fajhőt."
+      },
+      "correct": "c",
+      "explanation": "A képletben 'c' a fajhő jele, amely egy anyagra jellemző állandó."
+    },
+    {
+      "question": "Miért fontosabb télen a jó hőszigetelés egy háznál?",
+      "answers": {
+        "a": "Nyáron nem fontos.",
+        "b": "Mert télen hidegebb van.",
+        "c": "Hogy a benti meleget ne engedje ki, és a kinti hideget ne engedje be."
+      },
+      "correct": "c",
+      "explanation": "A hő mindig a melegebb helyről a hidegebb felé áramlik. Télen a házból kifelé, nyáron a kánikulában pedig kintről befelé. A jó hőszigetelés mindkét irányban lelassítja ezt a nemkívánatos hőáramlást."
+    },
+    {
+      "question": "Melyik folyamat jár hőfelvétellel?",
+      "answers": {
+        "a": "Olvadás",
+        "b": "Fagyás",
+        "c": "Lecsapódás"
+      },
+      "correct": "a",
+      "explanation": "Az olvadáshoz energiát kell közölni a szilárd anyaggal. Ez egy hőfelvétellel járó folyamat. A fagyás és a lecsapódás hőleadással jár."
+    },
+    {
+      "question": "Mi a ΔT a hőmennyiség képletében?",
+      "answers": {
+        "a": "A test hőmérséklete.",
+        "b": "A hőmérséklet-változás (T_végső - T_kezdeti).",
+        "c": "Az idő."
+      },
+      "correct": "b",
+      "explanation": "A Δ (delta) betű a fizikában mindig a változást jelöli. A ΔT a hőmérséklet megváltozása, a végső és a kezdeti hőmérséklet különbsége."
+    },
+    {
+      "question": "Melyik folyamat során NEM változik a test hőmérséklete?",
+      "answers": {
+        "a": "Melegítés",
+        "b": "Forrás",
+        "c": "Hűlés"
+      },
+      "correct": "b",
+      "explanation": "A halmazállapot-változások, mint a forrás és az olvadás, állandó hőmérsékleten zajlanak, amíg a teljes anyag át nem alakul."
+    },
+    {
+      "question": "Mi a feltétele a kalorimetriai mérések pontosságának?",
+      "answers": {
+        "a": "A rendszer jó hőszigetelése, hogy a hőcsere csak a vizsgált testek között történjen.",
+        "b": "A mérést gyorsan kell elvégezni.",
+        "c": "A vizet mindig 100°C-ra kell melegíteni."
+      },
+      "correct": "a",
+      "explanation": "A kaloriméter lényege, hogy minimalizálja a hőcserét a környezettel. Ideális esetben a melegebb test által leadott hő teljes mértékben a hidegebb test által felvett hővel egyenlő."
+    },
+    {
+      "question": "Hogyan mérhetjük meg egy ismeretlen fém fajhőjét?",
+      "answers": {
+        "a": "Mérleggel.",
+        "b": "Kaloriméter segítségével.",
+        "c": "Vonalzóval."
+      },
+      "correct": "b",
+      "explanation": "A forró fémdarabot ismert tömegű és hőmérsékletű vízbe helyezve egy kaloriméterben, és megmérve a kialakuló közös hőmérsékletet, a hőcsere egyenletéből kiszámítható a fém fajhője."
+    },
+    {
+      "question": "Mi a hőmennyiség jele és mértékegysége?",
+      "answers": {
+        "a": "Jele: Q, mértékegysége: joule (J).",
+        "b": "Jele: T, mértékegysége: Celsius-fok (°C).",
+        "c": "Jele: H, mértékegysége: watt (W)."
+      },
+      "correct": "a",
+      "explanation": "A hőmennyiséget (hőt) Q betűvel jelöljük, és mivel energiaátadási folyamatot ír le, a mértékegysége ugyanaz, mint az energiáé és a munkáé: a joule (J)."
+    },
+    {
+      "question": "Mi a kaloriméter?",
+      "answers": {
+        "a": "Hőmennyiség mérésére szolgáló, hőszigetelt edény.",
+        "b": "Hőmérséklet mérésére szolgáló eszköz.",
+        "c": "Ételek kalóriatartalmát mérő gép."
+      },
+      "correct": "a",
+      "explanation": "A kaloriméter egy jól hőszigetelt edényrendszer, amelyben a hőcsere folyamatokat lehet vizsgálni, és a hőmérséklet-változásból lehet következtetni a hőmennyiségre."
+    },
+    {
+      "question": "Mi a belső energia?",
+      "answers": {
+        "a": "Ugyanaz, mint a hő.",
+        "b": "A testet alkotó részecskék mozgási és kölcsönhatási energiáinak összege.",
+        "c": "A test mechanikai energiája."
+      },
+      "correct": "b",
+      "explanation": "A belső energia egy állapotjelző, a testben tárolt energia. A hő pedig a belső energia megváltozásának egyik módja."
+    },
+    {
+      "question": "Melyik állítás igaz a hőre és a hőmérsékletre?",
+      "answers": {
+        "a": "A hő a test tulajdonsága, a hőmérséklet egy folyamat.",
+        "b": "A hőmérséklet a test tulajdonsága, a hő egy energiaátadási folyamat.",
+        "c": "A kettő ugyanazt jelenti."
+      },
+      "correct": "b",
+      "explanation": "Ez a legfontosabb különbségtétel. A hőmérséklet a test állapotát írja le (állapotjelző), a hő pedig a testek közötti energiaátadást (folyamatjellegű mennyiség)."
+    },
+    {
+      "question": "A víznek kiemelkedően magas a fajhője. Mit jelent ez a gyakorlatban?",
+      "answers": {
+        "a": "Gyorsan felmelegszik és gyorsan lehűl.",
+        "b": "Nem tud megfagyni.",
+        "c": "Lassan melegszik fel és lassan hűl le, sok hőt képes tárolni."
+      },
+      "correct": "c",
+      "explanation": "A magas fajhő miatt sok energiát kell közölni a vízzel, hogy a hőmérséklete jelentősen megemelkedjen. Emiatt a nagy víztömegek (tengerek, tavak) kiegyenlítik az éghajlatot."
+    },
+    {
+      "question": "Miért adnak a távfűtő csövekre vastag szigetelést?",
+      "answers": {
+        "a": "Hogy erősebbek legyenek.",
+        "b": "Hogy szebbek legyenek.",
+        "c": "Hogy a hőveszteséget csökkentsék a szállítás során."
+      },
+      "correct": "c",
+      "explanation": "A szigetelőanyag rossz hővezető, ezért lecsökkenti a forró víz hőleadását a környezet felé. Így a hőenergia a lehető legkisebb veszteséggel jut el a fűtőtestekig."
+    },
+    {
+      "question": "Hogyan számítható ki a hőmérséklet-változáshoz szükséges hőmennyiség?",
+      "answers": {
+        "a": "Q = c ⋅ m ⋅ ΔT",
+        "b": "Q = m ⋅ g ⋅ h",
+        "c": "W = F ⋅ s"
+      },
+      "correct": "a",
+      "explanation": "A hőmennyiség (Q) kiszámításához a test fajhőjét (c), tömegét (m) és a hőmérséklet-változását (ΔT) kell összeszorozni."
+    },
+    {
+      "question": "Milyen irányú a hő áramlása?",
+      "answers": {
+        "a": "A magasabb hőmérsékletű hely felől az alacsonyabb felé.",
+        "b": "Az alacsonyabb hőmérsékletű hely felől a magasabb felé.",
+        "c": "A hő nem áramlik, hanem a testekben van."
+      },
+      "correct": "a",
+      "explanation": "A termodinamika második főtétele szerint a hő önkéntesen mindig a melegebb helyről a hidegebb hely felé áramlik."
+    },
+    {
+      "question": "Mi az olvadáshő?",
+      "answers": {
+        "a": "Az a hőmennyiség, ami 1 kg anyag megolvasztásához szükséges az olvadásponton.",
+        "b": "A fajhő másik neve.",
+        "c": "Az a hőmérséklet, ahol egy anyag megolvad."
+      },
+      "correct": "a",
+      "explanation": "Olvadás közben a test hőmérséklete nem változik. Az olvadáshő az az energia, ami a kristályrács kötéseinek felszakításához kell. Jele: Lₒ, mértékegysége: J/kg."
+    },
+    {
+      "question": "Mi NEM a hő mértékegysége?",
+      "answers": {
+        "a": "Joule (J)",
+        "b": "Newton (N)",
+        "c": "Kalória (cal)"
+      },
+      "correct": "b",
+      "explanation": "A hő egy energiaforma, mértékegysége a joule. Régebben a kalóriát is használták. A newton az erő mértékegysége."
+    },
+    {
+      "question": "A párolgáshő...",
+      "answers": {
+        "a": "...ugyanaz, mint a forráshő.",
+        "b": "...az az energia, ami 1 kg folyadék elpárologtatásához szükséges.",
+        "c": "...csak 100°C-on létezik."
+      },
+      "correct": "b",
+      "explanation": "A párolgás is energiát igényel, mert a folyadékból kiszakadó részecskéknek le kell győzniük a társaik vonzását. A párolgáshő ennek az energiának a mértéke."
+    },
+    {
+      "question": "2 kg alumínium hőmérsékletét 10°C-kal akarjuk emelni. Mennyi hő szükséges? (c_Al = 900 J/(kg·°C))",
+      "answers": {
+        "a": "9000 J",
+        "b": "18 000 J",
+        "c": "45 J"
+      },
+      "correct": "b",
+      "explanation": "A hőmennyiség Q = c ⋅ m ⋅ ΔT = 900 J/(kg·°C) ⋅ 2 kg ⋅ 10 °C = 18 000 J."
+    },
+    {
+      "question": "A hő...",
+      "answers": {
+        "a": "...a hőmérséklet mértékegysége.",
+        "b": "...egy anyag.",
+        "c": "...az energiaátadás egyik formája."
+      },
+      "correct": "c",
+      "explanation": "A hő nem anyag és nem is állapotjelző, hanem az energiaátadás egyik módja, amely hőmérséklet-különbség hatására jön létre."
+    },
+    {
+      "question": "Melyik állítás igaz a kaloriméterre?",
+      "answers": {
+        "a": "A hőtermelést méri.",
+        "b": "A hőmérsékletet méri.",
+        "c": "A hőcserét méri."
+      },
+      "correct": "c",
+      "explanation": "A kaloriméter egy olyan eszköz, amellyel két vagy több, különböző hőmérsékletű anyag közötti hőcsere folyamatát lehet vizsgálni, és a kicserélt hőmennyiséget meg lehet mérni."
+    },
+    {
+      "question": "Két különböző anyagú, de azonos tömegű testnek ugyanannyi hőt közlünk. Melyiknek lesz nagyobb a hőmérséklet-változása?",
+      "answers": {
+        "a": "Amelyiknek kisebb a fajhője.",
+        "b": "Amelyiknek nagyobb a fajhője.",
+        "c": "A hőmérséklet-változásuk egyenlő lesz."
+      },
+      "correct": "a",
+      "explanation": "A kisebb fajhőjű anyag 'könnyebben' melegszik, tehát ugyanannyi hőtől jobban megemelkedik a hőmérséklete."
+    },
+    {
+      "question": "Hogyan számoljuk ki a halmazállapot-változáshoz (olvadás, fagyás) szükséges hőt?",
+      "answers": {
+        "a": "Q = L ⋅ m",
+        "b": "Q = c ⋅ m ⋅ ΔT",
+        "c": "Q = L / m"
+      },
+      "correct": "a",
+      "explanation": "A halmazállapot-változás közben nincs hőmérséklet-változás. A szükséges hőmennyiség (Q) az anyag tömegének (m) és a rá jellemző olvadáshőnek vagy forráshőnek (L) a szorzata."
+    },
+    {
+      "question": "Mi a fajhő mértékegysége?",
+      "answers": {
+        "a": "J/kg",
+        "b": "J/(kg·°C)",
+        "c": "J/°C"
+      },
+      "correct": "b",
+      "explanation": "A fajhő (c) azt adja meg, hogy mennyi joule energia kell 1 kilogramm anyag hőmérsékletének 1 Celsius-fokkal való emeléséhez."
+    }
+  ]
 }

@@ -4,5 +4,206 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz egyenletrendszerek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik számpár megoldása a rendszernek? <div class='formula-display'>2x + y = 1 <br> x + 2y = 5</div>",
+      "answers": {
+        "a": "(1, -1)",
+        "b": "(3, -5)",
+        "c": "(-1, 3)"
+      },
+      "correct": "c",
+      "explanation": "Ellenőrizzük a (-1, 3) párt. Az első egyenletbe helyettesítve: 2*(-1) + 3 = -2 + 3 = 1. Ez igaz. A másodikba helyettesítve: (-1) + 2*3 = -1 + 6 = 5. Ez is igaz. Tehát a (-1, 3) a megoldás."
+    },
+    {
+      "question": "Mi a megoldása a következő egyenletrendszernek? <div class='formula-display'>x - y = 1 <br> 2x + 3y = 12</div>",
+      "answers": {
+        "a": "(2, 1)",
+        "b": "(4, 3)",
+        "c": "(3, 2)"
+      },
+      "correct": "c",
+      "explanation": "Az első egyenletből kifejezzük x-et: x = y + 1. Ezt behelyettesítjük a másodikba: 2(y+1) + 3y = 12. Felbontva a zárójelet: 2y + 2 + 3y = 12. Összevonva: 5y + 2 = 12. Kivonva 2-t: 5y = 10. Osztva 5-tel: y = 2. Visszahelyettesítve: x = 2 + 1 = 3."
+    },
+    {
+      "question": "Melyik egyenletrendszernek van végtelen sok megoldása?",
+      "answers": {
+        "a": "x+y=3, x+y=4",
+        "b": "x+y=3, 2x+2y=6",
+        "c": "x+y=3, x-y=3"
+      },
+      "correct": "b",
+      "explanation": "Végtelen sok megoldás akkor van, ha a két egyenlet lényegében ugyanaz. Ha a második egyenletet (2x+2y=6) elosztjuk 2-vel, az első egyenletet (x+y=3) kapjuk. Mivel a két egyenlet ugyanazt írja le, végtelen sok megoldásuk van."
+    },
+    {
+      "question": "Mi a megoldása a következő egyenletrendszernek? <div class='formula-display'>5x - 2y = 11 <br> x + y = 5</div>",
+      "answers": {
+        "a": "(4, 1)",
+        "b": "(2, -0.5)",
+        "c": "(3, 2)"
+      },
+      "correct": "c",
+      "explanation": "Szorozzuk a második egyenletet 2-vel, hogy kiküszöbölhessük y-t. Az új rendszer: 5x-2y=11 és 2x+2y=10. Ha összeadjuk őket: 7x = 21, amiből x = 3. Visszahelyettesítve az x+y=5-be: 3 + y = 5, amiből y = 2."
+    },
+    {
+      "question": "Ha x=y és x+y=10, mennyi x?",
+      "answers": {
+        "a": "10",
+        "b": "Nincs megoldás",
+        "c": "5"
+      },
+      "correct": "c",
+      "explanation": "Mivel x=y, az első egyenletben y helyére beírhatjuk x-et: x + x = 10. Összevonva: 2x = 10, amiből x = 5."
+    },
+    {
+      "question": "Két szám összege 20, különbsége 4. Melyik ez a két szám?",
+      "answers": {
+        "a": "12 és 8",
+        "b": "10 és 10",
+        "c": "14 és 6"
+      },
+      "correct": "a",
+      "explanation": "Legyen a két szám x és y. Az egyenletrendszer: x + y = 20 és x - y = 4. Ha összeadjuk a két egyenletet: 2x = 24, amiből x = 12. Visszahelyettesítve: 12 + y = 20, tehát y = 8."
+    },
+    {
+      "question": "Melyik számpár megoldása az egyenletrendszernek? <div class='formula-display'>y = 2x <br> x + y = 12</div>",
+      "answers": {
+        "a": "(4, 8)",
+        "b": "(3, 6)",
+        "c": "(2, 10)"
+      },
+      "correct": "a",
+      "explanation": "A behelyettesítő módszer a leggyorsabb. Helyettesítsük be az 'y' értékét (2x) a második egyenletbe: x + (2x) = 12. Összevonva: 3x = 12, tehát x = 4. Visszahelyettesítve: y = 2 * 4 = 8."
+    },
+    {
+      "question": "Mi az eliminációs (kiküszöbölő) módszer célja?",
+      "answers": {
+        "a": "Egy új változó bevezetése.",
+        "b": "Az egyik változó eltüntetése az egyenletek összeadásával/kivonásával.",
+        "c": "A változók kifejezése egymással."
+      },
+      "correct": "b",
+      "explanation": "Az eliminációs módszer során az egyenleteket úgy alakítjuk (pl. szorzással), hogy az egyik változó együtthatója a két egyenletben egymás ellentettje legyen. Így az egyenletek összeadásakor ez a változó 'kiesik'."
+    },
+    {
+      "question": "Mi a megoldása a következő egyenletrendszernek? <div class='formula-display'>2x + y = 9 <br> 3x - y = 1</div>",
+      "answers": {
+        "a": "(3, 3)",
+        "b": "(2, 5)",
+        "c": "(1, 7)"
+      },
+      "correct": "b",
+      "explanation": "Adjuk össze a két egyenletet, hogy kiküszöböljük y-t. (2x+y) + (3x-y) = 9 + 1, amiből 5x = 10, tehát x = 2. Visszahelyettesítve az első egyenletbe: 2*2 + y = 9, amiből 4 + y = 9, tehát y = 5."
+    },
+    {
+      "question": "Két szám összege 15. Az egyik szám a másik kétszerese. Melyik ez a két szám?",
+      "answers": {
+        "a": "7 és 8",
+        "b": "5 és 10",
+        "c": "6 és 9"
+      },
+      "correct": "b",
+      "explanation": "Legyen a két szám x és y. Az egyenletrendszer: x + y = 15 és y = 2x. Behelyettesítve a második egyenletet az elsőbe: x + 2x = 15. Összevonva: 3x = 15, tehát x = 5. Visszahelyettesítve: y = 2*5 = 10."
+    },
+    {
+      "question": "Mit jelent egy egyenletrendszer megoldása?",
+      "answers": {
+        "a": "Az a számpár, amely mindkét egyenletet igazzá teszi.",
+        "b": "Az a szám, amely az egyik egyenletet igazzá teszi.",
+        "c": "A két egyenlet összege."
+      },
+      "correct": "a",
+      "explanation": "Egy egyenletrendszer megoldása egy olyan rendezett számpár (x,y), amely az összes egyenletbe behelyettesítve egyszerre igaz állítást eredményez."
+    },
+    {
+      "question": "Mikor van egy lineáris egyenletrendszernek végtelen sok megoldása?",
+      "answers": {
+        "a": "Ha a két egyenlet ekvivalens.",
+        "b": "Ha a két egyenletben nincs közös pont.",
+        "c": "Ha az egyenletek ellentmondanak egymásnak."
+      },
+      "correct": "a",
+      "explanation": "Geometriailag ez azt jelenti, hogy a két egyenlet ugyanazt az egyenest írja le. Algebrailag pedig azt, hogy az egyik egyenlet a másiknak valós számszorosa (pl. x+y=2 és 2x+2y=4)."
+    },
+    {
+      "question": "Melyik a behelyettesítő módszer első lépése?",
+      "answers": {
+        "a": "Kifejezzük az egyik változót az egyik egyenletből.",
+        "b": "Összeadjuk a két egyenletet.",
+        "c": "Kivonjuk a két egyenletet egymásból."
+      },
+      "correct": "a",
+      "explanation": "A behelyettesítő módszer lényege, hogy az egyik egyenletet használjuk arra, hogy az egyik változót kifejezzük a másikkal, majd ezt a kifejezést behelyettesítjük a másik egyenletbe."
+    },
+    {
+      "question": "Mikor NINCS megoldása egy lineáris egyenletrendszernek?",
+      "answers": {
+        "a": "Ha a két egyenlet ugyanazt az egyenest írja le.",
+        "b": "Ha a két egyenlet párhuzamos, de nem egybeeső egyeneseket ír le.",
+        "c": "Ha a két egyenlet metszi egymást."
+      },
+      "correct": "b",
+      "explanation": "Az egyenletrendszer megoldása az egyenletek által leírt egyenesek metszéspontja. Ha az egyenesek párhuzamosak és nem esnek egybe, nincs közös pontjuk, így nincs megoldás sem."
+    },
+    {
+      "question": "Mi a megoldása a következő egyenletrendszernek? <div class='formula-display'>x + y = 10 <br> x - y = 4</div>",
+      "answers": {
+        "a": "x=7, y=3",
+        "b": "x=6, y=4",
+        "c": "x=8, y=2"
+      },
+      "correct": "a",
+      "explanation": "Adjuk össze a két egyenletet, így az y kiesik: 2x = 14, amiből x = 7. Behelyettesítve az első egyenletbe: 7 + y = 10, amiből y = 3."
+    },
+    {
+      "question": "Melyik számpár oldja meg az egyenletrendszert? <div class='formula-display'>x + y = 5 <br> 2x - y = -2</div>",
+      "answers": {
+        "a": "(2, 3)",
+        "b": "(1, 4)",
+        "c": "(0, 5)"
+      },
+      "correct": "b",
+      "explanation": "Ellenőrizzük az (1, 4) párt. Első egyenlet: 1+4=5 (igaz). Második egyenlet: 2*1 - 4 = 2-4 = -2 (igaz). Mivel mindkettő igaz, ez a megoldás."
+    },
+    {
+      "question": "Mi a megoldása a következő egyenletrendszernek? <div class='formula-display'>x = 5 <br> x + y = 8</div>",
+      "answers": {
+        "a": "(5, 3)",
+        "b": "(3, 5)",
+        "c": "(5, 13)"
+      },
+      "correct": "a",
+      "explanation": "Az x értéke már adott, így csak be kell helyettesíteni a második egyenletbe: 5 + y = 8. Ebből kivonva 5-öt: y = 3."
+    },
+    {
+      "question": "Egy farmon csirkék és nyulak vannak. Összesen 10 fejük és 26 lábuk van. Hány csirke van?",
+      "answers": {
+        "a": "7",
+        "b": "3",
+        "c": "5"
+      },
+      "correct": "a",
+      "explanation": "Legyen 'c' a csirkék és 'ny' a nyulak száma. Egyenletek: c + ny = 10 (fejek) és 2c + 4ny = 26 (lábak). Az elsőből c = 10 - ny. Behelyettesítve: 2(10-ny) + 4ny = 26, amiből 20 + 2ny = 26, tehát ny = 3. Visszahelyettesítve: c = 10 - 3 = 7."
+    },
+    {
+      "question": "Melyik számpár oldja meg az egyenletrendszert? <div class='formula-display'>3x + y = 5 <br> x - y = 3</div>",
+      "answers": {
+        "a": "(1, 2)",
+        "b": "(3, -2)",
+        "c": "(2, -1)"
+      },
+      "correct": "c",
+      "explanation": "Adjuk össze a két egyenletet, így az y kiesik: 4x = 8, amiből x = 2. Visszahelyettesítve a második egyenletbe: 2 - y = 3, amiből -y = 1, tehát y = -1."
+    },
+    {
+      "question": "Mi a megoldása a következő egyenletrendszernek? <div class='formula-display'>x + y = 5 <br> x - y = 1</div>",
+      "answers": {
+        "a": "(2, 3)",
+        "b": "(3, 2)",
+        "c": "(4, 1)"
+      },
+      "correct": "b",
+      "explanation": "Adjuk össze a két egyenletet: 2x = 6, amiből x = 3. Behelyettesítve az első egyenletbe: 3 + y = 5, amiből y = 2."
+    }
+  ]
 }
