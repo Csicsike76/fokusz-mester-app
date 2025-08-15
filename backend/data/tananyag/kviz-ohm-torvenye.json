@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz ohm torvenye\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi az áram erőssége?",
+      "answers": {
+        "a": "A feszültség mértéke.",
+        "b": "Az elektromos töltések áramlási sebessége.",
+        "c": "Az elektromos alkatrészek ellenállása."
+      },
+      "correct": "b",
+      "explanation": "Az áram erőssége az elektromos töltések áramlási sebességét jelenti. ✅ Megoldás: Az elektromos töltések áramlási sebessége."
+    },
+    {
+      "question": "Milyen mértékegysége van az áram erősségének?",
+      "answers": {
+        "a": "Volt (V)",
+        "b": "Amper (A)",
+        "c": "Ohm (Ω)"
+      },
+      "correct": "b",
+      "explanation": "Az áram erősségét amperben (A) mérjük. ✅ Megoldás: Amper (A)"
+    },
+    {
+      "question": "Mi a feszültség?",
+      "answers": {
+        "a": "Az áram körben haladásának sebessége.",
+        "b": "Az az erő, ami az áramot hajtja.",
+        "c": "Az elektromos alkatrész ellenállása."
+      },
+      "correct": "b",
+      "explanation": "A feszültség az az elektromos erő, ami az áramot hajtja. ✅ Megoldás: Az az erő, ami az áramot hajtja."
+    },
+    {
+      "question": "Milyen mértékegysége van a feszültségnek?",
+      "answers": {
+        "a": "Ohm (Ω)",
+        "b": "Volt (V)",
+        "c": "Amper (A)"
+      },
+      "correct": "b",
+      "explanation": "A feszültséget voltban (V) mérjük.  ✅ Megoldás: Volt (V)"
+    },
+    {
+      "question": "Mi az ellenállás?",
+      "answers": {
+        "a": "Az áram nagysága.",
+        "b": "Az a mérték, amivel egy alkatrész korlátozza az áram folyását.",
+        "c": "Az a feszültség, amivel egy alkatrész működik."
+      },
+      "correct": "b",
+      "explanation": "Az ellenállás (R) az az alkatrész, ami korlátozza az áram folyását.  ✅ Megoldás: Az a mérték, amivel egy alkatrész korlátozza az áram folyását."
+    },
+    {
+      "question": "Milyen mértékegysége van az ellenállásnak?",
+      "answers": {
+        "a": "Volt (V)",
+        "b": "Amper (A)",
+        "c": "Ohm (Ω)"
+      },
+      "correct": "c",
+      "explanation": "Az ellenállást ohmban (Ω) mérjük. ✅ Megoldás: Ohm (Ω)"
+    },
+    {
+      "question": "Mi az Ohm-törvény?",
+      "answers": {
+        "a": "Feszültség = áram * ellenállás.",
+        "b": "Áram = feszültség * ellenállás.",
+        "c": "Ellenállás = áram / feszültség."
+      },
+      "correct": "a",
+      "explanation": "Az Ohm-törvény szerint a feszültség (U) egyenlő az áram (I) és az ellenállás (R) szorzatával: U = I * R. ✅ Megoldás: Feszültség = áram * ellenállás."
+    },
+    {
+      "question": "Ha egy áramkörben a feszültség 12 V, az ellenállás 4 Ohm, mennyi az áram?",
+      "answers": {
+        "a": "3 A",
+        "b": "8 A",
+        "c": "48 A"
+      },
+      "correct": "a",
+      "explanation": "Az Ohm-törvényből I = U / R = 12 V / 4 Ω = 3 A. ✅ Megoldás: 3 A"
+    },
+    {
+      "question": "Ha egy áramkörben az áram 2 A, az ellenállás 6 Ohm, mennyi a feszültség?",
+      "answers": {
+        "a": "3 V",
+        "b": "12 V",
+        "c": "0,33 V"
+      },
+      "correct": "b",
+      "explanation": "Az Ohm-törvényből U = I * R = 2 A * 6 Ω = 12 V. ✅ Megoldás: 12 V"
+    },
+    {
+      "question": "Ha egy 12 V-os izzón 2 A folyik át, mekkora az ellenállása?",
+      "answers": {
+        "a": "6 ohm",
+        "b": "24 ohm",
+        "c": "14 ohm"
+      },
+      "correct": "a",
+      "explanation": "Az Ohm-törvényből R = U / I = 12 V / 2 A = 6 Ω. ✅ Megoldás: 6 ohm"
+    },
+    {
+      "question": "Melyik egység az áram mérésére szolgál?",
+      "answers": {
+        "a": "Ohm mérő",
+        "b": "Volt mérő",
+        "c": "Amper mérő"
+      },
+      "correct": "c",
+      "explanation": "Az amper mérő az áram mérésére szolgáló eszköz. ✅ Megoldás: Amper mérő."
+    },
+    {
+      "question": "Melyik egység a feszültség mérésére szolgál?",
+      "answers": {
+        "a": "Ohm mérő",
+        "b": "Volt mérő",
+        "c": "Amper mérő"
+      },
+      "correct": "b",
+      "explanation": "A volt mérő a feszültség mérésére szolgáló eszköz. ✅ Megoldás: Volt mérő"
+    },
+    {
+      "question": "Hogyan változik az áram erőssége, ha a feszültség nő, miközben az ellenállás állandó?",
+      "answers": {
+        "a": "Csökken.",
+        "b": "Nő.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "Az Ohm-törvény szerint az áram egyenesen arányos a feszültséggel, ha az ellenállás állandó. Ha a feszültség nő, az áram is nő. ✅ Megoldás: Nő."
+    },
+    {
+      "question": "Hogyan változik az áram erőssége, ha az ellenállás nő, miközben a feszültség állandó?",
+      "answers": {
+        "a": "Csökken.",
+        "b": "Nő.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "Az Ohm-törvény szerint az áram fordítottan arányos az ellenállással, ha a feszültség állandó. Ha az ellenállás nő, az áram csökken.  ✅ Megoldás: Csökken."
+    },
+    {
+      "question": "Mi a szigetelőanyagok fő tulajdonsága?",
+      "answers": {
+        "a": "Jól vezetik az áramot.",
+        "b": "Nem vezetik az áramot, vagy csak nagyon rosszul.",
+        "c": "Nagyon nagy az ellenállásuk, így sok áramot engednek át."
+      },
+      "correct": "b",
+      "explanation": "A szigetelőanyagok nem vezetik az áramot, vagy csak nagyon rosszul. ✅ Megoldás: Nem vezetik az áramot, vagy csak nagyon rosszul."
+    },
+    {
+      "question": "Melyik anyag a jobb vezető?",
+      "answers": {
+        "a": "A gumi.",
+        "b": "A fa.",
+        "c": "A réz."
+      },
+      "correct": "c",
+      "explanation": "A fémek, mint a réz, a legjobb vezetők. ✅ Megoldás: A réz."
+    },
+    {
+      "question": "Mi a rövidzár?",
+      "answers": {
+        "a": "Amikor az áramkör megszakad.",
+        "b": "Amikor az áramkörben az ellenállás nagyon alacsony, és nagy áram folyik.",
+        "c": "Amikor a feszültség 0."
+      },
+      "correct": "b",
+      "explanation": "Rövidzárkor az áramkörben az ellenállás nagyon alacsony, ezért nagy áram folyik, ami veszélyes lehet. ✅ Megoldás: Amikor az áramkörben az ellenállás nagyon alacsony, és nagy áram folyik."
+    },
+    {
+      "question": "Mitől függ egy vezeték ellenállása?",
+      "answers": {
+        "a": "A feszültségtől és az áramtól.",
+        "b": "Az anyagától, a hosszától és a keresztmetszetétől.",
+        "c": "A színtől és a súlyától."
+      },
+      "correct": "b",
+      "explanation": "Egy vezeték ellenállása függ az anyagától, a hosszától és a keresztmetszetétől. ✅ Megoldás: Az anyagától, a hosszától és a keresztmetszetétől."
+    },
+    {
+      "question": "Miért fontos a biztosíték egy áramkörben?",
+      "answers": {
+        "a": "Hogy szép legyen.",
+        "b": "Hogy megakadályozza a rövidzárat.",
+        "c": "Hogy az áram erősségét szabályozza."
+      },
+      "correct": "b",
+      "explanation": "A biztosíték megvédi az áramkört a túláramtól, ami a rövidzár miatt keletkezhet.  ✅ Megoldás: Hogy megakadályozza a rövidzárat."
+    },
+    {
+      "question": "Mi a soros kapcsolás?",
+      "answers": {
+        "a": "Amikor az alkatrészek egymás mellett vannak.",
+        "b": "Amikor az alkatrészek egymás után vannak, az áramnak csak egy útja van.",
+        "c": "Amikor az alkatrészek függetlenül vannak."
+      },
+      "correct": "b",
+      "explanation": "Soros kapcsolásnál az alkatrészek egymás után vannak, az áramnak csak egy útja van. ✅ Megoldás: Amikor az alkatrészek egymás után vannak, az áramnak csak egy útja van."
+    },
+    {
+      "question": "Mi a párhuzamos kapcsolás?",
+      "answers": {
+        "a": "Amikor az alkatrészek egymás után vannak.",
+        "b": "Amikor az alkatrészek egymás mellett vannak, az áramnak több útja van.",
+        "c": "Amikor nincs ellenállás."
+      },
+      "correct": "b",
+      "explanation": "Párhuzamos kapcsolásnál az alkatrészek egymás mellett vannak, így az áram több útvonalon is haladhat.  ✅ Megoldás: Amikor az alkatrészek egymás mellett vannak, az áramnak több útja van."
+    },
+    {
+      "question": "Ha sorosan kapcsolunk ellenállásokat, hogyan számoljuk ki az eredő ellenállást (ismétlés)?",
+      "answers": {
+        "a": "Összeadjuk az ellenállásokat.",
+        "b": "Kiszorozzuk az ellenállásokat.",
+        "c": "Elosztjuk az ellenállásokat."
+      },
+      "correct": "a",
+      "explanation": "Soros kapcsolásnál az eredő ellenállás az egyes ellenállások összege. ✅ Megoldás: Összeadjuk az ellenállásokat."
+    },
+    {
+      "question": "Ha párhuzamosan kapcsolunk ellenállásokat, hogyan számoljuk ki az eredő ellenállást (ismétlés)?",
+      "answers": {
+        "a": "Összeadjuk az ellenállásokat.",
+        "b": "Kiszorozzuk az ellenállásokat.",
+        "c": "A reciprokjaik összegének a reciprokát vesszük."
+      },
+      "correct": "c",
+      "explanation": "Párhuzamos kapcsolásnál az eredő ellenállás a reciprok értékek összegének a reciprokja.  ✅ Megoldás: A reciprokjaik összegének a reciprokát vesszük."
+    },
+    {
+      "question": "Melyik képlet fejezi ki helyesen az Ohm-törvényt?",
+      "answers": {
+        "a": "I = U * R",
+        "b": "U = I * R",
+        "c": "R = U * I"
+      },
+      "correct": "b",
+      "explanation": "Az Ohm-törvény szerint a feszültség (U) egyenlő az áram (I) és az ellenállás (R) szorzatával: U = I * R. ✅ Megoldás: U = I * R"
+    }
+  ]
 }

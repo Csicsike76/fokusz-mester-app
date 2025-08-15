@@ -1,8 +1,259 @@
 {
   "title": "Kviz valtozo mozgas",
-  "subject": "altalanos",
-  "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Kviz valtozo mozgas\" című tananyag.",
-  "questions": []
+  "subject": "általános",
+  "grade": 4,
+  "category": "iskolai",
+  "description": "Ez a kvíz a változó mozgás témakörét fedi le.",
+  "questions": [
+    {
+      "question": "1. Egy test sebessége 10 m/s, gyorsulása 2 m/s². Mennyi lesz a sebessége 3 másodperc múlva?",
+      "answers": {
+        "a": "16 m/s",
+        "b": "15 m/s",
+        "c": "6 m/s"
+      },
+      "correct": "a",
+      "explanation": "A sebességváltozás = gyorsulás * idő = 2 m/s² * 3 s = 6 m/s. A sebesség 10 m/s + 6 m/s = 16 m/s lesz."
+    },
+    {
+      "question": "2. Mi a gyorsulás SI mértékegysége?",
+      "answers": {
+        "a": "m/s²",
+        "b": "km/h",
+        "c": "m/s"
+      },
+      "correct": "a",
+      "explanation": "A gyorsulást méter per szekundum négyzetben (m/s²) mérjük. Ez azt jelzi, hogy a sebesség mennyivel változik másodpercenként."
+    },
+    {
+      "question": "3. Egy autó 20 m/s sebességgel halad, majd fékezni kezd -4 m/s² gyorsulással. Mennyi idő alatt áll meg?",
+      "answers": {
+        "a": "5 s",
+        "b": "80 s",
+        "c": "4 s"
+      },
+      "correct": "a",
+      "explanation": "Idő = (sebességváltozás) / gyorsulás. Idő = (0 - 20 m/s) / (-4 m/s²) = 5 s."
+    },
+    {
+      "question": "4. Mi okozza a szabadon eső testek gyorsulását (légellenállást elhanyagolva)?",
+      "answers": {
+        "a": "A gravitációs erő.",
+        "b": "A test tömege.",
+        "c": "A levegő nyomása."
+      },
+      "correct": "a",
+      "explanation": "A gravitáció húzza a testeket lefelé, ez okozza a gyorsulást."
+    },
+    {
+      "question": "5. Egy autó nyugalomból indulva 10 másodperc alatt éri el a 20 m/s sebességet. Mennyi a gyorsulása?",
+      "answers": {
+        "a": "2 m/s²",
+        "b": "0,5 m/s²",
+        "c": "200 m/s²"
+      },
+      "correct": "a",
+      "explanation": "Gyorsulás = (sebességváltozás) / (idő). a = (20 m/s - 0 m/s) / 10 s = 2 m/s²."
+    },
+    {
+      "question": "6. Ha egy test sebessége és gyorsulása is pozitív, akkor a test...",
+      "answers": {
+        "a": "gyorsul.",
+        "b": "lassul.",
+        "c": "egyenletesen mozog."
+      },
+      "correct": "a",
+      "explanation": "Ha a sebesség és a gyorsulás egy irányba mutatnak, a test egyre gyorsabban fog mozogni."
+    },
+    {
+      "question": "7. Mi a 'lassulás' fizikai szempontból?",
+      "answers": {
+        "a": "A pálya hosszának csökkenése.",
+        "b": "Negatív gyorsulás (pozitív mozgásiránynál).",
+        "c": "A tömeg csökkenése."
+      },
+      "correct": "b",
+      "explanation": "A lassulás negatív gyorsulást jelent. A sebesség csökken."
+    },
+    {
+      "question": "8. Egy egyenletes sebességgel haladó vonat gyorsulása...",
+      "answers": {
+        "a": "nulla.",
+        "b": "pozitív.",
+        "c": "negatív."
+      },
+      "correct": "a",
+      "explanation": "Ha a sebesség nem változik, a gyorsulás nulla."
+    },
+    {
+      "question": "9. Egy autó 108 km/h sebességről 10 s alatt egyenletesen megáll. Mennyi a gyorsulása?",
+      "answers": {
+        "a": "-3 m/s²",
+        "b": "-30 m/s²",
+        "c": "-10.8 m/s²"
+      },
+      "correct": "a",
+      "explanation": "Először átváltjuk a sebességet: 108 km/h = 30 m/s. Gyorsulás = (0 m/s - 30 m/s) / 10 s = -3 m/s²."
+    },
+    {
+      "question": "10. Az autó gázpedáljának lenyomása milyen hatással van a gyorsulásra?",
+      "answers": {
+        "a": "Pozitív gyorsulást eredményez.",
+        "b": "Csökkenti azt.",
+        "c": "Nem befolyásolja."
+      },
+      "correct": "a",
+      "explanation": "Ha a gázpedált lenyomod, az autó gyorsul, vagyis a gyorsulás pozitív."
+    },
+    {
+      "question": "11. Egy test sebessége 10 m/s, gyorsulása -2 m/s². Mit csinál a test?",
+      "answers": {
+        "a": "Lassul",
+        "b": "Gyorsul",
+        "c": "Egyenletesen mozog"
+      },
+      "correct": "a",
+      "explanation": "A negatív gyorsulás lassulást jelent."
+    },
+    {
+      "question": "12. Egy űrhajó hajtóművei folyamatosan működnek a légüres térben. Milyen mozgást végez?",
+      "answers": {
+        "a": "Gyorsuló mozgást végez.",
+        "b": "Egyenletesen mozog.",
+        "c": "Nyugalomban van."
+      },
+      "correct": "a",
+      "explanation": "Ha a hajtóművek tolóerőt fejtenek ki, az űrhajó sebessége folyamatosan változik, vagyis gyorsul."
+    },
+    {
+      "question": "13. Mi a Δt jelölés jelentése a fizikában?",
+      "answers": {
+        "a": "Az eltelt időtartam.",
+        "b": "A sebességváltozás.",
+        "c": "A teljes távolság."
+      },
+      "correct": "a",
+      "explanation": "A Δt az időtartamot jelöli. Ez azt mutatja meg, mennyi idő telt el."
+    },
+    {
+      "question": "14. Mi a 'lassulás' fizikai szempontból?",
+      "answers": {
+        "a": "A pálya hosszának csökkenése.",
+        "b": "A tömeg csökkenése.",
+        "c": "Negatív gyorsulás (pozitív mozgásiránynál)."
+      },
+      "correct": "c",
+      "explanation": "A lassulás negatív gyorsulást jelent. A sebesség csökken."
+    },
+    {
+      "question": "15. Melyik mennyiség változik az egyenletesen változó mozgás során?",
+      "answers": {
+        "a": "A gyorsulás",
+        "b": "A sebesség",
+        "c": "A tömeg"
+      },
+      "correct": "c",
+      "explanation": "Az egyenletesen változó mozgásban a sebesség folyamatosan változik. "
+    },
+    {
+      "question": "16. Egy kerékpáros 8 m/s-ról 2 m/s-ra lassít 3 másodperc alatt. Mennyi a gyorsulása?",
+      "answers": {
+        "a": "2 m/s²",
+        "b": "-3 m/s²",
+        "c": "-2 m/s²"
+      },
+      "correct": "c",
+      "explanation": "Gyorsulás = (2 m/s - 8 m/s) / 3 s = -6 m/s / 3 s = -2 m/s². A mínusz jel a lassulást jelzi."
+    },
+    {
+      "question": "17. Melyik mennyiség változik az egyenletesen változó mozgás során?",
+      "answers": {
+        "a": "A gyorsulás",
+        "b": "A tömeg",
+        "c": "A sebesség"
+      },
+      "correct": "c",
+      "explanation": "Az egyenletesen változó mozgásban a sebesség folyamatosan változik."
+    },
+    {
+      "question": "18. A szabadon eső testek gyorsulása a Földön (légellenállás nélkül) kb...",
+      "answers": {
+        "a": "10 m/s²",
+        "b": "1 m/s²",
+        "c": "100 m/s²"
+      },
+      "correct": "a",
+      "explanation": "A nehézségi gyorsulás kb. 10 m/s²."
+    },
+    {
+      "question": "19. A nehézségi gyorsulás jele:",
+      "answers": {
+        "a": "a",
+        "b": "g",
+        "c": "v"
+      },
+      "correct": "b",
+      "explanation": "A nehézségi gyorsulást g-vel jelöljük."
+    },
+    {
+      "question": "20. Egy autó 20 m/s-ról 30 m/s-ra gyorsul. Mi igaz a gyorsulására?",
+      "answers": {
+        "a": "Pozitív",
+        "b": "Negatív",
+        "c": "Nulla"
+      },
+      "correct": "a",
+      "explanation": "A sebesség nőtt, tehát a gyorsulás pozitív."
+    },
+    {
+      "question": "21. Egy busz elindul a megállóból. Milyen a gyorsulása?",
+      "answers": {
+        "a": "Nulla",
+        "b": "Pozitív",
+        "c": "Negatív"
+      },
+      "correct": "b",
+      "explanation": "A busz sebessége nő. Ha a sebesség nő, akkor a gyorsulás pozitív."
+    },
+    {
+      "question": "22. Mi a Δv jelölés jelentése a gyorsulás képletében?",
+      "answers": {
+        "a": "Pálya hossza",
+        "b": "Sebességváltozás",
+        "c": "Átlagsebesség"
+      },
+      "correct": "c",
+      "explanation": "A Δv a sebesség változását jelöli."
+    },
+    {
+      "question": "23. Mi a gyorsulás jele?",
+      "answers": {
+        "a": "a",
+        "b": "v",
+        "c": "s"
+      },
+      "correct": "a",
+      "explanation": "A gyorsulás jele: a."
+    },
+    {
+      "question": "24. Melyik esetben van a legnagyobb gyorsulás?",
+      "answers": {
+        "a": "Motor, ami 2 s alatt gyorsul 10 m/s-ra",
+        "b": "Bicikli, ami 5 s alatt gyorsul 10 m/s-ra",
+        "c": "Autó, ami 10 s alatt gyorsul 10 m/s-ra"
+      },
+      "correct": "a",
+      "explanation": "A gyorsulás nagyobb, ha rövidebb idő alatt éri el a sebességet."
+    },
+    {
+      "question": "25. Egy test sebessége 10 m/s, gyorsulása 2 m/s². Mennyi lesz a sebessége 3 másodperc múlva?",
+      "answers": {
+        "a": "16 m/s",
+        "b": "6 m/s",
+        "c": "15 m/s"
+      },
+      "correct": "a",
+      "explanation": "A sebességváltozás = gyorsulás * idő = 2 m/s² * 3 s = 6 m/s. A sebesség 10 m/s + 6 m/s = 16 m/s lesz."
+    }
+  ]
 }

@@ -4,5 +4,266 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz osszehasonlitas kerekites\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik szám a nagyobb: 10 234 vagy 9 876?",
+      "answers": {
+        "a": "10 234",
+        "b": "9 876",
+        "c": "Egyenlőek"
+      },
+      "correct": "a",
+      "explanation": "Számok összehasonlításakor először a számjegyek számát nézzük. A 10 234 ötjegyű, a 9 876 négyjegyű, tehát a 10 234 a nagyobb."
+    },
+    {
+      "question": "Mi a 478 szám tízesekre kerekített értéke?",
+      "answers": {
+        "a": "470",
+        "b": "480",
+        "c": "500"
+      },
+      "correct": "b",
+      "explanation": "Tízesre kerekítéshez az egyesek helyén álló számjegyet (8) kell nézni. Mivel ez 5 vagy annál nagyobb, felfelé kerekítünk. Ez azt jelenti, hogy a tízesek helyén álló 7-es eggyel nő, 8-as lesz. Az eredmény 480."
+    },
+    {
+      "question": "Melyik relációs jel kerüljön a pontok helyére: 1234 ... 1243?",
+      "answers": {
+        "a": ">",
+        "b": "<",
+        "c": "="
+      },
+      "correct": "b",
+      "explanation": "Mindkét szám négyjegyű. A legmagasabb helyiértéktől haladva hasonlítjuk össze a számjegyeket. Az ezres és százas helyiérték megegyezik. A tízes helyiértéken 3 < 4, tehát 1234 < 1243."
+    },
+    {
+      "question": "Mi a 8 450 szám százasokra kerekített értéke?",
+      "answers": {
+        "a": "8400",
+        "b": "8000",
+        "c": "8500"
+      },
+      "correct": "c",
+      "explanation": "Százasra kerekítéshez a tízesek helyén álló számjegyet (5) kell nézni. Mivel ez 5 vagy annál nagyobb, felfelé kerekítünk. A százasok helyén álló 4-es eggyel nő, 5-ös lesz. Az eredmény 8500."
+    },
+    {
+      "question": "Melyik a legkisebb szám?",
+      "answers": {
+        "a": "5067",
+        "b": "5607",
+        "c": "5076"
+      },
+      "correct": "a",
+      "explanation": "Mindhárom szám négyjegyű, és az ezres helyiértéken 5-ös áll. A százasokat összehasonlítva a 0 a legkisebb, tehát az 5067 és 5076 közül kell választani. A tízeseket nézve 6 < 7, tehát az 5067 a legkisebb."
+    },
+    {
+      "question": "Mi a 299 szám tízesekre kerekített értéke?",
+      "answers": {
+        "a": "290",
+        "b": "300",
+        "c": "200"
+      },
+      "correct": "b",
+      "explanation": "Tízesre kerekítéshez az egyesek helyén álló 9-est nézzük. Mivel ez 5 vagy nagyobb, felfelé kerekítünk. A tízesek helyén álló 9-esből 10-es lenne, ami 0 tízes és 1 százas maradékot jelent. A százasok helyén álló 2-eshez hozzáadva az 1-et, 3-at kapunk. Az eredmény 300."
+    },
+    {
+      "question": "Hány olyan egész szám van, ami tízesekre kerekítve 80?",
+      "answers": {
+        "a": "9",
+        "b": "10",
+        "c": "11"
+      },
+      "correct": "b",
+      "explanation": "Azok a számok, amiket 80-ra kerekítünk, a 75-től (felfelé kerekítve 80) a 84-ig (lefelé kerekítve 80) tartanak. A {75, 76, 77, 78, 79, 80, 81, 82, 83, 84} halmaznak 10 eleme van."
+    },
+    {
+      "question": "Melyik állítás igaz a kerekítésre?",
+      "answers": {
+        "a": "A kerekítés mindig növeli a szám értékét.",
+        "b": "A kerekítés egy közelítő érték megadását jelenti.",
+        "c": "A kerekítés mindig csökkenti a szám értékét."
+      },
+      "correct": "b",
+      "explanation": "A kerekítés célja, hogy egy számot egy egyszerűbb, 'kerekebb', de hozzá közeli értékkel helyettesítsünk. Ez a közelítő érték lehet nagyobb (felfelé kerekítés) vagy kisebb (lefelé kerekítés) is az eredetinél."
+    },
+    {
+      "question": "Mi a 99 501 szám ezresekre kerekített értéke?",
+      "answers": {
+        "a": "99 000",
+        "b": "100 000",
+        "c": "99 500"
+      },
+      "correct": "b",
+      "explanation": "Ezresekre kerekítéshez a százasok helyén álló 5-öst kell nézni. Mivel ez 5, felfelé kerekítünk. A 99 ezresből így 100 ezres lesz, azaz 100 000."
+    },
+    {
+      "question": "Tedd növekvő sorrendbe: 3210, 3120, 3201.",
+      "answers": {
+        "a": "3120, 3201, 3210",
+        "b": "3210, 3201, 3120",
+        "c": "3120, 3210, 3201"
+      },
+      "correct": "a",
+      "explanation": "Mindhárom szám négyjegyű, az ezresek helyén 3-as áll. A százasokat nézve a 3120 a legkisebb. A másik kettőnél a tízeseket hasonlítjuk össze: 0 < 1, tehát a 3201 a kisebb. A helyes sorrend: 3120, 3201, 3210."
+    },
+    {
+      "question": "Hogyan kell leírni a < jelet?",
+      "answers": {
+        "a": "Kisebb vagy egyenlő",
+        "b": "Szigorúan kisebb",
+        "c": "Nagyobb"
+      },
+      "correct": "b",
+      "explanation": "A < jel a 'szigorúan kisebb' reláció jele. A ≤ jelenti a 'kisebb vagy egyenlő'-t."
+    },
+    {
+      "question": "Melyik a legnagyobb négyjegyű, különböző számjegyekből álló szám?",
+      "answers": {
+        "a": "9999",
+        "b": "9876",
+        "c": "1234"
+      },
+      "correct": "b",
+      "explanation": "A legnagyobb számot úgy kapjuk, ha a legnagyobb helyiértékre a legnagyobb számjegyet írjuk, majd csökkenő sorrendben folytatjuk a maradék legnagyobbakkal: 9, 8, 7, 6."
+    },
+    {
+      "question": "Melyik állítás igaz az 5432 és 5423 számokra?",
+      "answers": {
+        "a": "5432 < 5423",
+        "b": "5432 > 5423",
+        "c": "5432 = 5423"
+      },
+      "correct": "b",
+      "explanation": "Az első két számjegy (ezres, százas) megegyezik. A tízes helyiértéken 3 > 2, tehát az 5432 a nagyobb szám."
+    },
+    {
+      "question": "Mi a 14 990 szám ezresekre kerekített értéke?",
+      "answers": {
+        "a": "14 000",
+        "b": "15 000",
+        "c": "10 000"
+      },
+      "correct": "b",
+      "explanation": "Ezresekre kerekítéshez a százasok helyén álló 9-est kell nézni. Mivel ez 5-nél nagyobb, felfelé kerekítünk. A 14 ezresből így 15 ezres lesz, azaz 15 000."
+    },
+    {
+      "question": "Melyik szám NEM megoldása az x² = 36 egyenletnek?",
+      "answers": {
+        "a": "6",
+        "b": "-6",
+        "c": "18"
+      },
+      "correct": "c",
+      "explanation": "Az x² = 36 egyenlet megoldásai 6 és -6, mert 6²=36 és (-6)²=36. ✅ Megoldás: A 18 nem megoldása az egyenletnek."
+    },
+    {
+      "question": "Mi a legnagyobb egy számjegyű szám?",
+      "answers": {
+        "a": "0",
+        "b": "1",
+        "c": "9"
+      },
+      "correct": "c",
+      "explanation": "A 9 a legnagyobb egy számjegyű szám."
+    },
+    {
+      "question": "Melyik szám van a 20 és a 30 között?",
+      "answers": {
+        "a": "19",
+        "b": "25",
+        "c": "31"
+      },
+      "correct": "b",
+      "explanation": "A 25 a 20 és a 30 között van. ✅ Megoldás: 25."
+    },
+    {
+      "question": "Melyik szám van a 450 és 550 között?",
+      "answers": {
+        "a": "449",
+        "b": "551",
+        "c": "501"
+      },
+      "correct": "c",
+      "explanation": "Az 501 a 450 és 550 között van. ✅ Megoldás: 501."
+    },
+    {
+      "question": "Mi a 199 szám százasokra kerekített értéke?",
+      "answers": {
+        "a": "100",
+        "b": "200",
+        "c": "190"
+      },
+      "correct": "b",
+      "explanation": "Százasokra kerekítéskor a tízes helyiértékben álló számjegyet (9) kell nézni. Mivel ez 5 vagy nagyobb, a 1-es százast eggyel növeljük, a többi helyiértéken 0 lesz. ✅ Megoldás: 200."
+    },
+    {
+      "question": "Mennyi 10 perc?",
+      "answers": {
+        "a": "60 másodperc",
+        "b": "600 másodperc",
+        "c": "3600 másodperc"
+      },
+      "correct": "b",
+      "explanation": "1 perc 60 másodperc. 10 perc az 10*60=600 másodperc.  ✅ Megoldás: 600 másodperc"
+    },
+    {
+      "question": "Mi a legkisebb prímszám?",
+      "answers": {
+        "a": "0",
+        "b": "1",
+        "c": "2"
+      },
+      "correct": "c",
+      "explanation": "A prímszámok azok a természetes számok, amelyeknek pontosan két különböző osztója van: 1 és önmaga. A legkisebb ilyen szám a 2.  ✅ Megoldás: 2"
+    },
+    {
+      "question": "Melyik a helyes meghatározása a törtnek?",
+      "answers": {
+        "a": "Két szám összege",
+        "b": "Két szám szorzata",
+        "c": "Egy egésznek a részei"
+      },
+      "correct": "c",
+      "explanation": "A tört egy egésznek a részeit mutatja. ✅ Megoldás: Egy egésznek a részei."
+    },
+    {
+      "question": "Melyik nem lehet számláló egy törtben?",
+      "answers": {
+        "a": "0",
+        "b": "1",
+        "c": "0,5"
+      },
+      "correct": "c",
+      "explanation": "A számlálónak egész számnak kell lennie, a 0.5 nem egész. ✅ Megoldás: A 0.5."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Két egész szám összege mindig egész szám.",
+        "b": "Két egész szám hányadosa mindig egész szám.",
+        "c": "Két egész szám szorzata mindig egész szám."
+      },
+      "correct": "b",
+      "explanation": "Az egész számok halmaza zárt az összeadásra és a szorzásra, de az osztásra nem. Például 3 / 2 = 1.5, ami nem egész szám. ✅ Megoldás: Két egész szám hányadosa mindig egész szám."
+    },
+    {
+      "question": "Mi az alaki érték és a valódi érték különbsége a 754 szám 7-es számjegyére nézve?",
+      "answers": {
+        "a": "Nincs különbség.",
+        "b": "Az alaki érték 7, a valódi 700.",
+        "c": "Az alaki érték 700, a valódi 7."
+      },
+      "correct": "b",
+      "explanation": "Az alaki érték maga a számjegy (7). A valódi érték a helyiértékkel megszorzott érték, ami a 7-es esetén 7 * 100 = 700. ✅ Megoldás: Az alaki érték 7, a valódi 700."
+    },
+    {
+      "question": "Mi a 100 : (-5) : (-4) műveletsor eredménye?",
+      "answers": {
+        "a": "-5",
+        "b": "5",
+        "c": "80"
+      },
+      "correct": "b",
+      "explanation": "Mivel a két osztás egyenrangú, balról jobbra haladunk. 1. 100 : (-5) = -20. 2. -20 : (-4) = 5. ✅ Megoldás: 5"
+    }
+  ]
 }

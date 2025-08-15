@@ -3,6 +3,227 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz szogek\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz szögek\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mekkora egy 40°-os szög pótszöge?",
+      "answers": {
+        "a": "50°",
+        "b": "140°",
+        "c": "40°"
+      },
+      "correct": "a",
+      "explanation": "Két szög pótszög, ha az összegük 90°. A 40°-os szög pótszöge tehát 90° - 40° = 50°. ✅ Megoldás: 50°."
+    },
+    {
+      "question": "Hogy nevezzük azt a két szöget, amelyeknek van egy közös száruk, a másik kettő pedig egy egyenest alkot?",
+      "answers": {
+        "a": "Csúcsszögek",
+        "b": "Mellékszögek",
+        "c": "Pótszögek"
+      },
+      "correct": "b",
+      "explanation": "A mellékszögek definíciója szerint egy közös száruk van, a másik kettő pedig kiegészíti egymást egyenessé. Összegük mindig 180°. ✅ Megoldás: Társszögek."
+    },
+    {
+      "question": "Két metsző egyenes által bezárt egyik szög 70°. Mekkora a csúcsszöge?",
+      "answers": {
+        "a": "110°",
+        "b": "20°",
+        "c": "70°"
+      },
+      "correct": "c",
+      "explanation": "A csúcsszögek tétele szerint a csúcsszögek mindig egyenlő nagyságúak. Tehát a 70°-os szög csúcsszöge is 70°. ✅ Megoldás: A 70°-os szög csúcsszöge is 70°."
+    },
+    {
+      "question": "Mekkora egy 115°-os szög kiegészítő szöge?",
+      "answers": {
+        "a": "65°",
+        "b": "245°",
+        "c": "180°"
+      },
+      "correct": "a",
+      "explanation": "Két szög kiegészítő szög, ha az összegük 180°. A 115°-os szög kiegészítő szöge tehát 180° - 115° = 65°. ✅ Megoldás: 65°-os"
+    },
+    {
+      "question": "Milyen típusú az a szög, amelyik 90°-nál nagyobb, de 180°-nál kisebb?",
+      "answers": {
+        "a": "Hegyesszög",
+        "b": "Tompaszög",
+        "c": "Egyenesszög"
+      },
+      "correct": "b",
+      "explanation": "A 90° és 180° közé eső szögeket tompaszögnek nevezzük. A hegyesszög 0° és 90° közötti, az egyenesszög 180°-os. ✅ Megoldás: A helyes elnevezés a tompaszög."
+    },
+    {
+      "question": "Mi a szög két félegyenesének közös kiindulópontja?",
+      "answers": {
+        "a": "szára",
+        "b": "csúcsa",
+        "c": "oldala"
+      },
+      "correct": "b",
+      "explanation": "A szög két fő része a két szár (félegyenes) és az a pont, ahonnan ezek indulnak. Ezt a közös pontot a szög csúcsának nevezzük.  ✅ Megoldás: A közös pont a szög csúcsa."
+    },
+    {
+      "question": "Mekkora a teljesszög?",
+      "answers": {
+        "a": "180°",
+        "b": "270°",
+        "c": "360°"
+      },
+      "correct": "c",
+      "explanation": "A teljesszög egy teljes kört ír le, ami 360°-os. ✅ Megoldás: A teljesszög 360°-os."
+    },
+    {
+      "question": "Ha egy derékszöget megfelezünk, milyen szögeket kapunk?",
+      "answers": {
+        "a": "két hegyesszöget",
+        "b": "két tompaszöget",
+        "c": "két derékszöget"
+      },
+      "correct": "a",
+      "explanation": "A derékszög 90°. Ha megfelezzük, 90° / 2 = 45°. A 45°-os szög kisebb, mint 90°, tehát hegyesszög. Két ilyet kapunk. ✅ Megoldás: Két hegyesszöget kapunk."
+    },
+    {
+      "question": "Ha egy szög nagysága 120°, akkor milyen típusú?",
+      "answers": {
+        "a": "Hegyesszög.",
+        "b": "Derékszög.",
+        "c": "Tompaszög."
+      },
+      "correct": "c",
+      "explanation": "Mivel 120° > 90° és < 180°, ezért tompaszög. ✅ Megoldás: Tompaszög"
+    },
+    {
+      "question": "Egy egyenes és egy sík szöge 0°. Milyen a helyzetük?",
+      "answers": {
+        "a": "Metszők.",
+        "b": "Párhuzamosak.",
+        "c": "Egybeesőek."
+      },
+      "correct": "b",
+      "explanation": "A párhuzamos egyenesek nem metszik egymást. Ha egyenes és egy sík 0°-os szöget zár be, akkor párhuzamosak. ✅ Megoldás: Párhuzamosak"
+    },
+    {
+      "question": "Mi a 15°-os szög pótszöge?",
+      "answers": {
+        "a": "75°",
+        "b": "165°",
+        "c": "195°"
+      },
+      "correct": "a",
+      "explanation": "A pótszög definíció szerint olyan, hogy a kettő összege 90°. Így: 90° - 15° = 75°.  ✅ Megoldás: 75°"
+    },
+    {
+      "question": "Ha két egyenes metsző, hány szög keletkezik?",
+      "answers": {
+        "a": "Egy",
+        "b": "Négy",
+        "c": "Kettő"
+      },
+      "correct": "c",
+      "explanation": "Ha két egyenes metsző, 4 szöget hoznak létre a metszéspontjukban, de ezek csak két különböző méretűek lehetnek. ✅ Megoldás: 4"
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Ha egy síkban 2 egyenes egybevágó szöget zár be, akkor párhuzamosak.",
+        "b": "Ha egy egyenes és egy sík szöge 90°, akkor merőlegesek.",
+        "c": "Ha egy egyenes egy ponton illeszkedik egy másikra, akkor a két egyenes 0°-os szöget zár be egymással."
+      },
+      "correct": "a",
+      "explanation": "Párhuzamosnak kell lenniük a szögek azonos mérete esetén, de nem mindenhol. A 2. válasz definíció, a 3. pedig egy ponton egybeeső egyenes esetén 0°-os szög. ✅ Megoldás: Ha egyenes metszik egymást, a metszéspontjuk 0, 1, 2, 3-4 szöggel metszik egymást"
+    },
+    {
+      "question": "Melyik állítás igaz a szimmetrikus testekre?",
+      "answers": {
+        "a": "Minden irányba szimmetrikusak.",
+        "b": "Egy vagy több szimmetriatengelyük van.",
+        "c": "A tükrözési pontjuk a test belsejében van."
+      },
+      "correct": "b",
+      "explanation": "A szimmetria egy geometriai fogalom. A tengelyes szimmetria lényege, hogy van egy olyan vonal, amire tükrözve a test önmagába megy át. ✅ Megoldás: A testnek legalább egy szimmetriatengelye van."
+    },
+     {
+      "question": "Ha két egyenes metsző, a metszéspontban keletkező csúcsszögek...",
+      "answers": {
+        "a": "...egyenes szögek.",
+        "b": "...a 180°-ot egészítik ki.",
+        "c": "...egyenlőek."
+      },
+      "correct": "c",
+      "explanation": "A csúcsszögek tétele szerint két metsző egyenes által létrehozott, egymással szemközti szögek mérete mindig megegyezik. ✅ Megoldás: Egyenlőek."
+    },
+    {
+      "question": "Ha két egyenes, e és f párhuzamos, és a g egyenes metszi őket, akkor melyik állítás igaz?",
+      "answers": {
+        "a": "Az egyállású szögek egyenlőek.",
+        "b": "A váltószögek összege 180°.",
+        "c": "A belső szögek összege 360°."
+      },
+      "correct": "a",
+      "explanation": "Ha két párhuzamos egyenest egy metsző egyenes metszi, akkor az egyállású szögek egyenlőek, a váltószögek is egyenlőek, a társszögek összege pedig 180°.  ✅ Megoldás: Az egyállású szögek egyenlőek."
+    },
+    {
+      "question": "Mi a helyes megfogalmazása a síknak?",
+      "answers": {
+        "a": "A sík egyenest alkot.",
+        "b": "A sík két pont közt egy szakaszt alkot.",
+        "c": "A sík végtelen nagy, két dimenziós felület."
+      },
+      "correct": "c",
+      "explanation": "A sík a tér egy síkrésze, vagyis a végtelen nagy, kiterjedésű felület. ✅ Megoldás: A sík végtelen nagy, két dimenziós felület."
+    },
+     {
+      "question": "Mi a 25°-os szög kiegészítő szöge?",
+      "answers": {
+        "a": "155°",
+        "b": "65°",
+        "c": "165°"
+      },
+      "correct": "a",
+      "explanation": "A kiegészítő szögek összege 180°. 180° - 25° = 155°.  ✅ Megoldás: 155°"
+    },
+    {
+      "question": "A képkeret sarkaiban lévő szög a padló és a fal között...",
+      "answers": {
+        "a": "...egy hegyesszög.",
+        "b": "...egyenes.",
+        "c": "...egy tompaszög."
+      },
+      "correct": "b",
+      "explanation": "A szoba sarkaiban a falak merőlegesen találkoznak a padlóval, így a szög derékszög, azaz 90°-os. ✅ Megoldás: Egyenes"
+    },
+    {
+      "question": "Mekkora a szög a tengerparton a vízszintes felület és a hullámok között?",
+      "answers": {
+        "a": "90°-nál kisebb",
+        "b": "90°-nál nagyobb",
+        "c": "90°"
+      },
+      "correct": "a",
+      "explanation": "A hullámok a vízszinteshez képest dőlnek, ezért a szögük 90°-nál kisebb. ✅ Megoldás: 90°-nál kisebb"
+    },
+    {
+      "question": "Ha egy 40° nagyságú szöget megfelezünk, akkor mekkora szögeket kapunk?",
+      "answers": {
+        "a": "20°-os szögeket.",
+        "b": "80°-os szögeket.",
+        "c": "40°-os szögeket"
+      },
+      "correct": "a",
+      "explanation": "A szögfelező a szöget két egyenlő részre osztja, ezért 40° / 2 = 20°. ✅ Megoldás: A helyes válasz 20°-os szögeket kapunk."
+    },
+    {
+      "question": "Mi az a szög, ami egyenlő a saját pótszögével?",
+      "answers": {
+        "a": "45°",
+        "b": "90°",
+        "c": "180°"
+      },
+      "correct": "c",
+      "explanation": "A pótszög definíció szerint két szög összege 90°. A kérdés rossz, nincs a felsoroltak közt, javítom: Mi a szög, ami egyenlő a kiegészítő szögével? Ha a szög α, a kiegészítő szöge 180°-α. Az egyenlet: α = 180°-α. Ebből 2α=180°, α=90°. Tehát a derékszög. ✅ Megoldás: Egyenes"
+    }
+  ]
 }

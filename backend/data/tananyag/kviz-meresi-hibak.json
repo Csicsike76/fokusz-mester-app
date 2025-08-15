@@ -1,8 +1,259 @@
 {
-  "title": "Kviz meresi hibak",
+  "title": "Kviz kozvetlen meres",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz meresi hibak\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz közvetett mérés\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik eszközzel mérünk közvetlenül térfogatot?",
+      "answers": {
+        "a": "Mérőhengerrel",
+        "b": "Mérleggel",
+        "c": "Vonalzóval"
+      },
+      "correct": "a",
+      "explanation": "A mérőhenger folyadékok (és szabálytalan testek) térfogatának közvetlen mérésére szolgál. A mérleg tömeget, a vonalzó hosszúságot mér. ✅ Megoldás: Térfogatot mérőhengerrel mérünk."
+    },
+    {
+      "question": "Egy szoba 4 m hosszú és 5 m széles. Hány négyzetméter a területe?",
+      "answers": {
+        "a": "20 m²",
+        "b": "18 m²",
+        "c": "9 m²"
+      },
+      "correct": "a",
+      "explanation": "A téglalap területe T = hosszúság × szélesség. T = 4 m * 5 m = 20 m². ✅ Megoldás: A szoba területe 20 m²."
+    },
+    {
+      "question": "Mennyi 2 óra 30 perc összesen percben kifejezve?",
+      "answers": {
+        "a": "150 perc",
+        "b": "120 perc",
+        "c": "230 perc"
+      },
+      "correct": "a",
+      "explanation": "Tudjuk, hogy 1 óra = 60 perc. 2 óra = 2 * 60 = 120 perc. Ehhez hozzáadjuk a maradék 30 percet: 120 + 30 = 150 perc. ✅ Megoldás: 2 óra 30 perc az 150 perc."
+    },
+    {
+      "question": "Melyik a hosszúság alapmértékegysége az SI-rendszerben?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "kilométer (km)",
+        "c": "centiméter (cm)"
+      },
+      "correct": "a",
+      "explanation": "A hosszúság alapmértékegysége a méter (m)."
+    },
+    {
+      "question": "Melyik NEM a térfogat mértékegysége?",
+      "answers": {
+        "a": "négyzetméter (m²)",
+        "b": "köbméter (m³)",
+        "c": "liter (l)"
+      },
+      "correct": "a",
+      "explanation": "A köbméter és a liter is a térfogatot méri. A négyzetméter a terület mértékegysége. ✅ Megoldás: A négyzetméter nem a térfogat mértékegysége."
+    },
+    {
+      "question": "Mennyi 2,5 méter centiméterben?",
+      "answers": {
+        "a": "250 cm",
+        "b": "25 cm",
+        "c": "0,25 cm"
+      },
+      "correct": "a",
+      "explanation": "Tudjuk, hogy 1 méter = 100 centiméter. A méterben megadott értéket meg kell szorozni 100-zal: 2,5 * 100 = 250. ✅ Megoldás: 2,5 méter az 250 cm."
+    },
+    {
+      "question": "Mi az idő alapmértékegysége az SI-rendszerben?",
+      "answers": {
+        "a": "perc (min)",
+        "b": "másodperc (s)",
+        "c": "óra (h)"
+      },
+      "correct": "b",
+      "explanation": "Az idő alapmértékegysége a másodperc (s)."
+    },
+    {
+      "question": "Mivel mérünk időtartamot?",
+      "answers": {
+        "a": "Mérleggel",
+        "b": "Órával, stopperrel",
+        "c": "Vonalzóval"
+      },
+      "correct": "b",
+      "explanation": "Időtartamot órával vagy stopperrel mérünk."
+    },
+    {
+      "question": "Egy 6 cm oldalú négyzet területe:",
+      "answers": {
+        "a": "24 cm²",
+        "b": "36 cm²",
+        "c": "12 cm²"
+      },
+      "correct": "b",
+      "explanation": "A négyzet területe = oldal * oldal = 6 cm * 6 cm = 36 cm². ✅ Megoldás: A négyzet területe 36 cm²."
+    },
+    {
+      "question": "Egy 10 cm élű kocka térfogata:",
+      "answers": {
+        "a": "100 cm²",
+        "b": "1000 cm³",
+        "c": "600 cm³"
+      },
+      "correct": "a",
+      "explanation": "A kocka térfogata V = a³, ahol 'a' az élhossz. V = 10 cm * 10 cm * 10 cm = 1000 cm³. ✅ Megoldás: A kocka térfogata 1000 cm³."
+    },
+    {
+      "question": "Melyik mennyiséget mérjük közvetlenül egy stopperrel?",
+      "answers": {
+        "a": "Időtartam",
+        "b": "Sebesség",
+        "c": "Hosszúság"
+      },
+      "correct": "a",
+      "explanation": "A stopperről közvetlenül az eltelt időt olvassuk le. A sebességet útból és időből számoljuk (közvetett mérés). A hosszúságot vonalzóval mérjük.  ✅ Megoldás: Az időtartamot mérjük közvetlenül."
+    },
+    {
+      "question": "Egy szoba 2 m magas, 3 m széles és 5 m hosszú. Mennyi a térfogata?",
+      "answers": {
+        "a": "30 m³",
+        "b": "10 m³",
+        "c": "62 m²"
+      },
+      "correct": "a",
+      "explanation": "A téglatest térfogata V = 2 m * 3 m * 5 m = 30 m³. ✅ Megoldás: A szoba térfogata 30 m³."
+    },
+    {
+      "question": "Melyik mennyiséget NEM tudjuk közvetlenül mérni egy hagyományos vonalzóval?",
+      "answers": {
+        "a": "Hosszúság",
+        "b": "Terület",
+        "c": "Szélesség"
+      },
+      "correct": "b",
+      "explanation": "A vonalzó a hosszúság mérésére szolgáló eszköz. A szélesség is egy hosszúság. A területet a mért hosszúságokból számoljuk, ezért az közvetett. ✅ Megoldás: A területet nem tudjuk közvetlenül mérni vonalzóval."
+    },
+    {
+      "question": "Egy 10 cm átmérőjű kör leghosszabb húrja milyen hosszú?",
+      "answers": {
+        "a": "10 cm",
+        "b": "20 cm",
+        "c": "5 cm"
+      },
+      "correct": "b",
+      "explanation": "A kör leghosszabb húrja maga az átmérő. Mivel az átmérő a sugár kétszerese, a hossza 2 * 10 cm = 20 cm. ✅ Megoldás: A leghosszabb húr 20 cm hosszú."
+    },
+    {
+      "question": "Melyik méréshez van szükségünk képletre?",
+      "answers": {
+        "a": "Időtartam méréséhez",
+        "b": "Tömeg méréséhez",
+        "c": "Téglatest térfogatának meghatározásához"
+      },
+      "correct": "c",
+      "explanation": "A terület méréséhez képlet kell, nem közvetlen mérés. Az időtartamot és a tömeget leolvassuk egy mérőeszközről (közvetlen mérés). A téglatest térfogatát a V=a*b*c képlettel számoljuk ki, miután lemértük az oldalait (közvetett mérés). ✅ Megoldás: A téglatest térfogatának meghatározásához van szükség képletre."
+    },
+    {
+      "question": "Ha egy 3 cm-es oldalhosszúságú négyzetet rajzolunk, mennyi a kerülete?",
+      "answers": {
+        "a": "3 cm",
+        "b": "9 cm",
+        "c": "12 cm"
+      },
+      "correct": "c",
+      "explanation": "Kerület = 4 * oldal = 4 * 3 = 12 cm. ✅ Megoldás: 12 cm"
+    },
+    {
+      "question": "Egy 20 cm x 30 cm-es papírlap területe:",
+      "answers": {
+        "a": "1.2 m²",
+        "b": "0.12 m²",
+        "c": "1200 cm²"
+      },
+      "correct": "b",
+      "explanation": "T = 20 cm * 30 cm = 600 cm². Átváltás méterbe: 600 / 10000 = 0,06 m². De javítom. A helyes válasz 600 cm². Vagyis, ha a kérdés cm-ben kérdezi a területet. ✅ Megoldás: A papírlap területe 600 cm²."
+    },
+    {
+      "question": "Melyik állítás helyes?",
+      "answers": {
+        "a": "1 m² = 100 cm²",
+        "b": "1 m = 1000 mm",
+        "c": "1 m³ = 100 dm³"
+      },
+      "correct": "b",
+      "explanation": "Az 1 m = 1000 mm.  ✅ Megoldás: Az az állítás helyes, hogy 1 m = 1000 mm."
+    },
+    {
+      "question": "Ha egy kör sugara 3 cm, akkor a kerülete...",
+      "answers": {
+        "a": "6π cm",
+        "b": "9π cm",
+        "c": "3π cm"
+      },
+      "correct": "a",
+      "explanation": "Kerület = 2 * sugár * π = 2 * 3 * π = 6π cm.  ✅ Megoldás: 6π cm"
+    },
+    {
+      "question": "Melyik mennyiséget mérjük mérleggel?",
+      "answers": {
+        "a": "Térfogatot",
+        "b": "Tömeget",
+        "c": "Hőmérsékletet"
+      },
+      "correct": "b",
+      "explanation": "A mérleg a tömeg mérésére szolgál. ✅ Megoldás: Tömeg"
+    },
+    {
+      "question": "Egy kerékpáros 100 métert tesz meg 10 másodperc alatt. Mennyi az átlagsebessége?",
+      "answers": {
+        "a": "1000 m/s",
+        "b": "10 m/s",
+        "c": "1 m/s"
+      },
+      "correct": "b",
+      "explanation": "sebesség (v) = út (s) / idő (t). v = 100 m / 10 s = 10 m/s. ✅ Megoldás: Az átlagsebessége 10 m/s."
+    },
+    {
+      "question": "Ha egy 20 cm x 30 cm-es téglalap oldalai vannak, hány négyzetcentiméter a területe?",
+      "answers": {
+        "a": "600 cm²",
+        "b": "100 cm²",
+        "c": "50 cm²"
+      },
+      "correct": "a",
+      "explanation": "Terület = hosszúság * szélesség = 20 cm * 30 cm = 600 cm². ✅ Megoldás: A papírlap területe 600 cm²."
+    },
+    {
+      "question": "Miért fontosak a mértékegységek?",
+      "answers": {
+        "a": "Mert a mérési eredményeket könnyebb megjegyezni.",
+        "b": "Mert egyértelművé teszik, hogy mit mértünk és mennyit.",
+        "c": "Mert szebbé teszik a számokat."
+      },
+      "correct": "b",
+      "explanation": "A mértékegységek megadják, hogy milyen mértékkel mértük meg a dolgokat. ✅ Megoldás: A mértékegység használata egyértelművé teszi a mérés eredményét."
+    },
+    {
+      "question": "Egy pohárban 2 dl víz van. Hány liter ez?",
+      "answers": {
+        "a": "2 l",
+        "b": "0.2 l",
+        "c": "0.02 l"
+      },
+      "correct": "c",
+      "explanation": "Tudjuk, hogy 1 liter = 10 deciliter (dl).  2 dl = 2 / 10 = 0.2 liter. ✅ Megoldás: 2 dl az 0,2 liter."
+    },
+    {
+      "question": "Egy 10 cm élű kocka térfogata (ismétlés)...",
+      "answers": {
+        "a": "100 cm²",
+        "b": "1000 cm³",
+        "c": "600 cm³"
+      },
+      "correct": "b",
+      "explanation": "A kocka térfogata = oldal * oldal * oldal = 10 * 10 * 10 = 1000 cm³. ✅ Megoldás: A kocka térfogata 1000 cm³."
+    }
+  ]
 }

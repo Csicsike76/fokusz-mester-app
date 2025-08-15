@@ -3,6 +3,257 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz nevezetes vonalak\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz nevezetes vonalak\" című tananyag.",
+  "questions": [
+    {
+      "question": "Hogy nevezzük a háromszög csúcsát a szemközti oldal felezőpontjával összekötő szakaszt?",
+      "answers": {
+        "a": "Magasságvonal",
+        "b": "Súlyvonal",
+        "c": "Szögfelező"
+      },
+      "correct": "b",
+      "explanation": "A súlyvonal definíció szerint a háromszög egyik csúcsát köti össze a szemközti oldal felezőpontjával. A három súlyvonal a súlypontban metszi egymást. ✅ Megoldás: Súlyvonal."
+    },
+    {
+      "question": "Mi a háromszög beírt körének középpontja?",
+      "answers": {
+        "a": "A súlyvonalak metszéspontja.",
+        "b": "A magasságvonalak metszéspontja.",
+        "c": "A belső szögfelezők metszéspontja."
+      },
+      "correct": "c",
+      "explanation": "A háromszög belső szögfelezői egy pontban metszik egymást. Ez a pont egyenlő távolságra van mindhárom oldaltól, ezért ez lesz a beírt kör középpontja. ✅ Megoldás: A belső szögfelezők metszéspontja."
+    },
+    {
+      "question": "Milyen arányban osztja a súlypont a súlyvonalakat?",
+      "answers": {
+        "a": "1:1 arányban",
+        "b": "2:1 arányban a csúcstól számítva",
+        "c": "3:1 arányban a csúcstól számítva"
+      },
+      "correct": "b",
+      "explanation": "A súlypont a súlyvonalakat a csúcstól távolabbi és a felezőponttól távolabbi részekre osztja 2:1 arányban. A csúcs felőli rész a hosszabb. ✅ Megoldás: 2:1 arányban a csúcstól számítva."
+    },
+    {
+      "question": "Mi a háromszög köré írható körének középpontja?",
+      "answers": {
+        "a": "Az oldalfelező merőlegesek metszéspontja.",
+        "b": "A szögfelezők metszéspontja.",
+        "c": "A súlyvonalak metszéspontja."
+      },
+      "correct": "a",
+      "explanation": "Az oldalfelező merőlegesek pontjai egyenlő távolságra vannak egy oldal két végpontjától. A három oldalfelező merőleges metszéspontja lesz az a pont, ami mindhárom csúcstól egyenlő távolságra van. ✅ Megoldás: Az oldalfelező merőlegesek metszéspontja."
+    },
+    {
+      "question": "Hogy nevezzük a háromszög magasságvonalainak metszéspontját?",
+      "answers": {
+        "a": "Súlypont",
+        "b": "Magasságpont (ortocentrum)",
+        "c": "Beírt kör középpontja"
+      },
+      "correct": "b",
+      "explanation": "A háromszög három magasságvonalának egyenese egy pontban metszi egymást, ezt a pontot magasságpontnak vagy ortocentrumnak nevezzük. ✅ Megoldás: Magasságpont (ortocentrum)."
+    },
+    {
+      "question": "Egy egyenlő szárú háromszögben az alaphoz tartozó magasságvonal egyben...",
+      "answers": {
+        "a": "...súlyvonal és szögfelező is.",
+        "b": "...csak súlyvonal.",
+        "c": "...csak szögfelező."
+      },
+      "correct": "a",
+      "explanation": "Az egyenlő szárú háromszög szimmetriája miatt az alaphoz tartozó magasság egyben az alapot felezi (tehát súlyvonal) és a szárszöget is felezi (tehát szögfelező). Ez az egyenes a háromszög szimmetriatengelye. ✅ Megoldás: Súlyvonal és szögfelező is."
+    },
+    {
+      "question": "Egy derékszögű háromszög magasságpontja hol található?",
+      "answers": {
+        "a": "A háromszögön kívül.",
+        "b": "Az átfogó felezőpontjában.",
+        "c": "A derékszögű csúcsban."
+      },
+      "correct": "c",
+      "explanation": "A derékszögű háromszög két befogója egyben magasságvonal is. Mivel a magasságvonalak egy pontban metszik egymást, ez a metszéspont csak a derékszögű csúcs lehet. ✅ Megoldás: A derékszögű csúcsban."
+    },
+    {
+      "question": "Mi a neve a csúcsból a szemközti oldalra bocsátott merőleges szakasznak?",
+      "answers": {
+        "a": "Oldalfelező merőleges",
+        "b": "Magasságvonal",
+        "c": "Súlyvonal"
+      },
+      "correct": "b",
+      "explanation": "A magasságvonal definíciója a csúcsból a szemközti oldal egyenesére bocsátott merőleges szakasz. ✅ Megoldás: Magasságvonal."
+    },
+    {
+      "question": "Melyik testnek van kör alakú éle?",
+      "answers": {
+        "a": "Kocka.",
+        "b": "Henger.",
+        "c": "Négyzet alapú gúla."
+      },
+      "correct": "c",
+      "explanation": "Egy gúla alapja kör. ✅ Megoldás: Gúla"
+    },
+    {
+      "question": "Melyik alakzatnak van szimmetriatengelye?",
+      "answers": {
+        "a": "A szabálytalan háromszög.",
+        "b": "A kör.",
+        "c": "A vonal."
+      },
+      "correct": "b",
+      "explanation": "A körnek végtelen sok szimmetriatengelye van. ✅ Megoldás: A kör."
+    },
+    {
+      "question": "Ha egy négyzetet a középpontja körül elforgatunk 90 fokkal, akkor...",
+      "answers": {
+        "a": "Nem fog megegyezni az eredetivel.",
+        "b": "Megegyezik az eredetivel.",
+        "c": "Kétszer akkora lesz."
+      },
+      "correct": "b",
+      "explanation": "A négyzet 90 fokos elforgatás után is önmagába képződik, azaz megegyezik az eredetivel. ✅ Megoldás: Megegyezik az eredetivel."
+    },
+    {
+      "question": "Ha egy egyenlő szárú háromszöget a szimmetriatengelye mentén kettévágunk, milyen két alakzatot kapunk?",
+      "answers": {
+        "a": "Két különböző háromszöget.",
+        "b": "Két egybevágó derékszögű háromszöget.",
+        "c": "Egy téglalapot és egy háromszöget."
+      },
+      "correct": "b",
+      "explanation": "A szimmetriatengely mentén kettévágva két egybevágó derékszögű háromszöget kapunk. ✅ Megoldás: Két egybevágó derékszögű háromszöget."
+    },
+    {
+      "question": "Melyik szó a szimmetrikus a tükörképpel?",
+      "answers": {
+        "a": "K",
+        "b": "M",
+        "c": "A"
+      },
+      "correct": "b",
+      "explanation": "Az M betű szimmetrikus a tükörképpel, mert a szimmetriatengely mentén tükrözve ugyanazt kapjuk. ✅ Megoldás: M"
+    },
+    {
+      "question": "Mi a forgásszimmetria?",
+      "answers": {
+        "a": "Amikor egy alakzatot eltolunk.",
+        "b": "Amikor egy alakzatot elforgatunk, és önmagába képződik.",
+        "c": "Amikor egy alakzatot tükrözünk."
+      },
+      "correct": "b",
+      "explanation": "Ha egy alakzatot elforgatunk, és önmagába képződik, az forgásszimmetria.  ✅ Megoldás: Amikor egy alakzatot elforgatunk, és önmagába képződik."
+    },
+    {
+      "question": "Melyik alakzatnak van forgásszimmetriája?",
+      "answers": {
+        "a": "A szív.",
+        "b": "A kör.",
+        "c": "A vonal."
+      },
+      "correct": "b",
+      "explanation": "A körnek végtelen sok forgásszimmetriája van. ✅ Megoldás: A kör."
+    },
+    {
+      "question": "Melyik az SSS-hasonlósági tétel? (ismétlés)",
+      "answers": {
+        "a": "Ha a két háromszög minden oldala arányos.",
+        "b": "Ha a két háromszög két szöge egyenlő.",
+        "c": "Ha a két háromszög egy oldala és a két szög rajta egyenlő."
+      },
+      "correct": "a",
+      "explanation": "Az SSS (oldal-oldal-oldal) tétel szerint, ha két háromszög minden oldala arányos, akkor a két háromszög hasonló. ✅ Megoldás: Ha a két háromszög minden oldala arányos."
+    },
+    {
+      "question": "Mi a neve a kúp görbe oldalfelületének?",
+      "answers": {
+        "a": "oldallap",
+        "b": "palást",
+        "c": "fedőlap"
+      },
+      "correct": "b",
+      "explanation": "A hengerhez hasonlóan a kúp görbe oldalfelületét is palástnak nevezzük. ✅ Megoldás: Palást."
+    },
+    {
+      "question": "Mi a ⊥ jel jelentése?",
+      "answers": {
+        "a": "párhuzamos",
+        "b": "merőleges",
+        "c": "illeszkedik"
+      },
+      "correct": "b",
+      "explanation": "A ⊥ szimbólum a merőlegesség jele a matematikában. ✅ Megoldás: Merőleges."
+    },
+    {
+      "question": "Ha két sík metsző, akkor a metszésvonaluk...",
+      "answers": {
+        "a": "egy pont.",
+        "b": "egy egyenes.",
+        "c": "egy sík."
+      },
+      "correct": "b",
+      "explanation": "Két metsző sík metszésvonala egy egyenes. ✅ Megoldás: Egy egyenes."
+    },
+    {
+      "question": "Ha egy egyenes merőleges egy síkra, akkor a síkban fekvő összes egyenesre merőleges?",
+      "answers": {
+        "a": "Igen, kivétel nélkül mindegyikre.",
+        "b": "Nem, csak azokra, amik átmennek a döfésponton.",
+        "c": "Nem, csak azokra, amik párhuzamosak."
+      },
+      "correct": "b",
+      "explanation": "A síkra merőleges egyenes csak azokkal a síkbeli egyenesekkel van merőleges viszonyban, amik átmennek a döfésponton. A többi síkbeli egyenessel kitérő helyzetű. ✅ Megoldás: Nem, csak azokra, amik átmennek a döfésponton."
+    },
+    {
+      "question": "Mi a közös tulajdonsága a körnek és a gömbnek?",
+      "answers": {
+        "a": "nincs csúcsuk.",
+        "b": "van lapjuk.",
+        "c": "minden pontjuk egyenlő távolságra van a középponttól."
+      },
+      "correct": "a",
+      "explanation": "A kör és a gömb is azonos távolságra lévő pontok halmaza. ✅ Megoldás: Nincs csúcsuk"
+    },
+    {
+      "question": "Egy doboz oldallapjai hogyan viszonyulnak egymáshoz?",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "Metszők.",
+        "c": "Merőlegesek"
+      },
+      "correct": "b",
+      "explanation": "A doboz oldalait síkok alkotják, amelyek metszik egymást, ez által a sarkainál. ✅ Megoldás: Metszők"
+    },
+    {
+      "question": "Egy kocka csúcsai...",
+      "answers": {
+        "a": "Az oldallapok.",
+        "b": "A sarkok.",
+        "c": "Az élek felezőpontjai"
+      },
+      "correct": "b",
+      "explanation": "A kocka csúcsait a sarkok alkotják.  ✅ Megoldás: A sarkok."
+    },
+    {
+      "question": "Hogyan hívjuk a szakaszt, ami összeköti egy sokszög két nem szomszédos csúcsát?",
+      "answers": {
+        "a": "Oldal",
+        "b": "Átló",
+        "c": "Magasság"
+      },
+      "correct": "b",
+      "explanation": "A sokszög átlója a két nem szomszédos csúcsot köti össze. ✅ Megoldás: Átló."
+    },
+    {
+      "question": "Mi a síkmetszet? ",
+      "answers": {
+        "a": "Egy testet kettévágó sík.",
+        "b": "Két nem szomszédos pont összekötése.",
+        "c": "A test belseje."
+      },
+      "correct": "a",
+      "explanation": "A síkmetszet egy testet kettévágó sík. ✅ Megoldás: A testet kettévágó sík."
+    }
+  ]
 }

@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz keruletszog\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a kerületi szög?",
+      "answers": {
+        "a": "A kör középpontjában lévő szög.",
+        "b": "A körvonalon lévő szög, aminek a szárai a kör húrjai.",
+        "c": "A kör belsejében lévő szög."
+      },
+      "correct": "b",
+      "explanation": "A kerületi szög a körvonalon helyezkedik el, és a szárai a kör húrjai.  ✅ Megoldás: A körvonalon lévő szög, aminek a szárai a kör húrjai."
+    },
+    {
+      "question": "Hol található a kerületi szög csúcsa?",
+      "answers": {
+        "a": "A kör középpontjában.",
+        "b": "A körvonalon.",
+        "c": "A körön kívül."
+      },
+      "correct": "b",
+      "explanation": "A kerületi szög csúcsa a körvonalon van. ✅ Megoldás: A körvonalon."
+    },
+    {
+      "question": "Mit jelent az, hogy egy kerületi szög egy íven nyugszik?",
+      "answers": {
+        "a": "Az ív a szög egyik szára.",
+        "b": "Az ív a szög csúcsa.",
+        "c": "Az ív a szög két szárát köti össze."
+      },
+      "correct": "c",
+      "explanation": "A kerületi szög az íven nyugszik, ha a szárai a körvonalat a vizsgált ív végpontjaiban metszik.  ✅ Megoldás: Az ív a szög két szárát köti össze."
+    },
+    {
+      "question": "Mi a kapcsolat a kerületi szög és a hozzá tartozó középponti szög között?",
+      "answers": {
+        "a": "A kerületi szög kétszerese a középponti szögnek.",
+        "b": "A középponti szög kétszerese a kerületi szögnek.",
+        "c": "A két szög egyforma nagyságú."
+      },
+      "correct": "b",
+      "explanation": "Ha egy kerületi szög és egy középponti szög ugyanazon az íven nyugszik, akkor a középponti szög kétszer akkora, mint a kerületi szög.  ✅ Megoldás: A középponti szög kétszerese a kerületi szögnek."
+    },
+    {
+      "question": "Mekkora a kerületi szög, ami a kör átmérőjére támaszkodik?",
+      "answers": {
+        "a": "30 fok.",
+        "b": "60 fok.",
+        "c": "90 fok."
+      },
+      "correct": "c",
+      "explanation": "A kör átmérőjére támaszkodó kerületi szög mindig derékszög, azaz 90 fokos.  ✅ Megoldás: 90 fok."
+    },
+    {
+      "question": "Ha a középponti szög 60 fok, mekkora a hozzá tartozó kerületi szög?",
+      "answers": {
+        "a": "30 fok.",
+        "b": "60 fok.",
+        "c": "120 fok."
+      },
+      "correct": "a",
+      "explanation": "A kerületi szög a középponti szög fele. 60/2=30 fok. ✅ Megoldás: 30 fok."
+    },
+    {
+      "question": "Ha egy kerületi szög 45 fok, mekkora a hozzá tartozó középponti szög?",
+      "answers": {
+        "a": "22,5 fok.",
+        "b": "45 fok.",
+        "c": "90 fok."
+      },
+      "correct": "c",
+      "explanation": "A középponti szög kétszer akkora, mint a kerületi szög: 45 * 2 = 90 fok. ✅ Megoldás: 90 fok."
+    },
+    {
+      "question": "Mit jelent a körív?",
+      "answers": {
+        "a": "A kör átmérője.",
+        "b": "A körvonal egy része.",
+        "c": "A kör középpontja."
+      },
+      "correct": "b",
+      "explanation": "A körív a körvonal egy része. ✅ Megoldás: A körvonal egy része."
+    },
+    {
+      "question": "Mi a kapcsolat az azonos íven nyugvó kerületi szögek között?",
+      "answers": {
+        "a": "Különböző nagyságúak.",
+        "b": "Egyenlő nagyságúak.",
+        "c": "Az egyik kétszerese a másiknak."
+      },
+      "correct": "b",
+      "explanation": "Az ugyanazon az íven nyugvó kerületi szögek mindig egyenlő nagyságúak. ✅ Megoldás: Egyenlő nagyságúak."
+    },
+    {
+      "question": "Mi az a húr?",
+      "answers": {
+        "a": "A kör középpontjából a körvonalig tartó szakasz.",
+        "b": "A körvonal két pontja közötti szakasz.",
+        "c": "A kör átmérője."
+      },
+      "correct": "b",
+      "explanation": "A húr a körvonal két pontja közötti szakasz. ✅ Megoldás: A körvonal két pontja közötti szakasz."
+    },
+    {
+      "question": "Ha egy kerületi szög 30 fok, a hozzá tartozó ív a teljes kör hányad része?",
+      "answers": {
+        "a": "A 1/6 része.",
+        "b": "A 1/12 része.",
+        "c": "A 1/3 része."
+      },
+      "correct": "a",
+      "explanation": "A kerületi szög 30 fok, a középponti szög ennek kétszerese, azaz 60 fok. A 60 fok a 360 foknak, vagyis a körnek a 1/6 része.  ✅ Megoldás: A 1/6 része."
+    },
+    {
+      "question": "Ha egy kerületi szög 120 fok, a hozzá tartozó középponti szög...",
+      "answers": {
+        "a": "60 fok.",
+        "b": "120 fok.",
+        "c": "240 fok."
+      },
+      "correct": "c",
+      "explanation": "A középponti szög kétszerese a kerületi szögnek. 120 * 2 = 240 fok. ✅ Megoldás: 240 fok."
+    },
+    {
+      "question": "Mi a viszony a körívek hossza és a hozzájuk tartozó kerületi szögek nagysága között?",
+      "answers": {
+        "a": "Minél nagyobb a kerületi szög, annál rövidebb a körív.",
+        "b": "Minél nagyobb a kerületi szög, annál hosszabb a körív.",
+        "c": "Nincs kapcsolat."
+      },
+      "correct": "b",
+      "explanation": "Minél nagyobb a kerületi szög, annál hosszabb a hozzá tartozó körív. ✅ Megoldás: Minél nagyobb a kerületi szög, annál hosszabb a körív."
+    },
+    {
+      "question": "Ha a kör átmérőjét megrajzoljuk, és egy pontot a körvonalra helyezünk, milyen nagyságú lesz a kerületi szög?",
+      "answers": {
+        "a": "30 fok",
+        "b": "60 fok",
+        "c": "90 fok"
+      },
+      "correct": "c",
+      "explanation": "A kör átmérőjére támaszkodó kerületi szög mindig derékszög, azaz 90 fokos. ✅ Megoldás: 90 fok"
+    },
+    {
+      "question": "Mi a kapcsolat a kerületi szög és a középponti szög között (ismétlés)?",
+      "answers": {
+        "a": "A kerületi szög kétszer akkora, mint a középponti szög.",
+        "b": "A középponti szög kétszer akkora, mint a kerületi szög.",
+        "c": "Egyenlőek."
+      },
+      "correct": "b",
+      "explanation": "A középponti szög mindig kétszer akkora, mint az azonos íven nyugvó kerületi szög. ✅ Megoldás: A középponti szög kétszer akkora, mint a kerületi szög."
+    },
+    {
+      "question": "Milyen a szögek aránya az azonos íven nyugvó kerületi szögek között?",
+      "answers": {
+        "a": "Különbözőek",
+        "b": "Egyenlőek",
+        "c": "Az egyik kétszerese a másiknak"
+      },
+      "correct": "b",
+      "explanation": "Az ugyanazon íven nyugvó kerületi szögek nagysága megegyezik. ✅ Megoldás: Egyenlőek"
+    },
+    {
+      "question": "Ha a kerületi szög 45 fok, akkor a hozzá tartozó középponti szög...",
+      "answers": {
+        "a": "90 fok.",
+        "b": "45 fok.",
+        "c": "22,5 fok."
+      },
+      "correct": "a",
+      "explanation": "A középponti szög kétszer akkora, mint a kerületi szög, így 45 * 2 = 90 fok. ✅ Megoldás: 90 fok."
+    },
+    {
+      "question": "Ha egy körben egy húr feloszt egy kört két ívre, akkor a kisebb ívhez tartozó kerületi szög 60 fok. Mekkora a nagyobb ívhez tartozó kerületi szög?",
+      "answers": {
+        "a": "120 fok",
+        "b": "300 fok",
+        "c": "60 fok"
+      },
+      "correct": "a",
+      "explanation": "A teljes kör 360 fok. A 60 fokos ívhez tartozó kerületi szög 30 fok, a maradék 300 fokos ívhez tartozó kerületi szög 150 fok.  180°-ból a 60 fokos ív a 60*2=120 fokos. ✅ Megoldás: 120 fok"
+    },
+    {
+      "question": "Mi a kapcsolat a kerületi szög nagysága és a hozzá tartozó ív hossza között?",
+      "answers": {
+        "a": "Minél nagyobb a kerületi szög, annál rövidebb a körív.",
+        "b": "Minél nagyobb a kerületi szög, annál hosszabb a körív.",
+        "c": "Nincs kapcsolat a kettő között."
+      },
+      "correct": "b",
+      "explanation": "Minél nagyobb a kerületi szög, annál hosszabb a hozzá tartozó körív.  ✅ Megoldás: Minél nagyobb a kerületi szög, annál hosszabb a körív."
+    },
+    {
+      "question": "Ha egy 10 cm-es húr két részre oszt egy kört, akkor a nagyobb ívhez tartozó kerületi szög 150 fok. Mekkora a kisebb ívhez tartozó kerületi szög?",
+      "answers": {
+        "a": "30 fok",
+        "b": "75 fok",
+        "c": "150 fok"
+      },
+      "correct": "a",
+      "explanation": "A kerületi szögek összege 360°-ra egészül ki. Ha a nagyobb ívhez tartozó kerületi szög 150°, akkor a középponti szög 300°. A kisebb ívhez tartozó kerületi szög pedig 180° - 150° = 30°. ✅ Megoldás: 30 fok"
+    },
+    {
+      "question": "Ha a kerületi szög 45°, akkor a hozzá tartozó középponti szög...",
+      "answers": {
+        "a": "22,5 fok.",
+        "b": "45 fok.",
+        "c": "90 fok."
+      },
+      "correct": "c",
+      "explanation": "A középponti szög a kerületi szög kétszerese, azaz 45° * 2 = 90°. ✅ Megoldás: 90 fok."
+    },
+    {
+      "question": "Mit ad meg a kerületi szög?",
+      "answers": {
+        "a": "A kör középpontjának helyzetét.",
+        "b": "A körív hosszát.",
+        "c": "A körívhez tartozó szöget."
+      },
+      "correct": "c",
+      "explanation": "A kerületi szög a körívhez tartozó szöget adja meg. ✅ Megoldás: A körívhez tartozó szöget."
+    },
+    {
+      "question": "Ha a kerületi szög 100 fok, akkor a hozzá tartozó középponti szög...",
+      "answers": {
+        "a": "50 fok",
+        "b": "100 fok",
+        "c": "200 fok"
+      },
+      "correct": "c",
+      "explanation": "A középponti szög a kerületi szög kétszerese, 100° * 2 = 200°. ✅ Megoldás: 200 fok."
+    },
+    {
+      "question": "Ha egy körben két húr metsződik, milyen viszonyban állnak az így kapott szakaszok?",
+      "answers": {
+        "a": "A szemközti szakaszok egyenlők.",
+        "b": "A szemközti szakaszok összege ugyanannyi.",
+        "c": "A metszésponton belüli szakaszok szorzata egyenlő."
+      },
+      "correct": "c",
+      "explanation": "A húrok metszéspontján belüli szakaszok szorzata egyenlő. ✅ Megoldás: A metszésponton belüli szakaszok szorzata egyenlő."
+    }
+  ]
 }

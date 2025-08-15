@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz kor 5\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Hogyan definiáljuk a kört?",
+      "answers": {
+        "a": "Egy ponttól azonos távolságra lévő pontok halmaza a síkban.",
+        "b": "Egy zárt, görbe vonal.",
+        "c": "Egy olyan sokszög, aminek végtelen sok oldala van."
+      },
+      "correct": "a",
+      "explanation": "A kör egy ponttól azonos távolságra lévő pontok halmaza a síkban."
+    },
+    {
+      "question": "Mi a neve a kör középpontját a körvonal egy pontjával összekötő szakasznak?",
+      "answers": {
+        "a": "átmérő",
+        "b": "sugár",
+        "c": "húr"
+      },
+      "correct": "b",
+      "explanation": "A neve sugár."
+    },
+    {
+      "question": "Milyen kapcsolat van a kör sugara (r) és átmérője (d) között?",
+      "answers": {
+        "a": "d = r * r",
+        "b": "r = d * 2",
+        "c": "d = 2 * r"
+      },
+      "correct": "c",
+      "explanation": "Az átmérő a sugár kétszerese, d = 2 * r."
+    },
+    {
+      "question": "Hogy nevezzük azt a szakaszt, ami a körvonal két tetszőleges pontját köti össze?",
+      "answers": {
+        "a": "átmérő",
+        "b": "sugár",
+        "c": "húr"
+      },
+      "correct": "c",
+      "explanation": "A neve húr."
+    },
+    {
+      "question": "Mi a kör leghosszabb húrja?",
+      "answers": {
+        "a": "az átmérő",
+        "b": "a sugár",
+        "c": "a körív"
+      },
+      "correct": "a",
+      "explanation": "A leghosszabb húr az átmérő."
+    },
+    {
+      "question": "Egy kör sugara 5 cm. Mekkora az átmérője?",
+      "answers": {
+        "a": "2,5 cm",
+        "b": "10 cm",
+        "c": "25 cm"
+      },
+      "correct": "b",
+      "explanation": "Az átmérő 10 cm."
+    },
+    {
+      "question": "Egy kör átmérője 14 cm. Mekkora a sugara?",
+      "answers": {
+        "a": "28 cm",
+        "b": "14 cm",
+        "c": "7 cm"
+      },
+      "correct": "c",
+      "explanation": "A sugár 7 cm."
+    },
+    {
+      "question": "Mi a neve a körvonal egy darabjának?",
+      "answers": {
+        "a": "körszelet",
+        "b": "körcikk",
+        "c": "körív"
+      },
+      "correct": "c",
+      "explanation": "A neve körív."
+    },
+    {
+      "question": "Melyik NEM a kör része?",
+      "answers": {
+        "a": "középpont",
+        "b": "sugár",
+        "c": "oldal"
+      },
+      "correct": "c",
+      "explanation": "A körnek nincs oldala."
+    },
+    {
+      "question": "Mi az a körcikk?",
+      "answers": {
+        "a": "Két sugár és a körvonal által határolt rész.",
+        "b": "Egy húr és a körív által határolt rész.",
+        "c": "A kör területe."
+      },
+      "correct": "a",
+      "explanation": "Két sugár és a körvonal által határolt rész."
+    },
+    {
+      "question": "Mi az a körszelet?",
+      "answers": {
+        "a": "Két sugár és a körív által határolt rész.",
+        "b": "Egy húr és a körív által határolt rész.",
+        "c": "A kör kerülete."
+      },
+      "correct": "b",
+      "explanation": "Egy húr és a körív által határolt rész."
+    },
+    {
+      "question": "Mit nevezünk körlapnak?",
+      "answers": {
+        "a": "a körvonalat",
+        "b": "a körvonal által határolt teljes területet",
+        "c": "a kör átmérőjét"
+      },
+      "correct": "b",
+      "explanation": "A körvonal által határolt teljes területet nevezzük körlapnak."
+    },
+    {
+      "question": "Mi a neve annak az egyenesnek, amelyiknek pontosan egy közös pontja van a körrel?",
+      "answers": {
+        "a": "szelő",
+        "b": "érintő",
+        "c": "elkerülő"
+      },
+      "correct": "b",
+      "explanation": "A neve érintő."
+    },
+    {
+      "question": "Mi a neve annak az egyenesnek, amelyik két pontban metszi a kört?",
+      "answers": {
+        "a": "szelő",
+        "b": "érintő",
+        "c": "sugár"
+      },
+      "correct": "a",
+      "explanation": "A neve szelő."
+    },
+    {
+      "question": "Hogyan viszonyul egymáshoz egy kör összes sugara?",
+      "answers": {
+        "a": "mind különböző hosszúságú",
+        "b": "mind egyenlő hosszúságú",
+        "c": "összegük az átmérő"
+      },
+      "correct": "b",
+      "explanation": "Mind egyenlő hosszúságú."
+    },
+    {
+      "question": "Melyik eszközzel rajzolunk legpontosabban kört?",
+      "answers": {
+        "a": "vonalzóval",
+        "b": "szögmérővel",
+        "c": "körzővel"
+      },
+      "correct": "c",
+      "explanation": "A körzővel rajzolunk kört."
+    },
+    {
+      "question": "Mi a jele a sugárnak?",
+      "answers": {
+        "a": "d",
+        "b": "r",
+        "c": "K"
+      },
+      "correct": "b",
+      "explanation": "A sugár jele 'r'."
+    },
+    {
+      "question": "Mi a jele az átmérőnek?",
+      "answers": {
+        "a": "r",
+        "b": "d",
+        "c": "T"
+      },
+      "correct": "b",
+      "explanation": "Az átmérő jele 'd'."
+    },
+    {
+      "question": "Két kör koncentrikus. Mit jelent ez?",
+      "answers": {
+        "a": "a sugaruk egyenlő",
+        "b": "a középpontjuk közös",
+        "c": "metszik egymást"
+      },
+      "correct": "b",
+      "explanation": "A középpontjuk közös."
+    },
+    {
+      "question": "Hol található a kör középpontja?",
+      "answers": {
+        "a": "a körvonalon",
+        "b": "a körön belül",
+        "c": "a körön kívül"
+      },
+      "correct": "b",
+      "explanation": "A körön belül található."
+    },
+    {
+      "question": "Ha egy pont távolsága a kör középpontjától nagyobb, mint a sugár, hol van a pont?",
+      "answers": {
+        "a": "a körön kívül",
+        "b": "a körön belül",
+        "c": "a körvonalon"
+      },
+      "correct": "a",
+      "explanation": "A pont a körön kívül van."
+    },
+    {
+      "question": "Ha egy pont távolsága a kör középpontjától kisebb, mint a sugár, hol van a pont?",
+      "answers": {
+        "a": "a körön kívül",
+        "b": "a körön belül",
+        "c": "a körvonalon"
+      },
+      "correct": "b",
+      "explanation": "A pont a körön belül van."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A körnek végtelen sok sugara van.",
+        "b": "A körnek egyetlen átmérője van.",
+        "c": "A körnek egyetlen középpontja van."
+      },
+      "correct": "b",
+      "explanation": "A körnek végtelen sok sugara és átmérője van (bármelyik irányban húzhatunk egyet), de középpontja csak egyetlen egy van."
+    },
+    {
+      "question": "Egy kör átmérője 20 egység. Hány egység hosszú a leghosszabb húrja?",
+      "answers": {
+        "a": "10",
+        "b": "20",
+        "c": "40"
+      },
+      "correct": "b",
+      "explanation": "A leghosszabb húr 20 egység hosszú."
+    },
+    {
+      "question": "Mi a körvonal?",
+      "answers": {
+        "a": "A kör területe.",
+        "b": "A kör határvonala.",
+        "c": "A kör sugara."
+      },
+      "correct": "b",
+      "explanation": "A körvonal a kör határvonala."
+    }
+  ]
 }

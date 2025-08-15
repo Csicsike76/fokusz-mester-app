@@ -3,6 +3,257 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz tomegmeres\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz tömegmérés\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a tömeg?",
+      "answers": {
+        "a": "A test mérete.",
+        "b": "Az anyagmennyiség.",
+        "c": "A test súlya."
+      },
+      "correct": "b",
+      "explanation": "A tömeg az anyagmennyiség mértéke. ✅ Megoldás: Az anyagmennyiség."
+    },
+    {
+      "question": "Milyen mértékegységben mérjük a tömeget?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "kilogramm (kg)",
+        "c": "másodperc (s)"
+      },
+      "correct": "b",
+      "explanation": "A tömeg mértékegysége a kilogramm (kg). ✅ Megoldás: kilogramm (kg)"
+    },
+    {
+      "question": "Mi a mérőeszköz a tömeg mérésére?",
+      "answers": {
+        "a": "vonalzó",
+        "b": "mérleg",
+        "c": "hőmérő"
+      },
+      "correct": "b",
+      "explanation": "A tömeget mérleggel mérjük. ✅ Megoldás: mérleg"
+    },
+    {
+      "question": "Milyen hatása van a Földön a tömegnek?",
+      "answers": {
+        "a": "A tömeg a test nagyságától függ.",
+        "b": "A tömeg nem függ a helytől.",
+        "c": "A tömeg a gravitáció miatt súlyt eredményez."
+      },
+      "correct": "c",
+      "explanation": "A tömeg a gravitáció miatt súlyt eredményez. ✅ Megoldás: A testre ható nehézségi erő (súly)"
+    },
+    {
+      "question": "Mennyi 1 kg grammban?",
+      "answers": {
+        "a": "1000 g",
+        "b": "100 g",
+        "c": "10 g"
+      },
+      "correct": "a",
+      "explanation": "1 kg = 1000 g. ✅ Megoldás: 1000 g"
+    },
+    {
+      "question": "Mi a dekagramm jele?",
+      "answers": {
+        "a": "dg",
+        "b": "dag",
+        "c": "dk"
+      },
+      "correct": "b",
+      "explanation": "A dekagramm jele: dag. ✅ Megoldás: dag"
+    },
+    {
+      "question": "Mennyi 50 dkg grammban?",
+      "answers": {
+        "a": "500 g",
+        "b": "50 g",
+        "c": "5 g"
+      },
+      "correct": "a",
+      "explanation": "1 dkg = 10 g.  50 dkg = 50 * 10 = 500 g. ✅ Megoldás: 500 g"
+    },
+    {
+      "question": "Mennyi 1 kg dkg-ban?",
+      "answers": {
+        "a": "100 dkg",
+        "b": "1000 dkg",
+        "c": "10 dkg"
+      },
+      "correct": "a",
+      "explanation": "1 kg = 1000 g, és 1 dkg = 10 g. Ezért 1 kg = 1000 g / 10 g/dkg = 100 dkg. ✅ Megoldás: 100 dkg"
+    },
+    {
+      "question": "Mennyi 250 dkg kilogrammban?",
+      "answers": {
+        "a": "25 kg",
+        "b": "2.5 kg",
+        "c": "0.25 kg"
+      },
+      "correct": "b",
+      "explanation": "250 dkg = 250/100 kg = 2.5 kg. ✅ Megoldás: 2.5 kg"
+    },
+    {
+      "question": "Melyik a legkisebb?",
+      "answers": {
+        "a": "1 kg",
+        "b": "90 dkg",
+        "c": "100 g"
+      },
+      "correct": "c",
+      "explanation": "Átváltva: 1 kg = 100 dkg = 1000g;  90 dkg = 900 g; 100 g. A 100 g a legkisebb. ✅ Megoldás: 100 g"
+    },
+    {
+      "question": "Miért nehéz megmérni a golyóstollad tömegét?",
+      "answers": {
+        "a": "Mert nem lehet megfogni.",
+        "b": "Mert túl kicsi a tömege, és a mérleg pontatlan lehet.",
+        "c": "Mert mozgásban van."
+      },
+      "correct": "b",
+      "explanation": "A kis tömeg miatt a mérleg pontatlanul mérhet, tehát a mérés pontossága korlátozott.  ✅ Megoldás: Mert túl kicsi a tömege, és a mérleg pontatlan lehet."
+    },
+    {
+      "question": "Mi a hatásfok?",
+      "answers": {
+        "a": "A gép nagysága.",
+        "b": "A gép által hasznosított energia.",
+        "c": "A hasznos munka és a befektetett energia hányadosa."
+      },
+      "correct": "c",
+      "explanation": "A hatásfok a hasznos munka és a befektetett energia hányadosa. ✅ Megoldás: A hasznos munka és a befektetett energia hányadosa."
+    },
+    {
+      "question": "Miért fontos a mérés többszöri elvégzése?",
+      "answers": {
+        "a": "Mert így többet tudunk a mérésről.",
+        "b": "Mert a mérési hibákat kiküszöbölhetjük.",
+        "c": "Mert a tanár azt mondta."
+      },
+      "correct": "b",
+      "explanation": "A mérések többszöri elvégzése és átlagolása csökkenti a hibákat. ✅ Megoldás: A mérési hibákat kiküszöbölhetjük."
+    },
+    {
+      "question": "Mit jelent a pontosság a mérésben?",
+      "answers": {
+        "a": "A mérőeszköz minősége.",
+        "b": "A mért érték közelsége a valós értékhez.",
+        "c": "Az ismétlések száma."
+      },
+      "correct": "b",
+      "explanation": "A pontosság a mért értéknek a valós értékhez való közelségét jelenti.  ✅ Megoldás: A mért érték közelsége a valós értékhez."
+    },
+    {
+      "question": "Mi a mérési hiba?",
+      "answers": {
+        "a": "A mérés nehézsége.",
+        "b": "A mért érték és a valós érték közötti különbség.",
+        "c": "A mérőeszköz pontatlansága."
+      },
+      "correct": "b",
+      "explanation": "A mérési hiba a mért érték és a valós érték közötti különbség. ✅ Megoldás: A mért érték és a valós érték közötti különbség."
+    },
+    {
+      "question": "Ha egy golyó tömege 100g, mennyi a tömege kilogrammban?",
+      "answers": {
+        "a": "10 kg",
+        "b": "0,1 kg",
+        "c": "1 kg"
+      },
+      "correct": "b",
+      "explanation": "1 g = 0,001 kg. 100 g = 100 * 0,001 kg = 0,1 kg. ✅ Megoldás: 0,1 kg"
+    },
+    {
+      "question": "Melyik erő hat egy almára, ami a fán lóg?",
+      "answers": {
+        "a": "Súrlódás",
+        "b": "Súlyerő",
+        "c": "Felhajtóerő"
+      },
+      "correct": "b",
+      "explanation": "A Föld vonzza az almát, ami súlyerővel nyilvánul meg. ✅ Megoldás: Súlyerő"
+    },
+    {
+      "question": "Mekkora a nehézségi gyorsulás a Földön?",
+      "answers": {
+        "a": "9,81 m/s²",
+        "b": "340 m/s",
+        "c": "300 000 km/s"
+      },
+      "correct": "a",
+      "explanation": "A nehézségi gyorsulás (g) a Földön kb. 9,81 m/s². ✅ Megoldás: 9,81 m/s²"
+    },
+    {
+      "question": "Mit mérünk a mérleggel? (ismétlés)",
+      "answers": {
+        "a": "Tömeget.",
+        "b": "Térfogatot.",
+        "c": "Hőmérsékletet."
+      },
+      "correct": "a",
+      "explanation": "A mérleg a tömeget méri, ami az anyagmennyiség mértéke. ✅ Megoldás: Tömeget."
+    },
+    {
+      "question": "Mi a súly?",
+      "answers": {
+        "a": "A test térfogata.",
+        "b": "A testre ható nehézségi erő.",
+        "c": "A test mozgása."
+      },
+      "correct": "b",
+      "explanation": "A súly egy testre ható nehézségi erő.  ✅ Megoldás: A testre ható nehézségi erő."
+    },
+    {
+      "question": "Melyik a helyes képlete a súlynak?",
+      "answers": {
+        "a": "S = m * g",
+        "b": "S = m / g",
+        "c": "S = g / m"
+      },
+      "correct": "a",
+      "explanation": "A súly (S) egyenlő a tömeg (m) és a nehézségi gyorsulás (g) szorzatával: S = m * g.  ✅ Megoldás: S = m * g"
+    },
+    {
+      "question": "Ha egy test tömege 2 kg, mekkora a súlya? (g=10N/kg)",
+      "answers": {
+        "a": "5 N",
+        "b": "10 N",
+        "c": "20 N"
+      },
+      "correct": "c",
+      "explanation": "S = m * g = 2 kg * 10 N/kg = 20 N. ✅ Megoldás: 20 N"
+    },
+     {
+      "question": "Mi a tehetetlenség?",
+      "answers": {
+        "a": "A test ellenállása a mozgással szemben.",
+        "b": "A test súlya.",
+        "c": "A test ellenállása a mozgásállapot megváltozásával szemben (állapot fenntartásával szemben)."
+      },
+      "correct": "c",
+      "explanation": "A tehetetlenség a testeknek az a tulajdonsága, hogy ellenállnak a mozgásállapot megváltoztatásával szemben, azaz a nyugalmi állapot vagy az egyenletes mozgás megőrzésével szemben. ✅ Megoldás: A test ellenállása a mozgásállapot megváltozásával szemben"
+    },
+    {
+      "question": "Ha 2 kg-os tömegű golyót gyorsítunk, akkor mi változik?",
+      "answers": {
+        "a": "A golyó tömege",
+        "b": "A golyó helyzeti energiája",
+        "c": "A golyó mozgási energiája"
+      },
+      "correct": "c",
+      "explanation": "A gyorsítás a sebességet változtatja, és így a mozgási energia változik. ✅ Megoldás: A golyó mozgási energiája."
+    },
+    {
+      "question": "Ha egy test 10m/s sebességgel halad, mennyi a mozgási energiája?",
+      "answers": {
+        "a": "függ a test tömegétől.",
+        "b": "független a test tömegétől.",
+        "c": "nem lehet megadni, mert nincs megadva a tömege."
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia a test tömegétől és a sebességétől függ. ✅ Megoldás: Függ a test tömegétől"
+    }
+  ]
 }

@@ -1,8 +1,240 @@
 {
   "title": "Kviz onerteles optika",
+ 
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz onerteles optika\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz onerteles optika\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik állítás igaz a fényre?",
+      "answers": {
+        "a": "Egyenes vonalban terjed homogén közegben.",
+        "b": "Mindig görbe vonalban terjed.",
+        "c": "Terjedéséhez anyagi közeg szükséges."
+      },
+      "correct": "a",
+      "explanation": "A fény egyenes vonalú terjedése az optika egyik legfontosabb alapelve, amit az árnyékjelenségek is bizonyítanak. A fény vákuumban is képes terjedni. ✅ Megoldás: Egyenes vonalban terjed homogén közegben."
+    },
+    {
+      "question": "Melyik test átlátszatlan?",
+      "answers": {
+        "a": "Egy fadarab.",
+        "b": "Egy ablaküveg.",
+        "c": "Egy pohár tiszta víz."
+      },
+      "correct": "a",
+      "explanation": "Az átlátszatlan testek nem engedik át a fényt. A fa ilyen. Az üveg és a víz átlátszóak. ✅ Megoldás: Egy fadarab."
+    },
+    {
+      "question": "A fényvisszaverődés törvénye szerint a beesési szög...",
+      "answers": {
+        "a": "...egyenlő a visszaverődési szöggel.",
+        "b": "...mindig 90°.",
+        "c": "...mindig kisebb, mint a visszaverődési szög."
+      },
+      "correct": "a",
+      "explanation": "A szabályos visszaverődésnél a beesési merőlegeshez mért beesési szög mindig megegyezik a visszaverődési szöggel.  ✅ Megoldás: ...egyenlő a visszaverődési szöggel."
+    },
+    {
+      "question": "Milyen képet hoz létre egy nagyító?",
+      "answers": {
+        "a": "Nagyított, látszólagos, egyenes állású képet.",
+        "b": "Kicsinyített, valódi, fordított képet.",
+        "c": "Mindig valódi képet."
+      },
+      "correct": "a",
+      "explanation": "A nagyító egy gyűjtőlencse. Ha a tárgyat a fókusztávolságán belülre helyezzük, a lencsén átnézve egy nagyított, egyenes állású, látszólagos (virtuális) képet látunk. ✅ Megoldás: Nagyított, látszólagos, egyenes állású képet."
+    },
+    {
+      "question": "A szivárvány kialakulásának oka...",
+      "answers": {
+        "a": "...a fehér fény megtörése és színekre bontása az esőcseppeken.",
+        "b": "...a fény visszaverődése a felhőkről.",
+        "c": "...az árnyékjelenség."
+      },
+      "correct": "a",
+      "explanation": "A szivárvány a fénytörés és a diszperzió (színfelbontás) látványos természeti jelensége. Az esőcseppek prizmaként működnek.  ✅ Megoldás: ...a fehér fény megtörése és színekre bontása az esőcseppeken."
+    },
+    {
+      "question": "Melyik optikai eszköz használ homorú tükröt?",
+      "answers": {
+        "a": "Tükrös csillagászati távcső.",
+        "b": "Szemüveg.",
+        "c": "Nagyító."
+      },
+      "correct": "a",
+      "explanation": "A nagy csillagászati távcsövek (reflektorok) egy nagyméretű homorú tükörrel gyűjtik össze a csillagok halvány fényét a fókuszpontjukba. ✅ Megoldás: Tükrös csillagászati távcső."
+    },
+    {
+      "question": "Mi a fényforrás?",
+      "answers": {
+        "a": "Minden test, amely fényt bocsát ki vagy ver vissza.",
+        "b": "Csak a Nap és a csillagok.",
+        "c": "Csak az elektromos lámpák."
+      },
+      "correct": "a",
+      "explanation": "Fényforrásnak tekintünk minden olyan testet, amelyről fény jut a szemünkbe, függetlenül attól, hogy azt saját maga termeli (elsődleges) vagy csak visszaveri (másodlagos).  ✅ Megoldás: Minden test, amely fényt bocsát ki vagy ver vissza."
+    },
+    {
+      "question": "Mi történik, ha egy kiterjedt fényforrás világít meg egy tárgyat?",
+      "answers": {
+        "a": "Teljes árnyék és félárnyék is keletkezik.",
+        "b": "Csak éles árnyék keletkezik.",
+        "c": "Nem keletkezik árnyék."
+      },
+      "correct": "a",
+      "explanation": "A kiterjedt fényforrás (pl. a Nap, egy neoncső) mérete nem elhanyagolható. Emiatt az árnyék legsötétebb része, a teljes árnyék (umbra) körül egy világosabb sáv, a félárnyék (penumbra) is létrejön.  ✅ Megoldás: Teljes árnyék és félárnyék is keletkezik."
+    },
+    {
+      "question": "Mi a fénytörés?",
+      "answers": {
+        "a": "A fény visszaverődése egy felületről.",
+        "b": "A fény terjedési irányának megváltozása két közeg határán.",
+        "c": "A fény elnyelődése."
+      },
+      "correct": "b",
+      "explanation": "Fénytörés akkor következik be, amikor a fény egyik átlátszó közegből egy másikba lép, mert a terjedési sebessége megváltozik. Ez a sebességváltozás okozza az irányváltozást. ✅ Megoldás: A fény terjedési irányának megváltozása két közeg határán."
+    },
+    {
+      "question": "Melyik a másodlagos, természetes fényforrás?",
+      "answers": {
+        "a": "Egy égő gyertya.",
+        "b": "A Hold.",
+        "c": "Egy TV képernyője."
+      },
+      "correct": "b",
+      "explanation": "A Hold a természetben található, de saját fénye nincs, csak a Nap fényét veri vissza. Ezért természetes és másodlagos fényforrás.  ✅ Megoldás: A Hold."
+    },
+    {
+      "question": "Milyen lencsével korrigálják a rövidlátást?",
+      "answers": {
+        "a": "Gyűjtőlencsével.",
+        "b": "Szórólencsével.",
+        "c": "Domború tükörrel."
+      },
+      "correct": "b",
+      "explanation": "A rövidlátó szem a fénysugarakat a retina előtt fókuszálja. A szórólencse (homorú lencse) kissé széttartóbbá teszi a sugarakat, így a szemlencse már a megfelelő helyre, a retinára tudja fókuszálni a képet. ✅ Megoldás: Szórólencsével."
+    },
+    {
+      "question": "Milyen képet alkot egy síktükör?",
+      "answers": {
+        "a": "Valódi, fordított, kicsinyített.",
+        "b": "Látszólagos, egyenes állású, azonos méretű.",
+        "c": "Valódi, nagyított, egyenes állású."
+      },
+      "correct": "b",
+      "explanation": "A síktükör által alkotott kép virtuális (a tükör mögött jön létre), a tárggyal megegyező állású és nagyságú, valamint a tárgytávolság is megegyezik a képtávolsággal. ✅ Megoldás: Látszólagos, egyenes állású, azonos méretű."
+    },
+    {
+      "question": "Melyik test áttetsző?",
+      "answers": {
+        "a": "Ablaküveg",
+        "b": "Zsírpapír",
+        "c": "Tükör"
+      },
+      "correct": "b",
+      "explanation": "Az áttetsző testek áteresztik a fényt, de azt szétszórják, így nem látunk rajtuk keresztül élesen. A zsírpapír, a tejüveg, a köd ilyen. ✅ Megoldás: Zsírpapír."
+    },
+    {
+      "question": "Melyik állítás igaz a fény terjedési sebességére?",
+      "answers": {
+        "a": "Vízben a legnagyobb.",
+        "b": "Vákuumban a legnagyobb.",
+        "c": "Levegőben a legnagyobb."
+      },
+      "correct": "b",
+      "explanation": "A fény sebessége a vákuumban (légüres térben) a maximális lehetséges, minden más közegben ennél csak lassabban tud terjedni.  ✅ Megoldás: Vákuumban a legnagyobb."
+    },
+    {
+      "question": "Mi történik napfogyatkozáskor?",
+      "answers": {
+        "a": "A Föld árnyéka vetül a Holdra.",
+        "b": "A Hold árnyéka vetül a Földre.",
+        "c": "A Nap kialszik."
+      },
+      "correct": "b",
+      "explanation": "Napfogyatkozáskor a Hold kerül a Nap és a Föld közé, és kitakarja előlünk a Napot. Ilyenkor a Hold árnyéka vetül a Föld felszínének egy sávjára.  ✅ Megoldás: A Hold árnyéka vetül a Földre."
+    },
+    {
+      "question": "Mit jelent a színekre bontás (diszperzió)?",
+      "answers": {
+        "a": "A sugárzás visszaverődése egy felületről.",
+        "b": "A fehér fény színekre bontása.",
+        "c": "A fény elnyelődése."
+      },
+      "correct": "b",
+      "explanation": "A diszperzió vagy színfelbontás az a jelenség, amikor egy közeg törésmutatója függ a fény színétől (hullámhosszától), ezért a fehér fényt alkotóelemeire bontja. Ezt látjuk a prizmánál és a szivárványnál. ✅ Megoldás: A fehér fény színekre bontása."
+    },
+    {
+      "question": "Mi a Galilei-féle távcső főbb részei?",
+      "answers": {
+        "a": "Két gyűjtőlencse.",
+        "b": "Gyűjtőlencse és szórólencse.",
+        "c": "Két szórólencse."
+      },
+      "correct": "b",
+      "explanation": "A Galilei-távcső egy gyűjtőlencséből (objektív) és egy szórólencséből (okulár) áll.  ✅ Megoldás: Gyűjtőlencse és szórólencse."
+    },
+    {
+      "question": "Mi a fényvisszaverődés?",
+      "answers": {
+        "a": "A fény elnyelődése.",
+        "b": "A fény irányának megváltozása két közeg határán.",
+        "c": "A fény visszafordulása egy felületről."
+      },
+      "correct": "c",
+      "explanation": "A fényvisszaverődéskor a fény visszafordul egy felületről. ✅ Megoldás: A fény visszafordulása egy felületről."
+    },
+    {
+      "question": "Mi a törésmutató?",
+      "answers": {
+        "a": "A fény sebessége a vákuumban.",
+        "b": "Megmutatja, hogy egy közegben a fény hányszor lassabban terjed, mint a vákuumban.",
+        "c": "A visszaverődési szög mértéke."
+      },
+      "correct": "b",
+      "explanation": "A törésmutató azt mutatja meg, hogy egy közegben a fény hányszor lassabban terjed, mint a vákuumban. ✅ Megoldás: Megmutatja, hogy egy közegben a fény hányszor lassabban terjed, mint a vákuumban."
+    },
+    {
+      "question": "Mit jelent a 'látószög'?",
+      "answers": {
+        "a": "Azt a szög, amekkorát a szemünkkel látunk.",
+        "b": "A szemünk és a tárgy közötti távolság.",
+        "c": "A fényforrás nagysága."
+      },
+      "correct": "a",
+      "explanation": "A látószög azt a szöget jelenti, amekkorát a tárgy a szemünkből látszik. Minél nagyobb a látószög, annál nagyobbnak látjuk a tárgyat.  ✅ Megoldás: Azt a szög, amekkorát a szemünkkel látunk."
+    },
+    {
+      "question": "Miért látunk színeket?",
+      "answers": {
+        "a": "Mert a tárgyak elnyelik a fényt.",
+        "b": "Mert a tárgyak visszaverik a fényt, és a szemünk a különböző hullámhosszakat különböző színként érzékeli.",
+        "c": "Mert a szemünk fénylik."
+      },
+      "correct": "b",
+      "explanation": "A tárgyak a rájuk eső fehér fény bizonyos színeit elnyelik, a többit visszaverik. A visszavert színt látjuk, amit a szemünk érzékel. ✅ Megoldás: Mert a tárgyak visszaverik a fényt, és a szemünk a különböző hullámhosszakat különböző színként érzékeli."
+    },
+    {
+      "question": "Miért látjuk a szivárványt?",
+      "answers": {
+        "a": "Mert a fény elnyelődik az esőcseppekben.",
+        "b": "Mert a napfény megtörik az esőcseppeken, és színeire bomlik.",
+        "c": "Mert a szivárvány egy mágikus jelenség."
+      },
+      "correct": "b",
+      "explanation": "A szivárvány a fény törése, és az azt követő szétválása a színekre. Az esőcseppek prizmaként működnek. ✅ Megoldás: Mert a napfény megtörik az esőcseppeken, és színeire bomlik."
+    },
+    {
+      "question": "Melyik színnek a legkisebb a hullámhossza a látható fény tartományában?",
+      "answers": {
+        "a": "Vörös",
+        "b": "Zöld",
+        "c": "Kék/ibolya"
+      },
+      "correct": "c",
+      "explanation": "A kék/ibolya szín a látható fény spektrumában a legrövidebb hullámhosszú. ✅ Megoldás: Kék/ibolya"
+    }
+  ]
 }

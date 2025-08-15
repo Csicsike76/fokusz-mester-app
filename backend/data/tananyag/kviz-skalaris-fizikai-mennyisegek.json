@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz skalaris fizikai mennyisegek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a fizikai mennyiség?",
+      "answers": {
+        "a": "A testek és jelenségek mérhető tulajdonsága.",
+        "b": "A test anyaga.",
+        "c": "A test színe."
+      },
+      "correct": "a",
+      "explanation": "A fizikai mennyiség a testek, jelenségek mérhető tulajdonsága, amihez mérőszám és mértékegység rendelhető. ✅ Megoldás: A testek és jelenségek mérhető tulajdonsága."
+    },
+    {
+      "question": "Mit jelent a skaláris fizikai mennyiség?",
+      "answers": {
+        "a": "Csak nagysága van.",
+        "b": "Nagysága és iránya is van.",
+        "c": "Nincs nagysága."
+      },
+      "correct": "a",
+      "explanation": "A skaláris mennyiségeknek csak nagyságuk van, irányuk nincs.  ✅ Megoldás: Csak nagysága van."
+    },
+    {
+      "question": "Melyik a távolság SI mértékegysége?",
+      "answers": {
+        "a": "kilogramm (kg)",
+        "b": "méter (m)",
+        "c": "másodperc (s)"
+      },
+      "correct": "b",
+      "explanation": "A távolság (és a hossz) SI alapmértékegysége a méter (m).  ✅ Megoldás: méter (m)"
+    },
+    {
+      "question": "Melyik a tömeg SI mértékegysége?",
+      "answers": {
+        "a": "kilogramm (kg)",
+        "b": "méter (m)",
+        "c": "másodperc (s)"
+      },
+      "correct": "a",
+      "explanation": "A tömeg (m) SI alapmértékegysége a kilogramm (kg). ✅ Megoldás: kilogramm (kg)"
+    },
+    {
+      "question": "Melyik az időtartam SI mértékegysége?",
+      "answers": {
+        "a": "kilogramm (kg)",
+        "b": "méter (m)",
+        "c": "másodperc (s)"
+      },
+      "correct": "c",
+      "explanation": "Az időtartam (t) SI alapmértékegysége a másodperc (s). ✅ Megoldás: másodperc (s)"
+    },
+    {
+      "question": "Melyik mennyiség skaláris?",
+      "answers": {
+        "a": "Erő.",
+        "b": "Sebesség.",
+        "c": "Tömeg."
+      },
+      "correct": "c",
+      "explanation": "A tömegnek nincs iránya, csak nagysága. Az erő és a sebesség vektormennyiségek. ✅ Megoldás: Tömeg."
+    },
+    {
+      "question": "Melyik mennyiséget mérjük dinamométerrel?",
+      "answers": {
+        "a": "Hőmérsékletet.",
+        "b": "Erőt.",
+        "c": "Tömeget."
+      },
+      "correct": "b",
+      "explanation": "A dinamométerrel (rugós erőmérő) az erőt mérjük. ✅ Megoldás: Erőt."
+    },
+    {
+      "question": "Melyik mennyiséget mérjük a mérleggel?",
+      "answers": {
+        "a": "Hőmérsékletet.",
+        "b": "Tömeget.",
+        "c": "Időt."
+      },
+      "correct": "b",
+      "explanation": "A mérleggel a tömeget mérjük. ✅ Megoldás: Tömeget."
+    },
+    {
+      "question": "Melyik mennyiséget mérjük órával vagy stopperrel?",
+      "answers": {
+        "a": "Hőmérsékletet.",
+        "b": "Tömeget.",
+        "c": "Időtartamot."
+      },
+      "correct": "c",
+      "explanation": "Az órát vagy a stoppert az időtartam mérésére használjuk. ✅ Megoldás: Időtartamot."
+    },
+    {
+      "question": "Mi a munka?",
+      "answers": {
+        "a": "A test sebessége.",
+        "b": "Az erő és az elmozdulás szorzata.",
+        "c": "Az idő múlása."
+      },
+      "correct": "b",
+      "explanation": "A munka (W) egyenlő az erő (F) és az elmozdulás (s) szorzatával, ha az erő a mozgás irányában hat: W = F * s.  ✅ Megoldás: Az erő és az elmozdulás szorzata."
+    },
+    {
+      "question": "Melyik a munka mértékegysége?",
+      "answers": {
+        "a": "joule (J)",
+        "b": "watt (W)",
+        "c": "newton (N)"
+      },
+      "correct": "a",
+      "explanation": "A munka mértékegysége a joule (J). ✅ Megoldás: joule (J)"
+    },
+    {
+      "question": "Mitől függ a munka?",
+      "answers": {
+        "a": "A test tömegétől és a sebességétől.",
+        "b": "A kifejtett erőtől és az elmozdulástól.",
+        "c": "Az időtartamtól."
+      },
+      "correct": "b",
+      "explanation": "A munka (W = F * s) az erőtől és az elmozdulástól függ. ✅ Megoldás: A kifejtett erőtől és az elmozdulástól."
+    },
+    {
+      "question": "Ha egy testre ható erő merőleges az elmozdulásra, akkor mennyi a végzett munka?",
+      "answers": {
+        "a": "pozitív",
+        "b": "negatív",
+        "c": "nulla"
+      },
+      "correct": "c",
+      "explanation": "Ha az erő és az elmozdulás merőlegesek egymásra, a munkavégzés nulla, mert a cosinus 90°-nál nulla. ✅ Megoldás: nulla"
+    },
+    {
+      "question": "Mi a teljesítmény?",
+      "answers": {
+        "a": "A munka és az idő hányadosa.",
+        "b": "Az erő és az elmozdulás szorzata.",
+        "c": "A test sebessége."
+      },
+      "correct": "a",
+      "explanation": "A teljesítmény (P) a munka (W) és az idő (t) hányadosa: P = W / t.  ✅ Megoldás: A munka és az idő hányadosa."
+    },
+    {
+      "question": "Melyik a teljesítmény mértékegysége?",
+      "answers": {
+        "a": "joule (J)",
+        "b": "watt (W)",
+        "c": "newton (N)"
+      },
+      "correct": "b",
+      "explanation": "A teljesítmény mértékegysége a watt (W). ✅ Megoldás: watt (W)"
+    },
+    {
+      "question": "Ha 10 J munkát 2 másodperc alatt végzünk, mennyi a teljesítményünk?",
+      "answers": {
+        "a": "5 W",
+        "b": "20 W",
+        "c": "12 W"
+      },
+      "correct": "a",
+      "explanation": "P = W / t = 10 J / 2 s = 5 W. ✅ Megoldás: 5 W"
+    },
+    {
+      "question": "Mi az energiamegmaradás törvénye?",
+      "answers": {
+        "a": "Az energia nem vész el, csak átalakul.",
+        "b": "A mechanikai energia mindig megmarad.",
+        "c": "Az energia nem létezik."
+      },
+      "correct": "a",
+      "explanation": "Az energia megmaradásának törvénye szerint az energia nem vész el, csak átalakul egyik formából a másikba. ✅ Megoldás: Az energia nem vész el, csak átalakul."
+    },
+    {
+      "question": "Melyik energiára igaz, hogy arányos a test tömegével?",
+      "answers": {
+        "a": "Potenciális energia",
+        "b": "Mozgási energia",
+        "c": "Mindkettő"
+      },
+      "correct": "c",
+      "explanation": "Mind a mozgási energia, mind a helyzeti energia függ a test tömegétől. ✅ Megoldás: Mindkettő"
+    },
+    {
+      "question": "Melyik energiát tárolja a rugó?",
+      "answers": {
+        "a": "Mozgási energia.",
+        "b": "Hőenergia.",
+        "c": "Rugalmas energia."
+      },
+      "correct": "c",
+      "explanation": "A rugóban rugalmas energia tárolódik. ✅ Megoldás: Rugalmas energia."
+    },
+     {
+      "question": "Mi a sűrűség?",
+      "answers": {
+        "a": "A test sebessége.",
+        "b": "A test tömege egységnyi térfogatra vonatkoztatva.",
+        "c": "A test színe."
+      },
+      "correct": "b",
+      "explanation": "A sűrűség azt mutatja meg, hogy egy adott anyagból mennyi tömeg jut egy adott térfogatra. ✅ Megoldás: A test tömege egységnyi térfogatra vonatkoztatva."
+    },
+    {
+      "question": "Melyik egységben adjuk meg a sűrűséget?",
+      "answers": {
+        "a": "kg/m³",
+        "b": "kg",
+        "c": "m³"
+      },
+      "correct": "a",
+      "explanation": "A sűrűséget kilogramm per köbméterben (kg/m³) adjuk meg.  ✅ Megoldás: kg/m³"
+    },
+    {
+      "question": "Mi a hőmérséklet?",
+      "answers": {
+        "a": "A test súlya.",
+        "b": "A test melegségének mértéke.",
+        "c": "A test mérete."
+      },
+      "correct": "b",
+      "explanation": "A hőmérséklet azt mutatja meg, hogy egy test mennyire meleg. ✅ Megoldás: A test melegségének mértéke."
+    },
+    {
+      "question": "Melyik eszköz a hőmérséklet mérésére alkalmas?",
+      "answers": {
+        "a": "A mérleg",
+        "b": "A hőmérő",
+        "c": "A vonalzó"
+      },
+      "correct": "b",
+      "explanation": "A hőmérsékletet hőmérővel mérjük. ✅ Megoldás: A hőmérő"
+    },
+    {
+      "question": "Ha egy test helyzeti energiája csökken, mi történik?",
+      "answers": {
+        "a": "A sebessége csökken.",
+        "b": "A sebessége nő.",
+        "c": "A tömege csökken."
+      },
+      "correct": "b",
+      "explanation": "A test a helyzeti energiájának a csökkenésekor a mozgási energiája nő, ezért a sebessége is. ✅ Megoldás: A sebessége nő."
+    },
+    {
+      "question": "A víz fajhője 4200 J/(kg·°C). Ez mit jelent?",
+      "answers": {
+        "a": "1 kg vizet 1 °C-kal való melegítéséhez 4200 J energia szükséges.",
+        "b": "A víz sebessége 4200 m/s.",
+        "c": "A víz tömege 4200 kg."
+      },
+      "correct": "a",
+      "explanation": "A fajhő azt adja meg, hogy 1 kg anyag 1 °C-kal való melegítéséhez mennyi energia szükséges.  ✅ Megoldás: 1 kg vizet 1 °C-kal való melegítéséhez 4200 J energia szükséges."
+    }
+  ]
 }

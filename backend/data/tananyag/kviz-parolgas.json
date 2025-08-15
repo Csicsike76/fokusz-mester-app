@@ -4,5 +4,236 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz parolgas\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a párolgás?",
+      "answers": {
+        "a": "A folyadék szilárddá válása.",
+        "b": "A folyadék gázzá válása.",
+        "c": "A gáz folyékonnyá válása."
+      },
+      "correct": "b",
+      "explanation": "A párolgás a folyékony halmazállapotból a gáz halmazállapotba való átmenet. ✅ Megoldás: A folyadék gázzá válása."
+    },
+    {
+      "question": "Mi a forrás?",
+      "answers": {
+        "a": "A folyadék melegedése.",
+        "b": "A folyadék gázzá válása a felszínén.",
+        "c": "A folyadék gázzá válása a folyadék belsejében is."
+      },
+      "correct": "c",
+      "explanation": "A forrás a párolgás egy fajtája, amikor a folyadék belsejében is buborékok képződnek, és a gőzképződés a teljes folyadékban végbemegy. ✅ Megoldás: A folyadék gázzá válása a folyadék belsejében is."
+    },
+    {
+      "question": "Melyik folyamat során vesz fel a víz hőt?",
+      "answers": {
+        "a": "Fagyáskor.",
+        "b": "Lecsapódáskor.",
+        "c": "Párolgáskor."
+      },
+      "correct": "c",
+      "explanation": "A párolgáshoz hőre van szükség, hogy a folyadék gőzzé alakuljon.  ✅ Megoldás: Párolgáskor."
+    },
+    {
+      "question": "Miért hűl a bőrünk, ha vizesek leszünk és fúj a szél?",
+      "answers": {
+        "a": "Mert a víz befagy.",
+        "b": "Mert a víz elpárolog, és a párolgáshoz hőt von el a bőrből.",
+        "c": "Mert hideg a szél."
+      },
+      "correct": "b",
+      "explanation": "A párolgáshoz hőre van szükség. A víz a bőrről párolog, ami a hő elvonásával jár, ezért hűvösnek érezzük.  ✅ Megoldás: Mert a víz elpárolog, és a párolgáshoz hőt von el a bőrből."
+    },
+    {
+      "question": "Mitől függ a párolgás sebessége?",
+      "answers": {
+        "a": "A folyadék minőségétől, a hőmérséklettől, a felülettől és a szél sebességétől.",
+        "b": "A folyadék színétől.",
+        "c": "A folyadék mennyiségétől."
+      },
+      "correct": "a",
+      "explanation": "A párolgás sebessége függ a folyadék minőségétől, a hőmérséklettől, a felülettől és a szél sebességétől. ✅ Megoldás: A folyadék minőségétől, a hőmérséklettől, a felülettől és a szél sebességétől."
+    },
+    {
+      "question": "Mi történik a párolgás során a folyadék molekuláival?",
+      "answers": {
+        "a": "Lelassulnak.",
+        "b": "A hőmérsékletük csökken.",
+        "c": "Elszakadnak egymástól, és gáz halmazállapotba kerülnek."
+      },
+      "correct": "c",
+      "explanation": "A párolgás során a folyadék molekulái több energiát kapnak, elszakadnak egymástól, és gáz halmazállapotba kerülnek. ✅ Megoldás: Elszakadnak egymástól, és gáz halmazállapotba kerülnek."
+    },
+    {
+      "question": "Miért hűl le a kávé, ha egy ideig áll?",
+      "answers": {
+        "a": "Mert a kávéban lévő víz elpárolog, ami hőt von el.",
+        "b": "Mert a kávé kiömlik.",
+        "c": "Mert a kávéba kerül a levegő."
+      },
+      "correct": "a",
+      "explanation": "A kávéban lévő víz elpárolog, ami hőt von el a kávéból, így az lehűl. ✅ Megoldás: Mert a kávéban lévő víz elpárolog, ami hőt von el."
+    },
+    {
+      "question": "Melyik körülmény gyorsítja a párolgást?",
+      "answers": {
+        "a": "Nagyobb felület, melegítés, szél.",
+        "b": "Kisebb felület, hideg, szélcsend.",
+        "c": "Nagyobb felület, hideg, szélcsend."
+      },
+      "correct": "a",
+      "explanation": "A párolgást gyorsítja a nagyobb felület, a melegítés és a szél (ami a gőzt eltávolítja a folyadék felszínéről). ✅ Megoldás: Nagyobb felület, melegítés, szél."
+    },
+    {
+      "question": "Miért tart tovább a nedves ruha száradása árnyékban?",
+      "answers": {
+        "a": "Mert az árnyék melegebb, mint a nap.",
+        "b": "Mert kevesebb a napsugárzás, így kevesebb a hő.",
+        "c": "Mert az árnyékban nincs szél."
+      },
+      "correct": "b",
+      "explanation": "Az árnyékban a hőmérséklet alacsonyabb, így lassabban párolog a víz. ✅ Megoldás: Mert kevesebb a napsugárzás, így kevesebb a hő."
+    },
+    {
+      "question": "Miért forr a víz 100 °C-on?",
+      "answers": {
+        "a": "Mert a légnyomás ennyi.",
+        "b": "Mert a víz eléri a forráspontját.",
+        "c": "Mert a nap süt rá."
+      },
+      "correct": "b",
+      "explanation": "A víz forráspontja 100 °C, ahol a forrás megindul. ✅ Megoldás: Mert a víz eléri a forráspontját."
+    },
+    {
+      "question": "Melyik halmazállapot-változás a forrás?",
+      "answers": {
+        "a": "Szilárd halmazállapotból folyékony halmazállapotba kerülés.",
+        "b": "Folyékony halmazállapotból légnemű halmazállapotba kerülés a folyadék belsejében.",
+        "c": "Légnemű halmazállapotból folyékony halmazállapotba kerülés."
+      },
+      "correct": "b",
+      "explanation": "A forrás a folyadék belsejében történő gőzképződés, amikor a folyadék a forráspontjára melegszik. ✅ Megoldás: Folyékony halmazállapotból légnemű halmazállapotba kerülés a folyadék belsejében."
+    },
+    {
+      "question": "Miért keletkeznek buborékok a víz forrásakor?",
+      "answers": {
+        "a": "Mert a gőz a folyadék belsejében képződik, és a felszínre jut.",
+        "b": "Mert a víz színe megváltozik.",
+        "c": "Mert a vízben lévő szennyeződések gőzzé válnak."
+      },
+      "correct": "a",
+      "explanation": "A forrás során a gőz a folyadék belsejében képződik, és a felszínre jut, buborékokat képezve. ✅ Megoldás: Mert a gőz a folyadék belsejében képződik, és a felszínre jut."
+    },
+    {
+      "question": "Melyik helyzetben forr a víz alacsonyabb hőmérsékleten?",
+      "answers": {
+        "a": "Magasabb légnyomásnál.",
+        "b": "Alacsonyabb légnyomásnál.",
+        "c": "Mindig 100°C-on."
+      },
+      "correct": "b",
+      "explanation": "A forráspont a légnyomástól függ. Minél alacsonyabb a légnyomás, annál alacsonyabb a forráspont. ✅ Megoldás: Alacsonyabb légnyomásnál."
+    },
+    {
+      "question": "Miért nem tudjuk forralni a vizet egy űrhajóban?",
+      "answers": {
+        "a": "Mert túl hideg van.",
+        "b": "Mert alacsony a nyomás, így a víz már alacsonyabb hőmérsékleten forr, de nem tud melegedni.",
+        "c": "Mert a víz kifolyik a tartályból."
+      },
+      "correct": "b",
+      "explanation": "Az űrhajókban alacsony a légnyomás, így a víz már alacsonyabb hőmérsékleten forr, de a gőz nem tud melegedni, és így nem történik forrás.  ✅ Megoldás: Mert alacsony a nyomás, így a víz már alacsonyabb hőmérsékleten forr, de nem tud melegedni."
+    },
+    {
+      "question": "Mi a párolgás és a forrás közös vonása?",
+      "answers": {
+        "a": "Mindkettő szilárd halmazállapotú változás.",
+        "b": "Mindkettő gőzképződéssel jár.",
+        "c": "Mindkettő a felszínen történik."
+      },
+      "correct": "b",
+      "explanation": "Mindkettő gőzképződéssel jár. ✅ Megoldás: Mindkettő gőzképződéssel jár."
+    },
+    {
+      "question": "Melyik nem befolyásolja a párolgás sebességét?",
+      "answers": {
+        "a": "A folyadék hőmérséklete.",
+        "b": "A folyadék mennyisége.",
+        "c": "A levegő mozgása a folyadék felett."
+      },
+      "correct": "b",
+      "explanation": "A folyadék mennyisége nem befolyásolja a párolgás sebességét. ✅ Megoldás: A folyadék mennyisége."
+    },
+    {
+      "question": "Mit jelent, hogy a párolgás hűtő hatású?",
+      "answers": {
+        "a": "A folyadék melegebb lesz.",
+        "b": "A folyadék hőmérséklete csökken.",
+        "c": "A folyadék a környezetét melegíti."
+      },
+      "correct": "b",
+      "explanation": "A párolgás hőt von el a folyadékból, ezért a hőmérséklete csökken. ✅ Megoldás: A folyadék hőmérséklete csökken."
+    },
+    {
+      "question": "Ha egy nedves ruhát kitesszük a szélbe, miért szárad meg?",
+      "answers": {
+        "a": "Mert a szél felmelegíti.",
+        "b": "Mert a szél eltávolítja a gőzt a ruha felületéről, így gyorsul a párolgás.",
+        "c": "Mert a víz a levegőbe kerül."
+      },
+      "correct": "b",
+      "explanation": "A szél eltávolítja a gőzt a ruha felületéről, így a párolgás gyorsul. ✅ Megoldás: Mert a szél eltávolítja a gőzt a ruha felületéről, így gyorsul a párolgás."
+    },
+    {
+      "question": "Mi a ködképződés?",
+      "answers": {
+        "a": "A víz forrása.",
+        "b": "A víz lecsapódása apró cseppek formájában.",
+        "c": "A jég olvadása."
+      },
+      "correct": "b",
+      "explanation": "A ködképződés során a víz lecsapódik apró cseppek formájában, ami azt jelenti, hogy a gáz halmazállapotú víz folyadékká válik. ✅ Megoldás: A víz lecsapódása apró cseppek formájában."
+    },
+    {
+      "question": "Miért látjuk a ködöt?",
+      "answers": {
+        "a": "Mert a víz forr.",
+        "b": "Mert a víz lecsapódik.",
+        "c": "Mert apró vízcseppek vannak a levegőben, amik a fényt szórják."
+      },
+      "correct": "c",
+      "explanation": "A köd apró vízcseppekből áll, amik a fényt szórják, ezért látjuk.  ✅ Megoldás: Mert apró vízcseppek vannak a levegőben, amik a fényt szórják."
+    },
+    {
+      "question": "Mi a harmat?",
+      "answers": {
+        "a": "A víz lecsapódása a növényeken.",
+        "b": "A jég olvadása.",
+        "c": "A víz forrása."
+      },
+      "correct": "a",
+      "explanation": "A harmat a víz lecsapódása a növényeken. ✅ Megoldás: A víz lecsapódása a növényeken."
+    },
+    {
+      "question": "Miért hidegebb az üveg, ha befogja a harmatot?",
+      "answers": {
+        "a": "Mert a víz lecsapódásakor hőt ad le, ami hűti az üveget.",
+        "b": "Mert a víz melegebb, mint az üveg.",
+        "c": "Mert a víz a levegőben is hideg."
+      },
+      "correct": "a",
+      "explanation": "A víz lecsapódásakor hőt ad le, ami hűti az üveget. ✅ Megoldás: Mert a víz lecsapódásakor hőt ad le, ami hűti az üveget."
+    },
+    {
+      "question": "Miért van a felhő?",
+      "answers": {
+        "a": "A víz a magasban lecsapódik apró vízcseppekké vagy jégkristályokká.",
+        "b": "A víz a Nap hatására gőzzé válik.",
+        "c": "A víz a földről a felhőkbe emelkedik."
+      },
+      "correct": "a",
+      "explanation": "A felhő apró vízcseppekből vagy jégkristályokból áll, amik a levegőben lecsapódnak.  ✅ Megoldás: A víz a magasban lecsapódik apró vízcseppekké vagy jégkristályokká."
+    }
+  ]
 }

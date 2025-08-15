@@ -3,6 +3,247 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz mertani alapok\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz mértani alapok\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mivel jelöljük a pontokat a geometriában?",
+      "answers": {
+        "a": "nagybetűvel",
+        "b": "kisbetűvel",
+        "c": "számmal"
+      },
+      "correct": "a",
+      "explanation": "A mértani pontokat mindig nagybetűkkel nevezzük el, hogy megkülönböztessük őket. Például A pont, B pont, P pont. A kisbetűket az egyenesek jelölésére használjuk. ✅ Megoldás: Nagybetűvel jelöljük."
+    },
+    {
+      "question": "Hány végpontja van egy szakasznak?",
+      "answers": {
+        "a": "0",
+        "b": "2",
+        "c": "1"
+      },
+      "correct": "b",
+      "explanation": "A szakasz definíció szerint egy egyenes része, amelyet két pont határol. Ezt a két pontot a szakasz végpontjainak nevezzük. ✅ Megoldás: Egy szakasznak 2 végpontja van."
+    },
+    {
+      "question": "Mi az, aminek van kezdőpontja, de nincs végpontja?",
+      "answers": {
+        "a": "egyenes",
+        "b": "szakasz",
+        "c": "félegyenes"
+      },
+      "correct": "c",
+      "explanation": "A félegyenes az, ami egy pontból indul ki és a másik irányban a végtelenbe tart. ✅ Megoldás: A félegyenesnek van kezdőpontja, de nincs végpontja."
+    },
+    {
+      "question": "Mi az, ami mindkét irányban végtelen?",
+      "answers": {
+        "a": "a szakasz",
+        "b": "a sík",
+        "c": "az egyenes"
+      },
+      "correct": "c",
+      "explanation": "Az egyenes az, amit egyenes vonalként képzelünk el, ami a két végén soha nem ér véget. ✅ Megoldás: Az egyenes mindkét irányban végtelen."
+    },
+    {
+      "question": "Hány egyenest lehet húzni egyetlen ponton keresztül?",
+      "answers": {
+        "a": "pontosan egyet",
+        "b": "egyet sem",
+        "c": "végtelen sokat"
+      },
+      "correct": "c",
+      "explanation": "Egy ponton keresztül végtelen sok egyenest lehet húzni, mert a vonalzót bármilyen irányba elfordíthatjuk a pont körül. ✅ Megoldás: Egy ponton keresztül végtelen sok egyenest lehet húzni."
+    },
+    {
+      "question": "Mi az egyenes jelölése a geometriában?",
+      "answers": {
+        "a": "nagybetű",
+        "b": "kisbetű",
+        "c": "görög betű"
+      },
+      "correct": "b",
+      "explanation": "Az egyeneseket szokás kisbetűkkel elnevezni. Például: e egyenes, f egyenes. ✅ Megoldás: Az egyenes jelölése kisbetű."
+    },
+    {
+      "question": "Melyiknek van mérhető hossza?",
+      "answers": {
+        "a": "a félegyenesnek",
+        "b": "a szakasznak",
+        "c": "az egyenesnek"
+      },
+      "correct": "b",
+      "explanation": "A szakasz két pont között helyezkedik el, ezért a hossza véges és mérhető. ✅ Megoldás: A szakasznak van mérhető hossza."
+    },
+    {
+      "question": "A füzeted lapja mit modellez a legjobban?",
+      "answers": {
+        "a": "egy pontot",
+        "b": "egy egyenest",
+        "c": "egy síkot"
+      },
+      "correct": "c",
+      "explanation": "A füzetlap egy sima, lapos felület. Bár a füzetlap véges, de a sík egy darabját képviseli, ami a valóságban végtelen lenne. ✅ Megoldás: A füzetlap a síkot modellezi."
+    },
+    {
+      "question": "Hány egyenest lehet pontosan két, különböző ponton keresztül fektetni?",
+      "answers": {
+        "a": "végtelen sokat",
+        "b": "pontosan egyet",
+        "c": "egyet sem"
+      },
+      "correct": "b",
+      "explanation": "Két különböző ponton át pontosan egy egyenes fektethető. ✅ Megoldás: Két különböző ponton át pontosan egy egyenes fektethető."
+    },
+    {
+      "question": "Mit nevezünk pontnak?",
+      "answers": {
+        "a": "A legkisebb kört.",
+        "b": "Egy kiterjedés nélküli helyet.",
+        "c": "Egy nagyon rövid szakaszt."
+      },
+      "correct": "b",
+      "explanation": "A pont a geometria legkisebb építőeleme, ami kiterjedés nélküli helyet jelöl. ✅ Megoldás: A pont egy kiterjedés nélküli hely."
+    },
+    {
+      "question": "Az égbolton egy távoli csillag mit modellez a legjobban?",
+      "answers": {
+        "a": "síkot",
+        "b": "pontot",
+        "c": "szakaszt"
+      },
+      "correct": "b",
+      "explanation": "Bár a csillagok óriásiak, de olyan messze vannak, hogy a mi szemszögünkből csak egy fénylő pontnak látszanak. A geometriában is így használjuk a pontot: egy hely jelölésére, méret nélkül. ✅ Megoldás: A csillag a pontot modellezi."
+    },
+    {
+      "question": "Hány kezdőpontja van egy félegyenesnek?",
+      "answers": {
+        "a": "2",
+        "b": "1",
+        "c": "0"
+      },
+      "correct": "b",
+      "explanation": "A félegyenes nevében is benne van: egy 'fél' egyenes. Egy pontból indul ki, ez a kezdőpontja, és innen tart a végtelenbe. ✅ Megoldás: Egy félegyenesnek egy kezdőpontja van."
+    },
+    {
+      "question": "A ceruza hegye mit modellez a legjobban?",
+      "answers": {
+        "a": "a pontot",
+        "b": "a síkot",
+        "c": "az egyenest"
+      },
+      "correct": "a",
+      "explanation": "A ceruza hegye egy nagyon pici helyet jelöl ki a papíron. Ez a legjobb modell a kiterjedés nélküli pontra. ✅ Megoldás: A ceruza hegye a pontot modellezi."
+    },
+    {
+      "question": "Mi a sík jelölése a felsoroltak közül?",
+      "answers": {
+        "a": "P",
+        "b": "f",
+        "c": "S"
+      },
+      "correct": "c",
+      "explanation": "A síkot nagybetűvel (pl. S) vagy görög betűvel (pl. α) szokás jelölni. ✅ Megoldás: Az 'S' a sík jelölése."
+    },
+    {
+      "question": "Hány végpontja van egy egyenesnek?",
+      "answers": {
+        "a": "0",
+        "b": "1",
+        "c": "2"
+      },
+      "correct": "a",
+      "explanation": "Az egyenes definíció szerint mindkét irányban végtelen. Mivel soha nem ér véget, ezért nincsenek végpontjai. ✅ Megoldás: Egy egyenesnek 0 végpontja van."
+    },
+    {
+      "question": "Egy egyenesen van az A és a B pont. Mit nevezünk AB szakasznak?",
+      "answers": {
+        "a": "A két pontot.",
+        "b": "A két pont közötti részt, a pontokkal együtt.",
+        "c": "Az A-ból induló félegyenest."
+      },
+      "correct": "b",
+      "explanation": "A szakasz egy meghatározott része az egyenesnek. Az A és B pontok, valamint a közöttük lévő összes pont alkotja az AB szakaszt. ✅ Megoldás: A két pont közötti részt, a pontokkal együtt nevezzük szakasznak."
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "Két pont mindig egy síkban van.",
+        "b": "Három pont mindig egy síkban van.",
+        "c": "Négy pont mindig egy síkban van."
+      },
+      "correct": "a",
+      "explanation": "Két ponton át egy egyenest lehet fektetni. Három ponton át pedig mindig lehet egy síkot fektetni (gondolj egy háromlábú székre, az sosem billeg). Négy pont viszont már 'kiállhat' a síkból. ✅ Megoldás: Két pont mindig egy síkban van."
+    },
+    {
+      "question": "A kifeszített gitárhúr melyik mértani alakzatot modellezi?",
+      "answers": {
+        "a": "félegyenest",
+        "b": "egyenest",
+        "c": "szakaszt"
+      },
+      "correct": "c",
+      "explanation": "Mivel a gitárhúrnak van egy kezdete és egy vége, ahol rögzítve van. Ezért a szakaszt modellezi a legjobban. ✅ Megoldás: A gitárhúr a szakaszt modellezi."
+    },
+    {
+      "question": "Mi a különbség a szakasz és az egyenes között?",
+      "answers": {
+        "a": "Az egyenes görbe, a szakasz egyenes.",
+        "b": "Az egyenes végtelen, a szakasz véges hosszúságú.",
+        "c": "Nincs különbség."
+      },
+      "correct": "b",
+      "explanation": "Mindkettő egyenes vonal. A legfontosabb különbség a hosszukban van. Az egyenes mindkét irányba végtelen, míg a szakasz két pont között van, tehát véges a hossza. ✅ Megoldás: Az egyenes végtelen, a szakasz véges hosszúságú."
+    },
+    {
+      "question": "Ha az 'e' egyenesen van egy 'P' pont, hány részből áll az egyenes a pont nélkül?",
+      "answers": {
+        "a": "Egy részből",
+        "b": "Két részből (két félegyenesből)",
+        "c": "Nem osztja részekre."
+      },
+      "correct": "b",
+      "explanation": "Képzelj el egy végtelen hosszú madzagot, és csípd meg középen. A megcsípés pontja (P) két, ellentétes irányba tartó félegyenesre osztja a madzagot (egyenest). ✅ Megoldás: Két részből, azaz két félegyenesből áll."
+    },
+    {
+      "question": "Melyik NEM mértani alapfogalom?",
+      "answers": {
+        "a": "a pont",
+        "b": "az egyenes",
+        "c": "a háromszög"
+      },
+      "correct": "c",
+      "explanation": "Az alapfogalmakat nem definiáljuk, hanem elfogadjuk (pont, egyenes, sík). A háromszög már ezekből az alapfogalmakból hozzuk létre: 'egy síkban lévő három, nem egy egyenesre eső pontot összekötő szakaszok által határolt síkidom'. ✅ Megoldás: A háromszög már egy származtatott alakzat, nem alapfogalom."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A szakasz része az egyenesnek.",
+        "b": "Az egyenes része a síknak.",
+        "c": "A sík része az egyenesnek."
+      },
+      "correct": "c",
+      "explanation": "Egy egyenesből kivághatunk egy szakaszt. Egy síkra rajzolhatunk egyenest. A sík kétdimenziós, az egyenes egydimenziós. A sík nem lehet része az egyenesnek, ez fordítva igaz. ✅ Megoldás: A 'c' állítás hamis."
+    },
+    {
+      "question": "Az asztal lapja egy sík darabja. Mi lehet ezen a síkon egy egyenes modellje?",
+      "answers": {
+        "a": "egy morzsa",
+        "b": "a vonalzó éle",
+        "c": "az asztal lába"
+      },
+      "correct": "b",
+      "explanation": "A vonalzó éle egyenes vonal, ami teljesen ráfekszik az asztal lapjára (a síkra). ✅ Megoldás: A vonalzó éle a legjobb modell."
+    },
+    {
+      "question": "Hogyan jelöljük az A és B pontok által meghatározott szakaszt?",
+      "answers": {
+        "a": "a+b",
+        "b": "AB",
+        "c": "A-B"
+      },
+      "correct": "b",
+      "explanation": "A geometriában a két végpontot egymás mellé írva jelöljük a szakaszt. Nem használunk közé műveleti jelet. ✅ Megoldás: A helyes jelölés: AB."
+    }
+  ]
 }

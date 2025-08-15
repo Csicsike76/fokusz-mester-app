@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz intervallumok abrazolas\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi az intervallum?",
+      "answers": {
+        "a": "Egy pont a számegyenesen.",
+        "b": "A számegyenes egy része, ami két szám között van.",
+        "c": "A számegyenes teljes hossza."
+      },
+      "correct": "b",
+      "explanation": "Az intervallum a számegyenes egy része, ami két szám között helyezkedik el. ✅ Megoldás: A számegyenes egy része, ami két szám között van."
+    },
+    {
+      "question": "Mivel jelöljük az intervallumokat?",
+      "answers": {
+        "a": "Kisbetűkkel.",
+        "b": "Nagybetűkkel.",
+        "c": "Számokkal."
+      },
+      "correct": "b",
+      "explanation": "Az intervallumokat általában nagybetűkkel jelöljük, pl. A, B, I.  ✅ Megoldás: Nagybetűkkel."
+    },
+    {
+      "question": "Melyik jel azt jelenti, hogy egy szám benne van az intervallumban?",
+      "answers": {
+        "a": "=",
+        "b": "∈",
+        "c": "∉"
+      },
+      "correct": "b",
+      "explanation": "Ha egy szám benne van az intervallumban, azt az ∈ (elem) jellel jelöljük.  ✅ Megoldás: ∈"
+    },
+    {
+      "question": "Melyik jelzi, hogy egy szám nincs benne az intervallumban?",
+      "answers": {
+        "a": "=",
+        "b": "∈",
+        "c": "∉"
+      },
+      "correct": "c",
+      "explanation": "Ha egy szám nincs benne az intervallumban, azt a ∉ (nem elem) jellel jelöljük.  ✅ Megoldás: ∉"
+    },
+    {
+      "question": "Milyen jelölésekkel adhatjuk meg az intervallumokat?",
+      "answers": {
+        "a": "Csak felsorolással.",
+        "b": "Csak a közös tulajdonsággal.",
+        "c": "Felsorolással, közös tulajdonsággal és számtengelyen való ábrázolással."
+      },
+      "correct": "c",
+      "explanation": "Az intervallumokat megadhatjuk felsorolással (pl. {1, 2, 3}), közös tulajdonsággal (pl. {x | x < 5}) és a számegyenesen való ábrázolással. ✅ Megoldás: Felsorolással, közös tulajdonsággal és számtengelyen való ábrázolással."
+    },
+    {
+      "question": "Mit jelent a zárt intervallum?",
+      "answers": {
+        "a": "A végpontok nincsenek benne.",
+        "b": "A végpontok benne vannak.",
+        "c": "Csak a közepén lévő számok tartoznak bele."
+      },
+      "correct": "b",
+      "explanation": "A zárt intervallumban a végpontok is benne vannak.  ✅ Megoldás: A végpontok benne vannak."
+    },
+    {
+      "question": "Hogyan jelöljük a zárt intervallumot?",
+      "answers": {
+        "a": "( ; )",
+        "b": "[ ; ]",
+        "c": "{ ; }"
+      },
+      "correct": "b",
+      "explanation": "A zárt intervallumot szögletes zárójelekkel jelöljük: [ ; ].  ✅ Megoldás: [ ; ]"
+    },
+    {
+      "question": "Mit jelent a nyílt intervallum?",
+      "answers": {
+        "a": "A végpontok benne vannak.",
+        "b": "A végpontok nincsenek benne.",
+        "c": "Csak a középső számok tartoznak bele."
+      },
+      "correct": "b",
+      "explanation": "A nyílt intervallumban a végpontok nincsenek benne.  ✅ Megoldás: A végpontok nincsenek benne."
+    },
+    {
+      "question": "Hogyan jelöljük a nyílt intervallumot?",
+      "answers": {
+        "a": "( ; )",
+        "b": "[ ; ]",
+        "c": "{ ; }"
+      },
+      "correct": "a",
+      "explanation": "A nyílt intervallumot kerek zárójelekkel jelöljük: ( ; ). ✅ Megoldás: ( ; )"
+    },
+    {
+      "question": "Hogyan ábrázoljuk a számegyenesen a zárt intervallumot?",
+      "answers": {
+        "a": "Üres karikákkal a végpontoknál.",
+        "b": "Teli karikákkal a végpontoknál.",
+        "c": "Nincs jelölés a végpontoknál."
+      },
+      "correct": "b",
+      "explanation": "A zárt intervallumot a számegyenesen teli karikákkal jelöljük a végpontoknál.  ✅ Megoldás: Teli karikákkal a végpontoknál."
+    },
+    {
+      "question": "Hogyan ábrázoljuk a számegyenesen a nyílt intervallumot?",
+      "answers": {
+        "a": "Teli karikákkal a végpontoknál.",
+        "b": "Üres karikákkal a végpontoknál.",
+        "c": "Nem jelöljük a végpontokat."
+      },
+      "correct": "b",
+      "explanation": "A nyílt intervallumot a számegyenesen üres karikákkal jelöljük a végpontoknál.  ✅ Megoldás: Üres karikákkal a végpontoknál."
+    },
+    {
+      "question": "Mi az az intervallum, ami a 2-től 5-ig tart, a 2 és az 5 is benne van?",
+      "answers": {
+        "a": "(2; 5)",
+        "b": "[2; 5]",
+        "c": "(2; 5]"
+      },
+      "correct": "b",
+      "explanation": "Ha a végpontok is benne vannak, akkor zárt intervallumot kapunk, jelölése [2; 5]. ✅ Megoldás: [2; 5]"
+    },
+    {
+      "question": "Mi az az intervallum, ami a 2-től 5-ig tart, a 2 benne van, az 5 nincs?",
+      "answers": {
+        "a": "(2; 5)",
+        "b": "[2; 5]",
+        "c": "[2; 5)"
+      },
+      "correct": "c",
+      "explanation": "A bal oldalon zárt, a jobb oldalon nyitott.  ✅ Megoldás: [2; 5)"
+    },
+    {
+      "question": "Ha egy számegyenesen a (3; 7) intervallum van megadva, akkor a 3...",
+      "answers": {
+        "a": "Benne van az intervallumban.",
+        "b": "Nincs benne az intervallumban.",
+        "c": "A végpontja az intervallumnak."
+      },
+      "correct": "b",
+      "explanation": "A (3; 7) nyílt intervallum, ami azt jelenti, hogy a végpontok (3 és 7) nincsenek benne.  ✅ Megoldás: Nincs benne az intervallumban."
+    },
+    {
+      "question": "Ha egy számegyenesen a [3; 7] intervallum van megadva, akkor a 7...",
+      "answers": {
+        "a": "Benne van az intervallumban.",
+        "b": "Nincs benne az intervallumban.",
+        "c": "A közepén van."
+      },
+      "correct": "a",
+      "explanation": "A [3; 7] zárt intervallum, ami azt jelenti, hogy a végpontok (3 és 7) is benne vannak. ✅ Megoldás: Benne van az intervallumban."
+    },
+    {
+      "question": "Melyik ábrázolás jelöli a [-1; 2] intervallumot?",
+      "answers": {
+        "a": "Üres karika -1-nél, teli karika 2-nél.",
+        "b": "Teli karika -1-nél, üres karika 2-nél.",
+        "c": "Teli karikák mindkét végponton."
+      },
+      "correct": "c",
+      "explanation": "A zárt intervallumot teli karikákkal jelöljük a végpontoknál. ✅ Megoldás: Teli karikák mindkét végponton."
+    },
+    {
+      "question": "Melyik ábrázolás jelöli a (-1; 2) intervallumot?",
+      "answers": {
+        "a": "Üres karika -1-nél, teli karika 2-nél.",
+        "b": "Teli karika -1-nél, üres karika 2-nél.",
+        "c": "Üres karikák mindkét végponton."
+      },
+      "correct": "c",
+      "explanation": "A nyílt intervallumot üres karikákkal jelöljük a végpontoknál. ✅ Megoldás: Üres karikák mindkét végponton."
+    },
+    {
+      "question": "Melyik szám van benne a [0; 5] intervallumban?",
+      "answers": {
+        "a": "-1",
+        "b": "0",
+        "c": "6"
+      },
+      "correct": "b",
+      "explanation": "A [0; 5] intervallumban benne vannak a 0 és 5 közötti számok, beleértve a 0-t és az 5-öt is. ✅ Megoldás: 0"
+    },
+    {
+      "question": "Melyik szám nincs benne a (0; 5) intervallumban?",
+      "answers": {
+        "a": "1",
+        "b": "0",
+        "c": "2,5"
+      },
+      "correct": "b",
+      "explanation": "A (0; 5) intervallumban a 0 és az 5 közötti számok vannak, de a 0 és az 5 nincsenek benne.  ✅ Megoldás: 0"
+    },
+     {
+      "question": "Mi a különbség a [2; 4] és a (2; 4) intervallumok között?",
+      "answers": {
+        "a": "Az elsőben benne vannak a végpontok, a másodikban nincsenek.",
+        "b": "Az elsőben nincsenek benne a végpontok, a másodikban benne vannak.",
+        "c": "Nincs különbség."
+      },
+      "correct": "a",
+      "explanation": "A [2; 4] zárt, benne vannak a végpontok, a (2; 4) nyílt, a végpontok nincsenek benne.  ✅ Megoldás: Az elsőben benne vannak a végpontok, a másodikban nincsenek."
+    },
+    {
+      "question": "Melyik szám a nagyobb: 2,5 vagy 3, ha a [2; 4] intervallumban vizsgáljuk?",
+      "answers": {
+        "a": "2,5",
+        "b": "3",
+        "c": "Egyformák"
+      },
+      "correct": "b",
+      "explanation": "A 3 nagyobb, mint a 2,5, és mindkettő benne van a [2; 4] intervallumban.  ✅ Megoldás: 3"
+    },
+    {
+      "question": "Melyik szám van benne a [-1; 1] intervallumban?",
+      "answers": {
+        "a": "-2",
+        "b": "0",
+        "c": "2"
+      },
+      "correct": "b",
+      "explanation": "A 0 benne van a [-1; 1] intervallumban. ✅ Megoldás: 0"
+    },
+    {
+      "question": "Mi a helyes jelölése a 2-nél nagyobb, 5-nél kisebb számoknak (2 és 5 nélkül)?",
+      "answers": {
+        "a": "[2; 5]",
+        "b": "(2; 5)",
+        "c": "[2; 5)"
+      },
+      "correct": "b",
+      "explanation": "A 2-nél nagyobb, 5-nél kisebb számokat (2 és 5 nélkül) a (2; 5) jelöli. ✅ Megoldás: (2; 5)"
+    },
+    {
+      "question": "Mi a neve annak a halmaznak, ami a 3-nál nem kisebb számokat tartalmazza?",
+      "answers": {
+        "a": "(−∞; 3]",
+        "b": "[3; ∞)",
+        "c": "(3; ∞)"
+      },
+      "correct": "b",
+      "explanation": "A 3-nál nem kisebb számok halmaza a [3; ∞). ✅ Megoldás: [3; ∞)"
+    }
+  ]
 }

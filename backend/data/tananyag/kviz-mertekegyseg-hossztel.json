@@ -3,6 +3,247 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz mertekegyseg hossztel\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kviz mennyisegek mertekegysegek\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik a hosszúság alapmértékegysége az SI-rendszerben?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "kilométer (km)",
+        "c": "centiméter (cm)"
+      },
+      "correct": "a",
+      "explanation": "A hosszúság alapmértékegysége a méter (m)."
+    },
+    {
+      "question": "Mivel mérünk tömeget?",
+      "answers": {
+        "a": "Mérleggel",
+        "b": "Vonalzóval",
+        "c": "Hőmérővel"
+      },
+      "correct": "a",
+      "explanation": "Tömeget mérleggel mérünk."
+    },
+    {
+      "question": "Mennyi 1500 gramm kilogrammban?",
+      "answers": {
+        "a": "1,5 kg",
+        "b": "15 kg",
+        "c": "0,15 kg"
+      },
+      "correct": "a",
+      "explanation": "1500 gramm az 1,5 kg."
+    },
+    {
+      "question": "Mi a fizikai mennyiség?",
+      "answers": {
+        "a": "A testek és jelenségek mérhető tulajdonsága.",
+        "b": "A testek színe és szaga.",
+        "c": "Csak a számérték, mértékegység nélkül."
+      },
+      "correct": "a",
+      "explanation": "A helyes definíció az, hogy a testek és jelenségek mérhető tulajdonsága."
+    },
+    {
+      "question": "Egy téglalap oldalai 5 cm és 10 cm. Hogyan számolnád ki a területét?",
+      "answers": {
+        "a": "Közvetett méréssel (számolással).",
+        "b": "Közvetlen méréssel (leolvasással).",
+        "c": "Becsléssel."
+      },
+      "correct": "a",
+      "explanation": "A területet közvetett méréssel (számolással) határozzuk meg."
+    },
+    {
+      "question": "Mi a célja a mérés többszöri elvégzésének és az eredmények átlagolásának?",
+      "answers": {
+        "a": "A mérési hiba csökkentése.",
+        "b": "Az idő elhúzása.",
+        "c": "A mértékegység megváltoztatása."
+      },
+      "correct": "a",
+      "explanation": "A mérések átlagolásának célja a mérési hiba csökkentése."
+    },
+    {
+      "question": "Melyik NEM fizikai mennyiség?",
+      "answers": {
+        "a": "Szépség",
+        "b": "Hőmérséklet",
+        "c": "Térfogat"
+      },
+      "correct": "a",
+      "explanation": "A szépség nem fizikai mennyiség."
+    },
+    {
+      "question": "Melyik jelenti a legnagyobb távolságot?",
+      "answers": {
+        "a": "2 km",
+        "b": "200 m",
+        "c": "20000 cm"
+      },
+      "correct": "a",
+      "explanation": "A 2 km a legnagyobb távolság."
+    },
+    {
+      "question": "Mit jelent a 'kilo-' prefixum?",
+      "answers": {
+        "a": "Százszoros",
+        "b": "Ezerszeres",
+        "c": "Ezredrész"
+      },
+      "correct": "b",
+      "explanation": "A 'kilo-' prefixum ezerszeres szorzót jelent."
+    },
+    {
+      "question": "Mi az idő alapmértékegysége az SI-rendszerben?",
+      "answers": {
+        "a": "perc (min)",
+        "b": "másodperc (s)",
+        "c": "óra (h)"
+      },
+      "correct": "b",
+      "explanation": "Az idő alapmértékegysége a másodperc (s)."
+    },
+    {
+      "question": "Mivel mérünk időtartamot?",
+      "answers": {
+        "a": "Mérleggel",
+        "b": "Órával, stopperrel",
+        "c": "Vonalzóval"
+      },
+      "correct": "b",
+      "explanation": "Időtartamot órával vagy stopperrel mérünk."
+    },
+    {
+      "question": "Mennyi 0.5 liter köbcentiméterben (cm³)?",
+      "answers": {
+        "a": "50 cm³",
+        "b": "500 cm³",
+        "c": "5 cm³"
+      },
+      "correct": "b",
+      "explanation": "0.5 liter az 500 köbcentiméter."
+    },
+    {
+      "question": "Melyik NEM a hosszúság mértékegysége?",
+      "answers": {
+        "a": "fényév",
+        "b": "gramm",
+        "c": "mérföld"
+      },
+      "correct": "b",
+      "explanation": "A gramm nem a hosszúság mértékegysége."
+    },
+    {
+      "question": "Egy edényben 2 dl víz van. Hány liter ez?",
+      "answers": {
+        "a": "2 l",
+        "b": "0.2 l",
+        "c": "0.02 l"
+      },
+      "correct": "b",
+      "explanation": "2 dl az 0.2 liter."
+    },
+    {
+      "question": "Melyik állítás helyes?",
+      "answers": {
+        "a": "1 m² = 100 cm²",
+        "b": "1 m = 1000 mm",
+        "c": "1 m³ = 100 dm³"
+      },
+      "correct": "b",
+      "explanation": "Az 1 m = 1000 mm."
+    },
+    {
+      "question": "Mi a mérési hiba?",
+      "answers": {
+        "a": "A mért érték.",
+        "b": "A mért érték és a valós érték közötti különbség.",
+        "c": "A mértékegység."
+      },
+      "correct": "b",
+      "explanation": "A mérési hiba a mért érték és a valós érték közötti különbség. ✅ Megoldás: A mért érték és a valós érték közötti különbség."
+    },
+    {
+      "question": "Melyik mérőeszközzel mérünk tömeget?",
+      "answers": {
+        "a": "hőmérővel",
+        "b": "mérleggel",
+        "c": "vonalzóval"
+      },
+      "correct": "b",
+      "explanation": "A tömeget mérleggel mérünk. ✅ Megoldás: Mérleggel"
+    },
+    {
+      "question": "Ha a szoba hossza 5 méter, a szélessége 4 méter, mennyi a területe?",
+      "answers": {
+        "a": "9 négyzetméter",
+        "b": "20 négyzetméter",
+        "c": "10 négyzetméter"
+      },
+      "correct": "b",
+      "explanation": "Téglalap területe = hosszúság * szélesség = 5 m * 4 m = 20 m². ✅ Megoldás: 20 négyzetméter"
+    },
+    {
+      "question": "Mi a kapcsolat a centiméter és a méter között?",
+      "answers": {
+        "a": "1 m = 100 cm",
+        "b": "1 cm = 100 m",
+        "c": "1 m = 10 cm"
+      },
+      "correct": "a",
+      "explanation": "1 méter = 100 centiméter. ✅ Megoldás: 1 m = 100 cm"
+    },
+    {
+      "question": "Milyen mértékegység a térfogat?",
+      "answers": {
+        "a": "m",
+        "b": "m²",
+        "c": "m³"
+      },
+      "correct": "c",
+      "explanation": "A térfogat mértékegysége köbméter (m³). ✅ Megoldás: m³"
+    },
+    {
+      "question": "Mennyi 2000 gramm?",
+      "answers": {
+        "a": "2 kg",
+        "b": "20 kg",
+        "c": "0,2 kg"
+      },
+      "correct": "a",
+      "explanation": "1 kg = 1000 g. 2000g / 1000 = 2 kg. ✅ Megoldás: 2 kg"
+    },
+    {
+      "question": "Mi a legrövidebb időtartam a felsoroltak közül?",
+      "answers": {
+        "a": "10 perc",
+        "b": "300 másodperc",
+        "c": "1 óra"
+      },
+      "correct": "b",
+      "explanation": "10 perc = 600 másodperc. 1 óra = 3600 másodperc. ✅ Megoldás: 300 másodperc"
+    },
+    {
+      "question": "Melyik a terület mértékegysége (ismétlés)?",
+      "answers": {
+        "a": "m",
+        "b": "m²",
+        "c": "m³"
+      },
+      "correct": "b",
+      "explanation": "A terület a síkban a hely nagyságát jelenti, ezt négyzetméterben (m²) mérjük. ✅ Megoldás: m²"
+    },
+    {
+      "question": "Mennyi 1 liter köbcentiméterben?",
+      "answers": {
+        "a": "1000 cm³",
+        "b": "100 cm³",
+        "c": "10 cm³"
+      },
+      "correct": "a",
+      "explanation": "1 liter = 1 köbdeciméter = 1000 cm³. ✅ Megoldás: 1000 cm³"
+    }
+  ]
 }

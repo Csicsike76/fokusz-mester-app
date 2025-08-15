@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz hoallapot valtozas\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a halmazállapot-változás?",
+      "answers": {
+        "a": "Egy test alakjának megváltozása.",
+        "b": "Amikor az anyag formát változtatja meg a hő hatására.",
+        "c": "A test méretének megváltozása."
+      },
+      "correct": "b",
+      "explanation": "A halmazállapot-változás az, amikor egy anyag a melegítés vagy hűtés hatására egyik formából (szilárd, folyékony, gáz) a másikba alakul. ✅ Megoldás: Amikor az anyag formát változtatja meg a hő hatására."
+    },
+    {
+      "question": "Mi a fagyás?",
+      "answers": {
+        "a": "A folyadék szilárddá válása.",
+        "b": "A szilárd anyag melegedése.",
+        "c": "A gáz folyékonnyá válása."
+      },
+      "correct": "a",
+      "explanation": "A fagyáskor egy folyékony anyag szilárddá válik. Például a víz jéggé fagyása. ✅ Megoldás: A folyadék szilárddá válása."
+    },
+    {
+      "question": "Mi az olvadás?",
+      "answers": {
+        "a": "A szilárd anyag melegedése.",
+        "b": "A folyékony anyag forrása.",
+        "c": "A szilárd anyag folyékonnyá válása."
+      },
+      "correct": "c",
+      "explanation": "Az olvadáskor a szilárd anyag folyékonnyá válik. Például a jég olvadása.  ✅ Megoldás: A szilárd anyag folyékonnyá válása."
+    },
+    {
+      "question": "Mi a párolgás?",
+      "answers": {
+        "a": "A folyadék melegedése.",
+        "b": "A folyadék gázzá válása.",
+        "c": "A gáz lehűlése."
+      },
+      "correct": "b",
+      "explanation": "A párolgáskor a folyadék gázzá válik. Például a víz párolgása. ✅ Megoldás: A folyadék gázzá válása."
+    },
+    {
+      "question": "Mi a forrás?",
+      "answers": {
+        "a": "A folyadék forrni kezd.",
+        "b": "A gáz cseppekké válik.",
+        "c": "A szilárd anyag gázzá válik."
+      },
+      "correct": "a",
+      "explanation": "A forrás a párolgás egyik fajtája, amikor a folyadék belsejében is buborékok képződnek. Például a víz forrása. ✅ Megoldás: A folyadék forrni kezd."
+    },
+    {
+      "question": "Mi a lecsapódás?",
+      "answers": {
+        "a": "A gáz szilárddá válása.",
+        "b": "A gáz folyadékká válása.",
+        "c": "A folyadék forrása."
+      },
+      "correct": "b",
+      "explanation": "A lecsapódáskor a gáz folyékony halmazállapotúvá válik. Például a víz lecsapódása a pohár falán. ✅ Megoldás: A gáz folyadékká válása."
+    },
+    {
+      "question": "Mi a szublimáció?",
+      "answers": {
+        "a": "A szilárd anyag folyadékká válása.",
+        "b": "A szilárd anyag közvetlenül gázzá válik.",
+        "c": "A gáz folyadékká válása."
+      },
+      "correct": "b",
+      "explanation": "A szublimáció a szilárd halmazállapotból a gáz halmazállapotba való közvetlen átmenet, folyékony állapot nélkül. Például a szárazjég szublimációja. ✅ Megoldás: A szilárd anyag közvetlenül gázzá válik."
+    },
+    {
+      "question": "Mi a ködképződés?",
+      "answers": {
+        "a": "A víz forrása.",
+        "b": "A víz lecsapódása apró cseppek formájában.",
+        "c": "A jég olvadása."
+      },
+      "correct": "b",
+      "explanation": "A köd kicsi vízcseppekből áll, amik a levegőben lecsapódnak.  ✅ Megoldás: A víz lecsapódása apró cseppek formájában."
+    },
+    {
+      "question": "Milyen halmazállapotú a víz, ha jéggé fagy?",
+      "answers": {
+        "a": "Folyékony",
+        "b": "Szilárd",
+        "c": "Gáz"
+      },
+      "correct": "b",
+      "explanation": "A jég a víz szilárd halmazállapota. ✅ Megoldás: Szilárd"
+    },
+    {
+      "question": "Milyen halmazállapotú a víz, ha forr?",
+      "answers": {
+        "a": "Folyékony",
+        "b": "Szilárd",
+        "c": "Gáz"
+      },
+      "correct": "c",
+      "explanation": "A forrás során a víz gőzzé, azaz gázzá válik. ✅ Megoldás: Gáz"
+    },
+    {
+      "question": "Mi történik a vízmolekulákkal, amikor a víz forr?",
+      "answers": {
+        "a": "Közelebb kerülnek egymáshoz.",
+        "b": "Távolabb kerülnek egymástól, és gőzzé válnak.",
+        "c": "Nem változik a helyzetük."
+      },
+      "correct": "b",
+      "explanation": "A forrás során a vízmolekulák eltávolodnak egymástól, gőzt alkotva. ✅ Megoldás: Távolabb kerülnek egymástól, és gőzzé válnak."
+    },
+    {
+      "question": "Ha egy pohárban jég olvad, akkor a jég átalakul...",
+      "answers": {
+        "a": "Gőzzé.",
+        "b": "Vízgőzzé.",
+        "c": "Vízbe."
+      },
+      "correct": "c",
+      "explanation": "Az olvadás során a jég folyékonnyá, azaz vízzé válik. ✅ Megoldás: Vízbe."
+    },
+    {
+      "question": "Melyik halmazállapot-változáskor kell a hő?",
+      "answers": {
+        "a": "Fagyáskor.",
+        "b": "Olvadáskor.",
+        "c": "Lecsapódáskor."
+      },
+      "correct": "b",
+      "explanation": "Az olvadáshoz melegítés, azaz hő szükséges. ✅ Megoldás: Olvadáskor."
+    },
+    {
+      "question": "Melyik halmazállapot-változáskor ad le hőt az anyag?",
+      "answers": {
+        "a": "Párolgáskor.",
+        "b": "Olvadáskor.",
+        "c": "Fagyáskor."
+      },
+      "correct": "c",
+      "explanation": "A fagyáskor hő szabadul fel. ✅ Megoldás: Fagyáskor."
+    },
+    {
+      "question": "Ha a ruhákat a napon szárítjuk, mi történik a vízzel?",
+      "answers": {
+        "a": "A víz megfagy a ruhában.",
+        "b": "A víz elpárolog a ruhából.",
+        "c": "A ruhák megnőnek."
+      },
+      "correct": "b",
+      "explanation": "A meleg hatására a ruha nedvességtartalma elpárolog, azaz gőzzé válik, így száradnak meg a ruhák. ✅ Megoldás: A víz elpárolog a ruhából."
+    },
+    {
+      "question": "Melyik halmazállapot-változás a forrás fordítottja?",
+      "answers": {
+        "a": "Olvadás",
+        "b": "Fagyás",
+        "c": "Lecsapódás"
+      },
+      "correct": "c",
+      "explanation": "A forrás során a folyadék gőzzé válik, a lecsapódáskor a gőz folyadékká. ✅ Megoldás: Lecsapódás"
+    },
+    {
+      "question": "Melyik halmazállapot-változás a szublimáció fordítottja?",
+      "answers": {
+        "a": "Olvadás",
+        "b": "Fagyás",
+        "c": "Kicsapódás"
+      },
+      "correct": "c",
+      "explanation": "A szublimáció a szilárd halmazállapotból a gáz halmazállapotba való átmenet. A fordítottja a kicsapódás (depozíció), amikor a gáz közvetlenül szilárddá válik.  ✅ Megoldás: Kicsapódás"
+    },
+    {
+      "question": "Mi a harmat?",
+      "answers": {
+        "a": "A párolgás jele.",
+        "b": "A víz lecsapódása a leveleken.",
+        "c": "A jég megolvadása."
+      },
+      "correct": "b",
+      "explanation": "A harmat a leveleken lecsapódott vízcseppek.  ✅ Megoldás: A víz lecsapódása a leveleken."
+    },
+    {
+      "question": "Mi a dér?",
+      "answers": {
+        "a": "A párolgás.",
+        "b": "A fagyott eső.",
+        "c": "A víz szilárd formája a növényeken."
+      },
+      "correct": "c",
+      "explanation": "A dér a szilárd halmazállapotú víz, ami a hideg felületeken képződik, mint a növényeken.  ✅ Megoldás: A víz szilárd formája a növényeken."
+    },
+    {
+      "question": "Melyik halmazállapot-változás során lesz a víz gáz?",
+      "answers": {
+        "a": "Fagyás.",
+        "b": "Párolgás.",
+        "c": "Olvadás."
+      },
+      "correct": "b",
+      "explanation": "A párolgás során a folyadék gázzá válik. ✅ Megoldás: Párolgás"
+    },
+    {
+      "question": "Mi a neve annak a folyamatnak, amikor a víz szilárd halmazállapotból (jég) folyékony halmazállapotba (víz) kerül?",
+      "answers": {
+        "a": "Fagyás",
+        "b": "Olvadás",
+        "c": "Párolgás"
+      },
+      "correct": "b",
+      "explanation": "Az olvadás a szilárdból folyékonyba való átmenet. ✅ Megoldás: Olvadás"
+    },
+    {
+      "question": "Mi a szárazjég?",
+      "answers": {
+        "a": "A fagyott víz.",
+        "b": "A szén-dioxid szilárd formája.",
+        "c": "A jég, ami nagyon gyorsan olvad."
+      },
+      "correct": "b",
+      "explanation": "A szárazjég a szén-dioxid szilárd formája, ami szublimál, azaz gáz lesz belőle. ✅ Megoldás: A szén-dioxid szilárd formája."
+    },
+    {
+      "question": "Mi történik a vízmolekulákkal olvadáskor?",
+      "answers": {
+        "a": "Közelebb kerülnek egymáshoz.",
+        "b": "Távolabb kerülnek egymástól.",
+        "c": "Nem változik a helyzetük."
+      },
+      "correct": "b",
+      "explanation": "Az olvadáskor a molekulák több mozgási szabadságot kapnak, így távolabb kerülnek egymástól. ✅ Megoldás: Távolabb kerülnek egymástól."
+    },
+     {
+      "question": "Melyik halmazállapot-változás során szabadul fel a hő?",
+      "answers": {
+        "a": "Olvadás.",
+        "b": "Párolgás.",
+        "c": "Lecsapódás."
+      },
+      "correct": "c",
+      "explanation": "A lecsapódás során a gáz folyékony halmazállapotba megy át, és közben hő szabadul fel.  ✅ Megoldás: Lecsapódás."
+    },
+    {
+      "question": "Mi a kicsapódás?",
+      "answers": {
+        "a": "A folyadék szilárddá válása.",
+        "b": "A gáz folyadékká válása.",
+        "c": "A szilárd anyag gázzá válása."
+      },
+      "correct": "c",
+      "explanation": "A kicsapódás (depozíció) során a gáz szilárddá válik. ✅ Megoldás: A gáz szilárddá válása."
+    }
+  ]
 }

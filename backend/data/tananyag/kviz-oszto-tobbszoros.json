@@ -1,8 +1,249 @@
 {
-  "title": "Kviz oszto tobbszoros",
+  "title": "Kviz oszthatosagi szabalyok",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz oszto tobbszoros\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz oszthatosagi szabalyok\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik szám osztható 10-zel?",
+      "answers": {
+        "a": "2020",
+        "b": "1001",
+        "c": "5555"
+      },
+      "correct": "a",
+      "explanation": "Egy szám akkor osztható 10-zel, ha a szám utolsó számjegye 0. ✅ Megoldás: A 2020 osztható 10-zel."
+    },
+    {
+      "question": "Melyik szám osztható 9-cel?",
+      "answers": {
+        "a": "729",
+        "b": "908",
+        "c": "119"
+      },
+      "correct": "a",
+      "explanation": "Egy szám akkor osztható 9-cel, ha a számjegyeinek összege osztható 9-cel. 7+2+9=18 (osztható 9-cel). ✅ Megoldás: A 729 osztható 9-cel."
+    },
+    {
+      "question": "Melyik szám osztható 6-tal?",
+      "answers": {
+        "a": "636",
+        "b": "333",
+        "c": "452"
+      },
+      "correct": "a",
+      "explanation": "A 6-tal való oszthatóság szabálya, hogy a számnak 2-vel ÉS 3-mal is oszthatónak kell lennie. A 636 páros (osztható 2-vel), és a számjegyek összege 6+3+6=15, ami osztható 3-mal.  ✅ Megoldás: A 636 osztható 6-tal."
+    },
+    {
+      "question": "Ha egy szám osztható 9-cel, akkor biztosan osztható...",
+      "answers": {
+        "a": "3-mal is.",
+        "b": "6-tal is.",
+        "c": "4-gyel is."
+      },
+      "correct": "a",
+      "explanation": "A 9-es oszthatóság szabálya, hogy a számjegyek összege osztható 9-cel. Ha egy számjegyek összege osztható 9-cel, akkor 3-mal is osztható (pl. 18, 27). ✅ Megoldás: Ha egy szám osztható 9-cel, akkor biztosan osztható 3-mal is."
+    },
+    {
+      "question": "Melyik számra igaz, hogy 4-gyel és 9-cel is osztható?",
+      "answers": {
+        "a": "144",
+        "b": "126",
+        "c": "234"
+      },
+      "correct": "a",
+      "explanation": "Mindhárom szám számjegyeinek összege 9, tehát mind osztható 9-cel. Vizsgáljuk a 4-es oszthatóságot (utolsó két számjegy). 44 osztható 4-gyel. 26 és 34 nem osztható 4-gyel. ✅ Megoldás: Az 144 mindkét feltételnek megfelel."
+    },
+    {
+      "question": "Milyen számjegyre végződik az a szám, ami 2-vel és 5-tel is osztható?",
+      "answers": {
+        "a": "csak 0-ra",
+        "b": "0-ra vagy 2-re",
+        "c": "bármilyen páros számjegyre"
+      },
+      "correct": "a",
+      "explanation": "Ha egy szám osztható 2-vel és 5-tel is, akkor a legkisebb közös többszörösükkel, 10-zel is osztható. A 10-zel osztható számok mindig 0-ra végződnek. ✅ Megoldás: A számnak 0-ra kell végződnie."
+    },
+    {
+      "question": "Melyik szám osztható 25-tel?",
+      "answers": {
+        "a": "2525",
+        "b": "5252",
+        "c": "2255"
+      },
+      "correct": "a",
+      "explanation": "A 25-tel való oszthatóság szabálya az utolsó két számjegyre vonatkozik. A számnak 00, 25, 50 vagy 75-re kell végződnie. ✅ Megoldás: A 2525 osztható 25-tel."
+    },
+    {
+      "question": "Ha egy szám számjegyeinek összege 18, akkor a szám biztosan osztható...",
+      "answers": {
+        "a": "3-mal és 9-cel is.",
+        "b": "csak 3-mal.",
+        "c": "csak 9-cel."
+      },
+      "correct": "a",
+      "explanation": "Ha egy szám számjegyeinek összege osztható 9-cel, akkor a szám osztható 9-cel is, és 3-mal is. ✅ Megoldás: A szám 3-mal és 9-cel is biztosan osztható."
+    },
+    {
+      "question": "Melyik szám NEM páros?",
+      "answers": {
+        "a": "1024",
+        "b": "3000",
+        "c": "2013"
+      },
+      "correct": "c",
+      "explanation": "A páros számok 0, 2, 4, 6, 8-ra végződnek. A páratlanok 1, 3, 5, 7, 9-re. A 2013 utolsó számjegye 3, ami páratlan. ✅ Megoldás: A 2013 nem páros szám."
+    },
+    {
+      "question": "Hogyan szól a 6-tal való oszthatóság szabálya?",
+      "answers": {
+        "a": "Ha a szám páros.",
+        "b": "Ha a számjegyek összege osztható 6-tal.",
+        "c": "Ha a szám osztható 2-vel és 3-mal is."
+      },
+      "correct": "c",
+      "explanation": "Mivel 6 = 2 × 3, és a 2 és 3 relatív prímek, egy szám akkor osztható 6-tal, ha teljesíti a 2-vel és a 3-mal való oszthatóság szabályát is. ✅ Megoldás: A helyes szabály, hogy a számnak oszthatónak kell lennie 2-vel és 3-mal is."
+    },
+    {
+      "question": "Hogyan szól a 25-tel való oszthatóság szabálya?",
+      "answers": {
+        "a": "A számjegyek összege 25.",
+        "b": "A szám 25-re végződik.",
+        "c": "A szám 00, 25, 50 vagy 75-re végződik."
+      },
+      "correct": "c",
+      "explanation": "A 25-tel való oszthatóság szabálya az utolsó két számjegyre vonatkozik. A számnak 00, 25, 50 vagy 75-re kell végződnie. ✅ Megoldás: A helyes szabály az, hogy az utolsó két számjegyből alkotott számnak kell oszthatónak lennie 25-tel."
+    },
+    {
+      "question": "Melyik szám a 10-nek a legközelebbi többszöröse: 233?",
+      "answers": {
+        "a": "230",
+        "b": "240",
+        "c": "200"
+      },
+      "correct": "a",
+      "explanation": "Az a szám a közelebbi, amelyik 10-esre végződik.  ✅ Megoldás: 230"
+    },
+    {
+      "question": "Melyik szám osztható 8-cal?",
+      "answers": {
+        "a": "1234",
+        "b": "5670",
+        "c": "8000"
+      },
+      "correct": "c",
+      "explanation": "Egy szám akkor osztható 8-cal, ha az utolsó három számjegyéből képzett szám osztható 8-cal. Mivel a 8000 osztható 8-cal, ezért a 8000 osztható 8-cal. ✅ Megoldás: A 8000 osztható 8-cal."
+    },
+    {
+      "question": "Melyik szám osztható 11-gyel?",
+      "answers": {
+        "a": "121",
+        "b": "122",
+        "c": "123"
+      },
+      "correct": "a",
+      "explanation": "Az 11-gyel való oszthatóság szabálya: a páratlan helyeken álló számjegyek összegéből kivonjuk a páros helyeken álló számjegyek összegét. Ha az eredmény osztható 11-gyel (vagy 0), akkor a szám is osztható 11-gyel. a) 1 - 2 + 1 = 0. ✅ Megoldás: 121"
+    },
+     {
+      "question": "Mennyi a 60000 - 1-10000 számjegyű szám? ",
+      "answers": {
+        "a": "50 000",
+        "b": "40 000",
+        "c": "500 000"
+      },
+      "correct": "a",
+      "explanation": "60000-10000=50000. ✅ Megoldás: 50 000"
+    },
+    {
+      "question": "Melyik osztója a 42-nek?",
+      "answers": {
+        "a": "8",
+        "b": "7",
+        "c": "4"
+      },
+      "correct": "b",
+      "explanation": "A 42 osztói: 1, 2, 3, 6, 7, 14, 21, 42.  ✅ Megoldás: A 7 osztója a 42-nek."
+    },
+    {
+      "question": "Hány osztója van a 10-nek?",
+      "answers": {
+        "a": "2",
+        "b": "3",
+        "c": "4"
+      },
+      "correct": "c",
+      "explanation": "A 10 osztói: 1, 2, 5, 10. ✅ Megoldás: A 10-nek 4 osztója van."
+    },
+    {
+      "question": "Egy szám ... önmagának.",
+      "answers": {
+        "a": "csak osztója",
+        "b": "osztója és többszöröse is",
+        "c": "csak többszöröse"
+      },
+      "correct": "b",
+      "explanation": "Minden szám (a 0-t kivéve) osztója és többszöröse is önmagának. ✅ Megoldás: Minden szám (kivéve a 0) osztója és többszöröse is önmagának."
+    },
+    {
+      "question": "Melyik szám a 100-nak osztója?",
+      "answers": {
+        "a": "200",
+        "b": "25",
+        "c": "30"
+      },
+      "correct": "b",
+      "explanation": "A 100 osztói: 1, 2, 4, 5, 10, 20, 25, 50, 100.  ✅ Megoldás: A 25 osztója a 100-nak."
+    },
+    {
+      "question": "Mi a 20 legkisebb valódi osztója? (A valódi osztó nem 1.)",
+      "answers": {
+        "a": "1",
+        "b": "2",
+        "c": "4"
+      },
+      "correct": "b",
+      "explanation": "A 20 osztói: 1, 2, 4, 5, 10, 20. A valódi osztók nem egyenlők magával a számmal, tehát: 2, 4, 5, 10. Ezek közül a legkisebb a 2.  ✅ Megoldás: A 20 legkisebb, 1-nél nagyobb osztója a 2."
+    },
+    {
+      "question": "Hány olyan osztója van a 36-nak, ami páros?",
+      "answers": {
+        "a": "3",
+        "b": "4",
+        "c": "5"
+      },
+      "correct": "c",
+      "explanation": "A 36 osztói: 1, 2, 3, 4, 6, 9, 12, 18, 36. A páros osztók: 2, 4, 6, 12, 18, 36. Ez 5 darab. ✅ Megoldás: 5 darab"
+    },
+    {
+      "question": "Mi a legkisebb közös többszöröse (lkkt) a 6 és a 9 számoknak?",
+      "answers": {
+        "a": "18",
+        "b": "27",
+        "c": "3"
+      },
+      "correct": "a",
+      "explanation": "A 6 többszörösei: 6, 12, 18, 24... A 9 többszörösei: 9, 18, 27... A legkisebb közös többszörös a 18. ✅ Megoldás: A 18."
+    },
+    {
+      "question": "Melyik szám a 15-nek a legkisebb, 15-nél nagyobb többszöröse?",
+      "answers": {
+        "a": "30",
+        "b": "45",
+        "c": "1"
+      },
+      "correct": "a",
+      "explanation": "A 15 többszörösei: 15, 30, 45, 60... A legkisebb 15-nél nagyobb többszörös a 30.  ✅ Megoldás: A 30."
+    },
+    {
+      "question": "Mi a 45+45+45+45 összeg rövidebb formája?",
+      "answers": {
+        "a": "45*5",
+        "b": "45*4",
+        "c": "45-4"
+      },
+      "correct": "b",
+      "explanation": "Az összeadás ismétlése helyett szorzást használunk. Azaz 45-öt 4-szer adunk össze önmagával, ezt 45*4-el írjuk le. ✅ Megoldás: 45*4"
+    }
+  ]
 }

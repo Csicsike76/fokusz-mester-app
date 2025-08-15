@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz kozepek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a 10 és a 30 számtani közepe?",
+      "answers": {
+        "a": "20",
+        "b": "15",
+        "c": "40"
+      },
+      "correct": "a",
+      "explanation": "Két szám (x, y) számtani közepe: (x + y) / 2. (10 + 30) / 2 = 40 / 2 = 20. ✅ Megoldás: A két szám számtani közepe 20."
+    },
+    {
+      "question": "Mi a 4 és a 16 mértani közepe?",
+      "answers": {
+        "a": "8",
+        "b": "10",
+        "c": "64"
+      },
+      "correct": "a",
+      "explanation": "Két pozitív szám (x, y) mértani közepe: √(x * y). √(4 * 16) = √64 = 8. ✅ Megoldás: A két szám mértani közepe 8."
+    },
+    {
+      "question": "Ha két szám számtani közepe 15, és az egyik szám 10, mennyi a másik szám?",
+      "answers": {
+        "a": "20",
+        "b": "12.5",
+        "c": "25"
+      },
+      "correct": "a",
+      "explanation": "(10 + x) / 2 = 15.  10 + x = 30, amiből x = 20. ✅ Megoldás: A másik szám a 20."
+    },
+    {
+      "question": "Mikor egyenlő két pozitív szám számtani és mértani közepe?",
+      "answers": {
+        "a": "Ha a két szám egyenlő.",
+        "b": "Soha.",
+        "c": "Ha az egyik szám 0."
+      },
+      "correct": "a",
+      "explanation": "A számtani és mértani közép közötti egyenlőtlenség (AM-GM) szerint a számtani közép mindig nagyobb vagy egyenlő a mértaninál. Az egyenlőség pontosan akkor áll fenn, ha a két szám megegyezik. ✅ Megoldás: Akkor, ha a két szám egyenlő."
+    },
+    {
+      "question": "Mi az 1, 2, 3, 4, 5 számok számtani közepe?",
+      "answers": {
+        "a": "3",
+        "b": "2.5",
+        "c": "3.5"
+      },
+      "correct": "a",
+      "explanation": "A számok összegét el kell osztani a számok darabszámával. (1 + 2 + 3 + 4 + 5) / 5 = 15 / 5 = 3.  ✅ Megoldás: A számok számtani közepe 3."
+    },
+    {
+      "question": "Két dolgozatod jegye 4-es és 5-ös. Az 5-ös jegy súlya kétszeres. Mi a súlyozott átlagod?",
+      "answers": {
+        "a": "4,67",
+        "b": "4,5",
+        "c": "4,75"
+      },
+      "correct": "a",
+      "explanation": "Súlyozott átlag = (érték1*súly1 + érték2*súly2) / (súly1 + súly2).  (4*1 + 5*2) / (1 + 2) = (4 + 10) / 3 = 14 / 3 ≈ 4,67.  ✅ Megoldás: A súlyozott átlag kb. 4,67."
+    },
+    {
+      "question": "Mi a 10 és a 90 mértani közepe?",
+      "answers": {
+        "a": "30",
+        "b": "50",
+        "c": "√80"
+      },
+      "correct": "a",
+      "explanation": "√(10 * 90) = √900 = 30.  ✅ Megoldás: A mértani közép 30."
+    },
+    {
+      "question": "Melyik számhármasnak 10 a számtani közepe?",
+      "answers": {
+        "a": "5, 10, 15",
+        "b": "10, 10, 9",
+        "c": "5, 5, 5"
+      },
+      "correct": "a",
+      "explanation": "Azt a számhármast keressük, amelynek tagjait összeadva és 3-mal elosztva 10-et kapunk.  (5 + 10 + 15) / 3 = 30 / 3 = 10.  ✅ Megoldás: Az 5, 10, 15 számok számtani közepe 10."
+    },
+    {
+      "question": "Mi a 2 és a 8 mértani közepe?",
+      "answers": {
+        "a": "5",
+        "b": "4",
+        "c": "16"
+      },
+      "correct": "b",
+      "explanation": "√(2 * 8) = √16 = 4. ✅ Megoldás: A két szám mértani közepe 4."
+    },
+    {
+      "question": "Mi a 7, 8, 9 számok számtani közepe?",
+      "answers": {
+        "a": "7",
+        "b": "8",
+        "c": "9"
+      },
+      "correct": "b",
+      "explanation": "(7 + 8 + 9) / 3 = 24 / 3 = 8.  ✅ Megoldás: A számok számtani közepe 8."
+    },
+    {
+      "question": "Ha két szám mértani közepe 10, és az egyik szám 5, mennyi a másik?",
+      "answers": {
+        "a": "15",
+        "b": "20",
+        "c": "10"
+      },
+      "correct": "b",
+      "explanation": "√(5 * x) = 10. Mindkét oldalt négyzetre emeljük: 5 * x = 100. Ebből x = 100 / 5 = 20.  ✅ Megoldás: A másik szám a 20."
+    },
+    {
+      "question": "Melyik közepet használjuk általában jegyek átlagolására?",
+      "answers": {
+        "a": "Mértani közép",
+        "b": "Számtani közép",
+        "c": "Harmonikus közép"
+      },
+      "correct": "b",
+      "explanation": "Az iskolai osztályzatok, teszteredmények átlagát hagyományosan a számtani (vagy súlyozott számtani) középpel számoljuk. ✅ Megoldás: A számtani közepet használjuk."
+    },
+    {
+      "question": "Hasonlítsd össze a 4 és 9 számtani és mértani közepét!",
+      "answers": {
+        "a": "Egyenlőek",
+        "b": "A számtani közép nagyobb",
+        "c": "A mértani közép nagyobb"
+      },
+      "correct": "b",
+      "explanation": "Számtani közép: (4 + 9) / 2 = 13 / 2 = 6,5.  Mértani közép: √(4 * 9) = √36 = 6.  Mivel 6,5 > 6, a számtani közép nagyobb.  ✅ Megoldás: A számtani közép nagyobb."
+    },
+    {
+      "question": "Mi a -5 és 5 számtani közepe?",
+      "answers": {
+        "a": "2.5",
+        "b": "0",
+        "c": "Nincs értelme"
+      },
+      "correct": "b",
+      "explanation": "(-5 + 5) / 2 = 0 / 2 = 0. ✅ Megoldás: A két szám számtani közepe 0."
+    },
+    {
+      "question": "Mi az 5 és 5 mértani közepe?",
+      "answers": {
+        "a": "25",
+        "b": "5",
+        "c": "√10"
+      },
+      "correct": "b",
+      "explanation": "√(5 * 5) = √25 = 5. Ha a két szám egyenlő, a számtani és mértani közepük is megegyezik a számmal. ✅ Megoldás: A mértani közép 5."
+    },
+    {
+      "question": "Egy téglalap oldalai 2 és 18. Milyen hosszú oldala van annak a négyzetnek, amelynek a területe megegyezik a téglalapéval?",
+      "answers": {
+        "a": "10",
+        "b": "6",
+        "c": "8"
+      },
+      "correct": "b",
+      "explanation": "Téglalap területe: 2 * 18 = 36.  Négyzet területe: a². a² = 36, amiből a = √36 = 6.  ✅ Megoldás: A négyzet oldala 6."
+    },
+    {
+      "question": "Mi az első három páros természetes szám (2, 4, 6) számtani közepe?",
+      "answers": {
+        "a": "3",
+        "b": "4",
+        "c": "5"
+      },
+      "correct": "b",
+      "explanation": "(2 + 4 + 6) / 3 = 12 / 3 = 4. ✅ Megoldás: A számok számtani közepe 4."
+    },
+    {
+      "question": "Mi az 1, 2 és 6 számok számtani közepe?",
+      "answers": {
+        "a": "2",
+        "b": "3.5",
+        "c": "3"
+      },
+      "correct": "c",
+      "explanation": "(1 + 2 + 6) / 3 = 9 / 3 = 3. ✅ Megoldás: A számok számtani közepe 3."
+    },
+    {
+      "question": "Mi a 3 és a 12 mértani közepe?",
+      "answers": {
+        "a": "7.5",
+        "b": "√15",
+        "c": "6"
+      },
+      "correct": "c",
+      "explanation": "√(3 * 12) = √36 = 6. ✅ Megoldás: A mértani közép 6."
+    },
+    {
+      "question": "Melyik reláció igaz két KÜLÖNBÖZŐ pozitív szám számtani (AM) és mértani (GM) közepére?",
+      "answers": {
+        "a": "AM < GM",
+        "b": "AM = GM",
+        "c": "AM > GM"
+      },
+      "correct": "c",
+      "explanation": "Két különböző pozitív szám esetén a számtani közép szigorúan nagyobb, mint a mértani. ✅ Megoldás: Különböző pozitív számok esetén a számtani közép nagyobb, mint a mértani."
+    },
+    {
+      "question": "Melyik számpárnak NEM értelmezhető a mértani közepe a valós számok halmazán?",
+      "answers": {
+        "a": "4 és 9",
+        "b": "0 és 5",
+        "c": "-4 és 4"
+      },
+      "correct": "c",
+      "explanation": "A -4 és 4 szorzata -16. A valós számok halmazán negatív számnak nincs négyzetgyöke. ✅ Megoldás: A -4 és 4 számpárnak nem értelmezhető a mértani közepe."
+    },
+    {
+      "question": "Mi a 10 és a 40 mértani közepe?",
+      "answers": {
+        "a": "25",
+        "b": "√50",
+        "c": "20"
+      },
+      "correct": "c",
+      "explanation": "√(10 * 40) = √400 = 20. ✅ Megoldás: A mértani közép 20."
+    },
+    {
+      "question": "Mi a 0, 10 és 20 számtani közepe?",
+      "answers": {
+        "a": "15",
+        "b": "5",
+        "c": "10"
+      },
+      "correct": "c",
+      "explanation": "(0 + 10 + 20) / 3 = 30 / 3 = 10. ✅ Megoldás: A számok számtani közepe 10."
+    },
+    {
+      "question": "Hogyan definiáljuk két pozitív szám, 'a' és 'b' mértani közepét?",
+      "answers": {
+        "a": "a*b / 2",
+        "b": "(a+b)²",
+        "c": "√(a*b)"
+      },
+      "correct": "c",
+      "explanation": "Két pozitív szám mértani közepe a számok szorzatának négyzetgyöke. ✅ Megoldás: A helyes képlet a √(a*b)."
+    }
+  ]
 }

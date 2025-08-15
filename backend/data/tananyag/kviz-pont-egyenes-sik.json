@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz pont egyenes sik\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Egy síkon két pont egyértelműen meghatároz egy...",
+      "answers": {
+        "a": "egyenest",
+        "b": "kört",
+        "c": "háromszöget"
+      },
+      "correct": "a",
+      "explanation": "Egy síkon két különböző ponton át egy és csak egy egyenes húzható. ✅ Megoldás: egyenes."
+    },
+    {
+      "question": "Három nem kollineáris pont egyértelműen meghatároz egy...",
+      "answers": {
+        "a": "egyenest",
+        "b": "síkmértani háromszöget",
+        "c": "gömböt"
+      },
+      "correct": "b",
+      "explanation": "Ha három pont nincs egy egyenesen, akkor egyértelműen meghatároznak egy síkmértani háromszöget.  ✅ Megoldás: síkmértani háromszöget."
+    },
+    {
+      "question": "Ha két egyenes metszi egymást, akkor...",
+      "answers": {
+        "a": "minden pontjuk közös",
+        "b": "nincs közös pontjuk",
+        "c": "pontban metszenek"
+      },
+      "correct": "c",
+      "explanation": "A metsző egyeneseknek pontosan egy közös pontjuk van. ✅ Megoldás: pontban metszenek."
+    },
+    {
+      "question": "Két párhuzamos egyenes síkot határoz meg?",
+      "answers": {
+        "a": "igen",
+        "b": "nem",
+        "c": "csak merőleges esetén"
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos egyenesek egy síkban helyezkednek el. ✅ Megoldás: Igen."
+    },
+    {
+      "question": "Három pont kollineáris, ha...",
+      "answers": {
+        "a": "háromszöget alkotnak",
+        "b": "mindegyik pont külön síkban van",
+        "c": "ugyanazon az egyenesen fekszenek"
+      },
+      "correct": "c",
+      "explanation": "A kollinearitás azt jelenti, hogy a pontok egy egyenesen helyezkednek el. ✅ Megoldás: ugyanazon az egyenesen fekszenek."
+    },
+    {
+      "question": "Merőleges egyenesek találkozási szöge:",
+      "answers": {
+        "a": "60°",
+        "b": "90°",
+        "c": "180°"
+      },
+      "correct": "b",
+      "explanation": "A merőleges egyenesek 90 fokos szöget zárnak be egymással. ✅ Megoldás: 90°."
+    },
+    {
+      "question": "Egy sík és egy pont nem ezen a síkon új síkot határoz?",
+      "answers": {
+        "a": "igen",
+        "b": "nem",
+        "c": "csak ha pont rajta van"
+      },
+      "correct": "a",
+      "explanation": "Egy sík és egy rajta kívüli pont egyértelműen meghatároz egy másik síkot. ✅ Megoldás: Igen."
+    },
+    {
+      "question": "Két párhuzamos sík metszi egymást?",
+      "answers": {
+        "a": "igen, pontban",
+        "b": "igen, vonalban",
+        "c": "nem"
+      },
+      "correct": "c",
+      "explanation": "A párhuzamos síkoknak nincs közös pontjuk, tehát nem metszik egymást.  ✅ Megoldás: Nem."
+    },
+    {
+      "question": "Ha egy egyenes merőleges egy síkra, akkor...",
+      "answers": {
+        "a": "metszi sík vonalát",
+        "b": "merőleges bármely síkbeli egyenesre",
+        "c": "soha nem találkozik"
+      },
+      "correct": "b",
+      "explanation": "Ha egy egyenes merőleges egy síkra, akkor a síkban lévő bármely egyenesre is merőleges.  ✅ Megoldás: merőleges bármely síkbeli egyenesre."
+    },
+    {
+      "question": "Mi a pont és merőlegesen álló egyenes távolsága a ponttól?",
+      "answers": {
+        "a": "rövidítés a pontból a síkra",
+        "b": "hosszabbodik",
+        "c": "nem értelmezhető"
+      },
+      "correct": "a",
+      "explanation": "A pont és egyenes távolsága a pontból az egyenesre bocsátott merőleges szakasz hossza. ✅ Megoldás: rövidítés a pontból a síkra"
+    },
+    {
+      "question": "Ha két egyenes nem lapul egy síkon, akkor...",
+      "answers": {
+        "a": "metszik egymást.",
+        "b": "párhuzamosak.",
+        "c": "ferdén metszik."
+      },
+      "correct": "c",
+      "explanation": "Ferdén metsző egyenesek nem helyezkednek egy síkban. ✅ Megoldás: ferdén metszik."
+    },
+    {
+      "question": "Mi a pont távolsága egy egyenestől, ha a pont rajta van az egyenesen?",
+      "answers": {
+        "a": "a ponttól vett merőleges vetület",
+        "b": "a szakasz hossza",
+        "c": "végtelen"
+      },
+      "correct": "b",
+      "explanation": "Ha egy pont illeszkedik egy egyenesre, akkor a pont távolsága az egyenestől 0. ✅ Megoldás: A pontból az egyenesre bocsátott merőleges szakasz hossza 0."
+    },
+    {
+      "question": "Ha egy síkot egyenesek metsznek, mit alkotnak?",
+      "answers": {
+        "a": "A sík lapját.",
+        "b": "Két szöget.",
+        "c": "Féltereket."
+      },
+      "correct": "a",
+      "explanation": "A síkban lévő egyenesek a síkot területekre, azaz lapokra osztják.  ✅ Megoldás: A sík lapját."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Az egyenes a körvonal egyenes része.",
+        "b": "A körnek egyetlen középpontja van.",
+        "c": "A körnek végtelen sok sugara van."
+      },
+      "correct": "a",
+      "explanation": "Az egyenes nem része a körnek.  ✅ Megoldás: A körnek van egyetlen középpontja."
+    },
+    {
+      "question": "Mi a neve a körvonal egy darabjának?",
+      "answers": {
+        "a": "Körszelet",
+        "b": "Körív",
+        "c": "Húr"
+      },
+      "correct": "b",
+      "explanation": "A körvonal egy darabját körívnek hívjuk. ✅ Megoldás: A neve körív."
+    },
+    {
+      "question": "Egy egyenes két pontjának a távolsága",
+      "answers": {
+        "a": "A szakasz.",
+        "b": "A metszéspont.",
+        "c": "A sugár."
+      },
+      "correct": "a",
+      "explanation": "A szakasz a két pont között húzott egyenes. ✅ Megoldás: A szakasz"
+    },
+    {
+      "question": "Ha két pont meg van adva a síkon, akkor ezeken a pontokon át hány egyenes húzható?",
+      "answers": {
+        "a": "Egy sem",
+        "b": "Egy",
+        "c": "Kettő"
+      },
+      "correct": "b",
+      "explanation": "Két különböző ponton át pontosan egy egyenes húzható. ✅ Megoldás: Egy"
+    },
+    {
+      "question": "Ha egy egyenes egy síkra merőleges, akkor...",
+      "answers": {
+        "a": "Párhuzamos a síkban lévő minden egyenessel.",
+        "b": "Metszi a síkot.",
+        "c": "Merőleges a síkban lévő minden egyenesre, ami átmegy a döféspontján."
+      },
+      "correct": "c",
+      "explanation": "Ha egy egyenes merőleges egy síkra, akkor a síkban lévő bármely egyenesre is merőleges, amennyiben a döfésponton halad át.  ✅ Megoldás: Merőleges a síkban lévő minden egyenesre, ami átmegy a döféspontján."
+    },
+    {
+      "question": "Melyik pont nem tartozik a körhöz?",
+      "answers": {
+        "a": "A középpont.",
+        "b": "A sugár vonala.",
+        "c": "A körön lévő pont."
+      },
+      "correct": "b",
+      "explanation": "A körön lévő pontok, a körvonal részei, és a középpont is a kör része. A sugár pedig egy szakasz, ami a középpontból a körvonalra fut. ✅ Megoldás: A sugár."
+    },
+    {
+      "question": "Mi a helyes definíciója a síknak?",
+      "answers": {
+        "a": "A végtelen egyenesek halmaza.",
+        "b": "Egy lapos felület, ami minden irányban kiterjed.",
+        "c": "Egy pont."
+      },
+      "correct": "b",
+      "explanation": "A sík egy lapos felület, ami minden irányban kiterjed. ✅ Megoldás: Egy lapos felület, ami minden irányban kiterjed."
+    },
+    {
+      "question": "Mi a neve a pontok összessége, ami a körvonalból és a belsejéből áll?",
+      "answers": {
+        "a": "Kör.",
+        "b": "Körlap.",
+        "c": "Átmérő."
+      },
+      "correct": "b",
+      "explanation": "A körlap a körvonal és a kör belsejének az összessége. ✅ Megoldás: Körlap."
+    },
+    {
+      "question": "Mi a helyes jelölése a síknak?",
+      "answers": {
+        "a": "egyenesen",
+        "b": "A, B, C betűkkel",
+        "c": "α, β, γ betűkkel"
+      },
+      "correct": "c",
+      "explanation": "A síkot általában görög betűkkel (pl. α, β, γ) jelöljük. ✅ Megoldás: α, β, γ betűkkel"
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A szakasznak két végpontja van.",
+        "b": "A síkban a pontok fektethetők, a pontok egyenese, majd síkja.",
+        "c": "A pontnak van hossza."
+      },
+      "correct": "c",
+      "explanation": "A pontoknak nincs hossza, mert kiterjedés nélküliek. ✅ Megoldás: A pontnak van hossza."
+    },
+    {
+      "question": "Ha egy egyenes a síkra merőleges, hány fokos szöget zár be a síkkal?",
+      "answers": {
+        "a": "0",
+        "b": "90",
+        "c": "180"
+      },
+      "correct": "b",
+      "explanation": "A síkra merőleges egyenes 90 fokos szöget zár be a síkkal. ✅ Megoldás: 90"
+    }
+  ]
 }

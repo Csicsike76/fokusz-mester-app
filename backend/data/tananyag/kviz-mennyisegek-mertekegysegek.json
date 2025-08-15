@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz mennyisegek mertekegysegek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik a hosszúság alapmértékegysége az SI-rendszerben?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "kilométer (km)",
+        "c": "centiméter (cm)"
+      },
+      "correct": "a",
+      "explanation": "A hosszúság alapmértékegysége a méter (m)."
+    },
+    {
+      "question": "Mivel mérünk tömeget?",
+      "answers": {
+        "a": "Mérleggel",
+        "b": "Vonalzóval",
+        "c": "Hőmérővel"
+      },
+      "correct": "a",
+      "explanation": "Tömeget mérleggel mérünk."
+    },
+    {
+      "question": "Mennyi 1500 gramm kilogrammban?",
+      "answers": {
+        "a": "1,5 kg",
+        "b": "15 kg",
+        "c": "0,15 kg"
+      },
+      "correct": "a",
+      "explanation": "1500 gramm az 1,5 kg."
+    },
+    {
+      "question": "Mi a fizikai mennyiség?",
+      "answers": {
+        "a": "A testek és jelenségek mérhető tulajdonsága.",
+        "b": "A testek színe és szaga.",
+        "c": "Csak a számérték, mértékegység nélkül."
+      },
+      "correct": "a",
+      "explanation": "A helyes definíció az, hogy a testek és jelenségek mérhető tulajdonsága."
+    },
+    {
+      "question": "Egy téglalap oldalai 5 cm és 10 cm. Hogyan számolnád ki a területét?",
+      "answers": {
+        "a": "Közvetett méréssel (számolással).",
+        "b": "Közvetlen méréssel (leolvasással).",
+        "c": "Becsléssel."
+      },
+      "correct": "a",
+      "explanation": "A területet közvetett méréssel (számolással) határozzuk meg."
+    },
+    {
+      "question": "Mi a célja a mérés többszöri elvégzésének és az eredmények átlagolásának?",
+      "answers": {
+        "a": "A mérési hiba csökkentése.",
+        "b": "Az idő elhúzása.",
+        "c": "A mértékegység megváltoztatása."
+      },
+      "correct": "a",
+      "explanation": "A mérések átlagolásának célja a mérési hiba csökkentése."
+    },
+    {
+      "question": "Melyik NEM fizikai mennyiség?",
+      "answers": {
+        "a": "Szépség",
+        "b": "Hőmérséklet",
+        "c": "Térfogat"
+      },
+      "correct": "a",
+      "explanation": "A szépség nem fizikai mennyiség."
+    },
+    {
+      "question": "Melyik jelenti a legnagyobb távolságot?",
+      "answers": {
+        "a": "2 km",
+        "b": "200 m",
+        "c": "20000 cm"
+      },
+      "correct": "a",
+      "explanation": "A 2 km a legnagyobb távolság."
+    },
+    {
+      "question": "Mit jelent a 'kilo-' prefixum?",
+      "answers": {
+        "a": "Százszoros",
+        "b": "Ezerszeres",
+        "c": "Ezredrész"
+      },
+      "correct": "b",
+      "explanation": "A 'kilo-' prefixum ezerszeres szorzót jelent."
+    },
+    {
+      "question": "Mi az idő alapmértékegysége az SI-rendszerben?",
+      "answers": {
+        "a": "perc (min)",
+        "b": "másodperc (s)",
+        "c": "óra (h)"
+      },
+      "correct": "b",
+      "explanation": "Az idő alapmértékegysége a másodperc (s)."
+    },
+    {
+      "question": "Mivel mérünk időtartamot?",
+      "answers": {
+        "a": "Mérleggel",
+        "b": "Órával, stopperrel",
+        "c": "Vonalzóval"
+      },
+      "correct": "b",
+      "explanation": "Időtartamot órával vagy stopperrel mérünk."
+    },
+    {
+      "question": "Mennyi 0.5 liter köbcentiméterben (cm³)?",
+      "answers": {
+        "a": "50 cm³",
+        "b": "500 cm³",
+        "c": "5 cm³"
+      },
+      "correct": "b",
+      "explanation": "0.5 liter = 0.5 * 1000 cm³ = 500 cm³. ✅ Megoldás: 0.5 liter az 500 köbcentiméter."
+    },
+    {
+      "question": "Melyik NEM a hosszúság mértékegysége?",
+      "answers": {
+        "a": "fényév",
+        "b": "gramm",
+        "c": "mérföld"
+      },
+      "correct": "b",
+      "explanation": "A gramm nem a hosszúság mértékegysége."
+    },
+    {
+      "question": "Egy edényben 2 dl víz van. Hány liter ez?",
+      "answers": {
+        "a": "2 l",
+        "b": "0.2 l",
+        "c": "0.02 l"
+      },
+      "correct": "b",
+      "explanation": "Tudjuk, hogy 1 liter = 10 deciliter (dl). A decilitert 10-zel kell osztani a literhez: 2 / 10 = 0.2. ✅ Megoldás: 2 dl az 0.2 liter."
+    },
+    {
+      "question": "Melyik állítás helyes?",
+      "answers": {
+        "a": "A 3/4 tört kisebb, mint az 1/2.",
+        "b": "1 m² = 100 cm²",
+        "c": "1 m = 1000 mm"
+      },
+      "correct": "b",
+      "explanation": "1 m = 1000 mm. A helyes állítás, hogy 1 m = 1000 mm."
+    },
+    {
+      "question": "Miért fontos a mérés?",
+      "answers": {
+        "a": "Mert a mérések alapján tudunk következtetéseket levonni a világról.",
+        "b": "Mert jó érzés a méréssel foglalkozni.",
+        "c": "Mert a tanár kéri."
+      },
+      "correct": "a",
+      "explanation": "A mérések alapján tudjuk a dolgokat vizsgálni, a mérések alapján következtetéseket tudunk levonni a világról. ✅ Megoldás: Mert a mérések alapján tudunk következtetéseket levonni a világról."
+    },
+    {
+      "question": "Miért melegszik fel a kezed, ha megdörzsölöd a kezünket?",
+      "answers": {
+        "a": "Mert hőt adunk hozzá.",
+        "b": "Mert a súrlódás hőt termel.",
+        "c": "Mert a kezünk nagyobb lesz."
+      },
+      "correct": "b",
+      "explanation": "A súrlódás hőt termel, ami felmelegíti a kezünket. ✅ Megoldás: Mert a súrlódás hőt termel."
+    },
+    {
+      "question": "Melyik erő nem végez munkát, ha egy test vízszintesen mozog?",
+      "answers": {
+        "a": "Súrlódási erő.",
+        "b": "Súlyerő.",
+        "c": "Húzóerő."
+      },
+      "correct": "b",
+      "explanation": "A súlyerő (függőleges) merőleges a vízszintes elmozdulásra, ezért nem végez munkát. ✅ Megoldás: Súlyerő"
+    },
+    {
+      "question": "Mi a súrlódási erő?",
+      "answers": {
+        "a": "Az a erő, ami a test mozgását akadályozza, vagy megakadályozza a megindulást.",
+        "b": "A testet a Föld felé vonzó erő.",
+        "c": "Az, hogy a test a mérete."
+      },
+      "correct": "a",
+      "explanation": "A súrlódási erő a test mozgását akadályozza. ✅ Megoldás: Az a erő, ami a test mozgását akadályozza, vagy megakadályozza a megindulást."
+    },
+    {
+      "question": "Mi történik, ha egy testet egyenletes sebességgel emelünk?",
+      "answers": {
+        "a": "Nő a helyzeti energiája.",
+        "b": "Csökken a helyzeti energiája.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "A helyzeti energia függ a magasságtól, tehát ha emelünk, nő. ✅ Megoldás: Nő"
+    },
+    {
+      "question": "Melyik mennyiségre igaz, hogy arányos a test tömegével?",
+      "answers": {
+        "a": "A mozgási energia.",
+        "b": "A helyzeti energia.",
+        "c": "Mindkettő."
+      },
+      "correct": "c",
+      "explanation": "Mind a mozgási, mind a helyzeti energia arányos a test tömegével. ✅ Megoldás: Mindkettő."
+    },
+    {
+      "question": "Mi történik, ha egy testet a levegőbe dobunk?",
+      "answers": {
+        "a": "A mozgási energia átalakul helyzeti energiává.",
+        "b": "A helyzeti energia csökken.",
+        "c": "A mozgási energia csökken."
+      },
+      "correct": "a",
+      "explanation": "A feldobott test mozgási energiája helyzeti energiává alakul át. ✅ Megoldás: A mozgási energia átalakul helyzeti energiává."
+    },
+    {
+      "question": "Mi a gép hatásfoka?",
+      "answers": {
+        "a": "A gép súlya.",
+        "b": "A gép hatásosságát mutató szám.",
+        "c": "A gép mérete."
+      },
+      "correct": "b",
+      "explanation": "A hatásfok megmutatja, hogy a gép a befektetett energiából mennyi hasznos munkát tud végezni. ✅ Megoldás: A gép hatásosságát mutató szám."
+    },
+    {
+      "question": "Egy emelő hatásfoka 80%. Ez mit jelent?",
+      "answers": {
+        "a": "A befektetett munka 80%-a hasznosul.",
+        "b": "A hasznos munka 80%-a hasznosul.",
+        "c": "A gép 80 kg súlyt tud emelni."
+      },
+      "correct": "b",
+      "explanation": "A hatásfok 80% azt jelenti, hogy a befektetett energia 80%-a hasznosul munkavégzésre. ✅ Megoldás: A hasznos munka 80%-a hasznosul."
+    },
+    {
+      "question": "Miért nem lehet a hatásfok 100% feletti?",
+      "answers": {
+        "a": "Mert a munka nem adható át tökéletesen.",
+        "b": "Mert a gépnek súlya van.",
+        "c": "Mert a gép sokkal kisebb a valóságnál."
+      },
+      "correct": "a",
+      "explanation": "A hatásfok nem lehet 100%-nál nagyobb, mert a hasznos munka nem lehet nagyobb, mint a befektetett munka. A gyakorlatban mindig vannak veszteségek.  ✅ Megoldás: Mert a munka nem adható át tökéletesen."
+    }
+  ]
 }

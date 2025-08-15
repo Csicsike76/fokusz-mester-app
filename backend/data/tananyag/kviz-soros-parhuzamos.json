@@ -3,6 +3,227 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz soros parhuzamos\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz soros parhuzamos\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi történik, ha egy sorba kapcsolt áramkörben az egyik izzó kiég?",
+      "answers": {
+        "a": "A többi izzó is kialszik.",
+        "b": "A többi izzó fényesebben világít.",
+        "c": "A többi izzó tovább világít."
+      },
+      "correct": "a",
+      "explanation": "A soros kapcsolásban az áramnak csak egyetlen útja van. Ha ez az út bárhol megszakad, például egy izzó kiégésével (az izzószál elszakad), az egész áramkör nyitottá válik, és az áramlás mindenhol megszűnik. ✅ Megoldás: A többi izzó is kialszik."
+    },
+    {
+      "question": "Melyik kapcsolási módot használják jellemzően a lakásokban a konnektorok és lámpák bekötésére?",
+      "answers": {
+        "a": "Párhuzamos kapcsolást.",
+        "b": "Soros kapcsolást.",
+        "c": "Vegyes kapcsolást."
+      },
+      "correct": "a",
+      "explanation": "A lakásokban párhuzamos kapcsolást alkalmaznak, mert így minden fogyasztó (lámpa, TV, hűtő) egymástól függetlenül működtethető. Ha egy kiég, a többi még működik, és mindegyik a hálózati feszültséget kapja.  ✅ Megoldás: Párhuzamos kapcsolást."
+    },
+    {
+      "question": "Hogyan változik az izzók fényereje, ha egy meglévő mellé még egy izzót sorba kötünk?",
+      "answers": {
+        "a": "Minden izzó halványabban fog világítani.",
+        "b": "Minden izzó fényesebben fog világítani.",
+        "c": "Az izzók fényereje nem változik."
+      },
+      "correct": "a",
+      "explanation": "Soros kapcsolásnál a fogyasztók 'osztoznak' az áramforrás feszültségén. Ha több izzót kötünk sorba, akkor egy izzóra kisebb feszültség jut, ezért mindegyik halványabban fog világítani. ✅ Megoldás: Minden izzó halványabban fog világítani."
+    },
+    {
+      "question": "Mit jelent a soros kapcsolás?",
+      "answers": {
+        "a": "A fogyasztók egymás után, egyetlen áramköri ágban vannak elhelyezve.",
+        "b": "A fogyasztók külön ágakon helyezkednek el.",
+        "c": "A fogyasztók nincsenek összekötve."
+      },
+      "correct": "a",
+      "explanation": "Soros kapcsolás esetén a fogyasztók úgy vannak összekötve, mint a láncszemek: az egyik vége a másik elejéhez csatlakozik, így az áramnak csak egyetlen útja van, amin végighaladhat. ✅ Megoldás: A fogyasztók egymás után, egyetlen áramköri ágban vannak elhelyezve."
+    },
+    {
+      "question": "Egy párhuzamos kapcsolásban minden ágban...",
+      "answers": {
+        "a": "...ugyanakkora feszültség mérhető.",
+        "b": "...ugyanakkora az áramerősség.",
+        "c": "...más-más feszültség mérhető."
+      },
+      "correct": "a",
+      "explanation": "Párhuzamos kapcsolás nagy előnye, hogy minden párhuzamosan kapcsolt ágra ugyanakkora feszültség jut, ami megegyezik az áramforrás feszültségével. ✅ Megoldás: ...ugyanakkora feszültség mérhető."
+    },
+    {
+      "question": "Hogyan viszonyul a főág áramerőssége a mellékágak áramerősségéhez párhuzamos kapcsolásnál?",
+      "answers": {
+        "a": "A főág áramerőssége a mellékágak áramerősségének összege.",
+        "b": "A főág áramerőssége kisebb, mint bármelyik mellékágé.",
+        "c": "A főág és a mellékágak áramerőssége mindig megegyezik."
+      },
+      "correct": "a",
+      "explanation": "A csomóponti törvény értelmében az áram a párhuzamos ágakon szétoszlik. Az áramforrásból kilépő főági áramerősség pontosan annyi, mint a mellékágakban folyó áramok összege. ✅ Megoldás: A főág áramerőssége a mellékágak áramerősségének összege."
+    },
+    {
+      "question": "Mi történik, ha egy elemet és egy kapcsolót sorba kötünk egy izzóval?",
+      "answers": {
+        "a": "Működőképes áramkört kapunk.",
+        "b": "Rövidzárlat keletkezik.",
+        "c": "Az izzó nem fog világítani."
+      },
+      "correct": "a",
+      "explanation": "Ez egy egyszerű, alapvető áramkör felépítése: áramforrás (elem), kapcsoló (az áram út megszakítására/zárására) és fogyasztó (izzó) sorba kötve. Ha a kapcsolót zárjuk, az izzó világítani fog. ✅ Megoldás: Működőképes áramkört kapunk."
+    },
+    {
+      "question": "Soros kapcsolásban a fogyasztókon átfolyó áram...",
+      "answers": {
+        "a": "...minden fogyasztón ugyanakkora.",
+        "b": "...eloszlik a fogyasztók között.",
+        "c": "...a fogyasztók számával nő."
+      },
+      "correct": "a",
+      "explanation": "Mivel soros kapcsolásnál az áramnak csak egy útja van, ugyanazok a töltések haladnak át minden egyes fogyasztón. Ebből következik, hogy az áramerősség az áramkör minden pontján, így minden fogyasztón is megegyezik. ✅ Megoldás: ...minden fogyasztón ugyanakkora."
+    },
+    {
+      "question": "Ha egy 12 V-os elemmel két 2 Ω-os izzót kötsz sorba, mennyi a feszültség egy izzón?",
+      "answers": {
+        "a": "12 V",
+        "b": "6 V",
+        "c": "24 V"
+      },
+      "correct": "b",
+      "explanation": "Soros kapcsolásban a feszültség a fogyasztókon eloszlik. Mivel a két izzó azonos, a feszültség a két izzó között feleződik. Így a feszültség egy izzón: 12 V / 2 = 6 V. ✅ Megoldás: 6 V"
+    },
+    {
+      "question": "Ha a 12V-os elemhez egy 2 ohmos és egy 4 ohmos ellenállást kapcsolunk sorba, akkor...",
+      "answers": {
+        "a": "az áram erőssége ugyanakkora az ellenállásokban.",
+        "b": "a 2 ohmoson nagyobb áram folyik.",
+        "c": " a 4 ohmoson nagyobb áram folyik."
+      },
+      "correct": "a",
+      "explanation": "A soros kapcsolás egyik alapvető tulajdonsága, hogy az áramerősség mindenhol megegyezik. ✅ Megoldás: az áram erőssége ugyanakkora az ellenállásokban."
+    },
+    {
+      "question": "Ha az 5 ohmos és a 10 ohmos ellenállásokat párhuzamosan kapcsoljuk a 12V-os áramkörhöz, akkor mi igaz?",
+      "answers": {
+        "a": "A két ellenálláson folyó áram erőssége megegyezik.",
+        "b": "Az 5 ohmos ellenálláson folyó áram erőssége nagyobb, mint a 10 ohmosban.",
+        "c": "A 10 ohmos ellenálláson folyó áram erőssége nagyobb, mint az 5 ohmosban."
+      },
+      "correct": "b",
+      "explanation": "Párhuzamos kapcsolás esetén mindkét ellenállásra a teljes feszültség jut. Ohm törvénye szerint (I = U/R), ha az U azonos, a kisebb R-en nagyobb áram folyik. ✅ Megoldás: Az 5 ohmos ellenálláson folyó áram erőssége nagyobb, mint a 10 ohmosban."
+    },
+    {
+      "question": "Melyik igaz a párhuzamosan kapcsolt ellenállások eredőjére?",
+      "answers": {
+        "a": "Az eredő ellenállás kisebb, mint a legkisebb tag.",
+        "b": "Az eredő ellenállás az ellenállások összege.",
+        "c": "Az eredő ellenállás nagyobb, mint a legnagyobb tag."
+      },
+      "correct": "a",
+      "explanation": "A párhuzamosan kapcsolt ellenállások eredője mindig kisebb, mint a legkisebb tag. ✅ Megoldás: Az eredő ellenállás kisebb, mint a legkisebb tag."
+    },
+    {
+      "question": "Mi a 20 ohmos és a 30 ohmos ellenállás párhuzamos eredő ellenállása?",
+      "answers": {
+        "a": "50 ohm",
+        "b": "12 ohm",
+        "c": "600 ohm"
+      },
+      "correct": "b",
+      "explanation": "A párhuzamos eredő ellenállás képlete: 1/R_e = 1/R₁ + 1/R₂. Behelyettesítve: 1/R_e = 1/20 + 1/30 = 3/60 + 2/60 = 5/60. Ebből R_e = 60/5 = 12 ohm. ✅ Megoldás: 12 ohm"
+    },
+    {
+      "question": "Mi a kapcsolás a hálózati feszültséghez kötött lámpáknál?",
+      "answers": {
+        "a": "Soros.",
+        "b": "Párhuzamos.",
+        "c": "Vegyes."
+      },
+      "correct": "b",
+      "explanation": "A lakásban a lámpák és a konnektorok párhuzamos kapcsolásban vannak. Ha kiég egy lámpa, a többi tovább működik, mindegyik a hálózati feszültséget kapja. ✅ Megoldás: Párhuzamos."
+    },
+    {
+      "question": "Miért praktikus a párhuzamos kapcsolás?",
+      "answers": {
+        "a": "Mert a fogyasztók függetlenül működnek.",
+        "b": "Mert az áramerősség a fogyasztókon azonos.",
+        "c": "Mert kisebb az ellenállás."
+      },
+      "correct": "a",
+      "explanation": "Párhuzamos kapcsolás esetén a fogyasztók függetlenül működnek, azaz ha egy leáll, a többi továbbra is üzemel. ✅ Megoldás: Mert a fogyasztók függetlenül működnek."
+    },
+    {
+      "question": "Ha egy áramkörben több fogyasztó van, és az egyikben az ellenállás megnő, mi történik?",
+      "answers": {
+        "a": "A többi fogyasztó árama csökken, ha soros a kapcsolás.",
+        "b": "A többi fogyasztó árama nő, ha soros a kapcsolás.",
+        "c": "A többi fogyasztó árama nem változik, ha párhuzamos a kapcsolás."
+      },
+      "correct": "c",
+      "explanation": "Ha egy párhuzamos áramkörben az egyik ágban az ellenállás megváltozik, a többi ág árama független marad, mert mindegyik a teljes feszültséget kapja. Ha soros a kapcsolás, az eredő ellenállás növekedik, ami az áram csökkenéséhez vezet. ✅ Megoldás: A többi fogyasztó árama nem változik, ha párhuzamos a kapcsolás."
+    },
+    {
+      "question": "Ha egy áramkörben a feszültség (U) 12V, az ellenállás (R) 6 ohm, mennyi az áramerősség (I)?",
+      "answers": {
+        "a": "2 A",
+        "b": "72 A",
+        "c": "6 A"
+      },
+      "correct": "a",
+      "explanation": "Ohm-törvény: I = U / R = 12 V / 6 Ω = 2 A. ✅ Megoldás: 2 A."
+    },
+    {
+      "question": "Mitől függ a lámpák fényereje (azaz a rajta átfolyó áram)?",
+      "answers": {
+        "a": "A lámpa feszültségétől, és az áramkörben sorba kötött ellenállások számától.",
+        "b": "A lámpa feszültségétől és a lámpa ellenállásától.",
+        "c": "Csak a lámpa feszültségétől."
+      },
+      "correct": "b",
+      "explanation": "Az izzó fényerejét az átfolyó áram határozza meg. Az Ohm-törvény szerint a feszültség és az ellenállás is meghatározza. ✅ Megoldás: A lámpa feszültségétől és a lámpa ellenállásától."
+    },
+    {
+      "question": "Melyik igaz a feszültségről?",
+      "answers": {
+        "a": "A soros kapcsolásban a feszültség eloszlik, párhuzamosban ugyanakkora.",
+        "b": "A soros kapcsolásban a feszültség ugyanakkora, párhuzamosban eloszlik.",
+        "c": "A feszültség sosem változik a soros és párhuzamos kapcsolásban."
+      },
+      "correct": "a",
+      "explanation": "Soros kapcsolásban a feszültség a fogyasztókon eloszlik, míg a párhuzamos kapcsolásban minden fogyasztó a teljes feszültséget kapja. ✅ Megoldás: A soros kapcsolásban a feszültség eloszlik, párhuzamosban ugyanakkora."
+    },
+    {
+      "question": "Ha egy áramkörben a feszültség 24 V, és az ellenállás 6 ohm, mennyi az áram erőssége (Ohm törvény segítségével)?",
+      "answers": {
+        "a": "4 A",
+        "b": "144 A",
+        "c": "30 A"
+      },
+      "correct": "a",
+      "explanation": "Ohm törvény: I=U/R. I=24/6=4A ✅ Megoldás: 4 A"
+    },
+    {
+      "question": "Ha két azonos, 10 ohmos ellenállást sorba kötünk, mennyi lesz az eredő ellenállás?",
+      "answers": {
+        "a": "5 ohm",
+        "b": "10 ohm",
+        "c": "20 ohm"
+      },
+      "correct": "c",
+      "explanation": "Soros kapcsolás esetén az eredő ellenállás = R1 + R2. 10+10=20. ✅ Megoldás: 20 ohm"
+    },
+    {
+      "question": "Ha két azonos, 10 ohmos ellenállást párhuzamosan kötünk, mennyi lesz az eredő ellenállás?",
+      "answers": {
+        "a": "5 ohm",
+        "b": "10 ohm",
+        "c": "20 ohm"
+      },
+      "correct": "a",
+      "explanation": "Két azonos ellenállás párhuzamos eredője: R_e = R / 2 = 10/2 = 5. ✅ Megoldás: 5 ohm"
+    }
+  ]
 }

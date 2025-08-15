@@ -3,6 +3,227 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz parhuzamos meroleges\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz parhuzamos meroleges\" című tananyag.",
+  "questions": [
+    {
+      "question": "Hogyan definiáljuk a párhuzamos egyeneseket?",
+      "answers": {
+        "a": "Két egyenes, amelyek 90°-os szöget zárnak be.",
+        "b": "Két egyenes, amelyek egy síkban vannak és nem metszik egymást.",
+        "c": "Két egyenes, amelyeknek van közös pontjuk."
+      },
+      "correct": "b",
+      "explanation": "Két egyenes akkor párhuzamos, ha egy síkban fekszenek és nincs közös pontjuk. A metszéspont hiánya a kulcs."
+    },
+    {
+      "question": "Mi a szakasz felezőmerőlegesének definíciója?",
+      "answers": {
+        "a": "Egy egyenes, amely merőleges a szakaszra és átmegy a felezőpontján.",
+        "b": "Egy egyenes, amely párhuzamos a szakaszt.",
+        "c": "Egy egyenes, ami a szakaszt 1:2 arányban osztja."
+      },
+      "correct": "a",
+      "explanation": "A név mindent elárul: az egyenesnek egyszerre kell merőlegesnek lennie a szakaszra ÉS átmennie annak a felezőpontján."
+    },
+    {
+      "question": "Hány, egy adott egyenessel párhuzamos egyenes húzható egy külső ponton keresztül?",
+      "answers": {
+        "a": "Végtelen sok",
+        "b": "Pontosan kettő",
+        "c": "Pontosan egy"
+      },
+      "correct": "c",
+      "explanation": "Ez a párhuzamossági axióma (vagy Euklidész 5. posztulátuma), a síkgeometria egyik alaptétele."
+    },
+    {
+      "question": "Ha két párhuzamos egyenest egy harmadik (szelő) metsz, milyenek a belső váltószögek?",
+      "answers": {
+        "a": "Összegük 180°.",
+        "b": "Mindig egyenlőek.",
+        "c": "Mindig derékszögek."
+      },
+      "correct": "b",
+      "explanation": "A belső váltószögek (a 'Z' betűt formázó szögek) a párhuzamosság esetén mindig egyenlő nagyságúak. Ez az egyik párhuzamossági kritérium."
+    },
+    {
+      "question": "Hogy nevezzük azokat a szögeket, amelyek a metsző ugyanazon oldalán, a párhuzamosok között vannak?",
+      "answers": {
+        "a": "egyállású szögek",
+        "b": "társszögek",
+        "c": "váltószögek"
+      },
+      "correct": "b",
+      "explanation": "Ez a definíció a 'társszög' fogalmát írja le."
+    },
+    {
+      "question": "Egy létra 75°-os szöget zár be a talajjal. Ha a fal merőleges a talajra, mekkora szöget zár be a létra a fallal?",
+      "answers": {
+        "a": "90°",
+        "b": "75°",
+        "c": "15°"
+      },
+      "correct": "c",
+      "explanation": "A létra, a fal és a talaj egy derékszögű háromszöget alkotnak. A szögeik: 90° (a falnál), 75° (a talajnál). A háromszög belső szögeinek összege 180°. A harmadik szög: 180° - 90° - 75° = 15°. ✅ Megoldás: 15°-os szöget."
+    },
+    {
+      "question": "Ha két egyenest egy harmadik úgy metsz, hogy a váltószögek egyenlőek, akkor a két egyenes...",
+      "answers": {
+        "a": "metsző.",
+        "b": "merőleges.",
+        "c": "párhuzamos."
+      },
+      "correct": "c",
+      "explanation": "Ha a váltószögek (vagy az egyállású szögek) egyenlőek, az bizonyítja, hogy a két eredeti egyenes párhuzamos egymással."
+    },
+    {
+      "question": "Egy paralelogramma egyik belső szöge 60°. Mekkora a mellette lévő belső szög?",
+      "answers": {
+        "a": "60°",
+        "b": "120°",
+        "c": "90°"
+      },
+      "correct": "b",
+      "explanation": "A paralelogramma szomszédos szögeinek összege 180°. 180° - 60° = 120°. ✅ Megoldás: 120°."
+    },
+    {
+      "question": "Egy 60°-os szöget hány fokos kiegészítő szöge?",
+      "answers": {
+        "a": "30°",
+        "b": "120°",
+        "c": "240°"
+      },
+      "correct": "a",
+      "explanation": "180°-60=120° ✅ Megoldás: 120°"
+    },
+    {
+      "question": "Melyik négyszögnek felezik az átlói egymást?",
+      "answers": {
+        "a": "Trapéz",
+        "b": "Deltoid",
+        "c": "Paralelogramma"
+      },
+      "correct": "c",
+      "explanation": "A paralelogramma átlói felezik egymást."
+    },
+    {
+      "question": "Melyik állítás NEM igaz?",
+      "answers": {
+        "a": "Ha két egyenes merőleges egy harmadikra, akkor párhuzamosak.",
+        "b": "Ha két egyenes párhuzamos egy harmadikkal, akkor párhuzamosak.",
+        "c": "Ha két egyenes metszi egymást, nem lehetnek párhuzamosak."
+      },
+      "correct": "a",
+      "explanation": "Ha két egyenes merőleges egy harmadikra, akkor azok párhuzamosak. ✅ Megoldás: Ha két egyenes merőleges egy harmadikra, akkor párhuzamosak."
+    },
+    {
+      "question": "Mi a 90°-os szög másik neve?",
+      "answers": {
+        "a": "hegyesszög",
+        "b": "tompaszög",
+        "c": "derékszög"
+      },
+      "correct": "c",
+      "explanation": "A derékszög 90°-os. ✅ Megoldás: Derékszög"
+    },
+    {
+      "question": "Ha egy egyenes a síkra merőleges, milyen a szöge a síkkal?",
+      "answers": {
+        "a": "0 fok",
+        "b": "90 fok",
+        "c": "180 fok"
+      },
+      "correct": "b",
+      "explanation": "Ha a hajlásszög 90°, az a síkra merőlegesség definíciója. ✅ Megoldás: 90 fok."
+    },
+    {
+      "question": "Melyik NEM a vonalzód egyik egysége?",
+      "answers": {
+        "a": "centiméter",
+        "b": "méter",
+        "c": "óra"
+      },
+      "correct": "c",
+      "explanation": "A vonalzó hosszúságot mér, a mértékegysége cm vagy m.  ✅ Megoldás: óra"
+    },
+    {
+      "question": "Mit jelent a 'metsző' szó?",
+      "answers": {
+        "a": "Egyik helyen nem találkoznak.",
+        "b": "Egy pontban találkoznak.",
+        "c": "Sok pontban találkoznak."
+      },
+      "correct": "b",
+      "explanation": "A metsző egyeneseknek egy közös pontja van. ✅ Megoldás: Egy pontban találkoznak."
+    },
+    {
+      "question": "Mi a 12, 13, 14, 15 számok számtani közepe?",
+      "answers": {
+        "a": "13,5",
+        "b": "13",
+        "c": "13,25"
+      },
+      "correct": "a",
+      "explanation": "(12+13+14+15)/4=54/4=13.5 ✅ Megoldás: 13,5"
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A két egyenes metszéspontja egy pont.",
+        "b": "A síkok nem lehetnek kitérők.",
+        "c": "Ha egyenesre egy pontból merőlegest állítunk, egyet kapunk"
+      },
+      "correct": "b",
+      "explanation": "A síkok lehetnek kitérők, nem csak metszők vagy párhuzamosak. ✅ Megoldás: Ha két egyenes metszi egymást, nem lehetnek párhuzamosak."
+    },
+    {
+      "question": "Mi a 4.5 + (-4.5) összege?",
+      "answers": {
+        "a": "4.5",
+        "b": "0",
+        "c": "-4.5"
+      },
+      "correct": "b",
+      "explanation": "A szám és az ellentettjének összege mindig 0. ✅ Megoldás: 0"
+    },
+    {
+      "question": "Ha egy szöget elfelezünk, akkor mit kapunk?",
+      "answers": {
+        "a": "Egy nagyobb szöget.",
+        "b": "Két egyenlő szöget.",
+        "c": "Egy tompaszöget."
+      },
+      "correct": "b",
+      "explanation": "A szögfelező a szöget két egyenlő részre osztja. ✅ Megoldás: Két egyenlő szöget."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Két egyenes lehet párhuzamos.",
+        "b": "Egy szakasz része az egyenesnek.",
+        "c": "Két pont lehet merőleges."
+      },
+      "correct": "c",
+      "explanation": "A merőlegesség két egyenes közötti viszony. Pontok nem lehetnek merőlegesek. ✅ Megoldás: Két pont lehet merőleges."
+    },
+    {
+      "question": "Melyik a konvex (domború) négyszög?",
+      "answers": {
+        "a": "Amelyiknek van 180°-nál nagyobb szöge.",
+        "b": "Minden szöge 180°-nál kisebb.",
+        "c": "Amelyiknek minden oldala egyenlő."
+      },
+      "correct": "b",
+      "explanation": "A konvex négyszög definíciója: minden belső szöge kisebb 180°-nál. ✅ Megoldás: Minden szöge 180°-nál kisebb."
+    },
+    {
+      "question": "Ha két egyenes egy pontban metszi egymást, hány szöget hoznak létre?",
+      "answers": {
+        "a": "2",
+        "b": "3",
+        "c": "4"
+      },
+      "correct": "c",
+      "explanation": "A metszéspontban 4 szög keletkezik. ✅ Megoldás: 4"
+    }
+  ]
 }

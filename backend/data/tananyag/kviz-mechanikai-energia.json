@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz mechanikai energia\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi az energia?",
+      "answers": {
+        "a": "A test tömege.",
+        "b": "A test sebessége.",
+        "c": "A test munkavégző képessége."
+      },
+      "correct": "c",
+      "explanation": "Az energia a munka végzésének képessége. A test képes energiát birtokolni és átadni, amivel munkát tud végezni.  ✅ Megoldás: A test munkavégző képessége."
+    },
+    {
+      "question": "Milyen mértékegysége van az energiának?",
+      "answers": {
+        "a": "kilogramm (kg)",
+        "b": "joule (J)",
+        "c": "méter (m)"
+      },
+      "correct": "b",
+      "explanation": "Az energia mértékegysége a joule (J). ✅ Megoldás: joule (J)"
+    },
+    {
+      "question": "Melyik energiafajta tartozik a mechanikai energiához?",
+      "answers": {
+        "a": "Hőenergia.",
+        "b": "Kémiai energia.",
+        "c": "Mozgási energia."
+      },
+      "correct": "c",
+      "explanation": "A mechanikai energia a mozgással és a helyzettel kapcsolatos energia, mint a mozgási vagy a helyzeti energia. ✅ Megoldás: Mozgási energia."
+    },
+    {
+      "question": "Mit jelent a mozgási energia?",
+      "answers": {
+        "a": "Egy test súlyát.",
+        "b": "A mozgó test energiáját.",
+        "c": "A nyugalomban lévő test energiáját."
+      },
+      "correct": "b",
+      "explanation": "A mozgási energia a mozgó test energiája, ami a test tömegétől és a sebességétől függ. ✅ Megoldás: A mozgó test energiáját."
+    },
+    {
+      "question": "Hogyan számoljuk ki a mozgási energiát (Em)?",
+      "answers": {
+        "a": "Em = m * g * h",
+        "b": "Em = (1/2) * m * v²",
+        "c": "Em = m * v"
+      },
+      "correct": "b",
+      "explanation": "A mozgási energia (Em) képlete: Em = (1/2) * m * v², ahol 'm' a tömeg, 'v' a sebesség. ✅ Megoldás: Em = (1/2) * m * v²"
+    },
+    {
+      "question": "Mi a helyzeti energia?",
+      "answers": {
+        "a": "Egy test sebessége.",
+        "b": "A test helyzetéből adódó energia.",
+        "c": "Egy test súlya."
+      },
+      "correct": "b",
+      "explanation": "A helyzeti energia a test helyzetéből adódó energia. ✅ Megoldás: A test helyzetéből adódó energia."
+    },
+    {
+      "question": "Hogyan számoljuk ki a helyzeti energiát (Eh)?",
+      "answers": {
+        "a": "Eh = m * g * h",
+        "b": "Eh = (1/2) * m * v²",
+        "c": "Eh = m * v"
+      },
+      "correct": "a",
+      "explanation": "A helyzeti energia (Eh) képlete: Eh = m * g * h, ahol 'm' a tömeg, 'g' a nehézségi gyorsulás, 'h' a magasság. ✅ Megoldás: Eh = m * g * h"
+    },
+    {
+      "question": "Mi a nehézségi gyorsulás jele?",
+      "answers": {
+        "a": "m",
+        "b": "g",
+        "c": "h"
+      },
+      "correct": "b",
+      "explanation": "A nehézségi gyorsulás jele 'g'. A Földön kb. 9.81 m/s². ✅ Megoldás: g"
+    },
+    {
+      "question": "Mi történik a helyzeti energiával, ha egy testet leejtünk?",
+      "answers": {
+        "a": "Nő.",
+        "b": "Csökken, majd mozgási energiává alakul.",
+        "c": "Ugyanannyi marad."
+      },
+      "correct": "b",
+      "explanation": "Ahogy a test a magasságot veszít, a helyzeti energiája csökken, és mozgási energiává alakul. ✅ Megoldás: Csökken, majd mozgási energiává alakul."
+    },
+    {
+      "question": "Mi a mechanikai energia megmaradásának elve?",
+      "answers": {
+        "a": "A mechanikai energia mindig csökken.",
+        "b": "A mechanikai energia egy zárt rendszerben állandó marad, ha nincsenek súrlódási erők.",
+        "c": "A mechanikai energia nagysága a test alakjától függ."
+      },
+      "correct": "b",
+      "explanation": "A mechanikai energia egy zárt rendszerben állandó marad, ha nincsenek súrlódási erők. ✅ Megoldás: A mechanikai energia egy zárt rendszerben állandó marad, ha nincsenek súrlódási erők."
+    },
+    {
+      "question": "Ha egy testet egyenletes sebességgel emelünk, mekkora a mozgási energiájának a változása?",
+      "answers": {
+        "a": "Nő.",
+        "b": "Csökken.",
+        "c": "Nem változik."
+      },
+      "correct": "c",
+      "explanation": "Ha a sebesség nem változik, a mozgási energia sem változik. ✅ Megoldás: Nem változik."
+    },
+    {
+      "question": "Ha egy 2 kg-os test 5 m/s sebességgel mozog, mennyi a mozgási energiája?",
+      "answers": {
+        "a": "10 J",
+        "b": "25 J",
+        "c": "50 J"
+      },
+      "correct": "b",
+      "explanation": "Em = (1/2) * m * v² = (1/2) * 2 kg * (5 m/s)² = 25 J. ✅ Megoldás: 25 J"
+    },
+    {
+      "question": "Ha egy 3 kg-os test 2 méter magasan van, mekkora a helyzeti energiája?",
+      "answers": {
+        "a": "6 J",
+        "b": "58.86 J",
+        "c": "12 J"
+      },
+      "correct": "b",
+      "explanation": "Eh = m * g * h = 3 kg * 9,81 m/s² * 2 m ≈ 58.86 J. ✅ Megoldás: 58.86 J"
+    },
+    {
+      "question": "Mi a súrlódás hatása a mechanikai energiára?",
+      "answers": {
+        "a": "Növeli a mechanikai energiát.",
+        "b": "Nem befolyásolja a mechanikai energiát.",
+        "c": "Csökkenti a mechanikai energiát, hővé alakítja."
+      },
+      "correct": "c",
+      "explanation": "A súrlódás csökkenti a mechanikai energiát, mert az energia hővé alakul.  ✅ Megoldás: Csökkenti a mechanikai energiát, hővé alakítja."
+    },
+    {
+      "question": "Ha egy test lejtőn csúszik lefelé, mi történik a helyzeti energiájával?",
+      "answers": {
+        "a": "Nő.",
+        "b": "Csökken.",
+        "c": "Ugyanannyi marad."
+      },
+      "correct": "b",
+      "explanation": "A test a magasságát veszti, így a helyzeti energiája csökken. ✅ Megoldás: Csökken."
+    },
+    {
+      "question": "Melyik energiára igaz, hogy arányos a test tömegével?",
+      "answers": {
+        "a": "A mozgási energia.",
+        "b": "A helyzeti energia.",
+        "c": "Mindkettő."
+      },
+      "correct": "c",
+      "explanation": "Mind a mozgási, mind a helyzeti energia arányos a test tömegével. ✅ Megoldás: Mindkettő."
+    },
+    {
+      "question": "Mi történik a mechanikai energiával, ha egy test ütközik egy másik testtel?",
+      "answers": {
+        "a": "Megnő.",
+        "b": "Csökken, hővé alakulhat.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "Az ütközés során a mechanikai energia egy része hővé alakulhat a súrlódás miatt. ✅ Megoldás: Csökken, hővé alakulhat."
+    },
+    {
+      "question": "Ha egy 1 kg-os test 10 m/s sebességgel halad, majd megáll, mekkora a mozgási energiájának a változása?",
+      "answers": {
+        "a": "0 J",
+        "b": "50 J",
+        "c": "100 J"
+      },
+      "correct": "b",
+      "explanation": "Em = (1/2) * m * v² = (1/2) * 1 kg * (10 m/s)² = 50 J. Ha megáll, a mozgási energia 0 lesz. A változás 50 - 0 = 50 J. ✅ Megoldás: 50 J"
+    },
+    {
+      "question": "Mi a kapcsolata a mozgási energia és a sebesség között?",
+      "answers": {
+        "a": "Egyenesen arányosak.",
+        "b": "Fordítottan arányosak.",
+        "c": "A mozgási energia a sebesség négyzetével arányos."
+      },
+      "correct": "c",
+      "explanation": "A mozgási energia a sebesség négyzetével arányos. ✅ Megoldás: A mozgási energia a sebesség négyzetével arányos."
+    },
+    {
+      "question": "Mi a kapcsolati a mechanikai energia és a munkavégzés között?",
+      "answers": {
+        "a": "A munkavégzés a mechanikai energia változása.",
+        "b": "A munkavégzés nem függ a mechanikai energiától.",
+        "c": "A mechanikai energia a munkavégzés mértékegysége."
+      },
+      "correct": "a",
+      "explanation": "A munkavégzés a mechanikai energia megváltozását jelenti. ✅ Megoldás: A munkavégzés a mechanikai energia változása."
+    },
+    {
+      "question": "Ha egy testet 2 méterrel magasabbra emelünk, mi változik?",
+      "answers": {
+        "a": "A mozgási energiája.",
+        "b": "A helyzeti energiája.",
+        "c": "A tömege."
+      },
+      "correct": "b",
+      "explanation": "A test magassága változik, ezért a helyzeti energiája is változik. ✅ Megoldás: A helyzeti energiája."
+    },
+    {
+      "question": "Melyik a mechanikai energia legfontosabb megmaradási feltétele?",
+      "answers": {
+        "a": "A testnek nem szabad mozognia.",
+        "b": "Nincs súrlódás.",
+        "c": "A testnek nagy tömegűnek kell lennie."
+      },
+      "correct": "b",
+      "explanation": "A mechanikai energia megmaradásának feltétele, hogy a rendszerben ne legyenek súrlódási erők, amik a mechanikai energiát csökkentenék. ✅ Megoldás: Nincs súrlódás."
+    },
+    {
+      "question": "Mi a gépkocsik fékezésekor a mechanikai energia sorsa?",
+      "answers": {
+        "a": "A mozgási energia csökken, hőenergiává alakul.",
+        "b": "A helyzeti energia növekszik.",
+        "c": "A mechanikai energia nem változik."
+      },
+      "correct": "a",
+      "explanation": "A fékezéskor a mozgási energia csökken, és a fékek felmelegednek, azaz hőenergiává alakul. ✅ Megoldás: A mozgási energia csökken, hőenergiává alakul."
+    },
+    {
+      "question": "Mi történik, ha egy rugót összenyomunk?",
+      "answers": {
+        "a": "Csökken a helyzeti energiája.",
+        "b": "Potenciális energia tárolódik benne.",
+        "c": "A súlya csökken."
+      },
+      "correct": "b",
+      "explanation": "A rugóban a helyzeti energia (rugalmas energia) tárolódik, amikor összenyomjuk. ✅ Megoldás: Potenciális energia tárolódik benne."
+    }
+  ]
 }

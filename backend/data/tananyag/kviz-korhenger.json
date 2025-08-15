@@ -4,5 +4,236 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz korhenger\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Milyen síkidomok alkotják a henger alap- és fedőlapját?",
+      "answers": {
+        "a": "négyzetek",
+        "b": "körök",
+        "c": "háromszögek"
+      },
+      "correct": "b",
+      "explanation": "A körhenger nevében is benne van az alaplapja. A hengernek két, egymással párhuzamos és egybevágó körlapja van: az alaplap és a fedőlap. ✅ Megoldás: Körök."
+    },
+    {
+      "question": "Milyen síkidomokból áll egy henger testhálója (kiterített hálója)?",
+      "answers": {
+        "a": "két körből és egy téglalapból",
+        "b": "két téglalapból és egy körből",
+        "c": "csak körökből"
+      },
+      "correct": "a",
+      "explanation": "A testháló a test kiterített lapjait tartalmazza. A hengernek van egy kör alaplapja, egy kör fedőlapja, és a palástja, ami kiterítve egy téglalapot ad. ✅ Megoldás: Két körből és egy téglalapból áll."
+    },
+    {
+      "question": "Mi határozza meg a henger testhálójában lévő téglalap szélességét?",
+      "answers": {
+        "a": "a henger magassága",
+        "b": "a henger térfogata",
+        "c": "az alaplap kerülete"
+      },
+      "correct": "c",
+      "explanation": "A palástot kiterítve egy téglalapot kapunk. Ennek a magassága a henger magassága. A szélességének pontosan körbe kell érnie az alaplapot, tehát a hossza megegyezik az alaplap kör kerületével (2*π*r).  ✅ Megoldás: Az alaplap kerülete."
+    },
+    {
+      "question": "Mi a neve a henger két alaplapjának távolságának?",
+      "answers": {
+        "a": "magasság",
+        "b": "átmérő",
+        "c": "sugár"
+      },
+      "correct": "a",
+      "explanation": "A két párhuzamos körlap közötti merőleges távolság a test magassága.  ✅ Megoldás: A henger magassága."
+    },
+    {
+      "question": "Melyik hétköznapi tárgy hasonlít a legjobban egy hengerre?",
+      "answers": {
+        "a": "egy focilabda",
+        "b": "egy konzervdoboz",
+        "c": "egy piramis"
+      },
+      "correct": "b",
+      "explanation": "A konzervdoboznak van egy kör alakú alja, teteje és egy görbe oldalfelülete, ami pontosan megfelel a henger leírásának. ✅ Megoldás: Egy konzervdoboz."
+    },
+    {
+      "question": "Mi a legfőbb különbség a henger és a kúp között?",
+      "answers": {
+        "a": "A kúpnak görbe a felülete.",
+        "b": "A hengernek két alaplapja van, a kúpnak egy.",
+        "c": "A henger magasabb."
+      },
+      "correct": "b",
+      "explanation": "A hengernek két alaplapja van (alul és felül), míg a kúpnak csak egy alaplapja van és egy csúcsa. ✅ Megoldás: Az alaplapok száma."
+    },
+    {
+      "question": "Milyen síkidomot kell megforgatnunk az egyik oldala körül, hogy hengert kapjunk?",
+      "answers": {
+        "a": "téglalapot",
+        "b": "háromszöget",
+        "c": "kört"
+      },
+      "correct": "a",
+      "explanation": "Ha egy téglalapot az egyik oldala mint tengely körül megforgatunk, a szemközti oldala egy görbe palástot 'söpör', a másik két oldala pedig a kör alaplapokat. ✅ Megoldás: Téglalapot."
+    },
+    {
+      "question": "Mi a neve a henger görbe oldalfelületének?",
+      "answers": {
+        "a": "oldallap",
+        "b": "palást",
+        "c": "fedőlap"
+      },
+      "correct": "b",
+      "explanation": "A henger és a kúp görbe oldalfelületét palástnak nevezzük. ✅ Megoldás: Palást."
+    },
+    {
+      "question": "Hány síklapja (lapos felülete) van egy hengernek?",
+      "answers": {
+        "a": "2",
+        "b": "1",
+        "c": "0"
+      },
+      "correct": "a",
+      "explanation": "A hengernek van egy görbe felülete, a palást. Ezen kívül van két sík felülete: az alaplap és a fedőlap. ✅ Megoldás: 2 síklapja van."
+    },
+    {
+      "question": "Hány csúcsa van egy hengernek?",
+      "answers": {
+        "a": "2",
+        "b": "1",
+        "c": "0"
+      },
+      "correct": "c",
+      "explanation": "A hengernek nincsenek ilyen sarkai, csak kör alakú élei és görbe palástja. ✅ Megoldás: A hengernek 0 csúcsa van."
+    },
+    {
+      "question": "Azt a szakaszt, ami a két alaplap középpontját köti össze, ... nevezzük.",
+      "answers": {
+        "a": "a henger tengelyének",
+        "b": "a henger alkotójának",
+        "c": "a henger magasságának"
+      },
+      "correct": "a",
+      "explanation": "A henger szimmetriatengelye az a vonal, ami a két körlap középpontján halad át. Ennek a test belsejében lévő szakasza a henger tengelye. ✅ Megoldás: A henger tengelyének."
+    },
+    {
+      "question": "Mit jelent az, hogy egy körhenger 'egyenes'?",
+      "answers": {
+        "a": "A palástja kiterítve egyenes.",
+        "b": "Nem lehet felborítani.",
+        "c": "A tengelye merőleges az alaplapokra."
+      },
+      "correct": "c",
+      "explanation": "Azt jelenti, hogy a henger nem dől el, az alaplapjai pontosan egymás felett vannak. Ezt geometriailag az fejezi ki, hogy a tengelye derékszöget zár be az alaplapokkal. ✅ Megoldás: A tengelye merőleges az alaplapokra."
+    },
+    {
+      "question": "Hogyan számítjuk ki a henger palástjának területét?",
+      "answers": {
+        "a": "Alaplap kerülete * Testmagasság",
+        "b": "Alaplap területe * Testmagasság",
+        "c": "2 * Alaplap kerülete"
+      },
+      "correct": "a",
+      "explanation": "A palást kiterített hálója egy téglalap. Ennek a téglalapnak az egyik oldala a test magassága, a másik oldala az alaplap kör kerületével egyezik. ✅ Megoldás: Alaplap kerülete * Testmagasság."
+    },
+    {
+      "question": "Mekkora a testhálón lévő téglalap magassága?",
+      "answers": {
+        "a": "A henger sugarával egyenlő.",
+        "b": "A henger magasságával egyenlő.",
+        "c": "A henger átmérőjével egyenlő."
+      },
+      "correct": "b",
+      "explanation": "Ennek a téglalapnak a magassága megegyezik a henger eredeti magasságával. ✅ Megoldás: A henger magasságával egyenlő."
+    },
+    {
+      "question": "Hogyan számoljuk ki a henger teljes felszínét?",
+      "answers": {
+        "a": "Alaplap területe + Palást területe",
+        "b": "2 * Alaplap területe + Palást területe",
+        "c": "Palást területe"
+      },
+      "correct": "b",
+      "explanation": "A henger felszíne = 2 * (alapterület) + palást. ✅ Megoldás: 2 * Alaplap területe + Palást területe."
+    },
+    {
+      "question": "Mi a henger térfogatának képlete?",
+      "answers": {
+        "a": "Alapterület * Testmagasság",
+        "b": "Alaplap kerülete * Testmagasság",
+        "c": "Alapterület * Sugár"
+      },
+      "correct": "a",
+      "explanation": "A henger (és minden hasáb) térfogatát ugyanazzal az elvvel számoljuk. Vesszük az alaplap területét, és azt 'megszorozzuk' a test magasságával. ✅ Megoldás: Alapterület * Testmagasság."
+    },
+    {
+      "question": "Egy henger alapterülete 10 cm², magassága 5 cm. Mekkora a térfogata?",
+      "answers": {
+        "a": "50 cm³",
+        "b": "15 cm³",
+        "c": "2 cm³"
+      },
+      "correct": "a",
+      "explanation": "A henger térfogatának képlete: V = Alapterület * Testmagasság. Helyettesítsük be az adatokat: V = 10 cm² * 5 cm = 50 cm³. ✅ Megoldás: A térfogata 50 cm³."
+    },
+    {
+      "question": "Melyik NEM forgástest?",
+      "answers": {
+        "a": "gömb",
+        "b": "kúp",
+        "c": "gúla"
+      },
+      "correct": "c",
+      "explanation": "A forgástestek úgy jönnek létre, hogy egy síkidomot egy tengely körül megforgatunk. A gúla sokszöglapokból áll, nem forgatással jön létre. ✅ Megoldás: A gúla."
+    },
+    {
+      "question": "Mi a henger alkotója (generátrixa)?",
+      "answers": {
+        "a": "Az alaplap átmérője.",
+        "b": "A paláston lévő, tengellyel párhuzamos szakasz.",
+        "c": "Az alaplap kerülete."
+      },
+      "correct": "b",
+      "explanation": "Az alkotó az a vonal, ami a forgatás során 'létrehozza' a palástot. Egyenes hengernél ez a paláston lévő, a két alaplapot összekötő, a tengellyel párhuzamos szakasz. Hossza megegyezik a magassággal. ✅ Megoldás: A paláston lévő, tengellyel párhuzamos szakasz."
+    },
+    {
+      "question": "Milyen síkidomot kapunk, ha egy hengert az alaplapjával párhuzamosan elvágunk?",
+      "answers": {
+        "a": "téglalapot",
+        "b": "kört",
+        "c": "háromszöget"
+      },
+      "correct": "b",
+      "explanation": "A vágási felület, a szelet alakja kör lesz, ami megegyezik az alaplap alakjával. ✅ Megoldás: Kört kapunk."
+    },
+    {
+      "question": "Milyen síkidomot kapunk, ha egy egyenes hengert a tengelyén keresztül elvágunk?",
+      "answers": {
+        "a": "kör",
+        "b": "négyzet",
+        "c": "téglalap"
+      },
+      "correct": "c",
+      "explanation": "A vágási felület egy téglalap lesz, aminek egyik oldala a fatörzs magassága, a másik az átmérője. ✅ Megoldás: Téglalapot kapunk."
+    },
+    {
+      "question": "Egy pénzérme milyen testhez hasonlít?",
+      "answers": {
+        "a": "egy nagyon lapos hengerhez",
+        "b": "egy körlaphoz",
+        "c": "egy koronghoz"
+      },
+      "correct": "a",
+      "explanation": "A pénzérmének van vastagsága, tehát térbeli test. A körlap síkidom. Mivel van vastagsága (magassága) és két kör alakú lapja, ez egy henger, ami nagyon lapos. ✅ Megoldás: Egy nagyon lapos hengerhez."
+    },
+    {
+      "question": "Egy csődarab milyen test modellje?",
+      "answers": {
+        "a": "tömör henger",
+        "b": "üreges henger",
+        "c": "kúp"
+      },
+      "correct": "b",
+      "explanation": "A csőnek van külső és belső fala is, a belseje üres. Ezt a formát üreges hengernek nevezzük. ✅ Megoldás: Üreges henger"
+    }
+  ]
 }

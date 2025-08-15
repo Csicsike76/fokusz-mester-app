@@ -1,8 +1,250 @@
 {
   "title": "Kviz onerteles hojelensegek",
+
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz onerteles hojelensegek\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz hőtágulás\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik hőterjedési mód nem igényel közvetítő közeget?",
+      "answers": {
+        "a": "Hősugárzás",
+        "b": "Hővezetés",
+        "c": "Hőáramlás"
+      },
+      "correct": "a",
+      "explanation": "A hősugárzás elektromágneses hullámok formájában terjed, ami a vákuumban is képes haladni. A hővezetéshez és hőáramláshoz anyagi közeg szükséges. ✅ Megoldás: Hősugárzás."
+    },
+    {
+      "question": "Mi történik a legtöbb anyaggal, ha melegítjük?",
+      "answers": {
+        "a": "Kitágul.",
+        "b": "Összehúzódik.",
+        "c": "A mérete nem változik."
+      },
+      "correct": "a",
+      "explanation": "A hőmérséklet emelkedésével a részecskék mozgása hevesebbé válik, nagyobb helyet igényelnek, ami a test méretének növekedését, azaz hőtágulását okozza. ✅ Megoldás: Kitágul."
+    },
+    {
+      "question": "Melyik állítás igaz a hőre?",
+      "answers": {
+        "a": "Egy energiaátadási folyamat.",
+        "b": "Egy testben tárolt tulajdonság.",
+        "c": "Ugyanaz, mint a hőmérséklet."
+      },
+      "correct": "a",
+      "explanation": "A hő nem a test tulajdonsága, hanem egy folyamat, az energia áramlása a melegebb test felől a hidegebb felé a hőmérséklet-különbség miatt.  ✅ Megoldás: Egy energiaátadási folyamat."
+    },
+    {
+      "question": "Mi a kaloriméter?",
+      "answers": {
+        "a": "Hőszigetelt edény hőmennyiség mérésére.",
+        "b": "Hőmérő.",
+        "c": "Ételek energiatartalmát mérő eszköz."
+      },
+      "correct": "a",
+      "explanation": "A kaloriméter egy olyan hőszigetelt edény, amiben a hőcsere folyamatokat lehet vizsgálni, és a hőmérséklet-változásokból a kicserélődött hőmennyiségre lehet következtetni. ✅ Megoldás: Hőszigetelt edény hőmennyiség mérésére."
+    },
+    {
+      "question": "Mi a fűtőérték?",
+      "answers": {
+        "a": "Az a hőmennyiség, ami 1 kg fűtőanyag elégetésekor felszabadul.",
+        "b": "A fűtőanyag gyulladási hőmérséklete.",
+        "c": "A fűtőanyag ára."
+      },
+      "correct": "a",
+      "explanation": "A fűtőérték egy anyagra jellemző érték, ami megmutatja az egységnyi tömegű anyag elégetésekor felszabaduló energiát.  ✅ Megoldás: Az a hőmennyiség, ami 1 kg fűtőanyag elégetésekor felszabadul."
+    },
+    {
+      "question": "Melyik folyamat jár hőfelvétellel?",
+      "answers": {
+        "a": "Forrás",
+        "b": "Fagyás",
+        "c": "Lecsapódás"
+      },
+      "correct": "a",
+      "explanation": "A forrás (és az olvadás, párolgás) során az anyag energiát vesz fel a környezetétől a halmazállapot-változáshoz. A fagyás és a lecsapódás hőleadással jár. ✅ Megoldás: Forrás."
+    },
+    {
+      "question": "Melyik anyag a jó hővezető?",
+      "answers": {
+        "a": "Fémek",
+        "b": "Fa",
+        "c": "Levegő"
+      },
+      "correct": "a",
+      "explanation": "A fémekben a szabad elektronok hatékonyan továbbítják a rezgési energiát, ezért kiváló hővezetők. A fa és a levegő hőszigetelők.  ✅ Megoldás: Fémek."
+    },
+    {
+      "question": "Milyen halmazállapotú a víz 0 °C-on?",
+      "answers": {
+        "a": "Lehet szilárd (jég) és folyékony is.",
+        "b": "Csak szilárd.",
+        "c": "Csak folyékony."
+      },
+      "correct": "a",
+      "explanation": "A 0 °C a víz olvadás- és fagyáspontja. Ezen a hőmérsékleten a jég és a víz egyensúlyban lehet egymással. Az olvadás vagy fagyás folyamata ezen a hőmérsékleten zajlik. ✅ Megoldás: Lehet szilárd (jég) és folyékony is."
+    },
+    {
+      "question": "Egy 50 cm hosszú fémrudat 20 °C-ról 40 °C-ra melegítünk. Milyen hatása lesz a hosszára?",
+      "answers": {
+        "a": "Rövidebb lesz.",
+        "b": "Hosszabb lesz.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "A fémrudak a melegtől kitágulnak, ezért a hosszúságuk nő. ✅ Megoldás: Hosszabb lesz."
+    },
+    {
+      "question": "Miért hagynak rést a vasúti sínek között?",
+      "answers": {
+        "a": "Hogy a vonatok hangosabbak legyenek.",
+        "b": "Hogy a sínek el tudjanak mozdulni a hőtágulás miatt, és ne görbüljenek.",
+        "c": "Hogy olcsóbb legyen a vasút építése."
+      },
+      "correct": "b",
+      "explanation": "A vasúti sínek meleg időben kitágulnak. A rések helyet adnak a tágulásnak, így a sínek nem görbülnek meg. ✅ Megoldás: Hogy a sínek el tudjanak mozdulni a hőtágulás miatt, és ne görbüljenek."
+    },
+    {
+      "question": "Mi a hőtágulás?",
+      "answers": {
+        "a": "A testek tömegének növekedése.",
+        "b": "A testek méretének a növekedése a hő hatására.",
+        "c": "A testek színének a változása."
+      },
+      "correct": "b",
+      "explanation": "A hőtágulás az a jelenség, amikor a testek melegítés hatására kitágulnak, azaz a méretük nő. ✅ Megoldás: A testek méretének a növekedése a hő hatására."
+    },
+    {
+      "question": "A meleg hatására a gázok...",
+      "answers": {
+        "a": "Összezsugorodnak.",
+        "b": "Kitágulnak.",
+        "c": "A méretük nem változik."
+      },
+      "correct": "b",
+      "explanation": "A melegedő gázok is kitágulnak.  ✅ Megoldás: Kitágulnak."
+    },
+    {
+      "question": "Miért repedhet meg egy üveg, ha forró vizet öntünk bele hirtelen?",
+      "answers": {
+        "a": "Mert a víz szétnyomja az üveget.",
+        "b": "Mert az üveg hirtelen összébb megy.",
+        "c": "Mert az üveg hirtelen kitágul a melegtől."
+      },
+      "correct": "c",
+      "explanation": "A forró víz hirtelen melegíti az üveget, ami kitágul, és ha a tágulás nem egyenletes, megrepedhet. ✅ Megoldás: Mert az üveg hirtelen kitágul a melegtől."
+    },
+    {
+      "question": "Mi a hőtágulás veszélye a hidaknál?",
+      "answers": {
+        "a": "A híd lerövidülhet.",
+        "b": "A híd megrepedhet.",
+        "c": "A híd színe megváltozhat."
+      },
+      "correct": "b",
+      "explanation": "A fémhidak a melegedéskor kitágulhatnak, ami feszültséget és repedéseket okozhat. ✅ Megoldás: A híd megrepedhet."
+    },
+    {
+      "question": "Miért lazulnak ki a villanyvezetékek meleg időben?",
+      "answers": {
+        "a": "Mert a fém összébb megy.",
+        "b": "Mert a fém kitágul, és a vezeték megrövidül.",
+        "c": "Mert a fém kitágul, és a vezeték megnő."
+      },
+      "correct": "c",
+      "explanation": "A vezetékek melegben kitágulnak, ezért látszanak lazábbnak. ✅ Megoldás: Mert a fém kitágul, és a vezeték megnő."
+    },
+    {
+      "question": "Mi a hőtágulás a mindennapi életben?",
+      "answers": {
+        "a": "Amikor a test melegebb lesz.",
+        "b": "Amikor a test mérete nő a hő hatására.",
+        "c": "Amikor a test eléri a fagyáspontját."
+      },
+      "correct": "b",
+      "explanation": "A hőtágulás az a jelenség, amikor a testek melegítés hatására kitágulnak, azaz a méretük nő. ✅ Megoldás: Amikor a test mérete nő a hő hatására."
+    },
+    {
+      "question": "Ha a hőmérséklet 10 Celsius-fokkal nő, akkor a fémrúd...",
+      "answers": {
+        "a": "...hossza nem változik.",
+        "b": "...összezsugorodik.",
+        "c": "...meghosszabbodik."
+      },
+      "correct": "c",
+      "explanation": "A hőtágulás miatt a fémrúd meghosszabbodik, ha a hőmérséklete nő. ✅ Megoldás: Meghosszabbodik."
+    },
+    {
+      "question": "Miért nem szabad túl szorosan becsavarni egy üvegbe a fém kupakot, ha meleg lesz?",
+      "answers": {
+        "a": "Mert a fém összébb megy.",
+        "b": "Mert a fém kitágul, és beszorulhat.",
+        "c": "Mert az üveg elreped."
+      },
+      "correct": "b",
+      "explanation": "A fém kupak a meleg hatására kitágulhat, és nehéz lesz lecsavarni.  ✅ Megoldás: Mert a fém kitágul, és beszorulhat."
+    },
+    {
+      "question": "Melyik anyagnak a legkisebb a hőtágulása?",
+      "answers": {
+        "a": "A fémnek.",
+        "b": "A fának.",
+        "c": "Az üvegnek."
+      },
+      "correct": "c",
+      "explanation": "Az üvegnek kisebb a hőtágulása, mint a fémeknek. ✅ Megoldás: Az üvegnek."
+    },
+    {
+      "question": "Milyen módon terjedhet a hő (ismétlés)?",
+      "answers": {
+        "a": "Vezetéssel, sugárzással, konvekcióval.",
+        "b": "Olvadással, fagyással.",
+        "c": "Összenyomással."
+      },
+      "correct": "a",
+      "explanation": "A hő vezetéssel, sugárzással és konvekcióval terjed. ✅ Megoldás: Vezetéssel, sugárzással, konvekcióval."
+    },
+     {
+      "question": "Miért melegszik fel a kezünk, ha megérintünk egy forró tárgyat?",
+      "answers": {
+        "a": "Mert a meleg átáramlik a kezünkhöz.",
+        "b": "Mert a meleg a kezünkből a tárgyba áramlik.",
+        "c": "Mert a tárgy rezeg."
+      },
+      "correct": "a",
+      "explanation": "A meleg a melegebb testből a hidegebb felé áramlik (hővezetés). ✅ Megoldás: Mert a meleg átáramlik a kezünkhöz."
+    },
+    {
+      "question": "Miért használunk hőszigetelést az épületeken?",
+      "answers": {
+        "a": "Hogy ne melegedjenek fel nyáron.",
+        "b": "Hogy a hő ne távozzon könnyen, így télen melegebb, nyáron hűvösebb legyen.",
+        "c": "Hogy az épület szebb legyen."
+      },
+      "correct": "b",
+      "explanation": "A hőszigetelés segít megtartani a meleget télen, és a hűvöset nyáron. ✅ Megoldás: Hogy a hő ne távozzon könnyen, így télen melegebb, nyáron hűvösebb legyen."
+    },
+    {
+      "question": "Melyik jelenségnél tapasztaljuk a hősugárzást?",
+      "answers": {
+        "a": "A fém kanál melegszik a levesben.",
+        "b": "A nap melegít.",
+        "c": "A forró tea felmelegíti a bögrét."
+      },
+      "correct": "b",
+      "explanation": "A Nap a hősugárzással adja át a hőt. ✅ Megoldás: A Nap melegít."
+    },
+    {
+      "question": "Miért érezzük hidegnek a fémet, ha megérintjük?",
+      "answers": {
+        "a": "Mert a fém hideg.",
+        "b": "Mert a fém elvonja a hőt a kezünkből.",
+        "c": "Mert a fém kemény."
+      },
+      "correct": "b",
+      "explanation": "A fém jó hővezető, ezért elvonja a hőt a kezünkből, ezért érezzük hidegnek. ✅ Megoldás: Mert a fém elvonja a hőt a kezünkből."
+    }
+  ]
 }

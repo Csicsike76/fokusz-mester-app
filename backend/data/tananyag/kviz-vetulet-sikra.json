@@ -1,8 +1,259 @@
 {
   "title": "Kviz vetulet sikra",
   "subject": "altalanos",
-  "grade": 0,
-  "category": "premium_course",
+  "grade": 4,
+  "category": "iskolai",
   "description": "Ez a(z) \"Kviz vetulet sikra\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "1. Melyik állítás írja le a vektort?",
+      "answers": {
+        "a": "Olyan mennyiség, aminek nagysága és iránya is van.",
+        "b": "Olyan mennyiség, aminek csak nagysága van.",
+        "c": "Olyan mennyiség, aminek csak iránya van."
+      },
+      "correctAnswer": "a",
+      "explanation": "Ez a vektormennyiség pontos definíciója. A teljes leírásához mind a nagyságát, mind az irányát meg kell adni. ✅ Megoldás: Olyan mennyiség, aminek nagysága és iránya is van."
+    },
+    {
+      "question": "2. Melyik NEM vektormennyiség?",
+      "answers": {
+        "a": "Erő",
+        "b": "Térfogat",
+        "c": "Elmozdulás"
+      },
+      "correctAnswer": "b",
+      "explanation": "A térfogatnak (pl. 2 liter) csak nagysága van, iránya nincs, ezért skalármennyiség. Az erő és az elmozdulás vektorok. ✅ Megoldás: Térfogat."
+    },
+    {
+      "question": "3. Mi a távolsága egy kocka két szemközti lapjának, ha a testátlója √3?",
+      "answers": {
+        "a": "1",
+        "b": "√3 / 3",
+        "c": "√2"
+      },
+      "correctAnswer": "a",
+      "explanation": "🔹 1. Lépés: A kocka testátlójának képlete d = a√3, ahol 'a' az élhossz. 🔹 2. Lépés: Ha a√3 = √3, akkor az élhossz a=1. 🔹 3. Lépés: A szemközti lapok távolsága megegyezik az élhosszal. ✅ Megoldás: A távolság 1."
+    },
+    {
+      "question": "4. Ha két sík metszi egymást, mennyi a távolságuk?",
+      "answers": {
+        "a": "1",
+        "b": "végtelen",
+        "c": "0"
+      },
+      "correctAnswer": "c",
+      "explanation": "🔹 1. Lépés: A távolság a legkisebb távolság a két sík pontjai között. 🔹 2. Lépés: Ha a síkok metszik egymást, vannak közös pontjaik. Egy pont távolsága önmagától nulla. ✅ Megoldás: A távolságuk 0."
+    },
+    {
+      "question": "5. Egy emeletes torta szintjei milyen viszonyban vannak egymással?",
+      "answers": {
+        "a": "párhuzamos síkokat modelleznek",
+        "b": "metsző síkokat modelleznek",
+        "c": "nem modelleznek síkokat"
+      },
+      "correctAnswer": "a",
+      "explanation": "🔹 1. Lépés: A torta szintjei vízszintesek és egymás felett helyezkednek el. 🔹 2. Lépés: Soha nem találkoznak, tehát párhuzamos síkokat modelleznek. ✅ Megoldás: Párhuzamos síkokat modelleznek."
+    },
+    {
+      "question": "6. Mi a súly?",
+      "answers": {
+        "a": "A testre ható gravitációs erő.",
+        "b": "A testben lévő anyag mennyisége.",
+        "c": "Egy skalármennyiség."
+      },
+      "correctAnswer": "a",
+      "explanation": "A súly az az erő, amellyel egy égitest (pl. a Föld) vonzza a testet. Mivel erő, ezért vektormennyiség, iránya mindig az égitest középpontja felé mutat. ✅ Megoldás: A testre ható gravitációs erő."
+    },
+    {
+      "question": "7. Milyen vonal mentén mérjük két párhuzamos sík távolságát?",
+      "answers": {
+        "a": "egy ferde vonal mentén",
+        "b": "egy, a síkokra merőleges egyenes mentén",
+        "c": "egy, a síkokkal párhuzamos egyenes mentén"
+      },
+      "correctAnswer": "b",
+      "explanation": "🔹 1. Lépés: A távolság a legrövidebb összekötő út. 🔹 2. Lépés: A legrövidebb út a két sík között mindig a merőleges. ✅ Megoldás: Egy, a síkokra merőleges egyenes mentén."
+    },
+    {
+      "question": "8. Melyik állítás igaz egy kockára?",
+      "answers": {
+        "a": "Bármely két lapja metsző.",
+        "b": "Bármely két lapja párhuzamos.",
+        "c": "Egy lapjával párhuzamos egy másik lap, és metszi négy másik lap."
+      },
+      "correctAnswer": "c",
+      "explanation": "🔹 1. Lépés: Válasszuk ki a felső lapot. Ennek van egy vele szemközti párhuzamos lapja (az alsó). 🔹 2. Lépés: A felső lapot metszi a 4 oldallap (az első, hátsó, jobb és bal). ✅ Megoldás: A 'c' állítás írja le pontosan a helyzetet."
+    },
+    {
+      "question": "9. Hogyan határozzuk meg két párhuzamos sík távolságát?",
+      "answers": {
+        "a": "A két síkra merőleges szakasz hosszával.",
+        "b": "Bármely két pontjuk távolságával.",
+        "c": "A két sík metszésvonalának hosszával."
+      },
+      "correctAnswer": "a",
+      "explanation": "🔹 1. Lépés: A távolság mindig a legrövidebb utat jelenti. 🔹 2. Lépés: Két párhuzamos sík között a legrövidebb út a rájuk merőleges szakasz. Ennek hossza mindenhol ugyanannyi. ✅ Megoldás: A két síkra merőleges szakasz hosszával."
+    },
+    {
+      "question": "10. Egy szoba belmagassága 3 méter. Mekkora a padló és a mennyezet síkjának távolsága?",
+      "answers": {
+        "a": "1,5 méter",
+        "b": "nem lehet tudni",
+        "c": "3 méter"
+      },
+      "correctAnswer": "c",
+      "explanation": "🔹 1. Lépés: A padló és a mennyezet párhuzamos síkok. 🔹 2. Lépés: A belmagasság pontosan a két sík közötti merőleges távolságot jelenti. ✅ Megoldás: 3 méter."
+    },
+    {
+      "question": "11. Mi a különbség a sebesség és a sebesség nagysága között?",
+      "answers": {
+        "a": "Nincs különbség.",
+        "b": "A sebesség nagysága mindig nagyobb.",
+        "c": "A sebesség vektor (van iránya), a sebesség nagysága skalár."
+      },
+      "correctAnswer": "c",
+      "explanation": "A fizikában a sebesség egy vektormennyiség, amelynek nagysága és iránya is van. A sebesség nagysága (amit pl. az autó km-órája mutat) egy skalármennyiség, ami csak a mozgás gyorsaságát jelöli. ✅ Megoldás: A sebesség vektor (van iránya), a sebesség nagysága skalár."
+    },
+    {
+      "question": "12. Mi a metszésvonala a szoba padlójának és a mennyezetének?",
+      "answers": {
+        "a": "egy sarokél",
+        "b": "egy átló",
+        "c": "nincs metszésvonaluk"
+      },
+      "correctAnswer": "c",
+      "explanation": "🔹 1. Lépés: A padló és a mennyezet párhuzamos síkok. 🔹 2. Lépés: A párhuzamos síkoknak definíció szerint nincs közös pontjuk, így metszésvonaluk sem lehet. ✅ Megoldás: Nincs metszésvonaluk."
+    },
+    {
+      "question": "13. Melyik állítás írja le a vektort?",
+      "answers": {
+        "a": "Olyan mennyiség, aminek nagysága és iránya is van.",
+        "b": "Olyan mennyiség, aminek csak nagysága van.",
+        "c": "Olyan mennyiség, aminek csak iránya van."
+      },
+      "correctAnswer": "a",
+      "explanation": "Ez a vektormennyiség pontos definíciója. A teljes leírásához mind a nagyságát, mind az irányát meg kell adni. ✅ Megoldás: Olyan mennyiség, aminek nagysága és iránya is van."
+    },
+    {
+      "question": "14. Egy egyenes merőleges az S1 síkra. Az S1 párhuzamos az S2 síkkal. Milyen az egyenes és S2 viszonya?",
+      "answers": {
+        "a": "párhuzamosak",
+        "b": "merőlegesek",
+        "c": "az egyenes illeszkedik S2-re"
+      },
+      "correctAnswer": "b",
+      "explanation": "🔹 1. Lépés: Képzeld el a padlót (S1) és a plafont (S2). Egy oszlop (egyenes) merőleges a padlóra. 🔹 2. Lépés: Ugyanez az oszlop a plafonra is merőleges lesz. ✅ Megoldás: Merőlegesek."
+    },
+    {
+      "question": "15. Mi a súly?",
+      "answers": {
+        "a": "A testre ható gravitációs erő.",
+        "b": "A testben lévő anyag mennyisége.",
+        "c": "Egy skalármennyiség."
+      },
+      "correctAnswer": "a",
+      "explanation": "A súly az az erő, amellyel egy égitest (pl. a Föld) vonzza a testet. Mivel erő, ezért vektormennyiség, iránya mindig az égitest középpontja felé mutat. ✅ Megoldás: A testre ható gravitációs erő."
+    },
+    {
+      "question": "16. Ha két sík nem metszi egymást, akkor azok...",
+      "answers": {
+        "a": "párhuzamosak.",
+        "b": "merőlegesek.",
+        "c": "kitérőek."
+      },
+      "correctAnswer": "a",
+      "explanation": "🔹 1. Lépés: Két sík a térben vagy metszi egymást, vagy nem. 🔹 2. Lépés: Ha nincs közös pontjuk, akkor a definíció szerint párhuzamosak. ✅ Megoldás: Párhuzamosak."
+    },
+    {
+      "question": "17. Melyik állítás igaz egy kockára?",
+      "answers": {
+        "a": "Bármely két lapja metsző.",
+        "b": "Bármely két lapja párhuzamos.",
+        "c": "Egy lapjával párhuzamos egy másik lap, és metszi négy másik lap."
+      },
+      "correctAnswer": "c",
+      "explanation": "🔹 1. Lépés: Válasszuk ki a felső lapot. Ennek van egy vele szemközti párhuzamos lapja (az alsó). 🔹 2. Lépés: A felső lapot metszi a 4 oldallap (az első, hátsó, jobb és bal). ✅ Megoldás: A 'c' állítás írja le pontosan a helyzetet."
+    },
+    {
+      "question": "18. Ha két sík metszi egymást, mennyi a távolságuk?",
+      "answers": {
+        "a": "1",
+        "b": "végtelen",
+        "c": "0"
+      },
+      "correctAnswer": "c",
+      "explanation": "🔹 1. Lépés: A távolság a legkisebb távolság a két sík pontjai között. 🔹 2. Lépés: Ha a síkok metszik egymást, vannak közös pontjaik. Egy pont távolsága önmagától nulla. ✅ Megoldás: A távolságuk 0."
+    },
+    {
+      "question": "19. Melyik NEM vektormennyiség?",
+      "answers": {
+        "a": "Sebesség",
+        "b": "Súly",
+        "c": "Munka"
+      },
+      "correctAnswer": "c",
+      "explanation": "A munka, bár az erő (vektor) és az elmozdulás (vektor) alapján számoljuk, maga skalármennyiség, nincs iránya. ✅ Megoldás: Munka."
+    },
+    {
+      "question": "20. Melyik NEM vektormennyiség?",
+      "answers": {
+        "a": "Erő",
+        "b": "Térfogat",
+        "c": "Elmozdulás"
+      },
+      "correctAnswer": "b",
+      "explanation": "A térfogatnak (pl. 2 liter) csak nagysága van, iránya nincs, ezért skalármennyiség. Az erő és az elmozdulás vektorok. ✅ Megoldás: Térfogat."
+    },
+    {
+      "question": "21. Mi a különbség a sebesség és a sebesség nagysága között?",
+      "answers": {
+        "a": "Nincs különbség.",
+        "b": "A sebesség nagysága mindig nagyobb.",
+        "c": "A sebesség vektor (van iránya), a sebesség nagysága skalár."
+      },
+      "correctAnswer": "c",
+      "explanation": "A fizikában a sebesség egy vektormennyiség, amelynek nagysága és iránya is van. A sebesség nagysága (amit pl. az autó km-órája mutat) egy skalármennyiség, ami csak a mozgás gyorsaságát jelöli. ✅ Megoldás: A sebesség vektor (van iránya), a sebesség nagysága skalár."
+    },
+    {
+      "question": "22. Ha két párhuzamos síkot egy harmadik sík metsz. Mik a metszésvonalak?",
+      "answers": {
+        "a": "metsző egyenesek",
+        "b": "párhuzamos egyenesek",
+        "c": "kitérő egyenesek"
+      },
+      "correctAnswer": "b",
+      "explanation": "🔹 1. Lépés: Ez a párhuzamos metszősíkok tétele. 🔹 2. Lépés: A harmadik sík mindkét párhuzamos síkból kimetsz egy-egy egyenest. Ez a két metszésvonal mindig párhuzamos lesz egymással. ✅ Megoldás: Párhuzamos egyenesek."
+    },
+    {
+      "question": "23. Mi a súly?",
+      "answers": {
+        "a": "A testre ható gravitációs erő.",
+        "b": "A testben lévő anyag mennyisége.",
+        "c": "Egy skalármennyiség."
+      },
+      "correctAnswer": "a",
+      "explanation": "A súly az az erő, amellyel egy égitest (pl. a Föld) vonzza a testet. Mivel erő, ezért vektormennyiség, iránya mindig az égitest középpontja felé mutat. ✅ Megoldás: A testre ható gravitációs erő."
+    },
+    {
+      "question": "24. Egy téglatest élei 3 cm, 4 cm és 5 cm. Mekkora a két legkisebb területű lapjának távolsága?",
+      "answers": {
+        "a": "3 cm",
+        "b": "4 cm",
+        "c": "5 cm"
+      },
+      "correctAnswer": "c",
+      "explanation": "🔹 1. Lépés: A legkisebb lapok a 3x4 cm-esek. 🔹 2. Lépés: Ezt a két lapot a harmadik, rájuk merőleges él köti össze. Ennek hossza 5 cm. ✅ Megoldás: 5 cm."
+    },
+    {
+      "question": "25. Melyik állítás igaz?",
+      "answers": {
+        "a": "A tömeg és a súly ugyanaz.",
+        "b": "A súly egy erő, a tömeg egy skalármennyiség.",
+        "c": "A súly skalár, a tömeg vektor."
+      },
+      "correctAnswer": "b",
+      "explanation": "A tömeg (kg) az anyagmennyiség mértéke, skalár. A súly (N) a gravitációs erő, ami a testre hat, tehát vektor. A Holdon például a tömeged ugyanannyi, de a súlyod kisebb. ✅ Megoldás: A súly egy erő, a tömeg egy skalármennyiség."
+    }
+  ]
 }

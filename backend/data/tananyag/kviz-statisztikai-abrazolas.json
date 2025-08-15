@@ -4,5 +4,226 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz statisztikai abrazolas\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik diagramtípus a legalkalmasabb különböző kategóriák (pl. kedvenc sportágak) mennyiségi összehasonlítására?",
+      "answers": {
+        "a": "kördiagram",
+        "b": "vonaldiagram",
+        "c": "oszlopdiagram"
+      },
+      "correct": "c",
+      "explanation": "Az oszlopdiagramban minden kategóriához egy oszlop tartozik, melynek magassága arányos az adott kategória értékével. Ez teszi lehetővé a kategóriák közötti egyszerű, vizuális összehasonlítást. ✅ Megoldás: Az oszlopdiagram."
+    },
+    {
+      "question": "Mire használjuk leggyakrabban a kördiagramot?",
+      "answers": {
+        "a": "Időbeli változások követésére.",
+        "b": "Egy egész részekre való felosztásának (arányoknak) a bemutatására.",
+        "c": "Két adat közötti kapcsolat kimutatására."
+      },
+      "correct": "b",
+      "explanation": "A kördiagram mindig egy egészet (100%-ot) képvisel. A különböző méretű körcikkek azt mutatják meg, hogy ez az egész milyen arányban oszlik meg az egyes kategóriák között. ✅ Megoldás: Egy egész részekre való felosztásának a bemutatására."
+    },
+    {
+      "question": "Melyik diagram mutatja a legjobban egy adat időbeli változásának trendjét (pl. egy beteg lázának alakulása)?",
+      "answers": {
+        "a": "vonaldiagram",
+        "b": "oszlopdiagram",
+        "c": "kördiagram"
+      },
+      "correct": "a",
+      "explanation": "A vonaldiagram az időben egymást követő adatpontokat köti össze egy vonallal. A vonal emelkedése, süllyedése vagy stagnálása egyértelműen mutatja a változás irányát, a trendet. ✅ Megoldás: A vonaldiagram."
+    },
+    {
+      "question": "Egy kördiagramon egy 180°-os körcikk az egész hány százalékát jelöli?",
+      "answers": {
+        "a": "25%",
+        "b": "50%",
+        "c": "100%"
+      },
+      "correct": "b",
+      "explanation": "A teljes kör 360°, ez felel meg a 100%-nak. A 180° a 360°-nak pont a fele. Ezért a 100%-nak is a felét, azaz 50%-ot jelöl. ✅ Megoldás: 50%-ot jelöl."
+    },
+    {
+      "question": "Egy oszlopdiagramon az 'alma' oszlop 10-ig, a 'körte' 15-ig ér. Mit jelent ez?",
+      "answers": {
+        "a": "Több körte van, mint alma.",
+        "b": "Több alma van, mint körte.",
+        "c": "Ugyanannyi van mindkettőből."
+      },
+      "correct": "a",
+      "explanation": "Az oszlopdiagramon a magasabb oszlop nagyobb mennyiséget jelöl. ✅ Megoldás: Több körte van, mint alma."
+    },
+    {
+      "question": "Mit olvasunk le a koordináta-rendszer vízszintes (x) tengelyéről egy vonaldiagram esetében?",
+      "answers": {
+        "a": "a mért mennyiséget",
+        "b": "az idő múlását vagy a kategóriákat",
+        "c": "a diagram címét"
+      },
+      "correct": "b",
+      "explanation": "A vonaldiagram a függőleges tengelyen (y) lévő adat változását mutatja a vízszintes tengelyen (x) lévő skála mentén. Ez a vízszintes skála leggyakrabban az idő (napok, órák, évek) vagy sorrendi kategóriák. ✅ Megoldás: Az idő múlását vagy a kategóriákat."
+    },
+    {
+      "question": "Ha egy vonaldiagramon a vonal balról jobbra emelkedik, az mit jelent?",
+      "answers": {
+        "a": "csökkenést",
+        "b": "növekedést",
+        "c": "nincs változás"
+      },
+      "correct": "b",
+      "explanation": "A balról jobbra haladás az idő múlását jelenti. Ha a vonal közben emelkedik, az azt jelenti, hogy a mért érték (pl. hőmérséklet) egyre nagyobb lesz. ✅ Megoldás: Növekedést jelent."
+    },
+    {
+      "question": "Mit olvasunk le a koordináta-rendszer függőleges (y) tengelyéről egy oszlopdiagram esetében?",
+      "answers": {
+        "a": "az adatok gyakoriságát vagy mennyiségét",
+        "b": "az adatfajtákat, kategóriákat",
+        "c": "az adatok átlagát"
+      },
+      "correct": "a",
+      "explanation": "A függőleges tengelyen van a skála, amihez az oszlopok magasságát mérjük. Az oszlop magassága mutatja meg, hogy az adott kategóriából milyen mennyiségű vagy hány darab adat van. ✅ Megoldás: Az adatok gyakoriságát vagy mennyiségét."
+    },
+    {
+      "question": "Egy kördiagram 25%-os szelete 10 embert jelent. Hány emberből áll a teljes csoport?",
+      "answers": {
+        "a": "25",
+        "b": "100",
+        "c": "40"
+      },
+      "correct": "c",
+      "explanation": "A 25% az egésznek a negyede (1/4). Ha a csoport negyede 10 ember, akkor a teljes csoport 4 * 10 = 40 ember. ✅ Megoldás: A teljes csoport 40 emberből áll."
+    },
+    {
+      "question": "Egy oszlopdiagramon az oszlopok magassága: 5, 8, 2. Hány adatot ábrázoltunk összesen?",
+      "answers": {
+        "a": "3",
+        "b": "15",
+        "c": "8"
+      },
+      "correct": "b",
+      "explanation": "Az egyes oszlopok a kategóriákba tartozó adatok számát mutatják. Az összes adat számához össze kell adni az oszlopok magasságát: 5 + 8 + 2 = 15.  ✅ Megoldás: Összesen 15 adatot ábrázoltunk."
+    },
+    {
+      "question": "Mi a diagram 'jelmagyarázatának' (legenda) a feladata?",
+      "answers": {
+        "a": "A diagram címét tartalmazza.",
+        "b": "Megmutatja, hogy a különböző színek vagy minták melyik kategóriát jelentik.",
+        "c": "A diagram készítőjének nevét jelöli."
+      },
+      "correct": "b",
+      "explanation": "A jelmagyarázat egy kis 'szótár' a diagram mellett, ami segít beazonosítani, hogy melyik színhez melyik adatfajta tartozik. ✅ Megoldás: Megmutatja, hogy a különböző színek melyik kategóriát jelentik."
+    },
+    {
+      "question": "Milyen diagramtípus esetén fontos a jelmagyarázat?",
+      "answers": {
+        "a": "Vonaldiagram.",
+        "b": "Oszlopdiagram.",
+        "c": "Kördiagram."
+      },
+      "correct": "c",
+      "explanation": "A kördiagramokon az egyes részeket általában különböző színekkel jelölik, ezért a jelmagyarázat segít a színek jelentésének megértésében. ✅ Megoldás: Kördiagram"
+    },
+    {
+      "question": "Miért jó, ha a diagramnak címe van?",
+      "answers": {
+        "a": "Szebbé teszi a diagramot.",
+        "b": "Megtudjuk belőle, hogy miről szólnak az adatok.",
+        "c": "Segít a színeket megkülönböztetni."
+      },
+      "correct": "b",
+      "explanation": "A diagramoknak a cím adja meg a kontextust, elmondja, hogy mit ábrázolunk (pl. 'Az osztály tanulóinak magassága'). ✅ Megoldás: Megtudjuk belőle, hogy miről szólnak az adatok."
+    },
+    {
+      "question": "Ha egy kördiagram 25%-os szelete 10 embert jelöl (ismétlés), akkor a teljes csoport létszáma:",
+      "answers": {
+        "a": "40",
+        "b": "50",
+        "c": "25"
+      },
+      "correct": "a",
+      "explanation": "A 25% az egésznek a negyede (1/4). Ha a csoport negyede 10 ember, akkor a teljes csoport 4 * 10 = 40 ember. ✅ Megoldás: 40"
+    },
+    {
+      "question": "Ha egy oszlopdiagramon az 'alma' oszlop 10-ig, a 'körte' 15-ig ér. Mit jelöl ez? (ismétlés)",
+      "answers": {
+        "a": "Több körte van, mint alma.",
+        "b": "Több alma van, mint körte.",
+        "c": "Ugyanannyi van mindkettőből."
+      },
+      "correct": "a",
+      "explanation": "Az oszlopdiagramon a magasabb oszlop nagyobb mennyiséget jelöl. ✅ Megoldás: Több körte van, mint alma."
+    },
+    {
+      "question": "Egy 10 cm magas oszlopdiagramos ábrán a legnagyobb adat 10 cm magasan van. Mit jelöl a 2 cm magasságú oszlop?",
+      "answers": {
+        "a": "A legkisebb értéket",
+        "b": "Az értékek 20%-át.",
+        "c": "Az eredeti érték 1/5-ét."
+      },
+      "correct": "b",
+      "explanation": "Az oszlopok magassága arányos az adatok nagyságával. Ha 10 cm a teljes skála, akkor a 2 cm az 1/5, azaz 20%-a.  ✅ Megoldás: Az értékek 20%-át."
+    },
+    {
+      "question": "Egy 10 cm-es vonaldiagramon a legmagasabb pont 8 cm-nél van, a legalacsonyabb 2 cm-nél. Ez mit jelent?",
+      "answers": {
+        "a": "Az adatok átlagosan 5 cm-nél vannak.",
+        "b": "A változás 6 cm mértékű.",
+        "c": "A legmagasabb érték a legalacsonyabb négyszerese."
+      },
+      "correct": "b",
+      "explanation": "A két pont közötti különbség, azaz a változás mértéke 8 - 2 = 6 cm. ✅ Megoldás: A változás 6 cm mértékű."
+    },
+     {
+      "question": "Melyik a legalkalmasabb diagram, ha egy város lélekszámának változását szeretnénk bemutatni az elmúlt 10 évben?",
+      "answers": {
+        "a": "Oszlopdiagram",
+        "b": "Vonaldiagram",
+        "c": "Kördiagram"
+      },
+      "correct": "a",
+      "explanation": "A vonaldiagram a legjobban alkalmas az időbeli trendek bemutatására. Az oszlopdiagram kategóriák összehasonlítására alkalmas. A kördiagram arányokat mutat.  ✅ Megoldás: Vonaldiagram"
+    },
+    {
+      "question": "Egy 100 fős osztályban 30-an fiúk, a többiek lányok. Ha a körtáblázatba ábrázoljuk, mekkora a fiúkat jelző körcikk szöge?",
+      "answers": {
+        "a": "30°",
+        "b": "108°",
+        "c": "36°"
+      },
+      "correct": "b",
+      "explanation": "A fiúk aránya 30/100, azaz 30%. A teljes kör 360°, a fiúkat jelző körcikk 30/100 * 360° = 108°. ✅ Megoldás: A fiúkat jelző körcikk szöge 108°."
+    },
+    {
+      "question": "Melyik NEM használható a százalékos adatok ábrázolására?",
+      "answers": {
+        "a": "Kördiagram",
+        "b": "Oszlopdiagram",
+        "c": "Vonaldiagram"
+      },
+      "correct": "c",
+      "explanation": "A kördiagram a százalékos megoszlást mutatja. Az oszlopdiagram is alkalmas arányok ábrázolására. A vonaldiagram időbeli változásokat mutat, nem százalékokat. ✅ Megoldás: A vonaldiagram nem alkalmas a százalékos adatok ábrázolására."
+    },
+    {
+      "question": "Egy tortát a barátaid között osztasz szét. Hogy a legegyszerűbb a torta részeit vizuálisan bemutatni?",
+      "answers": {
+        "a": "Oszlopdiagrammal",
+        "b": "Kördiagrammal",
+        "c": "Vonaldiagrammal"
+      },
+      "correct": "b",
+      "explanation": "A kördiagram mutatja a legjobban az arányokat, egy egész részeit. ✅ Megoldás: Kördiagrammal"
+    },
+    {
+      "question": "Egy óvodai felmérésben a gyerekek kedvenc gyümölcsét vizsgálták. Milyen diagrammal a legérthetőbb bemutatni?",
+      "answers": {
+        "a": "Oszlopdiagrammal",
+        "b": "Kördiagrammal",
+        "c": "Vonaldiagram"
+      },
+      "correct": "a",
+      "explanation": "Az oszlopdiagrammal a kategóriák (a gyümölcsök) gyakoriságát vizuálisan jól lehet érzékeltetni. ✅ Megoldás: Oszlopdiagrammal"
+    }
+  ]
 }

@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz hasab felszin terfogat\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a hasáb?",
+      "answers": {
+        "a": "Egy olyan test, melynek alapja és teteje egyforma sokszög, az oldallapjai pedig téglalapok.",
+        "b": "Egy szabályos sokszög.",
+        "c": "Egy olyan test, melynek nincs oldallapja."
+      },
+      "correct": "a",
+      "explanation": "A hasáb egy olyan test, melynek az alapja és a teteje is egyforma, a többi oldala pedig téglalap. Például a kocka vagy a téglatest. ✅ Megoldás: Egy olyan test, melynek alapja és teteje egyforma sokszög, az oldallapjai pedig téglalapok."
+    },
+    {
+      "question": "Milyen alakúak a hasáb oldallapjai?",
+      "answers": {
+        "a": "Háromszögek.",
+        "b": "Téglalapok.",
+        "c": "Körök."
+      },
+      "correct": "b",
+      "explanation": "A hasáb oldallapjai mindig téglalap alakúak. ✅ Megoldás: Téglalapok."
+    },
+    {
+      "question": "Mi a hasáb térfogata?",
+      "answers": {
+        "a": "Alap*magasság",
+        "b": "Oldal*oldal*magasság",
+        "c": "Alap*magasság/2"
+      },
+      "correct": "a",
+      "explanation": "A hasáb térfogatát úgy kapjuk, hogy az alapterületet megszorozzuk a magassággal. ✅ Megoldás: Alap*magasság"
+    },
+    {
+      "question": "Mi a hasáb felszíne?",
+      "answers": {
+        "a": "Az oldalak területeinek összege.",
+        "b": "A két alap és az oldallapok területeinek összege.",
+        "c": "Csak az alaplap területe."
+      },
+      "correct": "b",
+      "explanation": "A hasáb felszíne a két alaplap és az oldallapok területének összege. ✅ Megoldás: A két alap és az oldallapok területeinek összege."
+    },
+    {
+      "question": "Ha egy téglatest alapja 4 cm széles és 3 cm hosszú, a magassága 5 cm, akkor mekkora a térfogata?",
+      "answers": {
+        "a": "60 cm³",
+        "b": "120 cm³",
+        "c": "30 cm³"
+      },
+      "correct": "a",
+      "explanation": "A téglatest térfogata: Alap*magasság = (4*3)*5 = 60 cm³. ✅ Megoldás: 60 cm³"
+    },
+    {
+      "question": "Mi a felszín mértékegysége?",
+      "answers": {
+        "a": "cm",
+        "b": "cm²",
+        "c": "cm³"
+      },
+      "correct": "b",
+      "explanation": "A felszín egy területet mér, ezért a mértékegysége négyzetes. ✅ Megoldás: cm²"
+    },
+    {
+      "question": "Mi a térfogat mértékegysége?",
+      "answers": {
+        "a": "cm",
+        "b": "cm²",
+        "c": "cm³"
+      },
+      "correct": "c",
+      "explanation": "A térfogat a test által elfoglalt helyet méri, ezért a mértékegysége köbös. ✅ Megoldás: cm³"
+    },
+    {
+      "question": "Ha egy kocka oldala 2 cm, akkor a térfogata...",
+      "answers": {
+        "a": "4 cm³",
+        "b": "8 cm³",
+        "c": "16 cm³"
+      },
+      "correct": "b",
+      "explanation": "A kocka térfogata: oldal*oldal*oldal = 2*2*2 = 8 cm³. ✅ Megoldás: 8 cm³"
+    },
+    {
+      "question": "Ha egy kocka oldala 3 cm, akkor a felszíne...",
+      "answers": {
+        "a": "18 cm²",
+        "b": "36 cm²",
+        "c": "54 cm²"
+      },
+      "correct": "c",
+      "explanation": "A kocka felszíne: 6 * (oldal*oldal) = 6 * (3*3) = 54 cm².  ✅ Megoldás: 54 cm²"
+    },
+    {
+      "question": "Mi a magassága egy hasábnak?",
+      "answers": {
+        "a": "Az oldallapok hossza.",
+        "b": "Az alaplap szélessége.",
+        "c": "Az alaplapok távolsága."
+      },
+      "correct": "c",
+      "explanation": "A hasáb magassága az alaplapok távolságát jelenti. ✅ Megoldás: Az alaplapok távolsága."
+    },
+    {
+      "question": "Mi a kocka?",
+      "answers": {
+        "a": "Olyan hasáb, aminek az alapja téglalap.",
+        "b": "Olyan hasáb, aminek minden oldala egyenlő.",
+        "c": "Olyan hasáb, aminek az alapja háromszög."
+      },
+      "correct": "b",
+      "explanation": "A kocka egy olyan hasáb, aminek minden oldala egyenlő. ✅ Megoldás: Olyan hasáb, aminek minden oldala egyenlő."
+    },
+    {
+      "question": "Ha egy téglatest magassága 2 cm, az alapja 5 cm széles és 4 cm hosszú, akkor a felszíne...",
+      "answers": {
+        "a": "40 cm²",
+        "b": "76 cm²",
+        "c": "80 cm²"
+      },
+      "correct": "b",
+      "explanation": "A téglatest felszíne = 2*(alap*szélesség) + 2*(magasság*szélesség) + 2*(magasság*hosszúság). 2*(5*4) + 2*(2*4) + 2*(2*5) = 40 + 16 + 20 = 76 cm². ✅ Megoldás: 76 cm²"
+    },
+    {
+      "question": "Ha egy hasáb alapja 10 cm², a magassága 6 cm, mekkora a térfogata?",
+      "answers": {
+        "a": "16 cm³",
+        "b": "60 cm³",
+        "c": "30 cm³"
+      },
+      "correct": "b",
+      "explanation": "A térfogat = Alap*Magasság. Vagyis 10*6 = 60 cm³. ✅ Megoldás: 60 cm³"
+    },
+    {
+      "question": "Milyen alakú a hasáb oldallapjai?",
+      "answers": {
+        "a": "Háromszög",
+        "b": "Négyzet",
+        "c": "Téglalap"
+      },
+      "correct": "c",
+      "explanation": "A hasábok oldallapjai téglalapok.  ✅ Megoldás: Téglalap"
+    },
+    {
+      "question": "Mi a gúlák és a hasábok közti különbség?",
+      "answers": {
+        "a": "A gúlák oldalnégyzetei háromszögek, a hasáboké téglalapok",
+        "b": "A gúláknak csak egy alapjuk van, a hasáboknak kettő.",
+        "c": "Mindkettő egyforma"
+      },
+      "correct": "c",
+      "explanation": "A hasáboknak két alapja van, a gúláknak egy. ✅ Megoldás: A gúláknak csak egy alapjuk van, a hasáboknak kettő."
+    },
+    {
+      "question": "Egy egyenes hasáb alapja egy 3 cm oldalú négyzet, a magassága 7 cm.  Mekkora a felszíne?",
+      "answers": {
+        "a": "117 cm²",
+        "b": "102 cm²",
+        "c": "99 cm²"
+      },
+      "correct": "c",
+      "explanation": "A felszín = 2*(alap*alap) + 4*(alap*magasság). Az alaplap területe = 3*3=9 cm².  Az oldallapok területe = 4*(3*7) = 84.  A felszín = 2*9 + 84 = 99 cm². ✅ Megoldás: 99 cm²"
+    },
+    {
+      "question": "Egy 6 cm magas hasáb alapja egy 5 cm oldalhosszúságú négyzet. Mekkora a térfogata?",
+      "answers": {
+        "a": "150 cm³",
+        "b": "120 cm³",
+        "c": "100 cm³"
+      },
+      "correct": "a",
+      "explanation": "A térfogat = Alap*Magasság. Alap = 5*5 = 25 cm². Vagyis a térfogat 25 * 6 = 150 cm³. ✅ Megoldás: 150 cm³"
+    },
+    {
+      "question": "Ha a hasáb alapja egy háromszög, akkor mi a helyes képlet a térfogatára?",
+      "answers": {
+        "a": "Térfogat = Alap * Magasság",
+        "b": "Térfogat = (Alap * Magasság) / 2",
+        "c": "Térfogat = Alap + Magasság"
+      },
+      "correct": "a",
+      "explanation": "A hasáb térfogatát úgy számoljuk, hogy az alapterületet megszorozzuk a magassággal. A háromszög alakú alap területe szerepel az alapban.  ✅ Megoldás: Térfogat = Alap * Magasság"
+    },
+    {
+      "question": "Egy hasáb alapja egy 4 cm oldalú négyzet, és a magassága 10 cm. Mekkora a felszíne?",
+      "answers": {
+        "a": "256 cm²",
+        "b": "160 cm²",
+        "c": "192 cm²"
+      },
+      "correct": "c",
+      "explanation": "Felszín = 2*(alap*alap) + 4*(alap*magasság) = 2*(4*4) + 4*(4*10) = 32 + 160 = 192 cm².  ✅ Megoldás: 192 cm²"
+    },
+    {
+      "question": "Mekkora a hasáb térfogata, ha az alapja 20 cm² és a magassága 10 cm?",
+      "answers": {
+        "a": "200 cm³",
+        "b": "100 cm³",
+        "c": "30 cm³"
+      },
+      "correct": "a",
+      "explanation": "Térfogat = Alap*Magasság, ami 20*10=200 cm³. ✅ Megoldás: 200 cm³"
+    },
+    {
+      "question": "Ha megduplázzuk egy hasáb magasságát, akkor a térfogata is...",
+      "answers": {
+        "a": "Kétszeresére nő.",
+        "b": "Felére csökken.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "A térfogat egyenesen arányos a magassággal.  ✅ Megoldás: Kétszeresére nő."
+    },
+     {
+      "question": "Mi történik, ha megduplázzuk a hasáb alapjának területét, miközben a magasságát nem változtatjuk?",
+      "answers": {
+        "a": "A térfogat kétszeresére nő.",
+        "b": "A térfogat feleződik.",
+        "c": "A térfogat nem változik."
+      },
+      "correct": "a",
+      "explanation": "A térfogat a magasságtól és az alapterülettől függ. Ha az alapterületet megduplázzuk, a térfogat is kétszeresére nő. ✅ Megoldás: A térfogat kétszeresére nő."
+    },
+    {
+      "question": "Melyik test a hasáb?",
+      "answers": {
+        "a": "Gúla",
+        "b": "Téglatest",
+        "c": "Gömb"
+      },
+      "correct": "b",
+      "explanation": "A téglatest egy speciális hasáb, aminek az alapjai és az oldalai is téglalapok. ✅ Megoldás: Téglatest"
+    },
+    {
+      "question": "Hány alaplapja van a hasábnak?",
+      "answers": {
+        "a": "Egy",
+        "b": "Kettő",
+        "c": "Három"
+      },
+      "correct": "b",
+      "explanation": "A hasábnak két egyforma alaplapja van. ✅ Megoldás: Kettő"
+    },
+    {
+      "question": "Ha egy hasáb alapja egy kör, akkor minek nevezzük?",
+      "answers": {
+        "a": "Kocka",
+        "b": "Téglatest",
+        "c": "Henger"
+      },
+      "correct": "c",
+      "explanation": "A hengereknek kör alakúak az alapjai. ✅ Megoldás: Henger"
+    }
+  ]
 }

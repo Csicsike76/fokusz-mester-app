@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz kozvetlen meres\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik eszközzel mérünk közvetlenül térfogatot?",
+      "answers": {
+        "a": "Mérőhengerrel",
+        "b": "Mérleggel",
+        "c": "Vonalzóval"
+      },
+      "correct": "a",
+      "explanation": "A mérőhenger folyadékok (és szabálytalan testek) térfogatának közvetlen mérésére szolgál. A mérleg tömeget, a vonalzó hosszúságot mér. ✅ Megoldás: Térfogatot mérőhengerrel mérünk."
+    },
+    {
+      "question": "Egy szoba 4 m hosszú és 5 m széles. Hány négyzetméter a területe?",
+      "answers": {
+        "a": "20 m²",
+        "b": "18 m²",
+        "c": "9 m²"
+      },
+      "correct": "a",
+      "explanation": "A téglalap területe T = hosszúság × szélesség. T = 4 m * 5 m = 20 m². ✅ Megoldás: A szoba területe 20 m²."
+    },
+    {
+      "question": "Mennyi 2 óra 30 perc összesen percben kifejezve?",
+      "answers": {
+        "a": "150 perc",
+        "b": "120 perc",
+        "c": "230 perc"
+      },
+      "correct": "a",
+      "explanation": "Tudjuk, hogy 1 óra = 60 perc. 2 óra = 2 * 60 = 120 perc. Ehhez hozzáadjuk a maradék 30 percet: 120 + 30 = 150 perc. ✅ Megoldás: 2 óra 30 perc az 150 perc."
+    },
+    {
+      "question": "Melyik a hosszúság alapmértékegysége az SI-rendszerben?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "kilométer (km)",
+        "c": "centiméter (cm)"
+      },
+      "correct": "a",
+      "explanation": "A hosszúság alapmértékegysége a méter (m). ✅ Megoldás: A hosszúság alapmértékegysége a méter (m)."
+    },
+    {
+      "question": "Melyik NEM a térfogat mértékegysége?",
+      "answers": {
+        "a": "négyzetméter (m²)",
+        "b": "köbméter (m³)",
+        "c": "liter (l)"
+      },
+      "correct": "a",
+      "explanation": "A köbméter és a liter is a térfogatot méri. A négyzetméter a terület mértékegysége. ✅ Megoldás: A négyzetméter nem a térfogat mértékegysége."
+    },
+    {
+      "question": "Mennyi 2,5 méter centiméterben?",
+      "answers": {
+        "a": "250 cm",
+        "b": "25 cm",
+        "c": "0,25 cm"
+      },
+      "correct": "a",
+      "explanation": "Tudjuk, hogy 1 méter = 100 centiméter. A méterben megadott értéket meg kell szorozni 100-zal: 2,5 * 100 = 250. ✅ Megoldás: 2,5 méter az 250 cm."
+    },
+    {
+      "question": "Mi az idő alapmértékegysége az SI-rendszerben?",
+      "answers": {
+        "a": "másodperc (s)",
+        "b": "perc (min)",
+        "c": "óra (h)"
+      },
+      "correct": "a",
+      "explanation": "Az idő alapmértékegysége a másodperc (s). ✅ Megoldás: Az idő alapmértékegysége a másodperc (s)."
+    },
+    {
+      "question": "Mi a mérés folyamata?",
+      "answers": {
+        "a": "Egy mennyiség összehasonlítása a választott mértékegységgel.",
+        "b": "Egy tárgy megszemlélése.",
+        "c": "Egy tárgy lerajzolása."
+      },
+      "correct": "a",
+      "explanation": "A mérés lényege, hogy megállapítjuk, hányszor fér rá a választott mértékegység (az etalon) a mérendő mennyiségre. ✅ Megoldás: A mérés egy mennyiség összehasonlítása a választott mértékegységgel."
+    },
+    {
+      "question": "Milyen típusú mérés egy szoba hőmérsékletének leolvasása egy hőmérőről?",
+      "answers": {
+        "a": "Közvetett mérés",
+        "b": "Közvetlen mérés",
+        "c": "Számítás"
+      },
+      "correct": "b",
+      "explanation": "Közvetlen mérésnek nevezzük, amikor a mérőeszközről közvetlenül leolvassuk a keresett mennyiség értékét. ✅ Megoldás: A hőmérséklet leolvasása közvetlen mérés."
+    },
+    {
+      "question": "Mennyi 3 liter deciliterben?",
+      "answers": {
+        "a": "300 dl",
+        "b": "30 dl",
+        "c": "0,3 dl"
+      },
+      "correct": "b",
+      "explanation": "Tudjuk, hogy 1 liter = 10 deciliter. A literben megadott értéket meg kell szorozni 10-zel: 3 * 10 = 30. ✅ Megoldás: 3 liter az 30 deciliter."
+    },
+    {
+      "question": "Egy futó 100 métert fut 10 másodperc alatt. Mennyi az átlagsebessége?",
+      "answers": {
+        "a": "1000 m/s",
+        "b": "10 m/s",
+        "c": "1 m/s"
+      },
+      "correct": "b",
+      "explanation": "sebesség (v) = út (s) / idő (t). v = 100 m / 10 s = 10 m/s. ✅ Megoldás: Az átlagsebessége 10 m/s."
+    },
+    {
+      "question": "Melyik jelenti a legrövidebb időt: 200 másodperc, 3 perc, 1 óra?",
+      "answers": {
+        "a": "200 s",
+        "b": "3 perc",
+        "c": "1 óra"
+      },
+      "correct": "b",
+      "explanation": "• 200 s<br>• 3 perc = 180 s<br>• 1 óra = 3600 s. ✅ Megoldás: A 3 perc (180 s) a legrövidebb idő."
+    },
+    {
+      "question": "Mi a terület SI alapmértékegysége?",
+      "answers": {
+        "a": "Hektár (ha)",
+        "b": "Négyzetméter (m²)",
+        "c": "Négyzetcentiméter (cm²)"
+      },
+      "correct": "b",
+      "explanation": "A terület származtatott mennyiség, amely a hosszúság (méter) négyzetéből adódik. ✅ Megoldás: A terület SI alapmértékegysége a négyzetméter (m²)."
+    },
+    {
+      "question": "Egy 10 cm élű kocka térfogata:",
+      "answers": {
+        "a": "100 cm²",
+        "b": "1000 cm³",
+        "c": "600 cm³"
+      },
+      "correct": "b",
+      "explanation": "A kocka térfogata V = a³, ahol 'a' az élhossz. V = 10 cm * 10 cm * 10 cm = 1000 cm³. ✅ Megoldás: A kocka térfogata 1000 cm³."
+    },
+    {
+      "question": "Melyik mérőeszközt használjuk rendkívül kis hosszúságok (pl. papírlap vastagsága) pontos mérésére?",
+      "answers": {
+        "a": "Vonalzó",
+        "b": "Tolómérce vagy mikrométer",
+        "c": "Mérőszalag"
+      },
+      "correct": "b",
+      "explanation": "A vonalzó milliméteres, a mérőszalag centiméteres pontosságú. A tolómérce tized-, a mikrométer századmilliméteres pontosságú mérést tesz lehetővé. ✅ Megoldás: Kis méretek pontos mérésére a tolómérce vagy a mikrométer alkalmas."
+    },
+    {
+      "question": "Mennyi 1 óra?",
+      "answers": {
+        "a": "60 másodperc",
+        "b": "100 perc",
+        "c": "3600 másodperc"
+      },
+      "correct": "c",
+      "explanation": "1 óra = 60 perc, és 1 perc = 60 másodperc. 1 óra = 60 * 60 másodperc = 3600 másodperc. ✅ Megoldás: 1 óra az 3600 másodperc."
+    },
+    {
+      "question": "Egy 2 méter oldalhosszúságú négyzet kerülete:",
+      "answers": {
+        "a": "4 m",
+        "b": "6 m",
+        "c": "8 m"
+      },
+      "correct": "c",
+      "explanation": "A négyzet kerülete K = 4 * a, ahol 'a' az oldalhossz. K = 4 * 2 m = 8 m. ✅ Megoldás: A négyzet kerülete 8 m."
+    },
+    {
+      "question": "Mi a 'parallaxis hiba'?",
+      "answers": {
+        "a": "A mérőeszköz pontatlansága.",
+        "b": "A nem merőleges leolvasásból adódó hiba.",
+        "c": "A mért tárgy hőmérsékletének változása."
+      },
+      "correct": "b",
+      "explanation": "A parallaxis hiba akkor lép fel, ha a megfigyelő szeme, a mérőeszköz mutatója és a skála nincsenek egy, a skálára merőleges egyenesen. Ekkor a leolvasott érték eltér a valóstól. ✅ Megoldás: A nem merőleges leolvasásból adódó hiba a parallaxis hiba."
+    },
+    {
+      "question": "Egy pohárba 2 dl vizet töltünk. Mennyi ez literben?",
+      "answers": {
+        "a": "2 l",
+        "b": "0,02 l",
+        "c": "0,2 l"
+      },
+      "correct": "c",
+      "explanation": "1 liter = 10 deciliter. Tehát a decilitert 10-zel kell osztani a literhez. 2 / 10 = 0,2. ✅ Megoldás: 2 dl az 0,2 liter."
+    },
+    {
+      "question": "Melyik állítás helyes?",
+      "answers": {
+        "a": "1 m² = 100 cm²",
+        "b": "1 m = 1000 mm",
+        "c": "1 m³ = 100 dm³"
+      },
+      "correct": "b",
+      "explanation": "Az 1 m = 1000 mm. ✅ Megoldás: Az az állítás helyes, hogy 1 m = 1000 mm."
+    },
+    {
+      "question": "Egy 20 cm × 30 cm-es papírlap területe:",
+      "answers": {
+        "a": "1.2 m²",
+        "b": "0.06 m²",
+        "c": "0.12 m²"
+      },
+      "correct": "b",
+      "explanation": "T = 20 cm * 30 cm = 600 cm². 1 m² = 10 000 cm². Tehát a cm²-ben kapott értéket osztani kell 10 000-rel. 600 / 10 000 = 0.06 m². ✅ Megoldás: A papírlap területe 0.12 m²."
+    },
+    {
+      "question": "Melyik méréshez van szükségünk képletre?",
+      "answers": {
+        "a": "Időtartam méréséhez",
+        "b": "Tömeg méréséhez",
+        "c": "Téglatest térfogatának meghatározásához"
+      },
+      "correct": "c",
+      "explanation": "Az időtartamot és a tömeget leolvassuk egy mérőeszközről (közvetlen mérés). A téglatest térfogatát a V=a*b*c képlettel számoljuk ki, miután lemértük az oldalait (közvetett mérés). ✅ Megoldás: A téglatest térfogatának meghatározásához van szükség képletre."
+    },
+    {
+      "question": "Egy 3 cm oldalú kocka felszíne:",
+      "answers": {
+        "a": "27 cm²",
+        "b": "9 cm²",
+        "c": "54 cm²"
+      },
+      "correct": "c",
+      "explanation": "A kocka felszíne = 6 * (oldal * oldal) = 6 * (3 * 3) = 54 cm². ✅ Megoldás: A kocka felszíne 54 cm²."
+    },
+    {
+      "question": "Ha egy téglalap területét és egyik oldalát ismerjük, hogyan számoljuk ki a másik oldalát?",
+      "answers": {
+        "a": "Összeadjuk az oldalait.",
+        "b": "Elosztjuk a területet az ismert oldallal.",
+        "c": "Megszorozzuk őket."
+      },
+      "correct": "b",
+      "explanation": "A téglalap területe (T) = a * b. Ha 'a'-t keressük, akkor az egyenlet mindkét oldalát elosztjuk 'b'-vel: a = T / b.  ✅ Megoldás: A másik oldalt úgy kapjuk meg, hogy elosztjuk a területet az ismert oldallal."
+    },
+    {
+      "question": "Egy pénzérme milyen testhez hasonlít?",
+      "answers": {
+        "a": "egy nagyon lapos hengerhez",
+        "b": "egy körlaphoz",
+        "c": "egy koronghoz"
+      },
+      "correct": "a",
+      "explanation": "Mivel van vastagsága (magassága) és két kör alakú lapja, ez egy henger, ami nagyon lapos. ✅ Megoldás: Egy nagyon lapos hengerhez."
+    }
+  ]
 }

@@ -3,6 +3,247 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz muveletek valos\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz műveletek valos\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a 3√7 + 5√7 összege?",
+      "answers": {
+        "a": "8√7",
+        "b": "8√14",
+        "c": "15√7"
+      },
+      "correct": "a",
+      "explanation": "Az egynemű gyökös kifejezéseket (amelyekben a gyökjel alatt ugyanaz a szám áll) összevonhatjuk az együtthatók összevonásával. (3 + 5)√7 = 8√7. ✅ Megoldás: Az összeg 8√7."
+    },
+    {
+      "question": "Mi a √8 + √18 összege?",
+      "answers": {
+        "a": "5√2",
+        "b": "√26",
+        "c": "2√5"
+      },
+      "correct": "a",
+      "explanation": "Először egyszerűsítjük a tagokat, hogy egyneműek legyenek. √8 = √(4 * 2) = 2√2, √18 = √(9 * 2) = 3√2. Ezután összeadjuk: 2√2 + 3√2 = (2+3)√2 = 5√2. ✅ Megoldás: Az összeg 5√2."
+    },
+    {
+      "question": "Mi a √3 * (√3 + 2) szorzat értéke?",
+      "answers": {
+        "a": "3 + 2√3",
+        "b": "5√3",
+        "c": "9 + 2√3"
+      },
+      "correct": "a",
+      "explanation": "A zárójelet a szorzás disztributív tulajdonsága szerint bontjuk fel: (√3 * √3) + (√3 * 2) = 3 + 2√3. ✅ Megoldás: A szorzat értéke 3 + 2√3."
+    },
+    {
+      "question": "Melyik kifejezés egyenlő ezzel: (√5 - √2)²?",
+      "answers": {
+        "a": "7 - 2√10",
+        "b": "3",
+        "c": "7"
+      },
+      "correct": "a",
+      "explanation": "Az (a-b)² = a² - 2ab + b² azonosságot alkalmazzuk. (√5)² - 2*√5*√2 + (√2)² = 5 - 2√10 + 2 = 7 - 2√10. ✅ Megoldás: A kifejezés értéke 7 - 2√10."
+    },
+    {
+      "question": "Mi a 2 / √2 gyöktelenített alakja?",
+      "answers": {
+        "a": "√2",
+        "b": "2√2",
+        "c": "1"
+      },
+      "correct": "a",
+      "explanation": "A nevezőben lévő gyökkel, azaz √2-vel bővítjük a törtet. (2 * √2) / (√2 * √2) = 2√2 / 2. A 2-vel való egyszerűsítés után az eredmény √2. ✅ Megoldás: A gyöktelenített alak √2."
+    },
+    {
+      "question": "Mennyi a 8 / (√5 - 1) gyöktelenített értéke?",
+      "answers": {
+        "a": "2(√5 + 1)",
+        "b": "8(√5 + 1)",
+        "c": "4(√5 - 1)"
+      },
+      "correct": "a",
+      "explanation": "A nevező konjugáltjával, (√5 + 1)-gyel bővítünk. [8 * (√5 + 1)] / [(√5 - 1)(√5 + 1)] = 8(√5 + 1) / (5 - 1) = 8(√5 + 1) / 4. 4-gyel egyszerűsítve kapjuk, hogy 2(√5 + 1).  ✅ Megoldás: A kifejezés értéke 2(√5 + 1)."
+    },
+    {
+      "question": "Melyik kifejezés nevezője racionális szám?",
+      "answers": {
+        "a": "5 / 4",
+        "b": "√3 / 2",
+        "c": "1 / √5"
+      },
+      "correct": "a",
+      "explanation": "A √3 / 2 és 1 / √5 kifejezések értéke irracionális, de a kérdés a nevezőre vonatkozik. Az 5 / 4 tört nevezője, a 4, egy racionális szám.  ✅ Megoldás: Az \"5 / 4\" tört nevezője, a 4, egy racionális szám."
+    },
+    {
+      "question": "Mi a √2 / √3 gyöktelenített alakja?",
+      "answers": {
+        "a": "√6 / 3",
+        "b": "2 / 3",
+        "c": "√2 / 3"
+      },
+      "correct": "a",
+      "explanation": "A nevezővel, azaz √3-mal bővítjük a törtet. (√2 * √3) / (√3 * √3) = √6 / 3. ✅ Megoldás: A gyöktelenített alak √6 / 3."
+    },
+    {
+      "question": "Mennyi a 10√6 / 2√3 osztás eredménye?",
+      "answers": {
+        "a": "5√18",
+        "b": "5√2",
+        "c": "5√3"
+      },
+      "correct": "b",
+      "explanation": "Az együtthatókat és a gyökös részeket külön osztjuk: (10/2) * (√6/√3) = 5 * √(6/3) = 5 * √2. ✅ Megoldás: Az eredmény 5√2."
+    },
+    {
+      "question": "Mi a 1 / √5 gyöktelenített alakja?",
+      "answers": {
+        "a": "5",
+        "b": "√5 / 5",
+        "c": "1/5"
+      },
+      "correct": "b",
+      "explanation": "A nevezőben lévő gyökkel, azaz √5-tel bővítjük a törtet: (1 * √5) / (√5 * √5) = √5 / 5. ✅ Megoldás: A gyöktelenített alak √5 / 5."
+    },
+    {
+      "question": "Mi a célja a nevező gyöktelenítésének?",
+      "answers": {
+        "a": "A szám értékének megváltoztatása.",
+        "b": "A nevező racionálissá tétele.",
+        "c": "A számláló eltüntetése."
+      },
+      "correct": "b",
+      "explanation": "A cél a nevező racionálissá tétele. ✅ Megoldás: A cél a nevező racionálissá tétele."
+    },
+    {
+      "question": "Mennyi a 1 / (√2 + 1) gyöktelenített értéke?",
+      "answers": {
+        "a": "√2 + 1",
+        "b": "√2 - 1",
+        "c": "1"
+      },
+      "correct": "b",
+      "explanation": "Szorozzuk meg a számlálót és a nevezőt a nevező konjugáltjával, (√2 - 1)-gyel: [1 * (√2 - 1)] / [(√2 + 1)(√2 - 1)] = (√2 - 1) / (2 - 1) = √2 - 1. ✅ Megoldás: A kifejezés értéke √2 - 1."
+    },
+    {
+      "question": "Mi a 7 / (4 - √2) gyöktelenített értéke?",
+      "answers": {
+        "a": "(4 + √2) / 2",
+        "b": "(28 + 7√2) / 14",
+        "c": "7(4 + √2)"
+      },
+      "correct": "b",
+      "explanation": "Szorozzuk meg a számlálót és a nevezőt a nevező konjugáltjával, (4 + √2)-vel: [7 * (4 + √2)] / [(4 - √2)(4 + √2)] = (28 + 7√2) / (16 - 2) = (28 + 7√2) / 14.  ✅ Megoldás: A kifejezés értéke (28 + 7√2) / 14."
+    },
+    {
+      "question": "Mi az (a+b)(a-b) azonosság eredménye?",
+      "answers": {
+        "a": "a² + b²",
+        "b": "a² - b²",
+        "c": "a² - 2ab + b²"
+      },
+      "correct": "b",
+      "explanation": "Az (a+b)(a-b) azonosság eredménye a² - b². ✅ Megoldás: Az azonosság eredménye a² - b²."
+    },
+    {
+      "question": "Mennyi a 15 / √5 gyöktelenített értéke?",
+      "answers": {
+        "a": "3√25",
+        "b": "3√5",
+        "c": "5√3"
+      },
+      "correct": "b",
+      "explanation": "Szorozzuk meg a számlálót és a nevezőt √5-tel: (15 * √5) / (√5 * √5) = 15√5 / 5. 5-tel egyszerűsítve az eredmény 3√5. ✅ Megoldás: A kifejezés értéke 3√5."
+    },
+    {
+      "question": "Mi a 3/√3 gyöktelenített alakja?",
+      "answers": {
+        "a": "3",
+        "b": "1",
+        "c": "√3"
+      },
+      "correct": "c",
+      "explanation": "A nevezőben lévő gyökkel, √3-mal bővítjük a törtet: (3 * √3) / (√3 * √3) = 3√3 / 3. A 3-mal való egyszerűsítés után az eredmény √3. ✅ Megoldás: A gyöktelenített alak √3."
+    },
+    {
+      "question": "Mi a -0,2 + 1,7 művelet eredménye?",
+      "answers": {
+        "a": "-1,5",
+        "b": "1,5",
+        "c": "1,9"
+      },
+      "correct": "b",
+      "explanation": "A művelet eredménye 1,5.  ✅ Megoldás: 1,5"
+    },
+    {
+      "question": "Melyik állítás igaz a racionális számokra?",
+      "answers": {
+        "a": "A racionális számok összeadása nem kommutatív.",
+        "b": "A racionális számok osztása asszociatív.",
+        "c": "Racionális számok szorzása asszociatív."
+      },
+      "correct": "c",
+      "explanation": "A racionális számok halmaza zárt az összeadásra és a szorzásra, a kommutatív tulajdonságok érvényesülnek. Az osztásra nem. ✅ Megoldás: Racionális számok szorzása asszociatív."
+    },
+    {
+      "question": "Mi a 2 × (1/2 + 1/4) ?",
+      "answers": {
+        "a": "1",
+        "b": "1.5",
+        "c": "2.5"
+      },
+      "correct": "b",
+      "explanation": "Először a zárójelben lévő összeadást végezzük el: 1/2+1/4 = 2/4+1/4=3/4.  Ezután szorzunk: 2 × (3/4) = 6/4 = 3/2 = 1.5.  ✅ Megoldás: 1.5"
+    },
+    {
+      "question": "Mi az a  -12+16+3-5  eredménye?",
+      "answers": {
+        "a": "2",
+        "b": "−14",
+        "c": "26"
+      },
+      "correct": "a",
+      "explanation": "-12+16+3-5 = -12+16 = 4 + 3 - 5 = 7 -5 = 2.  ✅ Megoldás: 2"
+    },
+    {
+      "question": "Melyik a helyes műveleti sorrend?",
+      "answers": {
+        "a": "Zárójel, osztás/szorzás, összeadás/kivonás",
+        "b": "Összeadás/kivonás, szorzás/osztás, zárójel",
+        "c": "Szorzás/osztás, összeadás/kivonás, zárójel"
+      },
+      "correct": "a",
+      "explanation": "A helyes műveleti sorrend a következő: zárójel, hatványozás, szorzás/osztás, összeadás/kivonás. ✅ Megoldás: Zárójel, osztás/szorzás, összeadás/kivonás"
+    },
+    {
+      "question": "Mennyi a 100-nak a 75%-a?",
+      "answers": {
+        "a": "25",
+        "b": "75",
+        "c": "100"
+      },
+      "correct": "b",
+      "explanation": "75% = 75/100. 100 * (75/100)=75. ✅ Megoldás: 75"
+    },
+    {
+      "question": "Melyik nem racionális szám?",
+      "answers": {
+        "a": "3",
+        "b": "π",
+        "c": "0,75"
+      },
+      "correct": "b",
+      "explanation": "A π irracionális szám, mert a tizedes tört alakja végtelen és nem ismétlődő. A 3 és a 0,75 racionálisak. ✅ Megoldás: π"
+    },
+    {
+      "question": "Egy termék ára 20%-kal csökkent. Az eredeti ár 1000 Ft volt. Mennyi az új ár?",
+      "answers": {
+        "a": "800 Ft",
+        "b": "600 Ft",
+        "c": "1200 Ft"
+      },
+      "correct": "a",
+      "explanation": "20% kedvezmény = 20/100 * 1000 = 200.  1000-200=800. ✅ Megoldás: Az új ár 800 Ft."
+    }
+  ]
 }

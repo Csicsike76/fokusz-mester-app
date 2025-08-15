@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz ket egyenes helyzete\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Hányféleképpen helyezkedhet el két egyenes a síkban?",
+      "answers": {
+        "a": "Egyféleképpen.",
+        "b": "Kétféleképpen.",
+        "c": "Háromféleképpen."
+      },
+      "correct": "c",
+      "explanation": "Két egyenes lehet párhuzamos, metsző vagy egybeeső.  ✅ Megoldás: Háromféleképpen."
+    },
+    {
+      "question": "Mit jelent, ha két egyenes párhuzamos?",
+      "answers": {
+        "a": "Metszik egymást.",
+        "b": "Nincs közös pontjuk.",
+        "c": "Egy pontjuk van."
+      },
+      "correct": "b",
+      "explanation": "A párhuzamos egyenesek nem metszik egymást, nincs közös pontjuk. ✅ Megoldás: Nincs közös pontjuk."
+    },
+    {
+      "question": "Mi a jelölése a párhuzamos egyeneseknek?",
+      "answers": {
+        "a": "=",
+        "b": "∥",
+        "c": "⊥"
+      },
+      "correct": "b",
+      "explanation": "A párhuzamos egyeneseket a ∥ jellel jelöljük. ✅ Megoldás: ∥"
+    },
+    {
+      "question": "Mit jelent, ha két egyenes metsző?",
+      "answers": {
+        "a": "Nincs közös pontjuk.",
+        "b": "Egy közös pontjuk van.",
+        "c": "Sok közös pontjuk van."
+      },
+      "correct": "b",
+      "explanation": "A metsző egyeneseknek egy közös pontja van. ✅ Megoldás: Egy közös pontjuk van."
+    },
+    {
+      "question": "Mit jelent, ha két egyenes egybeesik?",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "Ugyanazok az egyenesek, minden pontjuk közös.",
+        "c": "Egy közös pontjuk van."
+      },
+      "correct": "b",
+      "explanation": "Az egybeeső egyenesek ugyanazok az egyenesek, vagyis minden pontjuk közös. ✅ Megoldás: Ugyanazok az egyenesek, minden pontjuk közös."
+    },
+    {
+      "question": "Ha két egyenes egy pontban találkozik, akkor...",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "Metszőek.",
+        "c": "Egybeesőek."
+      },
+      "correct": "b",
+      "explanation": "Ha két egyenes egy pontban találkozik, akkor metszőek. ✅ Megoldás: Metszőek."
+    },
+    {
+      "question": "Ha két egyenesnek minden pontja közös, akkor...",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "Metszőek.",
+        "c": "Egybeesőek."
+      },
+      "correct": "c",
+      "explanation": "Ha két egyenesnek minden pontja közös, akkor egybeesőek.  ✅ Megoldás: Egybeesőek."
+    },
+    {
+      "question": "Mekkora a szög a két, egymásra merőleges egyenes között?",
+      "answers": {
+        "a": "0 fok.",
+        "b": "45 fok.",
+        "c": "90 fok."
+      },
+      "correct": "c",
+      "explanation": "A merőleges egyenesek 90 fokos szöget zárnak be egymással. ✅ Megoldás: 90 fok."
+    },
+    {
+      "question": "Mi a merőleges egyenesek jele?",
+      "answers": {
+        "a": "=",
+        "b": "∥",
+        "c": "⊥"
+      },
+      "correct": "c",
+      "explanation": "A merőleges egyeneseket a ⊥ jellel jelöljük.  ✅ Megoldás: ⊥"
+    },
+    {
+      "question": "Ha két egyenes, 'e' és 'f' párhuzamosak, ezt hogyan jelöljük?",
+      "answers": {
+        "a": "e ∥ f",
+        "b": "e ⊥ f",
+        "c": "e = f"
+      },
+      "correct": "a",
+      "explanation": "A párhuzamosságot a ∥ jellel jelöljük.  ✅ Megoldás: e ∥ f"
+    },
+    {
+      "question": "Ha két egyenes metsző, hány közös pontjuk van?",
+      "answers": {
+        "a": "Nincs.",
+        "b": "Egy.",
+        "c": "Végtelen sok."
+      },
+      "correct": "b",
+      "explanation": "A metsző egyeneseknek egy közös pontja van. ✅ Megoldás: Egy."
+    },
+    {
+      "question": "Ha két egyenes, 'e' és 'f' merőlegesek, ezt hogyan jelöljük?",
+      "answers": {
+        "a": "e ∥ f",
+        "b": "e ⊥ f",
+        "c": "e = f"
+      },
+      "correct": "b",
+      "explanation": "A merőlegességet a ⊥ jellel jelöljük. ✅ Megoldás: e ⊥ f"
+    },
+    {
+      "question": "Melyik a helyes megfogalmazás?",
+      "answers": {
+        "a": "A párhuzamos egyeneseknek egy közös pontja van.",
+        "b": "A metsző egyeneseknek nincs közös pontja.",
+        "c": "Az egybeeső egyenesek minden pontjukban megegyeznek."
+      },
+      "correct": "c",
+      "explanation": "Az egybeeső egyenesek ugyanazok az egyenesek, minden pontjuk közös. ✅ Megoldás: Az egybeeső egyenesek minden pontjukban megegyeznek."
+    },
+    {
+      "question": "Mi a szög a két, egymással párhuzamos egyenes között?",
+      "answers": {
+        "a": "0 fok.",
+        "b": "90 fok.",
+        "c": "180 fok."
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos egyenesek nem metszik egymást, tehát a szögük 0 fok. ✅ Megoldás: 0 fok"
+    },
+    {
+      "question": "Ha két egyenes egy pontban metszik egymást, milyen szögpárt alkotnak?",
+      "answers": {
+        "a": "Párhuzamos szögek.",
+        "b": "Egyállású szögek.",
+        "c": "Csúcsszögek."
+      },
+      "correct": "c",
+      "explanation": "A metsző egyenesek csúcsszögeket alkotnak, amik egyenlőek.  ✅ Megoldás: Csúcsszögek."
+    },
+    {
+      "question": "Ha két egyenes metsző, akkor a metszéspontnál hány szöget kapunk?",
+      "answers": {
+        "a": "Egyet.",
+        "b": "Kettőt.",
+        "c": "Négyet."
+      },
+      "correct": "c",
+      "explanation": "Két metsző egyenes négy szöget hoz létre. ✅ Megoldás: Négyet."
+    },
+    {
+      "question": "Milyen a kapcsolat a csúcsszögek között?",
+      "answers": {
+        "a": "Különbözőek.",
+        "b": "Egyenlőek.",
+        "c": "Összegük 90 fok."
+      },
+      "correct": "b",
+      "explanation": "A csúcsszögek mindig egyenlőek.  ✅ Megoldás: Egyenlőek."
+    },
+    {
+      "question": "Ha két egyenes, 'a' és 'b' párhuzamosak, és egy 'c' egyenes metszi őket, melyik szögek egyenlőek?",
+      "answers": {
+        "a": "A csúcsszögek.",
+        "b": "Az egyállású szögek.",
+        "c": "Mindkettő helyes."
+      },
+      "correct": "c",
+      "explanation": "Ha két párhuzamos egyenest egy harmadik metsz, akkor az egyállású szögek egyenlőek, a csúcsszögek szintén. ✅ Megoldás: Mindkettő helyes."
+    },
+    {
+      "question": "Mi az egyállású szög?",
+      "answers": {
+        "a": "Két, párhuzamos egyenesen fekvő szög, amik a metsző egyenes azonos oldalán vannak.",
+        "b": "A metsző egyenesen fekvő szögek.",
+        "c": "Az egyenesek között lévő szög."
+      },
+      "correct": "a",
+      "explanation": "Az egyállású szögek a párhuzamos egyeneseket metsző egyenes azonos oldalán helyezkednek el. ✅ Megoldás: Két, párhuzamos egyenesen fekvő szög, amik a metsző egyenes azonos oldalán vannak."
+    },
+    {
+      "question": "Ha két egyenes metsző, akkor...",
+      "answers": {
+        "a": "Nincs közös pontjuk.",
+        "b": "Egy közös pontjuk van.",
+        "c": "Két közös pontjuk van."
+      },
+      "correct": "b",
+      "explanation": "A metsző egyeneseknek egy közös pontja van.  ✅ Megoldás: Egy közös pontjuk van."
+    },
+    {
+      "question": "Ha két egyenes párhuzamos, és egy harmadik metszi őket, akkor az egyállású szögek...",
+      "answers": {
+        "a": "Különböző nagyságúak.",
+        "b": "Egyenlő nagyságúak.",
+        "c": "Összegük 180 fok."
+      },
+      "correct": "b",
+      "explanation": "A párhuzamos egyeneseket metsző egyenes azonos oldali szögei (egyállású szögek) egyenlő nagyságúak.  ✅ Megoldás: Egyenlő nagyságúak."
+    },
+    {
+      "question": "Ha két egyenes egybeesik, akkor hány közös pontjuk van?",
+      "answers": {
+        "a": "Nincs.",
+        "b": "Egy.",
+        "c": "Végtelen sok."
+      },
+      "correct": "c",
+      "explanation": "Ha két egyenes egybeesik, akkor a pontjaik megegyeznek, így végtelen sok közös pontjuk van. ✅ Megoldás: Végtelen sok."
+    },
+    {
+      "question": "Mit jelent, ha két egyenes merőleges?",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "90 fokos szöget zárnak be.",
+        "c": "Metszik egymást."
+      },
+      "correct": "b",
+      "explanation": "A merőleges egyenesek 90 fokos szöget zárnak be egymással.  ✅ Megoldás: 90 fokos szöget zárnak be."
+    },
+    {
+      "question": "Melyik igaz a csúcsszögekre?",
+      "answers": {
+        "a": "Különbözőek.",
+        "b": "Egyenlőek.",
+        "c": "Összegük 90 fok."
+      },
+      "correct": "b",
+      "explanation": "A csúcsszögek egyenlőek. ✅ Megoldás: Egyenlőek."
+    },
+    {
+      "question": "Ha két egyenes párhuzamos, és egy harmadik metszi őket, akkor a belső szögek összege egy oldalon...",
+      "answers": {
+        "a": "180 fok.",
+        "b": "90 fok.",
+        "c": "360 fok."
+      },
+      "correct": "a",
+      "explanation": "Ha a metsző egyenes ugyanazon oldalán lévő belső szögek összege 180°. ✅ Megoldás: 180 fok"
+    }
+  ]
 }

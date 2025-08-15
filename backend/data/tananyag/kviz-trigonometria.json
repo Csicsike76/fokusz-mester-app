@@ -1,8 +1,259 @@
 {
-  "title": "Kviz trigonometria",
-  "subject": "altalanos",
-  "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Kviz trigonometria\" című tananyag.",
-  "questions": []
+  "title": "Kvíz trigonometria",
+  "subject": "általános",
+  "grade": 4,
+  "category": "iskolai",
+  "description": "Ez a kvíz a trigonometria alapjait teszteli.",
+  "questions": [
+    {
+      "question": "1. Mit jelent 'megoldani egy derékszögű háromszöget'?",
+      "answers": {
+        "a": "Lerajzolni egy papírra.",
+        "b": "Megmérni a kerületét.",
+        "c": "Kiszámítani az összes hiányzó oldalát és szögét."
+      },
+      "correct": "c",
+      "explanation": "A megoldás azt jelenti, hogy minden adatot megtalálunk a háromszögben: az összes oldal hosszát és az összes szöget. Ha tudunk valamennyit, akkor a többit ki tudjuk számolni."
+    },
+    {
+      "question": "2. Egy derékszögű háromszögben α = 40°. Mekkora a másik hegyesszög, β?",
+      "answers": {
+        "a": "40°",
+        "b": "50°",
+        "c": "140°"
+      },
+      "correct": "b",
+      "explanation": "A derékszögű háromszögben van egy 90 fokos szög. A másik két szög összege is 90 fok. Ha az egyik 40, akkor a másik 90 - 40 = 50 fok."
+    },
+    {
+      "question": "3. Ha egy derékszögű háromszög két befogója adott (a, b), mivel érdemes kezdeni a megoldást?",
+      "answers": {
+        "a": "A szögek kiszámításával.",
+        "b": "Az átfogó kiszámításával Pitagorasz-tétellel.",
+        "c": "A terület kiszámításával."
+      },
+      "correct": "b",
+      "explanation": "A Pitagorasz-tétel segítségével (a² + b² = c²) meg tudjuk határozni az átfogó hosszát. Ha ez megvan, már könnyebb a többi oldalt és szöget kiszámolni."
+    },
+    {
+      "question": "4. Egy derékszögű háromszög átfogója 10 cm, az egyik hegyesszöge 30°. Milyen hosszú a szöggel szemközti befogó?",
+      "answers": {
+        "a": "10 cm",
+        "b": "5 cm",
+        "c": "kb. 8.66 cm"
+      },
+      "correct": "b",
+      "explanation": "A 30 fokos szög szinuszát (sin) használjuk: sin(30°) = szemközti / átfogó. A szinusz 30 foknál 0.5. Így 0.5 = szemközti / 10.  Szorzunk 10-zel: a szemközti oldal 5 cm."
+    },
+    {
+      "question": "5. Egy derékszögű háromszögben a=5 és b=12. Melyik szögfüggvénnyel számolnád ki az 'a' oldallal szemközti szöget?",
+      "answers": {
+        "a": "szinusz",
+        "b": "koszinusz",
+        "c": "tangens"
+      },
+      "correct": "c",
+      "explanation": "A tangens (tan) a szemközti és a szomszédos oldalt köti össze: tan(szög) = szemközti / szomszédos. A tangenssel meg tudjuk mondani a szöget, ha ismerjük a két befogót."
+    },
+    {
+      "question": "6. Egy derékszögű háromszögben a szomszédos befogó 8 cm, a mellette lévő szög 60°. Milyen hosszú az átfogó?",
+      "answers": {
+        "a": "4 cm",
+        "b": "16 cm",
+        "c": "kb. 9.2 cm"
+      },
+      "correct": "b",
+      "explanation": "A koszinusz (cos) a szomszédos és az átfogót köti össze: cos(szög) = szomszédos / átfogó. cos(60°) = 0.5. Így 0.5 = 8 / átfogó.  Szorzunk az átfogóval, majd osztunk 0.5-tel, és megkapjuk az átfogót: 16 cm."
+    },
+    {
+      "question": "7. Egy egyenlő szárú derékszögű háromszög átfogója 10 cm. Milyen hosszúak a befogók?",
+      "answers": {
+        "a": "5 cm",
+        "b": "10 cm",
+        "c": "√50 cm (kb. 7.07 cm)"
+      },
+      "correct": "c",
+      "explanation": "Az egyenlő szárú derékszögű háromszögben a befogók egyforma hosszúak.  A Pitagorasz-tétel: befogó² + befogó² = átfogó². Tehát két befogó² = 100. Egy befogó² = 50, és a befogó = √50."
+    },
+    {
+      "question": "8. Melyik adatpár NEM elegendő egy derékszögű háromszög egyértelmű megoldásához?",
+      "answers": {
+        "a": "Két befogó.",
+        "b": "Két hegyesszög.",
+        "c": "Egy befogó és az átfogó."
+      },
+      "correct": "b",
+      "explanation": "Ha csak a szögeket tudjuk, akkor csak azt tudjuk, hogy milyen formájú a háromszög, de a méretét nem. Végtelen sok különböző méretű háromszög lehet ugyanolyan szögekkel."
+    },
+    {
+      "question": "9. Egy 20 méter magasból lejtő sípálya 15°-os szöget zár be a vízszintessel. Milyen hosszú a pálya?",
+      "answers": {
+        "a": "20 / sin 15°",
+        "b": "20 * sin 15°",
+        "c": "20 / tan 15°"
+      },
+      "correct": "a",
+      "explanation": "A sin(szög) = szemközti / átfogó. A szemközti oldal a magasság, a pálya az átfogó. sin(15°) = 20 / átfogó. Átrendezve: átfogó = 20 / sin(15°)."
+    },
+    {
+      "question": "10. Egy derékszögű háromszög átfogója 15, egyik befogója 9. Hogyan számolnád ki a másik befogót?",
+      "answers": {
+        "a": "Pitagorasz-tétellel: b² = 15² + 9²",
+        "b": "Pitagorasz-tétellel: b² = 15² - 9²",
+        "c": "Trigonometriával."
+      },
+      "correct": "b",
+      "explanation": "A Pitagorasz-tétellel (a² + b² = c²) tudjuk, hogy c² = a² + b². Ha a befogót akarjuk kiszámolni, akkor c² - a² = b²."
+    },
+    {
+      "question": "11. Az előző feladatban (c=15, a=9), mekkora a másik befogó?",
+      "answers": {
+        "a": "12",
+        "b": "6",
+        "c": "144"
+      },
+      "correct": "a",
+      "explanation": "b² = 15² - 9² = 225 - 81 = 144. Így b = √144 = 12."
+    },
+    {
+      "question": "12. Egy toronytól 100 méterre állva 35°-os szögben látjuk a torony csúcsát. Milyen magas a torony?",
+      "answers": {
+        "a": "100 / tan 35°",
+        "b": "100 * cos 35°",
+        "c": "100 * tan 35°"
+      },
+      "correct": "c",
+      "explanation": "tan(szög) = szemközti / szomszédos. A torony a szemközti oldal, a távolság a szomszédos. tan(35°) = magasság / 100.  Átrendezve: magasság = 100 * tan(35°)."
+    },
+    {
+      "question": "13. Ha egy derékszögű háromszögben sin α = 0.5, mekkora az α szög?",
+      "answers": {
+        "a": "30°",
+        "b": "45°",
+        "c": "60°"
+      },
+      "correct": "a",
+      "explanation": "Ha a szög szinusza 0.5, akkor a szög 30 fokos. Ez egy fontos, memorizálandó érték."
+    },
+    {
+      "question": "14. Egy derékszögű háromszögben a=7, c=14. Mekkora az 'a' oldallal szemközti szög?",
+      "answers": {
+        "a": "45°",
+        "b": "60°",
+        "c": "30°"
+      },
+      "correct": "c",
+      "explanation": "sin(α) = szemközti / átfogó = 7/14 = 0.5. Mivel sin(α) = 0.5, α = 30°."
+    },
+    {
+      "question": "15. Egy derékszögű háromszögben a=4, b=3. Hogyan számolnád ki az 'a' oldallal szemközti szöget?",
+      "answers": {
+        "a": "sin α = 4/5",
+        "b": "tan α = 4/3",
+        "c": "cos α = 3/4"
+      },
+      "correct": "b",
+      "explanation": "tan(α) = szemközti / szomszédos = 4/3."
+    },
+    {
+      "question": "16. Ha cos β = 0.707... és β egy hegyesszög, mekkora β?",
+      "answers": {
+        "a": "30°",
+        "b": "45°",
+        "c": "60°"
+      },
+      "correct": "b",
+      "explanation": "Ha a szög koszinusza 0.707, akkor a szög 45 fokos. Ez egy másik fontos érték."
+    },
+    {
+      "question": "17. Egy derékszögű háromszög átfogója 50, egyik hegyesszöge 25°. Milyen hosszú a szöggel szomszédos befogó?",
+      "answers": {
+        "a": "50 * cos 25°",
+        "b": "50 * sin 25°",
+        "c": "50 / tan 25°"
+      },
+      "correct": "a",
+      "explanation": "cos(szög) = szomszédos / átfogó.  cos(25°) = szomszédos / 50. Átrendezve: szomszédos = 50 * cos(25°)."
+    },
+    {
+      "question": "18. Ha egy derékszögű háromszögben ismerjük az 'a' befogót és a 'c' átfogót, hogyan számoljuk ki a β szöget?",
+      "answers": {
+        "a": "sin β = a/c",
+        "b": "cos β = a/c",
+        "c": "tan β = a/c"
+      },
+      "correct": "b",
+      "explanation": "A koszinusz (cos) a szomszédos (most az 'a' befogó) és az átfogót köti össze. cos(β) = a / c."
+    },
+    {
+      "question": "19. Egy egyenlő szárú háromszög alapja 10 cm, a szárak 13 cm-esek. Milyen magas a háromszög?",
+      "answers": {
+        "a": "12 cm",
+        "b": "13 cm",
+        "c": "√194 cm"
+      },
+      "correct": "a",
+      "explanation": "A magasság felezi az alapot. Így a magasság, a fél alap (5 cm) és a szár (13 cm) egy derékszögű háromszöget alkot. Pitagorasz-tétel: magasság² + 5² = 13².  Magasság² = 169 - 25 = 144. A magasság = 12 cm."
+    },
+    {
+      "question": "20. Az előző feladatban (alap:10, szár:13, magasság:12) mekkora az alapon fekvő szög szinusza?",
+      "answers": {
+        "a": "12/13",
+        "b": "5/13",
+        "c": "12/5"
+      },
+      "correct": "a",
+      "explanation": "A sin(szög) = szemközti / átfogó. A szemközti oldal a magasság (12 cm), az átfogó a szár (13 cm)."
+    },
+    {
+      "question": "21. Egy derékszögű háromszögben a=1, c=2. Mekkora az 'a' oldallal szemközti szög?",
+      "answers": {
+        "a": "45°",
+        "b": "30°",
+        "c": "60°"
+      },
+      "correct": "b",
+      "explanation": "sin(szög) = szemközti / átfogó = 1/2 = 0.5. A 0.5 szinuszú szög 30 fokos."
+    },
+    {
+      "question": "22. Egy ház falától 15 méterre a talajról 20°-os szögben látjuk az eresz vonalát. Milyen magasan van az eresz?",
+      "answers": {
+        "a": "15 * tan 20°",
+        "b": "15 / tan 20°",
+        "c": "15 * sin 20°"
+      },
+      "correct": "a",
+      "explanation": "tan(szög) = szemközti / szomszédos. Az eresz a szemközti oldal, a távolság a szomszédos. tan(20°) = magasság / 15.  Átrendezve: magasság = 15 * tan(20°)."
+    },
+    {
+      "question": "23. Mi a teendő, ha egy háromszögben α=50°, β=60° és c=10 adatokat ismerjük?",
+      "answers": {
+        "a": "Pitagorasz-tételt kell használni.",
+        "b": "Ez nem derékszögű, nem tudjuk megoldani.",
+        "c": "Kiszámoljuk a harmadik szöget, és a szinusztételt használjuk (magasabb tananyag)."
+      },
+      "correct": "b",
+      "explanation": "Mivel a szögek összege 110 fok, a háromszög nem derékszögű. Ez a feladat nem oldható meg az itt tanult módszerekkel."
+    },
+    {
+      "question": "24. Egy derékszögű háromszög befogói 9 cm és 12 cm. Mekkora az átfogó?",
+      "answers": {
+        "a": "21 cm",
+        "b": "15 cm",
+        "c": "10 cm"
+      },
+      "correct": "b",
+      "explanation": "Pitagorasz-tétel: c² = 9² + 12² = 81 + 144 = 225. Az átfogó c = √225 = 15 cm."
+    },
+    {
+      "question": "25. Melyik két adat ismerete szükséges legalább egy derékszögű háromszög megoldásához (a 90°-os szöget nem számítva)?",
+      "answers": {
+        "a": "Egy oldal és egy szög.",
+        "b": "Két oldal.",
+        "c": "Mindkettő lehetőség elegendő."
+      },
+      "correct": "c",
+      "explanation": "Egy derékszögű háromszög megoldásához a 90°-os szögön kívül elegendő ismerni két oldalt VAGY egy oldalt és egy hegyesszöget."
+    }
+  ]
 }

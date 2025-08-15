@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz kirchoff torvenyei\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a Kirchhoff-törvények lényege?",
+      "answers": {
+        "a": "Az áramkörökben a feszültségek és áramok viszonyát írják le.",
+        "b": "A hőmérséklet változását mérik.",
+        "c": "A mágneses erőt mutatják meg."
+      },
+      "correct": "a",
+      "explanation": "A Kirchhoff-törvények az áramkörökben a feszültségek és áramok viszonyát írják le. ✅ Megoldás: Az áramkörökben a feszültségek és áramok viszonyát írják le."
+    },
+    {
+      "question": "Mi az első Kirchhoff-törvény?",
+      "answers": {
+        "a": "A huroktörvény.",
+        "b": "A csomóponti törvény.",
+        "c": "Az Ohm-törvény."
+      },
+      "correct": "b",
+      "explanation": "Az első Kirchhoff-törvényt csomóponti törvénynek is nevezzük. ✅ Megoldás: A csomóponti törvény."
+    },
+    {
+      "question": "Mit mond a csomóponti törvény?",
+      "answers": {
+        "a": "A csomópontba befolyó áramok összege egyenlő a kifolyó áramok összegével.",
+        "b": "A hurokban a feszültségek összege nulla.",
+        "c": "Az áram azonos a feszültséggel."
+      },
+      "correct": "a",
+      "explanation": "A csomóponti törvény szerint egy csomópontba befolyó áramok összege megegyezik a kifolyó áramok összegével. Vagyis, a csomópontba belépő áramok összege egyenlő a kilépő áramok összegével. ✅ Megoldás: A csomópontba befolyó áramok összege egyenlő a kifolyó áramok összegével."
+    },
+    {
+      "question": "Mi a csomópont?",
+      "answers": {
+        "a": "Egy zárt hurkot alkotó pont.",
+        "b": "Az a pont az áramkörben, ahol három vagy több vezeték találkozik.",
+        "c": "Az a pont, ahol az áram nulla."
+      },
+      "correct": "b",
+      "explanation": "A csomópont az a pont az áramkörben, ahol három vagy több vezeték találkozik. ✅ Megoldás: Az a pont az áramkörben, ahol három vagy több vezeték találkozik."
+    },
+    {
+      "question": "Mi a hurok a Kirchhoff-törvényeknél?",
+      "answers": {
+        "a": "Egy pont az áramkörben.",
+        "b": "Egy zárt hurok az áramkörben.",
+        "c": "Egy áramforrás."
+      },
+      "correct": "b",
+      "explanation": "A hurok egy zárt út az áramkörben, ami lehetővé teszi az áram körbejárását. ✅ Megoldás: Egy zárt hurok az áramkörben."
+    },
+    {
+      "question": "Mi a második Kirchhoff-törvény?",
+      "answers": {
+        "a": "A csomóponti törvény.",
+        "b": "A huroktörvény.",
+        "c": "Az Ohm-törvény."
+      },
+      "correct": "b",
+      "explanation": "A második Kirchhoff-törvényt huroktörvénynek is nevezzük. ✅ Megoldás: A huroktörvény."
+    },
+    {
+      "question": "Mit mond a huroktörvény?",
+      "answers": {
+        "a": "A csomópontba befolyó áramok összege egyenlő a kifolyó áramok összegével.",
+        "b": "Egy hurokban a feszültségek összege nulla.",
+        "c": "Az áram nagysága a feszültséggel egyenesen arányos."
+      },
+      "correct": "b",
+      "explanation": "A huroktörvény szerint egy zárt hurokban a feszültségek összege mindig nulla. ✅ Megoldás: Egy hurokban a feszültségek összege nulla."
+    },
+    {
+      "question": "Mi a feszültség?",
+      "answers": {
+        "a": "Az áram nagysága.",
+        "b": "Az elektromos áramot mozgató erő.",
+        "c": "Az elektromos alkatrész mérete."
+      },
+      "correct": "b",
+      "explanation": "A feszültség az elektromos áramot mozgató erő.  ✅ Megoldás: Az elektromos áramot mozgató erő."
+    },
+    {
+      "question": "Mi az áram?",
+      "answers": {
+        "a": "Az elektromos töltések mozgása.",
+        "b": "Az elektromos alkatrész feszültsége.",
+        "c": "Az elektromos alkatrész ellenállása."
+      },
+      "correct": "a",
+      "explanation": "Az áram az elektromos töltések mozgása. ✅ Megoldás: Az elektromos töltések mozgása."
+    },
+    {
+      "question": "Mi az ellenállás?",
+      "answers": {
+        "a": "Az áram mértéke.",
+        "b": "Az alkatrész, ami feszültséget ad.",
+        "c": "Az a mérték, amivel egy alkatrész korlátozza az áram folyását."
+      },
+      "correct": "c",
+      "explanation": "Az ellenállás (R) az az alkatrész, ami korlátozza az áram folyását. ✅ Megoldás: Az a mérték, amivel egy alkatrész korlátozza az áram folyását."
+    },
+    {
+      "question": "Milyen mértékegysége van a feszültségnek?",
+      "answers": {
+        "a": "Ohm (Ω)",
+        "b": "Volt (V)",
+        "c": "Amper (A)"
+      },
+      "correct": "b",
+      "explanation": "A feszültség mértékegysége a volt (V). ✅ Megoldás: Volt (V)"
+    },
+    {
+      "question": "Milyen mértékegysége van az áramnak?",
+      "answers": {
+        "a": "Ohm (Ω)",
+        "b": "Volt (V)",
+        "c": "Amper (A)"
+      },
+      "correct": "c",
+      "explanation": "Az áram mértékegysége az amper (A). ✅ Megoldás: Amper (A)"
+    },
+    {
+      "question": "Milyen mértékegysége van az ellenállásnak?",
+      "answers": {
+        "a": "Ohm (Ω)",
+        "b": "Volt (V)",
+        "c": "Amper (A)"
+      },
+      "correct": "a",
+      "explanation": "Az ellenállás mértékegysége az ohm (Ω). ✅ Megoldás: Ohm (Ω)"
+    },
+    {
+      "question": "Mi az Ohm-törvény?",
+      "answers": {
+        "a": "Feszültség = áram * ellenállás",
+        "b": "Áram = feszültség * ellenállás",
+        "c": "Ellenállás = áram * feszültség"
+      },
+      "correct": "a",
+      "explanation": "Az Ohm-törvény szerint a feszültség (U) egyenlő az áram (I) és az ellenállás (R) szorzatával: U = I * R. ✅ Megoldás: Feszültség = áram * ellenállás"
+    },
+    {
+      "question": "Ha egy áramkörben a feszültség 12 V, az ellenállás 4 Ohm, mennyi az áram?",
+      "answers": {
+        "a": "3 A",
+        "b": "8 A",
+        "c": "48 A"
+      },
+      "correct": "a",
+      "explanation": "Az Ohm-törvényből I = U / R = 12 V / 4 Ω = 3 A. ✅ Megoldás: 3 A"
+    },
+    {
+      "question": "Mi a rövidzár?",
+      "answers": {
+        "a": "Amikor az áramkör megszakad.",
+        "b": "Amikor az áramkörben az ellenállás nagyon alacsony, és nagy áram folyik.",
+        "c": "Amikor az áramkör feszültsége alacsony."
+      },
+      "correct": "b",
+      "explanation": "Rövidzárkor az áramkörben az ellenállás nagyon alacsony, ezért nagy áram folyik, ami veszélyes lehet. ✅ Megoldás: Amikor az áramkörben az ellenállás nagyon alacsony, és nagy áram folyik."
+    },
+    {
+      "question": "Mi a soros kapcsolás?",
+      "answers": {
+        "a": "Amikor az alkatrészek egymás mellett vannak.",
+        "b": "Amikor az alkatrészek egymás után vannak.",
+        "c": "Amikor az alkatrészek függetlenül vannak."
+      },
+      "correct": "b",
+      "explanation": "Soros kapcsolásnál az alkatrészek egymás után vannak, így az áram csak egy úton haladhat.  ✅ Megoldás: Amikor az alkatrészek egymás után vannak."
+    },
+    {
+      "question": "Mi a párhuzamos kapcsolás?",
+      "answers": {
+        "a": "Amikor az alkatrészek egymás után vannak.",
+        "b": "Amikor az alkatrészek egymás mellett vannak.",
+        "c": "Amikor nincs ellenállás."
+      },
+      "correct": "b",
+      "explanation": "Párhuzamos kapcsolásnál az alkatrészek egymás mellett vannak, így az áram több útvonalon is haladhat. ✅ Megoldás: Amikor az alkatrészek egymás mellett vannak."
+    },
+    {
+      "question": "Ha sorosan kapcsolunk ellenállásokat, hogyan számoljuk ki az eredő ellenállást?",
+      "answers": {
+        "a": "Összeadjuk az ellenállásokat.",
+        "b": "Kiszorozzuk az ellenállásokat.",
+        "c": "Elosztjuk az ellenállásokat."
+      },
+      "correct": "a",
+      "explanation": "Soros kapcsolásnál az eredő ellenállás az egyes ellenállások összege. ✅ Megoldás: Összeadjuk az ellenállásokat."
+    },
+    {
+      "question": "Ha párhuzamosan kapcsolunk ellenállásokat, hogyan számoljuk ki az eredő ellenállást?",
+      "answers": {
+        "a": "Összeadjuk az ellenállásokat.",
+        "b": "Kiszorozzuk az ellenállásokat.",
+        "c": "A reciprokjaik összegének a reciprokát vesszük."
+      },
+      "correct": "c",
+      "explanation": "Párhuzamos kapcsolásnál az eredő ellenállás a reciprok értékek összegének a reciprokja.  ✅ Megoldás: A reciprokjaik összegének a reciprokát vesszük."
+    },
+    {
+      "question": "Milyen egysége van a villamos teljesítménynek?",
+      "answers": {
+        "a": "Volt (V)",
+        "b": "Watt (W)",
+        "c": "Ohm (Ω)"
+      },
+      "correct": "b",
+      "explanation": "A villamos teljesítmény mértékegysége a watt (W).  ✅ Megoldás: Watt (W)"
+    },
+    {
+      "question": "Hogyan számoljuk ki a villamos teljesítményt?",
+      "answers": {
+        "a": "Feszültség * áram",
+        "b": "Áram / ellenállás",
+        "c": "Feszültség / ellenállás"
+      },
+      "correct": "a",
+      "explanation": "A villamos teljesítményt úgy kapjuk, hogy a feszültséget megszorozzuk az árammal: P = U * I.  ✅ Megoldás: Feszültség * áram"
+    },
+    {
+      "question": "Ha egy 12 V-os izzó 2 A áramot vesz fel, mennyi a teljesítménye?",
+      "answers": {
+        "a": "6 W",
+        "b": "14 W",
+        "c": "24 W"
+      },
+      "correct": "c",
+      "explanation": "P = U * I = 12 V * 2 A = 24 W.  ✅ Megoldás: 24 W"
+    },
+    {
+      "question": "Miért fontosak a Kirchhoff-törvények?",
+      "answers": {
+        "a": "Hogy megértsük az áramkörök működését.",
+        "b": "A feszültséget mérni.",
+        "c": "Az alkatrészeket megjelölni."
+      },
+      "correct": "a",
+      "explanation": "A Kirchhoff-törvények segítségével megérthetjük, hogyan működnek az áramkörök, és hogyan oszlanak el bennük a feszültségek és áramok. ✅ Megoldás: Hogy megértsük az áramkörök működését."
+    },
+    {
+      "question": "Mi a célja az Ohm-törvény alkalmazásának?",
+      "answers": {
+        "a": "Hogy az áramkörben a feszültséget és az áramot kiszámoljuk.",
+        "b": "Az áramkörök kapcsolását megérteni.",
+        "c": "Az alkatrészeket megjelölni."
+      },
+      "correct": "a",
+      "explanation": "Az Ohm-törvény segítségével kiszámolhatjuk az áramkörben a feszültséget, az áramot és az ellenállást. ✅ Megoldás: Hogy az áramkörben a feszültséget és az áramot kiszámoljuk."
+    }
+  ]
 }

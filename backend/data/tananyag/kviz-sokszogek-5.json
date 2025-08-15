@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz sokszogek 5\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Hogyan nevezzük az ötoldalú sokszöget?",
+      "answers": {
+        "a": "négyszög",
+        "b": "hatszög",
+        "c": "ötszög"
+      },
+      "correct": "c",
+      "explanation": "A sokszögeket az oldalaik száma alapján nevezzük el. ✅ Megoldás: Az ötoldalú sokszög neve ötszög (pentagon)."
+    },
+    {
+      "question": "Melyik NEM sokszög?",
+      "answers": {
+        "a": "háromszög",
+        "b": "kör",
+        "c": "téglalap"
+      },
+      "correct": "b",
+      "explanation": "A sokszög definíció szerint csak egyenes szakaszokból álló, zárt síkidom. A körnek görbe vonala van, ezért nem sokszög. A háromszög és a téglalap megfelel a definíciónak. ✅ Megoldás: A kör nem sokszög."
+    },
+    {
+      "question": "Hogyan számoljuk ki egy sokszög kerületét?",
+      "answers": {
+        "a": "összeadjuk az oldalak hosszát",
+        "b": "összeszorozzuk az oldalak hosszát",
+        "c": "megmérjük a leghosszabb oldalt"
+      },
+      "correct": "a",
+      "explanation": "A kerület a sokszöget határoló vonal teljes hossza. Ezt úgy kapjuk meg, ha az összes oldalhosszúságot összeadjuk. ✅ Megoldás: A kerület az oldalak hosszának összege."
+    },
+    {
+      "question": "Mit jelent az, hogy egy sokszög 'szabályos'?",
+      "answers": {
+        "a": "nincs benne hiba",
+        "b": "minden oldala és minden szöge egyenlő",
+        "c": "legalább 5 oldala van"
+      },
+      "correct": "b",
+      "explanation": "Egy sokszög akkor szabályos, ha minden oldala egyforma hosszú ÉS minden belső szöge egyforma nagy. ✅ Megoldás: Minden oldala és minden szöge egyenlő."
+    },
+    {
+      "question": "Mi a sokszög csúcsa?",
+      "answers": {
+        "a": "az a pont, ahol két oldal találkozik",
+        "b": "a sokszög közepe",
+        "c": "a leghosszabb oldal"
+      },
+      "correct": "a",
+      "explanation": "A csúcs az a pont, ahol két oldal találkozik."
+    },
+    {
+      "question": "Hány oldala van egy hatszögnek?",
+      "answers": {
+        "a": "5",
+        "b": "7",
+        "c": "6"
+      },
+      "correct": "c",
+      "explanation": "A sokszögek elnevezése az oldalak számából ered. A 'hexa' görög szó jelentése hat. ✅ Megoldás: A hatszögnek (hexagon) 6 oldala van."
+    },
+    {
+      "question": "Hogyan nevezzük az összes négyoldalú sokszöget közös néven?",
+      "answers": {
+        "a": "négyzet",
+        "b": "négyszög",
+        "c": "rombusz"
+      },
+      "correct": "b",
+      "explanation": "A négyzet és a rombusz a négyoldalú sokszögek speciális esetei. A gyűjtőnevük, ami minden négy oldallal rendelkező sokszögre igaz, a négyszög. ✅ Megoldás: A közös nevük a négyszög."
+    },
+    {
+      "question": "Mi a legkevesebb oldal, amiből egy sokszög állhat?",
+      "answers": {
+        "a": "3",
+        "b": "4",
+        "c": "2"
+      },
+      "correct": "a",
+      "explanation": "A sokszög definíciója, hogy az zárt legyen. A 2 szakaszból nem lehet zárt alakzatot létrehozni, de háromból már igen, ez a háromszög. ✅ Megoldás: A legkevesebb oldalú sokszög a háromszög, aminek 3 oldala van."
+    },
+    {
+      "question": "Mennyi a kerülete egy 4 cm oldalú szabályos ötszögnek?",
+      "answers": {
+        "a": "20 cm",
+        "b": "30 cm",
+        "c": "18 cm"
+      },
+      "correct": "a",
+      "explanation": "A szabályos ötszögnek 5 egyenlő oldala van. A kerület a 6 * 5 cm = 20 cm. ✅ Megoldás: A kerülete 20 cm."
+    },
+    {
+      "question": "Mi a sokszög átlója?",
+      "answers": {
+        "a": "A sokszög oldala",
+        "b": "két nem szomszédos csúcsot összekötő szakasz",
+        "c": "A sokszög magassága"
+      },
+      "correct": "b",
+      "explanation": "Az átló a sokszög belsejében halad, két nem szomszédos csúcsot köt össze. ✅ Megoldás: Két nem szomszédos csúcsot összekötő szakasz."
+    },
+    {
+      "question": "Hány csúcsa van egy nyolcszögnek?",
+      "answers": {
+        "a": "7",
+        "b": "9",
+        "c": "8"
+      },
+      "correct": "c",
+      "explanation": "Egy sokszögnek mindig ugyanannyi oldala van, mint csúcsa. A nyolcszögnek 8 oldala van, tehát 8 csúcsa is van. ✅ Megoldás: A nyolcszögnek 8 csúcsa van."
+    },
+    {
+      "question": "Ha egy sokszög szabályos, akkor...",
+      "answers": {
+        "a": "...minden oldala egyenlő.",
+        "b": "...minden szöge egyenlő.",
+        "c": "mindkettő igaz"
+      },
+      "correct": "c",
+      "explanation": "Egy szabályos sokszög minden oldala és minden szöge egyenlő. ✅ Megoldás: Mindkettő igaz"
+    },
+    {
+      "question": "Melyik állítás NEM igaz?",
+      "answers": {
+        "a": "Egy egyenesnek végtelen sok pontja van.",
+        "b": "Két különböző ponton át végtelen sok egyenes húzható.",
+        "c": "Egy szakasz rész a síknak."
+      },
+      "correct": "b",
+      "explanation": "Egyenesen: végtelen sok pont van. Két ponton át egy egyenest.  Egy szakasz része a síknak. ✅ Megoldás: Két ponton keresztül egyet lehet húzni"
+    },
+    {
+      "question": "Egy 8 cm x 6 cm-es téglalap kerülete...",
+      "answers": {
+        "a": "28 cm",
+        "b": "48 cm",
+        "c": "14 cm"
+      },
+      "correct": "a",
+      "explanation": "A kerület = 2 * (hosszúság + szélesség).  K = 2 * (8 + 6) = 28 cm. ✅ Megoldás: 28 cm"
+    },
+    {
+      "question": "Mi a 2x+3y=6 egyenes x-tengelymetszete?",
+      "answers": {
+        "a": "3",
+        "b": "2",
+        "c": "0"
+      },
+      "correct": "a",
+      "explanation": "Az x tengelyen az y koordináta 0. 2x+3*0=6, 2x=6, x=3. ✅ Megoldás: 3"
+    },
+    {
+      "question": "Melyik a legkisebb ötjegyű, különböző számjegyekből álló szám?",
+      "answers": {
+        "a": "10234",
+        "b": "12345",
+        "c": "10000"
+      },
+      "correct": "a",
+      "explanation": "A legkisebb számot úgy kapjuk, ha a legkisebb számjegyeket használjuk. Az ezresekre a legkisebb nem nulla számjegy (1) kerül. A többire a maradék legkisebbek növekvő sorrendben: 0, 2, 3, 4. Így a szám: 10234. ✅ Megoldás: 10234"
+    },
+    {
+      "question": "Mi a 199 szám százasokra kerekített értéke?",
+      "answers": {
+        "a": "100",
+        "b": "200",
+        "c": "190"
+      },
+      "correct": "b",
+      "explanation": "Százasokra kerekítéskor a tízesek helyén álló 9-est kell nézni. Mivel ez 5-nél nagyobb, felfelé kerekítünk. A 1-es százast eggyel növeljük, a többi helyiértéken 0 lesz. ✅ Megoldás: 200"
+    },
+    {
+      "question": "Melyik szám a 100-nak osztója?",
+      "answers": {
+        "a": "200",
+        "b": "25",
+        "c": "30"
+      },
+      "correct": "b",
+      "explanation": "A 100 osztói: 1, 2, 4, 5, 10, 20, 25, 50, 100.  ✅ Megoldás: A 25 osztója a 100-nak."
+    },
+    {
+      "question": "Mi a 999 szám ezresekre kerekített értéke?",
+      "answers": {
+        "a": "99 000",
+        "b": "100 000",
+        "c": "99 500"
+      },
+      "correct": "b",
+      "explanation": "Ezresekre kerekítéshez a százasok helyén álló 9-est kell nézni. Mivel ez 5-nél nagyobb, felfelé kerekítünk. A 99 ezresből így 100 ezres lesz, azaz 100 000.  ✅ Megoldás: 100 000"
+    },
+    {
+      "question": "Melyik a 3.889 legkisebb pontossággal kerekitett értéke?",
+      "answers": {
+        "a": "4",
+        "b": "4.0",
+        "c": "3.9"
+      },
+      "correct": "b",
+      "explanation": "Az adott tizedesjegyig való kerekítés a pontosabb. ✅ Megoldás: 4,0"
+    },
+    {
+      "question": "Mi a szabályos ötszög belső szögeinek összege?",
+      "answers": {
+        "a": "360°",
+        "b": "540°",
+        "c": "720°"
+      },
+      "correct": "b",
+      "explanation": "Egy n oldalú konvex sokszög belső szögeinek összege (n-2) * 180°. Egy ötszög (n=5): (5-2)*180=3*180=540°. ✅ Megoldás: 540°"
+    },
+    {
+      "question": "Melyik nem lehet a sokszög belső szöge?",
+      "answers": {
+        "a": "90",
+        "b": "150",
+        "c": "200"
+      },
+      "correct": "c",
+      "explanation": "Egy sokszög belső szöge nem lehet 180°nál nagyobb, mert a sokszög konvex. ✅ Megoldás: A 200° nem lehet"
+    },
+    {
+      "question": "Egy négyszög szögeinek aránya 2:3:5:8. Mekkora a legnagyobb szöge?",
+      "answers": {
+        "a": "150°",
+        "b": "160°",
+        "c": "180°"
+      },
+      "correct": "b",
+      "explanation": "A szögek összege 2x+3x+5x+8x=360°.  18x=360, x=20°.  A legnagyobb szög 8*20=160. ✅ Megoldás: 160°"
+    },
+    {
+      "question": "Mi a síkidom?",
+      "answers": {
+        "a": "A tér egy része",
+        "b": "A test körvonala.",
+        "c": "Zárt vonallal határolt alakzat."
+      },
+      "correct": "c",
+      "explanation": "A síkidom a sík egy része, amit a körvonal határol.  ✅ Megoldás: Zárt vonallal határolt alakzat."
+    },
+    {
+      "question": "Ha a 4 cm oldalú négyzetet megszorozzuk 2-vel, akkor a területe",
+      "answers": {
+        "a": "duplázódik.",
+        "b": "négyszeresére nő.",
+        "c": "változatlan marad"
+      },
+      "correct": "b",
+      "explanation": "Mivel a terület a hosszal arányos, ha az oldalt duplázzuk a terület négyszeresére nő. ✅ Megoldás: A terület a négyszeresére nő."
+    }
+  ]
 }

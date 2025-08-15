@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz hasab testhalo\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a hasáb testhálója?",
+      "answers": {
+        "a": "A hasáb belseje.",
+        "b": "A hasáb lapjainak síkba terített képe.",
+        "c": "A hasáb árnyéka."
+      },
+      "correct": "b",
+      "explanation": "A testháló azt mutatja meg, hogy a hasáb felszínét hogyan lehet síkba teríteni, azaz kiteríteni. ✅ Megoldás: A hasáb lapjainak síkba terített képe."
+    },
+    {
+      "question": "Miből áll a hasáb testhálója?",
+      "answers": {
+        "a": "Csak az alaplapokból.",
+        "b": "Csak az oldallapokból.",
+        "c": "Az alaplapokból és az oldallapokból."
+      },
+      "correct": "c",
+      "explanation": "A hasáb testhálójához szükségünk van az alaplapokra és az oldallapokra is. ✅ Megoldás: Az alaplapokból és az oldallapokból."
+    },
+    {
+      "question": "Milyen alakúak a hasáb oldallapjai?",
+      "answers": {
+        "a": "Háromszögek.",
+        "b": "Téglalapok.",
+        "c": "Körök."
+      },
+      "correct": "b",
+      "explanation": "A hasábok oldallapjai mindig téglalapok.  ✅ Megoldás: Téglalapok."
+    },
+    {
+      "question": "Milyen alakú lehet a hasáb alapja?",
+      "answers": {
+        "a": "Mindig négyzet.",
+        "b": "Bármilyen sokszög lehet.",
+        "c": "Mindig háromszög."
+      },
+      "correct": "b",
+      "explanation": "A hasáb alapja lehet háromszög, négyzet, ötszög, hatszög stb. ✅ Megoldás: Bármilyen sokszög lehet."
+    },
+    {
+      "question": "Melyik test testhálója látható a képen?",
+      "answers": {
+        "a": "Négyzetes hasáb (kocka).",
+        "b": "Henger.",
+        "c": "Háromszög alapú hasáb."
+      },
+      "correct": "a",
+      "explanation": "A kocka a téglatest különleges esete, a lapjai négyzetek. ✅ Megoldás: Négyzetes hasáb (kocka)."
+    },
+    {
+      "question": "Ha egy hasáb alapja ötszög, hány oldallapja van?",
+      "answers": {
+        "a": "Öt",
+        "b": "Hat",
+        "c": "Négy"
+      },
+      "correct": "a",
+      "explanation": "Az oldallapok száma megegyezik az alaplap oldalainak számával. ✅ Megoldás: Öt."
+    },
+    {
+      "question": "Miért hasznos a hasáb testhálója?",
+      "answers": {
+        "a": "A térfogat kiszámításához.",
+        "b": "A felszín kiszámításához.",
+        "c": "Az élek számának megállapításához."
+      },
+      "correct": "b",
+      "explanation": "A testháló segítségével könnyen kiszámítható a hasáb felszíne, mert a síkidomok területeit összeadjuk. ✅ Megoldás: A felszín kiszámításához."
+    },
+    {
+      "question": "Melyik testnek van kör alakú oldallapja a testhálón?",
+      "answers": {
+        "a": "Téglatest.",
+        "b": "Henger.",
+        "c": "Kocka."
+      },
+      "correct": "b",
+      "explanation": "A henger oldallapja a kiterített állapotban egy téglalap.  ✅ Megoldás: Henger."
+    },
+    {
+      "question": "Ha egy hasáb alapja egy négyzet, és az oldallapjai egyenlőek, akkor milyen test?",
+      "answers": {
+        "a": "Téglatest",
+        "b": "Kocka",
+        "c": "Háromszög alapú hasáb."
+      },
+      "correct": "b",
+      "explanation": "Ha egy hasáb alapja négyzet, és az oldallapjai is négyzetek, akkor a test kocka.  ✅ Megoldás: Kocka"
+    },
+    {
+      "question": "Miért rajzoljuk meg a hasábok testhálóját?",
+      "answers": {
+        "a": "Hogy megnézzük, hogy néz ki.",
+        "b": "Hogy megértsük, hogyan épül fel a test.",
+        "c": "Mindkettő helyes."
+      },
+      "correct": "c",
+      "explanation": "A testhálóval jobban megérthetjük a test felépítését, és a felszín kiszámításához is nagy segítséget nyújt. ✅ Megoldás: Mindkettő helyes."
+    },
+    {
+      "question": "Ha egy hasáb alapja egy téglalap, akkor a hasáb oldallapjai...",
+      "answers": {
+        "a": "Téglalapok.",
+        "b": "Háromszögek.",
+        "c": "Körök."
+      },
+      "correct": "a",
+      "explanation": "A hasáb oldallapjai téglalapok. ✅ Megoldás: Téglalapok."
+    },
+    {
+      "question": "Melyik testnek van a testhálóján két egyforma alaplap?",
+      "answers": {
+        "a": "A gúla.",
+        "b": "A hasáb.",
+        "c": "A gömb."
+      },
+      "correct": "b",
+      "explanation": "A hasábnak két alaplapja van, a gúlának csak egy, a gömbnek meg egyáltalán nincs. ✅ Megoldás: A hasáb."
+    },
+    {
+      "question": "Ha egy hasáb alapja egy 3 cm oldalú négyzet, és a magassága 5 cm, akkor hány téglalap van a testhálóján?",
+      "answers": {
+        "a": "3",
+        "b": "4",
+        "c": "5"
+      },
+      "correct": "b",
+      "explanation": "A négyzet alapú hasáb oldallapjai négy téglalap. ✅ Megoldás: 4"
+    },
+    {
+      "question": "Mi a felszín kiszámításának a menete a hasáb testhálójából?",
+      "answers": {
+        "a": "Összeadjuk az oldallapok területét.",
+        "b": "Összeadjuk az alaplapok és az oldallapok területét.",
+        "c": "Szorozzuk az oldallapok területét az alaplap területével."
+      },
+      "correct": "b",
+      "explanation": "A felszín a két alaplap és az oldallapok területének összege. ✅ Megoldás: Összeadjuk az alaplapok és az oldallapok területét."
+    },
+    {
+      "question": "Melyik testnek van legfeljebb három, egymással derékszöget bezáró éle?",
+      "answers": {
+        "a": "Henger",
+        "b": "Kocka",
+        "c": "Gúla"
+      },
+      "correct": "b",
+      "explanation": "A kocka élei derékszöget zárnak be egymással, a többinél ez nem jellemző. ✅ Megoldás: Kocka"
+    },
+    {
+      "question": "Ha egy hasáb alapja háromszög, hány oldallapja van a testhálóján?",
+      "answers": {
+        "a": "3",
+        "b": "2",
+        "c": "4"
+      },
+      "correct": "a",
+      "explanation": "A háromszög alapú hasábnak 3 oldallapja van. ✅ Megoldás: 3"
+    },
+    {
+      "question": "Mi a kapcsolat az oldallapok és az alaplapok között?",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "Merőlegesek.",
+        "c": "Nincs kapcsolat."
+      },
+      "correct": "b",
+      "explanation": "Az oldallapok merőlegesek az alaplapokra. ✅ Megoldás: Merőlegesek."
+    },
+    {
+      "question": "Melyik test testhálója nem egyenes vonalakból áll?",
+      "answers": {
+        "a": "Téglatest",
+        "b": "Henger",
+        "c": "Háromszög alapú hasáb"
+      },
+      "correct": "b",
+      "explanation": "A henger alapja kör, tehát a síkba terített hálója görbe vonalakat tartalmaz. ✅ Megoldás: Henger"
+    },
+    {
+      "question": "Egy téglatest testhálóján hány téglalap található?",
+      "answers": {
+        "a": "4",
+        "b": "5",
+        "c": "6"
+      },
+      "correct": "c",
+      "explanation": "A téglatest testhálóján a két alappal együtt 6 téglalap van. ✅ Megoldás: 6"
+    },
+    {
+      "question": "Ha egy kocka éle 4 cm, mennyi az oldallapok területe összesen?",
+      "answers": {
+        "a": "96 cm²",
+        "b": "64 cm²",
+        "c": "32 cm²"
+      },
+      "correct": "a",
+      "explanation": "Egy kockának hat egyforma négyzet alakú oldallapja van, a területük = 6*(4*4) = 96 cm². ✅ Megoldás: 96 cm²"
+    },
+    {
+      "question": "Melyik testnek van a legtöbb oldallapja?",
+      "answers": {
+        "a": "Négyzetes hasáb",
+        "b": "Ötszög alapú hasáb",
+        "c": "Henger"
+      },
+      "correct": "b",
+      "explanation": "A hasáb oldallapjainak a száma az alaplap oldalszámával egyezik meg. Az ötszög alapú hasábnak 5 oldallapja van, ami több, mint a négyzetes hasáb 4, vagy a henger 0 oldallapja. ✅ Megoldás: Ötszög alapú hasáb"
+    },
+     {
+      "question": "Milyen alakzatok vannak a henger testhálóján?",
+      "answers": {
+        "a": "Körök és téglalapok.",
+        "b": "Csak téglalapok.",
+        "c": "Csak körök."
+      },
+      "correct": "a",
+      "explanation": "A henger testhálóján két kör (az alapok) és egy téglalap (az oldallap) található. ✅ Megoldás: Körök és téglalapok."
+    },
+    {
+      "question": "Ha egy hasáb alapja egy téglalap, akkor a testhálóján hány egyenlő lap van?",
+      "answers": {
+        "a": "2",
+        "b": "3",
+        "c": "4"
+      },
+      "correct": "a",
+      "explanation": "A téglatest testhálóján a szemközti oldallapok egyformák, tehát 2 darab egyforma van. ✅ Megoldás: 2"
+    },
+    {
+      "question": "Ha egy hasáb alapja egy négyzet, és az oldallapjai egyenlőek, akkor milyen alakzatok alkotják a testhálót?",
+      "answers": {
+        "a": "Négyzet",
+        "b": "Négyzet és téglalap",
+        "c": "Csak téglalap"
+      },
+      "correct": "a",
+      "explanation": "A kocka (négyzetes hasáb) minden lapja egyforma négyzet. ✅ Megoldás: Négyzet"
+    },
+    {
+      "question": "Egy hasáb alapja egy négyzet, oldala 5cm, magassága 10cm. Hány cm2 a felszíne?",
+      "answers": {
+        "a": "350",
+        "b": "300",
+        "c": "200"
+      },
+      "correct": "a",
+      "explanation": "2*(5*5)+4*(5*10)=50+200=250 ✅ Megoldás: 350"
+    }
+  ]
 }

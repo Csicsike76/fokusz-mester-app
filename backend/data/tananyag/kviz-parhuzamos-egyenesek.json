@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz parhuzamos egyenesek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a kapcsolat az egyállású szögek (corresponding angles) között, ha két párhuzamos egyenest egy harmadik metsz?",
+      "answers": {
+        "a": "Összegük 180°.",
+        "b": "Összegük 90°.",
+        "c": "Egyenlőek."
+      },
+      "correct": "c",
+      "explanation": "Az egyállású szögek azok, amik a két metszéspontban 'ugyanolyan helyen' vannak. Párhuzamos egyenesek esetén ezek a szögek mindig megegyeznek. ✅ Megoldás: Egyenlőek."
+    },
+    {
+      "question": "Két párhuzamos egyenest egy harmadik metsz. Az egyik szög 80°. Mekkora a váltószöge (alternate interior angle)?",
+      "answers": {
+        "a": "80°",
+        "b": "100°",
+        "c": "20°"
+      },
+      "correct": "a",
+      "explanation": "A váltószögek a metsző ellentétes oldalán, a párhuzamosok között helyezkednek el. Párhuzamos egyenesek esetén a váltószögek mindig egyenlőek. ✅ Megoldás: 80°."
+    },
+    {
+      "question": "Két párhuzamos egyenest egy harmadik metsz. Az egyik szög 110°. Mekkora a társszöge (consecutive interior angle)?",
+      "answers": {
+        "a": "110°",
+        "b": "70°",
+        "c": "20°"
+      },
+      "correct": "b",
+      "explanation": "A társszögek a metsző ugyanazon oldalán, a párhuzamosok között helyezkednek el. Párhuzamos egyenesek esetén a társszögek összege mindig 180° (kiegészítő szögek). 180° - 110° = 70°.  ✅ Megoldás: 70°."
+    },
+    {
+      "question": "Hogy nevezzük azokat a szögeket, amelyek a metsző ugyanazon oldalán, a párhuzamosok között vannak?",
+      "answers": {
+        "a": "egyállású szögek",
+        "b": "társszögek",
+        "c": "váltószögek"
+      },
+      "correct": "b",
+      "explanation": "Ez a definíció a 'társszög' fogalmát írja le. Angolul 'consecutive interior angles'-nek is nevezik őket.  ✅ Megoldás: Társszögek."
+    },
+    {
+      "question": "Egy létra 75°-os szöget zár be a talajjal. Ha a fal merőleges a talajra, mekkora szöget zár be a létra a fallal?",
+      "answers": {
+        "a": "90°",
+        "b": "75°",
+        "c": "15°"
+      },
+      "correct": "c",
+      "explanation": "A létra, a fal és a talaj egy derékszögű háromszöget alkotnak. A szögeik: 90° (a falnál), 75° (a talajnál). A háromszög belső szögeinek összege 180°. A harmadik szög: 180° - 90° - 75° = 15°. ✅ Megoldás: 15°-os szöget."
+    },
+    {
+      "question": "Ha két egyenest egy harmadik úgy metsz, hogy a váltószögek egyenlőek, akkor a két egyenes...",
+      "answers": {
+        "a": "metsző.",
+        "b": "merőleges.",
+        "c": "párhuzamos."
+      },
+      "correct": "c",
+      "explanation": "Ha a váltószögek (vagy az egyállású szögek) egyenlőek, az bizonyítja, hogy a két eredeti egyenes párhuzamos egymással. ✅ Megoldás: Párhuzamosak."
+    },
+    {
+      "question": "Egy paralelogramma egyik belső szöge 60°. Mekkora a mellette lévő belső szög?",
+      "answers": {
+        "a": "60°",
+        "b": "120°",
+        "c": "90°"
+      },
+      "correct": "b",
+      "explanation": "A paralelogramma szomszédos szögeinek összege 180°. 180° - 60° = 120°.  ✅ Megoldás: 120°."
+    },
+    {
+      "question": "Két párhuzamos utat egy harmadik keresztez. Az egyik sarkon a tompaszög 130°. Mekkora az egyállású szög a másik kereszteződésben?",
+      "answers": {
+        "a": "130°",
+        "b": "50°",
+        "c": "90°"
+      },
+      "correct": "a",
+      "explanation": "Az egyállású szögek a két metszéspontban azonos helyen vannak. Mivel az utak párhuzamosak, az egyállású szögek egyenlőek. ✅ Megoldás: 130°."
+    },
+    {
+      "question": "Egy metsző két egyenest úgy metsz, hogy egy pár egyállású szög 45° és 46°. Párhuzamos-e a két egyenes?",
+      "answers": {
+        "a": "igen",
+        "b": "nem eldönthető",
+        "c": "nem"
+      },
+      "correct": "c",
+      "explanation": "A párhuzamosság feltétele, hogy az egyállású szögek egyenlőek legyenek. Mivel 45° ≠ 46°, a feltétel nem teljesül.  ✅ Megoldás: Nem párhuzamosak."
+    },
+    {
+      "question": "Mit jelent a '||' jel a geometriában?",
+      "answers": {
+        "a": "merőleges",
+        "b": "párhuzamos",
+        "c": "hozzávetőlegesen"
+      },
+      "correct": "b",
+      "explanation": "A két függőleges vonal vizuálisan is a párhuzamosságot idézi. Például 'e || f' azt jelenti, hogy az 'e' egyenes párhuzamos az 'f' egyenessel. ✅ Megoldás: Párhuzamos."
+    },
+    {
+      "question": "Két párhuzamos egyenes esetén, ha egy harmadik egyenes metszi őket, akkor hány különböző nagyságú szög keletkezik?",
+      "answers": {
+        "a": "2",
+        "b": "4",
+        "c": "8"
+      },
+      "correct": "a",
+      "explanation": "Összesen 8 szög keletkezik. De ezek között csak kétféle méret van: egy hegyesszög (α) és egy tompaszög (180°-α), valamint ezek csúcs- és váltópárjai. ✅ Megoldás: 2 különböző méretű szög."
+    },
+    {
+      "question": "Ha egy egyenes a síkra merőleges, akkor a síkban fekvő összes egyenesre merőleges?",
+      "answers": {
+        "a": "Igen, kivétel nélkül mindegyikre.",
+        "b": "Nem, csak azokra, amik átmennek a döfésponton.",
+        "c": "Nem, csak azokra, amik párhuzamosak."
+      },
+      "correct": "b",
+      "explanation": "A síkra merőleges egyenes csak azokkal a síkbeli egyenesekkel van merőleges viszonyban, amik átmennek a döfésponton. A többi síkbeli egyenessel kitérő helyzetű. ✅ Megoldás: Nem, csak azokra, amik átmennek a döfésponton."
+    },
+    {
+      "question": "Mi a szögpár neve, ha az egyenest metsző egyenes ugyanazon oldalán vannak, és összege 180°?",
+      "answers": {
+        "a": "Egyállású szögek.",
+        "b": "Váltószögek.",
+        "c": "Társszögek."
+      },
+      "correct": "b",
+      "explanation": "A társszögek a metsző ugyanazon oldalán, a párhuzamosok között vannak. Ezek mindig kiegészítő szögek, tehát az összegük 180°.  ✅ Megoldás: Társszögek."
+    },
+    {
+      "question": "Melyik testnek vannak párhuzamos oldallapjai?",
+      "answers": {
+        "a": "gúla",
+        "b": "hasáb",
+        "c": "gömb"
+      },
+      "correct": "b",
+      "explanation": "A hasábnak van két párhuzamos alaplapja. ✅ Megoldás: A hasáb."
+    },
+    {
+      "question": "Mi történik a téglalap szögeivel?",
+      "answers": {
+        "a": "Azok összege mindig 360°-os.",
+        "b": "Azok összege mindig 180°-os.",
+        "c": "Mindegyik szögük derékszög."
+      },
+      "correct": "c",
+      "explanation": "A téglalap szögei derékszögek. ✅ Megoldás: Mindegyik szögük derékszög."
+    },
+    {
+      "question": "Ha egy egyenes egy síkot metsz, és merőleges egy másik egyenesre a síkban, akkor...",
+      "answers": {
+        "a": "...a másik egyenesre merőleges.",
+        "b": "...a másik egyenessel azonos síkban van.",
+        "c": "...nincs köze a másik egyeneshez."
+      },
+      "correct": "a",
+      "explanation": "Ha egy egyenes merőleges egy síkra, akkor a síkban lévő bármely egyenesre is merőleges. ✅ Megoldás: Merőleges."
+    },
+    {
+      "question": "Mi a 123° és 57° szögfajta?",
+      "answers": {
+        "a": "Egyenes szögek.",
+        "b": "Egyenlő szögek.",
+        "c": "Kiegészítő szögek."
+      },
+      "correct": "c",
+      "explanation": "A kiegészítő szögek összege 180°, ami a két szög esetében igaz: 123°+57°=180°. ✅ Megoldás: Kiegészítő szögek."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A 90°-os szög derékszög.",
+        "b": "A két, 120°-os szög váltószög.",
+        "c": "A 180°-os szög egyenesszög."
+      },
+      "correct": "b",
+      "explanation": "A váltószögek nagysága egyenlő. A 120°-os szögek nem váltószögek. ✅ Megoldás: A 120°-os szögek nem váltószögek."
+    },
+    {
+      "question": "Ha egy szög 130°, akkor a csúcsszöge...",
+      "answers": {
+        "a": "50°",
+        "b": "130°",
+        "c": "90°"
+      },
+      "correct": "b",
+      "explanation": "A csúcsszögek nagysága megegyezik. ✅ Megoldás: 130°"
+    },
+    {
+      "question": "Ha egy síkidomot eltolunk, akkor mi változik?",
+      "answers": {
+        "a": "A nagysága.",
+        "b": "Az alakja.",
+        "c": "A helyzete."
+      },
+      "correct": "c",
+      "explanation": "Az eltolás a helyzetet változtatja, a méretet és a formát nem.  ✅ Megoldás: A helyzete."
+    },
+    {
+      "question": "Melyik négyszög NEM paralelogramma?",
+      "answers": {
+        "a": "négyzet",
+        "b": "téglalap",
+        "c": "deltoid"
+      },
+      "correct": "c",
+      "explanation": "A paralelogramma definíciója a szemközti oldalak párhuzamossága. A négyzet, a téglalap és a rombusz mind a paralelogrammák speciális esetei. A deltoid nem ilyen. ✅ Megoldás: deltoid"
+    },
+    {
+      "question": "Milyen sokszögre igaz, hogy a belső szögeinek összege 360°?",
+      "answers": {
+        "a": "háromszögre",
+        "b": "négyszögre",
+        "c": "hatszögre"
+      },
+      "correct": "b",
+      "explanation": "Minden négyszög (és csakis a négyszögek) belső szögeinek összege 360°. ✅ Megoldás: Négyszögre"
+    },
+    {
+      "question": "Melyik jellemző: parabola egyenesre képzés?",
+      "answers": {
+        "a": "invertálás",
+        "b": "görbültív",
+        "c": "deriválás"
+      },
+      "correct": "b",
+      "explanation": "A deriválás a görbültívbe való átalakítást jelenti. ✅ Megoldás: Görbültív"
+    },
+    {
+      "question": "Mi a 0 és a 7 legnagyobb közös osztója?",
+      "answers": {
+        "a": "0",
+        "b": "7",
+        "c": "1"
+      },
+      "correct": "b",
+      "explanation": "Mivel 7 | 7 és 7 | 0 (mert 0=7⋅0), a 7 közös osztó. Mivel 7-nél nagyobb osztója a 7-nek nincs, így az ln.k.o. a 7. Általában ln.k.o(a,0)=a. ✅ Megoldás: A 7 osztója 7"
+    }
+  ]
 }

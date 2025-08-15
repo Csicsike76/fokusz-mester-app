@@ -3,6 +3,257 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz oszthatosag\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz oszthatosag\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik szám osztható 3-mal?",
+      "answers": {
+        "a": "133",
+        "b": "207",
+        "c": "442"
+      },
+      "correct": "b",
+      "explanation": "Egy szám akkor osztható 3-mal, ha számjegyeinek összege osztható 3-mal. a) 1+3+3=7 (nem osztható). b) 2+0+7=9 (osztható 3-mal). c) 4+4+2=10 (nem osztható). ✅ Megoldás: 207."
+    },
+    {
+      "question": "Mi a 48 prímtényezős felbontása?",
+      "answers": {
+        "a": "2⁴ ⋅ 3",
+        "b": "2³ ⋅ 6",
+        "c": "4 ⋅ 12"
+      },
+      "correct": "a",
+      "explanation": "A prímtényezős felbontás során a számot csak prímszámok szorzataként írjuk fel. 48 = 2 ⋅ 24 = 2 ⋅ 2 ⋅ 12 = 2 ⋅ 2 ⋅ 2 ⋅ 6 = 2 ⋅ 2 ⋅ 2 ⋅ 2 ⋅ 3 = 2⁴ ⋅ 3. ✅ Megoldás: 2⁴ ⋅ 3."
+    },
+    {
+      "question": "Melyik szám NEM prímszám?",
+      "answers": {
+        "a": "17",
+        "b": "29",
+        "c": "51"
+      },
+      "correct": "c",
+      "explanation": "A prímszám csak 1-gyel és önmagával osztható. Az 51 osztható 3-mal (5+1=6), ezért nem prímszám. 51 = 3 × 17. ✅ Megoldás: 51."
+    },
+    {
+      "question": "Mi a legnagyobb közös osztója (ln.k.o.) a 60 és 84 számoknak?",
+      "answers": {
+        "a": "6",
+        "b": "12",
+        "c": "4"
+      },
+      "correct": "b",
+      "explanation": "A prímtényezős felbontás: 60 = 2²⋅3⋅5; 84 = 2²⋅3⋅7. Az ln.k.o.-hoz a közös prímeket kell a legkisebb hatványon összeszorozni: 2² ⋅ 3¹ = 4 ⋅ 3 = 12. ✅ Megoldás: 12."
+    },
+    {
+      "question": "Melyik szám osztható maradék nélkül 4-gyel?",
+      "answers": {
+        "a": "234",
+        "b": "158",
+        "c": "372"
+      },
+      "correct": "c",
+      "explanation": "Egy szám akkor osztható 4-gyel, ha az utolsó két számjegyéből alkotott szám osztható 4-gyel. a) 34 (nem). b) 58 (nem). c) 72 (igen, 72:4=18). ✅ Megoldás: 372."
+    },
+    {
+      "question": "Mi a legkisebb közös többszöröse (lk.k.t.) a 12 és 15 számoknak?",
+      "answers": {
+        "a": "60",
+        "b": "3",
+        "c": "180"
+      },
+      "correct": "a",
+      "explanation": "A prímtényezős felbontás: 12 = 2²⋅3; 15 = 3⋅5. Az lk.k.t.-hez az összes prímtényezőt a legnagyobb hatványon kell összeszorozni: 2² ⋅ 3¹ ⋅ 5¹ = 4 ⋅ 3 ⋅ 5 = 60. ✅ Megoldás: 60."
+    },
+    {
+      "question": "Mikor relatív prím két szám?",
+      "answers": {
+        "a": "Ha mindkettő prímszám.",
+        "b": "Ha a legnagyobb közös osztójuk 1.",
+        "c": "Ha nincs közös többszörösük."
+      },
+      "correct": "b",
+      "explanation": "Két természetes szám akkor relatív prím, ha az 1-en kívül nincs más közös osztójuk, azaz a legnagyobb közös osztójuk 1. Például a 8 és a 9 relatív prímek. ✅ Megoldás: Ha a legnagyobb közös osztójuk 1."
+    },
+    {
+      "question": "Melyik szám osztható 9-cel?",
+      "answers": {
+        "a": "246",
+        "b": "333",
+        "c": "987"
+      },
+      "correct": "b",
+      "explanation": "Egy szám akkor osztható 9-cel, ha számjegyeinek összege osztható 9-cel. a) 2+4+6=12 (nem). b) 3+3+3=9 (igen). c) 9+8+7=24 (nem). ✅ Megoldás: 333."
+    },
+    {
+      "question": "Mi az egyetlen páros prímszám?",
+      "answers": {
+        "a": "0",
+        "b": "2",
+        "c": "4"
+      },
+      "correct": "b",
+      "explanation": "A 2 az egyetlen páros prímszám, mert minden más páros szám osztható 2-vel is (önmagán és 1-en kívül), így azok már összetett számok. ✅ Megoldás: 2."
+    },
+    {
+      "question": "Melyik szám osztható 5-tel?",
+      "answers": {
+        "a": "1025",
+        "b": "251",
+        "c": "304"
+      },
+      "correct": "a",
+      "explanation": "Egy szám akkor osztható 5-tel, ha az utolsó számjegye 0 vagy 5. Az 1025 utolsó számjegye 5, ezért osztható 5-tel. ✅ Megoldás: 1025."
+    },
+    {
+      "question": "Mi a 66 oszthatósági szabálya 2-vel?",
+      "answers": {
+        "a": "Ha az utolsó számjegye 0, 2, 4, 6 vagy 8.",
+        "b": "Ha a számjegyek összege osztható 2-vel.",
+        "c": "Ha osztható 3-mal."
+      },
+      "correct": "a",
+      "explanation": "Egy szám akkor osztható 2-vel, ha az utolsó számjegye páros, azaz 0, 2, 4, 6 vagy 8.  ✅ Megoldás: Ha az utolsó számjegye 0, 2, 4, 6 vagy 8."
+    },
+    {
+      "question": "Mi a 6 oszthatósági szabálya?",
+      "answers": {
+        "a": "Ha osztható 2-vel vagy 3-mal.",
+        "b": "Ha a szám utolsó számjegye 6.",
+        "c": "Ha osztható 2-vel és 3-mal is."
+      },
+      "correct": "c",
+      "explanation": "Mivel 6 = 2 × 3, és a 2 és 3 relatív prímek, egy szám akkor osztható 6-tal, ha teljesíti a 2-vel és a 3-mal való oszthatóság szabályát is. ✅ Megoldás: Ha osztható 2-vel és 3-mal is."
+    },
+    {
+      "question": "Melyik szám osztható 4-gyel?",
+      "answers": {
+        "a": "234",
+        "b": "158",
+        "c": "372"
+      },
+      "correct": "c",
+      "explanation": "Egy szám akkor osztható 4-gyel, ha az utolsó két számjegyéből alkotott szám osztható 4-gyel. a) 34 (nem). b) 58 (nem). c) 72 (igen, 72:4=18).  ✅ Megoldás: 372"
+    },
+    {
+      "question": "Ha egy szám osztható 8-cal, akkor biztosan osztható...",
+      "answers": {
+        "a": "4-gyel.",
+        "b": "3-mal.",
+        "c": "6-tal."
+      },
+      "correct": "a",
+      "explanation": "Ha egy szám osztható 8-cal, akkor osztható 4-gyel is.  ✅ Megoldás: 4-gyel."
+    },
+    {
+      "question": "Ha a számjegyek összege osztható 3-mal, akkor a szám...",
+      "answers": {
+        "a": "...osztható 6-tal.",
+        "b": "...osztható 9-cel.",
+        "c": "...osztható 3-mal."
+      },
+      "correct": "c",
+      "explanation": "Ha egy szám számjegyeinek összege osztható 3-mal, akkor a szám is osztható 3-mal.  ✅ Megoldás: ...osztható 3-mal."
+    },
+    {
+      "question": "Melyik számnak nincs osztója 1-en és önmagán kívül?",
+      "answers": {
+        "a": "6",
+        "b": "13",
+        "c": "15"
+      },
+      "correct": "b",
+      "explanation": "Az 1-en és önmagán kívül a prímszámoknak nincs más osztója. ✅ Megoldás: 13"
+    },
+    {
+      "question": "Mi a közös osztó?",
+      "answers": {
+        "a": "Egy szám, ami csak 1-gyel osztható.",
+        "b": "Egy szám, ami kettő vagy több számnak is osztója.",
+        "c": "Azonos nagyságú számok."
+      },
+      "correct": "b",
+      "explanation": "Egy szám közös osztója a több számnak, ha mindegyiket maradék nélkül osztja. ✅ Megoldás: Egy szám, ami kettő vagy több számnak is osztója."
+    },
+    {
+      "question": "Mi a legnagyobb közös osztója (lnko) a 12 és a 18 számoknak?",
+      "answers": {
+        "a": "2",
+        "b": "3",
+        "c": "6"
+      },
+      "correct": "c",
+      "explanation": "A 12 osztói: 1, 2, 3, 4, 6, 12. A 18 osztói: 1, 2, 3, 6, 9, 18. A közös osztók: 1, 2, 3, 6. A legnagyobb a 6. ✅ Megoldás: 6"
+    },
+    {
+      "question": "Melyik szám osztói az 1, 2, 3, 4, 6, 8, 12, 24?",
+      "answers": {
+        "a": "24",
+        "b": "12",
+        "c": "48"
+      },
+      "correct": "a",
+      "explanation": "A felsorolt számok mind a 24 osztói. ✅ Megoldás: 24"
+    },
+    {
+      "question": "Mi a kapcsolat a legkisebb közös többszörös (lkkt) és a legnagyobb közös osztó (lnko) között?",
+      "answers": {
+        "a": "Nincs kapcsolat.",
+        "b": "Az lkkt szorzata és lnko egyenlő.",
+        "c": "Az lkkt és az lnko mindig 1."
+      },
+      "correct": "b",
+      "explanation": "Két szám legnagyobb közös osztójának és legkisebb közös többszörösének szorzata egyenlő magának a két számnak a szorzatával. ✅ Megoldás: Az lkkt szorzata és lnko egyenlő."
+    },
+    {
+      "question": "Hogyan lehet megállapítani egy 2-vel osztható számot?",
+      "answers": {
+        "a": "Ha a számjegyeinek összege osztható 2-vel.",
+        "b": "Ha az utolsó számjegye osztható 2-vel.",
+        "c": "Ha a számlálója páros."
+      },
+      "correct": "b",
+      "explanation": "Egy szám akkor osztható 2-vel, ha az utolsó számjegye 0, 2, 4, 6 vagy 8, azaz páros. ✅ Megoldás: Ha az utolsó számjegye osztható 2-vel."
+    },
+    {
+      "question": "Melyik szám relatív prím a 10-hez?",
+      "answers": {
+        "a": "9",
+        "b": "10",
+        "c": "15"
+      },
+      "correct": "a",
+      "explanation": "A 10 osztói: 1, 2, 5, 10. A 9-nek nincs közös osztója az 1-en kívül a 10-zel, ezért relatív prímek. ✅ Megoldás: 9"
+    },
+    {
+      "question": "Mi a 24-nek a 2-es prímtényezője a prímtényezős felbontásában?",
+      "answers": {
+        "a": "2³",
+        "b": "2",
+        "c": "8"
+      },
+      "correct": "a",
+      "explanation": "A 24 prímtényezős felbontása 2³ ⋅ 3. A 2-es prím a 3-as kitevővel szerepel benne, tehát a 2-es prímtényező a 2³. ✅ Megoldás: 2³."
+    },
+    {
+      "question": "Mi a 0 osztóinak halmaza?",
+      "answers": {
+        "a": "∅",
+        "b": "Csak a 0.",
+        "c": "Minden nem nulla természetes szám."
+      },
+      "correct": "c",
+      "explanation": "Mivel 0 = n ⋅ 0 bármely n≠0 természetes számra, ezért a 0-nak minden nem nulla természetes szám az osztója. A 0-val való osztás nincs értelmezve.  ✅ Megoldás: Minden nem nulla természetes szám."
+    },
+    {
+      "question": "Adottak az A = {prímszámok} és B = {páratlan számok} halmazok. Melyik szám eleme az A \\ B halmaznak?",
+      "answers": {
+        "a": "2",
+        "b": "9",
+        "c": "7"
+      },
+      "correct": "a",
+      "explanation": "Az A \\ B halmaz azokat a prímszámokat tartalmazza, amelyek NEM páratlanok. Az egyetlen ilyen szám a 2, ami egy páros prímszám. ✅ Megoldás: 2."
+    }
+  ]
 }

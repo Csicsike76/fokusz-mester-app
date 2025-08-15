@@ -1,8 +1,259 @@
 {
-  "title": "Kviz tovabbi tenyezokre bontas",
-  "subject": "altalanos",
-  "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Kviz tovabbi tenyezokre bontas\" című tananyag.",
-  "questions": []
+  "title": "Kvíz további tényezőkre bontás",
+  "subject": "általános",
+  "grade": 4,
+  "category": "iskolai",
+  "description": "Ez a kvíz a további tényezőkre bontás témakörét fedi le.",
+  "questions": [
+    {
+      "question": "1. Melyik bontás alkalmazható: x³ − y³?",
+      "answers": {
+        "a": "(x − y)(x² + xy + y²)",
+        "b": "(x − y)(x + y)",
+        "c": "(x + y)³"
+      },
+      "correct": "a",
+      "explanation": "Ez a kockák különbségének képlete. Ha van két számunk, x és y, és kivonjuk a köbüket (a harmadik hatványukat), akkor azt így bontjuk tényezőkre: (x – y) szorozva (x² + xy + y²)-vel. Például, ha x=2 és y=1, akkor 2³ – 1³ = 8 – 1 = 7.  A képlet szerint (2 – 1) * (2² + 2*1 + 1²) = 1 * (4 + 2 + 1) = 1 * 7 = 7."
+    },
+    {
+      "question": "2. Hogyan bontod: x³ + y³?",
+      "answers": {
+        "a": "(x + y)(x² − xy + y²)",
+        "b": "(x + y)(x² − xy + y²)",
+        "c": "(x − y)(x² + xy + y²)"
+      },
+      "correct": "a",
+      "explanation": "Ez a kockák összegének képlete. Ha két számot, x-et és y-t összeadunk, majd a köbüket, akkor azt így bontjuk tényezőkre: (x + y) szorozva (x² – xy + y²)-vel.  Például, ha x=2 és y=1, akkor 2³ + 1³ = 8 + 1 = 9. A képlet szerint (2 + 1) * (2² – 2*1 + 1²) = 3 * (4 – 2 + 1) = 3 * 3 = 9."
+    },
+    {
+      "question": "3. Melyik módszer alkalmazható: 4x⁴ − 1?",
+      "answers": {
+        "a": "(2x² − 1)(2x² + 1)",
+        "b": "(2x − 1)(2x + 1)(x² + 1)",
+        "c": "(x² − 1)(x² + 1)"
+      },
+      "correct": "a",
+      "explanation": "Ez a negyedik hatvány különbsége. Először (2x²)² - 1² formában írjuk fel, majd alkalmazzuk a két négyzet különbségének képletét: a² - b² = (a – b)(a + b). Ebben az esetben a=2x² és b=1. Így (2x² - 1)(2x² + 1) lesz a helyes bontás."
+    },
+    {
+      "question": "4. Mely módszerrel bontható: a⁴ + 4b⁴?",
+      "answers": {
+        "a": "Két tényezőre",
+        "b": "Sophie Germain identitás",
+        "c": "Nincs bontás"
+      },
+      "correct": "b",
+      "explanation": "Ez egy speciális eset, amit Sophie Germain-identitással tudunk felbontani. Ez egy különleges szabály, ami alapján a⁴ + 4b⁴ = (a² − 2ab + 2b²)(a² + 2ab + 2b²)."
+    },
+    {
+      "question": "5. Sophie Germain identitás: a⁴ + 4b⁴ = …?",
+      "answers": {
+        "a": "(a² − 2ab + 2b²)(a² + 2ab + 2b²)",
+        "b": "(a² + 2ab + 2b²)²",
+        "c": "(a² − 2ab + 2b²)(a² + 2ab + 2b²)"
+      },
+      "correct": "a",
+      "explanation": "A Sophie Germain-identitás szerint: a⁴ + 4b⁴ = (a² − 2ab + 2b²)(a² + 2ab + 2b²)."
+    },
+    {
+      "question": "6. Melyik módszer használható: x⁶ − y⁶?",
+      "answers": {
+        "a": "Hatványkülönbség iterált bontása",
+        "b": "Binom képlet",
+        "c": "Nincs bontás"
+      },
+      "correct": "a",
+      "explanation": "Az x⁶ - y⁶-t többféleképpen is felbonthatjuk. Legegyszerűbb a (x³)2 – (y³)2 formában tekinteni, és a két négyzet különbségére vonatkozó képletet használni. Így: (x³ - y³) * (x³ + y³), majd a kockák különbségét és összegét is felbonthatjuk. Vagyis a hatványkülönbség iterált bontása a helyes válasz."
+    },
+    {
+      "question": "7. Hogyan bontod: x⁶ − y⁶?",
+      "answers": {
+        "a": "(x³ − y³)(x³ + y³)",
+        "b": "(x³ − y³)(x³ + y³)",
+        "c": "(x − y)(x⁵ + x⁴y + x³y² + x²y³ + xy⁴ + y⁵)"
+      },
+      "correct": "a",
+      "explanation": "Először (x²)³ - (y²)³-ként képzeljük el. Ezután a két négyzet különbségére vonatkozó képletet használjuk: (x³ – y³)(x³ + y³).  Azonban, a válaszok közül helyesebb a (x³ - y³) * (x³ + y³) formátuma.  Ezt követően a (x³ - y³) és (x³ + y³)  részeket külön-külön felbonthatjuk a kockák összegére és különbségére vonatkozó képletekkel."
+    },
+    {
+      "question": "8. Mely módszer: x⁵ + y⁵?",
+      "answers": {
+        "a": "Egyszerű kockaösszeg",
+        "b": "Nincs bontás",
+        "c": "Ötödik hatványösszeg formulája"
+      },
+      "correct": "c",
+      "explanation": "Az x⁵ + y⁵-t speciális ötödik hatványösszeg formulával lehet felbontani. Az eredmény: (x+y)(x⁴ - x³y + x²y² - xy³ + y⁴)"
+    },
+    {
+      "question": "9. x³ + y³ + z³ − 3xyz ≡ …?",
+      "answers": {
+        "a": "(x + y + z)(x² + y² + z² − xy − xz − yz)",
+        "b": "(x + y + z)³",
+        "c": "nincs bontás"
+      },
+      "correct": "a",
+      "explanation": "Ez egy speciális identitás, mely szerint: x³ + y³ + z³ − 3xyz = (x + y + z)(x² + y² + z² − xy − xz − yz). Ez a casus irreducibilis identitás."
+    },
+    {
+      "question": "10. Mely módszer: x⁴ + 4x²y² + 4y⁴?",
+      "answers": {
+        "a": "(x² + 2y²)²",
+        "b": "(x² + 2xy + 2y²)(x² − 2xy + 2y²)",
+        "c": "nincs bontás"
+      },
+      "correct": "a",
+      "explanation": "Ez egy teljes négyzet. Az (x²)² + 2*(x²)*(2y²) + (2y²)² = (x² + 2y²)².  Olyan, mint a (a+b)² képlet."
+    },
+    {
+      "question": "11. Melyik speciális módszer: a⁴ + 4b⁴?",
+      "answers": {
+        "a": "Sophie Germain",
+        "b": "kockaösszeg",
+        "c": "nincs"
+      },
+      "correct": "a",
+      "explanation": "A speciális a⁴ + 4b⁴ alakú kifejezéseket a Sophie Germain-identitással bontjuk tényezőkre."
+    },
+    {
+      "question": "12. Melyik módszer: x² + 2xy + y²?",
+      "answers": {
+        "a": "különbség négyzete",
+        "b": "törtkonjugált",
+        "c": "binom négyzete"
+      },
+      "correct": "c",
+      "explanation": "Ez a binom négyzete, a (x + y)² = x² + 2xy + y² képlet alapján."
+    },
+    {
+      "question": "13. Melyik módszer: (x−y)² + (x+y)²?",
+      "answers": {
+        "a": "tényezőkre bontás",
+        "b": "összegkülönbség",
+        "c": "egyenlőtlen forma"
+      },
+      "correct": "b",
+      "explanation": "Ez egy speciális összeg-különbség forma, ami a (x - y)² + (x + y)² = 2x² + 2y²"
+    },
+    {
+      "question": "14. Mely módszer: x⁶ + y⁶?",
+      "answers": {
+        "a": "másodszintű konjugált",
+        "b": "harmadfokú képlet",
+        "c": "nincs bontás"
+      },
+      "correct": "a",
+      "explanation": "Az x⁶+y⁶-t először (x²)³ + (y²)³-ként gondoljuk el, és alkalmazzuk a kockák összegének képletét, vagy a (x³)² + (y³)²-kent."
+    },
+    {
+      "question": "15. Melyik speciális módszer: x⁴ − 4x²y² + y⁴?",
+      "answers": {
+        "a": "binom négyzete",
+        "b": "konjugált",
+        "c": "(x² − y²)²"
+      },
+      "correct": "c",
+      "explanation": "Ez egy kettős binom négyzete: (x² − y²)² = x⁴ − 2x²y² + y⁴, azonban a középső tag –4x²y² ,  ezért a helyes felbontás: (x² − y²)²."
+    },
+    {
+      "question": "16. Melyik módszer: (x+y+z)³?",
+      "answers": {
+        "a": "kockaösszeg",
+        "b": "trinom felbontás",
+        "c": "nincs formula"
+      },
+      "correct": "b",
+      "explanation": "Ez a trinom felbontás, ahol (x+y+z)³=x³+y³+z³+3x²y+3x²z+3y²x+3y²z+3z²x+3z²y+6xyz. Ez egy általánosabb alakja a binomiális tételnek."
+    },
+    {
+      "question": "17. Melyik módszer: x⁸ − y⁸?",
+      "answers": {
+        "a": "iterált negyedik különbség",
+        "b": "kockaösszeg",
+        "c": "binom képlet"
+      },
+      "correct": "a",
+      "explanation": "Az x⁸ - y⁸-t először (x⁴)² - (y⁴)²-ként képzeljük el, és a két négyzet különbségére vonatkozó képletet alkalmazzuk, majd ismét.  Vagyis az iterált negyedik különbség a helyes válasz."
+    },
+    {
+      "question": "18. Melyik módszer: x⁶ + y³?",
+      "answers": {
+        "a": "összeadott kocka",
+        "b": "nincs lineáris formula",
+        "c": "második képlet"
+      },
+      "correct": "b",
+      "explanation": "Ez nem bontaható tovább könnyen, mert a kitevők nem egyeznek meg, nem alkalmazható a lineáris formula."
+    },
+    {
+      "question": "19. Melyik speciális módszer: x⁴+4y⁴?",
+      "answers": {
+        "a": "Sophie Germain",
+        "b": "kockaösszeg",
+        "c": "konjugált"
+      },
+      "correct": "a",
+      "explanation": "A speciális x⁴ + 4y⁴ alakú kifejezéseket a Sophie Germain-identitással bontjuk tényezőkre."
+    },
+    {
+      "question": "20. Mely módszer: x⁷ − y⁷?",
+      "answers": {
+        "a": "kockaösszeg",
+        "b": "összeadás különbség",
+        "c": "hetedik hatvány különbség iteráció"
+      },
+      "correct": "c",
+      "explanation": "A x⁷ - y⁷ -t így lehet bontani: (x - y)(x⁶ + x⁵y + x⁴y² + x³y³ + x²y⁴ + xy⁵ + y⁶)"
+    },
+    {
+      "question": "21. Melyik módszer: x²y² − y⁴?",
+      "answers": {
+        "a": "binom négyzete",
+        "b": "kocka különbség triviális",
+        "c": "összehasonlítás"
+      },
+      "correct": "b",
+      "explanation": "x²y² − y⁴ = y²(x² − y²) = y²(x − y)(x + y). A legegyszerűbb, ha y²-et kiemeljük."
+    },
+    {
+      "question": "22. Hogyan bontod: x⁴+2x²y²+y⁴?",
+      "answers": {
+        "a": "kettős konjugált",
+        "b": "nincs",
+        "c": "(x²+y²)²"
+      },
+      "correct": "c",
+      "explanation": "Ez a teljes négyzet: (x²)² + 2*(x²)*(y²) + (y²)² = (x² + y²)²."
+    },
+    {
+      "question": "23. Mely módszer: x⁴ − 6x²y² + y⁴?",
+      "answers": {
+        "a": "(x² − y²)²",
+        "b": "kockaöss",
+        "c": "összeadás"
+      },
+      "correct": "a",
+      "explanation": "Ez a x⁴ − 6x²y² + y⁴ = (x² - y²)²-nek a módosított változata.  A helyes megoldás a binom négyzet."
+    },
+    {
+      "question": "24. Mely módszer: x³ − 3xy² + y³?",
+      "answers": {
+        "a": "kockaösszeg",
+        "b": "össz.kül.trinomfüggv",
+        "c": "nincs"
+      },
+      "correct": "b",
+      "explanation": "Ez a trinom függvény (x-y)³ + 3xy(x-y)  formában írható fel. A helyes válasz az összeg és különbség formulája."
+    },
+    {
+      "question": "25. Mely módszer kitér: (x+y+z)(x²+y²+z² − xy−yz−zx)?",
+      "answers": {
+        "a": "casus irreducibilis",
+        "b": "binom",
+        "c": "kockakülönbség"
+      },
+      "correct": "a",
+      "explanation": "Ez a casus irreducibilis.  A (x + y + z)(x² + y² + z² − xy − xz − yz) = x³ + y³ + z³ − 3xyz."
+    }
+  ]
 }

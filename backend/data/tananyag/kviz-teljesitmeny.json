@@ -4,5 +4,226 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz teljesitmeny\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a teljesítmény?",
+      "answers": {
+        "a": "Egy test tömege.",
+        "b": "A munka elvégzésének sebessége.",
+        "c": "Egy erő nagysága."
+      },
+      "correct": "b",
+      "explanation": "A teljesítmény azt mutatja meg, hogy milyen gyorsan végezünk munkát. ✅ Megoldás: A munka elvégzésének sebessége."
+    },
+    {
+      "question": "Milyen mértékegysége van a teljesítménynek?",
+      "answers": {
+        "a": "joule (J)",
+        "b": "watt (W)",
+        "c": "méter (m)"
+      },
+      "correct": "b",
+      "explanation": "A teljesítmény mértékegysége a watt (W). ✅ Megoldás: watt (W)"
+    },
+    {
+      "question": "Hogyan számítjuk ki a teljesítményt (P)?",
+      "answers": {
+        "a": "P = W / t",
+        "b": "P = F * s",
+        "c": "P = m * g * h"
+      },
+      "correct": "a",
+      "explanation": "A teljesítményt úgy kapjuk meg, hogy a munkát (W) elosztjuk az eltelt idővel (t): P = W / t. ✅ Megoldás: P = W / t"
+    },
+    {
+      "question": "Ha 1000 J munkát 10 másodperc alatt végzünk, mennyi a teljesítményünk?",
+      "answers": {
+        "a": "100 W",
+        "b": "10000 W",
+        "c": "1000 J"
+      },
+      "correct": "a",
+      "explanation": "P = W / t = 1000 J / 10 s = 100 W. ✅ Megoldás: 100 W"
+    },
+    {
+      "question": "Mi a munka?",
+      "answers": {
+        "a": "Az erő nagysága.",
+        "b": "Egy erő hatására bekövetkező elmozdulás.",
+        "c": "A test tömege."
+      },
+      "correct": "b",
+      "explanation": "A mechanikai munka (W) egy erő (F) hatására bekövetkező elmozdulás (s): W = F * s. ✅ Megoldás: Egy erő hatására bekövetkező elmozdulás."
+    },
+    {
+      "question": "Milyen egységben mérjük a munkát?",
+      "answers": {
+        "a": "watt (W)",
+        "b": "joule (J)",
+        "c": "méter (m)"
+      },
+      "correct": "b",
+      "explanation": "A munka mértékegysége a joule (J). ✅ Megoldás: joule (J)"
+    },
+    {
+      "question": "Ha egy emelővel emelünk egy 200 N súlyú testet 2 méter magasra, mennyi munkát végzünk?",
+      "answers": {
+        "a": "100 J",
+        "b": "200 J",
+        "c": "400 J"
+      },
+      "correct": "c",
+      "explanation": "W = F * s = 200 N * 2 m = 400 J. ✅ Megoldás: 400 J"
+    },
+    {
+      "question": "Ha egy motor 1000 J munkát végez 10 másodperc alatt, mennyi a teljesítménye?",
+      "answers": {
+        "a": "100 W",
+        "b": "10000 W",
+        "c": "100 J"
+      },
+      "correct": "a",
+      "explanation": "P = W / t = 1000 J / 10 s = 100 W. ✅ Megoldás: 100 W"
+    },
+    {
+      "question": "Melyik állítás NEM igaz a teljesítményre?",
+      "answers": {
+        "a": "A teljesítmény a munka elvégzésének a sebességét jelenti.",
+        "b": "A teljesítmény azt mutatja meg, hogy mennyi munkát végzünk egy adott idő alatt.",
+        "c": "A teljesítmény mértékegysége a kg/m³."
+      },
+      "correct": "c",
+      "explanation": "A sűrűség (kg/m³) mértékegysége nem kapcsolódik a teljesítményhez.  ✅ Megoldás: A teljesítmény mértékegysége a kg/m³."
+    },
+    {
+      "question": "Mi a hatásfok?",
+      "answers": {
+        "a": "A hasznos munka és a befektetett munka hányadosa.",
+        "b": "A teljesítmény és az idő szorzata.",
+        "c": "A test tömege."
+      },
+      "correct": "a",
+      "explanation": "A hatásfok megmutatja, hogy a gép a befektetett energiából mennyi hasznos munkát tud végezni: hatásfok = hasznos munka / befektetett munka. ✅ Megoldás: A hasznos munka és a befektetett munka hányadosa."
+    },
+    {
+      "question": "Milyen a hatásfoka egy ideális gépnek (nincs veszteség)?",
+      "answers": {
+        "a": "0%",
+        "b": "100%",
+        "c": "50%"
+      },
+      "correct": "b",
+      "explanation": "Egy ideális gépben nincs energiaveszteség, így a hatásfoka 100%.  ✅ Megoldás: 100%"
+    },
+    {
+      "question": "Egy gép 200 J munkát végez, a befektetett energia 250 J. Mekkora a hatásfoka?",
+      "answers": {
+        "a": "80%",
+        "b": "100%",
+        "c": "125%"
+      },
+      "correct": "a",
+      "explanation": "Hatásfok = (hasznos munka / befektetett energia) * 100 = (200 J / 250 J) * 100 = 80%. ✅ Megoldás: 80%"
+    },
+    {
+      "question": "Egy autó motorjának a teljesítménye 100 kW, és a hatásfoka 25%. Mennyi a hasznos teljesítmény?",
+      "answers": {
+        "a": "400 kW",
+        "b": "25 kW",
+        "c": "100 kW"
+      },
+      "correct": "b",
+      "explanation": "A hasznos teljesítmény a teljesítmény és a hatásfok szorzata. A 25% a 0,25-nek felel meg. Hasznos teljesítmény = 100 kW * 0.25 = 25 kW. ✅ Megoldás: 25 kW"
+    },
+    {
+      "question": "Miért fontos a hatásfok?",
+      "answers": {
+        "a": "Mert megmutatja, hogy a gép mennyi munkát végez.",
+        "b": "Mert megmutatja, hogy a gép mennyire hatékony, azaz mennyi befektetett energiát alakít hasznos munkává.",
+        "c": "Mert megmutatja, hogy milyen gyorsan működik a gép."
+      },
+      "correct": "b",
+      "explanation": "A hatásfok azt mutatja meg, hogy a gép mennyire hatékony, azaz mennyi befektetett energiát alakít hasznos munkává. ✅ Megoldás: Mert megmutatja, hogy a gép mennyire hatékony, azaz mennyi befektetett energiát alakít hasznos munkává."
+    },
+    {
+      "question": "Mi történik a teljesítménnyel, ha ugyanannyi munkát rövidebb idő alatt végzünk el?",
+      "answers": {
+        "a": "Csökken.",
+        "b": "Nő.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "P = W / t. Ha a munkavégzés ideje csökken, a teljesítmény nő. ✅ Megoldás: Nő."
+    },
+    {
+      "question": "Melyik NEM a hatásfok kiszámítási módja?",
+      "answers": {
+        "a": "Hasznos energia / Befektetett energia.",
+        "b": "Befektetett energia / Hasznos energia.",
+        "c": "Hasznos munka / Befektetett munka."
+      },
+      "correct": "b",
+      "explanation": "A hatásfok képlete: hatásfok = (hasznos energia / befektetett energia) * 100, vagy hatásfok = (hasznos munka / befektetett munka) * 100. ✅ Megoldás: A befektetett energia / Hasznos energia."
+    },
+    {
+      "question": "Ha egy gép a befektetett energia 20%-át alakítja hasznos munkává, akkor a hatásfoka...",
+      "answers": {
+        "a": "20%",
+        "b": "80%",
+        "c": "100%"
+      },
+      "correct": "a",
+      "explanation": "A hatásfokot úgy kapjuk meg, ha a hasznos energiát elosztjuk a befektetett energiával, majd megszorozzuk 100-zal. ✅ Megoldás: 20%"
+    },
+    {
+      "question": "Miért nem érhet a hatásfok 100%-ot?",
+      "answers": {
+        "a": "Mert mindig vannak veszteségek.",
+        "b": "Mert a gép drága.",
+        "c": "Mert a gép nehéz."
+      },
+      "correct": "a",
+      "explanation": "A valóságban a gépekben mindig vannak veszteségek (pl. súrlódás, hőveszteség), ezért a hatásfok sosem érheti el a 100%-ot. ✅ Megoldás: Mert mindig vannak veszteségek."
+    },
+    {
+      "question": "Melyik gép hatásfoka a legjobb?",
+      "answers": {
+        "a": "Aminek alacsony a hatásfoka.",
+        "b": "Aminek magas a hatásfoka.",
+        "c": "Aminek a hatásfoka 50%."
+      },
+      "correct": "b",
+      "explanation": "A magas hatásfok azt jelenti, hogy a gép a lehető legtöbb befektetett energiát alakítja hasznos munkává. ✅ Megoldás: Aminek magas a hatásfoka."
+    },
+    {
+      "question": "Mi a hasznos munka?",
+      "answers": {
+        "a": "A teljesítményt jelenti.",
+        "b": "A gép által végzett tényleges munka.",
+        "c": "A befektetett energia."
+      },
+      "correct": "b",
+      "explanation": "A hasznos munka a gép által végzett tényleges munka, aminek a nagyságát a hatásfokhoz viszonyítjuk. ✅ Megoldás: A gép által végzett tényleges munka."
+    },
+    {
+      "question": "Melyik energiafajta NEM tudja növelni egy gép hatásfokát?",
+      "answers": {
+        "a": "A súrlódás csökkentése.",
+        "b": "A felhasznált energia növelése.",
+        "c": "A veszteségek csökkentése."
+      },
+      "correct": "b",
+      "explanation": "A hatásfok a hasznos energia és a befektetett energia aránya. A felhasznált energia növelése önmagában nem növeli a hatásfokot, csak a hasznos munkát. A súrlódás csökkentésével, és a veszteségek mérséklésével javul a hatásfok. ✅ Megoldás: A felhasznált energia növelése."
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "Egy tökéletes gépet sosem lehet létrehozni.",
+        "b": "A tökéletes gép hatásfoka 0%.",
+        "c": "A tökéletes gép hasznos munkát végez."
+      },
+      "correct": "a",
+      "explanation": "A tökéletes gép hatásfoka 100% lenne, ami azt jelenti, hogy minden befektetett energia hasznosulna, de ez a valóságban sosem lehetséges. ✅ Megoldás: Egy tökéletes gépet sosem lehet létrehozni."
+    }
+  ]
 }

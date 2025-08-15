@@ -4,5 +4,236 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz galvanelemek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a galvánelem alapvető funkciója?",
+      "answers": {
+        "a": "Kémiai energiát alakít át elektromos energiává.",
+        "b": "Elektromos energiát alakít át hőenergiává.",
+        "c": "Mozgási energiát alakít át elektromos energiává."
+      },
+      "correct": "a",
+      "explanation": "A galvánelemek (elemek, akkumulátorok) belsejében egy spontán végbemenő kémiai reakció játszódik le, amelynek energiája elektromos feszültséget hoz létre és áramot hajt az áramkörben. ✅ Megoldás: Kémiai energiát alakít át elektromos energiává."
+    },
+    {
+      "question": "Melyik a megújuló energiaforrás?",
+      "answers": {
+        "a": "Kőolaj",
+        "b": "Biomassza (pl. fa, szalma)",
+        "c": "Földgáz"
+      },
+      "correct": "b",
+      "explanation": "A megújuló energiaforrások emberi időléptékben képesek újratermelődni. A biomassza (növényi anyagok) ilyen, mert a növények újranőnek. A fosszilis energiahordozók évmilliók alatt keletkeztek, így nem megújulók. ✅ Megoldás: Biomassza (pl. fa, szalma)."
+    },
+    {
+      "question": "Mi a tökéletlen égés veszélyes mellékterméke?",
+      "answers": {
+        "a": "Vízgőz",
+        "b": "Szén-monoxid (CO)",
+        "c": "Szén-dioxid (CO₂)"
+      },
+      "correct": "b",
+      "explanation": "Ha nincs elég oxigén az égéshez, az tökéletlenné válik. Ilyenkor a szén-dioxid mellett mérgező, színtelen és szagtalan szén-monoxid gáz is keletkezik, ami belélegezve halálos lehet. ✅ Megoldás: Szén-monoxid (CO)."
+    },
+    {
+      "question": "Mi a fűtőérték?",
+      "answers": {
+        "a": "Megmutatja, hogy 1 kg fűtőanyag tökéletes elégetésekor mennyi hő szabadul fel.",
+        "b": "A fűtőanyag hőmérséklete.",
+        "c": "A fűtőanyag ára."
+      },
+      "correct": "a",
+      "explanation": "A fűtőérték egy anyagra jellemző mennyiség, amely a fűtőanyag 'minőségét' írja le. Minél nagyobb a fűtőértéke, annál több hőt nyerhetünk belőle. Mértékegysége J/kg vagy J/m³. ✅ Megoldás: Megmutatja, hogy 1 kg fűtőanyag tökéletes elégetésekor mennyi hő szabadul fel."
+    },
+    {
+      "question": "Melyik csoportban vannak CSAK fosszilis fűtőanyagok?",
+      "answers": {
+        "a": "Fa, szén, benzin",
+        "b": "Szén, kőolaj, földgáz",
+        "c": "Földgáz, hidrogén, fa"
+      },
+      "correct": "b",
+      "explanation": "A szén, a kőolaj és a földgáz mindhárom fosszilis energiahordozó, amelyek évmilliók alatt jöttek létre. A fa biomassza, a hidrogén pedig előállítható, de nem fosszilis. ✅ Megoldás: Szén, kőolaj, földgáz."
+    },
+    {
+      "question": "Miért káros a fosszilis fűtőanyagok égetése a környezetre?",
+      "answers": {
+        "a": "Mert túl sok oxigént használnak el.",
+        "b": "Mert az égésük során szén-dioxid kerül a légkörbe, ami fokozza az üvegházhatást.",
+        "c": "Mert túl drágák."
+      },
+      "correct": "b",
+      "explanation": "A fosszilis tüzelőanyagok elégetésekor nagy mennyiségű szén-dioxid (CO₂) szabadul fel, ami egy üvegházhatású gáz. A légkörben felhalmozódva hozzájárul a globális felmelegedéshez és az éghajlatváltozáshoz. ✅ Megoldás: Mert az égésük során szén-dioxid kerül a légkörbe, ami fokozza az üvegházhatást."
+    },
+    {
+      "question": "Mi a tökéletes égés?",
+      "answers": {
+        "a": "Olyan égés, ahol az éghető anyag teljesen szén-dioxiddá és vízzé alakul.",
+        "b": "Olyan égés, ami nem termel hőt.",
+        "c": "Olyan égés, ami oxigén nélkül zajlik."
+      },
+      "correct": "a",
+      "explanation": "Tökéletes égésről akkor beszélünk, ha elegendő oxigén áll rendelkezésre, és az égés végtermékei nem tartalmaznak már éghető anyagot (pl. kormot, szén-monoxidot). ✅ Megoldás: Olyan égés, ahol az éghető anyag teljesen szén-dioxiddá és vízzé alakul."
+    },
+    {
+      "question": "Mit jelent a gyulladási hőmérséklet?",
+      "answers": {
+        "a": "A fűtőanyag forráspontja.",
+        "b": "Az a legalacsonyabb hőmérséklet, amelyen egy anyag oxigén jelenlétében meggyullad.",
+        "c": "A fűtőanyag olvadáspontja."
+      },
+      "correct": "b",
+      "explanation": "Az égés beindításához az anyagot fel kell hevíteni a gyulladási hőmérsékletére. Ezen a ponton az égési folyamat önfenntartóvá válik. ✅ Megoldás: Az a legalacsonyabb hőmérséklet, amelyen egy anyag oxigén jelenlétében meggyullad."
+    },
+    {
+      "question": "Melyik fűtőanyagnak van általában a legmagasabb fűtőértéke?",
+      "answers": {
+        "a": "Földgáz/Hidrogén",
+        "b": "Fa",
+        "c": "Szén"
+      },
+      "correct": "a",
+      "explanation": "Általánosságban a gáz halmazállapotú fűtőanyagok, különösen a földgáz és a hidrogén, rendelkeznek a legmagasabb fűtőértékkel tömegegységre vetítve. ✅ Megoldás: Földgáz/Hidrogén."
+    },
+    {
+      "question": "Hogyan oltjuk el a tüzet vízzel?",
+      "answers": {
+        "a": "Növeljük az oxigénellátást.",
+        "b": "A vizet a gyulladási hőmérséklet alá hűtjük és elzárjuk az oxigéntől.",
+        "c": "Éghető anyagot adunk hozzá."
+      },
+      "correct": "b",
+      "explanation": "A víz kétféleképpen olt: egyrészt lehűti az égő anyagot a gyulladási hőmérséklete alá, másrészt a fejlődő vízgőz elzárja az oxigéntől, így megszüntetve az égés két feltételét. ✅ Megoldás: A vizet a gyulladási hőmérséklet alá hűtjük és elzárjuk az oxigéntől."
+    },
+    {
+      "question": "A benzin...",
+      "answers": {
+        "a": "...nem fűtőanyag.",
+        "b": "...a kőolajból finomítással előállított fűtőanyag.",
+        "c": "...megújuló energiaforrás."
+      },
+      "correct": "b",
+      "explanation": "A benzin a kőolaj-finomítás egyik legfontosabb terméke, amit belső égésű motorokban használnak üzemanyagként. Mivel kőolajból származik, fosszilis energiahordozó. ✅ Megoldás: ...a kőolajból finomítással előállított fűtőanyag."
+    },
+    {
+      "question": "Melyik fűtőanyagot használják leggyakrabban az autókban?",
+      "answers": {
+        "a": "Szenet",
+        "b": "Fát",
+        "c": "Benzint és gázolajat."
+      },
+      "correct": "c",
+      "explanation": "A belső égésű motorokkal működő autók túlnyomó többsége a kőolajból finomított benzint vagy gázolajat használja üzemanyagként. ✅ Megoldás: Benzint és gázolajat."
+    },
+    {
+      "question": "Mi történik az anyaggal égés közben?",
+      "answers": {
+        "a": "A tömege megnő.",
+        "b": "Halmazállapota megváltozik.",
+        "c": "Kémiai átalakuláson megy keresztül."
+      },
+      "correct": "c",
+      "explanation": "Az égés egy kémiai reakció, amely során az éghető anyag molekulái oxigénnel lépnek reakcióba, és új anyagok (pl. szén-dioxid, víz) keletkeznek, miközben energia szabadul fel. ✅ Megoldás: Kémiai átalakuláson megy keresztül."
+    },
+    {
+      "question": "Mi a biomassza?",
+      "answers": {
+        "a": "A test tömege.",
+        "b": "Fosszilis fűtőanyag.",
+        "c": "Növényi vagy állati eredetű szerves anyag, amit energiatermelésre használnak."
+      },
+      "correct": "c",
+      "explanation": "A biomassza kategóriájába tartozik a tűzifa, szalma, energiafű, vagy akár a szerves hulladék. Megújuló energiaforrásnak tekinthető. ✅ Megoldás: Növényi vagy állati eredetű szerves anyag, amit energiatermelésre használnak."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Az égéshez oxigén kell.",
+        "b": "A fűtőanyagok kémiai energiát tárolnak.",
+        "c": "Az égés mindig lassú folyamat."
+      },
+      "correct": "c",
+      "explanation": "Ez az állítás hamis. Az égés egy gyors oxidáció, amely hő- és fénykibocsátással jár. A lassú oxidációra példa a vas rozsdásodása. ✅ Megoldás: Az égés mindig lassú folyamat."
+    },
+    {
+      "question": "Miért nem szabad vízzel oltani az égő olajat vagy elektromos tüzet?",
+      "answers": {
+        "a": "Mert a víz nem oltja a tüzet.",
+        "b": "Mert veszélyes reakciót válthat ki (szétfröccsenő égő olaj, áramütés).",
+        "c": "Mert a víz túl drága."
+      },
+      "correct": "b",
+      "explanation": "Az égő olajra öntött víz hirtelen gőzzé válik, és szétfröcsköli az égő olajat, tovább terjesztve a tüzet. Az elektromos berendezésekre öntött víz pedig áramütés-veszélyes. Ilyen tüzeket porral oltóval kell oltani. ✅ Megoldás: Mert veszélyes reakciót válthat ki (szétfröccsenő égő olaj, áramütés)."
+    },
+    {
+      "question": "Melyik NEM fűtőanyag?",
+      "answers": {
+        "a": "Földgáz",
+        "b": "Szén",
+        "c": "Homok"
+      },
+      "correct": "c",
+      "explanation": "A homok (szilícium-dioxid) egy nem éghető ásványi anyag, ezért nem használható fűtőanyagként. A földgáz és a szén kiváló fűtőanyagok. ✅ Megoldás: Homok."
+    },
+    {
+      "question": "Mit jelent, ha egy pont az x tengelyen van?",
+      "answers": {
+        "a": "Az y koordinátája 0.",
+        "b": "Az x koordinátája 0.",
+        "c": "Mindkét koordinátája 0."
+      },
+      "correct": "a",
+      "explanation": "🔹 1. Lépés: Az x tengely a vízszintes 'alapvonal'. 🔹 2. Lépés: Az ezen a vonalon lévő pontok nincsenek se felette, se alatta, tehát a függőleges (y) koordinátájuk nulla. ✅ Megoldás: Az y koordinátája 0."
+    },
+     {
+      "question": "Mit jelent, ha egy pont az y tengelyen van?",
+      "answers": {
+        "a": "Az y koordinátája 0.",
+        "b": "Mindkét koordinátája 0.",
+        "c": "Az x koordinátája 0."
+      },
+      "correct": "c",
+      "explanation": "🔹 1. Lépés: Az y tengely a függőleges 'alapvonal'. 🔹 2. Lépés: Az ezen a vonalon lévő pontok nincsenek se tőle jobbra, se balra, tehát a vízszintes (x) koordinátájuk nulla. ✅ Megoldás: Az x koordinátája 0."
+    },
+    {
+      "question": "Mi a maximumértéke egy függvénynek?",
+      "answers": {
+        "a": "A legnagyobb x érték.",
+        "b": "A legnagyobb y (függvény) érték.",
+        "c": "Az y tengely metszéspontja."
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: A maximumérték azt jelenti, 'milyen magasan' van a grafikon legmagasabb pontja. 🔹 2. Lépés: A magasságot az y koordináta mutatja meg. ✅ Megoldás: A legnagyobb y (függvény) érték."
+    },
+    {
+      "question": "Melyik függvény szigorúan monoton növekvő?",
+      "answers": {
+        "a": "f(x) = 5",
+        "b": "f(x) = x + 1",
+        "c": "f(x) = -x"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: Az f(x)=5 konstans. Az f(x)=-x csökkenő (minél nagyobb x-et adunk, annál kisebb lesz az eredmény). 🔹 2. Lépés: Az f(x)=x+1 függvényben ha növeljük az x-et, az eredmény is nő. ✅ Megoldás: Az f(x) = x + 1."
+    },
+    {
+      "question": "Mi a maximumértéke egy függvénynek?",
+      "answers": {
+        "a": "A legnagyobb x érték.",
+        "b": "A legnagyobb y (függvény) érték.",
+        "c": "Az y tengely metszéspontja."
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: A maximumérték azt jelenti, 'milyen magasan' van a grafikon legmagasabb pontja. 🔹 2. Lépés: A magasságot az y koordináta mutatja meg. ✅ Megoldás: A legnagyobb y (függvény) érték."
+    },
+     {
+      "question": "Hogyan ábrázoljuk az f(x) = x függvényt?",
+      "answers": {
+        "a": "Az x tengelyre eső egyenes.",
+        "b": "Az y tengelyre eső egyenes.",
+        "c": "Egy, az origón átmenő, 45°-os egyenes."
+      },
+      "correct": "c",
+      "explanation": "🔹 1. Lépés: Az f(x)=x azt jelenti, hogy y=x. Az összetartozó pontok pl. (1;1), (2;2), (-3;-3). 🔹 2. Lépés: Ezek a pontok egy olyan egyenesen helyezkednek el, ami áthalad az origón és 'felezi' az első és harmadik síknegyedet. ✅ Megoldás: Egy, az origón átmenő, 45°-os egyenes."
+    }
+  ]
 }

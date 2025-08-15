@@ -1,8 +1,219 @@
 {
-  "title": "Kviz gula felszin terfogat",
+  "title": "Kvíz gula felszin terfogat",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz gula felszin terfogat\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz gula felszin terfogat\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a gúla?",
+      "answers": {
+        "a": "Egy olyan test, amelyet egy sokszög alap és a csúcsot az alap minden pontjával összekötő oldallapok határolnak.",
+        "b": "Egy olyan test, amelyet téglalapok határolnak.",
+        "c": "Egy forgástest."
+      },
+      "correct": "a",
+      "explanation": "A gúla egy sokszög alapból és az oldallapokból áll, amelyek a sokszög csúcsait egy közös ponttal (a gúla csúcsa) kötik össze. ✅ Megoldás: Egy olyan test, amelyet egy sokszög alap és a csúcsot az alap minden pontjával összekötő oldallapok határolnak."
+    },
+    {
+      "question": "Hogy nevezzük a gúla oldalait?",
+      "answers": {
+        "a": "Élek",
+        "b": "Oldallapok",
+        "c": "Alaplapok"
+      },
+      "correct": "b",
+      "explanation": "A gúla oldalai a sokszög alap és a csúcsot összekötő síkidomok, amiket oldallapoknak nevezünk. ✅ Megoldás: Oldallapok."
+    },
+    {
+      "question": "Mi a gúla magassága?",
+      "answers": {
+        "a": "A gúla egyik oldala.",
+        "b": "A csúcsból az alapra bocsátott merőleges szakasz hossza.",
+        "c": "Az alap és a csúcs távolsága."
+      },
+      "correct": "b",
+      "explanation": "A gúla magassága a csúcsból az alapra bocsátott merőleges szakasz, amelynek hossza a magasság. ✅ Megoldás: A csúcsból az alapra bocsátott merőleges szakasz hossza."
+    },
+    {
+      "question": "Hogy nevezzük a gúla alapját, ha a gúla oldallapjai egyenlő szárú háromszögek?",
+      "answers": {
+        "a": "Szabálytalan alap",
+        "b": "Szabályos alap",
+        "c": "Nincs neve"
+      },
+      "correct": "b",
+      "explanation": "Ha a gúla oldallapjai egyenlő szárú háromszögek, akkor a gúla alapja szabályos sokszög, azaz minden oldala és szöge egyenlő. ✅ Megoldás: Szabályos alap."
+    },
+    {
+      "question": "Milyen síkidom a gúla oldallapja, ha a gúla alapja egy négyzet, és az oldallapok egyenlő szárú háromszögek?",
+      "answers": {
+        "a": "Téglalap",
+        "b": "Háromszög",
+        "c": "Négyzet"
+      },
+      "correct": "b",
+      "explanation": "A gúla oldallapjai mindig háromszögek. Ha az alap négyzet, és az oldallapok egyenlő szárú háromszögek, akkor ezek a háromszögek egyenlőek, és az oldallapok a négyzet oldalaihoz kapcsolódnak. ✅ Megoldás: Háromszög."
+    },
+    {
+      "question": "Mi a gúla térfogatának képlete?",
+      "answers": {
+        "a": "V = (1/3) * Alap * Magasság",
+        "b": "V = Alap * Magasság",
+        "c": "V = (1/2) * Alap * Magasság"
+      },
+      "correct": "a",
+      "explanation": "A gúla térfogatát úgy kapjuk, hogy az alapterületet (Alap) megszorozzuk a magassággal, majd elosztjuk 3-mal. ✅ Megoldás: V = (1/3) * Alap * Magasság."
+    },
+    {
+      "question": "Mi a gúla felszínének képlete?",
+      "answers": {
+        "a": "F = Alap + Oldallapok",
+        "b": "F = 2 * Alap + Oldallapok",
+        "c": "F = Alap * Oldallapok"
+      },
+      "correct": "a",
+      "explanation": "A gúla felszínét úgy kapjuk meg, hogy összeadjuk az alap területét és az oldallapok területét.  ✅ Megoldás: F = Alap + Oldallapok."
+    },
+    {
+      "question": "Mi a gúla felszínének mértékegysége?",
+      "answers": {
+        "a": "cm",
+        "b": "cm²",
+        "c": "cm³"
+      },
+      "correct": "b",
+      "explanation": "A felszín területi mértékegység, így a mértékegysége négyzetes egység, mint például a cm². ✅ Megoldás: cm²."
+    },
+    {
+      "question": "Mi a gúla térfogatának mértékegysége?",
+      "answers": {
+        "a": "cm",
+        "b": "cm²",
+        "c": "cm³"
+      },
+      "correct": "c",
+      "explanation": "A térfogat a test által elfoglalt helyet méri, ezért a mértékegysége köbös, pl. cm³. ✅ Megoldás: cm³."
+    },
+    {
+      "question": "Milyen alakú a gúla alapja, ha a neve 'négyszög alapú gúla'?",
+      "answers": {
+        "a": "Háromszög",
+        "b": "Négyszög",
+        "c": "Kör"
+      },
+      "correct": "b",
+      "explanation": "A gúla neve a gúla alapjának alakját jelzi. A négyszög alapú gúla alapja tehát egy négyszög. ✅ Megoldás: Négyszög."
+    },
+    {
+      "question": "Ha egy gúla alapja egy négyzet, és a magassága 5 cm, az alapja oldala 4 cm, akkor a térfogata...",
+      "answers": {
+        "a": "80/3 cm³",
+        "b": "20 cm³",
+        "c": "30 cm³"
+      },
+      "correct": "a",
+      "explanation": "🔹 1. Lépés: A térfogat képlete V = (1/3) * Alap * Magasság. 🔹 2. Lépés: Az alap területe = 4 * 4 = 16 cm². 🔹 3. Lépés: V = (1/3) * 16 * 5 = 80/3. ✅ Megoldás: 80/3 cm³."
+    },
+    {
+      "question": "Egy szabályos gúla alapja egy 6 cm oldalú hatszög. Ha a gúla magassága 10 cm, akkor a térfogata...",
+      "answers": {
+        "a": "90√3 cm³",
+        "b": "180√3 cm³",
+        "c": "360√3 cm³"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: A szabályos hatszög területe: A = (3√3 / 2) * a², ahol 'a' az oldal hossza. 🔹 2. Lépés: A = (3√3 / 2) * 6² = (3√3 / 2) * 36 = 54√3 cm². 🔹 3. Lépés: A térfogat V = (1/3) * Alap * Magasság = (1/3) * 54√3 * 10 = 180√3 cm³. ✅ Megoldás: 180√3 cm³."
+    },
+    {
+      "question": "Egy szabályos gúla alapja egy 4 cm oldalú négyzet, az oldallapok magassága 6 cm. Mekkora a felszíne?",
+      "answers": {
+        "a": "16 + 48 cm²",
+        "b": "16 + 24 cm²",
+        "c": "64 cm²"
+      },
+      "correct": "a",
+      "explanation": "🔹 1. Lépés: A felszín = Alap + Oldallapok. 🔹 2. Lépés: Az alap területe 4 * 4 = 16 cm². 🔹 3. Lépés: Az oldallapok területe: 4 * (4 * 6 / 2) = 48 cm². 🔹 4. Lépés: A felszín = 16 + 48 = (16+48) cm². ✅ Megoldás: 16 + 48 cm²."
+    },
+    {
+      "question": "Ha egy gúla alapja egy négyzet, és a magassága 10 cm, az alapja oldala 4 cm, akkor a felszíne...",
+      "answers": {
+        "a": "16 + 40 cm²",
+        "b": "16 + √116 * 8 cm²",
+        "c": "160 cm²"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: A felszín = Alap + Oldallapok. Az alap területe 4*4=16 cm². 🔹 2. Lépés: Az oldallapok területe: Az oldallap magassága (m) Pitagorasszal: m² = 10² + 2² -> m = √104 ≈ 10.2 cm. 🔹 3. Lépés: Az oldallap területe 4*m/2, azaz 4*√104/2 -> 8*√26. 4. A felszín = Alap + oldallapok = 16 + 8√26.  A leegyszerűsített alak: A felszín ≈ 16 + 8*10.2. A felszín = 16 + √116 * 8. ✅ Megoldás: 16 + √116 * 8 cm²."
+    },
+    {
+      "question": "Mekkora a gúla alapterülete, ha térfogata 30 cm³ és magassága 5 cm?",
+      "answers": {
+        "a": "6 cm²",
+        "b": "18 cm²",
+        "c": "90 cm²"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: V = (1/3) * Alap * Magasság. 🔹 2. Lépés: 30 = (1/3) * Alap * 5. Szorozzuk meg 3-mal: 90 = Alap * 5. 🔹 3. Lépés: Osszuk el 5-tel: Alap = 18 cm². ✅ Megoldás: 18 cm²."
+    },
+    {
+      "question": "Milyen alakú a gúla oldallapja?",
+      "answers": {
+        "a": "Háromszög",
+        "b": "Téglalap",
+        "c": "Négyzet"
+      },
+      "correct": "a",
+      "explanation": "A gúla oldallapjai háromszögek, amelyek a csúcsot kötik össze az alaplap éleivel. ✅ Megoldás: Háromszög."
+    },
+    {
+      "question": "Ha egy gúla térfogata 24 cm³, az alapja területe 12 cm², akkor a magassága...",
+      "answers": {
+        "a": "2 cm",
+        "b": "4 cm",
+        "c": "6 cm"
+      },
+      "correct": "c",
+      "explanation": "🔹 1. Lépés: V = (1/3) * Alap * Magasság. 🔹 2. Lépés: 24 = (1/3) * 12 * Magasság. 🔹 3. Lépés: 24 = 4 * Magasság. 🔹 4. Lépés: Magasság = 6 cm. ✅ Megoldás: 6 cm."
+    },
+      {
+        "question": "Mitől függ egy gúla térfogata?",
+        "answers": {
+          "a": "Az alaplap területétől és a magasságtól.",
+          "b": "Csak a magasságtól.",
+          "c": "Csak az alaplap területétől."
+        },
+        "correct": "a",
+        "explanation": "A gúla térfogata a következő képlettel számolható ki: V = (1/3) * alapterület * magasság. A térfogat tehát mindkét tényezőtől függ. ✅ Megoldás: Az alaplap területétől és a magasságtól."
+      },
+      {
+        "question": "Mi a szabályos gúla oldallapjának magassága?",
+        "answers": {
+          "a": "A gúla magassága.",
+          "b": "A gúla oldallapjának az alaplaphoz tartozó magassága.",
+          "c": "Az alaplap egyik oldala."
+        },
+        "correct": "b",
+        "explanation": "A gúla oldallapjának magassága az oldallap alapjához tartozó magasság. A gúla alapjának oldala egy él, ami nem a magasság. ✅ Megoldás: A gúla oldallapjának az alaplaphoz tartozó magassága."
+      },
+      {
+        "question": "Hogyan változik a gúla térfogata, ha az alapterületét megduplázzuk?",
+        "answers": {
+          "a": "Kétszeresére nő.",
+          "b": "Négyszeresére nő.",
+          "c": "Nem változik."
+        },
+        "correct": "a",
+        "explanation": "A gúla térfogata egyenesen arányos az alapterülettel. V = (1/3) * Alap * Magasság. Ha az alapterületet megduplázzuk, a térfogat is kétszeresére nő. ✅ Megoldás: Kétszeresére nő."
+      },
+      {
+        "question": "Mi a neve annak a szakasznak, ami összeköti a gúla csúcsát az alaplap középpontjával egy szabályos gúlánál?",
+        "answers": {
+          "a": "Oldalél",
+          "b": "Magasság",
+          "c": "Alapél"
+        },
+        "correct": "b",
+        "explanation": "A csúcsból az alaplapra bocsátott merőleges szakasz a gúla magassága. ✅ Megoldás: Magasság."
+      }
+  ]
 }

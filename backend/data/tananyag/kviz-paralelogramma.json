@@ -3,6 +3,247 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz paralelogramma\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz paralelogramma\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a paralelogramma definíciója?",
+      "answers": {
+        "a": "Olyan négyszög, amelynek szemközti oldalai párhuzamosak.",
+        "b": "Olyan négyszög, amelynek van két párhuzamos oldala.",
+        "c": "Olyan négyszög, amelynek minden oldala egyenlő."
+      },
+      "correct": "a",
+      "explanation": "A paralelogramma egy olyan konvex négyszög, amelynek két-két szemközti oldala párhuzamos. A trapéz definíciója az, hogy van (legalább) egy párhuzamos oldalpárja. ✅ Megoldás: A helyes definíció az, hogy a négyszög szemközti oldalai párhuzamosak."
+    },
+    {
+      "question": "Mi igaz egy paralelogramma szemközti oldalaira?",
+      "answers": {
+        "a": "Egyenlő hosszúak.",
+        "b": "Merőlegesek egymásra.",
+        "c": "Mindig hosszabbak, mint az átlók."
+      },
+      "correct": "a",
+      "explanation": "A paralelogramma definíciójából (szemközti oldalak párhuzamossága) levezethető, hogy a szemközti oldalak hossza páronként megegyezik. ✅ Megoldás: A paralelogramma szemközti oldalai egyenlő hosszúak."
+    },
+    {
+      "question": "Mi igaz egy paralelogramma szemközti szögeire?",
+      "answers": {
+        "a": "Egyenlő nagyságúak.",
+        "b": "Összegük 180°.",
+        "c": "Mindig hegyesszögek."
+      },
+      "correct": "a",
+      "explanation": "A paralelogramma szemközti szögei páronként egyenlő nagyságúak (kongruensek). ✅ Megoldás: A paralelogramma szemközti szögei egyenlő nagyságúak."
+    },
+    {
+      "question": "Mi igaz egy paralelogramma szomszédos szögeire?",
+      "answers": {
+        "a": "Összegük 180°.",
+        "b": "Egyenlő nagyságúak.",
+        "c": "Összegük 90°."
+      },
+      "correct": "a",
+      "explanation": "Mivel a szemközti oldalak párhuzamosak, a szomszédos szögek a párhuzamos szárakat metsző szelő egyik oldalán fekvő szögek. Ezek összege mindig 180° (kiegészítő szögek). ✅ Megoldás: A paralelogramma szomszédos szögeinek összege 180°."
+    },
+    {
+      "question": "Melyik állítás igaz a paralelogramma átlóira?",
+      "answers": {
+        "a": "Felezve metszik egymást.",
+        "b": "Mindig merőlegesek egymásra.",
+        "c": "Mindig egyenlő hosszúak."
+      },
+      "correct": "a",
+      "explanation": "A paralelogramma átlói metszik egymást, és ez a metszéspont mindkét átlót megfelezi. ✅ Megoldás: Az átlók felezve metszik egymást."
+    },
+    {
+      "question": "Egy paralelogramma egyik oldala 8 cm, a másik 12 cm. Mennyi a kerülete?",
+      "answers": {
+        "a": "40 cm",
+        "b": "20 cm",
+        "c": "96 cm"
+      },
+      "correct": "a",
+      "explanation": "A kerület a négy oldal hosszának összege. Mivel a szemközti oldalak egyenlőek, K = 2a + 2b = 2(a+b). K = 2 * (8 + 12) = 2 * 20 = 40 cm. ✅ Megoldás: A kerület 40 cm."
+    },
+    {
+      "question": "Egy paralelogramma egyik szöge 110°. Hány fokos a szemközti szöge?",
+      "answers": {
+        "a": "110°",
+        "b": "70°",
+        "c": "Nem lehet tudni."
+      },
+      "correct": "a",
+      "explanation": "A paralelogramma szemközti szögei egyenlő nagyságúak. ✅ Megoldás: A szemközti szög is 110°."
+    },
+    {
+      "question": "Melyik feltétel garantálja, hogy egy négyszög biztosan paralelogramma?",
+      "answers": {
+        "a": "Az átlói felezik egymást.",
+        "b": "Van egy párhuzamos oldalpárja.",
+        "c": "Minden oldala egyenlő hosszú."
+      },
+      "correct": "a",
+      "explanation": "Egy négyszög akkor paralelogramma, ha pl. szemközti oldalai páronként egyenlőek, VAGY ha átlói felezik egymást. ✅ Megoldás: Ha egy négyszög átlói felezik egymást, az biztosan paralelogramma."
+    },
+    {
+      "question": "Egy paralelogramma egyik szöge 65°. Hány fokos a mellette fekvő szög?",
+      "answers": {
+        "a": "75°",
+        "b": "115°",
+        "c": "65°"
+      },
+      "correct": "b",
+      "explanation": "A paralelogramma szomszédos szögeinek összege 180°. Így a keresett szög 180° - 65° = 115°. ✅ Megoldás: A szomszédos szög 115°."
+    },
+    {
+      "question": "Egy paralelogramma kerülete 50 cm. Az egyik oldala 10 cm. Milyen hosszú a másik oldal?",
+      "answers": {
+        "a": "40 cm",
+        "b": "15 cm",
+        "c": "25 cm"
+      },
+      "correct": "b",
+      "explanation": "A kerület = 2(a+b). Behelyettesítve: 50 = 2 * (10 + b). Először osszunk 2-vel: 25 = 10 + b. Majd vonjunk ki 10-et: b = 15. ✅ Megoldás: A másik oldal 15 cm hosszú."
+    },
+    {
+      "question": "Igaz-e, hogy minden négyzet paralelogramma?",
+      "answers": {
+        "a": "Hamis",
+        "b": "Igaz",
+        "c": "Csak ha az oldala páros szám."
+      },
+      "correct": "b",
+      "explanation": "A négyzet teljesíti a paralelogramma definícióját (szemközti oldalak párhuzamosak), ezért a négyzet a paralelogrammák egy speciális esete. ✅ Megoldás: Az állítás igaz."
+    },
+    {
+      "question": "Egy paralelogramma egyik átlójának hossza 18 cm. A metszéspont milyen messze van az átló két végpontjától?",
+      "answers": {
+        "a": "Nem lehet tudni",
+        "b": "9 cm-re mindkettőtől",
+        "c": "6 cm és 12 cm-re"
+      },
+      "correct": "b",
+      "explanation": "A paralelogramma átlói felezik egymást. A metszéspont a 18 cm-es átlót két egyenlő, 18 / 2 = 9 cm-es szakaszra osztja.  ✅ Megoldás: A metszéspont 9 cm-re van mindkét végponttól."
+    },
+    {
+      "question": "Mi NEM igaz MINDEN általános paralelogrammára?",
+      "answers": {
+        "a": "Szemközti oldalai egyenlőek.",
+        "b": "Átlói merőlegesek egymásra.",
+        "c": "Szemközti szögei egyenlők."
+      },
+      "correct": "b",
+      "explanation": "A szemközti oldalak és szögek egyenlősége alaptulajdonság. Az átlók csak speciális esetekben (rombusz, négyzet) merőlegesek egymásra, egy általános, nyújtott paralelogrammában nem. ✅ Megoldás: Az az állítás nem igaz mindig, hogy az átlók merőlegesek."
+    },
+    {
+      "question": "Egy paralelogramma oldalai a és b. Hogyan számoljuk ki a kerületét?",
+      "answers": {
+        "a": "a*b",
+        "b": "2(a+b)",
+        "c": "4a"
+      },
+      "correct": "b",
+      "explanation": "A kerület = 2a + 2b = 2(a+b). ✅ Megoldás: A kerület képlete 2(a+b)."
+    },
+     {
+      "question": "Melyik négyszögnek felezik az átlói egymást?",
+      "answers": {
+        "a": "Trapéz",
+        "b": "Deltoid",
+        "c": "Paralelogramma"
+      },
+      "correct": "c",
+      "explanation": "A paralelogramma átlói felezik egymást. ✅ Megoldás: A paralelogramma átlói felezik egymást."
+    },
+    {
+      "question": "Egy paralelogramma egyik szöge 65°. Hány fokos a mellette fekvő szög?",
+      "answers": {
+        "a": "75°",
+        "b": "115°",
+        "c": "65°"
+      },
+      "correct": "b",
+      "explanation": "A paralelogramma szomszédos szögeinek összege 180°. Így a keresett szög 180° - 65° = 115°. ✅ Megoldás: A szomszédos szög 115°."
+    },
+    {
+      "question": "Mi a Pitagorasz-tétel képlete, ha 'a' és 'b' a befogók, 'c' pedig az átfogó?",
+      "answers": {
+        "a": "a + b = c",
+        "b": "a² + b² = c²",
+        "c": "a² - b² = c²"
+      },
+      "correct": "a",
+      "explanation": "A tétel kimondja, hogy a derékszögű háromszög két befogójának négyzetösszege egyenlő az átfogó négyzetével.  ✅ Megoldás: a² + b² = c²."
+    },
+    {
+      "question": "Egy rombusz átlói 10 cm és 24 cm. Mekkora az oldala?",
+      "answers": {
+        "a": "13 cm",
+        "b": "26 cm",
+        "c": "17 cm"
+      },
+      "correct": "c",
+      "explanation": "A rombusz átlói merőlegesen felezik egymást. Ezek a 2 derékszögű háromszög befogói. A hosszúságok fele: 5cm és 12 cm. 5²+12²=169 és √169=13cm. ✅ Megoldás: 13 cm"
+    },
+    {
+      "question": "Mit jelent az, ha egy pont egy síkidomon belül van?",
+      "answers": {
+        "a": "Érintője a síkidomnak.",
+        "b": "A szomszédos oldalakkal egyenlő távolságra van.",
+        "c": "A síkidom belsejében helyezkedik el, nem a határvonalán."
+      },
+      "correct": "c",
+      "explanation": "A síkidom belsejében helyezkedik el, nem a határvonalán. ✅ Megoldás: A síkidom belsejében helyezkedik el, nem a határvonalán."
+    },
+    {
+      "question": "Ha egy négyzet oldala 5 cm, mekkora a kerülete?",
+      "answers": {
+        "a": "20 cm",
+        "b": "25 cm",
+        "c": "10 cm"
+      },
+      "correct": "a",
+      "explanation": "Minden oldala egyenlő. Kerület=4*5cm=20 cm. ✅ Megoldás: 20 cm"
+    },
+    {
+      "question": "Egy konvex négyszög három szöge 100°, 110° és 80°. Mekkora a negyedik szöge?",
+      "answers": {
+        "a": "70°",
+        "b": "80°",
+        "c": "90°"
+      },
+      "correct": "c",
+      "explanation": "Egy négyszög belső szögeinek összege 360°. A negyedik szög: 360° - (100° + 110° + 80°) = 70°.  Javítottam.  ✅ Megoldás: 70°"
+    },
+    {
+      "question": "Ha egy négyzet oldala 8 cm, mekkora az átlója?",
+      "answers": {
+        "a": "16 cm",
+        "b": "kb. 11,3 cm",
+        "c": "64 cm"
+      },
+      "correct": "a",
+      "explanation": "A Pitagorasz-tétel segítségével. A négyzet átlója: √ (8² + 8²) = √(64 + 64) = √128.  ✅ Megoldás: kb. 11,3 cm."
+    },
+      {
+        "question": "Mi a neve annak a pontnak, ahol a paralelogramma átlói metszik egymást?",
+        "answers": {
+          "a": "A súlypont.",
+          "b": "A beírt kör középpontja.",
+          "c": "A középpont"
+        },
+        "correct": "c",
+        "explanation": "A paralelogramma átlói a középpontban metszik egymást. ✅ Megoldás: A középpont"
+      },
+    {
+      "question": "Melyik négyszögnek nem egyezik meg az átlójának hossza?",
+      "answers": {
+        "a": "négyzet",
+        "b": "téglalap",
+        "c": "deltoid"
+      },
+      "correct": "c",
+      "explanation": "A négyzetnek, a rombusznak és a téglalapnak is megegyezik az átlója. A deltoid nem ilyen. ✅ Megoldás: deltoid"
+    }
+  ]
 }

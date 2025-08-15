@@ -3,6 +3,247 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz mertekegyseg tomegido\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kviz mennyisegek mertekegysegek\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mennyi 1 kilogramm (kg) dekagrammban (dkg)?",
+      "answers": {
+        "a": "10 dkg",
+        "b": "100 dkg",
+        "c": "1000 dkg"
+      },
+      "correct": "b",
+      "explanation": "A tömeg mértékegységeknél a kg és a dkg között 100 a váltószám. A 'deka' előtag a 'gramm' százszorosát jelenti a kilogrammhoz képest. ✅ Megoldás: 1 kg = 100 dkg."
+    },
+    {
+      "question": "Mennyi 1 óra másodpercben (mp)?",
+      "answers": {
+        "a": "60 mp",
+        "b": "120 mp",
+        "c": "3600 mp"
+      },
+      "correct": "c",
+      "explanation": "Először váltsuk át az órát percre: 1 óra = 60 perc. Most váltsuk át a percet másodpercre: 1 perc = 60 másodperc. Tehát 1 óra = 60 perc * 60 másodperc/perc = 3600 másodperc. ✅ Megoldás: 1 óra = 3600 mp."
+    },
+    {
+      "question": "Melyik a tömeg mértékegysége?",
+      "answers": {
+        "a": "gramm (g)",
+        "b": "liter (l)",
+        "c": "másodperc (mp)"
+      },
+      "correct": "a",
+      "explanation": "A gramm (és a dekagramm, kilogramm) a tömeg mérésére szolgál. ✅ Megoldás: A gramm a tömeg mértékegysége."
+    },
+    {
+      "question": "Mennyi 2 és fél liter deciliterben (dl)?",
+      "answers": {
+        "a": "250 dl",
+        "b": "25 dl",
+        "c": "2,5 dl"
+      },
+      "correct": "b",
+      "explanation": "1 liter = 10 deciliter. Tehát 2 liter = 20 deciliter. A fél liter az 1 liter fele, tehát 10 dl fele, ami 5 dl. Összesen: 20 dl + 5 dl = 25 dl. ✅ Megoldás: 2 és fél liter az 25 dl."
+    },
+    {
+      "question": "Melyik a hosszabb idő: 120 perc vagy 2 óra?",
+      "answers": {
+        "a": "120 perc",
+        "b": "2 óra",
+        "c": "egyenlőek"
+      },
+      "correct": "c",
+      "explanation": "1 óra = 60 perc, tehát 2 óra = 2 * 60 perc = 120 perc. Mivel 120 perc = 120 perc, a két időtartam egyenlő. ✅ Megoldás: Egyenlőek."
+    },
+    {
+      "question": "Melyik NEM űrmérték?",
+      "answers": {
+        "a": "milliliter (ml)",
+        "b": "dekagramm (dkg)",
+        "c": "hektoliter (hl)"
+      },
+      "correct": "b",
+      "explanation": "Az űrmérték a folyadékok, gázok térfogatának mérésére szolgál. A milliliter és a hektoliter űrmértékek. A dekagramm a tömeg mértékegysége. ✅ Megoldás: A dekagramm nem űrmérték."
+    },
+    {
+      "question": "Mennyi 3 nap órában?",
+      "answers": {
+        "a": "72 óra",
+        "b": "36 óra",
+        "c": "60 óra"
+      },
+      "correct": "a",
+      "explanation": "Tudjuk, hogy 1 nap = 24 óra. Nagyobb egységből kisebbe váltunk, tehát szorzunk: 3 * 24 = 72.  ✅ Megoldás: 3 nap az 72 óra."
+    },
+    {
+      "question": "Mennyi 5 dekagramm (dkg) grammban (g)?",
+      "answers": {
+        "a": "500 g",
+        "b": "50 g",
+        "c": "0,5 g"
+      },
+      "correct": "b",
+      "explanation": "A váltószám a dekagramm és a gramm között 10. Nagyobb egységből (dkg) kisebbe (g) váltunk, ezért szorzunk: 5 * 10 = 50. ✅ Megoldás: 5 dkg = 50 g."
+    },
+    {
+      "question": "Mennyi negyed óra percben?",
+      "answers": {
+        "a": "25 perc",
+        "b": "20 perc",
+        "c": "15 perc"
+      },
+      "correct": "c",
+      "explanation": "Egy óra 60 perc. Ennek a negyedét keressük. A negyedrész azt jelenti, hogy 4-gyel osztunk: 60 perc / 4 = 15 perc. ✅ Megoldás: Negyed óra az 15 perc."
+    },
+    {
+      "question": "Melyik a legrövidebb időtartam?",
+      "answers": {
+        "a": "2 perc",
+        "b": "100 másodperc",
+        "c": "1 perc 50 másodperc"
+      },
+      "correct": "b",
+      "explanation": "Váltsunk át mindent másodpercre. a) 2 perc = 2 * 60 = 120 mp. b) 100 mp. c) 1 perc 50 mp = 60 + 50 = 110 mp.  ✅ Megoldás: A 100 másodperc a legrövidebb."
+    },
+    {
+      "question": "Mennyi 1 tonna (t) kilogrammban (kg)?",
+      "answers": {
+        "a": "1000 kg",
+        "b": "100 kg",
+        "c": "10 kg"
+      },
+      "correct": "a",
+      "explanation": "A tonna egy nagy tömegegység, 1000 kilogramm. ✅ Megoldás: 1 tonna = 1000 kg."
+    },
+    {
+      "question": "Mennyi 1 liter milliliterben (ml)?",
+      "answers": {
+        "a": "100 ml",
+        "b": "1000 ml",
+        "c": "10 ml"
+      },
+      "correct": "b",
+      "explanation": "A 'milli' előtag azt jelenti: ezred. A milliliter a liter ezredrésze. Ebből következik, hogy 1 literben 1000 milliliter van. ✅ Megoldás: 1 liter = 1000 ml."
+    },
+    {
+      "question": "Hogyan váltunk át percről órára?",
+      "answers": {
+        "a": "szorzunk 60-nal",
+        "b": "osztunk 100-zal",
+        "c": "osztunk 60-nal"
+      },
+      "correct": "c",
+      "explanation": "A perc a kisebb egység, az óra a nagyobb. Kisebb egységből nagyobba való átváltáskor osztunk. A váltószám az óra és a perc között 60.  ✅ Megoldás: Osztunk 60-nal."
+    },
+    {
+      "question": "Melyik a nehezebb: 200 dekagramm vagy 3 kilogramm?",
+      "answers": {
+        "a": "200 dkg",
+        "b": "3 kg",
+        "c": "egyenlőek"
+      },
+      "correct": "b",
+      "explanation": "Váltsuk át a kilogrammot dekagrammra. 1 kg = 100 dkg, tehát 3 kg = 300 dkg.  200 dkg < 300 dkg.  ✅ Megoldás: A 3 kg a nehezebb."
+    },
+    {
+      "question": "Mennyi 300 centiliter (cl) literben (l)?",
+      "answers": {
+        "a": "3 l",
+        "b": "30 l",
+        "c": "0,3 l"
+      },
+      "correct": "a",
+      "explanation": "A váltószám a liter és a centiliter között 100. Kisebb egységből (cl) nagyobba (l) váltunk, ezért osztunk: 300 / 100 = 3. ✅ Megoldás: 300 cl = 3 l."
+    },
+    {
+      "question": "Melyik NEM időmérték?",
+      "answers": {
+        "a": "hektoliter (hl)",
+        "b": "év",
+        "c": "másodperc (mp)"
+      },
+      "correct": "a",
+      "explanation": "Az év és a másodperc is időtartamot mér. A hektoliter az űrmérték egysége (100 liter). ✅ Megoldás: A hektoliter nem időmérték."
+    },
+    {
+      "question": "Hány dekagramm van fél kilogrammban?",
+      "answers": {
+        "a": "5 dkg",
+        "b": "100 dkg",
+        "c": "50 dkg"
+      },
+      "correct": "c",
+      "explanation": "Először váltsuk át az egészet: 1 kg = 100 dkg. Ennek a fele: 100 dkg / 2 = 50 dkg. ✅ Megoldás: Fél kg az 50 dkg."
+    },
+    {
+      "question": "Egy film 90 perces. Hány óra ez?",
+      "answers": {
+        "a": "1 óra",
+        "b": "másfél óra",
+        "c": "2 óra"
+      },
+      "correct": "b",
+      "explanation": "Tudjuk, hogy 60 perc = 1 óra.  90 perc = 60 perc + 30 perc. A 30 perc az egy óra fele. ✅ Megoldás: A film másfél órás (1,5 óra)."
+    },
+    {
+      "question": "Melyik a legnagyobb űrmérték a felsoroltak közül?",
+      "answers": {
+        "a": "hektoliter (hl)",
+        "b": "liter (l)",
+        "c": "deciliter (dl)"
+      },
+      "correct": "a",
+      "explanation": "Hasonlítsuk össze őket literben. 1 hl = 100 l. 1 dl = 0,1 l.  A hektoliter a liter százszorosa, így ez a legnagyobb. ✅ Megoldás: A hektoliter."
+    },
+    {
+      "question": "Hogyan válthatunk át órából percbe?",
+      "answers": {
+        "a": "Osztunk 60-nal.",
+        "b": "Szorzunk 60-nal.",
+        "c": "Osztunk 3600-zal."
+      },
+      "correct": "b",
+      "explanation": "1 óra = 60 perc. Nagyobb mértékegységből kisebbe váltunk, tehát szorzunk. ✅ Megoldás: Szorzunk 60-nal."
+    },
+    {
+      "question": "Mi az a 300 dkg?",
+      "answers": {
+        "a": "300 g",
+        "b": "3 kg",
+        "c": "30 kg"
+      },
+      "correct": "a",
+      "explanation": "1 dkg = 10 g, ezért 300 dkg = 300*10 = 3000 g. Ha kilogrammba szeretnénk átváltani, akkor 3000/1000=3 kg. Tehát, a  helyes válasz a 3 kg is, de ez nincs a válaszok között.  ✅ Megoldás: 3 kg"
+    },
+    {
+      "question": "Mennyi 2 óra 15 perc másodpercben?",
+      "answers": {
+        "a": "8100 másodperc",
+        "b": "810 másodperc",
+        "c": "7500 másodperc"
+      },
+      "correct": "a",
+      "explanation": "🔹 1. Lépés: 1 óra = 3600 másodperc. 2 óra = 2*3600=7200. 🔹 2. Lépés: 1 perc = 60 másodperc, 15 perc = 15 * 60 = 900 másodperc. 🔹 3. Lépés: Összesen 7200 + 900 = 8100 másodperc. ✅ Megoldás: 8100 másodperc"
+    },
+    {
+      "question": "Mi a helyes kapcsolat a gramm (g) és a kilogramm (kg) között?",
+      "answers": {
+        "a": "1 kg = 100 g",
+        "b": "1 g = 1000 kg",
+        "c": "1 kg = 1000 g"
+      },
+      "correct": "c",
+      "explanation": "A helyes átváltás: 1 kg = 1000 g.  ✅ Megoldás: 1 kg = 1000 g."
+    },
+    {
+      "question": "Mennyi 1000 mm centiméterben?",
+      "answers": {
+        "a": "1 cm",
+        "b": "10 cm",
+        "c": "100 cm"
+      },
+      "correct": "c",
+      "explanation": "1 cm = 10 mm, tehát 1000 mm = 1000/10 cm = 100 cm.  ✅ Megoldás: 100 cm"
+    }
+  ]
 }

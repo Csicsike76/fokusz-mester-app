@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz haromszog alapok\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Hány oldala van a háromszögnek?",
+      "answers": {
+        "a": "Kettő",
+        "b": "Három",
+        "c": "Négy"
+      },
+      "correct": "b",
+      "explanation": "A háromszögnek három oldala van. ✅ Megoldás: Három."
+    },
+    {
+      "question": "Hány szöge van a háromszögnek?",
+      "answers": {
+        "a": "Kettő",
+        "b": "Három",
+        "c": "Négy"
+      },
+      "correct": "b",
+      "explanation": "A háromszögnek három szöge van. ✅ Megoldás: Három."
+    },
+    {
+      "question": "Milyen a szögek összege egy háromszögben?",
+      "answers": {
+        "a": "90 fok",
+        "b": "180 fok",
+        "c": "360 fok"
+      },
+      "correct": "b",
+      "explanation": "A háromszög belső szögeinek összege mindig 180 fok. ✅ Megoldás: 180 fok"
+    },
+    {
+      "question": "Milyen háromszög, aminek minden oldala egyenlő?",
+      "answers": {
+        "a": "Egyenlő szárú háromszög",
+        "b": "Egyenlő oldalú háromszög",
+        "c": "Derékszögű háromszög"
+      },
+      "correct": "b",
+      "explanation": "Az egyenlő oldalú háromszögnek minden oldala egyenlő. ✅ Megoldás: Egyenlő oldalú háromszög."
+    },
+    {
+      "question": "Milyen háromszög, aminek két oldala egyenlő?",
+      "answers": {
+        "a": "Egyenlő szárú háromszög",
+        "b": "Egyenlő oldalú háromszög",
+        "c": "Derékszögű háromszög"
+      },
+      "correct": "a",
+      "explanation": "Az egyenlő szárú háromszögnek két oldala egyenlő. ✅ Megoldás: Egyenlő szárú háromszög"
+    },
+    {
+      "question": "Milyen a háromszög, aminek van egy derékszöge (90 fokos szöge)?",
+      "answers": {
+        "a": "Egyenlő szárú",
+        "b": "Egyenlő oldalú",
+        "c": "Derékszögű"
+      },
+      "correct": "c",
+      "explanation": "A derékszögű háromszögnek van egy derékszöge (90 fokos szöge).  ✅ Megoldás: Derékszögű"
+    },
+    {
+      "question": "Mi a háromszög területe?",
+      "answers": {
+        "a": "oldal * oldal",
+        "b": "(alap * magasság) / 2",
+        "c": "alap + magasság"
+      },
+      "correct": "b",
+      "explanation": "A háromszög területét úgy számoljuk ki, hogy az alapot megszorozzuk a magassággal, majd elosztjuk kettővel. ✅ Megoldás: (alap * magasság) / 2"
+    },
+    {
+      "question": "Mi a háromszög kerülete?",
+      "answers": {
+        "a": "Az oldalak szorzata.",
+        "b": "Az oldalak összege.",
+        "c": "Az alap és a magasság összege."
+      },
+      "correct": "b",
+      "explanation": "A háromszög kerülete a három oldalának az összege. ✅ Megoldás: Az oldalak összege."
+    },
+    {
+      "question": "Mi a magasság a háromszögben?",
+      "answers": {
+        "a": "Egy oldal hossza.",
+        "b": "A csúcspontból az alapra húzott merőleges.",
+        "c": "A szögek összege."
+      },
+      "correct": "b",
+      "explanation": "A magasság a csúcspontból az alapra húzott merőleges szakasz. ✅ Megoldás: A csúcspontból az alapra húzott merőleges."
+    },
+    {
+      "question": "Hogyan számoljuk ki egy egyenlő oldalú háromszög kerületét, ha ismerjük egy oldalát?",
+      "answers": {
+        "a": "Megszorozzuk az oldalt 2-vel.",
+        "b": "Megszorozzuk az oldalt 3-mal.",
+        "c": "Összeadjuk az oldalhoz a magasságot."
+      },
+      "correct": "b",
+      "explanation": "Az egyenlő oldalú háromszög kerülete a három egyenlő oldal összegéből adódik, ezért 3-mal szorozzuk meg. ✅ Megoldás: Megszorozzuk az oldalt 3-mal."
+    },
+    {
+      "question": "Hogyan nevezzük a leghosszabb oldalt a derékszögű háromszögben?",
+      "answers": {
+        "a": "Magasság",
+        "b": "Átfogó",
+        "c": "Alap"
+      },
+      "correct": "b",
+      "explanation": "A derékszögű háromszögben a leghosszabb oldalt átfogónak nevezzük. ✅ Megoldás: Átfogó."
+    },
+    {
+      "question": "Milyen a kapcsolat a derékszögű háromszög oldalai között?",
+      "answers": {
+        "a": "A leghosszabb oldal (átfogó) hosszabb, mint a másik két oldal.",
+        "b": "A két rövidebb oldal összege egyenlő az átfogóval.",
+        "c": "Mindegyik oldal egyforma hosszú."
+      },
+      "correct": "a",
+      "explanation": "A derékszögű háromszögben az átfogó a leghosszabb. ✅ Megoldás: A leghosszabb oldal (átfogó) hosszabb, mint a másik két oldal."
+    },
+    {
+      "question": "Melyik szabályt használjuk a derékszögű háromszög oldalai közötti kapcsolat kiszámításához?",
+      "answers": {
+        "a": "Pitagorasz-tétel",
+        "b": "Thalesz-tétel",
+        "c": "Kétoldal - egy szög tétel"
+      },
+      "correct": "a",
+      "explanation": "A derékszögű háromszög oldalai közötti kapcsolatot a Pitagorasz-tétel írja le. ✅ Megoldás: Pitagorasz-tétel"
+    },
+    {
+      "question": "Mi a Pitagorasz-tétel?",
+      "answers": {
+        "a": "a² + b² = c²",
+        "b": "a + b = c",
+        "c": "a - b = c"
+      },
+      "correct": "a",
+      "explanation": "A Pitagorasz-tétel szerint a derékszögű háromszögben az átfogó (c) négyzete egyenlő a két befogó (a, b) négyzetének összegével: a² + b² = c². ✅ Megoldás: a² + b² = c²"
+    },
+    {
+      "question": "Ha egy háromszög két oldala 3 cm és 4 cm, a harmadik 5 cm. Milyen háromszög?",
+      "answers": {
+        "a": "Egyenlő szárú.",
+        "b": "Derékszögű.",
+        "c": "Egyenlő oldalú."
+      },
+      "correct": "b",
+      "explanation": "Mivel 3² + 4² = 5², a Pitagorasz-tétel teljesül, tehát a háromszög derékszögű. ✅ Megoldás: Derékszögű."
+    },
+    {
+      "question": "Hogyan számoljuk ki egy derékszögű háromszög területét, ha ismerjük a befogóit?",
+      "answers": {
+        "a": "összeadjuk a két befogót.",
+        "b": "(befogó1 * befogó2) / 2",
+        "c": "összeadjuk a befogót és az átfogót."
+      },
+      "correct": "b",
+      "explanation": "A derékszögű háromszög területe a két befogó szorzatának a fele. ✅ Megoldás: (befogó1 * befogó2) / 2"
+    },
+    {
+      "question": "Melyik a helyes a területszámításnál?",
+      "answers": {
+        "a": "Terület = alap * magasság",
+        "b": "Terület = (alap * magasság) / 2",
+        "c": "Terület = alap + magasság"
+      },
+      "correct": "b",
+      "explanation": "A háromszög területe = (alap * magasság) / 2. ✅ Megoldás: Terület = (alap * magasság) / 2"
+    },
+    {
+      "question": "Ha egy egyenlő szárú háromszög alapja 6 cm, magassága 4 cm, akkor mekkora a területe?",
+      "answers": {
+        "a": "10 cm²",
+        "b": "12 cm²",
+        "c": "24 cm²"
+      },
+      "correct": "b",
+      "explanation": "Terület = (alap * magasság) / 2 = (6 * 4) / 2 = 12 cm². ✅ Megoldás: 12 cm²"
+    },
+    {
+      "question": "Ha egy háromszög oldalai 5 cm, 12 cm és 13 cm, akkor mekkora a kerülete?",
+      "answers": {
+        "a": "25 cm",
+        "b": "30 cm",
+        "c": "60 cm"
+      },
+      "correct": "b",
+      "explanation": "Kerület = 5 + 12 + 13 = 30 cm. ✅ Megoldás: 30 cm"
+    },
+    {
+      "question": "Melyik egységben mérjük a területet?",
+      "answers": {
+        "a": "cm",
+        "b": "cm²",
+        "c": "cm³"
+      },
+      "correct": "b",
+      "explanation": "A területet mindig négyzetes egységben mérjük, például cm². ✅ Megoldás: cm²"
+    },
+     {
+      "question": "Mekkora a szögek összege egy háromszögben?",
+      "answers": {
+        "a": "90 fok",
+        "b": "180 fok",
+        "c": "360 fok"
+      },
+      "correct": "b",
+      "explanation": "A háromszög belső szögeinek összege 180 fok.  ✅ Megoldás: 180 fok"
+    },
+    {
+      "question": "Ha egy háromszög oldalai 6cm, 8cm, 10cm, akkor az átfogója...",
+      "answers": {
+        "a": "6cm",
+        "b": "8cm",
+        "c": "10cm"
+      },
+      "correct": "c",
+      "explanation": "A derékszögű háromszögben az átfogó a leghosszabb oldal, ami itt 10 cm. ✅ Megoldás: 10cm"
+    },
+    {
+      "question": "Egy háromszög alapja 10 cm, magassága 5 cm. Mekkora a területe?",
+      "answers": {
+        "a": "15 cm²",
+        "b": "25 cm²",
+        "c": "50 cm²"
+      },
+      "correct": "b",
+      "explanation": "Terület = (alap * magasság) / 2 = (10 * 5) / 2 = 25 cm². ✅ Megoldás: 25 cm²"
+    },
+    {
+      "question": "Ha egy egyenlő oldalú háromszög oldala 4 cm, akkor a kerülete...",
+      "answers": {
+        "a": "8 cm",
+        "b": "12 cm",
+        "c": "16 cm"
+      },
+      "correct": "b",
+      "explanation": "Az egyenlő oldalú háromszögnek minden oldala egyforma. Kerület = 3 * oldal = 3 * 4 = 12 cm.  ✅ Megoldás: 12 cm"
+    },
+    {
+      "question": "Melyik a helyes képlet a háromszög területének kiszámításához?",
+      "answers": {
+        "a": "T = a * m",
+        "b": "T = (a * m) / 2",
+        "c": "T = 2 * a * m"
+      },
+      "correct": "b",
+      "explanation": "A háromszög területét az alap (a) és a magasság (m) segítségével számoljuk. Terület = (alap * magasság) / 2 ✅ Megoldás: T = (a * m) / 2"
+    }
+  ]
 }

@@ -3,6 +3,237 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz szamok irasa\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz számok írása\" című tananyag.",
+  "questions": [
+    {
+      "question": "Hogyan írjuk le betűvel a 407 számot?",
+      "answers": {
+        "a": "Négyszázhetven",
+        "b": "Négyszázhét",
+        "c": "Negyvenhét"
+      },
+      "correct": "b",
+      "explanation": "A 4-es a százas helyiértéken áll, a 0 a tízesen, a 7 az egyesen. A nulla tízes helyiértéket nem ejtjük ki. Tehát a szám: négyszázhét."
+    },
+    {
+      "question": "Melyik számjegy áll az ezres helyiértéken a 12 345 számban?",
+      "answers": {
+        "a": "1",
+        "b": "2",
+        "c": "3"
+      },
+      "correct": "b",
+      "explanation": "A helyiértékeket jobbról balra olvassuk: egyes, tízes, százas, ezres, tízezres. Az ezres helyiértéken a 2-es számjegy áll."
+    },
+    {
+      "question": "Hogyan írjuk le számjegyekkel: 'ötezer-tizenkettő'?",
+      "answers": {
+        "a": "512",
+        "b": "5012",
+        "c": "5120"
+      },
+      "correct": "b",
+      "explanation": "Az ötezer (5000) és a tizenkettő (12) összege 5012. Figyelni kell a nulla százas helyiértékre."
+    },
+    {
+      "question": "Melyik a legnagyobb háromjegyű páros szám?",
+      "answers": {
+        "a": "999",
+        "b": "998",
+        "c": "990"
+      },
+      "correct": "b",
+      "explanation": "A legnagyobb háromjegyű szám a 999. Mivel ez páratlan, a nála eggyel kisebb szám, a 998 lesz a legnagyobb háromjegyű páros szám."
+    },
+    {
+      "question": "Mi a 345 szám alaki értékeinek összege?",
+      "answers": {
+        "a": "12",
+        "b": "345",
+        "c": "Nem lehet összeadni"
+      },
+      "correct": "a",
+      "explanation": "Az alaki érték magát a számjegyet jelenti, függetlenül a helyiértéktől. Az alaki értékek összege: 3 + 4 + 5 = 12."
+    },
+    {
+      "question": "Melyik a legkisebb négyjegyű páratlan szám?",
+      "answers": {
+        "a": "1000",
+        "b": "1001",
+        "c": "9999"
+      },
+      "correct": "b",
+      "explanation": "A legkisebb négyjegyű szám az 1000. Ez páros. A következő szám az 1001, ami már páratlan, tehát ez a legkisebb négyjegyű páratlan szám."
+    },
+    {
+      "question": "Hány darab százas van a 3782 számban?",
+      "answers": {
+        "a": "7",
+        "b": "37",
+        "c": "378"
+      },
+      "correct": "b",
+      "explanation": "A 3782 számot felírhatjuk úgy, mint 37 × 100 + 82. Tehát 37 darab teljes százas van benne."
+    },
+    {
+      "question": "Melyik számjegyet kell a 45_2 számban az aláhúzás helyére írni, hogy a szám páros legyen?",
+      "answers": {
+        "a": "Bármelyik számjegyet",
+        "b": "Csak páros számjegyet",
+        "c": "Csak páratlan számjegyet"
+      },
+      "correct": "a",
+      "explanation": "Egy szám párosságát vagy páratlanságát az utolsó számjegye határozza meg. Mivel az utolsó számjegy (2) páros, a szám páros lesz, függetlenül attól, hogy a tízes helyiértéken mi áll."
+    },
+    {
+      "question": "Hogyan bontható fel helyiérték szerint a 608 szám?",
+      "answers": {
+        "a": "6 + 0 + 8",
+        "b": "60 + 8",
+        "c": "6⋅100 + 0⋅10 + 8⋅1"
+      },
+      "correct": "c",
+      "explanation": "A helyiértékes bontás során minden számjegyet megszorzunk a helyiértékének megfelelő értékkel (1, 10, 100, ...), majd ezeket összeadjuk."
+    },
+    {
+      "question": "Mennyi a különbség a legnagyobb és a legkisebb háromjegyű szám között?",
+      "answers": {
+        "a": "899",
+        "b": "900",
+        "c": "898"
+      },
+      "correct": "a",
+      "explanation": "A legnagyobb háromjegyű szám a 999. A legkisebb a 100. A különbségük: 999 - 100 = 899."
+    },
+    {
+      "question": "Hány darab számjegy van a tízes számrendszerben?",
+      "answers": {
+        "a": "9",
+        "b": "10",
+        "c": "Végtelen sok"
+      },
+      "correct": "b",
+      "explanation": "A tízes (decimális) számrendszer 10 darab számjegyet használ: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Minden más számot ezek kombinációjából írunk le."
+    },
+    {
+      "question": "A 23 456 számban a 3-as számjegy valódi értéke:",
+      "answers": {
+        "a": "3",
+        "b": "3000",
+        "c": "300"
+      },
+      "correct": "c",
+      "explanation": "A valódi érték a számjegy helyiértékétől függő érték. A 3-as az százas helyiértéken áll, tehát a valódi értéke 3 × 100 = 300. ✅ Megoldás: 300."
+    },
+    {
+      "question": "Melyik számban a 8-as számjegy helyiértéke a legnagyobb?",
+      "answers": {
+        "a": "1823",
+        "b": "8123",
+        "c": "2381"
+      },
+      "correct": "b",
+      "explanation": "A helyiértékeket vizsgálva: a) százas, b) ezres, c) tízes. Az ezres a legnagyobb helyiérték a felsoroltak közül. ✅ Megoldás: Az ezres a legnagyobb helyiérték a felsoroltak közül."
+    },
+    {
+      "question": "Mi a 100-nak az 50%-a?",
+      "answers": {
+        "a": "200",
+        "b": "50",
+        "c": "0,005"
+      },
+      "correct": "b",
+      "explanation": "A 0.5-szel való szorzás ugyanaz, mint 2-vel való osztás. 100 * 0.5 = 50. ✅ Megoldás: 50"
+    },
+    {
+      "question": "Mi a 200-nak a 25%-a?",
+      "answers": {
+        "a": "50",
+        "b": "100",
+        "c": "150"
+      },
+      "correct": "b",
+      "explanation": "25% = 1/4. A szám 1/4-e 200/4=50. ✅ Megoldás: A 25%-a a 200-nak 50."
+    },
+    {
+      "question": "Melyik számra igaz, hogy minden számjegye azonos?",
+      "answers": {
+        "a": "11",
+        "b": "222",
+        "c": "Mindkettő"
+      },
+      "correct": "c",
+      "explanation": "Minden számjegye azonos. ✅ Megoldás: Mindkettő"
+    },
+    {
+      "question": "Mi a helyiérték?",
+      "answers": {
+        "a": "A szám nagysága",
+        "b": "A számjegy helye a számban",
+        "c": "A számjegyet leíró jel"
+      },
+      "correct": "b",
+      "explanation": "A számjegy helye a számban. ✅ Megoldás: A számjegy helye a számban"
+    },
+    {
+      "question": "A 345678 szám 4 helyiértéke?",
+      "answers": {
+        "a": "Tízezres",
+        "b": "Ezres",
+        "c": "Százas"
+      },
+      "correct": "b",
+      "explanation": "A helyiértékeket jobbról balra olvassuk: egyesek, tízesek, százasok, ezresek, tízezresek, százzezresek. Tehát az ezres a helyiérték.  ✅ Megoldás: Ezres"
+    },
+    {
+      "question": "Hogyan írjuk a 345 számot helyiértékek szerint?",
+      "answers": {
+        "a": "3+4+5",
+        "b": "3*100+4*10+5*1",
+        "c": "300+40+5"
+      },
+      "correct": "c",
+      "explanation": "A helyiértékes bontás: a 3*100+4*10+5*1. ✅ Megoldás: 300+40+5"
+    },
+    {
+      "question": "Ha egy szám a tízes helyiértékre kerekítve 200, mi lehetett az eredeti szám?",
+      "answers": {
+        "a": "195",
+        "b": "205",
+        "c": "200"
+      },
+      "correct": "a",
+      "explanation": "Ha a 200-ra kerekített szám 195 és 204 között van. ✅ Megoldás: 195"
+    },
+    {
+      "question": "Ha egy szám 23456, a 4-es helyiértéke:",
+      "answers": {
+        "a": "százas",
+        "b": "tízezres",
+        "c": "ezres"
+      },
+      "correct": "c",
+      "explanation": "Az ezres a helyiérték. ✅ Megoldás: Ezres"
+    },
+    {
+      "question": "Mi a 100-as számlap helyiértékes alakja?",
+      "answers": {
+        "a": "1*100+0*10+0*1",
+        "b": "1*10+0*1",
+        "c": "1*1000"
+      },
+      "correct": "a",
+      "explanation": "A 100=1*100+0*10+0*1. ✅ Megoldás: 1*100+0*10+0*1"
+    },
+     {
+      "question": "Melyik a nagyság szerint a 10234, 1234, 11234, 999, 11234, 10001 számok sorrendje?",
+      "answers": {
+        "a": "999, 1234, 10234, 11234, 10001, 11234",
+        "b": "999, 1234, 10001, 10234, 11234, 11234",
+        "c": "999, 10001, 10234, 11234, 11234, 1234"
+      },
+      "correct": "b",
+      "explanation": "1. Legkisebb a 999. 2. Utána a 1234. 3. Utána 10001. 4. Utána 10234. 5. Többi is 11234 ✅ Megoldás: 999, 1234, 10001, 10234, 11234, 11234"
+    }
+  ]
 }

@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_tool",
   "description": "Ez a(z) \"Kviz optikai eszkozok\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik a legfontosabb optikai eszköz?",
+      "answers": {
+        "a": "A szem.",
+        "b": "A mikroszkóp.",
+        "c": "A távcső."
+      },
+      "correct": "a",
+      "explanation": "A szemünk a legfontosabb optikai eszköz, amivel a világot látjuk. ✅ Megoldás: A szem."
+    },
+    {
+      "question": "Milyen részei vannak a szemnek?",
+      "answers": {
+        "a": "Csak a szivárványhártya.",
+        "b": "Szivárványhártya, szemlencse, retin",
+        "c": "Csak a pupilla."
+      },
+      "correct": "b",
+      "explanation": "A szem legfontosabb részei a szivárványhártya, a szemlencse és a retina.  ✅ Megoldás: Szivárványhártya, szemlencse, retin."
+    },
+    {
+      "question": "Mi a szerepe a szemlencsének?",
+      "answers": {
+        "a": "A fényt a retinára fókuszálja.",
+        "b": "Védi a szemet.",
+        "c": "Színezi a képet."
+      },
+      "correct": "a",
+      "explanation": "A szemlencse a fényt a retinára fókuszálja. ✅ Megoldás: A fényt a retinára fókuszálja."
+    },
+    {
+      "question": "Hol található a retina?",
+      "answers": {
+        "a": "A szemlencse előtt.",
+        "b": "A szem hátuljában.",
+        "c": "A szivárványhártyán."
+      },
+      "correct": "b",
+      "explanation": "A retina a szemgolyó hátuljában található, és itt alakul ki a kép. ✅ Megoldás: A szem hátuljában."
+    },
+    {
+      "question": "Miért látunk?",
+      "answers": {
+        "a": "Mert a szemünk a fényt elnyeli.",
+        "b": "Mert a szemünk a fényt visszaveri.",
+        "c": "Mert a szemünk érzékeli a fényt, és jeleket küld az agynak."
+      },
+      "correct": "c",
+      "explanation": "A szemünk érzékeli a fényt, és a látóidegen keresztül jeleket küld az agynak, ami alapján látjuk a világot. ✅ Megoldás: Mert a szemünk érzékeli a fényt, és jeleket küld az agynak."
+    },
+    {
+      "question": "Mi a nagyító (lupa)?",
+      "answers": {
+        "a": "Egy homorú tükör.",
+        "b": "Egy nagyító lencse.",
+        "c": "Egy gyűjtőlencse, ami felnagyítja a képet."
+      },
+      "correct": "c",
+      "explanation": "A nagyító egy gyűjtőlencse, ami a tárgyakról nagyobbított képet ad. ✅ Megoldás: Egy gyűjtőlencse, ami felnagyítja a képet."
+    },
+    {
+      "question": "Mi a távcső?",
+      "answers": {
+        "a": "Egy olyan eszköz, amivel a nagyon távoli dolgokat látjuk.",
+        "b": "A gyűjtőlencse.",
+        "c": "Egy tükör."
+      },
+      "correct": "a",
+      "explanation": "A távcső egy olyan optikai eszköz, amivel a távoli objektumok láthatók. ✅ Megoldás: Egy olyan eszköz, amivel a nagyon távoli dolgokat látjuk."
+    },
+    {
+      "question": "Milyen lencsét tartalmaz a szemüveg rövidlátás esetén?",
+      "answers": {
+        "a": "Domború lencsét (gyűjtőlencse).",
+        "b": "Homorú lencsét (szórólencse).",
+        "c": "Sík lencsét."
+      },
+      "correct": "b",
+      "explanation": "A rövidlátó szem a fénysugarakat a retina előtt fókuszálja. A szórólencse (homorú lencse) kissé széttartóbbá teszi a sugarakat, így a szemlencse már a megfelelő helyre, a retinára tudja fókuszálni a képet.  ✅ Megoldás: Homorú lencsét (szórólencse)."
+    },
+    {
+      "question": "Milyen lencsét tartalmaz a szemüveg távollátás esetén?",
+      "answers": {
+        "a": "Szórólencsét",
+        "b": "Gyűjtőlencsét.",
+        "c": "Sík lencsét."
+      },
+      "correct": "b",
+      "explanation": "A távollátó szem a fénysugarakat a retina mögé fókuszálja. A gyűjtőlencse (domború) segít a fénysugarakat előbb összegyűjteni, így a kép élesen a retinára kerül.  ✅ Megoldás: Gyűjtőlencsét."
+    },
+    {
+      "question": "Melyik eszköz használ tükröt a képalkotáshoz?",
+      "answers": {
+        "a": "A nagyító.",
+        "b": "A mikroszkóp.",
+        "c": "A távcső (reflektor)."
+      },
+      "correct": "c",
+      "explanation": "A tükrös csillagászati távcső (reflektor) egy nagyméretű homorú tükörrel gyűjti össze a csillagok halvány fényét a fókuszpontjába. ✅ Megoldás: A távcső (reflektor)."
+    },
+    {
+      "question": "Melyik eszköz a képalkotásnál használja a fénytörést?",
+      "answers": {
+        "a": "Tükör.",
+        "b": "Lencse.",
+        "c": "Prizma."
+      },
+      "correct": "b",
+      "explanation": "A lencsék a fénytörés jelenségét használják a képalkotáshoz. ✅ Megoldás: Lencse."
+    },
+    {
+      "question": "Miért használják a mikroszkópot?",
+      "answers": {
+        "a": "A távoli dolgok megfigyelésére.",
+        "b": "A kis méretű dolgok nagyítására.",
+        "c": "A fény színekre bontására."
+      },
+      "correct": "b",
+      "explanation": "A mikroszkópot a kis méretű dolgok nagyítására használjuk. ✅ Megoldás: A kis méretű dolgok nagyítására."
+    },
+    {
+      "question": "A kamera lencséje milyen képet alkot?",
+      "answers": {
+        "a": "Valódi, fordított.",
+        "b": "Látszólagos, egyenes.",
+        "c": "Valódi, egyenes."
+      },
+      "correct": "a",
+      "explanation": "A kamera lencséje a tárgyakról valódi, fordított képet alkot. A kép a fényérzékeny érzékelőre vetül. ✅ Megoldás: Valódi, fordított."
+    },
+    {
+      "question": "Melyik eszköz használja a fénytörést és a tükröződést is?",
+      "answers": {
+        "a": "A szem.",
+        "b": "A teleszkóp.",
+        "c": "A kamera."
+      },
+      "correct": "a",
+      "explanation": "A szemlencse a fényt töri, a szivárványhártya és a belső réteg a fényt visszaveri. ✅ Megoldás: A szem."
+    },
+    {
+      "question": "Mit csinál a szem szivárványhártyája?",
+      "answers": {
+        "a": "A fényt a retinára fókuszálja.",
+        "b": "Szabályozza a pupilla méretét, így a bejutó fény mennyiségét.",
+        "c": "Védi a szemet."
+      },
+      "correct": "b",
+      "explanation": "A szivárványhártya szabályozza a pupilla méretét, így a bejutó fény mennyiségét. ✅ Megoldás: Szabályozza a pupilla méretét, így a bejutó fény mennyiségét."
+    },
+    {
+      "question": "Melyik a szem fényérzékelő része?",
+      "answers": {
+        "a": "A szivárványhártya",
+        "b": "A pupilla",
+        "c": "A retina"
+      },
+      "correct": "c",
+      "explanation": "A retina a szem hátsó részében található, és itt találhatók a fényérzékelő sejtek, amelyek a képet érzékelik. ✅ Megoldás: A retina."
+    },
+    {
+      "question": "Melyik tartja a szemet a helyén?",
+      "answers": {
+        "a": "A szemhéj",
+        "b": "A szivárványhártya",
+        "c": "A szemizmok"
+      },
+      "correct": "c",
+      "explanation": "A szemizmok mozgatják a szemet, és tartják a helyén. ✅ Megoldás: A szemizmok"
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A lencsék a fényt törik.",
+        "b": "A tükrök a fényt visszaverik.",
+        "c": "A szem nem lát, ha nem jön fény."
+      },
+      "correct": "c",
+      "explanation": "A szem működéséhez, a látáshoz fényre van szükség. Ha nincs fény, akkor nincs képalkotás a retinán, és így nem látunk. ✅ Megoldás: A szem nem lát, ha nem jön fény."
+    },
+    {
+      "question": "Mi a szemlencse feladata?",
+      "answers": {
+        "a": "Védi a szemet.",
+        "b": "Összegyűjti a fényt.",
+        "c": "A fényt a retinára fókuszálja."
+      },
+      "correct": "c",
+      "explanation": "A szemlencse a fényt a retinára fókuszálja. ✅ Megoldás: A fényt a retinára fókuszálja."
+    },
+    {
+      "question": "Melyik a fókuszpont a lencsénél (ismétlés)?",
+      "answers": {
+        "a": "A lencse középpontja.",
+        "b": "Az a pont, ahol a lencsén áthaladó fénysugarak találkoznak.",
+        "c": "Ahol a lencse nem töri meg a fényt."
+      },
+      "correct": "b",
+      "explanation": "A gyűjtőlencse a fókuszpontjában gyűjti össze a fénysugarakat. ✅ Megoldás: Az a pont, ahol a lencsén áthaladó fénysugarak találkoznak."
+    },
+    {
+      "question": "Mi a lencse és a tükör közös tulajdonsága?",
+      "answers": {
+        "a": "Mindkettő a fényt töri.",
+        "b": "Mindkettő a fényt visszaveri.",
+        "c": "Mindkettővel képet alkothatunk."
+      },
+      "correct": "c",
+      "explanation": "Mind a lencsével, mind a tükörrel képet lehet alkotni. A lencse fénytöréssel, a tükör visszaverődéssel működik. ✅ Megoldás: Mindkettővel képet alkothatunk."
+    },
+    {
+      "question": "Ha egy távcső objektív lencséje nagyobb, mint a szemlencséje, mi történik?",
+      "answers": {
+        "a": "A kép homályos lesz.",
+        "b": "Több fényt gyűjt össze, így halványabb objektumokat is láthatunk.",
+        "c": "A kép kisebb lesz."
+      },
+      "correct": "b",
+      "explanation": "A nagyobb objektív több fényt gyűjt össze, így halványabb objektumokat is láthatunk. ✅ Megoldás: Több fényt gyűjt össze, így halványabb objektumokat is láthatunk."
+    },
+    {
+      "question": "Melyik NEM optikai eszköz?",
+      "answers": {
+        "a": "A távcső.",
+        "b": "A villanykörte.",
+        "c": "A mikroszkóp."
+      },
+      "correct": "b",
+      "explanation": "A villanykörte nem optikai eszköz, hanem fényforrás. A távcső és a mikroszkóp az optikai eszközök kategóriájába tartoznak. ✅ Megoldás: A villanykörte."
+    },
+    {
+      "question": "Melyik a legjobb szemüveg a rövidlátás korrigálására? (ismétlés)",
+      "answers": {
+        "a": "Szórólencse.",
+        "b": "Gyűjtőlencse.",
+        "c": "Sík lencse."
+      },
+      "correct": "a",
+      "explanation": "A rövidlátó szem a fénysugarakat a retina előtt fókuszálja. A szórólencse (homorú lencse) kissé széttartóbbá teszi a sugarakat, így a szemlencse már a megfelelő helyre, a retinára tudja fókuszálni a képet. ✅ Megoldás: Szórólencse."
+    }
+  ]
 }

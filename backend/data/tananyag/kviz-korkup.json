@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz korkup\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Hogyan jön létre az egyenes körkúp?",
+      "answers": {
+        "a": "Egy derékszögű háromszög befogója körüli forgatásával.",
+        "b": "Egy kör átmérő körüli forgatásával.",
+        "c": "Egy téglalap oldala körüli forgatásával."
+      },
+      "correct": "a",
+      "explanation": "Egy derékszögű háromszöget az egyik befogója (ami a tengely lesz) körül megforgatva, a másik befogója az alapkör sugarát, az átfogója pedig a kúp alkotóját 'söpri' végig. ✅ Megoldás: Egy derékszögű háromszög befogója körüli forgatásával."
+    },
+    {
+      "question": "Milyen síkidomokból áll a kúp testhálója?",
+      "answers": {
+        "a": "Egy körből és egy háromszögből",
+        "b": "Egy körből és egy körcikkből",
+        "c": "Két körből és egy téglalapból"
+      },
+      "correct": "b",
+      "explanation": "A kúpnak van egy kör alakú alaplapja. A görbe palástját kiterítve egy körcikket kapunk, nem pedig egy háromszöget. ✅ Megoldás: Egy körből és egy körcikkből áll."
+    },
+    {
+      "question": "Mi a neve a kúp csúcsát az alapkör egy pontjával összekötő szakasznak a paláston?",
+      "answers": {
+        "a": "testmagasság",
+        "b": "sugár",
+        "c": "alkotó"
+      },
+      "correct": "c",
+      "explanation": "Azt a szakaszt, ami a kúp oldalán fut le a csúcstól az alapkörig, alkotónak nevezzük. ✅ Megoldás: Alkotó (vagy apotéma)."
+    },
+    {
+      "question": "Milyen összefüggés van a kúp sugara (r), magassága (m) és alkotója (a) között?",
+      "answers": {
+        "a": "r² + m² = a² (Pitagorasz-tétel)",
+        "b": "r + m = a",
+        "c": "a² + r² = m²"
+      },
+      "correct": "a",
+      "explanation": "Egy egyenes körkúpban a sugár, a testmagasság és az alkotó egy derékszögű háromszöget alkotnak. A  Pitagorasz-tétel: r² + m² = a². ✅ Megoldás: r² + m² = a² (Pitagorasz-tétel)."
+    },
+    {
+      "question": "Melyik hétköznapi tárgy egy kúp modellje?",
+      "answers": {
+        "a": "egy fagylalttölcsér",
+        "b": "egy pénzérme",
+        "c": "egy dobókocka"
+      },
+      "correct": "a",
+      "explanation": "A fagylalttölcsérnek kör alakú az 'teteje' (alapja) és egy csúcsban végződik, ami pontosan a kúp formája. ✅ Megoldás: Egy fagylalttölcsér."
+    },
+    {
+      "question": "Melyik testre hasonlít legjobban a kúp?",
+      "answers": {
+        "a": "henger",
+        "b": "gúla",
+        "c": "gömb"
+      },
+      "correct": "b",
+      "explanation": "A kúp és a gúla is egy alaplapból és egy csúcsból áll. A kúp felfogható egy olyan gúlaként, aminek az alaplapja egy végtelen sok oldalú szabályos sokszög (azaz egy kör). ✅ Megoldás: A gúlára."
+    },
+    {
+      "question": "Milyen síkidomot kapunk, ha egy kúpot a tengelyén keresztül elvágunk?",
+      "answers": {
+        "a": "parabola",
+        "b": "egyenlő szárú háromszöget",
+        "c": "kört"
+      },
+      "correct": "b",
+      "explanation": "A tengelyes metszet áthalad a kúp csúcsán és az alaplap átmérőjén. A metszet síkidom oldalai az alaplap átmérője és a két szemközti alkotó. Ez egy egyenlő szárú háromszöget ad. ✅ Megoldás: Egyenlő szárú háromszöget."
+    },
+    {
+      "question": "Milyen síkidomot kapunk, ha egy kúpot az alaplapjával párhuzamosan elvágunk?",
+      "answers": {
+        "a": "háromszöget",
+        "b": "kört",
+        "c": "téglalapot"
+      },
+      "correct": "b",
+      "explanation": "A vágási felület mindig egy, az alaplappal hasonló, kisebb kör lesz. ✅ Megoldás: Kört kapunk."
+    },
+    {
+      "question": "Hány csúcsa van egy kúpnak?",
+      "answers": {
+        "a": "végtelen sok",
+        "b": "kettő",
+        "c": "egy"
+      },
+      "correct": "c",
+      "explanation": "A kúpnak van egy alaplapja, ami egy kör. A körvonal pontjait a palást egyetlen közös pontba, a kúp csúcsába köti össze. ✅ Megoldás: Egy csúcsa van."
+    },
+    {
+      "question": "Hány éle van egy kúpnak?",
+      "answers": {
+        "a": "egy",
+        "b": "kettő",
+        "c": "nincs neki"
+      },
+      "correct": "a",
+      "explanation": "A kúpnak van egy alaplapja és egy palástja. Ahol ezek találkoznak, az egy kör alakú vonal. Ezt nevezzük a kúp élének. ✅ Megoldás: Egy (kör alakú) éle van."
+    },
+    {
+      "question": "Egy derékszögű háromszög átfogója lesz a forgatás után a kúp...",
+      "answers": {
+        "a": "alkotója.",
+        "b": "magassága.",
+        "c": "sugara."
+      },
+      "correct": "a",
+      "explanation": "A forgatásnál a tengely a magasság, a tengelyre merőleges befogó a sugár. A háromszög leghosszabb oldala, az átfogó, 'rajzolja' ki a kúp palástját. Ez az alkotó. ✅ Megoldás: Alkotója."
+    },
+    {
+      "question": "Mi a neve a kúp görbe oldalfelületének?",
+      "answers": {
+        "a": "oldallap",
+        "b": "palást",
+        "c": "fedőlap"
+      },
+      "correct": "b",
+      "explanation": "A hengerhez hasonlóan a kúp görbe oldalfelületét is palástnak nevezzük. ✅ Megoldás: Palást."
+    },
+    {
+      "question": "Mit jelent az, hogy egy körkúp 'egyenes'?",
+      "answers": {
+        "a": "A palástja kiterítve egyenes.",
+        "b": "A tengelye merőleges az alaplapra.",
+        "c": "Nem lehet felborítani."
+      },
+      "correct": "b",
+      "explanation": "Azt jelenti, hogy a kúp nem 'ferde'. Ez geometriailag azt fejezi ki, hogy a csúcsot az alapkör középpontjával összekötő magasságvonal merőleges az alaplap síkjára.  ✅ Megoldás: A tengelye merőleges az alaplapokra."
+    },
+    {
+      "question": "A kúp testhálójában a körcikk ívhossza mivel egyenlő?",
+      "answers": {
+        "a": "a kúp magasságával",
+        "b": "a kúp alapkörének kerületével",
+        "c": "a kúp alkotójának hosszával"
+      },
+      "correct": "b",
+      "explanation": "A körcikk íves szélének pontosan rá kell illeszkednie az alapkör vonalára. Ezért a hosszuknak meg kell egyeznie. ✅ Megoldás: A kúp alapkörének kerületével."
+    },
+    {
+      "question": "A kúp testhálójában a körcikk sugara mivel egyenlő?",
+      "answers": {
+        "a": "a kúp magasságával",
+        "b": "a kúp alkotójával",
+        "c": "a kúp alapkörének sugarával"
+      },
+      "correct": "b",
+      "explanation": "Amikor a körcikket felcsavarjuk, a sugara lesz a kúp ferde oldala. A kúp ferde oldalát alkotónak nevezzük. ✅ Megoldás: A kúp alkotójával."
+    },
+    {
+      "question": "Melyik test NEM forgástest?",
+      "answers": {
+        "a": "gömb",
+        "b": "kúp",
+        "c": "gúla"
+      },
+      "correct": "c",
+      "explanation": "A forgástestek egy síkidom tengely körüli forgatásával jönnek létre. A gúla sokszöglapokból áll, nem forgatással jön létre. ✅ Megoldás: A gúla."
+    },
+    {
+      "question": "Egy kúp alapkörének sugara 3 cm, magassága 4 cm. Milyen hosszú az alkotója?",
+      "answers": {
+        "a": "5 cm",
+        "b": "7 cm",
+        "c": "12 cm"
+      },
+      "correct": "a",
+      "explanation": "A sugár, magasság és alkotó derékszögű háromszöget alkotnak, az alkotó az átfogó. Pitagorasz-tétel: 3² + 4² = a². 9 + 16 = 25. Tehát a² = 25, amiből a = 5 cm.  ✅ Megoldás: Az alkotó 5 cm."
+    },
+    {
+      "question": "Mi a kúp tengelye?",
+      "answers": {
+        "a": "az alkotója",
+        "b": "az alaplap átmérője",
+        "c": "a csúcsot az alaplap középpontjával összekötő szakasz"
+      },
+      "correct": "c",
+      "explanation": "Az egyenes körkúp szimmetriatengelye a forgástengelye. Ez a test belsejében a csúcsot és az alapkör középpontját összekötő szakasz, ami egyben a testmagasság is. ✅ Megoldás: A csúcsot az alaplap középpontjával összekötő szakasz."
+    },
+    {
+      "question": "Melyik testnek van egy csúcsa, egy éle és két lapja?",
+      "answers": {
+        "a": "gúla",
+        "b": "hasáb",
+        "c": "kúp"
+      },
+      "correct": "c",
+      "explanation": "A kúpnak van egy csúcsa. Van egy kör alakú éle (ahol a palást és az alaplap találkozik). Van egy síklapja (az alaplap) és egy görbe lapja (a palást), ami összesen két lap. ✅ Megoldás: A kúp."
+    },
+    {
+      "question": "Hány síklapja (teljesen lapos felülete) van egy kúpnak?",
+      "answers": {
+        "a": "0",
+        "b": "1",
+        "c": "2"
+      },
+      "correct": "b",
+      "explanation": "A kúpnak két felülete van: a palást és az alaplap. A palást görbe felület. Az alaplap egy körlap, ami sík. ✅ Megoldás: Pontosan 1 síklapja van."
+    },
+    {
+      "question": "Milyen testet kapunk, ha egy gúlának végtelen sok oldala lenne?",
+      "answers": {
+        "a": "hengert",
+        "b": "gömböt",
+        "c": "kúpot"
+      },
+      "correct": "c",
+      "explanation": "Ha egy gúla alaplapja egy szabályos sokszög, és az oldalak számát növeljük, az alaplap egyre jobban hasonlít egy körre. A határesetben, amikor az oldalak száma végtelen, a sokszögből kör lesz, a gúlából pedig kúp.  ✅ Megoldás: Kúpot kapunk."
+    },
+    {
+      "question": "Egy parti süveg milyen mértani test?",
+      "answers": {
+        "a": "gúla",
+        "b": "henger",
+        "c": "kúp"
+      },
+      "correct": "c",
+      "explanation": "A parti süvegnek kör alakú az alapja és egy csúcsban végződik. Ez a forma a kúpé. ✅ Megoldás: Kúp."
+    },
+    {
+      "question": "Melyik állítás igaz az egyenes körkútra?",
+      "answers": {
+        "a": "Minden alkotója egyenlő hosszú.",
+        "b": "Minden alkotója különböző hosszú.",
+        "c": "Nincs alkotója."
+      },
+      "correct": "a",
+      "explanation": "Az egyenes körkúp csúcsa az alapkör középpontja felett van. Emiatt a csúcs az alapkörvonal minden pontjától egyenlő távolságra van. Ez a távolság az alkotó hossza. ✅ Megoldás: Minden alkotója egyenlő hosszú."
+    },
+    {
+      "question": "Mi a kúp térfogatának képlete?",
+      "answers": {
+        "a": "T = (alap * magasság) / 3.",
+        "b": "T = alap * magasság",
+        "c": "T = (alap * magasság) / 2"
+      },
+      "correct": "a",
+      "explanation": "A kúp térfogatát a  T = (alap * magasság) / 3  képlettel számoljuk ki. ✅ Megoldás: T = (alap * magasság) / 3"
+    },
+     {
+      "question": "Egy kúp magassága 4 cm, alapjának sugara 3 cm. Mekkora a térfogata?",
+      "answers": {
+        "a": "12π cm³",
+        "b": "36π cm³",
+        "c": "4π cm³"
+      },
+      "correct": "a",
+      "explanation": "A kúp térfogata = (alapterület * magasság) / 3. Alapterület = π * r² = π * 3² = 9π. Térfogat = (9π * 4) / 3 = 12π cm³. ✅ Megoldás: 12π cm³"
+    }
+  ]
 }

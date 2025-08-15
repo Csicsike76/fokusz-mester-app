@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz hasonlosag\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mit jelent a hasonlóság?",
+      "answers": {
+        "a": "Ugyanolyan alak, de más méret.",
+        "b": "Különböző alak, de azonos méret.",
+        "c": "A méret és az alak is változhat."
+      },
+      "correct": "a",
+      "explanation": "A hasonlóság azt jelenti, hogy a formák megegyeznek, de a méretük eltérő lehet, például egy fénykép kicsinyítése vagy nagyítása. ✅ Megoldás: Ugyanolyan alak, de más méret."
+    },
+    {
+      "question": "Melyik jelöli a hasonlóságot?",
+      "answers": {
+        "a": "=",
+        "b": "∽",
+        "c": "≈"
+      },
+      "correct": "b",
+      "explanation": "A hasonlóság jele: ∽. ✅ Megoldás: ∽"
+    },
+    {
+      "question": "Mikor hasonló két alakzat?",
+      "answers": {
+        "a": "Ha azonos nagyságúak.",
+        "b": "Ha azonos az alakjuk, de különböző a méretük.",
+        "c": "Ha eltérő az alakjuk és a méretük."
+      },
+      "correct": "b",
+      "explanation": "A hasonlósághoz azonos alak szükséges, de a méret változhat.  ✅ Megoldás: Ha azonos az alakjuk, de különböző a méretük."
+    },
+    {
+      "question": "Mi a hasonlóság lényege?",
+      "answers": {
+        "a": "A méret megtartása, de a forma változhat.",
+        "b": "A forma megtartása, de a méret változhat.",
+        "c": "A forma és a méret is megváltozik."
+      },
+      "correct": "b",
+      "explanation": "A hasonlóság azt jelenti, hogy a formák azonosak maradnak, csak a méretük változhat.  ✅ Megoldás: A forma megtartása, de a méret változhat."
+    },
+    {
+      "question": "Melyik NEM hasonlóság?",
+      "answers": {
+        "a": "Egy fénykép nagyítása.",
+        "b": "Egy kör átrajzolása.",
+        "c": "Egy téglalap átrajzolása egy négyzetbe."
+      },
+      "correct": "c",
+      "explanation": "A téglalapból négyzetet csinálni nem hasonlóság, mert a formák nem egyeznek meg. ✅ Megoldás: Egy téglalap átrajzolása egy négyzetbe."
+    },
+    {
+      "question": "Ha egy térképen 1 cm a valóságban 10 m-t jelent, mi az arány?",
+      "answers": {
+        "a": "1:10",
+        "b": "1:100",
+        "c": "1:1000"
+      },
+      "correct": "c",
+      "explanation": "A 10 méter az 1000 centiméter. Az arány tehát 1:1000. ✅ Megoldás: 1:1000"
+    },
+    {
+      "question": "Ha egy kép 2-szer nagyobb, mint az eredeti, mi a méretarány?",
+      "answers": {
+        "a": "1:2",
+        "b": "2:1",
+        "c": "1:1"
+      },
+      "correct": "b",
+      "explanation": "Ha a kép 2-szer nagyobb, mint az eredeti, akkor a méretarány 2:1. ✅ Megoldás: 2:1"
+    },
+    {
+      "question": "Melyik a megfelelő jelölése két hasonló háromszögnek?",
+      "answers": {
+        "a": "A = B",
+        "b": "A ∽ B",
+        "c": "A ≠ B"
+      },
+      "correct": "b",
+      "explanation": "A hasonlóságot a ∽ jellel jelöljük.  ✅ Megoldás: A ∽ B"
+    },
+    {
+      "question": "Ha egy háromszög oldalai 3, 4, 5 cm, a hozzá hasonlóé 6, 8, X cm. Mennyi X?",
+      "answers": {
+        "a": "5 cm",
+        "b": "10 cm",
+        "c": "15 cm"
+      },
+      "correct": "b",
+      "explanation": "Az oldalak kétszeresére nőttek, ezért az X = 5 * 2 = 10 cm. ✅ Megoldás: 10 cm"
+    },
+    {
+      "question": "Melyik az SSS-hasonlósági tétel?",
+      "answers": {
+        "a": "Ha két háromszög két szöge egyenlő.",
+        "b": "Ha két háromszög minden oldala arányos.",
+        "c": "Ha két háromszög két oldala arányos és a közbezárt szög egyenlő."
+      },
+      "correct": "b",
+      "explanation": "Az SSS (oldal-oldal-oldal) tétel azt mondja ki, hogy ha a két háromszög minden oldala arányos, akkor a két háromszög hasonló. ✅ Megoldás: Ha két háromszög minden oldala arányos."
+    },
+    {
+      "question": "Melyik az SSZ-hasonlósági tétel?",
+      "answers": {
+        "a": "Ha a két háromszög minden oldala arányos.",
+        "b": "Ha két háromszög két szöge egyenlő.",
+        "c": "Ha két háromszög két oldala arányos és a közbezárt szög egyenlő."
+      },
+      "correct": "c",
+      "explanation": "Az SSZ (oldal-szög-oldal) tétel szerint, ha két háromszög két oldala arányos, és az általuk közbezárt szög egyenlő, akkor a két háromszög hasonló. ✅ Megoldás: Ha két háromszög két oldala arányos és a közbezárt szög egyenlő."
+    },
+    {
+      "question": "Melyik az SZSZ-hasonlósági tétel?",
+      "answers": {
+        "a": "Ha két háromszög két szöge egyenlő.",
+        "b": "Ha két háromszög minden szöge egyenlő.",
+        "c": "Ha a két háromszög két oldala arányos, és a közbezárt szög egyenlő."
+      },
+      "correct": "a",
+      "explanation": "Az SZSZ (szög-szög-szög) tétel szerint, ha két háromszög két szöge egyenlő, akkor a két háromszög hasonló.  ✅ Megoldás: Ha két háromszög két szöge egyenlő."
+    },
+    {
+      "question": "Ha a fény egy fát árnyékot vet, akkor a fa és az árnyék...",
+      "answers": {
+        "a": "Egybevágóak.",
+        "b": "Hasonlóak.",
+        "c": "Semmi közük egymáshoz."
+      },
+      "correct": "b",
+      "explanation": "A fa és az árnyéka hasonlóak, mert a nap sugaraival arányosak. ✅ Megoldás: Hasonlóak."
+    },
+    {
+      "question": "Melyik igaz? Ha két háromszög hasonló, akkor a szögeik...",
+      "answers": {
+        "a": "Ugyanakkorák.",
+        "b": "Különbözőek.",
+        "c": "A területekkel egyeznek meg."
+      },
+      "correct": "a",
+      "explanation": "A hasonló háromszögek szögei megegyeznek. ✅ Megoldás: Ugyanakkorák."
+    },
+    {
+      "question": "Ha egy térképen 1:1000 a méretarány, mit jelent ez?",
+      "answers": {
+        "a": "A valóság 1000-szer kisebb a térképnél.",
+        "b": "A térkép 1000-szer kisebb a valóságnál.",
+        "c": "A valóság 1000-szer nagyobb a térképnél."
+      },
+      "correct": "c",
+      "explanation": "Az 1:1000 azt jelenti, hogy a valóság 1000-szer nagyobb a térképen ábrázoltnál. ✅ Megoldás: A valóság 1000-szer nagyobb a térképnél."
+    },
+    {
+      "question": "Egy fénykép 10 cm magas, egy kicsinyített másolata 5 cm. Mi a méretarány?",
+      "answers": {
+        "a": "1:2",
+        "b": "2:1",
+        "c": "1:5"
+      },
+      "correct": "a",
+      "explanation": "A méret feleződött, tehát az arány 1:2. ✅ Megoldás: 1:2"
+    },
+    {
+      "question": "Ha egy rajz méretaránya 1:5, akkor a valóságban egy 10 cm-es szakasz a rajzon hány cm?",
+      "answers": {
+        "a": "2 cm",
+        "b": "50 cm",
+        "c": "10 cm"
+      },
+      "correct": "a",
+      "explanation": "Az 1:5 azt jelenti, hogy a rajz mérete a valóság ötödrésze. 10 / 5 = 2 cm. ✅ Megoldás: 2 cm"
+    },
+    {
+      "question": "Mi történik a területtel a hasonló alakzatoknál?",
+      "answers": {
+        "a": "A területek megegyeznek.",
+        "b": "A területek az oldalak arányával egyeznek meg.",
+        "c": "A területek az oldalak négyzetével arányosak."
+      },
+      "correct": "c",
+      "explanation": "A területek a megfelelő oldalak négyzetével arányosak.  ✅ Megoldás: A területek az oldalak négyzetével arányosak."
+    },
+    {
+      "question": "Ha egy háromszög oldalai 3 cm, 4 cm, 5 cm, és a hozzá hasonló háromszög oldala 9 cm, mekkora a többi oldala?",
+      "answers": {
+        "a": "12 cm és 15 cm",
+        "b": "6 cm és 7 cm",
+        "c": "6 cm és 9 cm"
+      },
+      "correct": "a",
+      "explanation": "Az oldalak 3-szorosára nőttek (3 * 3 = 9), ezért a többi oldal is 3-szorosára nő.  4 * 3 = 12 cm, 5 * 3 = 15 cm. ✅ Megoldás: 12 cm és 15 cm"
+    },
+    {
+      "question": "Melyik egyenesek alkotnak hasonlóságot a napfény és az árnyékok esetén?",
+      "answers": {
+        "a": "A fa és az árnyékos része.",
+        "b": "A nap sugara és a talaj.",
+        "c": "A nap sugara és a fa."
+      },
+      "correct": "c",
+      "explanation": "A fa, az árnyék és a nap sugarai adnak hasonlóságot. ✅ Megoldás: A nap sugara és a fa."
+    },
+    {
+      "question": "Ha egy 4 cm-es oldalhosszú négyzet 1:2 arányban van kicsinyítve, mekkora lesz az oldala?",
+      "answers": {
+        "a": "1 cm",
+        "b": "2 cm",
+        "c": "8 cm"
+      },
+      "correct": "b",
+      "explanation": "Az 1:2 arány azt jelenti, hogy a méretek a felére csökkennek. 4 / 2 = 2 cm.  ✅ Megoldás: 2 cm"
+    },
+    {
+      "question": "Ha a kicsinyített kép területe 4 cm², mennyi az eredeti kép területe, ha a méretarány 1:3?",
+      "answers": {
+        "a": "12 cm²",
+        "b": "36 cm²",
+        "c": "9 cm²"
+      },
+      "correct": "b",
+      "explanation": "A terület a méretek négyzetével arányos, így a terület aránya 1:9. Ha a kicsinyített kép területe 4 cm², akkor az eredeti kép területe 4 * 9 = 36 cm².  ✅ Megoldás: 36 cm²"
+    },
+    {
+      "question": "Ha két hasonló háromszög területeinek aránya 1:4, akkor az oldalak aránya...",
+      "answers": {
+        "a": "1:4",
+        "b": "1:2",
+        "c": "4:1"
+      },
+      "correct": "b",
+      "explanation": "A területek az oldalak négyzetével arányosak. A 4 négyzetgyöke 2. Ezért az oldalak aránya 1:2.  ✅ Megoldás: 1:2"
+    },
+    {
+      "question": "Mi a méretarány a modellek esetén?",
+      "answers": {
+        "a": "A modell és a valóság méreteinek aránya.",
+        "b": "A modell magassága.",
+        "c": "A valóság magassága."
+      },
+      "correct": "a",
+      "explanation": "A méretarány a modell méretei és a valóság méretei közötti arány. ✅ Megoldás: A modell és a valóság méreteinek aránya."
+    }
+  ]
 }

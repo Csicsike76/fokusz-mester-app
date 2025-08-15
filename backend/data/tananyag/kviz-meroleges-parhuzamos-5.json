@@ -3,6 +3,267 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz meroleges parhuzamos 5\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz merőleges parhuzamos 5\" című tananyag.",
+  "questions": [
+    {
+      "question": "Hogyan nevezzük azokat az egyeneseket, amelyek soha nem metszik egymást?",
+      "answers": {
+        "a": "merőlegesek",
+        "b": "metszők",
+        "c": "párhuzamosak"
+      },
+      "correct": "c",
+      "explanation": "A definíció szerint a párhuzamos egyenesek azok, amik egy síkban vannak, de nincs közös pontjuk. ✅ Megoldás: Párhuzamosaknak nevezzük őket."
+    },
+    {
+      "question": "Mekkora szöget zárnak be egymással a merőleges egyenesek?",
+      "answers": {
+        "a": "180°",
+        "b": "90°",
+        "c": "45°"
+      },
+      "correct": "b",
+      "explanation": "A merőleges egyenesek 90°-os szöget zárnak be egymással."
+    },
+    {
+      "question": "Mi a párhuzamosság jele?",
+      "answers": {
+        "a": "||",
+        "b": "⊥",
+        "c": "≈"
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos egyeneseket a ∥ jellel jelöljük."
+    },
+    {
+      "question": "Mi a merőlegesség jele?",
+      "answers": {
+        "a": "||",
+        "b": "=",
+        "c": "⊥"
+      },
+      "correct": "c",
+      "explanation": "A merőleges egyeneseket a ⊥ jellel jelöljük."
+    },
+    {
+      "question": "Egy téglalap szomszédos oldalai...",
+      "answers": {
+        "a": "párhuzamosak egymással.",
+        "b": "merőlegesek egymásra.",
+        "c": "metszők."
+      },
+      "correct": "b",
+      "explanation": "A téglalap szomszédos oldalai merőlegesek egymásra."
+    },
+    {
+      "question": "Egy téglalap szemközti oldalai...",
+      "answers": {
+        "a": "merőlegesek egymásra.",
+        "b": "párhuzamosak egymással.",
+        "c": "metszik egymást."
+      },
+      "correct": "b",
+      "explanation": "A téglalap szemközti oldalai párhuzamosak egymással."
+    },
+    {
+      "question": "Melyik hétköznapi tárgy modellezi a párhuzamosságot?",
+      "answers": {
+        "a": "egy olló",
+        "b": "egy vasúti sínpár",
+        "c": "egy csillag"
+      },
+      "correct": "b",
+      "explanation": "A vasúti síneknek végig ugyanakkora távolságra kell lenniük egymástól, különben a vonat kisiklana. Ez a tulajdonság a párhuzamosság lényege. ✅ Megoldás: A vasúti sínpár a párhuzamosság modellje."
+    },
+    {
+      "question": "Mi igaz a füzeted vonalaira?",
+      "answers": {
+        "a": "merőlegesek egymásra",
+        "b": "párhuzamosak egymással",
+        "c": "metszik egymást"
+      },
+      "correct": "b",
+      "explanation": "A füzet vízszintes vonalai soha nem keresztezik egymást. A távolságuk végig állandó. ✅ Megoldás: A füzet vonalai párhuzamosak egymással."
+    },
+    {
+      "question": "Ha az 'e' egyenes párhuzamos az 'f' egyenessel, és az 'f' párhuzamos a 'g' egyenessel, akkor mi igaz?",
+      "answers": {
+        "a": "e merőleges g-re",
+        "b": "e párhuzamos g-vel",
+        "c": "e metszi g-t"
+      },
+      "correct": "b",
+      "explanation": "Ez a párhuzamosság tranzitív (átmenő) tulajdonsága. Ha az első egyenes párhuzamos a másodikkal, és a második a harmadikkal, akkor az első is párhuzamos a harmadikkal.  ✅ Megoldás: e párhuzamos g-vel."
+    },
+    {
+      "question": "Hány közös pontja van két merőleges egyenesnek?",
+      "answers": {
+        "a": "egy",
+        "b": "kettő",
+        "c": "nulla"
+      },
+      "correct": "b",
+      "explanation": "A metsző egyeneseknek egy közös pontja van. ✅ Megoldás: Egy."
+    },
+    {
+      "question": "Ha két egyenes, 'e' és 'f' merőlegesek, ezt hogyan jelöljük?",
+      "answers": {
+        "a": "e ∥ f",
+        "b": "e ⊥ f",
+        "c": "e = f"
+      },
+      "correct": "b",
+      "explanation": "A merőlegességet a ⊥ jellel jelöljük. ✅ Megoldás: e ⊥ f"
+    },
+    {
+      "question": "Melyik a helyes megfogalmazás?",
+      "answers": {
+        "a": "A párhuzamos egyeneseknek egy közös pontja van.",
+        "b": "A metsző egyeneseknek nincs közös pontja.",
+        "c": "Az egybeeső egyenesek minden pontjukban megegyeznek."
+      },
+      "correct": "c",
+      "explanation": "Az egybeeső egyenesek ugyanazok az egyenesek, minden pontjuk közös. ✅ Megoldás: Az egybeeső egyenesek minden pontjukban megegyeznek."
+    },
+    {
+      "question": "Mi a szög a két, egymással párhuzamos egyenes között?",
+      "answers": {
+        "a": "0 fok.",
+        "b": "90 fok.",
+        "c": "180 fok."
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos egyenesek szöge 0 fok. ✅ Megoldás: 0 fok"
+    },
+    {
+      "question": "Ha két egyenes metsző, akkor...",
+      "answers": {
+        "a": "Nincs közös pontjuk.",
+        "b": "Egy közös pontjuk van.",
+        "c": "Két közös pontjuk van."
+      },
+      "correct": "b",
+      "explanation": "A metsző egyeneseknek egy közös pontja van.  ✅ Megoldás: Egy közös pontjuk van."
+    },
+    {
+      "question": "Ha két egyenes párhuzamos, és egy harmadik metszi őket, akkor az egyállású szögek...",
+      "answers": {
+        "a": "Különböző nagyságúak.",
+        "b": "Egyenlő nagyságúak.",
+        "c": "Összegük 180 fok."
+      },
+      "correct": "b",
+      "explanation": "A párhuzamos egyeneseket metsző egyenes azonos oldali szögei (egyállású szögek) egyenlő nagyságúak. ✅ Megoldás: Egyenlő nagyságúak."
+    },
+    {
+      "question": "Melyik állítás igaz a csúcsszögekre?",
+      "answers": {
+        "a": "Különbözőek.",
+        "b": "Egyenlőek.",
+        "c": "Összegük 90 fok."
+      },
+      "correct": "b",
+      "explanation": "A csúcsszögek egyenlőek. ✅ Megoldás: Egyenlőek."
+    },
+    {
+      "question": "Mi a neve annak az egyenesnek, amelyik egy körvonalat pontosan egy pontban érint?",
+      "answers": {
+        "a": "szelő",
+        "b": "érintő",
+        "c": "sugár"
+      },
+      "correct": "b",
+      "explanation": "Az érintő az a vonal, ami a körhöz érintőlegesen kapcsolódik, egy pontban. ✅ Megoldás: Érintő"
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Két egyenes mindig vagy párhuzamos, vagy metsző.",
+        "b": "Két szakasz is lehet párhuzamos.",
+        "c": "Két pont lehet merőleges."
+      },
+      "correct": "c",
+      "explanation": "A pontoknak nincsen irányuk. A merőlegesség két egyenes közötti viszony. A pontok nem állhatnak merőleges viszonyban egymással. ✅ Megoldás: Két pont lehet merőleges."
+    },
+    {
+      "question": "Mi a helyzet a padlóval és a mennyezettel a legtöbb szobában?",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "Metszőek.",
+        "c": "Egybeesőek."
+      },
+      "correct": "a",
+      "explanation": "A padló és a mennyezet a legtöbb szobában párhuzamos. ✅ Megoldás: Párhuzamosak."
+    },
+    {
+      "question": "Mi a mértékegysége a szögek mérésének?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "fok (°)",
+        "c": "kilogramm (kg)"
+      },
+      "correct": "b",
+      "explanation": "A szögeket fokban vagy radiánban mérjük. ✅ Megoldás: fok (°)"
+    },
+    {
+      "question": "Ha két egyenes metsző, a metszéspontjukban hány szög keletkezik?",
+      "answers": {
+        "a": "egy",
+        "b": "kettő",
+        "c": "négy"
+      },
+      "correct": "c",
+      "explanation": "A metsző egyenesek 4 szöget hoznak létre a metszéspontjukban. ✅ Megoldás: Négy"
+    },
+    {
+      "question": "Ha egy 40 fokos szöget a szögfelezőjével osztunk, mekkora szögeket kapunk?",
+      "answers": {
+        "a": "40 fokosat",
+        "b": "20 fokosat",
+        "c": "80 fokosat"
+      },
+      "correct": "b",
+      "explanation": "A szögfelező a szöget két egyenlő részre osztja, ezért 40 / 2 = 20 fokos szögeket kapunk.  ✅ Megoldás: 20 fokosat"
+    },
+    {
+      "question": "Ha két sík 180 fokos lapszöget zár be, akkor...",
+      "answers": {
+        "a": "párhuzamosak.",
+        "b": "merőlegesek.",
+        "c": "egybeesőek."
+      },
+      "correct": "a",
+      "explanation": "A 180°-os szög egy egyenesszög, ami azt jelenti, hogy a két sík 'kihajlik' egyetlen síkká, azaz azonosak lesznek. Ez megegyezik a párhuzamossággal.  ✅ Megoldás: Párhuzamosak."
+    },
+    {
+      "question": "Mi a síkszög?",
+      "answers": {
+        "a": "A két sík közös pontja.",
+        "b": "A metszésvonalra merőleges síkokban lévő szögek.",
+        "c": "A síkok által bezárt szög."
+      },
+      "correct": "b",
+      "explanation": "A síkszög a két metsző sík hajlásszögének a mértéke. Ezt a metszésvonalra merőleges síkokban lévő szögekkel mérjük. ✅ Megoldás: A metszésvonalra merőleges síkokban lévő szögek."
+    },
+    {
+      "question": "Egy egyenes és egy sík hajlásszöge 0°. Milyen a helyzetük?",
+      "answers": {
+        "a": "merőlegesek",
+        "b": "párhuzamosak vagy illeszkedők",
+        "c": "metszők 45°-ban"
+      },
+      "correct": "b",
+      "explanation": "Ha a hajlásszög 0°, az azt jelenti, hogy az egyenes egybeesik a vetületével, tehát vagy rajta fekszik a síkon (illeszkedő), vagy párhuzamos vele. ✅ Megoldás: Párhuzamosak vagy illeszkedők."
+    },
+    {
+      "question": "Egy 30 fokos emelkedő egyúttal milyen hajlásszöget jelent a vízszinteshez képest?",
+      "answers": {
+        "a": "30 fok",
+        "b": "60 fok",
+        "c": "90 fok"
+      },
+      "correct": "a",
+      "explanation": "Az emelkedő szöge a vízszinteshez viszonyított hajlásszöget jelenti. ✅ Megoldás: 30 fok"
+    }
+  ]
 }

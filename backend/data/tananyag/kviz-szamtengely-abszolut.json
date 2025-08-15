@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz szamtengely abszolut\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik szám van a számegyenesen a -3 és az 5 között?",
+      "answers": {
+        "a": "0",
+        "b": "-4",
+        "c": "6"
+      },
+      "correct": "a",
+      "explanation": "A -3-tól jobbra és az 5-től balra elhelyezkedő számokat keressük. A 0 a -3 és 5 közötti intervallumba esik. ✅ Megoldás: A 0 a -3 és 5 közötti intervallumba esik."
+    },
+    {
+      "question": "Mennyi a |-8| értéke?",
+      "answers": {
+        "a": "8",
+        "b": "-8",
+        "c": "±8"
+      },
+      "correct": "a",
+      "explanation": "Egy szám abszolút értéke a szám 0-tól való távolsága a számegyenesen. A távolság soha nem negatív, így |-8| = 8. ✅ Megoldás: Az abszolút érték 8."
+    },
+    {
+      "question": "Melyik reláció igaz?",
+      "answers": {
+        "a": "-5 < -2",
+        "b": "-5 > -2",
+        "c": "-5 = -2"
+      },
+      "correct": "a",
+      "explanation": "A számegyenesen a balra lévő számok mindig kisebbek a jobbra lévőknél. A -5 a számegyenesen balrább helyezkedik el, mint a -2, ezért kisebb nála. ✅ Megoldás: A helyes reláció a -5 < -2."
+    },
+    {
+      "question": "Mi a |-15 + 10| értéke?",
+      "answers": {
+        "a": "5",
+        "b": "-5",
+        "c": "25"
+      },
+      "correct": "a",
+      "explanation": "Először az abszolút értéken belüli műveletet végezzük el: -15 + 10 = -5. A kifejezés tehát |-5|. Az |-5| értéke 5. ✅ Megoldás: Az eredmény 5."
+    },
+    {
+      "question": "Melyik szám ellentettje a 7?",
+      "answers": {
+        "a": "-7",
+        "b": "1/7",
+        "c": "7"
+      },
+      "correct": "a",
+      "explanation": "Egy szám ellentettje az a szám, amit hozzáadva 0-t kapunk. A 7 ellentettje a -7. ✅ Megoldás: A 7 ellentettje -7."
+    },
+    {
+      "question": "Melyik az x-nek az az értéke, amelyre |x| = 9?",
+      "answers": {
+        "a": "9 vagy -9",
+        "b": "Csak 9",
+        "c": "Csak -9"
+      },
+      "correct": "a",
+      "explanation": "Azokat a számokat keressük, amelyeknek a 0-tól való távolsága 9. Mind a 9, mind a -9 távolsága 9 egység a 0-tól. ✅ Megoldás: Az egyenletet a 9 és a -9 is kielégíti."
+    },
+    {
+      "question": "Melyik szám van távolabb a 0-tól?",
+      "answers": {
+        "a": "-10",
+        "b": "9",
+        "c": "0"
+      },
+      "correct": "a",
+      "explanation": "A távolságot az abszolút érték adja meg. |-10| = 10, |9| = 9, |0| = 0. Mivel 10 > 9, a -10 távolabb van a 0-tól. ✅ Megoldás: A -10 van távolabb a 0-tól."
+    },
+    {
+      "question": "Mi a |7| - |-3| értéke?",
+      "answers": {
+        "a": "4",
+        "b": "10",
+        "c": "-4"
+      },
+      "correct": "a",
+      "explanation": "Először kiszámoljuk az abszolút értékeket: |7| = 7 és |-3| = 3. Ezután végezzük el a kivonást: 7 - 3 = 4. ✅ Megoldás: A kifejezés értéke 4."
+    },
+    {
+      "question": "Ha A pont koordinátája -2 és B pont koordinátája 3, mennyi a távolságuk?",
+      "answers": {
+        "a": "1",
+        "b": "5",
+        "c": "-5"
+      },
+      "correct": "b",
+      "explanation": "Két pont távolsága a koordinátáik különbségének abszolút értéke: |3 - (-2)| = |3+2| = 5. A távolság nem lehet negatív. ✅ Megoldás: A két pont távolsága 5 egység."
+    },
+    {
+      "question": "Melyik szám abszolút értéke a legnagyobb?",
+      "answers": {
+        "a": "10",
+        "b": "-12",
+        "c": "0"
+      },
+      "correct": "b",
+      "explanation": "A 10 = 10, |-12| = 12, |0| = 0. A 12 a legnagyobb érték. ✅ Megoldás: A -12 abszolút értéke a legnagyobb."
+    },
+    {
+      "question": "Melyik szám van közelebb a 0-hoz?",
+      "answers": {
+        "a": "3",
+        "b": "-2",
+        "c": "4"
+      },
+      "correct": "b",
+      "explanation": "A nullától való távolságot az abszolút érték adja meg. |3| = 3, |-2| = 2, |4| = 4. A 2 a legkisebb távolság. ✅ Megoldás: A -2 van legközelebb a 0-hoz."
+    },
+    {
+      "question": "Milyen számok megoldásai az |x| < 3 egyenlőtlenségnek az egész számok halmazán?",
+      "answers": {
+        "a": "0, 1, 2",
+        "b": "-2, -1, 0, 1, 2",
+        "c": "1, 2"
+      },
+      "correct": "b",
+      "explanation": "Azokat az egész számokat keressük, amelyeknek a 0-tól való távolsága kisebb, mint 3. Ezek a számok a -3 és 3 közötti egész számok: -2, -1, 0, 1, 2. ✅ Megoldás: A helyes halmaz a -2, -1, 0, 1, 2."
+    },
+    {
+      "question": "Melyik szám a legnagyobb?",
+      "answers": {
+        "a": "3",
+        "b": "-5",
+        "c": "|-4|"
+      },
+      "correct": "a",
+      "explanation": "Számoljuk ki az értékeket: a) 3. b) -5. c) |-4| = 4. A három érték közül a 3 a legnagyobb. ✅ Megoldás: A 3 a legnagyobb."
+    },
+    {
+      "question": "Mi a |7| - |-3| értéke? (ismétlés)",
+      "answers": {
+        "a": "4",
+        "b": "10",
+        "c": "-4"
+      },
+      "correct": "a",
+      "explanation": "Először kiszámoljuk az abszolút értékeket: |7| = 7 és |-3| = 3.  Ezután végezzük el a kivonást: 7 - 3 = 4. ✅ Megoldás: Az eredmény 4."
+    },
+    {
+      "question": "Melyik szám osztható 2-vel?",
+      "answers": {
+        "a": "2048",
+        "b": "3000",
+        "c": "2013"
+      },
+      "correct": "a",
+      "explanation": "Egy szám akkor osztható 2-vel, ha az utolsó számjegye páros, azaz 0, 2, 4, 6, 8.  ✅ Megoldás: A 2048 osztható 2-vel."
+    },
+    {
+      "question": "Melyik a legkisebb, hárommal osztható pozitív szám?",
+      "answers": {
+        "a": "0",
+        "b": "3",
+        "c": "6"
+      },
+      "correct": "b",
+      "explanation": "A 0-t nem tekintjük pozitívnak. A legkisebb pozitív szám, ami 3-mal osztható a 3. ✅ Megoldás: 3"
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "A negatív számok abszolút értéke negatív.",
+        "b": "Két ellentétes előjelű szám abszolút értéke megegyezik.",
+        "c": "A nulla abszolút értéke nulla."
+      },
+      "correct": "c",
+      "explanation": "A nulla abszolút értéke önmagában a nulla. ✅ Megoldás: A nulla abszolút értéke nulla."
+    },
+    {
+      "question": "Mi a 12-nek az osztója?",
+      "answers": {
+        "a": "5",
+        "b": "6",
+        "c": "7"
+      },
+      "correct": "b",
+      "explanation": "Az osztó azt jelenti, hogy maradék nélkül osztható. ✅ Megoldás: A 6"
+    },
+    {
+      "question": "Mi a 123 - ( - 10 )  művelet eredménye?",
+      "answers": {
+        "a": "133",
+        "b": "113",
+        "c": "110"
+      },
+      "correct": "a",
+      "explanation": "123-(-10) = 123 + 10 = 133 ✅ Megoldás: 133"
+    },
+    {
+      "question": "Melyik szám NEM osztója a 18-nak?",
+      "answers": {
+        "a": "2",
+        "b": "3",
+        "c": "4"
+      },
+      "correct": "c",
+      "explanation": "A 18 osztói: 1, 2, 3, 6, 9, 18. A 4 nem osztója a 18-nak. ✅ Megoldás: A 4 nem osztója a 18-nak."
+    },
+     {
+      "question": "Mi a 7/2  és az -7/2 összege?",
+      "answers": {
+        "a": "7",
+        "b": "0",
+        "c": "-7"
+      },
+      "correct": "b",
+      "explanation": "Az ellentett számok összege 0. ✅ Megoldás: 0"
+    },
+    {
+      "question": "Mi a 36° -os szög kiegészítő szöge?",
+      "answers": {
+        "a": "36°",
+        "b": "64°",
+        "c": "144°"
+      },
+      "correct": "c",
+      "explanation": "Két szög kiegészítő szögeinek összege 180°. 180° - 36° = 144°.  ✅ Megoldás: 144°"
+    },
+    {
+      "question": "Mi a -4  ×  (-3) ?",
+      "answers": {
+        "a": "-12",
+        "b": "12",
+        "c": "-7"
+      },
+      "correct": "b",
+      "explanation": "Két negatív szám szorzata pozitív:  (-4) × (-3) = 12. ✅ Megoldás: 12"
+    },
+     {
+      "question": "Mit csinál az abszolút érték?",
+      "answers": {
+        "a": "Megfordítja az előjelet.",
+        "b": "Megadja a szám nagyságát (a 0-tól való távolságot).",
+        "c": "Mindkettő helyes."
+      },
+      "correct": "c",
+      "explanation": "A válaszok mindegyike igaz.  ✅ Megoldás: Mindkettő helyes."
+    }
+  ]
 }

@@ -3,6 +3,247 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz parhuzamos sikok\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz parhuzamos sikok\" című tananyag.",
+  "questions": [
+    {
+      "question": "Milyen helyzetű két sík, ha nincs közös pontjuk?",
+      "answers": {
+        "a": "párhuzamosak",
+        "b": "metszők",
+        "c": "azonosak"
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos síkoknak nincs közös pontjuk, azaz soha nem metszik egymást. ✅ Megoldás: Párhuzamosak."
+    },
+    {
+      "question": "Mi a metszete két, egymást metsző síknak?",
+      "answers": {
+        "a": "egy egyenes",
+        "b": "egy pont",
+        "c": "egy szakasz"
+      },
+      "correct": "a",
+      "explanation": "A metsző síkok egy egyenes mentén metszik egymást. ✅ Megoldás: A metszetük egy egyenes."
+    },
+    {
+      "question": "Milyen helyzetű egy szoba padlója és az egyik oldalfala?",
+      "answers": {
+        "a": "párhuzamosak",
+        "b": "metszők",
+        "c": "azonosak"
+      },
+      "correct": "b",
+      "explanation": "A padló és az oldalfal találkozik. A találkozási vonaluk egy egyenes (a szegély). Mivel van közös pontjuk (sőt, egy egész egyenes mentén), ezért a két sík metsző. ✅ Megoldás: Metszők."
+    },
+    {
+      "question": "Hány közös pontja van két, egymással párhuzamos síknak?",
+      "answers": {
+        "a": "végtelen sok",
+        "b": "egy",
+        "c": "nulla"
+      },
+      "correct": "c",
+      "explanation": "A párhuzamos síkoknak nincs közös pontjuk, azaz soha nem metszik egymást.  ✅ Megoldás: Nulla közös pontjuk van."
+    },
+    {
+      "question": "Hány közös pontja van két azonos síknak?",
+      "answers": {
+        "a": "végtelen sok",
+        "b": "egy",
+        "c": "nulla"
+      },
+      "correct": "a",
+      "explanation": "Ha két sík azonos, akkor valójában egy síkról van szó. Egy sík végtelen sok pontból áll, tehát a két (azonos) síknak végtelen sok közös pontja van. ✅ Megoldás: Végtelen sok."
+    },
+    {
+      "question": "Milyen helyzetű egy kocka elülső és hátsó lapjának síkja?",
+      "answers": {
+        "a": "párhuzamos",
+        "b": "metsző",
+        "c": "azonos"
+      },
+      "correct": "a",
+      "explanation": "A kocka elülső és hátsó lapja egymással szemben helyezkedik el. Soha nem metszik egymást, és a távolságuk állandó. Ez a párhuzamosság definíciója. ✅ Megoldás: Párhuzamosak."
+    },
+    {
+      "question": "Melyik NEM lehet két sík kölcsönös helyzete?",
+      "answers": {
+        "a": "metsző",
+        "b": "kitérő",
+        "c": "párhuzamos"
+      },
+      "correct": "b",
+      "explanation": "A 'kitérő' fogalmat két egyenes viszonyára használjuk a térben. Két sík vagy metszi egymást, vagy párhuzamos egymással (az azonos helyzet a metsző speciális esete).  ✅ Megoldás: Két sík nem lehet kitérő."
+    },
+    {
+      "question": "Egy könyv két szomszédos lapja milyen helyzetű síkokat modellez?",
+      "answers": {
+        "a": "párhuzamos",
+        "b": "metsző",
+        "c": "azonos"
+      },
+      "correct": "b",
+      "explanation": "A könyv két lapja a gerincnél találkozik. A gerinc a két sík metszésvonala. Mivel van metszésvonaluk, a síkok metszők. ✅ Megoldás: Metszők."
+    },
+    {
+      "question": "Hány síkpárja van összesen egy téglatestnek?",
+      "answers": {
+        "a": "6",
+        "b": "15",
+        "c": "12"
+      },
+      "correct": "a",
+      "explanation": "Egy téglatestnek 6 lapja van. Ezek párokba rendezhetők: van egy alsó-felső pár, egy első-hátsó pár és egy jobb-bal oldali pár. Ez összesen 3 pár párhuzamos sík. A többi metsző.  ✅ Megoldás: Összesen 15 síkpárja van (ebből 3 párhuzamos, 12 pedig metsző)."
+    },
+    {
+      "question": "Ha két sík nem párhuzamos egymással, akkor biztosan...",
+      "answers": {
+        "a": "merőlegesek.",
+        "b": "metszők.",
+        "c": "azonosak."
+      },
+      "correct": "b",
+      "explanation": "Két síknak a térben csak két alapvető helyzete lehet: vagy nincs közös pontjuk, vagy van. Ha nem párhuzamosak, az azt jelenti, hogy van közös pontjuk, tehát metszik egymást. ✅ Megoldás: Akkor biztosan metszők."
+    },
+    {
+      "question": "Mi a neve a metsző síkok közös pontjainak halmazának?",
+      "answers": {
+        "a": "metszéspont",
+        "b": "metszésvonal",
+        "c": "metszősík"
+      },
+      "correct": "b",
+      "explanation": "A metsző síkok közös pontjai egy egyenest alkotnak. Ezt az egyenest nevezzük a két sík metszésvonalának. ✅ Megoldás: A neve metszésvonal."
+    },
+    {
+      "question": "Egy kocka felső lapja és jobb oldali lapja milyen helyzetű?",
+      "answers": {
+        "a": "párhuzamos",
+        "b": "metsző",
+        "c": "azonos"
+      },
+      "correct": "b",
+      "explanation": "A kocka felső és jobb oldali lap a kocka egyik felső, jobb oldali élében találkozik. Ez a két sík a lapok metszésvonala. Tehát a síkok metszők. ✅ Megoldás: Metszők."
+    },
+    {
+      "question": "Ha egy egyenes a síkra merőleges, akkor milyen a szöge a síkkal?",
+      "answers": {
+        "a": "0 fok",
+        "b": "90 fok",
+        "c": "180 fok"
+      },
+      "correct": "b",
+      "explanation": "Ha egy egyenes merőleges egy síkra, akkor a szögük 90 fokos.  ✅ Megoldás: 90 fok"
+    },
+    {
+      "question": "Mi a három merőleges tételének rövidítése?",
+      "answers": {
+        "a": "TMT",
+        "b": "HMT",
+        "c": "NMT"
+      },
+      "correct": "a",
+      "explanation": "A három merőleges tétel a TMT. ✅ Megoldás: TMT"
+    },
+    {
+      "question": "Milyen módon lehet igazolni, hogy két sík merőleges?",
+      "answers": {
+        "a": "Ha közös pontjuk van.",
+        "b": "Ha az egyik síkban van egy egyenes, ami merőleges a másik síkra.",
+        "c": "Ha párhuzamosak."
+      },
+      "correct": "b",
+      "explanation": "Ha az egyik síkban van egy egyenes, ami merőleges a másik síkra, akkor a két sík merőleges egymásra. ✅ Megoldás: Ha az egyik síkban van egy egyenes, ami merőleges a másik síkra."
+    },
+    {
+      "question": "Melyik állítás NEM igaz a párhuzamos síkokra?",
+      "answers": {
+        "a": "Nincs közös pontjuk.",
+        "b": "A távolságuk állandó.",
+        "c": "Metszik egymást."
+      },
+      "correct": "c",
+      "explanation": "A párhuzamos síkok definíciója, hogy nincs közös pontjuk és a távolságuk állandó. ✅ Megoldás: A metszésvonalak a helytelen állítás."
+    },
+    {
+      "question": "Mi a neve annak a pontnak, ahol egy egyenes átszúrja a síkot?",
+      "answers": {
+        "a": "Döféspont",
+        "b": "Metszéspont",
+        "c": "Csúcspont"
+      },
+      "correct": "a",
+      "explanation": "A döféspont a neve annak a pontnak, ahol egy egyenes átszúrja a síkot. ✅ Megoldás: Döféspont"
+    },
+    {
+      "question": "Mi a helyes fogalma a síkba rajzolt egyenesekre?",
+      "answers": {
+        "a": "A 2 egyenes lehet párhuzamos, egybeeső, vagy metsző. ",
+        "b": "A két egyenes párhuzamos.  ",
+        "c": "A két egyenes metsző."
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos egyenesek nem metszik egymást, viszont a metszők. Ha egy síkban két egyenest nézünk, akkor a fenti a helyes megfogalmazás. ✅ Megoldás: A két egyenes lehet párhuzamos, egybeeső, vagy metsző."
+    },
+    {
+      "question": "Ha az S1 és S2 síkok párhuzamosak, akkor mekkora a hajlásszögük?",
+      "answers": {
+        "a": "0°",
+        "b": "90°",
+        "c": "180°"
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos síkok szöge 0 fok. ✅ Megoldás: 0°"
+    },
+    {
+      "question": "Mi a három merőleges tételének lényege?",
+      "answers": {
+        "a": "Egy sík és egy rá nem merőleges egyenes kapcsolatát írja le.",
+        "b": "Egy síkra merőleges egyenesek helyzetét.",
+        "c": "Egy síkra merőleges egyenes és egy benne fekvő egyenes viszonyát."
+      },
+      "correct": "c",
+      "explanation": "A három merőleges tétel a síkra merőleges egyenes és a síkban lévő egyenes viszonyát írja le. ✅ Megoldás: Egy síkra merőleges egyenes és egy benne fekvő egyenes viszonyát."
+    },
+    {
+      "question": "Mi a helyes definíciója a lapszögnek?",
+      "answers": {
+        "a": "Két egyenes által bezárt szög.",
+        "b": "Két sík által bezárt szög.",
+        "c": "A sík egy pontja."
+      },
+      "correct": "b",
+      "explanation": "A lapszög két metsző sík hajlásszögét jelenti. ✅ Megoldás: Két sík által bezárt szög."
+    },
+    {
+      "question": "Ha egy egyenes a síkra merőleges (ismétlés), a szög a síkkal?",
+      "answers": {
+        "a": "0°",
+        "b": "90°",
+        "c": "180°"
+      },
+      "correct": "b",
+      "explanation": "A síkra merőlegesség azt jelenti, hogy az egyenes 'derékszögben áll' a síkhoz képest. Ez a derékszög 90°-ot jelent. ✅ Megoldás: 90°"
+    },
+    {
+      "question": "Mekkora a lapszög két merőleges sík között?",
+      "answers": {
+        "a": "0°",
+        "b": "90°",
+        "c": "180°"
+      },
+      "correct": "b",
+      "explanation": "A merőleges síkok 90 fokos szöget zárnak be egymással. ✅ Megoldás: 90°"
+    },
+    {
+      "question": "Ha két egyenes párhuzamos, és egy harmadik metszi őket, melyek egyenlőek?",
+      "answers": {
+        "a": "Egyállású szögek",
+        "b": "Csúcsszögek.",
+        "c": "Minden szög egyenlő."
+      },
+      "correct": "a",
+      "explanation": "Ha két párhuzamos egyenest egy harmadik metsz, akkor az egyállású szögek egyenlőek.  ✅ Megoldás: Egyállású szögek"
+    }
+  ]
 }

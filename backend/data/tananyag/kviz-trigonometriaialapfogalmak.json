@@ -1,8 +1,259 @@
 {
-  "title": "Kviz trigonometriaialapfogalmak",
-  "subject": "altalanos",
-  "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Kviz trigonometriaialapfogalmak\" című tananyag.",
-  "questions": []
+  "title": "Kvíz trigonometriaialapfogalmak",
+  "subject": "általános",
+  "grade": 4,
+  "category": "iskolai",
+  "description": "Ez a kvíz a trigonometria alapfogalmait teszteli.",
+  "questions": [
+    {
+      "question": "1. Hogyan definiáljuk egy hegyesszög szinuszát (sin α)?",
+      "answers": {
+        "a": "szemközti befogó / átfogó",
+        "b": "szomszédos befogó / átfogó",
+        "c": "szemközti befogó / szomszédos befogó"
+      },
+      "correct": "a",
+      "explanation": "A szinusz (sin) azt mutatja meg, hogy a szöggel szemközti oldal milyen arányban van az átfogóhoz képest. Minél nagyobb a szög, annál nagyobb a szemközti oldal az átfogóhoz képest."
+    },
+    {
+      "question": "2. Hogyan definiáljuk egy hegyesszög koszinuszát (cos α)?",
+      "answers": {
+        "a": "szemközti befogó / átfogó",
+        "b": "szomszédos befogó / átfogó",
+        "c": "szomszédos befogó / szemközti befogó"
+      },
+      "correct": "b",
+      "explanation": "A koszinusz (cos) azt mutatja meg, hogy a szög melletti (szomszédos) oldal milyen arányban van az átfogóhoz képest."
+    },
+    {
+      "question": "3. Hogyan definiáljuk egy hegyesszög tangensét (tan α)?",
+      "answers": {
+        "a": "szemközti befogó / átfogó",
+        "b": "átfogó / szomszédos befogó",
+        "c": "szemközti befogó / szomszédos befogó"
+      },
+      "correct": "c",
+      "explanation": "A tangens (tan) a szemközti oldalt a szomszédos oldallal hasonlítja össze: tan(szög) = szemközti / szomszédos."
+    },
+    {
+      "question": "4. Milyen típusú háromszögekben használjuk ezeket az alapvető szögfüggvényeket?",
+      "answers": {
+        "a": "Minden háromszögben.",
+        "b": "Csak derékszögű háromszögekben.",
+        "c": "Csak egyenlő szárú háromszögekben."
+      },
+      "correct": "b",
+      "explanation": "A szinusz, koszinusz és tangens csak a derékszögű háromszögekben használható, mert csak ezekben a háromszögekben van átfogó, szemközti és szomszédos befogó."
+    },
+    {
+      "question": "5. Egy derékszögű háromszög befogói a=3, b=4, átfogója c=5. Mekkora az 'a' oldallal szemközti szög szinusza?",
+      "answers": {
+        "a": "3/5 = 0.6",
+        "b": "4/5 = 0.8",
+        "c": "3/4 = 0.75"
+      },
+      "correct": "a",
+      "explanation": "sin(α) = szemközti / átfogó. A szemközti oldal 'a' = 3, az átfogó c = 5. Így sin(α) = 3 / 5 = 0.6."
+    },
+    {
+      "question": "6. Egy derékszögű háromszög befogói a=3, b=4, átfogója c=5. Mekkora az 'a' oldallal szemközti szög koszinusza?",
+      "answers": {
+        "a": "3/5 = 0.6",
+        "b": "4/5 = 0.8",
+        "c": "4/3 ≈ 1.33"
+      },
+      "correct": "b",
+      "explanation": "cos(α) = szomszédos / átfogó. A szomszédos oldal a 'b' = 4, az átfogó c = 5. Így cos(α) = 4 / 5 = 0.8."
+    },
+    {
+      "question": "7. Egy derékszögű háromszög befogói a=3, b=4, átfogója c=5. Mekkora az 'a' oldallal szemközti szög tangense?",
+      "answers": {
+        "a": "3/5 = 0.6",
+        "b": "4/5 = 0.8",
+        "c": "3/4 = 0.75"
+      },
+      "correct": "c",
+      "explanation": "tan(α) = szemközti / szomszédos. A szemközti oldal a = 3, a szomszédos b = 4. Így tan(α) = 3 / 4 = 0.75."
+    },
+    {
+      "question": "8. Melyik szögfüggvény értéke lehet nagyobb, mint 1?",
+      "answers": {
+        "a": "sin α",
+        "b": "cos α",
+        "c": "tan α"
+      },
+      "correct": "c",
+      "explanation": "A sin és a cos értéke sosem lehet 1-nél nagyobb, mert a befogók mindig kisebbek az átfogónál. A tangens értéke viszont lehet nagyobb, mert a szemközti befogó hosszabb lehet, mint a szomszédos."
+    },
+    {
+      "question": "9. Egy derékszögű háromszögben minek a rövidítése a 'hipotenuz'?",
+      "answers": {
+        "a": "Az átfogó.",
+        "b": "A befogó.",
+        "c": "A magasság."
+      },
+      "correct": "a",
+      "explanation": "A hipotenuz (vagy átfogó) a derékszögű háromszög leghosszabb oldala, a derékszöggel szemközti oldal."
+    },
+    {
+      "question": "10. Egy derékszögű háromszög befogói 6 cm és 8 cm. Mekkora az átfogó?",
+      "answers": {
+        "a": "14 cm",
+        "b": "10 cm",
+        "c": "100 cm"
+      },
+      "correct": "b",
+      "explanation": "Pitagorasz-tétel: átfogó² = 6² + 8² = 36 + 64 = 100. Így az átfogó = √100 = 10 cm."
+    },
+    {
+      "question": "11. Az előző feladatban (a=6, b=8, c=10), mekkora a 6 cm-es oldallal szemközti szög szinusza?",
+      "answers": {
+        "a": "6/8 = 0.75",
+        "b": "8/10 = 0.8",
+        "c": "6/10 = 0.6"
+      },
+      "correct": "c",
+      "explanation": "sin(α) = szemközti / átfogó. sin(α) = 6 / 10 = 0.6."
+    },
+    {
+      "question": "12. Egy derékszögű háromszögben α és β a két hegyesszög. Melyik összefüggés igaz?",
+      "answers": {
+        "a": "sin α = sin β",
+        "b": "sin α = cos β",
+        "c": "tan α = tan β"
+      },
+      "correct": "b",
+      "explanation": "Az egyik szög szinusza megegyezik a másik szög koszinuszával, mert a szemközti befogó a másik szög szomszédos befogója."
+    },
+    {
+      "question": "13. Egy egyenlő szárú derékszögű háromszögben (ahol a befogók egyenlőek), mekkora a hegyesszögek tangense?",
+      "answers": {
+        "a": "0.5",
+        "b": "1",
+        "c": "2"
+      },
+      "correct": "b",
+      "explanation": "Ha a befogók egyenlőek, akkor tan(szög) = szemközti / szomszédos = befogó / befogó = 1. Ez a 45 fokos szögre igaz."
+    },
+    {
+      "question": "14. Egy derékszögű háromszög átfogója 13, egyik befogója 12. Mekkora a 12-es befogóval szemközti szög koszinusza?",
+      "answers": {
+        "a": "5/13",
+        "b": "12/13",
+        "c": "5/12"
+      },
+      "correct": "a",
+      "explanation": "A szomszédos befogót ki kell számolni Pitagorasz-tétellel: 13² - 12² = 5². cos(α) = szomszédos / átfogó = 5 / 13."
+    },
+    {
+      "question": "15. Melyik oldal van a nevezőben a szinusz és a koszinusz kiszámításakor?",
+      "answers": {
+        "a": "A szemközti befogó.",
+        "b": "A szomszédos befogó.",
+        "c": "Az átfogó."
+      },
+      "correct": "c",
+      "explanation": "Mind a szinusz (sin) mind a koszinusz (cos) képletében az átfogó (a leghosszabb oldal) van a nevezőben."
+    },
+    {
+      "question": "16. Ha egy derékszögű háromszöget felnagyítunk a kétszeresére, mi történik a szögeinek szinuszával?",
+      "answers": {
+        "a": "A kétszeresére nő.",
+        "b": "A felére csökken.",
+        "c": "Nem változik."
+      },
+      "correct": "c",
+      "explanation": "A szögfüggvények (sin, cos, tan) csak a szögtől függenek. A méret növelésével a szögek nem változnak, így a szinusz értéke sem változik."
+    },
+    {
+      "question": "17. Egy derékszögű háromszögben tan α = 1. Milyen ez a háromszög?",
+      "answers": {
+        "a": "Szabályos.",
+        "b": "A befogói egyenlőek.",
+        "c": "Az egyik befogó kétszerese a másiknak."
+      },
+      "correct": "b",
+      "explanation": "Ha a tangens 1, akkor a szemközti és a szomszédos befogó egyforma hosszú. Ez egy egyenlő szárú derékszögű háromszög."
+    },
+    {
+      "question": "18. Mi a 'trigonometria' szó jelentése?",
+      "answers": {
+        "a": "Háromszögmérés",
+        "b": "Körszámítás",
+        "c": "Szögfüggvény"
+      },
+      "correct": "a",
+      "explanation": "A trigonometria a háromszögekkel és a szögek mérésével foglalkozik."
+    },
+    {
+      "question": "19. Melyik szögfüggvényt kapjuk, ha a sin α értékét elosztjuk a cos α értékével?",
+      "answers": {
+        "a": "A reciprokát.",
+        "b": "A tan α értékét.",
+        "c": "Mindig 1-et."
+      },
+      "correct": "b",
+      "explanation": "tan(α) = sin(α) / cos(α)."
+    },
+    {
+      "question": "20. Egy derékszögű háromszög befogói 8 és 15. Mekkora a 8-as oldallal szemközti szög koszinusza?",
+      "answers": {
+        "a": "8/17",
+        "b": "15/17",
+        "c": "8/15"
+      },
+      "correct": "b",
+      "explanation": "A 8-as oldallal szemközti szög koszinuszához az átfogóra és a szomszédos oldalra van szükség. Az átfogó Pitagorasz-tétellel: c² = 8² + 15² = 17. A szomszédos oldal 15.  cos(α) = 15 / 17."
+    },
+    {
+      "question": "21. Ha cos α = 0.8, és az átfogó 20, milyen hosszú a szomszédos befogó?",
+      "answers": {
+        "a": "16",
+        "b": "25",
+        "c": "8"
+      },
+      "correct": "a",
+      "explanation": "cos(α) = szomszédos / átfogó. 0.8 = szomszédos / 20. A szomszédos = 0.8 * 20 = 16."
+    },
+    {
+      "question": "22. Mi a 'szemközti befogó' az α szöghöz képest?",
+      "answers": {
+        "a": "Az az oldal, ami az α szöget alkotja az átfogóval.",
+        "b": "A leghosszabb oldal.",
+        "c": "Az az oldal, amivel az α szög 'szemben' van."
+      },
+      "correct": "c",
+      "explanation": "A szemközti befogó az, amelyik a vizsgált szög 'szemben' van."
+    },
+    {
+      "question": "23. Melyik állítás HAMIS?",
+      "answers": {
+        "a": "sin α sosem lehet nagyobb 1-nél.",
+        "b": "cos α sosem lehet nagyobb 1-nél.",
+        "c": "tan α sosem lehet nagyobb 1-nél."
+      },
+      "correct": "c",
+      "explanation": "A tangens értéke lehet 1-nél nagyobb. Ez azt jelenti, hogy a szemközti oldal hosszabb, mint a szomszédos oldal."
+    },
+    {
+      "question": "24. Egy derékszögű háromszög átfogója 25, a magassága 12. Az egyik befogó 15. Mekkora ezen befogóval szemközti szög szinusza?",
+      "answers": {
+        "a": "12/25",
+        "b": "15/25 = 0.6",
+        "c": "12/15 = 0.8"
+      },
+      "correct": "b",
+      "explanation": "sin(α) = szemközti / átfogó. sin(α) = 15 / 25 = 0.6."
+    },
+    {
+      "question": "25. Minek a segítségével tudjuk egy derékszögű háromszög oldalainak arányából a szöget kiszámolni?",
+      "answers": {
+        "a": "Vonalzóval.",
+        "b": "A szögfüggvények és egy számológép segítségével.",
+        "c": "A körzővel."
+      },
+      "correct": "b",
+      "explanation": "A szögfüggvények (sin, cos, tan) és a számológép a segítségedre van, ha meg akarod határozni a szöget, ha ismered az oldalak arányát."
+    }
+  ]
 }

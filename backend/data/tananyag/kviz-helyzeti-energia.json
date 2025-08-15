@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz helyzeti energia\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi az energia?",
+      "answers": {
+        "a": "A test sebessége.",
+        "b": "A test mozgása.",
+        "c": "A munka végzésének képessége."
+      },
+      "correct": "c",
+      "explanation": "Az energia a munka végzésének képessége. ✅ Megoldás: A munka végzésének képessége."
+    },
+    {
+      "question": "Milyen mértékegysége van az energiának?",
+      "answers": {
+        "a": "kilogramm (kg)",
+        "b": "joule (J)",
+        "c": "méter (m)"
+      },
+      "correct": "b",
+      "explanation": "Az energia mértékegysége a joule (J). ✅ Megoldás: joule (J)"
+    },
+    {
+      "question": "Mi a helyzeti energia?",
+      "answers": {
+        "a": "A mozgó testek energiája.",
+        "b": "A test helyzetéből adódó energia.",
+        "c": "A meleg testek energiája."
+      },
+      "correct": "b",
+      "explanation": "A helyzeti energia a test helyzetéből adódó energia, például a magasban lévő testeké. ✅ Megoldás: A test helyzetéből adódó energia."
+    },
+    {
+      "question": "Mi történik a helyzeti energiával, ha egy testet magasabbra emelünk?",
+      "answers": {
+        "a": "Csökken.",
+        "b": "Ugyanannyi marad.",
+        "c": "Nő."
+      },
+      "correct": "c",
+      "explanation": "Minél magasabban van a test, annál nagyobb a helyzeti energiája. ✅ Megoldás: Nő."
+    },
+    {
+      "question": "Mitől függ a helyzeti energia?",
+      "answers": {
+        "a": "A test sebességétől.",
+        "b": "A test tömegétől és a magasságától.",
+        "c": "A test színétől."
+      },
+      "correct": "b",
+      "explanation": "A helyzeti energia függ a test tömegétől és a magasságától.  ✅ Megoldás: A test tömegétől és a magasságától."
+    },
+    {
+      "question": "Ha egy test tömege kétszeresére nő, akkor a helyzeti energiája...",
+      "answers": {
+        "a": "Kétszeresére nő.",
+        "b": "Felerészére csökken.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "A helyzeti energia egyenesen arányos a tömeggel.  ✅ Megoldás: Kétszeresére nő."
+    },
+    {
+      "question": "Ha egy test magassága a földhöz képest kétszeresére nő, akkor a helyzeti energiája...",
+      "answers": {
+        "a": "Felerészére csökken.",
+        "b": "Kétszeresére nő.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "A helyzeti energia egyenesen arányos a magassággal. ✅ Megoldás: Kétszeresére nő."
+    },
+    {
+      "question": "Milyen energia van egy fán lévő almában?",
+      "answers": {
+        "a": "Mozgási energia.",
+        "b": "Helyzeti energia.",
+        "c": "Hőenergia."
+      },
+      "correct": "b",
+      "explanation": "A fán lévő almának helyzeti energiája van, mert a földhöz képest magasban van. ✅ Megoldás: Helyzeti energia."
+    },
+    {
+      "question": "Mi történik a helyzeti energiával, ha egy alma leesik a fáról?",
+      "answers": {
+        "a": "Csökken, majd nullává válik.",
+        "b": "Nő.",
+        "c": "Ugyanannyi marad."
+      },
+      "correct": "a",
+      "explanation": "Az alma leesik, a magassága csökken, így a helyzeti energiája is csökken. Amikor a földön van, a helyzeti energiája nulla. ✅ Megoldás: Csökken, majd nullává válik."
+    },
+    {
+      "question": "Mi a helyzeti energia jele?",
+      "answers": {
+        "a": "E",
+        "b": "Eh",
+        "c": "Em"
+      },
+      "correct": "b",
+      "explanation": "A helyzeti energiát gyakran Eh-val jelöljük. ✅ Megoldás: Eh"
+    },
+    {
+      "question": "Melyik testnek van nagyobb helyzeti energiája?",
+      "answers": {
+        "a": "Egy 1 kg-os kő a földön.",
+        "b": "Egy 1 kg-os kő a 2 méter magasban.",
+        "c": "Egy 2 kg-os kő a földön."
+      },
+      "correct": "b",
+      "explanation": "A helyzeti energia a tömegtől és a magasságtól függ. A nagyobb magasság miatt a 2 méter magasban lévő kőnek van nagyobb helyzeti energiája. ✅ Megoldás: Egy 1 kg-os kő a 2 méter magasban."
+    },
+    {
+      "question": "Mi történik a helyzeti energiával, ha egy testet a földről felemelünk?",
+      "answers": {
+        "a": "Csökken",
+        "b": "Nő",
+        "c": "Ugyanannyi marad"
+      },
+      "correct": "b",
+      "explanation": "Ha felemelünk egy testet, a helyzeti energiája nő. ✅ Megoldás: Nő"
+    },
+    {
+      "question": "Ha egy test lefelé esik, mi történik a helyzeti energiájával?",
+      "answers": {
+        "a": "Nő",
+        "b": "Csökken",
+        "c": "Nem változik"
+      },
+      "correct": "b",
+      "explanation": "Ha egy test lefelé esik, a magassága csökken, ezért a helyzeti energiája is csökken. ✅ Megoldás: Csökken"
+    },
+    {
+      "question": "Melyik energiafajta lehet a helyzeti energiából?",
+      "answers": {
+        "a": "Hőenergia",
+        "b": "Mozgási energia",
+        "c": "Kémiai energia"
+      },
+      "correct": "b",
+      "explanation": "Ha egy test leesik, a helyzeti energiája mozgási energiává alakul. ✅ Megoldás: Mozgási energia"
+    },
+    {
+      "question": "Milyen a helyzeti energia egy a talajon fekvő testnél?",
+      "answers": {
+        "a": "Nagyon nagy.",
+        "b": "Nulla.",
+        "c": "Kicsi, de nem nulla."
+      },
+      "correct": "b",
+      "explanation": "A talajon fekvő testnek nincs helyzeti energiája, mert nincs a talajhoz képest magasban. ✅ Megoldás: Nulla"
+    },
+    {
+      "question": "Ha egy gyermek a csúszdán lecsúszik, a helyzeti energiája átalakul...",
+      "answers": {
+        "a": "Hőenergiává",
+        "b": "Mozgási energiává",
+        "c": "Kémiai energiává"
+      },
+      "correct": "b",
+      "explanation": "A helyzeti energia a mozgási energiává alakul, ahogy a gyerek lecsúszik. ✅ Megoldás: Mozgási energiává"
+    },
+    {
+      "question": "Mitől függ a helyzeti energia?",
+      "answers": {
+        "a": "A test színétől.",
+        "b": "A test tömegétől és a magasságától.",
+        "c": "A test formájától."
+      },
+      "correct": "b",
+      "explanation": "A helyzeti energia a test tömegétől és a magasságától függ. ✅ Megoldás: A test tömegétől és a magasságától."
+    },
+    {
+      "question": "Ha egy labda a kezünkből leesik, mi történik a helyzeti energiájával?",
+      "answers": {
+        "a": "Nő, mert közelebb kerül a földhöz.",
+        "b": "Csökken, mert a magassága csökken.",
+        "c": "Ugyanannyi marad, mert a tömege nem változik."
+      },
+      "correct": "b",
+      "explanation": "A labda a zuhanás során elveszít a magasságából, ezért a helyzeti energiája csökken. ✅ Megoldás: Csökken, mert a magassága csökken."
+    },
+    {
+      "question": "Melyik a legnagyobb helyzeti energiával rendelkező test?",
+      "answers": {
+        "a": "Egy kicsi toll a földön.",
+        "b": "Egy nagy kő a magasban.",
+        "c": "Egy kicsi golyó a padlón."
+      },
+      "correct": "b",
+      "explanation": "A nagy tömeg és a nagy magasság együtt adja a legnagyobb helyzeti energiát. ✅ Megoldás: Egy nagy kő a magasban."
+    },
+    {
+      "question": "Melyik energiafajta köthető a helyzeti energiához?",
+      "answers": {
+        "a": "Fényenergia",
+        "b": "Hangenergia",
+        "c": "Mozgási energia"
+      },
+      "correct": "c",
+      "explanation": "A leeső testek helyzeti energiája mozgási energiává alakul. ✅ Megoldás: Mozgási energia"
+    },
+    {
+      "question": "Mekkora a helyzeti energiája annak a testnek, ami a talajon fekszik?",
+      "answers": {
+        "a": "Nagy",
+        "b": "Kis",
+        "c": "Nulla"
+      },
+      "correct": "c",
+      "explanation": "A test a talajon van, így nincs magassága, ezért a helyzeti energiája is nulla. ✅ Megoldás: Nulla"
+    },
+    {
+      "question": "Egy magasban lévő testnek van...",
+      "answers": {
+        "a": "Helyzeti energiája.",
+        "b": "Hőenergiája.",
+        "c": "Nincs energiája."
+      },
+      "correct": "a",
+      "explanation": "Egy magasban lévő testnek helyzeti energiája van a földhöz képest. ✅ Megoldás: Helyzeti energiája"
+    },
+    {
+      "question": "Mi történik a helyzeti energiával a hullámvasúton lefelé haladva?",
+      "answers": {
+        "a": "Nő",
+        "b": "Csökken",
+        "c": "Ugyanannyi marad"
+      },
+      "correct": "b",
+      "explanation": "A lefelé haladás során a magasság csökken, ezért a helyzeti energia is csökken. ✅ Megoldás: Csökken"
+    },
+    {
+      "question": "Ha egy testet felemelünk, milyen energia változik?",
+      "answers": {
+        "a": "Hőenergia",
+        "b": "Helyzeti energia",
+        "c": "Kémiai energia"
+      },
+      "correct": "b",
+      "explanation": "Amikor felemelünk egy testet, a helyzeti energiája változik, mivel megváltozik a helyzete a földhöz képest.  ✅ Megoldás: Helyzeti energia"
+    },
+    {
+      "question": "Milyen energiává alakul át a helyzeti energia, amikor a labda a földre ér?",
+      "answers": {
+        "a": "Fény",
+        "b": "Hang",
+        "c": "Mindkettő."
+      },
+      "correct": "c",
+      "explanation": "A lezuhanó labda helyzeti energiája részben hanggá és részben hővé alakul.  ✅ Megoldás: Mindkettő."
+    }
+  ]
 }

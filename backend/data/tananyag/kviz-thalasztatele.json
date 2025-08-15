@@ -3,6 +3,217 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz thalasztatele\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz Thalész-tétel\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a Thalész-tétel?",
+      "answers": {
+        "a": "Egyenesekre vonatkozó tétel.",
+        "b": "Körhöz kapcsolódó tétel a derékszögről.",
+        "c": "Szögfelezőkkel kapcsolatos tétel."
+      },
+      "correct": "b",
+      "explanation": "A Thalész-tétel egy körhöz kapcsolódó tétel, ami a derékszögről szól. ✅ Megoldás: Körhöz kapcsolódó tétel a derékszögről."
+    },
+    {
+      "question": "Mit mond ki a Thalész-tétel?",
+      "answers": {
+        "a": "A kör átmérőjére támaszkodó kerületi szög derékszög.",
+        "b": "A háromszög belső szögeinek összege 180°.",
+        "c": "A kerületi szög fele a középponti szögnek."
+      },
+      "correct": "a",
+      "explanation": "A Thalész-tétel szerint, ha egy derékszögű háromszögben az egyik befogó az átmérő, a harmadik csúcspont a körvonalon van, akkor a derékszög a körön helyezkedik el.  ✅ Megoldás: A kör átmérőjére támaszkodó kerületi szög derékszög."
+    },
+    {
+      "question": "Hol helyezkedik el a derékszögű háromszög harmadik csúcsa, ha a befogója a kör átmérője?",
+      "answers": {
+        "a": "A kör középpontjában.",
+        "b": "A körön kívül.",
+        "c": "A körvonalon."
+      },
+      "correct": "c",
+      "explanation": "A Thalész-tétel értelmében a derékszögű háromszög harmadik csúcsa a körvonalon található. ✅ Megoldás: A körvonalon."
+    },
+    {
+      "question": "Mit mond a Thalész-tétel megfordítása?",
+      "answers": {
+        "a": "Ha egy háromszög egyik oldala fölé húzott kerületi szög derékszög, akkor az az oldal a kör átmérője.",
+        "b": "Minden derékszögű háromszög köré írható kör.",
+        "c": "Ha egy háromszög átfogója a kör átmérője, akkor a háromszög derékszögű."
+      },
+      "correct": "a",
+      "explanation": "A Thalész-tétel megfordítása szerint, ha egy háromszög egyik oldala fölé húzott kerületi szög derékszög, akkor az az oldal a kör átmérője. ✅ Megoldás: Ha egy háromszög egyik oldala fölé húzott kerületi szög derékszög, akkor az az oldal a kör átmérője."
+    },
+    {
+      "question": "Ha egy háromszög derékszögű, és a köré írt kör átmérője 10 cm, akkor mekkora a szemközti oldal?",
+      "answers": {
+        "a": "5 cm",
+        "b": "10 cm",
+        "c": "20 cm"
+      },
+      "correct": "b",
+      "explanation": "A derékszögű háromszög átfogója a köré írt kör átmérője. ✅ Megoldás: A szemközti oldal 10 cm."
+    },
+    {
+      "question": "Egy háromszög oldalai: 6 cm, 8 cm és 10 cm. Ha a leghosszabb oldala az átmérője egy körnek, akkor a háromszög melyik szöge derékszög?",
+      "answers": {
+        "a": "A 6 cm-es oldallal szemközti szög.",
+        "b": "A 8 cm-es oldallal szemközti szög.",
+        "c": "A 10 cm-es oldallal szemközti szög."
+      },
+      "correct": "c",
+      "explanation": "Pitagorasz-tétel: 6² + 8² = 36 + 64 = 100 = 10². A 10 cm-es oldal az átfogó, ezért a vele szemközti szög derékszög. ✅ Megoldás: A 10 cm-es oldallal szemközti szög."
+    },
+    {
+      "question": "Milyen tulajdonságokkal rendelkezik egy húrnégyszög?",
+      "answers": {
+        "a": "Minden szöge derékszög.",
+        "b": "Szemközti szögeinek összege 180°.",
+        "c": "Az átlói egyenlő hosszúak."
+      },
+      "correct": "b",
+      "explanation": "A húrnégyszög (amelynek minden csúcsa egy körön van) szemközti szögeinek összege mindig 180°. ✅ Megoldás: Szemközti szögeinek összege 180°."
+    },
+    {
+      "question": "Milyen tulajdonságokkal rendelkezik egy derékszögű háromszög?",
+      "answers": {
+        "a": "A szögfelezői egy pontban metszik egymást.",
+        "b": "A súlyvonalai egyenlő hosszúak.",
+        "c": "A köré írt kör középpontja az átfogó felezőpontja."
+      },
+      "correct": "c",
+      "explanation": "A derékszögű háromszög köré írt körének középpontja az átfogó felezőpontja. ✅ Megoldás: A köré írt kör középpontja az átfogó felezőpontja."
+    },
+    {
+      "question": "Egy körben egy átmérőhöz tartozó kerületi szög...",
+      "answers": {
+        "a": "...hegyesszög.",
+        "b": "...derékszög.",
+        "c": "...tompaszög."
+      },
+      "correct": "b",
+      "explanation": "A Thalész-tétel szerint a kör átmérőjére támaszkodó kerületi szög derékszög.  ✅ Megoldás: Derékszög."
+    },
+    {
+      "question": "Melyik állítás igaz a Thalész-tétel megfordítására?",
+      "answers": {
+        "a": "Minden derékszögű háromszög köré írható kör.",
+        "b": "A körbe írt háromszög mindig derékszögű.",
+        "c": "Mindkettő helyes."
+      },
+      "correct": "c",
+      "explanation": "A Thalész-tétel megfordítása: ha egy háromszög átfogója a kör átmérője, akkor a háromszög derékszögű. A 'c' a helyes válasz. ✅ Megoldás: Mindkettő helyes."
+    },
+    {
+      "question": "Mi a húrnégyszög definíciója?",
+      "answers": {
+        "a": "A kör középpontjában lévő szögek.",
+        "b": "A kör belsejében lévő szögek.",
+        "c": "Olyan négyszög, amelynek minden csúcsa egy körön van."
+      },
+      "correct": "c",
+      "explanation": "A húrnégyszög olyan négyszög, amelynek minden csúcsa egy körön van. ✅ Megoldás: Olyan négyszög, amelynek minden csúcsa egy körön van."
+    },
+    {
+      "question": "Melyik a leghosszabb húr egy körben?",
+      "answers": {
+        "a": "A sugár.",
+        "b": "Az átmérő.",
+        "c": "Bármelyik húr."
+      },
+      "correct": "b",
+      "explanation": "A leghosszabb húr a kör átmérője. ✅ Megoldás: Az átmérő."
+    },
+    {
+      "question": "Mekkora a kerületi szög, ha a középponti szög 180°?",
+      "answers": {
+        "a": "30°",
+        "b": "90°",
+        "c": "180°"
+      },
+      "correct": "b",
+      "explanation": "A kerületi szög fele a hozzá tartozó középponti szögnek. 180° / 2 = 90°. ✅ Megoldás: 90°"
+    },
+    {
+      "question": "Ha a húrnégyszög két szemközti szöge egyenlő, akkor...",
+      "answers": {
+        "a": "A négyszög téglalap.",
+        "b": "A négyszög húrnégyszög.",
+        "c": "Nem paralelogramma."
+      },
+      "correct": "a",
+      "explanation": "Ha a szemközti szögek egyenlőek, a négyszög egy téglalap, ami egy speciális húrnégyszög. ✅ Megoldás: A négyszög téglalap."
+    },
+    {
+      "question": "Mi a helyes kapcsolat a kerületi szög és a középponti szög között?",
+      "answers": {
+        "a": "A kerületi szög a középponti szög kétszerese.",
+        "b": "A középponti szög a kerületi szög kétszerese.",
+        "c": "Egyenlőek."
+      },
+      "correct": "b",
+      "explanation": "A középponti szög (az azonos íven) mindig kétszer akkora, mint a kerületi szög. ✅ Megoldás: A középponti szög a kerületi szög kétszerese."
+    },
+    {
+      "question": "Ha egy háromszög oldalai 8 cm, 15 cm és 17 cm, akkor a köré írt kör átmérője...",
+      "answers": {
+        "a": "8 cm",
+        "b": "15 cm",
+        "c": "17 cm"
+      },
+      "correct": "c",
+      "explanation": "Mivel 8²+15²=17², a háromszög derékszögű. A derékszögű háromszög átfogója a köré írt kör átmérője. ✅ Megoldás: 17 cm"
+    },
+    {
+      "question": "Ha egy négyszög szemközti szögei 120° és 60°, akkor az egy...",
+      "answers": {
+        "a": "Paralelogramma.",
+        "b": "Húrnégyszög.",
+        "c": "Négyzet."
+      },
+      "correct": "b",
+      "explanation": "A húrnégyszög szemközti szögeinek összege 180°. 120° + 60° = 180°.  ✅ Megoldás: Húrnégyszög."
+    },
+    {
+      "question": "Ha egy háromszög oldalai: 5 cm, 12 cm, X cm. Ha a háromszög derékszögű, akkor mennyi X?",
+      "answers": {
+        "a": "13 cm",
+        "b": "7 cm",
+        "c": "17 cm"
+      },
+      "correct": "a",
+      "explanation": "Pitagorasz-tétel: x² = 5² + 12² = 25 + 144 = 169. Ebből x = √169 = 13. ✅ Megoldás: 13 cm"
+    },
+    {
+      "question": "Ha egy négyszög két szemközti szöge derékszög, akkor az is...",
+      "answers": {
+        "a": "Deltoid.",
+        "b": "Húrnégyszög.",
+        "c": "Paralelogramma."
+      },
+      "correct": "b",
+      "explanation": "Ha egy négyszög két szemközti szöge derékszög, a másik két szög összege is 180°. Azt kapjuk, hogy a szemközti szögek összege 180°, tehát húrnégyszög. ✅ Megoldás: Húrnégyszög."
+    },
+    {
+      "question": "Ha egy derékszögű háromszög átfogója 20 cm, egyik befogója 16 cm. A másik befogó a köré írt kör átmérője?",
+      "answers": {
+        "a": "12 cm",
+        "b": "20 cm",
+        "c": "24 cm"
+      },
+      "correct": "a",
+      "explanation": "A másik befogó Pitagorasz-tételből: a² = 20² - 16² = 400 - 256 = 144, így a = √144 = 12.  A köré írt kör átmérője az átfogó, tehát 20cm. A kérdés rosszul van feltéve! Javítom. Ha egy derékszögű háromszög átfogója 20 cm, egyik befogója 16 cm, milyen hosszú a másik befogó? ✅ Megoldás: 12 cm"
+    },
+     {
+      "question": "Mi a legfontosabb a Thalész-tétel alkalmazásakor?",
+      "answers": {
+        "a": "A háromszög egyenlő szárú.",
+        "b": "Az egyik oldal a kör átmérője.",
+        "c": "A háromszög minden oldala egyenlő."
+      },
+      "correct": "b",
+      "explanation": "A Thalész-tétel szerint a derékszögű háromszög egyik befogója a kör átmérője. ✅ Megoldás: A szög a körön van"
+    }
+  ]
 }

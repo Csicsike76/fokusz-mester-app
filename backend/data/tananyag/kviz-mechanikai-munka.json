@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz mechanikai munka\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a mechanikai munka?",
+      "answers": {
+        "a": "Egy test mozgása.",
+        "b": "Egy erő hatására bekövetkező elmozdulás.",
+        "c": "A test tömege."
+      },
+      "correct": "b",
+      "explanation": "A mechanikai munka egy erő hatására bekövetkező elmozdulás. Ha egy testet elmozdítunk, munkát végzünk. ✅ Megoldás: Egy erő hatására bekövetkező elmozdulás."
+    },
+    {
+      "question": "Mikor végzünk munkát a fizikában?",
+      "answers": {
+        "a": "Ha egy test helyben marad.",
+        "b": "Ha egy test mozdulatlan.",
+        "c": "Ha egy erő hatására elmozdul a test."
+      },
+      "correct": "c",
+      "explanation": "A munkavégzés feltétele, hogy egy erő hatására a test elmozduljon.  ✅ Megoldás: Ha egy erő hatására elmozdul a test."
+    },
+    {
+      "question": "Milyen mértékegysége van a munkának?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "joule (J)",
+        "c": "kilogramm (kg)"
+      },
+      "correct": "b",
+      "explanation": "A munka mértékegysége a joule (J). ✅ Megoldás: joule (J)"
+    },
+    {
+      "question": "Hogyan számítjuk ki a munkát (W), ha az erő (F) a mozgás irányában hat?",
+      "answers": {
+        "a": "W = F / s",
+        "b": "W = F * s",
+        "c": "W = F + s"
+      },
+      "correct": "b",
+      "explanation": "Ha az erő (F) a mozgás irányában hat, a munka (W) képlete: W = F * s, ahol 's' az elmozdulás. ✅ Megoldás: W = F * s"
+    },
+    {
+      "question": "Egy emelő 20 N erővel emel egy 1 méter magasra egy dobozt. Mennyi munkát végzett?",
+      "answers": {
+        "a": "20 J",
+        "b": "19 J",
+        "c": "21 J"
+      },
+      "correct": "a",
+      "explanation": "W = F * s = 20 N * 1 m = 20 J.  ✅ Megoldás: 20 J"
+    },
+    {
+      "question": "Mikor nem végez munkát az erő?",
+      "answers": {
+        "a": "Ha az erő és az elmozdulás azonos irányú.",
+        "b": "Ha a test elmozdul.",
+        "c": "Ha az erő merőleges az elmozdulásra."
+      },
+      "correct": "c",
+      "explanation": "Ha az erő merőleges az elmozdulásra, akkor az erő nem végez munkát.  ✅ Megoldás: Ha az erő merőleges az elmozdulásra."
+    },
+    {
+      "question": "Ha egy test vízszintesen mozog, és a súlyerő hat rá, a súlyerő végez munkát?",
+      "answers": {
+        "a": "Igen.",
+        "b": "Nem.",
+        "c": "Függ a sebességtől."
+      },
+      "correct": "b",
+      "explanation": "A súlyerő függőlegesen lefelé hat, az elmozdulás pedig vízszintes, tehát a két dolog merőleges egymásra, ezért a súlyerő nem végez munkát.  ✅ Megoldás: Nem."
+    },
+    {
+      "question": "Ha egy testet egyenletes sebességgel emelünk fel, milyen irányú az erő a mozgáshoz képest?",
+      "answers": {
+        "a": "Azonos irányú.",
+        "b": "Ellentétes irányú.",
+        "c": "Merőleges."
+      },
+      "correct": "a",
+      "explanation": "Az emeléshez szükséges erő a mozgással azonos irányú. ✅ Megoldás: Azonos irányú."
+    },
+    {
+      "question": "Mekkora a munka, ha egy testet a Föld vonzása ellenére emelünk?",
+      "answers": {
+        "a": "Negatív.",
+        "b": "Pozitív.",
+        "c": "Nulla."
+      },
+      "correct": "b",
+      "explanation": "A Föld vonzása ellenében végzett munka pozitív, mert az erő és az elmozdulás ellentétes irányú.  ✅ Megoldás: Pozitív."
+    },
+    {
+      "question": "Ha egy testet leejtünk, milyen munkát végez a súlyerő?",
+      "answers": {
+        "a": "Negatív.",
+        "b": "Pozitív.",
+        "c": "Nulla."
+      },
+      "correct": "b",
+      "explanation": "A súlyerő lefelé hat, az elmozdulás is lefelé történik, tehát a munka pozitív. ✅ Megoldás: Pozitív."
+    },
+    {
+      "question": "Mi a hatásfok?",
+      "answers": {
+        "a": "A gép súlya.",
+        "b": "A gép hatásosságát mutató szám.",
+        "c": "A gép mérete."
+      },
+      "correct": "b",
+      "explanation": "A hatásfok megmutatja, hogy a gép a befektetett energiából mennyi hasznos munkát tud végezni.  ✅ Megoldás: A gép hatásosságát mutató szám."
+    },
+    {
+      "question": "Mivel egyenlő a hatásfok?",
+      "answers": {
+        "a": "Hatásfok = hasznos munka / befektetett munka.",
+        "b": "Hatásfok = befektetett munka / hasznos munka.",
+        "c": "Hatásfok = hasznos munka * befektetett munka."
+      },
+      "correct": "a",
+      "explanation": "A hatásfok = hasznos munka / befektetett munka. ✅ Megoldás: Hatásfok = hasznos munka / befektetett munka."
+    },
+    {
+      "question": "Hogyan változik a hatásfok, ha a gép veszteséggel működik?",
+      "answers": {
+        "a": "Nő.",
+        "b": "Csökken.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "Ha a gép veszteséggel működik (pl. súrlódás), akkor a hatásfoka csökken.  ✅ Megoldás: Csökken."
+    },
+    {
+      "question": "Miért nem lehet a hatásfok 100% feletti?",
+      "answers": {
+        "a": "Mert a munka nem adható át tökéletesen.",
+        "b": "Mert a gépnek súlya van.",
+        "c": "Mert a gép sokkal kisebb a valóságnál."
+      },
+      "correct": "a",
+      "explanation": "A hatásfok nem lehet 100%-nál nagyobb, mert a hasznos munka nem lehet nagyobb, mint a befektetett munka. A gyakorlatban mindig vannak veszteségek. ✅ Megoldás: Mert a munka nem adható át tökéletesen."
+    },
+    {
+      "question": "Egy emelő hatásfoka 80%. Ez mit jelent?",
+      "answers": {
+        "a": "A befektetett munka 80%-a hasznosul.",
+        "b": "A hasznos munka 80%-a hasznosul.",
+        "c": "A gép 80 kg súlyt tud emelni."
+      },
+      "correct": "b",
+      "explanation": "A hatásfok 80% azt jelenti, hogy a befektetett energia 80%-a hasznosul munkavégzésre. ✅ Megoldás: A hasznos munka 80%-a hasznosul."
+    },
+    {
+      "question": "Egy testre 10 N erővel hatunk, ami 2 métert mozdul el. Mennyi a munka?",
+      "answers": {
+        "a": "20 J",
+        "b": "12 J",
+        "c": "5 J"
+      },
+      "correct": "a",
+      "explanation": "W = F * s = 10 N * 2 m = 20 J. ✅ Megoldás: 20 J"
+    },
+    {
+      "question": "Melyik erő nem végez munkát, ha egy test vízszintesen mozog?",
+      "answers": {
+        "a": "Súrlódási erő.",
+        "b": "Súlyerő.",
+        "c": "Húzóerő."
+      },
+      "correct": "b",
+      "explanation": "A súlyerő (függőleges) merőleges a vízszintes elmozdulásra, ezért nem végez munkát. ✅ Megoldás: Súlyerő"
+    },
+    {
+      "question": "Mekkora a munka, ha 50 N erővel 0 métert mozdítunk el egy testet?",
+      "answers": {
+        "a": "50 J",
+        "b": "0 J",
+        "c": "5 J"
+      },
+      "correct": "b",
+      "explanation": "W = F * s = 50 N * 0 m = 0 J.  ✅ Megoldás: 0 J"
+    },
+    {
+      "question": "Ha egy testet emelünk, melyik erő végez munkát?",
+      "answers": {
+        "a": "Súlyerő.",
+        "b": "Emelőerő.",
+        "c": "Súrlódási erő."
+      },
+      "correct": "b",
+      "explanation": "Az emelőerő munkát végez, mert a test felfelé mozdul el. ✅ Megoldás: Emelőerő."
+    },
+     {
+      "question": "Ha egy 500 N-os testet 2 méterrel emelünk, mennyi a munka?",
+      "answers": {
+        "a": "1000 J",
+        "b": "250 J",
+        "c": "500 J"
+      },
+      "correct": "a",
+      "explanation": "W = F * s = 500 N * 2 m = 1000 J. ✅ Megoldás: 1000 J"
+    },
+    {
+      "question": "Egy 60 J munkát végzünk, aminek a hatásfoka 60%. Mennyi volt a befektetett munka?",
+      "answers": {
+        "a": "36 J",
+        "b": "100 J",
+        "c": "120 J"
+      },
+      "correct": "b",
+      "explanation": "A hatásfok = hasznos munka / befektetett munka. 0.6 = 60 J / befektetett munka. Befektetett munka = 60/0.6=100 J. ✅ Megoldás: 100 J"
+    },
+    {
+      "question": "Mi történik a munkavégzés során?",
+      "answers": {
+        "a": "Energia alakul át.",
+        "b": "A test tömege nő.",
+        "c": "A test színe változik."
+      },
+      "correct": "a",
+      "explanation": "A munkavégzés során az energia egyik formából a másikba alakul.  ✅ Megoldás: Energia alakul át."
+    },
+    {
+      "question": "Melyik eszköz segít a munkavégzésben?",
+      "answers": {
+        "a": "A mérleg.",
+        "b": "Az emelő.",
+        "c": "A kötél."
+      },
+      "correct": "b",
+      "explanation": "Az emelő a munka megkönnyítésére szolgál. ✅ Megoldás: Az emelő."
+    },
+    {
+      "question": "A gép hatásfoka sosem lehet 100%-nál...",
+      "answers": {
+        "a": "...kisebb.",
+        "b": "...egyenlő.",
+        "c": "...nagyobb."
+      },
+      "correct": "c",
+      "explanation": "A hatásfok nem lehet 100%-nál nagyobb, mert a hasznos munka nem lehet nagyobb, mint a befektetett munka. A gyakorlatban mindig vannak veszteségek. ✅ Megoldás: ...nagyobb."
+    }
+  ]
 }

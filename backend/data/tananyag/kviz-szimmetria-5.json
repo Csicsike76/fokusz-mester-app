@@ -3,6 +3,207 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz szimmetria 5\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz szimmetria 5\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a szimmetriatengely?",
+      "answers": {
+        "a": "A leghosszabb átló.",
+        "b": "A sokszög oldala.",
+        "c": "Az a vonal, amire tükrözve az alakzat önmagára képződik."
+      },
+      "correct": "c",
+      "explanation": "A szimmetriatengely az a vonal, amire tükrözve az alakzat önmagára képződik. ✅ Megoldás: Az a vonal, amire tükrözve az alakzat önmagára képződik."
+    },
+    {
+      "question": "Hány szimmetriatengelye van egy négyzetnek?",
+      "answers": {
+        "a": "2",
+        "b": "4",
+        "c": "1"
+      },
+      "correct": "b",
+      "explanation": "A négyzetnek van két átlós szimmetriatengelye, és van két, az oldalakkal párhuzamos, középen áthaladó tengelye is.  ✅ Megoldás: A négyzetnek 4 szimmetriatengelye van."
+    },
+    {
+      "question": "Melyik betű tengelyesen szimmetrikus?",
+      "answers": {
+        "a": "A",
+        "b": "F",
+        "c": "G"
+      },
+      "correct": "a",
+      "explanation": "Az 'A' betűnek van egy függőleges szimmetriatengelye. Az 'F' és 'G' betűknek nincs. ✅ Megoldás: Az 'A' betű tengelyesen szimmetrikus."
+    },
+    {
+      "question": "Hány szimmetriatengelye van egy körnek?",
+      "answers": {
+        "a": "egy",
+        "b": "négy",
+        "c": "végtelen sok"
+      },
+      "correct": "c",
+      "explanation": "Egy kör bármely, a középpontján áthaladó egyenesre nézve szimmetrikus. ✅ Megoldás: A körnek végtelen sok szimmetriatengelye van."
+    },
+    {
+      "question": "Mi lesz egy P pont tükörképe, ha a P pont rajta van a szimmetriatengelyen?",
+      "answers": {
+        "a": "a P ponttól jobbra lesz",
+        "b": "önmaga",
+        "c": "a P ponttól balra lesz"
+      },
+      "correct": "b",
+      "explanation": "A tengelyen lévő pontok a tükrözés során nem mozdulnak el.  ✅ Megoldás: A pont tükörképe önmaga."
+    },
+    {
+      "question": "Melyik alakzatnak van pontosan egy szimmetriatengelye?",
+      "answers": {
+        "a": "szabályos háromszög",
+        "b": "egyenlő szárú háromszög",
+        "c": "általános háromszög"
+      },
+      "correct": "b",
+      "explanation": "Az egyenlő szárú háromszögnek az alapra merőleges magassága egyben a szimmetriatengelye is. ✅ Megoldás: Az egyenlő szárú háromszögnek van pontosan egy."
+    },
+    {
+      "question": "Mit nevezünk tengelyesen szimmetrikus alakzatnak?",
+      "answers": {
+        "a": "Aminek van szimmetriatengelye.",
+        "b": "Amelyik kerek.",
+        "c": "Amelyiknek van kerülete."
+      },
+      "correct": "a",
+      "explanation": "Ha egy alakzatnak van legalább egy olyan tengelye, amire tükrözve önmagát kapjuk, akkor az alakzat tengelyesen szimmetrikus. ✅ Megoldás: Aminek van szimmetriatengelye."
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "Ha két pont távolsága a tengelytől ugyanakkora, akkor egymás tükörképei.",
+        "b": "Az alakzatok mérete a tükrözéskor megváltozik.",
+        "c": "Az alakzatok a szimmetriatengely mentén megnőnek."
+      },
+      "correct": "a",
+      "explanation": "A tükrözés során a kép a tengely 'túloldalára' kerül. A két pont távolsága a tengelytől ugyanakkora. ✅ Megoldás: Ha a két kép az eredeti pont tükörképe a tengelyre, akkor a pontok egyenlő távol vannak."
+    },
+    {
+      "question": "Hány szimmetriatengelye van egy téglalapnak (ami nem négyzet)?",
+      "answers": {
+        "a": "1",
+        "b": "2",
+        "c": "4"
+      },
+      "correct": "b",
+      "explanation": "A téglalapnak 2 szimmetriatengelye van (a középvonalai). ✅ Megoldás: A téglalapnak 2 szimmetriatengelye van."
+    },
+    {
+      "question": "Melyik természeti forma mutat gyakran tengelyes szimmetriát?",
+      "answers": {
+        "a": "egy felhő",
+        "b": "egy pillangó",
+        "c": "egy kő"
+      },
+      "correct": "b",
+      "explanation": "A pillangó két szárnya szinte tökéletes tükörképe egymásnak.  ✅ Megoldás: A pillangó szimmetrikus."
+    },
+    {
+      "question": "Hány szimmetriatengelye van egy szabályos ötszögnek?",
+      "answers": {
+        "a": "5",
+        "b": "1",
+        "c": "10"
+      },
+      "correct": "a",
+      "explanation": "A szabályos sokszögeknek mindig annyi szimmetriatengelyük van, ahány oldaluk. A szabályos ötszögnek 5 oldala van, tehát 5 szimmetriatengelye van (a csúcsokat a szemközti oldal felezőpontjával összekötő egyenesek). ✅ Megoldás: A szabályos ötszögnek 5 szimmetriatengelye van."
+    },
+    {
+      "question": "Melyik betűnek van vízszintes és függőleges szimmetriatengelye is?",
+      "answers": {
+        "a": "A",
+        "b": "B",
+        "c": "H"
+      },
+      "correct": "c",
+      "explanation": "A 'H' betűt a közepén vízszintesen és függőlegesen is 'félbehajthatjuk', hogy a részek fedjék egymást. ✅ Megoldás: A 'H' betűnek mindkét irányú tengelye van."
+    },
+    {
+      "question": "Egy pont 4 cm-re van a szimmetriatengelytől. Milyen messze van a tükörképe a tengelytől?",
+      "answers": {
+        "a": "8 cm",
+        "b": "4 cm",
+        "c": "2 cm"
+      },
+      "correct": "b",
+      "explanation": "A tükrözés távolságtartó a tengelyhez képest. ✅ Megoldás: A tükörkép is 4 cm-re van a tengelytől."
+    },
+    {
+      "question": "Melyik alakzatnak nincs szimmetriatengelye?",
+      "answers": {
+        "a": "általános háromszög",
+        "b": "szabályos hatszög",
+        "c": "rombusz"
+      },
+      "correct": "a",
+      "explanation": "Az általános háromszögnek, aminek minden oldala és szöge különböző, nincs szimmetriatengelye.  ✅ Megoldás: Az általános háromszögnek nincs."
+    },
+    {
+      "question": "Mi a tükrözés?",
+      "answers": {
+        "a": "Egy alakzat körüli forgatás.",
+        "b": "Az alakzat átmásolása.",
+        "c": "Egy alakzat 'tükörképe' egy egyenesre."
+      },
+      "correct": "c",
+      "explanation": "Tükrözéskor egy alakzatnak a tükörképét kapjuk, ami egy egyenesre nézve szimmetrikus. ✅ Megoldás: Egy alakzat 'tükörképe' egy egyenesre."
+    },
+    {
+      "question": "Egy egyenlő szárú háromszög alapja 10 cm, szárai 13 cm hosszúak. Milyen hosszú a magasság?",
+      "answers": {
+        "a": "10 cm",
+        "b": "12 cm",
+        "c": "16 cm"
+      },
+      "correct": "b",
+      "explanation": "Pitagorasz-tétel. A szimmetria miatt a magasság felezi az alapot, így a derékszögű háromszög befogói 5 cm és 12 cm, átfogója 13 cm. ✅ Megoldás: 12 cm"
+    },
+    {
+      "question": "Melyik a 30°-os szög kiegészítő szöge?",
+      "answers": {
+        "a": "150°",
+        "b": "120°",
+        "c": "60°"
+      },
+      "correct": "a",
+      "explanation": "A kiegészítő szögek összege 180°.  180°-30°=150°. ✅ Megoldás: 150°"
+    },
+    {
+      "question": "Melyik a helyes fogalma a síknak?",
+      "answers": {
+        "a": "A sík egyenesek gyűjteménye.",
+        "b": "Egy görbe vonal.",
+        "c": "A sík minden pontja azonos távolságra van a központi ponttól."
+      },
+      "correct": "a",
+      "explanation": "A sík egyenesek gyűjteménye. ✅ Megoldás: A sík egyenesek halmaza."
+    },
+     {
+      "question": "Melyik állítás igaz? (ismétlés)",
+      "answers": {
+        "a": "A szimmetriatengely egyenes.",
+        "b": "A szimmetriatengely kör.",
+        "c": "Az egyeneseknek nincs szimmetriatengelye."
+      },
+      "correct": "a",
+      "explanation": "A szimmetriatengely egyenes. ✅ Megoldás: A szimmetriatengely egyenes"
+    },
+    {
+      "question": "Mi a metsző egyenesek közös pontjának a neve?",
+      "answers": {
+        "a": "Középpont",
+        "b": "Metszéspont",
+        "c": "Tengely"
+      },
+      "correct": "b",
+      "explanation": "A metsző egyenesek közös pontját metszéspontnak nevezzük. ✅ Megoldás: Metszéspont"
+    }
+  ]
 }

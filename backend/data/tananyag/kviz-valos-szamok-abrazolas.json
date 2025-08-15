@@ -1,8 +1,250 @@
 {
   "title": "Kviz valos szamok abrazolas",
   "subject": "altalanos",
-  "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Kviz valos szamok abrazolas\" című tananyag.",
-  "questions": []
+  "grade": 4,
+  "category": "iskolai",
+  "description": "Ez a kvíz a valós számok ábrázolásának témakörét fedi le.",
+  "questions": [
+    {
+      "question": "1. Mit jelent az, hogy a 0 a számtengelyen az&nbsp;<em>origó</em>?",
+      "answers": {
+        "a": "Ez a kiindulópont, amelytől jobbra a pozitív, balra a negatív számokat jelöljük",
+        "b": "A számtengely legnagyobb értéke",
+        "c": "A negatív számok összessége"
+      },
+      "correct": "a",
+      "explanation": "Az origó a számtengely nullapontja. Ettől indulunk, és jobbra vannak a pozitív, balra a negatív számok."
+    },
+    {
+      "question": "2. Melyik állítás igaz az 5 és −5 számpárra?",
+      "answers": {
+        "a": "Azonos helyen vannak a tengelyen",
+        "b": "Egyenlő távol vannak az origótól, de ellentétes oldalon",
+        "c": "−5 közelebb van az origóhoz"
+      },
+      "correct": "b",
+      "explanation": "Az 5 és -5 ugyanannyira messze van a 0-tól, de különböző irányban. Az egyik a 0-tól jobbra, a másik balra."
+    },
+    {
+      "question": "3. Hogyan jelöljük a (−3, 2] intervallumot a számtengelyen?",
+      "answers": {
+        "a": "Nyitott kör −3-nál, zárt kör 2-nél, közte folytonos vonal",
+        "b": "Zárt kör −3-nál, nyitott kör 2-nél, közte szaggatott vonal",
+        "c": "Mindkét végpont zárt körrel"
+      },
+      "correct": "a",
+      "explanation": "A ( ) jel nyitott kört jelent, nem tartozik a szám. A [ ] jel zárt kört jelent, ide tartozik a szám. -3-nál nyitott, 2-nél zárt."
+    },
+    {
+      "question": "4. Mekkora távolságra van a √2 a 0-tól a tengelyen?",
+      "answers": {
+        "a": "2 egységre",
+        "b": "1 egységre",
+        "c": "≈ 1,414 egységre"
+      },
+      "correct": "c",
+      "explanation": "A √2 egy kicsit több, mint 1,4. Ha megnézed a számtengelyen, a 0-tól kb. 1,4-re van."
+    },
+    {
+      "question": "5. Melyik jelölés mutatja helyesen, hogy a π > 3?",
+      "answers": {
+        "a": "3 < π",
+        "b": "π < 3",
+        "c": "π = 3"
+      },
+      "correct": "a",
+      "explanation": "A π (pí) egy kicsit több, mint 3. A helyes jelölés: 3 < π, azaz 3 kisebb, mint π."
+    },
+    {
+      "question": "6. A −2,7 szám melyik intervallumba esik?",
+      "answers": {
+        "a": "(−2, −1)",
+        "b": "[−1, 0)",
+        "c": "(−3, −2)"
+      },
+      "correct": "c",
+      "explanation": "-3 kisebb, mint -2,7, ami kisebb, mint -2. Tehát a -2,7 a -3 és a -2 közé esik."
+    },
+    {
+      "question": "7. Mi az abszolút érték geometriai jelentése?",
+      "answers": {
+        "a": "A szám előjele",
+        "b": "Távolság az origótól a tengelyen",
+        "c": "A szám reciproka"
+      },
+      "correct": "b",
+      "explanation": "Az abszolút érték a számnak a 0-tól való távolságát jelenti a számegyenesen."
+    },
+    {
+      "question": "8. Melyik szám következik a tengelyen közvetlenül a 1,5 és 1,6 közé beosztott centiméteres skálán?",
+      "answers": {
+        "a": "1,55",
+        "b": "1,45",
+        "c": "1,65"
+      },
+      "correct": "a",
+      "explanation": "Ha 1,5 és 1,6 között van a skála, akkor a felező pont 1,55."
+    },
+    {
+      "question": "9. Hogyan jelöljük a 2,3 periódikus számot a tengelyen?",
+      "answers": {
+        "a": "Ugyanott, mint a 2,33",
+        "b": "Két 2 és 3 közti pont közé, picit közelebb a 2,4-hez",
+        "c": "Pontosan a 2,35 helynél"
+      },
+      "correct": "b",
+      "explanation": "A 2,3 periódikus a 2,333...-et jelenti. Ez közelebb van a 2,3-hoz mint a 2,4-hez."
+    },
+    {
+      "question": "10. Melyik egyenlőtlenség mutatja, hogy x balra van a −1-től?",
+      "answers": {
+        "a": "x ≥ −1",
+        "b": "x < −1",
+        "c": "x > −1"
+      },
+      "correct": "b",
+      "explanation": "A bal oldalon kisebb számok vannak, ezért x < -1."
+    },
+    
+    {
+      "question": "12. Hogy jelöljük a zárt intervallumot, amely −4-től 0-ig tart?",
+      "answers": {
+        "a": "(−4, 0)",
+        "b": "[−4, 0)",
+        "c": "[−4, 0]"
+      },
+      "correct": "c",
+      "explanation": "A zárt intervallumban a végpontok is benne vannak. A szögletes zárójelek ezt jelzik: [-4,0]."
+    },
+    {
+      "question": "13. Melyik szám NEM jelölhető pontosan a tengelyen?",
+      "answers": {
+        "a": "√3",
+        "b": "√−2",
+        "c": "π"
+      },
+      "correct": "b",
+      "explanation": "A √-2 nem létezik. A többi jelölhető a számtengelyen."
+    },
+    {
+      "question": "14. Melyik jelölés mutatja, hogy a valós számok sűrűek a tengelyen?",
+      "answers": {
+        "a": "|a−b| ≥ 1",
+        "b": "∃ n ∈ ℕ: a < n < b",
+        "c": "∀ a<b ∈ ℝ, ∃ c: a<c<b"
+      },
+      "correct": "c",
+      "explanation": "A valós számok sűrűek, ami azt jelenti, hogy bármely két szám között mindig van egy másik szám. Ez a helyes jelölés."
+    },
+    {
+      "question": "15. Mi a reciprok (inverz) szám tengelyen vett helyének sajátossága?",
+      "answers": {
+        "a": "Ha x>1, akkor 1/x a 0 és 1 közé esik, ugyanazon az oldalon",
+        "b": "Mindig jobbra van az 1-nél",
+        "c": "Mindig balra van a 0-tól"
+      },
+      "correct": "a",
+      "explanation": "A reciprok (1/x) a számnak a tükörképe az 1-hez képest. Ha x nagyobb, mint 1, akkor a reciproka 0 és 1 között lesz."
+    },
+    {
+      "question": "16. Melyik ábrázolási lépés helytelen?",
+      "answers": {
+        "a": "Egységnyi beosztás készítése",
+        "b": "Negatív számokat jobbra, pozitívakat balra jelöl",
+        "c": "Nyilak elhelyezése a tengely két végén"
+      },
+      "correct": "b",
+      "explanation": "A helyes irány: pozitív számok jobbra, negatívok balra."
+    },
+    {
+      "question": "17. Mi a 1,732… (≈√3) és 1,73 közti különbség jelentősége ábrázoláskor?",
+      "answers": {
+        "a": "Nincs különbség",
+        "b": "A 1,73 balra esik a √3-tól",
+        "c": "A √3 kicsit balra esik a 1,73 jelöléstől"
+      },
+      "correct": "c",
+      "explanation": "A √3 egy kicsit nagyobb, mint 1,73, ezért a √3 jobbra van a 1,73-tól."
+    },
+    {
+      "question": "18. Hova kerül a −√2 szám?",
+      "answers": {
+        "a": "Bal oldalra, kb. −1,414-hez",
+        "b": "Jobb oldalra, 1,414-hez",
+        "c": "Az origóba"
+      },
+      "correct": "a",
+      "explanation": "A −√2 a 0-tól balra helyezkedik el, kb. -1,414-nél."
+    },
+    {
+      "question": "19. Melyik állítás igaz?",
+      "answers": {
+        "a": "Nincsenek valós számok a 0 és 0,1 között",
+        "b": "A 0 és 0,1 között végtelen sok valós szám van",
+        "c": "Pontosan 10 tizedes tört található ott"
+      },
+      "correct": "b",
+      "explanation": "A valós számok sűrűek, így bármely két szám között végtelen sok másik található."
+    },
+    {
+      "question": "20. Melyik egyenlőtlenség írja le, hogy x a 2 és 5 közé esik, de nem lehet 5?",
+      "answers": {
+        "a": "2 ≤ x ≤ 5",
+        "b": "2 ≤ x < 5",
+        "c": "2 < x ≤ 5"
+      },
+      "correct": "b",
+      "explanation": "2 ≤ x < 5. A <= azt jelenti, hogy a 2 benne van, az < pedig azt, hogy az 5 nincs benne."
+    },
+    {
+      "question": "21. Ha egy szám 0,001-nél nagyobb, de 0,01-nél kisebb, melyik jelölés helyes?",
+      "answers": {
+        "a": "(0,001, 0,01]",
+        "b": "[0,001, 0,01]",
+        "c": "(0,001, 0,01)"
+      },
+      "correct": "c",
+      "explanation": "Mindkét végpont ki van zárva. A helyes jelölés: (0,001, 0,01)."
+    },
+    {
+      "question": "22. A |x| = 4 egyenlet megoldásai hol vannak?",
+      "answers": {
+        "a": "−4 és 4 pontjaiban",
+        "b": "Csak 4-nél",
+        "c": "A 0 és 4 közti szakaszon"
+      },
+      "correct": "a",
+      "explanation": "Az abszolút érték azt jelenti, hogy a szám 0-tól való távolsága. |x|=4, azaz a szám 4 egységre van a 0-tól. Ez két szám lehet: -4 és 4."
+    },
+    {
+      "question": "23. Egy szám <em>x</em> helyét az origótól 7 egységnyire jelölöd jobbra. Melyik számról van szó?",
+      "answers": {
+        "a": "−7",
+        "b": "7",
+        "c": "±7"
+      },
+      "correct": "b",
+      "explanation": "A jobbra a pozitív irány, így a 7."
+    },
+    {
+      "question": "24. Melyik szám nagyobb?",
+      "answers": {
+        "a": "−2",
+        "b": "−3",
+        "c": "−2 nagyobb, mert kevésbé negatív"
+      },
+      "correct": "c",
+      "explanation": "A számtengelyen a jobbra lévő számok nagyobbak. A -2 közelebb van a 0-hoz, ezért nagyobb, mint a -3."
+    },
+    {
+      "question": "25. Melyik az a szám, amelynek nincs pontos helye a tizedes törtek között, de irracionálisként mégis elhelyezhető?",
+      "answers": {
+        "a": "π",
+        "b": "2,5",
+        "c": "0,125"
+      },
+      "correct": "a",
+      "explanation": "A π (pí) egy irracionális szám, nem lehet pontosan tizedes tört formájában felírni, de a számtengelyen el tudjuk helyezni."
+    }
+  ]
 }

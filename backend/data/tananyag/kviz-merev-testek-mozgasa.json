@@ -3,6 +3,247 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz merev testek mozgasa\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz merev testek mozgasa\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a merev test?",
+      "answers": {
+        "a": "Egy olyan idealizált test, amelynek alakja és mérete az erők hatására sem változik.",
+        "b": "Egy nagyon kemény anyagból készült test.",
+        "c": "Egy test, amely nem tud mozogni."
+      },
+      "correct": "a",
+      "explanation": "A merev test egy fizikai modell, amelyben eltekintünk a testek valós deformációjától. Ez az egyszerűsítés lehetővé teszi, hogy a mozgását könnyebben leírjuk. ✅ Megoldás: Egy olyan idealizált test, amelynek alakja és mérete az erők hatására sem változik."
+    },
+    {
+      "question": "Milyen mozgást végez egy lecsúszó, de nem pörgő szánkó?",
+      "answers": {
+        "a": "Tiszta haladó mozgást (transzlációt).",
+        "b": "Tiszta forgó mozgást (rotációt).",
+        "c": "Általános mozgást."
+      },
+      "correct": "a",
+      "explanation": "Haladó mozgás (transzláció) során a test minden pontja azonos pályán, párhuzamosan mozdul el. A csúszó szánkó minden része ugyanúgy mozog lefelé. ✅ Megoldás: Tiszta haladó mozgást (transzlációt)."
+    },
+    {
+      "question": "Milyen mozgást végez egy óra másodpercmutatójának hegye?",
+      "answers": {
+        "a": "Tiszta forgó mozgást.",
+        "b": "Tiszta haladó mozgást.",
+        "c": "Nyugalomban van."
+      },
+      "correct": "a",
+      "explanation": "Forgó mozgás (rotáció) során a test pontjai egy rögzített tengely körül körpályán mozognak. A másodpercmutató hegye az óra középpontja körül végez forgó mozgást. ✅ Megoldás: Tiszta forgó mozgást."
+    },
+    {
+      "question": "Mi a forgástengely?",
+      "answers": {
+        "a": "Az az egyenes, amely körül a merev test forog.",
+        "b": "A test súlypontja.",
+        "c": "A test sebességvektora."
+      },
+      "correct": "a",
+      "explanation": "A forgó mozgást végző merev testnek mindig van egy (valós vagy képzeletbeli) egyenese, amelynek pontjai a mozgás során helyben maradnak. Ez a forgástengely. ✅ Megoldás: Az az egyenes, amely körül a merev test forog."
+    },
+    {
+      "question": "Melyik test végez haladó és forgó mozgást egyszerre?",
+      "answers": {
+        "a": "Egy guruló kerék.",
+        "b": "Egy lift.",
+        "c": "Egy körhinta."
+      },
+      "correct": "a",
+      "explanation": "A guruló kerék egy általános mozgást végez: a középpontja halad előre (transzláció), miközben a kerék pontjai e középpont körül forognak (rotáció). ✅ Megoldás: Egy guruló kerék."
+    },
+    {
+      "question": "Egy autó kereke forog. A kerék tengelye a kocsihoz képest...",
+      "answers": {
+        "a": "...nyugalomban van.",
+        "b": "...forgó mozgást végez.",
+        "c": "...haladó mozgást végez."
+      },
+      "correct": "a",
+      "explanation": "Bár a kerék forog, a forgásának középpontja, a tengely, a kocsi vázához van rögzítve, tehát ahhoz képest nyugalomban van. (A talajhoz képest persze halad.) ✅ Megoldás: ...nyugalomban van."
+    },
+    {
+      "question": "Milyen mozgást végez egy dodzsem?",
+      "answers": {
+        "a": "Haladó és forgó mozgás keverékét.",
+        "b": "Csak haladó mozgást.",
+        "c": "Csak forgó mozgást."
+      },
+      "correct": "a",
+      "explanation": "A dodzsem a pályán halad előre, hátra és oldalra (haladó mozgás), miközben gyakran a saját tengelye körül is forog, különösen egy ütközés után. Ez egy általános, összetett mozgás.  ✅ Megoldás: Haladó és forgó mozgás keverékét."
+    },
+    {
+      "question": "Mi a transzláció?",
+      "answers": {
+        "a": "A haladó mozgás másik neve.",
+        "b": "A forgó mozgás másik neve.",
+        "c": "A test gyorsulása."
+      },
+      "correct": "a",
+      "explanation": "A transzláció a tiszta haladó mozgás tudományos elnevezése, amikor a test minden pontja párhuzamos pályán mozdul el.  ✅ Megoldás: A haladó mozgás másik neve."
+    },
+    {
+      "question": "Mi jellemző a tiszta haladó mozgásra?",
+      "answers": {
+        "a": "A test pontjai különböző sebességgel mozognak.",
+        "b": "A test minden pontja ugyanakkora elmozdulást tesz meg ugyanannyi idő alatt.",
+        "c": "A test egy pont körül forog."
+      },
+      "correct": "b",
+      "explanation": "A tiszta haladó mozgás (transzláció) lényege, hogy a test nem forog el. Ennek következtében minden pontja azonos alakú és hosszúságú pályát ír le. ✅ Megoldás: A test minden pontja ugyanakkora elmozdulást tesz meg ugyanannyi idő alatt."
+    },
+    {
+      "question": "Mi jellemző a tiszta forgó mozgásra?",
+      "answers": {
+        "a": "A test minden pontja egyenes vonalban mozog.",
+        "b": "A test pontjai a forgástengely körül körpályán mozognak.",
+        "c": "A test minden pontja nyugalomban van."
+      },
+      "correct": "b",
+      "explanation": "Forgó mozgás során a test pontjai (a tengely pontjait kivéve) koncentrikus körpályákat írnak le a forgástengely körül. ✅ Megoldás: A test pontjai a forgástengely körül körpályán mozognak."
+    },
+    {
+      "question": "Egy focilabda repül a kapu felé, miközben pörög. Milyen mozgást végez?",
+      "answers": {
+        "a": "Csak forgó mozgást.",
+        "b": "Haladó és forgó mozgás összegét (általános mozgást).",
+        "c": "Csak haladó mozgást."
+      },
+      "correct": "b",
+      "explanation": "A labda súlypontja egy görbe vonalú pályán halad a kapu felé (ez a haladó mozgás), miközben a labda a súlypontja körül forog is. Ez a két mozgás együtt adja a labda általános mozgását. ✅ Megoldás: Haladó és forgó mozgás összegét (általános mozgást)."
+    },
+    {
+      "question": "Egy csúszdán lecsúszó gyerek...",
+      "answers": {
+        "a": "...forgó mozgást végez.",
+        "b": "...haladó mozgást végez.",
+        "c": "...nyugalomban van."
+      },
+      "correct": "b",
+      "explanation": "A csúszdán lecsúszó gyerek teste nem forog, hanem a csúszda pályáját követve halad. Ez egy görbe vonalú haladó mozgás. ✅ Megoldás: ...haladó mozgást végez."
+    },
+    {
+      "question": "Egy ajtó a zsanérjai körül...",
+      "answers": {
+        "a": "...haladó mozgást végez.",
+        "b": "...forgó mozgást végez.",
+        "c": "...általános mozgást végez."
+      },
+      "correct": "b",
+      "explanation": "Az ajtó nyitásakor és csukásakor a zsanérok által meghatározott függőleges egyenes körül forog. Ez egy tiszta forgó mozgás. ✅ Megoldás: ...forgó mozgást végez."
+    },
+    {
+      "question": "Melyik állítás igaz a forgó mozgást végző merev test pontjaira?",
+      "answers": {
+        "a": "Mindegyik pont sebessége ugyanakkora.",
+        "b": "A forgástengelytől távolabbi pontok sebessége nagyobb.",
+        "c": "A forgástengelyhez közelebbi pontok sebessége nagyobb."
+      },
+      "correct": "b",
+      "explanation": "Bár a test minden pontja ugyanakkora szögsebességgel forog, a kerületi sebességük a tengelytől mért távolságtól függ. A távolabbi pontoknak ugyanannyi idő alatt nagyobb utat kell megtenniük, ezért a sebességük is nagyobb. ✅ Megoldás: A forgástengelytől távolabbi pontok sebessége nagyobb."
+    },
+    {
+      "question": "Miért fontos a mozgás megértése?",
+      "answers": {
+        "a": "A testek alakjának megértéséhez.",
+        "b": "A természetben zajló folyamatok megértéséhez, a mindennapi életben a mozgó testek biztonságos kezeléséhez.",
+        "c": "A hangok megértéséhez."
+      },
+      "correct": "b",
+      "explanation": "A mozgás törvényszerűségeinek ismerete elengedhetetlen a természetben zajló folyamatok megértéséhez. ✅ Megoldás: A természetben zajló folyamatok megértéséhez, a mindennapi életben a mozgó testek biztonságos kezeléséhez."
+    },
+     {
+      "question": "Egy autó egyenes úton halad. Milyen mozgást végez?",
+      "answers": {
+        "a": "Egyenletes mozgást.",
+        "b": "Változó mozgást.",
+        "c": "Általános mozgást."
+      },
+      "correct": "a",
+      "explanation": "Ha egyenes úton, állandó sebességgel halad, akkor egyenletes a mozgása. ✅ Megoldás: Egyenletes mozgást."
+    },
+    {
+      "question": "Ha egy test a sebességét változtatja, milyen mozgást végez?",
+      "answers": {
+        "a": "Egyenletes mozgást.",
+        "b": "Gyorsuló mozgást.",
+        "c": "Változó mozgást."
+      },
+      "correct": "c",
+      "explanation": "Ha a test sebessége változik, a mozgás nem egyenletes, hanem változó. ✅ Megoldás: Változó mozgást."
+    },
+    {
+      "question": "Mi a neve annak a mozgásnak, amely során a test egyenes vonalban halad, és a sebessége állandó?",
+      "answers": {
+        "a": "Gyorsuló mozgás.",
+        "b": "Egyenletes mozgás.",
+        "c": "Változó mozgás."
+      },
+      "correct": "b",
+      "explanation": "A tiszta haladó mozgás esetén, ha a sebesség állandó, egyenletes mozgásról beszélünk.  ✅ Megoldás: Egyenletes mozgás."
+    },
+    {
+      "question": "Mi a neve annak a mozgásnak, amikor a sebesség nem állandó?",
+      "answers": {
+        "a": "Egyenletes mozgás.",
+        "b": "Gyorsuló mozgás.",
+        "c": "Változó mozgás."
+      },
+      "correct": "c",
+      "explanation": "Ha a sebesség változik (pl. gyorsul vagy lassul), a mozgás változó. ✅ Megoldás: Változó mozgás."
+    },
+    {
+      "question": "Ha egy test gyorsul, a sebessége...",
+      "answers": {
+        "a": "Állandó.",
+        "b": "Nő.",
+        "c": "Csökken."
+      },
+      "correct": "b",
+      "explanation": "A gyorsulás a sebesség növekedését jelenti. ✅ Megoldás: Nő."
+    },
+    {
+      "question": "Ha egy test lassul, a sebessége...",
+      "answers": {
+        "a": "Nő.",
+        "b": "Csökken.",
+        "c": "Állandó."
+      },
+      "correct": "b",
+      "explanation": "A lassulás a sebesség csökkenését jelenti. ✅ Megoldás: Csökken."
+    },
+    {
+      "question": "Ha egy test körbe-körbe mozog, a mozgása...",
+      "answers": {
+        "a": "Tiszta haladó.",
+        "b": "Tiszta forgó.",
+        "c": "Egyenletes."
+      },
+      "correct": "b",
+      "explanation": "A körbe-körbe mozgás a forgó mozgás egyik formája. ✅ Megoldás: Tiszta forgó."
+    },
+    {
+      "question": "Melyik mozgás esetén nem változik a sebesség nagysága?",
+      "answers": {
+        "a": "Gyorsuló mozgás.",
+        "b": "Egyenletes körmozgás.",
+        "c": "Változó mozgás."
+      },
+      "correct": "b",
+      "explanation": "Egyenletes körmozgásnál a sebesség nagysága állandó, csak az iránya változik folyamatosan. ✅ Megoldás: Egyenletes körmozgás."
+    },
+    {
+      "question": "Melyik jármű végzi a legbonyolultabb mozgást, ami több mozgás kombinációja?",
+      "answers": {
+        "a": "Az autó",
+        "b": "A bicikli",
+        "c": "A repülőgép"
+      },
+      "correct": "c",
+      "explanation": "A repülőgép a levegőben halad előre (haladó), fordul, emelkedik, süllyed (általános mozgás), a pilóta emellett forgatja is a kerekeket. A több mozgás kombinációja. ✅ Megoldás: A repülőgép"
+    }
+  ]
 }

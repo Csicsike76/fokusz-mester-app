@@ -3,6 +3,227 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz tavolsagmeres\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz távolságmérés\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik a legrövidebb távolság két pont között?",
+      "answers": {
+        "a": "A görbe vonal a két pont között.",
+        "b": "A két pontot összekötő egyenes szakasz.",
+        "c": "A körív a két pont között."
+      },
+      "correct": "b",
+      "explanation": "A legrövidebb távolság két pont között az őket összekötő egyenes szakasz.  ✅ Megoldás: A két pontot összekötő egyenes szakasz."
+    },
+    {
+      "question": "Melyik a távolság mérésére szolgáló SI alapmértékegysége?",
+      "answers": {
+        "a": "kilogramm (kg)",
+        "b": "méter (m)",
+        "c": "másodperc (s)"
+      },
+      "correct": "b",
+      "explanation": "A hosszúság (és a távolság) SI alapmértékegysége a méter (m).  ✅ Megoldás: méter (m)"
+    },
+    {
+      "question": "Mennyi 3 kilométer méterben?",
+      "answers": {
+        "a": "30 m",
+        "b": "300 m",
+        "c": "3000 m"
+      },
+      "correct": "c",
+      "explanation": "1 km = 1000 m, tehát 3 km = 3 * 1000 m = 3000 m. ✅ Megoldás: 3000 m."
+    },
+    {
+      "question": "Melyik a távolság mérésére használt eszköz?",
+      "answers": {
+        "a": "hőmérő",
+        "b": "mérleg",
+        "c": "vonalzó vagy mérőszalag"
+      },
+      "correct": "c",
+      "explanation": "A távolságot vonalzóval, mérőszalaggal vagy más mérőeszközzel mérjük, ami a hosszúságot méri. ✅ Megoldás: vonalzó vagy mérőszalag."
+    },
+    {
+      "question": "Hogyan tudod megmérni a szobád hosszát?",
+      "answers": {
+        "a": "Lépésekkel.",
+        "b": "Egy mérőszalaggal.",
+        "c": "A szoba súlyával."
+      },
+      "correct": "b",
+      "explanation": "A szoba hosszát legpontosabban egy mérőszalaggal mérhetjük. ✅ Megoldás: Egy mérőszalaggal."
+    },
+    {
+      "question": "Melyik a pontosabb: a lépésekkel, vagy a mérőszalaggal való mérés?",
+      "answers": {
+        "a": "A lépésekkel való mérés.",
+        "b": "A mérőszalaggal való mérés.",
+        "c": "Mindkettő egyforma pontos."
+      },
+      "correct": "b",
+      "explanation": "A mérőszalaggal való mérés sokkal pontosabb, mint a lépésekkel való mérés, mert a lépések hossza változhat. ✅ Megoldás: A mérőszalaggal való mérés."
+    },
+    {
+      "question": "Miért fontos a mérés a mindennapi életben?",
+      "answers": {
+        "a": "Mert a méretek nélkül nem lehet semmit csinálni.",
+        "b": "Mert segít, hogy pontosan megtervezzük és megvalósítsuk a dolgokat.",
+        "c": "Mert a mérés unalmas."
+      },
+      "correct": "b",
+      "explanation": "A mérés a tervezés és a megvalósítás alapvető része a mindennapi életben. ✅ Megoldás: Mert segít, hogy pontosan megtervezzük és megvalósítsuk a dolgokat."
+    },
+    {
+      "question": "Ha egy térképen 1 cm a valóságban 100 métert jelent, mit jelent ez?",
+      "answers": {
+        "a": "A térkép méretaránya 1:100.",
+        "b": "A térkép méretaránya 1:10000.",
+        "c": "A valóság távolsága 100-szor kisebb a térképen."
+      },
+      "correct": "b",
+      "explanation": "1 cm a térképen 100 m a valóságban. 100 m = 100 * 100 cm = 10000 cm. Ez 1:10000-es méretarányt jelent. ✅ Megoldás: A térkép méretaránya 1:10000."
+    },
+    {
+      "question": "Ha egy térképen két város távolsága 5 cm, és a méretarány 1:20 000, akkor milyen messze vannak a városok a valóságban?",
+      "answers": {
+        "a": "1 km",
+        "b": "1000 méter",
+        "c": "Mindkettő helyes."
+      },
+      "correct": "c",
+      "explanation": "A méretarány 1:20 000 azt jelenti, hogy a valóságban minden méret 20 000-szer nagyobb, mint a térképen. A valóságban a távolság: 5 cm * 20 000 = 100 000 cm = 1000 m = 1 km. ✅ Megoldás: Mindkettő helyes."
+    },
+    {
+      "question": "Mi a helyes sorrend, ha a távolságokat a legrövidebbtől a leghosszabbig rendezzük?",
+      "answers": {
+        "a": "mm, cm, m, km",
+        "b": "km, m, cm, mm",
+        "c": "cm, mm, m, km"
+      },
+      "correct": "a",
+      "explanation": "A helyes sorrend a legrövidebbtől a leghosszabbig: mm, cm, m, km. ✅ Megoldás: mm, cm, m, km"
+    },
+    {
+      "question": "Ha egy vonalzóm van, melyik távolságot tudom a legpontosabban megmérni?",
+      "answers": {
+        "a": "A szobám hosszát.",
+        "b": "Egy ceruza hosszát.",
+        "c": "A Föld és a Hold távolságát."
+      },
+      "correct": "b",
+      "explanation": "A vonalzóval kisebb távolságokat tudunk pontosan mérni. A szobád hossza nagy, a Föld és a Hold pedig nagyon távol vannak.  ✅ Megoldás: Egy ceruza hosszát"
+    },
+    {
+      "question": "Ha egy 1:50 léptékű makettben egy elem 10 cm hosszú, mennyi a hossza a valóságban?",
+      "answers": {
+        "a": "50 cm",
+        "b": "500 cm",
+        "c": "0.2 cm"
+      },
+      "correct": "b",
+      "explanation": "Az 1:50 azt jelenti, hogy a valóságban minden méret 50-szer nagyobb, mint a maketten. A valós hossz: 10 cm * 50 = 500 cm, ami 5 méter. ✅ Megoldás: 500 cm"
+    },
+    {
+      "question": "Miért nem tudjuk pontosan megmérni a távolságokat?",
+      "answers": {
+        "a": "Mert a mérőeszközök nem tökéletesek, és vannak mérési hibák.",
+        "b": "Mert a levegő változik.",
+        "c": "Mert nem tudjuk megállítani a mozgást."
+      },
+      "correct": "a",
+      "explanation": "A mérések során mindig vannak hibák, mert a mérőeszközök nem tökéletesek. ✅ Megoldás: Mert a mérőeszközök nem tökéletesek, és vannak mérési hibák."
+    },
+    {
+      "question": "Melyik eszköz nem alkalmas a távolság mérésére?",
+      "answers": {
+        "a": "Lézeres távolságmérő.",
+        "b": "Szögmérő.",
+        "c": "Mérőszalag."
+      },
+      "correct": "b",
+      "explanation": "A szögmérő a szögek mérésére szolgál. A lézeres távolságmérő és a mérőszalag a távolság mérésére használhatók. ✅ Megoldás: Szögmérő"
+    },
+    {
+      "question": "Miért fontos a távolság pontos mérése?",
+      "answers": {
+        "a": "A térbeli helyzetek pontos meghatározásához, a navigációhoz, a tervezéshez.",
+        "b": "A szép rajzhoz.",
+        "c": "Hogy sok időt töltsünk."
+      },
+      "correct": "a",
+      "explanation": "A pontos távolságmérés a térbeli helyzetek pontos meghatározásához, a navigációhoz, a tervezéshez (építkezés, térképészet) elengedhetetlen.  ✅ Megoldás: A térbeli helyzetek pontos meghatározásához, a navigációhoz, a tervezéshez."
+    },
+    {
+      "question": "Hogyan váltunk át cm-ről mm-re?",
+      "answers": {
+        "a": "Szorzunk 10-zel.",
+        "b": "Osztunk 10-zel.",
+        "c": "Szorzunk 100-zal."
+      },
+      "correct": "a",
+      "explanation": "1 cm = 10 mm. Mivel nagyobb egységből kisebbe váltunk, szorzunk.  ✅ Megoldás: Szorzunk 10-zel."
+    },
+    {
+      "question": "Mennyi 2,5 km méterben?",
+      "answers": {
+        "a": "250 m",
+        "b": "2500 m",
+        "c": "25000 m"
+      },
+      "correct": "b",
+      "explanation": "1 km = 1000 m. 2,5 km = 2,5 * 1000 m = 2500 m.  ✅ Megoldás: 2500 m"
+    },
+    {
+      "question": "Ha egy térképen 1 cm 500 métert jelent, akkor milyen a méretarány?",
+      "answers": {
+        "a": "1:50",
+        "b": "1:500",
+        "c": "1:50000"
+      },
+      "correct": "c",
+      "explanation": "A valóságban 1 cm a térképen 500 méternek felel meg. 500 m = 500 * 100 cm = 50000 cm. Így a méretarány 1:50000. ✅ Megoldás: 1:50000"
+    },
+     {
+      "question": "Egy térképen egy szoba 5 cm hosszú és 3 cm széles. A méretarány 1:100. Milyen hosszú a szoba?",
+      "answers": {
+        "a": "5 m",
+        "b": "3 m",
+        "c": "300 cm"
+      },
+      "correct": "a",
+      "explanation": "Mivel a méretarány 1:100, a valóságban minden méret 100-szor nagyobb, mint a térképen. A szoba hossza a térképen 5 cm, a valóságban 5 * 100 cm = 500 cm = 5 m. ✅ Megoldás: 5 m"
+    },
+    {
+      "question": "Hány cm egy 1 km?",
+      "answers": {
+        "a": "1000",
+        "b": "100000",
+        "c": "10000"
+      },
+      "correct": "b",
+      "explanation": "1 km = 1000 m = 1000 * 100 cm = 100 000 cm.  ✅ Megoldás: 100 000"
+    },
+    {
+      "question": "Ha egy térképen a két város távolsága 4 cm, és a méretarány 1:25 000, akkor milyen messze vannak a valóságban?",
+      "answers": {
+        "a": "1 km",
+        "b": "10 km",
+        "c": "1000 méter"
+      },
+      "correct": "b",
+      "explanation": "A méretarány 1:25 000 azt jelenti, hogy a valóságban minden méret 25 000-szer nagyobb, mint a térképen. A valóságban a távolság: 4 cm * 25 000 = 100 000 cm = 1000 m = 1 km. ✅ Megoldás: 1 km"
+    },
+    {
+      "question": "Mi a pontosabb: egy hosszú szakaszt egy vonalzóval vagy egy mérőszalaggal mérni?",
+      "answers": {
+        "a": "vonalzóval",
+        "b": "mérőszalaggal",
+        "c": "ugyanolyan pontos"
+      },
+      "correct": "b",
+      "explanation": "A mérőszalag a hosszabb szakaszt pontosabban tudja megmérni, mint a vonalzó. ✅ Megoldás: mérőszalaggal"
+    }
+  ]
 }

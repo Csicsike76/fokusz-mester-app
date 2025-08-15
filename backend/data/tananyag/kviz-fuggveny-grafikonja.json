@@ -4,5 +4,236 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz fuggveny grafikonja\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik tengely a vízszintes a koordináta-rendszerben?",
+      "answers": {
+        "a": "az y tengely",
+        "b": "az origó",
+        "c": "az x tengely"
+      },
+      "correct": "c",
+      "explanation": "🔹 1. Lépés: A Descartes-féle koordináta-rendszer két, egymásra merőleges számegyenesből áll. 🔹 2. Lépés: A vízszintes tengelyt x-tengelynek (abszcissza), a függőlegeset y-tengelynek (ordináta) nevezzük. ✅ Megoldás: A vízszintes az x tengely."
+    },
+    {
+      "question": "Mi a neve a koordináta-rendszer (0;0) pontjának?",
+      "answers": {
+        "a": "origó",
+        "b": "zérushely",
+        "c": "maximum"
+      },
+      "correct": "a",
+      "explanation": "🔹 1. Lépés: A két tengely metszéspontja egy különleges, kitüntetett pont. 🔹 2. Lépés: Ezt a pontot, ahol x és y is nulla, origónak nevezzük. ✅ Megoldás: A neve origó."
+    },
+    {
+      "question": "Hol helyezkedik el a P(-2; 3) pont?",
+      "answers": {
+        "a": "2 jobbra, 3 fel",
+        "b": "2 balra, 3 fel",
+        "c": "2 balra, 3 le"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: Az első koordináta (x) a vízszintes mozgást jelöli. A -2 azt jelenti, hogy az origóból 2 egységet balra lépünk. 🔹 2. Lépés: A második koordináta (y) a függőleges mozgást jelöli. A +3 azt jelenti, hogy onnan 3 egységet felfelé lépünk. ✅ Megoldás: 2 balra, 3 fel."
+    },
+    {
+      "question": "Mi a függvény zérushelye?",
+      "answers": {
+        "a": "Ahol a függvény a legkisebb értékét veszi fel.",
+        "b": "Ahol a függvény grafikonja metszi a függőleges (y) tengelyt.",
+        "c": "Ahol a függvény grafikonja metszi a vízszintes (x) tengelyt."
+      },
+      "correct": "c",
+      "explanation": "🔹 1. Lépés: A zérushely az a pont, ahol a függvény értéke nulla (f(x)=0). 🔹 2. Lépés: Az y koordináta az x-tengely mentén mindenhol nulla, ezért a zérushely az x-tengellyel való metszéspont. ✅ Megoldás: Ahol a grafikon metszi a vízszintes (x) tengelyt."
+    },
+    {
+      "question": "Melyik pont van rajta az f(x) = x + 4 függvény grafikonján?",
+      "answers": {
+        "a": "(1; 5)",
+        "b": "(4; 1)",
+        "c": "(1; 4)"
+      },
+      "correct": "a",
+      "explanation": "🔹 1. Lépés: Be kell helyettesíteni az x koordinátát a függvénybe, és megnézni, hogy a kapott érték megegyezik-e az y koordinátával. 🔹 2. Lépés: Ha x=1, akkor f(1) = 1 + 4 = 5. Az y koordináta 5. Tehát az (1; 5) pont rajta van a grafikonon. ✅ Megoldás: Az (1; 5) pont."
+    },
+    {
+      "question": "Mit jelent az, hogy egy függvény monoton növekvő?",
+      "answers": {
+        "a": "A grafikonja egyenes.",
+        "b": "A grafikonja balról jobbra 'lefelé' halad.",
+        "c": "A grafikonja balról jobbra 'felfelé' halad."
+      },
+      "correct": "c",
+      "explanation": "🔹 1. Lépés: A monotonitás a függvény 'irányát' írja le. 🔹 2. Lépés: Ha az x értékek növelésével az y értékek (a függvényértékek) is nőnek, akkor a függvény monoton növekvő. Ez a grafikonon egy 'emelkedő' vonalként jelenik meg. ✅ Megoldás: A grafikonja balról jobbra 'felfelé' halad."
+    },
+    {
+      "question": "Mit jelent az, hogy egy függvény monoton csökkenő?",
+      "answers": {
+        "a": "A grafikonja balról jobbra 'lefelé' halad.",
+        "b": "A grafikonja vízszintes.",
+        "c": "A grafikonja görbe."
+      },
+      "correct": "a",
+      "explanation": "🔹 1. Lépés: A monotonitás a függvény 'irányát' írja le. 🔹 2. Lépés: Ha az x értékek növelésével az y értékek csökkennek, akkor a függvény monoton csökkenő. Ez a grafikonon egy 'lejtő' vonalként jelenik meg. ✅ Megoldás: A grafikonja balról jobbra 'lefelé' halad."
+    },
+    {
+      "question": "Milyen alakú az f(x) = 2x - 1 függvény grafikonja?",
+      "answers": {
+        "a": "parabola",
+        "b": "egyenes",
+        "c": "kör"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: Ez egy elsőfokú függvény, mert az x az első hatványon szerepel. 🔹 2. Lépés: Minden elsőfokú függvény (lineáris függvény) grafikonja egyenes. ✅ Megoldás: Egyenes."
+    },
+    {
+      "question": "Hol metszi az f(x) = x + 3 függvény az y tengelyt?",
+      "answers": {
+        "a": "az x = -3 helyen",
+        "b": "az y = 3 helyen",
+        "c": "az origóban"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: Az y tengelymetszet az a pont, ahol x=0. 🔹 2. Lépés: Helyettesítsük be az x=0 értéket a függvénybe: f(0) = 0 + 3 = 3. Tehát a metszéspont a (0; 3) pont, ami az y=3 helyen van. ✅ Megoldás: Az y=3 helyen metszi."
+    },
+    {
+      "question": "Mi az f(x) = x - 5 függvény zérushelye?",
+      "answers": {
+        "a": "-5",
+        "b": "5",
+        "c": "0"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: A zérushelyet úgy kapjuk meg, hogy az f(x)-et egyenlővé tesszük nullával: x - 5 = 0. 🔹 2. Lépés: Az egyenletet megoldva: x = 5. ✅ Megoldás: A zérushelye az x=5."
+    },
+    {
+      "question": "Mit jelent a függvény képe?",
+      "answers": {
+        "a": "A függvény értékkészlete.",
+        "b": "A függvény grafikonja.",
+        "c": "A függvény hozzárendelési szabálya."
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: A 'függvény képe' és a 'függvény grafikonja' szinonimák. 🔹 2. Lépés: Mindkettő az összetartozó (x,y) pontok halmazát jelenti a koordináta-rendszerben. ✅ Megoldás: A függvény grafikonja."
+    },
+    {
+      "question": "Mi a minimumhelye egy függvénynek?",
+      "answers": {
+        "a": "A legkisebb függvényérték.",
+        "b": "Az az x érték, ahol a függvény a legkisebb értékét veszi fel.",
+        "c": "A zérushely."
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: Fontos megkülönböztetni a minimumhelyet és a minimumértéket. 🔹 2. Lépés: A minimumérték az y érték (a 'milyen alacsonyan van'), a minimumhely pedig az x érték (a 'hol van'). ✅ Megoldás: Az az x érték, ahol a függvény a legkisebb értékét veszi fel."
+    },
+    {
+      "question": "Hogy nevezzük a koordináta-rendszer függőleges tengelyét?",
+      "answers": {
+        "a": "x tengely (abszcissza)",
+        "b": "y tengely (ordináta)",
+        "c": "z tengely"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: A két fő tengely a vízszintes és a függőleges. 🔹 2. Lépés: A függőleges tengelyt nevezzük y-tengelynek, vagy más néven ordinátatengelynek. ✅ Megoldás: y tengely (ordináta)."
+    },
+    {
+      "question": "Milyen függvény grafikonja egy vízszintes egyenes?",
+      "answers": {
+        "a": "lineáris függvény",
+        "b": "konstans függvény",
+        "c": "másodfokú függvény"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: Ha a grafikon vízszintes, az azt jelenti, hogy bármilyen x értékhez ugyanaz az y érték tartozik. 🔹 2. Lépés: Ezt a típust, ahol a függvényérték állandó (konstans), konstans függvénynek nevezzük. Pl. f(x)=4. ✅ Megoldás: Konstans függvény."
+    },
+    {
+      "question": "Melyik pont van az origóban?",
+      "answers": {
+        "a": "(1; 1)",
+        "b": "(0; 1)",
+        "c": "(0; 0)"
+      },
+      "correct": "c",
+      "explanation": "🔹 1. Lépés: Az origó a koordináta-rendszer kezdőpontja, a tengelyek metszéspontja. 🔹 2. Lépés: Itt mind az x, mind az y koordináta értéke nulla. ✅ Megoldás: A (0; 0) pont."
+    },
+    {
+      "question": "Hol van a P(4; 0) pont?",
+      "answers": {
+        "a": "Az y tengelyen.",
+        "b": "Az x tengelyen.",
+        "c": "Az origóban."
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: Az y koordináta (a második érték) nulla. 🔹 2. Lépés: Ha az y koordináta nulla, a pont nem mozdul el sem fel, sem le a vízszintes tengelyről. ✅ Megoldás: A pont az x tengelyen van."
+    },
+    {
+      "question": "Mi a maximumértéke egy függvénynek?",
+      "answers": {
+        "a": "A legnagyobb x érték.",
+        "b": "A legnagyobb y (függvény) érték.",
+        "c": "Az y tengely metszéspontja."
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: A maximumérték azt jelenti, 'milyen magasan' van a grafikon legmagasabb pontja. 🔹 2. Lépés: A magasságot az y koordináta mutatja meg. ✅ Megoldás: A legnagyobb y (függvény) érték."
+    },
+    {
+      "question": "Melyik betű NEM lehet egy függvény grafikonja (ha a függőleges tengely az y)?",
+      "answers": {
+        "a": "V",
+        "b": "M",
+        "c": "C"
+      },
+      "correct": "c",
+      "explanation": "🔹 1. Lépés: Alkalmazzuk a 'függőleges vonal' tesztet. Egy grafikon akkor függvény, ha bármely függőleges vonal legfeljebb egyszer metszi. 🔹 2. Lépés: A 'V' és 'M' betűket bármely függőleges vonal legfeljebb egyszer metszi. A 'C' betűt viszont egy függőleges vonal két helyen is metszheti. ✅ Megoldás: A 'C' betű nem lehet egy függvény grafikonja."
+    },
+    {
+      "question": "Hogyan ábrázoljuk az f(x) = x függvényt?",
+      "answers": {
+        "a": "Az x tengelyre eső egyenes.",
+        "b": "Az y tengelyre eső egyenes.",
+        "c": "Egy, az origón átmenő, 45°-os egyenes."
+      },
+      "correct": "c",
+      "explanation": "🔹 1. Lépés: Az f(x)=x azt jelenti, hogy y=x. Az összetartozó pontok pl. (1;1), (2;2), (-3;-3). 🔹 2. Lépés: Ezek a pontok egy olyan egyenesen helyezkednek el, ami áthalad az origón és 'felezi' az első és harmadik síknegyedet. ✅ Megoldás: Egy, az origón átmenő, 45°-os egyenes."
+    },
+    {
+      "question": "Mi az f(x)=2x+5 függvény y-tengelymetszete?",
+      "answers": {
+        "a": "2",
+        "b": "5",
+        "c": "2,5"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: Az y-tengelymetszet az a pont, ahol x=0. 🔹 2. Lépés: Helyettesítsünk be: f(0) = 2*0 + 5 = 0 + 5 = 5. ✅ Megoldás: Az y-tengelymetszet az 5."
+    },
+    {
+      "question": "A P(3; -1) pont melyik síknegyedben van?",
+      "answers": {
+        "a": "IV. síknegyed",
+        "b": "II. síknegyed",
+        "c": "III. síknegyed"
+      },
+      "correct": "a",
+      "explanation": "🔹 1. Lépés: A síknegyedeket az óramutató járásával ellentétesen számozzuk. I.(+,+), II.(-,+), III.(-,-), IV.(+,-). 🔹 2. Lépés: A P pont x koordinátája pozitív (3), y koordinátája negatív (-1). Ez a (+,-) eset. ✅ Megoldás: A pont a IV. síknegyedben van."
+    },
+    {
+      "question": "Melyik függvény szigorúan monoton növekvő?",
+      "answers": {
+        "a": "f(x) = 5",
+        "b": "f(x) = x + 1",
+        "c": "f(x) = -x"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: Az f(x)=5 konstans. Az f(x)=-x csökkenő (minél nagyobb x-et adunk, annál kisebb lesz az eredmény). 🔹 2. Lépés: Az f(x)=x+1 függvényben ha növeljük az x-et, az eredmény is nő. ✅ Megoldás: Az f(x) = x + 1."
+    },
+    {
+      "question": "Mi az f(x) = 3x függvény zérushelye?",
+      "answers": {
+        "a": "x = 3",
+        "b": "x = 0",
+        "c": "nincs neki"
+      },
+      "correct": "b",
+      "explanation": "🔹 1. Lépés: A zérushelyet az f(x)=0 egyenlet megoldásával kapjuk: 3x = 0. 🔹 2. Lépés: Ezt az egyenletet x-re megoldva: x = 0/3 = 0. ✅ Megoldás: A zérushelye x = 0."
+    }
+  ]
 }

@@ -1,8 +1,259 @@
 {
   "title": "Kviz visszavezetett egyenlotlensegek",
   "subject": "altalanos",
-  "grade": 0,
-  "category": "premium_course",
+  "grade": 4,
+  "category": "iskolai",
   "description": "Ez a(z) \"Kviz visszavezetett egyenlotlensegek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "1. Melyik egyenlőtlenség átalakítható x − 3 ≤ 0 formára?",
+      "answers": {
+        "a": "x ≤ 3",
+        "b": "x ≥ 3",
+        "c": "x ≤ −3"
+      },
+      "correctAnswer": "a",
+      "explanation": "x − 3 ≤ 0 közvetlen átalakítás: x ≤ 3."
+    },
+    {
+      "question": "2. Hogyan vezetesd vissza: 4−2x ≥ 0 → ax+b ≤0 alakra?",
+      "answers": {
+        "a": "−2x+4 ≤ 0",
+        "b": "2x−4 ≤ 0",
+        "c": "4−2x ≤ 0"
+      },
+      "correctAnswer": "b",
+      "explanation": "Átrendezés: 2x−4 ≤0 (szorzó −1 csere után)."
+    },
+    {
+      "question": "3. Visszavezetés: 2− x ≤ 0 →?",
+      "answers": {
+        "a": "−x ≤ −2",
+        "b": "x ≥ 2",
+        "c": "x ≤ 2"
+      },
+      "correctAnswer": "a",
+      "explanation": "2−x ≤0 ⇒ −x ≤ −2 ⇒ x ≥ 2."
+    },
+    {
+      "question": "4. Oldd meg: −3(x+2) ≥ 0 visszavezetett formával?",
+      "answers": {
+        "a": "−3x−6 ≤ 0",
+        "b": "x+2 ≥ 0",
+        "c": "x ≤ −2"
+      },
+      "correctAnswer": "a",
+      "explanation": "Átalakítás: −3x−6 ≥0 → −3x ≥6 → x ≤ −2."
+    },
+    {
+      "question": "5. Visszavezetés: 0·(x−3) ≤ 0 →?",
+      "answers": {
+        "a": "x ≤ 3",
+        "b": "minden x",
+        "c": "nincs megoldás"
+      },
+      "correctAnswer": "b",
+      "explanation": "0 ≤0 mindig igaz, bármely x."
+    },
+    {
+      "question": "6. Melyik visszavezetés eredménye x ≤ −2?",
+      "answers": {
+        "a": "2x+4 ≥ 0",
+        "b": "2x+4 ≤ 0",
+        "c": "2x−4 ≤ 0"
+      },
+      "correctAnswer": "b",
+      "explanation": "2x+4 ≤0 → 2x ≤ −4 → x ≤ −2."
+    },
+    {
+      "question": "7. Mi a visszavezetett forma: 3(x − 1) ≤ 0?",
+      "answers": {
+        "a": "3x + 3 ≤ 0",
+        "b": "x − 1 ≥ 0",
+        "c": "3x − 3 ≤ 0"
+      },
+      "correctAnswer": "c",
+      "explanation": "3(x−1)=3x−3 ≤0, visszavezetett lineáris forma."
+    },
+    {
+      "question": "8. Visszavezetés után mi x, ha 5−x/2 ≤ 0?",
+      "answers": {
+        "a": "x ≥ 10",
+        "b": "x ≥ 5",
+        "c": "x ≥ 10"
+      },
+      "correctAnswer": "c",
+      "explanation": "5 ≤ x/2 ⇒ x ≥ 10."
+    },
+    {
+      "question": "9. Melyik visszavezetés helyes: (2x−4)/2 ≤ 0?",
+      "answers": {
+        "a": "2x−4 ≤ 0",
+        "b": "x−2 ≤ 0",
+        "c": "x−2 ≥ 0"
+      },
+      "correctAnswer": "b",
+      "explanation": "Osztás 2-vel: x−2 ≤0."
+    },
+    {
+      "question": "10. Visszavezetés: 7−2x ≤ 1?",
+      "answers": {
+        "a": "−2x ≤ −6",
+        "b": "7−2x ≥ 1",
+        "c": "x ≥ 3"
+      },
+      "correctAnswer": "a",
+      "explanation": "7−2x ≤1 → −2x ≤ −6 → x ≥3."
+    },
+    {
+      "question": "11. Melyik egyenlőtlenség NEM vezethető vissza ax+b ≤0 formára?",
+      "answers": {
+        "a": "2x+1 ≤ 3",
+        "b": "x/2−4 ≤ 0",
+        "c": "x·y ≤ 0 (két változós)"
+      },
+      "correctAnswer": "c",
+      "explanation": "ax+b ≤0 csak egy ismeretlenes lineáris egyenlőtlenség."
+    },
+    {
+      "question": "12. Oldd meg: (−x)/3 + 2 ≤ 0?",
+      "answers": {
+        "a": "x ≥ 6",
+        "b": "x ≥ 6",
+        "c": "x ≤ −6"
+      },
+      "correctAnswer": "b",
+      "explanation": "−x/3 ≤ −2 → x/3 ≥2 → x ≥6."
+    },
+    {
+      "question": "13. Mi a visszavezetett forma: (x/3)−1 ≤ 0?",
+      "answers": {
+        "a": "x−1 ≤ 0",
+        "b": "x ≤ 3",
+        "c": "x/3 ≤ 1"
+      },
+      "correctAnswer": "c",
+      "explanation": "Első lépés: x/3 ≤1, majd x ≤3."
+    },
+    {
+      "question": "14. Melyik kifejezés nem értelmezhető:?",
+      "answers": {
+        "a": "5 ÷ 0",
+        "b": "5 ÷ 0",
+        "c": "0 · 5"
+      },
+      "correctAnswer": "a",
+      "explanation": "Osztás nullával nem értelmezett."
+    },
+    {
+      "question": "15.  Igaz-e, hogy (x−3)/2 ≤ 0 visszavezethető  x−3 ≤ 0 formára?",
+      "answers": {
+        "a": "Igen, megszorozzuk 2-vel",
+        "b": "Nem, irányváltás miatt",
+        "c": "Csak ha x pozitív"
+      },
+      "correctAnswer": "a",
+      "explanation": "2>0 miatt irány nem változik: x−3 ≤ 0."
+    },
+    {
+      "question": "16. Hogyan vezethető vissza 2x + 4 ≤ 6 alakra egyenlőtlenség?",
+      "answers": {
+        "a": "2x ≤ 2",
+        "b": "2x + 4 ≤ 6 eredeti forma",
+        "c": "x ≤ 1 végeredmény"
+      },
+      "correctAnswer": "b",
+      "explanation": "Első lépés: 2x + 4 ≤ 6 marad, majd 2x ≤ 2 → x ≤ 1."
+    },
+    {
+      "question": "17. Visszavezetett forma: (ax+b)/c ≤0?",
+      "answers": {
+        "a": "ax+b ≤0 (ha c>0)",
+        "b": "ax+b ≥0",
+        "c": "nincs visszavezetés"
+      },
+      "correctAnswer": "a",
+      "explanation": "Pozitív c esetén egyszerű osztás → ax+b ≤0."
+    },
+    {
+      "question": "18. Melyik lépés NEM visszavezetés?",
+      "answers": {
+        "a": "Szorzás felbontás",
+        "b": "Átrendezés",
+        "c": "Negatív hatványozás"
+      },
+      "correctAnswer": "c",
+      "explanation": "Negatív hatványozás nem lineáris transzformáció."
+    },
+    {
+      "question": "19. Oldd meg: 5(x + 2) ≤ 0 – először visszavezetés utáni forma?",
+      "answers": {
+        "a": "5x + 10 ≤ 0",
+        "b": "x + 2 ≤ 0",
+        "c": "5x ≤ −10"
+      },
+      "correctAnswer": "a",
+      "explanation": "Szétosztás: 5x+10 ≤0, majd 5x ≤ −10 → x ≤ −2."
+    },
+    {
+      "question": "20. Melyik visszavezetés helyes: (2x−4)/2 ≤ 0?",
+      "answers": {
+        "a": "2x−4 ≤ 0",
+        "b": "x−2 ≤ 0",
+        "c": "x−2 ≥ 0"
+      },
+      "correctAnswer": "b",
+      "explanation": "Osztás 2-vel: x−2 ≤0."
+    },
+    {
+      "question": "21. Hogyan szabadulunk meg a mínusz előjeltől: −(x + 4) ≤ 0?",
+      "answers": {
+        "a": "x + 4 ≤ 0",
+        "b": "−x − 4 ≤ 0",
+        "c": "x + 4 ≥ 0"
+      },
+      "correctAnswer": "c",
+      "explanation": "Szétosztjuk: −x−4 ≤0 → −x ≤4 → x ≥ −4."
+    },
+    {
+      "question": "22. Ha 4−x ≤ 2x + 1, visszavezetett egyenlőtlenség?",
+      "answers": {
+        "a": "−x ≤ 2x−3",
+        "b": "4 ≤ 3x+1",
+        "c": "4−(2x+1) ≤ x"
+      },
+      "correctAnswer": "c",
+      "explanation": "Átrendezés: 4−x−2x−1 ≤0 → 3−3x ≤0 → −3x ≤ −3 → x ≥1."
+    },
+    {
+      "question": "23. Melyik kifejezéshez kell először bontani?",
+      "answers": {
+        "a": "(a+b)·c",
+        "b": "a·(b+c)",
+        "c": "(a+b)·c"
+      },
+      "correctAnswer": "c",
+      "explanation": "Zárójel elsőbbség."
+    },
+    {
+      "question": "24. Melyik visszavezetés eredménye x ≤ −2?",
+      "answers": {
+        "a": "2x+4 ≥ 0",
+        "b": "2x+4 ≤ 0",
+        "c": "2x−4 ≤ 0"
+      },
+      "correctAnswer": "b",
+      "explanation": "2x+4 ≤0 → 2x ≤ −4 → x ≤ −2."
+    },
+    {
+      "question": "25. Visszavezetés: 0·x + b ≤ 0 esetén b ≤ 0?",
+      "answers": {
+        "a": "Igaz: b ≤ 0",
+        "b": "x ≤ −b/a",
+        "c": "Nincs megoldás"
+      },
+      "correctAnswer": "a",
+      "explanation": "Egyetlen feltétel b ≤0, x-től független."
+    }
+  ]
 }

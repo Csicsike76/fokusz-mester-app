@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz hangok keltese es erzekelese\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a hang?",
+      "answers": {
+        "a": "A fény.",
+        "b": "A rezgő testek által keltett hullámok.",
+        "c": "A szél."
+      },
+      "correct": "b",
+      "explanation": "A hangot a rezgő testek hozzák létre, és ezek a rezgések hullámok formájában terjednek. ✅ Megoldás: A rezgő testek által keltett hullámok."
+    },
+    {
+      "question": "Milyen közegben terjed a hang?",
+      "answers": {
+        "a": "Csak a levegőben.",
+        "b": "Szilárd, folyékony és gáz halmazállapotú anyagokban.",
+        "c": "Csak a vízben."
+      },
+      "correct": "b",
+      "explanation": "A hang terjedhet szilárd, folyékony és gáz halmazállapotú anyagokban. ✅ Megoldás: Szilárd, folyékony és gáz halmazállapotú anyagokban."
+    },
+    {
+      "question": "Mi a hangsebesség?",
+      "answers": {
+        "a": "A hang erőssége.",
+        "b": "A hang terjedési sebessége.",
+        "c": "A hang magassága."
+      },
+      "correct": "b",
+      "explanation": "A hangsebesség megmutatja, milyen gyorsan terjed a hang egy adott közegben. ✅ Megoldás: A hang terjedési sebessége."
+    },
+    {
+      "question": "Miben terjed a hang a leggyorsabban?",
+      "answers": {
+        "a": "Levegőben.",
+        "b": "Vízben.",
+        "c": "Szilárd anyagokban."
+      },
+      "correct": "c",
+      "explanation": "A hang a szilárd anyagokban terjed a leggyorsabban, a levegőben a leglassabban. ✅ Megoldás: Szilárd anyagokban."
+    },
+    {
+      "question": "Mit jelent a hang magassága?",
+      "answers": {
+        "a": "A hang erősségét.",
+        "b": "A hang gyorsaságát.",
+        "c": "A hang mély vagy magas voltát."
+      },
+      "correct": "c",
+      "explanation": "A hang magassága azt mutatja, hogy a hang mennyire mély (basszus) vagy magas (szoprán). ✅ Megoldás: A hang mély vagy magas voltát."
+    },
+    {
+      "question": "Mitől függ a hang magassága?",
+      "answers": {
+        "a": "A rezgő test nagyságától.",
+        "b": "A rezgő test rezgésszámától.",
+        "c": "A hang hangerejétől."
+      },
+      "correct": "b",
+      "explanation": "A hang magasságát a rezgő test rezgésszáma határozza meg. Minél nagyobb a rezgésszám, annál magasabb a hang. ✅ Megoldás: A rezgő test rezgésszámától."
+    },
+    {
+      "question": "Mit jelent a hang erőssége?",
+      "answers": {
+        "a": "A hang magasságát.",
+        "b": "A hang hangerejét.",
+        "c": "A hang gyorsaságát."
+      },
+      "correct": "b",
+      "explanation": "A hang erőssége a hangerejét mutatja, hogy hangos-e vagy halk. ✅ Megoldás: A hang hangerejét."
+    },
+    {
+      "question": "Milyen egységben mérjük a hang erősségét?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "decibel (dB)",
+        "c": "kilogramm (kg)"
+      },
+      "correct": "b",
+      "explanation": "A hang erősségét decibelben (dB) mérjük. ✅ Megoldás: decibel (dB)"
+    },
+    {
+      "question": "Milyen szervek vesznek részt a hang érzékelésében?",
+      "answers": {
+        "a": "A szem.",
+        "b": "A fül.",
+        "c": "Az orr."
+      },
+      "correct": "b",
+      "explanation": "A fül a szervünk, ami a hangokat érzékeli. ✅ Megoldás: A fül."
+    },
+    {
+      "question": "Melyik a fül részei?",
+      "answers": {
+        "a": "Dobhártya, kalapács, kengyel.",
+        "b": "A szemhéj, a szemgolyó, a pupilla.",
+        "c": "A nyelv, a fogak, az ajkak."
+      },
+      "correct": "a",
+      "explanation": "A fül részei a dobhártya, a kalapács és a kengyel, amik a hangot érzékelik. ✅ Megoldás: Dobhártya, kalapács, kengyel."
+    },
+    {
+      "question": "Milyen szerepe van a dobhártyának?",
+      "answers": {
+        "a": "A hangot felerősíti.",
+        "b": "Vibrál a hang hatására.",
+        "c": "Színezi a hangot."
+      },
+      "correct": "b",
+      "explanation": "A dobhártya vibrál a hang hatására, ami a hang érzékelésének az első lépése.  ✅ Megoldás: Vibrál a hang hatására."
+    },
+    {
+      "question": "Hol található a csiga?",
+      "answers": {
+        "a": "A fülben.",
+        "b": "A szájban.",
+        "c": "Az orrban."
+      },
+      "correct": "a",
+      "explanation": "A csiga a belső fül része, ami a hanghullámokat elektromos jelekké alakítja. ✅ Megoldás: A fülben."
+    },
+    {
+      "question": "Hogyan keletkezik a hang a gitárban?",
+      "answers": {
+        "a": "A húrok rezgésekor.",
+        "b": "A gitár testének súrlódásakor.",
+        "c": "A levegő rezgésekor."
+      },
+      "correct": "a",
+      "explanation": "A gitárban a húrok rezegnek, és ezek a rezgések keltik a hangot. ✅ Megoldás: A húrok rezgésekor."
+    },
+    {
+      "question": "Mi a rezonancia?",
+      "answers": {
+        "a": "A hang gyors terjedése.",
+        "b": "Amikor egy test a másik rezgése hatására rezegni kezd.",
+        "c": "A hang visszaverődése."
+      },
+      "correct": "b",
+      "explanation": "A rezonancia az a jelenség, amikor egy test a másik rezgése hatására rezegni kezd.  ✅ Megoldás: Amikor egy test a másik rezgése hatására rezegni kezd."
+    },
+    {
+      "question": "Miért halljuk a hangokat?",
+      "answers": {
+        "a": "Mert a hanghullámok elérik a fülünket, és a dobhártyát rezgetik.",
+        "b": "Mert a szemünk látja a hangot.",
+        "c": "Mert az orrunk szaglás útján érzékeli a hangot."
+      },
+      "correct": "a",
+      "explanation": "A hangot a fülünk érzékeli, amikor a hanghullámok bejutnak a fülbe, és rezgetik a dobhártyát. ✅ Megoldás: Mert a hanghullámok elérik a fülünket, és a dobhártyát rezgetik."
+    },
+    {
+      "question": "Mi a zaj?",
+      "answers": {
+        "a": "A kellemes hangok.",
+        "b": "A szabálytalan rezgésekből álló hangok.",
+        "c": "A csend."
+      },
+      "correct": "b",
+      "explanation": "A zaj szabálytalan, összevissza rezgésekből álló hang.  ✅ Megoldás: A szabálytalan rezgésekből álló hangok."
+    },
+    {
+      "question": "Mi a hangszigetelés?",
+      "answers": {
+        "a": "A hang terjedésének megakadályozása.",
+        "b": "A hang felerősítése.",
+        "c": "A hang magasságának változtatása."
+      },
+      "correct": "a",
+      "explanation": "A hangszigetelés célja, hogy megakadályozzuk a hang terjedését, így csökkentve a zajt. ✅ Megoldás: A hang terjedésének megakadályozása."
+    },
+     {
+      "question": "Miért nem halljuk a hangot az űrben?",
+      "answers": {
+        "a": "Mert nincs levegő.",
+        "b": "Mert túl hideg van.",
+        "c": "Mert nincs fülünk."
+      },
+      "correct": "a",
+      "explanation": "A hang terjedéséhez közegre van szükség. Az űrben nincs levegő, ezért nem tud terjedni a hang. ✅ Megoldás: Mert nincs levegő."
+    },
+    {
+      "question": "Mi a hangerő mértékegysége?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "decibel (dB)",
+        "c": "másodperc (s)"
+      },
+      "correct": "b",
+      "explanation": "A hang erősségét, vagyis a hangerőt decibelben mérjük. ✅ Megoldás: decibel (dB)"
+    },
+    {
+      "question": "Melyik test ad ki hangot a rezgésével?",
+      "answers": {
+        "a": "A hűtőgép.",
+        "b": "A rezgő húr a gitáron.",
+        "c": "Az asztal."
+      },
+      "correct": "b",
+      "explanation": "A gitár húrjai rezgésükkel adnak ki hangot. ✅ Megoldás: A rezgő húr a gitáron."
+    },
+    {
+      "question": "Mi történik a hanggal, ha a hangforrás távolodik?",
+      "answers": {
+        "a": "A hang erősebb lesz.",
+        "b": "A hang halkabb lesz.",
+        "c": "A hang magasabb lesz."
+      },
+      "correct": "b",
+      "explanation": "Minél távolabb vagyunk a hangforrástól, a hang annál halkabb lesz. ✅ Megoldás: A hang halkabb lesz."
+    },
+    {
+      "question": "Mi a hullám?",
+      "answers": {
+        "a": "Egyenes vonal.",
+        "b": "Rezgések terjedése.",
+        "c": "A hang forrása."
+      },
+      "correct": "b",
+      "explanation": "A hanghullámok a rezgések terjedése, ami a hangot a fülünkbe juttatja. ✅ Megoldás: Rezgések terjedése."
+    },
+    {
+      "question": "Melyik eszköz használható a hangok rögzítésére?",
+      "answers": {
+        "a": "Szögmérő",
+        "b": "Mikrofon",
+        "c": "Vonalzó"
+      },
+      "correct": "b",
+      "explanation": "A mikrofon a hangokat elektromos jelekké alakítja, amiket rögzíthetünk. ✅ Megoldás: Mikrofon"
+    },
+    {
+      "question": "Melyik hangszertípus használja a levegőoszlopot a hangkeltéshez?",
+      "answers": {
+        "a": "Vonós hangszerek",
+        "b": "Fúvós hangszerek",
+        "c": "Ütős hangszerek"
+      },
+      "correct": "b",
+      "explanation": "A fúvós hangszerek a levegőoszlop rezgésével hozzák létre a hangot, mint például a trombita vagy a furulya. ✅ Megoldás: Fúvós hangszerek"
+    }
+  ]
 }

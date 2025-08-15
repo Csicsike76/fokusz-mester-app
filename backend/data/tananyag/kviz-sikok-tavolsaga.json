@@ -1,8 +1,219 @@
 {
-  "title": "Kviz sikok tavolsaga",
+  "title": "Kviz sikkal parhuzamos",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz sikok tavolsaga\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz sikkal parhuzamos\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mit jelent, ha egy egyenes párhuzamos egy síkkal?",
+      "answers": {
+        "a": "Az egyenesnek és a síknak nincs közös pontja.",
+        "b": "Az egyenes merőleges a síkra.",
+        "c": "Az egyenes a síkban fekszik."
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos egyeneseknek nincs közös pontjuk, azaz soha nem metszik egymást.  ✅ Megoldás: Az egyenesnek és a síknak nincs közös pontja."
+    },
+    {
+      "question": "Hogyan bizonyíthatjuk be legkönnyebben, hogy egy 'e' egyenes párhuzamos egy 'S' síkkal?",
+      "answers": {
+        "a": "Megmutatjuk, hogy 'e' merőleges az 'S' síkra.",
+        "b": "Megmutatjuk, hogy 'e' párhuzamos egy, az 'S' síkban fekvő 'f' egyenessel.",
+        "c": "Megmérjük a távolságukat."
+      },
+      "correct": "b",
+      "explanation": "Ha egy egyenes párhuzamos egy síkkal, akkor az egyenes minden pontja ugyanakkora távolságra van a síktól, így soha nem metszik egymást. ✅ Megoldás: Megmutatjuk, hogy 'e' párhuzamos egy, az 'S' síkban fekvő 'f' egyenessel."
+    },
+    {
+      "question": "Egy kocka felső lapjának egyik éle milyen helyzetű az alsó lap síkjával?",
+      "answers": {
+        "a": "metsző",
+        "b": "illeszkedő",
+        "c": "párhuzamos"
+      },
+      "correct": "c",
+      "explanation": "A kocka elülső és hátsó lapja egymással szemben helyezkedik el. Soha nem metszik egymást, és a távolságuk állandó. Ez a párhuzamosság definíciója. ✅ Megoldás: Párhuzamos."
+    },
+    {
+      "question": "Egy asztalon fekvő vonalzó milyen helyzetben van az asztal lapjával?",
+      "answers": {
+        "a": "illeszkedő (rajta fekszik)",
+        "b": "párhuzamos",
+        "c": "metsző"
+      },
+      "correct": "a",
+      "explanation": "Az illeszkedés azt jelenti, hogy az egyenes minden pontja a síknak is pontja.  ✅ Megoldás: Illeszkedő helyzetű."
+    },
+    {
+      "question": "Egy szoba mennyezetének egyik éle milyen helyzetű a padló síkjával?",
+      "answers": {
+        "a": "metsző",
+        "b": "párhuzamos",
+        "c": "illeszkedő"
+      },
+      "correct": "b",
+      "explanation": "A mennyezet síkja párhuzamos a padló síkjával. ✅ Megoldás: Párhuzamos."
+    },
+    {
+      "question": "Hány közös pontja van két, egymással párhuzamos síknak?",
+      "answers": {
+        "a": "végtelen sok",
+        "b": "egy",
+        "c": "nulla"
+      },
+      "correct": "c",
+      "explanation": "A párhuzamos síkoknak nincs közös pontjuk, azaz soha nem metszik egymást. ✅ Megoldás: Nulla közös pontjuk van."
+    },
+    {
+      "question": "Hány közös pontja van két azonos síknak?",
+      "answers": {
+        "a": "végtelen sok",
+        "b": "egy",
+        "c": "nulla"
+      },
+      "correct": "a",
+      "explanation": "Ha két sík azonos, akkor valójában egy síkról van szó. Egy sík végtelen sok pontból áll, tehát a két (azonos) síknak végtelen sok közös pontja van. ✅ Megoldás: Végtelen sok."
+    },
+    {
+      "question": "Milyen helyzetű egy kocka elülső és jobb oldali lapjának síkja?",
+      "answers": {
+        "a": "illeszkedő",
+        "b": "metsző",
+        "c": "párhuzamos"
+      },
+      "correct": "b",
+      "explanation": "A kocka elülső és jobb oldali lapja a közös élüknél találkozik. Mivel van közös vonaluk (metszésvonal), ezért metszik egymást. ✅ Megoldás: Metszők."
+    },
+    {
+      "question": "Mi a távolsága egy pontnak egy síktól?",
+      "answers": {
+        "a": "A pontot a sík egy tetszőleges pontjával összekötő szakasz hossza.",
+        "b": "A pontból a síkra bocsátott merőleges szakasz hossza.",
+        "c": "Nulla, ha a pont nincs a síkon."
+      },
+      "correct": "b",
+      "explanation": "A távolság két párhuzamos sík között a síkokat merőlegesen összekötő szakasz hossza. ✅ Megoldás: A pontból a síkra bocsátott merőleges szakasz hossza."
+    },
+    {
+      "question": "Ha két sík metszi egymást, a metszésvonaluk...",
+      "answers": {
+        "a": "egy pont.",
+        "b": "egy egyenes.",
+        "c": "egy szakasz."
+      },
+      "correct": "b",
+      "explanation": "Két metsző sík metszésvonala egy egyenes. ✅ Megoldás: Egy egyenes."
+    },
+    {
+      "question": "Ha a Földön egy torony áll, a talaj síkja és a torony közötti viszony...",
+      "answers": {
+        "a": "merőleges",
+        "b": "metsző",
+        "c": "párhuzamos"
+      },
+      "correct": "b",
+      "explanation": "A torony a talajon áll, tehát metsző. ✅ Megoldás: Metsző"
+    },
+    {
+      "question": "Ha egy egyenes a síkban fekszik, a síkkal való szöge...",
+      "answers": {
+        "a": "0°",
+        "b": "90°",
+        "c": "180°"
+      },
+      "correct": "a",
+      "explanation": "Ha az egyenes a síkon fekszik (illeszkedik rá), akkor a szög a 0° ✅ Megoldás: 0°"
+    },
+    {
+      "question": "Melyik a három merőleges tételének (TMT) alapja?",
+      "answers": {
+        "a": "Ha egy egyenes merőleges a síkra, akkor...",
+        "b": "Ha két egyenes merőleges egymásra.",
+        "c": "Ha két sík merőleges egymásra."
+      },
+      "correct": "a",
+      "explanation": "A TMT a síkra merőleges egyenesek helyzetét írja le. ✅ Megoldás: Ha egy egyenes merőleges a síkra, akkor..."
+    },
+    {
+      "question": "Mit jelent az, hogy két egyenes kitérő?",
+      "answers": {
+        "a": "Egy síkban vannak.",
+        "b": "Párhuzamosak.",
+        "c": "Nincsenek egy síkban."
+      },
+      "correct": "c",
+      "explanation": "A kitérő egyenesek nem párhuzamosak, és nem is metszik egymást, mert nincs közös pontjuk.  ✅ Megoldás: Nincsenek egy síkban."
+    },
+    {
+      "question": "Mi a három merőleges tételének következménye?",
+      "answers": {
+        "a": "Ha egy ferde egyenes vetülete merőleges, akkor a ferde egyenes is merőleges.",
+        "b": "A ferde egyenes merőleges a síkra.",
+        "c": "A vetület hossza egyenlő az egyenes hosszával."
+      },
+      "correct": "a",
+      "explanation": "Ha egy síkra vetített ferde egyenes vetülete merőleges, akkor a ferde egyenes is merőleges lesz a síkban lévő másik egyenesre. ✅ Megoldás: Ha egy ferde egyenes vetülete merőleges, akkor a ferde egyenes is merőleges."
+    },
+     {
+      "question": "Ha két sík párhuzamos, milyen a távolságuk?",
+      "answers": {
+        "a": "Nulla",
+        "b": "Állandó",
+        "c": "Változó"
+      },
+      "correct": "b",
+      "explanation": "A párhuzamos síkok távolsága mindenhol azonos. ✅ Megoldás: Állandó"
+    },
+    {
+      "question": "Melyik testnek van egyenlő nagyságú és párhuzamos lapjai?",
+      "answers": {
+        "a": "Kocka",
+        "b": "Gúla",
+        "c": "Gömb"
+      },
+      "correct": "a",
+      "explanation": "A kocka egyenlő nagyságú, négyzet alakú oldallapokból áll. ✅ Megoldás: Kocka"
+    },
+    {
+      "question": "Ha két egyenes a térben nem metszik egymást, akkor mit mondhatunk róluk?",
+      "answers": {
+        "a": "párhuzamosak",
+        "b": "kitérők",
+        "c": "mindkettő"
+      },
+      "correct": "c",
+      "explanation": "Ha két egyenes egy síkban van, és nem metszik egymást, akkor párhuzamosak. Ha nincsenek egy síkban, akkor kitérők. ✅ Megoldás: Mindkettő"
+    },
+    {
+      "question": "Milyen a metsző síkok közös pontjainak halmaza?",
+      "answers": {
+        "a": "Pont",
+        "b": "Sík",
+        "c": "Egyenes"
+      },
+      "correct": "c",
+      "explanation": "A metsző síkok közös pontjai egy egyenest alkotnak. ✅ Megoldás: Egyenes"
+    },
+    {
+      "question": "Ha egy egyenes egy síkra merőleges, akkor hány fokos szöget zár be a síkkal (ismétlés)?",
+      "answers": {
+        "a": "0°",
+        "b": "90°",
+        "c": "180°"
+      },
+      "correct": "b",
+      "explanation": "A síkra merőleges egyenes 90 fokos szöget zár be. ✅ Megoldás: 90°"
+    },
+    {
+      "question": "Melyik a térbeli távolság fogalma?",
+      "answers": {
+        "a": "Egy pont és egy sík között a legrövidebb szakasz hossza.",
+        "b": "A test súlya.",
+        "c": "A test nagysága."
+      },
+      "correct": "a",
+      "explanation": "A térben a két ponthoz, egyeneshez, síkhoz viszonyított távolságot a legrövidebb szakasz hosszaként definiáljuk. ✅ Megoldás: Egy pont és egy sík között a legrövidebb szakasz hossza."
+    }
+  ]
 }

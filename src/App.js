@@ -18,6 +18,7 @@ import ProfilePage from './pages/ProfilePage';
 import HelpCenterPage from './pages/HelpCenterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import InteraktivMatematika from './pages/InteraktivMatematika';
 import './App.css';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="bejelentkezes" element={<LoginPage />} />
             <Route path="regisztracio" element={<RegistrationPage />} />
+            <Route path="interaktiv-matematika" element={<InteraktivMatematika />} />
 
             {/* Tantárgy gyűjtemény-oldal (grade paraméter nem kell ide) */}
             <Route path="targy/:subjectName" element={<SubjectPage />} />

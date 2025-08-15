@@ -1,8 +1,199 @@
 {
-  "title": "Kviz gula testhalo",
+  "title": "Kvíz gula testhalo",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz gula testhalo\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a gúla testhálója?",
+      "answers": {
+        "a": "A gúla belsejének leírása.",
+        "b": "A gúla felszíne síkba terítve.",
+        "c": "A gúla árnyéka."
+      },
+      "correct": "b",
+      "explanation": "A testháló egy 3D-s test felszínének 2D-s (sík) kiterítése. A gúla testhálója a gúla oldallapjait és alaplapját mutatja egy síkban. ✅ Megoldás: A gúla felszíne síkba terítve."
+    },
+    {
+      "question": "Miből áll a gúla testhálója?",
+      "answers": {
+        "a": "Csak az alaplapból.",
+        "b": "Az alaplapból és az oldallapokból.",
+        "c": "Csak az oldallapokból."
+      },
+      "correct": "b",
+      "explanation": "A gúla testhálójához az alaplapra és az oldallapokra van szükség. ✅ Megoldás: Az alaplapból és az oldallapokból."
+    },
+    {
+      "question": "Milyen alakúak a gúla oldallapjai?",
+      "answers": {
+        "a": "Téglalapok",
+        "b": "Háromszögek",
+        "c": "Körök"
+      },
+      "correct": "b",
+      "explanation": "A gúla oldallapjai mindig háromszögek. ✅ Megoldás: Háromszögek."
+    },
+    {
+      "question": "Milyen alakú a gúla alapja?",
+      "answers": {
+        "a": "Mindig négyzet.",
+        "b": "Bármilyen sokszög lehet.",
+        "c": "Mindig háromszög."
+      },
+      "correct": "b",
+      "explanation": "A gúla alapja egy sokszög, ami lehet háromszög, négyzet, ötszög, hatszög stb. ✅ Megoldás: Bármilyen sokszög lehet."
+    },
+    {
+      "question": "Melyik test testhálója látható a képen?",
+      "answers": {
+        "a": "Négyzet alapú gúla",
+        "b": "Téglatest",
+        "c": "Henger"
+      },
+      "correct": "a",
+      "explanation": "A gúla testhálójának felismerése a vizuális képességeket igényli, a válasz a gúla típusa (négyzet alapú) és az oldallapok alakja (háromszög) alapján határozható meg. ✅ Megoldás: Négyzet alapú gúla."
+    },
+    {
+      "question": "Hány oldallapja van egy ötszög alapú gúlának?",
+      "answers": {
+        "a": "Öt",
+        "b": "Hat",
+        "c": "Négy"
+      },
+      "correct": "a",
+      "explanation": "Az oldallapok száma megegyezik az alaplap oldalainak számával. Az ötszög alapú gúlának 5 oldallapja van. ✅ Megoldás: Öt."
+    },
+    {
+      "question": "Ha egy gúla alapja egy szabályos hatszög, hány egyenlő szárú háromszögből áll a testháló oldallapja?",
+      "answers": {
+        "a": "Hat",
+        "b": "Öt",
+        "c": "Négy"
+      },
+      "correct": "a",
+      "explanation": "A hatszög alapú gúla oldallapjai egyenlő szárú háromszögek, és a darabszámuk megegyezik a hatszög oldalszámával, azaz hat. ✅ Megoldás: Hat."
+    },
+    {
+      "question": "Miért hasznos a testháló?",
+      "answers": {
+        "a": "A térfogat kiszámításához.",
+        "b": "A felszín kiszámításához.",
+        "c": "Az élek számának megállapításához."
+      },
+      "correct": "b",
+      "explanation": "A testháló segítségével könnyen kiszámítható a gúla felszíne, hiszen a síkidomok területeit kell csak összeadni. ✅ Megoldás: A felszín kiszámításához."
+    },
+    {
+      "question": "Melyik NEM része a gúla testhálójának?",
+      "answers": {
+        "a": "Alaplap",
+        "b": "Oldallapok",
+        "c": "Csúcs"
+      },
+      "correct": "c",
+      "explanation": "A csúcs a 3D-s test része, nem a síkba terített testhálón. ✅ Megoldás: Csúcs."
+    },
+    {
+      "question": "Ha egy gúla alapja egy négyzet, és az oldallapjai egybevágó egyenlő szárú háromszögek, milyen a gúla?",
+      "answers": {
+        "a": "Ferde gúla",
+        "b": "Szabályos gúla",
+        "c": "Háromszög alapú gúla"
+      },
+      "correct": "b",
+      "explanation": "Ha a gúla alapja szabályos sokszög, és az oldallapjai egybevágó, egyenlő szárú háromszögek, akkor a gúla szabályos gúla. ✅ Megoldás: Szabályos gúla."
+    },
+    {
+      "question": "Hogyan kapjuk meg a gúla felszínét a testhálóból?",
+      "answers": {
+        "a": "Összeadjuk az oldallapok területét.",
+        "b": "Összeadjuk az alaplap és az oldallapok területét.",
+        "c": "Összeszorozzuk az alaplap és az oldallapok területét."
+      },
+      "correct": "b",
+      "explanation": "A gúla felszíne a testhálóból a következő: a) kiszámoljuk az egyes síkidomok területét, majd b) összeadjuk ezeket. ✅ Megoldás: Összeadjuk az alaplap és az oldallapok területét."
+    },
+    {
+      "question": "Milyen alakúak a gúla testhálójának élei?",
+      "answers": {
+        "a": "Egyenes vonalak.",
+        "b": "Görbe vonalak.",
+        "c": "Pontok."
+      },
+      "correct": "a",
+      "explanation": "A testháló élei a síkidomok (alaplap és oldallapok) oldalai, amelyek egyenes vonalak. ✅ Megoldás: Egyenes vonalak."
+    },
+    {
+      "question": "Ha egy gúla testhálójában az oldallapok egyenlő szárú háromszögek, akkor milyen gúla az?",
+      "answers": {
+        "a": "Ferde gúla",
+        "b": "Szabályos gúla",
+        "c": "Négyszög alapú gúla"
+      },
+      "correct": "b",
+      "explanation": "A szabályos gúla oldallapjai egyenlő szárú háromszögek. ✅ Megoldás: Szabályos gúla."
+    },
+    {
+      "question": "Hány éle van egy hatszög alapú gúlának?",
+      "answers": {
+        "a": "6",
+        "b": "12",
+        "c": "7"
+      },
+      "correct": "b",
+      "explanation": "A gúlának annyi éle van, amennyi az alaplap oldalszáma + az oldallapok éleinek száma. A hatszög alapú gúlának 6 alapéle és 6 oldaléle van. ✅ Megoldás: 12."
+    },
+    {
+      "question": "Hány csúcsa van egy ötszög alapú gúlának?",
+      "answers": {
+        "a": "5",
+        "b": "6",
+        "c": "7"
+      },
+      "correct": "b",
+      "explanation": "A csúcsok száma egyenlő az alaplap csúcsainak száma + 1 (a csúcs). Ötszög alapú gúlában 5+1 = 6 csúcs van. ✅ Megoldás: 6."
+    },
+    {
+      "question": "Melyik test testhálója NEM egyenes vonalakból áll?",
+      "answers": {
+        "a": "Négyzet alapú gúla",
+        "b": "Henger",
+        "c": "Háromszög alapú gúla"
+      },
+      "correct": "b",
+      "explanation": "A henger alapja kör, tehát a síkba terített hálója görbe vonalakat tartalmaz. ✅ Megoldás: Henger."
+    },
+    {
+      "question": "Melyik test testhálója NEM tartalmaz háromszögeket?",
+      "answers": {
+        "a": "Háromszög alapú gúla",
+        "b": "Négyzet alapú gúla",
+        "c": "Téglatest"
+      },
+      "correct": "c",
+      "explanation": "A téglatest testhálója téglalapokból áll. A gúlákban a háromszögek az oldallapok. ✅ Megoldás: Téglatest."
+    },
+    {
+      "question": "Egy gúla alapja egy 4 cm oldalú négyzet, az oldallapok magassága 5 cm.  Mi a felszíne?",
+      "answers": {
+        "a": "24 cm²",
+        "b": "56 cm²",
+        "c": "40 cm²"
+      },
+      "correct": "b",
+      "explanation": "A gúla felszíne = alaplap területe + 4 * (oldallap területe). Alap: 4*4 = 16 cm². Oldallap területe = (4*5)/2= 10 cm². Felszín = 16 + 4*10. Felszín = 16 + 40 = 56 cm². ✅ Megoldás: 56 cm²."
+    },
+    {
+      "question": "Egy szabályos háromszög alapú gúla oldallapjainak magassága 10 cm, az alapélek 6 cm hosszúak. Mi a felszíne?",
+      "answers": {
+        "a": "90 cm²",
+        "b": "108 cm²",
+        "c": "30√3 + 90 cm²"
+      },
+      "correct": "c",
+      "explanation": "🔹 1. Lépés: A felszín = alaplap + oldallapok. 🔹 2. Lépés:  A szabályos háromszög területe: T = (a²√3)/4 = (6²√3)/4 = 9√3. 🔹 3. Lépés: Az oldallap területe = 3*(6 * 10 / 2) = 90. 🔹 4. Lépés: Felszín = 9√3 + 90. ✅ Megoldás: 30√3 + 90 cm²."
+    }
+  ]
 }

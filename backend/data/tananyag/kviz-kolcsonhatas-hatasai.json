@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz kolcsonhatas hatasai\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a kölcsönhatás?",
+      "answers": {
+        "a": "Az, amikor a testek nem hatnak egymásra.",
+        "b": "Amikor a testek kölcsönösen hatnak egymásra.",
+        "c": "A test súlya."
+      },
+      "correct": "b",
+      "explanation": "A kölcsönhatás azt jelenti, hogy a testek kölcsönösen hatnak egymásra.  ✅ Megoldás: Amikor a testek kölcsönösen hatnak egymásra."
+    },
+    {
+      "question": "Milyen erővel hat a Föld a testekre?",
+      "answers": {
+        "a": "Súrlódási erővel.",
+        "b": "Súlyerővel.",
+        "c": "Felhajtóerővel."
+      },
+      "correct": "b",
+      "explanation": "A Föld a testeket a súlyerővel vonzza magához. ✅ Megoldás: Súlyerővel."
+    },
+    {
+      "question": "Mi történik, ha egy labdát feldobunk?",
+      "answers": {
+        "a": "A labda egyenletesen mozog felfelé.",
+        "b": "A labda egyre gyorsabban mozog felfelé.",
+        "c": "A labda lassul, majd lefelé fordul."
+      },
+      "correct": "c",
+      "explanation": "A Föld vonzza a labdát, ezért a labda sebessége lefelé csökken, majd megfordul. ✅ Megoldás: A labda lassul, majd lefelé fordul."
+    },
+    {
+      "question": "Miért esnek a dolgok lefelé?",
+      "answers": {
+        "a": "Mert könnyűek.",
+        "b": "Mert a Föld vonzza őket.",
+        "c": "Mert a levegőben vannak."
+      },
+      "correct": "b",
+      "explanation": "A Föld vonzereje, a súlyerő miatt esnek le a dolgok. ✅ Megoldás: Mert a Föld vonzza őket."
+    },
+    {
+      "question": "Mi a Newton III. törvénye (hatás-ellenhatás törvénye)?",
+      "answers": {
+        "a": "A testek nyugalomban maradnak, amíg erő nem hat rájuk.",
+        "b": "Minden hatásra egyenlő nagyságú, de ellentétes irányú ellenhatás történik.",
+        "c": "Az erő = tömeg * gyorsulás."
+      },
+      "correct": "b",
+      "explanation": "A hatás-ellenhatás törvénye kimondja, hogy minden hatásra egyenlő nagyságú, de ellentétes irányú ellenhatás történik. ✅ Megoldás: Minden hatásra egyenlő nagyságú, de ellentétes irányú ellenhatás történik."
+    },
+    {
+      "question": "Ha egy asztalon álló könyv a Földet vonzza, akkor...",
+      "answers": {
+        "a": "A Föld nem vonzza a könyvet.",
+        "b": "A Föld is vonzza a könyvet, ugyanakkora erővel.",
+        "c": "A könyv lebeg."
+      },
+      "correct": "b",
+      "explanation": "A hatás-ellenhatás törvénye miatt a Föld is vonzza a könyvet. ✅ Megoldás: A Föld is vonzza a könyvet, ugyanakkora erővel."
+    },
+    {
+      "question": "Mi a következménye a hatás-ellenhatás törvényének?",
+      "answers": {
+        "a": "A testek nem mozognak.",
+        "b": "A testek kölcsönösen hatnak egymásra.",
+        "c": "Az erők kiegyenlítik egymást."
+      },
+      "correct": "b",
+      "explanation": "A hatás-ellenhatás miatt a testek mindig kölcsönösen hatnak egymásra. ✅ Megoldás: A testek kölcsönösen hatnak egymásra."
+    },
+    {
+      "question": "Ha egy ember tol egy falat, a fal is tolja az embert. Miért?",
+      "answers": {
+        "a": "Mert a fal nehéz.",
+        "b": "A hatás-ellenhatás törvénye miatt.",
+        "c": "Mert az ember erős."
+      },
+      "correct": "b",
+      "explanation": "A hatás-ellenhatás törvénye miatt a fal is tolja az embert, egyenlő, de ellentétes erővel. ✅ Megoldás: A hatás-ellenhatás törvénye miatt."
+    },
+    {
+      "question": "Ha egy hajó a vízen halad, mi történik?",
+      "answers": {
+        "a": "A hajó a vizet tolja hátra, a víz a hajót előre.",
+        "b": "A hajó nem hat a vízre.",
+        "c": "A víz a hajót a partra tolja."
+      },
+      "correct": "a",
+      "explanation": "A hajó a vizet tolja hátra, a víz a hajót előre. ✅ Megoldás: A hajó a vizet tolja hátra, a víz a hajót előre."
+    },
+    {
+      "question": "Miért tudunk járni?",
+      "answers": {
+        "a": "Mert a lábunk tolja a földet hátra, a föld pedig előre.",
+        "b": "Mert a levegőben tudunk mozogni.",
+        "c": "Mert a lábunk könnyű."
+      },
+      "correct": "a",
+      "explanation": "Járáskor a lábunk a földet hátra tolja, a föld pedig a hatás-ellenhatás törvénye szerint előre. ✅ Megoldás: Mert a lábunk tolja a földet hátra, a föld pedig előre."
+    },
+    {
+      "question": "Mi történik, ha egy rakétát kilövünk?",
+      "answers": {
+        "a": "A rakéta lassan emelkedik.",
+        "b": "A rakéta a gázokat hátra löki, a gázok a rakétát előre.",
+        "c": "A rakéta megáll."
+      },
+      "correct": "b",
+      "explanation": "A rakéta a gázokat hátra löki, a gázok pedig a hatás-ellenhatás törvénye szerint a rakétát előre hajtják. ✅ Megoldás: A rakéta a gázokat hátra löki, a gázok a rakétát előre."
+    },
+    {
+      "question": "Ha a vízbe ugrunk, mi történik?",
+      "answers": {
+        "a": "A víz megpróbál minket megfogni.",
+        "b": "A testünk nyomja a vizet lefelé, a víz felfelé.",
+        "c": "Semmi."
+      },
+      "correct": "b",
+      "explanation": "Ugráskor a testünk nyomja a vizet lefelé, a víz pedig a hatás-ellenhatás törvénye szerint felfelé, ez a felhajtóerő. ✅ Megoldás: A testünk nyomja a vizet lefelé, a víz felfelé."
+    },
+    {
+      "question": "Mi történik, ha egy asztalra egy labdát teszünk?",
+      "answers": {
+        "a": "A labda a levegőbe emelkedik.",
+        "b": "A labda nyomja az asztalt lefelé, az asztal felfelé.",
+        "c": "A labda elgurul."
+      },
+      "correct": "b",
+      "explanation": "A labda nyomja az asztalt lefelé, az asztal pedig a hatás-ellenhatás törvénye szerint felfelé. ✅ Megoldás: A labda nyomja az asztalt lefelé, az asztal felfelé."
+    },
+    {
+      "question": "Mi a súrlódási erő?",
+      "answers": {
+        "a": "A test súlya.",
+        "b": "Az a erő, ami a testet a föld felé vonzza.",
+        "c": "Az a erő, ami a test mozgását akadályozza, vagy megakadályozza a megindulást."
+      },
+      "correct": "c",
+      "explanation": "A súrlódási erő a test mozgását akadályozza.  ✅ Megoldás: Az a erő, ami a test mozgását akadályozza, vagy megakadályozza a megindulást."
+    },
+    {
+      "question": "Mitől függ a súrlódási erő?",
+      "answers": {
+        "a": "A test színétől.",
+        "b": "A felületek érdességétől, a testek nyomóerejétől.",
+        "c": "A test nagyságától."
+      },
+      "correct": "b",
+      "explanation": "A súrlódási erő függ a felületek érdességétől, és a testek egymáshoz nyomódásának erejétől. ✅ Megoldás: A felületek érdességétől, a testek nyomóerejétől."
+    },
+    {
+      "question": "Melyik felületen nagyobb a súrlódás?",
+      "answers": {
+        "a": "Sima felületen.",
+        "b": "Érdes felületen.",
+        "c": "Nincs különbség."
+      },
+      "correct": "b",
+      "explanation": "Az érdes felületen nagyobb a súrlódás, mint a sima felületen. ✅ Megoldás: Érdes felületen."
+    },
+    {
+      "question": "Ha egy test mozog, a súrlódás mindig...",
+      "answers": {
+        "a": "Azonos irányú a mozgással.",
+        "b": "Ellentétes irányú a mozgással.",
+        "c": "Merőleges a mozgásra."
+      },
+      "correct": "b",
+      "explanation": "A súrlódási erő mindig a mozgással ellentétes irányú, és lassítja a testet.  ✅ Megoldás: Ellentétes irányú a mozgással."
+    },
+    {
+      "question": "Mi történik, ha egy testet megpróbálunk elmozdítani, de a súrlódás nagyobb, mint az erőnk?",
+      "answers": {
+        "a": "A test elmozdul.",
+        "b": "A test gyorsul.",
+        "c": "A test nem mozdul meg."
+      },
+      "correct": "c",
+      "explanation": "Ha a súrlódás nagyobb, mint az erőnk, a test nem tud megmozdulni. ✅ Megoldás: A test nem mozdul meg."
+    },
+    {
+      "question": "Miért használnak a téli gumiabroncsokon barázdákat?",
+      "answers": {
+        "a": "Hogy a kerék szebb legyen.",
+        "b": "Hogy a tapadás jobb legyen a havon és a jégen, azaz kisebb legyen a súrlódás.",
+        "c": "Hogy a tapadás jobb legyen a havon és a jégen, azaz nagyobb legyen a súrlódás."
+      },
+      "correct": "c",
+      "explanation": "A barázdák növelik a súrlódást, így a tapadás is nagyobb a havon, jégen. ✅ Megoldás: Hogy a tapadás jobb legyen a havon és a jégen, azaz nagyobb legyen a súrlódás."
+    },
+    {
+      "question": "Mi a haszna a súrlódásnak?",
+      "answers": {
+        "a": "Lehetővé teszi, hogy járjunk, megfogjunk dolgokat.",
+        "b": "Lassítja a dolgokat.",
+        "c": "Mindkettő."
+      },
+      "correct": "c",
+      "explanation": "A súrlódás segít abban, hogy járjunk, megfogjunk dolgokat, de a mozgást is lassítja. ✅ Megoldás: Mindkettő."
+    },
+    {
+      "question": "Melyik gépben használjuk a súrlódást?",
+      "answers": {
+        "a": "A csúszdában.",
+        "b": "A fékrendszerben.",
+        "c": "A repülőgépben."
+      },
+      "correct": "b",
+      "explanation": "A fékrendszer a súrlódást használja a jármű lelassításához. ✅ Megoldás: A fékrendszerben."
+    },
+    {
+      "question": "Miért kenjük olajjal a kerékpár láncát?",
+      "answers": {
+        "a": "Mert szép.",
+        "b": "Hogy a súrlódást csökkentsük.",
+        "c": "Hogy a lánc ne rozsdásodjon."
+      },
+      "correct": "b",
+      "explanation": "Az olaj csökkenti a súrlódást, ami a lánc kopását is lassítja. ✅ Megoldás: Hogy a súrlódást csökkentsük."
+    },
+    {
+      "question": "Mi a felhajtóerő a vízben?",
+      "answers": {
+        "a": "A test súlya.",
+        "b": "A testet felfelé toló erő a vízben.",
+        "c": "A test mérete."
+      },
+      "correct": "b",
+      "explanation": "A felhajtóerő az a felfelé irányuló erő, amit a víz a testre kifejt. ✅ Megoldás: A testet felfelé toló erő a vízben."
+    },
+    {
+      "question": "Miért úszik a hajó?",
+      "answers": {
+        "a": "Mert nehéz.",
+        "b": "Mert a súlya kisebb, mint a víz által kiszorított víz súlya.",
+        "c": "Mert a hajó alakja speciális."
+      },
+      "correct": "b",
+      "explanation": "A hajó azért úszik, mert a hajó által kiszorított víz súlya nagyobb, mint a hajó súlya, ezáltal felhajtóerő hat a hajóra. ✅ Megoldás: Mert a súlya kisebb, mint a víz által kiszorított víz súlya."
+    }
+  ]
 }

@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz hojelensegek alapok\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a hő?",
+      "answers": {
+        "a": "A hideg.",
+        "b": "A test melegsége.",
+        "c": "A meleg energia."
+      },
+      "correct": "c",
+      "explanation": "A hő a meleg energia, ami a testek között áramlik. ✅ Megoldás: A meleg energia."
+    },
+    {
+      "question": "Milyen mértékegységben mérjük a hőt?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "joule (J)",
+        "c": "kilogramm (kg)"
+      },
+      "correct": "b",
+      "explanation": "A hő mértékegysége a joule (J).  ✅ Megoldás: joule (J)"
+    },
+    {
+      "question": "Mi a hőmérséklet?",
+      "answers": {
+        "a": "A test sebessége.",
+        "b": "A test melegségének mértéke.",
+        "c": "A test tömege."
+      },
+      "correct": "b",
+      "explanation": "A hőmérséklet azt mutatja meg, hogy egy test mennyire meleg.  ✅ Megoldás: A test melegségének mértéke."
+    },
+    {
+      "question": "Milyen egységben mérjük a hőmérsékletet?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "Celsius-fok (°C)",
+        "c": "kilogramm (kg)"
+      },
+      "correct": "b",
+      "explanation": "A hőmérsékletet Celsius-fokban (°C) mérjük. ✅ Megoldás: Celsius-fok (°C)"
+    },
+    {
+      "question": "Mi történik, ha egy testet melegítünk?",
+      "answers": {
+        "a": "A tömege csökken.",
+        "b": "A hőmérséklete nő.",
+        "c": "A mérete csökken."
+      },
+      "correct": "b",
+      "explanation": "Ha egy testet melegítünk, a hőmérséklete nő.  ✅ Megoldás: A hőmérséklete nő."
+    },
+    {
+      "question": "Mi történik, ha egy testet hűtünk?",
+      "answers": {
+        "a": "A hőmérséklete nő.",
+        "b": "A hőmérséklete csökken.",
+        "c": "A színe megváltozik."
+      },
+      "correct": "b",
+      "explanation": "Ha egy testet hűtünk, a hőmérséklete csökken. ✅ Megoldás: A hőmérséklete csökken."
+    },
+    {
+      "question": "Melyik a hő terjedési módja?",
+      "answers": {
+        "a": "Konvekció, sugárzás, vezetés.",
+        "b": "Fagyás, olvadás, forrás.",
+        "c": "Tömeg, súly, méret."
+      },
+      "correct": "a",
+      "explanation": "A hő terjedhet konvekcióval (áramlással), sugárzással és vezetéssel.  ✅ Megoldás: Konvekció, sugárzás, vezetés."
+    },
+    {
+      "question": "Mi a vezetés a hő terjedésénél?",
+      "answers": {
+        "a": "A hő terjedése a melegebb folyadék mozgásával.",
+        "b": "A hő terjedése érintkezés útján.",
+        "c": "A hő terjedése hullámok formájában."
+      },
+      "correct": "b",
+      "explanation": "A vezetéskor a hő az érintkező testek között terjed.  ✅ Megoldás: A hő terjedése érintkezés útján."
+    },
+    {
+      "question": "Mi a konvekció a hő terjedésénél?",
+      "answers": {
+        "a": "A hő terjedése a melegebb folyadék vagy gáz mozgásával.",
+        "b": "A hő terjedése érintkezés útján.",
+        "c": "A hő terjedése a nap sugarai által."
+      },
+      "correct": "a",
+      "explanation": "A konvekciókor a melegebb folyadék vagy gáz mozog, és magával viszi a hőt. ✅ Megoldás: A hő terjedése a melegebb folyadék vagy gáz mozgásával."
+    },
+    {
+      "question": "Mi a sugárzás a hő terjedésénél?",
+      "answers": {
+        "a": "A hő terjedése a melegebb folyadék mozgásával.",
+        "b": "A hő terjedése érintkezés útján.",
+        "c": "A hő terjedése hullámok formájában, például a nap sugarai."
+      },
+      "correct": "c",
+      "explanation": "A sugárzás a hő terjedése hullámok formájában. ✅ Megoldás: A hő terjedése hullámok formájában, például a nap sugarai."
+    },
+    {
+      "question": "Ha melegítünk egy fém kanalat, mi történik?",
+      "answers": {
+        "a": "A hő a kanál végénél nem érződik.",
+        "b": "A hő a kanál végénél is érződik, vezetéssel terjed.",
+        "c": "A kanál meghajlik."
+      },
+      "correct": "b",
+      "explanation": "A fém a jó hővezető, ezért a hő a kanál mentén végig terjed. ✅ Megoldás: A hő a kanál végénél is érződik, vezetéssel terjed."
+    },
+    {
+      "question": "Melyik a legjobb hővezető?",
+      "answers": {
+        "a": "A fa.",
+        "b": "A fém.",
+        "c": "A levegő."
+      },
+      "correct": "b",
+      "explanation": "A fémek a legjobb hővezetők, így gyorsan átadják a hőt. ✅ Megoldás: A fém."
+    },
+    {
+      "question": "Melyik a legjobb hőszigetelő?",
+      "answers": {
+        "a": "A fém.",
+        "b": "A fa.",
+        "c": "A levegő."
+      },
+      "correct": "c",
+      "explanation": "A levegő rossz hővezető, ezért jó hőszigetelő.  ✅ Megoldás: A levegő."
+    },
+    {
+      "question": "Miért melegszik fel a kezünk, ha tűz közelébe megyünk?",
+      "answers": {
+        "a": "Vezetéssel terjed a hő.",
+        "b": "Konvekcióval terjed a hő.",
+        "c": "Sugárzással terjed a hő."
+      },
+      "correct": "c",
+      "explanation": "A tűz sugárzással adja át a hőt a környezetének.  ✅ Megoldás: Sugárzással terjed a hő."
+    },
+    {
+      "question": "Miért hideg a fém fogantyú télen?",
+      "answers": {
+        "a": "Mert a fém elvonja a hőt a kezünkből.",
+        "b": "Mert a fém meleg.",
+        "c": "Mert a fém hideg."
+      },
+      "correct": "a",
+      "explanation": "A fém jó hővezető, ezért elvonja a hőt a kezünkből. ✅ Megoldás: Mert a fém elvonja a hőt a kezünkből."
+    },
+    {
+      "question": "Miért használunk hőszigetelést az épületeken?",
+      "answers": {
+        "a": "Hogy ne melegedjenek fel nyáron.",
+        "b": "Hogy ne melegedjenek fel télen.",
+        "c": "Mindkettő."
+      },
+      "correct": "c",
+      "explanation": "A hőszigetelés segít megtartani a meleget télen, és a hűvöset nyáron, vagyis mindkettő.  ✅ Megoldás: Mindkettő."
+    },
+    {
+      "question": "Mi történik a testekkel, ha hőt vesznek fel?",
+      "answers": {
+        "a": "Összemennek.",
+        "b": "Kitágulnak.",
+        "c": "Megváltozik a színük."
+      },
+      "correct": "b",
+      "explanation": "A legtöbb anyag a melegtől kitágul.  ✅ Megoldás: Kitágulnak."
+    },
+    {
+      "question": "Ha egy meleg poharat hideg vízbe teszünk, mi történik?",
+      "answers": {
+        "a": "A víz hőmérséklete nő.",
+        "b": "A pohár hőmérséklete nő.",
+        "c": "A pohár és a víz hőmérséklete kiegyenlítődik."
+      },
+      "correct": "c",
+      "explanation": "A meleg a pohárból a hideg vízbe áramlik, így a hőmérsékletük kiegyenlítődik. ✅ Megoldás: A pohár és a víz hőmérséklete kiegyenlítődik."
+    },
+    {
+      "question": "Ha egy test forró, akkor a molekulái...",
+      "answers": {
+        "a": "Lassan mozognak.",
+        "b": "Gyorsan mozognak.",
+        "c": "Nincs mozgásuk."
+      },
+      "correct": "b",
+      "explanation": "A meleg testek molekulái gyorsabban mozognak, mint a hidegeké. ✅ Megoldás: Gyorsan mozognak."
+    },
+    {
+      "question": "Ha egy testet melegítünk, a molekulái...",
+      "answers": {
+        "a": "Közelebb kerülnek egymáshoz.",
+        "b": "Távolabb kerülnek egymástól.",
+        "c": "Nem változik a helyzetük."
+      },
+      "correct": "b",
+      "explanation": "A melegítés hatására a molekulák több energiát kapnak, jobban mozognak, és így távolabb kerülnek egymástól. ✅ Megoldás: Távolabb kerülnek egymástól."
+    },
+    {
+      "question": "Miért használunk hőszigetelést egy sütőben?",
+      "answers": {
+        "a": "Hogy a sütő ne melegedjen fel.",
+        "b": "Hogy a sütő belsejében a meleg megmaradjon.",
+        "c": "Hogy a sütő szép legyen."
+      },
+      "correct": "b",
+      "explanation": "A hőszigetelés segít megakadályozni a hő távozását, így a sütő belsejében megmarad a meleg. ✅ Megoldás: Hogy a sütő belsejében a meleg megmaradjon."
+    },
+    {
+      "question": "Miért hűl le a kávé a csészében?",
+      "answers": {
+        "a": "Mert a csésze melegíti.",
+        "b": "Mert a hő a levegőbe távozik.",
+        "c": "Mert a kávé sokkal sűrűbb, mint a levegő."
+      },
+      "correct": "b",
+      "explanation": "A kávé a levegőnek adja át a hőt, így lehűl.  ✅ Megoldás: Mert a hő a levegőbe távozik."
+    },
+     {
+      "question": "Ha egy hideg testet meleg helyre teszünk, hogyan változik a hőmérséklete?",
+      "answers": {
+        "a": "Csökken",
+        "b": "Nő",
+        "c": "Ugyanannyi marad."
+      },
+      "correct": "b",
+      "explanation": "A meleg helyről a hideg test hőenergiát vesz fel, a hőmérséklete emiatt nő.  ✅ Megoldás: Nő"
+    },
+    {
+      "question": "Milyen a hőmérséklet a sarkokon?",
+      "answers": {
+        "a": "Meleg",
+        "b": "Hideg",
+        "c": "Közepes"
+      },
+      "correct": "b",
+      "explanation": "A sarkokon a hőmérséklet hideg, mert a Nap sugarai nem érnek oda olyan közvetlenül.  ✅ Megoldás: Hideg"
+    },
+    {
+      "question": "Melyik anyagnak van a legnagyobb hőtároló képessége?",
+      "answers": {
+        "a": "A fémnek.",
+        "b": "A víznek.",
+        "c": "A levegőnek."
+      },
+      "correct": "b",
+      "explanation": "A víznek nagy a hőtároló képessége, ezért lassabban melegszik fel és hűl le, mint más anyagok.  ✅ Megoldás: A víznek"
+    }
+  ]
 }

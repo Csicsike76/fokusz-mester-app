@@ -1,8 +1,249 @@
 {
-  "title": "Kviz peldak az erokre",
+  "title": "Kviz meroleges parhuzamos",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz peldak az erokre\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kviz meroleges parhuzamos\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a pálya fizikai definíciója?",
+      "answers": {
+        "a": "A mozgó test által leírt vonal.",
+        "b": "A test sebessége.",
+        "c": "A test kiindulási helye."
+      },
+      "correct": "a",
+      "explanation": "A pálya az a tényleges út, az a vonal (legyen az egyenes vagy görbe), amelyet egy test a mozgása során befut egy adott vonatkoztatási rendszerben. ✅ Megoldás: A pálya a mozgó test által leírt vonal."
+    },
+    {
+      "question": "Ha egy egyenes úton haladó autó pályája...",
+      "answers": {
+        "a": "egyenes.",
+        "b": "kör.",
+        "c": "görbe."
+      },
+      "correct": "a",
+      "explanation": "Ha egy test egyenes vonalban mozog, akkor az általa leírt pálya is egyenes. Ezt nevezzük egyenesvonalú mozgásnak. ✅ Megoldás: Az autó pályája egyenes."
+    },
+    {
+      "question": "A Hold Föld körüli pályája milyen alakú?",
+      "answers": {
+        "a": "Kör (közelítőleg)",
+        "b": "Egyenes",
+        "c": "Háromszög"
+      },
+      "correct": "a",
+      "explanation": "A Hold a Föld gravitációs vonzásának hatására kering bolygónk körül. A pályája enyhén elliptikus, de jó közelítéssel körnek tekinthető. ✅ Megoldás: A Hold pályája közelítőleg kör alakú."
+    },
+    {
+      "question": "Mi a megtett út?",
+      "answers": {
+        "a": "A pálya hossza.",
+        "b": "A kezdő- és végpont közötti távolság.",
+        "c": "A test sebessége."
+      },
+      "correct": "a",
+      "explanation": "A megtett út a pálya teljes hossza, amit a test bejár. Ezzel szemben az elmozdulás a kezdő- és végpont közötti legrövidebb, egyenes távolság. ✅ Megoldás: A megtett út a pálya hossza."
+    },
+    {
+      "question": "Egy körhinta szélén ülő személy pályája a körhinta középpontjához képest...",
+      "answers": {
+        "a": "kör.",
+        "b": "egyenes.",
+        "c": "pont."
+      },
+      "correct": "a",
+      "explanation": "Ahogy a körhinta forog, a rajta ülő személy egy kör alakú pályát ír le a középpont körül. Ezt nevezzük körmozgásnak. ✅ Megoldás: A személy pályája kör."
+    },
+    {
+      "question": "Egy feldobott kő pályája (a légellenállást elhanyagolva)...",
+      "answers": {
+        "a": "egy görbe vonal (parabola).",
+        "b": "egyenesen felfelé, majd egyenesen lefelé.",
+        "c": "egy kör."
+      },
+      "correct": "a",
+      "explanation": "A feldobott testre a gravitáció hat, ami folyamatosan 'lefelé húzza'. Emiatt a pályája nem egyenes, hanem egy jellegzetes, parabola alakú görbe.  ✅ Megoldás: A kő pályája egy görbe vonal."
+    },
+    {
+      "question": "Ha körbesétálsz egy 400 méteres futópályán és visszaérsz a kiindulási pontba, mennyi a megtett utad?",
+      "answers": {
+        "a": "400 m",
+        "b": "0 m",
+        "c": "200 m"
+      },
+      "correct": "a",
+      "explanation": "A megtett út a pálya teljes hossza. Mivel a pálya hossza 400 méter, ennyit sétáltál. ✅ Megoldás: A megtett út 400 m."
+    },
+    {
+      "question": "Milyen a pálya",
+      "answers": {
+        "a": "Az a test, amit a kísérlet során vizsgálunk.",
+        "b": "Az a vonal, amit a test bejár a mozgása során.",
+        "c": "A mozgás sebessége."
+      },
+      "correct": "b",
+      "explanation": "A pálya a mozgó test által leírt vonal.  ✅ Megoldás: Az a vonal, amit a test bejár a mozgása során."
+    },
+    {
+      "question": "Ha az e egyenes párhuzamos az f egyenessel, és az f párhuzamos a g egyenessel, akkor mi a kapcsolat e és g között?",
+      "answers": {
+        "a": "Egymással merőlegesek.",
+        "b": "Párhuzamosak.",
+        "c": "Metszők"
+      },
+      "correct": "b",
+      "explanation": "Ha két egyenes párhuzamos egy harmadikkal, akkor egymással is párhuzamosak. ✅ Megoldás: Párhuzamosak."
+    },
+    {
+      "question": "Ha egy 1 kg-os test 20 m/s sebességgel mozog, mennyi a mozgási energiája?",
+      "answers": {
+        "a": "100 J",
+        "b": "200 J",
+        "c": "20 J"
+      },
+      "correct": "b",
+      "explanation": "E_kin = ½ ⋅ m ⋅ v² = 0,5 * 1 kg * (20 m/s)² = 200 J. ✅ Megoldás: 200 J"
+    },
+    {
+      "question": "Ha egy test egyenletes sebességgel mozog, akkor a pályája...",
+      "answers": {
+        "a": "egyenes.",
+        "b": "görbe.",
+        "c": "szabálytalan."
+      },
+      "correct": "a",
+      "explanation": "Egyenletes mozgásnál a test sebessége nem változik. ✅ Megoldás: A pályája egyenes"
+    },
+    {
+      "question": "Mi a sebesség mértékegysége?",
+      "answers": {
+        "a": "m/s",
+        "b": "m/s²",
+        "c": "m"
+      },
+      "correct": "a",
+      "explanation": "A sebesség mértékegysége: méter per szekundum (m/s). ✅ Megoldás: m/s"
+    },
+    {
+      "question": "Mi a gyorsulás?",
+      "answers": {
+        "a": "A test tömege.",
+        "b": "A sebesség megváltozása időben.",
+        "c": "A test által megtett út."
+      },
+      "correct": "b",
+      "explanation": "A gyorsulás a sebesség megváltozásának a mértéke. ✅ Megoldás: A test tömege."
+    },
+    {
+      "question": "Mi a gyorsulás jele?",
+      "answers": {
+        "a": "v",
+        "b": "a",
+        "c": "t"
+      },
+      "correct": "b",
+      "explanation": "A gyorsulást a betűvel jelöljük. ✅ Megoldás: a"
+    },
+    {
+      "question": "Ha egy test egyenletes sebességgel mozog, akkor mi a gyorsulása?",
+      "answers": {
+        "a": "Nagy",
+        "b": "Kis",
+        "c": "Nulla"
+      },
+      "correct": "c",
+      "explanation": "A sebesség nem változik, ezért a gyorsulás nulla. ✅ Megoldás: Nulla"
+    },
+    {
+      "question": "Egy busz indul. A mozgása...",
+      "answers": {
+        "a": "Egyenletes.",
+        "b": "Változó (gyorsuló).",
+        "c": "Egyenes vonalú."
+      },
+      "correct": "b",
+      "explanation": "Az induló busz gyorsul, tehát a sebessége változik. ✅ Megoldás: Változó (gyorsuló)"
+    },
+    {
+      "question": "Ha egy test lassul, akkor a gyorsulásának az iránya...",
+      "answers": {
+        "a": "Ugyanaz, mint a mozgás iránya.",
+        "b": "Fordított a mozgás irányához képest.",
+        "c": "Nulla."
+      },
+      "correct": "b",
+      "explanation": "A lassulás azt jelenti, hogy a sebesség csökken. A gyorsulás a sebesség változását jelenti, ezért ilyenkor az a mozgás irányával ellentétes. ✅ Megoldás: Fordított a mozgás irányához képest."
+    },
+    {
+      "question": "Mi a gépkocsik fékrendszerének lényege?",
+      "answers": {
+        "a": "A mozgási energia csökkentése, hővé alakítása a súrlódás révén.",
+        "b": "A kerekek leblokkolása.",
+        "c": "A motor leállítása."
+      },
+      "correct": "a",
+      "explanation": "A fékrendszer a mozgási energiát (sebességet) csökkenti. A súrlódás hőt termel. ✅ Megoldás: A mozgási energia csökkentése, hővé alakítása a súrlódás révén."
+    },
+    {
+      "question": "Miért veszélyes a hirtelen fékezés?",
+      "answers": {
+        "a": "A test tehetetlensége miatt.",
+        "b": "Mert túl nagy a súrlódás.",
+        "c": "Mert a fékek felmelegszenek."
+      },
+      "correct": "a",
+      "explanation": "A test tehetetlensége miatt hirtelen fékezéskor a test folytatja a mozgást, és az utasok előre (vagy a jármű irányába) dőlnek. ✅ Megoldás: A test tehetetlensége miatt."
+    },
+    {
+      "question": "Mi a gyorsulás mértékegysége?",
+      "answers": {
+        "a": "m/s",
+        "b": "m/s²",
+        "c": "m"
+      },
+      "correct": "b",
+      "explanation": "A gyorsulás mértékegysége: méter per szekundum négyzet (m/s²). ✅ Megoldás: m/s²"
+    },
+    {
+      "question": "Ha a testre erő hat, akkor az mindig...",
+      "answers": {
+        "a": "Nyugalomban marad.",
+        "b": "Változtatja a sebességét (gyorsul).",
+        "c": "Csökkenti a sebességét."
+      },
+      "correct": "b",
+      "explanation": "Ha egy testre erő hat, és az nem kiegyenlített, akkor a sebessége változni fog. ✅ Megoldás: Változtatja a sebességét (gyorsul)."
+    },
+    {
+      "question": "Mi a tehetetlenség?",
+      "answers": {
+        "a": "A test gyorsulása.",
+        "b": "A test ellenállása a sebesség megváltoztatásával szemben.",
+        "c": "A test tömege."
+      },
+      "correct": "b",
+      "explanation": "A tehetetlenség a testeknek az a tulajdonsága, hogy ellenállnak a mozgásállapotuk megváltoztatásának. ✅ Megoldás: A test ellenállása a sebesség megváltoztatásával szemben."
+    },
+    {
+      "question": "Mi okozza a mozgás megváltozását?",
+      "answers": {
+        "a": "A sebesség.",
+        "b": "Az erő.",
+        "c": "A tömeg."
+      },
+      "correct": "b",
+      "explanation": "Az erő hatására változik a test mozgása. ✅ Megoldás: Az erő."
+    },
+    {
+      "question": "Egy test sebessége 0 m/s, mit mondhatunk?",
+      "answers": {
+        "a": "Egyenletes mozgást végez.",
+        "b": "Nyugalomban van.",
+        "c": "Gyorsul."
+      },
+      "correct": "b",
+      "explanation": "A 0 m/s azt jelenti, hogy a test nem mozog, vagyis nyugalomban van. ✅ Megoldás: Nyugalomban van."
+    }
+  ]
 }

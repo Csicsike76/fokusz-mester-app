@@ -1,8 +1,259 @@
 {
-  "title": "Kviz keruletterulet",
+  "title": "Kvíz keruletterulet",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz keruletterulet\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz keruletterulet\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a kerület?",
+      "answers": {
+        "a": "Egy alakzat belseje.",
+        "b": "Egy alakzat határvonala körüli hossz.",
+        "c": "Egy alakzat magassága."
+      },
+      "correct": "b",
+      "explanation": "A kerület egy síkidom határvonalának a hossza. Például a téglalap kerülete az oldalak hosszának az összege. ✅ Megoldás: Egy alakzat határvonala körüli hossz."
+    },
+    {
+      "question": "Mi a terület?",
+      "answers": {
+        "a": "Egy alakzat határvonala.",
+        "b": "Egy alakzat magassága.",
+        "c": "Egy alakzat belsejének nagysága."
+      },
+      "correct": "c",
+      "explanation": "A terület megmutatja, hogy egy síkidom mekkora helyet foglal el. Például a szoba nagyságát a területtel adjuk meg. ✅ Megoldás: Egy alakzat belsejének nagysága."
+    },
+    {
+      "question": "Hogyan számoljuk ki a téglalap kerületét?",
+      "answers": {
+        "a": "Oldal * oldal.",
+        "b": "2 * (hosszúság + szélesség).",
+        "c": "hosszúság * szélesség."
+      },
+      "correct": "b",
+      "explanation": "A téglalap kerülete a 2 * (hosszúság + szélesség) képlettel számolható ki. ✅ Megoldás: 2 * (hosszúság + szélesség)."
+    },
+    {
+      "question": "Hogyan számoljuk ki a téglalap területét?",
+      "answers": {
+        "a": "Oldal * oldal.",
+        "b": "2 * (hosszúság + szélesség).",
+        "c": "hosszúság * szélesség."
+      },
+      "correct": "c",
+      "explanation": "A téglalap területét úgy kapjuk meg, hogy a hosszúságot megszorozzuk a szélességgel. ✅ Megoldás: hosszúság * szélesség."
+    },
+    {
+      "question": "Ha egy téglalap 5 cm hosszú és 3 cm széles, mekkora a kerülete?",
+      "answers": {
+        "a": "15 cm",
+        "b": "16 cm",
+        "c": "30 cm"
+      },
+      "correct": "b",
+      "explanation": "Kerület = 2 * (hosszúság + szélesség) = 2 * (5 + 3) = 16 cm. ✅ Megoldás: 16 cm"
+    },
+    {
+      "question": "Ha egy téglalap 5 cm hosszú és 3 cm széles, mekkora a területe?",
+      "answers": {
+        "a": "15 cm²",
+        "b": "16 cm²",
+        "c": "30 cm²"
+      },
+      "correct": "a",
+      "explanation": "Terület = hosszúság * szélesség = 5 * 3 = 15 cm². ✅ Megoldás: 15 cm²"
+    },
+    {
+      "question": "Hogyan számoljuk ki a négyzet kerületét?",
+      "answers": {
+        "a": "Oldal * oldal.",
+        "b": "4 * oldal.",
+        "c": "(oldal + oldal) * 2"
+      },
+      "correct": "b",
+      "explanation": "A négyzet minden oldala egyenlő, ezért a kerületet úgy kapjuk, hogy az oldalt megszorozzuk 4-gyel. ✅ Megoldás: 4 * oldal."
+    },
+    {
+      "question": "Hogyan számoljuk ki a négyzet területét?",
+      "answers": {
+        "a": "4 * oldal.",
+        "b": "oldal + oldal.",
+        "c": "oldal * oldal."
+      },
+      "correct": "c",
+      "explanation": "A négyzet területét úgy kapjuk, hogy az oldalt megszorozzuk önmagával.  ✅ Megoldás: oldal * oldal."
+    },
+    {
+      "question": "Ha egy négyzet oldala 4 cm, akkor mekkora a kerülete?",
+      "answers": {
+        "a": "8 cm",
+        "b": "16 cm",
+        "c": "20 cm"
+      },
+      "correct": "b",
+      "explanation": "Kerület = 4 * oldal = 4 * 4 = 16 cm. ✅ Megoldás: 16 cm"
+    },
+    {
+      "question": "Ha egy négyzet oldala 4 cm, akkor mekkora a területe?",
+      "answers": {
+        "a": "8 cm²",
+        "b": "16 cm²",
+        "c": "20 cm²"
+      },
+      "correct": "b",
+      "explanation": "Terület = oldal * oldal = 4 * 4 = 16 cm². ✅ Megoldás: 16 cm²"
+    },
+    {
+      "question": "Hogyan számoljuk ki a háromszög kerületét?",
+      "answers": {
+        "a": "A háromszög alapja * magassága.",
+        "b": "Az oldalak összege.",
+        "c": "Az alap + magasság."
+      },
+      "correct": "b",
+      "explanation": "A háromszög kerülete a három oldalának az összege. ✅ Megoldás: Az oldalak összege."
+    },
+    {
+      "question": "Hogyan számoljuk ki a háromszög területét?",
+      "answers": {
+        "a": "Alap * magasság.",
+        "b": "(alap * magasság) / 2.",
+        "c": "alap + magasság."
+      },
+      "correct": "b",
+      "explanation": "A háromszög területét úgy kapjuk meg, hogy az alapot megszorozzuk a magassággal, majd elosztjuk kettővel. ✅ Megoldás: (alap * magasság) / 2."
+    },
+    {
+      "question": "Ha egy háromszög oldalai 3 cm, 4 cm, 5 cm, akkor mekkora a kerülete?",
+      "answers": {
+        "a": "10 cm",
+        "b": "12 cm",
+        "c": "15 cm"
+      },
+      "correct": "b",
+      "explanation": "Kerület = 3 + 4 + 5 = 12 cm.  ✅ Megoldás: 12 cm"
+    },
+    {
+      "question": "Ha egy háromszög alapja 6 cm, a magassága 4 cm, akkor mekkora a területe?",
+      "answers": {
+        "a": "10 cm²",
+        "b": "12 cm²",
+        "c": "24 cm²"
+      },
+      "correct": "b",
+      "explanation": "Terület = (alap * magasság) / 2 = (6 * 4) / 2 = 12 cm². ✅ Megoldás: 12 cm²"
+    },
+    {
+      "question": "Hogyan számoljuk ki a kör kerületét?",
+      "answers": {
+        "a": "2 * sugár * π (pí)",
+        "b": "sugár * sugár * π (pí)",
+        "c": "sugár * π (pí)"
+      },
+      "correct": "a",
+      "explanation": "A kör kerületét úgy kapjuk, hogy a sugarát (r) megszorozzuk 2-vel, majd a π-vel.  ✅ Megoldás: 2 * sugár * π (pí)"
+    },
+    {
+      "question": "Hogyan számoljuk ki a kör területét?",
+      "answers": {
+        "a": "2 * sugár * π (pí)",
+        "b": "sugár * sugár * π (pí)",
+        "c": "sugár * π (pí)"
+      },
+      "correct": "b",
+      "explanation": "A kör területét úgy kapjuk, hogy a sugarát (r) megszorozzuk önmagával, majd a  π-vel. ✅ Megoldás: sugár * sugár * π (pí)"
+    },
+    {
+      "question": "Mi az a π (pí) szám?",
+      "answers": {
+        "a": "A kör kerületének és átmérőjének hányadosa, kb. 3,14.",
+        "b": "A kör sugara.",
+        "c": "A kör átmérője."
+      },
+      "correct": "a",
+      "explanation": "A π (pí) egy különleges szám, ami a kör kerületének és az átmérőjének a hányadosa, kb. 3,14. ✅ Megoldás: A kör kerületének és átmérőjének hányadosa, kb. 3,14."
+    },
+    {
+      "question": "Ha egy kör sugara 3 cm, akkor mekkora a kerülete?",
+      "answers": {
+        "a": "9π cm",
+        "b": "6π cm",
+        "c": "3π cm"
+      },
+      "correct": "b",
+      "explanation": "Kerület = 2 * sugár * π = 2 * 3 * π = 6π cm. ✅ Megoldás: 6π cm"
+    },
+    {
+      "question": "Ha egy kör sugara 3 cm, akkor mekkora a területe?",
+      "answers": {
+        "a": "9π cm²",
+        "b": "6π cm²",
+        "c": "3π cm²"
+      },
+      "correct": "a",
+      "explanation": "Terület = sugár * sugár * π = 3 * 3 * π = 9π cm². ✅ Megoldás: 9π cm²"
+    },
+    {
+      "question": "Ha egy kör átmérője 10 cm, akkor mekkora a sugara?",
+      "answers": {
+        "a": "5 cm",
+        "b": "10 cm",
+        "c": "20 cm"
+      },
+      "correct": "a",
+      "explanation": "A sugár a kör középpontjától a körvonalig tart, az átmérő a körvonal két pontja közötti távolság, ami átmegy a középponton. A sugár a fele az átmérőnek. ✅ Megoldás: 5 cm"
+    },
+    {
+      "question": "Ha egy kör átmérője 10 cm, akkor mekkora a kerülete?",
+      "answers": {
+        "a": "10π cm",
+        "b": "20π cm",
+        "c": "5π cm"
+      },
+      "correct": "a",
+      "explanation": "A sugár 5 cm, a kerület = 2 * sugár * π = 10π cm. ✅ Megoldás: 10π cm"
+    },
+    {
+      "question": "Ha egy kör átmérője 10 cm, akkor mekkora a területe?",
+      "answers": {
+        "a": "10π cm²",
+        "b": "25π cm²",
+        "c": "50π cm²"
+      },
+      "correct": "b",
+      "explanation": "A sugár 5 cm, a terület = sugár * sugár * π = 5 * 5 * π = 25π cm².  ✅ Megoldás: 25π cm²"
+    },
+    {
+      "question": "Ha egy téglalap kerülete 20 cm, hossza 6 cm, akkor mekkora a szélessége?",
+      "answers": {
+        "a": "4 cm",
+        "b": "7 cm",
+        "c": "8 cm"
+      },
+      "correct": "a",
+      "explanation": "Kerület = 2 * (hosszúság + szélesség). 20 = 2 * (6 + szélesség). 10 = 6 + szélesség, a szélesség = 4 cm. ✅ Megoldás: 4 cm"
+    },
+    {
+      "question": "Mi a helyes mértékegység a terület mérésére?",
+      "answers": {
+        "a": "cm",
+        "b": "cm²",
+        "c": "cm³"
+      },
+      "correct": "b",
+      "explanation": "A területet mindig négyzetes mértékegységben adjuk meg, mint például cm². ✅ Megoldás: cm²"
+    },
+    {
+      "question": "Ha egy négyzet kerülete 20 cm, akkor mekkora az oldala?",
+      "answers": {
+        "a": "4 cm",
+        "b": "5 cm",
+        "c": "10 cm"
+      },
+      "correct": "b",
+      "explanation": "A négyzet minden oldala egyenlő. Kerület = 4 * oldal = 20 cm, az oldal = 5 cm.  ✅ Megoldás: 5 cm"
+    }
+  ]
 }

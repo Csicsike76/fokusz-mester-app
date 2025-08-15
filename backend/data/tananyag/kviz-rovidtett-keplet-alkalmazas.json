@@ -3,6 +3,247 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz rovidtett keplet alkalmazas\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz rövidített képlet alkalmazása\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik képlet alkalmazható: (a+b)² = …?",
+      "answers": {
+        "a": "a² + 2ab + b²",
+        "b": "a² − 2ab + b²",
+        "c": "a² + b²"
+      },
+      "correct": "a",
+      "explanation": "Binom négyzete képlet."
+    },
+    {
+      "question": "Hogyan alkalmazod: (a−b)² = …?",
+      "answers": {
+        "a": "a² + 2ab + b²",
+        "b": "a² − 2ab + b²",
+        "c": "a² − b²"
+      },
+      "correct": "b",
+      "explanation": "Binom különbsége négyzete."
+    },
+    {
+      "question": "Melyik képlet használható: (a+b)(a−b) = …?",
+      "answers": {
+        "a": "a² + b²",
+        "b": "a² + 2ab + b²",
+        "c": "a² − b²"
+      },
+      "correct": "c",
+      "explanation": "Konjugált szorzat."
+    },
+    {
+      "question": "Rövidített képlet: (x+3)² – (x−3)² = …?",
+      "answers": {
+        "a": "6x",
+        "b": "12x",
+        "c": "0"
+      },
+      "correct": "b",
+      "explanation": "Képlet: (a+b)²−(a−b)²=4ab, itt b=3 →12x."
+    },
+    {
+      "question": "Rövidített képlet alkalmazása: (2+5)² = …?",
+      "answers": {
+        "a": "49",
+        "b": "25",
+        "c": "14"
+      },
+      "correct": "a",
+      "explanation": "7²=49."
+    },
+    {
+      "question": "Rövidített képlet: (x−4)(x+4) = …?",
+      "answers": {
+        "a": "x²+16",
+        "b": "x²−16",
+        "c": "x²−8x"
+      },
+      "correct": "b",
+      "explanation": "a²−b²."
+    },
+    {
+      "question": "(a+2)² + (a−2)² = …?",
+      "answers": {
+        "a": "2a²+4",
+        "b": "2a²+8",
+        "c": "a²+4"
+      },
+      "correct": "a",
+      "explanation": "2a²+2·4=2a²+8."
+    },
+    {
+      "question": "Rövidített képlet: (x+1)² – x² = …?",
+      "answers": {
+        "a": "2x+1",
+        "b": "x+1",
+        "c": "1"
+      },
+      "correct": "a",
+      "explanation": "(a+b)²−a²=2ab+b², b=1 →2x+1."
+    },
+    {
+      "question": "Rövidített képlet: (x+3)² = …?",
+      "answers": {
+        "a": "x²+6x+9",
+        "b": "x²+6x+9",
+        "c": "x²−6x+9"
+      },
+      "correct": "a",
+      "explanation": "Binom négyzete."
+    },
+    {
+      "question": "Rövidített képlet: (a−b)² + (a+b)² = …?",
+      "answers": {
+        "a": "2(a²−b²)",
+        "b": "2(a²+b²)",
+        "c": "a²+b²"
+      },
+      "correct": "b",
+      "explanation": "2a²+2b²."
+    },
+    {
+      "question": "Rövidített képlet: (x−y)(x+y) = …?",
+      "answers": {
+        "a": "x²−y²",
+        "b": "x²+y²",
+        "c": "(x−y)²"
+      },
+      "correct": "a",
+      "explanation": "Konjugált szorzat."
+    },
+    {
+      "question": "Rövidített képlet alkalmazása: (2x+5)²?",
+      "answers": {
+        "a": "4x²+20x+25",
+        "b": "4x²+10x+25",
+        "c": "4x²+20x+25"
+      },
+      "correct": "a",
+      "explanation": "a²+2ab+b²."
+    },
+    {
+      "question": "Rövidített képlet: (x+4)(x−4) + 16 = …?",
+      "answers": {
+        "a": "x²−16+16",
+        "b": "x²",
+        "c": "x²−8x"
+      },
+      "correct": "b",
+      "explanation": "x²−16+16=x²."
+    },
+    {
+      "question": "Rövidített képlet: (a+b)² − a² = …?",
+      "answers": {
+        "a": "2ab+b²",
+        "b": "a²+2ab",
+        "c": "b²"
+      },
+      "correct": "a",
+      "explanation": "(a+b)²−a²=2ab+b²."
+    },
+    {
+      "question": "Rövidített képlet: (a−b)² − (a+b)² = …?",
+      "answers": {
+        "a": "−2ab+b²",
+        "b": "2ab−b²",
+        "c": "−4ab"
+      },
+      "correct": "c",
+      "explanation": "(a−b)²−(a+b)²=−4ab."
+    },
+    {
+      "question": "Rövidített képlet: (x+k)² + (x−k)² = …?",
+      "answers": {
+        "a": "2x²",
+        "b": "2x²+2k²",
+        "c": "2k²"
+      },
+      "correct": "b",
+      "explanation": "2x²+2k²."
+    },
+    {
+      "question": "Rövidített képlet: (a−3)(a+3) + 9 = …?",
+      "answers": {
+        "a": "a²",
+        "b": "a²+9",
+        "c": "a²−9"
+      },
+      "correct": "a",
+      "explanation": "a²−9+9=a²."
+    },
+    {
+      "question": "Rövidített képlet alkalmazása: (x−2)² + 4 = …?",
+      "answers": {
+        "a": "x²−4x+4",
+        "b": "x²−4x+8",
+        "c": "x²−4x+8"
+      },
+      "correct": "b",
+      "explanation": "x²−4x+4+4=x²−4x+8."
+    },
+    {
+      "question": "Rövidített képlet: (a−b)² − (a+b)² = …? (ismétlés)",
+      "answers": {
+        "a": "-2ab+b²",
+        "b": "8ab",
+        "c": "-4ab"
+      },
+      "correct": "c",
+      "explanation": "Ez az, ahol hibáztam.  (a−b)²−(a+b)² = −4ab.  ✅ Megoldás: −4ab."
+    },
+    {
+      "question": "Mi a (2-x)² képlete?",
+      "answers": {
+        "a": "4 - 4x + x²",
+        "b": "4 - x²",
+        "c": "4 + x²"
+      },
+      "correct": "a",
+      "explanation": "A binomiális tétel alapján (a - b)² = a² - 2ab + b². (2 - x)² = 2² - 2 * 2 * x + x² = 4 - 4x + x². ✅ Megoldás: 4 - 4x + x²."
+    },
+    {
+      "question": "Mi a (2x+3)(2x-3) képlete?",
+      "answers": {
+        "a": "4x² - 9",
+        "b": "4x² + 12x + 9",
+        "c": "4x² + 9"
+      },
+      "correct": "a",
+      "explanation": "A konjugált szorzat képlete (a+b)(a-b) = a² - b². (2x+3)(2x-3) = (2x)² - 3² = 4x² - 9. ✅ Megoldás: 4x² - 9."
+    },
+    {
+      "question": "Mi a (2x+1)² képlete?",
+      "answers": {
+        "a": "4x² + 4x + 1",
+        "b": "4x² + 1",
+        "c": "2x² + 1"
+      },
+      "correct": "a",
+      "explanation": "A binomiális tétel alapján (a + b)² = a² + 2ab + b². (2x + 1)² = (2x)² + 2 * 2x * 1 + 1² = 4x² + 4x + 1. ✅ Megoldás: 4x² + 4x + 1."
+    },
+    {
+      "question": "Ha a=5 és b=2, mennyi (a+b)(a-b)?",
+      "answers": {
+        "a": "25",
+        "b": "21",
+        "c": "6"
+      },
+      "correct": "b",
+      "explanation": "(a+b)(a-b) = a² - b². 5² - 2² = 25 - 4 = 21. ✅ Megoldás: 21."
+    },
+    {
+      "question": "Mi a (3-x)(3+x) kifejezés?",
+      "answers": {
+        "a": "9 - x²",
+        "b": "9 + x²",
+        "c": "6x"
+      },
+      "correct": "a",
+      "explanation": "Konjugált szorzat: a² - b² = 3² - x² = 9 - x². ✅ Megoldás: 9 - x²"
+    }
+  ]
 }

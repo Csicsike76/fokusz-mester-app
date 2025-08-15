@@ -1,8 +1,249 @@
 {
-  "title": "Kviz haladasi egyensuly",
+  "title": "Kvíz haladasi egyensuly",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz haladasi egyensuly\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a haladási egyensúly?",
+      "answers": {
+        "a": "Amikor egy test nyugalomban van, vagy egyenes vonalban, egyenletes sebességgel mozog.",
+        "b": "Amikor a test gyorsul.",
+        "c": "Amikor a test megáll."
+      },
+      "correct": "a",
+      "explanation": "A haladási egyensúly azt jelenti, hogy a test sebessége nem változik. Vagy áll, vagy egyenes vonalban, állandó sebességgel mozog. ✅ Megoldás: Amikor egy test nyugalomban van, vagy egyenes vonalban, egyenletes sebességgel mozog."
+    },
+    {
+      "question": "Mi a tehetetlenség törvénye?",
+      "answers": {
+        "a": "A test akkor gyorsul, ha erő hat rá.",
+        "b": "A test nyugalomban marad, vagy egyenes vonalban, egyenletesen mozog, amíg egy erő nem hat rá.",
+        "c": "A test vonzza a másikat."
+      },
+      "correct": "b",
+      "explanation": "A tehetetlenség törvénye azt mondja ki, hogy a test megőrzi mozgásállapotát, amíg valami nem változtat rajta. Ha nem hat erő, a test vagy áll, vagy egyenes vonalban, egyenletesen mozog. ✅ Megoldás: A test nyugalomban marad, vagy egyenes vonalban, egyenletesen mozog, amíg egy erő nem hat rá."
+    },
+    {
+      "question": "Milyen erő hat egy asztalon nyugvó könyvre?",
+      "answers": {
+        "a": "Csak a súlyerő.",
+        "b": "Csak a tartóerő.",
+        "c": "A súlyerő és a tartóerő is."
+      },
+      "correct": "c",
+      "explanation": "A könyvre lefelé hat a súlyerő (a Föld vonzza), felfelé pedig a tartóerő (az asztal tartja). Ezek kiegyenlítik egymást, ezért a könyv nyugalomban van. ✅ Megoldás: A súlyerő és a tartóerő is."
+    },
+    {
+      "question": "Mi a súlyerő?",
+      "answers": {
+        "a": "A test tömege.",
+        "b": "A testet a Föld felé vonzó erő.",
+        "c": "Az a erő, ami a testet a levegőben tartja."
+      },
+      "correct": "b",
+      "explanation": "A súlyerő az a vonzóerő, amellyel a Föld vonzza a testeket. ✅ Megoldás: A testet a Föld felé vonzó erő."
+    },
+    {
+      "question": "Mi a tartóerő?",
+      "answers": {
+        "a": "A test súlya.",
+        "b": "Az az erő, amivel egy felület tartja a testet.",
+        "c": "A test mérete."
+      },
+      "correct": "b",
+      "explanation": "A tartóerő az az erő, amellyel egy felület (pl. asztal, padló) megtartja a testet. ✅ Megoldás: Az az erő, amivel egy felület tartja a testet."
+    },
+    {
+      "question": "Mikor van egy test haladási egyensúlyban?",
+      "answers": {
+        "a": "Ha gyorsul.",
+        "b": "Ha erő hat rá, de nem mozog.",
+        "c": "Ha a testre ható erők eredője nulla."
+      },
+      "correct": "c",
+      "explanation": "Ha egy testre ható erők eredője nulla, akkor a test vagy áll, vagy egyenes vonalban, egyenletes sebességgel mozog. ✅ Megoldás: Ha a testre ható erők eredője nulla."
+    },
+    {
+      "question": "Mi a tehetetlenség?",
+      "answers": {
+        "a": "A test ellenállása a sebesség megváltoztatásával szemben.",
+        "b": "A test súlya.",
+        "c": "A test mérete."
+      },
+      "correct": "a",
+      "explanation": "A tehetetlenség azt jelenti, hogy a test megpróbálja megtartani a mozgásállapotát. Vagy áll, vagy egyenletesen mozog. ✅ Megoldás: A test ellenállása a sebesség megváltoztatásával szemben."
+    },
+    {
+      "question": "Mi történik, ha egy testre ható erők eredője nem nulla?",
+      "answers": {
+        "a": "A test egyenletesen mozog.",
+        "b": "A test megáll.",
+        "c": "A test gyorsul."
+      },
+      "correct": "c",
+      "explanation": "Ha a testre ható erők eredője nem nulla, akkor a test gyorsul, vagyis a sebessége változik. ✅ Megoldás: A test gyorsul."
+    },
+    {
+      "question": "Mi a tehetetlenség következménye?",
+      "answers": {
+        "a": "A test nehezebb lesz.",
+        "b": "A test megpróbálja megtartani a sebességét.",
+        "c": "A test felmelegszik."
+      },
+      "correct": "b",
+      "explanation": "A tehetetlenség miatt a test hajlamos megőrizni a mozgásállapotát. ✅ Megoldás: A test megpróbálja megtartani a sebességét."
+    },
+    {
+      "question": "Egy mozgó vonatra felugrik egy utas. Mi történik?",
+      "answers": {
+        "a": "Hátracsúszik a vonatban.",
+        "b": "Ugyanazzal a sebességgel mozog, mint a vonat.",
+        "c": "Ugrás után lemarad a vonatról."
+      },
+      "correct": "b",
+      "explanation": "A tehetetlenség miatt az utas a vonattal együtt mozog, mert mindkettőre ugyanaz a mozgás érvényes. ✅ Megoldás: Ugyanazzal a sebességgel mozog, mint a vonat."
+    },
+    {
+      "question": "Mi történik, ha a busz hirtelen megáll, és te nem tartod magad?",
+      "answers": {
+        "a": "Előre dőlsz.",
+        "b": "Hátra dőlsz.",
+        "c": "Oldalra dőlsz."
+      },
+      "correct": "a",
+      "explanation": "A tehetetlenség miatt a test meg akarja tartani a mozgását. Amikor a busz megáll, a test előre dől, mert megpróbálja megtartani az eredeti sebességét. ✅ Megoldás: Előre dőlsz."
+    },
+    {
+      "question": "Mikor van egy test nyugalomban?",
+      "answers": {
+        "a": "Amikor mozog.",
+        "b": "Amikor a sebessége 0.",
+        "c": "Amikor gyorsul."
+      },
+      "correct": "b",
+      "explanation": "Ha a test sebessége 0, akkor nem mozog, vagyis nyugalomban van. ✅ Megoldás: Amikor a sebessége 0."
+    },
+    {
+      "question": "Milyen erők hatnak egy asztalon álló pohárra?",
+      "answers": {
+        "a": "Csak a súlyerő.",
+        "b": "Csak a tartóerő.",
+        "c": "A súlyerő és a tartóerő is."
+      },
+      "correct": "c",
+      "explanation": "A pohárra lefelé hat a súlyerő, felfelé pedig a tartóerő. Ezek kiegyenlítik egymást, ezért a pohár nyugalomban van. ✅ Megoldás: A súlyerő és a tartóerő is."
+    },
+    {
+      "question": "Mi történik, ha egy test egyenletes sebességgel mozog?",
+      "answers": {
+        "a": "Gyorsul.",
+        "b": "Lassul.",
+        "c": "Nincs gyorsulása."
+      },
+      "correct": "c",
+      "explanation": "Egyenletes mozgásnál a test sebessége nem változik, tehát nincs gyorsulása. ✅ Megoldás: Nincs gyorsulása."
+    },
+    {
+      "question": "Egy doboz nyugalomban van az asztalon. Mi a tehetetlenség következménye?",
+      "answers": {
+        "a": "A doboz elmozdul az asztalról.",
+        "b": "A doboz nyugalomban marad, amíg erő nem hat rá.",
+        "c": "A doboz lebegni kezd."
+      },
+      "correct": "b",
+      "explanation": "A tehetetlenség miatt a doboz nyugalomban marad, amíg egy erő meg nem mozdítja. ✅ Megoldás: A doboz nyugalomban marad, amíg erő nem hat rá."
+    },
+    {
+      "question": "Melyik erő tartja a Földön a dolgokat?",
+      "answers": {
+        "a": "A tartóerő.",
+        "b": "A súrlódási erő.",
+        "c": "A gravitációs erő (súlyerő)."
+      },
+      "correct": "c",
+      "explanation": "A gravitációs erő (súlyerő) a Föld vonzása, ami a dolgokat a Földön tartja. ✅ Megoldás: A gravitációs erő (súlyerő)."
+    },
+    {
+      "question": "Melyik a helyes megfogalmazása a tehetetlenség törvényének?",
+      "answers": {
+        "a": "Ha egy testre ható erők összege nulla, akkor a test gyorsul.",
+        "b": "Ha egy testre ható erők összege nulla, akkor a test nyugalomban marad vagy egyenes vonalú egyenletes mozgást végez.",
+        "c": "Ha egy testre erő hat, akkor megáll."
+      },
+      "correct": "b",
+      "explanation": "A tehetetlenség törvénye azt mondja, hogy ha nincs eredő erő (erők összege nulla), akkor a test vagy áll, vagy egyenletesen mozog. ✅ Megoldás: Ha egy testre ható erők összege nulla, akkor a test nyugalomban marad vagy egyenes vonalú egyenletes mozgást végez."
+    },
+    {
+      "question": "Miért dőlünk hátra a buszon, amikor hirtelen elindul?",
+      "answers": {
+        "a": "Mert a tehetetlenség miatt a testünk meg akar maradni a helyén.",
+        "b": "Mert a busz gyorsul.",
+        "c": "Mert félünk."
+      },
+      "correct": "a",
+      "explanation": "Amikor a busz elindul, a testünk a tehetetlenség miatt meg akar maradni a helyén, ezért dőlünk hátra. ✅ Megoldás: Mert a tehetetlenség miatt a testünk meg akar maradni a helyén."
+    },
+     {
+      "question": "Mi a tehetetlenség a mindennapokban?",
+      "answers": {
+        "a": "Amikor a testünk szeretne gyorsulni.",
+        "b": "Amikor a testünk ellenáll a mozgás megváltoztatásának.",
+        "c": "Amikor egy test könnyen megmozdul."
+      },
+      "correct": "b",
+      "explanation": "A tehetetlenség miatt egy test nem akarja, hogy a mozgása megváltozzon.  ✅ Megoldás: Amikor a testünk ellenáll a mozgás megváltoztatásának."
+    },
+    {
+      "question": "Ha egy asztalon a könyv nyugalomban van, milyen erők hatnak rá?",
+      "answers": {
+        "a": "A súlyerő és a tartóerő.",
+        "b": "Csak a súlyerő.",
+        "c": "Csak a tartóerő."
+      },
+      "correct": "a",
+      "explanation": "A könyvre a Föld vonzóereje (súlyerő) hat lefelé, az asztal pedig tartóerővel tartja. ✅ Megoldás: A súlyerő és a tartóerő."
+    },
+    {
+      "question": "Ha a test egyenletesen mozog, akkor milyen a gyorsulása?",
+      "answers": {
+        "a": "Pozitív.",
+        "b": "Negatív.",
+        "c": "Nulla."
+      },
+      "correct": "c",
+      "explanation": "Egyenletes mozgásnál a sebesség állandó, ezért a gyorsulás nulla. ✅ Megoldás: Nulla."
+    },
+    {
+      "question": "Mi okozza a mozgás megváltozását?",
+      "answers": {
+        "a": "A tehetetlenség.",
+        "b": "Az erő.",
+        "c": "A sebesség."
+      },
+      "correct": "b",
+      "explanation": "A test mozgásállapotát (sebességét) az erő változtatja meg. ✅ Megoldás: Az erő."
+    },
+    {
+      "question": "Milyen irányban hat a súlyerő?",
+      "answers": {
+        "a": "Felfelé.",
+        "b": "Lefelé.",
+        "c": "Oldalra."
+      },
+      "correct": "b",
+      "explanation": "A súlyerő a Föld középpontja felé, azaz lefelé hat. ✅ Megoldás: Lefelé."
+    },
+    {
+      "question": "Ha egy test nyugalomban van, akkor milyen erők hatnak rá?",
+      "answers": {
+        "a": "Nincs erő.",
+        "b": "Az erők kiegyenlítik egymást.",
+        "c": "Csak egy erő hat."
+      },
+      "correct": "b",
+      "explanation": "Ha egy test nyugalomban van, a rá ható erők kioltják egymást (eredőjük nulla). ✅ Megoldás: Az erők kiegyenlítik egymást."
+    }
+  ]
 }

@@ -4,5 +4,226 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz suly\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a súly?",
+      "answers": {
+        "a": "Egy test tömege.",
+        "b": "A testet a Föld által kifejtett gravitációs erő.",
+        "c": "Az anyag mennyisége."
+      },
+      "correct": "b",
+      "explanation": "A súly a testre ható gravitációs erő, amit a Föld fejt ki a testre.  ✅ Megoldás: A testet a Föld által kifejtett gravitációs erő."
+    },
+    {
+      "question": "Mi a tömeg?",
+      "answers": {
+        "a": "A test nagysága.",
+        "b": "Az anyag mennyisége egy testben.",
+        "c": "A test gyorsulása."
+      },
+      "correct": "b",
+      "explanation": "A tömeg az anyagmennyiség mértéke. Független a helytől, a súly viszont attól is függ. ✅ Megoldás: Az anyag mennyisége egy testben."
+    },
+    {
+      "question": "Milyen mértékegysége van a súlynak?",
+      "answers": {
+        "a": "kilogramm (kg)",
+        "b": "newton (N)",
+        "c": "méter (m)"
+      },
+      "correct": "b",
+      "explanation": "Az erő, így a súly is newtonban (N) mérjük. ✅ Megoldás: newton (N)"
+    },
+    {
+      "question": "Mi a g (nehézségi gyorsulás) értéke a Földön?",
+      "answers": {
+        "a": "9,81 m/s²",
+        "b": "10 N/kg",
+        "c": "Mindkettő helyes"
+      },
+      "correct": "c",
+      "explanation": "A nehézségi gyorsulás (g) a Földön kb. 9,81 m/s², vagy 10 N/kg. ✅ Megoldás: Mindkettő helyes."
+    },
+    {
+      "question": "Hogyan számoljuk ki a súlyt (S)?",
+      "answers": {
+        "a": "S = m * g",
+        "b": "S = m / g",
+        "c": "S = g / m"
+      },
+      "correct": "a",
+      "explanation": "A súly (S) egyenlő a tömeg (m) és a nehézségi gyorsulás (g) szorzatával.  ✅ Megoldás: S = m * g"
+    },
+    {
+      "question": "Ha egy test tömege 2 kg, mekkora a súlya a Földön?",
+      "answers": {
+        "a": "kb. 2 N",
+        "b": "kb. 20 N",
+        "c": "kb. 10 N"
+      },
+      "correct": "b",
+      "explanation": "S = m * g ≈ 2 kg * 10 N/kg = 20 N.  ✅ Megoldás: kb. 20 N"
+    },
+    {
+      "question": "Ha egy test tömege 5 kg, és a súlya 50 N. Mekkora a nehézségi gyorsulás?",
+      "answers": {
+        "a": "5 m/s²",
+        "b": "10 m/s²",
+        "c": "250 m/s²"
+      },
+      "correct": "b",
+      "explanation": "S = m * g, ebből g = S / m = 50 N / 5 kg = 10 N/kg.  ✅ Megoldás: 10 m/s²"
+    },
+    {
+      "question": "Ha a Holdon mérünk egy testet, a tömege és a súlya is csökken.",
+      "answers": {
+        "a": "Igaz",
+        "b": "Hamis",
+        "c": "Részben igaz"
+      },
+      "correct": "b",
+      "explanation": "A tömeg az anyagmennyiség mértéke, ami nem függ a helytől. A Holdon kisebb a gravitáció, ezért a súly csökken, de a tömeg nem. ✅ Megoldás: Hamis"
+    },
+    {
+      "question": "Ha egy 10 kg tömegű testet mérünk a Holdon, a súlya kb. ...",
+      "answers": {
+        "a": "100 N",
+        "b": "16 N",
+        "c": "10 N"
+      },
+      "correct": "b",
+      "explanation": "A Holdon a nehézségi gyorsulás kb. 1/6-a a Földinek.  A súly = tömeg * gravitáció, tehát a Földön 10 kg * 10 N/kg = 100 N, a Holdon kb. 100/6 ≈ 16 N. ✅ Megoldás: Kb. 16 N"
+    },
+    {
+      "question": "Mi történik a súlyával, ha egy testet magasabbra emelünk a Földön?",
+      "answers": {
+        "a": "Nő.",
+        "b": "Csökken.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "A gravitáció a távolsággal csökken. A távolabb lévő testre kisebb erő hat, tehát a súlya is csökken.  ✅ Megoldás: Csökken."
+    },
+    {
+      "question": "Melyik erő a súly (ismétlés)?",
+      "answers": {
+        "a": "A test lendülete.",
+        "b": "A testet a Föld felé vonzó erő.",
+        "c": "A test tömege."
+      },
+      "correct": "b",
+      "explanation": "A súly a testet a Föld felé vonzó erő. ✅ Megoldás: A testet a Föld felé vonzó erő."
+    },
+    {
+      "question": "Mit mérünk a mérleggel? (ismétlés)",
+      "answers": {
+        "a": "Tömeget.",
+        "b": "Hőmérsékletet.",
+        "c": "Hosszt."
+      },
+      "correct": "a",
+      "explanation": "A mérleg a tömeget méri, ami az anyagmennyiség mértéke. ✅ Megoldás: Tömeget."
+    },
+    {
+      "question": "Mi a különbség a súly és a tömeg között?",
+      "answers": {
+        "a": "A tömeg az anyagmennyiség, a súly a gravitáció hatására a testre ható erő.",
+        "b": "A súly a mértékegység.",
+        "c": "Mindkettő ugyanaz."
+      },
+      "correct": "a",
+      "explanation": "A tömeg az anyagmennyiség, a súly pedig a testre ható nehézségi erő. A kettő nem ugyanaz. ✅ Megoldás: A tömeg az anyagmennyiség, a súly a gravitáció hatására a testre ható erő."
+    },
+    {
+      "question": "Ha a Holdon mérünk, akkor a tömeg és a súly is kisebb lesz.",
+      "answers": {
+        "a": "Igaz.",
+        "b": "Hamis.",
+        "c": "Részben igaz."
+      },
+      "correct": "b",
+      "explanation": "A tömeg az anyagmennyiség mértéke, ami független a helytől. A súly a gravitációs vonzás következménye, ami a Holdon kisebb, mint a Földön.  ✅ Megoldás: Hamis"
+    },
+    {
+      "question": "Ha valaki a tengerbe ugrik, a súlya...",
+      "answers": {
+        "a": "...ugyanakkora marad.",
+        "b": "...csökken.",
+        "c": "...nulla lesz."
+      },
+      "correct": "b",
+      "explanation": "A víz felhajtóerőt fejt ki a testre, ami csökkenti a súlyát. ✅ Megoldás: Csökken"
+    },
+     {
+      "question": "Mi a súly egysége? (ismétlés)",
+      "answers": {
+        "a": "kilogramm (kg)",
+        "b": "newton (N)",
+        "c": "méter (m)"
+      },
+      "correct": "b",
+      "explanation": "A súly az erő, ezért a mértékegysége a newton (N). ✅ Megoldás: newton (N)."
+    },
+    {
+      "question": "Ha a Földön egy test súlya 100 N, mekkora a tömege (kb.)?",
+      "answers": {
+        "a": "10 kg",
+        "b": "100 kg",
+        "c": "1000 kg"
+      },
+      "correct": "a",
+      "explanation": "S = m * g, amiből m = S / g ≈ 100 N / 10 N/kg = 10 kg.  ✅ Megoldás: 10 kg"
+    },
+    {
+      "question": "Melyik erő felelős a testek súlyáért?",
+      "answers": {
+        "a": "A súrlódási erő.",
+        "b": "A gravitációs erő.",
+        "c": "A közegellenállási erő."
+      },
+      "correct": "b",
+      "explanation": "A Föld a gravitációs erővel vonzza a testeket, ezt nevezzük súlyerőnek. ✅ Megoldás: A gravitációs erő."
+    },
+    {
+      "question": "Miért nehezebb egy emelővel felemelni egy tárgyat?",
+      "answers": {
+        "a": "Mert a súrlódás gátolja.",
+        "b": "Mert a tárgy súlya a nehézségi erővel hat lefelé.",
+        "c": "Mert a tárgy tömege nagy."
+      },
+      "correct": "b",
+      "explanation": "A súly a testre ható nehézségi erő, ami lefelé húzza a testet, megnehezítve az emelést. ✅ Megoldás: Mert a tárgy súlya a nehézségi erővel hat lefelé."
+    },
+    {
+      "question": "Ha egy testet felviszünk a hegyre, a súlya...",
+      "answers": {
+        "a": "csökken",
+        "b": "ugyanakkora marad",
+        "c": "megnő"
+      },
+      "correct": "a",
+      "explanation": "A gravitációs erő a távolsággal csökken, ezért a hegyre felérve a súly is csökken. ✅ Megoldás: Csökken"
+    },
+     {
+      "question": "Mi a tömeg mértékegysége? (ismétlés)",
+      "answers": {
+        "a": "kilogramm (kg)",
+        "b": "newton (N)",
+        "c": "méter (m)"
+      },
+      "correct": "a",
+      "explanation": "A tömeg (m) SI alapmértékegysége a kilogramm (kg). ✅ Megoldás: kilogramm (kg)."
+    },
+     {
+      "question": "Melyik állítás helyes?",
+      "answers": {
+        "a": "A nagy tömegű test nehezebb.",
+        "b": "A test súlya a magasságtól független.",
+        "c": "A súly és a tömeg azonos mértékegységgel mérhető."
+      },
+      "correct": "a",
+      "explanation": "A nagy tömegű testre nagyobb a gravitációs erő, tehát nehezebb. A súly a magasságtól függ, és a súly egysége a newton. A tömegé a kilogramm. ✅ Megoldás: A nagy tömegű test nehezebb."
+    }
+  ]
 }

@@ -4,5 +4,236 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz relacios jelek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a reláció?",
+      "answers": {
+        "a": "Az egyenlőség jele.",
+        "b": "Két dolog közötti kapcsolat vagy viszony.",
+        "c": "Egy szám önmagával való viszonya."
+      },
+      "correct": "b",
+      "explanation": "A reláció két dolog (szám, objektum, stb.) közötti kapcsolatot vagy viszonyt fejez ki.  ✅ Megoldás: Két dolog közötti kapcsolat vagy viszony."
+    },
+    {
+      "question": "Melyik relációs jelet használjuk az egyenlőség jelzésére?",
+      "answers": {
+        "a": "<",
+        "b": "=",
+        "c": ">"
+      },
+      "correct": "b",
+      "explanation": "Az egyenlőség jele az '='.  ✅ Megoldás: ="
+    },
+    {
+      "question": "Mit jelent az a ≤ b jelölés?",
+      "answers": {
+        "a": "A kisebb vagy egyenlő b-vel.",
+        "b": "a nagyobb b-nél.",
+        "c": "a és b nem egyenlőek."
+      },
+      "correct": "a",
+      "explanation": "A ≤ relációs jel azt jelenti, hogy 'a kisebb vagy egyenlő b-vel'.  ✅ Megoldás: a kisebb vagy egyenlő b-vel."
+    },
+    {
+      "question": "Mit jelent az a ≥ b jelölés?",
+      "answers": {
+        "a": "a kisebb b-nél.",
+        "b": "a nagyobb vagy egyenlő b-vel.",
+        "c": "a és b nem egyenlőek."
+      },
+      "correct": "b",
+      "explanation": "A ≥ relációs jel azt jelenti, hogy 'a nagyobb vagy egyenlő b-vel'. ✅ Megoldás: a nagyobb vagy egyenlő b-vel."
+    },
+    {
+      "question": "Melyik jelzi, hogy a nem egyenlő b-vel?",
+      "answers": {
+        "a": "=",
+        "b": "∈",
+        "c": "≠"
+      },
+      "correct": "c",
+      "explanation": "A  ≠  jel azt jelenti, hogy 'a nem egyenlő b-vel'. ✅ Megoldás: ≠"
+    },
+    {
+      "question": "Melyik állítás helyes?",
+      "answers": {
+        "a": "Ha a < b, akkor b > a.",
+        "b": "Ha a > b, akkor a < b.",
+        "c": "Ha a = b, akkor a > b."
+      },
+      "correct": "a",
+      "explanation": "Ha a kisebb, mint b, akkor b nagyobb, mint a.  ✅ Megoldás: Ha a < b, akkor b > a."
+    },
+    {
+      "question": "Mit jelent, ha a < 0?",
+      "answers": {
+        "a": "A szám pozitív.",
+        "b": "A szám nulla.",
+        "c": "A szám negatív."
+      },
+      "correct": "c",
+      "explanation": "Ha egy szám kisebb, mint 0, akkor negatív. ✅ Megoldás: A szám negatív."
+    },
+    {
+      "question": "Ha x ≥ 5, akkor az x értéke lehet...",
+      "answers": {
+        "a": "4",
+        "b": "5",
+        "c": "4,9"
+      },
+      "correct": "b",
+      "explanation": "Az x ≥ 5 azt jelenti, hogy x lehet 5, vagy 5-nél nagyobb. ✅ Megoldás: 5"
+    },
+    {
+      "question": "Ha x < 3, akkor az x értéke NEM lehet...",
+      "answers": {
+        "a": "2",
+        "b": "0",
+        "c": "3"
+      },
+      "correct": "c",
+      "explanation": "Az x < 3 azt jelenti, hogy x kisebb, mint 3. A 3 nem kisebb 3-nál. ✅ Megoldás: 3"
+    },
+    {
+      "question": "Mit jelent a 'relatív prím' kifejezés?",
+      "answers": {
+        "a": "Két szám, melyek csak önmagukkal oszthatók.",
+        "b": "Két szám, melyeknek a legnagyobb közös osztója 1.",
+        "c": "Két azonos szám."
+      },
+      "correct": "b",
+      "explanation": "Két szám akkor relatív prím, ha a legnagyobb közös osztójuk 1. ✅ Megoldás: Két szám, melyeknek a legnagyobb közös osztója 1."
+    },
+    {
+      "question": "Melyik szám van közelebb a nullához: -3 vagy 2?",
+      "answers": {
+        "a": "-3",
+        "b": "2",
+        "c": "Egyenlő távol."
+      },
+      "correct": "b",
+      "explanation": "A számegyenesen a nullához közelebbi szám közelebb van hozzá. A 2 közelebb van a nullához, mint a -3. ✅ Megoldás: 2"
+    },
+    {
+      "question": "Ha egy szám 5-nél nagyobb, ezt hogyan jelöljük?",
+      "answers": {
+        "a": "x = 5",
+        "b": "x < 5",
+        "c": "x > 5"
+      },
+      "correct": "c",
+      "explanation": "Az 'x nagyobb, mint 5' a matematikai jelölése x > 5. ✅ Megoldás: x > 5"
+    },
+    {
+      "question": "Melyik állítás NEM igaz?",
+      "answers": {
+        "a": "Ha a = b, akkor a + 2 = b + 2.",
+        "b": "Ha a < b, akkor a + 2 > b + 2.",
+        "c": "Ha a = b, akkor a - 2 = b - 2."
+      },
+      "correct": "b",
+      "explanation": "Ha egyenlő számokhoz ugyanazt adjuk hozzá, vagy ugyanazt vonjuk ki belőlük, az egyenlőség fennmarad. Ha a < b, akkor a + 2 < b + 2, a > b. Ezzel szemben a 'b' állítás pont fordítva szól.  ✅ Megoldás: Ha a < b, akkor a + 2 > b + 2."
+    },
+    {
+      "question": "Melyik állítás igaz a számok nagyságára vonatkozóan?",
+      "answers": {
+        "a": "A pozitív számok kisebbek a negatív számoknál.",
+        "b": "A negatív számok kisebbek a pozitív számoknál.",
+        "c": "A 0 a legnagyobb szám."
+      },
+      "correct": "b",
+      "explanation": "A számegyenesen a negatív számok a 0-tól balra helyezkednek el, a pozitívak jobbra. Egy szám mindig kisebb a jobbra lévő számnál. ✅ Megoldás: A negatív számok kisebbek a pozitív számoknál."
+    },
+    {
+      "question": "Ha x ≤ y, és y ≤ z, akkor...",
+      "answers": {
+        "a": "x = z",
+        "b": "x ≥ z",
+        "c": "x ≤ z"
+      },
+      "correct": "c",
+      "explanation": "Ha x kisebb vagy egyenlő y-nal, és y kisebb vagy egyenlő z-vel, akkor x kisebb vagy egyenlő z-vel. Ez a reláció tranzitív.  ✅ Megoldás: x ≤ z"
+    },
+    {
+      "question": "Ha egy szám nagyobb, mint 3, és kisebb vagy egyenlő 7-tel, hogyan jelöljük ezt intervallummal?",
+      "answers": {
+        "a": "(3; 7)",
+        "b": "[3; 7]",
+        "c": "(3; 7]"
+      },
+      "correct": "c",
+      "explanation": "A 3-nál nagyobb azt jelenti, hogy a 3 nincs benne az intervallumban, ezért a kerek zárójel. A legfeljebb 7 azt jelenti, hogy a 7 benne van az intervallumban, ezért szögletes zárójel. ✅ Megoldás: (3; 7]"
+    },
+    {
+      "question": "Mi a 10-nél kisebb természetes számok halmaza?",
+      "answers": {
+        "a": "{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}",
+        "b": "{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}",
+        "c": "{1, 2, 3, 4, 5, 6, 7, 8, 9}"
+      },
+      "correct": "c",
+      "explanation": "A természetes számok 1-től kezdődnek. A 10-nél kisebb számok a 9-ig tartanak. ✅ Megoldás: {1, 2, 3, 4, 5, 6, 7, 8, 9}"
+    },
+    {
+      "question": "Ha egy szám egyenlő 0-val, akkor...",
+      "answers": {
+        "a": "... pozitív.",
+        "b": "...negatív.",
+        "c": "...nem pozitív, és nem negatív."
+      },
+      "correct": "c",
+      "explanation": "A 0 sem nem pozitív, sem nem negatív. ✅ Megoldás: ...nem pozitív, és nem negatív."
+    },
+    {
+      "question": "Melyik szám nagyobb: -2 vagy -1?",
+      "answers": {
+        "a": "-2",
+        "b": "-1",
+        "c": "egyenlőek"
+      },
+      "correct": "b",
+      "explanation": "A számegyenesen a -1 a -2-höz képest jobbra helyezkedik el, ezért a -1 a nagyobb szám.  ✅ Megoldás: -1"
+    },
+    {
+      "question": "Ha 'a' egyenlő 'b'-vel, mit jelent ez a matematikai jelölésben?",
+      "answers": {
+        "a": "a < b",
+        "b": "a = b",
+        "c": "a > b"
+      },
+      "correct": "b",
+      "explanation": "Az egyenlőség jele az '='. ✅ Megoldás: a = b"
+    },
+     {
+      "question": "Mit jelent az 'a < b' jelölés?",
+      "answers": {
+        "a": "A kisebb, mint b.",
+        "b": "A nagyobb, mint b.",
+        "c": "A egyenlő b-vel."
+      },
+      "correct": "a",
+      "explanation": "A ' < ' (kisebb) relációs jel azt jelenti, hogy a kisebb, mint b. ✅ Megoldás: A kisebb, mint b."
+    },
+    {
+      "question": "Melyik állítás igaz a racionális számokra?",
+      "answers": {
+        "a": "A racionális számok irracionális számokkal együtt alkotják a valós számokat.",
+        "b": "A racionális számok mindig egész számok.",
+        "c": "A racionális számok tizedes tört alakja soha nem ismétlődhet."
+      },
+      "correct": "a",
+      "explanation": "A racionális számok és az irracionális számok a valós számok halmazát alkotják. A racionális számok lehetnek egész számok, de nem mindig. A tizedes tört alakjuk pedig vagy véges, vagy szakaszos. ✅ Megoldás: A racionális számok irracionális számokkal együtt alkotják a valós számokat."
+    },
+    {
+      "question": "Ha egy szám osztható 2-vel és 5-tel is, akkor biztosan osztható...",
+      "answers": {
+        "a": "3-mal.",
+        "b": "10-zel.",
+        "c": "4-gyel."
+      },
+      "correct": "b",
+      "explanation": "Ha egy szám osztható 2-vel és 5-tel is, az azt jelenti, hogy osztható a legkisebb közös többszörösükkel, ami a 10.  ✅ Megoldás: 10-zel."
+    }
+  ]
 }

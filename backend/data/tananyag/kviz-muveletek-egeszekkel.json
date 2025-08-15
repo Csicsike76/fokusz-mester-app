@@ -3,6 +3,246 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz muveletek egeszekkel\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz muveletek egeszekkel\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a (-8) + 5 ?",
+      "answers": {
+        "a": "-13",
+        "b": "-3",
+        "c": "3"
+      },
+      "correct": "b",
+      "explanation": "Egy negatív és egy pozitív szám összeadásakor a nagyobb abszolút értékűből kivonjuk a kisebb abszolút értékűt (8-5=3), és az eredmény a nagyobb abszolút értékű előjelét kapja meg (-)."
+    },
+    {
+      "question": "Mi a (-7) × (-4) szorzat értéke?",
+      "answers": {
+        "a": "28",
+        "b": "-28",
+        "c": "-11"
+      },
+      "correct": "a",
+      "explanation": "Két negatív egész szám szorzata mindig pozitív. Egyszerűen összeszorozzuk az abszolút értékeiket: 7 × 4 = 28."
+    },
+    {
+      "question": "Mennyi a 6 - (-9) ?",
+      "answers": {
+        "a": "-3",
+        "b": "3",
+        "c": "15"
+      },
+      "correct": "c",
+      "explanation": "Egy számból kivonni egy negatív számot ugyanaz, mintha hozzáadnánk az ellentettjét. Tehát 6 - (-9) = 6 + 9 = 15."
+    },
+    {
+      "question": "Mi a 24 : (-3) hányados értéke?",
+      "answers": {
+        "a": "8",
+        "b": "-8",
+        "c": "21"
+      },
+      "correct": "b",
+      "explanation": "Különböző előjelű egész számok hányadosa mindig negatív. Elosztjuk az abszolút értékeiket: 24 / 3 = 8. Az eredmény -8."
+    },
+    {
+      "question": "Mi a (-2)⁵ értéke?",
+      "answers": {
+        "a": "32",
+        "b": "-32",
+        "c": "-10"
+      },
+      "correct": "b",
+      "explanation": "Negatív alap páratlan kitevőjű hatványa mindig negatív. Az eredmény: -(2×2×2×2×2) = -32."
+    },
+    {
+      "question": "Mennyi az 5 + (-3) × 2 ?",
+      "answers": {
+        "a": "4",
+        "b": "-1",
+        "c": "1"
+      },
+      "correct": "b",
+      "explanation": "A műveleti sorrend szerint először a szorzást végezzük el: (-3) × 2 = -6. Utána az összeadást: 5 + (-6) = -1."
+    },
+    {
+      "question": "Mi a (-10) + (-5) összege?",
+      "answers": {
+        "a": "-15",
+        "b": "-5",
+        "c": "5"
+      },
+      "correct": "a",
+      "explanation": "Két negatív szám összeadásakor az abszolút értékeiket összeadjuk (10+5=15), és az eredmény negatív előjelet kap."
+    },
+    {
+      "question": "Mennyi a -30 : (-5) ?",
+      "answers": {
+        "a": "-6",
+        "b": "6",
+        "c": "-35"
+      },
+      "correct": "b",
+      "explanation": "Azonos előjelű (két negatív) egész számok hányadosa mindig pozitív. 30 / 5 = 6."
+    },
+    {
+      "question": "Mi a (-4)² értéke?",
+      "answers": {
+        "a": "-16",
+        "b": "8",
+        "c": "16"
+      },
+      "correct": "c",
+      "explanation": "A -4-et emeljük a második hatványra. Mivel a kitevő páros, az eredmény pozitív lesz: (-4) × (-4) = 16. Vigyázat, ez nem ugyanaz, mint a -4² (ami -16 lenne)!"
+    },
+    {
+      "question": "Melyik állítás igaz az összeadásra?",
+      "answers": {
+        "a": "A 0 a semleges elem (additív egységelem).",
+        "b": "A -1 a semleges elem.",
+        "c": "Nincs semleges eleme."},
+      "correct": "a",
+      "explanation": "Az összeadás semleges (vagy neutrális) eleme a 0, mert bármely számhoz hozzáadva a szám nem változik: a + 0 = a."
+    },
+    {
+      "question": "Mi a 12 - 20 művelet eredménye?",
+      "answers": {
+        "a": "8",
+        "b": "-8",
+        "c": "32"
+      },
+      "correct": "b",
+      "explanation": "A nagyobb abszolút értékűből (20) kivonjuk a kisebbet (12), ami 8. Az eredmény a nagyobb abszolút értékű előjelét kapja, ami a -20 miatt negatív. Tehát az eredmény -8."
+    },
+    {
+      "question": "Mennyi a (-1)¹⁰⁰ értéke?",
+      "answers": {
+        "a": "1",
+        "b": "-1",
+        "c": "-100"
+      },
+      "correct": "a",
+      "explanation": "A -1 hatványozásakor az eredmény 1 vagy -1. Mivel a kitevő (100) páros, az eredmény pozitív, tehát 1."
+    },
+    {
+      "question": "Oldd meg: 4 - ( -3 + 8 )",
+      "answers": {
+        "a": "-7",
+        "b": "-1",
+        "c": "9"
+      },
+      "correct": "b",
+      "explanation": "Először a zárójelben lévő műveletet végezzük el: -3 + 8 = 5. Utána a kivonást: 4 - 5 = -1."
+    },
+    {
+      "question": "Mi az a szám, amit ha -5-tel megszorzunk, 30-at kapunk?",
+      "answers": {
+        "a": "-6",
+        "b": "6",
+        "c": "-150"
+      },
+      "correct": "a",
+      "explanation": "Az egyenlet: x ⋅ (-5) = 30. Osszuk mindkét oldalt -5-tel: x = 30 / (-5) = -6."
+    },
+    {
+      "question": "Mennyi a |-10| - |-15| értéke?",
+      "answers": {
+        "a": "5",
+        "b": "-5",
+        "c": "25"
+      },
+      "correct": "b",
+      "explanation": "Először kiszámoljuk az abszolút értékeket: |-10|=10 és |-15|=15. Ezután végezzük el a kivonást: 10 - 15 = -5."
+    },
+    {
+      "question": "Melyik kifejezés értéke negatív?",
+      "answers": {
+        "a": "(-5) × (-2)",
+        "b": "(-10) / (-5)",
+        "c": "5 - 10"
+      },
+      "correct": "c",
+      "explanation": "a) (-5)×(-2) = 10 (pozitív). b) (-10)/(-5) = 2 (pozitív). c) 5-10 = -5 (negatív)."
+    },
+    {
+      "question": "Hány fokot csökken a hőmérséklet, ha +4 °C-ról -7 °C-ra hűl le?",
+      "answers": {
+        "a": "3 °C",
+        "b": "11 °C",
+        "c": "Nem lehet megmondani."
+      },
+      "correct": "b",
+      "explanation": "A változást a két érték különbsége adja: 4 - (-7) = 4 + 7 = 11. Tehát 11 °C-ot csökkent."
+    },
+    {
+      "question": "Mi a -5 és 5 számtani közepe?",
+      "answers": {
+        "a": "2.5",
+        "b": "0",
+        "c": "Nincs értelme"
+      },
+      "correct": "b",
+      "explanation": "Két szám számtani közepe a számok összegének fele. (-5 + 5) / 2 = 0 / 2 = 0. ✅ Megoldás: A két szám számtani közepe 0."
+    },
+    {
+      "question": "Mi a 10 és a 40 mértani közepe?",
+      "answers": {
+        "a": "25",
+        "b": "√50",
+        "c": "20"
+      },
+      "correct": "c",
+      "explanation": "√(10 * 40) = √400 = 20. ✅ Megoldás: A mértani közép 20."
+    },
+    {
+      "question": "Egy négyszög szögei rendre x, 2x, 2x, 5x, mennyi a legnagyobb szög?",
+      "answers": {
+        "a": "150°",
+        "b": "120°",
+        "c": "180°"
+      },
+      "correct": "a",
+      "explanation": "A szögek összege 10x=360, x=36, tehát a legnagyobb szög 5*36=180°, de ez nem lehetséges."
+    },
+    {
+      "question": "Melyik reláció igaz két KÜLÖNBÖZŐ pozitív szám számtani (AM) és mértani (GM) közepére?",
+      "answers": {
+        "a": "AM < GM",
+        "b": "AM = GM",
+        "c": "AM > GM"
+      },
+      "correct": "c",
+      "explanation": "Két különböző pozitív szám esetén a számtani közép szigorúan nagyobb, mint a mértani. ✅ Megoldás: Különböző pozitív számok esetén a számtani közép nagyobb, mint a mértani."
+    },
+    {
+      "question": "Mi a 0, 10 és 20 számtani közepe?",
+      "answers": {
+        "a": "15",
+        "b": "5",
+        "c": "10"
+      },
+      "correct": "c",
+      "explanation": "(0 + 10 + 20) / 3 = 30 / 3 = 10.  ✅ Megoldás: A számok számtani közepe 10."
+    },
+    {
+      "question": "Hogyan definiáljuk két pozitív szám, 'a' és 'b' mértani közepét?",
+      "answers": {
+        "a": "a*b / 2",
+        "b": "(a+b)²",
+        "c": "√(a*b)"
+      },
+      "correct": "c",
+      "explanation": "Két pozitív szám mértani közepe a számok szorzatának négyzetgyöke. ✅ Megoldás: A helyes képlet a √(a*b)."
+    },
+    {
+      "question": "Egy téglalap területe 20 cm², egyik oldala 4 cm. Milyen hosszú a másik oldal?",
+      "answers": {
+        "a": "5 cm",
+        "b": "4 cm",
+        "c": "16 cm"
+      },
+      "correct": "a",
+      "explanation": "Téglalap területe = hosszúság * szélesség. 20=4*x -> x = 5. ✅ Megoldás: A másik oldal 5 cm."
+    }
+  ]
 }

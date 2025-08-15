@@ -1,8 +1,209 @@
 {
-  "title": "Kviz gyorsulas",
+  "title": "Kvíz gyorsulas",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz gyorsulas\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a gyorsulás?",
+      "answers": {
+        "a": "A sebesség megváltozásának a mértéke.",
+        "b": "A megtett út mértéke.",
+        "c": "A test tömege."
+      },
+      "correct": "a",
+      "explanation": "A gyorsulás azt mutatja meg, hogy mennyivel változik a sebességünk egy adott idő alatt. Ha egy autó gyorsít, akkor a sebessége nő. Ha lassít, akkor csökken. ✅ Megoldás: A sebesség megváltozásának a mértéke."
+    },
+    {
+      "question": "Milyen mértékegysége van a gyorsulásnak?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "méter per szekundum (m/s)",
+        "c": "méter per szekundum négyzet (m/s²)"
+      },
+      "correct": "c",
+      "explanation": "A gyorsulás azt mutatja meg, hogy a sebesség mennyi idő alatt változik. A sebesség mértékegysége m/s, az időé s, így a gyorsulás mértékegysége m/s². ✅ Megoldás: méter per szekundum négyzet (m/s²)"
+    },
+    {
+      "question": "Ha egy autó egyenletesen gyorsul, akkor...",
+      "answers": {
+        "a": "A sebessége állandó.",
+        "b": "A sebessége egyenletesen nő.",
+        "c": "A sebessége egyenletesen csökken."
+      },
+      "correct": "b",
+      "explanation": "Egyenletes gyorsulás esetén a sebesség minden másodpercben ugyanannyival nő. ✅ Megoldás: A sebessége egyenletesen nő."
+    },
+    {
+      "question": "Ha egy test lassul, akkor a gyorsulása...",
+      "answers": {
+        "a": "Negatív.",
+        "b": "Pozitív.",
+        "c": "Nulla."
+      },
+      "correct": "a",
+      "explanation": "Ha a test sebessége csökken, akkor a gyorsulás negatív, mert a sebesség csökken. Ezt lassulásnak is nevezzük. ✅ Megoldás: Negatív."
+    },
+    {
+      "question": "Egy autó 2 másodperc alatt 10 m/s-ról 20 m/s-ra gyorsul. Mekkora a gyorsulása?",
+      "answers": {
+        "a": "5 m/s²",
+        "b": "10 m/s²",
+        "c": "15 m/s²"
+      },
+      "correct": "a",
+      "explanation": "A gyorsulás kiszámításához meg kell nézni, mennyivel változott a sebesség (20 m/s - 10 m/s = 10 m/s), és ezt el kell osztani az idővel (2 s). 10 m/s / 2 s = 5 m/s². ✅ Megoldás: 5 m/s²"
+    },
+    {
+      "question": "Mi a tehetetlenség?",
+      "answers": {
+        "a": "A test ellenállása a sebesség megváltoztatásával szemben.",
+        "b": "A test súlya.",
+        "c": "A test mérete."
+      },
+      "correct": "a",
+      "explanation": "A tehetetlenség azt jelenti, hogy a test igyekszik megőrizni a sebességét. Ha a test nyugalomban van, akkor nyugalomban akar maradni. Ha mozog, akkor egyenes vonalban, állandó sebességgel szeretne mozogni.  ✅ Megoldás: A test ellenállása a sebesség megváltoztatásával szemben."
+    },
+    {
+      "question": "Ha egy testre erő hat, de a sebessége nem változik, akkor...",
+      "answers": {
+        "a": "A test gyorsul.",
+        "b": "A testre ható erők kiegyenlítik egymást.",
+        "c": "A test nyugalomban van."
+      },
+      "correct": "b",
+      "explanation": "Ha a testre ható erők eredője nulla, akkor a test sebessége nem változik (vagyis egyenletes mozgást végez, vagy nyugalomban van).  ✅ Megoldás: A testre ható erők kiegyenlítik egymást."
+    },
+    {
+      "question": "Mi történik, ha egy testre ható erők eredője nem nulla?",
+      "answers": {
+        "a": "A test egyenletesen mozog.",
+        "b": "A test megáll.",
+        "c": "A test gyorsul."
+      },
+      "correct": "c",
+      "explanation": "Ha egy testre ható erők eredője nem nulla, akkor a test gyorsul, vagyis a sebessége változik. ✅ Megoldás: A test gyorsul."
+    },
+    {
+      "question": "Egy kerékpáros elindul, és 5 másodperc alatt éri el a 10 m/s sebességet. Mekkora a gyorsulása?",
+      "answers": {
+        "a": "1 m/s²",
+        "b": "2 m/s²",
+        "c": "3 m/s²"
+      },
+      "correct": "b",
+      "explanation": "A gyorsulás = (végső sebesség - kezdő sebesség) / idő. A kezdősebesség 0 m/s, a végső 10 m/s, az idő 5 s. (10 m/s - 0 m/s) / 5 s = 2 m/s². ✅ Megoldás: 2 m/s²"
+    },
+    {
+      "question": "Ha egy test gyorsul, akkor biztosan...",
+      "answers": {
+        "a": "Nő a tömege.",
+        "b": "Erő hat rá.",
+        "c": "Csökken a sebessége."
+      },
+      "correct": "b",
+      "explanation": "A gyorsuláshoz erő szükséges. A tömeg nem változik, a sebesség pedig nőhet, vagy csökkenhet (lassulás). ✅ Megoldás: Erő hat rá."
+    },
+    {
+      "question": "Melyik a gyorsulás jele?",
+      "answers": {
+        "a": "v",
+        "b": "a",
+        "c": "t"
+      },
+      "correct": "b",
+      "explanation": "A gyorsulást általában az 'a' betűvel jelöljük.  ✅ Megoldás: a"
+    },
+    {
+      "question": "Miért fontos a biztonsági öv?",
+      "answers": {
+        "a": "Mert lassítja az autót.",
+        "b": "Mert megakadályozza, hogy a testünk a hirtelen fékezéskor vagy ütközéskor tovább mozogjon a tehetetlenség miatt.",
+        "c": "Mert szép."
+      },
+      "correct": "b",
+      "explanation": "A tehetetlenség miatt egy hirtelen fékezéskor vagy ütközéskor a testünk tovább akar mozogni. A biztonsági öv megakadályozza, hogy ez történjen. ✅ Megoldás: Mert megakadályozza, hogy a testünk a hirtelen fékezéskor vagy ütközéskor tovább mozogjon a tehetetlenség miatt."
+    },
+    {
+      "question": "Ha egy test sebessége 0 m/s, akkor...",
+      "answers": {
+        "a": "A gyorsulása is 0 m/s².",
+        "b": "Nyugalomban van.",
+        "c": "Mozog egyenletesen."
+      },
+      "correct": "b",
+      "explanation": "Ha a test sebessége 0 m/s, akkor nem mozog, vagyis nyugalomban van. ✅ Megoldás: Nyugalomban van."
+    },
+    {
+      "question": "Egy autó 20 m/s sebességgel halad, majd 4 másodperc alatt megáll. Mekkora a lassulása?",
+      "answers": {
+        "a": "5 m/s²",
+        "b": "-5 m/s²",
+        "c": "80 m/s²"
+      },
+      "correct": "b",
+      "explanation": "A gyorsulás = (végső sebesség - kezdő sebesség) / idő. A végső sebesség 0 m/s, a kezdő 20 m/s, az idő 4 s. (0 m/s - 20 m/s) / 4 s = -5 m/s². A mínusz jel azt jelzi, hogy lassul.  ✅ Megoldás: -5 m/s²"
+    },
+    {
+      "question": "Melyik esetben van gyorsulás?",
+      "answers": {
+        "a": "Egyenes vonalú, egyenletes mozgásnál.",
+        "b": "Nyugalomban lévő testnél.",
+        "c": "A sebesség megváltozásánál."
+      },
+      "correct": "c",
+      "explanation": "A gyorsulás a sebesség megváltozását jelenti.  ✅ Megoldás: A sebesség megváltozásánál."
+    },
+    {
+      "question": "Ha egy labdát feldobunk, és felfelé mozog, akkor a gyorsulása...",
+      "answers": {
+        "a": "Nulla.",
+        "b": "Felfelé mutat.",
+        "c": "Lefelé mutat."
+      },
+      "correct": "c",
+      "explanation": "A Föld vonzza a labdát, ezért a gravitációs gyorsulás lefelé mutat. A sebessége csökken, a gyorsulás pedig negatív (lefelé).  ✅ Megoldás: Lefelé mutat."
+    },
+    {
+      "question": "Melyik a helyes összefüggés?",
+      "answers": {
+        "a": "gyorsulás = sebesség * idő",
+        "b": "gyorsulás = sebesség / idő",
+        "c": "sebesség = gyorsulás / idő"
+      },
+      "correct": "b",
+      "explanation": "A gyorsulás a sebesség megváltozásának a mértéke, amit az idővel osztunk el.  ✅ Megoldás: gyorsulás = sebesség / idő"
+    },
+    {
+      "question": "Egy autó 10 m/s² gyorsulással indul. Mennyi a sebessége 3 másodperc múlva?",
+      "answers": {
+        "a": "30 m/s",
+        "b": "3,3 m/s",
+        "c": "13 m/s"
+      },
+      "correct": "a",
+      "explanation": "Ha a gyorsulás 10 m/s², és 3 másodpercig tart, akkor a sebesség 10*3 = 30 m/s-ra változik.  ✅ Megoldás: 30 m/s"
+    },
+    {
+      "question": "Miért esnek a dolgok lefelé?",
+      "answers": {
+        "a": "Mert a Föld vonzza őket.",
+        "b": "Mert a szél fújja őket.",
+        "c": "Mert nehezek."
+      },
+      "correct": "a",
+      "explanation": "A Föld vonzereje (gravitáció) miatt esnek a dolgok lefelé. ✅ Megoldás: Mert a Föld vonzza őket."
+    },
+      {
+        "question": "Ha egy test egyenletesen mozog, akkor...",
+        "answers": {
+          "a": "Nincs gyorsulása.",
+          "b": "Van gyorsulása, ami a sebességgel egyezik meg.",
+          "c": "Van gyorsulása, ami folyamatosan nő."
+        },
+        "correct": "a",
+        "explanation": "Egyenletes mozgásnál a sebesség állandó, így nincs gyorsulás. ✅ Megoldás: Nincs gyorsulása."
+      }
+  ]
 }

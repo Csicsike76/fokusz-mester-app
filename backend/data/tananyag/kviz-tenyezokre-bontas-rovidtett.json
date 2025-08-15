@@ -3,6 +3,247 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz tenyezokre bontas rovidtett\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz tényezőkre bontás\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik bontás helyes: 12x + 18?",
+      "answers": {
+        "a": "6(2x + 3)",
+        "b": "3(4x + 6)",
+        "c": "12(x + 1.5)"
+      },
+      "correct": "a",
+      "explanation": "Közös tényező: 6."
+    },
+    {
+      "question": "Hogyan bontod: 9a² + 3a?",
+      "answers": {
+        "a": "3a(a + 1)",
+        "b": "3(3a² + a)",
+        "c": "3a(3a + 1)"
+      },
+      "correct": "b",
+      "explanation": "Közös: 3a."
+    },
+    {
+      "question": "Melyik bontás: 15a − 10?",
+      "answers": {
+        "a": "5(3a + 2)",
+        "b": "10(1.5a − 1)",
+        "c": "5(3a − 2)"
+      },
+      "correct": "c",
+      "explanation": "Közös tényező: 5 → 5(3a−2)."
+    },
+    {
+      "question": "Melyik a helyes bontás: 9x − 12y?",
+      "answers": {
+        "a": "3(3x − 4y)",
+        "b": "9(x − 12y)",
+        "c": "12(0.75x − y)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 3."
+    },
+    {
+      "question": "Hogyan bontod: 7m³ + 14m²?",
+      "answers": {
+        "a": "7m²(m + 2)",
+        "b": "7m²(m + 2)",
+        "c": "14m²(m + 0.5)"
+      },
+      "correct": "a",
+      "explanation": "Közös m² és 7."
+    },
+    {
+      "question": "Melyik bontás: 12x⁴ − 8x³?",
+      "answers": {
+        "a": "4x³(3x − 2)",
+        "b": "12x³(x − 8/12)",
+        "c": "4x³(3x − 2)"
+      },
+      "correct": "a",
+      "explanation": "Közös 4x³."
+    },
+    {
+      "question": "Melyik bontás: 5ab + 10a?",
+      "answers": {
+        "a": "5a(b + 2)",
+        "b": "10a(b + 0.5)",
+        "c": "a(5b + 10)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 5a."
+    },
+    {
+      "question": "Melyik bontás törtracionális: 6x/3 + 4/2?",
+      "answers": {
+        "a": "2x + 2",
+        "b": "2x + 2",
+        "c": "6x + 4"
+      },
+      "correct": "a",
+      "explanation": "Osztások után: 2x + 2."
+    },
+    {
+      "question": "Melyik bontás: 8x²y + 12xy?",
+      "answers": {
+        "a": "4xy(2x + 3)",
+        "b": "8xy(x + 1.5)",
+        "c": "2xy(4x + 6)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 4xy."
+    },
+    {
+      "question": "Melyik bontás: 18m − 12n + 6?",
+      "answers": {
+        "a": "6(3m − 2n + 1)",
+        "b": "12(1.5m − n + 0.5)",
+        "c": "6(3m − 2n + 1)"
+      },
+      "correct": "c",
+      "explanation": "Közös: 6."
+    },
+    {
+      "question": "Melyik bontás: 21x³ + 14x?",
+      "answers": {
+        "a": "7x(3x² + 2)",
+        "b": "21x(x² + 2/3)",
+        "c": "14x(1.5x² + 1)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 7x."
+    },
+    {
+      "question": "Melyik bontás: 9a²b + 3ab²?",
+      "answers": {
+        "a": "3ab(a + b)",
+        "b": "3(3a²b + ab²)",
+        "c": "9ab(a+1/3*b)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 3ab."
+    },
+    {
+      "question": "Melyik bontás: 16x⁴ − 24x³?",
+      "answers": {
+        "a": "8x³(2x − 3)",
+        "b": "16x³(x - 1,5)",
+        "c": "4x³(4x-6)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 8x³."
+    },
+     {
+      "question": "Melyik bontás: 25m²n + 15mn²?",
+      "answers": {
+        "a": "5mn(5m + 3n)",
+        "b": "15mn(m + n)",
+        "c": "5mn(m + 3n)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 5mn."
+    },
+    {
+      "question": "Melyik bontás: 14x + 21?",
+      "answers": {
+        "a": "7x(2 + 3)",
+        "b": "7(2x + 3)",
+        "c": "21(14x/21 + 1)"
+      },
+      "correct": "b",
+      "explanation": "Közös: 7."
+    },
+    {
+      "question": "Melyik bontás: 12a − 18b + 6?",
+      "answers": {
+        "a": "6(2a − 3b + 1)",
+        "b": "12(a − 1.5b + 0.5)",
+        "c": "6(3m − 2n + 1)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 6."
+    },
+    {
+      "question": "Melyik bontás: 3x³ − 6x?",
+      "answers": {
+        "a": "3x(x² − 2)",
+        "b": "3(x³ − 2x)",
+        "c": "x(3x² − 6)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 3x."
+    },
+    {
+      "question": "Melyik bontás: 8x⁵ + 12x⁴?",
+      "answers": {
+        "a": "4x⁴(2x + 3)",
+        "b": "4x⁴(2x + 3)",
+        "c": "8x⁴(x + 1.5)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 4x⁴."
+    },
+    {
+      "question": "Melyik bontás: 18y² − 27y?",
+      "answers": {
+        "a": "9y(2y − 3)",
+        "b": "18y(y − 1.5)",
+        "c": "9y(2y + 3)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 9y."
+    },
+    {
+      "question": "Melyik bontás: 5ab − 10a?",
+      "answers": {
+        "a": "5a(b − 2)",
+        "b": "5a(b - 2)",
+        "c": "10a(b - 0.5)"
+      },
+      "correct": "a",
+      "explanation": "Közös: 5a."
+    },
+     {
+      "question": "Melyik bontás: 30ab + 45b + 60a?",
+      "answers": {
+        "a": "15b(2a + 3) + 60a",
+        "b": "15(2ab + 3b + 4a)",
+        "c": "60a"
+      },
+      "correct": "b",
+      "explanation": "Közös: 15. ✅ Megoldás: 15(2ab + 3b + 4a)"
+    },
+    {
+      "question": "Mi a másodfokú kifejezés általános alakja?",
+      "answers": {
+        "a": "ax + b",
+        "b": "ax² + bx + c",
+        "c": "ax³ + bx² + cx + d"
+      },
+      "correct": "b",
+      "explanation": "Másodfokú kifejezés: ax² + bx + c. ✅ Megoldás: ax² + bx + c"
+    },
+    {
+      "question": "Hogyan bontjuk tényezőkre x²-9?",
+      "answers": {
+        "a": "(x+3)(x-3)",
+        "b": "(x-3)(x-3)",
+        "c": "(x+3)(x+3)"
+      },
+      "correct": "a",
+      "explanation": "(x+3)(x-3). ✅ Megoldás: (x+3)(x-3)"
+    },
+    {
+      "question": "Hogyan bontjuk tényezőkre x²-6x+9?",
+      "answers": {
+        "a": "(x-3)(x-3)",
+        "b": "(x+3)(x-3)",
+        "c": "(x+3)(x+3)"
+      },
+      "correct": "a",
+      "explanation": "(x-3)(x-3). ✅ Megoldás: (x-3)(x-3)"
+    }
+  ]
 }

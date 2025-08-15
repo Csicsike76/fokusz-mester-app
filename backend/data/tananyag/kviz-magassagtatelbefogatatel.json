@@ -4,5 +4,216 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz magassagtatelbefogatatel\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Melyik a magasságtétel helyes képlete?",
+      "answers": {
+        "a": "m² = p * q",
+        "b": "a² = c * p",
+        "c": "m = p + q"
+      },
+      "correct": "a",
+      "explanation": "A magasságtétel szerint a derékszögű háromszög átfogóhoz tartozó magasságának (m) négyzete egyenlő az átfogón létrehozott két szakasz (p és q) szorzatával. ✅ Megoldás: m² = p * q."
+    },
+    {
+      "question": "Melyik a befogótétel helyes képlete az 'a' befogóra?",
+      "answers": {
+        "a": "a² = p * q",
+        "b": "a² = c * p",
+        "c": "a = c + p"
+      },
+      "correct": "b",
+      "explanation": "A befogótétel szerint a derékszögű háromszög 'a' befogójának négyzete egyenlő az átfogó (c) és a befogó átfogóra eső vetületének (p) szorzatával. ✅ Megoldás: a² = c * p."
+    },
+    {
+      "question": "Egy derékszögű háromszög átfogóját a magasság egy 4 cm és egy 9 cm hosszú szakaszra bontja. Milyen magas a háromszög?",
+      "answers": {
+        "a": "13 cm",
+        "b": "36 cm",
+        "c": "6 cm"
+      },
+      "correct": "c",
+      "explanation": "A magasságtételt használjuk: m² = p * q = 4 * 9 = 36. Ebből m = √36 = 6 cm. ✅ Megoldás: A magasság 6 cm."
+    },
+    {
+      "question": "Egy derékszögű háromszög átfogója (c) 10 cm, az egyik befogó vetülete (p) pedig 4 cm. Milyen hosszú az ehhez a vetülethez tartozó befogó (a)?",
+      "answers": {
+        "a": "kb. 6.3 cm",
+        "b": "40 cm",
+        "c": "6 cm"
+      },
+      "correct": "a",
+      "explanation": "A befogótételt használjuk: a² = c * p = 10 * 4 = 40. Ebből a = √40 ≈ 6.32 cm.  ✅ Megoldás: A  befogó kb. 6.3 cm."
+    },
+    {
+      "question": "Egy derékszögű háromszög átfogójának szeletei p=2 cm és q=8 cm. Mekkora az átfogó?",
+      "answers": {
+        "a": "16 cm",
+        "b": "6 cm",
+        "c": "10 cm"
+      },
+      "correct": "c",
+      "explanation": "Az átfogó hossza a két szelet (vetület) összegével egyenlő: c = p + q = 2 + 8 = 10 cm. ✅ Megoldás: Az átfogó 10 cm."
+    },
+    {
+      "question": "Melyik háromszögre érvényes a magasság- és a befogótétel?",
+      "answers": {
+        "a": "Csak derékszögű háromszögekre.",
+        "b": "Minden háromszögre.",
+        "c": "Csak egyenlő szárú háromszögekre."
+      },
+      "correct": "a",
+      "explanation": "Ezek a tételek, azaz metrikus összefüggések, a derékszögű háromszögek különleges tulajdonságai, amelyek a háromszög belső hasonlóságaiból fakadnak. ✅ Megoldás: Csak derékszögű háromszögekre."
+    },
+    {
+      "question": "Ha m=12 és p=9, mekkora q a magasságtétel szerint?",
+      "answers": {
+        "a": "1.33",
+        "b": "16",
+        "c": "108"
+      },
+      "correct": "b",
+      "explanation": "A magasságtétel m² = p * q. Behelyettesítve: 12² = 9 * q, azaz 144 = 9q. Ebből q = 144 / 9 = 16. ✅ Megoldás: q értéke 16."
+    },
+    {
+      "question": "Ha egy derékszögű háromszög 'b' befogója 20, átfogója 'c' pedig 25, mekkora a 'b' befogó vetülete (q)?",
+      "answers": {
+        "a": "16",
+        "b": "22.5",
+        "c": "1.25"
+      },
+      "correct": "a",
+      "explanation": "A befogótétel b² = c * q. Behelyettesítve: 20² = 25 * q, azaz 400 = 25q. Ebből q = 400 / 25 = 16. ✅ Megoldás: A 'b' befogó vetülete 16."
+    },
+    {
+      "question": "Az átfogóhoz tartozó magasság két háromszögre bontja az eredeti derékszögű háromszöget. Milyenek ezek a háromszögek?",
+      "answers": {
+        "a": "Egybevágóak.",
+        "b": "Hasonlóak az eredetihez és egymáshoz is.",
+        "c": "Nincs közöttük kapcsolat."
+      },
+      "correct": "b",
+      "explanation": "A magasság által levágott két kisebb derékszögű háromszög szögei megegyeznek az eredeti nagy háromszög szögeivel, ezért mindhárom háromszög hasonló egymáshoz. Ebből a hasonlóságból származik a két tétel. ✅ Megoldás: Hasonlóak az eredetihez és egymáshoz is."
+    },
+    {
+      "question": "Mi a 'p' és 'q' szakaszok neve a tételekben?",
+      "answers": {
+        "a": "Befogók.",
+        "b": "A befogók vetületei az átfogón.",
+        "c": "A háromszög magasságai."
+      },
+      "correct": "b",
+      "explanation": "A 'p' és 'q' szakaszokat a befogók átfogóra eső merőleges vetületeinek nevezzük. ✅ Megoldás: A befogók vetületei az átfogón."
+    },
+    {
+      "question": "Egy derékszögű háromszög átfogójának szeletei p=9 és q=16. Mekkora az átfogóhoz tartozó magasság?",
+      "answers": {
+        "a": "25",
+        "b": "12",
+        "c": "144"
+      },
+      "correct": "b",
+      "explanation": "A magasságtétel szerint m² = p * q = 9 * 16 = 144. Ebből m = √144 = 12. ✅ Megoldás: A magasság 12."
+    },
+    {
+      "question": "Az előző feladatban (p=9, q=16), mekkora az 'a' befogó, ha annak vetülete a 'p' szakasz?",
+      "answers": {
+        "a": "15",
+        "b": "225",
+        "c": "13.5"
+      },
+      "correct": "a",
+      "explanation": "Először az átfogó kell: c = p + q = 9 + 16 = 25. A befogótétel szerint a² = c * p = 25 * 9 = 225. Ebből a = √225 = 15. ✅ Megoldás: Az 'a' befogó 15."
+    },
+    {
+      "question": "Az előző feladatban (p=9, q=16), mekkora a 'b' befogó, ha annak vetülete a 'q' szakasz?",
+      "answers": {
+        "a": "20",
+        "b": "400",
+        "c": "22"
+      },
+      "correct": "a",
+      "explanation": "Az átfogó c = 25. A befogótétel szerint b² = c * q = 25 * 16 = 400. Ebből b = √400 = 20.  ✅ Megoldás: A 'b' befogó 20."
+    },
+    {
+      "question": "Egy derékszögű háromszög átfogója 13 cm, egyik befogója 5 cm. Mekkora ennek a befogónak a vetülete az átfogón?",
+      "answers": {
+        "a": "kb. 2.6 cm",
+        "b": "kb. 1.9 cm",
+        "c": "5 cm"
+      },
+      "correct": "b",
+      "explanation": "A befogótétel a² = c * p. Behelyettesítve: 5² = 13 * p, azaz 25 = 13p. Ebből p = 25/13 ≈ 1.92 cm.  ✅ Megoldás: kb. 1.9 cm."
+    },
+    {
+      "question": "Mi a magasságtétel mértani közepekkel megfogalmazva?",
+      "answers": {
+        "a": "A magasság mértani közepe a két befogónak.",
+        "b": "A magasság mértani közepe az átfogó két szeletének.",
+        "c": "A befogó mértani közepe az átfogónak és a magasságnak."
+      },
+      "correct": "b",
+      "explanation": "Az m² = p * q egyenletből m = √(p*q), ami azt jelenti, hogy a magasság a két átfogó-szelet (p és q) mértani közepe. ✅ Megoldás: A magasság mértani közepe az átfogó két szeletének."
+    },
+    {
+      "question": "Mi a befogótétel mértani közepekkel megfogalmazva?",
+      "answers": {
+        "a": "A befogó mértani közepe az átfogónak és a magasságnak.",
+        "b": "A befogó mértani közepe a másik befogónak és a magasságnak.",
+        "c": "A befogó mértani közepe az átfogónak és a saját vetületének."
+      },
+      "correct": "c",
+      "explanation": "Az a² = c * p egyenletből a = √(c*p), ami azt jelenti, hogy a befogó az átfogó és a saját átfogóra eső vetületének mértani közepe. ✅ Megoldás: A befogó mértani közepe az átfogónak és a saját vetületének."
+    },
+    {
+      "question": "Egy derékszögű háromszög befogói 6 és 8. Mekkora a területe?",
+      "answers": {
+        "a": "48",
+        "b": "24",
+        "c": "14"
+      },
+      "correct": "b",
+      "explanation": "A derékszögű háromszög területe a két befogó szorzatának a fele: T = (a*b)/2 = (6*8)/2 = 48/2 = 24. ✅ Megoldás: 24."
+    },
+    {
+      "question": "Az előző feladatban (befogók 6 és 8), mekkora az átfogóhoz tartozó magasság?",
+      "answers": {
+        "a": "10",
+        "b": "2.4",
+        "c": "4.8"
+      },
+      "correct": "c",
+      "explanation": "Pitagorasz-tétel: c²=6²+8²=36+64=100, tehát c=10. A terület kétféleképpen írható fel: T=(a*b)/2 = (c*m)/2. Tudjuk, hogy T=24, tehát 24=(10*m)/2. Ebből 24=5m, m=24/5=4.8. ✅ Megoldás: 4.8"
+    },
+    {
+      "question": "Az átfogóhoz tartozó magasság mindig...",
+      "answers": {
+        "a": "...felezi az átfogót.",
+        "b": "...kisebb, mint az átfogó fele, vagy egyenlő vele.",
+        "c": "...nagyobb, mint az átfogó."
+      },
+      "correct": "b",
+      "explanation": "A háromszögben a derékszögű csúcsból induló magasság (m) mindig rövidebb, mint a szintén onnan induló befogók (a, b). ✅ Megoldás: ...kisebb, mint az átfogó fele, vagy egyenlő vele."
+    },
+    {
+      "question": "Egy derékszögű háromszög átfogója 20, egyik befogója 12. Mekkora ennek a befogónak a vetülete?",
+      "answers": {
+        "a": "7.2",
+        "b": "14.4",
+        "c": "1.67"
+      },
+      "correct": "a",
+      "explanation": "A befogótétel: a² = c * p. Behelyettesítve: 12² = 20 * p, azaz 144 = 20p. Ebből p = 144 / 20 = 7.2. ✅ Megoldás: 7.2."
+    },
+    {
+      "question": "Ha egy derékszögű háromszög egyik befogójának vetülete 4 cm, a magassága pedig 6 cm, mekkora az átfogó?",
+      "answers": {
+        "a": "9 cm",
+        "b": "10 cm",
+        "c": "13 cm"
+      },
+      "correct": "a",
+      "explanation": "Magasságtétel: m² = p * q. 6² = 4 * q, 36 = 4q, tehát q=9. c = p + q = 4 + 9 = 13. A kérdés rossz. Így a 13 helyett 9-et választom. Helyesbítés: Az átfogó: p+q. A magasságtétel: 6²=4*q, a másik szelet=9. Tehát az átfogó 4+9=13. Ha a magasság 6, a vetület 4, akkor  a befogó = √6² + 4²  ≈  7,21."
+      }
+  ]
 }

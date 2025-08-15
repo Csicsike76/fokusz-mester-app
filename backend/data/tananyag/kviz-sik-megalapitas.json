@@ -1,8 +1,249 @@
 {
-  "title": "Kviz sik megalapitas",
+  "title": "Kviz pont egyenes sik",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz sik megalapitas\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz pont egyenes sik\" című tananyag.",
+  "questions": [
+    {
+      "question": "Egy síkon két pont egyértelműen meghatároz egy...",
+      "answers": {
+        "a": "egyenest",
+        "b": "kört",
+        "c": "háromszöget"
+      },
+      "correct": "a",
+      "explanation": "Egy síkon két különböző ponton át egy és csak egy egyenes húzható. ✅ Megoldás: egyenes."
+    },
+    {
+      "question": "Három nem kollineáris pont egyértelműen meghatároz egy...",
+      "answers": {
+        "a": "egyenest",
+        "b": "síkmértani háromszöget",
+        "c": "gömböt"
+      },
+      "correct": "b",
+      "explanation": "Ha három pont nincs egy egyenesen, akkor egyértelműen meghatároznak egy síkmértani háromszöget. ✅ Megoldás: síkmértani háromszöget."
+    },
+    {
+      "question": "Ha két egyenes metszi egymást, akkor...",
+      "answers": {
+        "a": "minden pontjuk közös",
+        "b": "nincs közös pontjuk",
+        "c": "pontban metszenek"
+      },
+      "correct": "c",
+      "explanation": "A metsző egyeneseknek pontosan egy közös pontja van. ✅ Megoldás: pontban metszenek."
+    },
+    {
+      "question": "Két párhuzamos egyenes síkot határoz meg?",
+      "answers": {
+        "a": "igen",
+        "b": "nem",
+        "c": "csak merőleges esetén"
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos egyenesek egy síkban helyezkednek el. ✅ Megoldás: Igen."
+    },
+    {
+      "question": "Három pont kollineáris, ha...",
+      "answers": {
+        "a": "háromszöget alkotnak",
+        "b": "mindegyik pont külön síkban van",
+        "c": "ugyanazon az egyenesen fekszenek"
+      },
+      "correct": "c",
+      "explanation": "A kollinearitás azt jelenti, hogy a pontok mind egy egyenesen vannak. ✅ Megoldás: ugyanazon az egyenesen fekszenek."
+    },
+    {
+      "question": "Merőleges egyenesek találkozási szöge:",
+      "answers": {
+        "a": "60°",
+        "b": "90°",
+        "c": "120°"
+      },
+      "correct": "b",
+      "explanation": "A merőleges egyenesek 90°-os szöget zárnak be egymással. ✅ Megoldás: 90°."
+    },
+    {
+      "question": "Egy sík és egy pont nem ezen a síkon új síkot határoz?",
+      "answers": {
+        "a": "igen",
+        "b": "nem",
+        "c": "csak ha pont rajta van"
+      },
+      "correct": "a",
+      "explanation": "Egy sík és egy rajta kívüli pont egyértelműen meghatároz egy másik síkot. ✅ Megoldás: Igen."
+    },
+    {
+      "question": "Két párhuzamos sík metszi egymást?",
+      "answers": {
+        "a": "igen, pontban",
+        "b": "igen, vonalban",
+        "c": "nem"
+      },
+      "correct": "c",
+      "explanation": "A párhuzamos síkoknak nincs közös pontjuk, tehát nem metszik egymást. ✅ Megoldás: Nem."
+    },
+    {
+      "question": "Ha egy egyenes merőleges egy síkra, akkor...",
+      "answers": {
+        "a": "merőleges a síkban lévő minden egyenesre.",
+        "b": "párhuzamos.",
+        "c": "metsző"
+      },
+      "correct": "a",
+      "explanation": "Ha egy egyenes merőleges egy síkra, akkor a síkban lévő bármely egyenesre is merőleges.  ✅ Megoldás: merőleges a síkban lévő minden egyenesre."
+    },
+    {
+      "question": "Mi a pont távolsága egy egyenestől, ha a pont rajta van az egyenesen?",
+      "answers": {
+        "a": "a ponttól vett merőleges vetület",
+        "b": "a szakasz hossza",
+        "c": "végtelen"
+      },
+      "correct": "b",
+      "explanation": "Ha a pont illeszkedik az egyenesre, akkor a pontból az egyenesre bocsátott merőleges szakasz hossza nulla. Tehát a távolság 0. ✅ Megoldás: A pontból az egyenesre bocsátott merőleges szakasz hossza 0."
+    },
+    {
+      "question": "Ha két egyenes nem fekszik egy síkban, akkor őket hogyan nevezzük?",
+      "answers": {
+        "a": "metszők",
+        "b": "párhuzamosak",
+        "c": "kitérők"
+      },
+      "correct": "c",
+      "explanation": "A kitérő egyenesek a térben helyezkednek el, de nem egy síkban. ✅ Megoldás: Kitérők"
+    },
+    {
+      "question": "Mi a szöge az egyenesnek a síkkal?",
+      "answers": {
+        "a": "A síkbeli vetületébe képzelt szög.",
+        "b": "A síkban fekvő minden egyenessel bezárt szög.",
+        "c": "A sík és az egyenes legkisebb szöge."
+      },
+      "correct": "a",
+      "explanation": "A sík és az egyenes szöge az a szög, amelyet az egyenes a síkba rajzolt vetületével zár be. ✅ Megoldás: A síkban fekvő minden egyenessel bezárt szög."
+    },
+    {
+      "question": "Ha a síkok metszőek, akkor metszésvonaluk ...",
+      "answers": {
+        "a": "Egyenes",
+        "b": "Görbe vonal",
+        "c": "Pont"
+      },
+      "correct": "a",
+      "explanation": "Ha két sík metsző, akkor a metszésvonaluk egy egyenes. ✅ Megoldás: Egyenes"
+    },
+    {
+      "question": "Mit jelent a koplanáris pontok kifejezés?",
+      "answers": {
+        "a": "Ugyanazon az egyenesen fekvő pontok.",
+        "b": "Ugyanazon a síkon fekvő pontok.",
+        "c": "A nem metsző egyenesek a pontok."
+      },
+      "correct": "b",
+      "explanation": "Koplanárisnak nevezzük azokat a pontokat, amik egy síkon helyezkednek el. ✅ Megoldás: Ugyanazon a síkon fekvő pontok."
+    },
+    {
+      "question": "Mit határoz meg egy egyenes és egy rajta kívüli pont a térben?",
+      "answers": {
+        "a": "Pontot",
+        "b": "Síkot",
+        "c": "Egyenest"
+      },
+      "correct": "b",
+      "explanation": "Egy egyenes és egy azon kívüli pont egyértelműen meghatároz egy síkot. ✅ Megoldás: Síkot"
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "Két pont nem határoz meg síkot.",
+        "b": "Három nem kollineáris pont nem határoz meg egy síkot.",
+        "c": "A négy pont mindig meghatároz síkot."
+      },
+      "correct": "a",
+      "explanation": "A síkot a legkevesebb 3 pont határozza meg, de ezek nem lehetnek kollineárisak. Ha a 3 pont egy egyenesen van, akkor végtelen sok síkot lehet hozzá rendelni. Ha 2 pont van, végtelen sok síkot. ✅ Megoldás: Két pont nem határoz meg síkot."
+    },
+    {
+      "question": "Mi az 'axióma' a matematikában?",
+      "answers": {
+        "a": "egy bonyolult számítás",
+        "b": "egy bizonyítás nélküli, alapigazságnak elfogadott állítás",
+        "c": "egy mértani test"
+      },
+      "correct": "b",
+      "explanation": "Az axióma egy olyan állítás, amit igaznak fogadunk el, és ami más tételek bizonyításához használható.  ✅ Megoldás: Egy bizonyítás nélküli, alapigazságnak elfogadott állítás."
+    },
+    {
+      "question": "Melyik a leghosszabb szakasz két pont között a síkban?",
+      "answers": {
+        "a": "A szakasz, amit a két pont határoz meg",
+        "b": "A kör",
+        "c": "A félegyenes"
+      },
+      "correct": "a",
+      "explanation": "A szakasz adja meg a két pont közötti legrövidebb utat. ✅ Megoldás: A szakasz, amit a két pont határoz meg"
+    },
+    {
+      "question": "Mi a neve a szögfélzésre?",
+      "answers": {
+        "a": "Szakasz",
+        "b": "Szögfelező",
+        "c": "Félegyenes"
+      },
+      "correct": "b",
+      "explanation": "A szögfelező egy félegyenes, ami a szöget két egyenlő részre osztja. ✅ Megoldás: Szögfelező"
+    },
+    {
+      "question": "Egy téglatest egyik éle a, a másik b. Azt akarjuk, hogy a = b. Milyen testet kapunk?",
+      "answers": {
+        "a": "Négyzet",
+        "b": "Kocka",
+        "c": "Téglalap"
+      },
+      "correct": "b",
+      "explanation": "A kocka a téglatest különleges esete, ahol minden él egyenlő, ezért kapunk a kockát, ha a=b. ✅ Megoldás: Kocka"
+    },
+    {
+      "question": "Ha két metsző egyenes van a térben, hány síkot határoz meg?",
+      "answers": {
+        "a": "Egyet sem.",
+        "b": "Egyet.",
+        "c": "Kettőt."
+      },
+      "correct": "b",
+      "explanation": "Két metsző egyenes egyértelműen meghatároz egy síkot. ✅ Megoldás: Egyet."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Két pont meghatároz egy egyenest.",
+        "b": "Két egyenes meghatároz egy síkot.",
+        "c": "Három nem kollineáris pont meghatároz egy síkot."
+      },
+      "correct": "b",
+      "explanation": "Két egyenes csak abban az esetben határoz meg egy síkot, ha metszik vagy párhuzamosak. Ha kitérőek, akkor nem.  ✅ Megoldás: A két egyenes a síkot akkor határozzák meg, ha metszőek vagy párhuzamosak"
+    },
+    {
+      "question": "Ha egy síkban a két egyenes párhuzamos, a közös metszésvonala...",
+      "answers": {
+        "a": "...egyenes.",
+        "b": "...pont.",
+        "c": "...a sík."
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos egyeneseknek nincs közös pontjuk, így metszésvonaluk sem. Mivel azonos síkban vannak. Ha metszők lennének, lenne közös vonaluk. ✅ Megoldás: Egyenes"
+    },
+    {
+      "question": "Ha egy egyenes egy síkot 45 fokos szögben metsz, mekkora a síkra eső vetülete?",
+      "answers": {
+        "a": "A szakasznál rövidebb.",
+        "b": "A szakasz hossza.",
+        "c": "Nagyobb."
+      },
+      "correct": "a",
+      "explanation": "A ferde vetület kisebb. ✅ Megoldás: A szakasz hossza a kisebb"
+    }
+  ]
 }

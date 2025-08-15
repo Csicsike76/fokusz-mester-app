@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz magnesesseg\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a mágnesesség?",
+      "answers": {
+        "a": "A testek súlya.",
+        "b": "Az a jelenség, amikor bizonyos anyagok vonzzák vagy taszítják egymást.",
+        "c": "A fény."
+      },
+      "correct": "b",
+      "explanation": "A mágnesesség az a fizikai jelenség, amikor bizonyos anyagok (pl. vas, nikkel) vonzzák vagy taszítják egymást.  ✅ Megoldás: Az a jelenség, amikor bizonyos anyagok vonzzák vagy taszítják egymást."
+    },
+    {
+      "question": "Milyen pólusai vannak a mágneseknek?",
+      "answers": {
+        "a": "Csak pozitív pólusa van.",
+        "b": "Csak negatív pólusa van.",
+        "c": "Északi és déli pólusa."
+      },
+      "correct": "c",
+      "explanation": "A mágneseknek két pólusa van: északi és déli.  ✅ Megoldás: Északi és déli pólusa."
+    },
+    {
+      "question": "Mit csinálnak az azonos pólusok?",
+      "answers": {
+        "a": "Taszítják egymást.",
+        "b": "Vonzódnak egymáshoz.",
+        "c": "Nem hatnak egymásra."
+      },
+      "correct": "a",
+      "explanation": "Az azonos pólusok taszítják egymást.  ✅ Megoldás: Taszítják egymást."
+    },
+    {
+      "question": "Mit csinálnak a különböző pólusok?",
+      "answers": {
+        "a": "Vonzódnak egymáshoz.",
+        "b": "Taszítják egymást.",
+        "c": "Nem hatnak egymásra."
+      },
+      "correct": "a",
+      "explanation": "A különböző pólusok vonzzák egymást.  ✅ Megoldás: Vonzódnak egymáshoz."
+    },
+    {
+      "question": "Melyik anyag vonzódik a mágneshez?",
+      "answers": {
+        "a": "Fa",
+        "b": "Vas",
+        "c": "Műanyag"
+      },
+      "correct": "b",
+      "explanation": "A vas (és a vasat tartalmazó anyagok) erősen vonzódnak a mágnesekhez.  ✅ Megoldás: Vas."
+    },
+    {
+      "question": "Mi a mágneses mező?",
+      "answers": {
+        "a": "A mágnes színe.",
+        "b": "A mágnes körüli láthatatlan tér, ahol a mágneses erő érvényesül.",
+        "c": "A mágnes tömege."
+      },
+      "correct": "b",
+      "explanation": "A mágneses mező a mágnes körüli tér, ahol a mágneses erő hat.  ✅ Megoldás: A mágnes körüli láthatatlan tér, ahol a mágneses erő érvényesül."
+    },
+    {
+      "question": "Hogyan lehet láthatóvá tenni a mágneses mezőt?",
+      "answers": {
+        "a": "Fénnyel világítva.",
+        "b": "Vassal hintett papírral. A vasreszelék a mezőt mutatja.",
+        "c": "Hanggal."
+      },
+      "correct": "b",
+      "explanation": "A mágneses mezőt vasreszelékkel tudjuk láthatóvá tenni. A vasreszelék a mágneses erővonalak mentén rendeződik.  ✅ Megoldás: Vassal hintett papírral. A vasreszelék a mezőt mutatja."
+    },
+    {
+      "question": "Mi a Föld mágneses pólusai?",
+      "answers": {
+        "a": "Északi és déli.",
+        "b": "Keleti és nyugati.",
+        "c": "A Nap és a Hold."
+      },
+      "correct": "a",
+      "explanation": "A Földnek északi és déli mágneses pólusa van.  ✅ Megoldás: Északi és déli."
+    },
+    {
+      "question": "Milyen eszközzel tudjuk meghatározni az irányt?",
+      "answers": {
+        "a": "Hőmérővel.",
+        "b": "Iránytűvel.",
+        "c": "Mérleggel."
+      },
+      "correct": "b",
+      "explanation": "Az iránytű a Föld mágneses mezőjét használja, így az északi irányt mutatja. ✅ Megoldás: Iránytűvel."
+    },
+    {
+      "question": "Miért működik az iránytű?",
+      "answers": {
+        "a": "Mert forog.",
+        "b": "Mert a mágneses Föld vonzza a mágneses tűjét.",
+        "c": "Mert a nap melegíti."
+      },
+      "correct": "b",
+      "explanation": "Az iránytű mágneses tűje a Föld mágneses mezejében rendeződik, és az északi irányt mutatja. ✅ Megoldás: Mert a mágneses Föld vonzza a mágneses tűjét."
+    },
+    {
+      "question": "Mi a mágnesességet mutató anyag a fémek közül?",
+      "answers": {
+        "a": "Arany",
+        "b": "Réz",
+        "c": "Vas"
+      },
+      "correct": "c",
+      "explanation": "A vas a mágneses anyag a fémek közül. ✅ Megoldás: Vas"
+    },
+    {
+      "question": "Mit nevezünk elektromágnesnek?",
+      "answers": {
+        "a": "Egy olyan mágnes, amit áram hoz létre.",
+        "b": "Egy természetes mágnes.",
+        "c": "A mágnes és a vas darabka."
+      },
+      "correct": "a",
+      "explanation": "Az elektromágnes olyan mágnes, amit áram segítségével hoznak létre. ✅ Megoldás: Egy olyan mágnes, amit áram hoz létre."
+    },
+    {
+      "question": "Hogyan hozunk létre elektromágnest?",
+      "answers": {
+        "a": "Hővel.",
+        "b": "Ha egy vasmag köré vezetődrótot tekercselünk, és abban áramot vezetünk.",
+        "c": "Ha két mágnest összeérintünk."
+      },
+      "correct": "b",
+      "explanation": "Ha egy vasmag köré vezetődrótot tekercselünk, és abban áramot vezetünk, elektromágnest kapunk. ✅ Megoldás: Ha egy vasmag köré vezetődrótot tekercselünk, és abban áramot vezetünk."
+    },
+    {
+      "question": "Mitől függ az elektromágnes ereje?",
+      "answers": {
+        "a": "A mag méretétől és az áram erősségétől.",
+        "b": "A mágnes színétől.",
+        "c": "A levegő hőmérsékletétől."
+      },
+      "correct": "a",
+      "explanation": "Az elektromágnes ereje függ a vasmag méretétől, a tekercs menetszámától, és az áram erősségétől. ✅ Megoldás: A mag méretétől és az áram erősségétől."
+    },
+    {
+      "question": "Mi a mágneses indukció?",
+      "answers": {
+        "a": "Amikor a mágnes elfordul.",
+        "b": "Amikor a mozgó mágnes hatására elektromos feszültség keletkezik.",
+        "c": "A mágneses erő nagysága."
+      },
+      "correct": "b",
+      "explanation": "A mágneses indukció az a jelenség, amikor egy mozgó mágnes hatására elektromos feszültség keletkezik. ✅ Megoldás: Amikor a mozgó mágnes hatására elektromos feszültség keletkezik."
+    },
+    {
+      "question": "Melyik eszköz működik elektromágnesekkel?",
+      "answers": {
+        "a": "A sütő.",
+        "b": "A hangszóró.",
+        "c": "A hűtőgép."
+      },
+      "correct": "b",
+      "explanation": "A hangszóró elektromágneseket használ a hang előállításához. ✅ Megoldás: A hangszóró."
+    },
+    {
+      "question": "Mi a mágneses erővonalak iránya?",
+      "answers": {
+        "a": "Az északi pólustól a déli pólus felé.",
+        "b": "A déli pólustól az északi pólus felé.",
+        "c": "Egyenes vonalban."
+      },
+      "correct": "a",
+      "explanation": "A mágneses erővonalak az északi pólustól a déli pólus felé mutatnak. ✅ Megoldás: Az északi pólustól a déli pólus felé."
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "A mágneses pólusok mindig párosával léteznek.",
+        "b": "Egy mágnesnek csak északi pólusa lehet.",
+        "c": "A mágneses pólusok taszítják egymást."
+      },
+      "correct": "a",
+      "explanation": "A mágneses pólusok mindig párosával léteznek (északi és déli). ✅ Megoldás: A mágneses pólusok mindig párosával léteznek."
+    },
+    {
+      "question": "Melyik irányba mutat az iránytű, ha nem befolyásolja semmi más mágneses hatás?",
+      "answers": {
+        "a": "Északra, a mágneses észak felé.",
+        "b": "Délre, a mágneses dél felé.",
+        "c": "Bármerre."
+      },
+      "correct": "a",
+      "explanation": "Az iránytű az északi mágneses pólus irányába mutat. ✅ Megoldás: Északra, a mágneses észak felé."
+    },
+    {
+      "question": "Melyik erő hatására esnek le a dolgok a Földre?",
+      "answers": {
+        "a": "Súrlódási erő",
+        "b": "Súlyerő",
+        "c": "Felhajtóerő"
+      },
+      "correct": "b",
+      "explanation": "A Föld a testeket a súlyerővel vonzza magához. ✅ Megoldás: Súlyerő."
+    },
+    {
+      "question": "Miért nem tapad a mágnes a rézhez?",
+      "answers": {
+        "a": "Mert a réz mágneses.",
+        "b": "Mert a réz nem mágneses.",
+        "c": "Mert a réz nehéz."
+      },
+      "correct": "b",
+      "explanation": "A réz nem mágneses, ezért nem tapad a mágneshez. ✅ Megoldás: Mert a réz nem mágneses."
+    },
+    {
+      "question": "Ha eltörünk egy mágnest, mit kapunk?",
+      "answers": {
+        "a": "Két mágneset, mindegyik északi vagy déli pólussal.",
+        "b": "Két kisebb mágneset, mindegyik északi és déli pólussal.",
+        "c": "Egy mágnest, de gyengébbet."
+      },
+      "correct": "b",
+      "explanation": "Ha egy mágnest eltörünk, a kapott darabok is mágnesek lesznek, és mindegyiknek lesz északi és déli pólusa. ✅ Megoldás: Két kisebb mágneset, mindegyik északi és déli pólussal."
+    },
+    {
+      "question": "Mi a Föld mágneses tere?",
+      "answers": {
+        "a": "A Föld belsejében a mágnes.",
+        "b": "A mágneses hatás, ami a Föld körül van.",
+        "c": "A sarkok."
+      },
+      "correct": "b",
+      "explanation": "A mágneses mező a Föld körüli terület, ahol a mágneses erő érvényesül. ✅ Megoldás: A mágneses hatás, ami a Föld körül van."
+    },
+     {
+      "question": "Melyik irányba mutat az iránytű?",
+      "answers": {
+        "a": "A mágneses észak felé.",
+        "b": "A földrajzi észak felé.",
+        "c": "A mágneses déli pólus felé."
+      },
+      "correct": "a",
+      "explanation": "Az iránytű a mágneses észak felé mutat. ✅ Megoldás: A mágneses észak felé."
+    },
+    {
+      "question": "Mi a legfontosabb tulajdonsága a mágneseknek?",
+      "answers": {
+        "a": "Vonzanak bizonyos anyagokat.",
+        "b": "Színesek.",
+        "c": "Nehezek."
+      },
+      "correct": "a",
+      "explanation": "A mágnesek legfontosabb tulajdonsága, hogy bizonyos anyagokat vonzanak. ✅ Megoldás: Vonzanak bizonyos anyagokat."
+    }
+  ]
 }

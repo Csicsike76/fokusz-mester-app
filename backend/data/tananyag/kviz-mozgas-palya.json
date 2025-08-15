@@ -3,6 +3,237 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz mozgas palya\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz mozgas palya\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a pálya fizikai definíciója?",
+      "answers": {
+        "a": "A mozgó test által leírt vonal.",
+        "b": "A test sebessége.",
+        "c": "A test kiindulási helye."
+      },
+      "correct": "a",
+      "explanation": "A pálya az a tényleges út, az a vonal (legyen az egyenes vagy görbe), amelyet egy test a mozgása során befut egy adott vonatkoztatási rendszerben. ✅ Megoldás: A pálya a mozgó test által leírt vonal."
+    },
+    {
+      "question": "Egy egyenes úton haladó autó pályája...",
+      "answers": {
+        "a": "egyenes.",
+        "b": "kör.",
+        "c": "görbe."
+      },
+      "correct": "a",
+      "explanation": "Ha egy test egyenes vonalban mozog, akkor az általa leírt pálya is egyenes. Ezt nevezzük egyenesvonalú mozgásnak. ✅ Megoldás: Az autó pályája egyenes."
+    },
+    {
+      "question": "A Hold Föld körüli pályája milyen alakú?",
+      "answers": {
+        "a": "Kör (közelítőleg)",
+        "b": "Egyenes",
+        "c": "Háromszög"
+      },
+      "correct": "a",
+      "explanation": "A Hold a Föld gravitációs vonzásának hatására kering bolygónk körül. A pályája enyhén elliptikus, de jó közelítéssel körnek tekinthető. ✅ Megoldás: A Hold pályája közelítőleg kör alakú."
+    },
+    {
+      "question": "Mi a megtett út?",
+      "answers": {
+        "a": "A pálya hossza.",
+        "b": "A kezdő- és végpont közötti távolság.",
+        "c": "A test sebessége."
+      },
+      "correct": "a",
+      "explanation": "A megtett út a pálya teljes hossza, amit a test bejár. Ezzel szemben az elmozdulás a kezdő- és végpont közötti legrövidebb, egyenes távolság. ✅ Megoldás: A megtett út a pálya hossza."
+    },
+    {
+      "question": "Egy körhinta szélén ülő személy pályája a körhinta középpontjához képest...",
+      "answers": {
+        "a": "kör.",
+        "b": "egyenes.",
+        "c": "pont."
+      },
+      "correct": "a",
+      "explanation": "Ahogy a körhinta forog, a rajta ülő személy egy kör alakú pályát ír le a középpont körül. Ezt nevezzük körmozgásnak. ✅ Megoldás: A személy pályája kör."
+    },
+    {
+      "question": "Egy feldobott kő pályája (a légellenállást elhanyagolva)...",
+      "answers": {
+        "a": "egy görbe vonal (parabola).",
+        "b": "egyenesen felfelé, majd egyenesen lefelé.",
+        "c": "egy kör."
+      },
+      "correct": "a",
+      "explanation": "A feldobott testre a gravitáció hat, ami folyamatosan lefelé húzza. Emiatt a pályája nem egyenes, hanem egy jellegzetes, parabola alakú görbe. ✅ Megoldás: A kő pályája egy görbe vonal."
+    },
+    {
+      "question": "Ha körbesétálsz egy 400 méteres futópályán és visszaérsz a kiindulási pontba, mennyi a megtett utad?",
+      "answers": {
+        "a": "400 m",
+        "b": "0 m",
+        "c": "200 m"
+      },
+      "correct": "a",
+      "explanation": "A megtett út a pálya teljes hossza. Mivel a pálya hossza 400 méter, ennyit sétáltál. ✅ Megoldás: A megtett út 400 m."
+    },
+    {
+      "question": "Milyen pályán mozog a Föld a Nap körül?",
+      "answers": {
+        "a": "Ellipszis (közel kör) alakú pályán.",
+        "b": "Egyenes vonalú pályán.",
+        "c": "Szabálytalan pályán."
+      },
+      "correct": "a",
+      "explanation": "A bolygók, így a Föld is, a Nap gravitációs vonzásának hatására ellipszis alakú pályán keringenek. A Föld pályája nagyon hasonlít egy körhöz, de nem tökéletes kör.  ✅ Megoldás: A Föld ellipszis (közel kör) alakú pályán mozog."
+    },
+    {
+      "question": "Melyik test mozog egyenes vonalú pályán?",
+      "answers": {
+        "a": "Egy hullámvasút",
+        "b": "Egy szabadon eső alma",
+        "c": "Egy óra mutatójának vége"
+      },
+      "correct": "b",
+      "explanation": "A hullámvasút és az óramutató is görbe pályán mozog. A szabadon eső testet a gravitáció egyenesen a Föld középpontja felé húzza, így a pályája (szélcsendben) egyenes. ✅ Megoldás: A szabadon eső alma mozog egyenes vonalú pályán."
+    },
+    {
+      "question": "Mi a neve annak a mozgásnak, aminek a pályája görbe?",
+      "answers": {
+        "a": "Egyenletes mozgás",
+        "b": "Görbe vonalú mozgás",
+        "c": "Nyugalmi állapot"
+      },
+      "correct": "b",
+      "explanation": "A mozgásokat a pályájuk alakja szerint is csoportosíthatjuk. Ha a pálya egyenes, a mozgás egyenesvonalú. Ha a pálya görbe, a mozgás görbe vonalú.  ✅ Megoldás: A mozgás neve görbe vonalú mozgás."
+    },
+    {
+      "question": "Ha az 'e' egyenesen van egy 'P' pont, hány részből áll az egyenes a pont nélkül?",
+      "answers": {
+        "a": "Egy részből",
+        "b": "Két részből (két félegyenesből)",
+        "c": "Nem osztja részekre."
+      },
+      "correct": "b",
+      "explanation": "A félegyenes nevében is benne van: egy 'fél' egyenes. Egy pontból indul ki, ez a kezdőpontja, és innen tart a végtelenbe.  ✅ Megoldás: Két részből, azaz két félegyenesből áll."
+    },
+    {
+      "question": "Melyik NEM mértani alapfogalom?",
+      "answers": {
+        "a": "a pont",
+        "b": "az egyenes",
+        "c": "a háromszög"
+      },
+      "correct": "c",
+      "explanation": "Az alapfogalmakat nem definiáljuk, hanem elfogadjuk (pont, egyenes, sík). A háromszög már ezekből az alapfogalmakból hozzuk létre: 'egy síkban lévő három, nem egy egyenesre eső pontot összekötő szakaszok által határolt síkidom'.  ✅ Megoldás: A háromszög már egy származtatott alakzat, nem alapfogalom."
+    },
+    {
+      "question": "Mi a különbség a pálya és az elmozdulás között?",
+      "answers": {
+        "a": "Az elmozdulás a pálya hossza.",
+        "b": "Nincs különbség.",
+        "c": "A pálya a teljes út, az elmozdulás a kezdő- és végpont közötti egyenes távolság."
+      },
+      "correct": "c",
+      "explanation": "A pálya a ténylegesen bejárt vonal. Az elmozdulás egy vektor, ami a startpontból a célpontba mutat. A megtett út a pálya hossza. ✅ Megoldás: A pálya a teljes út, az elmozdulás a kezdő- és végpont közötti egyenes távolság."
+    },
+    {
+      "question": "Ha egy test egyenes vonalban, egyenletesen mozog, akkor a pályája...",
+      "answers": {
+        "a": "egy egyenes.",
+        "b": "egy pont.",
+        "c": "egy kör."
+      },
+      "correct": "a",
+      "explanation": "Azt mondtuk, ha egy test egyenes vonalban mozog, akkor az általa leírt pálya is egyenes.  ✅ Megoldás: A test pályája egy egyenes."
+    },
+    {
+      "question": "Ha egy test a kiindulási pontjából visszatér, akkor az elmozdulása...",
+      "answers": {
+        "a": "a megtett úttal egyezik meg.",
+        "b": "nulla.",
+        "c": "kétszerese a megtett útnak."
+      },
+      "correct": "b",
+      "explanation": "Az elmozdulás a kiindulási pont és a végpont távolsága. Ha a test visszatér, a kettő egybeesik, így az elmozdulás nulla. ✅ Megoldás: nulla."
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "Az elmozdulás mindig egyenlő a megtett úttal.",
+        "b": "A megtett út mindig nagyobb, mint az elmozdulás.",
+        "c": "A megtett út mindig kisebb, mint az elmozdulás."
+      },
+      "correct": "b",
+      "explanation": "A megtett út a pálya teljes hossza, az elmozdulás a kezdő- és végpont közötti egyenes távolság. Ha a pálya nem egyenes, akkor a megtett út mindig hosszabb, mint az elmozdulás. ✅ Megoldás: A megtett út mindig nagyobb, mint az elmozdulás."
+    },
+    {
+      "question": "A hajtó kerekein egyenes vonalban guruló biciklista pályája...",
+      "answers": {
+        "a": "egy kör.",
+        "b": "egyenes.",
+        "c": "szabálytalan görbe."
+      },
+      "correct": "b",
+      "explanation": "A biciklista a kerék forgása közben egyenes vonalban halad, így a pályája egyenes. ✅ Megoldás: egyenes."
+    },
+    {
+      "question": "Ha egy test egyenes vonalban, egyenletes sebességgel mozog, akkor...",
+      "answers": {
+        "a": "a pályája egyenes.",
+        "b": "A gyorsulása nem nulla.",
+        "c": "A sebessége változik."
+      },
+      "correct": "a",
+      "explanation": "Ha a sebesség állandó, az egyenletes mozgás. Ha egyenes vonalban mozog, a pályája is egyenes. ✅ Megoldás: A pályája egyenes."
+    },
+    {
+      "question": "Mi történik a helyzeti energiával, ha egy test a pályáján lefelé halad?",
+      "answers": {
+        "a": "nő",
+        "b": "csökken",
+        "c": "nem változik"
+      },
+      "correct": "b",
+      "explanation": "A helyzeti energia a magasságtól függ. Ha a test lefelé halad, a magassága csökken, ezért a helyzeti energiája is csökken.  ✅ Megoldás: Csökken"
+    },
+    {
+      "question": "Ha egy test egyenes vonalban mozog, a megtett út és az elmozdulás nagysága...",
+      "answers": {
+        "a": "mindig különböző.",
+        "b": "egyenlő.",
+        "c": "azonos irányú."
+      },
+      "correct": "b",
+      "explanation": "Ha a mozgás egyenes vonalú, és nem változik az iránya, a megtett út és az elmozdulás nagysága megegyezik. ✅ Megoldás: egyenlő."
+    },
+    {
+      "question": "Egy táblán mozgó kréta által hagyott nyom a táblán, a kréta...",
+      "answers": {
+        "a": "...mozgásának a pályája.",
+        "b": "...sebessége.",
+        "c": "...gyorsulása."
+      },
+      "correct": "a",
+      "explanation": "A kréta által a táblán hagyott vonal a mozgás pályája. ✅ Megoldás: ...mozgásának a pályája."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "A pálya a test által bejárt út.",
+        "b": "A megtett út és az elmozdulás mindig ugyanaz.",
+        "c": "Az elmozdulás a kezdő- és végpont közti legrövidebb távolság."
+      },
+      "correct": "b",
+      "explanation": "A megtett út és az elmozdulás nagysága csak egyenes vonalú mozgás esetén egyezik meg. Általános esetben a megtett út a pálya hossza, az elmozdulás a két pont közti távolság. ✅ Megoldás: A megtett út és az elmozdulás mindig ugyanaz."
+    },
+    {
+      "question": "Ha egy autó megkerül egy kört, a megtett út és az elmozdulás nagysága...",
+      "answers": {
+        "a": "ugyanannyi.",
+        "b": "a megtett út nagyobb.",
+        "c": "az elmozdulás nagyobb."
+      },
+      "correct": "b",
+      "explanation": "A megtett út a kör kerülete, az elmozdulás pedig 0, mert a kiindulási és végpont megegyezik. ✅ Megoldás: A megtett út nagyobb."
+    }
+  ]
 }

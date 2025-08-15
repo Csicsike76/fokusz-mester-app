@@ -1,8 +1,249 @@
 {
-  "title": "Kviz nyomas",
+  "title": "Kviz hidrosztatikai nyomas",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz nyomas\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz hidrosztatikai nyomas\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a hidrosztatikai nyomás?",
+      "answers": {
+        "a": "A szilárd testek nyomása.",
+        "b": "A folyadékok nyomása.",
+        "c": "A gázok nyomása."
+      },
+      "correct": "b",
+      "explanation": "A hidrosztatikai nyomás a folyadékok nyomása. ✅ Megoldás: A folyadékok nyomása."
+    },
+    {
+      "question": "Mitől függ a hidrosztatikai nyomás?",
+      "answers": {
+        "a": "A folyadék sűrűségétől és a mélységtől.",
+        "b": "A tartály méretétől.",
+        "c": "A folyadék hőmérsékletétől."
+      },
+      "correct": "a",
+      "explanation": "A hidrosztatikai nyomás függ a folyadék sűrűségétől és a mélységtől. Minél sűrűbb a folyadék, és minél mélyebben vagyunk benne, annál nagyobb a nyomás. ✅ Megoldás: A folyadék sűrűségétől és a mélységtől."
+    },
+    {
+      "question": "Miért érezzük a nyomást a vízben?",
+      "answers": {
+        "a": "Mert a víz súlya nyomja a testünket.",
+        "b": "Mert a víz hideg.",
+        "c": "Mert nem tudunk lebegni."
+      },
+      "correct": "a",
+      "explanation": "A víz súlya a testünkre nehezedik, ami nyomást okoz. ✅ Megoldás: Mert a víz súlya nyomja a testünket."
+    },
+    {
+      "question": "Ha mélyebbre merülünk a vízben, akkor a nyomás...",
+      "answers": {
+        "a": "Csökken.",
+        "b": "Ugyanannyi marad.",
+        "c": "Nő."
+      },
+      "correct": "c",
+      "explanation": "Mélyebbre merülve a felettünk lévő vízréteg vastagabb lesz, ezért a nyomás nő. ✅ Megoldás: Nő."
+    },
+    {
+      "question": "Mi a sűrűség?",
+      "answers": {
+        "a": "A test súlya.",
+        "b": "Megmutatja, hogy egy anyagnak mekkora a tömege egy adott térfogatban.",
+        "c": "A test mérete."
+      },
+      "correct": "b",
+      "explanation": "A sűrűség azt mutatja meg, hogy egy anyagnak mekkora a tömege egy adott térfogatban. Például a sűrűbb anyagok nehezebbek, mint a kevésbé sűrűek. ✅ Megoldás: Megmutatja, hogy egy anyagnak mekkora a tömege egy adott térfogatban."
+    },
+    {
+      "question": "Miért emelkedik a buborék a vízben?",
+      "answers": {
+        "a": "Mert nehezebb, mint a víz.",
+        "b": "Mert könnyebb, mint a víz.",
+        "c": "Mert a víz forr."
+      },
+      "correct": "b",
+      "explanation": "A buborék könnyebb, mint a víz, ezért felfelé emelkedik. ✅ Megoldás: Mert könnyebb, mint a víz."
+    },
+    {
+      "question": "Mi a vízszintes irányban a hidrosztatikai nyomás a vízben?",
+      "answers": {
+        "a": "Kisebb, mint a függőleges irányban.",
+        "b": "Ugyanakkora, mint a függőleges irányban.",
+        "c": "Nagyobb, mint a függőleges irányban."
+      },
+      "correct": "b",
+      "explanation": "A nyomás minden irányban ugyanakkora, egy adott mélységben.  ✅ Megoldás: Ugyanakkora, mint a függőleges irányban."
+    },
+    {
+      "question": "Miért van szükség a zsilipkapukra a hajók esetében a csatornákban?",
+      "answers": {
+        "a": "Hogy lassítsák a hajókat.",
+        "b": "Hogy a hajókat a különböző vízszintek között emeljék vagy süllyesszék.",
+        "c": "Hogy a vizet tisztítsák."
+      },
+      "correct": "b",
+      "explanation": "A zsilipkapuk segítségével a hajókat a különböző vízszintek között lehet mozgatni, leküzdve a magasságbeli különbségeket.  ✅ Megoldás: Hogy a hajókat a különböző vízszintek között emeljék vagy süllyesszék."
+    },
+    {
+      "question": "Melyik anyagban nagyobb a nyomás ugyanazon a mélységen?",
+      "answers": {
+        "a": "A sűrűbb folyadékban.",
+        "b": "A kevésbé sűrű folyadékban.",
+        "c": "A két folyadékban ugyanakkora."
+      },
+      "correct": "a",
+      "explanation": "A sűrűbb folyadékban nagyobb a nyomás. ✅ Megoldás: A sűrűbb folyadékban."
+    },
+    {
+      "question": "Miért nem zúzódnak össze a tengeralattjárók nagy mélységben?",
+      "answers": {
+        "a": "Mert a vastag falak ellenállnak a nyomásnak.",
+        "b": "Mert a tengeralattjáró könnyű.",
+        "c": "Mert a tengeralattjáró nem érintkezik a vízzel."
+      },
+      "correct": "a",
+      "explanation": "A tengeralattjárókat vastag falakkal építik, ami ellenáll a nagy nyomásnak a mélyben. ✅ Megoldás: Mert a vastag falak ellenállnak a nyomásnak."
+    },
+    {
+      "question": "Mi a kapcsolat a mélység és a hidrosztatikai nyomás között?",
+      "answers": {
+        "a": "Minél mélyebben vagyunk, annál kisebb a nyomás.",
+        "b": "Minél mélyebben vagyunk, annál nagyobb a nyomás.",
+        "c": "A mélység nem befolyásolja a nyomást."
+      },
+      "correct": "b",
+      "explanation": "A mélységgel a nyomás egyre nagyobb lesz.  ✅ Megoldás: Minél mélyebben vagyunk, annál nagyobb a nyomás."
+    },
+    {
+      "question": "Miért veszélyesek a búvárok számára a mély merülések?",
+      "answers": {
+        "a": "Mert a nyomás miatt megsérülhetnek a dobhártyájuk.",
+        "b": "Mert nem tudnak úszni.",
+        "c": "Mert a víz hideg."
+      },
+      "correct": "a",
+      "explanation": "A nagy mélységben a nyomás miatt megsérülhetnek a búvárok dobhártyái, orra, tüdeje, ha nem egyenlítik ki a nyomást.  ✅ Megoldás: Mert a nyomás miatt megsérülhetnek a dobhártyájuk."
+    },
+    {
+      "question": "Ha egy edénybe vizet öntünk, a nyomás a fenéken...",
+      "answers": {
+        "a": "A magasságtól függ.",
+        "b": "A szélességtől függ.",
+        "c": "A víz színétől függ."
+      },
+      "correct": "a",
+      "explanation": "A nyomás a folyadék magasságától függ. ✅ Megoldás: A magasságtól függ."
+    },
+    {
+      "question": "Melyik energiafajta függ a test magasságától?",
+      "answers": {
+        "a": "Mozgási energia",
+        "b": "Helyzeti energia",
+        "c": "Hőenergia"
+      },
+      "correct": "b",
+      "explanation": "A helyzeti energia függ a test magasságától. ✅ Megoldás: Helyzeti energia."
+    },
+    {
+      "question": "Melyik állítás igaz a nyomásra egy folyadékban?",
+      "answers": {
+        "a": "A nyomás csak lefelé hat.",
+        "b": "A nyomás a mélységgel csökken.",
+        "c": "A nyomás minden irányban egyenlő nagyságú."
+      },
+      "correct": "c",
+      "explanation": "A nyomás minden irányban egyenlő nagyságú. ✅ Megoldás: A nyomás minden irányban egyenlő nagyságú."
+    },
+    {
+      "question": "Egy búvár lemerül. Mi történik a nyomással?",
+      "answers": {
+        "a": "Csökken.",
+        "b": "Nő.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "A mélységgel a nyomás növekszik. ✅ Megoldás: Nő."
+    },
+    {
+      "question": "Mi a teendő, ha egy tartályban a folyadék nyomását akarjuk növelni?",
+      "answers": {
+        "a": "Emeljük a folyadék hőmérsékletét.",
+        "b": "Növeljük a folyadék mennyiségét.",
+        "c": "Mélyebbre süllyesztjük a mérendő pontot."
+      },
+      "correct": "c",
+      "explanation": "A mélység növelésével a hidrosztatikai nyomás is növekszik. ✅ Megoldás: Mélyebbre süllyesztjük a mérendő pontot."
+    },
+    {
+      "question": "Egy test súlya 50 N, és 10 m²-es felületen áll. Mennyi a nyomás?",
+      "answers": {
+        "a": "5 Pa",
+        "b": "500 Pa",
+        "c": "0.2 Pa"
+      },
+      "correct": "a",
+      "explanation": "p = F/A = 50 N / 10 m² = 5 Pa.  ✅ Megoldás: 5 Pa."
+    },
+    {
+      "question": "Miért tapad a tapadókorong a falra?",
+      "answers": {
+        "a": "A tapadókorong súlya miatt.",
+        "b": "A levegő nyomása miatt, ami a tapadókorong és a fal között ki van szívva.",
+        "c": "Mert a tapadókorong anyaga ragacsos."
+      },
+      "correct": "b",
+      "explanation": "A tapadókorong és a fal között a levegő nyomása alacsonyabb, mint a külső nyomás, ezért a tapadókorong a falhoz tapad. ✅ Megoldás: A levegő nyomása miatt, ami a tapadókorong és a fal között ki van szívva."
+    },
+    {
+      "question": "Melyik a Pascal-törvény a hidrosztatikában?",
+      "answers": {
+        "a": "A nyomás minden irányban egyenlő.",
+        "b": "A nyomás a mélységgel egyenesen arányos.",
+        "c": "A nyomás nem függ a folyadék sűrűségétől."
+      },
+      "correct": "a",
+      "explanation": "A Pascal-törvény kimondja, hogy a folyadék belsejében a nyomás minden irányban egyenlő nagyságú.  ✅ Megoldás: A nyomás minden irányban egyenlő."
+    },
+    {
+      "question": "Mi történik, ha a légnyomás csökken?",
+      "answers": {
+        "a": "Forr a víz alacsonyabb hőmérsékleten.",
+        "b": "A víz forráspontja nem változik.",
+        "c": "A víz fagyáspontja magasabb lesz."
+      },
+      "correct": "a",
+      "explanation": "A víz forráspontja a légnyomástól függ. A légnyomás csökkenésével a forráspont is csökken.  ✅ Megoldás: Forr a víz alacsonyabb hőmérsékleten."
+    },
+    {
+      "question": "Egy 100 N súlyú test 2 m² felületen áll. Mennyi a nyomás?",
+      "answers": {
+        "a": "50 Pa",
+        "b": "200 Pa",
+        "c": "0.02 Pa"
+      },
+      "correct": "a",
+      "explanation": "A nyomás (p) = Erő (F) / Felület (A). Ebben az esetben p = 100 N / 2 m² = 50 Pa. ✅ Megoldás: 50 Pa"
+    },
+    {
+      "question": "Egy pohár víz aljára ható nyomás...",
+      "answers": {
+        "a": "...a víz magasságától függ.",
+        "b": "...a pohár alakjától függ.",
+        "c": "...a víz mennyiségétől függ."
+      },
+      "correct": "a",
+      "explanation": "A hidrosztatikai nyomás a folyadék magasságától és a sűrűségétől függ, nem a pohár alakjától vagy a víz mennyiségétől. ✅ Megoldás: A víz magasságától függ."
+    },
+    {
+      "question": "Miért tud úszni egy hajó?",
+      "answers": {
+        "a": "Mert a hajó súlya kisebb, mint a víz súlya.",
+        "b": "Mert a hajóra a felhajtóerő hat, ami a súlyánál nagyobb.",
+        "c": "Mert a hajó formája speciális."
+      },
+      "correct": "b",
+      "explanation": "A hajó azért úszik, mert a felhajtóerő nagyobb, mint a hajó súlya. ✅ Megoldás: Mert a hajóra a felhajtóerő hat, ami a súlyánál nagyobb."
+    }
+  ]
 }

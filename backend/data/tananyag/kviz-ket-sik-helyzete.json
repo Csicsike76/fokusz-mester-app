@@ -4,5 +4,236 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz ket sik helyzete\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Hányféleképpen helyezkedhet el két sík a térben?",
+      "answers": {
+        "a": "Egyféleképpen.",
+        "b": "Kétféleképpen.",
+        "c": "Háromféleképpen."
+      },
+      "correct": "b",
+      "explanation": "Két sík lehet párhuzamos vagy metsző.  ✅ Megoldás: Kétféleképpen."
+    },
+    {
+      "question": "Mit jelent, ha két sík párhuzamos?",
+      "answers": {
+        "a": "Van közös pontjuk.",
+        "b": "Nincs közös pontjuk.",
+        "c": "Egy pontjuk van."
+      },
+      "correct": "b",
+      "explanation": "A párhuzamos síkoknak nincs közös pontjuk, azaz soha nem metszik egymást. ✅ Megoldás: Nincs közös pontjuk."
+    },
+    {
+      "question": "Mi a jelölése a párhuzamos síkoknak?",
+      "answers": {
+        "a": "=",
+        "b": "∥",
+        "c": "p"
+      },
+      "correct": "b",
+      "explanation": "A párhuzamos síkokat a ∥ jellel jelöljük, hasonlóan a párhuzamos egyenesekhez. ✅ Megoldás: ∥"
+    },
+    {
+      "question": "Mit jelent, ha két sík metsző?",
+      "answers": {
+        "a": "Nincs közös pontjuk.",
+        "b": "Egy közös pontjuk van.",
+        "c": "Egy egyenes mentén metszik egymást."
+      },
+      "correct": "c",
+      "explanation": "A metsző síkok egy egyenes mentén metszik egymást. ✅ Megoldás: Egy egyenes mentén metszik egymást."
+    },
+    {
+      "question": "Ha két sík merőleges egymásra, akkor hány fokos a szögük?",
+      "answers": {
+        "a": "0 fok.",
+        "b": "45 fok.",
+        "c": "90 fok."
+      },
+      "correct": "c",
+      "explanation": "A merőleges síkok 90 fokos szöget zárnak be egymással.  ✅ Megoldás: 90 fok."
+    },
+    {
+      "question": "Ha két sík párhuzamos, mekkora a köztük lévő szög?",
+      "answers": {
+        "a": "0 fok.",
+        "b": "45 fok.",
+        "c": "90 fok."
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos síkok szöge 0 fok. ✅ Megoldás: 0 fok"
+    },
+    {
+      "question": "Mi a távolság két párhuzamos sík között?",
+      "answers": {
+        "a": "A síkokban lévő egyenesek távolsága.",
+        "b": "A síkokat merőlegesen összekötő szakasz hossza.",
+        "c": "A síkok metszéspontjának a távolsága."
+      },
+      "correct": "b",
+      "explanation": "A távolság két párhuzamos sík között a síkokat merőlegesen összekötő szakasz hossza. ✅ Megoldás: A síkokat merőlegesen összekötő szakasz hossza."
+    },
+    {
+      "question": "Hogy nevezzük a síkok közös egyenesét?",
+      "answers": {
+        "a": "Metszőegyenes.",
+        "b": "Síkegyenes.",
+        "c": "Alapélek."
+      },
+      "correct": "a",
+      "explanation": "A síkok közös egyenesét metszőegyenesnek nevezzük. ✅ Megoldás: Metszőegyenes."
+    },
+    {
+      "question": "Ha két sík metszi egymást, akkor a metszésvonaluk...",
+      "answers": {
+        "a": "egy pont.",
+        "b": "egy egyenes.",
+        "c": "egy sík."
+      },
+      "correct": "b",
+      "explanation": "Két metsző sík metszésvonala egy egyenes. ✅ Megoldás: egy egyenes."
+    },
+    {
+      "question": "Ha egy asztal lapja a padlóval párhuzamos, milyen a szög a lap és a padló között?",
+      "answers": {
+        "a": "0 fok.",
+        "b": "45 fok.",
+        "c": "90 fok."
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos síkok szöge 0 fok.  ✅ Megoldás: 0 fok."
+    },
+    {
+      "question": "Ha egy fal merőleges a padlóra, akkor a köztük lévő szög...",
+      "answers": {
+        "a": "0 fok.",
+        "b": "45 fok.",
+        "c": "90 fok."
+      },
+      "correct": "c",
+      "explanation": "A merőleges síkok szöge 90 fok. ✅ Megoldás: 90 fok."
+    },
+    {
+      "question": "Melyik testnek van párhuzamos oldallapja?",
+      "answers": {
+        "a": "A gúla.",
+        "b": "A hasáb.",
+        "c": "A gömb."
+      },
+      "correct": "b",
+      "explanation": "A hasábnak van két párhuzamos alaplapja. ✅ Megoldás: A hasáb."
+    },
+    {
+      "question": "Mit jelent a 'távolság' két sík között?",
+      "answers": {
+        "a": "A síkok bármely pontja közötti legrövidebb szakasz.",
+        "b": "A síkokat merőlegesen összekötő szakasz hossza.",
+        "c": "A síkokban lévő egyenesek távolsága."
+      },
+      "correct": "b",
+      "explanation": "A távolság két párhuzamos sík között a síkokat merőlegesen összekötő szakasz hossza. ✅ Megoldás: A síkokat merőlegesen összekötő szakasz hossza."
+    },
+    {
+      "question": "Ha egy repülőgép vízszintesen repül, a szárnya és a talaj közötti szög...",
+      "answers": {
+        "a": "0 fok.",
+        "b": "45 fok.",
+        "c": "90 fok."
+      },
+      "correct": "a",
+      "explanation": "Ha a repülő vízszintesen repül, a szárnya és a talaj közötti szög 0 fok. ✅ Megoldás: 0 fok."
+    },
+    {
+      "question": "Milyen az a két sík, amiknek nincs közös pontja?",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "Metszőek.",
+        "c": "Egybeesőek."
+      },
+      "correct": "a",
+      "explanation": "Ha a síkoknak nincs közös pontja, akkor azok párhuzamosak.  ✅ Megoldás: Párhuzamosak."
+    },
+    {
+      "question": "Mekkora a szög a fal és a mennyezet között?",
+      "answers": {
+        "a": "0 fok.",
+        "b": "90 fok.",
+        "c": "180 fok."
+      },
+      "correct": "c",
+      "explanation": "A fal és a mennyezet általában 90 fokos szöget zár be, a padlóval való szöget is 90 fokos.  ✅ Megoldás: 90 fok."
+    },
+    {
+      "question": "Ha egy síkban egy egyenes van, ami merőleges egy másik egyenesre, és mindkettő egy harmadik síkban van, akkor mit mondhatunk?",
+      "answers": {
+        "a": "A síkok párhuzamosak.",
+        "b": "A síkok metszők.",
+        "c": "Nem tudjuk eldönteni."
+      },
+      "correct": "b",
+      "explanation": "Ha a síkok egy közös egyenest tartalmaznak, akkor metszőek. ✅ Megoldás: Metszőek."
+    },
+    {
+      "question": "Mi a helyzet a padlóval és a mennyezettel a legtöbb szobában?",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "Metszőek.",
+        "c": "Egybeesőek."
+      },
+      "correct": "a",
+      "explanation": "A padló és a mennyezet a legtöbb szobában párhuzamos. ✅ Megoldás: Párhuzamosak."
+    },
+    {
+      "question": "Mi a metszéspont a metsző síkoknál?",
+      "answers": {
+        "a": "Egy pont.",
+        "b": "Egy egyenes.",
+        "c": "Egy sík."
+      },
+      "correct": "b",
+      "explanation": "A metsző síkok a metszésvonalukon metszik egymást, ami egy egyenes.  ✅ Megoldás: Egy egyenes."
+    },
+    {
+      "question": "Ha két sík azonos, akkor hány közös pontjuk van?",
+      "answers": {
+        "a": "Nincs.",
+        "b": "Végtelen sok.",
+        "c": "Egy."
+      },
+      "correct": "b",
+      "explanation": "Ha két sík azonos, minden pontjuk közös, tehát végtelen sok. ✅ Megoldás: Végtelen sok."
+    },
+    {
+      "question": "Ha a síkok nem metszik egymást, akkor milyen a helyzetük?",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "Metszőek.",
+        "c": "Egybeesőek."
+      },
+      "correct": "a",
+      "explanation": "A nem metsző síkok párhuzamosak. ✅ Megoldás: Párhuzamosak."
+    },
+    {
+      "question": "Ha egy egyenes a síkra merőleges, akkor hány fokos szöget zár be a síkkal?",
+      "answers": {
+        "a": "0 fok",
+        "b": "90 fok",
+        "c": "180 fok"
+      },
+      "correct": "b",
+      "explanation": "Ha egy egyenes merőleges egy síkra, akkor a szögük 90 fokos. ✅ Megoldás: 90 fok"
+    },
+    {
+      "question": "Ha egy ajtó becsukódik, a fal és az ajtó hogyan viszonyul egymáshoz?",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "Metszőek.",
+        "c": "Egybeesőek."
+      },
+      "correct": "b",
+      "explanation": "A fal és az ajtó metszőek, mert egy közös élen találkoznak. ✅ Megoldás: Metszőek"
+    }
+  ]
 }

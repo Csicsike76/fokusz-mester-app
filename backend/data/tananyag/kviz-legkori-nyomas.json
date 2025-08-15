@@ -4,5 +4,236 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz legkori nyomas\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi okozza a légköri nyomást?",
+      "answers": {
+        "a": "A felettünk lévő levegőoszlop súlya.",
+        "b": "A Föld forgása.",
+        "c": "A Nap melege."
+      },
+      "correct": "a",
+      "explanation": "A Földet körülvevő gázburoknak, a légkörnek a gravitáció miatt súlya van. Ez a hatalmas levegőtömeg nyomást gyakorol a Föld felszínére és minden testre. ✅ Megoldás: A felettünk lévő levegőoszlop súlya."
+    },
+    {
+      "question": "Hogyan változik a légnyomás a tengerszint feletti magassággal?",
+      "answers": {
+        "a": "A magassággal csökken.",
+        "b": "A magassággal nő.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "Minél magasabbra megyünk, annál rövidebb (és ritkább) a felettünk lévő levegőoszlop, tehát a súlya is kisebb. Emiatt a légköri nyomás a magasság növekedésével csökken.  ✅ Megoldás: A magassággal csökken."
+    },
+    {
+      "question": "Mivel mérjük a légnyomást?",
+      "answers": {
+        "a": "Barométerrel.",
+        "b": "Hőmérővel.",
+        "c": "Erőmérővel."
+      },
+      "correct": "a",
+      "explanation": "A légnyomás mérésére szolgáló eszközt barométernek nevezzük. Ennek legismertebb típusa a Torricelli-féle higanyos barométer.  ✅ Megoldás: Barométerrel."
+    },
+    {
+      "question": "Miért 'roppan össze' egy levegőtlenített fémdoboz?",
+      "answers": {
+        "a": "Mert a külső légnyomás sokkal nagyobb, mint a doboz belsejében lévő nyomás.",
+        "b": "Mert a doboz anyaga meggyengül.",
+        "c": "Mert a gravitáció összenyomja."
+      },
+      "correct": "a",
+      "explanation": "Normál állapotban a dobozban lévő levegő nyomása kiegyenlíti a külső légnyomást. Ha a levegőt kiszivattyúzzuk, a belső nyomás lecsökken, és a hatalmas külső légnyomás összeroppantja a doboz falát. ✅ Megoldás: Mert a külső légnyomás sokkal nagyobb, mint a doboz belsejében lévő nyomás."
+    },
+    {
+      "question": "Hol a legnagyobb a légköri nyomás?",
+      "answers": {
+        "a": "A tengerszinten.",
+        "b": "Egy magas hegy csúcsán.",
+        "c": "Egy repülőgép utazómagasságán."
+      },
+      "correct": "a",
+      "explanation": "A légnyomás a tengerszinten a legnagyobb, mert ott a leghosszabb és legsűrűbb a felettünk lévő levegőoszlop. ✅ Megoldás: A tengerszinten."
+    },
+    {
+      "question": "Miért nehéz széthúzni két egymásra tett, nedves üveglapot?",
+      "answers": {
+        "a": "Mert a külső légnyomás összenyomja őket.",
+        "b": "Mert összeragadnak.",
+        "c": "Mert a víz mágneses."
+      },
+      "correct": "a",
+      "explanation": "Amikor megpróbáljuk széthúzni őket, a lapok közötti térfogat növekedne, ami nyomáscsökkenést okoz. A külső, nagy légköri nyomás ezt megakadályozza és összeszorítja a lapokat.  ✅ Megoldás: Mert a külső légnyomás összenyomja őket."
+    },
+    {
+      "question": "Milyen időjárás várható, ha a légnyomás gyorsan csökken?",
+      "answers": {
+        "a": "Általában rossz, szeles, csapadékos idő.",
+        "b": "Általában napos, szélcsendes idő.",
+        "c": "A légnyomás nem befolyásolja az időjárást."
+      },
+      "correct": "a",
+      "explanation": "A gyorsan csökkenő légnyomás alacsony nyomású légköri képződmény (ciklon) közeledtét jelzi, ami jellemzően felhősödéssel, széllel és csapadékkal jár. ✅ Megoldás: Általában rossz, szeles, csapadékos idő."
+    },
+    {
+      "question": "Miért kell a repülőgépek utasterét hermetikusan lezárni?",
+      "answers": {
+        "a": "Mert nagy magasságban a külső légnyomás nagyon alacsony.",
+        "b": "Mert a külső levegő túl hideg.",
+        "c": "Hogy ne essen be az eső."
+      },
+      "correct": "a",
+      "explanation": "Az utazómagasságon a külső légnyomás olyan alacsony, hogy az emberi szervezet nem tudna működni. Ezért a kabinban mesterségesen a földihez hasonló nyomást tartanak fenn. ✅ Megoldás: Mert nagy magasságban a külső légnyomás nagyon alacsony."
+    },
+    {
+      "question": "Melyik jelenség NEM a légnyomáson alapul?",
+      "answers": {
+        "a": "A gumis tapadókorong falhoz tapadása.",
+        "b": "Egy léggömb lebegése.",
+        "c": "Ivás szívószállal."
+      },
+      "correct": "b",
+      "explanation": "A léggömb lebegése a felhajtóerőn (Arkhimédész törvénye) alapul. A tapadókorong és a szívószál működése a külső és belső nyomás közötti különbségen, azaz a légnyomáson alapul.  ✅ Megoldás: Egy léggömb lebegése."
+    },
+    {
+      "question": "Mi a vákuum?",
+      "answers": {
+        "a": "Nagyon sűrű levegő.",
+        "b": "Nagyon hideg levegő.",
+        "c": "Lényegében részecskéktől mentes, légüres tér."
+      },
+      "correct": "c",
+      "explanation": "A vákuum olyan tér, ahol a gáznyomás elhanyagolhatóan kicsi. Tökéletes vákuumot nem lehet létrehozni, de a világűr nagyon közel áll hozzá.  ✅ Megoldás: Lényegében részecskéktől mentes, légüres tér."
+    },
+    {
+      "question": "A szél...",
+      "answers": {
+        "a": "...nem kapcsolódik a légnyomáshoz.",
+        "b": "...mindig az alacsony nyomású helyről a magas felé fúj.",
+        "c": "...a magas nyomású hely felől az alacsony nyomású hely felé áramló levegő."
+      },
+      "correct": "c",
+      "explanation": "A szelet a légköri nyomáskülönbségek hozzák létre. A levegő mindig a nagyobb nyomású területek felől áramlik a kisebb nyomású területek felé, hogy kiegyenlítse a különbséget.  ✅ Megoldás: ...a magas nyomású hely felől az alacsony nyomású hely felé áramló levegő."
+    },
+    {
+      "question": "Melyik mérőeszközzel mérünk közvetlenül légnyomást?",
+      "answers": {
+        "a": "Hőmérővel.",
+        "b": "Barométerrel.",
+        "c": "Manométerrel."
+      },
+      "correct": "b",
+      "explanation": "A légnyomás mérésére szolgáló eszközt barométernek nevezzük. ✅ Megoldás: Barométerrel."
+    },
+    {
+      "question": "Mi a helyes meghatározása a légköri nyomásnak?",
+      "answers": {
+        "a": "A levegő hőmérséklete.",
+        "b": "A levegő súlya.",
+        "c": "A levegő súlyának a felületre gyakorolt hatása."
+      },
+      "correct": "c",
+      "explanation": "A légköri nyomás a levegő súlyának a felületre gyakorolt hatása. ✅ Megoldás: A levegő súlyának a felületre gyakorolt hatása."
+    },
+    {
+      "question": "Milyen irányban hat a légnyomás?",
+      "answers": {
+        "a": "Csak lefelé.",
+        "b": "Csak felfelé.",
+        "c": "Minden irányban."
+      },
+      "correct": "c",
+      "explanation": "A gázokban, így a levegőben is a nyomás minden irányban egyenletesen hat.  ✅ Megoldás: Minden irányban."
+    },
+    {
+      "question": "Miért könnyebb a hegymászóknak levegőt venni magas hegyen?",
+      "answers": {
+        "a": "Mert a levegő ritkább, kevesebb oxigén van benne.",
+        "b": "Mert kevesebb nyomást kell leküzdeniük a levegőbe jutáshoz.",
+        "c": "Mindkettő."
+      },
+      "correct": "c",
+      "explanation": "Magasabb helyeken ritkább a levegő (kevesebb a légnyomás), így kevesebb oxigén van benne, és a légzés is nehezebb. ✅ Megoldás: Mindkettő."
+    },
+    {
+      "question": "Ha a légnyomás magas, milyen időjárás várható?",
+      "answers": {
+        "a": "Eső.",
+        "b": "Szél.",
+        "c": "Napos idő."
+      },
+      "correct": "c",
+      "explanation": "Magas légnyomásnál általában napos, szélcsendes idő van. ✅ Megoldás: Napos idő."
+    },
+     {
+      "question": "Miért nehezebb a szívószállal való ivás magasabb helyeken?",
+      "answers": {
+        "a": "Mert nehezebb szippantani.",
+        "b": "Mert alacsonyabb a külső légnyomás, így kisebb a nyomáskülönbség.",
+        "c": "Mindkettő."
+      },
+      "correct": "b",
+      "explanation": "A szívószállal ivásnál a szájban kisebb nyomást hozunk létre, a külső légnyomás pedig a folyadékot nyomja fel. Magasabb helyen alacsonyabb a külső légnyomás, így a nyomáskülönbség is kisebb.  ✅ Megoldás: Mert alacsonyabb a külső légnyomás, így kisebb a nyomáskülönbség."
+    },
+    {
+      "question": "Miért hajlik meg a műanyag palack, ha a belsejéből kiszívjuk a levegőt?",
+      "answers": {
+        "a": "Mert a palack anyaga gyenge.",
+        "b": "Mert a belső nyomás lecsökken, miközben a külső nyomás összenyomja.",
+        "c": "Mert a palack melegszik."
+      },
+      "correct": "b",
+      "explanation": "A belső nyomás lecsökken, miközben a külső légnyomás összenyomja.  ✅ Megoldás: Mert a belső nyomás lecsökken, miközben a külső nyomás összenyomja."
+    },
+    {
+      "question": "Mi a felhajtóerő?",
+      "answers": {
+        "a": "A test súlya.",
+        "b": "A testet a Föld felé vonzó erő.",
+        "c": "A folyadék által a testre kifejtett felfelé irányuló erő."
+      },
+      "correct": "c",
+      "explanation": "A felhajtóerő a folyadék által a testre kifejtett felfelé irányuló erő, ami segít lebegni. ✅ Megoldás: A folyadék által a testre kifejtett felfelé irányuló erő."
+    },
+    {
+      "question": "Miért úszik a hajó?",
+      "answers": {
+        "a": "Mert nehéz.",
+        "b": "Mert a súlya kisebb, mint a víz által kiszorított víz súlya.",
+        "c": "Mert a hajó alakja speciális."
+      },
+      "correct": "b",
+      "explanation": "A hajó azért úszik, mert a hajó által kiszorított víz súlya nagyobb, mint a hajó súlya, ezáltal felhajtóerő hat a hajóra. ✅ Megoldás: Mert a súlya kisebb, mint a víz által kiszorított víz súlya."
+    },
+    {
+      "question": "Miért nehezebb a búvárkodás a mélyben?",
+      "answers": {
+        "a": "Mert nehezebb a ruhát felvenni.",
+        "b": "Mert a nyomás nő, és a testünkre ható erők megnőnek.",
+        "c": "Mert a víz hideg."
+      },
+      "correct": "b",
+      "explanation": "A mélyben a víz nyomása növekszik, ami a testünkre ható erőket növeli. ✅ Megoldás: Mert a nyomás nő, és a testünkre ható erők megnőnek."
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "A légnyomás a magassággal nő.",
+        "b": "A légnyomás mindenhol azonos.",
+        "c": "A légnyomás a magassággal csökken."
+      },
+      "correct": "c",
+      "explanation": "A légnyomás a magassággal csökken, mert a felettünk lévő levegőoszlop súlya csökken.  ✅ Megoldás: A légnyomás a magassággal csökken."
+    },
+    {
+      "question": "Miért használnak a repülőgépek nyomásfokozást?",
+      "answers": {
+        "a": "Mert a repülőgép gyorsabb lesz.",
+        "b": "Hogy az utasok a nagy magasságban is normál légnyomást érezzenek.",
+        "c": "Hogy kevesebb üzemanyagot fogyasszanak."
+      },
+      "correct": "b",
+      "explanation": "A nagy magasságban a légnyomás alacsony, ami miatt az utasok nem éreznék jól magukat. A nyomásfokozás biztosítja a megfelelő légnyomást.  ✅ Megoldás: Hogy az utasok a nagy magasságban is normál légnyomást érezzenek."
+    }
+  ]
 }

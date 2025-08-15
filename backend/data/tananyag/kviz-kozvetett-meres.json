@@ -3,6 +3,267 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz kozvetett meres\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz kozvetett meres\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a közvetett mérés lényege?",
+      "answers": {
+        "a": "A mért mennyiség kiszámítása más, közvetlenül mért adatokból.",
+        "b": "A mért mennyiség leolvasása egy speciális műszerről.",
+        "c": "A mérés többszöri megismétlése."
+      },
+      "correct": "a",
+      "explanation": "Közvetett mérésnek nevezzük, amikor a keresett mennyiséget nem tudjuk közvetlenül leolvasni, hanem más, mérhető adatokból (pl. hosszúság) és egy képlet segítségével határozzuk meg. ✅ Megoldás: A mért mennyiség kiszámítása más, közvetlenül mért adatokból."
+    },
+    {
+      "question": "Egy 5 m hosszú és 4 m széles szoba padlójának területe...",
+      "answers": {
+        "a": "közvetett méréssel határozható meg.",
+        "b": "közvetlen méréssel határozható meg.",
+        "c": "nem mérhető."
+      },
+      "correct": "a",
+      "explanation": "Megmérjük a hosszúságot (közvetlen mérés) és a szélességet (közvetlen mérés). A területet a T = a * b képlettel számoljuk ki. Mivel számolásra van szükség, a mérés közvetett. ✅ Megoldás: A terület közvetett méréssel határozható meg."
+    },
+    {
+      "question": "Melyik a terület mértékegysége?",
+      "answers": {
+        "a": "négyzetméter (m²)",
+        "b": "méter (m)",
+        "c": "köbméter (m³)"
+      },
+      "correct": "a",
+      "explanation": "A terület mértékegysége a négyzetméter. ✅ Megoldás: A terület mértékegysége a négyzetméter."
+    },
+    {
+      "question": "Hogyan számoljuk ki egy téglatest térfogatát?",
+      "answers": {
+        "a": "V = a * b * c",
+        "b": "V = a + b + c",
+        "c": "V = 2(ab+ac+bc)"
+      },
+      "correct": "a",
+      "explanation": "A téglatest térfogatát a három különböző élhosszának szorzatával kapjuk meg. ✅ Megoldás: A térfogat képlete V = a * b * c."
+    },
+    {
+      "question": "Melyik mennyiséget mérjük közvetlenül egy stopperrel?",
+      "answers": {
+        "a": "Időtartam",
+        "b": "Sebesség",
+        "c": "Hosszúság"
+      },
+      "correct": "a",
+      "explanation": "A stopperről közvetlenül az eltelt időt olvassuk le. A sebességet útból és időből számoljuk (közvetett mérés). A hosszúságot vonalzóval mérjük. ✅ Megoldás: Az időtartamot mérjük közvetlenül."
+    },
+    {
+      "question": "Egy 10 cm élű kocka térfogata:",
+      "answers": {
+        "a": "1000 cm³",
+        "b": "100 cm²",
+        "c": "600 cm²"
+      },
+      "correct": "a",
+      "explanation": "A kocka térfogata V = a³, ahol 'a' az élhossz. V = 10 cm * 10 cm * 10 cm = 1000 cm³. ✅ Megoldás: A kocka térfogata 1000 cm³."
+    },
+    {
+      "question": "Egy szoba 2 m magas, 3 m széles és 5 m hosszú. Mennyi a térfogata?",
+      "answers": {
+        "a": "30 m³",
+        "b": "10 m³",
+        "c": "62 m²"
+      },
+      "correct": "a",
+      "explanation": "A téglatest térfogata V = 2 m * 3 m * 5 m = 30 m³. ✅ Megoldás: A szoba térfogata 30 m³."
+    },
+    {
+      "question": "Mennyi 2 négyzetméter (m²) négyzetcentiméterben (cm²)?",
+      "answers": {
+        "a": "20 000 cm²",
+        "b": "200 cm²",
+        "c": "2000 cm²"
+      },
+      "correct": "a",
+      "explanation": "Tudjuk, hogy 1 méter = 100 centiméter. 1 m² = (100 cm)² = 100 cm * 100 cm = 10 000 cm². 2 m² = 2 * 10 000 cm² = 20 000 cm².  ✅ Megoldás: 2 m² az 20 000 cm²."
+    },
+    {
+      "question": "Melyik mennyiséget NEM tudjuk közvetlenül mérni egy hagyományos vonalzóval?",
+      "answers": {
+        "a": "Hosszúság",
+        "b": "Terület",
+        "c": "Szélesség"
+      },
+      "correct": "b",
+      "explanation": "A vonalzó a hosszúság mérésére szolgáló eszköz. A szélesség is egy hosszúság. A területet a mért hosszúságokból számoljuk, tehát azt nem mérjük közvetlenül. ✅ Megoldás: A területet nem tudjuk közvetlenül mérni vonalzóval."
+    },
+    {
+      "question": "Egy 6 cm oldalú négyzet területe:",
+      "answers": {
+        "a": "24 cm²",
+        "b": "36 cm²",
+        "c": "12 cm²"
+      },
+      "correct": "b",
+      "explanation": "A négyzet területe T = a * a = a². T = 6 cm * 6 cm = 36 cm². ✅ Megoldás: A négyzet területe 36 cm²."
+    },
+    {
+      "question": "Mi a térfogat jele a fizikában?",
+      "answers": {
+        "a": "T",
+        "b": "V",
+        "c": "A"
+      },
+      "correct": "b",
+      "explanation": "A térfogatot általában 'V' betűvel (az angol volume szóból) jelöljük.  ✅ Megoldás: A térfogat jele V."
+    },
+    {
+      "question": "Egy medence 10 m hosszú, 5 m széles és 2 m mély. Hány liter víz fér bele?",
+      "answers": {
+        "a": "1000 liter",
+        "b": "100 000 liter",
+        "c": "10 000 liter"
+      },
+      "correct": "b",
+      "explanation": "A medence térfogata V = 10 m * 5 m * 2 m = 100 m³. Tudjuk, hogy 1 köbméter (m³) = 1000 liter. 100 m³ = 100 * 1000 liter = 100 000 liter. ✅ Megoldás: 100 000 liter víz fér a medencébe."
+    },
+    {
+      "question": "Melyik mérés közvetett?",
+      "answers": {
+        "a": "Egy cérna hosszának megmérése.",
+        "b": "Egy szoba alapterületének kiszámítása.",
+        "c": "Egy pohár víz térfogatának leolvasása mérőhengerből."
+      },
+      "correct": "b",
+      "explanation": "A cérna hosszát és a víz térfogatát közvetlenül leolvassuk. A szoba alapterületét a mért hosszúságokból számoljuk, ezért az közvetett. ✅ Megoldás: A szoba alapterületének kiszámítása közvetett mérés."
+    },
+    {
+      "question": "Ha egy kocka térfogata 8 cm³, milyen hosszú egy éle?",
+      "answers": {
+        "a": "4 cm",
+        "b": "2 cm",
+        "c": "2.67 cm"
+      },
+      "correct": "b",
+      "explanation": "A kocka térfogata V = a³. Azt a számot keressük, amelynek a harmadik hatványa 8. 2 * 2 * 2 = 8, tehát az élhossz 2 cm. ✅ Megoldás: A kocka éle 2 cm."
+    },
+    {
+      "question": "Mennyi egy 30 cm × 40 cm-es papírlap területe négyzetméterben?",
+      "answers": {
+        "a": "1.2 m²",
+        "b": "0.12 m²",
+        "c": "1200 m²"
+      },
+      "correct": "b",
+      "explanation": "Tudjuk, hogy 1 méter = 100 centiméter. 1 m² = (100 cm)² = 100 cm * 100 cm = 10 000 cm².  T = 30 cm * 40 cm = 1200 cm². 1200 / 10 000 = 0.12 m². ✅ Megoldás: A papírlap területe 0.12 m²."
+    },
+    {
+      "question": "Melyik mennyiség méréséhez van szükségünk képletre?",
+      "answers": {
+        "a": "Időtartam méréséhez",
+        "b": "Tömeg méréséhez",
+        "c": "Téglatest térfogatának meghatározásához"
+      },
+      "correct": "c",
+      "explanation": "Az időtartamot és a tömeget leolvassuk egy mérőeszközről (közvetlen mérés). A téglatest térfogatát a V=a*b*c képlettel számoljuk ki, miután lemértük az oldalait (közvetett mérés). ✅ Megoldás: A téglatest térfogatának meghatározásához van szükség képletre."
+    },
+    {
+      "question": "Egy 3 cm oldalú kocka felszíne:",
+      "answers": {
+        "a": "27 cm²",
+        "b": "9 cm²",
+        "c": "54 cm²"
+      },
+      "correct": "c",
+      "explanation": "A kocka felszíne = 6 * (oldal * oldal).  Felszín = 6 * (3 * 3) = 54 cm². ✅ Megoldás: A kocka felszíne 54 cm²."
+    },
+    {
+      "question": "Ha egy téglalap területét és egyik oldalát ismerjük, hogyan számoljuk ki a másik oldalát?",
+      "answers": {
+        "a": "Összeadjuk őket.",
+        "b": "Elosztjuk a területet az ismert oldallal.",
+        "c": "Megszorozzuk őket."
+      },
+      "correct": "b",
+      "explanation": "A téglalap területe (T) = a * b. Ha 'a'-t keressük, akkor az egyenlet mindkét oldalát elosztjuk 'b'-vel: a = T / b.  ✅ Megoldás: A másik oldalt úgy kapjuk meg, hogy elosztjuk a területet az ismert oldallal."
+    },
+    {
+      "question": "Egy 2 literes üdítőből hány 2 deciliteres poharat lehet teletölteni?",
+      "answers": {
+        "a": "5",
+        "b": "20",
+        "c": "10"
+      },
+      "correct": "c",
+      "explanation": "1 liter = 10 deciliter, tehát 2 liter = 20 deciliter. A teljes mennyiséget elosztjuk egy pohár űrtartalmával: 20 dl / 2 dl = 10. ✅ Megoldás: 10 poharat lehet teletölteni."
+    },
+    {
+      "question": "Melyik állítás igaz?",
+      "answers": {
+        "a": "A területet literben mérjük.",
+        "b": "Az időt méterben mérjük.",
+        "c": "A térfogatot köbcentiméterben mérjük."
+      },
+      "correct": "c",
+      "explanation": "A helyes párosítás az, hogy a térfogatot köbcentiméterben mérjük.  ✅ Megoldás: A helyes párosítás az, hogy a térfogatot köbcentiméterben mérjük."
+    },
+    {
+      "question": "Ha egy kocka élét megháromszorozzuk, hányszorosára nő a térfogata?",
+      "answers": {
+        "a": "9-szeresére",
+        "b": "3-szorosára",
+        "c": "27-szeresére"
+      },
+      "correct": "c",
+      "explanation": "Az eredeti térfogat: V₁ = a³. Az új élhossz 3a. Az új térfogat V₂ = (3a)³ = 3³ * a³ = 27a³. V₂ / V₁ = 27a³ / a³ = 27. ✅ Megoldás: A térfogata 27-szeresére nő."
+    },
+    {
+      "question": "Egy 10 cm x 20 cm x 30 cm méretű dobozba hány 1 cm élű kocka fér el?",
+      "answers": {
+        "a": "60",
+        "b": "600",
+        "c": "6000"
+      },
+      "correct": "c",
+      "explanation": "A doboz térfogata V = 10 cm * 20 cm * 30 cm = 6000 cm³. Egy 1 cm élű kocka térfogata 1 cm³. A 6000 cm³-es dobozba 6000 darab 1 cm³-es kocka fér el.  ✅ Megoldás: 6000 kocka fér el a dobozban."
+    },
+    {
+      "question": "Melyik állítás HAMIS?",
+      "answers": {
+        "a": "Az átmérő a kör szimmetriatengelye.",
+        "b": "A körnek végtelen sok átmérője van.",
+        "c": "A körnek egyetlen középpontja van."
+      },
+      "correct": "b",
+      "explanation": "A körnek végtelen sok sugara és átmérője van (bármelyik irányban húzhatunk egyet), de középpontja csak egyetlen egy van. ✅ Megoldás: A körnek végtelen sok sugara és átmérője van (bármelyik irányban húzhatunk egyet), de középpontja csak egyetlen egy van."
+    },
+    {
+      "question": "Mi a 10 és a 40 mértani közepe?",
+      "answers": {
+        "a": "25",
+        "b": "√50",
+        "c": "20"
+      },
+      "correct": "c",
+      "explanation": "√(10 * 40) = √400 = 20. ✅ Megoldás: A mértani közép 20."
+    },
+    {
+      "question": "Mi a 0, 10 és 20 számtani közepe?",
+      "answers": {
+        "a": "15",
+        "b": "5",
+        "c": "10"
+      },
+      "correct": "c",
+      "explanation": "(0 + 10 + 20) / 3 = 30 / 3 = 10. ✅ Megoldás: A számok számtani közepe 10."
+    },
+    {
+      "question": "Hogyan definiáljuk két pozitív szám, 'a' és 'b' mértani közepét?",
+      "answers": {
+        "a": "a*b / 2",
+        "b": "(a+b)²",
+        "c": "√(a*b)"
+      },
+      "correct": "c",
+      "explanation": "Két pozitív szám mértani közepe a számok szorzatának négyzetgyöke.  ✅ Megoldás: A helyes képlet a √(a*b)."
+    }
+  ]
 }

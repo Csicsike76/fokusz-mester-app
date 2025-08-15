@@ -3,6 +3,237 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz sikkal parhuzamos\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz sikkal parhuzamos\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mit jelent, ha egy egyenes párhuzamos egy síkkal?",
+      "answers": {
+        "a": "Az egyenesnek és a síknak nincs közös pontja.",
+        "b": "Az egyenes merőleges a síkra.",
+        "c": "Az egyenesnek és a síknak egy közös pontja van."
+      },
+      "correct": "a",
+      "explanation": "A párhuzamos egyeneseknek egy síkban nincs közös pontjuk, azaz soha nem metszik egymást. ✅ Megoldás: Az egyenesnek és a síknak nincs közös pontja."
+    },
+    {
+      "question": "Hogyan bizonyíthatjuk be legkönnyebben, hogy egy 'e' egyenes párhuzamos egy 'S' síkkal?",
+      "answers": {
+        "a": "Megmutatjuk, hogy 'e' merőleges az 'S' síkra.",
+        "b": "Megmutatjuk, hogy 'e' párhuzamos egy, az 'S' síkban fekvő 'f' egyenessel.",
+        "c": "Megmérjük a távolságukat."
+      },
+      "correct": "b",
+      "explanation": "Ha egy egyenes párhuzamos egy síkkal, akkor az egyenes minden pontja ugyanakkora távolságra van a síktól, így soha nem metszik egymást.   ✅ Megoldás: Megmutatjuk, hogy 'e' párhuzamos egy, az 'S' síkban fekvő 'f' egyenessel."
+    },
+    {
+      "question": "Egy kocka felső lapjának egyik éle milyen helyzetű az alsó lap síkjával?",
+      "answers": {
+        "a": "metsző",
+        "b": "illeszkedő",
+        "c": "párhuzamos"
+      },
+      "correct": "c",
+      "explanation": "A kocka elülső és hátsó lapja egymással szemben helyezkedik el. Soha nem metszik egymást, és a távolságuk állandó. Ez a párhuzamosság definíciója. ✅ Megoldás: Párhuzamos helyzetű."
+    },
+    {
+      "question": "Egy asztalon fekvő vonalzó milyen helyzetben van az asztal lapjával?",
+      "answers": {
+        "a": "illeszkedő (rajta fekszik)",
+        "b": "párhuzamos",
+        "c": "metsző"
+      },
+      "correct": "a",
+      "explanation": "Az illeszkedés azt jelenti, hogy az egyenes minden pontja a síknak is pontja.  ✅ Megoldás: Illeszkedő helyzetű."
+    },
+    {
+      "question": "Egy szoba mennyezetének egyik éle milyen helyzetű a padló síkjával?",
+      "answers": {
+        "a": "metsző",
+        "b": "párhuzamos",
+        "c": "illeszkedő"
+      },
+      "correct": "b",
+      "explanation": "A mennyezet síkja párhuzamos a padló síkjával.  ✅ Megoldás: Párhuzamos."
+    },
+    {
+      "question": "Hány közös pontja van egy síknak és egy azt metsző egyenesnek?",
+      "answers": {
+        "a": "végtelen sok",
+        "b": "0",
+        "c": "1"
+      },
+      "correct": "c",
+      "explanation": "A metsző egyenes egy pontban metszi a síkot. ✅ Megoldás: 1 közös pontjuk van."
+    },
+    {
+      "question": "Ha egy egyenes a síkon fekszik (illeszkedik rá), akkor párhuzamos-e vele?",
+      "answers": {
+        "a": "Nem, mert van közös pontjuk.",
+        "b": "Igen, ez a párhuzamosság speciális esete.",
+        "c": "Nem, mert a távolságuk változik."
+      },
+      "correct": "b",
+      "explanation": "Párhuzamosnak tekinthetjük azt az egyenest, ami a síkon fekszik, mert definíció szerint nincs közös pontjuk.  ✅ Megoldás: Igen, ez a párhuzamosság speciális esete."
+    },
+    {
+      "question": "Ha egy síkban egy pont van, hány, a síkkal párhuzamos egyenes húzható a ponton keresztül?",
+      "answers": {
+        "a": "egyet sem",
+        "b": "végtelen sokat",
+        "c": "pontosan egyet"
+      },
+      "correct": "b",
+      "explanation": "Egy síkon, egy ponton keresztül végtelen sok egyenes húzható, és ezek mindegyike párhuzamos lehet a síkkal. ✅ Megoldás: Végtelen sokat."
+    },
+    {
+      "question": "Egy kocka elülső lapjának egyik éle milyen helyzetű a HÁTSÓ lap síkjával?",
+      "answers": {
+        "a": "illeszkedő",
+        "b": "metsző",
+        "c": "párhuzamos"
+      },
+      "correct": "c",
+      "explanation": "A kocka elülső és hátsó lapja egymással szemben helyezkedik el. Soha nem metszik egymást, és a távolságuk állandó. Ez a párhuzamosság definíciója. ✅ Megoldás: Párhuzamos."
+    },
+    {
+      "question": "Egy függőlegesen álló oszlop milyen helyzetű a vízszintes talaj síkjával?",
+      "answers": {
+        "a": "metsző",
+        "b": "párhuzamos",
+        "c": "illeszkedő"
+      },
+      "correct": "a",
+      "explanation": "Az oszlop 'beleáll' a talajba, tehát van egy közös pontjuk. Ez a metszés esete. (Pontosabban merőlegesen metszi). ✅ Megoldás: Metsző."
+    },
+    {
+      "question": "Hogyan jelöljük, hogy az 'e' egyenes párhuzamos az 'S' síkkal?",
+      "answers": {
+        "a": "e ⊥ S",
+        "b": "e ∈ S",
+        "c": "e || S"
+      },
+      "correct": "b",
+      "explanation": "A párhuzamosság jele a ||. Ezt használjuk egyenesek és síkok esetében is.  ✅ Megoldás: e || S"
+    },
+    {
+      "question": "Melyik állítás igaz? Ha egy 'e' egyenes párhuzamos egy 'S' síkkal, akkor 'e'...",
+      "answers": {
+        "a": "párhuzamos a sík összes egyenesével.",
+        "b": "merőleges a sík összes egyenesére.",
+        "c": "párhuzamos a sík végtelen sok egyenesével."
+      },
+      "correct": "c",
+      "explanation": "Ha a egyenes párhuzamos a síkkal, akkor a síkban fekvő egyenesekhez képest lehet, hogy kitérő, lehet, hogy párhuzamos, és a síkban fekvő végtelen sok egyenessel párhuzamos. ✅ Megoldás: Párhuzamos a sík végtelen sok egyenesével."
+    },
+    {
+      "question": "Két különböző, egymással párhuzamos síkban van egy-egy egyenes. Ezek az egyenesek...",
+      "answers": {
+        "a": "lehetnek párhuzamosak vagy kitérőek.",
+        "b": "mindig párhuzamosak.",
+        "c": "mindig metszők."
+      },
+      "correct": "a",
+      "explanation": "Két párhuzamos síkban lévő egyenes vagy párhuzamos vagy kitérő. ✅ Megoldás: Lehetnek párhuzamosak vagy kitérőek."
+    },
+    {
+      "question": "Ha egy egyenes merőleges egy síkra, akkor...",
+      "answers": {
+        "a": "... a sík összes egyenesére merőleges.",
+        "b": "...csak a síkban fekvő egyenesekre merőleges.",
+        "c": "...nem metszi a síkot."
+      },
+      "correct": "b",
+      "explanation": "A síkra merőleges egyenes a síkban fekvő összes egyenesre merőleges. ✅ Megoldás: A síkban fekvő egyenesekre merőleges."
+    },
+    {
+      "question": "Mi a neve a metsző síkok közös pontjainak halmazának?",
+      "answers": {
+        "a": "metszéspont",
+        "b": "metszésvonal",
+        "c": "metszősík"
+      },
+      "correct": "b",
+      "explanation": "A metsző síkok közös pontjai egy egyenest alkotnak, ezt metszésvonalnak nevezzük. ✅ Megoldás: A neve metszésvonal."
+    },
+    {
+      "question": "Egy kocka felső lapja és a jobb oldali lapja milyen helyzetű?",
+      "answers": {
+        "a": "metszők",
+        "b": "illeszkedő",
+        "c": "párhuzamos"
+      },
+      "correct": "a",
+      "explanation": "A kocka felső és jobb oldali lapja egy közös élben találkozik, tehát metszők. ✅ Megoldás: Metszők"
+    },
+    {
+      "question": "Mi a célja a síkok metszésének?",
+      "answers": {
+        "a": "Az egyenesek elrendezése.",
+        "b": "Távolságmérés.",
+        "c": "Újabb síkok létrehozása."
+      },
+      "correct": "a",
+      "explanation": "A metsző síkokban lévő egyenesek a síkokon belül helyezkednek el, a síkokat lapokra osztva. ✅ Megoldás: Az egyenesek elrendezése."
+    },
+    {
+      "question": "Melyik testnek nincs közös pontja egy síkkal?",
+      "answers": {
+        "a": "Kocka",
+        "b": "Gömb",
+        "c": "Párhuzamos síkok"
+      },
+      "correct": "c",
+      "explanation": "A párhuzamos síkoknak nincs közös pontja. ✅ Megoldás: Párhuzamos síkok."
+    },
+    {
+      "question": "Mi a távolság két párhuzamos sík között?",
+      "answers": {
+        "a": "A síkokat metsző egyenesek távolsága.",
+        "b": "A síkokat merőlegesen összekötő szakasz hossza.",
+        "c": "A két sík egy pontjának távolsága."
+      },
+      "correct": "b",
+      "explanation": "A távolság két párhuzamos sík között a síkokat merőlegesen összekötő szakasz hossza.  ✅ Megoldás: A síkokat merőlegesen összekötő szakasz hossza."
+    },
+    {
+      "question": "Melyik állítás igaz a szobád falaira?",
+      "answers": {
+        "a": "Párhuzamosak.",
+        "b": "Metszőek.",
+        "c": "Mindig egy síkban vannak."
+      },
+      "correct": "b",
+      "explanation": "A falak metszők. ✅ Megoldás: Metszők"
+    },
+    {
+      "question": "Melyik a három merőleges egyenes síkmetszete?",
+      "answers": {
+        "a": "Egy pont",
+        "b": "Végtelen sok pont",
+        "c": "Egy szakasz"
+      },
+      "correct": "a",
+      "explanation": "Ha három egyenest egy sík metsz, és minden egyenes merőleges a másik kettőre, akkor csak egy pontban metszhetik egymást. ✅ Megoldás: Egy pont."
+    },
+    {
+      "question": "Ha két egyenes egy síkban, és nem párhuzamos, akkor...",
+      "answers": {
+        "a": "vannak közös pontjaik.",
+        "b": "nincs közös pontjuk.",
+        "c": "egy közös pontjuk van."
+      },
+      "correct": "a",
+      "explanation": "Ha két egyenes nem párhuzamos, akkor metszik egymást, azaz van közös pontjuk. ✅ Megoldás: Vannak közös pontjaik"
+    },
+     {
+      "question": "Mi a metsző egyenesek közös pontjának a neve?",
+      "answers": {
+        "a": "Középpont",
+        "b": "Metszéspont",
+        "c": "Tengely"
+      },
+      "correct": "b",
+      "explanation": "A metsző egyenesek közös pontját metszéspontnak nevezzük. ✅ Megoldás: Metszéspont"
+    }
+  ]
 }

@@ -3,6 +3,237 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz onerteles elektromossag\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz onerteles elektromossag\" című tananyag.",
+  "questions": [
+    {
+      "question": "Hogyan hat egymásra két azonos nemű elektromos töltés?",
+      "answers": {
+        "a": "Taszítják egymást.",
+        "b": "Vonzzák egymást.",
+        "c": "Nem hatnak egymásra."
+      },
+      "correct": "a",
+      "explanation": "Az elektrosztatika alaptörvénye szerint az azonos nemű töltések (pl. két pozitív) taszítják egymást. ✅ Megoldás: Taszítják egymást."
+    },
+    {
+      "question": "Mi Ohm törvényének képlete?",
+      "answers": {
+        "a": "I = U / R",
+        "b": "P = U ⋅ I",
+        "c": "W = F ⋅ s"
+      },
+      "correct": "a",
+      "explanation": "Ohm törvénye szerint az áramerősség (I), a feszültség (U) és az ellenállás (R) közötti kapcsolatot írja le. A P=U⋅I a teljesítmény, a W=F⋅s a mechanikai munka képlete. ✅ Megoldás: I = U / R."
+    },
+    {
+      "question": "Milyen hatást használ ki az elektromágnes?",
+      "answers": {
+        "a": "Az elektromos áram mágneses hatását.",
+        "b": "Az elektromos áram hőhatását.",
+        "c": "Az elektromos áram kémiai hatását."
+      },
+      "correct": "a",
+      "explanation": "Az elektromágnes egy áramjárta tekercs, amely az elektromos áram hatására jön létre, tehát az áram mágneses hatásán alapul. ✅ Megoldás: Az elektromos áram mágneses hatását."
+    },
+    {
+      "question": "Mi a galvánelem?",
+      "answers": {
+        "a": "Olyan áramforrás, amely kémiai energiát alakít elektromos energiává.",
+        "b": "Olyan eszköz, amely elektromos energiát alakít hővé.",
+        "c": "Olyan eszköz, amely elektromos energiát alakít mágneses mezővé."
+      },
+      "correct": "a",
+      "explanation": "A galvánelemek, mint a ceruzaelemek vagy az akkumulátorok, egy belső kémiai reakció révén hoznak létre elektromos feszültséget. ✅ Megoldás: Olyan áramforrás, amely kémiai energiát alakít elektromos energiává."
+    },
+    {
+      "question": "Egy 12V-os feszültségforrásra kapcsolt 6 ohmos ellenálláson mekkora áram folyik?",
+      "answers": {
+        "a": "2 A",
+        "b": "72 A",
+        "c": "0,5 A"
+      },
+      "correct": "a",
+      "explanation": "Ohm törvénye szerint I = U / R. Behelyettesítve: I = 12 V / 6 Ω = 2 A. ✅ Megoldás: 2 A."
+    },
+    {
+      "question": "Mi történik egy soros áramkörben, ha az egyik fogyasztó meghibásodik?",
+      "answers": {
+        "a": "Az egész áramkör megszakad.",
+        "b": "A többi fogyasztó tovább működik.",
+        "c": "A többi fogyasztó fényesebben világít."
+      },
+      "correct": "a",
+      "explanation": "Soros kapcsolásban az áramnak csak egy útja van. Ha ez az út megszakad, az áramlás mindenhol leáll. ✅ Megoldás: Az egész áramkör megszakad."
+    },
+    {
+      "question": "Mi a töltésmegmaradás törvénye?",
+      "answers": {
+        "a": "Zárt rendszerben a töltések előjeles összege állandó.",
+        "b": "A töltések soha nem mozoghatnak.",
+        "c": "Minden test pozitív töltésű."
+      },
+      "correct": "a",
+      "explanation": "A töltésmegmaradás azt jelenti, hogy töltést nem hozhatunk létre a semmiből és nem tüntethetünk el, csak szétválaszthatjuk (pl. dörzsöléssel) vagy átrendezhetjük. ✅ Megoldás: Zárt rendszerben a töltések előjeles összege állandó."
+    },
+    {
+      "question": "Melyik állítás igaz a párhuzamos kapcsolásra?",
+      "answers": {
+        "a": "Minden fogyasztóra ugyanakkora feszültség jut.",
+        "b": "Minden fogyasztón ugyanakkora áram folyik át.",
+        "c": "Az eredő ellenállás az ellenállások összege."
+      },
+      "correct": "a",
+      "explanation": "Párhuzamos kapcsolásnál minden ág közvetlenül az áramforrásra csatlakozik, így mindegyikre az áramforrás teljes feszültsége jut. Az áramerősség és az eredő ellenállás a többi állításban helytelenül van megadva. ✅ Megoldás: Minden fogyasztóra ugyanakkora feszültség jut."
+    },
+    {
+      "question": "Mi az elektromos ellenállás mértékegysége?",
+      "answers": {
+        "a": "Volt (V)",
+        "b": "Ohm (Ω)",
+        "c": "Amper (A)"
+      },
+      "correct": "b",
+      "explanation": "Az elektromos ellenállás mértékegysége az ohm (Ω). ✅ Megoldás: Ohm (Ω)."
+    },
+    {
+      "question": "Hogyan változik az áram erőssége, ha a feszültség nő, miközben az ellenállás állandó?",
+      "answers": {
+        "a": "Csökken.",
+        "b": "Nő.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "Az Ohm-törvény szerint az áram egyenesen arányos a feszültséggel, ha az ellenállás állandó. Ha a feszültség nő, az áram is nő. ✅ Megoldás: Nő."
+    },
+    {
+      "question": "Hogyan változik az áram erőssége, ha az ellenállás nő, miközben a feszültség állandó?",
+      "answers": {
+        "a": "Csökken.",
+        "b": "Nő.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "Az Ohm-törvény szerint az áram fordítottan arányos az ellenállással, ha a feszültség állandó. Ha az ellenállás nő, az áram csökken. ✅ Megoldás: Csökken."
+    },
+    {
+      "question": "Mi a rövidzár?",
+      "answers": {
+        "a": "Amikor az áramkör megszakad.",
+        "b": "Amikor az áramkörben az ellenállás nagyon alacsony, és nagy áram folyik.",
+        "c": "Amikor a feszültség 0."
+      },
+      "correct": "b",
+      "explanation": "Rövidzárkor az áramkörben az ellenállás nagyon alacsony, ezért nagy áram folyik, ami veszélyes lehet. ✅ Megoldás: Amikor az áramkörben az ellenállás nagyon alacsony, és nagy áram folyik."
+    },
+    {
+      "question": "Mitől függ egy vezető ellenállása?",
+      "answers": {
+        "a": "A feszültségtől és az áramtól.",
+        "b": "Az anyagától, a hosszától és a keresztmetszetétől.",
+        "c": "A színtől és a súlyától."
+      },
+      "correct": "b",
+      "explanation": "Egy vezeték ellenállása függ az anyagától, a hosszától és a keresztmetszetétől. ✅ Megoldás: Az anyagától, a hosszától és a keresztmetszetétől."
+    },
+    {
+      "question": "Miért fontos a biztosíték egy áramkörben?",
+      "answers": {
+        "a": "Hogy szép legyen.",
+        "b": "Hogy megakadályozza a rövidzárat.",
+        "c": "Hogy az áram erősségét szabályozza."
+      },
+      "correct": "b",
+      "explanation": "A biztosíték megvédi az áramkört a túláramtól, ami a rövidzár miatt keletkezhet. ✅ Megoldás: Hogy megakadályozza a rövidzárat."
+    },
+    {
+      "question": "Mi a soros kapcsolás?",
+      "answers": {
+        "a": "Amikor az alkatrészek egymás mellett vannak.",
+        "b": "Amikor az alkatrészek egymás után vannak, az áramnak csak egy útja van.",
+        "c": "Amikor az alkatrészek függetlenül vannak."
+      },
+      "correct": "b",
+      "explanation": "Soros kapcsolásnál az alkatrészek egymás után vannak, így az áram csak egy úton haladhat. ✅ Megoldás: Amikor az alkatrészek egymás után vannak, az áramnak csak egy útja van."
+    },
+    {
+      "question": "Ha sorosan kapcsolunk ellenállásokat, hogyan számoljuk ki az eredő ellenállást (ismétlés)?",
+      "answers": {
+        "a": "Összeadjuk az ellenállásokat.",
+        "b": "Kiszorozzuk az ellenállásokat.",
+        "c": "Elosztjuk az ellenállásokat."
+      },
+      "correct": "a",
+      "explanation": "Soros kapcsolásnál az eredő ellenállás az egyes ellenállások összege.  ✅ Megoldás: Összeadjuk az ellenállásokat."
+    },
+    {
+      "question": "Ha párhuzamosan kapcsolunk ellenállásokat, hogyan számoljuk ki az eredő ellenállást (ismétlés)?",
+      "answers": {
+        "a": "Összeadjuk az ellenállásokat.",
+        "b": "Kiszorozzuk az ellenállásokat.",
+        "c": "A reciprokjaik összegének a reciprokát vesszük."
+      },
+      "correct": "c",
+      "explanation": "Párhuzamos kapcsolásnál az eredő ellenállás a reciprok értékek összegének a reciprokja.  ✅ Megoldás: A reciprokjaik összegének a reciprokát vesszük."
+    },
+    {
+      "question": "Milyen egysége van a villamos teljesítménynek?",
+      "answers": {
+        "a": "Volt (V)",
+        "b": "Watt (W)",
+        "c": "Ohm (Ω)"
+      },
+      "correct": "b",
+      "explanation": "A villamos teljesítmény mértékegysége a watt (W). ✅ Megoldás: Watt (W)"
+    },
+    {
+      "question": "Hogyan számoljuk ki a villamos teljesítményt?",
+      "answers": {
+        "a": "Feszültség * áram",
+        "b": "Áram / ellenállás",
+        "c": "Feszültség / ellenállás"
+      },
+      "correct": "a",
+      "explanation": "A villamos teljesítményt úgy kapjuk, hogy a feszültséget megszorozzuk az árammal: P = U * I. ✅ Megoldás: Feszültség * áram"
+    },
+    {
+      "question": "Ha egy 12 V-os izzón 2 A folyik át, mekkora a teljesítménye?",
+      "answers": {
+        "a": "6 W",
+        "b": "24 W",
+        "c": "0,33 W"
+      },
+      "correct": "c",
+      "explanation": "P = U * I = 12 V * 2 A = 24 W. Javítva a választ. ✅ Megoldás: 24 W"
+    },
+    {
+      "question": "Miért fontosak a Kirchhoff-törvények?",
+      "answers": {
+        "a": "Hogy megértsük az áramkörök működését.",
+        "b": "A feszültséget mérni.",
+        "c": "Az alkatrészeket megjelölni."
+      },
+      "correct": "a",
+      "explanation": "A Kirchhoff-törvények segítségével megérthetjük, hogyan működnek az áramkörök, és hogyan oszlanak el bennük a feszültségek és áramok. ✅ Megoldás: Hogy megértsük az áramkörök működését."
+    },
+    {
+      "question": "Mi a célja az Ohm-törvény alkalmazásának?",
+      "answers": {
+        "a": "Hogy az áramkörben a feszültséget és az áramot kiszámoljuk.",
+        "b": "Az áramkörök kapcsolását megérteni.",
+        "c": "Az alkatrészeket megjelölni."
+      },
+      "correct": "a",
+      "explanation": "Az Ohm-törvény segítségével kiszámolhatjuk az áramkörben a feszültséget, az áramot és az ellenállást. ✅ Megoldás: Hogy az áramkörben a feszültséget és az áramot kiszámoljuk."
+    },
+    {
+      "question": "Ha egy 24 V-os izzó ellenállása 12 Ohm, akkor mekkora áram folyik át rajta?",
+      "answers": {
+        "a": "2 A",
+        "b": "12 A",
+        "c": "0,5 A"
+      },
+      "correct": "a",
+      "explanation": "I = U / R = 24 V / 12 Ω = 2 A. ✅ Megoldás: 2 A"
+    }
+  ]
 }

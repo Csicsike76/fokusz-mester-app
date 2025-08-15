@@ -4,5 +4,246 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz mechanikai hullamok\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a hullám?",
+      "answers": {
+        "a": "A hullám egy mozgó test.",
+        "b": "Zavar terjedése egy közegben.",
+        "c": "Egy pont a térben."
+      },
+      "correct": "b",
+      "explanation": "A hullám a zavar (energia, információ) terjedése egy közegben.  ✅ Megoldás: Zavar terjedése egy közegben."
+    },
+    {
+      "question": "Milyen hullámhoz kell közeg?",
+      "answers": {
+        "a": "Elektromágneses hullámhoz.",
+        "b": "Mechanikai hullámhoz.",
+        "c": "Mindkettőhöz."
+      },
+      "correct": "b",
+      "explanation": "A mechanikai hullámok (pl. hang, vízihullám) terjedéséhez közegre van szükségük (levegő, víz, stb.), míg az elektromágneses hullámok (fény) a vákuumban is terjedhetnek. ✅ Megoldás: Mechanikai hullámhoz."
+    },
+    {
+      "question": "Mi a hullámhossz?",
+      "answers": {
+        "a": "A hullám magassága.",
+        "b": "Két hullámcsúcs közötti távolság.",
+        "c": "A hullám sebessége."
+      },
+      "correct": "b",
+      "explanation": "A hullámhossz a két hullámcsúcs (vagy két völgy) közötti távolság.  ✅ Megoldás: Két hullámcsúcs közötti távolság."
+    },
+    {
+      "question": "Mi a frekvencia?",
+      "answers": {
+        "a": "A hullám sebessége.",
+        "b": "Egy másodperc alatt lezajló rezgések száma.",
+        "c": "A hullám magassága."
+      },
+      "correct": "b",
+      "explanation": "A frekvencia megmutatja, hogy egy másodperc alatt hány rezgés történik. ✅ Megoldás: Egy másodperc alatt lezajló rezgések száma."
+    },
+    {
+      "question": "Milyen mértékegységben mérjük a frekvenciát?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "hertz (Hz)",
+        "c": "másodperc (s)"
+      },
+      "correct": "b",
+      "explanation": "A frekvencia mértékegysége a hertz (Hz). ✅ Megoldás: hertz (Hz)"
+    },
+    {
+      "question": "Mi a kapcsolat a hullámhossz (λ), a frekvencia (f) és a sebesség (v) között?",
+      "answers": {
+        "a": "v = λ * f",
+        "b": "v = λ / f",
+        "c": "v = f / λ"
+      },
+      "correct": "a",
+      "explanation": "A hullám sebessége (v) a hullámhossz (λ) és a frekvencia (f) szorzata: v = λ * f. ✅ Megoldás: v = λ * f"
+    },
+    {
+      "question": "Mitől függ a hang sebessége?",
+      "answers": {
+        "a": "A hang erősségétől.",
+        "b": "A közeg minőségétől (pl. levegő, víz).",
+        "c": "A hang magasságától."
+      },
+      "correct": "b",
+      "explanation": "A hang sebessége a közegtől függ. A hang gyorsabban terjed szilárd anyagokban, mint a levegőben.  ✅ Megoldás: A közeg minőségétől (pl. levegő, víz)."
+    },
+    {
+      "question": "Mi a hangmagasság?",
+      "answers": {
+        "a": "A hang erőssége.",
+        "b": "A hang gyorsasága.",
+        "c": "A hang mély vagy magas volta."
+      },
+      "correct": "c",
+      "explanation": "A hang magassága azt mutatja, hogy a hang mennyire mély (basszus) vagy magas (szoprán). ✅ Megoldás: A hang mély vagy magas volta."
+    },
+    {
+      "question": "Mitől függ a hang magassága?",
+      "answers": {
+        "a": "A hang erősségétől.",
+        "b": "A hang frekvenciájától.",
+        "c": "A hang sebességétől."
+      },
+      "correct": "b",
+      "explanation": "A hang magasságát a frekvencia határozza meg. Magasabb frekvencia magasabb hangot jelent. ✅ Megoldás: A hang frekvenciájától."
+    },
+    {
+      "question": "Mi a hang erőssége?",
+      "answers": {
+        "a": "A hang magassága.",
+        "b": "A hang hangereje.",
+        "c": "A hang frekvenciája."
+      },
+      "correct": "b",
+      "explanation": "A hang erőssége a hangerejét mutatja. ✅ Megoldás: A hang hangereje."
+    },
+    {
+      "question": "Miért halljuk a hangokat?",
+      "answers": {
+        "a": "Mert a hang rezgéseket okoz a dobhártyánkban.",
+        "b": "Mert a szemünk látja a hangot.",
+        "c": "Mert a hang a levegőben villámlik."
+      },
+      "correct": "a",
+      "explanation": "A hanghullámok a fülünkbe jutnak, és a dobhártyánkat rezgetik, így halljuk a hangot. ✅ Megoldás: Mert a hang rezgéseket okoz a dobhártyánkban."
+    },
+    {
+      "question": "Mi a hullám terjedési módja?",
+      "answers": {
+        "a": "Fény formájában.",
+        "b": "Rezgések továbbadása a részecskék között.",
+        "c": "A test mozgása."
+      },
+      "correct": "b",
+      "explanation": "A hullám a rezgések továbbadása a közeg részecskéi között.  ✅ Megoldás: Rezgések továbbadása a részecskék között."
+    },
+    {
+      "question": "Melyik nem mechanikai hullám?",
+      "answers": {
+        "a": "Vízihullám.",
+        "b": "Hanghullám.",
+        "c": "Rádióhullám."
+      },
+      "correct": "c",
+      "explanation": "A rádióhullám elektromágneses hullám, a vízihullám és a hanghullám mechanikai hullám. ✅ Megoldás: Rádióhullám."
+    },
+    {
+      "question": "Mi a hang terjedési közege?",
+      "answers": {
+        "a": "Csak a levegő.",
+        "b": "Levegő, víz, szilárd anyagok.",
+        "c": "Csak a víz."
+      },
+      "correct": "b",
+      "explanation": "A hang terjedhet a levegőben, vízben, szilárd anyagokban. ✅ Megoldás: Levegő, víz, szilárd anyagok."
+    },
+    {
+      "question": "Mi a sötétség?",
+      "answers": {
+        "a": "A fény hiánya.",
+        "b": "A meleg.",
+        "c": "A zaj."
+      },
+      "correct": "a",
+      "explanation": "A sötétség a fény hiánya. ✅ Megoldás: A fény hiánya."
+    },
+    {
+      "question": "Mi történik a hanggal, ha egy akadályba ütközik?",
+      "answers": {
+        "a": "Megváltozik a színe.",
+        "b": "Visszaverődik.",
+        "c": "Eltűnik."
+      },
+      "correct": "b",
+      "explanation": "A hang visszaverődhet, mint a visszhang. ✅ Megoldás: Visszaverődik."
+    },
+    {
+      "question": "Mi a doppler-effektus?",
+      "answers": {
+        "a": "A hang hangerejének változása.",
+        "b": "A hang magasságának változása, ha a hangforrás mozog.",
+        "c": "A hang színének a változása."
+      },
+      "correct": "b",
+      "explanation": "A Doppler-effektus a hang frekvenciájának (magasságának) változása, amikor a hangforrás vagy a hallgató mozog.  ✅ Megoldás: A hang magasságának változása, ha a hangforrás mozog."
+    },
+    {
+      "question": "Melyik a hanghullámok sebessége (v) a levegőben, normál körülmények között?",
+      "answers": {
+        "a": "kb. 340 m/s",
+        "b": "kb. 1500 m/s",
+        "c": "300 000 km/s"
+      },
+      "correct": "a",
+      "explanation": "A hangsebessége a levegőben kb. 340 m/s. ✅ Megoldás: kb. 340 m/s"
+    },
+    {
+      "question": "Mi a frekvencia mértékegysége (ismétlés)?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "hertz (Hz)",
+        "c": "méter per szekundum (m/s)"
+      },
+      "correct": "b",
+      "explanation": "A frekvencia mértékegysége a hertz (Hz). ✅ Megoldás: hertz (Hz)"
+    },
+    {
+      "question": "Ha a hullámhossz (λ) 2 méter, a sebesség (v) 340 m/s, mennyi a frekvencia (f)?",
+      "answers": {
+        "a": "170 Hz",
+        "b": "680 Hz",
+        "c": "342 Hz"
+      },
+      "correct": "a",
+      "explanation": "v = λ * f, ebből f = v / λ = 340 m/s / 2 m = 170 Hz. ✅ Megoldás: 170 Hz"
+    },
+    {
+      "question": "Mi a jelenség, amikor a hanghullámok elérik a fülünket, és érzékeljük a hangot?",
+      "answers": {
+        "a": "Rezonancia",
+        "b": "Interferencia",
+        "c": "Hallás"
+      },
+      "correct": "c",
+      "explanation": "A hallás során a hanghullámok a fülünkbe jutnak, és érzékeljük a hangot. ✅ Megoldás: Hallás"
+    },
+    {
+      "question": "Miért zeng egy templomi harang?",
+      "answers": {
+        "a": "Mert a harang anyaga súrlódik a levegővel.",
+        "b": "Mert a harang rezgése a levegőben hanghullámokat kelt, amik visszaverődnek a falakról. ",
+        "c": "Mert a harang túl nehéz."
+      },
+      "correct": "b",
+      "explanation": "A harang rezgése a levegőben hanghullámokat kelt, amik visszaverődnek a falakról.  ✅ Megoldás: Mert a harang rezgése a levegőben hanghullámokat kelt, amik visszaverődnek a falakról."
+    },
+     {
+      "question": "Mi a rezonancia (ismétlés)?",
+      "answers": {
+        "a": "A hang visszaverődése.",
+        "b": "Amikor egy test a másik rezgése hatására intenzíven rezegni kezd.",
+        "c": "A hang erősségének változása."
+      },
+      "correct": "b",
+      "explanation": "A rezonancia az a jelenség, amikor egy test a másik rezgése hatására intenzíven rezegni kezd. ✅ Megoldás: Amikor egy test a másik rezgése hatására intenzíven rezegni kezd."
+    },
+    {
+      "question": "Mi a hullámok hullámhossza (ismétlés)?",
+      "answers": {
+        "a": "A hullám magassága.",
+        "b": "Két hullámcsúcs közötti távolság.",
+        "c": "A hullám sebessége."
+      },
+      "correct": "b",
+      "explanation": "A hullámhossz a két hullámcsúcs (vagy két völgy) közötti távolság. ✅ Megoldás: Két hullámcsúcs közötti távolság."
+    }
+  ]
 }

@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz kocka teglatest\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a téglatest?",
+      "answers": {
+        "a": "Egy olyan test, aminek minden oldala háromszög.",
+        "b": "Egy olyan test, aminek hat téglalap alakú oldala van.",
+        "c": "Egy olyan test, aminek az alapja kör."
+      },
+      "correct": "b",
+      "explanation": "A téglatest egy olyan térbeli alakzat, aminek a hat oldala téglalap. ✅ Megoldás: Egy olyan test, aminek hat téglalap alakú oldala van."
+    },
+    {
+      "question": "Mi a kocka?",
+      "answers": {
+        "a": "Egy olyan test, aminek minden oldala háromszög.",
+        "b": "Egy olyan test, aminek hat négyzet alakú oldala van.",
+        "c": "Egy olyan test, aminek az alapja kör."
+      },
+      "correct": "b",
+      "explanation": "A kocka a téglatest egy speciális esete, ahol minden oldal egyforma négyzet. ✅ Megoldás: Egy olyan test, aminek hat négyzet alakú oldala van."
+    },
+    {
+      "question": "Milyen alakú a téglatest oldalai?",
+      "answers": {
+        "a": "Háromszög.",
+        "b": "Négyzet.",
+        "c": "Téglalap."
+      },
+      "correct": "c",
+      "explanation": "A téglatest oldalai téglalapok. ✅ Megoldás: Téglalap."
+    },
+    {
+      "question": "Milyen alakú a kocka oldalai?",
+      "answers": {
+        "a": "Háromszög.",
+        "b": "Négyzet.",
+        "c": "Téglalap."
+      },
+      "correct": "b",
+      "explanation": "A kocka oldalai négyzetek. ✅ Megoldás: Négyzet."
+    },
+    {
+      "question": "Hány éle van a téglatestnek?",
+      "answers": {
+        "a": "4",
+        "b": "8",
+        "c": "12"
+      },
+      "correct": "c",
+      "explanation": "A téglatestnek 12 éle van.  ✅ Megoldás: 12"
+    },
+    {
+      "question": "Hány csúcsa van a téglatestnek?",
+      "answers": {
+        "a": "4",
+        "b": "6",
+        "c": "8"
+      },
+      "correct": "c",
+      "explanation": "A téglatestnek 8 csúcsa van.  ✅ Megoldás: 8"
+    },
+    {
+      "question": "Hogyan számoljuk ki a téglatest térfogatát?",
+      "answers": {
+        "a": "Térfogat = hosszúság * szélesség * magasság.",
+        "b": "Térfogat = 2 * (hosszúság + szélesség + magasság).",
+        "c": "Térfogat = alap * magasság / 2."
+      },
+      "correct": "a",
+      "explanation": "A téglatest térfogatát a hosszúság, a szélesség és a magasság szorzataként kapjuk. ✅ Megoldás: Térfogat = hosszúság * szélesség * magasság."
+    },
+    {
+      "question": "Ha a téglatest hossza 4 cm, szélessége 3 cm, magassága 2 cm, mekkora a térfogata?",
+      "answers": {
+        "a": "9 cm³",
+        "b": "24 cm³",
+        "c": "29 cm³"
+      },
+      "correct": "b",
+      "explanation": "Térfogat = 4 * 3 * 2 = 24 cm³. ✅ Megoldás: 24 cm³"
+    },
+    {
+      "question": "Hogyan számoljuk ki a téglatest felszínét?",
+      "answers": {
+        "a": "Az összes oldal területét összeadjuk.",
+        "b": "2 * (hosszúság + szélesség + magasság).",
+        "c": "Hosszúság * szélesség * magasság."
+      },
+      "correct": "a",
+      "explanation": "A téglatest felszíne az összes oldallap területének az összege.  ✅ Megoldás: Az összes oldal területét összeadjuk."
+    },
+    {
+      "question": "Ha a téglatest hossza 4 cm, szélessége 3 cm, magassága 2 cm, mekkora a felszíne?",
+      "answers": {
+        "a": "24 cm²",
+        "b": "52 cm²",
+        "c": "36 cm²"
+      },
+      "correct": "b",
+      "explanation": "Felszín = 2 * (4*3) + 2*(4*2) + 2*(3*2) = 24 + 16 + 12 = 52 cm². ✅ Megoldás: 52 cm²"
+    },
+    {
+      "question": "Ha egy kocka oldala 3 cm, akkor mekkora a térfogata?",
+      "answers": {
+        "a": "9 cm³",
+        "b": "27 cm³",
+        "c": "18 cm³"
+      },
+      "correct": "b",
+      "explanation": "A kocka térfogata = oldal * oldal * oldal = 3 * 3 * 3 = 27 cm³.  ✅ Megoldás: 27 cm³"
+    },
+    {
+      "question": "Ha egy kocka oldala 3 cm, akkor mekkora a felszíne?",
+      "answers": {
+        "a": "27 cm²",
+        "b": "36 cm²",
+        "c": "54 cm²"
+      },
+      "correct": "c",
+      "explanation": "A kocka felszíne = 6 * (oldal * oldal) = 6 * (3 * 3) = 54 cm². ✅ Megoldás: 54 cm²"
+    },
+    {
+      "question": "Ha egy kocka térfogata 64 cm³, mekkora az oldala?",
+      "answers": {
+        "a": "4 cm",
+        "b": "8 cm",
+        "c": "16 cm"
+      },
+      "correct": "a",
+      "explanation": "A térfogat = oldal³. Mivel 4³ = 64, az oldal 4 cm.  ✅ Megoldás: 4 cm"
+    },
+    {
+      "question": "Mi a képlete a kocka térfogatának?",
+      "answers": {
+        "a": "Térfogat = oldal * oldal.",
+        "b": "Térfogat = oldal³",
+        "c": "Térfogat = 4 * oldal"
+      },
+      "correct": "b",
+      "explanation": "A kocka térfogata: oldal * oldal * oldal, vagyis oldal³. ✅ Megoldás: Térfogat = oldal³"
+    },
+    {
+      "question": "Ha egy téglatest alapja 5 cm széles és 6 cm hosszú, a magassága 3 cm, mekkora a felszíne?",
+      "answers": {
+        "a": "120 cm²",
+        "b": "126 cm²",
+        "c": "90 cm²"
+      },
+      "correct": "b",
+      "explanation": "Felszín = 2 * (5*6) + 2*(5*3) + 2*(6*3) = 60 + 30 + 36 = 126 cm². ✅ Megoldás: 126 cm²"
+    },
+    {
+      "question": "Hogyan változik a téglatest térfogata, ha minden élét megduplázzuk?",
+      "answers": {
+        "a": "Kétszeresére nő.",
+        "b": "Négyszeresére nő.",
+        "c": "Nyolcszorosára nő."
+      },
+      "correct": "c",
+      "explanation": "A térfogat a három él szorzatával számolható. Ha mindegyik duplázódik, a térfogat 2*2*2 = 8-szorosára nő. ✅ Megoldás: Nyolcszorosára nő."
+    },
+    {
+      "question": "Melyik a helyes mértékegysége a térfogatnak?",
+      "answers": {
+        "a": "cm",
+        "b": "cm²",
+        "c": "cm³"
+      },
+      "correct": "c",
+      "explanation": "A térfogat köbös mértékegységgel mérhető, például cm³. ✅ Megoldás: cm³"
+    },
+    {
+      "question": "Melyik a helyes mértékegysége a felszínnek?",
+      "answers": {
+        "a": "cm",
+        "b": "cm²",
+        "c": "cm³"
+      },
+      "correct": "b",
+      "explanation": "A területet négyzetes mértékegységgel mérjük, például cm².  ✅ Megoldás: cm²"
+    },
+    {
+      "question": "Ha egy kocka éle 1 cm, akkor mekkora a felszíne?",
+      "answers": {
+        "a": "1 cm²",
+        "b": "6 cm²",
+        "c": "12 cm²"
+      },
+      "correct": "b",
+      "explanation": "Felszín = 6 * (1*1) = 6 cm². ✅ Megoldás: 6 cm²"
+    },
+    {
+      "question": "Ha egy téglatest alapja négyzet, akkor milyen test?",
+      "answers": {
+        "a": "Kocka",
+        "b": "Gúla",
+        "c": "Henger"
+      },
+      "correct": "a",
+      "explanation": "Ha a téglatest alapja négyzet, a test kocka lehet. ✅ Megoldás: Kocka"
+    },
+    {
+      "question": "Ha egy téglatest hossza 2 cm, szélessége 3 cm, magassága 4 cm, mennyi a térfogata?",
+      "answers": {
+        "a": "9 cm³",
+        "b": "14 cm³",
+        "c": "24 cm³"
+      },
+      "correct": "c",
+      "explanation": "Térfogat = 2*3*4 = 24 cm³. ✅ Megoldás: 24 cm³"
+    },
+    {
+      "question": "Mi a különbség a kocka és a téglatest között?",
+      "answers": {
+        "a": "A kocka nem téglatest.",
+        "b": "A kocka speciális téglatest, ahol minden él egyenlő.",
+        "c": "A téglatestnek nincs felszíne."
+      },
+      "correct": "b",
+      "explanation": "A kocka a téglatest egy speciális esete, ahol minden él egyenlő, ezért minden oldala négyzet. ✅ Megoldás: A kocka speciális téglatest, ahol minden él egyenlő."
+    },
+    {
+      "question": "Ha egy kocka felszíne 24 cm², mekkora egy oldala?",
+      "answers": {
+        "a": "2 cm",
+        "b": "4 cm",
+        "c": "12 cm"
+      },
+      "correct": "a",
+      "explanation": "A kocka felszíne = 6 * (oldal * oldal). 24 = 6 * oldal². Az oldal² = 4, tehát az oldal 2 cm. ✅ Megoldás: 2 cm"
+    },
+    {
+      "question": "Melyik állítás hamis?",
+      "answers": {
+        "a": "A téglatest minden oldala téglalap.",
+        "b": "A kocka egy téglatest.",
+        "c": "A téglatestnek csak 4 éle van."
+      },
+      "correct": "c",
+      "explanation": "A téglatestnek 12 éle van.  ✅ Megoldás: A téglatestnek csak 4 éle van."
+    },
+    {
+      "question": "Hogyan számoljuk ki egy téglatest egyik oldalának a területét?",
+      "answers": {
+        "a": "Összeadjuk az oldalait.",
+        "b": "Hosszúság * szélesség.",
+        "c": "Hosszúság + szélesség."
+      },
+      "correct": "b",
+      "explanation": "Egy téglalap területét a hosszúság és a szélesség szorzatával számoljuk ki. ✅ Megoldás: Hosszúság * szélesség."
+    }
+  ]
 }

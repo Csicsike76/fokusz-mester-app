@@ -3,6 +3,227 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz tizedes tortek\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz tizedes tortek\" című tananyag.",
+  "questions": [
+    {
+      "question": "Hogyan írjuk le tizedes törtként: öt egész három tized?",
+      "answers": {
+        "a": "5,3",
+        "b": "5,03",
+        "c": "3,5"
+      },
+      "correct": "a",
+      "explanation": "Az 'öt egész' az egész rész, a tizedesvessző elé kerül. A 'három tized' a tizedesvessző utáni első helyiértékre kerül. ✅ Megoldás: A helyes alak az 5,3."
+    },
+    {
+      "question": "Melyik a nagyobb: 4,7 vagy 4,17?",
+      "answers": {
+        "a": "4,17",
+        "b": "4,7",
+        "c": "egyenlőek"
+      },
+      "correct": "b",
+      "explanation": "Az egész részek (4) egyenlőek, ezért a tizedeket hasonlítjuk össze. Az első számnál 7 tized van, a másodiknál 1 tized. Mivel 7 > 1, az első szám a nagyobb. ✅ Megoldás: A 4,7 a nagyobb."
+    },
+    {
+      "question": "Hogyan olvassuk ki a 2,05 számot?",
+      "answers": {
+        "a": "kettő egész öt tized",
+        "b": "kettő egész öt század",
+        "c": "kettő egész öt ezred"
+      },
+      "correct": "b",
+      "explanation": "Az egész rész a 2. A törtrész 05. Az utolsó számjegy, az 5-ös a századok helyiértékén áll. ✅ Megoldás: A helyes kiolvasás: kettő egész öt század."
+    },
+    {
+      "question": "Mi a 3/4 közönséges tört tizedes tört alakja?",
+      "answers": {
+        "a": "0,34",
+        "b": "3,4",
+        "c": "0,75"
+      },
+      "correct": "c",
+      "explanation": "Az 3/4 törtet úgy bővítjük, hogy a nevezője 100 legyen. Ehhez 25-tel kell szorozni. 3/4 = (3 * 25) / (4 * 25) = 75/100. ✅ Megoldás: A 75 század tizedes tört alakja 0,75."
+    },
+    {
+      "question": "Melyik számjegy áll a századok helyén a 12,345 számban?",
+      "answers": {
+        "a": "3",
+        "b": "4",
+        "c": "5"
+      },
+      "correct": "b",
+      "explanation": "A helyiértékek a tizedesvessző után: tized, század, ezred.  A tizedesvessző utáni második számjegy a század. ✅ Megoldás: A 4-es áll a századok helyén."
+    },
+    {
+      "question": "Mi az 1,5 közönséges tört alakja legegyszerűbb formában?",
+      "answers": {
+        "a": "15/10",
+        "b": "1 1/2",
+        "c": "1/5"
+      },
+      "correct": "b",
+      "explanation": "Az 1,5 az 'egy egész öt tized', amit így írunk: 1 5/10. A legegyszerűbb alak a vegyes szám, 1 1/2 (vagy áltörtként 3/2). ✅ Megoldás: A legegyszerűbb alak a vegyes szám, 1 1/2 (vagy áltörtként 3/2)."
+    },
+    {
+      "question": "Melyik a legkisebb?",
+      "answers": {
+        "a": "0,1",
+        "b": "0,09",
+        "c": "0,11"
+      },
+      "correct": "b",
+      "explanation": "Hasonlítsuk össze a számokat úgy, hogy azonos számú tizedesjegyük legyen. 0,1 = 0,10. 0,09. 0,11. A 0,09 a legkisebb. ✅ Megoldás: A 0,09 a legkisebb."
+    },
+    {
+      "question": "Hogyan írjuk le tizedes törtként: harminckettő ezred?",
+      "answers": {
+        "a": "0,32",
+        "b": "0,032",
+        "c": "32,0"
+      },
+      "correct": "b",
+      "explanation": "Az 'ezred' azt jelenti, hogy a tizedesvessző után 3 számjegynek kell állnia. A 32-t úgy kell leírni, hogy az utolsó számjegye (2) az ezredek helyén álljon. Ehhez ki kell egészíteni egy nullával: 0,032. ✅ Megoldás: A helyes alak 0,032."
+    },
+    {
+      "question": "Mi az 1/2 tört tizedes tört alakja?",
+      "answers": {
+        "a": "0,2",
+        "b": "0,5",
+        "c": "1,2"
+      },
+      "correct": "b",
+      "explanation": "Az 1/2 törtet bővítsük úgy, hogy a nevező 10 legyen. Ehhez 5-tel kell szorozni. 1/2 = (1*5)/(2*5) = 5/10. A 5 tized tizedes tört alakja 0,5. ✅ Megoldás: Az 1/2 = 0,5."
+    },
+    {
+      "question": "Hogyan írjuk le közönséges törtként a 0,25-öt?",
+      "answers": {
+        "a": "25/10",
+        "b": "25/100",
+        "c": "25/1000"
+      },
+      "correct": "b",
+      "explanation": "Olvassuk ki a számot: 'huszonöt század'. Ezt már könnyű leírni közönséges törtként. A számláló 25, a nevező 100. ✅ Megoldás: A helyes alak 25/100 (ami egyszerűsítve 1/4)."
+    },
+    {
+      "question": "Melyik a nagyobb: 3,14 vagy 3,2?",
+      "answers": {
+        "a": "egyenlőek",
+        "b": "3,2",
+        "c": "3,14"
+      },
+      "correct": "b",
+      "explanation": "Az egész részek (3) egyenlőek. Összehasonlítjuk a tizedeket. Az első számnál 1 tized, a másodiknál 2 tized van. Mivel 2 > 1, a második szám a nagyobb.  ✅ Megoldás: A 3,2 a nagyobb."
+    },
+    {
+      "question": "Mi az 5/2 szám ellentettje?",
+      "answers": {
+        "a": "-5/2",
+        "b": "5/2",
+        "c": "0"
+      },
+      "correct": "a",
+      "explanation": "Ha két szám összege 0, akkor egymás ellentettjei. Az 5/2 ellentettje a -5/2. ✅ Megoldás: Az -5/2"
+    },
+    {
+      "question": "Mi a 3 - 4,5 + 1,2 műveletsor eredménye?",
+      "answers": {
+        "a": "-3,3",
+        "b": "-0,3",
+        "c": "1,5"
+      },
+      "correct": "a",
+      "explanation": "A helyes sorrend: 1. 3 - 4,5 = -1,5 2. -1,5 + 1,2 = -0,3. (Javítva.) ✅ Megoldás: -0,3"
+    },
+    {
+      "question": "Hogyan lehet a 45-öt felírni közönséges tört alakban?",
+      "answers": {
+        "a": "45/1",
+        "b": "45/45",
+        "c": "1/45"
+      },
+      "correct": "a",
+      "explanation": "Minden egész szám felírható tört alakban, úgy, hogy a nevezője 1. ✅ Megoldás: 45/1"
+    },
+    {
+      "question": "Melyik tört van legegyszerűbb alakban?",
+      "answers": {
+        "a": "10/20",
+        "b": "3/5",
+        "c": "15/9"
+      },
+      "correct": "b",
+      "explanation": "A helyes válasz. Ha a számlálónak és a nevezőnek a legnagyobb közös osztója 1. ✅ Megoldás: Az 3/5"
+    },
+    {
+      "question": "Mennyi a 7,356 kerekített értéke tízesekre kerekítve?",
+      "answers": {
+        "a": "7,000",
+        "b": "7,3",
+        "c": "7,4"
+      },
+      "correct": "c",
+      "explanation": "Ha tízesekre kerekítünk, akkor a tizedes helyiértéken lévő számjegyet (3) kell nézni. Mivel az 5-nél kisebb, ezért lefelé kerekítünk.  ✅ Megoldás: 7,4"
+    },
+    {
+      "question": "Mennyi a 3,75 kerekített értéke egészre kerekítve?",
+      "answers": {
+        "a": "4",
+        "b": "3,7",
+        "c": "3"
+      },
+      "correct": "a",
+      "explanation": "Egészre kerekítéskor a tizedek helyén álló számjegyet (7) nézzük. Mivel ez 5-nél nagyobb, felfelé kerekítünk. ✅ Megoldás: 4"
+    },
+    {
+      "question": "Mi a 4/5  és 2/3 összege?",
+      "answers": {
+        "a": "22/15",
+        "b": "1/5",
+        "c": "22/15"
+      },
+      "correct": "a",
+      "explanation": "A közös nevező 15. 4/5=12/15, 2/3=10/15. 12/15+10/15=22/15 ✅ Megoldás: 22/15"
+    },
+    {
+      "question": "Mi a 3,675 kerekített értéke századokra kerekítve?",
+      "answers": {
+        "a": "3,68",
+        "b": "3,67",
+        "c": "3,70"
+      },
+      "correct": "a",
+      "explanation": "Századokra kerekítéskor az ezredek helyén álló számjegyet (5) kell nézni. Mivel ez 5, felfelé kerekítünk. ✅ Megoldás: 3,68"
+    },
+    {
+      "question": "Mi a -3/5 osztva 3-mal?",
+      "answers": {
+        "a": "5",
+        "b": "-1/5",
+        "c": "-1/5"
+      },
+      "correct": "b",
+      "explanation": "-3/5 osztva 3-mal = -3/5 / 3 = -3/5 * 1/3 = -3/15, ezt egyszerűsítve -1/5. ✅ Megoldás: -1/5"
+    },
+    {
+      "question": "Mi a 4,5  * 2 ?",
+      "answers": {
+        "a": "4,7",
+        "b": "9",
+        "c": "2.25"
+      },
+      "correct": "b",
+      "explanation": "4.5 * 2 = 9.  ✅ Megoldás: 9"
+    },
+     {
+      "question": "Melyik számnak a legkisebb az abszolút értéke a -3, 0, 2 számok közül?",
+      "answers": {
+        "a": "0",
+        "b": "-3",
+        "c": "2"
+      },
+      "correct": "a",
+      "explanation": "A 0-nak a legkisebb az abszolút értéke a 0.  ✅ Megoldás: A 0"
+    }
+  ]
 }

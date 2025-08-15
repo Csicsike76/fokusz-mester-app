@@ -1,8 +1,239 @@
 {
-  "title": "Kviz rugalmassagi ero",
+  "title": "Kviz rugalmas energia",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz rugalmassagi ero\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz rugalmas energia\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik testnek van rugalmas energiája?",
+      "answers": {
+        "a": "Egy megfeszített íjnak.",
+        "b": "Egy asztalon álló könyvnek.",
+        "c": "Egy szabadon eső kőnek."
+      },
+      "correct": "a",
+      "explanation": "A rugalmas (potenciális) energia a rugalmasan megváltoztatott alakú testekben tárolt energia. A megfeszített íjban ilyen energia van, ami a nyílvessző kilövéséhez szükséges munkát végzi. ✅ Megoldás: Egy megfeszített íjnak."
+    },
+    {
+      "question": "Hogyan változik a mozgási energia, ha a test tömege a duplájára nő, de a sebessége ugyanaz marad?",
+      "answers": {
+        "a": "A kétszeresére nő.",
+        "b": "Négyszeresére nő.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia képlete: E_kin = ½ ⋅ m ⋅ v². Mivel az energia egyenesen arányos a tömeggel (m), ha a tömeg duplázódik, a mozgási energia is a kétszeresére nő. ✅ Megoldás: A kétszeresére nő."
+    },
+    {
+      "question": "Két autó közül melyiknek nagyobb a mozgási energiája, ha a tömegük azonos, de az egyik gyorsabban megy?",
+      "answers": {
+        "a": "A gyorsabbnak.",
+        "b": "A lassabbnak.",
+        "c": "Egyenlő."
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia a sebesség négyzetével arányos. Azonos tömeg esetén a nagyobb sebességű testnek mindig nagyobb a mozgási energiája. ✅ Megoldás: A gyorsabbnak."
+    },
+    {
+      "question": "Milyen munkát kell végezni egy testen, hogy a mozgási energiája megnőjön?",
+      "answers": {
+        "a": "Pozitív (gyorsító) munkát.",
+        "b": "Negatív (fékező) munkát.",
+        "c": "Nulla munkát."
+      },
+      "correct": "a",
+      "explanation": "A munkatétel szerint a munkavégzés megváltoztatja a test mozgási energiáját. Ahhoz, hogy az energia növekedjen, pozitív munkát kell végezni, azaz gyorsítani kell a testet. ✅ Megoldás: Pozitív (gyorsító) munkát."
+    },
+    {
+      "question": "Egy 2 kg tömegű test 10 m/s sebességgel mozog. Mekkora a mozgási energiája?",
+      "answers": {
+        "a": "100 J",
+        "b": "20 J",
+        "c": "40 J"
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia képlete E_kin = ½ ⋅ m ⋅ v². Behelyettesítve: E_kin = 0,5 ⋅ 2 kg ⋅ (10 m/s)² = 1 ⋅ 100 = 100 J. ✅ Megoldás: 100 J."
+    },
+    {
+      "question": "Melyik energiafajta függ a test sebességétől?",
+      "answers": {
+        "a": "Mozgási energia",
+        "b": "Helyzeti energia",
+        "c": "Rugalmas energia"
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia definíció szerint a mozgásból származó energia, ezért közvetlenül függ a test sebességétől. A helyzeti energia a magasságtól, a rugalmas energia az alakváltozástól függ. ✅ Megoldás: Mozgási energia."
+    },
+    {
+      "question": "Milyen energiaalakulás történik egy guruló golyó fékezésekor?",
+      "answers": {
+        "a": "A mozgási energia hőenergiává alakul.",
+        "b": "A hőenergia mozgási energiává alakul.",
+        "c": "A helyzeti energia mozgási energiává alakul."
+      },
+      "correct": "a",
+      "explanation": "Fékezéskor a súrlódási erő negatív munkát végez. Ez a munka a test mozgási energiáját csökkenti, és az energiaveszteség hő formájában jelenik meg (a fék és a kerék felmelegszik). ✅ Megoldás: A mozgási energia hőenergiává alakul."
+    },
+    {
+      "question": "Mi a kinetikus energia?",
+      "answers": {
+        "a": "A mozgási energia másik neve.",
+        "b": "A helyzeti energia másik neve.",
+        "c": "A hőenergia másik neve."
+      },
+      "correct": "a",
+      "explanation": "A kinetikus energia a mozgási energia tudományos elnevezése, a görög 'kinetikos' (mozgásra vonatkozó) szóból ered. ✅ Megoldás: A mozgási energia másik neve."
+    },
+    {
+      "question": "Melyik energia tárolódik egy megfeszített íjban?",
+      "answers": {
+        "a": "Hő",
+        "b": "Rugalmas",
+        "c": "Mozgási"
+      },
+      "correct": "b",
+      "explanation": "A megfeszített íjban rugalmas energia tárolódik. ✅ Megoldás: Rugalmas energia."
+    },
+    {
+      "question": "Mi történik egy rugó energiájával, ha az eredeti hosszára engedjük vissza?",
+      "answers": {
+        "a": "Az energia megmarad a rugóban.",
+        "b": "A rugalmas energia nullává válik (és másfajta energiává alakul).",
+        "c": "Az energia megduplázódik."
+      },
+      "correct": "b",
+      "explanation": "A rugalmas energia csak a deformált állapotban létezik. Amikor a rugó visszatér a nyugalmi, eredeti hosszára, a rugalmas energiája teljesen átalakul, például a rajta lévő test mozgási energiájává. ✅ Megoldás: A rugalmas energia nullává válik (és másfajta energiává alakul)."
+    },
+    {
+      "question": "Mi a rugalmassági állandó jele?",
+      "answers": {
+        "a": "g",
+        "b": "k",
+        "c": "E"
+      },
+      "correct": "b",
+      "explanation": "A rugalmassági állandót a k betűvel jelöljük.  ✅ Megoldás: k"
+    },
+    {
+      "question": "Ha egy rugó a felére csökken a hossza, akkor a rugalmas energia...",
+      "answers": {
+        "a": "...kétszeresére nő.",
+        "b": "...negyedére csökken.",
+        "c": "...ugyanannyi marad."
+      },
+      "correct": "b",
+      "explanation": "A rugalmas energia a megnyúlás négyzetével arányos (E_rugalmas = ½⋅D⋅x²). Ha a megnyúlás a felére (1/2-szeresére) csökken, az energia (1/2)² = 1/4-szeresére, azaz a negyedére csökken. ✅ Megoldás: A negyedére csökken."
+    },
+    {
+      "question": "Mi a rugalmas erő?",
+      "answers": {
+        "a": "Az a testet a Föld felé vonzó erő.",
+        "b": "Az a belső erő, amely a rugalmas test eredeti alakjának visszaállítására törekszik.",
+        "c": "Az a súrlódási erő, ami a test mozgását akadályozza."
+      },
+      "correct": "b",
+      "explanation": "A rugalmas erő a rugalmas testekben ébredő belső erő, ami az eredeti alak visszaállítására törekszik. ✅ Megoldás: Az a belső erő, amely a rugalmas test eredeti alakjának visszaállítására törekszik."
+    },
+    {
+      "question": "Mi az összefüggés a rugalmas erő és a megnyúlás között?",
+      "answers": {
+        "a": "Fordított arányosság.",
+        "b": "Egyenes arányosság.",
+        "c": "Nincs összefüggés."
+      },
+      "correct": "b",
+      "explanation": "A rugalmas erő (F) egyenesen arányos a megnyúlással (Δx). ✅ Megoldás: Egyenes arányosság."
+    },
+    {
+      "question": "Mi a célja a rugalmas erőt felhasználó eszközöknek?",
+      "answers": {
+        "a": "Mozgás előidézése vagy a mozgás megállítása, energia tárolása.",
+        "b": "Felfelé emelés.",
+        "c": "Fékezés."
+      },
+      "correct": "a",
+      "explanation": "A rugalmas erővel rendelkező eszközök (pl. rugók, íjak) energiát tárolhatnak, vagy mozgást hozhatnak létre.  ✅ Megoldás: Mozgás előidézése vagy a mozgás megállítása, energia tárolása."
+    },
+     {
+      "question": "Melyik nem a rugalmas energia egy formája?",
+      "answers": {
+        "a": "Egy kifeszített íjban tárolt energia.",
+        "b": "Egy sínpályára helyezett vonat energiája.",
+        "c": "Egy összenyomott rugóban tárolt energia."
+      },
+      "correct": "b",
+      "explanation": "Egy sínpályára helyezett vonatnak helyzeti energiája van, de nem rugalmas. ✅ Megoldás: Egy sínpályára helyezett vonat energiája."
+    },
+    {
+      "question": "Egy test a rugalmassági határon túl deformálódik. Ez azt jelenti, hogy...",
+      "answers": {
+        "a": "...visszanyeri eredeti alakját.",
+        "b": "...képlékeny alakváltozást szenvedett.",
+        "c": "...a rugalmassági állandója megváltozott."
+      },
+      "correct": "b",
+      "explanation": "Ha a test a rugalmassági határon túl van, akkor a belső szerkezete károsodik, és az alakváltozás maradandóvá (képlékennyé) válik. ✅ Megoldás: Képlékeny alakváltozást szenvedett."
+    },
+    {
+      "question": "Ha egy 30 cm-es rugóban 10 J energiát tárolunk, majd 15 cm-re nyomjuk össze, mennyi lesz benne az energia?",
+      "answers": {
+        "a": "5 J",
+        "b": "2,5 J",
+        "c": "10 J"
+      },
+      "correct": "b",
+      "explanation": "A rugalmas energia a megnyúlás (x) négyzetével arányos (E = 1/2 * k * x²). Ha a megnyúlás feleződik, az energia a negyedére csökken, ami 10 J / 4 = 2,5 J. ✅ Megoldás: 2,5 J"
+    },
+    {
+      "question": "Hogyan változik egy acélrugó rugalmassági állandója, ha a felére vágjuk?",
+      "answers": {
+        "a": "Nem változik.",
+        "b": "A felére csökken.",
+        "c": "Kétszeresére nő."
+      },
+      "correct": "c",
+      "explanation": "Ha egy rugót félbevágunk, mindkét fele kétszer olyan merev lesz, mint az eredeti. ✅ Megoldás: A rugalmassági állandója a duplájára nő."
+    },
+    {
+      "question": "Egy rugó rugalmassági állandója 100 N/m.  Ha 10 cm-rel megnyújtjuk, mekkora erő hat a rugóra?",
+      "answers": {
+        "a": "10 N",
+        "b": "1000 N",
+        "c": "10000 N"
+      },
+      "correct": "a",
+      "explanation": "F = k * Δx. Átváltva: 10 cm = 0,1 m. Behelyettesítve: F = 100 N/m * 0,1 m = 10 N. ✅ Megoldás: 10 N"
+    },
+    {
+      "question": "Melyik a rugalmas energia képlete (ismétlés)?",
+      "answers": {
+        "a": "E_rugalmas = m * g * h.",
+        "b": "E_rugalmas = ½ * m * v²",
+        "c": "E_rugalmas = ½ * k * x²"
+      },
+      "correct": "c",
+      "explanation": "A rugalmas energia képlete: E_rugalmas = ½ * k * x², ahol 'k' a rugóállandó, 'x' a megnyúlás mértéke. ✅ Megoldás: E_rugalmas = ½ * k * x²"
+    },
+    {
+      "question": "Ha egy rugóban 50 J rugalmas energia van, és a rugóállandó 200 N/m, mennyi a megnyúlás mértéke?",
+      "answers": {
+        "a": "0,5 m",
+        "b": "1 m",
+        "c": "10 m"
+      },
+      "correct": "a",
+      "explanation": "E_rugalmas = ½ * k * x². Átrendezve: x = √(2 * E_rugalmas / k). Behelyettesítve: x = √(2 * 50 J / 200 N/m) = √0.5 m ≈ 0.5 m. ✅ Megoldás: 0,5 m"
+    },
+     {
+      "question": "Mi a 100 cm-es rúdban a 200 N-os erővel szemben ébredő rugalmas erő?",
+      "answers": {
+        "a": "200 N",
+        "b": "100 N",
+        "c": "10 N"
+      },
+      "correct": "a",
+      "explanation": "A rugalmas testek vissza akarják állítani az eredeti alakjukat, így a rugalmas erő megegyezik a külső erő nagyságával.  ✅ Megoldás: 200 N"
+    }
+  ]
 }

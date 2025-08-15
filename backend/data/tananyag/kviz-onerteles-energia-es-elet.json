@@ -3,6 +3,247 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz onerteles energia es elet\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz 8. osztályos fizika\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik testnek van mozgási energiája?",
+      "answers": {
+        "a": "Egy repülő madárnak.",
+        "b": "Egy asztalon álló könyvnek.",
+        "c": "Egy összenyomott rugónak."
+      },
+      "correct": "a",
+      "explanation": "Mozgási (kinetikus) energiája a mozgó testeknek van. A repülő madár mozog, tehát van mozgási energiája. Az asztalon álló könyvnek helyzeti, az összenyomott rugónak rugalmas energiája van. ✅ Megoldás: Egy repülő madárnak."
+    },
+    {
+      "question": "Hogyan változik a mozgási energia, ha a test tömege a duplájára nő, de a sebessége ugyanaz marad?",
+      "answers": {
+        "a": "A kétszeresére nő.",
+        "b": "Négyszeresére nő.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia képlete: E_kin = ½ ⋅ m ⋅ v². Mivel az energia egyenesen arányos a tömeggel (m), ha a tömeg duplázódik, a mozgási energia is a kétszeresére nő. ✅ Megoldás: A kétszeresére nő."
+    },
+    {
+      "question": "Két autó közül melyiknek nagyobb a mozgási energiája, ha a tömegük azonos, de az egyik gyorsabban megy?",
+      "answers": {
+        "a": "A gyorsabbnak.",
+        "b": "A lassabbnak.",
+        "c": "Egyenlő."
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia a sebesség négyzetével arányos. Azonos tömeg esetén a nagyobb sebességű testnek mindig nagyobb a mozgási energiája. ✅ Megoldás: A gyorsabbnak."
+    },
+    {
+      "question": "Milyen munkát kell végezni egy testen, hogy a mozgási energiája megnőjön?",
+      "answers": {
+        "a": "Pozitív (gyorsító) munkát.",
+        "b": "Negatív (fékező) munkát.",
+        "c": "Nulla munkát."
+      },
+      "correct": "a",
+      "explanation": "A munkatétel szerint a munkavégzés megváltoztatja a test mozgási energiáját. Ahhoz, hogy az energia növekedjen, pozitív munkát kell végezni, azaz gyorsítani kell a testet.  ✅ Megoldás: Pozitív (gyorsító) munkát."
+    },
+    {
+      "question": "Egy 2 kg tömegű test 10 m/s sebességgel mozog. Mekkora a mozgási energiája?",
+      "answers": {
+        "a": "100 J",
+        "b": "20 J",
+        "c": "40 J"
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia képlete E_kin = ½ ⋅ m ⋅ v². Behelyettesítve: E_kin = 0,5 ⋅ 2 kg ⋅ (10 m/s)² = 1 ⋅ 100 = 100 J. ✅ Megoldás: 100 J."
+    },
+    {
+      "question": "Melyik energiafajta függ a test sebességétől?",
+      "answers": {
+        "a": "Mozgási energia",
+        "b": "Helyzeti energia",
+        "c": "Rugalmas energia"
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia definíció szerint a mozgásból származó energia, ezért közvetlenül függ a test sebességétől. A helyzeti energia a magasságtól, a rugalmas energia az alakváltozástól függ. ✅ Megoldás: Mozgási energia."
+    },
+    {
+      "question": "Milyen energiaalakulás történik egy guruló golyó fékezésekor?",
+      "answers": {
+        "a": "A mozgási energia hőenergiává alakul.",
+        "b": "A hőenergia mozgási energiává alakul.",
+        "c": "A helyzeti energia mozgási energiává alakul."
+      },
+      "correct": "a",
+      "explanation": "Fékezéskor a súrlódási erő negatív munkát végez. Ez a munka a test mozgási energiáját csökkenti, és az energiaveszteség hő formájában jelenik meg (a fék és a kerék felmelegszik). ✅ Megoldás: A mozgási energia hőenergiává alakul."
+    },
+    {
+      "question": "Mi a kinetikus energia?",
+      "answers": {
+        "a": "A mozgási energia másik neve.",
+        "b": "A helyzeti energia másik neve.",
+        "c": "A hőenergia másik neve."
+      },
+      "correct": "a",
+      "explanation": "A kinetikus energia a mozgási energia tudományos elnevezése, a görög 'kinetikos' (mozgásra vonatkozó) szóból ered. ✅ Megoldás: A mozgási energia másik neve."
+    },
+    {
+      "question": "Melyik energiaforrás használata járul hozzá leginkább az üvegházhatáshoz?",
+      "answers": {
+        "a": "Napenergia",
+        "b": "Szélenergia",
+        "c": "Fosszilis tüzelőanyagok (szén, olaj, gáz)"
+      },
+      "correct": "c",
+      "explanation": "A fosszilis tüzelőanyagok elégetésekor nagy mennyiségű szén-dioxid, egy erős üvegházhatású gáz kerül a légkörbe, ami a globális felmelegedés fő okozója. ✅ Megoldás: Fosszilis tüzelőanyagok (szén, olaj, gáz)."
+    },
+    {
+      "question": "Mi a Föld légkörének legfontosabb feladata?",
+      "answers": {
+        "a": "A Nap sugarainak visszaverése.",
+        "b": "Az élethez szükséges gázok biztosítása és a káros sugarak kiszűrése.",
+        "c": "A meteoritok megfogása."
+      },
+      "correct": "b",
+      "explanation": "A légkör biztosítja az élethez szükséges gázokat (pl. oxigén), és a káros ultraibolya sugárzást is megszűri. ✅ Megoldás: Az élethez szükséges gázok biztosítása és a káros sugarak kiszűrése."
+    },
+    {
+      "question": "Mi a légnemű halmazállapotú anyag?",
+      "answers": {
+        "a": "A szilárd testek, pl. a jég.",
+        "b": "A folyadékok, pl. a víz.",
+        "c": "A gázok, pl. az oxigén."
+      },
+      "correct": "c",
+      "explanation": "A gázok (pl. oxigén, szén-dioxid) a légnemű anyagok. ✅ Megoldás: A gázok, pl. az oxigén."
+    },
+    {
+      "question": "Mi a legkisebb részecskéje az anyagnak?",
+      "answers": {
+        "a": "Molekula.",
+        "b": "Atom.",
+        "c": "Sejt."
+      },
+      "correct": "b",
+      "explanation": "Az atom az anyag legkisebb építőköve. ✅ Megoldás: Atom."
+    },
+    {
+      "question": "Mi a tömeg?",
+      "answers": {
+        "a": "A test nagysága.",
+        "b": "A test tehetetlenségének mértéke.",
+        "c": "A test sebessége."
+      },
+      "correct": "b",
+      "explanation": "A test tehetetlenségének mértéke. ✅ Megoldás: A test tehetetlenségének mértéke."
+    },
+    {
+      "question": "Milyen mértékegységben mérjük a tömeget?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "gramm (g) vagy kilogramm (kg)",
+        "c": "másodperc (s)"
+      },
+      "correct": "b",
+      "explanation": "A tömeg mértékegysége a gramm (g) vagy a kilogramm (kg). ✅ Megoldás: gramm (g) vagy kilogramm (kg)"
+    },
+    {
+      "question": "Milyen erő hat a Földön a testekre?",
+      "answers": {
+        "a": "Elektromos erő.",
+        "b": "Súrlódási erő.",
+        "c": "Súlyerő."
+      },
+      "correct": "c",
+      "explanation": "A Föld a testeket a súlyerővel vonzza magához. ✅ Megoldás: Súlyerő."
+    },
+    {
+      "question": "Melyik a helyzeti energia képlete?",
+      "answers": {
+        "a": "E = m * g * h",
+        "b": "E = m * c²",
+        "c": "E = ½ * m * v²"
+      },
+      "correct": "a",
+      "explanation": "A helyzeti energia képlete: Eh = m * g * h, ahol 'm' a tömeg, 'g' a nehézségi gyorsulás, 'h' a magasság. ✅ Megoldás: E = m * g * h"
+    },
+    {
+      "question": "Mi a tehetetlenség?",
+      "answers": {
+        "a": "A test ellenállása a sebesség megváltoztatásával szemben.",
+        "b": "A test súlya.",
+        "c": "A test alakja."
+      },
+      "correct": "a",
+      "explanation": "A tehetetlenség azt jelenti, hogy a test megpróbálja megtartani a mozgásállapotát. Vagy áll, vagy egyenletesen mozog.  ✅ Megoldás: A test ellenállása a sebesség megváltoztatásával szemben."
+    },
+    {
+      "question": "Mi az összefüggés a sebesség (v), a megtett út (s) és az idő (t) között?",
+      "answers": {
+        "a": "v = s * t",
+        "b": "v = s / t",
+        "c": "s = v / t"
+      },
+      "correct": "b",
+      "explanation": "A sebesség = megtett út / idő, vagyis v = s / t. ✅ Megoldás: v = s / t"
+    },
+    {
+      "question": "Melyik a hang terjedésének a közege?",
+      "answers": {
+        "a": "Csak a levegő",
+        "b": "Levegő, víz, szilárd anyagok",
+        "c": "Csak a víz."
+      },
+      "correct": "b",
+      "explanation": "A hang terjedhet a levegőben, vízben, szilárd anyagokban. ✅ Megoldás: Levegő, víz, szilárd anyagok"
+    },
+    {
+      "question": "Mi a hullámhossz?",
+      "answers": {
+        "a": "A hullám magassága.",
+        "b": "A hullám sebessége.",
+        "c": "Két hullámcsúcs közötti távolság."
+      },
+      "correct": "c",
+      "explanation": "A hullámhossz a két hullámcsúcs (vagy két völgy) közötti távolság. ✅ Megoldás: Két hullámcsúcs közötti távolság."
+    },
+    {
+      "question": "Mi a frekvencia?",
+      "answers": {
+        "a": "A hullám magassága.",
+        "b": "Egy másodperc alatt lezajló rezgések száma.",
+        "c": "A hullám sebessége."
+      },
+      "correct": "b",
+      "explanation": "A frekvencia megmutatja, hogy egy másodperc alatt hány rezgés történik. ✅ Megoldás: Egy másodperc alatt lezajló rezgések száma."
+    },
+    {
+      "question": "Ha a hanghullám sebessége 340 m/s, a frekvenciája 170 Hz, mennyi a hullámhossza?",
+      "answers": {
+        "a": "0.5 m",
+        "b": "2 m",
+        "c": "510 m"
+      },
+      "correct": "b",
+      "explanation": "A hullámhossz = sebesség / frekvencia. λ = v / f = 340 m/s / 170 Hz = 2 m. ✅ Megoldás: 2 m"
+    },
+     {
+      "question": "Melyik energiaforrás nem szennyezi a környezetet?",
+      "answers": {
+        "a": "szén",
+        "b": "víz",
+        "c": "földgáz"
+      },
+      "correct": "b",
+      "explanation": "A vízenergia nem termel szén-dioxidot, a többi fosszilis. ✅ Megoldás: víz"
+    },
+    {
+      "question": "Melyik eszköz nem használ áramot?",
+      "answers": {
+        "a": "villanykörte",
+        "b": "porszívó",
+        "c": "gőzölős vasaló"
+      },
+      "correct": "c",
+      "explanation": "A gőzölős vasaló hőt használ, ami a villanykörtéhez és a porszívóhoz képest nem elektromos energia. ✅ Megoldás: gőzölős vasaló"
+    }
+  ]
 }

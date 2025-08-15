@@ -1,8 +1,249 @@
 {
-  "title": "Kviz kongruencia alkalmazas",
+  "title": "Kvíz kongruencia alkalmazas",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz kongruencia alkalmazas\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Milyen tulajdonságúak az egyenlő szárú háromszög alapon fekvő szögei?",
+      "answers": {
+        "a": "Mindig 60°-osak.",
+        "b": "Kongruensek (egyenlőek).",
+        "c": "Összegük 90°."
+      },
+      "correct": "b",
+      "explanation": "Az egyenlő szárú háromszög alaptétele, hogy az egyenlő hosszúságú szárakkal szemközti, alapon fekvő szögek mindig egyenlő nagyságúak. Ezt az O.Sz.O. egybevágósági tétel segítségével lehet bizonyítani."
+    },
+    {
+      "question": "Mi igaz a szakaszfelező merőleges pontjaira?",
+      "answers": {
+        "a": "Egyenlő távolságra vannak a szakasz két végpontjától.",
+        "b": "A szakaszt 2:1 arányban osztják.",
+        "c": "A szakaszon belül helyezkednek el."
+      },
+      "correct": "a",
+      "explanation": "A szakaszfelező merőleges azon pontok mértani helye, amelyek egyenlő távolságra vannak a szakasz két végpontjától. Ezt kongruens háromszögek (O.Sz.O.) segítségével lehet igazolni."
+    },
+    {
+      "question": "Milyen hosszú a derékszögű háromszög átfogójához tartozó súlyvonala?",
+      "answers": {
+        "a": "Kétszerese az átfogónak.",
+        "b": "Megegyezik az átfogóval.",
+        "c": "Fele olyan hosszú, mint az átfogó."
+      },
+      "correct": "c",
+      "explanation": "A derékszögű háromszög köré írt körének középpontja az átfogó felezőpontja (Thalész tételének megfordítása). A súlyvonal a csúcsot köti össze ezzel a középponttal, tehát hossza megegyezik a kör sugarával, ami az átfogó fele."
+    },
+    {
+      "question": "Milyen háromszöget alkot egy rombusz oldala és két félátlója?",
+      "answers": {
+        "a": "Tompaszögűt.",
+        "b": "Hegyesszögűt.",
+        "c": "Derékszögűt."
+      },
+      "correct": "c",
+      "explanation": "Mivel a rombusz átlói merőlegesek egymásra, a rombuszt négy egybevágó derékszögű háromszögre bontják. A befogók a félátlók, az átfogó a rombusz oldala."
+    },
+    {
+      "question": "Egy szög szögfelezőjének bármely pontja...",
+      "answers": {
+        "a": "...egyenlő távolságra van a szög két szárától.",
+        "b": "...a szög csúcsával egyenlő távolságra van.",
+        "c": "...a szög szárain van."
+      },
+      "correct": "a",
+      "explanation": "A szögfelezőn lévő pontok legfontosabb tulajdonsága, hogy egyenlő távolságra vannak a két szögszártól. Ezt két kongruens derékszögű háromszög létrehozásával lehet bizonyítani."
+    },
+    {
+      "question": "Egy egyenlő szárú háromszögben az alaphoz tartozó magasságvonal...",
+      "answers": {
+        "a": "...nem metszi a súlyvonalat.",
+        "b": "...egybeesik a súlyvonallal és a szögfelezővel.",
+        "c": "...párhuzamos a súlyvonallal."
+      },
+      "correct": "b",
+      "explanation": "Az egyenlő szárú háromszög szimmetriatengelye az alaphoz tartozó magasság, súlyvonal és szögfelező, valamint az oldalfelező merőleges is. Ezek a vonalak egybeesnek."
+    },
+    {
+      "question": "Ha egy paralelogramma átlói egyenlő hosszúak, akkor az biztosan...",
+      "answers": {
+        "a": "Rombusz.",
+        "b": "Négyzet.",
+        "c": "Téglalap."
+      },
+      "correct": "c",
+      "explanation": "A paralelogrammák közül csak a téglalapnak (és a négyzetnek, ami speciális téglalap) egyenlőek az átlói. Ezt két kongruens háromszög (O.O.O.) segítségével lehet bizonyítani."
+    },
+    {
+      "question": "Miért igaz, hogy a paralelogramma szemközti oldalai egyenlőek?",
+      "answers": {
+        "a": "Mert az átló két kongruens háromszögre bontja.",
+        "b": "Mert a szemközti oldalak párhuzamosak.",
+        "c": "Mert az átlók felezik egymást."
+      },
+      "correct": "a",
+      "explanation": "Az átló két olyan háromszögre bontja a paralelogrammát, amelyek kongruensek a Sz.O.Sz tétel alapján (az átló közös, a váltószögek egyenlőek). A kongruenciából következik a megfelelő oldalak egyenlősége."
+    },
+    {
+      "question": "Egy egyenlő oldalú háromszögben minden szög...",
+      "answers": {
+        "a": "...derékszög.",
+        "b": "...60°.",
+        "c": "...különböző."
+      },
+      "correct": "b",
+      "explanation": "Mivel az egyenlő oldalú háromszög egyben egyenlő szárú is bármelyik oldalát tekintve alapnak, minden szöge egyenlő. Mivel az összegük 180°, egy szög 180/3 = 60°."
+    },
+    {
+      "question": "Egy körben az egyenlő húrokhoz...",
+      "answers": {
+        "a": "...különböző középponti szögek tartoznak.",
+        "b": "...egyenlő középponti szögek tartoznak.",
+        "c": "...derékszögek tartoznak."
+      },
+      "correct": "b",
+      "explanation": "Ha két húr egyenlő, akkor a kör középpontjával alkotott két háromszög kongruens lesz az O.O.O. tétel szerint (két oldal a sugár, a harmadik a húr). Ebből következik, hogy a középponti szögek is egyenlőek."
+    },
+    {
+      "question": "Egy derékszögű háromszög átfogója 10. Mekkora az átfogóhoz tartozó súlyvonal?",
+      "answers": {
+        "a": "10",
+        "b": "5",
+        "c": "Nem lehet tudni."
+      },
+      "correct": "b",
+      "explanation": "A derékszögű háromszög köré írt kör középpontja az átfogó felezőpontja. A súlyvonal a derékszögű csúcsból ebbe a pontba húzott szakasz, ami pontosan a kör sugara. A sugár az átmérő (átfogó) fele, tehát 10/2=5."
+    },
+    {
+      "question": "Milyen alakzatot kapunk, ha egy négyszög oldalfelező pontjait összekötjük?",
+      "answers": {
+        "a": "Paralelogrammát.",
+        "b": "Téglalapot.",
+        "c": "Rombuszt."
+      },
+      "correct": "a",
+      "explanation": "Ez a Varignon-tétel. Bármely négyszög oldalfelező pontjai egy paralelogrammát alkotnak. Ezt a háromszög középvonal-tételének alkalmazásával lehet bizonyítani."
+    },
+    {
+      "question": "Melyik állítás bizonyítható kongruencia segítségével?",
+      "answers": {
+        "a": "Pitagorasz-tétel.",
+        "b": "Két pont távolsága.",
+        "c": "A paralelogramma szemközti szögei egyenlőek."
+      },
+      "correct": "c",
+      "explanation": "A paralelogramma szemközti szögei egyenlőek (a Sz.O.Sz. tétel alapján)."
+    },
+    {
+      "question": "Ha egy háromszögben két szög egyenlő, akkor a háromszög...",
+      "answers": {
+        "a": "...biztosan derékszögű.",
+        "b": "...biztosan egyenlő oldalú.",
+        "c": "...biztosan egyenlő szárú."
+      },
+      "correct": "c",
+      "explanation": "Ez az egyenlő szárú háromszög tételének megfordítása. Ha két szög egyenlő, akkor a velük szemközti oldalak is egyenlőek, tehát a háromszög egyenlő szárú."
+    },
+    {
+      "question": "Mi igaz a rombusz átlóira?",
+      "answers": {
+        "a": "Felezik a belső szögeket.",
+        "b": "Egyenlő hosszúak.",
+        "c": "A metszéspont 1:2 arányban osztja őket."
+      },
+      "correct": "a",
+      "explanation": "A rombusz átlói egyben szögfelezők is. Ezt úgy lehet bizonyítani, hogy az átló két kongruens egyenlő szárú háromszögre bontja a rombuszt."
+    },
+    {
+      "question": "Egy kör középpontjából egy húrra bocsátott merőleges...",
+      "answers": {
+        "a": "...mindig egyenlő a sugárral.",
+        "b": "...felezi a húrt.",
+        "c": "...párhuzamos a húrral."
+      },
+      "correct": "b",
+      "explanation": "A középpontból a húrra bocsátott merőleges egy egyenlő szárú háromszög magassága (a szárak a sugarak). Az egyenlő szárú háromszögben a magasság egyben súlyvonal is, tehát felezi az alapot (a húrt)."
+    },
+    {
+      "question": "Ha egy négyszög átlói merőlegesen felezik egymást, akkor az egy...",
+      "answers": {
+        "a": "Téglalap.",
+        "b": "Trapéz.",
+        "c": "Rombusz."
+      },
+      "correct": "c",
+      "explanation": "Ha az átlók felezik egymást, az alakzat paralelogramma. Ha még merőlegesek is, az már a rombusz speciális tulajdonsága. Ezt kongruens derékszögű háromszögekkel lehet igazolni."
+    },
+    {
+      "question": "Ha két derékszögű háromszög átfogója és egy-egy befogója megegyezik, akkor kongruensek. Miért?",
+      "answers": {
+        "a": "Mert a harmadik befogójuk is egyenlő lesz a Pitagorasz-tétel miatt.",
+        "b": "Mert az O.Sz.O. tétel teljesül.",
+        "c": "Mert a Sz.O.Sz. tétel teljesül."
+      },
+      "correct": "a",
+      "explanation": "Ez az Átfogó-Befogó (Á.B.) eset. Bár nem alapeset, de a Pitagorasz-tétel (a²=c²-b²) garantálja, hogy a harmadik befogók is egyenlőek lesznek, így az O.O.O. tétel már teljesül."
+    },
+    {
+      "question": "Ha egy egyenlő szárú háromszög egyik szöge 90°, akkor a másik két szöge...",
+      "answers": {
+        "a": "45°-os.",
+        "b": "60°-os.",
+        "c": "30°-os."
+      },
+      "correct": "a",
+      "explanation": "Az egyenlő szárú háromszögben a másik két szög egyenlő, és összegük 180-90=90°. Ezek tehát 45°-osak. ✅ Megoldás: 45°-os."
+    },
+    {
+      "question": "Ha a síkidom a két szomszédos oldala merőleges, akkor...",
+      "answers": {
+        "a": "Négyzet.",
+        "b": "Téglalap.",
+        "c": "Mindkettő."
+      },
+      "correct": "c",
+      "explanation": "A négyzet és a téglalap is olyan négyszög, aminek minden szöge derékszög.  ✅ Megoldás: Mindkettő."
+    },
+    {
+      "question": "Ha egy háromszög oldalai 5cm, 5cm, 8cm, akkor milyen?",
+      "answers": {
+        "a": "Egyenlő szárú.",
+        "b": "Egyenlő oldalú.",
+        "c": "Derékszögű."
+      },
+      "correct": "a",
+      "explanation": "Két oldala egyenlő, ezért egyenlő szárú. ✅ Megoldás: Egyenlő szárú"
+    },
+    {
+      "question": "Mit állapíthatunk meg az SSS-tétel segítségével?",
+      "answers": {
+        "a": "Hogy a két háromszög hasonló.",
+        "b": "Hogy a két háromszög egybevágó.",
+        "c": "Hogy a két háromszög területe egyenlő."
+      },
+      "correct": "b",
+      "explanation": "Az SSS tétel a háromszögek egybevágóságát igazolja. ✅ Megoldás: Hogy a két háromszög egybevágó."
+    },
+    {
+      "question": "Hogyan tudjuk meghatározni két derékszögű háromszög egybevágóságát?",
+      "answers": {
+        "a": "Csak a szögek segítségével.",
+        "b": "Az átfogó és a befogók segítségével.",
+        "c": "Csak az oldalak segítségével."
+      },
+      "correct": "b",
+      "explanation": "Az átfogó (leghosszabb oldal) és a befogók (a derékszöget bezáró oldalak) segítségével. ✅ Megoldás: Az átfogó és a befogók segítségével."
+    },
+    {
+      "question": "Ha két háromszög hasonló, akkor biztosan...",
+      "answers": {
+        "a": "Egybevágóak.",
+        "b": "A szögeik egyenlőek.",
+        "c": "Az oldalaik egyenlő hosszúak."
+      },
+      "correct": "b",
+      "explanation": "A hasonlóság azt jelenti, hogy a szögek megegyeznek. ✅ Megoldás: A szögeik egyenlőek."
+    }
+  ]
 }

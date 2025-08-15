@@ -4,5 +4,256 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz halmazallapotu anyagok\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Milyen halmazállapotban van a víz?",
+      "answers": {
+        "a": "Csak szilárd.",
+        "b": "Csak folyékony.",
+        "c": "Szilárd, folyékony és gáz."
+      },
+      "correct": "c",
+      "explanation": "A víz sokféle halmazállapotban létezhet: jégként (szilárd), víz formájában (folyékony) és vízgőzként (gáz). ✅ Megoldás: Szilárd, folyékony és gáz."
+    },
+    {
+      "question": "Mi a szilárd halmazállapotú anyagok jellemzője?",
+      "answers": {
+        "a": "Könnyen folynak.",
+        "b": "Megtartják az alakjukat és a térfogatukat.",
+        "c": "Kitöltik a teret."
+      },
+      "correct": "b",
+      "explanation": "A szilárd anyagok megtartják az alakjukat és a térfogatukat, mint például a kő vagy a ceruza. ✅ Megoldás: Megtartják az alakjukat és a térfogatukat."
+    },
+    {
+      "question": "Mi a folyékony halmazállapotú anyagok jellemzője?",
+      "answers": {
+        "a": "Nem tartják meg a formájukat, de a térfogatuk állandó.",
+        "b": "Megtartják a formájukat és a térfogatukat.",
+        "c": "Nincs térfogatuk."
+      },
+      "correct": "a",
+      "explanation": "A folyékony anyagok felveszik a tartó edényük alakját, de a térfogatuk nem változik. Például a víz a pohár alakját veszi fel. ✅ Megoldás: Nem tartják meg a formájukat, de a térfogatuk állandó."
+    },
+    {
+      "question": "Mi a gáz halmazállapotú anyagok jellemzője?",
+      "answers": {
+        "a": "Megtartják a formájukat és a térfogatukat.",
+        "b": "Kitöltik a rendelkezésükre álló teret.",
+        "c": "Folyékonyak."
+      },
+      "correct": "b",
+      "explanation": "A gázok kitöltik a teret, mint például a levegő egy szobában.  ✅ Megoldás: Kitöltik a rendelkezésükre álló teret."
+    },
+    {
+      "question": "Melyik anyag van szilárd halmazállapotban szobahőmérsékleten?",
+      "answers": {
+        "a": "A víz.",
+        "b": "Az oxigén.",
+        "c": "A kő."
+      },
+      "correct": "c",
+      "explanation": "A kő egy kemény, szilárd anyag, ami szobahőmérsékleten is szilárd.  ✅ Megoldás: A kő."
+    },
+    {
+      "question": "Melyik anyag van folyékony halmazállapotban szobahőmérsékleten?",
+      "answers": {
+        "a": "A vas.",
+        "b": "A víz.",
+        "c": "A fa."
+      },
+      "correct": "b",
+      "explanation": "A víz folyékony halmazállapotban van szobahőmérsékleten. ✅ Megoldás: A víz."
+    },
+    {
+      "question": "Melyik anyag van gáz halmazállapotban szobahőmérsékleten?",
+      "answers": {
+        "a": "A só.",
+        "b": "Az oxigén.",
+        "c": "Az arany."
+      },
+      "correct": "b",
+      "explanation": "Az oxigén egy gáz halmazállapotú anyag, amit belélegzünk. ✅ Megoldás: Az oxigén."
+    },
+    {
+      "question": "Mi történik, ha a víz megfagy?",
+      "answers": {
+        "a": "Vízgőz lesz belőle.",
+        "b": "Jég lesz belőle.",
+        "c": "Melegebb lesz."
+      },
+      "correct": "b",
+      "explanation": "A víz fagyáskor jéggé válik, ami szilárd. ✅ Megoldás: Jég lesz belőle."
+    },
+    {
+      "question": "Mi történik, ha a jég megolvad?",
+      "answers": {
+        "a": "Víz lesz belőle.",
+        "b": "Vízgőz lesz belőle.",
+        "c": "Több jég lesz belőle."
+      },
+      "correct": "a",
+      "explanation": "Az olvadás során a jég folyékonnyá, azaz vízzé válik. ✅ Megoldás: Víz lesz belőle."
+    },
+    {
+      "question": "Mi történik, ha a víz forrni kezd?",
+      "answers": {
+        "a": "Jég lesz belőle.",
+        "b": "Gőz lesz belőle.",
+        "c": "A víz hidegebb lesz."
+      },
+      "correct": "b",
+      "explanation": "A forrás során a víz gőzzé alakul, ami gáz halmazállapotú. ✅ Megoldás: Gőz lesz belőle."
+    },
+    {
+      "question": "Milyen halmazállapotú a víz a fürdőkádban?",
+      "answers": {
+        "a": "Szilárd.",
+        "b": "Folyékony.",
+        "c": "Gáz."
+      },
+      "correct": "b",
+      "explanation": "A fürdőkádban folyékony víz van. ✅ Megoldás: Folyékony."
+    },
+    {
+      "question": "Milyen halmazállapotú a jégkocka a pohárban?",
+      "answers": {
+        "a": "Szilárd.",
+        "b": "Folyékony.",
+        "c": "Gáz."
+      },
+      "correct": "a",
+      "explanation": "A jégkocka szilárd halmazállapotú. ✅ Megoldás: Szilárd."
+    },
+    {
+      "question": "Milyen halmazállapotú a felhő?",
+      "answers": {
+        "a": "Szilárd.",
+        "b": "Folyékony.",
+        "c": "Gáz."
+      },
+      "correct": "b",
+      "explanation": "A felhők apró vízcseppekből állnak, amik folyékonyak. ✅ Megoldás: Folyékony."
+    },
+    {
+      "question": "Mi a párolgás?",
+      "answers": {
+        "a": "A folyadék szilárddá válása.",
+        "b": "A folyadék gázzá válása.",
+        "c": "A gáz folyadékká válása."
+      },
+      "correct": "b",
+      "explanation": "A párolgáskor a folyadék gőzzé válik.  ✅ Megoldás: A folyadék gázzá válása."
+    },
+    {
+      "question": "Mi a lecsapódás?",
+      "answers": {
+        "a": "A gáz szilárddá válása.",
+        "b": "A gáz folyadékká válása.",
+        "c": "A folyadék forrása."
+      },
+      "correct": "b",
+      "explanation": "A lecsapódáskor a gáz folyékony halmazállapotúvá válik. ✅ Megoldás: A gáz folyadékká válása."
+    },
+    {
+      "question": "Mi a szublimáció?",
+      "answers": {
+        "a": "A szilárd anyag folyadékká válása.",
+        "b": "A szilárd anyag közvetlenül gázzá válik.",
+        "c": "A gáz folyadékká válása."
+      },
+      "correct": "b",
+      "explanation": "A szublimáció során a szilárd anyag gázzá alakul folyékony állapot kihagyásával. ✅ Megoldás: A szilárd anyag közvetlenül gázzá válik."
+    },
+    {
+      "question": "Mi a kicsapódás?",
+      "answers": {
+        "a": "A folyadék szilárddá válása.",
+        "b": "A gáz folyadékká válása.",
+        "c": "A gáz szilárddá válása."
+      },
+      "correct": "c",
+      "explanation": "A kicsapódás a szublimáció fordítottja, amikor a gáz szilárddá válik, pl. a dér a fűszálakon. ✅ Megoldás: A gáz szilárddá válása."
+    },
+    {
+      "question": "Mi a harmat?",
+      "answers": {
+        "a": "A víz lecsapódása a leveleken.",
+        "b": "A jég olvadása.",
+        "c": "A forrás."
+      },
+      "correct": "a",
+      "explanation": "A harmat a leveleken lecsapódott vízcseppek. ✅ Megoldás: A víz lecsapódása a leveleken."
+    },
+    {
+      "question": "Mi a dér?",
+      "answers": {
+        "a": "A víz lecsapódása.",
+        "b": "A fagyott eső.",
+        "c": "A víz szilárd formája a növényeken."
+      },
+      "correct": "c",
+      "explanation": "A dér a szilárd halmazállapotú víz, ami a hideg felületeken képződik, mint a növényeken. ✅ Megoldás: A víz szilárd formája a növényeken."
+    },
+    {
+      "question": "Mi a hó?",
+      "answers": {
+        "a": "A víz folyékony formája.",
+        "b": "A víz szilárd formája, ami a levegőben képződik.",
+        "c": "A felhők."
+      },
+      "correct": "b",
+      "explanation": "A hó jégkristályokból áll, ami a levegőben fagy meg. ✅ Megoldás: A víz szilárd formája, ami a levegőben képződik."
+    },
+    {
+      "question": "Melyik halmazállapot-változáskor keletkezik a gőz?",
+      "answers": {
+        "a": "Olvadás",
+        "b": "Párolgás vagy forrás",
+        "c": "Fagyás"
+      },
+      "correct": "b",
+      "explanation": "A gőz a folyadékokból keletkezik, párolgás vagy forrás útján. ✅ Megoldás: Párolgás vagy forrás"
+    },
+    {
+      "question": "Melyik halmazállapot-változáskor keletkezik a jég?",
+      "answers": {
+        "a": "Olvadás",
+        "b": "Fagyás",
+        "c": "Párolgás"
+      },
+      "correct": "b",
+      "explanation": "A jég a vízből fagyás során keletkezik. ✅ Megoldás: Fagyás"
+    },
+    {
+      "question": "Melyik a legkisebb mértékegység a felsoroltak közül?",
+      "answers": {
+        "a": "A molekula",
+        "b": "Az atom",
+        "c": "A sejt"
+      },
+      "correct": "b",
+      "explanation": "Az atomok alkotják a molekulákat, a molekulák pedig az anyagot.  ✅ Megoldás: Az atom"
+    },
+    {
+      "question": "Miért változnak a halmazállapotok?",
+      "answers": {
+        "a": "Mert megváltozik a hőmérséklet.",
+        "b": "Mert megváltozik a test tömege.",
+        "c": "Mert a test színe megváltozik."
+      },
+      "correct": "a",
+      "explanation": "A halmazállapotok a hőmérséklet hatására változnak meg. ✅ Megoldás: Mert megváltozik a hőmérséklet."
+    },
+    {
+      "question": "Mi történik a vízmolekulákkal, amikor a víz forr?",
+      "answers": {
+        "a": "Közelebb kerülnek egymáshoz.",
+        "b": "Távolabb kerülnek egymástól, és gőzzé válnak.",
+        "c": "Nem változik a helyzetük."
+      },
+      "correct": "b",
+      "explanation": "A forrás során a vízmolekulák eltávolodnak egymástól, gőzt alkotva. ✅ Megoldás: Távolabb kerülnek egymástól, és gőzzé válnak."
+    }
+  ]
 }

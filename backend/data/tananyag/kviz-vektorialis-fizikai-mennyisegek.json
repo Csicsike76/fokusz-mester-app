@@ -1,8 +1,259 @@
 {
   "title": "Kviz vektorialis fizikai mennyisegek",
   "subject": "fizika",
-  "grade": 0,
-  "category": "premium_course",
+  "grade": 4,
+  "category": "iskolai",
   "description": "Ez a(z) \"Kviz vektorialis fizikai mennyisegek\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "1. Melyik mennyiség vektormennyiség?",
+      "answers": {
+        "a": "Erő",
+        "b": "Tömeg",
+        "c": "Idő"
+      },
+      "correctAnswer": "a",
+      "explanation": "Az erőnek nemcsak nagysága, hanem iránya is van, ezért vektormennyiség. A tömegnek és az időnek csak nagysága van, így azok skalármennyiségek. ✅ Megoldás: Erő."
+    },
+    {
+      "question": "2. Hogyan ábrázoljuk a vektorokat?",
+      "answers": {
+        "a": "Irányított szakasszal (nyíllal).",
+        "b": "Egyetlen számmal.",
+        "c": "Egy körrel."
+      },
+      "correctAnswer": "a",
+      "explanation": "A vektorokat grafikusan irányított szakaszokkal, azaz nyilakkal ábrázoljuk. A nyíl hossza arányos a vektor nagyságával, a nyíl iránya pedig a vektor irányát mutatja. ✅ Megoldás: Irányított szakasszal (nyíllal)."
+    },
+    {
+      "question": "3. Melyik NEM skalármennyiség?",
+      "answers": {
+        "a": "Gyorsulás",
+        "b": "Idő",
+        "c": "Térfogat"
+      },
+      "correctAnswer": "a",
+      "explanation": "A gyorsulásnak van iránya (pl. a Föld középpontja felé), ezért vektormennyiség. Az időnek és a térfogatnak csak nagysága van, ezért skalármennyiségek. ✅ Megoldás: Gyorsulás."
+    },
+    {
+      "question": "4. Két, azonos irányú, 5 N és 10 N nagyságú erő eredője...",
+      "answers": {
+        "a": "...15 N, és az iránya megegyezik az eredeti erők irányával.",
+        "b": "...5 N, és az iránya megegyezik.",
+        "c": "...nem határozható meg."
+      },
+      "correctAnswer": "a",
+      "explanation": "Azonos irányú vektorok összegekor a nagyságokat egyszerűen összeadjuk, az irány pedig változatlan marad. 5 N + 10 N = 15 N. ✅ Megoldás: ...15 N, és az iránya megegyezik az eredeti erők irányával."
+    },
+    {
+      "question": "5. Mi a súly?",
+      "answers": {
+        "a": "A testre ható gravitációs erő.",
+        "b": "A testben lévő anyag mennyisége.",
+        "c": "Egy skalármennyiség."
+      },
+      "correctAnswer": "a",
+      "explanation": "A súly az az erő, amellyel egy égitest (pl. a Föld) vonzza a testet. Mivel erő, ezért vektormennyiség, iránya mindig az égitest középpontja felé mutat. ✅ Megoldás: A testre ható gravitációs erő."
+    },
+    {
+      "question": "6. Melyik állítás írja le a vektort?",
+      "answers": {
+        "a": "Olyan mennyiség, aminek nagysága és iránya is van.",
+        "b": "Olyan mennyiség, aminek csak nagysága van.",
+        "c": "Olyan mennyiség, aminek csak iránya van."
+      },
+      "correctAnswer": "a",
+      "explanation": "Ez a vektormennyiség pontos definíciója. A teljes leírásához mind a nagyságát, mind az irányát meg kell adni. ✅ Megoldás: Olyan mennyiség, aminek nagysága és iránya is van."
+    },
+    {
+      "question": "7. A szél sebessége egy...",
+      "answers": {
+        "a": "...vektormennyiség.",
+        "b": "...skalármennyiség.",
+        "c": "...fizikai jelenség."
+      },
+      "correctAnswer": "a",
+      "explanation": "A szél sebességének nemcsak nagysága van (pl. 30 km/h), hanem iránya is (pl. északnyugati), ezért vektormennyiség. ✅ Megoldás: ...vektormennyiség."
+    },
+    {
+      "question": "8. Ha egy dobozt 20 N erővel tolsz keletre, ez egy...",
+      "answers": {
+        "a": "...vektormennyiség.",
+        "b": "...skalármennyiség.",
+        "c": "...teljesítmény."
+      },
+      "correctAnswer": "a",
+      "explanation": "Az adat megadja az erő nagyságát (20 N) és irányát (keletre), tehát egy vektormennyiséget ír le. ✅ Megoldás: ...vektormennyiség."
+    },
+    {
+      "question": "9. Melyik NEM vektormennyiség?",
+      "answers": {
+        "a": "Erő",
+        "b": "Térfogat",
+        "c": "Elmozdulás"
+      },
+      "correctAnswer": "b",
+      "explanation": "A térfogatnak (pl. 2 liter) csak nagysága van, iránya nincs, ezért skalármennyiség. Az erő és az elmozdulás vektorok. ✅ Megoldás: Térfogat."
+    },
+    {
+      "question": "10. Mi az elmozdulás?",
+      "answers": {
+        "a": "A test által megtett teljes út hossza.",
+        "b": "A test kezdő- és végpontját összekötő irányított szakasz.",
+        "c": "A test sebességének mértéke."
+      },
+      "correctAnswer": "b",
+      "explanation": "Az elmozdulás egy vektormennyiség, amely a mozgás kezdő- és végpontja közötti legrövidebb, egyenes távolságot és annak irányát adja meg. A megtett út skalármennyiség. ✅ Megoldás: A test kezdő- és végpontját összekötő irányított szakasz."
+    },
+    {
+      "question": "11. Két, ellentétes irányú, 10 N és 8 N nagyságú erő eredője...",
+      "answers": {
+        "a": "...18 N, az erőkkel megegyező irányban.",
+        "b": "...2 N, a nagyobb erő irányában.",
+        "c": "...2 N, a kisebb erő irányában."
+      },
+      "correctAnswer": "b",
+      "explanation": "Ellentétes irányú vektorok esetén a nagyságokat kivonjuk egymásból, és az eredő iránya a nagyobb vektor irányával fog megegyezni. 10 N - 8 N = 2 N. ✅ Megoldás: ...2 N, a nagyobb erő irányában."
+    },
+    {
+      "question": "12. A paralelogramma-szabály mire használható?",
+      "answers": {
+        "a": "Skalárok összeadására.",
+        "b": "Két, közös pontból induló vektor összegzésére.",
+        "c": "Területszámításra."
+      },
+      "correctAnswer": "b",
+      "explanation": "A paralelogramma-módszer egy grafikus eljárás, amellyel két, nem egy egyenesbe eső, de közös pontból kiinduló vektort (pl. erőt) lehet összegezni. Az eredő vektor a két vektor által kifeszített paralelogramma átlója lesz. ✅ Megoldás: Két, közös pontból induló vektor összegzésére."
+    },
+    {
+      "question": "13. Melyik állítás igaz?",
+      "answers": {
+        "a": "A tömeg és a súly ugyanaz.",
+        "b": "A súly egy erő, a tömeg egy skalármennyiség.",
+        "c": "A súly skalár, a tömeg vektor."
+      },
+      "correctAnswer": "b",
+      "explanation": "A tömeg (kg) az anyagmennyiség mértéke, skalár. A súly (N) a gravitációs erő, ami a testre hat, tehát vektor. A Holdon például a tömeged ugyanannyi, de a súlyod kisebb. ✅ Megoldás: A súly egy erő, a tömeg egy skalármennyiség."
+    },
+    {
+      "question": "14. Mi a nyíl hossza egy vektor ábrázolásakor?",
+      "answers": {
+        "a": "A vektor iránya.",
+        "b": "A vektor nagysága.",
+        "c": "A vektor támadáspontja."
+      },
+      "correctAnswer": "b",
+      "explanation": "A vektort ábrázoló nyíl hossza arányos a vektor nagyságával. A nagyobb nagyságú vektort hosszabb nyíllal rajzoljuk. A nyíl hegye mutatja a vektor irányát. ✅ Megoldás: A vektor nagysága."
+    },
+    {
+      "question": "15. Melyik csoportban vannak CSAK vektormennyiségek?",
+      "answers": {
+        "a": "Erő, hőmérséklet, súly",
+        "b": "Sebesség, gyorsulás, elmozdulás",
+        "c": "Tömeg, idő, energia"
+      },
+      "correctAnswer": "b",
+      "explanation": "A sebességnek, a gyorsulásnak és az elmozdulásnak is van iránya, ezért mindhárom vektormennyiség. Az 'a' opcióban a hőmérséklet, a 'c' opcióban mindhárom mennyiség skalár. ✅ Megoldás: Sebesség, gyorsulás, elmozdulás."
+    },
+    {
+      "question": "16. Ha egy repülő kelet felé repül 500 km/h sebességgel, és 50 km/h-s szél fúj északról, akkor a repülő...",
+      "answers": {
+        "a": "...lassabban fog haladni.",
+        "b": "...dél-keleti irányba fog haladni.",
+        "c": "...észak-keleti irányba fog haladni."
+      },
+      "correctAnswer": "b",
+      "explanation": "A repülő sebességvektora keletre mutat, a szél sebességvektora pedig délre (északról fúj). A két vektor összege, az eredő sebesség egy dél-keleti irányú vektor lesz. ✅ Megoldás: ...dél-keleti irányba fog haladni."
+    },
+    {
+      "question": "17. Mi az eredő erő?",
+      "answers": {
+        "a": "A leggyengébb erő a rendszerben.",
+        "b": "Az egy testre ható összes erő vektori összege.",
+        "c": "Az erők számtani átlaga."
+      },
+      "correctAnswer": "b",
+      "explanation": "Az eredő erő az az egyetlen erő, amely ugyanazt a hatást fejti ki a testre, mint a rá ható erők együttesen. Az erők vektori összeadásával kapjuk meg. ✅ Megoldás: Az egy testre ható összes erő vektori összege."
+    },
+    {
+      "question": "18. Melyik NEM vektormennyiség?",
+      "answers": {
+        "a": "Sebesség",
+        "b": "Súly",
+        "c": "Munka"
+      },
+      "correctAnswer": "c",
+      "explanation": "A munka, bár az erő (vektor) és az elmozdulás (vektor) alapján számoljuk, maga skalármennyiség, nincs iránya. ✅ Megoldás: Munka."
+    },
+    {
+      "question": "19. Mit jelent, ha két vektor egyenlő?",
+      "answers": {
+        "a": "Csak a nagyságuk egyenlő.",
+        "b": "Csak az irányuk egyenlő.",
+        "c": "A nagyságuk és az irányuk is egyenlő."
+      },
+      "correctAnswer": "c",
+      "explanation": "Két vektor csak akkor tekinthető egyenlőnek, ha mind a nagyságuk, mind az irányuk tökéletesen megegyezik. ✅ Megoldás: A nagyságuk és az irányuk is egyenlő."
+    },
+    {
+      "question": "20. Egy autó 90 km/h sebességgel halad. Ez az adat...",
+      "answers": {
+        "a": "...az autó sebességvektora.",
+        "b": "...az autó gyorsulása.",
+        "c": "...az autó sebességének nagysága (skalár)."
+      },
+      "correctAnswer": "c",
+      "explanation": "Ez az adat csak a sebesség nagyságát adja meg. Ahhoz, hogy vektorként kezeljük, az irányát is ismernünk kellene (pl. '90 km/h-val észak felé'). ✅ Megoldás: ...az autó sebességének nagysága (skalár)."
+    },
+    {
+      "question": "21. Ha egy testre két egyenlő nagyságú, de ellentétes irányú erő hat, akkor az eredő erő...",
+      "answers": {
+        "a": "...az erők összegének kétszerese.",
+        "b": "...az egyik erővel egyenlő.",
+        "c": "...nulla."
+      },
+      "correctAnswer": "c",
+      "explanation": "Ha két erő nagysága megegyezik, de irányuk ellentétes, akkor a hatásuk pontosan kioltja egymást. A vektori összegük, azaz az eredő erő nulla lesz. ✅ Megoldás: ...nulla."
+    },
+    {
+      "question": "22. Mi a különbség a sebesség és a sebesség nagysága között?",
+      "answers": {
+        "a": "Nincs különbség.",
+        "b": "A sebesség nagysága mindig nagyobb.",
+        "c": "A sebesség vektor (van iránya), a sebesség nagysága skalár."
+      },
+      "correctAnswer": "c",
+      "explanation": "A fizikában a sebesség egy vektormennyiség, amelynek nagysága és iránya is van. A sebesség nagysága (amit pl. az autó km-órája mutat) egy skalármennyiség, ami csak a mozgás gyorsaságát jelöli. ✅ Megoldás: A sebesség vektor (van iránya), a sebesség nagysága skalár."
+    },
+    {
+      "question": "23. Mi a Δv jelölés jelentése a gyorsulás képletében?",
+      "answers": {
+        "a": "Átlagsebesség",
+        "b": "Pálya hossza",
+        "c": "Sebességváltozás"
+      },
+      "correctAnswer": "c",
+      "explanation": "A Δv a sebesség változását jelöli."
+    },
+    {
+      "question": "24. Mi a gyorsulás jele?",
+      "answers": {
+        "a": "s",
+        "b": "v",
+        "c": "a"
+      },
+      "correctAnswer": "c",
+      "explanation": "A gyorsulás jele: a."
+    },
+    {
+      "question": "25. Melyik esetben van a legnagyobb gyorsulás?",
+      "answers": {
+        "a": "Motor, ami 2 s alatt gyorsul 10 m/s-ra",
+        "b": "Bicikli, ami 5 s alatt gyorsul 10 m/s-ra",
+        "c": "Autó, ami 10 s alatt gyorsul 10 m/s-ra"
+      },
+      "correctAnswer": "a",
+      "explanation": "A gyorsulás nagyobb, ha rövidebb idő alatt éri el a sebességet."
+    }
+  ]
 }

@@ -1,8 +1,209 @@
 {
-  "title": "Kviz gyoktelenites",
+  "title": "Kvíz gyöktelenites",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz gyoktelenites\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "question": "Mi a gyöktelenítés célja?",
+      "answers": {
+        "a": "A tört alján lévő gyök eltávolítása.",
+        "b": "A tört tetején lévő gyök eltávolítása.",
+        "c": "A gyökök összeadása."
+      },
+      "correct": "a",
+      "explanation": "A gyöktelenítés azt jelenti, hogy a tört alján (nevezőjében) nem szeretnénk gyökjelet látni. A gyöktelenítés célja, hogy a tört aljáról eltüntessük a gyököt. ✅ Megoldás: A tört alján lévő gyök eltávolítása."
+    },
+    {
+      "question": "Hogyan gyöktelenítjük az 1 / √2 törtet?",
+      "answers": {
+        "a": "Megszorozzuk a törtet a  √2 -vel.",
+        "b": "Elosztjuk a törtet a  √2 -vel.",
+        "c": "Hozzáadunk a tört számlálójához és nevezőjéhez is a  √2 -t."
+      },
+      "correct": "a",
+      "explanation": "Ha a tört alján gyök van, akkor meg kell szorozni a törtet úgy, hogy a gyök eltűnjön. Ehhez a számlálót és a nevezőt is √2 -vel szorozzuk. ✅ Megoldás: Megszorozzuk a törtet a  √2 -vel."
+    },
+    {
+      "question": "Mi a 1 / √3  gyöktelenített alakja?",
+      "answers": {
+        "a": "1/3",
+        "b": "√3 / 3",
+        "c": "√3 / 1"
+      },
+      "correct": "b",
+      "explanation": "Szorozzuk meg a törtet √3-mal, hogy a gyök eltűnjön a nevezőből (alulról). Így a  1 / √3  *  √3 / √3  =  √3 / 3  ✅ Megoldás:  √3 / 3"
+    },
+    {
+      "question": "Hogyan gyöktelenítjük a  2 / √5  törtet?",
+      "answers": {
+        "a": "Megszorozzuk a számlálót és a nevezőt √5-tel.",
+        "b": "Elosztjuk a számlálót és a nevezőt √5-tel.",
+        "c": "Hozzáadjuk a számlálóhoz és a nevezőhöz √5-t."
+      },
+      "correct": "a",
+      "explanation": "Szorozzuk a számlálót (felül) és nevezőjét (alul)  √5-tel, hogy a gyökjelet eltávolítsuk az aljáról.  ✅ Megoldás: Megszorozzuk a számlálót és a nevezőt √5-tel."
+    },
+    {
+      "question": "Mi a  3 / √7  gyöktelenített alakja?",
+      "answers": {
+        "a": "3/7",
+        "b": "3√7 / 7",
+        "c": "√7 / 3"
+      },
+      "correct": "b",
+      "explanation": "A gyöktelenítéskor a számlálót és a nevezőt √7-tel szorozzuk.  3 / √7  *  √7 / √7 =  3√7 / 7. ✅ Megoldás:  3√7 / 7"
+    },
+    {
+      "question": "Milyen szabályt használunk a gyöktelenítéshez?",
+      "answers": {
+        "a": "√a * √a = a",
+        "b": "√a + √a = 2√a",
+        "c": "√a - √a = 0"
+      },
+      "correct": "a",
+      "explanation": "A gyöktelenítés lényege, hogy megszorozzuk a gyököt önmagával. Ezért használjuk ezt a szabályt: √a * √a = a. ✅ Megoldás: √a * √a = a."
+    },
+    {
+      "question": "Mi a  √2 / √2  egyszerűsített alakja?",
+      "answers": {
+        "a": "2",
+        "b": "1",
+        "c": "√2"
+      },
+      "correct": "b",
+      "explanation": "Ha egy törtben a fenti szám (számláló) és a lenti szám (nevező) ugyanaz, akkor az eredmény 1. ✅ Megoldás: 1."
+    },
+    {
+      "question": "Mi a  4 / √8  tört gyöktelenített alakja?",
+      "answers": {
+        "a": "4√8 / 8",
+        "b": "4√2 / 4",
+        "c": "√2"
+      },
+      "correct": "c",
+      "explanation": "Szorozzuk meg a számlálót és a nevezőt √8-cal, majd egyszerűsítsünk.  4 / √8  *  √8 / √8 =  4√8 / 8 =  8√2 / 8 = √2. ✅ Megoldás: √2"
+    },
+    {
+      "question": "Melyik a helyes lépés a  5 / √10  gyöktelenítéséhez?",
+      "answers": {
+        "a": "Szorozzuk meg a számlálót és a nevezőt √5-tel.",
+        "b": "Szorozzuk meg a számlálót és a nevezőt √10-zel.",
+        "c": "Elosztjuk a számlálót és a nevezőt √10-zel."
+      },
+      "correct": "b",
+      "explanation": "A nevezőben lévő gyök eltávolításához a számlálót és a nevezőt is √10-zel kell megszorozni. ✅ Megoldás: Szorozzuk meg a számlálót és a nevezőt √10-zel."
+    },
+    {
+      "question": "Mi a  5 / √10  gyöktelenített alakja?",
+      "answers": {
+        "a": "5√10 / 10",
+        "b": "√5 / 2",
+        "c": "√10 / 2"
+      },
+      "correct": "c",
+      "explanation": "Szorozzuk meg a számlálót és a nevezőt √10-zel:  5 / √10  *  √10 / √10 =  5√10 / 10.  Ezt egyszerűsítve:  √10 / 2. ✅ Megoldás: √10 / 2"
+    },
+    {
+      "question": "Melyik tört van gyöktelenített alakban?",
+      "answers": {
+        "a": "1 / √4",
+        "b": "√3 / 2",
+        "c": "2 / √5"
+      },
+      "correct": "b",
+      "explanation": "A gyöktelenített alakban a tört alján (nevezőjében) nem lehet gyök. A  √3 / 2  törtnek nincs gyöke az alján. ✅ Megoldás: √3 / 2"
+    },
+    {
+      "question": "Mi a  6 / √12  gyöktelenített alakja?",
+      "answers": {
+        "a": "6√12 / 12",
+        "b": "6√3 / 6",
+        "c": "√3"
+      },
+      "correct": "c",
+      "explanation": "Szorozzuk meg a számlálót és a nevezőt √12-vel. Eztán egyszerűsítsünk:  6 / √12  *  √12 / √12 =  6√12 / 12 =  12√3 / 12 = √3. ✅ Megoldás: √3"
+    },
+    {
+      "question": "Mi a  √5 / √5  tört egyszerűsített alakja?",
+      "answers": {
+        "a": "√5",
+        "b": "1",
+        "c": "5"
+      },
+      "correct": "b",
+      "explanation": "Ha egy törtben a fenti szám (számláló) és a lenti szám (nevező) ugyanaz, akkor az eredmény 1. ✅ Megoldás: 1."
+    },
+    {
+      "question": "Mi a  1 / √a  gyöktelenített alakja?",
+      "answers": {
+        "a": "1/a",
+        "b": "√a / a",
+        "c": "√a"
+      },
+      "correct": "b",
+      "explanation": "Szorozzuk meg a számlálót és a nevezőt √a-val:  1 / √a  *  √a / √a =  √a / a. ✅ Megoldás: √a / a"
+    },
+    {
+      "question": "Mi a  3 / √20  gyöktelenített alakja?",
+      "answers": {
+        "a": "3√20 / 20",
+        "b": "3√5 / 10",
+        "c": "3√2 / 4"
+      },
+      "correct": "b",
+      "explanation": "Szorozzuk meg a számlálót és a nevezőt √20-szal. Ezt követően egyszerűsítünk:  3 / √20  *  √20 / √20 =  3√20 / 20 = 6√5 / 20 =  3√5 / 10. ✅ Megoldás:  3√5 / 10"
+    },
+    {
+      "question": "Melyik törtet kell gyökteleníteni?",
+      "answers": {
+        "a": "4/5",
+        "b": "√3 / 4",
+        "c": "7 / √11"
+      },
+      "correct": "c",
+      "explanation": "A gyöktelenítésre csak akkor van szükség, ha a nevezőben gyök van. A  7 / √11  tört nevezőjében  √11  szerepel, ezért ezt kell gyökteleníteni. ✅ Megoldás: 7 / √11"
+    },
+    {
+      "question": "Mi a  2√3 / √3  egyszerűsített alakja?",
+      "answers": {
+        "a": "2",
+        "b": "√3",
+        "c": "6"
+      },
+      "correct": "a",
+      "explanation": "Ha a számlálóban és a nevezőben is ugyanaz a gyök van, akkor azok kiesnek. Így a  √3 /  √3  = 1,  ezért az eredmény  2 * 1 = 2. ✅ Megoldás: 2."
+    },
+    {
+      "question": "Mi a  1 / (2 + √3)  tört gyöktelenítése?",
+      "answers": {
+        "a": "Megszorozzuk a számlálót és a nevezőt (2 - √3)-mal.",
+        "b": "Megszorozzuk a számlálót és a nevezőt (2 + √3)-mal.",
+        "c": "Nem kell gyökteleníteni."
+      },
+      "correct": "a",
+      "explanation": "Ha a nevezőben egy szám és egy gyök összege vagy különbsége van, akkor a konjugáltjával kell szorozni. A konjugált azt jelenti, hogy a két tag közötti műveleti jel ellentétesére változik. A (2+√3) konjugáltja a (2-√3). ✅ Megoldás: Megszorozzuk a számlálót és a nevezőt (2 - √3)-mal."
+    },
+    {
+      "question": "Mi a  1 / (2 + √3)  tört gyöktelenített alakja?",
+      "answers": {
+        "a": "2 - √3",
+        "b": "2 + √3",
+        "c": "(2 - √3) / 7"
+      },
+      "correct": "a",
+      "explanation": "Szorozzuk meg a számlálót és a nevezőt  (2 - √3)-mal:  1 / (2 + √3)  *  (2 - √3) / (2 - √3) =  (2 - √3) / (4 - 3) = 2 - √3. ✅ Megoldás: 2 - √3"
+    },
+    {
+      "question": "Mi a  3 / (3 - √2)  tört gyöktelenített alakja?",
+      "answers": {
+        "a": "3 + √2",
+        "b": "(3(3 + √2)) / 7",
+        "c": "3 - √2"
+      },
+      "correct": "b",
+      "explanation": "Szorozzuk meg a számlálót és a nevezőt (3 + √2)-mal:  3 / (3 - √2)  *  (3 + √2) / (3 + √2) = (3(3 + √2)) / (9 - 2) =  (3(3 + √2)) / 7. ✅ Megoldás: (3(3 + √2)) / 7"
+    }
+  ]
 }

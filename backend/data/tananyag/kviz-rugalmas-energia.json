@@ -3,6 +3,257 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz rugalmas energia\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz rugalmas energia\" című tananyag.",
+  "questions": [
+    {
+      "question": "Melyik testnek van rugalmas energiája?",
+      "answers": {
+        "a": "Egy megfeszített íjnak.",
+        "b": "Egy asztalon álló könyvnek.",
+        "c": "Egy szabadon eső kőnek."
+      },
+      "correct": "a",
+      "explanation": "A rugalmas (potenciális) energia a rugalmasan megváltoztatott alakú testekben tárolt energia. A megfeszített íjban ilyen energia van, ami a nyílvessző kilövéséhez szükséges munkát végzi. ✅ Megoldás: Egy megfeszített íjnak."
+    },
+    {
+      "question": "Hogyan változik a mozgási energia, ha a test tömege a duplájára nő, de a sebessége ugyanaz marad?",
+      "answers": {
+        "a": "A kétszeresére nő.",
+        "b": "Négyszeresére nő.",
+        "c": "Nem változik."
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia képlete: E_kin = ½ ⋅ m ⋅ v². Mivel az energia egyenesen arányos a tömeggel (m), ha a tömeg duplázódik, a mozgási energia is a kétszeresére nő. ✅ Megoldás: A kétszeresére nő."
+    },
+    {
+      "question": "Két autó közül melyiknek nagyobb a mozgási energiája, ha a tömegük azonos, de az egyik gyorsabban megy?",
+      "answers": {
+        "a": "A gyorsabbnak.",
+        "b": "A lassabbnak.",
+        "c": "Egyenlő."
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia a sebesség négyzetével arányos. Azonos tömeg esetén a nagyobb sebességű testnek mindig nagyobb a mozgási energiája. ✅ Megoldás: A gyorsabbnak."
+    },
+    {
+      "question": "Milyen munkát kell végezni egy testen, hogy a mozgási energiája megnőjön?",
+      "answers": {
+        "a": "Pozitív (gyorsító) munkát.",
+        "b": "Negatív (fékező) munkát.",
+        "c": "Nulla munkát."
+      },
+      "correct": "a",
+      "explanation": "A munkatétel szerint a munkavégzés megváltoztatja a test mozgási energiáját. Ahhoz, hogy az energia növekedjen, pozitív munkát kell végezni, azaz gyorsítani kell a testet. ✅ Megoldás: Pozitív (gyorsító) munkát."
+    },
+    {
+      "question": "Egy 2 kg tömegű test 10 m/s sebességgel mozog. Mekkora a mozgási energiája?",
+      "answers": {
+        "a": "100 J",
+        "b": "20 J",
+        "c": "40 J"
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia képlete E_kin = ½ ⋅ m ⋅ v². Behelyettesítve: E_kin = 0,5 ⋅ 2 kg ⋅ (10 m/s)² = 1 ⋅ 100 = 100 J. ✅ Megoldás: 100 J."
+    },
+    {
+      "question": "Melyik energiafajta függ a test sebességétől?",
+      "answers": {
+        "a": "Mozgási energia",
+        "b": "Helyzeti energia",
+        "c": "Rugalmas energia"
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia definíció szerint a mozgásból származó energia, ezért közvetlenül függ a test sebességétől. A helyzeti energia a magasságtól, a rugalmas energia az alakváltozástól függ. ✅ Megoldás: Mozgási energia."
+    },
+    {
+      "question": "Milyen energiaalakulás történik egy guruló golyó fékezésekor?",
+      "answers": {
+        "a": "A mozgási energia hőenergiává alakul.",
+        "b": "A hőenergia mozgási energiává alakul.",
+        "c": "A helyzeti energia hőenergiává alakul."
+      },
+      "correct": "a",
+      "explanation": "Fékezéskor a súrlódási erő negatív munkát végez. Ez a munka a test mozgási energiáját csökkenti, és az energiaveszteség hő formájában jelenik meg (a fék és a kerék felmelegszik). ✅ Megoldás: A mozgási energia hőenergiává alakul."
+    },
+    {
+      "question": "Mi a kinetikus energia?",
+      "answers": {
+        "a": "A mozgási energia másik neve.",
+        "b": "A helyzeti energia másik neve.",
+        "c": "A hőenergia másik neve."
+      },
+      "correct": "a",
+      "explanation": "A kinetikus energia a mozgási energia tudományos elnevezése, a görög 'kinetikos' (mozgásra vonatkozó) szóból ered. ✅ Megoldás: A mozgási energia másik neve."
+    },
+    {
+      "question": "Milyen energiája van egy nyugalomban lévő testnek?",
+      "answers": {
+        "a": "Csak mozgási energiája.",
+        "b": "Nincs mozgási energiája.",
+        "c": "Mindig van mozgási energiája."
+      },
+      "correct": "b",
+      "explanation": "A mozgási energia a mozgásból származik. Ha egy test nyugalomban van, a sebessége nulla, ezért a mozgási energiája is nulla. Helyzeti vagy más energiája ettől még lehet. ✅ Megoldás: Nincs mozgási energiája."
+    },
+    {
+      "question": "Melyik két mennyiségtől függ a mozgási energia?",
+      "answers": {
+        "a": "A test súlyától és magasságától.",
+        "b": "A test tömegétől és sebességétől.",
+        "c": "A test térfogatától és sűrűségétől."
+      },
+      "correct": "b",
+      "explanation": "A mozgási energia képlete (E_kin = ½ ⋅ m ⋅ v²) egyértelműen mutatja, hogy az értékét a test tömege (m) és a sebességének négyzete (v²) határozza meg. ✅ Megoldás: A test tömegétől és sebességétől."
+    },
+    {
+      "question": "Ha egy testet 2-szer akkora magasságra emelünk, hányszorosára nő a helyzeti energiája?",
+      "answers": {
+        "a": "kétszeresére",
+        "b": "négyszeresére",
+        "c": "nem változik"
+      },
+      "correct": "a",
+      "explanation": "A helyzeti energia egyenesen arányos a magassággal.  ✅ Megoldás: Kétszeresére nő."
+    },
+    {
+      "question": "Ha egy testet a földről felemelünk, milyen munkát végzünk?",
+      "answers": {
+        "a": "Negatív.",
+        "b": "Pozitív.",
+        "c": "Nem végzünk munkát."
+      },
+      "correct": "b",
+      "explanation": "A Föld vonzása ellenében végzett munka pozitív, mert az erő és az elmozdulás ellentétes irányú. ✅ Megoldás: Pozitív."
+    },
+    {
+      "question": "Mi történik, ha egy test a pályáján lefelé halad?",
+      "answers": {
+        "a": "Nő.",
+        "b": "Csökken.",
+        "c": "Nem változik."
+      },
+      "correct": "b",
+      "explanation": "A test a magasságát veszti, így a helyzeti energiája csökken. ✅ Megoldás: Csökken."
+    },
+    {
+      "question": "Milyen a helyzeti energia egy a talajon fekvő testnél?",
+      "answers": {
+        "a": "Nagyon nagy.",
+        "b": "Nulla.",
+        "c": "Kicsi, de nem nulla."
+      },
+      "correct": "b",
+      "explanation": "A talajon fekvő testnek nincs helyzeti energiája, mert nincs a talajhoz képest magasban.  ✅ Megoldás: Nulla"
+    },
+    {
+      "question": "Ha egy 1 kg-os test 10 m/s sebességgel halad, mennyi a mozgási energiája?",
+      "answers": {
+        "a": "10 J",
+        "b": "25 J",
+        "c": "50 J"
+      },
+      "correct": "c",
+      "explanation": "Em = (1/2) * m * v² = (1/2) * 1 kg * (10 m/s)² = 50 J. ✅ Megoldás: 50 J"
+    },
+    {
+      "question": "Mi a súrlódás hatása a mechanikai energiára?",
+      "answers": {
+        "a": "Növeli a mechanikai energiát, mert hőt termel.",
+        "b": "Nem befolyásolja a mechanikai energiát.",
+        "c": "Csökkenti a mechanikai energiát, hővé alakítja."
+      },
+      "correct": "c",
+      "explanation": "A súrlódás csökkenti a mechanikai energiát, mert az energia hővé alakul. ✅ Megoldás: Csökkenti a mechanikai energiát, hővé alakítja."
+    },
+    {
+      "question": "Ha egy 100 N súlyú test 2 m² felületen fekszik a padlón. Mekkora nyomást gyakorol a padlóra?",
+      "answers": {
+        "a": "50 Pa",
+        "b": "200 Pa",
+        "c": "0.02 Pa"
+      },
+      "correct": "a",
+      "explanation": "p = F / A = 100 N / 2 m² = 50 Pa. ✅ Megoldás: 50 Pa."
+    },
+    {
+      "question": "Melyik energiafajta köthető a helyzeti energiához?",
+      "answers": {
+        "a": "Hőenergia",
+        "b": "Kémiai energia",
+        "c": "Mozgási energia"
+      },
+      "correct": "c",
+      "explanation": "A leeső testek helyzeti energiája mozgási energiává alakul. ✅ Megoldás: Mozgási energia."
+    },
+    {
+      "question": "Mi történik, ha a testek ütköznek?",
+      "answers": {
+        "a": "Több energia lesz.",
+        "b": "A mozgási energia csökken, hővé alakulhat.",
+        "c": "Az energia megmarad."
+      },
+      "correct": "b",
+      "explanation": "Az ütközés során a mechanikai energia egy része hővé alakulhat a súrlódás miatt. ✅ Megoldás: A mozgási energia hővé és hangenergiává alakul."
+    },
+    {
+      "question": "Ha egy 3 kg-os test 2 méter magasan van, mekkora a helyzeti energiája?",
+      "answers": {
+        "a": "6 J",
+        "b": "58.86 J",
+        "c": "12 J"
+      },
+      "correct": "b",
+      "explanation": "Eh = m * g * h = 3 kg * 9,81 m/s² * 2 m ≈ 58.86 J.  ✅ Megoldás: 58.86 J"
+    },
+    {
+      "question": "Miért veszélyes a túlzott sebesség a közúti közlekedésben?",
+      "answers": {
+        "a": "Mert a mozgási energia a sebességgel nő, a fékút megnő.",
+        "b": "Mert a gyorshajtás szabálytalan.",
+        "c": "Mert a jármű instabillá válik."
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia a sebesség négyzetével arányos. Ha megnő a sebesség, a mozgási energia is jelentősen nő, ami miatt a fékezéshez nagyobb erőre és hosszabb fékútra van szükség. ✅ Megoldás: Mert a mozgási energia a sebességgel nő, a fékút megnő."
+    },
+    {
+      "question": "Ha egy test 2-szer nagyobb tömegű, és a sebessége azonos, akkor a mozgási energiája...",
+      "answers": {
+        "a": "Kétszer akkora lesz.",
+        "b": "Négyszer akkora lesz.",
+        "c": "Ugyanannyi lesz."
+      },
+      "correct": "a",
+      "explanation": "A mozgási energia egyenesen arányos a tömeggel.  ✅ Megoldás: Kétszer akkora lesz."
+    },
+    {
+      "question": "Mi a munkatétel (ismétlés)?",
+      "answers": {
+        "a": "A munka mindig negatív.",
+        "b": "A munka egyenlő a test mozgási energiájának megváltozásával.",
+        "c": "A munka és a teljesítmény ugyanaz."
+      },
+      "correct": "b",
+      "explanation": "A munkatétel szerint a testre ható erők munkája egyenlő a test mozgási energiájának megváltozásával.  ✅ Megoldás: A testen végzett munka egyenlő a test mozgási energiájának megváltozásával."
+    },
+    {
+      "question": "Melyik energiát hasznosítja a szélkerék?",
+      "answers": {
+        "a": "Kémiai energiát.",
+        "b": "A Nap energiáját.",
+        "c": "A levegő mozgási energiáját."
+      },
+      "correct": "c",
+      "explanation": "A szél a levegő áramlása, tehát a levegő mozgási energiája van. A szélkerék ezt a mozgási energiát alakítja át forgási, majd elektromos energiává. ✅ Megoldás: A levegő mozgási energiáját."
+    },
+    {
+      "question": "Ha egy test mozgási energiája 0, mit mondhatunk a sebességéről?",
+      "answers": {
+        "a": "Nulla a sebessége.",
+        "b": "Nagy a sebessége.",
+        "c": "A sebessége folyamatosan változik."
+      },
+      "correct": "a",
+      "explanation": "Ha a test mozgási energiája nulla, akkor a sebessége is nulla. ✅ Megoldás: Nulla a sebessége."
+    }
+  ]
 }

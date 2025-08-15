@@ -3,6 +3,247 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Kviz tomeg\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Kvíz tömeg\" című tananyag.",
+  "questions": [
+    {
+      "question": "Mi a tömeg?",
+      "answers": {
+        "a": "A test mérete.",
+        "b": "Az anyag mennyisége egy testben.",
+        "c": "A test súlya."
+      },
+      "correct": "b",
+      "explanation": "A tömeg (m) az anyagmennyiség mértéke, ami azt mutatja meg, hogy mennyi anyag van egy testben. ✅ Megoldás: Az anyag mennyisége egy testben."
+    },
+    {
+      "question": "Milyen mértékegységben mérjük a tömeget?",
+      "answers": {
+        "a": "méter (m)",
+        "b": "kilogramm (kg)",
+        "c": "másodperc (s)"
+      },
+      "correct": "b",
+      "explanation": "A tömeg (m) SI alapmértékegysége a kilogramm (kg). ✅ Megoldás: kilogramm (kg)"
+    },
+    {
+      "question": "Mennyi 1 kg grammban?",
+      "answers": {
+        "a": "1000 g",
+        "b": "100 g",
+        "c": "10 g"
+      },
+      "correct": "a",
+      "explanation": "1 kilogramm 1000 gramm. ✅ Megoldás: 1000 g"
+    },
+    {
+      "question": "Mi a dekagramm jele?",
+      "answers": {
+        "a": "dg",
+        "b": "dag",
+        "c": "dk"
+      },
+      "correct": "b",
+      "explanation": "A dekagramm jele: dag. ✅ Megoldás: dag"
+    },
+    {
+      "question": "Mennyi 50 dkg grammban?",
+      "answers": {
+        "a": "500 g",
+        "b": "50 g",
+        "c": "5 g"
+      },
+      "correct": "a",
+      "explanation": "1 dkg = 10 g.  50 dkg = 50 * 10 = 500 g. ✅ Megoldás: 500 g"
+    },
+    {
+      "question": "Mennyi 1 kg dkg-ban?",
+      "answers": {
+        "a": "100 dkg",
+        "b": "1000 dkg",
+        "c": "10 dkg"
+      },
+      "correct": "a",
+      "explanation": "1 kg = 1000 g, és 1 dkg = 10 g. Ezért 1 kg = 1000 g / 10 g/dkg = 100 dkg. ✅ Megoldás: 100 dkg"
+    },
+    {
+      "question": "Mi a mérleg?",
+      "answers": {
+        "a": "A hőmérséklet mérésére szolgál.",
+        "b": "Az idő mérésére szolgál.",
+        "c": "A tömeg mérésére szolgál."
+      },
+      "correct": "c",
+      "explanation": "A mérleg a tömeg mérésére szolgáló eszköz. ✅ Megoldás: A tömeg mérésére szolgál."
+    },
+    {
+      "question": "Mi a nehezebb: 1 kg vas vagy 1 kg toll?",
+      "answers": {
+        "a": "A vas, mert nehezebb az anyaga.",
+        "b": "A toll, mert nagyobb a térfogata.",
+        "c": "Egyforma nehezek."
+      },
+      "correct": "c",
+      "explanation": "Mivel mindkét test 1 kg tömegű, ezért egyforma nehezek. A tömeg nem függ a anyagtól. ✅ Megoldás: Egyforma nehezek."
+    },
+    {
+      "question": "Mi a tömeg? (ismétlés)",
+      "answers": {
+        "a": "A test mérete.",
+        "b": "Az anyagmennyiség.",
+        "c": "A test gyorsulása."
+      },
+      "correct": "b",
+      "explanation": "A tömeg az anyagmennyiség mértéke. ✅ Megoldás: Az anyagmennyiség."
+    },
+    {
+      "question": "Mennyi 30 dkg kg-ban?",
+      "answers": {
+        "a": "0,3 kg",
+        "b": "3 kg",
+        "c": "300 kg"
+      },
+      "correct": "a",
+      "explanation": "1 dkg = 0,01 kg, ezért 30 dkg = 30 * 0,01 kg = 0,3 kg. ✅ Megoldás: 0,3 kg"
+    },
+    {
+      "question": "Melyik a legkisebb egység?",
+      "answers": {
+        "a": "gramm",
+        "b": "kilogramm",
+        "c": "dekagramm"
+      },
+      "correct": "a",
+      "explanation": "A gramm a legkisebb tömeg mértékegység a felsoroltak közül. 1 kg = 1000 g, 1 dkg = 10 g.  ✅ Megoldás: gramm"
+    },
+    {
+      "question": "Mennyi 250 dkg kilogrammban? (ismétlés)",
+      "answers": {
+        "a": "25 kg",
+        "b": "2.5 kg",
+        "c": "0.25 kg"
+      },
+      "correct": "b",
+      "explanation": "250 dkg = 250/100 kg = 2.5 kg. ✅ Megoldás: 2.5 kg"
+    },
+    {
+      "question": "Mit mutat a mérleg?",
+      "answers": {
+        "a": "A súlyt.",
+        "b": "A térfogatot.",
+        "c": "A tömeget."
+      },
+      "correct": "c",
+      "explanation": "A mérleg a tömeget méri. ✅ Megoldás: A tömeget."
+    },
+    {
+      "question": "Mi a viszony a gramm és a kilogramm között? (ismétlés)",
+      "answers": {
+        "a": "1 kg = 100 g",
+        "b": "1 g = 1000 kg",
+        "c": "1 kg = 1000 g"
+      },
+      "correct": "c",
+      "explanation": "1 kg = 1000 g.  ✅ Megoldás: 1 kg = 1000 g."
+    },
+    {
+      "question": "Melyik több: 2 kg vagy 1800 g?",
+      "answers": {
+        "a": "2 kg",
+        "b": "1800 g",
+        "c": "egyenlőek"
+      },
+      "correct": "a",
+      "explanation": "2 kg = 2000 g. 2000 g > 1800 g.  ✅ Megoldás: 2 kg a több"
+    },
+    {
+      "question": "Hogyan válthatunk át a dkg-ról kg-ra?",
+      "answers": {
+        "a": "10-zel osztunk",
+        "b": "100-zal osztunk",
+        "c": "1000-rel osztunk"
+      },
+      "correct": "b",
+      "explanation": "1 kg = 100 dkg. Ezért dkg-ról kg-ra váltáshoz 100-zal kell osztani. ✅ Megoldás: 100-zal osztunk"
+    },
+    {
+      "question": "Ha egy csomagban 30 dkg liszt van, mennyi liszt van benne grammban?",
+      "answers": {
+        "a": "3000 g",
+        "b": "300 g",
+        "c": "30 g"
+      },
+      "correct": "b",
+      "explanation": "1 dkg = 10 g. 30 dkg = 30 * 10 g = 300 g. ✅ Megoldás: 300 g"
+    },
+     {
+      "question": "Mennyi 2,5 kg grammban? (ismétlés)",
+      "answers": {
+        "a": "1500 g",
+        "b": "150 g",
+        "c": "2500 g"
+      },
+      "correct": "c",
+      "explanation": "1 kg = 1000 g, így 2,5 kg = 2,5 * 1000 g = 2500 g. ✅ Megoldás: 2500 g"
+    },
+    {
+      "question": "Melyik test tömege a nagyobb: 200 dkg liszt, vagy 2 kg liszt?",
+      "answers": {
+        "a": "200 dkg",
+        "b": "2 kg",
+        "c": "egyenlőek"
+      },
+      "correct": "c",
+      "explanation": "200 dkg = 2 kg. Ezért a két tömeg egyenlő.  ✅ Megoldás: Egyenlőek"
+    },
+    {
+      "question": "Mi a 2000 g  és a 2 kg tömegeinek viszonya?",
+      "answers": {
+        "a": "A 2000 g nagyobb.",
+        "b": "A 2 kg nagyobb.",
+        "c": "Egyenlőek."
+      },
+      "correct": "c",
+      "explanation": "2000 g = 2 kg, a két tömeg nagysága egyenlő. ✅ Megoldás: Egyenlőek"
+    },
+    {
+      "question": "Ha egy testet a Holdon mérünk, a tömege...",
+      "answers": {
+        "a": "...ugyanakkora marad, mint a Földön.",
+        "b": "...kisebb lesz.",
+        "c": "...a testsúlyával egyenlő."
+      },
+      "correct": "a",
+      "explanation": "A tömeg az anyagmennyiség mértéke, ami független a helytől. A súly viszont függ a gravitációtól. ✅ Megoldás: Ugyanakkora marad, mint a Földön."
+    },
+    {
+      "question": "Ha egy test 20 kg tömegű, mennyi a súlya a Földön?",
+      "answers": {
+        "a": "kb. 2 N",
+        "b": "kb. 200 N",
+        "c": "kb. 2000 N"
+      },
+      "correct": "b",
+      "explanation": "A súly = tömeg * nehézségi gyorsulás, a Földön kb. 10 N/kg. S ≈ 20 kg * 10 N/kg = 200 N.  ✅ Megoldás: Kb. 200 N"
+    },
+    {
+      "question": "Ha egy test súlya 30 N, a tömege kb. mennyi?",
+      "answers": {
+        "a": "3 kg",
+        "b": "300 kg",
+        "c": "300 g"
+      },
+      "correct": "a",
+      "explanation": "S ≈ m * 10 N/kg. Ebből m ≈ S / 10 = 30 N / 10 N/kg = 3 kg.  ✅ Megoldás: Kb. 3 kg"
+    },
+    {
+      "question": "Mi a szilárd anyag tömegének a megmérésének legpontosabb módja?",
+      "answers": {
+        "a": "Lábbal megbecsülni.",
+        "b": "Kézzel felbecsülni.",
+        "c": "Mérleggel kimérni."
+      },
+      "correct": "c",
+      "explanation": "A tömeget mindig a mérleggel mérjük. ✅ Megoldás: Mérleggel kimérni"
+    }
+  ]
 }
