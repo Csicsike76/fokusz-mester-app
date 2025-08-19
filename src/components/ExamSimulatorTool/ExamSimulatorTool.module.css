@@ -1,0 +1,70 @@
+:root {
+    --kek: #005A9C; --piros: #CD2A3E; --zold: #436F4D; --feher: #FFFFFF;
+    --sotet: #2c3e50; --vilagos-szurke: #f0f4f8; --szoveg: #34495e;
+    --card-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.simulatorCard { 
+    background: var(--feher); 
+    border-radius: 16px; 
+    box-shadow: var(--card-shadow); 
+    overflow: hidden; 
+    border-top: 8px solid var(--zold);
+    color: var(--szoveg);
+    max-width: 700px;
+    margin: 2rem auto;
+}
+.simulatorHeader { padding: 2rem; text-align: center; }
+.icon { font-size: 4rem; line-height: 1; }
+.simulatorHeader h1 { font-family: 'Roboto Slab', serif; color: var(--sotet); margin: 1rem 0 0.5rem 0; }
+.simulatorHeader p { color: #6c757d; max-width: 500px; margin: auto; }
+.simulatorBody { padding: 0 2rem 2rem 2rem; }
+.formGroup { margin-bottom: 1.5rem; }
+.formGroup label { display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 1.2rem; }
+.formGroup select, .formGroup input { 
+    width: 100%; 
+    padding: 12px; 
+    border-radius: 8px; 
+    border: 1px solid #ccc; 
+    font-size: 1rem; 
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+.btnSubmit { 
+    width: 100%; 
+    padding: 1rem; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 700; 
+    transition: all 0.3s; 
+    border: none; 
+    background-color: var(--zold); 
+    color: var(--feher); 
+    font-size: 1.2rem; 
+    text-align: center; 
+    cursor: pointer; 
+    margin-top: 1.5rem; 
+}
+.btnSubmit:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+.feedbackMessage {
+    display: block;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    animation: fadeIn 0.5s ease-in-out;
+}
+.feedbackMessage.success { background-color: #e8f5e9; border: 2px solid var(--zold); color: var(--szoveg); }
+.feedbackMessage.error { background-color: #ffebee; border: 2px solid var(--piros); color: var(--szoveg); }
+.feedbackLink {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    background-color: var(--zold);
+    color: white;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }

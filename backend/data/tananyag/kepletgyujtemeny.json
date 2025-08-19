@@ -1,8 +1,64 @@
 {
-  "title": "Kepletgyujtemeny",
+  "title": "Képlet- és Tételtár",
   "subject": "altalanos",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Kepletgyujtemeny\" című tananyag.",
-  "questions": []
+  "category": "premium_tool",
+  "description": "Válassz tantárgyat és évfolyamot a folytatáshoz!",
+  "questions": [],
+  "topics": [
+    {
+      "title": "Matematika",
+      "color": "#CD2A3E",
+      "items": [
+        {
+          "title": "5. Osztály",
+          "link": "/tananyag/matek-kepletek-5",
+          "disabled": true,
+          "text": "(Fejlesztés alatt)"
+        },
+        {
+          "title": "6. Osztály",
+          "link": "/tananyag/matek-kepletek-6",
+          "disabled": false,
+          "text": "→"
+        },
+        {
+          "title": "7. Osztály",
+          "link": "/tananyag/matek-kepletek-7",
+          "disabled": false,
+          "text": "→"
+        },
+        {
+          "title": "8. Osztály",
+          "link": "/tananyag/matek-kepletek-8",
+          "disabled": false,
+          "text": "→"
+        }
+      ]
+    },
+    {
+      "title": "Fizika",
+      "color": "#005A9C",
+      "items": [
+        {
+          "title": "6. Osztály",
+          "link": "/tananyag/fizika-kepletek-6",
+          "disabled": true,
+          "text": "(Fejlesztés alatt)"
+        },
+        {
+          "title": "7. Osztály",
+          "link": "/tananyag/fizika-kepletek-7",
+          "disabled": true,
+          "text": "(Fejlesztés alatt)"
+        },
+        {
+          "title": "8. Osztály",
+          "link": "/tananyag/fizika-kepletek-8",
+          "disabled": true,
+          "text": "(Fejlesztés alatt)"
+        }
+      ]
+    }
+  ]
 }

@@ -1,0 +1,93 @@
+:root {
+    --kek: #005A9C;
+    --piros: #CD2A3E;
+    --zold: #436F4D;
+    --feher: #FFFFFF;
+    --sotet: #2c3e50;
+    --vilagos-szurke: #f0f4f8;
+    --szoveg: #34495e;
+    --card-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.tutorCard {
+    background: var(--feher);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    border-top: 8px solid var(--kek);
+    color: var(--szoveg);
+    max-width: 700px;
+    margin: 2rem auto;
+}
+
+.tutorHeader {
+    padding: 2rem;
+    text-align: center;
+}
+
+.icon {
+    font-size: 4rem;
+    line-height: 1;
+}
+
+.tutorHeader h1 {
+    font-family: 'Roboto Slab', serif;
+    color: var(--sotet);
+    margin: 1rem 0 0.5rem 0;
+}
+
+.tutorHeader p {
+    color: #6c757d;
+    max-width: 500px;
+    margin: auto;
+}
+
+.tutorBody {
+    padding: 0 2rem 2rem 2rem;
+}
+
+.tutorBody h3 {
+    font-family: 'Roboto Slab', serif;
+    color: var(--zold);
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+
+.tutorBody ul {
+    padding-left: 20px;
+    list-style-position: inside;
+}
+
+.tutorBody li {
+    margin-bottom: 0.5rem;
+}
+
+.startChatBtn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s;
+    border: none;
+    background-color: var(--piros);
+    color: var(--feher);
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 2rem;
+    box-sizing: border-box;
+}
+
+.startChatBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.disclaimer {
+    font-size: 0.85rem;
+    text-align: center;
+    color: #6c757d;
+    margin-top: 1rem;
+}

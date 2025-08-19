@@ -1,0 +1,109 @@
+/* Fájl: src/components/WorkshopContent/WorkshopContent.module.css (VÉGLEGES JAVÍTÁS) */
+
+:root {
+    --text-color: #333;
+    --header-color: #2c3e50;
+    --background-color: #ffffff; /* Tiszta fehér háttér */
+    --card-background: #f9f9f9; /* Nagyon halvány szürke a kártyáknak */
+    --card-border: #e0e0e0;
+    --prompt-background: #f0f4f8; /* Világoskék háttér a promptoknak */
+    --button-background: #007bff;
+    --button-hover-background: #0056b3;
+}
+
+.workshopContainer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Georgia', serif; /* Olvashatóbb, dokumentum-szerű betűtípus */
+    line-height: 1.7;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+.workshopSection {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 2rem;
+}
+
+.workshopSection:last-of-type {
+    border-bottom: none;
+}
+
+.workshopSection h2 {
+    font-size: 2rem;
+    color: var(--header-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--header-color);
+}
+
+/* Általános bekezdések és listák formázása */
+.workshopSection div p,
+.workshopSection div li {
+    margin-bottom: 1rem;
+}
+
+.workshopSection div ul {
+    list-style-type: disc;
+    padding-left: 25px;
+}
+
+.workshopSection div strong {
+    font-weight: bold;
+}
+
+/* Feladat kártyák (taskCard) stílusa */
+.taskCard {
+    background-color: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+}
+
+.taskCard h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--header-color);
+}
+
+/* Prompt dobozok stílusa */
+.promptContainer {
+    margin-top: 1.5rem;
+}
+
+.promptExample {
+    background-color: var(--prompt-background);
+    border-left: 4px solid var(--button-background);
+    padding: 1rem;
+    border-radius: 4px;
+    white-space: pre-wrap; /* Hosszú sorok tördelése */
+    word-wrap: break-word;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Másolás gomb stílusa */
+.copyButton {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--button-background);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.copyButton:hover {
+    background-color: var(--button-hover-background);
+}
+
+.copyButton:active {
+    transform: scale(0.98);
+}

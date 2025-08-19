@@ -1,8 +1,45 @@
 {
-  "title": "Essze vazlatolo",
+  "title": "Esszé Vázlatoló",
   "subject": "altalanos",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Essze vazlatolo\" című tananyag.",
-  "questions": []
+  "category": "premium_tool",
+  "description": "Ez az eszköz segít felépíteni a fogalmazásod vagy esszéd logikus vázlatát, hogy utána már csak az alkotásra kelljen koncentrálnod!",
+  "questions": [],
+  "toolData": {
+    "type": "multi-input-prompt-generator",
+    "icon": "✍️",
+    "header": "Esszé Vázlatoló",
+    "subheader": "A legnehezebb lépés az első. Ez az eszköz segít felépíteni a fogalmazásod vagy esszéd logikus vázlatát, hogy utána már csak az alkotásra kelljen koncentrálnod!",
+    "fields": [
+      {
+        "id": "tema",
+        "label": "1. Mi az esszé témája?",
+        "type": "text",
+        "placeholder": "Pl.: A közösségi média hatása a fiatalokra",
+        "required": true
+      },
+      {
+        "id": "tetelmondat",
+        "label": "2. Mi a fő állításod? (Tételmondat)",
+        "type": "text",
+        "placeholder": "Pl.: A túlzott közösségi média használat negatívan befolyásolja a mentális egészséget.",
+        "required": true
+      },
+      {
+        "id": "ervek",
+        "label": "3. Milyen 3 fő érvvel támasztod ezt alá?",
+        "type": "textarea",
+        "placeholder": "Minden érvet írj új sorba!\nPl.: Elszigetelődés a valós kapcsolatoktól\n irreális elvárások és testképzavar\n online zaklatás veszélye",
+        "required": true
+      }
+    ],
+    "buttonText": "Vázlat Tervezése →",
+    "resultArea": {
+      "header": "✅ Kész a személyes Promptod!",
+      "subheader": "Másold ki az alábbi szöveget, és illeszd be a kedvenc chatbotodba (pl. ChatGPT), hogy megkapd a személyre szabott vázlatot!",
+      "copyButtonText": "Prompt Másolása a vágólapra",
+      "copyButtonSuccessText": "✅ Másolva!"
+    },
+    "systemPromptTemplate": "Viselkedj mint egy tapasztalt, segítőkész magyartanár és szövegíró mentor.\nA feladatod, hogy a diák által megadott információk alapján készíts egy részletes, logikus vázlatot egy esszéhez.\n\nFONTOS SZABÁLYOK:\n- NE írd meg helyette a teljes szöveget, CSAK a vázlatot add meg, pontokba szedve.\n- Minden vázlatponthoz adj rövid, rávezető kérdéseket vagy tippeket, amelyek segítik a diákot a gondolkodásban.\n- A stílusod legyen bátorító és motiváló.\n\nA diák által megadott adatok a következők:\n- TÉMA: {{tema}}\n- FŐ ÁLLÍTÁS (TÉTELMONDAT): {{tetelmondat}}\n- ALÁTÁMASZTÓ ÉRVEK (ezekből lesznek a tárgyalás bekezdései):\n{{ervek}}\n\nA kért vázlat struktúrája:\n1.  **Bevezetés:**\n    -   Hogyan lehet megragadni az olvasó figyelmét? (pl. egy kérdéssel, egy meghökkentő adattal)\n    -   A téma bemutatása röviden.\n    -   A tételmondat világos megfogalmazása.\n\n2.  **Tárgyalás:**\n    -   Minden érvet egy külön bekezdésben fejts ki.\n    -   Minden bekezdés elején vezesd fel az adott érvet.\n    -   Támogasd az érveidet példákkal, adatokkal vagy logikus levezetéssel.\n\n3.  **Befejezés:**\n    -   A fő gondolatok rövid összefoglalása (a tételmondat megerősítése).\n    -   Személyes vélemény, egy elgondolkodtató kérdés vagy egy jövőbe mutató kitekintés lezárásként.\n\nKészítsd el a vázlatot a fenti struktúra szerint!"
+  }
 }

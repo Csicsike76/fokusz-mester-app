@@ -1,260 +1,254 @@
-
 {
-  "title": "Fizikakepletek 6 osztaly",
+  "title": "Fizika Segédlet - 6. Osztály",
   "subject": "fizika",
-  "grade": 0,
+  "grade": 6,
   "category": "premium_course",
-  "description": "Ez a(z) \"Fizikakepletek 6 osztaly\" című tananyag.",
-  "questions": [
-    {
-      "question": "Mi a sűrűség (ρ) definíciója és képlete?",
-      "answers": {
-        "a": "Az anyag tehetetlenségének mértéke, képlete: m = ρ * V",
-        "b": "Megmutatja az anyag egységnyi térfogatának tömegét, képlete: ρ = m / V",
-        "c": "A testre ható gravitációs erő, képlete: G = m * g"
+  "description": "Részletes fizikai tananyag 6. osztályos tanulók számára, alapfogalmaktól optikai jelenségekig.",
+  "questions": [],
+  "toolData": {
+    "type": "hub-page",
+    "header": "Fizika Segédlet - 6. Osztály",
+    "sections": [
+      {
+        "id": "fejezet1",
+        "title": "1. Alapfogalmak a fizikában",
+        "cards": [
+          {
+            "id": "fejezet1-1",
+            "title": "Fizikai mennyiségek, mértékegységek, többszörösök és törtrészek",
+            "description": "A fizikai mennyiségek a testek mérhető tulajdonságai. Mindig egy számértékből és egy mértékegységből állnak. A mértékegységeknek vannak többszörösei (pl. kilo-, mega-) és törtrészei (pl. centi-, milli-).",
+              "link": "/tananyag/kviz_mennyisegek_mertekegysegek.html"
+          },
+          {
+            "id": "fejezet1-2",
+            "title": "Hosszúság, terület, térfogat és időtartam közvetlen mérése",
+            "description": "A közvetlen mérés során a mérendő mennyiséget egy mérőeszközön lévő skálához hasonlítjuk, és az értéket közvetlenül leolvassuk.",
+            "quizLink": "kviz_kozvetlen_meres.html"
+          },
+          {
+            "id": "fejezet1-3",
+            "title": "Mérési hibák, hibaforrások, hibaszámítás",
+            "description": "A mérés sosem tökéletesen pontos. A hiba lehet a mérőeszköz, a mérő személy vagy a környezet pontatlansága. Több mérés átlagolásával csökkenthetjük a véletlen hibák hatását.",
+            "quizLink": "kviz_meresi_hibak.html"
+          },
+          {
+            "id": "fejezet1-4",
+            "title": "Terület és térfogat közvetett mérése",
+            "description": "A közvetett mérés során más, könnyebben mérhető mennyiségekből (pl. hosszúság) számítjuk ki a keresett értéket egy matematikai képlet segítségével.",
+            "quizLink": "kviz_kozvetett_meres.html"
+          }
+        ]
       },
-      "correct": "b",
-      "explanation": "A sűrűség egy anyagra jellemző mennyiség, amely megadja, hogy egységnyi térfogatnak (pl. 1 köbméternek) mekkora a tömege. Kiszámítása: tömeg osztva térfogattal."
-    },
-    {
-      "question": "Melyik állítás igaz az egyenes vonalú egyenletes mozgásra?",
-      "answers": {
-        "a": "A test sebessége folyamatosan nő.",
-        "b": "A test egyenlő időközök alatt egyenlő utakat tesz meg.",
-        "c": "A test pályája kör alakú."
+      {
+        "id": "fejezet2",
+        "title": "2. Mechanikai jelenségek",
+        "cards": [
+          {
+            "id": "fejezet2-1",
+            "title": "Vonatkoztatási rendszer",
+            "description": "A testek mozgása vagy nyugalma mindig egy másik testhez (vonatkoztatási rendszerhez) viszonyítva értelmezhető. A mozgás relatív.",
+            "quizLink": "kviz_vonatkoztatasi_rendszer.html"
+          },
+          {
+            "id": "fejezet2-2",
+            "title": "Pálya",
+            "description": "A mozgó test által leírt vonal a test pályája. Ha egy test helyzete nem változik a vonatkoztatási rendszerhez képest, akkor nyugalomban van.",
+            "quizLink": "kviz_mozgas_palya.html"
+          },
+          {
+            "id": "fejezet2-3",
+            "title": "Egyenletes mozgás",
+            "description": "Egy test egyenes vonalú egyenletes mozgást végez, ha pályája egyenes, és egyenlő időközök alatt egyenlő utakat tesz meg. Sebessége állandó.",
+            "quizLink": "kviz_egyenletes_mozgas.html"
+          },
+          {
+            "id": "fejezet2-4",
+            "title": "Megtett távolság, időtartam",
+            "description": "A megtett távolság (út) a pálya hossza, amit a test egy adott időtartam alatt bejár. Az időtartam a mozgás kezdete és vége között eltelt idő.",
+            "quizLink": "kviz_ut_ido.html"
+          },
+          {
+            "id": "fejezet2-5",
+            "title": "Átlagsebesség",
+            "description": "Az átlagsebesség a teljes megtett út és az ehhez szükséges teljes idő hányadosa. Képlete: v = s / t.",
+            "quizLink": "kviz_atlagsebesseg.html"
+          },
+          {
+            "id": "fejezet2-6",
+            "title": "Gyorsulás",
+            "description": "A gyorsulás megmutatja, hogy a test sebessége mennyit változik egységnyi idő alatt. Jele 'a'.",
+            "quizLink": "kviz_gyorsulas.html"
+          },
+          {
+            "id": "fejezet2-7",
+            "title": "Egyenletesen változó mozgás",
+            "description": "Ilyen mozgást végez a test, ha sebessége egyenlő időközök alatt ugyanannyival változik. A gyorsulása állandó.",
+            "quizLink": "kviz_valtozo_mozgas.html"
+          },
+          {
+            "id": "fejezet2-8",
+            "title": "Tehetetlenség",
+            "description": "A tehetetlenség a testek azon tulajdonsága, hogy mozgásállapotuk megváltoztatásával szemben ellenállást fejtenek ki.",
+            "quizLink": "kviz_tehetetlenseg.html"
+          },
+          {
+            "id": "fejezet2-9",
+            "title": "Tömeg",
+            "description": "A tehetetlenség mértéke a tömeg. Minél nagyobb egy test tömege, annál nagyobb a tehetetlensége. Jele 'm', mértékegysége a kg.",
+            "quizLink": "kviz_tomeg_merteke.html"
+          },
+          {
+            "id": "fejezet2-10",
+            "title": "Tömegmérés",
+            "description": "A testek tömegét mérleggel mérjük, összehasonlítva ismert tömegű testekkel (súlyokkal).",
+            "quizLink": "kviz_tomegmeres.html"
+          },
+          {
+            "id": "fejezet2-11",
+            "title": "Sűrűség",
+            "description": "A sűrűség egy anyagra jellemző fizikai mennyiség, amely megmutatja az anyag egységnyi térfogatának tömegét. Képlete: ρ = m / V.",
+            "quizLink": "kviz_suruseg.html"
+          },
+          {
+            "id": "fejezet2-12",
+            "title": "Kölcsönhatások hatásai",
+            "description": "A kölcsönhatások megváltoztathatják a testek mozgásállapotát (gyorsíthatják, lassíthatják, elfordíthatják őket) vagy alakját (alakváltozás).",
+            "quizLink": "kviz_kolcsonhatas_hatasai.html"
+          },
+          {
+            "id": "fejezet2-13",
+            "title": "Erő",
+            "description": "A kölcsönhatás erősségét az erő nevű fizikai mennyiséggel jellemezzük. Az erőnek nagysága és iránya is van, ezért vektormennyiség.",
+            "quizLink": "kviz_ero_merteke.html"
+          },
+          {
+            "id": "fejezet2-14",
+            "title": "Súly",
+            "description": "A súly az az erő, amellyel a test a Földet vonzza (gravitációs erő). A test tömegétől és a gravitációs gyorsulástól függ.",
+            "quizLink": "kviz_suly.html"
+          },
+          {
+            "id": "fejezet2-15",
+            "title": "Erőmérés, dinamométer",
+            "description": "Az erőt dinamométerrel (rugós erőmérővel) mérjük. A mérés a rugó megnyúlásán alapul, ami arányos a rá ható erővel.",
+            "quizLink": "kviz_eromeres.html"
+          },
+          {
+            "id": "fejezet2-16",
+            "title": "Súrlódási erő",
+            "description": "A csúszó súrlódási erő egy mozgást akadályozó erő, amely két, egymáson elcsúszó felület között lép fel. Iránya mindig a mozgással ellentétes.",
+            "quizLink": "kviz_surlodas.html"
+          },
+          {
+            "id": "fejezet2-17",
+            "title": "Rugalmassági erő",
+            "description": "A rugalmas erő egy rugalmas test (pl. rugó) alakváltozása során lép fel, és igyekszik visszaállítani az eredeti alakot. Nagysága arányos a megnyúlással.",
+            "quizLink": "kviz_rugalmassagi_ero.html"
+          }
+        ]
       },
-      "correct": "b",
-      "explanation": "Az egyenletes mozgás definíciója, hogy a test sebessége állandó, ezért egyenlő idők alatt mindig ugyanakkora utat jár be."
-    },
-    {
-      "question": "Mi a tehetetlenség mértéke?",
-      "answers": {
-        "a": "A tömeg",
-        "b": "A sebesség",
-        "c": "A súly"
+      {
+        "id": "fejezet3",
+        "title": "3. Hőjelenségek",
+        "cards": [
+          {
+            "id": "fejezet3-1",
+            "title": "Hőállapot, hőmérséklet, termikus érintkezés",
+            "description": "A hőmérséklet a testek hőállapotát jellemző fizikai mennyiség. Két különböző hőmérsékletű test érintkezésekor hőcsere történik, amíg a hőmérsékletük ki nem egyenlítődik (hőegyensúly).",
+            "quizLink": "kviz_hoallapot_homerseklet.html"
+          },
+          {
+            "id": "fejezet3-2",
+            "title": "Hőmérsékleti skálák",
+            "description": "A hőmérséklet mérésére különböző skálákat használunk. A mindennapi életben a Celsius-skála, a tudományban a Kelvin-skála a legelterjedtebb.",
+            "quizLink": "kviz_homersekleti_skalak.html"
+          },
+          {
+            "id": "fejezet3-3",
+            "title": "Hőátadás",
+            "description": "Egy test hőállapotát hőátadással (melegítéssel vagy hűtéssel) lehet megváltoztatni.",
+            "quizLink": "kviz_hoallapot_valtozas.html"
+          },
+          {
+            "id": "fejezet3-4",
+            "title": "Hőtágulás",
+            "description": "A legtöbb anyag melegítés hatására kitágul, hűtés hatására összehúzódik. Ezt a jelenséget hőtágulásnak nevezzük.",
+            "quizLink": "kviz_hotagulas.html"
+          },
+          {
+            "id": "fejezet3-5",
+            "title": "Halmazállapot-változások",
+            "description": "Az anyagok hőmérséklet-változás hatására halmazállapotot válthatnak. A főbb folyamatok: olvadás, fagyás, párolgás, lecsapódás, szublimáció.",
+            "quizLink": "kviz_halmazallapot_valtozasok.html"
+          }
+        ]
       },
-      "correct": "a",
-      "explanation": "A tömeg (jele: m) fejezi ki, hogy egy test mennyire áll ellen a mozgásállapot-változtatásnak. A nagyobb tömegű test tehetetlenebb."
-    },
-    {
-      "question": "Milyen kölcsönhatás lép fel két azonos mágneses pólus között?",
-      "answers": {
-        "a": "Vonzás",
-        "b": "Taszítás",
-        "c": "Nincs kölcsönhatás."
+      {
+        "id": "fejezet4",
+        "title": "4. Elektromos és mágneses jelenségek",
+        "cards": [
+          {
+            "id": "fejezet4-1",
+            "title": "Mágneses kölcsönhatások",
+            "description": "Minden mágnesnek két pólusa van: északi és déli. Az azonos pólusok taszítják, a különbözőek vonzzák egymást.",
+            "quizLink": "kviz_magnesesseg.html"
+          },
+          {
+            "id": "fejezet4-2",
+            "title": "Elektromos állapot, töltés",
+            "description": "Dörzsöléssel a testek elektromos állapotba hozhatók. Kétféle töltés létezik: pozitív és negatív. Az azonos töltések taszítják, a különbözőek vonzzák egymást.",
+            "quizLink": "kviz_elektromos_toltes.html"
+          },
+          {
+            "id": "fejezet4-3",
+            "title": "Egyszerű áramkörök",
+            "description": "Az elektromos áram a töltéssel rendelkező részecskék rendezett áramlása. Egy egyszerű áramkör részei: áramforrás, fogyasztó, vezeték és kapcsoló.",
+            "quizLink": "kviz_egyszeru_aramkor.html"
+          },
+          {
+            "id": "fejezet4-4",
+            "title": "Soros és párhuzamos kapcsolás",
+            "description": "Soros kapcsolásnál a fogyasztók egymás után helyezkednek el. Ha egy kiesik, a többi sem működik. Párhuzamos kapcsolásnál a fogyasztók külön ágakon vannak. Ha egy kiesik, a többi tovább működik.",
+            "quizLink": "kviz_soros_parhuzamos.html"
+          }
+        ]
       },
-      "correct": "b",
-      "explanation": "A mágnesesség alaptörvénye szerint az azonos pólusok (északi és északi, vagy déli és déli) taszítják egymást."
-    },
-    {
-      "question": "Mi a különbség a soros és a párhuzamos kapcsolás között, ha egy fogyasztó (égő) kiég?",
-      "answers": {
-        "a": "Sorosnál a többi tovább működik, párhuzamosnál az áramkör megszakad.",
-        "b": "Mindkét esetben tovább működnek a többiek.",
-        "c": "Párhuzamosnál a többi tovább működik, sorosnál az áramkör megszakad."
-      },
-      "correct": "c",
-      "explanation": "Soros kapcsolásban az áramnak egyetlen útja van, ha ez megszakad, a többi elem sem kap áramot. Párhuzamos kapcsolásnál minden fogyasztó külön ágon van, így az egyik kiesése nem befolyásolja a többit."
-    },
-    {
-      "question": "Mit nevezünk egy test pályájának?",
-      "answers": {
-        "a": "A test által a mozgás során leírt vonalat.",
-        "b": "A test sebességének nagyságát.",
-        "c": "A test és a Föld közötti távolságot."
-      },
-      "correct": "a",
-      "explanation": "A pálya az a görbe vagy egyenes vonal, amelyet a mozgó test pontjai leírnak a térben."
-    },
-    {
-      "question": "Hogyan számítjuk ki az átlagsebességet?",
-      "answers": {
-        "a": "A teljes megtett út és az ehhez szükséges idő hányadosaként (v = s / t).",
-        "b": "A kezdő- és végsebesség összegeként.",
-        "c": "A gyorsulás és az idő szorzataként."
-      },
-      "correct": "a",
-      "explanation": "Az átlagsebesség azt mutatja meg, hogy a test átlagosan mekkora sebességgel haladt a teljes út során, képlete v = s / t."
-    },
-    {
-      "question": "Melyik jelenség NEM halmazállapot-változás?",
-      "answers": {
-        "a": "Párolgás",
-        "b": "Hőtágulás",
-        "c": "Olvadás"
-      },
-      "correct": "b",
-      "explanation": "A hőtágulás egy test méretének megváltozása hő hatására, de a halmazállapota (szilárd, folyékony, gáz) közben nem változik. Az olvadás és a párolgás halmazállapot-változások."
-    },
-    {
-      "question": "Mire használjuk a dinamométert?",
-      "answers": {
-        "a": "Hőmérséklet mérésére.",
-        "b": "Tömeg mérésére.",
-        "c": "Erő mérésére."
-      },
-      "correct": "c",
-      "explanation": "A dinamométer, vagy rugós erőmérő az erő nagyságának mérésére szolgáló eszköz."
-    },
-    {
-      "question": "Mi történik a legtöbb anyaggal melegítés hatására?",
-      "answers": {
-        "a": "Összehúzódnak.",
-        "b": "Kitágulnak.",
-        "c": "A méretük nem változik."
-      },
-      "correct": "b",
-      "explanation": "A hőtágulás jelensége miatt a legtöbb anyag térfogata megnő, ha melegítjük, mert a részecskéi hevesebben mozognak."
-    },
-    {
-      "question": "Mi a fényvisszaverődés törvényének lényege?",
-      "answers": {
-        "a": "A beesési szög mindig nagyobb, mint a visszaverődési szög.",
-        "b": "A beesési szög egyenlő a visszaverődési szöggel.",
-        "c": "A fény elnyelődik a felületen."
-      },
-      "correct": "b",
-      "explanation": "A fényvisszaverődés törvénye kimondja, hogy a fénysugár a felületre a beesési merőlegeshez képest ugyanakkora szögben verődik vissza, mint amekkora szögben beérkezett."
-    },
-    {
-      "question": "Hogyan terjed a fény homogén közegben?",
-      "answers": {
-        "a": "Görbe vonalban.",
-        "b": "Egyenes vonalban.",
-        "c": "Spirális alakban."
-      },
-      "correct": "b",
-      "explanation": "A fény egyenes vonalú terjedése az optika egyik alapelve, ami például az árnyékjelenségeket is magyarázza."
-    },
-    {
-      "question": "Mi a különbség a súly és a tömeg között?",
-      "answers": {
-        "a": "A kettő ugyanazt jelenti.",
-        "b": "A tömeg a tehetetlenség mértéke (kg), a súly pedig egy erő (N).",
-        "c": "A súly a tehetetlenség mértéke, a tömeg pedig egy erő."
-      },
-      "correct": "b",
-      "explanation": "A tömeg egy skalármennyiség, ami az anyag mennyiségét és tehetetlenségét jellemzi. A súly egy vektormennyiség, az az erő, amellyel a test egy égitest vonzásában az alátámasztást nyomja vagy a felfüggesztést húzza."
-    },
-    {
-      "question": "Mi az alapja az egyszerű elektromos áramkörnek?",
-      "answers": {
-        "a": "A mágneses részecskék áramlása.",
-        "b": "A töltéssel rendelkező részecskék rendezett áramlása.",
-        "c": "A hő részecskéinek áramlása."
-      },
-      "correct": "b",
-      "explanation": "Az elektromos áram definíció szerint a töltéshordozók (pl. elektronok) egyirányú, rendezett mozgása."
-    },
-    {
-      "question": "Melyik erő iránya mindig a mozgással ellentétes?",
-      "answers": {
-        "a": "A súrlódási erő.",
-        "b": "A gravitációs erő.",
-        "c": "A rugalmas erő."
-      },
-      "correct": "a",
-      "explanation": "A csúszó súrlódási erő mindig a mozgást akadályozó hatású, ezért iránya ellentétes a test mozgásának irányával."
-    },
-    {
-      "question": "Melyik NEM egy fizikai mennyiség?",
-      "answers": {
-        "a": "Sebesség.",
-        "b": "Szépség.",
-        "c": "Hosszúság."
-      },
-      "correct": "b",
-      "explanation": "A fizikai mennyiségek a testek mérhető tulajdonságai. A sebesség és a hosszúság mérhető, a szépség azonban szubjektív, nem mérhető fizikai tulajdonság."
-    },
-    {
-      "question": "Mi a közvetett mérés lényege?",
-      "answers": {
-        "a": "A mérendő értéket közvetlenül leolvassuk egy mérőeszközről.",
-        "b": "Mindig pontosabb, mint a közvetlen mérés.",
-        "c": "Más, könnyebben mérhető mennyiségekből számoljuk ki a keresett értéket."
-      },
-      "correct": "c",
-      "explanation": "Például egy téglalap területét nem közvetlenül mérjük, hanem a két oldalának hosszát megmérjük (közvetlen mérés), majd a két értéket összeszorozva (számítás) kapjuk meg a területet."
-    },
-    {
-      "question": "Miért mondjuk, hogy a mozgás relatív?",
-      "answers": {
-        "a": "Mert minden test folyamatosan mozog.",
-        "b": "Mert egy test mozgása vagy nyugalma mindig egy másik testhez (vonatkoztatási rendszerhez) képest értelmezhető.",
-        "c": "Mert a sebesség mértékegysége változó."
-      },
-      "correct": "b",
-      "explanation": "Egy vonaton ülő utas a vonathoz képest nyugalomban van, de a Földhöz képest mozog. A mozgás leírásához mindig meg kell adni, mihez viszonyítunk."
-    },
-    {
-      "question": "Melyik hőmérsékleti skálát használják leginkább a tudományos életben?",
-      "answers": {
-        "a": "Fahrenheit-skála",
-        "b": "Celsius-skála",
-        "c": "Kelvin-skála"
-      },
-      "correct": "c",
-      "explanation": "A Kelvin-skála az abszolút hőmérsékleti skála, amelynek nullpontja az abszolút nulla fok, ahol a részecskemozgás elméletileg megszűnik. Ezért használják a tudományos számításokban."
-    },
-    {
-      "question": "Mi a különbség az átlátszó és az áttetsző testek között?",
-      "answers": {
-        "a": "Az átlátszón keresztül élesen látunk, az áttetszőn keresztül a fény áthalad, de szóródik.",
-        "b": "Az átlátszó nem engedi át a fényt, az áttetsző igen.",
-        "c": "Nincs különbség, a két szó ugyanazt jelenti."
-      },
-      "correct": "a",
-      "explanation": "Példa átlátszó testre az ablaküveg, példa áttetszőre a tejüveg vagy a zsírpapír. Mindkettőn áthatol a fény, de csak az egyiken látunk át élesen."
-    },
-    {
-      "question": "Hogyan nevezzük azt a jelenséget, amikor a fény egy másik közegbe lépve megváltoztatja haladási irányát?",
-      "answers": {
-        "a": "Fénytörés",
-        "b": "Fényvisszaverődés",
-        "c": "Fényelnyelés"
-      },
-      "correct": "a",
-      "explanation": "Ez a fénytörés definíciója. Ennek a jelenségnek köszönhető, hogy a vízbe tett szívószálat 'töröttnek' látjuk."
-    },
-    {
-      "question": "Mi keletkezik, ha egy átlátszatlan test a fény útjába kerül?",
-      "answers": {
-        "a": "Szivárvány",
-        "b": "Árnyék",
-        "c": "Fényvillanás"
-      },
-      "correct": "b",
-      "explanation": "Mivel a fény egyenes vonalban terjed, és az átlátszatlan test nem engedi át, a test mögött egy fénytől elzárt terület, azaz árnyék jön létre."
-    },
-    {
-      "question": "Milyen kölcsönhatás lép fel két ellentétes elektromos töltés között?",
-      "answers": {
-        "a": "Taszítás",
-        "b": "Vonzás",
-        "c": "Semmilyen"
-      },
-      "correct": "b",
-      "explanation": "Az elektrosztatika alaptörvénye szerint az ellentétes nemű (pozitív és negatív) töltések vonzzák egymást."
-    },
-    {
-      "question": "Mi a rugalmas erő?",
-      "answers": {
-        "a": "A test súlya.",
-        "b": "A mozgást akadályozó súrlódási erő.",
-        "c": "Egy rugalmas test alakváltozása során fellépő, eredeti alakot visszaállítani igyekvő erő."
-      },
-      "correct": "c",
-      "explanation": "Amikor egy rugót megnyújtunk vagy összenyomunk, a benne ébredő rugalmas erő igyekszik azt visszaállítani az eredeti, nyugalmi állapotába."
-    },
-    {
-      "question": "Mire példa a Nap vagy egy égő lámpa?",
-      "answers": {
-        "a": "Fényforrásokra",
-        "b": "Megvilágított testekre",
-        "c": "Átlátszatlan testekre"
-      },
-      "correct": "a",
-      "explanation": "A fényforrások olyan testek, amelyek önállóan bocsátanak ki fényt, ellentétben a megvilágított testekkel, amelyek csak a rájuk eső fényt verik vissza."
-    }
-  ]
+      {
+        "id": "fejezet5",
+        "title": "5. Optikai jelenségek",
+        "cards": [
+          {
+            "id": "fejezet5-1",
+            "title": "Fényforrások",
+            "description": "A fényforrások olyan testek, amelyek fényt bocsátanak ki. Lehetnek természetesek (pl. Nap) vagy mesterségesek (pl. lámpa). A megvilágított testek a rájuk eső fényt verik vissza.",
+            "quizLink": "kviz_fenyforrasok.html"
+          },
+          {
+            "id": "fejezet5-2",
+            "title": "Átlátszó, áttetsző, átlátszatlan testek",
+            "description": "Az átlátszó testeken a fény áthalad és élesen látunk rajtuk keresztül. Az áttetsző testeken a fény áthalad, de szóródik. Az átlátszatlan testek nem engedik át a fényt.",
+            "quizLink": "kviz_atlatszo_testek.html"
+          },
+          {
+            "id": "fejezet5-3",
+            "title": "Fény terjedése, sebessége",
+            "description": "A fény homogén közegben (pl. levegő, vákuum) egyenes vonalban terjed. Sebessége a legnagyobb ismert sebesség a természetben, kb. 300 000 km/s.",
+            "quizLink": "kviz_feny_terjedese.html"
+          },
+          {
+            "id": "fejezet5-4",
+            "title": "Árnyék és félárnyék",
+            "description": "Amikor egy átlátszatlan test a fény útjába kerül, mögötte árnyék keletkezik. Ha a fényforrás kiterjedt (nem pontszerű), az éles árnyék mellett egy elmosódottabb félárnyék is létrejöhet.",
+            "quizLink": "kviz_arnyek.html"
+          },
+          {
+            "id": "fejezet5-5",
+            "title": "Fényvisszaverődés és fénytörés",
+            "description": "Fényvisszaverődés: Amikor a fény egy felületről visszaverődik (pl. tükör). A beesési szög egyenlő a visszaverődési szöggel. Fénytörés: Amikor a fény egy másik közegbe lépve megváltoztatja haladási irányát (pl. szívószál a vízben).",
+            "quizLink": "kviz_fenyvisszaverodes_fenytores.html"
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -1,8 +1,84 @@
 {
-  "title": "Interaktav fizika gyljtemany",
+  "title": "Interaktív Fizika Gyűjtemény",
   "subject": "fizika",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Interaktav fizika gyljtemany\" című tananyag.",
-  "questions": []
+  "description": "Ez a(z) \"Interaktív Fizika Gyűjtemény\" című tananyag.",
+  "questions": [],
+  "toolData": {
+    "type": "hub-page",
+    "header": "Interaktív Fizika Gyűjtemény",
+    "subheader": "Digitális segédlet és gyakorlórendszer általános iskolásoknak",
+    "sections": [
+      {
+        "title": "Tananyagok Évfolyamok Szerint",
+        "cards": [
+          {
+            "styleType": "grade",
+            "mainText": "6.",
+            "subText": "Osztály",
+            "link": "/tananyag/fizikakepletek-6-osztaly"
+          },
+          {
+            "styleType": "grade",
+            "mainText": "7.",
+            "subText": "Osztály",
+            "link": "/tananyag/fizikakepletek-7-osztaly"
+          },
+          {
+            "styleType": "grade",
+            "mainText": "8.",
+            "subText": "Osztály",
+            "link": "/tananyag/fizikakepletek-8-osztaly"
+          }
+        ]
+      },
+      {
+        "title": "Összesített Képletgyűjtemények",
+        "cards": [
+          {
+            "styleType": "formula",
+            "mainText": "6.",
+            "subText": "Teljes Gyűjtemény",
+            "link": "/tananyag/fizikateljes-kepletgyujtemeny-6"
+          },
+          {
+            "styleType": "formula",
+            "mainText": "7.",
+            "subText": "Teljes Gyűjtemény",
+            "link": "/tananyag/fizikateljes-kepletgyujtemeny-7"
+          },
+          {
+            "styleType": "formula",
+            "mainText": "8.",
+            "subText": "Teljes Gyűjtemény",
+            "link": "/tananyag/fizikateljes-kepletgyujtemeny-8"
+          }
+        ]
+      },
+      {
+        "title": "Év Végi Összefoglaló Felmérők",
+        "cards": [
+          {
+            "styleType": "summary",
+            "mainText": "6.",
+            "subText": "Év Végi Felmérő",
+            "link": "/tananyag/fizikakviz-6-osztaly-ev-vegi-osszefoglalo"
+          },
+          {
+            "styleType": "summary",
+            "mainText": "7.",
+            "subText": "Év Végi Felmérő",
+            "link": "/tananyag/fizikakviz-7-osztaly-ev-vegi-osszefoglalo"
+          },
+          {
+            "styleType": "summary",
+            "mainText": "8.",
+            "subText": "Év Végi Felmérő",
+            "link": "/tananyag/fizika8kviz-8-osztaly-ev-vegi-osszefoglalo"
+          }
+        ]
+      }
+    ]
+  }
 }

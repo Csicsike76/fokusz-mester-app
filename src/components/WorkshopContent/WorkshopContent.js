@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './WorkshopStyles.module.css';
+import styles from './WorkshopContent.module.css';
 
 const WorkshopContent = ({ sections }) => {
   if (!sections || sections.length === 0) {

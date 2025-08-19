@@ -123,3 +123,114 @@
   color: white !important;
 }
 
+/* Fájl: src/pages/ContentPage.module.css (VÉGLEGES, MŰKÖDŐ VERZIÓ) */
+
+/* === ITT A LÉNYEGI VÁLTOZÁS: KÉT KÜLÖNBÖZŐ FŐ KERET === */
+
+/* 1. KERET: A KVÍZEKHEZ ÉS ESZKÖZÖKHÖZ (középre igazított, szűkített tartalom) */
+.centeredContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px); /* 80px a fejléc magassága */
+    padding: 40px 20px;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* 2. KERET: A TANANYAGOKHOZ (teljes szélességet elfoglalja, nincs középre igazítás) */
+.fullWidthContainer {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    display: block; /* Fontos, hogy ne flexbox legyen */
+}
+
+/* Betöltési üzenet stílusa */
+.centeredMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    color: white;
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px black;
+}
+
+/* Háttér videó és sötétítés (minden oldalon közös) */
+.backgroundVideo {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%; min-height: 100%;
+    z-index: -2;
+    object-fit: cover;
+}
+.backgroundOverlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: var(--overlay);
+    z-index: -1;
+}
+.contentWrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+/* ----- BELSŐ NÉZETEK STÍLUSAI ----- */
+
+/* A. LessonView (kétoszlopos tananyag) stílusai */
+.lessonContainer {
+    display: flex;
+    height: calc(100vh - 80px); /* Kitölti a teljes magasságot */
+    background-color: #f4f7f9; /* Világos háttér a tananyagnak */
+    color: #333; /* Sötét szöveg */
+}
+.lessonToc {
+    width: 300px;
+    flex-shrink: 0;
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    padding: 2rem;
+    overflow-y: auto;
+}
+.lessonToc h2 {
+    font-size: 1.2rem; margin-top: 0; color: #2c3e50;
+    border-bottom: 2px solid #2c3e50; padding-bottom: 0.5rem;
+}
+.lessonToc ul { list-style-type: none; padding: 0; margin: 1rem 0 0 0; }
+.lessonToc li { margin-bottom: 0.5rem; }
+.lessonToc a { text-decoration: none; color: #4a5568; }
+.lessonToc a:hover { color: #2d3748; }
+.lessonToc > ul > li > a { font-weight: 700; }
+.lessonToc ul ul { padding-left: 1rem; margin-top: 0.5rem; border-left: 2px solid #e2e8f0; font-size: 0.9em; }
+
+.lessonMainContent {
+    flex-grow: 1;
+    padding: 2rem 3rem;
+    overflow-y: auto;
+}
+.lessonMainContent h1 {
+    text-align: center; font-size: 2.5rem; color: #2c3e50;
+    margin-bottom: 3rem;
+}
+
+/* B. QuizView, CharacterView stb. (középre igazított doboz) stílusai */
+.quizContainer, .genericToolContainer, .characterSelection {
+    background-color: rgba(44, 62, 80, 0.85);
+    padding: 3rem 4rem;
+    border-radius: 15px;
+    text-align: center;
+    color: #ecf0f1;
+    max-width: 800px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    backdrop-filter: blur(5px);
+}
+.mainTitle { font-size: 2.5rem; color: #ffffff; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+.subTitle { font-size: 1.1rem; color: #f0f0f0; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* ... Itt jönnek a többi, már meglévő stílusok, amik a kvíz gombokat, karakter kártyákat, stb. formázzák ... */

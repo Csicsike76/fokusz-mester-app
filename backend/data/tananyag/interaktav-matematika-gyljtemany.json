@@ -1,42 +1,42 @@
 {
-  "title": "Interaktav matematika gyljtemany",
+  "title": "Interaktív Matematika Gyűjtemény",
   "subject": "matematika",
   "grade": 0,
   "category": "free_lesson",
-  "description": "Ez a(z) \"Interaktav matematika gyljtemany\" című tananyag.",
-  "questions": [
-
-
-
-    {
-      "title": "Tananyagok Évfolyamok Szerint",
-      "cards": [
-        { "text": "5. Osztály", "link": "kepletek_5_osztaly.html", "type": "grade", "number": "5." },
-        { "text": "6. Osztály", "link": "kepletek_6_osztaly.html", "type": "grade", "number": "6." },
-        { "text": "7. Osztály", "link": "kepletek_7_osztaly.html", "type": "grade", "number": "7." },
-        { "text": "8. Osztály", "link": "1Fo oldal.html", "type": "grade", "number": "8." }
-      ]
-    },
-    {
-      "title": "Összesített Képletgyűjtemények",
-      "cards": [
-        { "text": "5. Osztály - Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_5_osztaly.html", "type": "formula" },
-        { "text": "6. Osztály - Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_6_osztaly.html", "type": "formula" },
-        { "text": "7. Osztály - Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_7_osztaly.html", "type": "formula" },
-        { "text": "8. Osztály - Teljes Gyűjtemény", "link": "teljes_kepletgyujtemeny_8_osztaly.html", "type": "formula" }
-      ]
-    },
-    {
-      "title": "Év Végi Összefoglaló Felmérők",
-      "cards": [
-        { "text": "5. Osztály - Év Végi Felmérő", "link": "kviz_5_osztaly_ev_vegi_osszefoglalo.html", "type": "summary" },
-        { "text": "6. Osztály - Év Végi Felmérő", "link": "kviz_6_osztaly_ev_vegi_osszefoglalo.html", "type": "summary" },
-        { "text": "7. Osztály - Év Végi Felmérő", "link": "kviz_7_osztaly_ev_vegi_osszefoglalo.html", "type": "summary" },
-        { "text": "8. Osztály - Év Végi Felmérő", "link": "kviz_8_osztaly_ev_vegi_osszefoglalo.html", "type": "summary" }
-      
-    
-   ]
-    }
-  ]
+  "description": "Digitális segédlet és gyakorlórendszer általános iskolásoknak.",
+  "questions": [],
+  "toolData": {
+    "type": "hub-page",
+    "header": "Interaktív Matematika Gyűjtemény",
+    "subheader": "Digitális segédlet és gyakorlórendszer általános iskolásoknak",
+    "sections": [
+      {
+        "title": "Tananyagok Évfolyamok Szerint",
+        "cards": [
+          { "styleType": "grade", "mainText": "5.", "subText": "Osztály", "link": "/tananyag/kepletek-5-osztaly" },
+          { "styleType": "grade", "mainText": "6.", "subText": "Osztály", "link": "/tananyag/matek-kepletek-6" },
+          { "styleType": "grade", "mainText": "7.", "subText": "Osztály", "link": "/tananyag/matek-kepletek-7" },
+          { "styleType": "grade", "mainText": "8.", "subText": "Osztály", "link": "/tananyag/matek-kepletek-8" }
+        ]
+      },
+      {
+        "title": "Összesített Képletgyűjtemények",
+        "cards": [
+          { "styleType": "formula", "mainText": "5. Osztály", "subText": "Teljes Gyűjtemény", "link": "/tananyag/teljes-kepletgyujtemeny-5" },
+          { "styleType": "formula", "mainText": "6. Osztály", "subText": "Teljes Gyűjtemény", "link": "/tananyag/teljes-kepletgyujtemeny-6" },
+          { "styleType": "formula", "mainText": "7. Osztály", "subText": "Teljes Gyűjtemény", "link": "/tananyag/teljes-kepletgyujtemeny-7" },
+          { "styleType": "formula", "mainText": "8. Osztály", "subText": "Teljes Gyűjtemény", "link": "/tananyag/teljes-kepletgyujtemeny-8" }
+        ]
+      },
+      {
+        "title": "Év Végi Összefoglaló Felmérők",
+        "cards": [
+          { "styleType": "summary", "mainText": "5. Osztály", "subText": "Év Végi Felmérő", "link": "/tananyag/kviz-5-osztaly-ev-vegi-osszefoglalo" },
+          { "styleType": "summary", "mainText": "6. Osztály", "subText": "Év Végi Felmérő", "link": "/tananyag/kviz-6-osztaly-ev-vegi-osszefoglalo" },
+          { "styleType": "summary", "mainText": "7. Osztály", "subText": "Év Végi Felmérő", "link": "/tananyag/kviz-7-osztaly-ev-vegi-osszefoglalo" },
+          { "styleType": "summary", "mainText": "8. Osztály", "subText": "Év Végi Felmérő", "link": "/tananyag/kviz-8-osztaly-ev-vegi-osszefoglalo" }
+        ]
+      }
+    ]
+  }
 }
-

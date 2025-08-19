@@ -1,8 +1,41 @@
 {
-  "title": "Vita arena",
+  "title": "Vita Aréna",
   "subject": "altalanos",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Vita arena\" című tananyag.",
-  "questions": []
+  "category": "premium_tool",
+  "description": "Válassz egy témát, és nézd meg, hogyan érvelnek az MI-k egymás ellen!",
+  "questions": [],
+  "toolData": {
+    "type": "multi-choice-prompt-generator",
+    "header": "AI Vita Aréna",
+    "subheader": "Válassz egy témát, és nézd meg, hogyan érvelnek az MI-k egymás ellen!",
+    "choices": [
+      {
+        "title": "A videójátékok sportnak számítanak?",
+        "description": "Egy lelkes e-sport kommentátor vitázik egy szkeptikus sporttörténésszel.",
+        "topicValue": "A videójátékok sportnak számítanak-e?"
+      },
+      {
+        "title": "Be kellene tiltani az okostelefonokat az iskolákban?",
+        "description": "Egy innovatív pedagógus vitázik egy a hagyományos értékeket védő tanárral.",
+        "topicValue": "Be kellene-e tiltani az okostelefonokat az iskolákban?"
+      },
+      {
+        "title": "Etikus-e MI-vel művészeti versenyt nyerni?",
+        "description": "Egy jövőpárti digitális művész vitázik egy klasszikus festőművésszel.",
+        "topicValue": "Etikus-e MI-vel művészeti versenyt nyerni?"
+      },
+      {
+        "title": "Jobb a városban vagy vidéken élni?",
+        "description": "Egy nagyvárosi startupper vitázik egy vidéki gazdálkodóval.",
+        "topicValue": "Jobb-e a városban vagy vidéken élni?"
+      }
+    ],
+    "buttonText": "Vita Indítása",
+    "successMessage": "✅ Szuper! A vita-generáló promptot a vágólapra másoltam.",
+    "linkButtonText": "Irány a Gemini!",
+    "linkUrl": "https://gemini.google.com/",
+    "successNote": "Nyisd meg, illeszd be a promptot (Ctrl+V), és nézd meg a vitát!",
+    "systemPromptTemplate": "Viselkedj úgy, mint egy vitarendező és forgatókönyvíró! A feladatod, hogy legenerálj egy teljes vita-leiratot két, ellentétes nézőpontú mesterséges intelligencia között.\n\n**A MAI VITATÉMA:**\n\"{{topic}}\"\n\n**A VITAPARTNEREK:**\n1.  **AI Karakter A (A Téma Támogatója/Optimista):** Egy lelkes, jövő-orientált, innovációpárti személyiség. Az érvei a fejlődésre, a lehetőségekre és a modern világ előnyeire fókuszálnak.\n2.  **AI Karakter B (A Téma Ellenzője/Szkeptikus):** Egy megfontolt, a hagyományokat tisztelő, óvatos személyiség. Az érvei a kockázatokra, a hátrányokra és a bevált értékek megőrzésére fókuszálnak.\n\n**A VITA SZERKEZETE (4 Forduló):**\nKészíts egy teljes, párbeszédes formátumú vita-leiratot a következő szerkezet szerint:\n\n**1. Forduló: Nyitó érvek**\n   - Karakter A bemutatja a fő érvét a téma mellett.\n   - Karakter B bemutatja a fő érvét a téma ellen.\n\n**2. Forduló: Cáfolat**\n   - Karakter A reagál Karakter B nyitó érvére, és megpróbálja megcáfolni azt.\n   - Karakter B reagál Karakter A nyitó érvére, és megpróbálja megcáfolni azt.\n\n**3. Forduló: Új szempontok behozása**\n   - Karakter A egy új, meglepő szempontot vagy példát hoz fel az álláspontja megerősítésére.\n   - Karakter B is egy új szemponttal vagy példával kontráz.\n\n**4. Forduló: Záró gondolatok**\n   - Karakter A összefoglalja a végső álláspontját 2-3 mondatban.\n   - Karakter B is összefoglalja a végső álláspontját 2-3 mondatban.\n\n**FONTOS SZABÁLYOK:**\n- A stílus legyen intelligens, érvelő, de egy 14-16 éves diák számára is érthető és élvezetes.\n- A karakterek ne sértegessék egymást, de a vita legyen éles és gondolatébresztő.\n- A teljes leiratot egyetlen válasszban add meg, markdown formázással (félkövér nevek, stb.).\n- SOHA ne említsd, hogy te egy MI vagy! Te a vitarendező vagy, aki levezényli ezt a szimulációt."
+  }
 }

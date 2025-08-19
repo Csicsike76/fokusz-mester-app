@@ -4,5 +4,127 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Matek kepletek 6\" című tananyag.",
-  "questions": []
+  "questions": [
+    {
+      "title": "Halmazok és Természetes Számok",
+      "cards": [
+        {
+          "type": "formula",
+          "title": "1.1 Halmazok és Elemek",
+          "explanation": "<p>A halmaz egyértelműen meghatározott, különböző dolgok (elemek) összessége. A halmaz elemeit kapcsos zárójelek között, vesszővel elválasztva soroljuk fel. Azt, hogy egy 'a' elem beletartozik egy 'A' halmazba, az 'a ∈ A' jellel jelöljük.</p>",
+          "expression": "<span class=\"formula-var\">a<span class=\"tooltip-text\">Egy elem</span></span> ∈ <span class=\"formula-var\">A<span class=\"tooltip-text\">A halmaz, ami tartalmazza 'a'-t</span></span>",
+          "example": "<p><strong>Feladat:</strong> Legyen A = {1, 3, 5, 7}. Igaz-e, hogy 5 ∈ A?<br><strong>Megoldás:</strong> Igen, igaz, mert az 5-ös szám szerepel az A halmaz elemei között.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Halmazok alapfogalmai", "expression": "a ∈ A", "example": "Legyen A a páros számok halmaza. Ekkor a 4 ∈ A (4 eleme A-nak), de az 5 ∉ A (5 nem eleme A-nak)." } }
+        },
+        {
+          "type": "formula",
+          "title": "1.2 Halmazműveletek",
+          "explanation": "<p>Két halmazzal alapvető műveleteket végezhetünk:</p><ul><li><strong>Unió (∪):</strong> A két halmaz \"egyesítése\". Az unióhalmaz tartalmazza mindazokat az elemeket, amelyek legalább az egyik halmazban benne vannak.</li><li><strong>Metszet (∩):</strong> A két halmaz \"közös része\". A metszethalmaz csak azokat az elemeket tartalmazza, amelyek mindkét halmazban benne vannak.</li></ul>",
+          "expression": null,
+          "example": "<p><strong>Feladat:</strong> Legyen A={1,2,3} és B={2,3,4}. Add meg az A∪B és az A∩B halmazokat!<br><strong>Megoldás:</strong><br>Unió (minden elemet beírunk, de mindent csak egyszer): A∪B = {1, 2, 3, 4}.<br>Metszet (csak a közös elemeket írjuk be): A∩B = {2, 3}.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Halmazműveletek (unió, metszet)", "expression": "A ∪ B, A ∩ B", "example": "A={1,2,3}, B={2,3,4}. Ekkor A∪B={1,2,3,4} (minden elem), A∩B={2,3} (csak a közös elemek)." } }
+        },
+        {
+          "type": "formula",
+          "title": "1.3 Oszthatóság",
+          "explanation": "<p>Azt mondjuk, hogy az 'a' természetes szám osztója a 'b' természetes számnak, ha van olyan természetes szám, amellyel 'a'-t megszorozva 'b'-t kapunk. Másképpen: 'b' osztható 'a'-val, ha az osztás maradéka 0. Jelölése: a | b (olvasd: 'a' osztója 'b'-nek).</p>",
+          "expression": null,
+          "example": "<p><strong>Feladat:</strong> Sorold fel a 12 összes természetes szám osztóját!<br><strong>Megoldás:</strong> Keressük azokat a számokat, amelyekkel a 12 maradék nélkül osztható. Ezek: 1, 2, 3, 4, 6, 12.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Oszthatóság a természetes számok halmazában", "expression": "a | b", "example": "A 12-nek osztója a 4, mert 12 = 4 * 3. Jelöléssel: 4 | 12." } }
+        },
+        {
+          "type": "knowledge-check", "title": "Ismeretfelmérő: Halmazok és Természetes Számok", "explanation": "Készen állsz, hogy leteszteld a tudásodat a halmazokról, halmazműveletekről és az oszthatóságról? Használd a Tudástár intelligens eszközeit a gyakorláshoz és a felkészüléshez!",
+          "links": [ { "title": "Gyors Ismétlés", "description": "Generálj véletlenszerű, rövid feladatokat az 5. osztályos tananyagból!", "url": "/tananyag/napi-kihivas" }, { "title": "Próba-Témazáró", "description": "Generálj egy teljes témazárót ebből a fejezetből az AI Vizsga Szimulátorral!", "url": "/tananyag/vizsga-szimulator" } ]
+        }
+      ]
+    },
+    {
+      "title": "Arányok, Aránypárok",
+      "cards": [
+        {
+          "type": "formula", "title": "2.1 Arány és Aránypár", "explanation": "<p>Az <strong>arány</strong> két mennyiség hányadossal való összehasonlítása. Jele a ':' (pl. a:b), ami ugyanazt jelenti, mint a tört (a/b). Az <strong>aránypár</strong> két egyenlő arány kapcsolata. Egy aránypár akkor igaz, ha a két arány értéke megegyezik. Fontos tulajdonsága, hogy a \"külső tagok szorzata egyenlő a belső tagok szorzatával\" (a*d = b*c).</p>", "expression": "<span class=\"formula-var\">a<span class=\"tooltip-text\">Külső tag</span></span> : <span class=\"formula-var\">b<span class=\"tooltip-text\">Belső tag</span></span> = <span class=\"formula-var\">c<span class=\"tooltip-text\">Belső tag</span></span> : <span class=\"formula-var\">d<span class=\"tooltip-text\">Külső tag</span></span>", "example": "<p><strong>Feladat:</strong> Oldd meg az egyenletet: x : 5 = 6 : 10.<br><strong>Megoldás:</strong> Használjuk a külső és belső tagok szorzatának szabályát: x * 10 = 5 * 6 => 10x = 30 => x = 3.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Arány és aránypár", "expression": "a : b = c : d", "example": "Igaz-e az aránypár: 2:4 = 3:6? Megoldás: Igen, mert 2/4 = 0.5 és 3/6 = 0.5. A két arány értéke megegyezik." } }
+        },
+        {
+          "type": "formula", "title": "2.2 Egyenes és Fordított Arányosság", "explanation": "<p>Két mennyiség arányos, ha az egyik változása a másik szabályos változását vonja maga után.</p><ul><li><strong>Egyenes arányosság:</strong> Ha az egyik mennyiség valahányszorosára nő, a másik is ugyanannyiszorosára nő. (Pl. több munka, több pénz). A hozzájuk tartozó értékek hányadosa állandó.</li><li><strong>Fordított arányosság:</strong> Ha az egyik mennyiség valahányszorosára nő, a másik ugyanannyiad részére csökken. (Pl. több munkás, kevesebb idő). A hozzájuk tartozó értékek szorzata állandó.</li></ul>", "expression": null, "example": "<p><strong>Feladat (fordított arányosság):</strong> 4 munkás 6 nap alatt végez el egy munkát. Hány nap alatt végezne vele 8 munkás?<br><strong>Megoldás:</strong> Kétszer annyi munkás fele annyi idő alatt végez. 6 / 2 = 3 nap.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Egyenes és fordított arányosság", "expression": "Egyenes: y=k*x, Fordított: y=k/x", "example": "Egy autó 2 óra alatt 180 km-t tesz meg. Mennyit tesz meg 5 óra alatt? Megoldás (egyenes arányosság): 5/2 = x/180 => 2x = 900 => x = 450 km." } }
+        },
+        {
+          "type": "formula", "title": "2.3 Százalékszámítás", "explanation": "<p>A százalék egy arány, ami azt fejezi ki, hogy egy mennyiség egy másik mennyiségnek hány századrésze. A % jel az /100-ad részt jelöli. Három fő típusa van:</p><ul><li><strong>Százalékérték kiszámítása:</strong> Mennyi az alap X %-a? (Alap * (Százalékláb/100))</li><li><strong>Alap kiszámítása:</strong> Minek az X %-a az érték? (Érték / (Százalékláb/100))</li><li><strong>Százalékláb kiszámítása:</strong> Az érték hány %-a az alapnak? ((Érték / Alap) * 100)</li></ul>", "expression": null, "example": "<p><strong>Feladat:</strong> Egy 5000 Ft-os pulóver árát 20%-kal csökkentették. Mennyi az új ára?<br><strong>Megoldás:</strong> A kedvezmény: 5000 * 0.20 = 1000 Ft. Az új ár: 5000 - 1000 = 4000 Ft.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Százalékszámítás", "expression": "Százalékérték = Alap * Százalékláb / 100", "example": "Mennyi a 2000 Ft-nak a 15%-a? Megoldás: 2000 * (15/100) = 2000 * 0.15 = 300 Ft." } }
+        },
+        {
+          "type": "knowledge-check", "title": "Ismeretfelmérő: Arányok és Aránypárok", "explanation": "Teszteld a tudásodat az arányokról, arányosságokról és a százalékszámításról a Tudástár intelligens eszközeivel!",
+          "links": [ { "title": "Gyors Ismétlés", "description": "Generálj véletlenszerű, rövid feladatokat az 5. osztályos tananyagból!", "url": "/tananyag/napi-kihivas" }, { "title": "Próba-Témazáró", "description": "Generálj egy teljes témazárót ebből a fejezetből az AI Vizsga Szimulátorral!", "url": "/tananyag/vizsga-szimulator" } ]
+        }
+      ]
+    },
+    {
+      "title": "Az Egész Számok Halmaza",
+      "cards": [
+        {
+          "type": "formula", "title": "3.1 Egész Számok és Abszolút Érték", "explanation": "<p>Az egész számok halmaza (ℤ) tartalmazza a természetes számokat (0, 1, 2,...), azok ellentettjeit (-1, -2, -3,...), és a nullát. Az <strong>abszolút érték</strong> |a| egy szám távolságát jelenti a nullától a számegyenesen, ezért soha nem lehet negatív. Például |-3| = 3 és |+3| = 3.</p>", "expression": null, "example": "<p><strong>Feladat:</strong> Tedd növekvő sorrendbe: -5, 2, 0, -1, |-4|.<br><strong>Gondolkodás:</strong> Először kiszámoljuk az abszolút értéket: |-4| = 4. A számok tehát: -5, 2, 0, -1, 4.<br><strong>Megoldás:</strong> A számegyenesen balról jobbra haladva a sorrend: -5, -1, 0, 2, 4.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Az egész számok és az abszolút érték", "expression": "ℤ = {...,-2,-1,0,1,2,...}", "example": "Mennyi a |-3| (mínusz három abszolút értéke)? Megoldás: 3, mert a -3 szám 3 egység távolságra van a nullától a számegyenesen." } }
+        },
+        {
+          "type": "formula", "title": "3.2 Műveletek Egész Számokkal", "explanation": "<p>A negatív számokkal végzett műveleteknek különös figyelmet kell szentelni, főleg a szorzásnál és osztásnál:</p><ul><li><strong>Összeadás/Kivonás:</strong> Egy negatív szám hozzáadása ugyanaz, mint a pozitív párjának kivonása. (pl. 7 + (-3) = 7 - 3 = 4).</li><li><strong>Szorzás/Osztás:</strong><ul><li>Ha az előjelek <strong>különbözőek</strong>, az eredmény <strong>negatív</strong>. (pl. (+) * (-) = (-))</li><li>Ha az előjelek <strong>azonosak</strong>, az eredmény <strong>pozitív</strong>. (pl. (-) * (-) = (+))</li></ul></li></ul>", "expression": null, "example": "<p><strong>Feladat:</strong> Számítsd ki: -8 - (-5).<br><strong>Gondolkodás:</strong> Egy negatív szám kivonása ugyanaz, mint a pozitív párjának hozzáadása.<br><strong>Megoldás:</strong> -8 - (-5) = -8 + 5 = -3.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Műveletek egész számokkal", "expression": "(+)*(-)=(-); (-)*(-)=(+)", "example": "Mennyi (-2) * (+5)? Megoldás: -10. Mennyi (-3) * (-4)? Megoldás: +12." } }
+        },
+        {
+          "type": "formula", "title": "3.3 Egyenletek az Egész Számok Halmazán", "explanation": "<p>Az egész számok bevezetésével már olyan egyenleteket is meg tudunk oldani, amelyeknek a természetes számok körében nem volt megoldásuk. Az egyenletmegoldás lépései (mérleg-elv) ugyanazok, de a műveleteket már az egész számokra vonatkozó szabályok szerint végezzük el.</p>", "expression": null, "example": "<p><strong>Feladat:</strong> Oldd meg: 4x = -12.<br><strong>Megoldás:</strong> Mindkét oldalt elosztjuk 4-gyel. x = -12 / 4 = -3.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Egyenletek az egész számok halmazán", "expression": "x + 8 = 3", "example": "Oldd meg az egyenletet: x + 8 = 3. Megoldás: Mindkét oldalból kivonunk 8-at. x = 3 - 8 = -5." } }
+        },
+        {
+          "type": "knowledge-check", "title": "Ismeretfelmérő: Egész Számok", "explanation": "Teszteld a tudásodat az egész számokkal végzett műveletekről és az egyenletmegoldásról a Tudástár intelligens eszközeivel!",
+          "links": [ { "title": "Gyors Ismétlés", "description": "Generálj véletlenszerű, rövid feladatokat az 5. osztályos tananyagból!", "url": "/tananyag/napi-kihivas" }, { "title": "Próba-Témazáró", "description": "Generálj egy teljes témazárót ebből a fejezetből az AI Vizsga Szimulátorral!", "url": "/tananyag/vizsga-szimulator" } ]
+        }
+      ]
+    },
+    {
+      "title": "Mértani Alapfogalmak",
+      "cards": [
+        {
+          "type": "formula", "title": "5.1 Szögek a Síkban", "explanation": "<p>A szögekkel kapcsolatos alapvető fogalmak:</p><ul><li><strong>Pótszögek:</strong> Két szög, amelyeknek összege 90°.</li><li><strong>Kiegészítő szögek:</strong> Két szög, amelyeknek összege 180°.</li><li><strong>Csúcsszögek:</strong> Két egyenes metszeténél keletkező, egymással szemben lévő szögek. A csúcsszögek mindig egyenlőek.</li></ul>", "expression": null, "example": "<p><strong>Feladat:</strong> Egy 30°-os szögnek mennyi a pótszöge és a kiegészítő szöge?<br><strong>Megoldás:</strong><br>Pótszöge: 90° - 30° = 60°.<br>Kiegészítő szöge: 180° - 30° = 150°.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Szögek a síkban", "expression": "Pótszögek: α+β=90°; Kiegészítő szögek: α+β=180°", "example": "Egy 30°-os szögnek mennyi a pótszöge és a kiegészítő szöge? Megoldás: Pótszöge: 90°-30°=60°. Kiegészítő szöge: 180°-30°=150°." } }
+        },
+        {
+          "type": "formula", "title": "5.2 Párhuzamos Egyenesek", "explanation": "<p>Ha két párhuzamos egyenest egy harmadik (a szelő) metsz, akkor a keletkező 8 szög között szabályos összefüggések vannak:</p><ul><li><strong>Egyállású szögek:</strong> Ugyanazon az oldalon, \"ugyanolyan pozícióban\" lévő szögek. Ezek mindig egyenlőek.</li><li><strong>Váltószögek:</strong> A szelő ellentétes oldalán, a párhuzamosok között lévő \"belső\" vagy azokon kívül lévő \"külső\" szögek. Ezek is mindig egyenlőek.</li></ul><p><strong>Párhuzamossági kritérium:</strong> Ha a fenti szögekről tudjuk, hogy egyenlőek, akkor az eredeti két egyenes biztosan párhuzamos.</p>", "expression": null, "example": "<p><strong>Feladat:</strong> Két párhuzamos egyenest egy szelő 70°-os szögben metsz. Mekkorák a többi szögek?<br><strong>Megoldás:</strong> A keletkezett 8 szögből 4 darab 70°-os lesz (az eredeti, annak csúcsszöge, és a velük egyállású/váltószög párok). A többi 4 szög a 70° kiegészítő szöge, azaz 180° - 70° = 110°.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Párhuzamos egyenesek és egy szelő által bezárt szögek", "expression": "Váltószögek és egyállású szögek egyenlőek.", "example": "Két párhuzamos egyenest egy szelő 70°-os szögben metsz. Mekkora a többi keletkezett szög? Megoldás: A csúcsszöge és a váltószöge is 70°. A mellékszögei 180°-70°=110°." } }
+        },
+        {
+          "type": "formula", "title": "5.3 Merőleges Egyenesek", "explanation": "<p>Két egyenes merőleges, ha 90°-os szöget zárnak be. Fontos kapcsolódó fogalmak:</p><ul><li><strong>Pont távolsága egyenestől:</strong> A pontból az egyenesre bocsátott merőleges szakasz hossza. Ez a legrövidebb távolság.</li><li><strong>Szakaszfelező merőleges:</strong> Az az egyenes, amely egy szakaszt pontosan a felénél, 90°-os szögben metsz. A szakaszfelező merőleges minden pontja egyenlő távolságra van a szakasz két végpontjától.</li></ul>", "expression": null, "example": "<p><strong>Feladat:</strong> Mi a mértani helye azoknak a pontoknak a síkon, amelyek egyenlő távolságra vannak egy szakasz két végpontjától?<br><strong>Megoldás:</strong> A szakaszfelező merőleges egyenes.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "Merőleges egyenesek és a szakaszfelező merőleges", "expression": "Egy pont és egy egyenes távolsága a pontból az egyenesre bocsátott merőleges szakasz hossza.", "example": "Az AB szakasz felezőmerőlegese az az egyenes, amely merőleges az AB szakaszra és átmegy annak a felezőpontján." } }
+        },
+        {
+          "type": "formula", "title": "5.4 A Kör", "explanation": "<p>A kör azoknak a pontoknak a halmaza a síkon, amelyek egy adott ponttól (a középponttól) egyenlő távolságra vannak. A kör alapvető elemei:</p><ul><li><strong>Középpont (O):</strong> A pont, amelytől a körvonal minden pontja egyenlő távolságra van.</li><li><strong>Sugár (r):</strong> A középpontot a körvonal bármely pontjával összekötő szakasz.</li><li><strong>Átmérő (d):</strong> A körvonal két pontját összekötő szakasz, amely áthalad a középponton. Hossza a sugár kétszerese.</li><li><strong>Húr:</strong> A körvonal két tetszőleges pontját összekötő szakasz. A leghosszabb húr az átmérő.</li></ul>", "expression": null, "example": "<p><strong>Feladat:</strong> Egy kör átmérője 14 cm. Mekkora a sugara?<br><strong>Megoldás:</strong> A sugár az átmérő fele, tehát r = 14 / 2 = 7 cm.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "A kör alapvető elemei", "expression": "d = 2 * r", "example": "Egy kör sugara 5 cm. Milyen hosszú az átmérője? Megoldás: d = 2 * 5 = 10 cm." } }
+        },
+        {
+          "type": "knowledge-check", "title": "Ismeretfelmérő: Mértani Alapfogalmak", "explanation": "Teszteld a tudásodat a szögekről, egyenesekről és a kör alapjairól a Tudástár intelligens eszközeivel!",
+          "links": [ { "title": "Gyors Ismétlés", "description": "Generálj véletlenszerű, rövid feladatokat az 5. osztályos tananyagból!", "url": "/tananyag/napi-kihivas" }, { "title": "Próba-Témazáró", "description": "Generálj egy teljes témazárót ebből a fejezetből az AI Vizsga Szimulátorral!", "url": "/tananyag/vizsga-szimulator" } ]
+        }
+      ]
+    },
+    {
+      "title": "A Háromszög",
+      "cards": [
+        {
+          "type": "formula", "title": "6.1 A Háromszög Alapjai", "explanation": "<p>A háromszög egy olyan sokszög, amelynek 3 oldala és 3 csúcsa van. Osztályozhatjuk oldalak szerint (általános, egyenlő szárú, egyenlő oldalú) és szögek szerint (hegyes-, derék- vagy tompaszögű).</p><ul><li><strong>Háromszög-egyenlőtlenség:</strong> Bármely két oldalának összege nagyobb a harmadik oldalnál. (a+b > c)</li><li><strong>Belső szögek összege:</strong> A háromszög belső szögeinek összege mindig 180°.</li></ul>", "expression": null, "example": "<p><strong>Feladat:</strong> Lehet-e egy háromszögnek 2cm, 3cm és 6cm hosszú oldala?<br><strong>Megoldás:</strong> Nem, mert a két rövidebb oldal összege (2+3=5) nem nagyobb a leghosszabb oldalnál (6). A háromszög-egyenlőtlenség nem teljesül.</p>",
+          "actions": { "showExampleButton": true, "geminiHelp": { "name": "A háromszög alapfogalmai és a belső szögek összege", "expression": "α + β + γ = 180°", "example": "Egy háromszög két ismert szöge 50° és 70°. Mekkora a harmadik szöge? Megoldás: 50°+70°=120°. A harmadik szög 180°-120°=60°." } }
+        },
+        {
+          "type": "formula", "title": "6.2 A Háromszög Nevezetes Vonalai", "explanation": "<p>A háromszögnek négy fontos, \"nevezetes\" vonaltípusa van, amelyek metszéspontjai is különlegesek:</p><ul><li><strong>Magasságvonal:</strong> A csúcsból a szemközti oldalra bocsátott merőleges. Metszéspontjuk a <strong>magasságpont (M)</strong>.</li><li><strong>Oldalfelező merőleges:</strong> Az oldal felezőpontjában az oldalra emelt merőleges. Metszéspontjuk a <strong>háromszög köré írható kör középpontja (O)</strong>.</li><li><strong>Szögfelező:</strong> A belső szöget két egyenlő részre osztó vonal. Metszéspontjuk a <strong>háromszögbe írható kör középpontja (K)</strong>.</li><li><strong>Súlyvonal:</strong> A csúcsot a szemközti oldal felezőpontjával összekötő szakasz. Metszéspontjuk a <strong>súlypont (S)</strong>.</li></ul>", "expression": null, "example": null,
+          "actions": { "showExampleButton": false, "geminiHelp": { "name": "A háromszög nevezetes vonalai", "expression": "Magasságvonal, oldalfelező, szögfelező, súlyvonal", "example": "A súlypont a háromszög súlyvonalainak metszéspontja, és a súlyvonalakat 2:1 arányban osztja." } }
+        },
+        {
+          "type": "formula", "title": "6.3 Kongruens Háromszögek", "explanation": "<p>Két háromszög <strong>kongruens</strong> (vagy egybevágó), ha mindhárom oldaluk és mindhárom szögük páronként megegyezik. A kongruens háromszögek \"pontosan ugyanolyanok\", egymásra helyezve tökéletesen fedik egymást. A kongruencia bizonyításához nem kell minden adatot ellenőrizni, elegendő az alábbi esetek (kongruenciakritériumok) egyikét igazolni:</p><ul><li><strong>Oldal-Oldal-Oldal (O.O.O.):</strong> Mindhárom oldaluk páronként egyenlő.</li><li><strong>Oldal-Szög-Oldal (O.Sz.O.):</strong> Két oldaluk és a közbezárt szögük páronként egyenlő.</li><li><strong>Szög-Oldal-Szög (Sz.O.Sz.):</strong> Egy oldaluk és a rajta fekvő két szög páronként egyenlő.</li><li><strong>Oldal-Oldal-Szög (O.O.Sz., speciális eset):</strong> Két oldaluk és a nagyobbikkal szemközti szögük páronként egyenlő.</li></ul>", "expression": null, "example": null,
+          "actions": { "showExampleButton": false, "geminiHelp": { "name": "Kongruens háromszögek", "expression": "ΔABC ≅ ΔA'B'C'", "example": "Ha két háromszög mindhárom oldala páronként megegyezik, akkor a két háromszög egybevágó (kongruens)." } }
+        },
+        {
+          "type": "knowledge-check", "title": "Ismeretfelmérő: A Háromszög", "explanation": "Készen állsz, hogy leteszteld a tudásodat a háromszögek tulajdonságairól, nevezetes vonalairól és a kongruenciáról?",
+          "links": [ { "title": "Gyors Ismétlés", "description": "Generálj véletlenszerű, rövid feladatokat az 5. osztályos tananyagból!", "url": "/tananyag/napi-kihivas" }, { "title": "Próba-Témazáró", "description": "Generálj egy teljes témazárót ebből a fejezetből az AI Vizsga Szimulátorral!", "url": "/tananyag/vizsga-szimulator" } ]
+        }
+      ]
+    }
+  ]
 }

@@ -1,8 +1,22 @@
 {
-  "title": "Iranytu",
+  "title": "Iránytű",
   "subject": "altalanos",
   "grade": 0,
-  "category": "free_lesson",
-  "description": "Ez a(z) \"Iranytu\" című tananyag.",
-  "questions": []
+  "category": "free_tool",
+  "description": "A személyre szabott kalauzod a CSICSIKE Tudástárban, ami segít megtalálni a számodra legmegfelelőbb tananyagot vagy eszközt.",
+  "questions": [],
+  "toolData": {
+    "type": "prompt-generator",
+    "icon": "🧭",
+    "header": "Tudás Iránytű",
+    "subheader": "A személyre szabott kalauzod a CSICSIKE Tudástárban",
+    "label": "Miben segíthetek ma?",
+    "placeholder": "Írd le, mit szeretnél tanulni, miben akadtál el, vagy mihez van kedved! Pl: 'Segíts felkészülni a Pitagorasz-tételre!', 'Unatkozom, valami kreatívat csinálnék AI-val.', 'Hogyan működik a hőtágulás?'",
+    "buttonText": "1. Prompt Előkészítése",
+    "successMessage": "✅ Szuper! A személyre szabott promptot a vágólapra másoltam.",
+    "linkButtonText": "2. Irány a Gemini!",
+    "linkUrl": "https://gemini.google.com/",
+    "successNote": "Nyisd meg, illeszd be a promptot (Ctrl+V), és nyomj Entert!",
+    "systemPromptTemplate": "Viselkedj úgy, mint a \"Tudás Iránytű\", a CSICSIKE Tudástár intelligens kalauza! A feladatod, hogy a felhasználó kérésére egy személyre szabott, lépésről-lépésre vezető tanulási útvonalat állíts össze a CSICSIKE Tudástár meglévő tananyagaiból és eszközeiből.\n\n**A CSICSIKE Tudástár Felépítése:**\n\n1.  **Tantárgyak és Leckék:**\n    *   Matematika (5-8. osztály)\n    *   Fizika (6-8. osztály)\n    *   Mesterséges Intelligencia (AI) Műhelyek\n    *   Szuperképesség Kurzus\n\n2.  **Extra Interaktív Eszközök:**\n   \n    *   **Fókusz Mester (fokusz_mester.html):** Tanulási időzítő.\n    *   **Időutazó Csevegő (idoutazo_csevego.html):** Beszélgetés híres tudósokkal.\n    *   **Jövőkutató Szimulátor (jovokutato_szimulator.html):** A jövő felfedezése.\n    *   **Személyes Célkitűző (celkituzo.html):** Célok tervezése.\n\n**A TE FELADATOD:**\n\nA felhasználó a következő problémával/kéréssel fordul hozzád:\n\"{{userInput}}\"\n\nVálaszként állíts össze egy 2-4 lépésből álló, logikus \"Tanulási Útvonalat\"!\n-   Minden lépéshez írj egy rövid, bátorító magyarázatot!\n-   Minden lépésnél javasolj egy konkrét eszközt vagy leckét a CSICSIKE Tudástárból!\n-   **FONTOS:** A válaszodban ne linkeket használj, hanem vastag betűvel írd ki az ajánlott oldal nevét! Pl. \"**Interaktív Segédlet: Matematika 8. Osztály**\" vagy \"**Extra Eszköz: Fókusz Mester**\".\n\n**Válasz Stílusa:** Legyél barátságos, segítőkész és rendkívül gyakorlatias. A célod, hogy a felhasználó úgy érezze, egy személyre szabott, exkluzív útitervet kapott.\n\nKezd a választ így: \"Szia! A kérésed alapján itt van egy javasolt útvonal a CSICSIKE Tudástárban:\""
+  }
 }

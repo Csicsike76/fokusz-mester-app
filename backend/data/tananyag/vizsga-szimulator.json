@@ -1,8 +1,57 @@
 {
-  "title": "Vizsga szimulator",
+  "title": "Vizsga Szimulátor",
   "subject": "altalanos",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Vizsga szimulator\" című tananyag.",
-  "questions": []
+  "category": "premium_tool",
+  "description": "Generálj végtelen számú, megbízható próbafeladatsort a témazáróidra!",
+  "questions": [],
+  "toolData": {
+    "type": "exam-simulator",
+    "icon": "📝",
+    "header": "AI Vizsga Szimulátor",
+    "subheader": "Generálj végtelen számú, megbízható próbafeladatsort a témazáróidra!",
+    "fields": [
+      {
+        "id": "subject",
+        "label": "1. Válassz tantárgyat:",
+        "type": "select",
+        "options": ["Matematika", "Fizika"]
+      },
+      {
+        "id": "grade",
+        "label": "2. Válassz évfolyamot:",
+        "type": "select-dependent",
+        "dependency": "subject"
+      },
+      {
+        "id": "numQuestions",
+        "label": "3. Kérdések száma:",
+        "type": "select",
+        "defaultValue": "10",
+        "options": [
+          { "value": "5", "text": "5 kérdés (Villámteszt)" },
+          { "value": "10", "text": "10 kérdés (Standard Témazáró)" },
+          { "value": "15", "text": "15 kérdés (Nagy Felmérő)" }
+        ]
+      },
+      {
+        "id": "focusTopics",
+        "label": "4. Fókusz témakörök (opcionális):",
+        "type": "text",
+        "placeholder": "Pl. törtek, százalékszámítás, Newton törvényei..."
+      }
+    ],
+    "gradeDependencyMap": {
+      "Matematika": ["5. Osztály", "6. Osztály", "7. Osztály", "8. Osztály"],
+      "Fizika": ["6. Osztály", "7. Osztály", "8. Osztály"]
+    },
+    "buttonText": "Próbavizsga Generálása →",
+    "successMessage": "✅ Szuper! A személyre szabott vizsgasort a vágólapra másoltam.",
+    "linkButtonText": "Irány a Gemini!",
+    "linkUrl": "https://gemini.google.com/",
+    "successNote": "Nyisd meg, illeszd be a promptot (Ctrl+V), és nyomj Entert!",
+    "focusTopicsDefault": "nincs megadva, általános feladatsor kell",
+    "knowledgeBase": "---\n TUDÁSBÁZIS (CSAK EBBŐL DOLGOZZ!)\n---\nMatematika 5. osztály: Műveletek törtekkel, Tizedestörtek, Természetes számok, Geometriai alapok.\nMatematika 6. osztály: Százalékszámítás, Arányosság, Tengelyes tükrözés, Egész számok, Oszthatóság.\nMatematika 7. osztály: Hatványozás, Algebrai kifejezések, Egyenletek, Háromszögek szögei.\nMatematika 8. osztály: Pitagorasz-tétel (a²+b²=c²), Lineáris függvény (y=mx+b), Nevezetes azonosságok ((a+b)²=a²+2ab+b²), Halmazok (metszet, unió), Henger térfogata (V=r²*π*m).\nFizika 6. osztály: Halmazállapotok (szilárd, folyékony, gáz), Hőtágulás, Sűrűség (ρ=m/V).\nFizika 7. osztály: Sebesség (v=s/t), Erő (F, Newton), Newton törvényei (I. Tehetetlenség, II. F=m*a, III. Hatás-ellenhatás), Munka (W=F*s).\nFizika 8. osztály: Elektromos töltés (pozitív, negatív), Áramerősség (I, Amper), Feszültség (U, Volt), Ellenállás (R, Ohm), Ohm törvénye (I=U/R), Mágneses mező, Iránytű.\n--- TUDÁSBÁZIS VÉGE ---",
+    "systemPromptTemplate": "Viselkedj úgy, mint egy precíz, megbízható tanár, aki egy témazáró feladatsort állít össze! A feladatod, hogy a megadott paraméterek és a megadott TUDÁSBÁZIS alapján generálj egy próbavizsgát.\n\n**A vizsga paraméterei:**\n- Tantárgy: {{subject}}\n- Évfolyam: {{grade}}\n- Feladatok száma: {{numQuestions}}\n- Fókuszban lévő témakörök: {{focusTopics}}\n\n{{knowledgeBase}}\n\n**SZIGORÚ UTASÍTÁSOK:**\n1.  **CSAK a fenti Tudásbázisból dolgozz!** Ne használj semmilyen más, külső ismeretet! Ez garantálja a pontosságot.\n2.  Készíts egy {{numQuestions}} kérdésből álló, vegyes típusú feladatsort (feleletválasztós, definíció, egyszerű számítás).\n3.  A kérdések nehézsége feleljen meg a megadott évfolyam szintjének.\n4.  **A feleletválasztós kérdéseknél SOHA NE használj betűjeleket (A, B, C)!** A válaszlehetőségeket egyszerű felsorolásként, jelölés nélkül add meg!\n5.  A feladatsor végén, \"**--- MEGOLDÓKULCS ---**\" címszó alatt add meg a helyes válaszokat, egyértelműen.\n\nKezd a választ a feladatsor címével, pl. \"Próbavizsga - {{subject}} {{grade}}\"."
+  }
 }

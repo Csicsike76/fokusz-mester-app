@@ -1,0 +1,128 @@
+:root {
+    --piros: #CD2A3E;
+    --feher: #FFFFFF;
+    --zold: #477050;
+    --sotet-szurke: #333333;
+    --surface: rgba(255, 255, 255, 0.9);
+    --card-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(90deg, 
+        rgba(205, 42, 62, 0.8) 33.3%, 
+        rgba(255, 255, 255, 0.8) 33.3%, 
+        rgba(255, 255, 255, 0.8) 66.6%, 
+        rgba(71, 112, 80, 0.8) 66.6%);
+    color: var(--sotet-szurke);
+    border-radius: 16px;
+    border: 1px solid rgba(221, 221, 221, 0.5);
+}
+
+.header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.sectionWrapper {
+    margin-bottom: 3rem;
+}
+
+.titleWrapper {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+    font-size: 2rem;
+    color: var(--zold);
+    text-align: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--zold);
+    display: inline-block;
+    background-color: var(--surface);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.cardGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    padding: 2rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--sotet-szurke);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #E7E4DC;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.mainText {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--piros);
+    line-height: 1;
+}
+
+.subText {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.card.formula .mainText,
+.card.summary .mainText {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.card.formula {
+    background: linear-gradient(135deg, rgba(241, 248, 233, 0.9), rgba(255, 255, 255, 0.9));
+}
+.card.formula .subText {
+    color: var(--zold);
+}
+
+.card.summary {
+    background: linear-gradient(135deg, #477050, #5a8e65);
+    color: white;
+}
+.card.summary .mainText, .card.summary .subText {
+    color: white;
+}
+
+@media(max-width: 768px) {
+    .header h1 { font-size: 2rem; }
+    .header p { font-size: 1rem; }
+    .sectionTitle { font-size: 1.5rem; }
+}

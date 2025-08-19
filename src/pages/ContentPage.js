@@ -1,4 +1,4 @@
-// Fájl: src/pages/ContentPage.js (VÉGLEGES JAVÍTÁS)
+// Fájl: src/pages/ContentPage.js (JAVÍTOTT VERZIÓ)
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -10,10 +10,43 @@ import SingleChoiceQuestion from '../components/SingleChoiceQuestion';
 import WorkshopContent from '../components/WorkshopContent/WorkshopContent';
 import TopicSelector from '../components/TopicSelector/TopicSelector';
 import GoalPlannerTool from '../components/GoalPlannerTool/GoalPlannerTool';
+import PromptGeneratorTool from '../components/PromptGeneratorTool/PromptGeneratorTool';
+import PreloadedPromptLauncher from '../components/PreloadedPromptLauncher/PreloadedPromptLauncher';
+import MultiChoicePromptGenerator from '../components/MultiChoicePromptGenerator/MultiChoicePromptGenerator';
+import ExamSimulatorTool from '../components/ExamSimulatorTool/ExamSimulatorTool';
+import MultiInputPromptGenerator from '../components/MultiInputPromptGenerator/MultiInputPromptGenerator';
+import HubPageTool from '../components/HubPageTool/HubPageTool';
 
 // =================================================================
 // BELSŐ NÉZET KOMPONENSEK
 // =================================================================
+
+// ---- Tananyag nézet (kétoszlopos) ----
+const LessonView = ({ title, toc, sections }) => (
+    <div className={styles.lessonContainer}>
+        <nav className={styles.lessonToc}>
+            <h2>Tartalomjegyzék</h2>
+            <ul>
+                {toc.map(chapter => (
+                    <li key={chapter.id}>
+                        <a href={`#${chapter.id}`}>{chapter.title}</a>
+                        {chapter.subheadings && chapter.subheadings.length > 0 && (
+                            <ul>
+                                {chapter.subheadings.map(sub => (
+                                    <li key={sub.id}><a href={`#${sub.id}`}>{sub.title}</a></li>
+                                ))}
+                            </ul>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </nav>
+        <main className={styles.lessonMainContent}>
+            <h1>{title}</h1>
+            <WorkshopContent sections={sections} />
+        </main>
+    </div>
+);
 
 // ---- Karakterválasztós eszköz nézet ----
 const CharacterSelectionView = ({ contentData, onSelectCharacter }) => (
@@ -141,11 +174,10 @@ const GenericToolView = ({ contentData }) => (
     <h1 className={styles.mainTitle}>{contentData.title}</h1>
     <p className={styles.subTitle}>{contentData.description}</p>
     <div className={styles.workInProgress}>
-      <p>Ez az eszköz még fejlesztés alatt áll.</p>
+      <p>Ismeretlen adatformátum.</p>
     </div>
   </div>
 );
-
 
 // =================================================================
 // FŐ KOMPONENS
@@ -211,8 +243,6 @@ const ContentPage = () => {
   };
 
   const renderContent = () => {
-    if (!contentData) return null;
-
     if (activeChat) {
       return (
         <div className={styles.chatContainer}>
@@ -230,63 +260,65 @@ const ContentPage = () => {
         </div>
       );
     }
-
-    // === JAVÍTÁS: A SPECIÁLIS ESZKÖZÖK ELLENŐRZÉSE ÉS HELYES MEGJELENÍTÉSE ===
-    const isGoalPlanner = contentData.toolData?.type === 'goal-planner';
-    if (isGoalPlanner) {
-      // A Célkitűzőt egy közös konténerbe tesszük a címmel és leírással,
-      // és a helyes `toolData` prop-ot adjuk át neki.
-      return (
-        <div className={styles.genericToolContainer}>
-          <h1 className={styles.mainTitle}>{contentData.title}</h1>
-          <p className={styles.subTitle}>{contentData.description}</p>
-          <hr style={{border: 'none', borderTop: '1px solid rgba(255,255,255,0.1)', margin: '1.5rem 0'}} />
-          <GoalPlannerTool toolData={contentData.toolData} />
-        </div>
-      );
-    }
-    // ======================================================================
-
-    const hasTopics = contentData.topics && Array.isArray(contentData.topics) && contentData.topics.length > 0;
-    const hasCharacters = contentData.characters && typeof contentData.characters === 'object' && Object.keys(contentData.characters).length > 0;
-    const isWorkshop = contentData.questions && contentData.questions.length > 0 && contentData.questions[0].content !== undefined;
-
-    if (hasTopics || (contentData.category === 'premium_tool' && hasCharacters)) {
-        return <TopicSelector data={contentData} />;
-    } 
     
-    if (contentData.category === 'free_tool' && hasCharacters) {
-        return <CharacterSelectionView contentData={contentData} onSelectCharacter={handleCharacterSelect} />;
-    }
+    const data = contentData;
+    let componentToRender;
+    let isLessonLayout = false;
 
-    if (isWorkshop) {
-        return <WorkshopContent sections={contentData.questions} />;
-    } 
+    if (data.toc) {
+        // 🔧 JAVÍTVA: sections = data.sections, nem data.questions
+        componentToRender = <LessonView title={data.title} toc={data.toc} sections={data.sections} />;
+        isLessonLayout = true;
+    } else {
+        const toolType = data.toolData?.type;
+        switch(toolType) {
+            case 'hub-page': componentToRender = <HubPageTool toolData={data.toolData} />; break;
+            case 'goal-planner': componentToRender = (<div className={styles.genericToolContainer}><h1 className={styles.mainTitle}>{data.title}</h1><p className={styles.subTitle}>{data.description}</p><hr style={{border: 'none', borderTop: '1px solid rgba(255,255,255,0.1)', margin: '1.5rem 0'}} /><GoalPlannerTool toolData={data.toolData} /></div>); break;
+            case 'prompt-generator': componentToRender = <PromptGeneratorTool toolData={data.toolData} />; break;
+            case 'preloaded-prompt-launcher': componentToRender = <PreloadedPromptLauncher toolData={data.toolData} />; break;
+            case 'multi-choice-prompt-generator': componentToRender = <MultiChoicePromptGenerator toolData={data.toolData} />; break;
+            case 'exam-simulator': componentToRender = <ExamSimulatorTool toolData={data.toolData} />; break;
+            case 'multi-input-prompt-generator': componentToRender = <MultiInputPromptGenerator toolData={data.toolData} />; break;
+            default: {
+                const hasTopics = data.content && data.content.topics;
+                const hasCharacters = data.characters && typeof data.characters === 'object' && Object.keys(data.characters).length > 0;
+                const isWorkshop = data.questions && data.questions.length > 0 && data.questions[0].content !== undefined;
 
-    switch (contentData.category) {
-      case 'free_lesson':
-      case 'premium_lesson':
-        return <QuizView contentData={contentData} />;
-      default:
-        return <GenericToolView contentData={contentData} />;
+                if (hasTopics) {
+                    componentToRender = <TopicSelector data={data} />;
+                } else if (data.category === 'free_tool' && hasCharacters) {
+                    componentToRender = <CharacterSelectionView contentData={data} onSelectCharacter={handleCharacterSelect} />;
+                } else if (isWorkshop) {
+                    componentToRender = <WorkshopContent sections={data.questions} />;
+                } else if (data.category === 'free_lesson' || data.category === 'premium_lesson' || data.category === 'premium_course') {
+                    componentToRender = <QuizView contentData={data} />;
+                } else {
+                    componentToRender = <GenericToolView contentData={data} />;
+                }
+            }
+        }
     }
+    
+    const containerClassName = isLessonLayout ? styles.fullWidthContainer : styles.centeredContainer;
+
+    return (
+        <div className={containerClassName}>
+            <div className={styles.backgroundOverlay}></div>
+            <video autoPlay loop muted className={styles.backgroundVideo}>
+                <source src="/videos/bg-video.mp4" type="video/mp4" />
+            </video>
+            <div className={styles.contentWrapper}>
+                {componentToRender}
+            </div>
+        </div>
+    );
   };
-
+  
   if (isLoading) return <div className={styles.container}>Adatok betöltése...</div>;
   if (error) return <div className={styles.container}>{error}</div>;
   if (!contentData) return <div className={styles.container}>A tartalom nem található.</div>;
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.backgroundOverlay}></div>
-      <video autoPlay loop muted className={styles.backgroundVideo}>
-        <source src="/videos/bg-video.mp4" type="video/mp4" />
-      </video>
-      <div className={styles.contentWrapper}>
-        {renderContent()}
-      </div>
-    </div>
-  );
+  return renderContent();
 };
 
 export default ContentPage;

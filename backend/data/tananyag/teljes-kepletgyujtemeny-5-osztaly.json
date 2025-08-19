@@ -4,5 +4,293 @@
   "grade": 0,
   "category": "premium_course",
   "description": "Ez a(z) \"Teljes kepletgyujtemeny 5 osztaly\" című tananyag.",
-  "questions": []
+  "questions": [],
+  "content": {
+    "title": "Képlet- és Tételgyűjtemény - Matematika 5. Osztály",
+    "sections": [
+      {
+        "id": "fejezet1",
+        "title": "1. Természetes számok",
+        "cards": [
+          {
+            "id": "fejezet1-1",
+            "title": "1.1. Műveleti sorrend",
+            "description": "A matematikai műveleteket szigorú sorrendben kell elvégezni a helyes eredmény érdekében. Először a zárójelben lévő, majd a szorzás/osztás, és végül az összeadás/kivonás műveleteket végezzük el, balról jobbra haladva.",
+            "formula": {
+              "title": "Szabály",
+              "content": [
+                "1. Zárójelben lévő műveletek",
+                "2. Szorzás és osztás (balról jobbra)",
+                "3. Összeadás és kivonás (balról jobbra)"
+              ]
+            },
+            "example": {
+              "title": "Példa",
+              "text": "Számítsd ki: 10 + (6 - 2) * 3",
+              "steps": [
+                "1. Zárójel: (6 - 2) = 4",
+                "2. A kifejezés most: 10 + 4 * 3",
+                "3. Szorzás: 4 * 3 = 12",
+                "4. A kifejezés most: 10 + 12",
+                "5. Összeadás: 10 + 12 = 22"
+              ]
+            },
+            "quizLink": "kviz_muveleti_sorrend.html"
+          },
+          {
+            "id": "fejezet1-2",
+            "title": "1.2. Oszthatósági szabályok",
+            "description": "Ezek a szabályok segítenek gyorsan eldönteni, hogy egy szám osztható-e egy másikkal anélkül, hogy elvégeznénk az osztást.",
+            "formula": {
+              "title": "Alapvető szabályok",
+              "content": [
+                "• 2-vel: Ha a szám páros (0, 2, 4, 6, 8-ra végződik).",
+                "• 5-tel: Ha a szám 0-ra vagy 5-re végződik.",
+                "• 10-zel: Ha a szám 0-ra végződik.",
+                "• 3-mal: Ha a számjegyeinek összege osztható 3-mal.",
+                "• 9-cel: Ha a számjegyeinek összege osztható 9-cel."
+              ]
+            },
+            "example": {
+              "title": "Példa",
+              "text": "Osztható-e a 135 3-mal és 5-tel?",
+              "steps": [
+                "1. 5-tel oszthatóság: A szám 5-re végződik, tehát osztható 5-tel.",
+                "2. 3-mal oszthatóság: A számjegyek összege: 1 + 3 + 5 = 9.",
+                "3. Mivel 9 osztható 3-mal, ezért a 135 is osztható 3-mal."
+              ]
+            },
+            "quizLink": "kviz_oszthatosag.html"
+          },
+          {
+            "id": "fejezet1-3",
+            "title": "1.3. Legnagyobb közös osztó (LNKO) és legkisebb közös többszörös (LKKT)",
+            "description": "LNKO: A legnagyobb természetes szám, amellyel két vagy több szám maradék nélkül osztható.\nLKKT: A legkisebb pozitív szám, amely mindkét (vagy az összes) számnak többszöröse.",
+            "formula": {
+              "title": "Meghatározás lépései",
+              "content": [
+                "1. Prímtényezős felbontás.",
+                "2. LNKO: A közös prímtényezőket a legalacsonyabb hatványon összeszorozzuk.",
+                "3. LKKT: Az összes prímtényezőt a legmagasabb hatványon összeszorozzuk."
+              ]
+            },
+            "example": {
+              "title": "Példa",
+              "text": "LNKO és LKKT a 12 és 18 esetén.",
+              "steps": [
+                "1. Felbontás: 12 = 2² * 3; 18 = 2 * 3²",
+                "2. LNKO: A közös prímek a 2 és a 3. A legalacsonyabb hatványok: 2¹ és 3¹. LNKO(12, 18) = 2 * 3 = 6.",
+                "3. LKKT: Az összes prím a 2 és a 3. A legmagasabb hatványok: 2² és 3². LKKT(12, 18) = 2² * 3² = 4 * 9 = 36."
+              ]
+            },
+            "quizLink": "kviz_lnko_lkkt.html"
+          }
+        ]
+      },
+      {
+        "id": "fejezet2",
+        "title": "2. Törtek és tizedes törtek",
+        "cards": [
+          {
+            "id": "fejezet2-1",
+            "title": "2.1. Törtek összeadása és kivonása",
+            "description": "Törteket csak akkor tudunk összeadni vagy kivonni, ha a nevezőjük azonos. Ha a nevezők különbözőek, először közös nevezőre kell hozni a törteket (bővítéssel).",
+            "formula": {
+              "title": "Képlet (közös nevező esetén)",
+              "content": "a/c + b/c = (a+b)/c"
+            },
+            "example": {
+              "title": "Példa",
+              "text": "Mennyi 1/2 + 1/3 ?",
+              "steps": [
+                "1. Közös nevező keresése: A 2 és a 3 legkisebb közös többszöröse a 6.",
+                "2. Bővítés: Az első törtet 3-mal, a másodikat 2-vel bővítjük. 1/2 = 3/6; 1/3 = 2/6.",
+                "3. Összeadás: 3/6 + 2/6 = (3+2)/6 = 5/6."
+              ]
+            },
+            "quizLink": "kviz_tortek_osszeadasa.html"
+          },
+          {
+            "id": "fejezet2-2",
+            "title": "2.2. Törtek szorzása és osztása",
+            "description": "Szorzás: A számlálót a számlálóval, a nevezőt a nevezővel szorozzuk. Osztás: Egy törttel úgy osztunk, hogy a reciprokával szorzunk.",
+            "formula": {
+              "title": "Képletek",
+              "content": "(a/b) * (c/d) = (a*c) / (b*d)\n(a/b) / (c/d) = (a/b) * (d/c)"
+            },
+            "example": {
+              "title": "Példa (osztás)",
+              "text": "Mennyi 2/3 : 4/5 ?",
+              "steps": [
+                "1. Reciprok vétel: A 4/5 reciproka 5/4.",
+                "2. Szorzás: 2/3 * 5/4 = (2*5) / (3*4) = 10/12.",
+                "3. Egyszerűsítés: A 10/12 törtet 2-vel egyszerűsítve 5/6-ot kapunk."
+              ]
+            },
+            "quizLink": "kviz_tortek_szorzasa.html"
+          },
+          {
+            "id": "fejezet2-3",
+            "title": "2.3. Műveletek tizedes törtekkel",
+            "description": "A tizedes törtekkel végzett műveleteknél a legfontosabb a helyiértékek helyes kezelése. Összeadásnál és kivonásnál a tizedesvesszőket mindig egymás alá írjuk.",
+            "formula": {
+              "title": "Szabály (szorzás)",
+              "content": [
+                "1. Elvégezzük a szorzást a tizedesvesszők nélkül.",
+                "2. Az eredményben annyi tizedesjegyet választunk le, amennyi a tényezőkben összesen volt."
+              ]
+            },
+            "example": {
+              "title": "Példa",
+              "text": "Mennyi 1,2 * 0,3 ?",
+              "steps": [
+                "1. Szorzás vessző nélkül: 12 * 3 = 36.",
+                "2. Tizedesjegyek száma: Az 1,2-ben egy, a 0,3-ban egy, tehát összesen 1+1=2 tizedesjegy van.",
+                "3. Vessző elhelyezése: A 36-ban két tizedesjegyet leválasztva 0,36-ot kapunk."
+              ]
+            },
+            "quizLink": "kviz_tizedes_tortek.html"
+          }
+        ]
+      },
+      {
+        "id": "fejezet3",
+        "title": "3. Geometria alapjai",
+        "cards": [
+          {
+            "id": "fejezet3-1",
+            "title": "3.1. Szögek típusai",
+            "description": "A szögeket mértékük szerint csoportosítjuk. A legfontosabb alaptípusok ismerete elengedhetetlen a geometriai feladatokhoz.",
+            "formula": {
+              "title": "Típusok",
+              "content": [
+                "• Hegyesszög: 0° < α < 90°",
+                "• Derékszög: α = 90°",
+                "• Tompaszög: 90° < α < 180°",
+                "• Egyenesszög: α = 180°",
+                "• Teljesszög: α = 360°"
+              ]
+            },
+            "example": {
+              "title": "Példa",
+              "text": "Egy 120°-os szög tompaszög, mert 90° és 180° közé esik."
+            },
+            "quizLink": "kviz_szogek.html"
+          },
+          {
+            "id": "fejezet3-2",
+            "title": "3.2. Kerület és terület",
+            "description": "A kerület a síkidom határoló vonalainak hossza, a terület pedig a síkidom által lefedett terület mértéke.",
+            "formula": {
+              "title": "Alap képletek",
+              "content": [
+                "• Négyzet: Kerület = 4*a; Terület = a*a",
+                "• Téglalap: Kerület = 2*(a+b); Terület = a*b"
+              ]
+            },
+            "example": {
+              "title": "Példa",
+              "text": "Egy téglalap oldalai 5 cm és 10 cm.",
+              "steps": [
+                "1. Kerület: K = 2 * (5 + 10) = 2 * 15 = 30 cm.",
+                "2. Terület: T = 5 * 10 = 50 cm²."
+              ]
+            },
+            "quizLink": "kviz_kerulet_terulet.html"
+          },
+          {
+            "id": "fejezet3-3",
+            "title": "3.3. Térfogat és felszín (Téglatest)",
+            "description": "A téglatest egy háromdimenziós test. A felszíne a határoló lapok területeinek összege, a térfogata pedig a test által elfoglalt tér mértéke.",
+            "formula": {
+              "title": "Képletek (élek: a, b, c)",
+              "content": [
+                "• Felszín: A = 2 * (a*b + a*c + b*c)",
+                "• Térfogat: V = a * b * c"
+              ]
+            },
+            "example": {
+              "title": "Példa",
+              "text": "Egy téglatest élei 2 cm, 3 cm, 5 cm.",
+              "steps": [
+                "1. Felszín: A = 2 * (2*3 + 2*5 + 3*5) = 2 * (6 + 10 + 15) = 2 * 31 = 62 cm².",
+                "2. Térfogat: V = 2 * 3 * 5 = 30 cm³."
+              ]
+            },
+            "quizLink": "kviz_terfogat_felszin.html"
+          }
+        ]
+      },
+      {
+        "id": "fejezet4",
+        "title": "4. Mértékegységek",
+        "cards": [
+          {
+            "id": "fejezet4-1",
+            "title": "4.1. Hosszúság mértékegységei",
+            "description": "A hosszúság alapmértékegysége a méter (m). A váltószám a szomszédos mértékegységek között általában 10.",
+            "formula": {
+              "title": "Gyakori váltószámok",
+              "content": [
+                "1 km = 1000 m",
+                "1 m = 10 dm = 100 cm = 1000 mm"
+              ]
+            },
+            "example": {
+              "title": "Példa",
+              "text": "Váltsd át 3,5 kilométert centiméterre!",
+              "steps": [
+                "1. km → m: 3,5 km = 3,5 * 1000 = 3500 m.",
+                "2. m → cm: 3500 m = 3500 * 100 = 350 000 cm."
+              ]
+            },
+            "quizLink": "kviz_hosszusag_mertekegysegek.html"
+          },
+          {
+            "id": "fejezet4-2",
+            "title": "4.2. Tömeg mértékegységei",
+            "description": "A tömeg alapmértékegysége a kilogramm (kg). Itt is fontos a váltószámok ismerete.",
+            "formula": {
+              "title": "Gyakori váltószámok",
+              "content": [
+                "1 t = 1000 kg",
+                "1 kg = 100 dkg = 1000 g"
+              ]
+            },
+            "example": {
+              "title": "Példa",
+              "text": "Válts át 420 dekagrammot kilogrammra!",
+              "steps": [
+                "1. Váltószám: 1 kg = 100 dkg, tehát dkg-ból kg-ba váltáshoz 100-zal kell osztani.",
+                "2. Osztás: 420 / 100 = 4,2 kg."
+              ]
+            },
+            "quizLink": "kviz_tomeg_mertekegysegek.html"
+          },
+          {
+            "id": "fejezet4-3",
+            "title": "4.3. Idő mértékegységei",
+            "description": "Az idő mértékegységeinek váltószáma nem tízes alapú, ezért különös figyelmet igényel.",
+            "formula": {
+              "title": "Gyakori váltószámok",
+              "content": [
+                "1 óra = 60 perc",
+                "1 perc = 60 másodperc",
+                "1 nap = 24 óra"
+              ]
+            },
+            "example": {
+              "title": "Példa",
+              "text": "Hány perc 2,5 óra?",
+              "steps": [
+                "1. Váltószám: 1 óra = 60 perc.",
+                "2. Szorzás: 2,5 * 60 = 150 perc."
+              ]
+            },
+            "quizLink": "kviz_ido_mertekegysegek.html"
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -1,8 +1,22 @@
 {
-  "title": "Konkretizalo",
+  "title": "Konkretizáló",
   "subject": "altalanos",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Konkretizalo\" című tananyag.",
-  "questions": []
+  "category": "premium_tool",
+  "description": "A nehezen érthető tudományos fogalmak személyes fordítója.",
+  "questions": [],
+  "toolData": {
+    "type": "prompt-generator",
+    "icon": "🔬➡️💡",
+    "header": "Absztrakt->Konkrét Fordító",
+    "subheader": "A nehezen érthető tudományos fogalmak személyes fordítója",
+    "label": "Melyik fogalmat nem érted?",
+    "placeholder": "Pl. Tehetetlenség törvénye, Halmazok metszete, Neurális háló...",
+    "buttonText": "Tedd érthetővé! →",
+    "successMessage": "✅ Szuper! A személyre szabott magyarázatot a vágólapra másoltam.",
+    "linkButtonText": "Irány a Gemini!",
+    "linkUrl": "https://gemini.google.com/",
+    "successNote": "Nyisd meg, illeszd be a promptot (Ctrl+V), és nyomj Entert!",
+    "systemPromptTemplate": "Viselkedj úgy, mint egy zseniális tudományos ismeretterjesztő, aki a legbonyolultabb fogalmakat is képes egyszerűen és érthetően elmagyarázni egy 14 éves diáknak!\n\nA feladatod, hogy a(z) \"{{userInput}}\" fogalmat egy 3 lépéses, könnyen emészthető formában add vissza!\n\n**A VÁLASZOD SZERKEZETE:**\n\n**Fogalom: {{userInput}}**\n\n**1. A \"Szótári\" Definíció (Röviden és Egyszerűen):**\nItt írd le 1-2 mondatban a fogalom pontos, de leegyszerűsített definícióját!\n\n**2. A Hétköznapi Analógia (A \"Fordítás\"):**\nEz a legfontosabb rész! Találj egy kreatív, hétköznapi példát vagy analógiát, ami tökéletesen bemutatja a fogalom működését! Kezd így: \"Képzeld el, hogy...\"\n\n**3. \"Hol találkozol vele?\" (Valós Példák):**\nSorolj fel 2-3 konkrét, valós példát, ahol a diák a mindennapi életben vagy a tanulmányai során találkozhat ezzel a fogalommal!\n\n**Stílus:** A hangnemed legyen lelkes, a magyarázatok pedig legyenek vizuálisak és könnyen elképzelhetőek. A cél a \"hűha, most már értem!\" élmény elérése."
+  }
 }

@@ -1,49 +1,72 @@
-// Fájl: src/components/TopicSelector/TopicSelector.js
+// Fájl: src/components/TopicSelector/TopicSelector.js (FRISSÍTETT KÓD)
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './TopicSelector.module.css';
 
 const TopicSelector = ({ data }) => {
+  // === ITT A BŐVÍTETT LOGIKA ===
+  // Ellenőrizzük, hogy a kapott adat 'topics' (csoportosított) vagy 'characters' (sima) struktúrájú-e.
 
-  const handleCardClick = (topic) => {
-    // A prompt összerakása
-    const fullPrompt = `${data.basePrompt}\n\nA mostani beszélgetésünk fókuszában ez a téma áll: "${topic.title}". Kezdjük azzal, hogy röviden bemutatod ezt a területet, majd tedd fel a kérdést: "Mi érdekel a leginkább a(z) ${topic.title} témakörével kapcsolatban?"`;
-
-    // Másolás és Gemini megnyitása
-    navigator.clipboard.writeText(fullPrompt.trim()).then(() => {
-      alert('✅ Prompt a vágólapra másolva! A Gemini megnyílik egy új ablakban.');
-      window.open('https://gemini.google.com/app', '_blank');
-    }).catch(err => {
-      console.error('Hiba a másolás során:', err);
-    });
-  };
-
-  const topics = data.topics || [];
-  const characters = data.characters ? Object.values(data.characters) : [];
-  const items = topics.length > 0 ? topics : characters;
-
-  return (
-    <div>
-      <h1 className={styles.mainTitle}>{data.title}</h1>
-      <p className={styles.subTitle}>{data.description}</p>
-      <div className={styles.grid}>
-        {items.map((item, index) => (
-          <div
-            key={item.id || index}
-            className={styles.card}
-            style={{ backgroundImage: `url(${item.backgroundImageUrl || item.imageUrl})` }}
-            onClick={() => handleCardClick(item)}
-          >
-            <div className={styles.cardContent}>
-              <h3>{item.title || item.name}</h3>
-              <p>{item.description || item.quote}</p>
-              <span className={styles.button}>Beszélgetés Indítása →</span>
+  // 1. Csoportosított nézet (Képletgyűjtemény)
+  if (data.topics && Array.isArray(data.topics)) {
+    return (
+      <div className={styles.topicContainer}>
+        <h1 className={styles.mainTitle}>{data.title}</h1>
+        <p className={styles.subTitle}>{data.description}</p>
+        
+        {data.topics.map((topic, index) => (
+          <section key={index} className={styles.topicSection}>
+            <h3 className={styles.topicTitle} style={{ color: topic.color, borderColor: topic.color }}>
+              {topic.title}
+            </h3>
+            <div className={styles.cardGrid}>
+              {topic.items.map((item, itemIndex) => (
+                <div key={itemIndex} className={styles.card}>
+                  {item.disabled ? (
+                    <div className={`${styles.btn} ${styles.disabledBtn}`} style={{ backgroundColor: '#ccc' }}>
+                      {item.title} <span className={styles.btnText}>{item.text}</span>
+                    </div>
+                  ) : (
+                    <Link to={item.link} className={styles.btn} style={{ backgroundColor: topic.color }}>
+                      {item.title} <span className={styles.btnText}>{item.text}</span>
+                    </Link>
+                  )}
+                </div>
+              ))}
             </div>
-          </div>
+          </section>
         ))}
       </div>
-    </div>
-  );
+    );
+  }
+
+  // 2. Karakterválasztó nézet (pl. Időutazó) - Ez a régi, jól működő rész
+  if (data.characters) {
+    return (
+      <div className={styles.characterSelection}>
+        <h2 className={styles.mainTitle}>{data.title}</h2>
+        <p className={styles.subTitle}>{data.description}</p>
+        <div className={styles.characterGrid}>
+            {Object.keys(data.characters).map(key => {
+                const character = data.characters[key];
+                return (
+                    <div key={key} className={styles.characterCard} style={{ backgroundColor: character.color }}>
+                        <img src={character.imageUrl || '/images/default-avatar.png'} alt={character.name} className={styles.characterImage} />
+                        <h3 className={styles.characterName}>{character.name}</h3>
+                        <p className={styles.characterTitle}>{character.title}</p>
+                        <p className={styles.characterQuote}>"{character.quote}"</p>
+                        {/* A gombot itt nem jelenítjük meg, mert a ContentPage kezeli a kattintást */}
+                    </div>
+                );
+            })}
+        </div>
+      </div>
+    );
+  }
+
+  // Fallback, ha egyik séma sem illik
+  return <div>Ismeretlen adatformátum.</div>;
 };
 
 export default TopicSelector;
