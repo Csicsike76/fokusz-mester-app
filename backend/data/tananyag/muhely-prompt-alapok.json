@@ -3,6 +3,78 @@
   "subject": "altalanos",
   "grade": 0,
   "category": "free_lesson",
-  "description": "Ez a(z) \"Muhely prompt alapok\" című tananyag.",
-  "questions": []
+  "description": "2. hét: A \"beszélgetés\" az MI-vel: A promptolás alapjai",
+  "questions": [
+    {
+      "type": "introduction",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel egyszerű, de hatékony utasításokat (promptokat) adni egy szöveggeneráló MI-nek, és megérted, hogyan tudod a válaszait a saját céljaidnak megfelelően formálni a <strong>részletesség, a szerepkör és a formátum</strong> megadásával.</p>"
+    },
+    {
+      "type": "tools",
+      "title": "2. Szükséges Eszközök",
+      "content": "<p>Válassz egyet az alábbi, ingyenesen elérhető szöveges MI-asszisztensek közül! A feladatokat bármelyikkel el tudod végezni.</p><ul><li><strong>Microsoft Copilot</strong> (régen Bing Chat) - Ingyenes, a legújabb GPT modelleket használja.</li><li><strong>Google Gemini</strong> - A Google saját, modern MI-modellje.</li><li><strong>ChatGPT</strong> (az ingyenes 3.5-ös verzió is tökéletes)</li></ul>"
+    },
+    {
+      "type": "introduction",
+      "title": "3. Bevezető: A jó kérés fél siker",
+      "content": "<p>Képzeld el, hogy pizzát rendelsz. Ha csak annyit mondasz a telefonba, hogy \"Kérek egy pizzát!\", ki tudja, mit fogsz kapni. De ha azt mondod: \"Kérek egy nagy, sonkás-gombás pizzát, vékony tésztával, extra sajttal\", akkor pontosan azt kapod, amit szeretnél. A promptolás pont ilyen: a mesterséges intelligenciának adott <strong>pontos és részletes utasítás művészete</strong>. Minél jobban kérsz, annál jobbat kapsz.</p>"
+    },
+    {
+      "type": "tasks_section",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "tasks": [
+        {
+          "title": "1. Feladat: Az egyszerű kérés",
+          "content": "<p>Kezdjük egy nagyon egyszerű prompttal! Írd be a választott MI-asszisztensbe a következőt, majd olvasd el a választ.</p><p><strong>Megfigyelés:</strong> Figyeld meg, milyen történetet kaptál! Milyen a sárkány? Hol játszódik a történet? Az MI-nek magának kellett minden részletet kitalálnia.</p>",
+          "prompts": [
+            "Írj egy történetet egy sárkányról."
+          ]
+        },
+        {
+          "title": "2. Feladat: Részletek hozzáadása (Legyél specifikus!)",
+          "content": "<p>Most tegyük a történetet sokkal érdekesebbé! Adjunk hozzá jelzőket, helyszínt és egy problémát. Másold be ezt az új, részletesebb promptot!</p><p><strong>Megfigyelés:</strong> Hasonlítsd össze ezt a történetet az előzővel! Látod, hogyan változott meg a történet hangulata és tartalma, csak mert több információt adtál?</p>",
+          "prompts": [
+            "Írj egy rövid, vicces történetet egy apró, zöld sárkányról, akinek a legnagyobb félelme a magasság, és egy hegy tetején él."
+          ]
+        },
+        {
+          "title": "3. Feladat: Szerepkör kiosztása (Legyen valaki!)",
+          "content": "<p>Az MI sokkal jobban teljesít, ha megmondod neki, milyen \"szerepet\" játsszon. Próbáld ki ezt a promptot!</p><p><strong>Megfigyelés:</strong> Figyeld meg a stílust és a szóhasználatot! Az MI megpróbálja utánozni a kalózokról alkotott sztereotípiákat. A szerepkör segít a stílus és a hangnem beállításában.</p>",
+          "prompts": [
+            "Viselkedj úgy, mint egy mogorva kalózkapitány! Meséld el egy mondatban, mi bosszantott fel ma a legjobban a hajón."
+          ]
+        },
+        {
+          "title": "4. Feladat: Formátum meghatározása (Hogyan nézzen ki?)",
+          "content": "<p>Nem csak a tartalmat, a kinézetet is irányíthatod. Kérheted, hogy listát, táblázatot vagy vázlatot készítsen. Próbáld ki!</p><p><strong>Megfigyelés:</strong> Az MI a kérésednek megfelelően, strukturált, pontokba szedett listát készített. Ez nagyon hasznos, ha információt szeretnél rendszerezni.</p>",
+          "prompts": [
+            "Sorold fel 3 pontban, miért fontos a víz a növények számára. A célközönség egy 10 éves diák."
+          ]
+        },
+        {
+          "title": "5. Feladat: Finomítás (Beszélgess vele!)",
+          "content": "<p>Az MI emlékszik a beszélgetés korábbi részeire. Nem kell mindig új promptot írnod, finomíthatod is az előző választ. A 4. feladat után írd be ezt:</p><p><strong>Megfigyelés:</strong> Látod? Az MI vette az előző témát (a víz fontossága), és a kérésednek megfelelően teljesen új formába öntötte. A legjobb eredményeket gyakran több lépéses \"beszélgetéssel\" lehet elérni.</p>",
+          "prompts": [
+            "Ez jó, de most írd át ugyanezt egy rövid, két soros vers formájában."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "5. Tippek a sikeres promptoláshoz",
+      "content": "<ul><li><strong>Légy konkrét:</strong> A \"nagy kutya\" helyett jobb a \"hatalmas, golden retriever kutya\".</li><li><strong>Adj kontextust:</strong> Mondd el, mi a célod, vagy ki a célközönség.</li><li><strong>Rendelj szerepkört:</strong> \"Viselkedj úgy, mint egy...\"</li><li><strong>Határozd meg a formátumot:</strong> \"Írj listát\", \"Készíts táblázatot\", \"Fogalmazz meg egy emailt\".</li><li><strong>Kísérletezz és finomíts:</strong> Az első válasz ritkán tökéletes. Beszélgess, pontosíts, kérj változtatásokat!</li></ul>"
+    },
+    {
+      "type": "criticalThinking",
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "content": "<p>Most, hogy már tudsz \"beszélgetni\" az MI-vel, gondolkozz el ezen!</p><ul><li><strong>Honnan tudja ezt az MI?</strong> Az MI nem \"gondolkodik\", hanem hatalmas mennyiségű internetes szövegből tanult mintázatok alapján rakja össze a szavakat. Nem mindig tudja, mi a valóság. Kérdezz rá egy konkrét, de kevésbé ismert tényre! Vajon a válasza pontos lesz? Miért fontos a tényellenőrzés?</li><li><strong>Kinek a hangján szól?</strong> A kalózos példa vicces volt, de mit jelent ez? Az MI az interneten talált sztereotípiákból táplálkozik. Milyen veszélyei lehetnek ennek, ha komolyabb témákról van szó?</li></ul>"
+    },
+    {
+      "type": "challenge",
+      "title": "7. Önálló Kihívás: Tervezd meg az álomhétvégédet!",
+      "content": "<p>Most használd az összes tanult technikát egyetlen feladatban! A célod, hogy az MI segítségével megtervezz egy fantasztikus hétvégi programot.</p><p>Írj egyetlen, részletes promptot, ami tartalmazza a következőket:</p><ol><li><strong>Szerepkör:</strong> \"Viselkedj úgy, mint egy tapasztalt utazásszervező.\"</li><li><strong>Részletek:</strong> Add meg a helyszínt (lehet egy valós város vagy egy kitalált hely), az időtartamot (szombat-vasárnap), és hogy milyen típusú programokat szeretsz (pl. \"szeretem a természetet, a történelmet és a jó ételeket\").</li><li><strong>Formátum:</strong> \"Készíts egy órára lebontott útitervet táblázatos formában.\"</li></ol><p>Kísérletezz, amíg olyan választ nem kapsz, ami igazán tetszik! A legjobb eredményt mentsd le, vagy másold ki egy dokumentumba.</p>"
+    }
+  ]
 }

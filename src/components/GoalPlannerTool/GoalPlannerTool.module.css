@@ -1,0 +1,95 @@
+/* Fájl: src/components/GoalPlannerTool/GoalPlannerTool.module.css */
+
+.plannerCard {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 2rem;
+    border-top: 8px solid #436F4D; /* zold */
+    color: #34495e;
+}
+
+.plannerStep {
+    margin-bottom: 2.5rem;
+}
+
+.plannerStep:last-child {
+    margin-bottom: 1rem;
+}
+
+.plannerStep h2 {
+    font-family: 'Roboto Slab', serif;
+    color: #436F4D; /* zold */
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+}
+
+.stepNumber {
+    background-color: #436F4D; /* zold */
+    color: #FFFFFF;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.formGroup input, .formGroup textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+.btnSubmit {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s;
+    border: none;
+    background-color: #CD2A3E; /* piros */
+    color: #FFFFFF;
+    font-size: 1.2rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btnSubmit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.feedbackMessage {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #e8f5e9;
+    border: 2px solid #436F4D; /* zold */
+    text-align: center;
+    font-weight: 500;
+}
+
+.feedbackError {
+    background-color: #ffebee;
+    border-color: #CD2A3E; /* piros */
+    color: #CD2A3E;
+}
