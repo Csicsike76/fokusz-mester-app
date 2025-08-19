@@ -1,5 +1,6 @@
 // server.js
 
+
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
@@ -688,6 +689,9 @@ app.get('/api/quiz/:slug', async (req, res) => {
     return res.status(500).json({ success: false, message: 'Szerverhiba történt a lecke betöltésekor.' });
   }
 });
+
+
+
 
 
 

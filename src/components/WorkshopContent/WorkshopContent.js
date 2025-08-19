@@ -6,22 +6,16 @@ const WorkshopContent = ({ sections }) => {
     return <p>A tananyag tartalma jelenleg nem elérhető.</p>;
   }
 
-  // === ITT A JAVÍTÁS ===
-  // A funkciót kiegészítjük a window.open paranccsal.
   const copyPromptAndOpenGemini = (promptText, buttonElement) => {
     navigator.clipboard.writeText(promptText).then(() => {
       const originalText = buttonElement.textContent;
       buttonElement.textContent = '✅ Másolva!';
-      
-      // Új sor: Megnyitja a Gemini-t egy új fülön.
       window.open('https://gemini.google.com/app', '_blank');
-      
       setTimeout(() => {
         buttonElement.textContent = originalText;
-      }, 3000); // 3 másodperc után visszaáll a gomb szövege
+      }, 3000);
     }).catch(err => {
       console.error('Hiba a másolás során:', err);
-      // Opcionális: Hiba esetén jelezhetünk a felhasználónak
       alert('Hiba történt a vágólapra másolás során.');
     });
   };
@@ -32,10 +26,25 @@ const WorkshopContent = ({ sections }) => {
         <section key={index} className={styles.workshopSection}>
           <h2>{section.title}</h2>
 
+          {/* Dinamikus renderelés: tömb vagy HTML string kezelése */}
           {section.content && (
-            <div dangerouslySetInnerHTML={{ __html: section.content }} />
+            <div>
+              {Array.isArray(section.content) ? (
+                section.content.map((item, itemIndex) => (
+                  <div key={itemIndex} className={styles.taskCard}>
+                    <h3>{item.title}</h3>
+                    {item.htmlContent && (
+                      <div dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+                    )}
+                  </div>
+                ))
+              ) : (
+                <div dangerouslySetInnerHTML={{ __html: section.content }} />
+              )}
+            </div>
           )}
 
+          {/* Eredeti tasks_section és prompts logika */}
           {section.type === 'tasks_section' && section.tasks && (
             <div>
               {section.tasks.map((task, taskIndex) => (
@@ -48,7 +57,6 @@ const WorkshopContent = ({ sections }) => {
                       <pre className={styles.promptExample}>{prompt}</pre>
                       <button 
                         className={styles.copyButton}
-                        // A gomb most már az új, kiegészített funkciót hívja meg.
                         onClick={(e) => copyPromptAndOpenGemini(prompt, e.target)}
                       >
                         Másolás

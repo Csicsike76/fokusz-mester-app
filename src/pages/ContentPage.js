@@ -1,5 +1,3 @@
-// Fájl: src/pages/ContentPage.js (JAVÍTOTT VERZIÓ)
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styles from './ContentPage.module.css';
@@ -266,8 +264,8 @@ const ContentPage = () => {
     let isLessonLayout = false;
 
     if (data.toc) {
-        // 🔧 JAVÍTVA: sections = data.sections, nem data.questions
-        componentToRender = <LessonView title={data.title} toc={data.toc} sections={data.sections} />;
+        // 🔧 JAVÍTVA: sections = data.questions, nem data.sections
+        componentToRender = <LessonView title={data.title} toc={data.toc} sections={data.questions} />;
         isLessonLayout = true;
     } else {
         const toolType = data.toolData?.type;
