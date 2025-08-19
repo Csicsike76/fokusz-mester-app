@@ -1,8 +1,60 @@
+
+
 {
-  "title": "Merfoldko 01 piackutatas",
+   "title": "Merfoldko 01 piackutatas",
   "subject": "altalanos",
   "grade": 0,
   "category": "premium_course",
-  "description": "Ez a(z) \"Merfoldko 01 piackutatas\" című tananyag.",
-  "questions": []
+  "description": "1-2. hét: Piackutatás és Célcsoport",
+  "sections": [
+    {
+      "title": "1. Célkitűzés",
+      "type": "introduction",
+      "content": "A mérföldkő végére a csapatotok mélyebben megérti a választott problémát, és képes lesz pontosan meghatározni, hogy <strong>kinek</strong> készül a projekt. Létrehoztok egy részletes <strong>felhasználói perszónát (user persona)</strong> és egy <strong>empátia-térképet</strong>, amelyek a projekt további fázisainak alapját képezik."
+    },
+    {
+      "title": "2. Bevezető: Nyomozás a Felhasználó Után",
+      "type": "introduction",
+      "content": "Egy terméket vagy megoldást létrehozni anélkül, hogy ismernéd a felhasználódat, olyan, mintha sötétben lövöldöznél: talán eltalálsz valamit, de sokkal valószínűbb, hogy célt tévesztesz. A legsikeresebb projektek mindig a felhasználó mély megértéséből indulnak ki. Ezen a héten detektívekké válunk: az MI segítségével felkutatjuk és \"kihallgatjuk\" a célközönségünket, hogy pontosan megértsük a motivációikat, a céljaikat és a frusztrációikat."
+    },
+    {
+      "title": "3. Lépésről-lépésre Feladatok",
+      "type": "introduction",
+      "content": "Vegyétek elő a \"Projekt Terv Vázlatotokat\"! A benne megfogalmazott problémával és célközönséggel fogunk dolgozni."
+    },
+    {
+      "title": "1. Feladat: A Probléma Mélyére Ásunk",
+      "type": "task",
+      "description": "Az MI segítségével gyűjtsetek adatokat, amelyek alátámasztják, hogy a problémátok valóban létezik és fontos.",
+      "prompt": "Viselkedj úgy, mint egy piackutató! A problémánk: \"[Ide írjátok a problémamegfogalmazásotokat]\". Gyűjts 3 statisztikát vagy tényt, ami alátámasztja a probléma létezését, és sorolj fel 3 lehetséges okot, ami a probléma mögött áll! Adj forrásokat is, ha találsz.",
+      "buttonText": "Másolás",
+      "buttonHref": null
+    },
+    {
+      "title": "2. Feladat: A Felhasználói Perszóna Megalkotása",
+      "type": "task",
+      "description": "Most keltsük életre a célközönségeteket! Alkossunk egy \"user personát\", egy kitalált karaktert, aki a tipikus felhasználótokat testesíti meg. Ez segít, hogy mindig egy konkrét emberre gondoljatok a tervezés során.",
+      "prompt": "Segíts nekünk létrehozni egy felhasználói perszónát! A célközönségünk: \"[Ide írjátok a célközönség leírását, pl. 'elfoglalt középiskolás diákok']\". A problémánk: \"[Ide írjátok a problémát]\". Készíts egy részletes perszónát a következő adatokkal: Név, Kor, Iskola/Foglalkozás, 3 fő cél, 3 fő frusztráció (a problémával kapcsolatban), és egy rövid, 2 mondatos bemutatkozás.",
+      "buttonText": "Másolás",
+      "buttonHref": null
+    },
+    {
+      "title": "3. Feladat: Az Empátia-Térkép Kitöltése",
+      "type": "task",
+      "description": "Most, hogy ismerjük \"Annát\", próbáljunk a fejével gondolkodni! Az empátia-térkép egy eszköz, ami segít ebben.",
+      "prompt": "Készíts egy empátia-térképet a korábban létrehozott perszónánk, \"[Perszóna neve]\" számára a mi problémánkkal kapcsolatban! A térkép 4 részből álljon: Mit GONDOL és ÉREZ? Mit LÁT? Mit MOND és TESZ? Mit HALL?",
+      "buttonText": "Másolás",
+      "buttonHref": null
+    },
+    {
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "type": "criticalThinking",
+      "content": "<ul><li><strong>A Sztereotípia Veszélye:</strong> Az MI által alkotott perszóna az interneten talált adatok és sztereotípiák alapján jött létre. Mennyire reális ez a karakter? Hogyan tudnátok a perszónátokat \"validálni\", vagyis ellenőrizni, hogy a valós célközönségetek tényleg így gondolkodik-e? (Például: készíthetnétek egy 3 kérdéses mini-interjút a barátaitokkal.)</li><li><strong>Kinek Tervezünk?</strong> A perszóna segít fókuszálni. De mi van azokkal, akik nem olyanok, mint a perszónátok? Hogyan biztosíthatjátok, hogy a megoldásotok ne csak egy szűk rétegnek, hanem minél több embernek segítsen?</li></ul>"
+    },
+    {
+      "title": "5. A Mérföldkő Kihívása: A Kutatási Összefoglaló",
+      "type": "challenge",
+      "content": "A két hét munkájának eredménye egyetlen, közös dokumentum, a \"Kutatási Összefoglaló\". Bővítsétek a \"Projekt Terv Vázlatotokat\" a következő három, kidolgozott szekcióval:<ol><li><strong>Probléma Validálása:</strong> A kutatásotok alapján 3-4 mondatban fogalmazzátok meg, miért valós és fontos a választott problémátok, alátámasztva 1-2 ténnyel vagy statisztikával.</li><li><strong>Felhasználói Perszóna:</strong> Illesszétek be a véglegesített, részletes perszónátok leírását.</li><li><strong>Empátia-Térkép:</strong> Illesszétek be a perszónátokhoz tartozó empátia-térkép legfontosabb pontjait.</li></ol>Ez a dokumentum lesz a szilárd alap, amire a következő hetekben a konkrét terveket építhetitek. Jó nyomozást!"
+    }
+  ]
 }

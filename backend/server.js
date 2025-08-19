@@ -580,6 +580,7 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
 
 app.get('/api/curriculums', async (req, res) => {
   try {
+    // csak publikált tételek
     const { rows } = await pool.query(`
       SELECT title, slug, subject, grade, category, description
       FROM curriculums
@@ -591,21 +592,22 @@ app.get('/api/curriculums', async (req, res) => {
         title
     `);
 
+    // Pont olyan szerkezet, amit a HomePage.js fel tud dolgozni
     const groupedData = {
-      freeLessons: {},
-      freeTools: [],
-      premiumCourses: [],
-      premiumTools: [],
+      freeLessons: {},     // { [subject]: [items...] }
+      freeTools: [],       // []
+      premiumCourses: [],  // []
+      premiumTools: []     // []
     };
 
     for (const row of rows) {
       const item = {
         title: row.title,
-        slug: row.slug,
+        slug: row.slug, // NINCS csere: a HomePage már elvégzi a _ → - normalizálást szükség esetén
         subject: row.subject || null,
         grade: row.grade,
         description: row.description || null,
-        category: row.category,
+        category: row.category
       };
 
       switch (row.category) {
@@ -625,6 +627,7 @@ app.get('/api/curriculums', async (req, res) => {
           groupedData.premiumTools.push(item);
           break;
         default:
+          // ha véletlenül más kategória jönne, tegyük az ingyenes eszközök közé, hogy ne vesszen el
           groupedData.freeTools.push(item);
       }
     }
@@ -632,58 +635,61 @@ app.get('/api/curriculums', async (req, res) => {
     res.status(200).json({
       success: true,
       data: groupedData,
-      meta: { count: rows.length, timestamp: new Date().toISOString() },
+      meta: { count: rows.length, timestamp: new Date().toISOString() }
     });
   } catch (err) {
     console.error('❌ /api/curriculums hiba:', err);
-    res
-      .status(500)
-      .json({ success: false, message: 'Szerverhiba a tananyagok lekérdezésekor.' });
+    res.status(500).json({ success: false, message: 'Szerverhiba a tananyagok lekérdezésekor.' });
   }
 });
 
+
+// ✅ Stabil /api/quiz/:slug — támogat .json és .js forrásokat is
 app.get('/api/quiz/:slug', async (req, res) => {
-  const { slug } = req.params;
   try {
-    const dbResult = await pool.query(`
-        SELECT c.*,
-               (SELECT jsonb_agg(q.question_data ORDER BY q.order_num)
-                FROM quizquestions q
-                WHERE q.curriculum_id = c.id) as questions
-        FROM curriculums c
-        WHERE c.slug = $1 AND c.is_published = true
-        GROUP BY c.id;
-    `, [slug]);
-
-    if (dbResult.rows.length > 0) {
-        const data = dbResult.rows[0];
-        if (!data.questions) {
-            data.questions = [];
-        }
-        return res.json({ success: true, source: 'database', data });
-    }
-
+    const raw = req.params.slug || '';
+    const slug = raw.replace(/_/g, '-'); // egységesítés
     const baseDir = path.resolve(__dirname, 'data', 'tananyag');
     const jsonPath = path.join(baseDir, `${slug}.json`);
+    const jsPath   = path.join(baseDir, `${slug}.js`);
+
+    let data;
 
     if (fsSync.existsSync(jsonPath)) {
+      // .json -> szöveg -> JSON.parse
       const text = await fsp.readFile(jsonPath, 'utf8');
-      const data = JSON.parse(text);
-      return res.json({ success: true, source: 'filesystem', data });
+      data = JSON.parse(text);
+      console.log(`📄 Betöltve JSON: ${jsonPath}`);
+    } else if (fsSync.existsSync(jsPath)) {
+      // .js -> require (már objektumot ad vissza, NEM parse-oljuk újra)
+      delete require.cache[jsPath]; // biztos ami biztos
+      const mod = require(jsPath);
+      data = (mod && mod.default) ? mod.default : mod;
+      console.log(`🧩 Betöltve JS modul: ${jsPath}`);
+    } else {
+      return res.status(404).json({
+        success: false,
+        message: `Nem található a lecke: ${slug}.json vagy ${slug}.js a ${baseDir} mappában.`,
+      });
     }
-    
-    return res.status(404).json({
-      success: false,
-      message: `Nem található a lecke: ${slug}`,
-    });
 
+    // Védőháló: ha véletlenül string került ide, és úgy tűnik JSON
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch {
+        // hagyjuk stringként, ha nem JSON
+      }
+    }
+
+    return res.json({ success: true, data });
   } catch (err) {
-    console.error(`❌ Hiba a(z) /api/quiz/${slug} feldolgozásakor:`, err);
-    return res
-      .status(500)
-      .json({ success: false, message: 'Szerverhiba történt a lecke betöltésekor.' });
+    console.error(`❌ Hiba a(z) /api/quiz/${req.params.slug} feldolgozásakor:`, err);
+    return res.status(500).json({ success: false, message: 'Szerverhiba történt a lecke betöltésekor.' });
   }
 });
+
+
 
 app.get('/api/admin/clear-users/:secret', async (req, res) => {
   const { secret } = req.params;

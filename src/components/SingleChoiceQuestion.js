@@ -4,32 +4,57 @@ import styles from './QuestionStyles.module.css';
 const SingleChoiceQuestion = ({ question, userAnswer, onAnswerChange, showResults }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  // Beküldéskor alapból legyen NYITVA
   useEffect(() => {
     if (showResults) setIsCollapsed(false);
   }, [showResults]);
 
-  let options = [];
-  if (Array.isArray(question.options)) {
-    options = question.options;
-  } else {
-    try {
-      options = JSON.parse(question.options);
-    } catch (e) {
-      console.error("Nem sikerült feldolgozni a kérdés opcióit:", question.options, e);
-      options = [];
+  // --- KEZDŐDIK A JAVÍTÁS ---
+  // "Adapter" logika, ami normalizálja a bejövő `question` objektumot.
+  // Eldönti, hogy régi vagy új formátumú-e, és átalakítja egy egységes formára.
+  const getNormalizedQuestion = (q) => {
+    // Ha a 'description' kulcs létezik, akkor ez az új formátum, nincs teendő.
+    if (q.description && Array.isArray(q.options)) {
+      return {
+        id: q.id,
+        description: q.description,
+        options: q.options,
+        answer: q.answer,
+        explanation: q.explanation,
+      };
     }
-  }
+    
+    // Ha a 'question' kulcs létezik, akkor ez a régi formátum, átalakítjuk.
+    if (q.question && typeof q.answers === 'object') {
+      return {
+        id: q.id,
+        description: q.question, // 'question' -> 'description'
+        options: Object.values(q.answers), // {a:"...", b:"..."} -> ["...", "..."]
+        answer: q.answers[q.correct], // a helyes válasz kulcs ("b") alapján kikeresi a tényleges választ
+        explanation: q.explanation,
+      };
+    }
 
+    // Ha egyik sem, visszatérünk egy üres struktúrával a hibák elkerülése végett.
+    console.error("Ismeretlen kérdés formátum:", q);
+    return { id: 'unknown', description: 'Hiba a kérdés betöltésekor.', options: [], answer: '', explanation: '' };
+  };
+
+  const normalizedQuestion = getNormalizedQuestion(question);
+  // --- EDDIG TART A JAVÍTÁS ---
+
+
+  // Innentől a kód többi része a `normalizedQuestion` objektumot használja,
+  // ami már garantáltan a helyes formátumú.
+  
   return (
     <div className={styles.questionBlock}>
-      <p className={styles.description}>{question.description}</p>
+      <p className={styles.description}>{normalizedQuestion.description}</p>
 
       <div className={styles.optionsGrid}>
-        {options.map((option, index) => {
+        {normalizedQuestion.options.map((option, index) => {
           let labelClass = styles.optionLabel;
           const isSelected = userAnswer === option;
-          const isCorrect = question.answer === option;
+          const isCorrect = normalizedQuestion.answer === option;
 
           if (showResults) {
             if (isCorrect) labelClass += ` ${styles.correct}`;
@@ -42,10 +67,10 @@ const SingleChoiceQuestion = ({ question, userAnswer, onAnswerChange, showResult
             <label key={index} className={labelClass}>
               <input
                 type="radio"
-                name={`question-${question.id}`}
+                name={`question-${normalizedQuestion.id}`}
                 value={option}
                 checked={isSelected}
-                onChange={() => onAnswerChange(question.id, option)}
+                onChange={() => onAnswerChange(normalizedQuestion.id, option)}
                 style={{ display: 'none' }}
                 disabled={showResults}
               />
@@ -67,8 +92,8 @@ const SingleChoiceQuestion = ({ question, userAnswer, onAnswerChange, showResult
           </button>
 
           <div className={`${styles.explanation} ${isCollapsed ? styles.explanationCollapsed : ''}`}>
-            {question.explanation && String(question.explanation).trim().length > 0
-              ? question.explanation
+            {normalizedQuestion.explanation && String(normalizedQuestion.explanation).trim().length > 0
+              ? normalizedQuestion.explanation
               : "Ehhez a kérdéshez nincs magyarázat."}
           </div>
         </div>
