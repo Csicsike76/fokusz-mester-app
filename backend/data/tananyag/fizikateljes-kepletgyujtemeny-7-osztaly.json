@@ -1,8 +1,87 @@
 {
   "title": "Fizikateljes kepletgyujtemeny 7 osztaly",
   "subject": "fizika",
-  "grade": 0,
+  "grade": 7,
   "category": "premium_course",
   "description": "Ez a(z) \"Fizikateljes kepletgyujtemeny 7 osztaly\" című tananyag.",
-  "questions": []
+  "toc": [
+    {
+      "id": "fejezet1",
+      "title": "Mechanikai kölcsönhatások",
+      "subheadings": [
+        { "id": "fejezet1-1", "title": "Newton I. törvénye (A tehetetlenség elve)" },
+        { "id": "fejezet1-2", "title": "Newton III. törvénye (A hatás-visszahatás elve)" },
+        { "id": "fejezet1-3", "title": "Eredő erő" }
+      ]
+    },
+    {
+      "id": "fejezet2",
+      "title": "Mechanikai munka és energia",
+      "subheadings": [
+        { "id": "fejezet2-1", "title": "Mechanikai munka" },
+        { "id": "fejezet2-2", "title": "Mechanikai teljesítmény" },
+        { "id": "fejezet2-3", "title": "Mozgási energia" },
+        { "id": "fejezet2-4", "title": "Gravitációs helyzeti energia" },
+        { "id": "fejezet2-5", "title": "Rugalmassági helyzeti energia" },
+        { "id": "fejezet2-6", "title": "Mechanikai energia megmaradása" }
+      ]
+    },
+    {
+      "id": "fejezet3",
+      "title": "Folyadékok és gázok mechanikája",
+      "subheadings": [
+        { "id": "fejezet3-1", "title": "Pascal-törvénye" },
+        { "id": "fejezet3-2", "title": "Arkhimédész törvénye" }
+      ]
+    },
+    {
+      "id": "fejezet4",
+      "title": "Mechanikai hullámok, a hang",
+      "subheadings": [
+        { "id": "fejezet4-1", "title": "Hullámterjedés alapegyenlete" },
+        { "id": "fejezet4-2", "title": "Frekvencia és periódusidő kapcsolata" },
+        { "id": "fejezet4-3", "title": "Hang jellemzői" }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "fejezet1",
+      "title": "Mechanikai kölcsönhatások",
+      "content": [
+        { "type": "card", "id": "fejezet1-1", "title": "Newton I. törvénye (A tehetetlenség elve)", "htmlContent": "<p>Minden test nyugalomban marad vagy egyenes vonalú egyenletes mozgást végez, míg egy külső erő a mozgásállapota megváltoztatására nem kényszeríti. Példa: Egy hirtelen induló buszon hátrazuhanunk, mert a testünk a tehetetlensége miatt nyugalomban maradna.</p><a href=\"/tananyag/kviz-newton-i-tehetetlenseg-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet1-2", "title": "Newton III. törvénye (A hatás-visszahatás elve)", "htmlContent": "<p>Ha 'A' test erőt gyakorol 'B' testre (hatás), akkor 'B' test is ugyanakkora, de ellentétes irányú erőt gyakorol 'A' testre (ellenhatás). FA→B = -FB→A. Példa: Amikor elrugaszkodunk a partról, a lábunk hátrafelé löki a Földet, és a Föld ugyanakkora erővel lök el minket előre.</p><a href=\"/tananyag/kviz-newton-iii-hatas-visszahatas-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet1-3", "title": "Eredő erő", "htmlContent": "<p>Egy testre ható erők vektori összege. Jele: Fe. Ha az eredő erő nulla (Fe=0), a test egyensúlyban van. Példa: Ha két gyerek 50-50 N erővel húz egy kötelet ellentétes irányba, az eredő erő 0 N, a kötél nem mozdul.</p><a href=\"/tananyag/kviz-eredo-ero-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet2",
+      "title": "Mechanikai munka és energia",
+      "content": [
+        { "type": "card", "id": "fejezet2-1", "title": "Mechanikai munka", "htmlContent": "<p>W = F ⋅ s. Példa: Ha 20 N erővel 3 méterrel eltolunk egy dobozt, a végzett munka W = 20 N ⋅ 3 m = 60 J.</p><a href=\"/tananyag/kviz-mechanikai-munka-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-2", "title": "Mechanikai teljesítmény", "htmlContent": "<p>P = W / t. Példa: Ha 60 J munkát 10 másodperc alatt végzünk, a teljesítmény P = 60 J / 10 s = 6 W.</p><a href=\"/tananyag/kviz-mechanikai-teljesitmeny-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-3", "title": "Mozgási energia", "htmlContent": "<p>E_k = (1/2)mv². Példa: Egy 2 kg tömegű labda 4 m/s sebességgel mozog, E_k = (1/2) * 2 kg * (4 m/s)² = 16 J.</p><a href=\"/tananyag/kviz-mozgasi-energia-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-4", "title": "Gravitációs helyzeti energia", "htmlContent": "<p>E_p = mgh. Példa: Egy 5 kg-os tárgy 10 m magasban van, E_p = 5 kg * 9.81 m/s² * 10 m = 490.5 J.</p><a href=\"/tananyag/kviz-gravitacios-energia-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-5", "title": "Rugalmassági helyzeti energia", "htmlContent": "<p>E_r = (1/2)kx². Példa: Egy rugó állandója 100 N/m, és 0.2 m-re nyúlik, E_r = (1/2) * 100 N/m * (0.2 m)² = 2 J.</p><a href=\"/tananyag/kviz-rugalmassagi-energia-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-6", "title": "Mechanikai energia megmaradása", "htmlContent": "<p>A mechanikai energia teljes egészében megmarad zárt rendszerben, ha nincs energia veszteség. Példa: Egy inga mozgása során a helyzeti és mozgási energia átalakul egymásba.</p><a href=\"/tananyag/kviz-mechanikai-energia-megmaradasa-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet3",
+      "title": "Folyadékok és gázok mechanikája",
+      "content": [
+        { "type": "card", "id": "fejezet3-1", "title": "Pascal-törvénye", "htmlContent": "<p>Nyugvó, zárt folyadékban a külső nyomás minden irányban gyengítetlenül terjed tovább. Példa: Az autók hidraulikus fékrendszere. A fékpedál lenyomásával keltett nyomás a fékfolyadékban eljut a kerekekig.</p><a href=\"/tananyag/kviz-pascal-torvenye-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet3-2", "title": "Arkhimédész törvénye", "htmlContent": "<p>Minden folyadékba vagy gázba merülő testre felhajtóerő hat, amelynek nagysága egyenlő a test által kiszorított folyadék vagy gáz súlyával. Példa: Egy hajó azért úszik, mert az általa kiszorított víz súlya (a felhajtóerő) megegyezik a hajó teljes súlyával.</p><a href=\"/tananyag/kviz-arkhimedesz-torvenye-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet4",
+      "title": "Mechanikai hullámok, a hang",
+      "content": [
+        { "type": "card", "id": "fejezet4-1", "title": "Hullámterjedés alapegyenlete", "htmlContent": "<p>c = λ ⋅ f. Példa: Ha a hang sebessége 340 m/s, és a frekvenciája 170 Hz, akkor a hullámhossza λ = c / f = 340 / 170 = 2 méter.</p><a href=\"/tananyag/kviz-hullamterjedes-egyenlet-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet4-2", "title": "Frekvencia és periódusidő kapcsolata", "htmlContent": "<p>f = 1 / T. Példa: Ha egy hinta 2 másodperc alatt tesz meg egy teljes lengést (T=2s), akkor a frekvenciája f = 1 / 2s = 0.5 Hz.</p><a href=\"/tananyag/kviz-frekvencia-peridus-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet4-3", "title": "Hang jellemzői", "htmlContent": "<p>Hangmagasság: a frekvenciától (f) függ. Példa: A szúnyog zümmögése magas (nagy f), a medve dörmögése mély (kis f). Hangerősség: az amplitúdótól (A) függ. Példa: A suttogás kis amplitúdójú, a kiabálás nagy amplitúdójú hanghullám. Hangszín: a felhangok összetételétől függ. Példa: Ezért tudjuk megkülönböztetni egy hegedű és egy zongora hangját.</p><a href=\"/tananyag/kviz-hang-jellemzoi-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    }
+  ]
 }

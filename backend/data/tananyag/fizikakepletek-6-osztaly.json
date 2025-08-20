@@ -4,251 +4,143 @@
   "grade": 6,
   "category": "premium_course",
   "description": "Részletes fizikai tananyag 6. osztályos tanulók számára, alapfogalmaktól optikai jelenségekig.",
-  "questions": [],
+  "toc": [
+    {
+      "id": "fejezet1",
+      "title": "1. Alapfogalmak a fizikában",
+      "subheadings": [
+        { "id": "fejezet1-1", "title": "Fizikai mennyiségek, mértékegységek" },
+        { "id": "fejezet1-2", "title": "Hosszúság, terület, térfogat, idő mérése" },
+        { "id": "fejezet1-3", "title": "Mérési hibák, hibaforrások" },
+        { "id": "fejezet1-4", "title": "Terület és térfogat közvetett mérése" }
+      ]
+    },
+    {
+      "id": "fejezet2",
+      "title": "2. Mechanikai jelenségek",
+      "subheadings": [
+        { "id": "fejezet2-1", "title": "Vonatkozási rendszer" },
+        { "id": "fejezet2-2", "title": "Pálya" },
+        { "id": "fejezet2-3", "title": "Egyenletes mozgás" },
+        { "id": "fejezet2-4", "title": "Megtett távolság, időtartam" },
+        { "id": "fejezet2-5", "title": "Átlagsebesség" },
+        { "id": "fejezet2-6", "title": "Gyorsulás" },
+        { "id": "fejezet2-7", "title": "Egyenletesen változó mozgás" },
+        { "id": "fejezet2-8", "title": "Tehetetlenség" },
+        { "id": "fejezet2-9", "title": "Tömeg" },
+        { "id": "fejezet2-10", "title": "Tömegmérés" },
+        { "id": "fejezet2-11", "title": "Sűrűség" },
+        { "id": "fejezet2-12", "title": "Kölcsönhatások hatásai" },
+        { "id": "fejezet2-13", "title": "Erő" },
+        { "id": "fejezet2-14", "title": "Súly" },
+        { "id": "fejezet2-15", "title": "Erőmérés, dinamométer" },
+        { "id": "fejezet2-16", "title": "Súrlódási erő" },
+        { "id": "fejezet2-17", "title": "Rugalmassági erő" }
+      ]
+    },
+    {
+      "id": "fejezet3",
+      "title": "3. Hőjelenségek",
+      "subheadings": [
+        { "id": "fejezet3-1", "title": "Hőállapot, hőmérséklet" },
+        { "id": "fejezet3-2", "title": "Hőmérsékleti skálák" },
+        { "id": "fejezet3-3", "title": "Hőátadás" },
+        { "id": "fejezet3-4", "title": "Hőtágulás" },
+        { "id": "fejezet3-5", "title": "Halmazállapot-változások" }
+      ]
+    },
+    {
+      "id": "fejezet4",
+      "title": "4. Elektromos és mágneses jelenségek",
+      "subheadings": [
+        { "id": "fejezet4-1", "title": "Mágneses kölcsönhatások" },
+        { "id": "fejezet4-2", "title": "Elektromos állapot, töltés" },
+        { "id": "fejezet4-3", "title": "Egyszerű áramkörök" },
+        { "id": "fejezet4-4", "title": "Soros és párhuzamos kapcsolás" }
+      ]
+    },
+    {
+      "id": "fejezet5",
+      "title": "5. Optikai jelenségek",
+      "subheadings": [
+        { "id": "fejezet5-1", "title": "Fényforrások" },
+        { "id": "fejezet5-2", "title": "Átlátszó, áttetsző, átlátszatlan testek" },
+        { "id": "fejezet5-3", "title": "A fény egyenesvonalú terjedése. A fény sebessége" },
+        { "id": "fejezet5-4", "title": "Az árnyék és a félárnyék" },
+        { "id": "fejezet5-5", "title": "Fényvisszaverődés és fénytörés" }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "fejezet1",
+      "title": "1. Alapfogalmak a fizikában",
+      "content": [
+        { "type": "card", "id": "fejezet1-1", "title": "Fizikai mennyiségek, mértékegységek", "htmlContent": "<p>A fizikai mennyiségek a testek mérhető tulajdonságai. Mindig egy számértékből és egy mértékegységből állnak. Jele: F, m, v stb.</p><a href=\"/tananyag/kviz-fizikai-mennyisegek-mertekegysegek-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet1-2", "title": "Hosszúság, terület, térfogat, idő mérése", "htmlContent": "<p>Hosszúság: Méter (m), terület: m², térfogat: m³, idő: Másodperc (s).</p><a href=\"/tananyag/kviz-hosszusag-terulet-terfogat-ido-merese-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet1-3", "title": "Mérési hibák, hibaforrások", "htmlContent": "<p>Mérési hibák lehetnek szisztematikus (pl. elavult eszköz) vagy véletlen (pl. olvasási hiba).</p><a href=\"/tananyag/kviz-meresi-hibak-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet1-4", "title": "Terület és térfogat közvetett mérése", "htmlContent": "<p>Terület: h * sz, térfogat: h * sz * m, ahol közvetett mérést használunk képletekkel.</p><a href=\"/tananyag/kviz-terulet-terfogat-kozvetett-merese-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet2",
+      "title": "2. Mechanikai jelenségek",
+      "content": [
+        { "type": "card", "id": "fejezet2-1", "title": "Vonatkozási rendszer", "htmlContent": "<p>A mozgás mindig egy vonatkozási rendszerhez képest történik, pl. Földhöz képest.</p><a href=\"/tananyag/kviz-vonatkoztasi-rendszer-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-2", "title": "Pálya", "htmlContent": "<p>A mozgás pályája a test által bejárt útvonal.</p><a href=\"/tananyag/kviz-palya-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-3", "title": "Egyenletes mozgás", "htmlContent": "<p>Állandó sebességű mozgás, ahol a távolság arányos az idővel.</p><a href=\"/tananyag/kviz-egyenletes-mozgas-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-4", "title": "Megtett távolság, időtartam", "htmlContent": "<p>s = v * t, ahol s a távolság, v a sebesség, t az idő.</p><a href=\"/tananyag/kviz-megtet-tavolsag-idotartam-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-5", "title": "Átlagsebesség", "htmlContent": "<p>v_átlag = s / t, a teljes távolság osztva a teljes idővel.</p><a href=\"/tananyag/kviz-atlagsebesseg-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-6", "title": "Gyorsulás", "htmlContent": "<p>a = Δv / Δt, a sebességváltozás osztva az idővel.</p><a href=\"/tananyag/kviz-gyorsulas-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-7", "title": "Egyenletesen változó mozgás", "htmlContent": "<p>Állandó gyorsulású mozgás, pl. szabad esés.</p><a href=\"/tananyag/kviz-egyenletesen-valtozo-mozgas-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-8", "title": "Tehetetlenség", "htmlContent": "<p>A testek megtartják mozgásállapotukat, ha nincs külső erő.</p><a href=\"/tananyag/kviz-tehetetlenseg-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-9", "title": "Tömeg", "htmlContent": "<p>A test tehetetlenségének mértéke, mértékegysége kg.</p><a href=\"/tananyag/kviz-tomeg-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-10", "title": "Tömegmérés", "htmlContent": "<p>Mérleggel, összehasonlítással ismert tömegekkel.</p><a href=\"/tananyag/kviz-tomegmeres-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-11", "title": "Sűrűség", "htmlContent": "<p>ρ = m / V, tömeg osztva térfogattal.</p><a href=\"/tananyag/kviz-suruseg-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-12", "title": "Kölcsönhatások hatásai", "htmlContent": "<p>Erők kölcsönhatásai megváltoztatják a mozgást.</p><a href=\"/tananyag/kviz-kolcsonhatasok-hatasa-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-13", "title": "Erő", "htmlContent": "<p>A testek kölcsönhatásának mértéke, jele F, mértékegysége N.</p><a href=\"/tananyag/kviz-ero-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-14", "title": "Súly", "htmlContent": "<p>F_g = m * g, ahol g ≈ 9.8 m/s².</p><a href=\"/tananyag/kviz-suly-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-15", "title": "Erőmérés, dinamométer", "htmlContent": "<p>Dinamométerrel mérjük az erő nagyságát.</p><a href=\"/tananyag/kviz-eromeres-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-16", "title": "Súrlódási erő", "htmlContent": "<p>A felületek közötti ellenállás, ami gátolja a mozgást.</p><a href=\"/tananyag/kviz-surlodasi-ero-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet2-17", "title": "Rugalmassági erő", "htmlContent": "<p>F = -k * x, Hooke-törvény a rugókra.</p><a href=\"/tananyag/kviz-rugalmassagi-ero-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet3",
+      "title": "3. Hőjelenségek",
+      "content": [
+        { "type": "card", "id": "fejezet3-1", "title": "Hőállapot, hőmérséklet", "htmlContent": "<p>A hőmérséklet a hőállapot mértéke, Celsius-skálán mérjük.</p><a href=\"/tananyag/kviz-hoallapot-hom-erseklet-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet3-2", "title": "Hőmérsékleti skálák", "htmlContent": "<p>Celsius, Fahrenheit, Kelvin skálák átváltása.</p><a href=\"/tananyag/kviz-hom-ersekleti-skalak-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet3-3", "title": "Hőátadás", "htmlContent": "<p>Hővezetés, hőáramlás, hőszugárzás.</p><a href=\"/tananyag/kviz-hoatadas-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet3-4", "title": "Hőtágulás", "htmlContent": "<p>A testek hőtől való kiterjedése, pl. lineáris tágulás.</p><a href=\"/tananyag/kviz-hotagulas-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet3-5", "title": "Halmazállapot-változások", "htmlContent": "<p>Olvadás, fagyás, párolgás, lecsapódás.</p><a href=\"/tananyag/kviz-halmazallapot-valtozasok-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet4",
+      "title": "4. Elektromos és mágneses jelenségek",
+      "content": [
+        { "type": "card", "id": "fejezet4-1", "title": "Mágneses kölcsönhatások", "htmlContent": "<p>Mágnesek vonzzák vagy taszítják egymást, pólusok alapján.</p><a href=\"/tananyag/kviz-magneses-kolcsonhatasok-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet4-2", "title": "Elektromos állapot, töltés", "htmlContent": "<p>Pozitív és negatív töltések, vonzás és taszítás.</p><a href=\"/tananyag/kviz-elektromos-allapot-toltes-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet4-3", "title": "Egyszerű áramkörök", "htmlContent": "<p>Áramforrás, vezeték, fogyasztó, kapcsoló.</p><a href=\"/tananyag/kviz-egyszeru-aramkorok-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet4-4", "title": "Soros és párhuzamos kapcsolás", "htmlContent": "<p>Soros: I állandó, U összeadódik. Párhuzamos: U állandó, I összeadódik.</p><a href=\"/tananyag/kviz-soros-parhuzamos-kapcsolas-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet5",
+      "title": "5. Optikai jelenségek",
+      "content": [
+        { "type": "card", "id": "fejezet5-1", "title": "Fényforrások", "htmlContent": "<p>A fényforrások olyan testek, amelyek fényt bocsátanak ki. Lehetnek természetesek (pl. Nap) vagy mesterségesek (pl. lámpa). Jele: a megvilágított testek a rájuk eső fényt verik vissza.</p><a href=\"/tananyag/kviz-fenyforrasok-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet5-2", "title": "Átlátszó, áttetsző, átlátszatlan testek", "htmlContent": "<p>Az átlátszó testeken a fény áthalad és élesen látunk rajtuk keresztül. Az áttetsző testeken a fény áthalad, de szóródik. Az átlátszatlan testek nem engedik át a fényt.</p><a href=\"/tananyag/kviz-atlatszo-attettszo-atlatszatlan-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet5-3", "title": "A fény egyenesvonalú terjedése. A fény sebessége", "htmlContent": "<p>A fény homogén közegben (pl. levegő, vákuum) egyenes vonalban terjed. Sebessége a legnagyobb ismert sebesség a természetben, kb. 300 000 km/s.</p><a href=\"/tananyag/kviz-feny-egyenesvonalu-terjedese-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet5-4", "title": "Az árnyék és a félárnyék", "htmlContent": "<p>Amikor egy átlátszatlan test a fény útjába kerül, mögötte árnyék keletkezik. Ha a fényforrás kiterjedt (nem pontszerű), az éles árnyék mellett egy elmosódottabb félárnyék is létrejöhet.</p><a href=\"/tananyag/kviz-arnyek-felarnyek-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet5-5", "title": "Fényvisszaverődés és fénytörés", "htmlContent": "<p>Fényvisszaverődés: Amikor a fény egy felületről visszaverődik (pl. tükör). A beesési szög egyenlő a visszaverődési szöggel. Fénytörés: Amikor a fény egy másik közegbe lépve megváltoztatja haladási irányát (pl. szívószál a vízben).</p><a href=\"/tananyag/kviz-fenyvisszaverodes-fenytor-6\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    }
+  ],
   "toolData": {
     "type": "hub-page",
     "header": "Fizika Segédlet - 6. Osztály",
-    "sections": [
-      {
-        "id": "fejezet1",
-        "title": "1. Alapfogalmak a fizikában",
-        "cards": [
-          {
-            "id": "fejezet1-1",
-            "title": "Fizikai mennyiségek, mértékegységek, többszörösök és törtrészek",
-            "description": "A fizikai mennyiségek a testek mérhető tulajdonságai. Mindig egy számértékből és egy mértékegységből állnak. A mértékegységeknek vannak többszörösei (pl. kilo-, mega-) és törtrészei (pl. centi-, milli-).",
-              "link": "/tananyag/kviz_mennyisegek_mertekegysegek.html"
-          },
-          {
-            "id": "fejezet1-2",
-            "title": "Hosszúság, terület, térfogat és időtartam közvetlen mérése",
-            "description": "A közvetlen mérés során a mérendő mennyiséget egy mérőeszközön lévő skálához hasonlítjuk, és az értéket közvetlenül leolvassuk.",
-            "quizLink": "kviz_kozvetlen_meres.html"
-          },
-          {
-            "id": "fejezet1-3",
-            "title": "Mérési hibák, hibaforrások, hibaszámítás",
-            "description": "A mérés sosem tökéletesen pontos. A hiba lehet a mérőeszköz, a mérő személy vagy a környezet pontatlansága. Több mérés átlagolásával csökkenthetjük a véletlen hibák hatását.",
-            "quizLink": "kviz_meresi_hibak.html"
-          },
-          {
-            "id": "fejezet1-4",
-            "title": "Terület és térfogat közvetett mérése",
-            "description": "A közvetett mérés során más, könnyebben mérhető mennyiségekből (pl. hosszúság) számítjuk ki a keresett értéket egy matematikai képlet segítségével.",
-            "quizLink": "kviz_kozvetett_meres.html"
-          }
-        ]
-      },
-      {
-        "id": "fejezet2",
-        "title": "2. Mechanikai jelenségek",
-        "cards": [
-          {
-            "id": "fejezet2-1",
-            "title": "Vonatkoztatási rendszer",
-            "description": "A testek mozgása vagy nyugalma mindig egy másik testhez (vonatkoztatási rendszerhez) viszonyítva értelmezhető. A mozgás relatív.",
-            "quizLink": "kviz_vonatkoztatasi_rendszer.html"
-          },
-          {
-            "id": "fejezet2-2",
-            "title": "Pálya",
-            "description": "A mozgó test által leírt vonal a test pályája. Ha egy test helyzete nem változik a vonatkoztatási rendszerhez képest, akkor nyugalomban van.",
-            "quizLink": "kviz_mozgas_palya.html"
-          },
-          {
-            "id": "fejezet2-3",
-            "title": "Egyenletes mozgás",
-            "description": "Egy test egyenes vonalú egyenletes mozgást végez, ha pályája egyenes, és egyenlő időközök alatt egyenlő utakat tesz meg. Sebessége állandó.",
-            "quizLink": "kviz_egyenletes_mozgas.html"
-          },
-          {
-            "id": "fejezet2-4",
-            "title": "Megtett távolság, időtartam",
-            "description": "A megtett távolság (út) a pálya hossza, amit a test egy adott időtartam alatt bejár. Az időtartam a mozgás kezdete és vége között eltelt idő.",
-            "quizLink": "kviz_ut_ido.html"
-          },
-          {
-            "id": "fejezet2-5",
-            "title": "Átlagsebesség",
-            "description": "Az átlagsebesség a teljes megtett út és az ehhez szükséges teljes idő hányadosa. Képlete: v = s / t.",
-            "quizLink": "kviz_atlagsebesseg.html"
-          },
-          {
-            "id": "fejezet2-6",
-            "title": "Gyorsulás",
-            "description": "A gyorsulás megmutatja, hogy a test sebessége mennyit változik egységnyi idő alatt. Jele 'a'.",
-            "quizLink": "kviz_gyorsulas.html"
-          },
-          {
-            "id": "fejezet2-7",
-            "title": "Egyenletesen változó mozgás",
-            "description": "Ilyen mozgást végez a test, ha sebessége egyenlő időközök alatt ugyanannyival változik. A gyorsulása állandó.",
-            "quizLink": "kviz_valtozo_mozgas.html"
-          },
-          {
-            "id": "fejezet2-8",
-            "title": "Tehetetlenség",
-            "description": "A tehetetlenség a testek azon tulajdonsága, hogy mozgásállapotuk megváltoztatásával szemben ellenállást fejtenek ki.",
-            "quizLink": "kviz_tehetetlenseg.html"
-          },
-          {
-            "id": "fejezet2-9",
-            "title": "Tömeg",
-            "description": "A tehetetlenség mértéke a tömeg. Minél nagyobb egy test tömege, annál nagyobb a tehetetlensége. Jele 'm', mértékegysége a kg.",
-            "quizLink": "kviz_tomeg_merteke.html"
-          },
-          {
-            "id": "fejezet2-10",
-            "title": "Tömegmérés",
-            "description": "A testek tömegét mérleggel mérjük, összehasonlítva ismert tömegű testekkel (súlyokkal).",
-            "quizLink": "kviz_tomegmeres.html"
-          },
-          {
-            "id": "fejezet2-11",
-            "title": "Sűrűség",
-            "description": "A sűrűség egy anyagra jellemző fizikai mennyiség, amely megmutatja az anyag egységnyi térfogatának tömegét. Képlete: ρ = m / V.",
-            "quizLink": "kviz_suruseg.html"
-          },
-          {
-            "id": "fejezet2-12",
-            "title": "Kölcsönhatások hatásai",
-            "description": "A kölcsönhatások megváltoztathatják a testek mozgásállapotát (gyorsíthatják, lassíthatják, elfordíthatják őket) vagy alakját (alakváltozás).",
-            "quizLink": "kviz_kolcsonhatas_hatasai.html"
-          },
-          {
-            "id": "fejezet2-13",
-            "title": "Erő",
-            "description": "A kölcsönhatás erősségét az erő nevű fizikai mennyiséggel jellemezzük. Az erőnek nagysága és iránya is van, ezért vektormennyiség.",
-            "quizLink": "kviz_ero_merteke.html"
-          },
-          {
-            "id": "fejezet2-14",
-            "title": "Súly",
-            "description": "A súly az az erő, amellyel a test a Földet vonzza (gravitációs erő). A test tömegétől és a gravitációs gyorsulástól függ.",
-            "quizLink": "kviz_suly.html"
-          },
-          {
-            "id": "fejezet2-15",
-            "title": "Erőmérés, dinamométer",
-            "description": "Az erőt dinamométerrel (rugós erőmérővel) mérjük. A mérés a rugó megnyúlásán alapul, ami arányos a rá ható erővel.",
-            "quizLink": "kviz_eromeres.html"
-          },
-          {
-            "id": "fejezet2-16",
-            "title": "Súrlódási erő",
-            "description": "A csúszó súrlódási erő egy mozgást akadályozó erő, amely két, egymáson elcsúszó felület között lép fel. Iránya mindig a mozgással ellentétes.",
-            "quizLink": "kviz_surlodas.html"
-          },
-          {
-            "id": "fejezet2-17",
-            "title": "Rugalmassági erő",
-            "description": "A rugalmas erő egy rugalmas test (pl. rugó) alakváltozása során lép fel, és igyekszik visszaállítani az eredeti alakot. Nagysága arányos a megnyúlással.",
-            "quizLink": "kviz_rugalmassagi_ero.html"
-          }
-        ]
-      },
-      {
-        "id": "fejezet3",
-        "title": "3. Hőjelenségek",
-        "cards": [
-          {
-            "id": "fejezet3-1",
-            "title": "Hőállapot, hőmérséklet, termikus érintkezés",
-            "description": "A hőmérséklet a testek hőállapotát jellemző fizikai mennyiség. Két különböző hőmérsékletű test érintkezésekor hőcsere történik, amíg a hőmérsékletük ki nem egyenlítődik (hőegyensúly).",
-            "quizLink": "kviz_hoallapot_homerseklet.html"
-          },
-          {
-            "id": "fejezet3-2",
-            "title": "Hőmérsékleti skálák",
-            "description": "A hőmérséklet mérésére különböző skálákat használunk. A mindennapi életben a Celsius-skála, a tudományban a Kelvin-skála a legelterjedtebb.",
-            "quizLink": "kviz_homersekleti_skalak.html"
-          },
-          {
-            "id": "fejezet3-3",
-            "title": "Hőátadás",
-            "description": "Egy test hőállapotát hőátadással (melegítéssel vagy hűtéssel) lehet megváltoztatni.",
-            "quizLink": "kviz_hoallapot_valtozas.html"
-          },
-          {
-            "id": "fejezet3-4",
-            "title": "Hőtágulás",
-            "description": "A legtöbb anyag melegítés hatására kitágul, hűtés hatására összehúzódik. Ezt a jelenséget hőtágulásnak nevezzük.",
-            "quizLink": "kviz_hotagulas.html"
-          },
-          {
-            "id": "fejezet3-5",
-            "title": "Halmazállapot-változások",
-            "description": "Az anyagok hőmérséklet-változás hatására halmazállapotot válthatnak. A főbb folyamatok: olvadás, fagyás, párolgás, lecsapódás, szublimáció.",
-            "quizLink": "kviz_halmazallapot_valtozasok.html"
-          }
-        ]
-      },
-      {
-        "id": "fejezet4",
-        "title": "4. Elektromos és mágneses jelenségek",
-        "cards": [
-          {
-            "id": "fejezet4-1",
-            "title": "Mágneses kölcsönhatások",
-            "description": "Minden mágnesnek két pólusa van: északi és déli. Az azonos pólusok taszítják, a különbözőek vonzzák egymást.",
-            "quizLink": "kviz_magnesesseg.html"
-          },
-          {
-            "id": "fejezet4-2",
-            "title": "Elektromos állapot, töltés",
-            "description": "Dörzsöléssel a testek elektromos állapotba hozhatók. Kétféle töltés létezik: pozitív és negatív. Az azonos töltések taszítják, a különbözőek vonzzák egymást.",
-            "quizLink": "kviz_elektromos_toltes.html"
-          },
-          {
-            "id": "fejezet4-3",
-            "title": "Egyszerű áramkörök",
-            "description": "Az elektromos áram a töltéssel rendelkező részecskék rendezett áramlása. Egy egyszerű áramkör részei: áramforrás, fogyasztó, vezeték és kapcsoló.",
-            "quizLink": "kviz_egyszeru_aramkor.html"
-          },
-          {
-            "id": "fejezet4-4",
-            "title": "Soros és párhuzamos kapcsolás",
-            "description": "Soros kapcsolásnál a fogyasztók egymás után helyezkednek el. Ha egy kiesik, a többi sem működik. Párhuzamos kapcsolásnál a fogyasztók külön ágakon vannak. Ha egy kiesik, a többi tovább működik.",
-            "quizLink": "kviz_soros_parhuzamos.html"
-          }
-        ]
-      },
-      {
-        "id": "fejezet5",
-        "title": "5. Optikai jelenségek",
-        "cards": [
-          {
-            "id": "fejezet5-1",
-            "title": "Fényforrások",
-            "description": "A fényforrások olyan testek, amelyek fényt bocsátanak ki. Lehetnek természetesek (pl. Nap) vagy mesterségesek (pl. lámpa). A megvilágított testek a rájuk eső fényt verik vissza.",
-            "quizLink": "kviz_fenyforrasok.html"
-          },
-          {
-            "id": "fejezet5-2",
-            "title": "Átlátszó, áttetsző, átlátszatlan testek",
-            "description": "Az átlátszó testeken a fény áthalad és élesen látunk rajtuk keresztül. Az áttetsző testeken a fény áthalad, de szóródik. Az átlátszatlan testek nem engedik át a fényt.",
-            "quizLink": "kviz_atlatszo_testek.html"
-          },
-          {
-            "id": "fejezet5-3",
-            "title": "Fény terjedése, sebessége",
-            "description": "A fény homogén közegben (pl. levegő, vákuum) egyenes vonalban terjed. Sebessége a legnagyobb ismert sebesség a természetben, kb. 300 000 km/s.",
-            "quizLink": "kviz_feny_terjedese.html"
-          },
-          {
-            "id": "fejezet5-4",
-            "title": "Árnyék és félárnyék",
-            "description": "Amikor egy átlátszatlan test a fény útjába kerül, mögötte árnyék keletkezik. Ha a fényforrás kiterjedt (nem pontszerű), az éles árnyék mellett egy elmosódottabb félárnyék is létrejöhet.",
-            "quizLink": "kviz_arnyek.html"
-          },
-          {
-            "id": "fejezet5-5",
-            "title": "Fényvisszaverődés és fénytörés",
-            "description": "Fényvisszaverődés: Amikor a fény egy felületről visszaverődik (pl. tükör). A beesési szög egyenlő a visszaverődési szöggel. Fénytörés: Amikor a fény egy másik közegbe lépve megváltoztatja haladási irányát (pl. szívószál a vízben).",
-            "quizLink": "kviz_fenyvisszaverodes_fenytores.html"
-          }
-        ]
-      }
-    ]
+    "sections": []
   }
 }

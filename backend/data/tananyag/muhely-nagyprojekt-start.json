@@ -1,8 +1,86 @@
 {
-  "title": "Muhely nagyprojekt start",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 28-29. hét: Nagy Projekt - Start",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely nagyprojekt start\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére csapatokba szerveződtök, kiválasztotok egy titeket érdeklő témát, és megfogalmazzátok azt a konkrét problémát, amivel foglalkozni fogtok.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Garázstól a Világsikerig"
+    },
+    {
+      "id": "kulcsfogalmak",
+      "title": "3. Kulcsfogalmak"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. A Hét Kihívása: Projekt Terv Vázlat"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>Ezen a dupla héten a cél, hogy megalapozzátok a félév végi nagy projekteteket. A műhely végére <strong>csapatokba szerveződtök, kiválasztotok egy titeket érdeklő témát</strong>, és megfogalmazzátok azt a konkrét problémát, amivel foglalkozni fogtok. Létrehoztok egy egyszerű projektterv-vázlatot, ami a következő hetek munkáját irányítja.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Garázstól a Világsikerig",
+      "content": "<p>Sok híres cég és innováció egy egyszerű ötlettel indult egy garázsban vagy egy kollégiumi szobában. A következő hetekben ti is egy ilyen \"startup\" csapattá váltok. Nem kell megváltanotok a világot, de lehetőségetek van arra, hogy egy olyan problémával foglalkozzatok, ami valóban érdekel titeket. Az MI lesz a legfőbb eszközötök a kutatásban, tervezésben és alkotásban. Az első és legfontosabb lépés: megtalálni azt az egyetlen, közös ötletet, amiért a csapat minden tagja lelkesedni tud.</p>"
+    },
+    {
+      "id": "kulcsfogalmak",
+      "title": "3. Kulcsfogalmak",
+      "content": "<ul><li><strong>Problémamegfogalmazás (Problem Statement):</strong> Egy-két mondat, ami pontosan leírja, mi az a probléma, amit a projektetekkel orvosolni szeretnétek.</li><li><strong>Célkitűzés (Goal/Objective):</strong> Egy mondat, ami leírja, mit szeretnétek elérni. Mi lesz a projekt kézzelfogható eredménye?</li><li><strong>Célközönség (Target Audience):</strong> Kinek készül a projekt? Kinek a problémáját oldja meg? (pl. diákok, tanárok, a helyi közösség)</li></ul>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Csapatépítés (kb. 15 perc)",
+          "content": "<p>Ez a projekt csapatmunka! A feladatotok, hogy alkossatok <strong>3-4 fős csapatokat</strong>! Próbáljatok olyanokkal zusammenarbeiten, akikkel jól tudtok együtt dolgozni és hasonló az érdeklődési körötök.</p><p>Ha a csapatok megalakultak, találjatok ki egy nevet a csapatotoknak!</p>"
+        },
+        {
+          "title": "2. Feladat: Témakörök Feltárása (kb. 30 perc)",
+          "content": "<p>Most, hogy van egy csapatotok, ötleteljetek közösen! Milyen nagy témakörök érdekelnek titeket? Használjátok az MI-t inspirációként!</p><p><strong>Feladat:</strong> Beszéljétek meg az MI által adott ötleteket és a sajátjaitokat! Válasszatok ki <strong>1-2 nagy témakört</strong>, amivel a legszívesebben foglalkoznátok.</p>",
+          "prompts": ["Viselkedj úgy, mint egy innovációs tanácsadó! Egy középiskolás diákokból álló csapat vagyunk, és egy féléves MI-projekthez keresünk témát. Adj 5 nagy témakört, ami érdekes lehet számunkra, és mindegyikhez 2-3 konkrét projektötletet! A témák legyenek relevánsak a mindennapi életünkre (pl. iskola, környezetvédelem, közösség, mentális egészség, kreativitás)."]
+        },
+        {
+          "title": "3. Feladat: A Konkrét Probléma Megtalálása (kb. 30 perc)",
+          "content": "<p>A \"környezetvédelem\" túl tág téma. Konkrét problémára van szükségetek! Most szűkítsétek a kört az MI segítségével!</p><p><strong>Feladat:</strong> Válasszátok ki azt az <strong>egyetlen, konkrét problémát</strong>, ami a csapatotokat a legjobban motiválja! (Pl. \"Nehéz követni a házi feladatokat\", \"Sok ételmaradék keletkezik a menzán\", \"Az új diákok nehezen illeszkednek be\".)</p>",
+          "prompts": ["A csapatunkat a(z) \"[ide írjátok a választott témakört, pl. iskolai élet]\" téma érdekli. Adj 5 konkrét, kicsi, megoldható problémát ezen a területen belül, amivel egy diákprojekt foglalkozhatna!"]
+        },
+        {
+          "title": "4. Feladat: A Projektcél Megfogalmazása (kb. 15 perc)",
+          "content": "<p>Most, hogy megvan a probléma, fogalmazzátok meg a célt! Mit fogtok létrehozni?</p><p><strong>Feladat:</strong> A kapott javaslatok alapján fogalmazzátok meg a projektetek végleges címét és célkitűzését!</p>",
+          "prompts": ["A problémánk a következő: \"[ide másoljátok a problémátokat]\". Adj javaslatot egy fülbemászó projektnévre és egy egyetlen mondatos célkitűzésre (mission statement)! A célkitűzés írja le, mi lesz a projektünk kézzelfogható eredménye (pl. egy applikáció terve, egy kampányterv, egy bemutató)."]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok",
+      "content": "<p>Mielőtt belevágnátok, gondoljátok át közösen!</p><ul><li><strong>Valódi a probléma?</strong> A kiválasztott probléma tényleg létezik, és tényleg zavarja a célközönséget? Vagy csak egy érdekesnek tűnő ötlet? Hogyan tudnátok erről meggyőződni? (Pl. megkérdezhettek más diákokat.)</li><li><strong>Megoldható a probléma?</strong> A célkitűzésetek reális? Az MI tényleg tud segíteni a megvalósításban? Fontos, hogy a projekt a rendelkezésre álló idő (néhány hét) és eszközök (MI-asszisztensek) keretein belül megvalósítható legyen.</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. A Hét Kihívása: A Projekt Terv Vázlat Elkészítése",
+      "content": "<p>A két hét munkájának eredménye egyetlen, közös dokumentum, a \"Projekt Terv Vázlat\".</p><p><strong>Készítsetek egy egyoldalas dokumentumot (pl. Google Docs), ami a következőket tartalmazza:</strong></p><ol><li><strong>Csapatnév</strong></li><li><strong>Csapattagok nevei</strong></li><li><strong>A Projekt Címe</strong></li><li><strong>Problémamegfogalmazás (1-2 mondat):</strong> Mi az a probléma, amit megoldotok?</li><li><strong>Célkitűzés (1 mondat):</strong> Mi lesz a projekt kézzelfogható eredménye?</li><li><strong>Célközönség (1 mondat):</strong> Kinek készült a projekt?</li></ol><p>Ezt a dokumentumot mentsétek el a csapatotoknak! A következő hetekben ez lesz az útitervetek. Sok sikert a közös munkához!</p>"
+    }
+  ]
 }

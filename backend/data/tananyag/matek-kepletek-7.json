@@ -1,8 +1,147 @@
 {
   "title": "Matek kepletek 7",
   "subject": "matematika",
-  "grade": 0,
+  "grade": 7,
   "category": "premium_course",
   "description": "Ez a(z) \"Matek kepletek 7\" című tananyag.",
-  "questions": []
+  "toc": [
+    {
+      "id": "fejezet1",
+      "title": "1. Valós számok halmaza",
+      "subheadings": [
+        { "id": "fejezet1-1", "title": "1.1 Természetes számok négyzetgyöke" },
+        { "id": "fejezet1-2", "title": "1.2 Irracionális számok" },
+        { "id": "fejezet1-3", "title": "1.3 Tényezők kiemelése gyökjel alól" },
+        { "id": "fejezet1-4", "title": "1.4 Számok ábrázolása, összehasonlítás" },
+        { "id": "fejezet1-5", "title": "1.5 Műveletek valós számokkal" },
+        { "id": "fejezet1-6", "title": "1.6 Számtani és mértani közép" },
+        { "id": "fejezet1-7", "title": "1.7 x² = a egyenletek" }
+      ]
+    },
+    {
+      "id": "fejezet2",
+      "title": "2. Lineáris egyenletek és rendszerek",
+      "subheadings": []
+    },
+    {
+      "id": "fejezet3",
+      "title": "3. Az adatszervezés elemei",
+      "subheadings": [
+        { "id": "fejezet3-1", "title": "3.1 Descartes-szorzat" },
+        { "id": "fejezet3-2", "title": "3.2 Koordináta-rendszer" },
+        { "id": "fejezet3-3", "title": "3.3 Függvényi kapcsolat" }
+      ]
+    },
+    {
+      "id": "fejezet4",
+      "title": "4. A négyszög",
+      "subheadings": [
+        { "id": "fejezet4-1", "title": "4.1 Konvex négyszög szögei" },
+        { "id": "fejezet4-2", "title": "4.2 Paralelogramma" },
+        { "id": "fejezet4-3", "title": "4.3 Téglalap, rombusz, négyzet" },
+        { "id": "fejezet4-4", "title": "4.4 Trapéz és középvonala" },
+        { "id": "fejezet4-5", "title": "4.5 Kerület és terület" }
+      ]
+    },
+    {
+      "id": "fejezet5",
+      "title": "5. A kör",
+      "subheadings": [
+        { "id": "fejezet5-1", "title": "5.1 Kerületi szög és érintők" },
+        { "id": "fejezet5-2", "title": "5.2 Szabályos sokszögek" },
+        { "id": "fejezet5-3", "title": "5.3 Kerület és terület" }
+      ]
+    },
+    {
+      "id": "fejezet6",
+      "title": "6. Háromszögek hasonlósága",
+      "subheadings": [
+        { "id": "fejezet6-1", "title": "6.1 Arányos szakaszok" },
+        { "id": "fejezet6-2", "title": "6.2 Thalész tétele" },
+        { "id": "fejezet6-3", "title": "6.3 Hasonlósági esetek" },
+        { "id": "fejezet6-4", "title": "6.4 Gyakorlati alkalmazás" }
+      ]
+    },
+    {
+      "id": "fejezet7",
+      "title": "7. Metrikus összefüggések derékszögű háromszögben",
+      "subheadings": [
+        { "id": "fejezet7-1", "title": "7.1 Magasságtétel, befogótétel" },
+        { "id": "fejezet7-2", "title": "7.2 Pitagorasz-tétel" },
+        { "id": "fejezet7-3", "title": "7.3 Trigonometria alapjai" },
+        { "id": "fejezet7-4", "title": "7.4 Derékszögű háromszög megoldása" }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "fejezet1",
+      "title": "1. Valós számok halmaza",
+      "content": [
+        { "type": "card", "id": "fejezet1-1", "title": "1.1 Természetes számok négyzetgyöke", "htmlContent": "<p>Content for 1.1 goes here.</p><a href=\"/tananyag/kviz-termeszetes-negyzetgyok\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet1-2", "title": "1.2 Irracionális számok", "htmlContent": "<p>Content for 1.2 goes here.</p><a href=\"/tananyag/kviz-irracionalis-szamok\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet1-3", "title": "1.3 Tényezők kiemelése gyökjel alól", "htmlContent": "<p>Content for 1.3 goes here.</p><a href=\"/tananyag/kviz-gyoktelenites\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet1-4", "title": "1.4 Számok ábrázolása, összehasonlítás", "htmlContent": "<p>Content for 1.4 goes here.</p><a href=\"/tananyag/kviz-szamtengely-abszolut\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet1-5", "title": "1.5 Műveletek valós számokkal", "htmlContent": "<p>Content for 1.5 goes here.</p><a href=\"/tananyag/kviz-muveletek-valos\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet1-6", "title": "1.6 Számtani és mértani közép", "htmlContent": "<p>Content for 1.6 goes here.</p><a href=\"/tananyag/kviz-kozepek\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet1-7", "title": "1.7 x² = a egyenletek", "htmlContent": "<p>Content for 1.7 goes here.</p><a href=\"/tananyag/kviz-negyzetes-egyenletek\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet2",
+      "title": "2. Lineáris egyenletek és rendszerek",
+      "content": [
+        { "type": "card", "id": "fejezet2-1", "title": "2. Lineáris egyenletek és rendszerek", "htmlContent": "<p>Content for 2 goes here.</p><a href=\"/tananyag/kviz-ekvivalens-egyenletek\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet3",
+      "title": "3. Az adatszervezés elemei",
+      "content": [
+        { "type": "card", "id": "fejezet3-1", "title": "3.1 Descartes-szorzat", "htmlContent": "<p>Content for 3.1 goes here.</p><a href=\"/tananyag/kviz-descartes-szorzata\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet3-2", "title": "3.2 Koordináta-rendszer", "htmlContent": "<p>Content for 3.2 goes here.</p><a href=\"/tananyag/kviz-koordinata-rendszer\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet3-3", "title": "3.3 Függvényi kapcsolat", "htmlContent": "<p>Content for 3.3 goes here.</p><a href=\"/tananyag/kviz-fuggveny-fogalma\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet4",
+      "title": "4. A négyszög",
+      "content": [
+        { "type": "card", "id": "fejezet4-1", "title": "4.1 Konvex négyszög szögei", "htmlContent": "<p>Content for 4.1 goes here.</p><a href=\"/tananyag/kviz-konvexnagyszag\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet4-2", "title": "4.2 Paralelogramma", "htmlContent": "<p>Content for 4.2 goes here.</p><a href=\"/tananyag/kviz-paralelogramma\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet4-3", "title": "4.3 Téglalap, rombusz, négyzet", "htmlContent": "<p>Content for 4.3 goes here.</p><a href=\"/tananyag/kviz-teglalap-rombusz-negyzet\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet4-4", "title": "4.4 Trapéz és középvonala", "htmlContent": "<p>Content for 4.4 goes here.</p><a href=\"/tananyag/kviz-trapaz\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet4-5", "title": "4.5 Kerület és terület", "htmlContent": "<p>Content for 4.5 goes here.</p><a href=\"/tananyag/kviz-keruletterulet\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet5",
+      "title": "5. A kör",
+      "content": [
+        { "type": "card", "id": "fejezet5-1", "title": "5.1 Kerületi szög és érintők", "htmlContent": "<p>Content for 5.1 goes here.</p><a href=\"/tananyag/kviz-keruletszog\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet5-2", "title": "5.2 Szabályos sokszögek", "htmlContent": "<p>Content for 5.2 goes here.</p><a href=\"/tananyag/kviz-szabalyossokszogek\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet5-3", "title": "5.3 Kerület és terület", "htmlContent": "<p>Content for 5.3 goes here.</p><a href=\"/tananyag/kviz-kor\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet6",
+      "title": "6. Háromszögek hasonlósága",
+      "content": [
+        { "type": "card", "id": "fejezet6-1", "title": "6.1 Arányos szakaszok", "htmlContent": "<p>A háromszögek oldalai arányosak, ha egyforma a hasonlósági arány. A háromszögek egybevágóak, ha az arányok megtartása mellett bármely rész hossza az egész 1/n-ed része.</p><a href=\"/tananyag/kviz-aranyosszakaszok\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet6-2", "title": "6.2 Thalész tétele", "htmlContent": "<p>Ha egy kör átmérőjének végpontjaihoz egy tetszőleges pontot kapcsolunk, akkor a keletkező szög derékszög. ∠ACB = 90°</p><a href=\"/tananyag/kviz-thalasztatele\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet6-3", "title": "6.3 Hasonlósági esetek", "htmlContent": "<p>AA (két szög egyenlő) SAS (két szög és a közrefogó oldal aránya) SSS (minden oldal aránya)</p><a href=\"/tananyag/kviz-hasonlasagiesetek\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet6-4", "title": "6.4 Gyakorlati alkalmazás", "htmlContent": "<p>Távolság mérése hasonló háromszögekkel: h₁/h₂ = d₁/d₂ Példa: Eiffel-torony magasságának becslése árnyék alapján.</p><a href=\"/tananyag/kviz-hasonlosag\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    },
+    {
+      "id": "fejezet7",
+      "title": "7. Metrikus összefüggések derékszögű háromszögben",
+      "content": [
+        { "type": "card", "id": "fejezet7-1", "title": "7.1 Magasságtétel, befogótétel", "htmlContent": "<p>Magasság: h² = p·q  Befogó: a² = p·c, b² = q·c</p><a href=\"/tananyag/kviz-magassagtatelbefogatatel\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet7-2", "title": "7.2 Pitagorasz-tétel", "htmlContent": "<p>a² + b² = c² Példa: a=6 cm, b=8 cm → c=√(36+64)=10 cm</p><a href=\"/tananyag/kviz-pitagorasz\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet7-3", "title": "7.3 Trigonometriai alapfogalmak", "htmlContent": "<p>sin α = szemközti / átfogó  cos α = szomszédos / átfogó  tan α = szemközti / szomszédos</p><a href=\"/tananyag/kviz-trigonometriaialapfogalmak\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "fejezet7-4", "title": "7.4 Derékszögű háromszög megoldása", "htmlContent": "<p>Adott két adat esetén kiszámíthatók a hiányzó oldalak és szögek.</p><a href=\"/tananyag/kviz-trigonometria\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
+    }
+  ]
 }

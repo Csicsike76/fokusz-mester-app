@@ -1,8 +1,79 @@
 {
-  "title": "Muhely etika dilemmak",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 24. hét: Az MI etikája: A dilemmák",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely etika dilemmak\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére a gyakorlatban tapasztalod meg, milyen bonyolult etikai döntéseket kell beprogramozni egy MI-be.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A villamos-dilemma 2.0"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: Írd meg a te szabályodat!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére a gyakorlatban tapasztalod meg, milyen bonyolult etikai döntéseket kell beprogramozni egy MI-be. A \"Moral Machine\" szimulátor segítségével szembesülsz az önvezető autók dilemmáival, elemzed a saját morális preferenciáidat, és megérted, miért nincsenek egyszerű, \"tökéletes\" válaszok ezekre a kérdésekre.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Webböngésző.</li><li>Az MIT (Massachusetts Institute of Technology) által fejlesztett <strong>\"Moral Machine\"</strong> szimulátor. Elérhető itt: <a href=\"https://www.moralmachine.net/\" target=\"_blank\">moralmachine.net</a> (az oldal nyelve magyarra állítható a jobb felső sarokban).</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A villamos-dilemma 2.0",
+      "content": "<p>Talán hallottál már a klasszikus filozófiai problémáról, a villamos-dilemmáról: átirányítanál-e egy elszabadult villamost egy másik vágányra, hogy megments öt embert, még akkor is, ha a másik vágányon egy ember áll? Most képzeld el, hogy ezt a döntést egy önvezető autó MI-jének kell meghoznia ezredmásodpercek alatt egy elkerülhetetlen balesetnél. Kit védjen az autó? Az utasát? A gyalogosokat? Azokat, akik betartják a szabályokat? Ma te leszel a programozó, akinek ezekre a lehetetlen kérdésekre kell választ adnia.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Indítsd el a Szimulációt!",
+          "content": "<ol><li>Nyisd meg a <a href=\"https://www.moralmachine.net/\" target=\"_blank\">Moral Machine</a> weboldalt.</li><li>Ha szükséges, állítsd a nyelvet magyarra (jobb felső sarok).</li><li>Kattints a \"Kezdje el az ítélkezést\" gombra.</li></ol><p>A rendszer 13 véletlenszerű, elkerülhetetlen baleseti forgatókönyvet fog mutatni. Minden esetben neked kell eldöntened, hogy az önvezető autó melyik kimenetelt válassza. Nincs \"jó\" vagy \"rossz\" válasz, dönts a saját belátásod szerint!</p>"
+        },
+        {
+          "title": "2. Feladat: A Személyes Elemzés",
+          "content": "<p>Miután végigvitted a 13 esetet, a rendszer egy részletes elemzést ad a döntéseidről.</p><ol><li>Nézd meg alaposan az eredményeket! A rendszer megmutatja, milyen tényezőket részesítettél előnyben. Például:<ul><li><strong>Az utasok mentése vs. a gyalogosok mentése.</strong></li><li><strong>A többség megmentése (több élet vs. kevesebb élet).</strong></li><li><strong>Azok védelme, akik betartják a szabályokat (zöld lámpa vs. piros lámpa).</strong></li><li>Figyelembe vetted-e az emberek korát, nemét, vagy akár a fajukat (emberek vs. állatok)?</li></ul></li><li>Készíts egy képernyőképet a te személyes eredmény-összesítődről!</li></ol>"
+        },
+        {
+          "title": "3. Feladat: Összehasonlítás a Világgal",
+          "content": "<p>Az eredményeid alatt van egy gomb vagy fül, ami megmutatja, hogyan viszonyulnak a te döntéseid a több millió ember által adott válaszok globális átlagához.</p><ol><li>Kattints rá, és nézd meg az összehasonlító ábrákat!</li><li><strong>A feladatod:</strong> Írj le a jegyzetedbe egy olyan szempontot, amiben a te döntésed <strong>hasonlított</strong> a globális átlaghoz, és egy olyat, amiben jelentősen <strong>eltért</strong> attól.</li><li>Mit gondolsz, miért lehetnek ezek az eltérések? (Pl. kulturális különbségek, személyes értékrend)</li></ol>"
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok",
+      "content": "<p>A játék véget ért, de a valódi kérdések csak most jönnek.</p><ul><li><strong>Ki döntsön?</strong> Ha a te eredményeid ennyire eltérhetnek a globális átlagtól (vagy akár a padtársadétól), kinek az etikáját kellene beprogramozni az összes önvezető autóba? A tiédet? Az enyémet? A gyártó cégét? A kormányét? Lehetséges egyáltalán egyetlen, mindenki számára elfogadható etikai szabályrendszert alkotni?</li><li><strong>Az algoritmus mint bűnbak:</strong> Ha egy önvezető autó balesetet okoz, és az MI a beprogramozott etikai szabályai szerint \"döntött\", ki a felelős? A programozó, aki a kódot írta? A cég, aki az autót gyártotta? A tulajdonos, aki megvette? Vagy maga az \"algoritmus\"?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: Írd meg a te \"Autó-Etikai\" szabályodat!",
+      "content": "<p>Képzeld el, hogy te vagy az a törvényhozó, akinek egyetlen, egyszerű szabályt kell alkotnia, amit minden önvezető autónak követnie kell elkerülhetetlen baleset esetén.</p><p><strong>A feladatod:</strong></p><p>Fogalmazz meg <strong>egyetlen mondatban</strong> egy általános etikai szabályt! A mondat kezdődjön így:</p><p><strong>\"Elkerülhetetlen baleset esetén az önvezető autó MI-jének minden esetben...\"</strong></p><p>Nincs tökéletes válasz. A cél a gondolkodás. Miután megfogalmaztad a szabályodat, írj le 1-2 mondatban egy olyan lehetséges helyzetet is, ahol a te saját szabályod is igazságtalan vagy problémás eredményre vezetne.</p><p>Mentsd le a szabályodat és az ellenpéldádat! Ez a feladat segít megérteni az MI-szabályozás elképesztő bonyolultságát.</p>"
+    }
+  ]
 }

@@ -1,8 +1,74 @@
 {
-  "title": "Szuper dilemma elemzes",
-  "subject": "altalanos",
+  "title": "AIMI Szuperképesség - M02: Dilemma Elemzés és Döntéstámogatás",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Szuper dilemma elemzes\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel az MI-t egy komplex, személyes dilemma objektív elemzésére használni.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: Az \"Ördög Ügyvédje\""
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: Döntési Mátrix"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel az MI-t egy komplex, személyes dilemma objektív elemzésére használni. Megtanulod, hogyan kérj előny/hátrány elemzést, és hogyan vizsgáld meg a lehetséges hosszú távú következményeket, hogy megalapozottabb döntéseket hozhass.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: Az \"Ördög Ügyvédje\" a Zsebedben",
+      "content": "<p>Amikor nehéz döntés előtt állunk, gyakran az érzelmeink vezérelnek, vagy csak egyetlen nézőpontot látunk. Az MI ilyenkor lehet a mi személyes \"ördög ügyvédje\": egy pártatlan partner, aki érzelmek nélkül, hideg logikával segít végiggondolni az összes lehetséges oldalt. Nem mondja meg, mit tegyél, de megvilágítja a döntésed rejtett aspektusait és lehetséges következményeit, amikre talán nem is gondoltál. Ma megtanuljuk, hogyan fogjuk be ezt a \"szuperképességet\" a jobb döntések érdekében.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai dilemma:</strong> \"Elfogadjak egy nyári diákmunkát, ami jó pénzt fizet, de unalmas, vagy inkább menjek el egy izgalmas, de fizetés nélküli önkéntes programba?\"</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Az Első Elemzés - Előnyök és Hátrányok",
+          "content": "<p>Kérjük meg az MI-t, hogy készítsen egy klasszikus pro/kontra listát!</p><p><strong>Megfigyelés:</strong> Az MI valószínűleg egy jól strukturált táblázatot ad, ami segít átlátni a két lehetőség közvetlen előnyeit és hátrányait (pl. Pénz vs. Tapasztalat, Unalom vs. Kaland).</p>",
+          "prompts": ["Viselkedj úgy, mint egy pártatlan karrier-tanácsadó! A nyári dilemmám a következő:\nOpció A: Jól fizető, de monoton diákmunka egy irodában.\nOpció B: Izgalmas, de fizetés nélküli önkéntes munka egy nemzeti parkban.\nKészíts egy táblázatot, ami bemutatja mindkét opció 3 legfontosabb előnyét és 3 legfontosabb hátrányát!"]
+        },
+        {
+          "title": "2. Feladat: Mélyebb Elemzés - Másodrendű Gondolkodás",
+          "content": "<p>Most jön a haladó technika! Ne csak a közvetlen, hanem a hosszú távú, \"másodrendű\" következményekre is kérdezzünk rá!</p><p><strong>Megfigyelés:</strong> Figyeld meg, hogy az MI most már nem csak a nyárról beszél! Olyan szempontokat is behozhat, mint pl. az önkéntes munka hogyan néz ki egy későbbi önéletrajzban, vagy a diákmunkán keresett pénz hogyan alapozhat meg egy későbbi befektetést. Ez segít a stratégiai gondolkodásban.</p>",
+          "prompts": ["Ez egy jó kezdet. Most 'gondolkodj hangosan' és alkalmazz a másodrendű gondolkodás (second-order thinking) módszerét! Az előző elemzés alapján vizsgáld meg mindkét opció lehetséges HOSSZÚ TÁVÚ (1-2 éven belüli) következményeit! Milyen új lehetőségeket nyithat meg, vagy zárhat be az egyik vagy a másik választás?"]
+        },
+        {
+          "title": "3. Feladat: A Személyes Tényezők Bevonása",
+          "content": "<p>A logika fontos, de a döntéseink személyesek. Most adjunk az MI-nek több kontextust magunkról!</p><p><strong>Feladat:</strong> Olvasd el az MI személyre szabott érvelését! Hogyan változtatta meg a következtetéseit az új információ? Ez a lépés mutatja meg, hogy az MI annál jobb tanácsadó, minél több releváns adatot adunk neki.</p>",
+          "prompts": ["Köszönöm az elemzést! Most vedd figyelembe a következő személyes információkat is: a hosszú távú célom, hogy biológus legyek, de jelenleg spórolnom kell egy új laptopra. Ezen információk fényében, melyik opció illeszkedik jobban a céljaimhoz? Érvelj mindkét oldal mellett röviden!"]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>A Hiányzó Adat: Az Érzések:</strong> Az MI logikusan elemzett, de egy fontos tényezőt nem tud figyelembe venni: a te személyes érzéseidet, megérzéseidet. Mi van, ha a logikus döntés boldogtalanná tenne? Miért elengedhetetlen, hogy a végső döntésnél a saját értékrendedre és megérzéseidre is hallgass?</li><li><strong>A Végső Döntés Felelőssége:</strong> Az MI felvázolta a lehetőségeket, de nem döntött helyetted. Miért fontos, hogy a végső felelősség mindig a tiéd maradjon? Mi a veszélye annak, ha az emberek kritika nélkül elfogadják egy algoritmus \"javaslatát\" a saját életükkel kapcsolatos fontos kérdésekben?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Személyes Döntési Mátrixod",
+      "content": "<p>Most alkalmazd a tanultakat egy saját, valós vagy kitalált dilemmádra!</p><p><strong>Válassz egyet a dilemmák közül (vagy találj ki sajátot):</strong> \"Melyik faktot válasszam jövőre?\", \"Elmenjek a hétvégi családi programra, vagy inkább a barátaimmal legyek?\", \"Milyen új hobbiba kezdjek: sport vagy művészet?\"</p><p><strong>A feladatod:</strong></p><ol><li>Írj egy olyan mester-promptot, ami a te dilemmádra vonatkozik, és tartalmazza mind a 3 lépést, amit ma tanultunk:<ul><li>Kérj egy <strong>előny/hátrány</strong> elemzést.</li><li>Kérj egy <strong>hosszú távú következmény</strong> elemzést.</li><li>Adj meg <strong>személyes kontextust</strong>, és kérj egy végső, személyre szabott érvelést.</li></ul></li></ol><p>Mentsd le a teljes beszélgetésedet az MI-vel! Ez a dokumentum egy komplett döntés-előkészítő anyag, ami segít a jövőben is a nehéz helyzetekben.</p>"
+    }
+  ]
 }

@@ -1,8 +1,94 @@
 {
-  "title": "Muhely prezentacio",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 12. hét: Prezentációk készítése",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely prezentacio\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel egyetlen promptból egy teljes, több diából álló, látványos prezentációt generálni egy MI-alapú eszközzel.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Személyes Dizájn-Asszisztensed"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a profi MI-prezentációkhoz"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A te villám-előadásod!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel egyetlen promptból egy teljes, több diából álló, látványos prezentációt generálni egy MI-alapú eszközzel. Megtanulod, hogyan add meg a témát, hogyan finomítsd a generált vázlatot és tartalmat, és hogyan szabd személyre a dizájnt.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<p>Válassz egyet az alábbi, kifejezetten prezentációkészítésre specializálódott, ingyenesen kipróbálható MI-alkalmazások közül! Mindkettőhöz Google-fiókkal egyszerűen be lehet jelentkezni.</p><ul><li><strong>Gamma.app</strong> - Rendkívül gyors és könnyen kezelhető, interaktív elemeket is be tud illeszteni.</li><li><strong>Tome.app</strong> - Nagyon szép, letisztult dizájnokat készít, a képgenerálása is kiváló.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Személyes Dizájn-Asszisztensed",
+      "content": "<p>Egy jó prezentáció elkészítése rengeteg időt vehet igénybe: meg kell tervezni a szerkezetét, megírni a szövegeket, megfelelő képeket keresni, és végül az egészet egy szép dizájnba önteni. Az MI-alapú prezentációkészítők ezt a folyamatot gyorsítják fel drámaian. Úgy működnek, mint egy személyes dizájner és szövegíró csapat: te megadod az ötletet, ők pedig másodpercek alatt elkészítik a kész bemutató vázát, amit neked már csak finomítanod kell. Ma te leszel a projektvezető, és egy MI-csapatot fogsz irányítani!</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai projektünk:</strong> Készítünk egy rövid, 6-8 diából álló bemutatót a következő témában: <strong>\"A Római Birodalom felemelkedése és bukása\"</strong>.</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Varázslat Indítása",
+          "content": "<ol><li>Nyisd meg a választott prezentációkészítő oldalt (Gamma vagy Tome), és jelentkezz be.</li><li>Keresd meg az \"Create\" (Létrehozás) vagy \"New\" (Új) gombot, és válaszd a \"Generate\" (Generálás) vagy \"Create presentation about...\" (Prezentáció készítése...) opciót.</li><li>Megjelenik egy beviteli mező. Itt kell megadnod a prezentációd témáját.</li></ol>"
+        },
+        {
+          "title": "2. Feladat: A Mester-Prompt Megadása",
+          "content": "<p>A beviteli mezőbe ne csak a címet írd be, hanem egy kicsit több információt is! Ezzel segíted az MI munkáját. Másold be a következőt:</p><p><strong>Megfigyelés:</strong> Az MI a parancs beírása után valószínűleg felajánl egy vázlatot (outline) a diáknak a címeivel (pl. \"Bevezetés\", \"A köztársaság kora\", \"A császárság fénykora\", \"A hanyatlás okai\", \"Örökség\"). Ezt a vázlatot itt még szerkesztheted, hozzáadhatsz vagy elvehetsz pontokat, mielőtt a végleges generálásra kattintanál.</p>",
+          "prompts": ["Egy rövid, 6-8 diából álló prezentáció a Római Birodalom felemelkedéséről és bukásáról, középiskolás diákok számára."]
+        },
+        {
+          "title": "3. Feladat: Generálás és Ámulat",
+          "content": "<p>Miután a vázlat megfelel, kattints a \"Generate\" (Generálás) vagy \"Continue\" (Folytatás) gombra, és dőlj hátra!</p><p><strong>Megfigyelés:</strong> Néhány másodperc alatt az MI elkészíti a teljes prezentációt. Legenerálja a szövegeket minden diához, releváns képeket keres vagy generál, és az egészet egy egységes dizájnba illeszti. Nézd végig a kapott bemutatót!</p>"
+        },
+        {
+          "title": "4. Feladat: Finomítás és Személyre szabás",
+          "content": "<p>Az MI által generált bemutató egy remek kiindulási pont, de ritkán tökéletes. Most te jössz! A feladatod, hogy legalább <strong>három</strong> dolgot megváltoztass a kapott prezentáción.</p><ul><li><strong>Írj át egy szöveget:</strong> Keress egy bekezdést, és fogalmazd át a saját szavaiddal, vagy egészítsd ki egy fontos információval!</li><li><strong>Cserélj ki egy képet:</strong> Nem tetszik az egyik kép? Kattints rá, és keress helyette másikat az eszköz beépített képkeresőjével, vagy generálj egy újat!</li><li><strong>Változtass a dizájnon:</strong> A legtöbb eszközben egy kattintással megváltoztathatod a teljes bemutató színvilágát vagy betűtípusát. Próbálj ki egy másik témát!</li></ul>"
+        }
+      ]
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a profi MI-prezentációkhoz",
+      "content": "<ul><li><strong>A prompt a lelke mindennek:</strong> Minél pontosabban írod le, kinek és miről szóljon a bemutató, annál jobb lesz a vázlat.</li><li><strong>Ne félj szerkeszteni a vázlatot!</strong> A generálás előtti vázlat a te kezedben van. Törölj, adj hozzá, nevezz át pontokat bátran!</li><li><strong>Használd az \"újragenerálás\" funkciót!</strong> Ha egy szövegrészlet vagy egy kép nem tetszik, a legtöbb eszközben van lehetőség csak azt az egy elemet újra generáltatni.</li><li><strong>Mindig ellenőrizd a tényeket!</strong> Az MI néha tévedhet vagy pontatlan lehet. A generált szöveget mindig olvasd át kritikusan, különösen, ha fontos adatokról van szó!</li></ul>"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "content": "<p>Percek alatt készítettél egy profi kinézetű bemutatót. De mit jelent ez a tudásra nézve?</p><ul><li><strong>A tartalom király marad:</strong> Egy gyönyörű, MI által generált prezentáció semmit sem ér, ha a tartalma pontatlan vagy felszínes. Miért fontos, hogy a diák (te) legyen a téma szakértője, és az MI csak az eszköz, ami segít a tálalásban?</li><li><strong>Az \"elég jó\" csapdája:</strong> Az MI nagyon gyorsan hoz létre egy \"elég jó\" szintű bemutatót. Milyen veszélye van annak, ha megelégszünk ezzel, és nem törekszünk a saját, egyedi gondolataink, mélyebb kutatásunk belevitelére? Hogyan kerülhetjük el, hogy mindenki prezentációja egyformán nézzen ki?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A te villám-előadásod!",
+      "content": "<p>Most rajtad a sor, hogy egy teljesen saját témában alkoss!</p><p><strong>A feladatod:</strong></p><ol><li>Válassz egy hobbidat, egy kedvenc filmedet, egy sportot vagy bármilyen témát, ami igazán érdekel.</li><li>A tanult módszerrel generáltass egy 5-6 diából álló prezentációt a témádról.</li><li>Szerkeszd és finomítsd a kapott anyagot: írd át a szövegeket, hogy a te hangodon szóljanak, cserélj képeket, és állítsd be a neked tetsző dizájnt.</li></ol><p>Mentsd el a kész prezentációt (a legtöbb eszköz enged exportálást PDF-be vagy megosztható linket ad). Készülj fel, hogy a következő órán egy 1 perces \"villám-előadásban\" bemutasd a legérdekesebb diát a munkádból!</p>"
+    }
+  ]
 }

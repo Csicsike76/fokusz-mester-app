@@ -1,8 +1,94 @@
 {
-  "title": "Muhely szerzoi jog",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 21. hét: Kreativitás és szerzői jog",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely szerzoi jog\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére megérted a szerzői jog alapvető dilemmáit az MI-generált tartalmak korában.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A majom szelfije"
+    },
+    {
+      "id": "kulcsfogalmak",
+      "title": "4. Kulcsfogalmak"
+    },
+    {
+      "id": "feladatok",
+      "title": "5. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A te MI-etiketted!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére megérted a szerzői jog alapvető dilemmáit az MI-generált tartalmak korában. Képes leszel feltenni a megfelelő kérdéseket a tulajdonjogról, az eredetiségről és a felhasználás etikai hatáiról, miközben kreatív feladatokat végzel.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Bármelyik <strong>képalkotó MI</strong> (pl. Microsoft Designer/Copilot, Leonardo.Ai).</li><li>Bármelyik <strong>szöveggeneráló MI</strong> (pl. Copilot, Gemini, ChatGPT).</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A majom szelfije és a gondolkodó gép",
+      "content": "<p>Valós jogi eset történt pár éve: egy majom készített egy szelfit egy fotós kamerájával. A kérdés, ami bíróság elé került: kié a kép szerzői joga? A fotósé, akié a gép? Vagy a majomé, aki megnyomta a gombot? (A bíróság szerint egyiküké sem, a kép közkincs lett.) Az MI-vel hasonlóan bonyolult kérdések merülnek fel. Ha te írod a parancsot, de a gép alkotja a művet, ki a valódi szerző? Ma olyan kísérleteket végzünk, amelyek segítenek körbejárni ezt a rejtélyt.</p>"
+    },
+    {
+      "id": "kulcsfogalmak",
+      "title": "4. Kulcsfogalmak, mielőtt belevágnánk",
+      "content": "<ul><li><strong>Szerzői Jog:</strong> A törvény, ami védi az alkotókat, és kizárólagos jogot ad nekik a saját, eredeti műveik (zene, kép, szöveg) másolására és terjesztésére.</li><li><strong>Közkincs (Public Domain):</strong> Olyan alkotások, amelyeknek lejárt a szerzői jogi védelme (pl. egy nagyon régi festmény), így bárki szabadon felhasználhatja őket. Van Gogh művei például közkincsnek számítanak.</li><li><strong>Méltányos Felhasználás (Fair Use):</strong> A szerzői jogi törvény kivétele, ami megengedi a védett művek korlátozott felhasználását (pl. oktatási célra, kritikaként, paródiaként) engedély nélkül.</li></ul>"
+    },
+    {
+      "id": "feladatok",
+      "title": "5. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Mester utánzása",
+          "content": "<p>Hozzunk létre egy képet egy híres, de már régen elhunyt festő stílusában! Mivel az ő művei már közkincsnek számítanak, a stílusuk \"utánzása\" jogilag kevésbé aggályos.</p><p><strong>Gondolkodtató kérdés:</strong> A kapott kép egy új műalkotás? Vagy csak egy ügyes másolat? Mennyiben számít a te kreativitásod (a futurisztikus város ötlete) és mennyiben az MI-é (a stílus leutánzása)?</p>",
+          "prompts": ["A painting of a futuristic city with flying cars, in the style of Vincent van Gogh."]
+        },
+        {
+          "title": "2. Feladat: Az MI mint múzsa",
+          "content": "<p>Most vizsgáljuk meg a közös alkotás folyamatát! Először kérjünk egy verset, majd írjunk közösen.</p><p><strong>Gondolkodtató kérdés:</strong> A két vers közül melyikben érzed magad inkább szerzőnek? Az első esetben, ahol csak a témát adtad meg, vagy a másodikban, ahol te adtad az indító gondolatot és a kereteket? Hol húzódik a határ az inspiráció és a társszerzőség között?</p>",
+          "prompts": [
+            "Írj egy négysoros verset az esőről.",
+            "Most folytassuk ezt a sort: \"Az ezüst cseppek hullni kezdenek...\". Írj hozzá még három sort, ami rímel és illik a hangulathoz!"
+          ]
+        },
+        {
+          "title": "3. Feladat: A játékszabályok elolvasása",
+          "content": "<p>Minden MI eszköznek van egy \"Felhasználási Feltételek\" (Terms of Service) dokumentuma, ami leírja, mit tehetsz és mit nem a generált tartalmakkal. Vessünk rá egy pillantást!</p><p><strong>Megfigyelés:</strong> A válaszból kiderül, hogy a legtöbb cég a felhasználónak adja a jogokat, de gyakran vannak megkötések. Ez a feladat megmutatja, hogy a \"kié a kép?\" kérdésre a válasz az adott szolgáltató szabályzatában rejlik.</p>",
+          "prompts": ["Viselkedj úgy, mint egy jogi asszisztens! Foglald össze egyszerűen, 3-4 pontban, hogy az OpenAI (DALL-E) vagy a Microsoft Copilot felhasználási feltételei szerint kié a generált képek tulajdonjoga, és lehet-e őket kereskedelmi célra (pl. pólóra nyomtatva eladni) használni?"]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "content": "<p>A jogi kérdések mögött mélyebb etikai dilemmák húzódnak.</p><ul><li><strong>A névtelen tanítómesterek:</strong> Az MI több millió, az internetről összegyűjtött képen és szövegen tanult, amelyeket valódi, emberi művészek és írók készítettek (legtöbbször a tudtuk és engedélyük nélkül). Etikus-e, hogy egy cég ezeken a műveken \"tanítja\" az MI-jét, majd pénzt keres a generált tartalmakkal, anélkül, hogy az eredeti alkotók részesednének belőle?</li><li><strong>A kreativitás elértéktelenedése:</strong> Ha bárki másodpercek alatt képes \"elég jó\" képet, zenét vagy szöveget alkotni, mi történik az emberi kreativitás értékével? Miért szánna valaki éveket arra, hogy megtanuljon festeni, ha egy gép megcsinálja helyette? Mi az a plusz, amit egy emberi alkotó adhat, és egy gép soha?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A te személyes MI-etikettd!",
+      "content": "<p>Most, hogy jobban átlátod a helyzetet, a feladatod, hogy alkoss egy saját, személyes \"MI Felhasználói Etikai Kódexet\".</p><p><strong>Készíts egy egyszerű, 3 pontos listát, ami a te szabályaidat tartalmazza az MI-vel való alkotásra. A lista válaszoljon a következőkre:</strong></p><ol><li><strong>Iskolai munkában:</strong> Hogyan és mire fogod használni az MI-t (pl. ötletelésre, vázlatírásra), és mi az a határ, amit már nem lépsz át (pl. komplett beadandó megíratása)? Hogyan fogod jelezni, ha MI-t használtál?</li><li><strong>Közösségi médiában:</strong> Ha megosztasz egy MI által generált képet, jelölöd-e valahogy, hogy az nem valódi? Miért igen, vagy miért nem?</li><li><strong>Más művészek stílusa:</strong> Kérnéd-e az MI-t, hogy utánozza egy ma is élő, aktív kedvenc festőd vagy zenészed stílusát? Miért (nem) tartod ezt etikusnak?</li></ol><p>Mentsd le a személyes etikai kódexedet! Ez a dokumentum a te iránymutatód lesz a felelős és etikus MI-használathoz.</p>"
+    }
+  ]
 }

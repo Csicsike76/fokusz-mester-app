@@ -44,7 +44,7 @@ const WorkshopContent = ({ sections }) => {
             </div>
           )}
 
-          {/* Eredeti tasks_section és prompts logika */}
+          {/* Eredeti tasks_section és prompts logika - nem kvízként jelenik meg */}
           {section.type === 'tasks_section' && section.tasks && (
             <div>
               {section.tasks.map((task, taskIndex) => (

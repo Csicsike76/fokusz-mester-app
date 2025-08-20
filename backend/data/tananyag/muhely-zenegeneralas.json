@@ -1,8 +1,101 @@
 {
-  "title": "Muhely zenegeneralas",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 5. hét: Zene és hang generálása",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely zenegeneralas\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel szöveges leírások (promptok) alapján rövid zenei részleteket, aláfestő zenéket és egyszerű hangeffekteket létrehozni.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A karmester te vagy!"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a sikeres zeneszerzéshez"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A te személyes filmzenéd!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel szöveges leírások (promptok) alapján rövid zenei részleteket, aláfestő zenéket és egyszerű hangeffekteket létrehozni. Megérted, hogyan tudod a hangulatot, a stílust és a hangszereket a szavaiddal irányítani.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<p>Válassz egyet az alábbi, ingyenesen kipróbálható zenei MI-alkalmazások közül! A legtöbb napi ingyenes krediteket ad a kísérletezéshez.</p><ul><li><strong>Suno AI</strong> - Rendkívül népszerű, komplett dalokat (szöveggel, énekkel) is tud generálni.</li><li><strong>Microsoft Copilot</strong> - A \"Make music with Suno\" beépülő moduljával egyszerűen használható.</li><li><strong>Udio</strong> - A Suno-hoz hasonló, szintén kiváló minőségű dalokat készít.</li><li><strong>Google MusicFX</strong> - Remek eszköz instrumentális zenék és loopok készítésére.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A karmester te vagy!",
+      "content": "<p>Képzeld el, hogy előtted áll egy teljes zenekar, amely bármilyen hangszeren tud játszani, bármilyen stílusban. Csak arra várnak, hogy te, a karmester, megmondd nekik, mit játsszanak. A zenei MI-k pont ilyenek! Nem kell tudnod kottát olvasni vagy hangszeren játszani, elég, ha leírod a hangulatot, a jelenetet vagy az érzést, amit hallani szeretnél. A szavaid válnak a kottává. Lássuk, hogyan vezényelheted le az első saját szerzeményedet!</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A hangulat megadása",
+          "content": "<p>Kezdjük a legegyszerűbbel! Csak egy hangulatot vagy stílust írunk le. Próbáld ki ezt a promptot (a legtöbb eszköz angolul működik a leghatékonyabban).</p><p><strong>Megfigyelés:</strong> Hallgasd meg az eredményt! Valószínűleg egy lassú, melankolikus zongoradallamot kaptál. Az MI a \"sad\" (szomorú) szóból a lassú tempóra és a moll hangnemre következtetett.</p>",
+          "prompts": ["sad piano music"]
+        },
+        {
+          "title": "2. Feladat: Hangszerek hozzáadása",
+          "content": "<p>Most tegyük gazdagabbá a hangzást! Adjunk meg több hangszert is a promptban.</p><p><strong>Megfigyelés:</strong> Hasonlítsd össze az új zenét az előzővel! Az MI a kérésednek megfelelően bevonta a vonós hangszereket is, a \"cinematic\" (filmszerű) szó pedig egy drámaibb, teljesebb hangzást eredményezett.</p>",
+          "prompts": ["A slow, cinematic song with a lonely piano, gentle violin, and deep cello."]
+        },
+        {
+          "title": "3. Feladat: Zene egy jelenethez",
+          "content": "<p>A zenék gyakran egy történetet, egy jelenetet festenek alá. Most próbálj meg te is aláfestő zenét készíteni egy kitalált jelenethez!</p><p><strong>Megfigyelés:</strong> Figyeld meg, hogyan próbálja az MI a \"vihar\" és a \"hősies hegymászás\" hangulatát zeneileg visszaadni! Valószínűleg hallasz majd nagy dobokat, fúvósokat és egy emelkedő dallamot.</p>",
+          "prompts": ["Epic adventure music for a movie scene where a hero is climbing a snowy mountain during a storm. Orchestral, powerful, dramatic."]
+        },
+        {
+          "title": "4. Feladat: Hangeffektek készítése",
+          "content": "<p>Az MI nem csak zenét, hanem hangeffekteket is tud generálni. Ez nagyon hasznos lehet videókhoz, prezentációkhoz.</p><p><strong>Megfigyelés:</strong> Ez a feladat megmutatja, hogy az MI képes konkrét, leíró hangokat is létrehozni, nem csak absztrakt dallamokat.</p>",
+          "prompts": ["Sound of a futuristic spaceship door opening with a pneumatic hiss, followed by computer beeps."]
+        },
+        {
+          "title": "5. Feladat: Dal írása (Suno / Udio használatával)",
+          "content": "<p>Ha olyan eszközt használsz, ami éneket is tud generálni, itt az ideje egy teljes dal megalkotásának! A promptban a zenén kívül a dalszöveget is megadhatod.</p><p><strong>Megfigyelés:</strong> Lenyűgöző, ahogy az MI a megadott szöveget egy komplett dallal, énekhanggal és zenei kísérettel kelti életre, a kért stílusban.</p>",
+          "prompts": ["[Verse 1]\nThe screen is bright, the code is clean\nI'm just a simple, learning machine\n[Chorus]\nOh, I calculate the stars above\nIs this what humans call love?\n\n(Style: upbeat 80s synth-pop)"]
+        }
+      ]
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a sikeres zeneszerzéshez",
+      "content": "<ul><li><strong>Használj hangulat-jelzőket:</strong> `happy`, `epic`, `dreamy`, `mysterious`, `aggressive`.</li><li><strong>Add meg a műfajt:</strong> `pop song`, `orchestral score`, `lo-fi hip hop beat`, `heavy metal`.</li><li><strong>Sorolj fel hangszereket:</strong> `acoustic guitar`, `808 drums`, `flute`, `synthesizer`.</li><li><strong>Utalj a tempóra:</strong> `slow tempo`, `fast and energetic`, `120 BPM`.</li><li><strong>Kísérletezz!</strong> Ugyanaz a prompt kétszer is teljesen más eredményt adhat. Generálj több verziót!</li></ul>"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "content": "<p>A szavaidból zene lett. De mit is jelent ez valójában?</p><ul><li><strong>Művészet vagy iparosmunka?</strong> Az MI által generált zene valódi művészetnek számít? Hordozhat valódi érzelmeket, vagy csak ügyesen utánozza azokat a zenei mintázatokat, amiket az emberek az érzelmekhez kötnek?</li><li><strong>A zenészek jövője:</strong> Ha bárki képes \"elég jó\" aláfestő zenét készíteni a YouTube videójához másodpercek alatt, mi lesz a zeneszerzők, zenészek munkájával? Veszélyezteti őket az MI, vagy egy új eszközt ad a kezükbe?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A te személyes filmzenéd!",
+      "content": "<p>A feladatod, hogy készíts egy rövid, 30-60 másodperces zenei témát, ami téged vagy egy kedvenc karakteredet (könyvből, filmből, játékból) jellemzi.</p><p><strong>A promptodnak tartalmaznia kell:</strong></p><ol><li>A karakter vagy a saját hangulatod leírását (pl. \"egy bátor felfedező\", \"egy gondolkodó, csendes tudós\").</li><li>A zenei stílust vagy műfajt.</li><li>Legalább két kulcsfontosságú hangszert, ami szerinted illik a karakterhez.</li><li>(Opcionális, ha van kedved) Próbálj meg egy rövid, 2-4 soros dalszöveget is írni, ami összefoglalja a karakter mottóját!</li></ol><p>Mentsd le a legjobb zenei alkotásodat (a legtöbb eszközön le lehet tölteni mp3-ban) és a promptot, amivel készítetted!</p>"
+    }
+  ]
 }

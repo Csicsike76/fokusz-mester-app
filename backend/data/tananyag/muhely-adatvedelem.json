@@ -1,8 +1,88 @@
 {
-  "title": "Muhely adatvedelem",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 22. hét: Adatvédelem: A te adataid",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely adatvedelem\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel eligazodni a kedvenc közösségi média alkalmazásod adatvédelmi beállításaiban.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A kíváncsi boltos"
+    },
+    {
+      "id": "kulcsfogalmak",
+      "title": "4. Kulcsfogalmak"
+    },
+    {
+      "id": "feladatok",
+      "title": "5. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A Te Digitális Védőpajzsod!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel eligazodni a kedvenc közösségi média alkalmazásod adatvédelmi beállításaiban. Megtanulod, hol találod meg és hogyan értelmezd azokat a beállításokat, amelyek befolyásolják, hogy az MI-algoritmusok mit tudnak rólad, és hogyan használják fel az adataidat.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Okostelefon, egy telepített közösségi média alkalmazással (pl. Instagram, TikTok, Facebook).</li><li>Egy jegyzetfüzet vagy digitális dokumentum a megfigyeléseid rögzítésére.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A kíváncsi boltos",
+      "content": "<p>Képzeld el, hogy a kedvenc közösségi médiád egy bolt. A boltos (az algoritmus) nagyon figyelmes: megjegyzi, mit nézegetsz, mit teszel a kosaradba, és legközelebb már a kedvenc termékeiddel vár. Ez a személyre szabás. De ez a boltos azt is figyeli, melyik másik boltban jártál, mit meséltél a barátaidnak, és ezeket az infókat is felhasználja. Az adatvédelmi beállítások olyanok, mint a bolt házirendje, amit te írhatsz: te mondhatod meg a kíváncsi boltosnak, hogy meddig mehet el.</p>"
+    },
+    {
+      "id": "kulcsfogalmak",
+      "title": "4. Kulcsfogalmak",
+      "content": "<div class=\"concepts-card\"><h3>Adatvédelmi Szótár</h3><ul><li><strong>Adat:</strong> Minden, amit csinálsz az appban: lájkok, kommentek, megosztások, keresések, megtekintett videók hossza, helyadatok.</li><li><strong>Algoritmikus Perszonalizáció:</strong> Az a folyamat, amikor az MI a te adataid alapján személyre szabja a hírfolyamodat vagy a neked szánt ajánlatokat.</li><li><strong>Célzott Hirdetések:</strong> Az adataid alapján neked kiválasztott reklámok. Ez a legtöbb ingyenes platform üzleti modelljének alapja.</li><li><strong>Platformon Kívüli Tevékenység:</strong> Azok az adatok, amiket más weboldalak és alkalmazások osztanak meg rólad a közösségi média platformmal.</li></ul></div>"
+    },
+    {
+      "id": "feladatok",
+      "title": "5. Lépésről-lépésre Feladatok: Adatvédelmi Audit",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Találd meg a Parancsnoki Központot!",
+          "content": "<p>Minden applikációban van egy hely, ahol az adatvédelmi beállításokat kezelheted. A feladatod, hogy megtaláld!</p><ol><li>Nyisd meg a választott közösségi média alkalmazásodat.</li><li>Keresd meg a profilodat, majd a menüben a <strong>\"Beállítások\"</strong> vagy <strong>\"Beállítások és adatvédelem\"</strong> (Settings and Privacy) menüpontot.</li><li>Kattints rá, és csak nézz körül! Milyen fő kategóriákat látsz? (Pl. Fiók, Adatvédelem, Biztonság, Hirdetések)</li></ol>"
+        },
+        {
+          "title": "2. Feladat: Mit gondol rólad az algoritmus?",
+          "content": "<p>Most nézzük meg, hogy a gyűjtött adatok alapján az MI milyen érdeklődési köröket társított hozzád!</p><ol><li>A beállításokon belül keresd meg a <strong>\"Hirdetések\"</strong> (Ads), <strong>\"Hirdetési preferenciák\"</strong> (Ad Preferences) vagy <strong>\"Érdeklődési körök\"</strong> (Ad Topics) menüpontot.</li><li>Nézd meg a listát! Olyan témákat fogsz látni, amikről az algoritmus azt gondolja, hogy érdekelnek téged (pl. \"videójátékok\", \"utazás\", \"főzés\").</li><li><strong>Elemzés:</strong> Mennyire pontos a lista? Találtál rajta meglepő dolgokat? Van olyan téma, ami már rég nem érdekel? A legtöbb helyen ezeket a témákat el is tudod távolítani.</li></ol>"
+        },
+        {
+          "title": "3. Feladat: A \"Nagy Testvér\" - Platformon Kívüli Tevékenységek",
+          "content": "<p>Ez az egyik legmegdöbbentőbb beállítás. Itt láthatod, hogy más cégek milyen adatokat osztanak meg rólad a közösségi médiával.</p><ol><li>A Beállításokon belül keress egy olyan menüpontot, mint <strong>\"Engedélyeid\"</strong>, <strong>\"Információid\"</strong> vagy <strong>\"Platformon kívüli tevékenységek\"</strong> (Off-Platform Activity).</li><li>Nézd meg a listát! Olyan webshopokat, hírportálokat, játékokat fogsz látni, ahol korábban jártál. Ezek mind \"jelentettek\" rólad a közösségi média platformnak.</li><li><strong>Fontos:</strong> A legtöbb helyen itt van lehetőséged <strong>letiltani vagy törölni</strong> ezt az adatgyűjtést a jövőre nézve.</li></ol>"
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "content": "<p>Most, hogy belenéztél a kulisszák mögé, gondolkodj el a látottakon!</p><ul><li><strong>A kényelem ára:</strong> A személyre szabott hírfolyam és a releváns hirdetések kényelmesek. A mai nyomozásod után mit gondolsz, megéri ez a kényelem azt az adatmennyiséget, amit megosztasz magadról? Változott a véleményed?</li><li><strong>Az irányítás illúziója:</strong> Bár sok mindent beállíthatsz, az alapvető adatgyűjtést (pl. mit nézel az appon belül) általában nem tudod leállítani, hiszen ez a szolgáltatás alapja. Mennyire érzed magad valójában az irányítás birtokosának? Milyen kompromisszumokat kell kötnöd, ha egy \"ingyenes\" szolgáltatást használsz?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A Te Digitális Védőpajzsod!",
+      "content": "<p>Most ne csak nézz, cselekedj! A feladatod, hogy a mai tanultak alapján végezz el egy valódi \"adatvédelmi nagytakarítást\".</p><p><strong>Végezd el az alábbi 3 lépést a választott alkalmazásodban:</strong></p><ol><li>Menj a <strong>Hirdetési preferenciákhoz</strong>, és távolíts el legalább <strong>5 olyan érdeklődési kört</strong>, ami már nem releváns vagy nem szeretnéd, hogy tudjanak rólad.</li><li>Keresd meg a <strong>Platformon kívüli tevékenységeket</strong>, és használd a \"Tevékenységek törlése\" vagy \"Leválasztás\" opciót!</li><li>Keress egy beállítást, ami a <strong>helyadatok</strong> használatára vonatkozik, és állítsd egy szigorúbb fokozatra (pl. \"csak az alkalmazás használata közben\" vagy \"soha\").</li></ol><p>Írj egy rövid, 2-3 mondatos összefoglalót a jegyzetedbe arról, hogy mit csináltál és miért érezted fontosnak ezeket a változtatásokat!</p>"
+    }
+  ]
 }

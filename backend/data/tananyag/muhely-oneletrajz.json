@@ -1,8 +1,86 @@
 {
-  "title": "Muhely oneletrajz",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 16. hét: Önéletrajz és motivációs levél",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely oneletrajz\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel az MI segítségével egy strukturált, profi kinézetű önéletrajz-vázlatot és egy meggyőző motivációs levelet készíteni.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Személyes Karrier-Tanácsadód"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: A Te Valódi Pályázatod!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel az MI segítségével egy strukturált, profi kinézetű önéletrajz-vázlatot és egy meggyőző motivációs levelet készíteni. Megtanulod, hogyan gyűjtsd össze és add át az MI-nek a szükséges információkat a legjobb eredmény érdekében.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Bármelyik <strong>szöveggeneráló MI</strong> (Copilot, Gemini, ChatGPT).</li><li>Egy egyszerű szövegszerkesztő (pl. Jegyzettömb, Google Docs) az információk összegyűjtéséhez.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Személyes Karrier-Tanácsadód",
+      "content": "<p>Önéletrajzot írni nehéz. Mit írjak bele? Hogyan fogalmazzam meg? Milyen legyen a felépítése? Az MI ebben a helyzetben olyan, mint egy személyes karrier-tanácsadó: ha megadod neki a megfelelő információkat, segít egy profi vázlat elkészítésében. Nem az a cél, hogy helyetted találjon ki dolgokat, hanem hogy a te adataidból egy átlátható és meggyőző dokumentumot szerkesszen. Te vagy a tartalom, az MI pedig a forma mestere.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai projektünk:</strong> Megpályázunk egy kitalált diákmunkát!</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Adatgyűjtés (Ez a legfontosabb!)",
+          "content": "<p>Mielőtt az MI-hez fordulnál, gyűjtsd össze a saját \"nyersanyagodat\"! Nyiss egy üres dokumentumot, és írd le a következőket pontokba szedve (ha valami még nincs, hagyd ki vagy írj példát):</p><ul><li><strong>Személyes adatok:</strong> Név, Város, Email, Telefonszám (elég kitalált adatokat használni)</li><li><strong>Tanulmányok:</strong> Iskola neve, szak (ha van), pl. \"XY Gimnázium, 2020-2024\"</li><li><strong>Tapasztalat:</strong> Bármi számít! Pl. \"Önkéntes munka a helyi állatmenhelyen (2023 nyár)\", \"Diákszövetségi tag\", \"Korrepetáltam egy alsóbb éves diákot matekból\".</li><li><strong>Készségek:</strong> Mit tudsz? Pl. Nyelvtudás (angol középfok), Számítógépes ismeretek (Microsoft Office, Canva), Személyes készségek (jó kommunikáció, csapatmunka, pontosság).</li></ul>"
+        },
+        {
+          "title": "2. Feladat: Az Önéletrajz-Vázlat Generálása",
+          "content": "<p>Most, hogy megvannak az adataid, adjuk oda őket az MI-nek! Másold be az összegyűjtött pontjaidat az MI-be, és írd fölé a következő promptot:</p><p><strong>Megfigyelés:</strong> Az MI a nyers listádból egy hivatalos kinézetű, szakaszokra (Tanulmányok, Tapasztalat, Készségek) bontott dokumentumot hozott létre. Figyeld meg, hogyan fogalmazza át a pontjaidat teljesebb mondatokká!</p>",
+          "prompts": ["Viselkedj úgy, mint egy HR-szakértő! Az alábbi, pontokba szedett információk alapján készíts egy rövid, jól strukturált önéletrajz-vázlatot egy diákmunkára pályázó fiatal számára. A stílus legyen profi, de könnyen olvasható.\n\n[IDE MÁSOLD BE AZ ÖSSZEGYŰJTÖTT ADATAIDAT]"]
+        },
+        {
+          "title": "3. Feladat: A Motivációs Levél Megírása",
+          "content": "<p>Most pályázzunk meg egy konkrét állást! Képzeljük el, hogy a helyi könyvtár diákmunkást keres. A feladat a könyvek polcokra helyezése és az olvasóknak való segítés. Ehhez kell motivációs levelet írnunk.</p><p><strong>Megfigyelés:</strong> Az MI képes volt összekötni az önéletrajzodban szereplő készségeket (kommunikáció, pontosság) a megpályázott pozíció elvárásaival. Létrehozott egy teljes, kész vázlatot, amit már csak személyre kell szabnod.</p>",
+          "prompts": ["Most írj egy rövid, 3 bekezdésből álló motivációs levelet a fenti önéletrajz alapján a \"Könyvtári Kisegítő Diákmunka\" pozícióra! A levélben hangsúlyozd a pontosságomat és a jó kommunikációs készségemet! A hangnem legyen udvarias és lelkes."]
+        },
+        {
+          "title": "4. Feladat: Finomítás és Személyre Szabás",
+          "content": "<p>Az MI által generált szövegek sosem 100%-ig tökéletesek. A te feladatod, hogy belevidd a saját személyiségedet!</p><ol><li>Olvasd át a generált motivációs levelet. Keress egy mondatot, ami túl \"gépi-esen\" hangzik, és fogalmazd át a saját szavaiddal!</li><li>Adj hozzá egy személyes mondatot! Például: \"Kiskorom óta imádok a helyi könyvtárba járni, ezért különösen nagy öröm lenne számomra, ha itt dolgozhatnék.\"</li></ol><p><strong>Emlékezz:</strong> Az MI a vázat adja, de a lélek te vagy!</p>"
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok",
+      "content": "<p>Egy gombnyomásra kész a pályázatod. De vajon ez jó dolog?</p><ul><li><strong>Az őszinteség határai:</strong> Az MI néha hajlamos \"felturbózni\" a képességeidet (pl. az \"alapszintű Excel-tudás\"-ból \"haladó Excel-ismeretet\" csinál). Hol van a te felelősséged, hogy az önéletrajzod minden szava igaz legyen? Milyen következményekkel járhat, ha valótlant állítasz?</li><li><strong>Elveszik az egyéniség?</strong> Ha mindenki MI-vel íratja a motivációs levelét, nem lesznek egyformák? Hogyan tudod biztosítani, hogy a te pályázatod kitűnjön a tömegből, és valóban a te személyiségedet tükrözze, nem pedig egy algoritmusét?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: A Te Valódi Pályázatod!",
+      "content": "<p>Most jön az igazi próbatétel! Keress egy valódi, téged érdeklő lehetőséget, és készítsd el a pályázatodat!</p><p><strong>A feladatod:</strong></p><ol><li>Keress az interneten egy valódi <strong>diákmunka-hirdetést, önkéntes lehetőséget</strong> vagy akár egy <strong>iskolai pályázatot</strong>, ami tetszik neked. Mentsd le a linkjét!</li><li>Gyűjtsd össze a saját, valós adataidat a 1. Feladat mintájára.</li><li>Az MI segítségével generálj egy önéletrajzot és egy, a hirdetésre szabott motivációs levelet.</li><li>A legfontosabb lépés: <strong>Szerkeszd át és tedd teljesen a magadévá</strong> a kapott szövegeket! Javítsd, egészítsd ki, formázd a saját stílusodra!</li></ol><p>Mentsd le a kész önéletrajzot és motivációs levelet (pl. PDF formátumban)! Ez egy olyan dokumentum lesz, amit a jövőben bármikor felhasználhatsz.</p>"
+    }
+  ]
 }

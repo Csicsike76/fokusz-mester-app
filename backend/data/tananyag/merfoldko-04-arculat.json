@@ -1,8 +1,69 @@
 {
-  "title": "Merfoldko 04 arculat",
-  "subject": "altalanos",
+  "title": "AIMI Stúdió - M04: Arculattervezés és Vizuális Prototípus",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Merfoldko 04 arculat\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A mérföldkő végére a csapatotok létrehozza a projekt teljes vizuális identitását (arculatát).",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Ház Felöltöztetése"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kihivas",
+      "title": "4. A Mérföldkő Kihívása"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A mérföldkő végére a csapatotok létrehozza a projekt teljes vizuális identitását (arculatát). Az MI segítségével megtervezitek a <strong>logót</strong>, a <strong>színpalettát</strong> és a <strong>betűtípusokat</strong>, majd ezeket alkalmazva a korábbi drótvázaitokból elkészítitek a projekt látványos, <strong>vizuális prototípusát (mockup)</strong>.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Ház Felöltöztetése",
+      "content": "<p>Az alaprajz (drótváz) kész, a ház szerkezete áll. Most jön a leglátványosabb rész: a belsőépítészet! Milyen színűek legyenek a falak? Milyen stílusúak a bútorok? Milyen legyen a bejárati ajtó? Ezek a döntések határozzák meg a ház hangulatát és azt, hogy a lakók jól érzik-e magukat benne. Ma az MI a ti személyes dizájneretek lesz, aki segít megtalálni a projektetekhez leginkább illő stílust, és \"felöltöztetni\" a drótvázakat egy vonzó, egységes arculattal.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p>Vegyétek elő a \"Projekt Vázlatotokat\" és az előző héten készített drótvázakat!</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Hangulat és Stílus Meghatározása",
+          "content": "<p>Mielőtt egyetlen színt is választanánk, döntsük el, milyen érzést, hangulatot szeretnénk kelteni a felhasználóban! Kérjünk az MI-től stílusjavaslatokat!</p><p><strong>Feladat:</strong> Beszéljétek meg a kapott stílusokat, és <strong>válasszátok ki azt az egyet</strong>, ami a legjobban illik a projektetekhez! A választott stílust és a hozzá tartozó kulcsszavakat írjátok be a projektdokumentumba.</p>",
+          "prompts": ["Viselkedj úgy, mint egy branding szakértő! A projektünk egy \"[a megoldásotok leírása]\", ami a \"[a célközönség leírása]\" számára készült. Javasolj 3 különböző vizuális stílust (pl. \"barátságos és játékos\", \"modern és letisztult\", \"megbízható és professzionális\")! Mindegyikhez írj 3-4 kulcsszót, ami leírja a hangulatot!"]
+        },
+        {
+          "title": "2. Feladat: Logótervezés MI-vel",
+          "content": "<p>Minden jó márkának kell egy logó! Használjatok egy képalkotó MI-t, hogy ötleteket generáljatok!</p><p><strong>Feladat:</strong> Generáljatok több (legalább 8-10) logóötletet! Nem kell, hogy tökéletesek legyenek. Válasszátok ki a legjobb koncepciót, vagy akár kombináljatok több ötletet! Mentsétek le a véglegesnek szánt logó képét.</p>",
+          "prompts": ["logo for a [projekt típusa, pl. mobile app] called \"[Projekt neve]\", style: [a választott stílus kulcsszavai, pl. minimalist, clean, green and blue colors], simple vector design"]
+        },
+        {
+          "title": "3. Feladat: Színpaletta és Betűtípusok Véglegesítése",
+          "content": "<p>Most kérjünk az MI-től egy teljes, használható arculati csomagot a választott stílus alapján!</p><p><strong>Feladat:</strong> A kapott javaslat alapján véglegesítsétek a projektetek színpalettáját és betűtípusait! Ezeket az adatokat (pl. #4CAF50, Montserrat, Lato) írjátok be a projektdokumentumba.</p>",
+          "prompts": ["Viselkedj úgy, mint egy UI/UX dizájner! A projektünk vizuális stílusa: \"[a választott stílus kulcsszavai]\". Készíts egy teljes arculati javaslatot:\n1.  Egy 4 színből álló színpalettát (2 fő szín, 1 kiegészítő, 1 háttérszín), a pontos hexadecimális kódokkal együtt.\n2.  Egy betűtípus párosítást a Google Fonts-ból (egy vastagabb, karakteres betűtípus a címeknek, és egy könnyen olvasható a szövegtörzsnek)."]
+        },
+        {
+          "title": "4. Feladat: A Vizuális Prototípus (Mockup) Összeállítása",
+          "content": "<p>Itt az ideje \"kiszínezni\" az alaprajzot! Most a drótvázaitokat alakítjátok át látványos képernyőtervekké.</p><p><strong>Feladat:</strong> Nyissatok meg egy tervezőprogramot (Canva, Figma, de akár a Google Diák is tökéletes)! A csapat kreatív vezetőjének irányításával:</p><ol><li>Helyezzétek el a drótvázakon szereplő elemeket (gombok, szövegek, képek).</li><li>Alkalmazzátok a véglegesített színpalettát és betűtípusokat.</li><li>A szürke dobozok helyére illesszetek be MI-vel generált képeket vagy ikonokat.</li><li>Illesszétek be a logótokat a megfelelő helyre.</li></ol><p>A cél, hogy a drótvázaitokból élethű, a végleges termék kinézetét tükröző képernyőtervek szülessenek.</p>"
+        }
+      ]
+    },
+    {
+      "id": "kihivas",
+      "title": "4. A Mérföldkő Kihívása: A Mini Arculati Kézikönyv és a Mockup",
+      "content": "<p>A többhetes munka eredménye a projektetek teljes vizuális identitása.</p><p><strong>Bővítsétek a közös projektdokumentumotokat a következőkkel:</strong></p><ol><li><strong>Mini Arculati Kézikönyv (Mini Brand Guide):</strong> Egy új oldal, ami tartalmazza a projekt végleges logóját, a színpalettát (a hex kódokkal együtt), és a kiválasztott betűtípusok nevét.</li><li><strong>A Vizuális Prototípus (Mockups):</strong> Illesszétek be a legalább 3 legfontosabb, már dizájnnal ellátott képernyőtervetek képét!</li></ol><p>Ez a dokumentum lesz az alapja a következő, \"fejlesztési\" fázisnak, ahol ezeket a terveket töltitek majd fel tartalommal. Jó alkotást!</p>"
+    }
+  ]
 }

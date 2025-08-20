@@ -1,4 +1,4 @@
-/* Fájl: src/components/WorkshopContent/WorkshopContent.module.css (VÉGLEGES JAVÍTÁS) */
+/* Fájl: src/components/WorkshopContent/WorkshopContent.module.css (JAVÍTOTT) */
 
 :root {
     --text-color: #333;
@@ -7,8 +7,8 @@
     --card-background: #f9f9f9;
     --card-border: #e0e0e0;
     --prompt-background: #f0f4f8;
-    --button-background: #008000; /* Zöld a magyar zászló alapján */
-    --button-hover-background: #CE1126; /* Piros a magyar zászló alapján */
+    --button-background: #436F4D; /* Zöld */
+    --button-hover-background: #D52B1E; /* Piros */
 }
 
 .workshopContainer {
@@ -39,22 +39,6 @@
     border-bottom: 2px solid var(--header-color);
 }
 
-/* Általános bekezdések és listák formázása */
-.workshopSection div p,
-.workshopSection div li {
-    margin-bottom: 1rem;
-}
-
-.workshopSection div ul {
-    list-style-type: disc;
-    padding-left: 25px;
-}
-
-.workshopSection div strong {
-    font-weight: bold;
-}
-
-/* Feladat kártyák (taskCard) stílusa */
 .taskCard {
     background-color: var(--card-background);
     border: 1px solid var(--card-border);
@@ -69,68 +53,25 @@
     color: var(--header-color);
 }
 
-/* Prompt dobozok stílusa */
-.promptContainer {
-    margin-top: 1.5rem;
-}
-
-.promptExample {
-    background-color: var(--prompt-background);
-    border-left: 4px solid var(--button-background);
-    padding: 1rem;
-    border-radius: 4px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1rem;
-    line-height: 1.5;
-}
-
-/* Másolás gomb stílusa */
-.copyButton {
+/* Stílus a quiz-button-hoz */
+:global(a.quiz-button) {
     display: inline-block;
+    padding: 0.8rem 1.5rem;
     margin-top: 1rem;
-    padding: 0.6rem 1.2rem;
     background-color: var(--button-background);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.copyButton:hover {
-    background-color: var(--button-hover-background);
-}
-
-.copyButton:active {
-    transform: scale(0.98);
-}
-
-/* Stílus a quiz-button-hoz, hogy gombként jelenjen meg magyar zászló színekkel */
-.quiz-button {
-    display: inline-block;
-    padding: 0.8rem 1.8rem;
-    background-color: var(--button-background);
-    color: #FFFFFF;
+    color: white !important;
     text-decoration: none;
     border: none;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    font-family: 'Georgia', serif;
 }
 
-.quiz-button:hover {
+:global(a.quiz-button:hover) {
     background-color: var(--button-hover-background);
-    box-shadow: 0 6px 12px rgba(206, 17, 38, 0.2);
+    box-shadow: 0 6px 12px rgba(213, 43, 30, 0.2);
     transform: translateY(-2px);
-}
-
-.quiz-button:active {
-    transform: scale(0.96);
 }

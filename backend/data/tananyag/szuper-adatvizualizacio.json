@@ -1,8 +1,74 @@
 {
-  "title": "Szuper adatvizualizacio",
-  "subject": "altalanos",
+  "title": "AIMI Szuperképesség - M05: Adatvizualizáció",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Szuper adatvizualizacio\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel egy egyszerű adatsort nemcsak elemezni, hanem egy vizuális történetté formálni.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Számokból Szőtt Történet"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Adat-Sztorid!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel egy egyszerű adatsort nemcsak elemezni, hanem egy vizuális történetté formálni. Megtanulod, hogyan kérj az MI-től adatelemzést, hogyan találd meg az adatok mögött rejlő \"sztorit\", és hogyan készíts egy komplett infografika-tervet az MI-vel mint dizájn-partnerrel.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Számokból Szőtt Történet",
+      "content": "<p>Az adatok önmagukban unalmasak. A \"2 milliárd\" csak egy szám. De ha azt mondjuk: \"Húsz év alatt az emberiség negyede vált okostelefon-felhasználóvá\", az már egy történet. Az adatvizualizáció művészete abban rejlik, hogy a száraz adatokból egy érthető, emlékezetes és vizuálisan vonzó történetet alkotunk. Ma az MI a mi adatelemzőnk és grafikusunk lesz, aki segít megtalálni és elmesélni a számok mögötti sztorit.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai adatsorunk:</strong> Az okostelefon-felhasználók számának alakulása a világban (becsült adatok).</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Az Adatok Elemzése",
+          "content": "<p>Először is, adjuk oda az adatokat az MI-nek, és kérjünk egy alapvető elemzést!</p><p><strong>Megfigyelés:</strong> Az MI valószínűleg kiemeli a folyamatos, gyors növekedést, esetleg kiszámolja az átlagos növekedési ütemet, és felhívja a figyelmet a legnagyobb ugrásokra.</p>",
+          "prompts": ["Viselkedj úgy, mint egy adatelemző! Itt van egy adatsor az okostelefon-felhasználók számáról milliárdban, évekre bontva:\n2010: 0.3\n2012: 0.6\n2014: 1.5\n2016: 2.5\n2018: 3.2\n2020: 3.8\n2022: 4.5\n2024: 5.1\n\nElemezd az adatokat, és írd le a 3 legfontosabb megállapítást vagy trendet, amit látsz!"]
+        },
+        {
+          "title": "2. Feladat: A \"Sztori\" Megtalálása",
+          "content": "<p>Most alakítsuk át a száraz tényeket egy történetté! Kérjünk egy főcímet és egy narratívát!</p><p><strong>Megfigyelés:</strong> Figyeld meg, hogyan vált az MI a tényközlésről a \"storytelling\"-re! Valószínűleg egy olyan címet ad, mint \"Egy évtized alatt a zsebünkbe költözött a világ\", és a bevezető is ezt a drámai változást hangsúlyozza.</p>",
+          "prompts": ["Az előző elemzés alapján, mi a fő történet, amit ezek a számok elmesélnek? Fogalmazz meg egy ütős, figyelemfelkeltő főcímet egy infografikához, és írj egy rövid, 2-3 mondatos bevezetőt, ami összefoglalja ezt a történetet!"]
+        },
+        {
+          "title": "3. Feladat: Az Infografika Megtervezése",
+          "content": "<p>Itt az ideje a vizuális tervezésnek! Kérjük meg az MI-t, hogy segítsen megtervezni az infografika felépítését!</p><p><strong>Feladat:</strong> A kapott terv alapján vegyél elő papírt és ceruzát (vagy egy digitális rajzeszközt), és készíts egy egyszerű vázlatot az infografikáról! Hova kerül a főcím? Hogy helyezkednek el a szekciók?</p>",
+          "prompts": ["Most tervezzük meg magát az infografikát a \"[ide másold be a kapott főcímet]\" címmel! Bontsd le a tervet 3 fő vizuális szekcióra! Minden szekcióhoz:\n1.  Adj egy rövid címet.\n2.  Írd le, melyik kulcsadatot vagy üzenetet emelje ki.\n3.  Javasolj egy egyszerű vizuális elemet (pl. egy nagy szám, egy vonaldiagram, egy telefon ikon)."]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>Adatból Vélemény:</strong> Az MI az adatokból megállapításokat tett, majd ezekből egy \"történetet\" alkotott. Hol van a határ az objektív tényközlés és a szubjektív történetmesélés között? Hogyan lehet az adatokkal manipulatív, félrevezető történeteket is elmesélni?</li><li><strong>A Vizuális Csalás:</strong> Egy diagrammal nagyon könnyű hazudni (pl. ha az Y tengely skálázását megváltoztatjuk, egy kis növekedés is óriásinak tűnhet). Miért fontos, hogy egy adatvizualizáció ne csak szép, hanem mindenekelőtt őszinte és pontos legyen?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Adat-Sztorid!",
+      "content": "<p>Most te vagy az adatszakértő újságíró! Keress egy téged érdeklő, egyszerű adatsort, és meséld el a történetét!</p><p><strong>Keress egy egyszerű, 5-10 adatpontból álló táblázatot az interneten! Ötletek:</strong></p><ul><li>A kedvenc filmed bevételi adatai hetekre bontva.</li><li>Egy közösségi média platform felhasználóinak számának növekedése az évek során.</li><li>A saját képernyőidőd alakulása az elmúlt héten.</li></ul><p><strong>A feladatod:</strong> Készíts egy egyoldalas \"Infografika Forgatókönyvet\" a választott adatsor alapján! A dokumentum tartalmazza:</p><ol><li>A nyers adatokat.</li><li>Az infografika <strong>főcímét</strong> (MI-vel generálva).</li><li>A 2-3 mondatos <strong>bevezető történetet</strong> (MI-vel generálva).</li><li>Az infografika <strong>3 szekciójának tervét</strong> (cím, kulcsüzenet, vizuális elem), amit az MI segítségével terveztél.</li></ol><p>Mentsd le a kész forgatókönyvedet! Ezzel a módszerrel bármilyen adathalmazból képes leszel egy érthető és meggyőző vizuális történetet alkotni.</p>"
+    }
+  ]
 }

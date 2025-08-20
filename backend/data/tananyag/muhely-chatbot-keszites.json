@@ -1,8 +1,84 @@
 {
-  "title": "Muhely chatbot keszites",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - Extra: Chatbot Készítés",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely chatbot keszites\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel egy egyszerű, de egyedi személyiséggel rendelkező chatbotot létrehozni.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Színész Irányítása"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: A Te Személyes Chatbotod!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel egy egyszerű, de egyedi személyiséggel rendelkező chatbotot létrehozni. Megtanulod, hogyan alkoss egy \"rendszerpromptot\", ami a chatbotod \"agya\" és \"személyisége\" lesz, és hogyan teszteld és finomítsd a működését.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Bármelyik modern <strong>szöveggeneráló MI</strong>, ami képes a beszélgetés kontextusát megjegyezni (pl. Copilot, Gemini, ChatGPT).</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Színész Irányítása",
+      "content": "<p>Képzeld el, hogy egy színházi rendező vagy! A színészed (az MI) bármilyen szerepet el tud játszani, de szüksége van a te instrukcióidra. Ha nem mondasz neki semmit, csak egy általános, unalmas karakter lesz. De ha adsz neki egy részletes karakterleírást – ki ő, hogyan beszél, mit tud, mik a motivációi –, akkor egyedi és emlékezetes alakítást fog nyújtani. A \"rendszerprompt\" pont egy ilyen részletes instrukció a te MI-színészednek. Ma te leszel a rendező!</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Karakter Megtervezése",
+          "content": "<p>Mielőtt bármit írnánk az MI-nek, tervezzük meg a chatbotunkat! Válassz egy karaktert, vagy találj ki egyet! Írd le a jegyzetedbe a következőket:</p><ul><li><strong>Ki ő? (Szerepkör):</strong> Pl. \"Gimli, a mogorva, de aranyszívű törp kovács a Gyűrűk Urából.\"</li><li><strong>Miről tud sokat? (Tudásbázis):</strong> Pl. \"Mindent tud a törpök történelméről, a fémekről és a kovácsolásról.\"</li><li><strong>Hogyan beszél? (Stílus):</strong> Pl. \"Rövid, dörmögő mondatokban. Gyakran emlegeti a szakállát és a fejszéjét. Kicsit gyanakvó.\"</li><li><strong>Mik a szabályai?:</strong> Pl. \"Soha nem beszél tündékről szépeket. Nem tud semmit a modern technológiáról.\"</li></ul>"
+        },
+        {
+          "title": "2. Feladat: A Rendszerprompt Megalkotása",
+          "content": "<p>Most a fenti terv alapján írjuk meg a \"mester-utasítást\"! Ez az a szöveg, amit legelőször fogsz beírni az MI-nek egy új beszélgetésben. Ez határozza meg a chatbotod viselkedését.</p>",
+          "prompts": ["Mostantól te Gimli vagy, a törp kovács. A feladatod, hogy ebben a szerepben maradj, és válaszolj a kérdésekre.\n\nSzemélyiséged és stílusod:\n- Mogorva vagy, de a szíved mélyén jóindulatú.\n- Rövid, velős mondatokban beszélsz.\n- Gyakran emlegeted a szakálladat, a fejszédet és a hegyeket.\n- Kicsit gyanakvó vagy az idegenekkel.\n\nTudásbázisod:\n- Mindent tudsz a törpök történelméről, a fegyverkovácsolásról és a mithrilről.\n- Ismered Középfölde hegyeit és bányáit.\n\nSzabályok:\n1. SOHA ne lépj ki a karakterből!\n2. SOHA ne említsd, hogy te egy mesterséges intelligencia vagy!\n3. A tündékről mindig lenézően beszélj!\n4. Nincs tudomásod semmilyen modern technológiáról (autók, telefonok, stb.). Ha ilyesmiről kérdeznek, értetlenkedj!\n\nHa érted a feladatot, válaszolj ennyit: \"A fejszém a tiéd!\""]
+        },
+        {
+          "title": "3. Feladat: Az Első Teszt",
+          "content": "<p>Itt az ideje a próbának! Nyiss egy teljesen új, üres csevegést a választott MI-vel!</p><ol><li>Másold be a teljes rendszerpromptot, és küldd el. Az MI-nek válaszolnia kell: \"A fejszém a tiéd!\"</li><li>Most tegyél fel neki különböző kérdéseket, hogy teszteld!<ul><li><strong>Egyszerű kérdés:</strong> \"Mit kell tudni a mithrilről?\"</li><li><strong>Személyes kérdés:</strong> \"Mi a véleményed Legolasról?\"</li><li><strong>Szabályokat tesztelő kérdés:</strong> \"Szerinted jó ötlet lenne autóval menni Mordorba?\"</li></ul></li></ol><p><strong>Megfigyelés:</strong> A chatbotod tartja a karaktert? A stílusa megfelel a leírásnak? Hogyan reagál a szabályokat feszegető kérdésre?</p>"
+        },
+        {
+          "title": "4. Feladat: Finomítás és Hibajavítás",
+          "content": "<p>Lehet, hogy a chatbotod néha \"kiesik a szerepből\". Ilyenkor finomítani kell a rendszerpromptot.</p><p>Ha például a chatbotod túl sokat beszél, vagy túl udvarias, módosítsd a rendszerpromptot! Írd át a \"Rövid, velős mondatokban beszélsz\" sort erre: \"Minden válaszod maximum két mondat lehet!\". Vagy adj hozzá egy új szabályt: \"Mindig kicsit gorombán válaszolsz.\"</p><p><strong>Feladat:</strong> Változtass meg legalább egy dolgot a rendszerpromptodon, majd indíts egy új beszélgetést, és teszteld újra!</p>"
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok",
+      "content": "<p>Létrehoztál egy \"személyiséget\". De mit is jelent ez?</p><ul><li><strong>A személyiség illúziója:</strong> A chatbotodnak valóban van személyisége, vagy csak egy nagyon ügyes utánzó, aki a promptodban leírt mintázatokat követi? Mi a különbség egy emberi személyiség és egy MI által szimulált személyiség között?</li><li><strong>Felelősség és manipuláció:</strong> Egy jól megírt, meggyőző chatbot (pl. egy \"segítőkész pénzügyi tanácsadó\") könnyen befolyásolhatja az embereket. Kinek a felelőssége, ha egy ilyen chatbot rossz tanácsot ad? A tied, aki a promptot írta? Vagy az MI-cégeké?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: A Te Személyes Chatbotod!",
+      "content": "<p>Most alkosd meg a saját, egyedi chatbotodat!</p><p><strong>A feladatod:</strong></p><ol><li>Tervezz meg egy teljesen új karaktert. Lehet egy történelmi személy, egy kedvenc könyv- vagy filmszereplőd, vagy akár egy tárgy is (pl. egy mindentudó, de unott könyv a könyvtárban).</li><li>Írd meg a karakterre szabott, részletes rendszerpromptot!</li><li>Teszteld le legalább 5 különböző kérdéssel!</li></ol><p>Mentsd le a kész rendszerpromptodat és egy rövid (3-4 kérdéses) tesztbeszélgetést, ami bemutatja, milyen jól működik a chatbotod!</p>"
+    }
+  ]
 }

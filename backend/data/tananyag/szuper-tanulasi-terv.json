@@ -1,8 +1,73 @@
 {
-  "title": "Szuper tanulasi terv",
-  "subject": "altalanos",
+  "title": "AIMI Szuperképesség - M03: Személyre Szabott Tanulási Terv",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Szuper tanulasi terv\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel az MI segítségével egy komplett, egyhónapos tanulási tervet készíteni bármilyen új készség elsajátításához.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Hegyi Túravezetőd"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Készségfejlesztési Terved"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel az MI segítségével egy komplett, egyhónapos tanulási tervet készíteni bármilyen új készség vagy hobbi elsajátításához. Megtanulod, hogyan határozz meg reális célokat, és hogyan kérj az MI-től egy strukturált, heti bontású tervet, ami elméleti és gyakorlati feladatokat is tartalmaz.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Hegyi Túravezetőd",
+      "content": "<p>Egy új készség elsajátítása olyan, mint megmászni egy hegyet. Elindulhatsz egyedül, térkép nélkül, és talán felérsz a csúcsra, de valószínűleg sokat fogsz bolyongani. Az MI ebben a helyzetben a te személyes hegyi túravezetőd. Nem ő mászik helyetted, de megmutatja a legjobb útvonalat, figyelmeztet a veszélyes szakaszokra, és segít bepakolni a megfelelő felszerelést. Ma megtanuljuk, hogyan kérjünk egy részletes útitervet ettől a digitális túravezetőtől.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai projektünk:</strong> Megtanulunk jobban fotózni az okostelefonunkkal egy hónap alatt.</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Cél Pontos Meghatározása",
+          "content": "<p>Mielőtt tervet készítenénk, tudnunk kell, hova akarunk eljutni. A \"megtanulni fotózni\" túl tág cél. Legyünk konkrétabbak!</p><p><strong>Feladat:</strong> Írd le a jegyzetedbe egyetlen, mérhető mondatban, hogy mit szeretnél elérni egy hónap alatt! Például:</p><ul><li>\"Egy hónap múlva szeretnék képes lenni 5, kompozíciósan helyes, jól megvilágított portrét készíteni a barátaimról a telefonommal.\"</li><li>\"Egy hónap múlva szeretném megérteni a rekeszérték, záridő és ISO alapvető összefüggéseit.\"</li></ul>"
+        },
+        {
+          "title": "2. Feladat: A Tanulási Terv Generálása",
+          "content": "<p>Most, hogy megvan a cél, kérjük meg az MI-t, hogy készítsen hozzá egy útitervet!</p><p><strong>Megfigyelés:</strong> Az MI egy strukturált, követhető tervet adott. Nemcsak megmondja, MIT tanulj, hanem azt is, HOGYAN (gyakorlati feladat) és MIBŐL (források).</p>",
+          "prompts": ["Viselkedj úgy, mint egy profi fotográfia-oktató! A célom, hogy egy hónap alatt megtanuljak sokkal jobb fotókat készíteni az okostelefonommal. A végcélom: \"[Ide másold be az előző feladatban megfogalmazott konkrét célodat!]\".\n\nKészíts egy 4 hetes, heti bontású tanulási tervet számomra! Minden héthez tartozzon:\n1.  Egy fő elméleti téma, amit meg kell értenem.\n2.  Egy konkrét, heti gyakorlati fotós kihívás.\n3.  Javaslat 1-2 ingyenes online forrásra (YouTube videó vagy cikk), ami segít az adott heti témában."]
+        },
+        {
+          "title": "3. Feladat: A Terv Részletezése és Finomítása",
+          "content": "<p>Az alap terv jó, de néha szükség van mélyebb részletekre. Fúrjunk bele az egyik heti feladatba!</p><p><strong>Feladat:</strong> Olvasd el a kapott tippeket! Ez a lépés megmutatja, hogyan tudod az MI-t nemcsak tervezésre, hanem konkrét, mélyebb tudás megszerzésére is használni. A kapott tippek alapján próbáld ki a heti kihívást!</p>",
+          "prompts": ["Nagyszerű a terv! Koncentráljunk az 1. hét gyakorlati kihívására. Adj 5 konkrét tippet vagy trükköt, amire egy teljesen kezdőnek figyelnie kell, amikor a \"harmadolási szabályt\" próbálja alkalmazni a fotóin!"]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>A Passzív Tanulás Csapdája:</strong> Az MI elkészítette a tervet és javasolt forrásokat. Hol van a te szereped abban, hogy a tanulás valóban megtörténjen? Miért nem elég csak elolvasni a tervet? Miért a gyakorlati kihívások elvégzése a legfontosabb lépés?</li><li><strong>Forráskritika:</strong> Az MI által javasolt YouTube videók és cikkek vajon mindig a legjobb minőségűek? Hogyan tudnád leellenőrizni, hogy egy javasolt forrás megbízható és valóban hasznos-e? (Pl. megnézed a kommenteket, a készítő egyéb munkáit).</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Személyes Készségfejlesztési Terved",
+      "content": "<p>Most tervezd meg a saját kalandodat!</p><p><strong>A feladatod:</strong></p><ol><li>Válassz egy <strong>valódi készséget vagy hobbit</strong>, amibe mindig is bele akartál kezdeni (pl. egy hangszer, egy programozási nyelv alapjai, rajzolás, egy új sport).</li><li>Fogalmazz meg egy <strong>konkrét, egy hónap alatt elérhető célt</strong> ezzel kapcsolatban.</li><li>A tanult promptolási technikával készíttesd el az MI-vel a <strong>személyre szabott, 4 hetes tanulási tervedet</strong>.</li></ol><p>Mentsd le a kész tervet! Ez nem csak egy iskolai feladat, hanem a te személyes útiterved az első lépésekhez. Ha van kedved, vágj is bele!</p>"
+    }
+  ]
 }

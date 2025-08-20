@@ -1,8 +1,97 @@
 {
-  "title": "Muhely teachable machine",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 6. hét: Az adat és az algoritmus",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely teachable machine\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel a Google Teachable Machine segítségével betanítani egy egyszerű, saját MI-modellt.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Készítsünk MI-t!"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a jobb modellért"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel a Google Teachable Machine segítségével betanítani egy egyszerű, saját MI-modellt, ami meg tud különböztetni két különböző tárgyat a webkamerád képén. A gyakorlaton keresztül megérted a gépi tanulás három alapvető lépését: az <strong>adatgyűjtést</strong>, a <strong>tanítást</strong> és a <strong>tesztelést</strong>.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Számítógép <strong>webkamerával</strong> és Chrome vagy Firefox böngészővel.</li><li><strong>Két különböző, hétköznapi tárgy.</strong> Például: egy toll és egy bögre, egy telefon és egy szemüveg, egy alma és egy banán.</li><li>A <strong>Google Teachable Machine</strong> weboldala: <a href=\"https://teachablemachine.withgoogle.com/\" target=\"_blank\">teachablemachine.withgoogle.com</a></li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Készítsünk MI-t!",
+      "content": "<p>Az előző hetekben olyan MI-ket használtunk, amiket mások már betanítottak. Most fordul a kocka! Bepillantunk a \"motorháztető\" alá, és mi magunk fogunk tanítani egy gépet. Nem bonyolult kódsorokat fogunk írni, hanem a legegyszerűbb módszert alkalmazzuk: <strong>példákat mutatunk neki</strong>. Pont úgy, ahogy egy kisgyereknek mutatnánk meg a különbséget egy kutya és egy macska között. Lássuk, hogyan működik a varázslat!</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "content": "<p>A mai projektünk: <strong>Készítünk egy MI-t, ami felismeri a tollat és a bögrét.</strong></p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A projekt előkészítése",
+          "content": "<ol><li>Nyisd meg a <a href=\"https://teachablemachine.withgoogle.com/\" target=\"_blank\">Teachable Machine</a> weboldalt.</li><li>Kattints a nagy kék \"Get Started\" gombra.</li><li>Válaszd az \"Image Project\" (Kép projekt) lehetőséget.</li><li>Válaszd a \"Standard image model\" opciót. Most egy új felületet látsz két \"Class\" (Osztály) dobozzal.</li></ol>"
+        },
+        {
+          "title": "2. Feladat: Adatgyűjtés - Az első osztály",
+          "content": "<p>Most megtanítjuk a gépnek, hogyan néz ki egy toll. Ezt hívjuk az első \"osztálynak\".</p><div class=\"instruction\"><p><strong>A \"Class 1\" dobozban:</strong></p><ol><li>Kattints a ceruza ikonra és nevezd át az osztályt <strong>\"Toll\"</strong>-ra.</li><li>Kattints a \"Webcam\" gombra, és engedélyezd a kamera használatát.</li><li>Vedd a kezedbe a tolladat! Kattints és tartsd lenyomva a kék <strong>\"Hold to Record\"</strong> gombot, és közben mozgasd a tollat a kamera előtt. Mutasd meg különböző szögekből, kicsit közelebbről, távolabbról, más háttér előtt.</li><li>Csinálj kb. <strong>100-150 képkockát</strong>! Minél több és változatosabb, annál jobb.</li></ol></div>"
+        },
+        {
+          "title": "3. Feladat: Adatgyűjtés - A második osztály",
+          "content": "<p>Most ismételjük meg ugyanezt a bögrével!</p><div class=\"instruction\"><p><strong>A \"Class 2\" dobozban:</strong></p><ol><li>Kattints a ceruza ikonra és nevezd át az osztályt <strong>\"Bögre\"</strong>-re.</li><li>Tedd le a tollat, és vedd a kezedbe a bögrét!</li><li>A \"Webcam\" gombbal, a \"Hold to Record\" nyomva tartásával készíts kb. <strong>100-150 képkockát</strong> a bögrédről is, szintén különböző szögekből és távolságokból.</li></ol></div>"
+        },
+        {
+          "title": "4. Feladat: A Modell Tanítása",
+          "content": "<p>Most jön a varázslat! A számítógép elemzi a képeket, és megkeresi a mintázatokat, amik megkülönböztetik a tollat a bögrétől.</p><div class=\"instruction\"><p>Kattints a <strong>\"Train Model\"</strong> (Modell tanítása) gombra. A tanítás eltarthat egy percig, légy türelmes és ne zárd be az oldalt!</p></div>"
+        },
+        {
+          "title": "5. Feladat: Tesztelés és Kiértékelés",
+          "content": "<p>Miután a tanítás befejeződött, a jobb oldalon megjelenik egy \"Output\" ablak a kamerád képével. Itt az ideje vizsgáztatni az MI-nket!</p><div class=\"instruction\"><ol><li>Mutasd fel a <strong>tolladat</strong> a kamerának! Figyeld a százalékos csíkokat. Jól ismeri fel?</li><li>Most mutasd fel a <strong>bögrédet</strong>! Változik az eredmény?</li><li>Próbáld ki valami mással! Mutass fel egy harmadik tárgyat, vagy csak a kezedet. Mit csinál az MI? Próbálja besorolni a két tanult kategória valamelyikébe, még ha nem is helyes.</li></ol></div>"
+        }
+      ]
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a jobb modellért",
+      "content": "<ul><li><strong>Több adat, jobb eredmény:</strong> Minél több képet adsz neki, annál jobban fog tanulni.</li><li><strong>A változatosság gyönyörködtet:</strong> A különböző szögek, fényviszonyok és hátterek segítenek az MI-nek, hogy ne csak egyféleképpen ismerje fel a tárgyat.</li><li><strong>Tiszta háttér:</strong> Próbáld meg, hogy csak a tárgy legyen a képen, a kezed vagy más zavaró dolog a lehető legkevésbé látsszon.</li><li><strong>Profi tipp:</strong> Hozz létre egy harmadik osztályt \"Hatter\" (Background) néven, és készíts képeket az üres háttérről. Így az MI megtanulja azt is, amikor \"semmi\" sincs a képen!</li></ul>"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "content": "<p>Létrehoztad a saját, működő MI-det. Most gondolkozz el!</p><ul><li><strong>\"Szemét be, szemét ki\":</strong> Mi történne, ha a tanítás során felcserélnéd a címkéket, és a toll képeit \"Bögre\" néven, a bögre képeit pedig \"Toll\" néven mentenéd el? Mit tanulna meg az MI? Ez a példa miért mutatja be tökéletesen az adatok minőségének fontosságát?</li><li><strong>A torzítás (bias) csírája:</strong> Mi történne, ha csak piros színű tollakkal tanítanád a modellt? Felismerne utána egy kék tollat is? Miért fontos, hogy a tanító adatok a lehető legváltozatosabbak legyenek?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A te személyes felismerőd!",
+      "content": "<p>Most rajtad a sor, hogy valami igazán személyeset alkoss!</p><p><strong>A feladatod:</strong></p><ol><li>Válassz két (vagy akár három!) saját tárgyat, amit szeretnél, hogy az MI felismerjen. Például: a kedvenc könyved vs. a telefonod, vagy egy alma vs. egy narancs.</li><li>Hajtsd végre a tanítási folyamatot a Teachable Machine segítségével ezekkel a tárgyakkal.</li><li><strong>Haladóknak:</strong> Próbálj meg betanítani egy modellt, ami három különböző kézjelet ismer fel: kő, papír, olló. Működik?</li></ol><p>A kész modelled linkjét (az \"Export Model\" gombbal tudsz linket generálni) mentsd el, hogy megmutathasd a többieknek!</p>"
+    }
+  ]
 }

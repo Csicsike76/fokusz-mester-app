@@ -1,8 +1,97 @@
 {
-  "title": "Muhely nyelvtanulas",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 11. hét: Nyelvtanulás és fordítás",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely nyelvtanulas\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel az MI-t tudatos nyelvtanulási eszközként használni.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Fordító, a Tolmács és a Nyelvtanár"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a profi nyelvtanuláshoz"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: Legyél te a fordító!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel az MI-t tudatos nyelvtanulási eszközként használni. Megtanulod, hogyan kérj fordítást, hogyan elemezd a fordítási lehetőségeket, és hogyan használd az MI-t a saját szövegeid javítására és a nyelvtani szabályok megértésére.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Bármelyik <strong>szöveggeneráló MI</strong> (Copilot, Gemini, ChatGPT) vagy egy dedikált fordítóprogram (pl. Google Translate, DeepL).</li><li>Egy általad tanult idegen nyelv (pl. angol, német). A példák angolul lesznek.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Fordító, a Tolmács és a Nyelvtanár",
+      "content": "<p>A zsebedben lévő MI egyszerre lehet egy szupergyors fordító, egy türelmes tolmács és egy fáradhatatlan nyelvtanár. A legtöbben csak az első funkciót használják: bemásolnak egy szöveget, és megnézik a fordítását. Ma azonban mélyebbre ásunk! Megnézzük, hogyan lehet a fordításból tanulni, és hogyan vehetjük rá az MI-t, hogy ne csak lefordítsa, hanem el is magyarázza a nyelvi finomságokat.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai projektünk:</strong> Lefordítunk és elemzünk egy egyszerű magyar mondatot: <strong>\"Szeretek a parkban sétálni, amikor süt a nap.\"</strong></p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Az egyszerű fordítás",
+          "content": "<p>Kezdjük az alapokkal! Kérjünk egy egyszerű fordítást angolra.</p><p><strong>Megfigyelés:</strong> Valószínűleg valami ilyesmit kaptál: \"I like to walk in the park when the sun is shining.\" Ez egy tökéletes, de elég egyszerű fordítás. Jegyezd meg vagy másold ki!</p>",
+          "prompts": ["Fordítsd le ezt a mondatot angolra: \"Szeretek a parkban sétálni, amikor süt a nap.\""]
+        },
+        {
+          "title": "2. Feladat: Alternatívák és stílusok",
+          "content": "<p>Egy gondolatot többféleképpen is ki lehet fejezni. Kérjünk az MI-től változatokat, hogy bővítsük a szókincsünket!</p><p><strong>Megfigyelés:</strong> Figyeld meg a szinonimákat és a különböző mondatszerkezeteket! (Pl. \"I love strolling in the park on sunny days.\" vagy \"I enjoy taking a walk in the park whenever it is sunny.\") Ez a feladat segít megérteni a nyelvi árnyalatokat.</p>",
+          "prompts": ["Adj még két alternatív fordítást az előző mondatra! Az egyik legyen egy kicsit lazább, hétköznapibb, a másik pedig formálisabb, irodalmibb stílusú."]
+        },
+        {
+          "title": "3. Feladat: A \"visszafordítás\" tesztje",
+          "content": "<p>Most jön egy izgalmas trükk! Fordíttassuk vissza az egyik új, angol mondatot magyarra. Ezzel ellenőrizhetjük, hogy a jelentés nem torzult-e.</p><p><strong>Megfigyelés:</strong> Pontosan ugyanazt a magyar mondatot kaptad vissza, mint az eredeti? Vagy egy kicsit mást? A \"strolling\" például nem pont ugyanaz, mint a \"sétálni\". Ez a teszt segít megérteni, hogy a fordítás mindig egyfajta értelmezés is.</p>",
+          "prompts": ["Fordítsd vissza magyarra ezt: \"I love strolling in the park on sunny days.\""]
+        },
+        {
+          "title": "4. Feladat: Hibajavítás és magyarázat",
+          "content": "<p>Most tegyünk úgy, mintha mi írtunk volna egy hibás mondatot. Kérjük meg az MI-t, hogy ne csak kijavítsa, hanem magyarázza is el a hibát!</p><p><strong>Megfigyelés:</strong> Az MI nemcsak kijavította a mondatot (\"I like to walk...\" vagy \"I like walking...\"), hanem valószínűleg el is magyarázta, hogy a \"like\" ige után miért kell a \"to\"-t vagy az \"-ing\" végződést használni. Ezzel az MI személyes nyelvtanárként működik.</p>",
+          "prompts": ["Javítsd ki a nyelvtani hibát ebben az angol mondatban, és magyarázd el egyszerűen, hogy mit rontottam el: \"I like walk in the park.\""]
+        }
+      ]
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a profi nyelvtanuláshoz MI-vel",
+      "content": "<ul><li><strong>Kérj példamondatokat!</strong> \"Írj 3 példamondatot az 'awesome' szóval!\"</li><li><strong>Kérdezz rá a különbségekre!</strong> \"Mi a különbség a 'watch', a 'see' és a 'look at' között?\"</li><li><strong>Gyakorold a kiejtést!</strong> Sok MI-asszisztens és fordító fel is tudja olvasni a leírt szöveget. Hallgasd meg és ismételd!</li><li><strong>Beszélgess vele!</strong> Válts nyelvet, és próbálj meg egy egyszerű, pár soros párbeszédet folytatni az MI-vel a tanult nyelven.</li></ul>"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "content": "<p>Az MI egy szuper nyelvtanulási eszköz, de vannak korlátai. Gondolkozz el ezen!</p><ul><li><strong>A kulturális kontextus hiánya:</strong> Az MI a szavakat fordítja, de a kulturális utalásokat, a humort, a szlenget vagy az iróniát gyakran félreérti. Miért lehet veszélyes egy viccet vagy egy fontos, érzelmi töltetű üzenetet kizárólag gépi fordítóval lefordítani?</li><li><strong>A \"tökéletes\" fordítás illúziója:</strong> Mint láttuk, egy mondatot sokféleképpen le lehet fordítani. Ha túlságosan rábízzuk magunkat a fordítóra, a saját nyelvi kreativitásunk és stílusunk háttérbe szorulhat. Hogyan lehet megtalálni az egyensúlyt a segítség és az önálló gondolkodás között?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: Legyél te a fordító!",
+      "content": "<p>A feladatod, hogy egy rövid, 3-4 mondatos magyar bekezdést lefordíts a tanult nyelvre az MI segítségével, de egy csavarral!</p><p><strong>A folyamat:</strong></p><ol><li>Írj egy rövid bekezdést magyarul a hobbidról.</li><li>Fordítsd le a szöveget <strong>mondatonként</strong> az MI-vel, és közben <strong>kérj minden mondathoz egy alternatívát is</strong>.</li><li>A kapott lehetőségekből <strong>állítsd össze a saját, végleges fordításodat</strong>, kiválasztva a neked leginkább tetsző megoldásokat.</li><li>Végül, másold be a saját, összeállított idegen nyelvű szövegedet az MI-be, és kérj tőle egy <strong>végső ellenőrzést és javítást</strong>.</li></ol><p>Mentsd le a magyar eredetit, a te általad összeállított fordítást és az MI végső, javított verzióját! Hasonlítsd össze őket!</p>"
+    }
+  ]
 }

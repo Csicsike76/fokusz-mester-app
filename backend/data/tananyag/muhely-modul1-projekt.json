@@ -1,8 +1,85 @@
 {
-  "title": "Muhely modul1 projekt",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 9. hét: I. Modul Projekt",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely modul1 projekt\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A projekt célja, hogy összefoglald és bemutasd, mit tanultál az első modul során. Létrehozol egy rövid, személyes prezentációt.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Építsd fel a szerszámosládádat!"
+    },
+    {
+      "id": "projekt_lepesek",
+      "title": "4. A Projekt Lépései"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "leadas",
+      "title": "6. A Projekt Leadása és Bemutatása"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A projekt célja, hogy összefoglald és bemutasd, mit tanultál az első modul során. Létrehozol egy rövid, személyes prezentációt, amelyben bemutatod a <strong>számodra leghasznosabb 3 MI-eszközt vagy -technikát</strong>. A projekt során újra használod az eddig tanult készségeket: az ötletelést, a vázlatírást és a tartalomalkotást MI segítségével.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Bármelyik <strong>szöveggeneráló MI</strong>, amit eddig használtunk (Copilot, Gemini, ChatGPT).</li><li>Opcionálisan egy <strong>képalkotó MI</strong> a prezentációd vizuális elemeihez.</li><li>Egy <strong>prezentációkészítő program</strong> (pl. Google Diák, Canva, PowerPoint, vagy akár egy MI-alapú, mint a Gamma).</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Építsd fel a saját szerszámosládádat!",
+      "content": "<p>Az elmúlt hetekben rengeteg új, digitális \"szerszámot\" vettünk a kezünkbe. Megtanultunk velük beszélgetni, képeket és zenét alkotni, sőt, még egy egyszerű MI-t is betanítottunk. Most itt az ideje, hogy rendet rakj a szerszámosládádban! Ebben a projektben te döntöd el, melyek a számodra legértékesebb eszközök. Nemcsak bemutatod őket, de azt is megmutatod, hogyan használnád őket a jövőben a tanuláshoz, az alkotáshoz vagy a problémamegoldáshoz.</p>"
+    },
+    {
+      "id": "projekt_lepesek",
+      "title": "4. A Projekt Lépései",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Ötletelés és Kiválasztás",
+          "content": "<p>Gondold végig az elmúlt 8 hetet! Melyik műhely tetszett a legjobban? Melyik eszköz nyűgözött le, vagy bizonyult a leghasznosabbnak? A feladatod, hogy válassz ki <strong>három</strong> kedvencet.</p><p><strong>Ha segítség kell, kérdezd az MI-t! Próbáld ki ezt a promptot:</strong></p><p>Ez segíthet eldönteni, melyik 3 eszközt vagy technikát szeretnéd bemutatni.</p>",
+          "prompts": ["Viselkedj úgy, mint egy tanulási tanácsadó! Az elmúlt hetekben tanultam a promptolásról, MI képalkotásról, zeneszerzésről, MI-modellek tanításáról (Teachable Machine) és a hírek kritikus elemzéséről. Segíts összeszedni, hogy ezen készségek közül melyik 3 lehet a leghasznosabb egy diáknak a mindennapi tanulásban! Adj rövid indoklást mindegyikhez."]
+        },
+        {
+          "title": "2. Feladat: A Tartalom Megtervezése",
+          "content": "<p>Most, hogy megvan a 3 témád, gyűjtsük össze hozzájuk a tartalmat! Minden egyes kiválasztott eszközről vagy technikáról válaszold meg a következő kérdéseket (használhatod az MI-t a válaszok megfogalmazásához!):</p><ul><li><strong>Mi ez?</strong> (1-2 mondatos, egyszerű leírás)</li><li><strong>Miért hasznos nekem?</strong> (Konkrét példa, hogyan segíti a tanulást vagy a kreativitást)</li><li><strong>Mi a legnagyobb előnye?</strong> (pl. gyorsaság, kreativitás, egyszerűség)</li><li><strong>Mi lehet a hátránya vagy egy veszélye?</strong> (pl. pontatlanság, torzítás, túlzott használat)</li></ul>"
+        },
+        {
+          "title": "3. Feladat: A Prezentáció Vázlatának Elkészítése",
+          "content": "<p>Kérd meg az MI-t, hogy készítsen egy vázlatot a prezentációdhoz! Ez segít, hogy a bemutatód logikus és jól követhető legyen.</p>",
+          "prompts": ["Készíts egy 5 diából álló prezentáció vázlatot \"Az én MI eszköztáram\" címmel!\n- 1. dia: Cím és a nevem.\n- 2. dia: Az első eszköz bemutatása (Mi ez? Miért hasznos? Előny/Hátrány).\n- 3. dia: A második eszköz bemutatása (ugyanaz a struktúra).\n- 4. dia: A harmadik eszköz bemutatása (ugyanaz a struktúra).\n- 5. dia: Összegzés: Melyik a kedvencem és miért, és hogyan fogom használni őket a jövőben."]
+        },
+        {
+          "title": "4. Feladat: A Prezentáció Elkészítése",
+          "content": "<p>Most jön az alkotás! Nyisd meg a kedvenc prezentációkészítődet, és a vázlat alapján készítsd el a diákat!</p><p><strong>Tipp: Használd közben is az MI-t!</strong></p><ul><li>Generálj egyedi háttérképeket vagy illusztrációkat a diáidhoz a képalkotó MI-vel!</li><li>Kérj a szöveggenerátortól frappáns címeket vagy rövid, figyelemfelkeltő összefoglalókat!</li><li>A végén másold be a kész szöveget, és kérj helyesírási és stilisztikai javítást!</li></ul>"
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok: A Te Felelősséged",
+      "content": "<p>A projekt elkészítése közben gondolkozz el ezen a kérdésen:</p><p>Most, hogy rendelkezel ezzel az \"eszköztárral\", hogyan változik meg a viszonyod a tanuláshoz és az alkotáshoz? Milyen új felelősséged van diákként? Hogyan fogod biztosítani, hogy ezeket az eszközöket a tudásod kiegészítésére használod, és nem a gondolkodás helyettesítésére?</p>"
+    },
+    {
+      "id": "leadas",
+      "title": "6. A Projekt Leadása és Bemutatása",
+      "content": "<p>A feladatod, hogy a kész, legalább 5 diából álló prezentációdat elmentsd (PDF-ként vagy a program saját formátumában).</p><p>Készülj fel arra, hogy a következő órán <strong>2-3 percben bemutasd</strong> a munkádat a többieknek!</p><p><strong>A bemutató során térj ki a következőkre:</strong></p><ul><li>Melyik 3 eszközt/technikát választottad?</li><li>Melyik a személyes kedvenced és miért?</li><li>Mutass egy konkrét példát, amit az MI segítségével alkottál a projekthez (pl. egy generált kép, egy átírt szöveg).</li></ul><p>Sok sikert az első nagy MI-projektetekhez!</p>"
+    }
+  ]
 }

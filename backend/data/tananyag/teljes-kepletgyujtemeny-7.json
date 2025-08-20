@@ -1,0 +1,95 @@
+{
+  "title": "Képletgyűjtemény - Matematika 7. Osztály",
+  "subject": "matematika",
+  "grade": 7,
+  "category": "premium_lesson",
+  "description": "Minden fontos tétel, definíció és példa egy helyen a 7. osztályos matematika tananyaghoz.",
+  "toc": [
+    { "id": "fejezet1", "title": "1. Valós számok halmaza", "subheadings": [
+        { "id": "fejezet1-1", "title": "1.1 Négyzetgyök" },
+        { "id": "fejezet1-2", "title": "1.2 Irracionális számok" },
+        { "id": "fejezet1-3", "title": "1.3 Tényezők kiemelése" },
+        { "id": "fejezet1-4", "title": "1.4 Ábrázolás, abszolút érték" },
+        { "id": "fejezet1-5", "title": "1.5 Műveletek valós számokkal" },
+        { "id": "fejezet1-6", "title": "1.6 Számtani és mértani közép" },
+        { "id": "fejezet1-7", "title": "1.7 x² = a egyenletek" }
+    ]},
+    { "id": "fejezet2", "title": "2. Lineáris egyenletek", "subheadings": [
+        { "id": "fejezet2-1", "title": "2.1 Ekvivalens egyenlőségek" },
+        { "id": "fejezet2-2", "title": "2.2 ax + b = 0 egyenletek" },
+        { "id": "fejezet2-3", "title": "2.3 Kétismeretlenes egyenletrendszerek" },
+        { "id": "fejezet2-4", "title": "2.4 Szöveges feladatok" }
+    ]},
+    { "id": "fejezet3", "title": "3. Adatszervezés", "subheadings": [
+        { "id": "fejezet3-1", "title": "3.1 Descartes-szorzat" },
+        { "id": "fejezet3-2", "title": "3.2 Koordináta-rendszer" }
+    ]},
+    { "id": "fejezet4", "title": "4. A négyszög", "subheadings": [
+        { "id": "fejezet4-1", "title": "4.1 Szögek összege" },
+        { "id": "fejezet4-2", "title": "4.2 Paralelogramma" },
+        { "id": "fejezet4-3", "title": "4.4 Trapéz" },
+        { "id": "fejezet4-4", "title": "4.5 Kerület és terület" }
+    ]},
+    { "id": "fejezet5", "title": "5. A kör", "subheadings": [
+        { "id": "fejezet5-1", "title": "5.1 Kerületi szög" },
+        { "id": "fejezet5-2", "title": "5.2 Körbe írt sokszögek" },
+        { "id": "fejezet5-3", "title": "5.3 Kerület és terület" }
+    ]},
+    { "id": "fejezet6", "title": "6. Háromszögek hasonlósága", "subheadings": [
+        { "id": "fejezet6-1", "title": "6.1 Arányos szakaszok" },
+        { "id": "fejezet6-2", "title": "6.2 Thalész tétele" },
+        { "id": "fejezet6-3", "title": "6.3 Hasonlósági esetek" },
+        { "id": "fejezet6-4", "title": "6.4 Alkalmazások" }
+    ]},
+    { "id": "fejezet7", "title": "7. Metrikus összefüggések", "subheadings": [
+        { "id": "fejezet7-1", "title": "7.1 Magasság- és befogótétel" },
+        { "id": "fejezet7-2", "title": "7.2 Pitagorasz-tétel" },
+        { "id": "fejezet7-3", "title": "7.3 Trigonometria alapjai" },
+        { "id": "fejezet7-4", "title": "7.4 Háromszög megoldása" }
+    ]}
+  ],
+  "questions": [
+    { "id": "fejezet1", "title": "1. Valós számok halmaza", "content": [
+        { "type": "card", "id": "fejezet1-1", "title": "1.1 Természetes számok négyzetének négyzetgyöke", "htmlContent": "<p>Egy természetes szám négyzetének négyzetgyöke visszaadja az eredeti számot.</p><div class=\"formula\">√(n²) = n,  ahol n ∈ ℕ</div><div class=\"example\"><strong>Példa:</strong> √49 = 7, mert 7² = 49.</div><a class=\"quizBtn\" href=\"/tananyag/kviz-termeszetes-negyzetgyok\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-2", "title": "1.2 Irracionális számok", "htmlContent": "<p>Olyan valós számok, amelyek nem írhatók fel két egész szám hányadosaként. Tizedes alakjuk végtelen és nem szakaszos.</p><div class=\"formula\">√2 ≈ 1,41421356…</div><div class=\"example\"><strong>Példa:</strong> √2, π, √3 mind irracionálisak.</div><a class=\"quizBtn\" href=\"/tananyag/kviz-irracionalis-szamok\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-3", "title": "1.3 Tényezők kiemelése a gyökjel alól", "htmlContent": "<p>A gyökjel alól kiemelhetjük a négyzetszám-tényezőket: √(a²·b) = a√b</p><div class=\"formula\">√50 = √(25·2) = 5√2</div><div class=\"example\"><strong>Példa:</strong> √72 = √(36·2) = 6√2</div><a class=\"quizBtn\" href=\"/tananyag/kviz-gyoktelenites\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-4", "title": "1.4 Valós számok ábrázolása, összehasonlítás, abszolút érték", "htmlContent": "<p>Minden valós szám egyértelműen ábrázolható a számtengelyen. Az abszolút érték a számtengelyen mért távolság 0-tól.</p><div class=\"formula\">|x| = x, ha x ≥ 0; |x| = –x, ha x < 0</div><div class=\"example\"><strong>Példa:</strong> |–5| = 5; |3,2| = 3,2</div><a class=\"quizBtn\" href=\"/tananyag/kviz-szamtengely-abszolut\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-5", "title": "1.5 Műveletek valós számokkal", "htmlContent": "<p>Az összeadás, kivonás, szorzás, osztás ugyanúgy működik irracionális számokkal is, mint racionálisokkal.</p><div class=\"formula\">a√b ± c√b = (a ± c)√b</div><div class=\"example\"><strong>Példa:</strong> 3√5 + 2√5 = 5√5</div><a class=\"quizBtn\" href=\"/tananyag/kviz-muveletek-valos\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-6", "title": "1.6 Számtani és mértani közép", "htmlContent": "<p>Két pozitív szám számtani közepe: (a+b)/2; mértani közepe: √(ab)</p><div class=\"formula\">m<sub>a</sub> = (a + b)/2  m<sub>g</sub> = √(ab)</div><div class=\"example\"><strong>Példa:</strong> 4 és 9 mértani közepe: √36 = 6</div><a class=\"quizBtn\" href=\"/tananyag/kviz-kozepek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-7", "title": "1.7 x² = a alakú egyenletek", "htmlContent": "<p>Ha a ≥ 0, akkor x = ±√a; ha a < 0, nincs valós megoldás.</p><div class=\"formula\">x² = 25 ⇒ x = 5 vagy x = –5</div><div class=\"example\"><strong>Példa:</strong> x² = –9 → nincs valós megoldás</div><a class=\"quizBtn\" href=\"/tananyag/kviz-negyzetes-egyenletek\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet2", "title": "2. Lineáris egyenletek és egyenletrendszerek", "content": [
+        { "type": "card", "id": "fejezet2-1", "title": "2.1 Ekvivalens egyenlőségek és azonosságok", "htmlContent": "<p>Két egyenlet ekvivalens, ha ugyanazt a megoldáshalmazt adják.</p><div class=\"formula\">ax + b = 0 ⇔ ax = –b</div><div class=\"example\"><strong>Példa:</strong> 2x – 4 = 0 ⇔ 2x = 4 ⇔ x = 2</div><a class=\"quizBtn\" href=\"/tananyag/kviz-ekvivalens-egyenletek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-2", "title": "2.2 ax + b = 0 alakú egyenletek", "htmlContent": "<p>Elsőfokú egyismeretlenes egyenlet megoldása:</p><div class=\"formula\">x = –b/a (a ≠ 0)</div><div class=\"example\"><strong>Példa:</strong> 3x + 6 = 0 → 3x = –6 → x = –2</div><a class=\"quizBtn\" href=\"/tananyag/kviz-egyenletek-axb0\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-3", "title": "2.3 Kétismeretlenes lineáris egyenletrendszerek", "htmlContent": "<p>Két lineáris egyenletből álló rendszer megoldása helyettesítéssel vagy kiküszöböléssel.</p><div class=\"formula\">2x + 3y = 12<br>x – y = 1</div><div class=\"example\"><strong>Példa megoldás:</strong> x = 3, y = 2</div><a class=\"quizBtn\" href=\"/tananyag/kviz-egyenletrendszerek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-4", "title": "2.4 Szöveges feladatok egyenletekkel", "htmlContent": "<p>Szavakból egyenletet készítünk, majd megoldjuk.</p><div class=\"example\"><strong>Feladat:</strong> Két szám összege 20, különbségük 4. Mekkora a két szám?<br><strong>Megoldás:</strong> x + y = 20; x – y = 4 ⇒ x = 12, y = 8</div><a class=\"quizBtn\" href=\"/tananyag/kviz-szoveges-feladatok\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet3", "title": "3. Az adatszervezés elemei", "content": [
+        { "type": "card", "id": "fejezet3-1", "title": "3.1 Két halmaz Descartes-szorzata", "htmlContent": "<p>Az A és B halmaz Descartes-szorzata az összes lehetséges (a,b) rendezett párok halmaza, ahol a∈A és b∈B.</p><div class=\"formula\">A × B = { (a,b) | a ∈ A, b ∈ B }</div><div class=\"example\"><strong>Példa:</strong> Ha A = {1,2}, B = {x,y}, akkor A × B = {(1,x),(1,y),(2,x),(2,y)}.</div><a class=\"quizBtn\" href=\"/tananyag/kviz-descartes-szorzata\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet3-2", "title": "3.2 Derékszögű koordináta-rendszer", "htmlContent": "<p>Két egymásra merőleges számtengely alkotja: vízszintes x, függőleges y tengely. Minden pontot (x;y) koordináták írnak le.</p><div class=\"formula\">P(x;y)</div><div class=\"example\"><strong>Példa:</strong> A(3;–2) pont 3 egységre van az origótól jobbra és 2 egységre lefelé.</div><a class=\"quizBtn\" href=\"/tananyag/kviz-adatszervezes\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet4", "title": "4. A négyszög", "content": [
+        { "type": "card", "id": "fejezet4-1", "title": "4.1 Konvex négyszög szögeinek összege", "htmlContent": "<p>Bármely konvex négyszög belső szögeinek összege 360°.</p><div class=\"formula\">α + β + γ + δ = 360°</div><a class=\"quizBtn\" href=\"/tananyag/kviz-konvexnagyszag\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-2", "title": "4.2 Paralelogramma", "htmlContent": "<p>Ellentétes oldalai párhuzamosak és egyenlő hosszúak, szemközti szögei egyenlők.</p><div class=\"formula\">AB ∥ CD, AD ∥ BC és AB = CD, AD = BC</div><a class=\"quizBtn\" href=\"/tananyag/kviz-paralelogramma\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-3", "title": "4.4 Trapéz", "htmlContent": "<p>Legalább egy pár szemközti oldala párhuzamos. Középvonala a szárak felezőpontját összekötő szakasz, párhuzamos az alapokkal és hossza az alapok számtani közepe.</p><div class=\"formula\">k = (a + c)/2</div><a class=\"quizBtn\" href=\"/tananyag/kviz-trapaz\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-4", "title": "4.5 Kerület és terület", "htmlContent": "<p>Téglalap esetén: K = 2(a+b), T = a·b</p><div class=\"example\"><strong>Példa:</strong> a=5 cm, b=3 cm → K=16 cm, T=15 cm².</div><a class=\"quizBtn\" href=\"/tananyag/kviz-keruletterulet\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet5", "title": "5. A kör", "content": [
+        { "type": "card", "id": "fejezet5-1", "title": "5.1 Kerületi szög és érintőszabályok", "htmlContent": "<p>Kerületi szög fele a középponti szögnek, ha azonos ívhez tartoznak.</p><div class=\"formula\">α = β / 2</div><a class=\"quizBtn\" href=\"/tananyag/kviz-keruletszog\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet5-2", "title": "5.2 Körbe írt szabályos sokszögek", "htmlContent": "<p>Oldalhossz: a = 2r·sin(π/n), ahol n az oldalak száma.</p><a class=\"quizBtn\" href=\"/tananyag/kviz-szabalyossokszogek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet5-3", "title": "5.3 Kerület és terület", "htmlContent": "<div class=\"formula\">K = 2rπ  T = r²π</div><div class=\"example\"><strong>Példa:</strong> r = 4 cm → K ≈ 25,13 cm, T ≈ 50,27 cm².</div><a class=\"quizBtn\" href=\"/tananyag/kviz-kor\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet6", "title": "6. Háromszögek hasonlósága", "content": [
+        { "type": "card", "id": "fejezet6-1", "title": "6.1 Arányos szakaszok", "htmlContent": "<p>Ha egy szakaszt n részre osztunk, akkor az arányok megtartása mellett bármely rész hossza az egész 1/n-ed része.</p><a class=\"quizBtn\" href=\"/tananyag/kviz-aranyosszakaszok\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet6-2", "title": "6.2 Thalész tétele", "htmlContent": "<p>Ha egy kör átmérőjének végpontjaihoz egy tetszőleges pontot kapcsolunk, akkor a keletkező szög derékszög.</p><div class=\"formula\">∠ACB = 90°</div><a class=\"quizBtn\" href=\"/tananyag/kviz-thalasztatele\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet6-3", "title": "6.3 Hasonlósági esetek", "htmlContent": "<ul><li>AA (két szög egyenlő)</li><li>SAS (két szög és a közrefogó oldal aránya)</li><li>SSS (minden oldal aránya)</li></ul><a class=\"quizBtn\" href=\"/tananyag/kviz-hasonlosagiesetek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet6-4", "title": "6.4 Alkalmazások", "htmlContent": "<p>Távolság mérése hasonló háromszögekkel: h₁/h₂ = d₁/d₂</p><div class=\"example\"><strong>Példa:</strong> Eiffel-torony magasságának becslése árnyék alapján.</div><a class=\"quizBtn\" href=\"/tananyag/kviz-hasonlosag\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet7", "title": "7. Metrikus összefüggések derékszögű háromszögben", "content": [
+        { "type": "card", "id": "fejezet7-1", "title": "7.1 Magasságtétel, befogótétel", "htmlContent": "<p>Magasság: h² = p·q  Befogó: a² = p·c, b² = q·c</p><a class=\"quizBtn\" href=\"/tananyag/kviz-magassagtatelbefogatatel\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet7-2", "title": "7.2 Pitagorasz-tétel", "htmlContent": "<div class=\"formula\">a² + b² = c²</div><div class=\"example\"><strong>Példa:</strong> a=6 cm, b=8 cm → c=√(36+64)=10 cm</div><a class=\"quizBtn\" href=\"/tananyag/kviz-pitagorasz\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet7-3", "title": "7.3 Trigonometriai alapfogalmak", "htmlContent": "<div class=\"formula\">sin α = szemközti / átfogó  cos α = szomszédos / átfogó  tan α = szemközti / szomszédos</div><a class=\"quizBtn\" href=\"/tananyag/kviz-trigonometriaialapfogalmak\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet7-4", "title": "7.4 Derékszögű háromszög megoldása", "htmlContent": "<p>Adott két adat esetén kiszámíthatók a hiányzó oldalak és szögek.</p><a class=\"quizBtn\" href=\"/tananyag/kviz-trigonometria\">Gyakorló Kvíz →</a>" }
+    ]}
+  ]
+}

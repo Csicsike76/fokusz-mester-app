@@ -1,8 +1,76 @@
 {
-  "title": "Muhely asszisztensek",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 8. hét: A hétköznapi MI-asszisztensek",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely asszisztensek\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére tudatosabban és hatékonyabban fogod használni a telefonod beépített hangasszisztensét.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Zsebedben Lapuló Dzsinn"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére tudatosabban és hatékonyabban fogod használni a telefonod beépített hangasszisztensét. Megtanulod, milyen típusú feladatokban erősek, és hol vannak a korlátaik, valamint megérted, hogyan \"gondolkodnak\" a parancsaidról.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<p>Nincs szükség új eszközre, csak a telefonodra!</p><ul><li>Okostelefon, bekapcsolt és beállított hangasszisztenssel:<ul><li><strong>iOS (iPhone):</strong> Siri</li><li><strong>Android:</strong> Google Assistant (\"Oké, Google\")</li></ul></li><li>Egy jegyzetfüzet vagy digitális dokumentum a \"Tesztnapló\" vezetéséhez.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Zsebedben Lapuló Dzsinn",
+      "content": "<p>A telefonod hangasszisztense olyan, mint egy dzsinn a palackban: parancsra vár, hogy teljesítse a kívánságaidat. De vajon minden kívánságot megért? Ma stressztesztnek vetjük alá a saját dzsinnünket! Ahelyett, hogy csak az időjárást kérdeznénk, egyre nehezebb és trükkösebb feladatokat adunk neki. A cél, hogy megfigyeljük, hol van az a pont, ahol a varázslat megtörik, és megértsük, miért.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok: Az Asszisztens Tesztpályája",
+      "content": "<p>A feladatod, hogy végigmenj az alábbi 5 nehézségi szinten, és minden parancs után kitöltsd a \"Tesztnaplódat\". A naplóban minden parancshoz jegyezd fel, hogy <strong>Sikeres volt-e (igen/nem)</strong>, és írj egy <strong>rövid megjegyzést</strong> (pl. \"Tökéletesen működött\", \"Félreértette a neveket\", \"Inkább csak egy Google keresést adott\").</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "A Te Tesztnaplód",
+          "content": "<table><thead><tr><th>Szint</th><th>Parancs</th><th>Sikeres? (I/N)</th><th>Megjegyzés</th></tr></thead><tbody><tr><td>1.</td><td><span class=\"command\">\"Milyen az időjárás?\"</span></td><td></td><td></td></tr><tr><td>2.</td><td><span class=\"command\">\"Emlékeztess holnap délután 3-kor, hogy...\"</span></td><td></td><td></td></tr><tr><td>3.</td><td><span class=\"command\">\"Navigálj a legközelebbi pizzériába!\"</span></td><td></td><td></td></tr><tr><td>4.</td><td><span class=\"command\">\"Küldj üzenetet [Barát neve]-nak, hogy...\"</span></td><td></td><td></td></tr><tr><td>5.</td><td><span class=\"command\">\"Játssz le valami vidám zenét!\"</span></td><td></td><td></td></tr></tbody></table>"
+        },
+        {
+          "title": "A Tesztpálya",
+          "content": "<p>Mondd ki a telefonodnak a következő parancsokat, és töltsd a naplót!</p><ol><li><strong>1. Szint: Egyszerű tények.</strong> Parancs: <span class=\"command\">\"Milyen magas a Mount Everest?\"</span> vagy <span class=\"command\">\"Ki írta a Harry Pottert?\"</span><br><em>(Ez a legegyszerűbb feladat: kulcsszavak alapján adatot kell kikeresnie.)</em></li><li><strong>2. Szint: A telefon funkcióinak vezérlése.</strong> Parancs: <span class=\"command\">\"Állíts be egy ébresztőt holnap reggel 7-re!\"</span> vagy <span class=\"command\">\"Indíts egy 5 perces időzítőt!\"</span><br><em>(Itt már a telefon belső alkalmazásait kell irányítania.)</em></li><li><strong>3. Szint: Kontextus és követő kérdés.</strong> Első parancs: <span class=\"command\">\"Ki Magyarország miniszterelnöke?\"</span>. Miután válaszolt, második parancs: <span class=\"command\">\"És hány éves?\"</span><br><em>(Megérti-e, hogy a második kérdés (\"ő\") az első válasz alanyára vonatkozik? Ez a kontextuskezelés.)</em></li><li><strong>4. Szint: Összetett, több lépéses kérés.</strong> Parancs: <span class=\"command\">\"Keress egy jó olasz éttermet a közelemben, ami nyitva van, és hívd fel nekem!\"</span><br><em>(Itt több feltételt kell egyszerre kezelnie és több alkalmazást kellene használnia. Valószínűleg el fog akadni.)</em></li><li><strong>5. Szint: Absztrakt, kreatív kérés.</strong> Parancs: <span class=\"command\">\"Mondj egy viccet a mesterséges intelligenciáról!\"</span> vagy <span class=\"command\">\"Írj egy rövid, négy soros verset a tavaszról!\"</span><br><em>(Itt már nem elég adatot kikeresni, valami újat kell \"alkotnia\".)</em></li></ol>"
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok",
+      "content": "<p>Most, hogy láttad az asszisztensedet akció közben, gondolkozz el a tapasztaltakon!</p><ul><li><strong>Hol a határ?</strong> A Tesztnaplód alapján melyik volt az a szint, ahol az asszisztense-d először hibázott vagy bizonytalankodott? Milyen típusú feladatok mennek neki jól (pl. konkrét adatok, egyszerű parancsok), és mik okoznak nehézséget (pl. kontextus, kreativitás, összetett logika)?</li><li><strong>Ez valódi \"megértés\"?</strong> Amikor az asszisztens helyesen válaszolt, szerinted valóban \"megértette\" a kérdésedet, mint egy ember? Vagy inkább csak a kulcsszavakat (\"időjárás\", \"ébresztő\") ismerte fel, és aktivált egy előre beprogramozott funkciót? Miben más ez, mint egy emberi beszélgetés?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: Tervezd meg a \"tökéletes\" asszisztenst!",
+      "content": "<p>Most, hogy ismered a korlátokat, engedd szabadjára a fantáziádat!</p><p>A feladatod, hogy írj egy rövid, 3-5 pontos listát egy dokumentumba a következő címmel:</p><h3 style=\"text-align:center;\">\"Az én szuper-asszisztensem: 3 funkció, amire igazán szükségem lenne\"</h3><p>A listában olyan parancsokat vagy képességeket írj le, amiket a jelenlegi asszisztensed nem tud, de neked nagy segítséget jelentene a mindennapi életedben vagy a tanulásban. Legyél kreatív!</p><p><strong>Például:</strong></p><ul><li>\"Olvassa fel nekem a biosz leckét, és utána kérdezzen ki belőle!\"</li><li>\"Keresse meg a legjobb mémeket a barátaimnak a belsős poénjaink alapján!\"</li><li>\"Figyelmeztessen, ha már túl sokat görgetem a TikTokot, és javasoljon helyette egy jobb programot!\"</li></ul><p>A listádat mentsd el, a következő órán megoszthatod az ötleteidet!</p>"
+    }
+  ]
 }

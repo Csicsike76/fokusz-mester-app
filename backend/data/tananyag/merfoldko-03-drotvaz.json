@@ -1,8 +1,74 @@
 {
-  "title": "Merfoldko 03 drotvaz",
-  "subject": "altalanos",
+  "title": "AIMI Stúdió - M03: Felhasználói Élmény és Drótváz",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Merfoldko 03 drotvaz\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A mérföldkő végére a csapatotok elkészíti a projektetek első vizuális \"tervrajzát\".",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Ház Alaprajza"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. A Mérföldkő Kihívása"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A mérföldkő végére a csapatotok elkészíti a projektetek első vizuális \"tervrajzát\". Létrehoztok egy <strong>felhasználói utat (user flow)</strong>, amely leírja a legfontosabb folyamatot, és elkészítitek az ehhez tartozó <strong>drótvázakat (wireframes)</strong>, amelyek a projektetek képernyőinek egyszerű, funkcionális vázlatai.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Ház Alaprajza",
+      "content": "<p>Mielőtt egy építész elkezdené kiválasztani a falak színét vagy a csillárokat, készít egy alaprajzot. Az alaprajz megmutatja, hol lesznek a szobák, az ajtók, az ablakok – a ház funkcionális vázát. A drótváz pontosan ilyen: a te projekted (legyen az app vagy weboldal) fekete-fehér alaprajza. Nem a dizájn a lényeg, hanem a logika és a használhatóság. Ma ti lesztek az MI-vel támogatott építészek, akik megtervezik a digitális házuk alapjait.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p>Vegyétek elő a véglegesített \"Projekt Vázlatotokat\" (One-Pager)!</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Legfontosabb Feladat Meghatározása",
+          "content": "<p>Minden jó termék egyetlen, kulcsfontosságú feladatot old meg igazán jól. Mi lesz ez a ti esetetekben? Kérjetek segítséget az MI-től a fókuszáláshoz!</p><p><strong>Feladat:</strong> Beszéljétek meg a kapott javaslatokat, és fogalmazzátok meg egyetlen mondatban a projektetek fő felhasználói útját! (Pl. \"A felhasználó képes legyen 1 perc alatt rögzíteni egy új házi feladatot és beállítani hozzá egy emlékeztetőt.\")</p>",
+          "prompts": ["Viselkedj úgy, mint egy termékmenedzser! A mi projektünk egy \"[a megoldásotok leírása]\", ami a \"[a problémátok leírása]\" problémát oldja meg. Mi az az EGYETLEN, legfontosabb feladat vagy \"utazás\" (user journey), amit a felhasználónak végre kell tudnia hajtani a mi megoldásunkkal, hogy sikeresnek érezze magát?"]
+        },
+        {
+          "title": "2. Feladat: A Felhasználói Út (User Flow) Lebontása",
+          "content": "<p>Most, hogy tudjátok, mi a fő útvonal, bontsuk le lépésekre!</p><p><strong>Feladat:</strong> A kapott lista lesz a felhasználói útitervetek! Finomítsátok, ha szükséges, és másoljátok be a projektdokumentumba. (Pl. 1. App megnyitása, 2. Bejelentkezés, 3. \"Új feladat\" gombra kattintás, 4. Adatok kitöltése, 5. Mentés.)</p>",
+          "prompts": ["A mi fő felhasználói utunk a következő: \"[ide másoljátok az előző feladatban megfogalmazott mondatot]\". Bontsd le ezt a folyamatot 5-7 egyszerű, logikai lépésre, amit a felhasználónak meg kell tennie! A lépések legyenek számozva."]
+        },
+        {
+          "title": "3. Feladat: A Képernyők Megtervezése (Drótvázazás)",
+          "content": "<p>Minden lépés a felhasználói úton egy új \"képernyőt\" vagy nézetet jelent. Most kérjük meg az MI-t, hogy segítsen megtervezni ezeket a képernyőket! Nem rajzolni fog, hanem listát ad a szükséges elemekről.</p><p><strong>Feladat:</strong> Ismételjétek meg ezt a promptot a felhasználói útitervetek <strong>legalább 3 legfontosabb lépésére</strong>! A kapott listák alapján vegyetek elő papírt és ceruzát (vagy egy egyszerű online rajzeszközt, pl. Canva, Google Rajzok), és <strong>rajzoljátok le a drótvázakat!</strong></p><p><strong>Fontos:</strong> A drótváz legyen csúnya! Csak dobozokat, vonalakat és egyszerű szöveget használjatok. A cél a funkció, nem a dizájn!</p>",
+          "prompts": ["Viselkedj úgy, mint egy UX/UI dizájner! A felhasználói utunk 3. lépése a következő: \"[ide másoljátok a 3. lépést, pl. 'Új feladat' gombra kattintás utáni képernyő]\". Milyen alapvető elemeknek (gombok, beviteli mezők, szövegek) kell szerepelnie ezen a képernyőn, hogy a felhasználó könnyen elvégezhesse a feladatát? Készíts egy egyszerű listát!"]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>Egyszerűség vs. Funkciók:</strong> Az MI hajlamos lehet sok-sok funkciót javasolni egy képernyőre. A ti feladatotok, hogy szelektáljatok! Melyik a 3 legfontosabb elem egy képernyőn? Mi az, ami nélkül a felhasználó nem tudja elvégezni a feladatát? Miért jobb egy egyszerűbb, letisztultabb felület, mint egy zsúfolt?</li><li><strong>A Láthatatlan Munka:</strong> A drótvázak elkészítése során rájöttetek olyan problémákra, amikre eddig nem is gondoltatok? (Pl. \"Hova tegyük a 'Mégse' gombot?\", \"Mi történik, ha a felhasználó rossz dátumot ad meg?\") Miért segít a vizuális tervezés a rejtett logikai hibák felfedezésében?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. A Mérföldkő Kihívása: Az Első Vizuális Terv",
+      "content": "<p>A két hét munkájának eredménye a projektetek első, kézzelfogható vizuális terve.</p><p><strong>Bővítsétek a közös projektdokumentumotokat a következőkkel:</strong></p><ol><li><strong>A Fő Felhasználói Út (User Flow):</strong> A pontokba szedett, véglegesített lista a felhasználó lépéseiről.</li><li><strong>A Drótvázak (Wireframes):</strong> Készítsetek fotót vagy képernyőképet a <strong>legalább 3 legfontosabb képernyőről</strong> készült drótvázaitokról, és illesszétek be őket a dokumentumba! Minden drótváz alá írjátok oda, hogy a felhasználói út melyik lépéséhez tartozik.</li></ol><p>Ez a dokumentum lesz az alapja a következő fázisnak, ahol ezeket a \"csontvázakat\" öltöztetjük fel gyönyörű dizájnnal. Jó tervezést!</p>"
+    }
+  ]
 }

@@ -1,0 +1,129 @@
+{
+  "title": "Teljes Képletgyűjtemény - 8. Osztály Matematika",
+  "subject": "matematika",
+  "grade": 8,
+  "category": "premium_lesson",
+  "description": "Minden fontos tétel, definíció és példa egy helyen a 8. osztályos matematika tananyaghoz.",
+  "toc": [
+    { "id": "fejezet1", "title": "1. FEJEZET: Intervallumok. Egyenlőtlenségek ℝ-ben", "subheadings": [
+        { "id": "fejezet1-1", "title": "Halmazok meghatározása" },
+        { "id": "fejezet1-2", "title": "Halmazok közötti reláció" },
+        { "id": "fejezet1-3", "title": "Valós számok ábrázolása" },
+        { "id": "fejezet1-4", "title": "Intervallumok ábrázolása" },
+        { "id": "fejezet1-5", "title": "Intervallumokkal végzett műveletek" },
+        { "id": "fejezet1-6", "title": "Relációs jelek" },
+        { "id": "fejezet1-7", "title": "ax + b ≤ 0 egyenlőtlenségek" },
+        { "id": "fejezet1-8", "title": "Visszavezethető egyenlőtlenségek" }
+    ]},
+    { "id": "fejezet2", "title": "2. FEJEZET: Algebrai számítások ℝ-ben", "subheadings": [
+        { "id": "fejezet2-1", "title": "Valós számokkal végzett műveletek" },
+        { "id": "fejezet2-2", "title": "Betűkkel jelölt valós számok" },
+        { "id": "fejezet2-3", "title": "Binom négyzete" },
+        { "id": "fejezet2-4", "title": "Rövidített képletek alkalmazása" },
+        { "id": "fejezet2-5", "title": "Tényezőkre bontás kiemeléssel" },
+        { "id": "fejezet2-6", "title": "Tényezőkre bontás képletekkel" },
+        { "id": "fejezet2-7", "title": "További tényezőkre bontási módszerek" },
+        { "id": "fejezet2-8", "title": "Algebrai törtek" },
+        { "id": "fejezet2-9", "title": "Műveletek algebrai törtekkel" },
+        { "id": "fejezet2-10", "title": "Másodfokú egyenletek" },
+        { "id": "fejezet2-11", "title": "Másodfokú egyenletekkel megoldható feladatok" }
+    ]},
+    { "id": "fejezet3", "title": "3. FEJEZET: Függvények", "subheadings": [
+        { "id": "fejezet3-1", "title": "A függvény fogalma" },
+        { "id": "fejezet3-2", "title": "A függvény grafikonja" },
+        { "id": "fejezet3-3", "title": "f(x) = ax + b alakú függvények" },
+        { "id": "fejezet3-4", "title": "Lineáris függvények ábrázolása" },
+        { "id": "fejezet3-5", "title": "Adatok rendezése" },
+        { "id": "fejezet3-6", "title": "Statisztikai ábrázolás" },
+        { "id": "fejezet3-7", "title": "Centrális tendencia mutatói" }
+    ]},
+    { "id": "fejezet4", "title": "4. FEJEZET: A térmértan elemei", "subheadings": [
+        { "id": "fejezet4-1", "title": "Pont, egyenes, sík" },
+        { "id": "fejezet4-2", "title": "A sík meghatározása" },
+        { "id": "fejezet4-3", "title": "Két egyenes kölcsönös helyzete" },
+        { "id": "fejezet4-4", "title": "Egyenes és sík kölcsönös helyzete" },
+        { "id": "fejezet4-5", "title": "Két sík kölcsönös helyzete" },
+        { "id": "fejezet4-6", "title": "Párhuzamos síkok" },
+        { "id": "fejezet4-7", "title": "Alapsíkkal párhuzamos síkmetszetek" },
+        { "id": "fejezet4-8", "title": "Merőleges egyenesek" },
+        { "id": "fejezet4-9", "title": "Két párhuzamos sík távolsága" },
+        { "id": "fejezet4-10", "title": "Merőleges síkok" },
+        { "id": "fejezet4-11", "title": "Vetület a síkra" },
+        { "id": "fejezet4-12", "title": "Egyenes és sík hajlásszöge" },
+        { "id": "fejezet4-13", "title": "Lapszög" },
+        { "id": "fejezet4-14", "title": "A három merőleges tétele" },
+        { "id": "fejezet4-15", "title": "A három merőleges tételének fordítottja" }
+    ]},
+    { "id": "fejezet5", "title": "5. FEJEZET: Testek felszíne és térfogata", "subheadings": [
+        { "id": "fejezet5-1", "title": "Távolságmérés testekben" },
+        { "id": "fejezet5-2", "title": "Hajlásszögek kiszámítása" },
+        { "id": "fejezet5-3", "title": "Hasáb felszíne és térfogata" },
+        { "id": "fejezet5-4", "title": "Gúla felszíne és térfogata" },
+        { "id": "fejezet5-5", "title": "Csonkagúla felszíne és térfogata" },
+        { "id": "fejezet5-6", "title": "Henger felszíne és térfogata" },
+        { "id": "fejezet5-7", "title": "Kúp felszíne és térfogata" },
+        { "id": "fejezet5-8", "title": "Gömb felszíne és térfogata" }
+    ]}
+  ],
+  "questions": [
+    { "id": "fejezet1", "title": "1. FEJEZET: Intervallumok. Egyenlőtlenségek ℝ-ben", "content": [
+        { "type": "card", "id": "fejezet1-1", "title": "Halmazok meghatározása elemeik közös tulajdonságával", "htmlContent": "<p>A halmazokat meghatározhatjuk elemeik felsorolásával vagy elemeik közös tulajdonságának megadásával.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-halmazok-meghataroza\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-2", "title": "Halmazok közötti reláció. Halmazokkal végzett műveletek", "htmlContent": "<p>A halmazok között különböző relációk léteznek (részhalmazok, egyenlőség), és velük különféle műveleteket végezhetünk.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-halmazmuveletek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-3", "title": "Valós számok ábrázolása a számtengelyen", "htmlContent": "<p>A valós számokat a számtengely pontjainak megfeleltetjük.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-valos-szamok-abrazolas\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-4", "title": "Intervallumok ábrázolása a számtengelyen", "htmlContent": "<p>Az intervallumok a számtengely összefüggő részeit reprezentálják.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-intervallumok-abrazolas\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-5", "title": "Intervallumokkal végzett műveletek", "htmlContent": "<p>Az intervallumokkal is végezhetjük a halmazokra jellemző műveleteket.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-intervallumok-muveletek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-6", "title": "Valós számok halmazán értelmezett ≤, ≥ relációs jelek", "htmlContent": "<p>A valós számok között rendezési reláció van értelmezve.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-relacios-jelek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-7", "title": "ax + b ≤ 0 alakú egyenlőtlenségek", "htmlContent": "<p>Az elsőfokú egyenlőtlenségek megoldását az egyenlőtlenség tulajdonságainak felhasználásával végezzük.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-elso-foku-egyenlotlensegek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-8", "title": "ax + b ≤ 0 alakú egyenlőtlenségre visszavezethető egyenlőtlenségek", "htmlContent": "<p>Összetettebb egyenlőtlenségeket algebrai átalakításokkal egyszerű alakra hozhatunk.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-visszavezetett-egyenlotlensegek\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet2", "title": "2. FEJEZET: Algebrai számítások ℝ-ben", "content": [
+        { "type": "card", "id": "fejezet2-1", "title": "Valós számokkal végzett műveletek", "htmlContent": "<p>A valós számok halmaza (ℝ) magában foglalja a racionális és irracionális számokat.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-valos-szamok-muveletek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-2", "title": "Betűkkel jelölt valós számokkal végzett műveletek", "htmlContent": "<p>Az algebrában betűket (változókat) használunk számok jelölésére.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-betukkel-muveletek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-3", "title": "Binom négyzete. Két tag összege és különbsége", "htmlContent": "<p>A nevezetes azonosságok olyan szorzatok, melyek gyakran előfordulnak.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-binom-negyzete\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-4", "title": "Rövidített számítási képletek alkalmazása", "htmlContent": "<p>A nevezetes azonosságok nemcsak szorzásra, hanem egyszerűsítésére és tényezőkre bontására is használhatók.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-rovidtett-keplet-alkalmazas\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-5", "title": "Tényezőkre bontás közös tényező kiemelésével", "htmlContent": "<p>A tényezőkre bontás az a folyamat, amikor egy összeget szorzattá alakítunk.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-tenyezokre-bontas-kiemeles\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-6", "title": "Tényezőkre bontás rövidített képletekkel", "htmlContent": "<p>A nevezetes azonosságokat 'jobbról balra' olvasva tényezőkre bontási képleteket kapunk.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-tenyezokre-bontas-rovidtett\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-7", "title": "További tényezőkre bontási módszerek", "htmlContent": "<p>Összetettebb, több tagú kifejezéseknél néha a csoportosításos módszer vezet célra.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-tovabbi-tenyezokre-bontas\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-8", "title": "Algebrai törtek", "htmlContent": "<p>Az algebrai tört olyan tört, amelynek nevezőjében változó (betű) szerepel.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-algebrai-tortek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-9", "title": "Algebrai törtekkel végzett műveletek", "htmlContent": "<p>Az algebrai törtekkel ugyanúgy végezhetünk műveleteket, mint a számokkal.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-algebrai-tortek-muveletek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-10", "title": "Egy ismeretlenes másodfokú egyenletek", "htmlContent": "<p>Az ax² + bx + c = 0 (ahol a≠0) alakú egyenleteket másodfokú egyenleteknek nevezzük.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-masodfoku-egyenletek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-11", "title": "ax² + bx + c = 0 egyenletekkel megoldható feladatok", "htmlContent": "<p>Számos gyakorlati probléma matematikai modellje egy másodfokú egyenlet.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-masodfoku-feladatok\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet3", "title": "3. FEJEZET: Függvények", "content": [
+        { "type": "card", "id": "fejezet3-1", "title": "A függvény fogalma. Megadási módjai", "htmlContent": "<p>A függvény egy hozzárendelés két halmaz elemei között.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-fuggveny-fogalma\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet3-2", "title": "A függvény grafikonja", "htmlContent": "<p>A függvény grafikonja az (x, f(x)) koordinátájú pontok halmaza.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-fuggveny-grafikonja\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet3-3", "title": "f(x) = ax + b alakú függvények", "htmlContent": "<p>Az f(x) = ax + b alakú függvényeket lineáris függvényeknek nevezzük.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-linearis-fuggvenyek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet3-4", "title": "f(x) = ax + b függvények grafikus ábrázolása", "htmlContent": "<p>Egy lineáris függvény grafikonjának megrajzolásához elég két pontot meghatározni.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-linearis-abrazolas\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet3-5", "title": "Adatok rendezése és rendszerezése", "htmlContent": "<p>A statisztika adatok gyűjtésével, rendszerezésével és elemzésével foglalkozik.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-adatok-rendezese\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet3-6", "title": "Statisztikai adatsorok mértani ábrázolása", "htmlContent": "<p>Az adatokat diagramok segítségével tehetjük szemléletessé.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-statisztikai-abrazolas\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet3-7", "title": "A centrális tendencia mutatói", "htmlContent": "<p>A centrális tendencia mutatói egyetlen számmal próbálják jellemezni az adatsor 'közepét'.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-centralis-tendencia\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet4", "title": "4. FEJEZET: A térmértan elemei", "content": [
+        { "type": "card", "id": "fejezet4-1", "title": "Pont, egyenes, sík: jelölések, ábrázolás", "htmlContent": "<p>A térmértan alapfogalmai a pont, az egyenes és a sík.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-pont-egyenes-sik\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-2", "title": "A sík meghatározása", "htmlContent": "<p>Egy síkot egyértelműen meghatároz három, nem egy egyenesen lévő pont.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-sik-megalapitas\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-3", "title": "Két egyenes kölcsönös helyzete a térben", "htmlContent": "<p>Két egyenes lehet metsző, párhuzamos, azonos vagy kitérő.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-ket-egyenes-helyzete\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-4", "title": "Egyenes és sík kölcsönös helyzete", "htmlContent": "<p>Lehet metsző, párhuzamos, vagy illeszkedő.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-egyenes-sik-helyzete\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-5", "title": "Két sík kölcsönös helyzete", "htmlContent": "<p>Lehetnek párhuzamosak vagy metszők.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-ket-sik-helyzete\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-6", "title": "Párhuzamos síkok", "htmlContent": "<p>Két sík párhuzamos, ha nincs közös pontjuk.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-parhuzamos-sikok\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-7", "title": "Alapsíkkal párhuzamos síkmetszetek", "htmlContent": "<p>Hasáboknál egybevágó, gúláknál hasonló az alaplaphoz.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-sikmetszetek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-8", "title": "Merőleges egyenesek, síkra merőleges egyenes", "htmlContent": "<p>Egy egyenes merőleges egy síkra, ha a sík minden egyenesére merőleges.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-meroleges-egyenesek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-9", "title": "Két párhuzamos sík távolsága", "htmlContent": "<p>A távolság a két síkra merőleges szakasz hossza.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-sikok-tavolsaga\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-10", "title": "Merőleges síkok, átlós metszetek", "htmlContent": "<p>Két sík merőleges, ha hajlásszögük 90°.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-meroleges-sikok\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-11", "title": "Pont, szakasz és egyenes vetülete a síkra", "htmlContent": "<p>Egy alakzat vetületét a pontjainak vetületei alkotják.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-vetulet-sikra\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-12", "title": "Egyenes és sík hajlásszöge", "htmlContent": "<p>Az egyenes és a síkra eső merőleges vetülete által bezárt szög.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-egyenes-sik-hajlas\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-13", "title": "Lapszög, lapszöghöz tartozó síkszög", "htmlContent": "<p>Két metsző sík hajlásszögét lapszögnek nevezzük.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-lapszog\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-14", "title": "A három merőleges tétele", "htmlContent": "<p>A térbeli és síkbeli merőlegesség kapcsolata.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-harom-meroleges\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-15", "title": "A három merőleges tételének fordított tételei", "htmlContent": "<p>A tétel megfordítása is igaz.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-harom-meroleges-forditott\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet5", "title": "5. FEJEZET: Testek felszíne és térfogata", "content": [
+        { "type": "card", "id": "fejezet5-1", "title": "Távolságmérés mértani testekben", "htmlContent": "<p>Két pont távolsága a térben az őket összekötő egyenes szakasz.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-tavolsagmeres\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet5-2", "title": "Hajlásszögek kiszámítása", "htmlContent": "<p>Térbeli testek hajlásszögeit derékszögű háromszögek segítségével számoljuk ki.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-hajlasszogek\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet5-3", "title": "Az egyenes hasáb felszíne és térfogata", "htmlContent": "<p>Felszín: A = 2*Tₐ + Tₚ. Térfogat: V = Tₐ * m.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-hasab-felszin-terfogat\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet5-4", "title": "A szabályos gúla felszíne és térfogata", "htmlContent": "<p>Felszín: A = Tₐ + Tₚ. Térfogat: V = (Tₐ * m) / 3.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-gula-felszin-terfogat\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet5-5", "title": "A szabályos csonka gúla felszíne és térfogata", "htmlContent": "<p>Felszín: A = T₁ + T₂ + Tₚ. Térfogat: V = (m/3) * (T₁ + √(T₁T₂) + T₂).</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-csonka-gula\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet5-6", "title": "Az egyenes körhenger felszíne és térfogata", "htmlContent": "<p>Felszín: A = 2πr² + 2πrm. Térfogat: V = πr²m.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-henger-felszin-terfogat\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet5-7", "title": "A kúp felszíne és térfogata", "htmlContent": "<p>Felszín: A = πr² + πra. Térfogat: V = (πr²m) / 3.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-kup-felszin-terfogat\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet5-8", "title": "A gömb felszíne és térfogata", "htmlContent": "<p>Felszín: A = 4πr². Térfogat: V = (4/3)πr³.</p><a class=\"quiz-btn\" href=\"/tananyag/kviz-gomb-felszin-terfogat\">Gyakorló Kvíz →</a>" }
+    ]}
+  ]
+}

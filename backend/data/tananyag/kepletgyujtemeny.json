@@ -1,64 +1,66 @@
 {
-  "title": "Képlet- és Tételtár",
-  "subject": "altalanos",
+  "title": "Képlet- és Tételtár Központ",
+  "subject": "matematika",
   "grade": 0,
-  "category": "premium_tool",
+  "category": "hub_page",
   "description": "Válassz tantárgyat és évfolyamot a folytatáshoz!",
-  "questions": [],
-  "topics": [
-    {
-      "title": "Matematika",
-      "color": "#CD2A3E",
-      "items": [
-        {
-          "title": "5. Osztály",
-          "link": "/tananyag/matek-kepletek-5",
-          "disabled": true,
-          "text": "(Fejlesztés alatt)"
-        },
-        {
-          "title": "6. Osztály",
-          "link": "/tananyag/matek-kepletek-6",
-          "disabled": false,
-          "text": "→"
-        },
-        {
-          "title": "7. Osztály",
-          "link": "/tananyag/matek-kepletek-7",
-          "disabled": false,
-          "text": "→"
-        },
-        {
-          "title": "8. Osztály",
-          "link": "/tananyag/matek-kepletek-8",
-          "disabled": false,
-          "text": "→"
-        }
-      ]
-    },
-    {
-      "title": "Fizika",
-      "color": "#005A9C",
-      "items": [
-        {
-          "title": "6. Osztály",
-          "link": "/tananyag/fizika-kepletek-6",
-          "disabled": true,
-          "text": "(Fejlesztés alatt)"
-        },
-        {
-          "title": "7. Osztály",
-          "link": "/tananyag/fizika-kepletek-7",
-          "disabled": true,
-          "text": "(Fejlesztés alatt)"
-        },
-        {
-          "title": "8. Osztály",
-          "link": "/tananyag/fizika-kepletek-8",
-          "disabled": true,
-          "text": "(Fejlesztés alatt)"
-        }
-      ]
-    }
-  ]
+  "toolData": {
+    "type": "hub-page",
+    "header": "Képlet- és Tételtár 📚",
+    "subheader": "Válassz tantárgyat és évfolyamot a folytatáshoz!",
+    "sections": [
+      {
+        "title": "Matematika",
+        "cards": [
+          {
+            "styleType": "grade",
+            "mainText": "5. Osztály",
+            "subText": "Alapvető képletek és tételek",
+            "link": "/tananyag/kepletek-5-osztaly"
+          },
+          {
+            "styleType": "grade",
+            "mainText": "6. Osztály",
+            "subText": "Arányosság, geometria alapok",
+            "link": "/tananyag/kepletek-6-osztaly"
+          },
+          {
+            "styleType": "grade",
+            "mainText": "7. Osztály",
+            "subText": "Algebra és geometria",
+            "link": "/tananyag/kepletek-7-osztaly"
+          },
+          {
+            "styleType": "grade",
+            "mainText": "8. Osztály",
+            "subText": "Függvények, kombinatorika",
+            "link": "/tananyag/kepletek-8-osztaly"
+          }
+        ]
+      },
+      {
+        "title": "Fizika",
+        "cards": [
+          {
+            "styleType": "grade",
+            "mainText": "6. Osztály",
+            "subText": "Mechanika, hőtan alapjai",
+            "link": "/tananyag/fizikakepletek-6-osztaly"
+          },
+          {
+            "styleType": "grade",
+            "mainText": "7. Osztály",
+            "subText": "Energia, nyomás, hullámok",
+            "link": "/tananyag/fizikakepletek-7-osztaly"
+          },
+          {
+            "styleType": "grade",
+            "mainText": "8. Osztály",
+            "subText": "Elektromosságtan, optika",
+            "link": "/tananyag/fizikakepletek-8-osztaly"
+          }
+        ]
+      }
+    ]
+  }
 }

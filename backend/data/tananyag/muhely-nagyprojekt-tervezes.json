@@ -1,8 +1,69 @@
 {
-  "title": "Muhely nagyprojekt tervezes",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 30-31. hét: Nagy Projekt - Tervezés",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely nagyprojekt tervezes\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére a csapatotok által kiválasztott ötletből egy részletes projekttervet készítetek.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: Az Ötlettől a Tervrajzig"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kihivas",
+      "title": "4. A Hét Kihívása: A Végleges Projektterv"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>Ezen a dupla héten a feladat, hogy a csapatotok által kiválasztott ötletből egy <strong>részletes projekttervet</strong> készítsetek. A műhely végére pontosan tudni fogjátok, hogy mit fogtok alkotni, milyen lépésekben haladtok, és ki miért lesz felelős a csapaton belül.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: Az Ötlettől a Tervrajzig",
+      "content": "<p>Az előző héten megálmodtátok, mit szeretnétek építeni. Most jön a mérnöki munka: el kell készíteni a tervrajzot. Egy házat sem lehet tervrajz nélkül felépíteni, mert káosz lenne a vége. Ugyanez igaz a projektekre is. Egy jó terv segít, hogy mindenki tudja a dolgát, ne csússzatok ki az időből, és a végeredmény valóban az legyen, amit elképzeltetek. Az MI ebben a fázisban a ti személyes kutatótok és stratégiai tanácsadótok lesz.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p>Vegyétek elő az előző héten készített \"Projekt Terv Vázlatotokat\"! Abból fogunk most részletes tervet készíteni.</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Mélyebb Kutatás",
+          "content": "<p>Mielőtt terveztek, váljatok a téma szakértőivé! Használjátok az MI-t, hogy mélyebbre ássatok a választott problémában.</p><p><strong>Feladat:</strong> Beszéljétek meg a kapott információkat! Változtat ez valamit az eredeti elképzeléseteken? Melyik információt tudnátok felhasználni a projektetekben?</p>",
+          "prompts": ["Viselkedj úgy, mint egy oknyomozó újságíró! A projektünk témája: \"[ide írjátok a projektetek témáját]\". Gyűjts össze nekünk:\n- 3 meglepő statisztikát vagy tényt a témával kapcsolatban.\n- 2 gyakori tévhitet, ami a témát övezi.\n- 1 létező kezdeményezést vagy szervezetet, ami már foglalkozik ezzel a problémával.\nMinden állításhoz adj forrást!"]
+        },
+        {
+          "title": "2. Feladat: A Megoldás Konkretizálása",
+          "content": "<p>Most dönteni kell! Pontosan <strong>MIT</strong> fogtok létrehozni? Egy kampánytervet? Egy applikáció prototípusát? Egy oktatóvideó forgatókönyvét? Kérjetek az MI-től segítséget a döntéshez!</p><p><strong>Feladat:</strong> Beszéljétek meg a lehetőségeket, és <strong>válasszátok ki azt az EGYETLEN, konkrét formátumot</strong>, amit a következő hetekben megvalósítotok!</p>",
+          "prompts": ["A problémánk: \"[ide írjátok a problémátokat]\". A célközönségünk: \"[ide írjátok a célközönséget]\". Javasolj 3 különböző, konkrét projektformátumot a probléma megoldására (pl. egy interaktív weboldal terve, egy figyelemfelkeltő posztersorozat terve, egy iskolai esemény forgatókönyve)! Mindegyikhez írd le az előnyeit és a hátrányait!"]
+        },
+        {
+          "title": "3. Feladat: A Munka Lebontása (Mérföldkövek és Feladatok)",
+          "content": "<p>Most, hogy tudjátok, mit készítetek, bontsátok le a munkát \"falatokra\"!</p><p><strong>Feladat:</strong> Finomítsátok és egészítsétek ki a kapott teendőlistát! Ez lesz a következő hetek feladatjegyzéke.</p>",
+          "prompts": ["A projektünk egy \"[ide írjátok a választott formátumot, pl. figyelemfelkeltő posztersorozat terve]\". Bontsd le a projektet 3 nagy mérföldkőre (pl. 1. Kutatás és Tartalom, 2. Vizuális Tervezés, 3. Összeállítás és Bemutatás). Minden mérföldkőhöz írj egy 3-4 pontos, konkrét teendőlistát!"]
+        },
+        {
+          "title": "4. Feladat: Szerepek és Felelősségek",
+          "content": "<p>Egy jó csapatban mindenkinek megvan a maga szerepe. Itt az ideje, hogy kioszátok a feladatokat!</p><p><strong>Feladat:</strong> Nézzétek végig a teendőlistátokat! Beszéljétek meg, ki miben a legerősebb. A megbeszélés alapján osszátok ki a következő (vagy hasonló) szerepeket egymás között:</p><ul><li><strong>Projektvezető/Koordinátor:</strong> Ő felel az ütemtervért, összefogja a csapatot.</li><li><strong>Főkutató/Szövegíró:</strong> Ő felel a projekt tartalmáért, a szövegek megírásáért, a források ellenőrzéséért.</li><li><strong>Kreatív Vezető/Dizájner:</strong> Ő felel a projekt vizuális megjelenéséért, a képek generálásáért, a dizájnért.</li></ul><p>Természetesen mindenki segít mindenkinek, de fontos, hogy minden területnek legyen egy \"gazdája\".</p>"
+        }
+      ]
+    },
+    {
+      "id": "kihivas",
+      "title": "4. A Hét Kihívása: A Végleges Projektterv Elkészítése",
+      "content": "<p>A két hét munkájának eredménye a végleges, részletes \"Projekt Terv\".</p><p><strong>Bővítsétek ki az előző heti vázlatotokat a következőkkel:</strong></p><ol><li><strong>A Megoldás (1 bekezdés):</strong> Itt részletesen leírjátok, mit fogtok létrehozni (a 2. feladat eredménye).</li><li><strong>Főbb Tartalmi Elemek (pontokba szedve):</strong> Mi lesz a posztereken? Milyen menüpontok lesznek az appban?</li><li><strong>Mérföldkövek és Teendőlista (lista):</strong> A 3. feladat eredménye.</li><li><strong>Csapatszerepek és Felelősségek (lista):</strong> A 4. feladat eredménye.</li></ol><p>Ez a dokumentum lesz a csapatotok \"szentírása\" a következő hetekben. Mentsétek el, és osszátok meg egymással! Sok sikert a tervezéshez!</p>"
+    }
+  ]
 }

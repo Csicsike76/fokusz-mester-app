@@ -1,8 +1,157 @@
 {
-  "title": "Kepletek 6 osztaly",
-  "subject": "altalanos",
-  "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Kepletek 6 osztaly\" című tananyag.",
+  "title": "Matematika Segédlet - 6. Osztály",
+  "subject": "matematika",
+  "grade": 6,
+  "category": "premium_lesson",
+  "description": "Részletes tananyag a legfontosabb 6. osztályos témakörökhöz, gyakorló kvízekkel.",
+  "toc": [
+    {
+      "id": "fejezet1",
+      "title": "1. Halmazok. Természetes számok",
+      "subheadings": [
+        { "id": "fejezet1-1", "title": "1.1 Halmazok, relációk" },
+        { "id": "fejezet1-2", "title": "1.2 Halmazműveletek" },
+        { "id": "fejezet1-3", "title": "1.3 Oszthatóság" }
+      ]
+    },
+    {
+      "id": "fejezet2",
+      "title": "2. Arányok, Aránypárok",
+      "subheadings": [
+        { "id": "fejezet2-1", "title": "2.1 Arányok, arányosság" },
+        { "id": "fejezet2-2", "title": "2.2 Adatszervezés" }
+      ]
+    },
+    {
+      "id": "fejezet3",
+      "title": "3. Egész számok",
+      "subheadings": [
+        { "id": "fejezet3-1", "title": "3.1 Bevezetés, ábrázolás" },
+        { "id": "fejezet3-2", "title": "3.2 Műveletek egész számokkal" },
+        { "id": "fejezet3-3", "title": "3.3 Egyenletek, egyenlőtlenségek" }
+      ]
+    },
+    {
+      "id": "fejezet4",
+      "title": "4. Racionális számok",
+      "subheadings": [
+        { "id": "fejezet4-1", "title": "4.1 Bevezetés, ábrázolás" },
+        { "id": "fejezet4-2", "title": "4.2 Műveletek racionális számokkal" },
+        { "id": "fejezet4-3", "title": "4.3 Egyenletek" }
+      ]
+    },
+    {
+      "id": "fejezet5",
+      "title": "5. Mértani alapfogalmak",
+      "subheadings": [
+        { "id": "fejezet5-1", "title": "5.1 Szögek" },
+        { "id": "fejezet5-2", "title": "5.2 Párhuzamos egyenesek" },
+        { "id": "fejezet5-3", "title": "5.3 Merőleges egyenesek" },
+        { "id": "fejezet5-4", "title": "5.4 A kör" }
+      ]
+    },
+    {
+      "id": "fejezet6",
+      "title": "6. A Háromszög",
+      "subheadings": [
+        { "id": "fejezet6-1", "title": "6.1 A háromszög elemei" },
+        { "id": "fejezet6-2", "title": "6.2 Nevezetes vonalak" },
+        { "id": "fejezet6-3", "title": "6.3 Kongruencia" },
+        { "id": "fejezet6-4", "title": "6.4 Kongruencia alkalmazásai" }
+      ]
+    }
+  ],
+  "content": [
+    {
+      "id": "fejezet1-1",
+      "title": "1.1 Halmazok. Halmazok közötti relációk",
+      "content": "Halmaz: Jól meghatározott, különböző elemek gyűjteménye. Jele: nagybetű (A, B, ...). Elem: A halmazt alkotó egyedek. Jele: kisbetű (a, b, ...). x ∈ A (x eleme A-nak), y ∉ A (y nem eleme A-nak). Részhalmaz (⊂): A ⊂ B, ha az A halmaz minden eleme a B halmaznak is eleme. Példa: {1, 2} ⊂ {1, 2, 3}. Az üres halmaz (∅) minden halmaznak részhalmaza. Egyenlő halmazok (=): Akkor, ha ugyanazok az elemeik. (A ⊂ B és B ⊂ A)."
+    },
+    {
+      "id": "fejezet1-2",
+      "title": "1.2 Halmazokkal végzett műveletek",
+      "content": "Unió (∪): Két halmaz uniója az a halmaz, amely mindkét halmaz összes elemét tartalmazza, a közös elemeket egyszer véve. A ∪ B = {x | x ∈ A vagy x ∈ B}. Metszet (∩): Két halmaz metszete a közös elemeikből álló halmaz. A ∩ B = {x | x ∈ A és x ∈ B}. Különbség (\\): Az A\\B halmaz azokat az elemeket tartalmazza, amelyek A-ban benne vannak, de B-ben nincsenek. A \\ B = {x | x ∈ A és x ∉ B}."
+    },
+    {
+      "id": "fejezet1-3",
+      "title": "1.3 Oszthatóság a természetes számok halmazában (ℕ)",
+      "content": "Prímszám: Olyan 1-nél nagyobb természetes szám, amelynek pontosan két osztója van: 1 és önmaga (pl. 2, 3, 5, 7, 11...). Összetett szám: Olyan 1-nél nagyobb természetes szám, amelynek kettőnél több osztója van (pl. 4, 6, 8, 9...). Prímtényezős felbontás: Egy összetett szám felírása prímszámok szorzataként. Példa: 36 = 2 ⋅ 18 = 2 ⋅ 2 ⋅ 9 = 2 ⋅ 2 ⋅ 3 ⋅ 3 = 2² ⋅ 3². Legnagyobb közös osztó (ln.k.o.): A számok közös prímtényezőit a legkisebb hatványon összeszorozzuk. Legkisebb közös többszörös (lk.k.t.): A számok összes prímtényezőjét a legnagyobb hatványon összeszorozzuk."
+    },
+    {
+      "id": "fejezet2-1",
+      "title": "2.1 Arányok, aránypárok, arányosság",
+      "content": "Arány: Két mennyiség hányadosa (pl. a/b). Aránypár: Két egyenlő arány egyenlősége (a/b = c/d). Aránypár alaptulajdonsága: a ⋅ d = b ⋅ c. Példa: x/4 = 9/12 → 12x = 4⋅9 = 36 → x=3. Egyenes arányosság: Ha az egyik mennyiség k-szorosára nő, a másik is k-szorosára nő (hányadosuk állandó). Fordított arányosság: Ha az egyik mennyiség k-szorosára nő, a másik 1/k-szorosára csökken (szorzatuk állandó). Százalék: Olyan arány, aminek a nevezője 100."
+    },
+    {
+      "id": "fejezet2-2",
+      "title": "2.2 Adatszervezés, valószínűség",
+      "content": "Számtani közép (átlag): Az adatok összegét elosztjuk az adatok számával. Valószínűség: P(esemény) = kedvező esetek száma / összes esetek száma."
+    },
+    {
+      "id": "fejezet3-1",
+      "title": "3.1 Bevezetés, ábrázolás, abszolút érték",
+      "content": "Egész számok: A természetes számok, a 0 és a negatív egészek. Pl: {..., -2, -1, 0, 1, 2, ...}. Abszolút érték |a|: Egy szám távolsága a 0-tól a számegyenesen. Értéke sosem negatív."
+    },
+    {
+      "id": "fejezet3-2",
+      "title": "3.2 Műveletek egész számokkal",
+      "content": "Összeadás/Kivonás: Számegyenesen való lépkedésként értelmezhető. Szorzás/Osztás előjelszabályai: (+)⋅(+)=+; (-)⋅(-)=+; (+)⋅(-)=-. Hatványozás: Negatív alap páros kitevőjű hatványa pozitív, páratlan kitevőjű hatványa negatív. Példa: (-2)³ = -8; (-2)⁴ = 16."
+    },
+    {
+      "id": "fejezet3-3",
+      "title": "3.3 Egyenletek, egyenlőtlenségek ℤ-ben",
+      "content": "Egyenletmegoldás: A mérlegelv használatával az ismeretlent (x) egy oldalra rendezzük. Egyenlőtlenségek: Negatív számmal való szorzás/osztás megfordítja a relációs jelet!"
+    },
+    {
+      "id": "fejezet4-1",
+      "title": "4.1 Racionális számok, ábrázolás, modulus",
+      "content": "Minden szám, ami felírható a/b törtként. Tizedestört alakjuk véges vagy végtelen szakaszos."
+    },
+    {
+      "id": "fejezet4-2",
+      "title": "4.2 Műveletek racionális számokkal",
+      "content": "A törtekkel és tizedestörtekkel végzett műveletek szabályai érvényesek, kiegészítve az egész számoknál tanult előjelszabályokkal."
+    },
+    {
+      "id": "fejezet4-3",
+      "title": "4.3 Egyenletek ℚ-ben",
+      "content": "Megoldásuk a mérlegelvvel történik, az eredmény lehet tört vagy tizedestört."
+    },
+    {
+      "id": "fejezet5-1",
+      "title": "5.1 Szögek",
+      "content": "Pótszögek: Összegük 90°. Kiegészítő szögek: Összegük 180°. Csúcsszögek: Egyenlőek. Mellékszögek: Összegük 180°."
+    },
+    {
+      "id": "fejezet5-2",
+      "title": "5.2-5.3 Párhuzamos és merőleges egyenesek",
+      "content": "Párhuzamos szelők tétele (Thalész): Ha egy szög szárait párhuzamosokkal metsszük, a keletkezett szakaszok arányosak. Felezőmerőleges: Egy szakasz felezőpontjára állított merőleges. Minden pontja egyenlő távolságra van a szakasz végpontjaitól."
+    },
+    {
+      "id": "fejezet5-3",
+      "title": "5.4 A kör",
+      "content": "Elemei: Középpont, sugár (r), átmérő (d=2r), húr, körív. Érintő: Egy pontban metszi a kört, merőleges az érintési pontba húzott sugárra."
+    },
+    {
+      "id": "fejezet6-1",
+      "title": "6.1 A háromszög elemei, osztályozás",
+      "content": "Belső szögek összege: Mindig 180°. Háromszög-egyenlőtlenség: Bármely két oldal összege nagyobb a harmadik oldalnál (a+b>c)."
+    },
+    {
+      "id": "fejezet6-2",
+      "title": "6.2 Nevezetes vonalak",
+      "content": "Magasságvonal, oldalfelező, szögfelező, súlyvonal. Az egyenlő szárú és egyenlő oldalú háromszögekben ezek egybeeshetnek."
+    },
+    {
+      "id": "fejezet6-3",
+      "title": "6.3 Kongruens háromszögek",
+      "content": "Kongruencia (egybevágóság): Alakjuk és méretük is megegyezik. Egybevágósági alapesetek: O-O-O, O-Sz-O, Sz-O-Sz, Sz-Sz-O."
+    },
+    {
+      "id": "fejezet6-4",
+      "title": "6.4 Kongruencia alkalmazásai",
+      "content": "Szögfelezőn lévő pontok: Egyenlő távolságra vannak a száraktól. Szakaszfelező merőleges pontjai: Egyenlő távolságra vannak a végpontoktól. Pitagorasz-tétel: Derékszögű háromszögben a²+b²=c²."
+    }
+  ],
   "questions": []
 }

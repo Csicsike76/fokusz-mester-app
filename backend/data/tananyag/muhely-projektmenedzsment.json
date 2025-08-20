@@ -1,8 +1,88 @@
 {
-  "title": "Muhely projektmenedzsment",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 17. hét: Személyes projektmenedzsment",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely projektmenedzsment\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel egy nagy, összetett célt az MI segítségével kisebb, logikus fázisokra és konkrét, végrehajtható feladatokra bontani.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Hogyan eszünk meg egy elefántot?"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: Tervezd meg a saját projektedet!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel egy nagy, összetett célt (pl. egy esemény megszervezése) az MI segítségével kisebb, logikus fázisokra és konkrét, végrehajtható feladatokra bontani. Megtanulod, hogyan készíts teendőlistát és egyszerű idővonalat bármilyen projekthez.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Bármelyik <strong>szöveggeneráló MI</strong> (Copilot, Gemini, ChatGPT).</li><li>Egy jegyzetfüzet vagy digitális dokumentum a tervek mentéséhez.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Hogyan eszünk meg egy elefántot?",
+      "content": "<p>A válasz: falatonként. A legtöbb nagy projekt azért tűnik ijesztőnek, mert egyben, \"elefántként\" tekintünk rá. A projektmenedzsment művészete abban rejlik, hogy képesek vagyunk ezt a nagy feladatot apró, emészthető \"falatokra\" vágni. Az MI ebben a folyamatban a te személyes projektmenedzsered: segít a bontásban, a feladatok kiosztásában és az időbeosztásban. Ma megtanuljuk, hogyan irányítsuk ezt az asszisztenst, hogy a legnagyobb célok is elérhetőnek tűnjenek.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai projektünk:</strong> Megszervezünk egy egynapos osztálykirándulást a közeli erdőbe!</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Nagy Cél Lebontása Fázisokra",
+          "content": "<p>Először is, lássuk át a projekt főbb szakaszait! Nem kell mindent egyszerre tudnunk, elég a nagy lépéseket felvázolni.</p><p><strong>Megfigyelés:</strong> Az MI valószínűleg olyan fázisokat javasol, mint: 1. Tervezés és Engedélyeztetés, 2. Költségvetés és Pénzgyűjtés, 3. Logisztika és Szervezés, 4. Lebonyolítás, 5. Utókövetés és Értékelés. Ezzel máris sokkal átláthatóbb lett a feladat!</p>",
+          "prompts": ["Viselkedj úgy, mint egy tapasztalt rendezvényszervező! Az a feladatom, hogy megszervezzek egy egynapos osztálykirándulást a közeli erdőbe 30 diáknak. Bontsd le ezt a projektet 4-5 logikus, egymást követő fázisra!"]
+        },
+        {
+          "title": "2. Feladat: Részletes Teendőlista (To-Do List)",
+          "content": "<p>Most válasszunk ki egyetlen fázist, és nézzük meg részletesebben! Fókuszáljunk a legbonyolultabbra: a Logisztika és Szervezés fázisra.</p><p><strong>Megfigyelés:</strong> Az MI egy konkrét, végrehajtható listát készített, ami olyan pontokat tartalmazhat, mint \"Autóbusz lefoglalása\", \"Szendvicsek megrendelése\", \"Szülői engedélyek begyűjtése\". Ezzel a listával már el lehet kezdeni dolgozni.</p>",
+          "prompts": ["Rendben, fókuszáljunk a 3. fázisra: \"Logisztika és Szervezés\". Készíts ehhez egy részletes, pontokba szedett teendőlistát! Minden feladathoz rendelj egy javasolt felelőst (pl. diákönkormányzat, osztályfőnök) és egy hozzávetőleges határidőt a kirándulás napja előtt (pl. \"2 héttel előtte\")."]
+        },
+        {
+          "title": "3. Feladat: Idővonal Készítése",
+          "content": "<p>A teendőlista remek, de egy idővonal segít vizuálisan is átlátni a feladatokat. Kérjünk egy egyszerű táblázatot!</p><p><strong>Megfigyelés:</strong> Az MI létrehozott egy egyszerű Gantt-diagramhoz hasonló táblázatot. Ezzel könnyen követhető, hogy mikor minek kell elkészülnie, és nem csúszunk ki a határidőkből.</p>",
+          "prompts": ["Készíts egy egyszerű heti bontású idővonalat a kirándulás előtti 4 hétre táblázatos formában! A táblázat mutassa meg, hogy az előző teendőlista legfontosabb feladatai melyik hétre esnek."]
+        },
+        {
+          "title": "4. Feladat: Kockázatkezelés",
+          "content": "<p>Egy jó projektmenedzser a lehetséges problémákra is felkészül. Kérdezzük meg az MI-t a kockázatokról!</p><p><strong>Megfigyelés:</strong> Az MI olyan problémákat sorolhat fel, mint \"rossz időjárás\", \"valaki megsérül\", \"nem gyűlik össze elég pénz\". A javasolt \"B tervek\" (pl. esőnap, elsősegély-felszerelés) a felelős tervezés részét képezik.</p>",
+          "prompts": ["Mik a legnagyobb lehetséges kockázatok vagy problémák egy erdei osztálykirándulás során? Adj 3 példát, és mindegyikhez javasolj egy megelőzési vagy megoldási tervet (\"B tervet\")!"]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok",
+      "content": "<p>Az MI segített egy tökéletesnek tűnő tervet készíteni. De vajon az is?</p><ul><li><strong>A rejtett feladatok:</strong> Az MI terve logikus, de számol-e az emberi tényezővel? Például beleszámolta, hogy a szülői engedélyek begyűjtése nem egy perc, mert néhány diák elfelejti hazavinni? Miért fontos, hogy a projektmenedzser (te) a valós tapasztalatok alapján mindig finomítsa és kiegészítse az MI által javasolt tervet?</li><li><strong>A kreativitás szerepe:</strong> Az MI egy logikus, de talán kissé sablonos tervet adott. Hol van a te szereped abban, hogy a kirándulás ne csak jól szervezett, hanem emlékezetes és kreatív is legyen (pl. egyedi programok, játékok kitalálása)? Az MI a \"hogyan\"-ban segít, de a \"mit\" és a \"miért\" nagy része még mindig a tiéd.</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: Tervezd meg a saját projektedet!",
+      "content": "<p>Most válassz egy saját, személyes projektet, és használd a tanult projektmenedzsment-technikákat!</p><p><strong>Válassz egyet a projektek közül (vagy találj ki sajátot):</strong> \"Felkészülni egy fontos témazáróra\", \"Megtanulni egy új dalt egy hangszeren\", \"Kitakarítani és átrendezni a szobámat egy hétvége alatt\".</p><p><strong>A feladatod:</strong></p><ol><li>Az MI segítségével bontsd le a projektet <strong>3-4 fő fázisra</strong>.</li><li>Válassz ki egy fázist, és készíttess hozzá egy <strong>részletes teendőlistát</strong>.</li><li>Kérj az MI-től <strong>3 lehetséges kockázatot</strong> a projekttel kapcsolatban, és javaslatokat a kezelésükre.</li></ol><p>Mentsd le a kész tervet! Ez nem csak egy iskolai feladat, hanem egy valódi útmutató, ami segít elérni a saját célodat.</p>"
+    }
+  ]
 }

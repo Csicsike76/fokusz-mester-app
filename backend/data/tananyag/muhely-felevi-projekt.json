@@ -1,8 +1,76 @@
 {
-  "title": "Muhely felevi projekt",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 18. hét: Félévi Projekt",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely felevi projekt\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A projekt célja, hogy az első félév során megismert MI-eszközök és -technikák felhasználásával készíts egy személyre szabott, egyhónapos tanulási tervet.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Legyél a saját tanulásod menedzsere!"
+    },
+    {
+      "id": "projekt_lepesek",
+      "title": "4. A Projekt Lépései"
+    },
+    {
+      "id": "leadas",
+      "title": "5. A Projekt Leadása és Bemutatása"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A projekt célja, hogy az első félév során megismert MI-eszközök és -technikák felhasználásával készíts egy <strong>személyre szabott, egyhónapos tanulási tervet</strong> egy általad választott, számodra kihívást jelentő tantárgyhoz. A projekt bemutatja, hogy képes vagy az MI-t stratégiai eszközként, egy valós probléma megoldására használni.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<p>Használd fel az egész féléves \"eszköztáradat\"!</p><ul><li><strong>Szöveggeneráló MI</strong> (Copilot, Gemini, stb.) a tervezéshez, ötleteléshez, összefoglaláshoz.</li><li><strong>Prezentációkészítő MI</strong> (Gamma, Tome) vagy hagyományos eszköz (Google Diák, PowerPoint) a projekt bemutatásához.</li><li>Opcionálisan: <strong>Képalkotó MI</strong> a prezentáció illusztrálásához.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Legyél a saját tanulásod menedzsere!",
+      "content": "<p>Mindannyiunknak vannak tantárgyai, amikkel nehezebben boldogulunk. A félévi projekt során nem egy külső feladatot oldasz meg, hanem a saját, személyes kihívásodat. Te leszel a saját tanulásod projektmenedzsere, az MI pedig a személyre szabott korrepetátorokból, asszisztensekből és vizuális segédekből álló csapatod. A feladatod, hogy megtervezd, hogyan fogod ezt a csapatot a leghatékonyabban irányítani a siker érdekében.</p>"
+    },
+    {
+      "id": "projekt_lepesek",
+      "title": "4. A Projekt Lépései",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Helyzetfelmérés és Célkitűzés",
+          "content": "<p>Először is, válassz egy tantárgyat (pl. történelem, biológia, irodalom), amiben fejlődni szeretnél. Ezután azonosítsd a konkrét problémákat!</p><p><strong>Használd ezt a promptot az MI-vel való közös gondolkodáshoz:</strong></p><p><strong>A feladatod:</strong> A kapott válasz és a saját tapasztalataid alapján írj le <strong>3 konkrét pontot</strong>, amiben fejlődni szeretnél (pl. \"Megérteni a gazdasági válság hatásait\", \"Megjegyezni a legfontosabb évszámokat\", \"Átlátni a politikai szereplők közötti viszonyokat\").</p>",
+          "prompts": ["Viselkedj úgy, mint egy tapasztalt pedagógiai tanácsadó! A történelem tantárgyból szeretnék felkészülni a következő témazáróra. A fő témakör a \"Magyarország a két világháború között\". Mik a legfontosabb altémák és kulcsfogalmak, amiket mindenképpen tudnom kell? Milyen tipikus nehézségei szoktak lenni a diákoknak ezzel a témával?"]
+        },
+        {
+          "title": "2. Feladat: A 4 Hétes Tanulási Terv Megtervezése",
+          "content": "<p>Most, hogy ismered a céljaidat, készíttess egy ütemtervet az MI-vel!</p><p><strong>A feladatod:</strong> Másold ki a kapott táblázatot egy dokumentumba. Ez lesz a terved gerince.</p>",
+          "prompts": ["Készíts egy 4 hetes tanulási tervet a \"Magyarország a két világháború között\" témakör feldolgozására! A céljaim: [itt sorold fel a 3 konkrét pontot, amit az előbb megfogalmaztál]. Bontsd le a témát heti adagokra! Minden héthez adj 2-3 konkrét tanulási célt! Az eredményt táblázatos formában kérem."]
+        },
+        {
+          "title": "3. Feladat: Az MI-eszköztár Hozzárendelése",
+          "content": "<p>Ez a projekt legkreatívabb része! A táblázatod minden egyes heti céljához rendelj hozzá egy vagy több, a félév során megismert MI-technikát, amit használni fogsz!</p><p><strong>Példák:</strong></p><ul><li><strong>Heti cél:</strong> \"A gazdasági válság hatásainak megértése.\" -> <strong>MI-technika:</strong> \"Egy hosszú Wikipedia-cikk bemásolása és 5 pontos összefoglaló kérése (10. heti műhely).\"</li><li><strong>Heti cél:</strong> \"Fontos évszámok megjegyzése.\" -> <strong>MI-technika:</strong> \"Tesztkérdések generáltatása az MI-vel a legfontosabb eseményekről (10. heti műhely).\"</li><li><strong>Heti cél:</strong> \"Horthy Miklós szerepének bemutatása.\" -> <strong>MI-technika:</strong> \"Egy prezentáció-dia generáltatása a témáról képekkel (12. heti műhely).\"</li><li><strong>Heti cél:</strong> \"A korszak hangulatának megértése.\" -> <strong>MI-technika:</strong> \"Egy kép generáltatása 'Budapest az 1930-as években, fotó stílusban' (3. heti műhely).\"</li></ul><p><strong>A feladatod:</strong> A tanulási terved táblázatát egészítsd ki egy új oszloppal: \"Használt MI-technikák\", és töltsd ki a fenti példákhoz hasonlóan.</p>"
+        },
+        {
+          "title": "4. Feladat: A Projekt Bemutatójának Elkészítése",
+          "content": "<p>Most állítsd össze a projektedet egy rövid, 4-5 diából álló prezentációban!</p><p><strong>A prezentáció kötelező elemei:</strong></p><ol><li><strong>Címdia:</strong> \"MI-turbó tanulási tervem: [Tantárgyad neve]\" + a te neved.</li><li><strong>Helyzetfelmérés dia:</strong> Mutasd be a választott tantárgyat és a 3 konkrét célodat, amiben fejlődni szeretnél.</li><li><strong>A Tanulási Terv dia:</strong> Mutasd be a 4 hetes tervedet (lehet a táblázat képernyőképe is).</li><li><strong>Példa a gyakorlatból dia:</strong> Mutass be egy konkrét példát, amit az MI-vel alkottál a terved részeként! (Pl. egy MI által összefoglalt szöveg, egy generált kép, egy vázlat).</li><li><strong>Összegzés dia:</strong> Írj le 2 mondatot arról, hogyan fogja szerinted az MI segíteni a tanulásodat a jövőben.</li></ol>"
+        }
+      ]
+    },
+    {
+      "id": "leadas",
+      "title": "5. A Projekt Leadása és Bemutatása",
+      "content": "<p>A feladatod, hogy a kész, legalább 4-5 diából álló prezentációdat elmentsd és felkészülj a bemutatására.</p><p>Ez a projekt zárja a félévet. A bemutatóval nemcsak a tervedet, hanem az elmúlt hónapok során megszerzett MI-készségeidet is demonstrálod.</p><p><strong>Sok sikert a félévi projektetekhez!</strong></p>"
+    }
+  ]
 }

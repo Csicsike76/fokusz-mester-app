@@ -1,8 +1,72 @@
 {
-  "title": "Szuper zaroprojekt",
-  "subject": "altalanos",
+  "title": "AIMI Szuperképesség - Záróprojekt",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Szuper zaroprojekt\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A záróprojekt célja, hogy a kurzus során tanult összes stratégiai készséget egyetlen, nagy, személyes projektben szintetizáld.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Te Személyes Küldetésed"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Záró Kihívás"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A záróprojekt célja, hogy a kurzus során tanult összes stratégiai készséget egyetlen, nagy, személyes projektben szintetizáld. Létrehozol egy komplett, egy hónapra szóló <strong>személyes fejlődési tervet</strong> egy általad választott, konkrét cél elérésére, és megteszed az első, kézzelfogható lépést a megvalósítás útján.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Te Személyes Küldetésed",
+      "content": "<p>Az elmúlt hetekben különböző \"szuperképességeket\" gyűjtöttél: megtanultad irányítani az idődet, elemezni a döntéseidet, felgyorsítani a tanulásodat és felerősíteni a kreativitásodat. Most itt az ideje, hogy ezeket a képességeket egyetlen, valódi \"küldetésre\" fókuszáld. Ez a projekt nem egy iskolai feladat. Ez a te személyes terved arról, hogyan válsz a saját életed jobb, hatékonyabb és tudatosabb rendezőjévé, az MI-t szövetségesként használva.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Küldetés Meghatározása (Define Your Mission)",
+          "content": "<p>Válassz egy konkrét, nagy, de egy hónap alatt elkezdhető és mérhető személyes célt! Legyen ez valami, ami valóban motivál.</p><p><strong>Ötletek:</strong></p><ul><li>\"Elindítom a saját blogomat/YouTube csatornámat a [kedvenc téma] témában.\"</li><li>\"Létrehozok egy 3 darabból álló digitális portfóliót a generált képeimből.\"</li><li>\"Egy hónap alatt megtanulom a [hangszer] 3 alapvető dalát.\"</li><li>\"Lefejlesztek egy egyszerű, de működő weboldalt a hobbimnak.\"</li></ul><p><strong>Feladat:</strong> Fogalmazd meg a célodat egyetlen, erőteljes mondatban! Használd az MI-t a finomításhoz!</p>",
+          "prompts": ["Viselkedj úgy, mint egy motivációs coach! A célom a következő: [írd le a célodat nyersen]. Segíts megfogalmazni ezt egyetlen, inspiráló és mérhető \"küldetésnyilatkozatként\"!"]
+        },
+        {
+          "title": "2. Feladat: A Stratégiai Terv Elkészítése",
+          "content": "<p>Most integráljuk az összes tanult \"szuperképességet\" egyetlen mester-promptba, hogy megalkossuk a haditervet!</p><p><strong>Feladat:</strong> A kapott terv lesz a projekted gerince. Olvasd el, és finomítsd, hogy 100%-ban a tiéd legyen!</p>",
+          "prompts": ["Viselkedj úgy, mint egy személyes \"chief of staff\"! A küldetésem: \"[Ide másold be az előző pontban megfogalmazott küldetésnyilatkozatodat]\".\nKészíts egy komplett, 4 hetes stratégiai tervet a megvalósításhoz! A terv tartalmazza:\n1.  **Heti Bontású Ütemterv:** Minden hétre konkrét, mérhető célokat és feladatokat.\n2.  **Kockázatelemzés:** Melyik 2 lehetséges akadály merülhet fel, és mi a \"B terv\" ellenük?\n3.  **Szükséges Készségek:** Milyen új készségeket kell elsajátítanom, és melyik héten fókuszáljak rájuk?\n4.  **Kreatív Tartalom Terv:** Milyen szöveges és vizuális anyagokat kell létrehoznom a projekthez?"]
+        },
+        {
+          "title": "3. Feladat: Az Első Lépés Megtétele",
+          "content": "<p>Egy terv semmit sem ér az első lépés nélkül. Most tedd meg!</p><p><strong>Feladat:</strong> Nézd meg a stratégiai terved <strong>1. hetének első feladatát</strong>! Használd az MI-t, hogy segítsen elvégezni ezt az egyetlen, konkrét feladatot!</p><p>Példák:</p><ul><li>Ha a cél egy blog indítása, az első feladat lehet: \"5 blogposzt-ötlet generálása\". A prompt: \"Adj 5 ütős címet és rövid vázlatot egy bloghoz, ami a [téma]-ról szól!\".</li><li>Ha a cél egy portfólió, az első feladat: \"Az első kép elkészítése\". A prompt: \"Generálj egy képet a portfóliómhoz a következő témában...\".</li></ul><p>A lényeg, hogy a műhely végére legyen egy kézzelfogható eredményed, ami bizonyítja, hogy a projekt elindult.</p>"
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>Az Emberi Tényező:</strong> Az MI egy tökéletes tervet adott. De mi az, amit az MI nem tud megtervezni? A motivációt, a kitartást, a fegyelmet. Hogyan tudod biztosítani, hogy a terv ne csak egy szép dokumentum maradjon, hanem egy megvalósított projekt legyen? Mi a te személyes felelősséged a folyamatban?</li><li>**A Cél és az Eszköz:** A kurzus során rengeteg MI-eszközt használtál. Hogyan változott a viszonyod ezekhez az eszközökhöz a kurzus elejétől a végéig? Mennyire látod őket most már nem célnak, hanem csupán eszköznek a saját, emberi céljaid eléréséhez?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Záró Kihívás: \"Az Én Személyes Fejlődési Csomagom\"",
+      "content": "<p>A záróprojekt feladata egyetlen, összefoglaló dokumentum elkészítése, ami bemutatja a te személyes küldetésedet és a megvalósítási tervedet.</p><p><strong>A leadandó \"Fejlődési Csomag\" tartalmazza:</strong></p><ol><li><strong>A Küldetésnyilatkozat (1 mondat):</strong> A te személyes, inspiráló célod.</li><li><strong>A Stratégiai Terv:</strong> Az MI által generált és általad finomított, 4 hetes, teljes terv.</li><li><strong>Az Első Lépés Bizonyítéka:</strong> A legelső feladat kézzelfogható eredménye (a legenerált blogposzt-ötletek, az elkészült kép, stb.).</li></ol><p>Ez a dokumentum több mint egy beadandó. Ez a te személyes terved arról, hogyan leszel a saját jövőd MI-vel felerősített, tudatos alakítója.</p>"
+    }
+  ]
 }

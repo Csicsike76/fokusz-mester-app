@@ -1,259 +1,129 @@
 {
   "title": "Fizikakepletek 7 osztaly",
   "subject": "fizika",
-  "grade": 0,
+  "grade": 7,
   "category": "premium_course",
   "description": "Ez a(z) \"Fizikakepletek 7 osztaly\" című tananyag.",
+  "toc": [
+    {
+      "id": "egyseg1",
+      "title": "I. Egység: A fizikában használt matematikai eljárások és modellek",
+      "subheadings": [
+        { "id": "egyseg1-1", "title": "1.1. Fizikai mennyiségek és jelenségek" },
+        { "id": "egyseg1-2", "title": "1.2. Egy kísérlet magvalósításának a lépései" },
+        { "id": "egyseg1-3", "title": "1.3. Metrikus összefüggések tanulmányozása" },
+        { "id": "egyseg1-4", "title": "1.4. Skaláris fizikai mennyiségek" },
+        { "id": "egyseg1-5", "title": "1.5. Vektoriális fizikai mennyiségek" }
+      ]
+    },
+    {
+      "id": "egyseg2",
+      "title": "II. Egység: Mechanikai jelenségek - Kölcsönhatások",
+      "subheadings": [
+        { "id": "egyseg2-1", "title": "2.1. A kölcsönhatás" },
+        { "id": "egyseg2-2", "title": "2.2. Az erő - a kölcsönhatás mértéke" },
+        { "id": "egyseg2-3", "title": "2.3. A tehetetlenség elve" },
+        { "id": "egyseg2-4", "title": "2.4. A hatás és visszahatás elve" },
+        { "id": "egyseg2-5", "title": "2.5. Példák az erőkre" },
+        { "id": "egyseg2-6", "title": "2.6. Egy test mozgása több erő hatására" },
+        { "id": "egyseg2-7", "title": "2.7. Az erők összeadása" },
+        { "id": "egyseg2-8", "title": "2.8. A paralelogramma szabály" },
+        { "id": "egyseg2-9", "title": "2.9. Egy erő felbontása" },
+        { "id": "egyseg2-10", "title": "2.10. Két egymásra merőleges összetevőre" }
+      ]
+    },
+    {
+      "id": "egyseg3",
+      "title": "III. Egység: Mechanikai jelenségek - Mechanikai munka, energia",
+      "subheadings": [
+        { "id": "egyseg3-1", "title": "3.1. Az állandó erők által végzett mechanikai munka" },
+        { "id": "egyseg3-2", "title": "3.2. A mechanikai teljesítmény" },
+        { "id": "egyseg3-3", "title": "3.3. A mozgási energia" },
+        { "id": "egyseg3-4", "title": "3.4. A gravitációs helyzeti energia" },
+        { "id": "egyseg3-5", "title": "3.5. A rugalmassági helyzeti energia" },
+        { "id": "egyseg3-6", "title": "3.6. A mechanikai energia" },
+        { "id": "egyseg3-7", "title": "3.7. A mechanikai energia megmaradása" }
+      ]
+    },
+    {
+      "id": "egyseg4",
+      "title": "IV. Egység: Mechanikai jelenségek - Testek egyensúlya",
+      "subheadings": [
+        { "id": "egyseg4-1", "title": "4.1. A merev testek haladó és forgó mozgása" },
+        { "id": "egyseg4-2", "title": "4.2. A haladási egyensúly" },
+        { "id": "egyseg4-3", "title": "4.3. Az erő nyomatéka" },
+        { "id": "egyseg4-4", "title": "4.4. A forgási egyensúly" }
+      ]
+    },
+    {
+      "id": "egyseg5",
+      "title": "V. Egység: Mechanikai jelenségek - Mechanikai hullámok, a hang",
+      "subheadings": [
+        { "id": "egyseg5-1", "title": "5.1. A mechanikai hullámok" },
+        { "id": "egyseg5-2", "title": "5.2. A hangok keltése és érzékelése" },
+        { "id": "egyseg5-3", "title": "5.3. A hang jellemzői" }
+      ]
+    }
+  ],
   "questions": [
     {
-      "question": "Mi a mechanikai munka (W) képlete, ha az F erő s úton mozgatja el a testet?",
-      "answers": {
-        "a": "W = F ⋅ s",
-        "b": "W = F / s",
-        "c": "W = F + s"
-      },
-      "correct": "a",
-      "explanation": "A mechanikai munka az erő és az elmozdulás szorzata, feltéve, hogy az erő és az elmozdulás egyirányú."
+      "id": "egyseg1",
+      "title": "I. Egység: A fizikában használt matematikai eljárások és modellek",
+      "content": [
+        { "type": "card", "id": "egyseg1-1", "title": "1.1. Fizikai mennyiségek és jelenségek", "htmlContent": "<p>Fizikai mennyiségek és jelenségek.</p><a href=\"/tananyag/kviz-fizikai-mennyisegek-jelensegek-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg1-2", "title": "1.2. Egy kísérlet magvalósításának a lépései", "htmlContent": "<p>Egy kísérlet magvalósításának a lépései.</p><a href=\"/tananyag/kviz-kiserlet-lepesei-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg1-3", "title": "1.3. Metrikus összefüggések tanulmányozása", "htmlContent": "<p>Metrikus összefüggések tanulmányozása.</p><a href=\"/tananyag/kviz-metrikus-osszefuggesek-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg1-4", "title": "1.4. Skaláris fizikai mennyiségek", "htmlContent": "<p>Skaláris fizikai mennyiségek.</p><a href=\"/tananyag/kviz-skalaris-mennyisegek-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg1-5", "title": "1.5. Vektoriális fizikai mennyiségek", "htmlContent": "<p>Vektoriális fizikai mennyiségek.</p><a href=\"/tananyag/kviz-vektorialis-mennyisegek-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
     },
     {
-      "question": "Mit jelent a teljesítmény (P) a fizikában?",
-      "answers": {
-        "a": "A test teljes energiáját.",
-        "b": "A munkavégzés sebességét (W / t).",
-        "c": "Az erő forgató hatását."
-      },
-      "correct": "b",
-      "explanation": "A teljesítmény azt mutatja meg, hogy egységnyi idő alatt mennyi munkát végzünk. Mértékegysége a Watt (W)."
+      "id": "egyseg2",
+      "title": "II. Egység: Mechanikai jelenségek - Kölcsönhatások",
+      "content": [
+        { "type": "card", "id": "egyseg2-1", "title": "2.1. A kölcsönhatás", "htmlContent": "<p>A kölcsönhatás.</p><a href=\"/tananyag/kviz-kolcsonhatas-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg2-2", "title": "2.2. Az erő - a kölcsönhatás mértéke", "htmlContent": "<p>Az erő - a kölcsönhatás mértéke.</p><a href=\"/tananyag/kviz-ero-kolcsonhatas-merteke-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg2-3", "title": "2.3. A tehetetlenség elve", "htmlContent": "<p>A tehetetlenség elve.</p><a href=\"/tananyag/kviz-tehetetlenseg-elve-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg2-4", "title": "2.4. A hatás és visszahatás elve", "htmlContent": "<p>A hatás és visszahatás elve.</p><a href=\"/tananyag/kviz-hatas-visszahatas-elve-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg2-5", "title": "2.5. Példák az erőkre", "htmlContent": "<p>Példák az erőkre.</p><a href=\"/tananyag/kviz-peldak-erokre-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg2-6", "title": "2.6. Egy test mozgása több erő hatására", "htmlContent": "<p>Egy test mozgása több erő hatására.</p><a href=\"/tananyag/kviz-test-mozgasa-erok-hatasara-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg2-7", "title": "2.7. Az erők összeadása", "htmlContent": "<p>Az erők összeadása.</p><a href=\"/tananyag/kviz-erok-osszeadasa-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg2-8", "title": "2.8. A paralelogramma szabály", "htmlContent": "<p>A paralelogramma szabály.</p><a href=\"/tananyag/kviz-paralelogramma-szabaly-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg2-9", "title": "2.9. Egy erő felbontása", "htmlContent": "<p>Egy erő felbontása.</p><a href=\"/tananyag/kviz-ero-felbontasa-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg2-10", "title": "2.10. Két egymásra merőleges összetevőre", "htmlContent": "<p>Két egymásra merőleges összetevőre.</p><a href=\"/tananyag/kviz-meroleges-osszetevok-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
     },
     {
-      "question": "Melyik két mennyiségtől függ egy test mozgási (kinetikus) energiája?",
-      "answers": {
-        "a": "A tömegétől és a magasságától.",
-        "b": "Az erejétől és a sebességétől.",
-        "c": "A tömegétől és a sebességének négyzetétől."
-      },
-      "correct": "c",
-      "explanation": "A mozgási energia képlete E(kin) = ½ ⋅ m ⋅ v², tehát a test tömegétől és sebességének négyzetétől függ."
+      "id": "egyseg3",
+      "title": "III. Egység: Mechanikai jelenségek - Mechanikai munka, energia",
+      "content": [
+        { "type": "card", "id": "egyseg3-1", "title": "3.1. Az állandó erők által végzett mechanikai munka", "htmlContent": "<p>Az állandó erők által végzett mechanikai munka.</p><a href=\"/tananyag/kviz-allando-erok-munka-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg3-2", "title": "3.2. A mechanikai teljesítmény", "htmlContent": "<p>A mechanikai teljesítmény.</p><a href=\"/tananyag/kviz-mechanikai-teljesitmeny-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg3-3", "title": "3.3. A mozgási energia", "htmlContent": "<p>A mozgási energia.</p><a href=\"/tananyag/kviz-mozgasi-energia-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg3-4", "title": "3.4. A gravitációs helyzeti energia", "htmlContent": "<p>A gravitációs helyzeti energia.</p><a href=\"/tananyag/kviz-gravitacios-energia-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg3-5", "title": "3.5. A rugalmassági helyzeti energia", "htmlContent": "<p>A rugalmassági helyzeti energia.</p><a href=\"/tananyag/kviz-rugalmassagi-energia-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg3-6", "title": "3.6. A mechanikai energia", "htmlContent": "<p>A mechanikai energia.</p><a href=\"/tananyag/kviz-mechanikai-energia-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg3-7", "title": "3.7. A mechanikai energia megmaradása", "htmlContent": "<p>A mechanikai energia megmaradása.</p><a href=\"/tananyag/kviz-mechanikai-energia-megmaradasa-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
     },
     {
-      "question": "Hogyan szól Newton I. törvénye, a tehetetlenség elve?",
-      "answers": {
-        "a": "Minden test nyugalomban marad vagy egyenes vonalú egyenletes mozgást végez, amíg egy külső erő mozgásállapota megváltoztatására nem kényszeríti.",
-        "b": "Az erők mindig párosával lépnek fel, mint hatás és ellenhatás.",
-        "c": "A test gyorsulása egyenesen arányos a rá ható erővel."
-      },
-      "correct": "a",
-      "explanation": "A tehetetlenség elve azt mondja ki, hogy a testek maguktól nem változtatják meg a mozgásukat, ehhez külső erőhatásra van szükség."
+      "id": "egyseg4",
+      "title": "IV. Egység: Mechanikai jelenségek - Testek egyensúlya",
+      "content": [
+        { "type": "card", "id": "egyseg4-1", "title": "4.1. A merev testek haladó és forgó mozgása", "htmlContent": "<p>A merev testek haladó és forgó mozgása.</p><a href=\"/tananyag/kviz-merev-testek-mozgasa-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg4-2", "title": "4.2. A haladási egyensúly", "htmlContent": "<p>A haladási egyensúly.</p><a href=\"/tananyag/kviz-haladasi-egyensuly-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg4-3", "title": "4.3. Az erő nyomatéka", "htmlContent": "<p>Az erő nyomatéka.</p><a href=\"/tananyag/kviz-ero-nyomaték-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg4-4", "title": "4.4. A forgási egyensúly", "htmlContent": "<p>A forgási egyensúly.</p><a href=\"/tananyag/kviz-forgasi-egyensuly-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
     },
     {
-      "question": "Mi a lényege Newton III. törvényének, a hatás-ellenhatás elvének?",
-      "answers": {
-        "a": "Az erősebb test mindig nagyobb erőt fejt ki.",
-        "b": "Két test kölcsönhatásakor mindkét testre azonos nagyságú, de ellentétes irányú erő hat.",
-        "c": "Az ellenhatás mindig később lép fel, mint a hatás."
-      },
-      "correct": "b",
-      "explanation": "Az erők mindig párosával lépnek fel. Ha egy falat megütünk, a fal ugyanakkora, de ellentétes irányú erővel hat vissza a kezünkre."
-    },
-    {
-      "question": "Hogyan számítható ki az erő forgató hatása, a forgatónyomaték (M)?",
-      "answers": {
-        "a": "M = F + k (Erő + Erőkar)",
-        "b": "M = F / k (Erő / Erőkar)",
-        "c": "M = F ⋅ k (Erő ⋅ Erőkar)"
-      },
-      "correct": "c",
-      "explanation": "A forgatónyomaték az erő és az erőkar (a forgástengelytől mért merőleges távolság) szorzata."
-    },
-    {
-      "question": "Mi a nyomás (p) definíciója?",
-      "answers": {
-        "a": "A nyomás az egységnyi felületre ható nyomóerő nagysága (p = F / A).",
-        "b": "A nyomás a folyadék súlyából származik (p = m ⋅ g).",
-        "c": "A nyomás a test teljes tömege."
-      },
-      "correct": "a",
-      "explanation": "A nyomás azt mutatja meg, hogyan oszlik el egy erő egy adott felületen. Ugyanakkora erő kisebb felületen nagyobb nyomást fejt ki."
-    },
-    {
-      "question": "Mitől függ a hidrosztatikai nyomás?",
-      "answers": {
-        "a": "Csak a folyadék mennyiségétől.",
-        "b": "A folyadék sűrűségétől és a folyadékoszlop magasságától.",
-        "c": "Az edény alakjától."
-      },
-      "correct": "b",
-      "explanation": "A hidrosztatikai nyomás (p = ρ ⋅ g ⋅ h) annál nagyobb, minél sűrűbb a folyadék és minél mélyebbre merülünk benne."
-    },
-    {
-      "question": "Hogyan szól Arkhimédész törvénye?",
-      "answers": {
-        "a": "Minden test elsüllyed a vízben.",
-        "b": "A testek súlya a vízben kisebb.",
-        "c": "Minden folyadékba merülő testre a kiszorított folyadék súlyával egyenlő nagyságú felhajtóerő hat."
-      },
-      "correct": "c",
-      "explanation": "Ez a törvény magyarázza meg a testek úszását. Ha a testre ható felhajtóerő nagyobb vagy egyenlő, mint a test súlya, a test lebeg vagy úszik."
-    },
-    {
-      "question": "Mi határozza meg a hang magasságát?",
-      "answers": {
-        "a": "A hang frekvenciája.",
-        "b": "A hang amplitúdója.",
-        "c": "A hang terjedési közege."
-      },
-      "correct": "a",
-      "explanation": "A magas hangoknak nagy a frekvenciája (a rezgés gyors), a mély hangoknak kicsi a frekvenciája (a rezgés lassú)."
-    },
-    {
-      "question": "Mit jelent, ha egy fizikai mennyiség vektoriális?",
-      "answers": {
-        "a": "Hogy csak nagysága van.",
-        "b": "Hogy a nagyságán kívül iránya is van.",
-        "c": "Hogy csak pozitív értéke lehet."
-      },
-      "correct": "b",
-      "explanation": "A vektormennyiségeket (pl. erő, sebesség) egy nyíllal ábrázoljuk, aminek hossza a nagyságot, iránya pedig a mennyiség irányát mutatja."
-    },
-    {
-      "question": "Mi a feltétele a testek haladási egyensúlyának?",
-      "answers": {
-        "a": "A testre ható erők összege pozitív.",
-        "b": "A testre ható forgatónyomatékok összege nulla.",
-        "c": "A testre ható erők vektori összege (az eredő erő) nulla."
-      },
-      "correct": "c",
-      "explanation": "Ha az eredő erő nulla, a test nem gyorsul, azaz vagy nyugalomban van, vagy egyenes vonalú egyenletes mozgást végez."
-    },
-    {
-      "question": "Mire vonatkozik Pascal törvénye?",
-      "answers": {
-        "a": "Nyugvó, zárt folyadékokra, melyekben a külső nyomás gyengítetlenül terjed tovább.",
-        "b": "Mozgó gázokra.",
-        "c": "Szilárd testek rugalmasságára."
-      },
-      "correct": "a",
-      "explanation": "Pascal törvénye a hidraulikus rendszerek (pl. autófék) működésének alapja."
-    },
-    {
-      "question": "Mikor marad meg egy test mechanikai energiája?",
-      "answers": {
-        "a": "Mindig, minden körülmények között.",
-        "b": "Zárt rendszerben, ha a súrlódás elhanyagolható.",
-        "c": "Csak akkor, ha a test nyugalomban van."
-      },
-      "correct": "b",
-      "explanation": "A mechanikai energia megmaradásának törvénye akkor érvényes, ha nincs energiaveszteség, például súrlódás vagy közegellenállás miatt. Ilyenkor a helyzeti és mozgási energia egymásba alakul, de az összegük állandó."
-    },
-    {
-      "question": "Mi az emelők törvénye?",
-      "answers": {
-        "a": "F₁ ⋅ k₁ = F₂ ⋅ k₂",
-        "b": "F₁ / k₁ = F₂ / k₂",
-        "c": "F₁ + k₁ = F₂ + k₂"
-      },
-      "correct": "a",
-      "explanation": "Az emelő egyensúlyban van, ha az egyik oldalon ható erő és erőkar szorzata (forgatónyomaték) megegyezik a másik oldalon ható erő és erőkar szorzatával."
-    },
-    {
-      "question": "Melyik az alábbiak közül skaláris mennyiség?",
-      "answers": {
-        "a": "Erő",
-        "b": "Sebesség",
-        "c": "Idő"
-      },
-      "correct": "c",
-      "explanation": "Az időnek csak nagysága van (pl. 10 másodperc), iránya nincs, ezért skalár. Az erőnek és a sebességnek iránya is van, ezért azok vektorok."
-    },
-    {
-      "question": "Mit tesz egy mozgócsiga?",
-      "answers": {
-        "a": "Megváltoztatja az erő irányát, de a nagyságát nem.",
-        "b": "Felezi a teher felemeléséhez szükséges erőt, de kétszeres úton kell húzni.",
-        "c": "Duplázza a szükséges erőt."
-      },
-      "correct": "b",
-      "explanation": "A mozgócsiga egy egyszerű gép, ami erőt takarít meg az út rovására. Az állócsiga csak az erő irányát változtatja meg."
-    },
-    {
-      "question": "Mi a gravitációs helyzeti energia (E_pot) képlete?",
-      "answers": {
-        "a": "E_pot = m ⋅ g ⋅ h",
-        "b": "E_pot = m ⋅ v² / 2",
-        "c": "E_pot = m ⋅ a"
-      },
-      "correct": "a",
-      "explanation": "A helyzeti energia a test tömegétől (m), a gravitációs gyorsulástól (g) és a választott nullszinthez képesti magasságtól (h) függ."
-    },
-    {
-      "question": "Miért nem terjed a hang vákuumban?",
-      "answers": {
-        "a": "Mert a vákuum túl hideg.",
-        "b": "Mert a hang terjedéséhez közvetítő közeg (anyag) szükséges.",
-        "c": "Mert a fény elnyeli a hangot a vákuumban."
-      },
-      "correct": "b",
-      "explanation": "A hang mechanikai hullám, ami az anyag részecskéinek rezgését jelenti. A vákuumban nincsenek részecskék, amik rezeghetnének, így a hang nem tud terjedni."
-    },
-    {
-      "question": "Mire használjuk a paralelogramma szabályt a fizikában?",
-      "answers": {
-        "a": "Területszámításra.",
-        "b": "Hőmérséklet átváltására.",
-        "c": "Két, egy pontból kiinduló erővektor eredőjének megszerkesztésére."
-      },
-      "correct": "c",
-      "explanation": "Ez egy grafikus módszer két vektor összegzésére. Az eredő vektort a két vektorra feszített paralelogramma átlója adja meg."
-    },
-    {
-      "question": "Melyik NEM vektormennyiség?",
-      "answers": {
-        "a": "Elmozdulás",
-        "b": "Tömeg",
-        "c": "Gyorsulás"
-      },
-      "correct": "b",
-      "explanation": "A tömegnek csak nagysága van, iránya nincs, ezért skalár. Az elmozdulásnak és a gyorsulásnak nagysága és iránya is van, tehát vektorok."
-    },
-    {
-      "question": "Mi a súlypont?",
-      "answers": {
-        "a": "A test legnehezebb pontja.",
-        "b": "A test mértani középpontja.",
-        "c": "Az a képzeletbeli pont, ahol a test teljes súlyereje támad."
-      },
-      "correct": "c",
-      "explanation": "A súlypont a test egyensúlyi szempontból fontos pontja. Homogén testeknél ez egybeesik a mértani középponttal."
-    },
-    {
-      "question": "Melyik hullámtípusra példa a hanghullám?",
-      "answers": {
-        "a": "Transzverzális hullám.",
-        "b": "Longitudinális hullám.",
-        "c": "Elektromágneses hullám."
-      },
-      "correct": "b",
-      "explanation": "A hanghullám longitudinális, mert a közeg részecskéi a hullám terjedési irányával párhuzamosan rezegnek (sűrűsödések és ritkulások formájában)."
-    },
-    {
-      "question": "Mi egy test mechanikai energiája?",
-      "answers": {
-        "a": "A mozgási és helyzeti energiájának összege.",
-        "b": "Csak a mozgási energiája.",
-        "c": "A testben tárolt kémiai energia."
-      },
-      "correct": "a",
-      "explanation": "A mechanikai energia a mozgásból (kinetikus) és a helyzetből (potenciális) származó energiák összessége. Képlete: E_mech = E_kin + E_pot."
-    },
-    {
-      "question": "Mi okozza a légköri nyomást?",
-      "answers": {
-        "a": "A Föld forgása.",
-        "b": "A napszél.",
-        "c": "A Földet körülvevő levegőréteg súlya."
-      },
-      "correct": "c",
-      "explanation": "A felettünk lévő, több kilométer magas levegőoszlopnak súlya van, és ez a súly nyomást gyakorol a Föld felszínére és a rajta lévő testekre."
+      "id": "egyseg5",
+      "title": "V. Egység: Mechanikai jelenségek - Mechanikai hullámok, a hang",
+      "content": [
+        { "type": "card", "id": "egyseg5-1", "title": "5.1. A mechanikai hullámok", "htmlContent": "<p>A mechanikai hullám egy rugalmas közegben terjedő rezgésállapot. A közeg részecskéi nem haladnak a hullámmal, csak a rezgésállapot terjed tova. Lehet transzverzális (a rezgés merőleges a terjedésre, pl. vízhullám) vagy longitudinális (a rezgés párhuzamos a terjedéssel, pl. hanghullám).</p><a href=\"/tananyag/kviz-mechanikai-hullamok-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg5-2", "title": "5.2. A hangok keltése és érzékelése", "htmlContent": "<p>A hang a rugalmas közegekben (levegő, víz, szilárd testek) terjedő longitudinális mechanikai hullám. Hangot a testek rezgése kelt. A hang terjedéséhez mindig szükség van közvetítő közegre, vákuumban nem terjed.</p><a href=\"/tananyag/kviz-hangok-keltese-erzekeles-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" },
+        { "type": "card", "id": "egyseg5-3", "title": "5.3. A hang jellemzői", "htmlContent": "<p>A hangot három fő tulajdonsággal jellemezhetjük: Hangmagasság: A rezgés frekvenciájától függ. Minél nagyobb a frekvencia, annál magasabb a hang. Hangerősség: A rezgés amplitúdójától függ. Minél nagyobb az amplitúdó, annál erősebb a hang. Hangszín: A hang \"színezetét\" a felhangok összetétele adja meg. Ezért tudunk megkülönböztetni egy hegedűt egy zongorától, még ha ugyanazt a hangot is játsszák.</p><a href=\"/tananyag/kviz-hang-jellemzoi-7\" class=\"quiz-button\">Gyakorló Kvíz a Témakörben →</a>" }
+      ]
     }
   ]
 }

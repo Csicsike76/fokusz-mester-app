@@ -1,8 +1,80 @@
 {
-  "title": "Fizikateljes kepletgyujtemeny 8 osztaly",
+  "title": "Teljes Képletgyűjtemény - Fizika 8. Osztály",
   "subject": "fizika",
-  "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Fizikateljes kepletgyujtemeny 8 osztaly\" című tananyag.",
-  "questions": []
+  "grade": 8,
+  "category": "premium_lesson",
+  "description": "Hőtan, elektromosságtan, optika és minden, ami a sikeres tanévhez és a felvételihez kell.",
+  "toc": [
+    { "id": "fejezet1", "title": "I. Egység: Hőjelenségek", "subheadings": [
+        { "id": "fejezet1-1", "title": "1.1 Hőmérséklet, Hőmérők" },
+        { "id": "fejezet1-2", "title": "1.2 Halmazállapotok" },
+        { "id": "fejezet1-3", "title": "1.3 A hő" },
+        { "id": "fejezet1-4", "title": "1.4 Hőterjedés" },
+        { "id": "fejezet1-5", "title": "1.5 Kalorimetria" },
+        { "id": "fejezet1-6", "title": "1.6 Hőmennyiség mérése" },
+        { "id": "fejezet1-7", "title": "1.7 Hőerőgépek" },
+        { "id": "fejezet1-8", "title": "1.8 Párolgás" },
+        { "id": "fejezet1-9", "title": "1.9 Hőtágulás" },
+        { "id": "fejezet1-10", "title": "1.10 Fűtőanyagok" }
+    ]},
+    { "id": "fejezet2", "title": "II. Egység: Elektromos és mágneses jelenségek", "subheadings": [
+        { "id": "fejezet2-1", "title": "2.1 Elektrosztatika" },
+        { "id": "fejezet2-2", "title": "2.2 Elektrodinamika" },
+        { "id": "fejezet2-3", "title": "2.3 Az áram mágneses hatása" }
+    ]},
+    { "id": "fejezet3", "title": "III. Egység: Optikai jelenségek", "subheadings": [
+        { "id": "fejezet3-1", "title": "3.1 Bevezetés az optikába" },
+        { "id": "fejezet3-2", "title": "3.2 A fény visszaverődése" },
+        { "id": "fejezet3-3", "title": "3.3 A fénytörés" },
+        { "id": "fejezet3-4", "title": "3.4 Vékony lencsék" },
+        { "id": "fejezet3-5", "title": "3.5 Optikai eszközök" }
+    ]},
+    { "id": "fejezet4", "title": "IV. Egység: Energia és az élet", "subheadings": [
+        { "id": "fejezet4-1", "title": "4.1 Energiaátvitel, energiaforrások" },
+        { "id": "fejezet4-2", "title": "4.2 Az energia és az élet" },
+        { "id": "fejezet4-3", "title": "4.3 Életfenntartási rendszer" }
+    ]}
+  ],
+  "questions": [
+    { "id": "fejezet1", "title": "I. Egység: Hőjelenségek", "content": [
+        { "type": "card", "id": "fejezet1-1", "title": "1.1 Hőmérséklet, Hőmérők", "htmlContent": "<p>A hőmérséklet (T) a testek hőállapotát jellemző fizikai mennyiség. Hőmérővel mérjük, leggyakrabban Celsius-skálán (°C).</p><a href=\"/tananyag/kviz-hojelensegek-alapok\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-2", "title": "1.2 Halmazállapotok", "htmlContent": "<p>Az anyagok lehetnek szilárd, folyékony vagy légnemű halmazállapotúak. A halmazállapot-változás energia felvétellel vagy leadással jár.</p><a href=\"/tananyag/kviz-halmazallapotu-anyagok\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-3", "title": "1.3 A hő", "htmlContent": "<p>A hő (Q) egy energiaátadási folyamat, amely a hőmérséklet-különbség miatt jön létre, mindig a melegebb test felől a hidegebb felé. Mértékegysége a Joule (J).</p><a href=\"/tananyag/kviz-a-ho\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-4", "title": "1.4 Hőterjedés", "htmlContent": "<p>A hő terjedésének három módja: hővezetés, hőáramlás, hősugárzás.</p><a href=\"/tananyag/kviz-hoterjedes\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-5", "title": "1.5 Kalorimetria", "htmlContent": "<p>A kalorimetria a hőmennyiség mérésével foglalkozik. A fajhő (c) egy anyagra jellemző állandó.</p><a href=\"/tananyag/kviz-kalorimetria\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-6", "title": "1.6 A hőmennyiség mérése", "htmlContent": "<p>A hőmennyiség (Q) kiszámítása hőmérséklet-változás esetén: Q = c·m·ΔT. Halmazállapot-változás esetén: Q = L·m.</p><a href=\"/tananyag/kviz-a-homennyiseg-merese\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-7", "title": "1.7 Hőerőgépek", "htmlContent": "<p>Olyan gépek, amelyek a hőt mechanikai munkává alakítják.</p><a href=\"/tananyag/kviz-hoeroegepek\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-8", "title": "1.8 Párolgás", "htmlContent": "<p>A párolgás a folyadék felszínén, bármely hőmérsékleten zajló gőzképződés. Hőt von el a környezetétől.</p><a href=\"/tananyag/kviz-parolgas\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-9", "title": "1.9 Hőtágulás", "htmlContent": "<p>A testek méretének megváltozása hőmérséklet-változás hatására.</p><a href=\"/tananyag/kviz-hotagulas\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet1-10", "title": "1.10 Fűtőanyagok", "htmlContent": "<p>Olyan anyagok, amelyek elégetésével hőt termelünk. Fűtőértékük adja meg az 1 kg anyag elégetésekor felszabaduló hőt.</p><a href=\"/tananyag/kviz-futoanyagok\" class=\"quiz-button\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet2", "title": "II. Egység: Elektromos és mágneses jelenségek", "content": [
+        { "type": "card", "id": "fejezet2-1", "title": "2.1.1 Elektromos töltés és kölcsönhatása", "htmlContent": "<p>Az elektromos töltés lehet pozitív (+) vagy negatív (-). Az azonosak taszítják, az ellentétesek vonzzák egymást.</p><a href=\"/tananyag/kviz-elektromos-toltes-kolcsonhatas\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-2", "title": "2.1.2 Coulomb törvénye", "htmlContent": "<p>Két ponttöltés között ható erő (F) egyenesen arányos a töltések szorzatával és fordítottan arányos a távolságuk négyzetével.</p><a href=\"/tananyag/kviz-coulomb-torvenye\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-3", "title": "2.2.1 Az elektromos áramkörök", "htmlContent": "<p>Részei: áramforrás, fogyasztó, vezeték, kapcsoló. Áram csak zárt áramkörben folyik.</p><a href=\"/tananyag/kviz-aramkorok-osszetevoi\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-4", "title": "2.2.2 Az elektromos feszültség", "htmlContent": "<p>A feszültség (U) az áramforrás két pólusa közötti potenciálkülönbség. Mértékegysége: Volt (V).</p><a href=\"/tananyag/kviz-elektromos-feszultseg\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-5", "title": "2.2.3 Az elektromos áram erőssége", "htmlContent": "<p>Az áramerősség (I) a vezetőn egységnyi idő alatt átáramló töltés mennyisége. Mértékegysége: Amper (A).</p><a href=\"/tananyag/kviz-aramerosseg\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-6", "title": "2.2.4 Az elektromos ellenállás", "htmlContent": "<p>Az ellenállás (R) az anyagok áramot akadályozó tulajdonsága. Mértékegysége: Ohm (Ω).</p><a href=\"/tananyag/kviz-elektromos-ellenallas\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-7", "title": "2.2.5 Ohm törvénye", "htmlContent": "<p>I = U / R. Egy fogyasztón átfolyó áram erőssége egyenesen arányos a feszültséggel és fordítottan arányos az ellenállással.</p><a href=\"/tananyag/kviz-ohm-torvenye\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-8", "title": "2.2.6 Kirchoff törvényei", "htmlContent": "<p>I. (Csomóponti törvény): A csomópontba befolyó áramok összege egyenlő a kifolyókéval. II. (Huroktörvény): Egy zárt hurokban a feszültségek előjeles összege nulla.</p><a href=\"/tananyag/kviz-kirchoff-torvenyei\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-9", "title": "2.2.7 Az áramkörök kapcsolása", "htmlContent": "<p>Lehet soros (a fogyasztók egymás után) vagy párhuzamos (a fogyasztók külön ágakon).</p><a href=\"/tananyag/kviz-aramkorok-kapcsolasa\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-10", "title": "2.2.8 Elektromos munka és teljesítmény", "htmlContent": "<p>Az elektromos mező munkát végez a töltéseken. A teljesítmény (P) a munkavégzés (W) sebessége.</p><a href=\"/tananyag/kviz-elektromos-munka-teljesitmeny\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-11", "title": "2.2.9 Az elektromos áram kémiai hatása", "htmlContent": "<p>Az elektrolízis az elektromos áram hatására bekövetkező kémiai bomlás.</p><a href=\"/tananyag/kviz-aram-kemiai-hatasa\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-12", "title": "2.2.10 Galvánelemek", "htmlContent": "<p>Olyan áramforrások (elemek, akkumulátorok), amelyek kémiai energiát alakítanak át elektromos energiává.</p><a href=\"/tananyag/kviz-galvanelemek\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-13", "title": "2.3.1 Az elektromos áram mágneses hatása", "htmlContent": "<p>Minden áramjárta vezető körül mágneses mező jön létre.</p><a href=\"/tananyag/kviz-aram-magneses-hatasa\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet2-14", "title": "2.3.2 Egy elektromágnes által kifejtett erő", "htmlContent": "<p>Az elektromágnes egy áramjárta, vasmagos tekercs. Ereje függ a menetszámtól és az áramerősségtől.</p><a href=\"/tananyag/kviz-elektromagneses-ero\" class=\"quiz-button\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet3", "title": "III. Egység: Optikai jelenségek", "content": [
+        { "type": "card", "id": "fejezet3-1", "title": "3.1 Bevezetés az optikába", "htmlContent": "<p>Az optika a fénnyel és a fényjelenségekkel foglalkozó tudományág.</p><a href=\"/tananyag/kviz-optika-bevezetes\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet3-2", "title": "3.2 A fény visszaverődése", "htmlContent": "<p>A beesési szög mindig egyenlő a visszaverődési szöggel.</p><a href=\"/tananyag/kviz-fenyvisszaverodes\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet3-3", "title": "3.3 A fénytörés", "htmlContent": "<p>A fénytörés a fény irányának megváltozása, amikor az egyik átlátszó közegből egy másikba lép át.</p><a href=\"/tananyag/kviz-fenytores\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet3-4", "title": "3.4 Vékony lencsék", "htmlContent": "<p>A lencsék a fénytörés elvén működő optikai eszközök, amelyek képet alkotnak. Leképezési törvény: 1/t + 1/k = 1/f.</p><a href=\"/tananyag/kviz-vekony-lencsek\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet3-5", "title": "3.5 Optikai eszközök", "htmlContent": "<p>Lencsék és/vagy tükrök kombinációját használják a képalkotáshoz (pl. szemüveg, mikroszkóp, távcső).</p><a href=\"/tananyag/kviz-optikai-eszkozok\" class=\"quiz-button\">Gyakorló Kvíz →</a>" }
+    ]},
+    { "id": "fejezet4", "title": "IV. Egység: Energia és az élet", "content": [
+        { "type": "card", "id": "fejezet4-1", "title": "4.1 Energiaátvitel, energiaforrások", "htmlContent": "<p>Az energiaátvitel során az energia egyik formából a másikba alakul át. Energiaforrásaink lehetnek megújulók és nem megújulók.</p><a href=\"/tananyag/kviz-energiaatvitel-energiaforrasok\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-2", "title": "4.2 Az energia és az élet", "htmlContent": "<p>A földi élet alapvető energiaforrása a Nap. A növények a fotoszintézis során a napenergiát kémiai energiává alakítják.</p><a href=\"/tananyag/kviz-az-energia-es-az-elet\" class=\"quiz-button\">Gyakorló Kvíz →</a>" },
+        { "type": "card", "id": "fejezet4-3", "title": "4.3 Életfenntartási rendszer", "htmlContent": "<p>Olyan mesterséges, zárt rendszer, amely az emberi élethez szükséges alapvető feltételeket biztosítja.</p><a href=\"/tananyag/kviz-eletfenntartasi-rendszer\" class=\"quiz-button\">Gyakorló Kvíz →</a>" }
+    ]}
+  ]
 }

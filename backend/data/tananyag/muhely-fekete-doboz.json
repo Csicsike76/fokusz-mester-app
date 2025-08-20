@@ -1,8 +1,96 @@
 {
-  "title": "Muhely fekete doboz",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 23. hét: A \"fekete doboz\" probléma",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely fekete doboz\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére megtapasztalod, mit jelent a \"fekete doboz\" probléma, és elsajátítasz egy hatékony promptolási technikát.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Varázsdoboz Titka"
+    },
+    {
+      "id": "kulcsfogalmak",
+      "title": "4. Kulcsfogalmak"
+    },
+    {
+      "id": "feladatok",
+      "title": "5. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A Te Dilemmád Elemzése!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére megtapasztalod, mit jelent a \"fekete doboz\" probléma, és elsajátítasz egy hatékony promptolási technikát (\"gondolkodj hangosan\"), amellyel rábírhatod az MI-t, hogy fedje fel a döntései mögött rejlő logikai láncot. Képes leszel kritikusan értékelni az MI által adott érvelést.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Bármelyik <strong>szöveggeneráló MI</strong> (Copilot, Gemini, ChatGPT).</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Varázsdoboz Titka",
+      "content": "<p>Képzeld el az MI-t egy varázsdobozként! Bedobsz felül egy kérdést (bemenet), és alul kiesik egy válasz (kimenet). De hogy mi történik a dobozon belül, az rejtély. A modern MI-k, különösen a neurális hálók, olyan bonyolultak, hogy még az alkotóik sem mindig tudják pontosan, miért hoznak egy adott döntést. Ezt nevezzük a \"fekete doboz\" problémának. Ma megtanuljuk, hogyan kérhetünk az MI-től egy kulcsot, amivel legalább egy kicsit bepillanthatunk a dobozba.</p>"
+    },
+    {
+      "id": "kulcsfogalmak",
+      "title": "4. Kulcsfogalmak",
+      "content": "<ul><li><strong>Fekete Doboz (Black Box):</strong> Olyan rendszer, amelynek a belső működése ismeretlen vagy érthetetlen a felhasználó számára. Látjuk a bemenetet és a kimenetet, de a kettő közötti folyamat rejtve marad.</li><li><strong>Magyarázható MI (Explainable AI - XAI):</strong> Az MI-kutatás azon területe, amely olyan módszerekkel foglalkozik, amelyekkel az MI-modellek döntései érthetővé és ember által értelmezhetővé tehetők.</li><li><strong>Következtetési Lánc (Chain of Thought):</strong> Az a folyamat, ahogy az MI lépésről lépésre eljut egy következtetésig. A \"gondolkodj hangosan\" prompt ezt a láncot próbálja meg láthatóvá tenni.</li></ul>"
+    },
+    {
+      "id": "feladatok",
+      "title": "5. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai kísérletünk:</strong> Rávesszük az MI-t, hogy ne csak tanácsot adjon, hanem érveljen is mellette.</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A \"Fekete Doboz\" Kérdés",
+          "content": "<p>Tegyünk fel az MI-nek egy összetett, nem egyértelmű kérdést, ami érvelést igényel! A cél, hogy egy rövid, direkt választ kapjunk először.</p><p><strong>Megfigyelés:</strong> Az MI valószínűleg választani fog egyet a kettő közül, és ad egy nagyon rövid indoklást. Ez a \"fekete doboz\" kimenete. Tudjuk a választ, de nem tudjuk, miért.</p>",
+          "prompts": ["Két tantárgy között vacillálok a jövőmet illetően: informatika és biológia. Melyiket válasszam, ha stabil, jól fizető állást szeretnék? Adj egy rövid, direkt választ, melyik a jobb választás!"]
+        },
+        {
+          "title": "2. Feladat: Bepillantás a Dobozba - \"Gondolkodj hangosan!\"",
+          "content": "<p>Most jön a trükk! Kérjük meg az MI-t, hogy fedje fel a gondolatmenetét!</p><p><strong>Megfigyelés:</strong> Figyeld meg, hogyan bontja le az MI a problémát! Valószínűleg összehasonlítja a két területet különböző szempontok szerint. Most már nem csak egy választ látsz, hanem egy érvelési folyamatot.</p>",
+          "prompts": ["Rendben. Most pedig 'gondolkodj hangosan'! Vezesd le lépésről lépésre, milyen szempontokat vettél figyelembe (pl. piaci trendek, kezdő fizetések, jövőbeli lehetőségek), és ezek alapján hogyan jutottál el az előző következtetésedig."]
+        },
+        {
+          "title": "3. Feladat: Az Érvelés Elemzése",
+          "content": "<p>Most, hogy látod a \"gondolatmenetet\", elemezd kritikusan! Ne fogadd el automatikusan!</p><ol><li><strong>Logikusak a lépések?</strong> Érthető, hogyan jutott el A-ból B-be?</li><li><strong>Milyen forrásokra támaszkodhatott?</strong> (Még ha nem is írja ki, gondold végig: valószínűleg álláshirdetési oldalak, gazdasági cikkek adataiból dolgozik.)</li><li><strong>Milyen fontos szempontot hagyott ki?</strong> Említette például a két területhez szükséges különböző készségeket? Vagy a munka-magánélet egyensúlyát?</li></ol>"
+        },
+        {
+          "title": "4. Feladat: A Fekete Doboz \"Megfordítása\"",
+          "content": "<p>Teszteljük le, hogy az érvelése mennyire rugalmas! Kérjük meg, hogy érveljen az ellenkezője mellett!</p><p><strong>Megfigyelés:</strong> Egy jó MI képes lesz erre, és rávilágít a másik oldal előnyeire is (pl. biotechnológia, egészségügy növekedése). Ez megmutatja, hogy a \"fekete doboz\" nem egyetlen igazságot tartalmaz, hanem a rendelkezésére álló adatok alapján képes különböző, logikusnak tűnő érveléseket felépíteni.</p>",
+          "prompts": ["Érdekes érvelés. Most pedig viselkedj úgy, mint egy másik karrier-tanácsadó, aki szerint a biológia a jobb választás a jövőre nézve! Milyen érveket hoznál fel amellett?"]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "content": "<p>Láttuk, hogy az MI döntései mögött van egyfajta logika, de vajon ez elég?</p><ul><li><strong>Amikor a tét nagy:</strong> A tantárgyválasztás fontos, de mi a helyzet, ha egy MI egy orvosi diagnózisról, egy hitelkérelem elutasításáról vagy egy bírósági ítéletben hoz javaslatot? Miért elengedhetetlenül fontos ezekben az esetekben, hogy a döntés ne egy \"fekete dobozból\" jöjjön, hanem minden lépése átlátható és megkérdőjelezhető legyen?</li><li><strong>A \"logikusnak tűnő\" csapdája:</strong> Az MI érvelése logikusnak tűnhet, de mi van, ha az alapul szolgáló adatok torzak (ahogy a 19. héten tanultuk)? Hogyan vezethet egy látszólag tökéletes érvelés is teljesen rossz vagy igazságtalan következtetésre?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A Te Személyes Dilemmád Elemzése!",
+      "content": "<p>Most alkalmazd a tanult technikát egy saját, személyes dilemmádra!</p><p><strong>Válassz egyet az alábbi, összetett kérdések közül (vagy találj ki sajátot):</strong></p><ul><li>\"Melyik a jobb választás egy diáknak nyári szünetre: a pénzkeresés egy diákmunkával, vagy egy új készség elsajátítása egy online kurzuson?\"</li><li>\"Jobb ötlet egy új telefont venni, vagy a régi, még működő telefont megtartani és a pénzt másra költeni?\"</li></ul><p><strong>A feladatod:</strong></p><ol><li>Tedd fel a kérdést az MI-nek, és kérj egy <strong>direkt választ</strong>!</li><li>Ezután kérd meg, hogy <strong>\"gondolkodjon hangosan\"</strong>, és vezesse le az érvelését lépésről lépésre.</li><li>Végül írj egy rövid, 2-3 mondatos reflexiót: <strong>Segített neked az MI érvelése a döntésben? Meggyőző volt? Milyen fontos szempontot hagyott ki, ami neked személyesen fontos?</strong></li></ol><p>Mentsd le a beszélgetésedet és a reflexiódat! Ez a gyakorlat segít, hogy az MI-t ne válasz-automatának, hanem egy gondolkodó partnernek tekintsd.</p>"
+    }
+  ]
 }

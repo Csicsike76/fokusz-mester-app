@@ -1,8 +1,85 @@
 {
-  "title": "Interaktavaimivisszamasolandokodgyljtemany",
+  "title": "AIMI Műhely - A Mesterséges Intelligencia Gyakorlati Alkalmazása",
   "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Interaktavaimivisszamasolandokodgyljtemany\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A Koncepciótól a Prototípusig - Teljes projektmenedzsment kurzus mesterséges intelligencia projektekhez.",
+  "toc": [
+    { "id": "module1", "title": "I. Első Lépések" },
+    { "id": "module2", "title": "II. Személyes Asszisztens" },
+    { "id": "module3", "title": "III. Kritikai Gondolkodás" },
+    { "id": "module4", "title": "IV. Alkotás és Innováció" },
+    { "id": "extra-modules", "title": "Extra Műhelyek" }
+  ],
+  "questions": [
+    {
+      "id": "module1",
+      "title": "I. MODUL: AZ ELSŐ LÉPÉSEK ÉS ALAPVETŐ ESZKÖZÖK (1–9. hét)",
+      "type": "tasks_section",
+      "tasks": [
+        { "title": "1. hét: Mi ez az egész? Az MI a gyakorlatban", "content": "<p>Feladat: Fedezz fel és azonosíts legalább 3 MI-alapú funkciót a saját telefonodon vagy számítógépeden! Készíts róluk képernyőképet és rövid leírást.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-mi-a-gyakorlatban\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "2. hét: A \"beszélgetés\" az MI-vel: A promptolás alapjai", "content": "<p>Feladat: Egy szöveggeneráló MI (pl. Copilot) segítségével írass egy rövid történetet, majd finomítsd a promptot lépésről lépésre, hogy a történet stílusa és tartalma megváltozzon.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-prompt-alapok\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "3. hét: Képalkotás MI-vel: Az első kreatív műhely", "content": "<p>Feladat: Hozz létre képeket egyszerű szöveges parancsokkal egy ingyenes képalkotó MI-vel! Kísérletezz a stílusokkal (fotó, festmény, képregény).</p><div class=\"button-group\"><a href=\"/tananyag/muhely-kepalkotas\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "4. hét: Ötletelés és vázlatírás", "content": "<p>Feladat: Válassz egy iskolai beadandó témát (pl. egy fogalmazás), és használd az MI-t ötletelésre, a gondolataid strukturálására és egy vázlat elkészítésére.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-otleteles-vazlatiras\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "5. hét: Zene és hang generálása", "content": "<p>Feladat: Hozz létre rövid zenei aláfestéseket vagy hangeffekteket egy MI-alapú zeneszerkesztővel, egyszerű leírások (pl. \"szomorú zongoradallam\") alapján.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-zenegeneralas\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "6. hét: Az adat és az algoritmus: Mitől működik?", "content": "<p>Feladat: A Google \"Teachable Machine\" eszközével taníts be egy egyszerű modellt, ami megkülönböztet két tárgyat a webkamerád képén. Értsd meg a tanítási folyamatot!</p><div class=\"button-group\"><a href=\"/tananyag/muhely-teachable-machine\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "7. hét: Felelősség és tévhitek", "content": "<p>Feladat: Keress 3 hírt vagy közösségi média posztot az MI-ről! A tanultak alapján értékeld, melyik állítás reális és melyik túlzó vagy félrevezető.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-felelosseg-tevhitek\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "8. hét: A hétköznapi MI-asszisztensek", "content": "<p>Feladat: Adj a telefonod asszisztensének (Siri, Google Assistant) 5 különböző, egyre összetettebb parancsot! Figyeld meg, mit ért meg és hol hibázik.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-asszisztensek\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "9. hét: I. Modul Projekt", "content": "<p>Feladat: Készíts egy 1 oldalas bemutatót \"Az én MI eszköztáram\" címmel, bemutatva a kedvenc, modul során megismert 3 eszközödet és azt, mire használnád őket.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-modul1-projekt\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" }
+      ]
+    },
+    {
+      "id": "module2",
+      "title": "II. MODUL: AZ MI MINT SZEMÉLYES ASSZISZTENS ÉS TANULÓTÁRS (10–18. hét)",
+      "type": "tasks_section",
+      "tasks": [
+        { "title": "10. hét: Tanulás turbó-fokozatban", "content": "<p>Feladat: Másolj be egy hosszú szöveget (pl. egy online cikket) egy MI-be, és kérj róla 5 pontos vázlatot, kulcsszavakat és 3 tesztkérdést a tartalmából.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-tanulas-osszegzes\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "11. hét: Nyelvtanulás és fordítás", "content": "<p>Feladat: Írj egy rövid bekezdést magyarul, majd fordítsd le MI-vel egy tanult nyelvre! Utána kérd meg az MI-t, hogy javítsa ki a saját fordítását és magyarázza el a hibákat.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-nyelvtanulas\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "12. hét: Prezentációk készítése", "content": "<p>Feladat: Egy MI prezentációkészítővel (pl. Gamma, Tome) generálj egy 5 diából álló bemutatót egy szabadon választott témáról, majd finomítsd a tartalmát és a dizájnját.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-prezentacio\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "13. hét: Kódolás alapjai (tudás nélkül)", "content": "<p>Feladat: Kérd meg az MI-t, hogy írjon egy egyszerű HTML kódot, ami létrehoz egy gombot! Utána kérd meg, hogy magyarázza el soronként, melyik rész mit csinál.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-kod-magyarazat\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "14. hét: Adatok elemzése (egyszerűen)", "content": "<p>Feladat: Keress egy egyszerű táblázatot (pl. egy ország népességi adatai). Kérd meg az MI-t, hogy elemezze, és írja le a 3 legfontosabb megállapítást az adatokból.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-adatelemzes\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "15. hét: Az 'MI-detektív': Információkeresés", "content": "<p>Feladat: Tegyél fel egy összetett kérdést az MI-nek, ami több forrást igényel (pl. \"Melyek a napenergia előnyei és hátrányai Dániában?\"). Ellenőrizd a kapott válasz forrásait!</p><div class=\"button-group\"><a href=\"/tananyag/muhely-tenyellenorzes\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "16. hét: Önéletrajz és motivációs levél", "content": "<p>Feladat: Írj egy 3 mondatos leírást magadról és egy megpályázni kívánt (akár kitalált) diákmunkáról! Kérd meg az MI-t, hogy ebből írjon egy rövid önéletrajz-vázlatot.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-oneletrajz\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "17. hét: Személyes projektmenedzsment", "content": "<p>Feladat: Adott egy cél (pl. \"megszervezni egy osztálykirándulást\"). Kérd meg az MI-t, hogy bontsa le a projektet heti lépésekre, és készítsen egy teendőlistát.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-projektmenedzsment\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "18. hét: Félévi Projekt", "content": "<p>Feladat: Válassz egy tantárgyat, amiből nehézségeid vannak! Tervezz meg egy 1 hónapos \"MI-turbó\" tanulási tervet a modulban tanult eszközökkel.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-felevi-projekt\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" }
+      ]
+    },
+    {
+      "id": "module3",
+      "title": "III. MODUL: KRITIKAI GONDOLKODÁS ÉS TÁRSADALMI HATÁSOK (19–27. hét)",
+      "type": "tasks_section",
+      "tasks": [
+        { "title": "19. hét: Torzítás (bias) a gyakorlatban", "content": "<p>Feladat: Használj egy képalkotót a `doktor`, `ápoló`, `vezérigazgató` szavakkal. Elemezd a kapott képeket: milyen sztereotípiákat tükröznek? Hogyan lehet ezt feloldani?</p><div class=\"button-group\"><a href=\"/tananyag/muhely-torzitas\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "20. hét: Deepfake és dezinformáció", "content": "<p>Feladat: Keress egy példát egy ismert deepfake videóra. Gyűjts össze 3 jelet, amiből gyanút lehet fogni, hogy a tartalom manipulált.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-dezinformacio\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "21. hét: Kreativitás és szerzői jog", "content": "<p>Feladat: Generálj egy képet egy híres festő (pl. Van Gogh) stílusában. Vitassátok meg: Ki a szerző? Felhasználhatod-e ezt a képet egy pólón, amit eladsz?</p><div class=\"button-group\"><a href=\"/tananyag/muhely-szerzoi-jog\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "22. hét: Adatvédelem: A te adataid", "content": "<p>Feladat: Nézd meg egy általad használt közösségi média oldal adatvédelmi beállításait! Keress 3 olyan beállítást, ami befolyásolja, hogy az MI mit 'tud' rólad.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-adatvedelem\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "23. hét: A \"fekete doboz\" probléma", "content": "<p>Feladat: Kérdezz meg egy MI-t egy összetett témáról, majd kérd meg, hogy \"gondolkodjon hangosan\", vagyis lépésről-lépésre vezesse le, hogyan jutott el a következtetésig.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-fekete-doboz\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "24. hét: Az MI etikája: A dilemmák", "content": "<p>Feladat: Használd a MIT \"Moral Machine\" szimulátorát! Hozz döntéseket önvezető autós dilemmákban, majd elemezd a saját és a globális eredményeket.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-etika-dilemmak\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "25. hét: A munka jövője", "content": "<p>Feladat: Válassz egy szakmát! Gyűjts össze 3 feladatot, amit az MI automatizálhat benne, és 3 új feladatot, ami az MI használata miatt jöhet létre.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-munka-jovoje\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "26. hét: MI a mentális egészségért", "content": "<p>Feladat: Próbálj ki egy MI-alapú mindfulness vagy naplózó alkalmazást! Írj rövid reflexiót a tapasztalataidról: segített vagy sem?</p><div class=\"button-group\"><a href=\"/tananyag/muhely-mentalhealth\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "27. hét: III. Modul Projekt", "content": "<p>Feladat: Készíts egy \"Felelős MI Felhasználói Kézikönyvet\" egy általad választott MI eszközhöz, amely 5 tippet és 3 figyelmeztetést tartalmaz.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-modul3-projekt\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" }
+      ]
+    },
+    {
+      "id": "module4",
+      "title": "IV. MODUL: ALKOTÁS ÉS INNOVÁCIÓ - A NAGY PROJEKT (28–36. hét)",
+      "type": "tasks_section",
+      "tasks": [
+        { "title": "28-29. hét: Csapatépítés és projektválasztás", "content": "<p>Feladat: Alakítsatok 3-4 fős csapatokat! Válasszatok egy valós problémát, amit egy MI-alapú projekttel szeretnétek megoldani vagy bemutatni.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-nagyprojekt-start\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "30-31. hét: Tervezés és kutatás", "content": "<p>Feladat: A csapatoddal készítsetek részletes projekttervet! Használjátok az MI-t a kutatáshoz és a feladatok lebontásához.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-nagyprojekt-tervezes\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "32-33. hét: Alkotói fázis", "content": "<p>Feladat: Hozzátok létre a projektetek kézzelfogható részeit: a prototípus vázlatát, a bemutató szövegeit, a vizuális elemeket, stb. az MI-eszközök segítségével.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-nagyprojekt-alkotas\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "34. hét: Tesztelés és finomítás", "content": "<p>Feladat: Mutassátok be a félkész projektet egy másik csapatnak, és kérjetek visszajelzést! Az MI segítségével elemezzétek a visszajelzéseket.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-nagyprojekt-teszteles\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "35. hét: Záró prezentációk", "content": "<p>Feladat: Minden csapat bemutatja a féléves projektjét a többiek és a tanár előtt.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-nagyprojekt-bemutato\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" },
+        { "title": "36. hét: Évzáró és kitekintés", "content": "<p>Feladat: Közös megbeszélés a tanultakról, a legjobb projektek értékelése. Milyen MI-készségekkel vágsz neki a jövőnek?</p><div class=\"button-group\"><a href=\"/tananyag/muhely-evzaro\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" }
+      ]
+    },
+    {
+      "id": "extra-modules",
+      "title": "EXTRA MŰHELYEK",
+      "type": "tasks_section",
+      "tasks": [
+        { "title": "Extra: Chatbot Készítés Személyiséggel", "content": "<p>Feladat: Tervezz meg egy egyedi karaktert, és írj egy \"rendszerpromptot\", ami életre kelti őt! Tanuld meg, hogyan adhatsz egy MI-nek személyiséget, tudást és viselkedési szabályokat.</p><div class=\"button-group\"><a href=\"/tananyag/muhely-chatbot-keszites\" class=\"quiz-button\">Gyakorlati Műhely →</a></div>" }
+      ]
+    }
+  ]
 }

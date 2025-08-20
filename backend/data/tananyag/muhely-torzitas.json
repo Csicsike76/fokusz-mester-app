@@ -1,8 +1,96 @@
 {
-  "title": "Muhely torzitas",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 19. hét: Torzítás (bias) a gyakorlatban",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely torzitas\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel egy egyszerű kísérlettel bemutatni, hogyan működik a mesterséges intelligencia torzítása (bias).",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Digitális Tükör"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: A Te Személyes Torzítás-Teszted!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel egy egyszerű kísérlettel bemutatni, hogyan működik a mesterséges intelligencia torzítása (bias). Megtanulod azonosítani a generált képekben rejlő sztereotípiákat, megérteni azok okát, és elsajátítasz egy technikát (a tudatos promptolást) a torzítás csökkentésére.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Bármelyik <strong>képalkotó MI</strong>, amit már használtunk (pl. Microsoft Designer/Copilot, Leonardo.Ai).</li><li>Egy jegyzetfüzet vagy digitális dokumentum a megfigyeléseid rögzítésére.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Digitális Tükör",
+      "content": "<p>Képzeld el az MI-t egy tükörnek! Ez a tükör azonban nem téged mutat, hanem azt a hatalmas adatmennyiséget (képeket, szövegeket az internetről), amiből tanult. És ahogy a mi világunk sem tökéletes, úgy ez az adat is tele van emberi előítéletekkel és sztereotípiákkal. Az MI, mint egy engedelmes diák, ezeket a mintákat is megtanulja. A mai feladatunk, hogy belenézzünk ebbe a digitális tükörbe, és megvizsgáljuk, milyen torz képet mutat néha rólunk, emberekről.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai kísérletünk:</strong> Megvizsgáljuk, hogyan \"képzeli el\" az MI a különböző foglalkozásokat.</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Kísérlet - Képek Generálása",
+          "content": "<p>Nyisd meg a választott képalkotó MI-t! A feladatod, hogy generálj képeket az alábbi egyszerű, angol nyelvű promptokkal. Minden prompthoz generálj le legalább 4 különböző képet!</p><p>Mentsd le a kapott képeket, vagy csak tartsd őket nyitva egy böngészőlapon az elemzéshez.</p>",
+          "prompts": [
+            "a doctor",
+            "a nurse",
+            "a CEO",
+            "a programmer",
+            "a kindergarten teacher"
+          ]
+        },
+        {
+          "title": "2. Feladat: Az Elemzés - Mit Látsz a Tükörben?",
+          "content": "<p>Most legyél te a kutató! Nézd végig a generált képeket, és válaszolj a következő kérdésekre a jegyzetedben minden egyes foglalkozásnál:</p><ul><li><strong>Nem:</strong> Milyen neműek a képen látható személyek? Többnyire férfiak, nők, vagy vegyes?</li><li><strong>Kor:</strong> Milyen korúak a személyek? Fiatalok, középkorúak, idősek?</li><li><strong>Etnikum:</strong> Milyen etnikumúak a személyek? (Pl. fehér, ázsiai, fekete stb.)</li><li><strong>Környezet és ruházat:</strong> Milyen ruhát viselnek? Milyen tárgyak veszik őket körül? Ezek mennyire sztereotipikusak?</li></ul><p><strong>Például:</strong> \"A 'doctor' promptra 4-ből 3 kép fehér, középkorú férfit mutatott fehér köpenyben, sztetoszkóppal a nyakában.\"</p>"
+        },
+        {
+          "title": "3. Feladat: A Következtetés Levonása",
+          "content": "<p>Nézd meg a jegyzeteidet! Milyen mintázatokat veszel észre?</p><p>Valószínűleg azt tapasztaltad, hogy a 'doktor', 'vezérigazgató' és 'programozó' képeken több a férfi, míg az 'ápoló' és 'óvónő' képeken több a nő. Ez a <strong>sztereotip torzítás (bias)</strong> a gyakorlatban. Az MI nem \"gonosz\", egyszerűen azt a mintát tanulta meg az internetről, hogy ezeket a foglalkozásokat gyakrabban ábrázolják férfiakkal vagy nőkkel.</p>"
+        },
+        {
+          "title": "4. Feladat: A Tükör \"Kijavítása\" - Tudatos Promptolás",
+          "content": "<p>Hogyan küzdhetünk ez ellen? Úgy, hogy <strong>pontosabb, tudatosabb promptokat</strong> írunk! A feladatod, hogy generálj újra képeket, de most olyan promptokkal, amik szándékosan megtörik a sztereotípiát.</p><p>Próbáld ki ezeket, vagy találj ki sajátokat:</p><p><strong>Megfigyelés:</strong> Látod? Ha te irányítasz, és konkrétabb információkat adsz, az MI azt fogja követni. A tudatos promptolás a legjobb eszköz a torzítások ellen.</p>",
+          "prompts": [
+            "photo of a young black female CEO in a modern office",
+            "a male kindergarten teacher playing with children, happy and colorful illustration",
+            "an elderly indian female programmer writing code on her laptop"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok",
+      "content": "<p>Ez a kísérlet többről szól, mint vicces képekről. Gondolkozz el a valódi következményeken!</p><ul><li><strong>Mi a valós veszély?</strong> Mi történne, ha egy cég olyan MI-t használna az önéletrajzok előszűrésére, ami azt tanulta meg, hogy a \"programozók\" általában férfiak? Milyen hatással lenne ez a női jelentkezőkre? Hogyan erősíthetik fel az MI-k a már meglévő társadalmi egyenlőtlenségeket?</li><li><strong>A te felelősséged:</strong> Most, hogy tudod, hogyan működik a torzítás, milyen felelősséged van neked, mint felhasználónak? Hogyan tudsz tudatosabban promptolni, hogy ne erősítsd a sztereotípiákat?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: A Te Személyes Torzítás-Teszted!",
+      "content": "<p>Most te jössz! Válassz egy témát, ami nem foglalkozás, de szintén tele lehet sztereotípiákkal, és végezd el a saját kísérletedet!</p><p><strong>Válassz egyet a témák közül:</strong></p><ul><li>Nemzetiségek (pl. <code>a tourist from America</code>, <code>a family from Japan</code>)</li><li>Családi szerepek (pl. <code>a family cooking dinner</code>)</li><li>Absztrakt fogalmak (pl. <code>a beautiful woman</code>, <code>a strong man</code>)</li></ul><p><strong>A feladatod:</strong> Készíts egy rövid, 2 diás \"Torzítás Jelentést\"!</p><ol><li><strong>1. Dia: A Kísérlet.</strong> Írd le a választott promptot, és illessz be 2-3 képet, amit az MI generált.</li><li><strong>2. Dia: Az Elemzés.</strong> Írj le 2-3 mondatban, milyen sztereotípiákat fedeztél fel a képeken. Ezután írj egy javított, tudatos promptot, és illessz be egy képet, amit azzal generáltál!</li></ol><p>Mentsd le a prezentációdat, és készülj fel a tapasztalataid megosztására!</p>"
+    }
+  ]
 }

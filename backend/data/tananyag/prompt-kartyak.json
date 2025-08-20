@@ -1,8 +1,123 @@
 {
-  "title": "Prompt kartyak",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - Prompt Mester Kártyacsomag",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Prompt kartyak\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "Kreatív Technikák Kártyacsomagja a mesterséges intelligencia hatékony használatához.",
+  "toc": [
+    { "id": "szerepjatek", "title": "Szerepjáték (Persona)" },
+    { "id": "lanc-gondolkodas", "title": "Lánc-Gondolkodás (Chain of Thought)" },
+    { "id": "negativ-prompt", "title": "Negatív Prompt" },
+    { "id": "formatum-celkozonseg", "title": "Formátum és Célközönség" },
+    { "id": "analogias-gondolkodas", "title": "Analógiás Gondolkodás" },
+    { "id": "stilus-keveres", "title": "Stílus-keverés (Style Blending)" },
+    { "id": "forditott-otletborze", "title": "Fordított Ötletbörze" }
+  ],
+  "questions": [
+    {
+      "id": "szerepjatek",
+      "title": "Szerepjáték (Persona)",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "",
+          "content": "<p>A leghatékonyabb technika a stílus és a hangnem beállítására. Mondd meg az MI-nek, hogy kinek a bőrébe bújjon!</p><strong>Sablon:</strong><strong>Példa:</strong>",
+          "prompts": [
+            "\"Viselkedj úgy, mint egy [SZEREPKÖR]! [FELADAT LEÍRÁSA]\"",
+            "Viselkedj úgy, mint egy lelkes idegenvezető! Írj egy rövid, 3 mondatos kedvcsinálót a Grand Canyonhoz."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lanc-gondolkodas",
+      "title": "Lánc-Gondolkodás (Chain of Thought)",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "",
+          "content": "<p>Komplex problémák megoldásához. Kérd meg az MI-t, hogy ne csak a választ adja meg, hanem vezesse le lépésről lépésre, hogyan jutott el odáig.</p><strong>Sablon:</strong><strong>Példa:</strong>",
+          "prompts": [
+            "\"[PROBLÉMA LEÍRÁSA]. Vezesd le a megoldást lépésről lépésre, 'gondolkodj hangosan'!\"",
+            "Van 30 diák egy osztályban. Ha mindenki mindenkivel kezet fog egyszer, hány kézfogás történik összesen? Vezesd le a megoldást lépésről lépésre!"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "negativ-prompt",
+      "title": "Negatív Prompt",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "",
+          "content": "<p>A képalkotás kulcsa. Nemcsak azt mondod meg, mit akarsz látni, hanem azt is, hogy mit NEM. Segít elkerülni a hibákat és a nem kívánt elemeket.</p><strong>Sablon:</strong><strong>Példa:</strong>",
+          "prompts": [
+            "\"[KÉP LEÍRÁSA], --no [NEM KÍVÁNT ELEM]\"",
+            "photo of a beautiful forest, --no path, --no people"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "formatum-celkozonseg",
+      "title": "Formátum és Célközönség",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "",
+          "content": "<p>Irányítsd a válasz szerkezetét és stílusát! Mondd meg, kinek készül és hogyan nézzen ki.</p><strong>Sablon:</strong><strong>Példa:</strong>",
+          "prompts": [
+            "\"[TÉMA]. Magyarázd el [FORMÁTUM]-ban, egy [CÉLKÖZÖNSÉG] számára.\"",
+            "A fotoszintézis. Magyarázd el pontokba szedett listában, egy 10 éves gyerek számára."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "analogias-gondolkodas",
+      "title": "Analógiás Gondolkodás",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "",
+          "content": "<p>Kérd meg az MI-t, hogy egy bonyolult fogalmat egy egyszerű, hétköznapi hasonlattal magyarázzon el. Kiváló a megértéshez.</p><strong>Sablon:</strong><strong>Példa:</strong>",
+          "prompts": [
+            "\"Magyarázd el a(z) [BONYOLULT FOGALOM] működését egy [EGYSZERŰ DOLOG] analógiájával!\"",
+            "Magyarázd el a számítógépes RAM memória működését egy íróasztal analógiájával!"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stilus-keveres",
+      "title": "Stílus-keverés (Style Blending)",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "",
+          "content": "<p>Hoz létre teljesen egyedi, meglepő képeket két, látszólag össze nem illő stílus vagy téma keresztezésével.</p><strong>Sablon:</strong><strong>Példa:</strong>",
+          "prompts": [
+            "\"[TÉMA 1], in the style of [MŰVÉSZ/STÍLUS 2]\"",
+            "An astronaut riding a horse, in the style of a medieval tapestry."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forditott-otletborze",
+      "title": "Fordított Ötletbörze",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "",
+          "content": "<p>Ha elakadtál, ne a megoldást keresd, hanem a problémát! Ez a technika segít új nézőpontokat találni.</p><strong>Sablon:</strong><strong>Példa:</strong>",
+          "prompts": [
+            "\"Hogyan tudnánk a(z) [CÉL] elérését teljesen elrontani? Sorolj fel 5 módszert, amivel garantáltan kudarcot vallanánk!\"",
+            "Hogyan tudnánk egy osztálykirándulás megszervezését teljesen elrontani? Sorolj fel 5 módszert, amivel garantáltan kudarcot vallanánk!"
+          ]
+        }
+      ]
+    }
+  ]
 }

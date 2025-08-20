@@ -1,8 +1,77 @@
 {
-  "title": "Muhely nagyprojekt alkotas",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 32-33. hét: Nagy Projekt - Alkotás",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely nagyprojekt alkotas\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére el kell készülnötök a projektetek első, teljes verziójával, beleértve a szöveges, vizuális és egyéb tartalmakat.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: Az Építkezés"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. A Hét Kihívása: \"Version 1.0\""
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>Ezen a dupla héten a feladat, hogy a csapatotok a részletes tervrajz alapján <strong>hozza létre a projekt kézzelfogható elemeit</strong>. A műhely végére el kell készülnötök a projektetek első, teljes verziójával (\"prototípusával\"), beleértve a szöveges, vizuális és egyéb tartalmakat, amelyeket a következő héten már tesztelhettek.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: Az Építkezés",
+      "content": "<p>A tervek elkészültek, az alapanyagok (az ötleteitek) a helyükön vannak. Itt az ideje, hogy felvegyétek a védősisakot, és elkezdjétek az építkezést! Ebben a fázisban az MI-eszközök a ti \"power tool\"-jaitok: a szöveggenerátor a nagy teljesítményű csavarhúzó, a képalkotó a digitális festékszóró. De a legfontosabb személy az építkezésen te és a csapatod vagytok: ti vagytok az építésvezetők, akik eldöntik, melyik elem hova kerül, és hogy a végeredmény stabil és esztétikus legyen.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p>Vegyétek elő a múlt héten elkészített, részletes \"Projekt Terveteket\" és a kiosztott szerepeket! A munka mostantól a tervetek alapján, párhuzamosan folyik.</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Szöveges Tartalom Létrehozása (Felelős: Főkutató/Szövegíró)",
+          "content": "<p>A projektetek minden szöveges elemét most kell megalkotni! Ez lehet egy applikáció menüpontjainak leírása, egy kampány szlogenjei és posztjai, vagy egy prezentáció diáinak szövege.</p><p><strong>Feladat:</strong> Írjátok meg az MI segítségével az összes szükséges szöveget! Ne felejtsétek el a kapott nyers szövegeket <strong>átírni, finomítani és a saját hangotokra formálni!</strong></p>",
+          "prompts": ["Viselkedj úgy, mint egy profi szövegíró! A projektünk egy [ide írjátok a projekt formátumát], aminek a célja [ide írjátok a célkitűzést]. Írj egy rövid, de meggyőző szöveget a [konkrét elem, pl. \"Főoldalra\", \"Bemutatkozó diára\"]! A stílus legyen [stílus leírása, pl. \"informatív, de laza\"]."]
+        },
+        {
+          "title": "2. Feladat: A Vizuális Világ Megteremtése (Felelős: Kreatív Vezető/Dizájner)",
+          "content": "<p>Egy projekt annyira jó, amennyire kinéz. Most hozzátok létre a projekt vizuális elemeit!</p><p><strong>Feladat:</strong> Készítsétek el a projektetek logóját, a szükséges illusztrációkat, háttérképeket vagy egyéb vizuális elemeket! Törekedjetek az <strong>egységes stílusra</strong>, hogy a projekt kinézete koherens legyen!</p>",
+          "prompts": ["Egy [projektötlet leírása] projekthez készítek vizuális anyagokat. Generálj egy logótervet és 3 illusztrációt, amelyek passzolnak a projekthez! A stílus legyen egységes: [stílus leírása, pl. \"minimalista, letisztult, pasztell színekkel\"]!"]
+        },
+        {
+          "title": "3. Feladat: A Prototípus Összeállítása (Felelős: Projektvezető és a Csapat)",
+          "content": "<p>Itt az ideje, hogy a szöveges és vizuális elemeket összeillesszétek a kiválasztott formátumban!</p><p><strong>Feladat:</strong> Nyissátok meg a választott szerkesztőprogramot (Canva, Gamma, Google Diák, stb.)! A projektvezető koordinálásával kezdjétek el összeállítani a projekt első, teljes verzióját:</p><ul><li>Illesszétek be a véglegesített szövegeket a megfelelő helyekre.</li><li>Töltsétek fel a generált képeket, logót.</li><li>Állítsátok be a betűtípusokat, színeket, elrendezést.</li></ul><p>A cél, hogy a hét végére legyen egy olyan verzió, amit már be lehet mutatni valakinek.</p>"
+        },
+        {
+          "title": "4. Feladat: Az \"Extra Lépés\" (Opcionális, de ajánlott)",
+          "content": "<p>Ha van időtök és energiátok, tegyetek bele valami extrát, ami kiemeli a projekteteket a többi közül!</p><ul><li>Generáljatok egy rövid, 15-20 másodperces <strong>zenei aláfestést</strong> a bemutatótokhoz!</li><li>Írassatok az MI-vel egy rövid, 30 másodperces <strong>videó narrátor-szövegét</strong>!</li><li>Készítsetek egy <strong>interaktív elemet</strong> (pl. egy egyszerű kvízt a témában, amit az MI generált).</li></ul>"
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<p>Az alkotói folyamat közben gondolkodjatok el a tapasztaltakon!</p><ul><li><strong>A \"Rendező\" Szerepe:</strong> Az MI rengeteg tartalmat generált. Milyen döntéseket kellett meghoznotok, hogy ezekből egy egységes, értelmes egészet alkossatok? Miért mondhatjuk, hogy ebben a fázisban ti voltatok a rendezők, és az MI csak a színészek és a díszletesek?</li><li><strong>Konzisztencia-problémák:</strong> Tapasztaltátok, hogy az MI néha elfelejtette a korábbi utasításokat, és a képek vagy szövegek stílusa nem volt teljesen egységes? Hogyan oldottátok meg ezeket a problémákat? Miért fontos az emberi felügyelet a konzisztencia fenntartásához?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. A Hét Kihívása: \"Version 1.0\" - Az Első Kész Verzió",
+      "content": "<p>A dupla hét végére a csapatotoknak el kell készülnie a projekt <strong>első, teljes, bemutatható verziójával</strong>.</p><p><strong>A leadandó anyag:</strong></p><ul><li>A választott formátumban összeállított prototípus (pl. egy kész prezentáció linkje, egy dokumentum a kampánytervvel és a poszterekkel).</li><li>A produktumnak tartalmaznia kell a véglegesnek szánt szövegeket és vizuális elemeket.</li></ul><p>Ez a verzió még nem a végső, de már elég teljesnek kell lennie ahhoz, hogy a következő héten visszajelzést kérhessetek rá. Jó munkát, építészek!</p>"
+    }
+  ]
 }

@@ -1,8 +1,87 @@
 {
-  "title": "Muhely tenyellenorzes",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 15. hét: Az 'MI-detektív': Információkeresés",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely tenyellenorzes\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel az MI-t komplex kutatási kérdések megválaszolására használni, és kritikusan ellenőrizni a kapott válaszokat.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Szupergyors Asszisztens"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: A te saját nyomozásod!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel az MI-t komplex kutatási kérdések megválaszolására használni, és ami még fontosabb, megtanulod, hogyan <strong>ellenőrizd kritikusan a kapott válaszokat</strong> a források vizsgálatával. Képes leszel különbséget tenni a megbízható és a megbízhatatlan információ között.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<p>Olyan MI-asszisztensre van szükséged, amely képes az interneten keresni és megjelölni a forrásait.</p><ul><li><strong>Microsoft Copilot</strong> vagy <strong>Google Gemini</strong> (az alapértelmezett beállításokkal mindkettő keres az interneten).</li><li><strong>Perplexity AI</strong> - Kifejezetten kutatásra és forráskezelésre kihegyezett eszköz.</li><li>Webböngésző a források megnyitásához.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Szupergyors Asszisztens és a Főnyomozó",
+      "content": "<p>Képzeld el, hogy az MI egy szupergyors kutatóasszisztens, aki másodpercek alatt elolvassa neked az internet összes könyvét és cikkét egy témában, majd összefoglalja a lényeget. Ez fantasztikusan hangzik, de van egy bökkenő: ez az asszisztens néha félreért dolgokat, vagy összekeveri a forrásokat. A te feladatod ma az, hogy te legyél a főnyomozó! Nem hiszel el semmit automatikusan, hanem minden fontos állítást ellenőrzöl. Megtanulod, hogyan kérdezd ki az asszisztensedet, és hogyan buktasd le, ha téved.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai nyomozásunk tárgya:</strong> \"Melyek a napenergia előnyei és hátrányai Dániában?\"</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Kezdeti Kikérdezés",
+          "content": "<p>Tegyük fel az MI-nek az alap kérdést, de azonnal kérjünk bizonyítékot (forrásokat) is!</p><p><strong>Megfigyelés:</strong> Az MI valószínűleg egy szépen strukturált listát ad, lábjegyzetekkel vagy linkekkel a végén. Ez a mi nyomozásunk kiindulópontja.</p>",
+          "prompts": ["Viselkedj úgy, mint egy energiapolitikai kutatóasszisztens! Gyűjtsd össze pontokba szedve a napenergia 3 legfontosabb előnyét és 3 legfontosabb hátrányát Dániában! Minden ponthoz add meg a forrásaidat link formájában."]
+        },
+        {
+          "title": "2. Feladat: A Bizonyítékok Ellenőrzése",
+          "content": "<p>Itt kezdődik az igazi detektívmunka! Ne hidd el, amit az MI ír, ellenőrizd le!</p><ol><li>Válassz ki egyet az MI által megadott forráslinkek közül, és <strong>nyisd meg egy új böngészőlapon</strong>.</li><li>Olvasd el (vagy legalább fuss át) a forráscikket. A cikk valóban arról szól, amit az MI állít?</li><li><strong>Tedd fel magadnak a kérdéseket:</strong> Megbízhatónak tűnik a forrás (pl. egyetemi kutatás, hivatalos statisztika, neves újság)? Vagy egy ismeretlen blogról van szó? A cikkben szereplő információ alátámasztja az MI által írt pontot, vagy az MI túlságosan leegyszerűsítette vagy akár félreértette azt?</li></ol>"
+        },
+        {
+          "title": "3. Feladat: A Keresztkérdések",
+          "content": "<p>Most, hogy már van egy alapinformációnk, tegyünk fel egy mélyebb, konkrét adatra vonatkozó kérdést! Ezzel teszteljük, hogy az MI csak általánosságban beszél-e, vagy képes specifikus adatokat is előásni.</p><p><strong>Megfigyelés:</strong> Figyeld meg a választ! Tudott konkrét számot mondani, és adott hozzá forrást? Vagy csak egy általános, kitérő választ adott? A jó MI-asszisztens ilyenkor is forrással támasztja alá az állítását.</p>",
+          "prompts": ["Az egyik hátrányként a 'változékony időjárást' említetted. A forrásaid alapján, konkrét számokkal alátámasztva, hány százalékkal csökken a napelemek hatékonysága egy átlagos téli, felhős napon Dániában a nyári, napsütéses naphoz képest?"]
+        },
+        {
+          "title": "4. Feladat: A Hamis Nyom Tesztje",
+          "content": "<p>Most próbáljuk meg szándékosan becsapni az MI-t, hogy lássuk, észreveszi-e a hazugságot. Ezt hívják \"hallucináció\" tesztnek.</p><p><strong>Megfigyelés:</strong> Ez egy nyilvánvalóan hamis állítás (Dániában nincs sivatag). Egy jó, tényellenőrző MI erre azt fogja válaszolni, hogy \"Nem, ez az információ téves\", és elmagyarázza, miért. Ha az MI megpróbálja megerősíteni vagy részleteket kitalálni hozzá, akkor \"hallucinál\", és nem megbízható a válasza.</p>",
+          "prompts": ["Igaz az az információ, hogy Dánia egy hatalmas, sivatagi naperőművet épít a 'Sahara Solar Project' keretében?"]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok",
+      "content": "<p>A nyomozás végén gondolkozz el a tapasztalatokon!</p><ul><li><strong>\"Bízom, de ellenőrzöm\":</strong> Miért ez a legfontosabb szabály, amikor az MI-t kutatásra használjuk? Milyen következményei lehetnek, ha egy iskolai beadandót vagy egy fontos döntést egy ellenőrizetlen, MI által generált információra alapozunk?</li><li><strong>A források minősége:</strong> Az MI abból tanul, amit az interneten talál. Ha egy témáról sok a megbízhatatlan, téves információ, az MI válaszai is pontatlanok lesznek. Hogyan segít a források ellenőrzése abban, hogy ne csak az MI-t, hanem magát az internetet is kritikusan kezeld?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: A te saját nyomozásod!",
+      "content": "<p>Most te vagy a főnyomozó! Válassz egy téged érdeklő, összetett kérdést, és végezd el a teljes detektívmunkát.</p><p><strong>A feladatod:</strong></p><ol><li>Tegyél fel egy komplex kérdést az MI-nek, és kérj hozzá forrásokat. (Pl. \"Milyen hatással van a videójátékozás a tizenévesek alvási szokásaira?\")</li><li>Ellenőrizz le legalább <strong>egy forrást</strong> alaposan. Valóban azt írja, amit az MI állít?</li><li>Tegyél fel egy <strong>konkrét adatra vonatkozó keresztkérdést</strong>.</li><li>A végén írj egy <strong>saját, 3-4 mondatos összefoglalót</strong> a témáról, <strong>a te szavaiddal</strong>, az ellenőrzött információk alapján. Az összefoglaló végén jelöld meg azt az egy forrást, amit te magad is elolvastál és megbízhatónak találtál.</li></ol><p>Mentsd le a beszélgetésedet és a saját összefoglalódat! Ez a munkafolyamat a felelős és hatékony online kutatás alapja.</p>"
+    }
+  ]
 }

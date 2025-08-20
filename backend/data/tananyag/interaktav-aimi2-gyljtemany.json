@@ -1,8 +1,125 @@
 {
-  "title": "Interaktav aimi2 gyljtemany",
+  "title": "AIMI Stúdió - A Koncepciótól a Prototípusig",
   "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Interaktav aimi2 gyljtemany\" című tananyag.",
-  "questions": []
+  "category": "hub_page",
+  "description": "A Mesterséges Intelligencia Gyakorlati Alkalmazása",
+  "toolData": {
+    "type": "hub-page",
+    "header": "AIMI Stúdió",
+    "subheader": "A Koncepciótól a Prototípusig",
+    "sections": [
+      {
+        "title": "Navigáció",
+        "cards": [
+          {
+            "styleType": "nav",
+            "mainText": "Projekt Kézikönyv 📖",
+            "link": "/tananyag/projekt-kezikonyv"
+          },
+          {
+            "styleType": "nav",
+            "mainText": "Központi Eszköztár 🛠️",
+            "link": "/tananyag/eszkoztar"
+          },
+          {
+            "styleType": "nav",
+            "mainText": "Prompt Mester Kártyák 🃏",
+            "link": "/tananyag/prompt-kartyak"
+          }
+        ]
+      },
+      {
+        "title": "I. FÁZIS: ÖTLET ÉS KUTATÁS",
+        "cards": [
+          {
+            "styleType": "milestone",
+            "mainText": "1-2. hét: Piackutatás és Célcsoport",
+            "subText": "Feladat: Azonosítsatok egy problémát, és az MI segítségével végezzetek kutatást! Határozzátok meg a célközönségeteket.",
+            "link": "/tananyag/merfoldko-01-piackutatas"
+          },
+          {
+            "styleType": "milestone",
+            "mainText": "3-4. hét: Versenytárs-elemzés és Projekt Vázlat",
+            "subText": "Feladat: Keressetek létező megoldásokat a problémára! Készítsétek el a projekt hivatalos, egyoldalas vázlatát!",
+            "link": "/tananyag/merfoldko-02-projekt-vazlat"
+          }
+        ]
+      },
+      {
+        "title": "II. FÁZIS: TERVEZÉS ÉS PROTOTÍPUS",
+        "cards": [
+          {
+            "styleType": "milestone",
+            "mainText": "5-6. hét: Felhasználói Élmény (UX) és Drótváz",
+            "subText": "Feladat: Tervezzétek meg a felhasználói utat! Készítsetek egyszerű, funkcionális drótvázakat a főbb képernyőkről.",
+            "link": "/tananyag/merfoldko-03-drotvaz"
+          },
+          {
+            "styleType": "milestone",
+            "mainText": "7-9. hét: Arculattervezés és Vizuális Prototípus",
+            "subText": "Feladat: Tervezzetek logót, színpalettát és komplett arculatot! Állítsátok össze a látványos, vizuális prototípust.",
+            "link": "/tananyag/merfoldko-04-arculat"
+          }
+        ]
+      },
+      {
+        "title": "III. FÁZIS: \"FEJLESZTÉS\" ÉS TARTALOMGYÁRTÁS",
+        "cards": [
+          {
+            "styleType": "milestone",
+            "mainText": "10-12. hét: Tartalomstratégia és -gyártás",
+            "subText": "Feladat: Írjátok meg az MI-vel a prototípus összes szövegét, és generáljátok le a szükséges képeket és ikonokat.",
+            "link": "/tananyag/merfoldko-05-tartalomgyartas"
+          },
+          {
+            "styleType": "milestone",
+            "mainText": "13-15. hét: Interaktív Prototípus Építése",
+            "subText": "Feladat: Keltsétek életre a terveket! Készítsétek el a projekt kattintható, működőképes prototípusát.",
+            "link": "/tananyag/merfoldko-06-interaktiv-prototipus"
+          }
+        ]
+      },
+      {
+        "title": "IV. FÁZIS: TESZTELÉS ÉS \"PITCH\"",
+        "cards": [
+          {
+            "styleType": "milestone",
+            "mainText": "16. hét: Felhasználói Tesztelés",
+            "subText": "Feladat: Mutassátok be a prototípust egy másik csapatnak! Gyűjtsetek visszajelzést, és elemezzétek a javaslatokat.",
+            "link": "/tananyag/merfoldko-07-teszteles"
+          },
+          {
+            "styleType": "milestone",
+            "mainText": "17. hét: A \"Pitch\" Felépítése",
+            "subText": "Feladat: Készítsétek el a záró, 5 perces \"befektetői prezentációtok\" vázlatát és szövegét!",
+            "link": "/tananyag/merfoldko-08-pitch-keszites"
+          },
+          {
+            "styleType": "milestone",
+            "mainText": "18. hét: Záró Prezentációk",
+            "subText": "Feladat: A csapatok bemutatják a féléves munkájukat, a koncepciót és az interaktív prototípust.",
+            "link": "/tananyag/merfoldko-09-zaro-prezentacio"
+          }
+        ]
+      },
+      {
+        "title": "EXTRA MŰHELYEK",
+        "cards": [
+          {
+            "styleType": "milestone",
+            "mainText": "Extra: Chatbot Készítés Személyiséggel",
+            "subText": "Feladat: Tervezz meg egy egyedi karaktert, és írj egy \"rendszerpromptot\", ami életre kelti őt!",
+            "link": "/tananyag/muhely-chatbot-keszites"
+          },
+          {
+            "styleType": "milestone",
+            "mainText": "Extra: MI a Videójáték-Tervezésben",
+            "subText": "Feladat: Tervezz egy teljes játék-koncepciót! Alkoss ötletet, karaktert, pályát és \"concept art\"-ot az MI segítségével.",
+            "link": "/tananyag/muhely-jatektervezes"
+          }
+        ]
+      }
+    ]
+  }
 }

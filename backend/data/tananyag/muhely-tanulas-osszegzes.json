@@ -1,8 +1,101 @@
 {
-  "title": "Muhely tanulas osszegzes",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 10. hét: Tanulás turbó-fokozatban",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely tanulas osszegzes\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel egy hosszú, ismeretlen szöveget az MI segítségével perceken belül megérteni és a legfontosabb pontjait kigyűjteni.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Személyes Könyvtárosod"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a profi használathoz"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A te gyorstalpalód!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel egy hosszú, ismeretlen szöveget az MI segítségével perceken belül megérteni, a legfontosabb pontjait kigyűjteni, és a saját tudásodat ellenőrizni. Megtanulod, hogyan használd az MI-t személyes tanulási asszisztensként, ami segít az információk feldolgozásában.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Bármelyik <strong>szöveggeneráló MI</strong> (Copilot, Gemini, ChatGPT).</li><li>Egy hosszú, informatív szöveg. A mai feladathoz használjuk a <strong><a href=\"https://hu.wikipedia.org/wiki/V%C3%ADz\" target=\"_blank\">Vízről szóló magyar Wikipedia szócikket</a></strong>. Nyisd meg és tartsd készenlétben!</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Személyes Könyvtárosod",
+      "content": "<p>Képzeld el, hogy egy hatalmas könyvtárban állsz, és meg kell találnod a legfontosabb információt egy könyvben, de csak 10 perced van. Lehetetlen, igaz? Az MI ebben a helyzetben olyan, mint egy szupergyors személyes könyvtáros: átfutja neked a teljes szöveget, és a kezedbe adja a lényeget. A cél nem az olvasás helyettesítése, hanem a gyors áttekintés, a kulcsfontosságú pontok megértése, és a felkészülés a mélyebb tanulásra.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai projektünk:</strong> Feldolgozzuk a Vízről szóló Wikipedia cikket az MI segítségével.</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Szöveg \"Megetetése\"",
+          "content": "<p>Az első lépés, hogy az MI megkapja az információt, amivel dolgoznia kell.</p><ol><li>Nyisd meg a <a href=\"https://hu.wikipedia.org/wiki/V%C3%ADz\" target=\"_blank\">Víz szócikket</a>.</li><li>Jelöld ki és másold ki a teljes szöveget a \"Bevezető\"-től egészen a \"Jegyzetek\" szekció előtti részig.</li><li>Nyisd meg a választott MI-asszisztensedet, és illeszd be a másolt szöveget a csevegőablakba. <strong>FONTOS: Még ne nyomj Entert!</strong></li></ol>"
+        },
+        {
+          "title": "2. Feladat: Az Első Áttekintés - Összefoglalás kérése",
+          "content": "<p>Most, hogy a szöveg be van illesztve, adjuk ki az első, legegyszerűbb parancsot! Írd a bemásolt szöveg fölé vagy alá (attól függően, hol van a kurzor) a következő promptot, majd nyomj Entert.</p><p><strong>Megfigyelés:</strong> Másodpercek alatt kaptál egy rövid, tömör összefoglalót. Ez a \"TL;DR\" (Too Long; Didn't Read - Túl hosszú, nem olvastam el) verzió, ami segít gyorsan képbe kerülni a cikk fő témáival.</p>",
+          "prompts": ["Az alábbi szöveg alapján foglald össze egyetlen, 5-6 mondatos bekezdésben, hogy mi a Víz szócikk legfontosabb tartalma!"]
+        },
+        {
+          "title": "3. Feladat: Strukturálás - Vázlatkészítés",
+          "content": "<p>Az összefoglaló jó, de a tanuláshoz jobb egy strukturált vázlat. Most kérjünk egy ilyet! (Nem kell újra beillesztened a szöveget, az MI emlékszik rá.)</p><p><strong>Megfigyelés:</strong> Most egy sokkal részletesebb, a cikk szerkezetét követő vázlatot kaptál. Ezzel már átlátod a témaköröket és az összefüggéseket, ami óriási segítség a tanulásban.</p>",
+          "prompts": ["Nagyszerű. Most készíts egy részletes vázlatot ugyanebből a szövegből, pontokba szedve! A főcímek legyenek a fő pontok, az alcímek pedig alpontok."]
+        },
+        {
+          "title": "4. Feladat: A Lényeg Kiemelése - Kulcsszavak",
+          "content": "<p>Melyek a legfontosabb fogalmak, amiket mindenképp meg kell jegyezned a cikkből? Kérdezzük meg az MI-t!</p><p><strong>Megfigyelés:</strong> Az MI kigyűjtötte a legfontosabb terminusokat (pl. \"hidrogénkötés\", \"halmazállapotok\", \"fotoszintézis\"). Ha ezeket a szavakat ismered, valószínűleg a téma lényegét is érted.</p>",
+          "prompts": ["Sorold fel a szöveg alapján a 10 legfontosabb kulcsszót vagy fogalmat, ami elengedhetetlen a téma megértéséhez!"]
+        },
+        {
+          "title": "5. Feladat: Tudáspróba - Tesztkérdések generálása",
+          "content": "<p>A tanulás leghatékonyabb módja, ha ellenőrzöd a tudásodat. Az MI ebben is tud segíteni!</p><p><strong>Megfigyelés:</strong> Az MI képes tesztkérdéseket generálni, amivel felmérheted, mit jegyeztél meg az anyagból. Ez az aktív felidézés (active recall) egyik legjobb módszere.</p>",
+          "prompts": ["Készíts 3 feleletválasztós tesztkérdést a cikk tartalma alapján, mindegyikhez 3 lehetséges válasszal! A helyes választ jelöld meg."]
+        }
+      ]
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a profi tanulási asszisztens használatához",
+      "content": "<ul><li><strong>Szabd a célközönségre!</strong> Ha valami túl bonyolult, kérd ezt: \"Magyarázd el ezt a részt úgy, mintha egy 12 évesnek mondanád!\".</li><li><strong>Kérj analógiákat!</strong> \"A hidrogénkötést magyarázd el egy hétköznapi hasonlattal!\" Ez segít a megértésben.</li><li><strong>Fordítsd le a kulcsfogalmakat!</strong> \"A 'felületi feszültség' mit jelent angolul?\"</li><li><strong>Vigyázz a hosszúsággal!</strong> Nagyon hosszú szövegeknél (pl. egy egész könyv) az MI \"elfelejtheti\" a szöveg elejét. Ilyenkor érdemes fejezetenként dolgozni.</li></ul>"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "content": "<p>Az MI egy szuper eszköz a tanuláshoz, de nem helyettesíti a gondolkodást. Gondolkozz el ezen!</p><ul><li><strong>A pontosság ára:</strong> Az MI néha \"hallucinál\", vagyis kitalál dolgokat, vagy rosszul értelmez egy-egy finomabb részletet az összefoglalás során. Miért elengedhetetlen, hogy a legfontosabb állításokat mindig ellenőrizd az eredeti szövegben?</li><li><strong>Felszínes tudás vs. mély megértés:</strong> Ha mindig csak az összefoglalókat olvasod el, valóban megtanulod az anyagot? Hol a határ a segítség és a lustaság között? Hogyan tudod ezt az eszközt úgy használni, hogy az a mélyebb megértést segítse, ne pedig gátolja?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: A te saját gyorstalpalód!",
+      "content": "<p>Most alkalmazd a tanultakat egy téged érdeklő témára!</p><p><strong>A feladatod:</strong></p><ol><li>Válassz egy tantárgyat, ami érdekel (vagy amiből épp dolgozatot írsz). Keress hozzá egy hosszú, megbízható online cikket vagy tanulmányt.</li><li>Hajtsd végre a műhelyen tanult 4 lépést: <strong>összefoglalás, vázlat, kulcsszavak, tesztkérdések</strong>.</li><li>Készíts egy egyoldalas \"<strong>Gyorstalpaló</strong>\" dokumentumot a témáról, ami tartalmazza a vázlatodat, a kulcsszavakat és a tesztkérdéseket.</li></ol><p>Mentsd el a dokumentumot! Ez nemcsak egy feladat, hanem egy valódi, használható segédlet lesz a következő dolgozatodhoz.</p>"
+    }
+  ]
 }

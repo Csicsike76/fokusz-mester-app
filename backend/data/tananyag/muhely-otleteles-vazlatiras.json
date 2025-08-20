@@ -1,8 +1,105 @@
 {
-  "title": "Muhely otleteles vazlatiras",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 4. hét: Ötletelés és vázlatírás",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely otleteles vazlatiras\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel az MI-t partnerként használni egy iskolai feladat (pl. fogalmazás) megtervezéséhez.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A gondolatrendező gép"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a sikeres ötleteléshez"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel az MI-t partnerként használni egy iskolai feladat (pl. fogalmazás) megtervezéséhez. Megtanulod, hogyan kérj ötleteket, gondolattérképet és egy strukturált vázlatot, ami alapján már könnyedén megírhatod a saját, egyedi munkádat.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<p>Ugyanazokat a szöveges MI-asszisztenseket használhatod, mint az előző héten. Válassz egyet!</p><ul><li><strong>Microsoft Copilot</strong></li><li><strong>Google Gemini</strong></li><li><strong>ChatGPT (3.5)</strong></li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A gondolatrendező gép",
+      "content": "<p>Néha a legnehezebb dolog egy feladatban elkezdeni. Ülsz az üres papír vagy a villogó kurzor előtt, és nem jönnek a gondolatok. Az MI itt lehet a legjobb barátod: egy kimeríthetetlen ötletforrás és egy szupergyors gondolatrendező. Nem az a cél, hogy megírja helyetted a fogalmazást, hanem hogy segítsen neked beindítani a saját kreativitásodat és logikus szerkezetbe önteni a gondolataidat. Lássuk, hogyan!</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai projektünk:</strong> Írunk egy fogalmazást a következő, talán kicsit unalmasnak tűnő témáról: <strong>\"A szelektív hulladékgyűjtés fontossága a mi városunkban.\"</strong> Tegyük érdekessé az MI segítségével!</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Ötletbörze (Brainstorming)",
+          "content": "<p>Először is, gyűjtsünk néhány érdekes nézőpontot, amiről írhatnánk. Kérjünk segítséget az MI-től!</p><p><strong>Megfigyelés:</strong> Figyeld meg, hogy az MI nem csak a sablonos \"védi a környezetet\" témát hozta fel! A \"marketingszakember\" szerep miatt valószínűleg kreatívabb, emberközelibb ötleteket adott (pl. \"a hulladék mint kincs\", \"közösségi versenyek\").</p>",
+          "prompts": [
+            "Viselkedj úgy, mint egy kreatív marketingszakember! Adj 5 érdekes és meglepő ötletet vagy nézőpontot egy fogalmazáshoz, aminek a címe: \"A szelektív hulladékgyűjtés fontossága a mi városunkban\"."
+          ]
+        },
+        {
+          "title": "2. Feladat: Gondolattérkép készítése",
+          "content": "<p>Válassz ki egyet az MI által adott ötletek közül, ami a legjobban tetszik! Most kérjük meg, hogy segítsen strukturálni a gondolatainkat egy gondolattérkép (mind map) formájában.</p><p><strong>Megfigyelés:</strong> Az MI egy bekezdésekkel tagolt, fa-struktúrájú listát hozott létre. Ez a vizuális elrendezés segít átlátni a téma különböző aspektusait és az összefüggéseket.</p>",
+          "prompts": [
+            "Rendben, tetszik a \"közösségi versenyek\" ötlet. Készíts egy egyszerű gondolattérképet szöveges formában erről a témáról! A fő téma legyen a közepén, és legyenek ágai az előnyöknek, a megvalósítás lépéseinek és a lehetséges nehézségeknek."
+          ]
+        },
+        {
+          "title": "3. Feladat: A vázlat megalkotása",
+          "content": "<p>Most, hogy vannak ötleteink és egy struktúránk, kérjünk egy hivatalos fogalmazás-vázlatot! Ez lesz a fogalmazásod \"csontváza\".</p><p><strong>Megfigyelés:</strong> Kaptál egy kész struktúrát! Most már nem az üres lap előtt ülsz. Pontosan látod, melyik bekezdésben miről kell írnod. A vázlat segít, hogy a fogalmazásod logikus és jól felépített legyen.</p>",
+          "prompts": [
+            "Készíts egy 5 bekezdésből álló fogalmazás-vázlatot a fenti gondolattérkép alapján! A vázlat tartalmazza a Bevezetést, 3 Tárgyalás bekezdést (mindegyik egy-egy kulcsgondolattal) és a Befejezést. Minden ponthoz írj 1-2 kulcsmondatot!"
+          ]
+        },
+        {
+          "title": "4. Feladat: A Bevezetés megírása",
+          "content": "<p>A vázlat alapján írjuk meg az első, legnehezebb részt: a bevezetést. Kérjünk hozzá egy figyelemfelkeltő kezdést!</p><p><strong>Megfigyelés:</strong> Az MI segített átlendülni a kezdeti nehézségen. A kapott szöveget most már átírhatod, a saját szavaiddal fogalmazhatod meg, de az alapötlet és a lendület már megvan.</p>",
+          "prompts": [
+            "Írj egy figyelemfelkeltő, 3-4 mondatos bevezető bekezdést a vázlat alapján! Kezdődjön egy elgondolkodtató kérdéssel."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a sikeres ötleteléshez és vázlatíráshoz",
+      "content": "<ul><li><strong>Használj különböző szerepköröket!</strong> Kérj ötleteket egy \"tudóstól\", egy \"gyerektől\" vagy egy \"költőtől\" is. Más-más nézőpontokat fogsz kapni.</li><li><strong>Kérj analógiákat!</strong> \"Magyarázd el a szelektív gyűjtést egy focimeccs hasonlattal!\" Ez segít a kreatív gondolkodásban.</li><li><strong>Ne fogadd el az első választ!</strong> Ha nem tetszik, írd azt: \"Adj még 5, teljesen más ötletet!\" vagy \"Ez túl sablonos, legyél meglepőbb!\".</li><li><strong>A vázlat a te mankód, nem a főnököd!</strong> Használd a vázlatot iránymutatónak, de bátran térj el tőle, ha jobb ötleted támad!</li></ul>"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "content": "<p>Az MI segített megtervezni egy fogalmazást. De hol a határ?</p><ul><li><strong>Hol kezdődik a csalás?</strong> Meddig számít a munka a tiédnek? Vázlatot kérni még segítség, de mi a helyzet, ha az egész fogalmazást az MI írja meg? Miért fontos, hogy a végső szöveg a te saját, önálló munkád legyen?</li><li><strong>Az eredetiség kérdése:</strong> Az MI által adott ötletek az interneten már meglévő szövegeken alapulnak. Hogyan tudsz a kapott ötletekből valami igazán egyedit és személyeset alkotni? Mi az a plusz, amit csak te tudsz hozzátenni?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: Tervezd meg a saját fogalmazásodat!",
+      "content": "<p>Most te jössz! Válassz egyet az alábbi témák közül (vagy találj ki egy sajátot), és végezd el ugyanazokat a lépéseket, mint a műhelyen:</p><p><strong>Választható témák:</strong> \"Az online játékok hatása a baráti kapcsolatokra\", \"Ha egy napra szuperhős lehetnék...\", \"Miért fontos olvasni a mai világban?\"</p><p><strong>A feladatod:</strong></p><ol><li>Kérj az MI-től <strong>ötleteket</strong> a választott témához.</li><li>Készíttess vele egy <strong>gondolattérképet</strong> a legjobb ötletből.</li><li>Generáltass egy <strong>5 pontos vázlatot</strong>.</li><li>Írasd meg vele a <strong>bevezető bekezdést</strong>.</li></ol><p>Mentsd le a teljes beszélgetésedet az MI-vel! A cél nem egy kész fogalmazás, hanem a tervezési folyamat dokumentálása.</p>"
+    }
+  ]
 }

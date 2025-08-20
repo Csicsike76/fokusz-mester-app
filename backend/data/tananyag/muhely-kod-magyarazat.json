@@ -1,8 +1,100 @@
 {
-  "title": "Muhely kod magyarazat",
-  "subject": "altalanos",
+  "title": " Kódolás alapjai (tudás nélkül)",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely kod magyarazat\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel az MI segítségével egyszerű HTML kódot generálni, azt egy online szerkesztőben kipróbálni, és megérteni a kód egyes sorainak jelentését.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Kód, Ami Életre Kel"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: Az interaktív gomb"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel az MI segítségével egyszerű HTML kódot generálni, azt egy online szerkesztőben kipróbálni, és megérteni a kód egyes sorainak jelentését. A cél, hogy lásd: a kódolás nem misztikus dolog, hanem logikus utasítások sorozata, aminek a megértésében az MI a személyes tanárod lehet.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Bármelyik <strong>szöveggeneráló MI</strong> (Copilot, Gemini, ChatGPT).</li><li>Egy <strong>online HTML szerkesztő</strong>, ahol azonnal láthatod a kódod eredményét. Ajánlott: <strong><a href=\"https://www.w3schools.com/html/tryit.asp?filename=tryhtml_default\" target=\"_blank\">W3Schools Tryit Editor</a></strong>.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A Kód, Ami Életre Kel",
+      "content": "<p>Minden weboldal, alkalmazás és játék, amit használsz, kódból épül fel. A kód olyan, mint egy recept a számítógép számára, ami pontosan leírja, mit és hogyan jelenítsen meg. Eddig talán úgy gondoltad, hogy ezt csak profi programozók érthetik. Ma bebizonyítjuk, hogy ez nem igaz! Az MI segítségével mi magunk fogunk egy egyszerű \"receptet\" íratni, \"megfőzzük\" (lefuttatjuk), és utána megkérjük a mesterszakácsot (az MI-t), hogy magyarázza el nekünk lépésről lépésre, mitől is működik.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai projektünk:</strong> Létrehozunk egy egyszerű, de látványos, kattintható gombot egy weboldalon.</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Kód Generálása",
+          "content": "<p>Kérjünk az MI-től egy egyszerű HTML kódot. Fontos, hogy a stílust (a kinézetet) is kérjük bele, hogy látványos legyen!</p><p><strong>Megfigyelés:</strong> Az MI egy kódrészletet fog adni, ami <code>&lt;!DOCTYPE html&gt;</code>-el kezdődik és <code>&lt;/html&gt;</code>-lel végződik. Ne ijedj meg, ha elsőre bonyolultnak tűnik!</p>",
+          "prompts": [
+            "Írj egy teljes HTML kódot, ami egyetlen, középre igazított, nagy piros gombot jelenít meg, \"Kattints ide!\" felirattal! A stílust (CSS) is írd bele a HTML fájlba."
+          ]
+        },
+        {
+          "title": "2. Feladat: A Kód Kipróbálása",
+          "content": "<p>Itt az ideje, hogy lássuk az eredményt! Fogd meg az MI által adott kódot.</p><ol><li>Másold ki a teljes kódot, amit az MI adott.</li><li>Nyisd meg a <strong><a href=\"https://www.w3schools.com/html/tryit.asp?filename=tryhtml_default\" target=\"_blank\">W3Schools Tryit Editor</a></strong>-t.</li><li>A bal oldali ablakban törölj ki mindent, ami ott van, és illeszd be a te kódodat.</li><li>Kattints a zöld \"Run\" gombra.</li></ol><p><strong>Megfigyelés:</strong> A jobb oldali, fehér ablakban megjelent a piros gombod! Gratulálok, létrehoztad az első weboldal-elemédet!</p>"
+        },
+        {
+          "title": "3. Feladat: A Kód Megértése",
+          "content": "<p>Most, hogy látod, mit csinál, kérjük meg az MI-t, hogy magyarázza el, HOGYAN csinálja. Másold vissza a kódot az MI-nek, és add hozzá ezt a promptot:</p><p><strong>Megfigyelés:</strong> Olvasd el figyelmesen a magyarázatot! Az MI lebontja a kódot részekre. Meg fogod érteni, hogy a <code>&lt;style&gt;</code> rész felel a kinézetért (szín, méret), a <code>&lt;body&gt;</code> a weboldal látható tartalmáért, a <code>&lt;button&gt;</code> pedig magáért a gombért.</p>",
+           "prompts": [
+            "Magyarázd el nekem ezt a kódot soronként, nagyon egyszerűen, mintha most látnék először HTML-t! Mit jelentenek a <style>, <body> és <button> részek?"
+          ]
+        },
+        {
+          "title": "4. Feladat: Légy te a programozó!",
+          "content": "<p>Most, hogy már érted a kód logikáját, itt az ideje, hogy te magad módosítsd! Menj vissza a W3Schools szerkesztőbe, és a bal oldali kódban végezd el a következő változtatásokat. Minden változtatás után nyomj \"Run\"-t!</p><ol><li>Keresd meg a kódban a \"Kattints ide!\" szöveget, és írd át a saját nevedre!</li><li>Keresd meg a <code>&lt;style&gt;</code> részen belül a <code>background-color: red;</code> sort. Írd át a <code>red</code> szót <code>blue</code>-ra vagy <code>green</code>-re!</li><li>Keresd meg a <code>font-size</code>-t (betűméret), és írj be egy nagyobb számot!</li></ol><p><strong>Megfigyelés:</strong> Látod? A változtatásaid azonnal megjelennek. Már nem csak másolod a kódot, hanem irányítod azt. Te mondod meg a böngészőnek, mit csináljon!</p>"
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok",
+      "content": "<p>Az MI megírta a kódot helyetted. Ez fantasztikus, de gondolkozzunk el a következményeken!</p><ul><li><strong>A programozók vége?</strong> Ha az MI ilyen könnyen ír kódot, szükség lesz a jövőben programozókra? Vagy a programozók szerepe inkább a jó kérdések (promptok) feltevésére és az MI által írt kód ellenőrzésére, javítására fog eltolódni?</li><li><strong>Rejtett hibák:</strong> Az MI kódja általában működik, de néha lehetnek benne rejtett hibák, biztonsági rések vagy egyszerűen csak nem hatékony. Miért fontos, hogy egy ember is megértse és ellenőrizze a kódot, mielőtt egy valódi, fontos rendszerben (pl. egy banki alkalmazásban) használnák?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. Önálló Kihívás: Az interaktív gomb",
+      "content": "<p>Most tegyük a gombunkat még okosabbá! Egy kis JavaScripttel interakciót adunk hozzá.</p><p><strong>A feladatod:</strong></p><ol><li>Menj vissza az MI-hez.</li><li>Másold be neki a te, már átalakított (pl. kék) gombod kódját.</li><li>Add hozzá a következő promptot:</li><li>Másold be az új, kiegészített kódot a W3Schools szerkesztőbe, és próbáld ki!</li><li>Végül, kérd meg az MI-t, hogy csak az új, JavaScript (<code>onclick</code>) részt magyarázza el neked.</li></ol><p>Mentsd le a kész, interaktív gombod HTML kódját egy szövegfájlba! Ez a te első, saját programod!</p>",
+      "type": "tasks_section",
+       "tasks": [
+        {
+          "title": "",
+          "content": "",
+          "prompts": [
+            "Módosítsd ezt a kódot úgy, hogy amikor a gombra kattintok, felugorjon egy ablak 'Szia Világ!' szöveggel!"
+          ]
+        }
+      ]
+    }
+  ]
 }

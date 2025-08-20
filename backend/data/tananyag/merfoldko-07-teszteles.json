@@ -1,8 +1,81 @@
 {
-  "title": "Merfoldko 07 teszteles",
-  "subject": "altalanos",
+  "title": "AIMI Stúdió - M07: Felhasználói Tesztelés",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Merfoldko 07 teszteles\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A mérföldkő végére a csapatod képes lesz konstruktív visszajelzést adni és fogadni egy másik csapat projektjéről.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Külső Szem"
+    },
+    {
+      "id": "ellenorzo-lista",
+      "title": "3. A Konstruktív Visszajelzés Ellenőrzőlistája"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. A Mérföldkő Kihívása"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A mérföldkő végére a csapatod képes lesz konstruktív visszajelzést adni és fogadni egy másik csapat projektjéről. Megtanuljátok, hogyan használjátok az MI-t a kapott visszajelzések összegzésére és egy konkrét javítási terv (akcióterv) elkészítésére a végső bemutató előtt.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Külső Szem",
+      "content": "<p>Amikor sokáig dolgozol valamin, könnyen \"belefeledkezhetsz\" a részletekbe, és nem veszed észre a hibákat vagy a logikai bukfenceket. Ezt hívják \"projektvakságnak\". A legjobb gyógyszer erre egy külső szem: valaki, aki először látja a munkádat, és friss nézőpontból tudja azt értékelni. Ma minden csapat egy másik csapat \"külső szeme\" lesz. A cél nem a kritizálás, hanem a segítés. Az MI pedig abban lesz a partnerünk, hogy a kapott javaslatokból egy tiszta és követhető javítási tervet készítsen.</p>"
+    },
+    {
+      "id": "ellenorzo-lista",
+      "title": "3. A Konstruktív Visszajelzés Ellenőrzőlistája",
+      "content": "<p>Mielőtt értékeltek, ismerjétek meg a jó visszajelzés szabályait! Mindig a \"szendvics-módszert\" használjuk: dicséret, javaslat, biztatás.</p><ul><li><strong>Konkrétumok:</strong> Ne azt mondd, hogy \"nem tetszik a kép\", hanem azt, hogy \"a kép stílusa nem illik a szöveg komoly hangvételéhez\".</li><li><strong>Megoldás-orientáltság:</strong> Ne csak a hibát mondd, javasolj megoldást is! \"Talán egy fekete-fehér fotó jobban illene ide.\"</li><li><strong>Kérdések feltevése:</strong> \"Nem volt teljesen egyértelmű, ki a célközönség. Tudnátok erről mesélni?\"</li><li><strong>Dicséret:</strong> Mindig emeld ki, mi az, ami különösen tetszett a projektben!</li></ul>"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A \"Peer Review\" (Társas Értékelés)",
+          "content": "<p>Minden csapat mutassa be az elkészült interaktív prototípusát egy másik, előre kijelölt csapatnak! A bemutató legyen rövid, kb. 5 perces.</p><p><strong>A \"tesztelő\" csapat feladata:</strong></p><ol><li>Figyelmesen hallgassátok végig a bemutatót, és kattintsátok végig a prototípust!</li><li>Az Ellenőrzőlista alapján fogalmazzatok meg:<ul><li><strong>2 dolgot</strong>, ami különösen tetszett nektek (a legerősebb pontok).</li><li><strong>2 konstruktív javaslatot</strong> a fejlesztésre (konkrét, megoldás-orientált ötletek).</li><li><strong>1 kérdést</strong>, ami felmerült bennetek a projekttel kapcsolatban.</li></ul></li><li>A pontjaitokat írjátok le egy papírra vagy egy digitális dokumentumba, és adjátok át a másik csapatnak!</li></ol>"
+        },
+        {
+          "title": "2. Feladat: A Visszajelzések Feldolgozása MI-vel",
+          "content": "<p>Most minden csapatnak van egy listája a kapott javaslatokról. Használjuk az MI-t, hogy objektíven összegezzük őket!</p><p><strong>Megfigyelés:</strong> Az MI segít érzelmileg eltávolodni a kritikától, és a javaslatok lényegére koncentrálni. Egy strukturált, tiszta listát kaptok a lehetséges fejlesztési pontokról.</p>",
+          "prompts": ["Viselkedj úgy, mint egy tapasztalt projektmenedzser! A csapatom a következő visszajelzéseket kapta a projektjére. Szedd őket témakörök szerint (pl. Dizájn, Használhatóság, Tartalom) és fogalmazd át őket tárgyilagos, konstruktív javaslatokká!\n\n[IDE MÁSOLJÁTOK BE A MÁSIK CSAPATTÓL KAPOTT ÖSSZES VISSZAJELZÉST]"]
+        },
+        {
+          "title": "3. Feladat: Az Akcióterv Elkészítése",
+          "content": "<p>Nem kell minden javaslatot megfogadni, de dönteni kell, mit csináltok meg a végső bemutatóig. Kérjünk segítséget az MI-től a priorizáláshoz!</p><p><strong>Feladat:</strong> Beszéljétek meg a kapott akciótervet! Egyezzetek meg abban a 2-3 legfontosabb változtatásban, amit a végső prezentáció előtt még elvégeztek. Osszátok ki a feladatokat a csapattagok között!</p>",
+          "prompts": ["Az előző pontban összefoglalt javaslatok alapján készíts egy egyszerű, 3 pontos akciótervet a következő hétre! Minden ponthoz írd le a konkrét feladatot és azt, hogy a csapatból ki a felelőse!"]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>Ember vs. Gép a visszajelzésben:</strong> Miért volt fontos, hogy a visszajelzést egy másik emberi csapat adja, és ne csak egy MI-t kérjetek meg, hogy \"elemezze a projektet\"? Milyen szempontokat (pl. érzelmi hatás, célközönség megértése) tud egy ember jobban megítélni, mint egy gép?</li><li><strong>Az MI mint \"mediátor\":</strong> Hogyan segített az MI abban, hogy a kapott kritikát ne sértésnek, hanem egy megoldandó feladatnak tekintsétek? Az MI objektivitása segíthet a csapaton belüli viták kezelésében is?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "6. A Mérföldkő Kihívása: A Véglegesítés",
+      "content": "<p>A hét végére a csapatotoknak el kell végeznie az akciótervben foglalt javításokat.</p><p><strong>A feladatotok:</strong></p><ol><li>Végezzétek el a megbeszélt 2-3 legfontosabb módosítást a prototípusotokon.</li><li>Készüljetek fel a végső, nagy prezentációra! A prototípusotok legyen a lehető legjobb formában.</li></ol><p>A cél, hogy a jövő heti nagy bemutatóra egy olyan, finomított és letesztelt projekttel érkezzetek, amire az egész csapat büszke lehet. Sok sikert az utolsó simításokhoz!</p>"
+    }
+  ]
 }

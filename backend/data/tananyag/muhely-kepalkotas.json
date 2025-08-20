@@ -1,42 +1,69 @@
 {
-  "title": "Muhely kepalkotas",
-  "subject": "altalanos",
+  "title": "Képalkotás MI-vel",
+  "subject": "ai",
   "grade": 0,
-  "category": "free_lesson",
-  "description": "3. hét: Képalkotás MI-vel: Az első kreatív műhely",
+  "category": "workshop",
+  "description": "A műhely végére képes leszel egyszerű szöveges utasításokkal (promptokkal) teljesen új, egyedi képeket létrehozni.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: A digitális festőművész"
+    },
+    {
+      "id": "feladatok",
+      "title": "4. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "tippek",
+      "title": "5. Tippek a sikeres képalkotáshoz"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: Álmodj egy világot!"
+    }
+  ],
   "questions": [
     {
-      "type": "introduction",
+      "id": "celkituzes",
       "title": "1. Célkitűzés",
       "content": "<p>A műhely végére képes leszel egyszerű szöveges utasításokkal (promptokkal) teljesen új, egyedi képeket létrehozni. Megtanulod, hogyan befolyásolja a leírásod részletessége a végeredményt, és kipróbálsz többféle vizuális stílust is.</p>"
     },
     {
-      "type": "tools",
+      "id": "eszkozok",
       "title": "2. Szükséges Eszközök",
       "content": "<p>Válassz egyet az alábbi, ingyenesen és egyszerűen használható képalkotó MI-k közül! Némelyikhez bejelentkezés szükséges.</p><ul><li><strong>Microsoft Designer (Image Creator)</strong> - A Copilot része, DALL-E 3 modellel működik, nagyon könnyen használható.</li><li><strong>Leonardo.Ai</strong> - Nagyon sokoldalú, rengeteg stílussal, napi ingyenes krediteket ad.</li><li><strong>Canva AI Image Generator</strong> - A népszerű tervezőeszköz beépített képalkotója.</li></ul>"
     },
     {
-      "type": "introduction",
+      "id": "bevezeto",
       "title": "3. Bevezető: A digitális festőművész",
       "content": "<p>Képzeld el, hogy a szavak az ecseteid, a képzeleted pedig a vásznad! A képalkotó MI-k pont ezt teszik lehetővé: a szöveges leírásodat lefordítják képi nyelvre. Úgy működnek, mint egy rendkívül tehetséges, de nagyon szófogadó festőművész, aki pontosan azt alkotja meg, amit kérsz tőle. A mai feladatod, hogy kipróbáld, milyen rendezőnek lenni, és a szavaiddal irányítsd ezt a digitális művészt.</p>"
     },
     {
-      "type": "tasks_section",
+      "id": "feladatok",
       "title": "4. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
       "tasks": [
         {
           "title": "1. Feladat: Az egyszerű tárgy",
           "content": "<p>Kezdjünk valami nagyon egyszerűvel! Írd be a választott képalkotóba a következőt. A legtöbb képalkotónak angolul kell írni, de a Copilot magyarul is jól ért.</p><p><strong>Megfigyelés:</strong> Figyeld meg, milyen képet kaptál! Milyen a háttér? Milyen a megvilágítás? Mivel nem adtál meg részleteket, az MI a saját \"fantáziájára\" (a tanító adatokban látott több millió képre) bízta a körítést.</p>",
-          "prompts": [
-            "a red apple"
-          ]
+          "prompts": ["a red apple"]
         },
         {
           "title": "2. Feladat: Részletek és környezet hozzáadása",
           "content": "<p>Most tegyük a jelenetet sokkal életszerűbbé! Bővítsük a promptot jelzőkkel, helyszínnel és megvilágítással.</p><p><strong>Megfigyelés:</strong> Hasonlítsd össze az eredményt az előzővel! Látod, hogy a \"photo of\" (fotó) kulcsszó fotorealisztikus képet eredményezett? A \"rustic wooden table\" (rusztikus faasztal) és a \"morning light\" (reggeli fény) mind-mind megjelentek a képen.</p>",
-          "prompts": [
-            "photo of a shiny red apple on a rustic wooden table, morning light coming from a window"
-          ]
+          "prompts": ["photo of a shiny red apple on a rustic wooden table, morning light coming from a window"]
         },
         {
           "title": "3. Feladat: A stílus hatalma",
@@ -50,24 +77,22 @@
         {
           "title": "4. Feladat: Egy komplexebb jelenet",
           "content": "<p>Most próbáljunk meg egy teljes jelenetet leírni több szereplővel és háttérrel. A kulcs a \"jelző + főnév\" szerkezetek használata.</p><p><strong>Megfigyelés:</strong> Az MI megpróbálta az összes elemet (cuki macska, varázsló kalap, könyvkupac, varázslatos könyvtár) egyetlen, koherens képbe sűríteni. Néha hibázik (pl. furcsa lábak), de az eredmény így is lenyűgöző.</p>",
-          "prompts": [
-            "A cute, fluffy cat wearing a tiny wizard hat, sitting on a pile of old books in a magical library."
-          ]
+          "prompts": ["A cute, fluffy cat wearing a tiny wizard hat, sitting on a pile of old books in a magical library."]
         }
       ]
     },
     {
-      "type": "tips",
+      "id": "tippek",
       "title": "5. Tippek a sikeres képalkotáshoz",
-      "content": "<ul><li><strong>Angolul jobban működik:</strong> Bár néhány MI ért magyarul, a legjobb eredményt általában angol nyelvű promptokkal érheted el.</li><li><strong>Minél több jelző, annál jobb:</strong> Ne csak annyit írj, \"kutya\", hanem \"egy vidám, golden retriever kölyökkutya, ami a fűben szalad\".</li><li><strong>Add meg a stílust:</strong> A <code>photo</code>, <code>watercolor painting</code>, <code>comic book art</code>, <code>3D render</code>, <code>pixel art</code> kulcsszavak csodákra képesek.</li><li><strong>Generálj többször:</strong> Ha az első kép nem tetszik, generáld újra! Az MI minden alkalommal egy kicsit mást fog alkotni.</li></ul>"
+      "content": "<ul><li><strong>Angolul jobban működik:</strong> Bár néhány MI ért magyarul, a legjobb eredményt általában angol nyelvű promptokkal érheted el.</li><li><strong>Minél több jelző, annál jobb:</strong> Ne csak annyit írj, \"kutya\", hanem \"egy vidám, golden retriever kölyökkutya, ami a fűben szalad\".</li><li><strong>Add meg a stílust:</strong> A `photo`, `watercolor painting`, `comic book art`, `3D render`, `pixel art` kulcsszavak csodákra képesek.</li><li><strong>Generálj többször:</strong> Ha az első kép nem tetszik, generáld újra! Az MI minden alkalommal egy kicsit mást fog alkotni.</li></ul>"
     },
     {
-      "type": "criticalThinking",
+      "id": "kritikai-gondolkodas",
       "title": "6. Kritikai Gondolkodás Sarok",
       "content": "<p>Alkottál néhány képet a semmiből. Most gondolkozz el ezen!</p><ul><li><strong>Ki a művész?</strong> Ha te írtad a promptot, de az MI hozta létre a képet, kié a szerzői jog? Felhasználhatod ezt a képet bárhol, bármire? (Erről később még tanulunk!)</li><li><strong>A valóság illúziója:</strong> A fotorealisztikus képek annyira élethűek lehetnek, hogy nehéz megkülönböztetni őket a valódi fotóktól. Milyen veszélyeket rejthet ez magában (pl. álhírek illusztrálása)?</li></ul>"
     },
     {
-      "type": "challenge",
+      "id": "kihivas",
       "title": "7. Önálló Kihívás: Álmodj egy világot!",
       "content": "<p>Most rajtad a sor, hogy szabadjára engedd a fantáziádat! A feladatod, hogy alkoss egy képet, ami egy kitalált, fantasztikus helyszínt vagy lényt ábrázol.</p><p><strong>A promptod tartalmazza a következőket:</strong></p><ol><li>Egy fő témát (pl. egy lebegő sziget, egy kristályerdő, egy barátságos űrlény).</li><li>Legalább három leíró jelzőt a témádhoz.</li><li>Egy konkrét stílust (pl. \"anime style\", \"impressionist painting\", \"cinematic photo\").</li><li>Egy leírást a háttérről vagy a környezetről.</li></ol><p>Kísérletezz, amíg olyan képet nem kapsz, ami igazán büszkévé tesz! Mentsd le a legjobb alkotásodat és a hozzá tartozó promptot. Készülj fel, hogy megmutasd a többieknek!</p>"
     }

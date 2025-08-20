@@ -1,3 +1,5 @@
+// Fájl: src/pages/ContentPage.js (TELJES, SZINTAKTIKAILAG JAVÍTOTT VERZIÓ)
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styles from './ContentPage.module.css';
@@ -45,6 +47,7 @@ const LessonView = ({ title, toc, sections }) => (
         </main>
     </div>
 );
+
 
 // ---- Karakterválasztós eszköz nézet ----
 const CharacterSelectionView = ({ contentData, onSelectCharacter }) => (
@@ -177,10 +180,10 @@ const GenericToolView = ({ contentData }) => (
   </div>
 );
 
+
 // =================================================================
 // FŐ KOMPONENS
 // =================================================================
-
 const ContentPage = () => {
   const { slug } = useParams();
   const [contentData, setContentData] = useState(null);
@@ -239,8 +242,13 @@ const ContentPage = () => {
     setActiveChat(null);
     setMessages([]);
   };
+  
+  // A renderelési logika most a fő komponens törzsében van
+  if (isLoading) return <div className={styles.container}>Adatok betöltése...</div>;
+  if (error) return <div className={styles.container}>{error}</div>;
+  if (!contentData) return <div className={styles.container}>A tartalom nem található.</div>;
 
-  const renderContent = () => {
+  const renderTheContent = () => {
     if (activeChat) {
       return (
         <div className={styles.chatContainer}>
@@ -264,7 +272,6 @@ const ContentPage = () => {
     let isLessonLayout = false;
 
     if (data.toc) {
-        // 🔧 JAVÍTVA: sections = data.questions, nem data.sections
         componentToRender = <LessonView title={data.title} toc={data.toc} sections={data.questions} />;
         isLessonLayout = true;
     } else {
@@ -311,12 +318,8 @@ const ContentPage = () => {
         </div>
     );
   };
-  
-  if (isLoading) return <div className={styles.container}>Adatok betöltése...</div>;
-  if (error) return <div className={styles.container}>{error}</div>;
-  if (!contentData) return <div className={styles.container}>A tartalom nem található.</div>;
 
-  return renderContent();
+  return renderTheContent();
 };
 
 export default ContentPage;

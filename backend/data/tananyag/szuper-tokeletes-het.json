@@ -1,8 +1,72 @@
 {
-  "title": "Szuper tokeletes het",
-  "subject": "altalanos",
+  "title": "AIMI Szuperképesség - M01: A Tökéletes Hét Megtervezése",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Szuper tokeletes het\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel az MI segítségével egy személyre szabott, kiegyensúlyozott heti tervet készíteni.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Személyes Stratégád"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Valódi Heted"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel az MI segítségével egy személyre szabott, kiegyensúlyozott heti tervet készíteni, ami figyelembe veszi a kötelezettségeidet, a céljaidat és a pihenési igényeidet is. Megtanulod, hogyan válj a hét passzív elszenvedőjéből annak tudatos tervezőjévé.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Személyes Stratégád",
+      "content": "<p>Képzeld el a hetedet, mint egy üres sakktáblát! Reagálhatsz véletlenszerűen a felbukkanó feladatokra, de tervezhetsz is előre, mint egy profi játékos. Az MI ebben a helyzetben a te személyes stratégiai tanácsadód: nem ő lép helyetted, de segít felmérni a terepet, javasol optimális lépéseket, és figyelmeztet a lehetséges buktatókra. Ma megtanuljuk, hogyan adjunk utasításokat ennek a tanácsadónak, hogy a hetünk ne csak teljen, hanem épüljön.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Adatgyűjtés - A Te Heted Alapanyagai",
+          "content": "<p>Mielőtt az MI-hez fordulnál, gyűjtsd össze a saját adataidat! Nyiss egy üres dokumentumot, és írd le a saját heted \"összetevőit\". Minél részletesebb vagy, annál jobb lesz a végeredmény!</p><ul><li><strong>Fix elfoglaltságok:</strong> Iskola, edzések, különórák, stb. (pontos napokkal és időpontokkal).</li><li><strong>Tanulási Célok:</strong> Miből és mennyit szeretnél tanulni a héten? (Pl. \"4 óra matek témazáróra készülés\", \"1 óra angol szókincsfejlesztés\").</li><li><strong>Személyes Célok és Hobbik:</strong> Mit szeretnél még csinálni? (Pl. \"Heti kétszer elmenni futni\", \"Befejezni egy könyvet\", \"Gyakorolni a gitáron\").</li><li><strong>Pihenés és Szociális Élet:</strong> Mennyi időt szánsz a barátaidra, a családodra, a pihenésre? (Pl. \"Péntek este filmnézés\", \"Szombat délután a barátokkal\").</li></ul>"
+        },
+        {
+          "title": "2. Feladat: A Mester-Prompt Megalkotása",
+          "content": "<p>Most, hogy megvannak az adataid, adjuk oda őket az MI-nek egyetlen, részletes utasításban!</p><p><strong>Feladat:</strong> Másold ki a fenti sablont, írd át a saját adataiddal, és küldd el az MI-nek!</p>",
+          "prompts": ["Viselkedj úgy, mint egy hatékonysági coach! A feladatom, hogy megtervezzem a következő hetemet. Készíts egy kiegyensúlyozott, napi bontású heti órarendet táblázatos formában!\n\nAz alapinformációk a következők:\n\nFix elfoglaltságaim:\n- Iskola: Hétfőtől Péntekig, 8:00 - 14:00\n- [Írd ide a saját fix elfoglaltságodat, pl. Kosárlabda edzés: Hétfő és Szerda, 16:00 - 17:30]\n\nCéljaim a hétre:\n- [Írd ide a saját célodat, pl. 4 óra matek gyakorlás]\n- [Írd ide a saját célodat, pl. Minden nap 30 perc olvasás]\n\nFontos szempontok:\n- A tanulási blokkok ne legyenek hosszabbak 1 óránál szünet nélkül.\n- A hétvégén legyen idő a pihenésre és a barátokra is.\n- Legyen legalább két \"szabad\" idősáv a héten a spontán programokra."]
+        },
+        {
+          "title": "3. Feladat: Elemzés és Finomítás",
+          "content": "<p>Az első terv ritkán tökéletes. Most te jössz! Elemezd a kapott órarendet, majd kérj finomítást!</p><p><strong>Kérdések az elemzéshez:</strong></p><ul><li>Reálisnak tűnik a terv? Van elég idő az étkezésre, utazásra?</li><li>Kiegyensúlyozott a terhelés? Vagy van olyan nap, ami túl zsúfolt?</li><li>Tetszik a javasolt beosztás?</li></ul><p>Most kérj egy konkrét változtatást!</p>",
+          "prompts": ["Ez egy jó kiindulási alap. Azonban a keddi nap túl zsúfoltnak tűnik. Kérlek, cseréld fel a keddi matek tanulást a szerdai szabad idősávval! Emellett a vasárnap délelőttöt hagyd teljesen szabadon pihenésre."]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>A \"Túloptimalizálás\" Veszélye:</strong> Mi történik, ha minden percünket egy algoritmus tervezi meg? Hol marad a spontaneitás, a kreatív \"semmittevés\" és a pihenés? Miért fontos, hogy a te általad készített tervben mindig legyenek üres, \"puffer\" idősávok?</li><li><strong>A Terv Börtöne:</strong> Egy részletes terv biztonságot ad, de néha börtönné is válhat, ami stresszt okoz, ha nem tudjuk tartani. Hogyan tudod ezt a tervet rugalmas útmutatóként kezelni, és nem kőbe vésett szabályként?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Valódi Heted",
+      "content": "<p>Most készítsd el a valódi tervedet!</p><p><strong>A feladatod:</strong></p><ol><li>Gyűjtsd össze a <strong>következő heted</strong> valós adatait és céljait.</li><li>A tanult promptolási technikával készíttesd el az MI-vel a személyre szabott heti tervedet.</li><li>Finomítsd a tervet legalább egy iterációs körben, amíg teljesen elégedett nem leszel vele.</li><li><strong>Extra kihívás:</strong> Kérd meg az MI-t, hogy a kész táblázatot alakítsa át egy egyszerű, pontokba szedett listává, amit könnyen bemásolhatsz a telefonod naptárába vagy jegyzeteibe!</li></ol><p>Mentsd le a kész, végleges heti tervedet! Ez nem csak egy feladat, hanem egy eszköz, amit a valóságban is használhatsz a hatékonyságod növelésére.</p>"
+    }
+  ]
 }

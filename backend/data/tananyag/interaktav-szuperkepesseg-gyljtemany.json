@@ -1,8 +1,74 @@
 {
-  "title": "Interaktav szuperkepesseg gyljtemany",
+  "title": "AIMI Szuperképesség: Személyes Stratégiák az MI Korában",
   "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Interaktav szuperkepesseg gyljtemany\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "Személyes Hatékonyság és Stratégia az MI Korában",
+  "toc": [
+    {
+      "id": "nav-buttons",
+      "title": "Navigáció",
+      "isNav": true,
+      "buttons": [
+        { "id": "eszkoztar", "text": "Központi Eszköztár 🛠️", "link": "/tananyag/eszkoztar" },
+        { "id": "prompt-kartyak", "text": "Prompt Mester Kártyák 🃏", "link": "/tananyag/prompt-kartyak" }
+      ]
+    },
+    {
+      "id": "module1",
+      "title": "I. Személyes OS Fejlesztés"
+    },
+    {
+      "id": "module2",
+      "title": "II. A Kreatív Erősítő"
+    },
+    {
+      "id": "module3",
+      "title": "III. Stratégiai Jövőkép"
+    },
+    {
+      "id": "module4",
+      "title": "IV. Záróprojekt"
+    }
+  ],
+  "questions": [
+    {
+      "id": "module1",
+      "title": "I. MODUL: SZEMÉLYES OS FEJLESZTÉS - Az MI mint mentális exoskeleton",
+      "type": "tasks_section",
+      "tasks": [
+        { "title": "1. Műhely: A Tökéletes Hét Megtervezése", "content": "<p>Feladat: Tanuld meg, hogyan használd az MI-t a heti teendőid, tanulási és pihenőidőd optimalizálására!</p><a href=\"/tananyag/szuper-tokeletes-het\" class=\"quiz-button\">Gyakorlati Műhely →</a>" },
+        { "title": "2. Műhely: Dilemma Elemzés és Döntéstámogatás", "content": "<p>Feladat: Használd a \"gondolkodj hangosan\" technikát, hogy egy komplex döntés minden lehetséges kimenetelét elemezd.</p><a href=\"/tananyag/szuper-dilemma-elemzes\" class=\"quiz-button\">Gyakorlati Műhely →</a>" },
+        { "title": "3. Műhely: Személyre Szabott Tanulási Terv", "content": "<p>Feladat: Tervezz meg egy egyhónapos, MI-asszisztált tervet egy új készség elsajátítására a nulláról.</p><a href=\"/tananyag/szuper-tanulasi-terv\" class=\"quiz-button\">Gyakorlati Műhely →</a>" }
+      ]
+    },
+    {
+      "id": "module2",
+      "title": "II. MODUL: A KREATÍV ERŐSÍTŐ - Az MI mint alkotótárs",
+      "type": "tasks_section",
+      "tasks": [
+        { "title": "4. Műhely: Közös Alkotás - Írj egy novellát az MI-vel!", "content": "<p>Feladat: Lépj a puszta ötletelésen túl! Hozz létre egy teljes, több fejezetes történetet, ahol te vagy a rendező, az MI pedig a világépítő és a szövegíró.</p><a href=\"/tananyag/szuper-novella-iras\" class=\"quiz-button\">Gyakorlati Műhely →</a>" },
+        { "title": "5. Műhely: Adatvizualizáció - Történetmesélés számokkal", "content": "<p>Feladat: Keress egy érdekes adatsort, és az MI segítségével hozz létre belőle egy teljes infografika tervét, ami egy történetet mesél el.</p><a href=\"/tananyag/szuper-adatvizualizacio\" class=\"quiz-button\">Gyakorlati Műhely →</a>" },
+        { "title": "6. Műhely: Játéktervezés 101", "content": "<p>Feladat: Tervezz egy teljes játék-koncepciót! Alkoss ötletet, karaktert, pályát és \"concept art\"-ot az MI segítségével.</p><a href=\"/tananyag/muhely-jatektervezes\" class=\"quiz-button\">Gyakorlati Műhely →</a>" }
+      ]
+    },
+    {
+      "id": "module3",
+      "title": "III. MODUL: STRATÉGIAI JÖVŐKÉP - Az MI mint pajzs és iránytű",
+      "type": "tasks_section",
+      "tasks": [
+        { "title": "7. Műhely: Digitális Önvédelmi Stratégiák", "content": "<p>Feladat: Az MI segítségével elemezd a saját digitális lábnyomodat, és készíts egy személyes tervet az online jelenléted tudatosabb kezelésére.</p><a href=\"/tananyag/szuper-onvedelem\" class=\"quiz-button\">Gyakorlati Műhely →</a>" },
+        { "title": "8. Műhely: Az Algoritmusok Pszichológiája", "content": "<p>Feladat: Válassz egy platformot (pl. TikTok, YouTube), és az MI-vel elemezd, milyen pszichológiai trükköket használ az algoritmusa a figyelem fenntartására.</p><a href=\"/tananyag/szuper-algoritmus-pszicho\" class=\"quiz-button\">Gyakorlati Műhely →</a>" },
+        { "title": "9. Műhely: Jövőálló Készségek Fejlesztése", "content": "<p>Feladat: Válassz egy szakmát, ami érdekel! Az MI-vel készíts egy \"készség-térképet\" arról, hogyan fogja átalakítani a szakmát 10 év múlva.</p><a href=\"/tananyag/szuper-jovoallo-keszsegek\" class=\"quiz-button\">Gyakorlati Műhely →</a>" }
+      ]
+    },
+    {
+      "id": "module4",
+      "title": "IV. MODUL: ZÁRÓPROJEKT - \"My AI-Augmented Self\"",
+      "type": "tasks_section",
+      "tasks": [
+        { "title": "10-12. hét: A Személyes Küldetés", "content": "<p>Feladat: Válassz egy nagy, konkrét, egy hónap alatt elérhető személyes célt! (Pl. egy új készség elsajátítása, egy blog elindítása, egy portfólió összeállítása). Tervezd meg a projektet az MI segítségével!</p><a href=\"/tananyag/szuper-zaroprojekt\" class=\"quiz-button\">Gyakorlati Műhely →</a>" }
+      ]
+    }
+  ]
 }

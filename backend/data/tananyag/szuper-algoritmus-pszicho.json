@@ -1,8 +1,73 @@
 {
-  "title": "Szuper algoritmus pszicho",
-  "subject": "altalanos",
+  "title": "AIMI Szuperképesség - M08: Az Algoritmusok Pszichológiája",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Szuper algoritmus pszicho\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel az MI segítségével azonosítani és megnevezni azokat a pszichológiai technikákat, amelyeket a közösségi média platformok algoritmusai használnak.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Digitális Kaszinó"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Figyelem-Auditod"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel az MI segítségével azonosítani és megnevezni azokat a pszichológiai technikákat, amelyeket a közösségi média platformok algoritmusai használnak a felhasználói figyelem fenntartására. Megérted a \"dopamin hurok\" és a \"változó jutalmazás\" elvét, és tudatosabbá válsz a saját online szokásaiddal kapcsolatban.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Digitális Kaszinó",
+      "content": "<p>Miért olyan nehéz letenni a telefont, és abbahagyni a görgetést? A válasz egyszerű: a legnépszerűbb applikációkat úgy tervezték, mint egy játékgépet egy kaszinóban. Az algoritmusok nem \"gonoszak\", egyszerűen egyetlen céljuk van: hogy minél tovább maradj az oldalon. Ehhez a pszichológia évtizedes trükkjeit használják. Ma az MI segítségével leleplezzük ezeket a trükköket. Nem arra használjuk az MI-t, hogy újabb tartalmakat fogyasszunk, hanem arra, hogy megértsük, hogyan próbál minket manipulálni a rendszer.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai nyomozásunk tárgya:</strong> Válassz egyet a kedvenc platformjaid közül (pl. TikTok, YouTube Shorts, Instagram Reels)!</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Figyelem-Csapdák Feltárása",
+          "content": "<p>Kérdezzük meg az MI-t, hogy egy szakértő szemével milyen trükköket lát!</p><p><strong>Feladat:</strong> Olvasd el figyelmesen a kapott listát! Melyik technika a legmeglepőbb számodra?</p>",
+          "prompts": ["Viselkedj úgy, mint egy digitális pszichológus és viselkedéskutató! A feladatom, hogy megértsem, a TikTok (vagy YouTube Shorts) algoritmusa milyen pszichológiai technikákat használ a felhasználói figyelem fenntartására. Sorolj fel és magyarázz el 5 konkrét, tudományosan alátámasztott technikát! (Például: változó jutalmazás, társadalmi bizonyíték, a befejezetlenség érzése)."]
+        },
+        {
+          "title": "2. Feladat: A Te Személyes Tapasztalatod",
+          "content": "<p>Most, hogy ismered az elméletet, figyeld meg a gyakorlatban! Nyisd meg a választott alkalmazást 5 percre.</p><p><strong>A feladatod:</strong> Görgetés közben tudatosan figyeld a saját érzéseidet és a látott tartalmakat! Próbálj meg találni legalább <strong>2 példát</strong> az MI által felsorolt technikákra a saját hírfolyamodban!</p><p>Írd le a jegyzeteidbe a tapasztalataidat! Például:</p><ul><li><strong>\"Változó jutalmazás\":</strong> \"Az első három videó unalmas volt, de a negyedik egy nagyon vicces macskás videó volt. Ezért görgettem tovább, hátha a következő is jó lesz.\"</li><li><strong>\"Társadalmi bizonyíték\":</strong> \"Egy videót csak azért néztem meg, mert láttam, hogy több millió lájk van rajta, gondoltam, biztos jó.\"</li></ul>"
+        },
+        {
+          "title": "3. Feladat: A \"Digitális Jólét\" Tervének Megalkotása",
+          "content": "<p>Most, hogy érted a mechanizmusokat, itt az ideje, hogy visszavedd az irányítást! Kérjünk az MI-től egy személyes stratégiát!</p><p><strong>Feladat:</strong> Olvasd el a kapott tervet! Melyik pontot tudnád a legkönnyebben beépíteni a mindennapjaidba már holnaptól?</p>",
+          "prompts": ["Viselkedj úgy, mint egy digitális jólét (digital wellbeing) tanácsadó! Az előző pontok alapján láttam, hogy a közösségi média algoritmusai hogyan tartják fenn a figyelmemet. Készíts egy 5 pontos, konkrét és gyakorlatias tervet arra, hogyan használhatom ezeket az appokat tudatosabban, és hogyan kerülhetem el a végtelen görgetés csapdáját!"]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>A Felelősség Kérdése:</strong> A platformok célja a profitmaximalizálás, amihez a figyelmed fenntartása szükséges. A te célod a tájékozódás, a szórakozás és a kapcsolataid ápolása. Hol húzódik a határ a szolgáltatás nyújtása és a pszichológiai manipuláció között? Kinek a felelőssége, hogy megvédjen a túlzott használattól? A platformé? A tiéd? A szüleidé?</li><li><strong>Az Algoritmus mint Tükör:</strong> A hírfolyamod egy algoritmus által neked készített, személyre szabott valóság-buborék. Ha az algoritmus csak olyan tartalmakat mutat, amikről tudja, hogy tetszenek neked, hogyan fogsz új gondolatokkal, más nézőpontokkal találkozni? Hogyan vezethet ez a \"visszhangkamra\" (echo chamber) a polarizációhoz?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Személyes \"Figyelem-Auditod\"",
+      "content": "<p>Most végezz el egy valódi, gyors auditot a saját szokásaidon!</p><p><strong>A feladatod:</strong></p><ol><li>A telefonod beállításaiban keresd meg a <strong>\"Digitális Egyensúly\"</strong> vagy <strong>\"Képernyőidő\"</strong> (Screen Time) menüpontot.</li><li>Nézd meg, melyik 3 alkalmazást használtad a legtöbbet az elmúlt héten.</li><li>Válassz ki egyet ezek közül, és állíts be rá egy <strong>napi időkorlátot</strong>! (Pl. TikTok - napi 45 perc).</li><li>Írj egy rövid, 2-3 mondatos fogadalmat a jegyzetedbe: \"Ezen a héten kipróbálom a napi időkorlátot a [App neve] alkalmazásra. A célom, hogy tudatosabb legyek a görgetéssel töltött idővel, és a felszabaduló időt [egy konkrét tevékenység, pl. olvasás, séta] fogom tölteni.\"</li></ol><p>Ez egy konkrét lépés afelé, hogy te irányítsd a figyelmedet, és ne egy algoritmus.</p>"
+    }
+  ]
 }

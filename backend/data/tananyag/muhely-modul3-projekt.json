@@ -1,8 +1,80 @@
 {
-  "title": "Muhely modul3 projekt",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 27. hét: III. Modul Projekt",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely modul3 projekt\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A projekt célja, hogy a harmadik modul során tanult kritikai ismereteket egy gyakorlati, kézzelfogható alkotásban szintetizáld.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Az MI \"KRESZ-táblái\""
+    },
+    {
+      "id": "projekt_lepesek",
+      "title": "4. A Projekt Lépései"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "leadas",
+      "title": "6. A Projekt Leadása és Megosztása"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A projekt célja, hogy a harmadik modul során tanult kritikai ismereteket (torzítás, dezinformáció, szerzői jog, adatvédelem, etika) egy gyakorlati, kézzelfogható alkotásban szintetizáld. Létrehozol egy <strong>egyoldalas \"Felelős Felhasználói Kézikönyvet\"</strong> egy általad választott MI-eszközhöz, amely másoknak is segít eligazodni a technológia felelős használatában.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Bármelyik <strong>szöveggeneráló MI</strong> az ötleteléshez és a szövegezéshez.</li><li>Egy egyszerű <strong>szerkesztőprogram</strong> a kézikönyv elkészítéséhez (pl. Canva, Google Docs, Word, vagy akár egy MI prezentációkészítő, mint a Gamma).</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Az MI \"KRESZ-táblái\"",
+      "content": "<p>Megtanultál autót vezetni, ami egy szuper képesség, de a biztonságos közlekedéshez ismerned kell a KRESZ-szabályokat is. Az MI-eszközök használata is hasonló: hatalmat adnak a kezedbe, de felelősséggel is járnak. A mai projekt során te magad fogod megalkotni a \"KRESZ-táblákat\" egy MI-eszközhöz. Nemcsak azt fogod leírni, hogyan kell használni, hanem azt is, mik a veszélyei, és milyen szabályokat érdemes betartani, hogy se magadnak, se másoknak ne okozz \"balesetet\".</p>"
+    },
+    {
+      "id": "projekt_lepesek",
+      "title": "4. A Projekt Lépései",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Válassz Eszközt!",
+          "content": "<p>Válassz egyet az eddig megismert MI-eszközök vagy -területek közül, amelyikhez a kézikönyvedet készíted! Például:</p><ul><li>Egy konkrét képalkotó (pl. Copilot Designer)</li><li>Egy konkrét chatbot (pl. ChatGPT)</li><li>MI-alapú zeneszerzők (általánosságban)</li><li>A Google Teachable Machine</li></ul><p>A választásod írd le a jegyzetedbe!</p>"
+        },
+        {
+          "title": "2. Feladat: A Tartalom Ötletbörzéje",
+          "content": "<p>Most használd az MI-t, hogy segítsen összegyűjteni a kézikönyved tartalmát! Gondolj az elmúlt hetekre: torzítás, dezinformáció, adatvédelem, etika...</p><p><strong>Megfigyelés:</strong> Az MI egy remek kiindulási alapot ad a kézikönyved két legfontosabb fejezetéhez. Olvasd át a javaslatait, és egészítsd ki a saját gondolataiddal!</p>",
+          "prompts": ["Viselkedj úgy, mint egy digitális állampolgárságra nevelő szakértő! Segíts összegyűjteni a pontokat egy \"Felelős Felhasználói Kézikönyvhöz\", ami a [IDE ÍRD A VÁLASZTOTT ESZKÖZ NEVÉT] használatáról szól.\n\nGyűjts nekem:\n- 5 pozitív tippet, hogyan lehet kreatívan és hasznosan használni.\n- 3 fontos figyelmeztetést a lehetséges veszélyekről (pl. torzítás, pontatlanság, adatvédelem)."]
+        },
+        {
+          "title": "3. Feladat: A Kézikönyv Megszerkesztése",
+          "content": "<p>Nyisd meg a választott szerkesztőprogramot, és készítsd el az egyoldalas kézikönyvedet! A dokumentum legyen átlátható, könnyen olvasható és informatív. A következő szerkezetet javasoljuk:</p><ol><li><strong>Főcím:</strong> Felelős Felhasználói Kézikönyv: [Az eszköz neve]</li><li><strong>Rövid bemutatkozás (1-2 mondat):</strong> Mire jó ez az eszköz?</li><li><strong>5 Tipp a Kreatív Használathoz:</strong> Itt sorold fel a pozitív, inspiráló tippeket. Használj ikonokat vagy képeket!</li><li><strong>3 Figyelmeztetés a Veszélyekre:</strong> Itt sorold fel a kritikai pontokat. Használj figyelmeztető jeleket!</li><li><strong>Az én aranyszabályom:</strong> Fogalmazz meg egyetlen, számodra legfontosabb szabályt az eszköz használatával kapcsolatban.</li></ol>"
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "5. Kritikai Gondolkodás Sarok",
+      "content": "<p>A kézikönyved elkészült. De vajon elolvassák az emberek?</p><ul><li><strong>A felelősség áthárítása:</strong> Sok cég a felhasználási feltételek apróbetűs részébe rejti a figyelmeztetéseket, ezzel áthárítva a felelősséget a felhasználóra. A te kézikönyved mennyivel felhasználóbarátabb? Miért fontos, hogy a cégek is közérthetően és proaktívan tájékoztassanak a kockázatokról?</li><li><strong>Szabályozás vagy önszabályozás?</strong> Elég, ha a felhasználók magukévá tesznek egyfajta etikai kódexet? Vagy szükség van szigorú állami törvényekre is, amelyek korlátozzák, mit tehetnek meg az MI-cégek? Melyik megközelítés lehet hatékonyabb?</li></ul>"
+    },
+    {
+      "id": "leadas",
+      "title": "6. A Projekt Leadása és Megosztása",
+      "content": "<p>A feladatod, hogy a kész, egyoldalas kézikönyvedet elmentsd PDF formátumban.</p><p>Ez a projekt a harmadik modul esszenciája. Nemcsak a saját tudásodat rendszerezed, hanem egy olyan anyagot hozol létre, ami másoknak is segíthet abban, hogy a digitális világ felelős és tudatos polgáraivá váljanak.</p><p><strong>A következő órán mutasd be a kézikönyvedet, és emeld ki:</strong></p><ul><li>Melyik eszközt választottad és miért?</li><li>Melyik figyelmeztetést tartod a legfontosabbnak?</li><li>Mi a te személyes \"aranyszabályod\"?</li></ul><p>Sok sikert a modulzáró projekthez!</p>"
+    }
+  ]
 }

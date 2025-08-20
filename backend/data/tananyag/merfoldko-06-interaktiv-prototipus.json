@@ -1,8 +1,72 @@
 {
-  "title": "Merfoldko 06 interaktiv prototipus",
-  "subject": "altalanos",
+  "title": "AIMI Stúdió - M06: Interaktív Prototípus Építése",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Merfoldko 06 interaktiv prototipus\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A mérföldkő végére a csapatotok a statikus képernyőtervekből egy kattintható, interaktív prototípust hoz létre.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Virtuális Próbakör"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. A Mérföldkő Kihívása"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A mérföldkő végére a csapatotok a statikus képernyőtervekből (mockupokból) egy <strong>kattintható, interaktív prototípust</strong> hoz létre. A cél, hogy a projekt ne csak úgy nézzen ki, mint egy valódi alkalmazás vagy weboldal, hanem a fő funkcióit tekintve úgy is <strong>viselkedjen</strong>.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Virtuális Próbakör",
+      "content": "<p>A ház tervei és látványtervei elkészültek. Most itt az ideje, hogy építsünk egy \"virtuális bejárást\", ahol a leendő lakók (a felhasználók) végigkattinthatnak a szobákon, kinyithatják az ajtókat, és kipróbálhatják, milyen érzés lenne ott élni. Az interaktív prototípus pont ilyen: egy szimuláció, ami lehetővé teszi, hogy a felhasználók \"próbakört\" tegyenek a terméketekkel, még mielőtt egyetlen sor kód is megíródna. Ma ti lesztek a virtuális túravezetők!</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p>Vegyétek elő a \"Mini Arculati Kézikönyveteket\" és a véglegesített vizuális prototípusotokat (mockupokat)!</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Munkaterület Előkészítése",
+          "content": "<p>Válasszátok ki azt az MI-prezentációs eszközt (pl. Gamma.app, Tome.app), amivel dolgozni fogtok! A Canva is alkalmas lehet, ha támogatja a belső linkelést.</p><ol><li>Hozzatok létre egy új, üres prezentációt a csapatotoknak.</li><li>Töltsétek fel a vizuális prototípusotok (mockupok) képeit! Minden egyes képernyőterv kerüljön egy <strong>külön diára vagy kártyára</strong>.</li><li>Nevezzétek el a diákat a funkciójuk szerint (pl. \"Bejelentkező képernyő\", \"Főoldal\", \"Új feladat hozzáadása\"). Ez segít a tájékozódásban.</li></ol>"
+        },
+        {
+          "title": "2. Feladat: Az Interakciók \"Bekötése\"",
+          "content": "<p>Ez a legfontosabb lépés! Most a gombokat és más elemeket kattinthatóvá tesszük, hogy a diák között lehessen navigálni.</p><ol><li>Vegyétek elő a 3. mérföldkőn készített <strong>Felhasználói Utat (User Flow)</strong>! Ez lesz a térképetek.</li><li>Menjetek az első diára (pl. \"Bejelentkező képernyő\"). Keressétek meg a \"Bejelentkezés\" gombot a feltöltött képen.</li><li>A prezentációs eszközötök segítségével helyezzetek a gombra egy <strong>átlátszó alakzatot</strong> vagy egy \"hotspot\" elemet.</li><li>Erre az alakzatra állítsatok be egy <strong>linket</strong>, ami nem egy külső weboldalra, hanem a prezentáción belül a következő, releváns diára mutat (pl. a \"Főoldal\" diára).</li><li>Ismételjétek meg ezt a folyamatot a teljes felhasználói útvonalon! Kössétek össze a gombokat a megfelelő képernyőkkel. Ne feledkezzetek meg a \"Vissza\" gombokról sem!</li></ol>"
+        },
+        {
+          "title": "3. Feladat: Az Élmény Finomítása",
+          "content": "<p>Hogy a prototípus még élethűbb legyen, adjunk hozzá apró részleteket! Kérjünk ötleteket az MI-től!</p><p><strong>Feladat:</strong> A kapott ötletek alapján próbáljatok ki legalább egyet! Állítsatok be finom <strong>átmeneteket (transitions)</strong> a diák között! Vagy ha a prototípusotok egy videót is tartalmazna, ágyazzatok be egy releváns YouTube videót az egyik diára!</p>",
+          "prompts": ["Viselkedj úgy, mint egy UX dizájner! Egy interaktív prototípust készítünk. Adj 3 egyszerű tippet, hogyan tehetnénk az élményt dinamikusabbá és felhasználóbarátabbá anélkül, hogy kódot írnánk! (Például: átmenetek, hover effektek, beágyazott tartalmak)."]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>A \"Boldog Út\" (Happy Path):</strong> A prototípusotok valószínűleg a \"boldog utat\" mutatja be, ahol a felhasználó mindent tökéletesen csinál. Mi történne, ha valaki rossz jelszót írna be? Vagy ha rákattintana egy nem működő gombra? Mit tanultatok abból, hogy egy prototípus mennyiben egyszerűsíti a valóságot?</li><li><strong>Illúzió vs. Valóság:</strong> A prototípusotok úgy néz ki és úgy viselkedik, mint egy valódi termék, de nem az. Nem ment adatokat, nincsenek mögötte adatbázisok. Mi a legfőbb különbség egy interaktív prototípus és egy lefejlesztett, valódi szoftver között? Miért fontos ez a lépés a valódi fejlesztés előtt?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. A Mérföldkő Kihívása: A Működő Prototípus",
+      "content": "<p>A többhetes munka eredménye a projektetek első, bárki által kipróbálható, interaktív verziója.</p><p><strong>A feladatotok, hogy készítsétek el és véglegesítsétek a prototípust, aminek a következő feltételeknek kell megfelelnie:</strong></p><ol><li>A prototípusnak tartalmaznia kell az összes, korábban megtervezett és tartalommal feltöltött képernyőt.</li><li>A fő felhasználói útvonalnak elejétől a végéig <strong>kattinthatónak kell lennie</strong>.</li><li>A prototípus legyen nyilvánosan megosztható egyetlen link segítségével.</li></ol><p>Szerezzétek be a megosztható linket (Share -> Public Link), és illesszétek be a közös projektdokumentumotokba! A következő héten ezt a linket fogjátok elküldeni a tesztelő csapatnak. Jó munkát!</p>"
+    }
+  ]
 }

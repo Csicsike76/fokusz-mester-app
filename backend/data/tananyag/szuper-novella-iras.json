@@ -1,8 +1,78 @@
 {
-  "title": "Szuper novella iras",
-  "subject": "altalanos",
+  "title": "AIMI Szuperképesség - M04: Írj egy novellát az MI-vel!",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Szuper novella iras\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel az MI-t kreatív írópartnerként használni egy hosszabb szöveg megalkotásához.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Főszerkesztő és a Sztáríró"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Szerkesztői Munkád"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel az MI-t kreatív írópartnerként használni egy hosszabb szöveg megalkotásához. Megtanulod, hogyan generálj történet-alapötletet, hogyan építs fel egy karaktert és egy cselekményvázlatot, és hogyan irányítsd az MI-t, hogy a te elképzeléseid szerint írja meg a történetet, miközben te maradsz a \"főszerkesztő\".</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Főszerkesztő és a Sztáríró",
+      "content": "<p>Képzeld el, hogy egy magazin főszerkesztője vagy! A te dolgod, hogy kitaláld a cikk témáját, a stílusát és a szerkezetét. Van egy rendkívül tehetséges, de néha szétszórt sztáríród (az MI), aki villámgyorsan megírja a nyers szöveget. A te feladatod, hogy adj neki egy tiszta iránymutatást, majd a kapott szöveget szerkeszd, finomítsd, és a saját, egyedi stílusodra formáld. Ma megtanuljuk, hogyan legyünk jó főszerkesztők!</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Az Alapötlet (Logline) Megalkotása",
+          "content": "<p>Minden jó történet elfér egyetlen mondatban. Ezt hívják \"logline\"-nak. Kérjünk az MI-től néhány ötletet!</p><p><strong>Feladat:</strong> Válaszd ki a legizgalmasabb logline-t! Ezzel fogunk tovább dolgozni. (Példa: \"Egy magányos űrbányász egy elhagyatott aszteroidán talál egy ősi, idegen mesterséges intelligenciát, aminek a segítségével meg kell mentenie a kolóniáját egy közelgő katasztrófától.\")</p>",
+          "prompts": ["Viselkedj úgy, mint egy hollywoodi forgatókönyvíró! Adj 3 különböző logline-t (egy mondatos történet-összefoglalót) egy sci-fi novellához! Mindegyik tartalmazzon egy főhőst, egy célt és egy konfliktust!"]
+        },
+        {
+          "title": "2. Feladat: A Főhős Megtervezése",
+          "content": "<p>Most, hogy megvan a történet magja, keltsük életre a főszereplőt!</p><p><strong>Feladat:</strong> Olvasd el a kapott karakterleírást! Egészítsd ki, vagy változtass rajta, hogy igazán a tiéd legyen! Ez a karakterlap lesz az iránytűd.</p>",
+          "prompts": ["A történetünk alapötlete a következő: [Ide másold be a kiválasztott logline-t]. Készíts egy részletes karakterleírást a főhősről! Térjen ki a nevére, korára, kinézetére, 2 pozitív és 2 negatív tulajdonságára, a legnagyobb vágyára és a legmélyebb félelmére!"]
+        },
+        {
+          "title": "3. Feladat: A Cselekményvázlat (Plot Outline)",
+          "content": "<p>Mielőtt írni kezdenénk, tervezzük meg a történet útvonalát! Használjuk a klasszikus háromfelvonásos szerkezetet.</p><p><strong>Feladat:</strong> Ez a vázlat lesz a történeted \"csontváza\". Olvasd át, és ha kell, finomíts rajta!</p>",
+          "prompts": ["A logline és a karakterleírás alapján készíts egy 5-7 pontos cselekményvázlatot a történethez a klasszikus háromfelvonásos szerkezet szerint!\n- 1. Felvonás (Bevezetés): Ismerjük meg a főhőst és a világát.\n- 2. Felvonás (Konfliktus): A főhős szembesül a problémával, akadályokba ütközik, és eléri a mélypontot.\n- 3. Felvonás (Megoldás): A főhős felülkerekedik, és eléri (vagy nem éri el) a célját."]
+        },
+        {
+          "title": "4. Feladat: Az Első Fejezet Megírása",
+          "content": "<p>Most jön a lényeg! Adjunk minden információt oda az MI-nek, és kérjük meg, hogy írja meg az első részt!</p><p><strong>Feladat:</strong> Olvasd el a kapott szöveget! Ez a te nyersanyagod. A következő lépés a szerkesztés.</p>",
+          "prompts": ["Most írd meg a novella első fejezetét (kb. 300 szó)! Használd a korábban elkészített karakterleírást és a cselekményvázlat 1. felvonásának pontjait! A stílus legyen [válassz stílust, pl. \"feszült, leíró jellegű, E/3 személyű\"]. Koncentrálj a főhős bemutatására és a világ atmoszférájának megteremtésére!"]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>A Szerző Hangja:</strong> Az MI által írt szöveg technikailag korrekt, de hiányzik belőle a te egyedi \"hangod\". Hol és hogyan tudod a szöveget a saját stílusodra formálni? Melyik mondatot írnád át? Milyen hasonlatot vagy metaforát tennél bele, ami csak tőled származhat?</li><li><strong>Konzisztencia-problémák:</strong> Ha folytatnád a történetet, az MI emlékezne minden apró részletre a karakterről és a világról? Miért elengedhetetlen az emberi \"főszerkesztő\" szerepe egy hosszabb történet írásánál, hogy a részletek végig következetesek maradjanak?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Szerkesztői Munkád",
+      "content": "<p>A feladatod, hogy a 4. lépésben kapott, MI által generált első fejezetet vedd alapul, és készítsd el belőle a saját, végleges verziódat!</p><p><strong>Végezd el az alábbi szerkesztési feladatokat:</strong></p><ol><li>Válassz ki egy bekezdést, és <strong>írd át teljesen a saját szavaiddal</strong>, a saját stílusodban.</li><li>Adj hozzá egy új, <strong>leíró mondatot</strong>, ami egy olyan érzékszervi tapasztalatot (szag, hang, tapintás) ír le, amit az MI kihagyott.</li><li>Húzz ki egy feleslegesnek ítélt mondatot vagy jelzőt!</li></ol><p>Mentsd le az \"előtte\" (az MI nyers szövege) és az \"utána\" (a te általad szerkesztett) verziót! Ez a folyamat tökéletesen bemutatja az ember és az MI közötti kreatív együttműködést.</p>"
+    }
+  ]
 }

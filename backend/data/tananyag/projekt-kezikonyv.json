@@ -1,8 +1,56 @@
 {
-  "title": "Projekt kezikonyv",
-  "subject": "altalanos",
+  "title": "AIMI Stúdió - Projekt Kézikönyv",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Projekt kezikonyv\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "Sablonok és Ellenőrzőlisták az AIMI Stúdióhoz",
+  "toc": [
+    {
+      "id": "one-pager",
+      "title": "Projekt Vázlat (One-Pager) Sablon"
+    },
+    {
+      "id": "persona",
+      "title": "Felhasználói Perszóna & Empátia-Térkép"
+    },
+    {
+      "id": "pitch-checklist",
+      "title": "Pitch Ellenőrzőlista (5 perces)"
+    }
+  ],
+  "questions": [
+    {
+      "id": "one-pager",
+      "title": "Projekt Vázlat (One-Pager) Sablon",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "",
+          "content": "<p>Használjátok ezt a sablont a projektetek legfontosabb adatainak egyetlen oldalon való rögzítésére.</p><ul><li><strong>Projekt Címe:</strong></li><li><strong>Problémamegfogalmazás (1-2 mondat):</strong></li><li><strong>Megoldás (1-2 mondat):</strong></li><li><strong>Célközönség:</strong></li><li><strong>Egyedi Értékajánlat (USP):</strong></li><li><strong>A Siker Mérőszámai (2-3 pont):</strong></li></ul>",
+          "prompts": [
+            "Projekt Címe: [Írjátok ide a projekt címet]\n\nProblémamegfogalmazás:\n[Írjátok ide 1-2 mondatban a megoldandó problémát]\n\nMegoldás:\n[Írjátok ide 1-2 mondatban, mi a ti megoldásotok]\n\nCélközönség:\n[Írjátok le, kinek készült a projekt]\n\nEgyedi Értékajánlat (USP):\n[Fogalmazzátok meg 1 mondatban, mitől különleges a ti projektetek]\n\nA Siker Mérőszámai:\n- [1. mérőszám, pl. A felhasználók 80%-a hasznosnak ítéli]\n- [2. mérőszám, pl. 10%-kal csökken a probléma előfordulása]\n- [3. mérőszám]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "persona",
+      "title": "Felhasználói Perszóna & Empátia-Térkép",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "",
+          "content": "<p>Ezek az eszközök segítenek megérteni és \"életre kelteni\" a célközönségeteket.</p><h3>Felhasználói Perszóna</h3><ul><li><strong>Név:</strong></li><li><strong>Kor:</strong></li><li><strong>Foglalkozás/Iskola:</strong></li><li><strong>Célok (3 pont):</strong></li><li><strong>Frusztrációk (3 pont):</strong></li><li><strong>Rövid bemutatkozás:</strong></li></ul><h3>Empátia-Térkép</h3><ul><li><strong>Mit GONDOL és ÉREZ?</strong> (Félelmek, vágyak, ami igazán számít)</li><li><strong>Mit HALL?</strong> (Mit mondanak a barátai, a tanárai, a média?)</li><li><strong>Mit LÁT?</strong> (Milyen a környezete, milyen ajánlatokkal találkozik?)</li><li><strong>Mit MOND és TESZ?</strong> (Hogyan viselkedik, mit kommunikál mások felé?)</li></ul>",
+          "prompts": [
+            "## Felhasználói Perszóna ##\n\nNév: [Adj neki egy nevet]\nKor: [Add meg a korát]\nFoglalkozás/Iskola: [Hova jár, mit csinál?]\n\nCélok:\n- [1. cél]\n- [2. cél]\n- [3. cél]\n\nFrusztrációk:\n- [1. frusztráció a problémával kapcsolatban]\n- [2. frusztráció]\n- [3. frusztráció]\n\nRövid bemutatkozás:\n[Írj róla 2-3 mondatot]\n\n## Empátia-Térkép ##\n\nMit GONDOL és ÉREZ?:\n- \nMit HALL?:\n- \nMit LÁT?:\n- \nMit MOND és TESZ?:\n- "
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pitch-checklist",
+      "title": "Pitch Ellenőrzőlista (5 perces)",
+      "content": "<p>Használjátok ezt a listát a záró prezentációtok felépítéséhez és gyakorlásához.</p><ul><li><strong>A Horog (kb. 30 mp):</strong> Megragadja a figyelmet? (Kérdés / Statisztika / Történet)</li><li><strong>A Probléma (kb. 1 perc):</strong> Világos és érthető, miért fontos?</li><li><strong>A Megoldás (kb. 2 perc):</strong> Bemutatjátok a prototípust? Jól látszik a működése?</li><li><strong>Miért Mi? (kb. 30 mp):</strong> Elhangzik az egyedi értékajánlat (USP)?</li><li><strong>Zárás (kb. 1 perc):</strong> Erőteljes az összefoglalás? Van egy emlékezetes zárómondat?</li><li><strong>Időkeret:</strong> Belefértetek az 5-7 percbe?</li></ul>"
+    }
+  ]
 }

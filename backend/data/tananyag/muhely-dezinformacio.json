@@ -1,8 +1,88 @@
 {
-  "title": "Muhely dezinformacio",
-  "subject": "altalanos",
+  "title": "AIMI Műhely - 20. hét: Deepfake és dezinformáció",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_tool",
-  "description": "Ez a(z) \"Muhely dezinformacio\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel azonosítani a deepfake videók és a mesterséges intelligencia által generált képek leggyakoribb árulkodó jeleit.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Amikor a szemed becsap"
+    },
+    {
+      "id": "ellenorzo-lista",
+      "title": "4. A \"Deepfake Detektív\" Ellenőrzőlista"
+    },
+    {
+      "id": "feladatok",
+      "title": "5. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel azonosítani a deepfake videók és a mesterséges intelligencia által generált képek leggyakoribb árulkodó jeleit. Megérted, miért veszélyes a dezinformáció, és megtanulod, hogyan viselkedj felelős digitális állampolgárként, ha gyanús tartalommal találkozol.</p>"
+    },
+    {
+      "id": "eszkozok",
+      "title": "2. Szükséges Eszközök",
+      "content": "<ul><li>Webböngésző az internetes kutatáshoz és a példák megtekintéséhez.</li><li>Kritikus gondolkodás és egy jó adag egészséges kételkedés.</li></ul>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "3. Bevezető: Amikor a szemed becsap",
+      "content": "<p>Régen azt mondtuk: \"Hiszem, ha látom.\" A deepfake technológia korában ez a mondás már nem érvényes. Az MI ma már képes olyan valósághű videókat és képeket készíteni, amelyek soha meg nem történt eseményeket mutatnak be, vagy emberek szájába adnak olyan szavakat, amiket sosem mondtak. Ma felvesszük a digitális detektív szemüvegünket, és megtanuljuk észrevenni az apró repedéseket a valóság digitális másolatán.</p>"
+    },
+    {
+      "id": "ellenorzo-lista",
+      "title": "4. A \"Deepfake Detektív\" Ellenőrzőlista",
+      "content": "<p>Mielőtt nyomozni kezdenénk, ismerkedjünk meg az eszközeinkkel! Ezek a leggyakoribb jelek, amik egy deepfake-re vagy manipulált képre utalhatnak:</p><div class=\"checklist-card\"><h3>Deepfake Detektív Ellenőrzőlista</h3><ul><li><strong>Természetellenes pislogás:</strong> A deepfake modellek néha \"elfelejtenek\" pislogni, vagy épp túl sokat pislognak. Az emberi pislogás ritmusa szabálytalan.</li><li><strong>Furcsa arc- és bőrmozgás:</strong> A bőr túl sima, viaszos, vagy épp a ráncok nem mozognak együtt a mimikával. Az arc széleinél elmosódás látható.</li><li><strong>Rossz száj-szinkron:</strong> A száj mozgása nincs tökéletes összhangban a hanggal.</li><li><strong>Haj és fogak:</strong> Az egyes hajszálak vagy a fogak gyakran elmosódottak, furcsán állnak, vagy hiányzik a részletességük.</li><li><strong>Fények és árnyékok:</strong> A fények és árnyékok az arcon nem mindig illeszkednek a háttér megvilágításához.</li><li><strong>Érzelmek hiánya:</strong> A \"szemek a lélek tükrei\" - a deepfake arcok gyakran üresek, hiányzik belőlük a valódi érzelem.</li><li><strong>Képi hibák:</strong> Apró, furcsa anomáliák, \"glitchek\" a videóban, különösen a gyors mozgásoknál.</li></ul></div>"
+    },
+    {
+      "id": "feladatok",
+      "title": "5. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: Esettanulmány - A Morgan Freeman Deepfake",
+          "content": "<p>Az egyik leghíresebb (és jó szándékkal készült) deepfake egy Morgan Freemanről készült videó. A feladatod, hogy megnézd és elemezd!</p><ol><li>Nézd meg a videót! Keress rá a YouTube-on: <strong>\"Morgan Freeman deepfake by Diep Nep\"</strong>.</li><li>Miközben nézed, vedd elő az Ellenőrzőlistádat! Próbálj meg legalább <strong>két árulkodó jelet</strong> találni a listáról! (Segítség: Figyeld a bőre simaságát és a száj mozgását!)</li><li>Írd le a jegyzeteidbe, mit találtál!</li></ol>"
+        },
+        {
+          "title": "2. Feladat: Képi Dezinformáció - A Pápa és a Pufidzseki",
+          "content": "<p>A dezinformáció nem csak videó lehet. Az egyik leghíresebb AI-generált kép Ferenc pápát ábrázolta egy divatos pufidzsekiben, ami vírusszerűen terjedt el.</p><ol><li>Keress rá a neten: <strong>\"Pope Francis AI puffer jacket\"</strong>. Nézd meg a képet alaposan!</li><li>Mi az, ami elsőre furcsa lehet rajta? Figyeld meg a kezeit, a fülbevalóját vagy a szemüvegét! Az MI gyakran hibázik az apró, komplex részleteknél, mint az ujjak.</li><li>Gondold végig: Miért hitték el olyan sokan, hogy a kép valódi?</li></ol>"
+        },
+        {
+          "title": "3. Feladat: A Felelős Viselkedés Gyakorlása",
+          "content": "<p>Képzeld el, hogy a legjobb barátod átküld neked egy megdöbbentő videót, amiben egy híres politikus olyat mond, ami botrányt okozhat. Gyanúsan furcsa a videó. Mi a helyes teendő?</p><p><strong>A rossz válasz:</strong> Azonnal továbbküldöm mindenkinek, hogy \"Ezt látnotok kell!\".</p><p><strong>A feladatod:</strong> Írj le 2-3 lépést, ami a <strong>helyes és felelős</strong> viselkedés ilyen helyzetben!</p>"
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "6. Kritikai Gondolkodás Sarok",
+      "content": "<p>Láttad, milyen könnyű megtéveszteni az embereket. Most gondolkodjunk el a mélyebb következményeken!</p><ul><li><strong>A bizalom megrendülése:</strong> Ha már semmiben sem hihetünk, amit látunk, az milyen hatással van a társadalomra? Hogyan befolyásolhatja ez a választásokat, a bírósági tárgyalásokat vagy akár a személyes kapcsolatainkat?</li><li><strong>Kinek a felelőssége?</strong> Ki a felelős a dezinformáció terjedéséért? Az, aki létrehozza? Az, aki megosztja? A közösségi média platform, ami teret ad neki? Vagy a kormány, aminek szabályoznia kellene?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "7. Önálló Kihívás: Készíts egy \"Digitális Önvédelmi\" Posztot!",
+      "content": "<p>A feladatod, hogy készíts egy rövid, figyelemfelkeltő anyagot, ami segít a barátaidnak és a családodnak felismerni a dezinformációt.</p><p><strong>Válassz egy formátumot:</strong></p><ul><li>Egy <strong>egyszerű kép/poszter</strong> (készítheted Canvával vagy akár egy MI képalkotóval!), ami bemutatja a 3 legfontosabb tippet a deepfake-ek felismerésére.</li><li>Egy <strong>rövid, 30 másodperces videó szkriptje</strong> (forgatókönyve), ami elmagyarázza, miért fontos, hogy gondolkodjunk, mielőtt megosztunk valamit.</li></ul><p>A cél, hogy a tanultakat egy egyszerű, közérthető és figyelemfelkeltő formába öntsd. Mentsd el a kész munkádat!</p>"
+    }
+  ]
 }

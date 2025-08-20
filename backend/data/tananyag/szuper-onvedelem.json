@@ -1,8 +1,73 @@
 {
-  "title": "Szuper onvedelem",
-  "subject": "altalanos",
+  "title": "AIMI Szuperképesség - M07: Digitális Önvédelmi Stratégiák",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Szuper onvedelem\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel az MI segítségével elemezni a saját potenciális digitális lábnyomodat, és egy konkrét, 5 pontos tervet készíteni.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Digitális Árnyékod"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Személyes Adat-Auditod"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel az MI segítségével elemezni a saját potenciális digitális lábnyomodat, és egy konkrét, 5 pontos tervet készíteni az online jelenléted tudatosabb és biztonságosabb kezelésére. A cél a passzív adatmegosztásból az aktív digitális önvédelemre való áttérés.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Digitális Árnyékod",
+      "content": "<p>Minden, amit online csinálsz, egy láthatatlan \"digitális árnyékot\" vet. Ez az árnyék nemcsak a posztjaidból és a lájkjaidból áll, hanem abból is, mennyi ideig nézel egy videót, mire keresel rá, vagy milyen útvonalon mész haza a telefonoddal a zsebedben. Az MI-algoritmusok ezeket az árnyékokat elemzik, hogy profilt alkossanak rólad. Ma az MI-t nem arra használjuk, hogy újabb árnyékot vessünk, hanem hogy megvilágítsuk a már meglévőt, és megtanuljuk, hogyan irányítsuk azt.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Profilozás Szimulációja",
+          "content": "<p>Nézzük meg, hogyan \"gondolkodik\" rólad egy marketing-algoritmus! Adj meg az MI-nek néhány valós érdeklődési körödet, és kérj tőle egy profilt!</p><p><strong>Feladat:</strong> Olvasd el a kapott elemzést! Mennyire talált be? Vannak benne meglepő, de igaz megállapítások? Ez a profil az, amit a cégek látnak belőled.</p>",
+          "prompts": ["Viselkedj úgy, mint egy piackutató algoritmus! A feladatom, hogy egy felhasználói profilt készíts. Az alábbi érdeklődési körökkel rendelkezem: [Írj ide 3-4 valós hobbidat, pl. \"sci-fi filmek, rockzene, kosárlabda, videójátékok\"].\nEzen adatok alapján készíts egy részletes profilt rólam:\n- Becsült kor és nem\n- Valószínűsíthető személyiségjegyek (pl. introvertált/extrovertált)\n- Milyen termékeket lehetne nekem sikeresen hirdetni?\n- Milyen típusú online tartalommal lehetne a figyelmemet a leghosszabb ideig fenntartani?"]
+        },
+        {
+          "title": "2. Feladat: A Láthatatlan Adatgyűjtés Feltárása",
+          "content": "<p>A legtöbb adatot nem is aktívan adjuk meg. Kérjük meg az MI-t, hogy segítsen feltárni a passzív adatgyűjtési pontokat!</p><p><strong>Feladat:</strong> Nézd végig a \"Passzív\" kategóriát! Melyik adatgyűjtési módszer lepett meg a leginkább? Melyikről nem is tudtál eddig?</p>",
+          "prompts": ["Készíts egy listát 10 gyakori módszerről, ahogy egy átlagos tinédzser digitális lábnyomot hagy maga után az interneten! Különítsd el őket \"Aktív\" (szándékos, pl. posztolás) és \"Passzív\" (automatikus, pl. helyadatok gyűjtése) kategóriákra!"]
+        },
+        {
+          "title": "3. Feladat: A Védelmi Stratégia Megalkotása",
+          "content": "<p>Most, hogy ismerjük a kockázatokat, készítsünk egy konkrét, használható védelmi tervet!</p><p><strong>Feladat:</strong> Olvasd el a kapott tervet! Melyik pontot tudnád a legkönnyebben beépíteni a mindennapjaidba már holnaptól?</p>",
+          "prompts": ["Viselkedj úgy, mint egy digitális adatvédelmi tanácsadó! Az előző pontok alapján állíts össze egy 5 pontos, könnyen betartható akciótervet \"Az én digitális pajzsom\" címmel! Minden pont legyen egy konkrét, gyakorlati tanács egy tinédzser számára a digitális lábnyomának tudatosabb kezelésére."]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>A Kényelem Ára:</strong> A személyre szabott szolgáltatások (pl. egy jó YouTube ajánlás) a mi adatainkon alapulnak. Lehetséges egyszerre élvezni a perszonalizáció kényelmét és megőrizni az adataink feletti teljes kontrollt? Hol van az arany középút?</li><li><strong>A Jövőbeli Éned:</strong> A mai digitális lábnyomod hogyan befolyásolhatja a jövőbeli lehetőségeidet 5-10 év múlva? (Pl. egy egyetemi felvételinél, egy állásinterjúnál). Miért fontos már most elkezdeni a tudatos \"digitális kertészkedést\"?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Te Személyes Adat-Auditod",
+      "content": "<p>Most végezz el egy valódi, gyors auditot a saját fiókodon!</p><p><strong>A feladatod:</strong></p><ol><li>Menj a <strong>Google Fiókod \"Adatvédelem és személyre szabás\"</strong> menüpontjába, és keresd meg a <strong>\"Hirdetési központ\"</strong> (Ad Center) beállítást.</li><li>Nézz bele a \"Profil\" vagy \"Kategóriák\" listába! Itt látod, milyen érdeklődési köröket társított hozzád a Google.</li><li>Készíts egy rövid, <strong>\"Előtte-Utána\"</strong> jelentést:<ul><li><strong>Előtte:</strong> Írj le 3 olyan meglepő vagy már nem releváns érdeklődési kört, amit a Google gondol rólad.</li><li><strong>Utána:</strong> Kapcsold ki vagy távolítsd el ezt a 3 kategóriát! Írd le egy mondatban, miért döntöttél így.</li></ul></li></ol><p>Mentsd le a jelentésedet! Ez egy konkrét, kézzelfogható lépés afelé, hogy visszavedd az irányítást a digitális árnyékod felett.</p>"
+    }
+  ]
 }

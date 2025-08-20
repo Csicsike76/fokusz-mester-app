@@ -1,8 +1,74 @@
 {
-  "title": "Merfoldko 02 projekt vazlat",
-  "subject": "altalanos",
+  "title": "AIMI Stúdió - M02: Versenytárs-elemzés és Projekt Vázlat",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Merfoldko 02 projekt vazlat\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A mérföldkő végére a csapatotok képes lesz felmérni a \"piacot\", azonosítani a lehetséges versenytársakat, és megfogalmazni, mitől lesz a ti projektetek egyedi és különleges.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: Ne találd fel újra a spanyolviaszt!"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. A Mérföldkő Kihívása"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A mérföldkő végére a csapatotok képes lesz felmérni a \"piacot\", azonosítani a lehetséges versenytársakat, és megfogalmazni, mitől lesz a ti projektetek <strong>egyedi és különleges</strong>. Mindezt egy hivatalos, egyoldalas <strong>projekt vázlatban (One-Pager)</strong> rögzítitek, ami a féléves munka legfontosabb dokumentuma lesz.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: Ne találd fel újra a spanyolviaszt!",
+      "content": "<p>Mielőtt belevágnánk egy nagy projektbe, érdemes körülnézni: foglalkozott-e már valaki hasonló problémával? Ha igen, hogyan? Ez nem a másolásról szól, hanem a tanulásról. A létező megoldások elemzése (a \"versenytársaké\") segít elkerülni a buktatókat, és megtalálni azt a rést, ahol a ti ötletetek valami újat, valami jobbat tud nyújtani. Ma az MI-t arra használjuk, hogy segítsen nekünk \"kémkedni\" egy kicsit, és megtalálni a projektünk szupererejét.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p>Vegyétek elő az előző mérföldkőn készített \"Kutatási Összefoglalótokat\"!</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A \"Versenytársak\" Feltérképezése",
+          "content": "<p>Használjátok az MI-t, hogy kiderítsétek, léteznek-e már hasonló megoldások a problémátokra!</p><p><strong>Feladat:</strong> Beszéljétek meg a kapott listát! Ismeritek ezeket a megoldásokat? Mennyire jók? Írjátok le a 3 legfontosabb \"versenytársat\" és a róluk tanultakat a projekt dokumentumotokba.</p>",
+          "prompts": ["Viselkedj úgy, mint egy piackutató! A projektünk egy olyan megoldás, ami segít [ide írjátok a probléma rövid leírását, pl. 'a diákoknak követni a házi feladataikat']. Keress 3 létező applikációt, weboldalt vagy módszert, ami ugyanezt a problémát próbálja megoldani! Mindegyikhez írd le röviden az erősségét és a gyengeségét!"]
+        },
+        {
+          "title": "2. Feladat: Az Egyedi Értékajánlat (USP) Megfogalmazása",
+          "content": "<p>Most jön a legfontosabb kérdés: ha már léteznek megoldások, <strong>mitől lesz a tiétek más vagy jobb?</strong> Ez az Egyedi Értékajánlat (Unique Selling Proposition - USP). Kérjünk az MI-től segítséget a megfogalmazásához!</p><p><strong>Feladat:</strong> Válasszátok ki a legütősebb ötletet, és fogalmazzátok meg egyetlen, emlékezetes mondatban a projektetek USP-jét! (Pl. \"A mi applikációnk nemcsak egy határidőnapló, hanem egy játékos, motiváló rendszer, ami segít legyőzni a halogatást.\") Ezt a mondatot írjátok be a projektdokumentumba!</p>",
+          "prompts": ["A mi projektünk egy [a ti megoldásotok leírása]. A versenytársak a következők: [soroljátok fel a 3 versenytársat]. Adj 3 ötletet arra, mi lehet a mi egyedi értékajánlatunk (USP)! Miben lehetünk mások? (Pl. egyszerűbb, ingyenes, egy speciális funkció, jobban céloz a diákokra stb.)"]
+        },
+        {
+          "title": "3. Feladat: A Projekt Vázlat (One-Pager) Összeállítása",
+          "content": "<p>Most minden tudásunkat egyetlen, áttekinthető dokumentumba sűrítjük. Ez lesz a projektetek \"személyi igazolványa\".</p><p><strong>Feladat:</strong> A kapott vázlatot finomítsátok, töltsétek ki a saját, véglegesített információitokkal, és formázzátok meg szépen egy dokumentumban!</p>",
+          "prompts": ["Viselkedj úgy, mint egy projektmenedzser! A rendelkezésre álló információk alapján (probléma, célközönség, USP) készíts egy egyoldalas projekt vázlatot (One-Pager)! A vázlat a következő részekből álljon: 1. Projekt Címe, 2. Problémamegfogalmazás (1 mondat), 3. Megoldás (1 mondat), 4. Célközönség (kiknek szól?), 5. Egyedi Értékajánlat (USP), 6. A Siker Mérőszámai (2-3 pont, pl. 'a diákok 80%-a használja', 'csökken az elfelejtett házik száma')."]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>Innováció vagy Másolat?</strong> Az MI a már létező információk alapján dolgozik. Hogyan tudjátok biztosítani, hogy a projektetek valóban új ötleteket tartalmazzon, és ne csak a versenytársak funkcióinak egy újabb kombinációja legyen? Mi az a kreatív, emberi szikra, amit ti tesztek hozzá?</li><li><strong>A \"Siker\" Definíciója:</strong> Az MI segített megfogalmazni a siker mérőszámait. De a siker csak számokban mérhető? Milyen más, nem mérhető (kvalitatív) módokon lehetne sikeres a projektetek? (Pl. \"a diákok kevésbé szoronganak a házik miatt\", \"erősíti az osztályközösséget\").</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. A Mérföldkő Kihívása: A Végleges Projekt Vázlat (One-Pager)",
+      "content": "<p>A két hét munkájának eredménye a csapatotok legfontosabb dokumentuma.</p><p><strong>Készítsétek el és véglegesítsétek a hivatalos, egyoldalas Projekt Vázlatotokat, ami a következő 6 pontot tartalmazza:</strong></p><ol><li>Projekt Címe</li><li>Problémamegfogalmazás</li><li>Megoldás</li><li>Célközönség</li><li>Egyedi Értékajánlat (USP)</li><li>A Siker Mérőszámai</li></ol><p>Ezt a dokumentumot mentsétek el PDF-ként! A következő fázisban, a tervezés során ez lesz a legfőbb iránymutatótok, ami segít, hogy ne térjetek le a kijelölt útról. Jó munkát!</p>"
+    }
+  ]
 }

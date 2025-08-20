@@ -1,8 +1,74 @@
 {
-  "title": "Szuper jovoallo keszsegek",
-  "subject": "altalanos",
+  "title": "AIMI Szuperképesség - M09: Jövőálló Készségek Fejlesztése",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Szuper jovoallo keszsegek\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A műhely végére képes leszel elemezni egy általad választott szakmát az MI szempontjából, és egy \"készség-térképet\" alkotni a jövőre nézve.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Kovács és a Gőzkalapács"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: A Jövő Álláshirdetése!"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A műhely végére képes leszel elemezni egy általad választott szakmát az MI szempontjából. Megtanulod azonosítani, mely feladatokat automatizálhat az MI, és ami még fontosabb, képes leszel új, emberi készségeket igénylő feladatokat kitalálni, és egy \"készség-térképet\" alkotni a jövőre nézve.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Kovács és a Gőzkalapács",
+      "content": "<p>Amikor feltalálták a gőzkalapácsot, a kovácsok nem mentek tönkre. A gyenge kovácsok, akik csak a puszta erejükkel versenyeztek a géppel, igen. De a legjobb kovácsok megtanulták használni a gőzkalapácsot, hogy olyan dolgokat hozzanak létre, amikről korábban álmodni sem mertek. Az MI a mi gőzkalapácsunk. Nem az a cél, hogy versenyezzünk vele, hanem hogy megtanuljuk mesterien kezelni. Ma te leszel a jövő kovácsa, aki megtervezi, hogyan fogja használni ezt az új, erős szerszámot.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p><strong>A mai projektünk:</strong> Készítünk egy jövő-elemzést egy általad választott szakmáról!</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Szakma Kiválasztása és Jelenlegi Feladatainak Feltérképezése",
+          "content": "<p>Válassz egy szakmát, ami érdekel! Ez lehet bármi: tanár, orvos, marketinges, autószerelő, stb. Most kérdezzük meg az MI-t, mit csinál ma egy ilyen szakember.</p><p><strong>Feladat:</strong> Olvasd el a kapott listát! Reálisnak tűnik? Egészítsd ki a saját tudásoddal, ha szükséges!</p>",
+          "prompts": ["Viselkedj úgy, mint egy karrier-tanácsadó! Az általam választott szakma: [Írd ide a választott szakmát, pl. \"általános iskolai tanár\"]. Bontsd le ennek a szakmának a 10 legjellemzőbb napi vagy heti feladatát!"]
+        },
+        {
+          "title": "2. Feladat: Az MI Hatásának Elemzése",
+          "content": "<p>Most nézzük meg, hogyan fogja az MI átalakítani ezeket a feladatokat!</p><p><strong>Megfigyelés:</strong> Figyeld meg a mintát! Az MI általában az ismétlődő, adminisztratív vagy adatelemző feladatokat veszi át, míg az emberi fókuszú feladatok az emberi kapcsolatokra, a stratégiai döntésekre és a kreatív problémamegoldásra helyeződnek át.</p>",
+          "prompts": ["Viselkedj úgy, mint egy jövőkutató! Az előző pontban összegyűjtött feladatlista alapján elemezd, hogyan fogja a mesterséges intelligencia átalakítani a(z) [választott szakma] szakmát 10 év múlva! Készíts egy kéthasábos táblázatot:\n- 1. oszlop: \"Automatizált vagy Felerősített Feladatok\" (Ide kerüljenek azok a feladatok, amiket az MI részben vagy egészben átvesz).\n- 2. oszlop: \"Új, Emberi Fókuszú Feladatok\" (Ide kerüljenek azok az új feladatok, amik az MI használata miatt jönnek létre, és a kreativitást, empátiát, stratégiát igénylik)."]
+        },
+        {
+          "title": "3. Feladat: A Jövőálló Készség-Térkép",
+          "content": "<p>Az elemzés alapján most határozzuk meg, milyen készségekre lesz szüksége a jövő szakemberének!</p><p><strong>Feladat:</strong> A kapott térkép a te személyes útiterved. Ez mutatja meg, milyen irányba érdemes fejlesztened magad, hogy sikeres legyél a jövőben.</p>",
+          "prompts": ["Az előző elemzés alapján készíts egy \"Jövőálló Készség-Térképet\" a(z) [választott szakma] számára! A térkép két részből álljon:\n1.  **\"Időtálló Emberi Szuperképességek\":** Sorolj fel 3 olyan mélyen emberi készséget, ami még fontosabbá válik (pl. empátia, kritikai gondolkodás, kreativitás).\n2.  **\"Új Technológiai Készségek\":** Sorolj fel 3 olyan új készséget, ami az MI-vel való együttműködéshez szükséges (pl. promptolás, adatelemzési eredmények értelmezése, MI-etika)."]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>A Tanulás Felelőssége:</strong> Ha a szakmák ilyen gyorsan változnak, ki a felelős azért, hogy a tudásod naprakész maradjon? Az iskola? A jövőbeli munkahelyed? Vagy te magad? Miért válik az \"élethosszig tartó tanulás\" nem egy unalmas közhellyé, hanem a legfontosabb túlélési stratégiává?</li><li>**Mi az, ami nem helyettesíthető?** Az elemzésed alapján próbáld megfogalmazni, mi a közös az \"Időtálló Emberi Szuperképességekben\". Miért gondolod, hogy az empátiát, a bizalmat vagy az etikai döntéseket nehezebb (vagy lehetetlen) automatizálni?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. Önálló Kihívás: Írd meg a Jövő Álláshirdetését!",
+      "content": "<p>Most te vagy a HR-es a jövőből! A feladatod, hogy írj egy álláshirdetést a választott szakmádra, de 2035-re datálva!</p><p><strong>A hirdetés tartalmazza a következőket:</strong></p><ol><li><strong>Pozíció neve:</strong> Legyél kreatív! (Pl. \"AI-Támogatott Orvosdiagnoszta\", \"Robot-Etikai Tanácsadó\", \"Személyre Szabott Tanulási Útvonal Tervező\")</li><li><strong>Főbb feladatok (3 pont):</strong> Írd le, mit csinálna ez a személy. A leírásban szerepeljen az MI-eszközökkel való együttműködés!</li><li><strong>Elvárt készségek (3 pont):</strong> Sorolj fel legalább egy technikai és egy emberi \"szuperképességet\" a Készség-Térképedről!</li></ol><p>Mentsd le a futurisztikus álláshirdetésedet! Ez a feladat segít elképzelni, hogyan alakulhat át a te jövőbeli szakmád is.</p>"
+    }
+  ]
 }

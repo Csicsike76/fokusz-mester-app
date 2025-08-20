@@ -1,8 +1,74 @@
 {
-  "title": "Merfoldko 05 tartalomgyartas",
-  "subject": "altalanos",
+  "title": "AIMI Stúdió - M05: Tartalomstratégia és -gyártás",
+  "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Merfoldko 05 tartalomgyartas\" című tananyag.",
-  "questions": []
+  "category": "workshop",
+  "description": "A mérföldkő végére a csapatotok létrehozza a projekt összes szükséges szöveges és képi tartalmát.",
+  "toc": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Ház Berendezése"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok"
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. A Mérföldkő Kihívása"
+    }
+  ],
+  "questions": [
+    {
+      "id": "celkituzes",
+      "title": "1. Célkitűzés",
+      "content": "<p>A mérföldkő végére a csapatotok létrehozza a projekt összes szükséges <strong>szöveges és képi tartalmát</strong>. Megtanuljátok, hogyan határozzátok meg a projekt kommunikációs stílusát (Tone of Voice), hogyan generáljatok különböző célú szövegeket, és hogyan alkossatok a projekthez illeszkedő, egységes vizuális anyagokat.</p>"
+    },
+    {
+      "id": "bevezeto",
+      "title": "2. Bevezető: A Ház Berendezése",
+      "content": "<p>A házatok felépült, a falak színesek. Most jön az a fázis, ami otthonossá teszi: a berendezés. Milyen szövegek kerülnek a falakra? Milyen képek lógnak majd ott? Milyen a hangulat? A tartalomgyártás során a \"bútorokat\" és a \"dekorációt\" hozzuk létre a digitális házunkba. Az MI a mi személyes szövegírónk és fotósunk, aki segít megtölteni a prototípusunk üres tereit. De a jó ízlés és a végső döntés, hogy mi kerül be és mi nem, a ti kezetekben van.</p>"
+    },
+    {
+      "id": "feladatok",
+      "title": "3. Lépésről-lépésre Feladatok",
+      "content": "<p>Vegyétek elő a \"Projekt Vázlatotokat\", a felhasználói perszónátokat és a vizuális prototípusotokat (mockup)!</p>",
+      "type": "tasks_section",
+      "tasks": [
+        {
+          "title": "1. Feladat: A Kommunikációs Stílus (Tone of Voice) Meghatározása",
+          "content": "<p>Milyen hangon szóljon a projektetek a felhasználóhoz? Legyen vicces, komoly, barátságos, hivatalos? Az MI segít megtalálni a tökéletes hangnemet!</p><p><strong>Feladat:</strong> Válasszátok ki azt az egy stílust, ami a legjobban illik a projekthez és a célközönségetekhez! Ezt írjátok be a projektdokumentumba, ez lesz az iránymutatótok a szövegírásnál.</p>",
+          "prompts": ["Viselkedj úgy, mint egy marketingszakember! A projektünk egy \"[a megoldásotok leírása]\", a célközönségünk pedig \"[a célközönség leírása]\". Javasolj 3 lehetséges kommunikációs stílust (Tone of Voice)! Mindegyikhez írj 3-4 jellemző kulcsszót és egy rövid példamondatot!"]
+        },
+        {
+          "title": "2. Feladat: A Szöveges Tartalom (Copy) Megírása",
+          "content": "<p>Most írjátok meg a prototípusotok összes szövegét! A főcímektől a gombok feliratán át a hosszabb leírásokig. A Főkutató/Szövegíró vezetésével használjátok az MI-t!</p><p><strong>Feladat:</strong> A fenti mintaprompt alapján generáljátok le, majd <strong>alaposan írjátok át és finomítsátok</strong> a prototípusotok összes szöveges elemét! Az MI adja a vázat, de a végső szöveg a tiétek!</p>",
+          "prompts": ["Írj egy rövid, 2-3 mondatos bemutatkozó szöveget a projektünk főképernyőjére! A kommunikációs stílusunk: \"[a választott stílus kulcsszavai, pl. barátságos, segítőkész, bátorító]\". A cél, hogy a felhasználó azonnal megértse, mi ez és miért jó neki."]
+        },
+        {
+          "title": "3. Feladat: A Vizuális Tartalom (Képek, Ikonok) Létrehozása",
+          "content": "<p>A prototípusban lévő helykitöltő képeket most cseréljük le végleges, egységes stílusú, MI-generált alkotásokra! A Kreatív Vezető/Dizájner felelőssége, hogy a képek illeszkedjenek a korábban megtervezett arculathoz.</p><p><strong>Feladat:</strong> Generáljátok le a prototípusotokhoz szükséges összes képet és ikont! Ügyeljetek arra, hogy a promptban mindig megadjátok a korábban definiált, egységes stílust, hogy a vizuális világ koherens maradjon.</p>",
+          "prompts": ["Generate a series of 4 illustrations for a [projekt típusa, pl. mobile app about recycling]. The style must be: [a választott vizuális stílus, pl. flat design, colorful, friendly characters]. The images should show: 1. A family sorting trash. 2. A smiling recycling bin. 3. A clean, green planet. 4. A graphic showing the recycling process."]
+        }
+      ]
+    },
+    {
+      "id": "kritikai-gondolkodas",
+      "title": "4. Kritikai Gondolkodás Sarok",
+      "content": "<ul><li><strong>A \"Gépi\" Hang:</strong> Az MI által generált szövegek néha túlságosan semlegesek, sablonosak vagy \"robotosak\" lehetnek. Milyen lépéseket tettetek azért, hogy a szövegek emberiek, hitelesek és a célközönségetek számára vonzóak legyenek? Miért elengedhetetlen az emberi szerkesztés és finomítás?</li><li><strong>Vizuális Egység:</strong> Nehéz volt elérni, hogy a különböző promptokkal generált képek stílusa teljesen egységes legyen? Milyen trükköket vetettetek be ennek érdekében? Miért fontos, hogy egy projekt vizuális megjelenése következetes legyen?</li></ul>"
+    },
+    {
+      "id": "kihivas",
+      "title": "5. A Mérföldkő Kihívása: A Tartalommal Feltöltött Prototípus",
+      "content": "<p>A többhetes munka eredménye a projektetek első, tartalommal is feltöltött, majdnem kész verziója.</p><p><strong>A feladatotok, hogy frissítsétek a vizuális prototípusotokat (mockup) a következőkkel:</strong></p><ol><li>Cseréljétek le az összes helykitöltő szöveget a végleges, MI-vel írt és általatok finomított szövegekre.</li><li>Cseréljétek le az összes helykitöltő képet a végleges, MI-vel generált, egységes stílusú vizuális anyagokra.</li></ol><p>A cél, hogy a mérföldkő végére egy olyan vizuális tervetek legyen, ami már nem csak egy csontváz, hanem egy teljes értékű, \"berendezett\" digitális termék látványát nyújtja. Ez lesz az alapja az interaktív prototípusnak! Jó alkotást!</p>"
+    }
+  ]
 }

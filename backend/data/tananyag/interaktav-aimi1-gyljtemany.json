@@ -1,8 +1,44 @@
 {
-  "title": "Interaktav aimi1 gyljtemany",
+  "title": "Interaktív AIMI Gyűjtemény",
   "subject": "ai",
   "grade": 0,
-  "category": "premium_course",
-  "description": "Ez a(z) \"Interaktav aimi1 gyljtemany\" című tananyag.",
-  "questions": []
+  "category": "free_lesson",
+  "description": "Fedezd fel az összes alapozó és haladó MI tananyagot egy helyen! Projektmenedzsment, műhelyek, szuperképességek és személyes hatékonyság az MI korában.",
+  "questions": [],
+  "toolData": {
+    "type": "hub-page",
+    "header": "Teljes Mesterséges Intelligencia Alapok Gyűjtemény",
+    "subheader": "Fedezd fel az összes alapozó és haladó MI tananyagot egy helyen! Projektmenedzsment, műhelyek, szuperképességek és személyes hatékonyság az MI korában.",
+    "sections": [
+      {
+        "title": "🤖 Mesterséges Intelligencia Tananyagok",
+        "cards": [
+          {
+            "styleType": "grade",
+            "mainText": "AIMI 0.",
+            "subText": "Év - Alapozó",
+            "link": "/tananyag/ai-alapozo"
+          },
+          {
+            "styleType": "grade",
+            "mainText": "AIMI 1",
+            "subText": "Projektmenedzsment",
+            "link": "/tananyag/interaktavaimivisszamasolandokodgyljtemany"
+          },
+          {
+            "styleType": "grade",
+            "mainText": "AIMI 2",
+            "subText": "Haladó Műhelyek",
+            "link": "/tananyag/interaktav-aimi2-gyljtemany"
+          },
+          {
+            "styleType": "grade",
+            "mainText": "Szuperképesség",
+            "subText": "Gyűjtemény",
+            "link": "/tananyag/interaktav-szuperkepesseg-gyljtemany"
+          }
+        ]
+      }
+    ]
+  }
 }
