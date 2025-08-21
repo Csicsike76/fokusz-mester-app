@@ -19,12 +19,6 @@ import HelpCenterPage from './pages/HelpCenterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import InteraktivMatematika from './pages/InteraktivMatematika';
-
-// --- JAVÍTOTT IMPORT SOROK ---
-// A programot a helyes helyre, a belső 'src' mappába irányítjuk.
-import AiContentWizard from './src/App'; // Feltételezve, hogy az AiContentWizard logikája az App.tsx-ben van
-import './src/App.css'; // És a hozzá tartozó CSS
-
 import './App.css';
 
 function App() {
@@ -37,12 +31,13 @@ function App() {
             <Route path="bejelentkezes" element={<LoginPage />} />
             <Route path="regisztracio" element={<RegistrationPage />} />
             <Route path="interaktiv-matematika" element={<InteraktivMatematika />} />
-            
-            {/* EZ AZ ÚJ ÚTVONAL AZ AI GENERÁTORNAK */}
-            <Route path="ai-generator" element={<AiContentWizard />} />
 
+            {/* Tantárgy gyűjtemény-oldal (grade paraméter nem kell ide) */}
             <Route path="targy/:subjectName" element={<SubjectPage />} />
+
+            {/* Minden lecke/eszköz egy helyen */}
             <Route path="tananyag/:slug" element={<ContentPage />} />
+            
             <Route path="verify-email/:token" element={<EmailVerificationPage />} />
             <Route path="approve-teacher/:userId" element={<TeacherApprovalPage />} />
             <Route path="sugo" element={<HelpCenterPage />} />

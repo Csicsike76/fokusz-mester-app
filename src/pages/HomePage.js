@@ -177,13 +177,6 @@ const HomePage = () => {
             <section id="premium-eszkozok" className={styles.section}>
               <h2 className={styles.sectionTitle}>Exkluzív Prémium Eszközök</h2>
               <div className={styles.cardGrid}>
-                <div key="ai-generator" className={`${styles.card} ${styles['premiumTool']}`}>
-                  <h4>AI Tartalom Varázsló</h4>
-                    <p>Generálj posztokat, videó forgatókönyveket és blog vázlatokat szövegből vagy akár képekből, másodpercek alatt!</p>
-                          <Link to="/ai-generator" className={`${styles.btn} ${styles['premiumToolBtn']}`}>
-                           Indítás →
-                          </Link>
-                 </div>
                 {homePageLayout.premiumTools.map(itemConfig => renderCard(itemConfig, 'premiumTool'))}
               </div>
             </section>
