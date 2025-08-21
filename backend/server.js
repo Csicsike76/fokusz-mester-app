@@ -431,25 +431,30 @@ app.get('/api/verify-email/:token', async (req, res) => {
 });
 
 app.get('/api/approve-teacher/:userId', authenticateToken, async (req, res) => {
-    if (req.user.role !== 'admin') {
-        return res.status(403).json({ success: false, message: 'Nincs jogosultságod ehhez a művelethez.' });
+    // Csak a te e-mail címeddel engedélyezett
+    if (req.user.email !== '19perro76@gmail.com') {
+        return res.status(403).json({ success: false, message: 'Csak a megadott e-mail címmel lehet jóváhagyni a tanárt.' });
     }
 
-  const { userId } = req.params;
-  try {
-    const result = await pool.query(
-      'UPDATE teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id',
-      [userId]
-    );
-    if (result.rowCount === 0) {
-      return res.status(404).json({ success: false, message: 'A tanár nem található.' });
+    const { userId } = req.params;
+
+    try {
+        const result = await pool.query(
+            'UPDATE teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id',
+            [userId]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ success: false, message: 'A tanár nem található.' });
+        }
+
+        return res.status(200).json({ success: true, message: 'A tanári fiók sikeresen jóváhagyva.' });
+    } catch (error) {
+        console.error('Tanár jóváhagyási hiba:', error);
+        return res.status(500).json({ success: false, message: 'Hiba történt a jóváhagyás során.' });
     }
-    return res.status(200).json({ success: true, message: 'A tanári fiók sikeresen jóváhagyva.' });
-  } catch (error) {
-    console.error('Tanár jóváhagyási hiba:', error);
-    return res.status(500).json({ success: false, message: 'Hiba történt a jóváhagyás során.' });
-  }
 });
+
 
 app.post('/api/login', authLimiter, async (req, res) => {
   const { email, password } = req.body;

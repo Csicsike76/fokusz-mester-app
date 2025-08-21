@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import styles from './SimpleMessagePage.module.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'https://fokusz-mester-backend.onrender.com';
-const MY_EMAIL = '19perro76@gmail.com';
+const MY_EMAIL = process.env.REACT_APP_MY_TEACHER_EMAIL || '19perro76@gmail.com';
 
 const TeacherApprovalPage = () => {
     const { userId } = useParams();
@@ -19,9 +19,8 @@ const TeacherApprovalPage = () => {
 
     useEffect(() => {
         const approveTeacher = async () => {
-            // Ellenőrzés: csak a saját e-mail címed lehet jogosult
             if (!auth?.isAuthenticated || auth?.user?.email !== MY_EMAIL) {
-                setMessage('A jóváhagyáshoz be kell jelentkezned a saját e-mail címeddel.');
+                setMessage('A jóváhagyáshoz a megfelelő e-mail címről kell bejelentkezned.');
                 setIsError(true);
                 setIsLoading(false);
                 setTimeout(() => navigate('/bejelentkezes'), 3000);
