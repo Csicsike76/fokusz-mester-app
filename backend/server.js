@@ -143,6 +143,77 @@ app.get('/api/help', async (req, res) => {
     }
 });
 
+app.post('/api/register-teacher', async (req, res) => {
+  const { email, username, password, referral_code } = req.body;
+
+  if (!email || !username || !password) {
+    return res.status(400).json({ success: false, message: 'Minden mező kitöltése kötelező.' });
+  }
+
+  try {
+    const existingUser = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    if (existingUser.rows.length > 0) {
+      return res.status(400).json({ success: false, message: 'E-mail már foglalt.' });
+    }
+
+    const password_hash = await bcrypt.hash(password, 10);
+    const newUser = await pool.query(
+      'INSERT INTO users (email, username, password_hash, role, referral_code, email_verified, created_at) VALUES ($1, $2, $3, $4, $5, $6, NOW()) RETURNING *',
+      [email, username, password_hash, 'teacher', referral_code || null, false]
+    );
+
+    // Tanári rekord létrehozása verify_token-nel
+    const verify_token = require('crypto').randomBytes(32).toString('hex');
+    await pool.query(
+      'INSERT INTO teachers (user_id, is_approved, verify_token) VALUES ($1, $2, $3)',
+      [newUser.rows[0].id, false, verify_token]
+    );
+
+    // Küldés emailben (itt a linket a frontend kezelje)
+    const verifyLink = `${process.env.FRONTEND_URL}/verify-teacher?token=${verify_token}`;
+    // sendEmail(email, 'Tanári regisztráció jóváhagyás', `Kattints ide: ${verifyLink}`);
+
+    res.status(201).json({
+      success: true,
+      message: 'Regisztráció kész, a tanári fiók jóváhagyására e-mailt küldtünk.'
+    });
+  } catch (error) {
+    console.error('Tanári regisztráció hiba:', error);
+    res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
+  }
+});
+
+app.post('/api/verify-teacher', async (req, res) => {
+  const { token } = req.body;
+
+  if (!token) {
+    return res.status(400).json({ success: false, message: 'Token hiányzik.' });
+  }
+
+  try {
+    const teacherResult = await pool.query(
+      'SELECT * FROM teachers WHERE verify_token = $1',
+      [token]
+    );
+
+    if (teacherResult.rows.length === 0) {
+      return res.status(400).json({ success: false, message: 'Érvénytelen token.' });
+    }
+
+    await pool.query(
+      'UPDATE teachers SET is_approved = TRUE, verify_token = NULL WHERE verify_token = $1',
+      [token]
+    );
+
+    res.json({ success: true, message: 'Tanári fiók jóváhagyva.' });
+  } catch (error) {
+    console.error('Tanári jóváhagyás hiba:', error);
+    res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
+  }
+});
+
+
+
 app.post('/api/register', authLimiter, async (req, res) => {
   const {
     role,
