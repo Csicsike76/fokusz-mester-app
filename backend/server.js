@@ -51,7 +51,7 @@ const sslRequired = (() => {
 
   const url = String(process.env.DATABASE_URL || '');
   if (/render\.com|heroku(app)?\.com|amazonaws\.com|azure|gcp|railway\.app/i.test(url)) return true;
-  if (/localhost|127\.0\.0\.1/.test(url) || url === '') return false;
+  if (/localhost|127\.0.0\.1/.test(url) || url === '') return false;
 
   // alapértelmezés: próbáljuk SSL-lel (hosted DB-k többsége kéri)
   return true;
@@ -249,9 +249,10 @@ app.post('/api/register', authLimiter, async (req, res) => {
     const referralCodeNew =
       role === 'student' ? `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}` : null;
 
+    // === JAVÍTÁS ITT KEZDŐDIK ===
     const insertUserQuery = `
-      INSERT INTO users (username, email, password_hash, role, referral_code, email_verification_token, email_verification_expires, is_permanent_free)
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+      INSERT INTO users (username, email, password_hash, role, referral_code, email_verification_token, email_verification_expires, is_permanent_free, email_verified)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
       RETURNING id, created_at
     `;
     const newUserResult = await client.query(insertUserQuery, [
@@ -263,7 +264,9 @@ app.post('/api/register', authLimiter, async (req, res) => {
       verificationToken,
       verificationExpires,
       isPermanentFree,
+      false, // FONTOS: Minden új felhasználó 'email_verified' státusza 'false', amíg nem erősíti meg.
     ]);
+    // === JAVÍTÁS ITT VÉGZŐDIK ===
 
     const newUserId = newUserResult.rows[0].id;
     const registrationDate = newUserResult.rows[0].created_at;
@@ -282,7 +285,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
       );
       const teacherIsApprovedResult = await client.query('SELECT is_approved from teachers where user_id=$1', [newUserId]);
       if(!teacherIsApprovedResult.rows[0].is_approved) {
-        const approvalUrl = `${process.env.FRONTEND_URL}/admin/approve-teacher/${newUserId}`;
+        const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
         const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
         if (adminRecipient) {
           await transporter.sendMail({
