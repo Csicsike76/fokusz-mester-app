@@ -19,10 +19,13 @@ import HelpCenterPage from './pages/HelpCenterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import InteraktivMatematika from './pages/InteraktivMatematika';
-// ÚJ IMPORT: Behívjuk az AI Generátor komponenst
-import AiContentWizard from './components/AiContentWizard';
+
+// --- JAVÍTOTT IMPORT SOROK ---
+// A programot a helyes helyre, a belső 'src' mappába irányítjuk.
+import AiContentWizard from './src/App'; // Feltételezve, hogy az AiContentWizard logikája az App.tsx-ben van
+import './src/App.css'; // És a hozzá tartozó CSS
+
 import './App.css';
-import './components/AiContentWizard.css'; // És a stílusát
 
 function App() {
   return (
