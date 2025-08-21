@@ -19,7 +19,10 @@ import HelpCenterPage from './pages/HelpCenterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import InteraktivMatematika from './pages/InteraktivMatematika';
+// ÚJ IMPORT: Behívjuk az AI Generátor komponenst
+import AiContentWizard from './components/AiContentWizard';
 import './App.css';
+import './components/AiContentWizard.css'; // És a stílusát
 
 function App() {
   return (
@@ -31,13 +34,12 @@ function App() {
             <Route path="bejelentkezes" element={<LoginPage />} />
             <Route path="regisztracio" element={<RegistrationPage />} />
             <Route path="interaktiv-matematika" element={<InteraktivMatematika />} />
-
-            {/* Tantárgy gyűjtemény-oldal (grade paraméter nem kell ide) */}
-            <Route path="targy/:subjectName" element={<SubjectPage />} />
-
-            {/* Minden lecke/eszköz egy helyen */}
-            <Route path="tananyag/:slug" element={<ContentPage />} />
             
+            {/* EZ AZ ÚJ ÚTVONAL AZ AI GENERÁTORNAK */}
+            <Route path="ai-generator" element={<AiContentWizard />} />
+
+            <Route path="targy/:subjectName" element={<SubjectPage />} />
+            <Route path="tananyag/:slug" element={<ContentPage />} />
             <Route path="verify-email/:token" element={<EmailVerificationPage />} />
             <Route path="approve-teacher/:userId" element={<TeacherApprovalPage />} />
             <Route path="sugo" element={<HelpCenterPage />} />

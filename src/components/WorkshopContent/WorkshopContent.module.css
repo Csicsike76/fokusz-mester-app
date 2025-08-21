@@ -75,3 +75,71 @@
     box-shadow: 0 6px 12px rgba(213, 43, 30, 0.2);
     transform: translateY(-2px);
 }
+/* Általános bekezdések és listák formázása */
+.workshopSection div p,
+.workshopSection div li {
+    margin-bottom: 1rem;
+}
+
+.workshopSection div ul {
+    list-style-type: disc;
+    padding-left: 25px;
+}
+
+.workshopSection div strong {
+    font-weight: bold;
+}
+
+/* Feladat kártyák (taskCard) stílusa */
+.taskCard {
+    background-color: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+}
+
+.taskCard h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--header-color);
+}
+
+/* Prompt dobozok stílusa */
+.promptContainer {
+    margin-top: 1.5rem;
+}
+
+.promptExample {
+    background-color: var(--prompt-background);
+    border-left: 4px solid var(--button-background);
+    padding: 1rem;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Másolás gomb stílusa */
+.copyButton {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--button-background);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.copyButton:hover {
+    background-color: var(--button-hover-background);
+}
+
+.copyButton:active {
+    transform: scale(0.98);
+}
