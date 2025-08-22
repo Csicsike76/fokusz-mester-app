@@ -1,4 +1,7 @@
+// src/context/AuthContext.js
+
 import React, { createContext, useState, useContext, useEffect, useMemo } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext(null);
 
@@ -25,10 +28,22 @@ export const AuthProvider = ({ children }) => {
                 if (storedIsSubscribed === 'true') {
                     setIsSubscribed(true);
                 }
+                const decoded = jwtDecode(storedToken);
+                if (decoded.exp * 1000 < Date.now()) {
+                    localStorage.clear();
+                    setUser(null);
+                    setToken(null);
+                    setIsSubscribed(false);
+                    setRegistrationDate(null);
+                }
             }
         } catch (error) {
             console.error("Hiba a localStorage olvasása közben", error);
             localStorage.clear();
+            setUser(null);
+            setToken(null);
+            setIsSubscribed(false);
+            setRegistrationDate(null);
         } finally {
             setIsLoading(false);
         }
