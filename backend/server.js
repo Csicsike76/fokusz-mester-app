@@ -38,13 +38,11 @@ const axios = require('axios');
   }
 })();
 
-// === JAVÍTOTT, VÉGLEGES ADATBÁZIS KAPCSOLAT ===
 const connectionString = process.env.DATABASE_URL;
 const pool = new Pool({
   connectionString: connectionString,
   ssl: /render\.com/.test(connectionString) ? { rejectUnauthorized: false } : false,
 });
-// ===============================================
 
 const mailPort = Number(process.env.MAIL_PORT || 587);
 const transporter = nodemailer.createTransport({
