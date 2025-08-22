@@ -349,26 +349,17 @@ app.post('/api/register', authLimiter, async (req, res) => {
       ]);
     }
 
-    if (role === 'teacher') {
-      await client.query(
-        'INSERT INTO teachers (user_id, vip_code) VALUES ($1,$2)',
-        [newUserId, vipCode || null]
-      );
-      const teacherIsApprovedResult = await client.query('SELECT is_approved from teachers where user_id=$1', [newUserId]);
-      if(!teacherIsApprovedResult.rows[0].is_approved) {
-        const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
-        const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
-        if (adminRecipient) {
-          await transporter.sendMail({
-            from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
-            to: adminRecipient,
-            subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
-            html: `<p>Új tanár: ${username} (${email})</p><p><a href="${approvalUrl}">Jóváhagyás</a></p>`,
-          });
-        }
-      }
+ if (role === 'teacher') {
+      const approvalUrl = `${baseUrl}/approve-teacher/${newUserId}`;
+      const adminMailOptions = {
+        from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+        to: process.env.MAIL_DEFAULT_SENDER,
+        subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
+        html: `<p>Új tanár: ${username} (${email})<br><a href="${approvalUrl}">Jóváhagyás</a></p>`
+      };
+      await transporter.sendMail(adminMailOptions);
     }
-
+        
     if (role === 'student' && classId) {
       await client.query('INSERT INTO classmemberships (user_id, class_id) VALUES ($1,$2)', [
         newUserId,
