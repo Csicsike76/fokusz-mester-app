@@ -15,9 +15,8 @@ const validator = require('validator');
 const { rateLimit, ipKeyGenerator } = require('express-rate-limit');
 const axios = require('axios');
 
-// ───────────────────────────────────────────────────────────────────────────────
-// .env betöltés – robusztus módon (rootból vagy a backend mappából is működik)
-(() => {
+// VÉGLEGES JAVÍTÁS: A .env fájlt csak akkor töltjük be, ha nem az éles szerveren futunk.
+if (process.env.NODE_ENV !== 'production') {
   const tryPaths = [
     path.resolve(process.cwd(), '.env'),
     path.resolve(__dirname, '.env'),
@@ -34,16 +33,13 @@ const axios = require('axios');
       }
     }
     if (!loaded) {
-      // utolsó esély: alap config
       require('dotenv').config();
     }
   } catch (_) {
     // no-op
   }
-})();
-// ───────────────────────────────────────────────────────────────────────────────
+}
 
-// Postgres SSL logika: Render/Heroku stb. => SSL; lokál => NO SSL
 const sslRequired = (() => {
   const flag = String(process.env.DB_SSL || '').toLowerCase();
   if (flag === 'true' || flag === '1') return true;
@@ -51,9 +47,8 @@ const sslRequired = (() => {
 
   const url = String(process.env.DATABASE_URL || '');
   if (/render\.com|heroku(app)?\.com|amazonaws\.com|azure|gcp|railway\.app/i.test(url)) return true;
-  if (/localhost|127\.0.0\.1/.test(url) || url === '') return false;
+  if (/localhost|127\.0\.0\.1/.test(url) || url === '') return false;
 
-  // alapértelmezés: próbáljuk SSL-lel (hosted DB-k többsége kéri)
   return true;
 })();
 
@@ -62,7 +57,6 @@ const pool = new Pool({
   ssl: sslRequired ? { rejectUnauthorized: false } : false,
 });
 
-// Gmail: 587 = STARTTLS (secure: false), 465 = SMTPS (secure: true)
 const mailPort = Number(process.env.MAIL_PORT || 587);
 const transporter = nodemailer.createTransport({
   host: process.env.MAIL_SERVER,
@@ -71,13 +65,10 @@ const transporter = nodemailer.createTransport({
   auth: { user: process.env.MAIL_USERNAME, pass: process.env.MAIL_PASSWORD },
 });
 
-// ───────────────────────────────────────────────────────────────────────────────
-
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Rate limiter (IPv6-safe kulcsgenerálás)
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 10,
@@ -162,16 +153,13 @@ app.post('/api/register-teacher', async (req, res) => {
       [email, username, password_hash, 'teacher', referral_code || null, false]
     );
 
-    // Tanári rekord létrehozása verify_token-nel
     const verify_token = require('crypto').randomBytes(32).toString('hex');
     await pool.query(
       'INSERT INTO teachers (user_id, is_approved, verify_token) VALUES ($1, $2, $3)',
       [newUser.rows[0].id, false, verify_token]
     );
 
-    // Küldés emailben (itt a linket a frontend kezelje)
     const verifyLink = `${process.env.FRONTEND_URL}/verify-teacher?token=${verify_token}`;
-    // sendEmail(email, 'Tanári regisztráció jóváhagyás', `Kattints ide: ${verifyLink}`);
 
     res.status(201).json({
       success: true,
@@ -334,7 +322,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
       verificationToken,
       verificationExpires,
       isPermanentFree,
-      false, 
+      false,
     ]);
 
     const newUserId = newUserResult.rows[0].id;
@@ -428,28 +416,22 @@ app.get('/api/verify-email/:token', async (req, res) => {
   }
 });
 
-// VÉGLEGES JAVÍTÁS: Az `authenticateToken` eltávolítva, a metódus GET-re cserélve
 app.get('/api/approve-teacher/:userId', async (req, res) => {
     const { userId } = req.params;
-
     try {
         const result = await pool.query(
             'UPDATE teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id',
             [userId]
         );
-
         if (result.rowCount === 0) {
             return res.status(404).json({ success: false, message: 'A tanár nem található.' });
         }
-        
-        // Visszajelzés a felhasználónak
         return res.status(200).send('<h1>A tanári fiók sikeresen jóváhagyva.</h1><p>Ez az ablak bezárható.</p>');
     } catch (error) {
         console.error('Tanár jóváhagyási hiba:', error);
         return res.status(500).send('<h1>Hiba történt a jóváhagyás során.</h1>');
     }
 });
-
 
 app.post('/api/login', authLimiter, async (req, res) => {
   const { email, password } = req.body;
@@ -458,25 +440,21 @@ app.post('/api/login', authLimiter, async (req, res) => {
       .status(400)
       .json({ success: false, message: 'E-mail és jelszó megadása kötelező.' });
   }
-
   try {
     const userResult = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
     if (userResult.rows.length === 0) {
       return res.status(401).json({ success: false, message: 'Hibás e-mail cím vagy jelszó.' });
     }
     const user = userResult.rows[0];
-
     if (!user.email_verified) {
       return res
         .status(403)
         .json({ success: false, message: 'Kérjük, először erősítsd meg az e-mail címedet!' });
     }
-
     const isPasswordCorrect = await bcrypt.compare(password, user.password_hash);
     if (!isPasswordCorrect) {
       return res.status(401).json({ success: false, message: 'Hibás e-mail cím vagy jelszó.' });
     }
-
     if (user.role === 'teacher') {
       const teacherResult = await pool.query('SELECT is_approved FROM teachers WHERE user_id = $1', [
         user.id,
@@ -487,11 +465,9 @@ app.post('/api/login', authLimiter, async (req, res) => {
           .json({ success: false, message: 'A tanári fiókod még nem lett jóváhagyva.' });
       }
     }
-
     const token = jwt.sign({ userId: user.id, role: user.role }, process.env.SECRET_KEY, {
       expiresIn: '1d',
     });
-
     res.status(200).json({
       success: true,
       token,
@@ -522,15 +498,12 @@ app.post('/api/forgot-password', authLimiter, async (req, res) => {
       });
     }
     const user = userResult.rows[0];
-
     const token = crypto.randomBytes(32).toString('hex');
     const expires = new Date(Date.now() + 3600000); // 1 óra
-
     await pool.query(
       'UPDATE users SET password_reset_token = $1, password_reset_expires = $2 WHERE id = $3',
       [token, expires, user.id]
     );
-
     const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password/${token}`;
     const mailOptions = {
       from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
@@ -538,9 +511,7 @@ app.post('/api/forgot-password', authLimiter, async (req, res) => {
       subject: 'Jelszó visszaállítása',
       html: `<p>Jelszó visszaállítási kérelmet kaptunk. A linkre kattintva állíthatsz be új jelszót:</p><p><a href="${resetUrl}">Új jelszó beállítása</a></p><p>A link 1 órán át érvényes. Ha nem te kérted a visszaállítást, hagyd figyelmen kívül ezt az e-mailt.</p>`,
     };
-
     await transporter.sendMail(mailOptions);
-
     res.status(200).json({
       success: true,
       message:
@@ -555,7 +526,6 @@ app.post('/api/forgot-password', authLimiter, async (req, res) => {
 app.post('/api/reset-password/:token', async (req, res) => {
   const { token } = req.params;
   const { password } = req.body;
-
   try {
     const passwordOptions = {
       minLength: 8,
@@ -569,7 +539,6 @@ app.post('/api/reset-password/:token', async (req, res) => {
         .status(400)
         .json({ success: false, message: 'A jelszó túl gyenge! A követelményeknek meg kell felelnie.' });
     }
-
     const userResult = await pool.query(
       'SELECT * FROM users WHERE password_reset_token = $1 AND password_reset_expires > NOW()',
       [token]
@@ -580,13 +549,11 @@ app.post('/api/reset-password/:token', async (req, res) => {
         .json({ success: false, message: 'A jelszó-visszaállító link érvénytelen vagy lejárt.' });
     }
     const user = userResult.rows[0];
-
     const passwordHash = await bcrypt.hash(password, 10);
     await pool.query(
       'UPDATE users SET password_hash = $1, password_reset_token = NULL, password_reset_expires = NULL WHERE id = $2',
       [passwordHash, user.id]
     );
-
     res
       .status(200)
       .json({ success: true, message: 'Jelszó sikeresen módosítva! Most már bejelentkezhetsz.' });
@@ -637,7 +604,6 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
     }
     const teacherId = req.user.userId;
     const classCode = `OSZTALY-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
-
     const query = `
       INSERT INTO classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
       VALUES ($1,$2,$3,$4,true,true)
@@ -655,7 +621,6 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
 
 app.get('/api/curriculums', async (req, res) => {
   try {
-    // csak publikált tételek
     const { rows } = await pool.query(`
       SELECT title, slug, subject, grade, category, description
       FROM curriculums
@@ -666,25 +631,21 @@ app.get('/api/curriculums', async (req, res) => {
         COALESCE(grade, 999),
         title
     `);
-
-    // Pont olyan szerkezet, amit a HomePage.js fel tud dolgozni
     const groupedData = {
-      freeLessons: {},     // { [subject]: [items...] }
-      freeTools: [],       // []
-      premiumCourses: [],  // []
-      premiumTools: []     // []
+      freeLessons: {},
+      freeTools: [],
+      premiumCourses: [],
+      premiumTools: []
     };
-
     for (const row of rows) {
       const item = {
         title: row.title,
-        slug: row.slug, // NINCS csere: a HomePage már elvégzi a _ → - normalizálást szükség esetén
+        slug: row.slug,
         subject: row.subject || null,
         grade: row.grade,
         description: row.description || null,
         category: row.category
       };
-
       switch (row.category) {
         case 'free_lesson': {
           const key = row.subject || 'altalanos';
@@ -702,11 +663,9 @@ app.get('/api/curriculums', async (req, res) => {
           groupedData.premiumTools.push(item);
           break;
         default:
-          // ha véletlenül más kategória jönne, tegyük az ingyenes eszközök közé, hogy ne vesszen el
           groupedData.freeTools.push(item);
       }
     }
-
     res.status(200).json({
       success: true,
       data: groupedData,
@@ -718,26 +677,20 @@ app.get('/api/curriculums', async (req, res) => {
   }
 });
 
-
-// ✅ Stabil /api/quiz/:slug — támogat .json és .js forrásokat is
 app.get('/api/quiz/:slug', async (req, res) => {
   try {
     const raw = req.params.slug || '';
-    const slug = raw.replace(/_/g, '-'); // egységesítés
+    const slug = raw.replace(/_/g, '-');
     const baseDir = path.resolve(__dirname, 'data', 'tananyag');
     const jsonPath = path.join(baseDir, `${slug}.json`);
     const jsPath   = path.join(baseDir, `${slug}.js`);
-
     let data;
-
     if (fsSync.existsSync(jsonPath)) {
-      // .json -> szöveg -> JSON.parse
       const text = await fsp.readFile(jsonPath, 'utf8');
       data = JSON.parse(text);
       console.log(`📄 Betöltve JSON: ${jsonPath}`);
     } else if (fsSync.existsSync(jsPath)) {
-      // .js -> require (már objektumot ad vissza, NEM parse-oljuk újra)
-      delete require.cache[jsPath]; // biztos ami biztos
+      delete require.cache[jsPath];
       const mod = require(jsPath);
       data = (mod && mod.default) ? mod.default : mod;
       console.log(`🧩 Betöltve JS modul: ${jsPath}`);
@@ -747,16 +700,12 @@ app.get('/api/quiz/:slug', async (req, res) => {
         message: `Nem található a lecke: ${slug}.json vagy ${slug}.js a ${baseDir} mappában.`,
       });
     }
-
-    // Védőháló: ha véletlenül string került ide, és úgy tűnik JSON
     if (typeof data === 'string') {
       try {
         data = JSON.parse(data);
       } catch {
-        // hagyjuk stringként, ha nem JSON
       }
     }
-
     return res.json({ success: true, data });
   } catch (err) {
     console.error(`❌ Hiba a(z) /api/quiz/${req.params.slug} feldolgozásakor:`, err);
@@ -769,7 +718,6 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
   if (!secret || secret !== process.env.ADMIN_SECRET) {
     return res.status(403).json({ message: 'Hozzáférés megtagadva.' });
   }
-
   const client = await pool.connect();
   try {
     await client.query('BEGIN');

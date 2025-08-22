@@ -1,10 +1,10 @@
-// src/pages/ProfilePage.js
-
-import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './ProfilePage.module.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+// VÉGLEGES JAVÍTÁS: Az API cím dinamikus beállítása a környezet alapján
+const API_URL = process.env.NODE_ENV === 'production'
+    ? 'https://fokusz-mester-backend.onrender.com'
+    : 'http://localhost:3001';
 
 const ProfilePage = () => {
     const { token, logout } = useAuth();
@@ -13,11 +13,9 @@ const ProfilePage = () => {
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
 
-    // Adatok szerkesztéséhez szükséges állapotok
     const [isEditingUsername, setIsEditingUsername] = useState(false);
     const [newUsername, setNewUsername] = useState('');
     
-    // Jelszócsere állapotok
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -61,8 +59,8 @@ const ProfilePage = () => {
             if (!response.ok) throw new Error(data.message);
             
             setMessage(data.message);
-            setProfileData(data.user); // Frissítjük a megjelenített adatokat
-            setIsEditingUsername(false); // Szerkesztési mód kikapcsolása
+            setProfileData(data.user);
+            setIsEditingUsername(false);
         } catch (err) {
             setError(err.message);
         }
@@ -91,7 +89,6 @@ const ProfilePage = () => {
             if (!response.ok) throw new Error(data.message);
 
             setMessage(data.message);
-            // Sikeres jelszócsere után érdemes lehet kijelentkeztetni a felhasználót
             setTimeout(() => logout(), 2000);
         } catch (err) {
             setError(err.message);

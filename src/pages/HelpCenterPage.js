@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from './HelpCenterPage.module.css';
 
-const API_URL = 'http://localhost:3001';
+// VÉGLEGES JAVÍTÁS: Az API cím dinamikus beállítása a környezet alapján
+const API_URL = process.env.NODE_ENV === 'production'
+    ? 'https://fokusz-mester-backend.onrender.com'
+    : 'http://localhost:3001';
 
 const HelpArticle = ({ article }) => {
     const [isOpen, setIsOpen] = useState(false);
