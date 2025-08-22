@@ -1,5 +1,3 @@
-// src/pages/LoginPage.js
-
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -38,10 +36,8 @@ const LoginPage = () => {
                 throw new Error(data.message || 'Sikertelen bejelentkezés.');
             }
             
-            // === VÉGLEGES JAVÍTÁS ITT ===
-            // A login funkció már csak a tokent várja, a többit a Context intézi.
-            login(data.token);
-            navigate('/'); // Átirányítás a főoldalra
+            login(data.user, data.token);
+            navigate('/');
 
         } catch (err) {
             setError(err.message);
