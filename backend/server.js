@@ -73,8 +73,8 @@ const transporter = nodemailer.createTransport({
 
 // ───────────────────────────────────────────────────────────────────────────────
 
-const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 // Rate limiter (IPv6-safe kulcsgenerálás)
