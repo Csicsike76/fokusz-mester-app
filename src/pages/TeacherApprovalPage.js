@@ -1,46 +1,76 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+// src/pages/TeacherApprovalPage.js
+
+import React, { useState, useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import styles from './SimpleMessagePage.module.css';
 
-const API_URL = 'https://fokusz-mester-backend.onrender.com';
+const API_URL = process.env.REACT_APP_API_URL || 'https://fokusz-mester-backend.onrender.com';
+const MY_EMAIL = process.env.REACT_APP_MY_TEACHER_EMAIL || '19perro76@gmail.com';
 
 const TeacherApprovalPage = () => {
     const { userId } = useParams();
+    const { auth } = useAuth(); 
+    const navigate = useNavigate();
+
     const [message, setMessage] = useState('Jóváhagyás folyamatban...');
-    const [error, setError] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (userId) {
-            const approveTeacher = async () => {
-                try {
-                    // A fetch hívás a backend API-ra mutat
-                    const response = await fetch(`${API_URL}/api/approve-teacher/${userId}`);
-                    const data = await response.json();
-                    
-                    if (!response.ok || !data.success) {
-                        throw new Error(data.message || 'A jóváhagyás sikertelen.');
-                    }
-                    
-                    setMessage(data.message);
-                    setError(false);
+        const approveTeacher = async () => {
+            if (!auth?.isAuthenticated || auth?.user?.email !== MY_EMAIL) {
+                
+                setIsError(true);
+                setIsLoading(false);
+                setTimeout(() => navigate('/bejelentkezes'), 3000);
+                return;
+            }
 
-                } catch (err) {
-                    setMessage(err.message);
-                    setError(true);
+            try {
+                const response = await fetch(`${API_URL}/api/approve-teacher/${userId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${auth.token}`,
+                    },
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    setMessage(data.message || 'A jóváhagyás sikeresen megtörtént.');
+                    setIsError(false);
+                } else {
+                    throw new Error(data.message || 'Ismeretlen hiba történt.');
                 }
-            };
-            approveTeacher();
-        }
-    }, [userId]);
+            } catch (error) {
+                setMessage(`Hiba: ${error.message}`);
+                setIsError(true);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        approveTeacher();
+    }, [userId, auth, navigate]);
 
     return (
         <div className={styles.container}>
-            <div className={`${styles.messageBox} ${error ? styles.error : styles.success}`}>
-                <h1>{error ? 'Hiba' : 'Siker!'}</h1>
-                <p>{message}</p>
-                <Link to="/" className={styles.button}>
-                    Vissza a főoldalra
-                </Link>
+            <div className={styles.messageBox}>
+                <h1>Tanári Regisztráció Jóváhagyása</h1>
+                {isLoading ? (
+                    <p>Kérlek, várj...</p>
+                ) : (
+                    <>
+                        <p className={isError ? styles.errorText : styles.successText}>
+                            {message}
+                        </p>
+                        <Link to="/" className={styles.loginButton}>
+                            Vissza a főoldalra
+                        </Link>
+                    </>
+                )}
             </div>
         </div>
     );
