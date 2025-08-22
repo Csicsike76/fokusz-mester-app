@@ -1,3 +1,5 @@
+// src/context/AuthContext.js
+
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
@@ -8,53 +10,47 @@ export const AuthProvider = ({ children }) => {
         token: null,
         isAuthenticated: false,
         user: null,
-        loading: true, // Kritikus: jelzi, hogy az azonosítási állapot betöltése folyamatban van
+        loading: true, 
     });
 
-    useEffect(() => {
+    // Ez a funkció a token alapján beállítja a teljes user state-et
+    const setAuthStateFromToken = (token) => {
         try {
-            const token = localStorage.getItem('token');
-            if (token) {
-                const decoded = jwtDecode(token);
-                if (decoded.exp * 1000 > Date.now()) {
-                    setAuth({
-                        token: token,
-                        isAuthenticated: true,
-                        user: {
-                            userId: decoded.userId,
-                            role: decoded.role,
-                            email: decoded.email,
-                            username: decoded.username, 
-                        },
-                        loading: false,
-                    });
-                } else {
-                    localStorage.removeItem('token');
-                    setAuth({ token: null, isAuthenticated: false, user: null, loading: false });
-                }
-            } else {
-                setAuth({ token: null, isAuthenticated: false, user: null, loading: false });
+            const decoded = jwtDecode(token);
+            if (decoded.exp * 1000 > Date.now()) {
+                setAuth({
+                    token: token,
+                    isAuthenticated: true,
+                    user: {
+                        userId: decoded.userId,
+                        role: decoded.role,
+                        email: decoded.email,
+                        username: decoded.username,
+                    },
+                    loading: false,
+                });
+                return true;
             }
         } catch (error) {
-            localStorage.removeItem('token');
+            // Hiba esetén is a "kijelentkezett" állapotot állítjuk be
+        }
+        localStorage.removeItem('token');
+        setAuth({ token: null, isAuthenticated: false, user: null, loading: false });
+        return false;
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            setAuthStateFromToken(token);
+        } else {
             setAuth({ token: null, isAuthenticated: false, user: null, loading: false });
         }
     }, []);
 
     const login = (token) => {
         localStorage.setItem('token', token);
-        const decoded = jwtDecode(token);
-        setAuth({
-            token: token,
-            isAuthenticated: true,
-            user: {
-                userId: decoded.userId,
-                role: decoded.role,
-                email: decoded.email,
-                username: decoded.username,
-            },
-            loading: false,
-        });
+        setAuthStateFromToken(token);
     };
 
     const logout = () => {

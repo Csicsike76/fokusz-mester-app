@@ -1,9 +1,10 @@
+// src/pages/LoginPage.js
+
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import styles from './LoginPage.module.css';
 
-// JAVÍTÁS: Környezeti változó használata a fixen beégetett URL helyett
 const API_URL = process.env.REACT_APP_API_URL || 'https://fokusz-mester-backend.onrender.com';
 
 const LoginPage = () => {
@@ -37,9 +38,10 @@ const LoginPage = () => {
                 throw new Error(data.message || 'Sikertelen bejelentkezés.');
             }
             
-            // JAVÍTÁS: A login funkció már csak a tokent várja
+            // === VÉGLEGES JAVÍTÁS ITT ===
+            // A login funkció már csak a tokent várja, a többit a Context intézi.
             login(data.token);
-            navigate('/');
+            navigate('/'); // Átirányítás a főoldalra
 
         } catch (err) {
             setError(err.message);
