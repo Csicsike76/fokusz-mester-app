@@ -136,24 +136,36 @@ app.post('/api/register', authLimiter, async (req, res) => {
   try {
     await client.query('BEGIN');
     const userExists = await client.query('SELECT id FROM users WHERE email = $1', [email]);
-    if (userExists.rows.length > 0) throw new Error('Ez az e-mail cím már regisztrálva van.');
+    if (userExists.rows.length > 0) {
+      await client.query('ROLLBACK');
+      return res.status(400).json({ success: false, message: 'Ez az e-mail cím már regisztrálva van.' });
+    }
     let referrerId = null;
     if (referralCode) {
       const referrerResult = await client.query('SELECT id FROM users WHERE referral_code = $1', [referralCode]);
       if (referrerResult.rows.length > 0) referrerId = referrerResult.rows[0].id;
     }
     if (role === 'teacher') {
-      if (process.env.VIP_CODE && vipCode !== process.env.VIP_CODE && !isPermanentFree) { throw new Error('Érvénytelen VIP kód.'); }
+      if (process.env.VIP_CODE && vipCode !== process.env.VIP_CODE && !isPermanentFree) {
+        await client.query('ROLLBACK');
+        return res.status(400).json({ success: false, message: 'Érvénytelen VIP kód.' });
+      }
     }
     let classId = null;
     if (role === 'student' && classCode) {
       const classResult = await client.query('SELECT id, max_students FROM classes WHERE class_code = $1 AND is_active = true', [classCode]);
-      if (classResult.rows.length === 0) throw new Error('A megadott osztálykód érvénytelen vagy az osztály már nem aktív.');
+      if (classResult.rows.length === 0) {
+        await client.query('ROLLBACK');
+        return res.status(400).json({ success: false, message: 'A megadott osztálykód érvénytelen vagy az osztály már nem aktív.' });
+      }
       classId = classResult.rows[0].id;
       const maxStudents = classResult.rows[0].max_students;
       const memberCountResult = await client.query('SELECT COUNT(*) FROM classmemberships WHERE class_id = $1', [classId]);
       const memberCount = parseInt(memberCountResult.rows[0].count, 10);
-      if (memberCount >= maxStudents) throw new Error('Ez az osztály sajnos már betelt.');
+      if (memberCount >= maxStudents) {
+        await client.query('ROLLBACK');
+        return res.status(400).json({ success: false, message: 'Ez az osztály sajnos már betelt.' });
+      }
     }
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
@@ -163,7 +175,9 @@ app.post('/api/register', authLimiter, async (req, res) => {
     const newUserResult = await client.query(insertUserQuery, [username, email, passwordHash, role, referralCodeNew, verificationToken, verificationExpires, isPermanentFree, false]);
     const newUserId = newUserResult.rows[0].id;
     const registrationDate = newUserResult.rows[0].created_at;
-    if (referrerId) { await client.query('INSERT INTO referrals (referrer_user_id, referred_user_id) VALUES ($1,$2)', [referrerId, newUserId]); }
+    if (referrerId) {
+      await client.query('INSERT INTO referrals (referrer_user_id, referred_user_id) VALUES ($1,$2)', [referrerId, newUserId]);
+    }
     if (role === 'teacher') {
       await client.query('INSERT INTO teachers (user_id, vip_code) VALUES ($1,$2)', [newUserId, vipCode || null]);
       const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
@@ -177,81 +191,76 @@ app.post('/api/register', authLimiter, async (req, res) => {
         });
       }
     }
-    if (role === 'student' && classId) { await client.query('INSERT INTO classmemberships (user_id, class_id) VALUES ($1,$2)', [newUserId, classId]); }
+    if (role === 'student' && classId) {
+      await client.query('INSERT INTO classmemberships (user_id, class_id) VALUES ($1,$2)', [newUserId, classId]);
+    }
     if (!isPermanentFree) {
       const baseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-      const verificationUrl = `${baseUrl}/verify-email/${verificationToken}`;
-      await transporter.sendMail({
+      const verificationUrl = `${baseUrl}/verify-email/${verificationToken}`; // JAVÍTVA
+      const mailOptions = {
         from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
         to: email,
-        subject: 'Erősítsd meg az e-mail címedet!',
-        html: `<p>Kérjük, kattints a linkre a megerősítéshez: <a href="${verificationUrl}">Megerősítés</a></p><p>A link 24 óráig érvényes.</p>`,
-      });
+        subject: 'E-mail cím megerősítése',
+        html: `<p>Köszönjük, hogy regisztráltál! Kérjük, erősítsd meg e-mail címedet az alábbi linkre kattintva:</p><p><a href="${verificationUrl}">E-mail megerősítése</a></p><p>A link 24 órán át érvényes.</p>`,
+      };
+      await transporter.sendMail(mailOptions);
     }
     await client.query('COMMIT');
-    res.status(201).json({ success: true, message: 'Sikeres regisztráció! Kérjük, ellenőrizd az e-mail fiókodat a további teendőkért.' });
-  } catch (err) {
-    if (client) await client.query('ROLLBACK');
-    console.error("Regisztrációs hiba:", err);
-    res.status(400).json({ success: false, message: err.message || 'Szerverhiba történt.' });
+    const token = jwt.sign(
+      { userId: newUserId, role, email, username },
+      process.env.SECRET_KEY,
+      { expiresIn: '1d' }
+    );
+    res.status(201).json({
+      success: true,
+      message: 'Sikeres regisztráció! Kérjük, ellenőrizd e-mail címedet a megerősítéshez.',
+      token,
+      user: {
+        id: newUserId,
+        username,
+        email,
+        role,
+        referral_code: referralCodeNew,
+        createdAt: registrationDate,
+      },
+    });
+  } catch (error) {
+    await client.query('ROLLBACK');
+    console.error('Regisztrációs hiba:', error);
+    res.status(500).json({ success: false, message: `Szerverhiba történt: ${error.message}` });
   } finally {
-    if (client) client.release();
-  }
-});
-
-app.get('/api/verify-email/:token', async (req, res) => {
-  const { token } = req.params;
-  try {
-    const userResult = await pool.query('SELECT id FROM users WHERE email_verification_token = $1 AND email_verification_expires > NOW()', [token]);
-    if (userResult.rows.length === 0) { return res.status(400).json({ success: false, message: 'A megerősítő link érvénytelen vagy lejárt.' }); }
-    const user = userResult.rows[0];
-    await pool.query('UPDATE users SET email_verified = true, email_verification_token = NULL, email_verification_expires = NULL WHERE id = $1', [user.id]);
-    res.status(200).json({ success: true, message: 'Sikeres megerősítés! Most már bejelentkezhetsz.' });
-  } catch (error) {
-    console.error("Email-ellenőrzési hiba:", error);
-    res.status(500).json({ success: false, message: 'Szerverhiba történt a megerősítés során.' });
-  }
-});
-
-app.post('/api/approve-teacher/:userId', authenticateToken, async (req, res) => {
-  if (req.user.role !== 'admin') { return res.status(403).json({ success: false, message: 'Nincs jogosultságod ehhez a művelethez.' }); }
-  const { userId } = req.params;
-  try {
-    const result = await pool.query('UPDATE teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id', [userId]);
-    if (result.rowCount === 0) { return res.status(404).json({ success: false, message: 'A tanár nem található.' }); }
-    return res.status(200).json({ success: true, message: 'A tanári fiók sikeresen jóváhagyva.' });
-  } catch (error) {
-    console.error('Tanár jóváhagyási hiba:', error);
-    return res.status(500).json({ success: false, message: 'Hiba történt a jóváhagyás során.' });
+    client.release();
   }
 });
 
 app.post('/api/login', authLimiter, async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) { return res.status(400).json({ success: false, message: 'E-mail és jelszó megadása kötelező.' }); }
   try {
     const userResult = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-    if (userResult.rows.length === 0) { return res.status(401).json({ success: false, message: 'Hibás e-mail cím vagy jelszó.' }); }
-    const user = userResult.rows[0];
-    if (!user.email_verified) { return res.status(403).json({ success: false, message: 'Kérjük, először erősítsd meg az e-mail címedet!' }); }
-    const isPasswordCorrect = await bcrypt.compare(password, user.password_hash);
-    if (!isPasswordCorrect) { return res.status(401).json({ success: false, message: 'Hibás e-mail cím vagy jelszó.' }); }
-    if (user.role === 'teacher') {
-      const teacherResult = await pool.query('SELECT is_approved FROM teachers WHERE user_id = $1', [user.id]);
-      if (teacherResult.rows.length === 0 || !teacherResult.rows[0].is_approved) {
-        return res.status(403).json({ success: false, message: 'A tanári fiókod még nem lett jóváhagyva.' });
-      }
+    if (userResult.rows.length === 0) {
+      return res.status(401).json({ success: false, message: 'Helytelen e-mail cím vagy jelszó.' });
     }
-    
-    const token = jwt.sign({
-      userId: user.id,
-      role: user.role,
-      email: user.email,
-      username: user.username,
-    }, process.env.SECRET_KEY, { expiresIn: '1d' });
-
-    res.status(200).json({
+    const user = userResult.rows[0];
+    if (!user.email_verified) {
+      return res.status(403).json({ success: false, message: 'Az e-mail címed még nincs megerősítve. Kérjük, ellenőrizd a postafiókod.' });
+    }
+    const isMatch = await bcrypt.compare(password, user.password_hash);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: 'Helytelen e-mail cím vagy jelszó.' });
+    }
+    const token = jwt.sign(
+      {
+        userId: user.id,
+        role: user.role,
+        email: user.email,
+        username: user.username,
+      },
+      process.env.SECRET_KEY,
+      { expiresIn: '1d' }
+    );
+    res.json({
       success: true,
+      message: 'Sikeres bejelentkezés!',
       token,
       user: {
         id: user.id,
@@ -262,9 +271,8 @@ app.post('/api/login', authLimiter, async (req, res) => {
         createdAt: user.created_at,
       },
     });
-
   } catch (error) {
-    console.error("Bejelentkezési hiba:", error);
+    console.error('Bejelentkezési hiba:', error);
     res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
   }
 });
