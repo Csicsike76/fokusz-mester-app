@@ -1,11 +1,10 @@
-// src/pages/LoginPage.js
-
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import styles from './LoginPage.module.css';
 
-const API_URL = 'https://fokusz-mester-backend.onrender.com';
+// JAVÍTÁS: Környezeti változó használata a fixen beégetett URL helyett
+const API_URL = process.env.REACT_APP_API_URL || 'https://fokusz-mester-backend.onrender.com';
 
 const LoginPage = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -38,7 +37,8 @@ const LoginPage = () => {
                 throw new Error(data.message || 'Sikertelen bejelentkezés.');
             }
             
-            login(data.user, data.token);
+            // JAVÍTÁS: A login funkció már csak a tokent várja
+            login(data.token);
             navigate('/');
 
         } catch (err) {
@@ -68,7 +68,7 @@ const LoginPage = () => {
                             <input type="checkbox" id="rememberMe" name="rememberMe" />
                             <label htmlFor="rememberMe">Emlékezz rám</label>
                         </div>
-                        <a href="/elfelejtett-jelszo">Elfelejtetted a jelszavad?</a>
+                        <Link to="/elfelejtett-jelszo">Elfelejtetted a jelszavad?</Link>
                     </div>
                     
                     {error && <p className={styles.errorMessage}>{error}</p>}

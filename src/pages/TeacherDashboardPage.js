@@ -1,11 +1,13 @@
+// src/pages/TeacherDashboardPage.js
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './TeacherDashboardPage.module.css';
 
-const API_URL = 'https://fokusz-mester-backend.onrender.com';
+const API_URL = process.env.REACT_APP_API_URL || 'https://fokusz-mester-backend.onrender.com';
 
 const TeacherDashboardPage = () => {
-    const { user, token } = useAuth();
+    const { auth } = useAuth();
     
     const [myClasses, setMyClasses] = useState([]);
     const [isLoadingClasses, setIsLoadingClasses] = useState(true);
@@ -16,11 +18,11 @@ const TeacherDashboardPage = () => {
     const [isLoadingCreate, setIsLoadingCreate] = useState(false);
 
     const fetchClasses = useCallback(async () => {
-        if (!token) return;
+        if (!auth.token) return;
         setIsLoadingClasses(true);
         try {
             const response = await fetch(`${API_URL}/api/teacher/classes`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                headers: { 'Authorization': `Bearer ${auth.token}` }
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.message || 'Hiba a lekérdezés során.');
@@ -30,7 +32,7 @@ const TeacherDashboardPage = () => {
         } finally {
             setIsLoadingClasses(false);
         }
-    }, [token]);
+    }, [auth.token]);
 
     useEffect(() => {
         fetchClasses();
@@ -46,7 +48,7 @@ const TeacherDashboardPage = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${auth.token}`
                 },
                 body: JSON.stringify({ className, maxStudents: Number(maxStudents) }),
             });
@@ -68,25 +70,20 @@ const TeacherDashboardPage = () => {
         <div className={styles.dashboardContainer}>
             <header className={styles.header}>
                 <h1>Tanári Irányítópult</h1>
-                <p>Üdvözlünk, {user?.username}!</p>
+                <p>Üdvözlünk, {auth.user?.username}!</p>
             </header>
             
             <div className={styles.content}>
                 <section>
                     <h2>Osztályaim</h2>
-                    {isLoadingClasses ? (
-                        <p>Osztályok betöltése...</p>
-                    ) : myClasses.length === 0 ? (
-                        <p>Jelenleg nincsenek osztályaid.</p>
-                    ) : (
+                    {isLoadingClasses ? <p>Osztályok betöltése...</p> : 
+                     myClasses.length === 0 ? <p>Jelenleg nincsenek osztályaid.</p> : (
                         <ul className={styles.classList}>
                             {myClasses.map(cls => (
                                 <li key={cls.id} className={styles.classItem}>
                                     <div>
                                         <span className={styles.className}>{cls.class_name}</span>
-                                        <span className={styles.studentCount}>
-                                            {cls.student_count} / {cls.max_students} fő
-                                        </span>
+                                        <span className={styles.studentCount}>{cls.student_count} / {cls.max_students} fő</span>
                                     </div>
                                     <span className={styles.classCode}>Kód: {cls.class_code}</span>
                                 </li>
@@ -102,26 +99,11 @@ const TeacherDashboardPage = () => {
                     <form onSubmit={handleCreateClass} className={styles.form}>
                         <div className={styles.formGroup}>
                             <label htmlFor="className">Osztály Neve:</label>
-                            <input
-                                type="text"
-                                id="className"
-                                value={className}
-                                onChange={(e) => setClassName(e.target.value)}
-                                placeholder="Pl.: 9.A Matek Csoport"
-                                required
-                            />
+                            <input type="text" id="className" value={className} onChange={(e) => setClassName(e.target.value)} placeholder="Pl.: 9.A Matek Csoport" required />
                         </div>
                         <div className={styles.formGroup}>
                             <label htmlFor="maxStudents">Maximális Létszám (5-30):</label>
-                            <input
-                                type="number"
-                                id="maxStudents"
-                                value={maxStudents}
-                                onChange={(e) => setMaxStudents(e.target.value)}
-                                min="5"
-                                max="30"
-                                required
-                            />
+                            <input type="number" id="maxStudents" value={maxStudents} onChange={(e) => setMaxStudents(e.target.value)} min="5" max="30" required />
                         </div>
                         
                         {message && <p className={styles.successMessage}>{message}</p>}

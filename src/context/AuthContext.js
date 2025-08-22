@@ -1,106 +1,72 @@
-// src/context/AuthContext.js
-
-import React, { createContext, useState, useContext, useEffect, useMemo } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
-    const [isSubscribed, setIsSubscribed] = useState(false);
-    const [registrationDate, setRegistrationDate] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [auth, setAuth] = useState({
+        token: null,
+        isAuthenticated: false,
+        user: null,
+        loading: true, // Kritikus: jelzi, hogy az azonosítási állapot betöltése folyamatban van
+    });
 
     useEffect(() => {
         try {
-            const storedToken = localStorage.getItem('token');
-            const storedUser = localStorage.getItem('user');
-            const storedRegistrationDate = localStorage.getItem('registrationDate');
-            const storedIsSubscribed = localStorage.getItem('isSubscribed');
-            
-            if (storedToken && storedUser) {
-                setUser(JSON.parse(storedUser));
-                setToken(storedToken);
-                if (storedRegistrationDate) {
-                    setRegistrationDate(new Date(storedRegistrationDate));
+            const token = localStorage.getItem('token');
+            if (token) {
+                const decoded = jwtDecode(token);
+                if (decoded.exp * 1000 > Date.now()) {
+                    setAuth({
+                        token: token,
+                        isAuthenticated: true,
+                        user: {
+                            userId: decoded.userId,
+                            role: decoded.role,
+                            email: decoded.email,
+                            username: decoded.username, 
+                        },
+                        loading: false,
+                    });
+                } else {
+                    localStorage.removeItem('token');
+                    setAuth({ token: null, isAuthenticated: false, user: null, loading: false });
                 }
-                if (storedIsSubscribed === 'true') {
-                    setIsSubscribed(true);
-                }
-                const decoded = jwtDecode(storedToken);
-                if (decoded.exp * 1000 < Date.now()) {
-                    localStorage.clear();
-                    setUser(null);
-                    setToken(null);
-                    setIsSubscribed(false);
-                    setRegistrationDate(null);
-                }
+            } else {
+                setAuth({ token: null, isAuthenticated: false, user: null, loading: false });
             }
         } catch (error) {
-            console.error("Hiba a localStorage olvasása közben", error);
-            localStorage.clear();
-            setUser(null);
-            setToken(null);
-            setIsSubscribed(false);
-            setRegistrationDate(null);
-        } finally {
-            setIsLoading(false);
+            localStorage.removeItem('token');
+            setAuth({ token: null, isAuthenticated: false, user: null, loading: false });
         }
     }, []);
 
-    const login = (userData, userToken) => {
-        const now = new Date();
-        
-        localStorage.setItem('user', JSON.stringify(userData));
-        localStorage.setItem('token', userToken);
-        setUser(userData);
-        setToken(userToken);
-        
-        const subscribedFlag = userData?.isSubscribed || false;
-        setIsSubscribed(subscribedFlag);
-        localStorage.setItem('isSubscribed', String(subscribedFlag));
-        
-        const regDate = userData?.createdAt ? new Date(userData.createdAt) : now;
-        setRegistrationDate(regDate);
-        localStorage.setItem('registrationDate', regDate.toISOString());
+    const login = (token) => {
+        localStorage.setItem('token', token);
+        const decoded = jwtDecode(token);
+        setAuth({
+            token: token,
+            isAuthenticated: true,
+            user: {
+                userId: decoded.userId,
+                role: decoded.role,
+                email: decoded.email,
+                username: decoded.username,
+            },
+            loading: false,
+        });
     };
 
     const logout = () => {
-        localStorage.clear();
-        setUser(null);
-        setToken(null);
-        setIsSubscribed(false);
-        setRegistrationDate(null);
+        localStorage.removeItem('token');
+        setAuth({ token: null, isAuthenticated: false, user: null, loading: false });
     };
 
-    const isTrialActive = useMemo(() => {
-        if (!registrationDate) return false;
-        const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000;
-        const expirationDate = new Date(registrationDate.getTime() + thirtyDaysInMillis);
-        return new Date() < expirationDate;
-    }, [registrationDate]);
-
-    const canUsePremium = isSubscribed || isTrialActive;
-
-    const value = {
-        user,
-        token,
-        isSubscribed,
-        isLoading,
-        isTrialActive,
-        canUsePremium,
-        login,
-        logout,
-    };
-
-    if (isLoading) {
-        return null;
-    }
-
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+    return (
+        <AuthContext.Provider value={{ auth, login, logout }}>
+            {!auth.loading && children}
+        </AuthContext.Provider>
+    );
 };
 
-export const useAuth = () => {
-    return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);

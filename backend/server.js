@@ -38,20 +38,14 @@ const axios = require('axios');
   }
 })();
 
-const sslRequired = (() => {
-  const flag = String(process.env.DB_SSL || '').toLowerCase();
-  if (flag === 'true' || flag === '1') return true;
-  if (flag === 'false' || flag === '0') return false;
-  const url = String(process.env.DATABASE_URL || '');
-  if (/render\.com|heroku(app)?\.com|amazonaws\.com|azure|gcp|railway\.app/i.test(url)) return true;
-  if (/localhost|127\.0.0\.1/.test(url) || url === '') return false;
-  return true;
-})();
-
+// === JAVÍTOTT, VÉGLEGES ADATBÁZIS KAPCSOLAT ===
+const connectionString = process.env.DATABASE_URL;
+// Ez a logika automatikusan bekapcsolja az SSL-t, ha a cím Render-es, egyébként nem.
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || undefined,
-  ssl: sslRequired ? { rejectUnauthorized: false } : false,
+  connectionString: connectionString,
+  ssl: /render\.com/.test(connectionString) ? { rejectUnauthorized: false } : false,
 });
+// ===============================================
 
 const mailPort = Number(process.env.MAIL_PORT || 587);
 const transporter = nodemailer.createTransport({
@@ -62,7 +56,14 @@ const transporter = nodemailer.createTransport({
 });
 
 const app = express();
-app.use(cors());
+
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type,Authorization"
+};
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 const authLimiter = rateLimit({
@@ -128,78 +129,6 @@ app.get('/api/help', async (req, res) => {
       console.error('/api/help hiba:', error);
       res.status(500).json({ success: false, message: 'Szerverhiba a súgó cikkek lekérdezésekor.' });
     }
-});
-
-app.post('/api/register-teacher', async (req, res) => {
-  const { email, username, password, referral_code } = req.body;
-
-  if (!email || !username || !password) {
-    return res.status(400).json({ success: false, message: 'Minden mező kitöltése kötelező.' });
-  }
-
-  try {
-    const existingUser = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-    if (existingUser.rows.length > 0) {
-      return res.status(400).json({ success: false, message: 'E-mail már foglalt.' });
-    }
-
-    const password_hash = await bcrypt.hash(password, 10);
-    const newUser = await pool.query(
-      'INSERT INTO users (email, username, password_hash, role, referral_code, email_verified, created_at) VALUES ($1, $2, $3, $4, $5, $6, NOW()) RETURNING *',
-      [email, username, password_hash, 'teacher', referral_code || null, false]
-    );
-
-    const verify_token = crypto.randomBytes(32).toString('hex');
-    await pool.query(
-      'INSERT INTO teachers (user_id, is_approved, verify_token) VALUES ($1, $2, $3)',
-      [newUser.rows[0].id, false, verify_token]
-    );
-
-    const verifyLink = `${process.env.FRONTEND_URL}/verify-teacher?token=${verify_token}`;
-    await transporter.sendMail({
-      from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
-      to: email,
-      subject: 'Tanári regisztráció jóváhagyás',
-      html: `<p>Kattints ide a jóváhagyáshoz: <a href="${verifyLink}">Jóváhagyás</a></p>`,
-    });
-
-    res.status(201).json({
-      success: true,
-      message: 'Regisztráció kész, a tanári fiók jóváhagyására e-mailt küldtünk.'
-    });
-  } catch (error) {
-    console.error('Tanári regisztráció hiba:', error);
-    res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
-  }
-});
-
-app.post('/api/verify-teacher', async (req, res) => {
-  const { token } = req.body;
-
-  if (!token) {
-    return res.status(400).json({ success: false, message: 'Token hiányzik.' });
-  }
-
-  try {
-    const teacherResult = await pool.query(
-      'SELECT * FROM teachers WHERE verify_token = $1',
-      [token]
-    );
-
-    if (teacherResult.rows.length === 0) {
-      return res.status(400).json({ success: false, message: 'Érvénytelen token.' });
-    }
-
-    await pool.query(
-      'UPDATE teachers SET is_approved = TRUE, verify_token = NULL WHERE verify_token = $1',
-      [token]
-    );
-
-    res.json({ success: true, message: 'Tanári fiók jóváhagyva.' });
-  } catch (error) {
-    console.error('Tanári jóváhagyás hiba:', error);
-    res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
-  }
 });
 
 app.post('/api/register', authLimiter, async (req, res) => {
@@ -304,7 +233,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
 
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
-    const verificationExpires = new Date(Date.now() + 24 * 3600000);
+    const verificationExpires = new Date(Date.now() + 24 * 3600000); // 24 óra
     const referralCodeNew =
       role === 'student' ? `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}` : null;
 
@@ -340,18 +269,15 @@ app.post('/api/register', authLimiter, async (req, res) => {
         'INSERT INTO teachers (user_id, vip_code) VALUES ($1,$2)',
         [newUserId, vipCode || null]
       );
-      const teacherIsApprovedResult = await client.query('SELECT is_approved from teachers where user_id=$1', [newUserId]);
-      if(!teacherIsApprovedResult.rows[0].is_approved) {
-        const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
-        const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
-        if (adminRecipient) {
-          await transporter.sendMail({
-            from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
-            to: adminRecipient,
-            subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
-            html: `<p>Új tanár: ${username} (${email})</p><p><a href="${approvalUrl}">Jóváhagyás</a></p>`,
-          });
-        }
+      const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
+      const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
+      if (adminRecipient) {
+        await transporter.sendMail({
+          from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+          to: adminRecipient,
+          subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
+          html: `<p>Új tanár: ${username} (${email})</p><p><a href="${approvalUrl}">Jóváhagyás</a></p>`,
+        });
       }
     }
 
@@ -377,7 +303,6 @@ app.post('/api/register', authLimiter, async (req, res) => {
     res.status(201).json({
       success: true,
       message: 'Sikeres regisztráció! Kérjük, ellenőrizd az e-mail fiókodat a további teendőkért.',
-      user: { id: newUserId, username: username, email: email, role: role, createdAt: registrationDate },
     });
   } catch (err) {
     if (client) await client.query('ROLLBACK');
@@ -416,9 +341,10 @@ app.get('/api/verify-email/:token', async (req, res) => {
   }
 });
 
-app.get('/api/approve-teacher/:userId', authenticateToken, async (req, res) => {
-    if (req.user.email !== '19perro76@gmail.com') {
-        return res.status(403).json({ success: false, message: 'Csak a megadott e-mail címmel lehet jóváhagyni a tanárt.' });
+// JAVÍTVA: POST metódus és 'admin' szerepkör ellenőrzése
+app.post('/api/approve-teacher/:userId', authenticateToken, async (req, res) => {
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ success: false, message: 'Nincs jogosultságod ehhez a művelethez.' });
     }
 
     const { userId } = req.params;
@@ -477,21 +403,19 @@ app.post('/api/login', authLimiter, async (req, res) => {
       }
     }
 
-    const token = jwt.sign({ userId: user.id, role: user.role, email: user.email }, process.env.SECRET_KEY, {
+    const token = jwt.sign({ 
+        userId: user.id, 
+        role: user.role, 
+        email: user.email,
+        username: user.username
+    }, process.env.SECRET_KEY, {
       expiresIn: '1d',
     });
 
     res.status(200).json({
       success: true,
       token,
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-        referral_code: user.referral_code,
-        createdAt: user.created_at,
-      },
+      // A user objektumot már nem küldjük vissza, a frontend a tokenből olvassa ki
     });
   } catch (error) {
     console.error("Bejelentkezési hiba:", error);
