@@ -1,5 +1,5 @@
 export const NAV_ITEMS = [
-  
+
   { 
     id: "math",
     label: "Matematika",
