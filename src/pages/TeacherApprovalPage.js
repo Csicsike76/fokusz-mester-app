@@ -1,3 +1,5 @@
+// src/pages/TeacherApprovalPage.js
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -12,25 +14,25 @@ const TeacherApprovalPage = () => {
 
     const [message, setMessage] = useState('Jóváhagyás folyamatban...');
     const [isError, setIsError] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    
+    // A komponens saját isLoading állapota most már nem szükséges, mert az auth.loading-ot használjuk
 
     useEffect(() => {
-        // Csak akkor fusson le a logika, ha van userId és az auth állapot már betöltődött
-        if (!userId || auth.loading) {
+        // VÉDEKEZŐ LÉPÉS: Ne csinálj semmit, amíg az auth állapot betöltődik
+        if (auth.loading) {
+            setMessage('Azonosítási állapot betöltése...');
             return;
         }
 
         const approveTeacher = async () => {
             if (!auth.isAuthenticated || auth.user.role !== 'admin') {
-                setMessage('A jóváhagyáshoz be kell jelentkezned adminisztrátori fiókkal. Átirányítás a bejelentkezéshez...');
+                setMessage('A jóváhagyáshoz be kell jelentkezned adminisztrátori fiókkal. Átirányítás...');
                 setIsError(true);
-                setIsLoading(false);
                 setTimeout(() => navigate('/bejelentkezes'), 3000);
                 return;
             }
 
             try {
-                setMessage('Adminisztrátori jogosultság ellenőrizve. Jóváhagyás küldése...');
                 const response = await fetch(`${API_URL}/api/approve-teacher/${userId}`, {
                     method: 'POST',
                     headers: {
@@ -45,32 +47,31 @@ const TeacherApprovalPage = () => {
                     setMessage(data.message || 'A tanári fiók sikeresen jóváhagyva.');
                     setIsError(false);
                 } else {
-                    throw new Error(data.message || 'Ismeretlen hiba történt a jóváhagyás során.');
+                    throw new Error(data.message || 'Hiba a jóváhagyás során.');
                 }
             } catch (error) {
                 setMessage(`Hiba: ${error.message}`);
                 setIsError(true);
-            } finally {
-                setIsLoading(false);
             }
         };
 
         approveTeacher();
-    }, [userId, auth, navigate]);
+    }, [userId, auth, navigate]); // Fontos, hogy az `auth` itt legyen a függőségek között
 
     return (
         <div className={styles.container}>
             <div className={styles.messageBox}>
                 <h1>Tanári Regisztráció Jóváhagyása</h1>
-                {isLoading ? (
+                {/* Most már csak az auth.loading alapján döntünk */}
+                {auth.loading ? (
                     <p>Kérlek, várj...</p>
                 ) : (
                     <>
                         <p className={isError ? styles.errorText : styles.successText}>
                             {message}
                         </p>
-                        <Link to="/" className={styles.loginButton}>
-                            Vissza a főoldalra
+                        <Link to={isError ? "/bejelentkezes" : "/"} className={styles.loginButton}>
+                            {isError ? "Tovább a bejelentkezéshez" : "Vissza a főoldalra"}
                         </Link>
                     </>
                 )}
