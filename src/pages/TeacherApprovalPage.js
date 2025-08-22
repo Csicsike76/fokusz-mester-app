@@ -20,7 +20,7 @@ const TeacherApprovalPage = () => {
     useEffect(() => {
         const approveTeacher = async () => {
             if (!auth?.isAuthenticated || auth?.user?.email !== MY_EMAIL) {
-                
+                setMessage('A jóváhagyáshoz a megfelelő e-mail címről kell bejelentkezned.');
                 setIsError(true);
                 setIsLoading(false);
                 setTimeout(() => navigate('/bejelentkezes'), 3000);
