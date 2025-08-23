@@ -65,20 +65,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const app = express();
-
-// VÉGLEGES JAVÍTÁS: Manuális, "brute force" CORS beállítás a helyi környezeti hibák felülbírására
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  // A böngésző "pre-flight" kéréseinek kezelése, ami a CORS hibák gyakori forrása
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-  next();
-});
-
-
+app.use(cors());
 app.use(express.json());
 
 const authLimiter = rateLimit({
@@ -90,6 +77,7 @@ const authLimiter = rateLimit({
     success: false,
     message: 'Túl sok próbálkozás, kérjük, próbáld újra 15 perc múlva.',
   },
+  // VÉGLEGES JAVÍTÁS: A keyGenerator a hivatalos ipKeyGenerator segédfüggvényt használja
   keyGenerator: (req) => {
     const ipKey = ipKeyGenerator(req);
     const emailKey = (req.body && req.body.email) ? String(req.body.email).toLowerCase() : '';
@@ -882,6 +870,8 @@ app.post('/api/profile/change-password', authenticateToken, async (req, res) => 
 
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`✅ A Fókusz Mester szerver elindult a ${PORT} porton.`);
+const HOST = '127.0.0.1';
+
+app.listen(PORT, HOST, () => {
+  console.log(`✅ A Fókusz Mester szerver elindult a http://${HOST}:${PORT} címen.`);
 });

@@ -2,9 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './ProfilePage.module.css';
 
-const API_URL = process.env.NODE_ENV === 'production'
-    ? 'https://fokusz-mester-backend.onrender.com'
-    : 'http://localhost:3001';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const ProfilePage = () => {
     const { user, token, logout, isTrialActive, registrationDate, updateUser } = useAuth();
@@ -20,8 +18,6 @@ const ProfilePage = () => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
-
-    // JAVÍTVA: Új állapot a gomb szövegének vezérléséhez
     const [isCopied, setIsCopied] = useState(false);
 
     const fetchProfile = useCallback(async () => {
@@ -114,7 +110,6 @@ const ProfilePage = () => {
         }
     };
     
-    // JAVÍTVA: A sikeres másoláskor lefutó közös logika
     const handleCopySuccess = () => {
         setMessage("Ajánlókód a vágólapra másolva!");
         setIsCopied(true);
@@ -275,7 +270,6 @@ const ProfilePage = () => {
                         <p>Oszd meg az alábbi egyedi ajánlókódodat barátaiddal! Minden 5., a te kódoddal regisztrált és előfizető felhasználó után <strong>1 hónap prémium hozzáférést</strong> kapsz ajándékba!</p>
                         <div className={styles.referralCodeBox}>
                             <span>{user.referral_code}</span>
-                            {/* JAVÍTVA: A gomb szövege most már dinamikusan változik */}
                             <button onClick={copyToClipboard} disabled={isCopied}>
                                 {isCopied ? 'Másolva' : 'Másolás'}
                             </button>

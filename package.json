@@ -2,35 +2,47 @@
   "name": "react-kviz-app",
   "version": "0.1.0",
   "private": true,
-  "main": "server.js",
-"scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "db:setup": "node scripts/setup-db.js",
-    "db:reset": "npm run db:setup && npm run sync-db",
-    "sync-db": "node scripts/sync-db.js",
-    "migrate:create": "node-pg-migrate create",
-    "migrate:up": "node-pg-migrate --database-url \"${DATABASE_URL}?ssl=true\" --reject-unauthorized false up",
-    "migrate:down": "node-pg-migrate --database-url \"${DATABASE_URL}?ssl=true\" --reject-unauthorized false down",
-    "migrate:redo": "node-pg-migrate down -m ./migrations && node-pg-migrate up -m ./migrations"
-  },
   "dependencies": {
+    "@types/file-saver": "^2.0.7",
+    "@types/tesseract.js": "^0.0.2",
+    "axios": "^0.21.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^4.19.2",
+    "express-rate-limit": "^6.7.0",
+    "file-saver": "^2.0.5",
     "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "node-pg-migrate": "^8.0.3",
     "nodemailer": "^6.9.11",
     "pg": "^8.16.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-google-recaptcha": "^3.1.0",
-    "react-router-dom": "6.23.0",
+    "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
+    "tesseract.js": "^6.0.1",
+    "validator": "^13.9.0",
     "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "db:setup": "node ../scripts/setup-db.js",
+    "db:reset": "npm run db:setup && npm run sync-db",
+    "sync-db": "node ../scripts/sync-db.js",
+    "migrate:create": "node-pg-migrate --migrations-dir \"../backend/migrations\" create",
+    "migrate:up": "node-pg-migrate --database-url \"${DATABASE_URL}?ssl=true\" --reject-unauthorized false --migrations-dir \"../backend/migrations\" up",
+    "migrate:down": "node-pg-migrate --database-url \"${DATABASE_URL}?ssl=true\" --reject-unauthorized false --migrations-dir \"../backend/migrations\" down"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -43,5 +55,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:3001"
 }

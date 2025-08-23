@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styles from './QuizPage.module.css';
+import { useAuth } from '../context/AuthContext';
 
 import SingleChoiceQuestion from '../components/SingleChoiceQuestion/SingleChoiceQuestion';
 import WorkshopContent from '../components/WorkshopContent/WorkshopContent';
@@ -11,6 +12,7 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const QuizPage = () => {
     const { slug } = useParams();
+    const { token } = useAuth();
     const [curriculum, setCurriculum] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
@@ -22,10 +24,26 @@ const QuizPage = () => {
         try {
             setIsLoading(true);
             setError('');
-            const response = await fetch(`${API_URL}/api/quiz/${slug}`);
-            if (!response.ok) throw new Error(`HTTP hiba! Státusz: ${response.status}`);
+
+            const headers = { 'Content-Type': 'application/json' };
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            const response = await fetch(`${API_URL}/api/quiz/${slug}`, { headers });
+
+            if (response.status === 403) {
+                 const errorData = await response.json();
+                 throw new Error(errorData.message || 'Hozzáférés megtagadva.');
+            }
+            if (!response.ok) {
+                 throw new Error(`Hiba a szerverrel való kommunikáció során. Státusz: ${response.status}`);
+            }
+
             const data = await response.json();
-            if (!data.success) throw new Error(data.message || 'A tananyag betöltése sikertelen.');
+            if (!data.success) {
+                throw new Error(data.message || 'A tananyag betöltése sikertelen.');
+            }
             setCurriculum(data.data);
         } catch (err) {
             setError(err.message);
@@ -33,7 +51,7 @@ const QuizPage = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [slug]);
+    }, [slug, token]);
 
     useEffect(() => {
         fetchCurriculum();
@@ -73,7 +91,19 @@ const QuizPage = () => {
         curriculum.questions.every((q, index) => userAnswers[q.id || index] !== undefined);
 
     if (isLoading) return <div className={styles.container}><div className={styles.quizBox}><p>Tananyag betöltése...</p></div></div>;
-    if (error) return <div className={styles.container}><div className={styles.quizBox}><p className={styles.error}>{error}</p></div></div>;
+    
+    if (error) {
+        return (
+            <div className={styles.container}>
+                <div className={styles.quizBox}>
+                    <h2 className={styles.errorTitle}>Hiba</h2>
+                    <p className={styles.error}>{error}</p>
+                    <Link to="/bejelentkezes" className={styles.backButton}>Bejelentkezés vagy Regisztráció</Link>
+                </div>
+            </div>
+        );
+    }
+
     if (!curriculum) return <div className={styles.container}><div className={styles.quizBox}><p>A tananyag nem található.</p></div></div>;
 
     const totalQuestions = curriculum?.questions?.length || 0;
