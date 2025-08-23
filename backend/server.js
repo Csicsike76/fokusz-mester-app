@@ -65,7 +65,20 @@ const transporter = nodemailer.createTransport({
 });
 
 const app = express();
-app.use(cors());
+
+// VÉGLEGES JAVÍTÁS: Manuális, "brute force" CORS beállítás a helyi környezeti hibák felülbírására
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  // A böngésző "pre-flight" kéréseinek kezelése, ami a CORS hibák gyakori forrása
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
+
 app.use(express.json());
 
 const authLimiter = rateLimit({
@@ -94,6 +107,21 @@ const authenticateToken = (req, res, next) => {
     req.user = user;
     next();
   });
+};
+
+const optionalAuthenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'] || '';
+    const token = authHeader.split(' ')[1];
+    if (!token) {
+        return next();
+    }
+
+    jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
+        if (!err) {
+            req.user = user;
+        }
+        next();
+    });
 };
 
 app.get('/api/help', async (req, res) => {
@@ -694,41 +722,69 @@ app.get('/api/curriculums', async (req, res) => {
   }
 });
 
-app.get('/api/quiz/:slug', async (req, res) => {
+app.get('/api/quiz/:slug', optionalAuthenticateToken, async (req, res) => {
   try {
     const raw = req.params.slug || '';
     const slug = raw.replace(/_/g, '-');
+    
+    const curriculumResult = await pool.query('SELECT category FROM curriculums WHERE slug = $1 AND is_published = true', [slug]);
+
+    if (curriculumResult.rows.length === 0) {
+      return res.status(404).json({ success: false, message: `A '${slug}' tananyag nem található vagy nem publikus.` });
+    }
+
+    const category = curriculumResult.rows[0].category;
+    const isPremium = category.startsWith('premium_');
+
+    if (isPremium) {
+      if (!req.user) {
+        return res.status(403).json({ success: false, message: 'Ez egy prémium tartalom. A megtekintéséhez kérjük, jelentkezzen be!' });
+      }
+
+      const userResult = await pool.query('SELECT created_at, is_permanent_free, is_subscribed FROM users WHERE id = $1', [req.user.userId]);
+      if (userResult.rows.length === 0) {
+        return res.status(403).json({ success: false, message: 'Érvénytelen felhasználó.' });
+      }
+      const user = userResult.rows[0];
+
+      const registrationDate = new Date(user.created_at);
+      const trialExpirationDate = new Date(registrationDate.getTime() + 30 * 24 * 60 * 60 * 1000);
+      const isTrialActive = new Date() < trialExpirationDate;
+
+      const canAccessPremium = user.is_permanent_free || user.is_subscribed || isTrialActive;
+
+      if (!canAccessPremium) {
+        return res.status(403).json({ success: false, message: 'Ez egy prémium tartalom. A próbaidőszakod lejárt, vagy nincs aktív előfizetésed.' });
+      }
+    }
+    
     const baseDir = path.resolve(__dirname, 'data', 'tananyag');
     const jsonPath = path.join(baseDir, `${slug}.json`);
     const jsPath   = path.join(baseDir, `${slug}.js`);
     let data;
+
     if (fsSync.existsSync(jsonPath)) {
       const text = await fsp.readFile(jsonPath, 'utf8');
       data = JSON.parse(text);
-      console.log(`📄 Betöltve JSON: ${jsonPath}`);
     } else if (fsSync.existsSync(jsPath)) {
       delete require.cache[jsPath];
       const mod = require(jsPath);
       data = (mod && mod.default) ? mod.default : mod;
-      console.log(`🧩 Betöltve JS modul: ${jsPath}`);
     } else {
       return res.status(404).json({
         success: false,
-        message: `Nem található a lecke: ${slug}.json vagy ${slug}.js a ${baseDir} mappában.`,
+        message: `Nem található a lecke adatfájlja: ${slug}.json vagy ${slug}.js`,
       });
     }
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch {
-      }
-    }
+
     return res.json({ success: true, data });
+
   } catch (err) {
     console.error(`❌ Hiba a(z) /api/quiz/${req.params.slug} feldolgozásakor:`, err);
     return res.status(500).json({ success: false, message: 'Szerverhiba történt a lecke betöltésekor.' });
   }
 });
+
 
 app.get('/api/admin/clear-users/:secret', async (req, res) => {
   const { secret } = req.params;
@@ -750,26 +806,23 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
   }
 });
 
-
-
-
-// VÉGLEGES JAVÍTÁS: Működő profil végpontok
 app.get('/api/profile', authenticateToken, async (req, res) => {
     try {
         const { userId } = req.user;
-        const result = await pool.query('SELECT id, username, email, role, referral_code, created_at FROM users WHERE id = $1', [userId]);
+        const result = await pool.query('SELECT id, username, email, role, referral_code, created_at, is_permanent_free, is_subscribed FROM users WHERE id = $1', [userId]);
         if (result.rows.length === 0) {
             return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
         }
         const user = result.rows[0];
-        // JAVÍTVA: Az adatbázis 'created_at' mezőjét átalakítjuk 'createdAt'-ra a konzisztencia érdekében
         const userResponse = {
             id: user.id,
             username: user.username,
             email: user.email,
             role: user.role,
             referral_code: user.referral_code,
-            createdAt: user.created_at
+            createdAt: user.created_at,
+            is_permanent_free: user.is_permanent_free,
+            is_subscribed: user.is_subscribed
         };
         res.status(200).json({ success: true, user: userResponse });
     } catch (error) {
@@ -785,16 +838,17 @@ app.put('/api/profile', authenticateToken, async (req, res) => {
         if (!username) {
             return res.status(400).json({ success: false, message: 'A felhasználónév nem lehet üres.' });
         }
-        const updatedUserResult = await pool.query('UPDATE users SET username = $1 WHERE id = $2 RETURNING id, username, email, role, referral_code, created_at', [username, userId]);
+        const updatedUserResult = await pool.query('UPDATE users SET username = $1 WHERE id = $2 RETURNING id, username, email, role, referral_code, created_at, is_permanent_free, is_subscribed', [username, userId]);
         const updatedUser = updatedUserResult.rows[0];
-        // JAVÍTVA: Az adatbázis 'created_at' mezőjét átalakítjuk 'createdAt'-ra a konzisztencia érdekében
         const userResponse = {
             id: updatedUser.id,
             username: updatedUser.username,
             email: updatedUser.email,
             role: updatedUser.role,
             referral_code: updatedUser.referral_code,
-            createdAt: updatedUser.created_at
+            createdAt: updatedUser.created_at,
+            is_permanent_free: updatedUser.is_permanent_free,
+            is_subscribed: updatedUser.is_subscribed
         };
         res.status(200).json({ success: true, message: 'Profil sikeresen frissítve.', user: userResponse });
     } catch (error) {
@@ -802,6 +856,7 @@ app.put('/api/profile', authenticateToken, async (req, res) => {
         res.status(500).json({ success: false, message: 'Szerverhiba a profil frissítése során.' });
     }
 });
+
 
 app.post('/api/profile/change-password', authenticateToken, async (req, res) => {
     const { userId } = req.user;
