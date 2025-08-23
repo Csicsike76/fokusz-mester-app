@@ -7,8 +7,8 @@ const API_URL = process.env.NODE_ENV === 'production'
     : 'http://localhost:3001';
 
 const ProfilePage = () => {
-    // JAVÍTVA: A registrationDate-et is kiolvassuk a kontextusból, ez lesz a megbízható forrás
-    const { user, token, logout, login, isTrialActive, registrationDate } = useAuth();
+    const { user, token, logout, isTrialActive, registrationDate, updateUser } = useAuth();
+    
     const [profileData, setProfileData] = useState(user);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
@@ -20,6 +20,9 @@ const ProfilePage = () => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
+
+    // JAVÍTVA: Új állapot a gomb szövegének vezérléséhez
+    const [isCopied, setIsCopied] = useState(false);
 
     const fetchProfile = useCallback(async () => {
         if (!token) {
@@ -33,28 +36,28 @@ const ProfilePage = () => {
             const data = await response.json();
             if (!response.ok) throw new Error(data.message || 'Hiba a profil betöltésekor.');
             
-            // JAVÍTVA: Nem felülírjuk, hanem összefésüljük az adatokat.
-            // Így ha a fetch válaszából hiányozna a 'created_at', a bejelentkezéskor kapott érték megmarad.
-            setProfileData(prevData => ({ ...prevData, ...data.user }));
-            setNewUsername(data.user.username);
+            updateUser(data.user);
+
         } catch (err) {
             setError(err.message);
         } finally {
             setIsLoading(false);
         }
-    }, [token]);
+    }, [token, updateUser]);
 
     useEffect(() => {
         if(!user) {
             setIsLoading(false);
         } else {
-            // A profileData kezdeti beállítása a kontextusból
-            setProfileData(user);
-            setNewUsername(user.username);
             fetchProfile();
         }
-    }, [user, fetchProfile]);
+    }, [fetchProfile]);
     
+    useEffect(() => {
+        setProfileData(user);
+        setNewUsername(user ? user.username : '');
+    }, [user]);
+
     const handleUpdateUsername = async () => {
         setMessage('');
         setError('');
@@ -71,10 +74,7 @@ const ProfilePage = () => {
             if (!response.ok) throw new Error(data.message);
             
             setMessage(data.message);
-            setProfileData(data.user);
-            
-            // Fontos, hogy a login-t a teljes, frissített user objektummal hívjuk meg
-            login(data.user, token);
+            updateUser(data.user);
             
             setIsEditingUsername(false);
         } catch (err) {
@@ -113,27 +113,79 @@ const ProfilePage = () => {
             setError(err.message);
         }
     };
+    
+    // JAVÍTVA: A sikeres másoláskor lefutó közös logika
+    const handleCopySuccess = () => {
+        setMessage("Ajánlókód a vágólapra másolva!");
+        setIsCopied(true);
+        setTimeout(() => {
+            setMessage('');
+            setIsCopied(false);
+        }, 3000);
+    };
 
-    // JAVÍTVA: A másolás funkció hibakezeléssel lett ellátva
-    const copyToClipboard = async () => {
-        if (profileData && profileData.referral_code) {
-            try {
-                await navigator.clipboard.writeText(profileData.referral_code);
-                setMessage("Ajánlókód a vágólapra másolva!");
-            } catch (err) {
-                console.error('Hiba a vágólapra másoláskor:', err);
-                setError('A másolás nem sikerült. Kérjük, jelölje ki és másolja a kódot manuálisan.');
-            } finally {
-                setTimeout(() => {
-                    setMessage('');
-                    setError('');
-                }, 3000);
-            }
+    const handleCopyError = () => {
+        setError('A másolás nem sikerült. Kérjük, jelölje ki és másolja a kódot manuálisan.');
+        setTimeout(() => setError(''), 3000);
+    };
+
+    const copyToClipboard = () => {
+        const codeToCopy = user?.referral_code;
+
+        if (!codeToCopy) {
+            setError("Nincs másolható kód.");
+            setTimeout(() => setError(''), 3000);
+            return;
+        }
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(codeToCopy)
+                .then(handleCopySuccess)
+                .catch(err => {
+                    console.error('Modern másolás sikertelen, fallback indul:', err);
+                    fallbackCopyTextToClipboard(codeToCopy);
+                });
+        } else {
+            fallbackCopyTextToClipboard(codeToCopy);
         }
     };
 
+    const fallbackCopyTextToClipboard = (text) => {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        
+        textArea.style.position = 'fixed';
+        textArea.style.top = 0;
+        textArea.style.left = 0;
+        textArea.style.width = '2em';
+        textArea.style.height = '2em';
+        textArea.style.padding = 0;
+        textArea.style.border = 'none';
+        textArea.style.outline = 'none';
+        textArea.style.boxShadow = 'none';
+        textArea.style.background = 'transparent';
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            const successful = document.execCommand('copy');
+            if(successful) {
+                handleCopySuccess();
+            } else {
+                 handleCopyError();
+            }
+        } catch (err) {
+            console.error('Fallback másolás sikertelen:', err);
+            handleCopyError();
+        }
+
+        document.body.removeChild(textArea);
+    };
+
+
     const getTrialInfo = (regDate) => {
-        // A függvény most már a Date objektumot kapja meg a kontextusból
         if (!regDate) return null;
         
         const expirationDate = new Date(new Date(regDate).getTime() + 30 * 24 * 60 * 60 * 1000);
@@ -148,12 +200,11 @@ const ProfilePage = () => {
         };
     };
 
-    // JAVÍTVA: A 'registrationDate'-et a megbízhatóbb AuthContext-ből vesszük, nem a 'profileData'-ból
     const trialInfo = registrationDate ? getTrialInfo(registrationDate) : null;
 
     if (isLoading) return <div className={styles.container}><p>Profil betöltése...</p></div>;
 
-    if (!profileData) {
+    if (!user) {
         return (
             <div className={styles.container}>
                 <div className={styles.profileBox}>
@@ -183,20 +234,19 @@ const ProfilePage = () => {
                             </div>
                         ) : (
                            <div className={styles.valueView}>
-                                <span className={styles.value}>{profileData.username}</span>
+                                <span className={styles.value}>{user.username}</span>
                                 <button onClick={() => setIsEditingUsername(true)}>Szerkeszt</button>
                            </div>
                         )}
                     </div>
                     <div className={styles.infoItem}>
                         <span className={styles.label}>E-mail cím:</span>
-                        <span className={styles.value}>{profileData.email}</span>
+                        <span className={styles.value}>{user.email}</span>
                     </div>
                     <div className={styles.infoItem}>
                         <span className={styles.label}>Szerepkör:</span>
-                        <span className={styles.value}>{profileData.role === 'teacher' ? 'Tanár' : 'Diák'}</span>
+                        <span className={styles.value}>{user.role === 'teacher' ? 'Tanár' : 'Diák'}</span>
                     </div>
-                    {/* JAVÍTVA: A trialInfo most már a kontextusból származó dátum alapján jelenik meg */}
                     {trialInfo && (
                         <div className={styles.infoItem}>
                             <span className={styles.label}>Regisztráció dátuma:</span>
@@ -219,20 +269,21 @@ const ProfilePage = () => {
 
                 <hr className={styles.divider} />
                 
-                {/* A feltétel most már azt is nézi, hogy van-e egyáltalán kód */}
-                {profileData.referral_code && (
+                {user.referral_code && (
                     <div className={styles.referralSection}>
                         <h2>Oszd meg és nyerj!</h2>
                         <p>Oszd meg az alábbi egyedi ajánlókódodat barátaiddal! Minden 5., a te kódoddal regisztrált és előfizető felhasználó után <strong>1 hónap prémium hozzáférést</strong> kapsz ajándékba!</p>
                         <div className={styles.referralCodeBox}>
-                            <span>{profileData.referral_code}</span>
-                            <button onClick={copyToClipboard}>Másolás</button>
+                            <span>{user.referral_code}</span>
+                            {/* JAVÍTVA: A gomb szövege most már dinamikusan változik */}
+                            <button onClick={copyToClipboard} disabled={isCopied}>
+                                {isCopied ? 'Másolva' : 'Másolás'}
+                            </button>
                         </div>
                     </div>
                 )}
 
 
-                {/* JAVÍTVA: A trialInfo most már a kontextusból származó dátum alapján jelenik meg */}
                 <div className={styles.subscriptionStatus}>
                     <h3>Előfizetési Státusz</h3>
                     {isTrialActive && trialInfo ? (

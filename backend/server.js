@@ -152,7 +152,6 @@ app.post('/api/register-teacher', async (req, res) => {
         const password_hash = await bcrypt.hash(password, 10);
         const emailVerificationToken = crypto.randomBytes(32).toString('hex');
         const emailVerificationExpires = new Date(Date.now() + 24 * 3600000);
-        // JAVÍTVA: A tanárok is kapnak ajánlói kódot ezen a végponton
         const referralCodeNew = `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
 
         const newUserResult = await client.query(
@@ -324,8 +323,6 @@ app.post('/api/register', authLimiter, async (req, res) => {
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
     const verificationExpires = new Date(Date.now() + 24 * 3600000); // 24 óra
-    
-    // JAVÍTVA: A feltétel eltávolítva, minden felhasználó (diák és tanár is) kap ajánlói kódot.
     const referralCodeNew = `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
 
     const insertUserQuery = `
@@ -764,7 +761,17 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
         if (result.rows.length === 0) {
             return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
         }
-        res.status(200).json({ success: true, user: result.rows[0] });
+        const user = result.rows[0];
+        // JAVÍTVA: Az adatbázis 'created_at' mezőjét átalakítjuk 'createdAt'-ra a konzisztencia érdekében
+        const userResponse = {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            role: user.role,
+            referral_code: user.referral_code,
+            createdAt: user.created_at
+        };
+        res.status(200).json({ success: true, user: userResponse });
     } catch (error) {
         console.error('Profil lekérdezési hiba:', error);
         res.status(500).json({ success: false, message: 'Szerverhiba a profiladatok lekérésekor.' });
@@ -779,7 +786,17 @@ app.put('/api/profile', authenticateToken, async (req, res) => {
             return res.status(400).json({ success: false, message: 'A felhasználónév nem lehet üres.' });
         }
         const updatedUserResult = await pool.query('UPDATE users SET username = $1 WHERE id = $2 RETURNING id, username, email, role, referral_code, created_at', [username, userId]);
-        res.status(200).json({ success: true, message: 'Profil sikeresen frissítve.', user: updatedUserResult.rows[0] });
+        const updatedUser = updatedUserResult.rows[0];
+        // JAVÍTVA: Az adatbázis 'created_at' mezőjét átalakítjuk 'createdAt'-ra a konzisztencia érdekében
+        const userResponse = {
+            id: updatedUser.id,
+            username: updatedUser.username,
+            email: updatedUser.email,
+            role: updatedUser.role,
+            referral_code: updatedUser.referral_code,
+            createdAt: updatedUser.created_at
+        };
+        res.status(200).json({ success: true, message: 'Profil sikeresen frissítve.', user: userResponse });
     } catch (error) {
         console.error('Profil frissítési hiba:', error);
         res.status(500).json({ success: false, message: 'Szerverhiba a profil frissítése során.' });
