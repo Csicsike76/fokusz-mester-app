@@ -13,18 +13,18 @@ export const AuthProvider = ({ children }) => {
         try {
             const storedToken = localStorage.getItem('token');
             const storedUser = localStorage.getItem('user');
+            const storedRegistrationDate = localStorage.getItem('registrationDate');
+            const storedIsSubscribed = localStorage.getItem('isSubscribed');
             
             if (storedToken && storedUser) {
-                const parsedUser = JSON.parse(storedUser);
-                setUser(parsedUser);
+                setUser(JSON.parse(storedUser));
                 setToken(storedToken);
-
-                // A regisztrációs dátumot és az előfizetést mindig a user objektumból származtatjuk
-                if (parsedUser.createdAt) {
-                    setRegistrationDate(new Date(parsedUser.createdAt));
+                if (storedRegistrationDate) {
+                    setRegistrationDate(new Date(storedRegistrationDate));
                 }
-                const subscribedFlag = parsedUser?.isSubscribed || false;
-                setIsSubscribed(subscribedFlag);
+                if (storedIsSubscribed === 'true') {
+                    setIsSubscribed(true);
+                }
             }
         } catch (error) {
             console.error("Hiba a localStorage olvasása közben", error);
@@ -35,8 +35,8 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = (userData, userToken) => {
-        // Ez a függvény CSAK a bejelentkezéskor fut le.
-        // A 'createdAt' adatot a userData objektumból olvassa ki és menti el.
+        const now = new Date();
+        
         localStorage.setItem('user', JSON.stringify(userData));
         localStorage.setItem('token', userToken);
         setUser(userData);
@@ -44,26 +44,11 @@ export const AuthProvider = ({ children }) => {
         
         const subscribedFlag = userData?.isSubscribed || false;
         setIsSubscribed(subscribedFlag);
+        localStorage.setItem('isSubscribed', String(subscribedFlag));
         
-        if (userData.createdAt) {
-            setRegistrationDate(new Date(userData.createdAt));
-        }
-    };
-    
-    // ÚJ FUNKCIÓ: A felhasználói adatok frissítésére
-    const updateUser = (newUserData) => {
-        // Ez a függvény frissíti a meglévő felhasználói adatokat.
-        // Összefésüli a régi és új adatokat, hogy semmi se vesszen el.
-        const updatedUser = { ...user, ...newUserData };
-        setUser(updatedUser);
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-
-        // Frissítjük a származtatott állapotokat is
-        if (updatedUser.createdAt) {
-            setRegistrationDate(new Date(updatedUser.createdAt));
-        }
-        const subscribedFlag = updatedUser?.isSubscribed || false;
-        setIsSubscribed(subscribedFlag);
+        const regDate = userData?.createdAt ? new Date(userData.createdAt) : now;
+        setRegistrationDate(regDate);
+        localStorage.setItem('registrationDate', regDate.toISOString());
     };
 
     const logout = () => {
@@ -90,10 +75,8 @@ export const AuthProvider = ({ children }) => {
         isLoading,
         isTrialActive,
         canUsePremium,
-        registrationDate, // Hozzáadva, hogy a ProfilePage is elérje
         login,
         logout,
-        updateUser, // Hozzáadva az új frissítő funkció
     };
 
     if (isLoading) {

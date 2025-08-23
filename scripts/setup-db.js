@@ -122,28 +122,21 @@ async function run() {
     await client.query(`CREATE INDEX IF NOT EXISTS idx_helparticles_category ON helparticles(category);`);
 
 
-console.log('`curriculums` tábla létrehozása...');
-await client.query(`
-  CREATE TABLE IF NOT EXISTS curriculums (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    slug TEXT NOT NULL UNIQUE,
-    title TEXT NOT NULL,
-    subject TEXT,
-    grade INTEGER,
-    category TEXT NOT NULL CHECK (category IN (
-          'free_lesson', 'free_tool',
-    'premium_course', 'premium_tool',
-    'lesson', 'practice',
-    'exam', 'workshop', 'premium_lesson',
-    'ai', 'hub_page'
-    )),
-    description TEXT,
-    is_published BOOLEAN NOT NULL DEFAULT true,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-  );
-`);
-
+    console.log('`curriculums` tábla létrehozása...');
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS curriculums (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        slug TEXT NOT NULL UNIQUE,
+        title TEXT NOT NULL,
+        subject TEXT,
+        grade INTEGER,
+        category TEXT NOT NULL CHECK (category IN ('free_lesson','free_tool','premium_course','premium_tool')),
+        description TEXT,
+        is_published BOOLEAN NOT NULL DEFAULT true,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
     await client.query(`CREATE INDEX IF NOT EXISTS idx_curriculums_pub_cat_sub_grade ON curriculums(is_published, category, subject, grade);`);
     
     console.log('`quizquestions` tábla létrehozása...');

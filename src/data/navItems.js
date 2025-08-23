@@ -1,21 +1,26 @@
 export const NAV_ITEMS = [
-
+  { 
+    id: "free-lessons", 
+    label: "Ingyenes Leckék", 
+    path: "/#ingyenes-leckek", 
+    roles: ["guest", "student", "teacher"] 
+  },
   { 
     id: "math",
     label: "Matematika",
-    path: "/tananyag/interaktav-matematika-gyljtemany", 
+    path: "/targy/matematika", 
     roles: ["guest", "student", "teacher"] 
   },
   { 
     id: "physics",
     label: "Fizika",
-    path: "/tananyag/interaktav-fizika-gyljtemany",
+    path: "/targy/fizika",
     roles: ["guest", "student", "teacher"] 
   },
   { 
     id: "ai",
     label: "Mesterséges Intelligencia",
-    path: "/tananyag/interaktav-aimi1-gyljtemany",
+    path: "/targy/ai",
     roles: ["guest", "student", "teacher"] 
   },
   { 

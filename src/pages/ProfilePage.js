@@ -1,3 +1,5 @@
+// src/pages/ProfilePage.js
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './ProfilePage.module.css';
@@ -5,56 +7,45 @@ import styles from './ProfilePage.module.css';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const ProfilePage = () => {
-    const { user, token, logout, isTrialActive, registrationDate, updateUser } = useAuth();
-    
-    const [profileData, setProfileData] = useState(user);
+    const { token, logout } = useAuth();
+    const [profileData, setProfileData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
 
+    // Adatok szerkesztéséhez szükséges állapotok
     const [isEditingUsername, setIsEditingUsername] = useState(false);
-    const [newUsername, setNewUsername] = useState(user ? user.username : '');
+    const [newUsername, setNewUsername] = useState('');
     
+    // Jelszócsere állapotok
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
-    const [isCopied, setIsCopied] = useState(false);
+
 
     const fetchProfile = useCallback(async () => {
-        if (!token) {
-            setIsLoading(false);
-            return;
-        }
+        if (!token) return;
+        setIsLoading(true);
         try {
             const response = await fetch(`${API_URL}/api/profile`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.message || 'Hiba a profil betöltésekor.');
-            
-            updateUser(data.user);
-
+            setProfileData(data.user);
+            setNewUsername(data.user.username);
         } catch (err) {
             setError(err.message);
         } finally {
             setIsLoading(false);
         }
-    }, [token, updateUser]);
+    }, [token]);
 
     useEffect(() => {
-        if(!user) {
-            setIsLoading(false);
-        } else {
-            fetchProfile();
-        }
+        fetchProfile();
     }, [fetchProfile]);
     
-    useEffect(() => {
-        setProfileData(user);
-        setNewUsername(user ? user.username : '');
-    }, [user]);
-
-    const handleUpdateUsername = async () => {
+    const handleUpdateProfile = async (updateData) => {
         setMessage('');
         setError('');
         try {
@@ -64,15 +55,14 @@ const ProfilePage = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ username: newUsername })
+                body: JSON.stringify(updateData)
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.message);
             
             setMessage(data.message);
-            updateUser(data.user);
-            
-            setIsEditingUsername(false);
+            setProfileData(data.user); // Frissítjük a megjelenített adatokat
+            setIsEditingUsername(false); // Szerkesztési mód kikapcsolása
         } catch (err) {
             setError(err.message);
         }
@@ -100,115 +90,28 @@ const ProfilePage = () => {
             const data = await response.json();
             if (!response.ok) throw new Error(data.message);
 
-            setMessage(data.message + " Kijelentkeztetés 2 másodperc múlva...");
-            setOldPassword('');
-            setNewPassword('');
-            setConfirmNewPassword('');
+            setMessage(data.message);
+            // Sikeres jelszócsere után érdemes lehet kijelentkeztetni a felhasználót
             setTimeout(() => logout(), 2000);
         } catch (err) {
             setError(err.message);
         }
     };
-    
-    const handleCopySuccess = () => {
-        setMessage("Ajánlókód a vágólapra másolva!");
-        setIsCopied(true);
-        setTimeout(() => {
-            setMessage('');
-            setIsCopied(false);
-        }, 3000);
-    };
-
-    const handleCopyError = () => {
-        setError('A másolás nem sikerült. Kérjük, jelölje ki és másolja a kódot manuálisan.');
-        setTimeout(() => setError(''), 3000);
-    };
 
     const copyToClipboard = () => {
-        const codeToCopy = user?.referral_code;
-
-        if (!codeToCopy) {
-            setError("Nincs másolható kód.");
-            setTimeout(() => setError(''), 3000);
-            return;
-        }
-
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(codeToCopy)
-                .then(handleCopySuccess)
-                .catch(err => {
-                    console.error('Modern másolás sikertelen, fallback indul:', err);
-                    fallbackCopyTextToClipboard(codeToCopy);
-                });
-        } else {
-            fallbackCopyTextToClipboard(codeToCopy);
-        }
+        navigator.clipboard.writeText(profileData.referral_code);
+        setMessage("Ajánlókód a vágólapra másolva!");
+        setTimeout(() => setMessage(''), 2000);
     };
-
-    const fallbackCopyTextToClipboard = (text) => {
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        
-        textArea.style.position = 'fixed';
-        textArea.style.top = 0;
-        textArea.style.left = 0;
-        textArea.style.width = '2em';
-        textArea.style.height = '2em';
-        textArea.style.padding = 0;
-        textArea.style.border = 'none';
-        textArea.style.outline = 'none';
-        textArea.style.boxShadow = 'none';
-        textArea.style.background = 'transparent';
-
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-
-        try {
-            const successful = document.execCommand('copy');
-            if(successful) {
-                handleCopySuccess();
-            } else {
-                 handleCopyError();
-            }
-        } catch (err) {
-            console.error('Fallback másolás sikertelen:', err);
-            handleCopyError();
-        }
-
-        document.body.removeChild(textArea);
+    
+    const handleAccessibilityToggle = (e) => {
+        const newMode = e.target.checked ? 'accessible' : 'default';
+        handleUpdateProfile({ accessibility_mode: newMode });
     };
-
-
-    const getTrialInfo = (regDate) => {
-        if (!regDate) return null;
-        
-        const expirationDate = new Date(new Date(regDate).getTime() + 30 * 24 * 60 * 60 * 1000);
-        const now = new Date();
-        const timeLeft = expirationDate.getTime() - now.getTime();
-        const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
-
-        return {
-            registration: new Date(regDate).toLocaleDateString('hu-HU'),
-            expiration: expirationDate.toLocaleDateString('hu-HU'),
-            daysLeft: daysLeft > 0 ? daysLeft : 0
-        };
-    };
-
-    const trialInfo = registrationDate ? getTrialInfo(registrationDate) : null;
 
     if (isLoading) return <div className={styles.container}><p>Profil betöltése...</p></div>;
-
-    if (!user) {
-        return (
-            <div className={styles.container}>
-                <div className={styles.profileBox}>
-                    <h1>Profil</h1>
-                    <p>A profil oldal megtekintéséhez kérjük, jelentkezz be.</p>
-                </div>
-            </div>
-        );
-    }
+    if (error && !profileData) return <div className={styles.container}><p className={styles.errorMessage}>{error}</p></div>;
+    if (!profileData) return null;
 
     return (
         <div className={styles.container}>
@@ -224,30 +127,27 @@ const ProfilePage = () => {
                         {isEditingUsername ? (
                             <div className={styles.editView}>
                                 <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} />
-                                <button onClick={handleUpdateUsername}>Mentés</button>
-                                <button className={styles.cancelButton} onClick={() => setIsEditingUsername(false)}>Mégse</button>
+                                <button onClick={() => handleUpdateProfile({ username: newUsername })}>Mentés</button>
+                                <button onClick={() => { setIsEditingUsername(false); setNewUsername(profileData.username); }}>Mégse</button>
                             </div>
                         ) : (
                            <div className={styles.valueView}>
-                                <span className={styles.value}>{user.username}</span>
+                                <span className={styles.value}>{profileData.username}</span>
                                 <button onClick={() => setIsEditingUsername(true)}>Szerkeszt</button>
                            </div>
                         )}
                     </div>
                     <div className={styles.infoItem}>
                         <span className={styles.label}>E-mail cím:</span>
-                        <span className={styles.value}>{user.email}</span>
+                        <span className={styles.value}>{profileData.email}</span>
                     </div>
-                    <div className={styles.infoItem}>
-                        <span className={styles.label}>Szerepkör:</span>
-                        <span className={styles.value}>{user.role === 'teacher' ? 'Tanár' : 'Diák'}</span>
+                     <div className={styles.infoItem}>
+                        <span className={styles.label}>Látássérült mód:</span>
+                        <label className={styles.switch}>
+                            <input type="checkbox" checked={profileData.accessibility_mode === 'accessible'} onChange={handleAccessibilityToggle} />
+                            <span className={styles.slider}></span>
+                        </label>
                     </div>
-                    {trialInfo && (
-                        <div className={styles.infoItem}>
-                            <span className={styles.label}>Regisztráció dátuma:</span>
-                            <span className={styles.value}>{trialInfo.registration}</span>
-                        </div>
-                    )}
                 </div>
 
                 <hr className={styles.divider} />
@@ -261,34 +161,29 @@ const ProfilePage = () => {
                         <button type="submit">Jelszó Módosítása</button>
                     </form>
                 </div>
-
-                <hr className={styles.divider} />
                 
-                {user.referral_code && (
+                <hr className={styles.divider} />
+
+                {profileData.role !== 'teacher' && (
                     <div className={styles.referralSection}>
                         <h2>Oszd meg és nyerj!</h2>
                         <p>Oszd meg az alábbi egyedi ajánlókódodat barátaiddal! Minden 5., a te kódoddal regisztrált és előfizető felhasználó után <strong>1 hónap prémium hozzáférést</strong> kapsz ajándékba!</p>
                         <div className={styles.referralCodeBox}>
-                            <span>{user.referral_code}</span>
-                            <button onClick={copyToClipboard} disabled={isCopied}>
-                                {isCopied ? 'Másolva' : 'Másolás'}
-                            </button>
+                            <span>{profileData.referral_code}</span>
+                            <button onClick={copyToClipboard}>Másolás</button>
                         </div>
                     </div>
                 )}
 
-
                 <div className={styles.subscriptionStatus}>
                     <h3>Előfizetési Státusz</h3>
-                    {isTrialActive && trialInfo ? (
-                        <p>
-                            Jelenleg az ingyenes, 30 napos próbaidőszakodat használod.
-                            <br />
-                            <strong>Lejárat: {trialInfo.expiration} ({trialInfo.daysLeft} nap van hátra).</strong>
-                        </p>
-                    ) : (
-                        <p>Jelenleg nincs aktív előfizetésed vagy a próbaidőszak lejárt.</p>
-                    )}
+                    <p>
+                        {profileData.is_permanent_free ? "Örökös prémium hozzáférésed van." : 
+                         profileData.subscription_status === 'active' ? `Aktív előfizetés. Lejárat: ${new Date(profileData.subscription_expires_at).toLocaleDateString()}` :
+                         profileData.subscription_status === 'free_trial' ? `Ingyenes próbaidőszak. Lejárat: ${new Date(profileData.subscription_expires_at).toLocaleDateString()}` :
+                         "Jelenleg nincs aktív előfizetésed."
+                        }
+                    </p>
                 </div>
             </div>
         </div>

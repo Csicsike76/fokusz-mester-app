@@ -1,82 +1,68 @@
 @echo off
-title Fokusz Mester - Teljes Rendszer Indito (Adatbazissal)
+chcp 65001 >nul
+title Fókusz Mester - Teljes Rendszer Indító
 
 echo.
 echo ======================================================
-echo Fokusz Mester - Fejlesztoi Kornyezet Indito
+echo Fókusz Mester - Fejlesztői Környezet Indító
 echo ======================================================
-echo.
-
-echo [1/4] Gyokerkonyvtar fuggosegeinek telepitese (a scriptek futtatasahoz)...
-call npm install
-if %errorlevel% neq 0 (
-    echo [HIBA] Hiba tortent a gyoker fuggosegek telepitese soran!
-    pause
-    exit /b 1
-)
-echo [OK] Gyoker fuggosegek rendben.
 echo.
 
 :SETUP_CHOICE
-choice /C IN /M "Szukseges az adatbazis teljes ujraepitese (minden adat torlodik)? [I/N]"
-if errorlevel 2 goto CHECK_DEPS
-if errorlevel 1 goto SETUP_DB
+REM Megkérdezzük a felhasználót, hogy szükség van-e tiszta telepítésre.
+CHOICE /C IN /M "Szükséges az adatbázis teljes újraépítése (minden adat törlődik)? [I/N]"
+IF ERRORLEVEL 2 GOTO CHECK_DEPS
+IF ERRORLEVEL 1 GOTO SETUP_DB
 
 :SETUP_DB
 echo.
-echo [INFO] Adatbazis teljes torlese es ujraepitese a 'setup-db.js' alapjan...
+echo [INFO] Adatbázis teljes törlése és újraépítése a 'setup-db.js' alapján...
 node scripts/setup-db.js
 if %errorlevel% neq 0 (
-    echo [HIBA] Hiba tortent a 'setup-db.js' futtatasa soran!
+    echo [HIBA] Hiba történt a 'setup-db.js' futtatása során!
     pause
     exit /b 1
 )
-echo [OK] Alap tablak sikeresen letrehozva.
+echo [OK] Alap táblák sikeresen létrehozva.
 echo.
-goto CHECK_DEPS
+GOTO CHECK_DEPS
 
 :CHECK_DEPS
-echo [2/4] Alkalmazas fuggosegeinek ellenorzese...
+echo [1/3] Függőségek ellenőrzése...
 if not exist "backend\node_modules" (
-    echo [INFO] Csomagok telepitese a backendhez...
+    echo [INFO] Csomagok telepítése a backendhez...
     pushd backend
     call npm install
     popd
 )
-if not exist "frontend\node_modules" (
-    echo [INFO] Figyelem: A 'frontend' mappa nem letezik vagy nem 'frontend' a neve. A frontend fuggosegeket kezzel kell telepiteni.
-) else (
-    if not exist "frontend\node_modules" (
-      echo [INFO] Csomagok telepitese a frontendhez...
-      pushd frontend
-      call npm install
-      popd
-    )
+if not exist "node_modules" (
+    echo [INFO] Csomagok telepítése a frontendhez...
+    call npm install
 )
-echo [OK] Alkalmazas fuggosegek rendben.
+echo [OK] Függőségek rendben.
 echo.
 
 :RUN_MIGRATIONS
-echo [3/4] Adatbazis sema frissitese (migrate:up)...
+echo [2/3] Adatbázis séma frissítése (migrate:up)...
 call npm run migrate:up
 if %errorlevel% neq 0 (
-    echo [HIBA] Hiba tortent az adatbazis migralasa soran! Ellenorizd a DATABASE_URL-t.
+    echo [HIBA] Hiba történt az adatbázis migrálása során! Ellenőrizd a DATABASE_URL-t.
     pause
     exit /b 1
 )
-echo [OK] Adatbazis sema naprakesz.
+echo [OK] Adatbázis séma naprakész.
 echo.
 
 :START_SERVERS
-echo [4/4] Szerverek inditasa kulon ablakokban...
-echo Inditom a Backend szervert (localhost:3001)...
-start "Fokusz Mester - BACKEND" cmd /k "cd backend && npm run dev"
+echo [3/3] Szerverek indítása külön ablakokban...
+echo Indítom a Backend szervert (localhost:3001)...
+start "Fókusz Mester - BACKEND" cmd /k "cd backend && npm run dev"
 
-echo Inditom a Frontend fejlesztoi szervert (localhost:3000)...
-start "Fokusz Mester - FRONTEND" cmd /k "npm start"
+echo Indítom a Frontend fejlesztői szervert (localhost:3000)...
+start "Fókusz Mester - FRONTEND" cmd /k "npm start"
 
 echo.
 echo [KESZ] A folyamatok elindultak.
-echo Ezt az ablakot most mar bezarhatod.
+echo Ezt az ablakot most már bezárhatod.
 echo.
 pause

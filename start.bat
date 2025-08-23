@@ -1,35 +1,38 @@
 @echo off
-title Fokusz Mester - Teljes Rendszer Indito
+chcp 65001 >nul
+title Fókusz Mester - Teljes Rendszer Indító
 
 echo.
 echo ======================================================
-echo Fokusz Mester - Fejlesztoi Kornyezet Indito
+echo Fókusz Mester - Fejlesztői Környezet Indító
 echo ======================================================
 echo.
 
-echo [1/2] Fuggosegek ellenorzese...
+:CHECK_DEPS
+echo [1/2] Függőségek ellenőrzése...
 if not exist "backend\node_modules" (
-    echo [INFO] Csomagok telepitese a backendhez...
+    echo [INFO] Csomagok telepítése a backendhez...
     pushd backend
     call npm install
     popd
 )
 if not exist "node_modules" (
-    echo [INFO] Csomagok telepitese a frontendhez...
+    echo [INFO] Csomagok telepítése a frontendhez...
     call npm install
 )
-echo [OK] Fuggosegek rendben.
+echo [OK] Függőségek rendben.
 echo.
 
-echo [2/2] Szerverek inditasa kulon ablakokban...
-echo Inditom a Backend szervert (localhost:3001)...
-start "Fokusz Mester - BACKEND" cmd /k "cd backend && npm run dev"
+:START_SERVERS
+echo [2/2] Szerverek indítása külön ablakokban...
+echo Indítom a Backend szervert (localhost:3001)...
+start "Fókusz Mester - BACKEND" cmd /k "cd backend && npm run dev"
 
-echo Inditom a Frontend fejlesztoi szervert (localhost:3000)...
-start "Fokusz Mester - FRONTEND" cmd /k "npm start"
+echo Indítom a Frontend fejlesztői szervert (localhost:3000)...
+start "Fókusz Mester - FRONTEND" cmd /k "npm start"
 
 echo.
 echo [KESZ] A folyamatok elindultak.
-echo Ezt az ablakot most mar bezarhatod.
+echo Ezt az ablakot most már bezárhatod.
 echo.
 pause

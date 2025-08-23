@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero/Hero';
 import styles from './HomePage.module.css';
-import { useAuth } from '../context/AuthContext';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
@@ -52,7 +51,6 @@ const HomePage = () => {
   const [allCurriculumsMap, setAllCurriculumsMap] = useState(new Map());
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const { canUsePremium } = useAuth();
 
   useEffect(() => {
     const fetchAllCurriculums = async () => {
@@ -86,28 +84,18 @@ const HomePage = () => {
   const renderCard = (itemConfig, typeClass) => {
     const dynamicData = allCurriculumsMap.get(itemConfig.slug);
     if (!dynamicData) return null;
-    
-    const isPremium = typeClass.startsWith('premium');
-    const userHasAccess = canUsePremium;
-    
     const title = itemConfig.titleOverride || dynamicData.title;
     const description = itemConfig.description || dynamicData.description;
-    
-    const linkTarget = (isPremium && !userHasAccess) ? '/bejelentkezes' : `/tananyag/${itemConfig.slug.replace(/_/g, '-')}`;
-
+    const linkTarget = `/tananyag/${itemConfig.slug.replace(/_/g, '-')}`;
     const buttonTextMap = {
       freeLesson: 'Ingyenes Lecke →',
       freeTool: 'Eszköz Indítása →',
       premiumCourse: 'Részletek →',
       premiumTool: 'Indítás →'
     };
-    
     return (
       <div key={itemConfig.slug} className={`${styles.card} ${styles[typeClass]}`}>
-        <h4>
-          {isPremium && !userHasAccess && <span className={styles.lockIcon}>🔒 </span>}
-          {itemConfig.grade ? `${itemConfig.grade} - ` : ''}{title}
-        </h4>
+        <h4>{itemConfig.grade ? `${itemConfig.grade} - ` : ''}{title}</h4>
         {description && <p>{description}</p>}
         <Link to={linkTarget} className={`${styles.btn} ${styles[typeClass + 'Btn']}`}>
           {buttonTextMap[typeClass] || 'Tovább →'}
@@ -129,14 +117,17 @@ const HomePage = () => {
         <section id="miert-fontos" className={styles.section}>
           <div className={styles.featureGrid}>
             <div className={styles.featureCard}>
+              {/* Az ikon hívás eltávolítva */}
               <h3>Gondolkodás, Nem Magolás</h3>
               <p>Az MI-tananyagok problémamegoldó gondolkodást tanítanak, ahelyett, hogy csak adatokat memorizálnának.</p>
             </div>
             <div className={styles.featureCard}>
+              {/* Az ikon hívás eltávolítva */}
               <h3>A Jövő Kompetenciája</h3>
               <p>Az MI hamarosan alapvető készség lesz. Aki most megismeri, behozhatatlan előnyre tesz szert a jövő munkaerőpiacán.</p>
             </div>
             <div className={styles.featureCard}>
+              {/* Az ikon hívás eltávolítva */}
               <h3>Kreativitás a Gyakorlatban</h3>
               <p>A tanulás nálunk azonnali, kézzelfogható alkotássá válik, legyen az képalkotás vagy játéktervezés.</p>
             </div>
