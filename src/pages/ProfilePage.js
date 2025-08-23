@@ -7,7 +7,7 @@ const API_URL = process.env.NODE_ENV === 'production'
     : 'http://localhost:3001';
 
 const ProfilePage = () => {
-    const { user, token, logout, login } = useAuth(); // login hozzáadva
+    const { user, token, logout, login, isTrialActive } = useAuth();
     const [profileData, setProfileData] = useState(user);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
@@ -66,7 +66,6 @@ const ProfilePage = () => {
             setMessage(data.message);
             setProfileData(data.user);
             
-            // Frissítjük a globális állapotot is
             login(data.user, token);
             
             setIsEditingUsername(false);
@@ -115,6 +114,24 @@ const ProfilePage = () => {
         }
     };
 
+    const getTrialInfo = (registrationDate) => {
+        if (!registrationDate) return null;
+        
+        const regDate = new Date(registrationDate);
+        const expirationDate = new Date(regDate.getTime() + 30 * 24 * 60 * 60 * 1000);
+        const now = new Date();
+        const timeLeft = expirationDate.getTime() - now.getTime();
+        const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
+
+        return {
+            registration: regDate.toLocaleDateString('hu-HU'),
+            expiration: expirationDate.toLocaleDateString('hu-HU'),
+            daysLeft: daysLeft > 0 ? daysLeft : 0
+        };
+    };
+
+    const trialInfo = profileData ? getTrialInfo(profileData.created_at) : null;
+
     if (isLoading) return <div className={styles.container}><p>Profil betöltése...</p></div>;
 
     if (!profileData) {
@@ -160,6 +177,12 @@ const ProfilePage = () => {
                         <span className={styles.label}>Szerepkör:</span>
                         <span className={styles.value}>{profileData.role === 'teacher' ? 'Tanár' : 'Diák'}</span>
                     </div>
+                    {trialInfo && (
+                        <div className={styles.infoItem}>
+                            <span className={styles.label}>Regisztráció dátuma:</span>
+                            <span className={styles.value}>{trialInfo.registration}</span>
+                        </div>
+                    )}
                 </div>
 
                 <hr className={styles.divider} />
@@ -187,7 +210,15 @@ const ProfilePage = () => {
 
                 <div className={styles.subscriptionStatus}>
                     <h3>Előfizetési Státusz</h3>
-                    <p>Jelenleg az ingyenes, 30 napos próbaidőszakodat használod.</p>
+                    {isTrialActive && trialInfo ? (
+                        <p>
+                            Jelenleg az ingyenes, 30 napos próbaidőszakodat használod.
+                            <br />
+                            <strong>Lejárat: {trialInfo.expiration} ({trialInfo.daysLeft} nap van hátra).</strong>
+                        </p>
+                    ) : (
+                        <p>Jelenleg nincs aktív előfizetésed.</p>
+                    )}
                 </div>
             </div>
         </div>

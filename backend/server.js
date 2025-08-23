@@ -134,41 +134,61 @@ app.get('/api/help', async (req, res) => {
 });
 
 app.post('/api/register-teacher', async (req, res) => {
-  const { email, username, password, referral_code } = req.body;
+    const { email, username, password } = req.body;
 
-  if (!email || !username || !password) {
-    return res.status(400).json({ success: false, message: 'Minden mező kitöltése kötelező.' });
-  }
-
-  try {
-    const existingUser = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-    if (existingUser.rows.length > 0) {
-      return res.status(400).json({ success: false, message: 'E-mail már foglalt.' });
+    if (!email || !username || !password) {
+        return res.status(400).json({ success: false, message: 'Minden mező kitöltése kötelező.' });
     }
 
-    const password_hash = await bcrypt.hash(password, 10);
-    const newUser = await pool.query(
-      'INSERT INTO users (email, username, password_hash, role, referral_code, email_verified, created_at) VALUES ($1, $2, $3, $4, $5, $6, NOW()) RETURNING *',
-      [email, username, password_hash, 'teacher', referral_code || null, false]
-    );
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
 
-    const verify_token = require('crypto').randomBytes(32).toString('hex');
-    await pool.query(
-      'INSERT INTO teachers (user_id, is_approved, verify_token) VALUES ($1, $2, $3)',
-      [newUser.rows[0].id, false, verify_token]
-    );
+        const existingUser = await client.query('SELECT * FROM users WHERE email = $1', [email]);
+        if (existingUser.rows.length > 0) {
+            throw new Error('E-mail már foglalt.');
+        }
 
-    const verifyLink = `${process.env.FRONTEND_URL}/verify-teacher?token=${verify_token}`;
+        const password_hash = await bcrypt.hash(password, 10);
+        const emailVerificationToken = crypto.randomBytes(32).toString('hex');
+        const emailVerificationExpires = new Date(Date.now() + 24 * 3600000);
+        // JAVÍTVA: A tanárok is kapnak ajánlói kódot ezen a végponton
+        const referralCodeNew = `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
 
-    res.status(201).json({
-      success: true,
-      message: 'Regisztráció kész, a tanári fiók jóváhagyására e-mailt küldtünk.'
-    });
-  } catch (error) {
-    console.error('Tanári regisztráció hiba:', error);
-    res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
-  }
+        const newUserResult = await client.query(
+            'INSERT INTO users (email, username, password_hash, role, referral_code, email_verified, email_verification_token, email_verification_expires, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW()) RETURNING id',
+            [email, username, password_hash, 'teacher', referralCodeNew, false, emailVerificationToken, emailVerificationExpires]
+        );
+        const newUserId = newUserResult.rows[0].id;
+
+        const teacherVerifyToken = crypto.randomBytes(32).toString('hex');
+        await client.query(
+            'INSERT INTO teachers (user_id, is_approved, verify_token) VALUES ($1, $2, $3)',
+            [newUserId, false, teacherVerifyToken]
+        );
+        
+        const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${emailVerificationToken}`;
+        await transporter.sendMail({
+            from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+            to: email,
+            subject: 'Fiók megerősítése',
+            html: `<p>Kattints a linkre az e-mail címed megerősítéséhez: <a href="${verificationUrl}">Megerősítés</a></p><p>A fiókodat egy adminisztrátornak is jóvá kell hagynia, mielőtt bejelentkezhetnél.</p>`,
+        });
+
+        await client.query('COMMIT');
+        res.status(201).json({
+            success: true,
+            message: 'Regisztráció sikeres! Kérjük, ellenőrizd az e-mail fiókodat a megerősítéshez. A fiók jóváhagyás alatt áll.',
+        });
+    } catch (error) {
+        if(client) await client.query('ROLLBACK');
+        console.error('Tanári regisztráció hiba:', error);
+        res.status(400).json({ success: false, message: error.message || 'Szerverhiba történt.' });
+    } finally {
+        if (client) client.release();
+    }
 });
+
 
 app.post('/api/verify-teacher', async (req, res) => {
   const { token } = req.body;
@@ -304,8 +324,9 @@ app.post('/api/register', authLimiter, async (req, res) => {
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
     const verificationExpires = new Date(Date.now() + 24 * 3600000); // 24 óra
-    const referralCodeNew =
-      role === 'student' ? `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}` : null;
+    
+    // JAVÍTVA: A feltétel eltávolítva, minden felhasználó (diák és tanár is) kap ajánlói kódot.
+    const referralCodeNew = `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
 
     const insertUserQuery = `
       INSERT INTO users (username, email, password_hash, role, referral_code, email_verification_token, email_verification_expires, is_permanent_free, email_verified)
@@ -731,6 +752,9 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
     client.release();
   }
 });
+
+
+
 
 // VÉGLEGES JAVÍTÁS: Működő profil végpontok
 app.get('/api/profile', authenticateToken, async (req, res) => {
