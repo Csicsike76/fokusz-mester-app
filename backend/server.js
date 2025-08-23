@@ -15,7 +15,6 @@ const validator = require('validator');
 const { rateLimit, ipKeyGenerator } = require('express-rate-limit');
 const axios = require('axios');
 
-// VÉGLEGES JAVÍTÁS: A .env fájlt csak akkor töltjük be, ha nem az éles szerveren futunk.
 if (process.env.NODE_ENV !== 'production') {
   const tryPaths = [
     path.resolve(process.cwd(), '.env'),
@@ -25,8 +24,7 @@ if (process.env.NODE_ENV !== 'production') {
   let loaded = false;
   try {
     for (const p of tryPaths) {
-      const ok = require('fs').existsSync(p);
-      if (ok) {
+      if (require('fs').existsSync(p)) {
         require('dotenv').config({ path: p });
         loaded = true;
         break;
@@ -40,21 +38,9 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-const sslRequired = (() => {
-  const flag = String(process.env.DB_SSL || '').toLowerCase();
-  if (flag === 'true' || flag === '1') return true;
-  if (flag === 'false' || flag === '0') return false;
-
-  const url = String(process.env.DATABASE_URL || '');
-  if (/render\.com|heroku(app)?\.com|amazonaws\.com|azure|gcp|railway\.app/i.test(url)) return true;
-  if (/localhost|127\.0\.0\.1/.test(url) || url === '') return false;
-
-  return true;
-})();
-
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || undefined,
-  ssl: sslRequired ? { rejectUnauthorized: false } : false,
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
 });
 
 const mailPort = Number(process.env.MAIL_PORT || 587);
@@ -677,62 +663,39 @@ app.get('/api/curriculums', async (req, res) => {
   }
 });
 
-// ✅ Stabil /api/quiz/:slug — támogat `tananyag` és `help` mappákat is
 app.get('/api/quiz/:slug', async (req, res) => {
   try {
     const raw = req.params.slug || '';
-    const slug = raw.replace(/_/g, '-'); // egységesítés
-    
-    // Két lehetséges hely, ahol a fájl lehet
-    const tananyagDir = path.resolve(__dirname, 'data', 'tananyag');
-    const helpDir = path.resolve(__dirname, 'data', 'help');
-    
-    // Létrehozzuk a lehetséges fájlútvonalakat (.json és .js kiterjesztéssel is)
-    const possiblePaths = [
-      path.join(tananyagDir, `${slug}.json`),
-      path.join(tananyagDir, `${slug}.js`),
-      path.join(helpDir, `${slug}.json`),
-      path.join(helpDir, `${slug}.js`)
-    ];
-
-    let foundPath = null;
-    for (const p of possiblePaths) {
-        if (fsSync.existsSync(p)) {
-            foundPath = p;
-            break;
-        }
-    }
-
-    if (!foundPath) {
+    const slug = raw.replace(/_/g, '-');
+    const baseDir = path.resolve(__dirname, 'data', 'tananyag');
+    const jsonPath = path.join(baseDir, `${slug}.json`);
+    const jsPath   = path.join(baseDir, `${slug}.js`);
+    let data;
+    if (fsSync.existsSync(jsonPath)) {
+      const text = await fsp.readFile(jsonPath, 'utf8');
+      data = JSON.parse(text);
+      console.log(`📄 Betöltve JSON: ${jsonPath}`);
+    } else if (fsSync.existsSync(jsPath)) {
+      delete require.cache[jsPath];
+      const mod = require(jsPath);
+      data = (mod && mod.default) ? mod.default : mod;
+      console.log(`🧩 Betöltve JS modul: ${jsPath}`);
+    } else {
       return res.status(404).json({
         success: false,
-        message: `Nem található a tartalom: ${slug} sem a 'tananyag', sem a 'help' mappában.`,
+        message: `Nem található a lecke: ${slug}.json vagy ${slug}.js a ${baseDir} mappában.`,
       });
     }
-
-    let data;
-    if (foundPath.endsWith('.json')) {
-      // .json -> szöveg -> JSON.parse
-      const text = await fsp.readFile(foundPath, 'utf8');
-      data = JSON.parse(text);
-      console.log(`📄 Betöltve JSON: ${foundPath}`);
-    } else { // .js
-      // .js -> require (már objektumot ad vissza, NEM parse-oljuk újra)
-      delete require.cache[foundPath]; // biztos ami biztos
-      const mod = require(foundPath);
-      data = (mod && mod.default) ? mod.default : mod;
-      console.log(`🧩 Betöltve JS modul: ${foundPath}`);
-    }
-
-    // Védőháló: ha véletlenül string került ide, és úgy tűnik JSON
     if (typeof data === 'string') {
-      try { data = JSON.parse(data); } catch { /* hagyjuk stringként, ha nem JSON */ }
+      try {
+        data = JSON.parse(data);
+      } catch {
+      }
     }
-
     return res.json({ success: true, data });
   } catch (err) {
     console.error(`❌ Hiba a(z) /api/quiz/${req.params.slug} feldolgozásakor:`, err);
-    return res.status(500).json({ success: false, message: 'Szerverhiba történt a tartalom betöltésekor.' });
+    return res.status(500).json({ success: false, message: 'Szerverhiba történt a lecke betöltésekor.' });
   }
 });
 
@@ -755,6 +718,59 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
     client.release();
   }
 });
+
+// Kiegészítés a Profil oldalhoz
+app.get('/api/profile', authenticateToken, async (req, res) => {
+    try {
+        const { userId } = req.user;
+        const result = await pool.query('SELECT username, email, role, referral_code, accessibility_mode, subscription_status, subscription_expires_at, is_permanent_free FROM users WHERE id = $1', [userId]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
+        }
+        res.status(200).json({ success: true, user: result.rows[0] });
+    } catch (error) {
+        console.error('Profil lekérdezési hiba:', error);
+        res.status(500).json({ success: false, message: 'Szerverhiba a profiladatok lekérésekor.' });
+    }
+});
+
+app.put('/api/profile', authenticateToken, async (req, res) => {
+    const { userId } = req.user;
+    const { username, accessibility_mode } = req.body;
+    try {
+        if (username) {
+            await pool.query('UPDATE users SET username = $1 WHERE id = $2', [username, userId]);
+        }
+        if (accessibility_mode) {
+            await pool.query('UPDATE users SET accessibility_mode = $1 WHERE id = $2', [accessibility_mode, userId]);
+        }
+        const updatedUser = await pool.query('SELECT username, email, role, referral_code, accessibility_mode, subscription_status, subscription_expires_at, is_permanent_free FROM users WHERE id = $1', [userId]);
+        res.status(200).json({ success: true, message: 'Profil sikeresen frissítve.', user: updatedUser.rows[0] });
+    } catch (error) {
+        console.error('Profil frissítési hiba:', error);
+        res.status(500).json({ success: false, message: 'Szerverhiba a profil frissítése során.' });
+    }
+});
+
+app.post('/api/profile/change-password', authenticateToken, async (req, res) => {
+    const { userId } = req.user;
+    const { oldPassword, newPassword } = req.body;
+    try {
+        const userResult = await pool.query('SELECT password_hash FROM users WHERE id = $1', [userId]);
+        const user = userResult.rows[0];
+        const isPasswordCorrect = await bcrypt.compare(oldPassword, user.password_hash);
+        if (!isPasswordCorrect) {
+            return res.status(401).json({ success: false, message: 'A régi jelszó hibás.' });
+        }
+        const newPasswordHash = await bcrypt.hash(newPassword, 10);
+        await pool.query('UPDATE users SET password_hash = $1 WHERE id = $2', [newPasswordHash, userId]);
+        res.status(200).json({ success: true, message: 'Jelszó sikeresen módosítva.' });
+    } catch (error) {
+        console.error('Jelszócsere hiba:', error);
+        res.status(500).json({ success: false, message: 'Szerverhiba a jelszócsere során.' });
+    }
+});
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
