@@ -24,7 +24,8 @@ if (process.env.NODE_ENV !== 'production') {
   let loaded = false;
   try {
     for (const p of tryPaths) {
-      if (require('fs').existsSync(p)) {
+      const ok = require('fs').existsSync(p);
+      if (ok) {
         require('dotenv').config({ path: p });
         loaded = true;
         break;
@@ -38,9 +39,21 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
+const sslRequired = (() => {
+  const flag = String(process.env.DB_SSL || '').toLowerCase();
+  if (flag === 'true' || flag === '1') return true;
+  if (flag === 'false' || flag === '0') return false;
+
+  const url = String(process.env.DATABASE_URL || '');
+  if (/render\.com|heroku(app)?\.com|amazonaws\.com|azure|gcp|railway\.app/i.test(url)) return true;
+  if (/localhost|127\.0\.0\.1/.test(url) || url === '') return false;
+
+  return true;
+})();
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
+  connectionString: process.env.DATABASE_URL || undefined,
+  ssl: sslRequired ? { rejectUnauthorized: false } : false,
 });
 
 const mailPort = Number(process.env.MAIL_PORT || 587);
@@ -719,11 +732,11 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
   }
 });
 
-// Kiegészítés a Profil oldalhoz
+// VÉGLEGES JAVÍTÁS: Működő profil végpontok
 app.get('/api/profile', authenticateToken, async (req, res) => {
     try {
         const { userId } = req.user;
-        const result = await pool.query('SELECT username, email, role, referral_code, accessibility_mode, subscription_status, subscription_expires_at, is_permanent_free FROM users WHERE id = $1', [userId]);
+        const result = await pool.query('SELECT id, username, email, role, referral_code, created_at FROM users WHERE id = $1', [userId]);
         if (result.rows.length === 0) {
             return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
         }
@@ -736,16 +749,13 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
 
 app.put('/api/profile', authenticateToken, async (req, res) => {
     const { userId } = req.user;
-    const { username, accessibility_mode } = req.body;
+    const { username } = req.body;
     try {
-        if (username) {
-            await pool.query('UPDATE users SET username = $1 WHERE id = $2', [username, userId]);
+        if (!username) {
+            return res.status(400).json({ success: false, message: 'A felhasználónév nem lehet üres.' });
         }
-        if (accessibility_mode) {
-            await pool.query('UPDATE users SET accessibility_mode = $1 WHERE id = $2', [accessibility_mode, userId]);
-        }
-        const updatedUser = await pool.query('SELECT username, email, role, referral_code, accessibility_mode, subscription_status, subscription_expires_at, is_permanent_free FROM users WHERE id = $1', [userId]);
-        res.status(200).json({ success: true, message: 'Profil sikeresen frissítve.', user: updatedUser.rows[0] });
+        const updatedUserResult = await pool.query('UPDATE users SET username = $1 WHERE id = $2 RETURNING id, username, email, role, referral_code, created_at', [username, userId]);
+        res.status(200).json({ success: true, message: 'Profil sikeresen frissítve.', user: updatedUserResult.rows[0] });
     } catch (error) {
         console.error('Profil frissítési hiba:', error);
         res.status(500).json({ success: false, message: 'Szerverhiba a profil frissítése során.' });
@@ -757,6 +767,9 @@ app.post('/api/profile/change-password', authenticateToken, async (req, res) => 
     const { oldPassword, newPassword } = req.body;
     try {
         const userResult = await pool.query('SELECT password_hash FROM users WHERE id = $1', [userId]);
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
+        }
         const user = userResult.rows[0];
         const isPasswordCorrect = await bcrypt.compare(oldPassword, user.password_hash);
         if (!isPasswordCorrect) {
