@@ -77,7 +77,6 @@ const authLimiter = rateLimit({
     success: false,
     message: 'Túl sok próbálkozás, kérjük, próbáld újra 15 perc múlva.',
   },
-  // VÉGLEGES JAVÍTÁS: A keyGenerator a hivatalos ipKeyGenerator segédfüggvényt használja
   keyGenerator: (req) => {
     const ipKey = ipKeyGenerator(req);
     const emailKey = (req.body && req.body.email) ? String(req.body.email).toLowerCase() : '';
