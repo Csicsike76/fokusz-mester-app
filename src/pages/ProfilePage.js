@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './ProfilePage.module.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_URL = process.env.REACT_APP_API_URL || '';
 
 const ProfilePage = () => {
     const { user, token, logout, isTrialActive, registrationDate, updateUser } = useAuth();
@@ -18,6 +18,7 @@ const ProfilePage = () => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
+
     const [isCopied, setIsCopied] = useState(false);
 
     const fetchProfile = useCallback(async () => {
@@ -29,9 +30,19 @@ const ProfilePage = () => {
             const response = await fetch(`${API_URL}/api/profile`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.message || 'Hiba a profil betöltésekor.');
+
+            if (!response.ok) {
+                 // Ha a válasz nem OK, megpróbáljuk JSON-ként olvasni a hibaüzenetet
+                try {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Hiba a profil betöltésekor.');
+                } catch (jsonError) {
+                    // Ha a válasz nem is érvényes JSON (pl. HTML hibaoldal), általános hibát dobunk
+                    throw new Error(`Szerverhiba (${response.status}). A válasz nem dolgozható fel.`);
+                }
+            }
             
+            const data = await response.json();
             updateUser(data.user);
 
         } catch (err) {
@@ -42,17 +53,20 @@ const ProfilePage = () => {
     }, [token, updateUser]);
 
     useEffect(() => {
-        if(!user) {
-            setIsLoading(false);
-        } else {
+        if(user) {
             fetchProfile();
+        } else {
+            setIsLoading(false);
         }
-    }, [fetchProfile]);
+    }, []); // Csak egyszer fusson le a komponens betöltődésekor
     
+    // VÉGLEGES JAVÍTÁS: Ez a hook csak akkor frissíti a nevet, ha NEM vagyunk szerkesztési módban.
     useEffect(() => {
-        setProfileData(user);
-        setNewUsername(user ? user.username : '');
-    }, [user]);
+        if (!isEditingUsername) {
+            setProfileData(user);
+            setNewUsername(user ? user.username : '');
+        }
+    }, [user, isEditingUsername]);
 
     const handleUpdateUsername = async () => {
         setMessage('');
@@ -70,9 +84,9 @@ const ProfilePage = () => {
             if (!response.ok) throw new Error(data.message);
             
             setMessage(data.message);
-            updateUser(data.user);
+            updateUser(data.user); // Frissíti a globális user állapotot
             
-            setIsEditingUsername(false);
+            setIsEditingUsername(false); // Kilép a szerkesztési módból
         } catch (err) {
             setError(err.message);
         }

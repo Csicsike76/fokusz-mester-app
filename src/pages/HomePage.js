@@ -4,7 +4,7 @@ import Hero from '../components/Hero/Hero';
 import styles from './HomePage.module.css';
 import { useAuth } from '../context/AuthContext';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_URL = process.env.REACT_APP_API_URL || '';
 
 const homePageLayout = {
   freeLessons: {
@@ -86,7 +86,7 @@ const HomePage = () => {
   const renderCard = (itemConfig, typeClass) => {
     const dynamicData = allCurriculumsMap.get(itemConfig.slug);
     if (!dynamicData) return null;
-    
+
     const isPremium = typeClass.startsWith('premium');
     const userHasAccess = canUsePremium;
     

@@ -486,6 +486,71 @@ app.post('/api/login', authLimiter, async (req, res) => {
   }
 });
 
+// PROFIL OLDAL VÉGPONTJAI
+app.get('/api/profile', authenticateToken, async (req, res) => {
+    try {
+        const userResult = await pool.query('SELECT id, username, email, role, referral_code, created_at FROM users WHERE id = $1', [req.user.userId]);
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
+        }
+        res.status(200).json({ success: true, user: userResult.rows[0] });
+    } catch (error) {
+        console.error("Profil lekérdezési hiba:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
+    }
+});
+
+app.put('/api/profile', authenticateToken, async (req, res) => {
+    const { username } = req.body;
+    if (!username) {
+        return res.status(400).json({ success: false, message: 'A felhasználónév nem lehet üres.' });
+    }
+    try {
+        const updateResult = await pool.query('UPDATE users SET username = $1 WHERE id = $2 RETURNING id, username, email, role, referral_code, created_at', [username, req.user.userId]);
+        if (updateResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
+        }
+        res.status(200).json({ success: true, message: 'Felhasználónév sikeresen frissítve.', user: updateResult.rows[0] });
+    } catch (error) {
+        console.error("Profil frissítési hiba:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
+    }
+});
+
+app.post('/api/profile/change-password', authenticateToken, async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+    if (!oldPassword || !newPassword) {
+        return res.status(400).json({ success: false, message: 'A régi és új jelszó megadása is kötelező.' });
+    }
+
+    try {
+        const userResult = await pool.query('SELECT password_hash FROM users WHERE id = $1', [req.user.userId]);
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
+        }
+        
+        const user = userResult.rows[0];
+        const isPasswordCorrect = await bcrypt.compare(oldPassword, user.password_hash);
+        if (!isPasswordCorrect) {
+            return res.status(401).json({ success: false, message: 'A régi jelszó helytelen.' });
+        }
+
+        const passwordOptions = { minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 };
+        if (!validator.isStrongPassword(newPassword, passwordOptions)) {
+            return res.status(400).json({ success: false, message: 'Az új jelszó túl gyenge.' });
+        }
+        
+        const newPasswordHash = await bcrypt.hash(newPassword, 10);
+        await pool.query('UPDATE users SET password_hash = $1 WHERE id = $2', [newPasswordHash, req.user.userId]);
+        
+        res.status(200).json({ success: true, message: 'Jelszó sikeresen módosítva.' });
+
+    } catch (error) {
+        console.error("Jelszócsere hiba:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt a jelszócsere során.' });
+    }
+});
+
 app.post('/api/forgot-password', authLimiter, async (req, res) => {
   const { email } = req.body;
   try {

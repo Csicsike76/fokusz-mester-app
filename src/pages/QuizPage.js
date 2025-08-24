@@ -8,7 +8,7 @@ import { useAuth } from '../context/AuthContext';
 import SingleChoiceQuestion from '../components/SingleChoiceQuestion/SingleChoiceQuestion';
 import WorkshopContent from '../components/WorkshopContent/WorkshopContent';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_URL = process.env.REACT_APP_API_URL || '';
 
 const QuizPage = () => {
     const { slug } = useParams();
