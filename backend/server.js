@@ -502,17 +502,39 @@ app.post('/api/login', authLimiter, async (req, res) => {
   }
 });
 
-// PROFIL OLDAL VÉGPONTJAI
 app.get('/api/profile', authenticateToken, async (req, res) => {
     try {
-        const userResult = await pool.query('SELECT id, username, email, role, referral_code, created_at FROM users WHERE id = $1', [req.user.userId]);
+        const userResult = await pool.query(
+            'SELECT id, username, email, role, referral_code, created_at FROM users WHERE id = $1', 
+            [req.user.userId]
+        );
         if (userResult.rows.length === 0) {
             return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
         }
-        res.status(200).json({ success: true, user: userResult.rows[0] });
+        const userProfile = userResult.rows[0];
+
+        const referralsResult = await pool.query(
+            `SELECT COUNT(*) 
+             FROM referrals r
+             JOIN users u_referred ON r.referred_user_id = u_referred.id
+             WHERE r.referrer_user_id = $1 AND u_referred.is_subscribed = true`,
+            [req.user.userId]
+        );
+        const successfulReferrals = parseInt(referralsResult.rows[0].count, 10);
+
+        const earnedRewards = Math.floor(successfulReferrals / 5);
+
+        userProfile.successful_referrals = successfulReferrals;
+        userProfile.earned_rewards = earnedRewards;
+        
+        // Temporarily adding these fields for frontend compatibility
+        userProfile.is_subscribed = userResult.rows[0].is_subscribed || false;
+        userProfile.subscription_end_date = userResult.rows[0].subscription_end_date || null;
+        
+        res.status(200).json({ success: true, user: userProfile });
     } catch (error) {
         console.error("Profil lekérdezési hiba:", error);
-        res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
+        res.status(500).json({ success: false, message: 'Szerverhiba történt a profil adatok lekérdezésekor.' });
     }
 });
 
@@ -700,7 +722,6 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
   }
 });
 
-// VÉGLEGES JAVÍTÁS: Visszaállított, stabil végpont a lapok tartalmának megjelenítéséhez
 app.get('/api/curriculums', async (req, res) => {
   try {
     const { rows } = await pool.query(`
@@ -759,7 +780,6 @@ app.get('/api/curriculums', async (req, res) => {
   }
 });
 
-// VÉGLEGES JAVÍTÁS: Új, dedikált és biztonságos végpont a kereséshez
 app.get('/api/search', authenticateTokenOptional, async (req, res) => {
   const searchTerm = (req.query.q || '').toString().trim();
 
@@ -779,7 +799,6 @@ app.get('/api/search', authenticateTokenOptional, async (req, res) => {
     `;
     const queryParams = [`%${searchTerm.toLowerCase()}%`];
 
-    // Ha a felhasználó nincs bejelentkezve, szűkítjük a keresést az ingyenes tartalmakra
     if (!req.user) {
       queryText += ` AND (category = 'free_lesson' OR category = 'free_tool')`;
     }
@@ -800,17 +819,14 @@ app.get('/api/search', authenticateTokenOptional, async (req, res) => {
 });
 
 
-// ✅ Stabil /api/quiz/:slug — támogat `tananyag` és `help` mappákat is
 app.get('/api/quiz/:slug', async (req, res) => {
   try {
     const raw = req.params.slug || '';
-    const slug = raw.replace(/_/g, '-'); // egységesítés
+    const slug = raw.replace(/_/g, '-');
     
-    // Két lehetséges hely, ahol a fájl lehet
     const tananyagDir = path.resolve(__dirname, 'data', 'tananyag');
     const helpDir = path.resolve(__dirname, 'data', 'help');
     
-    // Létrehozzuk a lehetséges fájlútvonalakat (.json és .js kiterjesztéssel is)
     const possiblePaths = [
       path.join(tananyagDir, `${slug}.json`),
       path.join(tananyagDir, `${slug}.js`),
@@ -835,21 +851,18 @@ app.get('/api/quiz/:slug', async (req, res) => {
 
     let data;
     if (foundPath.endsWith('.json')) {
-      // .json -> szöveg -> JSON.parse
       const text = await fsp.readFile(foundPath, 'utf8');
       data = JSON.parse(text);
       console.log(`📄 Betöltve JSON: ${foundPath}`);
-    } else { // .js
-      // .js -> require (már objektumot ad vissza, NEM parse-oljuk újra)
-      delete require.cache[foundPath]; // biztos ami biztos
+    } else {
+      delete require.cache[foundPath];
       const mod = require(foundPath);
       data = (mod && mod.default) ? mod.default : mod;
       console.log(`🧩 Betöltve JS modul: ${foundPath}`);
     }
 
-    // Védőháló: ha véletlenül string került ide, és úgy tűnik JSON
     if (typeof data === 'string') {
-      try { data = JSON.parse(data); } catch { /* hagyjuk stringként, ha nem JSON */ }
+      try { data = JSON.parse(data); } catch { }
     }
 
     return res.json({ success: true, data });

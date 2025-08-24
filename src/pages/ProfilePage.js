@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './ProfilePage.module.css';
+import { Link } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API_URL || '';
 
 const ProfilePage = () => {
-    const { user, token, logout, isTrialActive, registrationDate, updateUser } = useAuth();
+    const { user, token, logout, isTrialActive, registrationDate, updateUser, isSubscribed } = useAuth();
     
-    const [profileData, setProfileData] = useState(user);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
@@ -32,12 +32,10 @@ const ProfilePage = () => {
             });
 
             if (!response.ok) {
-                 // Ha a válasz nem OK, megpróbáljuk JSON-ként olvasni a hibaüzenetet
                 try {
                     const errorData = await response.json();
                     throw new Error(errorData.message || 'Hiba a profil betöltésekor.');
                 } catch (jsonError) {
-                    // Ha a válasz nem is érvényes JSON (pl. HTML hibaoldal), általános hibát dobunk
                     throw new Error(`Szerverhiba (${response.status}). A válasz nem dolgozható fel.`);
                 }
             }
@@ -58,12 +56,10 @@ const ProfilePage = () => {
         } else {
             setIsLoading(false);
         }
-    }, []); // Csak egyszer fusson le a komponens betöltődésekor
+    }, []);
     
-    // VÉGLEGES JAVÍTÁS: Ez a hook csak akkor frissíti a nevet, ha NEM vagyunk szerkesztési módban.
     useEffect(() => {
         if (!isEditingUsername) {
-            setProfileData(user);
             setNewUsername(user ? user.username : '');
         }
     }, [user, isEditingUsername]);
@@ -84,9 +80,9 @@ const ProfilePage = () => {
             if (!response.ok) throw new Error(data.message);
             
             setMessage(data.message);
-            updateUser(data.user); // Frissíti a globális user állapotot
+            updateUser(data.user);
             
-            setIsEditingUsername(false); // Kilép a szerkesztési módból
+            setIsEditingUsername(false);
         } catch (err) {
             setError(err.message);
         }
@@ -124,75 +120,18 @@ const ProfilePage = () => {
         }
     };
     
-    const handleCopySuccess = () => {
-        setMessage("Ajánlókód a vágólapra másolva!");
-        setIsCopied(true);
-        setTimeout(() => {
-            setMessage('');
-            setIsCopied(false);
-        }, 3000);
-    };
-
-    const handleCopyError = () => {
-        setError('A másolás nem sikerült. Kérjük, jelölje ki és másolja a kódot manuálisan.');
-        setTimeout(() => setError(''), 3000);
-    };
-
     const copyToClipboard = () => {
         const codeToCopy = user?.referral_code;
-
-        if (!codeToCopy) {
-            setError("Nincs másolható kód.");
-            setTimeout(() => setError(''), 3000);
-            return;
-        }
-
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(codeToCopy)
-                .then(handleCopySuccess)
-                .catch(err => {
-                    console.error('Modern másolás sikertelen, fallback indul:', err);
-                    fallbackCopyTextToClipboard(codeToCopy);
-                });
-        } else {
-            fallbackCopyTextToClipboard(codeToCopy);
-        }
+        if (!codeToCopy) return;
+        navigator.clipboard.writeText(codeToCopy).then(() => {
+            setIsCopied(true);
+            setMessage("Ajánlókód a vágólapra másolva!");
+            setTimeout(() => {
+                setIsCopied(false);
+                setMessage('');
+            }, 3000);
+        });
     };
-
-    const fallbackCopyTextToClipboard = (text) => {
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        
-        textArea.style.position = 'fixed';
-        textArea.style.top = 0;
-        textArea.style.left = 0;
-        textArea.style.width = '2em';
-        textArea.style.height = '2em';
-        textArea.style.padding = 0;
-        textArea.style.border = 'none';
-        textArea.style.outline = 'none';
-        textArea.style.boxShadow = 'none';
-        textArea.style.background = 'transparent';
-
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-
-        try {
-            const successful = document.execCommand('copy');
-            if(successful) {
-                handleCopySuccess();
-            } else {
-                 handleCopyError();
-            }
-        } catch (err) {
-            console.error('Fallback másolás sikertelen:', err);
-            handleCopyError();
-        }
-
-        document.body.removeChild(textArea);
-    };
-
 
     const getTrialInfo = (regDate) => {
         if (!regDate) return null;
@@ -203,7 +142,6 @@ const ProfilePage = () => {
         const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
 
         return {
-            registration: new Date(regDate).toLocaleDateString('hu-HU'),
             expiration: expirationDate.toLocaleDateString('hu-HU'),
             daysLeft: daysLeft > 0 ? daysLeft : 0
         };
@@ -211,8 +149,11 @@ const ProfilePage = () => {
 
     const trialInfo = registrationDate ? getTrialInfo(registrationDate) : null;
 
-    if (isLoading) return <div className={styles.container}><p>Profil betöltése...</p></div>;
+    // A progress barhoz szükséges számítás
+    const referralsForNextReward = user ? (user.successful_referrals || 0) % 5 : 0;
+    const progressPercentage = (referralsForNextReward / 5) * 100;
 
+    if (isLoading) return <div className={styles.container}><p>Profil betöltése...</p></div>;
     if (!user) {
         return (
             <div className={styles.container}>
@@ -231,6 +172,31 @@ const ProfilePage = () => {
                 
                 {message && <p className={styles.successMessage}>{message}</p>}
                 {error && <p className={styles.errorMessage}>{error}</p>}
+
+                <div className={styles.subscriptionSection}>
+                    <h3>Előfizetési Státusz</h3>
+                    {isSubscribed ? (
+                        <div className={styles.statusBox}>
+                            <p className={styles.statusActive}>Aktív Prémium Előfizetés</p>
+                            <p>Hozzáférésed érvényes: <strong>{user.subscription_end_date ? new Date(user.subscription_end_date).toLocaleDateString('hu-HU') : 'N/A'}</strong></p>
+                            <button className={styles.manageButton}>Előfizetés Kezelése</button>
+                        </div>
+                    ) : isTrialActive ? (
+                        <div className={styles.statusBox}>
+                            <p className={styles.statusTrial}>30 Napos Próbaidőszak</p>
+                            <p>Lejárat: <strong>{trialInfo.expiration} ({trialInfo.daysLeft} nap van hátra)</strong></p>
+                            <Link to="/elofizetes" className={styles.subscriptionCtaButton}>Prémium Előfizetés Most!</Link>
+                        </div>
+                    ) : (
+                        <div className={styles.statusBox}>
+                            <p className={styles.statusInactive}>Nincs Aktív Előfizetésed</p>
+                            <p>Szerezz hozzáférést az összes prémium tartalomhoz és eszközhöz.</p>
+                            <Link to="/elofizetes" className={styles.subscriptionCtaButton}>Tovább az Előfizetéshez</Link>
+                        </div>
+                    )}
+                </div>
+                
+                <hr className={styles.divider} />
 
                 <div className={styles.infoGrid}>
                     <div className={styles.infoItem}>
@@ -252,20 +218,10 @@ const ProfilePage = () => {
                         <span className={styles.label}>E-mail cím:</span>
                         <span className={styles.value}>{user.email}</span>
                     </div>
-                    <div className={styles.infoItem}>
-                        <span className={styles.label}>Szerepkör:</span>
-                        <span className={styles.value}>{user.role === 'teacher' ? 'Tanár' : 'Diák'}</span>
-                    </div>
-                    {trialInfo && (
-                        <div className={styles.infoItem}>
-                            <span className={styles.label}>Regisztráció dátuma:</span>
-                            <span className={styles.value}>{trialInfo.registration}</span>
-                        </div>
-                    )}
                 </div>
 
                 <hr className={styles.divider} />
-
+                
                 <div className={styles.section}>
                     <h2>Jelszócsere</h2>
                     <form onSubmit={handleChangePassword} className={styles.formGrid}>
@@ -276,34 +232,33 @@ const ProfilePage = () => {
                     </form>
                 </div>
 
-                <hr className={styles.divider} />
-                
                 {user.referral_code && (
-                    <div className={styles.referralSection}>
-                        <h2>Oszd meg és nyerj!</h2>
-                        <p>Oszd meg az alábbi egyedi ajánlókódodat barátaiddal! Minden 5., a te kódoddal regisztrált és előfizető felhasználó után <strong>1 hónap prémium hozzáférést</strong> kapsz ajándékba!</p>
-                        <div className={styles.referralCodeBox}>
-                            <span>{user.referral_code}</span>
-                            <button onClick={copyToClipboard} disabled={isCopied}>
-                                {isCopied ? 'Másolva' : 'Másolás'}
-                            </button>
+                    <>
+                        <hr className={styles.divider} />
+                        <div className={styles.referralSection}>
+                            <h2>Oszd meg és nyerj!</h2>
+                            <p>Oszd meg az alábbi egyedi ajánlókódodat barátaiddal! Minden 5., a te kódoddal regisztrált és előfizető felhasználó után <strong>1 hónap prémium hozzáférést</strong> kapsz ajándékba!</p>
+                            <div className={styles.referralCodeBox}>
+                                <span>{user.referral_code}</span>
+                                <button onClick={copyToClipboard} disabled={isCopied}>
+                                    {isCopied ? 'Másolva' : 'Másolás'}
+                                </button>
+                            </div>
+                            <div className={styles.statsBox}>
+                                <h4>Haladásod a következő jutalomig:</h4>
+                                <div className={styles.progressContainer}>
+                                    <div className={styles.progressBar} style={{ width: `${progressPercentage}%` }}></div>
+                                </div>
+                                <p className={styles.statsText}>
+                                    Sikeres ajánlások: <strong>{referralsForNextReward} / 5</strong>
+                                </p>
+                                <p className={styles.rewardsText}>
+                                    Eddig megszerzett jutalmak: <strong>{user.earned_rewards || 0} hónap</strong>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </>
                 )}
-
-
-                <div className={styles.subscriptionStatus}>
-                    <h3>Előfizetési Státusz</h3>
-                    {isTrialActive && trialInfo ? (
-                        <p>
-                            Jelenleg az ingyenes, 30 napos próbaidőszakodat használod.
-                            <br />
-                            <strong>Lejárat: {trialInfo.expiration} ({trialInfo.daysLeft} nap van hátra).</strong>
-                        </p>
-                    ) : (
-                        <p>Jelenleg nincs aktív előfizetésed vagy a próbaidőszak lejárt.</p>
-                    )}
-                </div>
             </div>
         </div>
     );
