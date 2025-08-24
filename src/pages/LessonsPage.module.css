@@ -1,7 +1,8 @@
 .container {
-    padding: 2rem;
+    padding: 2rem 1rem; /* Alapértelmezett, mobilbarát padding */
     color: white;
     max-width: 1200px;
+    width: 100%; /* Kitölti a rendelkezésre álló helyet a max-width-ig */
     margin: 2rem auto;
 }
 
@@ -26,7 +27,8 @@
 
 .cardGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    /* VÉGLEGES JAVÍTÁS: Automatikusan illeszkedő, reszponzív rács */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
 }
 
@@ -52,15 +54,15 @@
     flex-grow: 1; 
 }
 
-.pin {
-    color: #bdc3c7;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
-
 .lessonLink {
     color: #1abc9c;
     text-decoration: none;
     font-weight: bold;
     align-self: flex-start;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 2rem; /* Nagyobb képernyőn nagyobb margó */
+    }
 }

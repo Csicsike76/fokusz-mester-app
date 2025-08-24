@@ -15,6 +15,7 @@
   height: var(--navbar-height);
   display: flex;
   align-items: center;
+  justify-content: space-between; 
   gap: 24px;
   padding: 0 20px;
   background: var(--nav-bg);
@@ -23,12 +24,6 @@
   box-shadow: var(--shadow);
 }
 
-/* Bal szekció: logó + (opcionálisan) menü nyitó mobilon */
-.logo {
-  min-width: 180px;
-  display: flex;
-  align-items: center;
-}
 .logo a {
   color: var(--text);
   text-decoration: none;
@@ -41,13 +36,10 @@
   color: var(--link-hover);
 }
 
-/* Középső menü linkek */
 .navLinks {
   display: flex;
   align-items: center;
   gap: 18px;
-  flex: 1 1 auto;
-  min-width: 0;
 }
 .navLinks a {
   color: var(--text-dim);
@@ -56,6 +48,7 @@
   padding: 8px 10px;
   border-radius: 8px;
   transition: color .15s ease, background-color .15s ease;
+  white-space: nowrap;
 }
 .navLinks a:hover {
   color: var(--text);
@@ -65,96 +58,37 @@
   color: #ffd166 !important;
 }
 
-/* Jobb oldal: kereső + auth */
 .rightSide {
   display: flex;
   align-items: center;
   gap: 14px;
-  flex: 0 0 auto;
 }
 
-/* Kereső komponens tipikus wrapper-e (ha a Search saját stílt hoz, ez csak keret) */
-.searchWrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Auth linkek / UserMenu */
 .authLinks {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* ===== BAL OLDALI FIX DOKK A VEZÉRLŐKHÖZ =====
-   A Navbar-tól függetlenül a viewporthoz rögzítjük,
-   pont a navbar alá kerül (top: --navbar-height). */
-.controlsDock {
-  position: fixed;
-  left: 14px;
-  top: calc(var(--navbar-height) + 8px);
-  z-index: 901; /* a tartalom fölött, de a navbar alatt is jó */
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  pointer-events: none; /* hogy ne akadályozzon kattintást üres részen */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 1100;
 }
 
-/* A dokkban lévő valódi gombokra visszaengedjük az eseményeket */
-.controlsDock > * {
-  pointer-events: auto;
+/* VÉGLEGES JAVÍTÁS: Gombok és felhasználói üdvözlés olvashatósága */
+.welcomeUser {
+  color: #ecf0f1; /* Jól látható, enyhén tört fehér */
+  font-weight: 600;
+  margin-right: 10px;
 }
 
-/* Ha a UiControls saját konténerrel jön, ez opcionálisan kisimítja */
-.controlsCard {
-  background: rgba(33,49,63,0.85);
-  border: 1px solid var(--nav-border);
-  border-radius: 12px;
-  padding: 6px 8px;
-  box-shadow: var(--shadow);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1100px) {
-  .navLinks {
-    gap: 12px;
-  }
-}
-
-@media (max-width: 900px) {
-  .navbar {
-    height: 64px;
-  }
-  :root {
-    --navbar-height: 64px;
-  }
-  .logo a {
-    font-size: 18px;
-  }
-  .navLinks {
-    display: none; /* egyszerűsítés mobilon; ha van mobilmenü, itt lehet átírni */
-  }
-  .controlsDock {
-    left: 10px;
-    top: calc(var(--navbar-height) + 6px);
-  }
-}
-
-@media (max-width: 560px) {
-  .controlsCard {
-    padding: 6px;
-    gap: 6px;
-  }
-}
-/* ------- Auth linkek fix (fehér, nem kéklik el, gomb-szerű) ------- */
-.authLinks a,
-.authLinks a:link,
-.authLinks a:visited {
-  color: #fff !important;
+.loginButton, .logoutButton, .authButton {
+  color: #ffffff !important; /* Garantált fehér szín */
   text-decoration: none !important;
   display: inline-flex;
   align-items: center;
@@ -164,19 +98,70 @@
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(255,255,255,0.08);
   font-weight: 700;
-  margin-left: 10px;
+  cursor: pointer;
+  font-family: inherit; /* Örökölje a body betűtípusát */
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
 }
 
-.authLinks a:hover {
+.loginButton:hover, .logoutButton:hover, .authButton:hover {
   background: rgba(255,255,255,0.16);
 }
 
-/* ha külön akarod kiemelni a Regisztrációt */
-.authLinks a[href*="regisztracio"] {
+.authButton { /* Regisztráció gomb kiemelése */
   background: #1abc9c;
   border-color: #16a085;
 }
-
-.authLinks a[href*="regisztracio"]:hover {
+.authButton:hover {
   filter: brightness(1.05);
+}
+
+
+@media (max-width: 900px) {
+  :root {
+    --navbar-height: 64px;
+  }
+  .navbar {
+    padding: 0 15px;
+  }
+
+  .navLinks {
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+    width: 100%;
+    background-color: var(--nav-bg);
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--nav-border);
+    transform: translateY(-150%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .navLinks.open {
+    transform: translateY(0);
+  }
+
+  .hamburger {
+    display: block;
+  }
+  
+  .rightSide .searchWrapper {
+     display: none;
+  }
+
+  .logo a {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loginButton, .logoutButton, .authButton {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+  .welcomeUser {
+    display: none;
+  }
 }

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Search.module.css';
+import { useAuth } from '../../context/AuthContext';
 
-const API_URL = 'https://fokusz-mester-backend.onrender.com';
+const API_URL = process.env.REACT_APP_API_URL || '';
 
 const Search = () => {
+    const { token } = useAuth();
     const [searchTerm, setSearchTerm] = useState('');
     const [results, setResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -17,9 +19,16 @@ const Search = () => {
                 setIsLoading(true);
                 setShowResults(true);
                 try {
-                    const response = await fetch(`${API_URL}/api/curriculums?q=${searchTerm}`);
+                    const headers = { 'Content-Type': 'application/json' };
+                    if (token) {
+                        headers['Authorization'] = `Bearer ${token}`;
+                    }
+                    
+                    // VÉGLEGES JAVÍTÁS: A kérés az új, dedikált /api/search végpontra mutat
+                    const response = await fetch(`${API_URL}/api/search?q=${encodeURIComponent(searchTerm)}`, { headers });
                     const data = await response.json();
-                    if (data.success) {
+                    
+                    if (data.success && Array.isArray(data.data)) {
                         setResults(data.data);
                     } else {
                         setResults([]);
@@ -32,8 +41,8 @@ const Search = () => {
                 }
             } else {
                 setResults([]);
-                if (searchTerm.length > 0) {
-                    setShowResults(true); // Mutatjuk a "írj többet" üzenetet
+                if (searchTerm.length > 0) { 
+                    setShowResults(true); 
                 } else {
                     setShowResults(false);
                 }
@@ -43,7 +52,7 @@ const Search = () => {
         return () => {
             clearTimeout(handler);
         };
-    }, [searchTerm]);
+    }, [searchTerm, token]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -58,8 +67,7 @@ const Search = () => {
     }, []);
 
     const getLinkPath = (item) => {
-        const pathPrefix = item.category.includes('tool') ? '/eszkoz' : '/kviz';
-        return `${pathPrefix}/${item.slug}`;
+        return `/tananyag/${item.slug}`;
     };
 
     return (

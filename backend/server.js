@@ -97,6 +97,22 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
+const authenticateTokenOptional = (req, res, next) => {
+  const authHeader = req.headers['authorization'] || '';
+  const token = authHeader.split(' ')[1];
+  if (!token) {
+    return next();
+  }
+
+  jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
+    if (!err) {
+      req.user = user;
+    }
+    next();
+  });
+};
+
+
 app.get('/api/help', async (req, res) => {
     const q = (req.query.q || '').toString().trim().toLowerCase();
     
@@ -684,6 +700,7 @@ app.post('/api/classes/create', authenticateToken, async (req, res) => {
   }
 });
 
+// VÉGLEGES JAVÍTÁS: Visszaállított, stabil végpont a lapok tartalmának megjelenítéséhez
 app.get('/api/curriculums', async (req, res) => {
   try {
     const { rows } = await pool.query(`
@@ -742,6 +759,47 @@ app.get('/api/curriculums', async (req, res) => {
   }
 });
 
+// VÉGLEGES JAVÍTÁS: Új, dedikált és biztonságos végpont a kereséshez
+app.get('/api/search', authenticateTokenOptional, async (req, res) => {
+  const searchTerm = (req.query.q || '').toString().trim();
+
+  if (!searchTerm || searchTerm.length < 3) {
+    return res.status(400).json({ success: false, message: 'A kereséshez legalább 3 karakter szükséges.' });
+  }
+
+  try {
+    let queryText = `
+      SELECT title, slug, subject, grade, category, description
+      FROM curriculums
+      WHERE is_published = true AND (
+        LOWER(title) ILIKE $1 OR
+        LOWER(slug) ILIKE $1 OR
+        LOWER(description) ILIKE $1
+      )
+    `;
+    const queryParams = [`%${searchTerm.toLowerCase()}%`];
+
+    // Ha a felhasználó nincs bejelentkezve, szűkítjük a keresést az ingyenes tartalmakra
+    if (!req.user) {
+      queryText += ` AND (category = 'free_lesson' OR category = 'free_tool')`;
+    }
+
+    queryText += ` ORDER BY title LIMIT 10;`;
+    
+    const { rows } = await pool.query(queryText, queryParams);
+    
+    res.status(200).json({
+      success: true,
+      data: rows,
+      meta: { count: rows.length, timestamp: new Date().toISOString() }
+    });
+  } catch (err) {
+    console.error('❌ /api/search hiba:', err);
+    res.status(500).json({ success: false, message: 'Szerverhiba a keresés során.' });
+  }
+});
+
+
 // ✅ Stabil /api/quiz/:slug — támogat `tananyag` és `help` mappákat is
 app.get('/api/quiz/:slug', async (req, res) => {
   try {
@@ -796,7 +854,7 @@ app.get('/api/quiz/:slug', async (req, res) => {
 
     return res.json({ success: true, data });
   } catch (err) {
-    console.error(`❌ Hiba a(z) /api/quiz/${req.params.slug} feldolgozásakor:`, err);
+    console.error(`❌ Hiba a(z) /api/quiz/${req.params.slug} feldgozásakor:`, err);
     return res.status(500).json({ success: false, message: 'Szerverhiba történt a tartalom betöltésekor.' });
   }
 });

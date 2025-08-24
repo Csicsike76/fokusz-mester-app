@@ -8,10 +8,9 @@
 .section {
     max-width: 1200px;
     margin: 0 auto 4rem auto;
-    padding-top: 4rem; /* Hely a lebegő menü miatt */
+    padding: 4rem 2rem;
 }
 
-/* ÚJ: Feature Szekció */
 .featureGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -25,12 +24,6 @@
     border-radius: 15px;
     backdrop-filter: blur(10px);
 }
-.featureIcon {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 1rem;
-    fill: #1abc9c;
-}
 .featureCard h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
@@ -41,26 +34,13 @@
     line-height: 1.6;
 }
 
-/* ÚJ: Interaktív Szekció */
 .interactiveSection {
     background: rgba(0, 0, 0, 0.3);
     padding: 4rem 2rem;
     border-radius: 20px;
     text-align: center;
 }
-.interactiveSubtitle {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    font-weight: 300;
-}
-.interactiveCta p {
-    font-size: 1.1rem;
-    color: #bdc3c7;
-    max-width: 600px;
-    margin: 0 auto;
-}
 
-/* Régi Szekciók */
 .sectionTitle {
     text-align: center;
     font-size: 2.5rem;
@@ -78,17 +58,18 @@
 }
 .matematika { border-bottom: 4px solid #e74c3c; }
 .fizika { border-bottom: 4px solid #3498db; }
-.ai, .mesterseges-intelligencia { border-bottom: 4px solid #2ecc71; }
-.eszkozok { border-bottom: 4px solid #f39c12; }
+.mesterseges-intelligencia { border-bottom: 4px solid #2ecc71; }
 
 .cardGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
+
+/* VÉGLEGES JAVÍTÁS: Kártya alap stílusok */
 .card {
-    background-color: white;
-    color: #333;
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.95)); /* Világos háttér */
+    color: #2c3e50; /* Sötét, kontrasztos alapszín a szövegnek */
     border-radius: 10px;
     padding: 1.5rem;
     display: flex;
@@ -97,27 +78,36 @@
     border-top: 5px solid;
 }
 .card:hover { transform: translateY(-5px); }
+
+/* VÉGLEGES JAVÍTÁS: Cím és leírás olvashatósága */
+.card h4 { 
+    margin-top: 0; 
+    font-size: 1.2rem; 
+    flex-grow: 1; 
+    color: #34495e; /* Még kontrasztosabb, sötét szín a címnek */
+}
+.card p { 
+    color: #7f8c8d; /* Olvasható, de a címnél halványabb szürke */
+    font-size: 0.9rem; 
+    line-height: 1.5; 
+}
+
 .freeLesson, .freeTool {
     border-color: #e74c3c;
-    box-shadow: 0 5px 25px rgba(231, 76, 60, 0.4);
-}
-.freeLesson:hover, .freeTool:hover {
-    box-shadow: 0 10px 30px rgba(231, 76, 60, 0.5);
 }
 .premiumCourse, .premiumTool {
     border-color: #2ecc71;
-    box-shadow: 0 5px 25px rgba(46, 204, 113, 0.4);
 }
-.premiumCourse:hover, .premiumTool:hover {
-    box-shadow: 0 10px 30px rgba(46, 204, 113, 0.5);
-}
-.card h4 { margin-top: 0; font-size: 1.2rem; flex-grow: 1; }
-.card p { color: #666; font-size: 0.9rem; line-height: 1.5; }
+
 .btn { display: inline-block; padding: 0.6rem 1.2rem; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; align-self: flex-start; margin-top: auto; }
 .freeLessonBtn, .freeToolBtn { background-color: #e74c3c; }
 .premiumCourseBtn, .premiumToolBtn { background-color: #2ecc71; }
 
-@media screen and (max-width: 768px) {
-    .sectionTitle { font-size: 2rem; }
-    .cardGrid { grid-template-columns: 1fr; }
+@media (max-width: 768px) {
+    .section {
+        padding: 2rem 1rem;
+    }
+    .sectionTitle { 
+        font-size: 2rem; 
+    }
 }
