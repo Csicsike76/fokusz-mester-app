@@ -46,27 +46,32 @@ async function run() {
 
     console.log('`users` tábla létrehozása...');
     await client.query(`
-      CREATE TABLE IF NOT EXISTS users (
-        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        username TEXT NOT NULL,
-        email TEXT NOT NULL UNIQUE,
-        password_hash TEXT NOT NULL,
-        role TEXT NOT NULL CHECK (role IN ('student','teacher','admin')),
-        referral_code TEXT,
-        email_verified BOOLEAN NOT NULL DEFAULT false,
-        language_preference TEXT NOT NULL DEFAULT 'hu',
-        accessible_user BOOLEAN NOT NULL DEFAULT false,
-        time_zone TEXT,
-        parent_user_id UUID REFERENCES users(id) ON DELETE SET NULL,
-        is_permanent_free BOOLEAN NOT NULL DEFAULT false,
-        special_pending BOOLEAN NOT NULL DEFAULT false,
-        last_login TIMESTAMPTZ,
-        last_login_ip INET,
-        settings_json JSONB DEFAULT '{}'::jsonb,
-        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        CREATE TABLE "users" (
+    "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    "username" varchar(255) NOT NULL,
+    "email" varchar(255) UNIQUE NOT NULL,
+    "password_hash" varchar(255) NOT NULL,
+    "role" varchar(50) DEFAULT 'student' NOT NULL,
+    "referral_code" varchar(255) UNIQUE,
+    "is_subscribed" boolean DEFAULT false NOT NULL,
+    "subscription_end_date" timestamp,
+    "email_verified" boolean DEFAULT false NOT NULL,
+    "email_verification_token" text,
+    "email_verification_expires" timestamp,
+    "password_reset_token" text,
+    "password_reset_expires" timestamp,
+    "is_permanent_free" boolean DEFAULT false NOT NULL,
+    "profile_picture" text,
+    "last_login_at" timestamp,
+    "settings_json" jsonb DEFAULT '{}',
+    "created_at" timestamp DEFAULT current_timestamp NOT NULL,
+    "updated_at" timestamp DEFAULT current_timestamp NOT NULL
       );
     `);
+
+   
+
+
 
     console.log('`teachers` tábla létrehozása...');
     await client.query(`
