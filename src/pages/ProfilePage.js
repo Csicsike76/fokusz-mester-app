@@ -5,7 +5,6 @@ import styles from './ProfilePage.module.css';
 const API_URL = process.env.REACT_APP_API_URL || '';
 
 const ProfilePage = () => {
-    // JAVÍTÁS: A useAuth()-ból most már a legfrissebb állapotokat kapjuk meg
     const { user, token, logout, isTrialActive, registrationDate, updateUser, isSubscribed } = useAuth();
     
     const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +21,9 @@ const ProfilePage = () => {
     const [isCopied, setIsCopied] = useState(false);
     const [isRedirecting, setIsRedirecting] = useState(false);
 
-    // JAVÍTÁS: A fetchProfile függvényt úgy módosítjuk, hogy a token és az updateUser stabilitására építsen
+    // JAVÍTÁS: Új állapot a számlázási időszak kiválasztásához
+    const [billingInterval, setBillingInterval] = useState('monthly');
+
     const fetchProfile = useCallback(async () => {
         if (!token) {
             setIsLoading(false);
@@ -44,7 +45,6 @@ const ProfilePage = () => {
             }
             
             const data = await response.json();
-            // Az updateUser most már helyesen frissíti a teljes globális állapotot
             updateUser(data.user);
 
         } catch (err) {
@@ -56,23 +56,19 @@ const ProfilePage = () => {
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
-        let paymentSuccess = false;
         if (queryParams.get("payment_success")) {
             setMessage("Sikeres előfizetés! Köszönjük a bizalmadat. Profil frissítése...");
-            paymentSuccess = true;
+            fetchProfile(); 
         }
         if (queryParams.get("payment_canceled")) {
             setError("Az előfizetési folyamatot megszakítottad.");
         }
 
-        // Akkor is le kell kérni a profilt, ha be van jelentkezve a felhasználó,
-        // hogy a legfrissebb adatok jelenjenek meg.
         if (user) {
             fetchProfile();
         } else {
             setIsLoading(false);
         }
-        // JAVÍTÁS: A dependency array-t üresen hagyjuk, hogy csak betöltődéskor fusson le
     }, []);
     
     useEffect(() => {
@@ -150,7 +146,8 @@ const ProfilePage = () => {
         });
     };
 
-    const handleStripeRedirect = async (endpoint) => {
+    // JAVÍTÁS: A funkció most már a kiválasztott csomagot küldi a szervernek
+    const handleStripeRedirect = async (endpoint, interval) => {
         setError('');
         setMessage('');
         setIsRedirecting(true);
@@ -160,7 +157,8 @@ const ProfilePage = () => {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
-                }
+                },
+                body: JSON.stringify({ interval: interval }) // Elküldjük a választott intervallumot
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.message);
@@ -222,31 +220,47 @@ const ProfilePage = () => {
                             <p>Hozzáférésed érvényes: <strong>{user.subscription_end_date ? new Date(user.subscription_end_date).toLocaleDateString('hu-HU') : 'N/A'}</strong></p>
                             <button 
                                 className={styles.manageButton} 
-                                onClick={() => handleStripeRedirect('/api/create-billing-portal-session')}
+                                onClick={() => handleStripeRedirect('/api/create-billing-portal-session', null)} // Itt nem kell intervallum
                                 disabled={isRedirecting}
                             >
                                 {isRedirecting ? 'Átirányítás...' : 'Előfizetés Kezelése'}
                             </button>
                         </div>
-                    ) : isTrialActive && trialInfo ? (
-                        <div className={styles.statusBox}>
-                            <p className={styles.statusTrial}>30 Napos Próbaidőszak</p>
-                            <p>Lejárat: <strong>{trialInfo.expiration} ({trialInfo.daysLeft} nap van hátra)</strong></p>
-                            <button 
-                                className={styles.subscriptionCtaButton} 
-                                onClick={() => handleStripeRedirect('/api/create-checkout-session')}
-                                disabled={isRedirecting}
-                            >
-                               {isRedirecting ? 'Átirányítás...' : 'Prémium Előfizetés Most!'}
-                            </button>
-                        </div>
                     ) : (
                         <div className={styles.statusBox}>
-                            <p className={styles.statusInactive}>Nincs Aktív Előfizetésed</p>
+                            {isTrialActive && trialInfo ? (
+                                <>
+                                    <p className={styles.statusTrial}>30 Napos Próbaidőszak</p>
+                                    <p>Lejárat: <strong>{trialInfo.expiration} ({trialInfo.daysLeft} nap van hátra)</strong></p>
+                                </>
+                            ) : (
+                                <p className={styles.statusInactive}>Nincs Aktív Előfizetésed</p>
+                            )}
+                            
                             <p>Szerezz hozzáférést az összes prémium tartalomhoz és eszközhöz.</p>
+                            
+                            {/* JAVÍTÁS: Új csomagválasztó felület */}
+                            <div className={styles.planSelector}>
+                                <div 
+                                    className={`${styles.planOption} ${billingInterval === 'monthly' ? styles.planSelected : ''}`}
+                                    onClick={() => setBillingInterval('monthly')}
+                                >
+                                    <h4>Havi csomag</h4>
+                                    <p>25 RON / hó</p>
+                                </div>
+                                <div 
+                                    className={`${styles.planOption} ${billingInterval === 'yearly' ? styles.planSelected : ''}`}
+                                    onClick={() => setBillingInterval('yearly')}
+                                >
+                                    <span className={styles.dealBadge}>-17%</span>
+                                    <h4>Éves csomag</h4>
+                                    <p>250 RON / év</p>
+                                </div>
+                            </div>
+
                             <button 
                                 className={styles.subscriptionCtaButton}
-                                onClick={() => handleStripeRedirect('/api/create-checkout-session')}
+                                onClick={() => handleStripeRedirect('/api/create-checkout-session', billingInterval)}
                                 disabled={isRedirecting}
                             >
                                 {isRedirecting ? 'Átirányítás...' : 'Tovább az Előfizetéshez'}

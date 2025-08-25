@@ -134,7 +134,6 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                     const referrerId = referralResult.rows[0].referrer_user_id;
                     console.log(`Találat! Az új előfizetőt (${newUserId}) ez a felhasználó ajánlotta: ${referrerId}`);
 
-                    // 1. Számoljuk újra a sikeres ajánlásokat
                     const successfulReferralsResult = await client.query(
                        `SELECT COUNT(DISTINCT r.referred_user_id)
                         FROM referrals r
@@ -145,11 +144,9 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                     const newTotalReferrals = parseInt(successfulReferralsResult.rows[0].count, 10);
                     console.log(`Az ajánló (${referrerId}) új sikeres ajánlásainak száma: ${newTotalReferrals}`);
 
-                    // 2. Ellenőrizzük, hogy a jutalom esedékes-e (5-tel osztható)
                     if (newTotalReferrals > 0 && newTotalReferrals % 5 === 0) {
                         console.log(`JUTALOM JÁR! Az ajánló (${referrerId}) elérte a(z) ${newTotalReferrals}. sikeres ajánlást.`);
                         
-                        // 3. Adjuk hozzá a jutalmat (1 hónap)
                         const referrerSubscription = await client.query(
                             "SELECT id, current_period_end FROM subscriptions WHERE user_id = $1 AND status = 'active' ORDER BY created_at DESC LIMIT 1",
                             [referrerId]
@@ -163,7 +160,6 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                             );
                             console.log(`✅ A(z) ${referrerId} felhasználó előfizetése meghosszabbítva 1 hónappal.`);
                             
-                            // 4. Értesítés küldése a jutalomról
                              await client.query(
                                 `INSERT INTO notifications (user_id, title, message, type) 
                                  VALUES ($1, 'Jutalmat kaptál!', 'Egy általad ajánlott felhasználó előfizetett, így jutalmul 1 hónap prémium hozzáférést írtunk jóvá neked. Köszönjük!', 'reward')`,
@@ -194,7 +190,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                 await clientUpdate.query(
                    `UPDATE subscriptions 
                     SET status = $1, current_period_end = to_timestamp($2), updated_at = NOW()
-                    WHERE invoice_id = $3`, // Az invoice_id-t használjuk a stripe subscription id tárolására
+                    WHERE invoice_id = $3`,
                     [
                         subscriptionUpdated.status,
                         subscriptionUpdated.current_period_end,
@@ -542,7 +538,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
     res.status(201).json({
       success: true,
       message: 'Sikeres regisztráció! Kérjük, ellenőrizd az e-mail fiókodat a további teendőkért.',
-      user: { id: newUserId, createdAt: registrationDate },
+      user: { id: newUserId, created_at: registrationDate },
     });
   } catch (err) {
     if (client) await client.query('ROLLBACK');
@@ -642,7 +638,7 @@ app.post('/api/login', authLimiter, async (req, res) => {
         email: user.email,
         role: user.role,
         referral_code: user.referral_code,
-        created_at: user.created_at, // Javítva: createdAt -> created_at
+        created_at: user.created_at,
       },
     });
   } catch (error) {
@@ -1038,9 +1034,21 @@ app.get('/api/quiz/:slug', async (req, res) => {
 
 // === STRIPE INTEGRÁCIÓ ===
 
-// 1. Checkout session létrehozása
+// JAVÍTÁS: Checkout session létrehozása, ami kezeli a havi és éves csomagot is
 app.post('/api/create-checkout-session', authenticateToken, async (req, res) => {
+    const { interval } = req.body; // 'monthly' vagy 'yearly'
     const userId = req.user.userId;
+
+    // Válasszuk ki a megfelelő ár-azonosítót a környezeti változókból
+    const priceId = interval === 'yearly'
+        ? process.env.STRIPE_PRICE_ID_YEARLY
+        : process.env.STRIPE_PRICE_ID_MONTHLY;
+
+    if (!priceId) {
+        const errorMessage = `A '${interval}' időszakhoz tartozó Stripe Price ID nincs beállítva a szerveren.`;
+        console.error(`❌ ${errorMessage}`);
+        return res.status(500).json({ success: false, message: errorMessage });
+    }
     
     try {
         const userResult = await pool.query('SELECT email, profile_metadata FROM users WHERE id = $1', [userId]);
@@ -1066,7 +1074,7 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
             payment_method_types: ['card'],
             customer: stripeCustomerId,
             line_items: [{
-                price: process.env.STRIPE_PRICE_ID,
+                price: priceId, // Itt használjuk a kiválasztott ár-azonosítót
                 quantity: 1,
             }],
             mode: 'subscription',
