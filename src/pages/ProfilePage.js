@@ -5,6 +5,7 @@ import styles from './ProfilePage.module.css';
 const API_URL = process.env.REACT_APP_API_URL || '';
 
 const ProfilePage = () => {
+    // JAVÍTÁS: A useAuth()-ból most már a legfrissebb állapotokat kapjuk meg
     const { user, token, logout, isTrialActive, registrationDate, updateUser, isSubscribed } = useAuth();
     
     const [isLoading, setIsLoading] = useState(true);
@@ -21,11 +22,13 @@ const ProfilePage = () => {
     const [isCopied, setIsCopied] = useState(false);
     const [isRedirecting, setIsRedirecting] = useState(false);
 
+    // JAVÍTÁS: A fetchProfile függvényt úgy módosítjuk, hogy a token és az updateUser stabilitására építsen
     const fetchProfile = useCallback(async () => {
         if (!token) {
             setIsLoading(false);
             return;
         }
+        setIsLoading(true);
         try {
             const response = await fetch(`${API_URL}/api/profile`, {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -41,6 +44,7 @@ const ProfilePage = () => {
             }
             
             const data = await response.json();
+            // Az updateUser most már helyesen frissíti a teljes globális állapotot
             updateUser(data.user);
 
         } catch (err) {
@@ -52,26 +56,30 @@ const ProfilePage = () => {
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
+        let paymentSuccess = false;
         if (queryParams.get("payment_success")) {
-            setMessage("Sikeres előfizetés! Köszönjük a bizalmadat.");
-            fetchProfile(); // Frissítsük a profilt, hogy az új státusz megjelenjen
+            setMessage("Sikeres előfizetés! Köszönjük a bizalmadat. Profil frissítése...");
+            paymentSuccess = true;
         }
         if (queryParams.get("payment_canceled")) {
             setError("Az előfizetési folyamatot megszakítottad.");
         }
 
-        if(user) {
+        // Akkor is le kell kérni a profilt, ha be van jelentkezve a felhasználó,
+        // hogy a legfrissebb adatok jelenjenek meg.
+        if (user) {
             fetchProfile();
         } else {
             setIsLoading(false);
         }
+        // JAVÍTÁS: A dependency array-t üresen hagyjuk, hogy csak betöltődéskor fusson le
     }, []);
     
     useEffect(() => {
-        if (!isEditingUsername) {
-            setNewUsername(user ? user.username : '');
+        if (user) {
+            setNewUsername(user.username);
         }
-    }, [user, isEditingUsername]);
+    }, [user]);
 
     const handleUpdateUsername = async () => {
         setMessage('');

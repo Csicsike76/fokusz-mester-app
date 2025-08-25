@@ -30,7 +30,12 @@ async function run() {
 
     await client.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`);
 
-     await client.query(`DROP TABLE IF EXISTS user_quiz_results CASCADE;`);
+    // A meglévő DROP TABLE parancsokat meghagyjuk a szkript újrafuttathatósága érdekében.
+    await client.query(`DROP TABLE IF EXISTS payments CASCADE;`);
+    await client.query(`DROP TABLE IF EXISTS notifications CASCADE;`);
+    await client.query(`DROP TABLE IF EXISTS admin_actions CASCADE;`);
+    await client.query(`DROP TABLE IF EXISTS system_logs CASCADE;`);
+    await client.query(`DROP TABLE IF EXISTS user_quiz_results CASCADE;`);
     await client.query(`DROP TABLE IF EXISTS quizquestions CASCADE;`);
     await client.query(`DROP TABLE IF EXISTS curriculums CASCADE;`);
     await client.query(`DROP TABLE IF EXISTS helparticles CASCADE;`);
@@ -47,31 +52,23 @@ async function run() {
     console.log('`users` tábla létrehozása...');
     await client.query(`
         CREATE TABLE "users" (
-    "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    "username" varchar(255) NOT NULL,
-    "email" varchar(255) UNIQUE NOT NULL,
-    "password_hash" varchar(255) NOT NULL,
-    "role" varchar(50) DEFAULT 'student' NOT NULL,
-    "referral_code" varchar(255) UNIQUE,
-    "is_subscribed" boolean DEFAULT false NOT NULL,
-    "subscription_end_date" timestamp,
-    "email_verified" boolean DEFAULT false NOT NULL,
-    "email_verification_token" text,
-    "email_verification_expires" timestamp,
-    "password_reset_token" text,
-    "password_reset_expires" timestamp,
-    "is_permanent_free" boolean DEFAULT false NOT NULL,
-    "profile_picture" text,
-    "last_login_at" timestamp,
-    "settings_json" jsonb DEFAULT '{}',
-    "created_at" timestamp DEFAULT current_timestamp NOT NULL,
-    "updated_at" timestamp DEFAULT current_timestamp NOT NULL
+          "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+          "username" varchar(255) NOT NULL,
+          "email" varchar(255) UNIQUE NOT NULL,
+          "password_hash" varchar(255) NOT NULL,
+          "role" varchar(50) DEFAULT 'student' NOT NULL,
+          "referral_code" varchar(255) UNIQUE,
+          "email_verified" boolean DEFAULT false NOT NULL,
+          "email_verification_token" text,
+          "email_verification_expires" timestamp,
+          "password_reset_token" text,
+          "password_reset_expires" timestamp,
+          "is_permanent_free" boolean DEFAULT false NOT NULL,
+          "last_login_at" timestamp,
+          "created_at" timestamp DEFAULT current_timestamp NOT NULL,
+          "updated_at" timestamp DEFAULT current_timestamp NOT NULL
       );
     `);
-
-   
-
-
 
     console.log('`teachers` tábla létrehozása...');
     await client.query(`
@@ -79,7 +76,8 @@ async function run() {
         user_id UUID PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
         vip_code TEXT,
         is_approved BOOLEAN NOT NULL DEFAULT false,
-        subject_specialization TEXT
+        subject_specialization TEXT,
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
     `);
 
@@ -90,10 +88,8 @@ async function run() {
         class_name TEXT NOT NULL,
         class_code TEXT NOT NULL UNIQUE,
         teacher_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        class_type TEXT NOT NULL DEFAULT 'regular' CHECK (class_type IN ('regular','accessible')),
         max_students INTEGER NOT NULL CHECK (max_students > 0),
         is_active BOOLEAN NOT NULL DEFAULT true,
-        is_approved BOOLEAN NOT NULL DEFAULT true,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
@@ -118,8 +114,7 @@ async function run() {
       );
     `);
 
-    // Folytatom a következő üzenetben a helparticles, curriculums, quizquestions, subscriptions részekkel
-         console.log('`helparticles` tábla létrehozása...');
+    console.log('`helparticles` tábla létrehozása...');
     await client.query(`
       CREATE TABLE IF NOT EXISTS helparticles (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -128,7 +123,6 @@ async function run() {
         content TEXT NOT NULL,
         category TEXT,
         tags TEXT,
-        translations JSONB DEFAULT '{}'::jsonb,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
@@ -143,15 +137,8 @@ async function run() {
         title TEXT NOT NULL,
         subject TEXT,
         grade INTEGER,
-        category TEXT NOT NULL CHECK (category IN (
-          'free_lesson','free_tool','premium_course','premium_tool',
-          'workshop','hub_page','premium_lesson'
-        )),
+        category TEXT NOT NULL,
         description TEXT,
-        accessible_settings JSONB DEFAULT '{}'::jsonb,
-        translations JSONB DEFAULT '{}'::jsonb,
-        archived BOOLEAN NOT NULL DEFAULT false,
-        metadata JSONB DEFAULT '{}'::jsonb,
         is_published BOOLEAN NOT NULL DEFAULT true,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
@@ -165,11 +152,9 @@ async function run() {
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
         curriculum_id UUID NOT NULL REFERENCES curriculums(id) ON DELETE CASCADE,
         question_data JSONB NOT NULL,
-        hint TEXT,
-        time_limit_seconds INTEGER DEFAULT 0,
-        max_attempts INTEGER DEFAULT 0,
         order_num INTEGER DEFAULT 0,
-        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
     `);
     await client.query(`CREATE INDEX IF NOT EXISTS idx_quizquestions_curriculum_id ON quizquestions(curriculum_id);`);
@@ -183,7 +168,6 @@ async function run() {
         completed_questions INTEGER NOT NULL DEFAULT 0,
         total_questions INTEGER NOT NULL DEFAULT 0,
         score_percentage NUMERIC(5,2) DEFAULT 0.0,
-        level TEXT CHECK (level IN ('beginner','intermediate','expert')),
         completed_at TIMESTAMPTZ DEFAULT NOW(),
         UNIQUE(user_id, curriculum_id)
       );
@@ -197,46 +181,35 @@ async function run() {
         price_cents INTEGER NOT NULL CHECK (price_cents >= 0),
         interval_unit TEXT NOT NULL CHECK (interval_unit IN ('day','month','year')),
         interval_count INTEGER NOT NULL CHECK (interval_count > 0),
-        trial_days INTEGER NOT NULL DEFAULT 0 CHECK (trial_days >= 0),
-        is_active BOOLEAN NOT NULL DEFAULT true
+        is_active BOOLEAN NOT NULL DEFAULT true,
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
     `);
-
-    const plansCountRes = await client.query(`SELECT COUNT(*) as c FROM subscription_plans;`);
-    if (Number(plansCountRes.rows[0].c) === 0) {
-      console.log('Alapértelmezett előfizetési csomagok feltöltése...');
-      await client.query(`
-        INSERT INTO subscription_plans (name, price_cents, interval_unit, interval_count, trial_days, is_active)
-        VALUES
-          ('Ingyenes próba', 0, 'day', 30, 0, true),
-          ('Alap havidíj', 1990, 'month', 1, 7, true),
-          ('Tanári csomag', 4990, 'month', 1, 7, true);
-      `);
-    }
 
     console.log('`subscriptions` tábla létrehozása...');
     await client.query(`
       CREATE TABLE IF NOT EXISTS subscriptions (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
         user_id UUID NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
-        plan_id UUID NOT NULL REFERENCES subscription_plans(id) ON DELETE RESTRICT,
-        status TEXT NOT NULL CHECK (status IN ('active','canceled','past_due','trialing')),
-        current_period_start TIMESTAMPTZ NOT NULL,
-        current_period_end TIMESTAMPTZ NOT NULL,
+        plan_id TEXT,
+        status TEXT,
+        current_period_start TIMESTAMPTZ,
+        current_period_end TIMESTAMPTZ,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         canceled_at TIMESTAMPTZ,
-        promo_code TEXT,
         invoice_id TEXT,
-        payment_provider TEXT
+        payment_provider TEXT,
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
     `);
     
-
-        console.log('`payments` tábla létrehozása...');
+    // ÚJ TÁBLA: `payments`
+    console.log('`payments` tábla létrehozása...');
     await client.query(`
       CREATE TABLE IF NOT EXISTS payments (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        subscription_id UUID NOT NULL REFERENCES subscriptions(id) ON DELETE CASCADE,
+        subscription_id UUID REFERENCES subscriptions(id) ON DELETE SET NULL,
+        user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
         amount_cents INTEGER NOT NULL CHECK (amount_cents >= 0),
         currency TEXT NOT NULL DEFAULT 'HUF',
         provider TEXT NOT NULL,
@@ -247,6 +220,7 @@ async function run() {
       );
     `);
 
+    // ÚJ TÁBLA: `notifications`
     console.log('`notifications` tábla létrehozása...');
     await client.query(`
       CREATE TABLE IF NOT EXISTS notifications (
@@ -254,7 +228,7 @@ async function run() {
         user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
         title TEXT NOT NULL,
         message TEXT NOT NULL,
-        type TEXT NOT NULL CHECK (type IN ('info','warning','error','success')),
+        type TEXT NOT NULL CHECK (type IN ('info','warning','error','success', 'reward')),
         read BOOLEAN NOT NULL DEFAULT false,
         sent_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         metadata JSONB DEFAULT '{}'::jsonb
@@ -286,17 +260,6 @@ async function run() {
       );
     `);
 
-    console.log('`system_logs` tábla létrehozása...');
-    await client.query(`
-      CREATE TABLE IF NOT EXISTS system_logs (
-        id BIGSERIAL PRIMARY KEY,
-        level TEXT NOT NULL CHECK (level IN ('info','warn','error')),
-        message TEXT NOT NULL,
-        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-        metadata JSONB DEFAULT '{}'::jsonb
-      );
-    `);
-
     console.log('`admin_actions` tábla létrehozása...');
     await client.query(`
       CREATE TABLE IF NOT EXISTS admin_actions (
@@ -309,72 +272,78 @@ async function run() {
       );
     `);
 
-    console.log('Triggerek létrehozása az updated_at mező automatikus frissítésére...');
-    const tablesToUpdate = ['users','teachers','classes','curriculums','quizquestions','helparticles','subscriptions','subscription_plans'];
-    for (const tbl of tablesToUpdate) {
-      await client.query(`
-        CREATE OR REPLACE FUNCTION ${tbl}_update_timestamp() RETURNS trigger AS $$
-        BEGIN
-          NEW.updated_at = NOW();
-          RETURN NEW;
-        END;
-        $$ LANGUAGE plpgsql;
-      `);
-      await client.query(`
-        DROP TRIGGER IF EXISTS trg_${tbl}_update_timestamp ON ${tbl};
-        CREATE TRIGGER trg_${tbl}_update_timestamp
-        BEFORE UPDATE ON ${tbl}
-        FOR EACH ROW
-        EXECUTE FUNCTION ${tbl}_update_timestamp();
-      `);
-    }
-
-    console.log('✅ A Payments, Notifications, Logs és Trigger részek kész.');
-
-        console.log('Extra jövőbiztos mezők és multi-language támogatás hozzáadása...');
-
-    // Curriculums: extra JSONB mezők a jövőre
+    // JAVÍTÁS: Egységesített trigger logika
+    console.log('Egységes trigger létrehozása az updated_at mező automatikus frissítésére...');
+    
+    // 1. Létrehozzuk az EGYETLEN függvényt
     await client.query(`
-      ALTER TABLE curriculums
-        ADD COLUMN IF NOT EXISTS ai_settings JSONB DEFAULT '{}'::jsonb,
-        ADD COLUMN IF NOT EXISTS hub_settings JSONB DEFAULT '{}'::jsonb,
-        ADD COLUMN IF NOT EXISTS toc JSONB DEFAULT '{}'::jsonb,
-        ADD COLUMN IF NOT EXISTS language_options JSONB DEFAULT '{"default":"hu","available":["hu","ro","de"]}'::jsonb;
+      CREATE OR REPLACE FUNCTION trigger_set_timestamp()
+      RETURNS TRIGGER AS $$
+      BEGIN
+        NEW.updated_at = NOW();
+        RETURN NEW;
+      END;
+      $$ LANGUAGE plpgsql;
     `);
 
-    // Quiz Questions: szintezés, hint, metadata
+    // 2. Hozzárendeljük a függvényt az összes releváns táblához
+    const tablesToTrigger = ['users', 'teachers', 'classes', 'curriculums', 'helparticles', 'quizquestions', 'subscription_plans', 'subscriptions'];
+    for (const tbl of tablesToTrigger) {
+      console.log(`Trigger alkalmazása a(z) '${tbl}' táblára...`);
+      await client.query(`
+        DROP TRIGGER IF EXISTS trg_update_timestamp ON ${tbl};
+        CREATE TRIGGER trg_update_timestamp
+        BEFORE UPDATE ON ${tbl}
+        FOR EACH ROW
+        EXECUTE FUNCTION trigger_set_timestamp();
+      `);
+    }
+    
+    console.log('Extra jövőbiztos mezők és támogatás hozzáadása...');
+
+    // Jövőbiztos ALTER TABLE parancsok
+    await client.query(`
+      ALTER TABLE curriculums
+        ADD COLUMN IF NOT EXISTS translations JSONB DEFAULT '{}'::jsonb,
+        ADD COLUMN IF NOT EXISTS metadata JSONB DEFAULT '{}'::jsonb,
+        ADD COLUMN IF NOT EXISTS archived BOOLEAN NOT NULL DEFAULT false;
+    `);
+
     await client.query(`
       ALTER TABLE quizquestions
-        ADD COLUMN IF NOT EXISTS difficulty_level TEXT CHECK (difficulty_level IN ('beginner','intermediate','expert')),
+        ADD COLUMN IF NOT EXISTS hint TEXT,
+        ADD COLUMN IF NOT EXISTS time_limit_seconds INTEGER DEFAULT 0,
+        ADD COLUMN IF NOT EXISTS max_attempts INTEGER DEFAULT 0,
+        ADD COLUMN IF NOT EXISTS difficulty_level TEXT,
         ADD COLUMN IF NOT EXISTS metadata JSONB DEFAULT '{}'::jsonb;
     `);
 
-    // User Quiz Results: szintek, szintezés logika
     await client.query(`
       ALTER TABLE user_quiz_results
+        ADD COLUMN IF NOT EXISTS level TEXT,
         ADD COLUMN IF NOT EXISTS level_score_thresholds JSONB DEFAULT '{"beginner":40,"intermediate":65,"expert":90}'::jsonb,
         ADD COLUMN IF NOT EXISTS hints_used INTEGER DEFAULT 0,
         ADD COLUMN IF NOT EXISTS total_time_seconds INTEGER DEFAULT 0;
     `);
 
-    // Subscriptions: jövőbiztos extra fizetési mezők
     await client.query(`
       ALTER TABLE subscriptions
+        ADD COLUMN IF NOT EXISTS promo_code TEXT,
         ADD COLUMN IF NOT EXISTS payment_metadata JSONB DEFAULT '{}'::jsonb,
         ADD COLUMN IF NOT EXISTS promo_applied BOOLEAN DEFAULT false,
         ADD COLUMN IF NOT EXISTS next_billing_date TIMESTAMPTZ;
     `);
 
-    // Users: extra accessibility és profil beállítások
     await client.query(`
       ALTER TABLE users
+        ADD COLUMN IF NOT EXISTS profile_picture TEXT,
+        ADD COLUMN IF NOT EXISTS settings_json JSONB DEFAULT '{}',
         ADD COLUMN IF NOT EXISTS accessibility_settings JSONB DEFAULT '{}'::jsonb,
         ADD COLUMN IF NOT EXISTS preferred_language TEXT DEFAULT 'hu',
         ADD COLUMN IF NOT EXISTS archived BOOLEAN DEFAULT false,
         ADD COLUMN IF NOT EXISTS profile_metadata JSONB DEFAULT '{}'::jsonb;
     `);
-    // (A teljes kódot a korábbi 1-4 részekből összevontuk ide)
-
+    
     await client.query('COMMIT');
     console.log('✅ Adatbázis séma beállítása sikeresen befejeződött.');
   } catch (e) {
