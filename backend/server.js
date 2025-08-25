@@ -89,17 +89,19 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
     switch (event.type) {
         case 'checkout.session.completed':
             const session = event.data.object;
-            const userId = session.metadata.userId;
+            const newUserId = session.metadata.userId;
 
-            if (!userId) {
+            if (!newUserId) {
                 console.error('❌ Hiba: Hiányzó userId a Stripe session metaadataiból!');
                 break;
             }
 
+            const client = await pool.connect();
             try {
+                await client.query('BEGIN');
+
                 const subscription = await stripe.subscriptions.retrieve(session.subscription);
 
-                const client = await pool.connect();
                 await client.query(
                     `INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider, invoice_id)
                      VALUES ($1, $2, $3, to_timestamp($4), to_timestamp($5), 'stripe', $6)
@@ -107,10 +109,11 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                         status = $3,
                         current_period_start = to_timestamp($4),
                         current_period_end = to_timestamp($5),
-                        invoice_id = $6;
+                        invoice_id = $6,
+                        updated_at = NOW();
                     `,
                     [
-                        userId,
+                        newUserId,
                         subscription.items.data[0].plan.id,
                         subscription.status,
                         subscription.current_period_start,
@@ -118,11 +121,68 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                         subscription.id
                     ]
                 );
-                client.release();
-                console.log(`✅ Előfizetés sikeresen rögzítve a felhasználóhoz: ${userId}`);
+                console.log(`✅ Előfizetés sikeresen rögzítve a felhasználóhoz: ${newUserId}`);
 
+                // --- AJÁNLÓI RENDSZER LOGIKA ---
+                console.log(`Ajánlói rendszer ellenőrzése a felhasználóhoz: ${newUserId}`);
+                const referralResult = await client.query(
+                    'SELECT referrer_user_id FROM referrals WHERE referred_user_id = $1',
+                    [newUserId]
+                );
+                
+                if (referralResult.rows.length > 0) {
+                    const referrerId = referralResult.rows[0].referrer_user_id;
+                    console.log(`Találat! Az új előfizetőt (${newUserId}) ez a felhasználó ajánlotta: ${referrerId}`);
+
+                    // 1. Számoljuk újra a sikeres ajánlásokat
+                    const successfulReferralsResult = await client.query(
+                       `SELECT COUNT(DISTINCT r.referred_user_id)
+                        FROM referrals r
+                        JOIN subscriptions s ON r.referred_user_id = s.user_id
+                        WHERE r.referrer_user_id = $1 AND s.status = 'active'`,
+                       [referrerId]
+                    );
+                    const newTotalReferrals = parseInt(successfulReferralsResult.rows[0].count, 10);
+                    console.log(`Az ajánló (${referrerId}) új sikeres ajánlásainak száma: ${newTotalReferrals}`);
+
+                    // 2. Ellenőrizzük, hogy a jutalom esedékes-e (5-tel osztható)
+                    if (newTotalReferrals > 0 && newTotalReferrals % 5 === 0) {
+                        console.log(`JUTALOM JÁR! Az ajánló (${referrerId}) elérte a(z) ${newTotalReferrals}. sikeres ajánlást.`);
+                        
+                        // 3. Adjuk hozzá a jutalmat (1 hónap)
+                        const referrerSubscription = await client.query(
+                            "SELECT id, current_period_end FROM subscriptions WHERE user_id = $1 AND status = 'active' ORDER BY created_at DESC LIMIT 1",
+                            [referrerId]
+                        );
+
+                        if (referrerSubscription.rows.length > 0) {
+                            const sub = referrerSubscription.rows[0];
+                            await client.query(
+                                "UPDATE subscriptions SET current_period_end = current_period_end + INTERVAL '1 month' WHERE id = $1",
+                                [sub.id]
+                            );
+                            console.log(`✅ A(z) ${referrerId} felhasználó előfizetése meghosszabbítva 1 hónappal.`);
+                            
+                            // 4. Értesítés küldése a jutalomról
+                             await client.query(
+                                `INSERT INTO notifications (user_id, title, message, type) 
+                                 VALUES ($1, 'Jutalmat kaptál!', 'Egy általad ajánlott felhasználó előfizetett, így jutalmul 1 hónap prémium hozzáférést írtunk jóvá neked. Köszönjük!', 'reward')`,
+                                [referrerId]
+                            );
+                            console.log(`✅ Értesítés elküldve a(z) ${referrerId} felhasználónak a jutalomról.`);
+                        } else {
+                            console.log(`Az ajánló (${referrerId}) nem rendelkezik aktív előfizetéssel, így nem kap jutalmat.`);
+                        }
+                    }
+                }
+                // --- AJÁNLÓI RENDSZER LOGIKA VÉGE ---
+
+                await client.query('COMMIT');
             } catch (dbError) {
-                console.error('❌ Adatbázis hiba az előfizetés mentésekor:', dbError);
+                await client.query('ROLLBACK');
+                console.error('❌ Adatbázis hiba az előfizetés mentésekor vagy az ajánlói logika során:', dbError);
+            } finally {
+                client.release();
             }
             break;
 
@@ -130,10 +190,10 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
         case 'customer.subscription.deleted':
             const subscriptionUpdated = event.data.object;
             try {
-                const client = await pool.connect();
-                await client.query(
+                const clientUpdate = await pool.connect();
+                await clientUpdate.query(
                    `UPDATE subscriptions 
-                    SET status = $1, current_period_end = to_timestamp($2)
+                    SET status = $1, current_period_end = to_timestamp($2), updated_at = NOW()
                     WHERE invoice_id = $3`, // Az invoice_id-t használjuk a stripe subscription id tárolására
                     [
                         subscriptionUpdated.status,
@@ -141,7 +201,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                         subscriptionUpdated.id
                     ]
                 );
-                client.release();
+                clientUpdate.release();
                 console.log(`✅ Előfizetés státusza frissítve (${subscriptionUpdated.id}): ${subscriptionUpdated.status}`);
             } catch (dbError) {
                 console.error('❌ Adatbázis hiba az előfizetés frissítésekor:', dbError);
@@ -582,7 +642,7 @@ app.post('/api/login', authLimiter, async (req, res) => {
         email: user.email,
         role: user.role,
         referral_code: user.referral_code,
-        createdAt: user.created_at,
+        created_at: user.created_at, // Javítva: createdAt -> created_at
       },
     });
   } catch (error) {
