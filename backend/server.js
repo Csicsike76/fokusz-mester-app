@@ -40,6 +40,8 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 const sslRequired = (() => {
   const flag = String(process.env.DB_SSL || '').toLowerCase();
   if (flag === 'true' || flag === '1') return true;
@@ -67,6 +69,93 @@ const transporter = nodemailer.createTransport({
 
 const app = express();
 app.use(cors());
+
+// A Stripe Webhooknak a nyers body-ra van szüksége az aláírás ellenőrzéséhez.
+// Ennek a middleware-nek a globális express.json() előtt kell lennie.
+app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
+    } catch (err) {
+        console.error(`❌ Stripe webhook signature error: ${err.message}`);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    // Események kezelése
+    switch (event.type) {
+        case 'checkout.session.completed':
+            const session = event.data.object;
+            const userId = session.metadata.userId;
+
+            if (!userId) {
+                console.error('❌ Hiba: Hiányzó userId a Stripe session metaadataiból!');
+                break;
+            }
+
+            try {
+                const subscription = await stripe.subscriptions.retrieve(session.subscription);
+
+                const client = await pool.connect();
+                await client.query(
+                    `INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider, invoice_id)
+                     VALUES ($1, $2, $3, to_timestamp($4), to_timestamp($5), 'stripe', $6)
+                     ON CONFLICT (user_id) DO UPDATE SET
+                        status = $3,
+                        current_period_start = to_timestamp($4),
+                        current_period_end = to_timestamp($5),
+                        invoice_id = $6;
+                    `,
+                    [
+                        userId,
+                        subscription.items.data[0].plan.id,
+                        subscription.status,
+                        subscription.current_period_start,
+                        subscription.current_period_end,
+                        subscription.id
+                    ]
+                );
+                client.release();
+                console.log(`✅ Előfizetés sikeresen rögzítve a felhasználóhoz: ${userId}`);
+
+            } catch (dbError) {
+                console.error('❌ Adatbázis hiba az előfizetés mentésekor:', dbError);
+            }
+            break;
+
+        case 'customer.subscription.updated':
+        case 'customer.subscription.deleted':
+            const subscriptionUpdated = event.data.object;
+            try {
+                const client = await pool.connect();
+                await client.query(
+                   `UPDATE subscriptions 
+                    SET status = $1, current_period_end = to_timestamp($2)
+                    WHERE invoice_id = $3`, // Az invoice_id-t használjuk a stripe subscription id tárolására
+                    [
+                        subscriptionUpdated.status,
+                        subscriptionUpdated.current_period_end,
+                        subscriptionUpdated.id
+                    ]
+                );
+                client.release();
+                console.log(`✅ Előfizetés státusza frissítve (${subscriptionUpdated.id}): ${subscriptionUpdated.status}`);
+            } catch (dbError) {
+                console.error('❌ Adatbázis hiba az előfizetés frissítésekor:', dbError);
+            }
+            break;
+            
+        default:
+            console.log(`Unhandled event type ${event.type}`);
+    }
+
+    res.json({received: true});
+});
+
+
 app.use(express.json());
 
 const authLimiter = rateLimit({
@@ -504,20 +593,35 @@ app.post('/api/login', authLimiter, async (req, res) => {
 
 app.get('/api/profile', authenticateToken, async (req, res) => {
     try {
-        const userResult = await pool.query(
-            'SELECT id, username, email, role, referral_code, created_at FROM users WHERE id = $1', 
-            [req.user.userId]
-        );
+        const userQuery = `
+            SELECT 
+                u.id, 
+                u.username, 
+                u.email, 
+                u.role, 
+                u.referral_code, 
+                u.created_at,
+                u.profile_metadata,
+                s.status as subscription_status,
+                s.current_period_end as subscription_end_date
+            FROM users u
+            LEFT JOIN subscriptions s ON u.id = s.user_id AND s.status = 'active'
+            WHERE u.id = $1
+            ORDER BY s.created_at DESC
+            LIMIT 1;
+        `;
+        const userResult = await pool.query(userQuery, [req.user.userId]);
+
         if (userResult.rows.length === 0) {
             return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
         }
         const userProfile = userResult.rows[0];
 
         const referralsResult = await pool.query(
-            `SELECT COUNT(*) 
+            `SELECT COUNT(DISTINCT r.referred_user_id)
              FROM referrals r
-             JOIN users u_referred ON r.referred_user_id = u_referred.id
-             WHERE r.referrer_user_id = $1 AND u_referred.is_subscribed = true`,
+             JOIN subscriptions s ON r.referred_user_id = s.user_id
+             WHERE r.referrer_user_id = $1 AND s.status = 'active'`,
             [req.user.userId]
         );
         const successfulReferrals = parseInt(referralsResult.rows[0].count, 10);
@@ -527,9 +631,9 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
         userProfile.successful_referrals = successfulReferrals;
         userProfile.earned_rewards = earnedRewards;
         
-        // Temporarily adding these fields for frontend compatibility
-        userProfile.is_subscribed = userResult.rows[0].is_subscribed || false;
-        userProfile.subscription_end_date = userResult.rows[0].subscription_end_date || null;
+        userProfile.is_subscribed = userProfile.subscription_status === 'active';
+        
+        delete userProfile.subscription_status;
         
         res.status(200).json({ success: true, user: userProfile });
     } catch (error) {
@@ -871,6 +975,81 @@ app.get('/api/quiz/:slug', async (req, res) => {
     return res.status(500).json({ success: false, message: 'Szerverhiba történt a tartalom betöltésekor.' });
   }
 });
+
+// === STRIPE INTEGRÁCIÓ ===
+
+// 1. Checkout session létrehozása
+app.post('/api/create-checkout-session', authenticateToken, async (req, res) => {
+    const userId = req.user.userId;
+    
+    try {
+        const userResult = await pool.query('SELECT email, profile_metadata FROM users WHERE id = $1', [userId]);
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
+        }
+        const user = userResult.rows[0];
+        let stripeCustomerId = user.profile_metadata?.stripe_customer_id;
+
+        if (!stripeCustomerId) {
+            const customer = await stripe.customers.create({
+                email: user.email,
+                metadata: { userId: userId },
+            });
+            stripeCustomerId = customer.id;
+            await pool.query(
+                `UPDATE users SET profile_metadata = profile_metadata || '{"stripe_customer_id": "${stripeCustomerId}"}' WHERE id = $1`,
+                [userId]
+            );
+        }
+
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            customer: stripeCustomerId,
+            line_items: [{
+                price: process.env.STRIPE_PRICE_ID,
+                quantity: 1,
+            }],
+            mode: 'subscription',
+            success_url: `${process.env.FRONTEND_URL}/profil?payment_success=true`,
+            cancel_url: `${process.env.FRONTEND_URL}/profil?payment_canceled=true`,
+            metadata: {
+                userId: userId,
+            },
+        });
+
+        res.json({ success: true, url: session.url });
+
+    } catch (error) {
+        console.error('❌ Hiba a Stripe Checkout session létrehozásakor:', error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt a fizetési folyamat indításakor.' });
+    }
+});
+
+
+// 2. Billing Portal session létrehozása
+app.post('/api/create-billing-portal-session', authenticateToken, async (req, res) => {
+    const userId = req.user.userId;
+    try {
+        const userResult = await pool.query('SELECT profile_metadata FROM users WHERE id = $1', [userId]);
+        const stripeCustomerId = userResult.rows[0]?.profile_metadata?.stripe_customer_id;
+
+        if (!stripeCustomerId) {
+            return res.status(400).json({ success: false, message: 'Nincs társított fizetési fiók.' });
+        }
+
+        const portalSession = await stripe.billingPortal.sessions.create({
+            customer: stripeCustomerId,
+            return_url: `${process.env.FRONTEND_URL}/profil`,
+        });
+
+        res.json({ success: true, url: portalSession.url });
+
+    } catch (error) {
+        console.error('❌ Hiba a Billing Portal session létrehozásakor:', error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
+    }
+});
+
 
 app.get('/api/admin/clear-users/:secret', async (req, res) => {
   const { secret } = req.params;

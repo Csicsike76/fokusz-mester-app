@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './ProfilePage.module.css';
-import { Link } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API_URL || '';
 
@@ -20,6 +19,7 @@ const ProfilePage = () => {
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
     const [isCopied, setIsCopied] = useState(false);
+    const [isRedirecting, setIsRedirecting] = useState(false);
 
     const fetchProfile = useCallback(async () => {
         if (!token) {
@@ -51,6 +51,15 @@ const ProfilePage = () => {
     }, [token, updateUser]);
 
     useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        if (queryParams.get("payment_success")) {
+            setMessage("Sikeres előfizetés! Köszönjük a bizalmadat.");
+            fetchProfile(); // Frissítsük a profilt, hogy az új státusz megjelenjen
+        }
+        if (queryParams.get("payment_canceled")) {
+            setError("Az előfizetési folyamatot megszakítottad.");
+        }
+
         if(user) {
             fetchProfile();
         } else {
@@ -133,6 +142,31 @@ const ProfilePage = () => {
         });
     };
 
+    const handleStripeRedirect = async (endpoint) => {
+        setError('');
+        setMessage('');
+        setIsRedirecting(true);
+        try {
+            const response = await fetch(`${API_URL}${endpoint}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message);
+            
+            if (data.url) {
+                window.location.href = data.url;
+            }
+        } catch (err) {
+            setError(err.message || 'Hiba történt. Kérjük, próbáld újra.');
+            setIsRedirecting(false);
+        }
+    };
+
+
     const getTrialInfo = (regDate) => {
         if (!regDate) return null;
         
@@ -149,7 +183,6 @@ const ProfilePage = () => {
 
     const trialInfo = registrationDate ? getTrialInfo(registrationDate) : null;
 
-    // A progress barhoz szükséges számítás
     const referralsForNextReward = user ? (user.successful_referrals || 0) % 5 : 0;
     const progressPercentage = (referralsForNextReward / 5) * 100;
 
@@ -179,19 +212,37 @@ const ProfilePage = () => {
                         <div className={styles.statusBox}>
                             <p className={styles.statusActive}>Aktív Prémium Előfizetés</p>
                             <p>Hozzáférésed érvényes: <strong>{user.subscription_end_date ? new Date(user.subscription_end_date).toLocaleDateString('hu-HU') : 'N/A'}</strong></p>
-                            <button className={styles.manageButton}>Előfizetés Kezelése</button>
+                            <button 
+                                className={styles.manageButton} 
+                                onClick={() => handleStripeRedirect('/api/create-billing-portal-session')}
+                                disabled={isRedirecting}
+                            >
+                                {isRedirecting ? 'Átirányítás...' : 'Előfizetés Kezelése'}
+                            </button>
                         </div>
-                    ) : isTrialActive ? (
+                    ) : isTrialActive && trialInfo ? (
                         <div className={styles.statusBox}>
                             <p className={styles.statusTrial}>30 Napos Próbaidőszak</p>
                             <p>Lejárat: <strong>{trialInfo.expiration} ({trialInfo.daysLeft} nap van hátra)</strong></p>
-                            <Link to="/elofizetes" className={styles.subscriptionCtaButton}>Prémium Előfizetés Most!</Link>
+                            <button 
+                                className={styles.subscriptionCtaButton} 
+                                onClick={() => handleStripeRedirect('/api/create-checkout-session')}
+                                disabled={isRedirecting}
+                            >
+                               {isRedirecting ? 'Átirányítás...' : 'Prémium Előfizetés Most!'}
+                            </button>
                         </div>
                     ) : (
                         <div className={styles.statusBox}>
                             <p className={styles.statusInactive}>Nincs Aktív Előfizetésed</p>
                             <p>Szerezz hozzáférést az összes prémium tartalomhoz és eszközhöz.</p>
-                            <Link to="/elofizetes" className={styles.subscriptionCtaButton}>Tovább az Előfizetéshez</Link>
+                            <button 
+                                className={styles.subscriptionCtaButton}
+                                onClick={() => handleStripeRedirect('/api/create-checkout-session')}
+                                disabled={isRedirecting}
+                            >
+                                {isRedirecting ? 'Átirányítás...' : 'Tovább az Előfizetéshez'}
+                            </button>
                         </div>
                     )}
                 </div>
