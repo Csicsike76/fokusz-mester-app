@@ -122,22 +122,7 @@
 }
 
 @media(max-width: 768px) {
-    .header {
-        padding: 2rem 1rem; /* VÍZSZINTES PADDING CSÖKKENTVE */
-    }
-    .header h1 { 
-        font-size: 2rem; 
-    }
-    .header p { 
-        font-size: 1rem; 
-    }
-    .sectionTitle { 
-        font-size: 1.5rem; 
-    }
-    .cardGrid {
-        gap: 1rem; /* KÁRTYÁK KÖZÖTTI RÉS CSÖKKENTVE */
-    }
-    .card {
-        padding: 1.5rem; /* KÁRTYÁK PADDINGJA CSÖKKENTVE */
-    }
+    .header h1 { font-size: 2rem; }
+    .header p { font-size: 1rem; }
+    .sectionTitle { font-size: 1.5rem; }
 }

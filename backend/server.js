@@ -1157,6 +1157,8 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`✅ A Fókusz Mester szerver elindult a ${PORT} porton.`);
+
+// A JAVÍTOTT, HELYES KÓD:
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ A Fókusz Mester szerver elindult a ${PORT} porton, és a helyi hálózaton is elérhető.`);
 });
