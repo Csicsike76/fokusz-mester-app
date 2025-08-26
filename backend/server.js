@@ -15,30 +15,9 @@ const validator = require('validator');
 const { rateLimit, ipKeyGenerator } = require('express-rate-limit');
 const axios = require('axios');
 
-// VÉGLEGES JAVÍTÁS: A .env fájlt csak akkor töltjük be, ha nem az éles szerveren futunk.
-if (process.env.NODE_ENV !== 'production') {
-  const tryPaths = [
-    path.resolve(process.cwd(), '.env'),
-    path.resolve(__dirname, '.env'),
-    path.resolve(__dirname, '..', '.env'),
-  ];
-  let loaded = false;
-  try {
-    for (const p of tryPaths) {
-      const ok = require('fs').existsSync(p);
-      if (ok) {
-        require('dotenv').config({ path: p });
-        loaded = true;
-        break;
-      }
-    }
-    if (!loaded) {
-      require('dotenv').config();
-    }
-  } catch (_) {
-    // no-op
-  }
-}
+// JAVÍTÁS: .env betöltése a gyökérkönyvtárból
+require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
+
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -49,7 +28,7 @@ const sslRequired = (() => {
 
   const url = String(process.env.DATABASE_URL || '');
   if (/render\.com|heroku(app)?\.com|amazonaws\.com|azure|gcp|railway\.app/i.test(url)) return true;
-  if (/localhost|127\.0\.0\.1/.test(url) || url === '') return false;
+  if (/localhost|127\.0.0\.1/.test(url) || url === '') return false;
 
   return true;
 })();
@@ -68,7 +47,39 @@ const transporter = nodemailer.createTransport({
 });
 
 const app = express();
-app.use(cors());
+
+// JAVÍTÁS: CORS beállítása a mobilról érkező kérések engedélyezéséhez
+const whitelist = ['http://localhost:3000', process.env.FRONTEND_URL];
+if (process.env.NODE_ENV !== 'production') {
+    // Fejlesztés közben engedélyezzük a helyi hálózati IP-ket is
+    const os = require('os');
+    const nets = os.networkInterfaces();
+    for (const name of Object.keys(nets)) {
+        for (const net of nets[name]) {
+            if (net.family === 'IPv4' && !net.internal) {
+                whitelist.push(`http://${net.address}:3000`);
+            }
+        }
+    }
+}
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+};
+app.use(cors(corsOptions));
+
+
+// JAVÍTÁS: Debugging middleware a bejövő kérések naplózásához
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] Bejövő kérés: ${req.method} ${req.originalUrl}`);
+    next();
+});
+
 
 // A Stripe Webhooknak a nyers body-ra van szüksége az aláírás ellenőrzéséhez.
 // Ennek a middleware-nek a globális express.json() előtt kell lennie.
@@ -90,8 +101,15 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
         case 'invoice.paid':
             const invoice = event.data.object;
             
-            if (invoice.billing_reason === 'subscription_create') {
+            if (invoice.billing_reason === 'subscription_create' || invoice.billing_reason === 'subscription_cycle') {
                 const subscriptionId = invoice.subscription;
+                
+                // JAVÍTÁS: Ellenőrizzük, hogy a subscriptionId létezik-e, mielőtt használnánk
+                if (!subscriptionId) {
+                    console.error('❌ Hiba: Hiányzó "subscription" azonosító az "invoice.paid" eseményben.', invoice);
+                    break; // Kilépünk a switch-ből, ha nincs subscription ID
+                }
+
                 const customerId = invoice.customer;
 
                 const client = await pool.connect();
@@ -1014,6 +1032,47 @@ app.get('/api/quiz/:slug', async (req, res) => {
     console.error(`❌ Hiba a(z) /api/quiz/${req.params.slug} feldgozásakor:`, err);
     return res.status(500).json({ success: false, message: 'Szerverhiba történt a tartalom betöltésekor.' });
   }
+});
+
+app.post('/api/quiz/results', authenticateToken, async (req, res) => {
+    const { curriculumSlug, score, totalQuestions } = req.body;
+    const userId = req.user.userId;
+
+    if (!curriculumSlug || typeof score !== 'number' || typeof totalQuestions !== 'number') {
+        return res.status(400).json({ success: false, message: 'Hiányos adatok a kvízeredmény mentéséhez.' });
+    }
+
+    try {
+        // 1. Lekerjuk a curriculum ID-t a slug alapjan
+        const curriculumResult = await pool.query('SELECT id FROM curriculums WHERE slug = $1', [curriculumSlug]);
+        if (curriculumResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'A megadott tananyag nem található.' });
+        }
+        const curriculumId = curriculumResult.rows[0].id;
+        
+        // 2. Kiszamoljuk a szazalekos eredmenyt
+        const scorePercentage = totalQuestions > 0 ? (score / totalQuestions) * 100 : 0;
+
+        // 3. Eredmeny mentese vagy frissitese az adatbazisban
+        const query = `
+            INSERT INTO user_quiz_results (user_id, curriculum_id, completed_questions, total_questions, score_percentage, completed_at)
+            VALUES ($1, $2, $3, $4, $5, NOW())
+            ON CONFLICT (user_id, curriculum_id) DO UPDATE SET
+                completed_questions = EXCLUDED.completed_questions,
+                total_questions = EXCLUDED.total_questions,
+                score_percentage = EXCLUDED.score_percentage,
+                completed_at = NOW()
+            RETURNING *;
+        `;
+        
+        const { rows } = await pool.query(query, [userId, curriculumId, score, totalQuestions, scorePercentage]);
+        
+        res.status(200).json({ success: true, message: 'Eredmény sikeresen mentve.', data: rows[0] });
+
+    } catch (error) {
+        console.error("❌ Hiba a kvízeredmény mentésekor:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt az eredmény mentésekor.' });
+    }
 });
 
 // === STRIPE INTEGRÁCIÓ ===
