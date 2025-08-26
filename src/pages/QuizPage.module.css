@@ -1,7 +1,8 @@
 .container {
-  padding: 1rem;
+  /* JAVÍTÁS: Mobilon a container töltse ki a teljes szélességet, ne legyen saját paddingja */
+  padding: 0; 
   color: white;
-  max-width: 800px;
+  max-width: 800px; /* Ez megmarad, de a quizBox felülírja majd mobilon */
   width: 100%;
   margin: 1rem auto;
 }
@@ -9,26 +10,31 @@
 .quizBox {
   background-color: rgba(44, 62, 80, 0.9);
   border-radius: 10px;
-  padding: 1.5rem;
   backdrop-filter: blur(5px);
+  /* JAVÍTÁS: Nagyobb képernyőn a belső margó marad a régi */
+  padding: 2rem;
+  /* JAVÍTÁS: Biztosítjuk, hogy a padding ne adódjon hozzá a szélességhez */
+  box-sizing: border-box; 
+  width: 100%; /* A quizBox töltse ki a .container-t */
 }
 
 .quizBox h1 {
   margin-top: 0;
   text-align: center;
-  font-size: 1.8rem;
+  /* JAVÍTÁS: Nagyobb képernyőn a betűméret marad a régi */
+  font-size: 2.2rem;
 }
 
-/* VÉGLEGES JAVÍTÁS: A beküldő gomb stílusa */
+/* ... a többi stílus (gombok, stb.) változatlan marad ... */
 .submitButton {
   display: block;
   width: 100%;
   padding: 1rem;
-  background-color: #27ae60; /* Élénkebb zöld */
+  background-color: #27ae60;
   color: white;
   border: none;
-  border-radius: 10px; /* Gömbölyűbb */
-  font-size: 1.3rem; /* Nagyobb betűméret */
+  border-radius: 10px;
+  font-size: 1.3rem;
   font-weight: bold;
   cursor: pointer;
   margin-top: 2rem;
@@ -37,23 +43,21 @@
 }
 .submitButton:hover:not(:disabled) { 
   background-color: #2ecc71;
-  transform: translateY(-2px); /* Kiemelkedő hatás */
+  transform: translateY(-2px);
 }
 .submitButton:disabled {
-  background-color: #95a5a6; /* Egyértelmű inaktív állapot */
+  background-color: #95a5a6;
   color: #ecf0f1;
   cursor: not-allowed;
   box-shadow: none;
   transform: none;
 }
-
 .resultsBox {
   text-align: center;
   margin-top: 1.5rem;
   padding: 1rem 1.25rem;
   border-radius: 10px;
 }
-
 .resultsActions {
   display: flex;
   flex-direction: column;
@@ -61,41 +65,45 @@
   align-items: stretch;
   margin-top: 1rem;
 }
-
-/* VÉGLEGES JAVÍTÁS: Az újrakezdő gomb stílusa */
 .restartButton {
-  padding: 0.9rem 1.4rem; /* Nagyobb */
-  background-color: #3498db; /* Barátságos kék */
+  padding: 0.9rem 1.4rem;
+  background-color: #3498db;
   color: #fff;
   border: none;
-  border-radius: 10px; /* Gömbölyűbb */
+  border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
-  font-size: 1.1rem; /* Nagyobb betűméret */
+  font-size: 1.1rem;
   transition: filter 0.2s;
 }
 .restartButton:hover { 
   filter: brightness(1.1); 
 }
-
-
 .bad  { border: 2px solid #e74c3c; background: rgba(231, 76, 60, 0.12); }
 .ok   { border: 2px solid #f1c40f; background: rgba(241, 196, 15, 0.12); }
 .good { border: 2px solid #2ecc71; background: rgba(46, 204, 113, 0.12); }
 
-@media (min-width: 768px) {
+
+/* === JAVÍTÁS: Stílusok kisebb, mobil képernyőkre (768px alatt) === */
+@media (max-width: 768px) {
   .container {
-    padding: 2rem;
-    margin: 2rem auto;
+    margin: 0; /* Mobilon nincs szükség külső margóra */
+    width: 100%; /* Töltse ki a teljes szélességet */
   }
+
   .quizBox {
-    padding: 2rem;
+    /* ITT A LÉNYEG: A tábla mobilon a képernyő 100%-át foglalja el */
+    width: 100%; 
+    padding: 1rem; /* A belső margó legyen kisebb mobilon */
+    border-radius: 0; /* Mobilon a tábla ne legyen lekerekítve, hogy kitöltse a képernyőt */
+    min-height: 100vh; /* Legalább olyan magas, mint a képernyő */
   }
+
   .quizBox h1 {
-    font-size: 2.2rem;
+    font-size: 1.8rem; /* A címsor is legyen kisebb mobilon */
   }
+
   .resultsActions {
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column; /* A gombok egymás alatt legyenek */
   }
 }
