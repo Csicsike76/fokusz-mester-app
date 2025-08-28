@@ -80,8 +80,6 @@
     background-color: #16a085;
 }
 
-/* ... a .submitButton:hover stílus után ... */
-
 .successMessage {
     color: #2ecc71; /* Zöld szín a sikerhez */
     background-color: rgba(46, 204, 113, 0.1);
@@ -110,4 +108,31 @@
   display: flex;
   justify-content: center;
   margin-bottom: 1.5rem;
+}
+
+.fieldErrorMessage {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+/* ÚJ STÍLUSOK A JELSZÓ VISSZAJELZÉSHEZ */
+.passwordCriteria {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.passwordCriteria div {
+    transition: color 0.3s;
+}
+
+.invalid {
+    color: #e74c3c; /* Piros */
+}
+
+.valid {
+    color: #2ecc71; /* Zöld */
 }

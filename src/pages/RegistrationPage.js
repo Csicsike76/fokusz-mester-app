@@ -12,41 +12,42 @@ const RegistrationPage = () => {
         vipCode: '', referralCode: '', classCode: '', specialCode: '', termsAccepted: false,
     });
     
-    // JAVÍTÁS: Külön állapotok a jelszóhibáknak a mezőnkénti kijelzéshez
-    const [passwordStrengthError, setPasswordStrengthError] = useState('');
+    // Állapot a jelszó validációs kritériumoknak
+    const [passwordCriteria, setPasswordCriteria] = useState({
+        minLength: false,
+        hasLowercase: false,
+        hasUppercase: false,
+        hasNumber: false,
+        hasSymbol: false,
+    });
+
     const [passwordMatchError, setPasswordMatchError] = useState('');
     
     const [message, setMessage] = useState('');
-    const [error, setError] = useState(''); // Ez marad a globális, szerveroldali hibáknak
+    const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [recaptchaToken, setRecaptchaToken] = useState(null);
     const recaptchaRef = useRef();
 
     useEffect(() => {
-        // Jelszó erősségének ellenőrzése
+        // Jelszó erősségének ellenőrzése és kritériumok frissítése
         if (formData.password) {
-            const hasLowercase = /[a-z]/.test(formData.password);
-            const hasUppercase = /[A-Z]/.test(formData.password);
-            const hasNumber = /[0-9]/.test(formData.password);
-            const hasSymbol = /[^A-Za-z0-9]/.test(formData.password);
-            const isLongEnough = formData.password.length >= 8;
-
-            if (!isLongEnough) {
-                setPasswordStrengthError("A jelszónak legalább 8 karakter hosszúnak kell lennie.");
-            } else if (!hasLowercase || !hasUppercase || !hasNumber || !hasSymbol) {
-                setPasswordStrengthError("Kis- és nagybetű, szám és szimbólum szükséges.");
-            } else {
-                setPasswordStrengthError(''); // Ha minden rendben, töröljük a hibát
-            }
+            setPasswordCriteria({
+                minLength: formData.password.length >= 8,
+                hasLowercase: /[a-z]/.test(formData.password),
+                hasUppercase: /[A-Z]/.test(formData.password),
+                hasNumber: /[0-9]/.test(formData.password),
+                hasSymbol: /[^A-Za-z0-9]/.test(formData.password),
+            });
         } else {
-            setPasswordStrengthError('');
+             setPasswordCriteria({ minLength: false, hasLowercase: false, hasUppercase: false, hasNumber: false, hasSymbol: false });
         }
 
         // Jelszó egyezésének ellenőrzése
         if (formData.passwordConfirm && formData.password !== formData.passwordConfirm) {
             setPasswordMatchError("A két jelszó nem egyezik!");
         } else {
-            setPasswordMatchError(''); // Ha egyeznek, töröljük a hibát
+            setPasswordMatchError('');
         }
 
     }, [formData.password, formData.passwordConfirm]);
@@ -63,9 +64,9 @@ const RegistrationPage = () => {
         setError('');
         setMessage('');
 
-        // Ellenőrzés a beküldés előtt is
-        if (passwordStrengthError) { return; }
-        if (passwordMatchError) { return; }
+        const allCriteriaMet = Object.values(passwordCriteria).every(Boolean);
+        if (!allCriteriaMet) { setError("A jelszó nem felel meg a biztonsági követelményeknek."); return; }
+        if (passwordMatchError) { setError(passwordMatchError); return; }
         if (!formData.termsAccepted) { setError("El kell fogadnod a felhasználási feltételeket!"); return; }
         if (!recaptchaToken) { setError("Kérjük, igazolja, hogy nem robot."); return; }
 
@@ -97,7 +98,8 @@ const RegistrationPage = () => {
         }
     };
     
-    const isSubmitDisabled = isLoading || !!passwordStrengthError || !!passwordMatchError || !formData.termsAccepted || !recaptchaToken;
+    const allCriteriaMet = Object.values(passwordCriteria).every(Boolean);
+    const isSubmitDisabled = isLoading || !allCriteriaMet || !!passwordMatchError || !formData.termsAccepted || !recaptchaToken;
 
 
     return (
@@ -123,13 +125,19 @@ const RegistrationPage = () => {
                     <div className={styles.formGroup}>
                         <label htmlFor="password">Jelszó</label>
                         <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
-                        {/* JAVÍTÁS: Hibaüzenet közvetlenül a mező alatt */}
-                        {passwordStrengthError && formData.password && <p className={styles.fieldErrorMessage}>{passwordStrengthError}</p>}
+                        {formData.password && (
+                            <div className={styles.passwordCriteria}>
+                                <div className={passwordCriteria.minLength ? styles.valid : styles.invalid}>✓ Legalább 8 karakter</div>
+                                <div className={passwordCriteria.hasLowercase ? styles.valid : styles.invalid}>✓ Legalább egy kisbetű</div>
+                                <div className={passwordCriteria.hasUppercase ? styles.valid : styles.invalid}>✓ Legalább egy nagybetű</div>
+                                <div className={passwordCriteria.hasNumber ? styles.valid : styles.invalid}>✓ Legalább egy szám</div>
+                                <div className={passwordCriteria.hasSymbol ? styles.valid : styles.invalid}>✓ Legalább egy szimbólum</div>
+                            </div>
+                        )}
                     </div>
                     <div className={styles.formGroup}>
                         <label htmlFor="passwordConfirm">Jelszó megerősítése</label>
                         <input type="password" id="passwordConfirm" name="passwordConfirm" value={formData.passwordConfirm} onChange={handleChange} required />
-                         {/* JAVÍTÁS: Hibaüzenet közvetlenül a mező alatt */}
                         {passwordMatchError && formData.passwordConfirm && <p className={styles.fieldErrorMessage}>{passwordMatchError}</p>}
                     </div>
                     
@@ -169,7 +177,6 @@ const RegistrationPage = () => {
                       </div>
                     )}
 
-                    {/* JAVÍTÁS: A mezőspecifikus hibák már nem itt, hanem fentebb jelennek meg */}
                     {message && <p className={styles.successMessage}>{message}</p>}
                     {error && <p className={styles.errorMessage}>{error}</p>}
 
