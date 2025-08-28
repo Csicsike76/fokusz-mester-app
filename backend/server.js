@@ -947,8 +947,8 @@ app.post('/api/teacher/create-class-checkout-session', authenticateToken, async 
                 quantity: 1,
             }],
             mode: 'payment',
-            success_url: `${process.env.FRONTEND_URL}/teacher?class_creation_success=true`,
-            cancel_url: `${process.env.FRONTEND_URL}/teacher?class_creation_canceled=true`,
+            success_url: `${process.env.FRONTEND_URL}/dashboard/teacher?class_creation_success=true`,
+            cancel_url: `${process.env.FRONTEND_URL}/dashboard/teacher?class_creation_canceled=true`,
             metadata: {
                 type: 'teacher_class_payment',
                 teacherId: teacherId,
