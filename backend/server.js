@@ -649,6 +649,10 @@ const getFullUserProfile = async (userId) => {
     }
     const userProfile = userResult.rows[0];
 
+    if (userProfile.role === 'teacher') {
+        userProfile.subscription_status = 'vip_teacher';
+    }
+
     const referralsResult = await pool.query(
         `SELECT COUNT(DISTINCT r.referred_user_id)
          FROM referrals r

@@ -311,9 +311,13 @@ const ProfilePage = () => {
                 <hr className={styles.divider} />
 
                 <div className={styles.section}>
-                    <h3>Előfizetési Státusz</h3>
-                     <div className={styles.subscriptionStatus}>
-                        {profileData.is_permanent_free ? (
+                    <h3>{profileData.role === 'teacher' ? 'VIP Tagság' : 'Előfizetési Státusz'}</h3>
+                    <div className={styles.subscriptionStatus}>
+                        {profileData.subscription_status === 'vip_teacher' ? (
+                            <p className={styles.statusInfo}>
+                                A platformhoz való hozzáférésed tanárként korlátlan és díjmentes.
+                            </p>
+                        ) : profileData.is_permanent_free ? (
                             <p className={styles.statusInfo}>Örökös prémium hozzáférésed van.</p>
                         ) : isSubscribed ? (
                             <>
@@ -335,6 +339,7 @@ const ProfilePage = () => {
                         )}
                     </div>
                 </div>
+
 
                 <hr className={styles.divider} />
                 
