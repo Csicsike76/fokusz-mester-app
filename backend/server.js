@@ -28,7 +28,7 @@ const sslRequired = (() => {
 
   const url = String(process.env.DATABASE_URL || '');
   if (/render\.com|heroku(app)?\.com|amazonaws\.com|azure|gcp|railway\.app/i.test(url)) return true;
-  if (/localhost|127\.0.0\.1/.test(url) || url === '') return false;
+  if (/localhost|127\.0\.0\.1/.test(url) || url === '') return false;
 
   return true;
 })();
@@ -102,12 +102,12 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
             const invoice = event.data.object;
             
             if (invoice.billing_reason === 'subscription_create' || invoice.billing_reason === 'subscription_cycle') {
-                const subscriptionId = invoice.subscription;
+                // JAVÍTÁS: Robusztusabb subscription ID kinyerése, ami mindkét webhook formátumot kezeli.
+                const subscriptionId = invoice.subscription || invoice.parent?.subscription_details?.subscription;
                 
-                // JAVÍTÁS: Ellenőrizzük, hogy a subscriptionId létezik-e, mielőtt használnánk
                 if (!subscriptionId) {
-                    console.error('❌ Hiba: Hiányzó "subscription" azonosító az "invoice.paid" eseményben.', invoice);
-                    break; // Kilépünk a switch-ből, ha nincs subscription ID
+                    console.error('❌ Hiba: A "subscription" azonosító továbbra is hiányzik az "invoice.paid" eseményből.', invoice);
+                    break; 
                 }
 
                 const customerId = invoice.customer;
@@ -116,6 +116,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                 try {
                     await client.query('BEGIN');
 
+                    // A Stripe Customer objektum lekérdezése a userId kinyeréséhez a metaadatokból.
                     const customer = await stripe.customers.retrieve(customerId);
                     const userId = customer.metadata.userId;
 
@@ -123,6 +124,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                         throw new Error(`Hiányzó userId a Stripe Customer (${customerId}) metaadataiból!`);
                     }
 
+                    // A teljes Subscription objektum lekérdezése a részletes adatokért.
                     const subscription = await stripe.subscriptions.retrieve(subscriptionId);
 
                     await client.query(
@@ -141,12 +143,12 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                             subscription.status,
                             subscription.current_period_start,
                             subscription.current_period_end,
-                            subscription.id
+                            subscription.id // Itt a subscription ID-t mentjük invoice_id-ként a konzisztencia érdekében
                         ]
                     );
                     console.log(`✅ Előfizetés sikeresen rögzítve (invoice.paid) a felhasználóhoz: ${userId}`);
 
-                    console.log(`Ajánlói rendszer ellenőrzése a felhasználóhoz: ${userId}`);
+                    // Ajánlói rendszer ellenőrzése
                     const referralResult = await client.query('SELECT referrer_user_id FROM referrals WHERE referred_user_id = $1', [userId]);
                     if (referralResult.rows.length > 0) {
                         const referrerId = referralResult.rows[0].referrer_user_id;
@@ -155,7 +157,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                            `SELECT COUNT(DISTINCT r.referred_user_id)
                             FROM referrals r
                             JOIN subscriptions s ON r.referred_user_id = s.user_id
-                            WHERE r.referrer_user_id = $1 AND s.status = 'active'`,
+                            WHERE r.referrer_user_id = $1 AND s.status IN ('active', 'trialing')`,
                            [referrerId]
                         );
                         const newTotalReferrals = parseInt(successfulReferralsResult.rows[0].count, 10);
@@ -190,6 +192,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
             const subscriptionUpdated = event.data.object;
             try {
                 const clientUpdate = await pool.connect();
+                // A WHERE feltételt a subscription ID-ra (invoice_id oszlopunk) kell állítani
                 await clientUpdate.query(
                    `UPDATE subscriptions 
                     SET status = $1, current_period_end = to_timestamp($2), updated_at = NOW()
@@ -197,7 +200,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                     [
                         subscriptionUpdated.status,
                         subscriptionUpdated.current_period_end,
-                        subscriptionUpdated.id
+                        subscriptionUpdated.id 
                     ]
                 );
                 clientUpdate.release();
@@ -649,50 +652,57 @@ app.post('/api/login', authLimiter, async (req, res) => {
   }
 });
 
+const getFullUserProfile = async (userId) => {
+    const userQuery = `
+        SELECT 
+            u.id, 
+            u.username, 
+            u.email, 
+            u.role, 
+            u.referral_code, 
+            u.created_at,
+            u.profile_metadata,
+            u.is_permanent_free,
+            s.status as subscription_status,
+            s.current_period_end as subscription_end_date
+        FROM users u
+        LEFT JOIN subscriptions s ON u.id = s.user_id 
+        WHERE u.id = $1
+        ORDER BY s.created_at DESC
+        LIMIT 1;
+    `;
+    const userResult = await pool.query(userQuery, [userId]);
+
+    if (userResult.rows.length === 0) {
+        return null;
+    }
+    const userProfile = userResult.rows[0];
+
+    const referralsResult = await pool.query(
+        `SELECT COUNT(DISTINCT r.referred_user_id)
+         FROM referrals r
+         JOIN subscriptions s ON r.referred_user_id = s.user_id
+         WHERE r.referrer_user_id = $1 AND s.status IN ('active', 'trialing')`,
+        [userId]
+    );
+    const successfulReferrals = parseInt(referralsResult.rows?.[0]?.count || 0, 10);
+    const earnedRewards = Math.floor(successfulReferrals / 5);
+
+    userProfile.successful_referrals = successfulReferrals;
+    userProfile.earned_rewards = earnedRewards;
+    
+    const activeSubscription = userProfile.subscription_status === 'active' || userProfile.subscription_status === 'trialing';
+    userProfile.is_subscribed = userProfile.is_permanent_free || activeSubscription;
+
+    return userProfile;
+};
+
 app.get('/api/profile', authenticateToken, async (req, res) => {
     try {
-        const userQuery = `
-            SELECT 
-                u.id, 
-                u.username, 
-                u.email, 
-                u.role, 
-                u.referral_code, 
-                u.created_at,
-                u.profile_metadata,
-                s.status as subscription_status,
-                s.current_period_end as subscription_end_date
-            FROM users u
-            LEFT JOIN subscriptions s ON u.id = s.user_id AND s.status = 'active'
-            WHERE u.id = $1
-            ORDER BY s.created_at DESC
-            LIMIT 1;
-        `;
-        const userResult = await pool.query(userQuery, [req.user.userId]);
-
-        if (userResult.rows.length === 0) {
+        const userProfile = await getFullUserProfile(req.user.userId);
+        if (!userProfile) {
             return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
         }
-        const userProfile = userResult.rows[0];
-
-        const referralsResult = await pool.query(
-            `SELECT COUNT(DISTINCT r.referred_user_id)
-             FROM referrals r
-             JOIN subscriptions s ON r.referred_user_id = s.user_id
-             WHERE r.referrer_user_id = $1 AND s.status = 'active'`,
-            [req.user.userId]
-        );
-        const successfulReferrals = parseInt(referralsResult.rows[0].count, 10);
-
-        const earnedRewards = Math.floor(successfulReferrals / 5);
-
-        userProfile.successful_referrals = successfulReferrals;
-        userProfile.earned_rewards = earnedRewards;
-        
-        userProfile.is_subscribed = userProfile.subscription_status === 'active';
-        
-        delete userProfile.subscription_status;
-        
         res.status(200).json({ success: true, user: userProfile });
     } catch (error) {
         console.error("Profil lekérdezési hiba:", error);
@@ -702,15 +712,28 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
 
 app.put('/api/profile', authenticateToken, async (req, res) => {
     const { username } = req.body;
-    if (!username) {
+    const userId = req.user.userId;
+
+    if (!username || username.trim() === '') {
         return res.status(400).json({ success: false, message: 'A felhasználónév nem lehet üres.' });
     }
     try {
-        const updateResult = await pool.query('UPDATE users SET username = $1 WHERE id = $2 RETURNING id, username, email, role, referral_code, created_at', [username, req.user.userId]);
-        if (updateResult.rows.length === 0) {
-            return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
+        await pool.query(
+            'UPDATE users SET username = $1 WHERE id = $2', 
+            [username.trim(), userId]
+        );
+        
+        const updatedUserProfile = await getFullUserProfile(userId);
+        if (!updatedUserProfile) {
+             return res.status(404).json({ success: false, message: 'A frissített felhasználó nem található.' });
         }
-        res.status(200).json({ success: true, message: 'Felhasználónév sikeresen frissítve.', user: updateResult.rows[0] });
+
+        res.status(200).json({ 
+            success: true, 
+            message: 'Felhasználónév sikeresen frissítve.', 
+            user: updatedUserProfile 
+        });
+
     } catch (error) {
         console.error("Profil frissítési hiba:", error);
         res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
@@ -750,6 +773,54 @@ app.post('/api/profile/change-password', authenticateToken, async (req, res) => 
         res.status(500).json({ success: false, message: 'Szerverhiba történt a jelszócsere során.' });
     }
 });
+
+app.get('/api/profile/stats', authenticateToken, async (req, res) => {
+    const userId = req.user.userId;
+    try {
+        const completedLessonsResult = await pool.query(
+            'SELECT COUNT(*) FROM user_quiz_results WHERE user_id = $1',
+            [userId]
+        );
+        const completed_lessons_count = parseInt(completedLessonsResult.rows[0].count, 10);
+
+        const bestQuizResultsResult = await pool.query(
+            `SELECT c.title, uqr.score_percentage
+             FROM user_quiz_results uqr
+             JOIN curriculums c ON uqr.curriculum_id = c.id
+             WHERE uqr.user_id = $1
+             ORDER BY uqr.score_percentage DESC
+             LIMIT 3`,
+            [userId]
+        );
+        const best_quiz_results = bestQuizResultsResult.rows;
+
+        const mostPracticedSubjectsResult = await pool.query(
+            `SELECT c.subject, COUNT(c.subject) as lesson_count
+             FROM user_quiz_results uqr
+             JOIN curriculums c ON uqr.curriculum_id = c.id
+             WHERE uqr.user_id = $1 AND c.subject IS NOT NULL
+             GROUP BY c.subject
+             ORDER BY lesson_count DESC
+             LIMIT 3`,
+            [userId]
+        );
+        const most_practiced_subjects = mostPracticedSubjectsResult.rows;
+
+        res.status(200).json({
+            success: true,
+            stats: {
+                completed_lessons_count,
+                best_quiz_results,
+                most_practiced_subjects,
+            }
+        });
+
+    } catch (error) {
+        console.error("Statisztika lekérdezési hiba:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt a statisztikák lekérdezésekor.' });
+    }
+});
+
 
 app.post('/api/forgot-password', authLimiter, async (req, res) => {
   const { email } = req.body;
