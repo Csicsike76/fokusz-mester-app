@@ -527,29 +527,50 @@ app.post('/api/register', authLimiter, async (req, res) => {
 
 app.get('/api/verify-email/:token', async (req, res) => {
   const { token } = req.params;
+  const client = await pool.connect();
   try {
-    const userResult = await pool.query(
-      'SELECT id FROM users WHERE email_verification_token = $1 AND email_verification_expires > NOW()',
+    const userResult = await client.query(
+      'SELECT id, role FROM users WHERE email_verification_token = $1 AND email_verification_expires > NOW()',
       [token]
     );
+
     if (userResult.rows.length === 0) {
       return res
         .status(400)
         .json({ success: false, message: 'A megerősítő link érvénytelen vagy lejárt.' });
     }
     const user = userResult.rows[0];
-    await pool.query(
+
+    await client.query('BEGIN');
+
+    await client.query(
       'UPDATE users SET email_verified = true, email_verification_token = NULL, email_verification_expires = NULL WHERE id = $1',
       [user.id]
     );
+
+    if (user.role !== 'teacher') {
+      const trialQuery = `
+        INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider)
+        VALUES ($1, 'trial', 'trialing', NOW(), NOW() + INTERVAL '30 days', 'system')
+        ON CONFLICT (user_id) DO NOTHING;
+      `;
+      await client.query(trialQuery, [user.id]);
+    }
+
+    await client.query('COMMIT');
+    
     res
       .status(200)
-      .json({ success: true, message: 'Sikeres megerősítés! Most már bejelentkezhetsz.' });
-  } catch (error) {
+      .json({ success: true, message: 'Sikeres megerősítés! A 30 napos prémium próbaidőszakod elindult. Most már bejelentkezhetsz.' });
+  
+    } catch (error) {
+    await client.query('ROLLBACK');
     console.error("Email-ellenőrzési hiba:", error);
     res
       .status(500)
       .json({ success: false, message: 'Szerverhiba történt a megerősítés során.' });
+  } finally {
+    client.release();
   }
 });
 

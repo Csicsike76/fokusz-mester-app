@@ -212,8 +212,7 @@ const ProfilePage = () => {
     if (!profileData) {
         return <div className={styles.container}><p className={styles.errorMessage}>{error || 'Profiladatok nem elérhetők.'}</p></div>;
     }
-
-    const isSubscribed = profileData.is_subscribed;
+    
     const nextRewardProgress = (profileData.successful_referrals || 0) % 5;
 
     return (
@@ -319,7 +318,19 @@ const ProfilePage = () => {
                             </p>
                         ) : profileData.is_permanent_free ? (
                             <p className={styles.statusInfo}>Örökös prémium hozzáférésed van.</p>
-                        ) : isSubscribed ? (
+                        ) : profileData.subscription_status === 'trialing' ? (
+                            <>
+                                <p className={styles.statusInfo}>
+                                    Ingyenes próbaidőszakod aktív.
+                                    {profileData.subscription_end_date && ` A prémium funkciók eddig érhetőek el: ${new Date(profileData.subscription_end_date).toLocaleDateString()}`}
+                                </p>
+                                <div className={styles.subscribeOptions}>
+                                    <h4>Válts teljes előfizetésre a próbaidőszak lejárta előtt!</h4>
+                                    <button onClick={() => handleCreateCheckoutSession('monthly')} disabled={isLoading}>Havi Előfizetés</button>
+                                    <button onClick={() => handleCreateCheckoutSession('yearly')} disabled={isLoading}>Éves Előfizetés (2 hónap ajándék)</button>
+                                </div>
+                            </>
+                        ) : profileData.subscription_status === 'active' ? (
                             <>
                                 <p className={styles.statusInfo}>
                                     Előfizetésed aktív.
@@ -329,7 +340,7 @@ const ProfilePage = () => {
                             </>
                         ) : (
                             <>
-                                <p className={styles.statusInfo}>Jelenleg nincs aktív előfizetésed.</p>
+                                <p className={styles.statusInfo}>Jelenleg nincs aktív előfizetésed vagy próbaidőszakod.</p>
                                 <div className={styles.subscribeOptions}>
                                     <h4>Válassz prémium csomagot a korlátlan hozzáféréshez!</h4>
                                     <button onClick={() => handleCreateCheckoutSession('monthly')} disabled={isLoading}>Havi Előfizetés</button>
