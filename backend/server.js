@@ -1241,8 +1241,14 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
                 [userId]
             );
         }
+        
+        // --- MÓDOSÍTÁS KEZDETE: Próbaidőszak kezelése ---
+        const subscriptionResult = await pool.query(
+            'SELECT status, current_period_end FROM subscriptions WHERE user_id = $1',
+            [userId]
+        );
 
-        const session = await stripe.checkout.sessions.create({
+        const checkoutOptions = {
             payment_method_types: ['card'],
             customer: stripeCustomerId,
             line_items: [{
@@ -1255,7 +1261,26 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
             metadata: {
                 userId: userId,
             },
-        });
+        };
+        
+        const currentSubscription = subscriptionResult.rows[0];
+        if (currentSubscription && currentSubscription.status === 'trialing') {
+            const trialEndDate = new Date(currentSubscription.current_period_end);
+            const now = new Date();
+            if (trialEndDate > now) {
+                const remainingMilliseconds = trialEndDate.getTime() - now.getTime();
+                const remainingDays = Math.ceil(remainingMilliseconds / (1000 * 60 * 60 * 24));
+
+                if (remainingDays > 0) {
+                    checkoutOptions.subscription_data = {
+                        trial_period_days: remainingDays
+                    };
+                }
+            }
+        }
+        // --- MÓDOSÍTÁS VÉGE ---
+
+        const session = await stripe.checkout.sessions.create(checkoutOptions);
 
         res.json({ success: true, url: session.url });
 

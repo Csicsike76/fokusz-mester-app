@@ -320,10 +320,12 @@ const ProfilePage = () => {
                             <p className={styles.statusInfo}>Örökös prémium hozzáférésed van.</p>
                         ) : profileData.subscription_status === 'trialing' ? (
                             <>
-                                <p className={styles.statusInfo}>
-                                    Ingyenes próbaidőszakod aktív.
-                                    {profileData.subscription_end_date && ` A prémium funkciók eddig érhetőek el: ${new Date(profileData.subscription_end_date).toLocaleDateString()}`}
-                                </p>
+                                <div className={styles.trialHighlightBox}>
+                                    <p>
+                                        <strong>Ingyenes próbaidőszakod aktív.</strong>
+                                        {profileData.subscription_end_date && ` A prémium funkciók eddig érhetőek el: ${new Date(profileData.subscription_end_date).toLocaleDateString()}`}
+                                    </p>
+                                </div>
                                 <div className={styles.subscribeOptions}>
                                     <h4>Válts teljes előfizetésre a próbaidőszak lejárta előtt!</h4>
                                     <button onClick={() => handleCreateCheckoutSession('monthly')} disabled={isLoading}>Havi Előfizetés</button>
