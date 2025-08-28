@@ -38,6 +38,7 @@ const Navbar = () => {
                         {item.label}
                     </ConditionalLink>
                 ))}
+                <Link to="/kapcsolat" onClick={() => setIsMenuOpen(false)}>Kapcsolat</Link>
             </div>
 
             <div className={styles.rightSide}>

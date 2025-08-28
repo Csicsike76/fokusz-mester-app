@@ -1,0 +1,103 @@
+/* src/pages/ContactPage.module.css */
+.container {
+    padding: 2rem;
+    max-width: 700px;
+    margin: 2rem auto;
+}
+
+.formWrapper {
+    background-color: #2c3e50;
+    padding: 2rem 3rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    color: #ecf0f1;
+}
+
+.formWrapper h1 {
+    text-align: center;
+    color: #ffffff;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.formWrapper p {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #bdc3c7;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #bdc3c7;
+}
+
+.formGroup input,
+.formGroup textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: #34495e;
+    border: 1px solid #7f8c8d;
+    color: #ecf0f1;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+.formGroup input:disabled {
+    background-color: #2c3e50;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.formWrapper button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.formWrapper button:hover {
+    background-color: #2980b9;
+}
+
+.formWrapper button:disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+}
+
+.successMessage, .errorMessage {
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.successMessage {
+    background-color: #27ae60;
+    color: white;
+}
+
+.errorMessage {
+    background-color: #c0392b;
+    color: white;
+}

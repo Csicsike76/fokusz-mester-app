@@ -1242,7 +1242,6 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
             );
         }
         
-        // --- MÓDOSÍTÁS KEZDETE: Próbaidőszak kezelése ---
         const subscriptionResult = await pool.query(
             'SELECT status, current_period_end FROM subscriptions WHERE user_id = $1',
             [userId]
@@ -1278,7 +1277,6 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
                 }
             }
         }
-        // --- MÓDOSÍTÁS VÉGE ---
 
         const session = await stripe.checkout.sessions.create(checkoutOptions);
 
@@ -1361,6 +1359,52 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
     res.status(500).json({ success: false, message: 'Hiba történt a törlés során.' });
   } finally {
     client.release();
+  }
+});
+
+app.post('/api/contact', authLimiter, async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  if (!name || !email || !subject || !message) {
+    return res.status(400).json({ success: false, message: 'Minden mező kitöltése kötelező.' });
+  }
+
+  if (!validator.isEmail(email)) {
+    return res.status(400).json({ success: false, message: 'Érvénytelen e-mail cím formátum.' });
+  }
+
+  try {
+    const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER;
+    if (!adminRecipient) {
+        console.error('❌ ADMIN_EMAIL is not set. Cannot send contact form email.');
+        return res.status(500).json({ success: false, message: 'A szerver nincs megfelelően beállítva az üzenetek fogadására.' });
+    }
+
+    const mailOptions = {
+      from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+      to: adminRecipient,
+      subject: `Új kapcsolatfelvétel: ${subject}`,
+      replyTo: email,
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+          <h2>Új üzenet érkezett a Fókusz Mester weboldalról</h2>
+          <p><strong>Feladó neve:</strong> ${validator.escape(name)}</p>
+          <p><strong>Feladó e-mail címe:</strong> ${validator.escape(email)}</p>
+          <p><strong>Tárgy:</strong> ${validator.escape(subject)}</p>
+          <hr>
+          <h3>Üzenet:</h3>
+          <p style="white-space: pre-wrap; background-color: #f4f4f4; padding: 15px; border-radius: 5px;">${validator.escape(message)}</p>
+        </div>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.status(200).json({ success: true, message: 'Köszönjük üzenetét! Hamarosan felvesszük Önnel a kapcsolatot.' });
+
+  } catch (error) {
+    console.error('❌ Hiba a kapcsolatfelvételi űrlap feldolgozása során:', error);
+    res.status(500).json({ success: false, message: 'Szerverhiba történt az üzenet küldése közben.' });
   }
 });
 

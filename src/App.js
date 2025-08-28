@@ -19,6 +19,7 @@ import HelpCenterPage from './pages/HelpCenterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import InteraktivMatematika from './pages/InteraktivMatematika';
+import ContactPage from './pages/ContactPage';
 import './App.css';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
             <Route path="verify-email/:token" element={<EmailVerificationPage />} />
             <Route path="approve-teacher/:userId" element={<TeacherApprovalPage />} />
             <Route path="sugo" element={<HelpCenterPage />} />
+            <Route path="kapcsolat" element={<ContactPage />} />
             <Route path="elfelejtett-jelszo" element={<ForgotPasswordPage />} />
             <Route path="reset-password/:token" element={<ResetPasswordPage />} />
 
