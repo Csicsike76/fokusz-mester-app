@@ -14,6 +14,7 @@ const TeacherDashboardPage = () => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [isRedirecting, setIsRedirecting] = useState(false);
+    const [paymentSuccess, setPaymentSuccess] = useState(false);
 
     const fetchClasses = useCallback(async () => {
         if (!token) return;
@@ -36,6 +37,7 @@ const TeacherDashboardPage = () => {
         const queryParams = new URLSearchParams(window.location.search);
         if (queryParams.get("class_creation_success")) {
             setMessage("Sikeres fizetés! Az új osztályod létrejött és hamarosan megjelenik a listában.");
+            setPaymentSuccess(true);
             window.history.replaceState(null, '', window.location.pathname);
         } else if (queryParams.get("class_creation_canceled")) {
             setError("A fizetési folyamatot megszakítottad. Az osztály nem jött létre.");
@@ -43,7 +45,7 @@ const TeacherDashboardPage = () => {
         }
         
         fetchClasses();
-    }, [fetchClasses]);
+    }, [fetchClasses, paymentSuccess]);
 
     const handleCreateClass = async (e) => {
         e.preventDefault();
