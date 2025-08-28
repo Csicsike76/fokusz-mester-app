@@ -1,3 +1,5 @@
+/* ProfilePage.module.css */
+
 .container {
     padding: 1rem;
     color: white;
@@ -13,75 +15,26 @@
     backdrop-filter: blur(5px);
 }
 
+.profileBox h1,
+.profileBox h2,
+.profileBox h3,
+.profileBox h4 {
+    text-align: center;
+    margin-top: 0;
+}
+
 .profileBox h1 {
     font-size: 1.8rem;
-    text-align: center;
     margin-bottom: 2rem;
 }
+.profileBox h2 { margin-bottom: 1.5rem; }
+.profileBox h3 { margin-bottom: 1rem; }
 
-.subscriptionSection {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-.subscriptionSection h3 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-    color: #ecf0f1;
-}
-.statusBox {
-    background-color: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 1.5rem;
-}
-.statusBox p {
-    margin: 0 0 1rem 0;
-    line-height: 1.6;
-    font-size: 1rem;
-    color: #bdc3c7;
-}
-.statusBox p:last-of-type {
-    margin-bottom: 1.5rem;
-}
-.statusActive, .statusTrial, .statusInactive {
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem !important;
-}
-.statusActive { color: #2ecc71; }
-.statusTrial { color: #f1c40f; }
-.statusInactive { color: #e74c3c; }
-
-.subscriptionCtaButton {
-    display: inline-block;
-    background-color: #27ae60;
-    color: white !important;
-    text-decoration: none;
-    padding: 0.8rem 2rem;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    transition: background-color 0.2s, transform 0.2s;
-}
-.subscriptionCtaButton:hover {
-    background-color: #2ecc71;
-    transform: scale(1.05);
-}
-
-.manageButton {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 0.7rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-}
 
 .infoGrid {
     display: grid;
     gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .infoItem {
@@ -91,6 +44,9 @@
     gap: 0.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.infoItem:last-child {
+    border-bottom: none;
 }
 
 .label { font-weight: bold; color: #bdc3c7; }
@@ -103,10 +59,8 @@
     margin: 2rem 0;
 }
 
-.section h2 {
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 1.5rem;
+.section {
+    margin-bottom: 1rem;
 }
 
 .formGrid { display: grid; gap: 1rem; }
@@ -115,6 +69,7 @@
     padding: 0.75rem;
     border-radius: 5px;
     font-size: 1rem;
+    box-sizing: border-box;
 }
 .formGrid input {
     border: 1px solid #7f8c8d;
@@ -133,15 +88,11 @@
 .editView { justify-content: space-between; }
 .editView input { flex-grow: 1; padding: 0.5rem; }
 
-.referralSection h2 {
-    text-align: center;
-    font-family: 'Roboto Slab', serif;
-    color: #1abc9c;
-}
 .referralSection p {
     text-align: center;
     line-height: 1.7;
     color: #ecf0f1;
+    margin: 1rem 0;
 }
 .referralCodeBox {
     display: flex;
@@ -151,7 +102,6 @@
     border: 2px dashed #1abc9c;
     padding: 1rem;
     border-radius: 8px;
-    margin-top: 1.5rem;
     gap: 1rem;
     flex-wrap: wrap;
 }
@@ -170,48 +120,112 @@
     cursor: pointer;
     font-weight: bold;
 }
-
-/* ÚJ STÍLUSOK AZ AJÁNLÓI STATISZTIKÁHOZ */
-.statsBox {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background-color: rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.statsBox h4 {
-    margin-top: 0;
-    margin-bottom: 1rem;
+.copySuccessMessage {
     text-align: center;
-    color: #ecf0f1;
-    font-size: 1.1rem;
+    color: #2ecc71;
+    margin-top: 0.5rem;
+    font-weight: bold;
 }
-.progressContainer {
+
+.referralProgress {
+    margin-top: 1.5rem;
+}
+.progressBarContainer {
     width: 100%;
-    height: 12px;
+    height: 8px;
     background-color: #34495e;
-    border-radius: 6px;
+    border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem 0;
 }
 .progressBar {
     height: 100%;
     background-color: #2ecc71;
-    border-radius: 6px;
+    border-radius: 4px;
     transition: width 0.5s ease-in-out;
 }
-.statsText {
-    text-align: center;
-    font-weight: bold;
-    color: #bdc3c7;
-    margin: 0.5rem 0;
+
+.statsGrid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+.statItem ul { list-style: none; padding: 0; margin: 0; }
+.statItem li { margin-bottom: 0.25rem; }
+.statValue { font-size: 2rem; font-weight: bold; color: #1abc9c; }
+.statLabel { color: #bdc3c7; }
+
+.subscribeOptions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
 }
-.rewardsText {
-    text-align: center;
-    color: #f1c40f;
+.subscribeOptions button {
+    background-color: #27ae60;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+}
+.manageButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
     font-weight: bold;
-    margin-top: 1rem;
-    font-size: 1.1rem;
+}
+
+.dangerZone {
+    border: 2px solid #e74c3c;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: rgba(231, 76, 60, 0.1);
+}
+.dangerZone p {
+    text-align: center;
+    margin: 0.5rem 0 1rem 0;
+}
+.dangerButton {
+    display: block;
+    width: 100%;
+    background-color: #e74c3c;
+    color: white;
+    font-weight: bold;
+    padding: 0.75rem;
+    border-radius: 5px;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modalContent {
+    background-color: #34495e;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+}
+.modalDangerText {
+    color: #e74c3c;
+    font-weight: bold;
+}
+.modalActions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+.cancelButton {
+    background-color: #7f8c8d;
+    padding: 0.6rem 1.2rem;
 }
 
 .successMessage, .errorMessage {
@@ -239,4 +253,5 @@
         justify-content: space-between;
         align-items: center;
     }
+    .statsGrid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 }

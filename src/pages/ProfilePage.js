@@ -21,9 +21,10 @@ const ProfilePage = () => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
     
-    // JAVÍTÁS: Új állapotok a másolás funkció jobb felhasználói élményéhez
     const [isCopied, setIsCopied] = useState(false);
     const [copyMessage, setCopyMessage] = useState('');
+
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     const fetchAllData = useCallback(async () => {
         if (!token) {
@@ -132,7 +133,6 @@ const ProfilePage = () => {
         }
     };
 
-    // JAVÍTÁS: A másolás funkció frissítése
     const copyToClipboard = () => {
         if (!profileData || !profileData.referral_code) return;
         navigator.clipboard.writeText(profileData.referral_code);
@@ -181,6 +181,27 @@ const ProfilePage = () => {
         } catch (err) {
             setError(err.message);
             setIsLoading(false);
+        }
+    };
+
+    const handleDeleteAccount = async () => {
+        setError('');
+        setMessage('');
+        try {
+            const response = await fetch(`${API_URL}/api/profile`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message);
+            
+            alert('A fiókodat sikeresen töröltük.');
+            logout();
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsDeleteModalOpen(false);
         }
     };
 
@@ -271,12 +292,10 @@ const ProfilePage = () => {
                         <p>Oszd meg az alábbi egyedi ajánlókódodat barátaiddal! Minden 5., a te kódoddal regisztrált és előfizető felhasználó után <strong>1 hónap prémium hozzáférést</strong> kapsz ajándékba!</p>
                         <div className={styles.referralCodeBox}>
                             <span>{profileData.referral_code}</span>
-                            {/* JAVÍTÁS: A gomb most már a helyi állapot alapján változik */}
                             <button onClick={copyToClipboard} disabled={isCopied}>
                                 {isCopied ? 'Másolva!' : 'Másolás'}
                             </button>
                         </div>
-                        {/* JAVÍTÁS: Az üzenet most már itt jelenik meg */}
                         {copyMessage && <p className={styles.copySuccessMessage}>{copyMessage}</p>}
                         
                         <div className={styles.referralProgress}>
@@ -316,7 +335,28 @@ const ProfilePage = () => {
                         )}
                     </div>
                 </div>
+
+                <hr className={styles.divider} />
+                
+                <div className={`${styles.section} ${styles.dangerZone}`}>
+                    <h3>Veszélyzóna</h3>
+                    <p>A fiók törlése végleges és nem vonható vissza. Minden adatod, beleértve a haladásodat és előfizetésedet, azonnal törlődik.</p>
+                    <button onClick={() => setIsDeleteModalOpen(true)} className={styles.dangerButton}>Fiók Végleges Törlése</button>
+                </div>
             </div>
+
+            {isDeleteModalOpen && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modalContent}>
+                        <h4>Fiók Törlésének Megerősítése</h4>
+                        <p className={styles.modalDangerText}>Biztosan véglegesen törölni szeretnéd a fiókodat? Ez a művelet nem vonható vissza.</p>
+                        <div className={styles.modalActions}>
+                            <button onClick={() => setIsDeleteModalOpen(false)} className={styles.cancelButton}>Mégse</button>
+                            <button onClick={handleDeleteAccount} className={styles.dangerButton}>Igen, Törlöm</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -15,7 +15,6 @@ const validator = require('validator');
 const { rateLimit, ipKeyGenerator } = require('express-rate-limit');
 const axios = require('axios');
 
-// JAVÍTÁS: .env betöltése a gyökérkönyvtárból
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 
 
@@ -48,10 +47,8 @@ const transporter = nodemailer.createTransport({
 
 const app = express();
 
-// JAVÍTÁS: CORS beállítása a mobilról érkező kérések engedélyezéséhez
 const whitelist = ['http://localhost:3000', process.env.FRONTEND_URL];
 if (process.env.NODE_ENV !== 'production') {
-    // Fejlesztés közben engedélyezzük a helyi hálózati IP-ket is
     const os = require('os');
     const nets = os.networkInterfaces();
     for (const name of Object.keys(nets)) {
@@ -74,15 +71,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-// JAVÍTÁS: Debugging middleware a bejövő kérések naplózásához
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] Bejövő kérés: ${req.method} ${req.originalUrl}`);
     next();
 });
 
 
-// A Stripe Webhooknak a nyers body-ra van szüksége az aláírás ellenőrzéséhez.
-// Ennek a middleware-nek a globális express.json() előtt kell lennie.
 app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (req, res) => {
     const sig = req.headers['stripe-signature'];
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -96,27 +90,43 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
         return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    // Események kezelése
-    switch (event.type) {
-        case 'invoice.paid':
-            const invoice = event.data.object;
-            
-            if (invoice.billing_reason === 'subscription_create' || invoice.billing_reason === 'subscription_cycle') {
-                // JAVÍTÁS: Robusztusabb subscription ID kinyerése, ami mindkét webhook formátumot kezeli.
-                const subscriptionId = invoice.subscription || invoice.parent?.subscription_details?.subscription;
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+
+        switch (event.type) {
+            case 'checkout.session.completed':
+                const session = event.data.object;
                 
-                if (!subscriptionId) {
-                    console.error('❌ Hiba: A "subscription" azonosító továbbra is hiányzik az "invoice.paid" eseményből.', invoice);
-                    break; 
+                if (session.metadata.type === 'teacher_class_payment') {
+                    const { className, maxStudents, teacherId } = session.metadata;
+                    
+                    if (!className || !maxStudents || !teacherId) {
+                        throw new Error('Hiányos metaadatok a tanári osztály létrehozásához.');
+                    }
+
+                    const classCode = `OSZTALY-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
+                    const query = `
+                      INSERT INTO classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
+                      VALUES ($1,$2,$3,$4,true,true)
+                      RETURNING *;
+                    `;
+                    await client.query(query, [className, classCode, teacherId, maxStudents]);
+                    console.log(`✅ Tanári osztály sikeresen létrehozva (fizetés után): ${className}, Tanár ID: ${teacherId}`);
                 }
+                break;
 
-                const customerId = invoice.customer;
+            case 'invoice.paid':
+                const invoice = event.data.object;
+                
+                if (invoice.billing_reason === 'subscription_create' || invoice.billing_reason === 'subscription_cycle') {
+                    const subscriptionId = invoice.subscription || invoice.parent?.subscription_details?.subscription;
+                    
+                    if (!subscriptionId) {
+                        throw new Error('A "subscription" azonosító hiányzik az "invoice.paid" eseményből.');
+                    }
 
-                const client = await pool.connect();
-                try {
-                    await client.query('BEGIN');
-
-                    // A Stripe Customer objektum lekérdezése a userId kinyeréséhez a metaadatokból.
+                    const customerId = invoice.customer;
                     const customer = await stripe.customers.retrieve(customerId);
                     const userId = customer.metadata.userId;
 
@@ -124,7 +134,6 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                         throw new Error(`Hiányzó userId a Stripe Customer (${customerId}) metaadataiból!`);
                     }
 
-                    // A teljes Subscription objektum lekérdezése a részletes adatokért.
                     const subscription = await stripe.subscriptions.retrieve(subscriptionId);
 
                     await client.query(
@@ -143,57 +152,17 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                             subscription.status,
                             subscription.current_period_start,
                             subscription.current_period_end,
-                            subscription.id // Itt a subscription ID-t mentjük invoice_id-ként a konzisztencia érdekében
+                            subscription.id
                         ]
                     );
                     console.log(`✅ Előfizetés sikeresen rögzítve (invoice.paid) a felhasználóhoz: ${userId}`);
-
-                    // Ajánlói rendszer ellenőrzése
-                    const referralResult = await client.query('SELECT referrer_user_id FROM referrals WHERE referred_user_id = $1', [userId]);
-                    if (referralResult.rows.length > 0) {
-                        const referrerId = referralResult.rows[0].referrer_user_id;
-                        console.log(`Találat! Az új előfizetőt (${userId}) ez a felhasználó ajánlotta: ${referrerId}`);
-                        const successfulReferralsResult = await client.query(
-                           `SELECT COUNT(DISTINCT r.referred_user_id)
-                            FROM referrals r
-                            JOIN subscriptions s ON r.referred_user_id = s.user_id
-                            WHERE r.referrer_user_id = $1 AND s.status IN ('active', 'trialing')`,
-                           [referrerId]
-                        );
-                        const newTotalReferrals = parseInt(successfulReferralsResult.rows[0].count, 10);
-                        console.log(`Az ajánló (${referrerId}) új sikeres ajánlásainak száma: ${newTotalReferrals}`);
-                        if (newTotalReferrals > 0 && newTotalReferrals % 5 === 0) {
-                            console.log(`JUTALOM JÁR! Az ajánló (${referrerId}) elérte a(z) ${newTotalReferrals}. sikeres ajánlást.`);
-                            const referrerSubscription = await client.query("SELECT id FROM subscriptions WHERE user_id = $1 AND status = 'active' ORDER BY created_at DESC LIMIT 1", [referrerId]);
-                            if (referrerSubscription.rows.length > 0) {
-                                const sub = referrerSubscription.rows[0];
-                                await client.query("UPDATE subscriptions SET current_period_end = current_period_end + INTERVAL '1 month' WHERE id = $1", [sub.id]);
-                                console.log(`✅ A(z) ${referrerId} felhasználó előfizetése meghosszabbítva 1 hónappal.`);
-                                await client.query(`INSERT INTO notifications (user_id, title, message, type) VALUES ($1, 'Jutalmat kaptál!', 'Egy általad ajánlott felhasználó előfizetett, így jutalmul 1 hónap prémium hozzáférést írtunk jóvá neked. Köszönjük!', 'reward')`, [referrerId]);
-                                console.log(`✅ Értesítés elküldve a(z) ${referrerId} felhasználónak a jutalomról.`);
-                            } else {
-                                console.log(`Az ajánló (${referrerId}) nem rendelkezik aktív előfizetéssel, így nem kap jutalmat.`);
-                            }
-                        }
-                    }
-
-                    await client.query('COMMIT');
-                } catch (dbError) {
-                    await client.query('ROLLBACK');
-                    console.error('❌ Adatbázis hiba az invoice.paid feldolgozása során:', dbError);
-                } finally {
-                    client.release();
                 }
-            }
-            break;
+                break;
 
-        case 'customer.subscription.updated':
-        case 'customer.subscription.deleted':
-            const subscriptionUpdated = event.data.object;
-            try {
-                const clientUpdate = await pool.connect();
-                // A WHERE feltételt a subscription ID-ra (invoice_id oszlopunk) kell állítani
-                await clientUpdate.query(
+            case 'customer.subscription.updated':
+            case 'customer.subscription.deleted':
+                const subscriptionUpdated = event.data.object;
+                await client.query(
                    `UPDATE subscriptions 
                     SET status = $1, current_period_end = to_timestamp($2), updated_at = NOW()
                     WHERE invoice_id = $3`,
@@ -203,14 +172,16 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                         subscriptionUpdated.id 
                     ]
                 );
-                clientUpdate.release();
                 console.log(`✅ Előfizetés státusza frissítve (${subscriptionUpdated.id}): ${subscriptionUpdated.status}`);
-            } catch (dbError) {
-                console.error('❌ Adatbázis hiba az előfizetés frissítésekor:', dbError);
-            }
-            break;
-            
-        default:
+                break;
+        }
+
+        await client.query('COMMIT');
+    } catch (dbError) {
+        await client.query('ROLLBACK');
+        console.error('❌ Hiba a Stripe webhook feldolgozása során:', dbError);
+    } finally {
+        client.release();
     }
 
     res.json({received: true});
@@ -821,6 +792,32 @@ app.get('/api/profile/stats', authenticateToken, async (req, res) => {
     }
 });
 
+app.delete('/api/profile', authenticateToken, async (req, res) => {
+    const userId = req.user.userId;
+    const client = await pool.connect();
+
+    try {
+        await client.query('BEGIN');
+        
+        const deleteResult = await client.query('DELETE FROM users WHERE id = $1', [userId]);
+
+        if (deleteResult.rowCount === 0) {
+            throw new Error('A felhasználó nem található a törléshez.');
+        }
+
+        await client.query('COMMIT');
+        
+        res.status(200).json({ success: true, message: 'A fiók és a hozzá kapcsolódó összes adat sikeresen törölve.' });
+
+    } catch (error) {
+        await client.query('ROLLBACK');
+        console.error("Fióktörlési hiba:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt a fiók törlése során.' });
+    } finally {
+        client.release();
+    }
+});
+
 
 app.post('/api/forgot-password', authLimiter, async (req, res) => {
   const { email } = req.body;
@@ -923,6 +920,49 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
       .status(500)
       .json({ success: false, message: 'Szerverhiba történt az osztályok lekérdezésekor.' });
   }
+});
+
+app.post('/api/teacher/create-class-checkout-session', authenticateToken, async (req, res) => {
+    const { className, maxStudents } = req.body;
+    const teacherId = req.user.userId;
+
+    if (req.user.role !== 'teacher') {
+        return res.status(403).json({ success: false, message: 'Hozzáférés megtagadva.' });
+    }
+
+    if (!className || !maxStudents || maxStudents < 5 || maxStudents > 30) {
+        return res.status(400).json({ success: false, message: 'Érvénytelen osztályadatok.' });
+    }
+
+    const priceId = process.env.STRIPE_PRICE_ID_TEACHER_CLASS;
+    if (!priceId) {
+        return res.status(500).json({ success: false, message: 'A tanári csomag árazása nincs beállítva a szerveren.' });
+    }
+
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [{
+                price: priceId,
+                quantity: 1,
+            }],
+            mode: 'payment',
+            success_url: `${process.env.FRONTEND_URL}/teacher?class_creation_success=true`,
+            cancel_url: `${process.env.FRONTEND_URL}/teacher?class_creation_canceled=true`,
+            metadata: {
+                type: 'teacher_class_payment',
+                teacherId: teacherId,
+                className: className,
+                maxStudents: maxStudents,
+            },
+        });
+
+        res.json({ success: true, url: session.url });
+
+    } catch (error) {
+        console.error('❌ Hiba a tanári osztály Checkout session létrehozásakor:', error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt a fizetési folyamat indításakor.' });
+    }
 });
 
 app.post('/api/classes/create', authenticateToken, async (req, res) => {
@@ -1114,17 +1154,14 @@ app.post('/api/quiz/results', authenticateToken, async (req, res) => {
     }
 
     try {
-        // 1. Lekerjuk a curriculum ID-t a slug alapjan
         const curriculumResult = await pool.query('SELECT id FROM curriculums WHERE slug = $1', [curriculumSlug]);
         if (curriculumResult.rows.length === 0) {
             return res.status(404).json({ success: false, message: 'A megadott tananyag nem található.' });
         }
         const curriculumId = curriculumResult.rows[0].id;
         
-        // 2. Kiszamoljuk a szazalekos eredmenyt
         const scorePercentage = totalQuestions > 0 ? (score / totalQuestions) * 100 : 0;
 
-        // 3. Eredmeny mentese vagy frissitese az adatbazisban
         const query = `
             INSERT INTO user_quiz_results (user_id, curriculum_id, completed_questions, total_questions, score_percentage, completed_at)
             VALUES ($1, $2, $3, $4, $5, NOW())
@@ -1146,14 +1183,10 @@ app.post('/api/quiz/results', authenticateToken, async (req, res) => {
     }
 });
 
-// === STRIPE INTEGRÁCIÓ ===
-
-// JAVÍTÁS: Checkout session létrehozása, ami kezeli a havi és éves csomagot is
 app.post('/api/create-checkout-session', authenticateToken, async (req, res) => {
-    const { interval } = req.body; // 'monthly' vagy 'yearly'
+    const { interval } = req.body;
     const userId = req.user.userId;
 
-    // Válasszuk ki a megfelelő ár-azonosítót a környezeti változókból
     const priceId = interval === 'yearly'
         ? process.env.STRIPE_PRICE_ID_YEARLY
         : process.env.STRIPE_PRICE_ID_MONTHLY;
@@ -1188,7 +1221,7 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
             payment_method_types: ['card'],
             customer: stripeCustomerId,
             line_items: [{
-                price: priceId, // Itt használjuk a kiválasztott ár-azonosítót
+                price: priceId,
                 quantity: 1,
             }],
             mode: 'subscription',
@@ -1208,7 +1241,6 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
 });
 
 
-// 2. Billing Portal session létrehozása
 app.post('/api/create-billing-portal-session', authenticateToken, async (req, res) => {
     const userId = req.user.userId;
     try {
@@ -1232,9 +1264,6 @@ app.post('/api/create-billing-portal-session', authenticateToken, async (req, re
     }
 });
 
-// --- ÉRTESÍTÉSI RENDSZER API ---
-
-// 1. Értesítések lekérdezése
 app.get('/api/notifications', authenticateToken, async (req, res) => {
     try {
         const result = await pool.query(
@@ -1251,7 +1280,6 @@ app.get('/api/notifications', authenticateToken, async (req, res) => {
     }
 });
 
-// 2. Értesítések olvasottá tétele
 app.post('/api/notifications/mark-read', authenticateToken, async (req, res) => {
     try {
         await pool.query(

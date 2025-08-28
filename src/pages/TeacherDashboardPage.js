@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './TeacherDashboardPage.module.css';
 
-const API_URL = 'https://fokusz-mester-backend.onrender.com';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const TeacherDashboardPage = () => {
     const { user, token } = useAuth();
@@ -13,7 +13,7 @@ const TeacherDashboardPage = () => {
     const [maxStudents, setMaxStudents] = useState(30);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-    const [isLoadingCreate, setIsLoadingCreate] = useState(false);
+    const [isRedirecting, setIsRedirecting] = useState(false);
 
     const fetchClasses = useCallback(async () => {
         if (!token) return;
@@ -33,16 +33,25 @@ const TeacherDashboardPage = () => {
     }, [token]);
 
     useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        if (queryParams.get("class_creation_success")) {
+            setMessage("Sikeres fizetés! Az új osztályod létrejött és hamarosan megjelenik a listában.");
+            window.history.replaceState(null, '', window.location.pathname);
+        } else if (queryParams.get("class_creation_canceled")) {
+            setError("A fizetési folyamatot megszakítottad. Az osztály nem jött létre.");
+            window.history.replaceState(null, '', window.location.pathname);
+        }
+        
         fetchClasses();
     }, [fetchClasses]);
 
     const handleCreateClass = async (e) => {
         e.preventDefault();
-        setIsLoadingCreate(true);
+        setIsRedirecting(true);
         setMessage('');
         setError('');
         try {
-            const response = await fetch(`${API_URL}/api/classes/create`, {
+            const response = await fetch(`${API_URL}/api/teacher/create-class-checkout-session`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,14 +62,13 @@ const TeacherDashboardPage = () => {
             const data = await response.json();
             if (!response.ok) throw new Error(data.message);
 
-            setMessage(`Siker! Az új osztály kódja: ${data.class.class_code}.`);
-            setClassName('');
-            fetchClasses();
+            if (data.url) {
+                window.location.href = data.url;
+            }
 
         } catch (err) {
             setError(err.message);
-        } finally {
-            setIsLoadingCreate(false);
+            setIsRedirecting(false);
         }
     };
 
@@ -127,8 +135,8 @@ const TeacherDashboardPage = () => {
                         {message && <p className={styles.successMessage}>{message}</p>}
                         {error && <p className={styles.errorMessage}>{error}</p>}
 
-                        <button type="submit" className={styles.button} disabled={isLoadingCreate}>
-                            {isLoadingCreate ? 'Létrehozás...' : 'Osztály Létrehozása'}
+                        <button type="submit" className={styles.button} disabled={isRedirecting}>
+                            {isRedirecting ? 'Átirányítás a fizetéshez...' : 'Tovább a fizetéshez (4200 RON/év)'}
                         </button>
                     </form>
                 </section>
