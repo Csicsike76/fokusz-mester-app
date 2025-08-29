@@ -499,7 +499,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
             console.error('FATAL: BACKEND_URL environment variable is not set. Cannot generate teacher approval link.');
             throw new Error('Server configuration error: The approval link cannot be generated.');
         }
-        const approvalUrl = `${backendUrl}/api/admin/approve-teacher/${newUserId}?secret=${process.env.ADMIN_SECRET}`;
+        const approvalUrl = `${backendUrl}/api/admin/approve-teacher-by-link/${newUserId}?secret=${process.env.ADMIN_SECRET}`;
         const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
         if (adminRecipient) {
           await transporter.sendMail({
@@ -594,7 +594,7 @@ app.get('/api/verify-email/:token', async (req, res) => {
   }
 });
 
-app.get('/api/admin/approve-teacher/:userId', async (req, res) => {
+app.get('/api/admin/approve-teacher-by-link/:userId', async (req, res) => {
     const { userId } = req.params;
     const { secret } = req.query;
 
@@ -634,7 +634,7 @@ app.get('/api/admin/approve-teacher/:userId', async (req, res) => {
     }
 });
 
-app.post('/api/admin/users/:userId/approve', authenticateToken, authorizeAdmin, async (req, res) => {
+app.post('/api/admin/approve-teacher/:userId', authenticateToken, authorizeAdmin, async (req, res) => {
     const { userId } = req.params;
     try {
         const result = await pool.query(
