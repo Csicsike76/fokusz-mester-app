@@ -132,7 +132,7 @@ async function run() {
       CREATE TABLE subscriptions (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         user_id UUID UNIQUE REFERENCES users(id) ON DELETE CASCADE,
-        plan_id UUID REFERENCES subscription_plans(id) ON DELETE RESTRICT NULL,
+        plan_id UUID REFERENCES subscription_plans(id) ON DELETE SET NULL,
         status VARCHAR(50) CHECK (status IN ('active','canceled','past_due','trialing')),
         current_period_start TIMESTAMPTZ,
         current_period_end TIMESTAMPTZ,
