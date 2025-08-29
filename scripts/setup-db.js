@@ -12,7 +12,7 @@ function wantSSL(url) {
 
 const DATABASE_URL = process.env.DATABASE_URL;
 if (!DATABASE_URL || typeof DATABASE_URL !== 'string' || DATABASE_URL.trim() === '') {
-  console.error('HIBA: A DATABASE_URL környezeti változó hiányzik vagy üres a .env fájból.');
+  console.error('HIBA: A DATABASE_URL környezeti változó hiányzik vagy üres a .env fájlból.');
   process.exit(1);
 }
 
@@ -118,6 +118,7 @@ async function run() {
       CREATE TABLE subscription_plans (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         name TEXT UNIQUE NOT NULL,
+        stripe_price_id TEXT UNIQUE,
         price_cents INT NOT NULL CHECK (price_cents >= 0),
         interval_unit TEXT NOT NULL CHECK (interval_unit IN ('day','month','year')),
         interval_count INT NOT NULL CHECK (interval_count > 0),
@@ -126,6 +127,22 @@ async function run() {
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
     `);
+
+    // --- Alapértelmezett előfizetési csomagok létrehozása ---
+    if (process.env.STRIPE_PRICE_ID_MONTHLY) {
+        await client.query(`
+            INSERT INTO subscription_plans (name, stripe_price_id, price_cents, interval_unit, interval_count)
+            VALUES ('Havi Előfizetés', $1, 299000, 'month', 1)
+            ON CONFLICT (name) DO NOTHING;
+        `, [process.env.STRIPE_PRICE_ID_MONTHLY]);
+    }
+     if (process.env.STRIPE_PRICE_ID_YEARLY) {
+        await client.query(`
+            INSERT INTO subscription_plans (name, stripe_price_id, price_cents, interval_unit, interval_count)
+            VALUES ('Éves Előfizetés', $1, 2990000, 'year', 1)
+            ON CONFLICT (name) DO NOTHING;
+        `, [process.env.STRIPE_PRICE_ID_YEARLY]);
+    }
 
     // --- Subscriptions tábla ---
     await client.query(`

@@ -121,26 +121,32 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                 const invoice = event.data.object;
                 
                 if (invoice.billing_reason === 'subscription_create' || invoice.billing_reason === 'subscription_cycle') {
-                    const subscriptionId = invoice.subscription || invoice.parent?.subscription_details?.subscription;
-                    
-                    if (!subscriptionId) {
+                    const subscriptionIdStripe = invoice.subscription;
+                    if (!subscriptionIdStripe) {
                         throw new Error('A "subscription" azonosító hiányzik az "invoice.paid" eseményből.');
                     }
 
                     const customerId = invoice.customer;
                     const customer = await stripe.customers.retrieve(customerId);
                     const userId = customer.metadata.userId;
-
                     if (!userId) {
                         throw new Error(`Hiányzó userId a Stripe Customer (${customerId}) metaadataiból!`);
                     }
 
-                    const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+                    const subscriptionStripe = await stripe.subscriptions.retrieve(subscriptionIdStripe);
+                    const priceIdStripe = subscriptionStripe.items.data[0].plan.id;
+
+                    const planResult = await client.query('SELECT id FROM subscription_plans WHERE stripe_price_id = $1', [priceIdStripe]);
+                    if (planResult.rows.length === 0) {
+                        throw new Error(`Ismeretlen Stripe Price ID: ${priceIdStripe}. Nincs ilyen előfizetési csomag az adatbázisban.`);
+                    }
+                    const planIdDb = planResult.rows[0].id;
 
                     await client.query(
                         `INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider, invoice_id)
                          VALUES ($1, $2, $3, to_timestamp($4), to_timestamp($5), 'stripe', $6)
                          ON CONFLICT (user_id) DO UPDATE SET
+                            plan_id = $2,
                             status = $3,
                             current_period_start = to_timestamp($4),
                             current_period_end = to_timestamp($5),
@@ -149,11 +155,11 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                         `,
                         [
                             userId,
-                            subscription.items.data[0].plan.id,
-                            subscription.status,
-                            subscription.current_period_start,
-                            subscription.current_period_end,
-                            subscription.id
+                            planIdDb,
+                            subscriptionStripe.status,
+                            subscriptionStripe.current_period_start,
+                            subscriptionStripe.current_period_end,
+                            subscriptionStripe.id
                         ]
                     );
                     console.log(`✅ Előfizetés sikeresen rögzítve (invoice.paid) a felhasználóhoz: ${userId}`);
@@ -625,6 +631,23 @@ app.get('/api/admin/approve-teacher/:userId', async (req, res) => {
     } catch (error) {
         console.error('Tanár jóváhagyási hiba:', error);
         res.status(500).send('Szerverhiba történt a jóváhagyás során.');
+    }
+});
+
+app.post('/api/admin/users/:userId/approve', authenticateToken, authorizeAdmin, async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const result = await pool.query(
+            'UPDATE teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id',
+            [userId]
+        );
+        if (result.rowCount === 0) {
+            return res.status(404).json({ success: false, message: 'A tanár nem található.' });
+        }
+        return res.status(200).json({ success: true, message: 'A tanári fiók sikeresen jóváhagyva.'});
+    } catch (error) {
+        console.error('Tanár jóváhagyási hiba (admin):', error);
+        return res.status(500).json({ success: false, message: 'Szerverhiba történt a jóváhagyás során.'});
     }
 });
 
