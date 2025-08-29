@@ -560,7 +560,7 @@ app.get('/api/verify-email/:token', async (req, res) => {
     if (user.role !== 'teacher') {
       const trialQuery = `
         INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider)
-        VALUES ($1, 'trial', 'trialing', NOW(), NOW() + INTERVAL '30 days', 'system')
+        VALUES ($1, NULL, 'trialing', NOW(), NOW() + INTERVAL '30 days', 'system')
         ON CONFLICT (user_id) DO NOTHING;
       `;
       await client.query(trialQuery, [user.id]);
