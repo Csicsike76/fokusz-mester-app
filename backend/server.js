@@ -583,7 +583,7 @@ app.get('/api/verify-email/:token', async (req, res) => {
   }
 });
 
-app.post('/api/admin/approve-teacher/:userId', authenticateToken, authorizeAdmin, async (req, res) => {
+app.get('/api/admin/approve-teacher/:userId', authenticateToken, authorizeAdmin, async (req, res) => {
     const { userId } = req.params;
     try {
         const result = await pool.query(
@@ -591,15 +591,20 @@ app.post('/api/admin/approve-teacher/:userId', authenticateToken, authorizeAdmin
             [userId]
         );
         if (result.rowCount === 0) {
-            return res.status(404).json({ success: false, message: 'A tanár nem található.' });
+            return res.status(404).send('A tanár nem található.');
         }
         
         // TODO: Optionally send an email to the teacher that their account is approved.
 
-        return res.status(200).json({ success: true, message: 'A tanári fiók sikeresen jóváhagyva.'});
+        res.send(`
+            <script>
+                alert("A tanári fiók sikeresen jóváhagyva.");
+                window.close();
+            </script>
+        `);
     } catch (error) {
         console.error('Tanár jóváhagyási hiba:', error);
-        return res.status(500).json({ success: false, message: 'Szerverhiba történt a jóváhagyás során.'});
+        res.status(500).send('Szerverhiba történt a jóváhagyás során.');
     }
 });
 
@@ -1368,6 +1373,18 @@ app.get('/api/admin/users', authenticateToken, authorizeAdmin, async (req, res) 
     } catch (error) {
         console.error("Hiba a felhasználók lekérdezésekor:", error);
         res.status(500).json({ success: false, message: 'Szerverhiba történt a felhasználók lekérdezésekor.' });
+    }
+});
+
+app.get('/api/admin/messages', authenticateToken, authorizeAdmin, async (req, res) => {
+    try {
+        const { rows } = await pool.query(
+            'SELECT id, name, email, subject, message, is_archived, created_at FROM contact_messages ORDER BY created_at DESC'
+        );
+        res.status(200).json({ success: true, messages: rows });
+    } catch (error) {
+        console.error("Hiba a kapcsolatfelvételi üzenetek lekérdezésekor:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt az üzenetek lekérdezésekor.'});
     }
 });
 // --- MÓDOSÍTÁS VÉGE ---
