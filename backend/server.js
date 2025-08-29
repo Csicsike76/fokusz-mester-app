@@ -488,7 +488,12 @@ app.post('/api/register', authLimiter, async (req, res) => {
       );
       const teacherIsApprovedResult = await client.query('SELECT is_approved from teachers where user_id=$1', [newUserId]);
       if(!teacherIsApprovedResult.rows[0].is_approved) {
-        const approvalUrl = `${process.env.FRONTEND_URL}/admin/approve-teacher/${newUserId}`;
+        const backendUrl = process.env.BACKEND_URL;
+        if (!backendUrl) {
+            console.error('HIBA: A BACKEND_URL környezeti változó nincs beállítva! A tanár-jóváhagyási link nem generálható.');
+            throw new Error('Szerverkonfigurációs hiba miatt a jóváhagyási link nem küldhető el.');
+        }
+        const approvalUrl = `${backendUrl}/api/admin/approve-teacher/${newUserId}?secret=${process.env.ADMIN_SECRET}`;
         const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
         if (adminRecipient) {
           await transporter.sendMail({
@@ -583,8 +588,14 @@ app.get('/api/verify-email/:token', async (req, res) => {
   }
 });
 
-app.get('/api/admin/approve-teacher/:userId', authenticateToken, authorizeAdmin, async (req, res) => {
+app.get('/api/admin/approve-teacher/:userId', async (req, res) => {
     const { userId } = req.params;
+    const { secret } = req.query;
+
+    if (!secret || secret !== process.env.ADMIN_SECRET) {
+        return res.status(403).send('Hozzáférés megtagadva: érvénytelen biztonsági kulcs.');
+    }
+
     try {
         const result = await pool.query(
             'UPDATE teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id',
@@ -594,13 +605,22 @@ app.get('/api/admin/approve-teacher/:userId', authenticateToken, authorizeAdmin,
             return res.status(404).send('A tanár nem található.');
         }
         
-        // TODO: Optionally send an email to the teacher that their account is approved.
-
         res.send(`
-            <script>
-                alert("A tanári fiók sikeresen jóváhagyva.");
-                window.close();
-            </script>
+            <!DOCTYPE html>
+            <html lang="hu">
+            <head>
+                <title>Jóváhagyás Sikeres</title>
+                <meta charset="UTF-8">
+                <style>body { font-family: sans-serif; text-align: center; padding-top: 50px; }</style>
+            </head>
+            <body>
+                <p>A tanári fiók sikeresen jóváhagyva.</p>
+                <p>Ez az ablak hamarosan bezáródik.</p>
+                <script>
+                    setTimeout(() => window.close(), 3000);
+                </script>
+            </body>
+            </html>
         `);
     } catch (error) {
         console.error('Tanár jóváhagyási hiba:', error);
