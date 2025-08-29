@@ -26,12 +26,14 @@ const ProfilePage = () => {
 
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-    const fetchAllData = useCallback(async () => {
+    const fetchAllData = useCallback(async (isForcedRefresh = false) => {
         if (!token) {
             setIsLoading(false);
             return;
         }
-        setIsLoading(true);
+        if (!isForcedRefresh) {
+            setIsLoading(true);
+        }
         setError('');
         try {
             const [profileResponse, statsResponse] = await Promise.all([
@@ -66,15 +68,27 @@ const ProfilePage = () => {
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
+        let shouldRefresh = false;
+
         if (queryParams.get("payment_success")) {
             setMessage("Sikeres előfizetés! Köszönjük. A profilod hamarosan frissül.");
             window.history.replaceState(null, '', window.location.pathname);
+            shouldRefresh = true;
         } else if (queryParams.get("payment_canceled")) {
             setError("Az előfizetési folyamatot megszakítottad.");
             window.history.replaceState(null, '', window.location.pathname);
         }
         
         fetchAllData();
+
+        if (shouldRefresh) {
+            const timer = setTimeout(() => {
+                fetchAllData(true); // Kényszerített frissítés a legfrissebb adatokért
+                setMessage("Profil frissítve.");
+                setTimeout(() => setMessage(''), 3000);
+            }, 3000); // 3 másodperc várakozás, hogy a webhooknak legyen ideje lefutni
+            return () => clearTimeout(timer);
+        }
 
     }, [fetchAllData]);
     
