@@ -1,4 +1,3 @@
-/* src/pages/AdminPage.module.css */
 .container {
     padding: 2rem;
     max-width: 1200px;
@@ -18,7 +17,34 @@
     color: #ffffff;
     border-bottom: 2px solid #3498db;
     padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.navTabs {
+    display: flex;
+    border-bottom: 1px solid #34495e;
     margin-bottom: 2rem;
+}
+
+.tabButton {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: #bdc3c7;
+    font-size: 1rem;
+    border-bottom: 3px solid transparent;
+}
+
+.activeTab {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    color: #ffffff;
+    border-bottom: 3px solid #3498db;
+    font-weight: bold;
 }
 
 .tableContainer {
@@ -35,6 +61,7 @@ th, td {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #34495e;
+    white-space: nowrap;
 }
 
 thead tr {
@@ -105,4 +132,9 @@ tbody tr:hover {
 .successMessage {
     background-color: #27ae60;
     color: white;
+}
+
+.messageCell {
+    white-space: pre-wrap;
+    min-width: 300px;
 }

@@ -1403,13 +1403,21 @@ app.post('/api/contact', authLimiter, async (req, res) => {
   if (!validator.isEmail(email)) {
     return res.status(400).json({ success: false, message: 'Érvénytelen e-mail cím formátum.' });
   }
-
+  const client = await pool.connect();
   try {
+    await client.query('BEGIN');
     const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER;
     if (!adminRecipient) {
         console.error('❌ ADMIN_EMAIL is not set. Cannot send contact form email.');
         return res.status(500).json({ success: false, message: 'A szerver nincs megfelelően beállítva az üzenetek fogadására.' });
     }
+
+    // --- MÓDOSÍTÁS KEZDETE: Üzenet mentése adatbázisba ---
+    await client.query(
+        `INSERT INTO contact_messages (name, email, subject, message) VALUES ($1, $2, $3, $4)`,
+        [name, email, subject, message]
+    );
+    // --- MÓDOSÍTÁS VÉGE ---
 
     const adminMailOptions = {
       from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
@@ -1453,11 +1461,15 @@ app.post('/api/contact', authLimiter, async (req, res) => {
       transporter.sendMail(userConfirmationOptions)
     ]);
     
+    await client.query('COMMIT');
     res.status(200).json({ success: true, message: 'Köszönjük üzenetét! A részletekről és a további teendőkről visszaigazoló e-mailt küldtünk.' });
 
   } catch (error) {
+    await client.query('ROLLBACK');
     console.error('❌ Hiba a kapcsolatfelvételi űrlap feldolgozása során:', error);
     res.status(500).json({ success: false, message: 'Szerverhiba történt az üzenet küldése közben.' });
+  } finally {
+      client.release();
   }
 });
 
