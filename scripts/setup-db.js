@@ -12,7 +12,7 @@ function wantSSL(url) {
 
 const DATABASE_URL = process.env.DATABASE_URL;
 if (!DATABASE_URL || typeof DATABASE_URL !== 'string' || DATABASE_URL.trim() === '') {
-  console.error('HIBA: A DATABASE_URL környezeti változó hiányzik vagy üres a .env fájlból.');
+  console.error('HIBA: A DATABASE_URL környezeti változó hiányzik vagy üres a .env fájból.');
   process.exit(1);
 }
 

@@ -490,8 +490,8 @@ app.post('/api/register', authLimiter, async (req, res) => {
       if(!teacherIsApprovedResult.rows[0].is_approved) {
         const backendUrl = process.env.BACKEND_URL;
         if (!backendUrl) {
-            console.error('HIBA: A BACKEND_URL környezeti változó nincs beállítva! A tanár-jóváhagyási link nem generálható.');
-            throw new Error('Szerverkonfigurációs hiba miatt a jóváhagyási link nem küldhető el.');
+            console.error('FATAL: BACKEND_URL environment variable is not set. Cannot generate teacher approval link.');
+            throw new Error('Server configuration error: The approval link cannot be generated.');
         }
         const approvalUrl = `${backendUrl}/api/admin/approve-teacher/${newUserId}?secret=${process.env.ADMIN_SECRET}`;
         const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
