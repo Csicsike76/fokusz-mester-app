@@ -98,53 +98,36 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
         switch (event.type) {
             case 'checkout.session.completed':
                 const session = event.data.object;
-                
+
+                // --- Tanári osztály létrehozása ---
                 if (session.metadata.type === 'teacher_class_payment') {
                     const { className, maxStudents, teacherId } = session.metadata;
-                    
-                    if (!className || !maxStudents || !teacherId) {
-                        throw new Error('Hiányos metaadatok a tanári osztály létrehozásához.');
-                    }
+                    if (!className || !maxStudents || !teacherId) throw new Error('Hiányos metaadatok a tanári osztály létrehozásához.');
 
                     const classCode = `OSZTALY-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
-                    const query = `
-                      INSERT INTO classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
-                      VALUES ($1,$2,$3,$4,true,true)
-                      RETURNING *;
-                    `;
-                    await client.query(query, [className, classCode, teacherId, maxStudents]);
+                    await client.query(
+                      `INSERT INTO classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
+                       VALUES ($1, $2, $3, $4, true, true) RETURNING *;`,
+                      [className, classCode, teacherId, maxStudents]
+                    );
                     console.log(`✅ Tanári osztály sikeresen létrehozva (fizetés után): ${className}, Tanár ID: ${teacherId}`);
                 }
-                break;
-
-            case 'invoice.paid':
-                const invoice = event.data.object;
                 
-                if (invoice.billing_reason === 'subscription_create' || invoice.billing_reason === 'subscription_cycle') {
-                    const subscriptionIdStripe = invoice.subscription;
-                    if (!subscriptionIdStripe) {
-                        // A 'subscription' azonosító hiányzik, ez előfordulhat, ha az esemény később érkezik, mint a subscription objektum létrejön.
-                        // Ebben az esetben a 'checkout.session.completed' eseményre támaszkodunk, vagy logoljuk a hibát.
-                        console.warn(`Figyelmeztetés: A "subscription" azonosító hiányzik az "invoice.paid" eseményből (Invoice ID: ${invoice.id}). Az előfizetés állapotát a 'customer.subscription.created' eseménynek kell kezelnie.`);
-                        break; 
-                    }
+                // --- Felhasználói előfizetés létrehozása ---
+                if (session.mode === 'subscription') {
+                    const subscriptionId = session.subscription;
+                    if (!subscriptionId) throw new Error('Hiányzó subscription ID a checkout.session.completed eseményben.');
 
-                    const customerId = invoice.customer;
-                    const customer = await stripe.customers.retrieve(customerId);
-                    const userId = customer.metadata.userId;
-                    if (!userId) {
-                        throw new Error(`Hiányzó userId a Stripe Customer (${customerId}) metaadataiból!`);
-                    }
+                    const subscriptionStripe = await stripe.subscriptions.retrieve(subscriptionId);
+                    const userId = session.metadata.userId;
+                    if (!userId) throw new Error('Hiányzó userId a checkout session metaadataiból.');
 
-                    const subscriptionStripe = await stripe.subscriptions.retrieve(subscriptionIdStripe);
                     const priceIdStripe = subscriptionStripe.items.data[0].plan.id;
-
                     const planResult = await client.query('SELECT id FROM subscription_plans WHERE stripe_price_id = $1', [priceIdStripe]);
-                    if (planResult.rows.length === 0) {
-                        throw new Error(`Ismeretlen Stripe Price ID: ${priceIdStripe}. Nincs ilyen előfizetési csomag az adatbázisban.`);
-                    }
+                    if (planResult.rows.length === 0) throw new Error(`Ismeretlen Stripe Price ID: ${priceIdStripe}.`);
+                    
                     const planIdDb = planResult.rows[0].id;
-
+                    
                     await client.query(
                         `INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider, invoice_id)
                          VALUES ($1, $2, $3, to_timestamp($4), to_timestamp($5), 'stripe', $6)
@@ -154,22 +137,21 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                             current_period_start = to_timestamp($4),
                             current_period_end = to_timestamp($5),
                             invoice_id = $6,
-                            updated_at = NOW();
-                        `,
+                            updated_at = NOW();`,
                         [
-                            userId,
-                            planIdDb,
-                            subscriptionStripe.status,
-                            subscriptionStripe.current_period_start,
-                            subscriptionStripe.current_period_end,
+                            userId, planIdDb, subscriptionStripe.status,
+                            subscriptionStripe.current_period_start, subscriptionStripe.current_period_end,
                             subscriptionStripe.id
                         ]
                     );
-                    console.log(`✅ Előfizetés sikeresen rögzítve (invoice.paid) a felhasználóhoz: ${userId}`);
+                    console.log(`✅ Előfizetés sikeresen rögzítve (checkout.session.completed) a felhasználóhoz: ${userId}`);
                 }
                 break;
+
+            case 'invoice.paid':
+                // Ez a blokk most már másodlagos, a recurring fizetéseket kezeli, de a fő logikát a checkout.session.completed végzi.
+                break;
             
-            case 'customer.subscription.created':
             case 'customer.subscription.updated':
             case 'customer.subscription.deleted':
                 const subscription = event.data.object;
@@ -177,16 +159,11 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                 const customer = await stripe.customers.retrieve(customerId);
                 const userId = customer.metadata.userId;
 
-                if (!userId) {
-                    throw new Error(`Hiányzó userId a Stripe Customer (${customerId}) metaadataiból a subscription esemény során!`);
-                }
+                if (!userId) throw new Error(`Hiányzó userId a Stripe Customer (${customerId}) metaadataiból a subscription esemény során!`);
                 
                 const priceIdStripe = subscription.items.data[0].plan.id;
                 const planResult = await client.query('SELECT id FROM subscription_plans WHERE stripe_price_id = $1', [priceIdStripe]);
-                
-                if (planResult.rows.length === 0) {
-                    throw new Error(`Ismeretlen Stripe Price ID: ${priceIdStripe}. Nincs ilyen előfizetési csomag az adatbázisban.`);
-                }
+                if (planResult.rows.length === 0) throw new Error(`Ismeretlen Stripe Price ID: ${priceIdStripe}.`);
                 const planIdDb = planResult.rows[0].id;
 
                 await client.query(
@@ -200,11 +177,8 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                        invoice_id = $6,
                        updated_at = NOW();`,
                     [
-                        userId,
-                        planIdDb,
-                        subscription.status,
-                        subscription.current_period_start,
-                        subscription.current_period_end,
+                        userId, planIdDb, subscription.status,
+                        subscription.current_period_start, subscription.current_period_end,
                         subscription.id 
                     ]
                 );
