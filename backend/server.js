@@ -123,7 +123,10 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                 if (invoice.billing_reason === 'subscription_create' || invoice.billing_reason === 'subscription_cycle') {
                     const subscriptionIdStripe = invoice.subscription;
                     if (!subscriptionIdStripe) {
-                        throw new Error('A "subscription" azonosító hiányzik az "invoice.paid" eseményből.');
+                        // A 'subscription' azonosító hiányzik, ez előfordulhat, ha az esemény később érkezik, mint a subscription objektum létrejön.
+                        // Ebben az esetben a 'checkout.session.completed' eseményre támaszkodunk, vagy logoljuk a hibát.
+                        console.warn(`Figyelmeztetés: A "subscription" azonosító hiányzik az "invoice.paid" eseményből (Invoice ID: ${invoice.id}). Az előfizetés állapotát a 'customer.subscription.created' eseménynek kell kezelnie.`);
+                        break; 
                     }
 
                     const customerId = invoice.customer;
@@ -165,21 +168,47 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                     console.log(`✅ Előfizetés sikeresen rögzítve (invoice.paid) a felhasználóhoz: ${userId}`);
                 }
                 break;
-
+            
+            case 'customer.subscription.created':
             case 'customer.subscription.updated':
             case 'customer.subscription.deleted':
-                const subscriptionUpdated = event.data.object;
+                const subscription = event.data.object;
+                const customerId = subscription.customer;
+                const customer = await stripe.customers.retrieve(customerId);
+                const userId = customer.metadata.userId;
+
+                if (!userId) {
+                    throw new Error(`Hiányzó userId a Stripe Customer (${customerId}) metaadataiból a subscription esemény során!`);
+                }
+                
+                const priceIdStripe = subscription.items.data[0].plan.id;
+                const planResult = await client.query('SELECT id FROM subscription_plans WHERE stripe_price_id = $1', [priceIdStripe]);
+                
+                if (planResult.rows.length === 0) {
+                    throw new Error(`Ismeretlen Stripe Price ID: ${priceIdStripe}. Nincs ilyen előfizetési csomag az adatbázisban.`);
+                }
+                const planIdDb = planResult.rows[0].id;
+
                 await client.query(
-                   `UPDATE subscriptions 
-                    SET status = $1, current_period_end = to_timestamp($2), updated_at = NOW()
-                    WHERE invoice_id = $3`,
+                   `INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider, invoice_id)
+                    VALUES ($1, $2, $3, to_timestamp($4), to_timestamp($5), 'stripe', $6)
+                    ON CONFLICT (user_id) DO UPDATE SET
+                       plan_id = $2,
+                       status = $3,
+                       current_period_start = to_timestamp($4),
+                       current_period_end = to_timestamp($5),
+                       invoice_id = $6,
+                       updated_at = NOW();`,
                     [
-                        subscriptionUpdated.status,
-                        subscriptionUpdated.current_period_end,
-                        subscriptionUpdated.id 
+                        userId,
+                        planIdDb,
+                        subscription.status,
+                        subscription.current_period_start,
+                        subscription.current_period_end,
+                        subscription.id 
                     ]
                 );
-                console.log(`✅ Előfizetés státusza frissítve (${subscriptionUpdated.id}): ${subscriptionUpdated.status}`);
+                console.log(`✅ Előfizetés státusza frissítve (${subscription.id}) esemény (${event.type}) alapján: ${subscription.status}`);
                 break;
         }
 
