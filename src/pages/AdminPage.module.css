@@ -1,0 +1,108 @@
+/* src/pages/AdminPage.module.css */
+.container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+.adminPanel {
+    background-color: #2c3e50;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    color: #ecf0f1;
+}
+
+.adminPanel h1 {
+    text-align: center;
+    color: #ffffff;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tableContainer {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #34495e;
+}
+
+thead tr {
+    background-color: #34495e;
+}
+
+th {
+    font-weight: bold;
+    color: #ecf0f1;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: rgba(0,0,0,0.1);
+}
+
+tbody tr:hover {
+    background-color: #34495e;
+}
+
+.status, .approved, .pending, .notApplicable {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.approved {
+    background-color: #27ae60;
+    color: white;
+}
+
+.pending {
+    background-color: #f39c12;
+    color: white;
+}
+
+.notApplicable {
+    color: #7f8c8d;
+}
+
+.approveButton {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.approveButton:hover {
+    background-color: #27ae60;
+}
+
+.errorMessage, .successMessage {
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.errorMessage {
+    background-color: #c0392b;
+    color: white;
+}
+
+.successMessage {
+    background-color: #27ae60;
+    color: white;
+}

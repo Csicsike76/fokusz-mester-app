@@ -234,6 +234,14 @@ const authenticateTokenOptional = (req, res, next) => {
   });
 };
 
+const authorizeAdmin = (req, res, next) => {
+    if (req.user && req.user.role === 'admin') {
+        next();
+    } else {
+        res.status(403).json({ success: false, message: 'Hozzáférés megtagadva: adminisztrátori jogosultság szükséges.' });
+    }
+};
+
 
 app.get('/api/help', async (req, res) => {
     const q = (req.query.q || '').toString().trim().toLowerCase();
@@ -480,7 +488,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
       );
       const teacherIsApprovedResult = await client.query('SELECT is_approved from teachers where user_id=$1', [newUserId]);
       if(!teacherIsApprovedResult.rows[0].is_approved) {
-        const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
+        const approvalUrl = `${process.env.FRONTEND_URL}/admin/approve-teacher/${newUserId}`;
         const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
         if (adminRecipient) {
           await transporter.sendMail({
@@ -575,7 +583,7 @@ app.get('/api/verify-email/:token', async (req, res) => {
   }
 });
 
-app.get('/api/approve-teacher/:userId', async (req, res) => {
+app.post('/api/admin/approve-teacher/:userId', authenticateToken, authorizeAdmin, async (req, res) => {
     const { userId } = req.params;
     try {
         const result = await pool.query(
@@ -585,10 +593,13 @@ app.get('/api/approve-teacher/:userId', async (req, res) => {
         if (result.rowCount === 0) {
             return res.status(404).json({ success: false, message: 'A tanár nem található.' });
         }
-        return res.status(200).send('<h1>A tanári fiók sikeresen jóváhagyva.</h1><p>Ez az ablak bezárható.</p>');
+        
+        // TODO: Optionally send an email to the teacher that their account is approved.
+
+        return res.status(200).json({ success: true, message: 'A tanári fiók sikeresen jóváhagyva.'});
     } catch (error) {
         console.error('Tanár jóváhagyási hiba:', error);
-        return res.status(500).send('<h1>Hiba történt a jóváhagyás során.</h1>');
+        return res.status(500).json({ success: false, message: 'Szerverhiba történt a jóváhagyás során.'});
     }
 });
 
@@ -1341,6 +1352,25 @@ app.post('/api/notifications/mark-read', authenticateToken, async (req, res) => 
         res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
     }
 });
+
+
+// --- MÓDOSÍTÁS KEZDETE: Új Admin API végpontok ---
+app.get('/api/admin/users', authenticateToken, authorizeAdmin, async (req, res) => {
+    try {
+        const query = `
+            SELECT u.id, u.username, u.email, u.role, u.created_at, t.is_approved
+            FROM users u
+            LEFT JOIN teachers t ON u.id = t.user_id
+            ORDER BY u.created_at DESC;
+        `;
+        const { rows } = await pool.query(query);
+        res.status(200).json({ success: true, users: rows });
+    } catch (error) {
+        console.error("Hiba a felhasználók lekérdezésekor:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt a felhasználók lekérdezésekor.' });
+    }
+});
+// --- MÓDOSÍTÁS VÉGE ---
 
 
 app.get('/api/admin/clear-users/:secret', async (req, res) => {

@@ -1,6 +1,6 @@
 // src/components/Navbar/Navbar.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { useNav } from '../../hooks/useNav';
 import ConditionalLink from '../ConditionalLink/ConditionalLink';
@@ -21,24 +21,22 @@ const Navbar = () => {
                 <Link to="/">"Fókusz Mester"</Link>
             </div>
 
-            {/* Hamburger gomb, ami csak mobilon látszik */}
             <button className={styles.hamburger} onClick={toggleMenu} aria-label="Menü megnyitása/bezárása">
                 {isMenuOpen ? '✕' : '☰'}
             </button>
             
-            {/* A navLinks most már mobilnézetben is működik az 'open' osztály segítségével */}
             <div className={`${styles.navLinks} ${isMenuOpen ? styles.open : ''}`}>
                 {navItems.map(item => (
-                    <ConditionalLink 
+                     <NavLink 
                         key={item.id} 
                         to={item.path} 
-                        className={item.id === 'dashboard' ? styles.dashboardLink : ''}
-                        onClick={() => setIsMenuOpen(false)} // Navigáláskor bezárja a menüt
+                        className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink}
+                        onClick={() => setIsMenuOpen(false)}
                     >
                         {item.label}
-                    </ConditionalLink>
+                    </NavLink>
                 ))}
-                <Link to="/kapcsolat" onClick={() => setIsMenuOpen(false)}>Kapcsolat</Link>
+                <NavLink to="/kapcsolat" className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink} onClick={() => setIsMenuOpen(false)}>Kapcsolat</NavLink>
             </div>
 
             <div className={styles.rightSide}>
