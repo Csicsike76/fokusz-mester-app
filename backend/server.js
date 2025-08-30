@@ -104,6 +104,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                     throw new Error('Hiányzó userId a checkout session metaadataiból!');
                 }
 
+                // --- Tanári osztály létrehozása (Egyszeri fizetés) ---
                 if (session.mode === 'payment' && session.metadata.type === 'teacher_class_payment') {
                     const { className, maxStudents, teacherId } = session.metadata;
                     if (!className || !maxStudents || !teacherId) throw new Error('Hiányos metaadatok a tanári osztály létrehozásához.');
@@ -117,6 +118,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                     console.log(`✅ Tanári osztály sikeresen létrehozva (fizetés után): ${className}, Tanár ID: ${teacherId}`);
                 }
                 
+                // --- Felhasználói előfizetés létrehozása ---
                 if (session.mode === 'subscription') {
                     const subscriptionId = session.subscription;
                     if (!subscriptionId) throw new Error('Hiányzó subscription ID a checkout.session.completed eseményben.');
@@ -146,6 +148,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                     );
                     console.log(`✅ Előfizetés sikeresen rögzítve (checkout.session.completed) a felhasználóhoz: ${userId}`);
 
+                    // --- AJÁNLÓI RENDSZER LOGIKA ---
                     console.log(`Ajánlói rendszer ellenőrzése a felhasználóhoz: ${userId}`);
                     const referralResult = await client.query('SELECT referrer_user_id FROM referrals WHERE referred_user_id = $1', [userId]);
                     if (referralResult.rows.length > 0) {
