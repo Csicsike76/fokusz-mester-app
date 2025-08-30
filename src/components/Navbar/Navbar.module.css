@@ -6,6 +6,7 @@
   --text-dim: #d8e3ea;
   --link-hover: #1abc9c;
   --shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  --notification-yellow: #ffd166; /* JAVÍTÁS: Új sárga színváltozó */
 }
 
 .navbar {
@@ -55,7 +56,7 @@
   background: rgba(255,255,255,0.06);
 }
 .dashboardLink {
-  color: #ffd166 !important;
+  color: var(--notification-yellow) !important;
 }
 
 .rightSide {
@@ -80,15 +81,14 @@
   z-index: 1100;
 }
 
-/* VÉGLEGES JAVÍTÁS: Gombok és felhasználói üdvözlés olvashatósága */
 .welcomeUser {
-  color: #ecf0f1; /* Jól látható, enyhén tört fehér */
+  color: #ecf0f1;
   font-weight: 600;
   margin-right: 10px;
 }
 
 .loginButton, .logoutButton, .authButton {
-  color: #ffffff !important; /* Garantált fehér szín */
+  color: #ffffff !important;
   text-decoration: none !important;
   display: inline-flex;
   align-items: center;
@@ -99,7 +99,7 @@
   background: rgba(255,255,255,0.08);
   font-weight: 700;
   cursor: pointer;
-  font-family: inherit; /* Örökölje a body betűtípusát */
+  font-family: inherit;
   font-size: 0.9rem;
   transition: background-color 0.2s;
 }
@@ -108,13 +108,88 @@
   background: rgba(255,255,255,0.16);
 }
 
-.authButton { /* Regisztráció gomb kiemelése */
+.authButton {
   background: #1abc9c;
   border-color: #16a085;
 }
 .authButton:hover {
   filter: brightness(1.05);
 }
+
+/* --- JAVÍTÁS KEZDETE: Értesítési rendszer stílusai --- */
+.notificationContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.notificationBell {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--notification-yellow); /* JAVÍTÁS: Sárga szín */
+  font-size: 1.2rem;
+  position: relative;
+  padding: 5px;
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: #e74c3c; /* Piros jelzés */
+  color: white;
+  border-radius: 50%;
+  padding: 2px 5px;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.notificationPanel {
+  position: absolute;
+  top: 120%; /* A gomb alá pozícionáljuk */
+  right: 0;
+  width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #2c3e50; /* Sötétkék háttér */
+  border: 1px solid var(--nav-border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  z-index: 1200;
+  color: var(--text-dim); /* JAVÍTÁS: Jobban látható szövegszín */
+}
+
+.notificationItem {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--nav-border);
+  font-size: 0.9rem;
+}
+
+.notificationItem:last-child {
+  border-bottom: none;
+}
+
+.notificationItem strong {
+  color: var(--text);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.notificationItem p {
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.notificationItem small {
+  color: #95a5a6; /* Halványabb szürke a dátumhoz */
+  font-size: 0.75rem;
+}
+
+.notificationItem.unread {
+  background-color: rgba(52, 152, 219, 0.15); /* Enyhe kék háttér az olvasatlan üzeneteknek */
+}
+/* --- JAVÍTÁS VÉGE --- */
 
 
 @media (max-width: 900px) {
