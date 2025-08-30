@@ -132,15 +132,15 @@ async function run() {
     if (process.env.STRIPE_PRICE_ID_MONTHLY) {
         await client.query(`
             INSERT INTO subscription_plans (name, stripe_price_id, price_cents, interval_unit, interval_count)
-            VALUES ('Havi Előfizetés', $1, 299000, 'month', 1)
-            ON CONFLICT (name) DO NOTHING;
+            VALUES ('Havi Előfizetés', $1, 2990, 'month', 1)
+            ON CONFLICT (stripe_price_id) DO NOTHING;
         `, [process.env.STRIPE_PRICE_ID_MONTHLY]);
     }
      if (process.env.STRIPE_PRICE_ID_YEARLY) {
         await client.query(`
             INSERT INTO subscription_plans (name, stripe_price_id, price_cents, interval_unit, interval_count)
-            VALUES ('Éves Előfizetés', $1, 2990000, 'year', 1)
-            ON CONFLICT (name) DO NOTHING;
+            VALUES ('Éves Előfizetés', $1, 29900, 'year', 1)
+            ON CONFLICT (stripe_price_id) DO NOTHING;
         `, [process.env.STRIPE_PRICE_ID_YEARLY]);
     }
 
@@ -328,15 +328,17 @@ async function run() {
       $$ LANGUAGE plpgsql;
     `);
 
-    const tablesToTrigger = ['users','teachers','classes','classmemberships','curriculums','helparticles','quizquestions','subscription_plans','subscriptions'];
+    const tablesToTrigger = ['users','teachers','classes','subscription_plans','subscriptions'];
     for (const tbl of tablesToTrigger) {
-      await client.query(`DROP TRIGGER IF EXISTS trg_update_timestamp ON ${tbl}`);
-      await client.query(`
-        CREATE TRIGGER trg_update_timestamp
-        BEFORE UPDATE ON ${tbl}
-        FOR EACH ROW
-        EXECUTE FUNCTION trigger_set_timestamp();
-      `);
+      if (tbl !== 'curriculums' && tbl !== 'helparticles' && tbl !== 'quizquestions' && tbl !== 'classmemberships') {
+          await client.query(`DROP TRIGGER IF EXISTS trg_update_timestamp ON ${tbl}`);
+          await client.query(`
+            CREATE TRIGGER trg_update_timestamp
+            BEFORE UPDATE ON ${tbl}
+            FOR EACH ROW
+            EXECUTE FUNCTION trigger_set_timestamp();
+          `);
+      }
     }
 
     await client.query('COMMIT');

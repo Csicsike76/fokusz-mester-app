@@ -7,15 +7,14 @@ import styles from './ProfilePage.module.css';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const ProfilePage = () => {
-    const { token, logout } = useAuth();
-    const [profileData, setProfileData] = useState(null);
+    const { user, token, logout, updateUser } = useAuth();
     const [statsData, setStatsData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
 
     const [isEditingUsername, setIsEditingUsername] = useState(false);
-    const [newUsername, setNewUsername] = useState('');
+    const [newUsername, setNewUsername] = useState(user ? user.username : '');
     
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -45,7 +44,8 @@ const ProfilePage = () => {
             if (!profileResponse.ok) {
                 throw new Error(profileJson.message || 'Hiba a profil betöltésekor.');
             }
-            setProfileData(profileJson.user);
+            // Itt használjuk az updateUser-t a központi állapot frissítésére
+            updateUser(profileJson.user);
             setNewUsername(profileJson.user.username);
 
             const statsJson = await statsResponse.json();
@@ -64,7 +64,7 @@ const ProfilePage = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [token, logout]);
+    }, [token, logout, updateUser]);
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -83,16 +83,16 @@ const ProfilePage = () => {
 
         if (shouldRefresh) {
             const timer = setTimeout(() => {
-                fetchAllData(true); // Kényszerített frissítés a legfrissebb adatokért
+                fetchAllData(true);
                 setMessage("Profil frissítve.");
                 setTimeout(() => setMessage(''), 3000);
-            }, 3000); // 3 másodperc várakozás, hogy a webhooknak legyen ideje lefutni
+            }, 3000);
             return () => clearTimeout(timer);
         }
 
     }, [fetchAllData]);
     
-    const handleUpdateProfile = async (updateData) => {
+    const handleUpdateUsername = async () => {
         setMessage('');
         setError('');
         try {
@@ -102,13 +102,13 @@ const ProfilePage = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(updateData)
+                body: JSON.stringify({ username: newUsername })
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.message);
             
             setMessage(data.message);
-            setProfileData(prev => ({ ...prev, ...data.user }));
+            updateUser(data.user);
             setIsEditingUsername(false);
         } catch (err) {
             setError(err.message);
@@ -148,8 +148,8 @@ const ProfilePage = () => {
     };
 
     const copyToClipboard = () => {
-        if (!profileData || !profileData.referral_code) return;
-        navigator.clipboard.writeText(profileData.referral_code);
+        if (!user || !user.referral_code) return;
+        navigator.clipboard.writeText(user.referral_code);
         
         setCopyMessage("Ajánlókód a vágólapra másolva!");
         setIsCopied(true);
@@ -223,11 +223,11 @@ const ProfilePage = () => {
         return <div className={styles.container}><p>Profil betöltése...</p></div>;
     }
 
-    if (!profileData) {
-        return <div className={styles.container}><p className={styles.errorMessage}>{error || 'Profiladatok nem elérhetők.'}</p></div>;
+    if (!user) {
+        return <div className={styles.container}><p className={styles.errorMessage}>{error || 'Profiladatok nem elérhetők. Kérjük, jelentkezzen be újra.'}</p></div>;
     }
     
-    const nextRewardProgress = (profileData.successful_referrals || 0) % 5;
+    const nextRewardProgress = (user.successful_referrals || 0) % 5;
 
     return (
         <div className={styles.container}>
@@ -243,19 +243,19 @@ const ProfilePage = () => {
                         {isEditingUsername ? (
                             <div className={styles.editView}>
                                 <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} />
-                                <button onClick={() => handleUpdateProfile({ username: newUsername })}>Mentés</button>
-                                <button className={styles.cancelButton} onClick={() => { setIsEditingUsername(false); setNewUsername(profileData.username); }}>Mégse</button>
+                                <button onClick={() => {handleUpdateUsername()}}>Mentés</button>
+                                <button className={styles.cancelButton} onClick={() => { setIsEditingUsername(false); setNewUsername(user.username); }}>Mégse</button>
                             </div>
                         ) : (
                            <div className={styles.valueView}>
-                                <span className={styles.value}>{profileData.username}</span>
+                                <span className={styles.value}>{user.username}</span>
                                 <button onClick={() => setIsEditingUsername(true)}>Szerkeszt</button>
                            </div>
                         )}
                     </div>
                     <div className={styles.infoItem}>
                         <span className={styles.label}>E-mail cím:</span>
-                        <span className={styles.value}>{profileData.email}</span>
+                        <span className={styles.value}>{user.email}</span>
                     </div>
                 </div>
 
@@ -299,12 +299,12 @@ const ProfilePage = () => {
                 
                 <hr className={styles.divider} />
 
-                {profileData.role === 'student' && profileData.referral_code && (
+                {user.role === 'student' && user.referral_code && (
                     <div className={styles.section}>
                         <h2>Oszd meg és nyerj!</h2>
                         <p>Oszd meg az alábbi egyedi ajánlókódodat barátaiddal! Minden 5., a te kódoddal regisztrált és előfizető felhasználó után <strong>1 hónap prémium hozzáférést</strong> kapsz ajándékba!</p>
                         <div className={styles.referralCodeBox}>
-                            <span>{profileData.referral_code}</span>
+                            <span>{user.referral_code}</span>
                             <button onClick={copyToClipboard} disabled={isCopied}>
                                 {isCopied ? 'Másolva!' : 'Másolás'}
                             </button>
@@ -316,7 +316,7 @@ const ProfilePage = () => {
                             <div className={styles.progressBarContainer}>
                                 <div className={styles.progressBar} style={{ width: `${(nextRewardProgress / 5) * 100}%` }}></div>
                             </div>
-                            <p>Sikeresen ajánlottál <strong>{profileData.successful_referrals || 0}</strong> felhasználót. Eddig <strong>{profileData.earned_rewards || 0}</strong> hónap jutalmat szereztél.</p>
+                            <p>Sikeresen ajánlottál <strong>{user.successful_referrals || 0}</strong> felhasználót. Eddig <strong>{user.earned_rewards || 0}</strong> hónap jutalmat szereztél.</p>
                         </div>
                     </div>
                 )}
@@ -324,20 +324,20 @@ const ProfilePage = () => {
                 <hr className={styles.divider} />
 
                 <div className={styles.section}>
-                    <h3>{profileData.role === 'teacher' ? 'VIP Tagság' : 'Előfizetési Státusz'}</h3>
+                    <h3>{user.role === 'teacher' ? 'VIP Tagság' : 'Előfizetési Státusz'}</h3>
                     <div className={styles.subscriptionStatus}>
-                        {profileData.subscription_status === 'vip_teacher' ? (
+                        {user.subscription_status === 'vip_teacher' ? (
                             <p className={styles.statusInfo}>
                                 A platformhoz való hozzáférésed tanárként korlátlan és díjmentes.
                             </p>
-                        ) : profileData.is_permanent_free ? (
+                        ) : user.is_permanent_free ? (
                             <p className={styles.statusInfo}>Örökös prémium hozzáférésed van.</p>
-                        ) : profileData.subscription_status === 'trialing' ? (
+                        ) : user.subscription_status === 'trialing' ? (
                             <>
                                 <div className={styles.trialHighlightBox}>
                                     <p>
                                         <strong>Ingyenes próbaidőszakod aktív.</strong>
-                                        {profileData.subscription_end_date && ` A prémium funkciók eddig érhetőek el: ${new Date(profileData.subscription_end_date).toLocaleDateString()}`}
+                                        {user.subscription_end_date && ` A prémium funkciók eddig érhetőek el: ${new Date(user.subscription_end_date).toLocaleDateString()}`}
                                     </p>
                                 </div>
                                 <div className={styles.subscribeOptions}>
@@ -346,11 +346,11 @@ const ProfilePage = () => {
                                     <button onClick={() => handleCreateCheckoutSession('yearly')} disabled={isLoading}>Éves Előfizetés (2 hónap ajándék)</button>
                                 </div>
                             </>
-                        ) : profileData.subscription_status === 'active' ? (
+                        ) : user.subscription_status === 'active' ? (
                             <>
                                 <p className={styles.statusInfo}>
                                     Előfizetésed aktív.
-                                    {profileData.subscription_end_date && ` A jelenlegi időszak vége: ${new Date(profileData.subscription_end_date).toLocaleDateString()}`}
+                                    {user.subscription_end_date && ` A jelenlegi időszak vége: ${new Date(user.subscription_end_date).toLocaleDateString()}`}
                                 </p>
                                 <button onClick={handleManageSubscription} className={styles.manageButton} disabled={isLoading}>Előfizetés kezelése</button>
                             </>

@@ -98,36 +98,49 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
         switch (event.type) {
             case 'checkout.session.completed':
                 const session = event.data.object;
-
-                // --- Tanári osztály létrehozása ---
+                
                 if (session.metadata.type === 'teacher_class_payment') {
                     const { className, maxStudents, teacherId } = session.metadata;
-                    if (!className || !maxStudents || !teacherId) throw new Error('Hiányos metaadatok a tanári osztály létrehozásához.');
+                    
+                    if (!className || !maxStudents || !teacherId) {
+                        throw new Error('Hiányos metaadatok a tanári osztály létrehozásához.');
+                    }
 
                     const classCode = `OSZTALY-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
-                    await client.query(
-                      `INSERT INTO classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
-                       VALUES ($1, $2, $3, $4, true, true) RETURNING *;`,
-                      [className, classCode, teacherId, maxStudents]
-                    );
+                    const query = `
+                      INSERT INTO classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
+                      VALUES ($1,$2,$3,$4,true,true)
+                      RETURNING *;
+                    `;
+                    await client.query(query, [className, classCode, teacherId, maxStudents]);
                     console.log(`✅ Tanári osztály sikeresen létrehozva (fizetés után): ${className}, Tanár ID: ${teacherId}`);
                 }
+                break;
+
+            case 'invoice.paid':
+                const invoice = event.data.object;
                 
-                // --- Felhasználói előfizetés létrehozása ---
-                if (session.mode === 'subscription') {
-                    const subscriptionId = session.subscription;
-                    if (!subscriptionId) throw new Error('Hiányzó subscription ID a checkout.session.completed eseményben.');
+                if (invoice.billing_reason === 'subscription_create' || invoice.billing_reason === 'subscription_cycle') {
+                    const subscriptionId = invoice.subscription;
+                    if (!subscriptionId) {
+                        console.log(`INFO: Invoice.paid esemény figyelmen kívül hagyva (nem előfizetéshez kapcsolódik): ${invoice.id}`);
+                        break;
+                    }
 
-                    const subscriptionStripe = await stripe.subscriptions.retrieve(subscriptionId);
-                    const userId = session.metadata.userId;
-                    if (!userId) throw new Error('Hiányzó userId a checkout session metaadataiból.');
+                    const customerId = invoice.customer;
+                    const customer = await stripe.customers.retrieve(customerId);
+                    const userId = customer.metadata.userId;
 
-                    const priceIdStripe = subscriptionStripe.items.data[0].plan.id;
+                    if (!userId) {
+                        throw new Error(`Hiányzó userId a Stripe Customer (${customerId}) metaadataiból!`);
+                    }
+
+                    const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+                    const priceIdStripe = subscription.items.data[0].plan.id;
                     const planResult = await client.query('SELECT id FROM subscription_plans WHERE stripe_price_id = $1', [priceIdStripe]);
                     if (planResult.rows.length === 0) throw new Error(`Ismeretlen Stripe Price ID: ${priceIdStripe}.`);
-                    
                     const planIdDb = planResult.rows[0].id;
-                    
+
                     await client.query(
                         `INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider, invoice_id)
                          VALUES ($1, $2, $3, to_timestamp($4), to_timestamp($5), 'stripe', $6)
@@ -137,52 +150,38 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                             current_period_start = to_timestamp($4),
                             current_period_end = to_timestamp($5),
                             invoice_id = $6,
-                            updated_at = NOW();`,
+                            updated_at = NOW();
+                        `,
                         [
-                            userId, planIdDb, subscriptionStripe.status,
-                            subscriptionStripe.current_period_start, subscriptionStripe.current_period_end,
-                            subscriptionStripe.id
+                            userId, planIdDb, subscription.status,
+                            subscription.current_period_start, subscription.current_period_end,
+                            subscription.id
                         ]
                     );
-                    console.log(`✅ Előfizetés sikeresen rögzítve (checkout.session.completed) a felhasználóhoz: ${userId}`);
+                    console.log(`✅ Előfizetés sikeresen rögzítve/frissítve (invoice.paid) a felhasználóhoz: ${userId}`);
                 }
                 break;
 
-            case 'invoice.paid':
-                // Ez a blokk most már másodlagos, a recurring fizetéseket kezeli, de a fő logikát a checkout.session.completed végzi.
-                break;
-            
             case 'customer.subscription.updated':
             case 'customer.subscription.deleted':
-                const subscription = event.data.object;
-                const customerId = subscription.customer;
-                const customer = await stripe.customers.retrieve(customerId);
-                const userId = customer.metadata.userId;
+                const subscriptionUpdated = event.data.object;
+                const customerIdUpdated = subscriptionUpdated.customer;
+                const customerUpdated = await stripe.customers.retrieve(customerIdUpdated);
+                const userIdUpdated = customerUpdated.metadata.userId;
 
-                if (!userId) throw new Error(`Hiányzó userId a Stripe Customer (${customerId}) metaadataiból a subscription esemény során!`);
+                if (!userIdUpdated) throw new Error(`Hiányzó userId a Stripe Customer (${customerIdUpdated}) metaadataiból a subscription esemény során!`);
                 
-                const priceIdStripe = subscription.items.data[0].plan.id;
-                const planResult = await client.query('SELECT id FROM subscription_plans WHERE stripe_price_id = $1', [priceIdStripe]);
-                if (planResult.rows.length === 0) throw new Error(`Ismeretlen Stripe Price ID: ${priceIdStripe}.`);
-                const planIdDb = planResult.rows[0].id;
-
                 await client.query(
-                   `INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider, invoice_id)
-                    VALUES ($1, $2, $3, to_timestamp($4), to_timestamp($5), 'stripe', $6)
-                    ON CONFLICT (user_id) DO UPDATE SET
-                       plan_id = $2,
-                       status = $3,
-                       current_period_start = to_timestamp($4),
-                       current_period_end = to_timestamp($5),
-                       invoice_id = $6,
-                       updated_at = NOW();`,
+                   `UPDATE subscriptions 
+                    SET status = $1, current_period_end = to_timestamp($2), updated_at = NOW()
+                    WHERE user_id = $3`,
                     [
-                        userId, planIdDb, subscription.status,
-                        subscription.current_period_start, subscription.current_period_end,
-                        subscription.id 
+                        subscriptionUpdated.status,
+                        subscriptionUpdated.current_period_end,
+                        userIdUpdated
                     ]
                 );
-                console.log(`✅ Előfizetés státusza frissítve (${subscription.id}) esemény (${event.type}) alapján: ${subscription.status}`);
+                console.log(`✅ Előfizetés státusza frissítve (${subscriptionUpdated.id}) esemény (${event.type}) alapján: ${subscriptionUpdated.status}`);
                 break;
         }
 
