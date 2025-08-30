@@ -1,5 +1,3 @@
-// src/pages/ProfilePage.js
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './ProfilePage.module.css';
@@ -7,12 +5,14 @@ import styles from './ProfilePage.module.css';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const ProfilePage = () => {
-    const { token, logout } = useAuth();
+    const { token, logout, updateUser } = useAuth();
     const [profileData, setProfileData] = useState(null);
     const [statsData, setStatsData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+
+    const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
     const [isEditingUsername, setIsEditingUsername] = useState(false);
     const [newUsername, setNewUsername] = useState('');
@@ -26,74 +26,80 @@ const ProfilePage = () => {
 
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+    const fetchAllData = useCallback(async () => {
+        if (!token) {
+            return null;
+        }
+        try {
+            const [profileResponse, statsResponse] = await Promise.all([
+                fetch(`${API_URL}/api/profile`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                fetch(`${API_URL}/api/profile/stats`, { headers: { 'Authorization': `Bearer ${token}` } })
+            ]);
+
+            const profileJson = await profileResponse.json();
+            if (!profileResponse.ok) {
+                throw new Error(profileJson.message || 'Hiba a profil betöltésekor.');
+            }
+            
+            setProfileData(profileJson.user);
+            updateUser(profileJson.user);
+            setNewUsername(profileJson.user.username);
+
+            const statsJson = await statsResponse.json();
+            if (statsResponse.ok) {
+                setStatsData(statsJson.stats);
+            }
+            
+            return profileJson.user;
+
+        } catch (err) {
+            setError(err.message);
+            if (err.message.includes('Érvénytelen vagy lejárt token')) {
+                 logout();
+            }
+            return null;
+        }
+    }, [token, logout, updateUser]);
+
     useEffect(() => {
-        const fetchAllData = async (isForcedRefresh = false) => {
-            if (!token) {
-                setIsLoading(false);
-                return;
-            }
-            if (!isForcedRefresh) {
-                setIsLoading(true);
-            }
-            setError('');
-            try {
-                const [profileResponse, statsResponse] = await Promise.all([
-                    fetch(`${API_URL}/api/profile`, { headers: { 'Authorization': `Bearer ${token}` } }),
-                    fetch(`${API_URL}/api/profile/stats`, { headers: { 'Authorization': `Bearer ${token}` } })
-                ]);
-    
-                const profileJson = await profileResponse.json();
-                if (!profileResponse.ok) {
-                    throw new Error(profileJson.message || 'Hiba a profil betöltésekor.');
-                }
-                setProfileData(profileJson.user);
-                setNewUsername(profileJson.user.username);
-    
-                const statsJson = await statsResponse.json();
-                if (statsResponse.ok) {
-                    setStatsData(statsJson.stats);
-                } else {
-                    console.warn("Statisztikák betöltése sikertelen:", statsJson.message);
-                    setStatsData(null);
-                }
-    
-            } catch (err) {
-                setError(err.message);
-                if (err.message.includes('Érvénytelen vagy lejárt token')) {
-                     logout();
-                }
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        
         const queryParams = new URLSearchParams(window.location.search);
-        let shouldRefresh = false;
-
-        if (queryParams.get("payment_success")) {
-            setMessage("Sikeres előfizetés! Köszönjük. A profilod hamarosan frissül.");
-            window.history.replaceState(null, '', window.location.pathname);
-            shouldRefresh = true;
-        } else if (queryParams.get("payment_canceled")) {
-            setError("Az előfizetési folyamatot megszakítottad.");
-            window.history.replaceState(null, '', window.location.pathname);
-        }
         
-        fetchAllData();
+        if (queryParams.get("payment_success")) {
+            setIsLoading(false);
+            setIsProcessingPayment(true);
+            setMessage("Sikeres fizetés! Fiókját frissítjük, kérjük várjon...");
+            window.history.replaceState(null, '', window.location.pathname);
 
-        if (shouldRefresh) {
-            const timer = setTimeout(() => {
-                fetchAllData(true); // Kényszerített frissítés a legfrissebb adatokért
-                setMessage("Profil frissítve.");
-                setTimeout(() => setMessage(''), 3000);
-            }, 3000); // 3 másodperc várakozás, hogy a webhooknak legyen ideje lefutni
-            return () => clearTimeout(timer);
+            let attempts = 0;
+            const maxAttempts = 10;
+            const pollInterval = setInterval(async () => {
+                attempts++;
+                const freshProfileData = await fetchAllData();
+                
+                if (freshProfileData && (freshProfileData.is_subscribed || freshProfileData.subscription_status === 'active')) {
+                    clearInterval(pollInterval);
+                    setIsProcessingPayment(false);
+                    setMessage("Előfizetésed sikeresen aktiválva!");
+                    setTimeout(() => setMessage(''), 5000);
+                } else if (attempts >= maxAttempts) {
+                    clearInterval(pollInterval);
+                    setIsProcessingPayment(false);
+                    setError("Nem sikerült automatikusan frissíteni a státuszodat. Kérjük, frissítsd az oldalt, vagy lépj kapcsolatba az ügyfélszolgálattal, ha a probléma továbbra is fennáll.");
+                }
+            }, 3000);
+
+            return () => clearInterval(pollInterval);
+        
+        } else {
+            setIsLoading(true);
+            fetchAllData().finally(() => setIsLoading(false));
+
+            if (queryParams.get("payment_canceled")) {
+                setError("Az előfizetési folyamatot megszakítottad.");
+                window.history.replaceState(null, '', window.location.pathname);
+            }
         }
-
-    // JAVÍTÁS: A függőségi tömböt `[token, logout]`-ra cseréljük.
-    // Ez biztosítja, hogy az adatlekérés csak akkor fusson le újra, ha a felhasználó
-    // be- vagy kijelentkezik (a token megváltozik), megszüntetve a végtelen ciklust.
-    }, [token, logout]);
+    }, [fetchAllData]);
     
     const handleUpdateProfile = async (updateData) => {
         setMessage('');
@@ -101,17 +107,15 @@ const ProfilePage = () => {
         try {
             const response = await fetch(`${API_URL}/api/profile`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify(updateData)
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.message);
             
             setMessage(data.message);
-            setProfileData(prev => ({ ...prev, ...data.user }));
+            setProfileData(data.user);
+            updateUser(data.user);
             setIsEditingUsername(false);
         } catch (err) {
             setError(err.message);
@@ -131,10 +135,7 @@ const ProfilePage = () => {
         try {
              const response = await fetch(`${API_URL}/api/profile/change-password`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ oldPassword, newPassword })
             });
             const data = await response.json();
@@ -169,10 +170,7 @@ const ProfilePage = () => {
         try {
             const response = await fetch(`${API_URL}/api/create-checkout-session`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ interval }),
             });
             const data = await response.json();
@@ -209,10 +207,8 @@ const ProfilePage = () => {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-
             const data = await response.json();
             if (!response.ok) throw new Error(data.message);
-            
             alert('A fiókodat sikeresen töröltük.');
             logout();
         } catch (err) {
@@ -329,12 +325,25 @@ const ProfilePage = () => {
                 <div className={styles.section}>
                     <h3>{profileData.role === 'teacher' ? 'VIP Tagság' : 'Előfizetési Státusz'}</h3>
                     <div className={styles.subscriptionStatus}>
-                        {profileData.subscription_status === 'vip_teacher' ? (
+                        {isProcessingPayment ? (
+                            <div className={styles.statusInfo}>
+                                <p><strong>Fiók frissítése folyamatban...</strong></p>
+                                <p>A fizetés visszaigazolása megérkezett, a rendszer pillanatokon belül aktiválja az előfizetésedet.</p>
+                            </div>
+                        ) : profileData.subscription_status === 'vip_teacher' ? (
                             <p className={styles.statusInfo}>
                                 A platformhoz való hozzáférésed tanárként korlátlan és díjmentes.
                             </p>
                         ) : profileData.is_permanent_free ? (
                             <p className={styles.statusInfo}>Örökös prémium hozzáférésed van.</p>
+                        ) : profileData.subscription_status === 'active' ? (
+                            <>
+                                <p className={styles.statusInfo}>
+                                    Előfizetésed aktív.
+                                    {profileData.subscription_end_date && ` A jelenlegi időszak vége: ${new Date(profileData.subscription_end_date).toLocaleDateString()}`}
+                                </p>
+                                <button onClick={handleManageSubscription} className={styles.manageButton} disabled={isLoading}>Előfizetés kezelése</button>
+                            </>
                         ) : profileData.subscription_status === 'trialing' ? (
                             <>
                                 <div className={styles.trialHighlightBox}>
@@ -348,14 +357,6 @@ const ProfilePage = () => {
                                     <button onClick={() => handleCreateCheckoutSession('monthly')} disabled={isLoading}>Havi Előfizetés</button>
                                     <button onClick={() => handleCreateCheckoutSession('yearly')} disabled={isLoading}>Éves Előfizetés (2 hónap ajándék)</button>
                                 </div>
-                            </>
-                        ) : profileData.subscription_status === 'active' ? (
-                            <>
-                                <p className={styles.statusInfo}>
-                                    Előfizetésed aktív.
-                                    {profileData.subscription_end_date && ` A jelenlegi időszak vége: ${new Date(profileData.subscription_end_date).toLocaleDateString()}`}
-                                </p>
-                                <button onClick={handleManageSubscription} className={styles.manageButton} disabled={isLoading}>Előfizetés kezelése</button>
                             </>
                         ) : (
                             <>

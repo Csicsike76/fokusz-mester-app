@@ -106,16 +106,16 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
 
                 // --- Tanári osztály létrehozása (Egyszeri fizetés) ---
                 if (session.mode === 'payment' && session.metadata.type === 'teacher_class_payment') {
-                    const { className, maxStudents, teacherId } = session.metadata;
-                    if (!className || !maxStudents || !teacherId) throw new Error('Hiányos metaadatok a tanári osztály létrehozásához.');
+                    const { className, maxStudents } = session.metadata;
+                    if (!className || !maxStudents) throw new Error('Hiányos metaadatok a tanári osztály létrehozásához.');
 
                     const classCode = `OSZTALY-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
                     await client.query(
                       `INSERT INTO classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
                        VALUES ($1, $2, $3, $4, true, true) RETURNING *;`,
-                      [className, classCode, teacherId, maxStudents]
+                      [className, classCode, userId, maxStudents]
                     );
-                    console.log(`✅ Tanári osztály sikeresen létrehozva (fizetés után): ${className}, Tanár ID: ${teacherId}`);
+                    console.log(`✅ Tanári osztály sikeresen létrehozva (fizetés után): ${className}, Tanár ID: ${userId}`);
                 }
                 
                 // --- Felhasználói előfizetés létrehozása ---
@@ -1058,7 +1058,7 @@ app.post('/api/teacher/create-class-checkout-session', authenticateToken, async 
             cancel_url: `${process.env.FRONTEND_URL}/dashboard/teacher?class_creation_canceled=true`,
             metadata: {
                 type: 'teacher_class_payment',
-                teacherId: teacherId,
+                userId: teacherId,
                 className: className,
                 maxStudents: maxStudents,
             },
