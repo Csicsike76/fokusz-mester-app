@@ -1,6 +1,3 @@
-// server.js
-
-
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
@@ -728,37 +725,35 @@ app.post('/api/login', authLimiter, async (req, res) => {
 
 const getFullUserProfile = async (userId) => {
     const userQuery = `
-        SELECT 
-            u.id, 
-            u.username, 
-            u.email, 
-            u.role, 
-            u.referral_code, 
-            u.created_at,
-            u.profile_metadata,
-            u.is_permanent_free,
-            s.status as subscription_status,
-            s.current_period_end as subscription_end_date,
-            s.plan_id
+        SELECT
+            u.id, u.username, u.email, u.role, u.referral_code, u.created_at,
+            u.profile_metadata, u.is_permanent_free
         FROM users u
-        LEFT JOIN subscriptions s ON u.id = s.user_id 
-        WHERE u.id = $1
-        ORDER BY 
-            CASE 
-                WHEN s.status = 'active' THEN 1
-                WHEN s.plan_id IS NOT NULL THEN 2
-                WHEN s.status = 'trialing' THEN 3
-                ELSE 4
-            END,
-            s.created_at DESC
-        LIMIT 1;
+        WHERE u.id = $1;
     `;
     const userResult = await pool.query(userQuery, [userId]);
+    if (userResult.rows.length === 0) return null;
 
-    if (userResult.rows.length === 0) {
-        return null;
-    }
     const userProfile = userResult.rows[0];
+
+    const subsQuery = `
+        SELECT s.status, s.plan_id, s.current_period_end, s.created_at, p.name as plan_name
+        FROM subscriptions s
+        LEFT JOIN subscription_plans p ON s.plan_id = p.id
+        WHERE s.user_id = $1
+        ORDER BY s.created_at DESC
+    `;
+    const subsResult = await pool.query(subsQuery, [userId]);
+    userProfile.subscriptions = subsResult.rows;
+
+    const activeSub = subsResult.rows.find(s => s.status === 'active');
+    const trialSub = subsResult.rows.find(s => s.status === 'trialing' && s.plan_id === null);
+    const futureSub = subsResult.rows.find(s => s.status === 'trialing' && s.plan_id !== null);
+
+    let primarySub = activeSub || futureSub || trialSub;
+    
+    userProfile.subscription_status = primarySub?.status || null;
+    userProfile.subscription_end_date = primarySub?.current_period_end || null;
 
     if (userProfile.role === 'teacher') {
         userProfile.subscription_status = 'vip_teacher';
@@ -777,8 +772,7 @@ const getFullUserProfile = async (userId) => {
     userProfile.successful_referrals = successfulReferrals;
     userProfile.earned_rewards = earnedRewards;
     
-    const activeSubscription = userProfile.subscription_status === 'active' || (userProfile.subscription_status === 'trialing' && userProfile.plan_id !== null);
-    userProfile.is_subscribed = userProfile.is_permanent_free || activeSubscription;
+    userProfile.is_subscribed = userProfile.is_permanent_free || !!activeSub || !!futureSub;
 
     return userProfile;
 };

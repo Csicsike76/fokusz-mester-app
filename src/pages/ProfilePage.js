@@ -76,7 +76,7 @@ const ProfilePage = () => {
                 attempts++;
                 const freshProfileData = await fetchAllData();
                 
-                if (freshProfileData && (freshProfileData.is_subscribed || freshProfileData.subscription_status === 'active')) {
+                if (freshProfileData && freshProfileData.is_subscribed) {
                     clearInterval(pollInterval);
                     setIsProcessingPayment(false);
                     setMessage("Előfizetésed sikeresen aktiválva!");
@@ -232,6 +232,8 @@ const ProfilePage = () => {
     }
     
     const nextRewardProgress = (profileData.successful_referrals || 0) % 5;
+    const trialInfo = profileData.subscriptions?.find(s => s.status === 'trialing' && s.plan_id === null);
+    const futureSubInfo = profileData.subscriptions?.find(s => s.status === 'trialing' && s.plan_id !== null);
 
     return (
         <div className={styles.container}>
@@ -349,18 +351,23 @@ const ProfilePage = () => {
                                 </p>
                                 <button onClick={handleManageSubscription} className={styles.manageButton} disabled={isLoading}>Előfizetés kezelése</button>
                             </>
-                        ) : profileData.subscription_status === 'trialing' ? (
+                        ) : trialInfo ? (
                             <>
                                 <div className={styles.trialHighlightBox}>
                                     <p>
                                         <strong>Ingyenes próbaidőszakod aktív.</strong>
-                                        {profileData.subscription_end_date && ` A prémium funkciók eddig érhetőek el: ${new Date(profileData.subscription_end_date).toLocaleDateString()}`}
+                                        {trialInfo.current_period_end && ` A prémium funkciók eddig érhetőek el: ${new Date(trialInfo.current_period_end).toLocaleDateString()}`}
                                     </p>
                                 </div>
+                                {futureSubInfo && (
+                                    <div className={styles.statusInfo}>
+                                        <p>Már megvásároltad a(z) <strong>{futureSubInfo.plan_name?.toLowerCase()}</strong> előfizetést. Ez automatikusan elindul, amint a próbaidőszak lejár.</p>
+                                    </div>
+                                )}
                                 <div className={styles.subscribeOptions}>
                                     <h4>Válts teljes előfizetésre a próbaidőszak lejárta előtt!</h4>
-                                    <button onClick={() => handleCreateCheckoutSession('monthly')} disabled={isLoading}>Havi Előfizetés</button>
-                                    <button onClick={() => handleCreateCheckoutSession('yearly')} disabled={isLoading}>Éves Előfizetés (2 hónap ajándék)</button>
+                                    <button onClick={() => handleCreateCheckoutSession('monthly')} disabled={isLoading || !!futureSubInfo}>Havi Előfizetés</button>
+                                    <button onClick={() => handleCreateCheckoutSession('yearly')} disabled={isLoading || !!futureSubInfo}>Éves Előfizetés (2 hónap ajándék)</button>
                                 </div>
                             </>
                         ) : (
