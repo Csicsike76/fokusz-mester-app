@@ -47,7 +47,7 @@
 
 .label {
     font-size: 0.9rem;
-    color: #95a5a6;
+    color: #bdc3c7;
     margin-bottom: 0.3rem;
 }
 
@@ -69,7 +69,7 @@
 .divider {
     border: 0;
     height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #3498db, rgba(0, 0, 0, 0));
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #ffffff, rgba(0, 0, 0, 0));
     margin: 2rem 0;
 }
 
@@ -89,30 +89,32 @@ input[type="text"], input[type="password"] {
 }
 
 button {
-    background-color: #3498db;
-    color: white;
+    background-color: #ffffff; /* Fehér gombok */
+    color: #2c3e50; /* Sötét szöveg */
     border: none;
     padding: 12px 20px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
     font-weight: bold;
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: #ecf0f1;
 }
 
 button:disabled {
-    background-color: #7f8c8d;
+    background-color: #95a5a6;
+    color: #d5d9dc;
     cursor: not-allowed;
 }
 
 .cancelButton {
-    background-color: #95a5a6;
+    background-color: #7f8c8d;
+    color: #ffffff;
 }
 .cancelButton:hover {
-    background-color: #7f8c8d;
+    background-color: #95a5a6;
 }
 
 /* --- Message styles --- */
@@ -121,20 +123,21 @@ button:disabled {
     border-radius: 5px;
     margin: 1rem 0;
     text-align: center;
+    font-weight: bold;
 }
 
 .successMessage {
-    background-color: #27ae60;
+    background-color: #2ecc71; /* Zöld */
     color: white;
 }
 
 .errorMessage {
-    background-color: #c0392b;
+    background-color: #e74c3c; /* Piros */
     color: white;
 }
 
 .copySuccessMessage {
-    background-color: #27ae60;
+    background-color: #2ecc71; /* Zöld */
     font-size: 0.9rem;
     padding: 0.5rem;
 }
@@ -142,7 +145,7 @@ button:disabled {
 /* --- Referral Section --- */
 .referralCodeBox {
     background-color: #1f2b38;
-    border: 2px dashed #3498db;
+    border: 2px dashed #ffffff; /* Fehér szaggatott */
     padding: 1rem;
     margin: 1rem 0;
     display: flex;
@@ -155,7 +158,7 @@ button:disabled {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.4rem;
     font-weight: bold;
-    color: #f1c40f;
+    color: #ffffff; /* Fehér */
 }
 
 .referralProgress {
@@ -173,7 +176,7 @@ button:disabled {
 .progressBar {
     width: 0%;
     height: 15px;
-    background-color: #27ae60;
+    background-color: #2ecc71; /* Zöld */
     border-radius: 10px;
     transition: width 0.5s ease-in-out;
 }
@@ -185,11 +188,17 @@ button:disabled {
     border-radius: 8px;
 }
 
-.statusInfo {
+.statusInfo, .activeSubscription {
     font-size: 1.1rem;
     text-align: center;
     margin-bottom: 1.5rem;
 }
+
+.activeSubscription {
+    color: #2ecc71; /* Zöld */
+    font-weight: bold;
+}
+
 
 .subscribeOptions {
     text-align: center;
@@ -208,25 +217,27 @@ button:disabled {
 .manageButton {
     display: block;
     margin: 0 auto;
-    background-color: #f39c12;
+    background-color: #ffffff;
+    color: #2c3e50;
 }
 
 .manageButton:hover {
-    background-color: #e67e22;
+    background-color: #ecf0f1;
 }
 
 
 /* --- Danger Zone --- */
 .dangerZone {
-    border: 2px solid #e74c3c;
+    border: 2px solid #e74c3c; /* Piros */
     border-radius: 8px;
     padding: 1.5rem;
     background-color: rgba(231, 76, 60, 0.1);
 }
 
 .dangerButton {
-    background-color: #e74c3c;
+    background-color: #e74c3c; /* Piros */
     width: 100%;
+    color: white;
 }
 
 .dangerButton:hover {
@@ -257,7 +268,7 @@ button:disabled {
 }
 
 .modalDangerText {
-    color: #e74c3c;
+    color: #e74c3c; /* Piros */
     font-weight: bold;
     margin: 1rem 0;
 }
@@ -285,7 +296,7 @@ button:disabled {
 .statValue {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #3498db;
+    color: #ffffff; /* Fehér */
     display: block;
 }
 
@@ -311,7 +322,7 @@ button:disabled {
     border-bottom: none;
 }
 
-/* --- MÓDOSÍTÁS: A PRÓBAIDŐSZAK KIEMELÉSE --- */
+/* --- Trial/Subscription Info Boxes --- */
 .trialHighlightBox {
     background-color: rgba(46, 204, 113, 0.15); /* Halvány zöld */
     border: 1px solid #2ecc71; /* Élénkebb zöld keret */
