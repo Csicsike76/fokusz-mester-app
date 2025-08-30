@@ -120,7 +120,7 @@ async function run() {
         name TEXT UNIQUE NOT NULL,
         stripe_price_id TEXT UNIQUE,
         price_cents INT NOT NULL CHECK (price_cents >= 0),
-        interval_unit TEXT NOT NULL CHECK (interval_unit IN ('day','month','year')),
+        interval_unit TEXT NOT NULL CHECK (interval_unit IN ('day','month','year', 'one_time')),
         interval_count INT NOT NULL CHECK (interval_count > 0),
         trial_days INT DEFAULT 0 CHECK (trial_days >= 0),
         is_active BOOLEAN DEFAULT true,
@@ -142,6 +142,13 @@ async function run() {
             VALUES ('Éves Előfizetés', $1, 29900, 'year', 1)
             ON CONFLICT (stripe_price_id) DO NOTHING;
         `, [process.env.STRIPE_PRICE_ID_YEARLY]);
+    }
+     if (process.env.STRIPE_PRICE_ID_TEACHER_CLASS) {
+        await client.query(`
+            INSERT INTO subscription_plans (name, stripe_price_id, price_cents, interval_unit, interval_count)
+            VALUES ('Tanári Osztály Csomag', $1, 420000, 'one_time', 1)
+            ON CONFLICT (stripe_price_id) DO NOTHING;
+        `, [process.env.STRIPE_PRICE_ID_TEACHER_CLASS]);
     }
 
     // --- Subscriptions tábla ---
