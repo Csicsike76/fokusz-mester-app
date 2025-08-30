@@ -1,5 +1,3 @@
-// src/pages/ProfilePage.js
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './ProfilePage.module.css';
@@ -153,12 +151,17 @@ const ProfilePage = () => {
         }
     };
 
-    const copyToClipboard = () => {
+    const copyToClipboard = async () => {
         if (!profileData || !profileData.referral_code) return;
-        navigator.clipboard.writeText(profileData.referral_code);
         
-        setCopyMessage("Ajánlókód a vágólapra másolva!");
-        setIsCopied(true);
+        try {
+            await navigator.clipboard.writeText(profileData.referral_code);
+            setCopyMessage("Ajánlókód a vágólapra másolva!");
+            setIsCopied(true);
+        } catch (err) {
+            setCopyMessage("A másolás sikertelen volt.");
+            console.error('Hiba a vágólapra másoláskor:', err);
+        }
 
         setTimeout(() => {
             setCopyMessage('');

@@ -1,6 +1,3 @@
-// server.js
-
-
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
@@ -159,7 +156,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
                            `SELECT COUNT(DISTINCT r.referred_user_id)
                             FROM referrals r
                             JOIN subscriptions s ON r.referred_user_id = s.user_id
-                            WHERE r.referrer_user_id = $1 AND s.status = 'active'`,
+                            WHERE r.referrer_user_id = $1 AND s.status IN ('active', 'trialing') AND s.plan_id IS NOT NULL`,
                            [referrerId]
                         );
                         const newTotalReferrals = parseInt(successfulReferralsResult.rows[0].count, 10);
@@ -738,11 +735,19 @@ const getFullUserProfile = async (userId) => {
             u.profile_metadata,
             u.is_permanent_free,
             s.status as subscription_status,
-            s.current_period_end as subscription_end_date
+            s.current_period_end as subscription_end_date,
+            s.plan_id
         FROM users u
         LEFT JOIN subscriptions s ON u.id = s.user_id 
         WHERE u.id = $1
-        ORDER BY s.created_at DESC
+        ORDER BY 
+            CASE 
+                WHEN s.status = 'active' THEN 1
+                WHEN s.status = 'trialing' AND s.plan_id IS NOT NULL THEN 2
+                WHEN s.status = 'trialing' THEN 3
+                ELSE 4
+            END,
+            s.created_at DESC
         LIMIT 1;
     `;
     const userResult = await pool.query(userQuery, [userId]);
@@ -760,7 +765,7 @@ const getFullUserProfile = async (userId) => {
         `SELECT COUNT(DISTINCT r.referred_user_id)
          FROM referrals r
          JOIN subscriptions s ON r.referred_user_id = s.user_id
-         WHERE r.referrer_user_id = $1 AND s.status IN ('active', 'trialing')`,
+         WHERE r.referrer_user_id = $1 AND s.status IN ('active', 'trialing') AND s.plan_id IS NOT NULL`,
         [userId]
     );
     const successfulReferrals = parseInt(referralsResult.rows?.[0]?.count || 0, 10);
@@ -769,7 +774,7 @@ const getFullUserProfile = async (userId) => {
     userProfile.successful_referrals = successfulReferrals;
     userProfile.earned_rewards = earnedRewards;
     
-    const activeSubscription = userProfile.subscription_status === 'active' || userProfile.subscription_status === 'trialing';
+    const activeSubscription = userProfile.subscription_status === 'active' || (userProfile.subscription_status === 'trialing' && userProfile.plan_id !== null);
     userProfile.is_subscribed = userProfile.is_permanent_free || activeSubscription;
 
     return userProfile;
