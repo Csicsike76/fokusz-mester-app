@@ -746,7 +746,7 @@ const getFullUserProfile = async (userId) => {
         ORDER BY 
             CASE 
                 WHEN s.status = 'active' THEN 1
-                WHEN s.status = 'trialing' AND s.plan_id IS NOT NULL THEN 2
+                WHEN s.plan_id IS NOT NULL THEN 2
                 WHEN s.status = 'trialing' THEN 3
                 ELSE 4
             END,
