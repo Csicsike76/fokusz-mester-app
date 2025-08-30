@@ -1,3 +1,5 @@
+// src/pages/ProfilePage.js
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './ProfilePage.module.css';
@@ -99,7 +101,7 @@ const ProfilePage = () => {
                 window.history.replaceState(null, '', window.location.pathname);
             }
         }
-    }, [fetchAllData]);
+    }, [token]);
     
     const handleUpdateProfile = async (updateData) => {
         setMessage('');

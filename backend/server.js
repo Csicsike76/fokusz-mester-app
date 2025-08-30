@@ -1047,8 +1047,15 @@ app.post('/api/teacher/create-class-checkout-session', authenticateToken, async 
     }
 
     try {
+        const userResult = await pool.query('SELECT email FROM users WHERE id = $1', [teacherId]);
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'A tanár felhasználó nem található.' });
+        }
+        const teacherEmail = userResult.rows[0].email;
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
+            customer_email: teacherEmail,
             line_items: [{
                 price: priceId,
                 quantity: 1,
