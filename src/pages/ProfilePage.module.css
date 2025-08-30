@@ -19,7 +19,7 @@
 
 .profileBox h1, .profileBox h2, .profileBox h3, .profileBox h4 {
     color: #ffffff;
-    border-bottom: 2px solid #3498db;
+    border-bottom: 2px solid #ffffff;
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
 }
@@ -188,15 +188,20 @@ button:disabled {
     border-radius: 8px;
 }
 
-.statusInfo, .activeSubscription {
+.statusInfo {
     font-size: 1.1rem;
     text-align: center;
     margin-bottom: 1.5rem;
 }
 
 .activeSubscription {
-    color: #2ecc71; /* Zöld */
+    background-color: rgba(46, 204, 113, 0.15);
+    border: 1px solid #2ecc71;
+    color: #2ecc71;
     font-weight: bold;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
 }
 
 
@@ -216,7 +221,7 @@ button:disabled {
 
 .manageButton {
     display: block;
-    margin: 0 auto;
+    margin: 1rem auto 0;
     background-color: #ffffff;
     color: #2c3e50;
 }
@@ -323,7 +328,7 @@ button:disabled {
 }
 
 /* --- Trial/Subscription Info Boxes --- */
-.trialHighlightBox {
+.trialHighlightBox, .futureSubscriptionInfo {
     background-color: rgba(46, 204, 113, 0.15); /* Halvány zöld */
     border: 1px solid #2ecc71; /* Élénkebb zöld keret */
     border-radius: 8px;
@@ -332,7 +337,7 @@ button:disabled {
     text-align: center;
 }
 
-.trialHighlightBox p {
+.trialHighlightBox p, .futureSubscriptionInfo p {
     margin: 0;
     font-size: 1rem;
     color: #ecf0f1;

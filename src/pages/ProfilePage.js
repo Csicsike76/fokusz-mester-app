@@ -365,7 +365,7 @@ const ProfilePage = () => {
                                     </div>
                                 )}
                                 {futureSubInfo && (
-                                    <div className={styles.statusInfo}>
+                                     <div className={styles.futureSubscriptionInfo}>
                                         <p>Már megvásároltad a(z) <strong>{futureSubInfo.plan_name?.toLowerCase()}</strong> előfizetést. Ez automatikusan elindul, amint a próbaidőszak lejár.</p>
                                     </div>
                                 )}
