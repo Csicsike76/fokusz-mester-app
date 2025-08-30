@@ -354,14 +354,16 @@ const ProfilePage = () => {
                                 </p>
                                 <button onClick={handleManageSubscription} className={styles.manageButton} disabled={isLoading}>Előfizetés kezelése</button>
                             </>
-                        ) : trialInfo ? (
+                        ) : trialInfo || futureSubInfo ? (
                             <>
-                                <div className={styles.trialHighlightBox}>
-                                    <p>
-                                        <strong>Ingyenes próbaidőszakod aktív.</strong>
-                                        {trialInfo.current_period_end && ` A prémium funkciók eddig érhetőek el: ${new Date(trialInfo.current_period_end).toLocaleDateString()}`}
-                                    </p>
-                                </div>
+                                {trialInfo && (
+                                    <div className={styles.trialHighlightBox}>
+                                        <p>
+                                            <strong>Ingyenes próbaidőszakod aktív.</strong>
+                                            {trialInfo.current_period_end && ` A prémium funkciók eddig érhetőek el: ${new Date(trialInfo.current_period_end).toLocaleDateString()}`}
+                                        </p>
+                                    </div>
+                                )}
                                 {futureSubInfo && (
                                     <div className={styles.statusInfo}>
                                         <p>Már megvásároltad a(z) <strong>{futureSubInfo.plan_name?.toLowerCase()}</strong> előfizetést. Ez automatikusan elindul, amint a próbaidőszak lejár.</p>
