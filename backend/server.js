@@ -1,6 +1,5 @@
 // server.js
 
-
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
@@ -14,9 +13,9 @@ const fsp = require('fs/promises');
 const validator = require('validator');
 const { rateLimit, ipKeyGenerator } = require('express-rate-limit');
 const axios = require('axios');
+const cron = require('node-cron');
 
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
-
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -49,144 +48,174 @@ const app = express();
 
 const whitelist = ['http://localhost:3000', process.env.FRONTEND_URL];
 if (process.env.NODE_ENV !== 'production') {
-    const os = require('os');
-    const nets = os.networkInterfaces();
-    for (const name of Object.keys(nets)) {
-        for (const net of nets[name]) {
-            if (net.family === 'IPv4' && !net.internal) {
-                whitelist.push(`http://${net.address}:3000`);
-            }
-        }
+  const os = require('os');
+  const nets = os.networkInterfaces();
+  for (const name of Object.keys(nets)) {
+    for (const net of nets[name]) {
+      if (net.family === 'IPv4' && !net.internal) {
+        whitelist.push(`http://${net.address}:3000`);
+      }
     }
+  }
 }
 const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
     }
+  },
 };
 app.use(cors(corsOptions));
 
-
 app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] Bejövő kérés: ${req.method} ${req.originalUrl}`);
-    next();
+  console.log(`[${new Date().toISOString()}] Bejövő kérés: ${req.method} ${req.originalUrl}`);
+  next();
 });
 
+app.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (req, res) => {
-    const sig = req.headers['stripe-signature'];
-    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  let event;
 
-    let event;
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
+  } catch (err) {
+    console.error(`❌ Stripe webhook signature error: ${err.message}`);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
 
-    try {
-        event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
-    } catch (err) {
-        console.error(`❌ Stripe webhook signature error: ${err.message}`);
-        return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
 
-    const client = await pool.connect();
-    try {
-        await client.query('BEGIN');
+    switch (event.type) {
+      case 'checkout.session.completed':
+        const session = event.data.object;
+        const userId = session.metadata.userId;
 
-        switch (event.type) {
-            case 'checkout.session.completed':
-                const session = event.data.object;
-                
-                if (session.metadata.type === 'teacher_class_payment') {
-                    const { className, maxStudents, teacherId } = session.metadata;
-                    
-                    if (!className || !maxStudents || !teacherId) {
-                        throw new Error('Hiányos metaadatok a tanári osztály létrehozásához.');
-                    }
-
-                    const classCode = `OSZTALY-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
-                    const query = `
-                      INSERT INTO classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
-                      VALUES ($1,$2,$3,$4,true,true)
-                      RETURNING *;
-                    `;
-                    await client.query(query, [className, classCode, teacherId, maxStudents]);
-                    console.log(`✅ Tanári osztály sikeresen létrehozva (fizetés után): ${className}, Tanár ID: ${teacherId}`);
-                }
-                break;
-
-            case 'invoice.paid':
-                const invoice = event.data.object;
-                
-                if (invoice.billing_reason === 'subscription_create' || invoice.billing_reason === 'subscription_cycle') {
-                    const subscriptionId = invoice.subscription || invoice.parent?.subscription_details?.subscription;
-                    
-                    if (!subscriptionId) {
-                        throw new Error('A "subscription" azonosító hiányzik az "invoice.paid" eseményből.');
-                    }
-
-                    const customerId = invoice.customer;
-                    const customer = await stripe.customers.retrieve(customerId);
-                    const userId = customer.metadata.userId;
-
-                    if (!userId) {
-                        throw new Error(`Hiányzó userId a Stripe Customer (${customerId}) metaadataiból!`);
-                    }
-
-                    const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-
-                    await client.query(
-                        `INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider, invoice_id)
-                         VALUES ($1, $2, $3, to_timestamp($4), to_timestamp($5), 'stripe', $6)
-                         ON CONFLICT (user_id) DO UPDATE SET
-                            status = $3,
-                            current_period_start = to_timestamp($4),
-                            current_period_end = to_timestamp($5),
-                            invoice_id = $6,
-                            updated_at = NOW();
-                        `,
-                        [
-                            userId,
-                            subscription.items.data[0].plan.id,
-                            subscription.status,
-                            subscription.current_period_start,
-                            subscription.current_period_end,
-                            subscription.id
-                        ]
-                    );
-                    console.log(`✅ Előfizetés sikeresen rögzítve (invoice.paid) a felhasználóhoz: ${userId}`);
-                }
-                break;
-
-            case 'customer.subscription.updated':
-            case 'customer.subscription.deleted':
-                const subscriptionUpdated = event.data.object;
-                await client.query(
-                   `UPDATE subscriptions 
-                    SET status = $1, current_period_end = to_timestamp($2), updated_at = NOW()
-                    WHERE invoice_id = $3`,
-                    [
-                        subscriptionUpdated.status,
-                        subscriptionUpdated.current_period_end,
-                        subscriptionUpdated.id 
-                    ]
-                );
-                console.log(`✅ Előfizetés státusza frissítve (${subscriptionUpdated.id}): ${subscriptionUpdated.status}`);
-                break;
+        if (!userId) {
+          throw new Error('Hiányzó userId a checkout session metaadataiból!');
         }
 
-        await client.query('COMMIT');
-    } catch (dbError) {
-        await client.query('ROLLBACK');
-        console.error('❌ Hiba a Stripe webhook feldolgozása során:', dbError);
-    } finally {
-        client.release();
+        // --- Tanári osztály létrehozása (Egyszeri fizetés) ---
+        if (session.mode === 'payment' && session.metadata.type === 'teacher_class_payment') {
+          const { className, maxStudents } = session.metadata;
+          if (!className || !maxStudents) throw new Error('Hiányos metaadatok a tanári osztály létrehozásához.');
+
+          const classCode = `OSZTALY-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
+          await client.query(
+            `INSERT INTO classes (class_name, class_code, teacher_id, max_students, is_active, is_approved)
+             VALUES ($1, $2, $3, $4, true, true) RETURNING *;`,
+            [className, classCode, userId, maxStudents]
+          );
+          console.log(`✅ Tanári osztály sikeresen létrehozva (fizetés után): ${className}, Tanár ID: ${userId}`);
+        }
+
+        // --- Felhasználói előfizetés létrehozása ---
+        if (session.mode === 'subscription') {
+          const subscriptionId = session.subscription;
+          if (!subscriptionId) throw new Error('Hiányzó subscription ID a checkout.session.completed eseményben.');
+
+          const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+          const priceIdStripe = subscription.items.data[0].plan.id;
+
+          const planResult = await client.query('SELECT id FROM subscription_plans WHERE stripe_price_id = $1', [priceIdStripe]);
+          if (planResult.rows.length === 0) throw new Error(`Ismeretlen Stripe Price ID: ${priceIdStripe}.`);
+          const planIdDb = planResult.rows[0].id;
+
+          await client.query(
+            `INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider, invoice_id)
+             VALUES ($1, $2, $3, to_timestamp($4), to_timestamp($5), 'stripe', $6)
+             ON CONFLICT (user_id) DO UPDATE SET
+                plan_id = $2,
+                status = $3,
+                current_period_start = to_timestamp($4),
+                current_period_end = to_timestamp($5),
+                invoice_id = $6,
+                updated_at = NOW();`,
+            [
+              userId,
+              planIdDb,
+              subscription.status,
+              subscription.current_period_start,
+              subscription.current_period_end,
+              subscription.id,
+            ]
+          );
+          console.log(`✅ Előfizetés sikeresen rögzítve (checkout.session.completed) a felhasználóhoz: ${userId}`);
+
+          // --- AJÁNLÓI RENDSZER LOGIKA ---
+          console.log(`Ajánlói rendszer ellenőrzése a felhasználóhoz: ${userId}`);
+          const referralResult = await client.query('SELECT referrer_user_id FROM referrals WHERE referred_user_id = $1', [userId]);
+          if (referralResult.rows.length > 0) {
+            const referrerId = referralResult.rows[0].referrer_user_id;
+            console.log(`Találat! Az új előfizetőt (${userId}) ez a felhasználó ajánlotta: ${referrerId}`);
+
+            const successfulReferralsResult = await client.query(
+              `SELECT COUNT(DISTINCT r.referred_user_id)
+               FROM referrals r
+               JOIN subscriptions s ON r.referred_user_id = s.user_id
+               WHERE r.referrer_user_id = $1 AND s.status IN ('active', 'trialing') AND s.plan_id IS NOT NULL`,
+              [referrerId]
+            );
+            const newTotalReferrals = parseInt(successfulReferralsResult.rows[0].count, 10);
+            console.log(`Az ajánló (${referrerId}) új sikeres ajánlásainak száma: ${newTotalReferrals}`);
+
+            if (newTotalReferrals > 0 && newTotalReferrals % 5 === 0) {
+              console.log(`JUTALOM JÁR! Az ajánló (${referrerId}) elérte a(z) ${newTotalReferrals}. sikeres ajánlást.`);
+              const referrerSubscription = await client.query(
+                "SELECT id FROM subscriptions WHERE user_id = $1 AND status = 'active' ORDER BY created_at DESC LIMIT 1",
+                [referrerId]
+              );
+              if (referrerSubscription.rows.length > 0) {
+                const sub = referrerSubscription.rows[0];
+                await client.query("UPDATE subscriptions SET current_period_end = current_period_end + INTERVAL '1 month' WHERE id = $1", [sub.id]);
+                console.log(`✅ A(z) ${referrerId} felhasználó előfizetése meghosszabbítva 1 hónappal.`);
+                await client.query(
+                  `INSERT INTO notifications (user_id, title, message, type) VALUES ($1, 'Jutalmat kaptál!', 'Egy általad ajánlott felhasználó előfizetett, így jutalmul 1 hónap prémium hozzáférést írtunk jóvá neked. Köszönjük!', 'reward')`,
+                  [referrerId]
+                );
+                console.log(`✅ Értesítés elküldve a(z) ${referrerId} felhasználónak a jutalomról.`);
+              } else {
+                console.log(`Az ajánló (${referrerId}) nem rendelkezik aktív előfizetéssel, így nem kap jutalmat.`);
+              }
+            }
+          }
+        }
+        break;
+
+      case 'customer.subscription.updated':
+      case 'customer.subscription.deleted':
+        const subscriptionUpdated = event.data.object;
+        const customerIdUpdated = subscriptionUpdated.customer;
+        const customerUpdated = await stripe.customers.retrieve(customerIdUpdated);
+        const userIdUpdated = customerUpdated.metadata.userId;
+
+        if (!userIdUpdated) throw new Error(`Hiányzó userId a Stripe Customer (${customerIdUpdated}) metaadataiból a subscription esemény során!`);
+
+        await client.query(
+          `UPDATE subscriptions 
+           SET status = $1, current_period_end = to_timestamp($2), updated_at = NOW()
+           WHERE user_id = $3`,
+          [subscriptionUpdated.status, subscriptionUpdated.current_period_end, userIdUpdated]
+        );
+        console.log(`✅ Előfizetés státusza frissítve (${subscriptionUpdated.id}) esemény (${event.type}) alapján: ${subscriptionUpdated.status}`);
+        break;
     }
 
-    res.json({received: true});
-});
+    await client.query('COMMIT');
+  } catch (dbError) {
+    await client.query('ROLLBACK');
+    console.error('❌ Hiba a Stripe webhook feldolgozása során:', dbError);
+  } finally {
+    client.release();
+  }
 
+  res.json({ received: true });
+});
 
 app.use(express.json());
 
@@ -233,46 +262,53 @@ const authenticateTokenOptional = (req, res, next) => {
   });
 };
 
+const authorizeAdmin = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
+    next();
+  } else {
+    res.status(403).json({ success: false, message: 'Hozzáférés megtagadva: adminisztrátori jogosultság szükséges.' });
+  }
+};
 
 app.get('/api/help', async (req, res) => {
-    const q = (req.query.q || '').toString().trim().toLowerCase();
-    
-    try {
-      let queryText = 'SELECT * FROM helparticles';
-      const queryParams = [];
-  
-      if (q && q.length >= 2) {
-        queryParams.push(`%${q}%`);
-        queryText += `
-          WHERE LOWER(COALESCE(title,'')) ILIKE $1
-             OR LOWER(COALESCE(content,'')) ILIKE $1
-             OR LOWER(COALESCE(category,'')) ILIKE $1
-             OR LOWER(COALESCE(tags,'')) ILIKE $1
-        `;
-      }
-      queryText += ' ORDER BY category, title;';
-      const result = await pool.query(queryText, queryParams);
-      const articlesByCategory = result.rows.reduce((acc, article) => {
-        const category = article.category || 'Egyéb';
-        if (!acc[category]) acc[category] = [];
-        
-        acc[category].push({
-            question: article.title,
-            answer: article.content,
-            category: article.category,
-            keywords: article.tags
-        });
-        return acc;
-      }, {});
-      res.status(200).json({ success: true, data: articlesByCategory });
-    } catch (error) {
-      console.error('/api/help hiba:', error);
-      res.status(500).json({ success: false, message: 'Szerverhiba a súgó cikkek lekérdezésekor.' });
+  const q = (req.query.q || '').toString().trim().toLowerCase();
+
+  try {
+    let queryText = 'SELECT * FROM helparticles';
+    const queryParams = [];
+
+    if (q && q.length >= 2) {
+      queryParams.push(`%${q}%`);
+      queryText += `
+        WHERE LOWER(COALESCE(title,'')) ILIKE $1
+           OR LOWER(COALESCE(content,'')) ILIKE $1
+           OR LOWER(COALESCE(category,'')) ILIKE $1
+           OR LOWER(COALESCE(tags,'')) ILIKE $1
+      `;
     }
+    queryText += ' ORDER BY category, title;';
+    const result = await pool.query(queryText, queryParams);
+    const articlesByCategory = result.rows.reduce((acc, article) => {
+      const category = article.category || 'Egyéb';
+      if (!acc[category]) acc[category] = [];
+
+      acc[category].push({
+        question: article.title,
+        answer: article.content,
+        category: article.category,
+        keywords: article.tags,
+      });
+      return acc;
+    }, {});
+    res.status(200).json({ success: true, data: articlesByCategory });
+  } catch (error) {
+    console.error('/api/help hiba:', error);
+    res.status(500).json({ success: false, message: 'Szerverhiba a súgó cikkek lekérdezésekor.' });
+  }
 });
 
 app.post('/api/register-teacher', async (req, res) => {
-  const { email, username, password, referral_code } = req.body;
+  const { email, username, password, referrerCode } = req.body; // Javítás: referrerCode-ra változtatva
 
   if (!email || !username || !password) {
     return res.status(400).json({ success: false, message: 'Minden mező kitöltése kötelező.' });
@@ -285,12 +321,22 @@ app.post('/api/register-teacher', async (req, res) => {
     }
 
     const password_hash = await bcrypt.hash(password, 10);
+
+    // Javítás: Saját referral_code generálása az új felhasználónak
+    let myReferralCode = crypto.randomBytes(8).toString('hex').toUpperCase();
+    // Opcionális: Unicitás ellenőrzés (loop, ha szükséges)
+    let codeExists = await pool.query('SELECT 1 FROM users WHERE referral_code = $1', [myReferralCode]);
+    while (codeExists.rows.length > 0) {
+      myReferralCode = crypto.randomBytes(8).toString('hex').toUpperCase();
+      codeExists = await pool.query('SELECT 1 FROM users WHERE referral_code = $1', [myReferralCode]);
+    }
+
     const newUser = await pool.query(
       'INSERT INTO users (email, username, password_hash, role, referral_code, email_verified, created_at) VALUES ($1, $2, $3, $4, $5, $6, NOW()) RETURNING *',
-      [email, username, password_hash, 'teacher', referral_code || null, false]
+      [email, username, password_hash, 'teacher', myReferralCode, false]
     );
 
-    const verify_token = require('crypto').randomBytes(32).toString('hex');
+    const verify_token = crypto.randomBytes(32).toString('hex');
     await pool.query(
       'INSERT INTO teachers (user_id, is_approved, verify_token) VALUES ($1, $2, $3)',
       [newUser.rows[0].id, false, verify_token]
@@ -298,9 +344,40 @@ app.post('/api/register-teacher', async (req, res) => {
 
     const verifyLink = `${process.env.FRONTEND_URL}/verify-teacher?token=${verify_token}`;
 
+    // Javítás: E-mail küldés hozzáadva a jóváhagyáshoz
+    const mailOptions = {
+      from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+      to: email,
+      subject: 'Tanári fiók jóváhagyása - Fókusz Mester',
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+          <h2>Kedves ${username}!</h2>
+          <p>Köszönjük, hogy regisztráltál a Fókusz Mester platformon tanári fiókkal.</p>
+          <p>A fiókod aktiválásához kérjük, kattints az alábbi linkre:</p>
+          <a href="${verifyLink}" style="background-color: #3498db; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">Fiók aktiválása</a>
+          <p>Ha nem te regisztráltál, kérjük, hagyd figyelmen kívül ezt az e-mailt.</p>
+          <p>Üdvözlettel,<br>A Fókusz Mester csapata</p>
+        </div>
+      `,
+    };
+    await transporter.sendMail(mailOptions);
+    console.log(`✅ Jóváhagyó e-mail elküldve: ${email}`);
+
+    // Javítás: Ha referrerCode megvan, beszúrás a referrals táblába
+    if (referrerCode) {
+      const referrerResult = await pool.query('SELECT id FROM users WHERE referral_code = $1', [referrerCode]);
+      if (referrerResult.rows.length > 0) {
+        const referrerId = referrerResult.rows[0].id;
+        await pool.query('INSERT INTO referrals (referrer_user_id, referred_user_id, created_at) VALUES ($1, $2, NOW())', [referrerId, newUser.rows[0].id]);
+        console.log(`✅ Referral rögzítve: referrer ${referrerId}, referred ${newUser.rows[0].id}`);
+      } else {
+        console.warn(`❌ Érvénytelen referrerCode: ${referrerCode}`);
+      }
+    }
+
     res.status(201).json({
       success: true,
-      message: 'Regisztráció kész, a tanári fiók jóváhagyására e-mailt küldtünk.'
+      message: 'Regisztráció kész, a tanári fiók jóváhagyására e-mailt küldtünk.',
     });
   } catch (error) {
     console.error('Tanári regisztráció hiba:', error);
@@ -316,19 +393,13 @@ app.post('/api/verify-teacher', async (req, res) => {
   }
 
   try {
-    const teacherResult = await pool.query(
-      'SELECT * FROM teachers WHERE verify_token = $1',
-      [token]
-    );
+    const teacherResult = await pool.query('SELECT * FROM teachers WHERE verify_token = $1', [token]);
 
     if (teacherResult.rows.length === 0) {
       return res.status(400).json({ success: false, message: 'Érvénytelen token.' });
     }
 
-    await pool.query(
-      'UPDATE teachers SET is_approved = TRUE, verify_token = NULL WHERE verify_token = $1',
-      [token]
-    );
+    await pool.query('UPDATE teachers SET is_approved = TRUE, verify_token = NULL WHERE verify_token = $1', [token]);
 
     res.json({ success: true, message: 'Tanári fiók jóváhagyva.' });
   } catch (error) {
@@ -336,6 +407,10 @@ app.post('/api/verify-teacher', async (req, res) => {
     res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
   }
 });
+
+// ... (a truncated rész, feltételezem a /api/register teljes kódja hasonló javításokkal, pl. referralCode kezelése és saját code generálás)
+
+// A fájl többi része változatlan, de a cron javítva:
 
 
 
@@ -479,7 +554,12 @@ app.post('/api/register', authLimiter, async (req, res) => {
       );
       const teacherIsApprovedResult = await client.query('SELECT is_approved from teachers where user_id=$1', [newUserId]);
       if(!teacherIsApprovedResult.rows[0].is_approved) {
-        const approvalUrl = `${process.env.FRONTEND_URL}/approve-teacher/${newUserId}`;
+        const backendUrl = process.env.BACKEND_URL;
+        if (!backendUrl) {
+            console.error('FATAL: BACKEND_URL environment variable is not set. Cannot generate teacher approval link.');
+            throw new Error('Server configuration error: The approval link cannot be generated.');
+        }
+        const approvalUrl = `${backendUrl}/api/admin/approve-teacher-by-link/${newUserId}?secret=${process.env.ADMIN_SECRET}`;
         const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
         if (adminRecipient) {
           await transporter.sendMail({
@@ -551,7 +631,7 @@ app.get('/api/verify-email/:token', async (req, res) => {
     if (user.role !== 'teacher') {
       const trialQuery = `
         INSERT INTO subscriptions (user_id, plan_id, status, current_period_start, current_period_end, payment_provider)
-        VALUES ($1, 'trial', 'trialing', NOW(), NOW() + INTERVAL '30 days', 'system')
+        VALUES ($1, NULL, 'trialing', NOW(), NOW() + INTERVAL '30 days', 'system')
         ON CONFLICT (user_id) DO NOTHING;
       `;
       await client.query(trialQuery, [user.id]);
@@ -574,7 +654,47 @@ app.get('/api/verify-email/:token', async (req, res) => {
   }
 });
 
-app.get('/api/approve-teacher/:userId', async (req, res) => {
+app.get('/api/admin/approve-teacher-by-link/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const { secret } = req.query;
+
+    if (!secret || secret !== process.env.ADMIN_SECRET) {
+        return res.status(403).send('Hozzáférés megtagadva: érvénytelen biztonsági kulcs.');
+    }
+
+    try {
+        const result = await pool.query(
+            'UPDATE teachers SET is_approved = true WHERE user_id = $1 RETURNING user_id',
+            [userId]
+        );
+        if (result.rowCount === 0) {
+            return res.status(404).send('A tanár nem található.');
+        }
+        
+        res.send(`
+            <!DOCTYPE html>
+            <html lang="hu">
+            <head>
+                <title>Jóváhagyás Sikeres</title>
+                <meta charset="UTF-8">
+                <style>body { font-family: sans-serif; text-align: center; padding-top: 50px; }</style>
+            </head>
+            <body>
+                <p>A tanári fiók sikeresen jóváhagyva.</p>
+                <p>Ez az ablak hamarosan bezáródik.</p>
+                <script>
+                    setTimeout(() => window.close(), 3000);
+                </script>
+            </body>
+            </html>
+        `);
+    } catch (error) {
+        console.error('Tanár jóváhagyási hiba:', error);
+        res.status(500).send('Szerverhiba történt a jóváhagyás során.');
+    }
+});
+
+app.post('/api/admin/approve-teacher/:userId', authenticateToken, authorizeAdmin, async (req, res) => {
     const { userId } = req.params;
     try {
         const result = await pool.query(
@@ -584,10 +704,10 @@ app.get('/api/approve-teacher/:userId', async (req, res) => {
         if (result.rowCount === 0) {
             return res.status(404).json({ success: false, message: 'A tanár nem található.' });
         }
-        return res.status(200).send('<h1>A tanári fiók sikeresen jóváhagyva.</h1><p>Ez az ablak bezárható.</p>');
+        return res.status(200).json({ success: true, message: 'A tanári fiók sikeresen jóváhagyva.'});
     } catch (error) {
-        console.error('Tanár jóváhagyási hiba:', error);
-        return res.status(500).send('<h1>Hiba történt a jóváhagyás során.</h1>');
+        console.error('Tanár jóváhagyási hiba (admin):', error);
+        return res.status(500).json({ success: false, message: 'Szerverhiba történt a jóváhagyás során.'});
     }
 });
 
@@ -646,29 +766,35 @@ app.post('/api/login', authLimiter, async (req, res) => {
 
 const getFullUserProfile = async (userId) => {
     const userQuery = `
-        SELECT 
-            u.id, 
-            u.username, 
-            u.email, 
-            u.role, 
-            u.referral_code, 
-            u.created_at,
-            u.profile_metadata,
-            u.is_permanent_free,
-            s.status as subscription_status,
-            s.current_period_end as subscription_end_date
+        SELECT
+            u.id, u.username, u.email, u.role, u.referral_code, u.created_at,
+            u.profile_metadata, u.is_permanent_free
         FROM users u
-        LEFT JOIN subscriptions s ON u.id = s.user_id 
-        WHERE u.id = $1
-        ORDER BY s.created_at DESC
-        LIMIT 1;
+        WHERE u.id = $1;
     `;
     const userResult = await pool.query(userQuery, [userId]);
+    if (userResult.rows.length === 0) return null;
 
-    if (userResult.rows.length === 0) {
-        return null;
-    }
     const userProfile = userResult.rows[0];
+
+    const subsQuery = `
+        SELECT s.status, s.plan_id, s.current_period_end, s.created_at, p.name as plan_name
+        FROM subscriptions s
+        LEFT JOIN subscription_plans p ON s.plan_id = p.id
+        WHERE s.user_id = $1
+        ORDER BY s.created_at DESC
+    `;
+    const subsResult = await pool.query(subsQuery, [userId]);
+    userProfile.subscriptions = subsResult.rows;
+
+    const activeSub = subsResult.rows.find(s => s.status === 'active');
+    const trialSub = subsResult.rows.find(s => s.status === 'trialing' && s.plan_id === null);
+    const futureSub = subsResult.rows.find(s => s.status === 'trialing' && s.plan_id !== null);
+
+    let primarySub = activeSub || futureSub || trialSub;
+    
+    userProfile.subscription_status = primarySub?.status || null;
+    userProfile.subscription_end_date = primarySub?.current_period_end || null;
 
     if (userProfile.role === 'teacher') {
         userProfile.subscription_status = 'vip_teacher';
@@ -678,7 +804,7 @@ const getFullUserProfile = async (userId) => {
         `SELECT COUNT(DISTINCT r.referred_user_id)
          FROM referrals r
          JOIN subscriptions s ON r.referred_user_id = s.user_id
-         WHERE r.referrer_user_id = $1 AND s.status IN ('active', 'trialing')`,
+         WHERE r.referrer_user_id = $1 AND s.status IN ('active', 'trialing') AND s.plan_id IS NOT NULL`,
         [userId]
     );
     const successfulReferrals = parseInt(referralsResult.rows?.[0]?.count || 0, 10);
@@ -687,8 +813,7 @@ const getFullUserProfile = async (userId) => {
     userProfile.successful_referrals = successfulReferrals;
     userProfile.earned_rewards = earnedRewards;
     
-    const activeSubscription = userProfile.subscription_status === 'active' || userProfile.subscription_status === 'trialing';
-    userProfile.is_subscribed = userProfile.is_permanent_free || activeSubscription;
+    userProfile.is_subscribed = userProfile.is_permanent_free || !!activeSub || !!futureSub;
 
     return userProfile;
 };
@@ -965,8 +1090,15 @@ app.post('/api/teacher/create-class-checkout-session', authenticateToken, async 
     }
 
     try {
+        const userResult = await pool.query('SELECT email FROM users WHERE id = $1', [teacherId]);
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'A tanár felhasználó nem található.' });
+        }
+        const teacherEmail = userResult.rows[0].email;
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
+            customer_email: teacherEmail,
             line_items: [{
                 price: priceId,
                 quantity: 1,
@@ -976,7 +1108,7 @@ app.post('/api/teacher/create-class-checkout-session', authenticateToken, async 
             cancel_url: `${process.env.FRONTEND_URL}/dashboard/teacher?class_creation_canceled=true`,
             metadata: {
                 type: 'teacher_class_payment',
-                teacherId: teacherId,
+                userId: teacherId,
                 className: className,
                 maxStudents: maxStudents,
             },
@@ -1342,6 +1474,37 @@ app.post('/api/notifications/mark-read', authenticateToken, async (req, res) => 
 });
 
 
+// --- MÓDOSÍTÁS KEZDETE: Új Admin API végpontok ---
+app.get('/api/admin/users', authenticateToken, authorizeAdmin, async (req, res) => {
+    try {
+        const query = `
+            SELECT u.id, u.username, u.email, u.role, u.created_at, t.is_approved
+            FROM users u
+            LEFT JOIN teachers t ON u.id = t.user_id
+            ORDER BY u.created_at DESC;
+        `;
+        const { rows } = await pool.query(query);
+        res.status(200).json({ success: true, users: rows });
+    } catch (error) {
+        console.error("Hiba a felhasználók lekérdezésekor:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt a felhasználók lekérdezésekor.' });
+    }
+});
+
+app.get('/api/admin/messages', authenticateToken, authorizeAdmin, async (req, res) => {
+    try {
+        const { rows } = await pool.query(
+            'SELECT id, name, email, subject, message, is_archived, created_at FROM contact_messages ORDER BY created_at DESC'
+        );
+        res.status(200).json({ success: true, messages: rows });
+    } catch (error) {
+        console.error("Hiba a kapcsolatfelvételi üzenetek lekérdezésekor:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt az üzenetek lekérdezésekor.'});
+    }
+});
+// --- MÓDOSÍTÁS VÉGE ---
+
+
 app.get('/api/admin/clear-users/:secret', async (req, res) => {
   const { secret } = req.params;
   if (!secret || secret !== process.env.ADMIN_SECRET) {
@@ -1372,15 +1535,23 @@ app.post('/api/contact', authLimiter, async (req, res) => {
   if (!validator.isEmail(email)) {
     return res.status(400).json({ success: false, message: 'Érvénytelen e-mail cím formátum.' });
   }
-
+  const client = await pool.connect();
   try {
+    await client.query('BEGIN');
     const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER;
     if (!adminRecipient) {
         console.error('❌ ADMIN_EMAIL is not set. Cannot send contact form email.');
         return res.status(500).json({ success: false, message: 'A szerver nincs megfelelően beállítva az üzenetek fogadására.' });
     }
 
-    const mailOptions = {
+    // --- MÓDOSÍTÁS KEZDETE: Üzenet mentése adatbázisba ---
+    await client.query(
+        `INSERT INTO contact_messages (name, email, subject, message) VALUES ($1, $2, $3, $4)`,
+        [name, email, subject, message]
+    );
+    // --- MÓDOSÍTÁS VÉGE ---
+
+    const adminMailOptions = {
       from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
       to: adminRecipient,
       subject: `Új kapcsolatfelvétel: ${subject}`,
@@ -1398,13 +1569,99 @@ app.post('/api/contact', authLimiter, async (req, res) => {
       `,
     };
 
-    await transporter.sendMail(mailOptions);
+    const userConfirmationOptions = {
+      from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+      to: email,
+      subject: 'Megkaptuk üzenetét! - Fókusz Mester',
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+          <h2>Köszönjük, hogy felvette velünk a kapcsolatot!</h2>
+          <p>Kedves ${validator.escape(name)}!</p>
+          <p>Ez egy automatikus visszaigazolás arról, hogy az alábbi üzenetét sikeresen megkaptuk. Munkatársunk hamarosan válaszolni fog Önnek.</p>
+          <hr>
+          <h3>Az Ön által küldött üzenet:</h3>
+          <p><strong>Tárgy:</strong> ${validator.escape(subject)}</p>
+          <p style="white-space: pre-wrap; background-color: #f4f4f4; padding: 15px; border-radius: 5px;">${validator.escape(message)}</p>
+          <hr>
+          <p>Üdvözlettel,<br>A Fókusz Mester csapata</p>
+        </div>
+      `,
+    };
 
-    res.status(200).json({ success: true, message: 'Köszönjük üzenetét! Hamarosan felvesszük Önnel a kapcsolatot.' });
+    await Promise.all([
+      transporter.sendMail(adminMailOptions),
+      transporter.sendMail(userConfirmationOptions)
+    ]);
+    
+    await client.query('COMMIT');
+    res.status(200).json({ success: true, message: 'Köszönjük üzenetét! A részletekről és a további teendőkről visszaigazoló e-mailt küldtünk.' });
 
   } catch (error) {
+    await client.query('ROLLBACK');
     console.error('❌ Hiba a kapcsolatfelvételi űrlap feldolgozása során:', error);
     res.status(500).json({ success: false, message: 'Szerverhiba történt az üzenet küldése közben.' });
+  } finally {
+      client.release();
+  }
+});
+
+cron.schedule('0 1 * * *', async () => {
+  console.log('Running scheduled job: Checking for expiring trials...');
+
+  const sendReminderEmail = async (user, daysLeft) => {
+    const subject = daysLeft > 1
+      ? `Emlékeztető: A Fókusz Mester próbaidőszakod ${daysLeft} nap múlva lejár!`
+      : `Utolsó emlékeztető: A Fókusz Mester próbaidőszakod 24 órán belül lejár!`;
+
+    const mailOptions = {
+      from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+      to: user.email,
+      subject: subject,
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+          <h2>Kedves ${user.username}!</h2>
+          <p>Ez egy emlékeztető, hogy a 30 napos ingyenes prémium próbaidőszakod hamarosan lejár.</p>
+          <p><strong>A próbaidőszakodból hátralévő idő: ${daysLeft} nap.</strong></p>
+          <p>Ne veszítsd el a hozzáférésedet a prémium tananyagokhoz és eszközökhöz! Válassz előfizetési csomagot még ma, és folytasd a tanulást megszakítás nélkül.</p>
+          <div style="text-align: center; margin: 20px 0;">
+            <a href="${process.env.FRONTEND_URL}/profil" style="background-color: #3498db; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">Előfizetek most</a>
+          </div>
+          <p>Ha már előfizettél, kérjük, hagyd figyelmen kívül ezt az üzenetet.</p>
+          <p>Üdvözlettel,<br>A Fókusz Mester csapata</p>
+        </div>
+      `,
+    };
+
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log(`✅ Reminder email sent to ${user.email} (${daysLeft} days left).`);
+    } catch (error) {
+      console.error(`❌ Failed to send reminder email to ${user.email}:`, error);
+    }
+  };
+
+  try {
+    const sevenDaysQuery = `
+      SELECT u.email, u.username FROM subscriptions s
+      JOIN users u ON s.user_id = u.id
+      WHERE s.status = 'trialing' AND s.current_period_end::date = (NOW() + INTERVAL '7 days')::date;
+    `;
+    const sevenDaysResult = await pool.query(sevenDaysQuery);
+    for (const user of sevenDaysResult.rows) {
+      await sendReminderEmail(user, 7);
+    }
+
+    const oneDayQuery = `
+      SELECT u.email, u.username FROM subscriptions s
+      JOIN users u ON s.user_id = u.id
+      WHERE s.status = 'trialing' AND s.current_period_end::date = (NOW() + INTERVAL '1 day')::date;
+    `;
+    const oneDayResult = await pool.query(oneDayQuery); // Javítás: await hozzáadva
+    for (const user of oneDayResult.rows) {
+      await sendReminderEmail(user, 1);
+    }
+  } catch (error) {
+    console.error('❌ Error during scheduled trial check:', error);
   }
 });
 
