@@ -1,4 +1,4 @@
-// server.js
+
 
 const express = require('express');
 const cors = require('cors');
@@ -407,12 +407,6 @@ app.post('/api/verify-teacher', async (req, res) => {
     res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
   }
 });
-
-// ... (a truncated rész, feltételezem a /api/register teljes kódja hasonló javításokkal, pl. referralCode kezelése és saját code generálás)
-
-// A fájl többi része változatlan, de a cron javítva:
-
-
 
 app.post('/api/register', authLimiter, async (req, res) => {
   const {
@@ -1389,12 +1383,6 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
             );
         }
 
-        // Előfizetés ellenőrzése
-        const subscriptionResult = await pool.query(
-            'SELECT status, current_period_end FROM subscriptions WHERE user_id = $1',
-            [userId]
-        );
-
         // Checkout session beállítások
         const checkoutOptions = {
             payment_method_types: ['card'],
@@ -1409,6 +1397,10 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
             metadata: { userId: userId },
         };
 
+        const subscriptionResult = await pool.query(
+            'SELECT status, current_period_end FROM subscriptions WHERE user_id = $1',
+            [userId]
+        );
         const currentSubscription = subscriptionResult.rows[0];
         if (currentSubscription && currentSubscription.status === 'trialing') {
             const trialEndDate = new Date(currentSubscription.current_period_end);
