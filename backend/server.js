@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
@@ -1293,44 +1291,7 @@ app.get('/api/quiz/:slug', async (req, res) => {
   } catch (err) {
     console.error(`❌ Hiba a(z) /api/quiz/${req.params.slug} feldgozásakor:`, err);
     return res.status(500).json({ success: false, message: 'Szerverhiba történt a tartalom betöltésekor.' });
-  }
-});
 
-app.post('/api/quiz/results', authenticateToken, async (req, res) => {
-    const { curriculumSlug, score, totalQuestions } = req.body;
-    const userId = req.user.userId;
-
-    if (!curriculumSlug || typeof score !== 'number' || typeof totalQuestions !== 'number') {
-        return res.status(400).json({ success: false, message: 'Hiányos adatok a kvízeredmény mentéséhez.' });
-    }
-
-    try {
-        const curriculumResult = await pool.query('SELECT id FROM curriculums WHERE slug = $1', [curriculumSlug]);
-        if (curriculumResult.rows.length === 0) {
-            return res.status(404).json({ success: false, message: 'A megadott tananyag nem található.' });
-        }
-        const curriculumId = curriculumResult.rows[0].id;
-        
-        const scorePercentage = totalQuestions > 0 ? (score / totalQuestions) * 100 : 0;
-
-        const query = `
-            INSERT INTO user_quiz_results (user_id, curriculum_id, completed_questions, total_questions, score_percentage, completed_at)
-            VALUES ($1, $2, $3, $4, $5, NOW())
-            ON CONFLICT (user_id, curriculum_id) DO UPDATE SET
-                completed_questions = EXCLUDED.completed_questions,
-                total_questions = EXCLUDED.total_questions,
-                score_percentage = EXCLUDED.score_percentage,
-                completed_at = NOW()
-            RETURNING *;
-        `;
-        
-        const { rows } = await pool.query(query, [userId, curriculumId, score, totalQuestions, scorePercentage]);
-        
-        res.status(200).json({ success: true, message: 'Eredmény sikeresen mentve.', data: rows[0] });
-
-    } catch (error) {
-        console.error("❌ Hiba a kvízeredmény mentésekor:", error);
-        res.status(500).json({ success: false, message: 'Szerverhiba történt az eredmény mentésekor.' });
     }
 });
 
@@ -1347,43 +1308,32 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
         console.error(`❌ ${errorMessage}`);
         return res.status(500).json({ success: false, message: errorMessage });
     }
-
+    
     try {
-        // Felhasználó lekérdezése
         const userResult = await pool.query('SELECT email, profile_metadata FROM users WHERE id = $1', [userId]);
         if (userResult.rows.length === 0) {
             return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
         }
         const user = userResult.rows[0];
-
-        // Mindig ellenőrizzük, hogy a Customer ID létezik-e az új Stripe fiókban
         let stripeCustomerId = user.profile_metadata?.stripe_customer_id;
-        let customerExists = false;
 
-        if (stripeCustomerId) {
-            try {
-                await stripe.customers.retrieve(stripeCustomerId);
-                customerExists = true;
-            } catch (err) {
-                console.warn(`⚠️ A meglévő Stripe Customer ID nem található, új Customer-t hozunk létre: ${stripeCustomerId}`);
-                customerExists = false;
-            }
-        }
-
-        if (!stripeCustomerId || !customerExists) {
+        if (!stripeCustomerId) {
             const customer = await stripe.customers.create({
                 email: user.email,
                 metadata: { userId: userId },
             });
             stripeCustomerId = customer.id;
-
             await pool.query(
                 `UPDATE users SET profile_metadata = profile_metadata || '{"stripe_customer_id": "${stripeCustomerId}"}' WHERE id = $1`,
                 [userId]
             );
         }
+        
+        const subscriptionResult = await pool.query(
+            'SELECT status, current_period_end FROM subscriptions WHERE user_id = $1',
+            [userId]
+        );
 
-        // Checkout session beállítások
         const checkoutOptions = {
             payment_method_types: ['card'],
             customer: stripeCustomerId,
@@ -1394,13 +1344,11 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
             mode: 'subscription',
             success_url: `${process.env.FRONTEND_URL}/profil?payment_success=true`,
             cancel_url: `${process.env.FRONTEND_URL}/profil?payment_canceled=true`,
-            metadata: { userId: userId },
+            metadata: {
+                userId: userId,
+            },
         };
-
-        const subscriptionResult = await pool.query(
-            'SELECT status, current_period_end FROM subscriptions WHERE user_id = $1',
-            [userId]
-        );
+        
         const currentSubscription = subscriptionResult.rows[0];
         if (currentSubscription && currentSubscription.status === 'trialing') {
             const trialEndDate = new Date(currentSubscription.current_period_end);
@@ -1408,6 +1356,7 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
             if (trialEndDate > now) {
                 const remainingMilliseconds = trialEndDate.getTime() - now.getTime();
                 const remainingDays = Math.ceil(remainingMilliseconds / (1000 * 60 * 60 * 24));
+
                 if (remainingDays > 0) {
                     checkoutOptions.subscription_data = {
                         trial_period_days: remainingDays
@@ -1417,6 +1366,7 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
         }
 
         const session = await stripe.checkout.sessions.create(checkoutOptions);
+
         res.json({ success: true, url: session.url });
 
     } catch (error) {
@@ -1424,7 +1374,6 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
         res.status(500).json({ success: false, message: 'Szerverhiba történt a fizetési folyamat indításakor.' });
     }
 });
-
 
 
 app.post('/api/create-billing-portal-session', authenticateToken, async (req, res) => {
@@ -1611,9 +1560,9 @@ app.post('/api/contact', authLimiter, async (req, res) => {
   }
 });
 
-cron.schedule('0 1 * * *', async () => {
+cron.schedule('0 1 * * *', async () => { 
   console.log('Running scheduled job: Checking for expiring trials...');
-
+  
   const sendReminderEmail = async (user, daysLeft) => {
     const subject = daysLeft > 1
       ? `Emlékeztető: A Fókusz Mester próbaidőszakod ${daysLeft} nap múlva lejár!`
@@ -1662,7 +1611,7 @@ cron.schedule('0 1 * * *', async () => {
       JOIN users u ON s.user_id = u.id
       WHERE s.status = 'trialing' AND s.current_period_end::date = (NOW() + INTERVAL '1 day')::date;
     `;
-    const oneDayResult = await pool.query(oneDayQuery); // Javítás: await hozzáadva
+    const oneDayResult = await pool.query(oneDayQuery);
     for (const user of oneDayResult.rows) {
       await sendReminderEmail(user, 1);
     }
