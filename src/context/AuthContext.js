@@ -8,12 +8,14 @@ export const AuthProvider = ({ children }) => {
     const [isSubscribed, setIsSubscribed] = useState(false);
     const [registrationDate, setRegistrationDate] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isTeacherMode, setIsTeacherMode] = useState(false);
 
     useEffect(() => {
         try {
             const storedToken = localStorage.getItem('token');
             const storedUser = localStorage.getItem('user');
-            
+            const teacherMode = localStorage.getItem('teacherMode') === 'true';
+
             if (storedToken && storedUser) {
                 const parsedUser = JSON.parse(storedUser);
                 setUser(parsedUser);
@@ -25,6 +27,10 @@ export const AuthProvider = ({ children }) => {
                 
                 const subscribedFlag = parsedUser?.is_subscribed || false;
                 setIsSubscribed(subscribedFlag);
+
+                if (parsedUser.role === 'teacher' && teacherMode) {
+                    setIsTeacherMode(true);
+                }
             }
         } catch (error) {
             console.error("Hiba a localStorage olvasása közben", error);
@@ -46,6 +52,11 @@ export const AuthProvider = ({ children }) => {
         if (userData.created_at) {
             setRegistrationDate(new Date(userData.created_at));
         }
+
+        if (userData.role !== 'teacher') {
+            localStorage.removeItem('teacherMode');
+            setIsTeacherMode(false);
+        }
     }, []);
     
     const updateUser = useCallback((newUserData) => {
@@ -66,7 +77,27 @@ export const AuthProvider = ({ children }) => {
         setToken(null);
         setIsSubscribed(false);
         setRegistrationDate(null);
+        setIsTeacherMode(false);
     }, []);
+
+    const toggleTeacherMode = useCallback(() => {
+        if (user?.role !== 'teacher') return;
+
+        if (!isTeacherMode) {
+            const enteredPin = prompt("Kérlek, add meg a tanári PIN kódot a Mester Mód aktiválásához:");
+            if (enteredPin === "121909") {
+                localStorage.setItem('teacherMode', 'true');
+                setIsTeacherMode(true);
+                alert("Mester Mód aktiválva. A kvízek mostantól a megoldásokkal fognak megjelenni.");
+            } else if (enteredPin) {
+                alert("Hibás PIN kód!");
+            }
+        } else {
+            localStorage.removeItem('teacherMode');
+            setIsTeacherMode(false);
+            alert("Mester Mód kikapcsolva.");
+        }
+    }, [user, isTeacherMode]);
 
     const isTrialActive = useMemo(() => {
         if (!registrationDate || isSubscribed) return false;
@@ -85,11 +116,12 @@ export const AuthProvider = ({ children }) => {
         isTrialActive,
         canUsePremium,
         registrationDate,
+        isTeacherMode,
         login,
         logout,
         updateUser,
-    }), [user, token, isSubscribed, isLoading, isTrialActive, canUsePremium, registrationDate, login, logout, updateUser]);
-
+        toggleTeacherMode,
+    }), [user, token, isSubscribed, isLoading, isTrialActive, canUsePremium, registrationDate, isTeacherMode, login, logout, updateUser, toggleTeacherMode]);
 
     if (isLoading) {
         return null;

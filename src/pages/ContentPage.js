@@ -15,93 +15,25 @@ import ExamSimulatorTool from '../components/ExamSimulatorTool/ExamSimulatorTool
 import MultiInputPromptGenerator from '../components/MultiInputPromptGenerator/MultiInputPromptGenerator';
 import HubPageTool from '../components/HubPageTool/HubPageTool';
 
-const LessonView = ({ title, toc, sections }) => (
-    <div className={styles.lessonContainer}>
-        <nav className={styles.lessonToc}>
-            <h2>Tartalomjegyzék</h2>
-            <ul>
-                {toc.map(chapter => (
-                    <li key={chapter.id}>
-                        <a href={`#${chapter.id}`}>{chapter.title}</a>
-                        {chapter.subheadings && chapter.subheadings.length > 0 && (
-                            <ul>
-                                {chapter.subheadings.map(sub => (
-                                    <li key={sub.id}><a href={`#${sub.id}`}>{sub.title}</a></li>
-                                ))}
-                            </ul>
-                        )}
-                    </li>
-                ))}
-            </ul>
-        </nav>
-        <main className={styles.lessonMainContent}>
-            <h1>{title}</h1>
-            <WorkshopContent sections={sections} />
-        </main>
-    </div>
-);
+const LessonView = ({ title, toc, sections }) => ( <div className={styles.lessonContainer}> <nav className={styles.lessonToc}> <h2>Tartalomjegyzék</h2> <ul> {toc.map(chapter => ( <li key={chapter.id}> <a href={`#${chapter.id}`}>{chapter.title}</a> {chapter.subheadings && chapter.subheadings.length > 0 && ( <ul> {chapter.subheadings.map(sub => ( <li key={sub.id}><a href={`#${sub.id}`}>{sub.title}</a></li> ))} </ul> )} </li> ))} </ul> </nav> <main className={styles.lessonMainContent}> <h1>{title}</h1> <WorkshopContent sections={sections} /> </main> </div> );
+const CharacterSelectionView = ({ contentData, onSelectCharacter }) => ( <div className={styles.characterSelection}> <h2 className={styles.mainTitle}>{contentData.title}</h2> <p className={styles.subTitle}>{contentData.description}</p> <div className={styles.characterGrid}> {Object.keys(contentData.characters).map(key => { const character = contentData.characters[key]; return ( <div key={key} className={styles.characterCard} style={{ backgroundColor: character.color }}> <img src={character.imageUrl || '/images/default-avatar.png'} alt={character.name} className={styles.characterImage} /> <h3 className={styles.characterName}>{character.name}</h3> <p className={styles.characterTitle}>{character.title}</p> <p className={styles.characterQuote}>"{character.quote}"</p> <button className={styles.characterButton} onClick={() => onSelectCharacter(key)}> Beszélgetek {character.name}-val → </button> </div> ); })} </div> </div> );
+const GenericToolView = ({ contentData }) => ( <div className={styles.genericToolContainer}> <h1 className={styles.mainTitle}>{contentData.title}</h1> <p className={styles.subTitle}>{contentData.description}</p> <div className={styles.workInProgress}> <p>Ismeretlen adatformátum.</p> </div> </div> );
 
-const CharacterSelectionView = ({ contentData, onSelectCharacter }) => (
-  <div className={styles.characterSelection}>
-    <h2 className={styles.mainTitle}>{contentData.title}</h2>
-    <p className={styles.subTitle}>{contentData.description}</p>
-    <div className={styles.characterGrid}>
-      {Object.keys(contentData.characters).map(key => {
-        const character = contentData.characters[key];
-        return (
-          <div key={key} className={styles.characterCard} style={{ backgroundColor: character.color }}>
-            <img src={character.imageUrl || '/images/default-avatar.png'} alt={character.name} className={styles.characterImage} />
-            <h3 className={styles.characterName}>{character.name}</h3>
-            <p className={styles.characterTitle}>{character.title}</p>
-            <p className={styles.characterQuote}>"{character.quote}"</p>
-            <button className={styles.characterButton} onClick={() => onSelectCharacter(key)}>
-              Beszélgetek {character.name}-val →
-            </button>
-          </div>
-        );
-      })}
-    </div>
-  </div>
-);
-
-const QuizDifficultySelector = ({ onSelectDifficulty, questionCounts }) => (
-  <div className={quizStyles.quizBox}>
-      <h1>Válassz Nehézségi Szintet!</h1>
-      <p>Mérd fel a tudásod a számodra megfelelő szinten.</p>
-      <hr className={quizStyles.hr} />
-      <div className={quizStyles.difficultyGrid}>
-          <button onClick={() => onSelectDifficulty('easy')} className={quizStyles.difficultyButton} disabled={questionCounts.easy === 0}>
-              <h3>👶 Könnyű</h3>
-              <p>{questionCounts.easy > 0 ? `8 kérdés a bemelegítéshez` : `Nincs könnyű kérdés`}</p>
-          </button>
-          <button onClick={() => onSelectDifficulty('medium')} className={quizStyles.difficultyButton} disabled={questionCounts.medium === 0}>
-              <h3>🎓 Közepes</h3>
-              <p>{questionCounts.medium > 0 ? `15 kérdés az elmélyítéshez` : `Nincs közepes kérdés`}</p>
-          </button>
-          <button onClick={() => onSelectDifficulty('hard')} className={quizStyles.difficultyButton} disabled={questionCounts.hard === 0}>
-              <h3>👑 Profi</h3>
-              <p>{questionCounts.hard > 0 ? `Az összes kérdés a kihívásért` : `Nincs elérhető kérdés`}</p>
-          </button>
-      </div>
-  </div>
-);
-
-const QuizView = ({ contentData, slug, token }) => {
+const QuizView = ({ contentData, slug, token, isTeacherMode }) => {
   const [userAnswers, setUserAnswers] = useState({});
-  const [showResults, setShowResults] = useState(false);
+  const [showResults, setShowResults] = useState(isTeacherMode);
   const [score, setScore] = useState(0);
   const [isSaving, setIsSaving] = useState(false);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [activeQuestions, setActiveQuestions] = useState([]);
-
   const allQuestions = useMemo(() => Array.isArray(contentData?.questions) ? contentData.questions.map((q, i) => ({ ...q, originalId: q.id || i })) : [], [contentData]);
+  const questionCounts = useMemo(() => ({ easy: allQuestions.filter(q => q.difficulty === 'easy').length, medium: allQuestions.filter(q => q.difficulty === 'easy' || q.difficulty === 'medium').length, hard: allQuestions.length }), [allQuestions]);
 
-  const questionCounts = useMemo(() => {
-    const easy = allQuestions.filter(q => q.difficulty === 'easy').length;
-    const medium = allQuestions.filter(q => q.difficulty === 'easy' || q.difficulty === 'medium').length;
-    const hard = allQuestions.length;
-    return { easy, medium, hard };
-  }, [allQuestions]);
+  useEffect(() => {
+    if (isTeacherMode && !selectedDifficulty) {
+      setSelectedDifficulty('hard');
+    }
+  }, [isTeacherMode, selectedDifficulty]);
 
   useEffect(() => {
     if (!selectedDifficulty) return;
@@ -125,9 +57,9 @@ const QuizView = ({ contentData, slug, token }) => {
     else finalQuestions = shuffled;
     setActiveQuestions(finalQuestions);
     setUserAnswers({});
-    setShowResults(false);
+    setShowResults(isTeacherMode);
     setScore(0);
-  }, [selectedDifficulty, allQuestions]);
+  }, [selectedDifficulty, allQuestions, isTeacherMode]);
   
   const handleAnswerChange = (id, val) => {
     if (showResults) return;
@@ -160,10 +92,19 @@ const QuizView = ({ contentData, slug, token }) => {
 
   const handleRestart = () => setSelectedDifficulty(null);
   
-  if (!selectedDifficulty) {
+  if (!selectedDifficulty && !isTeacherMode) {
     return (
       <div className={quizStyles.container}>
-        <QuizDifficultySelector onSelectDifficulty={setSelectedDifficulty} questionCounts={questionCounts} />
+        <div className={quizStyles.quizBox}>
+            <h1>Válassz Nehézségi Szintet!</h1>
+            <p>Mérd fel a tudásod a számodra megfelelő szinten.</p>
+            <hr className={quizStyles.hr} />
+            <div className={quizStyles.difficultyGrid}>
+                <button onClick={() => setSelectedDifficulty('easy')} className={quizStyles.difficultyButton} disabled={questionCounts.easy === 0}><h3>👶 Könnyű</h3><p>{questionCounts.easy > 0 ? `8 kérdés a bemelegítéshez` : `Nincs könnyű kérdés`}</p></button>
+                <button onClick={() => setSelectedDifficulty('medium')} className={quizStyles.difficultyButton} disabled={questionCounts.medium === 0}><h3>🎓 Közepes</h3><p>{questionCounts.medium > 0 ? `15 kérdés az elmélyítéshez` : `Nincs közepes kérdés`}</p></button>
+                <button onClick={() => setSelectedDifficulty('hard')} className={quizStyles.difficultyButton} disabled={questionCounts.hard === 0}><h3>👑 Profi</h3><p>{questionCounts.hard > 0 ? `Az összes kérdés a kihívásért` : `Nincs elérhető kérdés`}</p></button>
+            </div>
+        </div>
       </div>
     );
   }
@@ -173,21 +114,15 @@ const QuizView = ({ contentData, slug, token }) => {
   let resultsTone = quizStyles.bad;
   if (pct >= 80) resultsTone = quizStyles.good;
   else if (pct >= 50) resultsTone = quizStyles.ok;
-
+  
   return (
     <div className={quizStyles.container}>
       <div className={quizStyles.quizBox}>
-        <h1>
-            {contentData.title} 
-            <span className={quizStyles.difficultyTag} data-level={selectedDifficulty}>{selectedDifficulty}</span>
-        </h1>
+        <h1>{contentData.title} {selectedDifficulty && <span className={quizStyles.difficultyTag} data-level={selectedDifficulty}>{selectedDifficulty}</span>}</h1>
         <p>{contentData.description}</p>
         <hr className={quizStyles.hr} />
-        {activeQuestions.length === 0 ? (
-          <div className={quizStyles.workInProgress}>
-            <p>Ehhez a nehézségi szinthez nem található elegendő kérdés. Próbálj másikat!</p>
-            <button onClick={handleRestart} className={quizStyles.restartButton} style={{marginTop: '1rem'}}>Vissza a választáshoz</button>
-          </div>
+        {activeQuestions.length === 0 && selectedDifficulty ? (
+          <div className={quizStyles.workInProgress}><p>Ehhez a nehézségi szinthez nem található elegendő kérdés. Próbálj másikat!</p><button onClick={handleRestart} className={quizStyles.restartButton} style={{marginTop: '1rem'}}>Vissza a választáshoz</button></div>
         ) : (
           <>
             {activeQuestions.map((q) => (
@@ -195,7 +130,7 @@ const QuizView = ({ contentData, slug, token }) => {
             ))}
             {!showResults ? (
               <button onClick={handleSubmit} className={quizStyles.submitButton} disabled={!allAnswered}>Kvíz beküldése</button>
-            ) : (
+            ) : !isTeacherMode && (
               <div className={`${quizStyles.resultsBox} ${resultsTone}`}>
                 <p><strong>Eredményed:</strong> {score} / {activeQuestions.length}</p>
                 <p><strong>Százalék:</strong> {pct}%</p>
@@ -213,25 +148,12 @@ const QuizView = ({ contentData, slug, token }) => {
   );
 };
 
-const GenericToolView = ({ contentData }) => (
-  <div className={styles.genericToolContainer}>
-    <h1 className={styles.mainTitle}>{contentData.title}</h1>
-    <p className={styles.subTitle}>{contentData.description}</p>
-    <div className={styles.workInProgress}>
-      <p>Ismeretlen adatformátum.</p>
-    </div>
-  </div>
-);
-
 const ContentPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { canUsePremium, token } = useAuth();
+  const { canUsePremium, token, isTeacherMode } = useAuth();
   const [contentData, setContentData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [messages, setMessages] = useState([]);
-  const [userInput, setUserInput] = useState('');
-  const [activeChat, setActiveChat] = useState(null);
   const [error, setError] = useState('');
 
   const fetchData = useCallback(async () => {
@@ -240,9 +162,7 @@ const ContentPage = () => {
       const res = await fetch(`${API_URL}/api/quiz/${correctedSlug}`);
       if (!res.ok) throw new Error(`Hálózati hiba: ${res.statusText}`);
       const data = await res.json();
-      if (!data.success || !data.data) {
-        throw new Error(data.message || 'Az adatok hiányosak.');
-      }
+      if (!data.success || !data.data) throw new Error(data.message || 'Az adatok hiányosak.');
       return data.data;
     } catch (err) {
       console.error("Hiba a tartalom betöltésekor:", err);
@@ -255,22 +175,13 @@ const ContentPage = () => {
       setIsLoading(true);
       setError('');
       setContentData(null);
-      setActiveChat(null);
       try {
         const data = await fetchData();
         if (data) {
-          const isPremiumContent = data.category && (
-            data.category.startsWith('premium_') ||
-            data.category === 'workshop' ||
-            data.category === 'premium_course' ||
-            data.category === 'premium_tool'
-          );
+          const isPremiumContent = data.category && (data.category.startsWith('premium_') || data.category === 'workshop' || data.category === 'premium_course' || data.category === 'premium_tool');
           if (isPremiumContent && !canUsePremium) {
             navigate('/bejelentkezes', {
-              state: {
-                from: window.location.pathname,
-                message: "A tartalom megtekintéséhez bejelentkezés és prémium hozzáférés szükséges."
-              }
+              state: { from: window.location.pathname, message: "A tartalom megtekintéséhez bejelentkezés és prémium hozzáférés szükséges." }
             });
             return;
           }
@@ -284,31 +195,6 @@ const ContentPage = () => {
     };
     loadAndCheckContent();
   }, [slug, canUsePremium, navigate, fetchData]);
-
-  const handleCharacterSelect = (charKey) => {
-    setActiveChat(charKey);
-    setMessages([{ text: `Szia! Én ${contentData.characters[charKey].name} vagyok. Kérdezz tőlem!`, sender: 'tutor' }]);
-  };
-
-  const handleSend = () => {
-    const userMessage = userInput.trim();
-    if (userMessage === '' || !activeChat) return;
-    const newMessages = [...messages, { text: userMessage, sender: 'user' }];
-    setMessages(newMessages);
-    setUserInput('');
-    const systemPrompt = contentData?.characters[activeChat]?.prompt || 'Viselkedj segítőkész tanárként.';
-    const conversationHistory = newMessages.map((msg) => `${msg.sender === 'user' ? 'Diák' : 'Tutor'}: ${msg.text}`).join('\n');
-    const fullPrompt = `${systemPrompt}\n\nA beszélgetés eddig:\n${conversationHistory}\nTutor:`;
-    navigator.clipboard.writeText(fullPrompt.trim()).then(() => {
-      setMessages((prev) => [...prev, { text: '✅ A kérdésedet a vágólapra másoltam! Nyisd meg a Geminit, illeszd be, majd a választ írd be ide a folytatáshoz.', sender: 'tutor' }]);
-      window.open('https://gemini.google.com/app', '_blank');
-    });
-  };
-
-  const handleGoBack = () => {
-    setActiveChat(null);
-    setMessages([]);
-  };
   
   if (isLoading) return <div className={styles.container}>Adatok betöltése...</div>;
   if (error) return <div className={styles.container}>{error}</div>;
@@ -317,35 +203,17 @@ const ContentPage = () => {
   const isActualQuiz = slug.includes('kviz');
   
   if (isActualQuiz) {
-      return <QuizView contentData={contentData} slug={slug} token={token} />;
+      return <QuizView contentData={contentData} slug={slug} token={token} isTeacherMode={isTeacherMode} />;
   }
-  
+
   const renderTheContent = () => {
-    if (activeChat) {
-      return (
-        <div className={styles.chatContainer}>
-          <div className={styles.chatHeader}>
-            <h3>Beszélgetés: {contentData.characters[activeChat].name}</h3>
-            <button onClick={handleGoBack} className={styles.backButton}>Vissza</button>
-          </div>
-          <div className={styles.messages}>
-            {messages.map((msg, idx) => (<div key={idx} className={`${styles.message} ${styles[msg.sender]}`}>{msg.text}</div>))}
-          </div>
-          <div className={styles.inputArea}>
-            <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder="Írd be a kérdésed..." onKeyPress={(e) => e.key === 'Enter' && handleSend()} />
-            <button onClick={handleSend}>Küldés</button>
-          </div>
-        </div>
-      );
-    }
-    
-    const data = contentData;
     let componentToRender;
     let isLessonLayout = false;
+    const data = contentData;
 
     if (data.toc) {
-        componentToRender = <LessonView title={data.title} toc={data.toc} sections={data.questions} />;
-        isLessonLayout = true;
+      componentToRender = <LessonView title={data.title} toc={data.toc} sections={data.questions} />;
+      isLessonLayout = true;
     } else {
         const toolType = data.toolData?.type;
         switch(toolType) {
@@ -364,7 +232,7 @@ const ContentPage = () => {
                 if (hasTopics) {
                     componentToRender = <TopicSelector data={data} />;
                 } else if (data.category === 'free_tool' && hasCharacters) {
-                    componentToRender = <CharacterSelectionView contentData={data} onSelectCharacter={handleCharacterSelect} />;
+                    componentToRender = <CharacterSelectionView contentData={data} />;
                 } else if (isWorkshop) {
                     componentToRender = <WorkshopContent sections={data.questions} />;
                 } else {
