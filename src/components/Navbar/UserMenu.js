@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Navbar.module.css';
 import { FaBell } from 'react-icons/fa';
-
-const API_URL = 'http://localhost:3001';
+import { API_URL } from '../../config/api'; // JAVÍTÁS: A központi konfiguráció használata
 
 const UserMenu = () => {
     const { user, logout, token } = useAuth();

@@ -3,14 +3,15 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import ChatButton from '../ChatButton/ChatButton';
 import BackgroundVideo from '../BackgroundVideo/BackgroundVideo';
-import UiControls from '../UiControls/UiControls'; // ← HOZZÁADVA: a bal oldali vezérlőpanel
+import UiControls from '../UiControls/UiControls';
 
 const Layout = () => (
   <>
     <BackgroundVideo />
     <Navbar />
-    <UiControls />  {/* ← HOZZÁADVA: mindig megjelenik a bal oldalon, navbar alatt */}
-    <main>
+    <UiControls />
+    {/* JAVÍTÁS: Hozzáadunk egy className-t a main elemhez */}
+    <main className="main-content">
       <Outlet />
     </main>
     <ChatButton />

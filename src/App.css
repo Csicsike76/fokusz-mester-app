@@ -85,3 +85,11 @@ html[data-theme="dark"]{
 
 /* segédosztály, ha bárhol kell */
 .fm-card{ background-color:var(--card-bg); color:var(--text-on-bg); }
+
+/* ... (a meglévő CSS kódod) ... */
+
+/* JAVÍTÁS: Globális szabály a fő tartalmi konténernek */
+.main-content {
+  width: 100%; /* Biztosítja, hogy a tartalom ne lógjon túl a képernyőn */
+  overflow-x: hidden; /* Ez a varázslat: letiltja a horizontális görgetést */
+}

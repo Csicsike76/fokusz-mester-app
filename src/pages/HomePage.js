@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import Hero from '../components/Hero/Hero';
 import styles from './HomePage.module.css';
 import { useAuth } from '../context/AuthContext';
-
-const API_URL = process.env.REACT_APP_API_URL || '';
+import { API_URL } from '../config/api'; // JAVÍTÁS: Központi API URL használata
 
 const homePageLayout = {
   freeLessons: {
@@ -93,7 +92,15 @@ const HomePage = () => {
     const title = itemConfig.titleOverride || dynamicData.title;
     const description = itemConfig.description || dynamicData.description;
     
-    const linkTarget = (isPremium && !userHasAccess) ? '/bejelentkezes' : `/tananyag/${itemConfig.slug.replace(/_/g, '-')}`;
+    // --- EZ A JAVÍTÁS LÉNYEGE ---
+    // Ha a tartalom prémium és a felhasználó nincs bejelentkezve,
+    // akkor egy objektumot adunk át a Link-nek, ami tartalmazza az üzenetet is.
+    const linkTarget = (isPremium && !userHasAccess)
+      ? {
+          pathname: '/bejelentkezes',
+          state: { message: "A tartalom megtekintéséhez bejelentkezés szükséges." }
+        }
+      : `/tananyag/${itemConfig.slug.replace(/_/g, '-')}`;
 
     const buttonTextMap = {
       freeLesson: 'Ingyenes Lecke →',

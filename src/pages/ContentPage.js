@@ -1,14 +1,9 @@
-// Fájl: src/pages/ContentPage.js (TELJES, JAVÍTOTT ÉS BIZTONSÁGOS VERZIÓ)
-
 import React, { useState, useEffect, useCallback } from 'react';
-// JAVÍTÁS: useNavigate importálása az átirányításhoz
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import styles from './ContentPage.module.css';
 import { API_URL } from '../config/api';
-// JAVÍTÁS: useAuth importálása a jogosultság-ellenőrzéshez
 import { useAuth } from '../context/AuthContext';
 
-// --- Komponensek importálása (VÁLTOZATLAN) ---
 import SingleChoiceQuestion from '../components/SingleChoiceQuestion';
 import WorkshopContent from '../components/WorkshopContent/WorkshopContent';
 import TopicSelector from '../components/TopicSelector/TopicSelector';
@@ -20,11 +15,6 @@ import ExamSimulatorTool from '../components/ExamSimulatorTool/ExamSimulatorTool
 import MultiInputPromptGenerator from '../components/MultiInputPromptGenerator/MultiInputPromptGenerator';
 import HubPageTool from '../components/HubPageTool/HubPageTool';
 
-// =================================================================
-// BELSŐ NÉZET KOMPONENSEK (VÁLTOZATLAN)
-// =================================================================
-
-// ---- Tananyag nézet (kétoszlopos) ----
 const LessonView = ({ title, toc, sections }) => (
     <div className={styles.lessonContainer}>
         <nav className={styles.lessonToc}>
@@ -51,8 +41,6 @@ const LessonView = ({ title, toc, sections }) => (
     </div>
 );
 
-
-// ---- Karakterválasztós eszköz nézet ----
 const CharacterSelectionView = ({ contentData, onSelectCharacter }) => (
   <div className={styles.characterSelection}>
     <h2 className={styles.mainTitle}>{contentData.title}</h2>
@@ -61,23 +49,12 @@ const CharacterSelectionView = ({ contentData, onSelectCharacter }) => (
       {Object.keys(contentData.characters).map(key => {
         const character = contentData.characters[key];
         return (
-          <div
-            key={key}
-            className={styles.characterCard}
-            style={{ backgroundColor: character.color }}
-          >
-            <img
-              src={character.imageUrl || '/images/default-avatar.png'}
-              alt={character.name}
-              className={styles.characterImage}
-            />
+          <div key={key} className={styles.characterCard} style={{ backgroundColor: character.color }}>
+            <img src={character.imageUrl || '/images/default-avatar.png'} alt={character.name} className={styles.characterImage} />
             <h3 className={styles.characterName}>{character.name}</h3>
             <p className={styles.characterTitle}>{character.title}</p>
             <p className={styles.characterQuote}>"{character.quote}"</p>
-            <button
-              className={styles.characterButton}
-              onClick={() => onSelectCharacter(key)}
-            >
+            <button className={styles.characterButton} onClick={() => onSelectCharacter(key)}>
               Beszélgetek {character.name}-val →
             </button>
           </div>
@@ -87,11 +64,11 @@ const CharacterSelectionView = ({ contentData, onSelectCharacter }) => (
   </div>
 );
 
-// ---- Kvíz nézet ----
-const QuizView = ({ contentData }) => {
+const QuizView = ({ contentData, slug, token }) => {
   const [userAnswers, setUserAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     setUserAnswers({});
@@ -106,7 +83,7 @@ const QuizView = ({ contentData }) => {
     setUserAnswers(prev => ({ ...prev, [id]: val }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let sc = 0;
     questions.forEach((q, idx) => {
       const id = q.id ?? idx;
@@ -115,6 +92,28 @@ const QuizView = ({ contentData }) => {
     });
     setScore(sc);
     setShowResults(true);
+
+    if (token) {
+        setIsSaving(true);
+        try {
+            await fetch(`${API_URL}/api/quiz/submit-result`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    slug: slug,
+                    score: sc,
+                    totalQuestions: questions.length
+                })
+            });
+        } catch (error) {
+            console.error("Hiba az eredmény mentésekor:", error);
+        } finally {
+            setIsSaving(false);
+        }
+    }
   };
 
   const handleRestart = () => {
@@ -135,7 +134,6 @@ const QuizView = ({ contentData }) => {
     <div className={styles.quizContainer}>
       <h1 className={styles.mainTitle}>{contentData.title}</h1>
       <p className={styles.subTitle}>{contentData.description}</p>
-
       {questions.length === 0 ? (
         <div className={styles.workInProgress}>
           <p>Ehhez a leckéhez még nincs kérdéslista csatolva.</p>
@@ -161,6 +159,7 @@ const QuizView = ({ contentData }) => {
           ) : (
             <div className={styles.workInProgress}>
               <p><strong>Eredményed:</strong> {score} / {questions.length} ({pct}%)</p>
+              {isSaving && <p>Eredmény mentése...</p>}
               <div style={{ marginTop: '1rem' }}>
                 <button onClick={handleRestart}>Újrakezd</button>
               </div>
@@ -172,7 +171,6 @@ const QuizView = ({ contentData }) => {
   );
 };
 
-// ---- Általános eszköz nézet ----
 const GenericToolView = ({ contentData }) => (
   <div className={styles.genericToolContainer}>
     <h1 className={styles.mainTitle}>{contentData.title}</h1>
@@ -183,15 +181,10 @@ const GenericToolView = ({ contentData }) => (
   </div>
 );
 
-
-// =================================================================
-// FŐ KOMPONENS (JAVÍTOTT LOGIKÁVAL)
-// =================================================================
 const ContentPage = () => {
   const { slug } = useParams();
-  // JAVÍTÁS: Hook-ok inicializálása
   const navigate = useNavigate();
-  const { canUsePremium } = useAuth();
+  const { canUsePremium, token } = useAuth();
 
   const [contentData, setContentData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -200,7 +193,6 @@ const ContentPage = () => {
   const [activeChat, setActiveChat] = useState(null);
   const [error, setError] = useState('');
 
-  // JAVÍTÁS: A fetchData most már visszaadja a letöltött adatot
   const fetchData = useCallback(async () => {
     try {
       const correctedSlug = slug.replace(/_/g, '-');
@@ -210,36 +202,28 @@ const ContentPage = () => {
       if (!data.success || !data.data) {
         throw new Error(data.message || 'Az adatok hiányosak.');
       }
-      return data.data; // FONTOS: Visszaadjuk az adatot
+      return data.data;
     } catch (err) {
-      // Itt már nem állítunk state-et, mert azt a hívó kezeli
       console.error("Hiba a tartalom betöltésekor:", err);
-      // Dobunk egy hibát, hogy a hívó el tudja kapni
       throw err;
     }
   }, [slug]);
 
-  // JAVÍTÁS: Az useEffect most már a jogosultság-ellenőrzést is elvégzi
   useEffect(() => {
     const loadAndCheckContent = async () => {
       setIsLoading(true);
       setError('');
       setContentData(null);
       setActiveChat(null);
-
       try {
         const data = await fetchData();
-
         if (data) {
-          // Prémium tartalom azonosítása
           const isPremiumContent = data.category && (
             data.category.startsWith('premium_') ||
             data.category === 'workshop' ||
             data.category === 'premium_course' ||
             data.category === 'premium_tool'
           );
-
-          // A "KIDOBÓEMBER" LOGIKA:
           if (isPremiumContent && !canUsePremium) {
             console.warn("Hozzáférés megtagadva! Prémium tartalom. Átirányítás a bejelentkezési oldalra.");
             navigate('/bejelentkezes', {
@@ -248,10 +232,8 @@ const ContentPage = () => {
                 message: "A tartalom megtekintéséhez bejelentkezés és prémium hozzáférés szükséges."
               }
             });
-            return; // Megállítjuk a további végrehajtást
+            return;
           }
-
-          // Ha minden rendben, beállítjuk az adatot és leállítjuk a töltést
           setContentData(data);
         }
       } catch (err) {
@@ -260,11 +242,9 @@ const ContentPage = () => {
         setIsLoading(false);
       }
     };
-
     loadAndCheckContent();
-  }, [slug, canUsePremium, navigate, fetchData]); // Függőségek frissítve
+  }, [slug, canUsePremium, navigate, fetchData]);
 
-  // A többi handler (handleCharacterSelect, stb.) VÁLTOZATLAN
   const handleCharacterSelect = (charKey) => {
     setActiveChat(charKey);
     setMessages([{ text: `Szia! Én ${contentData.characters[charKey].name} vagyok. Kérdezz tőlem!`, sender: 'tutor' }]);
@@ -290,7 +270,6 @@ const ContentPage = () => {
     setMessages([]);
   };
   
-  // A renderelési logika VÁLTOZATLAN
   if (isLoading) return <div className={styles.container}>Adatok betöltése...</div>;
   if (error) return <div className={styles.container}>{error}</div>;
   if (!contentData) return <div className={styles.container}>A tartalom nem elérhető.</div>;
@@ -335,15 +314,16 @@ const ContentPage = () => {
                 const hasTopics = data.content && data.content.topics;
                 const hasCharacters = data.characters && typeof data.characters === 'object' && Object.keys(data.characters).length > 0;
                 const isWorkshop = data.questions && data.questions.length > 0 && data.questions[0].content !== undefined;
-
+                const isQuiz = data.category === 'free_lesson' || data.category === 'premium_lesson' || data.category === 'premium_course';
+                
                 if (hasTopics) {
                     componentToRender = <TopicSelector data={data} />;
                 } else if (data.category === 'free_tool' && hasCharacters) {
                     componentToRender = <CharacterSelectionView contentData={data} onSelectCharacter={handleCharacterSelect} />;
                 } else if (isWorkshop) {
                     componentToRender = <WorkshopContent sections={data.questions} />;
-                } else if (data.category === 'free_lesson' || data.category === 'premium_lesson' || data.category === 'premium_course') {
-                    componentToRender = <QuizView contentData={data} />;
+                } else if (isQuiz) {
+                    componentToRender = <QuizView contentData={data} slug={slug} token={token} />;
                 } else {
                     componentToRender = <GenericToolView contentData={data} />;
                 }

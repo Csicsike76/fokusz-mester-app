@@ -1429,6 +1429,62 @@ app.post('/api/notifications/mark-read', authenticateToken, async (req, res) => 
 });
 
 
+// A server.js VÉGE FELÉ, AZ /api/notifications/mark-read UTÁN, DE AZ ADMIN API-K ELÉ
+
+// ÚJ VÉGPONT: Kvíz eredményének mentése
+app.post('/api/quiz/submit-result', authenticateToken, async (req, res) => {
+    const userId = req.user.userId;
+    const { slug, score, totalQuestions } = req.body;
+
+    if (!slug || typeof score === 'undefined' || !totalQuestions) {
+        return res.status(400).json({ success: false, message: 'Hiányos adatok a kvíz eredményének mentéséhez.' });
+    }
+
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+
+        // 1. Keressük meg a curriculum ID-t a slug alapján
+        const curriculumResult = await client.query('SELECT id FROM curriculums WHERE slug = $1', [slug]);
+        if (curriculumResult.rows.length === 0) {
+            throw new Error('A megadott tananyag nem található az adatbázisban.');
+        }
+        const curriculumId = curriculumResult.rows[0].id;
+
+        // 2. Számoljuk ki a százalékos eredményt
+        const scorePercentage = totalQuestions > 0 ? (score / totalQuestions) * 100 : 0;
+
+        // 3. Mentsük el az eredményt az adatbázisba.
+        // Az ON CONFLICT (user_id, curriculum_id) DO UPDATE biztosítja, hogy ha a felhasználó
+        // újra kitölti a kvízt, akkor a régi eredményét frissítjük, nem pedig újat hozunk létre.
+        const insertQuery = `
+            INSERT INTO user_quiz_results (user_id, curriculum_id, completed_questions, total_questions, score_percentage, completed_at)
+            VALUES ($1, $2, $3, $4, $5, NOW())
+            ON CONFLICT (user_id, curriculum_id) DO UPDATE SET
+                completed_questions = EXCLUDED.completed_questions,
+                total_questions = EXCLUDED.total_questions,
+                score_percentage = EXCLUDED.score_percentage,
+                completed_at = NOW();
+        `;
+        await client.query(insertQuery, [userId, curriculumId, score, totalQuestions, scorePercentage]);
+
+        await client.query('COMMIT');
+        res.status(200).json({ success: true, message: 'Eredmény sikeresen elmentve.' });
+
+    } catch (error) {
+        await client.query('ROLLBACK');
+        console.error("❌ Hiba a kvíz eredményének mentésekor:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt az eredmény mentésekor.' });
+    } finally {
+        client.release();
+    }
+});
+
+
+// --- MÓDOSÍTÁS KEZDETE: Új Admin API végpontok ---
+// ... (innen folytatódik a fájl a többi kóddal)
+
+
 // --- MÓDOSÍTÁS KEZDETE: Új Admin API végpontok ---
 app.get('/api/admin/users', authenticateToken, authorizeAdmin, async (req, res) => {
     try {
