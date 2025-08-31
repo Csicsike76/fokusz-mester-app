@@ -1353,32 +1353,49 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
         console.error(`❌ ${errorMessage}`);
         return res.status(500).json({ success: false, message: errorMessage });
     }
-    
+
     try {
+        // Felhasználó lekérdezése
         const userResult = await pool.query('SELECT email, profile_metadata FROM users WHERE id = $1', [userId]);
         if (userResult.rows.length === 0) {
             return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
         }
         const user = userResult.rows[0];
-        let stripeCustomerId = user.profile_metadata?.stripe_customer_id;
 
-        if (!stripeCustomerId) {
+        // Mindig ellenőrizzük, hogy a Customer ID létezik-e az új Stripe fiókban
+        let stripeCustomerId = user.profile_metadata?.stripe_customer_id;
+        let customerExists = false;
+
+        if (stripeCustomerId) {
+            try {
+                await stripe.customers.retrieve(stripeCustomerId);
+                customerExists = true;
+            } catch (err) {
+                console.warn(`⚠️ A meglévő Stripe Customer ID nem található, új Customer-t hozunk létre: ${stripeCustomerId}`);
+                customerExists = false;
+            }
+        }
+
+        if (!stripeCustomerId || !customerExists) {
             const customer = await stripe.customers.create({
                 email: user.email,
                 metadata: { userId: userId },
             });
             stripeCustomerId = customer.id;
+
             await pool.query(
                 `UPDATE users SET profile_metadata = profile_metadata || '{"stripe_customer_id": "${stripeCustomerId}"}' WHERE id = $1`,
                 [userId]
             );
         }
-        
+
+        // Előfizetés ellenőrzése
         const subscriptionResult = await pool.query(
             'SELECT status, current_period_end FROM subscriptions WHERE user_id = $1',
             [userId]
         );
 
+        // Checkout session beállítások
         const checkoutOptions = {
             payment_method_types: ['card'],
             customer: stripeCustomerId,
@@ -1389,11 +1406,9 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
             mode: 'subscription',
             success_url: `${process.env.FRONTEND_URL}/profil?payment_success=true`,
             cancel_url: `${process.env.FRONTEND_URL}/profil?payment_canceled=true`,
-            metadata: {
-                userId: userId,
-            },
+            metadata: { userId: userId },
         };
-        
+
         const currentSubscription = subscriptionResult.rows[0];
         if (currentSubscription && currentSubscription.status === 'trialing') {
             const trialEndDate = new Date(currentSubscription.current_period_end);
@@ -1401,7 +1416,6 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
             if (trialEndDate > now) {
                 const remainingMilliseconds = trialEndDate.getTime() - now.getTime();
                 const remainingDays = Math.ceil(remainingMilliseconds / (1000 * 60 * 60 * 24));
-
                 if (remainingDays > 0) {
                     checkoutOptions.subscription_data = {
                         trial_period_days: remainingDays
@@ -1411,7 +1425,6 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
         }
 
         const session = await stripe.checkout.sessions.create(checkoutOptions);
-
         res.json({ success: true, url: session.url });
 
     } catch (error) {
@@ -1419,6 +1432,7 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
         res.status(500).json({ success: false, message: 'Szerverhiba történt a fizetési folyamat indításakor.' });
     }
 });
+
 
 
 app.post('/api/create-billing-portal-session', authenticateToken, async (req, res) => {
