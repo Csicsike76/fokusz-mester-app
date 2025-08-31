@@ -8,9 +8,14 @@
     {
       "type": "single-choice",
       "description": "Melyik aránypár helyes?",
-      "options": ["2/3 = 4/5", "3/4 = 9/12", "1/2 = 2/3"],
+      "options": [
+        "2/3 = 4/5",
+        "3/4 = 9/12",
+        "1/2 = 2/3"
+      ],
       "answer": "3/4 = 9/12",
-      "explanation": "Egy aránypár akkor helyes, ha a két arány értéke megegyezik. A 9/12 törtet 3-mal egyszerűsítve 3/4-et kapunk, tehát a 3/4 = 9/12 egyenlőség igaz."
+      "explanation": "Egy aránypár akkor helyes, ha a két arány értéke megegyezik. A 9/12 törtet 3-mal egyszerűsítve 3/4-et kapunk, tehát a 3/4 = 9/12 egyenlőség igaz.",
+      "difficulty": "easy"
     },
     {
       "type": "single-choice",
@@ -21,21 +26,32 @@
         "A számlálók szorzata egyenlő a nevezők szorzatával."
       ],
       "answer": "A kültagok szorzata egyenlő a beltagok szorzatával.",
-      "explanation": "Az a/b = c/d aránypárban 'a' és 'd' a kültagok, 'b' és 'c' a beltagok. Az alaptulajdonság szerint a⋅d = b⋅c. Ezt hívjuk keresztbe szorzásnak is."
+      "explanation": "Az a/b = c/d aránypárban 'a' és 'd' a kültagok, 'b' és 'c' a beltagok. Az alaptulajdonság szerint a⋅d = b⋅c. Ezt hívjuk keresztbe szorzásnak is.",
+      "difficulty": "easy"
     },
     {
       "type": "single-choice",
       "description": "Oldd meg az x/5 = 8/10 aránypárt!",
-      "options": ["x = 4", "x = 5", "x = 8"],
+      "options": [
+        "x = 4",
+        "x = 5",
+        "x = 8"
+      ],
       "answer": "x = 4",
-      "explanation": "Az aránypár alaptulajdonságát használva: 10⋅x = 5⋅8. 10x = 40. Az egyenletet 10-zel osztva x = 4. Másik megoldás: egyszerűsítjük a 8/10 arányt 4/5-re. Ekkor x/5 = 4/5, amiből látszik, hogy x=4."
+      "explanation": "Az aránypár alaptulajdonságát használva: 10⋅x = 5⋅8. 10x = 40. Az egyenletet 10-zel osztva x = 4. Másik megoldás: egyszerűsítjük a 8/10 arányt 4/5-re. Ekkor x/5 = 4/5, amiből látszik, hogy x=4.",
+      "difficulty": "easy"
     },
     {
       "type": "single-choice",
       "description": "Két szám aránya 2:5. A kisebbik szám a 10. Melyik a nagyobbik?",
-      "options": ["20", "25", "50"],
+      "options": [
+        "20",
+        "25",
+        "50"
+      ],
       "answer": "25",
-      "explanation": "Ha a két szám aránya 2:5, akkor x/y = 2/5. A kisebbik x=10. Behelyettesítve: 10/y = 2/5. Keresztbe szorozva: 10⋅5 = 2⋅y. 50 = 2y. y = 25."
+      "explanation": "Ha a két szám aránya 2:5, akkor x/y = 2/5. A kisebbik x=10. Behelyettesítve: 10/y = 2/5. Keresztbe szorozva: 10⋅5 = 2⋅y. 50 = 2y. y = 25.",
+      "difficulty": "easy"
     },
     {
       "type": "single-choice",
@@ -46,21 +62,32 @@
         "Ha a szorzatuk állandó."
       ],
       "answer": "Ha a hányadosuk állandó.",
-      "explanation": "Két mennyiség (legyen x és y) akkor egyenesen arányos, ha az arányuk, azaz a hányadosuk (x/y) állandó. Ez azt jelenti, ha az egyik k-szorosára nő, a másik is k-szorosára nő."
+      "explanation": "Két mennyiség (legyen x és y) akkor egyenesen arányos, ha az arányuk, azaz a hányadosuk (x/y) állandó. Ez azt jelenti, ha az egyik k-szorosára nő, a másik is k-szorosára nő.",
+      "difficulty": "easy"
     },
     {
       "type": "single-choice",
       "description": "Ha 3 kg alma 600 Ft, mennyibe kerül 5 kg alma?",
-      "options": ["1000 Ft", "1200 Ft", "800 Ft"],
+      "options": [
+        "1000 Ft",
+        "1200 Ft",
+        "800 Ft"
+      ],
       "answer": "1000 Ft",
-      "explanation": "Ez egy egyenes arányosság. Először kiszámoljuk 1 kg alma árát: 600 Ft / 3 kg = 200 Ft/kg. Ezután megszorozzuk a kívánt mennyiséggel: 5 kg × 200 Ft/kg = 1000 Ft."
+      "explanation": "Ez egy egyenes arányosság. Először kiszámoljuk 1 kg alma árát: 600 Ft / 3 kg = 200 Ft/kg. Ezután megszorozzuk a kívánt mennyiséggel: 5 kg × 200 Ft/kg = 1000 Ft.",
+      "difficulty": "easy"
     },
     {
       "type": "single-choice",
       "description": "Egy 50 cm-es szakaszt 2:3 arányban osztunk fel. Milyenek a részek?",
-      "options": ["25 cm és 25 cm", "10 cm és 40 cm", "20 cm és 30 cm"],
+      "options": [
+        "25 cm és 25 cm",
+        "10 cm és 40 cm",
+        "20 cm és 30 cm"
+      ],
       "answer": "20 cm és 30 cm",
-      "explanation": "Az arányos részek száma összesen 2+3=5. Egy 'rész' hossza 50 cm / 5 = 10 cm. A két darab hossza: 2 × 10 cm = 20 cm és 3 × 10 cm = 30 cm."
+      "explanation": "Az arányos részek száma összesen 2+3=5. Egy 'rész' hossza 50 cm / 5 = 10 cm. A két darab hossza: 2 × 10 cm = 20 cm és 3 × 10 cm = 30 cm.",
+      "difficulty": "easy"
     },
     {
       "type": "single-choice",
@@ -71,7 +98,8 @@
         "1 m a térképen 200 km a valóságban."
       ],
       "answer": "1 cm a térképen 2 km a valóságban.",
-      "explanation": "A méretarány azt jelenti, hogy 1 cm a térképen 200 000 cm a valóságban. Váltsuk át a valós távolságot: 200 000 cm = 2000 m = 2 km."
+      "explanation": "A méretarány azt jelenti, hogy 1 cm a térképen 200 000 cm a valóságban. Váltsuk át a valós távolságot: 200 000 cm = 2000 m = 2 km.",
+      "difficulty": "easy"
     },
     {
       "type": "single-choice",
@@ -82,77 +110,128 @@
         "Ha az egyik növekedésével a másik is növekszik."
       ],
       "answer": "Ha a szorzatuk állandó.",
-      "explanation": "Két mennyiség (x és y) akkor fordítottan arányos, ha a szorzatuk állandó (x⋅y = k). Ez azt jelenti, ha az egyik k-szorosára nő, a másik 1/k-szorosára csökken."
+      "explanation": "Két mennyiség (x és y) akkor fordítottan arányos, ha a szorzatuk állandó (x⋅y = k). Ez azt jelenti, ha az egyik k-szorosára nő, a másik 1/k-szorosára csökken.",
+      "difficulty": "easy"
     },
     {
       "type": "single-choice",
       "description": "Ha 4 munkás 6 nap alatt végez el egy munkát, akkor 8 munkás hány nap alatt végez vele?",
-      "options": ["12 nap", "3 nap", "6 nap"],
+      "options": [
+        "12 nap",
+        "3 nap",
+        "6 nap"
+      ],
       "answer": "3 nap",
-      "explanation": "Ez egy fordított arányosság. Ha a munkások számát duplázzuk, az elvégzéshez szükséges idő feleződik. 6 nap / 2 = 3 nap. Képlettel: 4⋅6 = 8⋅x → 24 = 8x → x=3."
+      "explanation": "Ez egy fordított arányosság. Ha a munkások számát duplázzuk, az elvégzéshez szükséges idő feleződik. 6 nap / 2 = 3 nap. Képlettel: 4⋅6 = 8⋅x → 24 = 8x → x=3.",
+      "difficulty": "medium"
     },
     {
       "type": "single-choice",
       "description": "Mivel egyenlő 40-nek a 25%-a?",
-      "options": ["10", "25", "16"],
+      "options": [
+        "10",
+        "25",
+        "16"
+      ],
       "answer": "10",
-      "explanation": "A 25% az 1/4 részt jelenti. 40-nek az 1/4-e: 40/4=10. Képlettel: (40 × 25) / 100 = 1000 / 100 = 10."
+      "explanation": "A 25% az 1/4 részt jelenti. 40-nek az 1/4-e: 40/4=10. Képlettel: (40 × 25) / 100 = 1000 / 100 = 10.",
+      "difficulty": "medium"
     },
     {
       "type": "single-choice",
       "description": "Egy osztályban 12 fiú és 18 lány van. Mi a fiúk és a lányok aránya?",
-      "options": ["12:18", "3:2", "2:3"],
+      "options": [
+        "12:18",
+        "3:2",
+        "2:3"
+      ],
       "answer": "2:3",
-      "explanation": "A fiúk és lányok aránya 12:18. Ezt a törtet egyszerűsíteni kell. Mindkét szám osztható 6-tal: 12/6 = 2 és 18/6 = 3. Tehát az arány 2:3."
+      "explanation": "A fiúk és lányok aránya 12:18. Ezt a törtet egyszerűsíteni kell. Mindkét szám osztható 6-tal: 12/6 = 2 és 18/6 = 3. Tehát az arány 2:3.",
+      "difficulty": "medium"
     },
     {
       "type": "single-choice",
       "description": "Egy autó 100 km-en 8 liter benzint fogyaszt. Hány litert fogyaszt 350 km-en?",
-      "options": ["24 liter", "28 liter", "35 liter"],
+      "options": [
+        "24 liter",
+        "28 liter",
+        "35 liter"
+      ],
       "answer": "28 liter",
-      "explanation": "Egyenes arányosság. A 100 km-re jutó fogyasztás alapján az arányossági tényező 8/100. 350 km-en: 350 × (8/100) = 3.5 × 8 = 28 liter."
+      "explanation": "Egyenes arányosság. A 100 km-re jutó fogyasztás alapján az arányossági tényező 8/100. 350 km-en: 350 × (8/100) = 3.5 × 8 = 28 liter.",
+      "difficulty": "medium"
     },
     {
       "type": "single-choice",
       "description": "Melyik nem aránypár?",
-      "options": ["1/2 = 5/10", "3/5 = 6/10", "2/7 = 7/2"],
+      "options": [
+        "1/2 = 5/10",
+        "3/5 = 6/10",
+        "2/7 = 7/2"
+      ],
       "answer": "2/7 = 7/2",
-      "explanation": "Az 'a' és 'b' esetekben a törtek értéke egyenlő, tehát aránypárt alkotnak. A 'c' esetben 2/7 ≠ 7/2, tehát ez nem aránypár."
+      "explanation": "Az 'a' és 'b' esetekben a törtek értéke egyenlő, tehát aránypárt alkotnak. A 'c' esetben 2/7 ≠ 7/2, tehát ez nem aránypár.",
+      "difficulty": "medium"
     },
     {
       "type": "single-choice",
       "description": "Egy áru ára 20%-kal nőtt. Az új ár az eredetinek hány százaléka?",
-      "options": ["120%", "80%", "20%"],
+      "options": [
+        "120%",
+        "80%",
+        "20%"
+      ],
       "answer": "120%",
-      "explanation": "Az eredeti ár a 100%. Ha ezt megnöveljük 20%-kal, akkor 100% + 20% = 120% lesz az új ár."
+      "explanation": "Az eredeti ár a 100%. Ha ezt megnöveljük 20%-kal, akkor 100% + 20% = 120% lesz az új ár.",
+      "difficulty": "medium"
     },
     {
       "type": "single-choice",
       "description": "Ha 5 ember 12 óra alatt szedi le az almát, akkor 3 embernek mennyi időre van szüksége?",
-      "options": ["7,2 óra", "20 óra", "15 óra"],
+      "options": [
+        "7,2 óra",
+        "20 óra",
+        "15 óra"
+      ],
       "answer": "20 óra",
-      "explanation": "Fordított arányosság: a munkások száma és az idő szorzata állandó. 5 × 12 = 3 × x. 60 = 3x. x = 20 óra."
+      "explanation": "Fordított arányosság: a munkások száma és az idő szorzata állandó. 5 × 12 = 3 × x. 60 = 3x. x = 20 óra.",
+      "difficulty": "medium"
     },
     {
       "type": "single-choice",
       "description": "Mi az 5000 méter és 10 kilométer aránya?",
-      "options": ["1:2", "5:1", "500:1"],
+      "options": [
+        "1:2",
+        "5:1",
+        "500:1"
+      ],
       "answer": "1:2",
-      "explanation": "Az arány felírásához azonos mértékegységre kell hozni a mennyiségeket. 10 km = 10 000 méter. Az arány 5000 m : 10 000 m. Egyszerűsítve 5000-rel: 1:2."
+      "explanation": "Az arány felírásához azonos mértékegységre kell hozni a mennyiségeket. 10 km = 10 000 méter. Az arány 5000 m : 10 000 m. Egyszerűsítve 5000-rel: 1:2.",
+      "difficulty": "medium"
     },
     {
       "type": "single-choice",
       "description": "Egy süteményhez 3 rész liszt és 2 rész cukor kell. Ha 60 dkg lisztet használunk, mennyi cukor kell?",
-      "options": ["90 dkg", "40 dkg", "60 dkg"],
+      "options": [
+        "90 dkg",
+        "40 dkg",
+        "60 dkg"
+      ],
       "answer": "40 dkg",
-      "explanation": "Az arány liszt/cukor = 3/2. Behelyettesítve: 60/cukor = 3/2. Keresztbe szorozva: 60×2 = 3×cukor. 120 = 3×cukor. cukor = 40 dkg."
+      "explanation": "Az arány liszt/cukor = 3/2. Behelyettesítve: 60/cukor = 3/2. Keresztbe szorozva: 60×2 = 3×cukor. 120 = 3×cukor. cukor = 40 dkg.",
+      "difficulty": "hard"
     },
     {
       "type": "single-choice",
       "description": "Egy tervrajzon egy alkatrész 5 cm, a valóságban 2,5 m. Mi a tervrajz méretaránya?",
-      "options": ["1:5", "1:50", "1:500"],
+      "options": [
+        "1:5",
+        "1:50",
+        "1:500"
+      ],
       "answer": "1:50",
-      "explanation": "Hozzuk közös mértékegységre: 2,5 m = 250 cm. A méretarány rajz:valóság = 5 cm : 250 cm. Egyszerűsítsünk 5-tel: 1:50."
+      "explanation": "Hozzuk közös mértékegységre: 2,5 m = 250 cm. A méretarány rajz:valóság = 5 cm : 250 cm. Egyszerűsítsünk 5-tel: 1:50.",
+      "difficulty": "hard"
     },
     {
       "type": "single-choice",
@@ -163,42 +242,68 @@
         "Három szám számtani közepének kiszámítása."
       ],
       "answer": "Egy aránypár ismeretlen tagjának kiszámítási módszere.",
-      "explanation": "Az egyszerű hármasszabály egy olyan eljárás, amellyel egy aránypár negyedik, ismeretlen tagját határozzuk meg a másik három ismert tag segítségével. Ez az egyenes és fordított arányosság gyakorlati számítási módszere."
+      "explanation": "Az egyszerű hármasszabály egy olyan eljárás, amellyel egy aránypár negyedik, ismeretlen tagját határozzuk meg a másik három ismert tag segítségével. Ez az egyenes és fordított arányosság gyakorlati számítási módszere.",
+      "difficulty": "hard"
     },
     {
       "type": "single-choice",
       "description": "Egy autó 6 óra alatt tesz meg egy utat 80 km/h sebességgel. Mennyi idő alatt teszi meg ugyanezt az utat 120 km/h sebességgel?",
-      "options": ["4 óra", "9 óra", "6 óra"],
+      "options": [
+        "4 óra",
+        "9 óra",
+        "6 óra"
+      ],
       "answer": "4 óra",
-      "explanation": "Fordított arányosság: sebesség × idő = állandó. 6 × 80 = x × 120. 480 = 120x. x = 480/120 = 4 óra."
+      "explanation": "Fordított arányosság: sebesség × idő = állandó. 6 × 80 = x × 120. 480 = 120x. x = 480/120 = 4 óra.",
+      "difficulty": "hard"
     },
     {
       "type": "single-choice",
       "description": "Melyik nem ír le arányt?",
-      "options": ["25%", "3/4", "10 kg"],
+      "options": [
+        "25%",
+        "3/4",
+        "10 kg"
+      ],
       "answer": "10 kg",
-      "explanation": "Az arány két mennyiség viszonyát, hányadosát jelenti. A 25% a 25/100 arányt jelöli, a 3/4 szintén egy arány. A 10 kg egy konkrét mennyiség, nem viszonyszám."
+      "explanation": "Az arány két mennyiség viszonyát, hányadosát jelenti. A 25% a 25/100 arányt jelöli, a 3/4 szintén egy arány. A 10 kg egy konkrét mennyiség, nem viszonyszám.",
+      "difficulty": "hard"
     },
     {
       "type": "single-choice",
       "description": "Egy 120 oldalas könyv 20%-át olvastam el. Hány oldal van még hátra?",
-      "options": ["24", "96", "100"],
+      "options": [
+        "24",
+        "96",
+        "100"
+      ],
       "answer": "96",
-      "explanation": "Elolvasott oldalak: (120 × 20)/100 = 24 oldal. Hátravan: 120 - 24 = 96 oldal. Vagy: a 100%-80% van hátra. (120 × 80)/100=96."
+      "explanation": "Elolvasott oldalak: (120 × 20)/100 = 24 oldal. Hátravan: 120 - 24 = 96 oldal. Vagy: a 100%-80% van hátra. (120 × 80)/100=96.",
+      "difficulty": "hard"
     },
     {
       "type": "single-choice",
       "description": "Két szám aránya 7:4. Különbségük 15. Melyik a nagyobbik szám?",
-      "options": ["20", "35", "28"],
+      "options": [
+        "20",
+        "35",
+        "28"
+      ],
       "answer": "35",
-      "explanation": "Az arányos részek különbsége 7-4=3. Ez a 3 rész felel meg a 15-nek. Akkor 1 rész 15/3=5. A nagyobbik szám 7 részből áll: 7 × 5 = 35."
+      "explanation": "Az arányos részek különbsége 7-4=3. Ez a 3 rész felel meg a 15-nek. Akkor 1 rész 15/3=5. A nagyobbik szám 7 részből áll: 7 × 5 = 35.",
+      "difficulty": "hard"
     },
     {
       "type": "single-choice",
       "description": "Egy 100 literes hordó 30%-ig van tele. Hány liter vizet kell még beleöntenünk, hogy tele legyen?",
-      "options": ["30 liter", "130 liter", "70 liter"],
+      "options": [
+        "30 liter",
+        "130 liter",
+        "70 liter"
+      ],
       "answer": "70 liter",
-      "explanation": "A hordó 100% - 30% = 70%-a üres. Tehát a 100 liter 70%-át kell beleöntenünk, ami 70 liter."
+      "explanation": "A hordó 100% - 30% = 70%-a üres. Tehát a 100 liter 70%-át kell beleöntenünk, ami 70 liter.",
+      "difficulty": "hard"
     }
   ]
 }

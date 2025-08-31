@@ -13,7 +13,8 @@
         "c": "Bizonytalan"
       },
       "correct": "a",
-      "explanation": "2 + 3 = 5. Ez az összeadás alapvető szabálya."
+      "explanation": "2 + 3 = 5. Ez az összeadás alapvető szabálya.",
+      "difficulty": "easy"
     },
     {
       "question": "2. Melyik állítás hamis: 7 − 4 = 3?",
@@ -23,7 +24,8 @@
         "c": "Bizonytalan"
       },
       "correct": "b",
-      "explanation": "7 - 4 = 3. Az állítás igaz, tehát a „hamis” válasz a helyes."
+      "explanation": "7 - 4 = 3. Az állítás igaz, tehát a „hamis” válasz a helyes.",
+      "difficulty": "easy"
     },
     {
       "question": "3. Melyik eredmény helyes: 5 · 0?",
@@ -33,7 +35,8 @@
         "c": "1"
       },
       "correct": "a",
-      "explanation": "Bármely számot nullával szorozva az eredmény mindig nulla."
+      "explanation": "Bármely számot nullával szorozva az eredmény mindig nulla.",
+      "difficulty": "easy"
     },
     {
       "question": "4. Melyik helyes: 6 ÷ 2?",
@@ -43,7 +46,8 @@
         "c": "3"
       },
       "correct": "c",
-      "explanation": "6 osztva 2-vel egyenlő 3."
+      "explanation": "6 osztva 2-vel egyenlő 3.",
+      "difficulty": "easy"
     },
     {
       "question": "5. Milyen eredmény: (−2) · 3?",
@@ -53,7 +57,8 @@
         "c": "2"
       },
       "correct": "a",
-      "explanation": "Egy negatív számot egy pozitív számmal szorozva az eredmény negatív lesz. (−2) * 3 = -6."
+      "explanation": "Egy negatív számot egy pozitív számmal szorozva az eredmény negatív lesz. (−2) * 3 = -6.",
+      "difficulty": "easy"
     },
     {
       "question": "6. Melyik nem helyes: 4 ÷ (1/2)?",
@@ -63,7 +68,8 @@
         "c": "4"
       },
       "correct": "b",
-      "explanation": "Ha egy számot egy törttel osztunk, az ugyanaz, mintha a számmal megszoroznánk a tört reciprokát. 4 / (1/2) = 4 * 2 = 8."
+      "explanation": "Ha egy számot egy törttel osztunk, az ugyanaz, mintha a számmal megszoroznánk a tört reciprokát. 4 / (1/2) = 4 * 2 = 8.",
+      "difficulty": "easy"
     },
     {
       "question": "7. Melyik kifejezés a törtracionális művelet?",
@@ -73,7 +79,8 @@
         "c": "(2/0)"
       },
       "correct": "a",
-      "explanation": "A törtekkel való összeadás törtracionális művelet."
+      "explanation": "A törtekkel való összeadás törtracionális művelet.",
+      "difficulty": "easy"
     },
     {
       "question": "8. Melyik eredmény helyes: 0.5 · 0.2?",
@@ -83,7 +90,8 @@
         "c": "0.7"
       },
       "correct": "a",
-      "explanation": "0.5 szorozva 0.2-vel egyenlő 0.10."
+      "explanation": "0.5 szorozva 0.2-vel egyenlő 0.10.",
+      "difficulty": "easy"
     },
     {
       "question": "9. Melyik hamis: 3 + (−3)?",
@@ -93,7 +101,8 @@
         "c": "−3"
       },
       "correct": "b",
-      "explanation": "3 + (-3) = 0. A helytelen a 3."
+      "explanation": "3 + (-3) = 0. A helytelen a 3.",
+      "difficulty": "easy"
     },
     {
       "question": "10. Melyik kifejezés egyenlő: 1 ÷ 4?",
@@ -103,7 +112,8 @@
         "c": "2"
       },
       "correct": "b",
-      "explanation": "1 osztva 4-gyel = 0.25."
+      "explanation": "1 osztva 4-gyel = 0.25.",
+      "difficulty": "medium"
     },
     {
       "question": "11. Melyik állítás igaz: 2 + 3 · 4?",
@@ -113,7 +123,8 @@
         "c": "12"
       },
       "correct": "a",
-      "explanation": "A szorzást előbb végezzük el: 3 * 4 = 12. Majd: 2 + 12 = 14."
+      "explanation": "A szorzást előbb végezzük el: 3 * 4 = 12. Majd: 2 + 12 = 14.",
+      "difficulty": "medium"
     },
     {
       "question": "12. Mi az eredménye: (−1) · (−1)?",
@@ -123,7 +134,8 @@
         "c": "1"
       },
       "correct": "b",
-      "explanation": "Két negatív szám szorzata mindig pozitív: (-1) * (-1) = 1."
+      "explanation": "Két negatív szám szorzata mindig pozitív: (-1) * (-1) = 1.",
+      "difficulty": "medium"
     },
     {
       "question": "13. Melyik kifejezés nem értelmezhető:?",
@@ -133,7 +145,8 @@
         "c": "0 · 5"
       },
       "correct": "a",
-      "explanation": "Nullával nem lehet osztani. Az osztás nullával nincs értelmezve."
+      "explanation": "Nullával nem lehet osztani. Az osztás nullával nincs értelmezve.",
+      "difficulty": "medium"
     },
     {
       "question": "14. Melyik eredmény: 0 ÷ 5?",
@@ -143,7 +156,8 @@
         "c": "0"
       },
       "correct": "b",
-      "explanation": "Nullát bármivel osztani, az mindig nulla."
+      "explanation": "Nullát bármivel osztani, az mindig nulla.",
+      "difficulty": "medium"
     },
     {
       "question": "15. Hogyan soroljuk be: 2 + 2 · 2?",
@@ -153,7 +167,8 @@
         "c": "4"
       },
       "correct": "a",
-      "explanation": "A szorzást előbb végezzük: 2 * 2 = 4, majd 2 + 4 = 6."
+      "explanation": "A szorzást előbb végezzük: 2 * 2 = 4, majd 2 + 4 = 6.",
+      "difficulty": "medium"
     },
     {
       "question": "16. Melyik kifejezés irányban helyes: 7 − 2 · 3?",
@@ -163,7 +178,8 @@
         "c": "−1"
       },
       "correct": "a",
-      "explanation": "A szorzást előbb végezzük: 2 * 3 = 6, majd 7 - 6 = 1."
+      "explanation": "A szorzást előbb végezzük: 2 * 3 = 6, majd 7 - 6 = 1.",
+      "difficulty": "medium"
     },
     {
       "question": "17. Melyik kifejezéshez kell először bontani?",
@@ -173,7 +189,8 @@
         "c": "(a+b)·c"
       },
       "correct": "a",
-      "explanation": "A zárójelben lévő műveleteket mindig előbb kell elvégezni."
+      "explanation": "A zárójelben lévő műveleteket mindig előbb kell elvégezni.",
+      "difficulty": "medium"
     },
     {
       "question": "18. Melyik műveletasszociatív?",
@@ -183,7 +200,8 @@
         "c": "Kivonás"
       },
       "correct": "a",
-      "explanation": "Az összeadás asszociatív: (a+b)+c ugyanaz, mint a+(b+c). Nem számít, milyen sorrendben adod össze."
+      "explanation": "Az összeadás asszociatív: (a+b)+c ugyanaz, mint a+(b+c). Nem számít, milyen sorrendben adod össze.",
+      "difficulty": "hard"
     },
     {
       "question": "19. Melyik kommutatív?",
@@ -193,7 +211,8 @@
         "c": "Osztás"
       },
       "correct": "b",
-      "explanation": "A szorzás kommutatív: a * b ugyanaz, mint b * a (például: 2*3=3*2)."
+      "explanation": "A szorzás kommutatív: a * b ugyanaz, mint b * a (például: 2*3=3*2).",
+      "difficulty": "hard"
     },
     {
       "question": "20. Melyik igaz: a·(b+c)=a·b+a·c?",
@@ -203,7 +222,8 @@
         "c": "Csak disztributív"
       },
       "correct": "b",
-      "explanation": "Ez a disztributivitás törvénye. A szorzás elosztható az összeadásra nézve."
+      "explanation": "Ez a disztributivitás törvénye. A szorzás elosztható az összeadásra nézve.",
+      "difficulty": "hard"
     },
     {
       "question": "21. Melyik a négy alapművelet?",
@@ -213,7 +233,8 @@
         "c": "Összeadás, kivonás, szorzás, osztás"
       },
       "correct": "c",
-      "explanation": "Az alapműveletek: összeadás, kivonás, szorzás, osztás."
+      "explanation": "Az alapműveletek: összeadás, kivonás, szorzás, osztás.",
+      "difficulty": "hard"
     },
     {
       "question": "22. Melyik nem rendelkezik inverz művelettel?:",
@@ -223,7 +244,8 @@
         "c": "Szorzás nem nullával"
       },
       "correct": "a",
-      "explanation": "A szorzásnak nullával nincs inverze, mert nullával nem lehet osztani."
+      "explanation": "A szorzásnak nullával nincs inverze, mert nullával nem lehet osztani.",
+      "difficulty": "hard"
     },
     {
       "question": "23. Melyik művelet neutrális eleme 0?",
@@ -233,7 +255,8 @@
         "c": "Osztás"
       },
       "correct": "b",
-      "explanation": "Az összeadásnál a nulla a semleges elem: a + 0 = a."
+      "explanation": "Az összeadásnál a nulla a semleges elem: a + 0 = a.",
+      "difficulty": "hard"
     },
     {
       "question": "24. Melyik µveletnél 1 a semleges elem?",
@@ -243,7 +266,8 @@
         "c": "Szorzás"
       },
       "correct": "c",
-      "explanation": "A szorzásnál az egy a semleges elem: a * 1 = a."
+      "explanation": "A szorzásnál az egy a semleges elem: a * 1 = a.",
+      "difficulty": "hard"
     },
     {
       "question": "25. Melyik igaz:  a + b = b + a?",
@@ -253,7 +277,8 @@
         "c": "Disztributív"
       },
       "correct": "a",
-      "explanation": "Az összeadás kommutatív, vagyis felcserélhetjük az összeadandókat."
+      "explanation": "Az összeadás kommutatív, vagyis felcserélhetjük az összeadandókat.",
+      "difficulty": "hard"
     }
   ]
 }

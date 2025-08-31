@@ -5,9 +5,7 @@
   "category": "premium_course",
   "description": "Ez a(z) \"Kviz halmazmuveletek\" című tananyag.",
   "questions": [
-{
-
-  
+    {
       "question": "Melyik művelet adja meg két halmaz minden olyan elemét, ami bármelyikben benne van?",
       "answers": {
         "a": "Unió",
@@ -15,7 +13,8 @@
         "c": "Különbség"
       },
       "correct": "a",
-      "explanation": "Az unió (∪) a két halmaz összes olyan elemét tartalmazza, amelyek bármelyik halmazban szerepelnek."
+      "explanation": "Az unió (∪) a két halmaz összes olyan elemét tartalmazza, amelyek bármelyik halmazban szerepelnek.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik halmazművelet jele a ∩?",
@@ -25,7 +24,8 @@
         "c": "Különbség"
       },
       "correct": "a",
-      "explanation": "A ∩ jel a metszetet jelöli, amely a két halmaz közös elemeit adja meg."
+      "explanation": "A ∩ jel a metszetet jelöli, amely a két halmaz közös elemeit adja meg.",
+      "difficulty": "easy"
     },
     {
       "question": "Ha A = {1,2,3} és B = {3,4,5}, akkor A ∩ B = ?",
@@ -35,7 +35,8 @@
         "c": "{1,2}"
       },
       "correct": "a",
-      "explanation": "A metszet csak a mindkét halmazban megtalálható elemeket tartalmazza, itt ez a {3}."
+      "explanation": "A metszet csak a mindkét halmazban megtalálható elemeket tartalmazza, itt ez a {3}.",
+      "difficulty": "easy"
     },
     {
       "question": "Ha egy elem csak az egyik halmazban van, a másikban nem, akkor melyik művelettel találjuk meg?",
@@ -45,7 +46,8 @@
         "c": "Unió"
       },
       "correct": "a",
-      "explanation": "A különbségművelet (A − B) azon elemeket adja meg, amelyek az első halmazban vannak, de a másodikban nem."
+      "explanation": "A különbségművelet (A − B) azon elemeket adja meg, amelyek az első halmazban vannak, de a másodikban nem.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik halmazművelet szimmetrikus?",
@@ -55,7 +57,8 @@
         "c": "Különbség"
       },
       "correct": "a",
-      "explanation": "Az unió szimmetrikus, mert A ∪ B = B ∪ A minden halmaz esetén."
+      "explanation": "Az unió szimmetrikus, mert A ∪ B = B ∪ A minden halmaz esetén.",
+      "difficulty": "easy"
     },
     {
       "question": "A ∅ jelölése mit jelent?",
@@ -65,7 +68,8 @@
         "c": "Egész számok halmaza"
       },
       "correct": "a",
-      "explanation": "A ∅ az üres halmaz jelölése, amelynek nincsenek elemei."
+      "explanation": "A ∅ az üres halmaz jelölése, amelynek nincsenek elemei.",
+      "difficulty": "easy"
     },
     {
       "question": "Az A ∪ B művelet eredménye legfeljebb hány elemet tartalmazhat?",
@@ -75,7 +79,8 @@
         "c": "Végtelen sok"
       },
       "correct": "a",
-      "explanation": "Legfeljebb az összes elem szerepelhet, ha nincs közös elem, de közös elemeknél kevesebb lesz."
+      "explanation": "Legfeljebb az összes elem szerepelhet, ha nincs közös elem, de közös elemeknél kevesebb lesz.",
+      "difficulty": "easy"
     },
     {
       "question": "Ha A = {1,2}, B = {2,3}, akkor A − B = ?",
@@ -85,7 +90,8 @@
         "c": "{1,3}"
       },
       "correct": "a",
-      "explanation": "Az A − B halmaz a {1}, mivel az 1 csak A-ban szerepel."
+      "explanation": "Az A − B halmaz a {1}, mivel az 1 csak A-ban szerepel.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik művelet adja a közös elemeket?",
@@ -95,7 +101,8 @@
         "c": "Különbség"
       },
       "correct": "b",
-      "explanation": "A metszet tartalmazza a két halmaz közös elemeit."
+      "explanation": "A metszet tartalmazza a két halmaz közös elemeit.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik halmazművelet NEM szimmetrikus?",
@@ -105,7 +112,8 @@
         "c": "Metszet"
       },
       "correct": "b",
-      "explanation": "A különbség nem szimmetrikus, mert A − B ≠ B − A általában."
+      "explanation": "A különbség nem szimmetrikus, mert A − B ≠ B − A általában.",
+      "difficulty": "medium"
     },
     {
       "question": "A ⊆ B azt jelenti, hogy…",
@@ -115,7 +123,8 @@
         "c": "A és B azonos halmazok"
       },
       "correct": "b",
-      "explanation": "A ⊆ B jelentése: A minden eleme B-ben is megtalálható."
+      "explanation": "A ⊆ B jelentése: A minden eleme B-ben is megtalálható.",
+      "difficulty": "medium"
     },
     {
       "question": "A {1,2,3} ∪ {2,3,4} = ?",
@@ -125,7 +134,8 @@
         "c": "{1,4}"
       },
       "correct": "a",
-      "explanation": "Az unió minden elemet tartalmaz, ami bármelyik halmazban van: {1,2,3,4}."
+      "explanation": "Az unió minden elemet tartalmaz, ami bármelyik halmazban van: {1,2,3,4}.",
+      "difficulty": "medium"
     },
     {
       "question": "A szimmetrikus differencia jele:",
@@ -135,7 +145,8 @@
         "c": "∪"
       },
       "correct": "a",
-      "explanation": "A szimmetrikus differencia jele Δ, amely azokat az elemeket tartalmazza, amelyek csak az egyik halmazban vannak."
+      "explanation": "A szimmetrikus differencia jele Δ, amely azokat az elemeket tartalmazza, amelyek csak az egyik halmazban vannak.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik igaz a szimmetrikus differenciára?",
@@ -145,7 +156,8 @@
         "c": "Mindkét halmaz összes elemét tartalmazza"
       },
       "correct": "b",
-      "explanation": "A szimmetrikus differencia kizárja a közös elemeket."
+      "explanation": "A szimmetrikus differencia kizárja a közös elemeket.",
+      "difficulty": "medium"
     },
     {
       "question": "A ∅ ∪ A = ?",
@@ -155,7 +167,8 @@
         "c": "Nincs értelmezve"
       },
       "correct": "a",
-      "explanation": "Az üres halmaz uniója bármely halmazzal az adott halmaz."
+      "explanation": "Az üres halmaz uniója bármely halmazzal az adott halmaz.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha A ⊆ B és B ⊆ A, akkor…",
@@ -165,7 +178,8 @@
         "c": "B üres halmaz"
       },
       "correct": "b",
-      "explanation": "Ez azt jelenti, hogy A és B pontosan ugyanazokat az elemeket tartalmazzák."
+      "explanation": "Ez azt jelenti, hogy A és B pontosan ugyanazokat az elemeket tartalmazzák.",
+      "difficulty": "medium"
     },
     {
       "question": "A halmazműveletekhez használt univerzum halmaz jelölése:",
@@ -175,7 +189,8 @@
         "c": "∞"
       },
       "correct": "a",
-      "explanation": "Az U jelöli az univerzum halmazt, amely a vizsgált összes elemet tartalmazza."
+      "explanation": "Az U jelöli az univerzum halmazt, amely a vizsgált összes elemet tartalmazza.",
+      "difficulty": "hard"
     },
     {
       "question": "A komplementer halmaz tartalmazza…",
@@ -185,7 +200,8 @@
         "c": "A közös elemeket"
       },
       "correct": "b",
-      "explanation": "A komplementer halmazban az univerzum azon elemei szerepelnek, amelyek hiányoznak a vizsgált halmazból."
+      "explanation": "A komplementer halmazban az univerzum azon elemei szerepelnek, amelyek hiányoznak a vizsgált halmazból.",
+      "difficulty": "hard"
     },
     {
       "question": "A {1,2} és {3,4} metszete…",
@@ -195,7 +211,8 @@
         "c": "{2,3}"
       },
       "correct": "a",
-      "explanation": "Nincs közös elem, ezért a metszet az üres halmaz."
+      "explanation": "Nincs közös elem, ezért a metszet az üres halmaz.",
+      "difficulty": "hard"
     },
     {
       "question": "Az {x | x páros természetes szám} halmaz jele lehet…",
@@ -205,7 +222,8 @@
         "c": "N"
       },
       "correct": "b",
-      "explanation": "Sokszor E-vel jelölik a páros számok halmazát."
+      "explanation": "Sokszor E-vel jelölik a páros számok halmazát.",
+      "difficulty": "hard"
     },
     {
       "question": "A {1,2,3} − {3} = ?",
@@ -215,7 +233,8 @@
         "c": "{1}"
       },
       "correct": "a",
-      "explanation": "A különbségből kikerül a közös elem (3), így marad {1,2}."
+      "explanation": "A különbségből kikerül a közös elem (3), így marad {1,2}.",
+      "difficulty": "hard"
     },
     {
       "question": "A {a,b,c} ∪ {c,d} = ?",
@@ -225,7 +244,8 @@
         "c": "{a,b,d}"
       },
       "correct": "a",
-      "explanation": "Az unióban minden elem szerepel, ami bármelyik halmazban van."
+      "explanation": "Az unióban minden elem szerepel, ami bármelyik halmazban van.",
+      "difficulty": "hard"
     },
     {
       "question": "Az üres halmaz részhalmaza…",
@@ -235,7 +255,8 @@
         "c": "Egyiknek sem"
       },
       "correct": "a",
-      "explanation": "Az üres halmaz minden halmaz részhalmaza, mert nincs benne olyan elem, ami hiányozna."
+      "explanation": "Az üres halmaz minden halmaz részhalmaza, mert nincs benne olyan elem, ami hiányozna.",
+      "difficulty": "hard"
     },
     {
       "question": "A {1,2} Δ {2,3} = ?",
@@ -245,7 +266,8 @@
         "c": "{1,2,3}"
       },
       "correct": "a",
-      "explanation": "A szimmetrikus differencia csak az egyedi elemeket tartalmazza, a közös (2) kiesik."
+      "explanation": "A szimmetrikus differencia csak az egyedi elemeket tartalmazza, a közös (2) kiesik.",
+      "difficulty": "hard"
     }
   ]
 }

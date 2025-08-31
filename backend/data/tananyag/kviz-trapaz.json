@@ -13,7 +13,8 @@
         "c": "Átlóknak"
       },
       "correct": "b",
-      "explanation": "A trapéznak két oldala párhuzamos. Ezeket az oldalakat alapoknak hívjuk. Képzelj el egy házat: a tető a trapéz, az alapok a párhuzamos oldalak, a falak pedig a szárak!"
+      "explanation": "A trapéznak két oldala párhuzamos. Ezeket az oldalakat alapoknak hívjuk. Képzelj el egy házat: a tető a trapéz, az alapok a párhuzamos oldalak, a falak pedig a szárak!",
+      "difficulty": "easy"
     },
     {
       "question": "2. Melyik speciális trapéz rendelkezik egy szimmetriatengellyel?",
@@ -23,7 +24,8 @@
         "c": "Bármelyik trapéz, ha az alapjai egyenlőek"
       },
       "correct": "b",
-      "explanation": "A szimmetrikus trapéz olyan, mintha tükörben látnád magad. A szárai egyforma hosszúak, és a szimmetriatengely a két alap felezőpontjain megy át."
+      "explanation": "A szimmetrikus trapéz olyan, mintha tükörben látnád magad. A szárai egyforma hosszúak, és a szimmetriatengely a két alap felezőpontjain megy át.",
+      "difficulty": "easy"
     },
     {
       "question": "3. Mi a trapéz területének képlete, ha 'a' és 'c' az alapok, 'm' pedig a magasság?",
@@ -33,7 +35,8 @@
         "c": "T = ((a + c) / 2) * m"
       },
       "correct": "c",
-      "explanation": "A trapéz területét úgy kapjuk meg, hogy összeadjuk az alapokat, elosztjuk kettővel, és megszorozzuk a magassággal. Képzeld úgy, mintha egy átlagos magasságú téglalapot csinálnánk belőle."
+      "explanation": "A trapéz területét úgy kapjuk meg, hogy összeadjuk az alapokat, elosztjuk kettővel, és megszorozzuk a magassággal. Képzeld úgy, mintha egy átlagos magasságú téglalapot csinálnánk belőle.",
+      "difficulty": "easy"
     },
     {
       "question": "4. Mi a trapéz középvonalának hossza?",
@@ -43,7 +46,8 @@
         "c": "Az alapok és a szárak összegének a negyede"
       },
       "correct": "a",
-      "explanation": "A középvonal a trapéz közepén fut, összekötve a szárak felezőpontjait. A hossza: (a + c) / 2, azaz az alapok összegének a fele."
+      "explanation": "A középvonal a trapéz közepén fut, összekötve a szárak felezőpontjait. A hossza: (a + c) / 2, azaz az alapok összegének a fele.",
+      "difficulty": "easy"
     },
     {
       "question": "5. Melyik állítás igaz a derékszögű trapézra?",
@@ -53,7 +57,8 @@
         "c": "Az átlói mindig merőlegesek egymásra."
       },
       "correct": "a",
-      "explanation": "A derékszögű trapéznak van egy derékszöge (90 fokos szög). Mivel az alapok párhuzamosak, a derékszögnél a szár merőleges az alapokra."
+      "explanation": "A derékszögű trapéznak van egy derékszöge (90 fokos szög). Mivel az alapok párhuzamosak, a derékszögnél a szár merőleges az alapokra.",
+      "difficulty": "easy"
     },
     {
       "question": "6. Mi igaz a húrtrapéz (szimmetrikus trapéz) átlóira?",
@@ -63,7 +68,8 @@
         "c": "Felemás hosszúságúak."
       },
       "correct": "b",
-      "explanation": "A szimmetrikus trapézban a két átló (a sarokpontokat összekötő vonalak) ugyanakkora hosszú. Olyan, mint egy tükörkép."
+      "explanation": "A szimmetrikus trapézban a két átló (a sarokpontokat összekötő vonalak) ugyanakkora hosszú. Olyan, mint egy tükörkép.",
+      "difficulty": "easy"
     },
     {
       "question": "7. Egy trapéz alapjai 10 cm és 6 cm, magassága 5 cm. Mekkora a területe?",
@@ -73,7 +79,8 @@
         "c": "50 cm²"
       },
       "correct": "b",
-      "explanation": "Terület = ((alap1 + alap2) / 2) * magasság. T = ((10 + 6) / 2) * 5 = 40 cm². Képzelj el egy átlagos szélességű téglalapot."
+      "explanation": "Terület = ((alap1 + alap2) / 2) * magasság. T = ((10 + 6) / 2) * 5 = 40 cm². Képzelj el egy átlagos szélességű téglalapot.",
+      "difficulty": "easy"
     },
     {
       "question": "8. Lehet-e egy trapéz egyben paralelogramma is?",
@@ -83,7 +90,8 @@
         "c": "Csak akkor, ha téglalap."
       },
       "correct": "a",
-      "explanation": "A paralelogramma is trapéz, mert van két párhuzamos oldala (ami a trapéz definíciója). A téglalap, rombusz, négyzet is ebbe a kategóriába tartozik."
+      "explanation": "A paralelogramma is trapéz, mert van két párhuzamos oldala (ami a trapéz definíciója). A téglalap, rombusz, négyzet is ebbe a kategóriába tartozik.",
+      "difficulty": "easy"
     },
     {
       "question": "9. Melyik állítás NEM igaz minden trapézra?",
@@ -93,7 +101,8 @@
         "c": "A szárai mindig egyenlő hosszúak."
       },
       "correct": "c",
-      "explanation": "Csak a szimmetrikus trapézoknál egyenlőek a szárak. Egy átlagos trapéznak nem feltétlenül egyenlőek a szárai."
+      "explanation": "Csak a szimmetrikus trapézoknál egyenlőek a szárak. Egy átlagos trapéznak nem feltétlenül egyenlőek a szárai.",
+      "difficulty": "easy"
     },
     {
       "question": "10. Hogyan nevezzük a trapéz nem párhuzamos oldalait?",
@@ -103,7 +112,8 @@
         "c": "Magasságoknak"
       },
       "correct": "b",
-      "explanation": "A nem párhuzamos oldalakat száraknak hívjuk. Ezek az oldalak a trapéz 'oldalai', a párhuzamosak az alapok."
+      "explanation": "A nem párhuzamos oldalakat száraknak hívjuk. Ezek az oldalak a trapéz 'oldalai', a párhuzamosak az alapok.",
+      "difficulty": "medium"
     },
     {
       "question": "11. Egy trapéz középvonala 12 cm, magassága 10 cm. Mekkora a területe?",
@@ -113,7 +123,8 @@
         "c": "240 cm²"
       },
       "correct": "b",
-      "explanation": "Terület = középvonal * magasság. T = 12 cm * 10 cm = 120 cm². A középvonal a trapéz közepén fut."
+      "explanation": "Terület = középvonal * magasság. T = 12 cm * 10 cm = 120 cm². A középvonal a trapéz közepén fut.",
+      "difficulty": "medium"
     },
     {
       "question": "12. Mi a feltétele annak, hogy egy trapéz húrtrapéz legyen?",
@@ -123,7 +134,8 @@
         "c": "Az egyik szöge derékszög."
       },
       "correct": "a",
-      "explanation": "A húrtrapéz a szimmetrikus trapéz, a szárai egyforma hosszúak, mint egy tükörkép."
+      "explanation": "A húrtrapéz a szimmetrikus trapéz, a szárai egyforma hosszúak, mint egy tükörkép.",
+      "difficulty": "medium"
     },
     {
       "question": "13. Egy trapéz egyik szárán fekvő két szög összege...",
@@ -133,7 +145,8 @@
         "c": "nem feltétlenül 180°."
       },
       "correct": "b",
-      "explanation": "Mivel a trapéz alapjai párhuzamosak, a száron fekvő szögek úgy viselkednek, mint egy egyenesen fekvő szögek: összeadva 180 fokot adnak."
+      "explanation": "Mivel a trapéz alapjai párhuzamosak, a száron fekvő szögek úgy viselkednek, mint egy egyenesen fekvő szögek: összeadva 180 fokot adnak.",
+      "difficulty": "medium"
     },
     {
       "question": "14. Mi a neve annak a trapéznak, amelynek van derékszöge?",
@@ -143,7 +156,8 @@
         "c": "Derékszögű trapéz"
       },
       "correct": "c",
-      "explanation": "A derékszögű trapéznak van egy derékszöge. Olyan, mint egy épület sarka."
+      "explanation": "A derékszögű trapéznak van egy derékszöge. Olyan, mint egy épület sarka.",
+      "difficulty": "medium"
     },
     {
       "question": "15. Hány szimmetriatengelye van egy általános (nem szimmetrikus, nem derékszögű) trapéznak?",
@@ -153,7 +167,8 @@
         "c": "2"
       },
       "correct": "a",
-      "explanation": "Egy átlagos trapéz nem szimmetrikus, nincs tükörképe, ezért nincs szimmetriatengelye."
+      "explanation": "Egy átlagos trapéz nem szimmetrikus, nincs tükörképe, ezért nincs szimmetriatengelye.",
+      "difficulty": "medium"
     },
     {
       "question": "16. Egy trapéz kerülete 30 cm. Alapjai 12 cm és 8 cm. Milyen hosszúak a szárai, ha a trapéz szimmetrikus?",
@@ -163,7 +178,8 @@
         "c": "A két szár 10 cm és 10 cm."
       },
       "correct": "b",
-      "explanation": "Kerület = a + b + c + d. Tudjuk a két alapot, a trapéz szimmetrikus, ezért két egyenlő szára van. Kerület - alapok = a szárak összege. 30 - 12 - 8 = 10 cm. Mivel a szárak egyenlőek: 10 / 2 = 5 cm."
+      "explanation": "Kerület = a + b + c + d. Tudjuk a két alapot, a trapéz szimmetrikus, ezért két egyenlő szára van. Kerület - alapok = a szárak összege. 30 - 12 - 8 = 10 cm. Mivel a szárak egyenlőek: 10 / 2 = 5 cm.",
+      "difficulty": "medium"
     },
     {
       "question": "17. Egy trapéz területe 100 cm², magassága 10 cm. Mekkora az alapjainak összege?",
@@ -173,7 +189,8 @@
         "c": "15 cm"
       },
       "correct": "b",
-      "explanation": "Terület = ((alap1 + alap2) / 2) * magasság. 100 = ((a+c)/2) * 10. 100/10 = (a+c)/2. 10 * 2 = a+c. Az alapok összege 20 cm."
+      "explanation": "Terület = ((alap1 + alap2) / 2) * magasság. 100 = ((a+c)/2) * 10. 100/10 = (a+c)/2. 10 * 2 = a+c. Az alapok összege 20 cm.",
+      "difficulty": "medium"
     },
     {
       "question": "18. Melyik geometriai alakzat NEM trapéz?",
@@ -183,7 +200,8 @@
         "c": "Deltoid (ha nem rombusz)"
       },
       "correct": "c",
-      "explanation": "A deltoidnak nincsenek párhuzamos oldalai, ezért nem trapéz. A téglalapnak és a rombusznak van."
+      "explanation": "A deltoidnak nincsenek párhuzamos oldalai, ezért nem trapéz. A téglalapnak és a rombusznak van.",
+      "difficulty": "hard"
     },
     {
       "question": "19. Mi igaz a húrtrapéz alapon fekvő szögeire?",
@@ -193,7 +211,8 @@
         "c": "Az egy alapon fekvő két szög páronként egyenlő."
       },
       "correct": "c",
-      "explanation": "A húrtrapézban az egy alapon fekvő szögek egyforma nagyságúak. Olyan, mint a tükörkép."
+      "explanation": "A húrtrapézban az egy alapon fekvő szögek egyforma nagyságúak. Olyan, mint a tükörkép.",
+      "difficulty": "hard"
     },
     {
       "question": "20. Egy derékszögű trapéz rövidebbik alapja 5 cm, magassága 4 cm, a hosszabbik alapja 8 cm. Mekkora a területe?",
@@ -203,7 +222,8 @@
         "c": "32 cm²"
       },
       "correct": "a",
-      "explanation": "Terület = ((alap1 + alap2) / 2) * magasság. T = ((8 + 5) / 2) * 4 = 26 cm²."
+      "explanation": "Terület = ((alap1 + alap2) / 2) * magasság. T = ((8 + 5) / 2) * 4 = 26 cm².",
+      "difficulty": "hard"
     },
     {
       "question": "21. A trapéz átlói...",
@@ -213,7 +233,8 @@
         "c": "általános esetben nem felezik egymást."
       },
       "correct": "c",
-      "explanation": "Az átlók csak a paralelogrammánál felezik egymást. Az átlagos trapéznál a metszéspont nem a felezőpont."
+      "explanation": "Az átlók csak a paralelogrammánál felezik egymást. Az átlagos trapéznál a metszéspont nem a felezőpont.",
+      "difficulty": "hard"
     },
     {
       "question": "22. Hogyan számítjuk ki egy általános trapéz kerületét?",
@@ -223,7 +244,8 @@
         "c": "K = (a+c)*2"
       },
       "correct": "b",
-      "explanation": "A kerület az összes oldal hossza. Tehát: K = a + b + c + d."
+      "explanation": "A kerület az összes oldal hossza. Tehát: K = a + b + c + d.",
+      "difficulty": "hard"
     },
     {
       "question": "23. Egy trapéz középvonala 15 cm. Egyik alapja 10 cm. Milyen hosszú a másik alapja?",
@@ -233,7 +255,8 @@
         "c": "5 cm"
       },
       "correct": "b",
-      "explanation": "Középvonal = (alap1 + alap2) / 2. 15 = (10 + alap2) / 2.  30 = 10 + alap2. Alap2 = 20 cm."
+      "explanation": "Középvonal = (alap1 + alap2) / 2. 15 = (10 + alap2) / 2.  30 = 10 + alap2. Alap2 = 20 cm.",
+      "difficulty": "hard"
     },
     {
       "question": "24. Hány derékszöge lehet maximálisan egy olyan trapéznak, ami nem téglalap?",
@@ -243,7 +266,8 @@
         "c": "3"
       },
       "correct": "b",
-      "explanation": "A derékszögű trapézban van 2 derékszög. Ha 3 lenne, a negyediknek is derékszögnek kellene lennie, ami téglalapot csinálna."
+      "explanation": "A derékszögű trapézban van 2 derékszög. Ha 3 lenne, a negyediknek is derékszögnek kellene lennie, ami téglalapot csinálna.",
+      "difficulty": "hard"
     },
     {
       "question": "25. Melyik állítás igaz? Egy trapézt két átlója...",
@@ -253,7 +277,8 @@
         "c": "négy különböző területű háromszögre bont."
       },
       "correct": "b",
-      "explanation": "Az átlók négy háromszögre osztják a trapézt. A szárakon fekvő két háromszög területe egyenlő. Olyan, mintha egy trapézban két kisebb háromszög lenne."
+      "explanation": "Az átlók négy háromszögre osztják a trapézt. A szárakon fekvő két háromszög területe egyenlő. Olyan, mintha egy trapézban két kisebb háromszög lenne.",
+      "difficulty": "hard"
     }
   ]
 }

@@ -13,7 +13,8 @@
         "c": "X"
       },
       "correct": "b",
-      "explanation": "A római számokban az 1-et az 'I' betű jelöli. ✅ Megoldás: I."
+      "explanation": "A római számokban az 1-et az 'I' betű jelöli. ✅ Megoldás: I.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik római szám a 5-öt jelöli?",
@@ -23,7 +24,8 @@
         "c": "X"
       },
       "correct": "a",
-      "explanation": "A római számokban az 5-öt a 'V' betű jelöli. ✅ Megoldás: V."
+      "explanation": "A római számokban az 5-öt a 'V' betű jelöli. ✅ Megoldás: V.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik római szám a 10-et jelöli?",
@@ -33,7 +35,8 @@
         "c": "X"
       },
       "correct": "c",
-      "explanation": "A római számokban a 10-et az 'X' betű jelöli. ✅ Megoldás: X."
+      "explanation": "A római számokban a 10-et az 'X' betű jelöli. ✅ Megoldás: X.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik szám a XII római számokkal?",
@@ -43,7 +46,8 @@
         "c": "13"
       },
       "correct": "a",
-      "explanation": "XII = 10 + 1 + 1 = 12. ✅ Megoldás: 12."
+      "explanation": "XII = 10 + 1 + 1 = 12. ✅ Megoldás: 12.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik szám a VI római számokkal?",
@@ -53,7 +57,8 @@
         "c": "8"
       },
       "correct": "b",
-      "explanation": "VI = 5 + 1 = 6. ✅ Megoldás: 6."
+      "explanation": "VI = 5 + 1 = 6. ✅ Megoldás: 6.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a XIV római számmal jelölt szám?",
@@ -63,7 +68,8 @@
         "c": "14"
       },
       "correct": "c",
-      "explanation": "XIV = 10 + 4 = 14. ✅ Megoldás: 14."
+      "explanation": "XIV = 10 + 4 = 14. ✅ Megoldás: 14.",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan írjuk a 9-et római számokkal?",
@@ -73,7 +79,8 @@
         "c": "XI"
       },
       "correct": "b",
-      "explanation": "A 9 = 10 - 1, így IX. ✅ Megoldás: IX"
+      "explanation": "A 9 = 10 - 1, így IX. ✅ Megoldás: IX",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan írjuk a 4-et római számokkal?",
@@ -83,7 +90,8 @@
         "c": "VI"
       },
       "correct": "b",
-      "explanation": "A 4 = 5 - 1, így IV.  ✅ Megoldás: IV"
+      "explanation": "A 4 = 5 - 1, így IV.  ✅ Megoldás: IV",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan írjuk a 19-et római számokkal?",
@@ -93,7 +101,8 @@
         "c": "XXI"
       },
       "correct": "a",
-      "explanation": "19 = 10 + 9, vagyis XIX. ✅ Megoldás: XIX"
+      "explanation": "19 = 10 + 9, vagyis XIX. ✅ Megoldás: XIX",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik számot jelöli a XXXIV római számmal?",
@@ -103,7 +112,8 @@
         "c": "26"
       },
       "correct": "b",
-      "explanation": "XXXIV = 10 + 10 + 10 + 4 = 34. ✅ Megoldás: 34"
+      "explanation": "XXXIV = 10 + 10 + 10 + 4 = 34. ✅ Megoldás: 34",
+      "difficulty": "medium"
     },
     {
       "question": "Mit jelent, ha egy kisebb értékű jel megelőz egy nagyobbat?",
@@ -113,7 +123,8 @@
         "c": "Összeszorozzuk a két számot."
       },
       "correct": "b",
-      "explanation": "Ha egy kisebb értékű jel megelőz egy nagyobbat (pl. IV), akkor a kisebbet a nagyobból ki kell vonni. ✅ Megoldás: Kivonjuk a kisebbet a nagyobból."
+      "explanation": "Ha egy kisebb értékű jel megelőz egy nagyobbat (pl. IV), akkor a kisebbet a nagyobból ki kell vonni. ✅ Megoldás: Kivonjuk a kisebbet a nagyobból.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik számot jelöli a MCD?",
@@ -123,7 +134,8 @@
         "c": "1100"
       },
       "correct": "a",
-      "explanation": "MCD = 1000 + (1000 - 100) = 1000 + 900 = 1400. ✅ Megoldás: 1400"
+      "explanation": "MCD = 1000 + (1000 - 100) = 1000 + 900 = 1400. ✅ Megoldás: 1400",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik szám a 40?",
@@ -133,7 +145,8 @@
         "c": "L"
       },
       "correct": "a",
-      "explanation": "A 40 = 50 - 10, tehát XL.  ✅ Megoldás: XL"
+      "explanation": "A 40 = 50 - 10, tehát XL.  ✅ Megoldás: XL",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a római számok szabálya a jelek ismétlésére?",
@@ -143,7 +156,8 @@
         "c": "Csak a V, L, D ismételhetők."
       },
       "correct": "a",
-      "explanation": "A jeleket legfeljebb háromszor lehet ismételni egymás után. ✅ Megoldás: A jeleket legfeljebb négyszer lehet ismételni egymás után."
+      "explanation": "A jeleket legfeljebb háromszor lehet ismételni egymás után. ✅ Megoldás: A jeleket legfeljebb négyszer lehet ismételni egymás után.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik szám a helyes római számokkal: 49?",
@@ -153,7 +167,8 @@
         "c": "XXXXVIIII"
       },
       "correct": "b",
-      "explanation": "49 = 40 + 9, ami XLIX. ✅ Megoldás: XLIX"
+      "explanation": "49 = 40 + 9, ami XLIX. ✅ Megoldás: XLIX",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a 1000-et jelölő római szám?",
@@ -163,7 +178,8 @@
         "c": "M"
       },
       "correct": "c",
-      "explanation": "A 1000-et az 'M' betű jelöli a római számokban. ✅ Megoldás: M"
+      "explanation": "A 1000-et az 'M' betű jelöli a római számokban. ✅ Megoldás: M",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a 500-at jelölő római szám?",
@@ -173,7 +189,8 @@
         "c": "L"
       },
       "correct": "a",
-      "explanation": "Az 500-at a 'D' betű jelöli. ✅ Megoldás: D"
+      "explanation": "Az 500-at a 'D' betű jelöli. ✅ Megoldás: D",
+      "difficulty": "medium"
     },
     {
       "question": "Ha egy kisebb értékű jel a nagyobbnak a bal oldalán áll, az azt jelenti, hogy...",
@@ -183,7 +200,8 @@
         "c": "...összeszorozzuk az értékeket."
       },
       "correct": "b",
-      "explanation": "Ha egy kisebb értékű jel megelőz egy nagyobbat (pl. IV), akkor a kisebbet a nagyobból ki kell vonni.  ✅ Megoldás: ...kivonjuk a kisebbet a nagyobból."
+      "explanation": "Ha egy kisebb értékű jel megelőz egy nagyobbat (pl. IV), akkor a kisebbet a nagyobból ki kell vonni.  ✅ Megoldás: ...kivonjuk a kisebbet a nagyobból.",
+      "difficulty": "hard"
     },
     {
       "question": "Mit jelent a CCC?",
@@ -193,7 +211,8 @@
         "c": "3000"
       },
       "correct": "b",
-      "explanation": "Mivel a C=100, és a jeleket összeadjuk: CCC = 100 + 100 + 100 = 300. ✅ Megoldás: 300"
+      "explanation": "Mivel a C=100, és a jeleket összeadjuk: CCC = 100 + 100 + 100 = 300. ✅ Megoldás: 300",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a DCLV?",
@@ -203,7 +222,8 @@
         "c": "165"
       },
       "correct": "a",
-      "explanation": "DCLV = 500 + 100 + 50 + 5 = 655. ✅ Megoldás: 655"
+      "explanation": "DCLV = 500 + 100 + 50 + 5 = 655. ✅ Megoldás: 655",
+      "difficulty": "hard"
     },
     {
       "question": "Hogyan írjuk le a 400-at római számokkal?",
@@ -213,9 +233,10 @@
         "c": "CCCC"
       },
       "correct": "a",
-      "explanation": "A 400 = 500 - 100, tehát CD.  ✅ Megoldás: CD"
+      "explanation": "A 400 = 500 - 100, tehát CD.  ✅ Megoldás: CD",
+      "difficulty": "hard"
     },
-     {
+    {
       "question": "Melyik számot jelöli a  MMXIV?",
       "answers": {
         "a": "2014",
@@ -223,7 +244,8 @@
         "c": "2100"
       },
       "correct": "a",
-      "explanation": "A római számok összeadásából, majd kivonásából áll. MM = 2000, XIV = 14.  ✅ Megoldás: 2014"
+      "explanation": "A római számok összeadásából, majd kivonásából áll. MM = 2000, XIV = 14.  ✅ Megoldás: 2014",
+      "difficulty": "hard"
     },
     {
       "question": "Hogyan írjuk a 999-et római számokkal?",
@@ -233,9 +255,10 @@
         "c": "IC"
       },
       "correct": "b",
-      "explanation": "999 = 900 + 90 + 9 = CM + XC + IX.  ✅ Megoldás:  CMXCIX"
+      "explanation": "999 = 900 + 90 + 9 = CM + XC + IX.  ✅ Megoldás:  CMXCIX",
+      "difficulty": "hard"
     },
-     {
+    {
       "question": "Hogyan alakítjuk át a 1234-et római számokra?",
       "answers": {
         "a": "MCCXXXIV",
@@ -243,7 +266,8 @@
         "c": "MCDXXXIV"
       },
       "correct": "a",
-      "explanation": "1000=M, 200=CC, 30=XXX, 4=IV. Tehát a 1234 = MCCXXXIV.  ✅ Megoldás:  MCCXXXIV"
+      "explanation": "1000=M, 200=CC, 30=XXX, 4=IV. Tehát a 1234 = MCCXXXIV.  ✅ Megoldás:  MCCXXXIV",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a helyes írásmód a 100-at a római számokkal?",
@@ -253,7 +277,8 @@
         "c": "L"
       },
       "correct": "a",
-      "explanation": "A 100-at a 'C' betű jelöli a római számokban. ✅ Megoldás: C"
+      "explanation": "A 100-at a 'C' betű jelöli a római számokban. ✅ Megoldás: C",
+      "difficulty": "hard"
     }
   ]
 }

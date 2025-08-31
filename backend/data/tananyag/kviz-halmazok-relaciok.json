@@ -13,7 +13,8 @@
         "c": "A halmazok nagysága."
       },
       "correct": "b",
-      "explanation": "A reláció azt mutatja meg, hogy a két halmaz elemei hogyan kapcsolódnak egymáshoz. Például, hogy egy szám nagyobb-e, mint egy másik. ✅ Megoldás: Két halmaz elemei közötti kapcsolat."
+      "explanation": "A reláció azt mutatja meg, hogy a két halmaz elemei hogyan kapcsolódnak egymáshoz. Például, hogy egy szám nagyobb-e, mint egy másik. ✅ Megoldás: Két halmaz elemei közötti kapcsolat.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen jelet használunk a relációk jelölésére?",
@@ -23,7 +24,8 @@
         "c": "~ (valamihez kapcsolódik)"
       },
       "correct": "c",
-      "explanation": "A relációkat általában egy \"~\" (tilde) jellel jelöljük, vagy egy olyan nyíllal, ami a két halmaz elemei között mutatja a kapcsolatot. ✅ Megoldás: ~ (valamihez kapcsolódik)"
+      "explanation": "A relációkat általában egy \"~\" (tilde) jellel jelöljük, vagy egy olyan nyíllal, ami a két halmaz elemei között mutatja a kapcsolatot. ✅ Megoldás: ~ (valamihez kapcsolódik)",
+      "difficulty": "easy"
     },
     {
       "question": "Ha A = {1, 2, 3} és B = {a, b}, akkor a 2-höz mi kapcsolódhat egy relációban?",
@@ -33,7 +35,8 @@
         "c": "Csak az 'a'."
       },
       "correct": "b",
-      "explanation": "A reláció megmondja, hogy az A halmaz melyik elemei kapcsolódnak a B halmaz elemeihez.  ✅ Megoldás: Bármelyik elem B-ből."
+      "explanation": "A reláció megmondja, hogy az A halmaz melyik elemei kapcsolódnak a B halmaz elemeihez.  ✅ Megoldás: Bármelyik elem B-ből.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az a reláció, ami a nagyobb mint (>)",
@@ -43,7 +46,8 @@
         "c": "Azt mutatja meg, hogy a számok egyenlőek."
       },
       "correct": "b",
-      "explanation": "A 'nagyobb mint' reláció azt mutatja meg, hogy melyik szám a nagyobb. ✅ Megoldás: Azt mutatja meg, hogy melyik szám a nagyobb."
+      "explanation": "A 'nagyobb mint' reláció azt mutatja meg, hogy melyik szám a nagyobb. ✅ Megoldás: Azt mutatja meg, hogy melyik szám a nagyobb.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a reláció a 'kisebb mint (<)'?",
@@ -53,7 +57,8 @@
         "c": "A reláció nem létezik."
       },
       "correct": "b",
-      "explanation": "A 'kisebb mint' reláció azt mutatja meg, hogy melyik szám a kisebb.  ✅ Megoldás: A reláció azt mutatja, hogy melyik szám kisebb."
+      "explanation": "A 'kisebb mint' reláció azt mutatja meg, hogy melyik szám a kisebb.  ✅ Megoldás: A reláció azt mutatja, hogy melyik szám kisebb.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a reláció az 'egyenlő (=)'?",
@@ -63,7 +68,8 @@
         "c": "A reláció nem létezik."
       },
       "correct": "b",
-      "explanation": "Az egyenlőség (=) azt mutatja, hogy a két dolog ugyanaz. ✅ Megoldás: A reláció azt mutatja, hogy a két szám ugyanaz."
+      "explanation": "Az egyenlőség (=) azt mutatja, hogy a két dolog ugyanaz. ✅ Megoldás: A reláció azt mutatja, hogy a két szám ugyanaz.",
+      "difficulty": "easy"
     },
     {
       "question": "Ha egy reláció azt mondja, hogy 'barátja', akkor ez...",
@@ -73,7 +79,8 @@
         "c": "Azt mutatja, hogy mindenki egyenlő."
       },
       "correct": "b",
-      "explanation": "A 'barátja' reláció megmondja, hogy ki kinek a barátja. ✅ Megoldás: Megmutatja, ki kinek a barátja."
+      "explanation": "A 'barátja' reláció megmondja, hogy ki kinek a barátja. ✅ Megoldás: Megmutatja, ki kinek a barátja.",
+      "difficulty": "easy"
     },
     {
       "question": "Ha a fiúk halmazában van a 'Péter', és a lányok halmazában a 'Zsuzsa', és a reláció a 'szereti', akkor mit jelent, ha Péter ~ Zsuzsa?",
@@ -83,7 +90,8 @@
         "c": "Péter szereti Zsuzsát."
       },
       "correct": "c",
-      "explanation": "A reláció a 'szereti'. Péter ~ Zsuzsa azt jelenti, hogy Péter szereti Zsuzsát.  ✅ Megoldás: Péter szereti Zsuzsát."
+      "explanation": "A reláció a 'szereti'. Péter ~ Zsuzsa azt jelenti, hogy Péter szereti Zsuzsát.  ✅ Megoldás: Péter szereti Zsuzsát.",
+      "difficulty": "easy"
     },
     {
       "question": "Mit jelent a 'kisebb vagy egyenlő (≤)' reláció?",
@@ -93,7 +101,8 @@
         "c": "Azt, hogy az egyik szám nagyobb, mint a másik."
       },
       "correct": "b",
-      "explanation": "A 'kisebb vagy egyenlő (≤)' azt jelenti, hogy az első szám kisebb, vagy ugyanakkora mint a második. ✅ Megoldás: Azt, hogy az egyik szám kisebb vagy ugyanakkora, mint a másik."
+      "explanation": "A 'kisebb vagy egyenlő (≤)' azt jelenti, hogy az első szám kisebb, vagy ugyanakkora mint a második. ✅ Megoldás: Azt, hogy az egyik szám kisebb vagy ugyanakkora, mint a másik.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik relációt használjuk a nagyság meghatározására?",
@@ -103,7 +112,8 @@
         "c": "<, >, ≤, ≥"
       },
       "correct": "c",
-      "explanation": "A  < , > , ≤, ≥  relációkkal tudjuk megmondani, hogy egy szám kisebb, nagyobb, vagy egyenlő egy másikkal. ✅ Megoldás: <, >, ≤, ≥"
+      "explanation": "A  < , > , ≤, ≥  relációkkal tudjuk megmondani, hogy egy szám kisebb, nagyobb, vagy egyenlő egy másikkal. ✅ Megoldás: <, >, ≤, ≥",
+      "difficulty": "medium"
     },
     {
       "question": "Mit jelöl a '≠' reláció?",
@@ -113,7 +123,8 @@
         "c": "Azonos"
       },
       "correct": "a",
-      "explanation": "A  ≠  jel azt mutatja, hogy a két dolog nem egyforma.  ✅ Megoldás: Egyenlőtlen, nem ugyanaz."
+      "explanation": "A  ≠  jel azt mutatja, hogy a két dolog nem egyforma.  ✅ Megoldás: Egyenlőtlen, nem ugyanaz.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha egy halmazban az 'alma' és a 'körte' szerepel, és a reláció a 'gyümölcs', akkor...",
@@ -123,7 +134,8 @@
         "c": "Mindkettő helyes."
       },
       "correct": "c",
-      "explanation": "Mivel az alma és a körte is gyümölcs, mindkettőre igaz, hogy  ~ gyümölcs. ✅ Megoldás: Mindkettő helyes."
+      "explanation": "Mivel az alma és a körte is gyümölcs, mindkettőre igaz, hogy  ~ gyümölcs. ✅ Megoldás: Mindkettő helyes.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a reláció a 'testvér'?",
@@ -133,7 +145,8 @@
         "c": "Azt mutatja, hogy kiknek vannak közös szülei."
       },
       "correct": "c",
-      "explanation": "A 'testvér' reláció megmutatja, hogy kiknek vannak közös szülei. ✅ Megoldás: Azt mutatja, hogy kiknek vannak közös szülei."
+      "explanation": "A 'testvér' reláció megmutatja, hogy kiknek vannak közös szülei. ✅ Megoldás: Azt mutatja, hogy kiknek vannak közös szülei.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha a 'kutya' egy halmaz, a 'cica' egy másik, és a reláció a 'kedvenc'",
@@ -143,7 +156,8 @@
         "c": "Mindkettő lehetséges."
       },
       "correct": "c",
-      "explanation": "A reláció, a 'kedvenc' mind a kutyára, mind a cicára vonatkozhat. ✅ Megoldás: Mindkettő lehetséges."
+      "explanation": "A reláció, a 'kedvenc' mind a kutyára, mind a cicára vonatkozhat. ✅ Megoldás: Mindkettő lehetséges.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik reláció nem adható meg számokkal?",
@@ -153,7 +167,8 @@
         "c": "barát"
       },
       "correct": "c",
-      "explanation": "A 'barát' reláció nem feltétlenül adható meg számokkal, míg az egyenlőséget és a nagyságviszonyt számokkal lehet kifejezni. ✅ Megoldás: barát"
+      "explanation": "A 'barát' reláció nem feltétlenül adható meg számokkal, míg az egyenlőséget és a nagyságviszonyt számokkal lehet kifejezni. ✅ Megoldás: barát",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a kapcsolat a reláció és a függvény között?",
@@ -163,7 +178,8 @@
         "c": "A reláció a függvény fordítottja."
       },
       "correct": "a",
-      "explanation": "A függvény egy speciális reláció, ami minden bemeneti értékhez pontosan egy kimeneti értéket rendel. ✅ Megoldás: A függvény is reláció, de speciális."
+      "explanation": "A függvény egy speciális reláció, ami minden bemeneti értékhez pontosan egy kimeneti értéket rendel. ✅ Megoldás: A függvény is reláció, de speciális.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha A = {1, 2} és B = {3, 4}, és a reláció a 'kisebb mint', akkor...",
@@ -173,7 +189,8 @@
         "c": "Mindkettő helyes."
       },
       "correct": "b",
-      "explanation": "Mivel az 1 kisebb mint a 3, ezért a 1 ~ 3 reláció igaz. ✅ Megoldás: 1 ~ 3"
+      "explanation": "Mivel az 1 kisebb mint a 3, ezért a 1 ~ 3 reláció igaz. ✅ Megoldás: 1 ~ 3",
+      "difficulty": "hard"
     },
     {
       "question": "Ha a reláció azt jelenti 'a... a testvére', akkor mi a jelentése annak, hogy 'Anna ~ Péter'?",
@@ -183,7 +200,8 @@
         "c": "Mindkettő helyes."
       },
       "correct": "c",
-      "explanation": "Ha Anna testvére Péternek, akkor Péter is testvére Annának. ✅ Megoldás: Mindkettő helyes."
+      "explanation": "Ha Anna testvére Péternek, akkor Péter is testvére Annának. ✅ Megoldás: Mindkettő helyes.",
+      "difficulty": "hard"
     },
     {
       "question": "Mit jelöl a ⊆ jel a halmazoknál?",
@@ -193,7 +211,8 @@
         "c": "A halmazok különbségét."
       },
       "correct": "b",
-      "explanation": "A  ⊆  jel azt jelenti, hogy az egyik halmaz része a másiknak. ✅ Megoldás: Azt, hogy az egyik halmaz része a másiknak."
+      "explanation": "A  ⊆  jel azt jelenti, hogy az egyik halmaz része a másiknak. ✅ Megoldás: Azt, hogy az egyik halmaz része a másiknak.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha A = {1, 2, 3} és B = {1, 2, 3, 4}, akkor melyik igaz?",
@@ -203,7 +222,8 @@
         "c": "A = B"
       },
       "correct": "a",
-      "explanation": "Mivel az A minden eleme megtalálható a B-ben, ezért A része B-nek.  ✅ Megoldás: A ⊆ B"
+      "explanation": "Mivel az A minden eleme megtalálható a B-ben, ezért A része B-nek.  ✅ Megoldás: A ⊆ B",
+      "difficulty": "hard"
     },
     {
       "question": "Ha egy reláció azt mondja, hogy 'a... nagyobb', akkor ez...",
@@ -213,7 +233,8 @@
         "c": "Nincs reláció."
       },
       "correct": "a",
-      "explanation": "A 'nagyobb' reláció egyirányú, mert ha A nagyobb B-nél, akkor B nem nagyobb A-nál. ✅ Megoldás: Egyirányú kapcsolat."
+      "explanation": "A 'nagyobb' reláció egyirányú, mert ha A nagyobb B-nél, akkor B nem nagyobb A-nál. ✅ Megoldás: Egyirányú kapcsolat.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha a 'kisebb' relációt használjuk, akkor mi a helyes jelölés?",
@@ -223,7 +244,8 @@
         "c": "Mindkettő helyes."
       },
       "correct": "a",
-      "explanation": "Ha A kisebb, mint B, akkor A < B. ✅ Megoldás: A < B"
+      "explanation": "Ha A kisebb, mint B, akkor A < B. ✅ Megoldás: A < B",
+      "difficulty": "hard"
     },
     {
       "question": "Milyen reláció a szülők és a gyerekek között?",
@@ -233,7 +255,8 @@
         "c": "Nincs reláció."
       },
       "correct": "b",
-      "explanation": "A szülők és a gyerekek közötti kapcsolat egyirányú: a szülő a gyermeke, de a gyermek nem a szülője. ✅ Megoldás: Egyirányú."
+      "explanation": "A szülők és a gyerekek közötti kapcsolat egyirányú: a szülő a gyermeke, de a gyermek nem a szülője. ✅ Megoldás: Egyirányú.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha A = {kék, zöld} és a reláció a 'szín', akkor melyik állítás igaz?",
@@ -243,7 +266,8 @@
         "c": "A  ~ szín"
       },
       "correct": "c",
-      "explanation": "A halmaz elemei (kék, zöld) a 'szín' relációhoz tartoznak, vagyis a színek. ✅ Megoldás: A  ~ szín"
+      "explanation": "A halmaz elemei (kék, zöld) a 'szín' relációhoz tartoznak, vagyis a színek. ✅ Megoldás: A  ~ szín",
+      "difficulty": "hard"
     }
   ]
 }

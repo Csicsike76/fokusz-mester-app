@@ -13,7 +13,8 @@
         "c": "8"
       },
       "correct": "b",
-      "explanation": "Különböző előjelű számokat adunk össze. A nagyobb abszolút értékűből (|-5|=5) kivonjuk a kisebbet (|3|=3), az eredmény 2. Az eredmény előjele a nagyobb abszolút értékű szám előjele, ami a -5 miatt negatív. Megoldás: -2."
+      "explanation": "Különböző előjelű számokat adunk össze. A nagyobb abszolút értékűből (|-5|=5) kivonjuk a kisebbet (|3|=3), az eredmény 2. Az eredmény előjele a nagyobb abszolút értékű szám előjele, ami a -5 miatt negatív. Megoldás: -2.",
+      "difficulty": "easy"
     },
     {
       "question": "Mennyi a (-4) * (-6) művelet eredménye?",
@@ -23,7 +24,8 @@
         "c": "-10"
       },
       "correct": "a",
-      "explanation": "Két negatív számot szorzunk össze. 'Mínusz szorozva mínusszal az plusz'. Az eredmény pozitív lesz. 4 * 6 = 24. Megoldás: 24."
+      "explanation": "Két negatív számot szorzunk össze. 'Mínusz szorozva mínusszal az plusz'. Az eredmény pozitív lesz. 4 * 6 = 24. Megoldás: 24.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik a 12 és a 18 legnagyobb közös osztója (LNKO)?",
@@ -33,7 +35,8 @@
         "c": "6"
       },
       "correct": "c",
-      "explanation": "A 12 osztói: 1, 2, 3, 4, 6, 12. A 18 osztói: 1, 2, 3, 6, 9, 18. A közös osztók: 1, 2, 3, 6. Ezek közül a legnagyobb a 6."
+      "explanation": "A 12 osztói: 1, 2, 3, 4, 6, 12. A 18 osztói: 1, 2, 3, 6, 9, 18. A közös osztók: 1, 2, 3, 6. Ezek közül a legnagyobb a 6.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy 5 cm oldalú négyzet területe...",
@@ -43,7 +46,8 @@
         "c": "10 cm²"
       },
       "correct": "b",
-      "explanation": "A négyzet területének képlete T = a * a. T = 5 cm * 5 cm = 25 cm². Megoldás: 25 cm²."
+      "explanation": "A négyzet területének képlete T = a * a. T = 5 cm * 5 cm = 25 cm². Megoldás: 25 cm².",
+      "difficulty": "easy"
     },
     {
       "question": "Egy autó 2 óra alatt 180 km-t tesz meg. Mennyi utat tesz meg 3 óra alatt?",
@@ -53,7 +57,8 @@
         "c": "200 km"
       },
       "correct": "a",
-      "explanation": "Ez egyenes arányosság. Először kiszámoljuk, mennyit tesz meg 1 óra alatt: 180 km / 2 óra = 90 km/óra. Ezt megszorozzuk 3-mal: 90 km * 3 = 270 km."
+      "explanation": "Ez egyenes arányosság. Először kiszámoljuk, mennyit tesz meg 1 óra alatt: 180 km / 2 óra = 90 km/óra. Ezt megszorozzuk 3-mal: 90 km * 3 = 270 km.",
+      "difficulty": "easy"
     },
     {
       "question": "Mennyi 800-nak a 25%-a?",
@@ -63,7 +68,8 @@
         "c": "80"
       },
       "correct": "b",
-      "explanation": "A 25% az egynegyedet jelenti. 800 / 4 = 200. Vagy számolással: 800 * (25/100) = 800 * 0,25 = 200."
+      "explanation": "A 25% az egynegyedet jelenti. 800 / 4 = 200. Vagy számolással: 800 * (25/100) = 800 * 0,25 = 200.",
+      "difficulty": "easy"
     },
     {
       "question": "Mennyi (-5) + (+3) - (-2)?",
@@ -73,7 +79,8 @@
         "c": "-10"
       },
       "correct": "b",
-      "explanation": "Felbontjuk a zárójeleket: -5 + 3 + 2. Elvégezzük a műveleteket balról jobbra: -5 + 3 = -2. -2 + 2 = 0."
+      "explanation": "Felbontjuk a zárójeleket: -5 + 3 + 2. Elvégezzük a műveleteket balról jobbra: -5 + 3 = -2. -2 + 2 = 0.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik szám abszolútértéke a legnagyobb?",
@@ -83,7 +90,8 @@
         "c": "0"
       },
       "correct": "a",
-      "explanation": "Az abszolútérték egy szám távolsága a nullától a számegyenesen. Mindig pozitív. |-15| = 15. |12| = 12. |0| = 0. Ezek közül a 15 a legnagyobb."
+      "explanation": "Az abszolútérték egy szám távolsága a nullától a számegyenesen. Mindig pozitív. |-15| = 15. |12| = 12. |0| = 0. Ezek közül a 15 a legnagyobb.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az 5⁶ : 5⁴ művelet eredménye?",
@@ -93,7 +101,8 @@
         "c": "1²"
       },
       "correct": "a",
-      "explanation": "Azonos alapú hatványok osztásakor a kitevőket kivonjuk egymásból. 5⁶⁻⁴ = 5²."
+      "explanation": "Azonos alapú hatványok osztásakor a kitevőket kivonjuk egymásból. 5⁶⁻⁴ = 5².",
+      "difficulty": "easy"
     },
     {
       "question": "Két munkás 6 óra alatt végez el egy munkát. Hány óra alatt végezne ugyanazzal a munkával 4 munkás?",
@@ -103,7 +112,8 @@
         "c": "9 óra"
       },
       "correct": "b",
-      "explanation": "Ez fordított arányosság. Ha több a munkás, kevesebb idő kell. A teljes munka 2 * 6 = 12 'munkaóra'. Ezt a 12 munkaórát osztjuk el 4 munkás között: 12 / 4 = 3 óra."
+      "explanation": "Ez fordított arányosság. Ha több a munkás, kevesebb idő kell. A teljes munka 2 * 6 = 12 'munkaóra'. Ezt a 12 munkaórát osztjuk el 4 munkás között: 12 / 4 = 3 óra.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik a 4 és a 6 legkisebb közös többszöröse (LKKT)?",
@@ -113,7 +123,8 @@
         "c": "2"
       },
       "correct": "b",
-      "explanation": "A 4 többszörösei: 4, 8, 12, 16... A 6 többszörösei: 6, 12, 18... A közös többszörösök közül a legkisebb a 12."
+      "explanation": "A 4 többszörösei: 4, 8, 12, 16... A 6 többszörösei: 6, 12, 18... A közös többszörösök közül a legkisebb a 12.",
+      "difficulty": "medium"
     },
     {
       "question": "Mennyi egy trapéz területe, ha alapjai 10 cm és 6 cm, magassága 5 cm?",
@@ -123,7 +134,8 @@
         "c": "40 cm²"
       },
       "correct": "c",
-      "explanation": "A trapéz területképlete: T = ((a+c)/2) * m. T = ((10+6)/2) * 5 = (16/2) * 5 = 8 * 5 = 40 cm²."
+      "explanation": "A trapéz területképlete: T = ((a+c)/2) * m. T = ((10+6)/2) * 5 = (16/2) * 5 = 8 * 5 = 40 cm².",
+      "difficulty": "medium"
     },
     {
       "question": "Mekkora egy háromszög harmadik szöge, ha a másik kettő 50° és 70°?",
@@ -133,7 +145,8 @@
         "c": "60°"
       },
       "correct": "c",
-      "explanation": "A háromszög belső szögeinek összege mindig 180°. 180° - (50° + 70°) = 180° - 120° = 60°."
+      "explanation": "A háromszög belső szögeinek összege mindig 180°. 180° - (50° + 70°) = 180° - 120° = 60°.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik állítás igaz a prímszámokra?",
@@ -143,7 +156,8 @@
         "c": "A 9 prímszám."
       },
       "correct": "b",
-      "explanation": "A 9 osztható 3-mal is, tehát nem prím. A 2-nek pontosan két osztója van (1 és 2), tehát prím. Minden más páros szám osztható 2-vel, így nem lehet prím."
+      "explanation": "A 9 osztható 3-mal is, tehát nem prím. A 2-nek pontosan két osztója van (1 és 2), tehát prím. Minden más páros szám osztható 2-vel, így nem lehet prím.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik tört a nagyobb: 3/4 vagy 4/5?",
@@ -153,7 +167,8 @@
         "c": "egyenlőek"
       },
       "correct": "b",
-      "explanation": "Hozzuk közös nevezőre a törteket. A közös nevező 20. 3/4 = 15/20. 4/5 = 16/20. Mivel 16 > 15, ezért a 16/20 (azaz a 4/5) a nagyobb."
+      "explanation": "Hozzuk közös nevezőre a törteket. A közös nevező 20. 3/4 = 15/20. 4/5 = 16/20. Mivel 16 > 15, ezért a 16/20 (azaz a 4/5) a nagyobb.",
+      "difficulty": "medium"
     },
     {
       "question": "Mekkora egy 20 cm átmérőjű kör sugara?",
@@ -163,7 +178,8 @@
         "c": "10 cm"
       },
       "correct": "c",
-      "explanation": "A sugár (r) az átmérő (d) fele. r = 20 cm / 2 = 10 cm."
+      "explanation": "A sugár (r) az átmérő (d) fele. r = 20 cm / 2 = 10 cm.",
+      "difficulty": "medium"
     },
     {
       "question": "Mennyi az 5x - 3y kifejezés értéke, ha x=2 és y=1?",
@@ -173,7 +189,8 @@
         "c": "1"
       },
       "correct": "a",
-      "explanation": "Helyettesítsük be a változók értékeit: 5 * 2 - 3 * 1. Végezzük el a műveleteket: 10 - 3 = 7."
+      "explanation": "Helyettesítsük be a változók értékeit: 5 * 2 - 3 * 1. Végezzük el a műveleteket: 10 - 3 = 7.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a 0 abszolútértéke?",
@@ -183,7 +200,8 @@
         "c": "1"
       },
       "correct": "b",
-      "explanation": "Az abszolútérték egy szám távolsága a nullától. A nulla távolsága önmagától nulla."
+      "explanation": "Az abszolútérték egy szám távolsága a nullától. A nulla távolsága önmagától nulla.",
+      "difficulty": "hard"
     },
     {
       "question": "Milyen szöget zárnak be egy rombusz átlói?",
@@ -193,7 +211,8 @@
         "c": "tompaszöget"
       },
       "correct": "b",
-      "explanation": "A rombusz egyik legfontosabb tulajdonsága, hogy az átlói mindig merőlegesen metszik egymást."
+      "explanation": "A rombusz egyik legfontosabb tulajdonsága, hogy az átlói mindig merőlegesen metszik egymást.",
+      "difficulty": "hard"
     },
     {
       "question": "Mennyi (-4) * (-5)?",
@@ -203,7 +222,8 @@
         "c": "-9"
       },
       "correct": "a",
-      "explanation": "Két negatív szám szorzata mindig pozitív. 4 * 5 = 20."
+      "explanation": "Két negatív szám szorzata mindig pozitív. 4 * 5 = 20.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy egyenlő szárú háromszög alapon fekvő szögei 70°-osak. Mekkora a harmadik szöge?",
@@ -213,7 +233,8 @@
         "c": "110°"
       },
       "correct": "b",
-      "explanation": "A háromszög belső szögeinek összege 180°. A két alapon fekvő szög összege 70°+70°=140°. A harmadik szög: 180° - 140° = 40°."
+      "explanation": "A háromszög belső szögeinek összege 180°. A két alapon fekvő szög összege 70°+70°=140°. A harmadik szög: 180° - 140° = 40°.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a 10⁰ értéke?",
@@ -223,7 +244,8 @@
         "c": "1"
       },
       "correct": "c",
-      "explanation": "Bármely nullától különböző szám nulladik hatványa definíció szerint 1. Ez a hatványozás azonosságainak fontos alapszabálya."
+      "explanation": "Bármely nullától különböző szám nulladik hatványa definíció szerint 1. Ez a hatványozás azonosságainak fontos alapszabálya.",
+      "difficulty": "hard"
     },
     {
       "question": "Mennyi 1500 Ft 50%-a?",
@@ -233,7 +255,8 @@
         "c": "3000 Ft"
       },
       "correct": "a",
-      "explanation": "Az 50% mindig egy mennyiség felét jelenti. 1500 Ft / 2 = 750 Ft."
+      "explanation": "Az 50% mindig egy mennyiség felét jelenti. 1500 Ft / 2 = 750 Ft.",
+      "difficulty": "hard"
     },
     {
       "question": "Mekkora egy deltoid területe, ha átlói 6 cm és 10 cm hosszúak?",
@@ -243,7 +266,8 @@
         "c": "16 cm²"
       },
       "correct": "b",
-      "explanation": "A deltoid (és a rombusz) területe: T = (e*f)/2. T = (6 * 10) / 2 = 60 / 2 = 30 cm²."
+      "explanation": "A deltoid (és a rombusz) területe: T = (e*f)/2. T = (6 * 10) / 2 = 60 / 2 = 30 cm².",
+      "difficulty": "hard"
     },
     {
       "question": "Mennyi 180 perc órában kifejezve?",
@@ -253,7 +277,8 @@
         "c": "3 óra"
       },
       "correct": "c",
-      "explanation": "Tudjuk, hogy 60 perc az 1 óra. Kisebb egységből nagyobba váltunk, ezért osztunk: 180 / 60 = 3."
+      "explanation": "Tudjuk, hogy 60 perc az 1 óra. Kisebb egységből nagyobba váltunk, ezért osztunk: 180 / 60 = 3.",
+      "difficulty": "hard"
     }
   ]
 }

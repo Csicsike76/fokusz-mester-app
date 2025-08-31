@@ -1,101 +1,209 @@
 .container {
-  padding: 1rem;
-  color: white;
-  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 80px);
+  padding: 2rem 1rem;
+  box-sizing: border-box;
   width: 100%;
-  margin: 1rem auto;
 }
 
 .quizBox {
-  background-color: rgba(44, 62, 80, 0.9);
-  border-radius: 10px;
-  padding: 1.5rem;
-  backdrop-filter: blur(5px);
+  width: 100%;
+  max-width: 900px;
+  background: rgba(18, 21, 26, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  color: #f1f1f1;
 }
 
 .quizBox h1 {
+  text-align: center;
   margin-top: 0;
-  text-align: center;
-  font-size: 1.8rem;
-}
-
-/* VÉGLEGES JAVÍTÁS: A beküldő gomb stílusa */
-.submitButton {
-  display: block;
-  width: 100%;
-  padding: 1rem;
-  background-color: #27ae60; /* Élénkebb zöld */
-  color: white;
-  border: none;
-  border-radius: 10px; /* Gömbölyűbb */
-  font-size: 1.3rem; /* Nagyobb betűméret */
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.2s, transform 0.2s;
-}
-.submitButton:hover:not(:disabled) { 
-  background-color: #2ecc71;
-  transform: translateY(-2px); /* Kiemelkedő hatás */
-}
-.submitButton:disabled {
-  background-color: #95a5a6; /* Egyértelmű inaktív állapot */
-  color: #ecf0f1;
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
-}
-
-.resultsBox {
-  text-align: center;
-  margin-top: 1.5rem;
-  padding: 1rem 1.25rem;
-  border-radius: 10px;
-}
-
-.resultsActions {
+  margin-bottom: 0.5rem;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
   display: flex;
-  flex-direction: column;
-  gap: .75rem;
-  align-items: stretch;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.quizBox > p {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 2rem;
+}
+
+.difficultyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
   margin-top: 1rem;
 }
 
-/* VÉGLEGES JAVÍTÁS: Az újrakezdő gomb stílusa */
+.difficultyButton {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.difficultyButton:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+  z-index: 0;
+}
+
+.difficultyButton:hover:not(:disabled):before {
+  width: 250%;
+  height: 250%;
+}
+
+.difficultyButton:hover:not(:disabled) {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.difficultyButton h3, .difficultyButton p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.difficultyButton h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.difficultyButton p {
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.difficultyButton:nth-child(1):hover:not(:disabled) { border-color: #2ecc71; }
+.difficultyButton:nth-child(2):hover:not(:disabled) { border-color: #f1c40f; }
+.difficultyButton:nth-child(3):hover:not(:disabled) { border-color: #e74c3c; }
+
+.difficultyButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.difficultyTag {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 20px;
+  vertical-align: middle;
+  margin-left: 1rem;
+  text-transform: capitalize;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.5);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+.difficultyTag[data-level="easy"] { background: linear-gradient(45deg, #2ecc71, #27ae60); }
+.difficultyTag[data-level="medium"] { background: linear-gradient(45deg, #f1c40f, #f39c12); }
+.difficultyTag[data-level="hard"] { background: linear-gradient(45deg, #e74c3c, #c0392b); }
+
+.submitButton,
 .restartButton {
-  padding: 0.9rem 1.4rem; /* Nagyobb */
-  background-color: #3498db; /* Barátságos kék */
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: #fff;
   border: none;
-  border-radius: 10px; /* Gömbölyűbb */
-  font-weight: bold;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1.1rem; /* Nagyobb betűméret */
-  transition: filter 0.2s;
-}
-.restartButton:hover { 
-  filter: brightness(1.1); 
+  transition: all 0.2s;
+  background-color: #3498db;
+  margin-top: 1.5rem;
 }
 
+.submitButton:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
 
-.bad  { border: 2px solid #e74c3c; background: rgba(231, 76, 60, 0.12); }
-.ok   { border: 2px solid #f1c40f; background: rgba(241, 196, 15, 0.12); }
-.good { border: 2px solid #2ecc71; background: rgba(46, 204, 113, 0.12); }
+.restartButton {
+    background-color: #2ecc71;
+}
 
-@media (min-width: 768px) {
-  .container {
+.submitButton:hover:not(:disabled),
+.restartButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.resultsBox {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.resultsBox p {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.good { border: 2px solid #2ecc71; background-color: rgba(46, 204, 113, 0.1); }
+.ok { border: 2px solid #f1c40f; background-color: rgba(241, 196, 15, 0.1); }
+.bad { border: 2px solid #e74c3c; background-color: rgba(231, 76, 60, 0.1); }
+
+.resultsActions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+.backButton {
+    flex-grow: 1;
+    text-align: center;
+    padding: 0.8rem 1rem;
+    background-color: #95a5a6;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.workInProgress {
     padding: 2rem;
-    margin: 2rem auto;
-  }
-  .quizBox {
-    padding: 2rem;
-  }
-  .quizBox h1 {
-    font-size: 2.2rem;
-  }
-  .resultsActions {
-    flex-direction: row;
-    justify-content: center;
-  }
+    text-align: center;
+    background: rgba(0,0,0,0.2);
+    border-radius: 8px;
 }

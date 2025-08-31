@@ -13,7 +13,8 @@
         "c": "Betűkkel jelölt matematikai művelet."
       },
       "correct": "a",
-      "explanation": "A függvény egy matematikai fogalom, ami a bemeneti értékekhez (x) egyértelműen hozzárendeli a kimeneti értékeket (y). ✅ Megoldás: Egy olyan szabály, amely minden bemeneti értékhez pontosan egy kimeneti értéket rendel."
+      "explanation": "A függvény egy matematikai fogalom, ami a bemeneti értékekhez (x) egyértelműen hozzárendeli a kimeneti értékeket (y). ✅ Megoldás: Egy olyan szabály, amely minden bemeneti értékhez pontosan egy kimeneti értéket rendel.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a független változó egy függvényben?",
@@ -23,7 +24,8 @@
         "c": "Az y, a kimeneti érték."
       },
       "correct": "b",
-      "explanation": "A független változó (x) az a bemeneti érték, amit mi választunk meg, és aminek a függvény kiszámítja az értékét. ✅ Megoldás: Az x, a bemeneti érték."
+      "explanation": "A független változó (x) az a bemeneti érték, amit mi választunk meg, és aminek a függvény kiszámítja az értékét. ✅ Megoldás: Az x, a bemeneti érték.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a függő változó egy függvényben?",
@@ -33,7 +35,8 @@
         "c": "A függvény maga."
       },
       "correct": "a",
-      "explanation": "A függő változó (y) a függvény által előállított kimeneti érték, ami az x-től (független változó) függ. ✅ Megoldás: A függvény értéke (y)."
+      "explanation": "A függő változó (y) a függvény által előállított kimeneti érték, ami az x-től (független változó) függ. ✅ Megoldás: A függvény értéke (y).",
+      "difficulty": "easy"
     },
     {
       "question": "Mit jelent az, hogy egy függvény egyértelmű?",
@@ -43,7 +46,8 @@
         "c": "Sok x-hez tartozik egy y."
       },
       "correct": "a",
-      "explanation": "Egy függvény egyértelmű, ha a bemeneti érték (x) megadásával pontosan egy kimeneti értéket (y) kapunk. ✅ Megoldás: Minden x-hez csak egy y tartozik."
+      "explanation": "Egy függvény egyértelmű, ha a bemeneti érték (x) megadásával pontosan egy kimeneti értéket (y) kapunk. ✅ Megoldás: Minden x-hez csak egy y tartozik.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik jelöli helyesen a függvényt?",
@@ -53,7 +57,8 @@
         "c": "y = 7"
       },
       "correct": "a",
-      "explanation": "A függvényt általában f(x) = ... formában jelöljük, ahol az x a független változó, f(x) pedig a függvény értéke. A többi példa egy egyenlet vagy egy konstans érték. ✅ Megoldás: f(x) = 2x + 1."
+      "explanation": "A függvényt általában f(x) = ... formában jelöljük, ahol az x a független változó, f(x) pedig a függvény értéke. A többi példa egy egyenlet vagy egy konstans érték. ✅ Megoldás: f(x) = 2x + 1.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a függvény értékkészlete?",
@@ -63,7 +68,8 @@
         "c": "A függvény hozzárendelési szabálya."
       },
       "correct": "b",
-      "explanation": "Az értékkészlet a függvény által felvett lehetséges y értékek halmaza. ✅ Megoldás: A függvény kimeneti értékeinek halmaza."
+      "explanation": "Az értékkészlet a függvény által felvett lehetséges y értékek halmaza. ✅ Megoldás: A függvény kimeneti értékeinek halmaza.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a hozzárendelési szabály?",
@@ -73,7 +79,8 @@
         "c": "A független változók halmaza."
       },
       "correct": "a",
-      "explanation": "A hozzárendelési szabály leírja, hogy egy adott x értékhez a függvény hogyan számítja ki az y értéket. Ez a képlet vagy a leírás, ami a függvény működését meghatározza. ✅ Megoldás: Megmutatja, hogy a független változó (x) és a függő változó (y) között milyen összefüggés van."
+      "explanation": "A hozzárendelési szabály leírja, hogy egy adott x értékhez a függvény hogyan számítja ki az y értéket. Ez a képlet vagy a leírás, ami a függvény működését meghatározza. ✅ Megoldás: Megmutatja, hogy a független változó (x) és a függő változó (y) között milyen összefüggés van.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik NEM egy függvény?",
@@ -83,7 +90,8 @@
         "c": "x² + y² = 4"
       },
       "correct": "c",
-      "explanation": "Az x² + y² = 4 nem egy függvény, mert egy adott x értékhez (kivéve a -2 és 2 közötti tartományt) két y érték is tartozik. A függvényeknél egy x-hez csak egy y tartozhat. ✅ Megoldás: x² + y² = 4."
+      "explanation": "Az x² + y² = 4 nem egy függvény, mert egy adott x értékhez (kivéve a -2 és 2 közötti tartományt) két y érték is tartozik. A függvényeknél egy x-hez csak egy y tartozhat. ✅ Megoldás: x² + y² = 4.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a zérushelye egy függvénynek?",
@@ -93,7 +101,8 @@
         "c": "Ahol a függvény értéke nulla."
       },
       "correct": "c",
-      "explanation": "A zérushely az az x érték, amelyre a függvény értéke (y) nulla. Ez a pont a grafikonon az x-tengelyen helyezkedik el. ✅ Megoldás: Ahol a függvény értéke nulla."
+      "explanation": "A zérushely az az x érték, amelyre a függvény értéke (y) nulla. Ez a pont a grafikonon az x-tengelyen helyezkedik el. ✅ Megoldás: Ahol a függvény értéke nulla.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik egyenes a függvény grafikonja?",
@@ -103,7 +112,8 @@
         "c": "A függvény hozzárendelési szabálya."
       },
       "correct": "a",
-      "explanation": "A függvény grafikonja az a vizuális ábrázolás, ami a függvény pontjait (x, y) egy koordináta-rendszerben összeköti. ✅ Megoldás: Egy olyan vonal, ami a pontokat köti össze."
+      "explanation": "A függvény grafikonja az a vizuális ábrázolás, ami a függvény pontjait (x, y) egy koordináta-rendszerben összeköti. ✅ Megoldás: Egy olyan vonal, ami a pontokat köti össze.",
+      "difficulty": "medium"
     },
     {
       "question": "Mit jelent az, hogy egy függvény 'lineáris'?",
@@ -113,7 +123,8 @@
         "c": "A függvény értéke mindig pozitív."
       },
       "correct": "a",
-      "explanation": "A lineáris függvény grafikonja egy egyenes. Ezek az elsőfokú polinomfüggvények. ✅ Megoldás: A grafikonja egyenes."
+      "explanation": "A lineáris függvény grafikonja egy egyenes. Ezek az elsőfokú polinomfüggvények. ✅ Megoldás: A grafikonja egyenes.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik függvény lineáris?",
@@ -123,7 +134,8 @@
         "c": "f(x) = 1/x"
       },
       "correct": "b",
-      "explanation": "A lineáris függvények alakja f(x) = mx + b, ahol m és b konstansok. A b) pontban ez látható, a többi nem. ✅ Megoldás: f(x) = 2x - 3."
+      "explanation": "A lineáris függvények alakja f(x) = mx + b, ahol m és b konstansok. A b) pontban ez látható, a többi nem. ✅ Megoldás: f(x) = 2x - 3.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik egyenlet ír le egy függvényt?",
@@ -133,7 +145,8 @@
         "c": "x = 3"
       },
       "correct": "b",
-      "explanation": "A függvényeknél a bemeneti (x) értékhez csak egy kimeneti (y) érték tartozhat. Az y = x + 5 egyértelműen megadja, hogy x minden értékéhez mi a y értéke. ✅ Megoldás: y = x + 5."
+      "explanation": "A függvényeknél a bemeneti (x) értékhez csak egy kimeneti (y) érték tartozhat. Az y = x + 5 egyértelműen megadja, hogy x minden értékéhez mi a y értéke. ✅ Megoldás: y = x + 5.",
+      "difficulty": "medium"
     },
     {
       "question": "Mit jelent a függvény értéke?",
@@ -143,7 +156,8 @@
         "c": "A függvény kimeneti (y) értéke egy adott x-hez."
       },
       "correct": "c",
-      "explanation": "A függvény értéke egy adott x helyen, az y érték, amit a hozzárendelési szabály alapján kapunk. ✅ Megoldás: A függvény kimeneti (y) értéke egy adott x-hez."
+      "explanation": "A függvény értéke egy adott x helyen, az y érték, amit a hozzárendelési szabály alapján kapunk. ✅ Megoldás: A függvény kimeneti (y) értéke egy adott x-hez.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a definíciója a konstans függvénynek?",
@@ -153,7 +167,8 @@
         "c": "Olyan függvény, amelynek az értékkészlete végtelen."
       },
       "correct": "a",
-      "explanation": "A konstans függvény mindig ugyanazt az értéket adja vissza, függetlenül a bemeneti értékétől. A grafikonja egy vízszintes egyenes. ✅ Megoldás: Olyan függvény, amelynek értéke mindig ugyanaz a szám, függetlenül az x értékétől."
+      "explanation": "A konstans függvény mindig ugyanazt az értéket adja vissza, függetlenül a bemeneti értékétől. A grafikonja egy vízszintes egyenes. ✅ Megoldás: Olyan függvény, amelynek értéke mindig ugyanaz a szám, függetlenül az x értékétől.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik függvény a másodfokú függvény?",
@@ -163,7 +178,8 @@
         "c": "f(x) = 2/x"
       },
       "correct": "b",
-      "explanation": "A másodfokú függvények a második hatványon (x²) szereplő változót tartalmazzák. A b) példa egy ilyen, a többi nem. A grafikonjuk parabola. ✅ Megoldás: f(x) = x² - 4x + 3."
+      "explanation": "A másodfokú függvények a második hatványon (x²) szereplő változót tartalmazzák. A b) példa egy ilyen, a többi nem. A grafikonjuk parabola. ✅ Megoldás: f(x) = x² - 4x + 3.",
+      "difficulty": "hard"
     },
     {
       "question": "Mit mutat meg a függőleges vonal teszt?",
@@ -173,7 +189,8 @@
         "c": "A grafikon x tengelymetszetét."
       },
       "correct": "b",
-      "explanation": "Ha egy függőleges vonal csak egy pontban metszi a grafikont, akkor az egy függvény grafikonja. Ha több pontban metszi, akkor nem. ✅ Megoldás: Egy grafikon függvény-e."
+      "explanation": "Ha egy függőleges vonal csak egy pontban metszi a grafikont, akkor az egy függvény grafikonja. Ha több pontban metszi, akkor nem. ✅ Megoldás: Egy grafikon függvény-e.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a szigorúan monoton növekvő függvény?",
@@ -183,7 +200,8 @@
         "c": "Ahol a grafikon vízszintes."
       },
       "correct": "b",
-      "explanation": "Ha az x érték növelésével a függvény értéke (y) is nő, akkor a függvény szigorúan monoton növekvő, ami a grafikonon balról jobbra felfelé halad. ✅ Megoldás: Ahol a grafikon balról jobbra felfelé halad."
+      "explanation": "Ha az x érték növelésével a függvény értéke (y) is nő, akkor a függvény szigorúan monoton növekvő, ami a grafikonon balról jobbra felfelé halad. ✅ Megoldás: Ahol a grafikon balról jobbra felfelé halad.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik NEM függvény?",
@@ -193,7 +211,8 @@
         "c": "x^2 + y^2 = 1"
       },
       "correct": "c",
-      "explanation": "Az x^2 + y^2 = 1 egy kör egyenlete. Egy x értékhez két y érték tartozik (kivéve a -1 és 1 pontokat), ami nem felel meg a függvény definíciójának. ✅ Megoldás: x^2 + y^2 = 1."
+      "explanation": "Az x^2 + y^2 = 1 egy kör egyenlete. Egy x értékhez két y érték tartozik (kivéve a -1 és 1 pontokat), ami nem felel meg a függvény definíciójának. ✅ Megoldás: x^2 + y^2 = 1.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a függvény értelmezési tartománya?",
@@ -203,7 +222,8 @@
         "c": "A függvény grafikonja."
       },
       "correct": "b",
-      "explanation": "Az értelmezési tartomány (vagy definíciós tartomány) az x értékek halmaza, amiket a függvénybe behelyettesíthetünk. ✅ Megoldás: A függvény által felvehető x értékek halmaza."
+      "explanation": "Az értelmezési tartomány (vagy definíciós tartomány) az x értékek halmaza, amiket a függvénybe behelyettesíthetünk. ✅ Megoldás: A függvény által felvehető x értékek halmaza.",
+      "difficulty": "hard"
     }
   ]
 }

@@ -13,7 +13,8 @@
         "c": "Megkeressük a 3-at az y-tengelyen."
       },
       "correct": "c",
-      "explanation": "A legegyszerűbb módszer, ha a 'b' paramétert, azaz az y-tengelymetszetet használjuk kezdőpontnak. A 'b' értéke itt 3, tehát az első pontunk a (0; 3) lesz, ami az y-tengelyen a 3-nál van. ✅ Megoldás: Megkeressük a 3-at az y-tengelyen."
+      "explanation": "A legegyszerűbb módszer, ha a 'b' paramétert, azaz az y-tengelymetszetet használjuk kezdőpontnak. A 'b' értéke itt 3, tehát az első pontunk a (0; 3) lesz, ami az y-tengelyen a 3-nál van. ✅ Megoldás: Megkeressük a 3-at az y-tengelyen.",
+      "difficulty": "easy"
     },
     {
       "question": "Mit jelent a 2-es meredekség az f(x) = 2x + 3 függvényben?",
@@ -23,7 +24,8 @@
         "c": "2-t jobbra, 1-et fel"
       },
       "correct": "a",
-      "explanation": "A meredekséget törtként is felírhatjuk: a = 2 = 2/1.  A nevező (1) a vízszintes lépést, a számláló (2) a függőleges lépést jelenti. Mivel pozitív, felfelé lépünk. ✅ Megoldás: Bármely pontból 1-et jobbra, 2-t felfelé lépve a grafikon egy újabb pontját kapjuk."
+      "explanation": "A meredekséget törtként is felírhatjuk: a = 2 = 2/1.  A nevező (1) a vízszintes lépést, a számláló (2) a függőleges lépést jelenti. Mivel pozitív, felfelé lépünk. ✅ Megoldás: Bármely pontból 1-et jobbra, 2-t felfelé lépve a grafikon egy újabb pontját kapjuk.",
+      "difficulty": "easy"
     },
     {
       "question": "Hány pontot kell minimum kiszámolnunk és ábrázolnunk egy egyenes megrajzolásához?",
@@ -33,7 +35,8 @@
         "c": "3"
       },
       "correct": "b",
-      "explanation": "A geometria alaptétele szerint két különböző ponton át pontosan egy egyenes fektethető. Tehát elég két pontot meghatároznunk a grafikonon, és egy vonalzóval összekötve őket megkapjuk a teljes függvénygrafikont. ✅ Megoldás: Minimum 2 pont szükséges."
+      "explanation": "A geometria alaptétele szerint két különböző ponton át pontosan egy egyenes fektethető. Tehát elég két pontot meghatároznunk a grafikonon, és egy vonalzóval összekötve őket megkapjuk a teljes függvénygrafikont. ✅ Megoldás: Minimum 2 pont szükséges.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy függvény grafikonja az y-tengelyt a 4-nél metszi. Melyik pont van biztosan a grafikonon?",
@@ -43,7 +46,8 @@
         "c": "(4; 4)"
       },
       "correct": "b",
-      "explanation": "Az y-tengelyen minden pont x koordinátája 0. Ha a metszet a 4-nél van, az azt jelenti, hogy az y koordináta 4. ✅ Megoldás: A (0; 4) pont van a grafikonon."
+      "explanation": "Az y-tengelyen minden pont x koordinátája 0. Ha a metszet a 4-nél van, az azt jelenti, hogy az y koordináta 4. ✅ Megoldás: A (0; 4) pont van a grafikonon.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a legegyszerűbb módja az f(x) = 5 függvény ábrázolásának?",
@@ -53,7 +57,8 @@
         "c": "az origón átmenő egyenest húzunk"
       },
       "correct": "a",
-      "explanation": "Ez egy konstans függvény, ami azt jelenti, hogy minden x-hez ugyanazt az y értéket, az 5-öt rendeli. A pontjai például (0;5), (1;5), (2;5). Ezek egy vízszintes egyenesen helyezkednek el. ✅ Megoldás: Egy vízszintes egyenest húzunk az y=5 magasságban."
+      "explanation": "Ez egy konstans függvény, ami azt jelenti, hogy minden x-hez ugyanazt az y értéket, az 5-öt rendeli. A pontjai például (0;5), (1;5), (2;5). Ezek egy vízszintes egyenesen helyezkednek el. ✅ Megoldás: Egy vízszintes egyenest húzunk az y=5 magasságban.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy lineáris függvény grafikonja átmegy a (0; -2) és (1; 1) pontokon. Mi a függvény hozzárendelési szabálya?",
@@ -63,7 +68,8 @@
         "c": "f(x) = -2x + 3"
       },
       "correct": "b",
-      "explanation": "Az y-tengelymetszet (b) a (0; -2) pontból leolvasható, tehát b=-2. A meredekség (a): 1-et jobbra léptünk (0-ról 1-re), és 3-at felfelé (-2-ről 1-re). Tehát a=3/1=3. A szabály: f(x) = 3x - 2. ✅ Megoldás: f(x) = 3x - 2."
+      "explanation": "Az y-tengelymetszet (b) a (0; -2) pontból leolvasható, tehát b=-2. A meredekség (a): 1-et jobbra léptünk (0-ról 1-re), és 3-at felfelé (-2-ről 1-re). Tehát a=3/1=3. A szabály: f(x) = 3x - 2. ✅ Megoldás: f(x) = 3x - 2.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik módszerrel lehet BÁRMILYEN függvényt ábrázolni?",
@@ -73,7 +79,8 @@
         "c": "értéktáblázat"
       },
       "correct": "c",
-      "explanation": "A meredekséges módszer csak lineáris függvényekre működik. A zérushely egyetlen pont, ami nem elég. Az értéktáblázat univerzális: kiválasztunk x értékeket, kiszámoljuk a hozzájuk tartozó y értékeket, és a kapott (x;y) pontokat ábrázoljuk. Ez minden függvénytípusnál alkalmazható. ✅ Megoldás: Értéktáblázattal."
+      "explanation": "A meredekséges módszer csak lineáris függvényekre működik. A zérushely egyetlen pont, ami nem elég. Az értéktáblázat univerzális: kiválasztunk x értékeket, kiszámoljuk a hozzájuk tartozó y értékeket, és a kapott (x;y) pontokat ábrázoljuk. Ez minden függvénytípusnál alkalmazható. ✅ Megoldás: Értéktáblázattal.",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan ábrázoljuk a P(-1; -4) pontot?",
@@ -83,7 +90,8 @@
         "c": "1-et le, 4-et balra"
       },
       "correct": "b",
-      "explanation": "Az első koordináta (x=-1) azt jelenti, hogy az origóból 1 egységet balra lépünk. A második koordináta (y=-4) azt jelenti, hogy onnan 4 egységet lefelé lépünk. ✅ Megoldás: 1-et balra, 4-et le."
+      "explanation": "Az első koordináta (x=-1) azt jelenti, hogy az origóból 1 egységet balra lépünk. A második koordináta (y=-4) azt jelenti, hogy onnan 4 egységet lefelé lépünk. ✅ Megoldás: 1-et balra, 4-et le.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen meredekségű az f(x) = 4 - x függvény?",
@@ -93,7 +101,8 @@
         "c": "1"
       },
       "correct": "b",
-      "explanation": "Írjuk át a függvényt ax+b sorrendbe: f(x) = -x + 4. Ezt felírhatjuk f(x) = (-1)*x + 4 alakban is. Az x együtthatója a meredekség. ✅ Megoldás: A meredekség -1."
+      "explanation": "Írjuk át a függvényt ax+b sorrendbe: f(x) = -x + 4. Ezt felírhatjuk f(x) = (-1)*x + 4 alakban is. Az x együtthatója a meredekség. ✅ Megoldás: A meredekség -1.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik pont van az f(x) = -2x + 7 grafikonján?",
@@ -103,7 +112,8 @@
         "c": "(2; 11)"
       },
       "correct": "a",
-      "explanation": "Helyettesítsük be a 3-at: f(3) = -2 * 3 + 7 = -6 + 7 = 1. A kapott y érték 1, ami megegyezik a pont y koordinátájával. ✅ Megoldás: A (3; 1) pont rajta van a grafikonon."
+      "explanation": "Helyettesítsük be a 3-at: f(3) = -2 * 3 + 7 = -6 + 7 = 1. A kapott y érték 1, ami megegyezik a pont y koordinátájával. ✅ Megoldás: A (3; 1) pont rajta van a grafikonon.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi az első lépés egy pont koordináta-rendszerben való leolvasásakor?",
@@ -113,7 +123,8 @@
         "c": "A távolság megmérése az origótól."
       },
       "correct": "a",
-      "explanation": "A pontok koordinátáit mindig (x; y) sorrendben adjuk meg. Ezért a leolvasást is mindig a vízszintes tengelyen kezdjük, hogy megtaláljuk az első, x koordinátát. ✅ Megoldás: A vízszintes (x) koordináta megkeresése."
+      "explanation": "A pontok koordinátáit mindig (x; y) sorrendben adjuk meg. Ezért a leolvasást is mindig a vízszintes tengelyen kezdjük, hogy megtaláljuk az első, x koordinátát. ✅ Megoldás: A vízszintes (x) koordináta megkeresése.",
+      "difficulty": "medium"
     },
     {
       "question": "Az f(x) = x grafikonja...",
@@ -123,7 +134,8 @@
         "c": "egy vízszintes egyenes."
       },
       "correct": "b",
-      "explanation": "A szabály szerint y=x. Néhány pontja: (0;0), (1;1), (2;2). Ezek a pontok egy olyan egyenesen vannak, ami áthalad az origón és 'felezi' az I. és III. síknegyedet. ✅ Megoldás: Egy, az origón átmenő, 45°-os egyenes."
+      "explanation": "A szabály szerint y=x. Néhány pontja: (0;0), (1;1), (2;2). Ezek a pontok egy olyan egyenesen vannak, ami áthalad az origón és 'felezi' az I. és III. síknegyedet. ✅ Megoldás: Egy, az origón átmenő, 45°-os egyenes.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a grafikonja az f(x) = -3 függvénynek?",
@@ -133,7 +145,8 @@
         "c": "Vízszintes egyenes az y=-3-nál."
       },
       "correct": "c",
-      "explanation": "Ez egy konstans függvény, minden x-hez a -3 értéket rendeli. A pontjai (0;-3), (1;-3), (2;-3) stb., amelyek egy vízszintes egyenest alkotnak az y tengely -3-as értékénél. ✅ Megoldás: Vízszintes egyenes az y=-3-nál."
+      "explanation": "Ez egy konstans függvény, minden x-hez a -3 értéket rendeli. A pontjai (0;-3), (1;-3), (2;-3) stb., amelyek egy vízszintes egyenest alkotnak az y tengely -3-as értékénél. ✅ Megoldás: Vízszintes egyenes az y=-3-nál.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy függvény meredeksége 0. Milyen a grafikonja?",
@@ -143,7 +156,8 @@
         "c": "45°-os egyenes"
       },
       "correct": "a",
-      "explanation": "A 0 meredekség azt jelenti, hogy a függvény se nem emelkedik, se nem süllyed. Ez egy konstans függvényt ír le, aminek a grafikonja mindig egy vízszintes egyenes. ✅ Megoldás: Vízszintes egyenes."
+      "explanation": "A 0 meredekség azt jelenti, hogy a függvény se nem emelkedik, se nem süllyed. Ez egy konstans függvényt ír le, aminek a grafikonja mindig egy vízszintes egyenes. ✅ Megoldás: Vízszintes egyenes.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy grafikonról leolvasod, hogy az y-tengelyt a -1-nél metszi, és 1-et jobbra lépve 2-t kell felfelé lépni. Mi a szabálya?",
@@ -153,7 +167,8 @@
         "c": "f(x) = x - 2"
       },
       "correct": "a",
-      "explanation": "Az y-tengelymetszet (b) a -1. A meredekség (a) az '1 jobbra, 2 fel' lépésből adódik: a = 2/1 = 2. A szabály f(x) = ax + b, tehát f(x) = 2x - 1. ✅ Megoldás: f(x) = 2x - 1."
+      "explanation": "Az y-tengelymetszet (b) a -1. A meredekség (a) az '1 jobbra, 2 fel' lépésből adódik: a = 2/1 = 2. A szabály f(x) = ax + b, tehát f(x) = 2x - 1. ✅ Megoldás: f(x) = 2x - 1.",
+      "difficulty": "medium"
     },
     {
       "question": "Hol helyezkedik el a P(0; 5) pont?",
@@ -163,7 +178,8 @@
         "c": "az origóban"
       },
       "correct": "b",
-      "explanation": "A pont x koordinátája 0. Ha az x koordináta nulla, a pont nem mozdul el sem jobbra, sem balra az origótól, tehát a függőleges (y) tengelyen van. ✅ Megoldás: A pont az y tengelyen van."
+      "explanation": "A pont x koordinátája 0. Ha az x koordináta nulla, a pont nem mozdul el sem jobbra, sem balra az origótól, tehát a függőleges (y) tengelyen van. ✅ Megoldás: A pont az y tengelyen van.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi az f(x) = -5x + 10 zérushelye?",
@@ -173,7 +189,8 @@
         "c": "x = -2"
       },
       "correct": "b",
-      "explanation": "A zérushelyhez megoldjuk az f(x) = 0 egyenletet: -5x + 10 = 0. Vonjunk ki 10-et: -5x = -10. Osszunk -5-tel: x = 2.  ✅ Megoldás: A zérushelye az x=2."
+      "explanation": "A zérushelyhez megoldjuk az f(x) = 0 egyenletet: -5x + 10 = 0. Vonjunk ki 10-et: -5x = -10. Osszunk -5-tel: x = 2.  ✅ Megoldás: A zérushelye az x=2.",
+      "difficulty": "hard"
     },
     {
       "question": "Hány pontot kell ábrázolni egy értéktáblázatból a biztos ábrázoláshoz?",
@@ -183,7 +200,8 @@
         "c": "mindig 5-öt"
       },
       "correct": "b",
-      "explanation": "Két pont egyértelműen meghatároz egy egyenest. A gyakorlatban érdemes egy harmadik pontot is kiszámolni és ábrázolni, hogy ellenőrizzük, nem számoltuk-e el magunkat. Ha a harmadik pont is ugyanarra az egyenesre esik, jól dolgoztunk. ✅ Megoldás: 2 pont elég, de 3 az ellenőrzés miatt javasolt."
+      "explanation": "Két pont egyértelműen meghatároz egy egyenest. A gyakorlatban érdemes egy harmadik pontot is kiszámolni és ábrázolni, hogy ellenőrizzük, nem számoltuk-e el magunkat. Ha a harmadik pont is ugyanarra az egyenesre esik, jól dolgoztunk. ✅ Megoldás: 2 pont elég, de 3 az ellenőrzés miatt javasolt.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik függvény metszi magasabban az y-tengelyt: f(x)=x+5 vagy g(x)=2x+3?",
@@ -193,7 +211,8 @@
         "c": "ugyanott metszik"
       },
       "correct": "a",
-      "explanation": "Az y-tengelymetszetet a 'b' paraméter értéke adja meg. Az f(x) esetében b=5, a g(x) esetében b=3. Mivel 5 > 3, az f(x) metszi magasabban az y-tengelyt.  ✅ Megoldás: Az f(x)."
+      "explanation": "Az y-tengelymetszetet a 'b' paraméter értéke adja meg. Az f(x) esetében b=5, a g(x) esetében b=3. Mivel 5 > 3, az f(x) metszi magasabban az y-tengelyt.  ✅ Megoldás: Az f(x).",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik függvény grafikonja párhuzamos az x-tengellyel?",
@@ -203,7 +222,8 @@
         "c": "f(x) = 4"
       },
       "correct": "c",
-      "explanation": "A vízszintes x-tengellyel párhuzamos egyenes szintén vízszintes. A vízszintes egyenesek a konstans függvények grafikonjai, ahol a meredekség 0. Az f(x)=4 egy ilyen függvény.  ✅ Megoldás: Az f(x) = 4."
+      "explanation": "A vízszintes x-tengellyel párhuzamos egyenes szintén vízszintes. A vízszintes egyenesek a konstans függvények grafikonjai, ahol a meredekség 0. Az f(x)=4 egy ilyen függvény.  ✅ Megoldás: Az f(x) = 4.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi az első koordináta (x) neve? (ismétlés)",
@@ -213,7 +233,8 @@
         "c": "koordináta"
       },
       "correct": "b",
-      "explanation": "Az első (x) koordinátát abszcisszának, a másodikat (y) ordinátának nevezzük. ✅ Megoldás: Az x-koordináta neve abszcissza."
+      "explanation": "Az első (x) koordinátát abszcisszának, a másodikat (y) ordinátának nevezzük. ✅ Megoldás: Az x-koordináta neve abszcissza.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi az f(x) = 2x-1 függvény zérushelye?",
@@ -223,7 +244,8 @@
         "c": "x = -1"
       },
       "correct": "a",
-      "explanation": "Zérushely: -1 = 2x-1 -> 0 = 2x -> x = 1/2. ✅ Megoldás: x = 1/2."
+      "explanation": "Zérushely: -1 = 2x-1 -> 0 = 2x -> x = 1/2. ✅ Megoldás: x = 1/2.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha a függvény meredeksége pozitív, akkor a grafikonja...",
@@ -233,7 +255,8 @@
         "c": "...vízszintes."
       },
       "correct": "a",
-      "explanation": "Ha a meredekség pozitív, a grafikon balról jobbra emelkedik. ✅ Megoldás: balról jobbra emelkedik."
+      "explanation": "Ha a meredekség pozitív, a grafikon balról jobbra emelkedik. ✅ Megoldás: balról jobbra emelkedik.",
+      "difficulty": "hard"
     }
   ]
 }

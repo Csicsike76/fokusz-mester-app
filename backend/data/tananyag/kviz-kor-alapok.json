@@ -13,7 +13,8 @@
         "c": "Sugár"
       },
       "correct": "c",
-      "explanation": "A sugár (jele: r) a kör középpontját és a körvonal bármely pontját összekötő szakasz. A hossza a kör egyik alapvető mérete."
+      "explanation": "A sugár (jele: r) a kör középpontját és a körvonal bármely pontját összekötő szakasz. A hossza a kör egyik alapvető mérete.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen kapcsolat van a kör sugara (r) és átmérője (d) között?",
@@ -23,7 +24,8 @@
         "c": "d = r²"
       },
       "correct": "a",
-      "explanation": "Az átmérő a kör leghosszabb húrja, ami áthalad a középponton. Hossza mindig pontosan kétszerese a sugár hosszának: d = 2r."
+      "explanation": "Az átmérő a kör leghosszabb húrja, ami áthalad a középponton. Hossza mindig pontosan kétszerese a sugár hosszának: d = 2r.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a neve a körvonal két pontját összekötő szakasznak?",
@@ -33,7 +35,8 @@
         "c": "Körív"
       },
       "correct": "b",
-      "explanation": "A húr definíció szerint egy olyan szakasz, amelynek mindkét végpontja a körvonalon van. A szelő egy egyenes, ami két pontban metszi a kört."
+      "explanation": "A húr definíció szerint egy olyan szakasz, amelynek mindkét végpontja a körvonalon van. A szelő egy egyenes, ami két pontban metszi a kört.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy egyenesnek és egy körnek egy közös pontja van. Hogy nevezzük ezt az egyenest?",
@@ -43,7 +46,8 @@
         "c": "Elkerülő"
       },
       "correct": "b",
-      "explanation": "Az érintő egy olyan egyenes, amelynek pontosan egy közös pontja van a körrel. Ezt a pontot érintési pontnak nevezzük."
+      "explanation": "Az érintő egy olyan egyenes, amelynek pontosan egy közös pontja van a körrel. Ezt a pontot érintési pontnak nevezzük.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a középponti szög?",
@@ -53,7 +57,8 @@
         "c": "A körön kívüli szög."
       },
       "correct": "b",
-      "explanation": "A középponti szög csúcsa mindig a kör középpontja. A két szára a kör két sugara, melyek a körvonalon végződnek."
+      "explanation": "A középponti szög csúcsa mindig a kör középpontja. A két szára a kör két sugara, melyek a körvonalon végződnek.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen kölcsönös helyzetben lehet két kör, ha pontosan egy közös pontjuk van?",
@@ -63,7 +68,8 @@
         "c": "Érintők"
       },
       "correct": "c",
-      "explanation": "Ha két körnek pontosan egy közös pontja van, akkor érintő köröknek nevezzük őket. Lehetnek külső vagy belső érintők."
+      "explanation": "Ha két körnek pontosan egy közös pontja van, akkor érintő köröknek nevezzük őket. Lehetnek külső vagy belső érintők.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a neve a körvonal egy darabjának?",
@@ -73,7 +79,8 @@
         "c": "Körív"
       },
       "correct": "c",
-      "explanation": "A körív a körvonal két pontja által meghatározott íves vonaldarab. A körszelet egy síkidom, amit egy húr és egy körív határol."
+      "explanation": "A körív a körvonal két pontja által meghatározott íves vonaldarab. A körszelet egy síkidom, amit egy húr és egy körív határol.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy 10 cm sugarú kör leghosszabb húrja milyen hosszú?",
@@ -83,7 +90,8 @@
         "c": "5 cm"
       },
       "correct": "b",
-      "explanation": "A kör leghosszabb húrja az átmérő. Mivel az átmérő a sugár kétszerese, a hossza 2 × 10 cm = 20 cm."
+      "explanation": "A kör leghosszabb húrja az átmérő. Mivel az átmérő a sugár kétszerese, a hossza 2 × 10 cm = 20 cm.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen kapcsolat van az érintő és az érintési pontba húzott sugár között?",
@@ -93,7 +101,8 @@
         "c": "Egybeesnek"
       },
       "correct": "a",
-      "explanation": "Alaptétel, hogy a kör érintője mindig merőleges az érintési pontba húzott sugárra. A bezárt szögük 90°."
+      "explanation": "Alaptétel, hogy a kör érintője mindig merőleges az érintési pontba húzott sugárra. A bezárt szögük 90°.",
+      "difficulty": "easy"
     },
     {
       "question": "Két körnek nincs közös pontja és egymáson kívül helyezkednek el. Hogy nevezzük őket?",
@@ -103,7 +112,8 @@
         "c": "Külső diszjunkt körök"
       },
       "correct": "c",
-      "explanation": "Ha két körnek nincs közös pontja, diszjunktak. Ha egyik sincs a másik belsejében, akkor külső diszjunkt körökről beszélünk."
+      "explanation": "Ha két körnek nincs közös pontja, diszjunktak. Ha egyik sincs a másik belsejében, akkor külső diszjunkt körökről beszélünk.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a neve annak a húrnak, amelyik átmegy a kör középpontján?",
@@ -113,7 +123,8 @@
         "c": "Középvonal"
       },
       "correct": "b",
-      "explanation": "A középponton áthaladó húr a kör átmérője. Ez egyben a leghosszabb húr is."
+      "explanation": "A középponton áthaladó húr a kör átmérője. Ez egyben a leghosszabb húr is.",
+      "difficulty": "medium"
     },
     {
       "question": "Két körnek közös a középpontja, de a sugaruk különböző. Hogy hívjuk őket?",
@@ -123,7 +134,8 @@
         "c": "Érintő körök"
       },
       "correct": "b",
-      "explanation": "A közös középpontú köröket koncentrikus köröknek nevezzük. Ilyen például egy céltábla."
+      "explanation": "A közös középpontú köröket koncentrikus köröknek nevezzük. Ilyen például egy céltábla.",
+      "difficulty": "medium"
     },
     {
       "question": "Hány közös pontja van egy szelőnek és egy körnek?",
@@ -133,7 +145,8 @@
         "c": "2"
       },
       "correct": "c",
-      "explanation": "A szelő egy olyan egyenes, amely 'átvágja' a kört, így definíció szerint két pontban metszi azt."
+      "explanation": "A szelő egy olyan egyenes, amely 'átvágja' a kört, így definíció szerint két pontban metszi azt.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a körlap?",
@@ -143,7 +156,8 @@
         "c": "A kör kerülete."
       },
       "correct": "b",
-      "explanation": "A körvonal a határvonal. A körlap (vagy körlemez) magában foglalja a körvonalat és az összes pontot, ami a belsejében van. Ennek van területe."
+      "explanation": "A körvonal a határvonal. A körlap (vagy körlemez) magában foglalja a körvonalat és az összes pontot, ami a belsejében van. Ennek van területe.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy 6 cm sugarú kör középpontjától 8 cm-re van egy pont. Hol helyezkedik el a pont?",
@@ -153,7 +167,8 @@
         "c": "A körön kívül"
       },
       "correct": "c",
-      "explanation": "Mivel a pont távolsága a középponttól (8 cm) nagyobb, mint a sugár (6 cm), a pont a kör külső tartományában van."
+      "explanation": "Mivel a pont távolsága a középponttól (8 cm) nagyobb, mint a sugár (6 cm), a pont a kör külső tartományában van.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy kör átmérője 14. Mekkora a sugara?",
@@ -163,7 +178,8 @@
         "c": "14"
       },
       "correct": "b",
-      "explanation": "A sugár az átmérő fele. r = d/2 = 14/2 = 7."
+      "explanation": "A sugár az átmérő fele. r = d/2 = 14/2 = 7.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik állítás HAMIS?",
@@ -173,7 +189,8 @@
         "c": "A körnek egyetlen középpontja van."
       },
       "correct": "b",
-      "explanation": "A körnek végtelen sok sugara és átmérője van (bármelyik irányban húzhatunk egyet), de középpontja csak egyetlen egy van."
+      "explanation": "A körnek végtelen sok sugara és átmérője van (bármelyik irányban húzhatunk egyet), de középpontja csak egyetlen egy van.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy körvonal 20 egység. Mekkora a leghosszabb húrja?",
@@ -183,7 +200,8 @@
         "c": "40"
       },
       "correct": "b",
-      "explanation": "A kör leghosszabb húrja maga az átmérő.  ✅ Megoldás: A leghosszabb húr 20 egység hosszú."
+      "explanation": "A kör leghosszabb húrja maga az átmérő.  ✅ Megoldás: A leghosszabb húr 20 egység hosszú.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a körív?",
@@ -193,7 +211,8 @@
         "c": "A kör sugara."
       },
       "correct": "b",
-      "explanation": "A körvonal a kör határvonala."
+      "explanation": "A körvonal a kör határvonala.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a neve annak a szögnek, melyet két sugár alkot?",
@@ -203,7 +222,8 @@
         "c": "Érintőszárú szög"
       },
       "correct": "b",
-      "explanation": "A középponti szög csúcsa a kör középpontja, szárai pedig a kör sugarai."
+      "explanation": "A középponti szög csúcsa a kör középpontja, szárai pedig a kör sugarai.",
+      "difficulty": "hard"
     },
     {
       "question": "Két kör sugara 5 cm és 8 cm. A középpontjaik távolsága 13 cm. Milyen helyzetűek?",
@@ -213,7 +233,8 @@
         "c": "Belső érintők"
       },
       "correct": "b",
-      "explanation": "Ha a középpontok távolsága (d) megegyezik a sugarak összegével (r₁+r₂), a két kör kívülről érinti egymást. Itt 5+8=13, tehát külső érintők."
+      "explanation": "Ha a középpontok távolsága (d) megegyezik a sugarak összegével (r₁+r₂), a két kör kívülről érinti egymást. Itt 5+8=13, tehát külső érintők.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a félkörív?",
@@ -223,7 +244,8 @@
         "c": "Az átmérő által meghatározott körív."
       },
       "correct": "c",
-      "explanation": "Az átmérő a kört két egyenlő ívre, két félkörívre osztja. Mindkettő hossza a teljes kerület fele, és a fokmértéke 180°."
+      "explanation": "Az átmérő a kört két egyenlő ívre, két félkörívre osztja. Mindkettő hossza a teljes kerület fele, és a fokmértéke 180°.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy 10 cm átmérőjű körben van egy 10 cm hosszú húr. Mi ez a húr?",
@@ -233,7 +255,8 @@
         "c": "Érintő"
       },
       "correct": "b",
-      "explanation": "Mivel a húr hossza megegyezik az átmérő hosszával, ez a húr maga az átmérő."
+      "explanation": "Mivel a húr hossza megegyezik az átmérő hosszával, ez a húr maga az átmérő.",
+      "difficulty": "hard"
     },
     {
       "question": "Hány közös pontja lehet két különböző körnek?",
@@ -243,7 +266,8 @@
         "c": "Végtelen sok"
       },
       "correct": "a",
-      "explanation": "Két különböző körnek lehet 0 (diszjunkt), 1 (érintő) vagy 2 (metsző) közös pontja. Végtelen sok közös pontjuk csak akkor van, ha a két kör egybeesik."
+      "explanation": "Két különböző körnek lehet 0 (diszjunkt), 1 (érintő) vagy 2 (metsző) közös pontja. Végtelen sok közös pontjuk csak akkor van, ha a két kör egybeesik.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik állítás HAMIS?",
@@ -253,7 +277,8 @@
         "c": "A körnek egyetlen középpontja van."
       },
       "correct": "b",
-      "explanation": "A körnek végtelen sok sugara és átmérője van (bármelyik irányban húzhatunk egyet), de középpontja csak egyetlen egy van."
+      "explanation": "A körnek végtelen sok sugara és átmérője van (bármelyik irányban húzhatunk egyet), de középpontja csak egyetlen egy van.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a körcikk?",
@@ -263,7 +288,8 @@
         "c": "Két koncentrikus kör közötti terület."
       },
       "correct": "b",
-      "explanation": "A körcikk egy 'tortaszelethez' hasonló alakzat, amit a kör középpontjából kiinduló két sugár és a végpontjaik közötti körív határol."
+      "explanation": "A körcikk egy 'tortaszelethez' hasonló alakzat, amit a kör középpontjából kiinduló két sugár és a végpontjaik közötti körív határol.",
+      "difficulty": "hard"
     }
   ]
 }

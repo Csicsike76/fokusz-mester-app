@@ -13,7 +13,8 @@
         "c": "Alakjuk és méretük is megegyezik, fedésbe hozhatók."
       },
       "correct": "c",
-      "explanation": "Két síkidom akkor kongruens (egybevágó), ha létezik olyan távolságtartó transzformáció (eltolás, forgatás, tükrözés), ami az egyiket a másikba viszi. Ez azt jelenti, hogy tökéletesen 'ráhelyezhetők' egymásra."
+      "explanation": "Két síkidom akkor kongruens (egybevágó), ha létezik olyan távolságtartó transzformáció (eltolás, forgatás, tükrözés), ami az egyiket a másikba viszi. Ez azt jelenti, hogy tökéletesen 'ráhelyezhetők' egymásra.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik NEM az általános háromszögek egybevágóságának alapesete?",
@@ -23,7 +24,8 @@
         "c": "Szög-Szög-Szög (Sz.Sz.Sz.)"
       },
       "correct": "c",
-      "explanation": "A Sz.Sz.Sz. a hasonlóság alapesete. Ha háromszögek szögei megegyeznek, csak annyit tudunk, hogy hasonlók, de nem feltétlenül egybevágóak. Az egybevágósághoz legalább egy oldalegyezés is szükséges."
+      "explanation": "A Sz.Sz.Sz. a hasonlóság alapesete. Ha háromszögek szögei megegyeznek, csak annyit tudunk, hogy hasonlók, de nem feltétlenül egybevágóak. Az egybevágósághoz legalább egy oldalegyezés is szükséges.",
+      "difficulty": "easy"
     },
     {
       "question": "Két háromszögben egyenlő két-két oldal, és az általuk közbezárt szög. Milyen alapeset alapján kongruensek?",
@@ -33,7 +35,8 @@
         "c": "O.O.O."
       },
       "correct": "b",
-      "explanation": "Ez az Oldal-Szög-Oldal (O.Sz.O.) egybevágósági alapeset. A tétel kimondja, hogy ha két háromszögben két-két oldal hossza és az ezen oldalak által közbezárt szög megegyezik, akkor a két háromszög egybevágó."
+      "explanation": "Ez az Oldal-Szög-Oldal (O.Sz.O.) egybevágósági alapeset. A tétel kimondja, hogy ha két háromszögben két-két oldal hossza és az ezen oldalak által közbezárt szög megegyezik, akkor a két háromszög egybevágó.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy ABC háromszögben AB=5, BC=7, ABC∢=40°. Egy MNP háromszögben MN=5, NP=7, MNP∢=40°. Mi a két háromszög viszonya?",
@@ -43,7 +46,8 @@
         "c": "Nem lehet eldönteni."
       },
       "correct": "b",
-      "explanation": "Megadtak két-két oldalt (5 és 7) és a közbezárt szöget (40°), amelyek mindkét háromszögben megegyeznek. Az Oldal-Szög-Oldal alapeset szerint a két háromszög egybevágó."
+      "explanation": "Megadtak két-két oldalt (5 és 7) és a közbezárt szöget (40°), amelyek mindkét háromszögben megegyeznek. Az Oldal-Szög-Oldal alapeset szerint a két háromszög egybevágó.",
+      "difficulty": "easy"
     },
     {
       "question": "Két háromszögben megegyezik egy-egy oldal, és a rajta fekvő két-két szög. Milyen alapeset alapján kongruensek?",
@@ -53,7 +57,8 @@
         "c": "Sz.Sz.O."
       },
       "correct": "a",
-      "explanation": "Ez a Szög-Oldal-Szög (Sz.O.Sz.) egybevágósági alapeset. Ha egy-egy oldaluk és a rajta fekvő két szögük páronként megegyezik, a két háromszög egybevágó."
+      "explanation": "Ez a Szög-Oldal-Szög (Sz.O.Sz.) egybevágósági alapeset. Ha egy-egy oldaluk és a rajta fekvő két szögük páronként megegyezik, a két háromszög egybevágó.",
+      "difficulty": "easy"
     },
     {
       "question": "Az ABC∆ ≅ DEF∆ jelölés mit jelent?",
@@ -63,7 +68,8 @@
         "c": "A két háromszög kerülete egyenlő."
       },
       "correct": "b",
-      "explanation": "A ≅ szimbólum a kongruencia (egybevágóság) jele a geometriában."
+      "explanation": "A ≅ szimbólum a kongruencia (egybevágóság) jele a geometriában.",
+      "difficulty": "easy"
     },
     {
       "question": "Két derékszögű háromszög egybevágó, ha...",
@@ -73,7 +79,8 @@
         "c": "...átfogójuk egyenlő."
       },
       "correct": "b",
-      "explanation": "Ha a két befogó páronként egyenlő, akkor a köztük lévő szög (a derékszög) is egyenlő. Így az O.Sz.O. tétel szerint egybevágóak. Ezt B.B. (Befogó-Befogó) esetnek is hívjuk."
+      "explanation": "Ha a két befogó páronként egyenlő, akkor a köztük lévő szög (a derékszög) is egyenlő. Így az O.Sz.O. tétel szerint egybevágóak. Ezt B.B. (Befogó-Befogó) esetnek is hívjuk.",
+      "difficulty": "easy"
     },
     {
       "question": "Miért fontos a megfelelő elemek sorrendje az ABC∆ ≅ MNP∆ jelölésben?",
@@ -83,7 +90,8 @@
         "c": "Az ábécé sorrendet jelöli."
       },
       "correct": "a",
-      "explanation": "A sorrend kritikus. Az ABC∆ ≅ MNP∆ azt jelenti, hogy A∢=M∢, B∢=N∢, C∢=P∢, valamint AB=MN, BC=NP, AC=MP. Egy másik sorrend (pl. ABC∆ ≅ NMP∆) más megfeleltetést jelentene."
+      "explanation": "A sorrend kritikus. Az ABC∆ ≅ MNP∆ azt jelenti, hogy A∢=M∢, B∢=N∢, C∢=P∢, valamint AB=MN, BC=NP, AC=MP. Egy másik sorrend (pl. ABC∆ ≅ NMP∆) más megfeleltetést jelentene.",
+      "difficulty": "easy"
     },
     {
       "question": "Két háromszög mindhárom oldala páronként egyenlő. Melyik tétel alapján kongruensek?",
@@ -93,7 +101,8 @@
         "c": "Sz.O.Sz."
       },
       "correct": "b",
-      "explanation": "Ez az Oldal-Oldal-Oldal (O.O.O.) egybevágósági alapeset. Ha három oldal hossza adott, abból (ha teljesül a háromszög-egyenlőtlenség) csak egyféle háromszög szerkeszthető."
+      "explanation": "Ez az Oldal-Oldal-Oldal (O.O.O.) egybevágósági alapeset. Ha három oldal hossza adott, abból (ha teljesül a háromszög-egyenlőtlenség) csak egyféle háromszög szerkeszthető.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha két háromszög kongruens, akkor a területeik...",
@@ -103,7 +112,8 @@
         "c": "...lehetnek különbözőek."
       },
       "correct": "a",
-      "explanation": "Mivel a kongruens háromszögek méretre és alakra is megegyeznek, minden megfelelő méretük, így a kerületük és a területük is egyenlő."
+      "explanation": "Mivel a kongruens háromszögek méretre és alakra is megegyeznek, minden megfelelő méretük, így a kerületük és a területük is egyenlő.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik feltétel NEM elegendő két derékszögű háromszög egybevágóságához?",
@@ -113,7 +123,8 @@
         "c": "Mindhárom szögük egyenlő."
       },
       "correct": "c",
-      "explanation": "A szögek egyenlősége csak a hasonlóságot garantálja, az egybevágósághoz legalább egy oldalegyezés is kell. Az 'a' (Á.B.) és 'b' (Á.Sz.) a derékszögű háromszögek speciális egybevágósági esetei."
+      "explanation": "A szögek egyenlősége csak a hasonlóságot garantálja, az egybevágósághoz legalább egy oldalegyezés is kell. Az 'a' (Á.B.) és 'b' (Á.Sz.) a derékszögű háromszögek speciális egybevágósági esetei.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy háromszög oldalai 5, 6, 7. Egy másiké 7, 5, 6. Kongruensek-e?",
@@ -123,7 +134,8 @@
         "c": "Csak ha van derékszögük."
       },
       "correct": "a",
-      "explanation": "Igen. Az O.O.O. tételnél elég, ha a két háromszög oldalainak halmaza megegyezik, hiszen a megfelelő oldalakat párosítani tudjuk (5-5, 6-6, 7-7). Az oldalak páronként egyenlőek, tehát a háromszögek kongruensek."
+      "explanation": "Igen. Az O.O.O. tételnél elég, ha a két háromszög oldalainak halmaza megegyezik, hiszen a megfelelő oldalakat párosítani tudjuk (5-5, 6-6, 7-7). Az oldalak páronként egyenlőek, tehát a háromszögek kongruensek.",
+      "difficulty": "medium"
     },
     {
       "question": "Az O-Sz-O alapesetben a szögnek...",
@@ -133,7 +145,8 @@
         "c": "...a nagyobbik oldallal szemközti szögnek kell lennie."
       },
       "correct": "b",
-      "explanation": "Az Oldal-Szög-Oldal tétel csak akkor érvényes, ha a két oldal által KÖZBEZÁRT szög egyezik meg. Máskülönben az eset kétértelmű lehet (O.O.Sz. eset)."
+      "explanation": "Az Oldal-Szög-Oldal tétel csak akkor érvényes, ha a két oldal által KÖZBEZÁRT szög egyezik meg. Máskülönben az eset kétértelmű lehet (O.O.Sz. eset).",
+      "difficulty": "medium"
     },
     {
       "question": "Egy egyenlő szárú háromszög alapja 10, a szárai 8. Egy másik egyenlő szárú háromszög alapja 10, szárai 8. Kongruensek?",
@@ -143,7 +156,8 @@
         "c": "Igen, az O.Sz.O. tétel miatt."
       },
       "correct": "b",
-      "explanation": "Mivel mindhárom oldaluk páronként megegyezik (8=8, 8=8, 10=10), az O.O.O. tétel szerint a két háromszög kongruens."
+      "explanation": "Mivel mindhárom oldaluk páronként megegyezik (8=8, 8=8, 10=10), az O.O.O. tétel szerint a két háromszög kongruens.",
+      "difficulty": "medium"
     },
     {
       "question": "Milyen transzformációk visznek át egy alakzatot kongruens alakzatba?",
@@ -153,7 +167,8 @@
         "c": "Eltolás, forgatás és tükrözés."
       },
       "correct": "c",
-      "explanation": "Azokat a transzformációkat, amelyek a távolságot megtartják (azaz az alakzat méretét nem változtatják), egybevágósági transzformációknak nevezzük. Ilyen az eltolás, a forgatás és a tengelyes (vagy középpontos) tükrözés."
+      "explanation": "Azokat a transzformációkat, amelyek a távolságot megtartják (azaz az alakzat méretét nem változtatják), egybevágósági transzformációknak nevezzük. Ilyen az eltolás, a forgatás és a tengelyes (vagy középpontos) tükrözés.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha ABC∆ ≅ XYZ∆, akkor melyik állítás igaz?",
@@ -163,7 +178,8 @@
         "c": "AB = XZ"
       },
       "correct": "b",
-      "explanation": "A kongruencia jelölésében a megfelelő csúcsok sorrendje számít. A BC oldalnak (2. és 3. csúcs) az YZ oldal (2. és 3. csúcs) felel meg, tehát ezek egyenlő hosszúak."
+      "explanation": "A kongruencia jelölésében a megfelelő csúcsok sorrendje számít. A BC oldalnak (2. és 3. csúcs) az YZ oldal (2. és 3. csúcs) felel meg, tehát ezek egyenlő hosszúak.",
+      "difficulty": "medium"
     },
     {
       "question": "Két háromszögben két-két szöge és a nagyobbik szöggel szemközti oldala egyenlő. Kongruensek?",
@@ -173,7 +189,8 @@
         "c": "Igen, mert hasonlók és van egyenlő oldaluk."
       },
       "correct": "a",
-      "explanation": "Ez a Szög-Szög-Oldal (Sz.Sz.O.) esete. Ha két szög és a nagyobbikkal szemközti oldal egyenlő, az egyértelműen meghatározza a háromszöget, tehát kongruensek."
+      "explanation": "Ez a Szög-Szög-Oldal (Sz.Sz.O.) esete. Ha két szög és a nagyobbikkal szemközti oldal egyenlő, az egyértelműen meghatározza a háromszöget, tehát kongruensek.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy rombuszt az egyik átlója két háromszögre bont. Milyenek ezek a háromszögek?",
@@ -183,7 +200,8 @@
         "c": "Kongruensek"
       },
       "correct": "c",
-      "explanation": "A rombusz négy oldala egyenlő. Az átló közös. Az O.O.O. tétel alapján a két háromszög kongruens. (Mivel egyenlő szárúak is, ez az Sz-O-Sz tételből is következik)."
+      "explanation": "A rombusz négy oldala egyenlő. Az átló közös. Az O.O.O. tétel alapján a két háromszög kongruens. (Mivel egyenlő szárúak is, ez az Sz-O-Sz tételből is következik).",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik állítás igaz a derékszögű háromszögekre?",
@@ -193,7 +211,8 @@
         "c": "Mindkettő igaz."
       },
       "correct": "c",
-      "explanation": "Mindkettő a derékszögű háromszögek speciális egybevágósági esete. Az Á.Sz. a Sz.O.Sz., az Á.B. pedig az O.O.Sz. esetből vezethető le a Pitagorasz-tétel segítségével."
+      "explanation": "Mindkettő a derékszögű háromszögek speciális egybevágósági esete. Az Á.Sz. a Sz.O.Sz., az Á.B. pedig az O.O.Sz. esetből vezethető le a Pitagorasz-tétel segítségével.",
+      "difficulty": "hard"
     },
     {
       "question": "Miért NEM elég két oldal egyezése az egybevágósághoz?",
@@ -203,7 +222,8 @@
         "c": "Mert a harmadik oldal és a szögek is megváltozhatnak."
       },
       "correct": "c",
-      "explanation": "Ha csak két oldal adott, a harmadik oldal és a szögek is 'mozoghatnak'. Gondolj két egymáshoz csuklósan rögzített pálcára: a végpontjaik távolsága és a szögek is változtathatóak."
+      "explanation": "Ha csak két oldal adott, a harmadik oldal és a szögek is 'mozoghatnak'. Gondolj két egymáshoz csuklósan rögzített pálcára: a végpontjaik távolsága és a szögek is változtathatóak.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy ABC∆ és egy DEF∆ háromszögben AB=DE, BC=EF, és C∢=F∢. Biztosan kongruensek?",
@@ -213,7 +233,8 @@
         "c": "Igen, mert három adat megegyezik."
       },
       "correct": "b",
-      "explanation": "Ez az Oldal-Oldal-Szög eset, ami nem egybevágósági alapeset. A szögnek a két adott oldal által KÖZBEZÁRT szögnek kellene lennie (B∢=E∢) az O.Sz.O. tételhez."
+      "explanation": "Ez az Oldal-Oldal-Szög eset, ami nem egybevágósági alapeset. A szögnek a két adott oldal által KÖZBEZÁRT szögnek kellene lennie (B∢=E∢) az O.Sz.O. tételhez.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha két háromszög kongruens, akkor a kerületük...",
@@ -223,7 +244,8 @@
         "c": "...aránya 2."
       },
       "correct": "a",
-      "explanation": "Mivel a kongruens háromszögek megfelelő oldalai páronként egyenlő hosszúak, az oldalak összegéből számolt kerületük is szükségszerűen megegyezik."
+      "explanation": "Mivel a kongruens háromszögek megfelelő oldalai páronként egyenlő hosszúak, az oldalak összegéből számolt kerületük is szükségszerűen megegyezik.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy paralelogrammát az egyik átlója két háromszögre bont. Melyik tétel alapján kongruensek?",
@@ -233,7 +255,8 @@
         "c": "O.Sz.O."
       },
       "correct": "b",
-      "explanation": "A paralelogramma szemközti oldalai egyenlőek (a=c, b=d), az átló pedig közös. Így a két háromszögnek mindhárom oldala páronként egyenlő, tehát az O.O.O. tétel szerint kongruensek."
+      "explanation": "A paralelogramma szemközti oldalai egyenlőek (a=c, b=d), az átló pedig közös. Így a két háromszögnek mindhárom oldala páronként egyenlő, tehát az O.O.O. tétel szerint kongruensek.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a 'kongruencia' szó magyar megfelelője?",
@@ -243,7 +266,8 @@
         "c": "Egybevágóság"
       },
       "correct": "c",
-      "explanation": "A 'kongruens' latin eredetű szó, a magyar nyelvben az 'egybevágó' kifejezést használjuk rá, ami szemléletesen utal arra, hogy a két alakzat fedésbe hozható."
+      "explanation": "A 'kongruens' latin eredetű szó, a magyar nyelvben az 'egybevágó' kifejezést használjuk rá, ami szemléletesen utal arra, hogy a két alakzat fedésbe hozható.",
+      "difficulty": "hard"
     }
   ]
 }

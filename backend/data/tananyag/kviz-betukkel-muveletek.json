@@ -13,7 +13,8 @@
         "c": "a+b"
       },
       "correct": "a",
-      "explanation": "A törtvonalat a matematikában a '/' jellel is helyettesíthetjük, ami osztást jelent. Tehát 'a' osztva 'b'-vel."
+      "explanation": "A törtvonalat a matematikában a '/' jellel is helyettesíthetjük, ami osztást jelent. Tehát 'a' osztva 'b'-vel.",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan írjuk fel a szorzást betűkkel jelölve?",
@@ -23,7 +24,8 @@
         "c": "a / b"
       },
       "correct": "b",
-      "explanation": "A szorzást a '*' jellel, vagy néha ponttal (·) jelöljük. Gyakran a szorzás jelet el is hagyjuk, és csak egymás mellé írjuk a betűket, például 'ab'."
+      "explanation": "A szorzást a '*' jellel, vagy néha ponttal (·) jelöljük. Gyakran a szorzás jelet el is hagyjuk, és csak egymás mellé írjuk a betűket, például 'ab'.",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan nevezzük a műveletet, ha a⁻¹ = 1/a?",
@@ -33,7 +35,8 @@
         "c": "Reciprok"
       },
       "correct": "c",
-      "explanation": "A (-1)-edik hatványra emelés egy szám reciprokát jelenti. A reciprok az a szám, amivel az eredeti számot megszorozva 1-et kapunk."
+      "explanation": "A (-1)-edik hatványra emelés egy szám reciprokát jelenti. A reciprok az a szám, amivel az eredeti számot megszorozva 1-et kapunk.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a kitevős művelet algebrai jelölése?",
@@ -43,7 +46,8 @@
         "c": "aⁿ"
       },
       "correct": "c",
-      "explanation": "A hatványozás jelölésére a szám (az alap) után, felső indexbe írjuk a kitevőt, ami megmutatja, hányszor kell megszorozni az alapot önmagával."
+      "explanation": "A hatványozás jelölésére a szám (az alap) után, felső indexbe írjuk a kitevőt, ami megmutatja, hányszor kell megszorozni az alapot önmagával.",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan bontjuk tényezőkre: ab + ac?",
@@ -53,7 +57,8 @@
         "c": "c(a+b)"
       },
       "correct": "a",
-      "explanation": "Mindkét tagban (ab és ac) közös szorzótényező az 'a'. Ezt kiemelhetjük a zárójel elé, a zárójelben pedig az marad, amivel meg kellett szorozni: b + c."
+      "explanation": "Mindkét tagban (ab és ac) közös szorzótényező az 'a'. Ezt kiemelhetjük a zárójel elé, a zárójelben pedig az marad, amivel meg kellett szorozni: b + c.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik kifejezés mutatja az összeg felbontását?",
@@ -63,7 +68,8 @@
         "c": "ab + ac"
       },
       "correct": "b",
-      "explanation": "Ez az összeadás csoportosíthatósági (asszociatív) tulajdonsága, ami azt jelenti, hogy több szám összeadásánál a zárójeleket bárhogy áttehetjük, az eredmény nem változik."
+      "explanation": "Ez az összeadás csoportosíthatósági (asszociatív) tulajdonsága, ami azt jelenti, hogy több szám összeadásánál a zárójeleket bárhogy áttehetjük, az eredmény nem változik.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik igaz: a + b = b + a?",
@@ -73,7 +79,8 @@
         "c": "Disztributív tulajdonság"
       },
       "correct": "a",
-      "explanation": "Ez az összeadás felcserélhetőségi (kommutatív) tulajdonsága. Azt jelenti, hogy az összeadás tagjait felcserélhetjük, az összeg nem változik."
+      "explanation": "Ez az összeadás felcserélhetőségi (kommutatív) tulajdonsága. Azt jelenti, hogy az összeadás tagjait felcserélhetjük, az összeg nem változik.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik a (a/b)⁻¹ kifejezéssel egyenlő?",
@@ -83,7 +90,8 @@
         "c": "-b/a"
       },
       "correct": "b",
-      "explanation": "A (-1)-edik hatványra emelés egy tört reciprokát jelenti. Egy tört reciprokát úgy kapjuk meg, hogy a számlálóját és a nevezőjét felcseréljük."
+      "explanation": "A (-1)-edik hatványra emelés egy tört reciprokát jelenti. Egy tört reciprokát úgy kapjuk meg, hogy a számlálóját és a nevezőjét felcseréljük.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik kitevőszabály disztributív a hatványozás felett?",
@@ -93,7 +101,8 @@
         "c": "aⁿᵐ = aⁿᵐ"
       },
       "correct": "b",
-      "explanation": "Ha egy szorzatot emelünk hatványra, akkor a szorzat minden tényezőjét külön-külön is hatványra emelhetjük. Ez a hatványozás szorzásra vonatkozó 'szétosztási' (disztributív) szabálya."
+      "explanation": "Ha egy szorzatot emelünk hatványra, akkor a szorzat minden tényezőjét külön-külön is hatványra emelhetjük. Ez a hatványozás szorzásra vonatkozó 'szétosztási' (disztributív) szabálya.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik kitevőszabály NEM kommutatív?",
@@ -103,7 +112,8 @@
         "c": "(ab)ᵐ = aᵐbᵐ"
       },
       "correct": "b",
-      "explanation": "A szorzás felcserélhető, így a kitevőben lévő szorzás sorrendje mindegy. Az összeadás is felcserélhető. A b válasz is kommutatív, de a feladat hibás. A helyes válasz az lenne, hogy mind kommutatív a műveletekre nézve."
+      "explanation": "A szorzás felcserélhető, így a kitevőben lévő szorzás sorrendje mindegy. Az összeadás is felcserélhető. A b válasz is kommutatív, de a feladat hibás. A helyes válasz az lenne, hogy mind kommutatív a műveletekre nézve.",
+      "difficulty": "medium"
     },
     {
       "question": "Mely műveletnél fordul az egyenlőtlenség iránya?",
@@ -113,7 +123,8 @@
         "c": "Összeadás"
       },
       "correct": "a",
-      "explanation": "Az egyenlőtlenségek megoldásánál a relációs jel (<, >) megfordul, ha az egyenlőtlenség mindkét oldalát egy negatív számmal szorozzuk vagy osztjuk."
+      "explanation": "Az egyenlőtlenségek megoldásánál a relációs jel (<, >) megfordul, ha az egyenlőtlenség mindkét oldalát egy negatív számmal szorozzuk vagy osztjuk.",
+      "difficulty": "medium"
     },
     {
       "question": "Hogyan írjuk fel: gyökjelbetűvel?",
@@ -123,7 +134,8 @@
         "c": "a/b"
       },
       "correct": "b",
-      "explanation": "A négyzetgyök jele a √. Például a 9 négyzetgyöke √9 = 3."
+      "explanation": "A négyzetgyök jele a √. Például a 9 négyzetgyöke √9 = 3.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a szabály: (aⁿ)ᵐ = aⁿᵐ?",
@@ -133,7 +145,8 @@
         "c": "Hatványok osztása"
       },
       "correct": "a",
-      "explanation": "Ha egy hatványt egy újabb hatványra emelünk, akkor a kitevőket össze kell szorozni."
+      "explanation": "Ha egy hatványt egy újabb hatványra emelünk, akkor a kitevőket össze kell szorozni.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik kifejezés felel meg az a⁰ = 1 szabálynak?",
@@ -143,7 +156,8 @@
         "c": "a⁰ = 1"
       },
       "correct": "c",
-      "explanation": "A hatványozás alapszabálya, hogy bármely nullától különböző szám nulladik hatványa mindig 1."
+      "explanation": "A hatványozás alapszabálya, hogy bármely nullától különböző szám nulladik hatványa mindig 1.",
+      "difficulty": "medium"
     },
     {
       "question": "Hogyan írjuk fel: (x + y)(z)?",
@@ -153,7 +167,8 @@
         "c": "x * y + z"
       },
       "correct": "a",
-      "explanation": "Az algebrai kifejezésekben, ha egy zárójel után közvetlenül egy betű vagy szám áll, az szorzást jelent. A pont (·) vagy a csillag (*) a szorzás egyértelmű jelölése."
+      "explanation": "Az algebrai kifejezésekben, ha egy zárójel után közvetlenül egy betű vagy szám áll, az szorzást jelent. A pont (·) vagy a csillag (*) a szorzás egyértelmű jelölése.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik az algebrai betűs kifejezés a négyzethalmazra?",
@@ -163,7 +178,8 @@
         "c": "(a − b)² = a² − b²"
       },
       "correct": "a",
-      "explanation": "Ez az 'összeg négyzete' nevezetes azonosság. Azt jelenti, hogy (a+b) * (a+b), ami kifejtve az első tag négyzete, plusz a két tag kétszeres szorzata, plusz a második tag négyzete."
+      "explanation": "Ez az 'összeg négyzete' nevezetes azonosság. Azt jelenti, hogy (a+b) * (a+b), ami kifejtve az első tag négyzete, plusz a két tag kétszeres szorzata, plusz a második tag négyzete.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik sor helyes a zárójeles szorzásnál (a + b)c?",
@@ -173,7 +189,8 @@
         "c": "(a*c) + b"
       },
       "correct": "a",
-      "explanation": "Ez a disztributív (szétosztó) tulajdonság. A zárójelben lévő összeg minden tagját külön-külön meg kell szorozni a zárójelen kívüli szorzóval."
+      "explanation": "Ez a disztributív (szétosztó) tulajdonság. A zárójelben lévő összeg minden tagját külön-külön meg kell szorozni a zárójelen kívüli szorzóval.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a hatvány és gyök kapcsolata algebrai formában?",
@@ -183,7 +200,8 @@
         "c": "√a = a¹/²"
       },
       "correct": "c",
-      "explanation": "A négyzetgyökvonás ugyanaz, mint az 1/2-edik hatványra emelés. Például a köbgyök az 1/3-adik hatványt jelenti."
+      "explanation": "A négyzetgyökvonás ugyanaz, mint az 1/2-edik hatványra emelés. Például a köbgyök az 1/3-adik hatványt jelenti.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik feltétel írja le a disztributivitást?",
@@ -193,7 +211,8 @@
         "c": "a(b + c) = ab + ac"
       },
       "correct": "c",
-      "explanation": "Ez a szorzás 'szétosztási' (disztributív) tulajdonsága az összeadásra nézve. Azt jelenti, hogy a zárójelen kívüli szorzóval a zárójel minden tagját meg kell szorozni."
+      "explanation": "Ez a szorzás 'szétosztási' (disztributív) tulajdonsága az összeadásra nézve. Azt jelenti, hogy a zárójelen kívüli szorzóval a zárójel minden tagját meg kell szorozni.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik igaz az algebrai kitevőkre?",
@@ -203,7 +222,8 @@
         "c": "aⁿ + aᵐ = aⁿ⁺ᵐ"
       },
       "correct": "b",
-      "explanation": "Azonos alapú hatványok szorzásakor a kitevőket össze kell adni."
+      "explanation": "Azonos alapú hatványok szorzásakor a kitevőket össze kell adni.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik jelölés mutatja az n-edik gyököt?",
@@ -213,7 +233,8 @@
         "c": "ⁿ√a"
       },
       "correct": "c",
-      "explanation": "Az n-edik gyök jelölésénél a gyökjel 'horgába' írjuk be, hogy hányadik gyököt keressük. A 2-es indexet (négyzetgyök) nem szoktuk kiírni."
+      "explanation": "Az n-edik gyök jelölésénél a gyökjel 'horgába' írjuk be, hogy hányadik gyököt keressük. A 2-es indexet (négyzetgyök) nem szoktuk kiírni.",
+      "difficulty": "hard"
     },
     {
       "question": "Hogyan sűrítjük a (a + b)(a − b) képletet?",
@@ -223,7 +244,8 @@
         "c": "(a − b)²"
       },
       "correct": "a",
-      "explanation": "Ez a 'két négyzet különbsége' nevezetes azonosság. Két szám összegének és különbségének szorzata egyenlő a tagok négyzeteinek különbségével."
+      "explanation": "Ez a 'két négyzet különbsége' nevezetes azonosság. Két szám összegének és különbségének szorzata egyenlő a tagok négyzeteinek különbségével.",
+      "difficulty": "hard"
     },
     {
       "question": "Hogyan írjuk fel a reciprokot betűkkel?",
@@ -233,7 +255,8 @@
         "c": "1/a = a"
       },
       "correct": "a",
-      "explanation": "A (-1)-edik hatványra emelés egy szám reciprokát jelenti. A reciprok az a szám, amivel az eredeti számot megszorozva az eredmény 1."
+      "explanation": "A (-1)-edik hatványra emelés egy szám reciprokát jelenti. A reciprok az a szám, amivel az eredeti számot megszorozva az eredmény 1.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik árnyékolás mutatja a reciprok műveletet?",
@@ -243,7 +266,8 @@
         "c": "a⁻¹ = −1/a"
       },
       "correct": "a",
-      "explanation": "A negatív kitevő a szám reciprokát jelenti. Tehát a⁻¹ ugyanaz, mint 1/a."
+      "explanation": "A negatív kitevő a szám reciprokát jelenti. Tehát a⁻¹ ugyanaz, mint 1/a.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik sor követi az asszociativitást szorzásra?",
@@ -253,7 +277,8 @@
         "c": "a(bc) = (ac)b"
       },
       "correct": "b",
-      "explanation": "Ez a szorzás csoportosíthatósági (asszociatív) tulajdonsága. Azt jelenti, hogy több tényező szorzásánál a zárójeleket bárhogy áttehetjük, a szorzat nem változik."
+      "explanation": "Ez a szorzás csoportosíthatósági (asszociatív) tulajdonsága. Azt jelenti, hogy több tényező szorzásánál a zárójeleket bárhogy áttehetjük, a szorzat nem változik.",
+      "difficulty": "hard"
     }
   ]
 }

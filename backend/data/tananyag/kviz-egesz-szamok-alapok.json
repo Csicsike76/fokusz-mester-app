@@ -13,7 +13,8 @@
         "c": "100/10"
       },
       "correct": "b",
-      "explanation": "Számoljuk ki az értékeket: a) -18/3 = -6 (egész). b) 10/4 = 2,5 (nem egész). c) 100/10 = 10 (egész). A 10/4 a kakukktojás."
+      "explanation": "Számoljuk ki az értékeket: a) -18/3 = -6 (egész). b) 10/4 = 2,5 (nem egész). c) 100/10 = 10 (egész). A 10/4 a kakukktojás.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a 0 szám ellentettje?",
@@ -23,7 +24,8 @@
         "c": "Végtelen."
       },
       "correct": "b",
-      "explanation": "A 0 egy speciális szám, amelynek az ellentettje önmaga. |0|=0 és -0=0."
+      "explanation": "A 0 egy speciális szám, amelynek az ellentettje önmaga. |0|=0 és -0=0.",
+      "difficulty": "easy"
     },
     {
       "question": "Hány eleme van az egész számok (ℤ) halmazának?",
@@ -33,7 +35,8 @@
         "c": "Attól függ, meddig számolunk."
       },
       "correct": "a",
-      "explanation": "Az egész számok halmaza mind pozitív, mind negatív irányban végtelen, nincs legnagyobb és legkisebb eleme sem. Ezért végtelen halmaz."
+      "explanation": "Az egész számok halmaza mind pozitív, mind negatív irányban végtelen, nincs legnagyobb és legkisebb eleme sem. Ezért végtelen halmaz.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a {-2, 0, 5, -8} halmaz elemeinek abszolút értékeinek halmaza?",
@@ -43,7 +46,8 @@
         "c": "{-2, 0, 5, -8}"
       },
       "correct": "a",
-      "explanation": "Vegyük az elemek abszolút értékeit sorban: |-2|=2; |0|=0; |5|=5; |-8|=8. Az így kapott számok halmaza a {0, 2, 5, 8}."
+      "explanation": "Vegyük az elemek abszolút értékeit sorban: |-2|=2; |0|=0; |5|=5; |-8|=8. Az így kapott számok halmaza a {0, 2, 5, 8}.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik a legnagyobb kétjegyű negatív egész szám?",
@@ -53,7 +57,8 @@
         "c": "-1"
       },
       "correct": "b",
-      "explanation": "A kétjegyű negatív egészek a -99, -98, ..., -10. A számegyenesen a -10 van a leginkább jobbra, ezért ez a legnagyobb közülük."
+      "explanation": "A kétjegyű negatív egészek a -99, -98, ..., -10. A számegyenesen a -10 van a leginkább jobbra, ezért ez a legnagyobb közülük.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a 15 szám ellentettje?",
@@ -63,7 +68,8 @@
         "c": "15"
       },
       "correct": "b",
-      "explanation": "Egy szám ellentettje az a szám, amely a számegyenesen a 0-tól ugyanakkora távolságra van, csak az ellenkező oldalon. A 15 ellentettje a -15."
+      "explanation": "Egy szám ellentettje az a szám, amely a számegyenesen a 0-tól ugyanakkora távolságra van, csak az ellenkező oldalon. A 15 ellentettje a -15.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az x ellentettjének az ellentettje?",
@@ -73,7 +79,8 @@
         "c": "-x"
       },
       "correct": "b",
-      "explanation": "Egy szám ellentettjének (-x) az ellentettje -(-x), ami megegyezik az eredeti x számmal. Például: -(-5) = 5."
+      "explanation": "Egy szám ellentettjének (-x) az ellentettje -(-x), ami megegyezik az eredeti x számmal. Például: -(-5) = 5.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik a helyes növekvő sorrend?",
@@ -83,7 +90,8 @@
         "c": "0, 2, -5, -10"
       },
       "correct": "a",
-      "explanation": "A számegyenesen balról jobbra haladva a számok növekednek. A helyes sorrend: -10 < -5 < 0 < 2."
+      "explanation": "A számegyenesen balról jobbra haladva a számok növekednek. A helyes sorrend: -10 < -5 < 0 < 2.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik a legnagyobb szám az alábbiak közül?",
@@ -93,7 +101,8 @@
         "c": "0"
       },
       "correct": "c",
-      "explanation": "A számegyenesen a jobbra lévő számok a nagyobbak. A 0 jobbra van mind a -1-től, mind a -5-től, ezért a 0 a legnagyobb."
+      "explanation": "A számegyenesen a jobbra lévő számok a nagyobbak. A 0 jobbra van mind a -1-től, mind a -5-től, ezért a 0 a legnagyobb.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az a szám, aminek az abszolút értéke és az ellentettje is 8?",
@@ -103,7 +112,8 @@
         "c": "Nincs ilyen szám."
       },
       "correct": "b",
-      "explanation": "Legyen a szám x. |x|=8 és -x=8. A második egyenletből x=-8. Ellenőrizzük az elsőt: |-8|=8. Az állítás igaz. Tehát a keresett szám a -8."
+      "explanation": "Legyen a szám x. |x|=8 és -x=8. A második egyenletből x=-8. Ellenőrizzük az elsőt: |-8|=8. Az állítás igaz. Tehát a keresett szám a -8.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik szám van legtávolabb a 0-tól?",
@@ -113,7 +123,8 @@
         "c": "-3"
       },
       "correct": "b",
-      "explanation": "A 0-tól való távolságot az abszolút érték adja meg. |8|=8; |-9|=9; |-3|=3. A 9 a legnagyobb abszolút érték, tehát a -9 van a legtávolabb."
+      "explanation": "A 0-tól való távolságot az abszolút érték adja meg. |8|=8; |-9|=9; |-3|=3. A 9 a legnagyobb abszolút érték, tehát a -9 van a legtávolabb.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik a legkisebb háromjegyű pozitív egész szám?",
@@ -123,7 +134,8 @@
         "c": "102"
       },
       "correct": "a",
-      "explanation": "A háromjegyű pozitív egész számok a 100-zal kezdődnek és 999-ig tartanak. Ezek közül a legkisebb a 100."
+      "explanation": "A háromjegyű pozitív egész számok a 100-zal kezdődnek és 999-ig tartanak. Ezek közül a legkisebb a 100.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a |-3| + |-2| értéke?",
@@ -133,7 +145,8 @@
         "c": "1"
       },
       "correct": "a",
-      "explanation": "Először kiszámítjuk az abszolút értékeket: |-3|=3 és |-2|=2. Ezután összeadjuk őket: 3 + 2 = 5."
+      "explanation": "Először kiszámítjuk az abszolút értékeket: |-3|=3 és |-2|=2. Ezután összeadjuk őket: 3 + 2 = 5.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik szám NEM egész szám?",
@@ -143,7 +156,8 @@
         "c": "0"
       },
       "correct": "b",
-      "explanation": "Az egész számok halmaza a pozitív és negatív egész számokat, valamint a nullát tartalmazza. A 3/4 egy racionális szám, de nem egész."
+      "explanation": "Az egész számok halmaza a pozitív és negatív egész számokat, valamint a nullát tartalmazza. A 3/4 egy racionális szám, de nem egész.",
+      "difficulty": "medium"
     },
     {
       "question": "A 0 szám...",
@@ -153,7 +167,8 @@
         "c": "...sem nem pozitív, sem nem negatív."
       },
       "correct": "c",
-      "explanation": "A nulla egy speciális egész szám, amely elválasztja a pozitív és negatív tartományt. Előjel nélküli, se nem pozitív, se nem negatív."
+      "explanation": "A nulla egy speciális egész szám, amely elválasztja a pozitív és negatív tartományt. Előjel nélküli, se nem pozitív, se nem negatív.",
+      "difficulty": "medium"
     },
     {
       "question": "Hány egész szám van -3 és 3 között (a határokat nem számítva)?",
@@ -163,7 +178,8 @@
         "c": "5"
       },
       "correct": "c",
-      "explanation": "A -3 és 3 közötti egész számok: -2, -1, 0, 1, 2. Ez összesen 5 darab szám."
+      "explanation": "A -3 és 3 közötti egész számok: -2, -1, 0, 1, 2. Ez összesen 5 darab szám.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha |x|=10, akkor x lehetséges értékei:",
@@ -173,7 +189,8 @@
         "c": "Nincs ilyen x."
       },
       "correct": "b",
-      "explanation": "Két egész számnak van 10 az abszolút értéke: a 10-nek és a -10-nek. Mindkettő 10 egységre van a nullától."
+      "explanation": "Két egész számnak van 10 az abszolút értéke: a 10-nek és a -10-nek. Mindkettő 10 egységre van a nullától.",
+      "difficulty": "medium"
     },
     {
       "question": "Hány olyan egész szám van, amelynek az abszolút értéke 4?",
@@ -183,7 +200,8 @@
         "c": "Kettő (a 4 és a -4)"
       },
       "correct": "c",
-      "explanation": "Az |x|=4 egyenletnek két megoldása van az egész számok körében: x=4 és x=-4, mivel mindkettő 4 egység távolságra van a nullától."
+      "explanation": "Az |x|=4 egyenletnek két megoldása van az egész számok körében: x=4 és x=-4, mivel mindkettő 4 egység távolságra van a nullától.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik állítás írja le az egész számok halmazát?",
@@ -193,7 +211,8 @@
         "c": "A természetes számok, a nulla és a negatív egészek."
       },
       "correct": "c",
-      "explanation": "Ez az egész számok halmazának legpontosabb leírása, amely magában foglalja a pozitív egészeket (természetes számok), a negatív egészeket és a nullát."
+      "explanation": "Ez az egész számok halmazának legpontosabb leírása, amely magában foglalja a pozitív egészeket (természetes számok), a negatív egészeket és a nullát.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik reláció igaz?",
@@ -203,7 +222,8 @@
         "c": "-100 = -200"
       },
       "correct": "b",
-      "explanation": "Negatív számok esetén az a nagyobb, amelyiknek az abszolút értéke kisebb. Mivel |-100|=100 és |-200|=200, a -100 a nagyobb szám."
+      "explanation": "Negatív számok esetén az a nagyobb, amelyiknek az abszolút értéke kisebb. Mivel |-100|=100 és |-200|=200, a -100 a nagyobb szám.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik a helyes jelölés az 'egész számok halmaza' kifejezésre?",
@@ -213,7 +233,8 @@
         "c": "ℤ"
       },
       "correct": "c",
-      "explanation": "A matematikában az egész számok halmazának jelölésére a ℤ betűt használjuk, ami a német 'Zahlen' (számok) szóból ered."
+      "explanation": "A matematikában az egész számok halmazának jelölésére a ℤ betűt használjuk, ami a német 'Zahlen' (számok) szóból ered.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a -20 szám abszolút értéke?",
@@ -223,7 +244,8 @@
         "c": "±20"
       },
       "correct": "a",
-      "explanation": "Egy szám abszolút értéke a szám távolsága a 0-tól a számegyenesen. A távolság mindig nemnegatív, ezért |-20| = 20."
+      "explanation": "Egy szám abszolút értéke a szám távolsága a 0-tól a számegyenesen. A távolság mindig nemnegatív, ezért |-20| = 20.",
+      "difficulty": "hard"
     },
     {
       "question": "Hol helyezkedik el a -4 a számegyenesen?",
@@ -233,7 +255,8 @@
         "c": "Pontosan a 0-n."
       },
       "correct": "b",
-      "explanation": "A negatív egész számokat a számegyenesen a 0-tól balra ábrázoljuk, a negatív irányban."
+      "explanation": "A negatív egész számokat a számegyenesen a 0-tól balra ábrázoljuk, a negatív irányban.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik állítás igaz?",
@@ -243,7 +266,8 @@
         "c": "|-7| = -7"
       },
       "correct": "b",
-      "explanation": "Számoljuk ki az abszolút értékeket: |-7|=7 és |5|=5. Mivel 7 > 5, a 'b' állítás az igaz. Az abszolút érték sosem lehet negatív."
+      "explanation": "Számoljuk ki az abszolút értékeket: |-7|=7 és |5|=5. Mivel 7 > 5, a 'b' állítás az igaz. Az abszolút érték sosem lehet negatív.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik a legkisebb pozitív egész szám?",
@@ -253,7 +277,8 @@
         "c": "Nem létezik."
       },
       "correct": "b",
-      "explanation": "A pozitív egész számok halmaza a {1, 2, 3, ...}. Ennek a halmaznak a legkisebb eleme az 1. A 0 nem pozitív és nem negatív."
+      "explanation": "A pozitív egész számok halmaza a {1, 2, 3, ...}. Ennek a halmaznak a legkisebb eleme az 1. A 0 nem pozitív és nem negatív.",
+      "difficulty": "hard"
     }
   ]
 }

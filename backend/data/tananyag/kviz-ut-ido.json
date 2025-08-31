@@ -13,7 +13,8 @@
         "c": "A test sebessége."
       },
       "correct": "a",
-      "explanation": "A megtett út azt mutatja meg, hogy összesen mennyit mentél vagy utaztál. Például, ha elgyalogolsz a boltba, majd vissza, a megtett út a boltig és vissza."
+      "explanation": "A megtett út azt mutatja meg, hogy összesen mennyit mentél vagy utaztál. Például, ha elgyalogolsz a boltba, majd vissza, a megtett út a boltig és vissza.",
+      "difficulty": "easy"
     },
     {
       "question": "2. Mennyi 3600 másodperc?",
@@ -23,7 +24,8 @@
         "c": "36 óra"
       },
       "correct": "a",
-      "explanation": "1 óra 60 perc, és minden perc 60 másodperc. Így 1 óra = 60 * 60 = 3600 másodperc."
+      "explanation": "1 óra 60 perc, és minden perc 60 másodperc. Így 1 óra = 60 * 60 = 3600 másodperc.",
+      "difficulty": "easy"
     },
     {
       "question": "3. Melyik jelöli a leghosszabb távolságot?",
@@ -33,7 +35,8 @@
         "c": "10000 centiméter"
       },
       "correct": "a",
-      "explanation": "1 kilométer = 1000 méter. 10000 centiméter = 100 méter. A kilométer a leghosszabb."
+      "explanation": "1 kilométer = 1000 méter. 10000 centiméter = 100 méter. A kilométer a leghosszabb.",
+      "difficulty": "easy"
     },
     {
       "question": "4. Egy film 13:10-kor kezdődik és 14:50-kor ér véget. Mennyi a film időtartama?",
@@ -43,7 +46,8 @@
         "c": "1 óra 20 perc"
       },
       "correct": "a",
-      "explanation": "Számoljuk ki, mennyi idő telt el a 13:10-től 14:50-ig. 1 óra 40 perc telt el."
+      "explanation": "Számoljuk ki, mennyi idő telt el a 13:10-től 14:50-ig. 1 óra 40 perc telt el.",
+      "difficulty": "easy"
     },
     {
       "question": "5. Mi a hosszúság SI alapmértékegysége?",
@@ -53,7 +57,8 @@
         "c": "centiméter"
       },
       "correct": "a",
-      "explanation": "A méter az alap, a többi (kilométer, centiméter) ebből származik."
+      "explanation": "A méter az alap, a többi (kilométer, centiméter) ebből származik.",
+      "difficulty": "easy"
     },
     {
       "question": "6. Ha körbebiciklizel egy 2 km hosszú pályát, mennyi utat tettél meg?",
@@ -63,7 +68,8 @@
         "c": "1 km"
       },
       "correct": "a",
-      "explanation": "A megtett út az a távolság, amit megteszel. Ha körbebiciklizel, a pálya hosszát teszed meg, ami 2 km."
+      "explanation": "A megtett út az a távolság, amit megteszel. Ha körbebiciklizel, a pálya hosszát teszed meg, ami 2 km.",
+      "difficulty": "easy"
     },
     {
       "question": "7. Mennyi 1,5 nap órában kifejezve?",
@@ -73,7 +79,8 @@
         "c": "48 óra"
       },
       "correct": "a",
-      "explanation": "1 nap 24 óra. 1,5 nap az 24 + 12 óra = 36 óra."
+      "explanation": "1 nap 24 óra. 1,5 nap az 24 + 12 óra = 36 óra.",
+      "difficulty": "easy"
     },
     {
       "question": "8. Melyik NEM az idő mértékegysége?",
@@ -83,7 +90,8 @@
         "c": "másodperc"
       },
       "correct": "a",
-      "explanation": "A méter a hosszúság mértékegysége, nem az időé. A perc és a másodperc az idő mértékegységei."
+      "explanation": "A méter a hosszúság mértékegysége, nem az időé. A perc és a másodperc az idő mértékegységei.",
+      "difficulty": "easy"
     },
     {
       "question": "9. Melyik jelöli a legrövidebb időt?",
@@ -93,7 +101,8 @@
         "c": "1 óra"
       },
       "correct": "a",
-      "explanation": "100 másodperc a legrövidebb. 2 perc az 120 másodperc, és 1 óra = 3600 másodperc."
+      "explanation": "100 másodperc a legrövidebb. 2 perc az 120 másodperc, és 1 óra = 3600 másodperc.",
+      "difficulty": "easy"
     },
     {
       "question": "10. Mi az idő SI alapmértékegysége?",
@@ -103,7 +112,8 @@
         "c": "óra"
       },
       "correct": "b",
-      "explanation": "A másodperc az alap, a perc és az óra ebből származik."
+      "explanation": "A másodperc az alap, a perc és az óra ebből származik.",
+      "difficulty": "medium"
     },
     {
       "question": "11. Egy atléta lefut 10 kört egy 400 méteres pályán. Mekkora utat tesz meg?",
@@ -113,7 +123,8 @@
         "c": "400 méter"
       },
       "correct": "b",
-      "explanation": "10 kör * 400 méter/kör = 4000 méter. Ez 4 kilométer."
+      "explanation": "10 kör * 400 méter/kör = 4000 méter. Ez 4 kilométer.",
+      "difficulty": "medium"
     },
     {
       "question": "12. Mennyi 2 perc 10 másodperc összesen másodpercben?",
@@ -123,7 +134,8 @@
         "c": "30 s"
       },
       "correct": "b",
-      "explanation": "2 perc = 120 másodperc. 120 + 10 = 130 másodperc."
+      "explanation": "2 perc = 120 másodperc. 120 + 10 = 130 másodperc.",
+      "difficulty": "medium"
     },
     {
       "question": "13. Mi a különbség az út és az elmozdulás között?",
@@ -133,7 +145,8 @@
         "c": "Az elmozdulás mindig nagyobb."
       },
       "correct": "b",
-      "explanation": "Az út a teljes távolság, amit megteszel. Az elmozdulás a kiindulási és a célpont közötti egyenes távolság."
+      "explanation": "Az út a teljes távolság, amit megteszel. Az elmozdulás a kiindulási és a célpont közötti egyenes távolság.",
+      "difficulty": "medium"
     },
     {
       "question": "14. Egy túrázó délelőtt 8 km-t, délután 6 km-t gyalogolt. Mennyi utat tett meg összesen?",
@@ -143,7 +156,8 @@
         "c": "48 km"
       },
       "correct": "b",
-      "explanation": "8 km + 6 km = 14 km. Összesen 14 kilométert gyalogolt."
+      "explanation": "8 km + 6 km = 14 km. Összesen 14 kilométert gyalogolt.",
+      "difficulty": "medium"
     },
     {
       "question": "15. Melyik jelöli a legrövidebb távolságot?",
@@ -153,7 +167,8 @@
         "c": "100 cm"
       },
       "correct": "c",
-      "explanation": "2000 mm = 2 méter. 100 cm = 1 méter. 1 méter a rövidebb."
+      "explanation": "2000 mm = 2 méter. 100 cm = 1 méter. 1 méter a rövidebb.",
+      "difficulty": "medium"
     },
     {
       "question": "16. Egy órán a nagymutató egy teljes kört tesz meg. Mennyi idő alatt?",
@@ -163,7 +178,8 @@
         "c": "1 perc"
       },
       "correct": "b",
-      "explanation": "A nagymutató 1 óra alatt tesz meg egy kört."
+      "explanation": "A nagymutató 1 óra alatt tesz meg egy kört.",
+      "difficulty": "medium"
     },
     {
       "question": "17. Melyik állítás igaz az elmozdulásra egy teljes kör megtétele után?",
@@ -173,7 +189,8 @@
         "c": "Nulla."
       },
       "correct": "c",
-      "explanation": "Ha ugyanoda érsz vissza, ahonnan indultál, az elmozdulásod nulla."
+      "explanation": "Ha ugyanoda érsz vissza, ahonnan indultál, az elmozdulásod nulla.",
+      "difficulty": "medium"
     },
     {
       "question": "18. Melyik jelöl időtartamot?",
@@ -183,7 +200,8 @@
         "c": "25 másodperc"
       },
       "correct": "c",
-      "explanation": "Az időtartam egy adott időszak hossza. A másodperc az idő mértékegysége."
+      "explanation": "Az időtartam egy adott időszak hossza. A másodperc az idő mértékegysége.",
+      "difficulty": "hard"
     },
     {
       "question": "19. Egy autó 20 métert halad előre, majd 5 métert hátra. Mekkora a megtett útja?",
@@ -193,7 +211,8 @@
         "c": "25 m"
       },
       "correct": "c",
-      "explanation": "A megtett út: 20 méter + 5 méter = 25 méter."
+      "explanation": "A megtett út: 20 méter + 5 méter = 25 méter.",
+      "difficulty": "hard"
     },
     {
       "question": "20. Hány másodperc van negyed órában?",
@@ -203,7 +222,8 @@
         "c": "900 s"
       },
       "correct": "c",
-      "explanation": "Negyed óra az 15 perc. 15 perc * 60 másodperc/perc = 900 másodperc."
+      "explanation": "Negyed óra az 15 perc. 15 perc * 60 másodperc/perc = 900 másodperc.",
+      "difficulty": "hard"
     },
     {
       "question": "21. Egy kiránduló elindul a tábortól, tesz egy 5 km-es kört, majd visszatér a táborba. Mekkora az elmozdulása?",
@@ -213,7 +233,8 @@
         "c": "0 km"
       },
       "correct": "c",
-      "explanation": "Mivel visszatért a táborba, az elmozdulás nulla."
+      "explanation": "Mivel visszatért a táborba, az elmozdulás nulla.",
+      "difficulty": "hard"
     },
     {
       "question": "22. Melyik mennyiségnek van iránya is?",
@@ -223,7 +244,8 @@
         "c": "Elmozdulás"
       },
       "correct": "c",
-      "explanation": "Az elmozdulásnak iránya is van, nem csak nagysága."
+      "explanation": "Az elmozdulásnak iránya is van, nem csak nagysága.",
+      "difficulty": "hard"
     },
     {
       "question": "23. Melyik a kakukktojás?",
@@ -233,7 +255,8 @@
         "c": "kilométer"
       },
       "correct": "b",
-      "explanation": "A méter és a kilométer hosszúság, a kilogramm tömeg."
+      "explanation": "A méter és a kilométer hosszúság, a kilogramm tömeg.",
+      "difficulty": "hard"
     },
     {
       "question": "24. Egy esemény 14:00-kor kezdődött és 90 percig tartott. Mikor lett vége?",
@@ -243,7 +266,8 @@
         "c": "15:30"
       },
       "correct": "c",
-      "explanation": "90 perc az 1 óra 30 perc. 14:00 + 1 óra 30 perc = 15:30."
+      "explanation": "90 perc az 1 óra 30 perc. 14:00 + 1 óra 30 perc = 15:30.",
+      "difficulty": "hard"
     },
     {
       "question": "25. Milyen pályán mozog egy feldobott és elkapott labda?",
@@ -253,7 +277,8 @@
         "c": "Nyílt pályán"
       },
       "correct": "b",
-      "explanation": "Zárt pálya, mert a labda a kiindulási helyre (kéz) tér vissza."
+      "explanation": "Zárt pálya, mert a labda a kiindulási helyre (kéz) tér vissza.",
+      "difficulty": "hard"
     }
   ]
 }

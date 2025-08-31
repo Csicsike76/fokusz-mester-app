@@ -13,7 +13,8 @@
         "c": "Egy játék neve."
       },
       "correct": "b",
-      "explanation": "A halmaz olyan dolgok gyűjteménye, amiknek van valamilyen közös tulajdonsága. Lehetnek számok, betűk, gyümölcsök stb. ✅ Megoldás: Valamilyen dolgok gyűjteménye, amiknek van közös tulajdonságuk."
+      "explanation": "A halmaz olyan dolgok gyűjteménye, amiknek van valamilyen közös tulajdonsága. Lehetnek számok, betűk, gyümölcsök stb. ✅ Megoldás: Valamilyen dolgok gyűjteménye, amiknek van közös tulajdonságuk.",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan jelöljük a halmazokat?",
@@ -23,7 +24,8 @@
         "c": "Nagybetűkkel."
       },
       "correct": "c",
-      "explanation": "A halmazokat nagybetűkkel jelöljük, pl. A, B, C. ✅ Megoldás: Nagybetűkkel."
+      "explanation": "A halmazokat nagybetűkkel jelöljük, pl. A, B, C. ✅ Megoldás: Nagybetűkkel.",
+      "difficulty": "easy"
     },
     {
       "question": "Mivel jelöljük, hogy egy elem a halmazhoz tartozik?",
@@ -33,7 +35,8 @@
         "c": "≠"
       },
       "correct": "b",
-      "explanation": "Ha egy elem a halmazhoz tartozik, akkor ezt az ∈ (elem) jellel jelöljük.  ✅ Megoldás: ∈"
+      "explanation": "Ha egy elem a halmazhoz tartozik, akkor ezt az ∈ (elem) jellel jelöljük.  ✅ Megoldás: ∈",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a halmaz eleme?",
@@ -43,7 +46,8 @@
         "c": "A halmaz neve."
       },
       "correct": "b",
-      "explanation": "A halmaz elemei azok a dolgok, amik a halmazba tartoznak. ✅ Megoldás: A halmazban lévő dolog."
+      "explanation": "A halmaz elemei azok a dolgok, amik a halmazba tartoznak. ✅ Megoldás: A halmazban lévő dolog.",
+      "difficulty": "easy"
     },
     {
       "question": "Mivel jelöljük, hogy egy elem nem tartozik a halmazhoz?",
@@ -53,7 +57,8 @@
         "c": "="
       },
       "correct": "b",
-      "explanation": "Ha egy elem nem tartozik a halmazhoz, akkor ezt ∉ (nem elem) jellel jelöljük.  ✅ Megoldás: ∉"
+      "explanation": "Ha egy elem nem tartozik a halmazhoz, akkor ezt ∉ (nem elem) jellel jelöljük.  ✅ Megoldás: ∉",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan lehet megadni egy halmazt?",
@@ -63,7 +68,8 @@
         "c": "Felsorolással vagy egy közös tulajdonsággal."
       },
       "correct": "c",
-      "explanation": "A halmazt megadhatjuk úgy, hogy felsoroljuk az elemeit, vagy úgy, hogy megadjuk a közös tulajdonságot, amivel a halmaz elemei rendelkeznek. ✅ Megoldás: Felsorolással vagy egy közös tulajdonsággal."
+      "explanation": "A halmazt megadhatjuk úgy, hogy felsoroljuk az elemeit, vagy úgy, hogy megadjuk a közös tulajdonságot, amivel a halmaz elemei rendelkeznek. ✅ Megoldás: Felsorolással vagy egy közös tulajdonsággal.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a felsorolásos megadás?",
@@ -73,7 +79,8 @@
         "c": "Megadjuk a halmaz egy közös tulajdonságát."
       },
       "correct": "b",
-      "explanation": "A felsorolásos megadáskor a halmaz elemeit soroljuk fel, egymástól vesszővel elválasztva, kapcsos zárójelek között. Pl.: {1, 2, 3}. ✅ Megoldás: A halmaz elemeit soroljuk fel, kapcsos zárójelek közé."
+      "explanation": "A felsorolásos megadáskor a halmaz elemeit soroljuk fel, egymástól vesszővel elválasztva, kapcsos zárójelek között. Pl.: {1, 2, 3}. ✅ Megoldás: A halmaz elemeit soroljuk fel, kapcsos zárójelek közé.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a közös tulajdonságos megadás?",
@@ -83,7 +90,8 @@
         "c": "A halmaz nevét írjuk le."
       },
       "correct": "b",
-      "explanation": "A közös tulajdonságos megadáskor megadjuk a halmaz elemeinek a közös tulajdonságát. Pl.: {x | x egy természetes szám}. ✅ Megoldás: Megadjuk, hogy a halmaz elemei milyen tulajdonsággal rendelkeznek."
+      "explanation": "A közös tulajdonságos megadáskor megadjuk a halmaz elemeinek a közös tulajdonságát. Pl.: {x | x egy természetes szám}. ✅ Megoldás: Megadjuk, hogy a halmaz elemei milyen tulajdonsággal rendelkeznek.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a véges halmaz?",
@@ -93,7 +101,8 @@
         "c": "Aminek nincs egyetlen eleme sem."
       },
       "correct": "b",
-      "explanation": "A véges halmaznak meg lehet számolni az elemeit. Pl.: {alma, körte, szilva} ✅ Megoldás: Aminek meg lehet számolni az elemeit."
+      "explanation": "A véges halmaznak meg lehet számolni az elemeit. Pl.: {alma, körte, szilva} ✅ Megoldás: Aminek meg lehet számolni az elemeit.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a végtelen halmaz?",
@@ -103,7 +112,8 @@
         "c": "Aminek nincs egyetlen eleme sem."
       },
       "correct": "b",
-      "explanation": "A végtelen halmaznak végtelen sok eleme van. Pl.: a természetes számok halmaza: {1, 2, 3, ...}. ✅ Megoldás: Aminek végtelen sok eleme van."
+      "explanation": "A végtelen halmaznak végtelen sok eleme van. Pl.: a természetes számok halmaza: {1, 2, 3, ...}. ✅ Megoldás: Aminek végtelen sok eleme van.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi az üres halmaz?",
@@ -113,7 +123,8 @@
         "c": "Aminek nincs egyetlen eleme sem."
       },
       "correct": "c",
-      "explanation": "Az üres halmaznak nincs egyetlen eleme sem. Jelölése: { } vagy ∅. ✅ Megoldás: Aminek nincs egyetlen eleme sem."
+      "explanation": "Az üres halmaznak nincs egyetlen eleme sem. Jelölése: { } vagy ∅. ✅ Megoldás: Aminek nincs egyetlen eleme sem.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a helyes jelölése az üres halmaznak?",
@@ -123,7 +134,8 @@
         "c": "{x}"
       },
       "correct": "a",
-      "explanation": "Az üres halmaz jelölése: {} vagy ∅. ✅ Megoldás: {} vagy ∅"
+      "explanation": "Az üres halmaz jelölése: {} vagy ∅. ✅ Megoldás: {} vagy ∅",
+      "difficulty": "medium"
     },
     {
       "question": "Ha A = {1, 2, 3}, akkor a 2  … A?",
@@ -133,7 +145,8 @@
         "c": "∉"
       },
       "correct": "b",
-      "explanation": "A 2 benne van az A halmazban, ezért a helyes jel: ∈. ✅ Megoldás: ∈"
+      "explanation": "A 2 benne van az A halmazban, ezért a helyes jel: ∈. ✅ Megoldás: ∈",
+      "difficulty": "medium"
     },
     {
       "question": "Ha B = {a, b, c}, akkor a d … B?",
@@ -143,7 +156,8 @@
         "c": "∉"
       },
       "correct": "c",
-      "explanation": "A d nincs benne a B halmazban, ezért a helyes jel: ∉. ✅ Megoldás: ∉"
+      "explanation": "A d nincs benne a B halmazban, ezért a helyes jel: ∉. ✅ Megoldás: ∉",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik halmaz adható meg felsorolással?",
@@ -153,7 +167,8 @@
         "c": "A 10-nél nagyobb számok."
       },
       "correct": "b",
-      "explanation": "Az év hónapjait fel tudjuk sorolni: {január, február, március, ...}. A természetes számok végtelenek, a 10-nél nagyobb számok is. ✅ Megoldás: Az év hónapjai."
+      "explanation": "Az év hónapjait fel tudjuk sorolni: {január, február, március, ...}. A természetes számok végtelenek, a 10-nél nagyobb számok is. ✅ Megoldás: Az év hónapjai.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik halmaz adható meg egy közös tulajdonsággal?",
@@ -163,7 +178,8 @@
         "c": "{piros, kék, zöld}"
       },
       "correct": "a",
-      "explanation": "A {1, 2, 3, ...} a természetes számok halmaza, ami megadható a következőképpen: {x | x természetes szám}. A nap egy elem, a színek pedig felsorolással adhatók meg. ✅ Megoldás: {1, 2, 3, ...}"
+      "explanation": "A {1, 2, 3, ...} a természetes számok halmaza, ami megadható a következőképpen: {x | x természetes szám}. A nap egy elem, a színek pedig felsorolással adhatók meg. ✅ Megoldás: {1, 2, 3, ...}",
+      "difficulty": "medium"
     },
     {
       "question": "Mit jelöl a {szó | szó 5 betűs}.",
@@ -173,7 +189,8 @@
         "c": "A szavak betűinek halmazát."
       },
       "correct": "a",
-      "explanation": "Ez a halmaz az 5 betűs szavakat gyűjti össze. ✅ Megoldás: Az 5 betűs szavak halmazát."
+      "explanation": "Ez a halmaz az 5 betűs szavakat gyűjti össze. ✅ Megoldás: Az 5 betűs szavak halmazát.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik halmaz véges?",
@@ -183,7 +200,8 @@
         "c": "Az osztály tanulói."
       },
       "correct": "c",
-      "explanation": "Az osztály tanulóinak számát meg tudjuk határozni, tehát a halmaz véges. A páros számok és a csillagok száma végtelen vagy nehezen megállapítható. ✅ Megoldás: Az osztály tanulói."
+      "explanation": "Az osztály tanulóinak számát meg tudjuk határozni, tehát a halmaz véges. A páros számok és a csillagok száma végtelen vagy nehezen megállapítható. ✅ Megoldás: Az osztály tanulói.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik halmaz üres?",
@@ -193,7 +211,8 @@
         "c": "A 10-nél kisebb, 12-nél nagyobb számok."
       },
       "correct": "c",
-      "explanation": "Nincs olyan szám, ami egyszerre kisebb 10-nél és nagyobb 12-nél, tehát ez az üres halmaz. ✅ Megoldás: A 10-nél kisebb, 12-nél nagyobb számok."
+      "explanation": "Nincs olyan szám, ami egyszerre kisebb 10-nél és nagyobb 12-nél, tehát ez az üres halmaz. ✅ Megoldás: A 10-nél kisebb, 12-nél nagyobb számok.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik halmaz eleme a 7?",
@@ -203,7 +222,8 @@
         "c": "{5, 6, 7, 8, 9}"
       },
       "correct": "c",
-      "explanation": "A 7 csak a {5, 6, 7, 8, 9} halmazban található meg. ✅ Megoldás: {5, 6, 7, 8, 9}"
+      "explanation": "A 7 csak a {5, 6, 7, 8, 9} halmazban található meg. ✅ Megoldás: {5, 6, 7, 8, 9}",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a helyes jelölése egy üres halmaznak?",
@@ -213,7 +233,8 @@
         "c": "{x | x = 0}"
       },
       "correct": "b",
-      "explanation": "Az üres halmaz jelölése: ∅. ✅ Megoldás: ∅"
+      "explanation": "Az üres halmaz jelölése: ∅. ✅ Megoldás: ∅",
+      "difficulty": "hard"
     },
     {
       "question": "Mit jelent a halmazoknál a  ∩  jel?",
@@ -223,7 +244,8 @@
         "c": "A különbség"
       },
       "correct": "b",
-      "explanation": "A  ∩  jel a metszetet jelenti. Ez a két halmaz közös elemeit jelöli. ✅ Megoldás: A metszet"
+      "explanation": "A  ∩  jel a metszetet jelenti. Ez a két halmaz közös elemeit jelöli. ✅ Megoldás: A metszet",
+      "difficulty": "hard"
     },
     {
       "question": "Mit jelent a halmazoknál az  ∪  jel?",
@@ -233,7 +255,8 @@
         "c": "A különbség"
       },
       "correct": "a",
-      "explanation": "Az  ∪  jel az uniót jelenti. Ez az összes elemet jelöli a két halmazban (ismétlések nélkül). ✅ Megoldás: Az unió"
+      "explanation": "Az  ∪  jel az uniót jelenti. Ez az összes elemet jelöli a két halmazban (ismétlések nélkül). ✅ Megoldás: Az unió",
+      "difficulty": "hard"
     },
     {
       "question": "Ha A = {1, 2, 3} és B = {3, 4, 5}, akkor mi az A ∪ B?",
@@ -243,7 +266,8 @@
         "c": "{1, 2, 4, 5}"
       },
       "correct": "b",
-      "explanation": "Az unió azt jelenti, hogy összeírjuk az összes elemet a két halmazból:  A ∪ B = {1, 2, 3, 4, 5}. ✅ Megoldás: {1, 2, 3, 4, 5}"
+      "explanation": "Az unió azt jelenti, hogy összeírjuk az összes elemet a két halmazból:  A ∪ B = {1, 2, 3, 4, 5}. ✅ Megoldás: {1, 2, 3, 4, 5}",
+      "difficulty": "hard"
     },
     {
       "question": "Ha A = {1, 2, 3} és B = {3, 4, 5}, akkor mi az A ∩ B?",
@@ -253,7 +277,8 @@
         "c": "{1, 2, 4, 5}"
       },
       "correct": "a",
-      "explanation": "A metszet a közös elemeket jelöli. A két halmaznak csak a 3 a közös eleme. A ∩ B = {3}. ✅ Megoldás: {3}"
+      "explanation": "A metszet a közös elemeket jelöli. A két halmaznak csak a 3 a közös eleme. A ∩ B = {3}. ✅ Megoldás: {3}",
+      "difficulty": "hard"
     }
   ]
 }

@@ -13,7 +13,8 @@
         "c": "45°"
       },
       "correct": "c",
-      "explanation": "A szabályos n-szög középponti szögét a 360° / n képlettel számoljuk. Egy nyolcszög esetén n=8, így a középponti szög 360° / 8 = 45°."
+      "explanation": "A szabályos n-szög középponti szögét a 360° / n képlettel számoljuk. Egy nyolcszög esetén n=8, így a középponti szög 360° / 8 = 45°.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen különleges tulajdonsága van a szabályos hatszög oldalának (a) és a köré írt kör sugarának (R)?",
@@ -23,7 +24,8 @@
         "c": "a = R/2"
       },
       "correct": "b",
-      "explanation": "A szabályos hatszög felbontható 6 darab egybevágó, egyenlő szárú háromszögre. Mivel a középponti szög 360°/6 = 60°, ezek a háromszögek valójában szabályos háromszögek, így minden oldaluk egyenlő. Ebből következik, hogy a hatszög oldala megegyezik a köré írt kör sugarával (a = R)."
+      "explanation": "A szabályos hatszög felbontható 6 darab egybevágó, egyenlő szárú háromszögre. Mivel a középponti szög 360°/6 = 60°, ezek a háromszögek valójában szabályos háromszögek, így minden oldaluk egyenlő. Ebből következik, hogy a hatszög oldala megegyezik a köré írt kör sugarával (a = R).",
+      "difficulty": "easy"
     },
     {
       "question": "Mekkora egy körbe írt szabályos háromszög (egyenlő oldalú) egy belső szöge?",
@@ -33,7 +35,8 @@
         "c": "90°"
       },
       "correct": "a",
-      "explanation": "A szabályos háromszög minden belső szöge egyenlő. Mivel a háromszög belső szögeinek összege 180°, egy szög nagysága 180° / 3 = 60°."
+      "explanation": "A szabályos háromszög minden belső szöge egyenlő. Mivel a háromszög belső szögeinek összege 180°, egy szög nagysága 180° / 3 = 60°.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a képlete egy szabályos n-szög középponti szögének?",
@@ -43,7 +46,8 @@
         "c": "(n-2) * 180° / n"
       },
       "correct": "b",
-      "explanation": "A középponti szög az a szög, amelyet a sokszög két szomszédos csúcsához húzott sugár bezár. Mivel n darab ilyen egybevágó szög van a középpont körül, egy szög nagysága a teljesszög (360°) n-ed része, azaz 360° / n."
+      "explanation": "A középponti szög az a szög, amelyet a sokszög két szomszédos csúcsához húzott sugár bezár. Mivel n darab ilyen egybevágó szög van a középpont körül, egy szög nagysága a teljesszög (360°) n-ed része, azaz 360° / n.",
+      "difficulty": "easy"
     },
     {
       "question": "Hol van a szabályos sokszög köré írt kör középpontja?",
@@ -53,7 +57,8 @@
         "c": "A sokszög középpontjában."
       },
       "correct": "c",
-      "explanation": "A szabályos sokszög definíciójából adódik, hogy létezik egy pont, amelytől minden csúcsa egyenlő távolságra van. Ez a pont a sokszög középpontja, amely egyben a köré írt kör középpontja is."
+      "explanation": "A szabályos sokszög definíciójából adódik, hogy létezik egy pont, amelytől minden csúcsa egyenlő távolságra van. Ez a pont a sokszög középpontja, amely egyben a köré írt kör középpontja is.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy szabályos sokszög középponti szöge 36°. Hány oldala van?",
@@ -63,7 +68,8 @@
         "c": "12"
       },
       "correct": "b",
-      "explanation": "A középponti szög = 360° / n. Az egyenletet átrendezve: n = 360° / középponti szög. Behelyettesítve: n = 360° / 36° = 10. A sokszögnek 10 oldala van (szabályos tízszög)."
+      "explanation": "A középponti szög = 360° / n. Az egyenletet átrendezve: n = 360° / középponti szög. Behelyettesítve: n = 360° / 36° = 10. A sokszögnek 10 oldala van (szabályos tízszög).",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen összefüggés van egy körbe írt négyzet oldala (a) és a kör sugara (R) között?",
@@ -73,7 +79,8 @@
         "c": "a = 2R"
       },
       "correct": "a",
-      "explanation": "A négyzet átlója a köré írt kör átmérője (2R). A négyzetet az átlója két egyenlő szárú derékszögű háromszögre bontja. Pitagorasz tételével: a² + a² = (2R)². Ebből 2a² = 4R², azaz a = R√2."
+      "explanation": "A négyzet átlója a köré írt kör átmérője (2R). A négyzetet az átlója két egyenlő szárú derékszögű háromszögre bontja. Pitagorasz tételével: a² + a² = (2R)². Ebből 2a² = 4R², azaz a = R√2.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy szabályos hatszög kerülete 60 cm. Mekkora a köré írt kör sugara?",
@@ -83,7 +90,8 @@
         "c": "10 cm"
       },
       "correct": "a",
-      "explanation": "Szabályos hatszög esetén az oldal hossza megegyezik a köré írt kör sugarával, tehát a = 5 cm. A kerület K = n * a = 6 * 5 cm = 30 cm. A kerület nem ad meg semmit a sugárról."
+      "explanation": "Szabályos hatszög esetén az oldal hossza megegyezik a köré írt kör sugarával, tehát a = 5 cm. A kerület K = n * a = 6 * 5 cm = 30 cm. A kerület nem ad meg semmit a sugárról.",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan számítható ki egy szabályos n-szög területe a legegyszerűbben?",
@@ -93,7 +101,8 @@
         "c": "Kétszer vesszük az oldal és a sugár szorzatát."
       },
       "correct": "a",
-      "explanation": "Egy szabályos n-szög felbontható n darab egybevágó, egyenlő szárú háromszögre, melyeknek a csúcsa a sokszög középpontja. A sokszög teljes területe ezen kis háromszögek területeinek összege."
+      "explanation": "Egy szabályos n-szög felbontható n darab egybevágó, egyenlő szárú háromszögre, melyeknek a csúcsa a sokszög középpontja. A sokszög teljes területe ezen kis háromszögek területeinek összege.",
+      "difficulty": "medium"
     },
     {
       "question": "Mekkora egy szabályos hatszög egy belső szöge?",
@@ -103,7 +112,8 @@
         "c": "120°"
       },
       "correct": "c",
-      "explanation": "A belső szög képlete: (n-2) * 180° / n. Hatszög esetén n=6: (6-2) * 180° / 6 = 4 * 180° / 6 = 4 * 30° = 120°. ✅ Megoldás: 120°."
+      "explanation": "A belső szög képlete: (n-2) * 180° / n. Hatszög esetén n=6: (6-2) * 180° / 6 = 4 * 180° / 6 = 4 * 30° = 120°. ✅ Megoldás: 120°.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi történik, ha egy szabályos sokszög oldalszámát növeljük?",
@@ -113,7 +123,8 @@
         "c": "A szögei nem változnak."
       },
       "correct": "a",
-      "explanation": "Ahogy az oldalszámot növeljük, a sokszög oldalai egyre jobban 'rásimulnak' a körívre. A határesetben (n → ∞) a sokszög megegyezik a körrel. ✅ Megoldás: Azt hiszem, a köre egyre inkább hasonlítani fog."
+      "explanation": "Ahogy az oldalszámot növeljük, a sokszög oldalai egyre jobban 'rásimulnak' a körívre. A határesetben (n → ∞) a sokszög megegyezik a körrel. ✅ Megoldás: Azt hiszem, a köre egyre inkább hasonlítani fog.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a definíciója a szabályos sokszögnek?",
@@ -123,7 +134,8 @@
         "c": "Van legalább 5 oldala."
       },
       "correct": "b",
-      "explanation": "A szabályos sokszög definíciójának része, hogy nemcsak az oldalai, hanem a belső szögei is egyenlő nagyságúak. ✅ Megoldás: Minden oldala és minden szöge egyenlő."
+      "explanation": "A szabályos sokszög definíciójának része, hogy nemcsak az oldalai, hanem a belső szögei is egyenlő nagyságúak. ✅ Megoldás: Minden oldala és minden szöge egyenlő.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha a gúla alapja szabályos hatszög, akkor a gúla is...",
@@ -133,7 +145,8 @@
         "c": "nem tudjuk megállapítani, hogy mi."
       },
       "correct": "a",
-      "explanation": "Ha a gúla alapja szabályos sokszög, akkor a gúla is szabályos. ✅ Megoldás: Szabályos gúla."
+      "explanation": "Ha a gúla alapja szabályos sokszög, akkor a gúla is szabályos. ✅ Megoldás: Szabályos gúla.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a mértani helyek?",
@@ -143,7 +156,8 @@
         "c": "A derékszögű háromszög leghosszabb oldala."
       },
       "correct": "a",
-      "explanation": "A mértani helyek definíció szerint egy bizonyos feltételnek eleget tevő pontok halmazai. ✅ Megoldás: Egy bizonyos feltételnek eleget tevő pontok halmaza."
+      "explanation": "A mértani helyek definíció szerint egy bizonyos feltételnek eleget tevő pontok halmazai. ✅ Megoldás: Egy bizonyos feltételnek eleget tevő pontok halmaza.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a szabályos tízszög egy belső szöge? (a válasz 144°)",
@@ -153,7 +167,8 @@
         "c": "150°"
       },
       "correct": "a",
-      "explanation": "A szabályos tízszög (dekagon) belső szögeinek nagysága: (n-2) * 180° / n, amihez a 144°-ot adtad meg. ✅ Megoldás: 144°"
+      "explanation": "A szabályos tízszög (dekagon) belső szögeinek nagysága: (n-2) * 180° / n, amihez a 144°-ot adtad meg. ✅ Megoldás: 144°",
+      "difficulty": "medium"
     },
     {
       "question": "Egy szabályos hatszög oldala 10 cm. Mekkora a kerülete?",
@@ -163,7 +178,8 @@
         "c": "30 cm"
       },
       "correct": "a",
-      "explanation": "A szabályos hatszög kerülete K = n * a, ahol 'a' az oldal hossza.  K = 6 * 10 cm = 60 cm. ✅ Megoldás: 60 cm"
+      "explanation": "A szabályos hatszög kerülete K = n * a, ahol 'a' az oldal hossza.  K = 6 * 10 cm = 60 cm. ✅ Megoldás: 60 cm",
+      "difficulty": "hard"
     },
     {
       "question": "Ha egy konvex n-szög belső szögeinek összege 1080 fok, hány oldala van?",
@@ -173,7 +189,8 @@
         "c": "10"
       },
       "correct": "a",
-      "explanation": "A belső szögek összege (n-2) * 180°. Ha ez 1080, akkor (n-2) * 180° = 1080°, n-2=6, és n=8. ✅ Megoldás: 8"
+      "explanation": "A belső szögek összege (n-2) * 180°. Ha ez 1080, akkor (n-2) * 180° = 1080°, n-2=6, és n=8. ✅ Megoldás: 8",
+      "difficulty": "hard"
     },
     {
       "question": "Egy tízszögnek hány átlója van?",
@@ -183,7 +200,8 @@
         "c": "10"
       },
       "correct": "a",
-      "explanation": "Az átlók száma: (n * (n-3)) / 2.  10*(10-3)/2 = 35. ✅ Megoldás: 35."
+      "explanation": "Az átlók száma: (n * (n-3)) / 2.  10*(10-3)/2 = 35. ✅ Megoldás: 35.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik állítás HAMIS? Az átló...",
@@ -193,7 +211,8 @@
         "c": "...mindig merőleges az oldalakra."
       },
       "correct": "c",
-      "explanation": "A kocka átlói merőlegesen metszik egymást, de a legtöbb sokszögnél ez nem igaz. ✅ Megoldás: ...mindig merőleges az oldalakra."
+      "explanation": "A kocka átlói merőlegesen metszik egymást, de a legtöbb sokszögnél ez nem igaz. ✅ Megoldás: ...mindig merőleges az oldalakra.",
+      "difficulty": "hard"
     },
     {
       "question": "Hogyan számoljuk ki egy szabályos sokszög egy belső szögét?",
@@ -203,7 +222,8 @@
         "c": "180° / n"
       },
       "correct": "b",
-      "explanation": "Egy szabályos n-szög egy belső szöge: (n-2) * 180° / n.  ✅ Megoldás: (n-2) * 180° / n"
+      "explanation": "Egy szabályos n-szög egy belső szöge: (n-2) * 180° / n.  ✅ Megoldás: (n-2) * 180° / n",
+      "difficulty": "hard"
     },
     {
       "question": "Ha egy konvex n-szög minden belső szöge egyenlő, akkor az a(z)...",
@@ -213,7 +233,8 @@
         "c": "négyszög."
       },
       "correct": "a",
-      "explanation": "A szabályos sokszög definíciójának része, hogy minden oldala és minden szöge egyenlő nagyságú. ✅ Megoldás: Szabályos sokszög."
+      "explanation": "A szabályos sokszög definíciójának része, hogy minden oldala és minden szöge egyenlő nagyságú. ✅ Megoldás: Szabályos sokszög.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy szabályos ötszög egyik belső szöge hány fokos?",
@@ -223,7 +244,8 @@
         "c": "60°"
       },
       "correct": "a",
-      "explanation": "A belső szög képlete: (n-2) * 180° / n. Ötszög esetén n=5: (5-2) * 180° / 5 = 3 * 36° = 108°. ✅ Megoldás: 108°."
+      "explanation": "A belső szög képlete: (n-2) * 180° / n. Ötszög esetén n=5: (5-2) * 180° / 5 = 3 * 36° = 108°. ✅ Megoldás: 108°.",
+      "difficulty": "hard"
     }
   ]
 }

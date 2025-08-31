@@ -13,7 +13,8 @@
         "c": "Soros és párhuzamos kapcsolások kombinációja egy áramkörön belül."
       },
       "correct": "c",
-      "explanation": "A bonyolultabb áramkörök gyakran tartalmaznak sorosan kapcsolt elemeket, amelyek párhuzamosan vannak kapcsolva más elemekkel. Ezeket nevezzük vegyes kapcsolásoknak."
+      "explanation": "A bonyolultabb áramkörök gyakran tartalmaznak sorosan kapcsolt elemeket, amelyek párhuzamosan vannak kapcsolva más elemekkel. Ezeket nevezzük vegyes kapcsolásoknak.",
+      "difficulty": "easy"
     },
     {
       "question": "Három egyforma izzót párhuzamosan kapcsolunk egy elemre. Hogyan viszonyul a fényerejük egyetlen, ugyanilyen elemre kapcsolt izzó fényerejéhez?",
@@ -23,7 +24,8 @@
         "c": "Ugyanolyan fényesek lesznek."
       },
       "correct": "c",
-      "explanation": "Párhuzamos kapcsolásban minden izzó a telep teljes feszültségét kapja meg, függetlenül a többitől. Így mindegyik ugyanolyan fényerővel fog világítani, mintha egyedül lenne az áramkörben."
+      "explanation": "Párhuzamos kapcsolásban minden izzó a telep teljes feszültségét kapja meg, függetlenül a többitől. Így mindegyik ugyanolyan fényerővel fog világítani, mintha egyedül lenne az áramkörben.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik állítás igaz az eredő ellenállásra?",
@@ -33,7 +35,8 @@
         "c": "Soros kapcsolásnál mindig nő, párhuzamosnál mindig csökken."
       },
       "correct": "c",
-      "explanation": "Soros kapcsolásnál az ellenállások összeadódnak, így az eredő nagyobb lesz. Párhuzamos kapcsolásnál több út áll az áram rendelkezésére, így az eredő ellenállás mindig kisebb lesz, mint a legkisebb tagé."
+      "explanation": "Soros kapcsolásnál az ellenállások összeadódnak, így az eredő nagyobb lesz. Párhuzamos kapcsolásnál több út áll az áram rendelkezésére, így az eredő ellenállás mindig kisebb lesz, mint a legkisebb tagé.",
+      "difficulty": "easy"
     },
     {
       "question": "Két izzót egymás után kötünk be egy áramkörbe. Milyen kapcsolás ez?",
@@ -43,7 +46,8 @@
         "c": "Vegyes kapcsolás"
       },
       "correct": "a",
-      "explanation": "Amikor a fogyasztók egyetlen, elágazás nélküli áramköri ágban, láncszerűen követik egymást, azt soros kapcsolásnak nevezzük."
+      "explanation": "Amikor a fogyasztók egyetlen, elágazás nélküli áramköri ágban, láncszerűen követik egymást, azt soros kapcsolásnak nevezzük.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik kapcsolásban folyik ugyanakkora áram minden fogyasztón?",
@@ -53,7 +57,8 @@
         "c": "Mindkettőben."
       },
       "correct": "a",
-      "explanation": "Mivel soros kapcsolásnál az áramnak csak egy útja van, a vezető minden keresztmetszetén ugyanannyi töltés halad át egységnyi idő alatt, tehát az áramerősség minden fogyasztón azonos."
+      "explanation": "Mivel soros kapcsolásnál az áramnak csak egy útja van, a vezető minden keresztmetszetén ugyanannyi töltés halad át egységnyi idő alatt, tehát az áramerősség minden fogyasztón azonos.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi történik párhuzamos kapcsolásnál, ha az egyik izzó kiég?",
@@ -63,7 +68,8 @@
         "c": "Rövidzárlat keletkezik."
       },
       "correct": "b",
-      "explanation": "Párhuzamos kapcsolásnál az áram több úton haladhat. Ha az egyik ág megszakad, az áram a többi, ép ágon zavartalanul tovább tud folyni. Ezért használják a háztartásokban."
+      "explanation": "Párhuzamos kapcsolásnál az áram több úton haladhat. Ha az egyik ág megszakad, az áram a többi, ép ágon zavartalanul tovább tud folyni. Ezért használják a háztartásokban.",
+      "difficulty": "easy"
     },
     {
       "question": "Ha egy áramkörben az áramnak csak egy útja van, az...",
@@ -73,7 +79,8 @@
         "c": "...rövidzárlat."
       },
       "correct": "a",
-      "explanation": "Ez a soros kapcsolás definíciója. A fogyasztók láncszerűen vannak felfűzve egyetlen áramköri ágra."
+      "explanation": "Ez a soros kapcsolás definíciója. A fogyasztók láncszerűen vannak felfűzve egyetlen áramköri ágra.",
+      "difficulty": "easy"
     },
     {
       "question": "Két izzót külön ágakra, párhuzamosan kötünk be egy áramkörbe. Milyen kapcsolás ez?",
@@ -83,7 +90,8 @@
         "c": "Nincs neve."
       },
       "correct": "b",
-      "explanation": "Amikor az áramkör elágazik, és a fogyasztók ezeken a különálló, párhuzamos ágakon helyezkednek el, azt párhuzamos kapcsolásnak nevezzük."
+      "explanation": "Amikor az áramkör elágazik, és a fogyasztók ezeken a különálló, párhuzamos ágakon helyezkednek el, azt párhuzamos kapcsolásnak nevezzük.",
+      "difficulty": "easy"
     },
     {
       "question": "A háztartási lámpákat és konnektorokat...",
@@ -93,7 +101,8 @@
         "c": "...nem kötik sehogy."
       },
       "correct": "b",
-      "explanation": "A háztartásokban párhuzamos kapcsolást alkalmaznak, hogy minden eszköz a hálózati feszültséget kapja, és egymástól függetlenül lehessen őket működtetni."
+      "explanation": "A háztartásokban párhuzamos kapcsolást alkalmaznak, hogy minden eszköz a hálózati feszültséget kapja, és egymástól függetlenül lehessen őket működtetni.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik állítás igaz a feszültségre párhuzamos kapcsolásnál?",
@@ -103,7 +112,8 @@
         "c": "Az ágakban a feszültség nulla."
       },
       "correct": "b",
-      "explanation": "A párhuzamos kapcsolás nagy előnye, hogy minden ág közvetlenül az áramforrás pólusaira csatlakozik, ezért mindegyikre ugyanaz a feszültség (az áramforrás feszültsége) esik."
+      "explanation": "A párhuzamos kapcsolás nagy előnye, hogy minden ág közvetlenül az áramforrás pólusaira csatlakozik, ezért mindegyikre ugyanaz a feszültség (az áramforrás feszültsége) esik.",
+      "difficulty": "medium"
     },
     {
       "question": "Két, 10 Ω-os ellenállást sorba kapcsolunk. Mekkora az eredő ellenállás?",
@@ -113,7 +123,8 @@
         "c": "10 Ω"
       },
       "correct": "a",
-      "explanation": "Soros kapcsolásnál az ellenállásokat összeadjuk: R_eredő = R₁ + R₂ = 10 Ω + 10 Ω = 20 Ω."
+      "explanation": "Soros kapcsolásnál az ellenállásokat összeadjuk: R_eredő = R₁ + R₂ = 10 Ω + 10 Ω = 20 Ω.",
+      "difficulty": "medium"
     },
     {
       "question": "Hogyan viszonyul a párhuzamosan kapcsolt ellenállások eredője az egyes ellenállásokhoz?",
@@ -123,7 +134,8 @@
         "c": "Az eredő ellenállás az ellenállások összege."
       },
       "correct": "b",
-      "explanation": "Párhuzamos kapcsolásnál az áramnak több útja van, így a rendszer 'könnyebben átjárható'. Az eredő ellenállás mindig kisebb lesz, mint a legkisebb ellenállású ág ellenállása."
+      "explanation": "Párhuzamos kapcsolásnál az áramnak több útja van, így a rendszer 'könnyebben átjárható'. Az eredő ellenállás mindig kisebb lesz, mint a legkisebb ellenállású ág ellenállása.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy elágazásnál a főágban 6 A áram folyik. A két mellékág ellenállása egyenlő. Mekkora áram folyik egy-egy mellékágban?",
@@ -133,7 +145,8 @@
         "c": "3 A"
       },
       "correct": "c",
-      "explanation": "A csomóponti törvény szerint a 6 A áram szétoszlik. Mivel a két ág ellenállása egyenlő, az áram egyenlő arányban oszlik meg, tehát mindkét ágban 6 A / 2 = 3 A fog folyni."
+      "explanation": "A csomóponti törvény szerint a 6 A áram szétoszlik. Mivel a két ág ellenállása egyenlő, az áram egyenlő arányban oszlik meg, tehát mindkét ágban 6 A / 2 = 3 A fog folyni.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha egy áramkörben az áram útja elágazik, az...",
@@ -143,7 +156,8 @@
         "c": "...nyitott áramkör."
       },
       "correct": "b",
-      "explanation": "Az elágazási pont, vagy csomópont a párhuzamos kapcsolás egyértelmű ismérve. Itt oszlik szét a főági áram a mellékágakba."
+      "explanation": "Az elágazási pont, vagy csomópont a párhuzamos kapcsolás egyértelmű ismérve. Itt oszlik szét a főági áram a mellékágakba.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik állítás igaz a feszültségre soros kapcsolásnál?",
@@ -153,7 +167,8 @@
         "c": "A feszültség az áramkörben nulla."
       },
       "correct": "a",
-      "explanation": "Soros kapcsolásban az áramforrás feszültsége megoszlik a sorba kapcsolt fogyasztók között. A nagyobb ellenállású fogyasztóra nagyobb feszültség jut."
+      "explanation": "Soros kapcsolásban az áramforrás feszültsége megoszlik a sorba kapcsolt fogyasztók között. A nagyobb ellenállású fogyasztóra nagyobb feszültség jut.",
+      "difficulty": "medium"
     },
     {
       "question": "A régi típusú karácsonyfaizzó-soroknál, ha egy izzó kiégett, az egész füzér elaludt. Milyen kapcsolásúak voltak?",
@@ -163,7 +178,8 @@
         "c": "Soros"
       },
       "correct": "c",
-      "explanation": "Ez a jelenség a soros kapcsolás tipikus hátránya. Mivel az áramnak csak egy útja van, ha az bárhol megszakad, az egész áramkör működésképtelenné válik."
+      "explanation": "Ez a jelenség a soros kapcsolás tipikus hátránya. Mivel az áramnak csak egy útja van, ha az bárhol megszakad, az egész áramkör működésképtelenné válik.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik a két alapvető kapcsolási mód?",
@@ -173,7 +189,8 @@
         "c": "Soros és párhuzamos."
       },
       "correct": "c",
-      "explanation": "Az áramköri elemek összekötésének két alapvető módja a soros és a párhuzamos kapcsolás. Bonyolultabb áramkörök ezek kombinációjából állnak."
+      "explanation": "Az áramköri elemek összekötésének két alapvető módja a soros és a párhuzamos kapcsolás. Bonyolultabb áramkörök ezek kombinációjából állnak.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik kapcsolásnál nagyobb az eredő ellenállás két egyforma fogyasztó esetén?",
@@ -183,7 +200,8 @@
         "c": "Egyforma."
       },
       "correct": "a",
-      "explanation": "Soros kapcsolásnál az ellenállások összeadódnak (R_eredő = R+R = 2R), míg párhuzamosnál az eredő ellenállás kisebb lesz, mint a legkisebb tag (R_eredő = R/2). Tehát a soros eredő ellenállása a nagyobb."
+      "explanation": "Soros kapcsolásnál az ellenállások összeadódnak (R_eredő = R+R = 2R), míg párhuzamosnál az eredő ellenállás kisebb lesz, mint a legkisebb tag (R_eredő = R/2). Tehát a soros eredő ellenállása a nagyobb.",
+      "difficulty": "hard"
     },
     {
       "question": "Hogyan viszonyul a sorba kapcsolt ellenállások eredője az egyes ellenállásokhoz?",
@@ -193,7 +211,8 @@
         "c": "Az eredő ellenállás az ellenállások átlaga."
       },
       "correct": "a",
-      "explanation": "Soros kapcsolásnál az ellenállások összeadódnak, mert az áramnak mindegyiken át kell haladnia. A képlet: R_eredő = R₁ + R₂ + ..."
+      "explanation": "Soros kapcsolásnál az ellenállások összeadódnak, mert az áramnak mindegyiken át kell haladnia. A képlet: R_eredő = R₁ + R₂ + ...",
+      "difficulty": "hard"
     },
     {
       "question": "Mi történik soros kapcsolásnál, ha az egyik izzó kiég?",
@@ -203,7 +222,8 @@
         "c": "A többi izzó tovább működik."
       },
       "correct": "a",
-      "explanation": "Soros kapcsolásban az áramnak csak egy útja van. Ha ez az út bárhol megszakad (pl. egy izzó kiég), az egész áramkör nyitottá válik, és az áramlás mindenhol megszűnik."
+      "explanation": "Soros kapcsolásban az áramnak csak egy útja van. Ha ez az út bárhol megszakad (pl. egy izzó kiég), az egész áramkör nyitottá válik, és az áramlás mindenhol megszűnik.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy áramkörben van egy főkapcsoló és minden szobában külön lámpakapcsoló. Milyen a szobák kapcsolása?",
@@ -213,7 +233,8 @@
         "c": "Párhuzamos"
       },
       "correct": "c",
-      "explanation": "Ahhoz, hogy a szobák lámpáit egymástól függetlenül lehessen kapcsolni, párhuzamosan kell őket bekötni a fő vezetékre."
+      "explanation": "Ahhoz, hogy a szobák lámpáit egymástól függetlenül lehessen kapcsolni, párhuzamosan kell őket bekötni a fő vezetékre.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik állítás HAMIS?",
@@ -223,7 +244,8 @@
         "c": "Párhuzamos kapcsolásnál a feszültség minden ágban ugyanakkora."
       },
       "correct": "b",
-      "explanation": "Ez az állítás hamis. Párhuzamos kapcsolásnál az áramnak több útja van, így a rendszer teljes ellenállása csökken. Az eredő ellenállás mindig kisebb, mint a legkisebb ellenállású ág."
+      "explanation": "Ez az állítás hamis. Párhuzamos kapcsolásnál az áramnak több útja van, így a rendszer teljes ellenállása csökken. Az eredő ellenállás mindig kisebb, mint a legkisebb ellenállású ág.",
+      "difficulty": "hard"
     },
     {
       "question": "Két, 10 Ω-os ellenállást párhuzamosan kapcsolunk. Mekkora az eredő ellenállás?",
@@ -233,7 +255,8 @@
         "c": "10 Ω"
       },
       "correct": "b",
-      "explanation": "Két egyforma ellenállás párhuzamos kapcsolásakor az eredő ellenállás feleakkora lesz. A képlettel: 1/R_eredő = 1/10 + 1/10 = 2/10. Ebből R_eredő = 10/2 = 5 Ω."
+      "explanation": "Két egyforma ellenállás párhuzamos kapcsolásakor az eredő ellenállás feleakkora lesz. A képlettel: 1/R_eredő = 1/10 + 1/10 = 2/10. Ebből R_eredő = 10/2 = 5 Ω.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik kapcsolásban oszlik meg a főági áram a fogyasztók között?",
@@ -243,7 +266,8 @@
         "c": "Egyikben sem."
       },
       "correct": "b",
-      "explanation": "Párhuzamos kapcsolásnál a csomópontban a főági áram szétoszlik a különböző ágak között, általában a kisebb ellenállású ágban folyik nagyobb áram."
+      "explanation": "Párhuzamos kapcsolásnál a csomópontban a főági áram szétoszlik a különböző ágak között, általában a kisebb ellenállású ágban folyik nagyobb áram.",
+      "difficulty": "hard"
     },
     {
       "question": "Három egyforma izzót sorba kapcsolunk egy elemre. Hogyan viszonyul a fényerejük egyetlen, ugyanilyen elemre kapcsolt izzó fényerejéhez?",
@@ -253,7 +277,8 @@
         "c": "Sokkal halványabbak lesznek."
       },
       "correct": "c",
-      "explanation": "Soros kapcsolásnál az elem feszültsége megoszlik a három izzó között, így egy-egy izzóra csak a feszültség harmada jut. A kisebb feszültség miatt kisebb áram folyik rajtuk, ezért sokkal halványabban fognak világítani."
+      "explanation": "Soros kapcsolásnál az elem feszültsége megoszlik a három izzó között, így egy-egy izzóra csak a feszültség harmada jut. A kisebb feszültség miatt kisebb áram folyik rajtuk, ezért sokkal halványabban fognak világítani.",
+      "difficulty": "hard"
     }
   ]
 }

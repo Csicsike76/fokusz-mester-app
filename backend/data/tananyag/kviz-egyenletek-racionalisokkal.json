@@ -13,7 +13,8 @@
         "c": "4x + 3 = 1"
       },
       "correct": "c",
-      "explanation": "Ellenőrizzük a 'c' választ: 4*(-1/2) + 3 = -2 + 3 = 1. Az egyenlőség igaz."
+      "explanation": "Ellenőrizzük a 'c' választ: 4*(-1/2) + 3 = -2 + 3 = 1. Az egyenlőség igaz.",
+      "difficulty": "easy"
     },
     {
       "question": "Oldd meg: 0.8 - x = 0.2",
@@ -23,7 +24,8 @@
         "c": "-0.6"
       },
       "correct": "b",
-      "explanation": "Adjunk x-et mindkét oldalhoz: 0.8 = 0.2 + x. Vonjunk ki 0.2-t: x = 0.6."
+      "explanation": "Adjunk x-et mindkét oldalhoz: 0.8 = 0.2 + x. Vonjunk ki 0.2-t: x = 0.6.",
+      "difficulty": "easy"
     },
     {
       "question": "Ha egy szám 20%-a 15, akkor mennyi a szám 100%-a?",
@@ -33,7 +35,8 @@
         "c": "300"
       },
       "correct": "b",
-      "explanation": "Legyen a szám x. Az egyenlet: 0.20 * x = 15. Osszunk 0.2-vel: x = 15 / 0.2 = 75."
+      "explanation": "Legyen a szám x. Az egyenlet: 0.20 * x = 15. Osszunk 0.2-vel: x = 15 / 0.2 = 75.",
+      "difficulty": "easy"
     },
     {
       "question": "Oldd meg: -1/2 * x = 10",
@@ -43,7 +46,8 @@
         "c": "-20"
       },
       "correct": "c",
-      "explanation": "Szorozzuk mindkét oldalt -2-vel (az -1/2 reciprokával): x = 10 * (-2) = -20."
+      "explanation": "Szorozzuk mindkét oldalt -2-vel (az -1/2 reciprokával): x = 10 * (-2) = -20.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik átalakítás NEM ekvivalens, ha az alaphalmaz a racionális számok?",
@@ -53,7 +57,8 @@
         "c": "Mindkét oldal osztása 5-tel."
       },
       "correct": "a",
-      "explanation": "Egy változót tartalmazó kifejezéssel való szorzás nem ekvivalens átalakítás, mert a kifejezés értéke lehet 0, ami hamis megoldásokhoz vagy megoldásvesztéshez vezethet."
+      "explanation": "Egy változót tartalmazó kifejezéssel való szorzás nem ekvivalens átalakítás, mert a kifejezés értéke lehet 0, ami hamis megoldásokhoz vagy megoldásvesztéshez vezethet.",
+      "difficulty": "easy"
     },
     {
       "question": "Gondoltam egy számra. A feléhez hozzáadtam a harmadát, így 25-öt kaptam. Mi a gondolt szám?",
@@ -63,7 +68,8 @@
         "c": "50"
       },
       "correct": "a",
-      "explanation": "Az egyenlet: x/2 + x/3 = 25. Hozzuk közös nevezőre (6): 3x/6 + 2x/6 = 25. Így 5x/6 = 25. Szorozzunk 6-tal: 5x = 150. Osszunk 5-tel: x = 30."
+      "explanation": "Az egyenlet: x/2 + x/3 = 25. Hozzuk közös nevezőre (6): 3x/6 + 2x/6 = 25. Így 5x/6 = 25. Szorozzunk 6-tal: 5x = 150. Osszunk 5-tel: x = 30.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a 0.2x + 0.3x = 1 egyenlet megoldása?",
@@ -73,7 +79,8 @@
         "c": "2"
       },
       "correct": "c",
-      "explanation": "Először vonjuk össze a bal oldalon az x-es tagokat: 0.5x = 1. Osszunk 0.5-del (ami 2-vel való szorzást jelent): x = 1 / 0.5 = 2."
+      "explanation": "Először vonjuk össze a bal oldalon az x-es tagokat: 0.5x = 1. Osszunk 0.5-del (ami 2-vel való szorzást jelent): x = 1 / 0.5 = 2.",
+      "difficulty": "easy"
     },
     {
       "question": "Oldd meg az x/3 - 1 = 2 egyenletet!",
@@ -83,7 +90,8 @@
         "c": "6"
       },
       "correct": "b",
-      "explanation": "Először adjunk 1-et mindkét oldalhoz: x/3 = 3. Utána szorozzuk meg mindkét oldalt 3-mal: x = 9."
+      "explanation": "Először adjunk 1-et mindkét oldalhoz: x/3 = 3. Utána szorozzuk meg mindkét oldalt 3-mal: x = 9.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a 10 = 50x egyenlet megoldása?",
@@ -93,7 +101,8 @@
         "c": "500"
       },
       "correct": "a",
-      "explanation": "Osszuk mindkét oldalt 50-nel: x = 10 / 50 = 1/5 = 0.2."
+      "explanation": "Osszuk mindkét oldalt 50-nel: x = 10 / 50 = 1/5 = 0.2.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az a szám, aminek a tizedrésze 0.7?",
@@ -103,7 +112,8 @@
         "c": "70"
       },
       "correct": "b",
-      "explanation": "Az egyenlet: x/10 = 0.7. Szorozzuk mindkét oldalt 10-zel: x = 7."
+      "explanation": "Az egyenlet: x/10 = 0.7. Szorozzuk mindkét oldalt 10-zel: x = 7.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy apa 30 évvel idősebb a fiánál. Ketten együtt 42 évesek. Hány éves a fiú?",
@@ -113,7 +123,8 @@
         "c": "18"
       },
       "correct": "a",
-      "explanation": "Legyen a fiú x, az apa x+30. Az egyenlet: x + (x+30) = 42. Összevonva: 2x+30=42. Kivonva 30-at: 2x=12. Osztva 2-vel: x=6."
+      "explanation": "Legyen a fiú x, az apa x+30. Az egyenlet: x + (x+30) = 42. Összevonva: 2x+30=42. Kivonva 30-at: 2x=12. Osztva 2-vel: x=6.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy üveg 1/3-ig van tele. Ha beleöntünk még 2 decit, félig lesz. Hány decis az üveg?",
@@ -123,7 +134,8 @@
         "c": "12 deci"
       },
       "correct": "c",
-      "explanation": "Legyen az üveg űrtartalma x. Az egyenlet: x/3 + 2 = x/2. Hozzuk közös nevezőre (6): 2x/6 + 12/6 = 3x/6. Szorozzunk 6-tal: 2x+12=3x. Vonjunk ki 2x-et: x=12."
+      "explanation": "Legyen az üveg űrtartalma x. Az egyenlet: x/3 + 2 = x/2. Hozzuk közös nevezőre (6): 2x/6 + 12/6 = 3x/6. Szorozzunk 6-tal: 2x+12=3x. Vonjunk ki 2x-et: x=12.",
+      "difficulty": "medium"
     },
     {
       "question": "Oldd meg: (x - 5)/2 = -3",
@@ -133,7 +145,8 @@
         "c": "11"
       },
       "correct": "a",
-      "explanation": "Először szorozzuk mindkét oldalt 2-vel: x - 5 = -6. Utána adjunk hozzá 5-öt mindkét oldalhoz: x = -6 + 5 = -1."
+      "explanation": "Először szorozzuk mindkét oldalt 2-vel: x - 5 = -6. Utána adjunk hozzá 5-öt mindkét oldalhoz: x = -6 + 5 = -1.",
+      "difficulty": "medium"
     },
     {
       "question": "Oldd meg: 0.1x + 2 = 3.2",
@@ -143,7 +156,8 @@
         "c": "0.12"
       },
       "correct": "b",
-      "explanation": "Először vonjunk ki 2-t mindkét oldalból: 0.1x = 1.2. Utána osszunk 0.1-gyel (ami ugyanaz, mint 10-zel szorozni): x = 1.2 / 0.1 = 12."
+      "explanation": "Először vonjunk ki 2-t mindkét oldalból: 0.1x = 1.2. Utána osszunk 0.1-gyel (ami ugyanaz, mint 10-zel szorozni): x = 1.2 / 0.1 = 12.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi az a szám, aminek a 150%-a 60?",
@@ -153,7 +167,8 @@
         "c": "30"
       },
       "correct": "b",
-      "explanation": "Az egyenlet: 1.5 * x = 60. Osszuk mindkét oldalt 1.5-del: x = 60 / 1.5 = 40."
+      "explanation": "Az egyenlet: 1.5 * x = 60. Osszuk mindkét oldalt 1.5-del: x = 60 / 1.5 = 40.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy kert kerülete 50 méter. Az egyik oldala 10 méter. Mivel nem négyzet, milyen hosszú a másik oldala?",
@@ -163,7 +178,8 @@
         "c": "15 m"
       },
       "correct": "c",
-      "explanation": "A kerület képlete K=2(a+b). 50 = 2(10+b). Osszunk 2-vel: 25 = 10+b. Vonjunk ki 10-et: b=15 m."
+      "explanation": "A kerület képlete K=2(a+b). 50 = 2(10+b). Osszunk 2-vel: 25 = 10+b. Vonjunk ki 10-et: b=15 m.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha egy szám kétharmada 10. Melyik ez a szám?",
@@ -173,7 +189,8 @@
         "c": "30"
       },
       "correct": "a",
-      "explanation": "Az egyenlet: (2/3)*x = 10. Szorozzuk mindkét oldalt a 2/3 reciprokával, azaz 3/2-del: x = 10 * (3/2) = 15."
+      "explanation": "Az egyenlet: (2/3)*x = 10. Szorozzuk mindkét oldalt a 2/3 reciprokával, azaz 3/2-del: x = 10 * (3/2) = 15.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy szám és a felének összege 18. Melyik ez a szám?",
@@ -183,7 +200,8 @@
         "c": "27"
       },
       "correct": "b",
-      "explanation": "Az egyenlet: x + x/2 = 18. Összevonva: 1.5x = 18. Osztva 1.5-del: x = 12."
+      "explanation": "Az egyenlet: x + x/2 = 18. Összevonva: 1.5x = 18. Osztva 1.5-del: x = 12.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a 2x + 1.5 = 4.5 egyenlet megoldása?",
@@ -193,7 +211,8 @@
         "c": "6"
       },
       "correct": "a",
-      "explanation": "Először mindkét oldalból kivonunk 1.5-öt: 2x = 3. Utána mindkét oldalt elosztjuk 2-vel: x = 1.5."
+      "explanation": "Először mindkét oldalból kivonunk 1.5-öt: 2x = 3. Utána mindkét oldalt elosztjuk 2-vel: x = 1.5.",
+      "difficulty": "hard"
     },
     {
       "question": "Milyen x-re lesz 2x+1 és 3x-1 értéke egyenlő?",
@@ -203,7 +222,8 @@
         "c": "Nincs ilyen x."
       },
       "correct": "a",
-      "explanation": "Felírjuk az egyenletet: 2x+1 = 3x-1. Vonjunk ki 2x-et: 1 = x-1. Adjunk hozzá 1-et: 2 = x."
+      "explanation": "Felírjuk az egyenletet: 2x+1 = 3x-1. Vonjunk ki 2x-et: 1 = x-1. Adjunk hozzá 1-et: 2 = x.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi az -x + 0.5 = -2.5 egyenlet megoldása?",
@@ -213,7 +233,8 @@
         "c": "-2"
       },
       "correct": "a",
-      "explanation": "Először kivonunk 0.5-öt mindkét oldalból: -x = -3. Utána szorozzuk mindkét oldalt -1-gyel: x = 3."
+      "explanation": "Először kivonunk 0.5-öt mindkét oldalból: -x = -3. Utána szorozzuk mindkét oldalt -1-gyel: x = 3.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi az 5(x - 0.4) = 8 egyenlet megoldása?",
@@ -223,7 +244,8 @@
         "c": "2.4"
       },
       "correct": "a",
-      "explanation": "Először bontsuk fel a zárójelet: 5x - 2 = 8. Utána adjunk 2-t mindkét oldalhoz: 5x = 10. Végül osszunk 5-tel: x = 2."
+      "explanation": "Először bontsuk fel a zárójelet: 5x - 2 = 8. Utána adjunk 2-t mindkét oldalhoz: 5x = 10. Végül osszunk 5-tel: x = 2.",
+      "difficulty": "hard"
     },
     {
       "question": "Miért fontos az 'alaphalmaz' egyenletek megoldásánál?",
@@ -233,7 +255,8 @@
         "c": "Nem fontos."
       },
       "correct": "a",
-      "explanation": "Hiába kapunk egy matematikai megoldást, ha az nem esik a megengedett értékek halmazába (pl. egy hosszúság nem lehet negatív), akkor az a feladatnak nem megoldása."
+      "explanation": "Hiába kapunk egy matematikai megoldást, ha az nem esik a megengedett értékek halmazába (pl. egy hosszúság nem lehet negatív), akkor az a feladatnak nem megoldása.",
+      "difficulty": "hard"
     },
     {
       "question": "Oldd meg: (3/4)x - 2 = 7",
@@ -243,7 +266,8 @@
         "c": "36/4"
       },
       "correct": "a",
-      "explanation": "Először adjunk 2-t mindkét oldalhoz: (3/4)x = 9. Utána szorozzunk a 3/4 reciprokával, 4/3-dal: x = 9 * (4/3) = 12."
+      "explanation": "Először adjunk 2-t mindkét oldalhoz: (3/4)x = 9. Utána szorozzunk a 3/4 reciprokával, 4/3-dal: x = 9 * (4/3) = 12.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy téglalap kerülete 15, egyik oldala 3.5. Milyen hosszú a másik oldal?",
@@ -253,7 +277,8 @@
         "c": "7.5"
       },
       "correct": "b",
-      "explanation": "A kerület képlete K=2(a+b). 15 = 2(3.5+b). Osszunk 2-vel: 7.5 = 3.5+b. Vonjunk ki 3.5-et: b=4."
+      "explanation": "A kerület képlete K=2(a+b). 15 = 2(3.5+b). Osszunk 2-vel: 7.5 = 3.5+b. Vonjunk ki 3.5-et: b=4.",
+      "difficulty": "hard"
     }
   ]
 }

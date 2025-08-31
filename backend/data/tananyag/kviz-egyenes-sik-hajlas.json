@@ -13,7 +13,8 @@
         "c": "a testmagasság és az alaplap hajlásszögét"
       },
       "correct": "b",
-      "explanation": "Két sík hajlásszögét a metszésvonalukra állított merőlegesek szögével mérjük. Ez a gúlánál az oldallap magassága és annak vetülete közötti szög."
+      "explanation": "Két sík hajlásszögét a metszésvonalukra állított merőlegesek szögével mérjük. Ez a gúlánál az oldallap magassága és annak vetülete közötti szög.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy sík és egy rá illeszkedő egyenes hajlásszöge...",
@@ -23,7 +24,8 @@
         "c": "nincs értelmezve"
       },
       "correct": "a",
-      "explanation": "Ha az egyenes a síkon fekszik, a vetülete önmaga. Egy egyenes önmagával 0°-os szöget zár be."
+      "explanation": "Ha az egyenes a síkon fekszik, a vetülete önmaga. Egy egyenes önmagával 0°-os szöget zár be.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy ferde, a síkot metsző szakasz merőleges vetülete a síkon...",
@@ -33,7 +35,8 @@
         "c": "rövidebb, mint az eredeti szakasz."
       },
       "correct": "c",
-      "explanation": "A ferde szakasz, a vetülete és a vetítősugarak egy derékszögű háromszöget alkotnak. Ebben a háromszögben az eredeti szakasz az átfogó, a vetület pedig az egyik befogó. Az átfogó mindig hosszabb a befogónál."
+      "explanation": "A ferde szakasz, a vetülete és a vetítősugarak egy derékszögű háromszöget alkotnak. Ebben a háromszögben az eredeti szakasz az átfogó, a vetület pedig az egyik befogó. Az átfogó mindig hosszabb a befogónál.",
+      "difficulty": "easy"
     },
     {
       "question": "Mekkora a legnagyobb hajlásszöge lehet egy egyenesnek egy síkhoz?",
@@ -43,7 +46,8 @@
         "c": "90°"
       },
       "correct": "c",
-      "explanation": "A hajlásszög definíció szerint mindig 0° és 90° közé esik. A legnagyobb lehetséges érték a derékszög, ami a merőlegességet jelenti."
+      "explanation": "A hajlásszög definíció szerint mindig 0° és 90° közé esik. A legnagyobb lehetséges érték a derékszög, ami a merőlegességet jelenti.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi egy kocka testátlójának a vetülete az alaplap síkján?",
@@ -53,7 +57,8 @@
         "c": "egy pont"
       },
       "correct": "a",
-      "explanation": "A testátló az egyik alsó csúcsot köti össze a szemközti felsővel. Az alsó csúcs vetülete önmaga. A felső csúcs vetülete a vele egyvonalban lévő másik alsó csúcs. A két vetületi pontot összekötve pont az alaplap átlóját kapjuk."
+      "explanation": "A testátló az egyik alsó csúcsot köti össze a szemközti felsővel. Az alsó csúcs vetülete önmaga. A felső csúcs vetülete a vele egyvonalban lévő másik alsó csúcs. A két vetületi pontot összekötve pont az alaplap átlóját kapjuk.",
+      "difficulty": "easy"
     },
     {
       "question": "Mikor a leghosszabb egy 10 méteres rúd árnyéka a vízszintes talajon?",
@@ -63,7 +68,8 @@
         "c": "mindig ugyanolyan hosszú"
       },
       "correct": "b",
-      "explanation": "Az árnyék a rúd merőleges vetülete a talajra. Amikor a Nap alacsonyan jár, a napsugarak laposabb szögben érkeznek, így az 'árnyék' hosszabb lesz."
+      "explanation": "Az árnyék a rúd merőleges vetülete a talajra. Amikor a Nap alacsonyan jár, a napsugarak laposabb szögben érkeznek, így az 'árnyék' hosszabb lesz.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy kocka függőleges oldalélének mekkora a hajlásszöge az alaplap síkjához?",
@@ -73,7 +79,8 @@
         "c": "0°"
       },
       "correct": "a",
-      "explanation": "Egy kocka függőleges élei merőlegesek az alaplapra. A merőleges egyenesek hajlásszöge a síkhoz definíció szerint 90°."
+      "explanation": "Egy kocka függőleges élei merőlegesek az alaplapra. A merőleges egyenesek hajlásszöge a síkhoz definíció szerint 90°.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy egyenes merőleges egy sík minden egyenesére. Igaz ez az állítás?",
@@ -83,7 +90,8 @@
         "c": "Csak a párhuzamosakra."
       },
       "correct": "b",
-      "explanation": "A síkra merőleges egyenes csak a síkban fekvő, őt metsző egyenesekre merőleges. Azokkal az egyenesekkel, amik nem mennek át a döfésponton, kitérő helyzetű."
+      "explanation": "A síkra merőleges egyenes csak a síkban fekvő, őt metsző egyenesekre merőleges. Azokkal az egyenesekkel, amik nem mennek át a döfésponton, kitérő helyzetű.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy egyenes hajlásszöge egy síkhoz α. Milyen a hajlásszög, ha 0° < α < 90°?",
@@ -93,7 +101,8 @@
         "c": "derékszög"
       },
       "correct": "a",
-      "explanation": "A hajlásszög definíció szerint mindig 0° és 90° közé esik. Az ilyen szögeket hegyesszögnek nevezzük."
+      "explanation": "A hajlásszög definíció szerint mindig 0° és 90° közé esik. Az ilyen szögeket hegyesszögnek nevezzük.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy sípálya hajlásszöge 30°. Melyik állítás igaz?",
@@ -103,7 +112,8 @@
         "c": "A pálya magassága egyenlő a vízszintes vetületével."
       },
       "correct": "b",
-      "explanation": "Egy derékszögű háromszögben a 30°-os szöggel szemközti befogó (a magasság) fele az átfogónak (a pálya hossza)."
+      "explanation": "Egy derékszögű háromszögben a 30°-os szöggel szemközti befogó (a magasság) fele az átfogónak (a pálya hossza).",
+      "difficulty": "medium"
     },
     {
       "question": "Mi egy, a síkra merőleges szakasz merőleges vetülete a síkon?",
@@ -113,7 +123,8 @@
         "c": "egy rövidebb szakasz"
       },
       "correct": "a",
-      "explanation": "A szakasz minden pontjának ugyanoda, a szakasz talppontjába esik a vetülete. Tehát az egész szakasz vetülete egyetlen pont lesz."
+      "explanation": "A szakasz minden pontjának ugyanoda, a szakasz talppontjába esik a vetülete. Tehát az egész szakasz vetülete egyetlen pont lesz.",
+      "difficulty": "medium"
     },
     {
       "question": "Mekkora egy, a síkra merőleges egyenes hajlásszöge a síkhoz?",
@@ -123,7 +134,8 @@
         "c": "45°"
       },
       "correct": "a",
-      "explanation": "A síkra merőleges egyenes vetülete a síkon egyetlen pont. A definíció szerint ilyenkor a hajlásszöget 90°-nak tekintjük."
+      "explanation": "A síkra merőleges egyenes vetülete a síkon egyetlen pont. A definíció szerint ilyenkor a hajlásszöget 90°-nak tekintjük.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a 'döféspont'?",
@@ -133,7 +145,8 @@
         "c": "A sík középpontja."
       },
       "correct": "b",
-      "explanation": "A döféspont a metszés egy másik neve, amit akkor használunk, ha egy egyenes 'átdöf' egy síkot. Ez az egyenes és a sík egyetlen közös pontja."
+      "explanation": "A döféspont a metszés egy másik neve, amit akkor használunk, ha egy egyenes 'átdöf' egy síkot. Ez az egyenes és a sík egyetlen közös pontja.",
+      "difficulty": "medium"
     },
     {
       "question": "Mekkora egy, a síkkal párhuzamos egyenes hajlásszöge a síkhoz?",
@@ -143,7 +156,8 @@
         "c": "0°"
       },
       "correct": "c",
-      "explanation": "Ha egy egyenes párhuzamos a síkkal, akkor a merőleges vetülete is egy vele párhuzamos egyenes lesz. Két párhuzamos egyenes hajlásszöge 0°."
+      "explanation": "Ha egy egyenes párhuzamos a síkkal, akkor a merőleges vetülete is egy vele párhuzamos egyenes lesz. Két párhuzamos egyenes hajlásszöge 0°.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy lejtő 100 méter hosszan 20 métert emelkedik. Mi a lejtő hajlásszögének szinusza?",
@@ -153,7 +167,8 @@
         "c": "nem lehet tudni"
       },
       "correct": "b",
-      "explanation": "A lejtő hossza az átfogó (100 m), az emelkedés a szöggel szemközti befogó (20 m). A szinusz definíciója: szemközti befogó / átfogó, tehát 20 / 100 = 0,2."
+      "explanation": "A lejtő hossza az átfogó (100 m), az emelkedés a szöggel szemközti befogó (20 m). A szinusz definíciója: szemközti befogó / átfogó, tehát 20 / 100 = 0,2.",
+      "difficulty": "medium"
     },
     {
       "question": "Hogyan definiáljuk egy egyenes és egy sík hajlásszögét?",
@@ -163,7 +178,8 @@
         "c": "Mindig 90°."
       },
       "correct": "b",
-      "explanation": "A hajlásszöget úgy kapjuk meg, hogy az egyenes 'árnyékát', azaz a síkra eső merőleges vetületét vesszük. A két egyenes (az eredeti és a vetülete) által bezárt szög a hajlásszög."
+      "explanation": "A hajlásszöget úgy kapjuk meg, hogy az egyenes 'árnyékát', azaz a síkra eső merőleges vetületét vesszük. A két egyenes (az eredeti és a vetülete) által bezárt szög a hajlásszög.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi egy, a síkkal párhuzamos szakasz merőleges vetülete a síkon?",
@@ -173,7 +189,8 @@
         "c": "egy pont"
       },
       "correct": "b",
-      "explanation": "Ha a szakasz párhuzamos a síkkal, akkor a vetítés során nem 'rövidül'. A vetület hossza pontosan megegyezik az eredeti szakasz hosszával."
+      "explanation": "Ha a szakasz párhuzamos a síkkal, akkor a vetítés során nem 'rövidül'. A vetület hossza pontosan megegyezik az eredeti szakasz hosszával.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy rámpa 10 méter hosszú, és a vége 2 méterrel van magasabban, mint az eleje. Mi adja meg a rámpa hajlásszögét (α) a talajhoz?",
@@ -183,7 +200,8 @@
         "c": "tan(α) = 2/10"
       },
       "correct": "a",
-      "explanation": "A rámpa (átfogó), a magasság (szemközti befogó) és a vízszintes vetület derékszögű háromszöget alkot. A szemközti befogó és az átfogó aránya a szinusz."
+      "explanation": "A rámpa (átfogó), a magasság (szemközti befogó) és a vízszintes vetület derékszögű háromszöget alkot. A szemközti befogó és az átfogó aránya a szinusz.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy repülőgép 1 km magasan repül, és a leszállópálya elejét 10°-os depressziószögben (lehajlási szögben) látja. Milyen messze van a pályától?",
@@ -193,7 +211,8 @@
         "c": "1 / sin(10°)"
       },
       "correct": "a",
-      "explanation": "A magasság (1km) a szöggel szemközti befogó, a távolság a szomszédos befogó. A tangens definíciója: tan(10°) = szemközti / szomszédos = 1 / távolság. Ebből a távolság = 1 / tan(10°)."
+      "explanation": "A magasság (1km) a szöggel szemközti befogó, a távolság a szomszédos befogó. A tangens definíciója: tan(10°) = szemközti / szomszédos = 1 / távolság. Ebből a távolság = 1 / tan(10°).",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a hajlásszöge egy kocka lapátlójának ahhoz a laphoz, amin fekszik?",
@@ -203,7 +222,8 @@
         "c": "90°"
       },
       "correct": "a",
-      "explanation": "A lapátló illeszkedik a lap síkjára, azaz minden pontja a síkon van. Az illeszkedő egyenesek hajlásszöge a síkhoz 0°."
+      "explanation": "A lapátló illeszkedik a lap síkjára, azaz minden pontja a síkon van. Az illeszkedő egyenesek hajlásszöge a síkhoz 0°.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi egy kocka oldallapjának átlójának a vetülete az alaplap síkján?",
@@ -213,7 +233,8 @@
         "c": "az alaplap egyik éle"
       },
       "correct": "c",
-      "explanation": "Válasszuk a jobb oldali lap átlóját. Az egyik végpontjának vetülete önmaga. A másik végpontjának vetülete a vele egyvonalban lévő alsó csúcs. A két vetületi pontot összekötve az alaplap egyik élét kapjuk."
+      "explanation": "Válasszuk a jobb oldali lap átlóját. Az egyik végpontjának vetülete önmaga. A másik végpontjának vetülete a vele egyvonalban lévő alsó csúcs. A két vetületi pontot összekötve az alaplap egyik élét kapjuk.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha egy sík és egy egyenes hajlásszöge 60°, mekkora szöget zár be az egyenes a sík normálisával (a síkra merőleges egyenessel)?",
@@ -223,7 +244,8 @@
         "c": "30°"
       },
       "correct": "c",
-      "explanation": "Az egyenes, a vetülete és a normális egy derékszögű háromszöget feszítenek ki. A hajlásszög 60°. A normális és a vetület szöge 90°. A háromszög szögeinek összege 180°, így a keresett szög 180°-90°-60°=30°."
+      "explanation": "Az egyenes, a vetülete és a normális egy derékszögű háromszöget feszítenek ki. A hajlásszög 60°. A normális és a vetület szöge 90°. A háromszög szögeinek összege 180°, így a keresett szög 180°-90°-60°=30°.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha egy egyenes és egy sík hajlásszöge 45°, akkor a síkban van-e olyan egyenes, amivel 90°-ot zár be?",
@@ -233,7 +255,8 @@
         "c": "Csak akkor, ha a sík függőleges."
       },
       "correct": "a",
-      "explanation": "A hajlásszög a legkisebb szög, amit az egyenes a síkbeli egyenesekkel bezár. A síkban a vetületre merőleges egyenesekre maga az eredeti egyenes is merőleges lesz (három merőleges tétele)."
+      "explanation": "A hajlásszög a legkisebb szög, amit az egyenes a síkbeli egyenesekkel bezár. A síkban a vetületre merőleges egyenesekre maga az eredeti egyenes is merőleges lesz (három merőleges tétele).",
+      "difficulty": "hard"
     },
     {
       "question": "Mi az a derékszögű háromszög, amiben a hajlásszöget mérjük?",
@@ -243,7 +266,8 @@
         "c": "két szakasz és egy pont"
       },
       "correct": "a",
-      "explanation": "A hajlásszöget egy segéd-háromszögben keressük. A háromszög oldalai: az eredeti ferde szakasz (átfogó), a szakasz vetülete a síkon (egyik befogó), és a szakasz végpontjából a síkra bocsátott merőleges (másik befogó)."
+      "explanation": "A hajlásszöget egy segéd-háromszögben keressük. A háromszög oldalai: az eredeti ferde szakasz (átfogó), a szakasz vetülete a síkon (egyik befogó), és a szakasz végpontjából a síkra bocsátott merőleges (másik befogó).",
+      "difficulty": "hard"
     }
   ]
 }

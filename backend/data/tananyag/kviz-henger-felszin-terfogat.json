@@ -13,7 +13,8 @@
         "c": "Olyan test, aminek az alapja négyzet."
       },
       "correct": "a",
-      "explanation": "A henger olyan test, melynek az alapja egy kör, és az oldala (palástja) egyenes vonal. Gondolj a konzervdobozra! ✅ Megoldás: Olyan test, melynek alapja kör, és az oldala egyenes vonal."
+      "explanation": "A henger olyan test, melynek az alapja egy kör, és az oldala (palástja) egyenes vonal. Gondolj a konzervdobozra! ✅ Megoldás: Olyan test, melynek alapja kör, és az oldala egyenes vonal.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen alakúak a henger alapjai?",
@@ -23,7 +24,8 @@
         "c": "Körök."
       },
       "correct": "c",
-      "explanation": "A henger alapjai kör alakúak.  ✅ Megoldás: Körök."
+      "explanation": "A henger alapjai kör alakúak.  ✅ Megoldás: Körök.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a henger térfogatának a képlete?",
@@ -33,7 +35,8 @@
         "c": "Térfogat = alap + magasság"
       },
       "correct": "a",
-      "explanation": "A henger térfogatát úgy számoljuk ki, hogy az alapterületet megszorozzuk a magassággal.  ✅ Megoldás: Térfogat = alap * magasság"
+      "explanation": "A henger térfogatát úgy számoljuk ki, hogy az alapterületet megszorozzuk a magassággal.  ✅ Megoldás: Térfogat = alap * magasság",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a henger felszíne?",
@@ -43,7 +46,8 @@
         "c": "Csak a palást területe."
       },
       "correct": "b",
-      "explanation": "A henger felszíne a két alap kör területéből és az oldalfelület (palást) területéből áll. ✅ Megoldás: A két alap kör területe és az oldalfelület (palást) területe."
+      "explanation": "A henger felszíne a két alap kör területéből és az oldalfelület (palást) területéből áll. ✅ Megoldás: A két alap kör területe és az oldalfelület (palást) területe.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a henger palástja?",
@@ -53,7 +57,8 @@
         "c": "A henger belseje."
       },
       "correct": "b",
-      "explanation": "A palást a henger oldalfelülete, ami a két alaplapot összeköti. Ha kiterítjük, akkor egy téglalap. ✅ Megoldás: Az a rész, ami a két alaplapot összeköti."
+      "explanation": "A palást a henger oldalfelülete, ami a két alaplapot összeköti. Ha kiterítjük, akkor egy téglalap. ✅ Megoldás: Az a rész, ami a két alaplapot összeköti.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a kör területe?",
@@ -63,7 +68,8 @@
         "c": "T = r * π"
       },
       "correct": "a",
-      "explanation": "A kör területét a sugarának (r) négyzetét szorozva π-vel számoljuk ki.  ✅ Megoldás: T = r * r * π"
+      "explanation": "A kör területét a sugarának (r) négyzetét szorozva π-vel számoljuk ki.  ✅ Megoldás: T = r * r * π",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a palást területe, ha kiterítjük?",
@@ -73,7 +79,8 @@
         "c": "Egy háromszög."
       },
       "correct": "b",
-      "explanation": "A henger palástja a kiterítve egy téglalap.  ✅ Megoldás: Egy téglalap."
+      "explanation": "A henger palástja a kiterítve egy téglalap.  ✅ Megoldás: Egy téglalap.",
+      "difficulty": "easy"
     },
     {
       "question": "Ha a henger sugara (r) 2 cm, a magassága (m) 5 cm, mekkora a térfogata?",
@@ -83,7 +90,8 @@
         "c": "10π cm³"
       },
       "correct": "a",
-      "explanation": "A térfogat = alap * magasság = (π * r²) * m = π * 2² * 5 = 20π cm³. ✅ Megoldás: 20π cm³"
+      "explanation": "A térfogat = alap * magasság = (π * r²) * m = π * 2² * 5 = 20π cm³. ✅ Megoldás: 20π cm³",
+      "difficulty": "easy"
     },
     {
       "question": "Ha a henger sugara (r) 2 cm, a magassága (m) 5 cm, mekkora a palást területe?",
@@ -93,7 +101,8 @@
         "c": "40π cm²"
       },
       "correct": "a",
-      "explanation": "A palást területe = 2 * r * π * magasság = 2 * 2 * π * 5 = 20π cm². ✅ Megoldás: 20π cm²"
+      "explanation": "A palást területe = 2 * r * π * magasság = 2 * 2 * π * 5 = 20π cm². ✅ Megoldás: 20π cm²",
+      "difficulty": "medium"
     },
     {
       "question": "Ha a henger sugara (r) 2 cm, a magassága (m) 5 cm, mekkora a felszíne?",
@@ -103,7 +112,8 @@
         "c": "24π cm²"
       },
       "correct": "c",
-      "explanation": "Felszín = 2 * alap terület + palást terület = 2 * (π * r²) + (2 * r * π * m) = 2 * (π * 2²) + 20π = 8π + 20π = 28π cm². ✅ Megoldás: 28π cm²"
+      "explanation": "Felszín = 2 * alap terület + palást terület = 2 * (π * r²) + (2 * r * π * m) = 2 * (π * 2²) + 20π = 8π + 20π = 28π cm². ✅ Megoldás: 28π cm²",
+      "difficulty": "medium"
     },
     {
       "question": "Ha egy henger alapterülete 10 cm², a magassága 3 cm. Mennyi a térfogata?",
@@ -113,7 +123,8 @@
         "c": "7 cm³"
       },
       "correct": "b",
-      "explanation": "Térfogat = Alap * Magasság = 10*3=30 cm³. ✅ Megoldás: 30 cm³"
+      "explanation": "Térfogat = Alap * Magasság = 10*3=30 cm³. ✅ Megoldás: 30 cm³",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik mértékegység a térfogatra vonatkozik?",
@@ -123,7 +134,8 @@
         "c": "cm³"
       },
       "correct": "c",
-      "explanation": "A térfogatot köbös egységben mérjük, azaz cm³.  ✅ Megoldás: cm³"
+      "explanation": "A térfogatot köbös egységben mérjük, azaz cm³.  ✅ Megoldás: cm³",
+      "difficulty": "medium"
     },
     {
       "question": "Ha egy henger átmérője 4 cm, magassága 6 cm. Mennyi a sugara?",
@@ -133,7 +145,8 @@
         "c": "8 cm"
       },
       "correct": "a",
-      "explanation": "A sugár (r) a kör középpontjából a körvonalig tart, az átmérő (d) a kör két pontját köti össze a középponton át. A sugár az átmérő fele.  ✅ Megoldás: 2 cm"
+      "explanation": "A sugár (r) a kör középpontjából a körvonalig tart, az átmérő (d) a kör két pontját köti össze a középponton át. A sugár az átmérő fele.  ✅ Megoldás: 2 cm",
+      "difficulty": "medium"
     },
     {
       "question": "Egy henger átmérője 4 cm, a magassága 6 cm. Mekkora a térfogata?",
@@ -143,7 +156,8 @@
         "c": "6π cm³"
       },
       "correct": "a",
-      "explanation": "A sugár 2 cm. V = (π * r²) * m = π * 2² * 6 = 24π cm³. ✅ Megoldás: 24π cm³"
+      "explanation": "A sugár 2 cm. V = (π * r²) * m = π * 2² * 6 = 24π cm³. ✅ Megoldás: 24π cm³",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik a palást területe?",
@@ -153,7 +167,8 @@
         "c": "T = r*π*m"
       },
       "correct": "b",
-      "explanation": "A palást területe:  2*r*π*m. ✅ Megoldás: T = 2*r*π*m"
+      "explanation": "A palást területe:  2*r*π*m. ✅ Megoldás: T = 2*r*π*m",
+      "difficulty": "medium"
     },
     {
       "question": "Ha a henger magassága kétszeresére nő, a térfogata...",
@@ -163,7 +178,8 @@
         "c": "Ugyanannyi marad."
       },
       "correct": "a",
-      "explanation": "A térfogat egyenesen arányos a magassággal.  ✅ Megoldás: Kétszeresére nő."
+      "explanation": "A térfogat egyenesen arányos a magassággal.  ✅ Megoldás: Kétszeresére nő.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha egy henger sugarát megduplázzuk, a térfogata...",
@@ -173,7 +189,8 @@
         "c": "Ugyanannyi marad."
       },
       "correct": "b",
-      "explanation": "A sugár a négyzettel szerepel a térfogat képletében: V =  π * r² * m.  ✅ Megoldás: Négyszeresére nő."
+      "explanation": "A sugár a négyzettel szerepel a térfogat képletében: V =  π * r² * m.  ✅ Megoldás: Négyszeresére nő.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha egy henger sugarát és magasságát is megduplázzuk, akkor a térfogata...",
@@ -183,7 +200,8 @@
         "c": "Ugyanannyi marad."
       },
       "correct": "b",
-      "explanation": "A térfogat mind a sugár, mind a magasság növelésével változik.  ✅ Megoldás: Nyolcszorosára nő."
+      "explanation": "A térfogat mind a sugár, mind a magasság növelésével változik.  ✅ Megoldás: Nyolcszorosára nő.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha egy henger alapterülete 25 cm², és a magassága 4 cm, akkor a térfogata...",
@@ -193,7 +211,8 @@
         "c": "25 cm³"
       },
       "correct": "a",
-      "explanation": "Térfogat = alapterület * magasság = 25 * 4 = 100 cm³. ✅ Megoldás: 100 cm³"
+      "explanation": "Térfogat = alapterület * magasság = 25 * 4 = 100 cm³. ✅ Megoldás: 100 cm³",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a  π  értéke?",
@@ -203,7 +222,8 @@
         "c": "3,04"
       },
       "correct": "b",
-      "explanation": "A π (pi) egy matematikai konstans, ami kb. 3,14. ✅ Megoldás: 3,14"
+      "explanation": "A π (pi) egy matematikai konstans, ami kb. 3,14. ✅ Megoldás: 3,14",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a helyes képlet a henger felszínének kiszámításához?",
@@ -213,9 +233,10 @@
         "c": "felszín = 2 * alap"
       },
       "correct": "a",
-      "explanation": "A henger felszíne = 2 * (alapterület) + palást. ✅ Megoldás: felszín = 2 * (alap területe) + palást területe"
+      "explanation": "A henger felszíne = 2 * (alapterület) + palást. ✅ Megoldás: felszín = 2 * (alap területe) + palást területe",
+      "difficulty": "hard"
     },
-     {
+    {
       "question": "Mekkora a kör kerülete, ha sugara 3cm?",
       "answers": {
         "a": "6π cm",
@@ -223,7 +244,8 @@
         "c": "3π cm"
       },
       "correct": "a",
-      "explanation": "A kör kerülete = 2*π*r, ahol r a sugár. 2*3*π= 6π. ✅ Megoldás: 6π cm"
+      "explanation": "A kör kerülete = 2*π*r, ahol r a sugár. 2*3*π= 6π. ✅ Megoldás: 6π cm",
+      "difficulty": "hard"
     },
     {
       "question": "Ha egy henger magassága 4 cm, a sugara 2 cm. Mekkora a palást területe?",
@@ -233,7 +255,8 @@
         "c": "4π cm²"
       },
       "correct": "b",
-      "explanation": "Palást területe = 2 *  π * r * m. 2*π*2*4 = 16π cm². ✅ Megoldás: 16π cm²"
+      "explanation": "Palást területe = 2 *  π * r * m. 2*π*2*4 = 16π cm². ✅ Megoldás: 16π cm²",
+      "difficulty": "hard"
     },
     {
       "question": "Ha egy henger magassága 5 cm, a sugara 3 cm. Mennyi a térfogata?",
@@ -243,7 +266,8 @@
         "c": "15π cm³"
       },
       "correct": "a",
-      "explanation": "V = (π * r²) * m = π * 3² * 5 = 45π cm³. ✅ Megoldás: 45π cm³"
+      "explanation": "V = (π * r²) * m = π * 3² * 5 = 45π cm³. ✅ Megoldás: 45π cm³",
+      "difficulty": "hard"
     }
   ]
 }

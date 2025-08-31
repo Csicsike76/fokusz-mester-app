@@ -39,7 +39,6 @@ async function run() {
       await client.query(`DROP TABLE IF EXISTS ${tbl} CASCADE;`);
     }
 
-    // --- Users tábla ---
     await client.query(`
       CREATE TABLE users (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -64,7 +63,6 @@ async function run() {
       );
     `);
 
-    // --- Teachers tábla ---
     await client.query(`
       CREATE TABLE teachers (
         user_id UUID PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
@@ -77,7 +75,6 @@ async function run() {
       );
     `);
 
-    // --- Classes tábla ---
     await client.query(`
       CREATE TABLE classes (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -93,7 +90,6 @@ async function run() {
       );
     `);
 
-    // --- Classmemberships tábla ---
     await client.query(`
       CREATE TABLE classmemberships (
         user_id UUID REFERENCES users(id) ON DELETE CASCADE,
@@ -103,7 +99,6 @@ async function run() {
       );
     `);
 
-    // --- Referrals tábla ---
     await client.query(`
       CREATE TABLE referrals (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -113,7 +108,6 @@ async function run() {
       );
     `);
 
-    // --- Subscription plans tábla ---
     await client.query(`
       CREATE TABLE subscription_plans (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -128,30 +122,16 @@ async function run() {
       );
     `);
 
-    // --- Alapértelmezett előfizetési csomagok létrehozása ---
     if (process.env.STRIPE_PRICE_ID_MONTHLY) {
-        await client.query(`
-            INSERT INTO subscription_plans (name, stripe_price_id, price_cents, interval_unit, interval_count)
-            VALUES ('Havi Előfizetés', $1, 2990, 'month', 1)
-            ON CONFLICT (stripe_price_id) DO NOTHING;
-        `, [process.env.STRIPE_PRICE_ID_MONTHLY]);
+        await client.query(`INSERT INTO subscription_plans (name, stripe_price_id, price_cents, interval_unit, interval_count) VALUES ('Havi Előfizetés', $1, 2990, 'month', 1) ON CONFLICT (stripe_price_id) DO NOTHING;`, [process.env.STRIPE_PRICE_ID_MONTHLY]);
     }
-     if (process.env.STRIPE_PRICE_ID_YEARLY) {
-        await client.query(`
-            INSERT INTO subscription_plans (name, stripe_price_id, price_cents, interval_unit, interval_count)
-            VALUES ('Éves Előfizetés', $1, 29900, 'year', 1)
-            ON CONFLICT (stripe_price_id) DO NOTHING;
-        `, [process.env.STRIPE_PRICE_ID_YEARLY]);
+    if (process.env.STRIPE_PRICE_ID_YEARLY) {
+        await client.query(`INSERT INTO subscription_plans (name, stripe_price_id, price_cents, interval_unit, interval_count) VALUES ('Éves Előfizetés', $1, 29900, 'year', 1) ON CONFLICT (stripe_price_id) DO NOTHING;`, [process.env.STRIPE_PRICE_ID_YEARLY]);
     }
-     if (process.env.STRIPE_PRICE_ID_TEACHER_CLASS) {
-        await client.query(`
-            INSERT INTO subscription_plans (name, stripe_price_id, price_cents, interval_unit, interval_count)
-            VALUES ('Tanári Osztály Csomag', $1, 420000, 'one_time', 1)
-            ON CONFLICT (stripe_price_id) DO NOTHING;
-        `, [process.env.STRIPE_PRICE_ID_TEACHER_CLASS]);
+    if (process.env.STRIPE_PRICE_ID_TEACHER_CLASS) {
+        await client.query(`INSERT INTO subscription_plans (name, stripe_price_id, price_cents, interval_unit, interval_count) VALUES ('Tanári Osztály Csomag', $1, 420000, 'one_time', 1) ON CONFLICT (stripe_price_id) DO NOTHING;`, [process.env.STRIPE_PRICE_ID_TEACHER_CLASS]);
     }
 
-    // --- Subscriptions tábla ---
     await client.query(`
       CREATE TABLE subscriptions (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -171,7 +151,6 @@ async function run() {
       );
     `);
 
-    // --- Payments tábla ---
     await client.query(`
       CREATE TABLE payments (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -187,7 +166,6 @@ async function run() {
       );
     `);
 
-    // --- Helparticles tábla ---
     await client.query(`
       CREATE TABLE helparticles (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -201,7 +179,6 @@ async function run() {
       );
     `);
 
-    // --- Curriculums tábla ---
     await client.query(`
       CREATE TABLE curriculums (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -225,7 +202,6 @@ async function run() {
       );
     `);
 
-    // --- Quizquestions tábla ---
     await client.query(`
       CREATE TABLE quizquestions (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -235,14 +211,13 @@ async function run() {
         time_limit_seconds INT DEFAULT 0,
         max_attempts INT DEFAULT 0,
         order_num INT DEFAULT 0,
-        difficulty_level TEXT CHECK (difficulty_level IN ('beginner','intermediate','expert')),
+        difficulty_level TEXT CHECK (difficulty_level IN ('easy','medium','hard')),
         metadata JSONB DEFAULT '{}'::jsonb,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
     `);
 
-    // --- User quiz results tábla ---
     await client.query(`
       CREATE TABLE user_quiz_results (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -251,16 +226,15 @@ async function run() {
         completed_questions INT NOT NULL,
         total_questions INT NOT NULL,
         score_percentage NUMERIC(5,2) DEFAULT 0.0,
-        level TEXT CHECK (level IN ('beginner','intermediate','expert')),
-        level_score_thresholds JSONB DEFAULT '{"beginner":40,"intermediate":65,"expert":90}'::jsonb,
+        level TEXT CHECK (level IN ('easy','medium','hard')),
+        level_score_thresholds JSONB DEFAULT '{"easy":40,"medium":65,"hard":90}'::jsonb,
         hints_used INT DEFAULT 0,
         total_time_seconds INT DEFAULT 0,
         completed_at TIMESTAMPTZ DEFAULT NOW(),
-        UNIQUE(user_id, curriculum_id)
+        UNIQUE(user_id, curriculum_id, level)
       );
     `);
 
-    // --- Notifications tábla ---
     await client.query(`
       CREATE TABLE notifications (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -274,7 +248,6 @@ async function run() {
       );
     `);
 
-    // --- Contact messages tábla ---
     await client.query(`
       CREATE TABLE contact_messages (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -287,7 +260,6 @@ async function run() {
       );
     `);
 
-    // --- Admin actions tábla ---
     await client.query(`
       CREATE TABLE admin_actions (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -299,7 +271,6 @@ async function run() {
       );
     `);
 
-    // --- Activity logs ---
     await client.query(`
       CREATE TABLE activity_logs (
         id BIGSERIAL PRIMARY KEY,
@@ -312,7 +283,6 @@ async function run() {
       );
     `);
 
-    // --- Error logs ---
     await client.query(`
       CREATE TABLE error_logs (
         id BIGSERIAL PRIMARY KEY,
@@ -324,7 +294,6 @@ async function run() {
       );
     `);
 
-    // --- Trigger az updated_at automatikus frissítésére ---
     await client.query(`
       CREATE OR REPLACE FUNCTION trigger_set_timestamp()
       RETURNS TRIGGER AS $$

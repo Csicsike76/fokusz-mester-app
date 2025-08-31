@@ -13,7 +13,8 @@
         "c": "x = 8"
       },
       "correct": "a",
-      "explanation": "A zérushelyet az f(x)=0 egyenlet megoldásával kapjuk. 2x - 8 = 0. Adjunk 8-at mindkét oldalhoz: 2x = 8. Osszunk 2-vel: x = 4."
+      "explanation": "A zérushelyet az f(x)=0 egyenlet megoldásával kapjuk. 2x - 8 = 0. Adjunk 8-at mindkét oldalhoz: 2x = 8. Osszunk 2-vel: x = 4.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a [−2, 5) és [3, 8] intervallumok metszete?",
@@ -23,7 +24,8 @@
         "c": "{3, 4}"
       },
       "correct": "a",
-      "explanation": "A metszet a közös részt jelenti. Az első intervallum -2-től (zárt) 5-ig (nyílt) tart. A második 3-tól (zárt) 8-ig (zárt). A közös rész a 3-nál kezdődik és az 5-nél (nyílt végponttal) ér véget."
+      "explanation": "A metszet a közös részt jelenti. Az első intervallum -2-től (zárt) 5-ig (nyílt) tart. A második 3-tól (zárt) 8-ig (zárt). A közös rész a 3-nál kezdődik és az 5-nél (nyílt végponttal) ér véget.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a megoldása a 2x - 5 > 7 egyenlőtlenségnek?",
@@ -33,7 +35,8 @@
         "c": "x > 1"
       },
       "correct": "a",
-      "explanation": "Rendezzük az egyenlőtlenséget: adjunk 5-öt mindkét oldalhoz, így 2x > 12. Osszunk 2-vel. Mivel pozitív számmal osztunk, a relációs jel nem fordul meg, tehát x > 6."
+      "explanation": "Rendezzük az egyenlőtlenséget: adjunk 5-öt mindkét oldalhoz, így 2x > 12. Osszunk 2-vel. Mivel pozitív számmal osztunk, a relációs jel nem fordul meg, tehát x > 6.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi egy 10 cm sugarú, 10 cm magas henger térfogata?",
@@ -43,7 +46,8 @@
         "c": "200π cm³"
       },
       "correct": "a",
-      "explanation": "A henger térfogata V = T_alap * m = (π * r²) * m. Behelyettesítve: V = π * 10² * 10 = π * 100 * 10 = 1000π cm³."
+      "explanation": "A henger térfogata V = T_alap * m = (π * r²) * m. Behelyettesítve: V = π * 10² * 10 = π * 100 * 10 = 1000π cm³.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a 2, 8, 3, 2, 5 adatsor mediánja?",
@@ -53,7 +57,8 @@
         "c": "4"
       },
       "correct": "a",
-      "explanation": "Először rendezzük sorba az adatokat: 2, 2, 3, 5, 8. A medián a sorba rendezett adatsor középső eleme. Páratlan számú adat esetén ez a középső, ami a 3."
+      "explanation": "Először rendezzük sorba az adatokat: 2, 2, 3, 5, 8. A medián a sorba rendezett adatsor középső eleme. Páratlan számú adat esetén ez a középső, ami a 3.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik pont van rajta az f(x) = -x + 5 függvény grafikonján?",
@@ -63,7 +68,8 @@
         "c": "(3; 8)"
       },
       "correct": "a",
-      "explanation": "Helyettesítsük be az x koordinátát a függvénybe. Ha x=5, f(5) = -5 + 5 = 0. Az y koordináta 0. Tehát az (5; 0) pont rajta van a grafikonon."
+      "explanation": "Helyettesítsük be az x koordinátát a függvénybe. Ha x=5, f(5) = -5 + 5 = 0. Az y koordináta 0. Tehát az (5; 0) pont rajta van a grafikonon.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy kocka felszínén a legrövidebb út az egyik csúcsból a szemközti csúcsba...",
@@ -73,7 +79,8 @@
         "c": "kb. 17,3 cm."
       },
       "correct": "a",
-      "explanation": "Ehhez a kocka testhálóját kell használni. Kiterítünk két szomszédos lapot, ami egy 20x10-es téglalapot ad. A legrövidebb út ennek a téglalapnak az átlója. Pitagorasz-tétel: 10² + 20² = c². 100+400=500. c = √500 ≈ 22,36 cm."
+      "explanation": "Ehhez a kocka testhálóját kell használni. Kiterítünk két szomszédos lapot, ami egy 20x10-es téglalapot ad. A legrövidebb út ennek a téglalapnak az átlója. Pitagorasz-tétel: 10² + 20² = c². 100+400=500. c = √500 ≈ 22,36 cm.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az f(x) = (Alapterület * x) / 3 képlet?",
@@ -83,7 +90,8 @@
         "c": "A kör területe az x sugár függvényében."
       },
       "correct": "a",
-      "explanation": "A (Alapterület * magasság) / 3 a gúla térfogatának képlete. Itt a magasságot jelöli az x, tehát a térfogatot kapjuk a magasság függvényében."
+      "explanation": "A (Alapterület * magasság) / 3 a gúla térfogatának képlete. Itt a magasságot jelöli az x, tehát a térfogatot kapjuk a magasság függvényében.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik állítás igaz a párhuzamos síkokra?",
@@ -93,7 +101,8 @@
         "c": "Egy egyenesben metszik egymást."
       },
       "correct": "b",
-      "explanation": "A párhuzamosság definíciója szerint a két sík soha nem találkozik, tehát nincs közös pontjuk."
+      "explanation": "A párhuzamosság definíciója szerint a két sík soha nem találkozik, tehát nincs közös pontjuk.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik a megoldása az x² - 25 = 0 egyenletnek?",
@@ -103,7 +112,8 @@
         "c": "csak 25"
       },
       "correct": "b",
-      "explanation": "Ez egy hiányos másodfokú egyenlet. Rendezzük: x² = 25. Olyan számot keresünk, aminek a négyzete 25. Mind az 5-nek (5*5=25), mind a -5-nek (-5*-5=25) a négyzete 25."
+      "explanation": "Ez egy hiányos másodfokú egyenlet. Rendezzük: x² = 25. Olyan számot keresünk, aminek a négyzete 25. Mind az 5-nek (5*5=25), mind a -5-nek (-5*-5=25) a négyzete 25.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi egy 10 cm sugarú gömb felszíne?",
@@ -113,7 +123,8 @@
         "c": "kb. 4000/3 π cm³"
       },
       "correct": "b",
-      "explanation": "A gömb felszínének képlete A = 4 * π * r². Behelyettesítve r=10: A = 4 * π * 10² = 4 * π * 100 = 400π cm²."
+      "explanation": "A gömb felszínének képlete A = 4 * π * r². Behelyettesítve r=10: A = 4 * π * 10² = 4 * π * 100 = 400π cm².",
+      "difficulty": "medium"
     },
     {
       "question": "Milyen a monotonitása az f(x) = -3x + 1 függvénynek?",
@@ -123,7 +134,8 @@
         "c": "konstans"
       },
       "correct": "b",
-      "explanation": "A monotonitást a meredekség ('a' értéke) határozza meg. Itt a = -3. Mivel a meredekség negatív, a függvény grafikonja balról jobbra 'lefelé' halad, tehát csökkenő."
+      "explanation": "A monotonitást a meredekség ('a' értéke) határozza meg. Itt a = -3. Mivel a meredekség negatív, a függvény grafikonja balról jobbra 'lefelé' halad, tehát csökkenő.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a (x - 4)² kifejezés kifejtett alakja?",
@@ -133,7 +145,8 @@
         "c": "x² + 8x + 16"
       },
       "correct": "b",
-      "explanation": "Az (a - b)² = a² - 2ab + b² nevezetes azonosságot használjuk. Itt a=x és b=4. Behelyettesítve: x² - 2*x*4 + 4² = x² - 8x + 16."
+      "explanation": "Az (a - b)² = a² - 2ab + b² nevezetes azonosságot használjuk. Itt a=x és b=4. Behelyettesítve: x² - 2*x*4 + 4² = x² - 8x + 16.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a 4x² - 9 kifejezés tényezőkre bontott alakja?",
@@ -143,7 +156,8 @@
         "c": "(4x - 3)(x + 3)"
       },
       "correct": "b",
-      "explanation": "Az a² - b² = (a - b)(a + b) azonosságot kell felismerni. Itt a² = 4x² (tehát a=2x) és b² = 9 (tehát b=3). Behelyettesítve: (2x - 3)(2x + 3)."
+      "explanation": "Az a² - b² = (a - b)(a + b) azonosságot kell felismerni. Itt a² = 4x² (tehát a=2x) és b² = 9 (tehát b=3). Behelyettesítve: (2x - 3)(2x + 3).",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik NEM határoz meg egyértelműen egy síkot?",
@@ -153,7 +167,8 @@
         "c": "két metsző egyenes"
       },
       "correct": "b",
-      "explanation": "Ha a három pont egy egyenesen van, az olyan, mint egy tengely, amelyen végtelen sok síkot lehet 'átforgatni'."
+      "explanation": "Ha a három pont egy egyenesen van, az olyan, mint egy tengely, amelyen végtelen sok síkot lehet 'átforgatni'.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy 10 cm élű kocka testátlójának hossza?",
@@ -163,7 +178,8 @@
         "c": "10 cm"
       },
       "correct": "b",
-      "explanation": "A testátló (D), az él (a) és a lapátló (d) derékszögű háromszöget alkotnak. d² = 10²+10²=200. Ezután D² = d² + a² = 200 + 10² = 300. D = √300 = 10√3 ≈ 17,32 cm."
+      "explanation": "A testátló (D), az él (a) és a lapátló (d) derékszögű háromszöget alkotnak. d² = 10²+10²=200. Ezután D² = d² + a² = 200 + 10² = 300. D = √300 = 10√3 ≈ 17,32 cm.",
+      "difficulty": "medium"
     },
     {
       "question": "Az (x+5)(x-5) szorzat mivel egyenlő?",
@@ -173,7 +189,8 @@
         "c": "x² - 10x + 25"
       },
       "correct": "b",
-      "explanation": "Az (a+b)(a-b) = a² - b² nevezetes azonosságot kell felismerni. Itt a=x és b=5. Behelyettesítve: x² - 5² = x² - 25."
+      "explanation": "Az (a+b)(a-b) = a² - b² nevezetes azonosságot kell felismerni. Itt a=x és b=5. Behelyettesítve: x² - 5² = x² - 25.",
+      "difficulty": "medium"
     },
     {
       "question": "Mennyi egy 3 cm élű kocka térfogata?",
@@ -183,7 +200,8 @@
         "c": "27 cm³"
       },
       "correct": "c",
-      "explanation": "A kocka térfogatának képlete V = a * a * a. Behelyettesítve az a=3 cm értéket: V = 3 * 3 * 3 = 27 cm³."
+      "explanation": "A kocka térfogatának képlete V = a * a * a. Behelyettesítve az a=3 cm értéket: V = 3 * 3 * 3 = 27 cm³.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy kocka testátlója merőleges az alaplap átlójára, amellyel kitérő helyzetű. Melyik tétel bizonyítja ezt?",
@@ -193,7 +211,8 @@
         "c": "A három merőleges tétele"
       },
       "correct": "c",
-      "explanation": "A testátló (ferde egyenes) vetülete az alaplapra a másik lapátló. Mivel a négyzetben az átlók merőlegesek egymásra, a testátló vetülete merőleges a vizsgált alapátlóra. A tétel kimondja: ha a vetület merőleges, akkor az eredeti ferde egyenes is merőleges."
+      "explanation": "A testátló (ferde egyenes) vetülete az alaplapra a másik lapátló. Mivel a négyzetben az átlók merőlegesek egymásra, a testátló vetülete merőleges a vizsgált alapátlóra. A tétel kimondja: ha a vetület merőleges, akkor az eredeti ferde egyenes is merőleges.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy 6 cm magas, 8 cm alapélű négyzet alapú gúla oldallapjának magassága...",
@@ -203,7 +222,8 @@
         "c": "√52 cm (kb. 7,2 cm)"
       },
       "correct": "c",
-      "explanation": "A testmagasság (befogó), az alapél fele (befogó, 8/2=4) és az oldallap magassága (átfogó) derékszögű háromszöget alkotnak. Pitagorasz-tétel: 6²+4² = 36+16=52. Az oldallap magassága √52 cm."
+      "explanation": "A testmagasság (befogó), az alapél fele (befogó, 8/2=4) és az oldallap magassága (átfogó) derékszögű háromszöget alkotnak. Pitagorasz-tétel: 6²+4² = 36+16=52. Az oldallap magassága √52 cm.",
+      "difficulty": "hard"
     },
     {
       "question": "Két párhuzamos egyenest egy harmadik metsz. Az egyik szög 65°. Mekkora a váltószöge?",
@@ -213,7 +233,8 @@
         "c": "65°"
       },
       "correct": "c",
-      "explanation": "A váltószögek a metsző ellentétes oldalán, a párhuzamosok 'között' helyezkednek el. Párhuzamos egyenesek esetén a váltószögek mindig egyenlőek."
+      "explanation": "A váltószögek a metsző ellentétes oldalán, a párhuzamosok 'között' helyezkednek el. Párhuzamos egyenesek esetén a váltószögek mindig egyenlőek.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy 6 cm sugarú, 8 cm magas kúp alkotójának hossza...",
@@ -223,7 +244,8 @@
         "c": "10 cm"
       },
       "correct": "c",
-      "explanation": "A kúp sugara (r), magassága (m) és alkotója (a) egy derékszögű háromszöget alkotnak, ahol az alkotó az átfogó. Pitagorasz-tétel: 6² + 8² = a². 36 + 64 = 100. a² = 100. a = 10 cm."
+      "explanation": "A kúp sugara (r), magassága (m) és alkotója (a) egy derékszögű háromszöget alkotnak, ahol az alkotó az átfogó. Pitagorasz-tétel: 6² + 8² = a². 36 + 64 = 100. a² = 100. a = 10 cm.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a (3; -4) pont távolsága az origótól?",
@@ -233,7 +255,8 @@
         "c": "5"
       },
       "correct": "c",
-      "explanation": "A pont, az origó és a pont vetületei a tengelyeken egy derékszögű háromszöget alkotnak. A befogók hossza 3 és 4. A távolság az átfogó. Pitagorasz-tétel: 3² + 4² = c². 9+16=25. c=5."
+      "explanation": "A pont, az origó és a pont vetületei a tengelyeken egy derékszögű háromszöget alkotnak. A befogók hossza 3 és 4. A távolság az átfogó. Pitagorasz-tétel: 3² + 4² = c². 9+16=25. c=5.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik diagramtípus mutatja a legjobban egy egész arányait?",
@@ -243,7 +266,8 @@
         "c": "kördiagram"
       },
       "correct": "c",
-      "explanation": "A kördiagram a teljes kört (100%) osztja fel szeletekre. A szeletek mérete arányos az egyes kategóriák részesedésével, így kiválóan szemlélteti az arányokat."
+      "explanation": "A kördiagram a teljes kört (100%) osztja fel szeletekre. A szeletek mérete arányos az egyes kategóriák részesedésével, így kiválóan szemlélteti az arányokat.",
+      "difficulty": "hard"
     },
     {
       "question": "Mekkora egy kocka két szomszédos lapjának lapszöge?",
@@ -253,7 +277,8 @@
         "c": "90°"
       },
       "correct": "c",
-      "explanation": "A kocka szomszédos lapjai merőlegesek egymásra. A merőleges síkok hajlásszöge, azaz lapszöge definíció szerint 90°."
+      "explanation": "A kocka szomszédos lapjai merőlegesek egymásra. A merőleges síkok hajlásszöge, azaz lapszöge definíció szerint 90°.",
+      "difficulty": "hard"
     }
   ]
 }

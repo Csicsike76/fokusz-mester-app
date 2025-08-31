@@ -13,7 +13,8 @@
         "c": "ax"
       },
       "correct": "a",
-      "explanation": "Általános alak: ax² + bx + c = 0."
+      "explanation": "Általános alak: ax² + bx + c = 0.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen diszkriminánst használunk? b² − 4ac = …",
@@ -23,7 +24,8 @@
         "c": "0"
       },
       "correct": "a",
-      "explanation": "Diszkrimináns: Δ = b² − 4ac."
+      "explanation": "Diszkrimináns: Δ = b² − 4ac.",
+      "difficulty": "easy"
     },
     {
       "question": "Ha Δ > 0, akkor a megoldások …?",
@@ -33,7 +35,8 @@
         "c": "nincsenek"
       },
       "correct": "a",
-      "explanation": "Pozitív Δ esetén két különböző valós gyök."
+      "explanation": "Pozitív Δ esetén két különböző valós gyök.",
+      "difficulty": "easy"
     },
     {
       "question": "Δ = 0 esetén a gyökök …?",
@@ -43,7 +46,8 @@
         "c": "egyezők"
       },
       "correct": "c",
-      "explanation": "Δ = 0 → dupla, egyetlen valós gyök."
+      "explanation": "Δ = 0 → dupla, egyetlen valós gyök.",
+      "difficulty": "easy"
     },
     {
       "question": "Δ < 0 esetén a gyökök …?",
@@ -53,7 +57,8 @@
         "c": "kettő valós"
       },
       "correct": "a",
-      "explanation": "Negatív Δ → komplex gyökpár."
+      "explanation": "Negatív Δ → komplex gyökpár.",
+      "difficulty": "easy"
     },
     {
       "question": "Mely képlet adja a gyököket? x = …",
@@ -63,7 +68,8 @@
         "c": "(−b ± √Δ)/(2a)"
       },
       "correct": "c",
-      "explanation": "Megoldóképlet: x = (−b ± √Δ)/(2a)."
+      "explanation": "Megoldóképlet: x = (−b ± √Δ)/(2a).",
+      "difficulty": "easy"
     },
     {
       "question": "Oldd meg: x² − 5x + 6 = 0, gyökök?",
@@ -73,7 +79,8 @@
         "c": "{−2,−3}"
       },
       "correct": "b",
-      "explanation": "Szorzatra bont: (x−2)(x−3)=0 → 2,3."
+      "explanation": "Szorzatra bont: (x−2)(x−3)=0 → 2,3.",
+      "difficulty": "easy"
     },
     {
       "question": "Oldd meg: x² + 4x + 4 = 0, gyök?",
@@ -83,7 +90,8 @@
         "c": "{0}"
       },
       "correct": "a",
-      "explanation": "((x+2)² = 0) → x = −2 (dupla gyök)."
+      "explanation": "((x+2)² = 0) → x = −2 (dupla gyök).",
+      "difficulty": "easy"
     },
     {
       "question": "Δ = b² − 4ac = 9 − 12 = −3, valós gyökök?",
@@ -93,7 +101,8 @@
         "c": "egy"
       },
       "correct": "b",
-      "explanation": "Negatív Δ esetén nincs valós megoldás."
+      "explanation": "Negatív Δ esetén nincs valós megoldás.",
+      "difficulty": "medium"
     },
     {
       "question": "Oldd meg: 2x² = 8 → x = …?",
@@ -103,7 +112,8 @@
         "c": "{2}"
       },
       "correct": "a",
-      "explanation": "2x²−8=0 → x²=4 → ±2."
+      "explanation": "2x²−8=0 → x²=4 → ±2.",
+      "difficulty": "medium"
     },
     {
       "question": "Oldd meg: x² + 1 = 0 → x = …?",
@@ -113,7 +123,8 @@
         "c": "0"
       },
       "correct": "a",
-      "explanation": "x² = −1 → x = ±i."
+      "explanation": "x² = −1 → x = ±i.",
+      "difficulty": "medium"
     },
     {
       "question": "Hol helyezkedik el a parabola csúcsa: x² − 4x + 3?",
@@ -123,7 +134,8 @@
         "c": "y = -4"
       },
       "correct": "a",
-      "explanation": "x₀=−b/2a=2, y₀=2²−8+3=−1. ✅ Megoldás: (2,−1)"
+      "explanation": "x₀=−b/2a=2, y₀=2²−8+3=−1. ✅ Megoldás: (2,−1)",
+      "difficulty": "medium"
     },
     {
       "question": "Parabola tengelye: x² + 6x + 5?",
@@ -133,7 +145,8 @@
         "c": "x=3"
       },
       "correct": "b",
-      "explanation": "x₀=−b/2a=−6/2=−3. ✅ Megoldás: x=−3"
+      "explanation": "x₀=−b/2a=−6/2=−3. ✅ Megoldás: x=−3",
+      "difficulty": "medium"
     },
     {
       "question": "Hol metszi az y-t: x² − 2x − 3?",
@@ -143,7 +156,8 @@
         "c": "y=−3"
       },
       "correct": "c",
-      "explanation": "y-nél: x=0 → y=−3. ✅ Megoldás: y=−3"
+      "explanation": "y-nél: x=0 → y=−3. ✅ Megoldás: y=−3",
+      "difficulty": "medium"
     },
     {
       "question": "Oldd meg formula nélkül: x² − 9 = 0?",
@@ -153,7 +167,8 @@
         "c": "{−3}"
       },
       "correct": "a",
-      "explanation": "x²=9 → ±3. ✅ Megoldás: Az egyenlet megoldása 3 és -3."
+      "explanation": "x²=9 → ±3. ✅ Megoldás: Az egyenlet megoldása 3 és -3.",
+      "difficulty": "medium"
     },
     {
       "question": "Mikor nyílik lefelé a parabola?",
@@ -163,7 +178,8 @@
         "c": "Ha c < 0"
       },
       "correct": "a",
-      "explanation": "Ha a < 0 a parabola lefelé nyílik. ✅ Megoldás: Ha a < 0"
+      "explanation": "Ha a < 0 a parabola lefelé nyílik. ✅ Megoldás: Ha a < 0",
+      "difficulty": "medium"
     },
     {
       "question": "Oldd meg: 3x² − 6x + 1 = 0",
@@ -173,7 +189,8 @@
         "c": "{1±√6/3}"
       },
       "correct": "c",
-      "explanation": "Δ=36−12=24, x= (6±√24)/6=(6±2√6)/6=1±√6/3. ✅ Megoldás:  x = 1±√6/3"
+      "explanation": "Δ=36−12=24, x= (6±√24)/6=(6±2√6)/6=1±√6/3. ✅ Megoldás:  x = 1±√6/3",
+      "difficulty": "hard"
     },
     {
       "question": "Parabola nyitása: x² + bx + c az a=1?",
@@ -183,7 +200,8 @@
         "c": "Negatív"
       },
       "correct": "a",
-      "explanation": "a=1 → alapértelmezett nyitás felfelé. ✅ Megoldás: Egyszerű"
+      "explanation": "a=1 → alapértelmezett nyitás felfelé. ✅ Megoldás: Egyszerű",
+      "difficulty": "hard"
     },
     {
       "question": "Mely két gyök közt lesz a parabola negatív?",
@@ -193,7 +211,8 @@
         "c": "mindenhol"
       },
       "correct": "b",
-      "explanation": "A parabola a gyökök között negatív. ✅ Megoldás: gyökök között"
+      "explanation": "A parabola a gyökök között negatív. ✅ Megoldás: gyökök között",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik egyenletnek van két különböző valós megoldása?",
@@ -203,7 +222,8 @@
         "c": "x² = 0"
       },
       "correct": "a",
-      "explanation": "Az x² = a egyenletnek akkor van két különböző valós megoldása, ha a > 0. ✅ Megoldás: x² = 1"
+      "explanation": "Az x² = a egyenletnek akkor van két különböző valós megoldása, ha a > 0. ✅ Megoldás: x² = 1",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik szám NEM megoldása az x² = 36 egyenletnek?",
@@ -213,7 +233,8 @@
         "c": "18"
       },
       "correct": "c",
-      "explanation": "Az egyenlet megoldásai 6 és -6. A 18 nem megoldása, mert nem teljesíti az egyenletet. ✅ Megoldás: A 18 nem megoldása az egyenletnek."
+      "explanation": "Az egyenlet megoldásai 6 és -6. A 18 nem megoldása, mert nem teljesíti az egyenletet. ✅ Megoldás: A 18 nem megoldása az egyenletnek.",
+      "difficulty": "hard"
     },
     {
       "question": "Oldd meg: 100 - x² = 0",
@@ -223,7 +244,8 @@
         "c": "0 és 100"
       },
       "correct": "c",
-      "explanation": "Rendezzük az egyenletet: x² = 100.  Az egyenlet megoldása 10 és -10. ✅ Megoldás: Az egyenlet megoldása 10 és -10."
+      "explanation": "Rendezzük az egyenletet: x² = 100.  Az egyenlet megoldása 10 és -10. ✅ Megoldás: Az egyenlet megoldása 10 és -10.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a -4x² - 16x -12 egyenlet megoldása?",
@@ -233,7 +255,8 @@
         "c": "x= -1, x = -3"
       },
       "correct": "c",
-      "explanation": "Kiemelünk -4-et, így x²+4x+3=0.  Szorzatként x1,2=(-4+-√16-12)/2. Tehát (-4+-2)/2.  Ebből x1=-3, x2=-1.  ✅ Megoldás: -3 és -1"
+      "explanation": "Kiemelünk -4-et, így x²+4x+3=0.  Szorzatként x1,2=(-4+-√16-12)/2. Tehát (-4+-2)/2.  Ebből x1=-3, x2=-1.  ✅ Megoldás: -3 és -1",
+      "difficulty": "hard"
     }
   ]
 }

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import styles from './ContentPage.module.css';
+import quizStyles from './QuizPage.module.css';
 import { API_URL } from '../config/api';
 import { useAuth } from '../context/AuthContext';
-
 import SingleChoiceQuestion from '../components/SingleChoiceQuestion';
 import WorkshopContent from '../components/WorkshopContent/WorkshopContent';
 import TopicSelector from '../components/TopicSelector/TopicSelector';
@@ -64,49 +64,91 @@ const CharacterSelectionView = ({ contentData, onSelectCharacter }) => (
   </div>
 );
 
+const QuizDifficultySelector = ({ onSelectDifficulty, questionCounts }) => (
+  <div className={quizStyles.quizBox}>
+      <h1>Válassz Nehézségi Szintet!</h1>
+      <p>Mérd fel a tudásod a számodra megfelelő szinten.</p>
+      <hr className={quizStyles.hr} />
+      <div className={quizStyles.difficultyGrid}>
+          <button onClick={() => onSelectDifficulty('easy')} className={quizStyles.difficultyButton} disabled={questionCounts.easy === 0}>
+              <h3>👶 Könnyű</h3>
+              <p>{questionCounts.easy > 0 ? `8 kérdés a bemelegítéshez` : `Nincs könnyű kérdés`}</p>
+          </button>
+          <button onClick={() => onSelectDifficulty('medium')} className={quizStyles.difficultyButton} disabled={questionCounts.medium === 0}>
+              <h3>🎓 Közepes</h3>
+              <p>{questionCounts.medium > 0 ? `15 kérdés az elmélyítéshez` : `Nincs közepes kérdés`}</p>
+          </button>
+          <button onClick={() => onSelectDifficulty('hard')} className={quizStyles.difficultyButton} disabled={questionCounts.hard === 0}>
+              <h3>👑 Profi</h3>
+              <p>{questionCounts.hard > 0 ? `Az összes kérdés a kihívásért` : `Nincs elérhető kérdés`}</p>
+          </button>
+      </div>
+  </div>
+);
+
 const QuizView = ({ contentData, slug, token }) => {
   const [userAnswers, setUserAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
   const [isSaving, setIsSaving] = useState(false);
+  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+  const [activeQuestions, setActiveQuestions] = useState([]);
+
+  const allQuestions = useMemo(() => Array.isArray(contentData?.questions) ? contentData.questions.map((q, i) => ({ ...q, originalId: q.id || i })) : [], [contentData]);
+
+  const questionCounts = useMemo(() => {
+    const easy = allQuestions.filter(q => q.difficulty === 'easy').length;
+    const medium = allQuestions.filter(q => q.difficulty === 'easy' || q.difficulty === 'medium').length;
+    const hard = allQuestions.length;
+    return { easy, medium, hard };
+  }, [allQuestions]);
 
   useEffect(() => {
+    if (!selectedDifficulty) return;
+    let filtered = [];
+    if (selectedDifficulty === 'easy') {
+      filtered = allQuestions.filter(q => q.difficulty === 'easy');
+      if (filtered.length < 8 && filtered.length > 0) {
+        const mediumNeeded = 8 - filtered.length;
+        const mediumQuestions = allQuestions.filter(q => q.difficulty === 'medium');
+        filtered = [...filtered, ...mediumQuestions.sort(() => 0.5 - Math.random()).slice(0, mediumNeeded)];
+      }
+    } else if (selectedDifficulty === 'medium') {
+      filtered = allQuestions.filter(q => q.difficulty === 'easy' || q.difficulty === 'medium');
+    } else {
+      filtered = [...allQuestions];
+    }
+    const shuffled = filtered.sort(() => 0.5 - Math.random());
+    let finalQuestions = [];
+    if (selectedDifficulty === 'easy') finalQuestions = shuffled.slice(0, 8);
+    else if (selectedDifficulty === 'medium') finalQuestions = shuffled.slice(0, 15);
+    else finalQuestions = shuffled;
+    setActiveQuestions(finalQuestions);
     setUserAnswers({});
     setShowResults(false);
     setScore(0);
-  }, [contentData]);
-
-  const questions = Array.isArray(contentData?.questions) ? contentData.questions : [];
-
+  }, [selectedDifficulty, allQuestions]);
+  
   const handleAnswerChange = (id, val) => {
     if (showResults) return;
     setUserAnswers(prev => ({ ...prev, [id]: val }));
   };
-
+  
   const handleSubmit = async () => {
     let sc = 0;
-    questions.forEach((q, idx) => {
-      const id = q.id ?? idx;
+    activeQuestions.forEach((q) => {
       const correctAnswer = q.answer || (q.answers ? q.answers[q.correct] : undefined);
-      if (userAnswers[id] === correctAnswer) sc++;
+      if (userAnswers[q.originalId] === correctAnswer) sc++;
     });
     setScore(sc);
     setShowResults(true);
-
     if (token) {
         setIsSaving(true);
         try {
             await fetch(`${API_URL}/api/quiz/submit-result`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    slug: slug,
-                    score: sc,
-                    totalQuestions: questions.length
-                })
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                body: JSON.stringify({ slug: slug, score: sc, totalQuestions: activeQuestions.length, level: selectedDifficulty })
             });
         } catch (error) {
             console.error("Hiba az eredmény mentésekor:", error);
@@ -116,57 +158,57 @@ const QuizView = ({ contentData, slug, token }) => {
     }
   };
 
-  const handleRestart = () => {
-    setUserAnswers({});
-    setShowResults(false);
-    setScore(0);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const handleRestart = () => setSelectedDifficulty(null);
+  
+  if (!selectedDifficulty) {
+    return (
+      <div className={quizStyles.container}>
+        <QuizDifficultySelector onSelectDifficulty={setSelectedDifficulty} questionCounts={questionCounts} />
+      </div>
+    );
+  }
 
-  const allAnswered = questions.length > 0 && questions.every((q, idx) => {
-    const id = q.id ?? idx;
-    return userAnswers[id] !== undefined;
-  });
-
-  const pct = questions.length ? Math.round((score / questions.length) * 100) : 0;
+  const allAnswered = activeQuestions.length > 0 && activeQuestions.every((q) => userAnswers[q.originalId] !== undefined);
+  const pct = activeQuestions.length ? Math.round((score / activeQuestions.length) * 100) : 0;
+  let resultsTone = quizStyles.bad;
+  if (pct >= 80) resultsTone = quizStyles.good;
+  else if (pct >= 50) resultsTone = quizStyles.ok;
 
   return (
-    <div className={styles.quizContainer}>
-      <h1 className={styles.mainTitle}>{contentData.title}</h1>
-      <p className={styles.subTitle}>{contentData.description}</p>
-      {questions.length === 0 ? (
-        <div className={styles.workInProgress}>
-          <p>Ehhez a leckéhez még nincs kérdéslista csatolva.</p>
-        </div>
-      ) : (
-        <>
-          {questions.map((q, idx) => {
-            const id = q.id ?? idx;
-            return (
-              <SingleChoiceQuestion
-                key={id}
-                question={{ ...q, id }}
-                userAnswer={userAnswers[id]}
-                onAnswerChange={handleAnswerChange}
-                showResults={showResults}
-              />
-            );
-          })}
-          {!showResults ? (
-            <button onClick={handleSubmit} disabled={!allAnswered}>
-              Kvíz beküldése
-            </button>
-          ) : (
-            <div className={styles.workInProgress}>
-              <p><strong>Eredményed:</strong> {score} / {questions.length} ({pct}%)</p>
-              {isSaving && <p>Eredmény mentése...</p>}
-              <div style={{ marginTop: '1rem' }}>
-                <button onClick={handleRestart}>Újrakezd</button>
+    <div className={quizStyles.container}>
+      <div className={quizStyles.quizBox}>
+        <h1>
+            {contentData.title} 
+            <span className={quizStyles.difficultyTag} data-level={selectedDifficulty}>{selectedDifficulty}</span>
+        </h1>
+        <p>{contentData.description}</p>
+        <hr className={quizStyles.hr} />
+        {activeQuestions.length === 0 ? (
+          <div className={quizStyles.workInProgress}>
+            <p>Ehhez a nehézségi szinthez nem található elegendő kérdés. Próbálj másikat!</p>
+            <button onClick={handleRestart} className={quizStyles.restartButton} style={{marginTop: '1rem'}}>Vissza a választáshoz</button>
+          </div>
+        ) : (
+          <>
+            {activeQuestions.map((q) => (
+              <SingleChoiceQuestion key={q.originalId} question={{ ...q, id: q.originalId }} userAnswer={userAnswers[q.originalId]} onAnswerChange={handleAnswerChange} showResults={showResults} />
+            ))}
+            {!showResults ? (
+              <button onClick={handleSubmit} className={quizStyles.submitButton} disabled={!allAnswered}>Kvíz beküldése</button>
+            ) : (
+              <div className={`${quizStyles.resultsBox} ${resultsTone}`}>
+                <p><strong>Eredményed:</strong> {score} / {activeQuestions.length}</p>
+                <p><strong>Százalék:</strong> {pct}%</p>
+                {isSaving && <p>Eredmény mentése...</p>}
+                <div className={quizStyles.resultsActions}>
+                  <button onClick={handleRestart} className={quizStyles.restartButton}>Új kvíz</button>
+                  <Link to="/" className={quizStyles.backButton}>Vissza a főoldalra</Link>
+                </div>
               </div>
-            </div>
-          )}
-        </>
-      )}
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
@@ -185,7 +227,6 @@ const ContentPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { canUsePremium, token } = useAuth();
-
   const [contentData, setContentData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [messages, setMessages] = useState([]);
@@ -225,7 +266,6 @@ const ContentPage = () => {
             data.category === 'premium_tool'
           );
           if (isPremiumContent && !canUsePremium) {
-            console.warn("Hozzáférés megtagadva! Prémium tartalom. Átirányítás a bejelentkezési oldalra.");
             navigate('/bejelentkezes', {
               state: {
                 from: window.location.pathname,
@@ -273,7 +313,13 @@ const ContentPage = () => {
   if (isLoading) return <div className={styles.container}>Adatok betöltése...</div>;
   if (error) return <div className={styles.container}>{error}</div>;
   if (!contentData) return <div className={styles.container}>A tartalom nem elérhető.</div>;
-
+  
+  const isActualQuiz = slug.includes('kviz');
+  
+  if (isActualQuiz) {
+      return <QuizView contentData={contentData} slug={slug} token={token} />;
+  }
+  
   const renderTheContent = () => {
     if (activeChat) {
       return (
@@ -314,7 +360,6 @@ const ContentPage = () => {
                 const hasTopics = data.content && data.content.topics;
                 const hasCharacters = data.characters && typeof data.characters === 'object' && Object.keys(data.characters).length > 0;
                 const isWorkshop = data.questions && data.questions.length > 0 && data.questions[0].content !== undefined;
-                const isQuiz = data.category === 'free_lesson' || data.category === 'premium_lesson' || data.category === 'premium_course';
                 
                 if (hasTopics) {
                     componentToRender = <TopicSelector data={data} />;
@@ -322,8 +367,6 @@ const ContentPage = () => {
                     componentToRender = <CharacterSelectionView contentData={data} onSelectCharacter={handleCharacterSelect} />;
                 } else if (isWorkshop) {
                     componentToRender = <WorkshopContent sections={data.questions} />;
-                } else if (isQuiz) {
-                    componentToRender = <QuizView contentData={data} slug={slug} token={token} />;
                 } else {
                     componentToRender = <GenericToolView contentData={data} />;
                 }

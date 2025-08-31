@@ -13,7 +13,8 @@
         "c": "Az egyenes a síkban van."
       },
       "correct": "a",
-      "explanation": "A párhuzamos egyeneseknek a síkkal nincs közös pontja. ✅ Megoldás: Az egyenesnek és a síknak nincs közös pontja."
+      "explanation": "A párhuzamos egyeneseknek a síkkal nincs közös pontja. ✅ Megoldás: Az egyenesnek és a síknak nincs közös pontja.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a metszete két, egymást metsző síknak?",
@@ -23,7 +24,8 @@
         "c": "egy szakasz"
       },
       "correct": "a",
-      "explanation": "A metsző síkok egy egyenes mentén metszik egymást. ✅ Megoldás: A metszetük egy egyenes."
+      "explanation": "A metsző síkok egy egyenes mentén metszik egymást. ✅ Megoldás: A metszetük egy egyenes.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen helyzetű egy szoba padlója és az egyik oldalfala?",
@@ -33,7 +35,8 @@
         "c": "illeszkedő"
       },
       "correct": "b",
-      "explanation": "A padló és az oldalfal találkozik. A találkozási vonaluk egy egyenes (a szegély). Mivel van közös pontjuk (sőt, egy egész egyenes mentén), ezért a két sík metsző. ✅ Megoldás: Metszők."
+      "explanation": "A padló és az oldalfal találkozik. A találkozási vonaluk egy egyenes (a szegély). Mivel van közös pontjuk (sőt, egy egész egyenes mentén), ezért a két sík metsző. ✅ Megoldás: Metszők.",
+      "difficulty": "easy"
     },
     {
       "question": "Hány közös pontja van két, egymással párhuzamos síknak?",
@@ -43,7 +46,8 @@
         "c": "1"
       },
       "correct": "b",
-      "explanation": "A párhuzamos síkoknak nincs közös pontjuk, azaz soha nem metszik egymást. ✅ Megoldás: 0"
+      "explanation": "A párhuzamos síkoknak nincs közös pontjuk, azaz soha nem metszik egymást. ✅ Megoldás: 0",
+      "difficulty": "easy"
     },
     {
       "question": "Hány közös pontja van két azonos síknak?",
@@ -53,7 +57,8 @@
         "c": "nulla"
       },
       "correct": "a",
-      "explanation": "Ha két sík azonos, akkor valójában egy síkról van szó. Egy sík végtelen sok pontból áll, tehát a két (azonos) síknak végtelen sok közös pontja van. ✅ Megoldás: Végtelen sok"
+      "explanation": "Ha két sík azonos, akkor valójában egy síkról van szó. Egy sík végtelen sok pontból áll, tehát a két (azonos) síknak végtelen sok közös pontja van. ✅ Megoldás: Végtelen sok",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen helyzetű egy kocka elülső és hátsó lapjának síkja?",
@@ -63,7 +68,8 @@
         "c": "azonos"
       },
       "correct": "a",
-      "explanation": "A kocka elülső és hátsó lapja egymással szemben helyezkedik el. Soha nem metszik egymást, és a távolságuk állandó. Ez a párhuzamosság definíciója. ✅ Megoldás: Párhuzamos."
+      "explanation": "A kocka elülső és hátsó lapja egymással szemben helyezkedik el. Soha nem metszik egymást, és a távolságuk állandó. Ez a párhuzamosság definíciója. ✅ Megoldás: Párhuzamos.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik NEM lehet két sík kölcsönös helyzete?",
@@ -73,7 +79,8 @@
         "c": "párhuzamos"
       },
       "correct": "c",
-      "explanation": "Két sík vagy metszi egymást, vagy párhuzamos egymással (az azonos helyzet a metsző speciális esete). A 'kitérő' egyenesek egymáshoz viszonyított helyzete a térben, így az a válasz helytelen.  ✅ Megoldás: Nem lehet, mert kitérő csak egyenesek lehetnek."
+      "explanation": "Két sík vagy metszi egymást, vagy párhuzamos egymással (az azonos helyzet a metsző speciális esete). A 'kitérő' egyenesek egymáshoz viszonyított helyzete a térben, így az a válasz helytelen.  ✅ Megoldás: Nem lehet, mert kitérő csak egyenesek lehetnek.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy könyv két szomszédos lapja milyen helyzetű síkokat modellez?",
@@ -83,7 +90,8 @@
         "c": "azonos"
       },
       "correct": "b",
-      "explanation": "A könyv két lapja a gerincnél találkozik. A gerinc a két sík metszésvonala. Mivel van metszésvonaluk, a síkok metszők. ✅ Megoldás: Metszők."
+      "explanation": "A könyv két lapja a gerincnél találkozik. A gerinc a két sík metszésvonala. Mivel van metszésvonaluk, a síkok metszők. ✅ Megoldás: Metszők.",
+      "difficulty": "easy"
     },
     {
       "question": "Hány síkpárja van összesen egy téglatestnek?",
@@ -93,7 +101,8 @@
         "c": "3"
       },
       "correct": "a",
-      "explanation": "Egy téglatestnek 6 lapja van, így 6/2 = 3 pár párhuzamos síkpárja van. A metsző síkpárok száma: 12. A kérdés rossz volt. A javított válasz: 15 síkpárja van. ✅ Megoldás: 15"
+      "explanation": "Egy téglatestnek 6 lapja van, így 6/2 = 3 pár párhuzamos síkpárja van. A metsző síkpárok száma: 12. A kérdés rossz volt. A javított válasz: 15 síkpárja van. ✅ Megoldás: 15",
+      "difficulty": "easy"
     },
     {
       "question": "Ha két sík nem párhuzamos egymással, akkor biztosan...",
@@ -103,7 +112,8 @@
         "c": "azonosak."
       },
       "correct": "b",
-      "explanation": "Ha nem párhuzamosak, az azt jelenti, hogy van közös pontjuk, tehát metszik egymást. ✅ Megoldás: Akkor biztosan metszők."
+      "explanation": "Ha nem párhuzamosak, az azt jelenti, hogy van közös pontjuk, tehát metszik egymást. ✅ Megoldás: Akkor biztosan metszők.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a neve a metsző síkok közös pontjainak halmazának?",
@@ -113,7 +123,8 @@
         "c": "metszősík"
       },
       "correct": "b",
-      "explanation": "A metsző síkok közös pontjai egy egyenest alkotnak, ezt metszésvonalnak nevezzük. ✅ Megoldás: A neve metszésvonal."
+      "explanation": "A metsző síkok közös pontjai egy egyenest alkotnak, ezt metszésvonalnak nevezzük. ✅ Megoldás: A neve metszésvonal.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy kocka felső lapja és jobb oldali lapja milyen helyzetű?",
@@ -123,7 +134,8 @@
         "c": "párhuzamos"
       },
       "correct": "a",
-      "explanation": "A kocka felső és jobb oldali lapja egy közös élben találkozik, tehát metszők.  ✅ Megoldás: Metszők"
+      "explanation": "A kocka felső és jobb oldali lapja egy közös élben találkozik, tehát metszők.  ✅ Megoldás: Metszők",
+      "difficulty": "medium"
     },
     {
       "question": "Egy kocka elülső lapjának egy csúcsa és a hátsó lap síkja...",
@@ -133,7 +145,8 @@
         "c": "Illeszkedők"
       },
       "correct": "b",
-      "explanation": "A hátsó lap síkja a kocka oldallapja. A kocka egy csúcsa. Ez a két dolog nem metszi egymást, a síkba nem illeszkedik, a két dolog egymással párhuzamos. ✅ Megoldás: Párhuzamosak"
+      "explanation": "A hátsó lap síkja a kocka oldallapja. A kocka egy csúcsa. Ez a két dolog nem metszi egymást, a síkba nem illeszkedik, a két dolog egymással párhuzamos. ✅ Megoldás: Párhuzamosak",
+      "difficulty": "medium"
     },
     {
       "question": "Mit jelent, ha egy egyenes egy síkra merőleges?",
@@ -143,7 +156,8 @@
         "c": "Metszi a síkot, és a szög 90°"
       },
       "correct": "c",
-      "explanation": "A síkra merőleges egyenes a síkot 90 fokos szögben metszi. ✅ Megoldás: Ha a merőleges egyenesre merőleges"
+      "explanation": "A síkra merőleges egyenes a síkot 90 fokos szögben metszi. ✅ Megoldás: Ha a merőleges egyenesre merőleges",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a négyzethálós koordinátarendszerben a két tengely közös pontjának a neve?",
@@ -153,7 +167,8 @@
         "c": "Origó"
       },
       "correct": "c",
-      "explanation": "Az x és y tengelyek metszéspontját origónak hívjuk. ✅ Megoldás: Az origó"
+      "explanation": "Az x és y tengelyek metszéspontját origónak hívjuk. ✅ Megoldás: Az origó",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a 2x+3y=6 egyenes x tengelymetszete?",
@@ -163,7 +178,8 @@
         "c": "0"
       },
       "correct": "a",
-      "explanation": "Az x tengelyen az y koordináta 0, 2x+3*0=6, 2x=6, x=3. ✅ Megoldás: 3"
+      "explanation": "Az x tengelyen az y koordináta 0, 2x+3*0=6, 2x=6, x=3. ✅ Megoldás: 3",
+      "difficulty": "medium"
     },
     {
       "question": "Ha egy egyenes párhuzamos a másik kettővel, ez a térbeli három egyenes...?",
@@ -173,7 +189,8 @@
         "c": "Mindkettő helyes"
       },
       "correct": "c",
-      "explanation": "A párhuzamos egyenesek egy síkban vannak, a síkbeli egyenesek egymással párhuzamosak. ✅ Megoldás: Mindkettő helyes"
+      "explanation": "A párhuzamos egyenesek egy síkban vannak, a síkbeli egyenesek egymással párhuzamosak. ✅ Megoldás: Mindkettő helyes",
+      "difficulty": "medium"
     },
     {
       "question": "Mi egy pont merőleges vetülete egy síkon?",
@@ -183,7 +200,8 @@
         "c": "Egy vonal"
       },
       "correct": "b",
-      "explanation": "A merőleges vetület a pont a síkon, aminek az egyenes a legrövidebb távolságra van a ponttól. ✅ Megoldás: Egy másik pont"
+      "explanation": "A merőleges vetület a pont a síkon, aminek az egyenes a legrövidebb távolságra van a ponttól. ✅ Megoldás: Egy másik pont",
+      "difficulty": "hard"
     },
     {
       "question": "Ha a síkok nem metszik egymást, akkor milyen a helyzetük (ismétlés)?",
@@ -193,7 +211,8 @@
         "c": "Egybeesőek."
       },
       "correct": "a",
-      "explanation": "A párhuzamos síkoknak nincs közös pontjuk, azaz soha nem metszik egymást. ✅ Megoldás: Párhuzamosak."
+      "explanation": "A párhuzamos síkoknak nincs közös pontjuk, azaz soha nem metszik egymást. ✅ Megoldás: Párhuzamosak.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik az egyenes és a sík nem egybevágó helyzete?",
@@ -203,7 +222,8 @@
         "c": "Párhuzamos."
       },
       "correct": "b",
-      "explanation": "A metsző helyzet nem egybevágó. ✅ Megoldás: Metsző."
+      "explanation": "A metsző helyzet nem egybevágó. ✅ Megoldás: Metsző.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik állítás HAMIS?",
@@ -213,7 +233,8 @@
         "c": "A 3 pont nem egy egyenesen mindig egy síkot határoz meg."
       },
       "correct": "b",
-      "explanation": "Egyenesek nem határoznak meg egy síkot. ✅ Megoldás: A 2 metsző egyenes egy síkot határoz meg."
+      "explanation": "Egyenesek nem határoznak meg egy síkot. ✅ Megoldás: A 2 metsző egyenes egy síkot határoz meg.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha egy 30 cm magas fát 45 cm-re tesznek le, mit csinálnak vele?",
@@ -223,9 +244,10 @@
         "c": "A magasságát nem befolyásolják."
       },
       "correct": "b",
-      "explanation": "A mélység lecsökken, ezért a magasság csökken. ✅ Megoldás: A magasságát csökkentik."
+      "explanation": "A mélység lecsökken, ezért a magasság csökken. ✅ Megoldás: A magasságát csökkentik.",
+      "difficulty": "hard"
     },
-     {
+    {
       "question": "Mi a 45 fokos szög mértékegysége?",
       "answers": {
         "a": "fok.",
@@ -233,7 +255,8 @@
         "c": "mindkettő."
       },
       "correct": "c",
-      "explanation": "Mindkettő. ✅ Megoldás: Mindkettő."
+      "explanation": "Mindkettő. ✅ Megoldás: Mindkettő.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy egyenes és egy sík metszésvonala ...",
@@ -243,7 +266,8 @@
         "c": "...két pont."
       },
       "correct": "b",
-      "explanation": "A metszésvonal mindig egy egyenes. ✅ Megoldás: Egy egyenes."
+      "explanation": "A metszésvonal mindig egy egyenes. ✅ Megoldás: Egy egyenes.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy szoba mennyezete és padlója...",
@@ -253,7 +277,8 @@
         "c": "...egy sík."
       },
       "correct": "b",
-      "explanation": "A mennyezet és a padló párhuzamos. ✅ Megoldás: Párhuzamos síkok"
+      "explanation": "A mennyezet és a padló párhuzamos. ✅ Megoldás: Párhuzamos síkok",
+      "difficulty": "hard"
     }
   ]
 }

@@ -13,7 +13,8 @@
         "c": "A két halmaz elemeinek különbségét."
       },
       "correct": "b",
-      "explanation": "Az unió (jelölése: ∪) azt jelenti, hogy a két halmaz összes elemét vesszük, az ismétlődéseket elhagyva. ✅ Megoldás: Az összes elemet, ismétlés nélkül."
+      "explanation": "Az unió (jelölése: ∪) azt jelenti, hogy a két halmaz összes elemét vesszük, az ismétlődéseket elhagyva. ✅ Megoldás: Az összes elemet, ismétlés nélkül.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a metszet a halmazoknál?",
@@ -23,7 +24,8 @@
         "c": "A második halmaz elemeit."
       },
       "correct": "b",
-      "explanation": "A metszet (jelölése: ∩) a két halmaz közös elemeit jelenti. ✅ Megoldás: A közös elemeket."
+      "explanation": "A metszet (jelölése: ∩) a két halmaz közös elemeit jelenti. ✅ Megoldás: A közös elemeket.",
+      "difficulty": "easy"
     },
     {
       "question": "Ha A = [1; 3] és B = (2; 4), akkor mi az A ∪ B?",
@@ -33,7 +35,8 @@
         "c": "(1; 4)"
       },
       "correct": "a",
-      "explanation": "Az unió: [1; 3] és (2; 4) - a legkisebb elemtől a legnagyobbig: [1; 4]. ✅ Megoldás: [1; 4]"
+      "explanation": "Az unió: [1; 3] és (2; 4) - a legkisebb elemtől a legnagyobbig: [1; 4]. ✅ Megoldás: [1; 4]",
+      "difficulty": "easy"
     },
     {
       "question": "Ha A = [1; 3] és B = (2; 4), akkor mi az A ∩ B?",
@@ -43,7 +46,8 @@
         "c": "(1; 2)"
       },
       "correct": "b",
-      "explanation": "A metszet:  A két halmaz közös részét keressük: (2; 3]. ✅ Megoldás: (2; 3]"
+      "explanation": "A metszet:  A két halmaz közös részét keressük: (2; 3]. ✅ Megoldás: (2; 3]",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az a halmaz, amelyben minden elem benne van az A-ban, de nincs benne a B-ben?",
@@ -53,7 +57,8 @@
         "c": "A különbség."
       },
       "correct": "c",
-      "explanation": "Ez a különbségképzés, jelölése A\\B. ✅ Megoldás: A különbség."
+      "explanation": "Ez a különbségképzés, jelölése A\\B. ✅ Megoldás: A különbség.",
+      "difficulty": "easy"
     },
     {
       "question": "Ha A = {1, 2, 3, 4, 5} és B = {3, 5, 7}, akkor mi az A\\B (A mínusz B)?",
@@ -63,7 +68,8 @@
         "c": "{1, 2, 3, 4, 5, 7}"
       },
       "correct": "b",
-      "explanation": "Az A\\B azt jelenti, hogy az A halmazból elhagyjuk a B halmaz elemeit. A B-ben a 3 és az 5 szerepel, ezért: A\\B = {1, 2, 4}. ✅ Megoldás: {1, 2, 4}"
+      "explanation": "Az A\\B azt jelenti, hogy az A halmazból elhagyjuk a B halmaz elemeit. A B-ben a 3 és az 5 szerepel, ezért: A\\B = {1, 2, 4}. ✅ Megoldás: {1, 2, 4}",
+      "difficulty": "easy"
     },
     {
       "question": "Ha A = [1; 5] és B = [3; 7], akkor mi az A ∪ B?",
@@ -73,7 +79,8 @@
         "c": "[1; 3] ∪ [5; 7]"
       },
       "correct": "b",
-      "explanation": "Az unió az összes elemet jelenti. A  [1; 5] és [3; 7] uniója [1; 7]. ✅ Megoldás: [1; 7]"
+      "explanation": "Az unió az összes elemet jelenti. A  [1; 5] és [3; 7] uniója [1; 7]. ✅ Megoldás: [1; 7]",
+      "difficulty": "easy"
     },
     {
       "question": "Ha A = [1; 5] és B = [3; 7], akkor mi az A ∩ B?",
@@ -83,7 +90,8 @@
         "c": "∅"
       },
       "correct": "a",
-      "explanation": "A metszet a közös elemeket jelenti. A közös rész a [3; 5]. ✅ Megoldás: [3; 5]"
+      "explanation": "A metszet a közös elemeket jelenti. A közös rész a [3; 5]. ✅ Megoldás: [3; 5]",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a komplementer halmaz?",
@@ -93,7 +101,8 @@
         "c": "A halmaz összes eleme."
       },
       "correct": "b",
-      "explanation": "A komplementer halmaz mindent tartalmaz, ami nincs benne az eredeti halmazban. ✅ Megoldás: Minden, ami nem a halmaz része."
+      "explanation": "A komplementer halmaz mindent tartalmaz, ami nincs benne az eredeti halmazban. ✅ Megoldás: Minden, ami nem a halmaz része.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha az alaphalmaz a 1-től 10-ig tartó számok halmaza, és A = {1, 2, 3}, akkor mi az A komplementere?",
@@ -103,7 +112,8 @@
         "c": "{ }"
       },
       "correct": "b",
-      "explanation": "Az A komplementere a {4, 5, 6, 7, 8, 9, 10}, mert ezek a számok vannak meg az alaphalmazban, de nincsenek meg az A-ban. ✅ Megoldás: {4, 5, 6, 7, 8, 9, 10}"
+      "explanation": "Az A komplementere a {4, 5, 6, 7, 8, 9, 10}, mert ezek a számok vannak meg az alaphalmazban, de nincsenek meg az A-ban. ✅ Megoldás: {4, 5, 6, 7, 8, 9, 10}",
+      "difficulty": "medium"
     },
     {
       "question": "Mit jelöl a ∪ jel a halmazoknál?",
@@ -113,7 +123,8 @@
         "c": "A különbséget"
       },
       "correct": "b",
-      "explanation": "A ∪ jel az uniót jelöli, ami az összes elemet tartalmazza ismétlés nélkül. ✅ Megoldás: Az uniót"
+      "explanation": "A ∪ jel az uniót jelöli, ami az összes elemet tartalmazza ismétlés nélkül. ✅ Megoldás: Az uniót",
+      "difficulty": "medium"
     },
     {
       "question": "Mit jelöl a ∩ jel a halmazoknál?",
@@ -123,7 +134,8 @@
         "c": "A különbséget"
       },
       "correct": "a",
-      "explanation": "A ∩ jel a metszetet jelöli, ami a közös elemeket tartalmazza. ✅ Megoldás: A metszetet"
+      "explanation": "A ∩ jel a metszetet jelöli, ami a közös elemeket tartalmazza. ✅ Megoldás: A metszetet",
+      "difficulty": "medium"
     },
     {
       "question": "Ha A = (-∞; 2] és B = [0; ∞), akkor mi az A ∩ B?",
@@ -133,7 +145,8 @@
         "c": "∅"
       },
       "correct": "a",
-      "explanation": "A metszet a közös rész. A (-∞; 2] és [0; ∞) közös része a [0; 2].  ✅ Megoldás: [0; 2]"
+      "explanation": "A metszet a közös rész. A (-∞; 2] és [0; ∞) közös része a [0; 2].  ✅ Megoldás: [0; 2]",
+      "difficulty": "medium"
     },
     {
       "question": "Ha A = (-∞; 2] és B = [0; ∞), akkor mi az A ∪ B?",
@@ -143,7 +156,8 @@
         "c": "∅"
       },
       "correct": "b",
-      "explanation": "Az unió az összes elem. A (-∞; 2] és [0; ∞) uniója a  (-∞; ∞), azaz a számegyenes. ✅ Megoldás: (-∞; ∞)"
+      "explanation": "Az unió az összes elem. A (-∞; 2] és [0; ∞) uniója a  (-∞; ∞), azaz a számegyenes. ✅ Megoldás: (-∞; ∞)",
+      "difficulty": "medium"
     },
     {
       "question": "Ha A = [1; 4] és B = (4; 7), akkor mi az A ∪ B?",
@@ -153,7 +167,8 @@
         "c": "[1; 4] ∪ (4; 7)"
       },
       "correct": "a",
-      "explanation": "Az unió az összes elem.  A [1; 4] és (4; 7) uniója a [1; 7].  ✅ Megoldás: [1; 7]"
+      "explanation": "Az unió az összes elem.  A [1; 4] és (4; 7) uniója a [1; 7].  ✅ Megoldás: [1; 7]",
+      "difficulty": "medium"
     },
     {
       "question": "Ha A = [1; 4] és B = (4; 7), akkor mi az A ∩ B?",
@@ -163,7 +178,8 @@
         "c": "∅"
       },
       "correct": "c",
-      "explanation": "A metszet a közös elemeket jelenti. A [1; 4] és (4; 7) halmazoknak nincsenek közös elemei, ezért a metszet üres halmaz. ✅ Megoldás: ∅"
+      "explanation": "A metszet a közös elemeket jelenti. A [1; 4] és (4; 7) halmazoknak nincsenek közös elemei, ezért a metszet üres halmaz. ✅ Megoldás: ∅",
+      "difficulty": "medium"
     },
     {
       "question": "Ha A = {1, 2, 3, 4, 5} és B = {4, 5, 6, 7}, akkor mi az A\\B (A mínusz B)?",
@@ -173,7 +189,8 @@
         "c": "{6, 7}"
       },
       "correct": "b",
-      "explanation": "Az A\\B azokat az elemeket tartalmazza, amelyek az A-ban benne vannak, de a B-ben nincsenek. A 4 és 5 benne van mindkét halmazban, ezért elhagyjuk őket.  A\\B = {1, 2, 3}. ✅ Megoldás: {1, 2, 3}"
+      "explanation": "Az A\\B azokat az elemeket tartalmazza, amelyek az A-ban benne vannak, de a B-ben nincsenek. A 4 és 5 benne van mindkét halmazban, ezért elhagyjuk őket.  A\\B = {1, 2, 3}. ✅ Megoldás: {1, 2, 3}",
+      "difficulty": "hard"
     },
     {
       "question": "Ha A = {a, b, c, d} és B = {c, d, e, f}, akkor mi az A\\B?",
@@ -183,7 +200,8 @@
         "c": "{c, d}"
       },
       "correct": "a",
-      "explanation": "Az A\\B azokat az elemeket tartalmazza, amelyek az A-ban benne vannak, de a B-ben nincsenek. A {c, d} közös, ezért A\\B = {a, b}. ✅ Megoldás: {a, b}"
+      "explanation": "Az A\\B azokat az elemeket tartalmazza, amelyek az A-ban benne vannak, de a B-ben nincsenek. A {c, d} közös, ezért A\\B = {a, b}. ✅ Megoldás: {a, b}",
+      "difficulty": "hard"
     },
     {
       "question": "Mi történik, ha egy halmazt elmetszünk az üres halmazzal?",
@@ -193,7 +211,8 @@
         "c": "Az eredmény az alaphalmaz."
       },
       "correct": "b",
-      "explanation": "A metszet a közös elemeket tartalmazza. Az üres halmaznak nincs eleme, ezért a metszet is üres. ✅ Megoldás: Az eredmény az üres halmaz."
+      "explanation": "A metszet a közös elemeket tartalmazza. Az üres halmaznak nincs eleme, ezért a metszet is üres. ✅ Megoldás: Az eredmény az üres halmaz.",
+      "difficulty": "hard"
     },
     {
       "question": "Mit ad az unió, ha egy halmazt egyesítünk az üres halmazzal?",
@@ -203,7 +222,8 @@
         "c": "Az alaphalmazt."
       },
       "correct": "a",
-      "explanation": "Az unió az összes elemet tartalmazza. Az üres halmaznak nincsenek elemei, ezért az unió az eredeti halmaz. ✅ Megoldás: Az eredeti halmazt."
+      "explanation": "Az unió az összes elemet tartalmazza. Az üres halmaznak nincsenek elemei, ezért az unió az eredeti halmaz. ✅ Megoldás: Az eredeti halmazt.",
+      "difficulty": "hard"
     },
     {
       "question": "Mit kapunk, ha egy halmazt a komplementerével metszünk?",
@@ -213,7 +233,8 @@
         "c": "Az alaphalmazt."
       },
       "correct": "b",
-      "explanation": "A halmaz és a komplementere nem tartalmaz közös elemeket, ezért a metszetük üres.  ✅ Megoldás: Az üres halmazt."
+      "explanation": "A halmaz és a komplementere nem tartalmaz közös elemeket, ezért a metszetük üres.  ✅ Megoldás: Az üres halmazt.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi történik, ha egy halmazt az alaphalmazzal metszünk?",
@@ -223,7 +244,8 @@
         "c": "Az alaphalmazt."
       },
       "correct": "a",
-      "explanation": "A metszet a közös elemeket tartalmazza. Ha egy halmazt az alaphalmazzal metszünk, akkor az eredeti halmazt kapjuk. ✅ Megoldás: Az eredeti halmazt."
+      "explanation": "A metszet a közös elemeket tartalmazza. Ha egy halmazt az alaphalmazzal metszünk, akkor az eredeti halmazt kapjuk. ✅ Megoldás: Az eredeti halmazt.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik állítás igaz az unióra nézve?",
@@ -233,7 +255,8 @@
         "c": "Az unió a második halmaz elemeit tartalmazza."
       },
       "correct": "b",
-      "explanation": "Az unió az összes elemet tartalmazza, ismétlés nélkül. ✅ Megoldás: Az összes elemet tartalmazza, ismétlés nélkül."
+      "explanation": "Az unió az összes elemet tartalmazza, ismétlés nélkül. ✅ Megoldás: Az összes elemet tartalmazza, ismétlés nélkül.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a különbségképzés eredménye?",
@@ -243,7 +266,8 @@
         "c": "A második halmaz elemei, amik az elsőben nincsenek benne."
       },
       "correct": "b",
-      "explanation": "A különbségképzés (A\\B) azokat az elemeket tartalmazza, amelyek az A-ban benne vannak, de a B-ben nincsenek. ✅ Megoldás: Az első halmaz elemei, amik a másodikban nincsenek benne."
+      "explanation": "A különbségképzés (A\\B) azokat az elemeket tartalmazza, amelyek az A-ban benne vannak, de a B-ben nincsenek. ✅ Megoldás: Az első halmaz elemei, amik a másodikban nincsenek benne.",
+      "difficulty": "hard"
     }
   ]
 }

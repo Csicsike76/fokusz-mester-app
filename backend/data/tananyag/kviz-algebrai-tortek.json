@@ -13,7 +13,8 @@
         "c": "x+y+5"
       },
       "correct": "a",
-      "explanation": "Ha a számlálóban (a felső részben) egy összeg van, akkor minden tagot külön-külön el kell osztani a nevezővel. 5x osztva 5-tel az x. 5y osztva 5-tel az y. Az eredmény tehát x + y."
+      "explanation": "Ha a számlálóban (a felső részben) egy összeg van, akkor minden tagot külön-külön el kell osztani a nevezővel. 5x osztva 5-tel az x. 5y osztva 5-tel az y. Az eredmény tehát x + y.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik igaz: a/b + c/b = ?",
@@ -23,7 +24,8 @@
         "c": "(a+c)/b + 1"
       },
       "correct": "a",
-      "explanation": "A szabály az, hogy ha két törtnek az alsó része (a nevezője) megegyezik, akkor a felső részeket (a számlálókat) egyszerűen összeadhatjuk a közös nevező fölött."
+      "explanation": "A szabály az, hogy ha két törtnek az alsó része (a nevezője) megegyezik, akkor a felső részeket (a számlálókat) egyszerűen összeadhatjuk a közös nevező fölött.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik a törstulajdonság: a/b ÷ c/d = ?",
@@ -33,7 +35,8 @@
         "c": "a/(b*d/c)"
       },
       "correct": "a",
-      "explanation": "Törttel úgy osztunk, hogy az osztó törtet (a másodikat) 'megfordítjuk' (a reciprokát vesszük), és azzal szorzunk."
+      "explanation": "Törttel úgy osztunk, hogy az osztó törtet (a másodikat) 'megfordítjuk' (a reciprokát vesszük), és azzal szorzunk.",
+      "difficulty": "easy"
     },
     {
       "question": "Egyszerűsítés: (2x+4)/2 ?",
@@ -43,7 +46,8 @@
         "c": "2(x+2)"
       },
       "correct": "a",
-      "explanation": "Ha egy összeget (a felső részt) osztunk egy számmal (az alsó résszel), az összeg minden tagját külön-külön el kell osztani azzal a számmal. Először a 2x-et osztjuk 2-vel, amiből x lesz. Utána a 4-et osztjuk 2-vel, amiből 2 lesz. A végeredmény tehát x + 2."
+      "explanation": "Ha egy összeget (a felső részt) osztunk egy számmal (az alsó résszel), az összeg minden tagját külön-külön el kell osztani azzal a számmal. Először a 2x-et osztjuk 2-vel, amiből x lesz. Utána a 4-et osztjuk 2-vel, amiből 2 lesz. A végeredmény tehát x + 2.",
+      "difficulty": "easy"
     },
     {
       "question": "Egyszerűsítés: (x^2*y)/(x*y^2)?",
@@ -53,7 +57,8 @@
         "c": "y/x"
       },
       "correct": "b",
-      "explanation": "Nézzük külön a betűket! Fent x^2, alul x^1, a kitevők különbsége 2-1=1, tehát a számlálóban marad x. Alul y^2, fent y^1, a kitevők különbsége 2-1=1, tehát a nevezőben marad y. Az eredmény x/y."
+      "explanation": "Nézzük külön a betűket! Fent x^2, alul x^1, a kitevők különbsége 2-1=1, tehát a számlálóban marad x. Alul y^2, fent y^1, a kitevők különbsége 2-1=1, tehát a nevezőben marad y. Az eredmény x/y.",
+      "difficulty": "easy"
     },
     {
       "question": "Egyszerűsítés: 4x+8 / 2?",
@@ -63,7 +68,8 @@
         "c": "4x+4"
       },
       "correct": "b",
-      "explanation": "A felső részben lévő összeg minden tagját el kell osztani 2-vel. 4x osztva 2-vel az 2x, 8 osztva 2-vel pedig 4. A végeredmény 2x + 4."
+      "explanation": "A felső részben lévő összeg minden tagját el kell osztani 2-vel. 4x osztva 2-vel az 2x, 8 osztva 2-vel pedig 4. A végeredmény 2x + 4.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik hamis: 1/a + 1/b = (a+b)/ab ?",
@@ -73,7 +79,8 @@
         "c": "Bizonytalan"
       },
       "correct": "a",
-      "explanation": "Különböző nevezőjű törtek összeadásához közös nevezőre kell hozni őket. A közös nevező itt a*b lesz. Az első törtet 'b'-vel, a másodikat 'a'-val kell bővíteni. Így (1*b + 1*a) / (a*b) lesz, ami ugyanaz, mint (a+b)/ab. Tehát az állítás igaz."
+      "explanation": "Különböző nevezőjű törtek összeadásához közös nevezőre kell hozni őket. A közös nevező itt a*b lesz. Az első törtet 'b'-vel, a másodikat 'a'-val kell bővíteni. Így (1*b + 1*a) / (a*b) lesz, ami ugyanaz, mint (a+b)/ab. Tehát az állítás igaz.",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan bontjuk fel: (a+b)/c?",
@@ -83,7 +90,8 @@
         "c": "a + b/c"
       },
       "correct": "b",
-      "explanation": "Ha a számlálóban (felső részben) egy összeg van, akkor az összeg minden tagját külön-külön is eloszthatjuk a nevezővel. Tehát (a+b)/c felbontható a/c + b/c alakra."
+      "explanation": "Ha a számlálóban (felső részben) egy összeg van, akkor az összeg minden tagját külön-külön is eloszthatjuk a nevezővel. Tehát (a+b)/c felbontható a/c + b/c alakra.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik igaz: a/b * c/d = ?",
@@ -93,7 +101,8 @@
         "c": "(a+c)/(b+d)"
       },
       "correct": "b",
-      "explanation": "A szabály az, hogy törteket úgy szorzunk össze, hogy a felső részt (számlálót) megszorozzuk a felső résszel, az alsó részt (nevezőt) pedig az alsó résszel."
+      "explanation": "A szabály az, hogy törteket úgy szorzunk össze, hogy a felső részt (számlálót) megszorozzuk a felső résszel, az alsó részt (nevezőt) pedig az alsó résszel.",
+      "difficulty": "medium"
     },
     {
       "question": "Egyszerűsítés: 3(x+2)/3?",
@@ -103,7 +112,8 @@
         "c": "x"
       },
       "correct": "a",
-      "explanation": "A számláló (felső rész) azt jelenti, hogy 3-mal megszorozzuk az (x+2) összeget. Mivel a nevező (alsó rész) 3, ezért a szorzás és az osztás kioltja egymást. Az eredmény x+2."
+      "explanation": "A számláló (felső rész) azt jelenti, hogy 3-mal megszorozzuk az (x+2) összeget. Mivel a nevező (alsó rész) 3, ezért a szorzás és az osztás kioltja egymást. Az eredmény x+2.",
+      "difficulty": "medium"
     },
     {
       "question": "Egyszerűsítés: 4x+6 / 2x+3?",
@@ -113,7 +123,8 @@
         "c": "x+3"
       },
       "correct": "b",
-      "explanation": "Vegyük észre, hogy a felső rész (4x+6) pont a kétszerese az alsó résznek (2x+3). Ezt úgy is írhatjuk, hogy a felső rész 2*(2x+3). Mivel a (2x+3) rész a számlálóban és a nevezőben is szerepel, egyszerűsíthetünk vele, és az eredmény 2."
+      "explanation": "Vegyük észre, hogy a felső rész (4x+6) pont a kétszerese az alsó résznek (2x+3). Ezt úgy is írhatjuk, hogy a felső rész 2*(2x+3). Mivel a (2x+3) rész a számlálóban és a nevezőben is szerepel, egyszerűsíthetünk vele, és az eredmény 2.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik ábrázolja helyesen: 2/3?",
@@ -123,7 +134,8 @@
         "c": "Mindkettő helytelen"
       },
       "correct": "a",
-      "explanation": "A 2/3 törtet úgy alakítjuk tizedes törtté, hogy a 2-t elosztjuk 3-mal. Ez egy végtelen szakaszos tizedes törtet ad: 0,666..."
+      "explanation": "A 2/3 törtet úgy alakítjuk tizedes törtté, hogy a 2-t elosztjuk 3-mal. Ez egy végtelen szakaszos tizedes törtet ad: 0,666...",
+      "difficulty": "medium"
     },
     {
       "question": "Egyszerűsítsük: (x^2 - y^2)/(x - y)?",
@@ -133,7 +145,8 @@
         "c": "x+y"
       },
       "correct": "c",
-      "explanation": "A felső részt, az (x² - y²)-t, át lehet írni egy másik alakra: (x-y)(x+y). Így a törtünk: (x-y)(x+y) / (x-y). Látható, hogy az (x-y) rész a felső és az alsó részben is megegyezik, ezért egyszerűsíthetünk vele. Ami marad, az az x+y."
+      "explanation": "A felső részt, az (x² - y²)-t, át lehet írni egy másik alakra: (x-y)(x+y). Így a törtünk: (x-y)(x+y) / (x-y). Látható, hogy az (x-y) rész a felső és az alsó részben is megegyezik, ezért egyszerűsíthetünk vele. Ami marad, az az x+y.",
+      "difficulty": "medium"
     },
     {
       "question": "Egyszerűsítés: x^3/x?",
@@ -143,7 +156,8 @@
         "c": "x^2"
       },
       "correct": "c",
-      "explanation": "Ha azonos betűket osztunk egymással, amiknek hatványaik vannak, a kitevőket (a kis számokat fent) kivonjuk egymásból. Az 'x' önmagában x^1-t jelent. Tehát: 3 - 1 = 2, az eredmény x^2."
+      "explanation": "Ha azonos betűket osztunk egymással, amiknek hatványaik vannak, a kitevőket (a kis számokat fent) kivonjuk egymásból. Az 'x' önmagában x^1-t jelent. Tehát: 3 - 1 = 2, az eredmény x^2.",
+      "difficulty": "medium"
     },
     {
       "question": "Hogyan egyszerűsítjük: 8x/12?",
@@ -153,7 +167,8 @@
         "c": "x"
       },
       "correct": "b",
-      "explanation": "Keressük a legnagyobb számot, amivel a 8 és a 12 is osztható. Ez a 4. 8 osztva 4-gyel az 2, 12 osztva 4-gyel pedig 3. Így az egyszerűsített tört 2x/3."
+      "explanation": "Keressük a legnagyobb számot, amivel a 8 és a 12 is osztható. Ez a 4. 8 osztva 4-gyel az 2, 12 osztva 4-gyel pedig 3. Így az egyszerűsített tört 2x/3.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik átalakítás helyes: (a+b)/a?",
@@ -163,7 +178,8 @@
         "c": "1 + b/a"
       },
       "correct": "c",
-      "explanation": "A kifejezés felbontható két törtre: a/a + b/a. A dolog kulcsa, hogy ha egy számot elosztunk önmagával (feltéve, hogy a szám nem nulla), az eredmény mindig 1. Vagyis a/a = 1. Így a kifejezés 1 + b/a lesz."
+      "explanation": "A kifejezés felbontható két törtre: a/a + b/a. A dolog kulcsa, hogy ha egy számot elosztunk önmagával (feltéve, hogy a szám nem nulla), az eredmény mindig 1. Vagyis a/a = 1. Így a kifejezés 1 + b/a lesz.",
+      "difficulty": "medium"
     },
     {
       "question": "Egyszerűsítés: 2x/4x?",
@@ -173,7 +189,8 @@
         "c": "1/2"
       },
       "correct": "c",
-      "explanation": "A számlálót és a nevezőt is eloszthatjuk 2x-szel (feltéve, hogy x nem nulla). 2x osztva 2x-szel az 1. 4x osztva 2x-szel az 2. Így az eredmény 1/2."
+      "explanation": "A számlálót és a nevezőt is eloszthatjuk 2x-szel (feltéve, hogy x nem nulla). 2x osztva 2x-szel az 1. 4x osztva 2x-szel az 2. Így az eredmény 1/2.",
+      "difficulty": "hard"
     },
     {
       "question": "Egyszerűsítés: x^3/x^2?",
@@ -183,7 +200,8 @@
         "c": "x"
       },
       "correct": "c",
-      "explanation": "Azonos alapú hatványok osztásánál a kitevőket kivonjuk egymásból. 3 - 2 = 1, tehát az eredmény x^1 = x."
+      "explanation": "Azonos alapú hatványok osztásánál a kitevőket kivonjuk egymásból. 3 - 2 = 1, tehát az eredmény x^1 = x.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik törtrendezés helyes: 3/x + 5/x = ?",
@@ -193,7 +211,8 @@
         "c": "8/x^2"
       },
       "correct": "a",
-      "explanation": "Mivel a nevező (az alsó rész) mindkét törtnél ugyanaz ('x'), a számlálókat (a felső részeket) összeadhatjuk a közös nevező felett. 3+5=8."
+      "explanation": "Mivel a nevező (az alsó rész) mindkét törtnél ugyanaz ('x'), a számlálókat (a felső részeket) összeadhatjuk a közös nevező felett. 3+5=8.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik az a/b tört reciproka?",
@@ -203,7 +222,8 @@
         "c": "-a/b"
       },
       "correct": "a",
-      "explanation": "Egy tört reciprokát úgy kapjuk meg, hogy a felső és az alsó részét egyszerűen felcseréljük egymással."
+      "explanation": "Egy tört reciprokát úgy kapjuk meg, hogy a felső és az alsó részét egyszerűen felcseréljük egymással.",
+      "difficulty": "hard"
     },
     {
       "question": "Egyszerűsítés: (x^2 - 4)/(x - 2)?",
@@ -213,7 +233,8 @@
         "c": "x"
       },
       "correct": "b",
-      "explanation": "A felső részt, az (x² - 4)-et, át lehet írni szorzattá. Ez egy nevezetes azonosság: (x-2)(x+2). Most a törtünk így néz ki: (x-2)(x+2) / (x-2). Mivel az (x-2) rész a felső és az alsó részben is szerepel, egyszerűsíthetünk vele. Ami megmarad, az x+2."
+      "explanation": "A felső részt, az (x² - 4)-et, át lehet írni szorzattá. Ez egy nevezetes azonosság: (x-2)(x+2). Most a törtünk így néz ki: (x-2)(x+2) / (x-2). Mivel az (x-2) rész a felső és az alsó részben is szerepel, egyszerűsíthetünk vele. Ami megmarad, az x+2.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik átalakítás: 3a/6b?",
@@ -223,7 +244,8 @@
         "c": "3a/2b"
       },
       "correct": "b",
-      "explanation": "A törteket egyszerűsíthetjük, ha a számlálót és a nevezőt is el tudjuk osztani ugyanazzal a számmal. A 3-at és a 6-ot is el lehet osztani 3-mal. 3 osztva 3-mal az 1, 6 osztva 3-mal pedig 2. Így a tört egyszerűsített alakja a/2b."
+      "explanation": "A törteket egyszerűsíthetjük, ha a számlálót és a nevezőt is el tudjuk osztani ugyanazzal a számmal. A 3-at és a 6-ot is el lehet osztani 3-mal. 3 osztva 3-mal az 1, 6 osztva 3-mal pedig 2. Így a tört egyszerűsített alakja a/2b.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik helyes: 2x/x?",
@@ -233,7 +255,8 @@
         "c": "2x"
       },
       "correct": "b",
-      "explanation": "A számlálóban és a nevezőben is szerepel az x, amivel egyszerűsíthetünk (feltéve, hogy x nem nulla). Az eredmény 2."
+      "explanation": "A számlálóban és a nevezőben is szerepel az x, amivel egyszerűsíthetünk (feltéve, hogy x nem nulla). Az eredmény 2.",
+      "difficulty": "hard"
     }
   ]
 }

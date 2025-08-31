@@ -13,7 +13,8 @@
         "c": "5"
       },
       "correct": "a",
-      "explanation": "Először a zárójelben lévő összeadást végezzük el: 2+3=5. Utána emeljük négyzetre: 5*5=25."
+      "explanation": "Először a zárójelben lévő összeadást végezzük el: 2+3=5. Utána emeljük négyzetre: 5*5=25.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik igaz: (a + b)² + (a − b)² = …?",
@@ -23,7 +24,8 @@
         "c": "a² + b²"
       },
       "correct": "b",
-      "explanation": "Fejtsük ki mindkét tagot! Az első: a²+2ab+b². A második: a²-2ab+b². Ha összeadjuk őket, a '2ab' és '-2ab' tagok kiesnek. Ami marad: a²+b²+a²+b² = 2a²+2b²."
+      "explanation": "Fejtsük ki mindkét tagot! Az első: a²+2ab+b². A második: a²-2ab+b². Ha összeadjuk őket, a '2ab' és '-2ab' tagok kiesnek. Ami marad: a²+b²+a²+b² = 2a²+2b².",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik igaz: (a + b)² − (a − b)² = …?",
@@ -33,7 +35,8 @@
         "c": "4ab"
       },
       "correct": "c",
-      "explanation": "Fejtsük ki mindkét tagot! Az első: a²+2ab+b². A második: a²-2ab+b². Ha kivonjuk a másodikat az elsőből: (a²+2ab+b²) - (a²-2ab+b²) = a²+2ab+b²-a²+2ab-b². Az a² és b² tagok kiesnek, marad 2ab+2ab = 4ab."
+      "explanation": "Fejtsük ki mindkét tagot! Az első: a²+2ab+b². A második: a²-2ab+b². Ha kivonjuk a másodikat az elsőből: (a²+2ab+b²) - (a²-2ab+b²) = a²+2ab+b²-a²+2ab-b². Az a² és b² tagok kiesnek, marad 2ab+2ab = 4ab.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az (x+1)(x−1) értéke?",
@@ -43,7 +46,8 @@
         "c": "x²−2"
       },
       "correct": "b",
-      "explanation": "Ez a 'két négyzet különbsége' azonosság: (a+b)(a-b) = a²-b². Itt a=x és b=1. Tehát az eredmény x²-1² = x²-1."
+      "explanation": "Ez a 'két négyzet különbsége' azonosság: (a+b)(a-b) = a²-b². Itt a=x és b=1. Tehát az eredmény x²-1² = x²-1.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik kifejezés NEM binom négyzete?",
@@ -53,7 +57,8 @@
         "c": "(a − b)²"
       },
       "correct": "a",
-      "explanation": "A binom 'kéttagút' jelent. Az (a+b) és (a-b) kéttagú, tehát a négyzetük binom négyzete. Az (a+b+c) már háromtagú (trinom)."
+      "explanation": "A binom 'kéttagút' jelent. Az (a+b) és (a-b) kéttagú, tehát a négyzetük binom négyzete. Az (a+b+c) már háromtagú (trinom).",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik binomban NINCS 2ab?",
@@ -63,7 +68,8 @@
         "c": "(a+b)(a−b)"
       },
       "correct": "a",
-      "explanation": "A kérdés hibás, mivel az (a-b)² kifejezésben -2ab szerepel, nem pedig +2ab. A (a+b)(a-b) kifejezésben pedig egyáltalán nincs 'ab' tag, így az a helyes válasz."
+      "explanation": "A kérdés hibás, mivel az (a-b)² kifejezésben -2ab szerepel, nem pedig +2ab. A (a+b)(a-b) kifejezésben pedig egyáltalán nincs 'ab' tag, így az a helyes válasz.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a (a + b)(a − b) eredménye?",
@@ -73,7 +79,8 @@
         "c": "a² − b²"
       },
       "correct": "c",
-      "explanation": "Ez egy nevezetes azonosság, a 'két négyzet különbsége'. Két szám összegének és különbségének szorzata egyenlő a számok négyzeteinek különbségével."
+      "explanation": "Ez egy nevezetes azonosság, a 'két négyzet különbsége'. Két szám összegének és különbségének szorzata egyenlő a számok négyzeteinek különbségével.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a (a − b)² kifejezés?",
@@ -83,7 +90,8 @@
         "c": "a² − b²"
       },
       "correct": "b",
-      "explanation": "Ez a 'különbség négyzete' azonosság. Szabálya: első tag négyzete, mínusz a két tag kétszeres szorzata, plusz a második tag négyzete."
+      "explanation": "Ez a 'különbség négyzete' azonosság. Szabálya: első tag négyzete, mínusz a két tag kétszeres szorzata, plusz a második tag négyzete.",
+      "difficulty": "easy"
     },
     {
       "question": "(3 − 5)(3 + 5) értéke?",
@@ -93,7 +101,8 @@
         "c": "8"
       },
       "correct": "b",
-      "explanation": "Az (a-b)(a+b) = a²-b² azonosságot használva: 3²-5² = 9-25 = -16."
+      "explanation": "Az (a-b)(a+b) = a²-b² azonosságot használva: 3²-5² = 9-25 = -16.",
+      "difficulty": "easy"
     },
     {
       "question": "(2x+3)(2x−3) értéke?",
@@ -103,7 +112,8 @@
         "c": "4x²−9"
       },
       "correct": "c",
-      "explanation": "Az (a+b)(a-b) = a²-b² azonosságot használva, ahol a=2x és b=3. Az eredmény: (2x)² - 3² = 4x²-9."
+      "explanation": "Az (a+b)(a-b) = a²-b² azonosságot használva, ahol a=2x és b=3. Az eredmény: (2x)² - 3² = 4x²-9.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik tényezőket tartalmazza (a+b)² faktorizált alakban?",
@@ -113,7 +123,8 @@
         "c": "a² + b²"
       },
       "correct": "b",
-      "explanation": "A négyzetre emelés azt jelenti, hogy a kifejezést megszorozzuk önmagával. Tehát (a+b)² = (a+b)*(a+b)."
+      "explanation": "A négyzetre emelés azt jelenti, hogy a kifejezést megszorozzuk önmagával. Tehát (a+b)² = (a+b)*(a+b).",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik igaz: (a+b)² + (a−b)² = 2(a²+b²)?",
@@ -123,7 +134,8 @@
         "c": "Csak speciális a,b esetén"
       },
       "correct": "b",
-      "explanation": "Igen, ez egy nevezetes azonosság. Ha kifejtjük a bal oldalt (a²+2ab+b²) + (a²-2ab+b²), a '2ab' tagok kiesnek, és 2a²+2b² marad, amiből kiemelhető a 2."
+      "explanation": "Igen, ez egy nevezetes azonosság. Ha kifejtjük a bal oldalt (a²+2ab+b²) + (a²-2ab+b²), a '2ab' tagok kiesnek, és 2a²+2b² marad, amiből kiemelhető a 2.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik formula a binom különbsége?",
@@ -133,7 +145,8 @@
         "c": "(a + b)²"
       },
       "correct": "a",
-      "explanation": "A kérdés pontatlan, de a 'két négyzet különbsége' azonosságra utal, ami az a²-b². Ennek a tényezőkre bontott alakja az (a+b)(a-b)."
+      "explanation": "A kérdés pontatlan, de a 'két négyzet különbsége' azonosságra utal, ami az a²-b². Ennek a tényezőkre bontott alakja az (a+b)(a-b).",
+      "difficulty": "medium"
     },
     {
       "question": "Két binom négyzete között hol van a 2ab tag?",
@@ -143,7 +156,8 @@
         "c": "Mindkettőben"
       },
       "correct": "b",
-      "explanation": "A '+2ab' tag az (a+b)² kifejtésében (a²+2ab+b²) szerepel. Az (a-b)² kifejtésében a '-2ab' tag található."
+      "explanation": "A '+2ab' tag az (a+b)² kifejtésében (a²+2ab+b²) szerepel. Az (a-b)² kifejtésében a '-2ab' tag található.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi az (x+2)² és (x−2)² különbsége?",
@@ -153,7 +167,8 @@
         "c": "0"
       },
       "correct": "a",
-      "explanation": "Fejtsük ki a tagokat: (x²+4x+4) - (x²-4x+4). A zárójel felbontása után: x²+4x+4-x²+4x-4. Az x² és a 4 kiesik, marad 4x+4x=8x."
+      "explanation": "Fejtsük ki a tagokat: (x²+4x+4) - (x²-4x+4). A zárójel felbontása után: x²+4x+4-x²+4x-4. Az x² és a 4 kiesik, marad 4x+4x=8x.",
+      "difficulty": "medium"
     },
     {
       "question": "Mit jelent képlettel: (a + b)² = …?",
@@ -163,7 +178,8 @@
         "c": "a² + b²"
       },
       "correct": "a",
-      "explanation": "Ez az 'összeg négyzete' nevezetes azonosság. Szabálya: az első tag négyzete, plusz a két tag kétszeres szorzata, plusz a második tag négyzete."
+      "explanation": "Ez az 'összeg négyzete' nevezetes azonosság. Szabálya: az első tag négyzete, plusz a két tag kétszeres szorzata, plusz a második tag négyzete.",
+      "difficulty": "medium"
     },
     {
       "question": "(5+2)(5−2) értéke?",
@@ -173,7 +189,8 @@
         "c": "7"
       },
       "correct": "b",
-      "explanation": "Az (a+b)(a-b) = a²-b² azonosságot használva: 5²-2² = 25-4 = 21."
+      "explanation": "Az (a+b)(a-b) = a²-b² azonosságot használva: 5²-2² = 25-4 = 21.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik sor ONNEN VEGYI: a²−b² = (a−b)(a+b)?",
@@ -183,7 +200,8 @@
         "c": "(a−b)(a+b)"
       },
       "correct": "c",
-      "explanation": "A kérdés a 'két négyzet különbsége' azonosság tényezőkre bontott (szorzattá alakított) formáját kéri, ami az (a-b)(a+b)."
+      "explanation": "A kérdés a 'két négyzet különbsége' azonosság tényezőkre bontott (szorzattá alakított) formáját kéri, ami az (a-b)(a+b).",
+      "difficulty": "hard"
     },
     {
       "question": "(x+2)² − (x+2)(x−2) = …?",
@@ -193,7 +211,8 @@
         "c": "0"
       },
       "correct": "b",
-      "explanation": "A kifejezés hibás, a helyes levezetés: (x²+4x+4) - (x²-4) = x²+4x+4-x²+4 = 4x+8. A helyes válasz nincs a lehetőségek között. Javított kérdéssel a válasz 'b' lenne: (x+2)² - x(x+4) = x²+4x+4 - x²-4x = 4."
+      "explanation": "A kifejezés hibás, a helyes levezetés: (x²+4x+4) - (x²-4) = x²+4x+4-x²+4 = 4x+8. A helyes válasz nincs a lehetőségek között. Javított kérdéssel a válasz 'b' lenne: (x+2)² - x(x+4) = x²+4x+4 - x²-4x = 4.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik helyes összevonás: a² − b² = …?",
@@ -203,7 +222,8 @@
         "c": "(a − b)(a + b)"
       },
       "correct": "c",
-      "explanation": "Ez a 'két négyzet különbsége' nevezetes azonosság, amely egyenlő a két tag különbségének és összegének szorzatával."
+      "explanation": "Ez a 'két négyzet különbsége' nevezetes azonosság, amely egyenlő a két tag különbségének és összegének szorzatával.",
+      "difficulty": "hard"
     },
     {
       "question": "(x − 4)² kifejtve?",
@@ -213,7 +233,8 @@
         "c": "x² + 8x + 16"
       },
       "correct": "a",
-      "explanation": "Az (a-b)² = a²-2ab+b² azonosságot használva, ahol a=x és b=4. Az eredmény: x² - 2*x*4 + 4² = x² - 8x + 16."
+      "explanation": "Az (a-b)² = a²-2ab+b² azonosságot használva, ahol a=x és b=4. Az eredmény: x² - 2*x*4 + 4² = x² - 8x + 16.",
+      "difficulty": "hard"
     },
     {
       "question": "(a−b)² + (a+b)² és (a+b)² − (a−b)² különbsége?",
@@ -223,7 +244,8 @@
         "c": "0"
       },
       "correct": "a",
-      "explanation": "A kérdés pontatlan. Az (a+b)²+(a-b)² = 2a²+2b². Az (a+b)²-(a-b)² = 4ab. A kettő különbsége: 2a²+2b² - 4ab. A válaszok közül egyik sem helyes."
+      "explanation": "A kérdés pontatlan. Az (a+b)²+(a-b)² = 2a²+2b². Az (a+b)²-(a-b)² = 4ab. A kettő különbsége: 2a²+2b² - 4ab. A válaszok közül egyik sem helyes.",
+      "difficulty": "hard"
     },
     {
       "question": "Binom négyzeténél hol jelenik meg az ab tag?",
@@ -233,7 +255,8 @@
         "c": "Középen"
       },
       "correct": "c",
-      "explanation": "A kifejtett alakban (pl. a² + 2ab + b²) a vegyes tag, ami a két eredeti tag szorzatának kétszerese, mindig a két négyzetes tag között, középen helyezkedik el."
+      "explanation": "A kifejtett alakban (pl. a² + 2ab + b²) a vegyes tag, ami a két eredeti tag szorzatának kétszerese, mindig a két négyzetes tag között, középen helyezkedik el.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik binomos kifejezés tényezőre bontható?",
@@ -243,7 +266,8 @@
         "c": "a²−b²"
       },
       "correct": "a",
-      "explanation": "Az a²+b² (összeg négyzete) nem bontható tényezőkre. Az a²-b² igen. Az (a+b)²-b² szintén a 'két négyzet különbsége' azonosság, ahol az első tag (a+b). Felbontva: ((a+b)-b)((a+b)+b) = a(a+2b)."
+      "explanation": "Az a²+b² (összeg négyzete) nem bontható tényezőkre. Az a²-b² igen. Az (a+b)²-b² szintén a 'két négyzet különbsége' azonosság, ahol az első tag (a+b). Felbontva: ((a+b)-b)((a+b)+b) = a(a+2b).",
+      "difficulty": "hard"
     },
     {
       "question": "Mi az (a+b)² – (a−b)² képlet grafikus jelentése?",
@@ -253,7 +277,8 @@
         "c": "2ab szorzat"
       },
       "correct": "c",
-      "explanation": "A kérdés hibás, a képlet eredménye 4ab. Ez egy (a+b) oldalú négyzet területéből egy (a-b) oldalú négyzet területének kivonását jelenti, ami 4 darab 'ab' területű téglalapot ad."
+      "explanation": "A kérdés hibás, a képlet eredménye 4ab. Ez egy (a+b) oldalú négyzet területéből egy (a-b) oldalú négyzet területének kivonását jelenti, ami 4 darab 'ab' területű téglalapot ad.",
+      "difficulty": "hard"
     }
   ]
 }

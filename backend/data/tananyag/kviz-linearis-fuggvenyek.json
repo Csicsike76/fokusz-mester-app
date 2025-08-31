@@ -13,7 +13,8 @@
         "c": "meredekség"
       },
       "correct": "c",
-      "explanation": "A függvényben az 'a' a meredekséget jelöli, ami a függvény 'emelkedését' vagy 'csökkenését' mutatja. ✅ Megoldás: Az 'a' a meredekség."
+      "explanation": "A függvényben az 'a' a meredekséget jelöli, ami a függvény 'emelkedését' vagy 'csökkenését' mutatja. ✅ Megoldás: Az 'a' a meredekség.",
+      "difficulty": "easy"
     },
     {
       "question": "Mit mutat meg a 'b' paraméter az f(x) = ax + b függvényben?",
@@ -23,7 +24,8 @@
         "c": "a zérushelyet"
       },
       "correct": "b",
-      "explanation": "A 'b' paraméter megadja, hogy a függvény hol metszi az y-tengelyt. ✅ Megoldás: A 'b' az y-tengelymetszetet mutatja meg."
+      "explanation": "A 'b' paraméter megadja, hogy a függvény hol metszi az y-tengelyt. ✅ Megoldás: A 'b' az y-tengelymetszetet mutatja meg.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen a monotonitása az f(x) = -2x + 5 függvénynek?",
@@ -33,7 +35,8 @@
         "c": "szigorúan monoton növekvő"
       },
       "correct": "a",
-      "explanation": "A függvény szigorúan monoton csökkenő, mert a meredeksége negatív (-2).  ✅ Megoldás: A függvény szigorúan monoton csökkenő."
+      "explanation": "A függvény szigorúan monoton csökkenő, mert a meredeksége negatív (-2).  ✅ Megoldás: A függvény szigorúan monoton csökkenő.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen a monotonitása az f(x) = 3x - 4 függvénynek?",
@@ -43,7 +46,8 @@
         "c": "konstans"
       },
       "correct": "b",
-      "explanation": "A függvény szigorúan monoton növekvő, mert a meredeksége pozitív (3).  ✅ Megoldás: A függvény szigorúan monoton növekvő."
+      "explanation": "A függvény szigorúan monoton növekvő, mert a meredeksége pozitív (3).  ✅ Megoldás: A függvény szigorúan monoton növekvő.",
+      "difficulty": "easy"
     },
     {
       "question": "Hol metszi az f(x) = 4x + 8 függvény az y-tengelyt?",
@@ -53,7 +57,8 @@
         "c": "az y = 8 helyen"
       },
       "correct": "c",
-      "explanation": "A függvény az y-tengelyt a 'b' paraméter értékénél metszi, ami ebben az esetben 8.  ✅ Megoldás: Az y-tengelyt a 8-nál metszi."
+      "explanation": "A függvény az y-tengelyt a 'b' paraméter értékénél metszi, ami ebben az esetben 8.  ✅ Megoldás: Az y-tengelyt a 8-nál metszi.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az f(x) = 2x - 6 függvény zérushelye?",
@@ -63,7 +68,8 @@
         "c": "x = 6"
       },
       "correct": "a",
-      "explanation": "A zérushelyet úgy kapjuk, hogy az f(x)-et egyenlővé tesszük nullával: 2x - 6 = 0. Megoldva az egyenletet: 2x = 6, x = 3. ✅ Megoldás: A zérushelye az x=3."
+      "explanation": "A zérushelyet úgy kapjuk, hogy az f(x)-et egyenlővé tesszük nullával: 2x - 6 = 0. Megoldva az egyenletet: 2x = 6, x = 3. ✅ Megoldás: A zérushelye az x=3.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az f(x) = 5x függvény y-tengelymetszete?",
@@ -73,7 +79,8 @@
         "c": "1"
       },
       "correct": "b",
-      "explanation": "Az f(x) = 5x felírható f(x) = 5x + 0 alakban. A 'b' paraméter értéke 0, tehát a függvény az y-tengelyt a 0-nál metszi (átmegy az origón). ✅ Megoldás: Az y-tengelymetszet 0."
+      "explanation": "Az f(x) = 5x felírható f(x) = 5x + 0 alakban. A 'b' paraméter értéke 0, tehát a függvény az y-tengelyt a 0-nál metszi (átmegy az origón). ✅ Megoldás: Az y-tengelymetszet 0.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik függvény grafikonja párhuzamos az f(x) = 4x + 1 egyenesével?",
@@ -83,7 +90,8 @@
         "c": "g(x) = 1/4x + 1"
       },
       "correct": "b",
-      "explanation": "Két egyenes akkor párhuzamos, ha a meredekségük ('a' értékük) megegyezik, de az y-tengelymetszetük ('b' értékük) különböző. Az f(x) meredeksége 4. A g(x) = 4x + 3 függvény meredeksége szintén 4, de a 'b' értéke más. ✅ Megoldás: A g(x) = 4x + 3 függvény grafikonja párhuzamos."
+      "explanation": "Két egyenes akkor párhuzamos, ha a meredekségük ('a' értékük) megegyezik, de az y-tengelymetszetük ('b' értékük) különböző. Az f(x) meredeksége 4. A g(x) = 4x + 3 függvény meredeksége szintén 4, de a 'b' értéke más. ✅ Megoldás: A g(x) = 4x + 3 függvény grafikonja párhuzamos.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik pont van rajta az f(x) = 3x - 2 függvény grafikonján?",
@@ -93,7 +101,8 @@
         "c": "(1; 1)"
       },
       "correct": "a",
-      "explanation": "Helyettesítsük be a pontok x koordinátáját a függvénybe. Ha x=2, f(2) = 3*2 - 2 = 6-2 = 4. Az y koordináta 4, tehát a (2; 4) pont rajta van. ✅ Megoldás: A (2; 4) pont rajta van a grafikonon."
+      "explanation": "Helyettesítsük be a pontok x koordinátáját a függvénybe. Ha x=2, f(2) = 3*2 - 2 = 6-2 = 4. Az y koordináta 4, tehát a (2; 4) pont rajta van. ✅ Megoldás: A (2; 4) pont rajta van a grafikonon.",
+      "difficulty": "medium"
     },
     {
       "question": "Mennyi az f(-2) értéke, ha f(x) = 4x + 10?",
@@ -103,7 +112,8 @@
         "c": "6"
       },
       "correct": "a",
-      "explanation": "Helyettesítsük be az x helyére a -2-t. f(-2) = 4 * (-2) + 10 = -8 + 10 = 2. ✅ Megoldás: Az f(-2) értéke 2."
+      "explanation": "Helyettesítsük be az x helyére a -2-t. f(-2) = 4 * (-2) + 10 = -8 + 10 = 2. ✅ Megoldás: Az f(-2) értéke 2.",
+      "difficulty": "medium"
     },
     {
       "question": "Milyen típusú az f(x) = 9 függvény?",
@@ -113,7 +123,8 @@
         "c": "lineáris, csökkenő"
       },
       "correct": "b",
-      "explanation": "Ez a függvény felírható f(x) = 0x + 9 alakban. A meredeksége a=0. Ha a meredekség 0, a függvényérték állandó, nem változik. Ezt konstans függvénynek nevezzük. A grafikonja egy vízszintes egyenes. ✅ Megoldás: Konstans függvény."
+      "explanation": "Ez a függvény felírható f(x) = 0x + 9 alakban. A meredeksége a=0. Ha a meredekség 0, a függvényérték állandó, nem változik. Ezt konstans függvénynek nevezzük. A grafikonja egy vízszintes egyenes. ✅ Megoldás: Konstans függvény.",
+      "difficulty": "medium"
     },
     {
       "question": "Az f(x) = x + 6 függvényben mennyi a meredekség?",
@@ -123,7 +134,8 @@
         "c": "0"
       },
       "correct": "b",
-      "explanation": "Az f(x) = x + 6 függvényt felírhatjuk f(x) = 1*x + 6 alakban. Az 'a' paraméter, a meredekség, az x együtthatója, ami ebben az esetben 1. ✅ Megoldás: A meredekség 1."
+      "explanation": "Az f(x) = x + 6 függvényt felírhatjuk f(x) = 1*x + 6 alakban. Az 'a' paraméter, a meredekség, az x együtthatója, ami ebben az esetben 1. ✅ Megoldás: A meredekség 1.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik függvény grafikonja megy át az origón?",
@@ -133,7 +145,8 @@
         "c": "f(x) = 5"
       },
       "correct": "b",
-      "explanation": "Egy függvény akkor megy át az origón (0;0), ha f(0) = 0. Ez akkor teljesül, ha a 'b' paraméter 0. Az f(x) = 2x felírható f(x) = 2x + 0 alakban, tehát b=0.  ✅ Megoldás: Az f(x) = 2x grafikonja."
+      "explanation": "Egy függvény akkor megy át az origón (0;0), ha f(0) = 0. Ez akkor teljesül, ha a 'b' paraméter 0. Az f(x) = 2x felírható f(x) = 2x + 0 alakban, tehát b=0.  ✅ Megoldás: Az f(x) = 2x grafikonja.",
+      "difficulty": "medium"
     },
     {
       "question": "Hol metszi az f(x) = -x - 1 függvény az x-tengelyt?",
@@ -143,7 +156,8 @@
         "c": "nem metszi"
       },
       "correct": "b",
-      "explanation": "Az x-tengelymetszet a zérushely. Oldjuk meg az f(x) = 0 egyenletet. -x - 1 = 0. Adjunk hozzá 1-et: -x = 1. Szorozzunk -1-gyel: x = -1. ✅ Megoldás: Az x=-1 helyen metszi."
+      "explanation": "Az x-tengelymetszet a zérushely. Oldjuk meg az f(x) = 0 egyenletet. -x - 1 = 0. Adjunk hozzá 1-et: -x = 1. Szorozzunk -1-gyel: x = -1. ✅ Megoldás: Az x=-1 helyen metszi.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik függvény csökken a legmeredekebben?",
@@ -153,7 +167,8 @@
         "c": "f(x) = 2x"
       },
       "correct": "a",
-      "explanation": "A meredekség mértékét az 'a' abszolút értéke adja meg. A csökkenést a negatív előjel. A meredekségek: -5, -1, 2. A csökkenők a -5 és a -1. Ezek közül az esik 'gyorsabban', amelyiknek az abszolút értéke nagyobb. |-5| > |-1|. ✅ Megoldás: Az f(x) = -5x csökken a legmeredekebben."
+      "explanation": "A meredekség mértékét az 'a' abszolút értéke adja meg. A csökkenést a negatív előjel. A meredekségek: -5, -1, 2. A csökkenők a -5 és a -1. Ezek közül az esik 'gyorsabban', amelyiknek az abszolút értéke nagyobb. |-5| > |-1|. ✅ Megoldás: Az f(x) = -5x csökken a legmeredekebben.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik függvény nő a legkevésbé meredeken?",
@@ -163,7 +178,8 @@
         "c": "f(x) = 2x - 1"
       },
       "correct": "b",
-      "explanation": "A meredekség mértékét az 'a' értéke adja meg. Mindhárom függvény növekvő. A meredekségek: 3, 1, 2. Ezek közül a legkisebb az 1. ✅ Megoldás: Az f(x) = x + 5 nő a legkevésbé meredeken."
+      "explanation": "A meredekség mértékét az 'a' értéke adja meg. Mindhárom függvény növekvő. A meredekségek: 3, 1, 2. Ezek közül a legkisebb az 1. ✅ Megoldás: Az f(x) = x + 5 nő a legkevésbé meredeken.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik pont NINCS rajta az f(x) = 2x + 1 grafikonján?",
@@ -173,7 +189,8 @@
         "c": "(1; 2)"
       },
       "correct": "c",
-      "explanation": "Helyettesítsük be a pontok x koordinátáit. a) f(0)=2*0+1=1. Jó. b) f(2)=2*2+1=5. Jó. c) f(1)=2*1+1=3. A pont y koordinátája viszont 2, tehát ez a pont nincs a grafikonon. ✅ Megoldás: Az (1; 2) pont."
+      "explanation": "Helyettesítsük be a pontok x koordinátáit. a) f(0)=2*0+1=1. Jó. b) f(2)=2*2+1=5. Jó. c) f(1)=2*1+1=3. A pont y koordinátája viszont 2, tehát ez a pont nincs a grafikonon. ✅ Megoldás: Az (1; 2) pont.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha f(x) = 10x - 7, melyik x-re lesz a függvényérték 23?",
@@ -183,7 +200,8 @@
         "c": "x = 3"
       },
       "correct": "c",
-      "explanation": "Oldjuk meg az f(x) = 23 egyenletet. 10x - 7 = 23. Adjunk 7-et mindkét oldalhoz: 10x = 30. Osszunk 10-zel: x = 3. ✅ Megoldás: x=3 esetén."
+      "explanation": "Oldjuk meg az f(x) = 23 egyenletet. 10x - 7 = 23. Adjunk 7-et mindkét oldalhoz: 10x = 30. Osszunk 10-zel: x = 3. ✅ Megoldás: x=3 esetén.",
+      "difficulty": "hard"
     },
     {
       "question": "Milyen alakú a lineáris függvények grafikonja?",
@@ -193,7 +211,8 @@
         "c": "pont"
       },
       "correct": "a",
-      "explanation": "A lineáris függvény másik neve az elsőfokú függvény. Az elsőfokú függvények grafikonja mindig egyenes.  ✅ Megoldás: Egyenes."
+      "explanation": "A lineáris függvény másik neve az elsőfokú függvény. Az elsőfokú függvények grafikonja mindig egyenes.  ✅ Megoldás: Egyenes.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik függvény van helyesen megadva az 'x nyila x fele' szabállyal?",
@@ -203,7 +222,8 @@
         "c": "f(x) = x - 2"
       },
       "correct": "b",
-      "explanation": "A 'fele' szó osztást jelent 2-vel. Tehát a bemeneti x-et el kell osztanunk 2-vel.  ✅ Megoldás: f(x) = x/2."
+      "explanation": "A 'fele' szó osztást jelent 2-vel. Tehát a bemeneti x-et el kell osztanunk 2-vel.  ✅ Megoldás: f(x) = x/2.",
+      "difficulty": "hard"
     },
     {
       "question": "Az f(x) = 7 - x függvény...",
@@ -213,7 +233,8 @@
         "c": "...konstans."
       },
       "correct": "a",
-      "explanation": "Írjuk át a függvényt ax+b alakra: f(x) = -1*x + 7. A meredekség a=-1, ami negatív. ✅ Megoldás: A függvény csökkenő."
+      "explanation": "Írjuk át a függvényt ax+b alakra: f(x) = -1*x + 7. A meredekség a=-1, ami negatív. ✅ Megoldás: A függvény csökkenő.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi az f(x) = -4x függvény y-tengelymetszete?",
@@ -223,7 +244,8 @@
         "c": "0"
       },
       "correct": "c",
-      "explanation": "Az f(x) = -4x felírható f(x) = -4x + 0 alakban. A 'b' paraméter értéke 0, tehát a függvény az y-tengelyt a 0-nál metszi (átmegy az origón).  ✅ Megoldás: Az y-tengelymetszet 0."
+      "explanation": "Az f(x) = -4x felírható f(x) = -4x + 0 alakban. A 'b' paraméter értéke 0, tehát a függvény az y-tengelyt a 0-nál metszi (átmegy az origón).  ✅ Megoldás: Az y-tengelymetszet 0.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik két függvény metszi az y-tengelyt ugyanott?",
@@ -233,7 +255,8 @@
         "c": "f(x)=5x+2 és g(x)=2x+5"
       },
       "correct": "a",
-      "explanation": "Az y-tengelymetszetet a 'b' paraméter adja meg. Azt a párt keressük, ahol a 'b' értékek megegyeznek. Az 'a' opcióban mindkét függvénynél b=5. ✅ Megoldás: Az f(x)=2x+5 és g(x)=3x+5."
+      "explanation": "Az y-tengelymetszetet a 'b' paraméter adja meg. Azt a párt keressük, ahol a 'b' értékek megegyeznek. Az 'a' opcióban mindkét függvénynél b=5. ✅ Megoldás: Az f(x)=2x+5 és g(x)=3x+5.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi az f(x) = -2x + 5 függvény zérushelye?",
@@ -243,7 +266,8 @@
         "c": "x = 6"
       },
       "correct": "b",
-      "explanation": "A zérushely az x tengelyen van, ahol f(x)=0, vagyis -2x + 5=0, innen x= 5/2=2.5, így a kérdés rossz.  ✅ Megoldás: Az f(x) =-2x + 5 függvény zérushelye x=2,5. Javításra szorul. Az eredeti válaszok alapján a helyes válasz a  C, 10  és  B, a 3 lehet."
+      "explanation": "A zérushely az x tengelyen van, ahol f(x)=0, vagyis -2x + 5=0, innen x= 5/2=2.5, így a kérdés rossz.  ✅ Megoldás: Az f(x) =-2x + 5 függvény zérushelye x=2,5. Javításra szorul. Az eredeti válaszok alapján a helyes válasz a  C, 10  és  B, a 3 lehet.",
+      "difficulty": "hard"
     }
   ]
 }

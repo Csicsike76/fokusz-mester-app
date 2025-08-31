@@ -30,7 +30,6 @@ function readJsonFolder(folderAbsPath) {
     try {
       const raw = fs.readFileSync(path.join(folderAbsPath, file), 'utf8');
       const parsed = JSON.parse(raw);
-      // Hozzáadjuk a fájl nevét (slug) az objektumhoz, ha még nincs benne
       const slugFromFile = path.basename(file, '.json');
       if (Array.isArray(parsed)) {
           parsed.forEach(p => {
@@ -99,8 +98,8 @@ async function syncCurriculums(client, dataDir) {
       for (let i = 0; i < item.questions.length; i++) {
         const question = item.questions[i];
         await client.query(
-          `INSERT INTO quizquestions (curriculum_id, question_data, order_num) VALUES ($1, $2, $3);`,
-          [curriculumId, question, i]
+          `INSERT INTO quizquestions (curriculum_id, question_data, order_num, difficulty_level) VALUES ($1, $2, $3, $4);`,
+          [curriculumId, question, i, question.difficulty || 'medium']
         );
       }
     }
@@ -114,9 +113,7 @@ async function syncHelpArticles(client, dataDir) {
     console.warn(`Figyelmeztetés: A(z) ${dataDir} mappa üres vagy nem létezik. Súgócikkek szinkronizálása kihagyva.`);
     return;
   }
-
   console.log(`${items.length} db súgócikk feldolgozása indul...`);
-
   for (const h of items) {
     const title = h.question || 'Cím nélkül';
     const content = h.answer || '';

@@ -13,7 +13,8 @@
         "c": "A nagyobb erő mindig nagyobb forgatónyomatékot hoz létre."
       },
       "correct": "c",
-      "explanation": "Ez az állítás hamis. A forgatónyomaték az erő ÉS az erőkar szorzata. Lehetséges, hogy egy nagyon nagy erő kis erőkarral kisebb forgatónyomatékot hoz létre, mint egy kisebb erő nagy erőkarral."
+      "explanation": "Ez az állítás hamis. A forgatónyomaték az erő ÉS az erőkar szorzata. Lehetséges, hogy egy nagyon nagy erő kis erőkarral kisebb forgatónyomatékot hoz létre, mint egy kisebb erő nagy erőkarral.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy libikóka egyik végén egy 300 N súlyú gyerek ül a forgástengelytől 2 m távolságra. Mekkora forgatónyomatékot fejt ki?",
@@ -23,7 +24,8 @@
         "c": "302 N*m"
       },
       "correct": "a",
-      "explanation": "A forgatónyomaték M = F * k = 300 N * 2 m = 600 N*m."
+      "explanation": "A forgatónyomaték M = F * k = 300 N * 2 m = 600 N*m.",
+      "difficulty": "easy"
     },
     {
       "question": "Egyensúlyban lévő kétkarú emelőn 20 N erő hat 3 méteres erőkaron. Mekkora teher van a 2 méteres teherkaron?",
@@ -33,7 +35,8 @@
         "c": "30 N"
       },
       "correct": "c",
-      "explanation": "Az emelők törvénye: F_erő * k_erő = F_teher * k_teher. Behelyettesítve: 20 N * 3 m = F_teher * 2 m. Ebből F_teher = 60 Nm / 2 m = 30 N."
+      "explanation": "Az emelők törvénye: F_erő * k_erő = F_teher * k_teher. Behelyettesítve: 20 N * 3 m = F_teher * 2 m. Ebből F_teher = 60 Nm / 2 m = 30 N.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a 'nyomatéki egyensúly'?",
@@ -43,7 +46,8 @@
         "c": "A forgási egyensúly másik neve."
       },
       "correct": "c",
-      "explanation": "A nyomatéki egyensúly a forgási egyensúly szinonimája, arra utal, hogy a testre ható forgatónyomatékok egyensúlyban vannak."
+      "explanation": "A nyomatéki egyensúly a forgási egyensúly szinonimája, arra utal, hogy a testre ható forgatónyomatékok egyensúlyban vannak.",
+      "difficulty": "easy"
     },
     {
       "question": "Hogyan növelhetjük egy csavar meglazításához szükséges forgatónyomatékot anélkül, hogy nagyobb erőt fejtenénk ki?",
@@ -53,7 +57,8 @@
         "c": "Megolajozzuk a csavart."
       },
       "correct": "a",
-      "explanation": "Mivel a forgatónyomaték az erő és az erőkar szorzata, ha az erőt nem tudjuk növelni, az erőkart kell megnövelni. Egy hosszabb csavarkulcs nagyobb erőkart biztosít."
+      "explanation": "Mivel a forgatónyomaték az erő és az erőkar szorzata, ha az erőt nem tudjuk növelni, az erőkart kell megnövelni. Egy hosszabb csavarkulcs nagyobb erőkart biztosít.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy 2 méter hosszú deszka közepén van a forgástengely. A bal végére 10 N erőt fejtünk ki. Mekkora erővel kell lenyomni a jobb végét az egyensúlyhoz?",
@@ -63,7 +68,8 @@
         "c": "5 N"
       },
       "correct": "b",
-      "explanation": "Mivel a forgástengely középen van, az erőkarok egyenlőek (1 m). Az emelők törvénye szerint, ha az erőkarok egyenlőek, akkor az egyensúlyhoz az erőknek is egyenlőknek kell lenniük."
+      "explanation": "Mivel a forgástengely középen van, az erőkarok egyenlőek (1 m). Az emelők törvénye szerint, ha az erőkarok egyenlőek, akkor az egyensúlyhoz az erőknek is egyenlőknek kell lenniük.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az erőkar?",
@@ -73,7 +79,8 @@
         "c": "Az erő iránya."
       },
       "correct": "a",
-      "explanation": "Az erőkar a forgástengely és az erő hatásvonala (az az egyenes, amely mentén az erő hat) közötti merőleges távolság."
+      "explanation": "Az erőkar a forgástengely és az erő hatásvonala (az az egyenes, amely mentén az erő hat) közötti merőleges távolság.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik állítás írja le az emelők törvényét?",
@@ -83,7 +90,8 @@
         "c": "Erőkar egyenlő teherkar."
       },
       "correct": "a",
-      "explanation": "Az emelő egyensúlyának feltétele, hogy az egyik oldalon ható forgatónyomaték (Erő * erőkar) megegyezzen a másik oldalon ható forgatónyomatékkal (Teher * teherkar)."
+      "explanation": "Az emelő egyensúlyának feltétele, hogy az egyik oldalon ható forgatónyomaték (Erő * erőkar) megegyezzen a másik oldalon ható forgatónyomatékkal (Teher * teherkar).",
+      "difficulty": "easy"
     },
     {
       "question": "Mikor van egy test forgási egyensúlyban?",
@@ -93,7 +101,8 @@
         "c": "Ha a rá ható erők eredője nulla."
       },
       "correct": "a",
-      "explanation": "A forgási egyensúly feltétele, hogy a test forgómozgása ne változzon. Ez akkor teljesül, ha az óramutató járásával megegyező és azzal ellentétes irányú forgatónyomatékok kiegyenlítik egymást."
+      "explanation": "A forgási egyensúly feltétele, hogy a test forgómozgása ne változzon. Ez akkor teljesül, ha az óramutató járásával megegyező és azzal ellentétes irányú forgatónyomatékok kiegyenlítik egymást.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi történik, ha egy testre ható forgatónyomatékok eredője nem nulla?",
@@ -103,7 +112,8 @@
         "c": "A test tömege változik meg."
       },
       "correct": "a",
-      "explanation": "Ha a forgatónyomatékok nincsenek egyensúlyban, a test forgási állapota megváltozik: vagy elkezd forogni, vagy a már meglévő forgása felgyorsul vagy lelassul."
+      "explanation": "Ha a forgatónyomatékok nincsenek egyensúlyban, a test forgási állapota megváltozik: vagy elkezd forogni, vagy a már meglévő forgása felgyorsul vagy lelassul.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik esetben nagyobb a forgatónyomaték, ha az erő ugyanakkora?",
@@ -113,7 +123,8 @@
         "c": "Az erőkar nem befolyásolja."
       },
       "correct": "b",
-      "explanation": "Mivel a forgatónyomaték (M = F * k) egyenesen arányos az erőkarral (k), ezért nagyobb erőkarral nagyobb forgatónyomatékot lehet elérni ugyanazzal az erővel."
+      "explanation": "Mivel a forgatónyomaték (M = F * k) egyenesen arányos az erőkarral (k), ezért nagyobb erőkarral nagyobb forgatónyomatékot lehet elérni ugyanazzal az erővel.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy kormánykerék elfordításakor erőt fejtünk ki. Hol van a forgástengely?",
@@ -123,7 +134,8 @@
         "c": "A kormánykerék középpontjában."
       },
       "correct": "c",
-      "explanation": "A kormánykerék a középső tengelye körül forog el. Ez a forgástengely. Az erőt a kerék peremén fejtjük ki, így maximalizálva az erőkart."
+      "explanation": "A kormánykerék a középső tengelye körül forog el. Ez a forgástengely. Az erőt a kerék peremén fejtjük ki, így maximalizálva az erőkart.",
+      "difficulty": "medium"
     },
     {
       "question": "Egyensúly esetén a jobbra forgató és balra forgató nyomatékok...",
@@ -133,7 +145,8 @@
         "c": "...egyenlő nagyságúak."
       },
       "correct": "c",
-      "explanation": "A forgási egyensúly pontos feltétele, hogy az óramutató járásával megegyező (jobbra forgató) nyomatékok összege megegyezzen az azzal ellentétes (balra forgató) nyomatékok összegével."
+      "explanation": "A forgási egyensúly pontos feltétele, hogy az óramutató járásával megegyező (jobbra forgató) nyomatékok összege megegyezzen az azzal ellentétes (balra forgató) nyomatékok összegével.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a forgatónyomaték képlete?",
@@ -143,7 +156,8 @@
         "c": "M = F * k"
       },
       "correct": "c",
-      "explanation": "A forgatónyomaték (M) az erő (F) és az erőkar (k) szorzataként számítható ki."
+      "explanation": "A forgatónyomaték (M) az erő (F) és az erőkar (k) szorzataként számítható ki.",
+      "difficulty": "medium"
     },
     {
       "question": "Hogyan lehet egyensúlyba hozni egy libikókát, amin egy nehezebb és egy könnyebb gyerek ül?",
@@ -153,7 +167,8 @@
         "c": "Mindketten üljenek a végére."
       },
       "correct": "b",
-      "explanation": "Az egyensúlyhoz (F₁*k₁ = F₂*k₂) a nagyobb erőhöz (nehezebb gyerek) kisebb erőkar, a kisebb erőhöz (könnyebb gyerek) pedig nagyobb erőkar kell. Tehát a nehezebb gyereknek kell közelebb ülnie a forgáspont_h_oz."
+      "explanation": "Az egyensúlyhoz (F₁*k₁ = F₂*k₂) a nagyobb erőhöz (nehezebb gyerek) kisebb erőkar, a kisebb erőhöz (könnyebb gyerek) pedig nagyobb erőkar kell. Tehát a nehezebb gyereknek kell közelebb ülnie a forgáspont_h_oz.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha egy erőt a forgástengelyhez közelebb fejtünk ki, az erőkar...",
@@ -163,7 +178,8 @@
         "c": "...csökken."
       },
       "correct": "c",
-      "explanation": "Az erőkar a forgástengelytől mért távolság. Ha közelebb megyünk a tengelyhez, ez a távolság, tehát az erőkar is csökken."
+      "explanation": "Az erőkar a forgástengelytől mért távolság. Ha közelebb megyünk a tengelyhez, ez a távolság, tehát az erőkar is csökken.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik egyszerű gép működése alapul a forgatónyomaték egyensúlyán?",
@@ -173,7 +189,8 @@
         "c": "Ék"
       },
       "correct": "b",
-      "explanation": "Az emelő (pl. mérleghinta, feszítővas) egy forgástengely körül elforgatható rúd. Működésének alapja az emelő két oldalára ható forgatónyomatékok egyensúlya."
+      "explanation": "Az emelő (pl. mérleghinta, feszítővas) egy forgástengely körül elforgatható rúd. Működésének alapja az emelő két oldalára ható forgatónyomatékok egyensúlya.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a forgatónyomaték mértékegysége?",
@@ -183,7 +200,8 @@
         "c": "joule (J)"
       },
       "correct": "a",
-      "explanation": "A forgatónyomaték az erő és az erőkar szorzata. Az erő mértékegysége a newton (N), az erőkaré (távolság) pedig a méter (m), így a szorzatuké a newtonméter (N*m)."
+      "explanation": "A forgatónyomaték az erő és az erőkar szorzata. Az erő mértékegysége a newton (N), az erőkaré (távolság) pedig a méter (m), így a szorzatuké a newtonméter (N*m).",
+      "difficulty": "hard"
     },
     {
       "question": "Milyen irányú erőt kell kifejteni egy csavarkulcsra a maximális forgatónyomaték eléréséhez?",
@@ -193,7 +211,8 @@
         "c": "45°-os szögben."
       },
       "correct": "b",
-      "explanation": "A forgatónyomaték akkor a legnagyobb, ha az erő és az erőkar merőleges egymásra. Ekkor az erő teljes egésze a forgatásra fordítódik."
+      "explanation": "A forgatónyomaték akkor a legnagyobb, ha az erő és az erőkar merőleges egymásra. Ekkor az erő teljes egésze a forgatásra fordítódik.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik mennyiség NEM szerepel a forgatónyomaték képletében?",
@@ -203,7 +222,8 @@
         "c": "Tömeg"
       },
       "correct": "c",
-      "explanation": "A forgatónyomaték képlete M = F * k. Ebben az erő (F) és az erőkar (k) szerepel. A test tömege közvetlenül nem része a képletnek."
+      "explanation": "A forgatónyomaték képlete M = F * k. Ebben az erő (F) és az erőkar (k) szerepel. A test tömege közvetlenül nem része a képletnek.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy csavart 10 N erővel próbálunk meglazítani egy 0,2 m hosszú csavarkulccsal. Mekkora a forgatónyomaték?",
@@ -213,7 +233,8 @@
         "c": "10,2 N*m"
       },
       "correct": "a",
-      "explanation": "A forgatónyomaték az erő és az erőkar szorzata: M = F * k. Ebben az esetben M = 10 N * 0,2 m = 2 N*m."
+      "explanation": "A forgatónyomaték az erő és az erőkar szorzata: M = F * k. Ebben az esetben M = 10 N * 0,2 m = 2 N*m.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha kétszer akkora erővel hatunk ugyanakkora erőkarral, a forgatónyomaték...",
@@ -223,7 +244,8 @@
         "c": "...a kétszeresére nő."
       },
       "correct": "c",
-      "explanation": "A forgatónyomaték egyenesen arányos az erő nagyságával. Ha az erő duplázódik, a forgatónyomaték is a kétszeresére nő."
+      "explanation": "A forgatónyomaték egyenesen arányos az erő nagyságával. Ha az erő duplázódik, a forgatónyomaték is a kétszeresére nő.",
+      "difficulty": "hard"
     },
     {
       "question": "Ha ugyanakkora erővel kétszer akkora erőkarral hatunk, a forgatónyomaték...",
@@ -233,7 +255,8 @@
         "c": "...a kétszeresére nő."
       },
       "correct": "c",
-      "explanation": "A forgatónyomaték egyenesen arányos az erőkarral. Ha az erőkar duplázódik, a forgatónyomaték is a kétszeresére nő."
+      "explanation": "A forgatónyomaték egyenesen arányos az erőkarral. Ha az erőkar duplázódik, a forgatónyomaték is a kétszeresére nő.",
+      "difficulty": "hard"
     },
     {
       "question": "Mit jellemez a forgatónyomaték?",
@@ -243,7 +266,8 @@
         "c": "Az erő gyorsító hatását."
       },
       "correct": "b",
-      "explanation": "A forgatónyomaték (vagy nyomaték) az a fizikai mennyiség, amely megmutatja, hogy egy erő mekkora mértékben képes elforgatni egy testet egy adott tengely körül."
+      "explanation": "A forgatónyomaték (vagy nyomaték) az a fizikai mennyiség, amely megmutatja, hogy egy erő mekkora mértékben képes elforgatni egy testet egy adott tengely körül.",
+      "difficulty": "hard"
     },
     {
       "question": "Miért van a kilincs az ajtó forgástengelyétől (a zsanéroktól) a lehető legtávolabb?",
@@ -253,7 +277,8 @@
         "c": "Mert ott a legerősebb az ajtó."
       },
       "correct": "a",
-      "explanation": "Ugyanakkora forgatónyomaték eléréséhez kisebb erőre van szükség, ha az erőkar nagyobb. A kilincs távoli elhelyezésével maximalizáljuk az erőkart, így kényelmesen, kis erővel tudjuk működtetni az ajtót."
+      "explanation": "Ugyanakkora forgatónyomaték eléréséhez kisebb erőre van szükség, ha az erőkar nagyobb. A kilincs távoli elhelyezésével maximalizáljuk az erőkart, így kényelmesen, kis erővel tudjuk működtetni az ajtót.",
+      "difficulty": "hard"
     }
   ]
 }

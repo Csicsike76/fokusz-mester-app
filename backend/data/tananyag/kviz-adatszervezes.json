@@ -13,7 +13,8 @@
         "c": "Kördiagram"
       },
       "correct": "c",
-      "explanation": "A kördiagram (vagy tortadiagram) kifejezetten arra szolgál, hogy egy egész 100%-át felosszuk az egyes összetevők arányában. A körcikkek mérete arányos az összetevők részesedésével."
+      "explanation": "A kördiagram (vagy tortadiagram) kifejezetten arra szolgál, hogy egy egész 100%-át felosszuk az egyes összetevők arányában. A körcikkek mérete arányos az összetevők részesedésével.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a módusza a következő adatsornak: 4, 6, 7, 6, 8, 6, 5?",
@@ -23,7 +24,8 @@
         "c": "8"
       },
       "correct": "b",
-      "explanation": "A módusz az adatsorban leggyakrabban előforduló elem. A 6-os szám háromszor szerepel, míg a többi csak egyszer. Tehát a módusz a 6."
+      "explanation": "A módusz az adatsorban leggyakrabban előforduló elem. A 6-os szám háromszor szerepel, míg a többi csak egyszer. Tehát a módusz a 6.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy dobozban 10 golyó van. Annak a valószínűsége, hogy fehéret húzunk, 0,3. Hány fehér golyó van a dobozban?",
@@ -33,7 +35,8 @@
         "c": "Nem lehet tudni."
       },
       "correct": "b",
-      "explanation": "P = kedvező/összes. 0,3 = x/10. Az egyenletet 10-zel szorozva: x = 3. Tehát 3 fehér golyó van a dobozban."
+      "explanation": "P = kedvező/összes. 0,3 = x/10. Az egyenletet 10-zel szorozva: x = 3. Tehát 3 fehér golyó van a dobozban.",
+      "difficulty": "easy"
     },
     {
       "question": "Feldobunk egy pénzérmét. Mi a valószínűsége, hogy fejet dobunk?",
@@ -43,7 +46,8 @@
         "c": "0"
       },
       "correct": "b",
-      "explanation": "Két lehetséges kimenetel van: fej vagy írás. Ebből a fej dobása 1 kedvező eset. A valószínűség P = kedvező/összes = 1/2."
+      "explanation": "Két lehetséges kimenetel van: fej vagy írás. Ebből a fej dobása 1 kedvező eset. A valószínűség P = kedvező/összes = 1/2.",
+      "difficulty": "easy"
     },
     {
       "question": "Egy sportboltban 3-féle színű (piros, kék, zöld) és 2-féle méretű (felnőtt, gyerek) labda van. Hányféle különböző labda van összesen?",
@@ -53,7 +57,8 @@
         "c": "9"
       },
       "correct": "b",
-      "explanation": "Minden színhez 2 méret tartozik, vagy minden mérethez 3 szín. A kombinációs lehetőségek száma a két tulajdonság darabszámának szorzata: 3 × 2 = 6."
+      "explanation": "Minden színhez 2 méret tartozik, vagy minden mérethez 3 szín. A kombinációs lehetőségek száma a két tulajdonság darabszámának szorzata: 3 × 2 = 6.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik állítás igaz a valószínűség értékére?",
@@ -63,7 +68,8 @@
         "c": "Lehet 1-nél nagyobb."
       },
       "correct": "b",
-      "explanation": "Mivel a kedvező esetek száma sosem lehet több, mint az összes eset száma, a valószínűség P = kedvező/összes arány értéke mindig 0 és 1 között van. 0 a lehetetlen, 1 a biztos esemény."
+      "explanation": "Mivel a kedvező esetek száma sosem lehet több, mint az összes eset száma, a valószínűség P = kedvező/összes arány értéke mindig 0 és 1 között van. 0 a lehetetlen, 1 a biztos esemény.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a valószínűsége annak, hogy egy szabályos dobókockával 7-est dobunk?",
@@ -73,7 +79,8 @@
         "c": "0"
       },
       "correct": "c",
-      "explanation": "Mivel egy hagyományos dobókockán nincsen 7-es, a kedvező esetek száma 0. Így az esemény valószínűsége P = 0/6 = 0. Ezt lehetetlen eseménynek nevezzük."
+      "explanation": "Mivel egy hagyományos dobókockán nincsen 7-es, a kedvező esetek száma 0. Így az esemény valószínűsége P = 0/6 = 0. Ezt lehetetlen eseménynek nevezzük.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a {10, 10, 10, 10} adatsor átlaga?",
@@ -83,7 +90,8 @@
         "c": "10"
       },
       "correct": "c",
-      "explanation": "Ha egy adatsor minden eleme ugyanaz, akkor az átlaga, mediánja és módusza is megegyezik ezzel az elemmel. Kiszámolva: (10+10+10+10)/4 = 40/4 = 10."
+      "explanation": "Ha egy adatsor minden eleme ugyanaz, akkor az átlaga, mediánja és módusza is megegyezik ezzel az elemmel. Kiszámolva: (10+10+10+10)/4 = 40/4 = 10.",
+      "difficulty": "easy"
     },
     {
       "question": "Milyen adatot jelenít meg egy oszlopdiagram oszlopának magassága?",
@@ -93,7 +101,8 @@
         "c": "Az adatok sorszámát."
       },
       "correct": "b",
-      "explanation": "Az oszlopdiagram lényege, hogy az oszlopok magassága arányos azzal az értékkel (gyakoriság, mennyiség), amit az adott kategóriához rendelünk."
+      "explanation": "Az oszlopdiagram lényege, hogy az oszlopok magassága arányos azzal az értékkel (gyakoriság, mennyiség), amit az adott kategóriához rendelünk.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a relatív gyakoriság?",
@@ -103,7 +112,8 @@
         "c": "A leggyakoribb adat."
       },
       "correct": "b",
-      "explanation": "A relatív gyakoriság megmutatja, hogy egy adott érték az összes adat hányad részét, hány százalékát teszi ki. Képlete: (abszolút gyakoriság) / (összes elemszám)."
+      "explanation": "A relatív gyakoriság megmutatja, hogy egy adott érték az összes adat hányad részét, hány százalékát teszi ki. Képlete: (abszolút gyakoriság) / (összes elemszám).",
+      "difficulty": "medium"
     },
     {
       "question": "Egy dobozban 5 piros és 3 kék golyó van. Mi a valószínűsége, hogy kéket húzunk?",
@@ -113,7 +123,8 @@
         "c": "5/8"
       },
       "correct": "a",
-      "explanation": "Az összes eset száma a golyók teljes száma: 5 + 3 = 8. A kedvező esetek száma a kék golyók száma, ami 3. A valószínűség P = kedvező/összes = 3/8."
+      "explanation": "Az összes eset száma a golyók teljes száma: 5 + 3 = 8. A kedvező esetek száma a kék golyók száma, ami 3. A valószínűség P = kedvező/összes = 3/8.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy kosárban 6 piros és 4 zöld alma van. Mi a valószínűsége, hogy NEM zöld almát húzunk?",
@@ -123,7 +134,8 @@
         "c": "4/6"
       },
       "correct": "a",
-      "explanation": "Ha NEM zöldet húzunk, az azt jelenti, hogy pirosat húzunk. A piros a kedvező eset, ebből 6 db van. Az összes eset 10. P = 6/10 = 3/5."
+      "explanation": "Ha NEM zöldet húzunk, az azt jelenti, hogy pirosat húzunk. A piros a kedvező eset, ebből 6 db van. Az összes eset 10. P = 6/10 = 3/5.",
+      "difficulty": "medium"
     },
     {
       "question": "Hányféleképpen ülhet le 3 ember egy padra egymás mellé?",
@@ -133,7 +145,8 @@
         "c": "6"
       },
       "correct": "c",
-      "explanation": "Ez egy sorbarendezési probléma (permutáció). Az első helyre 3 ember ülhet. A másodikra a maradék 2. A harmadikra az utolsó 1. A lehetőségek száma: 3 × 2 × 1 = 6."
+      "explanation": "Ez egy sorbarendezési probléma (permutáció). Az első helyre 3 ember ülhet. A másodikra a maradék 2. A harmadikra az utolsó 1. A lehetőségek száma: 3 × 2 × 1 = 6.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a valószínűsége, hogy egy 52 lapos francia kártyából ászt húzunk?",
@@ -143,7 +156,8 @@
         "c": "4/13"
       },
       "correct": "a",
-      "explanation": "Az összes eset 52. A kedvező esetek az ászok, amiből 4 darab van. A valószínűség P = 4/52. Ezt a törtet 4-gyel egyszerűsítve 1/13-ot kapunk."
+      "explanation": "Az összes eset 52. A kedvező esetek az ászok, amiből 4 darab van. A valószínűség P = 4/52. Ezt a törtet 4-gyel egyszerűsítve 1/13-ot kapunk.",
+      "difficulty": "medium"
     },
     {
       "question": "Két dobókockával dobunk egyszerre. Mi a valószínűsége, hogy a dobott számok összege 12?",
@@ -153,7 +167,8 @@
         "c": "1/36"
       },
       "correct": "c",
-      "explanation": "Az összes lehetséges kimenetel 6×6 = 36. Az összeg csak egyetlen esetben lesz 12: ha mindkét kockával 6-ost dobunk, (6,6). A valószínűség P = 1/36."
+      "explanation": "Az összes lehetséges kimenetel 6×6 = 36. Az összeg csak egyetlen esetben lesz 12: ha mindkét kockával 6-ost dobunk, (6,6). A valószínűség P = 1/36.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik nem a statisztikai középértékek egyike?",
@@ -163,7 +178,8 @@
         "c": "Terjedelem"
       },
       "correct": "c",
-      "explanation": "A leggyakoribb középérték-mutatók az átlag, a medián és a módusz. A terjedelem a legnagyobb és a legkisebb adat különbsége, ami egy szóródási mutató."
+      "explanation": "A leggyakoribb középérték-mutatók az átlag, a medián és a módusz. A terjedelem a legnagyobb és a legkisebb adat különbsége, ami egy szóródási mutató.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a mediánja a következő adatsornak: 10, 20, 12, 18?",
@@ -173,7 +189,8 @@
         "c": "16"
       },
       "correct": "b",
-      "explanation": "Először sorba rendezzük: 10, 12, 18, 20. Mivel páros számú elem van, a medián a két középső elem (12 és 18) számtani közepe. Medián = (12+18)/2 = 15."
+      "explanation": "Először sorba rendezzük: 10, 12, 18, 20. Mivel páros számú elem van, a medián a két középső elem (12 és 18) számtani közepe. Medián = (12+18)/2 = 15.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy osztályban a jegyek: 5, 4, 5, 3, 4, 5. Mi a jegyek számtani közepe (átlaga)?",
@@ -183,7 +200,8 @@
         "c": "4"
       },
       "correct": "a",
-      "explanation": "Az átlaghoz össze kell adni a jegyeket és elosztani a darabszámukkal. Összeg: 5+4+5+3+4+5 = 26. Darabszám: 6. Átlag = 26 / 6 ≈ 4.33."
+      "explanation": "Az átlaghoz össze kell adni a jegyeket és elosztani a darabszámukkal. Összeg: 5+4+5+3+4+5 = 26. Darabszám: 6. Átlag = 26 / 6 ≈ 4.33.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy csomag magyar kártyából (32 lap) kihúzunk egy lapot. Mi a valószínűsége, hogy az király lesz?",
@@ -193,7 +211,8 @@
         "c": "8/32"
       },
       "correct": "a",
-      "explanation": "Az összes eset 32. A kedvező esetek a királyok, amiből 4 darab van (piros, zöld, makk, tök). A valószínűség P = 4/32, ami egyszerűsítve 1/8."
+      "explanation": "Az összes eset 32. A kedvező esetek a királyok, amiből 4 darab van (piros, zöld, makk, tök). A valószínűség P = 4/32, ami egyszerűsítve 1/8.",
+      "difficulty": "hard"
     },
     {
       "question": "Egy teszten az eredmények: 80%, 90%, 70%. Mi az eredmények átlaga?",
@@ -203,7 +222,8 @@
         "c": "240%"
       },
       "correct": "a",
-      "explanation": "Az átlagot úgy számoljuk, hogy összeadjuk az értékeket és elosztjuk a darabszámukkal. (80+90+70)/3 = 240/3 = 80. Tehát az átlag 80%."
+      "explanation": "Az átlagot úgy számoljuk, hogy összeadjuk az értékeket és elosztjuk a darabszámukkal. (80+90+70)/3 = 240/3 = 80. Tehát az átlag 80%.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik esemény valószínűsége 1?",
@@ -213,7 +233,8 @@
         "c": "Biztos esemény"
       },
       "correct": "c",
-      "explanation": "A biztos esemény az, ami egy kísérlet során mindenképpen bekövetkezik. Ennek a valószínűsége 1 (vagy 100%)."
+      "explanation": "A biztos esemény az, ami egy kísérlet során mindenképpen bekövetkezik. Ennek a valószínűsége 1 (vagy 100%).",
+      "difficulty": "hard"
     },
     {
       "question": "Egy kalapban 10 cetli van, 1-től 10-ig számozva. Mi a valószínűsége, hogy prímszámot húzunk?",
@@ -223,7 +244,8 @@
         "c": "3/10"
       },
       "correct": "a",
-      "explanation": "Az összes eset 10. A prímek 1 és 10 között: 2, 3, 5, 7. Ez 4 darab kedvező eset. A valószínűség P = 4/10 = 2/5."
+      "explanation": "Az összes eset 10. A prímek 1 és 10 között: 2, 3, 5, 7. Ez 4 darab kedvező eset. A valószínűség P = 4/10 = 2/5.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a mediánja a következő adatsornak: 2, 8, 3, 9, 5?",
@@ -233,7 +255,8 @@
         "c": "5.4"
       },
       "correct": "b",
-      "explanation": "A medián a sorba rendezett adatsor középső eleme. Először sorba rendezzük: 2, 3, 5, 8, 9. A középső elem az 5."
+      "explanation": "A medián a sorba rendezett adatsor középső eleme. Először sorba rendezzük: 2, 3, 5, 8, 9. A középső elem az 5.",
+      "difficulty": "hard"
     },
     {
       "question": "Feldobunk két pénzérmét. Mi a valószínűsége, hogy mindkettő fej lesz?",
@@ -243,7 +266,8 @@
         "c": "1/4"
       },
       "correct": "c",
-      "explanation": "A lehetséges kimenetelek: (fej,fej), (fej,írás), (írás,fej), (írás,írás). Ez összesen 4 eset. Ebből 1 a kedvező. A valószínűség P = 1/4."
+      "explanation": "A lehetséges kimenetelek: (fej,fej), (fej,írás), (írás,fej), (írás,írás). Ez összesen 4 eset. Ebből 1 a kedvező. A valószínűség P = 1/4.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a valószínűsége annak, hogy egy szabályos dobókockával páros számot dobunk?",
@@ -253,7 +277,8 @@
         "c": "1/3"
       },
       "correct": "b",
-      "explanation": "A lehetséges esetek száma 6. A kedvező esetek (páros számok) a 2, 4, 6, tehát 3 darab van. A valószínűség P = kedvező/összes = 3/6 = 1/2."
+      "explanation": "A lehetséges esetek száma 6. A kedvező esetek (páros számok) a 2, 4, 6, tehát 3 darab van. A valószínűség P = kedvező/összes = 3/6 = 1/2.",
+      "difficulty": "hard"
     }
   ]
 }

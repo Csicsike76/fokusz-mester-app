@@ -13,7 +13,8 @@
         "c": "22"
       },
       "correct": "b",
-      "explanation": "A műveleti sorrend szerint először a szorzást kell elvégezni, majd az összeadást. 1. Szorzás: 8 × 2 = 16. 2. Összeadás: 12 + 16 = 28."
+      "explanation": "A műveleti sorrend szerint először a szorzást kell elvégezni, majd az összeadást. 1. Szorzás: 8 × 2 = 16. 2. Összeadás: 12 + 16 = 28.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik tulajdonság miatt igaz, hogy 5 + 9 = 9 + 5?",
@@ -23,7 +24,8 @@
         "c": "Disztributivitás (széttagolhatóság)"
       },
       "correct": "b",
-      "explanation": "Az összeadás kommutatív tulajdonsága mondja ki, hogy a tagok sorrendje felcserélhető, az összeg nem változik."
+      "explanation": "Az összeadás kommutatív tulajdonsága mondja ki, hogy a tagok sorrendje felcserélhető, az összeg nem változik.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a 20 - (5 + 3) kifejezés értéke?",
@@ -33,7 +35,8 @@
         "c": "22"
       },
       "correct": "a",
-      "explanation": "A műveleti sorrend szerint először a zárójelben lévő műveletet kell elvégezni. 1. Zárójel: 5 + 3 = 8. 2. Kivonás: 20 - 8 = 12."
+      "explanation": "A műveleti sorrend szerint először a zárójelben lévő műveletet kell elvégezni. 1. Zárójel: 5 + 3 = 8. 2. Kivonás: 20 - 8 = 12.",
+      "difficulty": "easy"
     },
     {
       "question": "Mennyi 100 osztva 4-gyel?",
@@ -43,7 +46,8 @@
         "c": "96"
       },
       "correct": "a",
-      "explanation": "A 100-ban a 4 pontosan 25-ször van meg maradék nélkül. 100 / 4 = 25."
+      "explanation": "A 100-ban a 4 pontosan 25-ször van meg maradék nélkül. 100 / 4 = 25.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a 15 és a 6 szorzata?",
@@ -53,7 +57,8 @@
         "c": "90"
       },
       "correct": "c",
-      "explanation": "A szorzás műveletét elvégezve: 15 × 6 = 90."
+      "explanation": "A szorzás műveletét elvégezve: 15 × 6 = 90.",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik állítás igaz az összeadás és a szorzás kapcsolatára?",
@@ -63,7 +68,8 @@
         "c": "Az összeadás az osztás ismétlése."
       },
       "correct": "b",
-      "explanation": "A szorzás (pl. 3 × 4) azt jelenti, hogy a 4-et 3-szor adjuk össze önmagával (4+4+4). Tehát a szorzás az ismételt összeadás egy rövidebb formája."
+      "explanation": "A szorzás (pl. 3 × 4) azt jelenti, hogy a 4-et 3-szor adjuk össze önmagával (4+4+4). Tehát a szorzás az ismételt összeadás egy rövidebb formája.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi a 30 / 5 + 2 × 3 eredménye?",
@@ -73,7 +79,8 @@
         "c": "4"
       },
       "correct": "a",
-      "explanation": "Mivel a szorzás és osztás egyenrangúak, balról jobbra haladunk, majd összeadunk. 1. Osztás: 30 / 5 = 6. 2. Szorzás: 2 × 3 = 6. 3. Összeadás: 6 + 6 = 12."
+      "explanation": "Mivel a szorzás és osztás egyenrangúak, balról jobbra haladunk, majd összeadunk. 1. Osztás: 30 / 5 = 6. 2. Szorzás: 2 × 3 = 6. 3. Összeadás: 6 + 6 = 12.",
+      "difficulty": "easy"
     },
     {
       "question": "Mi az összeadás semleges eleme a természetes számok körében?",
@@ -83,7 +90,8 @@
         "c": "Nincs ilyen."
       },
       "correct": "b",
-      "explanation": "A 0 az összeadás semleges (vagy neutrális) eleme, mert bármely számhoz hozzáadva a szám értéke nem változik (a + 0 = a)."
+      "explanation": "A 0 az összeadás semleges (vagy neutrális) eleme, mert bármely számhoz hozzáadva a szám értéke nem változik (a + 0 = a).",
+      "difficulty": "easy"
     },
     {
       "question": "Melyik kifejezés értéke 1?",
@@ -93,7 +101,8 @@
         "c": "(3+3)/3 - 3"
       },
       "correct": "a",
-      "explanation": "Ellenőrizzük: a) 5 - 4 = 1. b) 2 - 2 = 0. c) 6/3 - 3 = 2-3 = -1. Tehát az 'a' a helyes."
+      "explanation": "Ellenőrizzük: a) 5 - 4 = 1. b) 2 - 2 = 0. c) 6/3 - 3 = 2-3 = -1. Tehát az 'a' a helyes.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a 123 + 77 összeg?",
@@ -103,7 +112,8 @@
         "c": "210"
       },
       "correct": "b",
-      "explanation": "A két számot helyiérték szerint összeadva: 123 + 77 = 200."
+      "explanation": "A két számot helyiérték szerint összeadva: 123 + 77 = 200.",
+      "difficulty": "medium"
     },
     {
       "question": "Ha egy dobozban 12 ceruza van, és veszünk 5 ilyen dobozzal, hány ceruzánk lesz?",
@@ -113,7 +123,8 @@
         "c": "7"
       },
       "correct": "b",
-      "explanation": "Ez egy szorzási feladat. A ceruzák teljes száma: 12 ceruza/doboz × 5 doboz = 60 ceruza."
+      "explanation": "Ez egy szorzási feladat. A ceruzák teljes száma: 12 ceruza/doboz × 5 doboz = 60 ceruza.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik művelet eredménye nem mindig természetes szám, ha két természetes számon végezzük el?",
@@ -123,7 +134,8 @@
         "c": "Kivonás"
       },
       "correct": "c",
-      "explanation": "Az összeadás és szorzás zárt a természetes számok halmazán (az eredmény mindig természetes). A kivonás viszont kivezethet a halmazból, pl. 3 - 5 = -2, ami nem természetes szám."
+      "explanation": "Az összeadás és szorzás zárt a természetes számok halmazán (az eredmény mindig természetes). A kivonás viszont kivezethet a halmazból, pl. 3 - 5 = -2, ami nem természetes szám.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi az (18-3)/5 kifejezés értéke?",
@@ -133,7 +145,8 @@
         "c": "Nem egész szám."
       },
       "correct": "b",
-      "explanation": "Először a zárójelben lévő művelet: 18-3=15. Ezután az osztás: 15/5=3."
+      "explanation": "Először a zárójelben lévő művelet: 18-3=15. Ezután az osztás: 15/5=3.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a 100 - 50 - 25 eredménye?",
@@ -143,7 +156,8 @@
         "c": "125"
       },
       "correct": "a",
-      "explanation": "Mivel a kivonások egyenrangúak, balról jobbra haladunk. 1. 100-50=50. 2. 50-25=25."
+      "explanation": "Mivel a kivonások egyenrangúak, balról jobbra haladunk. 1. 100-50=50. 2. 50-25=25.",
+      "difficulty": "medium"
     },
     {
       "question": "Melyik tulajdonság miatt igaz, hogy 3 × (4 + 5) = 3 × 4 + 3 × 5?",
@@ -153,7 +167,8 @@
         "c": "Disztributivitás"
       },
       "correct": "c",
-      "explanation": "A szorzás disztributív (széttagolható) az összeadásra nézve. Ez azt jelenti, hogy a zárójelen belüli tagokat külön-külön is megszorozhatjuk."
+      "explanation": "A szorzás disztributív (széttagolható) az összeadásra nézve. Ez azt jelenti, hogy a zárójelen belüli tagokat külön-külön is megszorozhatjuk.",
+      "difficulty": "medium"
     },
     {
       "question": "Mi a 0-val való osztás eredménye?",
@@ -163,7 +178,8 @@
         "c": "Nincs értelmezve"
       },
       "correct": "c",
-      "explanation": "A nullával való osztás a matematikában nincs értelmezve, mert ellentmondáshoz vezetne. Nem szabad összekeverni azzal, amikor a 0-t osztjuk egy számmal."
+      "explanation": "A nullával való osztás a matematikában nincs értelmezve, mert ellentmondáshoz vezetne. Nem szabad összekeverni azzal, amikor a 0-t osztjuk egy számmal.",
+      "difficulty": "medium"
     },
     {
       "question": "Egy teremben 5 sorban 6 szék van. Hány szék van összesen?",
@@ -173,7 +189,8 @@
         "c": "1"
       },
       "correct": "b",
-      "explanation": "A székek számát a sorok és az egy sorban lévő székek számának szorzatával kapjuk meg: 5 × 6 = 30."
+      "explanation": "A székek számát a sorok és az egy sorban lévő székek számának szorzatával kapjuk meg: 5 × 6 = 30.",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik állítás HAMIS?",
@@ -183,7 +200,8 @@
         "c": "Két egész szám szorzata mindig egész szám."
       },
       "correct": "b",
-      "explanation": "Az egész számok halmaza zárt az összeadásra és a szorzásra, de az osztásra nem. Például 3 / 2 = 1.5, ami nem egész szám."
+      "explanation": "Az egész számok halmaza zárt az összeadásra és a szorzásra, de az osztásra nem. Például 3 / 2 = 1.5, ami nem egész szám.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a 100 / (10 / 2) eredménye?",
@@ -193,7 +211,8 @@
         "c": "50"
       },
       "correct": "b",
-      "explanation": "Először a zárójelben lévő osztást végezzük el: 10/2=5. Ezután a külső osztást: 100/5=20."
+      "explanation": "Először a zárójelben lévő osztást végezzük el: 10/2=5. Ezután a külső osztást: 100/5=20.",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a szorzás semleges eleme?",
@@ -203,7 +222,8 @@
         "c": "Nincs ilyen."
       },
       "correct": "b",
-      "explanation": "Az 1 a szorzás semleges (vagy neutrális) eleme, mert bármely számot 1-gyel szorozva a szám nem változik (a × 1 = a)."
+      "explanation": "Az 1 a szorzás semleges (vagy neutrális) eleme, mert bármely számot 1-gyel szorozva a szám nem változik (a × 1 = a).",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a 100 – 50 - 25?",
@@ -213,7 +233,8 @@
         "c": "125"
       },
       "correct": "a",
-      "explanation": "Balról jobbra haladunk: 100-50=50, 50-25=25. ✅ Megoldás: 25"
+      "explanation": "Balról jobbra haladunk: 100-50=50, 50-25=25. ✅ Megoldás: 25",
+      "difficulty": "hard"
     },
     {
       "question": "Melyik jelzi a legnagyobb összeget?",
@@ -223,7 +244,8 @@
         "c": "2 x 3 + 1"
       },
       "correct": "b",
-      "explanation": "a) 2000 - 1999 = 1. b) 2 + 2 + 2 + 2 = 8. c) 2 x 3 + 1 = 7.  ✅ Megoldás: A legnagyobb 8"
+      "explanation": "a) 2000 - 1999 = 1. b) 2 + 2 + 2 + 2 = 8. c) 2 x 3 + 1 = 7.  ✅ Megoldás: A legnagyobb 8",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a 100 / (10 / 5) ?",
@@ -233,7 +255,8 @@
         "c": "10"
       },
       "correct": "a",
-      "explanation": "Először a zárójelben lévő osztást végezzük el: 10 / 5 = 2.  100 / 2 = 50. ✅ Megoldás: A helyes válasz 50"
+      "explanation": "Először a zárójelben lévő osztást végezzük el: 10 / 5 = 2.  100 / 2 = 50. ✅ Megoldás: A helyes válasz 50",
+      "difficulty": "hard"
     },
     {
       "question": "Mi a 2 + (3 × 4) - 5 műveletsor eredménye?",
@@ -243,7 +266,8 @@
         "c": "10"
       },
       "correct": "a",
-      "explanation": "Először a szorzást végezzük el: 3 × 4 = 12. A műveletsor: 2 + 12 - 5 = 14 - 5 = 9. ✅ Megoldás: A helyes válasz 9."
+      "explanation": "Először a szorzást végezzük el: 3 × 4 = 12. A műveletsor: 2 + 12 - 5 = 14 - 5 = 9. ✅ Megoldás: A helyes válasz 9.",
+      "difficulty": "hard"
     }
   ]
 }
