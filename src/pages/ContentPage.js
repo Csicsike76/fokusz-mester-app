@@ -1,11 +1,14 @@
-// Fájl: src/pages/ContentPage.js (TELJES, SZINTAKTIKAILAG JAVÍTOTT VERZIÓ)
+// Fájl: src/pages/ContentPage.js (TELJES, JAVÍTOTT ÉS BIZTONSÁGOS VERZIÓ)
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useParams } from 'react-router-dom';
+// JAVÍTÁS: useNavigate importálása az átirányításhoz
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import styles from './ContentPage.module.css';
 import { API_URL } from '../config/api';
+// JAVÍTÁS: useAuth importálása a jogosultság-ellenőrzéshez
+import { useAuth } from '../context/AuthContext';
 
-// --- Komponensek importálása ---
+// --- Komponensek importálása (VÁLTOZATLAN) ---
 import SingleChoiceQuestion from '../components/SingleChoiceQuestion';
 import WorkshopContent from '../components/WorkshopContent/WorkshopContent';
 import TopicSelector from '../components/TopicSelector/TopicSelector';
@@ -18,7 +21,7 @@ import MultiInputPromptGenerator from '../components/MultiInputPromptGenerator/M
 import HubPageTool from '../components/HubPageTool/HubPageTool';
 
 // =================================================================
-// BELSŐ NÉZET KOMPONENSEK
+// BELSŐ NÉZET KOMPONENSEK (VÁLTOZATLAN)
 // =================================================================
 
 // ---- Tananyag nézet (kétoszlopos) ----
@@ -182,10 +185,14 @@ const GenericToolView = ({ contentData }) => (
 
 
 // =================================================================
-// FŐ KOMPONENS
+// FŐ KOMPONENS (JAVÍTOTT LOGIKÁVAL)
 // =================================================================
 const ContentPage = () => {
   const { slug } = useParams();
+  // JAVÍTÁS: Hook-ok inicializálása
+  const navigate = useNavigate();
+  const { canUsePremium } = useAuth();
+
   const [contentData, setContentData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [messages, setMessages] = useState([]);
@@ -193,9 +200,8 @@ const ContentPage = () => {
   const [activeChat, setActiveChat] = useState(null);
   const [error, setError] = useState('');
 
+  // JAVÍTÁS: A fetchData most már visszaadja a letöltött adatot
   const fetchData = useCallback(async () => {
-    setIsLoading(true);
-    setError('');
     try {
       const correctedSlug = slug.replace(/_/g, '-');
       const res = await fetch(`${API_URL}/api/quiz/${correctedSlug}`);
@@ -204,20 +210,61 @@ const ContentPage = () => {
       if (!data.success || !data.data) {
         throw new Error(data.message || 'Az adatok hiányosak.');
       }
-      setContentData(data.data);
+      return data.data; // FONTOS: Visszaadjuk az adatot
     } catch (err) {
-      setError(err.message);
+      // Itt már nem állítunk state-et, mert azt a hívó kezeli
       console.error("Hiba a tartalom betöltésekor:", err);
-    } finally {
-      setIsLoading(false);
+      // Dobunk egy hibát, hogy a hívó el tudja kapni
+      throw err;
     }
   }, [slug]);
 
+  // JAVÍTÁS: Az useEffect most már a jogosultság-ellenőrzést is elvégzi
   useEffect(() => {
-    fetchData();
-    setActiveChat(null);
-  }, [fetchData, slug]);
+    const loadAndCheckContent = async () => {
+      setIsLoading(true);
+      setError('');
+      setContentData(null);
+      setActiveChat(null);
 
+      try {
+        const data = await fetchData();
+
+        if (data) {
+          // Prémium tartalom azonosítása
+          const isPremiumContent = data.category && (
+            data.category.startsWith('premium_') ||
+            data.category === 'workshop' ||
+            data.category === 'premium_course' ||
+            data.category === 'premium_tool'
+          );
+
+          // A "KIDOBÓEMBER" LOGIKA:
+          if (isPremiumContent && !canUsePremium) {
+            console.warn("Hozzáférés megtagadva! Prémium tartalom. Átirányítás a bejelentkezési oldalra.");
+            navigate('/bejelentkezes', {
+              state: {
+                from: window.location.pathname,
+                message: "A tartalom megtekintéséhez bejelentkezés és prémium hozzáférés szükséges."
+              }
+            });
+            return; // Megállítjuk a további végrehajtást
+          }
+
+          // Ha minden rendben, beállítjuk az adatot és leállítjuk a töltést
+          setContentData(data);
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadAndCheckContent();
+  }, [slug, canUsePremium, navigate, fetchData]); // Függőségek frissítve
+
+  // A többi handler (handleCharacterSelect, stb.) VÁLTOZATLAN
   const handleCharacterSelect = (charKey) => {
     setActiveChat(charKey);
     setMessages([{ text: `Szia! Én ${contentData.characters[charKey].name} vagyok. Kérdezz tőlem!`, sender: 'tutor' }]);
@@ -243,10 +290,10 @@ const ContentPage = () => {
     setMessages([]);
   };
   
-  // A renderelési logika most a fő komponens törzsében van
+  // A renderelési logika VÁLTOZATLAN
   if (isLoading) return <div className={styles.container}>Adatok betöltése...</div>;
   if (error) return <div className={styles.container}>{error}</div>;
-  if (!contentData) return <div className={styles.container}>A tartalom nem található.</div>;
+  if (!contentData) return <div className={styles.container}>A tartalom nem elérhető.</div>;
 
   const renderTheContent = () => {
     if (activeChat) {

@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from './HelpCenterPage.module.css';
-
-// VÉGLEGES JAVÍTÁS: Az API cím dinamikus beállítása a környezet alapján
-const API_URL = process.env.NODE_ENV === 'production'
-    ? 'https://fokusz-mester-backend.onrender.com'
-    : 'http://localhost:3001';
+import { API_URL } from '../config/api'; // JAVÍTVA: Importálás a központi konfigurációból
 
 const HelpArticle = ({ article }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -26,21 +22,30 @@ const HelpCenterPage = () => {
 
     const fetchArticles = useCallback(async () => {
         setIsLoading(true);
-        const url = searchTerm.length > 2 ? `${API_URL}/api/help?q=${searchTerm}` : `${API_URL}/api/help`;
+        // A lekérdezési URL összeállítása a központi API_URL változóval
+        const url = new URL(`${API_URL}/api/help`);
+        if (searchTerm.trim().length > 2) {
+            url.searchParams.append('q', searchTerm.trim());
+        }
+
         try {
-            const response = await fetch(url);
+            const response = await fetch(url.toString());
             const data = await response.json();
             if (data.success) {
                 setArticles(data.data);
+            } else {
+                setArticles({});
             }
         } catch (error) {
-            console.error(error);
+            console.error("Hiba a súgó cikkek lekérdezésekor:", error);
+            setArticles({});
         } finally {
             setIsLoading(false);
         }
     }, [searchTerm]);
 
     useEffect(() => {
+        // Debounce mechanizmus, hogy ne fusson le minden karakter leütésekor a keresés
         const debounceFetch = setTimeout(() => {
             fetchArticles();
         }, 300);
@@ -65,14 +70,15 @@ const HelpCenterPage = () => {
                 Object.keys(articles).length > 0 ? (
                     Object.keys(articles).map(category => (
                         <section key={category} className={styles.categorySection}>
+                            {/* A kategória nevének formázása */}
                             <h2>{category.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</h2>
-                            {articles[category].map(article => (
-                                <HelpArticle key={article.id} article={article} />
+                            {articles[category].map((article, index) => (
+                                <HelpArticle key={`${category}-${index}`} article={article} />
                             ))}
                         </section>
                     ))
                 ) : (
-                    <p>Nincs találat a keresésre.</p>
+                    <p>{searchTerm.length > 2 ? 'Nincs találat a keresésre.' : 'Kezdj el gépelni a kereséshez...'}</p>
                 )
             )}
         </div>

@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Search.module.css';
 import { useAuth } from '../../context/AuthContext';
-
-const API_URL = process.env.REACT_APP_API_URL || '';
+import { API_URL } from '../../config/api'; // JAVÍTVA: Importálás a központi konfigurációból (ellenőrizd az elérési utat!)
 
 const Search = () => {
     const { token } = useAuth();
@@ -24,7 +23,6 @@ const Search = () => {
                         headers['Authorization'] = `Bearer ${token}`;
                     }
                     
-                    // VÉGLEGES JAVÍTÁS: A kérés az új, dedikált /api/search végpontra mutat
                     const response = await fetch(`${API_URL}/api/search?q=${encodeURIComponent(searchTerm)}`, { headers });
                     const data = await response.json();
                     
