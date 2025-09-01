@@ -26,8 +26,6 @@
     margin: 2rem 0;
 }
 
-/* ... a .divider stílus után ... */
-
 .form {
     display: flex;
     flex-direction: column;
@@ -82,8 +80,6 @@
     text-align: center;
 }
 
-/* ... a .errorMessage stílus után ... */
-
 .classList {
     list-style: none;
     padding: 0;
@@ -100,25 +96,47 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+}
+
+.classInfo {
+    flex-grow: 1;
 }
 
 .className {
     font-weight: bold;
     font-size: 1.1rem;
+    display: block;
 }
 
 .classCode {
     font-family: monospace;
-    background-color: #1abc9c;
+    background-color: #16a085;
     padding: 0.3rem 0.6rem;
     border-radius: 5px;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-top: 0.5rem;
 }
 
-/* ... a .classCode stílus után ... */
-
 .studentCount {
-    display: block; /* Új sorba kerül a név alá */
+    display: block;
     font-size: 0.9rem;
-    color: #bdc3c7; /* Halványabb szürke szín */
+    color: #bdc3c7;
     margin-top: 0.25rem;
+}
+
+.detailsButton {
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.detailsButton:hover {
+    background-color: #2980b9;
 }

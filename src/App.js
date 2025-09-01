@@ -19,7 +19,8 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import InteraktivMatematika from './pages/InteraktivMatematika';
 import ContactPage from './pages/ContactPage';
-import AdminPage from './pages/AdminPage'; // ÚJ IMPORT
+import AdminPage from './pages/AdminPage';
+import ClassDetailsPage from './pages/ClassDetailsPage'; // HOZZÁADVA: Új import
 import './App.css';
 
 function App() {
@@ -37,8 +38,6 @@ function App() {
             <Route path="tananyag/:slug" element={<ContentPage />} />
             
             <Route path="verify-email/:token" element={<EmailVerificationPage />} />
-            {/* A régi approve-teacher linket eltávolítjuk, mert az admin felület váltja ki */}
-            {/* <Route path="approve-teacher/:userId" element={<TeacherApprovalPage />} /> */}
             <Route path="sugo" element={<HelpCenterPage />} />
             <Route path="kapcsolat" element={<ContactPage />} />
             <Route path="elfelejtett-jelszo" element={<ForgotPasswordPage />} />
@@ -50,13 +49,13 @@ function App() {
             
             <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
               <Route path="dashboard/teacher" element={<TeacherDashboardPage />} />
+              {/* HOZZÁADVA: Új útvonal az osztály részleteihez */}
+              <Route path="dashboard/teacher/class/:classId" element={<ClassDetailsPage />} />
             </Route>
 
-            {/* --- MÓDOSÍTÁS KEZDETE: Új admin útvonal --- */}
             <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
               <Route path="admin" element={<AdminPage />} />
             </Route>
-            {/* --- MÓDOSÍTÁS VÉGE --- */}
 
           </Route>
         </Routes>

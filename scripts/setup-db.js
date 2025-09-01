@@ -30,6 +30,7 @@ async function run() {
     await client.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`);
 
     const tablesToDrop = [
+      'student_progress', // HOZZÁADVA: Az új tábla is törlésre kerül, ha újra fut a script
       'contact_messages', 'admin_actions', 'error_logs', 'activity_logs',
       'notifications', 'user_quiz_results', 'quizquestions', 'curriculums',
       'helparticles', 'classmemberships', 'classes', 'teachers',
@@ -43,9 +44,13 @@ async function run() {
       CREATE TABLE users (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         username VARCHAR(255) UNIQUE NOT NULL,
+        real_name TEXT, -- HOZZÁADVA: A tanári felülethez és a regisztrációs szabályokhoz
         email VARCHAR(255) UNIQUE NOT NULL,
+        parental_email VARCHAR(255), -- HOZZÁADVA: A szülői felügyelethez
         password_hash VARCHAR(255) NOT NULL,
         role VARCHAR(50) NOT NULL CHECK (role IN ('student','teacher','admin')),
+        provider TEXT DEFAULT 'local', -- HOZZÁADVA: Külső bejelentkezéshez
+        provider_id TEXT, -- HOZZÁADVA: Külső bejelentkezéshez
         referral_code VARCHAR(255) UNIQUE,
         email_verified BOOLEAN DEFAULT false,
         email_verification_token VARCHAR(255),
@@ -59,9 +64,12 @@ async function run() {
         preferred_language TEXT DEFAULT 'hu',
         archived BOOLEAN DEFAULT false,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE(provider, provider_id) -- HOZZÁADVA: Külső bejelentkezéshez
       );
     `);
+
+    // --- A KÖVETKEZŐ TÁBLÁK VÁLTOZATLANOK MARADTAK AZ EREDETI SZKRIPTBŐL ---
 
     await client.query(`
       CREATE TABLE teachers (
@@ -98,6 +106,24 @@ async function run() {
         PRIMARY KEY (user_id, class_id)
       );
     `);
+
+    // --- ÚJ TÁBLA HOZZÁADVA A RÉSZLETES HALADÁSKÖVETÉSHEZ ---
+
+    await client.query(`
+      CREATE TABLE student_progress (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        user_id UUID REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+        activity_type TEXT NOT NULL CHECK (activity_type IN ('lesson_viewed', 'quiz_completed')),
+        lesson_slug TEXT,
+        quiz_slug TEXT,
+        score_percentage NUMERIC(5,2),
+        started_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        completed_at TIMESTAMPTZ,
+        metadata JSONB DEFAULT '{}'::jsonb
+      );
+    `);
+    
+    // --- A KÖVETKEZŐ TÁBLÁK SZINTÉN VÁLTOZATLANOK MARADTAK AZ EREDETI SZKRIPTBŐL ---
 
     await client.query(`
       CREATE TABLE referrals (

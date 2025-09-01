@@ -12,6 +12,10 @@ const validator = require('validator');
 const { rateLimit, ipKeyGenerator } = require('express-rate-limit');
 const axios = require('axios');
 const cron = require('node-cron');
+const { OAuth2Client } = require('google-auth-library'); // HOZZÁADVA
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID; // HOZZÁADVA
+const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID); // HOZZÁADVA
+
 
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 
@@ -98,7 +102,6 @@ app.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async
           throw new Error('Hiányzó userId a checkout session metaadataiból!');
         }
 
-        // --- Tanári osztály létrehozása (Egyszeri fizetés) ---
         if (session.mode === 'payment' && session.metadata.type === 'teacher_class_payment') {
           const { className, maxStudents } = session.metadata;
           if (!className || !maxStudents) throw new Error('Hiányos metaadatok a tanári osztály létrehozásához.');
@@ -112,7 +115,6 @@ app.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async
           console.log(`✅ Tanári osztály sikeresen létrehozva (fizetés után): ${className}, Tanár ID: ${userId}`);
         }
 
-        // --- Felhasználói előfizetés létrehozása ---
         if (session.mode === 'subscription') {
           const subscriptionId = session.subscription;
           if (!subscriptionId) throw new Error('Hiányzó subscription ID a checkout.session.completed eseményben.');
@@ -145,7 +147,6 @@ app.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async
           );
           console.log(`✅ Előfizetés sikeresen rögzítve (checkout.session.completed) a felhasználóhoz: ${userId}`);
 
-          // --- AJÁNLÓI RENDSZER LOGIKA ---
           console.log(`Ajánlói rendszer ellenőrzése a felhasználóhoz: ${userId}`);
           const referralResult = await client.query('SELECT referrer_user_id FROM referrals WHERE referred_user_id = $1', [userId]);
           if (referralResult.rows.length > 0) {
@@ -268,6 +269,14 @@ const authorizeAdmin = (req, res, next) => {
   }
 };
 
+const authorizeTeacher = (req, res, next) => {
+    if (req.user && req.user.role === 'teacher') {
+        next();
+    } else {
+        res.status(403).json({ success: false, message: 'Hozzáférés megtagadva: tanári jogosultság szükséges.' });
+    }
+};
+
 app.get('/api/help', async (req, res) => {
   const q = (req.query.q || '').toString().trim().toLowerCase();
 
@@ -306,7 +315,7 @@ app.get('/api/help', async (req, res) => {
 });
 
 app.post('/api/register-teacher', async (req, res) => {
-  const { email, username, password, referrerCode } = req.body; // Javítás: referrerCode-ra változtatva
+  const { email, username, password, referrerCode } = req.body;
 
   if (!email || !username || !password) {
     return res.status(400).json({ success: false, message: 'Minden mező kitöltése kötelező.' });
@@ -320,18 +329,16 @@ app.post('/api/register-teacher', async (req, res) => {
 
     const password_hash = await bcrypt.hash(password, 10);
 
-    // Javítás: Saját referral_code generálása az új felhasználónak
     let myReferralCode = crypto.randomBytes(8).toString('hex').toUpperCase();
-    // Opcionális: Unicitás ellenőrzés (loop, ha szükséges)
     let codeExists = await pool.query('SELECT 1 FROM users WHERE referral_code = $1', [myReferralCode]);
     while (codeExists.rows.length > 0) {
       myReferralCode = crypto.randomBytes(8).toString('hex').toUpperCase();
       codeExists = await pool.query('SELECT 1 FROM users WHERE referral_code = $1', [myReferralCode]);
     }
-
+    
     const newUser = await pool.query(
-      'INSERT INTO users (email, username, password_hash, role, referral_code, email_verified, created_at) VALUES ($1, $2, $3, $4, $5, $6, NOW()) RETURNING *',
-      [email, username, password_hash, 'teacher', myReferralCode, false]
+      'INSERT INTO users (email, username, password_hash, role, referral_code, email_verified, created_at, real_name) VALUES ($1, $2, $3, $4, $5, $6, NOW(), $7) RETURNING *',
+      [email, username, password_hash, 'teacher', myReferralCode, false, username]
     );
 
     const verify_token = crypto.randomBytes(32).toString('hex');
@@ -342,7 +349,6 @@ app.post('/api/register-teacher', async (req, res) => {
 
     const verifyLink = `${process.env.FRONTEND_URL}/verify-teacher?token=${verify_token}`;
 
-    // Javítás: E-mail küldés hozzáadva a jóváhagyáshoz
     const mailOptions = {
       from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
       to: email,
@@ -361,7 +367,6 @@ app.post('/api/register-teacher', async (req, res) => {
     await transporter.sendMail(mailOptions);
     console.log(`✅ Jóváhagyó e-mail elküldve: ${email}`);
 
-    // Javítás: Ha referrerCode megvan, beszúrás a referrals táblába
     if (referrerCode) {
       const referrerResult = await pool.query('SELECT id FROM users WHERE referral_code = $1', [referrerCode]);
       if (referrerResult.rows.length > 0) {
@@ -417,6 +422,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
     referralCode,
     specialCode,
     recaptchaToken,
+    parental_email,
   } = req.body;
 
   if (!recaptchaToken) {
@@ -513,13 +519,15 @@ app.post('/api/register', authLimiter, async (req, res) => {
       role === 'student' ? `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}` : null;
 
     const insertUserQuery = `
-      INSERT INTO users (username, email, password_hash, role, referral_code, email_verification_token, email_verification_expires, is_permanent_free, email_verified)
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+      INSERT INTO users (username, real_name, email, parental_email, password_hash, role, referral_code, email_verification_token, email_verification_expires, is_permanent_free, email_verified)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
       RETURNING id, created_at
     `;
     const newUserResult = await client.query(insertUserQuery, [
       username,
+      username, // real_name is set to username
       email,
+      parental_email || null,
       passwordHash,
       role,
       referralCodeNew,
@@ -759,7 +767,7 @@ app.post('/api/login', authLimiter, async (req, res) => {
 const getFullUserProfile = async (userId) => {
     const userQuery = `
         SELECT
-            u.id, u.username, u.email, u.role, u.referral_code, u.created_at,
+            u.id, u.username, u.real_name, u.email, u.role, u.referral_code, u.created_at,
             u.profile_metadata, u.is_permanent_free
         FROM users u
         WHERE u.id = $1;
@@ -832,7 +840,7 @@ app.put('/api/profile', authenticateToken, async (req, res) => {
     }
     try {
         await pool.query(
-            'UPDATE users SET username = $1 WHERE id = $2', 
+            'UPDATE users SET username = $1, real_name = $1 WHERE id = $2', 
             [username.trim(), userId]
         );
         
@@ -1428,15 +1436,11 @@ app.post('/api/notifications/mark-read', authenticateToken, async (req, res) => 
     }
 });
 
-
-// A server.js VÉGE FELÉ, AZ /api/notifications/mark-read UTÁN, DE AZ ADMIN API-K ELÉ
-
-// ÚJ VÉGPONT: Kvíz eredményének mentése
 app.post('/api/quiz/submit-result', authenticateToken, async (req, res) => {
     const userId = req.user.userId;
-    const { slug, score, totalQuestions } = req.body;
+    const { slug, score, totalQuestions, level } = req.body;
 
-    if (!slug || typeof score === 'undefined' || !totalQuestions) {
+    if (!slug || typeof score === 'undefined' || !totalQuestions || !level) {
         return res.status(400).json({ success: false, message: 'Hiányos adatok a kvíz eredményének mentéséhez.' });
     }
 
@@ -1444,29 +1448,29 @@ app.post('/api/quiz/submit-result', authenticateToken, async (req, res) => {
     try {
         await client.query('BEGIN');
 
-        // 1. Keressük meg a curriculum ID-t a slug alapján
         const curriculumResult = await client.query('SELECT id FROM curriculums WHERE slug = $1', [slug]);
         if (curriculumResult.rows.length === 0) {
             throw new Error('A megadott tananyag nem található az adatbázisban.');
         }
         const curriculumId = curriculumResult.rows[0].id;
-
-        // 2. Számoljuk ki a százalékos eredményt
         const scorePercentage = totalQuestions > 0 ? (score / totalQuestions) * 100 : 0;
-
-        // 3. Mentsük el az eredményt az adatbázisba.
-        // Az ON CONFLICT (user_id, curriculum_id) DO UPDATE biztosítja, hogy ha a felhasználó
-        // újra kitölti a kvízt, akkor a régi eredményét frissítjük, nem pedig újat hozunk létre.
-        const insertQuery = `
-            INSERT INTO user_quiz_results (user_id, curriculum_id, completed_questions, total_questions, score_percentage, completed_at)
-            VALUES ($1, $2, $3, $4, $5, NOW())
-            ON CONFLICT (user_id, curriculum_id) DO UPDATE SET
+        
+        const insertQueryOld = `
+            INSERT INTO user_quiz_results (user_id, curriculum_id, completed_questions, total_questions, score_percentage, completed_at, level)
+            VALUES ($1, $2, $3, $4, $5, NOW(), $6)
+            ON CONFLICT (user_id, curriculum_id, level) DO UPDATE SET
                 completed_questions = EXCLUDED.completed_questions,
                 total_questions = EXCLUDED.total_questions,
                 score_percentage = EXCLUDED.score_percentage,
                 completed_at = NOW();
         `;
-        await client.query(insertQuery, [userId, curriculumId, score, totalQuestions, scorePercentage]);
+        await client.query(insertQueryOld, [userId, curriculumId, score, totalQuestions, scorePercentage, level]);
+
+        const insertQueryNew = `
+            INSERT INTO student_progress (user_id, activity_type, quiz_slug, score_percentage, completed_at, metadata)
+            VALUES ($1, 'quiz_completed', $2, $3, NOW(), $4);
+        `;
+        await client.query(insertQueryNew, [userId, slug, scorePercentage, JSON.stringify({ level, score, totalQuestions })]);
 
         await client.query('COMMIT');
         res.status(200).json({ success: true, message: 'Eredmény sikeresen elmentve.' });
@@ -1480,12 +1484,79 @@ app.post('/api/quiz/submit-result', authenticateToken, async (req, res) => {
     }
 });
 
+app.post('/api/lesson/viewed', authenticateToken, async (req, res) => {
+    const userId = req.user.userId;
+    const { slug } = req.body;
+    if (!slug) {
+        return res.status(400).json({ success: false, message: 'Hiányzó tananyag azonosító.' });
+    }
+    try {
+        await pool.query(
+            `INSERT INTO student_progress (student_id, activity_type, lesson_slug, started_at)
+             VALUES ($1, 'lesson_viewed', $2, NOW())`,
+            [userId, slug]
+        );
+        res.status(200).json({ success: true, message: 'Lecke megtekintése rögzítve.' });
+    } catch (error) {
+        console.error("❌ Hiba a lecke megtekintésének rögzítésekor:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
+    }
+});
 
-// --- MÓDOSÍTÁS KEZDETE: Új Admin API végpontok ---
-// ... (innen folytatódik a fájl a többi kóddal)
+app.get('/api/teacher/class/:classId/students', authenticateToken, authorizeTeacher, async (req, res) => {
+    const { classId } = req.params;
+    const teacherId = req.user.userId;
+    try {
+        const classCheck = await pool.query('SELECT 1 FROM classes WHERE id = $1 AND teacher_id = $2', [classId, teacherId]);
+        if (classCheck.rows.length === 0) {
+            return res.status(403).json({ success: false, message: "Nincs jogosultsága ehhez az osztályhoz." });
+        }
+        
+        const query = `
+            SELECT u.id, u.real_name, u.email
+            FROM users u
+            JOIN classmemberships cm ON u.id = cm.user_id
+            WHERE cm.class_id = $1
+            ORDER BY u.real_name;
+        `;
+        const { rows } = await pool.query(query, [classId]);
+        res.status(200).json({ success: true, students: rows });
+    } catch (error) {
+        console.error(`❌ Hiba a(z) ${classId} osztály diákjainak lekérdezésekor:`, error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
+    }
+});
 
+app.get('/api/teacher/student/:studentId/progress', authenticateToken, authorizeTeacher, async (req, res) => {
+    const { studentId } = req.params;
+    const teacherId = req.user.userId;
+    try {
+        const accessCheck = await pool.query(`
+            SELECT 1 FROM classmemberships cm
+            JOIN classes c ON cm.class_id = c.id
+            WHERE cm.user_id = $1 AND c.teacher_id = $2
+        `, [studentId, teacherId]);
+        
+        if (accessCheck.rows.length === 0) {
+            return res.status(403).json({ success: false, message: "Nincs jogosultsága ennek a diáknak az adataihoz." });
+        }
 
-// --- MÓDOSÍTÁS KEZDETE: Új Admin API végpontok ---
+        const query = `
+            SELECT sp.activity_type, sp.lesson_slug, sp.quiz_slug, sp.score_percentage, sp.completed_at, sp.metadata,
+                   c.title AS curriculum_title
+            FROM student_progress sp
+            LEFT JOIN curriculums c ON sp.quiz_slug = c.slug OR sp.lesson_slug = c.slug
+            WHERE sp.student_id = $1
+            ORDER BY sp.completed_at DESC, sp.started_at DESC;
+        `;
+        const { rows } = await pool.query(query, [studentId]);
+        res.status(200).json({ success: true, progress: rows });
+    } catch (error) {
+        console.error(`❌ Hiba a(z) ${studentId} diák haladásának lekérdezésekor:`, error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
+    }
+});
+
 app.get('/api/admin/users', authenticateToken, authorizeAdmin, async (req, res) => {
     try {
         const query = `
@@ -1513,8 +1584,6 @@ app.get('/api/admin/messages', authenticateToken, authorizeAdmin, async (req, re
         res.status(500).json({ success: false, message: 'Szerverhiba történt az üzenetek lekérdezésekor.'});
     }
 });
-// --- MÓDOSÍTÁS VÉGE ---
-
 
 app.get('/api/admin/clear-users/:secret', async (req, res) => {
   const { secret } = req.params;
@@ -1536,6 +1605,84 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
   }
 });
 
+// HOZZÁADVA: Új végpont a Google bejelentkezés/regisztráció kezelésére
+app.post('/api/auth/google', async (req, res) => {
+    const { token, role = 'student' } = req.body;
+    const client = await pool.connect();
+    try {
+        const ticket = await googleClient.verifyIdToken({
+            idToken: token,
+            audience: GOOGLE_CLIENT_ID,
+        });
+        const payload = ticket.getPayload();
+        
+        const { email, name, sub: provider_id } = payload;
+
+        if (!email) {
+            return res.status(400).json({ success: false, message: 'A Google nem adta át az e-mail címedet.' });
+        }
+
+        await client.query('BEGIN');
+
+        let userResult = await client.query(
+            "SELECT * FROM users WHERE provider = 'google' AND provider_id = $1",
+            [provider_id]
+        );
+        let user = userResult.rows[0];
+
+        // Ha a felhasználó nem létezik, hozzuk létre
+        if (!user) {
+            // Ellenőrizzük, hogy létezik-e már felhasználó ezzel az e-mail címmel (de más providerrel)
+            const emailExists = await client.query("SELECT id FROM users WHERE email = $1", [email]);
+            if (emailExists.rows.length > 0) {
+                // Itt lehetne összekötni a fiókokat, de egyelőre hibát dobunk a bonyolultság elkerülése érdekében
+                throw new Error('Ez az e-mail cím már regisztrálva van. Kérjük, jelentkezz be a hagyományos módon.');
+            }
+
+            const password_hash = await bcrypt.hash(crypto.randomBytes(16).toString('hex'), 10); // Generálunk egy biztonságos, de nem használt jelszót
+            const referral_code = `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
+            
+            const newUserQuery = `
+                INSERT INTO users (real_name, username, email, role, provider, provider_id, password_hash, email_verified)
+                VALUES ($1, $2, $3, $4, 'google', $5, $6, true)
+                RETURNING *;
+            `;
+            const newUserResult = await client.query(newUserQuery, [name, name, email, role, provider_id, password_hash]);
+            user = newUserResult.rows[0];
+
+            // Ha tanárként regisztrál, automatikusan létrehozzuk a teachers bejegyzést is
+            if (role === 'teacher') {
+                await client.query('INSERT INTO teachers (user_id, is_approved) VALUES ($1, true)', [user.id]);
+            }
+        }
+
+        const jwtToken = jwt.sign({ userId: user.id, role: user.role }, process.env.SECRET_KEY, { expiresIn: '1d' });
+
+        await client.query('COMMIT');
+
+        res.status(200).json({
+            success: true,
+            token: jwtToken,
+            user: {
+                id: user.id,
+                username: user.username,
+                real_name: user.real_name,
+                email: user.email,
+                role: user.role,
+                referral_code: user.referral_code,
+                created_at: user.created_at,
+            },
+        });
+
+    } catch (err) {
+        await client.query('ROLLBACK');
+        console.error("Google authentikációs hiba:", err);
+        res.status(500).json({ success: false, message: err.message || 'Szerverhiba történt a Google azonosítás során.' });
+    } finally {
+        client.release();
+    }
+});
+
 app.post('/api/contact', authLimiter, async (req, res) => {
   const { name, email, subject, message } = req.body;
 
@@ -1555,12 +1702,10 @@ app.post('/api/contact', authLimiter, async (req, res) => {
         return res.status(500).json({ success: false, message: 'A szerver nincs megfelelően beállítva az üzenetek fogadására.' });
     }
 
-    // --- MÓDOSÍTÁS KEZDETE: Üzenet mentése adatbázisba ---
     await client.query(
         `INSERT INTO contact_messages (name, email, subject, message) VALUES ($1, $2, $3, $4)`,
         [name, email, subject, message]
     );
-    // --- MÓDOSÍTÁS VÉGE ---
 
     const adminMailOptions = {
       from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,

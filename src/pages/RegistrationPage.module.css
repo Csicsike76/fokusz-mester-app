@@ -1,12 +1,13 @@
+
 .pageContainer {
     padding: 4rem 2rem;
-    color: white; /* A szöveg fehér lesz a videó felett */
+    color: white;
 }
 
 .formContainer {
     max-width: 600px;
     margin: 0 auto;
-    background-color: rgba(44, 62, 80, 0.85); /* Áttetsző sötét háttér */
+    background-color: rgba(44, 62, 80, 0.85);
     padding: 2.5rem;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -16,6 +17,37 @@
 .formContainer h1 {
     text-align: center;
     margin-bottom: 2rem;
+}
+
+/* HOZZÁADVA: Stílusok a külső bejelentkezési gombokhoz és elválasztóhoz */
+.socialLoginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #bdc3c7;
+    margin: 1.5rem 0;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #7f8c8d;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
 }
 
 .formGroup {
@@ -81,7 +113,7 @@
 }
 
 .successMessage {
-    color: #2ecc71; /* Zöld szín a sikerhez */
+    color: #2ecc71;
     background-color: rgba(46, 204, 113, 0.1);
     padding: 0.75rem;
     border-radius: 5px;
@@ -90,7 +122,7 @@
 }
 
 .errorMessage {
-    color: #e74c3c; /* Piros szín a hibához */
+    color: #e74c3c;
     background-color: rgba(231, 76, 60, 0.1);
     padding: 0.75rem;
     border-radius: 5px;
@@ -98,7 +130,6 @@
     margin-bottom: 1.5rem;
 }
 
-/* Letiltott gomb stílusa */
 .submitButton:disabled {
     background-color: #95a5a6;
     cursor: not-allowed;
@@ -116,7 +147,6 @@
     margin-top: 0.5rem;
 }
 
-/* ÚJ STÍLUSOK A JELSZÓ VISSZAJELZÉSHEZ */
 .passwordCriteria {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -130,9 +160,9 @@
 }
 
 .invalid {
-    color: #e74c3c; /* Piros */
+    color: #e74c3c;
 }
 
 .valid {
-    color: #2ecc71; /* Zöld */
+    color: #2ecc71;
 }

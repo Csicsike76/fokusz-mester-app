@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect, useMemo, useCallback } from 'react';
+import { API_URL } from '../config/api'; // HOZZÁADVA
 
 const AuthContext = createContext(null);
 
@@ -41,9 +42,10 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = useCallback((userData, userToken) => {
-        localStorage.setItem('user', JSON.stringify(userData));
+        const userToStore = { ...userData, real_name: userData.real_name || userData.username };
+        localStorage.setItem('user', JSON.stringify(userToStore));
         localStorage.setItem('token', userToken);
-        setUser(userData);
+        setUser(userToStore);
         setToken(userToken);
         
         const subscribedFlag = userData?.is_subscribed || false;
@@ -59,9 +61,27 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
     
+    // HOZZÁADVA: Új függvény a Google bejelentkezés kezelésére
+    const handleGoogleLogin = useCallback(async (credentialResponse, role = 'student') => {
+        const response = await fetch(`${API_URL}/api/auth/google`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                token: credentialResponse.credential,
+                role: role // Regisztrációnál átadjuk a kiválasztott szerepkört
+            }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message || 'Sikertelen Google azonosítás.');
+        }
+        return data; // Visszaadja a { user, token } objektumot
+    }, []);
+
     const updateUser = useCallback((newUserData) => {
-        setUser(newUserData);
-        localStorage.setItem('user', JSON.stringify(newUserData));
+        const userToStore = { ...newUserData, real_name: newUserData.real_name || newUserData.username };
+        setUser(userToStore);
+        localStorage.setItem('user', JSON.stringify(userToStore));
 
         if (newUserData.created_at) {
             setRegistrationDate(new Date(newUserData.created_at));
@@ -121,7 +141,8 @@ export const AuthProvider = ({ children }) => {
         logout,
         updateUser,
         toggleTeacherMode,
-    }), [user, token, isSubscribed, isLoading, isTrialActive, canUsePremium, registrationDate, isTeacherMode, login, logout, updateUser, toggleTeacherMode]);
+        handleGoogleLogin, // HOZZÁADVA
+    }), [user, token, isSubscribed, isLoading, isTrialActive, canUsePremium, registrationDate, isTeacherMode, login, logout, updateUser, toggleTeacherMode, handleGoogleLogin]);
 
     if (isLoading) {
         return null;

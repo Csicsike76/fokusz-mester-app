@@ -33,7 +33,7 @@ const ProfilePage = () => {
             
             setProfileData(profileJson.user);
             updateUser(profileJson.user);
-            setNewUsername(profileJson.user.username);
+            setNewUsername(profileJson.user.real_name || profileJson.user.username); // MÓDOSÍTÁS: real_name használata
 
             const statsJson = await statsResponse.json();
             if (statsResponse.ok) setStatsData(statsJson.stats);
@@ -193,6 +193,8 @@ const ProfilePage = () => {
     const activeSubInfo = profileData.subscriptions?.find(s => s.status === 'active');
     const futureSubInfo = profileData.subscriptions?.find(s => s.status === 'trialing' && s.plan_id !== null);
 
+    const displayName = profileData.real_name || profileData.username; // MÓDOSÍTÁS: A megjelenítendő név
+
     return (
         <div className={styles.container}>
             <div className={styles.profileBox}>
@@ -202,16 +204,16 @@ const ProfilePage = () => {
 
                 <div className={styles.infoGrid}>
                     <div className={styles.infoItem}>
-                        <span className={styles.label}>Felhasználónév:</span>
+                        <span className={styles.label}>Név:</span>
                         {isEditingUsername ? (
                             <div className={styles.editView}>
                                 <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} />
                                 <button onClick={() => handleUpdateProfile({ username: newUsername })}>Mentés</button>
-                                <button className={styles.cancelButton} onClick={() => { setIsEditingUsername(false); setNewUsername(profileData.username); }}>Mégse</button>
+                                <button className={styles.cancelButton} onClick={() => { setIsEditingUsername(false); setNewUsername(displayName); }}>Mégse</button>
                             </div>
                         ) : (
                            <div className={styles.valueView}>
-                                <span className={styles.value}>{profileData.username}</span>
+                                <span className={styles.value}>{displayName}</span>
                                 <button onClick={() => setIsEditingUsername(true)}>Szerkeszt</button>
                            </div>
                         )}

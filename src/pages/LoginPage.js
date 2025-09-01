@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import styles from './LoginPage.module.css';
-import { API_URL } from '../config/api'; // JAVÍTÁS: A központi konfiguráció használata
+import { API_URL } from '../config/api';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'; // HOZZÁADVA
 
-const LoginPage = () => {
+const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
+const LoginPageContent = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     
-    const { login } = useAuth(); 
+    const { login, handleGoogleLogin } = useAuth(); // HOZZÁADVA: handleGoogleLogin
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Ha átirányításból érkezik, az üzenet megjelenítése
     const redirectMessage = location.state?.message;
 
     const handleChange = (e) => {
@@ -34,20 +36,30 @@ const LoginPage = () => {
             });
 
             const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || 'Sikertelen bejelentkezés.');
-            }
+            if (!response.ok) throw new Error(data.message || 'Sikertelen bejelentkezés.');
             
             login(data.user, data.token);
-
-            // Átirányítás oda, ahonnan a felhasználó jött, vagy a főoldalra
             const from = location.state?.from || '/';
             navigate(from, { replace: true });
 
         } catch (err) {
             setError(err.message);
-            console.error("Bejelentkezési hiba:", err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // HOZZÁADVA: Google bejelentkezés sikerességét kezelő függvény
+    const onGoogleSuccess = async (credentialResponse) => {
+        setIsLoading(true);
+        setError('');
+        try {
+            const { user, token } = await handleGoogleLogin(credentialResponse);
+            login(user, token);
+            const from = location.state?.from || '/';
+            navigate(from, { replace: true });
+        } catch (err) {
+            setError(err.message || 'Hiba a Google bejelentkezés során.');
         } finally {
             setIsLoading(false);
         }
@@ -58,6 +70,21 @@ const LoginPage = () => {
             <div className={styles.formContainer}>
                 <h1>Bejelentkezés</h1>
                 {redirectMessage && <p className={styles.infoMessage}>{redirectMessage}</p>}
+                
+                {/* HOZZÁADVA: Külső bejelentkezési lehetőségek */}
+                <div className={styles.socialLoginContainer}>
+                    {GOOGLE_CLIENT_ID && (
+                        <GoogleLogin
+                            onSuccess={onGoogleSuccess}
+                            onError={() => setError('Google bejelentkezési hiba.')}
+                            useOneTap
+                        />
+                    )}
+                    {/* Apple gomb helye */}
+                </div>
+
+                <div className={styles.separator}><span>VAGY</span></div>
+                
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
                         <label htmlFor="email">E-mail cím</label>
@@ -86,5 +113,12 @@ const LoginPage = () => {
         </div>
     );
 };
+
+// HOZZÁADVA: Provider a Google kliens ID-val
+const LoginPage = () => (
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+        <LoginPageContent />
+    </GoogleOAuthProvider>
+);
 
 export default LoginPage;

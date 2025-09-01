@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styles from './LessonView.module.css';
 import WorkshopContent from '../WorkshopContent/WorkshopContent';
+import { useAuth } from '../../context/AuthContext'; // HOZZÁADVA: AuthContext importálása
+import { API_URL } from '../../config/api'; // HOZZÁADVA: API URL importálása
 
 const LessonView = ({ lessonData }) => {
+    const { token, user } = useAuth(); // HOZZÁADVA: Token és user adatok lekérése
     const [tocOpen, setTocOpen] = useState(false);
     const [expandedChapters, setExpandedChapters] = useState({});
 
-    // Asztali nézetben alapból minden fejezetet kinyitunk
     useEffect(() => {
         if (window.innerWidth > 1024 && lessonData && lessonData.toc) {
             const allChapterIds = lessonData.toc.reduce((acc, chapter) => {
@@ -17,11 +19,34 @@ const LessonView = ({ lessonData }) => {
         }
     }, [lessonData]);
 
+    // HOZZÁADVA: useEffect a lecke megtekintésének rögzítésére
+    useEffect(() => {
+        const logLessonView = async () => {
+            // Csak bejelentkezett diákok esetén fusson le
+            if (token && user?.role === 'student' && lessonData?.slug) {
+                try {
+                    await fetch(`${API_URL}/api/lesson/viewed`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ slug: lessonData.slug })
+                    });
+                    console.log(`Lecke megtekintése rögzítve: ${lessonData.slug}`);
+                } catch (error) {
+                    console.error('Hiba a lecke megtekintésének rögzítésekor:', error);
+                }
+            }
+        };
+
+        logLessonView();
+    }, [token, user, lessonData?.slug]); // A függőségi lista biztosítja, hogy csak egyszer fusson le betöltéskor
+
     const handleAnchorClick = (e, id) => {
         e.preventDefault();
         const target = document.getElementById(id);
         if (target) {
-            // A 'start' helyett 'center' opcióval jobban látható lesz a tartalom a fix fejléc miatt
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             if (window.innerWidth <= 1024) {
                 setTocOpen(false);

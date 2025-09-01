@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './TeacherDashboardPage.module.css';
+import { Link } from 'react-router-dom'; // HOZZÁADVA: Link importálása
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
@@ -78,7 +79,7 @@ const TeacherDashboardPage = () => {
         <div className={styles.dashboardContainer}>
             <header className={styles.header}>
                 <h1>Tanári Irányítópult</h1>
-                <p>Üdvözlünk, {user?.username}!</p>
+                <p>Üdvözlünk, {user?.real_name || user?.username}!</p>
             </header>
             
             <div className={styles.content}>
@@ -92,13 +93,17 @@ const TeacherDashboardPage = () => {
                         <ul className={styles.classList}>
                             {myClasses.map(cls => (
                                 <li key={cls.id} className={styles.classItem}>
-                                    <div>
+                                    <div className={styles.classInfo}>
                                         <span className={styles.className}>{cls.class_name}</span>
                                         <span className={styles.studentCount}>
                                             {cls.student_count} / {cls.max_students} fő
                                         </span>
+                                        <span className={styles.classCode}>Kód: {cls.class_code}</span>
                                     </div>
-                                    <span className={styles.classCode}>Kód: {cls.class_code}</span>
+                                    {/* HOZZÁADVA: Gomb a diákok megtekintéséhez */}
+                                    <Link to={`/dashboard/teacher/class/${cls.id}`} className={styles.detailsButton}>
+                                        Részletek
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
