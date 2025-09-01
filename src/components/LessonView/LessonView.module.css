@@ -98,7 +98,8 @@
     display: none;
     position: fixed;
     top: 90px;
-    left: 1rem;
+    right: 1rem; /* JAVÍTÁS: Áthelyezve a jobb oldalra */
+    left: auto;   /* JAVÍTÁS: Bal oldali pozicionálás törlése */
     background-color: var(--accent-color);
     color: white;
     padding: 0.6rem 1rem;
@@ -106,7 +107,7 @@
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    z-index: 1001; /* JAVÍTÁS: Megemelt z-index, hogy a vezérlők felett legyen */
+    z-index: 1001;
 }
 
 .tocOverlay {
@@ -131,11 +132,11 @@
     .toc {
         position: fixed;
         top: 0;
-        left: 0;
+        left: 0; /* A becsúszó menü marad a bal oldalon */
         width: 80%;
         max-width: 320px;
         height: 100vh;
-        z-index: 999;
+        z-index: 1002; /* Magasabb z-index az overlay felett */
         overflow-y: auto;
         transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
