@@ -22,29 +22,31 @@ const WorkshopContent = ({ sections }) => {
 
   return (
     <div className={styles.workshopContainer}>
-      {sections.map((section, index) => (
-        <section key={index} className={styles.workshopSection}>
+      {sections.map((section) => (
+        <section key={section.id} id={section.id} className={styles.workshopSection}>
           <h2>{section.title}</h2>
 
-          {/* Dinamikus renderelés: tömb vagy HTML string kezelése */}
-          {section.content && (
+          {/* A `kepletek-5-osztaly.json` struktúrájának megfelelő renderelés */}
+          {section.content && Array.isArray(section.content) && (
             <div>
-              {Array.isArray(section.content) ? (
-                section.content.map((item, itemIndex) => (
-                  <div key={itemIndex} className={styles.taskCard}>
-                    <h3>{item.title}</h3>
-                    {item.htmlContent && (
-                      <div dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
-                    )}
-                  </div>
-                ))
-              ) : (
-                <div dangerouslySetInnerHTML={{ __html: section.content }} />
-              )}
+              {section.content.map((item) => (
+                <div key={item.id} id={item.id} className={styles.taskCard}>
+                  <h3>{item.title}</h3>
+                  {/* JAVÍTÁS: A JSON-ban `htmlContent` a helyes property név */}
+                  {item.htmlContent && (
+                    <div dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+                  )}
+                </div>
+              ))}
             </div>
           )}
+          
+          {/* Fallback egyéb, nem tömb `content` property-re */}
+          {section.content && !Array.isArray(section.content) && (
+             <div dangerouslySetInnerHTML={{ __html: section.content }} />
+          )}
 
-          {/* Eredeti tasks_section és prompts logika - nem kvízként jelenik meg */}
+          {/* Eredeti tasks_section és prompts logika */}
           {section.type === 'tasks_section' && section.tasks && (
             <div>
               {section.tasks.map((task, taskIndex) => (

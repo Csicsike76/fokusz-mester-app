@@ -1,12 +1,15 @@
+/* Fájl: src/components/LessonView/LessonView.module.css (MÓDOSÍTVA) */
+
 :root {
-    --bg-color: #f4f7f9;
-    --main-text-color: #333;
-    --nav-bg-color: #ffffff;
-    --nav-text-color: #4a5568;
-    --nav-hover-color: #2d3748;
-    --nav-border-color: #e2e8f0;
-    --header-color: #2c3e50;
-    --accent-color: #436F4D;
+    /* ÚJ, MODERN SZÍNSÉMA */
+    --bg-color: #2c3e50; /* Sötétkék háttér */
+    --main-text-color: #ecf0f1; /* Világos szöveg */
+    --nav-bg-color: rgba(23, 32, 42, 0.8); /* Áttetsző, sötétebb nav háttér */
+    --nav-text-color: #bdc3c7; /* Ezüstös szöveg */
+    --nav-hover-color: #ffffff; /* Fehér hover */
+    --nav-border-color: rgba(255, 255, 255, 0.1); /* Halvány szegély */
+    --header-color: #ffffff; /* Fehér címsorok */
+    --accent-color: #436F4D; /* Zöld, a gombokkal összhangban */
 }
 
 .container {
@@ -24,10 +27,11 @@
     background-color: var(--nav-bg-color);
     border-right: 1px solid var(--nav-border-color);
     padding: 2rem;
-    height: calc(100vh - 80px); /* Magasság a navbartól függően */
+    height: calc(100vh - 80px);
     position: sticky;
-    top: 80px; /* Navbar magassága */
+    top: 80px;
     overflow-y: auto;
+    backdrop-filter: blur(5px); /* Üveghatás */
 }
 
 .toc h2 {
@@ -47,12 +51,12 @@
 .toc ul li a:hover { color: var(--nav-hover-color); }
 
 .subList {
-    max-height: 0;
+    max-height: 1000px;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
 }
 .subList.expanded {
-    max-height: 500px; /* Várhatóan elég nagy érték */
+    max-height: 1000px; 
 }
 
 .expandButton {
@@ -68,9 +72,9 @@
     font-size: 1rem;
     line-height: 1;
     color: var(--nav-text-color);
-    display: none; /* Alapból rejtett, csak mobilon jelenik meg */
+    display: none; 
 }
-.expandButton:hover { background-color: var(--bg-color); }
+.expandButton:hover { background-color: rgba(255, 255, 255, 0.1); }
 
 .mainContent { 
     flex-grow: 1; 
@@ -88,7 +92,7 @@
     margin-bottom: 4rem;
 }
 
-.loadingError { padding: 2rem; text-align: center; font-style: italic; color: #777; }
+.loadingError { padding: 2rem; text-align: center; font-style: italic; color: #bdc3c7; }
 
 .tocToggle {
     display: none;
@@ -146,14 +150,10 @@
     .mainContent { 
         padding: 2rem 1rem; 
         width: 100%;
-        padding-top: 5rem; /* Hely a lebegő hamburger gombnak */
+        padding-top: 5rem;
     }
-    .expandButton { display: block; } /* Csak mobilon mutatjuk a +/- gombot */
-    .subList { /* Mobilon alapból csukva vannak az almenük */
+    .expandButton { display: block; }
+    .subList:not(.expanded) {
         max-height: 0;
-        overflow: hidden;
-    }
-    .subList.expanded {
-        max-height: 500px; /* Kinyitáskor megnő a magassága */
     }
 }

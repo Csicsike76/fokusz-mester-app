@@ -14,8 +14,8 @@ import MultiChoicePromptGenerator from '../components/MultiChoicePromptGenerator
 import ExamSimulatorTool from '../components/ExamSimulatorTool/ExamSimulatorTool';
 import MultiInputPromptGenerator from '../components/MultiInputPromptGenerator/MultiInputPromptGenerator';
 import HubPageTool from '../components/HubPageTool/HubPageTool';
+import LessonView from '../components/LessonView/LessonView';
 
-const LessonView = ({ title, toc, sections }) => ( <div className={styles.lessonContainer}> <nav className={styles.lessonToc}> <h2>Tartalomjegyzék</h2> <ul> {toc.map(chapter => ( <li key={chapter.id}> <a href={`#${chapter.id}`}>{chapter.title}</a> {chapter.subheadings && chapter.subheadings.length > 0 && ( <ul> {chapter.subheadings.map(sub => ( <li key={sub.id}><a href={`#${sub.id}`}>{sub.title}</a></li> ))} </ul> )} </li> ))} </ul> </nav> <main className={styles.lessonMainContent}> <h1>{title}</h1> <WorkshopContent sections={sections} /> </main> </div> );
 const CharacterSelectionView = ({ contentData, onSelectCharacter }) => ( <div className={styles.characterSelection}> <h2 className={styles.mainTitle}>{contentData.title}</h2> <p className={styles.subTitle}>{contentData.description}</p> <div className={styles.characterGrid}> {Object.keys(contentData.characters).map(key => { const character = contentData.characters[key]; return ( <div key={key} className={styles.characterCard} style={{ backgroundColor: character.color }}> <img src={character.imageUrl || '/images/default-avatar.png'} alt={character.name} className={styles.characterImage} /> <h3 className={styles.characterName}>{character.name}</h3> <p className={styles.characterTitle}>{character.title}</p> <p className={styles.characterQuote}>"{character.quote}"</p> <button className={styles.characterButton} onClick={() => onSelectCharacter(key)}> Beszélgetek {character.name}-val → </button> </div> ); })} </div> </div> );
 const GenericToolView = ({ contentData }) => ( <div className={styles.genericToolContainer}> <h1 className={styles.mainTitle}>{contentData.title}</h1> <p className={styles.subTitle}>{contentData.description}</p> <div className={styles.workInProgress}> <p>Ismeretlen adatformátum.</p> </div> </div> );
 
@@ -212,7 +212,7 @@ const ContentPage = () => {
     const data = contentData;
 
     if (data.toc) {
-      componentToRender = <LessonView title={data.title} toc={data.toc} sections={data.questions} />;
+      componentToRender = <LessonView lessonData={data} />;
       isLessonLayout = true;
     } else {
         const toolType = data.toolData?.type;

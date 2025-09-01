@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './LessonView.module.css';
 import WorkshopContent from '../WorkshopContent/WorkshopContent';
 
@@ -6,10 +6,22 @@ const LessonView = ({ lessonData }) => {
     const [tocOpen, setTocOpen] = useState(false);
     const [expandedChapters, setExpandedChapters] = useState({});
 
+    // Asztali nézetben alapból minden fejezetet kinyitunk
+    useEffect(() => {
+        if (window.innerWidth > 1024 && lessonData && lessonData.toc) {
+            const allChapterIds = lessonData.toc.reduce((acc, chapter) => {
+                acc[chapter.id] = true;
+                return acc;
+            }, {});
+            setExpandedChapters(allChapterIds);
+        }
+    }, [lessonData]);
+
     const handleAnchorClick = (e, id) => {
         e.preventDefault();
         const target = document.getElementById(id);
         if (target) {
+            // A 'start' helyett 'center' opcióval jobban látható lesz a tartalom a fix fejléc miatt
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             if (window.innerWidth <= 1024) {
                 setTocOpen(false);
@@ -86,12 +98,7 @@ const LessonView = ({ lessonData }) => {
 
             <main className={styles.mainContent}>
                 <h1>{lessonData.title}</h1>
-                {lessonData.questions.map((section) => (
-                    <section key={section.id} id={section.id} className={styles.contentSection}>
-                        <h2>{section.title}</h2>
-                        <WorkshopContent sections={section.content} />
-                    </section>
-                ))}
+                <WorkshopContent sections={lessonData.questions} />
             </main>
         </div>
     );

@@ -1,145 +1,112 @@
-/* Fájl: src/components/WorkshopContent/WorkshopContent.module.css (JAVÍTOTT) */
-
 :root {
-    --text-color: #333;
-    --header-color: #2c3e50;
-    --background-color: #ffffff;
-    --card-background: #f9f9f9;
-    --card-border: #e0e0e0;
-    --prompt-background: #f0f4f8;
-    --button-background: #436F4D; /* Zöld */
-    --button-hover-background: #D52B1E; /* Piros */
-}
 
+--text-color: #ecf0f1; 
+--header-color: #ffffff; 
+--background-color: transparent;
+--card-background: rgba(23, 32, 42, 0.7);
+--card-border: rgba(255, 255, 255, 0.15); 
+--prompt-background: #1C2833; 
+--button-background: #436F4D; 
+--button-hover-background: #D52B1E; 
+}
 .workshopContainer {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem;
-    font-family: 'Georgia', serif;
-    line-height: 1.7;
-    color: var(--text-color);
-    background-color: var(--background-color);
+max-width: 900px;
+margin: 0 auto;
+padding: 0; /* A padding már a kártyákon van */
+font-family: 'Georgia', serif;
+line-height: 1.7;
+color: var(--text-color);
+background-color: var(--background-color);
 }
-
 .workshopSection {
-    margin-bottom: 3rem;
-    border-bottom: 1px solid var(--card-border);
-    padding-bottom: 2rem;
+margin-bottom: 3rem;
+border-bottom: 1px solid var(--card-border);
+padding-bottom: 2rem;
 }
-
 .workshopSection:last-of-type {
-    border-bottom: none;
+border-bottom: none;
 }
-
 .workshopSection h2 {
-    font-size: 2rem;
-    color: var(--header-color);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--header-color);
+font-size: 2rem;
+color: var(--header-color);
+margin-bottom: 1.5rem;
+padding-bottom: 0.5rem;
+border-bottom: 2px solid var(--header-color);
 }
-
 .taskCard {
-    background-color: var(--card-background);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    padding: 1.5rem 2rem;
-    margin-top: 2rem;
+background-color: var(--card-background);
+border: 1px solid var(--card-border);
+border-radius: 12px;
+padding: 1.5rem 2rem;
+margin-top: 2rem;
+backdrop-filter: blur(5px); /* Üveghatás */
 }
-
 .taskCard h3 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: var(--header-color);
+margin-top: 0;
+font-size: 1.5rem;
+color: var(--header-color);
 }
-
 /* Stílus a quiz-button-hoz */
 :global(a.quiz-button) {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    margin-top: 1rem;
-    background-color: var(--button-background);
-    color: white !important;
-    text-decoration: none;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
+display: inline-block;
+padding: 0.8rem 1.5rem;
+margin-top: 1rem;
+background-color: var(--button-background);
+color: white !important;
+text-decoration: none;
+border: none;
+border-radius: 8px;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s ease;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+text-align: center;
 }
-
 :global(a.quiz-button:hover) {
-    background-color: var(--button-hover-background);
-    box-shadow: 0 6px 12px rgba(213, 43, 30, 0.2);
-    transform: translateY(-2px);
+background-color: var(--button-hover-background);
+box-shadow: 0 6px 12px rgba(213, 43, 30, 0.2);
+transform: translateY(-2px);
 }
-/* Általános bekezdések és listák formázása */
 .workshopSection div p,
 .workshopSection div li {
-    margin-bottom: 1rem;
+margin-bottom: 1rem;
 }
-
 .workshopSection div ul {
-    list-style-type: disc;
-    padding-left: 25px;
+list-style-type: disc;
+padding-left: 25px;
 }
-
 .workshopSection div strong {
-    font-weight: bold;
+font-weight: bold;
 }
-
-/* Feladat kártyák (taskCard) stílusa */
-.taskCard {
-    background-color: var(--card-background);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    padding: 1.5rem 2rem;
-    margin-top: 2rem;
-}
-
-.taskCard h3 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: var(--header-color);
-}
-
-/* Prompt dobozok stílusa */
 .promptContainer {
-    margin-top: 1.5rem;
+margin-top: 1.5rem;
 }
-
 .promptExample {
-    background-color: var(--prompt-background);
-    border-left: 4px solid var(--button-background);
-    padding: 1rem;
-    border-radius: 4px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1rem;
-    line-height: 1.5;
+background-color: var(--prompt-background);
+border-left: 4px solid var(--button-background);
+padding: 1rem;
+border-radius: 4px;
+white-space: pre-wrap;
+word-wrap: break-word;
+font-family: 'Courier New', Courier, monospace;
+font-size: 1rem;
+line-height: 1.5;
 }
-
-/* Másolás gomb stílusa */
 .copyButton {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.6rem 1.2rem;
-    background-color: var(--button-background);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s;
+display: inline-block;
+margin-top: 1rem;
+padding: 0.6rem 1.2rem;
+background-color: var(--button-background);
+color: white;
+border: none;
+border-radius: 5px;
+font-weight: bold;
+cursor: pointer;
+transition: background-color 0.2s;
 }
-
 .copyButton:hover {
-    background-color: var(--button-hover-background);
+background-color: var(--button-hover-background);
 }
-
 .copyButton:active {
-    transform: scale(0.98);
+transform: scale(0.98);
 }
