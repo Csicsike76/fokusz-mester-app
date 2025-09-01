@@ -1605,79 +1605,117 @@ app.get('/api/admin/clear-users/:secret', async (req, res) => {
   }
 });
 
-// HOZZÁADVA: Új végpont a Google bejelentkezés/regisztráció kezelésére
-app.post('/api/auth/google', async (req, res) => {
-    const { token, role = 'student' } = req.body;
-    const client = await pool.connect();
+app.post('/api/auth/google/verify', async (req, res) => {
+    const { token } = req.body;
     try {
         const ticket = await googleClient.verifyIdToken({
             idToken: token,
             audience: GOOGLE_CLIENT_ID,
         });
         const payload = ticket.getPayload();
-        
         const { email, name, sub: provider_id } = payload;
 
         if (!email) {
             return res.status(400).json({ success: false, message: 'A Google nem adta át az e-mail címedet.' });
         }
 
+        const userExists = await pool.query("SELECT id FROM users WHERE (provider = 'google' AND provider_id = $1) OR email = $2", [provider_id, email]);
+        if (userExists.rows.length > 0) {
+            throw new Error('Ezzel a Google fiókkal vagy e-mail címmel már regisztráltak. Kérjük, jelentkezz be.');
+        }
+
+        res.status(200).json({ success: true, name, email, provider_id });
+
+    } catch (err) {
+        console.error("Google token-ellenőrzési hiba:", err);
+        res.status(400).json({ success: false, message: err.message || 'Szerverhiba történt a Google azonosítás során.' });
+    }
+});
+
+// 2. LÉPÉS: Regisztráció befejezése a Google adatokkal és a kiegészítő űrlap adatokkal
+app.post('/api/register/google', async (req, res) => {
+    const {
+        email, name, provider_id, role,
+        parental_email, classCode, vipCode, referralCode, specialCode
+    } = req.body;
+
+    if (!email || !name || !provider_id || !role) {
+        return res.status(400).json({ success: false, message: 'Hiányzó alapvető regisztrációs adatok.' });
+    }
+
+    const client = await pool.connect();
+    try {
         await client.query('BEGIN');
 
-        let userResult = await client.query(
-            "SELECT * FROM users WHERE provider = 'google' AND provider_id = $1",
-            [provider_id]
-        );
-        let user = userResult.rows[0];
+        // Duplikáció ellenőrzése újra, a biztonság kedvéért
+        const userExists = await client.query("SELECT id FROM users WHERE email = $1", [email]);
+        if (userExists.rows.length > 0) throw new Error('Ez az e-mail cím már regisztrálva van.');
 
-        // Ha a felhasználó nem létezik, hozzuk létre
-        if (!user) {
-            // Ellenőrizzük, hogy létezik-e már felhasználó ezzel az e-mail címmel (de más providerrel)
-            const emailExists = await client.query("SELECT id FROM users WHERE email = $1", [email]);
-            if (emailExists.rows.length > 0) {
-                // Itt lehetne összekötni a fiókokat, de egyelőre hibát dobunk a bonyolultság elkerülése érdekében
-                throw new Error('Ez az e-mail cím már regisztrálva van. Kérjük, jelentkezz be a hagyományos módon.');
-            }
+        // Itt ugyanazok az ellenőrzések kellenek, mint a normál regisztrációnál
+        let classId = null;
+        if (role === 'student' && classCode) {
+            const classResult = await client.query('SELECT id, max_students FROM classes WHERE class_code = $1 AND is_active = true', [classCode]);
+            if (classResult.rows.length === 0) throw new Error('Érvénytelen osztálykód.');
+            classId = classResult.rows[0].id;
+        }
+        
+        let isPermanentFree = false;
+        if (specialCode && specialCode === process.env.SPECIAL_ACCESS_CODE) {
+            isPermanentFree = true;
+        }
 
-            const password_hash = await bcrypt.hash(crypto.randomBytes(16).toString('hex'), 10); // Generálunk egy biztonságos, de nem használt jelszót
-            const referral_code = `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
-            
-            const newUserQuery = `
-                INSERT INTO users (real_name, username, email, role, provider, provider_id, password_hash, email_verified)
-                VALUES ($1, $2, $3, $4, 'google', $5, $6, true)
-                RETURNING *;
-            `;
-            const newUserResult = await client.query(newUserQuery, [name, name, email, role, provider_id, password_hash]);
-            user = newUserResult.rows[0];
+        const password_hash = await bcrypt.hash(crypto.randomBytes(16).toString('hex'), 10);
+        const referralCodeNew = `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
 
-            // Ha tanárként regisztrál, automatikusan létrehozzuk a teachers bejegyzést is
-            if (role === 'teacher') {
-                await client.query('INSERT INTO teachers (user_id, is_approved) VALUES ($1, true)', [user.id]);
-            }
+        const insertUserQuery = `
+            INSERT INTO users (username, real_name, email, parental_email, password_hash, role, referral_code, provider, provider_id, email_verified, is_permanent_free)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, 'google', $8, true, $9)
+            RETURNING *;
+        `;
+        const newUserResult = await client.query(insertUserQuery, [
+            name, name, email, parental_email || null, password_hash, role, referralCodeNew, provider_id, isPermanentFree
+        ]);
+        const user = newUserResult.rows[0];
+
+        if (role === 'teacher') {
+            await client.query('INSERT INTO teachers (user_id, is_approved, vip_code) VALUES ($1, false, $2)', [user.id, vipCode || null]);
+            // Itt is mehetne az admin értesítő, mint a normál regisztrációnál...
+        }
+
+        if (role === 'student' && classId) {
+            await client.query('INSERT INTO classmemberships (user_id, class_id) VALUES ($1, $2)', [user.id, classId]);
+        }
+        
+        let referrerId = null;
+        if (referralCode) {
+          const referrerResult = await client.query('SELECT id FROM users WHERE referral_code = $1', [referralCode]);
+          if (referrerResult.rows.length > 0) {
+              referrerId = referrerResult.rows[0].id;
+              await client.query('INSERT INTO referrals (referrer_user_id, referred_user_id) VALUES ($1, $2)', [referrerId, user.id]);
+          }
+        }
+        
+        // Mivel Google regisztráció, automatikusan jár a próbaidőszak
+        if (role !== 'teacher' && !isPermanentFree) {
+            await client.query(
+                `INSERT INTO subscriptions (user_id, status, current_period_start, current_period_end, payment_provider)
+                 VALUES ($1, 'trialing', NOW(), NOW() + INTERVAL '30 days', 'system') ON CONFLICT (user_id) DO NOTHING;`,
+                [user.id]
+            );
         }
 
         const jwtToken = jwt.sign({ userId: user.id, role: user.role }, process.env.SECRET_KEY, { expiresIn: '1d' });
 
         await client.query('COMMIT');
+        
+        const fullUserProfile = await getFullUserProfile(user.id);
 
-        res.status(200).json({
-            success: true,
-            token: jwtToken,
-            user: {
-                id: user.id,
-                username: user.username,
-                real_name: user.real_name,
-                email: user.email,
-                role: user.role,
-                referral_code: user.referral_code,
-                created_at: user.created_at,
-            },
-        });
+        res.status(200).json({ success: true, token: jwtToken, user: fullUserProfile });
 
     } catch (err) {
         await client.query('ROLLBACK');
-        console.error("Google authentikációs hiba:", err);
-        res.status(500).json({ success: false, message: err.message || 'Szerverhiba történt a Google azonosítás során.' });
+        console.error("Google regisztráció befejezési hiba:", err);
+        res.status(400).json({ success: false, message: err.message || 'Szerverhiba történt.' });
     } finally {
         client.release();
     }

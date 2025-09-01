@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import styles from './RegistrationPage.module.css';
-import { useAuth } from '../context/AuthContext'; // HOZZÁADVA
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'; // HOZZÁADVA
+import { useAuth } from '../context/AuthContext';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
@@ -17,6 +17,8 @@ const RegistrationPageContent = () => {
         parental_email: '',
     });
     
+    const [googleData, setGoogleData] = useState(null); // HOZZÁADVA: A Google-től kapott adatok tárolása
+
     const [passwordCriteria, setPasswordCriteria] = useState({
         minLength: false, hasLowercase: false, hasUppercase: false, hasNumber: false, hasSymbol: false,
     });
@@ -27,27 +29,29 @@ const RegistrationPageContent = () => {
     const [recaptchaToken, setRecaptchaToken] = useState(null);
     const recaptchaRef = useRef();
     
-    const { login, handleGoogleLogin } = useAuth(); // HOZZÁADVA
-    const navigate = useNavigate(); // HOZZÁADVA
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (formData.password) {
-            setPasswordCriteria({
-                minLength: formData.password.length >= 8,
-                hasLowercase: /[a-z]/.test(formData.password),
-                hasUppercase: /[A-Z]/.test(formData.password),
-                hasNumber: /[0-9]/.test(formData.password),
-                hasSymbol: /[^A-Za-z0-9]/.test(formData.password),
-            });
-        } else {
-             setPasswordCriteria({ minLength: false, hasLowercase: false, hasUppercase: false, hasNumber: false, hasSymbol: false });
+        if (!googleData) { // Jelszó ellenőrzés csak hagyományos regisztrációnál
+            if (formData.password) {
+                setPasswordCriteria({
+                    minLength: formData.password.length >= 8,
+                    hasLowercase: /[a-z]/.test(formData.password),
+                    hasUppercase: /[A-Z]/.test(formData.password),
+                    hasNumber: /[0-9]/.test(formData.password),
+                    hasSymbol: /[^A-Za-z0-9]/.test(formData.password),
+                });
+            } else {
+                 setPasswordCriteria({ minLength: false, hasLowercase: false, hasUppercase: false, hasNumber: false, hasSymbol: false });
+            }
+            if (formData.passwordConfirm && formData.password !== formData.passwordConfirm) {
+                setPasswordMatchError("A két jelszó nem egyezik!");
+            } else {
+                setPasswordMatchError('');
+            }
         }
-        if (formData.passwordConfirm && formData.password !== formData.passwordConfirm) {
-            setPasswordMatchError("A két jelszó nem egyezik!");
-        } else {
-            setPasswordMatchError('');
-        }
-    }, [formData.password, formData.passwordConfirm]);
+    }, [formData.password, formData.passwordConfirm, googleData]);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -56,76 +60,110 @@ const RegistrationPageContent = () => {
 
     const handleRoleChange = (e) => { setRole(e.target.value); };
 
+    const handleGoogleIdentify = async (credentialResponse) => {
+        setIsLoading(true);
+        setError('');
+        try {
+            const response = await fetch(`${API_URL}/api/auth/google/verify`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token: credentialResponse.credential }),
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message);
+            
+            setGoogleData(data); // Elmentjük a Google adatokat (név, email, provider_id)
+            setFormData(prev => ({ ...prev, username: data.name, email: data.email })); // Kitöltjük az űrlapot
+        } catch (err) {
+            setError(err.message || "Hiba a Google fiók azonosítása során.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setMessage('');
-        const allCriteriaMet = Object.values(passwordCriteria).every(Boolean);
-        if (!allCriteriaMet) { setError("A jelszó nem felel meg a biztonsági követelményeknek."); return; }
-        if (passwordMatchError) { setError(passwordMatchError); return; }
-        if (!formData.termsAccepted) { setError("El kell fogadnod a felhasználási feltételeket!"); return; }
-        if (!recaptchaToken) { setError("Kérjük, igazolja, hogy nem robot."); return; }
         setIsLoading(true);
-        const registrationData = { ...formData, recaptchaToken, role: role };
-        try {
-            const response = await fetch(`${API_URL}/api/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(registrationData),
-            });
-            const data = await response.json();
-            if (!response.ok) { throw new Error(data.message || 'Ismeretlen hiba történt.'); }
-            setMessage(data.message);
-            setFormData({
-                username: '', email: '', password: '', passwordConfirm: '',
-                vipCode: '', referralCode: '', classCode: '', specialCode: '', termsAccepted: false,
-                parental_email: '',
-            });
-            setRole('student');
-            setRecaptchaToken(null);
-            if(recaptchaRef.current) recaptchaRef.current.reset();
-        } catch (err) {
-            setError(err.message);
-            if(recaptchaRef.current) recaptchaRef.current.reset();
-        } finally {
-            setIsLoading(false);
-        }
-    };
-    
-    const onGoogleSuccess = async (credentialResponse) => {
-        setIsLoading(true);
-        setError('');
-        try {
-            const { user, token } = await handleGoogleLogin(credentialResponse, role); // HOZZÁADVA: role átadása
-            login(user, token);
-            navigate('/');
-        } catch (err) {
-            setError(err.message || 'Hiba a Google regisztráció során.');
-        } finally {
-            setIsLoading(false);
+
+        if (googleData) { // Kétlépcsős Google regisztráció befejezése
+            const registrationData = { ...formData, role, ...googleData };
+            try {
+                const response = await fetch(`${API_URL}/api/register/google`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(registrationData),
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message);
+                login(data.user, data.token);
+                navigate('/profil'); // Vagy a főoldalra
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setIsLoading(false);
+            }
+
+        } else { // Hagyományos e-mail/jelszó regisztráció
+            const allCriteriaMet = Object.values(passwordCriteria).every(Boolean);
+            if (!allCriteriaMet) { setError("A jelszó nem felel meg a biztonsági követelményeknek."); setIsLoading(false); return; }
+            if (passwordMatchError) { setError(passwordMatchError); setIsLoading(false); return; }
+            if (!formData.termsAccepted) { setError("El kell fogadnod a felhasználási feltételeket!"); setIsLoading(false); return; }
+            if (!recaptchaToken) { setError("Kérjük, igazolja, hogy nem robot."); setIsLoading(false); return; }
+            
+            const registrationData = { ...formData, recaptchaToken, role };
+            try {
+                const response = await fetch(`${API_URL}/api/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(registrationData),
+                });
+                const data = await response.json();
+                if (!response.ok) { throw new Error(data.message || 'Ismeretlen hiba történt.'); }
+                setMessage(data.message);
+                setFormData({
+                    username: '', email: '', password: '', passwordConfirm: '',
+                    vipCode: '', referralCode: '', classCode: '', specialCode: '', termsAccepted: false,
+                    parental_email: '',
+                });
+                setRole('student');
+                setRecaptchaToken(null);
+                if(recaptchaRef.current) recaptchaRef.current.reset();
+            } catch (err) {
+                setError(err.message);
+                if(recaptchaRef.current) recaptchaRef.current.reset();
+            } finally {
+                setIsLoading(false);
+            }
         }
     };
     
     const allCriteriaMet = Object.values(passwordCriteria).every(Boolean);
-    const isSubmitDisabled = isLoading || !allCriteriaMet || !!passwordMatchError || !formData.termsAccepted || !recaptchaToken;
+    const isSubmitDisabled = isLoading || (!googleData && (!allCriteriaMet || !!passwordMatchError || !formData.termsAccepted || !recaptchaToken));
 
     return (
         <div className={styles.pageContainer}>
             <div className={styles.formContainer}>
                 <h1>Regisztráció</h1>
                 
-                 {/* HOZZÁADVA: Külső bejelentkezési lehetőségek */}
-                 <div className={styles.socialLoginContainer}>
-                    {GOOGLE_CLIENT_ID && (
-                        <GoogleLogin
-                            onSuccess={onGoogleSuccess}
-                            onError={() => setError('Google regisztrációs hiba.')}
-                        />
-                    )}
-                </div>
-                <div className={styles.separator}><span>VAGY</span></div>
+                {!googleData && (
+                    <>
+                        <div className={styles.socialLoginContainer}>
+                            {GOOGLE_CLIENT_ID && (
+                                <GoogleLogin
+                                    onSuccess={handleGoogleIdentify}
+                                    onError={() => setError('Google regisztrációs hiba.')}
+                                    text="signup_with"
+                                />
+                            )}
+                        </div>
+                        <div className={styles.separator}><span>VAGY</span></div>
+                    </>
+                )}
 
                 <form onSubmit={handleSubmit}>
+                    {googleData && <p className={styles.infoMessage}>Kérjük, add meg a regisztráció befejezéséhez szükséges további adatokat!</p>}
                     <div className={styles.formGroup}>
                         <label>Szerepkör kiválasztása:</label>
                         <div className={styles.roleSelection}>
@@ -135,11 +173,11 @@ const RegistrationPageContent = () => {
                     </div>
                     <div className={styles.formGroup}>
                         <label htmlFor="username">{role === 'student' ? 'Teljes Név' : 'Felhasználónév'}</label>
-                        <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required />
+                        <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required disabled={!!googleData} />
                     </div>
                     <div className={styles.formGroup}>
                         <label htmlFor="email">E-mail cím</label>
-                        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required disabled={!!googleData} />
                     </div>
                     {role === 'student' && (
                         <div className={styles.formGroup}>
@@ -147,29 +185,33 @@ const RegistrationPageContent = () => {
                             <input type="email" id="parental_email" name="parental_email" value={formData.parental_email} onChange={handleChange} />
                         </div>
                     )}
-                    <div className={styles.formGroup}>
-                        <label htmlFor="password">Jelszó</label>
-                        <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
-                        {formData.password && (
-                            <div className={styles.passwordCriteria}>
-                                <div className={passwordCriteria.minLength ? styles.valid : styles.invalid}>✓ Legalább 8 karakter</div>
-                                <div className={passwordCriteria.hasLowercase ? styles.valid : styles.invalid}>✓ Legalább egy kisbetű</div>
-                                <div className={passwordCriteria.hasUppercase ? styles.valid : styles.invalid}>✓ Legalább egy nagybetű</div>
-                                <div className={passwordCriteria.hasNumber ? styles.valid : styles.invalid}>✓ Legalább egy szám</div>
-                                <div className={passwordCriteria.hasSymbol ? styles.valid : styles.invalid}>✓ Legalább egy szimbólum</div>
+                    {!googleData && (
+                        <>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="password">Jelszó</label>
+                                <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
+                                {formData.password && (
+                                    <div className={styles.passwordCriteria}>
+                                        <div className={passwordCriteria.minLength ? styles.valid : styles.invalid}>✓ Legalább 8 karakter</div>
+                                        <div className={passwordCriteria.hasLowercase ? styles.valid : styles.invalid}>✓ Legalább egy kisbetű</div>
+                                        <div className={passwordCriteria.hasUppercase ? styles.valid : styles.invalid}>✓ Legalább egy nagybetű</div>
+                                        <div className={passwordCriteria.hasNumber ? styles.valid : styles.invalid}>✓ Legalább egy szám</div>
+                                        <div className={passwordCriteria.hasSymbol ? styles.valid : styles.invalid}>✓ Legalább egy szimbólum</div>
+                                    </div>
+                                )}
                             </div>
-                        )}
-                    </div>
-                    <div className={styles.formGroup}>
-                        <label htmlFor="passwordConfirm">Jelszó megerősítése</label>
-                        <input type="password" id="passwordConfirm" name="passwordConfirm" value={formData.passwordConfirm} onChange={handleChange} required />
-                        {passwordMatchError && formData.passwordConfirm && <p className={styles.fieldErrorMessage}>{passwordMatchError}</p>}
-                    </div>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="passwordConfirm">Jelszó megerősítése</label>
+                                <input type="password" id="passwordConfirm" name="passwordConfirm" value={formData.passwordConfirm} onChange={handleChange} required />
+                                {passwordMatchError && formData.passwordConfirm && <p className={styles.fieldErrorMessage}>{passwordMatchError}</p>}
+                            </div>
+                        </>
+                    )}
                     
                     {role === 'teacher' && (
                         <div className={`${styles.formGroup} ${styles.conditionalField}`}>
                             <label htmlFor="vipCode">VIP kód (csak tanároknak)</label>
-                            <input type="text" id="vipCode" name="vipCode" value={formData.vipCode} onChange={handleChange} required />
+                            <input type="text" id="vipCode" name="vipCode" value={formData.vipCode} onChange={handleChange} />
                         </div>
                     )}
                     {role === 'student' && (
@@ -191,7 +233,7 @@ const RegistrationPageContent = () => {
                         <label htmlFor="termsAccepted">Elfogadom az Általános Szerződési Feltételeket</label>
                     </div>
 
-                    {RECAPTCHA_SITE_KEY && (
+                    {!googleData && RECAPTCHA_SITE_KEY && (
                       <div className={styles.recaptchaContainer}>
                           <ReCAPTCHA
                               ref={recaptchaRef}
@@ -206,7 +248,7 @@ const RegistrationPageContent = () => {
                     {error && <p className={styles.errorMessage}>{error}</p>}
 
                     <button type="submit" className={styles.submitButton} disabled={isSubmitDisabled}>
-                        {isLoading ? 'Regisztrálás...' : 'Regisztrálás'}
+                        {isLoading ? 'Folyamatban...' : (googleData ? 'Regisztráció Befejezése' : 'Regisztrálás')}
                     </button>
                 </form>
             </div>

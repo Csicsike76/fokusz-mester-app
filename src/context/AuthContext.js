@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect, useMemo, useCallback } from 'react';
-import { API_URL } from '../config/api'; // HOZZÁADVA
+import { API_URL } from '../config/api';
 
 const AuthContext = createContext(null);
 
@@ -61,21 +61,19 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
     
-    // HOZZÁADVA: Új függvény a Google bejelentkezés kezelésére
-    const handleGoogleLogin = useCallback(async (credentialResponse, role = 'student') => {
+    const handleGoogleLogin = useCallback(async (credentialResponse) => {
         const response = await fetch(`${API_URL}/api/auth/google`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 token: credentialResponse.credential,
-                role: role // Regisztrációnál átadjuk a kiválasztott szerepkört
             }),
         });
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message || 'Sikertelen Google azonosítás.');
         }
-        return data; // Visszaadja a { user, token } objektumot
+        return data;
     }, []);
 
     const updateUser = useCallback((newUserData) => {
@@ -141,7 +139,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         updateUser,
         toggleTeacherMode,
-        handleGoogleLogin, // HOZZÁADVA
+        handleGoogleLogin,
     }), [user, token, isSubscribed, isLoading, isTrialActive, canUsePremium, registrationDate, isTeacherMode, login, logout, updateUser, toggleTeacherMode, handleGoogleLogin]);
 
     if (isLoading) {
