@@ -818,6 +818,32 @@ const getFullUserProfile = async (userId) => {
     return userProfile;
 };
 
+app.get('/api/profile/recommendations', authenticateToken, async (req, res) => {
+    const userId = req.user.userId;
+    const threshold = 80;
+
+    try {
+        const query = `
+            SELECT DISTINCT ON (sp.quiz_slug)
+                sp.quiz_slug,
+                sp.score_percentage,
+                c.title
+            FROM student_progress sp
+            JOIN curriculums c ON sp.quiz_slug = c.slug
+            WHERE sp.user_id = $1
+              AND sp.activity_type = 'quiz_completed'
+              AND sp.score_percentage < $2
+            ORDER BY sp.quiz_slug, sp.completed_at DESC;
+        `;
+        const { rows } = await pool.query(query, [userId, threshold]);
+
+        res.status(200).json({ success: true, recommendations: rows });
+    } catch (error) {
+        console.error("Ajánlások lekérdezési hiba:", error);
+        res.status(500).json({ success: false, message: 'Szerverhiba történt az ajánlások lekérdezésekor.' });
+    }
+});
+
 app.get('/api/profile', authenticateToken, async (req, res) => {
     try {
         const userProfile = await getFullUserProfile(req.user.userId);
@@ -899,7 +925,7 @@ app.get('/api/profile/stats', authenticateToken, async (req, res) => {
     const userId = req.user.userId;
     try {
         const completedLessonsResult = await pool.query(
-            'SELECT COUNT(*) FROM user_quiz_results WHERE user_id = $1',
+            'SELECT COUNT(DISTINCT lesson_slug) FROM student_progress WHERE user_id = $1 AND activity_type = \'lesson_viewed\'',
             [userId]
         );
         const completed_lessons_count = parseInt(completedLessonsResult.rows[0].count, 10);
@@ -917,9 +943,9 @@ app.get('/api/profile/stats', authenticateToken, async (req, res) => {
 
         const mostPracticedSubjectsResult = await pool.query(
             `SELECT c.subject, COUNT(c.subject) as lesson_count
-             FROM user_quiz_results uqr
-             JOIN curriculums c ON uqr.curriculum_id = c.id
-             WHERE uqr.user_id = $1 AND c.subject IS NOT NULL
+             FROM student_progress sp
+             JOIN curriculums c ON sp.quiz_slug = c.slug
+             WHERE sp.user_id = $1 AND c.subject IS NOT NULL
              GROUP BY c.subject
              ORDER BY lesson_count DESC
              LIMIT 3`,
@@ -1492,7 +1518,7 @@ app.post('/api/lesson/viewed', authenticateToken, async (req, res) => {
     }
     try {
         await pool.query(
-            `INSERT INTO student_progress (student_id, activity_type, lesson_slug, started_at)
+            `INSERT INTO student_progress (user_id, activity_type, lesson_slug, started_at)
              VALUES ($1, 'lesson_viewed', $2, NOW())`,
             [userId, slug]
         );

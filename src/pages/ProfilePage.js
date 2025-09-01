@@ -2,11 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './ProfilePage.module.css';
 import { API_URL } from '../config/api';
+import { Link } from 'react-router-dom';
 
 const ProfilePage = () => {
     const { user, token, logout, updateUser, isTeacherMode, toggleTeacherMode } = useAuth();
     const [profileData, setProfileData] = useState(null);
     const [statsData, setStatsData] = useState(null);
+    const [recommendations, setRecommendations] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
@@ -22,21 +24,33 @@ const ProfilePage = () => {
 
     const fetchAllData = useCallback(async () => {
         if (!token) return null;
-        try {
-            const [profileResponse, statsResponse] = await Promise.all([
-                fetch(`${API_URL}/api/profile`, { headers: { 'Authorization': `Bearer ${token}` } }),
-                fetch(`${API_URL}/api/profile/stats`, { headers: { 'Authorization': `Bearer ${token}` } })
-            ]);
+        
+        const apiCalls = [
+            fetch(`${API_URL}/api/profile`, { headers: { 'Authorization': `Bearer ${token}` } }),
+            fetch(`${API_URL}/api/profile/stats`, { headers: { 'Authorization': `Bearer ${token}` } })
+        ];
 
-            const profileJson = await profileResponse.json();
-            if (!profileResponse.ok) throw new Error(profileJson.message || 'Hiba a profil betöltésekor.');
+        if (user?.role === 'student') {
+            apiCalls.push(fetch(`${API_URL}/api/profile/recommendations`, { headers: { 'Authorization': `Bearer ${token}` } }));
+        }
+
+        try {
+            const responses = await Promise.all(apiCalls);
+    
+            const profileJson = await responses[0].json();
+            if (!responses[0].ok) throw new Error(profileJson.message || 'Hiba a profil betöltésekor.');
             
             setProfileData(profileJson.user);
             updateUser(profileJson.user);
-            setNewUsername(profileJson.user.real_name || profileJson.user.username); // MÓDOSÍTÁS: real_name használata
+            setNewUsername(profileJson.user.real_name || profileJson.user.username);
+    
+            const statsJson = await responses[1].json();
+            if (responses[1].ok) setStatsData(statsJson.stats);
 
-            const statsJson = await statsResponse.json();
-            if (statsResponse.ok) setStatsData(statsJson.stats);
+            if (user?.role === 'student' && responses[2]) {
+                const recsJson = await responses[2].json();
+                if (responses[2].ok) setRecommendations(recsJson.recommendations);
+            }
             
             return profileJson.user;
         } catch (err) {
@@ -44,7 +58,7 @@ const ProfilePage = () => {
             if (err.message.includes('Érvénytelen vagy lejárt token')) logout();
             return null;
         }
-    }, [token, logout, updateUser]);
+    }, [token, user?.role, logout, updateUser]);
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -193,7 +207,7 @@ const ProfilePage = () => {
     const activeSubInfo = profileData.subscriptions?.find(s => s.status === 'active');
     const futureSubInfo = profileData.subscriptions?.find(s => s.status === 'trialing' && s.plan_id !== null);
 
-    const displayName = profileData.real_name || profileData.username; // MÓDOSÍTÁS: A megjelenítendő név
+    const displayName = profileData.real_name || profileData.username;
 
     return (
         <div className={styles.container}>
@@ -241,6 +255,28 @@ const ProfilePage = () => {
 
                 <hr className={styles.divider} />
                 
+                {user?.role === 'student' && (
+                    <>
+                        <div className={styles.section}>
+                            <h3>Javasolt Gyakorlás</h3>
+                            {recommendations.length > 0 ? (
+                                <ul className={styles.recommendationList}>
+                                    {recommendations.map(rec => (
+                                        <li key={rec.quiz_slug}>
+                                            <Link to={`/tananyag/${rec.quiz_slug}`}>
+                                                {rec.title} <span>(Legutóbbi eredmény: {parseFloat(rec.score_percentage).toFixed(0)}%)</span>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p>Remek munka! Jelenleg nincs olyan témakör, ami ismétlésre szorulna.</p>
+                            )}
+                        </div>
+                        <hr className={styles.divider} />
+                    </>
+                )}
+
                 <div className={styles.section}>
                     <h3>Tanulási Statisztikák</h3>
                     {!statsData ? <p>Statisztikák betöltése...</p> : (
