@@ -12,9 +12,9 @@ const validator = require('validator');
 const { rateLimit, ipKeyGenerator } = require('express-rate-limit');
 const axios = require('axios');
 const cron = require('node-cron');
-const { OAuth2Client } = require('google-auth-library'); // HOZZÁADVA
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID; // HOZZÁADVA
-const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID); // HOZZÁADVA
+const { OAuth2Client } = require('google-auth-library');
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
 
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
@@ -1546,7 +1546,7 @@ app.get('/api/teacher/student/:studentId/progress', authenticateToken, authorize
                    c.title AS curriculum_title
             FROM student_progress sp
             LEFT JOIN curriculums c ON sp.quiz_slug = c.slug OR sp.lesson_slug = c.slug
-            WHERE sp.student_id = $1
+            WHERE sp.user_id = $1
             ORDER BY sp.completed_at DESC, sp.started_at DESC;
         `;
         const { rows } = await pool.query(query, [studentId]);
