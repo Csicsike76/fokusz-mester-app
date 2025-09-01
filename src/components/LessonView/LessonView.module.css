@@ -106,7 +106,7 @@
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 1001; /* JAVÍTÁS: Megemelt z-index, hogy a vezérlők felett legyen */
 }
 
 .tocOverlay {
