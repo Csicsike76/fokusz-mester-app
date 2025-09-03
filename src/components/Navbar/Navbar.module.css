@@ -6,7 +6,7 @@
   --text-dim: #d8e3ea;
   --link-hover: #1abc9c;
   --shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
-  --notification-yellow: #ffd166; /* JAVÍTÁS: Új sárga színváltozó */
+  --notification-yellow: #ffd166;
 }
 
 .navbar {
@@ -16,13 +16,15 @@
   height: var(--navbar-height);
   display: flex;
   align-items: center;
-  justify-content: space-between; 
-  gap: 24px;
   padding: 0 20px;
   background: var(--nav-bg);
   border-bottom: 1px solid var(--nav-border);
   backdrop-filter: blur(6px);
   box-shadow: var(--shadow);
+}
+
+.logo {
+  flex-shrink: 0; /* Megakadályozza, hogy a logó összenyomódjon */
 }
 
 .logo a {
@@ -37,12 +39,18 @@
   color: var(--link-hover);
 }
 
+.navLinksContainer {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
 .navLinks {
   display: flex;
   align-items: center;
   gap: 18px;
 }
-.navLinks a {
+.navLinks a, .dropdown .navLink {
   color: var(--text-dim);
   text-decoration: none;
   font-weight: 600;
@@ -51,7 +59,7 @@
   transition: color .15s ease, background-color .15s ease;
   white-space: nowrap;
 }
-.navLinks a:hover {
+.navLinks a:hover, .dropdown .navLink:hover {
   color: var(--text);
   background: rgba(255,255,255,0.06);
 }
@@ -63,6 +71,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  flex-shrink: 0; /* Megakadályozza, hogy ez a rész összenyomódjon */
 }
 
 .authLinks {
@@ -79,12 +88,14 @@
   font-size: 28px;
   cursor: pointer;
   z-index: 1100;
+  order: 3; /* A hamburger gomb mindig a jobb szélre kerül */
 }
 
 .welcomeUser {
   color: #ecf0f1;
   font-weight: 600;
   margin-right: 10px;
+  white-space: nowrap;
 }
 
 .loginButton, .logoutButton, .authButton {
@@ -102,6 +113,7 @@
   font-family: inherit;
   font-size: 0.9rem;
   transition: background-color 0.2s;
+  white-space: nowrap;
 }
 
 .loginButton:hover, .logoutButton:hover, .authButton:hover {
@@ -116,7 +128,6 @@
   filter: brightness(1.05);
 }
 
-/* --- JAVÍTÁS KEZDETE: Értesítési rendszer stílusai --- */
 .notificationContainer {
   position: relative;
   display: flex;
@@ -127,7 +138,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--notification-yellow); /* JAVÍTÁS: Sárga szín */
+  color: var(--notification-yellow);
   font-size: 1.2rem;
   position: relative;
   padding: 5px;
@@ -137,7 +148,7 @@
   position: absolute;
   top: -2px;
   right: -2px;
-  background-color: #e74c3c; /* Piros jelzés */
+  background-color: #e74c3c;
   color: white;
   border-radius: 50%;
   padding: 2px 5px;
@@ -147,17 +158,17 @@
 
 .notificationPanel {
   position: absolute;
-  top: 120%; /* A gomb alá pozícionáljuk */
+  top: 120%;
   right: 0;
   width: 320px;
   max-height: 400px;
   overflow-y: auto;
-  background-color: #2c3e50; /* Sötétkék háttér */
+  background-color: #2c3e50;
   border: 1px solid var(--nav-border);
   border-radius: 8px;
   box-shadow: var(--shadow);
   z-index: 1200;
-  color: var(--text-dim); /* JAVÍTÁS: Jobban látható szövegszín */
+  color: var(--text-dim);
 }
 
 .notificationItem {
@@ -182,66 +193,13 @@
 }
 
 .notificationItem small {
-  color: #95a5a6; /* Halványabb szürke a dátumhoz */
+  color: #95a5a6;
   font-size: 0.75rem;
 }
 
 .notificationItem.unread {
-  background-color: rgba(52, 152, 219, 0.15); /* Enyhe kék háttér az olvasatlan üzeneteknek */
+  background-color: rgba(52, 152, 219, 0.15);
 }
-/* --- JAVÍTÁS VÉGE --- */
-
-
-@media (max-width: 900px) {
-  :root {
-    --navbar-height: 64px;
-  }
-  .navbar {
-    padding: 0 15px;
-  }
-
-  .navLinks {
-    position: absolute;
-    top: var(--navbar-height);
-    left: 0;
-    width: 100%;
-    background-color: var(--nav-bg);
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--nav-border);
-    transform: translateY(-150%);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .navLinks.open {
-    transform: translateY(0);
-  }
-
-  .hamburger {
-    display: block;
-  }
-  
-  .rightSide .searchWrapper {
-     display: none;
-  }
-
-  .logo a {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 480px) {
-  .loginButton, .logoutButton, .authButton {
-    font-size: 0.8rem;
-    padding: 6px 10px;
-  }
-  .welcomeUser {
-    display: none;
-  }
-}
-
-/* === EZT A RÉSZT ADD HOZZÁ A MEGLÉVŐ NAVBAR.MODULE.CSS VÉGÉHEZ === */
 
 .dropdown {
     position: relative;
@@ -252,9 +210,9 @@
     cursor: pointer;
     background: none;
     border: none;
-    padding: 1rem;
+    padding: 8px 10px;
     font-size: 1rem;
-    color: #e0e0e0;
+    color: var(--text-dim);
     font-family: inherit;
 }
 
@@ -285,27 +243,126 @@
     display: block;
 }
 
-/* Reszponzív nézet a lenyíló menühöz */
-@media (max-width: 992px) {
-    .dropdown {
-        display: block;
-        width: 100%;
-        text-align: left;
-    }
+@media (max-width: 1200px) {
+  .welcomeUser {
+    display: none;
+  }
+}
 
-    .dropdown .navLink {
-        width: 100%;
-        text-align: left;
-    }
+@media (max-width: 1080px) {
+  .navLinksContainer {
+    display: none;
+  }
 
-    .dropdownContent {
-        position: static;
-        box-shadow: none;
-        background-color: #1f1f1f; /* Esetleg kissé más háttér a jobb elkülönülésért */
-        padding-left: 20px;
-    }
+  .navLinks {
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+    width: 100%;
+    background-color: var(--nav-bg);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    border-bottom: 1px solid var(--nav-border);
+    transform: translateY(-150%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .navLinks.open {
+    transform: translateY(0);
+  }
+  
+  .navbar {
+    justify-content: space-between;
+  }
 
-    .dropdown:hover .dropdownContent {
-        display: block; /* Vagy `flex` ha a belső elemek flexboxot használnak */
+  .hamburger {
+    display: block;
+  }
+    
+  .dropdown {
+      display: block;
+      width: 100%;
+      text-align: left;
+  }
+
+  .dropdown .navLink {
+      width: 100%;
+      text-align: left;
+  }
+
+  .dropdownContent {
+      position: static;
+      box-shadow: none;
+      background-color: #1f1f1f;
+      padding-left: 20px;
+      display: none; /* Alapból rejtett */
+  }
+
+  .dropdown:hover .dropdownContent {
+      display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .loginButton, .logoutButton, .authButton {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+}
+
+/* Üdvözlő felhasználó stílusai */
+.welcomeUserContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: default; /* jelzi, hogy interaktív */
+}
+
+.welcomeUserText {
+    color: #ecf0f1;
+    font-weight: 600;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.userIcon {
+    display: none; /* Alapból rejtett az ikon */
+    color: #ecf0f1;
+    font-size: 1.5rem;
+}
+
+/* Tooltip stílus */
+.welcomeUserContainer::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #34495e;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 10;
+}
+
+.welcomeUserContainer:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Reszponzív viselkedés a felhasználónév elrejtéséhez */
+@media (max-width: 768px) {
+    .welcomeUserText {
+        display: none; /* Kisebb képernyőn elrejtjük a szöveget */
+    }
+    .userIcon {
+        display: block; /* És megjelenítjük az ikont */
     }
 }

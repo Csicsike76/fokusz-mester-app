@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Link IMPORTÁLÁSA
+import { useNavigate, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import styles from './RegistrationPage.module.css';
 import { useAuth } from '../context/AuthContext';

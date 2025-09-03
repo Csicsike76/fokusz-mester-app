@@ -10,7 +10,6 @@ const Layout = () => (
     <BackgroundVideo />
     <Navbar />
     <UiControls />
-    {/* JAVÍTÁS: Hozzáadunk egy className-t a main elemhez */}
     <main className="main-content">
       <Outlet />
     </main>

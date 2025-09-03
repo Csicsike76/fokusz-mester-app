@@ -4,7 +4,7 @@ import styles from './UiControls.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useThemeMode } from '../../hooks/useThemeMode';
 import { useThemeZoom } from '../../hooks/useThemeZoom';
-import PomodoroTimer from './PomodoroTimer'; // VÉGLEGES JAVÍTÁS: Helyes útvonal ugyanabban a mappában
+import PomodoroTimer from './PomodoroTimer';
 
 const UiControls = () => {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ const UiControls = () => {
   return (
     <>
       <div className={styles.wrapper} aria-label="Felhasználói vezérlők">
-        {/* 0) Főoldal gomb */}
         <div className={styles.group}>
           <button
             type="button"
@@ -28,7 +27,6 @@ const UiControls = () => {
           </button>
         </div>
 
-        {/* 1) Téma váltó */}
         <div className={styles.group}>
           <button
             type="button"
@@ -46,14 +44,12 @@ const UiControls = () => {
           </button>
         </div>
 
-        {/* 2) Nagyítás */}
         <div className={styles.group} aria-label="Nagyítás vezérlő">
           <button type="button" onClick={dec} className={styles.roundBtn} title="Kicsinyítés">−</button>
           <div className={styles.pillSmall}>{zoom}%</div>
           <button type="button" onClick={inc} className={styles.roundBtn} title="Nagyítás">+</button>
         </div>
 
-        {/* 3) Pomodoro Timer Gomb */}
         <div className={styles.group}>
           <button
             type="button"

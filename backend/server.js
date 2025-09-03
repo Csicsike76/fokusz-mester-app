@@ -249,21 +249,21 @@ const authenticateToken = async (req, res, next) => {
       return res.status(403).json({ success: false, message: 'Érvénytelen token formátum.' });
     }
 
-    const userResult = await pool.query('SELECT active_session_id FROM users WHERE id = $1', [userId]);
+    const userResult = await pool.query('SELECT active_session_id, role FROM users WHERE id = $1', [userId]);
     if (userResult.rows.length === 0) {
       return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
     }
+    
+    const { active_session_id, role } = userResult.rows[0];
 
-    const activeSessionId = userResult.rows[0].active_session_id;
-
-    if (activeSessionId !== sessionId) {
+    if (active_session_id !== sessionId) {
       return res.status(401).json({
         success: false,
         message: 'A munkamenet lejárt, valószínűleg egy másik eszközről jelentkeztek be. Kérjük, jelentkezzen be újra.'
       });
     }
 
-    req.user = decoded;
+    req.user = { ...decoded, role }; 
     next();
   } catch (err) {
     if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
@@ -513,8 +513,15 @@ app.post('/api/register', authLimiter, async (req, res) => {
   try {
     await client.query('BEGIN');
 
-    const userExists = await client.query('SELECT id FROM users WHERE email = $1', [email]);
-    if (userExists.rows.length > 0) throw new Error('Ez az e-mail cím már regisztrálva van.');
+    const emailExists = await client.query('SELECT id FROM users WHERE email = $1', [email]);
+    if (emailExists.rows.length > 0) {
+        throw new Error('Ez az e-mail cím már regisztrálva van.');
+    }
+
+    const usernameExists = await client.query('SELECT id FROM users WHERE username = $1', [username]);
+    if (usernameExists.rows.length > 0) {
+        throw new Error('Ez a felhasználónév már foglalt. Kérjük, válassz másikat.');
+    }
 
     let referrerId = null;
     if (referralCode) {
@@ -525,10 +532,10 @@ app.post('/api/register', authLimiter, async (req, res) => {
       if (referrerResult.rows.length > 0) referrerId = referrerResult.rows[0].id;
     }
 
-    if (role === 'teacher') {
-      if (process.env.VIP_CODE && vipCode !== process.env.VIP_CODE && !isPermanentFree) {
-        throw new Error('Érvénytelen VIP kód.');
-      }
+    if (role === 'teacher' && !isPermanentFree) {
+        if (!vipCode || vipCode.trim() === '' || vipCode !== process.env.VIP_CODE) {
+            throw new Error('Érvénytelen vagy hiányzó VIP kód a tanári regisztrációhoz.');
+        }
     }
 
     let classId = null;
@@ -551,7 +558,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
 
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
-    const verificationExpires = new Date(Date.now() + 24 * 3600000); // 24 óra
+    const verificationExpires = new Date(Date.now() + 24 * 3600000); 
     const referralCodeNew =
       role === 'student' ? `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}` : null;
 
@@ -562,7 +569,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
     `;
     const newUserResult = await client.query(insertUserQuery, [
       username,
-      username, // real_name is set to username
+      username,
       email,
       parental_email || null,
       passwordHash,
@@ -589,23 +596,21 @@ app.post('/api/register', authLimiter, async (req, res) => {
         'INSERT INTO teachers (user_id, vip_code) VALUES ($1,$2)',
         [newUserId, vipCode || null]
       );
-      const teacherIsApprovedResult = await client.query('SELECT is_approved from teachers where user_id=$1', [newUserId]);
-      if(!teacherIsApprovedResult.rows[0].is_approved) {
+      
+      const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
+      if (adminRecipient) {
         const backendUrl = process.env.BACKEND_URL;
         if (!backendUrl) {
-            console.error('FATAL: BACKEND_URL environment variable is not set. Cannot generate teacher approval link.');
-            throw new Error('Server configuration error: The approval link cannot be generated.');
+            console.error('FATAL: BACKEND_URL environment variable is not set.');
+            throw new Error('Szerver konfigurációs hiba: A jóváhagyó link nem generálható.');
         }
         const approvalUrl = `${backendUrl}/api/admin/approve-teacher-by-link/${newUserId}?secret=${process.env.ADMIN_SECRET}`;
-        const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER || '';
-        if (adminRecipient) {
-          await transporter.sendMail({
-            from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
-            to: adminRecipient,
-            subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
-            html: `<p>Új tanár: ${username} (${email})</p><p><a href="${approvalUrl}">Jóváhagyás</a></p>`,
-          });
-        }
+        await transporter.sendMail({
+          from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+          to: adminRecipient,
+          subject: 'Új Tanári Regisztráció Jóváhagyásra Vár!',
+          html: `<p>Új tanár regisztrált: ${username} (${email}).</p><p>A fiók jóváhagyásához, kérjük, kattintson az alábbi linkre:</p><p><a href="${approvalUrl}">Tanári Fiók Jóváhagyása</a></p>`,
+        });
       }
     }
 
@@ -616,21 +621,19 @@ app.post('/api/register', authLimiter, async (req, res) => {
       ]);
     }
     
-    if (!isPermanentFree) {
-        const baseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-        const verificationUrl = `${baseUrl}/verify-email/${verificationToken}`;
-        await transporter.sendMail({
-          from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
-          to: email,
-          subject: 'Erősítsd meg az e-mail címedet!',
-          html: `<p>Kérjük, kattints a linkre a megerősítéshez: <a href="${verificationUrl}">Megerősítés</a></p><p>A link 24 óráig érvényes.</p>`,
-        });
-    }
+    const baseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+    const verificationUrl = `${baseUrl}/verify-email/${verificationToken}`;
+    await transporter.sendMail({
+      from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
+      to: email,
+      subject: 'Erősítsd meg az e-mail címedet a Fókusz Mesteren!',
+      html: `<p>Kedves ${username}!</p><p>Köszönjük a regisztrációdat. Kérjük, kattints a linkre a fiókod aktiválásához: <a href="${verificationUrl}">Fiók Aktiválása</a></p><p>A link 24 óráig érvényes.</p>`,
+    });
 
     await client.query('COMMIT');
     res.status(201).json({
       success: true,
-      message: 'Sikeres regisztráció! Kérjük, ellenőrizd az e-mail fiókodat a további teendőkért.',
+      message: 'Sikeres regisztráció! Kérjük, ellenőrizd az e-mail fiókodat a megerősítő linkért.',
       user: { id: newUserId, created_at: registrationDate },
     });
   } catch (err) {
@@ -783,12 +786,12 @@ app.post('/api/login', authLimiter, async (req, res) => {
     
     const newSessionId = crypto.randomBytes(32).toString('hex');
     await pool.query(
-        'UPDATE users SET active_session_id = $1 WHERE id = $2',
+        'UPDATE users SET active_session_id = $1, last_seen = NOW() WHERE id = $2',
         [newSessionId, user.id]
     );
 
     const token = jwt.sign(
-      { userId: user.id, role: user.role, sessionId: newSessionId },
+      { userId: user.id, sessionId: newSessionId },
       process.env.SECRET_KEY,
       { expiresIn: '1d' }
     );
@@ -815,7 +818,7 @@ const getFullUserProfile = async (userId) => {
     const userQuery = `
         SELECT
             u.id, u.username, u.real_name, u.email, u.role, u.referral_code, u.created_at,
-            u.profile_metadata, u.is_permanent_free
+            u.profile_metadata, u.is_permanent_free, u.avatar_url, u.xp, u.last_seen
         FROM users u
         WHERE u.id = $1;
     `;
@@ -926,8 +929,8 @@ app.put('/api/profile', authenticateToken, async (req, res) => {
     }
     try {
         await pool.query(
-            'UPDATE users SET username = $1, real_name = $1 WHERE id = $2', 
-            [username.trim(), userId]
+            'UPDATE users SET username = $1, real_name = $2 WHERE id = $3', 
+            [username.trim(), username.trim(), userId]
         );
         
         const updatedUserProfile = await getFullUserProfile(userId);

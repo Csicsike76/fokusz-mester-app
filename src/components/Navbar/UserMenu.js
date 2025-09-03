@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Navbar.module.css';
-import { FaBell } from 'react-icons/fa';
-import { API_URL } from '../../config/api'; // JAVÍTÁS: A központi konfiguráció használata
+import { FaBell, FaUserCircle } from 'react-icons/fa'; // FaUserCircle importálása
+import { API_URL } from '../../config/api';
 
 const UserMenu = () => {
     const { user, logout, token } = useAuth();
@@ -62,9 +62,16 @@ const UserMenu = () => {
         );
     }
 
+    // A felhasználó nevének rövidítése, ha túl hosszú
+    const displayName = user.username.length > 10 ? `${user.username.substring(0, 8)}...` : user.username;
+
     return (
         <>
-            <span className={styles.welcomeUser}>Üdv, {user.username}!</span>
+            {/* A span-t egy div-be tesszük, amihez hozzáadjuk a tooltip-et */}
+            <div className={styles.welcomeUserContainer} data-tooltip={`Üdv, ${user.username}!`}>
+                <span className={styles.welcomeUserText}>{displayName}</span>
+                <FaUserCircle className={styles.userIcon} />
+            </div>
             
             <div className={styles.notificationContainer}>
                 <button onClick={handleBellClick} className={styles.notificationBell}>

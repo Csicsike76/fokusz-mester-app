@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Search.module.css';
 import { useAuth } from '../../context/AuthContext';
-import { API_URL } from '../../config/api'; // JAVÍTVA: Importálás a központi konfigurációból (ellenőrizd az elérési utat!)
+import { API_URL } from '../../config/api';
+import { FaSearch } from 'react-icons/fa'; // Ikon importálása
 
 const Search = () => {
     const { token } = useAuth();
@@ -10,6 +11,7 @@ const Search = () => {
     const [results, setResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [showResults, setShowResults] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false); // Új állapot az ikonizált nézethez
     const searchRef = useRef(null);
 
     useEffect(() => {
@@ -56,6 +58,7 @@ const Search = () => {
         const handleClickOutside = (event) => {
             if (searchRef.current && !searchRef.current.contains(event.target)) {
                 setShowResults(false);
+                setIsExpanded(false); // Ikonizált nézet visszaállítása
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
@@ -69,13 +72,20 @@ const Search = () => {
     };
 
     return (
-        <div className={styles.searchContainer} ref={searchRef}>
+        <div className={`${styles.searchContainer} ${isExpanded ? styles.expanded : ''}`} ref={searchRef}>
+            <button className={styles.searchIcon} onClick={() => setIsExpanded(true)}>
+                <FaSearch />
+            </button>
             <input
                 type="text"
+                className={styles.searchInput}
                 placeholder="Keress a tananyagban..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                onFocus={() => searchTerm.length > 0 && setShowResults(true)}
+                onFocus={() => {
+                    setShowResults(true);
+                    setIsExpanded(true);
+                }}
             />
             {showResults && (
                 <div className={styles.resultsDropdown}>
@@ -87,7 +97,11 @@ const Search = () => {
                                 to={getLinkPath(item)} 
                                 key={item.slug} 
                                 className={styles.resultItem}
-                                onClick={() => setShowResults(false)}
+                                onClick={() => {
+                                    setShowResults(false);
+                                    setIsExpanded(false);
+                                    setSearchTerm('');
+                                }}
                             >
                                 {item.title}
                             </Link>

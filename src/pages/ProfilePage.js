@@ -224,29 +224,31 @@ const ProfilePage = () => {
         if (profileData.is_member_of_approved_class && !activeSubInfo && !futureSubInfo) {
             return <p className={styles.statusInfo}>Prémium hozzáférésed egy osztálytagságon keresztül aktív.</p>;
         }
-        if (activeSubInfo) {
+        
+        if (activeSubInfo || futureSubInfo) {
             return (
                 <>
-                    <p className={styles.activeSubscription}>
-                        Előfizetésed aktív. {activeSubInfo.current_period_end && `A jelenlegi időszak vége: ${new Date(activeSubInfo.current_period_end).toLocaleDateString()}`}
-                    </p>
-                    <button onClick={handleManageSubscription} className={styles.manageButton} disabled={isLoading}>Előfizetés kezelése</button>
-                </>
-            );
-        }
-        if (trialInfo || futureSubInfo) {
-            return (
-                <>
-                    {trialInfo && (
-                        <div className={styles.trialHighlightBox}>
-                            <p><strong>Ingyenes próbaidőszakod aktív.</strong> {trialInfo.current_period_end && `A prémium funkciók eddig érhetőek el: ${new Date(trialInfo.current_period_end).toLocaleDateString()}`}</p>
-                        </div>
+                    {activeSubInfo && (
+                         <p className={styles.activeSubscription}>
+                            Előfizetésed aktív. {activeSubInfo.current_period_end && `A jelenlegi időszak vége: ${new Date(activeSubInfo.current_period_end).toLocaleDateString()}`}
+                        </p>
                     )}
                     {futureSubInfo && (
                         <div className={styles.futureSubscriptionInfo}>
                             <p>Már megvásároltad a(z) <strong>{futureSubInfo.plan_name?.toLowerCase()}</strong> előfizetést. Ez automatikusan elindul, amint a próbaidőszak lejár.</p>
                         </div>
                     )}
+                    <button onClick={handleManageSubscription} className={styles.manageButton} disabled={isLoading}>Előfizetés kezelése</button>
+                </>
+            );
+        }
+
+        if (trialInfo) {
+            return (
+                <>
+                    <div className={styles.trialHighlightBox}>
+                        <p><strong>Ingyenes próbaidőszakod aktív.</strong> {trialInfo.current_period_end && `A prémium funkciók eddig érhetőek el: ${new Date(trialInfo.current_period_end).toLocaleDateString()}`}</p>
+                    </div>
                     {!futureSubInfo && (
                         <div className={styles.subscribeOptions}>
                             <h4>Válts teljes előfizetésre a próbaidőszak lejárta előtt!</h4>
@@ -257,6 +259,7 @@ const ProfilePage = () => {
                 </>
             );
         }
+
         return (
             <>
                 <p className={styles.statusInfo}>Jelenleg nincs aktív előfizetésed vagy próbaidőszakod.</p>
