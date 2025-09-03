@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Link IMPORTÁLÁSA
 import ReCAPTCHA from 'react-google-recaptcha';
 import styles from './RegistrationPage.module.css';
 import { useAuth } from '../context/AuthContext';
@@ -17,7 +17,7 @@ const RegistrationPageContent = () => {
         parental_email: '',
     });
     
-    const [googleData, setGoogleData] = useState(null); // HOZZÁADVA: A Google-től kapott adatok tárolása
+    const [googleData, setGoogleData] = useState(null);
 
     const [passwordCriteria, setPasswordCriteria] = useState({
         minLength: false, hasLowercase: false, hasUppercase: false, hasNumber: false, hasSymbol: false,
@@ -33,7 +33,7 @@ const RegistrationPageContent = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!googleData) { // Jelszó ellenőrzés csak hagyományos regisztrációnál
+        if (!googleData) {
             if (formData.password) {
                 setPasswordCriteria({
                     minLength: formData.password.length >= 8,
@@ -72,8 +72,8 @@ const RegistrationPageContent = () => {
             const data = await response.json();
             if (!response.ok) throw new Error(data.message);
             
-            setGoogleData(data); // Elmentjük a Google adatokat (név, email, provider_id)
-            setFormData(prev => ({ ...prev, username: data.name, email: data.email })); // Kitöltjük az űrlapot
+            setGoogleData(data);
+            setFormData(prev => ({ ...prev, username: data.name, email: data.email }));
         } catch (err) {
             setError(err.message || "Hiba a Google fiók azonosítása során.");
         } finally {
@@ -87,7 +87,7 @@ const RegistrationPageContent = () => {
         setMessage('');
         setIsLoading(true);
 
-        if (googleData) { // Kétlépcsős Google regisztráció befejezése
+        if (googleData) {
             const registrationData = { ...formData, role, ...googleData };
             try {
                 const response = await fetch(`${API_URL}/api/register/google`, {
@@ -98,14 +98,14 @@ const RegistrationPageContent = () => {
                 const data = await response.json();
                 if (!response.ok) throw new Error(data.message);
                 login(data.user, data.token);
-                navigate('/profil'); // Vagy a főoldalra
+                navigate('/profil');
             } catch (err) {
                 setError(err.message);
             } finally {
                 setIsLoading(false);
             }
 
-        } else { // Hagyományos e-mail/jelszó regisztráció
+        } else {
             const allCriteriaMet = Object.values(passwordCriteria).every(Boolean);
             if (!allCriteriaMet) { setError("A jelszó nem felel meg a biztonsági követelményeknek."); setIsLoading(false); return; }
             if (passwordMatchError) { setError(passwordMatchError); setIsLoading(false); return; }
@@ -230,7 +230,9 @@ const RegistrationPageContent = () => {
                     </div>
                     <div className={`${styles.formGroup} ${styles.checkboxGroup}`}>
                         <input type="checkbox" id="termsAccepted" name="termsAccepted" checked={formData.termsAccepted} onChange={handleChange} />
-                        <label htmlFor="termsAccepted">Elfogadom az Általános Szerződési Feltételeket</label>
+                        <label htmlFor="termsAccepted">
+                            Elfogadom az <Link to="/aszf" target="_blank">Általános Szerződési Feltételeket</Link> és az <Link to="/adatkezeles" target="_blank">Adatkezelési Tájékoztatót</Link>.
+                        </label>
                     </div>
 
                     {!googleData && RECAPTCHA_SITE_KEY && (

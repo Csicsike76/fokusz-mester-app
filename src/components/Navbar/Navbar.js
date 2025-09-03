@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { useNav } from '../../hooks/useNav';
-import ConditionalLink from '../ConditionalLink/ConditionalLink';
 import UserMenu from './UserMenu';
 import Search from '../Search/Search';
 
@@ -37,6 +36,15 @@ const Navbar = () => {
                     </NavLink>
                 ))}
                 <NavLink to="/kapcsolat" className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink} onClick={() => setIsMenuOpen(false)}>Kapcsolat</NavLink>
+                
+                {/* === JOGI DOKUMENTUMOK LENYÍLÓ MENÜ HOZZÁADVA === */}
+                <div className={styles.dropdown}>
+                    <button className={styles.navLink}>Jogi Dokumentumok</button>
+                    <div className={styles.dropdownContent}>
+                        <Link to="/aszf" onClick={() => setIsMenuOpen(false)}>ÁSZF</Link>
+                        <Link to="/adatkezeles" onClick={() => setIsMenuOpen(false)}>Adatkezelési Tájékoztató</Link>
+                    </div>
+                </div>
             </div>
 
             <div className={styles.rightSide}>

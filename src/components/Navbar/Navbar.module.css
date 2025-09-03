@@ -240,3 +240,72 @@
     display: none;
   }
 }
+
+/* === EZT A RÉSZT ADD HOZZÁ A MEGLÉVŐ NAVBAR.MODULE.CSS VÉGÉHEZ === */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown .navLink {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    color: #e0e0e0;
+    font-family: inherit;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #2c2c2c;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.dropdownContent a {
+    color: #e0e0e0;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s;
+}
+
+.dropdownContent a:hover {
+    background-color: #4a4a4a;
+}
+
+.dropdown:hover .dropdownContent {
+    display: block;
+}
+
+/* Reszponzív nézet a lenyíló menühöz */
+@media (max-width: 992px) {
+    .dropdown {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .dropdown .navLink {
+        width: 100%;
+        text-align: left;
+    }
+
+    .dropdownContent {
+        position: static;
+        box-shadow: none;
+        background-color: #1f1f1f; /* Esetleg kissé más háttér a jobb elkülönülésért */
+        padding-left: 20px;
+    }
+
+    .dropdown:hover .dropdownContent {
+        display: block; /* Vagy `flex` ha a belső elemek flexboxot használnak */
+    }
+}

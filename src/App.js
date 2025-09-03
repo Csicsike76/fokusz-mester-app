@@ -20,7 +20,9 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import InteraktivMatematika from './pages/InteraktivMatematika';
 import ContactPage from './pages/ContactPage';
 import AdminPage from './pages/AdminPage';
-import ClassDetailsPage from './pages/ClassDetailsPage'; // HOZZÁADVA: Új import
+import ClassDetailsPage from './pages/ClassDetailsPage';
+import AszfPage from './pages/AszfPage'; // ÚJ IMPORT
+import AdatkezelesiPage from './pages/AdatkezelesiPage'; // ÚJ IMPORT
 import './App.css';
 
 function App() {
@@ -43,13 +45,16 @@ function App() {
             <Route path="elfelejtett-jelszo" element={<ForgotPasswordPage />} />
             <Route path="reset-password/:token" element={<ResetPasswordPage />} />
 
+            {/* ÚJ ÚTVONALAK A JOGI DOKUMENTUMOKHOZ */}
+            <Route path="aszf" element={<AszfPage />} />
+            <Route path="adatkezeles" element={<AdatkezelesiPage />} />
+
             <Route element={<ProtectedRoute allowedRoles={['student', 'teacher', 'admin']} />}>
               <Route path="profil" element={<ProfilePage />} />
             </Route>
             
             <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
               <Route path="dashboard/teacher" element={<TeacherDashboardPage />} />
-              {/* HOZZÁADVA: Új útvonal az osztály részleteihez */}
               <Route path="dashboard/teacher/class/:classId" element={<ClassDetailsPage />} />
             </Route>
 
