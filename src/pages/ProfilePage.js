@@ -139,12 +139,21 @@ const ProfilePage = () => {
         if (!profileData?.referral_code) return;
         try {
             await navigator.clipboard.writeText(profileData.referral_code);
-            setCopyMessage("Ajánlókód a vágólapra másolva!");
             setIsCopied(true);
+
+            if (profileData.is_subscribed) {
+                setCopyMessage("Ajánlókód a vágólapra másolva! Sok sikert!");
+            } else {
+                setCopyMessage("Kód másolva! Figyelem: a jutalom jóváírásához aktív előfizetés szükséges.");
+            }
+
         } catch (err) {
             setCopyMessage("A másolás sikertelen volt.");
         }
-        setTimeout(() => { setCopyMessage(''); setIsCopied(false); }, 3000);
+        setTimeout(() => { 
+            setCopyMessage(''); 
+            setIsCopied(false); 
+        }, 5000); // Hosszabb idő az olvasáshoz
     };
 
     const handleCreateCheckoutSession = async (interval) => {
