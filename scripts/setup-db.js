@@ -34,7 +34,7 @@ async function run() {
       'contact_messages', 'admin_actions', 'error_logs', 'activity_logs',
       'notifications', 'user_quiz_results', 'quizquestions', 'curriculums',
       'helparticles', 'classmemberships', 'classes', 'teachers',
-      'referrals', 'payments', 'subscriptions', 'subscription_plans', 'users'
+      'referral_rewards', 'referrals', 'payments', 'subscriptions', 'subscription_plans', 'users'
     ];
     for (const tbl of tablesToDrop) {
       await client.query(`DROP TABLE IF EXISTS ${tbl} CASCADE;`);
@@ -129,6 +129,16 @@ async function run() {
         referrer_user_id UUID REFERENCES users(id) ON DELETE CASCADE,
         referred_user_id UUID REFERENCES users(id) ON DELETE CASCADE,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
+
+    await client.query(`
+      CREATE TABLE referral_rewards (
+        id SERIAL PRIMARY KEY,
+        referrer_user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        milestone_count INTEGER NOT NULL,
+        reward_granted_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE (referrer_user_id, milestone_count)
       );
     `);
 

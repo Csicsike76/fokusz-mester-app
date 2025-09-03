@@ -76,6 +76,61 @@ app.use((req, res, next) => {
   next();
 });
 
+const handleReferralCheck = async (client, userId) => {
+  console.log(`Ajánlói rendszer ellenőrzése a felhasználóhoz: ${userId}`);
+  const referralResult = await client.query('SELECT referrer_user_id FROM referrals WHERE referred_user_id = $1', [userId]);
+  if (referralResult.rows.length > 0) {
+    const referrerId = referralResult.rows[0].referrer_user_id;
+    console.log(`Találat! Az új előfizetőt (${userId}) ez a felhasználó ajánlotta: ${referrerId}`);
+
+    const successfulReferralsResult = await client.query(
+      `SELECT COUNT(DISTINCT r.referred_user_id)
+       FROM referrals r
+       JOIN subscriptions s ON r.referred_user_id = s.user_id
+       WHERE r.referrer_user_id = $1 AND s.status IN ('active', 'trialing') AND s.plan_id IS NOT NULL`,
+      [referrerId]
+    );
+    const newTotalReferrals = parseInt(successfulReferralsResult.rows[0].count, 10);
+    console.log(`Az ajánló (${referrerId}) új sikeres ajánlásainak száma: ${newTotalReferrals}`);
+
+    if (newTotalReferrals > 0 && newTotalReferrals % 5 === 0) {
+      const milestone = newTotalReferrals;
+      const existingRewardResult = await client.query(
+        'SELECT id FROM referral_rewards WHERE referrer_user_id = $1 AND milestone_count = $2',
+        [referrerId, milestone]
+      );
+
+      if (existingRewardResult.rows.length === 0) {
+        console.log(`JUTALOM JÁR! Az ajánló (${referrerId}) elérte a(z) ${milestone}. sikeres ajánlást.`);
+        const referrerSubscription = await client.query(
+          "SELECT id FROM subscriptions WHERE user_id = $1 AND status = 'active' ORDER BY created_at DESC LIMIT 1",
+          [referrerId]
+        );
+        if (referrerSubscription.rows.length > 0) {
+          const sub = referrerSubscription.rows[0];
+          await client.query("UPDATE subscriptions SET current_period_end = current_period_end + INTERVAL '1 month' WHERE id = $1", [sub.id]);
+          console.log(`✅ A(z) ${referrerId} felhasználó előfizetése meghosszabbítva 1 hónappal.`);
+          
+          await client.query(
+            'INSERT INTO referral_rewards (referrer_user_id, milestone_count) VALUES ($1, $2)',
+            [referrerId, milestone]
+          );
+
+          await client.query(
+            `INSERT INTO notifications (user_id, title, message, type) VALUES ($1, 'Jutalmat kaptál!', 'Egy általad ajánlott felhasználó előfizetett, így jutalmul 1 hónap prémium hozzáférést írtunk jóvá neked. Köszönjük!', 'reward')`,
+            [referrerId]
+          );
+          console.log(`✅ Értesítés elküldve a(z) ${referrerId} felhasználónak a jutalomról.`);
+        } else {
+          console.log(`Az ajánló (${referrerId}) nem rendelkezik aktív előfizetéssel, így nem kap jutalmat.`);
+        }
+      } else {
+        console.log(`Az ajánló (${referrerId}) már kapott jutalmat a(z) ${milestone}. ajánlásért, nincs teendő.`);
+      }
+    }
+  }
+};
+
 app.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -146,62 +201,37 @@ app.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async
             ]
           );
           console.log(`✅ Előfizetés sikeresen rögzítve (checkout.session.completed) a felhasználóhoz: ${userId}`);
-
-          console.log(`Ajánlói rendszer ellenőrzése a felhasználóhoz: ${userId}`);
-          const referralResult = await client.query('SELECT referrer_user_id FROM referrals WHERE referred_user_id = $1', [userId]);
-          if (referralResult.rows.length > 0) {
-            const referrerId = referralResult.rows[0].referrer_user_id;
-            console.log(`Találat! Az új előfizetőt (${userId}) ez a felhasználó ajánlotta: ${referrerId}`);
-
-            const successfulReferralsResult = await client.query(
-              `SELECT COUNT(DISTINCT r.referred_user_id)
-               FROM referrals r
-               JOIN subscriptions s ON r.referred_user_id = s.user_id
-               WHERE r.referrer_user_id = $1 AND s.status IN ('active', 'trialing') AND s.plan_id IS NOT NULL`,
-              [referrerId]
-            );
-            const newTotalReferrals = parseInt(successfulReferralsResult.rows[0].count, 10);
-            console.log(`Az ajánló (${referrerId}) új sikeres ajánlásainak száma: ${newTotalReferrals}`);
-
-            if (newTotalReferrals > 0 && newTotalReferrals % 5 === 0) {
-              console.log(`JUTALOM JÁR! Az ajánló (${referrerId}) elérte a(z) ${newTotalReferrals}. sikeres ajánlást.`);
-              const referrerSubscription = await client.query(
-                "SELECT id FROM subscriptions WHERE user_id = $1 AND status = 'active' ORDER BY created_at DESC LIMIT 1",
-                [referrerId]
-              );
-              if (referrerSubscription.rows.length > 0) {
-                const sub = referrerSubscription.rows[0];
-                await client.query("UPDATE subscriptions SET current_period_end = current_period_end + INTERVAL '1 month' WHERE id = $1", [sub.id]);
-                console.log(`✅ A(z) ${referrerId} felhasználó előfizetése meghosszabbítva 1 hónappal.`);
-                await client.query(
-                  `INSERT INTO notifications (user_id, title, message, type) VALUES ($1, 'Jutalmat kaptál!', 'Egy általad ajánlott felhasználó előfizetett, így jutalmul 1 hónap prémium hozzáférést írtunk jóvá neked. Köszönjük!', 'reward')`,
-                  [referrerId]
-                );
-                console.log(`✅ Értesítés elküldve a(z) ${referrerId} felhasználónak a jutalomról.`);
-              } else {
-                console.log(`Az ajánló (${referrerId}) nem rendelkezik aktív előfizetéssel, így nem kap jutalmat.`);
-              }
-            }
-          }
+          
+          await handleReferralCheck(client, userId);
         }
         break;
 
       case 'customer.subscription.updated':
-      case 'customer.subscription.deleted':
         const subscriptionUpdated = event.data.object;
         const customerIdUpdated = subscriptionUpdated.customer;
-        const customerUpdated = await stripe.customers.retrieve(customerIdUpdated);
-        const userIdUpdated = customerUpdated.metadata.userId;
 
-        if (!userIdUpdated) throw new Error(`Hiányzó userId a Stripe Customer (${customerIdUpdated}) metaadataiból a subscription esemény során!`);
+        if (subscriptionUpdated.status === 'active' && event.data.previous_attributes && event.data.previous_attributes.status !== 'active') {
+            const customerUpdated = await stripe.customers.retrieve(customerIdUpdated);
+            const userIdForReferralCheck = customerUpdated.metadata.userId;
+            if (userIdForReferralCheck) {
+                await handleReferralCheck(client, userIdForReferralCheck);
+            }
+        }
+      case 'customer.subscription.deleted':
+        const subEventData = event.data.object;
+        const customerIdForUpdate = subEventData.customer;
+        const customerForUpdate = await stripe.customers.retrieve(customerIdForUpdate);
+        const userIdUpdated = customerForUpdate.metadata.userId;
+
+        if (!userIdUpdated) throw new Error(`Hiányzó userId a Stripe Customer (${customerIdForUpdate}) metaadataiból a subscription esemény során!`);
 
         await client.query(
           `UPDATE subscriptions 
            SET status = $1, current_period_end = to_timestamp($2), updated_at = NOW()
            WHERE user_id = $3`,
-          [subscriptionUpdated.status, subscriptionUpdated.current_period_end, userIdUpdated]
+          [subEventData.status, subEventData.current_period_end, userIdUpdated]
         );
-        console.log(`✅ Előfizetés státusza frissítve (${subscriptionUpdated.id}) esemény (${event.type}) alapján: ${subscriptionUpdated.status}`);
+        console.log(`✅ Előfizetés státusza frissítve (${subEventData.id}) esemény (${event.type}) alapján: ${subEventData.status}`);
         break;
     }
 
@@ -249,7 +279,7 @@ const authenticateToken = async (req, res, next) => {
       return res.status(403).json({ success: false, message: 'Érvénytelen token formátum.' });
     }
 
-    const userResult = await pool.query('SELECT active_session_id, role FROM users WHERE id = $1', [userId]);
+    const userResult = await pool.query('SELECT active_session_id, role FROM users WHERE id = $1 AND archived = false', [userId]);
     if (userResult.rows.length === 0) {
       return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
     }
@@ -286,7 +316,7 @@ const authenticateTokenOptional = async (req, res, next) => {
     const { userId, sessionId } = decoded;
 
     if (userId && sessionId) {
-      const userResult = await pool.query('SELECT active_session_id FROM users WHERE id = $1', [userId]);
+      const userResult = await pool.query('SELECT active_session_id FROM users WHERE id = $1 AND archived = false', [userId]);
       if (userResult.rows.length > 0 && userResult.rows[0].active_session_id === sessionId) {
         req.user = decoded;
       }
@@ -359,7 +389,7 @@ app.post('/api/register-teacher', async (req, res) => {
   }
 
   try {
-    const existingUser = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    const existingUser = await pool.query('SELECT * FROM users WHERE email = $1 AND archived = false', [email]);
     if (existingUser.rows.length > 0) {
       return res.status(400).json({ success: false, message: 'E-mail már foglalt.' });
     }
@@ -405,7 +435,7 @@ app.post('/api/register-teacher', async (req, res) => {
     console.log(`✅ Jóváhagyó e-mail elküldve: ${email}`);
 
     if (referrerCode) {
-      const referrerResult = await pool.query('SELECT id FROM users WHERE referral_code = $1', [referrerCode]);
+      const referrerResult = await pool.query('SELECT id FROM users WHERE referral_code = $1 AND archived = false', [referrerCode]);
       if (referrerResult.rows.length > 0) {
         const referrerId = referrerResult.rows[0].id;
         await pool.query('INSERT INTO referrals (referrer_user_id, referred_user_id, created_at) VALUES ($1, $2, NOW())', [referrerId, newUser.rows[0].id]);
@@ -513,12 +543,12 @@ app.post('/api/register', authLimiter, async (req, res) => {
   try {
     await client.query('BEGIN');
 
-    const emailExists = await client.query('SELECT id FROM users WHERE email = $1', [email]);
+    const emailExists = await client.query('SELECT id FROM users WHERE email = $1 AND archived = false', [email]);
     if (emailExists.rows.length > 0) {
         throw new Error('Ez az e-mail cím már regisztrálva van.');
     }
 
-    const usernameExists = await client.query('SELECT id FROM users WHERE username = $1', [username]);
+    const usernameExists = await client.query('SELECT id FROM users WHERE username = $1 AND archived = false', [username]);
     if (usernameExists.rows.length > 0) {
         throw new Error('Ez a felhasználónév már foglalt. Kérjük, válassz másikat.');
     }
@@ -526,7 +556,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
     let referrerId = null;
     if (referralCode) {
       const referrerResult = await client.query(
-        'SELECT id FROM users WHERE referral_code = $1',
+        'SELECT id FROM users WHERE referral_code = $1 AND archived = false',
         [referralCode]
       );
       if (referrerResult.rows.length > 0) referrerId = referrerResult.rows[0].id;
@@ -759,7 +789,7 @@ app.post('/api/login', authLimiter, async (req, res) => {
       .json({ success: false, message: 'E-mail és jelszó megadása kötelező.' });
   }
   try {
-    const userResult = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    const userResult = await pool.query('SELECT * FROM users WHERE email = $1 AND archived = false', [email]);
     if (userResult.rows.length === 0) {
       return res.status(401).json({ success: false, message: 'Hibás e-mail cím vagy jelszó.' });
     }
@@ -820,7 +850,7 @@ const getFullUserProfile = async (userId) => {
             u.id, u.username, u.real_name, u.email, u.role, u.referral_code, u.created_at,
             u.profile_metadata, u.is_permanent_free, u.avatar_url, u.xp, u.last_seen
         FROM users u
-        WHERE u.id = $1;
+        WHERE u.id = $1 AND u.archived = false;
     `;
     const userResult = await pool.query(userQuery, [userId]);
     if (userResult.rows.length === 0) return null;
@@ -957,7 +987,7 @@ app.post('/api/profile/change-password', authenticateToken, async (req, res) => 
     }
 
     try {
-        const userResult = await pool.query('SELECT password_hash FROM users WHERE id = $1', [req.user.userId]);
+        const userResult = await pool.query('SELECT password_hash FROM users WHERE id = $1 AND archived = false', [req.user.userId]);
         if (userResult.rows.length === 0) {
             return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
         }
@@ -1038,7 +1068,10 @@ app.delete('/api/profile', authenticateToken, async (req, res) => {
     try {
         await client.query('BEGIN');
         
-        const deleteResult = await client.query('DELETE FROM users WHERE id = $1', [userId]);
+        const deleteResult = await client.query(
+            'UPDATE users SET archived = true, active_session_id = NULL, email = email || \'-deleted-\' || id::text WHERE id = $1', 
+            [userId]
+        );
 
         if (deleteResult.rowCount === 0) {
             throw new Error('A felhasználó nem található a törléshez.');
@@ -1046,7 +1079,7 @@ app.delete('/api/profile', authenticateToken, async (req, res) => {
 
         await client.query('COMMIT');
         
-        res.status(200).json({ success: true, message: 'A fiók és a hozzá kapcsolódó összes adat sikeresen törölve.' });
+        res.status(200).json({ success: true, message: 'A fiók és a hozzá kapcsolódó összes adat sikeresen archiválásra került.' });
 
     } catch (error) {
         await client.query('ROLLBACK');
@@ -1061,7 +1094,7 @@ app.delete('/api/profile', authenticateToken, async (req, res) => {
 app.post('/api/forgot-password', authLimiter, async (req, res) => {
   const { email } = req.body;
   try {
-    const userResult = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    const userResult = await pool.query('SELECT * FROM users WHERE email = $1 AND archived = false', [email]);
     if (userResult.rows.length === 0) {
       return res.status(200).json({
         success: true,
@@ -1112,7 +1145,7 @@ app.post('/api/reset-password/:token', async (req, res) => {
         .json({ success: false, message: 'A jelszó túl gyenge! A követelményeknek meg kell felelnie.' });
     }
     const userResult = await pool.query(
-      'SELECT * FROM users WHERE password_reset_token = $1 AND password_reset_expires > NOW()',
+      'SELECT * FROM users WHERE password_reset_token = $1 AND password_reset_expires > NOW() AND archived = false',
       [token]
     );
     if (userResult.rows.length === 0) {
@@ -1341,7 +1374,11 @@ app.get('/api/search', authenticateTokenOptional, async (req, res) => {
 app.get('/api/quiz/:slug', async (req, res) => {
   try {
     const raw = req.params.slug || '';
-    const slug = raw.replace(/_/g, '-');
+    const slug = raw.replace(/[^a-zA-Z0-9-]/g, '');
+
+    if (slug !== raw) {
+        return res.status(400).json({ success: false, message: 'Érvénytelen karakterek a tartalmazonosítóban.' });
+    }
     
     const tananyagDir = path.resolve(__dirname, 'data', 'tananyag');
     const helpDir = path.resolve(__dirname, 'data', 'help');
@@ -1388,7 +1425,6 @@ app.get('/api/quiz/:slug', async (req, res) => {
   } catch (err) {
     console.error(`❌ Hiba a(z) /api/quiz/${req.params.slug} feldgozásakor:`, err);
     return res.status(500).json({ success: false, message: 'Szerverhiba történt a tartalom betöltésekor.' });
-
     }
 });
 
@@ -1715,7 +1751,7 @@ app.get('/api/teacher/student/:studentId/progress', authenticateToken, authorize
 app.get('/api/admin/users', authenticateToken, authorizeAdmin, async (req, res) => {
     try {
         const query = `
-            SELECT u.id, u.username, u.email, u.role, u.created_at, t.is_approved
+            SELECT u.id, u.username, u.email, u.role, u.created_at, u.archived, t.is_approved
             FROM users u
             LEFT JOIN teachers t ON u.id = t.user_id
             ORDER BY u.created_at DESC;
@@ -1740,11 +1776,7 @@ app.get('/api/admin/messages', authenticateToken, authorizeAdmin, async (req, re
     }
 });
 
-app.get('/api/admin/clear-users/:secret', async (req, res) => {
-  const { secret } = req.params;
-  if (!secret || secret !== process.env.ADMIN_SECRET) {
-    return res.status(403).json({ message: 'Hozzáférés megtagadva.' });
-  }
+app.delete('/api/admin/clear-users', authenticateToken, authorizeAdmin, async (req, res) => {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -1774,7 +1806,7 @@ app.post('/api/auth/google/verify', async (req, res) => {
             return res.status(400).json({ success: false, message: 'A Google nem adta át az e-mail címedet.' });
         }
 
-        const userExists = await pool.query("SELECT id FROM users WHERE (provider = 'google' AND provider_id = $1) OR email = $2", [provider_id, email]);
+        const userExists = await pool.query("SELECT id FROM users WHERE ((provider = 'google' AND provider_id = $1) OR email = $2) AND archived = false", [provider_id, email]);
         if (userExists.rows.length > 0) {
             throw new Error('Ezzel a Google fiókkal vagy e-mail címmel már regisztráltak. Kérjük, jelentkezz be.');
         }
@@ -1803,7 +1835,7 @@ app.post('/api/register/google', async (req, res) => {
         await client.query('BEGIN');
 
         // Duplikáció ellenőrzése újra, a biztonság kedvéért
-        const userExists = await client.query("SELECT id FROM users WHERE email = $1", [email]);
+        const userExists = await client.query("SELECT id FROM users WHERE email = $1 AND archived = false", [email]);
         if (userExists.rows.length > 0) throw new Error('Ez az e-mail cím már regisztrálva van.');
 
         // Itt ugyanazok az ellenőrzések kellenek, mint a normál regisztrációnál
@@ -1843,7 +1875,7 @@ app.post('/api/register/google', async (req, res) => {
         
         let referrerId = null;
         if (referralCode) {
-          const referrerResult = await client.query('SELECT id FROM users WHERE referral_code = $1', [referralCode]);
+          const referrerResult = await client.query('SELECT id FROM users WHERE referral_code = $1 AND archived = false', [referralCode]);
           if (referrerResult.rows.length > 0) {
               referrerId = referrerResult.rows[0].id;
               await client.query('INSERT INTO referrals (referrer_user_id, referred_user_id) VALUES ($1, $2)', [referrerId, user.id]);
