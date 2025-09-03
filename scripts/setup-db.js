@@ -351,6 +351,14 @@ async function run() {
       }
     }
 
+    console.log('Indexek létrehozása a gyorsabb adatbázis-műveletekhez...');
+await client.query(`CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);`);
+await client.query(`CREATE INDEX IF NOT EXISTS idx_users_referral_code ON users(referral_code);`);
+await client.query(`CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id);`);
+await client.query(`CREATE INDEX IF NOT EXISTS idx_student_progress_user_id ON student_progress(user_id);`);
+await client.query(`CREATE INDEX IF NOT EXISTS idx_curriculums_slug ON curriculums(slug);`);
+console.log('✅ Indexek sikeresen létrehozva.');
+
     await client.query('COMMIT');
     console.log('✅ Adatbázis séma sikeresen létrehozva és naprakész.');
   } catch (err) {

@@ -15,6 +15,8 @@ const cron = require('node-cron');
 const { OAuth2Client } = require('google-auth-library');
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
+// HELYES KÓD a server.js 18. sorában az ön képernyőképe alapján:
+const logger = require('../logger');
 
 
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
@@ -72,16 +74,16 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] Bejövő kérés: ${req.method} ${req.originalUrl}`);
+  logger.info(`[${new Date().toISOString()}] Bejövő kérés: ${req.method} ${req.originalUrl}`);
   next();
 });
 
 const handleReferralCheck = async (client, userId) => {
-  console.log(`Ajánlói rendszer ellenőrzése a felhasználóhoz: ${userId}`);
+  logger.info(`Ajánlói rendszer ellenőrzése a felhasználóhoz: ${userId}`);
   const referralResult = await client.query('SELECT referrer_user_id FROM referrals WHERE referred_user_id = $1', [userId]);
   if (referralResult.rows.length > 0) {
     const referrerId = referralResult.rows[0].referrer_user_id;
-    console.log(`Találat! Az új előfizetőt (${userId}) ez a felhasználó ajánlotta: ${referrerId}`);
+    logger.info(`Találat! Az új előfizetőt (${userId}) ez a felhasználó ajánlotta: ${referrerId}`);
 
     const successfulReferralsResult = await client.query(
       `SELECT COUNT(DISTINCT r.referred_user_id)
@@ -91,7 +93,7 @@ const handleReferralCheck = async (client, userId) => {
       [referrerId]
     );
     const newTotalReferrals = parseInt(successfulReferralsResult.rows[0].count, 10);
-    console.log(`Az ajánló (${referrerId}) új sikeres ajánlásainak száma: ${newTotalReferrals}`);
+    logger.info(`Az ajánló (${referrerId}) új sikeres ajánlásainak száma: ${newTotalReferrals}`);
 
     if (newTotalReferrals > 0 && newTotalReferrals % 5 === 0) {
       const milestone = newTotalReferrals;
@@ -101,7 +103,7 @@ const handleReferralCheck = async (client, userId) => {
       );
 
       if (existingRewardResult.rows.length === 0) {
-        console.log(`JUTALOM JÁR! Az ajánló (${referrerId}) elérte a(z) ${milestone}. sikeres ajánlást.`);
+        logger.info(`JUTALOM JÁR! Az ajánló (${referrerId}) elérte a(z) ${milestone}. sikeres ajánlást.`);
         const referrerSubscription = await client.query(
           "SELECT id FROM subscriptions WHERE user_id = $1 AND status = 'active' ORDER BY created_at DESC LIMIT 1",
           [referrerId]
@@ -109,7 +111,7 @@ const handleReferralCheck = async (client, userId) => {
         if (referrerSubscription.rows.length > 0) {
           const sub = referrerSubscription.rows[0];
           await client.query("UPDATE subscriptions SET current_period_end = current_period_end + INTERVAL '1 month' WHERE id = $1", [sub.id]);
-          console.log(`✅ A(z) ${referrerId} felhasználó előfizetése meghosszabbítva 1 hónappal.`);
+          logger.info(`✅ A(z) ${referrerId} felhasználó előfizetése meghosszabbítva 1 hónappal.`);
           
           await client.query(
             'INSERT INTO referral_rewards (referrer_user_id, milestone_count) VALUES ($1, $2)',
@@ -120,12 +122,12 @@ const handleReferralCheck = async (client, userId) => {
             `INSERT INTO notifications (user_id, title, message, type) VALUES ($1, 'Jutalmat kaptál!', 'Egy általad ajánlott felhasználó előfizetett, így jutalmul 1 hónap prémium hozzáférést írtunk jóvá neked. Köszönjük!', 'reward')`,
             [referrerId]
           );
-          console.log(`✅ Értesítés elküldve a(z) ${referrerId} felhasználónak a jutalomról.`);
+          logger.info(`✅ Értesítés elküldve a(z) ${referrerId} felhasználónak a jutalomról.`);
         } else {
-          console.log(`Az ajánló (${referrerId}) nem rendelkezik aktív előfizetéssel, így nem kap jutalmat.`);
+          logger.warn(`Az ajánló (${referrerId}) nem rendelkezik aktív előfizetéssel, így nem kap jutalmat.`);
         }
       } else {
-        console.log(`Az ajánló (${referrerId}) már kapott jutalmat a(z) ${milestone}. ajánlásért, nincs teendő.`);
+        logger.info(`Az ajánló (${referrerId}) már kapott jutalmat a(z) ${milestone}. ajánlásért, nincs teendő.`);
       }
     }
   }
@@ -140,7 +142,7 @@ app.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
   } catch (err) {
-    console.error(`❌ Stripe webhook signature error: ${err.message}`);
+    logger.error('❌ Stripe webhook signature error', { message: err.message });
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
@@ -167,7 +169,7 @@ app.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async
              VALUES ($1, $2, $3, $4, true, true) RETURNING *;`,
             [className, classCode, userId, maxStudents]
           );
-          console.log(`✅ Tanári osztály sikeresen létrehozva (fizetés után): ${className}, Tanár ID: ${userId}`);
+          logger.info(`✅ Tanári osztály sikeresen létrehozva (fizetés után): ${className}, Tanár ID: ${userId}`);
         }
 
         if (session.mode === 'subscription') {
@@ -200,7 +202,7 @@ app.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async
               subscription.id,
             ]
           );
-          console.log(`✅ Előfizetés sikeresen rögzítve (checkout.session.completed) a felhasználóhoz: ${userId}`);
+          logger.info(`✅ Előfizetés sikeresen rögzítve (checkout.session.completed) a felhasználóhoz: ${userId}`);
           
           await handleReferralCheck(client, userId);
         }
@@ -231,14 +233,14 @@ app.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async
            WHERE user_id = $3`,
           [subEventData.status, subEventData.current_period_end, userIdUpdated]
         );
-        console.log(`✅ Előfizetés státusza frissítve (${subEventData.id}) esemény (${event.type}) alapján: ${subEventData.status}`);
+        logger.info(`✅ Előfizetés státusza frissítve (${subEventData.id}) esemény (${event.type}) alapján: ${subEventData.status}`);
         break;
     }
 
     await client.query('COMMIT');
   } catch (dbError) {
     await client.query('ROLLBACK');
-    console.error('❌ Hiba a Stripe webhook feldolgozása során:', dbError);
+    logger.error('❌ Hiba a Stripe webhook feldolgozása során', { message: dbError.message, stack: dbError.stack });
   } finally {
     client.release();
   }
@@ -299,7 +301,7 @@ const authenticateToken = async (req, res, next) => {
     if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
       return res.status(403).json({ success: false, message: 'Érvénytelen vagy lejárt token.' });
     }
-    console.error("Authentication error in middleware:", err);
+    logger.error("Authentication error in middleware", { message: err.message, stack: err.stack });
     return res.status(500).json({ success: false, message: 'Szerverhiba az authentikáció során.' });
   }
 };
@@ -376,7 +378,7 @@ app.get('/api/help', async (req, res) => {
     }, {});
     res.status(200).json({ success: true, data: articlesByCategory });
   } catch (error) {
-    console.error('/api/help hiba:', error);
+    logger.error('/api/help hiba', { message: error.message, stack: error.stack });
     res.status(500).json({ success: false, message: 'Szerverhiba a súgó cikkek lekérdezésekor.' });
   }
 });
@@ -432,16 +434,16 @@ app.post('/api/register-teacher', async (req, res) => {
       `,
     };
     await transporter.sendMail(mailOptions);
-    console.log(`✅ Jóváhagyó e-mail elküldve: ${email}`);
+    logger.info(`✅ Jóváhagyó e-mail elküldve: ${email}`);
 
     if (referrerCode) {
       const referrerResult = await pool.query('SELECT id FROM users WHERE referral_code = $1 AND archived = false', [referrerCode]);
       if (referrerResult.rows.length > 0) {
         const referrerId = referrerResult.rows[0].id;
         await pool.query('INSERT INTO referrals (referrer_user_id, referred_user_id, created_at) VALUES ($1, $2, NOW())', [referrerId, newUser.rows[0].id]);
-        console.log(`✅ Referral rögzítve: referrer ${referrerId}, referred ${newUser.rows[0].id}`);
+        logger.info(`✅ Referral rögzítve: referrer ${referrerId}, referred ${newUser.rows[0].id}`);
       } else {
-        console.warn(`❌ Érvénytelen referrerCode: ${referrerCode}`);
+        logger.warn(`❌ Érvénytelen referrerCode: ${referrerCode}`);
       }
     }
 
@@ -450,7 +452,7 @@ app.post('/api/register-teacher', async (req, res) => {
       message: 'Regisztráció kész, a tanári fiók jóváhagyására e-mailt küldtünk.',
     });
   } catch (error) {
-    console.error('Tanári regisztráció hiba:', error);
+    logger.error('Tanári regisztráció hiba', { message: error.message, stack: error.stack });
     res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
   }
 });
@@ -473,7 +475,7 @@ app.post('/api/verify-teacher', async (req, res) => {
 
     res.json({ success: true, message: 'Tanári fiók jóváhagyva.' });
   } catch (error) {
-    console.error('Tanári jóváhagyás hiba:', error);
+    logger.error('Tanári jóváhagyás hiba', { message: error.message, stack: error.stack });
     res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
   }
 });
@@ -507,7 +509,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
         .json({ success: false, message: 'A reCAPTCHA ellenőrzés sikertelen.' });
     }
   } catch (reCaptchaError) {
-    console.error('reCAPTCHA hiba:', reCaptchaError);
+    logger.error('reCAPTCHA hiba', { message: reCaptchaError.message, stack: reCaptchaError.stack });
     return res
       .status(500)
       .json({ success: false, message: 'Hiba történt a reCAPTCHA ellenőrzése során.' });
@@ -631,7 +633,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
       if (adminRecipient) {
         const backendUrl = process.env.BACKEND_URL;
         if (!backendUrl) {
-            console.error('FATAL: BACKEND_URL environment variable is not set.');
+            logger.error('FATAL: BACKEND_URL environment variable is not set.');
             throw new Error('Szerver konfigurációs hiba: A jóváhagyó link nem generálható.');
         }
         const approvalUrl = `${backendUrl}/api/admin/approve-teacher-by-link/${newUserId}?secret=${process.env.ADMIN_SECRET}`;
@@ -668,7 +670,7 @@ app.post('/api/register', authLimiter, async (req, res) => {
     });
   } catch (err) {
     if (client) await client.query('ROLLBACK');
-    console.error("Regisztrációs hiba:", err);
+    logger.error("Regisztrációs hiba:", { message: err.message, stack: err.stack });
     res.status(400).json({ success: false, message: err.message || 'Szerverhiba történt.' });
   } finally {
     if (client) client.release();
@@ -715,7 +717,7 @@ app.get('/api/verify-email/:token', async (req, res) => {
   
     } catch (error) {
     await client.query('ROLLBACK');
-    console.error("Email-ellenőrzési hiba:", error);
+    logger.error("Email-ellenőrzési hiba:", { message: error.message, stack: error.stack });
     res
       .status(500)
       .json({ success: false, message: 'Szerverhiba történt a megerősítés során.' });
@@ -759,7 +761,7 @@ app.get('/api/admin/approve-teacher-by-link/:userId', async (req, res) => {
             </html>
         `);
     } catch (error) {
-        console.error('Tanár jóváhagyási hiba:', error);
+        logger.error('Tanár jóváhagyási hiba:', { message: error.message, stack: error.stack });
         res.status(500).send('Szerverhiba történt a jóváhagyás során.');
     }
 });
@@ -776,7 +778,7 @@ app.post('/api/admin/approve-teacher/:userId', authenticateToken, authorizeAdmin
         }
         return res.status(200).json({ success: true, message: 'A tanári fiók sikeresen jóváhagyva.'});
     } catch (error) {
-        console.error('Tanár jóváhagyási hiba (admin):', error);
+        logger.error('Tanár jóváhagyási hiba (admin):', { message: error.message, stack: error.stack });
         return res.status(500).json({ success: false, message: 'Szerverhiba történt a jóváhagyás során.'});
     }
 });
@@ -839,7 +841,7 @@ app.post('/api/login', authLimiter, async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Bejelentkezési hiba:", error);
+    logger.error("Bejelentkezési hiba:", { message: error.message, stack: error.stack });
     res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
   }
 });
@@ -932,7 +934,7 @@ app.get('/api/profile/recommendations', authenticateToken, async (req, res) => {
 
         res.status(200).json({ success: true, recommendations: rows });
     } catch (error) {
-        console.error("Ajánlások lekérdezési hiba:", error);
+        logger.error("Ajánlások lekérdezési hiba:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt az ajánlások lekérdezésekor.' });
     }
 });
@@ -945,7 +947,7 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
         }
         res.status(200).json({ success: true, user: userProfile });
     } catch (error) {
-        console.error("Profil lekérdezési hiba:", error);
+        logger.error("Profil lekérdezési hiba:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt a profil adatok lekérdezésekor.' });
     }
 });
@@ -975,7 +977,7 @@ app.put('/api/profile', authenticateToken, async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Profil frissítési hiba:", error);
+        logger.error("Profil frissítési hiba:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
     }
 });
@@ -1009,7 +1011,7 @@ app.post('/api/profile/change-password', authenticateToken, async (req, res) => 
         res.status(200).json({ success: true, message: 'Jelszó sikeresen módosítva.' });
 
     } catch (error) {
-        console.error("Jelszócsere hiba:", error);
+        logger.error("Jelszócsere hiba:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt a jelszócsere során.' });
     }
 });
@@ -1056,7 +1058,7 @@ app.get('/api/profile/stats', authenticateToken, async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Statisztika lekérdezési hiba:", error);
+        logger.error("Statisztika lekérdezési hiba:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt a statisztikák lekérdezésekor.' });
     }
 });
@@ -1083,7 +1085,7 @@ app.delete('/api/profile', authenticateToken, async (req, res) => {
 
     } catch (error) {
         await client.query('ROLLBACK');
-        console.error("Fióktörlési hiba:", error);
+        logger.error("Fióktörlési hiba:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt a fiók törlése során.' });
     } finally {
         client.release();
@@ -1123,7 +1125,7 @@ app.post('/api/forgot-password', authLimiter, async (req, res) => {
         'Ha az e-mail cím regisztrálva van, kiküldtünk egy linket a jelszó visszaállításához.',
     });
   } catch (error) {
-    console.error('Jelszó-visszaállítási hiba (kérelem):', error);
+    logger.error('Jelszó-visszaállítási hiba (kérelem):', { message: error.message, stack: error.stack });
     res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
   }
 });
@@ -1163,18 +1165,13 @@ app.post('/api/reset-password/:token', async (req, res) => {
       .status(200)
       .json({ success: true, message: 'Jelszó sikeresen módosítva! Most már bejelentkezhetsz.' });
   } catch (error) {
-    console.error('Jelszó-visszaállítási hiba (beállítás):', error);
+    logger.error('Jelszó-visszaállítási hiba (beállítás):', { message: error.message, stack: error.stack });
     res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
   }
 });
 
-app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
+app.get('/api/teacher/classes', authenticateToken, authorizeTeacher, async (req, res) => {
   try {
-    if (req.user.role !== 'teacher') {
-      return res
-        .status(403)
-        .json({ message: 'Hozzáférés megtagadva: csak tanárok kérhetik le az osztályaikat.' });
-    }
     const teacherId = req.user.userId;
     const query = `
       SELECT c.id, c.class_name, c.class_code, c.max_students, COUNT(cm.user_id) AS student_count
@@ -1187,20 +1184,16 @@ app.get('/api/teacher/classes', authenticateToken, async (req, res) => {
     const { rows } = await pool.query(query, [teacherId]);
     res.status(200).json({ success: true, classes: rows });
   } catch (error) {
-    console.error('Hiba az osztályok lekérdezésekor:', error);
+    logger.error('Hiba az osztályok lekérdezésekor:', { message: error.message, stack: error.stack });
     res
       .status(500)
       .json({ success: false, message: 'Szerverhiba történt az osztályok lekérdezésekor.' });
   }
 });
 
-app.post('/api/teacher/create-class-checkout-session', authenticateToken, async (req, res) => {
+app.post('/api/teacher/create-class-checkout-session', authenticateToken, authorizeTeacher, async (req, res) => {
     const { className, maxStudents } = req.body;
     const teacherId = req.user.userId;
-
-    if (req.user.role !== 'teacher') {
-        return res.status(403).json({ success: false, message: 'Hozzáférés megtagadva.' });
-    }
 
     if (!className || !maxStudents || maxStudents < 5 || maxStudents > 30) {
         return res.status(400).json({ success: false, message: 'Érvénytelen osztályadatok.' });
@@ -1239,7 +1232,7 @@ app.post('/api/teacher/create-class-checkout-session', authenticateToken, async 
         res.json({ success: true, url: session.url });
 
     } catch (error) {
-        console.error('❌ Hiba a tanári osztály Checkout session létrehozásakor:', error);
+        logger.error('❌ Hiba a tanári osztály Checkout session létrehozásakor:', { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt a fizetési folyamat indításakor.' });
     }
 });
@@ -1262,7 +1255,7 @@ app.post('/api/classes/create', authenticateToken, authorizeAdmin, async (req, r
     const { rows } = await pool.query(query, [className, classCode, teacherId, maxStudents]);
     res.status(201).json({ success: true, message: 'Osztály sikeresen létrehozva!', class: rows[0] });
   } catch (error) {
-    console.error('Hiba az osztály létrehozásakor:', error);
+    logger.error('Hiba az osztály létrehozásakor:', { message: error.message, stack: error.stack });
     res
       .status(500)
       .json({ success: false, message: 'Szerverhiba történt az osztály létrehozásakor.' });
@@ -1322,7 +1315,7 @@ app.get('/api/curriculums', async (req, res) => {
       meta: { count: rows.length, timestamp: new Date().toISOString() }
     });
   } catch (err) {
-    console.error('❌ /api/curriculums hiba:', err);
+    logger.error('❌ /api/curriculums hiba:', { message: err.message, stack: err.stack });
     res.status(500).json({ success: false, message: 'Szerverhiba a tananyagok lekérdezésekor.' });
   }
 });
@@ -1360,7 +1353,7 @@ app.get('/api/search', authenticateTokenOptional, async (req, res) => {
       meta: { count: rows.length, timestamp: new Date().toISOString() }
     });
   } catch (err) {
-    console.error('❌ /api/search hiba:', err);
+    logger.error('❌ /api/search hiba:', { message: err.message, stack: err.stack });
     res.status(500).json({ success: false, message: 'Szerverhiba a keresés során.' });
   }
 });
@@ -1404,12 +1397,12 @@ app.get('/api/quiz/:slug', async (req, res) => {
     if (foundPath.endsWith('.json')) {
       const text = await fsp.readFile(foundPath, 'utf8');
       data = JSON.parse(text);
-      console.log(`📄 Betöltve JSON: ${foundPath}`);
+      logger.info(`📄 Betöltve JSON: ${foundPath}`);
     } else {
       delete require.cache[foundPath];
       const mod = require(foundPath);
       data = (mod && mod.default) ? mod.default : mod;
-      console.log(`🧩 Betöltve JS modul: ${foundPath}`);
+      logger.info(`🧩 Betöltve JS modul: ${foundPath}`);
     }
 
     if (typeof data === 'string') {
@@ -1418,7 +1411,7 @@ app.get('/api/quiz/:slug', async (req, res) => {
 
     return res.json({ success: true, data });
   } catch (err) {
-    console.error(`❌ Hiba a(z) /api/quiz/${req.params.slug} feldgozásakor:`, err);
+    logger.error(`❌ Hiba a(z) /api/quiz/${req.params.slug} feldgozásakor:`, { message: err.message, stack: err.stack });
     return res.status(500).json({ success: false, message: 'Szerverhiba történt a tartalom betöltésekor.' });
     }
 });
@@ -1433,7 +1426,7 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
 
     if (!priceId) {
         const errorMessage = `A '${interval}' időszakhoz tartozó Stripe Price ID nincs beállítva a szerveren.`;
-        console.error(`❌ ${errorMessage}`);
+        logger.error(`❌ ${errorMessage}`);
         return res.status(500).json({ success: false, message: errorMessage });
     }
     
@@ -1498,7 +1491,7 @@ app.post('/api/create-checkout-session', authenticateToken, async (req, res) => 
         res.json({ success: true, url: session.url });
 
     } catch (error) {
-        console.error('❌ Hiba a Stripe Checkout session létrehozásakor:', error);
+        logger.error('❌ Hiba a Stripe Checkout session létrehozásakor:', { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt a fizetési folyamat indításakor.' });
     }
 });
@@ -1522,7 +1515,7 @@ app.post('/api/create-billing-portal-session', authenticateToken, async (req, re
         res.json({ success: true, url: portalSession.url });
 
     } catch (error) {
-        console.error('❌ Hiba a Billing Portal session létrehozásakor:', error);
+        logger.error('❌ Hiba a Billing Portal session létrehozásakor:', { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
     }
 });
@@ -1538,7 +1531,7 @@ app.get('/api/notifications', authenticateToken, async (req, res) => {
         );
         res.status(200).json({ success: true, notifications: result.rows });
     } catch (error) {
-        console.error("❌ Hiba az értesítések lekérdezésekor:", error);
+        logger.error("❌ Hiba az értesítések lekérdezésekor:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
     }
 });
@@ -1551,7 +1544,7 @@ app.post('/api/notifications/mark-read', authenticateToken, async (req, res) => 
         );
         res.status(200).json({ success: true, message: 'Az értesítések olvasottá téve.' });
     } catch (error) {
-        console.error("❌ Hiba az értesítések olvasottá tételekor:", error);
+        logger.error("❌ Hiba az értesítések olvasottá tételekor:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
     }
 });
@@ -1594,7 +1587,6 @@ app.post('/api/quiz/submit-result', authenticateToken, async (req, res) => {
 
         await client.query('COMMIT');
         
-        // E-mail küldés a tranzakció sikeres lezárása után
         const userDetails = await pool.query('SELECT real_name, parental_email FROM users WHERE id = $1', [userId]);
         if (userDetails.rows.length > 0 && userDetails.rows[0].parental_email) {
             const { real_name, parental_email } = userDetails.rows[0];
@@ -1618,14 +1610,14 @@ app.post('/api/quiz/submit-result', authenticateToken, async (req, res) => {
                     </div>
                 `,
             };
-            transporter.sendMail(mailOptions).catch(err => console.error("Szülői értesítő e-mail küldési hiba:", err));
+            transporter.sendMail(mailOptions).catch(err => logger.error("Szülői értesítő e-mail küldési hiba:", { message: err.message, stack: err.stack }));
         }
 
         res.status(200).json({ success: true, message: 'Eredmény sikeresen elmentve.' });
 
     } catch (error) {
         await client.query('ROLLBACK');
-        console.error("❌ Hiba a kvíz eredményének mentésekor:", error);
+        logger.error("❌ Hiba a kvíz eredményének mentésekor:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt az eredmény mentésekor.' });
     } finally {
         client.release();
@@ -1649,13 +1641,12 @@ app.post('/api/lesson/viewed', authenticateToken, async (req, res) => {
 
         const progressResult = await client.query(
             `INSERT INTO student_progress (user_id, activity_type, lesson_slug, started_at, completed_at)
-             VALUES ($1, 'lesson_viewed', $2, NOW(), NOW())`, // A completed_at is beállításra kerül
+             VALUES ($1, 'lesson_viewed', $2, NOW(), NOW())`,
             [userId, slug]
         );
 
         await client.query('COMMIT');
 
-        // E-mail küldés a tranzakció sikeres lezárása után
         const userDetails = await pool.query('SELECT real_name, parental_email FROM users WHERE id = $1', [userId]);
         if (userDetails.rows.length > 0 && userDetails.rows[0].parental_email) {
             const { real_name, parental_email } = userDetails.rows[0];
@@ -1676,13 +1667,13 @@ app.post('/api/lesson/viewed', authenticateToken, async (req, res) => {
                     </div>
                 `,
             };
-            transporter.sendMail(mailOptions).catch(err => console.error("Szülői értesítő e-mail küldési hiba:", err));
+            transporter.sendMail(mailOptions).catch(err => logger.error("Szülői értesítő e-mail küldési hiba:", { message: err.message, stack: err.stack }));
         }
 
         res.status(200).json({ success: true, message: 'Lecke megtekintése rögzítve.' });
     } catch (error) {
         await client.query('ROLLBACK');
-        console.error("❌ Hiba a lecke megtekintésének rögzítésekor:", error);
+        logger.error("❌ Hiba a lecke megtekintésének rögzítésekor:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
     } finally {
         client.release();
@@ -1708,7 +1699,7 @@ app.get('/api/teacher/class/:classId/students', authenticateToken, authorizeTeac
         const { rows } = await pool.query(query, [classId]);
         res.status(200).json({ success: true, students: rows });
     } catch (error) {
-        console.error(`❌ Hiba a(z) ${classId} osztály diákjainak lekérdezésekor:`, error);
+        logger.error(`❌ Hiba a(z) ${classId} osztály diákjainak lekérdezésekor:`, { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
     }
 });
@@ -1738,7 +1729,7 @@ app.get('/api/teacher/student/:studentId/progress', authenticateToken, authorize
         const { rows } = await pool.query(query, [studentId]);
         res.status(200).json({ success: true, progress: rows });
     } catch (error) {
-        console.error(`❌ Hiba a(z) ${studentId} diák haladásának lekérdezésekor:`, error);
+        logger.error(`❌ Hiba a(z) ${studentId} diák haladásának lekérdezésekor:`, { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt.' });
     }
 });
@@ -1754,7 +1745,7 @@ app.get('/api/admin/users', authenticateToken, authorizeAdmin, async (req, res) 
         const { rows } = await pool.query(query);
         res.status(200).json({ success: true, users: rows });
     } catch (error) {
-        console.error("Hiba a felhasználók lekérdezésekor:", error);
+        logger.error("Hiba a felhasználók lekérdezésekor:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt a felhasználók lekérdezésekor.' });
     }
 });
@@ -1766,7 +1757,7 @@ app.get('/api/admin/messages', authenticateToken, authorizeAdmin, async (req, re
         );
         res.status(200).json({ success: true, messages: rows });
     } catch (error) {
-        console.error("Hiba a kapcsolatfelvételi üzenetek lekérdezésekor:", error);
+        logger.error("Hiba a kapcsolatfelvételi üzenetek lekérdezésekor:", { message: error.message, stack: error.stack });
         res.status(500).json({ success: false, message: 'Szerverhiba történt az üzenetek lekérdezésekor.'});
     }
 });
@@ -1780,7 +1771,7 @@ app.delete('/api/admin/clear-users', authenticateToken, authorizeAdmin, async (r
     res.status(200).json({ success: true, message: 'Minden felhasználói adat sikeresen törölve.' });
   } catch (error) {
     await client.query('ROLLBACK');
-    console.error("Adatbázis törlési hiba:", error);
+    logger.error("Adatbázis törlési hiba:", { message: error.message, stack: error.stack });
     res.status(500).json({ success: false, message: 'Hiba történt a törlés során.' });
   } finally {
     client.release();
@@ -1809,7 +1800,7 @@ app.post('/api/auth/google/verify', async (req, res) => {
         res.status(200).json({ success: true, name, email, provider_id });
 
     } catch (err) {
-        console.error("Google token-ellenőrzési hiba:", err);
+        logger.error("Google token-ellenőrzési hiba:", { message: err.message, stack: err.stack });
         res.status(400).json({ success: false, message: err.message || 'Szerverhiba történt a Google azonosítás során.' });
     }
 });
@@ -1829,11 +1820,9 @@ app.post('/api/register/google', async (req, res) => {
     try {
         await client.query('BEGIN');
 
-        // Duplikáció ellenőrzése újra, a biztonság kedvéért
         const userExists = await client.query("SELECT id FROM users WHERE email = $1 AND archived = false", [email]);
         if (userExists.rows.length > 0) throw new Error('Ez az e-mail cím már regisztrálva van.');
 
-        // Itt ugyanazok az ellenőrzések kellenek, mint a normál regisztrációnál
         let classId = null;
         if (role === 'student' && classCode) {
             const classResult = await client.query('SELECT id, max_students FROM classes WHERE class_code = $1 AND is_active = true', [classCode]);
@@ -1861,7 +1850,6 @@ app.post('/api/register/google', async (req, res) => {
 
         if (role === 'teacher') {
             await client.query('INSERT INTO teachers (user_id, is_approved, vip_code) VALUES ($1, false, $2)', [user.id, vipCode || null]);
-            // Itt is mehetne az admin értesítő, mint a normál regisztrációnál...
         }
 
         if (role === 'student' && classId) {
@@ -1877,7 +1865,6 @@ app.post('/api/register/google', async (req, res) => {
           }
         }
         
-        // Mivel Google regisztráció, automatikusan jár a próbaidőszak
         if (role !== 'teacher' && !isPermanentFree) {
             await client.query(
                 `INSERT INTO subscriptions (user_id, status, current_period_start, current_period_end, payment_provider)
@@ -1906,7 +1893,7 @@ app.post('/api/register/google', async (req, res) => {
 
     } catch (err) {
         await client.query('ROLLBACK');
-        console.error("Google regisztráció befejezési hiba:", err);
+        logger.error("Google regisztráció befejezési hiba:", { message: err.message, stack: err.stack });
         res.status(400).json({ success: false, message: err.message || 'Szerverhiba történt.' });
     } finally {
         client.release();
@@ -1928,7 +1915,7 @@ app.post('/api/contact', authLimiter, async (req, res) => {
     await client.query('BEGIN');
     const adminRecipient = process.env.ADMIN_EMAIL || process.env.MAIL_DEFAULT_SENDER;
     if (!adminRecipient) {
-        console.error('❌ ADMIN_EMAIL is not set. Cannot send contact form email.');
+        logger.error('❌ ADMIN_EMAIL is not set. Cannot send contact form email.');
         return res.status(500).json({ success: false, message: 'A szerver nincs megfelelően beállítva az üzenetek fogadására.' });
     }
 
@@ -1984,7 +1971,7 @@ app.post('/api/contact', authLimiter, async (req, res) => {
 
   } catch (error) {
     await client.query('ROLLBACK');
-    console.error('❌ Hiba a kapcsolatfelvételi űrlap feldolgozása során:', error);
+    logger.error('❌ Hiba a kapcsolatfelvételi űrlap feldolgozása során:', { message: error.message, stack: error.stack });
     res.status(500).json({ success: false, message: 'Szerverhiba történt az üzenet küldése közben.' });
   } finally {
       client.release();
@@ -1992,7 +1979,7 @@ app.post('/api/contact', authLimiter, async (req, res) => {
 });
 
 cron.schedule('0 1 * * *', async () => { 
-  console.log('Running scheduled job: Checking for expiring trials...');
+  logger.info('Running scheduled job: Checking for expiring trials...');
   
   const sendReminderEmail = async (user, daysLeft) => {
     const subject = daysLeft > 1
@@ -2020,9 +2007,9 @@ cron.schedule('0 1 * * *', async () => {
 
     try {
       await transporter.sendMail(mailOptions);
-      console.log(`✅ Reminder email sent to ${user.email} (${daysLeft} days left).`);
+      logger.info(`✅ Reminder email sent to ${user.email} (${daysLeft} days left).`);
     } catch (error) {
-      console.error(`❌ Failed to send reminder email to ${user.email}:`, error);
+      logger.error(`❌ Failed to send reminder email to ${user.email}:`, { message: error.message, stack: error.stack });
     }
   };
 
@@ -2047,11 +2034,11 @@ cron.schedule('0 1 * * *', async () => {
       await sendReminderEmail(user, 1);
     }
   } catch (error) {
-    console.error('❌ Error during scheduled trial check:', error);
+    logger.error('❌ Error during scheduled trial check:', { message: error.message, stack: error.stack });
   }
 });
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`✅ A Fókusz Mester szerver elindult a ${PORT} porton.`);
+  logger.info(`✅ A Fókusz Mester szerver elindult a ${PORT} porton.`);
 });
