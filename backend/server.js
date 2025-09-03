@@ -16,7 +16,7 @@ const { OAuth2Client } = require('google-auth-library');
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 // HELYES KÓD a server.js 18. sorában az ön képernyőképe alapján:
-const logger = require('../logger');
+const logger = require('./logger');
 
 
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
