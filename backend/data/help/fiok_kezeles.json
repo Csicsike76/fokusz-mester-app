@@ -1,32 +1,32 @@
 [
-  {
-    "category": "fiok_es_regisztracio",
-    "question": "Hogyan tudok regisztrálni?",
-    "answer": "<p>A 'Regisztráció' gombra kattintva töltsd ki az űrlapot a felhasználóneveddel, e-mail címeddel és egy biztonságos jelszóval. Ezután küldünk egy megerősítő linket az e-mail címedre.</p>",
-    "keywords": "regisztrálás, fiók, létrehozás, új felhasználó"
-  },
-  {
-    "category": "fiok_es_regisztracio",
-    "question": "Miért nem kaptam megerősítő e-mailt?",
-    "answer": "<p>Először is, kérjük, ellenőrizd a SPAM (levélszemét) mappádat a postafiókodban. Ha 5 percen belül sem érkezik meg, próbálj meg újra regisztrálni. Ha a probléma továbbra is fennáll, vedd fel velünk a kapcsolatot a 'Kapcsolat' menüponton keresztül.</p>",
-    "keywords": "email, megerősítés, levél, spam, nem jött meg"
-  },
-  {
-    "category": "fiok_es_regisztracio",
-    "question": "Hogyan tudok bejelentkezni?",
-    "answer": "<p>A 'Bejelentkezés' gombra kattintva add meg a regisztrációkor használt e-mail címedet és jelszavadat. Bejelentkezni csak azután tudsz, hogy az e-mail címedet a kapott linkkel megerősítetted.</p>",
-    "keywords": "belépés, login, bejelentkezés"
-  },
-  {
-    "category": "fiok_es_regisztracio",
-    "question": "Elfelejtettem a jelszavamat, mit tegyek?",
-    "answer": "<p>A bejelentkezési oldalon kattints az 'Elfelejtetted a jelszavad?' linkre. Add meg a regisztrált e-mail címedet, és küldünk egy linket, ahol új jelszót állíthatsz be.</p>",
-    "keywords": "jelszó, elfelejtett, új jelszó, jelszócsere"
-  },
-  {
-    "category": "fiok_es_regisztracio",
-    "question": "Hogyan működik a fiókmegosztás elleni védelem?",
-    "answer": "<p>A biztonságod érdekében egy fiókkal egy időben csak egyetlen eszközről lehetsz bejelentkezve. Ha egy új eszközről lépsz be, a rendszer a korábbi helyen automatikusan kijelentkeztet.</p>",
-    "keywords": "megosztás, több eszköz, biztonság"
-  }
+    {
+      "category": "fiok_kezeles",
+      "question": "Hogyan tudok regisztrálni?",
+      "answer": "<p>A regisztrációhoz kattints a 'Regisztráció' gombra, és add meg a kért adatokat (név, e-mail, jelszó). A regisztráció befejezéséhez meg kell erősítened az e-mail címedet a kiküldött linkre kattintva. <strong>Fontos:</strong> Tanári fiókot csak érvényes VIP kóddal lehet regisztrálni.</p>",
+      "keywords": "regisztráció, fiók, létrehozás, signup"
+    },
+    {
+      "category": "fiok_kezeles",
+      "question": "Elfelejtettem a jelszavamat, mit tegyek?",
+      "answer": "<p>Kattints a 'Bejelentkezés' oldalon az 'Elfelejtetted a jelszavad?' linkre. Add meg a regisztrált e-mail címedet, és küldünk egy linket, ahol új jelszót állíthatsz be magadnak.</p>",
+      "keywords": "elfelejtett jelszó, jelszó, új jelszó, password, reset"
+    },
+    {
+      "category": "fiok_kezeles",
+      "question": "Hogyan tudom törölni a fiókomat?",
+      "answer": "<p>A fiókodat a <strong>Profil</strong> oldalon, a 'Veszélyzóna' szekcióban található 'Fiók Végleges Törlése' gombbal tudod törölni. Figyelem, ez a művelet végleges és nem vonható vissza, minden adatod elvész!</p>",
+      "keywords": "törlés, fiók, megszüntetés, adat, GDPR"
+    },
+    {
+      "category": "fiok_kezeles",
+      "question": "Miért nem kaptam megerősítő e-mailt?",
+      "answer": "<p>Először is, kérjük, ellenőrizd a SPAM (levélszemét) mappádat a postafiókodban. Ha 5 percen belül sem érkezik meg, próbálj meg újra regisztrálni. Ha a probléma továbbra is fennáll, vedd fel velünk a kapcsolatot.</p>",
+      "keywords": "email, megerősítés, levél, spam, nem jött meg"
+    },
+    {
+      "category": "fiok_kezeles",
+      "question": "Hogyan működik a fiókmegosztás elleni védelem?",
+      "answer": "<p>A biztonságod érdekében egy fiókkal egy időben csak egyetlen eszközről lehetsz bejelentkezve. Ha egy új eszközről lépsz be, a rendszer a korábbi helyen automatikusan kijelentkeztet.</p>",
+      "keywords": "megosztás, több eszköz, biztonság"
+    }
 ]
