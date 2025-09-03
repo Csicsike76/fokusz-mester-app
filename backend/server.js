@@ -1244,14 +1244,9 @@ app.post('/api/teacher/create-class-checkout-session', authenticateToken, async 
     }
 });
 
-app.post('/api/classes/create', authenticateToken, async (req, res) => {
+app.post('/api/classes/create', authenticateToken, authorizeAdmin, async (req, res) => {
   const { className, maxStudents } = req.body;
   try {
-    if (req.user.role !== 'teacher') {
-      return res
-        .status(403)
-        .json({ message: 'Hozzáférés megtagadva: csak tanárok hozhatnak létre osztályt.' });
-    }
     if (!className || !maxStudents) {
       return res
         .status(400)

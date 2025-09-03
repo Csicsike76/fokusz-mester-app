@@ -19,4 +19,11 @@ export const NAV_ITEMS = [
     path: "/dashboard/teacher",
     roles: ["teacher"]
   },
+  ,
+  {
+    id: "admin",
+    label: "Admin",
+    path: "/admin",
+    roles: ["admin"]
+  },
 ];
