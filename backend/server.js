@@ -234,31 +234,68 @@ const authLimiter = rateLimit({
   },
 });
 
-const authenticateToken = (req, res, next) => {
+const authenticateToken = async (req, res, next) => {
   const authHeader = req.headers['authorization'] || '';
   const token = authHeader.split(' ')[1];
-  if (!token) return res.status(401).json({ success: false, message: 'Hiányzó authentikációs token.' });
+  if (!token) {
+    return res.status(401).json({ success: false, message: 'Hiányzó authentikációs token.' });
+  }
 
-  jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
-    if (err) return res.status(403).json({ success: false, message: 'Érvénytelen vagy lejárt token.' });
-    req.user = user;
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const { userId, sessionId } = decoded;
+
+    if (!userId || !sessionId) {
+      return res.status(403).json({ success: false, message: 'Érvénytelen token formátum.' });
+    }
+
+    const userResult = await pool.query('SELECT active_session_id FROM users WHERE id = $1', [userId]);
+    if (userResult.rows.length === 0) {
+      return res.status(404).json({ success: false, message: 'Felhasználó nem található.' });
+    }
+
+    const activeSessionId = userResult.rows[0].active_session_id;
+
+    if (activeSessionId !== sessionId) {
+      return res.status(401).json({
+        success: false,
+        message: 'A munkamenet lejárt, valószínűleg egy másik eszközről jelentkeztek be. Kérjük, jelentkezzen be újra.'
+      });
+    }
+
+    req.user = decoded;
     next();
-  });
+  } catch (err) {
+    if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
+      return res.status(403).json({ success: false, message: 'Érvénytelen vagy lejárt token.' });
+    }
+    console.error("Authentication error in middleware:", err);
+    return res.status(500).json({ success: false, message: 'Szerverhiba az authentikáció során.' });
+  }
 };
 
-const authenticateTokenOptional = (req, res, next) => {
+const authenticateTokenOptional = async (req, res, next) => {
   const authHeader = req.headers['authorization'] || '';
   const token = authHeader.split(' ')[1];
   if (!token) {
     return next();
   }
 
-  jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
-    if (!err) {
-      req.user = user;
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const { userId, sessionId } = decoded;
+
+    if (userId && sessionId) {
+      const userResult = await pool.query('SELECT active_session_id FROM users WHERE id = $1', [userId]);
+      if (userResult.rows.length > 0 && userResult.rows[0].active_session_id === sessionId) {
+        req.user = decoded;
+      }
     }
+  } catch (err) {
+    // Optional auth: ignore errors and proceed without user
+  } finally {
     next();
-  });
+  }
 };
 
 const authorizeAdmin = (req, res, next) => {
@@ -743,9 +780,19 @@ app.post('/api/login', authLimiter, async (req, res) => {
           .json({ success: false, message: 'A tanári fiókod még nem lett jóváhagyva.' });
       }
     }
-    const token = jwt.sign({ userId: user.id, role: user.role }, process.env.SECRET_KEY, {
-      expiresIn: '1d',
-    });
+    
+    const newSessionId = crypto.randomBytes(32).toString('hex');
+    await pool.query(
+        'UPDATE users SET active_session_id = $1 WHERE id = $2',
+        [newSessionId, user.id]
+    );
+
+    const token = jwt.sign(
+      { userId: user.id, role: user.role, sessionId: newSessionId },
+      process.env.SECRET_KEY,
+      { expiresIn: '1d' }
+    );
+
     res.status(200).json({
       success: true,
       token,
@@ -813,7 +860,20 @@ const getFullUserProfile = async (userId) => {
     userProfile.successful_referrals = successfulReferrals;
     userProfile.earned_rewards = earnedRewards;
     
-    userProfile.is_subscribed = userProfile.is_permanent_free || !!activeSub || !!futureSub;
+    let hasActiveClassMembership = false;
+    if (userProfile.role === 'student') {
+        const classResult = await pool.query(
+            `SELECT 1 FROM classmemberships cm
+             JOIN classes c ON cm.class_id = c.id
+             WHERE cm.user_id = $1 AND c.is_active = true AND c.is_approved = true
+             LIMIT 1`,
+            [userId]
+        );
+        hasActiveClassMembership = classResult.rowCount > 0;
+    }
+    userProfile.is_member_of_approved_class = hasActiveClassMembership;
+    
+    userProfile.is_subscribed = userProfile.is_permanent_free || !!activeSub || !!futureSub || hasActiveClassMembership;
 
     return userProfile;
 };
@@ -1796,7 +1856,17 @@ app.post('/api/register/google', async (req, res) => {
             );
         }
 
-        const jwtToken = jwt.sign({ userId: user.id, role: user.role }, process.env.SECRET_KEY, { expiresIn: '1d' });
+        const newSessionId = crypto.randomBytes(32).toString('hex');
+        await client.query(
+            'UPDATE users SET active_session_id = $1 WHERE id = $2',
+            [newSessionId, user.id]
+        );
+
+        const jwtToken = jwt.sign(
+            { userId: user.id, role: user.role, sessionId: newSessionId },
+            process.env.SECRET_KEY,
+            { expiresIn: '1d' }
+        );
 
         await client.query('COMMIT');
         

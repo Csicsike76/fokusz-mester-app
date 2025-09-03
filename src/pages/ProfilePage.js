@@ -55,7 +55,9 @@ const ProfilePage = () => {
             return profileJson.user;
         } catch (err) {
             setError(err.message);
-            if (err.message.includes('Érvénytelen vagy lejárt token')) logout();
+            if (err.message.includes('Érvénytelen vagy lejárt token') || err.message.includes('A munkamenet lejárt')) {
+                logout();
+            }
             return null;
         }
     }, [token, user?.role, logout, updateUser]);
@@ -209,6 +211,64 @@ const ProfilePage = () => {
 
     const displayName = profileData.real_name || profileData.username;
 
+    const renderSubscriptionStatus = () => {
+        if (isProcessingPayment) {
+            return <div className={styles.statusInfo}><p><strong>Fiók frissítése folyamatban...</strong></p></div>;
+        }
+        if (profileData.subscription_status === 'vip_teacher') {
+            return <p className={styles.statusInfo}>A platformhoz való hozzáférésed tanárként korlátlan és díjmentes.</p>;
+        }
+        if (profileData.is_permanent_free) {
+            return <p className={styles.statusInfo}>Örökös prémium hozzáférésed van.</p>;
+        }
+        if (profileData.is_member_of_approved_class && !activeSubInfo && !futureSubInfo) {
+            return <p className={styles.statusInfo}>Prémium hozzáférésed egy osztálytagságon keresztül aktív.</p>;
+        }
+        if (activeSubInfo) {
+            return (
+                <>
+                    <p className={styles.activeSubscription}>
+                        Előfizetésed aktív. {activeSubInfo.current_period_end && `A jelenlegi időszak vége: ${new Date(activeSubInfo.current_period_end).toLocaleDateString()}`}
+                    </p>
+                    <button onClick={handleManageSubscription} className={styles.manageButton} disabled={isLoading}>Előfizetés kezelése</button>
+                </>
+            );
+        }
+        if (trialInfo || futureSubInfo) {
+            return (
+                <>
+                    {trialInfo && (
+                        <div className={styles.trialHighlightBox}>
+                            <p><strong>Ingyenes próbaidőszakod aktív.</strong> {trialInfo.current_period_end && `A prémium funkciók eddig érhetőek el: ${new Date(trialInfo.current_period_end).toLocaleDateString()}`}</p>
+                        </div>
+                    )}
+                    {futureSubInfo && (
+                        <div className={styles.futureSubscriptionInfo}>
+                            <p>Már megvásároltad a(z) <strong>{futureSubInfo.plan_name?.toLowerCase()}</strong> előfizetést. Ez automatikusan elindul, amint a próbaidőszak lejár.</p>
+                        </div>
+                    )}
+                    {!futureSubInfo && (
+                        <div className={styles.subscribeOptions}>
+                            <h4>Válts teljes előfizetésre a próbaidőszak lejárta előtt!</h4>
+                            <button onClick={() => handleCreateCheckoutSession('monthly')} disabled={isLoading}>Havi Előfizetés</button>
+                            <button onClick={() => handleCreateCheckoutSession('yearly')} disabled={isLoading}>Éves Előfizetés (2 hónap ajándék)</button>
+                        </div>
+                    )}
+                </>
+            );
+        }
+        return (
+            <>
+                <p className={styles.statusInfo}>Jelenleg nincs aktív előfizetésed vagy próbaidőszakod.</p>
+                <div className={styles.subscribeOptions}>
+                    <h4>Válassz prémium csomagot a korlátlan hozzáféréshez!</h4>
+                    <button onClick={() => handleCreateCheckoutSession('monthly')} disabled={isLoading}>Havi Előfizetés</button>
+                    <button onClick={() => handleCreateCheckoutSession('yearly')} disabled={isLoading}>Éves Előfizetés (2 hónap ajándék)</button>
+                </div>
+            </>
+        );
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.profileBox}>
@@ -339,22 +399,7 @@ const ProfilePage = () => {
                 <div className={styles.section}>
                     <h3>{profileData.role === 'teacher' ? 'VIP Tagság' : 'Előfizetési Státusz'}</h3>
                     <div className={styles.subscriptionStatus}>
-                        {isProcessingPayment ? ( <div className={styles.statusInfo}><p><strong>Fiók frissítése folyamatban...</strong></p></div> ) : 
-                        profileData.subscription_status === 'vip_teacher' ? ( <p className={styles.statusInfo}>A platformhoz való hozzáférésed tanárként korlátlan és díjmentes.</p> ) : 
-                        profileData.is_permanent_free ? ( <p className={styles.statusInfo}>Örökös prémium hozzáférésed van.</p> ) : 
-                        activeSubInfo ? ( <><p className={styles.activeSubscription}>Előfizetésed aktív. {activeSubInfo.current_period_end && `A jelenlegi időszak vége: ${new Date(activeSubInfo.current_period_end).toLocaleDateString()}`}</p><button onClick={handleManageSubscription} className={styles.manageButton} disabled={isLoading}>Előfizetés kezelése</button></> ) : 
-                        trialInfo || futureSubInfo ? (
-                            <>
-                                {trialInfo && <div className={styles.trialHighlightBox}><p><strong>Ingyenes próbaidőszakod aktív.</strong> {trialInfo.current_period_end && `A prémium funkciók eddig érhetőek el: ${new Date(trialInfo.current_period_end).toLocaleDateString()}`}</p></div>}
-                                {futureSubInfo && <div className={styles.futureSubscriptionInfo}><p>Már megvásároltad a(z) <strong>{futureSubInfo.plan_name?.toLowerCase()}</strong> előfizetést. Ez automatikusan elindul, amint a próbaidőszak lejár.</p></div>}
-                                {!futureSubInfo && <div className={styles.subscribeOptions}><h4>Válts teljes előfizetésre a próbaidőszak lejárta előtt!</h4><button onClick={() => handleCreateCheckoutSession('monthly')} disabled={isLoading}>Havi Előfizetés</button><button onClick={() => handleCreateCheckoutSession('yearly')} disabled={isLoading}>Éves Előfizetés (2 hónap ajándék)</button></div>}
-                            </>
-                        ) : (
-                            <>
-                                <p className={styles.statusInfo}>Jelenleg nincs aktív előfizetésed vagy próbaidőszakod.</p>
-                                <div className={styles.subscribeOptions}><h4>Válassz prémium csomagot a korlátlan hozzáféréshez!</h4><button onClick={() => handleCreateCheckoutSession('monthly')} disabled={isLoading}>Havi Előfizetés</button><button onClick={() => handleCreateCheckoutSession('yearly')} disabled={isLoading}>Éves Előfizetés (2 hónap ajándék)</button></div>
-                            </>
-                        )}
+                        {renderSubscriptionStatus()}
                     </div>
                 </div>
 

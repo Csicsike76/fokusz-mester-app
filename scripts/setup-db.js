@@ -30,7 +30,7 @@ async function run() {
     await client.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`);
 
     const tablesToDrop = [
-      'student_progress', // HOZZÁADVA: Az új tábla is törlésre kerül, ha újra fut a script
+      'student_progress',
       'contact_messages', 'admin_actions', 'error_logs', 'activity_logs',
       'notifications', 'user_quiz_results', 'quizquestions', 'curriculums',
       'helparticles', 'classmemberships', 'classes', 'teachers',
@@ -44,13 +44,13 @@ async function run() {
       CREATE TABLE users (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         username VARCHAR(255) UNIQUE NOT NULL,
-        real_name TEXT, -- HOZZÁADVA: A tanári felülethez és a regisztrációs szabályokhoz
+        real_name TEXT,
         email VARCHAR(255) UNIQUE NOT NULL,
-        parental_email VARCHAR(255), -- HOZZÁADVA: A szülői felügyelethez
+        parental_email VARCHAR(255),
         password_hash VARCHAR(255) NOT NULL,
         role VARCHAR(50) NOT NULL CHECK (role IN ('student','teacher','admin')),
-        provider TEXT DEFAULT 'local', -- HOZZÁADVA: Külső bejelentkezéshez
-        provider_id TEXT, -- HOZZÁADVA: Külső bejelentkezéshez
+        provider TEXT DEFAULT 'local',
+        provider_id TEXT,
         referral_code VARCHAR(255) UNIQUE,
         email_verified BOOLEAN DEFAULT false,
         email_verification_token VARCHAR(255),
@@ -58,6 +58,10 @@ async function run() {
         password_reset_token VARCHAR(255),
         password_reset_expires TIMESTAMPTZ,
         is_permanent_free BOOLEAN DEFAULT false,
+        active_session_id TEXT,
+        avatar_url TEXT,
+        xp INT DEFAULT 0 NOT NULL,
+        last_seen TIMESTAMPTZ,
         profile_metadata JSONB DEFAULT '{}'::jsonb,
         settings_json JSONB DEFAULT '{}'::jsonb,
         accessibility_settings JSONB DEFAULT '{}'::jsonb,
@@ -65,11 +69,9 @@ async function run() {
         archived BOOLEAN DEFAULT false,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-        UNIQUE(provider, provider_id) -- HOZZÁADVA: Külső bejelentkezéshez
+        UNIQUE(provider, provider_id)
       );
     `);
-
-    // --- A KÖVETKEZŐ TÁBLÁK VÁLTOZATLANOK MARADTAK AZ EREDETI SZKRIPTBŐL ---
 
     await client.query(`
       CREATE TABLE teachers (
@@ -107,8 +109,6 @@ async function run() {
       );
     `);
 
-    // --- ÚJ TÁBLA HOZZÁADVA A RÉSZLETES HALADÁSKÖVETÉSHEZ ---
-
     await client.query(`
       CREATE TABLE student_progress (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -123,8 +123,6 @@ async function run() {
       );
     `);
     
-    // --- A KÖVETKEZŐ TÁBLÁK SZINTÉN VÁLTOZATLANOK MARADTAK AZ EREDETI SZKRIPTBŐL ---
-
     await client.query(`
       CREATE TABLE referrals (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

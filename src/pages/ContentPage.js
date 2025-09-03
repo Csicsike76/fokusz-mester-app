@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import styles from './ContentPage.module.css';
 import quizStyles from './QuizPage.module.css';
@@ -19,7 +19,7 @@ import LessonView from '../components/LessonView/LessonView';
 const CharacterSelectionView = ({ contentData, onSelectCharacter }) => ( <div className={styles.characterSelection}> <h2 className={styles.mainTitle}>{contentData.title}</h2> <p className={styles.subTitle}>{contentData.description}</p> <div className={styles.characterGrid}> {Object.keys(contentData.characters).map(key => { const character = contentData.characters[key]; return ( <div key={key} className={styles.characterCard} style={{ backgroundColor: character.color }}> <img src={character.imageUrl || '/images/default-avatar.png'} alt={character.name} className={styles.characterImage} /> <h3 className={styles.characterName}>{character.name}</h3> <p className={styles.characterTitle}>{character.title}</p> <p className={styles.characterQuote}>"{character.quote}"</p> <button className={styles.characterButton} onClick={() => onSelectCharacter(key)}> Beszélgetek {character.name}-val → </button> </div> ); })} </div> </div> );
 const GenericToolView = ({ contentData }) => ( <div className={styles.genericToolContainer}> <h1 className={styles.mainTitle}>{contentData.title}</h1> <p className={styles.subTitle}>{contentData.description}</p> <div className={styles.workInProgress}> <p>Ismeretlen adatformátum.</p> </div> </div> );
 
-const QuizView = ({ contentData, slug, token, isTeacherMode }) => {
+const QuizView = ({ contentData, slug, token, isTeacherMode, onRestart }) => {
   const [userAnswers, setUserAnswers] = useState({});
   const [showResults, setShowResults] = useState(isTeacherMode);
   const [score, setScore] = useState(0);
@@ -77,7 +77,7 @@ const QuizView = ({ contentData, slug, token, isTeacherMode }) => {
     if (token) {
         setIsSaving(true);
         try {
-            await fetch(`${API_URL}/api/quiz/submit-result`, {
+            await fetch(`${API_URL}/api/progress/submit-result`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ slug: slug, score: sc, totalQuestions: activeQuestions.length, level: selectedDifficulty })
@@ -90,7 +90,10 @@ const QuizView = ({ contentData, slug, token, isTeacherMode }) => {
     }
   };
 
-  const handleRestart = () => setSelectedDifficulty(null);
+  const handleRestart = () => {
+    setSelectedDifficulty(null);
+    onRestart();
+  };
   
   if (!selectedDifficulty && !isTeacherMode) {
     return (
@@ -135,7 +138,7 @@ const QuizView = ({ contentData, slug, token, isTeacherMode }) => {
                 <p><strong>Eredményed:</strong> {score} / {activeQuestions.length}</p>
                 <p><strong>Százalék:</strong> {pct}%</p>
                 {isSaving && <p>Eredmény mentése...</p>}
-                <div className={quizStyles.resultsActions}>
+                <div className={styles.resultsActions}>
                   <button onClick={handleRestart} className={quizStyles.restartButton}>Új kvíz</button>
                   <Link to="/" className={quizStyles.backButton}>Vissza a főoldalra</Link>
                 </div>
@@ -155,6 +158,32 @@ const ContentPage = () => {
   const [contentData, setContentData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [restartKey, setRestartKey] = useState(Date.now());
+
+  const inactivityTimer = useRef(null);
+
+  const resetInactivityTimer = useCallback(() => {
+    clearTimeout(inactivityTimer.current);
+    inactivityTimer.current = setTimeout(() => {
+      const isActualQuiz = slug.includes('kviz');
+      if (isActualQuiz) {
+        setRestartKey(Date.now());
+      } else {
+        navigate('/');
+      }
+    }, 2 * 60 * 1000);
+  }, [navigate, slug]);
+
+  useEffect(() => {
+    const activityEvents = ['mousemove', 'keydown', 'click', 'scroll'];
+    activityEvents.forEach(event => window.addEventListener(event, resetInactivityTimer));
+    resetInactivityTimer();
+
+    return () => {
+      clearTimeout(inactivityTimer.current);
+      activityEvents.forEach(event => window.removeEventListener(event, resetInactivityTimer));
+    };
+  }, [resetInactivityTimer]);
 
   const fetchData = useCallback(async () => {
     try {
@@ -194,7 +223,7 @@ const ContentPage = () => {
       }
     };
     loadAndCheckContent();
-  }, [slug, canUsePremium, navigate, fetchData]);
+  }, [slug, canUsePremium, navigate, fetchData, restartKey]);
   
   if (isLoading) return <div className={styles.container}>Adatok betöltése...</div>;
   if (error) return <div className={styles.container}>{error}</div>;
@@ -203,7 +232,7 @@ const ContentPage = () => {
   const isActualQuiz = slug.includes('kviz');
   
   if (isActualQuiz) {
-      return <QuizView contentData={contentData} slug={slug} token={token} isTeacherMode={isTeacherMode} />;
+      return <QuizView key={restartKey} contentData={contentData} slug={slug} token={token} isTeacherMode={isTeacherMode} onRestart={() => setRestartKey(Date.now())} />;
   }
 
   const renderTheContent = () => {
