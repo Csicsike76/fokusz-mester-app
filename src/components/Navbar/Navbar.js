@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { useAuth } from '../../context/AuthContext';
-import { NAV_ITEMS } from '../../data/navItems'; // JAVÍTVA: Helyes útvonal
+import { NAV_ITEMS } from '../../data/navItems';
 import UserMenu from './UserMenu';
 import Search from '../Search/Search';
 
@@ -37,25 +37,23 @@ const Navbar = () => {
                 <Link to="/">"Fókusz Mester"</Link>
             </div>
 
-            <div className={styles.navLinksContainer}>
-                <div className={`${styles.navLinks} ${isMenuOpen ? styles.open : ''}`}>
-                    {accessibleNavItems.map(item => (
-                         <NavLink 
-                            key={item.id} 
-                            to={item.path} 
-                            className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink}
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            {item.label}
-                        </NavLink>
-                    ))}
-                    <NavLink to="/kapcsolat" className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink} onClick={() => setIsMenuOpen(false)}>Kapcsolat</NavLink>
-                    <div className={styles.dropdown}>
-                        <button className={styles.navLink}>Jogi Dokumentumok</button>
-                        <div className={styles.dropdownContent}>
-                            <Link to="/aszf" onClick={() => setIsMenuOpen(false)}>ÁSZF</Link>
-                            <Link to="/adatkezeles" onClick={() => setIsMenuOpen(false)}>Adatkezelési Tájékoztató</Link>
-                        </div>
+            <div className={`${styles.navLinks} ${isMenuOpen ? styles.open : ''}`}>
+                {accessibleNavItems.map(item => (
+                     <NavLink 
+                        key={item.id} 
+                        to={item.path} 
+                        className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink}
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        {item.label}
+                    </NavLink>
+                ))}
+                <NavLink to="/kapcsolat" className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink} onClick={() => setIsMenuOpen(false)}>Kapcsolat</NavLink>
+                <div className={styles.dropdown}>
+                    <button className={styles.navLink}>Jogi Dokumentumok</button>
+                    <div className={styles.dropdownContent}>
+                        <Link to="/aszf" onClick={() => setIsMenuOpen(false)}>ÁSZF</Link>
+                        <Link to="/adatkezeles" onClick={() => setIsMenuOpen(false)}>Adatkezelési Tájékoztató</Link>
                     </div>
                 </div>
             </div>

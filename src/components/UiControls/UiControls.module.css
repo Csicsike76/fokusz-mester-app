@@ -2,22 +2,20 @@
 .wrapper {
   position: fixed;
   left: 14px;
-  top: calc(var(--navbar-height, 72px) + 10px); /* közvetlenül a navbar (logo) alatt */
+  top: calc(var(--navbar-height, 72px) + 10px);
   display: flex;
-  flex-direction: column;    /* egymás alá kerüljenek */
+  flex-direction: column;
   gap: 10px;
-  z-index: 1000;             /* mindig a tartalom fölött */
+  z-index: 999;
   pointer-events: auto;
 }
 
-/* Egy-egy blokk (főoldal, téma, zoom, később továbbiak) */
 .group {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-/* ÚJ: Házikó (Home) ikon gomb – önálló, jól látható kerek gomb */
 .homeBtn {
   width: 34px;
   height: 34px;
@@ -37,7 +35,6 @@
 }
 .homeBtn:hover { background: rgba(255, 255, 255, 0.14); }
 
-/* Nagy „pill” gomb a téma váltóhoz */
 .pill {
   display: inline-flex;
   align-items: center;
@@ -56,7 +53,6 @@
 .icon { font-size: 1rem; }
 .label { font-weight: 600; }
 
-/* Kerek gombok (−/+) */
 .roundBtn {
   width: 34px;
   height: 34px;
@@ -70,22 +66,19 @@
 }
 .roundBtn:hover { background: rgba(255, 255, 255, 0.14); }
 
-/* A középső kis jelző (pl. 100%) */
 .pillSmall {
   min-width: 66px;
   text-align: center;
   padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid rgba(0,0,0,0.2);
-  background: #FFFFFF; /* VÉGLEGES JAVÍTÁS: Szilárd fehér háttér a garantált olvashatóságért */
-  color: #000000;      /* VÉGLEGES JAVÍTÁS: Szilárd fekete szöveg a maximális kontrasztért */
+  background: #FFFFFF;
+  color: #000000;
   font-weight: 700;
 }
 
-/* Helyfoglaló a jövőbeni funkcióknak (most üres) */
 .spacer { height: 2px; }
 
-/* Aktív gomb stílusa (pl. a pomodoro-nak) */
 .activeBtn {
   background: rgba(100, 180, 255, 0.25);
   border-color: rgba(100, 180, 255, 0.5);
@@ -94,8 +87,8 @@
 /* --- Pomodoro Timer Stílusok --- */
 .pomodoroContainer {
   position: fixed;
-  left: 14px; /* Igazodik a vezérlőkhöz */
-  top: calc(var(--navbar-height, 72px) + 10px + 210px); /* A vezérlők ALÁ pozícionálva */
+  left: 14px;
+  top: calc(var(--navbar-height, 72px) + 10px + 210px);
   width: 220px;
   padding: 16px;
   border-radius: 12px;
@@ -116,14 +109,14 @@
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
-  transition: color 1s ease-in-out; /* Harmonikus színváltás */
+  transition: color 1s ease-in-out;
 }
 
 .timeDisplay {
   font-size: 3rem;
   font-weight: 700;
   letter-spacing: 1px;
-  transition: color 1s ease-in-out; /* Harmonikus színváltás */
+  transition: color 1s ease-in-out;
 }
 
 .buttonGroup {
@@ -160,7 +153,6 @@
 .progressBarInner {
   height: 100%;
   border-radius: 4px;
-  /* A harmonikus átmenet a színváltáshoz */
   transition: width 0.5s ease-out, background-color 1s ease-in-out;
 }
 
@@ -169,16 +161,20 @@
   opacity: 0.8;
 }
 
-/* Kis képernyőn se lógjon bele semmibe */
-@media (max-width: 640px) {
+@media (max-width: 1080px) {
   .wrapper {
-    left: 8px;
-    top: calc(var(--navbar-height, 64px) + 8px);
-    gap: 8px;
+    flex-direction: row;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 8px;
+    background: var(--nav-bg);
+    border-top: 1px solid var(--nav-border);
+    justify-content: space-around;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
   }
-  .pomodoroContainer {
-    left: 8px;
-    top: calc(var(--navbar-height, 64px) + 8px + 210px); /* A vezérlők alá csúsztatjuk */
-    width: calc(100% - 16px);
+  .label {
+    display: none;
   }
 }

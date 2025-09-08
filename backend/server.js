@@ -15,8 +15,7 @@ const cron = require('node-cron');
 const { OAuth2Client } = require('google-auth-library');
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
-// HELYES KÓD a server.js 18. sorában az ön képernyőképe alapján:
-const logger = require('./logger');
+const logger = require('../logger');
 
 
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
@@ -895,7 +894,9 @@ const getFullUserProfile = async (userId) => {
         [userId]
     );
     const successfulReferrals = parseInt(referralsResult.rows?.[0]?.count || 0, 10);
-    const earnedRewards = Math.floor(successfulReferrals / 5);
+    
+    const rewardsResult = await pool.query('SELECT COUNT(*) FROM referral_rewards WHERE referrer_user_id = $1', [userId]);
+    const earnedRewards = parseInt(rewardsResult.rows?.[0]?.count || 0, 10);
 
     userProfile.successful_referrals = successfulReferrals;
     userProfile.earned_rewards = earnedRewards;

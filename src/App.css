@@ -1,4 +1,4 @@
-/* Globális Reset és Alapbeállítások */
+/* App.css */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,13 +7,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f4f4f4;
+  overflow-x: hidden;
 }
 
 * {
   box-sizing: border-box;
 }
 
-/* Kártya stílusok a tananyag oldalakhoz */
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -26,7 +26,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   padding: 1.5rem;
-  flex: 1 1 300px; /* Flexbox a reszponzív elrendezéshez */
+  flex: 1 1 300px;
 }
 
 .card h3 {
@@ -40,56 +40,28 @@ body {
   color: #1abc9c;
   text-decoration: none;
 }
-
 .quiz-link:hover {
   text-decoration: underline;
 }
 
-/* Globális Reset és Alapbeállítások */
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #f4f4f4;
-}
-
-* { box-sizing: border-box; }
-
-/* Kártya stílusok a tananyag oldalakhoz */
-.card-container { display:flex; flex-wrap:wrap; gap:1.5rem; margin-top:2rem; }
-.card { background-color:#fff; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,.1); padding:1.5rem; flex:1 1 300px; }
-.card h3 { margin-top:0; }
-.quiz-link { display:inline-block; margin-top:1rem; font-weight:bold; color:#1abc9c; text-decoration:none; }
-.quiz-link:hover { text-decoration:underline; }
-
-/* ===== Globális vezérlő változók ===== */
-html{
-  --ui-zoom: 1;                  /* nagyítóhoz */
-  --overlay: transparent;        /* VILÁGOS módban nincs fedés! */
+html {
+  --ui-zoom: 1;
+  --overlay: transparent;
   --card-bg: rgba(255,255,255,.95);
   --text-on-bg: #ffffff;
 }
 
-/* a nagyítás minden oldalon működik */
-body{ font-size: calc(16px * var(--ui-zoom)); }
+body {
+  font-size: calc(16px * var(--ui-zoom));
+}
 
-/* Sötét mód */
-html[data-theme="dark"]{
-  --overlay: rgba(6,12,18,.65);  /* csak sötét módban van halvány sötétítés */
+html[data-theme="dark"] {
+  --overlay: rgba(6,12,18,.65);
   --card-bg: rgba(44,62,80,.92);
   --text-on-bg: #ecf0f1;
 }
 
-/* segédosztály, ha bárhol kell */
-.fm-card{ background-color:var(--card-bg); color:var(--text-on-bg); }
-
-/* ... (a meglévő CSS kódod) ... */
-
-/* JAVÍTÁS: Globális szabály a fő tartalmi konténernek */
-.main-content {
-  width: 100%; /* Biztosítja, hogy a tartalom ne lógjon túl a képernyőn */
-  overflow-x: hidden; /* Ez a varázslat: letiltja a horizontális görgetést */
+.fm-card {
+  background-color: var(--card-bg);
+  color: var(--text-on-bg);
 }

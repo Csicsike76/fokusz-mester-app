@@ -24,7 +24,7 @@
 }
 
 .logo {
-  flex-shrink: 0; /* Megakadályozza, hogy a logó összenyomódjon */
+  flex-shrink: 0;
 }
 
 .logo a {
@@ -39,17 +39,14 @@
   color: var(--link-hover);
 }
 
-.navLinksContainer {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-}
-
 .navLinks {
+  flex-grow: 1;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 18px;
 }
+
 .navLinks a, .dropdown .navLink {
   color: var(--text-dim);
   text-decoration: none;
@@ -71,7 +68,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  flex-shrink: 0; /* Megakadályozza, hogy ez a rész összenyomódjon */
+  flex-shrink: 0;
 }
 
 .authLinks {
@@ -88,7 +85,6 @@
   font-size: 28px;
   cursor: pointer;
   z-index: 1100;
-  order: 3; /* A hamburger gomb mindig a jobb szélre kerül */
 }
 
 .welcomeUser {
@@ -250,11 +246,16 @@
 }
 
 @media (max-width: 1080px) {
-  .navLinksContainer {
-    display: none;
+  .navbar {
+    justify-content: space-between;
   }
-
+  
+  .hamburger {
+    display: block;
+  }
+  
   .navLinks {
+    display: none;
     position: absolute;
     top: var(--navbar-height);
     left: 0;
@@ -264,20 +265,10 @@
     align-items: flex-start;
     padding: 1rem;
     border-bottom: 1px solid var(--nav-border);
-    transform: translateY(-150%);
-    transition: transform 0.3s ease-in-out;
   }
   
   .navLinks.open {
-    transform: translateY(0);
-  }
-  
-  .navbar {
-    justify-content: space-between;
-  }
-
-  .hamburger {
-    display: block;
+    display: flex;
   }
     
   .dropdown {
@@ -296,11 +287,6 @@
       box-shadow: none;
       background-color: #1f1f1f;
       padding-left: 20px;
-      display: none; /* Alapból rejtett */
-  }
-
-  .dropdown:hover .dropdownContent {
-      display: block;
   }
 }
 
@@ -311,12 +297,11 @@
   }
 }
 
-/* Üdvözlő felhasználó stílusai */
 .welcomeUserContainer {
     position: relative;
     display: flex;
     align-items: center;
-    cursor: default; /* jelzi, hogy interaktív */
+    cursor: default;
 }
 
 .welcomeUserText {
@@ -327,12 +312,11 @@
 }
 
 .userIcon {
-    display: none; /* Alapból rejtett az ikon */
+    display: none;
     color: #ecf0f1;
     font-size: 1.5rem;
 }
 
-/* Tooltip stílus */
 .welcomeUserContainer::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -356,13 +340,11 @@
     visibility: visible;
 }
 
-
-/* Reszponzív viselkedés a felhasználónév elrejtéséhez */
 @media (max-width: 768px) {
     .welcomeUserText {
-        display: none; /* Kisebb képernyőn elrejtjük a szöveget */
+        display: none;
     }
     .userIcon {
-        display: block; /* És megjelenítjük az ikont */
+        display: block;
     }
 }
