@@ -50,7 +50,12 @@ const transporter = nodemailer.createTransport({
 
 const app = express();
 
-const whitelist = ['http://localhost:3000', process.env.FRONTEND_URL];
+const whitelist = [
+  'http://localhost:3000', 
+  process.env.FRONTEND_URL, 
+  'https://fokuszmester.com', 
+  'https://www.fokuszmester.com'
+];
 if (process.env.NODE_ENV !== 'production') {
   const os = require('os');
   const nets = os.networkInterfaces();
