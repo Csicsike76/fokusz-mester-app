@@ -105,7 +105,7 @@ const handleReferralCheck = async (client, userId) => {
       if (existingRewardResult.rows.length === 0) {
         logger.info(`JUTALOM JÁR! Az ajánló (${referrerId}) elérte a(z) ${milestone}. sikeres ajánlást.`);
         const referrerSubscription = await client.query(
-          "SELECT id FROM subscriptions WHERE user_id = $1 AND status = 'active' ORDER BY created_at DESC LIMIT 1",
+          "SELECT id FROM subscriptions WHERE user_id = $1 AND status IN ('active', 'trialing') ORDER BY created_at DESC LIMIT 1",
           [referrerId]
         );
         if (referrerSubscription.rows.length > 0) {
