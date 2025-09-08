@@ -37,7 +37,7 @@ const Navbar = () => {
                 <Link to="/">"Fókusz Mester"</Link>
             </div>
 
-            <div className={`${styles.navLinks} ${isMenuOpen ? styles.open : ''}`}>
+            <div className={`${styles.navLinksContainer} ${isMenuOpen ? styles.open : ''}`}>
                 {accessibleNavItems.map(item => (
                      <NavLink 
                         key={item.id} 
