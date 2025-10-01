@@ -77,7 +77,8 @@ const corsOptions = {
     }
   },
 };
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions)); // KOMMENTELD KI EZT!
+app.use(cors()); // IDEIGLENESEN ENGEDÉLYEZI AZ ÖSSZES FORRÁST - CSUPÁN TESZTELÉSHEZ!
 
 app.use((req, res, next) => {
   logger.info(`[${new Date().toISOString()}] Bejövő kérés: ${req.method} ${req.originalUrl}`);
