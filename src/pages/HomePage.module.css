@@ -1,5 +1,6 @@
 /* src/pages/HomePage.module.css */
 
+/* --- Általános elrendezés és téma --- */
 .mainContent {
     background-color: transparent;
     padding: 2rem 1rem;
@@ -11,28 +12,20 @@
     padding: 4rem 2rem;
 }
 
+.featureGridContainer { /* Új stílus a "Miért fontos" kártyák containerének */
+    padding: 2rem 0; /* Kevesebb padding, mint a normál .section-nél, ha lenyílik */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
 .featureGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     text-align: center;
 }
-.featureCard {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-}
-.featureCard h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: white;
-}
-.featureCard p {
-    color: #bdc3c7;
-    line-height: 1.6;
-}
+/* Eltávolítottam a régi .featureCard stílust, mivel most a .card alapját használjuk */
 
 .interactiveSection {
     background: rgba(0, 0, 0, 0.3);
@@ -66,10 +59,9 @@
     gap: 2rem;
 }
 
-/* VÉGLEGES JAVÍTÁS: Kártya alap stílusok */
 .card {
-    background-color: var(--card-bg, rgba(255, 255, 255, 0.95)); /* Világos háttér */
-    color: #2c3e50; /* Sötét, kontrasztos alapszín a szövegnek */
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.95));
+    color: #2c3e50;
     border-radius: 10px;
     padding: 1.5rem;
     display: flex;
@@ -79,35 +71,205 @@
 }
 .card:hover { transform: translateY(-5px); }
 
-/* VÉGLEGES JAVÍTÁS: Cím és leírás olvashatósága */
 .card h4 { 
     margin-top: 0; 
     font-size: 1.2rem; 
     flex-grow: 1; 
-    color: #34495e; /* Még kontrasztosabb, sötét szín a címnek */
+    color: #34495e; 
 }
 .card p { 
-    color: #7f8c8d; /* Olvasható, de a címnél halványabb szürke */
+    color: #7f8c8d; 
     font-size: 0.9rem; 
     line-height: 1.5; 
 }
 
+/* "Miért fontos" kártyák kiemelése */
+.featureCardHighlight {
+  background-color: var(--card-bg, #ffffff); /* Fehér háttér */
+  border-color: #3498db; /* Kék keret */
+  color: #2c3e50; /* Sötét szöveg */
+}
+.featureCardHighlight h3 {
+  color: #34495e; /* Sötétebb címsor */
+}
+.featureCardHighlight p {
+  color: #7f8c8d; /* Szürke szöveg */
+}
+
+
 .freeLesson, .freeTool {
-    border-color: #e74c3c;
+    border-color: #e74c3c; /* Ez a kártyák felső szegélyének színe */
 }
 .premiumCourse, .premiumTool {
-    border-color: #2ecc71;
+    border-color: #2ecc71; /* Ez a kártyák felső szegélyének színe */
 }
 
-.btn { display: inline-block; padding: 0.6rem 1.2rem; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; align-self: flex-start; margin-top: auto; }
-.freeLessonBtn, .freeToolBtn { background-color: #e74c3c; }
-.premiumCourseBtn, .premiumToolBtn { background-color: #2ecc71; }
+/* --- Kártya gombok stílusai: vissza az eredetihez --- */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px; /* Kerekebb gombok */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+  color: #ffffff; /* Fehér szöveg a kártya gombokon */
+  border: 1px solid; /* Alapértelmezett keret */
+}
 
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Egyedi színek a kártya gomboknak */
+.freeLessonBtn, .freeToolBtn {
+  background-color: #e74c3c; /* Vöröses */
+  border-color: #e74c3c;
+}
+.freeLessonBtn:hover, .freeToolBtn:hover {
+  background-color: #c0392b; /* Sötétebb vörös hoverre */
+}
+
+.premiumCourseBtn, .premiumToolBtn {
+  background-color: #2ecc71; /* Zöldes */
+  border-color: #2ecc71;
+}
+.premiumCourseBtn:hover, .premiumToolBtn:hover {
+  background-color: #27ae60; /* Sötétebb zöld hoverre */
+}
+
+/* --- Lenyitható szekciók stílusai --- */
+.collapsibleContainer {
+  margin-bottom: 0.75rem; /* CSÖKKENTETT térköz a lenyitható szekciók között */
+}
+
+.collapsibleTitleBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0; /* Alapértelmezett belső margó asztalin */
+  transition: background-color 0.2s ease;
+}
+
+.collapsibleHeaderTitle {
+  /* Ez a h3-ra és a Hero gombra is vonatkozik, ha CollapsibleContentSection címe */
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  line-height: 1.2;
+}
+
+.toggleIcon {
+  display: none; /* Alapértelmezetten rejtett asztali nézetben */
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-color, #ffffff); /* Fehér ikon alapértelmezett */
+  margin-left: 1rem;
+}
+
+.collapsibleBody {
+  max-height: 2000px; /* Elegendően nagy érték a tartalom befogadására nyitott állapotban */
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out;
+  padding: 0 2rem; /* A content is kap paddingot, mint a section */
+}
+
+/* A cardGrid távolságának beállítása a lenyitható szekciókban */
+.collapsibleBody > .cardGrid, .collapsibleBody > .featureGridContainer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* A "Tudj meg többet" gomb stílusa, amikor lenyitható címsorként funkcionál */
+.heroCollapsibleBtn {
+  margin: 2rem auto; /* Középre igazítás a Hero alatt, hozzáadott margóval */
+  display: block; /* Blokkszintű elem, hogy az auto margin működjön */
+  width: fit-content; /* Gomb szélessége a tartalomhoz igazodik */
+  background-color: #4CAF50; /* Zöld háttér */
+  color: #ffffff; /* Fehér szöveg */
+  border-color: #4CAF50;
+  padding: 0.75rem 1.5rem;
+}
+.heroCollapsibleBtn:hover {
+    background-color: #45a049; /* Sötétebb zöld hoverre */
+    border-color: #45a049;
+}
+
+
+/* --- Reszponzív / Mobil stílusok (töréspont: 768px) --- */
 @media (max-width: 768px) {
-    .section {
-        padding: 2rem 1rem;
-    }
-    .sectionTitle { 
-        font-size: 2rem; 
-    }
+  .section {
+      padding: 2rem 1rem;
+  }
+  .sectionTitle { 
+      font-size: 2rem; 
+  }
+  .cardGrid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .collapsibleTitleBar.mobileToggleEnabled {
+    cursor: pointer;
+    background-color: #4CAF50; /* ZÖLD háttér a lenyitható címsornak mobil nézetben */
+    color: #ffffff; /* Fehér szöveg */
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.75rem; /* CSÖKKENTETT térköz */
+  }
+
+  .collapsibleTitleBar.mobileToggleEnabled:hover {
+    background-color: #45a049; /* Sötétebb zöld hoverre */
+  }
+
+  .collapsibleHeaderTitle {
+    flex-grow: 1;
+    color: #ffffff; /* Fehér cím mobil nézetben, ha a TitleBar zöld */
+  }
+
+  .toggleIcon {
+    display: block;
+    color: #ffffff; /* Fehér ikon mobil nézetben */
+  }
+
+  .collapsibleBody.closed {
+    max-height: 0;
+    padding: 0 1rem; /* Mobil nézetben kisebb oldalsó padding, ha zárt */
+  }
+
+  /* A "Tudj meg többet" gomb mobil nézetben */
+  .heroCollapsibleBtn {
+    width: 100%; /* Teljes szélesség mobil nézetben */
+    margin-top: 1.5rem; /* Margó a Hero alatt */
+    padding: 0.8rem 1.5rem; /* Konzisztens padding */
+    border-radius: 8px; /* Konzisztens border-radius */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Asztali-specifikus stílusok (> 768px töréspont) */
+@media (min-width: 769px) {
+  .collapsibleTitleBar {
+    cursor: default;
+    background-color: transparent; /* Nincs speciális háttér asztali nézetben */
+    padding: 0.5rem 0;
+  }
+  .collapsibleHeaderTitle {
+    /* Asztali nézetben a címek színe a .sectionTitle/.subjectTitle osztályokból jön (ezek fehérek) */
+    color: white; /* Biztosítja, hogy a címek fehérek maradjanak */
+  }
+  .toggleIcon {
+    display: none;
+  }
+  .collapsibleBody {
+    max-height: none !important; /* Mindig nyitva asztali nézetben */
+    padding: 0 2rem; /* Asztali nézetben a content is kap paddingot */
+  }
+  /* Rejtse el a "Tudj meg többet" gombot asztali nézetben, mivel a tartalom nyitva van */
+  .heroCollapsibleBtn {
+    display: none;
+  }
 }

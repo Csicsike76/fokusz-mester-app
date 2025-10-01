@@ -1,20 +1,23 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
-import ChatButton from '../ChatButton/ChatButton';
-import BackgroundVideo from '../BackgroundVideo/BackgroundVideo';
-import UiControls from '../UiControls/UiControls';
+import BackgroundVideo from '../BackgroundVideo/BackgroundVideo'; // Importáljuk a BackgroundVideo komponenst
+import UiControls from '../UiControls/UiControls'; // Importáljuk a UiControls komponenst
 
-const Layout = () => (
-  <>
-    <BackgroundVideo />
-    <Navbar />
-    <UiControls />
-    <main className="main-content">
-      <Outlet />
-    </main>
-    <ChatButton />
-  </>
-);
+const Layout = () => {
+  return (
+    <>
+      {/* A BackgroundVideo a JSX fában a legelső elem,
+                  így a z-index: -1 tudja a háttérbe helyezni. */}
+      <BackgroundVideo /> 
+      <Navbar />
+      <UiControls /> 
+      <main>
+        <Outlet />
+      </main>
+      {/* Ide jöhet a Footer komponens, ha van */}
+    </>
+  );
+};
 
 export default Layout;

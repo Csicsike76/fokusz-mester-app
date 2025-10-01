@@ -1,52 +1,46 @@
-/* src/pages/ContentPage.module.css (TELJES, JAVÍTOTT VERZIÓ) */
+/* src/pages/ContentPage.module.css (JAVÍTOTT VERZIÓ) */
 
+/* Alap konténer a tartalomnak */
 .container, .fullWidthContainer {
     position: relative;
     width: 100%;
-    min-height: calc(100vh - 80px);
-    overflow: hidden;
-}
-
-.container {
+    min-height: calc(100vh - var(--navbar-height, 72px));
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 40px 20px;
+    padding: 20px 10px;
+    box-sizing: border-box;
 }
 
 .fullWidthContainer {
-    display: block;
+    padding: 0;
+    align-items: stretch;
 }
 
-.backgroundVideo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -2;
-    object-fit: cover;
-}
-
+/* A background overlay marad, feltételezve, hogy egy globális video van mögötte */
 .backgroundOverlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--overlay);
-    z-index: -1;
+    /* JAVÍTVA: Az --overlay változó értékét az App.css fogja szabályozni. */
+    background-color: var(--overlay); 
+    z-index: 0; /* Video (-1) felett, tartalom (1) alatt */
 }
 
 .contentWrapper {
     position: relative;
-    z-index: 1;
+    z-index: 1; /* Tartalom rétege */
     width: 100%;
-    height: 100%;
+    max-width: 100%;
+    min-height: calc(100vh - var(--navbar-height, 72px) - 40px);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-top: 20px;
 }
 
 /* KÖZÖS CÍMSOR STÍLUSOK */
@@ -56,6 +50,8 @@
     color: #ffffff;
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-align: center;
+    max-width: 90%;
 }
 
 .subTitle {
@@ -66,21 +62,62 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
+    line-height: 1.5;
 }
 
 /* KARAKTERVÁLASZTÓ NÉZET */
-.characterSelection { width: 100%; max-width: 900px; text-align: center; }
-.characterGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-.characterCard { display: flex; flex-direction: column; align-items: center; padding: 30px 20px; border-radius: 12px; color: white; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.1); }
+.characterSelection { 
+    width: 100%; 
+    max-width: 900px; 
+    text-align: center; 
+    box-sizing: border-box;
+    padding: 0 15px;
+}
+.characterGrid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 30px; 
+}
+.characterCard { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 30px 20px; 
+    border-radius: 12px; 
+    color: white; 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    text-align: center;
+}
 .characterCard:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); }
-.characterImage { width: 100px; height: 100px; border-radius: 50%; border: 4px solid white; object-fit: cover; margin-bottom: 15px; }
+.characterImage { 
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
+    border: 4px solid white; 
+    object-fit: cover; 
+    margin-bottom: 15px; 
+}
 .characterName { font-size: 1.8rem; margin: 10px 0 5px 0; font-weight: bold; }
 .characterTitle { font-size: 1rem; margin: 0 0 20px 0; font-style: italic; opacity: 0.9; }
 .characterQuote { font-size: 0.9rem; margin: 0 0 25px 0; flex-grow: 1; font-family: 'Georgia', serif; max-width: 85%; }
-.characterButton { width: 100%; padding: 12px 20px; border: 2px solid rgba(255, 255, 255, 0.8); background-color: transparent; color: white; font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease; }
+.characterButton { 
+    width: 100%; 
+    padding: 12px 20px; 
+    border: 2px solid rgba(255, 255, 255, 0.8); 
+    background-color: transparent; 
+    color: white; 
+    font-size: 1rem; 
+    font-weight: bold; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
 .characterButton:hover { background-color: white; color: #333; }
 
-/* CHAT NÉZET - JAVÍTVA */
+/* CHAT NÉZET */
 .chatContainer { 
     width: 100%; 
     max-width: 700px; 
@@ -93,7 +130,7 @@
     overflow: hidden; 
     backdrop-filter: blur(5px); 
     color: white;
-    margin: auto; /* Ez a sor biztosítja, hogy a .contentWrapper-en belül is középre kerüljön */
+    margin: auto; 
 }
 .chatHeader { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background-color: rgba(0,0,0,0.2); }
 .backButton { background: none; border: 1px solid white; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
@@ -107,7 +144,8 @@
 
 /* KVÍZ ÉS ÁLTALÁNOS NÉZET */
 .quizContainer, .genericToolContainer {
-    background-color: rgba(44, 62, 80, 0.85);
+    /* JAVÍTVA: A háttérszín átlátszó, hogy a háttérvideó látszódjon */
+    background-color: transparent; /* JAVÍTVA */
     padding: 3rem 4rem;
     border-radius: 15px;
     text-align: center;
@@ -115,17 +153,194 @@
     max-width: 800px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     backdrop-filter: blur(5px);
+    width: 100%;
+    box-sizing: border-box;
+    margin: 20px auto;
 }
 .quizContainer .mainTitle, .genericToolContainer .mainTitle { color: #ecf0f5; text-shadow: none; }
 .quizContainer .subTitle, .genericToolContainer .subTitle { color: #e7ebef; text-shadow: none; }
 
 /* LessonView (kétoszlopos tananyag) stílusai */
-.lessonContainer { display: flex; height: calc(100vh - 80px); background-color: #f4f7f9; color: #333; }
-.lessonToc { width: 300px; flex-shrink: 0; background-color: #ffffff; border-right: 1px solid #e2e8f0; padding: 2rem; overflow-y: auto; }
-.lessonToc h2 { font-size: 1.2rem; margin-top: 0; color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 0.5rem; }
-.lessonToc ul { list-style-type: none; padding: 0; margin: 1rem 0 0 0; }
-.lessonToc li { margin-bottom: 0.5rem; }
-.lessonToc a { text-decoration: none; color: #4a5568; }
-.lessonToc > ul > li > a { font-weight: 700; }
-.lessonToc ul ul { padding-left: 1rem; margin-top: 0.5rem; border-left: 2px solid #e2e8f0; }
-.lessonMainContent { flex-grow: 1; padding: 2rem 3rem; overflow-y: auto; }
+.lessonContainer { 
+    display: flex; 
+    height: calc(100vh - var(--navbar-height, 72px)); 
+    /* JAVÍTVA: A háttérszín átlátszó, hogy a háttérvideó látszódjon */
+    background-color: transparent; /* JAVÍTVA */
+    color: var(--main-text-color); /* JAVÍTVA: A szövegszín a globális változóból */
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 12px;
+}
+.lessonToc { 
+    width: 320px; 
+    flex-shrink: 0; 
+    /* JAVÍTVA: A háttérszín átlátszó, hogy a háttérvideó látszódjon, de az overlay is takarhatja */
+    background-color: var(--nav-bg-color); /* JAVÍTVA: A navbar háttérszínét használja */
+    border-right: 1px solid var(--nav-border-color); /* JAVÍTVA: A navbar szegélyét használja */
+    padding: 2rem; 
+    overflow-y: auto; 
+    box-sizing: border-box;
+}
+.toc h2 { font-size: 1.2rem; margin-top: 0; color: var(--header-color); border-bottom: 2px solid var(--header-color); padding-bottom: 0.5rem; }
+.toc ul { list-style-type: none; padding: 0; margin: 1rem 0 0 0; }
+.toc > ul > li { margin-bottom: 0.5rem; }
+.toc ul li a { text-decoration: none; color: var(--nav-text-color); } /* JAVÍTVA: Globális változót használ */
+.toc > ul > li > a { font-weight: 700; }
+.toc ul ul { padding-left: 1rem; margin-top: 0.5rem; border-left: 2px solid var(--nav-border-color); } /* JAVÍTVA: Globális változót használ */
+.lessonMainContent { 
+    flex-grow: 1; 
+    padding: 2rem 3rem; 
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+/* MÉDIA LEKÉRDEZÉSEK A RESZPONZIVITÁSÉRT */
+
+@media (max-width: 1200px) {
+    .lessonToc {
+        width: 250px;
+        padding: 1.5rem;
+    }
+    .lessonMainContent {
+        padding: 2rem;
+    }
+    .quizContainer, .genericToolContainer {
+        padding: 2.5rem 3rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .container, .fullWidthContainer {
+        padding: 15px 10px;
+    }
+    .mainTitle {
+        font-size: 2.2rem;
+    }
+    .subTitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    /* LessonView: egyoszlopos elrendezés */
+    .lessonContainer {
+        flex-direction: column;
+        height: auto; 
+        min-height: calc(100vh - var(--navbar-height, 72px));
+        border-radius: 8px;
+    }
+
+    .toc {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--nav-border-color); /* JAVÍTVA: Globális változót használ */
+        padding: 1.5rem 1rem;
+        max-height: 40vh;
+        position: sticky;
+        top: var(--navbar-height, 72px);
+        z-index: 10;
+        background-color: var(--nav-bg-color); /* JAVÍTVA: Globális változót használ */
+    }
+    .toc h2 {
+        font-size: 1.1rem;
+    }
+
+    .mainContent { 
+        padding: 1.5rem 1rem; 
+        flex-grow: 1; 
+    }
+
+    .characterGrid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    .quizContainer, .genericToolContainer {
+        padding: 2rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container, .fullWidthContainer {
+        padding: 10px 5px;
+    }
+    .mainTitle {
+        font-size: 1.8rem;
+    }
+    .subTitle {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+    .characterGrid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .characterCard {
+        padding: 15px 10px;
+    }
+    .characterImage {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 10px;
+    }
+    .characterName {
+        font-size: 1.4rem;
+    }
+    .characterQuote {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+    }
+    .characterButton {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    .chatContainer {
+        height: 80vh;
+        max-width: 95%;
+    }
+
+    .quizContainer, .genericToolContainer {
+        padding: 1.5rem 1.5rem;
+        margin: 10px auto;
+    }
+    .quizContainer h1, .genericToolContainer h1 {
+        font-size: 1.8rem;
+    }
+    .quizContainer p, .genericToolContainer p {
+        font-size: 1rem;
+    }
+
+    .toc {
+        padding: 1rem 0.8rem;
+        max-height: 35vh;
+    }
+    .mainContent {
+        padding: 1rem 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainTitle {
+        font-size: 1.5rem;
+    }
+    .subTitle {
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+    }
+    .characterCard {
+        padding: 10px;
+    }
+    .characterImage {
+        width: 60px;
+        height: 60px;
+    }
+    .characterName {
+        font-size: 1.2rem;
+    }
+    .quizContainer, .genericToolContainer {
+        padding: 1rem;
+    }
+    .quizContainer h1, .genericToolContainer h1 {
+        font-size: 1.5rem;
+    }
+}

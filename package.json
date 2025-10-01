@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "cross-env REACT_APP_API_URL=https://fokuszmester.com/api REACT_APP_GOOGLE_CLIENT_ID=664375697790-g5qkfgik7crvjdl3hp3386tgfgdu8elv.apps.googleusercontent.com react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "db:setup": "node scripts/setup-db.js",
@@ -17,6 +17,9 @@
     "migrate:redo": "node-pg-migrate down -m ./migrations && node-pg-migrate up -m ./migrations"
   },
   "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/cli": "^7.4.3",
+    "@capacitor/core": "^7.4.3",
     "@react-oauth/google": "^0.12.1",
     "@types/file-saver": "^2.0.7",
     "@types/tesseract.js": "^0.0.2",
@@ -56,5 +59,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
   }
 }

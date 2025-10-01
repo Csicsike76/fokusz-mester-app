@@ -276,9 +276,10 @@ const ContentPage = () => {
     return (
         <div className={containerClassName}>
             <div className={styles.backgroundOverlay}></div>
-            <video autoPlay loop muted className={styles.backgroundVideo}>
+            {/* Az alábbi video tag eltávolítva, feltételezve, hogy a BackgroundVideo komponens globálisan van kezelve a Layout-ban vagy App.js-ben. */}
+            {/* <video autoPlay loop muted className={styles.backgroundVideo}>
                 <source src="/videos/bg-video.mp4" type="video/mp4" />
-            </video>
+            </video> */}
             <div className={styles.contentWrapper}>
                 {componentToRender}
             </div>

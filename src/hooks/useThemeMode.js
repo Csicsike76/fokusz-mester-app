@@ -14,7 +14,8 @@ export const useThemeMode = () => {
     document.documentElement.setAttribute('data-theme', t);
     localStorage.setItem(LS_KEY, t);
     // FONTOS: overlay logika – világos módban átlátszó, sötétben sötétítsen
-    const overlay = t === 'dark' ? 'rgba(30, 40, 50, 0.6)' : 'transparent';
+    // JAVÍTVA: Biztosítva, hogy az --overlay CSS változó frissüljön.
+    const overlay = t === 'dark' ? 'rgba(30, 40, 50, 0.65)' : 'transparent'; // Füstösebb sötét, mint korábban
     document.documentElement.style.setProperty('--overlay', overlay);
   }, []);
 

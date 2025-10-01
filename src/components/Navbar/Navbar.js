@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { useAuth } from '../../context/AuthContext';
@@ -21,7 +21,8 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (navRef.current && !navRef.current.contains(event.target)) {
+            // Bezárja a menüt, ha az "hamburger" gomb kivételével máshova kattintunk
+            if (navRef.current && !navRef.current.contains(event.target) && !event.target.closest(`.${styles.hamburger}`)) {
                 setIsMenuOpen(false);
             }
         };
@@ -37,6 +38,7 @@ const Navbar = () => {
                 <Link to="/">"Fókusz Mester"</Link>
             </div>
 
+            {/* A navigációs linkek konténere mobil nézeten becsúszó menüként funkcionál */}
             <div className={`${styles.navLinksContainer} ${isMenuOpen ? styles.open : ''}`}>
                 {accessibleNavItems.map(item => (
                      <NavLink 

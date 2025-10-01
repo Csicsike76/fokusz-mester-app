@@ -1,68 +1,212 @@
+/* Fájl: src/components/LessonView/LessonView.module.css (MÓDOSÍTVA) */
+
+:root {
+    --bg-color: #2c3e50;
+    --main-text-color: #ecf0f1;
+    --nav-bg-color: rgba(23, 32, 42, 0.8);
+    --nav-text-color: #bdc3c7;
+    --nav-hover-color: #ffffff;
+    --nav-border-color: rgba(255, 255, 255, 0.1);
+    --header-color: #ffffff;
+    --accent-color: #436F4D;
+    --navbar-height: 72px;
+}
+
 .container {
-    padding: 2rem 1rem; /* Alapértelmezett, mobilbarát padding */
-    color: white;
-    max-width: 1200px;
-    width: 100%; /* Kitölti a rendelkezésre álló helyet a max-width-ig */
-    margin: 2rem auto;
-}
-
-.error {
-    color: #e74c3c;
-    background-color: rgba(231, 76, 60, 0.2);
-    padding: 1rem;
-    border-radius: 8px;
-}
-
-.subjectSection {
-    margin-bottom: 3rem;
-}
-
-.subjectTitle {
-    font-size: 2.2rem;
-    text-transform: capitalize;
-    border-bottom: 2px solid #1abc9c;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.cardGrid {
-    display: grid;
-    /* VÉGLEGES JAVÍTÁS: Automatikusan illeszkedő, reszponzív rács */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-.lessonCard {
-    background-color: rgba(44, 62, 80, 0.8);
-    border: 1px solid rgba(26, 188, 156, 0.5);
-    border-radius: 10px;
-    padding: 1.5rem;
-    backdrop-filter: blur(5px);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
-    flex-direction: column;
+    max-width: 1600px;
+    margin: 0 auto;
+    background-color: var(--bg-color);
+    width: 100%;
+    color: var(--main-text-color);
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
 }
 
-.lessonCard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    border-color: #1abc9c;
+.toc {
+    width: 320px;
+    flex-shrink: 0;
+    background-color: var(--nav-bg-color);
+    border-right: 1px solid var(--nav-border-color);
+    padding: 2rem;
+    height: calc(100vh - var(--navbar-height));
+    position: sticky;
+    top: var(--navbar-height);
+    overflow-y: auto;
+    backdrop-filter: blur(5px);
+    box-sizing: border-box;
+    z-index: 10; /* Tartalom (1) felett, de a vezérlők és Navbar alatt */
 }
 
-.lessonCard h3 {
+.toc h2 {
+    font-size: 1.2rem;
     margin-top: 0;
+    color: var(--header-color);
+    border-bottom: 2px solid var(--header-color);
+    padding-bottom: 0.5rem;
+}
+
+.toc ul { list-style-type: none; padding: 0; margin: 1rem 0 0 0; }
+.toc > ul > li { margin-bottom: 1rem; position: relative; }
+.toc ul li a { text-decoration: none; color: var(--nav-text-color); display: block; padding: 0.3rem 0; transition: color 0.2s; font-weight: 500; cursor: pointer; }
+.toc > ul > li > a.chapterTitle { font-weight: 700; font-size: 1.1em; padding-right: 30px; }
+.toc ul li ul { padding-left: 1rem; margin-top: 0.5rem; border-left: 2px solid var(--nav-border-color); }
+.toc ul li ul li a { font-size: 0.95em; }
+.toc ul li a:hover { color: var(--nav-hover-color); }
+
+.subList {
+    max-height: 1000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+.subList:not(.expanded) {
+    max-height: 0;
+}
+
+.expandButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: transparent;
+    border: 1px solid var(--nav-border-color);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--nav-text-color);
+    display: none;
+}
+.expandButton:hover { background-color: rgba(255, 255, 255, 0.1); }
+
+.mainContent { 
     flex-grow: 1; 
+    padding: 2rem 3rem; 
+    width: calc(100% - 320px);
+    overflow-y: auto;
+    box-sizing: border-box;
+    z-index: 1;
+}
+.mainContent > h1 { 
+    text-align: center; 
+    font-size: 2.5rem; 
+    color: var(--header-color); 
+    margin-bottom: 3rem; 
 }
 
-.lessonLink {
-    color: #1abc9c;
-    text-decoration: none;
+.contentSection {
+    margin-bottom: 4rem;
+}
+
+.loadingError { padding: 2rem; text-align: center; font-style: italic; color: #bdc3c7; }
+
+/* Mobil tartalomjegyzék váltó gomb */
+.tocToggle {
+    display: none;
+    position: fixed;
+    top: calc(var(--navbar-height, 72px) + 1rem);
+    left: 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 5px;
     font-weight: bold;
-    align-self: flex-start;
+    cursor: pointer;
+    z-index: 1110; /* UiControls (1100) fölé, de az overlay (1115) alá */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
-@media (min-width: 768px) {
+/* Mobil tartalomjegyzék overlay */
+.tocOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1115; /* tocToggle (1110) fölé, de a TOC menü (1120) alá */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.tocOverlay.open { 
+    display: block; 
+    opacity: 1;
+}
+
+/* MÉDIA LEKÉRDEZÉSEK A RESZPONZIVITÁSÉRT */
+
+@media (max-width: 1024px) {
+    .tocToggle { display: inline-block; }
+    .toc {
+        position: fixed;
+        top: 0;
+        left: 0; 
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        z-index: 1120; /* Az overlay (1115) fölé */
+        overflow-y: auto;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        border-right: none;
+    }
+    .toc.open { 
+        transform: translateX(0);
+    }
+    .container { 
+        flex-direction: column;
+        height: auto; 
+        min-height: calc(100vh - var(--navbar-height)); 
+    }
+    .mainContent { 
+        padding: 2rem 1rem; 
+        width: 100%;
+        padding-top: 5rem;
+    }
+    .expandButton { display: block; }
+    .subList:not(.expanded) {
+        max-height: 0;
+    }
+}
+
+@media (max-width: 768px) {
     .container {
-        padding: 2rem; /* Nagyobb képernyőn nagyobb margó */
+        border-radius: 0;
+    }
+    .mainContent {
+        padding: 1.5rem 0.8rem;
+    }
+    .mainContent > h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    .tocToggle {
+        top: calc(var(--navbar-height, 72px) + 0.5rem);
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+        left: 0.5rem;
+    }
+    .toc {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainContent > h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    .mainContent {
+        padding: 1rem 0.5rem;
+    }
+    .tocToggle {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.7rem;
     }
 }

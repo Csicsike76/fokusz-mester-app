@@ -1,5 +1,6 @@
 /* App.css */
 body {
+  height: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -7,11 +8,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f4f4f4;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Megakadályozza a horizontális görgetést az egész oldalon */
+  overflow-y: auto; /* A tartalom görgethető az Y tengelyen */
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* Minden elemen, hogy a padding és border ne növelje a szélességet */
 }
 
 .card-container {
@@ -46,9 +48,10 @@ body {
 
 html {
   --ui-zoom: 1;
-  --overlay: transparent;
+  --overlay: transparent; /* JAVÍTVA: Az --overlay alapértelmezett értéke transparent marad.
+                             A useThemeMode.js fogja felülírni, ha témát váltunk. */
   --card-bg: rgba(255,255,255,.95);
-  --text-on-bg: #ffffff;
+  --text-on-bg: #000000; /* Világos módban fekete szöveg a jobb olvashatóságért */
 }
 
 body {
@@ -56,9 +59,9 @@ body {
 }
 
 html[data-theme="dark"] {
-  --overlay: rgba(6,12,18,.65);
+  --overlay: rgba(6,12,18,.65); /* Dark mode overlay */
   --card-bg: rgba(44,62,80,.92);
-  --text-on-bg: #ecf0f1;
+  --text-on-bg: #ecf0f1; /* Dark mode-ban világos szöveg */
 }
 
 .fm-card {

@@ -1,5 +1,4 @@
-// Fájl: src/pages/QuizPage.js
-
+// src/pages/QuizPage.js
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styles from './QuizPage.module.css';

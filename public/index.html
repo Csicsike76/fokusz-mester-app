@@ -3,7 +3,28 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- Dinamikus viewport meta tag a készülék alapján -->
+    <script>
+      (function() {
+        const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const scale = isMobile ? '0.8' : '1.0';
+        let viewportMeta = document.querySelector('meta[name="viewport"]');
+        if (!viewportMeta) {
+          viewportMeta = document.createElement('meta');
+          viewportMeta.name = 'viewport';
+          document.head.appendChild(viewportMeta);
+        }
+        // Mobil nézetben (és APK-ban) 80%-os nagyítás, asztali nézetben 100%. 
+        // A user-scalable=no megakadályozza a felhasználói nagyítást.
+        viewportMeta.content = `width=device-width, initial-scale=${scale}, maximum-scale=${scale}, user-scalable=no`;
+      })();
+    </script>
+    
+    <!-- Az eredeti viewport sor, amelyet a fenti script felülír vagy lecserél. 
+         Ezt kommentben hagytam, de akár törölheted is. -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
+    
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"

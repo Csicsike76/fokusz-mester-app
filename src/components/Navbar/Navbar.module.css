@@ -12,356 +12,7 @@
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 1000;
-  height: var(--navbar-height);
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  background: var(--nav-bg);
-  border-bottom: 1px solid var(--nav-border);
-  backdrop-filter: blur(6px);
-  box-shadow: var(--shadow);
-}
-
-.logo {
-  flex-shrink: 0;
-}
-
-.logo a {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 800;
-  letter-spacing: .2px;
-  font-size: 20px;
-  white-space: nowrap;
-}
-.logo a:hover {
-  color: var(--link-hover);
-}
-
-.navLinks {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 18px;
-}
-
-.navLinks a, .dropdown .navLink {
-  color: var(--text-dim);
-  text-decoration: none;
-  font-weight: 600;
-  padding: 8px 10px;
-  border-radius: 8px;
-  transition: color .15s ease, background-color .15s ease;
-  white-space: nowrap;
-}
-.navLinks a:hover, .dropdown .navLink:hover {
-  color: var(--text);
-  background: rgba(255,255,255,0.06);
-}
-.dashboardLink {
-  color: var(--notification-yellow) !important;
-}
-
-.rightSide {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-shrink: 0;
-}
-
-.authLinks {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 28px;
-  cursor: pointer;
-  z-index: 1100;
-}
-
-.welcomeUser {
-  color: #ecf0f1;
-  font-weight: 600;
-  margin-right: 10px;
-  white-space: nowrap;
-}
-
-.loginButton, .logoutButton, .authButton {
-  color: #ffffff !important;
-  text-decoration: none !important;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.08);
-  font-weight: 700;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 0.9rem;
-  transition: background-color 0.2s;
-  white-space: nowrap;
-}
-
-.loginButton:hover, .logoutButton:hover, .authButton:hover {
-  background: rgba(255,255,255,0.16);
-}
-
-.authButton {
-  background: #1abc9c;
-  border-color: #16a085;
-}
-.authButton:hover {
-  filter: brightness(1.05);
-}
-
-.notificationContainer {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.notificationBell {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--notification-yellow);
-  font-size: 1.2rem;
-  position: relative;
-  padding: 5px;
-}
-
-.notificationBadge {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  background-color: #e74c3c;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 5px;
-  font-size: 0.7rem;
-  font-weight: bold;
-}
-
-.notificationPanel {
-  position: absolute;
-  top: 120%;
-  right: 0;
-  width: 320px;
-  max-height: 400px;
-  overflow-y: auto;
-  background-color: #2c3e50;
-  border: 1px solid var(--nav-border);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  z-index: 1200;
-  color: var(--text-dim);
-}
-
-.notificationItem {
-  padding: 12px 15px;
-  border-bottom: 1px solid var(--nav-border);
-  font-size: 0.9rem;
-}
-
-.notificationItem:last-child {
-  border-bottom: none;
-}
-
-.notificationItem strong {
-  color: var(--text);
-  display: block;
-  margin-bottom: 4px;
-}
-
-.notificationItem p {
-  margin: 0 0 4px 0;
-  line-height: 1.4;
-}
-
-.notificationItem small {
-  color: #95a5a6;
-  font-size: 0.75rem;
-}
-
-.notificationItem.unread {
-  background-color: rgba(52, 152, 219, 0.15);
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown .navLink {
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 8px 10px;
-    font-size: 1rem;
-    color: var(--text-dim);
-    font-family: inherit;
-}
-
-.dropdownContent {
-    display: none;
-    position: absolute;
-    background-color: #2c2c2c;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1001;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.dropdownContent a {
-    color: #e0e0e0;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.2s;
-}
-
-.dropdownContent a:hover {
-    background-color: #4a4a4a;
-}
-
-.dropdown:hover .dropdownContent {
-    display: block;
-}
-
-@media (max-width: 1200px) {
-  .welcomeUser {
-    display: none;
-  }
-}
-
-@media (max-width: 1080px) {
-  .navbar {
-    justify-content: space-between;
-  }
-  
-  .hamburger {
-    display: block;
-  }
-  
-  .navLinks {
-    display: none;
-    position: absolute;
-    top: var(--navbar-height);
-    left: 0;
-    width: 100%;
-    background-color: var(--nav-bg);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
-    border-bottom: 1px solid var(--nav-border);
-  }
-  
-  .navLinks.open {
-    display: flex;
-  }
-    
-  .dropdown {
-      display: block;
-      width: 100%;
-      text-align: left;
-  }
-
-  .dropdown .navLink {
-      width: 100%;
-      text-align: left;
-  }
-
-  .dropdownContent {
-      position: static;
-      box-shadow: none;
-      background-color: #1f1f1f;
-      padding-left: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .loginButton, .logoutButton, .authButton {
-    font-size: 0.8rem;
-    padding: 6px 10px;
-  }
-}
-
-.welcomeUserContainer {
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: default;
-}
-
-.welcomeUserText {
-    color: #ecf0f1;
-    font-weight: 600;
-    margin-right: 10px;
-    white-space: nowrap;
-}
-
-.userIcon {
-    display: none;
-    color: #ecf0f1;
-    font-size: 1.5rem;
-}
-
-.welcomeUserContainer::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #34495e;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s, visibility 0.2s;
-    z-index: 10;
-}
-
-.welcomeUserContainer:hover::after {
-    opacity: 1;
-    visibility: visible;
-}
-
-@media (max-width: 768px) {
-    .welcomeUserText {
-        display: none;
-    }
-    .userIcon {
-        display: block;
-    }
-}:root {
-  --navbar-height: 72px;
-  --nav-bg: rgba(33, 49, 63, 0.96);
-  --nav-border: rgba(255, 255, 255, 0.08);
-  --text: #ffffff;
-  --text-dim: #d8e3ea;
-  --link-hover: #1abc9c;
-  --shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
-  --notification-yellow: #ffd166;
-}
-
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1100;
+  z-index: 1200; /* Legmagasabb z-index */
   height: var(--navbar-height);
   display: flex;
   align-items: center;
@@ -371,6 +22,8 @@
   border-bottom: 1px solid var(--nav-border);
   backdrop-filter: blur(6px);
   box-shadow: var(--shadow);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -428,13 +81,13 @@
 }
 
 .hamburger {
-  display: none;
+  display: none; /* Alapértelmezésben rejtett asztali nézeten */
   background: none;
   border: none;
   color: white;
   font-size: 28px;
   cursor: pointer;
-  z-index: 1200;
+  z-index: 1200; /* A navbarral azonos z-index */
 }
 
 .welcomeUser {
@@ -589,33 +242,36 @@
     display: block;
 }
 
-@media (max-width: 1200px) {
-  .welcomeUser {
-    display: none;
-  }
-}
-
-@media (max-width: 1080px) {
+/* JAVÍTVA: Mobilnézeti breakpoint és hamburger menü */
+@media (max-width: 992px) {
   .navLinksContainer {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    position: absolute;
+    position: fixed;
     top: var(--navbar-height);
     left: 0;
-    width: 100%;
+    width: 80%;
+    max-width: 300px;
+    height: calc(100vh - var(--navbar-height));
     background-color: var(--nav-bg);
     padding: 1rem;
-    border-bottom: 1px solid var(--nav-border);
-    transform: translateY(-150%);
-    transition: transform 0.3s ease-in-out, visibility 0.3s;
-    visibility: hidden;
+    border-right: 1px solid var(--nav-border);
+    box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1190;
+    box-sizing: border-box;
+    overflow-y: auto;
   }
   
+  .navLinksContainer:not(.open) {
+      display: none;
+  }
+
   .navLinksContainer.open {
+    transform: translateX(0);
     display: flex;
-    transform: translateY(0);
-    visibility: visible;
   }
   
   .hamburger {
@@ -639,12 +295,101 @@
       background-color: transparent;
       padding-left: 20px;
   }
+
+  .logo {
+    display: none;
+  }
+
+  /* JAVÍTVA: A mobil nézeti navigációs elemek pozicionálása.
+             A sorrend: Kereső, Értesítések, Felhasználó ikon, Kijelentkezés. */
+  .rightSide {
+      display: flex;
+      align-items: center;
+      /* JAVÍTVA: Flex-start, hogy a kereső legyen balra, majd jön a harang. */
+      justify-content: flex-start; /* JAVÍTVA */
+      margin-left: auto; /* JAVÍTVA: Auto margó, hogy a jobbra nyomja a konténert */
+      gap: 0; /* JAVÍTVA: Nincs rés az elemek között */
+      padding-right: 0; /* Nincs padding a jobb szélénél */
+  }
+
+  .searchWrapper {
+      order: 1; /* Kereső az első */
+      flex-grow: 0;
+      width: auto;
+      margin-right: 0;
+  }
+
+  .notificationContainer {
+      order: 2; /* Értesítések a második */
+      margin-left: 0;
+      margin-right: 0;
+  }
+
+  .authLinks { /* A felhasználói menü és kijelentkezés gomb konténere */
+      order: 3; /* Auth linkek a harmadik */
+      justify-content: flex-start; /* JAVÍTVA: Balra igazítva, hogy a Kijelentkezés a harang mellett legyen */
+      width: auto;
+      margin-top: 0;
+      gap: 0; /* Nincs rés az elemek között */
+  }
+
+  .logoutButton {
+      padding: 8px 14px;
+      font-size: 0.9rem;
+  }
+}
+
+/* Kisebb képernyőkhöz */
+@media (max-width: 768px) {
+  .navLinksContainer {
+    width: 100%;
+    max-width: none;
+  }
+  .hamburger {
+      font-size: 24px;
+  }
+  .rightSide {
+      gap: 0;
+      padding-right: 0;
+  }
+  .searchWrapper {
+      max-width: none;
+      margin-right: 0;
+  }
+  .notificationContainer {
+      margin-right: 0;
+  }
+  .authLinks {
+      gap: 0;
+  }
 }
 
 @media (max-width: 480px) {
   .loginButton, .logoutButton, .authButton {
     font-size: 0.8rem;
     padding: 6px 10px;
+  }
+  .navLinksContainer {
+      width: 100%;
+  }
+  .rightSide {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+      padding-right: 0;
+  }
+  .searchWrapper {
+      max-width: 100%;
+      margin-right: 0;
+      order: 0;
+  }
+  .notificationContainer {
+      order: 1;
+  }
+  .authLinks {
+    margin-top: 5px;
+    order: 2;
+    padding-right: 0;
   }
 }
 
@@ -668,34 +413,7 @@
     font-size: 1.5rem;
 }
 
-.welcomeUserContainer::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #34495e;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s, visibility 0.2s;
-    z-index: 10;
-}
-
 .welcomeUserContainer:hover::after {
     opacity: 1;
     visibility: visible;
-}
-
-@media (max-width: 768px) {
-    .welcomeUserText {
-        display: none;
-    }
-    .userIcon {
-        display: block;
-    }
 }

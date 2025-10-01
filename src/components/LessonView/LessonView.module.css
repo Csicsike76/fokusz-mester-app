@@ -1,15 +1,15 @@
 /* Fájl: src/components/LessonView/LessonView.module.css (MÓDOSÍTVA) */
 
 :root {
-    /* ÚJ, MODERN SZÍNSÉMA */
-    --bg-color: #2c3e50; /* Sötétkék háttér */
-    --main-text-color: #ecf0f1; /* Világos szöveg */
-    --nav-bg-color: rgba(23, 32, 42, 0.8); /* Áttetsző, sötétebb nav háttér */
-    --nav-text-color: #bdc3c7; /* Ezüstös szöveg */
-    --nav-hover-color: #ffffff; /* Fehér hover */
-    --nav-border-color: rgba(255, 255, 255, 0.1); /* Halvány szegély */
-    --header-color: #ffffff; /* Fehér címsorok */
-    --accent-color: #436F4D; /* Zöld, a gombokkal összhangban */
+    --bg-color: #2c3e50;
+    --main-text-color: #ecf0f1;
+    --nav-bg-color: rgba(23, 32, 42, 0.8);
+    --nav-text-color: #bdc3c7;
+    --nav-hover-color: #ffffff;
+    --nav-border-color: rgba(255, 255, 255, 0.1);
+    --header-color: #ffffff;
+    --accent-color: #436F4D;
+    --navbar-height: 72px;
 }
 
 .container {
@@ -19,6 +19,10 @@
     background-color: var(--bg-color);
     width: 100%;
     color: var(--main-text-color);
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
 }
 
 .toc {
@@ -27,11 +31,13 @@
     background-color: var(--nav-bg-color);
     border-right: 1px solid var(--nav-border-color);
     padding: 2rem;
-    height: calc(100vh - 80px);
+    height: calc(100vh - var(--navbar-height));
     position: sticky;
-    top: 80px;
+    top: var(--navbar-height);
     overflow-y: auto;
-    backdrop-filter: blur(5px); /* Üveghatás */
+    backdrop-filter: blur(5px);
+    box-sizing: border-box;
+    z-index: 10; /* Tartalom (1) felett, de a vezérlők és Navbar alatt */
 }
 
 .toc h2 {
@@ -55,8 +61,8 @@
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
 }
-.subList.expanded {
-    max-height: 1000px; 
+.subList:not(.expanded) {
+    max-height: 0;
 }
 
 .expandButton {
@@ -72,7 +78,7 @@
     font-size: 1rem;
     line-height: 1;
     color: var(--nav-text-color);
-    display: none; 
+    display: none;
 }
 .expandButton:hover { background-color: rgba(255, 255, 255, 0.1); }
 
@@ -80,6 +86,9 @@
     flex-grow: 1; 
     padding: 2rem 3rem; 
     width: calc(100% - 320px);
+    overflow-y: auto;
+    box-sizing: border-box;
+    z-index: 1;
 }
 .mainContent > h1 { 
     text-align: center; 
@@ -94,12 +103,12 @@
 
 .loadingError { padding: 2rem; text-align: center; font-style: italic; color: #bdc3c7; }
 
+/* Mobil tartalomjegyzék váltó gomb */
 .tocToggle {
     display: none;
     position: fixed;
-    top: 90px;
-    right: 1rem; /* JAVÍTÁS: Áthelyezve a jobb oldalra */
-    left: auto;   /* JAVÍTÁS: Bal oldali pozicionálás törlése */
+    top: calc(var(--navbar-height, 72px) + 1rem);
+    left: 1rem;
     background-color: var(--accent-color);
     color: white;
     padding: 0.6rem 1rem;
@@ -107,9 +116,11 @@
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 1110; /* UiControls (1100) fölé, de az overlay (1115) alá */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
+/* Mobil tartalomjegyzék overlay */
 .tocOverlay {
     display: none;
     position: fixed;
@@ -118,7 +129,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.5);
-    z-index: 998;
+    z-index: 1115; /* tocToggle (1110) fölé, de a TOC menü (1120) alá */
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -127,26 +138,31 @@
     opacity: 1;
 }
 
+/* MÉDIA LEKÉRDEZÉSEK A RESZPONZIVITÁSÉRT */
+
 @media (max-width: 1024px) {
     .tocToggle { display: inline-block; }
     .toc {
         position: fixed;
         top: 0;
-        left: 0; /* A becsúszó menü marad a bal oldalon */
+        left: 0; 
         width: 80%;
         max-width: 320px;
         height: 100vh;
-        z-index: 1002; /* Magasabb z-index az overlay felett */
+        z-index: 1120; /* Az overlay (1115) fölé */
         overflow-y: auto;
         transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        border-right: none;
     }
     .toc.open { 
-        transform: translateX(0); 
-        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        transform: translateX(0);
     }
     .container { 
-        flex-direction: column; 
+        flex-direction: column;
+        height: auto; 
+        min-height: calc(100vh - var(--navbar-height)); 
     }
     .mainContent { 
         padding: 2rem 1rem; 
@@ -156,5 +172,41 @@
     .expandButton { display: block; }
     .subList:not(.expanded) {
         max-height: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        border-radius: 0;
+    }
+    .mainContent {
+        padding: 1.5rem 0.8rem;
+    }
+    .mainContent > h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    .tocToggle {
+        top: calc(var(--navbar-height, 72px) + 0.5rem);
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+        left: 0.5rem;
+    }
+    .toc {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainContent > h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    .mainContent {
+        padding: 1rem 0.5rem;
+    }
+    .tocToggle {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.7rem;
     }
 }

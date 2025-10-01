@@ -1,9 +1,65 @@
+// src/pages/HomePage.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero/Hero';
 import styles from './HomePage.module.css';
 import { useAuth } from '../context/AuthContext';
-import { API_URL } from '../config/api'; // JAVÍTÁS: Központi API URL használata
+import { API_URL } from '../config/api';
+
+// Visszaállított CollapsibleContentSection logika a kérésnek megfelelően
+const CollapsibleContentSection = ({ title, children, isMobileBreakpoint = 768 }) => {
+  const [isOpen, setIsOpen] = useState(true); // Alapértelmezett, asztali nézetben mindig nyitva
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const currentIsMobile = window.innerWidth <= isMobileBreakpoint;
+      setIsMobile(currentIsMobile);
+      if (currentIsMobile) {
+        setIsOpen(false); // Mobil nézetben alapértelmezetten zárt
+      } else {
+        setIsOpen(true); // Asztali nézetben alapértelmezetten nyitva
+      }
+    };
+
+    handleResize(); // Kezdeti állapot beállítása
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobileBreakpoint]);
+
+  const toggleOpen = () => {
+    if (isMobile) { // Csak mobil nézetben engedélyezzük a kézi váltást
+      setIsOpen(!isOpen);
+    }
+  };
+
+  const clickableTitle = React.cloneElement(title, {
+    className: `${title.props.className || ''} ${styles.collapsibleHeaderTitle}`
+  });
+
+  return (
+    <div className={styles.collapsibleContainer}>
+      <div
+        className={`${styles.collapsibleTitleBar} ${isMobile ? styles.mobileToggleEnabled : ''}`}
+        onClick={toggleOpen}
+        role={isMobile ? "button" : undefined}
+        aria-expanded={isMobile ? isOpen : undefined}
+        tabIndex={isMobile ? 0 : undefined}
+      >
+        {clickableTitle}
+        {isMobile && (
+          <span className={styles.toggleIcon}>
+            {isOpen ? '▲' : '▼'}
+          </span>
+        )}
+      </div>
+      <div className={`${styles.collapsibleBody} ${isOpen ? styles.open : styles.closed}`}>
+        {children}
+      </div>
+    </div>
+  );
+};
+
 
 const homePageLayout = {
   freeLessons: {
@@ -30,7 +86,7 @@ const homePageLayout = {
     { slug: 'celkituzo', titleOverride: 'Személyes Célkitűző', description: 'Bontsd le a nagy álmaidat apró, elérhető lépésekre az MI segítségével.' },
     { slug: 'iranytu', titleOverride: 'Tudás Iránytű', description: 'Elakadtál? Írd le a problémád, és az MI útvonalat javasol a Tudástárból.' }
   ],
-  premiumCourses: [
+ premiumCourses: [
     { slug: 'interaktav-matematika-gyljtemany', titleOverride: 'Teljes Matematika Kurzus', description: 'Hozzáférés az összes évfolyam (5-8.) minden interaktív leckéjéhez és képletgyűjteményéhez.' },
     { slug: 'interaktav-fizika-gyljtemany', titleOverride: 'Teljes Fizika Kurzus', description: 'Hozzáférés az összes évfolyam (6-8.) minden interaktív leckéjéhez és képletgyűjteményéhez.' },
     { slug: 'interaktav-aimi1-gyljtemany', titleOverride: 'Teljes Interaktív Mesterséges Intelligencia', description: 'Hozzáférés az összes haladó műhelyhez, a projekt kézikönyvhöz és az extra tartalmakhoz.' }
@@ -51,7 +107,7 @@ const HomePage = () => {
   const [allCurriculumsMap, setAllCurriculumsMap] = useState(new Map());
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const { canUsePremium } = useAuth();
+  const { canUsePremium } = useAuth(); // Itt kérjük le a prémium státuszt
 
   useEffect(() => {
     const fetchAllCurriculums = async () => {
@@ -87,14 +143,11 @@ const HomePage = () => {
     if (!dynamicData) return null;
 
     const isPremium = typeClass.startsWith('premium');
-    const userHasAccess = canUsePremium;
+    const userHasAccess = canUsePremium; // Use the context value here
     
     const title = itemConfig.titleOverride || dynamicData.title;
     const description = itemConfig.description || dynamicData.description;
     
-    // --- EZ A JAVÍTÁS LÉNYEGE ---
-    // Ha a tartalom prémium és a felhasználó nincs bejelentkezve,
-    // akkor egy objektumot adunk át a Link-nek, ami tartalmazza az üzenetet is.
     const linkTarget = (isPremium && !userHasAccess)
       ? {
           pathname: '/bejelentkezes',
@@ -128,28 +181,33 @@ const HomePage = () => {
       <Hero
         title="Több, Mint Iskola: Felkészülés a Holnapra."
         subtitle="Miért éri meg a gyereknek már most Mesterséges Intelligenciát tanulnia?"
-        buttonText="Tudj meg többet ↓"
-        scrollToId="miert-fontos"
+        // Nincs buttonText vagy scrollToId a Hero komponensnek, a "Tudj meg többet" most külön lenyitható szekció
       />
 
       <main className={styles.mainContent}>
-        <section id="miert-fontos" className={styles.section}>
-          <div className={styles.featureGrid}>
-            <div className={styles.featureCard}>
+        {/* ÚJ lenyitható szekció a "Tudj meg többet" gombhoz és a feature kártyákhoz */}
+        <CollapsibleContentSection
+          title={<button className={`${styles.btn} ${styles.collapsibleHeaderBtn} ${styles.heroCollapsibleBtn}`}>Tudj meg többet ↓</button>}
+          // A cím maga a gomb, amely a lenyitható funkciót vezérli.
+        >
+          {/* A "Miért fontos" szekció tartalma, amelyet a "Tudj meg többet" gomb nyit meg */}
+          <div className={`${styles.section} ${styles.featureGridContainer}`}> {/* Új container a featureGrid-nek */}
+            <div className={`${styles.card} ${styles.featureCardHighlight}`}> {/* .card stílus és kék keret */}
               <h3>Gondolkodás, Nem Magolás</h3>
               <p>Az MI-tananyagok problémamegoldó gondolkodást tanítanak, ahelyett, hogy csak adatokat memorizálnának.</p>
             </div>
-            <div className={styles.featureCard}>
+            <div className={`${styles.card} ${styles.featureCardHighlight}`}>
               <h3>A Jövő Kompetenciája</h3>
               <p>Az MI hamarosan alapvető készség lesz. Aki most megismeri, behozhatatlan előnyre tesz szert a jövő munkaerőpiacán.</p>
             </div>
-            <div className={styles.featureCard}>
+            <div className={`${styles.card} ${styles.featureCardHighlight}`}>
               <h3>Kreativitás a Gyakorlatban</h3>
               <p>A tanulás nálunk azonnali, kézzelfogható alkotássá válik, legyen az képalkotás vagy játéktervezés.</p>
             </div>
           </div>
-        </section>
+        </CollapsibleContentSection>
 
+        {/* Az interaktív szekció, amely nem lenyitható */}
         <section className={`${styles.section} ${styles.interactiveSection}`}>
           <h2 className={styles.sectionTitle}>Tervezd meg a Jövő Iskoláját!</h2>
           <p className={styles.interactiveSubtitle}>Milyen AI-eszközt találnál ki, ha te terveznéd az iskoládat?</p>
@@ -169,32 +227,46 @@ const HomePage = () => {
               {Object.keys(homePageLayout.freeLessons).map(subject => {
                 const subjectClassName = subject.replace(/\s+/g, '-').toLowerCase();
                 return (
-                  <div key={subject}>
-                    <h3 className={`${styles.subjectTitle} ${styles[subjectClassName] || ''}`}>{subject}</h3>
+                  <CollapsibleContentSection
+                    key={subject}
+                    title={<h3 className={`${styles.subjectTitle} ${styles[subjectClassName] || ''}`}>{subject}</h3>}
+                  >
                     <div className={styles.cardGrid}>
                       {homePageLayout.freeLessons[subject].map(itemConfig => renderCard(itemConfig, 'freeLesson'))}
                     </div>
-                  </div>
+                  </CollapsibleContentSection>
                 );
               })}
             </section>
+
             <section id="ingyenes-eszkozok" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Ingyenes Interaktív Eszközök</h2>
-              <div className={styles.cardGrid}>
-                {homePageLayout.freeTools.map(itemConfig => renderCard(itemConfig, 'freeTool'))}
-              </div>
+              <CollapsibleContentSection
+                title={<h2 className={styles.sectionTitle}>Ingyenes Interaktív Eszközök</h2>}
+              >
+                <div className={styles.cardGrid}>
+                  {homePageLayout.freeTools.map(itemConfig => renderCard(itemConfig, 'freeTool'))}
+                </div>
+              </CollapsibleContentSection>
             </section>
+
             <section id="premium-kurzusok" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Teljes Kurzusok (Prémium)</h2>
-              <div className={styles.cardGrid}>
-                {homePageLayout.premiumCourses.map(itemConfig => renderCard(itemConfig, 'premiumCourse'))}
-              </div>
+              <CollapsibleContentSection
+                title={<h2 className={styles.sectionTitle}>Teljes Kurzusok (Prémium)</h2>}
+              >
+                <div className={styles.cardGrid}>
+                  {homePageLayout.premiumCourses.map(itemConfig => renderCard(itemConfig, 'premiumCourse'))}
+                </div>
+              </CollapsibleContentSection>
             </section>
+
             <section id="premium-eszkozok" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Exkluzív Prémium Eszközök</h2>
-              <div className={styles.cardGrid}>
-                {homePageLayout.premiumTools.map(itemConfig => renderCard(itemConfig, 'premiumTool'))}
-              </div>
+              <CollapsibleContentSection
+                title={<h2 className={styles.sectionTitle}>Exkluzív Prémium Eszközök</h2>}
+              >
+                <div className={styles.cardGrid}>
+                  {homePageLayout.premiumTools.map(itemConfig => renderCard(itemConfig, 'premiumTool'))}
+                </div>
+              </CollapsibleContentSection>
             </section>
           </>
         )}

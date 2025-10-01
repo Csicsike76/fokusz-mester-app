@@ -1,76 +1,102 @@
 /* src/components/Hero/Hero.module.css */
 
 .hero {
-  height: 90vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  text-align: center;
-  color: white;
-  background: transparent;
-  padding: 0 1rem;
+    height: calc(100vh - var(--navbar-height, 72px)); /* Az egész viewportot kitölti, kivéve a navbar magasságát */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden; /* A tartalom ne lógjon ki */
+
+    /* JAVÍTVA: Eltávolítva a háttérkép. A globális BackgroundVideo komponens adja a videós hátteret. */
+    background-color: transparent; /* Átlátszó háttér, hogy a mögötte lévő videó látszódjon */
+    /* A background-size, -position, -repeat itt már nem releváns, mivel nincs kép. */
 }
 
 .content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  background: none; 
+    position: relative;
+    z-index: 2; /* A tartalom legyen az overlay felett */
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.4); /* Sötét overlay a szöveg olvashatóságáért */
+    border-radius: 10px;
 }
 
-.content h1 {
-  font-size: 3.8rem; 
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7); 
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-family: 'Roboto Slab', serif;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 }
 
-.content p {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  max-width: 750px;
-  margin-left: auto;
-  margin-right: auto;
-  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
-  margin-bottom: 2rem;
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
 }
 
 .ctaButton {
     display: inline-block;
-    background-color: #1abc9c;
+    background-color: #1abc9c; /* Világosabb zöld a gombhoz */
     color: white;
-    padding: 1rem 2rem;
-    border-radius: 50px;
+    padding: 15px 30px;
+    border-radius: 8px;
     text-decoration: none;
-    font-size: 1.1rem;
     font-weight: bold;
-    text-transform: uppercase;
-    box-shadow: 0 5px 15px rgba(26, 188, 156, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 .ctaButton:hover {
+    background-color: #16a085; /* Sötétebb zöld hoverre */
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(26, 188, 156, 0.5);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
-@media screen and (max-width: 768px) {
-  .hero {
-    height: 95vh;
-  }
+/* MÉDIA LEKÉRDEZÉSEK A RESZPONZIVITÁSÉRT */
+@media (max-width: 768px) {
+    .hero {
+        min-height: calc(100vh - var(--navbar-height, 72px) - 60px); /* Kicsit kisebb magasság mobil nézeten */
+        height: auto;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
 
-  .content h1 {
-    font-size: 2.8rem;
-  }
+    .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
 
-  .content p {
-    font-size: 1.1rem;
-  }
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
 
-  .ctaButton {
-      padding: 0.8rem 1.6rem;
-      font-size: 1rem;
-  }
+    .ctaButton {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+    .content {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+    }
+
+    .ctaButton {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
 }
