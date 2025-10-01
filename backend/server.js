@@ -54,8 +54,7 @@ const whitelist = [
   process.env.FRONTEND_URL,
   'https://fokuszmester.com',
   'https://www.fokuszmester.com',
-  'capacitor://localhost', // EZT ADD HOZZÁ
-  'http://localhost'       // EZT ADD HOZZÁ
+  
 ];
 if (process.env.NODE_ENV !== 'production') {
   const os = require('os');
