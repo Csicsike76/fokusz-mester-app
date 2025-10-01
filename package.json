@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "react-scripts start",
-    "build": "npx cross-env REACT_APP_API_URL=https://fokuszmester.com/api REACT_APP_GOOGLE_CLIENT_ID=664375697790-g5qkfgik7crvjdl3hp3386tgfgdu8elv.apps.googleusercontent.com react-scripts build", 
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "db:setup": "node scripts/setup-db.js",
