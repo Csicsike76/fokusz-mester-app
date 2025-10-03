@@ -12,11 +12,11 @@
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 1200; /* Legmagasabb z-index */
+  z-index: 1200; 
   height: var(--navbar-height);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; 
   padding: 0 20px;
   background: var(--nav-bg);
   border-bottom: 1px solid var(--nav-border);
@@ -67,37 +67,86 @@
   color: var(--notification-yellow) !important;
 }
 
+/* Asztali nézetű Alkalmazás letöltése gomb */
+.desktopDownloadButton {
+    display: flex; 
+    align-items: center;
+    gap: 6px; 
+    color: var(--text-dim) !important; 
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: color .15s ease, background-color .15s ease;
+    white-space: nowrap;
+}
+
+.desktopDownloadButton:hover {
+    color: var(--text) !important;
+    background: rgba(255,255,255,0.06);
+}
+
+/* Mobil nézetű Alkalmazás letöltése gomb (alapértelmezésben rejtett) */
+.mobileDownloadButton {
+    display: none; /* Asztali nézeten rejtett */
+    width: 100%; 
+    justify-content: flex-start; 
+    gap: 10px; 
+    padding: 10px 15px; 
+    color: var(--text-dim);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: color .15s ease, background-color .15s ease;
+}
+.mobileDownloadButton:hover {
+    color: var(--text);
+    background: rgba(255,255,255,0.06);
+}
+
+
 .rightSide {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 14px; 
   flex-shrink: 0;
 }
 
 .authLinks {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px; 
 }
 
+
 .hamburger {
-  display: none; /* Alapértelmezésben rejtett asztali nézeten */
+  display: none; 
   background: none;
   border: none;
   color: white;
   font-size: 28px;
   cursor: pointer;
-  z-index: 1200; /* A navbarral azonos z-index */
+  z-index: 1200; 
 }
 
-.welcomeUser {
-  color: #ecf0f1;
-  font-weight: 600;
-  margin-right: 10px;
-  white-space: nowrap;
+.welcomeUserContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: default;
+}
+.welcomeUserText {
+    color: #ecf0f1;
+    font-weight: 600;
+    margin-right: 10px;
+    white-space: nowrap;
+    display: inline; 
+}
+.userIcon {
+    display: none; 
 }
 
-.loginButton, .logoutButton, .authButton {
+.logoutButton {
   color: #ffffff !important;
   text-decoration: none !important;
   display: inline-flex;
@@ -115,7 +164,36 @@
   white-space: nowrap;
 }
 
-.loginButton:hover, .logoutButton:hover, .authButton:hover {
+.logoutButton:hover {
+  background: rgba(255,255,255,0.16);
+}
+
+.logoutText {
+    display: inline; 
+}
+.logoutIcon {
+    display: none; 
+}
+
+.loginButton, .authButton {
+  color: #ffffff !important;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.loginButton:hover, .authButton:hover {
   background: rgba(255,255,255,0.16);
 }
 
@@ -242,8 +320,27 @@
     display: block;
 }
 
-/* JAVÍTVA: Mobilnézeti breakpoint és hamburger menü */
+/* --- MOBIL NÉZETI BREAKPOINT --- */
 @media (max-width: 992px) {
+  .navbar {
+      justify-content: flex-start; 
+      gap: 10px; 
+      padding: 0 10px; 
+  }
+
+  /* Hamburger menü látható, első a sorban */
+  .hamburger {
+    display: block; 
+    order: -1; 
+    margin-right: 10px; 
+  }
+  
+  /* Logó rejtett mobil nézeten */
+  .logo {
+    display: none;
+  }
+
+  /* Nav linkek konténere becsúszó menüként */
   .navLinksContainer {
     display: flex;
     flex-direction: column;
@@ -266,16 +363,12 @@
   }
   
   .navLinksContainer:not(.open) {
-      display: none;
+      display: none; 
   }
 
   .navLinksContainer.open {
     transform: translateX(0);
-    display: flex;
-  }
-  
-  .hamburger {
-    display: block;
+    display: flex; 
   }
     
   .dropdown {
@@ -296,124 +389,125 @@
       padding-left: 20px;
   }
 
-  .logo {
-    display: none;
+  /* Asztali letöltés gomb elrejtése mobil nézeten */
+  .desktopDownloadButton {
+      display: none;
   }
 
-  /* JAVÍTVA: A mobil nézeti navigációs elemek pozicionálása.
-             A sorrend: Kereső, Értesítések, Felhasználó ikon, Kijelentkezés. */
+  /* Mobil letöltés gomb megjelenítése a hamburger menüben */
+  .mobileDownloadButton {
+      display: flex; 
+  }
+
+  /* Jobb oldali elemek sorrendje mobil nézeten: Keresés, Értesítés, Felhasználó ikon, Kijelentkezés */
   .rightSide {
       display: flex;
       align-items: center;
-      /* JAVÍTVA: Flex-start, hogy a kereső legyen balra, majd jön a harang. */
-      justify-content: flex-start; /* JAVÍTVA */
-      margin-left: auto; /* JAVÍTVA: Auto margó, hogy a jobbra nyomja a konténert */
-      gap: 0; /* JAVÍTVA: Nincs rés az elemek között */
-      padding-right: 0; /* Nincs padding a jobb szélénél */
+      flex-grow: 1; 
+      justify-content: flex-end; 
+      gap: 10px; 
+      padding-right: 0;
+      margin-left: 0; 
   }
 
   .searchWrapper {
-      order: 1; /* Kereső az első */
-      flex-grow: 0;
-      width: auto;
-      margin-right: 0;
+      order: 1;
   }
 
   .notificationContainer {
-      order: 2; /* Értesítések a második */
-      margin-left: 0;
-      margin-right: 0;
+      order: 2;
   }
 
-  .authLinks { /* A felhasználói menü és kijelentkezés gomb konténere */
-      order: 3; /* Auth linkek a harmadik */
-      justify-content: flex-start; /* JAVÍTVA: Balra igazítva, hogy a Kijelentkezés a harang mellett legyen */
-      width: auto;
-      margin-top: 0;
-      gap: 0; /* Nincs rés az elemek között */
+  /* Felhasználói vezérlők (felhasználó ikon + kijelentkezés gomb) */
+  .userControls { 
+      order: 3;
+      display: flex;
+      align-items: center;
+      gap: 10px; 
   }
 
+  /* Felhasználónév rejtett, felhasználó ikon látható */
+  .welcomeUserContainer {
+      margin-right: 0; 
+      display: flex; 
+      align-items: center;
+      justify-content: center;
+  }
+  .welcomeUserText {
+      display: none; 
+  }
+  .userIcon {
+      display: block; 
+      font-size: 1.5rem; 
+      color: var(--text); 
+  }
+  .userIcon:hover {
+      color: var(--link-hover); 
+  }
+
+  /* Kijelentkezés gomb ikonként */
   .logoutButton {
-      padding: 8px 14px;
-      font-size: 0.9rem;
+      padding: 0; 
+      background: none; 
+      border: none; 
+      color: var(--text-dim); 
+      font-size: 1.5rem; 
+  }
+  .logoutButton:hover {
+      background: none; 
+      color: var(--text); 
+  }
+  .logoutText {
+      display: none; 
+  }
+  .logoutIcon {
+      display: block; 
+  }
+
+  /* Bejelentkezés/Regisztráció gombok, ha nincs bejelentkezve */
+  .authLinks { 
+      order: 3; 
+      gap: 10px; 
+  }
+  .loginButton, .authButton {
+      padding: 6px 10px; 
+      font-size: 0.85rem;
   }
 }
 
 /* Kisebb képernyőkhöz */
 @media (max-width: 768px) {
-  .navLinksContainer {
-    width: 100%;
-    max-width: none;
+  .navbar {
+    padding: 0 5px; 
   }
   .hamburger {
-      font-size: 24px;
+    font-size: 24px;
+    margin-right: 5px;
   }
   .rightSide {
-      gap: 0;
-      padding-right: 0;
+      gap: 8px; 
   }
-  .searchWrapper {
-      max-width: none;
-      margin-right: 0;
+  .userIcon, .logoutButton, .notificationBell {
+      font-size: 1.4rem;
   }
-  .notificationContainer {
-      margin-right: 0;
-  }
-  .authLinks {
-      gap: 0;
+  .loginButton, .authButton {
+      font-size: 0.8rem;
+      padding: 5px 8px;
   }
 }
 
+/* Még kisebb képernyőkhöz */
 @media (max-width: 480px) {
-  .loginButton, .logoutButton, .authButton {
-    font-size: 0.8rem;
-    padding: 6px 10px;
-  }
-  .navLinksContainer {
-      width: 100%;
-  }
-  .rightSide {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0;
-      padding-right: 0;
-  }
-  .searchWrapper {
-      max-width: 100%;
-      margin-right: 0;
-      order: 0;
-  }
-  .notificationContainer {
-      order: 1;
-  }
-  .authLinks {
-    margin-top: 5px;
-    order: 2;
-    padding-right: 0;
-  }
-}
-
-.welcomeUserContainer {
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: default;
-}
-
-.welcomeUserText {
-    color: #ecf0f1;
-    font-weight: 600;
-    margin-right: 10px;
-    white-space: nowrap;
-}
-
-.userIcon {
-    display: none;
-    color: #ecf0f1;
-    font-size: 1.5rem;
-}
-
-.welcomeUserContainer:hover::after {
-    opacity: 1;
-    visibility: visible;
+    .navbar {
+        gap: 5px;
+    }
+    .rightSide {
+        gap: 5px;
+    }
+    .userIcon, .logoutButton, .notificationBell {
+        font-size: 1.3rem;
+    }
+    .searchWrapper .searchIcon { 
+        font-size: 1.3rem;
+    }
 }

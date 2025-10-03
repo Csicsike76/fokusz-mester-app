@@ -1,0 +1,155 @@
+/* src/pages/DownloadGuidePage.module.css */
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  /* MÓDOSÍTVA: Sötét háttér, hasonlóan a többi tartalom blokkhoz */
+  background-color: rgba(33, 49, 63, 0.95); /* A navbar háttéréhez hasonló sötét, enyhén áttetsző */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sötétebb árnyék */
+  color: var(--text); /* Világos szövegszín a sötét háttéren */
+  border: 1px solid var(--nav-border); /* Vékony keret */
+}
+
+.title {
+  /* MÓDOSÍTVA: Világosabb főcím szín */
+  color: var(--link-hover); /* Használjuk az app zöld kiemelő színét */
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+}
+
+.intro {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--text-dim); /* Halványabb szöveg, ha szükséges */
+}
+
+.section {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--nav-border); /* Finom elválasztó, illeszkedik a sötét témához */
+  padding-top: 1.5rem;
+}
+
+.sectionTitle {
+  /* MÓDOSÍTVA: Világosabb alcím szín */
+  color: var(--text); /* Fehér szöveg */
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.list {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 1rem;
+  color: var(--text-dim); /* Halványabb szöveg */
+}
+
+.list strong {
+    color: var(--text); /* Kiemelt szöveg fehér */
+}
+
+.subList {
+  list-style-type: circle;
+  margin-left: 20px;
+  margin-top: 0.5rem;
+  color: var(--text-dim); /* Halványabb szöveg */
+}
+
+.tip {
+  /* MÓDOSÍTVA: Sötétebb kiemelő blokk háttér */
+  background-color: rgba(26, 188, 156, 0.15); /* A kiemelő zöld enyhén áttetsző árnyalata */
+  border-left: 4px solid var(--link-hover); /* Zöld bal oldali sáv */
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  color: var(--text-dim); /* Világos szöveg a tippen */
+}
+
+.downloadButtonContainer {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.downloadButton {
+  display: inline-block;
+  background-color: rgba(39, 174, 96, 0.85); 
+  color: white;
+  padding: 0.75rem 1.5rem; 
+  font-size: 1rem; 
+  font-weight: 600; 
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all 0.3s ease; 
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.3); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.downloadButton:hover {
+  background-color: rgba(39, 174, 96, 1); 
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.importantNotice {
+  /* MÓDOSÍTVA: Sötét témához igazított figyelmeztető stílus */
+  background-color: #ffd166; /* Élénk sárga háttér */
+  color: #34495e; /* Sötét szöveg a sárgán */
+  border: 1px solid #f7cd71;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.warning {
+    /* MÓDOSÍTVA: Sötét témához igazított "warning" stílus */
+    color: white; /* Fehér szöveg */
+    background-color: #e74c3c; /* Élénk piros háttér */
+    border-color: #c0392b;
+}
+
+/* Beépített gomb link stílus */
+.inlineButtonLink {
+  display: inline-block;
+  background-color: rgba(39, 174, 96, 0.7); 
+  color: white;
+  padding: 0.2em 0.6em; 
+  font-size: 0.9em; 
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap; 
+  margin: 0 0.2em; 
+  border: 1px solid rgba(255, 255, 255, 0.3); 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
+}
+
+.inlineButtonLink:hover {
+  background-color: rgba(39, 174, 96, 1); 
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Reszponzív módosítások */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  .title {
+    font-size: 1.8rem;
+  }
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+  .downloadButton {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}

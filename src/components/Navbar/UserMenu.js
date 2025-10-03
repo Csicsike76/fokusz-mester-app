@@ -1,57 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Navbar.module.css';
-import { FaBell, FaUserCircle } from 'react-icons/fa'; // FaUserCircle importálása
-import { API_URL } from '../../config/api';
+import { FaUserCircle, FaPowerOff } from 'react-icons/fa'; 
 
 const UserMenu = () => {
-    const { user, logout, token } = useAuth();
-    const [notifications, setNotifications] = useState([]);
-    const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-
-    const fetchNotifications = useCallback(async () => {
-        if (!token) return;
-        try {
-            const response = await fetch(`${API_URL}/api/notifications`, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const data = await response.json();
-            if (data.success) {
-                setNotifications(data.notifications);
-            }
-        } catch (error) {
-            console.error("Hiba az értesítések lekérdezésekor:", error);
-        }
-    }, [token]);
-
-    useEffect(() => {
-        if (user) {
-            fetchNotifications();
-            const interval = setInterval(fetchNotifications, 60000); 
-            return () => clearInterval(interval);
-        }
-    }, [user, fetchNotifications]);
-
-    const handleBellClick = async () => {
-        const currentlyOpen = isNotificationOpen;
-        setIsNotificationOpen(!currentlyOpen);
-        
-        const hasUnread = notifications.some(n => !n.read);
-        if (!currentlyOpen && hasUnread) {
-            try {
-                await fetch(`${API_URL}/api/notifications/mark-read`, {
-                    method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                setNotifications(prev => prev.map(n => ({ ...n, read: true })));
-            } catch (error) {
-                console.error("Hiba az értesítések olvasottá tételekor:", error);
-            }
-        }
-    };
-
-    const unreadCount = notifications.filter(n => !n.read).length;
+    const { user, logout } = useAuth();
 
     if (!user) {
         return (
@@ -62,41 +16,20 @@ const UserMenu = () => {
         );
     }
 
-    // A felhasználó nevének rövidítése, ha túl hosszú
     const displayName = user.username.length > 10 ? `${user.username.substring(0, 8)}...` : user.username;
 
     return (
-        <>
-            {/* A span-t egy div-be tesszük, amihez hozzáadjuk a tooltip-et */}
+        <div className={styles.userControls}> 
             <div className={styles.welcomeUserContainer} data-tooltip={`Üdv, ${user.username}!`}>
                 <span className={styles.welcomeUserText}>{displayName}</span>
                 <FaUserCircle className={styles.userIcon} />
             </div>
             
-            <div className={styles.notificationContainer}>
-                <button onClick={handleBellClick} className={styles.notificationBell}>
-                    <FaBell />
-                    {unreadCount > 0 && <span className={styles.notificationBadge}>{unreadCount}</span>}
-                </button>
-                {isNotificationOpen && (
-                    <div className={styles.notificationPanel}>
-                        {notifications.length > 0 ? (
-                            notifications.map(notif => (
-                                <div key={notif.id} className={`${styles.notificationItem} ${!notif.read ? styles.unread : ''}`}>
-                                    <strong>{notif.title}</strong>
-                                    <p>{notif.message}</p>
-                                    <small>{new Date(notif.sent_at).toLocaleString('hu-HU')}</small>
-                                </div>
-                            ))
-                        ) : (
-                            <div className={styles.notificationItem}>Nincsenek új értesítéseid.</div>
-                        )}
-                    </div>
-                )}
-            </div>
-
-            <button onClick={logout} className={styles.logoutButton}>Kijelentkezés</button>
-        </>
+            <button onClick={logout} className={styles.logoutButton}>
+                <span className={styles.logoutText}>Kijelentkezés</span> 
+                <FaPowerOff className={styles.logoutIcon} /> 
+            </button>
+        </div>
     );
 };
 

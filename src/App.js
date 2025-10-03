@@ -21,8 +21,9 @@ import InteraktivMatematika from './pages/InteraktivMatematika';
 import ContactPage from './pages/ContactPage';
 import AdminPage from './pages/AdminPage';
 import ClassDetailsPage from './pages/ClassDetailsPage';
-import AszfPage from './pages/AszfPage'; // ÚJ IMPORT
-import AdatkezelesiPage from './pages/AdatkezelesiPage'; // ÚJ IMPORT
+import AszfPage from './pages/AszfPage';
+import AdatkezelesiPage from './pages/AdatkezelesiPage';
+import DownloadGuidePage from './pages/DownloadGuidePage'; 
 import './App.css';
 
 function App() {
@@ -45,9 +46,12 @@ function App() {
             <Route path="elfelejtett-jelszo" element={<ForgotPasswordPage />} />
             <Route path="reset-password/:token" element={<ResetPasswordPage />} />
 
-            {/* ÚJ ÚTVONALAK A JOGI DOKUMENTUMOKHOZ */}
+            {/* ÚTVONALAK A JOGI DOKUMENTUMOKHOZ */}
             <Route path="aszf" element={<AszfPage />} />
             <Route path="adatkezeles" element={<AdatkezelesiPage />} />
+
+            {/* MÓDOSÍTOTT ÚTVONAL A TELEPÍTÉSI ÚTMUTATÓHOZ */}
+            <Route path="alkalmazas-letoltese" element={<DownloadGuidePage />} /> {/* Az "e" betű hozzáadva a végéhez */}
 
             <Route element={<ProtectedRoute allowedRoles={['student', 'teacher', 'admin']} />}>
               <Route path="profil" element={<ProfilePage />} />
