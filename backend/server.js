@@ -57,17 +57,6 @@ const whitelist = [
   'capacitor://localhost',
   'http://localhost'
 ];
-if (process.env.NODE_ENV !== 'production') {
-  const os = require('os');
-  const nets = os.networkInterfaces();
-  for (const name of Object.keys(nets)) {
-    for (const net of nets[name]) {
-      if (net.family === 'IPv4' && !net.internal) {
-        whitelist.push(`http://${net.address}:3000`);
-      }
-    }
-  }
-}
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || whitelist.indexOf(origin) !== -1) {
@@ -77,8 +66,8 @@ const corsOptions = {
     }
   },
 };
-// app.use(cors(corsOptions)); 
-app.use(cors()); 
+app.use(cors(corsOptions)); // Visszaállítva a corsOptions használatára
+// app.use(cors()); // IDEIGLENESEN ENGEDÉLYEZI AZ ÖSSZES FORRÁST - CSUPÁN TESZTELÉZHEZ! <- Ezt már kikommentelted a legutóbbi üzenetben
 
 app.use((req, res, next) => {
   logger.info(`[${new Date().toISOString()}] Bejövő kérés: ${req.method} ${req.originalUrl}`);
@@ -1034,6 +1023,13 @@ app.get('/api/profile/stats', authenticateToken, async (req, res) => {
         );
         const completed_lessons_count = parseInt(completedLessonsResult.rows[0].count, 10);
 
+        // Hozzáadva: kitöltött kvízek száma a student_progress táblából
+        const completedQuizzesCountResult = await pool.query(
+            'SELECT COUNT(DISTINCT quiz_slug) FROM student_progress WHERE user_id = $1 AND activity_type = \'quiz_completed\'',
+            [userId]
+        );
+        const completed_quizzes_count = parseInt(completedQuizzesCountResult.rows[0].count, 10);
+
         const bestQuizResultsResult = await pool.query(
             `SELECT c.title, uqr.score_percentage, uqr.level
              FROM user_quiz_results uqr
@@ -1046,12 +1042,12 @@ app.get('/api/profile/stats', authenticateToken, async (req, res) => {
         const best_quiz_results = bestQuizResultsResult.rows;
 
         const mostPracticedSubjectsResult = await pool.query(
-            `SELECT c.subject, COUNT(c.subject) as lesson_count
+            `SELECT c.subject, COUNT(c.subject) as quiz_count
              FROM student_progress sp
              JOIN curriculums c ON sp.quiz_slug = c.slug
-             WHERE sp.user_id = $1 AND c.subject IS NOT NULL
+             WHERE sp.user_id = $1 AND c.subject IS NOT NULL AND sp.activity_type = 'quiz_completed'
              GROUP BY c.subject
-             ORDER BY lesson_count DESC
+             ORDER BY quiz_count DESC
              LIMIT 3`,
             [userId]
         );
@@ -1061,6 +1057,7 @@ app.get('/api/profile/stats', authenticateToken, async (req, res) => {
             success: true,
             stats: {
                 completed_lessons_count,
+                completed_quizzes_count, // Új mező
                 best_quiz_results,
                 most_practiced_subjects,
             }
@@ -1545,11 +1542,11 @@ app.get('/api/notifications', authenticateToken, async (req, res) => {
     }
 });
 
-// ÚJ VÉGPONT: Tanulási útvonalak lekérdezése kvíz slug alapján
+// Tanulási útvonalak lekérdezése kvíz slug alapján
 app.get('/api/learning-paths/:quizSlug', authenticateTokenOptional, async (req, res) => {
     try {
         const rawQuizSlug = req.params.quizSlug;
-        const quizSlug = rawQuizSlug.replace(/[^a-zA-Z0-9-]/g, ''); // Tisztítás, mint a /api/quiz/:slug végpontban
+        const quizSlug = rawQuizSlug.replace(/[^a-zA-Z0-9-]/g, '');
 
         if (quizSlug !== rawQuizSlug) {
             return res.status(400).json({ success: false, message: 'Érvénytelen karakterek a kvíz azonosítóban.' });
@@ -1581,9 +1578,9 @@ app.get('/api/learning-paths/:quizSlug', authenticateTokenOptional, async (req, 
         const { rows: rawLessons } = await pool.query(lessonsQuery, [curriculumId]);
 
         const learningPaths = {
-            easy: [], // VISSZAÁLLÍTVA ANGLOLRA
-            medium: [], // VISSZAÁLLÍTVA ANGLOLRA
-            hard: [], // VISSZAÁLLÍTVA ANGLOLRA
+            easy: [],
+            medium: [],
+            hard: [],
         };
 
         rawLessons.forEach(lesson => {
@@ -1865,7 +1862,7 @@ app.delete('/api/admin/clear-users', authenticateToken, authorizeAdmin, async (r
     res.status(200).json({ success: true, message: 'Minden felhasználói adat sikeresen törölve.' });
   } catch (error) {
     await client.query('ROLLBACK');
-    logger.error("Adatbázis törlési hiba:", { message: error.message, stack: error.stack });
+    logger.error("Adatbázis törlési hiba:", { message: err.message, stack: err.stack });
     res.status(500).json({ success: false, message: 'Hiba történt a törlés során.' });
   } finally {
     client.release();
@@ -1899,7 +1896,7 @@ app.post('/api/auth/google/verify', async (req, res) => {
     }
 });
 
-// 2. LÉPÉS: Regisztráció befejezése a Google adatokkal és a kiegészítő űrlap adatokkal
+// Regisztráció befejezése a Google adatokkal és a kiegészítő űrlap adatokkal
 app.post('/api/register/google', async (req, res) => {
     const {
         email, name, provider_id, role,
@@ -2103,7 +2100,7 @@ cron.schedule('0 1 * * *', async () => {
       await transporter.sendMail(mailOptions);
       logger.info(`✅ Reminder email sent to ${user.email} (${daysLeft} days left).`);
     } catch (error) {
-      logger.error(`❌ Failed to send reminder email to ${user.email}:`, { message: error.message, stack: error.stack });
+      logger.error(`❌ Failed to send reminder email to ${user.email}:`, { message: error.message, stack: err.stack });
     }
   };
 
@@ -2128,7 +2125,7 @@ cron.schedule('0 1 * * *', async () => {
       await sendReminderEmail(user, 1);
     }
   } catch (error) {
-    logger.error('❌ Error during scheduled trial check:', { message: error.message, stack: error.stack });
+    logger.error('❌ Error during scheduled trial check:', { message: error.message, stack: err.stack });
   }
 });
 
