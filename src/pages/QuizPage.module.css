@@ -209,3 +209,201 @@
     background: rgba(0,0,0,0.2);
     border-radius: 8px;
 }
+
+/* src/pages/QuizPage.module.css */
+
+/* ... (a már meglévő CSS kódod itt van) ... */
+
+
+/* A quizHeader elrendezésének beállítása, hogy a cím és a gomb egymás mellé kerülhessen */
+.quizHeader {
+    display: flex;
+    justify-content: space-between; /* Elválasztja a címet és a gombot */
+    align-items: center; /* Függőlegesen középre igazítja őket */
+    margin-bottom: 0.5rem; /* Helyköz a leírás előtt */
+    flex-wrap: wrap; /* Törje a sort kisebb képernyőkön */
+    gap: 15px; /* Térköz a cím és a gomb között */
+}
+
+/* A H1 cím stílusának módosítása, hogy rugalmasan illeszkedjen */
+.quizBox h1 {
+  margin-top: 0;
+  margin-bottom: 0; /* Eltávolítja a margót, ha a quizHeader kezeli az elrendezést */
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  color: var(--link-hover); /* A zöld szín, amit használsz */
+  flex-grow: 1; /* Hogy a címet kitöltse a rendelkezésre álló helyet */
+  text-align: left; /* Alapértelmezett igazítás a bal oldalra, ha a gomb jobb oldalon van */
+}
+
+/* A "Javasolt Tanulási Útvonal" gomb stílusa */
+.learningPathButton {
+    background-color: rgba(26, 188, 156, 0.2); /* Enyhén zöldes, áttetsző háttér */
+    border: 1px solid var(--link-hover); /* Halvány zöld keret alapból */
+    color: var(--link-hover); /* Zöld szöveg */
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Térköz az ikon és a szöveg között */
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap; /* Megakadályozza a szöveg törését */
+}
+
+.learningPathButton:hover {
+    background-color: var(--link-hover); /* Sötétebb zöldes háttér hoverkor */
+    color: white;
+}
+
+/* --- Nehézségi Szint Választó Szekció Stílusai --- */
+/* Ez a rész megegyezik a korábban küldött fájlokkal, csak a teljesség kedvéért, ha esetleg hiányozna vagy felülíródna */
+.difficultySelection {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.difficultyIntroTitle { 
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--link-hover); /* Zöld szín */
+    margin-bottom: 10px;
+}
+.difficultyIntroText { 
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: var(--text); /* Fehér szín */
+}
+
+.difficultyCards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; 
+}
+
+.difficultyCard {
+    background-color: rgba(26, 188, 156, 0.1); 
+    border: 1px solid rgba(26, 188, 156, 0.3); 
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    width: 220px; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+.difficultyCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    border-color: var(--link-hover); 
+    background-color: rgba(26, 188, 156, 0.2); 
+}
+
+.difficultyCard h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--text);
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 8px; 
+}
+
+.difficultyCard p {
+    color: var(--text-dim);
+    font-size: 1rem;
+    flex-grow: 1; 
+    margin-bottom: 15px; 
+}
+
+.difficultyCard.alap h3 { /* Itt már az 'alap' ID-t használjuk a CSS-ben is */
+    color: #2ecc71; 
+}
+.difficultyCard.közép h3 { /* Itt az 'közép' ID-t használjuk */
+    color: #f1c40f; 
+}
+.difficultyCard.profi h3 { /* Itt az 'profi' ID-t használjuk */
+    color: #e74c3c; 
+}
+
+.startButton {
+    background-color: #3498db; 
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.startButton:hover {
+    background-color: #2980b9;
+}
+
+
+/* Reszponzív módosítások - ezeket is érdemes hozzáadni vagy ellenőrizni, ha hiányoznak */
+@media (max-width: 768px) {
+  .quizBox {
+    padding: 1.5rem;
+  }
+  .quizHeader {
+      flex-direction: column; 
+      align-items: flex-start;
+      gap: 10px;
+  }
+  .quizBox h1 {
+    font-size: 1.8rem;
+    text-align: left; 
+  }
+  .quizDescription {
+      font-size: 1rem;
+      text-align: left; 
+      margin-bottom: 1.5rem;
+  }
+  .learningPathButton {
+      width: 100%; 
+      justify-content: center;
+      font-size: 0.9rem;
+      padding: 8px 15px;
+  }
+  .difficultyIntroTitle {
+      font-size: 1.5rem;
+  }
+  .difficultyIntroText {
+      font-size: 0.95rem;
+  }
+  .difficultyCards {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+  }
+  .difficultyCard {
+      width: 90%; 
+      padding: 18px;
+  }
+  .difficultyCard h3 {
+      font-size: 1.3rem;
+  }
+  .difficultyCard p {
+      font-size: 0.9rem;
+  }
+  .startButton {
+      font-size: 0.85rem;
+      padding: 8px 12px;
+  }
+  .submitButton, .restartButton {
+      font-size: 1rem;
+      padding: 0.7rem 1rem;
+  }
+  .resultsActions { /* Ez a szabály a QuizPage.js-ben lévő resultsActions div-hez tartozik */
+      flex-direction: column;
+  }
+}

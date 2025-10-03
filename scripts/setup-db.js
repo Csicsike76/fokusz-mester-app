@@ -29,13 +29,12 @@ async function run() {
     await client.query('BEGIN');
     await client.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
 
-    // MÓDOSÍTÁS: Új táblák hozzáadása a törlendő táblák listájához
     const tablesToDrop = [
       'student_progress',
       'contact_messages', 'admin_actions', 'error_logs', 'activity_logs',
-      'notifications', 'user_quiz_results', 'quizquestions', 'quiz_learning_paths', // ÚJ: quiz_learning_paths
-      'lessons', // ÚJ: lessons
-      'curriculums', // curriculums after quiz_learning_paths because of foreign key
+      'notifications', 'user_quiz_results', 'quizquestions', 'quiz_learning_paths',
+      'lessons',
+      'curriculums',
       'helparticles', 'classmemberships', 'classes', 'teachers',
       'referral_rewards', 'referrals', 'payments', 'subscriptions', 'subscription_plans', 'users'
     ];
@@ -84,7 +83,7 @@ async function run() {
         verify_token VARCHAR(255),
         subject_specialization TEXT,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-        updated_at TIMESTAMTS NOT NULL DEFAULT NOW()
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
     `);
 
@@ -248,14 +247,14 @@ async function run() {
         time_limit_seconds INT DEFAULT 0,
         max_attempts INT DEFAULT 0,
         order_num INT DEFAULT 0,
-        difficulty_level TEXT CHECK (difficulty_level IN ('easy','medium','hard')),
+        difficulty_level TEXT CHECK (difficulty_level IN ('easy','medium','hard')), -- VISSZAÁLLÍTVA ANGLOLRA
         metadata JSONB DEFAULT '{}'::jsonb,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
     `);
 
-    await client.query(`
+await client.query(`
       CREATE TABLE user_quiz_results (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         user_id UUID REFERENCES users(id) ON DELETE CASCADE,
@@ -263,12 +262,12 @@ async function run() {
         completed_questions INT NOT NULL,
         total_questions INT NOT NULL,
         score_percentage NUMERIC(5,2) DEFAULT 0.0,
-        level TEXT CHECK (level IN ('easy','medium','hard')),
-        level_score_thresholds JSONB DEFAULT '{"easy":40,"medium":65,"hard":90}'::jsonb,
+        level TEXT CHECK (level IN ('easy','medium','hard')), -- VISSZAÁLLÍTVA ANGLOLRA
+        level_score_thresholds JSONB DEFAULT '{"easy":40,"medium":65,"hard":90}'::jsonb, -- VISSZAÁLLÍTVA ANGLOLRA
         hints_used INT DEFAULT 0,
         total_time_seconds INT DEFAULT 0,
-        completed_at TIMESTAMPTZ DEFAULT NOW(),
-        UNIQUE(user_id, curriculum_id, level)
+        completed_at TIMESTAMPTZ DEFAULT NOW()
+        -- AZ EREDETI 'UNIQUE(user_id, curriculum_id, level)' SOR ELTÁVOLÍTVA (marad így)
       );
     `);
 
@@ -337,7 +336,7 @@ async function run() {
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         title TEXT NOT NULL,
         description TEXT,
-        content_slug TEXT UNIQUE NOT NULL, -- Hivatkozás egy curriculum slugra vagy statikus tartalomra
+        content_slug TEXT UNIQUE NOT NULL,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
@@ -348,7 +347,7 @@ async function run() {
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         curriculum_id UUID REFERENCES curriculums(id) ON DELETE CASCADE NOT NULL,
         lesson_id UUID REFERENCES lessons(id) ON DELETE CASCADE NOT NULL,
-        difficulty_level TEXT NOT NULL CHECK (difficulty_level IN ('alap','közép','profi')),
+        difficulty_level TEXT NOT NULL CHECK (difficulty_level IN ('easy','medium','hard')), -- VISSZAÁLLÍTVA ANGLOLRA
         order_index INT NOT NULL DEFAULT 0,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -366,10 +365,9 @@ async function run() {
       $$ LANGUAGE plpgsql;
     `);
 
-    // MÓDOSÍTÁS: Az új táblák hozzáadása a triggert kapó táblák listájához
-    const tablesToTrigger = ['users','teachers','classes','subscription_plans','subscriptions', 'lessons', 'quiz_learning_paths'];
+    const tablesToTrigger = ['users','teachers','classes','subscription_plans','subscriptions'];
     for (const tbl of tablesToTrigger) {
-      if (tbl !== 'curriculums' && tbl !== 'helparticles' && tbl !== 'quizquestions' && tbl !== 'classmemberships' && tbl !== 'notifications') { //notifications also shouldn't get trigger
+      if (tbl !== 'curriculums' && tbl !== 'helparticles' && tbl !== 'quizquestions' && tbl !== 'classmemberships' && tbl !== 'notifications' && tbl !== 'user_quiz_results' && tbl !== 'student_progress') { 
           await client.query(`DROP TRIGGER IF EXISTS trg_update_timestamp ON ${tbl}`);
           await client.query(`
             CREATE TRIGGER trg_update_timestamp
@@ -379,6 +377,22 @@ async function run() {
           `);
       }
     }
+    // ÚJ TRIGGEREK HOZZÁADVA a lessons és quiz_learning_paths táblákhoz
+    await client.query(`DROP TRIGGER IF EXISTS trg_update_timestamp ON lessons`);
+    await client.query(`
+      CREATE TRIGGER trg_update_timestamp
+      BEFORE UPDATE ON lessons
+      FOR EACH ROW
+      EXECUTE FUNCTION trigger_set_timestamp();
+    `);
+    await client.query(`DROP TRIGGER IF EXISTS trg_update_timestamp ON quiz_learning_paths`);
+    await client.query(`
+      CREATE TRIGGER trg_update_timestamp
+      BEFORE UPDATE ON quiz_learning_paths
+      FOR EACH ROW
+      EXECUTE FUNCTION trigger_set_timestamp();
+    `);
+
 
     console.log('Indexek létrehozása a gyorsabb adatbázis-műveletekhez...');
     await client.query(`CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);`);
@@ -386,18 +400,15 @@ async function run() {
     await client.query(`CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id);`);
     await client.query(`CREATE INDEX IF NOT EXISTS idx_student_progress_user_id ON student_progress(user_id);`);
     await client.query(`CREATE INDEX IF NOT EXISTS idx_curriculums_slug ON curriculums(slug);`);
-    // ÚJ INDEXEK
     await client.query(`CREATE INDEX IF NOT EXISTS idx_lessons_content_slug ON lessons(content_slug);`);
     await client.query(`CREATE INDEX IF NOT EXISTS idx_qlp_curriculum_id ON quiz_learning_paths(curriculum_id);`);
     await client.query(`CREATE INDEX IF NOT EXISTS idx_qlp_lesson_id ON quiz_learning_paths(lesson_id);`);
+    await client.query(`CREATE INDEX IF NOT EXISTS idx_user_quiz_results_user_curriculum_level_completed_at ON user_quiz_results(user_id, curriculum_id, level, completed_at);`);
     console.log('✅ Indexek sikeresen létrehozva.');
 
-    // --- Példa adatok a Tanulási Útvonalakhoz (FONTOS A TESZTELÉSHEZ!) ---
     console.log('Példa tanulási útvonal adatok beszúrása...');
-
-    // Létrehozunk/megkeresünk egy példa curriculumot, amihez hozzárendeljük a leckéket
     let sampleCurriculumId;
-    const sampleCurriculumSlug = 'matek-ai-kalandok-1-4-osztaly'; // Ez a slug szerepel a képeiden
+    const sampleCurriculumSlug = 'kviz-muveletek-tortekkel'; // A screenshotodról vettem ezt a slug-ot
     const existingCurriculum = await client.query(`SELECT id FROM curriculums WHERE slug = $1`, [sampleCurriculumSlug]);
     if (existingCurriculum.rows.length > 0) {
         sampleCurriculumId = existingCurriculum.rows[0].id;
@@ -405,7 +416,7 @@ async function run() {
     } else {
         const newCurriculum = await client.query(`
             INSERT INTO curriculums (slug, title, subject, grade, category, description, is_published)
-            VALUES ($1, 'Matek-AI Kalandok 1-4. osztály', 'matematika', 1, 'premium_course', 'Interaktív matematika 1-4. osztályosoknak AI támogatással', true)
+            VALUES ($1, 'Matek-AI Kalandok: Műveletek Törtekkel', 'matematika', 5, 'premium_course', 'Gyakorold a törtekkel való műveleteket interaktív feladatokkal.', true)
             RETURNING id;
         `, [sampleCurriculumSlug]);
         sampleCurriculumId = newCurriculum.rows[0].id;
@@ -415,58 +426,42 @@ async function run() {
     // Példa leckék beszúrása
     const lesson1Result = await client.query(`
         INSERT INTO lessons (title, description, content_slug)
-        VALUES ('Számfogalom Alakítása Lecke', 'Ismerkedj meg a számokkal és a mennyiségekkel!', 'szamfogalom-alakitas')
+        VALUES ('Törtek fogalma és ábrázolása', 'Ismerkedj meg a törtek alapjaival és a vizuális megjelenítésükkel.', 'tortek-fogalma-abrazolasa')
         ON CONFLICT (content_slug) DO UPDATE SET title = EXCLUDED.title, description = EXCLUDED.description RETURNING id;
     `);
     const lesson1Id = lesson1Result.rows[0].id;
 
     const lesson2Result = await client.query(`
         INSERT INTO lessons (title, description, content_slug)
-        VALUES ('Műveletek Összeadása Lecke', 'Gyakorold az alapvető összeadásokat 10-es számkörben.', 'muveletek-osszeadas')
+        VALUES ('Törtek összeadása és kivonása', 'Gyakorold a törtek összeadását és kivonását azonos és különböző nevezőkkel.', 'tortek-osszeadas-kivonas')
         ON CONFLICT (content_slug) DO UPDATE SET title = EXCLUDED.title, description = EXCLUDED.description RETURNING id;
     `);
     const lesson2Id = lesson2Result.rows[0].id;
 
     const lesson3Result = await client.query(`
         INSERT INTO lessons (title, description, content_slug)
-        VALUES ('Műveletek Kivonás Lecke', 'Gyakorold az alapvető kivonásokat 10-es számkörben.', 'muveletek-kivonas')
+        VALUES ('Törtek szorzása és osztása', 'Tanuld meg a törtek szorzását és osztását egész számokkal és törtekkel.', 'tortek-szorzas-osztas')
         ON CONFLICT (content_slug) DO UPDATE SET title = EXCLUDED.title, description = EXCLUDED.description RETURNING id;
     `);
     const lesson3Id = lesson3Result.rows[0].id;
 
     const lesson4Result = await client.query(`
         INSERT INTO lessons (title, description, content_slug)
-        VALUES ('Szöveges Feladatok Alapok Lecke', 'Tanuld meg értelmezni a matematikai problémákat szöveges formában.', 'szoveges-feladatok-alapok')
+        VALUES ('Vegyes feladatok törtekkel', 'Oldj meg komplex feladatokat, amelyek többféle törtes műveletet igényelnek.', 'tortek-vegyes-feladatok')
         ON CONFLICT (content_slug) DO UPDATE SET title = EXCLUDED.title, description = EXCLUDED.description RETURNING id;
     `);
     const lesson4Id = lesson4Result.rows[0].id;
     
-    const lesson5Result = await client.query(`
-        INSERT INTO lessons (title, description, content_slug)
-        VALUES ('Geometriai Alapok Lecke', 'Alapvető geometriai formák és fogalmak.', 'geometriai-alapok')
-        ON CONFLICT (content_slug) DO UPDATE SET title = EXCLUDED.title, description = EXCLUDED.description RETURNING id;
-    `);
-    const lesson5Id = lesson5Result.rows[0].id;
-
-    const lesson6Result = await client.query(`
-        INSERT INTO lessons (title, description, content_slug)
-        VALUES ('Számok Párosítása Lecke', 'Ismerkedj meg a páros és páratlan számokkal.', 'szamok-parositasa')
-        ON CONFLICT (content_slug) DO UPDATE SET title = EXCLUDED.title, description = EXCLUDED.description RETURNING id;
-    `);
-    const lesson6Id = lesson6Result.rows[0].id;
-
     // Leckék hozzárendelése a tananyaghoz nehézségi szintenként
     await client.query(`
         INSERT INTO quiz_learning_paths (curriculum_id, lesson_id, difficulty_level, order_index)
         VALUES
-        ($1, $2, 'alap', 1), -- Számfogalom Alakítása Lecke
-        ($1, $3, 'alap', 2), -- Műveletek Összeadása Lecke
-        ($1, $4, 'közép', 1), -- Műveletek Kivonás Lecke
-        ($1, $5, 'közép', 2), -- Szöveges Feladatok Alapok Lecke
-        ($1, $6, 'közép', 3), -- Geometriai Alapok Lecke
-        ($1, $7, 'profi', 1)  -- Számok Párosítása Lecke
+        ($1, $2, 'easy', 1), -- Törtek fogalma és ábrázolása
+        ($1, $3, 'medium', 1), -- Törtek összeadása és kivonása
+        ($1, $4, 'medium', 2), -- Törtek szorzása és osztása
+        ($1, $5, 'hard', 1)  -- Vegyes feladatok törtekkel
         ON CONFLICT (curriculum_id, lesson_id, difficulty_level) DO NOTHING;
-    `, [sampleCurriculumId, lesson1Id, lesson2Id, lesson3Id, lesson4Id, lesson5Id, lesson6Id]);
+    `, [sampleCurriculumId, lesson1Id, lesson2Id, lesson3Id, lesson4Id]);
     console.log('✅ Példa tanulási útvonal adatok beszúrva/frissítve.');
     // --- Példa adatok vége ---
 

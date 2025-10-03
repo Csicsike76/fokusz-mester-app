@@ -54,8 +54,8 @@ const whitelist = [
   process.env.FRONTEND_URL,
   'https://fokuszmester.com',
   'https://www.fokuszmester.com',
-  'capacitor://localhost', // EZT ADD HOZZÁ
-  'http://localhost'       // EZT ADD HOZZÁ
+  'capacitor://localhost',
+  'http://localhost'
 ];
 if (process.env.NODE_ENV !== 'production') {
   const os = require('os');
@@ -77,8 +77,8 @@ const corsOptions = {
     }
   },
 };
-// app.use(cors(corsOptions)); // KOMMENTELD KI EZT!
-app.use(cors()); // IDEIGLENESEN ENGEDÉLYEZI AZ ÖSSZES FORRÁST - CSUPÁN TESZTELÉSHEZ!
+// app.use(cors(corsOptions)); 
+app.use(cors()); 
 
 app.use((req, res, next) => {
   logger.info(`[${new Date().toISOString()}] Bejövő kérés: ${req.method} ${req.originalUrl}`);
@@ -423,7 +423,7 @@ app.post('/api/register-teacher', async (req, res) => {
       [newUser.rows[0].id, false, verify_token]
     );
 
-    const verifyLink = `${process.env.BACKEND_URL}/api/verify-teacher-email-link?token=${verify_token}`; // JAVÍTÁS
+    const verifyLink = `${process.env.BACKEND_URL}/api/verify-teacher-email-link?token=${verify_token}`;
 
     const mailOptions = {
       from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
@@ -1035,7 +1035,7 @@ app.get('/api/profile/stats', authenticateToken, async (req, res) => {
         const completed_lessons_count = parseInt(completedLessonsResult.rows[0].count, 10);
 
         const bestQuizResultsResult = await pool.query(
-            `SELECT c.title, uqr.score_percentage
+            `SELECT c.title, uqr.score_percentage, uqr.level
              FROM user_quiz_results uqr
              JOIN curriculums c ON uqr.curriculum_id = c.id
              WHERE uqr.user_id = $1
@@ -1581,9 +1581,9 @@ app.get('/api/learning-paths/:quizSlug', authenticateTokenOptional, async (req, 
         const { rows: rawLessons } = await pool.query(lessonsQuery, [curriculumId]);
 
         const learningPaths = {
-            alap: [],
-            közép: [],
-            profi: [],
+            easy: [], // VISSZAÁLLÍTVA ANGLOLRA
+            medium: [], // VISSZAÁLLÍTVA ANGLOLRA
+            hard: [], // VISSZAÁLLÍTVA ANGLOLRA
         };
 
         rawLessons.forEach(lesson => {
@@ -1638,32 +1638,48 @@ app.post('/api/quiz/submit-result', authenticateToken, async (req, res) => {
     try {
         await client.query('BEGIN');
 
-        const curriculumResult = await client.query('SELECT id, title FROM curriculums WHERE slug = $1', [slug]);
+        // Lekérjük a tananyag ID-t, címét ÉS TÁRGYÁT
+        const curriculumResult = await client.query('SELECT id, title, subject FROM curriculums WHERE slug = $1', [slug]);
         if (curriculumResult.rows.length === 0) {
             throw new Error('A megadott tananyag nem található az adatbázisban.');
         }
-        const { id: curriculumId, title: curriculumTitle } = curriculumResult.rows[0];
+        const { id: curriculumId, title: curriculumTitle, subject: curriculumSubject } = curriculumResult.rows[0];
         const scorePercentage = totalQuestions > 0 ? (score / totalQuestions) * 100 : 0;
         
-        const insertQueryOld = `
+        // Új eredmény beszúrása a user_quiz_results táblába
+        const insertQueryForResults = `
             INSERT INTO user_quiz_results (user_id, curriculum_id, completed_questions, total_questions, score_percentage, completed_at, level)
-            VALUES ($1, $2, $3, $4, $5, NOW(), $6)
-            ON CONFLICT (user_id, curriculum_id, level) DO UPDATE SET
-                completed_questions = EXCLUDED.completed_questions,
-                total_questions = EXCLUDED.total_questions,
-                score_percentage = EXCLUDED.score_percentage,
-                completed_at = NOW();
+            VALUES ($1, $2, $3, $4, $5, NOW(), $6);
         `;
-        await client.query(insertQueryOld, [userId, curriculumId, score, totalQuestions, scorePercentage, level]);
+        await client.query(insertQueryForResults, [userId, curriculumId, score, totalQuestions, scorePercentage, level]);
 
-        const insertQueryNew = `
+        // Tisztítási logika: Töröljük a legrégebbi eredményeket, ha több van, mint 5 az adott felhasználó, tárgy és nehézségi szint kombinációjára
+        const cleanupQuery = `
+            DELETE FROM user_quiz_results
+            WHERE id IN (
+                SELECT uqr.id
+                FROM user_quiz_results uqr
+                JOIN curriculums c ON uqr.curriculum_id = c.id
+                WHERE uqr.user_id = $1
+                  AND c.subject = $2
+                  AND uqr.level = $3
+                ORDER BY uqr.completed_at ASC
+                OFFSET 5
+            );
+        `;
+        await client.query(cleanupQuery, [userId, curriculumSubject, level]);
+
+
+        // student_progress tábla frissítése (itt továbbra is minden aktivitás rögzítésre kerül)
+        const insertQueryForProgress = `
             INSERT INTO student_progress (user_id, activity_type, quiz_slug, score_percentage, completed_at, metadata)
             VALUES ($1, 'quiz_completed', $2, $3, NOW(), $4);
         `;
-        const progressResult = await client.query(insertQueryNew, [userId, slug, scorePercentage, JSON.stringify({ level, score, totalQuestions })]);
+        await client.query(insertQueryForProgress, [userId, slug, scorePercentage, JSON.stringify({ level, score, totalQuestions })]);
 
         await client.query('COMMIT');
         
+        // Szülői értesítő e-mail küldése
         const userDetails = await pool.query('SELECT real_name, parental_email FROM users WHERE id = $1', [userId]);
         if (userDetails.rows.length > 0 && userDetails.rows[0].parental_email) {
             const { real_name, parental_email } = userDetails.rows[0];
@@ -1678,6 +1694,7 @@ app.post('/api/quiz/submit-result', authenticateToken, async (req, res) => {
                         <h3>Részletek:</h3>
                         <ul>
                             <li><strong>Tananyag:</strong> ${curriculumTitle}</li>
+                            <li><strong>Tárgy:</strong> ${curriculumSubject}</li>
                             <li><strong>Elért eredmény:</strong> ${score} / ${totalQuestions} pont (${scorePercentage.toFixed(0)}%)</li>
                             <li><strong>Nehézségi szint:</strong> ${level}</li>
                             <li><strong>Dátum:</strong> ${new Date().toLocaleString('hu-HU')}</li>

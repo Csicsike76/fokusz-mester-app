@@ -1,0 +1,174 @@
+/* src/components/QuizLobby/SuggestedLearningPathModal.module.css */
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1500; 
+}
+
+.modalContent {
+    background-color: rgba(33, 49, 63, 0.98); 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh; 
+    overflow-y: auto; 
+    position: relative;
+    color: #f1f1f1; 
+}
+
+.closeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #d8e3ea; 
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+    color: #1abc9c; 
+}
+
+.modalTitle {
+    color: #1abc9c; 
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+.loadingText, .errorText, .noLessonsText {
+    text-align: center;
+    color: #d8e3ea;
+    padding: 20px;
+}
+
+.errorText {
+    color: #e74c3c; 
+    font-weight: bold;
+}
+
+
+.tabContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+    flex-wrap: wrap; 
+}
+
+.tabButton {
+    background-color: rgba(255, 255, 255, 0.08); 
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #d8e3ea; 
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.tabButton:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff; 
+}
+
+.tabButton.activeTab {
+    background-color: #1abc9c; 
+    border-color: #1abc9c;
+    color: white;
+}
+
+.tabButton.activeTab:hover {
+    background-color: #16a085; 
+    color: white;
+}
+
+.lessonListContainer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2); 
+    border-radius: 8px;
+    min-height: 150px; 
+}
+
+.lessonItem {
+    display: flex;
+    align-items: flex-start; 
+    margin-bottom: 15px;
+}
+
+.lessonCheckbox {
+    margin-right: 12px;
+    margin-top: 4px; 
+    min-width: 18px; 
+    min-height: 18px;
+    accent-color: #1abc9c; 
+    cursor: pointer;
+}
+
+.lessonLabel {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    color: #d8e3ea; 
+    flex-grow: 1; 
+}
+
+.lessonLabel:hover {
+    color: #ffffff; 
+}
+
+.lessonTitle {
+    font-weight: 700;
+    color: #ffffff; 
+    margin-bottom: 3px;
+    font-size: 1.1rem;
+}
+
+.lessonDescription {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Reszponzív módosítások */
+@media (max-width: 768px) {
+    .modalContent {
+        padding: 20px;
+        width: 95%;
+    }
+    .modalTitle {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+    .tabButton {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    .lessonItem {
+        margin-bottom: 10px;
+    }
+    .lessonCheckbox {
+        margin-top: 2px;
+    }
+    .lessonTitle {
+        font-size: 1rem;
+    }
+    .lessonDescription {
+        font-size: 0.85rem;
+    }
+}

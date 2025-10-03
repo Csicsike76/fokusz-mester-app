@@ -1,13 +1,14 @@
-// src/pages/QuizPage.js
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styles from './QuizPage.module.css';
 import { useAuth } from '../context/AuthContext';
+import { FaBookOpen, FaSmile, FaGraduationCap, FaCrown } from 'react-icons/fa'; 
 
 import SingleChoiceQuestion from '../components/SingleChoiceQuestion/SingleChoiceQuestion';
 import WorkshopContent from '../components/WorkshopContent/WorkshopContent';
+import SuggestedLearningPathModal from '../components/QuizLobby/SuggestedLearningPathModal'; 
 
-const API_URL = process.env.REACT_APP_API_URL || '';
+const API_URL = process.env.REACT_APP_API_URL || ''; 
 
 const QuizPage = () => {
     const { slug } = useParams();
@@ -18,6 +19,7 @@ const QuizPage = () => {
     const [userAnswers, setUserAnswers] = useState({});
     const [showResults, setShowResults] = useState(false);
     const [score, setScore] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false); 
 
     const fetchCurriculum = useCallback(async () => {
         try {
@@ -103,7 +105,8 @@ const QuizPage = () => {
         );
     }
 
-    if (!curriculum) return <div className={styles.container}><div className={styles.quizBox}><p>A tananyag nem található.</p></div></div>;
+    // A curriculum objektumot ellenőrizzük, mielőtt a title-t használnánk
+    if (!curriculum || !curriculum.title) return <div className={styles.container}><div className={styles.quizBox}><p>A tananyag nem található vagy címe hiányzik.</p></div></div>;
 
     const totalQuestions = curriculum?.questions?.length || 0;
     const pct = totalQuestions ? Math.round((score / totalQuestions) * 100) : 0;
@@ -111,16 +114,41 @@ const QuizPage = () => {
     if (pct >= 80) resultsTone = styles.good;
     else if (pct >= 50) resultsTone = styles.ok;
 
+    const difficultyLevels = [
+        { id: 'alap', label: <> <FaSmile /> Könnyű</>, questions: '8 kérdés', description: 'a bemelegítéshez' },
+        { id: 'közép', label: <> <FaGraduationCap /> Közepes</>, questions: '15 kérdés', description: 'az elmélyítéshez' },
+        { id: 'profi', label: <> <FaCrown /> Profi</>, questions: 'Az összes kérdés', description: 'a kihívásért' },
+    ];
+
     return (
         <div className={styles.container}>
             <div className={styles.quizBox}>
-                <h1>{curriculum.title}</h1>
-                <p>{curriculum.description}</p>
+                <div className={styles.quizHeader}>
+                    <h1>{curriculum.title}</h1>
+                    <button className={styles.learningPathButton} onClick={() => setIsModalOpen(true)}>
+                        <FaBookOpen /> Javasolt Tanulási Útvonal
+                    </button>
+                </div>
+                <p className={styles.quizDescription}>{curriculum.description}</p>
                 <hr className={styles.hr} />
+
+                <div className={styles.difficultySelection}>
+                    <p className={styles.difficultyIntroTitle}>Válassz Nehézségi Szintet!</p>
+                    <p className={styles.difficultyIntroText}>Mérd fel a tudásodra megfelelő szinten.</p>
+                    <div className={styles.difficultyCards}>
+                        {difficultyLevels.map(level => (
+                            <div key={level.id} className={`${styles.difficultyCard} ${styles[level.id]}`}>
+                                <h3>{level.label}</h3>
+                                <p>{level.questions} {level.description}</p>
+                                <button className={styles.startButton}>Kvíz indítása</button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
                 {isWorkshop && <WorkshopContent sections={curriculum.questions} />}
                 
-                {isQuiz && curriculum.questions.map((q, index) => (
+                {isQuiz && !isWorkshop && curriculum.questions.map((q, index) => (
                     <SingleChoiceQuestion
                         key={q.id || index}
                         question={{ ...q, id: q.id || index }}
@@ -130,13 +158,13 @@ const QuizPage = () => {
                     />
                 ))}
 
-                {isQuiz && !showResults && totalQuestions > 0 && (
+                {isQuiz && !isWorkshop && !showResults && totalQuestions > 0 && (
                     <button onClick={handleSubmit} className={styles.submitButton} disabled={!allAnswered}>
                         Kvíz beküldése
                     </button>
                 )}
 
-                {isQuiz && showResults && (
+                {isQuiz && !isWorkshop && showResults && (
                     <div className={`${styles.resultsBox} ${resultsTone}`}>
                         <p><strong>Eredményed:</strong> {score} / {totalQuestions}</p>
                         <p><strong>Százalék:</strong> {pct}%</p>
@@ -151,6 +179,12 @@ const QuizPage = () => {
                     <p>Ehhez a leckéhez még nincs tartalom (kérdés vagy szekció) csatolva.</p>
                 )}
             </div>
+
+            <SuggestedLearningPathModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                quizSlug={slug} 
+            />
         </div>
     );
 };
