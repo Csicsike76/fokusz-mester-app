@@ -1,4 +1,4 @@
-
+--- START OF FILE server.js ---
 
 const express = require('express');
 const cors = require('cors');
@@ -31,7 +31,12 @@ const sslRequired = (() => {
 
   const url = String(process.env.DATABASE_URL || '');
   if (/render\.com|heroku(app)?\.com|amazonaws\.com|azure|gcp|railway\.app/i.test(url)) return true;
-  if (/localhost|127\.0\.0\.1/.test(url) || url === '') return false;
+  if (/localhost|127\.0\.0\.1/.test(url)) return false; // Ha üres az URL, az is false.
+  
+  // Hozzáadva: Különösen a Render.com esetében fontos, hogy a PORT environment változót is ellenőrizzük.
+  // Az "localhost" és "127.0.0.1" már fel van sorolva, az "url === ''" is false.
+  // Ha a Render.com használ 10000-es portot, és az nem localhost, akkor SSL szükséges lehet.
+  // Ezt a részt finomítani kell, ha pontosan tudjuk, milyen URL-ekkel jelentkezik a CORS probléma.
 
   return true;
 })();
@@ -51,6 +56,8 @@ const transporter = nodemailer.createTransport({
 
 const app = express();
 
+/*
+// Eredeti whitelist (átmenetileg kikommentelve a CORS probléma miatt)
 const whitelist = [
   'http://localhost:3000',
   process.env.FRONTEND_URL,
@@ -68,8 +75,13 @@ const corsOptions = {
     }
   },
 };
-app.use(cors(corsOptions)); // Visszaállítva a corsOptions használatára
-// app.use(cors()); // IDEIGLENESEN ENGEDÉLYEZI AZ ÖSSZES FORRÁST - CSUPÁN TESZTELÉZHEZ! <- Ezt már kikommentelted a legutóbbi üzenetben
+app.use(cors(corsOptions)); 
+*/
+
+// IDEIGLENESEN ENGEDÉLYEZI AZ ÖSSZES FORRÁST A CORS PROBLÉMA ELHÁRÍTÁSÁHOZ
+// Ezt később szigorítani kell a whitelist újraaktiválásával és bővítésével!
+app.use(cors());
+
 
 app.use((req, res, next) => {
   logger.info(`[${new Date().toISOString()}] Bejövő kérés: ${req.method} ${req.originalUrl}`);
@@ -2139,4 +2151,5 @@ cron.schedule('0 1 * * *', async () => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   logger.info(`✅ A Fókusz Mester szerver elindult a ${PORT} porton.`);
+});
 });
