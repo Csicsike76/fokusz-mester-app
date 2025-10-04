@@ -225,6 +225,14 @@ const ProfilePage = () => {
         }
     };
 
+    // ÚJ: Dátumformázó függvény a ProfilePage-hez
+    const formatProfileDate = (dateString) => {
+        if (!dateString) return 'N/A';
+        const date = new Date(dateString);
+        // Explicit időzóna megadása
+        return date.toLocaleDateString('hu-HU', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'auto' });
+    };
+
     if (isLoading) return <div className={styles.container}><p>Profil betöltése...</p></div>;
     if (!profileData) return <div className={styles.container}><p className={styles.errorMessage}>{error || 'Profiladatok nem elérhetők.'}</p></div>;
 
@@ -254,7 +262,7 @@ const ProfilePage = () => {
                 <>
                     {activeSubInfo && (
                          <p className={styles.activeSubscription}>
-                            Előfizetésed aktív. {activeSubInfo.current_period_end && `A jelenlegi időszak vége: ${new Date(activeSubInfo.current_period_end).toLocaleDateString()}`}
+                            Előfizetésed aktív. {activeSubInfo.current_period_end && `A jelenlegi időszak vége: ${formatProfileDate(activeSubInfo.current_period_end)}`}
                         </p>
                     )}
                     {futureSubInfo && (
@@ -271,7 +279,7 @@ const ProfilePage = () => {
             return (
                 <>
                     <div className={styles.trialHighlightBox}>
-                        <p><strong>Ingyenes próbaidőszakod aktív.</strong> {trialInfo.current_period_end && `A prémium funkciók eddig érhetőek el: ${new Date(trialInfo.current_period_end).toLocaleDateString()}`}</p>
+                        <p><strong>Ingyenes próbaidőszakod aktív.</strong> {trialInfo.current_period_end && `A prémium funkciók eddig érhetőek el: ${formatProfileDate(trialInfo.current_period_end)}`}</p>
                     </div>
                     {!futureSubInfo && (
                         <div className={styles.subscribeOptions}>
@@ -383,7 +391,7 @@ const ProfilePage = () => {
                                 ) : <p>Nincs még kitöltött kvíz.</p>}
                             </div>
                             <div className={styles.statItem}>
-                                <span className={styles.statLabel}>Gyakori témakörök</span> {/* JAVÍTOTT: className kétszer szerepelt */}
+                                <span className={styles.statLabel}>Gyakori témakörök</span>
                                 {statsData.most_practiced_subjects?.length > 0 ? (
                                      <ul>{statsData.most_practiced_subjects.map((s, i) => <li key={i}>{s.subject} ({`${s.quiz_count || 0}x`})</li>)}</ul>
                                 ) : <p>Nincs még adat.</p>}
@@ -409,7 +417,7 @@ const ProfilePage = () => {
                 {profileData.role === 'student' && profileData.referral_code && (
                     <div className={styles.section}>
                         <h2>Oszd meg és nyerj!</h2>
-                        <p>Oszd meg az alábbi egyedi ajánlókódodat barátaiddal! Minden 5., a te kódoddal regisztrált és előfizető felhasználó után <strong>1 hónap prémium hozzáférést</strong> kapsz ajándékba!</p>
+                        <p>Oszd meg az alábbi egyedi ajánlókódodat barátaiddal! Minden 5., a te kódoddal regisztrált és előfizető felhasználó után <strong>1 hónap prémium hozzáférésedet</strong> kapsz ajándékba!</p>
                         <div className={styles.referralCodeBox}>
                             <span>{profileData.referral_code}</span>
                             <button onClick={copyToClipboard} disabled={isCopied}>{isCopied ? 'Másolva!' : 'Másolás'}</button>

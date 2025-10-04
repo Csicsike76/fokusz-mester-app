@@ -137,17 +137,19 @@ const TeacherDashboardPage = () => {
     const formatDate = (dateString) => {
         if (!dateString) return 'N/A';
         const date = new Date(dateString);
-        const year = date.getFullYear();
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const day = date.getDate().toString().padStart(2, '0');
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
+        
+        // Explicit időzóna megadása, hogy a böngésző helyi idejét vegye figyelembe
+        const localeOptions = { timeZone: 'auto' };
+
+        const year = date.toLocaleDateString('hu-HU', { year: 'numeric', ...localeOptions });
+        const monthDay = date.toLocaleDateString('hu-HU', { month: '2-digit', day: '2-digit', ...localeOptions });
+        const time = date.toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit', ...localeOptions });
 
         return (
-            <div className={styles.dateCellContent}> {/* ÚJ: Konténer a dátum elemeknek */}
+            <div className={styles.dateCellContent}>
                 <div className={styles.dateYear}>{year}</div>
-                <div className={styles.dateMonthDay}>{month}. {day}.</div>
-                <div className={styles.dateTime}>{hours}:{minutes}</div>
+                <div className={styles.dateMonthDay}>{monthDay}.</div>
+                <div className={styles.dateTime}>{time}</div>
             </div>
         );
     };
