@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
@@ -1017,10 +1019,12 @@ app.post('/api/profile/change-password', authenticateToken, async (req, res) => 
 app.get('/api/profile/stats', authenticateToken, async (req, res) => {
     const userId = req.user.userId;
     try {
+        logger.info(`Statisztikák lekérdezése a felhasználóhoz: ${userId}`);
         const completedLessonsResult = await pool.query(
             'SELECT COUNT(DISTINCT lesson_slug) FROM student_progress WHERE user_id = $1 AND activity_type = \'lesson_viewed\'',
             [userId]
         );
+        logger.info(`Elvégzett leckék eredménye: ${JSON.stringify(completedLessonsResult.rows[0])}`);
         const completed_lessons_count = parseInt(completedLessonsResult.rows[0].count, 10);
 
         // Hozzáadva: kitöltött kvízek száma a student_progress táblából
@@ -1028,6 +1032,7 @@ app.get('/api/profile/stats', authenticateToken, async (req, res) => {
             'SELECT COUNT(DISTINCT quiz_slug) FROM student_progress WHERE user_id = $1 AND activity_type = \'quiz_completed\'',
             [userId]
         );
+        logger.info(`Kitöltött kvízek száma eredménye: ${JSON.stringify(completedQuizzesCountResult.rows[0])}`);
         const completed_quizzes_count = parseInt(completedQuizzesCountResult.rows[0].count, 10);
 
         const bestQuizResultsResult = await pool.query(
@@ -1039,6 +1044,7 @@ app.get('/api/profile/stats', authenticateToken, async (req, res) => {
              LIMIT 3`,
             [userId]
         );
+        logger.info(`Legjobb kvíz eredmények: ${JSON.stringify(bestQuizResultsResult.rows)}`);
         const best_quiz_results = bestQuizResultsResult.rows;
 
         const mostPracticedSubjectsResult = await pool.query(
@@ -1051,6 +1057,7 @@ app.get('/api/profile/stats', authenticateToken, async (req, res) => {
              LIMIT 3`,
             [userId]
         );
+        logger.info(`Leggyakrabban gyakorolt témakörök: ${JSON.stringify(mostPracticedSubjectsResult.rows)}`);
         const most_practiced_subjects = mostPracticedSubjectsResult.rows;
 
         res.status(200).json({

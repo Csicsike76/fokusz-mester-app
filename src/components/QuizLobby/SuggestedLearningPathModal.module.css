@@ -6,25 +6,25 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7); 
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1500; 
+    z-index: 1500;
 }
 
 .modalContent {
-    background-color: rgba(33, 49, 63, 0.98); 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
+    background-color: rgba(33, 49, 63, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     padding: 30px;
     width: 90%;
     max-width: 600px;
-    max-height: 80vh; 
-    overflow-y: auto; 
+    max-height: 80vh;
+    overflow-y: auto;
     position: relative;
-    color: #f1f1f1; 
+    color: #f1f1f1;
 }
 
 .closeButton {
@@ -34,17 +34,17 @@
     background: none;
     border: none;
     font-size: 1.8rem;
-    color: #d8e3ea; 
+    color: #d8e3ea;
     cursor: pointer;
     transition: color 0.2s ease;
 }
 
 .closeButton:hover {
-    color: #1abc9c; 
+    color: #1abc9c;
 }
 
 .modalTitle {
-    color: #1abc9c; 
+    color: #1abc9c;
     text-align: center;
     margin-bottom: 25px;
     font-size: 2rem;
@@ -57,7 +57,7 @@
 }
 
 .errorText {
-    color: #e74c3c; 
+    color: #e74c3c;
     font-weight: bold;
 }
 
@@ -67,13 +67,13 @@
     justify-content: center;
     margin-bottom: 20px;
     gap: 10px;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 
 .tabButton {
-    background-color: rgba(255, 255, 255, 0.08); 
+    background-color: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #d8e3ea; 
+    color: #d8e3ea;
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
@@ -84,40 +84,40 @@
 
 .tabButton:hover {
     background-color: rgba(255, 255, 255, 0.15);
-    color: #ffffff; 
+    color: #ffffff;
 }
 
 .tabButton.activeTab {
-    background-color: #1abc9c; 
+    background-color: #1abc9c;
     border-color: #1abc9c;
     color: white;
 }
 
 .tabButton.activeTab:hover {
-    background-color: #16a085; 
+    background-color: #16a085;
     color: white;
 }
 
 .lessonListContainer {
     margin-top: 20px;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.2); 
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    min-height: 150px; 
+    min-height: 150px;
 }
 
 .lessonItem {
     display: flex;
-    align-items: flex-start; 
+    align-items: flex-start;
     margin-bottom: 15px;
 }
 
 .lessonCheckbox {
     margin-right: 12px;
-    margin-top: 4px; 
-    min-width: 18px; 
+    margin-top: 4px;
+    min-width: 18px;
     min-height: 18px;
-    accent-color: #1abc9c; 
+    accent-color: #1abc9c;
     cursor: pointer;
 }
 
@@ -125,17 +125,30 @@
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    color: #d8e3ea; 
-    flex-grow: 1; 
+    color: #d8e3ea;
+    flex-grow: 1;
 }
 
 .lessonLabel:hover {
-    color: #ffffff; 
+    color: #ffffff;
 }
+
+/* Az új .lessonLink stílus */
+.lessonLink {
+    text-decoration: none; /* Link aláhúzás eltávolítása */
+    color: inherit; /* Örökli a szülő színét */
+    display: flex; /* Flexbox a cím és leírás elrendezéséhez */
+    flex-direction: column;
+    width: 100%;
+}
+.lessonLink:hover {
+    color: white; /* Hover szín a teljes linkre */
+}
+
 
 .lessonTitle {
     font-weight: 700;
-    color: #ffffff; 
+    color: #ffffff;
     margin-bottom: 3px;
     font-size: 1.1rem;
 }
@@ -143,6 +156,7 @@
 .lessonDescription {
     font-size: 0.9rem;
     line-height: 1.4;
+    color: #bdc3c7; /* Kicsit halványabb a leírás */
 }
 
 /* Reszponzív módosítások */

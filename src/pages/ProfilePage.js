@@ -23,8 +23,12 @@ const ProfilePage = () => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     const fetchAllData = useCallback(async () => {
-        if (!token) return null;
-        
+        console.log('fetchAllData elindult. Aktuális token:', token);
+        if (!token) {
+            console.log('fetchAllData: A token hiányzik, visszatérünk null-lal.');
+            return null;
+        }
+
         const apiCalls = [
             fetch(`${API_URL}/api/profile`, { headers: { 'Authorization': `Bearer ${token}` } }),
             fetch(`${API_URL}/api/profile/stats`, { headers: { 'Authorization': `Bearer ${token}` } })
@@ -36,14 +40,23 @@ const ProfilePage = () => {
 
         try {
             const responses = await Promise.all(apiCalls);
-    
+
+            for (let i = 0; i < responses.length; i++) {
+                const res = responses[i];
+                const url = res.url;
+                const status = res.status;
+                const clonedRes = res.clone();
+                const json = await clonedRes.json();
+                console.log(`API válasz - ${url}: Státusz: ${status}, Adatok:`, json);
+            }
+
             const profileJson = await responses[0].json();
             if (!responses[0].ok) throw new Error(profileJson.message || 'Hiba a profil betöltésekor.');
-            
+
             setProfileData(profileJson.user);
             updateUser(profileJson.user);
             setNewUsername(profileJson.user.real_name || profileJson.user.username);
-    
+
             const statsJson = await responses[1].json();
             if (responses[1].ok) setStatsData(statsJson.stats);
 
@@ -51,9 +64,10 @@ const ProfilePage = () => {
                 const recsJson = await responses[2].json();
                 if (responses[2].ok) setRecommendations(recsJson.recommendations);
             }
-            
+
             return profileJson.user;
         } catch (err) {
+            console.error('fetchAllData hiba:', err);
             setError(err.message);
             if (err.message.includes('Érvénytelen vagy lejárt token') || err.message.includes('A munkamenet lejárt')) {
                 logout();
@@ -80,6 +94,7 @@ const ProfilePage = () => {
             }, 3000);
             return () => clearInterval(pollInterval);
         } else {
+            console.log('useEffect elindult. Hívjuk a fetchAllData-t...');
             setIsLoading(true);
             fetchAllData().finally(() => setIsLoading(false));
             if (queryParams.get("payment_canceled")) {
@@ -88,7 +103,7 @@ const ProfilePage = () => {
             }
         }
     }, [token, fetchAllData]);
-    
+
     const handleUpdateProfile = async (updateData) => {
         setMessage('');
         setError('');
@@ -108,7 +123,7 @@ const ProfilePage = () => {
             setError(err.message);
         }
     };
-    
+
     const handleChangePassword = async (e) => {
         e.preventDefault();
         setMessage('');
@@ -150,9 +165,9 @@ const ProfilePage = () => {
         } catch (err) {
             setCopyMessage("A másolás sikertelen volt.");
         }
-        setTimeout(() => { 
-            setCopyMessage(''); 
-            setIsCopied(false); 
+        setTimeout(() => {
+            setCopyMessage('');
+            setIsCopied(false);
         }, 5000); // Hosszabb idő az olvasáshoz
     };
 
@@ -212,7 +227,7 @@ const ProfilePage = () => {
 
     if (isLoading) return <div className={styles.container}><p>Profil betöltése...</p></div>;
     if (!profileData) return <div className={styles.container}><p className={styles.errorMessage}>{error || 'Profiladatok nem elérhetők.'}</p></div>;
-    
+
     const nextRewardProgress = (profileData.successful_referrals || 0) % 5;
     const trialInfo = profileData.subscriptions?.find(s => s.status === 'trialing' && s.plan_id === null);
     const activeSubInfo = profileData.subscriptions?.find(s => s.status === 'active');
@@ -233,7 +248,7 @@ const ProfilePage = () => {
         if (profileData.is_member_of_approved_class && !activeSubInfo && !futureSubInfo) {
             return <p className={styles.statusInfo}>Prémium hozzáférésed egy osztálytagságon keresztül aktív.</p>;
         }
-        
+
         if (activeSubInfo || futureSubInfo) {
             return (
                 <>
@@ -326,7 +341,7 @@ const ProfilePage = () => {
                 )}
 
                 <hr className={styles.divider} />
-                
+
                 {user?.role === 'student' && (
                     <>
                         <div className={styles.section}>
@@ -354,8 +369,12 @@ const ProfilePage = () => {
                     {!statsData ? <p>Statisztikák betöltése...</p> : (
                         <div className={styles.statsGrid}>
                             <div className={styles.statItem}>
-                                <span className={styles.statValue}>{statsData.completed_lessons_count}</span>
+                                <span className={styles.statValue}>{statsData.completed_lessons_count || 0}</span>
                                 <span className={styles.statLabel}>Elvégzett lecke</span>
+                            </div>
+                            <div className={styles.statItem}>
+                                <span className={styles.statValue}>{statsData.completed_quizzes_count || 0}</span>
+                                <span className={styles.statLabel}>Kitöltött kvíz</span>
                             </div>
                             <div className={styles.statItem}>
                                 <span className={styles.statLabel}>Legjobb eredmények</span>
@@ -366,7 +385,7 @@ const ProfilePage = () => {
                             <div className={styles.statItem}>
                                 <span className={styles.statLabel}>Gyakori témakörök</span>
                                 {statsData.most_practiced_subjects?.length > 0 ? (
-                                     <ul>{statsData.most_practiced_subjects.map((s, i) => <li key={i}>{s.subject} ({s.lesson_count}x)</li>)}</ul>
+                                     <ul>{statsData.most_practiced_subjects.map((s, i) => <li key={i}>{s.subject} ({`${s.quiz_count || 0}x`})</li>)}</ul>
                                 ) : <p>Nincs még adat.</p>}
                             </div>
                         </div>
@@ -384,7 +403,7 @@ const ProfilePage = () => {
                         <button type="submit" disabled={isLoading}>Jelszó Módosítása</button>
                     </form>
                 </div>
-                
+
                 <hr className={styles.divider} />
 
                 {profileData.role === 'student' && profileData.referral_code && (
@@ -405,7 +424,7 @@ const ProfilePage = () => {
                         </div>
                     </div>
                 )}
-                
+
                 <hr className={styles.divider} />
 
                 <div className={styles.section}>
@@ -416,7 +435,7 @@ const ProfilePage = () => {
                 </div>
 
                 <hr className={styles.divider} />
-                
+
                 <div className={`${styles.section} ${styles.dangerZone}`}>
                     <h3>Veszélyzóna</h3>
                     <p>A fiók törlése végleges és nem vonható vissza. Minden adatod, beleértve a haladásodat és előfizetésedet, azonnal törlődik.</p>

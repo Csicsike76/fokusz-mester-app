@@ -349,3 +349,48 @@ button:disabled {
     margin-bottom: 8px;
     font-size: 1.1rem;
 }
+
+/* src/pages/ProfilePage.module.css */
+
+/* ... (a fájl többi része változatlan) ... */
+
+/* --- Recommendation List (Javasolt Gyakorlás) --- */
+.recommendationList {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.recommendationList li {
+    background-color: #34495e; /* Sötétebb háttér a tételeknek */
+    margin-bottom: 0.5rem;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.recommendationList li:hover {
+    background-color: #4a627a; /* Sötétebb, de mégis látható hover effekt */
+}
+
+.recommendationList li a {
+    color: #ffffff; /* A link szövegének színe fehér lesz */
+    text-decoration: none; /* Aláhúzás eltávolítása */
+    font-weight: bold;
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recommendationList li a span {
+    font-weight: normal;
+    font-size: 0.9em;
+    color: #bdc3c7; /* Halványabb szín az eredmény százalékának */
+    margin-left: 10px;
+}
+
+/* ... (a fájl többi része változatlan) ... */

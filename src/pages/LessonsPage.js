@@ -1,153 +1,94 @@
-import React, { useState, useEffect } from 'react';
-import styles from './LessonView.module.css';
-import WorkshopContent from '../WorkshopContent/WorkshopContent';
-import { useAuth } from '../../context/AuthContext'; // HOZZÁADVA: AuthContext importálása
-import { API_URL } from '../../config/api'; // HOZZÁADVA: API URL importálása
+// src/pages/LessonPage.js
 
-const LessonView = ({ lessonData }) => {
-    const { token, user } = useAuth(); // HOZZÁADVA: Token és user adatok lekérése
-    const [tocOpen, setTocOpen] = useState(false);
-    const [expandedChapters, setExpandedChapters] = useState({});
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import styles from './LessonPage.module.css'; // Új CSS fájl a leckék oldalhoz
+import { API_URL } from '../config/api';
+import { useAuth } from '../context/AuthContext';
+import LessonView from '../components/LessonView/LessonView'; // Feltételezve, hogy LessonView kezeli a lecke tartalmát
+
+const LessonPage = () => {
+    const { slug } = useParams();
+    const navigate = useNavigate();
+    const { canUsePremium, token } = useAuth(); // Felhasználó authentikációs státusza
+    const [lessonData, setLessonData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState('');
+
+    const fetchLessonData = useCallback(async () => {
+        try {
+            setIsLoading(true);
+            setError('');
+            const headers = { 'Content-Type': 'application/json' };
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            // Kérjük le a lecke tartalmát a backendről
+            const res = await fetch(`${API_URL}/api/quiz/${slug}`, { headers }); // Ugyanazt a végpontot használjuk, mint a quiz/content
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.message || `Hálózati hiba: ${res.statusText}`);
+            }
+            const data = await res.json();
+
+            if (!data.success || !data.data) {
+                throw new Error(data.message || 'A lecke adatai hiányosak.');
+            }
+
+            // Ellenőrizzük, hogy prémium tartalom-e, és van-e hozzáférés
+            const isPremiumContent =
+                data.data.category &&
+                (data.data.category.startsWith('premium_') ||
+                 data.data.category === 'workshop' ||
+                 data.data.category === 'premium_course' ||
+                 data.data.category === 'premium_tool');
+
+            if (isPremiumContent && !canUsePremium) {
+                navigate('/bejelentkezes', {
+                    state: {
+                        from: window.location.pathname,
+                        message: 'A tartalom megtekintéséhez bejelentkezés és prémium hozzáférés szükséges.',
+                    },
+                });
+                return;
+            }
+
+            setLessonData(data.data);
+        } catch (err) {
+            setError(err.message);
+            console.error('Hiba a lecke tartalom betöltésekor:', err);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [slug, canUsePremium, navigate, token]);
 
     useEffect(() => {
-        // Nyissa ki az összes fejezetet alapértelmezetten nagyobb képernyőn
-        if (window.innerWidth > 1024 && lessonData && lessonData.toc) {
-            const allChapterIds = lessonData.toc.reduce((acc, chapter) => {
-                acc[chapter.id] = true;
-                return acc;
-            }, {});
-            setExpandedChapters(allChapterIds);
-        } else if (window.innerWidth <= 1024) {
-            // Mobil nézeten alapértelmezetten csukja össze a fejezeteket
-            setExpandedChapters({});
-        }
+        fetchLessonData();
+    }, [fetchLessonData]);
 
-        // Eseményfigyelő hozzáadása a képernyőméret változásához
-        const handleResize = () => {
-            if (window.innerWidth > 1024) {
-                const allChapterIds = lessonData.toc.reduce((acc, chapter) => {
-                    acc[chapter.id] = true;
-                    return acc;
-                }, {});
-                setExpandedChapters(allChapterIds);
-            } else {
-                setExpandedChapters({});
-            }
-        };
+    if (isLoading) return <div className={styles.container}>Lecke tartalmának betöltése...</div>;
+    if (error) return <div className={styles.container}><p className={styles.errorMessage}>{error}</p></div>;
+    if (!lessonData) return <div className={styles.container}><p>A lecke tartalom nem elérhető.</p></div>;
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-
-    }, [lessonData]);
-
-    // HOZZÁADVA: useEffect a lecke megtekintésének rögzítésére
-    useEffect(() => {
-        const logLessonView = async () => {
-            // Csak bejelentkezett diákok esetén fusson le
-            if (token && user?.role === 'student' && lessonData?.slug) {
-                try {
-                    await fetch(`${API_URL}/api/lesson/viewed`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify({ slug: lessonData.slug })
-                    });
-                    console.log(`Lecke megtekintése rögzítve: ${lessonData.slug}`);
-                } catch (error) {
-                    console.error('Hiba a lecke megtekintésének rögzítésekor:', error);
-                }
-            }
-        };
-
-        logLessonView();
-    }, [token, user, lessonData?.slug]); // A függőségi lista biztosítja, hogy csak egyszer fusson le betöltéskor
-
-    const handleAnchorClick = (e, id) => {
-        e.preventDefault();
-        const target = document.getElementById(id);
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            if (window.innerWidth <= 1024) {
-                setTocOpen(false);
-            }
-        }
-    };
-
-    const toggleChapterExpansion = (e, chapterId) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setExpandedChapters(prev => ({
-            ...prev,
-            [chapterId]: !prev[chapterId],
-        }));
-    };
-
-    if (!lessonData || !lessonData.toc || !lessonData.questions) {
-        return <p className={styles.loadingError}>A tananyag adatai hiányosak vagy nem tölthetők be.</p>;
-    }
-    
     return (
         <div className={styles.container}>
-            <button
-                className={styles.tocToggle}
-                onClick={() => setTocOpen(!tocOpen)}
-                aria-expanded={tocOpen}
-                aria-controls="toc-nav"
-            >
-                📚 Tartalomjegyzék
-            </button>
-
-            <div
-                className={`${styles.tocOverlay} ${tocOpen ? styles.open : ''}`}
-                onClick={() => setTocOpen(false)}
-            />
-
-            <nav id="toc-nav" className={`${styles.toc} ${tocOpen ? styles.open : ''}`}>
-                <h2>Tartalomjegyzék</h2>
-                <ul>
-                    {lessonData.toc.map((chapter) => (
-                        <li key={chapter.id}>
-                            <a
-                                href={`#${chapter.id}`}
-                                onClick={(e) => handleAnchorClick(e, chapter.id)}
-                                className={styles.chapterTitle}
-                            >
-                                {chapter.title}
-                            </a>
-
-                            {chapter.subheadings && chapter.subheadings.length > 0 && (
-                                <>
-                                    <button 
-                                        onClick={(e) => toggleChapterExpansion(e, chapter.id)} 
-                                        className={styles.expandButton}
-                                        aria-expanded={!!expandedChapters[chapter.id]}
-                                    >
-                                        {expandedChapters[chapter.id] ? '−' : '+'}
-                                    </button>
-                                    <ul className={`${styles.subList} ${expandedChapters[chapter.id] ? styles.expanded : ''}`}>
-                                        {chapter.subheadings.map((sub) => (
-                                            <li key={sub.id}>
-                                                <a href={`#${sub.id}`} onClick={(e) => handleAnchorClick(e, sub.id)}>
-                                                    {sub.title}
-                                                </a>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-
-            <main className={styles.mainContent}>
-                <h1>{lessonData.title}</h1>
-                <WorkshopContent sections={lessonData.questions} />
-            </main>
+            <div className={styles.lessonWrapper}>
+                {/* Itt feltételezzük, hogy van egy LessonView komponens, ami rendereli a lecke tartalmát */}
+                {lessonData.toc ? (
+                    <LessonView lessonData={lessonData} />
+                ) : (
+                    <div className={styles.defaultContent}>
+                        <h1>{lessonData.title}</h1>
+                        <p>{lessonData.description}</p>
+                        <p>Ez egy alapértelmezett nézet, mert a lecke nem rendelkezik TOC (Tartalomjegyzék) adatokkal.</p>
+                        {/* Itt lehetne egyéb tartalom megjelenítése is, ha a lessonData tartalmaz ilyesmit */}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
 
-export default LessonView;
+export default LessonPage;
