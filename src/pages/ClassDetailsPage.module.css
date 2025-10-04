@@ -1,3 +1,5 @@
+/* src/pages/ClassDetailsPage.module.css */
+
 .container {
     padding: 2rem;
     color: white;
@@ -88,16 +90,27 @@
     margin-top: 0;
 }
 
+/* KONTÉNER A GÖRGETÉSHEZ */
+.tableWrapper {
+    overflow-x: auto; /* Engedélyezi a vízszintes görgetést, ha a tartalom kilóg */
+    -webkit-overflow-scrolling: touch; /* Jobb görgetési élmény iOS-en */
+    margin-top: 1.5rem; /* Elválasztás a H3 címtől */
+    padding-bottom: 0.5rem; /* Hely a görgetősávnak, ha van */
+    background-color: rgba(0,0,0,0.1); /* Enyhén eltérő háttér a görgethető résznek */
+    border-radius: 5px;
+}
+
 .progressTable {
     width: 100%;
+    /* Az előző min-width: 650px; helyett rugalmasabb oszlopszélességeket használunk */
     border-collapse: collapse;
-    margin-top: 1.5rem;
 }
 
 .progressTable th, .progressTable td {
     padding: 0.8rem;
     text-align: left;
     border-bottom: 1px solid #7f8c8d;
+    /* white-space: nowrap; - Ezt eltávolítjuk az általános beállításból */
 }
 
 .progressTable th {
@@ -112,6 +125,34 @@
 .progressTable a:hover {
     text-decoration: underline;
 }
+
+/* SPECIFIKUS OSZLOPSZÉLESSÉGEK ÉS SZÖVEGTÖRDELÉS */
+.progressTable th:nth-child(1), /* Dátum oszlop */
+.progressTable td:nth-child(1) {
+    min-width: 130px; /* Dátumhoz elegendő szélesség */
+    white-space: nowrap; /* A dátum ne tördelődjön */
+}
+
+.progressTable th:nth-child(2), /* Típus oszlop */
+.progressTable td:nth-child(2) {
+    min-width: 80px; /* Típushoz elegendő */
+    white-space: nowrap; /* A típus ne tördelődjön */
+}
+
+.progressTable th:nth-child(3), /* A "Tananyag/Kvíz" oszlop */
+.progressTable td:nth-child(3) {
+    width: 100%; /* Ez az oszlop töltse ki a maradék helyet */
+    white-space: normal; /* A tananyag/kvíz oszlopban tördelje a szöveget */
+    word-break: break-word; /* Tördeli a hosszú szavakat is */
+}
+
+.progressTable th:nth-child(4), /* Eredmény oszlop */
+.progressTable td:nth-child(4) {
+    min-width: 80px; /* Eredményhez elegendő, fix */
+    white-space: nowrap; /* Az eredmény ne tördelődjön */
+    text-align: center; /* Az eredmény középre igazítása */
+}
+
 
 @media (max-width: 768px) {
     .mainContent {

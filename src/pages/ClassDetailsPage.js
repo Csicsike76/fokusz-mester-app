@@ -1,7 +1,8 @@
+// src/pages/ClassDetailsPage.jsx
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import styles from './ClassDetailsPage.module.css';
+import styles from './ClassDetailsPage.module.css'; // Fontos, hogy importálja a stílusokat
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
@@ -106,36 +107,41 @@ const ClassDetailsPage = () => {
                     ) : (
                         <div className={styles.progressDetails}>
                             <h3>{selectedStudent.real_name} naplója</h3>
-                            {progress.length === 0 ? <p>Nincs rögzített aktivitás.</p> : (
-                                <table className={styles.progressTable}>
-                                    <thead>
-                                        <tr>
-                                            <th>Dátum</th>
-                                            <th>Típus</th>
-                                            <th>Tananyag/Kvíz</th>
-                                            <th>Eredmény</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {progress.map((item, index) => (
-                                            <tr key={index}>
-                                                <td>{formatDate(item.completed_at || item.started_at)}</td>
-                                                <td>{item.activity_type === 'quiz_completed' ? '📝 Kvíz' : '📖 Lecke'}</td>
-                                                <td>
-                                                    <Link to={`/tananyag/${item.quiz_slug || item.lesson_slug}`}>
-                                                        {item.curriculum_title || (item.quiz_slug || item.lesson_slug)}
-                                                    </Link>
-                                                </td>
-                                                <td>
-                                                    {item.activity_type === 'quiz_completed' 
-                                                        ? `${parseFloat(item.score_percentage).toFixed(0)}%`
-                                                        : 'Megtekintve'}
-                                                </td>
+                            
+                            {/* ÚJ KONTÉNER A TÁBLÁZAT KÖRÉ */}
+                            <div className={styles.tableWrapper}>
+                                {progress.length === 0 ? <p>Nincs rögzített aktivitás.</p> : (
+                                    <table className={styles.progressTable}>
+                                        <thead>
+                                            <tr>
+                                                <th>Dátum</th>
+                                                <th>Típus</th>
+                                                <th>Tananyag/Kvíz</th>
+                                                <th>Eredmény</th>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            )}
+                                        </thead>
+                                        <tbody>
+                                            {progress.map((item, index) => (
+                                                <tr key={index}>
+                                                    <td>{formatDate(item.completed_at || item.started_at)}</td>
+                                                    <td>{item.activity_type === 'quiz_completed' ? '📝 Kvíz' : '📖 Lecke'}</td>
+                                                    <td>
+                                                        <Link to={`/tananyag/${item.quiz_slug || item.lesson_slug}`}>
+                                                            {item.curriculum_title || (item.quiz_slug || item.lesson_slug)}
+                                                        </Link>
+                                                    </td>
+                                                    <td>
+                                                        {item.activity_type === 'quiz_completed' 
+                                                            ? `${parseFloat(item.score_percentage).toFixed(0)}%`
+                                                            : 'Megtekintve'}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                )}
+                            </div> {/* .tableWrapper vége */}
+
                         </div>
                     )}
                 </div>

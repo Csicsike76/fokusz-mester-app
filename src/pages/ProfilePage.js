@@ -308,7 +308,7 @@ const ProfilePage = () => {
                         <span className={styles.label}>Név:</span>
                         {isEditingUsername ? (
                             <div className={styles.editView}>
-                                <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} />
+                                <input type="text" id="username" name="username" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} />
                                 <button onClick={() => handleUpdateProfile({ username: newUsername })}>Mentés</button>
                                 <button className={styles.cancelButton} onClick={() => { setIsEditingUsername(false); setNewUsername(displayName); }}>Mégse</button>
                             </div>
@@ -383,7 +383,7 @@ const ProfilePage = () => {
                                 ) : <p>Nincs még kitöltött kvíz.</p>}
                             </div>
                             <div className={styles.statItem}>
-                                <span className={styles.statLabel}>Gyakori témakörök</span>
+                                <span className={styles.statLabel}>Gyakori témakörök</span> {/* JAVÍTOTT: className kétszer szerepelt */}
                                 {statsData.most_practiced_subjects?.length > 0 ? (
                                      <ul>{statsData.most_practiced_subjects.map((s, i) => <li key={i}>{s.subject} ({`${s.quiz_count || 0}x`})</li>)}</ul>
                                 ) : <p>Nincs még adat.</p>}
@@ -397,9 +397,9 @@ const ProfilePage = () => {
                 <div className={styles.section}>
                     <h2>Jelszócsere</h2>
                     <form onSubmit={handleChangePassword} className={styles.formGrid}>
-                        <input type="password" placeholder="Régi jelszó" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} required />
-                        <input type="password" placeholder="Új jelszó" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
-                        <input type="password" placeholder="Új jelszó megerősítése" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} required />
+                        <input type="password" id="oldPassword" name="oldPassword" placeholder="Régi jelszó" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} required />
+                        <input type="password" id="newPassword" name="newPassword" placeholder="Új jelszó" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+                        <input type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="Új jelszó megerősítése" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} required />
                         <button type="submit" disabled={isLoading}>Jelszó Módosítása</button>
                     </form>
                 </div>
