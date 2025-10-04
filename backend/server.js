@@ -49,28 +49,7 @@ const transporter = nodemailer.createTransport({
 
 const app = express();
 
-// A CORS whitelist-et kikommenteltem és a cors() engedélyezését használom minden forrásra.
-// Ha később specifikusabb beállításokra lesz szükség, ezt a részt újra kell aktiválni és bővíteni.
-// const whitelist = [
-//   'http://localhost:3000',
-//   process.env.FRONTEND_URL,
-//   'https://fokuszmester.com',
-//   'https://www.fokuszmester.com',
-//   'capacitor://localhost',
-//   'http://localhost',
-//   // További források, pl. Render által használt portok vagy APK specifikus URL-ek
-// ];
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (!origin || whitelist.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-// };
-// app.use(cors(corsOptions));
-app.use(cors()); // IDEIGLENESEN ENGEDÉLYEZI AZ ÖSSZES FORRÁST A CORS PROBLÉMA ELHÁRÍTÁSÁHOZ
+app.use(cors());
 
 
 app.use((req, res, next) => {
@@ -1703,7 +1682,7 @@ app.post('/api/quiz/submit-result', authenticateToken, async (req, res) => {
                             <li><strong>Tárgy:</strong> ${curriculumSubject}</li>
                             <li><strong>Elért eredmény:</strong> ${score} / ${totalQuestions} pont (${scorePercentage.toFixed(0)}%)</li>
                             <li><strong>Nehézségi szint:</strong> ${level}</li>
-                            <li><strong>Dátum:</strong> ${new Date().toLocaleString('hu-HU')}</li>
+                            <li><strong>Dátum:</strong> ${new Date().toLocaleString('hu-HU', { timeZone: 'Europe/Budapest' })}</li>
                         </ul>
                         <p>A diákok haladását Ön is nyomon követheti a tanári felületen, amennyiben regisztrált tanárként is használja a rendszert.</p>
                         <p>Üdvözlettel,<br>A Fókusz Mester csapata</p>
@@ -1761,7 +1740,7 @@ app.post('/api/lesson/viewed', authenticateToken, async (req, res) => {
                         <h3>Részletek:</h3>
                         <ul>
                             <li><strong>Tananyag:</strong> ${curriculumTitle}</li>
-                            <li><strong>Dátum:</strong> ${new Date().toLocaleString('hu-HU')}</li>
+                            <li><strong>Dátum:</strong> ${new Date().toLocaleString('hu-HU', { timeZone: 'Europe/Budapest' })}</li>
                         </ul>
                         <p>Üdvözlettel,<br>A Fókusz Mester csapata</p>
                     </div>
@@ -1968,7 +1947,7 @@ app.post('/api/register/google', async (req, res) => {
         if (role !== 'teacher' && !isPermanentFree) {
             await client.query(
                 `INSERT INTO subscriptions (user_id, status, current_period_start, current_period_end, payment_provider)
-                 VALUES ($1, 'trialing', NOW(), NOW() + INTERVAL '30 days', 'system') ON CONFLICT (user_id) DO NOTHING;`,
+                 VALUES ($1, 'trialing', NOW(), NOW() + INTERVAL '30 days', 'system') ON CONFLICT (user.id) DO NOTHING;`,
                 [user.id]
             );
         }
