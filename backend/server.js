@@ -1,4 +1,4 @@
---- START OF FILE server.js ---
+
 
 const express = require('express');
 const cors = require('cors');
@@ -2151,5 +2151,4 @@ cron.schedule('0 1 * * *', async () => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   logger.info(`✅ A Fókusz Mester szerver elindult a ${PORT} porton.`);
-});
 });
