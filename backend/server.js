@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
@@ -51,7 +49,28 @@ const transporter = nodemailer.createTransport({
 
 const app = express();
 
-app.use(cors());
+// A CORS whitelist-et kikommenteltem és a cors() engedélyezését használom minden forrásra.
+// Ha később specifikusabb beállításokra lesz szükség, ezt a részt újra kell aktiválni és bővíteni.
+// const whitelist = [
+//   'http://localhost:3000',
+//   process.env.FRONTEND_URL,
+//   'https://fokuszmester.com',
+//   'https://www.fokuszmester.com',
+//   'capacitor://localhost',
+//   'http://localhost',
+//   // További források, pl. Render által használt portok vagy APK specifikus URL-ek
+// ];
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+// };
+// app.use(cors(corsOptions));
+app.use(cors()); // IDEIGLENESEN ENGEDÉLYEZI AZ ÖSSZES FORRÁST A CORS PROBLÉMA ELHÁRÍTÁSÁHOZ
 
 
 app.use((req, res, next) => {
@@ -473,7 +492,6 @@ app.post('/api/register', authLimiter, async (req, res) => {
     specialCode,
     recaptchaToken,
     parental_email,
-    timezone // Kiegészítés: időzóna a request body-ból
   } = req.body;
 
   if (!recaptchaToken) {
@@ -577,8 +595,8 @@ app.post('/api/register', authLimiter, async (req, res) => {
       role === 'student' ? `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}` : null;
 
     const insertUserQuery = `
-      INSERT INTO users (username, real_name, email, parental_email, password_hash, role, referral_code, email_verification_token, email_verification_expires, is_permanent_free, email_verified, timezone)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+      INSERT INTO users (username, real_name, email, parental_email, password_hash, role, referral_code, email_verification_token, email_verification_expires, is_permanent_free, email_verified)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
       RETURNING id, created_at
     `;
     const newUserResult = await client.query(insertUserQuery, [
@@ -593,7 +611,6 @@ app.post('/api/register', authLimiter, async (req, res) => {
       verificationExpires,
       isPermanentFree,
       false,
-      timezone || 'Europe/Budapest', // Kiegészítés: Alapértelmezett időzóna
     ]);
 
     const newUserId = newUserResult.rows[0].id;
@@ -833,7 +850,7 @@ const getFullUserProfile = async (userId) => {
     const userQuery = `
         SELECT
             u.id, u.username, u.real_name, u.email, u.role, u.referral_code, u.created_at,
-            u.profile_metadata, u.is_permanent_free, u.avatar_url, u.xp, u.last_seen, u.timezone
+            u.profile_metadata, u.is_permanent_free, u.avatar_url, u.xp, u.last_seen
         FROM users u
         WHERE u.id = $1 AND u.archived = false;
     `;
@@ -938,23 +955,16 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
 });
 
 app.put('/api/profile', authenticateToken, async (req, res) => {
-    const { username, timezone } = req.body; // Kiegészítés: időzóna frissítése
+    const { username } = req.body;
     const userId = req.user.userId;
 
     if (!username || username.trim() === '') {
         return res.status(400).json({ success: false, message: 'A felhasználónév nem lehet üres.' });
     }
-    
-    // Alapszintű időzóna validálás
-    const validTimezones = Intl.supportedValuesOf('timeZone');
-    if (timezone && !validTimezones.includes(timezone)) {
-        return res.status(400).json({ success: false, message: 'Érvénytelen időzóna.' });
-    }
-
     try {
         await pool.query(
-            'UPDATE users SET username = $1, real_name = $2, timezone = $3 WHERE id = $4', 
-            [username.trim(), username.trim(), timezone || 'Europe/Budapest', userId] // Kiegészítés: időzóna frissítése
+            'UPDATE users SET username = $1, real_name = $2 WHERE id = $3', 
+            [username.trim(), username.trim(), userId]
         );
         
         const updatedUserProfile = await getFullUserProfile(userId);
@@ -964,7 +974,7 @@ app.put('/api/profile', authenticateToken, async (req, res) => {
 
         res.status(200).json({ 
             success: true, 
-            message: 'Felhasználónév és időzóna sikeresen frissítve.', // Kiegészítés: üzenet módosítása
+            message: 'Felhasználónév sikeresen frissítve.', 
             user: updatedUserProfile 
         });
 
@@ -1394,7 +1404,7 @@ app.get('/api/quiz/:slug', async (req, res) => {
     if (!foundPath) {
       return res.status(404).json({
         success: false,
-        message: `Nem található a tartalom: ${slug} sem a 'tananyag', sem a 'help' mappában.`
+        message: `Nem található a tartalom: ${slug} sem a 'tananyag', sem a 'help' mappában.`,
       });
     }
 
@@ -1676,11 +1686,9 @@ app.post('/api/quiz/submit-result', authenticateToken, async (req, res) => {
         await client.query('COMMIT');
         
         // Szülői értesítő e-mail küldése
-        const userDetails = await pool.query('SELECT real_name, parental_email, timezone FROM users WHERE id = $1', [userId]); // Kiegészítés: időzóna lekérdezése
+        const userDetails = await pool.query('SELECT real_name, parental_email FROM users WHERE id = $1', [userId]);
         if (userDetails.rows.length > 0 && userDetails.rows[0].parental_email) {
-            const { real_name, parental_email, timezone } = userDetails.rows[0]; // Kiegészítés: időzóna változó
-            const userTimezone = timezone || 'Europe/Budapest'; // Alapértelmezett időzóna, ha nincs beállítva
-
+            const { real_name, parental_email } = userDetails.rows[0];
             const mailOptions = {
                 from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
                 to: parental_email,
@@ -1695,7 +1703,7 @@ app.post('/api/quiz/submit-result', authenticateToken, async (req, res) => {
                             <li><strong>Tárgy:</strong> ${curriculumSubject}</li>
                             <li><strong>Elért eredmény:</strong> ${score} / ${totalQuestions} pont (${scorePercentage.toFixed(0)}%)</li>
                             <li><strong>Nehézségi szint:</strong> ${level}</li>
-                            <li><strong>Dátum:</strong> ${new Date().toLocaleString('hu-HU', { timeZone: userTimezone })}</li>
+                            <li><strong>Dátum:</strong> ${new Date().toLocaleString('hu-HU')}</li>
                         </ul>
                         <p>A diákok haladását Ön is nyomon követheti a tanári felületen, amennyiben regisztrált tanárként is használja a rendszert.</p>
                         <p>Üdvözlettel,<br>A Fókusz Mester csapata</p>
@@ -1739,11 +1747,9 @@ app.post('/api/lesson/viewed', authenticateToken, async (req, res) => {
 
         await client.query('COMMIT');
 
-        const userDetails = await pool.query('SELECT real_name, parental_email, timezone FROM users WHERE id = $1', [userId]); // Kiegészítés: időzóna lekérdezése
+        const userDetails = await pool.query('SELECT real_name, parental_email FROM users WHERE id = $1', [userId]);
         if (userDetails.rows.length > 0 && userDetails.rows[0].parental_email) {
-            const { real_name, parental_email, timezone } = userDetails.rows[0]; // Kiegészítés: időzóna változó
-            const userTimezone = timezone || 'Europe/Budapest'; // Alapértelmezett időzóna, ha nincs beállítva
-
+            const { real_name, parental_email } = userDetails.rows[0];
             const mailOptions = {
                 from: `"${process.env.MAIL_SENDER_NAME}" <${process.env.MAIL_DEFAULT_SENDER}>`,
                 to: parental_email,
@@ -1755,7 +1761,7 @@ app.post('/api/lesson/viewed', authenticateToken, async (req, res) => {
                         <h3>Részletek:</h3>
                         <ul>
                             <li><strong>Tananyag:</strong> ${curriculumTitle}</li>
-                            <li><strong>Dátum:</strong> ${new Date().toLocaleString('hu-HU', { timeZone: userTimezone })}</li>
+                            <li><strong>Dátum:</strong> ${new Date().toLocaleString('hu-HU')}</li>
                         </ul>
                         <p>Üdvözlettel,<br>A Fókusz Mester csapata</p>
                     </div>
@@ -1865,7 +1871,7 @@ app.delete('/api/admin/clear-users', authenticateToken, authorizeAdmin, async (r
     res.status(200).json({ success: true, message: 'Minden felhasználói adat sikeresen törölve.' });
   } catch (error) {
     await client.query('ROLLBACK');
-    logger.error("Adatbázis törlési hiba:", { message: error.message, stack: error.stack }); // Itt 'err' helyett 'error'-t használtam
+    logger.error("Adatbázis törlési hiba:", { message: err.message, stack: err.stack });
     res.status(500).json({ success: false, message: 'Hiba történt a törlés során.' });
   } finally {
     client.release();
@@ -1903,7 +1909,7 @@ app.post('/api/auth/google/verify', async (req, res) => {
 app.post('/api/register/google', async (req, res) => {
     const {
         email, name, provider_id, role,
-        parental_email, classCode, vipCode, referralCode, specialCode, timezone // Kiegészítés: időzóna a request body-ból
+        parental_email, classCode, vipCode, referralCode, specialCode
     } = req.body;
 
     if (!email || !name || !provider_id || !role) {
@@ -1933,12 +1939,12 @@ app.post('/api/register/google', async (req, res) => {
         const referralCodeNew = `FKSZ-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
 
         const insertUserQuery = `
-            INSERT INTO users (username, real_name, email, parental_email, password_hash, role, referral_code, provider, provider_id, email_verified, is_permanent_free, timezone)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+            INSERT INTO users (username, real_name, email, parental_email, password_hash, role, referral_code, provider, provider_id, email_verified, is_permanent_free)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
             RETURNING *;
         `;
         const newUserResult = await client.query(insertUserQuery, [
-            name, name, email, parental_email || null, password_hash, role, referralCodeNew, 'google', provider_id, true, isPermanentFree, timezone || 'Europe/Budapest' // Kiegészítés: időzóna mentése
+            name, name, email, parental_email || null, password_hash, role, referralCodeNew, provider_id, isPermanentFree
         ]);
         const user = newUserResult.rows[0];
 
@@ -1962,7 +1968,7 @@ app.post('/api/register/google', async (req, res) => {
         if (role !== 'teacher' && !isPermanentFree) {
             await client.query(
                 `INSERT INTO subscriptions (user_id, status, current_period_start, current_period_end, payment_provider)
-                 VALUES ($1, 'trialing', NOW(), NOW() + INTERVAL '30 days', 'system') ON CONFLICT (user_id) DO NOTHING;`, // user_id-re javítva, nem user.id
+                 VALUES ($1, 'trialing', NOW(), NOW() + INTERVAL '30 days', 'system') ON CONFLICT (user_id) DO NOTHING;`,
                 [user.id]
             );
         }
@@ -2072,8 +2078,7 @@ app.post('/api/contact', authLimiter, async (req, res) => {
   }
 });
 
-// A cron job átalakítása, hogy óránként fusson, és a felhasználó időzónája szerint ellenőrizze a lejárati dátumot
-cron.schedule('0 * * * *', async () => { // Óránként fut le
+cron.schedule('0 1 * * *', async () => { 
   logger.info('Running scheduled job: Checking for expiring trials...');
   
   const sendReminderEmail = async (user, daysLeft) => {
@@ -2104,53 +2109,32 @@ cron.schedule('0 * * * *', async () => { // Óránként fut le
       await transporter.sendMail(mailOptions);
       logger.info(`✅ Reminder email sent to ${user.email} (${daysLeft} days left).`);
     } catch (error) {
-      logger.error(`❌ Failed to send reminder email to ${user.email}:`, { message: error.message, stack: error.stack }); // Itt 'err' helyett 'error'-t használtam
+      logger.error(`❌ Failed to send reminder email to ${user.email}:`, { message: error.message, stack: err.stack });
     }
   };
 
   try {
-    // Lekérjük azokat a felhasználókat, akiknek a próbaidőszaka 7 vagy 1 nap múlva lejár,
-    // és az időzónájukat is lekérjük.
-    const expiringTrialsQuery = `
-      SELECT u.id, u.email, u.username, u.timezone, s.current_period_end
-      FROM subscriptions s
+    const sevenDaysQuery = `
+      SELECT u.email, u.username FROM subscriptions s
       JOIN users u ON s.user_id = u.id
-      WHERE s.status = 'trialing'
-        AND s.current_period_end IS NOT NULL;
+      WHERE s.status = 'trialing' AND s.current_period_end::date = (NOW() + INTERVAL '7 days')::date;
     `;
-    const { rows: expiringUsers } = await pool.query(expiringTrialsQuery);
+    const sevenDaysResult = await pool.query(sevenDaysQuery);
+    for (const user of sevenDaysResult.rows) {
+      await sendReminderEmail(user, 7);
+    }
 
-    const nowUtc = new Date(); // Aktuális UTC idő
-
-    for (const user of expiringUsers) {
-      const userTimezone = user.timezone || 'Europe/Budapest';
-      const trialEndDate = new Date(user.current_period_end);
-
-      // Kiszámítjuk a felhasználó helyi idejét (a lejárati dátumra vonatkozóan)
-      // A dátum objektumok automatikusan kezelik az időzónákat, ha a toLocaleString-et használjuk.
-      // A lényeg, hogy az ÖSSZEHASONLÍTÁST kell a felhasználó Helyi idejére vetíteni, nem a szerverére.
-      
-      // Létrehozunk egy dátum objektumot, ami a felhasználó időzónájában van.
-      const nowInUserTimezone = new Date(nowUtc.toLocaleString('en-US', { timeZone: userTimezone }));
-      const trialEndInUserTimezone = new Date(trialEndDate.toLocaleString('en-US', { timeZone: userTimezone }));
-
-      const diffTime = trialEndInUserTimezone.getTime() - nowInUserTimezone.getTime();
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-      // Csak akkor küldünk emlékeztetőt, ha a felhasználó helyi ideje szerint reggel 8 és 9 óra között van,
-      // és a napok száma 7 vagy 1.
-      const currentHourInUserTimezone = nowInUserTimezone.getHours();
-      
-      if (currentHourInUserTimezone >= 8 && currentHourInUserTimezone < 9) { // Pl. reggel 8 és 9 óra között
-        if (diffDays === 7) {
-          await sendReminderEmail(user, 7);
-        } else if (diffDays === 1) {
-          await sendReminderEmail(user, 1);
-        }
-      }
+    const oneDayQuery = `
+      SELECT u.email, u.username FROM subscriptions s
+      JOIN users u ON s.user_id = u.id
+      WHERE s.status = 'trialing' AND s.current_period_end::date = (NOW() + INTERVAL '1 day')::date;
+    `;
+    const oneDayResult = await pool.query(oneDayQuery);
+    for (const user of oneDayResult.rows) {
+      await sendReminderEmail(user, 1);
     }
   } catch (error) {
-    logger.error('❌ Error during scheduled trial check:', { message: error.message, stack: error.stack }); // Itt 'err' helyett 'error'-t használtam
+    logger.error('❌ Error during scheduled trial check:', { message: error.message, stack: err.stack });
   }
 });
 
