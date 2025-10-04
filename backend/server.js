@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
@@ -31,12 +29,7 @@ const sslRequired = (() => {
 
   const url = String(process.env.DATABASE_URL || '');
   if (/render\.com|heroku(app)?\.com|amazonaws\.com|azure|gcp|railway\.app/i.test(url)) return true;
-  if (/localhost|127\.0\.0\.1/.test(url)) return false; // Ha üres az URL, az is false.
-  
-  // Hozzáadva: Különösen a Render.com esetében fontos, hogy a PORT environment változót is ellenőrizzük.
-  // Az "localhost" és "127.0.0.1" már fel van sorolva, az "url === ''" is false.
-  // Ha a Render.com használ 10000-es portot, és az nem localhost, akkor SSL szükséges lehet.
-  // Ezt a részt finomítani kell, ha pontosan tudjuk, milyen URL-ekkel jelentkezik a CORS probléma.
+  if (/localhost|127\.0\.0\.1/.test(url) || url === '') return false;
 
   return true;
 })();
@@ -56,31 +49,28 @@ const transporter = nodemailer.createTransport({
 
 const app = express();
 
-/*
-// Eredeti whitelist (átmenetileg kikommentelve a CORS probléma miatt)
-const whitelist = [
-  'http://localhost:3000',
-  process.env.FRONTEND_URL,
-  'https://fokuszmester.com',
-  'https://www.fokuszmester.com',
-  'capacitor://localhost',
-  'http://localhost'
-];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
-app.use(cors(corsOptions)); 
-*/
-
-// IDEIGLENESEN ENGEDÉLYEZI AZ ÖSSZES FORRÁST A CORS PROBLÉMA ELHÁRÍTÁSÁHOZ
-// Ezt később szigorítani kell a whitelist újraaktiválásával és bővítésével!
-app.use(cors());
+// A CORS whitelist-et kikommenteltem és a cors() engedélyezését használom minden forrásra.
+// Ha később specifikusabb beállításokra lesz szükség, ezt a részt újra kell aktiválni és bővíteni.
+// const whitelist = [
+//   'http://localhost:3000',
+//   process.env.FRONTEND_URL,
+//   'https://fokuszmester.com',
+//   'https://www.fokuszmester.com',
+//   'capacitor://localhost',
+//   'http://localhost',
+//   // További források, pl. Render által használt portok vagy APK specifikus URL-ek
+// ];
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+// };
+// app.use(cors(corsOptions));
+app.use(cors()); // IDEIGLENESEN ENGEDÉLYEZI AZ ÖSSZES FORRÁST A CORS PROBLÉMA ELHÁRÍTÁSÁHOZ
 
 
 app.use((req, res, next) => {
@@ -1950,7 +1940,7 @@ app.post('/api/register/google', async (req, res) => {
 
         const insertUserQuery = `
             INSERT INTO users (username, real_name, email, parental_email, password_hash, role, referral_code, provider, provider_id, email_verified, is_permanent_free)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, 'google', $8, true, $9)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
             RETURNING *;
         `;
         const newUserResult = await client.query(insertUserQuery, [
