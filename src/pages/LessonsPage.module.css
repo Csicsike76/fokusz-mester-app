@@ -138,6 +138,23 @@
     opacity: 1;
 }
 
+.explanationButton {
+    display: inline-block;
+    background-color: #e41a1c; /* Magyar piros */
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-right: 1rem; /* Elválasztás a kvíz gombtól */
+    transition: background-color 0.2s ease;
+    white-space: nowrap; /* Megakadályozza a törést mobilon */
+}
+
+.explanationButton:hover {
+    background-color: #c00c0e; /* Sötétebb árnyalat a hover effekthez */
+}
 /* MÉDIA LEKÉRDEZÉSEK A RESZPONZIVITÁSÉRT */
 
 @media (max-width: 1024px) {

@@ -1,0 +1,175 @@
+{
+  "title": "A tízes számrendszer megértése - Számok írása, olvasása",
+  "category": "magyarázat",
+  "related_lesson_id": "fejezet1-1",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "A kapott szöveg a tízes számrendszer működését magyarázza el. Azt mondja, hogy:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "10 számjegyet használunk (0-tól 9-ig).",
+        "A számok értékét a számjegyek helyiértéke adja meg (pl. egyesek, tízesek, százasok)."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Nincs konkrét kérdés vagy számítási feladat, de a célom az, hogy bemutassam, hogyan áll össze egy szám értéke ezekből az alapelvekből."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Kulcsfogalmak azonosítása"
+    },
+    {
+      "type": "paragraph",
+      "text": "A megoldáshoz (azaz a tízes számrendszer megértéséhez) a következő kulcsfogalmakat kell ismernünk:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "<b>Tízes számrendszer (Decimális rendszer):</b> Ez az a számrendszer, amit a mindennapi életben használunk. Azért \"tízes\", mert 10 különböző számjegyet használ, és a helyiértékek a 10 hatványai (1, 10, 100, 1000 stb.).",
+        "<b>Számjegyek:</b> A 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 szimbólumok, amelyekkel minden számot felépítünk.",
+        "<b>Helyiérték:</b> Azt jelenti, hogy egy számjegynek nem csak az önmagában vett értéke számít, hanem az is, hogy hol áll a számban. Például a <code>2</code> a <code>20</code>-ban mást jelent, mint a <code>2</code>-ben vagy a <code>200</code>-ban. A helyiértékek jobbról balra haladva: egyesek, tízesek, százasok, ezresek stb."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Részletes, lépésről-lépésre történő megoldás (Példa bemutatása)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Vegyünk egy konkrét számot, mondjuk a <b><code>472</code></b>-t, és nézzük meg, hogyan épül fel az értéke a helyiértékek alapján."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "1. lépés: A számjegyek és pozíciójuk azonosítása"
+    },
+    {
+      "type": "paragraph",
+      "text": "A <code>472</code> szám a következő számjegyekből áll:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "<code>4</code> a legbaloldalibb pozíción",
+        "<code>7</code> a középső pozíción",
+        "<code>2</code> a legjobboldalibb pozíción"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2. lépés: A helyiértékek meghatározása"
+    },
+    {
+      "type": "paragraph",
+      "text": "A tízes számrendszerben a helyiértékek jobbról balra haladva a 10 hatványai:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Legjobboldalibb pozíció: $10^0$ (ezek az <b>egyesek</b>)",
+        "Középső pozíció: $10^1$ (ezek a <b>tízesek</b>)",
+        "Legbaloldalibb pozíció: $10^2$ (ezek a <b>százasok</b>)",
+        "És így tovább: $10^3$ (ezresek), $10^4$ (tízezresek) stb."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "3. lépés: A számjegyek értékének kiszámítása a helyiértékük alapján"
+    },
+    {
+      "type": "paragraph",
+      "text": "Most nézzük meg, mennyivel járul hozzá az egyes számjegy a szám teljes értékéhez:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "A <code>2</code> az egyesek helyén áll. Ez azt jelenti, hogy az értéke $2 \\times \\text{egyes} = 2 \\times 1 = 2$.",
+        "A <code>7</code> a tízesek helyén áll. Ez azt jelenti, hogy az értéke $7 \\times \\text{tízes} = 7 \\times 10 = 70$.",
+        "A <code>4</code> a százasok helyén áll. Ez azt jelenti, hogy az értéke $4 \\times \\text{százas} = 4 \\times 100 = 400$."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "4. lépés: A teljes szám értékének kiszámítása"
+    },
+    {
+      "type": "paragraph",
+      "text": "A szám teljes értéke a számjegyek helyiértékkel súlyozott értékeinek összege."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Képletek bemutatása"
+    },
+    {
+      "type": "paragraph",
+      "text": "Egy általános, háromjegyű számot, melynek számjegyei $a$, $b$, és $c$ (ahol $a$ a százas, $b$ a tízes, $c$ az egyes helyén áll), a következőképpen írhatunk fel a helyiértékek segítségével:"
+    },
+    {
+      "type": "math",
+      "formula": "$$ \\text{abc} = a \\times 10^2 + b \\times 10^1 + c \\times 10^0 $$"
+    },
+    {
+      "type": "paragraph",
+      "text": "Ahol:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "$10^0 = 1$ (egyesek helyiértéke)",
+        "$10^1 = 10$ (tízesek helyiértéke)",
+        "$10^2 = 100$ (százasok helyiértéke)"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Végeredmény"
+    },
+    {
+      "type": "paragraph",
+      "text": "Alkalmazzuk a fenti képletet és az elveket a <b><code>472</code></b> számra:"
+    },
+    {
+      "type": "math",
+      "formula": "$$ 472 = 4 \\times 10^2 + 7 \\times 10^1 + 2 \\times 10^0 $$"
+    },
+    {
+      "type": "paragraph",
+      "text": "Most helyettesítsük be a 10 hatványainak értékét:"
+    },
+    {
+      "type": "math",
+      "formula": "$$ 472 = 4 \\times 100 + 7 \\times 10 + 2 \\times 1 $$"
+    },
+    {
+      "type": "paragraph",
+      "text": "Végezzük el a szorzásokat:"
+    },
+    {
+      "type": "math",
+      "formula": "$$ 472 = 400 + 70 + 2 $$"
+    },
+    {
+      "type": "paragraph",
+      "text": "Végül pedig az összeadást:"
+    },
+    {
+      "type": "math",
+      "formula": "$$ 472 = 472 $$"
+    },
+    {
+      "type": "paragraph",
+      "text": "Láthatjuk, hogy a <code>472</code> szám valóban a <code>4</code> százasból, <code>7</code> tízesből és <code>2</code> egyesből áll össze. Ez a módszer segít megérteni, hogy a tízes számrendszerben minden számjegynek a pozíciója adja meg a valódi értékét a teljes számban."
+    }
+  ]
+}

@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematika Segédlet - 5. Osztály</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Fókusz Mester</h1>
+            <nav>
+                <ul>
+                    <li><a href="/admin">Admin</a></li>
+                    <li><a href="/kapcsolat">Kapcsolat</a></li>
+                    <li><a href="/jogi-dokumentumok">Jogi Dokumentumok</a></li>
+                    <li><a href="/alkalmazas-letoltese">Alkalmazás letöltése</a></li>
+                    <li>
+                        <form action="/kereses" method="GET">
+                            <input type="text" name="q" placeholder="Keress a tananyagban...">
+                            <button type="submit">Keresés</button>
+                        </form>
+                    </li>
+                    <li><a href="/profil/19Csicsi">19Csicsi...</a></li>
+                    <li><a href="/kijelentkezes">Kijelentkezés</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content container">
+        <aside class="sidebar">
+            <h2>Tartalomjegyzék</h2>
+            <nav>
+                <ul>
+                    <li><a href="#vilagos-mod">Világos mód</a></li>
+                    <li>
+                        <a href="#fejezet1">1. Természetes számok</a>
+                        <ul>
+                            <li><a href="#fejezet1-1">1.1 Számok írása, olvasása</a></li>
+                            <li><a href="#fejezet1-2">1.2 Összehasonlítás, kerekítés</a></li>
+                            <li><a href="#fejezet1-3">1.3 Római számok</a></li>
+                            <li><a href="#fejezet1-4">1.4 Műveletek, tulajdonságok</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#fejezet2">2. Természetes számok oszthatósága</a>
+                        <ul>
+                            <li><a href="#fejezet2-1">2.1 Osztó, többszörös</a></li>
+                            <li><a href="#fejezet2-2">2.2 Oszthatósági szabályok</a></li>
+                            <li><a href="#fejezet2-3">2.3 Prímszámok, felbontás</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#fejezet3">3. Törtek</a>
+                        <ul>
+                            <li><a href="#fejezet3-1">3.1 Közönséges törtek</a></li>
+                            <li><a href="#fejezet3-2">3.2 Összehasonlítás, ábrázolás</a></li>
+                            <li><a href="#fejezet3-3">3.3 Tizedes törtek</a></li>
+                            <li><a href="#fejezet3-4">3.4 Műveletek törtekkel</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#fejezet4">4. Mértani alapfogalmak</a>
+                        <ul>
+                            <li><a href="#fejezet4-1">4.1 Pont, egyenes, sík</a></li>
+                            <li><a href="#fejezet4-2">4.2 Szakaszok, szögek</a></li>
+                            <li><a href="#fejezet4-3">4.3 Merőlegesség, párhuzamosság</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#fejezet5">5. Mértani alakzatok</a>
+                        <ul>
+                            <li><a href="#fejezet5-1">5.1 Sokszögek, háromszögek, négyszögek</a></li>
+                            <li><a href="#fejezet5-2">5.2 A kör</a></li>
+                            <li><a href="#fejezet5-3">5.3 Tengelyes szimmetria</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#fejezet6">6. Mértani testek</a>
+                        <ul>
+                            <li><a href="#fejezet6-1">6.1 Kocka, téglatest</a></li>
+                            <li><a href="#fejezet6-2">6.2 Henger, gömb, kúp, gúla</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#fejezet7">7. Mértékegységek</a>
+                        <ul>
+                            <li><a href="#fejezet7-1">7.1 Hosszúság, terület, térfogat</a></li>
+                            <li><a href="#fejezet7-2">7.2 Tömeg, űrmérték, idő</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content-area">
+            <h1>Matematika Segédlet - 5. Osztály</h1>
+
+            <section id="fejezet1">
+                <h2>1. Természetes számok</h2>
+                
+                <div class="card" id="fejezet1-1">
+                    <h3>1.1 Számok írása, olvasása</h3>
+                    <p>A tízes számrendszerben 10 számjegyet (0-9) használunk. A számok értékét a számjegyek helyiértéke adja meg (egyes, tízes, százas...).</p>
+                    <a href="/tananyag/kviz-szamok-irasa" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                    <a href="/tananyag/megerteni-feladatot-szamok-irasa.html" class="explanation-button">Megérteni a feladatot →</a>
+                </div>
+                
+                <div class="card" id="fejezet1-2">
+                    <h3>1.2 Összehasonlítás, kerekítés</h3>
+                    <p>Két szám közül az a nagyobb, amelyiknek több számjegye van. Ha ugyanannyi, akkor a legnagyobb helyiértéken álló számjegy dönt. Kerekítéskor a levágandó első számjegy alapján döntünk (0-4 lefelé, 5-9 felfelé).</p>
+                    <a href="/tananyag/kviz-osszehasonlitas-kerekites" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+
+                <div class="card" id="fejezet1-3">
+                    <h3>1.3 Római számok</h3>
+                    <p>A római számírás hetes számrendszeren alapul (I, V, X, L, C, D, M). A kivonás szabálya (pl. IV=4) csak bizonyos esetekben érvényes.</p>
+                    <a href="/tananyag/kviz-romai-szamok" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+
+                <div class="card" id="fejezet1-4">
+                    <h3>1.4 Műveletek, tulajdonságok</h3>
+                    <p>Alapműveletek: összeadás, kivonás, szorzás, osztás. Tulajdonságok: felcserélhetőség (kommutativitás), csoportosíthatóság (asszociativitás).</p>
+                    <a href="/tananyag/kviz-muveletek-termeszetes" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+
+            <section id="fejezet2">
+                <h2>2. Természetes számok oszthatósága</h2>
+                
+                <div class="card" id="fejezet2-1">
+                    <h3>2.1 Osztó, többszörös</h3>
+                    <p>'a' osztója 'b'-nek, ha 'b' maradék nélkül osztható 'a'-val. 'b' többszöröse 'a'-nak.</p>
+                    <a href="/tananyag/kviz-oszto-tobbszoros" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                
+                <div class="card" id="fejezet2-2">
+                    <h3>2.2 Oszthatósági szabályok</h3>
+                    <p>Szabályok 2-vel, 5-tel, 10-zel (utolsó számjegy alapján), 3-mal, 9-cel (számjegyek összege alapján), 4-gyel (utolsó két számjegy alapján).</p>
+                    <a href="/tananyag/kviz-oszthatosagi-szabalyok" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+
+                <div class="card" id="fejezet2-3">
+                    <h3>2.3 Prímszámok, felbontás</h3>
+                    <p>A prímszámoknak pontosan két osztójuk van (1 és önmaguk). Minden összetett szám felbontható prímek szorzatára.</p>
+                    <a href="/tananyag/kviz-primek" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+
+            <section id="fejezet3">
+                <h2>3. Törtek</h2>
+                
+                <div class="card" id="fejezet3-1">
+                    <h3>3.1 Közönséges törtek</h3>
+                    <p>A tört egy rész kifejezése, részei a számláló, nevező és a törtvonal. Lehet valódi, áltört vagy vegyes szám.</p>
+                    <a href="/tananyag/kviz-kozonseges-tortek" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                
+                <div class="card" id="fejezet3-2">
+                    <h3>3.2 Összehasonlítás, ábrázolás</h3>
+                    <p>Törtek összehasonlítása közös nevezőre vagy közös számlálóra hozással. Ábrázolás számegyenesen.</p>
+                    <a href="/tananyag/kviz-tortek-osszehasonlitasa" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+
+                <div class="card" id="fejezet3-3">
+                    <h3>3.3 Tizedes törtek</h3>
+                    <p>A tizedes törtek speciális törtek, ahol a nevező 10 hatványa. Részei: egészrész, tizedesvessző, törtrész.</p>
+                    <a href="/tananyag/kviz-tizedes-tortek" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+
+                <div class="card" id="fejezet3-4">
+                    <h3>3.4 Műveletek törtekkel</h3>
+                    <p>Összeadás/kivonás közös nevezőre hozással. Szorzás: számlálót a számlálóval, nevezőt a nevezővel. Osztás: recipokkal való szorzás.</p>
+                    <a href="/tananyag/kviz-muveletek-tortekkel" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+
+            <section id="fejezet4">
+                <h2>4. Mértani alapfogalmak</h2>
+                
+                <div class="card" id="fejezet4-1">
+                    <h3>4.1 Pont, egyenes, sík</h3>
+                    <p>Alapfogalmak, amelyeknek nincs definíciójuk, csak elképzelni tudjuk őket. Az egyenes végtelen, a félegyenesnek van kezdőpontja, a szakasznak kezdő- és végpontja is.</p>
+                    <a href="/tananyag/kviz-pont-egyenes-sik" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                
+                <div class="card" id="fejezet4-2">
+                    <h3>4.2 Szakaszok, szögek</h3>
+                    <p>A szög két, közös pontból induló félegyenes által közrezárt síkrész. Típusai: hegyes, derék, tompa, egyenes, homorú, teljes szög.</p>
+                    <a href="/tananyag/kviz-szakaszok-szogek" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+
+                <div class="card" id="fejezet4-3">
+                    <h3>4.3 Merőlegesség, párhuzamosság</h3>
+                    <p>Két egyenes merőleges, ha 90°-os szöget zárnak be. Két egyenes párhuzamos, ha egy síkban vannak és soha nem metszik egymást.</p>
+                    <a href="/tananyag/kviz-meroleges-parhuzamos-5" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+
+            <section id="fejezet5">
+                <h2>5. Mértani alakzatok</h2>
+                
+                <div class="card" id="fejezet5-1">
+                    <h3>5.1 Sokszögek, háromszögek, négyszögek</h3>
+                    <p>A sokszögeket oldalaik száma szerint nevezzük el. Speciális négyszögek: négyzet, téglalap, rombusz, trapéz, paralelogramma.</p>
+                    <a href="/tananyag/kviz-sokszogek-5" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                
+                <div class="card" id="fejezet5-2">
+                    <h3>5.2 A kör</h3>
+                    <p>A kör egy ponttól (középpont) egyenlő távolságra lévő pontok halmaza. Részei: sugár (r), átmérő (d=2r), húr, körív, körcikk.</p>
+                    <a href="/tananyag/kviz-kor-5" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+
+                <div class="card" id="fejezet5-3">
+                    <h3>5.3 Tengelyes szimmetria</h3>
+                    <p>Egy alakzat tengelyesen szimmetrikus, ha van egy egyenes (a szimmetriatengely), amire tükrözve önmagába megy át.</p>
+                    <a href="/tananyag/kviz-szimmetria-5" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+
+            <section id="fejezet6">
+                <h2>6. Mértani testek</h2>
+                
+                <div class="card" id="fejezet6-1">
+                    <h3>6.1 Kocka, téglatest</h3>
+                    <p>Testek, amelyeket téglalapok (a kockánál négyzetek) határolnak. Jellemzőik: csúcsok, élek, lapok. Felszín és térfogat számítása.</p>
+                    <a href="/tananyag/kviz-testek-5" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                
+                <div class="card" id="fejezet6-2">
+                    <h3>6.2 Henger, gömb, kúp, gúla</h3>
+                    <p>A görbült felületű testek alapjai. A későbbiekben részletesen foglalkozunk velük.</p>
+                    <a href="/tananyag/kviz-testek-5" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+
+            <section id="fejezet7">
+                <h2>7. Mértékegységek</h2>
+                
+                <div class="card" id="fejezet7-1">
+                    <h3>7.1 Hosszúság, terület, térfogat</h3>
+                    <p>Átváltások a mértékegységek között (pl. km-m-cm, m²-dm², m³-liter).</p>
+                    <a href="/tananyag/kviz-mertekegyseg-hossztel" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+                
+                <div class="card" id="fejezet7-2">
+                    <h3>7.2 Tömeg, űrmérték, idő</h3>
+                    <p>Átváltások (pl. t-kg-g, hl-l-dl, nap-óra-perc-mp).</p>
+                    <a href="/tananyag/kviz-mertekegyseg-tomegido" class="quiz-button">Gyakorló Kvíz a Témakörben →</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Fókusz Mester. Minden jog fenntartva.</p>
+        </div>
+    </footer>
+</body>
+</html>

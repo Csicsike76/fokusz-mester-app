@@ -1,5 +1,8 @@
+// src/pages/ContentPage.js
+
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async'; // HOZZÁADVA: Helmet importálása
 import styles from './ContentPage.module.css';
 import quizStyles from './QuizPage.module.css';
 import { API_URL } from '../config/api';
@@ -120,7 +123,7 @@ const QuizView = ({ contentData, slug, token, isTeacherMode, onRestart }) => {
     if (token) {
       setIsSaving(true);
       try {
-        await fetch(`${API_URL}/api/quiz/submit-result`, { // <-- ITT A VÁLTOZTATÁS
+        await fetch(`${API_URL}/api/quiz/submit-result`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
           body: JSON.stringify({ slug: slug, score: sc, totalQuestions: activeQuestions.length, level: selectedDifficulty }),
@@ -278,7 +281,11 @@ const ContentPage = () => {
   const fetchData = useCallback(async () => {
     try {
       const correctedSlug = slug.replace(/_/g, '-');
-      const res = await fetch(`${API_URL}/api/quiz/${correctedSlug}`);
+      // Módosítva: A lekérdezés most már képes a .json kiterjesztésű fájlokat is kezelni a backendről.
+      // Feltételezzük, hogy a backend tudja, hogy ha nincs kiterjesztés, akkor '.json' a default.
+      // Ha a backendnek szüksége van a .json kiterjesztésre, akkor azt itt hozzá kell adni.
+      const fetchUrl = slug.endsWith('.json') ? `${API_URL}/api/tananyag/${correctedSlug}` : `${API_URL}/api/quiz/${correctedSlug}`;
+      const res = await fetch(fetchUrl); 
       if (!res.ok) throw new Error(`Hálózati hiba: ${res.statusText}`);
       const data = await res.json();
       if (!data.success || !data.data) throw new Error(data.message || 'Az adatok hiányosak.');
@@ -323,24 +330,82 @@ const ContentPage = () => {
     loadAndCheckContent();
   }, [slug, canUsePremium, navigate, fetchData, restartKey]);
 
-  if (isLoading) return <div className={styles.container}>Adatok betöltése...</div>;
-  if (error) return <div className={styles.container}>{error}</div>;
-  if (!contentData) return <div className={styles.container}>A tartalom nem elérhető.</div>;
+  // --- Schema.org Markup generálása ---
+  const generateSchemaMarkup = useCallback((data) => {
+    if (!data) return null;
 
-  const isActualQuiz = slug.includes('kviz');
+    let schema = {};
+    const currentUrl = `https://fokuszmester.com/tananyag/${slug}`; // Az aktuális lecke URL-je
 
-  if (isActualQuiz) {
-    return (
-      <QuizView
-        key={restartKey}
-        contentData={contentData}
-        slug={slug}
-        token={token}
-        isTeacherMode={isTeacherMode}
-        onRestart={() => setRestartKey(Date.now())}
-      />
-    );
-  }
+    if (data.toc) { // Ha egy LessonView típusú tananyag
+        schema = {
+            "@context": "https://schema.org",
+            "@type": "Course", // Vagy EducationalMaterial, de Course jobban passzol a leckékhez
+            "name": data.title,
+            "description": data.description || "Oktatási tananyag a Fókusz Mester platformon.",
+            "url": currentUrl,
+            "provider": {
+                "@type": "EducationalOrganization",
+                "name": "Fókusz Mester",
+                "url": "https://fokuszmester.com/",
+                "logo": "https://fokuszmester.com/assets/fokuszmester-logo.png" // Cseréld a valós logó URL-re
+            },
+            "educationalLevel": `${data.grade || ''} osztály`,
+            "learningResourceType": "tananyag",
+            "keywords": data.keywords || (data.title ? data.title.split(' ').join(', ') : '')
+        };
+        // Ha van TOC, akkor az egyes fejezetek CourseInstance-ként is megjelölhetők,
+        // de az egyszerűség kedvéért most csak a fő Course-t jelöljük.
+    } else if (data.questions && data.questions.length > 0) { // Ha kvíz
+        schema = {
+            "@context": "https://schema.org",
+            "@type": "Quiz", // Vagy Exercise/Practice, de Quiz jobban illik
+            "name": data.title,
+            "description": data.description || "Interaktív kvíz a Fókusz Mester platformon.",
+            "url": currentUrl,
+            "about": {
+                "@type": "Thing", // Vagy EducationalSubject
+                "name": data.subject || "Matematika" // Feltételezve, hogy a data.subject mező tartalmazza a tárgyat
+            },
+            "author": {
+                "@type": "EducationalOrganization",
+                "name": "Fókusz Mester"
+            },
+            "educationalLevel": `${data.grade || ''} osztály`,
+            "educationalUse": "formative assessment", // Formáló értékelés
+            "timeRequired": "PT10M", // Becsült idő, pl. 10 perc. Ezt dinamikusan is lehetne generálni.
+            "question": data.questions.map(q => ({ // Minden kérdés Question típusként
+                "@type": "Question",
+                "name": q.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": q.answers ? q.answers[q.correct] : q.answer // Megfelelő válasz kiválasztása
+                }
+            }))
+        };
+    } else if (data.category && data.category.includes('tool')) { // Ha eszköz (pl. PromptGeneratorTool)
+        schema = {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication", // Vagy CreativeWork, de SoftwareApplication specifikusabb eszközökhöz
+            "name": data.title,
+            "description": data.description || "Online tanulást segítő eszköz a Fókusz Mestertől.",
+            "url": currentUrl,
+            "applicationCategory": "EducationalSoftware",
+            "operatingSystem": "Web",
+            "provider": {
+                "@type": "EducationalOrganization",
+                "name": "Fókusz Mester"
+            }
+        };
+    }
+    // Kiegészíthető más tartalomtípusokkal (pl. karakterválasztó, workshop)
+
+    return schema;
+  }, [slug]); // Függőség hozzáadva: slug
+
+  const pageSchema = useMemo(() => generateSchemaMarkup(contentData), [contentData, generateSchemaMarkup]);
+  // --- END Schema.org Markup generálása ---
+
 
   const renderTheContent = () => {
     let componentToRender;
@@ -384,13 +449,13 @@ const ContentPage = () => {
         default: {
           const hasTopics = data.content && data.content.topics;
           const hasCharacters = data.characters && typeof data.characters === 'object' && Object.keys(data.characters).length > 0;
-          const isWorkshop = data.questions && data.questions.length > 0 && data.questions[0].content !== undefined;
+          const isWorkshop = data.questions && data.questions.length > 0 && data.questions[0].content !== undefined; // Itt gond lehet, ha a kvíz is questions-t használ
 
           if (hasTopics) {
             componentToRender = <TopicSelector data={data} />;
           } else if (data.category === 'free_tool' && hasCharacters) {
             componentToRender = <CharacterSelectionView contentData={data} />;
-          } else if (isWorkshop) {
+          } else if (isWorkshop) { // WORKSHOP tartalom kezelése
             componentToRender = <WorkshopContent sections={data.questions} />;
           } else {
             componentToRender = <GenericToolView contentData={data} />;
@@ -409,7 +474,21 @@ const ContentPage = () => {
     );
   };
 
-  return renderTheContent();
+  return (
+    <>
+      <Helmet>
+        {contentData && pageSchema && (
+          <script type="application/ld+json">
+            {JSON.stringify(pageSchema)}
+          </script>
+        )}
+        <title>{contentData?.title ? `${contentData.title} | Fókusz Mester` : 'Fókusz Mester'}</title>
+        <meta name="description" content={contentData?.description || "Interaktív online oktatási platform matematika, fizika és mesterséges intelligencia tananyagokkal, kvízekkel és eszközökkel."} />
+        {/* Hozzáadhatók canonical link, Open Graph és Twitter Card meta tag-ek is. */}
+      </Helmet>
+      {renderTheContent()}
+    </>
+  );
 };
 
 export default ContentPage;
