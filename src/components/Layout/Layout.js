@@ -18,6 +18,9 @@ const Layout = () => {
       "logo": "https://fokuszmester.com/assets/fokuszmester-logo.png", // Cseréld a valós logó URL-re
       "description": "A Fókusz Mester egy interaktív online oktatási platform, amely matematika, fizika és mesterséges intelligencia tananyagokat, kvízeket, villámkártyákat és egyéb tanulást segítő eszközöket biztosít diákok, tanárok és osztályok számára, 5-8. osztályosoknak.",
       "sameAs": [
+        // Hozzáadhatók közösségi média linkek, ha vannak
+        // "https://www.facebook.com/fokuszmester",
+        // "https://twitter.com/fokuszmester" 
         "https://www.facebook.com/profile.php?id=61581465947170&locale=hu_HU",
         "https://www.facebook.com/profile.php?id=61581860337127"
       ],
@@ -108,8 +111,6 @@ const Layout = () => {
         <script type="application/ld+json">
           {JSON.stringify(schemaMarkup)}
         </script>
-        {/* BEILLESZTVE: Google Search Console ellenőrző meta tag */}
-        <meta name="google-site-verification" content="MgQyuB2pXA1" />
       </Helmet>
       
       <BackgroundVideo /> 
