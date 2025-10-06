@@ -6,7 +6,10 @@ import { NAV_ITEMS } from '../../data/navItems';
 import UserMenu from './UserMenu'; 
 import NotificationBell from './NotificationBell'; 
 import Search from '../Search/Search';
-import { FaDownload } from 'react-icons/fa'; // A letöltés ikon importálása
+import { FaDownload } from 'react-icons/fa';
+
+// Logó importálása az assets mappából
+import CsicsikeLogo from '../../assets/Csicsike-tudastar-rajz.jpg'; 
 
 const Navbar = () => {
     const { user } = useAuth();
@@ -40,9 +43,12 @@ const Navbar = () => {
                 {isMenuOpen ? '✕' : '☰'}
             </button>
 
-            {/* Logó (csak asztali nézeten látható) */}
+            {/* Logó és szöveg */}
             <div className={styles.logo}>
-                <Link to="/">"Fókusz Mester"</Link>
+                <Link to="/">
+                    <img src={CsicsikeLogo} alt="Fókusz Mester Logó" className={styles.logoImage} />
+                    <span className={styles.logoText}>Fókusz Mester</span> {/* MÓDOSÍTVA: Szöveg hozzáadva */}
+                </Link>
             </div>
 
             {/* Navigációs linkek konténere (mobil nézeten becsúszó menü) */}

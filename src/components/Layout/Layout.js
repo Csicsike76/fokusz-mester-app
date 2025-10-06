@@ -105,8 +105,8 @@ const Layout = () => {
       "@type": "VideoObject",
       "name": "Fókusz Mester Bemutató Háttérvideó",
       "description": "A Fókusz Mester online oktatási platform bemutató háttérvideója. Budapesti látképpel és motiváló hangulattal. Jól illeszkedik a tanulási környezethez.",
-      "uploadDate": "2025-10-06T12:00:00+01:00", // Frissítve a mai dátumra (október 6.) és 12:00:00 időre
-      "duration": "PT8S", // Frissítve: 8 másodperc
+      "uploadDate": "2025-10-06T12:00:00+01:00",
+      "duration": "PT8S",
       "contentUrl": "https://fokuszmester.com/assets/video.mp4",
       "thumbnailUrl": "https://fokuszmester.com/assets/video-thumbnail.jpg",
       "embedUrl": "https://fokuszmester.com/",
@@ -118,13 +118,35 @@ const Layout = () => {
     }
   ];
 
+  // Az Organization séma adatai, amiből az Open Graph és Twitter Card tag-ek generálódnak
+  const orgData = schemaMarkup.find(item => item['@type'] === 'EducationalOrganization');
+  const pageTitle = "Fókusz Mester - Online Oktatási Platform"; // Általános oldalcím
+  const pageDescription = "Interaktív online oktatási platform matematika, fizika és mesterséges intelligencia tananyagokkal, kvízekkel és egyéb tanulást segítő eszközökkel diákok, tanárok és osztályok számára."; // Általános oldal leírás
+
   return (
     <>
       <Helmet>
+        {/* Schema.org JSON-LD */}
         <script type="application/ld+json">
           {JSON.stringify(schemaMarkup)}
         </script>
+        {/* Google Search Console ellenőrző meta tag */}
         <meta name="google-site-verification" content="MgQyuB2pXA1CQwbWub64aWOHvCXujTduUv0XyNb73gc" />
+
+        {/* Open Graph Meta Tag-ek */}
+        <meta property="og:title" content={orgData?.name || pageTitle} />
+        <meta property="og:description" content={orgData?.description || pageDescription} />
+        <meta property="og:image" content={orgData?.logo || 'https://fokuszmester.com/assets/default-share-image.jpg'} /> {/* Kérem, készítsen egy default képet! */}
+        <meta property="og:url" content={orgData?.url || 'https://fokuszmester.com/'} />
+        <meta property="og:type" content="website" /> {/* Ha egy specifikus oldalról van szó, lehet "article" */}
+        <meta property="og:site_name" content="Fókusz Mester" />
+
+        {/* Twitter Card Meta Tag-ek */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={orgData?.name || pageTitle} />
+        <meta name="twitter:description" content={orgData?.description || pageDescription} />
+        <meta name="twitter:image" content={orgData?.logo || 'https://fokuszmester.com/assets/default-share-image.jpg'} />
+        {/* Ha van Twitter fiók, hozzáadható: <meta name="twitter:site" content="@FokuszMester" /> */}
       </Helmet>
       
       <BackgroundVideo /> 

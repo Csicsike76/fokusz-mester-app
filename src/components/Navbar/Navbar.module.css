@@ -511,3 +511,44 @@
         font-size: 1.3rem;
     }
 }
+
+.logoImage {
+    height: 40px; /* Vagy amilyen méretet szeretne */
+    width: auto;}
+
+    /* src/components/Navbar/Navbar.module.css */
+
+/* ... (meglévő CSS kód) ... */
+
+.logo {
+    display: flex; /* Hogy a kép és a szöveg egy sorban legyen */
+    align-items: center;
+    gap: 10px; /* Kis térköz a logó és a szöveg között */
+}
+
+.logoImage {
+    height: 40px; /* Vagy amilyen méretet szeretne */
+    width: auto;
+}
+
+.logoText {
+    color: var(--header-color); /* Vagy a navigációs szöveg színe */
+    font-size: 1.5rem; /* Vagy a kívánt méret */
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap; /* Megakadályozza a törést */
+}
+
+/* ... (meglévő reszponzív média lekérdezések) ... */
+
+@media (max-width: 768px) {
+    /* ... (meglévő mobil stílusok) ... */
+    .logoText {
+        display: none; /* Mobilon elrejtjük a szöveget */
+    }
+    .logoImage {
+        height: 35px; /* Kisebb logó mobilon, ha szükséges */
+    }
+}
+
+/* ... (további média lekérdezések, ha vannak) ... */
