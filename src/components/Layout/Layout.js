@@ -105,8 +105,8 @@ const Layout = () => {
       "@type": "VideoObject",
       "name": "Fókusz Mester Bemutató Háttérvideó",
       "description": "A Fókusz Mester online oktatási platform bemutató háttérvideója. Budapesti látképpel és motiváló hangulattal. Jól illeszkedik a tanulási környezethez.",
-      "uploadDate": "2023-10-05T08:00:00+01:00", // Kérem ellenőrizze és módosítsa a valós feltöltési dátumra és időzónára!
-      "duration": "PT30S", // Kérem ellenőrizze és módosítsa a videó valós időtartamára (pl. 30 másodperc = PT30S)!
+      "uploadDate": "2025-10-06T12:00:00+01:00", // Kérem ellenőrizze és módosítsa a valós feltöltési dátumra és időzónára!
+      "duration": "PT08S", // Kérem ellenőrizze és módosítsa a videó valós időtartamára (pl. 30 másodperc = PT30S)!
       "contentUrl": "https://fokuszmester.com/assets/video.mp4", // Kérem ellenőrizze a videó pontos URL-jét!
       "thumbnailUrl": "https://fokuszmester.com/assets/video-thumbnail.jpg", // Hozzon létre egy thumbnail képet, és cserélje le az URL-t!
       "embedUrl": "https://fokuszmester.com/", // Az oldal URL-je, ahova be van ágyazva
