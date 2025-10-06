@@ -3,7 +3,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import { HelmetProvider } from 'react-helmet-async'; // HOZZÁADVA: HelmetProvider importálása
 
 import Layout from './components/Layout/Layout';
 import HomePage from './pages/HomePage';
@@ -22,55 +21,49 @@ import InteraktivMatematika from './pages/InteraktivMatematika';
 import ContactPage from './pages/ContactPage';
 import AdminPage from './pages/AdminPage';
 import ClassDetailsPage from './pages/ClassDetailsPage';
-import AszfPage from './pages/AszfPage';
-import AdatkezelesiPage from './pages/AdatkezelesiPage';
-import DownloadGuidePage from './pages/DownloadGuidePage'; 
+import AszfPage from './pages/AszfPage'; // ÚJ IMPORT
+import AdatkezelesiPage from './pages/AdatkezelesiPage'; // ÚJ IMPORT
 import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <HelmetProvider> {/* HOZZÁADVA: HelmetProvider becsomagolja az alkalmazást */}
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="bejelentkezes" element={<LoginPage />} />
-              <Route path="regisztracio" element={<RegistrationPage />} />
-              <Route path="interaktiv-matematika" element={<InteraktivMatematika />} />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="bejelentkezes" element={<LoginPage />} />
+            <Route path="regisztracio" element={<RegistrationPage />} />
+            <Route path="interaktiv-matematika" element={<InteraktivMatematika />} />
 
-              <Route path="targy/:subjectName" element={<SubjectPage />} />
-              <Route path="tananyag/:slug" element={<ContentPage />} />
-              
-              <Route path="verify-email/:token" element={<EmailVerificationPage />} />
-              <Route path="sugo" element={<HelpCenterPage />} />
-              <Route path="kapcsolat" element={<ContactPage />} />
-              <Route path="elfelejtett-jelszo" element={<ForgotPasswordPage />} />
-              <Route path="reset-password/:token" element={<ResetPasswordPage />} />
+            <Route path="targy/:subjectName" element={<SubjectPage />} />
+            <Route path="tananyag/:slug" element={<ContentPage />} />
+            
+            <Route path="verify-email/:token" element={<EmailVerificationPage />} />
+            <Route path="sugo" element={<HelpCenterPage />} />
+            <Route path="kapcsolat" element={<ContactPage />} />
+            <Route path="elfelejtett-jelszo" element={<ForgotPasswordPage />} />
+            <Route path="reset-password/:token" element={<ResetPasswordPage />} />
 
-              {/* ÚTVONALAK A JOGI DOKUMENTUMOKHOZ */}
-              <Route path="aszf" element={<AszfPage />} />
-              <Route path="adatkezeles" element={<AdatkezelesiPage />} />
+            {/* ÚJ ÚTVONALAK A JOGI DOKUMENTUMOKHOZ */}
+            <Route path="aszf" element={<AszfPage />} />
+            <Route path="adatkezeles" element={<AdatkezelesiPage />} />
 
-              {/* MÓDOSÍTOTT ÚTVONAL A TELEPÍTÉSI ÚTMUTATÓHOZ */}
-              <Route path="alkalmazas-letoltese" element={<DownloadGuidePage />} />
-
-              <Route element={<ProtectedRoute allowedRoles={['student', 'teacher', 'admin']} />}>
-                <Route path="profil" element={<ProfilePage />} />
-              </Route>
-              
-              <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
-                <Route path="dashboard/teacher" element={<TeacherDashboardPage />} />
-                <Route path="dashboard/teacher/class/:classId" element={<ClassDetailsPage />} />
-              </Route>
-
-              <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-                <Route path="admin" element={<AdminPage />} />
-              </Route>
-
+            <Route element={<ProtectedRoute allowedRoles={['student', 'teacher', 'admin']} />}>
+              <Route path="profil" element={<ProfilePage />} />
             </Route>
-          </Routes>
-        </HelmetProvider> {/* HOZZÁADVA: HelmetProvider vége */}
+            
+            <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
+              <Route path="dashboard/teacher" element={<TeacherDashboardPage />} />
+              <Route path="dashboard/teacher/class/:classId" element={<ClassDetailsPage />} />
+            </Route>
+
+            <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+              <Route path="admin" element={<AdminPage />} />
+            </Route>
+
+          </Route>
+        </Routes>
       </AuthProvider>
     </BrowserRouter>
   );
