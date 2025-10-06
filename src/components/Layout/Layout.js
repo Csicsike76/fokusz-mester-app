@@ -100,16 +100,16 @@ const Layout = () => {
       "url": "https://fokuszmester.com/sugo",
       "description": "Segítség és gyakran ismételt kérdések a Fókusz Mester platform használatához."
     },
-    { // HOZZÁADVA: Schema.org VideoObject jelölés a háttérvideóhoz
+    { // Schema.org VideoObject jelölés a háttérvideóhoz
       "@context": "https://schema.org",
       "@type": "VideoObject",
       "name": "Fókusz Mester Bemutató Háttérvideó",
       "description": "A Fókusz Mester online oktatási platform bemutató háttérvideója. Budapesti látképpel és motiváló hangulattal. Jól illeszkedik a tanulási környezethez.",
-      "uploadDate": "2025-10-06T12:00:00+01:00", // Kérem ellenőrizze és módosítsa a valós feltöltési dátumra és időzónára!
-      "duration": "PT08S", // Kérem ellenőrizze és módosítsa a videó valós időtartamára (pl. 30 másodperc = PT30S)!
-      "contentUrl": "https://fokuszmester.com/assets/video.mp4", // Kérem ellenőrizze a videó pontos URL-jét!
-      "thumbnailUrl": "https://fokuszmester.com/assets/video-thumbnail.jpg", // Hozzon létre egy thumbnail képet, és cserélje le az URL-t!
-      "embedUrl": "https://fokuszmester.com/", // Az oldal URL-je, ahova be van ágyazva
+      "uploadDate": "2025-10-06T12:00:00+01:00", // Frissítve a mai dátumra (október 6.) és 12:00:00 időre
+      "duration": "PT8S", // Frissítve: 8 másodperc
+      "contentUrl": "https://fokuszmester.com/assets/video.mp4",
+      "thumbnailUrl": "https://fokuszmester.com/assets/video-thumbnail.jpg",
+      "embedUrl": "https://fokuszmester.com/",
       "publisher": {
         "@type": "EducationalOrganization",
         "name": "Fókusz Mester",
