@@ -21,10 +21,12 @@ import LessonView from '../components/LessonView/LessonView';
 
 const CharacterSelectionView = ({ contentData, onSelectCharacter }) => (
   <div className={styles.characterSelection}>
-    <h2 className={styles.mainTitle}>{contentData.title}</h2>
-    <p className={styles.subTitle}>{contentData.description}</p>
+    {/* A contentData?.title és contentData?.description opcionális láncolással, hogy elkerüljük a null hibákat */}
+    <h2 className={styles.mainTitle}>{contentData?.title}</h2>
+    <p className={styles.subTitle}>{contentData?.description}</p>
     <div className={styles.characterGrid}>
-      {Object.keys(contentData.characters).map(key => {
+      {/* Ellenőrzés, hogy a contentData.characters létezik-e és objektum-e */}
+      {contentData?.characters && typeof contentData.characters === 'object' && Object.keys(contentData.characters).map(key => {
         const character = contentData.characters[key];
         return (
           <div key={key} className={styles.characterCard} style={{ backgroundColor: character.color }}>
@@ -44,8 +46,9 @@ const CharacterSelectionView = ({ contentData, onSelectCharacter }) => (
 
 const GenericToolView = ({ contentData }) => (
   <div className={styles.genericToolContainer}>
-    <h1 className={styles.mainTitle}>{contentData.title}</h1>
-    <p className={styles.subTitle}>{contentData.description}</p>
+    {/* contentData?.title és contentData?.description opcionális láncolással */}
+    <h1 className={styles.mainTitle}>{contentData?.title}</h1>
+    <p className={styles.subTitle}>{contentData?.description}</p>
     <div className={styles.workInProgress}>
       <p>Ismeretlen adatformátum.</p>
     </div>
@@ -141,6 +144,18 @@ const QuizView = ({ contentData, slug, token, isTeacherMode, onRestart }) => {
     onRestart();
   };
 
+  // Ellenőrizzük, hogy a contentData elérhető-e, mielőtt a title/description-t használnánk
+  if (!contentData) {
+    return (
+      <div className={quizStyles.container}>
+        <div className={quizStyles.quizBox}>
+          <h1>Kvíz betöltése...</h1>
+          <p>Kérem várjon, amíg a kvíz adatai betöltődnek.</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!selectedDifficulty && !isTeacherMode) {
     return (
       <div className={quizStyles.container}>
@@ -188,11 +203,13 @@ const QuizView = ({ contentData, slug, token, isTeacherMode, onRestart }) => {
   return (
     <div className={quizStyles.container}>
       <div className={quizStyles.quizBox}>
+        {/* contentData?.title opcionális láncolással */}
         <h1>
-          {contentData.title}{' '}
+          {contentData?.title}{' '}
           {selectedDifficulty && <span className={quizStyles.difficultyTag} data-level={selectedDifficulty}>{selectedDifficulty}</span>}
         </h1>
-        <p>{contentData.description}</p>
+        {/* contentData?.description opcionális láncolással */}
+        <p>{contentData?.description}</p>
         <hr className={quizStyles.hr} />
         {activeQuestions.length === 0 && selectedDifficulty ? (
           <div className={quizStyles.workInProgress}>
@@ -334,7 +351,7 @@ const ContentPage = () => {
     const loadAndCheckContent = async () => {
       setIsLoading(true);
       setError('');
-      setContentData(null);
+      setContentData(null); // Minden betöltés előtt nullázzuk
       try {
         const data = await fetchData();
         if (data) {
@@ -442,8 +459,35 @@ const ContentPage = () => {
     let isLessonLayout = false;
     const data = contentData;
 
+    // HIBA JAVÍTÁS: Ellenőrizzük, hogy a 'data' objektum létezik-e, mielőtt használnánk
     if (!data) {
-        return <div className={styles.container}>A tartalom nem elérhető.</div>;
+        if (isLoading) {
+          return (
+            <div className={styles.container}>
+              <div className={styles.backgroundOverlay}></div>
+              <div className={styles.contentWrapper}>
+                <div className={styles.genericToolContainer}>
+                  <h1 className={styles.mainTitle}>Tartalom betöltése...</h1>
+                  <p className={styles.subTitle}>Kérem várjon.</p>
+                </div>
+              </div>
+            </div>
+          );
+        } else {
+          return (
+            <div className={styles.container}>
+              <div className={styles.backgroundOverlay}></div>
+              <div className={styles.contentWrapper}>
+                <div className={styles.genericToolContainer}>
+                  <h1 className={styles.mainTitle}>Tartalom nem elérhető.</h1>
+                  <p className={styles.subTitle}>Sajnáljuk, a kért tartalom nem található vagy nem tölthető be.</p>
+                  {error && <p className={styles.errorText}>Hiba: {error}</p>}
+                  <Link to="/" className={styles.backButton}>Vissza a főoldalra</Link>
+                </div>
+              </div>
+            </div>
+          );
+        }
     }
 
     if (data.toc) {
@@ -481,6 +525,7 @@ const ContentPage = () => {
           componentToRender = <MultiInputPromptGenerator toolData={data.toolData} />;
           break;
         default: {
+          // HIBA JAVÍTÁS: Ellenőrizzük, hogy a data.content és data.characters léteznek-e
           const hasTopics = data.content && data.content.topics;
           const hasCharacters = data.characters && typeof data.characters === 'object' && Object.keys(data.characters).length > 0;
           const isWorkshop = data.questions && data.questions.length > 0 && data.questions[0].content !== undefined; 
@@ -511,6 +556,7 @@ const ContentPage = () => {
   return (
     <>
       <Helmet>
+        {/* contentData?.title és contentData?.description opcionális láncolással */}
         {contentData && pageSchema && Object.keys(pageSchema).length > 0 && (
           <script type="application/ld+json">
             {JSON.stringify(pageSchema)}
@@ -520,14 +566,25 @@ const ContentPage = () => {
         <meta name="description" content={contentData?.description || "Interaktív online oktatási platform matematika, fizika és mesterséges intelligencia tananyagokkal, kvízekkel és eszközökkel."} />
       </Helmet>
       {isActualQuiz ? (
-        <QuizView
-          key={restartKey}
-          contentData={contentData}
-          slug={slug}
-          token={token}
-          isTeacherMode={isTeacherMode}
-          onRestart={() => setRestartKey(Date.now())}
-        />
+        // HIBA JAVÍTÁS: Itt is ellenőrizzük a contentData-t, mielőtt átadjuk a QuizView-nak
+        contentData ? (
+          <QuizView
+            key={restartKey}
+            contentData={contentData}
+            slug={slug}
+            token={token}
+            isTeacherMode={isTeacherMode}
+            onRestart={() => setRestartKey(Date.now())}
+          />
+        ) : (
+          <div className={quizStyles.container}>
+            <div className={quizStyles.quizBox}>
+              <h1>Kvíz betöltése...</h1>
+              <p>Kérem várjon, amíg a kvíz adatai betöltődnek.</p>
+              {error && <p className={quizStyles.errorText}>Hiba: {error}</p>}
+            </div>
+          </div>
+        )
       ) : (
         renderTheContent()
       )}
